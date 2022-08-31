@@ -8,7 +8,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     default: () => {
       return `
     <main class="${"flex h-[2000px] " + escape(pageColor, true)}">
-        <h1 class="${"p-24"}">Home</h1></main>`;
+        <h1 class="${"p-24"}">Home/ aug 30 2022 11:51pm</h1></main>`;
     }
   })}
     `;

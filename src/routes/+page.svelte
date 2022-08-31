@@ -16,7 +16,7 @@
         Currently doesnt work with +layout.svelte ... could be due to this wrapping <Pagetransitions>
         -->
         <h1 class="p-24"
-        >Home</h1>
+        >Home/ aug 30 2022 11:51pm</h1>
     </main>    
 </PageTransitions>
     <!-- <div class="flex justify-center items-center h-[400vh] {pageColor} "

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import PageTransitions from '$lib/PageTransitions.svelte';
  import { bgColour } from '$lib/store.js'
  let pageColor = bgColour.login
@@ -7,4 +7,4 @@
  <div class="flex justify-center items-center { pageColor } h-screen"> 
      Login
  </div>    
-</PageTransitions>
+</PageTransitions> -->
