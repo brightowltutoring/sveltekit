@@ -924,8 +924,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-76f00930.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-76f00930.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js", "_app/immutable/chunks/navigation-69639e22.js", "_app/immutable/chunks/singletons-7c22cc08.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-57873a11.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-57873a11.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js", "_app/immutable/chunks/navigation-2441f1ef.js", "_app/immutable/chunks/singletons-c7cb6842.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-5845f018.css"];
   }
 });
@@ -1011,8 +1011,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-9b9d093c.js";
-    imports2 = ["_app/immutable/components/error.svelte-9b9d093c.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-7c22cc08.js", "_app/immutable/chunks/index-71178bcf.js"];
+    file2 = "_app/immutable/components/error.svelte-67279f51.js";
+    imports2 = ["_app/immutable/components/error.svelte-67279f51.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-c7cb6842.js", "_app/immutable/chunks/index-71178bcf.js"];
     stylesheets2 = [];
   }
 });
@@ -7457,8 +7457,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-4fc19282.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-4fc19282.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/navigation-69639e22.js", "_app/immutable/chunks/singletons-7c22cc08.js", "_app/immutable/chunks/index-71178bcf.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-33e66b32.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-33e66b32.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/navigation-2441f1ef.js", "_app/immutable/chunks/singletons-c7cb6842.js", "_app/immutable/chunks/index-71178bcf.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -9554,7 +9554,20 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width" />\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width" />\n		' + head + `
+	</head>
+	<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-24J9DS8D00"><\/script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-24J9DS8D00');
+		<\/script>
+	<!-- Google tag (gtag.js) -->
+	<body>
+		<div>` + body + "</div>\n	</body>\n</html>\n";
 var read = null;
 set_paths({ "base": "", "assets": "" });
 var Server = class {
@@ -9620,7 +9633,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-bbfbb566.js", "imports": ["_app/immutable/start-bbfbb566.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-7c22cc08.js", "_app/immutable/chunks/index-71178bcf.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-1ce80872.js", "imports": ["_app/immutable/start-1ce80872.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-c7cb6842.js", "_app/immutable/chunks/index-71178bcf.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
