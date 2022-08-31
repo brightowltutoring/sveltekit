@@ -36,197 +36,197 @@
            
         })
     
-    // //  Hoisted Functions
+    //  Hoisted Functions
 
-    //     // Helper Functions 
-    //     function emailFieldHandler(EMAIL){
+        // Helper Functions 
+        function emailFieldHandler(EMAIL){
 
-    //         // regex checks if has email format
-    //         const isEmail =  (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(EMAIL);
+            // regex checks if has email format
+            const isEmail =  (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(EMAIL);
 
-    //         if(EMAIL.length === 0) {
-    //             emailField.style.border = "1px solid #aaa";
-    //             emailField.style.color="#aaa";
-    //             emailField.style.fontSize="16px";
-    //         }
-    //         else if (!isEmail ) {
+            if(EMAIL.length === 0) {
+                emailField.style.border = "1px solid #aaa";
+                emailField.style.color="#aaa";
+                emailField.style.fontSize="16px";
+            }
+            else if (!isEmail ) {
 
-    //             emailField.style.border = "1.5px solid red";
-    //             emailField.style.color="red";
-    //             emailField.style.fontSize="20px";
-    //         }
+                emailField.style.border = "1.5px solid red";
+                emailField.style.color="red";
+                emailField.style.fontSize="20px";
+            }
 
-    //         else {
-    //             emailField.style.border="2px solid #59d0ae";
-    //             emailField.style.backgroundColor="white";
-    //             emailField.style.color="#10bb8a"; // green-ish colour
+            else {
+                emailField.style.border="2px solid #59d0ae";
+                emailField.style.backgroundColor="white";
+                emailField.style.color="#10bb8a"; // green-ish colour
 
-    //             // these event listeners attached ONLY when regex confirms that the format is email
-    //             passwordlessLoginBtn.addEventListener("click", () =>  signinWithLinkAndStop() )
-    //             emailField.addEventListener("keydown", (e) => { 
-    //                 if(e.key === 'Enter' ) { signinWithLinkAndStop() }
-    //             })
-    //         }
-    //     }
+                // these event listeners attached ONLY when regex confirms that the format is email
+                passwordlessLoginBtn.addEventListener("click", () =>  signinWithLinkAndStop() )
+                emailField.addEventListener("keydown", (e) => { 
+                    if(e.key === 'Enter' ) { signinWithLinkAndStop() }
+                })
+            }
+        }
 
-    //     function GoogleLogin(){
+        function GoogleLogin(){
 
-    //         const provider = new GoogleAuthProvider();
+            const provider = new GoogleAuthProvider();
             
-    //         signInWithPopup(auth, provider)
-    //             .then((result) => {
-    //                 // This gives you a Google Access Token. You can use it to access the Google API.
-    //                 const credential = GoogleAuthProvider.credentialFromResult(result);
-    //                 const token = credential.accessToken;
-    //                 // The signed-in user info.
-    //                 const user = result.user;
-    //             })
-    //             .catch((error) => {
-    //                 // Handle Errors here.
-    //                 const errorCode = error.code;
-    //                 const errorMessage = error.message;
-    //                 // The email of the user's account used.
-    //                 const email = error.customData.email;
-    //                 // The AuthCredential type that was used.
-    //                 const credential = GoogleAuthProvider.credentialFromError(error);
-    //             });
-    //     }
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    // The signed-in user info.
+                    const user = result.user;
+                })
+                .catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                });
+        }
 
-    //     function loginViaPasswordlessEmail() {
+        function loginViaPasswordlessEmail() {
 
-    //         let email = emailField.value;
-    //         console.log(email);
+            let email = emailField.value;
+            console.log(email);
 
-    //         if(email.length!==0) {
+            if(email.length!==0) {
 
-    //             const actionCodeSettings = {
-    //                 url: 'https://www.brightowltutoring.com/login',
-    //                 handleCodeInApp: true,
-    //             };
+                const actionCodeSettings = {
+                    url: 'https://www.brightowltutoring.com/login',
+                    handleCodeInApp: true,
+                };
 
-    //             sendSignInLinkToEmail(auth, email, actionCodeSettings)
-    //                 .then(() => {
-    //                     // The link was successfully sent. Inform the user.
-    //                     // Save the email locally so you don't need to ask the user for it again
-    //                     // if they open the link on the same device.
-    //                     window.localStorage.setItem('emailForSignIn', email);
-    //                     console.log("success with sendSignInLinkToEmail!");
-    //                 })
-    //                 .catch((error) => {
-    //                     const errorCode = error.code;
-    //                     const errorMessage = error.message;
-    //                     console.log("error with sendSignInLinkToEmail");
-    //                     // ...
-    //                 }); 
-    //         }
-    //     }
+                sendSignInLinkToEmail(auth, email, actionCodeSettings)
+                    .then(() => {
+                        // The link was successfully sent. Inform the user.
+                        // Save the email locally so you don't need to ask the user for it again
+                        // if they open the link on the same device.
+                        window.localStorage.setItem('emailForSignIn', email);
+                        console.log("success with sendSignInLinkToEmail!");
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log("error with sendSignInLinkToEmail");
+                        // ...
+                    }); 
+            }
+        }
 
-    //     // Confirm the link is a sign-in with email link.
-    //     // if (isSignInWithEmailLink(auth, window.location.href)) {
+        // Confirm the link is a sign-in with email link.
+        // if (isSignInWithEmailLink(auth, window.location.href)) {
 
-    //     //     let email = window.localStorage.getItem('emailForSignIn');
-    //     //     if (!email) {
-    //     //         // User opened the link on a different device. To prevent session fixation
-    //     //         // attacks, ask the user to provide the associated email again. For example:
-    //     //         email = window.prompt('Please provide your email for confirmation');
-    //     //     }
-    //     //     // The client SDK will parse the code from the link for you.
-    //     //     signInWithEmailLink(auth, email, window.location.href)
-    //     //         .then((result) => {
-    //     //         // Clear email from storage.
-    //     //         window.localStorage.removeItem('emailForSignIn');
+        //     let email = window.localStorage.getItem('emailForSignIn');
+        //     if (!email) {
+        //         // User opened the link on a different device. To prevent session fixation
+        //         // attacks, ask the user to provide the associated email again. For example:
+        //         email = window.prompt('Please provide your email for confirmation');
+        //     }
+        //     // The client SDK will parse the code from the link for you.
+        //     signInWithEmailLink(auth, email, window.location.href)
+        //         .then((result) => {
+        //         // Clear email from storage.
+        //         window.localStorage.removeItem('emailForSignIn');
         
-    //     //         console.log("signInWithEmailLink then caught");
-    //     //         })
-    //     //         .catch((error) => {
+        //         console.log("signInWithEmailLink then caught");
+        //         })
+        //         .catch((error) => {
     
-    //     //         console.log("signInWithEmailLink error caught");
-    //     //         });
-    //     // }
-    //     // Confirm the link is a sign-in with email link.
+        //         console.log("signInWithEmailLink error caught");
+        //         });
+        // }
+        // Confirm the link is a sign-in with email link.
 
-    //     function logoutFunction(){
+        function logoutFunction(){
 
-    //         // firebase signing out
-    //         signOut(auth)
-    //             .then(() => {
+            // firebase signing out
+            signOut(auth)
+                .then(() => {
 
-    //                 console.log("logged out");
-    //                 goto("/")
-    //                 // window.location.replace("/")
+                    console.log("logged out");
+                    goto("/")
+                    // window.location.replace("/")
                     
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error)
-    //                 console.log("FAILED firebase signOut function");
-    //             })
-    //     }
+                })
+                .catch((error) => {
+                    console.log(error)
+                    console.log("FAILED firebase signOut function");
+                })
+        }
     
-    //     async function loginToRedirectUrl(userEmail) {
+        async function loginToRedirectUrl(userEmail) {
 
         
 
 
-    //         const colRef = collection(db, "email");
-    //         const querySnapshot = await getDocs(colRef);
-    //         querySnapshot.forEach( doc => {
+            const colRef = collection(db, "email");
+            const querySnapshot = await getDocs(colRef);
+            querySnapshot.forEach( doc => {
 
-    //             if ( userEmail === doc.id) { 
+                if ( userEmail === doc.id) { 
 
-    //                 let timeInMS = 3000;
-    //                 let seconds = parseInt(timeInMS/1000); // i.e. 3
-    //                 // let userRedirectUrl =  doc.data().redirectUrl; /TODO: change this later in firebase
-    //                 let userRedirectUrl =  '/'; 
+                    let timeInMS = 3000;
+                    let seconds = parseInt(timeInMS/1000); // i.e. 3
+                    // let userRedirectUrl =  doc.data().redirectUrl; /TODO: change this later in firebase
+                    let userRedirectUrl =  '/'; 
 
-    //                 console.log(`A match! ${doc.id} => ${userRedirectUrl}`)
-
-
-    //                 // redirect after login
-    //                 let myInterval = setInterval(() => {
-    //                     if(seconds > 0) {
-    //                         seconds += -1;
-    //                         document.getElementById("redirectMessage").innerHTML = ` ${seconds}`;
-    //                     }
-    //                 }, 1000);
+                    console.log(`A match! ${doc.id} => ${userRedirectUrl}`)
 
 
-    //                 let myTimeout = setTimeout( ()=>{ 
-    //                     // window.location.replace( userRedirectUrl  )
-    //                     goto(userRedirectUrl)
-    //                 }, timeInMS );
+                    // redirect after login
+                    let myInterval = setInterval(() => {
+                        if(seconds > 0) {
+                            seconds += -1;
+                            document.getElementById("redirectMessage").innerHTML = ` ${seconds}`;
+                        }
+                    }, 1000);
 
-    //                 // redirect after login
 
-    //             }
+                    let myTimeout = setTimeout( ()=>{ 
+                        // window.location.replace( userRedirectUrl  )
+                        goto(userRedirectUrl)
+                    }, timeInMS );
+
+                    // redirect after login
+
+                }
             
-    //         });
-    //     }
+            });
+        }
 
 
-    //     function signinWithLinkAndStop() {
+        function signinWithLinkAndStop() {
 
-    //         passwordlessLoginBtn.style.opacity="0.2";
-    //         passwordlessLoginBtn.style.pointerEvents = "none";
+            passwordlessLoginBtn.style.opacity="0.2";
+            passwordlessLoginBtn.style.pointerEvents = "none";
             
-    //         // let emailFieldClone = emailField.cloneNode(true);
-    //         // emailField.parentNode.replaceChild(emailFieldClone, emailField);
+            // let emailFieldClone = emailField.cloneNode(true);
+            // emailField.parentNode.replaceChild(emailFieldClone, emailField);
 
-    //         loginViaPasswordlessEmail();
+            loginViaPasswordlessEmail();
 
-    //         window.addEventListener("keydown", e =>  e.stopImmediatePropagation(), true);
-    //         window.addEventListener("click", e =>  e.stopImmediatePropagation(), true);
+            window.addEventListener("keydown", e =>  e.stopImmediatePropagation(), true);
+            window.addEventListener("click", e =>  e.stopImmediatePropagation(), true);
 
-    //         flyingEmoji.style.display="block";
-    //         emailStatusMessage.style.display="block";
+            flyingEmoji.style.display="block";
+            emailStatusMessage.style.display="block";
 
 
-    //         emailStatusMessage.innerHTML = /*html*/ `
-    //             <span class="centering" style=" font-weight: bold; font-size: 18px; color: #10bb8a"> 
-    //                 Link sent to email 
-    //             </span>
-    //             `
-    //     }
-    // //  Hoisted functions
+            emailStatusMessage.innerHTML = /*html*/ `
+                <span class="centering" style=" font-weight: bold; font-size: 18px; color: #10bb8a"> 
+                    Link sent to email 
+                </span>
+                `
+        }
+    //  Hoisted functions
     
 </script>
 
