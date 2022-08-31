@@ -1,7 +1,7 @@
 import { c as create_ssr_component, d as add_attribute } from "../../../chunks/index.js";
-import { a as auth } from "../../../chunks/firebase.js";
+import "../../../chunks/firebase.js";
 import "firebase/firestore/lite";
-import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
+import "firebase/auth";
 import "firebase/app";
 const _page_nolayout_svelte_svelte_type_style_lang = "";
 const css = {
@@ -10,18 +10,6 @@ const css = {
 };
 const Page_nolayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let emailFieldValue;
-  if (isSignInWithEmailLink(auth, window.location.href)) {
-    let email = window.localStorage.getItem("emailForSignIn");
-    if (!email) {
-      email = window.prompt("Please provide your email for confirmation");
-    }
-    signInWithEmailLink(auth, email, window.location.href).then((result) => {
-      window.localStorage.removeItem("emailForSignIn");
-      console.log("signInWithEmailLink then caught");
-    }).catch((error) => {
-      console.log("signInWithEmailLink error caught");
-    });
-  }
   $$result.css.add(css);
   return `
     

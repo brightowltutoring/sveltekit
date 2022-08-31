@@ -3086,11 +3086,11 @@ function _fail(authOrCode, ...rest) {
 function _createError(authOrCode, ...rest) {
   return createErrorInternal(authOrCode, ...rest);
 }
-function _errorWithCustomMessage(auth2, code, message) {
+function _errorWithCustomMessage(auth, code, message) {
   const errorMap = Object.assign(Object.assign({}, prodErrorMap()), { [code]: message });
   const factory = new ErrorFactory("auth", "Firebase", errorMap);
   return factory.create(code, {
-    appName: auth2.name
+    appName: auth.name
   });
 }
 function createErrorInternal(authOrCode, ...rest) {
@@ -3133,24 +3133,24 @@ function _getInstance(cls) {
 function initializeAuth(app2, deps) {
   const provider = _getProvider(app2, "auth");
   if (provider.isInitialized()) {
-    const auth3 = provider.getImmediate();
+    const auth2 = provider.getImmediate();
     const initialOptions = provider.getOptions();
     if (deepEqual(initialOptions, deps !== null && deps !== void 0 ? deps : {})) {
-      return auth3;
+      return auth2;
     } else {
-      _fail(auth3, "already-initialized");
+      _fail(auth2, "already-initialized");
     }
   }
-  const auth2 = provider.initialize({ options: deps });
-  return auth2;
+  const auth = provider.initialize({ options: deps });
+  return auth;
 }
-function _initializeAuthInstance(auth2, deps) {
+function _initializeAuthInstance(auth, deps) {
   const persistence = (deps === null || deps === void 0 ? void 0 : deps.persistence) || [];
   const hierarchy = (Array.isArray(persistence) ? persistence : [persistence]).map(_getInstance);
   if (deps === null || deps === void 0 ? void 0 : deps.errorMap) {
-    auth2._updateErrorMap(deps.errorMap);
+    auth._updateErrorMap(deps.errorMap);
   }
-  auth2._initializeWithPersistence(hierarchy, deps === null || deps === void 0 ? void 0 : deps.popupRedirectResolver);
+  auth._initializeWithPersistence(hierarchy, deps === null || deps === void 0 ? void 0 : deps.popupRedirectResolver);
 }
 function _getCurrentUrl() {
   var _a;
@@ -3184,14 +3184,14 @@ function _emulatorUrl(config, path) {
   }
   return `${url}${path.startsWith("/") ? path.slice(1) : path}`;
 }
-function _addTidIfNecessary(auth2, request) {
-  if (auth2.tenantId && !request.tenantId) {
-    return Object.assign(Object.assign({}, request), { tenantId: auth2.tenantId });
+function _addTidIfNecessary(auth, request) {
+  if (auth.tenantId && !request.tenantId) {
+    return Object.assign(Object.assign({}, request), { tenantId: auth.tenantId });
   }
   return request;
 }
-async function _performApiRequest(auth2, method, path, request, customErrorMap = {}) {
-  return _performFetchWithErrorHandling(auth2, customErrorMap, async () => {
+async function _performApiRequest(auth, method, path, request, customErrorMap = {}) {
+  return _performFetchWithErrorHandling(auth, customErrorMap, async () => {
     let body = {};
     let params = {};
     if (request) {
@@ -3203,24 +3203,24 @@ async function _performApiRequest(auth2, method, path, request, customErrorMap =
         };
       }
     }
-    const query = querystring(Object.assign({ key: auth2.config.apiKey }, params)).slice(1);
-    const headers = await auth2._getAdditionalHeaders();
+    const query = querystring(Object.assign({ key: auth.config.apiKey }, params)).slice(1);
+    const headers = await auth._getAdditionalHeaders();
     headers["Content-Type"] = "application/json";
-    if (auth2.languageCode) {
-      headers["X-Firebase-Locale"] = auth2.languageCode;
+    if (auth.languageCode) {
+      headers["X-Firebase-Locale"] = auth.languageCode;
     }
-    return FetchProvider.fetch()(_getFinalTarget(auth2, auth2.config.apiHost, path, query), Object.assign({
+    return FetchProvider.fetch()(_getFinalTarget(auth, auth.config.apiHost, path, query), Object.assign({
       method,
       headers,
       referrerPolicy: "no-referrer"
     }, body));
   });
 }
-async function _performFetchWithErrorHandling(auth2, customErrorMap, fetchFn) {
-  auth2._canInitEmulator = false;
+async function _performFetchWithErrorHandling(auth, customErrorMap, fetchFn) {
+  auth._canInitEmulator = false;
   const errorMap = Object.assign(Object.assign({}, SERVER_ERROR_MAP), customErrorMap);
   try {
-    const networkTimeout = new NetworkTimeout(auth2);
+    const networkTimeout = new NetworkTimeout(auth);
     const response = await Promise.race([
       fetchFn(),
       networkTimeout.promise
@@ -3228,7 +3228,7 @@ async function _performFetchWithErrorHandling(auth2, customErrorMap, fetchFn) {
     networkTimeout.clearNetworkTimeout();
     const json2 = await response.json();
     if ("needConfirmation" in json2) {
-      throw _makeTaggedError(auth2, "account-exists-with-different-credential", json2);
+      throw _makeTaggedError(auth, "account-exists-with-different-credential", json2);
     }
     if (response.ok && !("errorMessage" in json2)) {
       return json2;
@@ -3236,45 +3236,45 @@ async function _performFetchWithErrorHandling(auth2, customErrorMap, fetchFn) {
       const errorMessage = response.ok ? json2.errorMessage : json2.error.message;
       const [serverErrorCode, serverErrorMessage] = errorMessage.split(" : ");
       if (serverErrorCode === "FEDERATED_USER_ID_ALREADY_LINKED") {
-        throw _makeTaggedError(auth2, "credential-already-in-use", json2);
+        throw _makeTaggedError(auth, "credential-already-in-use", json2);
       } else if (serverErrorCode === "EMAIL_EXISTS") {
-        throw _makeTaggedError(auth2, "email-already-in-use", json2);
+        throw _makeTaggedError(auth, "email-already-in-use", json2);
       } else if (serverErrorCode === "USER_DISABLED") {
-        throw _makeTaggedError(auth2, "user-disabled", json2);
+        throw _makeTaggedError(auth, "user-disabled", json2);
       }
       const authError = errorMap[serverErrorCode] || serverErrorCode.toLowerCase().replace(/[_\s]+/g, "-");
       if (serverErrorMessage) {
-        throw _errorWithCustomMessage(auth2, authError, serverErrorMessage);
+        throw _errorWithCustomMessage(auth, authError, serverErrorMessage);
       } else {
-        _fail(auth2, authError);
+        _fail(auth, authError);
       }
     }
   } catch (e3) {
     if (e3 instanceof FirebaseError) {
       throw e3;
     }
-    _fail(auth2, "network-request-failed");
+    _fail(auth, "network-request-failed");
   }
 }
-async function _performSignInRequest(auth2, method, path, request, customErrorMap = {}) {
-  const serverResponse = await _performApiRequest(auth2, method, path, request, customErrorMap);
+async function _performSignInRequest(auth, method, path, request, customErrorMap = {}) {
+  const serverResponse = await _performApiRequest(auth, method, path, request, customErrorMap);
   if ("mfaPendingCredential" in serverResponse) {
-    _fail(auth2, "multi-factor-auth-required", {
+    _fail(auth, "multi-factor-auth-required", {
       _serverResponse: serverResponse
     });
   }
   return serverResponse;
 }
-function _getFinalTarget(auth2, host, path, query) {
+function _getFinalTarget(auth, host, path, query) {
   const base2 = `${host}${path}?${query}`;
-  if (!auth2.config.emulator) {
-    return `${auth2.config.apiScheme}://${base2}`;
+  if (!auth.config.emulator) {
+    return `${auth.config.apiScheme}://${base2}`;
   }
-  return _emulatorUrl(auth2.config, base2);
+  return _emulatorUrl(auth.config, base2);
 }
-function _makeTaggedError(auth2, code, response) {
+function _makeTaggedError(auth, code, response) {
   const errorParams = {
-    appName: auth2.name
+    appName: auth.name
   };
   if (response.email) {
     errorParams.email = response.email;
@@ -3282,15 +3282,15 @@ function _makeTaggedError(auth2, code, response) {
   if (response.phoneNumber) {
     errorParams.phoneNumber = response.phoneNumber;
   }
-  const error2 = _createError(auth2, code, errorParams);
+  const error2 = _createError(auth, code, errorParams);
   error2.customData._tokenResponse = response;
   return error2;
 }
-async function deleteAccount(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v1/accounts:delete", request);
+async function deleteAccount(auth, request) {
+  return _performApiRequest(auth, "POST", "/v1/accounts:delete", request);
 }
-async function getAccountInfo(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v1/accounts:lookup", request);
+async function getAccountInfo(auth, request) {
+  return _performApiRequest(auth, "POST", "/v1/accounts:lookup", request);
 }
 function utcTimestampToDateString(utcTimestamp) {
   if (!utcTimestamp) {
@@ -3371,10 +3371,10 @@ function isUserInvalidated({ code }) {
 }
 async function _reloadWithoutSaving(user) {
   var _a;
-  const auth2 = user.auth;
+  const auth = user.auth;
   const idToken = await user.getIdToken();
-  const response = await _logoutIfInvalidated(user, getAccountInfo(auth2, { idToken }));
-  _assert(response === null || response === void 0 ? void 0 : response.users.length, auth2, "internal-error");
+  const response = await _logoutIfInvalidated(user, getAccountInfo(auth, { idToken }));
+  _assert(response === null || response === void 0 ? void 0 : response.users.length, auth, "internal-error");
   const coreAccount = response.users[0];
   user._notifyReloadListener(coreAccount);
   const newProviderData = ((_a = coreAccount.providerUserInfo) === null || _a === void 0 ? void 0 : _a.length) ? extractProviderData(coreAccount.providerUserInfo) : [];
@@ -3419,15 +3419,15 @@ function extractProviderData(providers) {
     };
   });
 }
-async function requestStsToken(auth2, refreshToken) {
-  const response = await _performFetchWithErrorHandling(auth2, {}, async () => {
+async function requestStsToken(auth, refreshToken) {
+  const response = await _performFetchWithErrorHandling(auth, {}, async () => {
     const body = querystring({
       "grant_type": "refresh_token",
       "refresh_token": refreshToken
     }).slice(1);
-    const { tokenApiHost, apiKey } = auth2.config;
-    const url = _getFinalTarget(auth2, tokenApiHost, "/v1/token", `key=${apiKey}`);
-    const headers = await auth2._getAdditionalHeaders();
+    const { tokenApiHost, apiKey } = auth.config;
+    const url = _getFinalTarget(auth, tokenApiHost, "/v1/token", `key=${apiKey}`);
+    const headers = await auth._getAdditionalHeaders();
     headers["Content-Type"] = "application/x-www-form-urlencoded";
     return FetchProvider.fetch()(url, {
       method: "POST",
@@ -3537,40 +3537,40 @@ function _getClientVersion(clientPlatform, frameworks = []) {
   const reportedFrameworks = frameworks.length ? frameworks.join(",") : "FirebaseCore-web";
   return `${reportedPlatform}/${"JsCore"}/${SDK_VERSION}/${reportedFrameworks}`;
 }
-function _castAuth(auth2) {
-  return getModularInstance(auth2);
+function _castAuth(auth) {
+  return getModularInstance(auth);
 }
-async function updateEmailPassword(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v1/accounts:update", request);
+async function updateEmailPassword(auth, request) {
+  return _performApiRequest(auth, "POST", "/v1/accounts:update", request);
 }
-async function signInWithPassword(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPassword", _addTidIfNecessary(auth2, request));
+async function signInWithPassword(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPassword", _addTidIfNecessary(auth, request));
 }
-async function signInWithEmailLink$1(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth2, request));
+async function signInWithEmailLink$1(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth, request));
 }
-async function signInWithEmailLinkForLinking(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth2, request));
+async function signInWithEmailLinkForLinking(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth, request));
 }
-async function signInWithIdp(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithIdp", _addTidIfNecessary(auth2, request));
+async function signInWithIdp(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithIdp", _addTidIfNecessary(auth, request));
 }
-async function sendPhoneVerificationCode(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v1/accounts:sendVerificationCode", _addTidIfNecessary(auth2, request));
+async function sendPhoneVerificationCode(auth, request) {
+  return _performApiRequest(auth, "POST", "/v1/accounts:sendVerificationCode", _addTidIfNecessary(auth, request));
 }
-async function signInWithPhoneNumber$1(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, request));
+async function signInWithPhoneNumber$1(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, request));
 }
-async function linkWithPhoneNumber$1(auth2, request) {
-  const response = await _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, request));
+async function linkWithPhoneNumber$1(auth, request) {
+  const response = await _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, request));
   if (response.temporaryProof) {
-    throw _makeTaggedError(auth2, "account-exists-with-different-credential", response);
+    throw _makeTaggedError(auth, "account-exists-with-different-credential", response);
   }
   return response;
 }
-async function verifyPhoneNumberForExisting(auth2, request) {
+async function verifyPhoneNumberForExisting(auth, request) {
   const apiRequest = Object.assign(Object.assign({}, request), { operation: "REAUTH" });
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, apiRequest), VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_);
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, apiRequest), VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_);
 }
 function parseMode(mode) {
   switch (mode) {
@@ -3606,11 +3606,11 @@ function providerIdForResponse(response) {
   }
   return null;
 }
-function _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential, user) {
-  const idTokenProvider = operationType === "reauthenticate" ? credential._getReauthenticationResolver(auth2) : credential._getIdTokenResponse(auth2);
+function _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential, user) {
+  const idTokenProvider = operationType === "reauthenticate" ? credential._getReauthenticationResolver(auth) : credential._getIdTokenResponse(auth);
   return idTokenProvider.catch((error2) => {
     if (error2.code === `auth/${"multi-factor-auth-required"}`) {
-      throw MultiFactorError._fromErrorAndOperation(auth2, error2, operationType, user);
+      throw MultiFactorError._fromErrorAndOperation(auth, error2, operationType, user);
     }
     throw error2;
   });
@@ -3621,50 +3621,37 @@ async function _link$1(user, credential, bypassAuthState = false) {
 }
 async function _reauthenticate(user, credential, bypassAuthState = false) {
   var _a;
-  const { auth: auth2 } = user;
+  const { auth } = user;
   const operationType = "reauthenticate";
   try {
-    const response = await _logoutIfInvalidated(user, _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential, user), bypassAuthState);
-    _assert(response.idToken, auth2, "internal-error");
+    const response = await _logoutIfInvalidated(user, _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential, user), bypassAuthState);
+    _assert(response.idToken, auth, "internal-error");
     const parsed = _parseToken(response.idToken);
-    _assert(parsed, auth2, "internal-error");
+    _assert(parsed, auth, "internal-error");
     const { sub: localId } = parsed;
-    _assert(user.uid === localId, auth2, "user-mismatch");
+    _assert(user.uid === localId, auth, "user-mismatch");
     return UserCredentialImpl._forOperation(user, operationType, response);
   } catch (e3) {
     if (((_a = e3) === null || _a === void 0 ? void 0 : _a.code) === `auth/${"user-not-found"}`) {
-      _fail(auth2, "user-mismatch");
+      _fail(auth, "user-mismatch");
     }
     throw e3;
   }
 }
-async function _signInWithCredential(auth2, credential, bypassAuthState = false) {
+async function _signInWithCredential(auth, credential, bypassAuthState = false) {
   const operationType = "signIn";
-  const response = await _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential);
-  const userCredential = await UserCredentialImpl._fromIdTokenResponse(auth2, operationType, response);
+  const response = await _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential);
+  const userCredential = await UserCredentialImpl._fromIdTokenResponse(auth, operationType, response);
   if (!bypassAuthState) {
-    await auth2._updateCurrentUser(userCredential.user);
+    await auth._updateCurrentUser(userCredential.user);
   }
   return userCredential;
 }
-async function signInWithCredential(auth2, credential) {
-  return _signInWithCredential(_castAuth(auth2), credential);
+function startEnrollPhoneMfa(auth, request) {
+  return _performApiRequest(auth, "POST", "/v2/accounts/mfaEnrollment:start", _addTidIfNecessary(auth, request));
 }
-function isSignInWithEmailLink(auth2, emailLink) {
-  const actionCodeUrl = ActionCodeURL.parseLink(emailLink);
-  return (actionCodeUrl === null || actionCodeUrl === void 0 ? void 0 : actionCodeUrl.operation) === "EMAIL_SIGNIN";
-}
-async function signInWithEmailLink(auth2, email, emailLink) {
-  const authModular = getModularInstance(auth2);
-  const credential = EmailAuthProvider.credentialWithLink(email, emailLink || _getCurrentUrl());
-  _assert(credential._tenantId === (authModular.tenantId || null), authModular, "tenant-id-mismatch");
-  return signInWithCredential(authModular, credential);
-}
-function startEnrollPhoneMfa(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaEnrollment:start", _addTidIfNecessary(auth2, request));
-}
-function finalizeEnrollPhoneMfa(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaEnrollment:finalize", _addTidIfNecessary(auth2, request));
+function finalizeEnrollPhoneMfa(auth, request) {
+  return _performApiRequest(auth, "POST", "/v2/accounts/mfaEnrollment:finalize", _addTidIfNecessary(auth, request));
 }
 function _iframeCannotSyncWebStorage() {
   const ua = getUA();
@@ -3769,11 +3756,11 @@ function _deleteObject(db, key2) {
   const request = getObjectStore(db, true).delete(key2);
   return new DBPromise(request).toPromise();
 }
-function startSignInPhoneMfa(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaSignIn:start", _addTidIfNecessary(auth2, request));
+function startSignInPhoneMfa(auth, request) {
+  return _performApiRequest(auth, "POST", "/v2/accounts/mfaSignIn:start", _addTidIfNecessary(auth, request));
 }
-function finalizeSignInPhoneMfa(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaSignIn:finalize", _addTidIfNecessary(auth2, request));
+function finalizeSignInPhoneMfa(auth, request) {
+  return _performApiRequest(auth, "POST", "/v2/accounts/mfaSignIn:finalize", _addTidIfNecessary(auth, request));
 }
 function getScriptParentElement() {
   var _a, _b;
@@ -3797,12 +3784,12 @@ function _loadJS(url) {
 function _generateCallbackName(prefix2) {
   return `__${prefix2}${Math.floor(Math.random() * 1e6)}`;
 }
-async function _verifyPhoneNumber(auth2, options, verifier) {
+async function _verifyPhoneNumber(auth, options, verifier) {
   var _a;
   const recaptchaToken = await verifier.verify();
   try {
-    _assert(typeof recaptchaToken === "string", auth2, "argument-error");
-    _assert(verifier.type === RECAPTCHA_VERIFIER_TYPE, auth2, "argument-error");
+    _assert(typeof recaptchaToken === "string", auth, "argument-error");
+    _assert(verifier.type === RECAPTCHA_VERIFIER_TYPE, auth, "argument-error");
     let phoneInfoOptions;
     if (typeof options === "string") {
       phoneInfoOptions = {
@@ -3814,8 +3801,8 @@ async function _verifyPhoneNumber(auth2, options, verifier) {
     if ("session" in phoneInfoOptions) {
       const session = phoneInfoOptions.session;
       if ("phoneNumber" in phoneInfoOptions) {
-        _assert(session.type === "enroll", auth2, "internal-error");
-        const response = await startEnrollPhoneMfa(auth2, {
+        _assert(session.type === "enroll", auth, "internal-error");
+        const response = await startEnrollPhoneMfa(auth, {
           idToken: session.credential,
           phoneEnrollmentInfo: {
             phoneNumber: phoneInfoOptions.phoneNumber,
@@ -3824,10 +3811,10 @@ async function _verifyPhoneNumber(auth2, options, verifier) {
         });
         return response.phoneSessionInfo.sessionInfo;
       } else {
-        _assert(session.type === "signin", auth2, "internal-error");
+        _assert(session.type === "signin", auth, "internal-error");
         const mfaEnrollmentId = ((_a = phoneInfoOptions.multiFactorHint) === null || _a === void 0 ? void 0 : _a.uid) || phoneInfoOptions.multiFactorUid;
-        _assert(mfaEnrollmentId, auth2, "missing-multi-factor-info");
-        const response = await startSignInPhoneMfa(auth2, {
+        _assert(mfaEnrollmentId, auth, "missing-multi-factor-info");
+        const response = await startSignInPhoneMfa(auth, {
           mfaPendingCredential: session.credential,
           mfaEnrollmentId,
           phoneSignInInfo: {
@@ -3837,7 +3824,7 @@ async function _verifyPhoneNumber(auth2, options, verifier) {
         return response.phoneResponseInfo.sessionInfo;
       }
     } else {
-      const { sessionInfo } = await sendPhoneVerificationCode(auth2, {
+      const { sessionInfo } = await sendPhoneVerificationCode(auth, {
         phoneNumber: phoneInfoOptions.phoneNumber,
         recaptchaToken
       });
@@ -3847,28 +3834,28 @@ async function _verifyPhoneNumber(auth2, options, verifier) {
     verifier._reset();
   }
 }
-function _withDefaultResolver(auth2, resolverOverride) {
+function _withDefaultResolver(auth, resolverOverride) {
   if (resolverOverride) {
     return _getInstance(resolverOverride);
   }
-  _assert(auth2._popupRedirectResolver, auth2, "argument-error");
-  return auth2._popupRedirectResolver;
+  _assert(auth._popupRedirectResolver, auth, "argument-error");
+  return auth._popupRedirectResolver;
 }
 function _signIn(params) {
   return _signInWithCredential(params.auth, new IdpCredential(params), params.bypassAuthState);
 }
 function _reauth(params) {
-  const { auth: auth2, user } = params;
-  _assert(user, auth2, "internal-error");
+  const { auth, user } = params;
+  _assert(user, auth, "internal-error");
   return _reauthenticate(user, new IdpCredential(params), params.bypassAuthState);
 }
 async function _link(params) {
-  const { auth: auth2, user } = params;
-  _assert(user, auth2, "internal-error");
+  const { auth, user } = params;
+  _assert(user, auth, "internal-error");
   return _link$1(user, new IdpCredential(params), params.bypassAuthState);
 }
-async function _getAndClearPendingRedirectStatus(resolver, auth2) {
-  const key2 = pendingRedirectKey(auth2);
+async function _getAndClearPendingRedirectStatus(resolver, auth) {
+  const key2 = pendingRedirectKey(auth);
   const persistence = resolverPersistence(resolver);
   if (!await persistence._isAvailable()) {
     return false;
@@ -3877,17 +3864,17 @@ async function _getAndClearPendingRedirectStatus(resolver, auth2) {
   await persistence._remove(key2);
   return hasPendingRedirect;
 }
-function _overrideRedirectResult(auth2, result) {
-  redirectOutcomeMap.set(auth2._key(), result);
+function _overrideRedirectResult(auth, result) {
+  redirectOutcomeMap.set(auth._key(), result);
 }
 function resolverPersistence(resolver) {
   return _getInstance(resolver._redirectPersistence);
 }
-function pendingRedirectKey(auth2) {
-  return _persistenceKeyName(PENDING_REDIRECT_KEY, auth2.config.apiKey, auth2.name);
+function pendingRedirectKey(auth) {
+  return _persistenceKeyName(PENDING_REDIRECT_KEY, auth.config.apiKey, auth.name);
 }
-async function _getRedirectResult(auth2, resolverExtern, bypassAuthState = false) {
-  const authInternal = _castAuth(auth2);
+async function _getRedirectResult(auth, resolverExtern, bypassAuthState = false) {
+  const authInternal = _castAuth(auth);
   const resolver = _withDefaultResolver(authInternal, resolverExtern);
   const action = new RedirectAction(authInternal, resolver, bypassAuthState);
   const result = await action.execute();
@@ -3916,14 +3903,14 @@ function isRedirectEvent(event) {
       return false;
   }
 }
-async function _getProjectConfig(auth2, request = {}) {
-  return _performApiRequest(auth2, "GET", "/v1/projects", request);
+async function _getProjectConfig(auth, request = {}) {
+  return _performApiRequest(auth, "GET", "/v1/projects", request);
 }
-async function _validateOrigin(auth2) {
-  if (auth2.config.emulator) {
+async function _validateOrigin(auth) {
+  if (auth.config.emulator) {
     return;
   }
-  const { authorizedDomains } = await _getProjectConfig(auth2);
+  const { authorizedDomains } = await _getProjectConfig(auth);
   for (const domain of authorizedDomains) {
     try {
       if (matchDomain(domain)) {
@@ -3932,7 +3919,7 @@ async function _validateOrigin(auth2) {
     } catch (_a) {
     }
   }
-  _fail(auth2, "unauthorized-domain");
+  _fail(auth, "unauthorized-domain");
 }
 function matchDomain(expected) {
   const currentUrl = _getCurrentUrl();
@@ -3969,7 +3956,7 @@ function resetUnloadedGapiModules() {
     }
   }
 }
-function loadGapi(auth2) {
+function loadGapi(auth) {
   return new Promise((resolve2, reject) => {
     var _a, _b, _c;
     function loadGapiIframe() {
@@ -3980,7 +3967,7 @@ function loadGapi(auth2) {
         },
         ontimeout: () => {
           resetUnloadedGapiModules();
-          reject(_createError(auth2, "network-request-failed"));
+          reject(_createError(auth, "network-request-failed"));
         },
         timeout: NETWORK_TIMEOUT.get()
       });
@@ -3995,7 +3982,7 @@ function loadGapi(auth2) {
         if (!!gapi.load) {
           loadGapiIframe();
         } else {
-          reject(_createError(auth2, "network-request-failed"));
+          reject(_createError(auth, "network-request-failed"));
         }
       };
       return _loadJS(`https://apis.google.com/js/api.js?onload=${cbName}`).catch((e3) => reject(e3));
@@ -4005,36 +3992,36 @@ function loadGapi(auth2) {
     throw error2;
   });
 }
-function _loadGapi(auth2) {
-  cachedGApiLoader = cachedGApiLoader || loadGapi(auth2);
+function _loadGapi(auth) {
+  cachedGApiLoader = cachedGApiLoader || loadGapi(auth);
   return cachedGApiLoader;
 }
-function getIframeUrl(auth2) {
-  const config = auth2.config;
-  _assert(config.authDomain, auth2, "auth-domain-config-required");
-  const url = config.emulator ? _emulatorUrl(config, EMULATED_IFRAME_PATH) : `https://${auth2.config.authDomain}/${IFRAME_PATH}`;
+function getIframeUrl(auth) {
+  const config = auth.config;
+  _assert(config.authDomain, auth, "auth-domain-config-required");
+  const url = config.emulator ? _emulatorUrl(config, EMULATED_IFRAME_PATH) : `https://${auth.config.authDomain}/${IFRAME_PATH}`;
   const params = {
     apiKey: config.apiKey,
-    appName: auth2.name,
+    appName: auth.name,
     v: SDK_VERSION
   };
-  const eid = EID_FROM_APIHOST.get(auth2.config.apiHost);
+  const eid = EID_FROM_APIHOST.get(auth.config.apiHost);
   if (eid) {
     params.eid = eid;
   }
-  const frameworks = auth2._getFrameworks();
+  const frameworks = auth._getFrameworks();
   if (frameworks.length) {
     params.fw = frameworks.join(",");
   }
   return `${url}?${querystring(params).slice(1)}`;
 }
-async function _openIframe(auth2) {
-  const context = await _loadGapi(auth2);
+async function _openIframe(auth) {
+  const context = await _loadGapi(auth);
   const gapi2 = _window().gapi;
-  _assert(gapi2, auth2, "internal-error");
+  _assert(gapi2, auth, "internal-error");
   return context.open({
     where: document.body,
-    url: getIframeUrl(auth2),
+    url: getIframeUrl(auth),
     messageHandlersFilter: gapi2.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
     attributes: IFRAME_ATTRIBUTES,
     dontclear: true
@@ -4042,7 +4029,7 @@ async function _openIframe(auth2) {
     await iframe.restyle({
       setHideOnLeave: false
     });
-    const networkError = _createError(auth2, "network-request-failed");
+    const networkError = _createError(auth, "network-request-failed");
     const networkErrorTimer = _window().setTimeout(() => {
       reject(networkError);
     }, PING_TIMEOUT.get());
@@ -4055,7 +4042,7 @@ async function _openIframe(auth2) {
     });
   }));
 }
-function _open(auth2, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
+function _open(auth, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
   const top = Math.max((window.screen.availHeight - height) / 2, 0).toString();
   const left = Math.max((window.screen.availWidth - width) / 2, 0).toString();
   let target = "";
@@ -4079,7 +4066,7 @@ function _open(auth2, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT
     return new AuthPopup(null);
   }
   const newWin = window.open(url || "", target, optionsString);
-  _assert(newWin, auth2, "popup-blocked");
+  _assert(newWin, auth, "popup-blocked");
   try {
     newWin.focus();
   } catch (e3) {
@@ -4094,19 +4081,19 @@ function openAsNewWindowIOS(url, target) {
   click.initMouseEvent("click", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 1, null);
   el.dispatchEvent(click);
 }
-function _getRedirectUrl(auth2, provider, authType, redirectUrl, eventId, additionalParams) {
-  _assert(auth2.config.authDomain, auth2, "auth-domain-config-required");
-  _assert(auth2.config.apiKey, auth2, "invalid-api-key");
+function _getRedirectUrl(auth, provider, authType, redirectUrl, eventId, additionalParams) {
+  _assert(auth.config.authDomain, auth, "auth-domain-config-required");
+  _assert(auth.config.apiKey, auth, "invalid-api-key");
   const params = {
-    apiKey: auth2.config.apiKey,
-    appName: auth2.name,
+    apiKey: auth.config.apiKey,
+    appName: auth.name,
     authType,
     redirectUrl,
     v: SDK_VERSION,
     eventId
   };
   if (provider instanceof FederatedAuthProvider) {
-    provider.setDefaultLanguage(auth2.languageCode);
+    provider.setDefaultLanguage(auth.languageCode);
     params.providerId = provider.providerId || "";
     if (!isEmpty(provider.getCustomParameters())) {
       params.customParameters = JSON.stringify(provider.getCustomParameters());
@@ -4121,8 +4108,8 @@ function _getRedirectUrl(auth2, provider, authType, redirectUrl, eventId, additi
       params.scopes = scopes.join(",");
     }
   }
-  if (auth2.tenantId) {
-    params.tid = auth2.tenantId;
+  if (auth.tenantId) {
+    params.tid = auth.tenantId;
   }
   const paramsDict = params;
   for (const key2 of Object.keys(paramsDict)) {
@@ -4130,7 +4117,7 @@ function _getRedirectUrl(auth2, provider, authType, redirectUrl, eventId, additi
       delete paramsDict[key2];
     }
   }
-  return `${getHandlerBase(auth2)}?${querystring(paramsDict).slice(1)}`;
+  return `${getHandlerBase(auth)}?${querystring(paramsDict).slice(1)}`;
 }
 function getHandlerBase({ config }) {
   if (!config.emulator) {
@@ -4180,8 +4167,8 @@ function registerAuth(clientPlatform) {
     authInternalProvider.initialize();
   }));
   _registerComponent(new Component("auth-internal", (container) => {
-    const auth2 = _castAuth(container.getProvider("auth").getImmediate());
-    return ((auth3) => new AuthInterop(auth3))(auth2);
+    const auth = _castAuth(container.getProvider("auth").getImmediate());
+    return ((auth2) => new AuthInterop(auth2))(auth);
   }, "PRIVATE").setInstantiationMode("EXPLICIT"));
   registerVersion(name3, version3, getVersionForPlatform(clientPlatform));
   registerVersion(name3, version3, "esm2017");
@@ -4306,8 +4293,8 @@ var init_index_90ebcfae = __esm({
     };
     DEFAULT_API_TIMEOUT_MS = new Delay(3e4, 6e4);
     NetworkTimeout = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.timer = null;
         this.promise = new Promise((_2, reject) => {
           this.timer = setTimeout(() => {
@@ -4415,13 +4402,13 @@ var init_index_90ebcfae = __esm({
         const expiresIn = "expiresIn" in response && typeof response.expiresIn !== "undefined" ? Number(response.expiresIn) : _tokenExpiresIn(response.idToken);
         this.updateTokensAndExpiration(response.idToken, response.refreshToken, expiresIn);
       }
-      async getToken(auth2, forceRefresh = false) {
-        _assert(!this.accessToken || this.refreshToken, auth2, "user-token-expired");
+      async getToken(auth, forceRefresh = false) {
+        _assert(!this.accessToken || this.refreshToken, auth, "user-token-expired");
         if (!forceRefresh && this.accessToken && !this.isExpired) {
           return this.accessToken;
         }
         if (this.refreshToken) {
-          await this.refresh(auth2, this.refreshToken);
+          await this.refresh(auth, this.refreshToken);
           return this.accessToken;
         }
         return null;
@@ -4429,8 +4416,8 @@ var init_index_90ebcfae = __esm({
       clearRefreshToken() {
         this.refreshToken = null;
       }
-      async refresh(auth2, oldToken) {
-        const { accessToken, refreshToken, expiresIn } = await requestStsToken(auth2, oldToken);
+      async refresh(auth, oldToken) {
+        const { accessToken, refreshToken, expiresIn } = await requestStsToken(auth, oldToken);
         this.updateTokensAndExpiration(accessToken, refreshToken, Number(expiresIn));
       }
       updateTokensAndExpiration(accessToken, refreshToken, expiresInSec) {
@@ -4482,13 +4469,13 @@ var init_index_90ebcfae = __esm({
     };
     UserImpl = class {
       constructor(_a) {
-        var { uid, auth: auth2, stsTokenManager } = _a, opt = __rest(_a, ["uid", "auth", "stsTokenManager"]);
+        var { uid, auth, stsTokenManager } = _a, opt = __rest(_a, ["uid", "auth", "stsTokenManager"]);
         this.providerId = "firebase";
         this.proactiveRefresh = new ProactiveRefresh(this);
         this.reloadUserInfo = null;
         this.reloadListener = null;
         this.uid = uid;
-        this.auth = auth2;
+        this.auth = auth;
         this.stsTokenManager = stsTokenManager;
         this.accessToken = stsTokenManager.accessToken;
         this.displayName = opt.displayName || null;
@@ -4533,8 +4520,8 @@ var init_index_90ebcfae = __esm({
         this.metadata._copy(user.metadata);
         this.stsTokenManager._assign(user.stsTokenManager);
       }
-      _clone(auth2) {
-        return new UserImpl(Object.assign(Object.assign({}, this), { auth: auth2, stsTokenManager: this.stsTokenManager._clone() }));
+      _clone(auth) {
+        return new UserImpl(Object.assign(Object.assign({}, this), { auth, stsTokenManager: this.stsTokenManager._clone() }));
       }
       _onReload(callback) {
         _assert(!this.reloadListener, this.auth, "internal-error");
@@ -4598,7 +4585,7 @@ var init_index_90ebcfae = __esm({
       get refreshToken() {
         return this.stsTokenManager.refreshToken || "";
       }
-      static _fromJSON(auth2, object) {
+      static _fromJSON(auth, object) {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         const displayName = (_a = object.displayName) !== null && _a !== void 0 ? _a : void 0;
         const email = (_b = object.email) !== null && _b !== void 0 ? _b : void 0;
@@ -4609,22 +4596,22 @@ var init_index_90ebcfae = __esm({
         const createdAt = (_g = object.createdAt) !== null && _g !== void 0 ? _g : void 0;
         const lastLoginAt = (_h = object.lastLoginAt) !== null && _h !== void 0 ? _h : void 0;
         const { uid, emailVerified, isAnonymous, providerData, stsTokenManager: plainObjectTokenManager } = object;
-        _assert(uid && plainObjectTokenManager, auth2, "internal-error");
+        _assert(uid && plainObjectTokenManager, auth, "internal-error");
         const stsTokenManager = StsTokenManager.fromJSON(this.name, plainObjectTokenManager);
-        _assert(typeof uid === "string", auth2, "internal-error");
-        assertStringOrUndefined(displayName, auth2.name);
-        assertStringOrUndefined(email, auth2.name);
-        _assert(typeof emailVerified === "boolean", auth2, "internal-error");
-        _assert(typeof isAnonymous === "boolean", auth2, "internal-error");
-        assertStringOrUndefined(phoneNumber, auth2.name);
-        assertStringOrUndefined(photoURL, auth2.name);
-        assertStringOrUndefined(tenantId, auth2.name);
-        assertStringOrUndefined(_redirectEventId, auth2.name);
-        assertStringOrUndefined(createdAt, auth2.name);
-        assertStringOrUndefined(lastLoginAt, auth2.name);
+        _assert(typeof uid === "string", auth, "internal-error");
+        assertStringOrUndefined(displayName, auth.name);
+        assertStringOrUndefined(email, auth.name);
+        _assert(typeof emailVerified === "boolean", auth, "internal-error");
+        _assert(typeof isAnonymous === "boolean", auth, "internal-error");
+        assertStringOrUndefined(phoneNumber, auth.name);
+        assertStringOrUndefined(photoURL, auth.name);
+        assertStringOrUndefined(tenantId, auth.name);
+        assertStringOrUndefined(_redirectEventId, auth.name);
+        assertStringOrUndefined(createdAt, auth.name);
+        assertStringOrUndefined(lastLoginAt, auth.name);
         const user = new UserImpl({
           uid,
-          auth: auth2,
+          auth,
           email,
           emailVerified,
           displayName,
@@ -4644,12 +4631,12 @@ var init_index_90ebcfae = __esm({
         }
         return user;
       }
-      static async _fromIdTokenResponse(auth2, idTokenResponse, isAnonymous = false) {
+      static async _fromIdTokenResponse(auth, idTokenResponse, isAnonymous = false) {
         const stsTokenManager = new StsTokenManager();
         stsTokenManager.updateFromServerResponse(idTokenResponse);
         const user = new UserImpl({
           uid: idTokenResponse.localId,
-          auth: auth2,
+          auth,
           stsTokenManager,
           isAnonymous
         });
@@ -4685,14 +4672,14 @@ var init_index_90ebcfae = __esm({
     InMemoryPersistence.type = "NONE";
     inMemoryPersistence = InMemoryPersistence;
     PersistenceUserManager = class {
-      constructor(persistence, auth2, userKey) {
+      constructor(persistence, auth, userKey) {
         this.persistence = persistence;
-        this.auth = auth2;
+        this.auth = auth;
         this.userKey = userKey;
         const { config, name: name4 } = this.auth;
         this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name4);
         this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name4);
-        this.boundEventHandler = auth2._onStorageEvent.bind(auth2);
+        this.boundEventHandler = auth._onStorageEvent.bind(auth);
         this.persistence._addListener(this.fullUserKey, this.boundEventHandler);
       }
       setCurrentUser(user) {
@@ -4722,9 +4709,9 @@ var init_index_90ebcfae = __esm({
       delete() {
         this.persistence._removeListener(this.fullUserKey, this.boundEventHandler);
       }
-      static async create(auth2, persistenceHierarchy, userKey = "authUser") {
+      static async create(auth, persistenceHierarchy, userKey = "authUser") {
         if (!persistenceHierarchy.length) {
-          return new PersistenceUserManager(_getInstance(inMemoryPersistence), auth2, userKey);
+          return new PersistenceUserManager(_getInstance(inMemoryPersistence), auth, userKey);
         }
         const availablePersistences = (await Promise.all(persistenceHierarchy.map(async (persistence) => {
           if (await persistence._isAvailable()) {
@@ -4733,13 +4720,13 @@ var init_index_90ebcfae = __esm({
           return void 0;
         }))).filter((persistence) => persistence);
         let selectedPersistence = availablePersistences[0] || _getInstance(inMemoryPersistence);
-        const key2 = _persistenceKeyName(userKey, auth2.config.apiKey, auth2.name);
+        const key2 = _persistenceKeyName(userKey, auth.config.apiKey, auth.name);
         let userToMigrate = null;
         for (const persistence of persistenceHierarchy) {
           try {
             const blob = await persistence._get(key2);
             if (blob) {
-              const user = UserImpl._fromJSON(auth2, blob);
+              const user = UserImpl._fromJSON(auth, blob);
               if (persistence !== selectedPersistence) {
                 userToMigrate = user;
               }
@@ -4751,7 +4738,7 @@ var init_index_90ebcfae = __esm({
         }
         const migrationHierarchy = availablePersistences.filter((p2) => p2._shouldAllowMigration);
         if (!selectedPersistence._shouldAllowMigration || !migrationHierarchy.length) {
-          return new PersistenceUserManager(selectedPersistence, auth2, userKey);
+          return new PersistenceUserManager(selectedPersistence, auth, userKey);
         }
         selectedPersistence = migrationHierarchy[0];
         if (userToMigrate) {
@@ -4765,12 +4752,12 @@ var init_index_90ebcfae = __esm({
             }
           }
         }));
-        return new PersistenceUserManager(selectedPersistence, auth2, userKey);
+        return new PersistenceUserManager(selectedPersistence, auth, userKey);
       }
     };
     AuthMiddlewareQueue = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.queue = [];
       }
       pushCallback(callback, onAbort) {
@@ -5141,8 +5128,8 @@ var init_index_90ebcfae = __esm({
       }
     };
     Subscription = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.observer = null;
         this.addObserver = createSubscribe((observer) => this.observer = observer);
       }
@@ -5201,44 +5188,44 @@ var init_index_90ebcfae = __esm({
         }
         return null;
       }
-      async _getIdTokenResponse(auth2) {
+      async _getIdTokenResponse(auth) {
         switch (this.signInMethod) {
           case "password":
-            return signInWithPassword(auth2, {
+            return signInWithPassword(auth, {
               returnSecureToken: true,
               email: this._email,
               password: this._password
             });
           case "emailLink":
-            return signInWithEmailLink$1(auth2, {
+            return signInWithEmailLink$1(auth, {
               email: this._email,
               oobCode: this._password
             });
           default:
-            _fail(auth2, "internal-error");
+            _fail(auth, "internal-error");
         }
       }
-      async _linkToIdToken(auth2, idToken) {
+      async _linkToIdToken(auth, idToken) {
         switch (this.signInMethod) {
           case "password":
-            return updateEmailPassword(auth2, {
+            return updateEmailPassword(auth, {
               idToken,
               returnSecureToken: true,
               email: this._email,
               password: this._password
             });
           case "emailLink":
-            return signInWithEmailLinkForLinking(auth2, {
+            return signInWithEmailLinkForLinking(auth, {
               idToken,
               email: this._email,
               oobCode: this._password
             });
           default:
-            _fail(auth2, "internal-error");
+            _fail(auth, "internal-error");
         }
       }
-      _getReauthenticationResolver(auth2) {
-        return this._getIdTokenResponse(auth2);
+      _getReauthenticationResolver(auth) {
+        return this._getIdTokenResponse(auth);
       }
     };
     IDP_REQUEST_URI$1 = "http://localhost";
@@ -5295,19 +5282,19 @@ var init_index_90ebcfae = __esm({
         cred.pendingToken = rest.pendingToken || null;
         return cred;
       }
-      _getIdTokenResponse(auth2) {
+      _getIdTokenResponse(auth) {
         const request = this.buildRequest();
-        return signInWithIdp(auth2, request);
+        return signInWithIdp(auth, request);
       }
-      _linkToIdToken(auth2, idToken) {
+      _linkToIdToken(auth, idToken) {
         const request = this.buildRequest();
         request.idToken = idToken;
-        return signInWithIdp(auth2, request);
+        return signInWithIdp(auth, request);
       }
-      _getReauthenticationResolver(auth2) {
+      _getReauthenticationResolver(auth) {
         const request = this.buildRequest();
         request.autoCreate = false;
-        return signInWithIdp(auth2, request);
+        return signInWithIdp(auth, request);
       }
       buildRequest() {
         const request = {
@@ -5350,14 +5337,14 @@ var init_index_90ebcfae = __esm({
       static _fromTokenResponse(phoneNumber, temporaryProof) {
         return new PhoneAuthCredential({ phoneNumber, temporaryProof });
       }
-      _getIdTokenResponse(auth2) {
-        return signInWithPhoneNumber$1(auth2, this._makeVerificationRequest());
+      _getIdTokenResponse(auth) {
+        return signInWithPhoneNumber$1(auth, this._makeVerificationRequest());
       }
-      _linkToIdToken(auth2, idToken) {
-        return linkWithPhoneNumber$1(auth2, Object.assign({ idToken }, this._makeVerificationRequest()));
+      _linkToIdToken(auth, idToken) {
+        return linkWithPhoneNumber$1(auth, Object.assign({ idToken }, this._makeVerificationRequest()));
       }
-      _getReauthenticationResolver(auth2) {
-        return verifyPhoneNumberForExisting(auth2, this._makeVerificationRequest());
+      _getReauthenticationResolver(auth) {
+        return verifyPhoneNumberForExisting(auth, this._makeVerificationRequest());
       }
       _makeVerificationRequest() {
         const { temporaryProof, phoneNumber, verificationId, verificationCode } = this.params;
@@ -5619,8 +5606,8 @@ var init_index_90ebcfae = __esm({
         this._tokenResponse = params._tokenResponse;
         this.operationType = params.operationType;
       }
-      static async _fromIdTokenResponse(auth2, operationType, idTokenResponse, isAnonymous = false) {
-        const user = await UserImpl._fromIdTokenResponse(auth2, idTokenResponse, isAnonymous);
+      static async _fromIdTokenResponse(auth, operationType, idTokenResponse, isAnonymous = false) {
+        const user = await UserImpl._fromIdTokenResponse(auth, idTokenResponse, isAnonymous);
         const providerId = providerIdForResponse(idTokenResponse);
         const userCred = new UserCredentialImpl({
           user,
@@ -5642,21 +5629,21 @@ var init_index_90ebcfae = __esm({
       }
     };
     MultiFactorError = class extends FirebaseError {
-      constructor(auth2, error2, operationType, user) {
+      constructor(auth, error2, operationType, user) {
         var _a;
         super(error2.code, error2.message);
         this.operationType = operationType;
         this.user = user;
         Object.setPrototypeOf(this, MultiFactorError.prototype);
         this.customData = {
-          appName: auth2.name,
-          tenantId: (_a = auth2.tenantId) !== null && _a !== void 0 ? _a : void 0,
+          appName: auth.name,
+          tenantId: (_a = auth.tenantId) !== null && _a !== void 0 ? _a : void 0,
           _serverResponse: error2.customData._serverResponse,
           operationType
         };
       }
-      static _fromErrorAndOperation(auth2, error2, operationType, user) {
-        return new MultiFactorError(auth2, error2, operationType, user);
+      static _fromErrorAndOperation(auth, error2, operationType, user) {
+        return new MultiFactorError(auth, error2, operationType, user);
       }
     };
     STORAGE_AVAILABLE_KEY = "__sak";
@@ -6190,9 +6177,9 @@ var init_index_90ebcfae = __esm({
     NETWORK_TIMEOUT_DELAY = new Delay(3e4, 6e4);
     RECAPTCHA_VERIFIER_TYPE = "recaptcha";
     PhoneAuthProvider = class {
-      constructor(auth2) {
+      constructor(auth) {
         this.providerId = PhoneAuthProvider.PROVIDER_ID;
-        this.auth = _castAuth(auth2);
+        this.auth = _castAuth(auth);
       }
       verifyPhoneNumber(phoneOptions, applicationVerifier) {
         return _verifyPhoneNumber(this.auth, phoneOptions, getModularInstance(applicationVerifier));
@@ -6225,14 +6212,14 @@ var init_index_90ebcfae = __esm({
         super("custom", "custom");
         this.params = params;
       }
-      _getIdTokenResponse(auth2) {
-        return signInWithIdp(auth2, this._buildIdpRequest());
+      _getIdTokenResponse(auth) {
+        return signInWithIdp(auth, this._buildIdpRequest());
       }
-      _linkToIdToken(auth2, idToken) {
-        return signInWithIdp(auth2, this._buildIdpRequest(idToken));
+      _linkToIdToken(auth, idToken) {
+        return signInWithIdp(auth, this._buildIdpRequest(idToken));
       }
-      _getReauthenticationResolver(auth2) {
-        return signInWithIdp(auth2, this._buildIdpRequest());
+      _getReauthenticationResolver(auth) {
+        return signInWithIdp(auth, this._buildIdpRequest());
       }
       _buildIdpRequest(idToken) {
         const request = {
@@ -6251,8 +6238,8 @@ var init_index_90ebcfae = __esm({
       }
     };
     AbstractPopupRedirectOperation = class {
-      constructor(auth2, filter, resolver, user, bypassAuthState = false) {
-        this.auth = auth2;
+      constructor(auth, filter, resolver, user, bypassAuthState = false) {
+        this.auth = auth;
         this.resolver = resolver;
         this.user = user;
         this.bypassAuthState = bypassAuthState;
@@ -6331,8 +6318,8 @@ var init_index_90ebcfae = __esm({
     };
     _POLL_WINDOW_CLOSE_TIMEOUT = new Delay(2e3, 1e4);
     PopupOperation = class extends AbstractPopupRedirectOperation {
-      constructor(auth2, filter, provider, resolver, user) {
-        super(auth2, filter, resolver, user);
+      constructor(auth, filter, provider, resolver, user) {
+        super(auth, filter, resolver, user);
         this.provider = provider;
         this.authWindow = null;
         this.pollId = null;
@@ -6403,8 +6390,8 @@ var init_index_90ebcfae = __esm({
     PENDING_REDIRECT_KEY = "pendingRedirect";
     redirectOutcomeMap = /* @__PURE__ */ new Map();
     RedirectAction = class extends AbstractPopupRedirectOperation {
-      constructor(auth2, resolver, bypassAuthState = false) {
-        super(auth2, [
+      constructor(auth, resolver, bypassAuthState = false) {
+        super(auth, [
           "signInViaRedirect",
           "linkViaRedirect",
           "reauthViaRedirect",
@@ -6453,8 +6440,8 @@ var init_index_90ebcfae = __esm({
     };
     EVENT_DUPLICATION_CACHE_DURATION_MS = 10 * 60 * 1e3;
     AuthEventManager = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.cachedEventUids = /* @__PURE__ */ new Set();
         this.consumers = /* @__PURE__ */ new Set();
         this.queuedRedirectEvent = null;
@@ -6576,20 +6563,20 @@ var init_index_90ebcfae = __esm({
         this._completeRedirectFn = _getRedirectResult;
         this._overrideRedirectResult = _overrideRedirectResult;
       }
-      async _openPopup(auth2, provider, authType, eventId) {
+      async _openPopup(auth, provider, authType, eventId) {
         var _a;
-        debugAssert((_a = this.eventManagers[auth2._key()]) === null || _a === void 0 ? void 0 : _a.manager, "_initialize() not called before _openPopup()");
-        const url = _getRedirectUrl(auth2, provider, authType, _getCurrentUrl(), eventId);
-        return _open(auth2, url, _generateEventId());
+        debugAssert((_a = this.eventManagers[auth._key()]) === null || _a === void 0 ? void 0 : _a.manager, "_initialize() not called before _openPopup()");
+        const url = _getRedirectUrl(auth, provider, authType, _getCurrentUrl(), eventId);
+        return _open(auth, url, _generateEventId());
       }
-      async _openRedirect(auth2, provider, authType, eventId) {
-        await this._originValidation(auth2);
-        _setWindowLocation(_getRedirectUrl(auth2, provider, authType, _getCurrentUrl(), eventId));
+      async _openRedirect(auth, provider, authType, eventId) {
+        await this._originValidation(auth);
+        _setWindowLocation(_getRedirectUrl(auth, provider, authType, _getCurrentUrl(), eventId));
         return new Promise(() => {
         });
       }
-      _initialize(auth2) {
-        const key2 = auth2._key();
+      _initialize(auth) {
+        const key2 = auth._key();
         if (this.eventManagers[key2]) {
           const { manager, promise: promise2 } = this.eventManagers[key2];
           if (manager) {
@@ -6599,40 +6586,40 @@ var init_index_90ebcfae = __esm({
             return promise2;
           }
         }
-        const promise = this.initAndGetManager(auth2);
+        const promise = this.initAndGetManager(auth);
         this.eventManagers[key2] = { promise };
         promise.catch(() => {
           delete this.eventManagers[key2];
         });
         return promise;
       }
-      async initAndGetManager(auth2) {
-        const iframe = await _openIframe(auth2);
-        const manager = new AuthEventManager(auth2);
+      async initAndGetManager(auth) {
+        const iframe = await _openIframe(auth);
+        const manager = new AuthEventManager(auth);
         iframe.register("authEvent", (iframeEvent) => {
-          _assert(iframeEvent === null || iframeEvent === void 0 ? void 0 : iframeEvent.authEvent, auth2, "invalid-auth-event");
+          _assert(iframeEvent === null || iframeEvent === void 0 ? void 0 : iframeEvent.authEvent, auth, "invalid-auth-event");
           const handled = manager.onEvent(iframeEvent.authEvent);
           return { status: handled ? "ACK" : "ERROR" };
         }, gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER);
-        this.eventManagers[auth2._key()] = { manager };
-        this.iframes[auth2._key()] = iframe;
+        this.eventManagers[auth._key()] = { manager };
+        this.iframes[auth._key()] = iframe;
         return manager;
       }
-      _isIframeWebStorageSupported(auth2, cb) {
-        const iframe = this.iframes[auth2._key()];
+      _isIframeWebStorageSupported(auth, cb) {
+        const iframe = this.iframes[auth._key()];
         iframe.send(WEB_STORAGE_SUPPORT_KEY, { type: WEB_STORAGE_SUPPORT_KEY }, (result) => {
           var _a;
           const isSupported = (_a = result === null || result === void 0 ? void 0 : result[0]) === null || _a === void 0 ? void 0 : _a[WEB_STORAGE_SUPPORT_KEY];
           if (isSupported !== void 0) {
             cb(!!isSupported);
           }
-          _fail(auth2, "internal-error");
+          _fail(auth, "internal-error");
         }, gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER);
       }
-      _originValidation(auth2) {
-        const key2 = auth2._key();
+      _originValidation(auth) {
+        const key2 = auth._key();
         if (!this.originValidationPromises[key2]) {
-          this.originValidationPromises[key2] = _validateOrigin(auth2);
+          this.originValidationPromises[key2] = _validateOrigin(auth);
         }
         return this.originValidationPromises[key2];
       }
@@ -6645,12 +6632,12 @@ var init_index_90ebcfae = __esm({
       constructor(factorId) {
         this.factorId = factorId;
       }
-      _process(auth2, session, displayName) {
+      _process(auth, session, displayName) {
         switch (session.type) {
           case "enroll":
-            return this._finalizeEnroll(auth2, session.credential, displayName);
+            return this._finalizeEnroll(auth, session.credential, displayName);
           case "signin":
-            return this._finalizeSignIn(auth2, session.credential);
+            return this._finalizeSignIn(auth, session.credential);
           default:
             return debugFail("unexpected MultiFactorSessionType");
         }
@@ -6664,15 +6651,15 @@ var init_index_90ebcfae = __esm({
       static _fromCredential(credential) {
         return new PhoneMultiFactorAssertionImpl(credential);
       }
-      _finalizeEnroll(auth2, idToken, displayName) {
-        return finalizeEnrollPhoneMfa(auth2, {
+      _finalizeEnroll(auth, idToken, displayName) {
+        return finalizeEnrollPhoneMfa(auth, {
           idToken,
           displayName,
           phoneVerificationInfo: this.credential._makeVerificationRequest()
         });
       }
-      _finalizeSignIn(auth2, mfaPendingCredential) {
-        return finalizeSignInPhoneMfa(auth2, {
+      _finalizeSignIn(auth, mfaPendingCredential) {
+        return finalizeSignInPhoneMfa(auth, {
           mfaPendingCredential,
           phoneVerificationInfo: this.credential._makeVerificationRequest()
         });
@@ -6689,8 +6676,8 @@ var init_index_90ebcfae = __esm({
     name3 = "@firebase/auth";
     version3 = "0.20.5";
     AuthInterop = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.internalListeners = /* @__PURE__ */ new Map();
       }
       getUid() {
@@ -6764,7 +6751,7 @@ var init_index_esm3 = __esm({
 });
 
 // .svelte-kit/output/server/chunks/firebase.js
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, auth;
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
     init_index_esm();
@@ -6785,7 +6772,7 @@ var init_firebase = __esm({
       appId: FIREBASE_appId
     };
     app = initializeApp(firebaseConfig);
-    auth = getAuth(app);
+    getAuth(app);
     ln(app);
   }
 });
@@ -7136,8 +7123,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-f10acb82.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-f10acb82.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/navigation-3b1552ef.js", "_app/immutable/chunks/singletons-193b64e5.js", "_app/immutable/chunks/index-323eada8.js", "_app/immutable/chunks/store-8da9504d.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-cec64c38.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-cec64c38.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/navigation-8e5e7c44.js", "_app/immutable/chunks/singletons-ed11a01b.js", "_app/immutable/chunks/index-323eada8.js", "_app/immutable/chunks/store-8da9504d.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-ad0c1e11.css"];
   }
 });
@@ -7223,8 +7210,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-e6775af5.js";
-    imports2 = ["_app/immutable/components/error.svelte-e6775af5.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/singletons-193b64e5.js", "_app/immutable/chunks/index-323eada8.js"];
+    file2 = "_app/immutable/components/error.svelte-c363b6a9.js";
+    imports2 = ["_app/immutable/components/error.svelte-c363b6a9.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/singletons-ed11a01b.js", "_app/immutable/chunks/index-323eada8.js"];
     stylesheets2 = [];
   }
 });
@@ -7408,18 +7395,6 @@ var init_page_nolayout_svelte = __esm({
     };
     Page_nolayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let emailFieldValue;
-      if (isSignInWithEmailLink(auth, window.location.href)) {
-        let email = window.localStorage.getItem("emailForSignIn");
-        if (!email) {
-          email = window.prompt("Please provide your email for confirmation");
-        }
-        signInWithEmailLink(auth, email, window.location.href).then((result) => {
-          window.localStorage.removeItem("emailForSignIn");
-          console.log("signInWithEmailLink then caught");
-        }).catch((error2) => {
-          console.log("signInWithEmailLink error caught");
-        });
-      }
       $$result.css.add(css);
       return `
     
@@ -7471,8 +7446,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-c29ef762.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-c29ef762.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/navigation-3b1552ef.js", "_app/immutable/chunks/singletons-193b64e5.js", "_app/immutable/chunks/index-323eada8.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-9d2794d7.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-9d2794d7.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/navigation-8e5e7c44.js", "_app/immutable/chunks/singletons-ed11a01b.js", "_app/immutable/chunks/index-323eada8.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -9647,7 +9622,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-0de35382.js", "imports": ["_app/immutable/start-0de35382.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/singletons-193b64e5.js", "_app/immutable/chunks/index-323eada8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-04f9310f.js", "imports": ["_app/immutable/start-04f9310f.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/singletons-ed11a01b.js", "_app/immutable/chunks/index-323eada8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
