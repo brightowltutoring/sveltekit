@@ -924,8 +924,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-ca434228.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-ca434228.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js", "_app/immutable/chunks/singletons-73d8b609.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-948c6252.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-948c6252.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js", "_app/immutable/chunks/singletons-1b2cf062.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-5845f018.css"];
   }
 });
@@ -1011,8 +1011,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-88bd7a9f.js";
-    imports2 = ["_app/immutable/components/error.svelte-88bd7a9f.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-73d8b609.js", "_app/immutable/chunks/index-71178bcf.js"];
+    file2 = "_app/immutable/components/error.svelte-0c9767a5.js";
+    imports2 = ["_app/immutable/components/error.svelte-0c9767a5.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-1b2cf062.js", "_app/immutable/chunks/index-71178bcf.js"];
     stylesheets2 = [];
   }
 });
@@ -2702,10 +2702,10 @@ var init_index_esm20174 = __esm({
   }
 });
 
-// node_modules/Firebase/app/dist/index.esm.js
+// node_modules/firebase/app/dist/index.esm.js
 var name2, version2;
 var init_index_esm = __esm({
-  "node_modules/Firebase/app/dist/index.esm.js"() {
+  "node_modules/firebase/app/dist/index.esm.js"() {
     init_index_esm20174();
     init_index_esm20174();
     name2 = "firebase";
@@ -9620,7 +9620,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-06618869.js", "imports": ["_app/immutable/start-06618869.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-73d8b609.js", "_app/immutable/chunks/index-71178bcf.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-c1103ba4.js", "imports": ["_app/immutable/start-c1103ba4.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-1b2cf062.js", "_app/immutable/chunks/index-71178bcf.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -10,7 +10,7 @@
                 appId: "1:490986955869:web:433c6f7b31865fed5099b4"
             };
 
-            import { initializeApp } from "Firebase/app"
+            import { initializeApp } from "firebase/app"
             import { getFirestore } from 'firebase/firestore/lite'
             import { getAuth } from "firebase/auth"
 

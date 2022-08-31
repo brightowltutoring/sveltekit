@@ -1,5 +1,5 @@
 import { c as create_ssr_component, d as add_attribute } from "../../../chunks/index.js";
-import { initializeApp } from "Firebase/app";
+import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore/lite";
 import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 const _page_nolayout_svelte_svelte_type_style_lang = "";
