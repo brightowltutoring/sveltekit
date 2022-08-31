@@ -100,7 +100,8 @@
             if(email.length!==0) {
 
                 const actionCodeSettings = {
-                    url: 'https://www.brightowltutoring.com/login',
+                    // url: 'https://www.brightowltutoring.com/login',
+                    url: 'https://thinksolve.io/login',
                     handleCodeInApp: true,
                 };
 
