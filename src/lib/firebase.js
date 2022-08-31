@@ -1,4 +1,4 @@
-import * as NV from '$env/static/private'
+// import * as NV from '$env/static/private'
 // const firebaseConfig = {
 //     apiKey:            NV.FIREBASE_apiKey,
 //     authDomain:        NV.FIREBASE_authDomain,
