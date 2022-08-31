@@ -1,4 +1,3 @@
-
 <script>
     
     import PageTransitions from '$lib/PageTransitions.svelte';

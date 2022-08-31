@@ -18,8 +18,11 @@
 
         onMount(() => {
 
+            // moved stuff applying to window element
+            window.addEventListener("keydown", e =>  e.stopImmediatePropagation(), true);
+            window.addEventListener("click", e =>  e.stopImmediatePropagation(), true);
 
- 
+
             onAuthStateChanged( auth, user => {
                 if( user ) {
                     console.log(`User is signed in!`); 
@@ -110,6 +113,7 @@
                         // The link was successfully sent. Inform the user.
                         // Save the email locally so you don't need to ask the user for it again
                         // if they open the link on the same device.
+                        
                         window.localStorage.setItem('emailForSignIn', email);
                         console.log("success with sendSignInLinkToEmail!");
                     })
@@ -122,29 +126,7 @@
             }
         }
 
-        // Confirm the link is a sign-in with email link.
-        // if (isSignInWithEmailLink(auth, window.location.href)) {
-
-        //     let email = window.localStorage.getItem('emailForSignIn');
-        //     if (!email) {
-        //         // User opened the link on a different device. To prevent session fixation
-        //         // attacks, ask the user to provide the associated email again. For example:
-        //         email = window.prompt('Please provide your email for confirmation');
-        //     }
-        //     // The client SDK will parse the code from the link for you.
-        //     signInWithEmailLink(auth, email, window.location.href)
-        //         .then((result) => {
-        //         // Clear email from storage.
-        //         window.localStorage.removeItem('emailForSignIn');
         
-        //         console.log("signInWithEmailLink then caught");
-        //         })
-        //         .catch((error) => {
-    
-        //         console.log("signInWithEmailLink error caught");
-        //         });
-        // }
-        // Confirm the link is a sign-in with email link.
 
         function logoutFunction(){
 
@@ -214,8 +196,9 @@
 
             loginViaPasswordlessEmail();
 
-            window.addEventListener("keydown", e =>  e.stopImmediatePropagation(), true);
-            window.addEventListener("click", e =>  e.stopImmediatePropagation(), true);
+            // window.addEventListener("keydown", e =>  e.stopImmediatePropagation(), true);
+            // window.addEventListener("click", e =>  e.stopImmediatePropagation(), true);
+            //TODO: moved to onMount above
 
             flyingEmoji.style.display="block";
             emailStatusMessage.style.display="block";
