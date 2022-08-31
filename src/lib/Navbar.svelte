@@ -82,11 +82,11 @@
 <navbar class="flex justify-between items-center w-1/3 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex {!mobileOpen && "hidden"} backdrop-blur-3xl sm:p-4">
      
     {#key resetLogoClick }
-    <div class="translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins pl-[5%] sm:text-[min(3.5vw,30px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent" 
+    <div class="translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins pl-[5%] sm:text-[min(5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent" 
         style:color={logoTextColor}
         in:scale={{duration:1200, easing:elasticOut}}
         on:mouseup={ clickLogo } >
-            BRIGHTOWL TUTORING        
+            THINKSOLVE
     </div>
     {/key}
 

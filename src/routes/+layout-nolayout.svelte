@@ -1,3 +1,4 @@
+<slot/>
 <!-- <script>
     export let data
     let { app, db, auth} = data
@@ -29,4 +30,3 @@
     const auth = getAuth(app)
 </script> -->
 
-<slot/>

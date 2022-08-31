@@ -149,7 +149,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       {}
     )}
 
-<navbar class="${"flex justify-between items-center w-1/3 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:p-4"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins pl-[5%] sm:text-[min(3.5vw,30px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>BRIGHTOWL TUTORING        
+<navbar class="${"flex justify-between items-center w-1/3 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:p-4"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins pl-[5%] sm:text-[min(5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
     

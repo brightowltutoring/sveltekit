@@ -1,4 +1,4 @@
-// import * as NV from '$env/static/private'
+import * as NV from '$env/static/private'
 // const firebaseConfig = {
 //     apiKey:            NV.FIREBASE_apiKey,
 //     authDomain:        NV.FIREBASE_authDomain,
@@ -8,10 +8,19 @@
 //     appId:             NV.FIREBASE_appId
 // }
 
-// import { initializeApp } from "Firebase/app"
-// import { getFirestore } from 'firebase/firestore/lite'
-// import { getAuth } from "firebase/auth"
+const firebaseConfig = {
+    apiKey: "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",
+    authDomain: "thinksolve-app.firebaseapp.com",
+    projectId: "thinksolve-app",
+    storageBucket: "thinksolve-app.appspot.com",
+    messagingSenderId: "490986955869",
+    appId: "1:490986955869:web:433c6f7b31865fed5099b4"
+  };
 
-// export const app = initializeApp(firebaseConfig)
-// export const auth = getAuth(app)
-// export const db = getFirestore(app)
+import { initializeApp } from "Firebase/app"
+import { getFirestore } from 'firebase/firestore/lite'
+import { getAuth } from "firebase/auth"
+
+export const app = initializeApp(firebaseConfig)
+export const auth = getAuth(app)
+export const db = getFirestore(app)
