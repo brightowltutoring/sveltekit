@@ -1,6 +1,9 @@
+    <svelte:window/>
+    
+    
     <script>
         import { db, auth } from '$lib/firebase.js'
-
+        import { goto } from '$app/navigation'
         import { collection, getDocs } from 'firebase/firestore/lite'
         import { onAuthStateChanged, GoogleAuthProvider, signOut, signInWithPopup,           
             sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, 
@@ -146,8 +149,8 @@
                 .then(() => {
 
                     console.log("logged out");
-                    // goto("/")
-                    window.location.replace("/")
+                    goto("/")
+                    // window.location.replace("/")
                     
                 })
                 .catch((error) => {
