@@ -1,28 +1,28 @@
 
     <script>
-        // TODO: added back in ...but delete once I fix cloudflare with firebase.js
-            const firebaseConfig = {
-                apiKey: "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",
-                authDomain: "thinksolve-app.firebaseapp.com",
-                projectId: "thinksolve-app",
-                storageBucket: "thinksolve-app.appspot.com",
-                messagingSenderId: "490986955869",
-                appId: "1:490986955869:web:433c6f7b31865fed5099b4"
-            };
+        // // TODO: added back in ...but delete once I fix cloudflare with firebase.js
+        //     const firebaseConfig = {
+        //         apiKey: "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",
+        //         authDomain: "thinksolve-app.firebaseapp.com",
+        //         projectId: "thinksolve-app",
+        //         storageBucket: "thinksolve-app.appspot.com",
+        //         messagingSenderId: "490986955869",
+        //         appId: "1:490986955869:web:433c6f7b31865fed5099b4"
+        //     };
 
-            import { initializeApp } from "firebase/app"
-            import { getFirestore } from 'firebase/firestore/lite'
-            import { getAuth } from "firebase/auth"
+        //     import { initializeApp } from "firebase/app"
+        //     import { getFirestore } from 'firebase/firestore/lite'
+        //     import { getAuth } from "firebase/auth"
 
-            export const app = initializeApp(firebaseConfig)
-            export const auth = getAuth(app)
-            export const db = getFirestore(app)
-        // TODO: added back in ...but delete once I fix cloudflare with firebase.js
+        //     export const app = initializeApp(firebaseConfig)
+        //     export const auth = getAuth(app)
+        //     export const db = getFirestore(app)
+        // // TODO: added back in ...but delete once I fix cloudflare with firebase.js
 
 
 
-        // import { db, auth } from '$lib/firebase.js'
-        // import { goto } from '$app/navigation'
+        import { db, auth } from '$lib/firebase.js'
+        import { goto } from '$app/navigation'
 
         import { collection, getDocs } from 'firebase/firestore/lite'
         import { onAuthStateChanged, GoogleAuthProvider, signOut, signInWithPopup,           

@@ -8,19 +8,19 @@
 //     appId:             NV.FIREBASE_appId
 // }
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",
-//     authDomain: "thinksolve-app.firebaseapp.com",
-//     projectId: "thinksolve-app",
-//     storageBucket: "thinksolve-app.appspot.com",
-//     messagingSenderId: "490986955869",
-//     appId: "1:490986955869:web:433c6f7b31865fed5099b4"
-//   };
+const firebaseConfig = {
+    apiKey: "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",
+    authDomain: "thinksolve-app.firebaseapp.com",
+    projectId: "thinksolve-app",
+    storageBucket: "thinksolve-app.appspot.com",
+    messagingSenderId: "490986955869",
+    appId: "1:490986955869:web:433c6f7b31865fed5099b4"
+  };
 
-// import { initializeApp } from "Firebase/app"
-// import { getFirestore } from 'firebase/firestore/lite'
-// import { getAuth } from "firebase/auth"
+import { initializeApp } from "firebase/app"
+import { getFirestore } from 'firebase/firestore/lite'
+import { getAuth } from "firebase/auth"
 
-// export const app = initializeApp(firebaseConfig)
-// export const auth = getAuth(app)
-// export const db = getFirestore(app)
+export const app = initializeApp(firebaseConfig)
+export const auth = getAuth(app)
+export const db = getFirestore(app)
