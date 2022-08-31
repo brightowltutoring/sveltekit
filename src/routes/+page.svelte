@@ -1,8 +1,16 @@
+
 <script>
     
     import PageTransitions from '$lib/PageTransitions.svelte';
     import { bgColour, scrollY } from '$lib/store.js'
     let pageColor = bgColour.home
+
+
+    // import { onMount } from 'svelte'
+    // onMount(()=>{
+    //     console.log(window.location.url);
+    //     // document.title='some title'
+    // })
 	
 </script>
 

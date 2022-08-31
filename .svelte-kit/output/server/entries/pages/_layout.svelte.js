@@ -1,4 +1,5 @@
 import { c as create_ssr_component, a as subscribe, d as add_attribute, e as escape, v as validate_component, f as add_styles, g as each } from "../../chunks/index.js";
+import { p as page } from "../../chunks/stores.js";
 import "../../chunks/firebase.js";
 import "firebase/auth";
 import { i as isLoggedIn, a as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, b as instDeltaY, c as scrollYMax, d as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
@@ -211,11 +212,20 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $scrollY, $$unsubscribe_scrollY;
   let $$unsubscribe_innerWidth;
   let $$unsubscribe_windowInnerHeight;
+  let $page, $$unsubscribe_page;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  let pageObject = {
+    home: "Home \u{1F4AB}",
+    plans: "Plans \u{1F525}",
+    etc: "Etc \u{1F449}",
+    login: "Login \u{1F680}"
+  };
+  console.log(Object.keys(pageObject));
   let mobileHamburgerClosed = true;
   const hideCondition = (delta) => delta > 10;
   const showCondition = (delta) => delta < -10;
@@ -237,6 +247,10 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     extendedHideCondition = hideCondition(snapShotDeltaY);
     $$rendered = `
 ${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
+
+${$$result.head += `${each(Object.keys(pageObject), (key) => {
+      return `${key == $page.routeId ? `${$$result.title = `<title>${escape(pageObject[key])} </title>`, ""}` : `${$page.routeId.length == 0 ? `${$$result.title = `<title>${escape(pageObject.home)}  </title>`, ""}` : ``}`}`;
+    })}`, ""}
 
 
 
@@ -266,6 +280,7 @@ ${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
   $$unsubscribe_scrollY();
   $$unsubscribe_innerWidth();
   $$unsubscribe_windowInnerHeight();
+  $$unsubscribe_page();
   return $$rendered;
 });
 export {

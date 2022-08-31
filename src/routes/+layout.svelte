@@ -1,7 +1,29 @@
 <svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}/>
 <IsLoggedIn/>
 
+<svelte:head>
+	{#each Object.keys(pageObject) as key }
+		{#if key == $page.routeId }
+			<title>{ pageObject[ key ] } </title>
+		{:else if  $page.routeId.length == 0 }
+			<title>{ pageObject.home  }  </title>
+		{/if}
+	{/each}
+	
+</svelte:head>
+
 <script>
+
+	import { page } from '$app/stores'	
+
+	let pageObject = {
+		home:'Home 💫',
+		plans:'Plans 🔥',
+		etc:'Etc 👉',
+		login:'Login 🚀',
+	}
+
+	console.log(Object.keys(pageObject));
 
 	import IsLoggedIn from '$lib/IsLoggedIn.svelte';
 
