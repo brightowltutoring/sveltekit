@@ -924,8 +924,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-8e1eca77.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-8e1eca77.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js", "_app/immutable/chunks/navigation-189e9ae3.js", "_app/immutable/chunks/singletons-6390efb3.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-76f00930.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-76f00930.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js", "_app/immutable/chunks/navigation-69639e22.js", "_app/immutable/chunks/singletons-7c22cc08.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-5845f018.css"];
   }
 });
@@ -1011,8 +1011,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-32f5846f.js";
-    imports2 = ["_app/immutable/components/error.svelte-32f5846f.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-6390efb3.js", "_app/immutable/chunks/index-71178bcf.js"];
+    file2 = "_app/immutable/components/error.svelte-9b9d093c.js";
+    imports2 = ["_app/immutable/components/error.svelte-9b9d093c.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-7c22cc08.js", "_app/immutable/chunks/index-71178bcf.js"];
     stylesheets2 = [];
   }
 });
@@ -7369,20 +7369,26 @@ var page_nolayout_svelte_exports = {};
 __export(page_nolayout_svelte_exports, {
   default: () => Page_nolayout
 });
-var firebaseConfig, app, auth, css, Page_nolayout;
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, auth, css, Page_nolayout;
 var init_page_nolayout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page@nolayout.svelte.js"() {
     init_chunks();
     init_index_esm();
     init_index_esm2();
     init_index_esm3();
+    FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
+    FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
+    FIREBASE_projectId = "thinksolve-app";
+    FIREBASE_storageBucket = "thinksolve-app.appspot.com";
+    FIREBASE_messagingSenderId = "490986955869";
+    FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
     firebaseConfig = {
-      apiKey: "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",
-      authDomain: "thinksolve-app.firebaseapp.com",
-      projectId: "thinksolve-app",
-      storageBucket: "thinksolve-app.appspot.com",
-      messagingSenderId: "490986955869",
-      appId: "1:490986955869:web:433c6f7b31865fed5099b4"
+      apiKey: FIREBASE_apiKey,
+      authDomain: FIREBASE_authDomain,
+      projectId: FIREBASE_projectId,
+      storageBucket: FIREBASE_storageBucket,
+      messagingSenderId: FIREBASE_messagingSenderId,
+      appId: FIREBASE_appId
     };
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);
@@ -7451,8 +7457,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-25e29294.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-25e29294.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/navigation-189e9ae3.js", "_app/immutable/chunks/singletons-6390efb3.js", "_app/immutable/chunks/index-71178bcf.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-4fc19282.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-4fc19282.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/navigation-69639e22.js", "_app/immutable/chunks/singletons-7c22cc08.js", "_app/immutable/chunks/index-71178bcf.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -9614,7 +9620,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-8af241a4.js", "imports": ["_app/immutable/start-8af241a4.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-6390efb3.js", "_app/immutable/chunks/index-71178bcf.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-bbfbb566.js", "imports": ["_app/immutable/start-bbfbb566.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-7c22cc08.js", "_app/immutable/chunks/index-71178bcf.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
