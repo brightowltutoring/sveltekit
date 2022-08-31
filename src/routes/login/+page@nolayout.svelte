@@ -1,7 +1,5 @@
-
     <script>
         import { db, auth } from '$lib/firebase.js'
-        import { goto } from '$app/navigation'
 
         import { collection, getDocs } from 'firebase/firestore/lite'
         import { onAuthStateChanged, GoogleAuthProvider, signOut, signInWithPopup,           
@@ -10,8 +8,9 @@
 
 
         let emailFieldValue 
-     
+
         import { onMount } from 'svelte'
+
 
         onMount(() => {
  
@@ -25,7 +24,8 @@
                     logOutDiv.style.display = "block";
 
                     loginWelcomeText.innerText = user.displayName ? `Hey ${user.displayName}!` : `Hey ${user.email}!`;                               
-                }  else console.log(`User is NOT signed in`) 
+                }  
+                else console.log(`User is NOT signed in`) 
             })
            
         })
@@ -193,7 +193,8 @@
 
                     let timeInMS = 3000;
                     let seconds = parseInt(timeInMS/1000); // i.e. 3
-                    let userRedirectUrl =  doc.data().redirectUrl; 
+                    // let userRedirectUrl =  doc.data().redirectUrl; /TODO: change this later in firebase
+                    let userRedirectUrl =  '/'; 
 
                     console.log(`A match! ${doc.id} => ${userRedirectUrl}`)
 

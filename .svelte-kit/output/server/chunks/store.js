@@ -13,6 +13,7 @@ function customFade(node, { easing = elasticOut, duration = 3e3 }) {
       `
   };
 }
+const isLoggedIn = writable(false);
 const lastScrollY = writable(0);
 const scrollY = writable(0);
 const startScrollY = derived(scrollY, ($scrollY, set) => {
@@ -34,24 +35,21 @@ const inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
 });
 derived(isXs, ($isXs) => $isXs ? customFade : () => {
 });
-const homeColor = `from-[rgba(34,156,121,0.8)]`;
-const aboutColor = `from-[rgba(34,156,121,0.8)]`;
-const loginColor = `from-[rgba(34,156,121,0.8)]`;
-const plansColor = `from-[rgba(34,156,121,0.8)]`;
 const bgColour = {
-  home: `bg-gradient-to-b ${homeColor} via-[rgba(89,208,174,1)]`,
-  about: `bg-gradient-to-b ${aboutColor} via-[rgba(89,208,174,1)]`,
-  login: `bg-gradient-to-b ${loginColor} via-[rgba(89,208,174,1)]`,
-  plans: `bg-gradient-to-b ${plansColor} via-[rgba(89,208,174,1)]`
+  home: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+  plans: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+  login: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+  etc: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`
 };
 export {
-  instDeltaY as a,
-  scrollYMax as b,
-  innerWidth as c,
-  bgColour as d,
+  isXs as a,
+  instDeltaY as b,
+  scrollYMax as c,
+  innerWidth as d,
   inTransition as e,
   fractionScroll as f,
-  isXs as i,
+  bgColour as g,
+  isLoggedIn as i,
   lastScrollY as l,
   scrollY as s,
   windowInnerHeight as w

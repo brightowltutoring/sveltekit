@@ -1,6 +1,9 @@
 <svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}/>
+<IsLoggedIn/>
 
 <script>
+
+	import IsLoggedIn from '$lib/IsLoggedIn.svelte';
 
 	import '../app.css'
 	import Navbar from '$lib/Navbar.svelte'
@@ -25,7 +28,7 @@
 	$: extendedShowCondition = showCondition(snapShotDeltaY) || atMinScroll 
 	// $: extendedShowCondition = showCondition(snapShotDeltaY) || atMinScroll || atMaxScroll
 	$: extendedHideCondition = hideCondition(snapShotDeltaY) 
-	
+    
 </script>
 
 

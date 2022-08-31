@@ -1,6 +1,16 @@
 import { c as create_ssr_component, a as subscribe, d as add_attribute, e as escape, v as validate_component, f as add_styles, g as each } from "../../chunks/index.js";
-import { i as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, a as instDeltaY, b as scrollYMax, c as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
+import "../../chunks/firebase.js";
+import "firebase/auth";
+import { i as isLoggedIn, a as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, b as instDeltaY, c as scrollYMax, d as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
+import "firebase/app";
+import "firebase/firestore/lite";
 import "../../chunks/index2.js";
+const IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$unsubscribe_isLoggedIn;
+  $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
+  $$unsubscribe_isLoggedIn();
+  return ``;
+});
 const app = "";
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isXs;
@@ -23,7 +33,7 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isXs();
   return `
 
-<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-4 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>
+<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:text-white sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>
 
 
 
@@ -75,48 +85,18 @@ const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     
         </main>`;
 });
-let allBtnColor = "sm:bg-[rgba(69,140,117,0.5)]";
-let allBtnColorHover = "hover:sm:bg-[rgba(69,140,117,0.8)]";
+let allBtnColor = "sm:bg-[rgba(69,140,117,0.8)]";
+let allBtnColorHover = "hover:sm:bg-[rgba(69,140,117,0.5)]";
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let navBar;
   let logoTextColor;
   let $fractionScroll, $$unsubscribe_fractionScroll;
+  let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $isXs, $$unsubscribe_isXs;
   $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
+  $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
   let { mobileHamburgerClosed } = $$props;
-  let navBar = {
-    mobileOpen: false,
-    item: [
-      {
-        name: "Home",
-        href: "/",
-        isClicked: true,
-        btnColor: allBtnColor,
-        btnColorHover: allBtnColorHover
-      },
-      {
-        name: "About",
-        href: "/about",
-        isClicked: false,
-        btnColor: allBtnColor,
-        btnColorHover: allBtnColorHover
-      },
-      {
-        name: "Login",
-        href: "/login",
-        isClicked: false,
-        btnColor: allBtnColor,
-        btnColorHover: allBtnColorHover
-      },
-      {
-        name: "Plans",
-        href: "/plans",
-        isClicked: false,
-        btnColor: allBtnColor,
-        btnColorHover: allBtnColorHover
-      }
-    ]
-  };
   let mobileOpen;
   let unique;
   let hamburgerBtn;
@@ -126,9 +106,42 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$rendered;
   do {
     $$settled = true;
+    navBar = {
+      mobileOpen: false,
+      item: [
+        {
+          name: "Home",
+          href: "/",
+          isClicked: true,
+          btnColor: allBtnColor,
+          btnColorHover: allBtnColorHover
+        },
+        {
+          name: "Plans",
+          href: "/plans",
+          isClicked: false,
+          btnColor: allBtnColor,
+          btnColorHover: allBtnColorHover
+        },
+        {
+          name: "Etc",
+          href: "/etc",
+          isClicked: false,
+          btnColor: allBtnColor,
+          btnColorHover: allBtnColorHover
+        },
+        {
+          name: `${$isLoggedIn ? "\u{1F680}" : "Login"}`,
+          href: "/login",
+          isClicked: false,
+          btnColor: allBtnColor,
+          btnColorHover: allBtnColorHover
+        }
+      ]
+    };
     mobileOpen = navBar.mobileOpen;
     mobileHamburgerClosed = navBar.mobileOpen;
-    logoTextColor = `hsl(0,0%,${100 * $fractionScroll}%)`;
+    logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
     $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
       $$result,
       {
@@ -149,14 +162,15 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       {}
     )}
 
-<navbar class="${"flex justify-between items-center w-1/3 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:p-4"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins pl-[5%] sm:text-[min(5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<navbar class="${"flex justify-between items-center w-1/2 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:py-5 sm:px-20"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
     
  
     
-    <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-2xl sm:text-lg sm:h-[60px] sm:items-center"}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(navBar.item, (el) => {
-      return `<li class="${"p-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
+    <nav class="${"sm:px-4"}">
+        <ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(navBar.item, (el) => {
+      return `<li class="${"py-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
           href: el.href,
@@ -184,6 +198,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     })}</ul></nav></navbar>`;
   } while (!$$settled);
   $$unsubscribe_fractionScroll();
+  $$unsubscribe_isLoggedIn();
   $$unsubscribe_isXs();
   return $$rendered;
 });
@@ -221,6 +236,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     extendedShowCondition = showCondition(snapShotDeltaY) || atMinScroll;
     extendedHideCondition = hideCondition(snapShotDeltaY);
     $$rendered = `
+${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
 
 
 

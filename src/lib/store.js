@@ -52,6 +52,7 @@ export function slider(node, { X=0, Y=-100, easing = quintOut, duration = 300 })
     }
 }
 
+export const isLoggedIn = writable(false) 
 export const lastScrollY = writable(0) 
 export const scrollY = writable(0) 
 
@@ -83,33 +84,12 @@ export const isXs = derived(innerWidth, $innerWidth => $innerWidth < 640  )
 export const inTransition  = derived(isXs, $isXs =>  $isXs ? customFade :  ()=>{} )
 export const outTransition = derived(isXs, $isXs =>  $isXs ? customFade :  ()=>{} )
 
-// rgba(255,192,203,0.6)
-//indigo-500 = hsl(240,84%,68%)
-    
-
-export const homeColor  = `from-[rgba(34,156,121,0.8)]`;
-export const aboutColor = `from-[rgba(34,156,121,0.8)]`;
-export const loginColor = `from-[rgba(34,156,121,0.8)]`;
-export const plansColor = `from-[rgba(34,156,121,0.8)]`;
 
 export const bgColour = {
   
-  home : `bg-gradient-to-b ${ homeColor } via-[rgba(89,208,174,1)]`,
-  about : `bg-gradient-to-b ${ aboutColor } via-[rgba(89,208,174,1)]`,
-  login : `bg-gradient-to-b ${ loginColor } via-[rgba(89,208,174,1)]`,
-  plans : `bg-gradient-to-b ${ plansColor } via-[rgba(89,208,174,1)]`, 
+  home  : `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+  plans : `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+  login : `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+  etc   : `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`, 
 
-  // about: 'bg-gradient-to-b from-[rgba(79,80,240,0.7)] via-purple-300 to-pink-200 ',
-  // login: 'bg-gradient-to-b from-[rgba(79,80,240,0.6)] via-purple-300 to-pink-200 ',
-  // plans: 'bg-gradient-to-b from-[rgba(79,80,240,0.5)] via-purple-300 to-pink-200 ',
-
-  // home: 'bg-indigo-300',
-  // about: 'bg-rose-300',
-  // login: 'bg-lime-200',
-  // plans: 'bg-teal-300',
-  
-  // home:  'bg-indigo-300 hue-rotate-0',
-  // about: 'bg-rose-300 hue-rotate-0',
-  // login: 'bg-lime-200 hue-rotate-0',
-  // plans: 'bg-teal-300 hue-rotate-0',
 }

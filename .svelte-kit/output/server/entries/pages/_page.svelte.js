@@ -1,14 +1,29 @@
-import { c as create_ssr_component, v as validate_component, e as escape } from "../../chunks/index.js";
-import { P as PageTransitions } from "../../chunks/PageTransitions.js";
-import { d as bgColour } from "../../chunks/store.js";
+import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape } from "../../chunks/index.js";
+import { w as windowInnerHeight, c as scrollYMax, e as inTransition, g as bgColour } from "../../chunks/store.js";
 import "../../chunks/index2.js";
+const PageTransitions = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$unsubscribe_windowInnerHeight;
+  let $$unsubscribe_scrollYMax;
+  let $$unsubscribe_inTransition;
+  $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+  $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
+  $$unsubscribe_inTransition = subscribe(inTransition, (value) => value);
+  $$unsubscribe_windowInnerHeight();
+  $$unsubscribe_scrollYMax();
+  $$unsubscribe_inTransition();
+  return `
+
+
+
+<div>${slots.default ? slots.default({}) : ``}</div>`;
+});
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let pageColor = bgColour.home;
   return `${validate_component(PageTransitions, "PageTransitions").$$render($$result, {}, {}, {
     default: () => {
       return `
     <main class="${"flex h-[2000px] " + escape(pageColor, true)}">
-        <h1 class="${"p-24"}">Home/ aug 30 2022 11:51pm</h1></main>`;
+        <h1 class="${"p-24"}">Home </h1></main>`;
     }
   })}
     `;

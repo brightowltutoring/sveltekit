@@ -12,7 +12,7 @@ export const nodes = [
 
 export const dictionary = {
 	"": [[1], [0], 3],
-	"about": [[1], [0], 4],
+	"etc": [[1], [0], 4],
 	"login": [[1], [2], 5],
 	"plans": [[1], [0], 6]
 };

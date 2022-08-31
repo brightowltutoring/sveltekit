@@ -1,0 +1,4 @@
+import{d as n,w as s}from"./index-323eada8.js";import"./index-3c293d12.js";function h(t){const o=t-1;return o*o*o+1}function l(t){return Math.sin(-13*(t+1)*Math.PI/2)*Math.pow(2,-10*t)+1}function p(t){return--t*t*t*t*t+1}function i(t,{easing:o=l,duration:e=3e3}){return{easing:o,duration:e,css:(f,r)=>` opacity: ${.8*r+f};
+        filter: hue-rotate(${.15*r}turn) 
+                blur(${r}px);
+      `}}const w=s(!1),Y=s(0),a=s(0),u=n(a,(t,o)=>{setTimeout(()=>{o(t)},60)}),M=n([a,u],([t,o])=>t-o),g=s(0),x=n([a,g],([t,o])=>1-t/o),I=s(0),b=s(0),c=n(b,t=>t<640),O=n(c,t=>t?i:()=>{});n(c,t=>t?i:()=>{});const S={home:"bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]",plans:"bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]",login:"bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]",etc:"bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]"};export{c as a,M as b,h as c,g as d,l as e,x as f,b as g,O as h,w as i,S as j,Y as l,p as q,a as s,I as w};

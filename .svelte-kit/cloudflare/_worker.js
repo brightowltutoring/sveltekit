@@ -591,607 +591,6 @@ var init_layout = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/store.js
-function elasticOut(t2) {
-  return Math.sin(-13 * (t2 + 1) * Math.PI / 2) * Math.pow(2, -10 * t2) + 1;
-}
-function customFade(node, { easing = elasticOut, duration = 3e3 }) {
-  return {
-    easing,
-    duration,
-    css: (t2, u) => ` opacity: ${0.8 * u + t2};
-        filter: hue-rotate(${0.15 * u}turn) 
-                blur(${u}px);
-      `
-  };
-}
-var lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, inTransition, homeColor, aboutColor, loginColor, plansColor, bgColour;
-var init_store = __esm({
-  ".svelte-kit/output/server/chunks/store.js"() {
-    init_index2();
-    init_chunks();
-    lastScrollY = writable(0);
-    scrollY = writable(0);
-    startScrollY = derived(scrollY, ($scrollY, set) => {
-      setTimeout(() => {
-        set($scrollY);
-      }, 60);
-    });
-    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
-      return $scrollY - $startScrollY;
-    });
-    scrollYMax = writable(0);
-    fractionScroll = derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
-      return 1 - $scrollY / $scrollYMax;
-    });
-    windowInnerHeight = writable(0);
-    innerWidth = writable(0);
-    isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-    inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
-    });
-    derived(isXs, ($isXs) => $isXs ? customFade : () => {
-    });
-    homeColor = `from-[rgba(34,156,121,0.8)]`;
-    aboutColor = `from-[rgba(34,156,121,0.8)]`;
-    loginColor = `from-[rgba(34,156,121,0.8)]`;
-    plansColor = `from-[rgba(34,156,121,0.8)]`;
-    bgColour = {
-      home: `bg-gradient-to-b ${homeColor} via-[rgba(89,208,174,1)]`,
-      about: `bg-gradient-to-b ${aboutColor} via-[rgba(89,208,174,1)]`,
-      login: `bg-gradient-to-b ${loginColor} via-[rgba(89,208,174,1)]`,
-      plans: `bg-gradient-to-b ${plansColor} via-[rgba(89,208,174,1)]`
-    };
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_layout.svelte.js
-var layout_svelte_exports = {};
-__export(layout_svelte_exports, {
-  default: () => Layout
-});
-var Navitem, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, allBtnColor, allBtnColorHover, Navbar, Layout;
-var init_layout_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
-    init_chunks();
-    init_store();
-    init_index2();
-    Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $$unsubscribe_isXs;
-      $$unsubscribe_isXs = subscribe(isXs, (value) => value);
-      let { href, content, bool, navBar, mobileOpen, btnColor, btnColorHover } = $$props;
-      if ($$props.href === void 0 && $$bindings.href && href !== void 0)
-        $$bindings.href(href);
-      if ($$props.content === void 0 && $$bindings.content && content !== void 0)
-        $$bindings.content(content);
-      if ($$props.bool === void 0 && $$bindings.bool && bool !== void 0)
-        $$bindings.bool(bool);
-      if ($$props.navBar === void 0 && $$bindings.navBar && navBar !== void 0)
-        $$bindings.navBar(navBar);
-      if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
-        $$bindings.mobileOpen(mobileOpen);
-      if ($$props.btnColor === void 0 && $$bindings.btnColor && btnColor !== void 0)
-        $$bindings.btnColor(btnColor);
-      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
-        $$bindings.btnColorHover(btnColorHover);
-      $$unsubscribe_isXs();
-      return `
-
-<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-4 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>
-
-
-
-
-
-
-
-
-
-
-
-     
-
-
-    
-    `;
-    });
-    hamburgerWidth = 35;
-    hamburgerPattyHeight = 2;
-    hamburgerColor = "bg-red-500";
-    Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $$unsubscribe_lastScrollY;
-      let $$unsubscribe_scrollY;
-      $$unsubscribe_lastScrollY = subscribe(lastScrollY, (value) => value);
-      $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
-      let { mobileOpen } = $$props;
-      let { unique } = $$props;
-      const hamburgerHeight = Math.floor(0.7 * hamburgerWidth);
-      const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight));
-      const angle = 45 + 1 * 90;
-      if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
-        $$bindings.mobileOpen(mobileOpen);
-      if ($$props.unique === void 0 && $$bindings.unique && unique !== void 0)
-        $$bindings.unique(unique);
-      $$unsubscribe_lastScrollY();
-      $$unsubscribe_scrollY();
-      return `<main>
-    <hamburger-container class="${"sm:hidden fixed top-6 right-6 text-4xl z-10"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
-
-            <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
-
-            <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(-${translY}px) rotate(${angle}deg)`, true)}" class="${"" + escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div></hamburger></hamburger-container> 
-
-
-    
-    
-        
-
-    
-        </main>`;
-    });
-    allBtnColor = "sm:bg-[rgba(69,140,117,0.5)]";
-    allBtnColorHover = "hover:sm:bg-[rgba(69,140,117,0.8)]";
-    Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let logoTextColor;
-      let $fractionScroll, $$unsubscribe_fractionScroll;
-      let $isXs, $$unsubscribe_isXs;
-      $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
-      $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
-      let { mobileHamburgerClosed } = $$props;
-      let navBar = {
-        mobileOpen: false,
-        item: [
-          {
-            name: "Home",
-            href: "/",
-            isClicked: true,
-            btnColor: allBtnColor,
-            btnColorHover: allBtnColorHover
-          },
-          {
-            name: "About",
-            href: "/about",
-            isClicked: false,
-            btnColor: allBtnColor,
-            btnColorHover: allBtnColorHover
-          },
-          {
-            name: "Login",
-            href: "/login",
-            isClicked: false,
-            btnColor: allBtnColor,
-            btnColorHover: allBtnColorHover
-          },
-          {
-            name: "Plans",
-            href: "/plans",
-            isClicked: false,
-            btnColor: allBtnColor,
-            btnColorHover: allBtnColorHover
-          }
-        ]
-      };
-      let mobileOpen;
-      let unique;
-      let hamburgerBtn;
-      if ($$props.mobileHamburgerClosed === void 0 && $$bindings.mobileHamburgerClosed && mobileHamburgerClosed !== void 0)
-        $$bindings.mobileHamburgerClosed(mobileHamburgerClosed);
-      let $$settled;
-      let $$rendered;
-      do {
-        $$settled = true;
-        mobileOpen = navBar.mobileOpen;
-        mobileHamburgerClosed = navBar.mobileOpen;
-        logoTextColor = `hsl(0,0%,${100 * $fractionScroll}%)`;
-        $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
-          $$result,
-          {
-            hamburgerBtn,
-            mobileOpen: navBar.mobileOpen,
-            unique
-          },
-          {
-            mobileOpen: ($$value) => {
-              navBar.mobileOpen = $$value;
-              $$settled = false;
-            },
-            unique: ($$value) => {
-              unique = $$value;
-              $$settled = false;
-            }
-          },
-          {}
-        )}
-
-<navbar class="${"flex justify-between items-center w-1/3 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:p-4"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins pl-[5%] sm:text-[min(5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
-    </div>
-
-    
- 
-    
-    <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-2xl sm:text-lg sm:h-[60px] sm:items-center"}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(navBar.item, (el) => {
-          return `<li class="${"p-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
-            $$result,
-            {
-              href: el.href,
-              content: el.name,
-              navBar,
-              btnColor: el.btnColor,
-              btnColorHover: el.btnColorHover,
-              bool: el.isClicked,
-              mobileOpen: navBar.mobileOpen
-            },
-            {
-              bool: ($$value) => {
-                el.isClicked = $$value;
-                $$settled = false;
-              },
-              mobileOpen: ($$value) => {
-                navBar.mobileOpen = $$value;
-                $$settled = false;
-              }
-            },
-            {}
-          )}
-                
-            </li>`;
-        })}</ul></nav></navbar>`;
-      } while (!$$settled);
-      $$unsubscribe_fractionScroll();
-      $$unsubscribe_isXs();
-      return $$rendered;
-    });
-    Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let atMinScroll;
-      let extendedShowCondition;
-      let extendedHideCondition;
-      let $instDeltaY, $$unsubscribe_instDeltaY;
-      let $$unsubscribe_scrollYMax;
-      let $scrollY, $$unsubscribe_scrollY;
-      let $$unsubscribe_innerWidth;
-      let $$unsubscribe_windowInnerHeight;
-      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
-      $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
-      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
-      $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
-      $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
-      let mobileHamburgerClosed = true;
-      const hideCondition = (delta) => delta > 10;
-      const showCondition = (delta) => delta < -10;
-      let snapShotDeltaY;
-      let $$settled;
-      let $$rendered;
-      do {
-        $$settled = true;
-        atMinScroll = $scrollY == 0;
-        {
-          {
-            if (hideCondition($instDeltaY))
-              snapShotDeltaY = $instDeltaY;
-            if (showCondition($instDeltaY))
-              snapShotDeltaY = $instDeltaY;
-          }
-        }
-        extendedShowCondition = showCondition(snapShotDeltaY) || atMinScroll;
-        extendedHideCondition = hideCondition(snapShotDeltaY);
-        $$rendered = `
-
-
-
-
-
-
-
-<div class="${escape(extendedShowCondition && "opacity-100", true) + " " + escape(extendedHideCondition && "opacity-0", true)}">${validate_component(Navbar, "Navbar").$$render(
-          $$result,
-          { mobileHamburgerClosed },
-          {
-            mobileHamburgerClosed: ($$value) => {
-              mobileHamburgerClosed = $$value;
-              $$settled = false;
-            }
-          },
-          {}
-        )}</div>
-
-
-
-
-<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true)}">${slots.default ? slots.default({}) : ``}</div>`;
-      } while (!$$settled);
-      $$unsubscribe_instDeltaY();
-      $$unsubscribe_scrollYMax();
-      $$unsubscribe_scrollY();
-      $$unsubscribe_innerWidth();
-      $$unsubscribe_windowInnerHeight();
-      return $$rendered;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/0.js
-var __exports = {};
-__export(__exports, {
-  component: () => component,
-  file: () => file,
-  imports: () => imports,
-  index: () => index,
-  shared: () => layout_exports,
-  stylesheets: () => stylesheets
-});
-var index, component, file, imports, stylesheets;
-var init__ = __esm({
-  ".svelte-kit/output/server/nodes/0.js"() {
-    init_layout();
-    index = 0;
-    component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-57873a11.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-57873a11.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js", "_app/immutable/chunks/navigation-2441f1ef.js", "_app/immutable/chunks/singletons-c7cb6842.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-5845f018.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
-var error_svelte_exports = {};
-__export(error_svelte_exports, {
-  default: () => Error$1
-});
-function removed_session() {
-  throw new Error(
-    "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
-  );
-}
-var getStores, page, Error$1;
-var init_error_svelte = __esm({
-  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
-    init_chunks();
-    getStores = () => {
-      const stores = getContext("__svelte__");
-      const readonly_stores = {
-        page: {
-          subscribe: stores.page.subscribe
-        },
-        navigating: {
-          subscribe: stores.navigating.subscribe
-        },
-        updated: stores.updated
-      };
-      Object.defineProperties(readonly_stores, {
-        preloading: {
-          get() {
-            console.error("stores.preloading is deprecated; use stores.navigating instead");
-            return {
-              subscribe: stores.navigating.subscribe
-            };
-          },
-          enumerable: false
-        },
-        session: {
-          get() {
-            removed_session();
-            return {};
-          },
-          enumerable: false
-        }
-      });
-      return readonly_stores;
-    };
-    page = {
-      subscribe(fn) {
-        const store = getStores().page;
-        return store.subscribe(fn);
-      }
-    };
-    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $page, $$unsubscribe_page;
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_page();
-      return `<h1>${escape($page.status)}</h1>
-
-<pre>${escape($page.error.message)}</pre>
-
-
-
-${$page.error.frame ? `<pre>${escape($page.error.frame)}</pre>` : ``}
-${$page.error.stack ? `<pre>${escape($page.error.stack)}</pre>` : ``}`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/1.js
-var __exports2 = {};
-__export(__exports2, {
-  component: () => component2,
-  file: () => file2,
-  imports: () => imports2,
-  index: () => index2,
-  stylesheets: () => stylesheets2
-});
-var index2, component2, file2, imports2, stylesheets2;
-var init__2 = __esm({
-  ".svelte-kit/output/server/nodes/1.js"() {
-    index2 = 1;
-    component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-67279f51.js";
-    imports2 = ["_app/immutable/components/error.svelte-67279f51.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-c7cb6842.js", "_app/immutable/chunks/index-71178bcf.js"];
-    stylesheets2 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_layout-nolayout.js
-var layout_nolayout_exports = {};
-var init_layout_nolayout = __esm({
-  ".svelte-kit/output/server/entries/pages/_layout-nolayout.js"() {
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_layout-nolayout.svelte.js
-var layout_nolayout_svelte_exports = {};
-__export(layout_nolayout_svelte_exports, {
-  default: () => Layout_nolayout
-});
-var Layout_nolayout;
-var init_layout_nolayout_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_layout-nolayout.svelte.js"() {
-    init_chunks();
-    Layout_nolayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${slots.default ? slots.default({}) : ``}
-
-`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/2.js
-var __exports3 = {};
-__export(__exports3, {
-  component: () => component3,
-  file: () => file3,
-  imports: () => imports3,
-  index: () => index3,
-  shared: () => layout_nolayout_exports,
-  stylesheets: () => stylesheets3
-});
-var index3, component3, file3, imports3, stylesheets3;
-var init__3 = __esm({
-  ".svelte-kit/output/server/nodes/2.js"() {
-    init_layout_nolayout();
-    index3 = 2;
-    component3 = async () => (await Promise.resolve().then(() => (init_layout_nolayout_svelte(), layout_nolayout_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_layout-nolayout.svelte-463e91fa.js";
-    imports3 = ["_app/immutable/components/pages/_layout-nolayout.svelte-463e91fa.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/modules/pages/_layout-nolayout.js-f3f79583.js"];
-    stylesheets3 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_page.js
-var page_exports = {};
-var init_page = __esm({
-  ".svelte-kit/output/server/entries/pages/_page.js"() {
-  }
-});
-
-// .svelte-kit/output/server/chunks/PageTransitions.js
-var PageTransitions;
-var init_PageTransitions = __esm({
-  ".svelte-kit/output/server/chunks/PageTransitions.js"() {
-    init_chunks();
-    init_store();
-    PageTransitions = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $$unsubscribe_windowInnerHeight;
-      let $$unsubscribe_scrollYMax;
-      let $$unsubscribe_inTransition;
-      $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
-      $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
-      $$unsubscribe_inTransition = subscribe(inTransition, (value) => value);
-      $$unsubscribe_windowInnerHeight();
-      $$unsubscribe_scrollYMax();
-      $$unsubscribe_inTransition();
-      return `
-
-
-
-<div>${slots.default ? slots.default({}) : ``}</div>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_page.svelte.js
-var page_svelte_exports = {};
-__export(page_svelte_exports, {
-  default: () => Page
-});
-var Page;
-var init_page_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
-    init_chunks();
-    init_PageTransitions();
-    init_store();
-    init_index2();
-    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let pageColor = bgColour.home;
-      return `${validate_component(PageTransitions, "PageTransitions").$$render($$result, {}, {}, {
-        default: () => {
-          return `
-    <main class="${"flex h-[2000px] " + escape(pageColor, true)}">
-        <h1 class="${"p-24"}">Home/ aug 30 2022 11:51pm</h1></main>`;
-        }
-      })}
-    `;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/3.js
-var __exports4 = {};
-__export(__exports4, {
-  component: () => component4,
-  file: () => file4,
-  imports: () => imports4,
-  index: () => index4,
-  shared: () => page_exports,
-  stylesheets: () => stylesheets4
-});
-var index4, component4, file4, imports4, stylesheets4;
-var init__4 = __esm({
-  ".svelte-kit/output/server/nodes/3.js"() {
-    init_page();
-    index4 = 3;
-    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file4 = "_app/immutable/components/pages/_page.svelte-979c9617.js";
-    imports4 = ["_app/immutable/components/pages/_page.svelte-979c9617.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/PageTransitions-e7f7f06b.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
-    stylesheets4 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/about/_page.svelte.js
-var page_svelte_exports2 = {};
-__export(page_svelte_exports2, {
-  default: () => Page2
-});
-var Page2;
-var init_page_svelte2 = __esm({
-  ".svelte-kit/output/server/entries/pages/about/_page.svelte.js"() {
-    init_chunks();
-    init_PageTransitions();
-    init_store();
-    init_index2();
-    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let pageColor = bgColour.about;
-      return `${validate_component(PageTransitions, "PageTransitions").$$render($$result, {}, {}, {
-        default: () => {
-          return `<div class="${"flex " + escape(pageColor, true) + " h-[400vh]"}">
-        About 
-    </div>    
-    `;
-        }
-      })}
-  
-
-`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/4.js
-var __exports5 = {};
-__export(__exports5, {
-  component: () => component5,
-  file: () => file5,
-  imports: () => imports5,
-  index: () => index5,
-  stylesheets: () => stylesheets5
-});
-var index5, component5, file5, imports5, stylesheets5;
-var init__5 = __esm({
-  ".svelte-kit/output/server/nodes/4.js"() {
-    index5 = 4;
-    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file5 = "_app/immutable/components/pages/about/_page.svelte-cade7de4.js";
-    imports5 = ["_app/immutable/components/pages/about/_page.svelte-cade7de4.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/PageTransitions-e7f7f06b.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js"];
-    stylesheets5 = [];
-  }
-});
-
 // node_modules/@firebase/util/dist/index.esm2017.js
 function getUA() {
   if (typeof navigator !== "undefined" && typeof navigator["userAgent"] === "string") {
@@ -7364,15 +6763,10 @@ var init_index_esm3 = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/login/_page@nolayout.svelte.js
-var page_nolayout_svelte_exports = {};
-__export(page_nolayout_svelte_exports, {
-  default: () => Page_nolayout
-});
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, auth, css, Page_nolayout;
-var init_page_nolayout_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/login/_page@nolayout.svelte.js"() {
-    init_chunks();
+// .svelte-kit/output/server/chunks/firebase.js
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, auth;
+var init_firebase = __esm({
+  ".svelte-kit/output/server/chunks/firebase.js"() {
     init_index_esm();
     init_index_esm2();
     init_index_esm3();
@@ -7393,6 +6787,621 @@ var init_page_nolayout_svelte = __esm({
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);
     ln(app);
+  }
+});
+
+// .svelte-kit/output/server/chunks/store.js
+function elasticOut(t2) {
+  return Math.sin(-13 * (t2 + 1) * Math.PI / 2) * Math.pow(2, -10 * t2) + 1;
+}
+function customFade(node, { easing = elasticOut, duration = 3e3 }) {
+  return {
+    easing,
+    duration,
+    css: (t2, u) => ` opacity: ${0.8 * u + t2};
+        filter: hue-rotate(${0.15 * u}turn) 
+                blur(${u}px);
+      `
+  };
+}
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, inTransition, bgColour;
+var init_store = __esm({
+  ".svelte-kit/output/server/chunks/store.js"() {
+    init_index2();
+    init_chunks();
+    isLoggedIn = writable(false);
+    lastScrollY = writable(0);
+    scrollY = writable(0);
+    startScrollY = derived(scrollY, ($scrollY, set) => {
+      setTimeout(() => {
+        set($scrollY);
+      }, 60);
+    });
+    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
+      return $scrollY - $startScrollY;
+    });
+    scrollYMax = writable(0);
+    fractionScroll = derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
+      return 1 - $scrollY / $scrollYMax;
+    });
+    windowInnerHeight = writable(0);
+    innerWidth = writable(0);
+    isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
+    inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    });
+    derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    });
+    bgColour = {
+      home: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+      plans: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+      login: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
+      etc: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`
+    };
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_layout.svelte.js
+var layout_svelte_exports = {};
+__export(layout_svelte_exports, {
+  default: () => Layout
+});
+var IsLoggedIn, Navitem, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, allBtnColor, allBtnColorHover, Navbar, Layout;
+var init_layout_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
+    init_chunks();
+    init_firebase();
+    init_index_esm3();
+    init_store();
+    init_index_esm();
+    init_index_esm2();
+    init_index2();
+    IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_isLoggedIn;
+      $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
+      $$unsubscribe_isLoggedIn();
+      return ``;
+    });
+    Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_isXs;
+      $$unsubscribe_isXs = subscribe(isXs, (value) => value);
+      let { href, content, bool, navBar, mobileOpen, btnColor, btnColorHover } = $$props;
+      if ($$props.href === void 0 && $$bindings.href && href !== void 0)
+        $$bindings.href(href);
+      if ($$props.content === void 0 && $$bindings.content && content !== void 0)
+        $$bindings.content(content);
+      if ($$props.bool === void 0 && $$bindings.bool && bool !== void 0)
+        $$bindings.bool(bool);
+      if ($$props.navBar === void 0 && $$bindings.navBar && navBar !== void 0)
+        $$bindings.navBar(navBar);
+      if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
+        $$bindings.mobileOpen(mobileOpen);
+      if ($$props.btnColor === void 0 && $$bindings.btnColor && btnColor !== void 0)
+        $$bindings.btnColor(btnColor);
+      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
+        $$bindings.btnColorHover(btnColorHover);
+      $$unsubscribe_isXs();
+      return `
+
+<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:text-white sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
+    
+    `;
+    });
+    hamburgerWidth = 35;
+    hamburgerPattyHeight = 2;
+    hamburgerColor = "bg-red-500";
+    Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_lastScrollY;
+      let $$unsubscribe_scrollY;
+      $$unsubscribe_lastScrollY = subscribe(lastScrollY, (value) => value);
+      $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
+      let { mobileOpen } = $$props;
+      let { unique } = $$props;
+      const hamburgerHeight = Math.floor(0.7 * hamburgerWidth);
+      const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight));
+      const angle = 45 + 1 * 90;
+      if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
+        $$bindings.mobileOpen(mobileOpen);
+      if ($$props.unique === void 0 && $$bindings.unique && unique !== void 0)
+        $$bindings.unique(unique);
+      $$unsubscribe_lastScrollY();
+      $$unsubscribe_scrollY();
+      return `<main>
+    <hamburger-container class="${"sm:hidden fixed top-6 right-6 text-4xl z-10"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+
+            <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+
+            <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(-${translY}px) rotate(${angle}deg)`, true)}" class="${"" + escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div></hamburger></hamburger-container> 
+
+
+    
+    
+        
+
+    
+        </main>`;
+    });
+    allBtnColor = "sm:bg-[rgba(69,140,117,0.8)]";
+    allBtnColorHover = "hover:sm:bg-[rgba(69,140,117,0.5)]";
+    Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let navBar;
+      let logoTextColor;
+      let $fractionScroll, $$unsubscribe_fractionScroll;
+      let $isLoggedIn, $$unsubscribe_isLoggedIn;
+      let $isXs, $$unsubscribe_isXs;
+      $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
+      $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
+      $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
+      let { mobileHamburgerClosed } = $$props;
+      let mobileOpen;
+      let unique;
+      let hamburgerBtn;
+      if ($$props.mobileHamburgerClosed === void 0 && $$bindings.mobileHamburgerClosed && mobileHamburgerClosed !== void 0)
+        $$bindings.mobileHamburgerClosed(mobileHamburgerClosed);
+      let $$settled;
+      let $$rendered;
+      do {
+        $$settled = true;
+        navBar = {
+          mobileOpen: false,
+          item: [
+            {
+              name: "Home",
+              href: "/",
+              isClicked: true,
+              btnColor: allBtnColor,
+              btnColorHover: allBtnColorHover
+            },
+            {
+              name: "Plans",
+              href: "/plans",
+              isClicked: false,
+              btnColor: allBtnColor,
+              btnColorHover: allBtnColorHover
+            },
+            {
+              name: "Etc",
+              href: "/etc",
+              isClicked: false,
+              btnColor: allBtnColor,
+              btnColorHover: allBtnColorHover
+            },
+            {
+              name: `${$isLoggedIn ? "\u{1F680}" : "Login"}`,
+              href: "/login",
+              isClicked: false,
+              btnColor: allBtnColor,
+              btnColorHover: allBtnColorHover
+            }
+          ]
+        };
+        mobileOpen = navBar.mobileOpen;
+        mobileHamburgerClosed = navBar.mobileOpen;
+        logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
+        $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
+          $$result,
+          {
+            hamburgerBtn,
+            mobileOpen: navBar.mobileOpen,
+            unique
+          },
+          {
+            mobileOpen: ($$value) => {
+              navBar.mobileOpen = $$value;
+              $$settled = false;
+            },
+            unique: ($$value) => {
+              unique = $$value;
+              $$settled = false;
+            }
+          },
+          {}
+        )}
+
+<navbar class="${"flex justify-between items-center w-1/2 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:py-5 sm:px-20"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+    </div>
+
+    
+ 
+    
+    <nav class="${"sm:px-4"}">
+        <ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(navBar.item, (el) => {
+          return `<li class="${"py-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
+            $$result,
+            {
+              href: el.href,
+              content: el.name,
+              navBar,
+              btnColor: el.btnColor,
+              btnColorHover: el.btnColorHover,
+              bool: el.isClicked,
+              mobileOpen: navBar.mobileOpen
+            },
+            {
+              bool: ($$value) => {
+                el.isClicked = $$value;
+                $$settled = false;
+              },
+              mobileOpen: ($$value) => {
+                navBar.mobileOpen = $$value;
+                $$settled = false;
+              }
+            },
+            {}
+          )}
+                
+            </li>`;
+        })}</ul></nav></navbar>`;
+      } while (!$$settled);
+      $$unsubscribe_fractionScroll();
+      $$unsubscribe_isLoggedIn();
+      $$unsubscribe_isXs();
+      return $$rendered;
+    });
+    Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let atMinScroll;
+      let extendedShowCondition;
+      let extendedHideCondition;
+      let $instDeltaY, $$unsubscribe_instDeltaY;
+      let $$unsubscribe_scrollYMax;
+      let $scrollY, $$unsubscribe_scrollY;
+      let $$unsubscribe_innerWidth;
+      let $$unsubscribe_windowInnerHeight;
+      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
+      $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
+      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+      $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
+      $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+      let mobileHamburgerClosed = true;
+      const hideCondition = (delta) => delta > 10;
+      const showCondition = (delta) => delta < -10;
+      let snapShotDeltaY;
+      let $$settled;
+      let $$rendered;
+      do {
+        $$settled = true;
+        atMinScroll = $scrollY == 0;
+        {
+          {
+            if (hideCondition($instDeltaY))
+              snapShotDeltaY = $instDeltaY;
+            if (showCondition($instDeltaY))
+              snapShotDeltaY = $instDeltaY;
+          }
+        }
+        extendedShowCondition = showCondition(snapShotDeltaY) || atMinScroll;
+        extendedHideCondition = hideCondition(snapShotDeltaY);
+        $$rendered = `
+${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
+
+
+
+
+
+
+
+<div class="${escape(extendedShowCondition && "opacity-100", true) + " " + escape(extendedHideCondition && "opacity-0", true)}">${validate_component(Navbar, "Navbar").$$render(
+          $$result,
+          { mobileHamburgerClosed },
+          {
+            mobileHamburgerClosed: ($$value) => {
+              mobileHamburgerClosed = $$value;
+              $$settled = false;
+            }
+          },
+          {}
+        )}</div>
+
+
+
+
+<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true)}">${slots.default ? slots.default({}) : ``}</div>`;
+      } while (!$$settled);
+      $$unsubscribe_instDeltaY();
+      $$unsubscribe_scrollYMax();
+      $$unsubscribe_scrollY();
+      $$unsubscribe_innerWidth();
+      $$unsubscribe_windowInnerHeight();
+      return $$rendered;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/0.js
+var __exports = {};
+__export(__exports, {
+  component: () => component,
+  file: () => file,
+  imports: () => imports,
+  index: () => index,
+  shared: () => layout_exports,
+  stylesheets: () => stylesheets
+});
+var index, component, file, imports, stylesheets;
+var init__ = __esm({
+  ".svelte-kit/output/server/nodes/0.js"() {
+    init_layout();
+    index = 0;
+    component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
+    file = "_app/immutable/components/pages/_layout.svelte-08b5a373.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-08b5a373.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/firebase-83058df2.js", "_app/immutable/chunks/store-8da9504d.js", "_app/immutable/chunks/index-323eada8.js", "_app/immutable/chunks/singletons-69c3ecb5.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-ad0c1e11.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
+var error_svelte_exports = {};
+__export(error_svelte_exports, {
+  default: () => Error$1
+});
+function removed_session() {
+  throw new Error(
+    "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
+  );
+}
+var getStores, page, Error$1;
+var init_error_svelte = __esm({
+  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
+    init_chunks();
+    getStores = () => {
+      const stores = getContext("__svelte__");
+      const readonly_stores = {
+        page: {
+          subscribe: stores.page.subscribe
+        },
+        navigating: {
+          subscribe: stores.navigating.subscribe
+        },
+        updated: stores.updated
+      };
+      Object.defineProperties(readonly_stores, {
+        preloading: {
+          get() {
+            console.error("stores.preloading is deprecated; use stores.navigating instead");
+            return {
+              subscribe: stores.navigating.subscribe
+            };
+          },
+          enumerable: false
+        },
+        session: {
+          get() {
+            removed_session();
+            return {};
+          },
+          enumerable: false
+        }
+      });
+      return readonly_stores;
+    };
+    page = {
+      subscribe(fn) {
+        const store = getStores().page;
+        return store.subscribe(fn);
+      }
+    };
+    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $page, $$unsubscribe_page;
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_page();
+      return `<h1>${escape($page.status)}</h1>
+
+<pre>${escape($page.error.message)}</pre>
+
+
+
+${$page.error.frame ? `<pre>${escape($page.error.frame)}</pre>` : ``}
+${$page.error.stack ? `<pre>${escape($page.error.stack)}</pre>` : ``}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/1.js
+var __exports2 = {};
+__export(__exports2, {
+  component: () => component2,
+  file: () => file2,
+  imports: () => imports2,
+  index: () => index2,
+  stylesheets: () => stylesheets2
+});
+var index2, component2, file2, imports2, stylesheets2;
+var init__2 = __esm({
+  ".svelte-kit/output/server/nodes/1.js"() {
+    index2 = 1;
+    component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
+    file2 = "_app/immutable/components/error.svelte-9ed42ed1.js";
+    imports2 = ["_app/immutable/components/error.svelte-9ed42ed1.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/singletons-69c3ecb5.js", "_app/immutable/chunks/index-323eada8.js"];
+    stylesheets2 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_layout-nolayout.js
+var layout_nolayout_exports = {};
+var init_layout_nolayout = __esm({
+  ".svelte-kit/output/server/entries/pages/_layout-nolayout.js"() {
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_layout-nolayout.svelte.js
+var layout_nolayout_svelte_exports = {};
+__export(layout_nolayout_svelte_exports, {
+  default: () => Layout_nolayout
+});
+var Layout_nolayout;
+var init_layout_nolayout_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_layout-nolayout.svelte.js"() {
+    init_chunks();
+    Layout_nolayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${slots.default ? slots.default({}) : ``}
+
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/2.js
+var __exports3 = {};
+__export(__exports3, {
+  component: () => component3,
+  file: () => file3,
+  imports: () => imports3,
+  index: () => index3,
+  shared: () => layout_nolayout_exports,
+  stylesheets: () => stylesheets3
+});
+var index3, component3, file3, imports3, stylesheets3;
+var init__3 = __esm({
+  ".svelte-kit/output/server/nodes/2.js"() {
+    init_layout_nolayout();
+    index3 = 2;
+    component3 = async () => (await Promise.resolve().then(() => (init_layout_nolayout_svelte(), layout_nolayout_svelte_exports))).default;
+    file3 = "_app/immutable/components/pages/_layout-nolayout.svelte-2b46b9de.js";
+    imports3 = ["_app/immutable/components/pages/_layout-nolayout.svelte-2b46b9de.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/modules/pages/_layout-nolayout.js-f3f79583.js"];
+    stylesheets3 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_page.js
+var page_exports = {};
+var init_page = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.js"() {
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_page.svelte.js
+var page_svelte_exports = {};
+__export(page_svelte_exports, {
+  default: () => Page
+});
+var PageTransitions, Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+    init_chunks();
+    init_store();
+    init_index2();
+    PageTransitions = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_windowInnerHeight;
+      let $$unsubscribe_scrollYMax;
+      let $$unsubscribe_inTransition;
+      $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+      $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
+      $$unsubscribe_inTransition = subscribe(inTransition, (value) => value);
+      $$unsubscribe_windowInnerHeight();
+      $$unsubscribe_scrollYMax();
+      $$unsubscribe_inTransition();
+      return `
+
+
+
+<div>${slots.default ? slots.default({}) : ``}</div>`;
+    });
+    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let pageColor = bgColour.home;
+      return `${validate_component(PageTransitions, "PageTransitions").$$render($$result, {}, {}, {
+        default: () => {
+          return `
+    <main class="${"flex h-[2000px] " + escape(pageColor, true)}">
+        <h1 class="${"p-24"}">Home </h1></main>`;
+        }
+      })}
+    `;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/3.js
+var __exports4 = {};
+__export(__exports4, {
+  component: () => component4,
+  file: () => file4,
+  imports: () => imports4,
+  index: () => index4,
+  shared: () => page_exports,
+  stylesheets: () => stylesheets4
+});
+var index4, component4, file4, imports4, stylesheets4;
+var init__4 = __esm({
+  ".svelte-kit/output/server/nodes/3.js"() {
+    init_page();
+    index4 = 3;
+    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
+    file4 = "_app/immutable/components/pages/_page.svelte-5f2c962e.js";
+    imports4 = ["_app/immutable/components/pages/_page.svelte-5f2c962e.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/store-8da9504d.js", "_app/immutable/chunks/index-323eada8.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    stylesheets4 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/etc/_page.svelte.js
+var page_svelte_exports2 = {};
+__export(page_svelte_exports2, {
+  default: () => Page2
+});
+var Page2;
+var init_page_svelte2 = __esm({
+  ".svelte-kit/output/server/entries/pages/etc/_page.svelte.js"() {
+    init_chunks();
+    init_store();
+    init_index2();
+    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let pageColor = bgColour.etc;
+      return `
+
+<div class="${"flex justify-center items-center " + escape(pageColor, true) + " h-[400vh]"}">Etc
+</div>    
+  
+
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/4.js
+var __exports5 = {};
+__export(__exports5, {
+  component: () => component5,
+  file: () => file5,
+  imports: () => imports5,
+  index: () => index5,
+  stylesheets: () => stylesheets5
+});
+var index5, component5, file5, imports5, stylesheets5;
+var init__5 = __esm({
+  ".svelte-kit/output/server/nodes/4.js"() {
+    index5 = 4;
+    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
+    file5 = "_app/immutable/components/pages/etc/_page.svelte-2fe67899.js";
+    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-2fe67899.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/store-8da9504d.js", "_app/immutable/chunks/index-323eada8.js"];
+    stylesheets5 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/login/_page@nolayout.svelte.js
+var page_nolayout_svelte_exports = {};
+__export(page_nolayout_svelte_exports, {
+  default: () => Page_nolayout
+});
+var css, Page_nolayout;
+var init_page_nolayout_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/login/_page@nolayout.svelte.js"() {
+    init_chunks();
+    init_firebase();
+    init_index_esm2();
+    init_index_esm3();
+    init_index_esm();
     css = {
       code: "#flyingEmoji.svelte-1mhl4m5.svelte-1mhl4m5{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1mhl4m5-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1) ;animation:svelte-1mhl4m5-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1) }#flyingEmoji.svelte-1mhl4m5.svelte-1mhl4m5::after{content:'\u{1F6F8}';display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1mhl4m5-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1mhl4m5-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1mhl4m5-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1mhl4m5-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1mhl4m5-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1mhl4m5-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1mhl4m5-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1mhl4m5-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1mhl4m5.svelte-1mhl4m5{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1mhl4m5.svelte-1mhl4m5{margin:0px auto;margin-top:50px;width:25vw;min-width:280px;padding:20px;font-family:'Nunito', sans-serif;font-weight:400}.loginLogoutDivs.svelte-1mhl4m5 input.svelte-1mhl4m5,button.svelte-1mhl4m5.svelte-1mhl4m5{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:'Nunito', sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1mhl4m5 input.svelte-1mhl4m5{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1mhl4m5.svelte-1mhl4m5{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1mhl4m5.svelte-1mhl4m5:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1mhl4m5 button.svelte-1mhl4m5{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1mhl4m5 input.svelte-1mhl4m5:hover{border:1px solid #999}.loginLogoutDivs.svelte-1mhl4m5 button.svelte-1mhl4m5:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1mhl4m5 input.svelte-1mhl4m5:focus{background:rgba(255, 255, 255, 0.5) }.centering.svelte-1mhl4m5.svelte-1mhl4m5{display:flex;justify-content:center;align-items:center}",
       map: null
@@ -7457,8 +7466,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-33e66b32.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-33e66b32.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/navigation-2441f1ef.js", "_app/immutable/chunks/singletons-c7cb6842.js", "_app/immutable/chunks/index-71178bcf.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-dbe41252.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-dbe41252.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/firebase-83058df2.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -7498,8 +7507,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-729750b6.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-729750b6.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/store-adcfcad0.js", "_app/immutable/chunks/index-71178bcf.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-ab663162.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-ab663162.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/store-8da9504d.js", "_app/immutable/chunks/index-323eada8.js"];
     stylesheets7 = [];
   }
 });
@@ -9633,7 +9642,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-1ce80872.js", "imports": ["_app/immutable/start-1ce80872.js", "_app/immutable/chunks/index-c60b019d.js", "_app/immutable/chunks/singletons-c7cb6842.js", "_app/immutable/chunks/index-71178bcf.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-97c88f69.js", "imports": ["_app/immutable/start-97c88f69.js", "_app/immutable/chunks/index-3c293d12.js", "_app/immutable/chunks/singletons-69c3ecb5.js", "_app/immutable/chunks/index-323eada8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -9656,8 +9665,8 @@ var manifest = {
       },
       {
         type: "page",
-        id: "about",
-        pattern: /^\/about\/?$/,
+        id: "etc",
+        pattern: /^\/etc\/?$/,
         names: [],
         types: [],
         errors: [1],

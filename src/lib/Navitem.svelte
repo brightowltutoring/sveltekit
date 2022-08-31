@@ -30,8 +30,7 @@
 <a  in:slide={{ duration:800, easing: elasticOut }} 
     href={href}
     on:click={ clickOnNavLinks }
-    class = "{ bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-4 sm:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent 
-    { `${btnColorHover}`} sm:hover:rounded sm:hover:py-1  sm:hover:px-3 duration-300"
+    class = "{ bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-3 sm:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent { `${btnColorHover}`} sm:hover:text-white sm:hover:rounded sm:hover:py-1  sm:hover:px-3 duration-300"
     
     > {content}
 </a>
