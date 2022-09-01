@@ -39,7 +39,7 @@ const routes = writable({
   home: {
     name: "Home",
     href: "/",
-    title: "\u{1F4AB} Thinksolve.io",
+    title: "Thinksolve.io \u{1F4AB}",
     isCurrent: false,
     btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
     btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
@@ -64,7 +64,7 @@ const routes = writable({
     bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
   },
   login: {
-    name: "Login",
+    name: "Login \u{1F680}",
     href: "/login",
     title: "Login - Thinksolve.io",
     isCurrent: false,
