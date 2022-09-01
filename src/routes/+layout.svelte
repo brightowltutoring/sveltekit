@@ -5,7 +5,6 @@
 <script>
 	import PageTitle from '$lib/PageTitle.svelte';
 	import IsLoggedIn from '$lib/IsLoggedIn.svelte';
-
 	import '../app.css'
 	import Navbar from '$lib/Navbar.svelte'
 	import {innerWidth, scrollY, scrollYMax, instDeltaY, windowInnerHeight } from '$lib/store.js' 

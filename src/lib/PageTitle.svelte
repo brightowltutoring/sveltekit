@@ -1,7 +1,6 @@
 <script>
     import { page } from '$app/stores'	
     import { routes } from '$lib/store.js'
-
 </script>
 
 

@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","login-bg-video-blurred.mp4"]),
 	mimeTypes: {".mp4":"video/mp4"},
 	_: {
-		entry: {"file":"_app/immutable/start-1b7c13a3.js","imports":["_app/immutable/start-1b7c13a3.js","_app/immutable/chunks/index-0251ac3a.js","_app/immutable/chunks/singletons-b41c1d48.js","_app/immutable/chunks/index-ac9af0b2.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-42cf2071.js","imports":["_app/immutable/start-42cf2071.js","_app/immutable/chunks/index-0251ac3a.js","_app/immutable/chunks/singletons-b497a7c8.js","_app/immutable/chunks/index-ac9af0b2.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),

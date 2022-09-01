@@ -2,6 +2,22 @@ import { writable, derived } from 'svelte/store';
 import { quintOut, elasticOut } from 'svelte/easing'
 // import { slide, fade, scale, fly, blur } from 'svelte/transition';
 
+
+// to animate the loggedin logo ..but this is overkill
+// css:   transform: scale(${0.75*t});
+// filter: hue-rotate(${u}turn) 
+export function moduloScale(node, {easing = elasticOut, duration = 5000 }) {
+  return {
+    easing,
+    duration,
+    css: (t,u) => 
+    ` transform: translateX(${t*5}px); 
+      filter: hue-rotate(${u}turn) blur(${t}px);
+    `
+  }
+}
+
+
 export function customEase(t){
 
     // supercon function
@@ -83,7 +99,6 @@ export const isXs = derived(innerWidth, $innerWidth => $innerWidth < 640  )
 
 export const inTransition  = derived(isXs, $isXs =>  $isXs ? customFade :  ()=>{} )
 export const outTransition = derived(isXs, $isXs =>  $isXs ? customFade :  ()=>{} )
-
 
 
 // the all important

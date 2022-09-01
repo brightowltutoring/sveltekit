@@ -26,7 +26,9 @@ const IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) =
 const app = "";
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isXs;
+  let $page, $$unsubscribe_page;
   $$unsubscribe_isXs = subscribe(isXs, (value) => value);
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
   let { href, content, bool, mobileOpen, btnColor, btnColorHover, routes: routes2 } = $$props;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0)
     $$bindings.href(href);
@@ -42,7 +44,18 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.btnColorHover(btnColorHover);
   if ($$props.routes === void 0 && $$bindings.routes && routes2 !== void 0)
     $$bindings.routes(routes2);
+  {
+    {
+      Object.keys(routes2).forEach((key) => {
+        if ($page.routeId == key || key == "home" && $page.routeId.length == 0) {
+          routes2[key].isCurrent = true;
+        } else
+          routes2[key].isCurrent = false;
+      });
+    }
+  }
   $$unsubscribe_isXs();
+  $$unsubscribe_page();
   return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:text-white sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
 });
 const hamburgerWidth = 35;
@@ -82,15 +95,22 @@ const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let logoTextColor;
   let $routes, $$unsubscribe_routes;
+  let $$unsubscribe_scrollY;
   let $fractionScroll, $$unsubscribe_fractionScroll;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $isXs, $$unsubscribe_isXs;
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+  $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
   $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
   let { mobileHamburgerClosed } = $$props;
   let mobileOpen;
+  setInterval(
+    () => {
+    },
+    1e3
+  );
   let unique;
   let hamburgerBtn;
   if ($$props.mobileHamburgerClosed === void 0 && $$bindings.mobileHamburgerClosed && mobileHamburgerClosed !== void 0)
@@ -120,12 +140,14 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       {}
     )}
 
-<navbar class="${"flex justify-between items-center w-1/2 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:py-5 sm:px-20"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<navbar class="${"flex justify-between items-center w-1/2 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:py-5 sm:pr-10 sm:pl-10"}">
+    <div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
  
     <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(Object.keys($routes), (KEY) => {
-      return `<li class="${"py-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
+      return `
+                    <li class="${"py-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
           href: $routes[KEY].href,
@@ -151,11 +173,12 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           }
         },
         {}
-      )}
-            </li>`;
+      )}</li>
+                `;
     })}</ul></nav></navbar>`;
   } while (!$$settled);
   $$unsubscribe_routes();
+  $$unsubscribe_scrollY();
   $$unsubscribe_fractionScroll();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_isXs();
