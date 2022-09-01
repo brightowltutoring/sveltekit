@@ -39,8 +39,8 @@ const routes = writable({
   home: {
     name: "Home",
     href: "/",
-    title: "Home \u{1F4AB}",
-    isCurrent: true,
+    title: "\u{1F4AB} Home",
+    isCurrent: false,
     btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
     btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
     bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
@@ -48,7 +48,7 @@ const routes = writable({
   etc: {
     name: "Etc",
     href: "/etc",
-    title: "Etc \u{1F919}",
+    title: "\u{1F919} Etc",
     isCurrent: false,
     btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
     btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
@@ -57,7 +57,7 @@ const routes = writable({
   plans: {
     name: "Plans",
     href: "/plans",
-    title: "Plans \u{1F525}",
+    title: "\u{1F525} Plans",
     isCurrent: false,
     btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
     btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",

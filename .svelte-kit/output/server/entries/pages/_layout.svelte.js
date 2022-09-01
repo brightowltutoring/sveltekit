@@ -14,7 +14,8 @@ const PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_routes();
   $$unsubscribe_page();
   return `${$$result.head += `${each(Object.keys($routes), (key) => {
-    return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
+    return `
+        ${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
   })}`, ""}`;
 });
 const IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -46,12 +47,12 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.routes(routes2);
   {
     {
-      Object.keys(routes2).forEach((key) => {
-        if ($page.routeId == key || key == "home" && $page.routeId.length == 0) {
+      for (let key in routes2) {
+        if ($page.routeId == key || $page.routeId.length == 0 && key == "home") {
           routes2[key].isCurrent = true;
         } else
           routes2[key].isCurrent = false;
-      });
+      }
     }
   }
   $$unsubscribe_isXs();

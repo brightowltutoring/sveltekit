@@ -690,8 +690,8 @@ var init_store = __esm({
       home: {
         name: "Home",
         href: "/",
-        title: "Home \u{1F4AB}",
-        isCurrent: true,
+        title: "\u{1F4AB} Home",
+        isCurrent: false,
         btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
         btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
         bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
@@ -699,7 +699,7 @@ var init_store = __esm({
       etc: {
         name: "Etc",
         href: "/etc",
-        title: "Etc \u{1F919}",
+        title: "\u{1F919} Etc",
         isCurrent: false,
         btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
         btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
@@ -708,7 +708,7 @@ var init_store = __esm({
       plans: {
         name: "Plans",
         href: "/plans",
-        title: "Plans \u{1F525}",
+        title: "\u{1F525} Plans",
         isCurrent: false,
         btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
         btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
@@ -6937,7 +6937,8 @@ var init_layout_svelte = __esm({
       $$unsubscribe_routes();
       $$unsubscribe_page();
       return `${$$result.head += `${each(Object.keys($routes), (key2) => {
-        return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)} </title>`, ""}` : ``}`}`;
+        return `
+        ${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)} </title>`, ""}` : ``}`}`;
       })}`, ""}`;
     });
     IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -6968,12 +6969,12 @@ var init_layout_svelte = __esm({
         $$bindings.routes(routes2);
       {
         {
-          Object.keys(routes2).forEach((key2) => {
-            if ($page.routeId == key2 || key2 == "home" && $page.routeId.length == 0) {
+          for (let key2 in routes2) {
+            if ($page.routeId == key2 || $page.routeId.length == 0 && key2 == "home") {
               routes2[key2].isCurrent = true;
             } else
               routes2[key2].isCurrent = false;
-          });
+          }
         }
       }
       $$unsubscribe_isXs();
@@ -7192,8 +7193,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-fb6c2387.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-fb6c2387.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/stores-573e4b47.js", "_app/immutable/chunks/singletons-b497a7c8.js", "_app/immutable/chunks/index-ac9af0b2.js", "_app/immutable/chunks/store-cb3be851.js", "_app/immutable/chunks/navigation-fa9d0ff5.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-0a99f7d3.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-0a99f7d3.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/stores-bfb6b7e4.js", "_app/immutable/chunks/singletons-48a72146.js", "_app/immutable/chunks/index-ac9af0b2.js", "_app/immutable/chunks/store-eebcbffc.js", "_app/immutable/chunks/navigation-68e073ca.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-65a4ef40.css"];
   }
 });
@@ -7238,8 +7239,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-98caee8f.js";
-    imports2 = ["_app/immutable/components/error.svelte-98caee8f.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/stores-573e4b47.js", "_app/immutable/chunks/singletons-b497a7c8.js", "_app/immutable/chunks/index-ac9af0b2.js"];
+    file2 = "_app/immutable/components/error.svelte-82b7171c.js";
+    imports2 = ["_app/immutable/components/error.svelte-82b7171c.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/stores-bfb6b7e4.js", "_app/immutable/chunks/singletons-48a72146.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets2 = [];
   }
 });
@@ -7337,8 +7338,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file4 = "_app/immutable/components/pages/_page.svelte-59f3cb22.js";
-    imports4 = ["_app/immutable/components/pages/_page.svelte-59f3cb22.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-cb3be851.js", "_app/immutable/chunks/index-ac9af0b2.js"];
+    file4 = "_app/immutable/components/pages/_page.svelte-c2267ef0.js";
+    imports4 = ["_app/immutable/components/pages/_page.svelte-c2267ef0.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-eebcbffc.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets4 = [];
   }
 });
@@ -7384,8 +7385,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file5 = "_app/immutable/components/pages/etc/_page.svelte-430ffeb3.js";
-    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-430ffeb3.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-cb3be851.js", "_app/immutable/chunks/index-ac9af0b2.js"];
+    file5 = "_app/immutable/components/pages/etc/_page.svelte-113a3756.js";
+    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-113a3756.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-eebcbffc.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets5 = [];
   }
 });
@@ -7460,8 +7461,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-4654dc4a.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-4654dc4a.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/navigation-fa9d0ff5.js", "_app/immutable/chunks/singletons-b497a7c8.js", "_app/immutable/chunks/index-ac9af0b2.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-88c7aaaf.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-88c7aaaf.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/navigation-68e073ca.js", "_app/immutable/chunks/singletons-48a72146.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -7504,8 +7505,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-ce2da304.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-ce2da304.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-cb3be851.js", "_app/immutable/chunks/index-ac9af0b2.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-b64a818f.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-b64a818f.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-eebcbffc.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets7 = [];
   }
 });
@@ -9639,7 +9640,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-42cf2071.js", "imports": ["_app/immutable/start-42cf2071.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/singletons-b497a7c8.js", "_app/immutable/chunks/index-ac9af0b2.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-f364f4b2.js", "imports": ["_app/immutable/start-f364f4b2.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/singletons-48a72146.js", "_app/immutable/chunks/index-ac9af0b2.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

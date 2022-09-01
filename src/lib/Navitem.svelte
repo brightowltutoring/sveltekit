@@ -1,19 +1,21 @@
 <script>
     import { fade, fly, scale, slide, blur} from 'svelte/transition';
     import { elasticOut, quintOut } from 'svelte/easing';
-    import { isXs } from '$lib/store.js'
     import { page } from '$app/stores'
+    import { isXs } from '$lib/store.js'
 
-   // Matches current route to nav button checked. TODO: may remove as it seems to lag the app 
-    $:{
-            Object.keys(routes).forEach(key=>{
-                if( $page.routeId == key || (key=='home' && $page.routeId.length == 0 )) {
-                    routes[key].isCurrent = true        
-                }
-                else routes[key].isCurrent = false
-            })
+    $:{     
+
+        for (let key in routes ){
+        // for (let key of routesKeys){
+            if( $page.routeId == key || ( $page.routeId.length == 0 && key == 'home')) {
+                routes[key].isCurrent = true        
+            }
+            else routes[key].isCurrent = false
         }
-    // TODO: may remove as it seems to lag the app 
+        // forEach is possible too 
+     }
+
 
     export let href, content, bool, mobileOpen, btnColor, btnColorHover, routes
 
