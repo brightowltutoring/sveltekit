@@ -106,7 +106,7 @@ export const routes = writable({
   home: {
     name:'Home',
     href: "/",
-    title: "Home - Thinksolve.io",
+    title: "💫 Thinksolve.io",
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
