@@ -39,7 +39,7 @@ const routes = writable({
   home: {
     name: "Home",
     href: "/",
-    title: "\u{1F4AB} Home",
+    title: "Thinksolve.io",
     isCurrent: false,
     btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
     btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
@@ -48,7 +48,7 @@ const routes = writable({
   etc: {
     name: "Etc",
     href: "/etc",
-    title: "\u{1F919} Etc",
+    title: "Etc - Thinksolve.io",
     isCurrent: false,
     btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
     btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
@@ -57,7 +57,7 @@ const routes = writable({
   plans: {
     name: "Plans",
     href: "/plans",
-    title: "\u{1F525} Plans",
+    title: "Plans - Thinksolve.io",
     isCurrent: false,
     btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
     btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
@@ -66,7 +66,7 @@ const routes = writable({
   login: {
     name: "Login",
     href: "/login",
-    title: "Login \u{1F680}",
+    title: "Login - Thinksolve.io",
     isCurrent: false,
     btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
     btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",

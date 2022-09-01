@@ -106,7 +106,7 @@ export const routes = writable({
   home: {
     name:'Home',
     href: "/",
-    title: "💫 Home",
+    title: "Thinksolve.io",
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
@@ -115,7 +115,7 @@ export const routes = writable({
   etc: {
     name:'Etc',
     href: "/etc",
-    title: "🤙 Etc",
+    title: "Etc - Thinksolve.io",
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
@@ -124,7 +124,7 @@ export const routes = writable({
   plans: {
     name:'Plans',
     href: "/plans",
-    title: "🔥 Plans",
+    title: "Plans - Thinksolve.io",
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
@@ -133,7 +133,7 @@ export const routes = writable({
   login: {
     name:'Login',
     href: "/login",
-    title: "Login 🚀",
+    title: "Login - Thinksolve.io",
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
@@ -148,6 +148,6 @@ export const routes = writable({
   // export const routesKeysArray = derived(routes, ($routes) => { 
   //   return Object.keys($routes) 
   // }) 
-  
+
 // TODO: ... using a for in loop I can access the keys of routes directly ... Previously I was using forEach or for of
 //  and hence had to grab the keys first
