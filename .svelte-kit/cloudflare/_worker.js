@@ -75,6 +75,10 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+function set_store_value(store, ret, value) {
+  store.set(value);
+  return ret;
+}
 function set_current_component(component8) {
   current_component = component8;
 }
@@ -638,6 +642,88 @@ var init_stores = __esm({
         return store.subscribe(fn);
       }
     };
+  }
+});
+
+// .svelte-kit/output/server/chunks/store.js
+function elasticOut(t2) {
+  return Math.sin(-13 * (t2 + 1) * Math.PI / 2) * Math.pow(2, -10 * t2) + 1;
+}
+function customFade(node, { easing = elasticOut, duration = 3e3 }) {
+  return {
+    easing,
+    duration,
+    css: (t2, u) => ` opacity: ${0.8 * u + t2};
+        filter: hue-rotate(${0.15 * u}turn) 
+                blur(${u}px);
+      `
+  };
+}
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, inTransition, routes;
+var init_store = __esm({
+  ".svelte-kit/output/server/chunks/store.js"() {
+    init_index2();
+    init_chunks();
+    isLoggedIn = writable(false);
+    lastScrollY = writable(0);
+    scrollY = writable(0);
+    startScrollY = derived(scrollY, ($scrollY, set) => {
+      setTimeout(() => {
+        set($scrollY);
+      }, 60);
+    });
+    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
+      return $scrollY - $startScrollY;
+    });
+    scrollYMax = writable(0);
+    fractionScroll = derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
+      return 1 - $scrollY / $scrollYMax;
+    });
+    windowInnerHeight = writable(0);
+    innerWidth = writable(0);
+    isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
+    inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    });
+    derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    });
+    routes = writable({
+      home: {
+        name: "Home",
+        href: "/",
+        title: "Home \u{1F4AB}",
+        isCurrent: true,
+        btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
+        btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
+        bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+      },
+      etc: {
+        name: "Etc",
+        href: "/etc",
+        title: "Etc \u{1F919}",
+        isCurrent: false,
+        btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
+        btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
+        bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+      },
+      plans: {
+        name: "Plans",
+        href: "/plans",
+        title: "Plans \u{1F525}",
+        isCurrent: false,
+        btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
+        btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
+        bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+      },
+      login: {
+        name: "Login",
+        href: "/login",
+        title: "Login \u{1F680}",
+        isCurrent: false,
+        btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
+        btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
+        bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+      }
+    });
   }
 });
 
@@ -6827,72 +6913,33 @@ var init_firebase = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/store.js
-function elasticOut(t2) {
-  return Math.sin(-13 * (t2 + 1) * Math.PI / 2) * Math.pow(2, -10 * t2) + 1;
-}
-function customFade(node, { easing = elasticOut, duration = 3e3 }) {
-  return {
-    easing,
-    duration,
-    css: (t2, u) => ` opacity: ${0.8 * u + t2};
-        filter: hue-rotate(${0.15 * u}turn) 
-                blur(${u}px);
-      `
-  };
-}
-var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, inTransition, bgColour;
-var init_store = __esm({
-  ".svelte-kit/output/server/chunks/store.js"() {
-    init_index2();
-    init_chunks();
-    isLoggedIn = writable(false);
-    lastScrollY = writable(0);
-    scrollY = writable(0);
-    startScrollY = derived(scrollY, ($scrollY, set) => {
-      setTimeout(() => {
-        set($scrollY);
-      }, 60);
-    });
-    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
-      return $scrollY - $startScrollY;
-    });
-    scrollYMax = writable(0);
-    fractionScroll = derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
-      return 1 - $scrollY / $scrollYMax;
-    });
-    windowInnerHeight = writable(0);
-    innerWidth = writable(0);
-    isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-    inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
-    });
-    derived(isXs, ($isXs) => $isXs ? customFade : () => {
-    });
-    bgColour = {
-      home: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-      plans: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-      login: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-      etc: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`
-    };
-  }
-});
-
 // .svelte-kit/output/server/entries/pages/_layout.svelte.js
 var layout_svelte_exports = {};
 __export(layout_svelte_exports, {
   default: () => Layout
 });
-var IsLoggedIn, Navitem, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, allBtnColor, allBtnColorHover, Navbar, Layout;
+var PageTitle, IsLoggedIn, Navitem, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, Navbar, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
     init_stores();
+    init_store();
     init_firebase();
     init_index_esm3();
-    init_store();
+    init_index2();
     init_index_esm();
     init_index_esm2();
-    init_index2();
+    PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $routes, $$unsubscribe_routes;
+      let $page, $$unsubscribe_page;
+      $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_routes();
+      $$unsubscribe_page();
+      return `${$$result.head += `${each(Object.keys($routes), (key2) => {
+        return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)} </title>`, ""}` : ``}`}`;
+      })}`, ""}`;
+    });
     IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_isLoggedIn;
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
@@ -6902,41 +6949,23 @@ var init_layout_svelte = __esm({
     Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_isXs;
       $$unsubscribe_isXs = subscribe(isXs, (value) => value);
-      let { href, content, bool, navBar, mobileOpen, btnColor, btnColorHover } = $$props;
+      let { href, content, bool, mobileOpen, btnColor, btnColorHover, routes: routes2 } = $$props;
       if ($$props.href === void 0 && $$bindings.href && href !== void 0)
         $$bindings.href(href);
       if ($$props.content === void 0 && $$bindings.content && content !== void 0)
         $$bindings.content(content);
       if ($$props.bool === void 0 && $$bindings.bool && bool !== void 0)
         $$bindings.bool(bool);
-      if ($$props.navBar === void 0 && $$bindings.navBar && navBar !== void 0)
-        $$bindings.navBar(navBar);
       if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
         $$bindings.mobileOpen(mobileOpen);
       if ($$props.btnColor === void 0 && $$bindings.btnColor && btnColor !== void 0)
         $$bindings.btnColor(btnColor);
       if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
         $$bindings.btnColorHover(btnColorHover);
+      if ($$props.routes === void 0 && $$bindings.routes && routes2 !== void 0)
+        $$bindings.routes(routes2);
       $$unsubscribe_isXs();
-      return `
-
-<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:text-white sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>
-
-
-
-
-
-
-
-
-
-
-
-     
-
-
-    
-    `;
+      return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:text-white sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
     });
     hamburgerWidth = 35;
     hamburgerPattyHeight = 2;
@@ -6972,14 +7001,13 @@ var init_layout_svelte = __esm({
     
         </main>`;
     });
-    allBtnColor = "sm:bg-[rgba(69,140,117,0.8)]";
-    allBtnColorHover = "hover:sm:bg-[rgba(69,140,117,0.5)]";
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let navBar;
       let logoTextColor;
+      let $routes, $$unsubscribe_routes;
       let $fractionScroll, $$unsubscribe_fractionScroll;
       let $isLoggedIn, $$unsubscribe_isLoggedIn;
       let $isXs, $$unsubscribe_isXs;
+      $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
       $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
       $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
@@ -6993,52 +7021,17 @@ var init_layout_svelte = __esm({
       let $$rendered;
       do {
         $$settled = true;
-        navBar = {
-          mobileOpen: false,
-          item: [
-            {
-              name: "Home",
-              href: "/",
-              isClicked: true,
-              btnColor: allBtnColor,
-              btnColorHover: allBtnColorHover
-            },
-            {
-              name: "Plans",
-              href: "/plans",
-              isClicked: false,
-              btnColor: allBtnColor,
-              btnColorHover: allBtnColorHover
-            },
-            {
-              name: "Etc",
-              href: "/etc",
-              isClicked: false,
-              btnColor: allBtnColor,
-              btnColorHover: allBtnColorHover
-            },
-            {
-              name: `${$isLoggedIn ? "\u{1F680}" : "Login"}`,
-              href: "/login",
-              isClicked: false,
-              btnColor: allBtnColor,
-              btnColorHover: allBtnColorHover
-            }
-          ]
-        };
-        mobileOpen = navBar.mobileOpen;
-        mobileHamburgerClosed = navBar.mobileOpen;
+        mobileHamburgerClosed = mobileOpen;
+        {
+          $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
+        }
         logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
         $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
           $$result,
-          {
-            hamburgerBtn,
-            mobileOpen: navBar.mobileOpen,
-            unique
-          },
+          { hamburgerBtn, mobileOpen, unique },
           {
             mobileOpen: ($$value) => {
-              navBar.mobileOpen = $$value;
+              mobileOpen = $$value;
               $$settled = false;
             },
             unique: ($$value) => {
@@ -7052,38 +7045,39 @@ var init_layout_svelte = __esm({
 <navbar class="${"flex justify-between items-center w-1/2 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:py-5 sm:px-20"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
-    
  
-    
-    <nav class="${"sm:px-4"}">
-        <ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(navBar.item, (el) => {
+    <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(Object.keys($routes), (KEY) => {
           return `<li class="${"py-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
             $$result,
             {
-              href: el.href,
-              content: el.name,
-              navBar,
-              btnColor: el.btnColor,
-              btnColorHover: el.btnColorHover,
-              bool: el.isClicked,
-              mobileOpen: navBar.mobileOpen
+              href: $routes[KEY].href,
+              content: $routes[KEY].name,
+              btnColor: $routes[KEY].btnColor,
+              btnColorHover: $routes[KEY].btnColorHover,
+              mobileOpen,
+              bool: $routes[KEY].isCurrent,
+              routes: $routes
             },
             {
-              bool: ($$value) => {
-                el.isClicked = $$value;
+              mobileOpen: ($$value) => {
+                mobileOpen = $$value;
                 $$settled = false;
               },
-              mobileOpen: ($$value) => {
-                navBar.mobileOpen = $$value;
+              bool: ($$value) => {
+                $routes[KEY].isCurrent = $$value;
+                $$settled = false;
+              },
+              routes: ($$value) => {
+                $routes = $$value;
                 $$settled = false;
               }
             },
             {}
           )}
-                
             </li>`;
         })}</ul></nav></navbar>`;
       } while (!$$settled);
+      $$unsubscribe_routes();
       $$unsubscribe_fractionScroll();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_isXs();
@@ -7098,20 +7092,11 @@ var init_layout_svelte = __esm({
       let $scrollY, $$unsubscribe_scrollY;
       let $$unsubscribe_innerWidth;
       let $$unsubscribe_windowInnerHeight;
-      let $page, $$unsubscribe_page;
       $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
       $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
       $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      let pageObject = {
-        home: "Home \u{1F4AB}",
-        plans: "Plans \u{1F525}",
-        etc: "Etc \u{1F449}",
-        login: "Login \u{1F680}"
-      };
-      console.log(Object.keys(pageObject));
       let mobileHamburgerClosed = true;
       const hideCondition = (delta) => delta > 10;
       const showCondition = (delta) => delta < -10;
@@ -7133,10 +7118,7 @@ var init_layout_svelte = __esm({
         extendedHideCondition = hideCondition(snapShotDeltaY);
         $$rendered = `
 ${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
-
-${$$result.head += `${each(Object.keys(pageObject), (key2) => {
-          return `${key2 == $page.routeId ? `${$$result.title = `<title>${escape(pageObject[key2])} </title>`, ""}` : `${$page.routeId.length == 0 ? `${$$result.title = `<title>${escape(pageObject.home)}  </title>`, ""}` : ``}`}`;
-        })}`, ""}
+${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
 
 
 
@@ -7166,7 +7148,6 @@ ${$$result.head += `${each(Object.keys(pageObject), (key2) => {
       $$unsubscribe_scrollY();
       $$unsubscribe_innerWidth();
       $$unsubscribe_windowInnerHeight();
-      $$unsubscribe_page();
       return $$rendered;
     });
   }
@@ -7188,9 +7169,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-815b78f7.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-815b78f7.js", "_app/immutable/chunks/index-be81bbd2.js", "_app/immutable/chunks/stores-b24decfa.js", "_app/immutable/chunks/singletons-c2e766e2.js", "_app/immutable/chunks/index-47a1d975.js", "_app/immutable/chunks/navigation-45b611b3.js", "_app/immutable/chunks/store-f7827032.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-ad0c1e11.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-0cc5ade7.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-0cc5ade7.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/stores-f0af7291.js", "_app/immutable/chunks/singletons-b41c1d48.js", "_app/immutable/chunks/index-ac9af0b2.js", "_app/immutable/chunks/store-9d17f1fb.js", "_app/immutable/chunks/navigation-883873ba.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-5603b5a3.css"];
   }
 });
 
@@ -7234,8 +7215,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-a1a16839.js";
-    imports2 = ["_app/immutable/components/error.svelte-a1a16839.js", "_app/immutable/chunks/index-be81bbd2.js", "_app/immutable/chunks/stores-b24decfa.js", "_app/immutable/chunks/singletons-c2e766e2.js", "_app/immutable/chunks/index-47a1d975.js"];
+    file2 = "_app/immutable/components/error.svelte-bd3eec46.js";
+    imports2 = ["_app/immutable/components/error.svelte-bd3eec46.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/stores-f0af7291.js", "_app/immutable/chunks/singletons-b41c1d48.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets2 = [];
   }
 });
@@ -7269,8 +7250,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_layout_nolayout_svelte(), layout_nolayout_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_layout-nolayout.svelte-71ad76ed.js";
-    imports3 = ["_app/immutable/components/pages/_layout-nolayout.svelte-71ad76ed.js", "_app/immutable/chunks/index-be81bbd2.js"];
+    file3 = "_app/immutable/components/pages/_layout-nolayout.svelte-22f2ccd5.js";
+    imports3 = ["_app/immutable/components/pages/_layout-nolayout.svelte-22f2ccd5.js", "_app/immutable/chunks/index-0251ac3a.js"];
     stylesheets3 = [];
   }
 });
@@ -7303,7 +7284,10 @@ var init_page_svelte = __esm({
 <div>${slots.default ? slots.default({}) : ``}</div>`;
     });
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let pageColor = bgColour.home;
+      let $routes, $$unsubscribe_routes;
+      $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+      let pageColor = $routes.home.bgColor;
+      $$unsubscribe_routes();
       return `${validate_component(PageTransitions, "PageTransitions").$$render($$result, {}, {}, {
         default: () => {
           return `
@@ -7330,8 +7314,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file4 = "_app/immutable/components/pages/_page.svelte-a51c8c36.js";
-    imports4 = ["_app/immutable/components/pages/_page.svelte-a51c8c36.js", "_app/immutable/chunks/index-be81bbd2.js", "_app/immutable/chunks/store-f7827032.js", "_app/immutable/chunks/index-47a1d975.js"];
+    file4 = "_app/immutable/components/pages/_page.svelte-8493bbd0.js";
+    imports4 = ["_app/immutable/components/pages/_page.svelte-8493bbd0.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-9d17f1fb.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets4 = [];
   }
 });
@@ -7348,7 +7332,10 @@ var init_page_svelte2 = __esm({
     init_store();
     init_index2();
     Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let pageColor = bgColour.etc;
+      let $routes, $$unsubscribe_routes;
+      $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+      let pageColor = $routes.etc.bgColor;
+      $$unsubscribe_routes();
       return `
 
 <div class="${"flex justify-center items-center " + escape(pageColor, true) + " h-[400vh]"}">Etc
@@ -7374,8 +7361,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file5 = "_app/immutable/components/pages/etc/_page.svelte-391d68d0.js";
-    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-391d68d0.js", "_app/immutable/chunks/index-be81bbd2.js", "_app/immutable/chunks/store-f7827032.js", "_app/immutable/chunks/index-47a1d975.js"];
+    file5 = "_app/immutable/components/pages/etc/_page.svelte-8752e650.js";
+    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-8752e650.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-9d17f1fb.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets5 = [];
   }
 });
@@ -7450,8 +7437,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-293e87eb.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-293e87eb.js", "_app/immutable/chunks/index-be81bbd2.js", "_app/immutable/chunks/navigation-45b611b3.js", "_app/immutable/chunks/singletons-c2e766e2.js", "_app/immutable/chunks/index-47a1d975.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-8b78a9e6.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-8b78a9e6.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/navigation-883873ba.js", "_app/immutable/chunks/singletons-b41c1d48.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -7468,7 +7455,10 @@ var init_page_svelte3 = __esm({
     init_store();
     init_index2();
     Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let pageColor = bgColour.plans;
+      let $routes, $$unsubscribe_routes;
+      $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+      let pageColor = $routes.plans.bgColor;
+      $$unsubscribe_routes();
       return `
     <div class="${"flex justify-center items-center " + escape(pageColor, true) + " h-screen"}">Plans
     </div>    
@@ -7491,8 +7481,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-b23861ee.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-b23861ee.js", "_app/immutable/chunks/index-be81bbd2.js", "_app/immutable/chunks/store-f7827032.js", "_app/immutable/chunks/index-47a1d975.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-ff85abc5.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-ff85abc5.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-9d17f1fb.js", "_app/immutable/chunks/index-ac9af0b2.js"];
     stylesheets7 = [];
   }
 });
@@ -9626,7 +9616,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-89909542.js", "imports": ["_app/immutable/start-89909542.js", "_app/immutable/chunks/index-be81bbd2.js", "_app/immutable/chunks/singletons-c2e766e2.js", "_app/immutable/chunks/index-47a1d975.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-1b7c13a3.js", "imports": ["_app/immutable/start-1b7c13a3.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/singletons-b41c1d48.js", "_app/immutable/chunks/index-ac9af0b2.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

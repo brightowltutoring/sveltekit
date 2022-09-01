@@ -1,36 +1,14 @@
 <svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}/>
 <IsLoggedIn/>
-
-<svelte:head>
-	{#each Object.keys(pageObject) as key }
-		{#if key == $page.routeId }
-			<title>{ pageObject[ key ] } </title>
-		{:else if  $page.routeId.length == 0 }
-			<title>{ pageObject.home  }  </title>
-		{/if}
-	{/each}
-	
-</svelte:head>
+<PageTitle/>
 
 <script>
-
-	import { page } from '$app/stores'	
-
-	let pageObject = {
-		home:'Home 💫',
-		plans:'Plans 🔥',
-		etc:'Etc 👉',
-		login:'Login 🚀',
-	}
-
-	console.log(Object.keys(pageObject));
-
+	import PageTitle from '$lib/PageTitle.svelte';
 	import IsLoggedIn from '$lib/IsLoggedIn.svelte';
 
 	import '../app.css'
 	import Navbar from '$lib/Navbar.svelte'
-	import {innerWidth, scrollY, scrollYMax, instDeltaY, bgColour, windowInnerHeight } from '$lib/store.js'
-	let pageColor = bgColour.about  
+	import {innerWidth, scrollY, scrollYMax, instDeltaY, windowInnerHeight } from '$lib/store.js' 
 
 	let mobileHamburgerClosed = true
 

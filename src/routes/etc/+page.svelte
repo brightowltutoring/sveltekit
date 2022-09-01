@@ -1,14 +1,7 @@
 <script>
     import PageTransitions from '$lib/PageTransitions.svelte';
-    import { bgColour } from '$lib/store.js'
-    let pageColor = bgColour.etc  
-
-
-    // import { onMount } from 'svelte'
-	// $: onMount(() => {
-    //     body.style.color = "red"
-	// })
-    
+    import { routes } from '$lib/store.js'
+    let pageColor = $routes.etc.bgColor  
 </script>
 
 <!-- <div class="flex h-[400vh]" style:background={pageColor}>  -->

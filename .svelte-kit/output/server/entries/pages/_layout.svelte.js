@@ -1,11 +1,22 @@
-import { c as create_ssr_component, a as subscribe, d as add_attribute, e as escape, v as validate_component, f as add_styles, g as each } from "../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, e as each, d as escape, f as add_attribute, g as set_store_value, v as validate_component, h as add_styles } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
+import { r as routes, i as isLoggedIn, a as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, b as instDeltaY, c as scrollYMax, d as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
 import "../../chunks/firebase.js";
 import "firebase/auth";
-import { i as isLoggedIn, a as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, b as instDeltaY, c as scrollYMax, d as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
+import "../../chunks/index2.js";
 import "firebase/app";
 import "firebase/firestore/lite";
-import "../../chunks/index2.js";
+const PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $routes, $$unsubscribe_routes;
+  let $page, $$unsubscribe_page;
+  $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_routes();
+  $$unsubscribe_page();
+  return `${$$result.head += `${each(Object.keys($routes), (key) => {
+    return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
+  })}`, ""}`;
+});
 const IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isLoggedIn;
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
@@ -16,41 +27,23 @@ const app = "";
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isXs;
   $$unsubscribe_isXs = subscribe(isXs, (value) => value);
-  let { href, content, bool, navBar, mobileOpen, btnColor, btnColorHover } = $$props;
+  let { href, content, bool, mobileOpen, btnColor, btnColorHover, routes: routes2 } = $$props;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0)
     $$bindings.href(href);
   if ($$props.content === void 0 && $$bindings.content && content !== void 0)
     $$bindings.content(content);
   if ($$props.bool === void 0 && $$bindings.bool && bool !== void 0)
     $$bindings.bool(bool);
-  if ($$props.navBar === void 0 && $$bindings.navBar && navBar !== void 0)
-    $$bindings.navBar(navBar);
   if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
     $$bindings.mobileOpen(mobileOpen);
   if ($$props.btnColor === void 0 && $$bindings.btnColor && btnColor !== void 0)
     $$bindings.btnColor(btnColor);
   if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
     $$bindings.btnColorHover(btnColorHover);
+  if ($$props.routes === void 0 && $$bindings.routes && routes2 !== void 0)
+    $$bindings.routes(routes2);
   $$unsubscribe_isXs();
-  return `
-
-<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:text-white sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>
-
-
-
-
-
-
-
-
-
-
-
-     
-
-
-    
-    `;
+  return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:text-white  sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:text-white sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
 });
 const hamburgerWidth = 35;
 const hamburgerPattyHeight = 2;
@@ -86,14 +79,13 @@ const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     
         </main>`;
 });
-let allBtnColor = "sm:bg-[rgba(69,140,117,0.8)]";
-let allBtnColorHover = "hover:sm:bg-[rgba(69,140,117,0.5)]";
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let navBar;
   let logoTextColor;
+  let $routes, $$unsubscribe_routes;
   let $fractionScroll, $$unsubscribe_fractionScroll;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $isXs, $$unsubscribe_isXs;
+  $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
@@ -107,52 +99,17 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$rendered;
   do {
     $$settled = true;
-    navBar = {
-      mobileOpen: false,
-      item: [
-        {
-          name: "Home",
-          href: "/",
-          isClicked: true,
-          btnColor: allBtnColor,
-          btnColorHover: allBtnColorHover
-        },
-        {
-          name: "Plans",
-          href: "/plans",
-          isClicked: false,
-          btnColor: allBtnColor,
-          btnColorHover: allBtnColorHover
-        },
-        {
-          name: "Etc",
-          href: "/etc",
-          isClicked: false,
-          btnColor: allBtnColor,
-          btnColorHover: allBtnColorHover
-        },
-        {
-          name: `${$isLoggedIn ? "\u{1F680}" : "Login"}`,
-          href: "/login",
-          isClicked: false,
-          btnColor: allBtnColor,
-          btnColorHover: allBtnColorHover
-        }
-      ]
-    };
-    mobileOpen = navBar.mobileOpen;
-    mobileHamburgerClosed = navBar.mobileOpen;
+    mobileHamburgerClosed = mobileOpen;
+    {
+      $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
+    }
     logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
     $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
       $$result,
-      {
-        hamburgerBtn,
-        mobileOpen: navBar.mobileOpen,
-        unique
-      },
+      { hamburgerBtn, mobileOpen, unique },
       {
         mobileOpen: ($$value) => {
-          navBar.mobileOpen = $$value;
+          mobileOpen = $$value;
           $$settled = false;
         },
         unique: ($$value) => {
@@ -166,38 +123,39 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <navbar class="${"flex justify-between items-center w-1/2 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:py-5 sm:px-20"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
-    
  
-    
-    <nav class="${"sm:px-4"}">
-        <ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(navBar.item, (el) => {
+    <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(Object.keys($routes), (KEY) => {
       return `<li class="${"py-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
-          href: el.href,
-          content: el.name,
-          navBar,
-          btnColor: el.btnColor,
-          btnColorHover: el.btnColorHover,
-          bool: el.isClicked,
-          mobileOpen: navBar.mobileOpen
+          href: $routes[KEY].href,
+          content: $routes[KEY].name,
+          btnColor: $routes[KEY].btnColor,
+          btnColorHover: $routes[KEY].btnColorHover,
+          mobileOpen,
+          bool: $routes[KEY].isCurrent,
+          routes: $routes
         },
         {
-          bool: ($$value) => {
-            el.isClicked = $$value;
+          mobileOpen: ($$value) => {
+            mobileOpen = $$value;
             $$settled = false;
           },
-          mobileOpen: ($$value) => {
-            navBar.mobileOpen = $$value;
+          bool: ($$value) => {
+            $routes[KEY].isCurrent = $$value;
+            $$settled = false;
+          },
+          routes: ($$value) => {
+            $routes = $$value;
             $$settled = false;
           }
         },
         {}
       )}
-                
             </li>`;
     })}</ul></nav></navbar>`;
   } while (!$$settled);
+  $$unsubscribe_routes();
   $$unsubscribe_fractionScroll();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_isXs();
@@ -212,20 +170,11 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $scrollY, $$unsubscribe_scrollY;
   let $$unsubscribe_innerWidth;
   let $$unsubscribe_windowInnerHeight;
-  let $page, $$unsubscribe_page;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
-  $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  let pageObject = {
-    home: "Home \u{1F4AB}",
-    plans: "Plans \u{1F525}",
-    etc: "Etc \u{1F449}",
-    login: "Login \u{1F680}"
-  };
-  console.log(Object.keys(pageObject));
   let mobileHamburgerClosed = true;
   const hideCondition = (delta) => delta > 10;
   const showCondition = (delta) => delta < -10;
@@ -247,10 +196,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     extendedHideCondition = hideCondition(snapShotDeltaY);
     $$rendered = `
 ${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
-
-${$$result.head += `${each(Object.keys(pageObject), (key) => {
-      return `${key == $page.routeId ? `${$$result.title = `<title>${escape(pageObject[key])} </title>`, ""}` : `${$page.routeId.length == 0 ? `${$$result.title = `<title>${escape(pageObject.home)}  </title>`, ""}` : ``}`}`;
-    })}`, ""}
+${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
 
 
 
@@ -280,7 +226,6 @@ ${$$result.head += `${each(Object.keys(pageObject), (key) => {
   $$unsubscribe_scrollY();
   $$unsubscribe_innerWidth();
   $$unsubscribe_windowInnerHeight();
-  $$unsubscribe_page();
   return $$rendered;
 });
 export {

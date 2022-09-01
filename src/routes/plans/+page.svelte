@@ -1,7 +1,7 @@
 <script>
     import PageTransitions from '$lib/PageTransitions.svelte';
-    import { bgColour } from '$lib/store.js'
-    let pageColor = bgColour.plans
+    import { routes } from '$lib/store.js'
+    let pageColor = $routes.plans.bgColor  
 </script>
 
 <!-- <PageTransitions> -->

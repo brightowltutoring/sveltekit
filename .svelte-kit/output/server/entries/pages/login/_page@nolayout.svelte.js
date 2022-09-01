@@ -1,4 +1,4 @@
-import { c as create_ssr_component, d as add_attribute } from "../../../chunks/index.js";
+import { c as create_ssr_component, f as add_attribute } from "../../../chunks/index.js";
 import "../../../chunks/firebase.js";
 import "firebase/firestore/lite";
 import "firebase/auth";

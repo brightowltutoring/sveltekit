@@ -85,11 +85,44 @@ export const inTransition  = derived(isXs, $isXs =>  $isXs ? customFade :  ()=>{
 export const outTransition = derived(isXs, $isXs =>  $isXs ? customFade :  ()=>{} )
 
 
-export const bgColour = {
-  
-  home  : `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-  plans : `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-  login : `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-  etc   : `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`, 
 
-}
+// the all important
+export const routes = writable({
+  home: {
+    name:'Home',
+    href: "/",
+    title: "Home 💫",
+    isCurrent: true,
+    btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
+    btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
+    bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+  }, 
+  etc: {
+    name:'Etc',
+    href: "/etc",
+    title: "Etc 🤙",
+    isCurrent: false,
+    btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
+    btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
+    bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+  }, 
+  plans: {
+    name:'Plans',
+    href: "/plans",
+    title: "Plans 🔥",
+    isCurrent: false,
+    btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
+    btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
+    bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+  }, 
+  login: {
+    name:'Login',
+    href: "/login",
+    title: "Login 🚀",
+    isCurrent: false,
+    btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
+    btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
+    bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+  }, 
+})
+

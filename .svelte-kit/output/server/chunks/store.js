@@ -35,12 +35,44 @@ const inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
 });
 derived(isXs, ($isXs) => $isXs ? customFade : () => {
 });
-const bgColour = {
-  home: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-  plans: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-  login: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`,
-  etc: `bg-gradient-to-t from-[#f7f7f8]  to-[rgba(89,208,174,1)]`
-};
+const routes = writable({
+  home: {
+    name: "Home",
+    href: "/",
+    title: "Home \u{1F4AB}",
+    isCurrent: true,
+    btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
+    btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
+    bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+  },
+  etc: {
+    name: "Etc",
+    href: "/etc",
+    title: "Etc \u{1F919}",
+    isCurrent: false,
+    btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
+    btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
+    bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+  },
+  plans: {
+    name: "Plans",
+    href: "/plans",
+    title: "Plans \u{1F525}",
+    isCurrent: false,
+    btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
+    btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
+    bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+  },
+  login: {
+    name: "Login",
+    href: "/login",
+    title: "Login \u{1F680}",
+    isCurrent: false,
+    btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
+    btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
+    bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+  }
+});
 export {
   isXs as a,
   instDeltaY as b,
@@ -48,9 +80,9 @@ export {
   innerWidth as d,
   inTransition as e,
   fractionScroll as f,
-  bgColour as g,
   isLoggedIn as i,
   lastScrollY as l,
+  routes as r,
   scrollY as s,
   windowInnerHeight as w
 };
