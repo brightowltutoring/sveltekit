@@ -115,7 +115,7 @@ export const routes = writable({
   etc: {
     name:'Etc',
     href: "/etc",
-    title: "Etc - Thinksolve.io",
+    title: "Etc",
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
@@ -124,7 +124,7 @@ export const routes = writable({
   plans: {
     name:'Plans',
     href: "/plans",
-    title: "Plans - Thinksolve.io",
+    title: "Plans 📝",
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
