@@ -1,8 +1,7 @@
-    <svelte:window />
-    
-    
     <script>
 
+        import { slide, scale } from 'svelte/transition'
+        import { elasticOut } from 'svelte/easing'
         import { db, auth } from '$lib/firebase.js'
         import { goto } from '$app/navigation'
         import { collection, getDocs } from 'firebase/firestore/lite'
@@ -11,7 +10,8 @@
         } from "firebase/auth"
 
 
-        let emailFieldValue 
+        let emailFieldValue='';
+        let emptyEmailKey=false
 
         import { onMount } from 'svelte'
 
@@ -54,6 +54,8 @@
     //  Hoisted Functions
 
         // Helper Functions 
+
+        // this responds on input ..TODO: create a check for user submit on empty email
         function emailFieldHandler(EMAIL){
 
             // regex checks if has email format
@@ -111,14 +113,9 @@
 
             let email = emailField.value;
             console.log(email);
-
+            
             if(email.length!==0) {
-
-                const actionCodeSettings = {
-                    // url: 'https://www.brightowltutoring.com/login',
-                    url: 'https://thinksolve.io/login',
-                    handleCodeInApp: true,
-                };
+                const actionCodeSettings = { url: 'https://thinksolve.io/login', handleCodeInApp: true };
 
                 sendSignInLinkToEmail(auth, email, actionCodeSettings)
                     .then(() => {
@@ -139,13 +136,11 @@
         }
 
         
-
         function logoutFunction(){
 
             // firebase signing out
             signOut(auth)
                 .then(() => {
-
                     console.log("logged out");
                     goto("/")
                     // window.location.replace("/")
@@ -158,9 +153,6 @@
         }
     
         async function loginToRedirectUrl(userEmail) {
-
-        
-
 
             const colRef = collection(db, "email");
             const querySnapshot = await getDocs(colRef);
@@ -196,7 +188,7 @@
             
             });
         }
-
+        //emd 
 
         function signinWithLinkAndStop() {
 
@@ -222,7 +214,11 @@
                 </span>
                 `
         }
-    //  Hoisted functions
+        
+        function emptyEmailHandler(){
+            emailFieldValue.length==0 && (emptyEmailKey = !emptyEmailKey)
+        }
+        //  Hoisted functions
     
 </script>
 
@@ -252,17 +248,20 @@
         
         <br>
         <br>
-        <button id="googleBtn" on:click={()=>GoogleLogin()}
-        >Sign-in with Google</button>
+        
+            <button id="googleBtn" on:click={()=>GoogleLogin()}>Sign-in with Google</button>
         <br>
         <br>
 
+        
         <div id="emailSectionHover">
-            <button id ="passwordlessLoginBtn" >Sign-in via link</button>
-
-
-            <input id="emailField" bind:value={emailFieldValue} type="email" placeholder="email" 
-            on:input={ emailFieldHandler(emailFieldValue) }/>
+            <button id ="passwordlessLoginBtn" on:click={emptyEmailHandler}>Sign-in via link</button>
+            
+            {#key emptyEmailKey }
+                <input id="emailField" bind:value={emailFieldValue} type="email" placeholder="email" 
+                       on:input={ emailFieldHandler(emailFieldValue) }
+                       in:scale|local={{duration:500, easing:elasticOut}}/>
+            {/key}
 
 
             <span id ="emailStatusMessage" class="centering " style="display:none"></span>
