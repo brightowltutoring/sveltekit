@@ -1,17 +1,15 @@
 <script>
-    import { fly, slide, scale, /* fade, blur, crossfade */ } from 'svelte/transition'
+    import { fly, scale, /* fade, blur, crossfade */ } from 'svelte/transition'
     import { quintOut, elasticOut } from 'svelte/easing';
     import Navitem from './Navitem.svelte'
     import Hamburger from './Hamburger.svelte';
     import { goto } from '$app/navigation'
-    import { fractionScroll, isXs, customEase, isLoggedIn, routes, moduloScale, scrollY, scrollYMax } from '$lib/store.js'
+    import { fractionScroll, isXs, isLoggedIn, routes,scrollY, scrollYMax } from '$lib/store.js'
 
     import { spring } from 'svelte/motion';
     let scaleRocket = spring(3, { stiffness: 0.1, damping: 0.25})
-
-    // previously used modulo to periodically scale rocket emoji; 
-    // more customizable and easier conceptually with sine/cosine function
-    $:  scaleRocket.set(1 + 0.3*Math.sin($scrollY))
+    $:  $isLoggedIn ? scaleRocket.set(1 + 0.3*Math.sin($scrollY)) : null
+    // "Equivaent" code below .. for illustration how I did it before
     // $: {
     //     if($scrollY == 0){ scaleRocket.set(1)}
     //     if($scrollY % 2 == 0 && $scrollY >0 ){ scaleRocket.set(1.3)}

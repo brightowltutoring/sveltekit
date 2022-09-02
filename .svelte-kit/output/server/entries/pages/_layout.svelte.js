@@ -223,17 +223,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   do {
     $$settled = true;
     {
-      {
-        if ($scrollY == 0) {
-          scaleRocket.set(1);
-        }
-        if ($scrollY % 2 == 0 && $scrollY > 0) {
-          scaleRocket.set(1.3);
-        }
-        if ($scrollY % 2 !== 0 && $scrollY > 0) {
-          scaleRocket.set(1);
-        }
-      }
+      scaleRocket.set(1 + 0.3 * Math.sin($scrollY));
     }
     mobileHamburgerClosed = mobileOpen;
     {

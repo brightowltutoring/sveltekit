@@ -1,4 +1,4 @@
-import{c as St}from"./index-76e8331f.js";import"./index-1f1b8166.js";import{d as ee}from"./singletons-5c2e4580.js";const Ar="AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",kr="thinksolve-app.firebaseapp.com",Rr="thinksolve-app",Or="thinksolve-app.appspot.com",Cr="490986955869",Dr="1:490986955869:web:433c6f7b31865fed5099b4";/**
+import{c as St}from"./index-76e8331f.js";import"./index-1f1b8166.js";import{d as ee}from"./singletons-191346c0.js";const Ar="AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",kr="thinksolve-app.firebaseapp.com",Rr="thinksolve-app",Or="thinksolve-app.appspot.com",Cr="490986955869",Dr="1:490986955869:web:433c6f7b31865fed5099b4";/**
  * @license
  * Copyright 2017 Google LLC
  *
