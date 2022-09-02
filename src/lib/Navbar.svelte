@@ -9,13 +9,14 @@
     import { spring } from 'svelte/motion';
     let scaleRocket = spring(3, { stiffness: 0.1, damping: 0.25})
 
-    // perdiodic nature of modulo operator % makes this reactive scaling periodic
-    // the rocket emoji is scaled; happens when logged in as described by body code
-    $: {
-        if($scrollY == 0){ scaleRocket.set(1)}
-        if($scrollY % 2 == 0 && $scrollY >0 ){ scaleRocket.set(1.3)}
-        if($scrollY % 2 !==0 && $scrollY >0 ){ scaleRocket.set(1)}
-    }
+    // previously used modulo to periodically scale rocket emoji; 
+    // more customizable and easier conceptually with sine/cosine function
+    $:  scaleRocket.set(1 + 0.3*Math.sin($scrollY))
+    // $: {
+    //     if($scrollY == 0){ scaleRocket.set(1)}
+    //     if($scrollY % 2 == 0 && $scrollY >0 ){ scaleRocket.set(1.3)}
+    //     if($scrollY % 2 !==0 && $scrollY >0 ){ scaleRocket.set(1)}
+    // }
 
     export let mobileHamburgerClosed
     let mobileOpen;

@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, e as each, d as escape, f as add_attribute, g as now, l as loop, h as set_store_value, v as validate_component, j as add_styles } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
-import { r as routes, i as isLoggedIn, a as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, b as instDeltaY, c as scrollYMax, d as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
+import { r as routes, i as isLoggedIn, a as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, b as scrollYMax, c as instDeltaY, d as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
 import "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
@@ -198,11 +198,13 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $isXs, $$unsubscribe_isXs;
   let $scaleRocket, $$unsubscribe_scaleRocket;
+  let $scrollYMax, $$unsubscribe_scrollYMax;
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
+  $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => $scrollYMax = value);
   let scaleRocket = spring(3, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
   let { mobileHamburgerClosed } = $$props;
@@ -260,7 +262,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
  
     <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(Object.keys($routes), (KEY) => {
-      return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket})`, 0)}>
+      return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${$scrollY / $scrollYMax * 10}turn)`, 0)}>
                         ${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -299,6 +301,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_isXs();
   $$unsubscribe_scaleRocket();
+  $$unsubscribe_scrollYMax();
   return $$rendered;
 });
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
