@@ -1,36 +1,21 @@
 <script>
     import { fly, slide, scale, /* fade, blur, crossfade */ } from 'svelte/transition'
-    import { quintOut, elasticOut, sineOut } from 'svelte/easing';
+    import { quintOut, elasticOut } from 'svelte/easing';
     import Navitem from './Navitem.svelte'
     import Hamburger from './Hamburger.svelte';
     import { goto } from '$app/navigation'
-    import { fractionScroll, isXs, customEase, isLoggedIn, routes, 
-        moduloScale,
-        scrollY, scrollYMax, startScrollY 
-    } from '$lib/store.js'
+    import { fractionScroll, isXs, customEase, isLoggedIn, routes, moduloScale, scrollY } from '$lib/store.js'
 
+    import { spring } from 'svelte/motion';
+    let scaleRocket = spring(3, { stiffness: 0.1, damping: 0.25})
 
-    // import { page } from '$app/stores'
-    // $:{
-    //     Object.keys($routes).forEach( KEY =>{
-                
-    //             if( KEY == $page.routeId ) {
-    //                 $routes[KEY].isCurrent = true
-    //             }
-    //             else if( KEY =='home' && $page.routeId.length == 0 ) {
-    //                 $routes[KEY].isCurrent = true
-    //             }
-    //             else $routes[KEY].isCurrent = false
-    //     })
-    // }
-
-    // $: for( let KEY of Object.keys($routes)) {
-    //     if($page.routeId == KEY) {
-    //         $routes[KEY].isCurrent = true
-    //     }
-    //     else $routes[KEY].isCurrent = false
-    // }
-
+    // perdiodic nature of modulo operator % makes this reactive scaling periodic
+    // the rocket emoji is scaled; happens when logged in as described by body code
+    $: {
+        if($scrollY == 0){ scaleRocket.set(1)}
+        if($scrollY % 2 == 0 && $scrollY >0 ){ scaleRocket.set(1.3)}
+        if($scrollY % 2 !==0 && $scrollY >0 ){ scaleRocket.set(1)}
+    }
 
     export let mobileHamburgerClosed
     let mobileOpen;
@@ -39,11 +24,9 @@
     $: logoTextColor=`hsl(359,100%,${100*$fractionScroll}%)`
 
     // TODO: for pulsing rocket .. moduleScroll is {#key} for scale transition below
-    let moduloScroll
-    setInterval(()=>{
-        moduloScroll = $scrollY
-    },1000)
-    // $: console.log(moduloScroll);
+    let delayedScroll
+    setInterval(()=>{ delayedScroll = $scrollY },1000)
+
 
 
     let unique;
@@ -61,6 +44,7 @@
         $routes.home.isCurrent=true;
     }
 </script>
+
 
 
 <Hamburger {hamburgerBtn} bind:mobileOpen bind:unique />
@@ -89,22 +73,28 @@
         style:color={$isXs?"black":logoTextColor} 
         >
             {#each Object.keys($routes) as KEY }
-            <!-- {#if KEY=='login' && $isLoggedIn }
-                    {#key moduloScroll }
-                    <li class="py-3 sm:p-1" in:moduloScale >
+                    <li class="py-3 sm:p-1" 
+                        style={ (KEY =='login' && $isLoggedIn) && `transform:scale(${$scaleRocket})` }
+                     >
+                    <!-- this conditional style eliminate code duplcation as in the alternate solution below
+                    (below this each block -->
                         <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} />
                     </li>
-                    {/key}
-                {:else } -->
+            {/each}
+        
+            <!-- {#each Object.keys($routes) as KEY }
+                {#if KEY=='login' && $isLoggedIn }
+                    <li class="py-3 sm:p-1" style="transform:scale({$scaleRocket})">
+                        <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} />
+                    </li>
+                {:else }
                     <li class="py-3 sm:p-1">
                         <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} />
                     </li>
-                <!-- {/if} -->
-            {/each}
-          
+                {/if}
+            {/each} -->
         </ul>    
 
-        
     </nav>
 
 </navbar>

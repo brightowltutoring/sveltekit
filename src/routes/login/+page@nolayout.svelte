@@ -1,6 +1,7 @@
     <script>
 
-        import { slide, scale } from 'svelte/transition'
+        import { onMount } from 'svelte'
+        import { scale } from 'svelte/transition'
         import { elasticOut } from 'svelte/easing'
         import { db, auth } from '$lib/firebase.js'
         import { goto } from '$app/navigation'
@@ -13,26 +14,21 @@
         let emailFieldValue='';
         let emptyEmailKey=false
 
-        import { onMount } from 'svelte'
-
-
         onMount(() => {
 
             // TODO: previpously missing login code for passwordless login
                 // Confirm the link is a sign-in with email link.
-                if (isSignInWithEmailLink(auth, window.location.href)) {
-                  
-                    let email = window.localStorage.getItem('emailForSignIn');
-                    if (!email)  email = window.prompt('Please provide your email for confirmation');
+            if (isSignInWithEmailLink(auth, window.location.href)) {
                 
+                let email = window.localStorage.getItem('emailForSignIn');
+                if (!email)  email = window.prompt('Please provide your email for confirmation');
+            
 
-                    signInWithEmailLink(auth, email, window.location.href)
-                        .then((result) => {
-                            // Clear email from storage.
-                            window.localStorage.removeItem('emailForSignIn');
-                        })
-                        .catch( error => console.log(error));
-                }
+                signInWithEmailLink(auth, email, window.location.href)
+                    .then( () => window.localStorage.removeItem('emailForSignIn'))
+                    .catch( error => console.log(error));
+                    /* Clear email from storage or throw error.*/
+            }
             // TODO: previpously missing login code for passwordless login
 
             onAuthStateChanged( auth, user => {
@@ -53,11 +49,7 @@
     
     //  Hoisted Functions
 
-        // Helper Functions 
-
-        // this responds on input ..TODO: create a check for user submit on empty email
-        function emailFieldHandler(EMAIL){
-
+        function onInputEmailField(EMAIL){
             // regex checks if has email format
             const isEmail =  (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(EMAIL);
 
@@ -67,7 +59,6 @@
                 emailField.style.fontSize="16px";
             }
             else if (!isEmail ) {
-
                 emailField.style.border = "1.5px solid red";
                 emailField.style.color="red";
                 emailField.style.fontSize="20px";
@@ -215,9 +206,7 @@
                 `
         }
         
-        function emptyEmailHandler(){
-            emailFieldValue.length==0 && (emptyEmailKey = !emptyEmailKey)
-        }
+   
         //  Hoisted functions
     
 </script>
@@ -249,26 +238,26 @@
         <br>
         <br>
         
-            <button id="googleBtn" on:click={()=>GoogleLogin()}>Sign-in with Google</button>
+            <button id="googleBtn" on:click={ GoogleLogin }>Sign-in with Google</button>
         <br>
         <br>
 
+
+        <button id ="passwordlessLoginBtn" 
+                on:click={()=>{ emailFieldValue.length==0 && (emptyEmailKey = !emptyEmailKey)}}
+            >Sign-in via link</button>
         
-        <div id="emailSectionHover">
-            <button id ="passwordlessLoginBtn" on:click={emptyEmailHandler}>Sign-in via link</button>
-            
-            {#key emptyEmailKey }
-                <input id="emailField" bind:value={emailFieldValue} type="email" placeholder="email" 
-                       on:input={ emailFieldHandler(emailFieldValue) }
-                       in:scale|local={{duration:500, easing:elasticOut}}/>
-            {/key}
+        {#key emptyEmailKey }
+            <input  in:scale|local={{duration:500, easing:elasticOut}}
+                    id="emailField" bind:value={ emailFieldValue } type="email" placeholder="email" 
+                    on:input={ onInputEmailField(emailFieldValue) }
+             />
+        {/key}
 
 
-            <span id ="emailStatusMessage" class="centering " style="display:none"></span>
-            <span id ="flyingEmoji"  style="display:none"></span>
-        </div>
+        <span id ="emailStatusMessage" class="centering " style="display:none"></span>
+        <span id ="flyingEmoji"  style="display:none"></span>
 
-     
     </div>
 
 
@@ -278,7 +267,7 @@
         <h3 class="centering" > Redirecting to your page in </h3>
         <h3 class="centering" style="font-size: 30px;" id="redirectMessage" > ⌊π⌋</h3>
 
-        <button id ="logoutBtn" on:click={()=>logoutFunction()} >Logout</button>
+        <button id ="logoutBtn" on:click={ logoutFunction } >Logout</button>
     </div>
 
 </main>

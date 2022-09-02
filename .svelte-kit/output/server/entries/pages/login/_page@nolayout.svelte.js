@@ -9,26 +9,22 @@ const css = {
   map: null
 };
 const Page_nolayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let emailFieldValue;
+  let emailFieldValue = "";
   $$result.css.add(css);
-  return `
-    
-    
-    
-
-<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 100vh; max-height: 100vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(10px); "}"></video>
+  return `<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 100vh; max-height: 100vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(10px); "}"></video>
 
     
    
     <div class="${"loginLogoutDivs svelte-1mhl4m5"}" id="${"logInDiv"}" style="${"display: block; "}"><br>
         <br>
-        <button id="${"googleBtn"}" class="${"svelte-1mhl4m5"}">Sign-in with Google</button>
+        
+            <button id="${"googleBtn"}" class="${"svelte-1mhl4m5"}">Sign-in with Google</button>
         <br>
         <br>
 
+        
         <div id="${"emailSectionHover"}"><button id="${"passwordlessLoginBtn"}" class="${"svelte-1mhl4m5"}">Sign-in via link</button>
-
-
+            
             <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-1mhl4m5"}"${add_attribute("value", emailFieldValue, 0)}>
 
 

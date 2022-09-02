@@ -6,13 +6,13 @@ import { quintOut, elasticOut } from 'svelte/easing'
 // to animate the loggedin logo ..but this is overkill
 // css:   transform: scale(${0.75*t});
 // filter: hue-rotate(${u}turn) 
-export function moduloScale(node, {easing = elasticOut, duration = 5000 }) {
-  return {
+export function moduloScale(node, {easing = elasticOut, duration = 1000}) {
+
+  return {  
     easing,
     duration,
     css: (t,u) => 
-    ` transform: translateX(${t*5}px); 
-      filter: hue-rotate(${u}turn) blur(${t}px);
+    ` filter: hue-rotate(${10*u}turn) blur(${t*4}px);
     `
   }
 }
@@ -110,7 +110,8 @@ export const routes = writable({
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
-    bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+    bgColor:`bg-[rgba(89,208,174,1)]`,
+    // bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
   }, 
   etc: {
     name:'Etc',
@@ -124,7 +125,7 @@ export const routes = writable({
   plans: {
     name:'Plans',
     href: "/plans",
-    title: "Plans 📝",
+    title: "Plans",
     isCurrent: false,
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
