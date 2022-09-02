@@ -4,7 +4,7 @@
     import Navitem from './Navitem.svelte'
     import Hamburger from './Hamburger.svelte';
     import { goto } from '$app/navigation'
-    import { fractionScroll, isXs, customEase, isLoggedIn, routes, moduloScale, scrollY } from '$lib/store.js'
+    import { fractionScroll, isXs, customEase, isLoggedIn, routes, moduloScale, scrollY, scrollYMax } from '$lib/store.js'
 
     import { spring } from 'svelte/motion';
     let scaleRocket = spring(3, { stiffness: 0.1, damping: 0.25})
@@ -74,7 +74,8 @@
         >
             {#each Object.keys($routes) as KEY }
                     <li class="py-3 sm:p-1" 
-                        style={ (KEY =='login' && $isLoggedIn) && `transform:scale(${$scaleRocket})` }
+                        style={ (KEY =='login' && $isLoggedIn) && 
+                        `transform:scale(${$scaleRocket}); filter:hue-rotate(${($scrollY/$scrollYMax)*10}turn)` }
                      >
                     <!-- this conditional style eliminate code duplcation as in the alternate solution below
                     (below this each block -->

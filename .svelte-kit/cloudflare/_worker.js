@@ -79,6 +79,29 @@ function set_store_value(store, ret, value) {
   store.set(value);
   return ret;
 }
+function run_tasks(now2) {
+  tasks.forEach((task) => {
+    if (!task.c(now2)) {
+      tasks.delete(task);
+      task.f();
+    }
+  });
+  if (tasks.size !== 0)
+    raf(run_tasks);
+}
+function loop(callback) {
+  let task;
+  if (tasks.size === 0)
+    raf(run_tasks);
+  return {
+    promise: new Promise((fulfill) => {
+      tasks.add(task = { c: callback, f: fulfill });
+    }),
+    abort() {
+      tasks.delete(task);
+    }
+  };
+}
 function set_current_component(component8) {
   current_component = component8;
 }
@@ -170,9 +193,13 @@ function add_styles(style_object) {
   const styles = style_object_to_string(style_object);
   return styles ? ` style="${styles}"` : "";
 }
-var current_component, ATTR_REGEX, CONTENT_REGEX, missing_component, on_destroy;
+var is_client, now, raf, tasks, current_component, ATTR_REGEX, CONTENT_REGEX, missing_component, on_destroy;
 var init_chunks = __esm({
   ".svelte-kit/output/server/chunks/index.js"() {
+    is_client = typeof window !== "undefined";
+    now = is_client ? () => window.performance.now() : () => Date.now();
+    raf = is_client ? (cb) => requestAnimationFrame(cb) : noop;
+    tasks = /* @__PURE__ */ new Set();
     Promise.resolve();
     ATTR_REGEX = /[&"]/g;
     CONTENT_REGEX = /[&<]/g;
@@ -694,7 +721,7 @@ var init_store = __esm({
         isCurrent: false,
         btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
         btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-        bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`
+        bgColor: `bg-[rgba(89,208,174,1)]`
       },
       etc: {
         name: "Etc",
@@ -708,7 +735,7 @@ var init_store = __esm({
       plans: {
         name: "Plans",
         href: "/plans",
-        title: "Plans \u{1F4DD}",
+        title: "Plans",
         isCurrent: false,
         btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
         btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
@@ -1518,10 +1545,10 @@ var init_index_esm20173 = __esm({
       if (logType < instance.logLevel) {
         return;
       }
-      const now = new Date().toISOString();
+      const now2 = new Date().toISOString();
       const method = ConsoleMethod[logType];
       if (method) {
-        console[method](`[${now}]  ${instance.name}:`, ...args);
+        console[method](`[${now2}]  ${instance.name}:`, ...args);
       } else {
         throw new Error(`Attempted to log a message with an invalid logType (value: ${logType})`);
       }
@@ -2156,8 +2183,8 @@ var init_index_esm20174 = __esm({
         }
         this._heartbeatsCache.heartbeats = this._heartbeatsCache.heartbeats.filter((singleDateHeartbeat) => {
           const hbTimestamp = new Date(singleDateHeartbeat.date).valueOf();
-          const now = Date.now();
-          return now - hbTimestamp <= STORED_HEARTBEAT_RETENTION_MAX_MILLIS;
+          const now2 = Date.now();
+          return now2 - hbTimestamp <= STORED_HEARTBEAT_RETENTION_MAX_MILLIS;
         });
         return this._storage.overwrite(this._heartbeatsCache);
       }
@@ -6918,6 +6945,103 @@ var layout_svelte_exports = {};
 __export(layout_svelte_exports, {
   default: () => Layout
 });
+function is_date(obj) {
+  return Object.prototype.toString.call(obj) === "[object Date]";
+}
+function tick_spring(ctx, last_value, current_value, target_value) {
+  if (typeof current_value === "number" || is_date(current_value)) {
+    const delta = target_value - current_value;
+    const velocity = (current_value - last_value) / (ctx.dt || 1 / 60);
+    const spring2 = ctx.opts.stiffness * delta;
+    const damper = ctx.opts.damping * velocity;
+    const acceleration = (spring2 - damper) * ctx.inv_mass;
+    const d2 = (velocity + acceleration) * ctx.dt;
+    if (Math.abs(d2) < ctx.opts.precision && Math.abs(delta) < ctx.opts.precision) {
+      return target_value;
+    } else {
+      ctx.settled = false;
+      return is_date(current_value) ? new Date(current_value.getTime() + d2) : current_value + d2;
+    }
+  } else if (Array.isArray(current_value)) {
+    return current_value.map((_2, i) => tick_spring(ctx, last_value[i], current_value[i], target_value[i]));
+  } else if (typeof current_value === "object") {
+    const next_value = {};
+    for (const k in current_value) {
+      next_value[k] = tick_spring(ctx, last_value[k], current_value[k], target_value[k]);
+    }
+    return next_value;
+  } else {
+    throw new Error(`Cannot spring ${typeof current_value} values`);
+  }
+}
+function spring(value, opts = {}) {
+  const store = writable(value);
+  const { stiffness = 0.15, damping = 0.8, precision = 0.01 } = opts;
+  let last_time;
+  let task;
+  let current_token;
+  let last_value = value;
+  let target_value = value;
+  let inv_mass = 1;
+  let inv_mass_recovery_rate = 0;
+  let cancel_task = false;
+  function set(new_value, opts2 = {}) {
+    target_value = new_value;
+    const token = current_token = {};
+    if (value == null || opts2.hard || spring2.stiffness >= 1 && spring2.damping >= 1) {
+      cancel_task = true;
+      last_time = now();
+      last_value = new_value;
+      store.set(value = target_value);
+      return Promise.resolve();
+    } else if (opts2.soft) {
+      const rate = opts2.soft === true ? 0.5 : +opts2.soft;
+      inv_mass_recovery_rate = 1 / (rate * 60);
+      inv_mass = 0;
+    }
+    if (!task) {
+      last_time = now();
+      cancel_task = false;
+      task = loop((now2) => {
+        if (cancel_task) {
+          cancel_task = false;
+          task = null;
+          return false;
+        }
+        inv_mass = Math.min(inv_mass + inv_mass_recovery_rate, 1);
+        const ctx = {
+          inv_mass,
+          opts: spring2,
+          settled: true,
+          dt: (now2 - last_time) * 60 / 1e3
+        };
+        const next_value = tick_spring(ctx, last_value, value, target_value);
+        last_time = now2;
+        last_value = value;
+        store.set(value = next_value);
+        if (ctx.settled) {
+          task = null;
+        }
+        return !ctx.settled;
+      });
+    }
+    return new Promise((fulfil) => {
+      task.promise.then(() => {
+        if (token === current_token)
+          fulfil();
+      });
+    });
+  }
+  const spring2 = {
+    set,
+    update: (fn, opts2) => set(fn(target_value, value), opts2),
+    subscribe: store.subscribe,
+    stiffness,
+    damping,
+    precision
+  };
+  return spring2;
+}
 var PageTitle, IsLoggedIn, Navitem, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, Navbar, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
@@ -7018,15 +7142,18 @@ var init_layout_svelte = __esm({
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let logoTextColor;
       let $routes, $$unsubscribe_routes;
-      let $$unsubscribe_scrollY;
+      let $scrollY, $$unsubscribe_scrollY;
       let $fractionScroll, $$unsubscribe_fractionScroll;
       let $isLoggedIn, $$unsubscribe_isLoggedIn;
       let $isXs, $$unsubscribe_isXs;
+      let $scaleRocket, $$unsubscribe_scaleRocket;
       $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
-      $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
+      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
       $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
+      let scaleRocket = spring(3, { stiffness: 0.1, damping: 0.25 });
+      $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
       let { mobileHamburgerClosed } = $$props;
       let mobileOpen;
       setInterval(
@@ -7042,6 +7169,19 @@ var init_layout_svelte = __esm({
       let $$rendered;
       do {
         $$settled = true;
+        {
+          {
+            if ($scrollY == 0) {
+              scaleRocket.set(1);
+            }
+            if ($scrollY % 2 == 0 && $scrollY > 0) {
+              scaleRocket.set(1.3);
+            }
+            if ($scrollY % 2 !== 0 && $scrollY > 0) {
+              scaleRocket.set(1);
+            }
+          }
+        }
         mobileHamburgerClosed = mobileOpen;
         {
           $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
@@ -7069,8 +7209,8 @@ var init_layout_svelte = __esm({
 
  
     <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(Object.keys($routes), (KEY) => {
-          return `
-                    <li class="${"py-3 sm:p-1"}">${validate_component(Navitem, "Navitem").$$render(
+          return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket})`, 0)}>
+                        ${validate_component(Navitem, "Navitem").$$render(
             $$result,
             {
               href: $routes[KEY].href,
@@ -7096,15 +7236,18 @@ var init_layout_svelte = __esm({
               }
             },
             {}
-          )}</li>
-                `;
-        })}</ul></nav></navbar>`;
+          )}
+                    </li>`;
+        })}
+        
+            </ul></nav></navbar>`;
       } while (!$$settled);
       $$unsubscribe_routes();
       $$unsubscribe_scrollY();
       $$unsubscribe_fractionScroll();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_isXs();
+      $$unsubscribe_scaleRocket();
       return $$rendered;
     });
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -7193,9 +7336,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-d7b45c09.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-d7b45c09.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/stores-117d9efc.js", "_app/immutable/chunks/singletons-6be28cf4.js", "_app/immutable/chunks/index-ac9af0b2.js", "_app/immutable/chunks/store-0d92b9de.js", "_app/immutable/chunks/index-6a4cff02.js", "_app/immutable/chunks/navigation-b42aae11.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-65a4ef40.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-576a31bb.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-576a31bb.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-2295313d.js", "_app/immutable/chunks/singletons-fb90af80.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/store-1bc1e97c.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/navigation-02c51acc.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-962fc4dd.css"];
   }
 });
 
@@ -7239,8 +7382,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-b812cd3f.js";
-    imports2 = ["_app/immutable/components/error.svelte-b812cd3f.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/stores-117d9efc.js", "_app/immutable/chunks/singletons-6be28cf4.js", "_app/immutable/chunks/index-ac9af0b2.js"];
+    file2 = "_app/immutable/components/error.svelte-e8dfaae4.js";
+    imports2 = ["_app/immutable/components/error.svelte-e8dfaae4.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-2295313d.js", "_app/immutable/chunks/singletons-fb90af80.js", "_app/immutable/chunks/index-4375fd2f.js"];
     stylesheets2 = [];
   }
 });
@@ -7274,8 +7417,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_layout_nolayout_svelte(), layout_nolayout_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_layout-nolayout.svelte-22f2ccd5.js";
-    imports3 = ["_app/immutable/components/pages/_layout-nolayout.svelte-22f2ccd5.js", "_app/immutable/chunks/index-0251ac3a.js"];
+    file3 = "_app/immutable/components/pages/_layout-nolayout.svelte-e637f9f8.js";
+    imports3 = ["_app/immutable/components/pages/_layout-nolayout.svelte-e637f9f8.js", "_app/immutable/chunks/index-1f1b8166.js"];
     stylesheets3 = [];
   }
 });
@@ -7338,8 +7481,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file4 = "_app/immutable/components/pages/_page.svelte-e4278d63.js";
-    imports4 = ["_app/immutable/components/pages/_page.svelte-e4278d63.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-0d92b9de.js", "_app/immutable/chunks/index-ac9af0b2.js", "_app/immutable/chunks/index-6a4cff02.js"];
+    file4 = "_app/immutable/components/pages/_page.svelte-8d2f74c4.js";
+    imports4 = ["_app/immutable/components/pages/_page.svelte-8d2f74c4.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1bc1e97c.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets4 = [];
   }
 });
@@ -7385,8 +7528,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file5 = "_app/immutable/components/pages/etc/_page.svelte-e7661d0d.js";
-    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-e7661d0d.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-0d92b9de.js", "_app/immutable/chunks/index-ac9af0b2.js", "_app/immutable/chunks/index-6a4cff02.js"];
+    file5 = "_app/immutable/components/pages/etc/_page.svelte-175c478c.js";
+    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-175c478c.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1bc1e97c.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets5 = [];
   }
 });
@@ -7422,14 +7565,14 @@ var init_page_nolayout_svelte = __esm({
         <br>
         <br>
 
+
+        <button id="${"passwordlessLoginBtn"}" class="${"svelte-1mhl4m5"}">Sign-in via link</button>
         
-        <div id="${"emailSectionHover"}"><button id="${"passwordlessLoginBtn"}" class="${"svelte-1mhl4m5"}">Sign-in via link</button>
-            
-            <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-1mhl4m5"}"${add_attribute("value", emailFieldValue, 0)}>
+        <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-1mhl4m5"}"${add_attribute("value", emailFieldValue, 0)}>
 
 
-            <span id="${"emailStatusMessage"}" class="${"centering  svelte-1mhl4m5"}" style="${"display:none"}"></span>
-            <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-1mhl4m5"}"></span></div></div>
+        <span id="${"emailStatusMessage"}" class="${"centering  svelte-1mhl4m5"}" style="${"display:none"}"></span>
+        <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-1mhl4m5"}"></span></div>
 
 
     <div class="${"loginLogoutDivs svelte-1mhl4m5"}" id="${"logOutDiv"}" style="${"display: none"}"><h2 class="${"centering svelte-1mhl4m5"}" id="${"loginWelcomeText"}">Welcome User </h2>
@@ -7457,8 +7600,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-976767cf.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-976767cf.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/navigation-b42aae11.js", "_app/immutable/chunks/index-6a4cff02.js", "_app/immutable/chunks/singletons-6be28cf4.js", "_app/immutable/chunks/index-ac9af0b2.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-cf30f802.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-cf30f802.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-02c51acc.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/singletons-fb90af80.js", "_app/immutable/chunks/index-4375fd2f.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -7501,8 +7644,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-7f660a46.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-7f660a46.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/store-0d92b9de.js", "_app/immutable/chunks/index-ac9af0b2.js", "_app/immutable/chunks/index-6a4cff02.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-75d8e9e5.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-75d8e9e5.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1bc1e97c.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets7 = [];
   }
 });
@@ -9636,7 +9779,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-b469b171.js", "imports": ["_app/immutable/start-b469b171.js", "_app/immutable/chunks/index-0251ac3a.js", "_app/immutable/chunks/singletons-6be28cf4.js", "_app/immutable/chunks/index-ac9af0b2.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-6a4a440d.js", "imports": ["_app/immutable/start-6a4a440d.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-fb90af80.js", "_app/immutable/chunks/index-4375fd2f.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

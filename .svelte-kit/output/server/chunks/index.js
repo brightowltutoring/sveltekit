@@ -26,6 +26,33 @@ function set_store_value(store, ret, value) {
   store.set(value);
   return ret;
 }
+const is_client = typeof window !== "undefined";
+let now = is_client ? () => window.performance.now() : () => Date.now();
+let raf = is_client ? (cb) => requestAnimationFrame(cb) : noop;
+const tasks = /* @__PURE__ */ new Set();
+function run_tasks(now2) {
+  tasks.forEach((task) => {
+    if (!task.c(now2)) {
+      tasks.delete(task);
+      task.f();
+    }
+  });
+  if (tasks.size !== 0)
+    raf(run_tasks);
+}
+function loop(callback) {
+  let task;
+  if (tasks.size === 0)
+    raf(run_tasks);
+  return {
+    promise: new Promise((fulfill) => {
+      tasks.add(task = { c: callback, f: fulfill });
+    }),
+    abort() {
+      tasks.delete(task);
+    }
+  };
+}
 let current_component;
 function set_current_component(component) {
   current_component = component;
@@ -132,10 +159,12 @@ export {
   escape as d,
   each as e,
   add_attribute as f,
-  set_store_value as g,
-  add_styles as h,
+  now as g,
+  set_store_value as h,
   is_function as i,
-  getContext as j,
+  add_styles as j,
+  getContext as k,
+  loop as l,
   missing_component as m,
   noop as n,
   run_all as r,

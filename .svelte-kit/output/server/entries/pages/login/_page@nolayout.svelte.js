@@ -22,14 +22,14 @@ const Page_nolayout = create_ssr_component(($$result, $$props, $$bindings, slots
         <br>
         <br>
 
+
+        <button id="${"passwordlessLoginBtn"}" class="${"svelte-1mhl4m5"}">Sign-in via link</button>
         
-        <div id="${"emailSectionHover"}"><button id="${"passwordlessLoginBtn"}" class="${"svelte-1mhl4m5"}">Sign-in via link</button>
-            
-            <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-1mhl4m5"}"${add_attribute("value", emailFieldValue, 0)}>
+        <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-1mhl4m5"}"${add_attribute("value", emailFieldValue, 0)}>
 
 
-            <span id="${"emailStatusMessage"}" class="${"centering  svelte-1mhl4m5"}" style="${"display:none"}"></span>
-            <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-1mhl4m5"}"></span></div></div>
+        <span id="${"emailStatusMessage"}" class="${"centering  svelte-1mhl4m5"}" style="${"display:none"}"></span>
+        <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-1mhl4m5"}"></span></div>
 
 
     <div class="${"loginLogoutDivs svelte-1mhl4m5"}" id="${"logOutDiv"}" style="${"display: none"}"><h2 class="${"centering svelte-1mhl4m5"}" id="${"loginWelcomeText"}">Welcome User </h2>
