@@ -19,7 +19,7 @@ const scrollY = writable(0);
 const startScrollY = derived(scrollY, ($scrollY, set) => {
   setTimeout(() => {
     set($scrollY);
-  }, 60);
+  }, 50);
 });
 const instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
   return $scrollY - $startScrollY;
@@ -31,7 +31,7 @@ const fractionScroll = derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) 
 const windowInnerHeight = writable(0);
 const innerWidth = writable(0);
 const isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-derived(isXs, ($isXs) => $isXs ? customFade : () => {
+const inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
 });
 derived(isXs, ($isXs) => $isXs ? customFade : () => {
 });
@@ -78,6 +78,7 @@ export {
   instDeltaY as b,
   scrollYMax as c,
   innerWidth as d,
+  inTransition as e,
   fractionScroll as f,
   isLoggedIn as i,
   lastScrollY as l,

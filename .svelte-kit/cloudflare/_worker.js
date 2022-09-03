@@ -686,7 +686,7 @@ function customFade(node, { easing = elasticOut, duration = 3e3 }) {
       `
   };
 }
-var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, routes;
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, inTransition, routes;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
     init_index2();
@@ -697,7 +697,7 @@ var init_store = __esm({
     startScrollY = derived(scrollY, ($scrollY, set) => {
       setTimeout(() => {
         set($scrollY);
-      }, 60);
+      }, 50);
     });
     instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
       return $scrollY - $startScrollY;
@@ -709,7 +709,7 @@ var init_store = __esm({
     windowInnerHeight = writable(0);
     innerWidth = writable(0);
     isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-    derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
     });
     derived(isXs, ($isXs) => $isXs ? customFade : () => {
     });
@@ -7166,10 +7166,7 @@ var init_layout_svelte = __esm({
       do {
         $$settled = true;
         {
-          console.log("$fractionScroll", $fractionScroll);
-        }
-        {
-          {
+          if ($isLoggedIn && !$isXs) {
             hueRocket = $fractionScroll * 10;
             scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
           }
@@ -7195,7 +7192,7 @@ var init_layout_svelte = __esm({
           {}
         )}
 
-<navbar class="${"fixed sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " sm:pr-10 sm:pl-10 sm:backdrop-blur-3xl"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<navbar class="${escape(!mobileOpen && "hidden", true) + " " + escape($scrollY > 0 && "sm:backdrop-blur-3xl", true) + " fixed sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
  
@@ -7281,7 +7278,7 @@ ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
 
 
 
-<div class="${escape(extendedShowCondition && "opacity-100", true) + " " + escape(extendedHideCondition && "opacity-0", true)}">${validate_component(Navbar, "Navbar").$$render(
+<div class="${escape(extendedShowCondition && "opacity-100 ", true) + " " + escape(extendedHideCondition && "opacity-0  ", true) + " duration-300"}">${validate_component(Navbar, "Navbar").$$render(
           $$result,
           { mobileHamburgerClosed },
           {
@@ -7293,7 +7290,7 @@ ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
           {}
         )}</div>
 
-<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " w-full"}">${slots.default ? slots.default({}) : ``}</div>	
+<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true)}">${slots.default ? slots.default({}) : ``}</div>	
 
 
 
@@ -7342,9 +7339,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-895022e0.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-895022e0.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-59550a1f.js", "_app/immutable/chunks/singletons-5dc40673.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/store-5a538fc0.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/navigation-a983da0b.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-9d04d517.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-f5a45809.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-f5a45809.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-b913c903.js", "_app/immutable/chunks/singletons-8251c4ac.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/store-1f2ed741.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/navigation-b6a7fdda.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-a4890b3e.css"];
   }
 });
 
@@ -7388,8 +7385,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-4313eca7.js";
-    imports2 = ["_app/immutable/components/error.svelte-4313eca7.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-59550a1f.js", "_app/immutable/chunks/singletons-5dc40673.js", "_app/immutable/chunks/index-4375fd2f.js"];
+    file2 = "_app/immutable/components/error.svelte-a5243b14.js";
+    imports2 = ["_app/immutable/components/error.svelte-a5243b14.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-b913c903.js", "_app/immutable/chunks/singletons-8251c4ac.js", "_app/immutable/chunks/index-4375fd2f.js"];
     stylesheets2 = [];
   }
 });
@@ -7434,24 +7431,41 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var Page;
+var PageTransitions, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
     init_store();
     init_index2();
+    PageTransitions = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_windowInnerHeight;
+      let $$unsubscribe_scrollYMax;
+      let $$unsubscribe_inTransition;
+      $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+      $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
+      $$unsubscribe_inTransition = subscribe(inTransition, (value) => value);
+      $$unsubscribe_windowInnerHeight();
+      $$unsubscribe_scrollYMax();
+      $$unsubscribe_inTransition();
+      return `
+
+
+
+<div>${slots.default ? slots.default({}) : ``}</div>`;
+    });
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $routes, $$unsubscribe_routes;
       $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
       let pageColor = $routes.home.bgColor;
       $$unsubscribe_routes();
       return `
-
-    
+${validate_component(PageTransitions, "PageTransitions").$$render($$result, {}, {}, {
+        default: () => {
+          return `
     <main class="${"h-[2000px] " + escape(pageColor, true)}">
-       
-        <h1 class="${"p-24 "}">Home </h1></main>    
-
+        <h1 class="${"p-24 "}">Home </h1></main>`;
+        }
+      })}
     `;
     });
   }
@@ -7471,8 +7485,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file4 = "_app/immutable/components/pages/_page.svelte-535e8daa.js";
-    imports4 = ["_app/immutable/components/pages/_page.svelte-535e8daa.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-5a538fc0.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
+    file4 = "_app/immutable/components/pages/_page.svelte-7da46ded.js";
+    imports4 = ["_app/immutable/components/pages/_page.svelte-7da46ded.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1f2ed741.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets4 = [];
   }
 });
@@ -7518,8 +7532,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file5 = "_app/immutable/components/pages/etc/_page.svelte-9156847b.js";
-    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-9156847b.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-5a538fc0.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
+    file5 = "_app/immutable/components/pages/etc/_page.svelte-32ced349.js";
+    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-32ced349.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1f2ed741.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets5 = [];
   }
 });
@@ -7590,8 +7604,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-baf0eaab.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-baf0eaab.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-a983da0b.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/singletons-5dc40673.js", "_app/immutable/chunks/index-4375fd2f.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-14246e27.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-14246e27.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-b6a7fdda.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/singletons-8251c4ac.js", "_app/immutable/chunks/index-4375fd2f.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -7634,8 +7648,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-ca35abae.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-ca35abae.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-5a538fc0.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-98cfaec2.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-98cfaec2.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1f2ed741.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets7 = [];
   }
 });
@@ -9756,7 +9770,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-19e37b6e.js", "imports": ["_app/immutable/start-19e37b6e.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-5dc40673.js", "_app/immutable/chunks/index-4375fd2f.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-ed3f57d0.js", "imports": ["_app/immutable/start-ed3f57d0.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-8251c4ac.js", "_app/immutable/chunks/index-4375fd2f.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -217,10 +217,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   do {
     $$settled = true;
     {
-      console.log("$fractionScroll", $fractionScroll);
-    }
-    {
-      {
+      if ($isLoggedIn && !$isXs) {
         hueRocket = $fractionScroll * 10;
         scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
       }
@@ -246,7 +243,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       {}
     )}
 
-<navbar class="${"fixed sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " sm:pr-10 sm:pl-10 sm:backdrop-blur-3xl"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<navbar class="${escape(!mobileOpen && "hidden", true) + " " + escape($scrollY > 0 && "sm:backdrop-blur-3xl", true) + " fixed sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
  
@@ -332,7 +329,7 @@ ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
 
 
 
-<div class="${escape(extendedShowCondition && "opacity-100", true) + " " + escape(extendedHideCondition && "opacity-0", true)}">${validate_component(Navbar, "Navbar").$$render(
+<div class="${escape(extendedShowCondition && "opacity-100 ", true) + " " + escape(extendedHideCondition && "opacity-0  ", true) + " duration-300"}">${validate_component(Navbar, "Navbar").$$render(
       $$result,
       { mobileHamburgerClosed },
       {
@@ -344,7 +341,7 @@ ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
       {}
     )}</div>
 
-<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " w-full"}">${slots.default ? slots.default({}) : ``}</div>	
+<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true)}">${slots.default ? slots.default({}) : ``}</div>	
 
 
 

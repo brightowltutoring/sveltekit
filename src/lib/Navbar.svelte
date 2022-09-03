@@ -44,23 +44,20 @@
         $routes.home.isCurrent=true;
     }
 
-// import { onMount } from 'svelte'
 
-// let navvy;
-// $: console.log(navvy);
-
-// onMount(()=>{
-//     navvy=document.getElementById("navvy").offsetTop
-// })
-
-// TODO: what is navvy?
+//  this is similar to removing/adding css classes... while still being able to use tailwind
+// TODO: doesnt look as good on chrome
+let navTranslateY = ""
+$:{
+    if($scrollY==0 || ($instDeltaY<0) ) navTranslateY = ""
+    if($instDeltaY>60) navTranslateY = "translate-y-[-200px]"
+}
 </script>
 
 <Hamburger {hamburgerBtn} bind:mobileOpen bind:unique />
 
 {#key unique }
-
-<navbar class="{!mobileOpen && "hidden"} {$scrollY>0 && "sm:backdrop-blur-3xl"} fixed sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10  " >
+<logo-and-nav class=" fixed {navTranslateY} transition-transform duration-500 sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"} {$scrollY>0 && "sm:backdrop-blur-3xl"}" >
 
 
     {#key resetLogoClick }
@@ -73,12 +70,12 @@
     </div>
     {/key}
 
- 
+
     <nav class="sm:px-4"
         in:fly={{y:-75,duration:1500, easing: elasticOut}}
         out:fly={{y:-50,duration:250, easing: quintOut}} 
         on:click={_=>{ hamburgerBtn=false }}    
-     >
+    >
 
         <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center " 
         style:color={$isXs?"black":logoTextColor} 
@@ -87,7 +84,7 @@
                     <li class="py-3 sm:p-1" 
                         style={ (KEY =='login' && $isLoggedIn) && 
                         `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)` }
-                     >
+                    >
                     <!-- this conditional style eliminate code duplcation as in the alternate solution below
                     (below this each block -->
                         <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} />
@@ -109,8 +106,10 @@
 
     </nav>
 
-</navbar>
+</logo-and-nav>
 {/key}
+
+
 
 
 
