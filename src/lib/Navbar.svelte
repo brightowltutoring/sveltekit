@@ -50,7 +50,7 @@
 let navTranslateY = ""
 $:{
     if($scrollY==0 || ($instDeltaY<0) ) navTranslateY = ""
-    if($instDeltaY>60) navTranslateY = "translate-y-[-200px]"
+    if($instDeltaY>60) navTranslateY = "translate-y-[-200px] brightness-[99%]"
 }
 </script>
 

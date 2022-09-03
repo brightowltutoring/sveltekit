@@ -76,8 +76,8 @@ const routes = writable({
 export {
   isXs as a,
   instDeltaY as b,
-  scrollYMax as c,
-  innerWidth as d,
+  innerWidth as c,
+  scrollYMax as d,
   inTransition as e,
   fractionScroll as f,
   isLoggedIn as i,

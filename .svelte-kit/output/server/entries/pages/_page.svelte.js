@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, d as escape } from "../../chunks/index.js";
-import { w as windowInnerHeight, c as scrollYMax, e as inTransition, r as routes } from "../../chunks/store.js";
+import { w as windowInnerHeight, d as scrollYMax, e as inTransition, r as routes } from "../../chunks/store.js";
 import "../../chunks/index2.js";
 const PageTransitions = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_windowInnerHeight;

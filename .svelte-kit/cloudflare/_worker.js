@@ -7141,16 +7141,18 @@ var init_layout_svelte = __esm({
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let logoTextColor;
+      let $instDeltaY, $$unsubscribe_instDeltaY;
+      let $scrollY, $$unsubscribe_scrollY;
       let $routes, $$unsubscribe_routes;
       let $fractionScroll, $$unsubscribe_fractionScroll;
       let $isLoggedIn, $$unsubscribe_isLoggedIn;
-      let $scrollY, $$unsubscribe_scrollY;
       let $isXs, $$unsubscribe_isXs;
       let $scaleRocket, $$unsubscribe_scaleRocket;
+      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
+      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
       $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
-      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
       let scaleRocket = spring(2, { stiffness: 0.1, damping: 0.25 });
       $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
@@ -7159,6 +7161,7 @@ var init_layout_svelte = __esm({
       let mobileOpen;
       let unique;
       let hamburgerBtn;
+      let navTranslateY = "";
       if ($$props.mobileHamburgerClosed === void 0 && $$bindings.mobileHamburgerClosed && mobileHamburgerClosed !== void 0)
         $$bindings.mobileHamburgerClosed(mobileHamburgerClosed);
       let $$settled;
@@ -7176,6 +7179,14 @@ var init_layout_svelte = __esm({
           $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
         }
         logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
+        {
+          {
+            if ($scrollY == 0 || $instDeltaY < 0)
+              navTranslateY = "";
+            if ($instDeltaY > 60)
+              navTranslateY = "translate-y-[-200px]";
+          }
+        }
         $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
           $$result,
           { hamburgerBtn, mobileOpen, unique },
@@ -7192,10 +7203,10 @@ var init_layout_svelte = __esm({
           {}
         )}
 
-<navbar class="${escape(!mobileOpen && "hidden", true) + " " + escape($scrollY > 0 && "sm:backdrop-blur-3xl", true) + " fixed sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<logo-and-nav class="${"fixed " + escape(navTranslateY, true) + " transition-transform duration-500 sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true) + " " + escape($scrollY > 0 && "sm:backdrop-blur-3xl", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
- 
+
     <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(Object.keys($routes), (KEY) => {
           return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>
                         ${validate_component(Navitem, "Navitem").$$render(
@@ -7228,49 +7239,29 @@ var init_layout_svelte = __esm({
                     </li>`;
         })}
         
-            </ul></nav></navbar>`;
+            </ul></nav></logo-and-nav>`;
       } while (!$$settled);
+      $$unsubscribe_instDeltaY();
+      $$unsubscribe_scrollY();
       $$unsubscribe_routes();
       $$unsubscribe_fractionScroll();
       $$unsubscribe_isLoggedIn();
-      $$unsubscribe_scrollY();
       $$unsubscribe_isXs();
       $$unsubscribe_scaleRocket();
       return $$rendered;
     });
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let atMinScroll;
-      let extendedShowCondition;
-      let extendedHideCondition;
-      let $instDeltaY, $$unsubscribe_instDeltaY;
-      let $$unsubscribe_scrollYMax;
-      let $scrollY, $$unsubscribe_scrollY;
+      let $$unsubscribe_scrollY;
       let $$unsubscribe_innerWidth;
       let $$unsubscribe_windowInnerHeight;
-      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
-      $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
-      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+      $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
       $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
       $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
       let mobileHamburgerClosed = true;
-      const hideCondition = (delta) => delta > 60;
-      const showCondition = (delta) => delta < -10;
-      let snapShotDeltaY;
       let $$settled;
       let $$rendered;
       do {
         $$settled = true;
-        atMinScroll = $scrollY == 0;
-        {
-          {
-            if (hideCondition($instDeltaY))
-              snapShotDeltaY = $instDeltaY;
-            if (showCondition($instDeltaY))
-              snapShotDeltaY = $instDeltaY;
-          }
-        }
-        extendedShowCondition = showCondition(snapShotDeltaY) || atMinScroll;
-        extendedHideCondition = hideCondition(snapShotDeltaY);
         $$rendered = `
 ${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
 ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
@@ -7278,7 +7269,7 @@ ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
 
 
 
-<div class="${escape(extendedShowCondition && "opacity-100 ", true) + " " + escape(extendedHideCondition && "opacity-0  ", true) + " duration-300"}">${validate_component(Navbar, "Navbar").$$render(
+${validate_component(Navbar, "Navbar").$$render(
           $$result,
           { mobileHamburgerClosed },
           {
@@ -7288,33 +7279,10 @@ ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
             }
           },
           {}
-        )}</div>
+        )}
 
-<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true)}">${slots.default ? slots.default({}) : ``}</div>	
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-`;
+<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true)}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
-      $$unsubscribe_instDeltaY();
-      $$unsubscribe_scrollYMax();
       $$unsubscribe_scrollY();
       $$unsubscribe_innerWidth();
       $$unsubscribe_windowInnerHeight();
@@ -7339,9 +7307,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-f5a45809.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-f5a45809.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-b913c903.js", "_app/immutable/chunks/singletons-8251c4ac.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/store-1f2ed741.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/navigation-b6a7fdda.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-a4890b3e.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-d0f09488.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-d0f09488.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-2527be63.js", "_app/immutable/chunks/singletons-a0d57d8f.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/store-1eba54d6.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/navigation-c8bfa025.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-5b321d01.css"];
   }
 });
 
@@ -7385,8 +7353,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-a5243b14.js";
-    imports2 = ["_app/immutable/components/error.svelte-a5243b14.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-b913c903.js", "_app/immutable/chunks/singletons-8251c4ac.js", "_app/immutable/chunks/index-4375fd2f.js"];
+    file2 = "_app/immutable/components/error.svelte-9c2e2cc8.js";
+    imports2 = ["_app/immutable/components/error.svelte-9c2e2cc8.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-2527be63.js", "_app/immutable/chunks/singletons-a0d57d8f.js", "_app/immutable/chunks/index-4375fd2f.js"];
     stylesheets2 = [];
   }
 });
@@ -7485,8 +7453,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file4 = "_app/immutable/components/pages/_page.svelte-7da46ded.js";
-    imports4 = ["_app/immutable/components/pages/_page.svelte-7da46ded.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1f2ed741.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
+    file4 = "_app/immutable/components/pages/_page.svelte-4591f13d.js";
+    imports4 = ["_app/immutable/components/pages/_page.svelte-4591f13d.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1eba54d6.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets4 = [];
   }
 });
@@ -7532,8 +7500,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file5 = "_app/immutable/components/pages/etc/_page.svelte-32ced349.js";
-    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-32ced349.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1f2ed741.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
+    file5 = "_app/immutable/components/pages/etc/_page.svelte-f693959a.js";
+    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-f693959a.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1eba54d6.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets5 = [];
   }
 });
@@ -7604,8 +7572,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_nolayout_svelte(), page_nolayout_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-14246e27.js";
-    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-14246e27.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-b6a7fdda.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/singletons-8251c4ac.js", "_app/immutable/chunks/index-4375fd2f.js"];
+    file6 = "_app/immutable/components/pages/login/_page@nolayout.svelte-5ae08b22.js";
+    imports6 = ["_app/immutable/components/pages/login/_page@nolayout.svelte-5ae08b22.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-c8bfa025.js", "_app/immutable/chunks/index-76e8331f.js", "_app/immutable/chunks/singletons-a0d57d8f.js", "_app/immutable/chunks/index-4375fd2f.js"];
     stylesheets6 = ["_app/immutable/assets/+page@nolayout-9f5d0419.css"];
   }
 });
@@ -7648,8 +7616,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-98cfaec2.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-98cfaec2.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1f2ed741.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-b1783e92.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-b1783e92.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/store-1eba54d6.js", "_app/immutable/chunks/index-4375fd2f.js", "_app/immutable/chunks/index-76e8331f.js"];
     stylesheets7 = [];
   }
 });
@@ -9770,7 +9738,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-ed3f57d0.js", "imports": ["_app/immutable/start-ed3f57d0.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-8251c4ac.js", "_app/immutable/chunks/index-4375fd2f.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-275470db.js", "imports": ["_app/immutable/start-275470db.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-a0d57d8f.js", "_app/immutable/chunks/index-4375fd2f.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
