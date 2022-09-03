@@ -12,7 +12,7 @@
 </script>
 
 
-<div in:$inTransition on:resize= {setScrollYMax}>
+<div in:$inTransition on:resize={setScrollYMax}>
     <slot/>
 </div>
 

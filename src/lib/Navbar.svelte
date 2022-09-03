@@ -1,14 +1,20 @@
 <script>
-    import { fly, scale, /* fade, blur, crossfade */ } from 'svelte/transition'
+    import { fly, scale /* fade, blur, crossfade */ } from 'svelte/transition'
     import { quintOut, elasticOut } from 'svelte/easing';
     import Navitem from './Navitem.svelte'
     import Hamburger from './Hamburger.svelte';
     import { goto } from '$app/navigation'
-    import { fractionScroll, isXs, isLoggedIn, routes,scrollY, scrollYMax } from '$lib/store.js'
-
+    import { isXs, isLoggedIn, routes, scrollY, instDeltaY, fractionScroll, scrollYMax 
+    } from '$lib/store.js'
     import { spring } from 'svelte/motion';
-    let scaleRocket = spring(3, { stiffness: 0.1, damping: 0.25})
-    $:  $isLoggedIn ? scaleRocket.set(1 + 0.3*Math.sin($scrollY)) : null
+
+    let scaleRocket = spring(2, { stiffness: 0.1, damping: 0.25})
+    let hueRocket=0;
+
+    $: if( $isLoggedIn && !$isXs ){
+        hueRocket = $fractionScroll*10;
+        scaleRocket.set(1 + 0.5*Math.sin($scrollY))
+        }
     // "Equivaent" code below .. for illustration how I did it before
     // $: {
     //     if($scrollY == 0){ scaleRocket.set(1)}
@@ -22,16 +28,11 @@
     $: $isLoggedIn ? $routes.login.name = '🚀': $routes.login.name = 'Login'
     $: logoTextColor=`hsl(359,100%,${100*$fractionScroll}%)`
 
-    // TODO: for pulsing rocket .. moduleScroll is {#key} for scale transition below
-    let delayedScroll
-    setInterval(()=>{ delayedScroll = $scrollY },1000)
-
 
 
     let unique;
     let hamburgerBtn; //for css version of hamburger button only
 
-    let logo
     let resetLogoClick
     function clickLogo(){
         goto('/')
@@ -42,15 +43,26 @@
         })
         $routes.home.isCurrent=true;
     }
+
+// import { onMount } from 'svelte'
+
+// let navvy;
+// $: console.log(navvy);
+
+// onMount(()=>{
+//     navvy=document.getElementById("navvy").offsetTop
+// })
+
+// TODO: what is navvy?
 </script>
-
-
 
 <Hamburger {hamburgerBtn} bind:mobileOpen bind:unique />
 
 {#key unique }
-<navbar class="flex justify-between items-center w-1/2 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex {!mobileOpen && "hidden"} backdrop-blur-3xl sm:py-5 sm:pr-10 sm:pl-10  ">
-    <!-- -->
+
+<navbar class="{!mobileOpen && "hidden"} {$scrollY>0 && "sm:backdrop-blur-3xl"} fixed sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10  " >
+
+
     {#key resetLogoClick }
     <div class="translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20
     sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110  transition-transform selection:bg-transparent" 
@@ -74,7 +86,7 @@
             {#each Object.keys($routes) as KEY }
                     <li class="py-3 sm:p-1" 
                         style={ (KEY =='login' && $isLoggedIn) && 
-                        `transform:scale(${$scaleRocket}); filter:hue-rotate(${($scrollY/$scrollYMax)*10}turn)` }
+                        `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)` }
                      >
                     <!-- this conditional style eliminate code duplcation as in the alternate solution below
                     (below this each block -->

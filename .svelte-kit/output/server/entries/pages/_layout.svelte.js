@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, e as each, d as escape, f as add_attribute, g as now, l as loop, h as set_store_value, v as validate_component, j as add_styles } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
-import { r as routes, i as isLoggedIn, a as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, b as scrollYMax, c as instDeltaY, d as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
+import { r as routes, i as isLoggedIn, a as isXs, l as lastScrollY, s as scrollY, f as fractionScroll, b as instDeltaY, c as scrollYMax, d as innerWidth, w as windowInnerHeight } from "../../chunks/store.js";
 import "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
@@ -193,27 +193,21 @@ function spring(value, opts = {}) {
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let logoTextColor;
   let $routes, $$unsubscribe_routes;
-  let $scrollY, $$unsubscribe_scrollY;
   let $fractionScroll, $$unsubscribe_fractionScroll;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
+  let $scrollY, $$unsubscribe_scrollY;
   let $isXs, $$unsubscribe_isXs;
   let $scaleRocket, $$unsubscribe_scaleRocket;
-  let $scrollYMax, $$unsubscribe_scrollYMax;
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
-  $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
+  $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
-  $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => $scrollYMax = value);
-  let scaleRocket = spring(3, { stiffness: 0.1, damping: 0.25 });
+  let scaleRocket = spring(2, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
+  let hueRocket = 0;
   let { mobileHamburgerClosed } = $$props;
   let mobileOpen;
-  setInterval(
-    () => {
-    },
-    1e3
-  );
   let unique;
   let hamburgerBtn;
   if ($$props.mobileHamburgerClosed === void 0 && $$bindings.mobileHamburgerClosed && mobileHamburgerClosed !== void 0)
@@ -223,7 +217,13 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   do {
     $$settled = true;
     {
-      scaleRocket.set(1 + 0.3 * Math.sin($scrollY));
+      console.log("$fractionScroll", $fractionScroll);
+    }
+    {
+      {
+        hueRocket = $fractionScroll * 10;
+        scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
+      }
     }
     mobileHamburgerClosed = mobileOpen;
     {
@@ -246,13 +246,12 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       {}
     )}
 
-<navbar class="${"flex justify-between items-center w-1/2 sm:w-full fixed right-10 top-32 sm:right-0 sm:top-0 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " backdrop-blur-3xl sm:py-5 sm:pr-10 sm:pl-10"}">
-    <div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<navbar class="${"fixed sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex " + escape(!mobileOpen && "hidden", true) + " sm:pr-10 sm:pl-10 sm:backdrop-blur-3xl"}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
  
     <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center "}"${add_styles({ "color": $isXs ? "black" : logoTextColor })}>${each(Object.keys($routes), (KEY) => {
-      return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${$scrollY / $scrollYMax * 10}turn)`, 0)}>
+      return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>
                         ${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -286,12 +285,11 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
             </ul></nav></navbar>`;
   } while (!$$settled);
   $$unsubscribe_routes();
-  $$unsubscribe_scrollY();
   $$unsubscribe_fractionScroll();
   $$unsubscribe_isLoggedIn();
+  $$unsubscribe_scrollY();
   $$unsubscribe_isXs();
   $$unsubscribe_scaleRocket();
-  $$unsubscribe_scrollYMax();
   return $$rendered;
 });
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -309,7 +307,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
   let mobileHamburgerClosed = true;
-  const hideCondition = (delta) => delta > 10;
+  const hideCondition = (delta) => delta > 60;
   const showCondition = (delta) => delta < -10;
   let snapShotDeltaY;
   let $$settled;
@@ -334,9 +332,6 @@ ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
 
 
 
-
-
-
 <div class="${escape(extendedShowCondition && "opacity-100", true) + " " + escape(extendedHideCondition && "opacity-0", true)}">${validate_component(Navbar, "Navbar").$$render(
       $$result,
       { mobileHamburgerClosed },
@@ -349,10 +344,28 @@ ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
       {}
     )}</div>
 
+<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " w-full"}">${slots.default ? slots.default({}) : ``}</div>	
 
 
 
-<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true)}">${slots.default ? slots.default({}) : ``}</div>`;
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+`;
   } while (!$$settled);
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollYMax();

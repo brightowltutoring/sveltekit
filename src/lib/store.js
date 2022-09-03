@@ -2,20 +2,16 @@ import { writable, derived } from 'svelte/store';
 import { quintOut, elasticOut } from 'svelte/easing'
 // import { slide, fade, scale, fly, blur } from 'svelte/transition';
 
+// export function moduloScale(node, {easing = elasticOut, duration = 1000}) {
 
-// to animate the loggedin logo ..but this is overkill
-// css:   transform: scale(${0.75*t});
-// filter: hue-rotate(${u}turn) 
-export function moduloScale(node, {easing = elasticOut, duration = 1000}) {
-
-  return {  
-    easing,
-    duration,
-    css: (t,u) => 
-    ` filter: hue-rotate(${10*u}turn) blur(${t*4}px);
-    `
-  }
-}
+//   return {  
+//     easing,
+//     duration,
+//     css: (t,u) => 
+//     ` filter: hue-rotate(${10*u}turn) blur(${t*4}px);
+//     `
+//   }
+// }
 
 
 export function customEase(t){
@@ -75,7 +71,7 @@ export const scrollY = writable(0)
 // This is equivalent to "setTimeout(()=>{ $startScrollY = $scrollY },200)" 
 // if placed inside +layout.svelte .. under an onscroll event attached to the window 
 export const startScrollY = derived(scrollY,($scrollY, set)=>{ 
-  setTimeout(()=>{ set($scrollY) },60)
+  setTimeout(()=>{ set($scrollY) },50)
 })
 
 
@@ -90,7 +86,6 @@ export const scrollYMax = writable(0)
 export const fractionScroll = derived([scrollY,scrollYMax],([$scrollY,$scrollYMax]) => {
  return 1-($scrollY/$scrollYMax)
 })
-
 
 export const windowInnerHeight = writable(0) 
 export const innerWidth = writable(0) 

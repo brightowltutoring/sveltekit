@@ -15,7 +15,7 @@
 	$: atMinScroll = ( $scrollY == 0 )
 	$: atMaxScroll = ( $scrollY == $scrollYMax )
 
-	const hideCondition = delta => delta > 10  
+	const hideCondition = delta => delta > 60  
 	const showCondition = delta =>  delta < -10
 	
 	let snapShotDeltaY 
@@ -28,15 +28,35 @@
 	// $: extendedShowCondition = showCondition(snapShotDeltaY) || atMinScroll || atMaxScroll
 	$: extendedHideCondition = hideCondition(snapShotDeltaY) 
     
+
 </script>
+
+<!-- <Navbar bind:mobileHamburgerClosed /> -->
+<div class="{ extendedShowCondition && "opacity-100 " } { extendedHideCondition && "opacity-0  "} duration-300 ">
+	<Navbar bind:mobileHamburgerClosed />
+</div>
+
+<div class="sm:block {mobileHamburgerClosed && "hidden"} " >
+	<slot/>
+</div>	
+
+
+
 
 
 
 
 <!-- <div class="block { showCondition(snapShotDeltaY) && "block"} { hideCondition(snapShotDeltaY) && "hidden"} "> -->
-<div class="{ extendedShowCondition && "opacity-100" } { extendedHideCondition && "opacity-0"} ">
-	<Navbar bind:mobileHamburgerClosed />
-</div>
+
+
+	
+
+
+
+
+
+
+
 
 <!-- TODO: this logic is somehow janky -->
 <!-- {#if extendedShowCondition}
@@ -49,9 +69,7 @@
 	</div>
 {/if} -->
 
-<div class="sm:block {mobileHamburgerClosed && "hidden"}" >
-	<slot  />
-</div>	
+
 
 
 

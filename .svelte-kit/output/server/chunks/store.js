@@ -31,7 +31,7 @@ const fractionScroll = derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) 
 const windowInnerHeight = writable(0);
 const innerWidth = writable(0);
 const isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-const inTransition = derived(isXs, ($isXs) => $isXs ? customFade : () => {
+derived(isXs, ($isXs) => $isXs ? customFade : () => {
 });
 derived(isXs, ($isXs) => $isXs ? customFade : () => {
 });
@@ -75,10 +75,9 @@ const routes = writable({
 });
 export {
   isXs as a,
-  scrollYMax as b,
-  instDeltaY as c,
+  instDeltaY as b,
+  scrollYMax as c,
   innerWidth as d,
-  inTransition as e,
   fractionScroll as f,
   isLoggedIn as i,
   lastScrollY as l,
