@@ -32,7 +32,7 @@
 
         if (routes.login.isCurrent){
             window.document.body.classList.remove('dark-mode');
-            $isDarkMode=!$isDarkMode
+            $isDarkMode=false
         }
      
     }

@@ -67,6 +67,7 @@ const routes = writable({
     isCurrent: false
   }
 });
+const isDarkMode = writable(false);
 const PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
@@ -86,8 +87,10 @@ const IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) =
   return ``;
 });
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$unsubscribe_isDarkMode;
   let $$unsubscribe_isXs;
   let $page, $$unsubscribe_page;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   let { href, content, bool, mobileOpen, btnColor, btnColorHover, routes: routes2 } = $$props;
@@ -111,6 +114,7 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       routes2[key].isCurrent = condition;
     }
   }
+  $$unsubscribe_isDarkMode();
   $$unsubscribe_isXs();
   $$unsubscribe_page();
   return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
@@ -247,7 +251,13 @@ function spring(value, opts = {}) {
   return spring2;
 }
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<button>${`\u263E`}</button>`;
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  {
+    console.log("$isDarkMode", $isDarkMode);
+  }
+  $$unsubscribe_isDarkMode();
+  return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
 });
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let logoTextColor;
@@ -318,7 +328,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-700 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-screen sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-700 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
 
