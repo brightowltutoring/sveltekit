@@ -1,5 +1,6 @@
 <script>
-    import { scrollY, lastScrollY } from '$lib/store.js'
+    import { scrollY, lastScrollY, isXs } from '$lib/store.js'
+    import LightDarkMode from './LightDarkMode.svelte';
  
     // export let hamburgerBtn
     export let mobileOpen
@@ -29,6 +30,7 @@
 <main>
     <!-- version: tailwind + svelte style (css) + js variables (~20 lines code)-->
     <hamburger-container class="sm:hidden fixed top-6 right-6 text-4xl z-10" >
+       
         <hamburger style="width: {hamburgerWidth}px; height:{hamburgerHeight}px" class="relative flex flex-col justify-between" on:click={ clickOnBurger }>
             
             <div style="height:{hamburgerPattyHeight}px; {mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`}
@@ -38,6 +40,8 @@
 
             <div style="height:{hamburgerPattyHeight}px; {mobileOpen && `transform: translateY(-${translY}px) rotate(${angle}deg)`} " class=" {hamburgerColor} transition duration-300 rounded "></div>
         </hamburger>
+
+       
             
     </hamburger-container> 
 

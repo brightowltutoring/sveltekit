@@ -7195,7 +7195,7 @@ var init_layout_svelte = __esm({
         )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-700 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
 
@@ -7307,9 +7307,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-e2ebf061.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-e2ebf061.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-c4d58d8f.js", "_app/immutable/chunks/singletons-a933cce7.js", "_app/immutable/chunks/navigation-ff65c587.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-6b96e1e4.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-bff91923.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-bff91923.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-206873be.js", "_app/immutable/chunks/singletons-34dfe63b.js", "_app/immutable/chunks/navigation-adbaf003.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-9389b72f.css"];
   }
 });
 
@@ -7353,8 +7353,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-83114749.js";
-    imports2 = ["_app/immutable/components/error.svelte-83114749.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-c4d58d8f.js", "_app/immutable/chunks/singletons-a933cce7.js"];
+    file2 = "_app/immutable/components/error.svelte-9e6cefff.js";
+    imports2 = ["_app/immutable/components/error.svelte-9e6cefff.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-206873be.js", "_app/immutable/chunks/singletons-34dfe63b.js"];
     stylesheets2 = [];
   }
 });
@@ -7531,8 +7531,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-3386a860.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-3386a860.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-ff65c587.js", "_app/immutable/chunks/singletons-a933cce7.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-e15ffcf9.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-e15ffcf9.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-adbaf003.js", "_app/immutable/chunks/singletons-34dfe63b.js"];
     stylesheets6 = ["_app/immutable/assets/+page-3f96d491.css"];
   }
 });
@@ -9688,7 +9688,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-af6c5ebc.js", "imports": ["_app/immutable/start-af6c5ebc.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-a933cce7.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-764456af.js", "imports": ["_app/immutable/start-764456af.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-34dfe63b.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

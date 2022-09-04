@@ -61,7 +61,7 @@
 <!-- TODO: blur causing darked navbar when transitionining on chrome. Still need to find a way to blur the text -->
 <!-- backdrop-blur-3xl -->
 {#key unique }
-<logo-and-nav class="{jankytown} backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " >
+<logo-and-nav class="{jankytown} sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " >
 
 
     {#key resetLogoClick }
@@ -82,7 +82,12 @@
     >
 
         <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg sm:items-center text-center" 
-         >
+         >  
+            {#if $isXs && mobileOpen }
+            <li class="pb-4">
+                <LightDarkMode/>
+            </li>
+            {/if}
             
             {#each Object.keys($routes) as KEY }
             <li class="py-3 sm:p-1" 
@@ -93,9 +98,12 @@
                 <!-- <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} /> -->
             </li>
             {/each}
+
+            {#if !$isXs }
             <li class="px-3 ">
                 <LightDarkMode/>
             </li>
+            {/if}
         
         </ul>    
 
