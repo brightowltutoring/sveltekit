@@ -10,5 +10,13 @@
 /* desktop: only works on chrome/brave */
 body {
     overscroll-behavior-y: none;
+    
+    background-color: #f7f7f7;
+		color: #1d3040;
+		transition: background-color 0.3s
+}
 
+body.dark-mode {
+  background-color: #1d3040;
+  color: #f7f7f7;
 }

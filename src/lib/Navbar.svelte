@@ -45,21 +45,28 @@
     }
 
 
-//  this is similar to removing/adding css classes... while still being able to use tailwind
-// TODO: doesnt look as good on chrome
-let navTranslateY = ""
-$:{
-    if($scrollY==0 || ($instDeltaY<0) ) navTranslateY = ""
-    if($instDeltaY>60) navTranslateY = "translate-y-[-200px]"
-}
+    let jankytown='';
+    $:{
+        if($scrollY<30)  jankytown = "sm:sticky sm:top-0"
+        if($scrollY>30 && $instDeltaY>0)  jankytown = "sm:sticky sm:-top-20"
+        if($scrollY>30 && $instDeltaY<0)  jankytown = "sm:sticky sm:top-0"
+    }
+    // $instDeltaY>0 essentially means "currently scrolling down" as $instDeltaY relaxes to 0 shortly.
+    // $instDeltaY == 0, jankytown is not updated.
+
+    let btnColor = 'sm:bg-red-300 '
+    let btnColorHover = 'sm:hover:bg-red-300'
+
+    import LightDarkMode from '$lib/LightDarkMode.svelte'
 </script>
 
-<Hamburger {hamburgerBtn} bind:mobileOpen bind:unique />
 
-<!-- {$scrollY>0 && "sm:backdrop-blur-3xl"} -->
+
+<Hamburger {hamburgerBtn} bind:mobileOpen bind:unique />
 <!-- TODO: blur causing darked navbar when transitionining on chrome. Still need to find a way to blur the text -->
+
 {#key unique }
-<logo-and-nav class="backdrop-blur-3xl fixed {navTranslateY} transition-all duration-500 sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"} " >
+<logo-and-nav class="{jankytown} backdrop-blur-3xl transition-all duration-700 sm:right-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"} " >
 
 
     {#key resetLogoClick }
@@ -79,31 +86,24 @@ $:{
         on:click={_=>{ hamburgerBtn=false }}    
     >
 
-        <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center " 
-        style:color={$isXs?"black":logoTextColor} 
-        >
+        <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center" 
+         >
+            
             {#each Object.keys($routes) as KEY }
-                    <li class="py-3 sm:p-1" 
-                        style={ (KEY =='login' && $isLoggedIn) && 
-                        `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)` }
-                    >
-                    <!-- this conditional style eliminate code duplcation as in the alternate solution below
-                    (below this each block -->
-                        <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} />
-                    </li>
+            <li class="py-3 sm:p-1" 
+                style={ (KEY =='login' && $isLoggedIn) && 
+                `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)` }
+            >
+            
+
+                <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} bind:btnColor={btnColor} bind:btnColorHover={btnColorHover} />
+                <!-- <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} /> -->
+            </li>
             {/each}
+            <li class="px-5">
+                <LightDarkMode/>
+            </li>
         
-            <!-- {#each Object.keys($routes) as KEY }
-                {#if KEY=='login' && $isLoggedIn }
-                    <li class="py-3 sm:p-1" style="transform:scale({$scaleRocket})">
-                        <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} />
-                    </li>
-                {:else }
-                    <li class="py-3 sm:p-1">
-                        <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} />
-                    </li>
-                {/if}
-            {/each} -->
         </ul>    
 
     </nav>

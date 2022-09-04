@@ -213,27 +213,29 @@
 
 <main>
 
-    
-    <video autoplay loop muted playsinline controlslist="nodownload" 
-        src="/login-bg-video-blurred.mp4" 
-        style="
-        min-height: 100vh;
-        max-height: 100vh;
-        min-width: 100vw;
-        max-width: 100vw;
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        margin: 0;
-        padding: 0;
-        filter: blur(10px);
-        "
-    ></video>
+
+
+        <video autoplay loop muted playsinline controlslist="nodownload" 
+            src="/login-bg-video-blurred.mp4" 
+            style="
+            min-height: 100vh;
+            max-height: 100vh;
+            min-width: 100vw;
+            max-width: 100vw;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            filter: blur(10px);
+            "
+        ></video>
+
 
     
    
-    <div class="loginLogoutDivs" id="logInDiv" style="display: block; ">
+    <div class="loginLogoutDivs " id="logInDiv" style="display: block; ">
         
         <br>
         <br>
@@ -274,6 +276,8 @@
 
 <style>
     /* animate plane emoji */
+
+
     #flyingEmoji {
         /* height:10vh;
         width:10vw; */

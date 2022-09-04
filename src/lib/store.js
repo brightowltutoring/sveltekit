@@ -106,7 +106,7 @@ export const routes = writable({
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
     bgColor:`bg-[rgba(89,208,174,1)]`,
-    // bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+    bodyBgColor:"white"
   }, 
   etc: {
     name:'Etc',
@@ -116,6 +116,7 @@ export const routes = writable({
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
     bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+    bodyBgColor:'#59d0ae'
   }, 
   plans: {
     name:'Plans',
@@ -125,6 +126,7 @@ export const routes = writable({
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
     bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+    bodyBgColor:'#59d0ae'
   }, 
   login: {
     name:'Login',
@@ -134,6 +136,7 @@ export const routes = writable({
     btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
     btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
     bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
+    bodyBgColor:'white'
   }, 
 })
 
