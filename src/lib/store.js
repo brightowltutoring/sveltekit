@@ -103,40 +103,24 @@ export const routes = writable({
     href: "/",
     title: "Thinksolve.io 💫",
     isCurrent: false,
-    btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
-    btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
-    bgColor:`bg-[rgba(89,208,174,1)]`,
-    bodyBgColor:"white"
   }, 
   etc: {
     name:'Etc',
     href: "/etc",
     title: "Etc",
     isCurrent: false,
-    btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
-    btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
-    bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-    bodyBgColor:'#59d0ae'
   }, 
   plans: {
     name:'Plans',
     href: "/plans",
     title: "Plans",
     isCurrent: false,
-    btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
-    btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
-    bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-    bodyBgColor:'#59d0ae'
   }, 
   login: {
     name:'Login',
     href: "/login",
     title: "Login 🚀",
     isCurrent: false,
-    btnColor : 'sm:bg-[rgba(69,140,117,0.8)]',
-    btnColorHover : 'hover:sm:bg-[rgba(69,140,117,0.5)]',
-    bgColor:`bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-    bodyBgColor:'white'
   }, 
 })
 
