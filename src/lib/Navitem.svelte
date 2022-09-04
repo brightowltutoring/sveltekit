@@ -2,9 +2,11 @@
     import { slide } from 'svelte/transition';
     import { elasticOut } from 'svelte/easing';
     import { page } from '$app/stores'
-    import { isXs } from '$lib/store.js'
+    import { isXs, isDarkMode } from '$lib/store.js'
 
     export let href, content, bool, mobileOpen, btnColor, btnColorHover, routes
+
+    
 
     // this allows going back and button click matching with route
     // could've done this in if/else but the boolean nature here made it unnecessary
@@ -12,7 +14,7 @@
             let condition = (key == $page.routeId) || ($page.routeId.length == 0 && key == 'home')
             routes[key].isCurrent = condition 
         } 
-     
+
     let unique
 
     function clickOnNavLinks(){
@@ -27,6 +29,11 @@
         unique=!unique // to reanimate the non-mobile links
 
         $isXs && (mobileOpen =!mobileOpen )
+
+        if (routes.login.isCurrent){
+            window.document.body.classList.remove('dark-mode');
+            $isDarkMode=!$isDarkMode
+        }
      
     }
 </script>

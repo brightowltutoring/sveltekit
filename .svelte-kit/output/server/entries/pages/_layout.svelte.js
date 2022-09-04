@@ -46,41 +46,25 @@ const routes = writable({
     name: "Home",
     href: "/",
     title: "Thinksolve.io \u{1F4AB}",
-    isCurrent: false,
-    btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
-    btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-    bgColor: `bg-[rgba(89,208,174,1)]`,
-    bodyBgColor: "white"
+    isCurrent: false
   },
   etc: {
     name: "Etc",
     href: "/etc",
     title: "Etc",
-    isCurrent: false,
-    btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
-    btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-    bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-    bodyBgColor: "#59d0ae"
+    isCurrent: false
   },
   plans: {
     name: "Plans",
     href: "/plans",
     title: "Plans",
-    isCurrent: false,
-    btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
-    btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-    bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-    bodyBgColor: "#59d0ae"
+    isCurrent: false
   },
   login: {
     name: "Login",
     href: "/login",
     title: "Login \u{1F680}",
-    isCurrent: false,
-    btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
-    btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-    bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-    bodyBgColor: "white"
+    isCurrent: false
   }
 });
 const PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -122,19 +106,14 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.routes === void 0 && $$bindings.routes && routes2 !== void 0)
     $$bindings.routes(routes2);
   {
-    {
-      for (let key in routes2) {
-        if ($page.routeId == key || $page.routeId.length == 0 && key == "home") {
-          routes2[key].isCurrent = true;
-        } else
-          routes2[key].isCurrent = false;
-      }
+    for (let key in routes2) {
+      let condition = key == $page.routeId || $page.routeId.length == 0 && key == "home";
+      routes2[key].isCurrent = condition;
     }
   }
   $$unsubscribe_isXs();
   $$unsubscribe_page();
-  return `
-<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
+  return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
 });
 const hamburgerWidth = 35;
 const hamburgerPattyHeight = 2;
@@ -268,9 +247,7 @@ function spring(value, opts = {}) {
   return spring2;
 }
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<button>${`\u263E`}</button>
-
-`;
+  return `<button>${`\u263E`}</button>`;
 });
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let logoTextColor;
@@ -316,11 +293,11 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
     {
       {
-        if ($scrollY < 30)
+        if ($scrollY < 250)
           jankytown = "sm:sticky sm:top-0";
-        if ($scrollY > 30 && $instDeltaY > 0)
+        if ($scrollY > 250 && $instDeltaY > 0)
           jankytown = "sm:sticky sm:-top-20";
-        if ($scrollY > 30 && $instDeltaY < 0)
+        if ($scrollY > 250 && $instDeltaY < 0)
           jankytown = "sm:sticky sm:top-0";
       }
     }
@@ -341,11 +318,12 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-700 sm:right-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-700 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-screen sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
 
-    <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center"}">${each(Object.keys($routes), (KEY) => {
+    
+    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:items-center text-center"}">${each(Object.keys($routes), (KEY) => {
       return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -384,7 +362,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
                 
             </li>`;
     })}
-            <li class="${"px-5"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul></nav></logo-and-nav>`;
+            <li class="${"px-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul></nav></logo-and-nav>`;
   } while (!$$settled);
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();

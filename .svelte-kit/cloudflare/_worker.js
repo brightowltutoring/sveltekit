@@ -7010,41 +7010,25 @@ var init_layout_svelte = __esm({
         name: "Home",
         href: "/",
         title: "Thinksolve.io \u{1F4AB}",
-        isCurrent: false,
-        btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
-        btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-        bgColor: `bg-[rgba(89,208,174,1)]`,
-        bodyBgColor: "white"
+        isCurrent: false
       },
       etc: {
         name: "Etc",
         href: "/etc",
         title: "Etc",
-        isCurrent: false,
-        btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
-        btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-        bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-        bodyBgColor: "#59d0ae"
+        isCurrent: false
       },
       plans: {
         name: "Plans",
         href: "/plans",
         title: "Plans",
-        isCurrent: false,
-        btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
-        btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-        bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-        bodyBgColor: "#59d0ae"
+        isCurrent: false
       },
       login: {
         name: "Login",
         href: "/login",
         title: "Login \u{1F680}",
-        isCurrent: false,
-        btnColor: "sm:bg-[rgba(69,140,117,0.8)]",
-        btnColorHover: "hover:sm:bg-[rgba(69,140,117,0.5)]",
-        bgColor: `bg-gradient-to-t from-[#f7f7f8] to-[rgba(89,208,174,1)]`,
-        bodyBgColor: "white"
+        isCurrent: false
       }
     });
     PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -7086,19 +7070,14 @@ var init_layout_svelte = __esm({
       if ($$props.routes === void 0 && $$bindings.routes && routes2 !== void 0)
         $$bindings.routes(routes2);
       {
-        {
-          for (let key2 in routes2) {
-            if ($page.routeId == key2 || $page.routeId.length == 0 && key2 == "home") {
-              routes2[key2].isCurrent = true;
-            } else
-              routes2[key2].isCurrent = false;
-          }
+        for (let key2 in routes2) {
+          let condition = key2 == $page.routeId || $page.routeId.length == 0 && key2 == "home";
+          routes2[key2].isCurrent = condition;
         }
       }
       $$unsubscribe_isXs();
       $$unsubscribe_page();
-      return `
-<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
+      return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
     });
     hamburgerWidth = 35;
     hamburgerPattyHeight = 2;
@@ -7135,9 +7114,7 @@ var init_layout_svelte = __esm({
         </main>`;
     });
     LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<button>${`\u263E`}</button>
-
-`;
+      return `<button>${`\u263E`}</button>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let logoTextColor;
@@ -7183,11 +7160,11 @@ var init_layout_svelte = __esm({
         logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
         {
           {
-            if ($scrollY < 30)
+            if ($scrollY < 250)
               jankytown = "sm:sticky sm:top-0";
-            if ($scrollY > 30 && $instDeltaY > 0)
+            if ($scrollY > 250 && $instDeltaY > 0)
               jankytown = "sm:sticky sm:-top-20";
-            if ($scrollY > 30 && $instDeltaY < 0)
+            if ($scrollY > 250 && $instDeltaY < 0)
               jankytown = "sm:sticky sm:top-0";
           }
         }
@@ -7208,11 +7185,12 @@ var init_layout_svelte = __esm({
         )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-700 sm:right-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-700 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-screen sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
 
-    <nav class="${"sm:px-4"}"><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:h-[60px] sm:items-center"}">${each(Object.keys($routes), (KEY) => {
+    
+    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:items-center text-center"}">${each(Object.keys($routes), (KEY) => {
           return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
             $$result,
             {
@@ -7251,7 +7229,7 @@ var init_layout_svelte = __esm({
                 
             </li>`;
         })}
-            <li class="${"px-5"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul></nav></logo-and-nav>`;
+            <li class="${"px-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul></nav></logo-and-nav>`;
       } while (!$$settled);
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
@@ -7319,9 +7297,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-05631a52.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-05631a52.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-4ff7b407.js", "_app/immutable/chunks/singletons-f9c93e0a.js", "_app/immutable/chunks/navigation-85d72ede.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-46550ed8.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-8ef4ae8f.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-8ef4ae8f.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-b497ad29.js", "_app/immutable/chunks/singletons-ed5601e5.js", "_app/immutable/chunks/navigation-09a1b249.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-8a4bb6e2.css"];
   }
 });
 
@@ -7365,8 +7343,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-5e2313b9.js";
-    imports2 = ["_app/immutable/components/error.svelte-5e2313b9.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-4ff7b407.js", "_app/immutable/chunks/singletons-f9c93e0a.js"];
+    file2 = "_app/immutable/components/error.svelte-e685c229.js";
+    imports2 = ["_app/immutable/components/error.svelte-e685c229.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-b497ad29.js", "_app/immutable/chunks/singletons-ed5601e5.js"];
     stylesheets2 = [];
   }
 });
@@ -7543,8 +7521,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-75fd1008.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-75fd1008.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-85d72ede.js", "_app/immutable/chunks/singletons-f9c93e0a.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-12151a2d.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-12151a2d.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-09a1b249.js", "_app/immutable/chunks/singletons-ed5601e5.js"];
     stylesheets6 = ["_app/immutable/assets/+page-3f96d491.css"];
   }
 });
@@ -9700,7 +9678,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-66b7f607.js", "imports": ["_app/immutable/start-66b7f607.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-f9c93e0a.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-44a301bb.js", "imports": ["_app/immutable/start-44a301bb.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-ed5601e5.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

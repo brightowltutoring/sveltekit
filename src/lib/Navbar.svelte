@@ -61,7 +61,7 @@
 <!-- TODO: blur causing darked navbar when transitionining on chrome. Still need to find a way to blur the text -->
 
 {#key unique }
-<logo-and-nav class="{jankytown} backdrop-blur-3xl transition-all duration-700 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-screen sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " >
+<logo-and-nav class="{jankytown} backdrop-blur-3xl transition-all duration-700 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " >
 
 
     {#key resetLogoClick }

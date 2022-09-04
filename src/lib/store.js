@@ -125,12 +125,4 @@ export const routes = writable({
 })
 
 
-// Since I am checking "Object.keys($routes)" quite a bit in my code, I might as well 
-// create a dedicated array for it rather than recreate it every time I use it.
-
-  // export const routesKeysArray = derived(routes, ($routes) => { 
-  //   return Object.keys($routes) 
-  // }) 
-
-// TODO: ... using a for in loop I can access the keys of routes directly ... Previously I was using forEach or for of
-//  and hence had to grab the keys first
+export const isDarkMode = writable(false)
