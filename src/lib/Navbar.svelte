@@ -50,14 +50,16 @@
 let navTranslateY = ""
 $:{
     if($scrollY==0 || ($instDeltaY<0) ) navTranslateY = ""
-    if($instDeltaY>60) navTranslateY = "translate-y-[-200px] brightness-[99%]"
+    if($instDeltaY>60) navTranslateY = "translate-y-[-200px]"
 }
 </script>
 
 <Hamburger {hamburgerBtn} bind:mobileOpen bind:unique />
 
+<!-- {$scrollY>0 && "sm:backdrop-blur-3xl"} -->
+<!-- TODO: blur causing darked navbar when transitionining on chrome. Still need to find a way to blur the text -->
 {#key unique }
-<logo-and-nav class=" fixed {navTranslateY} transition-transform duration-500 sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"} {$scrollY>0 && "sm:backdrop-blur-3xl"}" >
+<logo-and-nav class="backdrop-blur-3xl fixed {navTranslateY} transition-all duration-500 sm:right-0 sm:top-0 flex justify-between items-center w-1/2 sm:w-full right-10 top-32 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"} " >
 
 
     {#key resetLogoClick }
