@@ -6973,7 +6973,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, routes, isDarkMode, PageTitle, IsLoggedIn, Navitem, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, LightDarkMode, Navbar, Layout;
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, routes, isDarkMode, PageTitle, IsLoggedIn, Navitem, LightDarkMode, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, Navbar, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -7083,6 +7083,15 @@ var init_layout_svelte = __esm({
       $$unsubscribe_page();
       return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
     });
+    LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      {
+        console.log("$isDarkMode", $isDarkMode);
+      }
+      $$unsubscribe_isDarkMode();
+      return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
+    });
     hamburgerWidth = 35;
     hamburgerPattyHeight = 2;
     hamburgerColor = "bg-red-500";
@@ -7116,15 +7125,6 @@ var init_layout_svelte = __esm({
 
     
         </main>`;
-    });
-    LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      {
-        console.log("$isDarkMode", $isDarkMode);
-      }
-      $$unsubscribe_isDarkMode();
-      return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let logoTextColor;
@@ -7195,12 +7195,14 @@ var init_layout_svelte = __esm({
         )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<logo-and-nav class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
     </div>
 
 
     
-    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:items-center text-center"}">${each(Object.keys($routes), (KEY) => {
+    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:items-center text-center"}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
+            
+            ${each(Object.keys($routes), (KEY) => {
           return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
             $$result,
             {
@@ -7239,7 +7241,8 @@ var init_layout_svelte = __esm({
                 
             </li>`;
         })}
-            <li class="${"px-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul></nav></logo-and-nav>`;
+
+            ${!$isXs ? `<li class="${"px-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-nav>`;
       } while (!$$settled);
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
@@ -7307,9 +7310,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-bff91923.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-bff91923.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-206873be.js", "_app/immutable/chunks/singletons-34dfe63b.js", "_app/immutable/chunks/navigation-adbaf003.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-9389b72f.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-f9738caf.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-f9738caf.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-c44db833.js", "_app/immutable/chunks/singletons-4ac5a536.js", "_app/immutable/chunks/navigation-8bd28da6.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-abe1b82d.css"];
   }
 });
 
@@ -7353,8 +7356,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-9e6cefff.js";
-    imports2 = ["_app/immutable/components/error.svelte-9e6cefff.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-206873be.js", "_app/immutable/chunks/singletons-34dfe63b.js"];
+    file2 = "_app/immutable/components/error.svelte-df0b4233.js";
+    imports2 = ["_app/immutable/components/error.svelte-df0b4233.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-c44db833.js", "_app/immutable/chunks/singletons-4ac5a536.js"];
     stylesheets2 = [];
   }
 });
@@ -7531,8 +7534,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-e15ffcf9.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-e15ffcf9.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-adbaf003.js", "_app/immutable/chunks/singletons-34dfe63b.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-756271d5.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-756271d5.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-8bd28da6.js", "_app/immutable/chunks/singletons-4ac5a536.js"];
     stylesheets6 = ["_app/immutable/assets/+page-3f96d491.css"];
   }
 });
@@ -9688,7 +9691,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-764456af.js", "imports": ["_app/immutable/start-764456af.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-34dfe63b.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-fa77000f.js", "imports": ["_app/immutable/start-fa77000f.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-4ac5a536.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

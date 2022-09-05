@@ -20,3 +20,7 @@ body.dark-mode {
   background-color: #1d3040;
   color: #f7f7f7;
 }
+
+body.noScroll{
+  overflow-y: hidden;
+}

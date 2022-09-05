@@ -1,4 +1,6 @@
-<svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}/>
+<svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}
+on:resize={setScrollYMax} on:popstate={ clearTimeout($redirectAfterLoginTimeOut) } />
+
 <IsLoggedIn/>
 <PageTitle/>
 
@@ -7,11 +9,18 @@
 	import PageTitle from '$lib/PageTitle.svelte'
 	import IsLoggedIn from '$lib/IsLoggedIn.svelte'
 	import Navbar from '$lib/Navbar.svelte'
+	import { onMount } from 'svelte'
+	import { innerWidth, scrollY, windowInnerHeight, scrollYMax, redirectAfterLoginTimeOut
+		// instDeltaY, routes
+	} from '$lib/store.js' 	
+
+	onMount( setScrollYMax )
+	function setScrollYMax(){
+		$scrollYMax = document.body.scrollHeight - $windowInnerHeight;
+	}
 	
-	import {innerWidth, scrollY, instDeltaY, windowInnerHeight, routes} from '$lib/store.js' 	
 	let mobileHamburgerClosed = true
 </script>
-
 
 <Navbar bind:mobileHamburgerClosed />
 

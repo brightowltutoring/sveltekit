@@ -1,5 +1,5 @@
     <script>
-
+        import { redirectAfterLoginTimeOut } from '$lib/store.js'
         import { onMount } from 'svelte'
         import { scale } from 'svelte/transition'
         import { elasticOut } from 'svelte/easing'
@@ -10,6 +10,7 @@
             sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, 
         } from "firebase/auth"
 
+        // import { page } from '$app/stores'
 
         let emailFieldValue='';
         let emptyEmailKey=false
@@ -142,7 +143,7 @@
                     console.log("FAILED firebase signOut function");
                 })
         }
-    
+        
         async function loginToRedirectUrl(userEmail) {
 
             const colRef = collection(db, "email");
@@ -167,13 +168,11 @@
                         }
                     }, 1000);
 
-
-                    let myTimeout = setTimeout( ()=>{ 
-                        // window.location.replace( userRedirectUrl  )
-                        goto(userRedirectUrl)
-                    }, timeInMS );
-
-                    // redirect after login
+                        // make this a global variable so I can cancel it elsewhere .. i.e. on route changes
+                        $redirectAfterLoginTimeOut = setTimeout( ()=>{ 
+                            goto(userRedirectUrl)
+                        }, timeInMS );
+    
 
                 }
             
@@ -211,15 +210,12 @@
     
 </script>
 
-<main>
-
-
-
+<main >
         <video autoplay loop muted playsinline controlslist="nodownload" 
             src="/login-bg-video-blurred.mp4" 
             style="
-            min-height: 100vh;
-            max-height: 100vh;
+            min-height: 90vh;
+            max-height: 90vh;
             min-width: 100vw;
             max-width: 100vw;
             position: absolute;
@@ -276,7 +272,6 @@
 
 <style>
     /* animate plane emoji */
-
 
     #flyingEmoji {
         /* height:10vh;
@@ -407,6 +402,7 @@
         justify-content: center; 
         align-items: center;
     }
+
 </style>
 
 

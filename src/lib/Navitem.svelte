@@ -2,11 +2,10 @@
     import { slide } from 'svelte/transition';
     import { elasticOut } from 'svelte/easing';
     import { page } from '$app/stores'
-    import { isXs, isDarkMode } from '$lib/store.js'
+    import { isXs, isDarkMode, redirectAfterLoginTimeOut } from '$lib/store.js'
+    import { goto } from '$app/navigation'
 
     export let href, content, bool, mobileOpen, btnColor, btnColorHover, routes
-
-    
 
     // this allows going back and button click matching with route
     // could've done this in if/else but the boolean nature here made it unnecessary
@@ -36,18 +35,24 @@
         }
      
     }
+
 </script>
 
 
+<!-- href={href} -->
 {#key unique }   
-<a  in:slide={{ duration:800, easing: elasticOut }} 
-    href={href}
-    on:click={ clickOnNavLinks }
+<button  
+    in:slide={{ duration:800, easing: elasticOut }} 
+    on:click|preventDefault={ ()=>{
+        clickOnNavLinks();
+        clearTimeout($redirectAfterLoginTimeOut)
+        goto(href);
+    }}
     class = "{ bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent { `${btnColorHover}`}  sm:hover:rounded sm:hover:py-1  sm:hover:px-3 duration-300"
     
     
     > {content}
-</a>
+</button>
 {/key}
 
 

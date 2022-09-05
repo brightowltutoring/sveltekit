@@ -1,28 +1,25 @@
 <script>
-    import { fly, scale /* fade, blur, crossfade */ } from 'svelte/transition'
+    import { fly, scale,
+        // fade, blur, slide 
+    } from 'svelte/transition'
     import { quintOut, elasticOut } from 'svelte/easing';
     import Navitem from './Navitem.svelte'
     import Hamburger from './Hamburger.svelte';
     import { goto } from '$app/navigation'
-    import { isXs, isLoggedIn, routes, scrollY, instDeltaY, fractionScroll, scrollYMax 
-    } from '$lib/store.js'
+    import { isXs, isLoggedIn, routes, scrollY, instDeltaY, isDarkMode, fractionScroll } from '$lib/store.js'
     import { spring } from 'svelte/motion';
 
-    let scaleRocket = spring(2, { stiffness: 0.1, damping: 0.25})
-    let hueRocket=0;
+    let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25})
+    let hueRocket = 0;
 
-    // !isXs not crucial ... but just doesnt execute code while mobile
-    $: if( $isLoggedIn && !$isXs ){
-        hueRocket = $fractionScroll*10;
-        scaleRocket.set(1 + 0.5*Math.sin($scrollY))
-    }
-
+    $: if( $isLoggedIn ) { hueRocket = $isDarkMode ? 0.75 : 0 }
+    $: if( $isLoggedIn && !$isXs ) { scaleRocket.set( 1 + 0.5*Math.sin($scrollY) ) }
 
     export let mobileHamburgerClosed
     let mobileOpen;
     $: mobileHamburgerClosed = mobileOpen  
     $: $isLoggedIn ? $routes.login.name = '🚀': $routes.login.name = 'Login'
-    $: logoTextColor=`hsl(359,100%,${100*$fractionScroll}%)`
+    // $: logoTextColor=`color:hsl(359,100%,${100*$fractionScroll}%)`
 
 
     let unique;
@@ -32,10 +29,9 @@
     function clickLogo(){
         goto('/')
         resetLogoClick=!resetLogoClick
+
+        for(key in $routes) { $routes[key].isCurrent=false }
  
-        Object.keys($routes).forEach(key=>{
-            $routes[key].isCurrent=false;
-        })
         $routes.home.isCurrent=true;
     }
 
@@ -61,13 +57,15 @@
 <!-- TODO: blur causing darked navbar when transitionining on chrome. Still need to find a way to blur the text -->
 <!-- backdrop-blur-3xl -->
 {#key unique }
-<logo-and-nav class="{jankytown} sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " >
+<logo-and-nav class="{jankytown} sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " 
 
+    >
+    
 
+    <!-- style="{logoTextColor}" -->
     {#key resetLogoClick }
     <div class=" translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20
     sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent" 
-        style:color={logoTextColor}
         in:scale={{duration:1200, easing:elasticOut}} 
         on:mouseup={ clickLogo } >
             THINKSOLVE
@@ -81,7 +79,7 @@
          out:fly={{y:-50,duration:250, easing: quintOut}} 
     >
 
-        <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg sm:items-center text-center" 
+        <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg items-center " 
          >  
             {#if $isXs && mobileOpen }
             <li class="pb-4">

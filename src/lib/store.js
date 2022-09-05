@@ -126,3 +126,6 @@ export const routes = writable({
 
 
 export const isDarkMode = writable(false)
+
+export const redirectAfterLoginTimeOut = writable('')
+
