@@ -145,25 +145,17 @@ function add_attribute(name, value, boolean) {
   const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
   return ` ${name}${assignment}`;
 }
-function style_object_to_string(style_object) {
-  return Object.keys(style_object).filter((key) => style_object[key]).map((key) => `${key}: ${style_object[key]};`).join(" ");
-}
-function add_styles(style_object) {
-  const styles = style_object_to_string(style_object);
-  return styles ? ` style="${styles}"` : "";
-}
 export {
   subscribe as a,
   safe_not_equal as b,
   create_ssr_component as c,
   escape as d,
   each as e,
-  add_attribute as f,
-  now as g,
-  set_store_value as h,
+  now as f,
+  set_store_value as g,
+  add_attribute as h,
   is_function as i,
-  add_styles as j,
-  getContext as k,
+  getContext as j,
   loop as l,
   missing_component as m,
   noop as n,

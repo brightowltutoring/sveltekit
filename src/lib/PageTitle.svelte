@@ -8,7 +8,6 @@
 
 <svelte:head>
 	{#each Object.keys($routes) as key }
-	<!-- {#each $routesKeysArray as key } -->
         {#if $page.routeId == "" }
             <title>{ $routes.home.title }  </title>
         {:else if $page.routeId == key }

@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component8) {
-  current_component = component8;
+function set_current_component(component7) {
+  current_component = component7;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component8, name4) {
-  if (!component8 || !component8.$$render) {
+function validate_component(component7, name4) {
+  if (!component7 || !component7.$$render) {
     if (name4 === "svelte:component")
       name4 += " this={...}";
     throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component8;
+  return component7;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -185,13 +185,6 @@ function add_attribute(name4, value, boolean) {
     return "";
   const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
   return ` ${name4}${assignment}`;
-}
-function style_object_to_string(style_object) {
-  return Object.keys(style_object).filter((key2) => style_object[key2]).map((key2) => `${key2}: ${style_object[key2]};`).join(" ");
-}
-function add_styles(style_object) {
-  const styles = style_object_to_string(style_object);
-  return styles ? ` style="${styles}"` : "";
 }
 var is_client, now, raf, tasks, current_component, ATTR_REGEX, CONTENT_REGEX, missing_component, on_destroy;
 var init_chunks = __esm({
@@ -317,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index8 = 0;
-      while (index8 < str.length) {
-        var eqIdx = str.indexOf("=", index8);
+      var index7 = 0;
+      while (index7 < str.length) {
+        var eqIdx = str.indexOf("=", index7);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index8);
+        var endIdx = str.indexOf(";", index7);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index8 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index7 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index8, eqIdx).trim();
+        var key2 = str.slice(index7, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -338,7 +331,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index8 = endIdx + 1;
+        index7 = endIdx + 1;
       }
       return obj;
     }
@@ -1179,8 +1172,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component8) {
-  return component8.instantiationMode === "EAGER";
+function isComponentEager(component7) {
+  return component7.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -1270,18 +1263,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component8) {
-        if (component8.name !== this.name) {
-          throw Error(`Mismatching Component ${component8.name} for Provider ${this.name}.`);
+      setComponent(component7) {
+        if (component7.name !== this.name) {
+          throw Error(`Mismatching Component ${component7.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component8;
+        this.component = component7;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component8)) {
+        if (isComponentEager(component7)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -1401,19 +1394,19 @@ var init_index_esm20172 = __esm({
         this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component8) {
-        const provider = this.getProvider(component8.name);
+      addComponent(component7) {
+        const provider = this.getProvider(component7.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component8.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component7.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component8);
+        provider.setComponent(component7);
       }
-      addOrOverwriteComponent(component8) {
-        const provider = this.getProvider(component8.name);
+      addOrOverwriteComponent(component7) {
+        const provider = this.getProvider(component7.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component8.name);
+          this.providers.delete(component7.name);
         }
-        this.addComponent(component8);
+        this.addComponent(component7);
       }
       getProvider(name4) {
         if (this.providers.has(name4)) {
@@ -1739,25 +1732,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component8 = provider.getComponent();
-  return (component8 === null || component8 === void 0 ? void 0 : component8.type) === "VERSION";
+  const component7 = provider.getComponent();
+  return (component7 === null || component7 === void 0 ? void 0 : component7.type) === "VERSION";
 }
-function _addComponent(app2, component8) {
+function _addComponent(app2, component7) {
   try {
-    app2.container.addComponent(component8);
+    app2.container.addComponent(component7);
   } catch (e3) {
-    logger.debug(`Component ${component8.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component7.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component8) {
-  const componentName = component8.name;
+function _registerComponent(component7) {
+  const componentName = component7.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component8);
+  _components.set(componentName, component7);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component8);
+    _addComponent(app2, component7);
   }
   return true;
 }
@@ -1789,8 +1782,8 @@ function initializeApp(options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name4);
-  for (const component8 of _components.values()) {
-    container.addComponent(component8);
+  for (const component7 of _components.values()) {
+    container.addComponent(component7);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name4, newApp);
@@ -4852,9 +4845,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index8 = this.queue.length - 1;
+        const index7 = this.queue.length - 1;
         return () => {
-          this.queue[index8] = () => Promise.resolve();
+          this.queue[index7] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -6832,12 +6825,77 @@ var init_index_esm3 = __esm({
 });
 
 // .svelte-kit/output/server/chunks/firebase.js
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app;
+function elasticOut(t2) {
+  return Math.sin(-13 * (t2 + 1) * Math.PI / 2) * Math.pow(2, -10 * t2) + 1;
+}
+function customFade(node, { easing = elasticOut, duration = 3e3 }) {
+  return {
+    easing,
+    duration,
+    css: (t2, u) => ` opacity: ${0.8 * u + t2};
+        filter: hue-rotate(${0.15 * u}turn) 
+                blur(${u}px);
+      `
+  };
+}
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, isXs, routes, isDarkMode, redirectAfterLoginTimeOut, FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
+    init_index2();
+    init_chunks();
     init_index_esm();
     init_index_esm2();
     init_index_esm3();
+    isLoggedIn = writable(false);
+    lastScrollY = writable(0);
+    scrollY = writable(0);
+    startScrollY = derived(scrollY, ($scrollY, set) => {
+      setTimeout(() => {
+        set($scrollY);
+      }, 50);
+    });
+    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
+      return $scrollY - $startScrollY;
+    });
+    scrollYMax = writable(0);
+    derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
+      return 1 - $scrollY / $scrollYMax;
+    });
+    windowInnerHeight = writable(0);
+    innerWidth = writable(0);
+    isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
+    derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    });
+    derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    });
+    routes = writable({
+      home: {
+        name: "Home",
+        href: "/",
+        title: "Thinksolve.io \u{1F4AB}",
+        isCurrent: false
+      },
+      etc: {
+        name: "Etc",
+        href: "/etc",
+        title: "Etc",
+        isCurrent: false
+      },
+      plans: {
+        name: "Plans",
+        href: "/plans",
+        title: "Plans",
+        isCurrent: false
+      },
+      login: {
+        name: "Login",
+        href: "/login",
+        title: "Login \u{1F680}",
+        isCurrent: false
+      }
+    });
+    isDarkMode = writable(false);
+    redirectAfterLoginTimeOut = writable("");
     FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
     FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
     FIREBASE_projectId = "thinksolve-app";
@@ -6863,19 +6921,6 @@ var layout_svelte_exports = {};
 __export(layout_svelte_exports, {
   default: () => Layout
 });
-function elasticOut(t2) {
-  return Math.sin(-13 * (t2 + 1) * Math.PI / 2) * Math.pow(2, -10 * t2) + 1;
-}
-function customFade(node, { easing = elasticOut, duration = 3e3 }) {
-  return {
-    easing,
-    duration,
-    css: (t2, u) => ` opacity: ${0.8 * u + t2};
-        filter: hue-rotate(${0.15 * u}turn) 
-                blur(${u}px);
-      `
-  };
-}
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
 }
@@ -6973,65 +7018,16 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, fractionScroll, windowInnerHeight, innerWidth, isXs, routes, isDarkMode, PageTitle, IsLoggedIn, Navitem, LightDarkMode, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, Navbar, Layout;
+var PageTitle, IsLoggedIn, Navitem, LightDarkMode, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, Navbar, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
     init_stores();
-    init_index2();
     init_firebase();
     init_index_esm3();
+    init_index2();
     init_index_esm();
     init_index_esm2();
-    isLoggedIn = writable(false);
-    lastScrollY = writable(0);
-    scrollY = writable(0);
-    startScrollY = derived(scrollY, ($scrollY, set) => {
-      setTimeout(() => {
-        set($scrollY);
-      }, 50);
-    });
-    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
-      return $scrollY - $startScrollY;
-    });
-    scrollYMax = writable(0);
-    fractionScroll = derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
-      return 1 - $scrollY / $scrollYMax;
-    });
-    windowInnerHeight = writable(0);
-    innerWidth = writable(0);
-    isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-    derived(isXs, ($isXs) => $isXs ? customFade : () => {
-    });
-    derived(isXs, ($isXs) => $isXs ? customFade : () => {
-    });
-    routes = writable({
-      home: {
-        name: "Home",
-        href: "/",
-        title: "Thinksolve.io \u{1F4AB}",
-        isCurrent: false
-      },
-      etc: {
-        name: "Etc",
-        href: "/etc",
-        title: "Etc",
-        isCurrent: false
-      },
-      plans: {
-        name: "Plans",
-        href: "/plans",
-        title: "Plans",
-        isCurrent: false
-      },
-      login: {
-        name: "Login",
-        href: "/login",
-        title: "Login \u{1F680}",
-        isCurrent: false
-      }
-    });
-    isDarkMode = writable(false);
     PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $routes, $$unsubscribe_routes;
       let $page, $$unsubscribe_page;
@@ -7054,9 +7050,11 @@ var init_layout_svelte = __esm({
       let $$unsubscribe_isDarkMode;
       let $$unsubscribe_isXs;
       let $page, $$unsubscribe_page;
+      let $$unsubscribe_redirectAfterLoginTimeOut;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
       $$unsubscribe_isXs = subscribe(isXs, (value) => value);
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       let { href, content, bool, mobileOpen, btnColor, btnColorHover, routes: routes2 } = $$props;
       if ($$props.href === void 0 && $$bindings.href && href !== void 0)
         $$bindings.href(href);
@@ -7081,7 +7079,9 @@ var init_layout_svelte = __esm({
       $$unsubscribe_isDarkMode();
       $$unsubscribe_isXs();
       $$unsubscribe_page();
-      return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
+      $$unsubscribe_redirectAfterLoginTimeOut();
+      return `
+<button class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</button>`;
     });
     LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -7127,21 +7127,20 @@ var init_layout_svelte = __esm({
         </main>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let logoTextColor;
       let $instDeltaY, $$unsubscribe_instDeltaY;
       let $scrollY, $$unsubscribe_scrollY;
       let $routes, $$unsubscribe_routes;
-      let $fractionScroll, $$unsubscribe_fractionScroll;
       let $isLoggedIn, $$unsubscribe_isLoggedIn;
       let $isXs, $$unsubscribe_isXs;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
       let $scaleRocket, $$unsubscribe_scaleRocket;
       $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
-      $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
       $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
-      let scaleRocket = spring(2, { stiffness: 0.1, damping: 0.25 });
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
       $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
       let hueRocket = 0;
       let { mobileHamburgerClosed } = $$props;
@@ -7158,8 +7157,12 @@ var init_layout_svelte = __esm({
       do {
         $$settled = true;
         {
+          if ($isLoggedIn) {
+            hueRocket = $isDarkMode ? 0.75 : 0;
+          }
+        }
+        {
           if ($isLoggedIn && !$isXs) {
-            hueRocket = $fractionScroll * 10;
             scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
           }
         }
@@ -7167,7 +7170,6 @@ var init_layout_svelte = __esm({
         {
           $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
         }
-        logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
         {
           {
             if ($scrollY < 250)
@@ -7195,12 +7197,13 @@ var init_layout_svelte = __esm({
         )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<logo-and-nav class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}">
+    <div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
 
     
-    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:items-center text-center"}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
+    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center "}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
             
             ${each(Object.keys($routes), (KEY) => {
           return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
@@ -7247,28 +7250,32 @@ var init_layout_svelte = __esm({
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
       $$unsubscribe_routes();
-      $$unsubscribe_fractionScroll();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_isXs();
+      $$unsubscribe_isDarkMode();
       $$unsubscribe_scaleRocket();
       return $$rendered;
     });
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_windowInnerHeight;
+      let $$unsubscribe_scrollYMax;
       let $$unsubscribe_scrollY;
       let $$unsubscribe_innerWidth;
-      let $$unsubscribe_windowInnerHeight;
+      let $$unsubscribe_redirectAfterLoginTimeOut;
+      $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+      $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
       $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
-      $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+      $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       let mobileHamburgerClosed = true;
       let $$settled;
       let $$rendered;
       do {
         $$settled = true;
         $$rendered = `
+
 ${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
 ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
-
 
 
 
@@ -7286,9 +7293,11 @@ ${validate_component(Navbar, "Navbar").$$render(
 
 <div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " h-[400vh]"}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
+      $$unsubscribe_windowInnerHeight();
+      $$unsubscribe_scrollYMax();
       $$unsubscribe_scrollY();
       $$unsubscribe_innerWidth();
-      $$unsubscribe_windowInnerHeight();
+      $$unsubscribe_redirectAfterLoginTimeOut();
       return $$rendered;
     });
   }
@@ -7310,9 +7319,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-f9738caf.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-f9738caf.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-c44db833.js", "_app/immutable/chunks/singletons-4ac5a536.js", "_app/immutable/chunks/navigation-8bd28da6.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-abe1b82d.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-456cf386.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-456cf386.js", "_app/immutable/chunks/index-a7bed9d3.js", "_app/immutable/chunks/stores-da71be7c.js", "_app/immutable/chunks/singletons-53142d77.js", "_app/immutable/chunks/navigation-a93162b3.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-0c0f533d.css"];
   }
 });
 
@@ -7356,44 +7365,9 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-df0b4233.js";
-    imports2 = ["_app/immutable/components/error.svelte-df0b4233.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/stores-c44db833.js", "_app/immutable/chunks/singletons-4ac5a536.js"];
+    file2 = "_app/immutable/components/error.svelte-5b7d4577.js";
+    imports2 = ["_app/immutable/components/error.svelte-5b7d4577.js", "_app/immutable/chunks/index-a7bed9d3.js", "_app/immutable/chunks/stores-da71be7c.js", "_app/immutable/chunks/singletons-53142d77.js"];
     stylesheets2 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_layout-nolayout.svelte.js
-var layout_nolayout_svelte_exports = {};
-__export(layout_nolayout_svelte_exports, {
-  default: () => Layout_nolayout
-});
-var Layout_nolayout;
-var init_layout_nolayout_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_layout-nolayout.svelte.js"() {
-    init_chunks();
-    Layout_nolayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${slots.default ? slots.default({}) : ``}`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/2.js
-var __exports3 = {};
-__export(__exports3, {
-  component: () => component3,
-  file: () => file3,
-  imports: () => imports3,
-  index: () => index3,
-  stylesheets: () => stylesheets3
-});
-var index3, component3, file3, imports3, stylesheets3;
-var init__3 = __esm({
-  ".svelte-kit/output/server/nodes/2.js"() {
-    index3 = 2;
-    component3 = async () => (await Promise.resolve().then(() => (init_layout_nolayout_svelte(), layout_nolayout_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_layout-nolayout.svelte-e637f9f8.js";
-    imports3 = ["_app/immutable/components/pages/_layout-nolayout.svelte-e637f9f8.js", "_app/immutable/chunks/index-1f1b8166.js"];
-    stylesheets3 = [];
   }
 });
 
@@ -7412,23 +7386,23 @@ var init_page_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/3.js
-var __exports4 = {};
-__export(__exports4, {
-  component: () => component4,
-  file: () => file4,
-  imports: () => imports4,
-  index: () => index4,
-  stylesheets: () => stylesheets4
+// .svelte-kit/output/server/nodes/2.js
+var __exports3 = {};
+__export(__exports3, {
+  component: () => component3,
+  file: () => file3,
+  imports: () => imports3,
+  index: () => index3,
+  stylesheets: () => stylesheets3
 });
-var index4, component4, file4, imports4, stylesheets4;
-var init__4 = __esm({
-  ".svelte-kit/output/server/nodes/3.js"() {
-    index4 = 3;
-    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file4 = "_app/immutable/components/pages/_page.svelte-77b95170.js";
-    imports4 = ["_app/immutable/components/pages/_page.svelte-77b95170.js", "_app/immutable/chunks/index-1f1b8166.js"];
-    stylesheets4 = [];
+var index3, component3, file3, imports3, stylesheets3;
+var init__3 = __esm({
+  ".svelte-kit/output/server/nodes/2.js"() {
+    index3 = 2;
+    component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
+    file3 = "_app/immutable/components/pages/_page.svelte-dcddd171.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-dcddd171.js", "_app/immutable/chunks/index-a7bed9d3.js"];
+    stylesheets3 = [];
   }
 });
 
@@ -7447,23 +7421,23 @@ var init_page_svelte2 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/4.js
-var __exports5 = {};
-__export(__exports5, {
-  component: () => component5,
-  file: () => file5,
-  imports: () => imports5,
-  index: () => index5,
-  stylesheets: () => stylesheets5
+// .svelte-kit/output/server/nodes/3.js
+var __exports4 = {};
+__export(__exports4, {
+  component: () => component4,
+  file: () => file4,
+  imports: () => imports4,
+  index: () => index4,
+  stylesheets: () => stylesheets4
 });
-var index5, component5, file5, imports5, stylesheets5;
-var init__5 = __esm({
-  ".svelte-kit/output/server/nodes/4.js"() {
-    index5 = 4;
-    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file5 = "_app/immutable/components/pages/etc/_page.svelte-f68a7cc7.js";
-    imports5 = ["_app/immutable/components/pages/etc/_page.svelte-f68a7cc7.js", "_app/immutable/chunks/index-1f1b8166.js"];
-    stylesheets5 = [];
+var index4, component4, file4, imports4, stylesheets4;
+var init__4 = __esm({
+  ".svelte-kit/output/server/nodes/3.js"() {
+    index4 = 3;
+    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
+    file4 = "_app/immutable/components/pages/etc/_page.svelte-a1b912c3.js";
+    imports4 = ["_app/immutable/components/pages/etc/_page.svelte-a1b912c3.js", "_app/immutable/chunks/index-a7bed9d3.js"];
+    stylesheets4 = [];
   }
 });
 
@@ -7479,64 +7453,68 @@ var init_page_svelte3 = __esm({
     init_firebase();
     init_index_esm2();
     init_index_esm3();
+    init_index2();
     init_index_esm();
     css = {
-      code: "#flyingEmoji.svelte-174ivch.svelte-174ivch{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-174ivch-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1) ;animation:svelte-174ivch-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1) }#flyingEmoji.svelte-174ivch.svelte-174ivch::after{content:'\u{1F6F8}';display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-174ivch-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-174ivch-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-174ivch-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-174ivch-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-174ivch-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-174ivch-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-174ivch-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-174ivch-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-174ivch.svelte-174ivch{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-174ivch.svelte-174ivch{margin:0px auto;margin-top:50px;width:25vw;min-width:280px;padding:20px;font-family:'Nunito', sans-serif;font-weight:400}.loginLogoutDivs.svelte-174ivch input.svelte-174ivch,button.svelte-174ivch.svelte-174ivch{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:'Nunito', sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-174ivch input.svelte-174ivch{background:#fff;border:1px solid #ccc}#googleBtn.svelte-174ivch.svelte-174ivch{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-174ivch.svelte-174ivch:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-174ivch button.svelte-174ivch{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-174ivch input.svelte-174ivch:hover{border:1px solid #999}.loginLogoutDivs.svelte-174ivch button.svelte-174ivch:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-174ivch input.svelte-174ivch:focus{background:rgba(255, 255, 255, 0.5) }.centering.svelte-174ivch.svelte-174ivch{display:flex;justify-content:center;align-items:center}",
+      code: "#flyingEmoji.svelte-m7g9u3.svelte-m7g9u3{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-m7g9u3-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1) ;animation:svelte-m7g9u3-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1) }#flyingEmoji.svelte-m7g9u3.svelte-m7g9u3::after{content:'\u{1F6F8}';display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-m7g9u3-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-m7g9u3-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-m7g9u3-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-m7g9u3-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-m7g9u3-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-m7g9u3-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-m7g9u3-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-m7g9u3-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-m7g9u3.svelte-m7g9u3{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-m7g9u3.svelte-m7g9u3{margin:0px auto;margin-top:50px;width:25vw;min-width:280px;padding:20px;font-family:'Nunito', sans-serif;font-weight:400}.loginLogoutDivs.svelte-m7g9u3 input.svelte-m7g9u3,button.svelte-m7g9u3.svelte-m7g9u3{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:'Nunito', sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-m7g9u3 input.svelte-m7g9u3{background:#fff;border:1px solid #ccc}#googleBtn.svelte-m7g9u3.svelte-m7g9u3{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-m7g9u3.svelte-m7g9u3:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-m7g9u3 button.svelte-m7g9u3{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-m7g9u3 input.svelte-m7g9u3:hover{border:1px solid #999}.loginLogoutDivs.svelte-m7g9u3 button.svelte-m7g9u3:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-m7g9u3 input.svelte-m7g9u3:focus{background:rgba(255, 255, 255, 0.5) }.centering.svelte-m7g9u3.svelte-m7g9u3{display:flex;justify-content:center;align-items:center}",
       map: null
     };
     Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_redirectAfterLoginTimeOut;
+      $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       let emailFieldValue = "";
       $$result.css.add(css);
-      return `<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 100vh; max-height: 100vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(10px); "}"></video>
+      $$unsubscribe_redirectAfterLoginTimeOut();
+      return `<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 90vh; max-height: 90vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(10px); "}"></video>
 
 
     
    
-    <div class="${"loginLogoutDivs  svelte-174ivch"}" id="${"logInDiv"}" style="${"display: block; "}"><br>
+    <div class="${"loginLogoutDivs  svelte-m7g9u3"}" id="${"logInDiv"}" style="${"display: block; "}"><br>
         <br>
         
-            <button id="${"googleBtn"}" class="${"svelte-174ivch"}">Sign-in with Google</button>
+            <button id="${"googleBtn"}" class="${"svelte-m7g9u3"}">Sign-in with Google</button>
         <br>
         <br>
 
 
-        <button id="${"passwordlessLoginBtn"}" class="${"svelte-174ivch"}">Sign-in via link</button>
+        <button id="${"passwordlessLoginBtn"}" class="${"svelte-m7g9u3"}">Sign-in via link</button>
         
-        <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-174ivch"}"${add_attribute("value", emailFieldValue, 0)}>
+        <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-m7g9u3"}"${add_attribute("value", emailFieldValue, 0)}>
 
 
-        <span id="${"emailStatusMessage"}" class="${"centering  svelte-174ivch"}" style="${"display:none"}"></span>
-        <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-174ivch"}"></span></div>
+        <span id="${"emailStatusMessage"}" class="${"centering  svelte-m7g9u3"}" style="${"display:none"}"></span>
+        <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-m7g9u3"}"></span></div>
 
 
-    <div class="${"loginLogoutDivs svelte-174ivch"}" id="${"logOutDiv"}" style="${"display: none"}"><h2 class="${"centering svelte-174ivch"}" id="${"loginWelcomeText"}">Welcome User </h2>
-        <h3 class="${"centering svelte-174ivch"}">Redirecting to your page in </h3>
-        <h3 class="${"centering svelte-174ivch"}" style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</h3>
+    <div class="${"loginLogoutDivs svelte-m7g9u3"}" id="${"logOutDiv"}" style="${"display: none"}"><h2 class="${"centering svelte-m7g9u3"}" id="${"loginWelcomeText"}">Welcome User </h2>
+        <h3 class="${"centering svelte-m7g9u3"}">Redirecting to your page in </h3>
+        <h3 class="${"centering svelte-m7g9u3"}" style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</h3>
 
-        <button id="${"logoutBtn"}" class="${"svelte-174ivch"}">Logout</button></div>
+        <button id="${"logoutBtn"}" class="${"svelte-m7g9u3"}">Logout</button></div>
 
 </main>`;
     });
   }
 });
 
-// .svelte-kit/output/server/nodes/5.js
-var __exports6 = {};
-__export(__exports6, {
-  component: () => component6,
-  file: () => file6,
-  imports: () => imports6,
-  index: () => index6,
-  stylesheets: () => stylesheets6
+// .svelte-kit/output/server/nodes/4.js
+var __exports5 = {};
+__export(__exports5, {
+  component: () => component5,
+  file: () => file5,
+  imports: () => imports5,
+  index: () => index5,
+  stylesheets: () => stylesheets5
 });
-var index6, component6, file6, imports6, stylesheets6;
-var init__6 = __esm({
-  ".svelte-kit/output/server/nodes/5.js"() {
-    index6 = 5;
-    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-756271d5.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-756271d5.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/navigation-8bd28da6.js", "_app/immutable/chunks/singletons-4ac5a536.js"];
-    stylesheets6 = ["_app/immutable/assets/+page-3f96d491.css"];
+var index5, component5, file5, imports5, stylesheets5;
+var init__5 = __esm({
+  ".svelte-kit/output/server/nodes/4.js"() {
+    index5 = 4;
+    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
+    file5 = "_app/immutable/components/pages/login/_page.svelte-9634786f.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-9634786f.js", "_app/immutable/chunks/index-a7bed9d3.js", "_app/immutable/chunks/navigation-a93162b3.js", "_app/immutable/chunks/singletons-53142d77.js"];
+    stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
 
@@ -7555,23 +7533,23 @@ var init_page_svelte4 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/6.js
-var __exports7 = {};
-__export(__exports7, {
-  component: () => component7,
-  file: () => file7,
-  imports: () => imports7,
-  index: () => index7,
-  stylesheets: () => stylesheets7
+// .svelte-kit/output/server/nodes/5.js
+var __exports6 = {};
+__export(__exports6, {
+  component: () => component6,
+  file: () => file6,
+  imports: () => imports6,
+  index: () => index6,
+  stylesheets: () => stylesheets6
 });
-var index7, component7, file7, imports7, stylesheets7;
-var init__7 = __esm({
-  ".svelte-kit/output/server/nodes/6.js"() {
-    index7 = 6;
-    component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-147ae8cb.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-147ae8cb.js", "_app/immutable/chunks/index-1f1b8166.js"];
-    stylesheets7 = [];
+var index6, component6, file6, imports6, stylesheets6;
+var init__6 = __esm({
+  ".svelte-kit/output/server/nodes/5.js"() {
+    index6 = 5;
+    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
+    file6 = "_app/immutable/components/pages/plans/_page.svelte-892fa2d9.js";
+    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-892fa2d9.js", "_app/immutable/chunks/index-a7bed9d3.js"];
+    stylesheets6 = [];
   }
 });
 
@@ -8412,7 +8390,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets8 = new Set(entry.stylesheets);
+  const stylesheets7 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -8462,7 +8440,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets8.add(url));
+        node.stylesheets.forEach((url) => stylesheets7.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -8525,7 +8503,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets8) {
+  for (const dep of stylesheets7) {
     const path = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -8781,14 +8759,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file8 = is_asset ? filename : filename_html;
+      const file7 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file8), {
+        response = new Response(options.read(file7), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file8}`, opts);
+        response = await fetch(`${event.url.origin}/${file7}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -9149,8 +9127,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index8 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index8]();
+              const index7 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index7]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -9691,15 +9669,14 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-fa77000f.js", "imports": ["_app/immutable/start-fa77000f.js", "_app/immutable/chunks/index-1f1b8166.js", "_app/immutable/chunks/singletons-4ac5a536.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-dc5bb636.js", "imports": ["_app/immutable/start-dc5bb636.js", "_app/immutable/chunks/index-a7bed9d3.js", "_app/immutable/chunks/singletons-53142d77.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
       () => Promise.resolve().then(() => (init__3(), __exports3)),
       () => Promise.resolve().then(() => (init__4(), __exports4)),
       () => Promise.resolve().then(() => (init__5(), __exports5)),
-      () => Promise.resolve().then(() => (init__6(), __exports6)),
-      () => Promise.resolve().then(() => (init__7(), __exports7))
+      () => Promise.resolve().then(() => (init__6(), __exports6))
     ],
     routes: [
       {
@@ -9710,7 +9687,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 3
+        leaf: 2
       },
       {
         type: "page",
@@ -9720,7 +9697,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 4
+        leaf: 3
       },
       {
         type: "page",
@@ -9730,7 +9707,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 5
+        leaf: 4
       },
       {
         type: "page",
@@ -9740,7 +9717,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 6
+        leaf: 5
       }
     ],
     matchers: async () => {
@@ -9803,12 +9780,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file8 = pathname.substring(1);
+      let file7 = pathname.substring(1);
       try {
-        file8 = decodeURIComponent(file8);
+        file7 = decodeURIComponent(file7);
       } catch (err) {
       }
-      if (manifest.assets.has(file8) || manifest.assets.has(file8 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file7) || manifest.assets.has(file7 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

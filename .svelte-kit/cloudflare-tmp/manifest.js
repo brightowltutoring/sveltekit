@@ -3,15 +3,14 @@ export const manifest = {
 	assets: new Set([".DS_Store","login-bg-video-blurred.mp4"]),
 	mimeTypes: {".mp4":"video/mp4"},
 	_: {
-		entry: {"file":"_app/immutable/start-fa77000f.js","imports":["_app/immutable/start-fa77000f.js","_app/immutable/chunks/index-1f1b8166.js","_app/immutable/chunks/singletons-4ac5a536.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-dc5bb636.js","imports":["_app/immutable/start-dc5bb636.js","_app/immutable/chunks/index-a7bed9d3.js","_app/immutable/chunks/singletons-53142d77.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),
 			() => import('../output/server/nodes/2.js'),
 			() => import('../output/server/nodes/3.js'),
 			() => import('../output/server/nodes/4.js'),
-			() => import('../output/server/nodes/5.js'),
-			() => import('../output/server/nodes/6.js')
+			() => import('../output/server/nodes/5.js')
 		],
 		routes: [
 			{
@@ -22,7 +21,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 3
+				leaf: 2
 			},
 			{
 				type: 'page',
@@ -32,7 +31,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 4
+				leaf: 3
 			},
 			{
 				type: 'page',
@@ -42,7 +41,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 5
+				leaf: 4
 			},
 			{
 				type: 'page',
@@ -52,7 +51,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 6
+				leaf: 5
 			}
 		],
 		matchers: async () => {

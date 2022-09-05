@@ -1,73 +1,11 @@
-import { c as create_ssr_component, a as subscribe, e as each, d as escape, f as add_attribute, g as now, l as loop, h as set_store_value, v as validate_component, j as add_styles } from "../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, e as each, d as escape, f as now, l as loop, g as set_store_value, v as validate_component, h as add_attribute } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
-import { d as derived, w as writable } from "../../chunks/index2.js";
-import "../../chunks/firebase.js";
+import { r as routes, i as isLoggedIn, a as isDarkMode, b as isXs, c as redirectAfterLoginTimeOut, l as lastScrollY, s as scrollY, d as instDeltaY, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/firebase.js";
 import "firebase/auth";
+import { w as writable } from "../../chunks/index2.js";
 import "firebase/app";
 import "firebase/firestore/lite";
 const app = "";
-function elasticOut(t) {
-  return Math.sin(-13 * (t + 1) * Math.PI / 2) * Math.pow(2, -10 * t) + 1;
-}
-function customFade(node, { easing = elasticOut, duration = 3e3 }) {
-  return {
-    easing,
-    duration,
-    css: (t, u) => ` opacity: ${0.8 * u + t};
-        filter: hue-rotate(${0.15 * u}turn) 
-                blur(${u}px);
-      `
-  };
-}
-const isLoggedIn = writable(false);
-const lastScrollY = writable(0);
-const scrollY = writable(0);
-const startScrollY = derived(scrollY, ($scrollY, set) => {
-  setTimeout(() => {
-    set($scrollY);
-  }, 50);
-});
-const instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
-  return $scrollY - $startScrollY;
-});
-const scrollYMax = writable(0);
-const fractionScroll = derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
-  return 1 - $scrollY / $scrollYMax;
-});
-const windowInnerHeight = writable(0);
-const innerWidth = writable(0);
-const isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-derived(isXs, ($isXs) => $isXs ? customFade : () => {
-});
-derived(isXs, ($isXs) => $isXs ? customFade : () => {
-});
-const routes = writable({
-  home: {
-    name: "Home",
-    href: "/",
-    title: "Thinksolve.io \u{1F4AB}",
-    isCurrent: false
-  },
-  etc: {
-    name: "Etc",
-    href: "/etc",
-    title: "Etc",
-    isCurrent: false
-  },
-  plans: {
-    name: "Plans",
-    href: "/plans",
-    title: "Plans",
-    isCurrent: false
-  },
-  login: {
-    name: "Login",
-    href: "/login",
-    title: "Login \u{1F680}",
-    isCurrent: false
-  }
-});
-const isDarkMode = writable(false);
 const PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
@@ -90,9 +28,11 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isDarkMode;
   let $$unsubscribe_isXs;
   let $page, $$unsubscribe_page;
+  let $$unsubscribe_redirectAfterLoginTimeOut;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   let { href, content, bool, mobileOpen, btnColor, btnColorHover, routes: routes2 } = $$props;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0)
     $$bindings.href(href);
@@ -117,7 +57,9 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode();
   $$unsubscribe_isXs();
   $$unsubscribe_page();
-  return `<a${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</a>`;
+  $$unsubscribe_redirectAfterLoginTimeOut();
+  return `
+<button class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</button>`;
 });
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -260,21 +202,20 @@ function spring(value, opts = {}) {
   return spring2;
 }
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let logoTextColor;
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
   let $routes, $$unsubscribe_routes;
-  let $fractionScroll, $$unsubscribe_fractionScroll;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $isXs, $$unsubscribe_isXs;
+  let $isDarkMode, $$unsubscribe_isDarkMode;
   let $scaleRocket, $$unsubscribe_scaleRocket;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
-  $$unsubscribe_fractionScroll = subscribe(fractionScroll, (value) => $fractionScroll = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
-  let scaleRocket = spring(2, { stiffness: 0.1, damping: 0.25 });
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
   let hueRocket = 0;
   let { mobileHamburgerClosed } = $$props;
@@ -291,8 +232,12 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   do {
     $$settled = true;
     {
+      if ($isLoggedIn) {
+        hueRocket = $isDarkMode ? 0.75 : 0;
+      }
+    }
+    {
       if ($isLoggedIn && !$isXs) {
-        hueRocket = $fractionScroll * 10;
         scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
       }
     }
@@ -300,7 +245,6 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {
       $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
     }
-    logoTextColor = `hsl(359,100%,${100 * $fractionScroll}%)`;
     {
       {
         if ($scrollY < 250)
@@ -328,12 +272,13 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}"${add_styles({ "color": logoTextColor })}>THINKSOLVE
+<logo-and-nav class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}">
+    <div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
 
     
-    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg sm:items-center text-center"}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
+    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center "}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
             
             ${each(Object.keys($routes), (KEY) => {
       return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
@@ -380,28 +325,32 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
   $$unsubscribe_routes();
-  $$unsubscribe_fractionScroll();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_isXs();
+  $$unsubscribe_isDarkMode();
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$unsubscribe_windowInnerHeight;
+  let $$unsubscribe_scrollYMax;
   let $$unsubscribe_scrollY;
   let $$unsubscribe_innerWidth;
-  let $$unsubscribe_windowInnerHeight;
+  let $$unsubscribe_redirectAfterLoginTimeOut;
+  $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+  $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
-  $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
+  $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   let mobileHamburgerClosed = true;
   let $$settled;
   let $$rendered;
   do {
     $$settled = true;
     $$rendered = `
+
 ${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
 ${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
-
 
 
 
@@ -419,9 +368,11 @@ ${validate_component(Navbar, "Navbar").$$render(
 
 <div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " h-[400vh]"}">${slots.default ? slots.default({}) : ``}</div>`;
   } while (!$$settled);
+  $$unsubscribe_windowInnerHeight();
+  $$unsubscribe_scrollYMax();
   $$unsubscribe_scrollY();
   $$unsubscribe_innerWidth();
-  $$unsubscribe_windowInnerHeight();
+  $$unsubscribe_redirectAfterLoginTimeOut();
   return $$rendered;
 });
 export {
