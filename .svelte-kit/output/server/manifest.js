@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","login-bg-video-blurred.mp4","moon-solid.svg","sun-solid.svg"]),
 	mimeTypes: {".mp4":"video/mp4",".svg":"image/svg+xml"},
 	_: {
-		entry: {"file":"_app/immutable/start-653dc4f8.js","imports":["_app/immutable/start-653dc4f8.js","_app/immutable/chunks/index-6e580a54.js","_app/immutable/chunks/singletons-2e7d080f.js","_app/immutable/chunks/index-ee468ebe.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-0a0d0de8.js","imports":["_app/immutable/start-0a0d0de8.js","_app/immutable/chunks/index-2a0f0a83.js","_app/immutable/chunks/singletons-6943fa3a.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),

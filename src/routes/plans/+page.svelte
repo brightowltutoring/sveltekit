@@ -3,7 +3,7 @@
     import { goto } from "$app/navigation"
 </script>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-20">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-20 ">
 
     <PlansCard btnColor={"bg-[rgb(45,165,214)]"} 
     calendlyUrl={'https://calendly.com/brightowltutoring/invoice-webinowl?hide_gdpr_banner=1'} 

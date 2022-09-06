@@ -7083,23 +7083,38 @@ var init_layout_svelte = __esm({
     hamburgerPattyHeight = 2;
     hamburgerColor = "bg-red-500";
     Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $scrollY, $$unsubscribe_scrollY;
+      let $instDeltaY, $$unsubscribe_instDeltaY;
+      let $isXs, $$unsubscribe_isXs;
       let $$unsubscribe_lastScrollY;
-      let $$unsubscribe_scrollY;
+      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
+      $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
       $$unsubscribe_lastScrollY = subscribe(lastScrollY, (value) => value);
-      $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
       let { mobileOpen } = $$props;
       let { unique } = $$props;
       const hamburgerHeight = Math.floor(0.7 * hamburgerWidth);
       const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight));
       const angle = 45 + 1 * 90;
+      let variableTop = "top-6";
       if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
         $$bindings.mobileOpen(mobileOpen);
       if ($$props.unique === void 0 && $$bindings.unique && unique !== void 0)
         $$bindings.unique(unique);
-      $$unsubscribe_lastScrollY();
+      {
+        if ($isXs && !mobileOpen) {
+          if ($instDeltaY > 0 && $scrollY > 250)
+            variableTop = "-top-20 ";
+          if ($instDeltaY < 0 && $scrollY > 250)
+            variableTop = "top-6";
+        }
+      }
       $$unsubscribe_scrollY();
+      $$unsubscribe_instDeltaY();
+      $$unsubscribe_isXs();
+      $$unsubscribe_lastScrollY();
       return `<main>
-    <hamburger-container class="${"sm:hidden fixed top-6 right-6 text-4xl z-10"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+    <hamburger-container class="${"sm:hidden z-50 text-4xl fixed right-6 " + escape(variableTop, true) + " transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
             <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
@@ -7116,12 +7131,12 @@ var init_layout_svelte = __esm({
     LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let elements = [];
-      {
-        console.log(elements.length);
-      }
       $$unsubscribe_isDarkMode();
-      return `<button>${$isDarkMode ? `
+      return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"}" data-svelte="svelte-1gia4sl">`, ""}
+
+
+
+<button>${$isDarkMode ? `
         <i class="${"las la-sun hover:scale-110 transition-transform duration-500"}"></i>
         
         
@@ -7137,16 +7152,16 @@ var init_layout_svelte = __esm({
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $instDeltaY, $$unsubscribe_instDeltaY;
       let $scrollY, $$unsubscribe_scrollY;
+      let $isXs, $$unsubscribe_isXs;
       let $routes, $$unsubscribe_routes;
       let $isLoggedIn, $$unsubscribe_isLoggedIn;
-      let $isXs, $$unsubscribe_isXs;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       let $scaleRocket, $$unsubscribe_scaleRocket;
       $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+      $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
       $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
-      $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
       $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
@@ -7178,7 +7193,7 @@ var init_layout_svelte = __esm({
           $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
         }
         {
-          {
+          if (!$isXs) {
             if ($scrollY < 250)
               jankytown = "sm:sticky sm:top-0";
             if ($scrollY > 250 && $instDeltaY > 0)
@@ -7207,7 +7222,7 @@ var init_layout_svelte = __esm({
 
 
 
-<logo-and-navbar class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+<logo-and-navbar class="${escape(jankytown, true) + " z-50 sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
 
@@ -7260,9 +7275,9 @@ var init_layout_svelte = __esm({
       } while (!$$settled);
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
+      $$unsubscribe_isXs();
       $$unsubscribe_routes();
       $$unsubscribe_isLoggedIn();
-      $$unsubscribe_isXs();
       $$unsubscribe_isDarkMode();
       $$unsubscribe_scaleRocket();
       return $$rendered;
@@ -7291,7 +7306,7 @@ var init_layout_svelte = __esm({
       let $$rendered;
       do {
         $$settled = true;
-        $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1o9myey"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1o9myey"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1o9myey"><link rel="${"stylesheet"}" href="${"https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"}" data-svelte="svelte-1o9myey">${each(Object.keys($routes), (key2) => {
+        $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key2) => {
           return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)} </title>`, ""}` : ``}`}`;
         })}`, ""}
 
@@ -7314,7 +7329,7 @@ ${validate_component(Navbar, "Navbar").$$render(
 
 
 
-<div class="${"sm:block h-[400vh] " + escape(mobileHamburgerClosed && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
+<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_redirectSetInterval();
@@ -7346,9 +7361,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-683c7c38.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-683c7c38.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/store-2cae3e75.js", "_app/immutable/chunks/index-ee468ebe.js", "_app/immutable/chunks/stores-351b3b87.js", "_app/immutable/chunks/singletons-2e7d080f.js", "_app/immutable/chunks/firebase-8f6e5b4e.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-1938304a.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-d09ad6ba.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-d09ad6ba.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-078fa598.js", "_app/immutable/chunks/singletons-6943fa3a.js", "_app/immutable/chunks/stores-c8940cbb.js", "_app/immutable/chunks/firebase-f37c729c.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-bdb754ed.css"];
   }
 });
 
@@ -7392,8 +7407,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-fac7a080.js";
-    imports2 = ["_app/immutable/components/error.svelte-fac7a080.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/stores-351b3b87.js", "_app/immutable/chunks/singletons-2e7d080f.js", "_app/immutable/chunks/index-ee468ebe.js"];
+    file2 = "_app/immutable/components/error.svelte-d80934b0.js";
+    imports2 = ["_app/immutable/components/error.svelte-d80934b0.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/stores-c8940cbb.js", "_app/immutable/chunks/singletons-6943fa3a.js"];
     stylesheets2 = [];
   }
 });
@@ -7427,8 +7442,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-263a1116.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-263a1116.js", "_app/immutable/chunks/index-6e580a54.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-f7f8853f.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-f7f8853f.js", "_app/immutable/chunks/index-2a0f0a83.js"];
     stylesheets3 = [];
   }
 });
@@ -7462,8 +7477,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/etc/_page.svelte-4c6dd070.js";
-    imports4 = ["_app/immutable/components/pages/etc/_page.svelte-4c6dd070.js", "_app/immutable/chunks/index-6e580a54.js"];
+    file4 = "_app/immutable/components/pages/etc/_page.svelte-594803d6.js";
+    imports4 = ["_app/immutable/components/pages/etc/_page.svelte-594803d6.js", "_app/immutable/chunks/index-2a0f0a83.js"];
     stylesheets4 = [];
   }
 });
@@ -7543,8 +7558,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-7b1dbad3.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-7b1dbad3.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/store-2cae3e75.js", "_app/immutable/chunks/index-ee468ebe.js", "_app/immutable/chunks/firebase-8f6e5b4e.js", "_app/immutable/chunks/singletons-2e7d080f.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-245403fe.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-245403fe.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-078fa598.js", "_app/immutable/chunks/singletons-6943fa3a.js", "_app/immutable/chunks/firebase-f37c729c.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -7554,36 +7569,46 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page4
 });
-var css2, PlansCard, Page4;
+var css$1, PlansCard, css2, Page4;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
     init_store();
     init_index2();
-    css2 = {
-      code: ".card.svelte-kh0wse{transform:perspective(1000px) rotateY(12deg);transition:transform 0.3s ease 0s}.card.svelte-kh0wse:hover{transform:perspective(3000px) rotateY(0deg) scale(1.02)}",
+    css$1 = {
+      code: ".card.svelte-148umed{transform:perspective(1000px) rotateY(12deg);transition:transform 0.3s ease 0s}.card.svelte-148umed:hover{transform:perspective(3000px) rotateY(0deg) scale(1.02)}",
       map: null
     };
     PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let cardColor;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let { buttonColor = "bg-[rgba(253,165,165,1)]" } = $$props;
-      let { buttonColorHover = "hover:bg-[rgba(253,165,165,0.4)]" } = $$props;
-      if ($$props.buttonColor === void 0 && $$bindings.buttonColor && buttonColor !== void 0)
-        $$bindings.buttonColor(buttonColor);
-      if ($$props.buttonColorHover === void 0 && $$bindings.buttonColorHover && buttonColorHover !== void 0)
-        $$bindings.buttonColorHover(buttonColorHover);
-      $$result.css.add(css2);
+      let { calendlyUrl = "" } = $$props;
+      let { btnColor = "bg-[rgba(114,202,202,0.8)]" } = $$props;
+      let { btnColorHover = "" } = $$props;
+      if ($$props.calendlyUrl === void 0 && $$bindings.calendlyUrl && calendlyUrl !== void 0)
+        $$bindings.calendlyUrl(calendlyUrl);
+      if ($$props.btnColor === void 0 && $$bindings.btnColor && btnColor !== void 0)
+        $$bindings.btnColor(btnColor);
+      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
+        $$bindings.btnColorHover(btnColorHover);
+      $$result.css.add(css$1);
       cardColor = $isDarkMode ? dark_lightened : light_darkened;
       $$unsubscribe_isDarkMode();
-      return `<div class="${"card shadow-xl rounded-xl w-[300px] p-10 m-4 text-center duration-300 svelte-kh0wse"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"cardBtn " + escape(buttonColor, true) + " " + escape(buttonColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 svelte-kh0wse"}">${slots.buttonText ? slots.buttonText({}) : `
+      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-rnasgc"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-rnasgc"><\/script>`, ""}
+
+
+
+<div class="${"card shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group svelte-148umed"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"cardBtn " + escape(btnColor, true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-60",
+        true
+      ) + " svelte-148umed"}">${slots.buttonText ? slots.buttonText({}) : `
             default button Text
         `}</button>
 
 
     <p class="${"py-2 text-2xl"}">${slots.cardTitle ? slots.cardTitle({}) : ` 
-            default cardTitle
+
         `}</p>
     
 
@@ -7591,32 +7616,84 @@ var init_page_svelte4 = __esm({
     ${slots.cardText ? slots.cardText({}) : ` 
         default cardText
     `}
+
+
 </div>`;
     });
+    css2 = {
+      code: "a.svelte-1s9r9ye{color:var(--anchor)}a.svelte-1s9r9ye:hover{color:var(--anchor_hover)}",
+      map: null
+    };
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(PlansCard, "PlansCard").$$render($$result, {}, {}, {
-        cardText: () => {
-          return `<span slot="${"cardText"}">sdfsdf </span>`;
+      $$result.css.add(css2);
+      return `<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-20"}">${validate_component(PlansCard, "PlansCard").$$render(
+        $$result,
+        {
+          btnColor: "bg-[rgb(45,165,214)]",
+          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-webinowl?hide_gdpr_banner=1"
         },
-        cardTitle: () => {
-          return `<span slot="${"cardTitle"}">flowy </span>`;
-        },
-        buttonText: () => {
-          return `<span slot="${"buttonText"}">flowy </span>`;
-        }
-      })}
+        {},
+        {
+          cardText: () => {
+            return `<span slot="${"cardText"}">Classic 1-on-1 session with smooth screen
+            sharing. Supported platforms: Zoom,
+            TeamViewer Meeting, and Microsoft Teams
+            Digital session notes available at a
+            premium
 
-${validate_component(PlansCard, "PlansCard").$$render($$result, {}, {}, {
-        cardText: () => {
-          return `<span slot="${"cardText"}">ss3ik </span>`;
-        },
-        cardTitle: () => {
-          return `<span slot="${"cardTitle"}">s3ik </span>`;
-        },
-        buttonText: () => {
-          return `<span slot="${"buttonText"}">s3ik </span>`;
+            <p><a href="${"https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS\n                "}" class="${"svelte-1s9r9ye"}">sample</a></p></span>`;
+          },
+          buttonText: () => {
+            return `<span slot="${"buttonText"}">Webinowl </span>`;
+          }
         }
-      })}`;
+      )}
+    
+    ${validate_component(PlansCard, "PlansCard").$$render(
+        $$result,
+        {
+          btnColor: "bg-[rgb(244,77,77)]",
+          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-blitzowl?hide_gdpr_banner=1"
+        },
+        {},
+        {
+          cardText: () => {
+            return `<span slot="${"cardText"}">Submit your homework
+            Receive a personal 15-day solution
+            URL/page
+            Cost calculated based on number of
+            questions submitted
+            Single and bundled options available.
+
+            <p><a href="${"https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS\n                "}" class="${"svelte-1s9r9ye"}">sample</a></p></span>`;
+          },
+          buttonText: () => {
+            return `<span slot="${"buttonText"}">Blitzowl </span>`;
+          }
+        }
+      )}
+
+    ${validate_component(PlansCard, "PlansCard").$$render(
+        $$result,
+        {
+          btnColor: "bg-[rgb(254,164,92)]",
+          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-mockowl?hide_gdpr_banner=1"
+        },
+        {},
+        {
+          cardText: () => {
+            return `<span slot="${"cardText"}">Get test ready. We provide a mock test
+            session complete with live support and a
+            digital copy of answers.
+            Solution key available at a premium
+            <p><a href="${"https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS\n                "}" class="${"svelte-1s9r9ye"}">sample</a></p></span>`;
+          },
+          buttonText: () => {
+            return `<span slot="${"buttonText"}">Mockowl </span>`;
+          }
+        }
+      )}
+</div>`;
     });
   }
 });
@@ -7635,9 +7712,9 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/plans/_page.svelte-a49a095d.js";
-    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-a49a095d.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/store-2cae3e75.js", "_app/immutable/chunks/index-ee468ebe.js"];
-    stylesheets6 = ["_app/immutable/assets/+page-6e65f8e8.css"];
+    file6 = "_app/immutable/components/pages/plans/_page.svelte-d185f429.js";
+    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-d185f429.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-078fa598.js", "_app/immutable/chunks/singletons-6943fa3a.js"];
+    stylesheets6 = ["_app/immutable/assets/+page-d5407507.css"];
   }
 });
 
@@ -9757,7 +9834,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "moon-solid.svg", "sun-solid.svg"]),
   mimeTypes: { ".mp4": "video/mp4", ".svg": "image/svg+xml" },
   _: {
-    entry: { "file": "_app/immutable/start-653dc4f8.js", "imports": ["_app/immutable/start-653dc4f8.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/singletons-2e7d080f.js", "_app/immutable/chunks/index-ee468ebe.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-0a0d0de8.js", "imports": ["_app/immutable/start-0a0d0de8.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/singletons-6943fa3a.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

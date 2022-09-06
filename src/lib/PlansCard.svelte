@@ -15,6 +15,7 @@
 
     function resetBtnValue(){ 
 
+        hoverTransform = "rotateX(0deg)) scale(1)"
         resetBtn = !resetBtn 
         Calendly.initPopupWidget({url:`${calendlyUrl}`});
     }
@@ -29,14 +30,22 @@
     // hue-rotate-[180deg]
     $: cardColor = $isDarkMode ? dark_lightened : light_darkened
 
+    let hoverTransform = "rotateX(0deg)) scale(1)"
+
+
 </script>
 
-<div class="card shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group"
-     style={`background:${cardColor}`}
+
+<div class="shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group"
+     style={`background:${cardColor}; transform:perspective(1000px) ${hoverTransform};`}
+     on:mouseover={()=>{hoverTransform = "rotateX(8deg) scale(1.1)"}}
+     on:focus={()=>{hoverTransform = "rotateX(8deg) scale(1.1)"}}
+     on:mouseout={()=>{hoverTransform = "rotateX(0deg) "}}
+     on:blur={()=>{hoverTransform = "rotateX(0deg) "}}
      
     >
     {#key resetBtn }
-    <button on:click={resetBtnValue} in:scale={{duration: 1000, easing:elasticOut}} class=" cardBtn {btnColor} {btnColorHover}  hover:shadow-md duration-300 rounded-md p-4 {$isDarkMode ? "group-hover:bg-opacity-80":"group-hover:bg-opacity-60"} "
+    <button on:click={resetBtnValue} in:scale={{duration: 1000, easing:elasticOut}} class=" cardBtn {btnColor} {btnColorHover}  hover:shadow-md duration-300 rounded-md p-4 {$isDarkMode ? "group-hover:bg-opacity-80":"group-hover:bg-opacity-60"} text-xl text-white"
     >
 
         <slot name="buttonText">
@@ -63,16 +72,16 @@
 
 </div>
 
-
-<style>
+<!-- hover wouldnt return on safari!! -->
+<!-- <style>
     
     .card {
-      transform: perspective(1000px) rotateY(12deg);
+      transform: perspective(1000px) rotateX(12deg);
       transition: transform 0.3s ease 0s;
     }
     
     .card:hover {
-      transform: perspective(3000px) rotateY(0deg) scale(1.02);
+      transform: perspective(1000px) rotateX(0deg) scale(1.02);
     }
  
-</style>
+</style> -->

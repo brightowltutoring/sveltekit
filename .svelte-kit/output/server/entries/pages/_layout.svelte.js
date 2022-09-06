@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as loop, f as set_store_value, v as validate_component, g as each, h as add_attribute } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
-import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, b as redirectSetInterval, l as lastScrollY, s as scrollY, c as instDeltaY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, b as redirectSetInterval, s as scrollY, c as instDeltaY, l as lastScrollY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
 import "../../chunks/firebase.js";
 import "firebase/auth";
@@ -51,23 +51,38 @@ const hamburgerWidth = 35;
 const hamburgerPattyHeight = 2;
 const hamburgerColor = "bg-red-500";
 const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $scrollY, $$unsubscribe_scrollY;
+  let $instDeltaY, $$unsubscribe_instDeltaY;
+  let $isXs, $$unsubscribe_isXs;
   let $$unsubscribe_lastScrollY;
-  let $$unsubscribe_scrollY;
+  $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+  $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
+  $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
   $$unsubscribe_lastScrollY = subscribe(lastScrollY, (value) => value);
-  $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
   let { mobileOpen } = $$props;
   let { unique } = $$props;
   const hamburgerHeight = Math.floor(0.7 * hamburgerWidth);
   const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight));
   const angle = 45 + 1 * 90;
+  let variableTop = "top-6";
   if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
     $$bindings.mobileOpen(mobileOpen);
   if ($$props.unique === void 0 && $$bindings.unique && unique !== void 0)
     $$bindings.unique(unique);
-  $$unsubscribe_lastScrollY();
+  {
+    if ($isXs && !mobileOpen) {
+      if ($instDeltaY > 0 && $scrollY > 250)
+        variableTop = "-top-20 ";
+      if ($instDeltaY < 0 && $scrollY > 250)
+        variableTop = "top-6";
+    }
+  }
   $$unsubscribe_scrollY();
+  $$unsubscribe_instDeltaY();
+  $$unsubscribe_isXs();
+  $$unsubscribe_lastScrollY();
   return `<main>
-    <hamburger-container class="${"sm:hidden fixed top-6 right-6 text-4xl z-10"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+    <hamburger-container class="${"sm:hidden z-50 text-4xl fixed right-6 " + escape(variableTop, true) + " transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
             <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
@@ -181,12 +196,12 @@ function spring(value, opts = {}) {
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  let elements = [];
-  {
-    console.log(elements.length);
-  }
   $$unsubscribe_isDarkMode();
-  return `<button>${$isDarkMode ? `
+  return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"}" data-svelte="svelte-1gia4sl">`, ""}
+
+
+
+<button>${$isDarkMode ? `
         <i class="${"las la-sun hover:scale-110 transition-transform duration-500"}"></i>
         
         
@@ -202,16 +217,16 @@ const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
+  let $isXs, $$unsubscribe_isXs;
   let $routes, $$unsubscribe_routes;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
-  let $isXs, $$unsubscribe_isXs;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $scaleRocket, $$unsubscribe_scaleRocket;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+  $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
-  $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
@@ -243,7 +258,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
     }
     {
-      {
+      if (!$isXs) {
         if ($scrollY < 250)
           jankytown = "sm:sticky sm:top-0";
         if ($scrollY > 250 && $instDeltaY > 0)
@@ -272,7 +287,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<logo-and-navbar class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+<logo-and-navbar class="${escape(jankytown, true) + " z-50 sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
 
@@ -325,9 +340,9 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   } while (!$$settled);
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
+  $$unsubscribe_isXs();
   $$unsubscribe_routes();
   $$unsubscribe_isLoggedIn();
-  $$unsubscribe_isXs();
   $$unsubscribe_isDarkMode();
   $$unsubscribe_scaleRocket();
   return $$rendered;
@@ -356,7 +371,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$rendered;
   do {
     $$settled = true;
-    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1o9myey"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1o9myey"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1o9myey"><link rel="${"stylesheet"}" href="${"https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"}" data-svelte="svelte-1o9myey">${each(Object.keys($routes), (key) => {
+    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
     })}`, ""}
 
@@ -379,7 +394,7 @@ ${validate_component(Navbar, "Navbar").$$render(
 
 
 
-<div class="${"sm:block h-[400vh] " + escape(mobileHamburgerClosed && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
+<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
   } while (!$$settled);
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_redirectSetInterval();
