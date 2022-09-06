@@ -29,13 +29,21 @@
 {#key $isDarkMode}
 <button on:click={toggleDM} in:scale={{duration:1000, easing:elasticOut}} >
     {#if $isDarkMode }  
-     <!-- ☾ -->
-     <!-- <i class="las la-moon"></i> -->
-     <i class="fa-solid fa-sun opacity-70 hover:opacity-100 transition-opacity duration-700"></i>
-     {:else}             
-     <!-- ☼ -->
-     <!-- <i class="las la-sun"></i> -->
-     <i class="fa-solid fa-moon opacity-70 hover:opacity-100 transition-opacity duration-700"></i>
+        <!-- ☾ -->
+        <i class="las la-sun hover:scale-110 transition-transform duration-500"></i>
+        <!-- <i class="fa-solid fa-sun opacity-70 hover:opacity-100 transition-opacity duration-700"></i> -->
+        <!-- <i class="fa fa-sun-o "></i> -->
+        <!-- <i href="/sun-solid.svg"></i> -->
+        <!-- <i class="fa fa-car"></i> -->
+        {:else}             
+        <!-- ☼ -->
+        <i class="las la-moon hover:scale-110 transition-transform duration-500 "></i>
+        
+        <!-- <i class="fa fa-car"></i> -->
+        <!-- <i class="fa fa-moon-o "></i> -->
+        <!-- <i href="/moon-solid.svg"></i>
+         -->
+        <!-- <i class="fa-solid fa-moon opacity-70 hover:opacity-100 transition-opacity duration-700"></i> -->
     {/if}
 </button>
 {/key}

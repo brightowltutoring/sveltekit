@@ -1,0 +1,1 @@
+import{S as o,i as r,s as c,q as i,r as l,b as u,A as a,h as f}from"../../../chunks/index-3dc49f29.js";function m(s){let t;return{c(){t=i("etc")},l(e){t=l(e,"etc")},m(e,n){u(e,t,n)},p:a,i:a,o:a,d(e){e&&f(t)}}}class d extends o{constructor(t){super(),r(this,t,null,m,c,{})}}export{d as default};

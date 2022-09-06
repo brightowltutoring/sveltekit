@@ -186,7 +186,11 @@ const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots
     console.log(elements.length);
   }
   $$unsubscribe_isDarkMode();
-  return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
+  return `<button>${$isDarkMode ? `
+     
+     <i class="${"fa-solid fa-sun opacity-70 hover:opacity-100 transition-opacity duration-700"}"></i>` : `
+     
+     <i class="${"fa-solid fa-moon opacity-70 hover:opacity-100 transition-opacity duration-700"}"></i>`}</button>`;
 });
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
@@ -345,7 +349,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$rendered;
   do {
     $$settled = true;
-    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key) => {
+    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1d2n7k4"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1d2n7k4"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1d2n7k4"><script src="${"https://kit.fontawesome.com/be3bf075fa.js"}" crossorigin="${"anonymous"}" data-svelte="svelte-1d2n7k4"><\/script>${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
     })}`, ""}
 
