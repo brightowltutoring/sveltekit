@@ -1,28 +1,25 @@
+<svelte:head>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+	<!-- <script src="https://use.fontawesome.com/4655df7e48.js"></script> -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+	<!-- <script src="https://kit.fontawesome.com/be3bf075fa.js" crossorigin="anonymous"></script> -->
+</svelte:head>
+
 <script>
-    import { scale } from 'svelte/transition';
-    import { elasticOut } from 'svelte/easing';
+    import { scale } from 'svelte/transition'
+    import { elasticOut } from 'svelte/easing'
     import { isDarkMode } from '$lib/store.js'
-    // import { onMount } from 'svelte';
-
-    let elements=[]
-
-    $:console.log(elements.length);
 
     function toggleDM() {
-        elements=[
-            window.document.body,
-            // ...document.getElementsByClassName("card"),
-            // ...document.getElementsByClassName("cardBtn"),
-        ]
-       
-        for (let el of elements){
-            el.classList.toggle('dark-mode')   
-        }
-        
+        window.document.body.classList.toggle('dark-mode')  
         $isDarkMode =!$isDarkMode
-        // other js variables will dark-mode other elements in the dom
-        // doing it with global css is problematic when the elements have
-        // yet to be mounted
+        // elements=[
+        //     window.document.body,
+        // ]
+       
+        // for (let el of elements){
+        //     el.classList.toggle('dark-mode')   
+        // }
 	}
 </script>
 

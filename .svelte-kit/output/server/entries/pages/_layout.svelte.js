@@ -187,10 +187,17 @@ const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots
   }
   $$unsubscribe_isDarkMode();
   return `<button>${$isDarkMode ? `
-     
-     <i class="${"fa-solid fa-sun opacity-70 hover:opacity-100 transition-opacity duration-700"}"></i>` : `
-     
-     <i class="${"fa-solid fa-moon opacity-70 hover:opacity-100 transition-opacity duration-700"}"></i>`}</button>`;
+        <i class="${"las la-sun hover:scale-110 transition-transform duration-500"}"></i>
+        
+        
+        
+        ` : `
+        <i class="${"las la-moon hover:scale-110 transition-transform duration-500 "}"></i>
+        
+        
+        
+        
+        `}</button>`;
 });
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
@@ -349,7 +356,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$rendered;
   do {
     $$settled = true;
-    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1d2n7k4"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1d2n7k4"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1d2n7k4"><script src="${"https://kit.fontawesome.com/be3bf075fa.js"}" crossorigin="${"anonymous"}" data-svelte="svelte-1d2n7k4"><\/script>${each(Object.keys($routes), (key) => {
+    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1o9myey"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1o9myey"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1o9myey"><link rel="${"stylesheet"}" href="${"https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"}" data-svelte="svelte-1o9myey">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
     })}`, ""}
 

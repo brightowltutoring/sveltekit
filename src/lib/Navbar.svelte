@@ -37,11 +37,13 @@
 
 
     let jankytown='';
-    $:{
+    $:if(!$isXs){
         if($scrollY<250)  jankytown = "sm:sticky sm:top-0"
         if($scrollY>250 && $instDeltaY>0)  jankytown = "sm:sticky sm:-top-20"
         if($scrollY>250 && $instDeltaY<0)  jankytown = "sm:sticky sm:top-0"
     }
+    
+
     // $instDeltaY>0 essentially means "currently scrolling down" as $instDeltaY relaxes to 0 shortly.
     // $instDeltaY == 0, jankytown is not updated.
 
@@ -60,7 +62,7 @@
 
 
 <logo-and-navbar 
-    class="{jankytown} sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " 
+    class="{jankytown} z-50 sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " 
 
     >
     

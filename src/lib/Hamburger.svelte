@@ -1,5 +1,5 @@
 <script>
-    import { scrollY, lastScrollY } from '$lib/store.js'
+    import { scrollY, lastScrollY, isXs, instDeltaY } from '$lib/store.js'
  
     // export let hamburgerBtn
     export let mobileOpen
@@ -24,13 +24,20 @@
     const angle = 45 + 1*90
     const hamburgerColor = "bg-red-500" //bg-gray-500
     // let hamburgerBtn
+    let variableTop="top-6"
+    $: if($isXs && !mobileOpen ){ 
+            // if($scrollY<250) variableTop = "top-6"
+            if( $instDeltaY>0 && $scrollY>250) variableTop = "-top-20 "
+            if( $instDeltaY<0 && $scrollY>250) variableTop = "top-6"
+        }
+    // $: if($isXs && mobileOpen ) variableTop = "top-6"
+    
 </script>
 
 
 <main>
     <!-- version: tailwind + svelte style (css) + js variables (~20 lines code)-->
-    <hamburger-container class="sm:hidden fixed top-6 right-6 text-4xl z-10" >
-       
+    <hamburger-container class="sm:hidden z-50 text-4xl fixed right-6 {variableTop} transition-all duration-300" >       
         <hamburger style="width: {hamburgerWidth}px; height:{hamburgerHeight}px" class="relative flex flex-col justify-between" on:click={ clickOnBurger }>
             
             <div style="height:{hamburgerPattyHeight}px; {mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`}

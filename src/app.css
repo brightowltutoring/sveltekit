@@ -12,6 +12,8 @@
 } */
 
 :root{
+  --anchor: rgb(253, 148, 148);
+  --anchor_hover: rgb(249, 87, 87);
   --light: #f7f7f7;
   --light_darkened: rgb(242,247,250);
   --dark: rgb(37,27,47);
@@ -19,6 +21,7 @@
   --dark_lightened: rgb(39,35,53);
   /* --dark_lightened: #263e53; */
   --ld-transition: background-color 0.3s
+
 }
 
 
