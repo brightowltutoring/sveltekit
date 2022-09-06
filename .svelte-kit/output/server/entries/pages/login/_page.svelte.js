@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, h as add_attribute } from "../../../chunks/index.js";
-import { c as redirectAfterLoginTimeOut } from "../../../chunks/firebase.js";
+import { r as redirectAfterLoginTimeOut } from "../../../chunks/firebase.js";
 import "firebase/firestore/lite";
 import "firebase/auth";
 import "../../../chunks/index2.js";

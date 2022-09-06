@@ -1,29 +1,10 @@
-import { c as create_ssr_component, a as subscribe, e as each, d as escape, f as now, l as loop, g as set_store_value, v as validate_component, h as add_attribute } from "../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as loop, f as set_store_value, v as validate_component, g as each, h as add_attribute } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
-import { r as routes, i as isLoggedIn, a as isDarkMode, b as isXs, c as redirectAfterLoginTimeOut, l as lastScrollY, s as scrollY, d as instDeltaY, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/firebase.js";
-import "firebase/auth";
+import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, l as lastScrollY, s as scrollY, b as instDeltaY, c as routes, d as isLoggedIn, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/firebase.js";
 import { w as writable } from "../../chunks/index2.js";
+import "firebase/auth";
 import "firebase/app";
 import "firebase/firestore/lite";
-const app = "";
-const PageTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $routes, $$unsubscribe_routes;
-  let $page, $$unsubscribe_page;
-  $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
-  $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$unsubscribe_routes();
-  $$unsubscribe_page();
-  return `${$$result.head += `${each(Object.keys($routes), (key) => {
-    return `
-        ${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
-  })}`, ""}`;
-});
-const IsLoggedIn = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $$unsubscribe_isLoggedIn;
-  $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
-  $$unsubscribe_isLoggedIn();
-  return ``;
-});
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isDarkMode;
   let $$unsubscribe_isXs;
@@ -331,14 +312,21 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
+const app = "";
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$unsubscribe_isLoggedIn;
   let $$unsubscribe_windowInnerHeight;
   let $$unsubscribe_scrollYMax;
+  let $routes, $$unsubscribe_routes;
+  let $page, $$unsubscribe_page;
   let $$unsubscribe_scrollY;
   let $$unsubscribe_innerWidth;
   let $$unsubscribe_redirectAfterLoginTimeOut;
+  $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
+  $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
@@ -347,10 +335,13 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$rendered;
   do {
     $$settled = true;
-    $$rendered = `
+    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key) => {
+      return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
+    })}`, ""}
 
-${validate_component(IsLoggedIn, "IsLoggedIn").$$render($$result, {}, {}, {})}
-${validate_component(PageTitle, "PageTitle").$$render($$result, {}, {}, {})}
+
+
+
 
 
 
@@ -368,8 +359,11 @@ ${validate_component(Navbar, "Navbar").$$render(
 
 <div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " h-[400vh]"}">${slots.default ? slots.default({}) : ``}</div>`;
   } while (!$$settled);
+  $$unsubscribe_isLoggedIn();
   $$unsubscribe_windowInnerHeight();
   $$unsubscribe_scrollYMax();
+  $$unsubscribe_routes();
+  $$unsubscribe_page();
   $$unsubscribe_scrollY();
   $$unsubscribe_innerWidth();
   $$unsubscribe_redirectAfterLoginTimeOut();

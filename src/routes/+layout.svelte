@@ -13,24 +13,29 @@
 </svelte:head>
 
 <svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}
-on:resize={setScrollYMax} on:popstate={ clearTimeout($redirectAfterLoginTimeOut) } />
+on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 
-<!-- <IsLoggedIn/> -->
 
 <script>
-	import Navbar from '$lib/Navbar.svelte'
-	import { innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, routes } from '$lib/store.js' 	
-	import { page } from '$app/stores'	
+
+	
 	import '../app.css'
-	// import IsLoggedIn from '$lib/IsLoggedIn.svelte'
+	import Navbar from '$lib/Navbar.svelte'
+	import { innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, redirectSetInterval, routes } from '$lib/store.js' 	
+	import { page } from '$app/stores'	
 	import { onMount } from 'svelte'
-	import { onAuthStateChanged } from "firebase/auth"
 	import { auth } from '$lib/firebase.js'
+	import { onAuthStateChanged } from "firebase/auth"
 
 	let mobileHamburgerClosed = true
 
 	function setScrollYMax(){
 		$scrollYMax = document.body.scrollHeight - $windowInnerHeight;
+	}
+	
+	function clearRedirectStuff(){
+		clearTimeout($redirectAfterLoginTimeOut);
+		clearInterval($redirectSetInterval)
 	}
 
 	onMount( ()=>{
@@ -54,4 +59,3 @@ on:resize={setScrollYMax} on:popstate={ clearTimeout($redirectAfterLoginTimeOut)
 <div class="sm:block {mobileHamburgerClosed && "hidden"} h-[400vh]" >
 	<slot/>
 </div>	
-

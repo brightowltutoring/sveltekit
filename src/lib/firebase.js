@@ -18,8 +18,8 @@ const firebaseConfig = {
 //   };
 
 import { initializeApp } from "firebase/app"
-import { getFirestore } from 'firebase/firestore/lite'
 import { getAuth } from "firebase/auth"
+import { getFirestore } from 'firebase/firestore/lite'
 
 export const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)

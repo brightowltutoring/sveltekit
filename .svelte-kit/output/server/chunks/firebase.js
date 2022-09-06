@@ -84,15 +84,15 @@ const app = initializeApp(firebaseConfig);
 getAuth(app);
 getFirestore(app);
 export {
-  isDarkMode as a,
-  isXs as b,
-  redirectAfterLoginTimeOut as c,
-  instDeltaY as d,
+  isXs as a,
+  instDeltaY as b,
+  routes as c,
+  isLoggedIn as d,
   scrollYMax as e,
   innerWidth as f,
-  isLoggedIn as i,
+  isDarkMode as i,
   lastScrollY as l,
-  routes as r,
+  redirectAfterLoginTimeOut as r,
   scrollY as s,
   windowInnerHeight as w
 };

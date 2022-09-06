@@ -5,9 +5,19 @@
 
 
     $: console.log("$isDarkMode",$isDarkMode);
+  
+
     function toggleDM() {
-		window.document.body.classList.toggle('dark-mode');
-        // isDark =!isDark
+        let elements = [
+            window.document.body,
+            ...document.getElementsByClassName("card"),
+            ...document.getElementsByClassName("cardBtn"),
+        ]
+
+        for (let el of elements){
+            el.classList.toggle('dark-mode')   
+        }
+        
         $isDarkMode =!$isDarkMode
 	}
 </script>

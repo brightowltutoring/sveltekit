@@ -2,7 +2,7 @@
     import { slide } from 'svelte/transition';
     import { elasticOut } from 'svelte/easing';
     import { page } from '$app/stores'
-    import { isXs, isDarkMode, redirectAfterLoginTimeOut } from '$lib/store.js'
+    import { isXs, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval } from '$lib/store.js'
     import { goto } from '$app/navigation'
 
     export let href, content, bool, mobileOpen, btnColor, btnColorHover, routes
@@ -46,6 +46,7 @@
     on:click|preventDefault={ ()=>{
         clickOnNavLinks();
         clearTimeout($redirectAfterLoginTimeOut)
+        clearInterval($redirectSetInterval)
         goto(href);
     }}
     class = "{ bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent { `${btnColorHover}`}  sm:hover:rounded sm:hover:py-1  sm:hover:px-3 duration-300"

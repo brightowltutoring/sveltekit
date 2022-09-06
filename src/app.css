@@ -7,21 +7,47 @@
 @tailwind utilities;
 
 
+/* body.noScroll{
+  overflow-y: hidden;
+} */
 
-/* desktop: only works on chrome/brave */
+:root{
+  --light: #f7f7f7;
+  --light-darkened: rgb(242, 247, 250);
+  --dark: #1d3040;
+  --dark-lightened: #263e53;
+  --ld-transition: background-color 0.3s
+}
+
+
 body {
-    overscroll-behavior-y: none;
-    
-    background-color: #f7f7f7;
-		color: #1d3040;
-		transition: background-color 0.3s
+  overscroll-behavior-y: none;
+  
+  background-color: var(--light);
+	color: var(--dark);
+	transition: var(--ld-transition)
 }
 
 body.dark-mode {
-  background-color: #1d3040;
-  color: #f7f7f7;
+  background-color: var(--dark);
+  color: var(--light);
 }
 
-body.noScroll{
-  overflow-y: hidden;
+.card {
+  background-color: var(--light-darkened);
+  color: var(--dark-lightened);
+  transition: var(--ld-transition)
 }
+.card.dark-mode{
+  background-color: var(--dark-lightened);
+  color: var(--light);
+}
+
+.cardBtn.dark-mode{
+  filter: hue-rotate(100deg);
+  /* background-color: var(--dark); */
+  color: var(--light);
+}
+
+
+

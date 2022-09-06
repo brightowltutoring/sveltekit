@@ -1,5 +1,5 @@
     <script>
-        import { redirectAfterLoginTimeOut } from '$lib/store.js'
+        import { redirectAfterLoginTimeOut, redirectSetInterval } from '$lib/store.js'
         import { onMount } from 'svelte'
         import { scale } from 'svelte/transition'
         import { elasticOut } from 'svelte/easing'
@@ -161,7 +161,7 @@
 
 
                     // redirect after login
-                    let myInterval = setInterval(() => {
+                    $redirectSetInterval = setInterval(() => {
                         if(seconds > 0) {
                             seconds += -1;
                             document.getElementById("redirectMessage").innerHTML = ` ${seconds}`;

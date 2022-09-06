@@ -1,6 +1,5 @@
 <script>
-    import { scrollY, lastScrollY, isXs } from '$lib/store.js'
-    import LightDarkMode from './LightDarkMode.svelte';
+    import { scrollY, lastScrollY } from '$lib/store.js'
  
     // export let hamburgerBtn
     export let mobileOpen
@@ -14,7 +13,7 @@
         // stores the last scroll position on hamburger open
         mobileOpen && ($lastScrollY = $scrollY)
         // ... then scrolls to this position on hamburger closed
-        !mobileOpen && requestAnimationFrame(()=> window.scrollTo(0, $lastScrollY ))
+        !mobileOpen && requestAnimationFrame(()=> window.scrollTo(0, $lastScrollY))
     }
 
 
