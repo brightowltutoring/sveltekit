@@ -15,7 +15,7 @@
 
     function resetBtnValue(){ 
 
-        hoverTransform = "rotateX(0deg)) scale(1)"
+        // hoverTransform = "rotateX(0deg)) scale(1)"
         resetBtn = !resetBtn 
         Calendly.initPopupWidget({url:`${calendlyUrl}`});
     }
@@ -30,18 +30,21 @@
     // hue-rotate-[180deg]
     $: cardColor = $isDarkMode ? dark_lightened : light_darkened
 
-    let hoverTransform = "rotateX(0deg)) scale(1)"
+    // let hoverTransform = "rotateX(0deg)) scale(1)"
 
 
 </script>
 
 
-<div class="shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group"
+<!-- <div class="shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group"
      style={`background:${cardColor}; transform:perspective(1000px) ${hoverTransform};`}
      on:mouseover={()=>{hoverTransform = "rotateX(8deg) scale(1.1)"}}
      on:focus={()=>{hoverTransform = "rotateX(8deg) scale(1.1)"}}
      on:mouseout={()=>{hoverTransform = "rotateX(0deg) "}}
-     on:blur={()=>{hoverTransform = "rotateX(0deg) "}}
+     on:blur={()=>{hoverTransform = "rotateX(0deg) "}} -->
+<div class="shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group cardCSS "
+     style={`background:${cardColor}`}
+   
      
     >
     {#key resetBtn }
@@ -73,15 +76,15 @@
 </div>
 
 <!-- hover wouldnt return on safari!! -->
-<!-- <style>
+<style>
     
-    .card {
-      transform: perspective(1000px) rotateX(12deg);
+    .cardCSS {
+      transform: perspective(1000px) rotateX(0deg);
       transition: transform 0.3s ease 0s;
     }
     
-    .card:hover {
-      transform: perspective(1000px) rotateX(0deg) scale(1.02);
+    .cardCSS:hover {
+      transform: perspective(1000px) rotateX(12deg) scale(1.02);
     }
  
-</style> -->
+</style>
