@@ -2,7 +2,7 @@
     import { scale } from 'svelte/transition';
     import { elasticOut } from 'svelte/easing';
     import { isDarkMode } from '$lib/store.js'
-    import { onMount } from 'svelte';
+    // import { onMount } from 'svelte';
 
     let elements=[]
 
@@ -28,8 +28,14 @@
 
 {#key $isDarkMode}
 <button on:click={toggleDM} in:scale={{duration:1000, easing:elasticOut}} >
-    {#if $isDarkMode }   ☾
-    {:else}              ☼
+    {#if $isDarkMode }  
+     <!-- ☾ -->
+     <!-- <i class="las la-moon"></i> -->
+     <i class="fa-solid fa-sun opacity-70 hover:opacity-100 transition-opacity duration-700"></i>
+     {:else}             
+     <!-- ☼ -->
+     <!-- <i class="las la-sun"></i> -->
+     <i class="fa-solid fa-moon opacity-70 hover:opacity-100 transition-opacity duration-700"></i>
     {/if}
 </button>
 {/key}

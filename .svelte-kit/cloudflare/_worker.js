@@ -665,6 +665,81 @@ var init_stores = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/store.js
+function elasticOut(t2) {
+  return Math.sin(-13 * (t2 + 1) * Math.PI / 2) * Math.pow(2, -10 * t2) + 1;
+}
+function customFade(node, { easing = elasticOut, duration = 3e3 }) {
+  return {
+    easing,
+    duration,
+    css: (t2, u) => ` opacity: ${0.8 * u + t2};
+        filter: hue-rotate(${0.15 * u}turn) 
+                blur(${u}px);
+      `
+  };
+}
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, isXs, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, dark_lightened;
+var init_store = __esm({
+  ".svelte-kit/output/server/chunks/store.js"() {
+    init_index2();
+    init_chunks();
+    isLoggedIn = writable(false);
+    lastScrollY = writable(0);
+    scrollY = writable(0);
+    startScrollY = derived(scrollY, ($scrollY, set) => {
+      setTimeout(() => {
+        set($scrollY);
+      }, 50);
+    });
+    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
+      return $scrollY - $startScrollY;
+    });
+    scrollYMax = writable(0);
+    derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
+      return 1 - $scrollY / $scrollYMax;
+    });
+    windowInnerHeight = writable(0);
+    innerWidth = writable(0);
+    isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
+    derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    });
+    derived(isXs, ($isXs) => $isXs ? customFade : () => {
+    });
+    routes = writable({
+      home: {
+        name: "Home",
+        href: "/",
+        title: "Thinksolve.io \u{1F4AB}",
+        isCurrent: false
+      },
+      etc: {
+        name: "Etc",
+        href: "/etc",
+        title: "Etc",
+        isCurrent: false
+      },
+      plans: {
+        name: "Plans",
+        href: "/plans",
+        title: "Plans",
+        isCurrent: false
+      },
+      login: {
+        name: "Login",
+        href: "/login",
+        title: "Login \u{1F680}",
+        isCurrent: false
+      }
+    });
+    isDarkMode = writable(false);
+    redirectAfterLoginTimeOut = writable("");
+    redirectSetInterval = writable("");
+    light_darkened = "rgb(242,247,250)";
+    dark_lightened = "rgb(39,35,53)";
+  }
+});
+
 // node_modules/@firebase/util/dist/index.esm2017.js
 function getUA() {
   if (typeof navigator !== "undefined" && typeof navigator["userAgent"] === "string") {
@@ -6825,78 +6900,12 @@ var init_index_esm3 = __esm({
 });
 
 // .svelte-kit/output/server/chunks/firebase.js
-function elasticOut(t2) {
-  return Math.sin(-13 * (t2 + 1) * Math.PI / 2) * Math.pow(2, -10 * t2) + 1;
-}
-function customFade(node, { easing = elasticOut, duration = 3e3 }) {
-  return {
-    easing,
-    duration,
-    css: (t2, u) => ` opacity: ${0.8 * u + t2};
-        filter: hue-rotate(${0.15 * u}turn) 
-                blur(${u}px);
-      `
-  };
-}
-var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, isXs, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app;
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
-    init_index2();
-    init_chunks();
     init_index_esm();
     init_index_esm2();
     init_index_esm3();
-    isLoggedIn = writable(false);
-    lastScrollY = writable(0);
-    scrollY = writable(0);
-    startScrollY = derived(scrollY, ($scrollY, set) => {
-      setTimeout(() => {
-        set($scrollY);
-      }, 50);
-    });
-    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
-      return $scrollY - $startScrollY;
-    });
-    scrollYMax = writable(0);
-    derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
-      return 1 - $scrollY / $scrollYMax;
-    });
-    windowInnerHeight = writable(0);
-    innerWidth = writable(0);
-    isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-    derived(isXs, ($isXs) => $isXs ? customFade : () => {
-    });
-    derived(isXs, ($isXs) => $isXs ? customFade : () => {
-    });
-    routes = writable({
-      home: {
-        name: "Home",
-        href: "/",
-        title: "Thinksolve.io \u{1F4AB}",
-        isCurrent: false
-      },
-      etc: {
-        name: "Etc",
-        href: "/etc",
-        title: "Etc",
-        isCurrent: false
-      },
-      plans: {
-        name: "Plans",
-        href: "/plans",
-        title: "Plans",
-        isCurrent: false
-      },
-      login: {
-        name: "Login",
-        href: "/login",
-        title: "Login \u{1F680}",
-        isCurrent: false
-      }
-    });
-    isDarkMode = writable(false);
-    redirectAfterLoginTimeOut = writable("");
-    redirectSetInterval = writable("");
     FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
     FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
     FIREBASE_projectId = "thinksolve-app";
@@ -7024,8 +7033,9 @@ var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
     init_stores();
-    init_firebase();
+    init_store();
     init_index2();
+    init_firebase();
     init_index_esm2();
     init_index_esm();
     init_index_esm3();
@@ -7106,8 +7116,9 @@ var init_layout_svelte = __esm({
     LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let elements = [];
       {
-        console.log("$isDarkMode", $isDarkMode);
+        console.log(elements.length);
       }
       $$unsubscribe_isDarkMode();
       return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
@@ -7132,7 +7143,6 @@ var init_layout_svelte = __esm({
       let { mobileHamburgerClosed } = $$props;
       let mobileOpen;
       let unique;
-      let hamburgerBtn;
       let jankytown = "";
       let btnColor = "sm:bg-red-300 ";
       let btnColorHover = "sm:hover:bg-red-300";
@@ -7168,7 +7178,7 @@ var init_layout_svelte = __esm({
         }
         $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
           $$result,
-          { hamburgerBtn, mobileOpen, unique },
+          { mobileOpen, unique },
           {
             mobileOpen: ($$value) => {
               mobileOpen = $$value;
@@ -7183,13 +7193,17 @@ var init_layout_svelte = __esm({
         )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}">
-    <div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+
+
+
+<logo-and-navbar class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
 
     
-    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center "}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
+    
+         
+    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center"}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
             
             ${each(Object.keys($routes), (KEY) => {
           return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
@@ -7227,11 +7241,11 @@ var init_layout_svelte = __esm({
             },
             {}
           )}
-                
+             
             </li>`;
         })}
 
-            ${!$isXs ? `<li class="${"px-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-nav>`;
+            ${!$isXs ? `<li class="${"px-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
       } while (!$$settled);
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
@@ -7287,7 +7301,9 @@ ${validate_component(Navbar, "Navbar").$$render(
           {}
         )}
 
-<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " h-[400vh]"}">${slots.default ? slots.default({}) : ``}</div>`;
+
+
+<div class="${"sm:block h-[400vh] " + escape(mobileHamburgerClosed && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_redirectSetInterval();
@@ -7319,9 +7335,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-a3c93f2f.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-a3c93f2f.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/index-133a490d.js", "_app/immutable/chunks/stores-a2ae3f5b.js", "_app/immutable/chunks/singletons-9a8d8975.js", "_app/immutable/chunks/firebase-b1810dc7.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-f5e04e27.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-09c9deeb.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-09c9deeb.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/store-2cae3e75.js", "_app/immutable/chunks/index-ee468ebe.js", "_app/immutable/chunks/stores-410cd107.js", "_app/immutable/chunks/singletons-588197bc.js", "_app/immutable/chunks/firebase-32d51669.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-9d47c909.css"];
   }
 });
 
@@ -7365,8 +7381,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-eb2fed99.js";
-    imports2 = ["_app/immutable/components/error.svelte-eb2fed99.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/stores-a2ae3f5b.js", "_app/immutable/chunks/singletons-9a8d8975.js"];
+    file2 = "_app/immutable/components/error.svelte-84fac431.js";
+    imports2 = ["_app/immutable/components/error.svelte-84fac431.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/stores-410cd107.js", "_app/immutable/chunks/singletons-588197bc.js", "_app/immutable/chunks/index-ee468ebe.js"];
     stylesheets2 = [];
   }
 });
@@ -7400,8 +7416,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-452600e9.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-452600e9.js", "_app/immutable/chunks/index-c9f4976c.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-263a1116.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-263a1116.js", "_app/immutable/chunks/index-6e580a54.js"];
     stylesheets3 = [];
   }
 });
@@ -7435,8 +7451,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/etc/_page.svelte-95a8f719.js";
-    imports4 = ["_app/immutable/components/pages/etc/_page.svelte-95a8f719.js", "_app/immutable/chunks/index-c9f4976c.js"];
+    file4 = "_app/immutable/components/pages/etc/_page.svelte-4c6dd070.js";
+    imports4 = ["_app/immutable/components/pages/etc/_page.svelte-4c6dd070.js", "_app/immutable/chunks/index-6e580a54.js"];
     stylesheets4 = [];
   }
 });
@@ -7450,6 +7466,7 @@ var css, Page3;
 var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
+    init_store();
     init_firebase();
     init_index_esm3();
     init_index_esm2();
@@ -7515,8 +7532,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-bcb5df9d.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-bcb5df9d.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/firebase-b1810dc7.js", "_app/immutable/chunks/singletons-9a8d8975.js", "_app/immutable/chunks/index-133a490d.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-bfe11bd8.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-bfe11bd8.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/store-2cae3e75.js", "_app/immutable/chunks/index-ee468ebe.js", "_app/immutable/chunks/firebase-32d51669.js", "_app/immutable/chunks/singletons-588197bc.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -7530,11 +7547,16 @@ var css2, PlansCard, Page4;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
+    init_store();
+    init_index2();
     css2 = {
       code: ".card.svelte-kh0wse{transform:perspective(1000px) rotateY(12deg);transition:transform 0.3s ease 0s}.card.svelte-kh0wse:hover{transform:perspective(3000px) rotateY(0deg) scale(1.02)}",
       map: null
     };
     PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let cardColor;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       let { buttonColor = "bg-[rgba(253,165,165,1)]" } = $$props;
       let { buttonColorHover = "hover:bg-[rgba(253,165,165,0.4)]" } = $$props;
       if ($$props.buttonColor === void 0 && $$bindings.buttonColor && buttonColor !== void 0)
@@ -7542,7 +7564,9 @@ var init_page_svelte4 = __esm({
       if ($$props.buttonColorHover === void 0 && $$bindings.buttonColorHover && buttonColorHover !== void 0)
         $$bindings.buttonColorHover(buttonColorHover);
       $$result.css.add(css2);
-      return `<div class="${"card shadow-xl rounded-xl w-[300px] p-10 m-4 text-center duration-300 svelte-kh0wse"}"><button class="${"cardBtn " + escape(buttonColor, true) + " " + escape(buttonColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 svelte-kh0wse"}">${slots.buttonText ? slots.buttonText({}) : `
+      cardColor = $isDarkMode ? dark_lightened : light_darkened;
+      $$unsubscribe_isDarkMode();
+      return `<div class="${"card shadow-xl rounded-xl w-[300px] p-10 m-4 text-center duration-300 svelte-kh0wse"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"cardBtn " + escape(buttonColor, true) + " " + escape(buttonColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 svelte-kh0wse"}">${slots.buttonText ? slots.buttonText({}) : `
             default button Text
         `}</button>
 
@@ -7600,8 +7624,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/plans/_page.svelte-ca69685d.js";
-    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-ca69685d.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/index-133a490d.js"];
+    file6 = "_app/immutable/components/pages/plans/_page.svelte-a49a095d.js";
+    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-a49a095d.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/store-2cae3e75.js", "_app/immutable/chunks/index-ee468ebe.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6e65f8e8.css"];
   }
 });
@@ -9722,7 +9746,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-b1b9fbc9.js", "imports": ["_app/immutable/start-b1b9fbc9.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/singletons-9a8d8975.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-340b8293.js", "imports": ["_app/immutable/start-340b8293.js", "_app/immutable/chunks/index-6e580a54.js", "_app/immutable/chunks/singletons-588197bc.js", "_app/immutable/chunks/index-ee468ebe.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

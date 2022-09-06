@@ -1,7 +1,8 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as loop, f as set_store_value, v as validate_component, g as each, h as add_attribute } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
-import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, b as redirectSetInterval, l as lastScrollY, s as scrollY, c as instDeltaY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/firebase.js";
+import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, b as redirectSetInterval, l as lastScrollY, s as scrollY, c as instDeltaY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
+import "../../chunks/firebase.js";
 import "firebase/auth";
 import "firebase/app";
 import "firebase/firestore/lite";
@@ -180,8 +181,9 @@ function spring(value, opts = {}) {
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  let elements = [];
   {
-    console.log("$isDarkMode", $isDarkMode);
+    console.log(elements.length);
   }
   $$unsubscribe_isDarkMode();
   return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
@@ -206,7 +208,6 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { mobileHamburgerClosed } = $$props;
   let mobileOpen;
   let unique;
-  let hamburgerBtn;
   let jankytown = "";
   let btnColor = "sm:bg-red-300 ";
   let btnColorHover = "sm:hover:bg-red-300";
@@ -242,7 +243,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
       $$result,
-      { hamburgerBtn, mobileOpen, unique },
+      { mobileOpen, unique },
       {
         mobileOpen: ($$value) => {
           mobileOpen = $$value;
@@ -257,13 +258,17 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     )}
 
 
-<logo-and-nav class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}">
-    <div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+
+
+
+<logo-and-navbar class="${escape(jankytown, true) + " sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
 
     
-    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center "}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
+    
+         
+    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center"}">${$isXs && mobileOpen ? `<li class="${"pb-4"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
             
             ${each(Object.keys($routes), (KEY) => {
       return `<li class="${"py-3 sm:p-1"}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
@@ -301,11 +306,11 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         },
         {}
       )}
-                
+             
             </li>`;
     })}
 
-            ${!$isXs ? `<li class="${"px-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-nav>`;
+            ${!$isXs ? `<li class="${"px-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
   } while (!$$settled);
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
@@ -361,7 +366,9 @@ ${validate_component(Navbar, "Navbar").$$render(
       {}
     )}
 
-<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " h-[400vh]"}">${slots.default ? slots.default({}) : ``}</div>`;
+
+
+<div class="${"sm:block h-[400vh] " + escape(mobileHamburgerClosed && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
   } while (!$$settled);
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_redirectSetInterval();

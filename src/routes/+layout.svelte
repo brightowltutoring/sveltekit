@@ -2,6 +2,9 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> -->
+	<!-- <script src="https://use.fontawesome.com/4655df7e48.js"></script> -->
+	<script src="https://kit.fontawesome.com/be3bf075fa.js" crossorigin="anonymous"></script>
 
 	{#each Object.keys($routes) as key }
         {#if $page.routeId == "" }
