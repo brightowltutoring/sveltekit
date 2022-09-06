@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css2) => css2.code).join("\n"),
+          code: Array.from(result.css).map((css3) => css3.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -2184,487 +2184,6 @@ var init_index_esm = __esm({
     name2 = "firebase";
     version2 = "9.9.3";
     registerVersion(name2, version2, "app");
-  }
-});
-
-// node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js
-function m(t2, ...e3) {
-  if (d.logLevel <= LogLevel.DEBUG) {
-    const n2 = e3.map(_);
-    d.debug(`Firestore (${f}): ${t2}`, ...n2);
-  }
-}
-function p(t2, ...e3) {
-  if (d.logLevel <= LogLevel.ERROR) {
-    const n2 = e3.map(_);
-    d.error(`Firestore (${f}): ${t2}`, ...n2);
-  }
-}
-function _(t2) {
-  if ("string" == typeof t2)
-    return t2;
-  try {
-    return e3 = t2, JSON.stringify(e3);
-  } catch (e4) {
-    return t2;
-  }
-  var e3;
-}
-function g(t2 = "Unexpected state") {
-  const e3 = `FIRESTORE (${f}) INTERNAL ASSERTION FAILED: ` + t2;
-  throw p(e3), new Error(e3);
-}
-function v(t2, e3) {
-  t2 || g();
-}
-function yt(t2, e3) {
-  return t2 < e3 ? -1 : t2 > e3 ? 1 : 0;
-}
-function ln(e3 = getApp()) {
-  return _getProvider(e3, "firestore/lite").getImmediate();
-}
-var l, f, d, A, x, L, U, j, z, G, W, K, Q, H, lt, ft, At, Nt, Dt, xe, Fe, on, cn, an, Yn;
-var init_index_browser_esm2017 = __esm({
-  "node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js"() {
-    init_index_esm20174();
-    init_index_esm20172();
-    init_index_esm20173();
-    init_index_esm2017();
-    l = class {
-      constructor(t2) {
-        this.uid = t2;
-      }
-      isAuthenticated() {
-        return null != this.uid;
-      }
-      toKey() {
-        return this.isAuthenticated() ? "uid:" + this.uid : "anonymous-user";
-      }
-      isEqual(t2) {
-        return t2.uid === this.uid;
-      }
-    };
-    l.UNAUTHENTICATED = new l(null), l.GOOGLE_CREDENTIALS = new l("google-credentials-uid"), l.FIRST_PARTY = new l("first-party-uid"), l.MOCK_USER = new l("mock-user");
-    f = "9.9.2";
-    d = new Logger("@firebase/firestore");
-    A = "invalid-argument";
-    x = "failed-precondition";
-    L = class extends FirebaseError {
-      constructor(t2, e3) {
-        super(t2, e3), this.code = t2, this.message = e3, this.toString = () => `${this.name}: [code=${this.code}]: ${this.message}`;
-      }
-    };
-    U = class {
-      constructor(t2, e3) {
-        this.user = e3, this.type = "OAuth", this.headers = /* @__PURE__ */ new Map(), this.headers.set("Authorization", `Bearer ${t2}`);
-      }
-    };
-    j = class {
-      getToken() {
-        return Promise.resolve(null);
-      }
-      invalidateToken() {
-      }
-      start(t2, e3) {
-        t2.enqueueRetryable(() => e3(l.UNAUTHENTICATED));
-      }
-      shutdown() {
-      }
-    };
-    z = class {
-      constructor(t2) {
-        this.auth = null, t2.onInit((t3) => {
-          this.auth = t3;
-        });
-      }
-      getToken() {
-        return this.auth ? this.auth.getToken().then((t2) => t2 ? (v("string" == typeof t2.accessToken), new U(t2.accessToken, new l(this.auth.getUid()))) : null) : Promise.resolve(null);
-      }
-      invalidateToken() {
-      }
-      start(t2, e3) {
-      }
-      shutdown() {
-      }
-    };
-    G = class {
-      constructor(t2, e3, n2) {
-        this.type = "FirstParty", this.user = l.FIRST_PARTY, this.headers = /* @__PURE__ */ new Map(), this.headers.set("X-Goog-AuthUser", e3);
-        const r2 = t2.auth.getAuthHeaderValueForFirstParty([]);
-        r2 && this.headers.set("Authorization", r2), n2 && this.headers.set("X-Goog-Iam-Authorization-Token", n2);
-      }
-    };
-    W = class {
-      constructor(t2, e3, n2) {
-        this.t = t2, this.i = e3, this.o = n2;
-      }
-      getToken() {
-        return Promise.resolve(new G(this.t, this.i, this.o));
-      }
-      start(t2, e3) {
-        t2.enqueueRetryable(() => e3(l.FIRST_PARTY));
-      }
-      shutdown() {
-      }
-      invalidateToken() {
-      }
-    };
-    K = class {
-      constructor(t2) {
-        this.value = t2, this.type = "AppCheck", this.headers = /* @__PURE__ */ new Map(), t2 && t2.length > 0 && this.headers.set("x-firebase-appcheck", this.value);
-      }
-    };
-    Q = class {
-      constructor(t2) {
-        this.u = t2, this.appCheck = null, t2.onInit((t3) => {
-          this.appCheck = t3;
-        });
-      }
-      getToken() {
-        return this.appCheck ? this.appCheck.getToken().then((t2) => t2 ? (v("string" == typeof t2.token), new K(t2.token)) : null) : Promise.resolve(null);
-      }
-      invalidateToken() {
-      }
-      start(t2, e3) {
-      }
-      shutdown() {
-      }
-    };
-    H = class {
-      constructor(t2, e3) {
-        this.projectId = t2, this.database = e3 || "(default)";
-      }
-      static empty() {
-        return new H("", "");
-      }
-      get isDefaultDatabase() {
-        return "(default)" === this.database;
-      }
-      isEqual(t2) {
-        return t2 instanceof H && t2.projectId === this.projectId && t2.database === this.database;
-      }
-    };
-    (ft = lt || (lt = {}))[ft.OK = 0] = "OK", ft[ft.CANCELLED = 1] = "CANCELLED", ft[ft.UNKNOWN = 2] = "UNKNOWN", ft[ft.INVALID_ARGUMENT = 3] = "INVALID_ARGUMENT", ft[ft.DEADLINE_EXCEEDED = 4] = "DEADLINE_EXCEEDED", ft[ft.NOT_FOUND = 5] = "NOT_FOUND", ft[ft.ALREADY_EXISTS = 6] = "ALREADY_EXISTS", ft[ft.PERMISSION_DENIED = 7] = "PERMISSION_DENIED", ft[ft.UNAUTHENTICATED = 16] = "UNAUTHENTICATED", ft[ft.RESOURCE_EXHAUSTED = 8] = "RESOURCE_EXHAUSTED", ft[ft.FAILED_PRECONDITION = 9] = "FAILED_PRECONDITION", ft[ft.ABORTED = 10] = "ABORTED", ft[ft.OUT_OF_RANGE = 11] = "OUT_OF_RANGE", ft[ft.UNIMPLEMENTED = 12] = "UNIMPLEMENTED", ft[ft.INTERNAL = 13] = "INTERNAL", ft[ft.UNAVAILABLE = 14] = "UNAVAILABLE", ft[ft.DATA_LOSS = 15] = "DATA_LOSS";
-    At = class {
-      constructor(t2, e3, n2, r2, s3) {
-        this.key = t2, this.value = e3, this.color = null != n2 ? n2 : At.RED, this.left = null != r2 ? r2 : At.EMPTY, this.right = null != s3 ? s3 : At.EMPTY, this.size = this.left.size + 1 + this.right.size;
-      }
-      copy(t2, e3, n2, r2, s3) {
-        return new At(null != t2 ? t2 : this.key, null != e3 ? e3 : this.value, null != n2 ? n2 : this.color, null != r2 ? r2 : this.left, null != s3 ? s3 : this.right);
-      }
-      isEmpty() {
-        return false;
-      }
-      inorderTraversal(t2) {
-        return this.left.inorderTraversal(t2) || t2(this.key, this.value) || this.right.inorderTraversal(t2);
-      }
-      reverseTraversal(t2) {
-        return this.right.reverseTraversal(t2) || t2(this.key, this.value) || this.left.reverseTraversal(t2);
-      }
-      min() {
-        return this.left.isEmpty() ? this : this.left.min();
-      }
-      minKey() {
-        return this.min().key;
-      }
-      maxKey() {
-        return this.right.isEmpty() ? this.key : this.right.maxKey();
-      }
-      insert(t2, e3, n2) {
-        let r2 = this;
-        const s3 = n2(t2, r2.key);
-        return r2 = s3 < 0 ? r2.copy(null, null, null, r2.left.insert(t2, e3, n2), null) : 0 === s3 ? r2.copy(null, e3, null, null, null) : r2.copy(null, null, null, null, r2.right.insert(t2, e3, n2)), r2.fixUp();
-      }
-      removeMin() {
-        if (this.left.isEmpty())
-          return At.EMPTY;
-        let t2 = this;
-        return t2.left.isRed() || t2.left.left.isRed() || (t2 = t2.moveRedLeft()), t2 = t2.copy(null, null, null, t2.left.removeMin(), null), t2.fixUp();
-      }
-      remove(t2, e3) {
-        let n2, r2 = this;
-        if (e3(t2, r2.key) < 0)
-          r2.left.isEmpty() || r2.left.isRed() || r2.left.left.isRed() || (r2 = r2.moveRedLeft()), r2 = r2.copy(null, null, null, r2.left.remove(t2, e3), null);
-        else {
-          if (r2.left.isRed() && (r2 = r2.rotateRight()), r2.right.isEmpty() || r2.right.isRed() || r2.right.left.isRed() || (r2 = r2.moveRedRight()), 0 === e3(t2, r2.key)) {
-            if (r2.right.isEmpty())
-              return At.EMPTY;
-            n2 = r2.right.min(), r2 = r2.copy(n2.key, n2.value, null, null, r2.right.removeMin());
-          }
-          r2 = r2.copy(null, null, null, null, r2.right.remove(t2, e3));
-        }
-        return r2.fixUp();
-      }
-      isRed() {
-        return this.color;
-      }
-      fixUp() {
-        let t2 = this;
-        return t2.right.isRed() && !t2.left.isRed() && (t2 = t2.rotateLeft()), t2.left.isRed() && t2.left.left.isRed() && (t2 = t2.rotateRight()), t2.left.isRed() && t2.right.isRed() && (t2 = t2.colorFlip()), t2;
-      }
-      moveRedLeft() {
-        let t2 = this.colorFlip();
-        return t2.right.left.isRed() && (t2 = t2.copy(null, null, null, null, t2.right.rotateRight()), t2 = t2.rotateLeft(), t2 = t2.colorFlip()), t2;
-      }
-      moveRedRight() {
-        let t2 = this.colorFlip();
-        return t2.left.left.isRed() && (t2 = t2.rotateRight(), t2 = t2.colorFlip()), t2;
-      }
-      rotateLeft() {
-        const t2 = this.copy(null, null, At.RED, null, this.right.left);
-        return this.right.copy(null, null, this.color, t2, null);
-      }
-      rotateRight() {
-        const t2 = this.copy(null, null, At.RED, this.left.right, null);
-        return this.left.copy(null, null, this.color, null, t2);
-      }
-      colorFlip() {
-        const t2 = this.left.copy(null, null, !this.left.color, null, null), e3 = this.right.copy(null, null, !this.right.color, null, null);
-        return this.copy(null, null, !this.color, t2, e3);
-      }
-      checkMaxDepth() {
-        const t2 = this.check();
-        return Math.pow(2, t2) <= this.size + 1;
-      }
-      check() {
-        if (this.isRed() && this.left.isRed())
-          throw g();
-        if (this.right.isRed())
-          throw g();
-        const t2 = this.left.check();
-        if (t2 !== this.right.check())
-          throw g();
-        return t2 + (this.isRed() ? 0 : 1);
-      }
-    };
-    At.EMPTY = null, At.RED = true, At.BLACK = false;
-    At.EMPTY = new class {
-      constructor() {
-        this.size = 0;
-      }
-      get key() {
-        throw g();
-      }
-      get value() {
-        throw g();
-      }
-      get color() {
-        throw g();
-      }
-      get left() {
-        throw g();
-      }
-      get right() {
-        throw g();
-      }
-      copy(t2, e3, n2, r2, s3) {
-        return this;
-      }
-      insert(t2, e3, n2) {
-        return new At(t2, e3);
-      }
-      remove(t2, e3) {
-        return this;
-      }
-      isEmpty() {
-        return true;
-      }
-      inorderTraversal(t2) {
-        return false;
-      }
-      reverseTraversal(t2) {
-        return false;
-      }
-      minKey() {
-        return null;
-      }
-      maxKey() {
-        return null;
-      }
-      isRed() {
-        return false;
-      }
-      checkMaxDepth() {
-        return true;
-      }
-      check() {
-        return 0;
-      }
-    }();
-    Nt = class {
-      constructor(t2) {
-        this.binaryString = t2;
-      }
-      static fromBase64String(t2) {
-        const e3 = atob(t2);
-        return new Nt(e3);
-      }
-      static fromUint8Array(t2) {
-        const e3 = function(t3) {
-          let e4 = "";
-          for (let n2 = 0; n2 < t3.length; ++n2)
-            e4 += String.fromCharCode(t3[n2]);
-          return e4;
-        }(t2);
-        return new Nt(e3);
-      }
-      [Symbol.iterator]() {
-        let t2 = 0;
-        return {
-          next: () => t2 < this.binaryString.length ? {
-            value: this.binaryString.charCodeAt(t2++),
-            done: false
-          } : {
-            value: void 0,
-            done: true
-          }
-        };
-      }
-      toBase64() {
-        return t2 = this.binaryString, btoa(t2);
-        var t2;
-      }
-      toUint8Array() {
-        return function(t2) {
-          const e3 = new Uint8Array(t2.length);
-          for (let n2 = 0; n2 < t2.length; n2++)
-            e3[n2] = t2.charCodeAt(n2);
-          return e3;
-        }(this.binaryString);
-      }
-      approximateByteSize() {
-        return 2 * this.binaryString.length;
-      }
-      compareTo(t2) {
-        return yt(this.binaryString, t2.binaryString);
-      }
-      isEqual(t2) {
-        return this.binaryString === t2.binaryString;
-      }
-    };
-    Nt.EMPTY_BYTE_STRING = new Nt("");
-    Dt = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
-    xe = (() => {
-      const t2 = {
-        asc: "ASCENDING",
-        desc: "DESCENDING"
-      };
-      return t2;
-    })();
-    Fe = (() => {
-      const t2 = {
-        "<": "LESS_THAN",
-        "<=": "LESS_THAN_OR_EQUAL",
-        ">": "GREATER_THAN",
-        ">=": "GREATER_THAN_OR_EQUAL",
-        "==": "EQUAL",
-        "!=": "NOT_EQUAL",
-        "array-contains": "ARRAY_CONTAINS",
-        in: "IN",
-        "not-in": "NOT_IN",
-        "array-contains-any": "ARRAY_CONTAINS_ANY"
-      };
-      return t2;
-    })();
-    on = /* @__PURE__ */ new Map();
-    cn = class {
-      constructor(t2) {
-        var e3;
-        if (void 0 === t2.host) {
-          if (void 0 !== t2.ssl)
-            throw new L(A, "Can't provide ssl option if host option is not set");
-          this.host = "firestore.googleapis.com", this.ssl = true;
-        } else
-          this.host = t2.host, this.ssl = null === (e3 = t2.ssl) || void 0 === e3 || e3;
-        if (this.credentials = t2.credentials, this.ignoreUndefinedProperties = !!t2.ignoreUndefinedProperties, void 0 === t2.cacheSizeBytes)
-          this.cacheSizeBytes = 41943040;
-        else {
-          if (-1 !== t2.cacheSizeBytes && t2.cacheSizeBytes < 1048576)
-            throw new L(A, "cacheSizeBytes must be at least 1048576");
-          this.cacheSizeBytes = t2.cacheSizeBytes;
-        }
-        this.experimentalForceLongPolling = !!t2.experimentalForceLongPolling, this.experimentalAutoDetectLongPolling = !!t2.experimentalAutoDetectLongPolling, this.useFetchStreams = !!t2.useFetchStreams, function(t3, e4, n2, r2) {
-          if (true === e4 && true === r2)
-            throw new L(A, `${t3} and ${n2} cannot be used together.`);
-        }("experimentalForceLongPolling", t2.experimentalForceLongPolling, "experimentalAutoDetectLongPolling", t2.experimentalAutoDetectLongPolling);
-      }
-      isEqual(t2) {
-        return this.host === t2.host && this.ssl === t2.ssl && this.credentials === t2.credentials && this.cacheSizeBytes === t2.cacheSizeBytes && this.experimentalForceLongPolling === t2.experimentalForceLongPolling && this.experimentalAutoDetectLongPolling === t2.experimentalAutoDetectLongPolling && this.ignoreUndefinedProperties === t2.ignoreUndefinedProperties && this.useFetchStreams === t2.useFetchStreams;
-      }
-    };
-    an = class {
-      constructor(t2, e3, n2) {
-        this._authCredentials = e3, this._appCheckCredentials = n2, this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new cn({}), this._settingsFrozen = false, t2 instanceof H ? this._databaseId = t2 : (this._app = t2, this._databaseId = function(t3) {
-          if (!Object.prototype.hasOwnProperty.apply(t3.options, ["projectId"]))
-            throw new L(A, '"projectId" not provided in firebase.initializeApp.');
-          return new H(t3.options.projectId);
-        }(t2));
-      }
-      get app() {
-        if (!this._app)
-          throw new L(x, "Firestore was not initialized using the Firebase SDK. 'app' is not available");
-        return this._app;
-      }
-      get _initialized() {
-        return this._settingsFrozen;
-      }
-      get _terminated() {
-        return void 0 !== this._terminateTask;
-      }
-      _setSettings(t2) {
-        if (this._settingsFrozen)
-          throw new L(x, "Firestore has already been started and its settings can no longer be changed. You can only modify settings before calling any other methods on a Firestore object.");
-        this._settings = new cn(t2), void 0 !== t2.credentials && (this._authCredentials = function(t3) {
-          if (!t3)
-            return new j();
-          switch (t3.type) {
-            case "gapi":
-              const e3 = t3.client;
-              return v(!("object" != typeof e3 || null === e3 || !e3.auth || !e3.auth.getAuthHeaderValueForFirstParty)), new W(e3, t3.sessionIndex || "0", t3.iamToken || null);
-            case "provider":
-              return t3.client;
-            default:
-              throw new L(A, "makeAuthCredentialsProvider failed due to invalid credential type");
-          }
-        }(t2.credentials));
-      }
-      _getSettings() {
-        return this._settings;
-      }
-      _freezeSettings() {
-        return this._settingsFrozen = true, this._settings;
-      }
-      _delete() {
-        return this._terminateTask || (this._terminateTask = this._terminate()), this._terminateTask;
-      }
-      toJSON() {
-        return {
-          app: this._app,
-          databaseId: this._databaseId,
-          settings: this._settings
-        };
-      }
-      _terminate() {
-        return function(t2) {
-          const e3 = on.get(t2);
-          e3 && (m("ComponentProvider", "Removing Datastore"), on.delete(t2), e3.terminate());
-        }(this), Promise.resolve();
-      }
-    };
-    Yn = new RegExp("[~\\*/\\[\\]]");
-    !function(t2) {
-      f = t2;
-    }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", (t2, { options: e3 }) => {
-      const n2 = t2.getProvider("app").getImmediate(), r2 = new an(n2, new z(t2.getProvider("auth-internal")), new Q(t2.getProvider("app-check-internal")));
-      return e3 && r2._setSettings(e3), r2;
-    }, "PUBLIC")), registerVersion("firestore-lite", "3.4.14", ""), registerVersion("firestore-lite", "3.4.14", "esm2017");
-  }
-});
-
-// node_modules/firebase/firestore/lite/dist/index.esm.js
-var init_index_esm2 = __esm({
-  "node_modules/firebase/firestore/lite/dist/index.esm.js"() {
-    init_index_browser_esm2017();
   }
 });
 
@@ -6818,9 +6337,490 @@ var init_esm2017 = __esm({
 });
 
 // node_modules/firebase/auth/dist/index.esm.js
-var init_index_esm3 = __esm({
+var init_index_esm2 = __esm({
   "node_modules/firebase/auth/dist/index.esm.js"() {
     init_esm2017();
+  }
+});
+
+// node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js
+function m(t2, ...e3) {
+  if (d.logLevel <= LogLevel.DEBUG) {
+    const n2 = e3.map(_);
+    d.debug(`Firestore (${f}): ${t2}`, ...n2);
+  }
+}
+function p(t2, ...e3) {
+  if (d.logLevel <= LogLevel.ERROR) {
+    const n2 = e3.map(_);
+    d.error(`Firestore (${f}): ${t2}`, ...n2);
+  }
+}
+function _(t2) {
+  if ("string" == typeof t2)
+    return t2;
+  try {
+    return e3 = t2, JSON.stringify(e3);
+  } catch (e4) {
+    return t2;
+  }
+  var e3;
+}
+function g(t2 = "Unexpected state") {
+  const e3 = `FIRESTORE (${f}) INTERNAL ASSERTION FAILED: ` + t2;
+  throw p(e3), new Error(e3);
+}
+function v(t2, e3) {
+  t2 || g();
+}
+function yt(t2, e3) {
+  return t2 < e3 ? -1 : t2 > e3 ? 1 : 0;
+}
+function ln(e3 = getApp()) {
+  return _getProvider(e3, "firestore/lite").getImmediate();
+}
+var l, f, d, A, x, L, U, j, z, G, W, K, Q, H, lt, ft, At, Nt, Dt, xe, Fe, on, cn, an, Yn;
+var init_index_browser_esm2017 = __esm({
+  "node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js"() {
+    init_index_esm20174();
+    init_index_esm20172();
+    init_index_esm20173();
+    init_index_esm2017();
+    l = class {
+      constructor(t2) {
+        this.uid = t2;
+      }
+      isAuthenticated() {
+        return null != this.uid;
+      }
+      toKey() {
+        return this.isAuthenticated() ? "uid:" + this.uid : "anonymous-user";
+      }
+      isEqual(t2) {
+        return t2.uid === this.uid;
+      }
+    };
+    l.UNAUTHENTICATED = new l(null), l.GOOGLE_CREDENTIALS = new l("google-credentials-uid"), l.FIRST_PARTY = new l("first-party-uid"), l.MOCK_USER = new l("mock-user");
+    f = "9.9.2";
+    d = new Logger("@firebase/firestore");
+    A = "invalid-argument";
+    x = "failed-precondition";
+    L = class extends FirebaseError {
+      constructor(t2, e3) {
+        super(t2, e3), this.code = t2, this.message = e3, this.toString = () => `${this.name}: [code=${this.code}]: ${this.message}`;
+      }
+    };
+    U = class {
+      constructor(t2, e3) {
+        this.user = e3, this.type = "OAuth", this.headers = /* @__PURE__ */ new Map(), this.headers.set("Authorization", `Bearer ${t2}`);
+      }
+    };
+    j = class {
+      getToken() {
+        return Promise.resolve(null);
+      }
+      invalidateToken() {
+      }
+      start(t2, e3) {
+        t2.enqueueRetryable(() => e3(l.UNAUTHENTICATED));
+      }
+      shutdown() {
+      }
+    };
+    z = class {
+      constructor(t2) {
+        this.auth = null, t2.onInit((t3) => {
+          this.auth = t3;
+        });
+      }
+      getToken() {
+        return this.auth ? this.auth.getToken().then((t2) => t2 ? (v("string" == typeof t2.accessToken), new U(t2.accessToken, new l(this.auth.getUid()))) : null) : Promise.resolve(null);
+      }
+      invalidateToken() {
+      }
+      start(t2, e3) {
+      }
+      shutdown() {
+      }
+    };
+    G = class {
+      constructor(t2, e3, n2) {
+        this.type = "FirstParty", this.user = l.FIRST_PARTY, this.headers = /* @__PURE__ */ new Map(), this.headers.set("X-Goog-AuthUser", e3);
+        const r2 = t2.auth.getAuthHeaderValueForFirstParty([]);
+        r2 && this.headers.set("Authorization", r2), n2 && this.headers.set("X-Goog-Iam-Authorization-Token", n2);
+      }
+    };
+    W = class {
+      constructor(t2, e3, n2) {
+        this.t = t2, this.i = e3, this.o = n2;
+      }
+      getToken() {
+        return Promise.resolve(new G(this.t, this.i, this.o));
+      }
+      start(t2, e3) {
+        t2.enqueueRetryable(() => e3(l.FIRST_PARTY));
+      }
+      shutdown() {
+      }
+      invalidateToken() {
+      }
+    };
+    K = class {
+      constructor(t2) {
+        this.value = t2, this.type = "AppCheck", this.headers = /* @__PURE__ */ new Map(), t2 && t2.length > 0 && this.headers.set("x-firebase-appcheck", this.value);
+      }
+    };
+    Q = class {
+      constructor(t2) {
+        this.u = t2, this.appCheck = null, t2.onInit((t3) => {
+          this.appCheck = t3;
+        });
+      }
+      getToken() {
+        return this.appCheck ? this.appCheck.getToken().then((t2) => t2 ? (v("string" == typeof t2.token), new K(t2.token)) : null) : Promise.resolve(null);
+      }
+      invalidateToken() {
+      }
+      start(t2, e3) {
+      }
+      shutdown() {
+      }
+    };
+    H = class {
+      constructor(t2, e3) {
+        this.projectId = t2, this.database = e3 || "(default)";
+      }
+      static empty() {
+        return new H("", "");
+      }
+      get isDefaultDatabase() {
+        return "(default)" === this.database;
+      }
+      isEqual(t2) {
+        return t2 instanceof H && t2.projectId === this.projectId && t2.database === this.database;
+      }
+    };
+    (ft = lt || (lt = {}))[ft.OK = 0] = "OK", ft[ft.CANCELLED = 1] = "CANCELLED", ft[ft.UNKNOWN = 2] = "UNKNOWN", ft[ft.INVALID_ARGUMENT = 3] = "INVALID_ARGUMENT", ft[ft.DEADLINE_EXCEEDED = 4] = "DEADLINE_EXCEEDED", ft[ft.NOT_FOUND = 5] = "NOT_FOUND", ft[ft.ALREADY_EXISTS = 6] = "ALREADY_EXISTS", ft[ft.PERMISSION_DENIED = 7] = "PERMISSION_DENIED", ft[ft.UNAUTHENTICATED = 16] = "UNAUTHENTICATED", ft[ft.RESOURCE_EXHAUSTED = 8] = "RESOURCE_EXHAUSTED", ft[ft.FAILED_PRECONDITION = 9] = "FAILED_PRECONDITION", ft[ft.ABORTED = 10] = "ABORTED", ft[ft.OUT_OF_RANGE = 11] = "OUT_OF_RANGE", ft[ft.UNIMPLEMENTED = 12] = "UNIMPLEMENTED", ft[ft.INTERNAL = 13] = "INTERNAL", ft[ft.UNAVAILABLE = 14] = "UNAVAILABLE", ft[ft.DATA_LOSS = 15] = "DATA_LOSS";
+    At = class {
+      constructor(t2, e3, n2, r2, s3) {
+        this.key = t2, this.value = e3, this.color = null != n2 ? n2 : At.RED, this.left = null != r2 ? r2 : At.EMPTY, this.right = null != s3 ? s3 : At.EMPTY, this.size = this.left.size + 1 + this.right.size;
+      }
+      copy(t2, e3, n2, r2, s3) {
+        return new At(null != t2 ? t2 : this.key, null != e3 ? e3 : this.value, null != n2 ? n2 : this.color, null != r2 ? r2 : this.left, null != s3 ? s3 : this.right);
+      }
+      isEmpty() {
+        return false;
+      }
+      inorderTraversal(t2) {
+        return this.left.inorderTraversal(t2) || t2(this.key, this.value) || this.right.inorderTraversal(t2);
+      }
+      reverseTraversal(t2) {
+        return this.right.reverseTraversal(t2) || t2(this.key, this.value) || this.left.reverseTraversal(t2);
+      }
+      min() {
+        return this.left.isEmpty() ? this : this.left.min();
+      }
+      minKey() {
+        return this.min().key;
+      }
+      maxKey() {
+        return this.right.isEmpty() ? this.key : this.right.maxKey();
+      }
+      insert(t2, e3, n2) {
+        let r2 = this;
+        const s3 = n2(t2, r2.key);
+        return r2 = s3 < 0 ? r2.copy(null, null, null, r2.left.insert(t2, e3, n2), null) : 0 === s3 ? r2.copy(null, e3, null, null, null) : r2.copy(null, null, null, null, r2.right.insert(t2, e3, n2)), r2.fixUp();
+      }
+      removeMin() {
+        if (this.left.isEmpty())
+          return At.EMPTY;
+        let t2 = this;
+        return t2.left.isRed() || t2.left.left.isRed() || (t2 = t2.moveRedLeft()), t2 = t2.copy(null, null, null, t2.left.removeMin(), null), t2.fixUp();
+      }
+      remove(t2, e3) {
+        let n2, r2 = this;
+        if (e3(t2, r2.key) < 0)
+          r2.left.isEmpty() || r2.left.isRed() || r2.left.left.isRed() || (r2 = r2.moveRedLeft()), r2 = r2.copy(null, null, null, r2.left.remove(t2, e3), null);
+        else {
+          if (r2.left.isRed() && (r2 = r2.rotateRight()), r2.right.isEmpty() || r2.right.isRed() || r2.right.left.isRed() || (r2 = r2.moveRedRight()), 0 === e3(t2, r2.key)) {
+            if (r2.right.isEmpty())
+              return At.EMPTY;
+            n2 = r2.right.min(), r2 = r2.copy(n2.key, n2.value, null, null, r2.right.removeMin());
+          }
+          r2 = r2.copy(null, null, null, null, r2.right.remove(t2, e3));
+        }
+        return r2.fixUp();
+      }
+      isRed() {
+        return this.color;
+      }
+      fixUp() {
+        let t2 = this;
+        return t2.right.isRed() && !t2.left.isRed() && (t2 = t2.rotateLeft()), t2.left.isRed() && t2.left.left.isRed() && (t2 = t2.rotateRight()), t2.left.isRed() && t2.right.isRed() && (t2 = t2.colorFlip()), t2;
+      }
+      moveRedLeft() {
+        let t2 = this.colorFlip();
+        return t2.right.left.isRed() && (t2 = t2.copy(null, null, null, null, t2.right.rotateRight()), t2 = t2.rotateLeft(), t2 = t2.colorFlip()), t2;
+      }
+      moveRedRight() {
+        let t2 = this.colorFlip();
+        return t2.left.left.isRed() && (t2 = t2.rotateRight(), t2 = t2.colorFlip()), t2;
+      }
+      rotateLeft() {
+        const t2 = this.copy(null, null, At.RED, null, this.right.left);
+        return this.right.copy(null, null, this.color, t2, null);
+      }
+      rotateRight() {
+        const t2 = this.copy(null, null, At.RED, this.left.right, null);
+        return this.left.copy(null, null, this.color, null, t2);
+      }
+      colorFlip() {
+        const t2 = this.left.copy(null, null, !this.left.color, null, null), e3 = this.right.copy(null, null, !this.right.color, null, null);
+        return this.copy(null, null, !this.color, t2, e3);
+      }
+      checkMaxDepth() {
+        const t2 = this.check();
+        return Math.pow(2, t2) <= this.size + 1;
+      }
+      check() {
+        if (this.isRed() && this.left.isRed())
+          throw g();
+        if (this.right.isRed())
+          throw g();
+        const t2 = this.left.check();
+        if (t2 !== this.right.check())
+          throw g();
+        return t2 + (this.isRed() ? 0 : 1);
+      }
+    };
+    At.EMPTY = null, At.RED = true, At.BLACK = false;
+    At.EMPTY = new class {
+      constructor() {
+        this.size = 0;
+      }
+      get key() {
+        throw g();
+      }
+      get value() {
+        throw g();
+      }
+      get color() {
+        throw g();
+      }
+      get left() {
+        throw g();
+      }
+      get right() {
+        throw g();
+      }
+      copy(t2, e3, n2, r2, s3) {
+        return this;
+      }
+      insert(t2, e3, n2) {
+        return new At(t2, e3);
+      }
+      remove(t2, e3) {
+        return this;
+      }
+      isEmpty() {
+        return true;
+      }
+      inorderTraversal(t2) {
+        return false;
+      }
+      reverseTraversal(t2) {
+        return false;
+      }
+      minKey() {
+        return null;
+      }
+      maxKey() {
+        return null;
+      }
+      isRed() {
+        return false;
+      }
+      checkMaxDepth() {
+        return true;
+      }
+      check() {
+        return 0;
+      }
+    }();
+    Nt = class {
+      constructor(t2) {
+        this.binaryString = t2;
+      }
+      static fromBase64String(t2) {
+        const e3 = atob(t2);
+        return new Nt(e3);
+      }
+      static fromUint8Array(t2) {
+        const e3 = function(t3) {
+          let e4 = "";
+          for (let n2 = 0; n2 < t3.length; ++n2)
+            e4 += String.fromCharCode(t3[n2]);
+          return e4;
+        }(t2);
+        return new Nt(e3);
+      }
+      [Symbol.iterator]() {
+        let t2 = 0;
+        return {
+          next: () => t2 < this.binaryString.length ? {
+            value: this.binaryString.charCodeAt(t2++),
+            done: false
+          } : {
+            value: void 0,
+            done: true
+          }
+        };
+      }
+      toBase64() {
+        return t2 = this.binaryString, btoa(t2);
+        var t2;
+      }
+      toUint8Array() {
+        return function(t2) {
+          const e3 = new Uint8Array(t2.length);
+          for (let n2 = 0; n2 < t2.length; n2++)
+            e3[n2] = t2.charCodeAt(n2);
+          return e3;
+        }(this.binaryString);
+      }
+      approximateByteSize() {
+        return 2 * this.binaryString.length;
+      }
+      compareTo(t2) {
+        return yt(this.binaryString, t2.binaryString);
+      }
+      isEqual(t2) {
+        return this.binaryString === t2.binaryString;
+      }
+    };
+    Nt.EMPTY_BYTE_STRING = new Nt("");
+    Dt = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
+    xe = (() => {
+      const t2 = {
+        asc: "ASCENDING",
+        desc: "DESCENDING"
+      };
+      return t2;
+    })();
+    Fe = (() => {
+      const t2 = {
+        "<": "LESS_THAN",
+        "<=": "LESS_THAN_OR_EQUAL",
+        ">": "GREATER_THAN",
+        ">=": "GREATER_THAN_OR_EQUAL",
+        "==": "EQUAL",
+        "!=": "NOT_EQUAL",
+        "array-contains": "ARRAY_CONTAINS",
+        in: "IN",
+        "not-in": "NOT_IN",
+        "array-contains-any": "ARRAY_CONTAINS_ANY"
+      };
+      return t2;
+    })();
+    on = /* @__PURE__ */ new Map();
+    cn = class {
+      constructor(t2) {
+        var e3;
+        if (void 0 === t2.host) {
+          if (void 0 !== t2.ssl)
+            throw new L(A, "Can't provide ssl option if host option is not set");
+          this.host = "firestore.googleapis.com", this.ssl = true;
+        } else
+          this.host = t2.host, this.ssl = null === (e3 = t2.ssl) || void 0 === e3 || e3;
+        if (this.credentials = t2.credentials, this.ignoreUndefinedProperties = !!t2.ignoreUndefinedProperties, void 0 === t2.cacheSizeBytes)
+          this.cacheSizeBytes = 41943040;
+        else {
+          if (-1 !== t2.cacheSizeBytes && t2.cacheSizeBytes < 1048576)
+            throw new L(A, "cacheSizeBytes must be at least 1048576");
+          this.cacheSizeBytes = t2.cacheSizeBytes;
+        }
+        this.experimentalForceLongPolling = !!t2.experimentalForceLongPolling, this.experimentalAutoDetectLongPolling = !!t2.experimentalAutoDetectLongPolling, this.useFetchStreams = !!t2.useFetchStreams, function(t3, e4, n2, r2) {
+          if (true === e4 && true === r2)
+            throw new L(A, `${t3} and ${n2} cannot be used together.`);
+        }("experimentalForceLongPolling", t2.experimentalForceLongPolling, "experimentalAutoDetectLongPolling", t2.experimentalAutoDetectLongPolling);
+      }
+      isEqual(t2) {
+        return this.host === t2.host && this.ssl === t2.ssl && this.credentials === t2.credentials && this.cacheSizeBytes === t2.cacheSizeBytes && this.experimentalForceLongPolling === t2.experimentalForceLongPolling && this.experimentalAutoDetectLongPolling === t2.experimentalAutoDetectLongPolling && this.ignoreUndefinedProperties === t2.ignoreUndefinedProperties && this.useFetchStreams === t2.useFetchStreams;
+      }
+    };
+    an = class {
+      constructor(t2, e3, n2) {
+        this._authCredentials = e3, this._appCheckCredentials = n2, this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new cn({}), this._settingsFrozen = false, t2 instanceof H ? this._databaseId = t2 : (this._app = t2, this._databaseId = function(t3) {
+          if (!Object.prototype.hasOwnProperty.apply(t3.options, ["projectId"]))
+            throw new L(A, '"projectId" not provided in firebase.initializeApp.');
+          return new H(t3.options.projectId);
+        }(t2));
+      }
+      get app() {
+        if (!this._app)
+          throw new L(x, "Firestore was not initialized using the Firebase SDK. 'app' is not available");
+        return this._app;
+      }
+      get _initialized() {
+        return this._settingsFrozen;
+      }
+      get _terminated() {
+        return void 0 !== this._terminateTask;
+      }
+      _setSettings(t2) {
+        if (this._settingsFrozen)
+          throw new L(x, "Firestore has already been started and its settings can no longer be changed. You can only modify settings before calling any other methods on a Firestore object.");
+        this._settings = new cn(t2), void 0 !== t2.credentials && (this._authCredentials = function(t3) {
+          if (!t3)
+            return new j();
+          switch (t3.type) {
+            case "gapi":
+              const e3 = t3.client;
+              return v(!("object" != typeof e3 || null === e3 || !e3.auth || !e3.auth.getAuthHeaderValueForFirstParty)), new W(e3, t3.sessionIndex || "0", t3.iamToken || null);
+            case "provider":
+              return t3.client;
+            default:
+              throw new L(A, "makeAuthCredentialsProvider failed due to invalid credential type");
+          }
+        }(t2.credentials));
+      }
+      _getSettings() {
+        return this._settings;
+      }
+      _freezeSettings() {
+        return this._settingsFrozen = true, this._settings;
+      }
+      _delete() {
+        return this._terminateTask || (this._terminateTask = this._terminate()), this._terminateTask;
+      }
+      toJSON() {
+        return {
+          app: this._app,
+          databaseId: this._databaseId,
+          settings: this._settings
+        };
+      }
+      _terminate() {
+        return function(t2) {
+          const e3 = on.get(t2);
+          e3 && (m("ComponentProvider", "Removing Datastore"), on.delete(t2), e3.terminate());
+        }(this), Promise.resolve();
+      }
+    };
+    Yn = new RegExp("[~\\*/\\[\\]]");
+    !function(t2) {
+      f = t2;
+    }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", (t2, { options: e3 }) => {
+      const n2 = t2.getProvider("app").getImmediate(), r2 = new an(n2, new z(t2.getProvider("auth-internal")), new Q(t2.getProvider("app-check-internal")));
+      return e3 && r2._setSettings(e3), r2;
+    }, "PUBLIC")), registerVersion("firestore-lite", "3.4.14", ""), registerVersion("firestore-lite", "3.4.14", "esm2017");
+  }
+});
+
+// node_modules/firebase/firestore/lite/dist/index.esm.js
+var init_index_esm3 = __esm({
+  "node_modules/firebase/firestore/lite/dist/index.esm.js"() {
+    init_index_browser_esm2017();
   }
 });
 
@@ -6838,7 +6838,7 @@ function customFade(node, { easing = elasticOut, duration = 3e3 }) {
       `
   };
 }
-var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, isXs, routes, isDarkMode, redirectAfterLoginTimeOut, FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app;
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, isXs, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
     init_index2();
@@ -6896,6 +6896,7 @@ var init_firebase = __esm({
     });
     isDarkMode = writable(false);
     redirectAfterLoginTimeOut = writable("");
+    redirectSetInterval = writable("");
     FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
     FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
     FIREBASE_projectId = "thinksolve-app";
@@ -7018,25 +7019,27 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Navitem, LightDarkMode, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, Navbar, Layout;
+var Navitem, hamburgerWidth, hamburgerPattyHeight, hamburgerColor, Hamburger, LightDarkMode, Navbar, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
     init_stores();
     init_firebase();
     init_index2();
-    init_index_esm3();
-    init_index_esm();
     init_index_esm2();
+    init_index_esm();
+    init_index_esm3();
     Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_isDarkMode;
       let $$unsubscribe_isXs;
       let $page, $$unsubscribe_page;
       let $$unsubscribe_redirectAfterLoginTimeOut;
+      let $$unsubscribe_redirectSetInterval;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
       $$unsubscribe_isXs = subscribe(isXs, (value) => value);
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
+      $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       let { href, content, bool, mobileOpen, btnColor, btnColorHover, routes: routes2 } = $$props;
       if ($$props.href === void 0 && $$bindings.href && href !== void 0)
         $$bindings.href(href);
@@ -7062,17 +7065,9 @@ var init_layout_svelte = __esm({
       $$unsubscribe_isXs();
       $$unsubscribe_page();
       $$unsubscribe_redirectAfterLoginTimeOut();
+      $$unsubscribe_redirectSetInterval();
       return `
 <button class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</button>`;
-    });
-    LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      {
-        console.log("$isDarkMode", $isDarkMode);
-      }
-      $$unsubscribe_isDarkMode();
-      return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
     });
     hamburgerWidth = 35;
     hamburgerPattyHeight = 2;
@@ -7107,6 +7102,15 @@ var init_layout_svelte = __esm({
 
     
         </main>`;
+    });
+    LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      {
+        console.log("$isDarkMode", $isDarkMode);
+      }
+      $$unsubscribe_isDarkMode();
+      return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $instDeltaY, $$unsubscribe_instDeltaY;
@@ -7240,21 +7244,23 @@ var init_layout_svelte = __esm({
     });
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_isLoggedIn;
+      let $$unsubscribe_redirectSetInterval;
+      let $$unsubscribe_redirectAfterLoginTimeOut;
       let $$unsubscribe_windowInnerHeight;
       let $$unsubscribe_scrollYMax;
       let $routes, $$unsubscribe_routes;
       let $page, $$unsubscribe_page;
       let $$unsubscribe_scrollY;
       let $$unsubscribe_innerWidth;
-      let $$unsubscribe_redirectAfterLoginTimeOut;
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
+      $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
+      $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
       $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
       $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
       $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
-      $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       let mobileHamburgerClosed = true;
       let $$settled;
       let $$rendered;
@@ -7263,7 +7269,6 @@ var init_layout_svelte = __esm({
         $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key2) => {
           return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)} </title>`, ""}` : ``}`}`;
         })}`, ""}
-
 
 
 
@@ -7285,13 +7290,14 @@ ${validate_component(Navbar, "Navbar").$$render(
 <div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " h-[400vh]"}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
       $$unsubscribe_isLoggedIn();
+      $$unsubscribe_redirectSetInterval();
+      $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_windowInnerHeight();
       $$unsubscribe_scrollYMax();
       $$unsubscribe_routes();
       $$unsubscribe_page();
       $$unsubscribe_scrollY();
       $$unsubscribe_innerWidth();
-      $$unsubscribe_redirectAfterLoginTimeOut();
       return $$rendered;
     });
   }
@@ -7313,9 +7319,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-51241b45.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-51241b45.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/firebase-0761f3f8.js", "_app/immutable/chunks/singletons-1b6351c9.js", "_app/immutable/chunks/stores-128bc6c2.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-b710652b.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-a3c93f2f.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-a3c93f2f.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/index-133a490d.js", "_app/immutable/chunks/stores-a2ae3f5b.js", "_app/immutable/chunks/singletons-9a8d8975.js", "_app/immutable/chunks/firebase-b1810dc7.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-f5e04e27.css"];
   }
 });
 
@@ -7359,8 +7365,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-60ad73ce.js";
-    imports2 = ["_app/immutable/components/error.svelte-60ad73ce.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/stores-128bc6c2.js", "_app/immutable/chunks/singletons-1b6351c9.js"];
+    file2 = "_app/immutable/components/error.svelte-eb2fed99.js";
+    imports2 = ["_app/immutable/components/error.svelte-eb2fed99.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/stores-a2ae3f5b.js", "_app/immutable/chunks/singletons-9a8d8975.js"];
     stylesheets2 = [];
   }
 });
@@ -7445,8 +7451,8 @@ var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
     init_firebase();
-    init_index_esm2();
     init_index_esm3();
+    init_index_esm2();
     init_index2();
     init_index_esm();
     css = {
@@ -7455,10 +7461,13 @@ var init_page_svelte3 = __esm({
     };
     Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_redirectAfterLoginTimeOut;
+      let $$unsubscribe_redirectSetInterval;
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
+      $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       let emailFieldValue = "";
       $$result.css.add(css);
       $$unsubscribe_redirectAfterLoginTimeOut();
+      $$unsubscribe_redirectSetInterval();
       return `<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 90vh; max-height: 90vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(10px); "}"></video>
 
 
@@ -7506,8 +7515,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-2e3304ec.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-2e3304ec.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/firebase-0761f3f8.js", "_app/immutable/chunks/singletons-1b6351c9.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-bcb5df9d.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-bcb5df9d.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/firebase-b1810dc7.js", "_app/immutable/chunks/singletons-9a8d8975.js", "_app/immutable/chunks/index-133a490d.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -7517,12 +7526,62 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page4
 });
-var Page4;
+var css2, PlansCard, Page4;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
+    css2 = {
+      code: ".card.svelte-kh0wse{transform:perspective(1000px) rotateY(12deg);transition:transform 0.3s ease 0s}.card.svelte-kh0wse:hover{transform:perspective(3000px) rotateY(0deg) scale(1.02)}",
+      map: null
+    };
+    PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { buttonColor = "bg-[rgba(253,165,165,1)]" } = $$props;
+      let { buttonColorHover = "hover:bg-[rgba(253,165,165,0.4)]" } = $$props;
+      if ($$props.buttonColor === void 0 && $$bindings.buttonColor && buttonColor !== void 0)
+        $$bindings.buttonColor(buttonColor);
+      if ($$props.buttonColorHover === void 0 && $$bindings.buttonColorHover && buttonColorHover !== void 0)
+        $$bindings.buttonColorHover(buttonColorHover);
+      $$result.css.add(css2);
+      return `<div class="${"card shadow-xl rounded-xl w-[300px] p-10 m-4 text-center duration-300 svelte-kh0wse"}"><button class="${"cardBtn " + escape(buttonColor, true) + " " + escape(buttonColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 svelte-kh0wse"}">${slots.buttonText ? slots.buttonText({}) : `
+            default button Text
+        `}</button>
+
+
+    <p class="${"py-2 text-2xl"}">${slots.cardTitle ? slots.cardTitle({}) : ` 
+            default cardTitle
+        `}</p>
+    
+
+
+    ${slots.cardText ? slots.cardText({}) : ` 
+        default cardText
+    `}
+</div>`;
+    });
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `Plans`;
+      return `${validate_component(PlansCard, "PlansCard").$$render($$result, {}, {}, {
+        cardText: () => {
+          return `<span slot="${"cardText"}">sdfsdf </span>`;
+        },
+        cardTitle: () => {
+          return `<span slot="${"cardTitle"}">flowy </span>`;
+        },
+        buttonText: () => {
+          return `<span slot="${"buttonText"}">flowy </span>`;
+        }
+      })}
+
+${validate_component(PlansCard, "PlansCard").$$render($$result, {}, {}, {
+        cardText: () => {
+          return `<span slot="${"cardText"}">ss3ik </span>`;
+        },
+        cardTitle: () => {
+          return `<span slot="${"cardTitle"}">s3ik </span>`;
+        },
+        buttonText: () => {
+          return `<span slot="${"buttonText"}">s3ik </span>`;
+        }
+      })}`;
     });
   }
 });
@@ -7541,9 +7600,9 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/plans/_page.svelte-556f5a3e.js";
-    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-556f5a3e.js", "_app/immutable/chunks/index-c9f4976c.js"];
-    stylesheets6 = [];
+    file6 = "_app/immutable/components/pages/plans/_page.svelte-ca69685d.js";
+    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-ca69685d.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/index-133a490d.js"];
+    stylesheets6 = ["_app/immutable/assets/+page-6e65f8e8.css"];
   }
 });
 
@@ -9663,7 +9722,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-a1b9ad38.js", "imports": ["_app/immutable/start-a1b9ad38.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/singletons-1b6351c9.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-b1b9fbc9.js", "imports": ["_app/immutable/start-b1b9fbc9.js", "_app/immutable/chunks/index-c9f4976c.js", "_app/immutable/chunks/singletons-9a8d8975.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

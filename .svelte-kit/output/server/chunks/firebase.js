@@ -1,8 +1,8 @@
 import { d as derived, w as writable } from "./index2.js";
 import "./index.js";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore/lite";
 function elasticOut(t) {
   return Math.sin(-13 * (t + 1) * Math.PI / 2) * Math.pow(2, -10 * t) + 1;
 }
@@ -66,6 +66,7 @@ const routes = writable({
 });
 const isDarkMode = writable(false);
 const redirectAfterLoginTimeOut = writable("");
+const redirectSetInterval = writable("");
 const FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
 const FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
 const FIREBASE_projectId = "thinksolve-app";
@@ -85,11 +86,12 @@ getAuth(app);
 getFirestore(app);
 export {
   isXs as a,
-  instDeltaY as b,
-  routes as c,
-  isLoggedIn as d,
-  scrollYMax as e,
-  innerWidth as f,
+  redirectSetInterval as b,
+  instDeltaY as c,
+  routes as d,
+  isLoggedIn as e,
+  scrollYMax as f,
+  innerWidth as g,
   isDarkMode as i,
   lastScrollY as l,
   redirectAfterLoginTimeOut as r,

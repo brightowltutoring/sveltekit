@@ -1,6 +1,8 @@
 <script>
     import { scale } from 'svelte/transition'
     import { elasticOut } from 'svelte/easing'
+    import { isDarkMode, light, light_darkened, dark, dark_lightened } from '$lib/store.js'
+
     let resetBtn=false
     function resetBtnValue(){
         resetBtn=!resetBtn
@@ -10,11 +12,16 @@
     export let buttonColor="bg-[rgba(253,165,165,1)]"
     export let buttonColorHover="hover:bg-[rgba(253,165,165,0.4)]"
 
+    $: cardColor = $isDarkMode ? dark_lightened : light_darkened
+
 </script>
 
-<div class="card shadow-xl rounded-xl w-[300px] p-10 m-4 text-center duration-300">
+<div class="card shadow-xl rounded-xl w-[300px] p-10 m-4 text-center duration-300"
+     style={`background:${cardColor}`}
+    >
     {#key resetBtn }
-    <button on:click={resetBtnValue} in:scale={{duration: 1000, easing:elasticOut}} class=" cardBtn {buttonColor} {buttonColorHover}  hover:shadow-md duration-300 rounded-md p-4 ">
+    <button on:click={resetBtnValue} in:scale={{duration: 1000, easing:elasticOut}} class=" cardBtn {buttonColor} {buttonColorHover}  hover:shadow-md duration-300 rounded-md p-4 "
+    >
 
         <slot name="buttonText">
             default button Text

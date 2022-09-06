@@ -23,6 +23,7 @@
     const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight) ) // 11px
     const angle = 45 + 1*90
     const hamburgerColor = "bg-red-500" //bg-gray-500
+    // let hamburgerBtn
 </script>
 
 

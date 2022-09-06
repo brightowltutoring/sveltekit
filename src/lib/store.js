@@ -130,3 +130,7 @@ export const isDarkMode = writable(false)
 export const redirectAfterLoginTimeOut = writable('')
 export const redirectSetInterval = writable('')
 
+export const light = '#f7f7f7'
+export const light_darkened =  'rgb(242,247,250)'
+export const dark =  'rgb(37,27,47)'
+export const dark_lightened =  'rgb(39,35,53)'

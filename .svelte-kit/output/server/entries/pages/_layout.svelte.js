@@ -1,19 +1,22 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as loop, f as set_store_value, v as validate_component, g as each, h as add_attribute } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
-import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, l as lastScrollY, s as scrollY, b as instDeltaY, c as routes, d as isLoggedIn, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/firebase.js";
+import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, b as redirectSetInterval, l as lastScrollY, s as scrollY, c as instDeltaY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/firebase.js";
 import { w as writable } from "../../chunks/index2.js";
 import "firebase/auth";
 import "firebase/app";
 import "firebase/firestore/lite";
+const app = "";
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isDarkMode;
   let $$unsubscribe_isXs;
   let $page, $$unsubscribe_page;
   let $$unsubscribe_redirectAfterLoginTimeOut;
+  let $$unsubscribe_redirectSetInterval;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
+  $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   let { href, content, bool, mobileOpen, btnColor, btnColorHover, routes: routes2 } = $$props;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0)
     $$bindings.href(href);
@@ -39,17 +42,9 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isXs();
   $$unsubscribe_page();
   $$unsubscribe_redirectAfterLoginTimeOut();
+  $$unsubscribe_redirectSetInterval();
   return `
 <button class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300"}">${escape(content)}</button>`;
-});
-const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $isDarkMode, $$unsubscribe_isDarkMode;
-  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  {
-    console.log("$isDarkMode", $isDarkMode);
-  }
-  $$unsubscribe_isDarkMode();
-  return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
 });
 const hamburgerWidth = 35;
 const hamburgerPattyHeight = 2;
@@ -182,6 +177,15 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
+const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  {
+    console.log("$isDarkMode", $isDarkMode);
+  }
+  $$unsubscribe_isDarkMode();
+  return `<button>${$isDarkMode ? `\u263E` : `\u263C`}</button>`;
+});
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
@@ -312,24 +316,25 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
-const app = "";
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isLoggedIn;
+  let $$unsubscribe_redirectSetInterval;
+  let $$unsubscribe_redirectAfterLoginTimeOut;
   let $$unsubscribe_windowInnerHeight;
   let $$unsubscribe_scrollYMax;
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
   let $$unsubscribe_scrollY;
   let $$unsubscribe_innerWidth;
-  let $$unsubscribe_redirectAfterLoginTimeOut;
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
+  $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
+  $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
-  $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   let mobileHamburgerClosed = true;
   let $$settled;
   let $$rendered;
@@ -338,7 +343,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
     })}`, ""}
-
 
 
 
@@ -360,13 +364,14 @@ ${validate_component(Navbar, "Navbar").$$render(
 <div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden", true) + " h-[400vh]"}">${slots.default ? slots.default({}) : ``}</div>`;
   } while (!$$settled);
   $$unsubscribe_isLoggedIn();
+  $$unsubscribe_redirectSetInterval();
+  $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_windowInnerHeight();
   $$unsubscribe_scrollYMax();
   $$unsubscribe_routes();
   $$unsubscribe_page();
   $$unsubscribe_scrollY();
   $$unsubscribe_innerWidth();
-  $$unsubscribe_redirectAfterLoginTimeOut();
   return $$rendered;
 });
 export {

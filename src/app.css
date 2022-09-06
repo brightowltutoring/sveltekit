@@ -13,9 +13,11 @@
 
 :root{
   --light: #f7f7f7;
-  --light-darkened: rgb(242, 247, 250);
-  --dark: #1d3040;
-  --dark-lightened: #263e53;
+  --light_darkened: rgb(242,247,250);
+  --dark: rgb(37,27,47);
+  /* --dark: #1d3040; */
+  --dark_lightened: rgb(39,35,53);
+  /* --dark_lightened: #263e53; */
   --ld-transition: background-color 0.3s
 }
 
@@ -33,21 +35,7 @@ body.dark-mode {
   color: var(--light);
 }
 
-.card {
-  background-color: var(--light-darkened);
-  color: var(--dark-lightened);
-  transition: var(--ld-transition)
-}
-.card.dark-mode{
-  background-color: var(--dark-lightened);
-  color: var(--light);
-}
 
-.cardBtn.dark-mode{
-  filter: hue-rotate(100deg);
-  /* background-color: var(--dark); */
-  color: var(--light);
-}
 
 
 

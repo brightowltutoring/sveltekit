@@ -56,6 +56,8 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 
 <Navbar bind:mobileHamburgerClosed />
 
-<div class="sm:block {mobileHamburgerClosed && "hidden"} h-[400vh]" >
+<!--  {mobileHamburgerClosed && "opacity-0"} -->
+<!-- <div class=" h-[400vh] bg-blue-300" > -->
+<div class="sm:block h-[400vh] {mobileHamburgerClosed && "hidden opacity-0"}  transition-all duration-500" >
 	<slot/>
 </div>	

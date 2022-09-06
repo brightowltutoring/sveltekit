@@ -2,23 +2,27 @@
     import { scale } from 'svelte/transition';
     import { elasticOut } from 'svelte/easing';
     import { isDarkMode } from '$lib/store.js'
+    import { onMount } from 'svelte';
 
+    let elements=[]
 
-    $: console.log("$isDarkMode",$isDarkMode);
-  
+    $:console.log(elements.length);
 
     function toggleDM() {
-        let elements = [
+        elements=[
             window.document.body,
-            ...document.getElementsByClassName("card"),
-            ...document.getElementsByClassName("cardBtn"),
+            // ...document.getElementsByClassName("card"),
+            // ...document.getElementsByClassName("cardBtn"),
         ]
-
+       
         for (let el of elements){
             el.classList.toggle('dark-mode')   
         }
         
         $isDarkMode =!$isDarkMode
+        // other js variables will dark-mode other elements in the dom
+        // doing it with global css is problematic when the elements have
+        // yet to be mounted
 	}
 </script>
 

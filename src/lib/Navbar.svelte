@@ -1,5 +1,5 @@
 <script>
-    import { fly, scale,
+    import { fly, scale, fade
         // fade, blur, slide 
     } from 'svelte/transition'
     import { quintOut, elasticOut } from 'svelte/easing';
@@ -53,16 +53,17 @@
 
 
 
-<Hamburger {hamburgerBtn} bind:mobileOpen bind:unique />
+<Hamburger bind:mobileOpen bind:unique />
+<!-- <Hamburger {hamburgerBtn} bind:mobileOpen bind:unique /> -->
 <!-- TODO: blur causing darked navbar when transitionining on chrome. Still need to find a way to blur the text -->
 <!-- backdrop-blur-3xl -->
-{#key unique }
-<logo-and-nav class="{jankytown} sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " 
+
+
+<logo-and-navbar 
+    class="{jankytown} sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " 
 
     >
     
-
-    <!-- style="{logoTextColor}" -->
     {#key resetLogoClick }
     <div class=" translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20
     sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent" 
@@ -74,12 +75,14 @@
 
 
     <!-- <nav class="sm:px-4" -->
-    <nav on:click={_=>{ hamburgerBtn=false }}    
-         in:fly={{y:-75,duration:1500, easing: elasticOut}}
-         out:fly={{y:-50,duration:250, easing: quintOut}} 
-    >
-
-        <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg items-center " 
+    <!--   in:fly={{y:-75,duration:1500, easing: elasticOut}}
+         out:fly={{y:-50,duration:250, easing: quintOut}}  -->
+         <!-- on:click={_=>{ hamburgerBtn=false }}     -->
+    <nav 
+       
+     >
+     {#key unique }
+        <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg items-center" 
          >  
             {#if $isXs && mobileOpen }
             <li class="pb-4">
@@ -93,7 +96,7 @@
                 `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)` }
              >
                 <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} bind:btnColor={btnColor} bind:btnColorHover={btnColorHover} />
-                <!-- <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} btnColor={$routes[KEY].btnColor} btnColorHover={$routes[KEY].btnColorHover} /> -->
+             
             </li>
             {/each}
 
@@ -104,11 +107,13 @@
             {/if}
         
         </ul>    
-
+        {/key}
+        
     </nav>
+    
+</logo-and-navbar>
 
-</logo-and-nav>
-{/key}
+
 
 
 

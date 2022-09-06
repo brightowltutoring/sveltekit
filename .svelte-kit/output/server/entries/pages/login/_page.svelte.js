@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, h as add_attribute } from "../../../chunks/index.js";
-import { r as redirectAfterLoginTimeOut } from "../../../chunks/firebase.js";
+import { r as redirectAfterLoginTimeOut, b as redirectSetInterval } from "../../../chunks/firebase.js";
 import "firebase/firestore/lite";
 import "firebase/auth";
 import "../../../chunks/index2.js";
@@ -11,10 +11,13 @@ const css = {
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_redirectAfterLoginTimeOut;
+  let $$unsubscribe_redirectSetInterval;
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
+  $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   let emailFieldValue = "";
   $$result.css.add(css);
   $$unsubscribe_redirectAfterLoginTimeOut();
+  $$unsubscribe_redirectSetInterval();
   return `<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 90vh; max-height: 90vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(10px); "}"></video>
 
 
