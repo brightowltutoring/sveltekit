@@ -42,7 +42,7 @@
      on:focus={()=>{hoverTransform = "rotateX(8deg) scale(1.1)"}}
      on:mouseout={()=>{hoverTransform = "rotateX(0deg) "}}
      on:blur={()=>{hoverTransform = "rotateX(0deg) "}} -->
-<div class="shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group cardCSS "
+<div class="shadow-xl rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group cardCSS "
      style={`background:${cardColor}`}
    
      
