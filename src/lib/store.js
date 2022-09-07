@@ -121,7 +121,7 @@ export const routes = writable({
     href: "/login",
     title: "Login 🚀",
     isCurrent: false,
-  }, 
+  }
 })
 
 

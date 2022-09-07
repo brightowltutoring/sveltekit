@@ -3,6 +3,10 @@
     // import { goto } from "$app/navigation"
 </script>
 
+<div class="font-Poppins text-center sm:text-7xl text-6xl pb-2 pt-20 ">
+    Plans
+</div>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 ">
 
     <PlansCard card={1} calendlyUrl={'https://calendly.com/brightowltutoring/invoice-webinowl?hide_gdpr_banner=1'}>

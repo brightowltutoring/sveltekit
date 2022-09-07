@@ -7132,8 +7132,7 @@ var init_layout_svelte = __esm({
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       $$unsubscribe_isDarkMode();
-      return `<button>${$isDarkMode ? `
-        <svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>` : `<svg aria-label="${"Moon"}" id="${"darkIcon"}" height="${"24"}" width="${"24"}" style="${"transform: scale(1);"}" data-metatip="${"true"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`}</button>`;
+      return `<button>${$isDarkMode ? `<svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>` : `<svg aria-label="${"Moon"}" id="${"darkIcon"}" height="${"24"}" width="${"24"}" style="${"transform: scale(1);"}" data-metatip="${"true"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`}</button>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $instDeltaY, $$unsubscribe_instDeltaY;
@@ -7153,7 +7152,7 @@ var init_layout_svelte = __esm({
       $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
       let hueRocket = 0;
       let { mobileHamburgerClosed } = $$props;
-      let mobileOpen;
+      let mobileOpen = "true";
       let unique;
       let jankytown = "";
       let btnColor = "sm:bg-red-300 ";
@@ -7180,8 +7179,6 @@ var init_layout_svelte = __esm({
         }
         {
           if (!$isXs) {
-            if ($scrollY < 250)
-              jankytown = "sm:sticky sm:top-0";
             if ($scrollY > 250 && $instDeltaY > 0)
               jankytown = "sm:sticky sm:-top-20";
             if ($scrollY > 250 && $instDeltaY < 0)
@@ -7203,6 +7200,7 @@ var init_layout_svelte = __esm({
           },
           {}
         )}
+
 
 
 
@@ -7275,6 +7273,7 @@ var init_layout_svelte = __esm({
       let $page, $$unsubscribe_page;
       let $$unsubscribe_scrollY;
       let $$unsubscribe_innerWidth;
+      let $isXs, $$unsubscribe_isXs;
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
@@ -7284,6 +7283,7 @@ var init_layout_svelte = __esm({
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
       $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
+      $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
       let mobileHamburgerClosed = true;
       let $$settled;
       let $$rendered;
@@ -7312,7 +7312,7 @@ ${validate_component(Navbar, "Navbar").$$render(
 
 
 
-<div class="${"sm:block " + escape(mobileHamburgerClosed && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
+<div class="${"sm:block " + escape(mobileHamburgerClosed && $isXs && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_redirectSetInterval();
@@ -7323,6 +7323,7 @@ ${validate_component(Navbar, "Navbar").$$render(
       $$unsubscribe_page();
       $$unsubscribe_scrollY();
       $$unsubscribe_innerWidth();
+      $$unsubscribe_isXs();
       return $$rendered;
     });
   }
@@ -7344,8 +7345,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-98acae8b.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-98acae8b.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-3e49859b.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/stores-66627aa4.js", "_app/immutable/chunks/singletons-e3bac11f.js", "_app/immutable/chunks/firebase-5fda3c4a.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-0dc5c812.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-0dc5c812.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-3e49859b.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/stores-36743713.js", "_app/immutable/chunks/singletons-c3b2d0e7.js", "_app/immutable/chunks/firebase-6a397dda.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-18d458b8.css"];
   }
 });
@@ -7390,8 +7391,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-9da50e27.js";
-    imports2 = ["_app/immutable/components/error.svelte-9da50e27.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/stores-66627aa4.js", "_app/immutable/chunks/singletons-e3bac11f.js", "_app/immutable/chunks/index-57952acb.js"];
+    file2 = "_app/immutable/components/error.svelte-51c9cb0c.js";
+    imports2 = ["_app/immutable/components/error.svelte-51c9cb0c.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/stores-36743713.js", "_app/immutable/chunks/singletons-c3b2d0e7.js", "_app/immutable/chunks/index-57952acb.js"];
     stylesheets2 = [];
   }
 });
@@ -7541,8 +7542,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-3b06608f.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-3b06608f.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-3e49859b.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/firebase-5fda3c4a.js", "_app/immutable/chunks/singletons-e3bac11f.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-878b9056.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-878b9056.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-3e49859b.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/firebase-6a397dda.js", "_app/immutable/chunks/singletons-c3b2d0e7.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -9812,7 +9813,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
   mimeTypes: { ".mp4": "video/mp4" },
   _: {
-    entry: { "file": "_app/immutable/start-b69ceeb0.js", "imports": ["_app/immutable/start-b69ceeb0.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/singletons-e3bac11f.js", "_app/immutable/chunks/index-57952acb.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-858f7939.js", "imports": ["_app/immutable/start-858f7939.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/singletons-c3b2d0e7.js", "_app/immutable/chunks/index-57952acb.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -14,7 +14,7 @@
     $: if( $isLoggedIn && !$isXs ) { scaleRocket.set( 1 + 0.5*Math.sin($scrollY) ) }
 
     export let mobileHamburgerClosed
-    let mobileOpen="true";
+    let mobileOpen="";
     $: mobileHamburgerClosed = mobileOpen  
     $: $isLoggedIn ? $routes.login.name = '🚀': $routes.login.name = 'Login'
     // $: logoTextColor=`color:hsl(359,100%,${100*$fractionScroll}%)`
