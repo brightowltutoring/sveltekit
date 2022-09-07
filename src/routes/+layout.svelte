@@ -19,7 +19,7 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 <script>
 	import '../app.css'
 	import Navbar from '$lib/Navbar.svelte'
-	import { innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, redirectSetInterval, routes } from '$lib/store.js' 	
+	import { isXs, innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, redirectSetInterval, routes } from '$lib/store.js' 	
 	import { page } from '$app/stores'	
 	import { onMount } from 'svelte'
 	import { auth } from '$lib/firebase.js'
@@ -56,6 +56,6 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 
 <!--  {mobileHamburgerClosed && "opacity-0"} -->
 <!-- <div class=" h-[400vh] bg-blue-300" > -->
-<div class="sm:block  {mobileHamburgerClosed && "hidden opacity-0"}  transition-all duration-500" >
+<div class="sm:block  { (mobileHamburgerClosed && $isXs) && "hidden opacity-0"}  transition-all duration-500" >
 	<slot/>
 </div>	

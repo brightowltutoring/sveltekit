@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as subscribe, h as add_attribute, e as escape, v as validate_component } from "../../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, e as escape, h as add_attribute, v as validate_component } from "../../../chunks/index.js";
 import { i as isDarkMode, h as dark_lightened, j as light_darkened } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const PlansCard_svelte_svelte_type_style_lang = "";
@@ -33,7 +33,7 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 
 
 
-<div class="${"shadow-2xl rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group cardCSS  svelte-1kfvqzd"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
+<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-1kfvqzd"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
   ) + " text-xl text-white svelte-1kfvqzd"}">${slots.buttonText ? slots.buttonText({}) : `default button Text`}</button>

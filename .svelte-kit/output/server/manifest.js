@@ -1,9 +1,9 @@
 export const manifest = {
 	appDir: "_app",
-	assets: new Set([".DS_Store","login-bg-video-blurred.mp4","moon-solid.svg","sun-solid.svg"]),
-	mimeTypes: {".mp4":"video/mp4",".svg":"image/svg+xml"},
+	assets: new Set([".DS_Store","login-bg-video-blurred.mp4"]),
+	mimeTypes: {".mp4":"video/mp4"},
 	_: {
-		entry: {"file":"_app/immutable/start-bc77dad7.js","imports":["_app/immutable/start-bc77dad7.js","_app/immutable/chunks/index-2a0f0a83.js","_app/immutable/chunks/singletons-cca2e603.js","_app/immutable/chunks/index-d2891264.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-b69ceeb0.js","imports":["_app/immutable/start-b69ceeb0.js","_app/immutable/chunks/index-64e3950e.js","_app/immutable/chunks/singletons-e3bac11f.js","_app/immutable/chunks/index-57952acb.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),

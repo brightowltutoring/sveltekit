@@ -14,7 +14,7 @@
     $: if( $isLoggedIn && !$isXs ) { scaleRocket.set( 1 + 0.5*Math.sin($scrollY) ) }
 
     export let mobileHamburgerClosed
-    let mobileOpen;
+    let mobileOpen="true";
     $: mobileHamburgerClosed = mobileOpen  
     $: $isLoggedIn ? $routes.login.name = '🚀': $routes.login.name = 'Login'
     // $: logoTextColor=`color:hsl(359,100%,${100*$fractionScroll}%)`
@@ -33,14 +33,14 @@
         $routes.home.isCurrent=true;
     }
 
-
     let jankytown='';
     $:if(!$isXs){
-        if($scrollY<250)  jankytown = "sm:sticky sm:top-0"
+        // if($scrollY<250)  jankytown = "sm:sticky sm:top-0"
         if($scrollY>250 && $instDeltaY>0)  jankytown = "sm:sticky sm:-top-20"
         if($scrollY>250 && $instDeltaY<0)  jankytown = "sm:sticky sm:top-0"
     }
-    
+   
+ 
 
     // $instDeltaY>0 essentially means "currently scrolling down" as $instDeltaY relaxes to 0 shortly.
     // $instDeltaY == 0, jankytown is not updated.
@@ -59,9 +59,9 @@
 <!-- backdrop-blur-3xl -->
 
 
+<!-- TODO: hiding on mobile also hides when resizing to desktop -->
 <logo-and-navbar 
-    class="{jankytown} sm:backdrop-blur-3xl z-50  transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " 
-
+    class="{jankytown} sm:backdrop-blur-3xl z-50  transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"} " 
     >
     
     {#key resetLogoClick }

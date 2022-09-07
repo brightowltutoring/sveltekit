@@ -65,7 +65,7 @@ const isDarkMode = writable(false);
 const redirectAfterLoginTimeOut = writable("");
 const redirectSetInterval = writable("");
 const light_darkened = "rgb(242,247,250)";
-const dark_lightened = "rgb(39,35,53)";
+const dark_lightened = "rgb(38, 35, 51)";
 export {
   isXs as a,
   redirectSetInterval as b,
