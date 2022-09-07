@@ -20,19 +20,18 @@
         Calendly.initPopupWidget({url:`${calendlyUrl}`});
     }
 
-
-
-    export let btnColor="bg-[rgba(114,202,202,0.8)]"
-    // export let btnColorHover="hover:bg-[rgba(114,202,202,1)]"
     export let btnColorHover=""
-    // export let btnColor="bg-[rgba(253,165,165,0.8)]"
-    // export let btnColorHover="hover:bg-[rgba(253,165,165,1)]"
-    // hue-rotate-[180deg]
     $: cardColor = $isDarkMode ? dark_lightened : light_darkened
 
     // let hoverTransform = "rotateX(0deg)) scale(1)"
 
+    export let card /* 1,2,3, */
 
+    let buttonColor = {
+        1: "bg-[rgb(45,165,214)]", /* blue */
+        2: "bg-[rgb(244,77,77)]",  /* red */
+        3: "bg-[rgb(254,164,92)]", /* yellow */
+    }
 </script>
 
 
@@ -42,42 +41,26 @@
      on:focus={()=>{hoverTransform = "rotateX(8deg) scale(1.1)"}}
      on:mouseout={()=>{hoverTransform = "rotateX(0deg) "}}
      on:blur={()=>{hoverTransform = "rotateX(0deg) "}} -->
-<div class="shadow-xl rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group cardCSS "
+<div class="shadow-2xl rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group cardCSS "
      style={`background:${cardColor}`}
-   
-     
-    >
+ >
     {#key resetBtn }
-    <button on:click={resetBtnValue} in:scale={{duration: 1000, easing:elasticOut}} class=" cardBtn {btnColor} {btnColorHover}  hover:shadow-md duration-300 rounded-md p-4 {$isDarkMode ? "group-hover:bg-opacity-80":"group-hover:bg-opacity-60"} text-xl text-white"
-    >
-
-        <slot name="buttonText">
-            default button Text
-        </slot>
-    
-
+    <button on:click={resetBtnValue} in:scale={{duration: 1000, easing:elasticOut}} class=" {buttonColor[card]} {btnColorHover}  hover:shadow-md duration-300 rounded-md p-4 {$isDarkMode ? "group-hover:bg-opacity-80":"group-hover:bg-opacity-80"} text-xl text-white"
+     >
+        <slot name="buttonText">default button Text</slot>
     </button>
     {/key}
-
-
-    <p class="py-2 text-2xl">
-        <slot name="cardTitle"> 
-
-        </slot>
-    </p>
     
-
-
-    <slot name="cardText"> 
-        default cardText
-    </slot>
-
-
+    <div class="py-4">
+        <slot name="cardText">default cardText</slot>
+    </div>
+    <!-- <p class="py-2 text-2xl">
+        <slot name="cardTitle"></slot>
+    </p> -->
 </div>
 
-<!-- hover wouldnt return on safari!! -->
-<style>
-    
+
+<style>    
     .cardCSS {
       transform: perspective(1000px) rotateX(0deg);
       transition: transform 0.3s ease 0s;

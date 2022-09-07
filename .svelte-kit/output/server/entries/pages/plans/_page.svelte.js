@@ -28,7 +28,7 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 
 
 
-<div class="${"shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group cardCSS  svelte-18xmx1p"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"cardBtn " + escape(btnColor, true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
+<div class="${"shadow-xl rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group cardCSS  svelte-18xmx1p"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"cardBtn " + escape(btnColor, true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-60",
     true
   ) + " text-xl text-white svelte-18xmx1p"}">${slots.buttonText ? slots.buttonText({}) : `
@@ -55,7 +55,7 @@ const css = {
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
-  return `<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-20 "}">${validate_component(PlansCard, "PlansCard").$$render(
+  return `<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-7 "}">${validate_component(PlansCard, "PlansCard").$$render(
     $$result,
     {
       btnColor: "bg-[rgb(45,165,214)]",

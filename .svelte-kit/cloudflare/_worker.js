@@ -7361,9 +7361,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-fa66a8f6.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-fa66a8f6.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-789953fe.js", "_app/immutable/chunks/singletons-01671aea.js", "_app/immutable/chunks/stores-04f663d3.js", "_app/immutable/chunks/firebase-f37c729c.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-db53a73c.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-403bd272.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-403bd272.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-8ee5c109.js", "_app/immutable/chunks/singletons-b0ad4cc6.js", "_app/immutable/chunks/stores-867682d3.js", "_app/immutable/chunks/firebase-f37c729c.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-8fc96ced.css"];
   }
 });
 
@@ -7407,8 +7407,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-02bbc0aa.js";
-    imports2 = ["_app/immutable/components/error.svelte-02bbc0aa.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/stores-04f663d3.js", "_app/immutable/chunks/singletons-01671aea.js"];
+    file2 = "_app/immutable/components/error.svelte-9d91838e.js";
+    imports2 = ["_app/immutable/components/error.svelte-9d91838e.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/stores-867682d3.js", "_app/immutable/chunks/singletons-b0ad4cc6.js"];
     stylesheets2 = [];
   }
 });
@@ -7558,8 +7558,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-c2f29db5.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-c2f29db5.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-789953fe.js", "_app/immutable/chunks/singletons-01671aea.js", "_app/immutable/chunks/firebase-f37c729c.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-cb4086aa.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-cb4086aa.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-8ee5c109.js", "_app/immutable/chunks/singletons-b0ad4cc6.js", "_app/immutable/chunks/firebase-f37c729c.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -7601,7 +7601,7 @@ var init_page_svelte4 = __esm({
 
 
 
-<div class="${"shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group cardCSS  svelte-18xmx1p"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"cardBtn " + escape(btnColor, true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
+<div class="${"shadow-xl rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group cardCSS  svelte-18xmx1p"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"cardBtn " + escape(btnColor, true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-60",
         true
       ) + " text-xl text-white svelte-18xmx1p"}">${slots.buttonText ? slots.buttonText({}) : `
@@ -7627,7 +7627,7 @@ var init_page_svelte4 = __esm({
     };
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $$result.css.add(css2);
-      return `<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-20 "}">${validate_component(PlansCard, "PlansCard").$$render(
+      return `<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-7 "}">${validate_component(PlansCard, "PlansCard").$$render(
         $$result,
         {
           btnColor: "bg-[rgb(45,165,214)]",
@@ -7713,8 +7713,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/plans/_page.svelte-e430b01f.js";
-    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-e430b01f.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-789953fe.js", "_app/immutable/chunks/singletons-01671aea.js"];
+    file6 = "_app/immutable/components/pages/plans/_page.svelte-fb95e10f.js";
+    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-fb95e10f.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/navigation-8ee5c109.js", "_app/immutable/chunks/singletons-b0ad4cc6.js"];
     stylesheets6 = ["_app/immutable/assets/+page-f541297a.css"];
   }
 });
@@ -9835,7 +9835,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "moon-solid.svg", "sun-solid.svg"]),
   mimeTypes: { ".mp4": "video/mp4", ".svg": "image/svg+xml" },
   _: {
-    entry: { "file": "_app/immutable/start-654d2740.js", "imports": ["_app/immutable/start-654d2740.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/singletons-01671aea.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-68974b83.js", "imports": ["_app/immutable/start-68974b83.js", "_app/immutable/chunks/index-2a0f0a83.js", "_app/immutable/chunks/singletons-b0ad4cc6.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
