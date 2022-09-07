@@ -28,8 +28,8 @@
 body {
   overscroll-behavior-y: none;
   
-  /* background: var(--light); */
-  background: radial-gradient(circle at center, var(--light) 0, var(--light_darkened), var(--light) 100%);
+  background: var(--light);
+  /* background: radial-gradient(circle at center, var(--light) 0, var(--light_darkened), var(--light) 100%); */
 	color: var(--dark);
 	transition: var(--ld-transition);
   width:  100vw;

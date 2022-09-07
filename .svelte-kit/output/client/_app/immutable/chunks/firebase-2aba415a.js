@@ -1,4 +1,4 @@
-import{d as ee}from"./singletons-254dc986.js";ee.disable_scroll_handling;const Qa=ee.goto;ee.invalidate;ee.prefetch;ee.prefetch_routes;ee.before_navigate;ee.after_navigate;const Sr="AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",Ar="thinksolve-app.firebaseapp.com",kr="thinksolve-app",Rr="thinksolve-app.appspot.com",Or="490986955869",Cr="1:490986955869:web:433c6f7b31865fed5099b4";/**
+import{d as ee}from"./singletons-f0d898ec.js";ee.disable_scroll_handling;const Qa=ee.goto;ee.invalidate;ee.prefetch;ee.prefetch_routes;ee.before_navigate;ee.after_navigate;const Sr="AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",Ar="thinksolve-app.firebaseapp.com",kr="thinksolve-app",Rr="thinksolve-app.appspot.com",Or="490986955869",Cr="1:490986955869:web:433c6f7b31865fed5099b4";/**
  * @license
  * Copyright 2017 Google LLC
  *
