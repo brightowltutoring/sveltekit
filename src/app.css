@@ -18,7 +18,8 @@
   --light_darkened: rgb(224, 229, 232);
   --dark: rgb(37,27,47);
   /* --dark: #1d3040; */
-  --dark_lightened: rgb(39,35,53);
+  --dark_lightened: rgb(38, 35, 51);
+  /* --dark_lightened_med: rgb(39,35,53); */
   /* --dark_lightened: #263e53; */
   --ld-transition: background-color 0.3s
 
@@ -38,14 +39,14 @@ body {
 }
 
 body.dark-mode {
-  /* background: var(--dark); */
+  background: var(--dark);
   /* background: 
               radial-gradient(ellipse at bottom, var(--dark_lightened), transparent),
               radial-gradient(ellipse at top, var(--dark), transparent),
               radial-gradient(ellipse at left, rgb(29, 29, 29), transparent),
               radial-gradient(ellipse at right, var(--dark_lightened), transparent)
               ; */
-  background: radial-gradient(circle at center, var(--dark) 0, var(--dark_lightened), var(--dark_lightened) 100%);
+  /* background: radial-gradient(circle at center, var(--dark) 0, var(--dark) 60%, var(--dark) 100%); */
   color: var(--light);
 }
 

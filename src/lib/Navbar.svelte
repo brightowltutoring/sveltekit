@@ -1,7 +1,5 @@
 <script>
-    import { fly, scale, fade
-        // fade, blur, slide 
-    } from 'svelte/transition'
+    import { fly, scale, fade, blur, slide } from 'svelte/transition'
     import { quintOut, elasticOut } from 'svelte/easing';
     import Navitem from './Navitem.svelte'
     import Hamburger from './Hamburger.svelte';
@@ -62,7 +60,7 @@
 
 
 <logo-and-navbar 
-    class="{jankytown} z-50 sm:backdrop-blur-3xl transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " 
+    class="{jankytown} sm:backdrop-blur-3xl z-50  transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"}  " 
 
     >
     
@@ -76,24 +74,21 @@
     {/key}
 
 
-    <!-- <nav class="sm:px-4" -->
-    <!--   in:fly={{y:-75,duration:1500, easing: elasticOut}}
-         out:fly={{y:-50,duration:250, easing: quintOut}}  -->
-         <!-- on:click={_=>{ hamburgerBtn=false }}     -->
-    <nav 
-       
-     >
+    <nav>
      {#key unique }
         <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg items-center" 
          >  
+           
             {#if $isXs && mobileOpen }
-            <li class="pb-4">
-                <LightDarkMode/>
-            </li>
+                {#key !$isDarkMode }
+                <li in:slide={{duration:600, easing:quintOut}} class="pb-3 ">
+                    <LightDarkMode/>
+                </li>
+                {/key}
             {/if}
-            
+
             {#each Object.keys($routes) as KEY }
-            <li class="py-3 sm:p-1" 
+            <li class="py-3 sm:p-1 " 
                 style={ (KEY =='login' && $isLoggedIn) && 
                 `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)` }
              >
@@ -103,9 +98,11 @@
             {/each}
 
             {#if !$isXs }
-            <li class="px-3 ">
-                <LightDarkMode/>
-            </li>
+                {#key !$isDarkMode }
+                <li in:slide={{duration:600, easing:quintOut}} class="px-3  translate-y-1">
+                    <LightDarkMode/>
+                </li>
+                {/key}
             {/if}
         
         </ul>    

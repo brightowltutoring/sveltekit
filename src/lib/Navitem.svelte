@@ -49,7 +49,7 @@
         clearInterval($redirectSetInterval)
         goto(href);
     }}
-    class = "{ bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent { `${btnColorHover}`}  sm:hover:rounded sm:hover:py-1  sm:hover:px-3 duration-300"
+    class = "{ bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent { `${btnColorHover}`}  sm:hover:rounded sm:hover:py-1  sm:hover:px-3 duration-300 hover:shadow-lg"
     
     
     > {content}
