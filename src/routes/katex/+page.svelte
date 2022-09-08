@@ -34,15 +34,10 @@ idea: when needed can place mathjax in drop down menus
 	// 		el.open =true
 	// 	}
 	// })
+
 </script>
 
-{#each Array(100) as _,i}
-	
-<details class="bg-red-100 disDetails">
-	<summary>hidden mathjax (to hide page load flicker)</summary>
-	$$I=\int_0^1 f(x) dx $$
-</details>
-{/each}
+
 
 
 
