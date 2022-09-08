@@ -1,3 +1,4 @@
+
 <script>
 	import katex from "katex";
 	export let math;

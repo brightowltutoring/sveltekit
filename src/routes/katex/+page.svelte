@@ -1,4 +1,11 @@
+
+<!-- testing using both mathjax and katex on same page ...-->
+<!-- Mathjax has greater scope of functions but katex is faster
+idea: when needed can place mathjax in drop down menus
+-->
+<MathJax/>
 <script>
+	import MathJax from "$lib/MathJax.svelte";  
 	// import Component
 	import Katex from "../../lib/Katex.svelte";
 	
@@ -17,9 +24,30 @@
 		// increase index
 		index = (index+1)%3;
 	}
+
+	// import { onMount } from 'svelte'
+	// onMount(()=>{
+
+
+
+	// 	for (let el of document.querySelectorAll(".disDetails") ){
+	// 		el.open =true
+	// 	}
+	// })
 </script>
 
-<p class="text-2xl text-center">KaTeX svelte component demo</p>
+{#each Array(300) as _,i}
+	
+<details class="bg-red-100 disDetails">
+	<summary>hidden mathjax (to hide page load flicker)</summary>
+	$$I=\int_0^1 f(x) dx $$
+</details>
+{/each}
+
+
+
+
+<p class="text-2xl text-center">KaTeX svelte component demo </p>
 
 <h2>Inline math</h2>
 Our math equation: <Katex {math} /> and it is inline.
@@ -37,8 +65,9 @@ Our math equation: <Katex {math} tr={true} displayMode/> and it is displayed.
 
 
 
+
 <h2>
-	Slot based Svelte Component
+	Slot based Svelte Component 
 </h2>
 Check out <a rel="external" href="https://www.npmjs.com/package/svelte-katex">Svelte KaTeX</a> for an implementation of a Svelte KaTeX component that takes markup via slots
 
@@ -54,4 +83,6 @@ Visit <a rel="external" href="https://svelte-math.vercel.app">Svelte Math</a> to
 		font-weight: 700;
 		padding: 0.5em;
 	}
+
+
 </style>
