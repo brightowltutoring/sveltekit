@@ -1,7 +1,7 @@
 <script>
 
     import GalleryScale from "$lib/GalleryScale.svelte"
-    import SampleQuiz from "$lib/SampleQuiz.svelte"
+
 
     const reviewers = [ 
         "zaara",
