@@ -1,0 +1,1 @@
+import{default as e}from"../components/pages/mathjax/_page.svelte-04582031.js";import"./index-c5b536bd.js";import"./MathJax-5f179e66.js";import"./index-73204f6a.js";import"./index-5890d8ae.js";export{e as component};

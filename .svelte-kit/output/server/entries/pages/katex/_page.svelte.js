@@ -1,4 +1,4 @@
-import { c as create_ssr_component, v as validate_component, g as each, e as escape } from "../../../chunks/index.js";
+import { c as create_ssr_component, v as validate_component, e as escape } from "../../../chunks/index.js";
 import { M as MathJax_1 } from "../../../chunks/MathJax.js";
 import katex from "katex";
 const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -39,11 +39,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 ${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
 
 
-${each(Array(100), (_, i) => {
-    return `<details class="${"bg-red-100 disDetails"}"><summary>hidden mathjax (to hide page load flicker)</summary>
-	$$I=\\int_0^1 f(x) dx $$
-</details>`;
-  })}
+
 
 
 

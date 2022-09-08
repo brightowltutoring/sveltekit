@@ -54,6 +54,12 @@ const routes = writable({
     title: "Katex",
     isCurrent: false
   },
+  mathjax: {
+    name: "mathjax",
+    href: "/mathjax",
+    title: "mathjax",
+    isCurrent: false
+  },
   login: {
     name: "Login",
     href: "/login",

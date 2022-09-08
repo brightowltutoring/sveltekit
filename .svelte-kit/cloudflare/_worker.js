@@ -725,6 +725,12 @@ var init_store = __esm({
         title: "Katex",
         isCurrent: false
       },
+      mathjax: {
+        name: "mathjax",
+        href: "/mathjax",
+        title: "mathjax",
+        isCurrent: false
+      },
       login: {
         name: "Login",
         href: "/login",
@@ -1159,8 +1165,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-b3eb0b81.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-b3eb0b81.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-7e5941f1.js", "_app/immutable/chunks/store-6fbda247.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/stores-4de1524c.js", "_app/immutable/chunks/singletons-e98ed96d.js", "_app/immutable/chunks/navigation-1baf876c.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-de13eb30.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-de13eb30.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-73204f6a.js", "_app/immutable/chunks/index-5890d8ae.js", "_app/immutable/chunks/stores-22cdc299.js", "_app/immutable/chunks/singletons-e87f12bc.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/store-803416dc.js", "_app/immutable/chunks/navigation-d1c81710.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-6cd88b2f.css"];
   }
 });
@@ -1205,8 +1211,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-2c037fe9.js";
-    imports2 = ["_app/immutable/components/error.svelte-2c037fe9.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/stores-4de1524c.js", "_app/immutable/chunks/singletons-e98ed96d.js", "_app/immutable/chunks/index-6302803f.js"];
+    file2 = "_app/immutable/components/error.svelte-4488d8c3.js";
+    imports2 = ["_app/immutable/components/error.svelte-4488d8c3.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/stores-22cdc299.js", "_app/immutable/chunks/singletons-e87f12bc.js", "_app/immutable/chunks/index-6302803f.js"];
     stylesheets2 = [];
   }
 });
@@ -1284,8 +1290,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-d42bb00e.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-d42bb00e.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-6fbda247.js", "_app/immutable/chunks/index-6302803f.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-7e90e03b.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-7e90e03b.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-803416dc.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/index-5890d8ae.js"];
     stylesheets3 = [];
   }
 });
@@ -14889,11 +14895,7 @@ var init_page_svelte2 = __esm({
 ${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
 
 
-${each(Array(100), (_2, i) => {
-        return `<details class="${"bg-red-100 disDetails"}"><summary>hidden mathjax (to hide page load flicker)</summary>
-	$$I=\\int_0^1 f(x) dx $$
-</details>`;
-      })}
+
 
 
 
@@ -14940,8 +14942,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/katex/_page.svelte-994d2cc5.js";
-    imports4 = ["_app/immutable/components/pages/katex/_page.svelte-994d2cc5.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/MathJax-5f179e66.js"];
+    file4 = "_app/immutable/components/pages/katex/_page.svelte-98808c21.js";
+    imports4 = ["_app/immutable/components/pages/katex/_page.svelte-98808c21.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/MathJax-5f179e66.js"];
     stylesheets4 = ["_app/immutable/assets/+page-ed1245ce.css"];
   }
 });
@@ -21199,8 +21201,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-40cde29f.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-40cde29f.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-6fbda247.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/index-7e5941f1.js", "_app/immutable/chunks/navigation-1baf876c.js", "_app/immutable/chunks/singletons-e98ed96d.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-d4697a7c.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-d4697a7c.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-803416dc.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/index-5890d8ae.js", "_app/immutable/chunks/index-73204f6a.js", "_app/immutable/chunks/navigation-d1c81710.js", "_app/immutable/chunks/singletons-e87f12bc.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -21222,11 +21224,22 @@ var init_page_svelte4 = __esm({
 
 
 <p>Mathjax is alright in vanilla html/js but flickers when using component frameworks (like this here svelte). Additionally reloads crashes the mathjax. Additionally expressions like ${escape(fracHalf)} aren&#39;t processed properly since svelte views the curly-braces-around-x as it&#39;s notation for rendering JS variable &quot;x&quot; in the html. To get it to work have to replace x with curly backticks expression ${escape(curlyBackticks)} within the code
-	<br></p>
+<br></p>
 
-<span>$$e^x = \\frac${escape(2)}${escape(3)}$$
+<span>$e^x = \\frac${escape(2)}${escape(3)}$
 	$$e^x = \\frac${escape(`{x}`)}${escape(3)}$$
-</span>`;
+</span>
+
+
+<details open class="${"bg-red-100 disDetails"}"><summary>hidden mathjax (to hide page load flicker)</summary>
+	$$I=\\int_0^1 f(x) dx $$
+</details>
+
+${each(Array(100), (_2, i) => {
+        return `<details class="${"bg-red-100 disDetails"}"><summary>hidden mathjax (to hide page load flicker)</summary>
+	$$I=\\int_0^1 f(x) dx $$
+</details>`;
+      })}`;
     });
   }
 });
@@ -21245,8 +21258,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/mathjax/_page.svelte-8b002aa5.js";
-    imports6 = ["_app/immutable/components/pages/mathjax/_page.svelte-8b002aa5.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/MathJax-5f179e66.js"];
+    file6 = "_app/immutable/components/pages/mathjax/_page.svelte-04582031.js";
+    imports6 = ["_app/immutable/components/pages/mathjax/_page.svelte-04582031.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/MathJax-5f179e66.js", "_app/immutable/chunks/index-73204f6a.js", "_app/immutable/chunks/index-5890d8ae.js"];
     stylesheets6 = [];
   }
 });
@@ -21397,8 +21410,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-400f280e.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-400f280e.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-7e5941f1.js", "_app/immutable/chunks/store-6fbda247.js", "_app/immutable/chunks/index-6302803f.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-a1c5762f.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-a1c5762f.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-73204f6a.js", "_app/immutable/chunks/index-5890d8ae.js", "_app/immutable/chunks/store-803416dc.js", "_app/immutable/chunks/index-6302803f.js"];
     stylesheets7 = ["_app/immutable/assets/+page-59f1650c.css"];
   }
 });
@@ -23519,7 +23532,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-d1071aeb.js", "imports": ["_app/immutable/start-d1071aeb.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/singletons-e98ed96d.js", "_app/immutable/chunks/index-6302803f.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-87e690fe.js", "imports": ["_app/immutable/start-87e690fe.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/singletons-e87f12bc.js", "_app/immutable/chunks/index-6302803f.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

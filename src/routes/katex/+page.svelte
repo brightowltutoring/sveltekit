@@ -50,6 +50,12 @@ Our math equation: <Katex {math} /> and it is inline.
 <h2>Displayed math</h2>
 Our math equation: <Katex {math} tr={true} displayMode/> and it is displayed.
 
+{#each Array(100) as _,i}
+
+	<Katex {math} tr={true} displayMode/>
+
+{/each}
+
 <h2>Reactivity</h2>
 <button on:click={changeMath}>
 	Displaying equation {index}
