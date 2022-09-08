@@ -345,9 +345,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {
       if (!$isXs) {
         if ($scrollY == 0)
-          jankytown = " top-0";
+          jankytown = "top-0";
         if ($scrollY > 250 && $instDeltaY > 0)
-          jankytown = "backdrop-blur-md  -top-20";
+          jankytown = "backdrop-blur-md -top-20";
         if ($scrollY > 250 && $instDeltaY < 0)
           jankytown = "backdrop-blur-3xl top-0";
       }
