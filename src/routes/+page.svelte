@@ -1,5 +1,7 @@
 <script>
+
     import GalleryScale from "$lib/GalleryScale.svelte"
+    import SampleQuiz from "$lib/SampleQuiz.svelte"
 
     const reviewers = [ 
         "zaara",
@@ -10,11 +12,16 @@
         "rob",
         "tj",
     ]
+ 
+    
 </script>
 
 
+
 <div class="font-Poppins text-center sm:text-5xl text-4xl pb-20 ">
-    TESTIMONIALS
+    TESTIMONIALS 
+
+    
 </div>
 
 <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 " >

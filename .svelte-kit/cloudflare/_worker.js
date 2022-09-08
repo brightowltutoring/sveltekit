@@ -7273,10 +7273,12 @@ var init_layout_svelte = __esm({
         $$settled = true;
         {
           if (!$isXs) {
+            if ($scrollY == 0)
+              jankytown = " top-0";
             if ($scrollY > 250 && $instDeltaY > 0)
-              jankytown = "backdrop-blur-md sticky -top-20";
+              jankytown = "backdrop-blur-md  -top-20";
             if ($scrollY > 250 && $instDeltaY < 0)
-              jankytown = "backdrop-blur-3xl sticky top-0";
+              jankytown = "backdrop-blur-3xl top-0";
           }
         }
         $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key2) => {
@@ -7289,7 +7291,7 @@ var init_layout_svelte = __esm({
 
 
 
-<div class="${"px-[4%] sm:px-[7%] pt-2 " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
+<div class="${"px-[4%] sm:px-[7%] pt-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
           $$result,
           { mobileHamburgerClosed },
           {
@@ -7301,7 +7303,7 @@ var init_layout_svelte = __esm({
           {}
         )}</div>
 
-<div class="${"px-[4%] sm:px-[7%] pt-20 sm:block " + escape(mobileHamburgerClosed && $isXs && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
+<div class="${"h-[400vh] px-[4%] sm:px-[7%] pt-20 sm:block " + escape(mobileHamburgerClosed && $isXs && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
@@ -7335,9 +7337,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-4a4ccb16.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-4a4ccb16.js", "_app/immutable/chunks/index-ad6f137b.js", "_app/immutable/chunks/index-e4ec1d16.js", "_app/immutable/chunks/store-f78ba1b3.js", "_app/immutable/chunks/stores-ee3553c4.js", "_app/immutable/chunks/singletons-bf3a518f.js", "_app/immutable/chunks/firebase-26643953.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-50a2909d.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-a570e8d2.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-a570e8d2.js", "_app/immutable/chunks/index-ad6f137b.js", "_app/immutable/chunks/index-e4ec1d16.js", "_app/immutable/chunks/store-f78ba1b3.js", "_app/immutable/chunks/stores-85841b65.js", "_app/immutable/chunks/singletons-28f4b6b5.js", "_app/immutable/chunks/firebase-b66ed6d6.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-b979aaac.css"];
   }
 });
 
@@ -7381,8 +7383,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-f1b56a9e.js";
-    imports2 = ["_app/immutable/components/error.svelte-f1b56a9e.js", "_app/immutable/chunks/index-ad6f137b.js", "_app/immutable/chunks/stores-ee3553c4.js", "_app/immutable/chunks/singletons-bf3a518f.js"];
+    file2 = "_app/immutable/components/error.svelte-3747e56d.js";
+    imports2 = ["_app/immutable/components/error.svelte-3747e56d.js", "_app/immutable/chunks/index-ad6f137b.js", "_app/immutable/chunks/stores-85841b65.js", "_app/immutable/chunks/singletons-28f4b6b5.js"];
     stylesheets2 = [];
   }
 });
@@ -7539,8 +7541,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/login/_page.svelte-3db48543.js";
-    imports4 = ["_app/immutable/components/pages/login/_page.svelte-3db48543.js", "_app/immutable/chunks/index-ad6f137b.js", "_app/immutable/chunks/store-f78ba1b3.js", "_app/immutable/chunks/index-e4ec1d16.js", "_app/immutable/chunks/firebase-26643953.js", "_app/immutable/chunks/singletons-bf3a518f.js"];
+    file4 = "_app/immutable/components/pages/login/_page.svelte-916a28a8.js";
+    imports4 = ["_app/immutable/components/pages/login/_page.svelte-916a28a8.js", "_app/immutable/chunks/index-ad6f137b.js", "_app/immutable/chunks/store-f78ba1b3.js", "_app/immutable/chunks/index-e4ec1d16.js", "_app/immutable/chunks/firebase-b66ed6d6.js", "_app/immutable/chunks/singletons-28f4b6b5.js"];
     stylesheets4 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -9813,7 +9815,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-0334b6b8.js", "imports": ["_app/immutable/start-0334b6b8.js", "_app/immutable/chunks/index-ad6f137b.js", "_app/immutable/chunks/singletons-bf3a518f.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-737553f5.js", "imports": ["_app/immutable/start-737553f5.js", "_app/immutable/chunks/index-ad6f137b.js", "_app/immutable/chunks/singletons-28f4b6b5.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -13,7 +13,7 @@
 </svelte:head>
 
 <svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}
-on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
+on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } on:contextmenu={event => event.preventDefault()} />
 
 
 <script>
@@ -54,15 +54,15 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 	
 	let jankytown='';
     $:if(!$isXs){
-        if($scrollY==0)  jankytown = " top-0"
-        if($scrollY>250 && $instDeltaY>0)  jankytown = "backdrop-blur-md  -top-20"
+        if($scrollY==0)  jankytown = "top-0"
+        if($scrollY>250 && $instDeltaY>0)  jankytown = "backdrop-blur-md -top-20"
         if($scrollY>250 && $instDeltaY<0)  jankytown = "backdrop-blur-3xl top-0"
     }
     
 </script>
 
 <!-- if controlling padding here, then the hiding nav effect only works if defined here 
-... Used to have the code in Navbar.svelte itself
+... Used to have the code in Navbar.svelte itself ...TODO: maybe can still remove some code from Navbar.svelte
 -->
 <div class="px-[4%] sm:px-[7%] pt-2 sticky {jankytown} z-50 duration-300">
 	<Navbar bind:mobileHamburgerClosed />

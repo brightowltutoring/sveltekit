@@ -110,6 +110,18 @@ export const routes = writable({
     title: "Plans",
     isCurrent: false,
   }, 
+  katex: {
+    name:'Katex',
+    href: "/katex",
+    title: "Katex",
+    isCurrent: false,
+  }, 
+  mathjax: {
+    name:'Mathjax',
+    href: "/mathjax",
+    title: "Mathjax",
+    isCurrent: false,
+  }, 
   login: {
     name:'Login',
     href: "/login",
