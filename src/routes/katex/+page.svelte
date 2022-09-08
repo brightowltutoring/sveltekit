@@ -22,10 +22,10 @@
 <p class="text-2xl text-center">KaTeX svelte component demo</p>
 
 <h2>Inline math</h2>
-Our math equation: <Katex {math}/> and it is inline.
+Our math equation: <Katex {math} /> and it is inline.
 
 <h2>Displayed math</h2>
-Our math equation: <Katex {math} displayMode/> and it is displayed.
+Our math equation: <Katex {math} tr={true} displayMode/> and it is displayed.
 
 <h2>Reactivity</h2>
 <button on:click={changeMath}>

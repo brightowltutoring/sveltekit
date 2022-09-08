@@ -13,8 +13,9 @@
 	import { scale, fade, slide, fly } from 'svelte/transition'
 	import { elasticOut, quintOut } from "svelte/easing"
 
-	
-   
+	export let tr
+
+
 
 </script>
 
@@ -23,7 +24,11 @@
 	
 </svelte:head>
 
-<div in:fly={{x:25, duration:800, easing:quintOut }}>
+{#if tr }
+	<p in:fly={{x:25, duration:800, easing:quintOut }}>
+		{@html katexString}
+	</p>
+{:else }
 	{@html katexString}
-</div>
+{/if}
 

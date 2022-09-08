@@ -20,7 +20,7 @@
 
 
 <div class="font-Poppins text-center sm:text-5xl text-4xl pb-20 ">
-    TESTIMONIALS  $$m^3$$
+    TESTIMONIALS 
 
     
 </div>
