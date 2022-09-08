@@ -7263,9 +7263,9 @@ var init_layout_svelte = __esm({
       let $$unsubscribe_redirectAfterLoginTimeOut;
       let $$unsubscribe_windowInnerHeight;
       let $$unsubscribe_scrollYMax;
+      let $$unsubscribe_innerWidth;
       let $routes, $$unsubscribe_routes;
       let $page, $$unsubscribe_page;
-      let $$unsubscribe_innerWidth;
       $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
@@ -7274,9 +7274,9 @@ var init_layout_svelte = __esm({
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
       $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
+      $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
       $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
       let mobileHamburgerClosed = true;
       let jankytown = "";
       let $$settled;
@@ -7293,11 +7293,17 @@ var init_layout_svelte = __esm({
               jankytown = "backdrop-blur-3xl top-0";
           }
         }
-        $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key2) => {
+        $$rendered = `
+
+${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1kb0r8e"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1kb0r8e"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1kb0r8e">${each(Object.keys($routes), (key2) => {
           return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)} </title>`, ""}` : ``}`}`;
         })}`, ""}
 
 
+
+	  
+
+  
 
 
 
@@ -7325,9 +7331,9 @@ var init_layout_svelte = __esm({
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_windowInnerHeight();
       $$unsubscribe_scrollYMax();
+      $$unsubscribe_innerWidth();
       $$unsubscribe_routes();
       $$unsubscribe_page();
-      $$unsubscribe_innerWidth();
       return $$rendered;
     });
   }
@@ -7349,8 +7355,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-5d825f60.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-5d825f60.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-989d9bdc.js", "_app/immutable/chunks/store-b5f39fea.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/stores-26685334.js", "_app/immutable/chunks/singletons-0aa44fc4.js", "_app/immutable/chunks/firebase-9ab5b0b0.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-84a33abe.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-84a33abe.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/index-5c4785e5.js", "_app/immutable/chunks/index-0d9a5c71.js", "_app/immutable/chunks/stores-958108dc.js", "_app/immutable/chunks/singletons-82d03d09.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/store-9c10c20e.js", "_app/immutable/chunks/firebase-57fb5325.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-ce6d04dc.css"];
   }
 });
@@ -7395,8 +7401,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-13ac2cdf.js";
-    imports2 = ["_app/immutable/components/error.svelte-13ac2cdf.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/stores-26685334.js", "_app/immutable/chunks/singletons-0aa44fc4.js", "_app/immutable/chunks/index-6302803f.js"];
+    file2 = "_app/immutable/components/error.svelte-543b4d28.js";
+    imports2 = ["_app/immutable/components/error.svelte-543b4d28.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/stores-958108dc.js", "_app/immutable/chunks/singletons-82d03d09.js", "_app/immutable/chunks/index-57952acb.js"];
     stylesheets2 = [];
   }
 });
@@ -7433,7 +7439,7 @@ var init_page_svelte = __esm({
     });
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
-      return `<div class="${"font-Poppins text-center sm:text-5xl text-4xl pb-20 "}">TESTIMONIALS 
+      return `<div class="${"font-Poppins text-center sm:text-5xl text-4xl pb-20 "}">TESTIMONIALS  $$m^3$$
 
     
 </div>
@@ -7474,8 +7480,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-061f6d67.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-061f6d67.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-b5f39fea.js", "_app/immutable/chunks/index-6302803f.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-bb50db99.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-bb50db99.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-9c10c20e.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/index-0d9a5c71.js"];
     stylesheets3 = [];
   }
 });
@@ -21040,17 +21046,17 @@ var init_page_svelte2 = __esm({
       if ($$props.displayMode === void 0 && $$bindings.displayMode && displayMode !== void 0)
         $$bindings.displayMode(displayMode);
       katexString = katex.renderToString(math4, options);
-      return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-1270p8n">`, ""}
+      return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-5lsyfq">`, ""}
 
-<!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->`;
+<div><!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END --></div>`;
     });
     css = {
       code: "a.svelte-qd6jw8{background-color:lightgray;text-decoration:underline;font-weight:700;padding:0.5em}",
       map: null
     };
-    math1 = "ax^2+bx+c=0";
+    math1 = "V=\\frac{1}{3}\\pi r^2 h";
     math2 = "x=-\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}";
-    math3 = "V=\\frac{1}{3}\\pi r^2 h";
+    math3 = "ax^2+bx+c=0";
     Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let math4;
       const mathArray = [math1, math2, math3];
@@ -21068,8 +21074,10 @@ Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { mat
 <h2>Reactivity</h2>
 <button>Displaying equation ${escape(index8)}</button>
 
-<h2>Static math expression within HTML</h2>
-${validate_component(Katex, "Katex").$$render($$result, { math: "V=\\pi\\textrm{ m}^3" }, {}, {})}
+<h2>Static math expression within HTML</h2> 
+${validate_component(Katex, "Katex").$$render($$result, { math: "V=\\pi \\textrm{ m}^3 " }, {}, {})}
+
+
 
 <h2>Slot based Svelte Component
 </h2>
@@ -21096,8 +21104,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/katex/_page.svelte-d30b85f4.js";
-    imports4 = ["_app/immutable/components/pages/katex/_page.svelte-d30b85f4.js", "_app/immutable/chunks/index-c5b536bd.js"];
+    file4 = "_app/immutable/components/pages/katex/_page.svelte-a3491f80.js";
+    imports4 = ["_app/immutable/components/pages/katex/_page.svelte-a3491f80.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/index-5c4785e5.js", "_app/immutable/chunks/index-0d9a5c71.js"];
     stylesheets4 = ["_app/immutable/assets/+page-ed1245ce.css"];
   }
 });
@@ -21177,8 +21185,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-23f95577.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-23f95577.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-b5f39fea.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/index-989d9bdc.js", "_app/immutable/chunks/firebase-9ab5b0b0.js", "_app/immutable/chunks/singletons-0aa44fc4.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-ce5582c3.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-ce5582c3.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-9c10c20e.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/index-0d9a5c71.js", "_app/immutable/chunks/index-5c4785e5.js", "_app/immutable/chunks/firebase-57fb5325.js", "_app/immutable/chunks/singletons-82d03d09.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -21188,12 +21196,12 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page4
 });
-var MathJax, Page4;
+var MathJax_1, curlyBackticks, Page4;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/mathjax/_page.svelte.js"() {
     init_chunks();
-    MathJax = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${$$result.head += `<script src="${"https://polyfill.io/v3/polyfill.min.js?features=es6"}" data-svelte="svelte-12gttbm"><\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-12gttbm"><\/script>`, ""}
+    MathJax_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${$$result.head += `<script src="${"https://polyfill.io/v3/polyfill.min.js?features=es6"}" data-svelte="svelte-vs9z3k"><\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-vs9z3k"><\/script>`, ""}
 
 
 
@@ -21206,15 +21214,20 @@ var init_page_svelte4 = __esm({
 
 `;
     });
+    curlyBackticks = " `{x}` ";
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(MathJax, "MathJax").$$render($$result, {}, {}, {})}
+      let fracHalf = "\\frac{x}{2}";
+      return `${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
 
 
-<p>Mathjax is alright in vanilla html/js but flickers when using component frameworks (like this here svelte). Additionally reloads crashes the mathjax.
+<div>Mathjax is alright in vanilla html/js but flickers when using component frameworks (like this here svelte). Additionally reloads crashes the mathjax. Additionally expressions like ${escape(fracHalf)} aren&#39;t processed properly since svelte views the curly-braces-around-x as it&#39;s notation for rendering JS variable &quot;x&quot; in the html. To get it to work have to replace x with curly backticks expression ${escape(curlyBackticks)} within the code
 	<br>
 	<br>
-    The slope of the radial line is: $$e^x = \\frac${escape(2)}${escape(3)}$$
-</p>`;
+
+
+	<div>$$e^x = \\frac${escape(`{x}`)}${escape(3)}$$ 
+		$$e^x = \\frac${escape(`{2}`)}${escape(3)}$$
+	</div></div>`;
     });
   }
 });
@@ -21233,8 +21246,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/mathjax/_page.svelte-c1ff2dbd.js";
-    imports6 = ["_app/immutable/components/pages/mathjax/_page.svelte-c1ff2dbd.js", "_app/immutable/chunks/index-c5b536bd.js"];
+    file6 = "_app/immutable/components/pages/mathjax/_page.svelte-3460aaa1.js";
+    imports6 = ["_app/immutable/components/pages/mathjax/_page.svelte-3460aaa1.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/index-5c4785e5.js", "_app/immutable/chunks/index-0d9a5c71.js"];
     stylesheets6 = [];
   }
 });
@@ -21385,8 +21398,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-5e4ef4d1.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-5e4ef4d1.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-989d9bdc.js", "_app/immutable/chunks/store-b5f39fea.js", "_app/immutable/chunks/index-6302803f.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-4a9b37c7.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-4a9b37c7.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/index-5c4785e5.js", "_app/immutable/chunks/index-0d9a5c71.js", "_app/immutable/chunks/store-9c10c20e.js", "_app/immutable/chunks/index-57952acb.js"];
     stylesheets7 = ["_app/immutable/assets/+page-59f1650c.css"];
   }
 });
@@ -23507,7 +23520,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-b3ba10df.js", "imports": ["_app/immutable/start-b3ba10df.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/singletons-0aa44fc4.js", "_app/immutable/chunks/index-6302803f.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-93011891.js", "imports": ["_app/immutable/start-93011891.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/singletons-82d03d09.js", "_app/immutable/chunks/index-57952acb.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

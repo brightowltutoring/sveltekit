@@ -10,18 +10,18 @@ const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.displayMode === void 0 && $$bindings.displayMode && displayMode !== void 0)
     $$bindings.displayMode(displayMode);
   katexString = katex.renderToString(math, options);
-  return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-1270p8n">`, ""}
+  return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-5lsyfq">`, ""}
 
-<!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->`;
+<div><!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END --></div>`;
 });
 const _page_svelte_svelte_type_style_lang = "";
 const css = {
   code: "a.svelte-qd6jw8{background-color:lightgray;text-decoration:underline;font-weight:700;padding:0.5em}",
   map: null
 };
-const math1 = "ax^2+bx+c=0";
+const math1 = "V=\\frac{1}{3}\\pi r^2 h";
 const math2 = "x=-\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}";
-const math3 = "V=\\frac{1}{3}\\pi r^2 h";
+const math3 = "ax^2+bx+c=0";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let math;
   const mathArray = [math1, math2, math3];
@@ -39,8 +39,10 @@ Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { mat
 <h2>Reactivity</h2>
 <button>Displaying equation ${escape(index)}</button>
 
-<h2>Static math expression within HTML</h2>
-${validate_component(Katex, "Katex").$$render($$result, { math: "V=\\pi\\textrm{ m}^3" }, {}, {})}
+<h2>Static math expression within HTML</h2> 
+${validate_component(Katex, "Katex").$$render($$result, { math: "V=\\pi \\textrm{ m}^3 " }, {}, {})}
+
+
 
 <h2>Slot based Svelte Component
 </h2>

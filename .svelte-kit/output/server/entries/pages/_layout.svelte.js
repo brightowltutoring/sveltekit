@@ -322,9 +322,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_redirectAfterLoginTimeOut;
   let $$unsubscribe_windowInnerHeight;
   let $$unsubscribe_scrollYMax;
+  let $$unsubscribe_innerWidth;
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
-  let $$unsubscribe_innerWidth;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
@@ -333,9 +333,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
+  $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   let mobileHamburgerClosed = true;
   let jankytown = "";
   let $$settled;
@@ -352,11 +352,17 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "backdrop-blur-3xl top-0";
       }
     }
-    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1cv4w2m"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1cv4w2m"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1cv4w2m">${each(Object.keys($routes), (key) => {
+    $$rendered = `
+
+${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1kb0r8e"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1kb0r8e"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1kb0r8e">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
     })}`, ""}
 
 
+
+	  
+
+  
 
 
 
@@ -384,9 +390,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_windowInnerHeight();
   $$unsubscribe_scrollYMax();
+  $$unsubscribe_innerWidth();
   $$unsubscribe_routes();
   $$unsubscribe_page();
-  $$unsubscribe_innerWidth();
   return $$rendered;
 });
 export {
