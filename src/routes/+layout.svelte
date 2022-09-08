@@ -54,8 +54,9 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 	
 	let jankytown='';
     $:if(!$isXs){
-        if($scrollY>250 && $instDeltaY>0)  jankytown = "backdrop-blur-md sticky -top-20"
-        if($scrollY>250 && $instDeltaY<0)  jankytown = "backdrop-blur-3xl sticky top-0"
+        if($scrollY==0)  jankytown = " top-0"
+        if($scrollY>250 && $instDeltaY>0)  jankytown = "backdrop-blur-md  -top-20"
+        if($scrollY>250 && $instDeltaY<0)  jankytown = "backdrop-blur-3xl top-0"
     }
     
 </script>
@@ -63,10 +64,10 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 <!-- if controlling padding here, then the hiding nav effect only works if defined here 
 ... Used to have the code in Navbar.svelte itself
 -->
-<div class="px-[4%] sm:px-[7%] pt-2 {jankytown} z-50 duration-300">
+<div class="px-[4%] sm:px-[7%] pt-2 sticky {jankytown} z-50 duration-300">
 	<Navbar bind:mobileHamburgerClosed />
 </div>
 
-<div class="px-[4%] sm:px-[7%] pt-20 sm:block  { (mobileHamburgerClosed && $isXs) && "hidden opacity-0"} transition-all duration-500" >
+<div class=" h-[400vh] px-[4%] sm:px-[7%] pt-20 sm:block  { (mobileHamburgerClosed && $isXs) && "hidden opacity-0"} transition-all duration-500" >
 	<slot/>
 </div>	

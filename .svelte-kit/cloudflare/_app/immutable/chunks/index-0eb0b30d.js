@@ -1,4 +1,0 @@
-import{j as h}from"./store-ffb3fd03.js";import"./index-64e3950e.js";function y(p,{delay:s=0,duration:i=400,easing:e=h}={}){const t=getComputedStyle(p),d=+t.opacity,a=parseFloat(t.height),r=parseFloat(t.paddingTop),c=parseFloat(t.paddingBottom),m=parseFloat(t.marginTop),g=parseFloat(t.marginBottom),l=parseFloat(t.borderTopWidth),n=parseFloat(t.borderBottomWidth);return{delay:s,duration:i,easing:e,css:o=>`overflow: hidden;opacity: ${Math.min(o*20,1)*d};height: ${o*a}px;padding-top: ${o*r}px;padding-bottom: ${o*c}px;margin-top: ${o*m}px;margin-bottom: ${o*g}px;border-top-width: ${o*l}px;border-bottom-width: ${o*n}px;`}}function _(p,{delay:s=0,duration:i=400,easing:e=h,start:t=0,opacity:d=0}={}){const a=getComputedStyle(p),r=+a.opacity,c=a.transform==="none"?"":a.transform,m=1-t,g=r*(1-d);return{delay:s,duration:i,easing:e,css:(l,n)=>`
-			transform: ${c} scale(${1-m*n});
-			opacity: ${r-g*n}
-		`}}export{_ as a,y as s};

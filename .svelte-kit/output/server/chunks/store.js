@@ -42,12 +42,6 @@ const routes = writable({
     title: "Thinksolve.io \u{1F4AB}",
     isCurrent: false
   },
-  etc: {
-    name: "Etc",
-    href: "/etc",
-    title: "Etc",
-    isCurrent: false
-  },
   plans: {
     name: "Plans",
     href: "/plans",
