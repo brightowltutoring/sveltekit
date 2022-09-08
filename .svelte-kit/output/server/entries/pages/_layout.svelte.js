@@ -217,7 +217,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
   let hueRocket = 0;
   let { mobileHamburgerClosed } = $$props;
-  let mobileOpen = "true";
+  let mobileOpen = "";
   let unique;
   let jankytown = "";
   let btnColor = "sm:bg-red-300 ";

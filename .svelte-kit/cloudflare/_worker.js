@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css3) => css3.code).join("\n"),
+          code: Array.from(result.css).map((css4) => css4.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -7152,7 +7152,7 @@ var init_layout_svelte = __esm({
       $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
       let hueRocket = 0;
       let { mobileHamburgerClosed } = $$props;
-      let mobileOpen = "true";
+      let mobileOpen = "";
       let unique;
       let jankytown = "";
       let btnColor = "sm:bg-red-300 ";
@@ -7345,9 +7345,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-0dc5c812.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-0dc5c812.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-3e49859b.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/stores-36743713.js", "_app/immutable/chunks/singletons-c3b2d0e7.js", "_app/immutable/chunks/firebase-6a397dda.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-18d458b8.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-ecb119fa.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-ecb119fa.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/index-0eb0b30d.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/stores-69193683.js", "_app/immutable/chunks/singletons-61e09b70.js", "_app/immutable/chunks/firebase-cb899c0b.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-1e7d7040.css"];
   }
 });
 
@@ -7391,8 +7391,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-51c9cb0c.js";
-    imports2 = ["_app/immutable/components/error.svelte-51c9cb0c.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/stores-36743713.js", "_app/immutable/chunks/singletons-c3b2d0e7.js", "_app/immutable/chunks/index-57952acb.js"];
+    file2 = "_app/immutable/components/error.svelte-b10b9592.js";
+    imports2 = ["_app/immutable/components/error.svelte-b10b9592.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/stores-69193683.js", "_app/immutable/chunks/singletons-61e09b70.js", "_app/immutable/chunks/index-57952acb.js"];
     stylesheets2 = [];
   }
 });
@@ -7402,12 +7402,114 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var Page;
+var css, GalleryScale, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
+    init_store();
+    init_index2();
+    css = {
+      code: ".relative.svelte-ka9qzy input.svelte-ka9qzy{position:absolute;left:50%;top:50%;transform:translate(-50%, -50%)}",
+      map: null
+    };
+    GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let { Src = "/reviews/review-ben.png" } = $$props;
+      let { Alt = "review ben" } = $$props;
+      let imgBackground;
+      if ($$props.Src === void 0 && $$bindings.Src && Src !== void 0)
+        $$bindings.Src(Src);
+      if ($$props.Alt === void 0 && $$bindings.Alt && Alt !== void 0)
+        $$bindings.Alt(Alt);
+      $$result.css.add(css);
+      {
+        $isDarkMode ? imgBackground = `peer-focus:bg-[rgb(218,220,203)] peer-focus:invert` : imgBackground = `peer-focus:bg-[#f7f7f7]`;
+      }
+      $$unsubscribe_isDarkMode();
+      return `<div class="${"relative svelte-ka9qzy"}"><input class="${"peer opacity-0 w-full h-full svelte-ka9qzy"}">
+    
+    <img class="${"hover:shadow-2xl " + escape(imgBackground, true) + " peer-hover:shadow-lg peer-focus:fixed peer-focus:top-10 peer-focus:left-10 peer-focus:z-50 peer-focus:-translate-x-8 peer-focus:scale-[1] sm:peer-focus:scale-[0.85]"}"${add_attribute("src", Src, 0)}${add_attribute("alt", Alt, 0)}>
+            </div>`;
+    });
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `Home`;
+      return `Home
+
+<div class="${"font-Poppins text-center sm:text-5xl text-4xl pb-5 pt-20 "}">TESTIMONIALS
+</div>
+
+<div class="${"grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4 "}">${validate_component(GalleryScale, "GalleryScale").$$render(
+        $$result,
+        {
+          Src: "/reviews/review-ben-bare.png",
+          Alt: "review ben"
+        },
+        {},
+        {}
+      )} 
+    ${validate_component(GalleryScale, "GalleryScale").$$render(
+        $$result,
+        {
+          Src: "/reviews/review-efe-bare.png",
+          Alt: "review ben"
+        },
+        {},
+        {}
+      )} 
+    ${validate_component(GalleryScale, "GalleryScale").$$render(
+        $$result,
+        {
+          Src: "/reviews/review-miranda-bare.png",
+          Alt: "review ben"
+        },
+        {},
+        {}
+      )} 
+    ${validate_component(GalleryScale, "GalleryScale").$$render(
+        $$result,
+        {
+          Src: "/reviews/review-paola-bare.png",
+          Alt: "review ben"
+        },
+        {},
+        {}
+      )} 
+    ${validate_component(GalleryScale, "GalleryScale").$$render(
+        $$result,
+        {
+          Src: "/reviews/review-rob-bare.png",
+          Alt: "review ben"
+        },
+        {},
+        {}
+      )} 
+    ${validate_component(GalleryScale, "GalleryScale").$$render(
+        $$result,
+        {
+          Src: "/reviews/review-tj-bare.png",
+          Alt: "review ben"
+        },
+        {},
+        {}
+      )} 
+    ${validate_component(GalleryScale, "GalleryScale").$$render(
+        $$result,
+        {
+          Src: "/reviews/review-zaara-bare.png",
+          Alt: "review ben"
+        },
+        {},
+        {}
+      )} 
+    
+    </div>
+
+
+
+
+
+
+`;
     });
   }
 });
@@ -7426,9 +7528,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-8d537a3f.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-8d537a3f.js", "_app/immutable/chunks/index-64e3950e.js"];
-    stylesheets3 = [];
+    file3 = "_app/immutable/components/pages/_page.svelte-8a30992e.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-8a30992e.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js"];
+    stylesheets3 = ["_app/immutable/assets/+page-2c896bd9.css"];
   }
 });
 
@@ -7472,7 +7574,7 @@ var page_svelte_exports3 = {};
 __export(page_svelte_exports3, {
   default: () => Page3
 });
-var css, Page3;
+var css2, Page3;
 var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
@@ -7482,7 +7584,7 @@ var init_page_svelte3 = __esm({
     init_index_esm2();
     init_index2();
     init_index_esm();
-    css = {
+    css2 = {
       code: "#flyingEmoji.svelte-m7g9u3.svelte-m7g9u3{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-m7g9u3-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1) ;animation:svelte-m7g9u3-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1) }#flyingEmoji.svelte-m7g9u3.svelte-m7g9u3::after{content:'\u{1F6F8}';display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-m7g9u3-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-m7g9u3-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-m7g9u3-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-m7g9u3-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-m7g9u3-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-m7g9u3-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-m7g9u3-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-m7g9u3-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-m7g9u3.svelte-m7g9u3{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-m7g9u3.svelte-m7g9u3{margin:0px auto;margin-top:50px;width:25vw;min-width:280px;padding:20px;font-family:'Nunito', sans-serif;font-weight:400}.loginLogoutDivs.svelte-m7g9u3 input.svelte-m7g9u3,button.svelte-m7g9u3.svelte-m7g9u3{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:'Nunito', sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-m7g9u3 input.svelte-m7g9u3{background:#fff;border:1px solid #ccc}#googleBtn.svelte-m7g9u3.svelte-m7g9u3{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-m7g9u3.svelte-m7g9u3:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-m7g9u3 button.svelte-m7g9u3{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-m7g9u3 input.svelte-m7g9u3:hover{border:1px solid #999}.loginLogoutDivs.svelte-m7g9u3 button.svelte-m7g9u3:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-m7g9u3 input.svelte-m7g9u3:focus{background:rgba(255, 255, 255, 0.5) }.centering.svelte-m7g9u3.svelte-m7g9u3{display:flex;justify-content:center;align-items:center}",
       map: null
     };
@@ -7492,7 +7594,7 @@ var init_page_svelte3 = __esm({
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       let emailFieldValue = "";
-      $$result.css.add(css);
+      $$result.css.add(css2);
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       return `<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 90vh; max-height: 90vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(10px); "}"></video>
@@ -7542,8 +7644,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-878b9056.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-878b9056.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-3e49859b.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/firebase-6a397dda.js", "_app/immutable/chunks/singletons-c3b2d0e7.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-31e5b605.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-31e5b605.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/index-0eb0b30d.js", "_app/immutable/chunks/firebase-cb899c0b.js", "_app/immutable/chunks/singletons-61e09b70.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -7553,7 +7655,7 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page4
 });
-var css$1, PlansCard, css2, Page4;
+var css$1, PlansCard, css3, Page4;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -7599,13 +7701,16 @@ var init_page_svelte4 = __esm({
     
 </div>`;
     });
-    css2 = {
+    css3 = {
       code: "a.svelte-1s9r9ye{color:var(--anchor)}a.svelte-1s9r9ye:hover{color:var(--anchor_hover)}",
       map: null
     };
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css2);
-      return `<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${validate_component(PlansCard, "PlansCard").$$render(
+      $$result.css.add(css3);
+      return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 pt-20 "}">Plans
+</div>
+
+<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${validate_component(PlansCard, "PlansCard").$$render(
         $$result,
         {
           card: 1,
@@ -7691,8 +7796,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/plans/_page.svelte-1e6aa7d5.js";
-    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-1e6aa7d5.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-3e49859b.js", "_app/immutable/chunks/index-57952acb.js"];
+    file6 = "_app/immutable/components/pages/plans/_page.svelte-8476d9ce.js";
+    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-8476d9ce.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/index-0eb0b30d.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js"];
     stylesheets6 = ["_app/immutable/assets/+page-59f1650c.css"];
   }
 });
@@ -9810,10 +9915,10 @@ var Server = class {
 // .svelte-kit/cloudflare-tmp/manifest.js
 var manifest = {
   appDir: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4"]),
-  mimeTypes: { ".mp4": "video/mp4" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
+  mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-858f7939.js", "imports": ["_app/immutable/start-858f7939.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/singletons-c3b2d0e7.js", "_app/immutable/chunks/index-57952acb.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-5fb673c2.js", "imports": ["_app/immutable/start-5fb673c2.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/singletons-61e09b70.js", "_app/immutable/chunks/index-57952acb.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

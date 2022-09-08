@@ -9,7 +9,7 @@
 </script>
 
 <div class="relative">
-    <input class="peer opacity-0 w-full h-full" />
+    <input inputmode="none" class="peer opacity-0 w-full h-full" />
     <!-- still confused as to how this scale full screen but ok! -->
     <img  class="hover:shadow-2xl 
                 {imgBackground}

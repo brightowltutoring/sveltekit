@@ -49,7 +49,10 @@ const css = {
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
-  return `<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${validate_component(PlansCard, "PlansCard").$$render(
+  return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 pt-20 "}">Plans
+</div>
+
+<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${validate_component(PlansCard, "PlansCard").$$render(
     $$result,
     {
       card: 1,
