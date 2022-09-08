@@ -2,10 +2,6 @@ import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as 
 import { p as page } from "../../chunks/stores.js";
 import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, b as redirectSetInterval, s as scrollY, c as instDeltaY, l as lastScrollY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
-import "../../chunks/firebase.js";
-import "firebase/auth";
-import "firebase/app";
-import "firebase/firestore/lite";
 const app = "";
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isDarkMode;
@@ -317,7 +313,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
   let $isXs, $$unsubscribe_isXs;
-  let $$unsubscribe_isLoggedIn;
   let $$unsubscribe_redirectSetInterval;
   let $$unsubscribe_redirectAfterLoginTimeOut;
   let $$unsubscribe_windowInnerHeight;
@@ -328,7 +323,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
-  $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
@@ -385,7 +379,6 @@ ${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapi
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
   $$unsubscribe_isXs();
-  $$unsubscribe_isLoggedIn();
   $$unsubscribe_redirectSetInterval();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_windowInnerHeight();

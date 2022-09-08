@@ -39,7 +39,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 ${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
 
 
-${each(Array(300), (_, i) => {
+${each(Array(5), (_, i) => {
     return `<details class="${"bg-red-100 disDetails"}"><summary>hidden mathjax (to hide page load flicker)</summary>
 	$$I=\\int_0^1 f(x) dx $$
 </details>`;

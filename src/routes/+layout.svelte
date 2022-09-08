@@ -30,6 +30,9 @@ on:popstate={ clearRedirectStuff }
 
 
 
+
+
+
 	import '../app.css'
 	import Navbar from '$lib/Navbar.svelte'
 	import { isXs, instDeltaY, innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, redirectSetInterval, routes } from '$lib/store.js' 	
@@ -50,7 +53,11 @@ on:popstate={ clearRedirectStuff }
 		
 	}
 
+
+	
 	onMount( ()=>{
+
+		console.log("isLoggedIn", $isLoggedIn);
 	
 
 		setScrollYMax();

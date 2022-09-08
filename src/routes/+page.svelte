@@ -1,7 +1,8 @@
 <script>
-
     import GalleryScale from "$lib/GalleryScale.svelte"
+    // import FirebaseAuthStateChecker from "$lib/FirebaseAuthStateChecker.svelte"
 
+    import { onMount } from 'svelte'
 
     const reviewers = [ 
         "zaara",
@@ -12,17 +13,27 @@
         "rob",
         "tj",
     ]
- 
-    
+
+    // $: console.log(allStorage());
+    // onMount(()=>allStorage())
+
+	// function allStorage() {
+
+    //     var values = [],
+    //         keys = Object.keys(localStorage),
+    //         i = keys.length;
+
+    //     while ( i-- ) {
+    //         values.push( localStorage.getItem(keys[i]) );
+    //     }
+
+    //     return values;
+    // }
 </script>
-
-
-
+<!-- <FirebaseAuthStateChecker/> -->
 
 <div class="font-Poppins text-center sm:text-5xl text-4xl pb-20 ">
-    TESTIMONIALS 
-
-    
+    TESTIMONIALS     
 </div>
 
 <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 " >
