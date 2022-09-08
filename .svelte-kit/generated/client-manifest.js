@@ -5,13 +5,11 @@ export const nodes = [
 	() => import('./nodes/1'),
 	() => import('./nodes/2'),
 	() => import('./nodes/3'),
-	() => import('./nodes/4'),
-	() => import('./nodes/5')
+	() => import('./nodes/4')
 ];
 
 export const dictionary = {
 	"": [[1], [0], 2],
-	"etc": [[1], [0], 3],
-	"login": [[1], [0], 4],
-	"plans": [[1], [0], 5]
+	"login": [[1], [0], 3],
+	"plans": [[1], [0], 4]
 };

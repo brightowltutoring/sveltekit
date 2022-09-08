@@ -21,7 +21,7 @@ const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots)
     $isDarkMode ? imgBackground = `peer-focus:bg-[rgb(218,220,203)] peer-focus:invert` : imgBackground = `peer-focus:bg-[#f7f7f7]`;
   }
   $$unsubscribe_isDarkMode();
-  return `<div class="${"relative svelte-ka9qzy"}"><input class="${"peer opacity-0 w-full h-full svelte-ka9qzy"}">
+  return `<div class="${"relative svelte-ka9qzy"}"><input inputmode="${"none"}" class="${"peer opacity-0 w-full h-full svelte-ka9qzy"}">
     
     <img class="${"hover:shadow-2xl " + escape(imgBackground, true) + " peer-hover:shadow-lg peer-focus:fixed peer-focus:top-10 peer-focus:left-10 peer-focus:z-50 peer-focus:-translate-x-8 peer-focus:scale-[1] sm:peer-focus:scale-[0.85]"}"${add_attribute("src", Src, 0)}${add_attribute("alt", Alt, 0)}>
             </div>`;

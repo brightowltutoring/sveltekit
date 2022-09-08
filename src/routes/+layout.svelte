@@ -19,7 +19,7 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 <script>
 	import '../app.css'
 	import Navbar from '$lib/Navbar.svelte'
-	import { isXs, innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, redirectSetInterval, routes } from '$lib/store.js' 	
+	import { isXs, instDeltaY, innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, redirectSetInterval, routes } from '$lib/store.js' 	
 	import { page } from '$app/stores'	
 	import { onMount } from 'svelte'
 	import { auth } from '$lib/firebase.js'
@@ -50,12 +50,23 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } />
 			}
 		})
 	})
+
+	
+	let jankytown='';
+    $:if(!$isXs){
+        if($scrollY>250 && $instDeltaY>0)  jankytown = "backdrop-blur-md sticky -top-20"
+        if($scrollY>250 && $instDeltaY<0)  jankytown = "backdrop-blur-3xl sticky top-0"
+    }
+    
 </script>
 
-<Navbar bind:mobileHamburgerClosed />
+<!-- if controlling padding here, then the hiding nav effect only works if defined here 
+... Used to have the code in Navbar.svelte itself
+-->
+<div class="px-[4%] sm:px-[7%] pt-2 {jankytown} z-50 duration-300">
+	<Navbar bind:mobileHamburgerClosed />
+</div>
 
-<!--  {mobileHamburgerClosed && "opacity-0"} -->
-<!-- <div class=" h-[400vh] bg-blue-300" > -->
-<div class="sm:block  { (mobileHamburgerClosed && $isXs) && "hidden opacity-0"}  transition-all duration-500" >
+<div class="px-[4%] sm:px-[7%] pt-20 sm:block  { (mobileHamburgerClosed && $isXs) && "hidden opacity-0"} transition-all duration-500" >
 	<slot/>
 </div>	

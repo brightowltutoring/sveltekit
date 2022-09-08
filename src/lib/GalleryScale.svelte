@@ -9,8 +9,8 @@
 </script>
 
 <div class="relative">
-    <input inputmode="none" class="peer opacity-0 w-full h-full" />
-    <!-- still confused as to how this scale full screen but ok! -->
+    <input inputmode="none" class="absolute opacity-0 w-full h-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 peer" />
+ 
     <img  class="hover:shadow-2xl 
                 {imgBackground}
                 peer-hover:shadow-lg 
@@ -20,28 +20,11 @@
                 peer-focus:z-50  
                 peer-focus:-translate-x-8 
                 peer-focus:scale-[1] 
-                sm:peer-focus:scale-[0.85] 
-                " src={Src} alt={Alt}>
-            </div>
+                sm:peer-focus:scale-[0.85]
+                peer-focus:duration-300  
+                " src={Src} alt={Alt}
+     >
+     <!-- still confused as to how this scale full screen but ok! -->
+</div>
 
-
-<style>
-    .relative input {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-    /* .relative input:focus ~ img {
-        transform: scale(2);
-    } */
-
-    /* img {
-      transform: perspective(1000px) rotateX(0deg);
-      transition: transform 0.3s ease 0s;
-    }
     
-    img:hover {
-      transform: perspective(1000px) rotateX(6deg) ;
-    } */
-</style>

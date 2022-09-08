@@ -7345,8 +7345,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-ecb119fa.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-ecb119fa.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/index-0eb0b30d.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/stores-69193683.js", "_app/immutable/chunks/singletons-61e09b70.js", "_app/immutable/chunks/firebase-cb899c0b.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-83a7e0d7.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-83a7e0d7.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/index-0eb0b30d.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/stores-c59b15a0.js", "_app/immutable/chunks/singletons-2f9d2e43.js", "_app/immutable/chunks/firebase-06d1aabc.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/+layout-1e7d7040.css"];
   }
 });
@@ -7391,8 +7391,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-b10b9592.js";
-    imports2 = ["_app/immutable/components/error.svelte-b10b9592.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/stores-69193683.js", "_app/immutable/chunks/singletons-61e09b70.js", "_app/immutable/chunks/index-57952acb.js"];
+    file2 = "_app/immutable/components/error.svelte-e3d557ca.js";
+    imports2 = ["_app/immutable/components/error.svelte-e3d557ca.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/stores-c59b15a0.js", "_app/immutable/chunks/singletons-2f9d2e43.js", "_app/immutable/chunks/index-57952acb.js"];
     stylesheets2 = [];
   }
 });
@@ -7427,7 +7427,7 @@ var init_page_svelte = __esm({
         $isDarkMode ? imgBackground = `peer-focus:bg-[rgb(218,220,203)] peer-focus:invert` : imgBackground = `peer-focus:bg-[#f7f7f7]`;
       }
       $$unsubscribe_isDarkMode();
-      return `<div class="${"relative svelte-ka9qzy"}"><input class="${"peer opacity-0 w-full h-full svelte-ka9qzy"}">
+      return `<div class="${"relative svelte-ka9qzy"}"><input inputmode="${"none"}" class="${"peer opacity-0 w-full h-full svelte-ka9qzy"}">
     
     <img class="${"hover:shadow-2xl " + escape(imgBackground, true) + " peer-hover:shadow-lg peer-focus:fixed peer-focus:top-10 peer-focus:left-10 peer-focus:z-50 peer-focus:-translate-x-8 peer-focus:scale-[1] sm:peer-focus:scale-[0.85]"}"${add_attribute("src", Src, 0)}${add_attribute("alt", Alt, 0)}>
             </div>`;
@@ -7528,8 +7528,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-8a30992e.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-8a30992e.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-3a9f7330.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-3a9f7330.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js"];
     stylesheets3 = ["_app/immutable/assets/+page-2c896bd9.css"];
   }
 });
@@ -7644,8 +7644,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-31e5b605.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-31e5b605.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/index-0eb0b30d.js", "_app/immutable/chunks/firebase-cb899c0b.js", "_app/immutable/chunks/singletons-61e09b70.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-bf018ccc.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-bf018ccc.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/store-ffb3fd03.js", "_app/immutable/chunks/index-57952acb.js", "_app/immutable/chunks/index-0eb0b30d.js", "_app/immutable/chunks/firebase-06d1aabc.js", "_app/immutable/chunks/singletons-2f9d2e43.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -9918,7 +9918,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-5fb673c2.js", "imports": ["_app/immutable/start-5fb673c2.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/singletons-61e09b70.js", "_app/immutable/chunks/index-57952acb.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-45518825.js", "imports": ["_app/immutable/start-45518825.js", "_app/immutable/chunks/index-64e3950e.js", "_app/immutable/chunks/singletons-2f9d2e43.js", "_app/immutable/chunks/index-57952acb.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

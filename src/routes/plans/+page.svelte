@@ -3,7 +3,7 @@
     // import { goto } from "$app/navigation"
 </script>
 
-<div class="font-Poppins text-center sm:text-7xl text-6xl pb-2 pt-20 ">
+<div class="font-Poppins text-center sm:text-7xl text-6xl pb-2  ">
     Plans
 </div>
 

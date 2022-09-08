@@ -1,5 +1,5 @@
 <script>
-    import { fly, scale, fade, blur, slide } from 'svelte/transition'
+    import { scale, slide, /* fly, fade, blur, */ } from 'svelte/transition'
     import { quintOut, elasticOut } from 'svelte/easing';
     import Navitem from './Navitem.svelte'
     import Hamburger from './Hamburger.svelte';
@@ -33,12 +33,6 @@
         $routes.home.isCurrent=true;
     }
 
-    let jankytown='';
-    $:if(!$isXs){
-        // if($scrollY<250)  jankytown = "sm:sticky sm:top-0"
-        if($scrollY>250 && $instDeltaY>0)  jankytown = "sm:sticky sm:-top-20"
-        if($scrollY>250 && $instDeltaY<0)  jankytown = "sm:sticky sm:top-0"
-    }
    
  
 
@@ -55,13 +49,10 @@
 
 <Hamburger bind:mobileOpen bind:unique />
 <!-- <Hamburger {hamburgerBtn} bind:mobileOpen bind:unique /> -->
-<!-- TODO: blur causing darked navbar when transitionining on chrome. Still need to find a way to blur the text -->
-<!-- backdrop-blur-3xl -->
 
 
-<!-- TODO: hiding on mobile also hides when resizing to desktop -->
 <logo-and-navbar 
-    class="{jankytown} sm:backdrop-blur-3xl z-50  transition-all duration-300 sm:right-0 flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex sm:pr-10 sm:pl-10 {!mobileOpen && "hidden"} " 
+    class="flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex {!mobileOpen && "hidden"} " 
     >
     
     {#key resetLogoClick }
