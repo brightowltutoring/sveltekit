@@ -3,9 +3,9 @@
 	import Katex from "../../lib/Katex.svelte";
 	
 	// math equations
-	const math1 = "ax^2+bx+c=0";
+	const math1 = "V=\\frac{1}{3}\\pi r^2 h";
 	const math2 = "x=-\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}";
-	const math3 = "V=\\frac{1}{3}\\pi r^2 h";
+	const math3 = "ax^2+bx+c=0";
 	
 	// set up array and index for reactivity and initialize
 	const mathArray = [math1, math2, math3];
@@ -32,8 +32,10 @@ Our math equation: <Katex {math} displayMode/> and it is displayed.
 	Displaying equation {index}
 </button>
 
-<h2>Static math expression within HTML</h2>
-<Katex math={"V=\\pi\\textrm{ m}^3"}/>
+<h2>Static math expression within HTML</h2> 
+<Katex math={"V=\\pi \\textrm{ m}^3 "}/>
+
+
 
 <h2>
 	Slot based Svelte Component

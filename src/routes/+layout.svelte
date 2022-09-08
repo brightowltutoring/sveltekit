@@ -1,3 +1,8 @@
+<svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}
+on:resize={ setScrollYMax }  on:contextmenu={event => event.preventDefault()} 
+on:popstate={ clearRedirectStuff }
+/>
+
 <svelte:head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,13 +15,21 @@
             <title>{ $routes[ key ].title } </title>
 		{/if}
 	{/each}
+
+
 </svelte:head>
 
-<svelte:window bind:scrollY={$scrollY}  bind:innerWidth={$innerWidth} bind:innerHeight={$windowInnerHeight}
-on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } on:contextmenu={event => event.preventDefault()} />
+
+
+	  
+
+  
 
 
 <script>
+
+
+
 	import '../app.css'
 	import Navbar from '$lib/Navbar.svelte'
 	import { isXs, instDeltaY, innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, redirectSetInterval, routes } from '$lib/store.js' 	
@@ -34,9 +47,12 @@ on:resize={ setScrollYMax } on:popstate={ clearRedirectStuff } on:contextmenu={e
 	function clearRedirectStuff(){
 		clearTimeout($redirectAfterLoginTimeOut);
 		clearInterval($redirectSetInterval)
+		
 	}
 
 	onMount( ()=>{
+	
+
 		setScrollYMax();
 
 		onAuthStateChanged( auth, user => {
