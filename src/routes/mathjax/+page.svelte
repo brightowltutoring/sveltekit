@@ -21,14 +21,9 @@
 </span>
 
 
-<details open class="bg-red-100 disDetails">
-	<summary>hidden mathjax (to hide page load flicker)</summary>
-	$$I=\int_0^1 f(x) dx $$
-</details>
-
 {#each Array(100) as _,i}
 	
-<details class="bg-red-100 disDetails">
+<details open class="bg-red-100 disDetails">
 	<summary>hidden mathjax (to hide page load flicker)</summary>
 	$$I=\int_0^1 f(x) dx $$
 </details>

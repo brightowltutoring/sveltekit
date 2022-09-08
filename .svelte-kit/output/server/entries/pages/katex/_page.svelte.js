@@ -1,4 +1,4 @@
-import { c as create_ssr_component, v as validate_component, e as escape } from "../../../chunks/index.js";
+import { c as create_ssr_component, v as validate_component, g as each, e as escape } from "../../../chunks/index.js";
 import { M as MathJax_1 } from "../../../chunks/MathJax.js";
 import katex from "katex";
 const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -51,6 +51,10 @@ Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { mat
 
 <h2>Displayed math</h2>
 Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { math, tr: true, displayMode: true }, {}, {})} and it is displayed.
+
+${each(Array(100), (_, i) => {
+    return `${validate_component(Katex, "Katex").$$render($$result, { math, tr: true, displayMode: true }, {}, {})}`;
+  })}
 
 <h2>Reactivity</h2>
 <button>Displaying equation ${escape(index)}</button>

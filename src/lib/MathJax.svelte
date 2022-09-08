@@ -1,13 +1,13 @@
 <script>
-
-
     import { onMount } from 'svelte'
     let script;
     
     onMount(() => {
 		
 		script = document.createElement('script');
-        script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
+        // script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
+        script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+                     
         document.head.append(script);
 		
 		script.addEventListener("load",()=>{
