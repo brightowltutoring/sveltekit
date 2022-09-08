@@ -35,8 +35,8 @@ on:popstate={ clearRedirectStuff }
 	import { isXs, instDeltaY, innerWidth, scrollY, windowInnerHeight, scrollYMax, isLoggedIn, redirectAfterLoginTimeOut, redirectSetInterval, routes } from '$lib/store.js' 	
 	import { page } from '$app/stores'	
 	import { onMount } from 'svelte'
-	import { auth } from '$lib/firebase.js'
-	import { onAuthStateChanged } from "firebase/auth"
+	// import { auth } from '$lib/firebase.js'
+	// import { onAuthStateChanged } from "firebase/auth"
 
 	let mobileHamburgerClosed = true
 
@@ -55,16 +55,16 @@ on:popstate={ clearRedirectStuff }
 
 		setScrollYMax();
 
-		onAuthStateChanged( auth, user => {
-			if( user ) {
-				$isLoggedIn = true
-				console.log("$isLoggedIn",$isLoggedIn)
-			}                           
-			else {
-				$isLoggedIn = false
-				console.log("$isLoggedIn",$isLoggedIn)
-			}
-		})
+		// onAuthStateChanged( auth, user => {
+		// 	if( user ) {
+		// 		$isLoggedIn = true
+		// 		console.log("$isLoggedIn",$isLoggedIn)
+		// 	}                           
+		// 	else {
+		// 		$isLoggedIn = false
+		// 		console.log("$isLoggedIn",$isLoggedIn)
+		// 	}
+		// })
 	})
 
 	

@@ -36,7 +36,7 @@ idea: when needed can place mathjax in drop down menus
 	// })
 </script>
 
-{#each Array(300) as _,i}
+{#each Array(5) as _,i}
 	
 <details class="bg-red-100 disDetails">
 	<summary>hidden mathjax (to hide page load flicker)</summary>

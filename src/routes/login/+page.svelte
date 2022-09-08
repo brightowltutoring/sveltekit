@@ -1,5 +1,5 @@
     <script>
-        import { redirectAfterLoginTimeOut, redirectSetInterval } from '$lib/store.js'
+        import { redirectAfterLoginTimeOut, redirectSetInterval, isLoggedIn  } from '$lib/store.js'
         import { onMount } from 'svelte'
         import { scale } from 'svelte/transition'
         import { elasticOut } from 'svelte/easing'
@@ -34,6 +34,8 @@
 
             onAuthStateChanged( auth, user => {
                 if( user ) {
+                    $isLoggedIn = true
+
                     console.log(`User is signed in!`); 
 
                     loginToRedirectUrl(user.email) 
@@ -43,7 +45,10 @@
 
                     loginWelcomeText.innerText = user.displayName ? `Hey ${user.displayName}!` : `Hey ${user.email}!`;                               
                 }  
-                else console.log(`User is NOT signed in`) 
+                else {
+                    $isLoggedIn = false
+                    console.log(`User is NOT signed in`) 
+                }
             })
            
         })

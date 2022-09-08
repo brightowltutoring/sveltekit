@@ -1,4 +1,5 @@
-import { c as create_ssr_component, v as validate_component, e as escape } from "../../../chunks/index.js";
+import { c as create_ssr_component, v as validate_component, g as each, e as escape } from "../../../chunks/index.js";
+import { M as MathJax_1 } from "../../../chunks/MathJax.js";
 import katex from "katex";
 const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let katexString;
@@ -33,7 +34,21 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let index = 0;
   $$result.css.add(css);
   math = mathArray[index];
-  return `<p class="${"text-2xl text-center"}">KaTeX svelte component demo</p>
+  return `
+
+${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
+
+
+${each(Array(300), (_, i) => {
+    return `<details class="${"bg-red-100 disDetails"}"><summary>hidden mathjax (to hide page load flicker)</summary>
+	$$I=\\int_0^1 f(x) dx $$
+</details>`;
+  })}
+
+
+
+
+<p class="${"text-2xl text-center"}">KaTeX svelte component demo </p>
 
 <h2>Inline math</h2>
 Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { math }, {}, {})} and it is inline.
@@ -49,7 +64,8 @@ ${validate_component(Katex, "Katex").$$render($$result, { math: "V=\\pi \\textrm
 
 
 
-<h2>Slot based Svelte Component
+
+<h2>Slot based Svelte Component 
 </h2>
 Check out <a rel="${"external"}" href="${"https://www.npmjs.com/package/svelte-katex"}" class="${"svelte-qd6jw8"}">Svelte KaTeX</a> for an implementation of a Svelte KaTeX component that takes markup via slots
 

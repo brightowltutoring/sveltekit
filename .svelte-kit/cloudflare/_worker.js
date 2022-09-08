@@ -725,12 +725,6 @@ var init_store = __esm({
         title: "Katex",
         isCurrent: false
       },
-      mathjax: {
-        name: "Mathjax",
-        href: "/mathjax",
-        title: "Mathjax",
-        isCurrent: false
-      },
       login: {
         name: "Login",
         href: "/login",
@@ -7355,9 +7349,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-f09e6b51.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-f09e6b51.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-82c9a945.js", "_app/immutable/chunks/index-e8bbf8b4.js", "_app/immutable/chunks/stores-593b151b.js", "_app/immutable/chunks/singletons-d48fe964.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/store-a20b6ece.js", "_app/immutable/chunks/firebase-92f3baa5.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
-    stylesheets = ["_app/immutable/assets/+layout-ce6d04dc.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-d1ec4bcc.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-d1ec4bcc.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-7e5941f1.js", "_app/immutable/chunks/store-6fbda247.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/stores-d05de45e.js", "_app/immutable/chunks/singletons-6f54d94e.js", "_app/immutable/chunks/firebase-5bc2e6be.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    stylesheets = ["_app/immutable/assets/+layout-6cd88b2f.css"];
   }
 });
 
@@ -7401,8 +7395,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-732c72bb.js";
-    imports2 = ["_app/immutable/components/error.svelte-732c72bb.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/stores-593b151b.js", "_app/immutable/chunks/singletons-d48fe964.js", "_app/immutable/chunks/index-6302803f.js"];
+    file2 = "_app/immutable/components/error.svelte-f4e2e6e7.js";
+    imports2 = ["_app/immutable/components/error.svelte-f4e2e6e7.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/stores-d05de45e.js", "_app/immutable/chunks/singletons-6f54d94e.js", "_app/immutable/chunks/index-6302803f.js"];
     stylesheets2 = [];
   }
 });
@@ -7480,9 +7474,20 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-a4fd4231.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-a4fd4231.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-a20b6ece.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/index-e8bbf8b4.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-4a21932e.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-4a21932e.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-6fbda247.js", "_app/immutable/chunks/index-6302803f.js"];
     stylesheets3 = [];
+  }
+});
+
+// .svelte-kit/output/server/chunks/MathJax.js
+var MathJax_1;
+var init_MathJax = __esm({
+  ".svelte-kit/output/server/chunks/MathJax.js"() {
+    init_chunks();
+    MathJax_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return ``;
+    });
   }
 });
 
@@ -21035,6 +21040,7 @@ var Katex, css, math1, math2, math3, Page2;
 var init_page_svelte2 = __esm({
   ".svelte-kit/output/server/entries/pages/katex/_page.svelte.js"() {
     init_chunks();
+    init_MathJax();
     init_katex();
     Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let katexString;
@@ -21068,7 +21074,21 @@ var init_page_svelte2 = __esm({
       let index8 = 0;
       $$result.css.add(css);
       math4 = mathArray[index8];
-      return `<p class="${"text-2xl text-center"}">KaTeX svelte component demo</p>
+      return `
+
+${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
+
+
+${each(Array(300), (_2, i) => {
+        return `<details class="${"bg-red-100 disDetails"}"><summary>hidden mathjax (to hide page load flicker)</summary>
+	$$I=\\int_0^1 f(x) dx $$
+</details>`;
+      })}
+
+
+
+
+<p class="${"text-2xl text-center"}">KaTeX svelte component demo </p>
 
 <h2>Inline math</h2>
 Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { math: math4 }, {}, {})} and it is inline.
@@ -21084,7 +21104,8 @@ ${validate_component(Katex, "Katex").$$render($$result, { math: "V=\\pi \\textrm
 
 
 
-<h2>Slot based Svelte Component
+
+<h2>Slot based Svelte Component 
 </h2>
 Check out <a rel="${"external"}" href="${"https://www.npmjs.com/package/svelte-katex"}" class="${"svelte-qd6jw8"}">Svelte KaTeX</a> for an implementation of a Svelte KaTeX component that takes markup via slots
 
@@ -21109,8 +21130,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/katex/_page.svelte-4dc85407.js";
-    imports4 = ["_app/immutable/components/pages/katex/_page.svelte-4dc85407.js", "_app/immutable/chunks/index-c5b536bd.js"];
+    file4 = "_app/immutable/components/pages/katex/_page.svelte-f17c341b.js";
+    imports4 = ["_app/immutable/components/pages/katex/_page.svelte-f17c341b.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/MathJax-5f179e66.js"];
     stylesheets4 = ["_app/immutable/assets/+page-ed1245ce.css"];
   }
 });
@@ -21190,8 +21211,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-f071cc02.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-f071cc02.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-a20b6ece.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/index-e8bbf8b4.js", "_app/immutable/chunks/index-82c9a945.js", "_app/immutable/chunks/firebase-92f3baa5.js", "_app/immutable/chunks/singletons-d48fe964.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-26bf8717.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-26bf8717.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/store-6fbda247.js", "_app/immutable/chunks/index-6302803f.js", "_app/immutable/chunks/index-7e5941f1.js", "_app/immutable/chunks/firebase-5bc2e6be.js", "_app/immutable/chunks/singletons-6f54d94e.js"];
     stylesheets5 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -21201,37 +21222,23 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page4
 });
-var MathJax_1, curlyBackticks, Page4;
+var curlyBackticks, Page4;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/mathjax/_page.svelte.js"() {
     init_chunks();
-    MathJax_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-
-
-
-
-
-
-${$$result.head += `<script src="${"https://polyfill.io/v3/polyfill.min.js?features=es6"}" data-svelte="svelte-vs9z3k"><\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-vs9z3k"><\/script>`, ""}`;
-    });
+    init_MathJax();
     curlyBackticks = " `{x}` ";
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let fracHalf = "\\frac{x}{2}";
       return `${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
 
 
-<div>Mathjax is alright in vanilla html/js but flickers when using component frameworks (like this here svelte). Additionally reloads crashes the mathjax. Additionally expressions like ${escape(fracHalf)} aren&#39;t processed properly since svelte views the curly-braces-around-x as it&#39;s notation for rendering JS variable &quot;x&quot; in the html. To get it to work have to replace x with curly backticks expression ${escape(curlyBackticks)} within the code
-	<br>
-	<br>
+<p>Mathjax is alright in vanilla html/js but flickers when using component frameworks (like this here svelte). Additionally reloads crashes the mathjax. Additionally expressions like ${escape(fracHalf)} aren&#39;t processed properly since svelte views the curly-braces-around-x as it&#39;s notation for rendering JS variable &quot;x&quot; in the html. To get it to work have to replace x with curly backticks expression ${escape(curlyBackticks)} within the code
+	<br></p>
 
-
-	$e^x = \\frac${escape(2)}${escape(3)}$
-	$$e^x = \\frac${escape(2)}${escape(3)}$$
-
-	<div>$$e^x = \\frac${escape(`{x}`)}${escape(3)}$$
-	</div></div>`;
+<span>$$e^x = \\frac${escape(2)}${escape(3)}$$
+	$$e^x = \\frac${escape(`{x}`)}${escape(3)}$$
+</span>`;
     });
   }
 });
@@ -21250,8 +21257,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/mathjax/_page.svelte-691d0712.js";
-    imports6 = ["_app/immutable/components/pages/mathjax/_page.svelte-691d0712.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-82c9a945.js", "_app/immutable/chunks/index-e8bbf8b4.js"];
+    file6 = "_app/immutable/components/pages/mathjax/_page.svelte-8b002aa5.js";
+    imports6 = ["_app/immutable/components/pages/mathjax/_page.svelte-8b002aa5.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/MathJax-5f179e66.js"];
     stylesheets6 = [];
   }
 });
@@ -21402,8 +21409,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/plans/_page.svelte-9c51d33d.js";
-    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-9c51d33d.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-82c9a945.js", "_app/immutable/chunks/index-e8bbf8b4.js", "_app/immutable/chunks/store-a20b6ece.js", "_app/immutable/chunks/index-6302803f.js"];
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-400f280e.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-400f280e.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/index-7e5941f1.js", "_app/immutable/chunks/store-6fbda247.js", "_app/immutable/chunks/index-6302803f.js"];
     stylesheets7 = ["_app/immutable/assets/+page-59f1650c.css"];
   }
 });
@@ -23524,7 +23531,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-a84e05c6.js", "imports": ["_app/immutable/start-a84e05c6.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/singletons-d48fe964.js", "_app/immutable/chunks/index-6302803f.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-3dc18bf8.js", "imports": ["_app/immutable/start-3dc18bf8.js", "_app/immutable/chunks/index-c5b536bd.js", "_app/immutable/chunks/singletons-6f54d94e.js", "_app/immutable/chunks/index-6302803f.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
