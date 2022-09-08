@@ -4,8 +4,8 @@
 	let curlyBackticks = " `{x}` "
 	let fracHalf = "\\" + "frac{x}{2}"
 
-	// import { fade,scale } from 'svelte/transition'
-	// import { elasticOut, sineOut, bounceIn, bounceOut, bounceInOut} from "svelte/easing"
+	import { fade, scale } from 'svelte/transition'
+	import { elasticOut, sineOut, bounceIn, bounceOut, bounceInOut} from "svelte/easing"
 
 </script>
 
@@ -15,10 +15,12 @@
 	<br>
 
 
-	<!-- <div in:scale={{duration:1500, easing:elasticOut }}></div> -->
-		$$e^x = \frac{`{x}`}{3}$$ 
-		$$e^x = \frac{`{2}`}{3}$$
-	<!-- </div> -->
+	$e^x = \frac{2}{3}$
+	$$e^x = \frac{2}{3}$$
+
+	<div in:scale={{duration:1500, easing:elasticOut }}> 
+		$$e^x = \frac{`{x}`}{3}$$
+	</div>
 
 		
 

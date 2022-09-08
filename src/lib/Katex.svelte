@@ -23,7 +23,7 @@
 	
 </svelte:head>
 
-<div in:fly={{x:30, duration:1000, easing:elasticOut }}>
+<div in:fly={{x:25, duration:800, easing:quintOut }}>
 	{@html katexString}
 </div>
 
