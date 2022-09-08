@@ -5,14 +5,19 @@ const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { math } = $$props;
   let { displayMode = false } = $$props;
   const options = { displayMode, throwOnError: false };
+  let { tr } = $$props;
   if ($$props.math === void 0 && $$bindings.math && math !== void 0)
     $$bindings.math(math);
   if ($$props.displayMode === void 0 && $$bindings.displayMode && displayMode !== void 0)
     $$bindings.displayMode(displayMode);
+  if ($$props.tr === void 0 && $$bindings.tr && tr !== void 0)
+    $$bindings.tr(tr);
   katexString = katex.renderToString(math, options);
   return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-5lsyfq">`, ""}
 
-<div><!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END --></div>`;
+
+	<!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->
+`;
 });
 const _page_svelte_svelte_type_style_lang = "";
 const css = {
@@ -34,7 +39,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { math }, {}, {})} and it is inline.
 
 <h2>Displayed math</h2>
-Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { math, displayMode: true }, {}, {})} and it is displayed.
+Our math equation: ${validate_component(Katex, "Katex").$$render($$result, { math, tr: true, displayMode: true }, {}, {})} and it is displayed.
 
 <h2>Reactivity</h2>
 <button>Displaying equation ${escape(index)}</button>

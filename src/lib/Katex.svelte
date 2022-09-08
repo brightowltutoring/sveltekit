@@ -24,11 +24,13 @@
 	
 </svelte:head>
 
-{#if tr }
+<!-- {#if tr }
 	<p in:fly={{x:25, duration:800, easing:quintOut }}>
 		{@html katexString}
 	</p>
-{:else }
+{:else } -->
 	{@html katexString}
-{/if}
+<!-- {/if} -->
+
+
 

@@ -22,7 +22,7 @@ const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots)
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
-  return `<div class="${"font-Poppins text-center sm:text-5xl text-4xl pb-20 "}">TESTIMONIALS  $$m^3$$
+  return `<div class="${"font-Poppins text-center sm:text-5xl text-4xl pb-20 "}">TESTIMONIALS 
 
     
 </div>
