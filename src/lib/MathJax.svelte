@@ -16,7 +16,7 @@
             MathJax = {
                 loader: {
                     load: [
-                        // 'ui/lazy',
+                        'ui/lazy',
                         '[tex]/physics',
                         '[tex]/cancel',
                         ]
