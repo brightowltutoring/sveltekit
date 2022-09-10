@@ -8,7 +8,7 @@
     redirectAfterLoginTimeOut,
     redirectSetInterval,
   } from "$lib/store.js";
-  import { goto } from "$app/navigation";
+  import { goto, prefetch } from "$app/navigation";
 
   export let href, content, bool, mobileOpen, btnColor, btnColorHover, routes;
 
@@ -46,10 +46,11 @@
 {#key unique}
   <button
     in:slide={{ duration: 800, easing: elasticOut }}
-    on:click|preventDefault={() => {
+    on:click={() => {
       clickOnNavLinks();
       clearTimeout($redirectAfterLoginTimeOut);
       clearInterval($redirectSetInterval);
+      prefetch(href);
       goto(href);
     }}
     class="{bool &&
