@@ -5,15 +5,15 @@ export const manifest = {
 	_: {
 		entry: {"file":"_app/immutable/start-335d2a47.js","imports":["_app/immutable/start-335d2a47.js","_app/immutable/chunks/index-00687be8.js","_app/immutable/chunks/singletons-ff46b31c.js","_app/immutable/chunks/index-847890c3.js"],"stylesheets":[]},
 		nodes: [
-			() => import('../output/server/nodes/0.js'),
-			() => import('../output/server/nodes/1.js'),
-			() => import('../output/server/nodes/2.js'),
-			() => import('../output/server/nodes/3.js'),
-			() => import('../output/server/nodes/4.js'),
-			() => import('../output/server/nodes/5.js'),
-			() => import('../output/server/nodes/6.js'),
-			() => import('../output/server/nodes/7.js'),
-			() => import('../output/server/nodes/8.js')
+			() => import('./nodes/0.js'),
+			() => import('./nodes/1.js'),
+			() => import('./nodes/2.js'),
+			() => import('./nodes/3.js'),
+			() => import('./nodes/4.js'),
+			() => import('./nodes/5.js'),
+			() => import('./nodes/6.js'),
+			() => import('./nodes/7.js'),
+			() => import('./nodes/8.js')
 		],
 		routes: [
 			{
@@ -93,5 +93,3 @@ export const manifest = {
 		}
 	}
 };
-
-export const prerendered = new Set([]);

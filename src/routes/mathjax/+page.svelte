@@ -7,7 +7,7 @@
 	import { blur, scale, fly, fade} from 'svelte/transition'
     import { quintOut, elasticOut } from 'svelte/easing'
 
-	let num = 100
+	let num = 10
 	$: delayy = num / 4
 	$: durationn = 16*num
 
