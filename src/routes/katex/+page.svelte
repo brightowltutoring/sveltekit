@@ -24,13 +24,18 @@ idea: when needed can place mathjax in drop down menus
 
 <!-- testing using both mathjax and katex on same page ...-->
 
-# heyo
-
-{#each Array(40) as _, i}
+{#each Array(30) as _, i}
+  <p class="text-center text-6xl text-red-600">
+    {i + 1}
+  </p>
+  <K d m={" A \\overset{!}{=} B; A \\stackrel{!}{=} B"} />
+  <K d m={"k = \\frac{aL}{At} \\ln \\frac{h_0}{h_t}"} />
   <K d m={"I=\\int_0^1 f(x) dx"} />
-  <!-- <K d m={String.raw`
-	I=\int_0^1 f(x) dx
-`}/> -->
+  <K d m={"\\frac{x}{3}"} />
+  <K
+    d
+    m={"S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}"}
+  />
 {/each}
 
 <!-- {#each Array(2) as _,i}

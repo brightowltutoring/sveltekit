@@ -1,4 +1,4 @@
-import { c as create_ssr_component, h as add_attribute, v as validate_component, e as escape } from "../../../chunks/index.js";
+import { c as create_ssr_component, h as add_attribute, g as each, v as validate_component, e as escape } from "../../../chunks/index.js";
 import "katex";
 const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { displayMode = false } = $$props;
@@ -15,32 +15,34 @@ const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"}" integrity="${"sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"}" crossorigin="${"anonymous"}" data-svelte="svelte-9nuprp">`, ""}
 
-${validate_component(Katex, "K").$$render($$result, {}, {}, {
-    default: () => {
-      return `ax^2+bx+c=0`;
-    }
-  })}
-${validate_component(Katex, "K").$$render($$result, { displayMode: true }, {}, {
-    default: () => {
-      return `ax^2+bx+c=0`;
-    }
-  })}
+${each(Array(40), (_, i) => {
+    return `${validate_component(Katex, "K").$$render($$result, {}, {}, {
+      default: () => {
+        return `ax^2+bx+c=0`;
+      }
+    })}
+  ${validate_component(Katex, "K").$$render($$result, { displayMode: true }, {}, {
+      default: () => {
+        return `ax^2+bx+c=0`;
+      }
+    })}
 
-${validate_component(Katex, "K").$$render($$result, {}, {}, {
-    default: () => {
-      return `\\frac${escape("{ \\sqrt{3} }")}${escape(3)}`;
-    }
-  })}
-${validate_component(Katex, "K").$$render($$result, {}, {}, {
-    default: () => {
-      return `\\sqrt${escape("{y}")}`;
-    }
-  })}
+  ${validate_component(Katex, "K").$$render($$result, {}, {}, {
+      default: () => {
+        return `\\frac${escape("{ \\sqrt{3} }")}${escape(3)}`;
+      }
+    })}
+  ${validate_component(Katex, "K").$$render($$result, {}, {}, {
+      default: () => {
+        return `\\sqrt${escape("{y}")}`;
+      }
+    })}
 
-${validate_component(Katex, "K").$$render($$result, { displayMode: true }, {}, {
-    default: () => {
-      return `a\\sqrt${escape("{x}")}^2+bx+c=0`;
-    }
+  ${validate_component(Katex, "K").$$render($$result, { displayMode: true }, {}, {
+      default: () => {
+        return `a\\sqrt${escape("{x}")}^2+bx+c=0`;
+      }
+    })}`;
   })}`;
 });
 export {

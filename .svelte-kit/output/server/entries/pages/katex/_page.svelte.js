@@ -27,10 +27,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-
 # heyo
 
-${each(Array(4), (_, i) => {
+${each(Array(40), (_, i) => {
     return `${validate_component(Katex, "K").$$render($$result, { d: true, m: "I=\\int_0^1 f(x) dx" }, {}, {})}
   `;
   })}
