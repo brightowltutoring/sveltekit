@@ -1170,8 +1170,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-e8f01108.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-e8f01108.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/index-3fc8dc6f.js", "_app/immutable/chunks/index-c7021fa9.js", "_app/immutable/chunks/stores-6215f700.js", "_app/immutable/chunks/singletons-ff46b31c.js", "_app/immutable/chunks/index-847890c3.js", "_app/immutable/chunks/store-686bfb8b.js", "_app/immutable/chunks/navigation-bebcaf83.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-5f950739.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-5f950739.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/index-3fc8dc6f.js", "_app/immutable/chunks/index-c7021fa9.js", "_app/immutable/chunks/stores-97e3d47e.js", "_app/immutable/chunks/singletons-e90a9f26.js", "_app/immutable/chunks/index-847890c3.js", "_app/immutable/chunks/store-686bfb8b.js", "_app/immutable/chunks/navigation-78998905.js"];
     stylesheets = ["_app/immutable/assets/+layout-ce6d04dc.css"];
   }
 });
@@ -1216,8 +1216,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-840444dc.js";
-    imports2 = ["_app/immutable/components/error.svelte-840444dc.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/stores-6215f700.js", "_app/immutable/chunks/singletons-ff46b31c.js", "_app/immutable/chunks/index-847890c3.js"];
+    file2 = "_app/immutable/components/error.svelte-780e92eb.js";
+    imports2 = ["_app/immutable/components/error.svelte-780e92eb.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/stores-97e3d47e.js", "_app/immutable/chunks/singletons-e90a9f26.js", "_app/immutable/chunks/index-847890c3.js"];
     stylesheets2 = [];
   }
 });
@@ -15081,8 +15081,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/katexBroken/_page.svelte-6a0094b2.js";
-    imports6 = ["_app/immutable/components/pages/katexBroken/_page.svelte-6a0094b2.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/katex-bb547764.js", "_app/immutable/chunks/stores-6215f700.js", "_app/immutable/chunks/singletons-ff46b31c.js", "_app/immutable/chunks/index-847890c3.js"];
+    file6 = "_app/immutable/components/pages/katexBroken/_page.svelte-8e6af069.js";
+    imports6 = ["_app/immutable/components/pages/katexBroken/_page.svelte-8e6af069.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/katex-bb547764.js", "_app/immutable/chunks/stores-97e3d47e.js", "_app/immutable/chunks/singletons-e90a9f26.js", "_app/immutable/chunks/index-847890c3.js"];
     stylesheets6 = [];
   }
 });
@@ -21340,8 +21340,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-470fbb46.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-470fbb46.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/store-686bfb8b.js", "_app/immutable/chunks/index-847890c3.js", "_app/immutable/chunks/index-c7021fa9.js", "_app/immutable/chunks/index-3fc8dc6f.js", "_app/immutable/chunks/navigation-bebcaf83.js", "_app/immutable/chunks/singletons-ff46b31c.js"];
+    file7 = "_app/immutable/components/pages/login/_page.svelte-d48ec005.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-d48ec005.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/store-686bfb8b.js", "_app/immutable/chunks/index-847890c3.js", "_app/immutable/chunks/index-c7021fa9.js", "_app/immutable/chunks/index-3fc8dc6f.js", "_app/immutable/chunks/navigation-78998905.js", "_app/immutable/chunks/singletons-e90a9f26.js"];
     stylesheets7 = ["_app/immutable/assets/+page-567451ce.css"];
   }
 });
@@ -21359,7 +21359,7 @@ var init_page_svelte6 = __esm({
       return ``;
     });
     curlyBackticks = " `{x}` ";
-    num = 100;
+    num = 10;
     Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let fracHalf = "\\frac{x}{2}";
       return `${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
@@ -21402,8 +21402,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file8 = "_app/immutable/components/pages/mathjax/_page.svelte-0a975550.js";
-    imports8 = ["_app/immutable/components/pages/mathjax/_page.svelte-0a975550.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/index-3fc8dc6f.js", "_app/immutable/chunks/index-c7021fa9.js"];
+    file8 = "_app/immutable/components/pages/mathjax/_page.svelte-002c01eb.js";
+    imports8 = ["_app/immutable/components/pages/mathjax/_page.svelte-002c01eb.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/index-3fc8dc6f.js", "_app/immutable/chunks/index-c7021fa9.js"];
     stylesheets8 = [];
   }
 });
@@ -23676,7 +23676,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-335d2a47.js", "imports": ["_app/immutable/start-335d2a47.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/singletons-ff46b31c.js", "_app/immutable/chunks/index-847890c3.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-09f7adb2.js", "imports": ["_app/immutable/start-09f7adb2.js", "_app/immutable/chunks/index-00687be8.js", "_app/immutable/chunks/singletons-e90a9f26.js", "_app/immutable/chunks/index-847890c3.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

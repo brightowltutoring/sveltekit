@@ -7,7 +7,7 @@
 	import { blur, scale, fly, fade} from 'svelte/transition'
     import { quintOut, elasticOut } from 'svelte/easing'
 
-	let num = 10
+	let num = 50
 	$: delayy = num / 4
 	$: durationn = 16*num
 
@@ -22,7 +22,7 @@
 
 <!-- $$I=\int_0^1 f(x) dx $$ -->
 {#each Array(num) as _,i}
-	<p in:scale={{ easing:elasticOut, delay:20, duration: 1000}}>
+	<p in:scale={{ easing:elasticOut, delay:200, duration: 1000}}>
 	<!-- <p in:fly={{x:300, easing:quintOut, duration:1200}}> -->
 		{i} 
 

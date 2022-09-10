@@ -3,7 +3,7 @@ const MathJax_1 = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   return ``;
 });
 let curlyBackticks = " `{x}` ";
-let num = 100;
+let num = 10;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let fracHalf = "\\frac{x}{2}";
   return `${validate_component(MathJax_1, "MathJax").$$render($$result, {}, {}, {})}
