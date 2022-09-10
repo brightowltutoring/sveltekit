@@ -1,111 +1,119 @@
 <script>
-    import { scale, slide, /* fly, fade, blur, */ } from 'svelte/transition'
-    import { quintOut, elasticOut } from 'svelte/easing';
-    import Navitem from './Navitem.svelte'
-    import Hamburger from './Hamburger.svelte';
-    import { goto } from '$app/navigation'
-    import { isXs, isLoggedIn, routes, scrollY, instDeltaY, isDarkMode, fractionScroll } from '$lib/store.js'
-    import { spring } from 'svelte/motion';
+  import { scale, slide /* fly, fade, blur, */ } from "svelte/transition";
+  import { quintOut, elasticOut } from "svelte/easing";
+  import Navitem from "./Navitem.svelte";
+  import Hamburger from "./Hamburger.svelte";
+  import { goto } from "$app/navigation";
+  import {
+    isXs,
+    isLoggedIn,
+    routes,
+    scrollY,
+    instDeltaY,
+    isDarkMode,
+    fractionScroll,
+  } from "$lib/store.js";
+  import { spring } from "svelte/motion";
 
-    let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25})
-    let hueRocket = 0;
+  let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
+  let hueRocket = 0;
 
-    $: if( $isLoggedIn ) { hueRocket = $isDarkMode ? 0.75 : 0 }
-    $: if( $isLoggedIn && !$isXs ) { scaleRocket.set( 1 + 0.5*Math.sin($scrollY) ) }
+  $: if ($isLoggedIn) {
+    hueRocket = $isDarkMode ? 0.75 : 0;
+  }
+  $: if ($isLoggedIn && !$isXs) {
+    scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
+  }
 
-    export let mobileHamburgerClosed
-    let mobileOpen="";
-    $: mobileHamburgerClosed = mobileOpen  
-    $: $isLoggedIn ? $routes.login.name = '🚀': $routes.login.name = 'Login'
-    // $: logoTextColor=`color:hsl(359,100%,${100*$fractionScroll}%)`
+  export let mobileHamburgerClosed;
+  let mobileOpen = "";
+  $: mobileHamburgerClosed = mobileOpen;
+  $: $isLoggedIn ? ($routes.login.name = "🚀") : ($routes.login.name = "Login");
+  // $: logoTextColor=`color:hsl(359,100%,${100*$fractionScroll}%)`
 
+  let unique;
+  let hamburgerBtn; //for css version of hamburger button only
 
-    let unique;
-    let hamburgerBtn; //for css version of hamburger button only
+  let resetLogoClick;
+  function clickLogo() {
+    goto("/");
+    resetLogoClick = !resetLogoClick;
 
-    let resetLogoClick
-    function clickLogo(){
-        goto('/')
-        resetLogoClick=!resetLogoClick
-
-        for(key in $routes) { $routes[key].isCurrent=false }
- 
-        $routes.home.isCurrent=true;
+    for (key in $routes) {
+      $routes[key].isCurrent = false;
     }
 
-   
- 
+    $routes.home.isCurrent = true;
+  }
 
-    // $instDeltaY>0 essentially means "currently scrolling down" as $instDeltaY relaxes to 0 shortly.
-    // $instDeltaY == 0, jankytown is not updated.
+  // $instDeltaY>0 essentially means "currently scrolling down" as $instDeltaY relaxes to 0 shortly.
+  // $instDeltaY == 0, jankytown is not updated.
 
-    let btnColor = 'sm:bg-red-300 '
-    let btnColorHover = 'sm:hover:bg-red-300'
+  let btnColor = "sm:bg-red-300 ";
+  let btnColorHover = "sm:hover:bg-red-300";
 
-    import LightDarkMode from '$lib/LightDarkMode.svelte'
+  import LightDarkMode from "$lib/LightDarkMode.svelte";
 </script>
-
-
 
 <Hamburger bind:mobileOpen bind:unique />
 <!-- <Hamburger {hamburgerBtn} bind:mobileOpen bind:unique /> -->
 
-
-<logo-and-navbar 
-    class="flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex {!mobileOpen && "hidden"} " 
+<logo-and-navbar
+  class="flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex {!mobileOpen &&
+    'hidden'} "
+>
+  {#key resetLogoClick}
+    <div
+      class=" translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20
+    sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
+      in:scale={{ duration: 1200, easing: elasticOut }}
+      on:mouseup={clickLogo}
     >
-    
-    {#key resetLogoClick }
-    <div class=" translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20
-    sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent" 
-        in:scale={{duration:1200, easing:elasticOut}} 
-        on:mouseup={ clickLogo } >
-            THINKSOLVE
+      THINKSOLVE
     </div>
-    {/key}
+  {/key}
 
-
-    <nav>
-     {#key unique }
-        <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg items-center" 
-         >  
-           
-            {#if $isXs && mobileOpen }
-                {#key !$isDarkMode }
-                <li in:slide={{duration:600, easing:quintOut}} class="pb-3 ">
-                    <LightDarkMode/>
-                </li>
-                {/key}
-            {/if}
-
-            {#each Object.keys($routes) as KEY }
-            <li class="py-3 sm:p-1 " 
-                style={ (KEY =='login' && $isLoggedIn) && 
-                `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)` }
-             >
-                <Navitem bind:mobileOpen href={$routes[KEY].href} content={$routes[KEY].name} bind:bool={$routes[KEY].isCurrent} bind:routes={$routes} bind:btnColor={btnColor} bind:btnColorHover={btnColorHover} />
-             
+  <nav>
+    {#key unique}
+      <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg items-center">
+        {#if $isXs && mobileOpen}
+          {#key !$isDarkMode}
+            <li in:slide={{ duration: 600, easing: quintOut }} class="pb-3 ">
+              <LightDarkMode />
             </li>
-            {/each}
+          {/key}
+        {/if}
 
-            {#if !$isXs }
-                {#key !$isDarkMode }
-                <li in:slide={{duration:600, easing:quintOut}} class="px-3  translate-y-1">
-                    <LightDarkMode/>
-                </li>
-                {/key}
-            {/if}
-        
-        </ul>    
-        {/key}
-        
-    </nav>
-    
+        {#each Object.keys($routes) as KEY}
+          <li
+            class="py-3 sm:p-1 "
+            style={KEY == "login" &&
+              $isLoggedIn &&
+              `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
+          >
+            <Navitem
+              bind:mobileOpen
+              href={$routes[KEY].href}
+              content={$routes[KEY].name}
+              bind:bool={$routes[KEY].isCurrent}
+              bind:routes={$routes}
+              bind:btnColor
+              bind:btnColorHover
+            />
+          </li>
+        {/each}
+
+        {#if !$isXs}
+          {#key !$isDarkMode}
+            <li
+              in:slide={{ duration: 600, easing: quintOut }}
+              class="px-3  translate-y-1"
+            >
+              <LightDarkMode />
+            </li>
+          {/key}
+        {/if}
+      </ul>
+    {/key}
+  </nav>
 </logo-and-navbar>
-
-
-
-
-
-
-

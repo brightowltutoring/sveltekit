@@ -54,7 +54,7 @@ const routes = writable({
     title: "Katex",
     isCurrent: false
   },
-  kate3: {
+  katex3: {
     name: "Katex3",
     href: "/katex3",
     title: "Katex3",

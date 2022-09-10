@@ -13,9 +13,7 @@ const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <span${add_attribute("this", output, 0)}></span>`;
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"}" integrity="${"sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"}" crossorigin="${"anonymous"}" data-svelte="svelte-1sunfh9">`, ""}
-
-
+  return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"}" integrity="${"sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"}" crossorigin="${"anonymous"}" data-svelte="svelte-9nuprp">`, ""}
 
 ${validate_component(Katex, "K").$$render($$result, {}, {}, {
     default: () => {
@@ -27,7 +25,6 @@ ${validate_component(Katex, "K").$$render($$result, { displayMode: true }, {}, {
       return `ax^2+bx+c=0`;
     }
   })}
-
 
 ${validate_component(Katex, "K").$$render($$result, {}, {}, {
     default: () => {

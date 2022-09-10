@@ -1,41 +1,37 @@
-
-<!-- testing using both mathjax and katex on same page ...-->
 <!-- Mathjax has greater scope of functions but katex is faster
 idea: when needed can place mathjax in drop down menus
 -->
-
 <script>
-	// import Component
-	import K from "$lib/Katex.svelte";
-	
-	// math equations
-	const math1 = "V=\\frac{1}{3}\\pi r^2 h";
-	const math2 = "x=-\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}";
-	const math3 = "ax^2+bx+c=0";
-	
-	// set up array and index for reactivity and initialize
-	const mathArray = [math1, math2, math3];
-	let index = 0;
-	$: math = mathArray[index];
-	
-	// changeMath function for button click
-	function changeMath() {
-		// increase index
-		index = (index+1)%3;
-	}
+  // import Component
+  import K from "$lib/Katex.svelte";
 
+  // math equations
+  const math1 = "V=\\frac{1}{3}\\pi r^2 h";
+  const math2 = "x=-\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}";
+  const math3 = "ax^2+bx+c=0";
 
-	
+  // set up array and index for reactivity and initialize
+  const mathArray = [math1, math2, math3];
+  let index = 0;
+  $: math = mathArray[index];
+
+  // changeMath function for button click
+  function changeMath() {
+    // increase index
+    index = (index + 1) % 3;
+  }
 </script>
+
+<!-- testing using both mathjax and katex on same page ...-->
 
 # heyo
 
-{#each Array(4) as _,i}
-<K d m={'I=\\int_0^1 f(x) dx'}/>
-<!-- <K d m={String.raw`
+{#each Array(40) as _, i}
+  <K d m={"I=\\int_0^1 f(x) dx"} />
+  <!-- <K d m={String.raw`
 	I=\int_0^1 f(x) dx
 `}/> -->
-{/each} 
+{/each}
 
 <!-- {#each Array(2) as _,i}
 

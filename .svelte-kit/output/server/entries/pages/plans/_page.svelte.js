@@ -3,7 +3,7 @@ import { i as isDarkMode, h as dark_lightened, j as light_darkened } from "../..
 import "../../../chunks/index2.js";
 const PlansCard_svelte_svelte_type_style_lang = "";
 const css$1 = {
-  code: ".cardCSS.svelte-1kfvqzd{transform:perspective(1000px) rotateX(0deg);transition:transform 0.3s ease 0s}.cardCSS.svelte-1kfvqzd:hover{transform:perspective(1000px) rotateX(12deg) scale(1.02)}",
+  code: ".cardCSS.svelte-12fzg61{transform:perspective(1000px) rotateX(0deg);transition:transform 0.3s ease 0s}.cardCSS.svelte-12fzg61:hover{transform:perspective(1000px) rotateX(12deg) scale(1.02)}",
   map: null
 };
 const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -27,19 +27,16 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$result.css.add(css$1);
   cardColor = $isDarkMode ? dark_lightened : light_darkened;
   $$unsubscribe_isDarkMode();
-  return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-rnasgc"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-rnasgc"><\/script>`, ""}
+  return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-mukgzh"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-mukgzh"><\/script>`, ""}
 
 
-
-
-
-<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-1kfvqzd"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
+<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-12fzg61"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
-  ) + " text-xl text-white svelte-1kfvqzd"}">${slots.buttonText ? slots.buttonText({}) : `default button Text`}</button>
-    
-    <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
-    
+  ) + " text-xl text-white svelte-12fzg61"}">${slots.buttonText ? slots.buttonText({}) : `default button Text`}</button>
+
+  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
+  
 </div>`;
 });
 const _page_svelte_svelte_type_style_lang = "";

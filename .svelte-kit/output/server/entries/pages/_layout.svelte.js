@@ -78,19 +78,18 @@ const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isXs();
   $$unsubscribe_lastScrollY();
   return `<main>
-    <hamburger-container class="${"sm:hidden z-50 text-4xl fixed right-6 " + escape(variableTop, true) + " transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+  <hamburger-container class="${"sm:hidden z-50 text-4xl fixed right-6 " + escape(variableTop, true) + " transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
-            <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+      <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
-            <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(-${translY}px) rotate(${angle}deg)`, true)}" class="${"" + escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div></hamburger></hamburger-container> 
+      <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(-${translY}px) rotate(${angle}deg)`, true)}" class="${"" + escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div></hamburger></hamburger-container>
 
+  
+  
+  
 
-    
-    
-        
-
-    
-        </main>`;
+  
+  </main>`;
 });
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
@@ -252,14 +251,12 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     )}
 
 
-
 <logo-and-navbar class="${"flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
+  <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center"}">${$isXs && mobileOpen ? `<li class="${"pb-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
 
-    <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center"}">${$isXs && mobileOpen ? `<li class="${"pb-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
-
-            ${each(Object.keys($routes), (KEY) => {
+        ${each(Object.keys($routes), (KEY) => {
       return `<li class="${"py-3 sm:p-1 "}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -295,11 +292,10 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         },
         {}
       )}
-             
-            </li>`;
+          </li>`;
     })}
 
-            ${!$isXs ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
+        ${!$isXs ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
   } while (!$$settled);
   $$unsubscribe_routes();
   $$unsubscribe_isLoggedIn();
@@ -352,18 +348,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     $$rendered = `
 
-${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1kb0r8e"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1kb0r8e"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1kb0r8e">${each(Object.keys($routes), (key) => {
-      return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}  </title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)} </title>`, ""}` : ``}`}`;
+${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key) => {
+      return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
     })}`, ""}
-
-
-
-	  
-
-  
-
-
-
 
 
 <div class="${"px-[4%] sm:px-[7%] pt-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(

@@ -1,61 +1,72 @@
 <script>
-    import { scrollY, lastScrollY, isXs, instDeltaY } from '$lib/store.js'
- 
-    // export let hamburgerBtn
-    export let mobileOpen
-    export let unique 
-    // TODO: this variable only used in parent component ... not here
+  import { scrollY, lastScrollY, isXs, instDeltaY } from "$lib/store.js";
 
-    function clickOnBurger(){
-        mobileOpen = !mobileOpen
-        unique=!unique  
-        
-        // stores the last scroll position on hamburger open
-        mobileOpen && ($lastScrollY = $scrollY)
-        // ... then scrolls to this position on hamburger closed
-        !mobileOpen && requestAnimationFrame(()=> window.scrollTo(0, $lastScrollY))
-    }
+  // export let hamburgerBtn
+  export let mobileOpen;
+  export let unique;
+  // TODO: this variable only used in parent component ... not here
 
+  function clickOnBurger() {
+    mobileOpen = !mobileOpen;
+    unique = !unique;
 
-    const hamburgerWidth = 35
-    const hamburgerHeight = Math.floor(0.7 * hamburgerWidth) // 24px
-    const hamburgerPattyHeight = 2;
-    const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight) ) // 11px
-    const angle = 45 + 1*90
-    const hamburgerColor = "bg-red-500" //bg-gray-500
-    // let hamburgerBtn
-    let variableTop="top-6"
-    $: if($isXs && !mobileOpen ){ 
-            // if($scrollY<250) variableTop = "top-6"
-            if( $instDeltaY>0 && $scrollY>250) variableTop = "-top-20 "
-            if( $instDeltaY<0 && $scrollY>250) variableTop = "top-6"
-        }
-    // $: if($isXs && mobileOpen ) variableTop = "top-6"
-    
+    // stores the last scroll position on hamburger open
+    mobileOpen && ($lastScrollY = $scrollY);
+    // ... then scrolls to this position on hamburger closed
+    !mobileOpen &&
+      requestAnimationFrame(() => window.scrollTo(0, $lastScrollY));
+  }
+
+  const hamburgerWidth = 35;
+  const hamburgerHeight = Math.floor(0.7 * hamburgerWidth); // 24px
+  const hamburgerPattyHeight = 2;
+  const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight)); // 11px
+  const angle = 45 + 1 * 90;
+  const hamburgerColor = "bg-red-500"; //bg-gray-500
+  // let hamburgerBtn
+  let variableTop = "top-6";
+  $: if ($isXs && !mobileOpen) {
+    // if($scrollY<250) variableTop = "top-6"
+    if ($instDeltaY > 0 && $scrollY > 250) variableTop = "-top-20 ";
+    if ($instDeltaY < 0 && $scrollY > 250) variableTop = "top-6";
+  }
+  // $: if($isXs && mobileOpen ) variableTop = "top-6"
 </script>
 
-
 <main>
-    <!-- version: tailwind + svelte style (css) + js variables (~20 lines code)-->
-    <hamburger-container class="sm:hidden z-50 text-4xl fixed right-6 {variableTop} transition-all duration-300" >       
-        <hamburger style="width: {hamburgerWidth}px; height:{hamburgerHeight}px" class="relative flex flex-col justify-between" on:click={ clickOnBurger }>
-            
-            <div style="height:{hamburgerPattyHeight}px; {mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`}
-            " class="{hamburgerColor} transition duration-300 rounded "></div>
+  <!-- version: tailwind + svelte style (css) + js variables (~20 lines code)-->
+  <hamburger-container
+    class="sm:hidden z-50 text-4xl fixed right-6 {variableTop} transition-all duration-300"
+  >
+    <hamburger
+      style="width: {hamburgerWidth}px; height:{hamburgerHeight}px"
+      class="relative flex flex-col justify-between"
+      on:click={clickOnBurger}
+    >
+      <div
+        style="height:{hamburgerPattyHeight}px; {mobileOpen &&
+          `transform: translateY(${translY}px) rotate(-${angle}deg)`}
+            "
+        class="{hamburgerColor} transition duration-300 rounded "
+      />
 
-            <div style="height:{hamburgerPattyHeight}px;  {mobileOpen && `transform: scale(0)`}" class="{hamburgerColor} transition duration-300 rounded"></div>
+      <div
+        style="height:{hamburgerPattyHeight}px;  {mobileOpen &&
+          `transform: scale(0)`}"
+        class="{hamburgerColor} transition duration-300 rounded"
+      />
 
-            <div style="height:{hamburgerPattyHeight}px; {mobileOpen && `transform: translateY(-${translY}px) rotate(${angle}deg)`} " class=" {hamburgerColor} transition duration-300 rounded "></div>
-        </hamburger>
+      <div
+        style="height:{hamburgerPattyHeight}px; {mobileOpen &&
+          `transform: translateY(-${translY}px) rotate(${angle}deg)`} "
+        class=" {hamburgerColor} transition duration-300 rounded "
+      />
+    </hamburger>
+  </hamburger-container>
 
-       
-            
-    </hamburger-container> 
-
-
-    <!-- TODO: hamburger doesn't close on clicking some nav links -->
-    <!-- version: tailwind + css variables (~28 lines code) -->
-        <!-- <style>
+  <!-- TODO: hamburger doesn't close on clicking some nav links -->
+  <!-- version: tailwind + css variables (~28 lines code) -->
+  <!-- <style>
             :root{
                     --hamburgerWidth: 35px;
                     --hamburgerHeight: calc( var(--hamburgerWidth) * 0.7 );
@@ -85,8 +96,8 @@
                 
         </hamburger-positioner> -->
 
-    <!-- pure css version (~54 lines code)-->
-        <!-- <style>
+  <!-- pure css version (~54 lines code)-->
+  <!-- <style>
             :root{
                     --hamburgerWidth: 35px;
                     --hamburgerHeight: calc( var(--hamburgerWidth) * 0.7 );
@@ -141,5 +152,4 @@
                     <div></div>
                 </div>
         </button> -->
-
 </main>
