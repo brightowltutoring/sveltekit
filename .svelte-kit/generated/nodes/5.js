@@ -1,1 +1,1 @@
-export { default as component } from "../../../src/routes/mathjax/+page.svelte";
+export { default as component } from "../../../src/routes/katexBroken/+page.svelte";

@@ -4,8 +4,13 @@
 	let curlyBackticks = " `{x}` "
 	let fracHalf = "\\" + "frac{x}{2}"
 
-	import { blur } from 'svelte/transition'
-    import { quintOut } from 'svelte/easing'
+	import { blur, scale, fly, fade} from 'svelte/transition'
+    import { quintOut, elasticOut } from 'svelte/easing'
+
+	let num = 100
+	$: delayy = num / 4
+	$: durationn = 16*num
+
 
 </script>
 
@@ -15,16 +20,21 @@
 	
 </p>
 
-<span in:blur={{easing:quintOut, duration:400}}>
-	$e^x = \frac{2}{3}$
-	$$e^x = \frac{`{x}`}{3}$$
-</span>
+<!-- $$I=\int_0^1 f(x) dx $$ -->
+{#each Array(num) as _,i}
+	<p in:scale={{ easing:elasticOut, delay:20, duration: 1000}}>
+	<!-- <p in:fly={{x:300, easing:quintOut, duration:1200}}> -->
+		{i} 
 
+		$$ \frac{`{x}`}{3} $$
 
-{#each Array(100) as _,i}
-	
-<details open class="bg-red-100 disDetails">
-	<summary>hidden mathjax (to hide page load flicker)</summary>
-	$$I=\int_0^1 f(x) dx $$
-</details>
+		$\frac{`{x}`}{3}$
+
+		{`$$\\frac{x}{3}$$`}
+		{`$$ 
+			S (\\omega)=\\frac{\\alpha g^2}{\\omega^5} \,
+		e ^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]} 
+		$$`}
+	</p>
+	<!-- {`$$x = \\frac{t}{3}$$`} -->
 {/each}

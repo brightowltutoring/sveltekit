@@ -6,12 +6,14 @@ declare module '$env/static/public' {
 }
 
 declare module '$env/static/private' {
+	export const NVM_RC_VERSION: string;
 	export const MANPATH: string;
 	export const alfred_theme_background: string;
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
 	export const GEM_HOME: string;
+	export const NVM_CD_FLAGS: string;
 	export const TERM: string;
 	export const SHELL: string;
 	export const npm_config_metrics_registry: string;
@@ -28,6 +30,7 @@ declare module '$env/static/private' {
 	export const npm_config_local_prefix: string;
 	export const ZSH: string;
 	export const alfred_version_build: string;
+	export const NVM_DIR: string;
 	export const USER: string;
 	export const COMMAND_MODE: string;
 	export const npm_config_globalconfig: string;
@@ -90,6 +93,7 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
+	export const NODE_ENV: string;
 	export const FIREBASE_apiKey: string;
 	export const FIREBASE_authDomain: string;
 	export const FIREBASE_projectId: string;

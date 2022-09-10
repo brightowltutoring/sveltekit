@@ -1,1 +1,0 @@
-import"./index-c5b536bd.js";function c(n){return n<.5?4*n*n*n:.5*Math.pow(2*n-2,3)+1}function a(n){const u=n-1;return u*u*u+1}function i(n){return Math.sin(-13*(n+1)*Math.PI/2)*Math.pow(2,-10*n)+1}function r(n){return--n*n*n*n*n+1}export{a,c,i as e,r as q};

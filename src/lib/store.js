@@ -116,6 +116,18 @@ export const routes = writable({
     title: "Katex",
     isCurrent: false,
   }, 
+  kate3: {
+    name:'Katex3',
+    href: "/katex3",
+    title: "Katex3",
+    isCurrent: false,
+  }, 
+  katexBroken: {
+    name:'katexBroken',
+    href: "/katexBroken",
+    title: "katexBroken2",
+    isCurrent: false,
+  }, 
   mathjax: {
     name:'mathjax',
     href: "/mathjax",

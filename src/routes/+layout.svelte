@@ -78,8 +78,9 @@ on:popstate={ clearRedirectStuff }
 	let jankytown='';
     $:if(!$isXs){
         if($scrollY==0)  jankytown = "top-0"
-        if($scrollY>250 && $instDeltaY>0)  jankytown = "backdrop-blur-md -top-20"
-        if($scrollY>250 && $instDeltaY<0)  jankytown = "backdrop-blur-3xl top-0"
+        if($scrollY>50 && $instDeltaY>0)  jankytown = "backdrop-blur-md top-0"
+        if($scrollY>200 && $instDeltaY>0)  jankytown = "backdrop-blur-3xl -top-20"
+        if($scrollY>200 && $instDeltaY<0)  jankytown = "backdrop-blur-3xl top-0"
     }
     
 </script>

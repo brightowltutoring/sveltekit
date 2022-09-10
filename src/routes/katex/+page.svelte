@@ -3,11 +3,10 @@
 <!-- Mathjax has greater scope of functions but katex is faster
 idea: when needed can place mathjax in drop down menus
 -->
-<MathJax/>
+
 <script>
-	import MathJax from "$lib/MathJax.svelte";  
 	// import Component
-	import Katex from "../../lib/Katex.svelte";
+	import K from "$lib/Katex.svelte";
 	
 	// math equations
 	const math1 = "V=\\frac{1}{3}\\pi r^2 h";
@@ -25,23 +24,25 @@ idea: when needed can place mathjax in drop down menus
 		index = (index+1)%3;
 	}
 
-	// import { onMount } from 'svelte'
-	// onMount(()=>{
 
-
-
-	// 	for (let el of document.querySelectorAll(".disDetails") ){
-	// 		el.open =true
-	// 	}
-	// })
-
+	
 </script>
 
+# heyo
 
+{#each Array(4) as _,i}
+<K d m={'I=\\int_0^1 f(x) dx'}/>
+<!-- <K d m={String.raw`
+	I=\int_0^1 f(x) dx
+`}/> -->
+{/each} 
 
+<!-- {#each Array(2) as _,i}
 
+	<Katex math={"I=\\int_0^1 f(x) dx"} displayMode/>
 
-
+{/each} -->
+<!-- 
 <p class="text-2xl text-center">KaTeX svelte component demo </p>
 
 <h2>Inline math</h2>
@@ -50,11 +51,7 @@ Our math equation: <Katex {math} /> and it is inline.
 <h2>Displayed math</h2>
 Our math equation: <Katex {math} tr={true} displayMode/> and it is displayed.
 
-{#each Array(100) as _,i}
 
-	<Katex {math} tr={true} displayMode/>
-
-{/each}
 
 <h2>Reactivity</h2>
 <button on:click={changeMath}>
@@ -66,10 +63,6 @@ Our math equation: <Katex {math} tr={true} displayMode/> and it is displayed.
 
 
 
-
-<h2>
-	Slot based Svelte Component 
-</h2>
 Check out <a rel="external" href="https://www.npmjs.com/package/svelte-katex">Svelte KaTeX</a> for an implementation of a Svelte KaTeX component that takes markup via slots
 
 <h2>
@@ -86,4 +79,4 @@ Visit <a rel="external" href="https://svelte-math.vercel.app">Svelte Math</a> to
 	}
 
 
-</style>
+</style> -->
