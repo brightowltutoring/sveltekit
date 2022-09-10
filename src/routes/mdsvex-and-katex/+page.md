@@ -20,7 +20,11 @@
             `
 		};
 	}
+
+    
 </script>
+
+
 
 # The content on this page is written in a markdown file, which uses html, css, svelte components ...thanks to MDsveX + plugins!
 
@@ -30,10 +34,13 @@
 The black math expressions are written in markdown. 
 
 * **Advantage1**: writing lots of inline math expressions — e.g. "..the general Einsteinian equation is **NOT** $$E=mc^2$$ — bur rather $$E^2=m^2c^4 + p^2c^2$$..."— is much simpler with markdown. **Advantage2**: Markdown math has identical syntax to Latex. 
-* **Disadvantage**: cannot apply css.
+* **Disadvantage**: cannot apply css directly to math expression
 
 
->The base "2" here — $x=${x}$^2$... —  is taken from script variable.
+
+>The base "2" here — $x=${x}$^2$... —  is taken from script variable. 
+> <button class="bg-red-100 p-2" on:click={()=>{x++}}>increment</button>
+> <button class="bg-red-100 p-2" on:click={()=>{x--}}>decrement</button>
 
 >$$
 >\begin{aligned}
@@ -44,6 +51,8 @@ The black math expressions are written in markdown.
 
 
 
+<!-- \frac{1}{2} \pi r^2 -->
+
 These red math expressions are (katex) svelte components. 
 * **Advantage1**: can apply css; the color was done with tailwind and the bounce was done with svelte transition!! **Advantage2**: can use conditional logic (e.g. for loops)
 * **Disadvantage1**: terrible for inline math expressions. **Disadvantage2**: syntax starts to depart from latex: escaping characters (i.e. '\\\frac ...') and having to be wrapped within svelte components.
@@ -51,6 +60,8 @@ These red math expressions are (katex) svelte components.
 {#each Array(3) as _, i}
 <!-- <div class="text-red-500" in:scaleHueElastic> -->
 <div class="text-red-500" in:scale={{easing:elasticOut, duration: 1000}}>
+	<K d m={'\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}'}  />
+	<K d m={'\\prod_\{i=a\}\^\{b\}\ f\(i\)'}  />
 	<K d m={' A \\overset{!}{=} B; A \\stackrel{!}{=} B'}  />
 	<K m={'k = \\frac{aL}{At} \\ln \\frac{h_0}{h_t}'} />
 	<K d m={'I=\\int_0^1 f(x) dx'} />

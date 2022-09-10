@@ -12,6 +12,6 @@ export const nodes = [
 export const dictionary = {
 	"": [[1], [0], 2],
 	"login": [[1], [0], 3],
-	"markdown-and-katex": [[1], [0], 4],
+	"mdsvex-and-katex": [[1], [0], 4],
 	"plans": [[1], [0], 5]
 };
