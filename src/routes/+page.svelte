@@ -27,7 +27,7 @@
         duration: 1000,
         delay: 150 * i,
       }} -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full">
   {#each equations as eqn, i}
     <p
       class={mathColor}
