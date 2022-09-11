@@ -133,6 +133,13 @@ export const redirectSetInterval = writable('')
 
 export const light = '#f7f7f7'
 export const light_darkened =  'rgb(242,247,250)'
+export const light_darkened_half =  'pink'
 export const dark =  'rgb(37,27,47)'
 // export const dark_lightened =  'rgb(39,35,53)'
 export const dark_lightened =  'rgb(38, 35, 51)'
+export const dark_lightened_half =  '#8f86b8'
+
+
+export const elementColor = derived(isDarkMode, ($isDarkMode,set)=>{
+  $isDarkMode ? set(dark_lightened_half) : set(light_darkened_half)
+})

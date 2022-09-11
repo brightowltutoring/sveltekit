@@ -10,7 +10,16 @@ const config = defineConfig({
   },
 
   remarkPlugins: [remarkMath],
-  rehypePlugins: [rehypeKatexSvelte],
+  rehypePlugins: [
+    rehypeKatexSvelte,
+    {
+      macros: {
+        "\\CC": "\\mathbb{C}",
+        "\\vec": "\\mathbf",
+      },
+    },
+  ],
+  
 });
 
 export default config;

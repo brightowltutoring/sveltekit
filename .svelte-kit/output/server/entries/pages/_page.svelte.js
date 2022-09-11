@@ -1,7 +1,7 @@
 import { c as create_ssr_component, a as subscribe, e as escape, h as add_attribute, g as each, v as validate_component } from "../../chunks/index.js";
 import { i as isDarkMode } from "../../chunks/store.js";
 import { K as Katex } from "../../chunks/Katex.js";
-import "../../chunks/index2.js";
+/* empty css                */import "../../chunks/index2.js";
 import "katex";
 const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -23,7 +23,6 @@ const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots)
   </div>`;
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let mathColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
@@ -35,15 +34,14 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     " i\\hbar\\gamma^\\mu \\partial_\\mu \\psi - mc\\psi = 0 ",
     "R_{\\mu \\nu} - {1 \\over 2}g_{\\mu \\nu}\\,R + g_{\\mu \\nu} \\Lambda = \n {8 \\pi G \\over c^4} T_{\\mu \\nu}"
   ];
-  mathColor = $isDarkMode ? "text-blue-100" : "text-red-500";
   $$unsubscribe_isDarkMode();
-  return `
-<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {
-    return `<p${add_attribute("class", mathColor, 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
+  return `<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {
+    return `
+    <p${add_attribute("class", $isDarkMode ? "text-blue-100" : "text-red-500", 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
     </p>`;
   })}</div>
 
-<div class="${"font-Poppins text-center sm:text-5xl text-4xl pb-20 "}">TESTIMONIALS
+<div class="${"font-Poppins text-center sm:text-5xl text-4xl py-20 "}">TESTIMONIALS
 </div>
 
 <div class="${"grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 "}">${each(reviewers, (name) => {

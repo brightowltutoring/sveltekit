@@ -1,8 +1,7 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as loop, f as set_store_value, v as validate_component, g as each, h as add_attribute } from "../../chunks/index.js";
-import { p as page } from "../../chunks/stores.js";
+/* empty css                */import { p as page } from "../../chunks/stores.js";
 import { i as isDarkMode, b as burgerBreakPoint, r as redirectAfterLoginTimeOut, a as redirectSetInterval, s as scrollY, c as instDeltaY, l as lastScrollY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
-const app = "";
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isDarkMode;
   let $$unsubscribe_burgerBreakPoint;
@@ -307,6 +306,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
+let xPaddingAndMargin = "mx-[4%] md:mx-[7%]";
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
@@ -354,10 +354,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-
-
-<div class="${"mx-[4%] md:mx-[7%] "}">
-  <div class="${"pt-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
+<div class="${escape(xPaddingAndMargin, true) + " pt-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
       $$result,
       { mobileHamburgerClosed },
       {
@@ -369,9 +366,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       {}
     )}</div>
 
-  
-  
-  <div class="${"" + escape(mobileHamburgerClosed && $burgerBreakPoint && "hidden opacity-0", true) + " h-[100vh] pt-20 md:block transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div></div>`;
+<div class="${escape(xPaddingAndMargin, true) + " " + escape(mobileHamburgerClosed && $burgerBreakPoint && "hidden opacity-0", true) + " h-[100vh] pt-20 md:block transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
   } while (!$$settled);
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();

@@ -1,5 +1,7 @@
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous"> -->
 <script>
+    import { elementColor } from "$lib/store.js"
+    // $:console.log($elementColor)
     import K from '$lib/Katex.svelte'; 
     // this component already includes the commented rel link above, otherwise it's needed
     import { blur, scale, fly, fade} from 'svelte/transition'
@@ -28,21 +30,21 @@
 
 # The content on this page is written in a markdown file, which uses html, css, svelte components ...thanks to MDsveX + plugins!
 
-<!-- <p>&nbsp;</p> -->
-<div class="h-6"></div>
+<p>&nbsp;</p>
 
-	
+<!-- <div class="h-6"></div> -->
+
 
 The black math expressions are written in markdown. 
 
-* **Advantage1**: writing lots of inline math expressions — e.g. "..the general Einsteinian equation is **NOT** $$E=mc^2$$ — bur rather $$E^2=m^2c^4 + p^2c^2$$..."— is much simpler with markdown. **Advantage2**: Markdown math has identical syntax to Latex. 
+* **Advantage1**: writing lots of inline math expressions — e.g. "..the general Einsteinian equation is **NOT** $E=mc^4$ — bur rather $E^3=m^2c^4 + p^2c^2$..."— is much simpler with markdown. **Advantage2**: Markdown math has identical syntax to Latex. 
 * **Disadvantage**: cannot apply css directly to math expression
 
 
 
 >The base "2" here — $x=${x}$^2$... —  is taken from script variable. 
-> <button class="bg-red-100 p-2" on:click={()=>{x++}}>increment</button>
-> <button class="bg-red-100 p-2" on:click={()=>{x--}}>decrement</button>
+> <button class="p-2 shadow-2xl" style:background={$elementColor}  on:click={()=>{x++}}>increment</button>
+> <button class="p-2 shadow-2xl" style:background={$elementColor} on:click={()=>{x--}}>decrement</button>
 
 >$$
 >\begin{aligned}
@@ -61,7 +63,8 @@ These red math expressions are (katex) svelte components.
 
 {#each Array(3) as _, i}
 <!-- <div class="text-red-500" in:scaleHueElastic> -->
-<div class="text-red-500" in:scale={{easing:elasticOut, duration: 1000}}>
+<!-- <div class="text-red-500" in:scale={{easing:elasticOut, duration: 1000}}> -->
+<div in:scale={{easing:elasticOut, duration: 1000}}>
 	<K d m={'\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}'}  />
 	<K d m={'\\prod_\{i=a\}\^\{b\}\ f\(i\)'}  />
 	<K d m={' A \\overset{!}{=} B; A \\stackrel{!}{=} B'}  />

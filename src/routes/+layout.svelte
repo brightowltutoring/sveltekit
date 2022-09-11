@@ -12,7 +12,11 @@
     redirectAfterLoginTimeOut,
     redirectSetInterval,
     routes,
+    // elementColor,
   } from "$lib/store.js";
+
+  // $: console.log(" elementColor", $elementColor);
+
   import { page } from "$app/stores";
   import { onMount } from "svelte";
   // import { auth } from '$lib/firebase.js'
