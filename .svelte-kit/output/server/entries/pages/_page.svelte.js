@@ -38,7 +38,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   mathColor = $isDarkMode ? "text-blue-100" : "text-red-500";
   $$unsubscribe_isDarkMode();
   return `
-<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {
+<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {
     return `<p${add_attribute("class", mathColor, 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
     </p>`;
   })}</div>

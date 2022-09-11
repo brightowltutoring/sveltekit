@@ -56,6 +56,8 @@
     if ($scrollY > 200 && $instDeltaY < 0)
       jankytown = "backdrop-blur-3xl top-0";
   }
+
+  let xPaddingAndMargin = "mx-[4%] md:mx-[7%]";
 </script>
 
 <svelte:head>
@@ -84,27 +86,14 @@
   on:popstate={clearRedirectStuff}
 />
 
-<!-- if controlling padding here, then the hiding nav effect only works if defined here 
-... Used to have the code in Navbar.svelte itself ...TODO: maybe can still remove some code from Navbar.svelte
+<div class="{xPaddingAndMargin} pt-2 sticky {jankytown} z-50 duration-300">
+  <Navbar bind:mobileHamburgerClosed />
+</div>
 
-this padding x is only pushing from the left
--->
-
-<div class="mx-[4%] md:mx-[7%] ">
-  <!-- <div> -->
-  <div class=" pt-2 sticky {jankytown} z-50 duration-300">
-    <Navbar bind:mobileHamburgerClosed />
-  </div>
-
-  <!-- class=" h-[100vh] px-[4%] md:px-[7%] pt-20 md:block  {mobileHamburgerClosed && -->
-  <!-- {mobileHamburgerClosed &&
-      $burgerBreakPoint &&
-      'hidden opacity-0'} -->
-  <div
-    class=" {mobileHamburgerClosed &&
-      $burgerBreakPoint &&
-      'hidden opacity-0'} h-[100vh] pt-20 md:block transition-all duration-500"
-  >
-    <slot />
-  </div>
+<div
+  class="{xPaddingAndMargin} {mobileHamburgerClosed &&
+    $burgerBreakPoint &&
+    'hidden opacity-0'} h-[100vh] pt-20 md:block transition-all duration-500"
+>
+  <slot />
 </div>

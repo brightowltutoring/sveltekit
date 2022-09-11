@@ -6,9 +6,12 @@
   import K from "$lib/Katex.svelte";
   import { blur, scale, fly, fade } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
+  import Hamburger from "../lib/Hamburger.svelte";
+  import Layout from "./+layout.svelte";
 
   const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
 
+  // these equations are animated, staggered in the html
   let equations = [
     "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}",
     "\\prod_{i=a}^{b} f(i)",
@@ -17,24 +20,18 @@
     " i\\hbar\\gamma^\\mu \\partial_\\mu \\psi - mc\\psi = 0 ",
     "R_{\\mu \\nu} - {1 \\over 2}g_{\\mu \\nu}\\,R + g_{\\mu \\nu} \\Lambda = \n {8 \\pi G \\over c^4} T_{\\mu \\nu}",
   ];
-
-  $: mathColor = $isDarkMode ? "text-blue-100" : "text-red-500";
 </script>
 
-<!--   class={mathColor}
-      in:scale={{
-        easing: elasticOut,
-        duration: 1000,
-        delay: 150 * i,
-      }} -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full">
   {#each equations as eqn, i}
+    <!-- note: the animation speeds up since the delay is given by a log function ...
+  and the change in logarithm DECREASES with increasing input (subsequent delays get smaller)-->
     <p
-      class={mathColor}
+      class={$isDarkMode ? "text-blue-100" : "text-red-500"}
       in:scale={{
+        delay: 350 * Math.log(i + 1),
         easing: quintOut,
         duration: 1000,
-        delay: 100 * i,
       }}
     >
       <K d m={eqn} />
@@ -42,7 +39,7 @@
   {/each}
 </div>
 
-<div class="font-Poppins text-center sm:text-5xl text-4xl pb-20 ">
+<div class="font-Poppins text-center sm:text-5xl text-4xl py-20 ">
   TESTIMONIALS
 </div>
 
