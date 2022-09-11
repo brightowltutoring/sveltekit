@@ -28,6 +28,7 @@
 }
 
 
+
 body {
   overscroll-behavior-y: none;
   
@@ -37,7 +38,9 @@ body {
 	transition: var(--ld-transition);
   width:  100vw;
   height: 100vh;
-
+  touch-action: manipulation;
+  /* pointer-events: none;     */
+  user-select:none;
 }
 
 body.dark-mode {

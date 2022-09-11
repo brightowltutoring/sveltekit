@@ -92,7 +92,7 @@
 </div>
 
 <div
-  class=" h-[400vh] px-[4%] sm:px-[7%] pt-20 sm:block  {mobileHamburgerClosed &&
+  class=" h-[100vh] px-[4%] sm:px-[7%] pt-20 sm:block  {mobileHamburgerClosed &&
     $isXs &&
     'hidden opacity-0'} transition-all duration-500"
 >

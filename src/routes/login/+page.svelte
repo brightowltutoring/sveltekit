@@ -285,6 +285,10 @@
 <style>
   /* animate plane emoji */
 
+  body {
+    overflow-y: hidden;
+  }
+
   #flyingEmoji {
     /* height:10vh;
         width:10vw; */
@@ -347,7 +351,7 @@
     /* display:block; */
     /* background: red;  */
     margin: 0px auto;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     width: 25vw;
     min-width: 280px;
     padding: 20px;

@@ -1139,8 +1139,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-f4a81134.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-f4a81134.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/stores-777a86f2.js", "_app/immutable/chunks/singletons-255d9f21.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/navigation-abba7206.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-807f2173.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-807f2173.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/stores-14b592a8.js", "_app/immutable/chunks/singletons-5ecdd498.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/navigation-dac7708b.js"];
     stylesheets = ["_app/immutable/assets/+layout-e485c653.css"];
   }
 });
@@ -1185,8 +1185,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-77490969.js";
-    imports2 = ["_app/immutable/components/error.svelte-77490969.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-777a86f2.js", "_app/immutable/chunks/singletons-255d9f21.js", "_app/immutable/chunks/index-b80a8d4d.js"];
+    file2 = "_app/immutable/components/error.svelte-96cdd0a9.js";
+    imports2 = ["_app/immutable/components/error.svelte-96cdd0a9.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-14b592a8.js", "_app/immutable/chunks/singletons-5ecdd498.js", "_app/immutable/chunks/index-b80a8d4d.js"];
     stylesheets2 = [];
   }
 });
@@ -21208,8 +21208,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/login/_page.svelte-99188845.js";
-    imports4 = ["_app/immutable/components/pages/login/_page.svelte-99188845.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/navigation-abba7206.js", "_app/immutable/chunks/singletons-255d9f21.js"];
+    file4 = "_app/immutable/components/pages/login/_page.svelte-a3dfc50b.js";
+    imports4 = ["_app/immutable/components/pages/login/_page.svelte-a3dfc50b.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/navigation-dac7708b.js", "_app/immutable/chunks/singletons-5ecdd498.js"];
     stylesheets4 = ["_app/immutable/assets/+page-d2c65961.css"];
   }
 });
@@ -21333,7 +21333,7 @@ var init_page_svelte3 = __esm({
     init_store();
     init_index2();
     css$1 = {
-      code: ".cardCSS.svelte-12fzg61{transform:perspective(1000px) rotateX(0deg);transition:transform 0.3s ease 0s}.cardCSS.svelte-12fzg61:hover{transform:perspective(1000px) rotateX(12deg) scale(1.02)}",
+      code: ".cardCSS.svelte-35bofc{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.cardCSS.svelte-35bofc:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
     PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21360,91 +21360,68 @@ var init_page_svelte3 = __esm({
       return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-mukgzh"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-mukgzh"><\/script>`, ""}
 
 
-<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-12fzg61"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
+<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
         true
-      ) + " text-xl text-white svelte-12fzg61"}">${slots.buttonText ? slots.buttonText({}) : `default button Text`}</button>
+      ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `default button Text`}</button>
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
   
 </div>`;
     });
     css3 = {
-      code: "a.svelte-1s9r9ye{color:var(--anchor)}a.svelte-1s9r9ye:hover{color:var(--anchor_hover)}",
+      code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css3);
-      return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans
-</div>
-
-<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${validate_component(PlansCard, "PlansCard").$$render(
-        $$result,
+      const plansCardArray = [
         {
           card: 1,
-          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-webinowl?hide_gdpr_banner=1"
+          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-webinowl?hide_gdpr_banner=1",
+          buttonText: "Webinowl",
+          cardText: "  Classic 1-on-1 session with smooth screen sharing. Supported platforms: Zoom, TeamViewer Meeting, and Microsoft Teams Digital session notesavailable at a premium ",
+          href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         },
-        {},
-        {
-          cardText: () => {
-            return `<span slot="${"cardText"}">Classic 1-on-1 session with smooth screen
-            sharing. Supported platforms: Zoom,
-            TeamViewer Meeting, and Microsoft Teams
-            Digital session notes available at a
-            premium
-
-            <p><a sveltekit:prefetch href="${"https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS\n                "}" class="${"svelte-1s9r9ye"}">sample</a></p></span>`;
-          },
-          buttonText: () => {
-            return `<span slot="${"buttonText"}">Webinowl </span>`;
-          }
-        }
-      )}
-    
-    ${validate_component(PlansCard, "PlansCard").$$render(
-        $$result,
         {
           card: 2,
-          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-blitzowl?hide_gdpr_banner=1"
+          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-blitzowl?hide_gdpr_banner=1",
+          buttonText: "Blitzowl",
+          cardText: "  Submit your homework Receive a personal 15-day solution URL/page Cost calculated based on number of questions submitted Single and bundled options available.",
+          href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         },
-        {},
-        {
-          cardText: () => {
-            return `<span slot="${"cardText"}">Submit your homework
-            Receive a personal 15-day solution
-            URL/page
-            Cost calculated based on number of
-            questions submitted
-            Single and bundled options available.
-
-            <p><a sveltekit:prefetch href="${"https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS\n                "}" class="${"svelte-1s9r9ye"}">sample</a></p></span>`;
-          },
-          buttonText: () => {
-            return `<span slot="${"buttonText"}">Blitzowl </span>`;
-          }
-        }
-      )}
-
-    ${validate_component(PlansCard, "PlansCard").$$render(
-        $$result,
         {
           card: 3,
-          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-mockowl?hide_gdpr_banner=1"
-        },
-        {},
-        {
-          cardText: () => {
-            return `<span slot="${"cardText"}">Get test ready. We provide a mock test
-            session complete with live support and a
-            digital copy of answers.
-            Solution key available at a premium
-            <p><a sveltekit:prefetch href="${"https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS\n                "}" class="${"svelte-1s9r9ye"}">sample</a></p></span>`;
-          },
-          buttonText: () => {
-            return `<span slot="${"buttonText"}">Mockowl </span>`;
-          }
+          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-mockowl?hide_gdpr_banner=1",
+          buttonText: "Mockowl",
+          cardText: " Get test ready. We provide a mock test session complete with live support and a digital copy of answers. Solution key available at a premium",
+          href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
-      )}
+      ];
+      $$result.css.add(css3);
+      return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
+
+
+<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
+        return `<div>${validate_component(PlansCard, "PlansCard").$$render(
+          $$result,
+          {
+            card: item.card,
+            calendlyUrl: item.calendlyUrl
+          },
+          {},
+          {
+            cardText: () => {
+              return `<span slot="${"cardText"}">${escape(item.cardText)}
+          <p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">sample</a></p>
+        </span>`;
+            },
+            buttonText: () => {
+              return `<span slot="${"buttonText"}">${escape(item.buttonText)} </span>`;
+            }
+          }
+        )}
+    </div>`;
+      })}
 </div>`;
     });
   }
@@ -21464,9 +21441,9 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/plans/_page.svelte-ee549b8d.js";
-    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-ee549b8d.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/index-b80a8d4d.js"];
-    stylesheets6 = ["_app/immutable/assets/+page-db38f45b.css"];
+    file6 = "_app/immutable/components/pages/plans/_page.svelte-5ebf4c20.js";
+    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-5ebf4c20.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js"];
+    stylesheets6 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
 
@@ -23586,7 +23563,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-959c314c.js", "imports": ["_app/immutable/start-959c314c.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-255d9f21.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-c1ee6a24.js", "imports": ["_app/immutable/start-c1ee6a24.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-5ecdd498.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

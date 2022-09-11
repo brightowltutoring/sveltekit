@@ -18,7 +18,7 @@
     "R_{\\mu \\nu} - {1 \\over 2}g_{\\mu \\nu}\\,R + g_{\\mu \\nu} \\Lambda = \n {8 \\pi G \\over c^4} T_{\\mu \\nu}",
   ];
 
-  $: mathColor = $isDarkMode ? "text-blue-200" : "text-red-500";
+  $: mathColor = $isDarkMode ? "text-blue-100" : "text-red-500";
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
