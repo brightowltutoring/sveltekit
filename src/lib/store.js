@@ -89,11 +89,12 @@ export const fractionScroll = derived([scrollY,scrollYMax],([$scrollY,$scrollYMa
 
 export const windowInnerHeight = writable(0) 
 export const innerWidth = writable(0) 
-// isXs needed since tailwind doesn't allow dynamic classes (i.e. for sm: )
-export const isXs = derived(innerWidth, $innerWidth => $innerWidth < 640  )
+// export const burgerBreakPoint = derived(innerWidth, $innerWidth => $innerWidth < 640  )
+export const burgerBreakPoint = derived(innerWidth, $innerWidth => $innerWidth < 768  )
 
-export const inTransition  = derived(isXs, $isXs =>  $isXs ? customFade :  ()=>{} )
-export const outTransition = derived(isXs, $isXs =>  $isXs ? customFade :  ()=>{} )
+
+export const inTransition  = derived(burgerBreakPoint, $burgerBreakPoint =>  $burgerBreakPoint ? customFade :  ()=>{} )
+export const outTransition = derived(burgerBreakPoint, $burgerBreakPoint =>  $burgerBreakPoint ? customFade :  ()=>{} )
 
 
 // the all important

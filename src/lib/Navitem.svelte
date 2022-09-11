@@ -3,7 +3,7 @@
   import { elasticOut } from "svelte/easing";
   import { page } from "$app/stores";
   import {
-    isXs,
+    burgerBreakPoint,
     isDarkMode,
     redirectAfterLoginTimeOut,
     redirectSetInterval,
@@ -33,7 +33,7 @@
 
     unique = !unique; // to reanimate the non-mobile links
 
-    $isXs && (mobileOpen = !mobileOpen);
+    $burgerBreakPoint && (mobileOpen = !mobileOpen);
 
     if (routes.login.isCurrent) {
       window.document.body.classList.remove("dark-mode");
@@ -54,7 +54,7 @@
       goto(href);
     }}
     class="{bool &&
-      `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent {`${btnColorHover}`}  sm:hover:rounded sm:hover:py-1  sm:hover:px-3 duration-300 hover:shadow-lg"
+      `${btnColor} md:border-b-1 md:rounded md:px-3 md:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent {`${btnColorHover}`}  md:hover:rounded md:hover:py-1  md:hover:px-3 duration-300 hover:shadow-lg"
   >
     {content}
   </button>

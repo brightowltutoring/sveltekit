@@ -2,7 +2,7 @@
   import "../app.css";
   import Navbar from "$lib/Navbar.svelte";
   import {
-    isXs,
+    burgerBreakPoint,
     instDeltaY,
     innerWidth,
     scrollY,
@@ -47,7 +47,7 @@
   });
 
   let jankytown = "";
-  $: if (!$isXs) {
+  $: if (!$burgerBreakPoint) {
     if ($scrollY == 0) jankytown = "top-0";
     if ($scrollY > 10 && $instDeltaY > 0)
       jankytown = "backdrop-blur-md -top-20";
@@ -57,15 +57,6 @@
       jankytown = "backdrop-blur-3xl top-0";
   }
 </script>
-
-<svelte:window
-  bind:scrollY={$scrollY}
-  bind:innerWidth={$innerWidth}
-  bind:innerHeight={$windowInnerHeight}
-  on:resize={setScrollYMax}
-  on:contextmenu={(event) => event.preventDefault()}
-  on:popstate={clearRedirectStuff}
-/>
 
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -84,17 +75,36 @@
   {/each}
 </svelte:head>
 
+<svelte:window
+  bind:scrollY={$scrollY}
+  bind:innerWidth={$innerWidth}
+  bind:innerHeight={$windowInnerHeight}
+  on:resize={setScrollYMax}
+  on:contextmenu={(event) => event.preventDefault()}
+  on:popstate={clearRedirectStuff}
+/>
+
 <!-- if controlling padding here, then the hiding nav effect only works if defined here 
 ... Used to have the code in Navbar.svelte itself ...TODO: maybe can still remove some code from Navbar.svelte
--->
-<div class="px-[4%] sm:px-[7%] pt-2 sticky {jankytown} z-50 duration-300">
-  <Navbar bind:mobileHamburgerClosed />
-</div>
 
-<div
-  class=" h-[100vh] px-[4%] sm:px-[7%] pt-20 sm:block  {mobileHamburgerClosed &&
-    $isXs &&
-    'hidden opacity-0'} transition-all duration-500"
->
-  <slot />
+this padding x is only pushing from the left
+-->
+
+<div class="mx-[4%] md:mx-[7%] ">
+  <!-- <div> -->
+  <div class=" pt-2 sticky {jankytown} z-50 duration-300">
+    <Navbar bind:mobileHamburgerClosed />
+  </div>
+
+  <!-- class=" h-[100vh] px-[4%] md:px-[7%] pt-20 md:block  {mobileHamburgerClosed && -->
+  <!-- {mobileHamburgerClosed &&
+      $burgerBreakPoint &&
+      'hidden opacity-0'} -->
+  <div
+    class=" {mobileHamburgerClosed &&
+      $burgerBreakPoint &&
+      'hidden opacity-0'} h-[100vh] pt-20 md:block transition-all duration-500"
+  >
+    <slot />
+  </div>
 </div>

@@ -30,10 +30,10 @@ derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
 });
 const windowInnerHeight = writable(0);
 const innerWidth = writable(0);
-const isXs = derived(innerWidth, ($innerWidth) => $innerWidth < 640);
-derived(isXs, ($isXs) => $isXs ? customFade : () => {
+const burgerBreakPoint = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
+derived(burgerBreakPoint, ($burgerBreakPoint) => $burgerBreakPoint ? customFade : () => {
 });
-derived(isXs, ($isXs) => $isXs ? customFade : () => {
+derived(burgerBreakPoint, ($burgerBreakPoint) => $burgerBreakPoint ? customFade : () => {
 });
 const routes = writable({
   home: {
@@ -67,8 +67,8 @@ const redirectSetInterval = writable("");
 const light_darkened = "rgb(242,247,250)";
 const dark_lightened = "rgb(38, 35, 51)";
 export {
-  isXs as a,
-  redirectSetInterval as b,
+  redirectSetInterval as a,
+  burgerBreakPoint as b,
   instDeltaY as c,
   routes as d,
   isLoggedIn as e,

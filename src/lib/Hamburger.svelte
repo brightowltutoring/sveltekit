@@ -1,5 +1,10 @@
 <script>
-  import { scrollY, lastScrollY, isXs, instDeltaY } from "$lib/store.js";
+  import {
+    scrollY,
+    lastScrollY,
+    burgerBreakPoint,
+    instDeltaY,
+  } from "$lib/store.js";
 
   // export let hamburgerBtn
   export let mobileOpen;
@@ -25,18 +30,18 @@
   const hamburgerColor = "bg-red-500"; //bg-gray-500
   // let hamburgerBtn
   let variableTop = "top-6";
-  $: if ($isXs && !mobileOpen) {
+  $: if ($burgerBreakPoint && !mobileOpen) {
     // if($scrollY<250) variableTop = "top-6"
     if ($instDeltaY > 0 && $scrollY > 250) variableTop = "-top-20 ";
     if ($instDeltaY < 0 && $scrollY > 250) variableTop = "top-6";
   }
-  // $: if($isXs && mobileOpen ) variableTop = "top-6"
+  // $: if($burgerBreakPoint && mobileOpen ) variableTop = "top-6"
 </script>
 
 <main>
   <!-- version: tailwind + svelte style (css) + js variables (~20 lines code)-->
   <hamburger-container
-    class="sm:hidden z-50 text-4xl fixed right-6 {variableTop} transition-all duration-300"
+    class="md:hidden z-50 text-4xl fixed right-6 {variableTop} transition-all duration-300"
   >
     <hamburger
       style="width: {hamburgerWidth}px; height:{hamburgerHeight}px"

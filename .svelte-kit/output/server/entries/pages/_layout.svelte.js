@@ -1,16 +1,16 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as loop, f as set_store_value, v as validate_component, g as each, h as add_attribute } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
-import { i as isDarkMode, a as isXs, r as redirectAfterLoginTimeOut, b as redirectSetInterval, s as scrollY, c as instDeltaY, l as lastScrollY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, b as burgerBreakPoint, r as redirectAfterLoginTimeOut, a as redirectSetInterval, s as scrollY, c as instDeltaY, l as lastScrollY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isDarkMode;
-  let $$unsubscribe_isXs;
+  let $$unsubscribe_burgerBreakPoint;
   let $page, $$unsubscribe_page;
   let $$unsubscribe_redirectAfterLoginTimeOut;
   let $$unsubscribe_redirectSetInterval;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
-  $$unsubscribe_isXs = subscribe(isXs, (value) => value);
+  $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
@@ -36,12 +36,12 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
   }
   $$unsubscribe_isDarkMode();
-  $$unsubscribe_isXs();
+  $$unsubscribe_burgerBreakPoint();
   $$unsubscribe_page();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_redirectSetInterval();
   return `
-<button class="${escape(bool && `${btnColor} sm:border-b-1 sm:rounded sm:px-3 sm:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " sm:hover:rounded sm:hover:py-1 sm:hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
+<button class="${escape(bool && `${btnColor} md:border-b-1 md:rounded md:px-3 md:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " md:hover:rounded md:hover:py-1 md:hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
 });
 const hamburgerWidth = 35;
 const hamburgerPattyHeight = 2;
@@ -49,11 +49,11 @@ const hamburgerColor = "bg-red-500";
 const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $scrollY, $$unsubscribe_scrollY;
   let $instDeltaY, $$unsubscribe_instDeltaY;
-  let $isXs, $$unsubscribe_isXs;
+  let $burgerBreakPoint, $$unsubscribe_burgerBreakPoint;
   let $$unsubscribe_lastScrollY;
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
-  $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
+  $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => $burgerBreakPoint = value);
   $$unsubscribe_lastScrollY = subscribe(lastScrollY, (value) => value);
   let { mobileOpen } = $$props;
   let { unique } = $$props;
@@ -66,7 +66,7 @@ const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   if ($$props.unique === void 0 && $$bindings.unique && unique !== void 0)
     $$bindings.unique(unique);
   {
-    if ($isXs && !mobileOpen) {
+    if ($burgerBreakPoint && !mobileOpen) {
       if ($instDeltaY > 0 && $scrollY > 250)
         variableTop = "-top-20 ";
       if ($instDeltaY < 0 && $scrollY > 250)
@@ -75,10 +75,10 @@ const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   }
   $$unsubscribe_scrollY();
   $$unsubscribe_instDeltaY();
-  $$unsubscribe_isXs();
+  $$unsubscribe_burgerBreakPoint();
   $$unsubscribe_lastScrollY();
   return `<main>
-  <hamburger-container class="${"sm:hidden z-50 text-4xl fixed right-6 " + escape(variableTop, true) + " transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+  <hamburger-container class="${"md:hidden z-50 text-4xl fixed right-6 " + escape(variableTop, true) + " transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
       <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
@@ -198,13 +198,13 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $routes, $$unsubscribe_routes;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $scrollY, $$unsubscribe_scrollY;
-  let $isXs, $$unsubscribe_isXs;
+  let $burgerBreakPoint, $$unsubscribe_burgerBreakPoint;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $scaleRocket, $$unsubscribe_scaleRocket;
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
-  $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
+  $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => $burgerBreakPoint = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
@@ -212,8 +212,8 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { mobileHamburgerClosed } = $$props;
   let mobileOpen = "";
   let unique;
-  let btnColor = "sm:bg-red-300 ";
-  let btnColorHover = "sm:hover:bg-red-300";
+  let btnColor = "md:bg-red-300 ";
+  let btnColorHover = "md:hover:bg-red-300";
   if ($$props.mobileHamburgerClosed === void 0 && $$bindings.mobileHamburgerClosed && mobileHamburgerClosed !== void 0)
     $$bindings.mobileHamburgerClosed(mobileHamburgerClosed);
   let $$settled;
@@ -226,7 +226,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       }
     }
     {
-      if ($isLoggedIn && !$isXs) {
+      if ($isLoggedIn && !$burgerBreakPoint) {
         scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
       }
     }
@@ -251,13 +251,15 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     )}
 
 
-<logo-and-navbar class="${"flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex " + escape(!mobileOpen && "hidden", true)}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20 sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+<logo-and-navbar class="${"flex md:inline-flex md:justify-between h-[85vh] md:h-16 justify-center items-center md:w-full " + escape(!mobileOpen && "hidden", true)}">
+  
+  <div class="${"translate-y-[0.2rem] translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:pr-20 md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
-  <nav><ul class="${"flex flex-col sm:flex-row text-3xl sm:text-lg items-center"}">${$isXs && mobileOpen ? `<li class="${"pb-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
+  <nav><ul class="${"flex flex-col md:flex-row text-3xl md:text-lg items-center"}">${$burgerBreakPoint && mobileOpen ? `<li class="${"pb-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
 
         ${each(Object.keys($routes), (KEY) => {
-      return `<li class="${"py-3 sm:p-1 "}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
+      return `<li class="${"py-3 md:p-0 "}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
           href: $routes[KEY].href,
@@ -295,12 +297,12 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           </li>`;
     })}
 
-        ${!$isXs ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
+        ${!$burgerBreakPoint ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
   } while (!$$settled);
   $$unsubscribe_routes();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_scrollY();
-  $$unsubscribe_isXs();
+  $$unsubscribe_burgerBreakPoint();
   $$unsubscribe_isDarkMode();
   $$unsubscribe_scaleRocket();
   return $$rendered;
@@ -308,26 +310,26 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
-  let $isXs, $$unsubscribe_isXs;
+  let $burgerBreakPoint, $$unsubscribe_burgerBreakPoint;
   let $$unsubscribe_isLoggedIn;
   let $$unsubscribe_redirectSetInterval;
   let $$unsubscribe_redirectAfterLoginTimeOut;
   let $$unsubscribe_windowInnerHeight;
   let $$unsubscribe_scrollYMax;
-  let $$unsubscribe_innerWidth;
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
+  let $$unsubscribe_innerWidth;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
-  $$unsubscribe_isXs = subscribe(isXs, (value) => $isXs = value);
+  $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => $burgerBreakPoint = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
-  $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   let mobileHamburgerClosed = true;
   let jankytown = "";
   let $$settled;
@@ -335,7 +337,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   do {
     $$settled = true;
     {
-      if (!$isXs) {
+      if (!$burgerBreakPoint) {
         if ($scrollY == 0)
           jankytown = "top-0";
         if ($scrollY > 10 && $instDeltaY > 0)
@@ -346,14 +348,16 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "backdrop-blur-3xl top-0";
       }
     }
-    $$rendered = `
-
-${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key) => {
+    $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
     })}`, ""}
 
 
-<div class="${"px-[4%] sm:px-[7%] pt-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
+
+
+
+<div class="${"mx-[4%] md:mx-[7%] "}">
+  <div class="${"pt-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
       $$result,
       { mobileHamburgerClosed },
       {
@@ -365,19 +369,21 @@ ${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapi
       {}
     )}</div>
 
-<div class="${"h-[100vh] px-[4%] sm:px-[7%] pt-20 sm:block " + escape(mobileHamburgerClosed && $isXs && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
+  
+  
+  <div class="${"" + escape(mobileHamburgerClosed && $burgerBreakPoint && "hidden opacity-0", true) + " h-[100vh] pt-20 md:block transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div></div>`;
   } while (!$$settled);
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
-  $$unsubscribe_isXs();
+  $$unsubscribe_burgerBreakPoint();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_redirectSetInterval();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_windowInnerHeight();
   $$unsubscribe_scrollYMax();
-  $$unsubscribe_innerWidth();
   $$unsubscribe_routes();
   $$unsubscribe_page();
+  $$unsubscribe_innerWidth();
   return $$rendered;
 });
 export {

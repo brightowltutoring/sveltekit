@@ -5,7 +5,7 @@
   import Hamburger from "./Hamburger.svelte";
   import { goto } from "$app/navigation";
   import {
-    isXs,
+    burgerBreakPoint,
     isLoggedIn,
     routes,
     scrollY,
@@ -21,7 +21,7 @@
   $: if ($isLoggedIn) {
     hueRocket = $isDarkMode ? 0.75 : 0;
   }
-  $: if ($isLoggedIn && !$isXs) {
+  $: if ($isLoggedIn && !$burgerBreakPoint) {
     scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
   }
 
@@ -49,8 +49,8 @@
   // $instDeltaY>0 essentially means "currently scrolling down" as $instDeltaY relaxes to 0 shortly.
   // $instDeltaY == 0, jankytown is not updated.
 
-  let btnColor = "sm:bg-red-300 ";
-  let btnColorHover = "sm:hover:bg-red-300";
+  let btnColor = "md:bg-red-300 ";
+  let btnColorHover = "md:hover:bg-red-300";
 
   import LightDarkMode from "$lib/LightDarkMode.svelte";
 </script>
@@ -59,13 +59,16 @@
 <!-- <Hamburger {hamburgerBtn} bind:mobileOpen bind:unique /> -->
 
 <logo-and-navbar
-  class="flex sm:justify-between items-center justify-center sm:w-full h-[85vh] sm:h-16 sm:inline-flex {!mobileOpen &&
+  class="flex md:inline-flex md:justify-between h-[85vh] md:h-16 justify-center items-center md:w-full  {!mobileOpen &&
     'hidden'} "
 >
+  <!-- styling from sep 11 @ 240pm -->
+  <!--  class=" translate-y-[0.2rem] translate-x-3 hidden md:block text-xl font-Poppins font-semibold pl-[5%] md:pr-20
+    md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent" -->
   {#key resetLogoClick}
     <div
-      class=" translate-y-[0.2rem] translate-x-3 hidden sm:block text-xl font-Poppins font-semibold pl-[5%] sm:pr-20
-    sm:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
+      class=" translate-y-[0.2rem] translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:pr-20
+    md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
       in:scale={{ duration: 1200, easing: elasticOut }}
       on:mouseup={clickLogo}
     >
@@ -75,8 +78,8 @@
 
   <nav>
     {#key unique}
-      <ul class="flex flex-col sm:flex-row text-3xl sm:text-lg items-center">
-        {#if $isXs && mobileOpen}
+      <ul class="flex flex-col md:flex-row text-3xl md:text-lg items-center">
+        {#if $burgerBreakPoint && mobileOpen}
           {#key !$isDarkMode}
             <li in:slide={{ duration: 600, easing: quintOut }} class="pb-3 ">
               <LightDarkMode />
@@ -86,7 +89,7 @@
 
         {#each Object.keys($routes) as KEY}
           <li
-            class="py-3 sm:p-1 "
+            class="py-3 md:p-0 "
             style={KEY == "login" &&
               $isLoggedIn &&
               `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
@@ -103,11 +106,11 @@
           </li>
         {/each}
 
-        {#if !$isXs}
+        {#if !$burgerBreakPoint}
           {#key !$isDarkMode}
             <li
               in:slide={{ duration: 600, easing: quintOut }}
-              class="px-3  translate-y-1"
+              class="px-3 translate-y-1"
             >
               <LightDarkMode />
             </li>
