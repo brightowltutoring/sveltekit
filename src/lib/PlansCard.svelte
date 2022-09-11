@@ -1,6 +1,4 @@
 <script>
-  import { scale } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
   import {
     isDarkMode,
     light,
@@ -8,6 +6,8 @@
     dark,
     dark_lightened,
   } from "$lib/store.js";
+  import { scale } from "svelte/transition";
+  import { elasticOut } from "svelte/easing";
 
   let resetBtn = false;
   export let calendlyUrl = "";
@@ -59,8 +59,8 @@
 >
   {#key resetBtn}
     <button
+      in:scale={{ duration: 600, easing: elasticOut }}
       on:click={resetBtnValue}
-      in:scale={{ duration: 1000, easing: elasticOut }}
       class=" {buttonColor[
         card
       ]} {btnColorHover}  hover:shadow-md duration-300 rounded-md p-4 {$isDarkMode
@@ -81,11 +81,16 @@
 
 <style>
   .cardCSS {
-    transform: perspective(1000px) rotateX(0deg);
-    transition: transform 0.3s ease 0s;
+    transform: perspective(1000px) rotateX(12deg);
+    /* transform: perspective(1000px) rotateX(0deg); */
+    /* transition: transform 0.3s ease 0s; */
+    /* transition: 500ms; */
+    z-index: 10;
+    -webkit-transform: translateZ(-1px);
   }
 
   .cardCSS:hover {
-    transform: perspective(1000px) rotateX(12deg) scale(1.02);
+    transform: perspective(1000px) rotateX(0deg) scale(1.02);
+    /* transform: perspective(1000px) rotateX(12deg) scale(1.02); */
   }
 </style>
