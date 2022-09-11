@@ -1,0 +1,4 @@
+import{d as n,w as s}from"./index-b80a8d4d.js";import{e as d}from"./index-406aa5de.js";function o(e,{easing:t=d,duration:l=3e3}){return{easing:t,duration:l,css:(c,a)=>` opacity: ${.8*a+c};
+        filter: hue-rotate(${.15*a}turn) 
+                blur(${a}px);
+      `}}const x=s(!1),k=s(0),r=s(0),m=n(r,(e,t)=>{setTimeout(()=>{t(e)},50)}),p=n([r,m],([e,t])=>e-t),f=s(0);n([r,f],([e,t])=>1-e/t);const v=s(0),u=s(0),i=n(u,e=>e<640);n(i,e=>e?o:()=>{});n(i,e=>e?o:()=>{});const b=s({home:{name:"Home",href:"/",title:"Thinksolve.io \u{1F4AB}",isCurrent:!1},plans:{name:"Plans",href:"/plans",title:"Plans",isCurrent:!1},mdsvex_and_katex:{name:"mdsvex-and-katex",href:"/mdsvex-and-katex",title:"mdsvex-and-katex",isCurrent:!1},login:{name:"Login",href:"/login",title:"Login \u{1F680}",isCurrent:!1}}),w=s(!1),Y=s(""),C=s(""),L="rgb(242,247,250)",_="rgb(38, 35, 51)";export{i as a,C as b,p as c,b as d,x as e,f,u as g,_ as h,w as i,L as j,k as l,Y as r,r as s,v as w};

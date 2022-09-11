@@ -1,6 +1,8 @@
 import { c as create_ssr_component, a as subscribe, e as escape, h as add_attribute, g as each, v as validate_component } from "../../chunks/index.js";
 import { i as isDarkMode } from "../../chunks/store.js";
+import { K as Katex } from "../../chunks/Katex.js";
 import "../../chunks/index2.js";
+import "katex";
 const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -21,8 +23,24 @@ const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots)
   </div>`;
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let mathColor;
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
-  return `
+  let equations = [
+    "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}",
+    "\\prod_{i=a}^{b} f(i)",
+    "k = \\frac{aL}{At} \\ln \\frac{h_0}{h_t}",
+    "\\left( \\sum_{k=1}^n a_k b_k \\right)^2 \\leq \\left( \\sum_{k=1}^n a_k^2 \\right) \\left( \\sum_{k=1}^n b_k^2 \\right)",
+    " i\\hbar\\gamma^\\mu \\partial_\\mu \\psi - mc\\psi = 0 ",
+    "R_{\\mu \\nu} - {1 \\over 2}g_{\\mu \\nu}\\,R + g_{\\mu \\nu} \\Lambda = \n {8 \\pi G \\over c^4} T_{\\mu \\nu}"
+  ];
+  mathColor = $isDarkMode ? "text-blue-200" : "text-red-500";
+  $$unsubscribe_isDarkMode();
+  return `<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}">${each(equations, (eqn, i) => {
+    return `<p${add_attribute("class", mathColor, 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
+    </p>`;
+  })}</div>
 
 <div class="${"font-Poppins text-center sm:text-5xl text-4xl pb-20 "}">TESTIMONIALS
 </div>

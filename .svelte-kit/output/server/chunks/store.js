@@ -48,10 +48,10 @@ const routes = writable({
     title: "Plans",
     isCurrent: false
   },
-  markdownAndKatex: {
-    name: "markdown-and-katex",
-    href: "/markdown-and-katex",
-    title: "markdown-and-katex",
+  mdsvex_and_katex: {
+    name: "mdsvex-and-katex",
+    href: "/mdsvex-and-katex",
+    title: "mdsvex-and-katex",
     isCurrent: false
   },
   login: {

@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.png","reviews/review-efe-bare.png","reviews/review-miranda-bare.png","reviews/review-paola-bare.png","reviews/review-rob-bare.png","reviews/review-tj-bare.png","reviews/review-zaara-bare.png"]),
 	mimeTypes: {".mp4":"video/mp4",".png":"image/png"},
 	_: {
-		entry: {"file":"_app/immutable/start-6114875b.js","imports":["_app/immutable/start-6114875b.js","_app/immutable/chunks/index-19209420.js","_app/immutable/chunks/singletons-29eeff45.js","_app/immutable/chunks/index-935073ee.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-7451b09b.js","imports":["_app/immutable/start-7451b09b.js","_app/immutable/chunks/index-c3c96927.js","_app/immutable/chunks/singletons-1809f604.js","_app/immutable/chunks/index-b80a8d4d.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),
@@ -35,8 +35,8 @@ export const manifest = {
 			},
 			{
 				type: 'page',
-				id: "markdown-and-katex",
-				pattern: /^\/markdown-and-katex\/?$/,
+				id: "mdsvex-and-katex",
+				pattern: /^\/mdsvex-and-katex\/?$/,
 				names: [],
 				types: [],
 				errors: [1],
