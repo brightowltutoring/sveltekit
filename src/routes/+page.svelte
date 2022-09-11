@@ -34,7 +34,7 @@
       in:scale={{
         easing: quintOut,
         duration: 1000,
-        delay: 150 * Math.log(i),
+        delay: 100 * i,
       }}
     >
       <K d m={eqn} />
