@@ -8,11 +8,6 @@
 
 
 
-
-/* body.noScroll{
-  overflow-y: hidden;
-} */
-
 :root{
   --anchor: rgb(253, 148, 148);
   --anchor_hover: rgb(249, 87, 87);
@@ -33,25 +28,16 @@ body {
   overscroll-behavior-y: none;
   
   background: var(--light);
-  /* background: radial-gradient(circle at center, var(--light) 0, var(--light_darkened), var(--light) 100%); */
 	color: var(--dark);
 	transition: var(--ld-transition);
   width:  100vw;
   height: 100vh;
   touch-action: manipulation;
-  /* pointer-events: none;     */
   user-select:none;
 }
 
 body.dark-mode {
   background: var(--dark);
-  /* background: 
-              radial-gradient(ellipse at bottom, var(--dark_lightened), transparent),
-              radial-gradient(ellipse at top, var(--dark), transparent),
-              radial-gradient(ellipse at left, rgb(29, 29, 29), transparent),
-              radial-gradient(ellipse at right, var(--dark_lightened), transparent)
-              ; */
-  /* background: radial-gradient(circle at center, var(--dark) 0, var(--dark) 60%, var(--dark) 100%); */
   color: var(--light);
 }
 

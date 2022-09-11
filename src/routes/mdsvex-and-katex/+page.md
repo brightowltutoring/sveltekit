@@ -28,7 +28,9 @@
 
 # The content on this page is written in a markdown file, which uses html, css, svelte components ...thanks to MDsveX + plugins!
 
-<div class="h-10"/>
+<!-- <p>&nbsp;</p> -->
+<div class="h-6"></div>
+
 	
 
 The black math expressions are written in markdown. 

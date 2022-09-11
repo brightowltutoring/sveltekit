@@ -365,7 +365,7 @@ ${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapi
       {}
     )}</div>
 
-<div class="${"h-[400vh] px-[4%] sm:px-[7%] pt-20 sm:block " + escape(mobileHamburgerClosed && $isXs && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
+<div class="${"h-[100vh] px-[4%] sm:px-[7%] pt-20 sm:block " + escape(mobileHamburgerClosed && $isXs && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
   } while (!$$settled);
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();

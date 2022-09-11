@@ -5,7 +5,7 @@
   import { isDarkMode } from "$lib/store.js";
   import K from "$lib/Katex.svelte";
   import { blur, scale, fly, fade } from "svelte/transition";
-  import { elasticOut /* quintOut,*/ } from "svelte/easing";
+  import { elasticOut, quintOut } from "svelte/easing";
 
   const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
 
@@ -21,14 +21,20 @@
   $: mathColor = $isDarkMode ? "text-blue-100" : "text-red-500";
 </script>
 
+<!--   class={mathColor}
+      in:scale={{
+        easing: elasticOut,
+        duration: 1000,
+        delay: 150 * i,
+      }} -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
   {#each equations as eqn, i}
     <p
       class={mathColor}
       in:scale={{
-        easing: elasticOut,
+        easing: quintOut,
         duration: 1000,
-        delay: 150 * i,
+        delay: 150 * Math.log(i),
       }}
     >
       <K d m={eqn} />

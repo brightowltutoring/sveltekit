@@ -1107,7 +1107,7 @@ ${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapi
           {}
         )}</div>
 
-<div class="${"h-[400vh] px-[4%] sm:px-[7%] pt-20 sm:block " + escape(mobileHamburgerClosed && $isXs && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
+<div class="${"h-[100vh] px-[4%] sm:px-[7%] pt-20 sm:block " + escape(mobileHamburgerClosed && $isXs && "hidden opacity-0", true) + " transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
@@ -1139,9 +1139,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-807f2173.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-807f2173.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/stores-14b592a8.js", "_app/immutable/chunks/singletons-5ecdd498.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/navigation-dac7708b.js"];
-    stylesheets = ["_app/immutable/assets/+layout-e485c653.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-5166fe6f.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-5166fe6f.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/stores-4d72993b.js", "_app/immutable/chunks/singletons-62ec5f46.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/navigation-53f24bd2.js"];
+    stylesheets = ["_app/immutable/assets/+layout-46af4f6c.css"];
   }
 });
 
@@ -1185,8 +1185,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-96cdd0a9.js";
-    imports2 = ["_app/immutable/components/error.svelte-96cdd0a9.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-14b592a8.js", "_app/immutable/chunks/singletons-5ecdd498.js", "_app/immutable/chunks/index-b80a8d4d.js"];
+    file2 = "_app/immutable/components/error.svelte-013ac0f7.js";
+    imports2 = ["_app/immutable/components/error.svelte-013ac0f7.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-4d72993b.js", "_app/immutable/chunks/singletons-62ec5f46.js", "_app/immutable/chunks/index-b80a8d4d.js"];
     stylesheets2 = [];
   }
 });
@@ -14913,7 +14913,7 @@ var init_page_svelte = __esm({
         " i\\hbar\\gamma^\\mu \\partial_\\mu \\psi - mc\\psi = 0 ",
         "R_{\\mu \\nu} - {1 \\over 2}g_{\\mu \\nu}\\,R + g_{\\mu \\nu} \\Lambda = \n {8 \\pi G \\over c^4} T_{\\mu \\nu}"
       ];
-      mathColor = $isDarkMode ? "text-blue-200" : "text-red-500";
+      mathColor = $isDarkMode ? "text-blue-100" : "text-red-500";
       $$unsubscribe_isDarkMode();
       return `<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}">${each(equations, (eqn, i) => {
         return `<p${add_attribute("class", mathColor, 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
@@ -14956,8 +14956,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-3af82806.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-3af82806.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/Katex-2484979a.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-be603805.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-be603805.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/Katex-2484979a.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = [];
   }
 });
@@ -21153,7 +21153,7 @@ var init_page_svelte2 = __esm({
     getAuth(app);
     ln(app);
     css = {
-      code: '#flyingEmoji.svelte-1hnxxkl.svelte-1hnxxkl{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1hnxxkl-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1hnxxkl-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1hnxxkl.svelte-1hnxxkl::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1hnxxkl-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1hnxxkl-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1hnxxkl-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1hnxxkl-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1hnxxkl-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1hnxxkl-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1hnxxkl-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1hnxxkl-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1hnxxkl.svelte-1hnxxkl{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1hnxxkl.svelte-1hnxxkl{margin:0px auto;margin-top:50px;width:25vw;min-width:280px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1hnxxkl input.svelte-1hnxxkl,button.svelte-1hnxxkl.svelte-1hnxxkl{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1hnxxkl input.svelte-1hnxxkl{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1hnxxkl.svelte-1hnxxkl{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1hnxxkl.svelte-1hnxxkl:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1hnxxkl button.svelte-1hnxxkl{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1hnxxkl input.svelte-1hnxxkl:hover{border:1px solid #999}.loginLogoutDivs.svelte-1hnxxkl button.svelte-1hnxxkl:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1hnxxkl input.svelte-1hnxxkl:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1hnxxkl.svelte-1hnxxkl{display:flex;justify-content:center;align-items:center}',
+      code: '#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1k1mjbo.svelte-1k1mjbo{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1k1mjbo.svelte-1k1mjbo{margin:0px auto;width:25vw;min-width:280px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo,button.svelte-1k1mjbo.svelte-1k1mjbo{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:hover{border:1px solid #999}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center}',
       map: null
     };
     Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21170,25 +21170,25 @@ var init_page_svelte2 = __esm({
       $$unsubscribe_isLoggedIn();
       return `<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 90vh; max-height: 90vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(10px); "}"></video>
 
-  <div class="${"loginLogoutDivs  svelte-1hnxxkl"}" id="${"logInDiv"}" style="${"display: block; "}"><br>
+  <div class="${"loginLogoutDivs  svelte-1k1mjbo"}" id="${"logInDiv"}" style="${"display: block; "}"><br>
     <br>
 
-    <button id="${"googleBtn"}" class="${"svelte-1hnxxkl"}">Sign-in with Google</button>
+    <button id="${"googleBtn"}" class="${"svelte-1k1mjbo"}">Sign-in with Google</button>
     <br>
     <br>
 
-    <button id="${"passwordlessLoginBtn"}" class="${"svelte-1hnxxkl"}">Sign-in via link</button>
+    <button id="${"passwordlessLoginBtn"}" class="${"svelte-1k1mjbo"}">Sign-in via link</button>
 
-    <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-1hnxxkl"}"${add_attribute("value", emailFieldValue, 0)}>
+    <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-1k1mjbo"}"${add_attribute("value", emailFieldValue, 0)}>
 
-    <span id="${"emailStatusMessage"}" class="${"centering  svelte-1hnxxkl"}" style="${"display:none"}"></span>
-    <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-1hnxxkl"}"></span></div>
+    <span id="${"emailStatusMessage"}" class="${"centering  svelte-1k1mjbo"}" style="${"display:none"}"></span>
+    <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-1k1mjbo"}"></span></div>
 
-  <div class="${"loginLogoutDivs svelte-1hnxxkl"}" id="${"logOutDiv"}" style="${"display: none"}"><h2 class="${"centering svelte-1hnxxkl"}" id="${"loginWelcomeText"}">Welcome User</h2>
-    <h3 class="${"centering svelte-1hnxxkl"}">Redirecting to your page in</h3>
-    <h3 class="${"centering svelte-1hnxxkl"}" style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</h3>
+  <div class="${"loginLogoutDivs svelte-1k1mjbo"}" id="${"logOutDiv"}" style="${"display: none"}"><h2 class="${"centering svelte-1k1mjbo"}" id="${"loginWelcomeText"}">Welcome User</h2>
+    <h3 class="${"centering svelte-1k1mjbo"}">Redirecting to your page in</h3>
+    <h3 class="${"centering svelte-1k1mjbo"}" style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</h3>
 
-    <button id="${"logoutBtn"}" class="${"svelte-1hnxxkl"}">Logout</button></div>
+    <button id="${"logoutBtn"}" class="${"svelte-1k1mjbo"}">Logout</button></div>
 </main>`;
     });
   }
@@ -21208,9 +21208,9 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/login/_page.svelte-a3dfc50b.js";
-    imports4 = ["_app/immutable/components/pages/login/_page.svelte-a3dfc50b.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/navigation-dac7708b.js", "_app/immutable/chunks/singletons-5ecdd498.js"];
-    stylesheets4 = ["_app/immutable/assets/+page-d2c65961.css"];
+    file4 = "_app/immutable/components/pages/login/_page.svelte-5b14be08.js";
+    imports4 = ["_app/immutable/components/pages/login/_page.svelte-5b14be08.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b6e0dbc0.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/navigation-53f24bd2.js", "_app/immutable/chunks/singletons-62ec5f46.js"];
+    stylesheets4 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
 
@@ -23563,7 +23563,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-c1ee6a24.js", "imports": ["_app/immutable/start-c1ee6a24.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-5ecdd498.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-33a2c812.js", "imports": ["_app/immutable/start-33a2c812.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-62ec5f46.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
