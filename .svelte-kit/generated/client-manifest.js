@@ -14,6 +14,6 @@ export const dictionary = {
 	"": [[1], [0], 2],
 	"faq": [[1], [0], 3],
 	"login": [[1], [0], 4],
-	"mdsvex_and_katex": [[1], [0], 5],
+	"math": [[1], [0], 5],
 	"plans": [[1], [0], 6]
 };

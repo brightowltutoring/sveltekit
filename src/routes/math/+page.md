@@ -24,16 +24,16 @@
         const options = {
             root: null,
             threshold: 0,
-            rootMargin:"200px"
+            rootMargin:"200px" //shows the lag effect
+            // rootMargin:"-100px" //shows the lag effect
         }
 
         observer = new IntersectionObserver( (entries,observer) => {
             entries.forEach( entry => {
                 console.log(entry);
-                if(!entry.isIntersecting) { return } // breaks here if condition not met
+                if(!entry.isIntersecting) { return; } // breaks here if condition not met
                 // entry.target.open = entry.isIntersecting
                 entry.target.open = true
-                entry.target.classList.remove("hide")
                 observer.unobserve(entry.target)
             })
         }, options)
@@ -42,7 +42,7 @@
             
     })
 
-let num = 200
+let num = 500
 </script>
 
 
@@ -65,26 +65,16 @@ The black math expressions are written in markdown.
 > <button class="p-2 shadow-2xl" style={buttonColorTransition}  on:click={()=>{x--}}>decrement</button>
 
 
-<!-- <button class="bg-red-100 p-2 rounded" on:click={unHide}>unhide element 1, 4, and 105 originally hidden 200</button> -->
 
 
-<!-- wrapping html around md only works with span and one-line space!! -->
-
-
-<span> 
-
-$E=mc^2$ 
-
-</span>
-
-<!-- or details in this funky way. Value of details is using it with IntersectionObserver below -->
-<details class="eqns" ><summary></summary>
+<!-- or details  in this funky way. Value of details  is using it with IntersectionObserver below -->
+<details  class="eqns" ><summary></summary>
 
 $$
 E=mc^{2}
 $$
 
-</details>
+</details >
 
 
 
@@ -119,8 +109,7 @@ These red math expressions are (katex) svelte components.
 
 
 {#each Array(num) as _,j }
-{j+1}
-<details class="eqns" ><summary></summary>
+<details  class="eqns" ><summary>..</summary>
 
 $$
 \begin{aligned} 
@@ -128,15 +117,14 @@ I=\int_{0}^{1}f(x)d x
 \end{aligned}
 $$
 
-</details>
+</details >
 {/each}
 
 {#each Array(num) as _,j }
-    <details class="eqns">
-        <summary> ..</summary>
-        { j + 1 + num }
+    <details  class="eqns">
+        <summary>..</summary>
         <K d m={'\\prod_\{i=a\}\^\{b\}\ f\(i\)'}  />
-    </details>
+    </details >
 {/each}
 
 
@@ -144,8 +132,8 @@ $$
 <!-- tailwind is still very useful inline, however so are original bullet points,   -->
 <style>
    
-    details > summary::-webkit-details-marker {   display: none; }  
-    details > summary {   
+    details  > summary::-webkit-details -marker {   display: none; }  
+    details  > summary {   
         list-style: none; 
         color:transparent 
     } 
