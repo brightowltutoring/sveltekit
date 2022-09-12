@@ -33,36 +33,29 @@ let eqns=[];
 let observer
 onMount(()=>{
 
-    eqns = document.getElementsByClassName("eqns")
+
+    eqns = document.querySelectorAll("DETAILS.eqns")
     const options = {
         root: null,
         threshold: 0,
-        rootMargin:"-150px"
+        rootMargin:"500px"
     }
 
-    observer = new IntersectionObserver( entries => {
+    observer = new IntersectionObserver( (entries,observer) => {
         entries.forEach( entry => {
             console.log(entry);
-            entry.target.classList.remove("hide",entry.isIntersecting)
-        //   if(!entry.isIntersecting) observer.unobserve(entry)
+            if(!entry.isIntersecting) { return } // breaks here if condition not met
+            entry.target.open = entry.isIntersecting
+            observer.unobserve(entry.target)
         })
-    },options)
+    }, options)
 
-  
-    for(let index in eqns) {
-        if (index < 100) observer.observe(eqns[index])
-    }
-
-
-    // for(let eqn of eqns) {
-        
-    //     observer.observe(eqn)
-    // }
+    for(let eqn of eqns) { observer.observe(eqn) }
         
 })
 
 
-let num = 100
+let num = 50
 // function unHide(){
 //     eqns[0].classList.remove("hide")
 //     eqns[3].classList.remove("hide")
@@ -99,17 +92,16 @@ The black math expressions are written in markdown.
 
 
 <!-- wrapping html around md only works with span and one-line space!! -->
-{#each Array(num) as _,j }
+{#each Array(1) as _,j }
 <span class="eqns hide">
 { j + 1 }
 
-$$ 
-\begin{aligned}
-A & = \frac{\pi r^2}{2} \\
-& = \frac{1}{2} \pi r^2
-\end{aligned}
-$$
-
+<K d m={'\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}'}  />
+	<K d m={'I=\\int_0^1 f(x) dx'} />
+	<K
+		d
+		m={'S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}'}
+	/>
 </span>
 {/each}
 
@@ -136,24 +128,23 @@ These red math expressions are (katex) svelte components.
 
 
 {#each Array(num) as _,j }
-    <div class="eqns hide">
+    <details class="eqns">
+        <summary> ..</summary>
         {num + j + 1 }
         <K d m={'\\prod_\{i=a\}\^\{b\}\ f\(i\)'}  />
-    </div>
+    </details>
 {/each}
 
 
 
 <!-- tailwind is still very useful inline, however so are original bullet points,   -->
 <style>
-
-    .eqns{
-        display:block;
-    }
    
-    .eqns.hide{
-        display:none;
-    }
+    details > summary::-webkit-details-marker {   display: none; }  
+    details > summary {   
+        list-style: none; 
+        color:transparent 
+    } 
    
    
     blockquote {  
