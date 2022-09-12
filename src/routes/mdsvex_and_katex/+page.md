@@ -23,8 +23,8 @@
         eqns = document.querySelectorAll(".eqns")
         const options = {
             root: null,
-            threshold: 1,
-            rootMargin:"0px"
+            threshold: 0,
+            rootMargin:"200px"
         }
 
         observer = new IntersectionObserver( (entries,observer) => {
@@ -42,7 +42,7 @@
             
     })
 
-
+let num = 200
 </script>
 
 
@@ -69,6 +69,8 @@ The black math expressions are written in markdown.
 
 
 <!-- wrapping html around md only works with span and one-line space!! -->
+
+
 <span> 
 
 $E=mc^2$ 
@@ -78,7 +80,9 @@ $E=mc^2$
 <!-- or details in this funky way. Value of details is using it with IntersectionObserver below -->
 <details class="eqns" ><summary></summary>
 
-$E=mc^2$
+$$
+E=mc^{2}
+$$
 
 </details>
 
@@ -106,7 +110,6 @@ These red math expressions are (katex) svelte components.
 
 <div  in:scale={{easing:elasticOut, duration: 1000}}>
 	<K d m={'\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}'}  />
-	<K d m={'I=\\int_0^1 f(x) dx'} />
 	<K
 		d
 		m={'S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}'}
@@ -115,18 +118,23 @@ These red math expressions are (katex) svelte components.
 
 
 
-{#each Array(200) as _,j }
+{#each Array(num) as _,j }
+{j+1}
 <details class="eqns" ><summary></summary>
 
-$E=mc^2$
+$$
+\begin{aligned} 
+I=\int_{0}^{1}f(x)d x
+\end{aligned}
+$$
 
 </details>
 {/each}
 
-{#each Array(200) as _,j }
+{#each Array(num) as _,j }
     <details class="eqns">
         <summary> ..</summary>
-        { j + 1 }
+        { j + 1 + num }
         <K d m={'\\prod_\{i=a\}\^\{b\}\ f\(i\)'}  />
     </details>
 {/each}

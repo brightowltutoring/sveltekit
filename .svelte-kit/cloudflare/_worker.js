@@ -1152,9 +1152,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-6a98a6e1.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-6a98a6e1.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/stores-3cf93054.js", "_app/immutable/chunks/singletons-76d6729f.js", "_app/immutable/chunks/navigation-e6fe212b.js"];
-    stylesheets = ["_app/immutable/assets/app-301e1bba.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-517bf088.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-517bf088.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/stores-7a658a53.js", "_app/immutable/chunks/singletons-4dfa8a11.js", "_app/immutable/chunks/navigation-2172e7dc.js"];
+    stylesheets = ["_app/immutable/assets/app-7480f44b.css"];
   }
 });
 
@@ -1198,8 +1198,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-de69096a.js";
-    imports2 = ["_app/immutable/components/error.svelte-de69096a.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-3cf93054.js", "_app/immutable/chunks/singletons-76d6729f.js", "_app/immutable/chunks/index-b80a8d4d.js"];
+    file2 = "_app/immutable/components/error.svelte-cc211eee.js";
+    imports2 = ["_app/immutable/components/error.svelte-cc211eee.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-7a658a53.js", "_app/immutable/chunks/singletons-4dfa8a11.js", "_app/immutable/chunks/index-b80a8d4d.js"];
     stylesheets2 = [];
   }
 });
@@ -14961,9 +14961,9 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-84935def.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-84935def.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-188585a8.js", "_app/immutable/chunks/navigation-e6fe212b.js", "_app/immutable/chunks/singletons-76d6729f.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
-    stylesheets3 = ["_app/immutable/assets/app-301e1bba.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-e97c96f1.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-e97c96f1.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-188585a8.js", "_app/immutable/chunks/navigation-2172e7dc.js", "_app/immutable/chunks/singletons-4dfa8a11.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    stylesheets3 = ["_app/immutable/assets/app-7480f44b.css"];
   }
 });
 
@@ -21348,8 +21348,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-9d06e324.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-9d06e324.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/navigation-e6fe212b.js", "_app/immutable/chunks/singletons-76d6729f.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-ab5ce7aa.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-ab5ce7aa.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/navigation-2172e7dc.js", "_app/immutable/chunks/singletons-4dfa8a11.js"];
     stylesheets5 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21359,7 +21359,7 @@ var page_md_exports = {};
 __export(page_md_exports, {
   default: () => Page4
 });
-var css3, num, Page4;
+var css3, Page4;
 var init_page_md = __esm({
   ".svelte-kit/output/server/entries/pages/mdsvex_and_katex/_page.md.js"() {
     init_chunks();
@@ -21371,7 +21371,6 @@ var init_page_md = __esm({
       code: "details.svelte-1kcug8h>summary.svelte-1kcug8h::-webkit-details-marker{display:none}details.svelte-1kcug8h>summary.svelte-1kcug8h{list-style:none;color:transparent \n    }blockquote.svelte-1kcug8h.svelte-1kcug8h{margin:0;padding-left:1.4rem;border-left:8px solid #bbb}ul.svelte-1kcug8h.svelte-1kcug8h{list-style-type:disc;list-style-position:inside}h1.svelte-1kcug8h.svelte-1kcug8h{font-size:1.5rem;line-height:2rem}",
       map: null
     };
-    num = 50;
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let buttonColorTransition;
       let $elementColor, $$unsubscribe_elementColor;
@@ -21383,7 +21382,6 @@ var init_page_md = __esm({
       return `
 <h1 class="${"svelte-1kcug8h"}">The content on this page is written in a markdown file, which uses html, css, svelte components \u2026thanks to MDsveX + plugins!</h1>
 <p>\xA0</p>
-
 <p>The black math expressions are written in markdown. </p>
 <ul class="${"svelte-1kcug8h"}"><li><strong>Advantage1</strong>: writing lots of inline math expressions \u2014 e.g. \u201C..the general Einsteinian equation is <strong>NOT</strong> <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> \u2014 bur rather <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>E</mi><mn>3</mn></msup><mo>=</mo><msup><mi>m</mi><mn>2</mn></msup><msup><mi>c</mi><mn>4</mn></msup><mo>+</mo><msup><mi>p</mi><mn>2</mn></msup><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E^3=m^2c^4 + p^2c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0085em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>\u2026\u201D\u2014 is much simpler with markdown. <strong>Advantage2</strong>: Markdown math has identical syntax to Latex. </li>
 <li><strong>Disadvantage</strong>: cannot apply css directly to math expression</li></ul>
@@ -21392,34 +21390,32 @@ var init_page_md = __esm({
 <button class="${"p-2 shadow-2xl"}"${add_attribute("style", buttonColorTransition, 0)}>decrement</button></blockquote>
 
 
-${each(Array(1), (_2, j2) => {
-        return `<span class="${"eqns hide"}">${escape(j2 + 1)}
+<span><p><span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span></p></span>
+
+<details class="${"eqns svelte-1kcug8h"}"><summary class="${"svelte-1kcug8h"}"></summary>
+<p><span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span></p></details>
 ${validate_component(Katex, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
-          },
-          {},
-          {}
-        )}
+        $$result,
+        {
+          d: true,
+          m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
+        },
+        {},
+        {}
+      )}
 	${validate_component(Katex, "K").$$render($$result, { d: true, m: "I=\\int_0^1 f(x) dx" }, {}, {})}
 	${validate_component(Katex, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: "S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}"
-          },
-          {},
-          {}
-        )}
-</span>`;
-      })}
+        $$result,
+        {
+          d: true,
+          m: "S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}"
+        },
+        {},
+        {}
+      )}
 <p>These red math expressions are (katex) svelte components. </p>
 <ul class="${"svelte-1kcug8h"}"><li><strong>Advantage1</strong>: can apply css; the color was done with tailwind and the bounce was done with svelte transition!! <strong>Advantage2</strong>: can use conditional logic (e.g. for loops)</li>
 <li><strong>Disadvantage1</strong>: terrible for inline math expressions. <strong>Disadvantage2</strong>: syntax starts to depart from latex: escaping characters (i.e. \u2019\\\\frac \u2026\u2019) and having to be wrapped within svelte components.</li></ul>
-
-
 <div>${validate_component(Katex, "K").$$render(
         $$result,
         {
@@ -21439,9 +21435,14 @@ ${validate_component(Katex, "K").$$render(
         {},
         {}
       )}</div>
-${each(Array(num), (_2, j2) => {
+${each(Array(200), (_2, j2) => {
+        return `<details class="${"eqns svelte-1kcug8h"}"><summary class="${"svelte-1kcug8h"}"></summary>
+<p><span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span></p>
+</details>`;
+      })}
+${each(Array(200), (_2, j2) => {
         return `<details class="${"eqns svelte-1kcug8h"}"><summary class="${"svelte-1kcug8h"}">..</summary>
-        ${escape(num + j2 + 1)}
+        ${escape(j2 + 1)}
         ${validate_component(Katex, "K").$$render(
           $$result,
           {
@@ -21472,8 +21473,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file6 = "_app/immutable/components/pages/mdsvex_and_katex/_page.md-ce38dbbf.js";
-    imports6 = ["_app/immutable/components/pages/mdsvex_and_katex/_page.md-ce38dbbf.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-188585a8.js"];
+    file6 = "_app/immutable/components/pages/mdsvex_and_katex/_page.md-6d218670.js";
+    imports6 = ["_app/immutable/components/pages/mdsvex_and_katex/_page.md-6d218670.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-188585a8.js"];
     stylesheets6 = ["_app/immutable/assets/+page-a71ea255.css"];
   }
 });
@@ -21769,12 +21770,12 @@ function devalue(value) {
     return str;
   }
 }
-function getName(num2) {
+function getName(num) {
   var name4 = "";
   do {
-    name4 = chars[num2 % chars.length] + name4;
-    num2 = ~~(num2 / chars.length) - 1;
-  } while (num2 >= 0);
+    name4 = chars[num % chars.length] + name4;
+    num = ~~(num / chars.length) - 1;
+  } while (num >= 0);
   return reserved.test(name4) ? name4 + "_" : name4;
 }
 function isPrimitive(thing) {
@@ -23720,7 +23721,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-2268d721.js", "imports": ["_app/immutable/start-2268d721.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-76d6729f.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-ebf8bb90.js", "imports": ["_app/immutable/start-ebf8bb90.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-4dfa8a11.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
