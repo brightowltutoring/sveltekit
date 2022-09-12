@@ -306,7 +306,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
-let xPaddingAndMargin = "mx-[4%] md:mx-[7%]";
+let xPaddingAndMargin = "px-[4%] md:px-[7%]";
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;

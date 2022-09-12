@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component7) {
-  current_component = component7;
+function set_current_component(component8) {
+  current_component = component8;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component7, name4) {
-  if (!component7 || !component7.$$render) {
+function validate_component(component8, name4) {
+  if (!component8 || !component8.$$render) {
     if (name4 === "svelte:component")
       name4 += " this={...}";
     throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component7;
+  return component8;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css4) => css4.code).join("\n"),
+          code: Array.from(result.css).map((css5) => css5.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -310,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index7 = 0;
-      while (index7 < str.length) {
-        var eqIdx = str.indexOf("=", index7);
+      var index8 = 0;
+      while (index8 < str.length) {
+        var eqIdx = str.indexOf("=", index8);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index7);
+        var endIdx = str.indexOf(";", index8);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index7 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index8 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index7, eqIdx).trim();
+        var key2 = str.slice(index8, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,7 +331,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index7 = endIdx + 1;
+        index8 = endIdx + 1;
       }
       return obj;
     }
@@ -672,7 +672,7 @@ function customFade(node, { easing = elasticOut, duration = 3e3 }) {
       `
   };
 }
-var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, burgerBreakPoint, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, dark_lightened;
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, burgerBreakPoint, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, light_darkened_half, dark_lightened, dark_lightened_half, elementColor;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
     init_index2();
@@ -712,10 +712,16 @@ var init_store = __esm({
         title: "Plans",
         isCurrent: false
       },
+      faq: {
+        name: "Faq",
+        href: "/faq",
+        title: "faq",
+        isCurrent: false
+      },
       mdsvex_and_katex: {
-        name: "mdsvex-and-katex",
-        href: "/mdsvex-and-katex",
-        title: "mdsvex-and-katex",
+        name: "mdsvex_and_katex",
+        href: "/mdsvex_and_katex",
+        title: "\u2797mdsvex and katex",
         isCurrent: false
       },
       login: {
@@ -729,7 +735,12 @@ var init_store = __esm({
     redirectAfterLoginTimeOut = writable("");
     redirectSetInterval = writable("");
     light_darkened = "rgb(242,247,250)";
+    light_darkened_half = "pink";
     dark_lightened = "rgb(38, 35, 51)";
+    dark_lightened_half = "#8f86b8";
+    elementColor = derived(isDarkMode, ($isDarkMode, set) => {
+      $isDarkMode ? set(dark_lightened_half) : set(light_darkened_half);
+    });
   }
 });
 
@@ -1049,7 +1060,7 @@ var init_layout_svelte = __esm({
       $$unsubscribe_scaleRocket();
       return $$rendered;
     });
-    xPaddingAndMargin = "mx-[4%] md:mx-[7%]";
+    xPaddingAndMargin = "px-[4%] md:px-[7%]";
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $instDeltaY, $$unsubscribe_instDeltaY;
       let $scrollY, $$unsubscribe_scrollY;
@@ -1141,9 +1152,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-daafb389.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-daafb389.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/stores-4bdfc95c.js", "_app/immutable/chunks/singletons-e641f76a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/store-28268c15.js", "_app/immutable/chunks/navigation-a7e873cb.js"];
-    stylesheets = ["_app/immutable/assets/app-6ff37374.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-d77c4f7b.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-d77c4f7b.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/stores-d89a9e3c.js", "_app/immutable/chunks/singletons-848fb667.js", "_app/immutable/chunks/navigation-998099e5.js"];
+    stylesheets = ["_app/immutable/assets/app-301e1bba.css"];
   }
 });
 
@@ -1187,8 +1198,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-f5efbf59.js";
-    imports2 = ["_app/immutable/components/error.svelte-f5efbf59.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-4bdfc95c.js", "_app/immutable/chunks/singletons-e641f76a.js", "_app/immutable/chunks/index-b80a8d4d.js"];
+    file2 = "_app/immutable/components/error.svelte-69effb5b.js";
+    imports2 = ["_app/immutable/components/error.svelte-69effb5b.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-d89a9e3c.js", "_app/immutable/chunks/singletons-848fb667.js", "_app/immutable/chunks/index-b80a8d4d.js"];
     stylesheets2 = [];
   }
 });
@@ -6612,8 +6623,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index7) => (n2) => {
-          nodes.splice(index7 + 1, 0, n2);
+        prev.insertAfter = ((index8) => (n2) => {
+          nodes.splice(index8 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -11897,13 +11908,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index7 = optArgs[0];
+        var index8 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index7
+          index: index8
         };
       },
       htmlBuilder(group, options) {
@@ -11969,9 +11980,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index7
+          index: index8
         } = group;
-        return index7 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index7, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index8 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index8, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -14851,21 +14862,14 @@ var init_Katex = __esm({
       let { d: d2 = false } = $$props;
       let { m: m2 } = $$props;
       const options = { displayMode: d2, throwOnError: false };
-      let { tr } = $$props;
       if ($$props.d === void 0 && $$bindings.d && d2 !== void 0)
         $$bindings.d(d2);
       if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
         $$bindings.m(m2);
-      if ($$props.tr === void 0 && $$bindings.tr && tr !== void 0)
-        $$bindings.tr(tr);
       katexString = katex.renderToString(m2, options);
       return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-bnfb8z">`, ""}
 
-
-
-<!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->
-
-`;
+<!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->`;
     });
   }
 });
@@ -14907,12 +14911,12 @@ var init_page_svelte = __esm({
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
       let equations = [
-        "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}",
-        "\\prod_{i=a}^{b} f(i)",
-        "k = \\frac{aL}{At} \\ln \\frac{h_0}{h_t}",
-        "\\left( \\sum_{k=1}^n a_k b_k \\right)^2 \\leq \\left( \\sum_{k=1}^n a_k^2 \\right) \\left( \\sum_{k=1}^n b_k^2 \\right)",
-        " i\\hbar\\gamma^\\mu \\partial_\\mu \\psi - mc\\psi = 0 ",
-        "R_{\\mu \\nu} - {1 \\over 2}g_{\\mu \\nu}\\,R + g_{\\mu \\nu} \\Lambda = \n {8 \\pi G \\over c^4} T_{\\mu \\nu}"
+        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c",
+        "e^{i x}=\\cos x+i\\sin x"
       ];
       $$unsubscribe_isDarkMode();
       return `<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {
@@ -14957,9 +14961,144 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-828e4e32.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-828e4e32.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-28268c15.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/Katex-2484979a.js", "_app/immutable/chunks/navigation-a7e873cb.js", "_app/immutable/chunks/singletons-e641f76a.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
-    stylesheets3 = ["_app/immutable/assets/app-6ff37374.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-c2484f64.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-c2484f64.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-188585a8.js", "_app/immutable/chunks/navigation-998099e5.js", "_app/immutable/chunks/singletons-848fb667.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    stylesheets3 = ["_app/immutable/assets/app-301e1bba.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/faq/_page.svelte.js
+var page_svelte_exports2 = {};
+__export(page_svelte_exports2, {
+  default: () => Page2
+});
+var css, Page2;
+var init_page_svelte2 = __esm({
+  ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
+    init_chunks();
+    css = {
+      code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
+      map: null
+    };
+    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css);
+      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
+  </summary>
+
+  <p class="${"svelte-63m8nq"}">In terms of personalized service: we offer 1-on-1 tutoring, mock test
+    sessions with solution keys, video links, and session notes; see <a>/plans</a>
+    for details.
+    <br><br>
+    We are also in the process of creating a
+    <a href="${"https://www.brightowltutoring.com/login"}">login-based</a>
+    service; users will have access to <i>interactive</i> quizzes &amp; exam-question
+    video solutions.
+  </p>
+  <p style="${"font-size:12pt"}" class="${"svelte-63m8nq"}"><b>Note</b>: we <i>only</i> provide online/digital solutions. We are so
+    confident in our workflow that we offer
+    <a>a free demo session</a> of up to 20 minutes to show it off.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q2</b> How do I pay? </summary>
+  <p class="${"svelte-63m8nq"}">On <a>/plans</a>
+    build out a custom plan and we send you an invoice based on your selections.<br><br>
+    Alternatively you can toggle &quot;off&quot; to choose amongst pay-now options.
+  </p>
+
+  <p style="${"font-size:13pt; color:#777;"}" class="${"svelte-63m8nq"}">We use STRIPE to securely process all transactions \u2014 in use by companies
+    such as Google, Amazon and Shopify.
+  </p></details>
+
+<details open class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q3</b> How do I book multiple sessions at once?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Book a session on our <a>plans</a> page, and click &quot;<a>\u279C Schedule another event</a>&quot; on the confirmation page.
+    <i>If booked already, we can also book the remaining dates for you at the end
+      of the live session</i>.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q4</b> How do I share homework? </summary>
+  <p class="${"svelte-63m8nq"}">On your mobile device: go to <a>/homework</a> &gt; click Upload &gt; snap a
+    picture &gt; Submit. <i>We convert each image into clean formatted text.</i></p>
+  <p class="${"svelte-63m8nq"}">Similar steps for PC. <span style="${"font-size:12pt; font-style:italic"}">Accepted file extensions: .png, .jpg, .jpeg, .heic, .pdf, .txt, .rtf,
+      .doc, .docx, .odt, .csv, .tex, .xls, .xlsx, .ods, .ppt, .pptx.</span></p>
+
+  <p class="${"svelte-63m8nq"}"><span style="${"font-size:12pt; font-style:italic"}">For last second submissions, you may also point your homework at the
+      webcam during the live session.</span></p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q5</b> Which screen-sharing software are we using? Zoom?
+  </summary>
+  <p class="${"svelte-63m8nq"}"><a href="${"https://zoom.us/download"}">Zoom</a>,
+    <a href="${"https://www.teamviewer.com/en-us/meeting/"}">TeamViewer Meeting</a>,
+    or
+    <a href="${"https://www.microsoft.com/en-ca/microsoft-teams/group-chat-software"}">Microsoft Teams</a>
+    \u2014 these provide the smoothest screensharing experience. Click the links to download
+    or visit <a>/screenshare</a> for more info.
+
+    <br> <b>Note:</b> No sign-up required to use TeamViewer Meeting; we use this
+    exclusively for group sessions.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q6</b> What subjects do you cover? </summary>
+
+  <p class="${"svelte-63m8nq"}"><b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University <br><br>
+
+    <b>MATHEMATICS</b>\xA0 Calculus \u2022 Trigonometry \u2022 Advanced Functions \u2022
+    Complex Numbers \u2022 Linear Algebra \u2022 Probability and Statistics \xA0\xA0<b>PHYSICS</b>
+    \xA0\xA0 Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp;
+    Magnetism \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special
+    Relativity \xA0\xA0<b>SPANISH</b> \xA0\xA0 Pronunciation \u2022 Grammatical
+    Rules \u2022 Practical Examples
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q7</b> How are mock tests/ Mockowl sessions administered?
+  </summary>
+  <p class="${"svelte-63m8nq"}">The student attends a live session where we implement Google Forms. Answer
+    keys are released within an hour of completion. <i>Digitally-handwritten solution key available as a premium.</i> <br><br>
+
+    We are soon implementing a content-based subscription plan; see our sample
+    quiz app on the <a href="${"https://www.brightowltutoring.com/"}">home page</a> for
+    a preview.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q8</b> I am looking to refer a friend, do you offer any discounts based on
+    referrals?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Great question! We absolutely welcome this initiative and are pleased to
+    reward it; please visit our <a>/referrals</a> page. <br><br>
+
+    Alternatively <i>if</i> filling out an invoice-based <a>plan</a>, you will
+    have a chance to input a referral.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q9 </b>Is it possible to access all my session content in one place?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Sure can! Secure a unique URL for $5/month while booking or <a>contact us directly</a>
+    (<a href="${"https://www.brightowltutoring.com/url"}">\u{1F4AB} sample URL</a>).
+  </p>
+</details>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/3.js
+var __exports4 = {};
+__export(__exports4, {
+  component: () => component4,
+  file: () => file4,
+  imports: () => imports4,
+  index: () => index4,
+  stylesheets: () => stylesheets4
+});
+var index4, component4, file4, imports4, stylesheets4;
+var init__4 = __esm({
+  ".svelte-kit/output/server/nodes/3.js"() {
+    index4 = 3;
+    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
+    file4 = "_app/immutable/components/pages/faq/_page.svelte-299f874d.js";
+    imports4 = ["_app/immutable/components/pages/faq/_page.svelte-299f874d.js", "_app/immutable/chunks/index-c3c96927.js"];
+    stylesheets4 = ["_app/immutable/assets/+page-113a1f72.css"];
   }
 });
 
@@ -15470,8 +15609,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component7) {
-  return component7.instantiationMode === "EAGER";
+function isComponentEager(component8) {
+  return component8.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -15561,18 +15700,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component7) {
-        if (component7.name !== this.name) {
-          throw Error(`Mismatching Component ${component7.name} for Provider ${this.name}.`);
+      setComponent(component8) {
+        if (component8.name !== this.name) {
+          throw Error(`Mismatching Component ${component8.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component7;
+        this.component = component8;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component7)) {
+        if (isComponentEager(component8)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -15692,19 +15831,19 @@ var init_index_esm20172 = __esm({
         this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component7) {
-        const provider = this.getProvider(component7.name);
+      addComponent(component8) {
+        const provider = this.getProvider(component8.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component7.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component8.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component7);
+        provider.setComponent(component8);
       }
-      addOrOverwriteComponent(component7) {
-        const provider = this.getProvider(component7.name);
+      addOrOverwriteComponent(component8) {
+        const provider = this.getProvider(component8.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component7.name);
+          this.providers.delete(component8.name);
         }
-        this.addComponent(component7);
+        this.addComponent(component8);
       }
       getProvider(name4) {
         if (this.providers.has(name4)) {
@@ -16030,25 +16169,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component7 = provider.getComponent();
-  return (component7 === null || component7 === void 0 ? void 0 : component7.type) === "VERSION";
+  const component8 = provider.getComponent();
+  return (component8 === null || component8 === void 0 ? void 0 : component8.type) === "VERSION";
 }
-function _addComponent(app2, component7) {
+function _addComponent(app2, component8) {
   try {
-    app2.container.addComponent(component7);
+    app2.container.addComponent(component8);
   } catch (e3) {
-    logger.debug(`Component ${component7.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component8.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component7) {
-  const componentName = component7.name;
+function _registerComponent(component8) {
+  const componentName = component8.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component7);
+  _components.set(componentName, component8);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component7);
+    _addComponent(app2, component8);
   }
   return true;
 }
@@ -16080,8 +16219,8 @@ function initializeApp(options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name4);
-  for (const component7 of _components.values()) {
-    container.addComponent(component7);
+  for (const component8 of _components.values()) {
+    container.addComponent(component8);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name4, newApp);
@@ -18662,9 +18801,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index7 = this.queue.length - 1;
+        const index8 = this.queue.length - 1;
         return () => {
-          this.queue[index7] = () => Promise.resolve();
+          this.queue[index8] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -21123,12 +21262,12 @@ var init_index_esm3 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/login/_page.svelte.js
-var page_svelte_exports2 = {};
-__export(page_svelte_exports2, {
-  default: () => Page2
+var page_svelte_exports3 = {};
+__export(page_svelte_exports3, {
+  default: () => Page3
 });
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css, Page2;
-var init_page_svelte2 = __esm({
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css2, Page3;
+var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
     init_store();
@@ -21153,11 +21292,11 @@ var init_page_svelte2 = __esm({
     app = initializeApp(firebaseConfig);
     getAuth(app);
     ln(app);
-    css = {
+    css2 = {
       code: '#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1k1mjbo.svelte-1k1mjbo{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1k1mjbo.svelte-1k1mjbo{margin:0px auto;width:25vw;min-width:280px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo,button.svelte-1k1mjbo.svelte-1k1mjbo{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:hover{border:1px solid #999}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center}',
       map: null
     };
-    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_redirectAfterLoginTimeOut;
       let $$unsubscribe_redirectSetInterval;
       let $$unsubscribe_isLoggedIn;
@@ -21165,7 +21304,7 @@ var init_page_svelte2 = __esm({
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       let emailFieldValue = "";
-      $$result.css.add(css);
+      $$result.css.add(css2);
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_isLoggedIn();
@@ -21195,114 +21334,6 @@ var init_page_svelte2 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/3.js
-var __exports4 = {};
-__export(__exports4, {
-  component: () => component4,
-  file: () => file4,
-  imports: () => imports4,
-  index: () => index4,
-  stylesheets: () => stylesheets4
-});
-var index4, component4, file4, imports4, stylesheets4;
-var init__4 = __esm({
-  ".svelte-kit/output/server/nodes/3.js"() {
-    index4 = 3;
-    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/login/_page.svelte-f1a65cb1.js";
-    imports4 = ["_app/immutable/components/pages/login/_page.svelte-f1a65cb1.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-28268c15.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js", "_app/immutable/chunks/navigation-a7e873cb.js", "_app/immutable/chunks/singletons-e641f76a.js"];
-    stylesheets4 = ["_app/immutable/assets/+page-6074a07d.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/mdsvex-and-katex/_page.md.js
-var page_md_exports = {};
-__export(page_md_exports, {
-  default: () => Page3
-});
-var css2, Page3;
-var init_page_md = __esm({
-  ".svelte-kit/output/server/entries/pages/mdsvex-and-katex/_page.md.js"() {
-    init_chunks();
-    init_Katex();
-    init_katex();
-    css2 = {
-      code: "blockquote.svelte-1m42o73{margin:0;padding-left:1.4rem;border-left:8px solid #bbb}ul.svelte-1m42o73{list-style-type:disc;list-style-position:inside}h1.svelte-1m42o73{font-size:1.5rem;line-height:2rem}",
-      map: null
-    };
-    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let x2 = 2;
-      $$result.css.add(css2);
-      return `
-<h1 class="${"svelte-1m42o73"}">The content on this page is written in a markdown file, which uses html, css, svelte components \u2026thanks to MDsveX + plugins!</h1>
-
-<div class="${"h-6"}"></div>
-<p>The black math expressions are written in markdown. </p>
-<ul class="${"svelte-1m42o73"}"><li><strong>Advantage1</strong>: writing lots of inline math expressions \u2014 e.g. \u201C..the general Einsteinian equation is <strong>NOT</strong> <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> \u2014 bur rather <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>E</mi><mn>2</mn></msup><mo>=</mo><msup><mi>m</mi><mn>2</mn></msup><msup><mi>c</mi><mn>4</mn></msup><mo>+</mo><msup><mi>p</mi><mn>2</mn></msup><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E^2=m^2c^4 + p^2c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0085em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>\u2026\u201D\u2014 is much simpler with markdown. <strong>Advantage2</strong>: Markdown math has identical syntax to Latex. </li>
-<li><strong>Disadvantage</strong>: cannot apply css directly to math expression</li></ul>
-<blockquote class="${"svelte-1m42o73"}"><p>The base \u201C2\u201D here \u2014 <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">x=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span>'}<!-- HTML_TAG_END --></span>${escape(x2)}<span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>\u2026 \u2014  is taken from script variable. </p>
-<button class="${"bg-red-100 p-2"}">increment</button>
-<button class="${"bg-red-100 p-2"}">decrement</button></blockquote>
-<blockquote class="${"svelte-1m42o73"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mi>A</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><mi>\u03C0</mi><msup><mi>r</mi><mn>2</mn></msup></mrow><mn>2</mn></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>\u03C0</mi><msup><mi>r</mi><mn>2</mn></msup></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\\begin{aligned}\nA &amp; = \\frac{\\pi r^2}{2} \\\\\n&amp; = \\frac{1}{2} \\pi r^2\n\\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.7845em;vertical-align:-2.1423em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6423em;"><span style="top:-4.6423em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord mathnormal">A</span></span></span><span style="top:-2.3348em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:2.1423em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6423em;"><span style="top:-4.6423em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">\u03C0</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.3348em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.03588em;">\u03C0</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:2.1423em;"><span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div></blockquote>
-
-<p>These red math expressions are (katex) svelte components. </p>
-<ul class="${"svelte-1m42o73"}"><li><strong>Advantage1</strong>: can apply css; the color was done with tailwind and the bounce was done with svelte transition!! <strong>Advantage2</strong>: can use conditional logic (e.g. for loops)</li>
-<li><strong>Disadvantage1</strong>: terrible for inline math expressions. <strong>Disadvantage2</strong>: syntax starts to depart from latex: escaping characters (i.e. \u2019\\\\frac \u2026\u2019) and having to be wrapped within svelte components.</li></ul>
-${each(Array(3), (_2, i) => {
-        return `
-<div class="${"text-red-500"}">${validate_component(Katex, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
-          },
-          {},
-          {}
-        )}
-	${validate_component(Katex, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: "\\prod_{i=a}^{b} f(i)"
-          },
-          {},
-          {}
-        )}
-	${validate_component(Katex, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: " A \\overset{!}{=} B; A \\stackrel{!}{=} B"
-          },
-          {},
-          {}
-        )}
-	${validate_component(Katex, "K").$$render(
-          $$result,
-          {
-            m: "k = \\frac{aL}{At} \\ln \\frac{h_0}{h_t}"
-          },
-          {},
-          {}
-        )}
-	${validate_component(Katex, "K").$$render($$result, { d: true, m: "I=\\int_0^1 f(x) dx" }, {}, {})}
-	${validate_component(Katex, "K").$$render($$result, { d: true, m: "\\frac{x}{3}" }, {}, {})}
-	${validate_component(Katex, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: "S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}"
-          },
-          {},
-          {}
-        )}
-</div>`;
-      })}
-`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/4.js
 var __exports5 = {};
 __export(__exports5, {
@@ -21316,20 +21347,125 @@ var index5, component5, file5, imports5, stylesheets5;
 var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
-    component5 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file5 = "_app/immutable/components/pages/mdsvex-and-katex/_page.md-4c5b78a4.js";
-    imports5 = ["_app/immutable/components/pages/mdsvex-and-katex/_page.md-4c5b78a4.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/Katex-2484979a.js", "_app/immutable/chunks/index-406aa5de.js"];
-    stylesheets5 = ["_app/immutable/assets/+page-00d95502.css"];
+    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
+    file5 = "_app/immutable/components/pages/login/_page.svelte-63b4e5fd.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-63b4e5fd.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/navigation-998099e5.js", "_app/immutable/chunks/singletons-848fb667.js"];
+    stylesheets5 = ["_app/immutable/assets/+page-6074a07d.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/mdsvex_and_katex/_page.md.js
+var page_md_exports = {};
+__export(page_md_exports, {
+  default: () => Page4
+});
+var css3, num, Page4;
+var init_page_md = __esm({
+  ".svelte-kit/output/server/entries/pages/mdsvex_and_katex/_page.md.js"() {
+    init_chunks();
+    init_store();
+    init_Katex();
+    init_index2();
+    init_katex();
+    css3 = {
+      code: ".eqns.svelte-1iupczg{display:block}.eqns.hide.svelte-1iupczg{display:none}blockquote.svelte-1iupczg{margin:0;padding-left:1.4rem;border-left:8px solid #bbb}ul.svelte-1iupczg{list-style-type:disc;list-style-position:inside}h1.svelte-1iupczg{font-size:1.5rem;line-height:2rem}",
+      map: null
+    };
+    num = 100;
+    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let buttonColorTransition;
+      let $elementColor, $$unsubscribe_elementColor;
+      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
+      let x2 = 2;
+      $$result.css.add(css3);
+      buttonColorTransition = `background: ${$elementColor};transition: background-color 0.4s cubic-bezier(0.64, 0, 0.78, 0)`;
+      $$unsubscribe_elementColor();
+      return `
+<h1 class="${"svelte-1iupczg"}">The content on this page is written in a markdown file, which uses html, css, svelte components \u2026thanks to MDsveX + plugins!</h1>
+<p>\xA0</p>
+
+<p>The black math expressions are written in markdown. </p>
+<ul class="${"svelte-1iupczg"}"><li><strong>Advantage1</strong>: writing lots of inline math expressions \u2014 e.g. \u201C..the general Einsteinian equation is <strong>NOT</strong> <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> \u2014 bur rather <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>E</mi><mn>3</mn></msup><mo>=</mo><msup><mi>m</mi><mn>2</mn></msup><msup><mi>c</mi><mn>4</mn></msup><mo>+</mo><msup><mi>p</mi><mn>2</mn></msup><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E^3=m^2c^4 + p^2c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0085em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>\u2026\u201D\u2014 is much simpler with markdown. <strong>Advantage2</strong>: Markdown math has identical syntax to Latex. </li>
+<li><strong>Disadvantage</strong>: cannot apply css directly to math expression</li></ul>
+<blockquote class="${"svelte-1iupczg"}"><p>The base \u201C2\u201D here \u2014 <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">x=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span>'}<!-- HTML_TAG_END --></span>${escape(x2)}<span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>\u2026 \u2014  is taken from script variable. </p>
+<button class="${"p-2 shadow-2xl"}"${add_attribute("style", buttonColorTransition, 0)}>increment</button>
+<button class="${"p-2 shadow-2xl"}"${add_attribute("style", buttonColorTransition, 0)}>decrement</button></blockquote>
+
+
+${each(Array(num), (_2, j2) => {
+        return `<span class="${"eqns hide svelte-1iupczg"}">${escape(j2 + 1)}
+<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mi>A</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><mi>\u03C0</mi><msup><mi>r</mi><mn>2</mn></msup></mrow><mn>2</mn></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>\u03C0</mi><msup><mi>r</mi><mn>2</mn></msup></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\\begin{aligned}\nA &amp; = \\frac{\\pi r^2}{2} \\\\\n&amp; = \\frac{1}{2} \\pi r^2\n\\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.7845em;vertical-align:-2.1423em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6423em;"><span style="top:-4.6423em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord mathnormal">A</span></span></span><span style="top:-2.3348em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:2.1423em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6423em;"><span style="top:-4.6423em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">\u03C0</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.3348em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.03588em;">\u03C0</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:2.1423em;"><span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>
+</span>`;
+      })}
+<p>These red math expressions are (katex) svelte components. </p>
+<ul class="${"svelte-1iupczg"}"><li><strong>Advantage1</strong>: can apply css; the color was done with tailwind and the bounce was done with svelte transition!! <strong>Advantage2</strong>: can use conditional logic (e.g. for loops)</li>
+<li><strong>Disadvantage1</strong>: terrible for inline math expressions. <strong>Disadvantage2</strong>: syntax starts to depart from latex: escaping characters (i.e. \u2019\\\\frac \u2026\u2019) and having to be wrapped within svelte components.</li></ul>
+
+
+<div>${validate_component(Katex, "K").$$render(
+        $$result,
+        {
+          d: true,
+          m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
+        },
+        {},
+        {}
+      )}
+	${validate_component(Katex, "K").$$render($$result, { d: true, m: "I=\\int_0^1 f(x) dx" }, {}, {})}
+	${validate_component(Katex, "K").$$render(
+        $$result,
+        {
+          d: true,
+          m: "S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}"
+        },
+        {},
+        {}
+      )}</div>
+${each(Array(num), (_2, j2) => {
+        return `<div class="${"eqns hide svelte-1iupczg"}">${escape(num + j2 + 1)}
+        ${validate_component(Katex, "K").$$render(
+          $$result,
+          {
+            d: true,
+            m: "\\prod_{i=a}^{b} f(i)"
+          },
+          {},
+          {}
+        )}
+    </div>`;
+      })}
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/5.js
+var __exports6 = {};
+__export(__exports6, {
+  component: () => component6,
+  file: () => file6,
+  imports: () => imports6,
+  index: () => index6,
+  stylesheets: () => stylesheets6
+});
+var index6, component6, file6, imports6, stylesheets6;
+var init__6 = __esm({
+  ".svelte-kit/output/server/nodes/5.js"() {
+    index6 = 5;
+    component6 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
+    file6 = "_app/immutable/components/pages/mdsvex_and_katex/_page.md-60b13fb8.js";
+    imports6 = ["_app/immutable/components/pages/mdsvex_and_katex/_page.md-60b13fb8.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-188585a8.js"];
+    stylesheets6 = ["_app/immutable/assets/+page-f44377c3.css"];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/plans/_page.svelte.js
-var page_svelte_exports3 = {};
-__export(page_svelte_exports3, {
-  default: () => Page4
+var page_svelte_exports4 = {};
+__export(page_svelte_exports4, {
+  default: () => Page5
 });
-var css$1, PlansCard, css3, Page4;
-var init_page_svelte3 = __esm({
+var css$1, PlansCard, css4, Page5;
+var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
     init_store();
@@ -21371,11 +21507,11 @@ var init_page_svelte3 = __esm({
   
 </div>`;
     });
-    css3 = {
+    css4 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
-    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const plansCardArray = [
         {
           card: 1,
@@ -21399,7 +21535,7 @@ var init_page_svelte3 = __esm({
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
       ];
-      $$result.css.add(css3);
+      $$result.css.add(css4);
       return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
 
 
@@ -21429,23 +21565,23 @@ var init_page_svelte3 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/5.js
-var __exports6 = {};
-__export(__exports6, {
-  component: () => component6,
-  file: () => file6,
-  imports: () => imports6,
-  index: () => index6,
-  stylesheets: () => stylesheets6
+// .svelte-kit/output/server/nodes/6.js
+var __exports7 = {};
+__export(__exports7, {
+  component: () => component7,
+  file: () => file7,
+  imports: () => imports7,
+  index: () => index7,
+  stylesheets: () => stylesheets7
 });
-var index6, component6, file6, imports6, stylesheets6;
-var init__6 = __esm({
-  ".svelte-kit/output/server/nodes/5.js"() {
-    index6 = 5;
-    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/plans/_page.svelte-5577c441.js";
-    imports6 = ["_app/immutable/components/pages/plans/_page.svelte-5577c441.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-28268c15.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/index-406aa5de.js"];
-    stylesheets6 = ["_app/immutable/assets/+page-ebab19d4.css"];
+var index7, component7, file7, imports7, stylesheets7;
+var init__7 = __esm({
+  ".svelte-kit/output/server/nodes/6.js"() {
+    index7 = 6;
+    component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
+    file7 = "_app/immutable/components/pages/plans/_page.svelte-1c6ef72e.js";
+    imports7 = ["_app/immutable/components/pages/plans/_page.svelte-1c6ef72e.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-92e6e95a.js", "_app/immutable/chunks/index-b80a8d4d.js"];
+    stylesheets7 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
 
@@ -21614,12 +21750,12 @@ function devalue(value) {
     return str;
   }
 }
-function getName(num) {
+function getName(num2) {
   var name4 = "";
   do {
-    name4 = chars[num % chars.length] + name4;
-    num = ~~(num / chars.length) - 1;
-  } while (num >= 0);
+    name4 = chars[num2 % chars.length] + name4;
+    num2 = ~~(num2 / chars.length) - 1;
+  } while (num2 >= 0);
   return reserved.test(name4) ? name4 + "_" : name4;
 }
 function isPrimitive(thing) {
@@ -22286,7 +22422,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets7 = new Set(entry.stylesheets);
+  const stylesheets8 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -22336,7 +22472,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets7.add(url));
+        node.stylesheets.forEach((url) => stylesheets8.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -22399,7 +22535,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets7) {
+  for (const dep of stylesheets8) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -22655,14 +22791,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file7 = is_asset ? filename : filename_html;
+      const file8 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file7), {
+        response = new Response(options.read(file8), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file7}`, opts);
+        response = await fetch(`${event.url.origin}/${file8}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23023,8 +23159,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index7 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index7]();
+              const index8 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index8]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -23565,14 +23701,15 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.png", "reviews/review-efe-bare.png", "reviews/review-miranda-bare.png", "reviews/review-paola-bare.png", "reviews/review-rob-bare.png", "reviews/review-tj-bare.png", "reviews/review-zaara-bare.png"]),
   mimeTypes: { ".mp4": "video/mp4", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-8c97bb5f.js", "imports": ["_app/immutable/start-8c97bb5f.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-e641f76a.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-1aa42e43.js", "imports": ["_app/immutable/start-1aa42e43.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-848fb667.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
       () => Promise.resolve().then(() => (init__3(), __exports3)),
       () => Promise.resolve().then(() => (init__4(), __exports4)),
       () => Promise.resolve().then(() => (init__5(), __exports5)),
-      () => Promise.resolve().then(() => (init__6(), __exports6))
+      () => Promise.resolve().then(() => (init__6(), __exports6)),
+      () => Promise.resolve().then(() => (init__7(), __exports7))
     ],
     routes: [
       {
@@ -23587,8 +23724,8 @@ var manifest = {
       },
       {
         type: "page",
-        id: "login",
-        pattern: /^\/login\/?$/,
+        id: "faq",
+        pattern: /^\/faq\/?$/,
         names: [],
         types: [],
         errors: [1],
@@ -23597,13 +23734,23 @@ var manifest = {
       },
       {
         type: "page",
-        id: "mdsvex-and-katex",
-        pattern: /^\/mdsvex-and-katex\/?$/,
+        id: "login",
+        pattern: /^\/login\/?$/,
         names: [],
         types: [],
         errors: [1],
         layouts: [0],
         leaf: 4
+      },
+      {
+        type: "page",
+        id: "mdsvex_and_katex",
+        pattern: /^\/mdsvex_and_katex\/?$/,
+        names: [],
+        types: [],
+        errors: [1],
+        layouts: [0],
+        leaf: 5
       },
       {
         type: "page",
@@ -23613,7 +23760,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 5
+        leaf: 6
       }
     ],
     matchers: async () => {
@@ -23676,12 +23823,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file7 = pathname.substring(1);
+      let file8 = pathname.substring(1);
       try {
-        file7 = decodeURIComponent(file7);
+        file8 = decodeURIComponent(file8);
       } catch (err) {
       }
-      if (manifest.assets.has(file7) || manifest.assets.has(file7 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file8) || manifest.assets.has(file8 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

@@ -27,12 +27,12 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
   let equations = [
-    "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}",
-    "\\prod_{i=a}^{b} f(i)",
-    "k = \\frac{aL}{At} \\ln \\frac{h_0}{h_t}",
-    "\\left( \\sum_{k=1}^n a_k b_k \\right)^2 \\leq \\left( \\sum_{k=1}^n a_k^2 \\right) \\left( \\sum_{k=1}^n b_k^2 \\right)",
-    " i\\hbar\\gamma^\\mu \\partial_\\mu \\psi - mc\\psi = 0 ",
-    "R_{\\mu \\nu} - {1 \\over 2}g_{\\mu \\nu}\\,R + g_{\\mu \\nu} \\Lambda = \n {8 \\pi G \\over c^4} T_{\\mu \\nu}"
+    "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+    "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+    " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+    "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+    "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c",
+    "e^{i x}=\\cos x+i\\sin x"
   ];
   $$unsubscribe_isDarkMode();
   return `<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {

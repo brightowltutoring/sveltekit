@@ -61,7 +61,7 @@
       jankytown = "backdrop-blur-3xl top-0";
   }
 
-  let xPaddingAndMargin = "mx-[4%] md:mx-[7%]";
+  let xPaddingAndMargin = "px-[4%] md:px-[7%]";
 </script>
 
 <svelte:head>

@@ -13,7 +13,6 @@ import { quintOut, elasticOut } from 'svelte/easing'
 //   }
 // }
 
-
 export function customEase(t){
 
     // supercon function
@@ -111,10 +110,16 @@ export const routes = writable({
     title: "Plans",
     isCurrent: false,
   }, 
+  faq: {
+    name:'Faq',
+    href: "/faq",
+    title: "faq",
+    isCurrent: false,
+  }, 
   mdsvex_and_katex: {
-    name:'mdsvex-and-katex',
-    href: "/mdsvex-and-katex",
-    title: "mdsvex-and-katex",
+    name:'mdsvex_and_katex',
+    href: "/mdsvex_and_katex",
+    title: "➗mdsvex and katex",
     isCurrent: false,
   }, 
   login: {

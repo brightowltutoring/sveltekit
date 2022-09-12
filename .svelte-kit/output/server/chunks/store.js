@@ -48,10 +48,16 @@ const routes = writable({
     title: "Plans",
     isCurrent: false
   },
+  faq: {
+    name: "Faq",
+    href: "/faq",
+    title: "faq",
+    isCurrent: false
+  },
   mdsvex_and_katex: {
-    name: "mdsvex-and-katex",
-    href: "/mdsvex-and-katex",
-    title: "mdsvex-and-katex",
+    name: "mdsvex_and_katex",
+    href: "/mdsvex_and_katex",
+    title: "\u2797mdsvex and katex",
     isCurrent: false
   },
   login: {
@@ -65,7 +71,12 @@ const isDarkMode = writable(false);
 const redirectAfterLoginTimeOut = writable("");
 const redirectSetInterval = writable("");
 const light_darkened = "rgb(242,247,250)";
+const light_darkened_half = "pink";
 const dark_lightened = "rgb(38, 35, 51)";
+const dark_lightened_half = "#8f86b8";
+const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
+  $isDarkMode ? set(dark_lightened_half) : set(light_darkened_half);
+});
 export {
   redirectSetInterval as a,
   burgerBreakPoint as b,
@@ -74,9 +85,10 @@ export {
   isLoggedIn as e,
   scrollYMax as f,
   innerWidth as g,
-  dark_lightened as h,
+  elementColor as h,
   isDarkMode as i,
-  light_darkened as j,
+  dark_lightened as j,
+  light_darkened as k,
   lastScrollY as l,
   redirectAfterLoginTimeOut as r,
   scrollY as s,

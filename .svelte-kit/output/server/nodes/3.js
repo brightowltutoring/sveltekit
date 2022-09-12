@@ -1,7 +1,7 @@
 
 
 export const index = 3;
-export const component = async () => (await import('../entries/pages/login/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/login/_page.svelte-f1a65cb1.js';
-export const imports = ["_app/immutable/components/pages/login/_page.svelte-f1a65cb1.js","_app/immutable/chunks/index-c3c96927.js","_app/immutable/chunks/store-28268c15.js","_app/immutable/chunks/index-b80a8d4d.js","_app/immutable/chunks/index-406aa5de.js","_app/immutable/chunks/navigation-a7e873cb.js","_app/immutable/chunks/singletons-e641f76a.js"];
-export const stylesheets = ["_app/immutable/assets/+page-6074a07d.css"];
+export const component = async () => (await import('../entries/pages/faq/_page.svelte.js')).default;
+export const file = '_app/immutable/components/pages/faq/_page.svelte-299f874d.js';
+export const imports = ["_app/immutable/components/pages/faq/_page.svelte-299f874d.js","_app/immutable/chunks/index-c3c96927.js"];
+export const stylesheets = ["_app/immutable/assets/+page-113a1f72.css"];

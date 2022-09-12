@@ -1,1 +1,1 @@
-export { default as component } from "../../../src/routes/mdsvex-and-katex/+page.md";
+export { default as component } from "../../../src/routes/login/+page.svelte";

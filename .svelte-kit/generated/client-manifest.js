@@ -6,12 +6,14 @@ export const nodes = [
 	() => import('./nodes/2'),
 	() => import('./nodes/3'),
 	() => import('./nodes/4'),
-	() => import('./nodes/5')
+	() => import('./nodes/5'),
+	() => import('./nodes/6')
 ];
 
 export const dictionary = {
 	"": [[1], [0], 2],
-	"login": [[1], [0], 3],
-	"mdsvex-and-katex": [[1], [0], 4],
-	"plans": [[1], [0], 5]
+	"faq": [[1], [0], 3],
+	"login": [[1], [0], 4],
+	"mdsvex_and_katex": [[1], [0], 5],
+	"plans": [[1], [0], 6]
 };

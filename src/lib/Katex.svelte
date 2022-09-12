@@ -8,13 +8,7 @@
     throwOnError: false,
   };
 
-  // $: katexString = katex.renderToString(math, options);
   $: katexString = katex.renderToString(m, options);
-
-  import { scale, fade, slide, fly } from "svelte/transition";
-  import { elasticOut, quintOut } from "svelte/easing";
-
-  export let tr;
 </script>
 
 <svelte:head>
@@ -26,12 +20,4 @@
   />
 </svelte:head>
 
-<!-- {#if tr }
-	<p in:fly={{x:25, duration:800, easing:quintOut }}>
-		{@html katexString}
-	</p>
-{:else } -->
-
 {@html katexString}
-
-<!-- {/if} -->
