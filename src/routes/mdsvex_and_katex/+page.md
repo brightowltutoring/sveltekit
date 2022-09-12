@@ -9,62 +9,40 @@
 
     let x = 2
 
-    function scaleHueElastic(node, { delay = 0, duration = 400, easing=elasticOut }) {
-		const o = +getComputedStyle(node).opacity;
 
-		return {
-			delay,
-			duration,
-            easing,
-			css: (t) => `
-            transform: scale(${t});
-            filter: hue-rotate(${t*2}turn);
-            `
-		};
-	}
-
-$: buttonColorTransition = `background: ${$elementColor};transition: background-color 0.4s cubic-bezier(0.64, 0, 0.78, 0)`
+    $: buttonColorTransition = `background: ${$elementColor};transition: background-color 0.4s cubic-bezier(0.64, 0, 0.78, 0)`
 
 
 
-import { onMount } from 'svelte'
-let eqns=[];
+    import { onMount } from 'svelte'
+    let eqns=[];
+    let observer
 
-let observer
-onMount(()=>{
+    onMount(()=>{
+
+        eqns = document.querySelectorAll(".eqns")
+        const options = {
+            root: null,
+            threshold: 1,
+            rootMargin:"0px"
+        }
+
+        observer = new IntersectionObserver( (entries,observer) => {
+            entries.forEach( entry => {
+                console.log(entry);
+                if(!entry.isIntersecting) { return } // breaks here if condition not met
+                // entry.target.open = entry.isIntersecting
+                entry.target.open = true
+                entry.target.classList.remove("hide")
+                observer.unobserve(entry.target)
+            })
+        }, options)
+
+        for(let eqn of eqns) { observer.observe(eqn) }
+            
+    })
 
 
-    eqns = document.querySelectorAll("DETAILS.eqns")
-    const options = {
-        root: null,
-        threshold: 0,
-        rootMargin:"500px"
-    }
-
-    observer = new IntersectionObserver( (entries,observer) => {
-        entries.forEach( entry => {
-            console.log(entry);
-            if(!entry.isIntersecting) { return } // breaks here if condition not met
-            entry.target.open = entry.isIntersecting
-            observer.unobserve(entry.target)
-        })
-    }, options)
-
-    for(let eqn of eqns) { observer.observe(eqn) }
-        
-})
-
-
-let num = 50
-// function unHide(){
-//     eqns[0].classList.remove("hide")
-//     eqns[3].classList.remove("hide")
-//     eqns[num+4].classList.remove("hide")
-//     // for(let eqn of eqns) {
-//     //     observer.observe(eqn)
-//     // }
-// }
-    
 </script>
 
 
@@ -73,7 +51,6 @@ let num = 50
 
 <p>&nbsp;</p>
 
-<!-- <div class="h-6"></div> -->
 
 
 The black math expressions are written in markdown. 
@@ -92,9 +69,20 @@ The black math expressions are written in markdown.
 
 
 <!-- wrapping html around md only works with span and one-line space!! -->
-{#each Array(1) as _,j }
-<span class="eqns hide">
-{ j + 1 }
+<span> 
+
+$E=mc^2$ 
+
+</span>
+
+<!-- or details in this funky way. Value of details is using it with IntersectionObserver below -->
+<details class="eqns" ><summary></summary>
+
+$E=mc^2$
+
+</details>
+
+
 
 <K d m={'\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}'}  />
 	<K d m={'I=\\int_0^1 f(x) dx'} />
@@ -102,8 +90,8 @@ The black math expressions are written in markdown.
 		d
 		m={'S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}'}
 	/>
-</span>
-{/each}
+
+
 
 
 
@@ -112,8 +100,8 @@ These red math expressions are (katex) svelte components.
 * **Disadvantage1**: terrible for inline math expressions. **Disadvantage2**: syntax starts to depart from latex: escaping characters (i.e. '\\\frac ...') and having to be wrapped within svelte components.
 
 
-<!-- <div class="text-red-500" in:scaleHueElastic> -->
-<!-- <div class="text-red-500" in:scale={{easing:elasticOut, duration: 1000}}> -->
+
+
 
 
 <div  in:scale={{easing:elasticOut, duration: 1000}}>
@@ -127,10 +115,18 @@ These red math expressions are (katex) svelte components.
 
 
 
-{#each Array(num) as _,j }
+{#each Array(200) as _,j }
+<details class="eqns" ><summary></summary>
+
+$E=mc^2$
+
+</details>
+{/each}
+
+{#each Array(200) as _,j }
     <details class="eqns">
         <summary> ..</summary>
-        {num + j + 1 }
+        { j + 1 }
         <K d m={'\\prod_\{i=a\}\^\{b\}\ f\(i\)'}  />
     </details>
 {/each}
