@@ -19,7 +19,6 @@
     let observer
 
     onMount(()=>{
-
         eqns = document.querySelectorAll(".eqns")
         const options = {
             root: null,
@@ -27,7 +26,6 @@
             rootMargin:"200px" //shows the lag effect
             // rootMargin:"-100px" //shows the lag effect
         }
-
         observer = new IntersectionObserver( (entries,observer) => {
             entries.forEach( entry => {
                 console.log(entry);
@@ -39,7 +37,6 @@
         }, options)
 
         for(let eqn of eqns) { observer.observe(eqn) }
-            
     })
 
 let num = 500
@@ -68,7 +65,7 @@ The black math expressions are written in markdown.
 
 
 <!-- or details  in this funky way. Value of details  is using it with IntersectionObserver below -->
-<details  class="eqns" ><summary></summary>
+<details   class="eqns" ><summary></summary>
 
 $$
 E=mc^{2}
@@ -109,7 +106,7 @@ These red math expressions are (katex) svelte components.
 
 
 {#each Array(num) as _,j }
-<details  class="eqns" ><summary>..</summary>
+<details   class="eqns" ><summary>..</summary>
 
 $$
 \begin{aligned} 
@@ -121,7 +118,7 @@ $$
 {/each}
 
 {#each Array(num) as _,j }
-    <details  class="eqns">
+    <details   class="eqns">
         <summary>..</summary>
         <K d m={'\\prod_\{i=a\}\^\{b\}\ f\(i\)'}  />
     </details >

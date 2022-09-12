@@ -54,10 +54,10 @@ const routes = writable({
     title: "faq",
     isCurrent: false
   },
-  mdsvex_and_katex: {
-    name: "mdsvex_and_katex",
-    href: "/mdsvex_and_katex",
-    title: "\u2797mdsvex and katex",
+  math: {
+    name: "math",
+    href: "/math",
+    title: "math",
     isCurrent: false
   },
   login: {
