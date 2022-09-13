@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp"]),
 	mimeTypes: {".mp4":"video/mp4",".webp":"image/webp"},
 	_: {
-		entry: {"file":"_app/immutable/start-dd95205e.js","imports":["_app/immutable/start-dd95205e.js","_app/immutable/chunks/index-c3c96927.js","_app/immutable/chunks/singletons-a5a4a00c.js","_app/immutable/chunks/index-b80a8d4d.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-37c71bca.js","imports":["_app/immutable/start-37c71bca.js","_app/immutable/chunks/index-c3c96927.js","_app/immutable/chunks/singletons-426390c3.js","_app/immutable/chunks/index-b80a8d4d.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),

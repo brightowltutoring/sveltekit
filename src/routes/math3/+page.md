@@ -1,97 +1,32 @@
-<svelte:head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
-</svelte:head>
-<!-- This needed if importing katex from 'katex' here -->
+<KatexIntersectionObserver/>
 
 <script>
-
-    import { onMount } from 'svelte'
-    import katex from "katex"
-    
-    
-    // let demo
-    let myKatex
-    // let katexContainer
-    // let mdMathContainer
-    let observer
-    // let eqn ="c = \\pm\\sqrt{a^2 + b^4}"
-
-    // let demo2
-    // function getDataMath(){
-    //     console.log(demo2.dataset.math);
-    // }
-
-    onMount(()=>{
-
-        myKatex = document.querySelectorAll(".myKatex")
-
-        const options = {
-            root: null,
-            threshold: 0,
-            rootMargin:"500px" 
-            // rootMargin:"-100px" //shows the lag effect
-        }
-        observer = new IntersectionObserver( (entries,observer) => {
-            entries.forEach( entry => {
-                if(entry.isIntersecting) { 
-                    // let child = entry.target.children[0]
-                    let child = entry.target
-                    let math = child.dataset.math
-                    console.log(child);
-                    console.log("math",math);
-                    katex.render(math, child)   
-              
-                    observer.unobserve(entry.target)
-                }
-
-            })
-        }, options)
-
-
-        // for(let el of katexContainer) { 
-        for(let el of myKatex) { 
-            observer.observe(el) 
-        }
-    })
-
-    let num = 10000
-
-
+    // I have yet to figure out for the life of me why I have to break this up into 
+    // two components ... trying to use the logic all in one makes things laggy
+    import KatexIntersectionObserver from "$lib/KatexIntersectionObserver.svelte"
+    import K from "$lib/KatexDataProp.svelte"
+    let num = 2000
 </script>
 
 
-{#each Array(num) as _,j }
-<div class="myKatex" data-math={"e=mc^2"}>
-..
-</div>
-{/each}
 
+This page has {2*num} lines of Katex ... Intersection Observer lazy renders the math on scroll down!!
 
 {#each Array(num) as _,j }
-<div class="myKatex" data-math={"c = \\pm\\sqrt{a^3 + b^3}"}>
-..
-</div>
+<K data_math={"e=mc^2"}/>
+<!-- <div class="myKatex" data-math={"e=mc^2"}>.</div> -->
 {/each}
 
 
 
 
+
+<!-- Useful Markdown styles .. removed from tailwind   -->
 <style>
-     .hide {
-        width:0;
-        height: 0; 
-        /* overflow: hidden; */
-        display:none;
-
-    }
-   
-   
-   
     blockquote {  
         margin: 0;  
         padding-left: 1.4rem;  
         border-left: 8px solid #bbb; 
-        /* border-left: 4px solid #dadada;  */
         }
     ul { 
     list-style-type: disc; 
