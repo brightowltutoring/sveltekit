@@ -2,13 +2,15 @@
   import katex from "katex";
   export let d = false;
   export let m;
+  export let observed = true; //tbd by intersection observer
 
   const options = {
     displayMode: d,
     throwOnError: false,
   };
 
-  $: katexString = katex.renderToString(m, options);
+  let katexString;
+  $: if (observed) katexString = katex.renderToString(m, options);
 </script>
 
 <svelte:head>

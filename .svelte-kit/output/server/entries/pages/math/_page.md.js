@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as subscribe, e as escape, h as add_attribute, v as validate_component, g as each } from "../../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
 import { h as elementColor } from "../../../chunks/store.js";
 import { K as Katex } from "../../../chunks/Katex.js";
 import "../../../chunks/index2.js";
@@ -18,6 +18,16 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   buttonColorTransition = `background: ${$elementColor};transition: background-color 0.4s cubic-bezier(0.64, 0, 0.78, 0)`;
   $$unsubscribe_elementColor();
   return `
+${validate_component(Katex, "K").$$render(
+    $$result,
+    {
+      observed: true,
+      d: true,
+      m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
+    },
+    {},
+    {}
+  )}
 <h1 class="${"svelte-6gn253"}">The content on this page is written in a markdown file, which uses html, css, svelte components \u2026thanks to MDsveX + plugins!</h1>
 <p>\xA0</p>
 <p>The black math expressions are written in markdown. </p>
@@ -75,7 +85,8 @@ ${each(Array(num), (_, j) => {
 </details>`;
   })}
 ${each(Array(num), (_, j) => {
-    return `<details class="${"eqns svelte-6gn253"}"><summary class="${"svelte-6gn253"}">..</summary>
+    return `
+    <details class="${"eqns svelte-6gn253"}"><summary class="${"svelte-6gn253"}">..</summary>
         ${validate_component(Katex, "K").$$render(
       $$result,
       {

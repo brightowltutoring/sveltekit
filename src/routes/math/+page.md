@@ -40,8 +40,13 @@
     })
 
 let num = 500
+// for pure katex:    5000 lines of math takes ~ 15s for page load ... on Firefox, laptop
+// for pure markdown: 5000 lines of math takes ~ 3s for page load ... on Firefox, laptop
+// // both observations made with current IntOb setup 
 </script>
 
+
+<K observed={true} d m={'\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}'}  />
 
 
 # The content on this page is written in a markdown file, which uses html, css, svelte components ...thanks to MDsveX + plugins!
@@ -117,7 +122,9 @@ $$
 </details >
 {/each}
 
+
 {#each Array(num) as _,j }
+    <!-- <details open> -->
     <details   class="eqns">
         <summary>..</summary>
         <K d m={'\\prod_\{i=a\}\^\{b\}\ f\(i\)'}  />

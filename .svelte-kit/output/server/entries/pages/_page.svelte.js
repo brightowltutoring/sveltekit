@@ -44,11 +44,12 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <div class="${"font-Poppins text-center sm:text-5xl text-4xl py-20 "}">TESTIMONIALS
 </div>
 
+
 <div class="${"grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 "}">${each(reviewers, (name) => {
     return `${validate_component(GalleryScale, "GalleryScale").$$render(
       $$result,
       {
-        Src: `/reviews/review-${name}-bare.png`,
+        Src: `/reviews/review-${name}-bare.webp`,
         Alt: `review ${name}`
       },
       {},
