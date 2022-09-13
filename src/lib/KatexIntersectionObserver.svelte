@@ -12,7 +12,7 @@
     const options = {
       root: null,
       threshold: 0,
-      rootMargin: "800px", // 800px = 1 laptop viewport
+      rootMargin: "100px", // 800px = 1 laptop viewport
       // rootMargin: "-100px", //shows the lag effect
     };
     observer = new IntersectionObserver((entries, observer) => {
@@ -21,9 +21,10 @@
           // let child = entry.target.children[0]
           let child = entry.target;
           let math = child.dataset.math;
+          let d = child.dataset.display;
           // console.log(child);
           // console.log("math", math);
-          katex.render(math, child);
+          katex.render(math, child, { displayMode: d });
 
           observer.unobserve(entry.target);
         }
@@ -35,7 +36,11 @@
       observer.observe(el);
     }
   });
+
+  export let m;
 </script>
+
+<!-- <div class="myKatex" data-math={m}>.</div> -->
 
 <!-- TODO: NOTE: Using the data on https://www.intmath.com/cg5/katex-mathjax-comparison.php, 
 the body of which has a clientHeight of 9701 pixels, it takes 382ms to render the 

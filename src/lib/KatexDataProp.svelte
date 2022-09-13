@@ -2,7 +2,8 @@
 It's too bad that I couldn't include this component the katex intersection observer component
 -->
 <script>
-  export let data_math;
+  export let m;
+  export let d;
 </script>
 
-<div class="myKatex" data-math={data_math}>.</div>
+<div class="myKatex" data-math={m} data-display={d}>.</div>
