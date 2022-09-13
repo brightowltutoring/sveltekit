@@ -7,7 +7,6 @@ declare module '$env/static/public' {
 
 declare module '$env/static/private' {
 	export const MANPATH: string;
-	export const alfred_theme_background: string;
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
@@ -21,8 +20,6 @@ declare module '$env/static/private' {
 	export const CONDA_SHLVL: string;
 	export const CONDA_PROMPT_MODIFIER: string;
 	export const TERM_PROGRAM_VERSION: string;
-	export const MallocSpaceEfficient: string;
-	export const alfred_preferences_localhash: string;
 	export const ZDOTDIR: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const MallocNanoZone: string;
@@ -30,21 +27,16 @@ declare module '$env/static/private' {
 	export const npm_config_noproxy: string;
 	export const npm_config_local_prefix: string;
 	export const ZSH: string;
-	export const alfred_version_build: string;
 	export const USER: string;
 	export const COMMAND_MODE: string;
 	export const npm_config_globalconfig: string;
 	export const CONDA_EXE: string;
-	export const alfred_version: string;
 	export const SSH_AUTH_SOCK: string;
 	export const __CF_USER_TEXT_ENCODING: string;
-	export const alfred_preferences: string;
 	export const npm_execpath: string;
-	export const alfred_theme_selection_background: string;
 	export const PAGER: string;
 	export const _CE_CONDA: string;
 	export const LSCOLORS: string;
-	export const alfred_theme_subtext: string;
 	export const PATH: string;
 	export const npm_package_json: string;
 	export const _: string;
@@ -67,8 +59,8 @@ declare module '$env/static/private' {
 	export const _CE_M: string;
 	export const XPC_SERVICE_NAME: string;
 	export const VSCODE_INJECTION: string;
-	export const HOME: string;
 	export const SHLVL: string;
+	export const HOME: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const GEM_ROOT: string;
 	export const HOMEBREW_PREFIX: string;
@@ -79,24 +71,19 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_script: string;
 	export const GEM_PATH: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
-	export const LC_CTYPE: string;
 	export const RUBY_ROOT: string;
 	export const CONDA_DEFAULT_ENV: string;
-	export const alfred_workflow_uid: string;
 	export const npm_config_user_agent: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const GIT_ASKPASS: string;
 	export const INFOPATH: string;
 	export const HOMEBREW_CELLAR: string;
-	export const alfred_workflow_name: string;
 	export const RUBYOPT: string;
 	export const pk: string;
 	export const RUBY_VERSION: string;
-	export const alfred_theme: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
-	export const NODE_ENV: string;
 	export const FIREBASE_apiKey: string;
 	export const FIREBASE_authDomain: string;
 	export const FIREBASE_projectId: string;

@@ -43,10 +43,11 @@
   TESTIMONIALS
 </div>
 
+<!-- Src={`/reviews/review-${name}-bare.png`} -->
 <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 ">
   {#each reviewers as name}
     <GalleryScale
-      Src={`/reviews/review-${name}-bare.png`}
+      Src={`/reviews/review-${name}-bare.webp`}
       Alt={`review ${name}`}
     />
   {/each}

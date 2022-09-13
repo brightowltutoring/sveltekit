@@ -238,7 +238,7 @@
             left: 0;
             margin: 0;
             padding: 0;
-            filter: blur(10px);
+            filter: blur(25px);
             "
   />
 
