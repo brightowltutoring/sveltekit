@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css5) => css5.code).join("\n"),
+          code: Array.from(result.css).map((css6) => css6.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -1158,9 +1158,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-c2872e7b.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-c2872e7b.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/stores-e02bfaaf.js", "_app/immutable/chunks/singletons-4cb27828.js", "_app/immutable/chunks/navigation-95eb058d.js"];
-    stylesheets = ["_app/immutable/assets/app-11d57176.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-2adec3ce.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-2adec3ce.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/stores-6ebf4cd4.js", "_app/immutable/chunks/singletons-52021ffc.js", "_app/immutable/chunks/navigation-569eb330.js"];
+    stylesheets = ["_app/immutable/assets/app-58704011.css"];
   }
 });
 
@@ -1204,8 +1204,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-b139bed1.js";
-    imports2 = ["_app/immutable/components/error.svelte-b139bed1.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-e02bfaaf.js", "_app/immutable/chunks/singletons-4cb27828.js", "_app/immutable/chunks/index-b80a8d4d.js"];
+    file2 = "_app/immutable/components/error.svelte-e6eac832.js";
+    imports2 = ["_app/immutable/components/error.svelte-e6eac832.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-6ebf4cd4.js", "_app/immutable/chunks/singletons-52021ffc.js", "_app/immutable/chunks/index-b80a8d4d.js"];
     stylesheets2 = [];
   }
 });
@@ -14974,9 +14974,9 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-6f132f0a.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-6f132f0a.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-a29f5995.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/navigation-95eb058d.js", "_app/immutable/chunks/singletons-4cb27828.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
-    stylesheets3 = ["_app/immutable/assets/app-11d57176.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-7bfcdec2.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-7bfcdec2.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-a29f5995.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/navigation-569eb330.js", "_app/immutable/chunks/singletons-52021ffc.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    stylesheets3 = ["_app/immutable/assets/app-58704011.css"];
   }
 });
 
@@ -21361,8 +21361,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-b0679ee5.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-b0679ee5.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/navigation-95eb058d.js", "_app/immutable/chunks/singletons-4cb27828.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-210522f9.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-210522f9.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/navigation-569eb330.js", "_app/immutable/chunks/singletons-52021ffc.js"];
     stylesheets5 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21504,13 +21504,18 @@ var page_md_exports2 = {};
 __export(page_md_exports2, {
   default: () => Page5
 });
-var KatexIntersectionObserver, KatexDataProp, num2, Page5;
+var KatexIntersectionObserver, KatexDataProp, css4, num2, Page5;
 var init_page_md2 = __esm({
   ".svelte-kit/output/server/entries/pages/math3/_page.md.js"() {
     init_chunks();
     init_katex();
     KatexIntersectionObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { m: m2 } = $$props;
+      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
+        $$bindings.m(m2);
       return `
+
+
 
 
 
@@ -21518,21 +21523,66 @@ var init_page_md2 = __esm({
 ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}`;
     });
     KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { data_math } = $$props;
-      if ($$props.data_math === void 0 && $$bindings.data_math && data_math !== void 0)
-        $$bindings.data_math(data_math);
+      let { m: m2 } = $$props;
+      let { d: d2 } = $$props;
+      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
+        $$bindings.m(m2);
+      if ($$props.d === void 0 && $$bindings.d && d2 !== void 0)
+        $$bindings.d(d2);
       return `
 
 
-<div class="${"myKatex"}"${add_attribute("data-math", data_math, 0)}>.</div>`;
+<div class="${"myKatex"}"${add_attribute("data-math", m2, 0)}${add_attribute("data-display", d2, 0)}>.</div>`;
     });
+    css4 = {
+      code: "h1.svelte-1rteh51{font-size:1.5rem;line-height:2rem}",
+      map: null
+    };
     num2 = 2e3;
     Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let equations = [
+        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
+      ];
+      $$result.css.add(css4);
       return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
-<p>This page has ${escape(2 * num2)} lines of Katex \u2026 Intersection Observer lazy renders the math on scroll down!!</p>
+
+
+<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>
+
+
+<h1 class="${"svelte-1rteh51"}">Katex below, Markdown Above</h1>
+
+${validate_component(KatexDataProp, "K").$$render(
+        $$result,
+        {
+          d: true,
+          m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
+        },
+        {},
+        {}
+      )}
+${each(equations, (eqn) => {
+        return `<div class="${"p-1 text-indigo-700"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
+</div>`;
+      })}
+<h1 class="${"svelte-1rteh51"}">${escape(num2)} lines of markdown below \u2026 lazy loaded with intersection observer!!</h1>
+<h1 class="${"svelte-1rteh51"}">Would be nice to figure out displaymode as it looks nicer than inline latex math</h1>
 ${each(Array(num2), (_2, j2) => {
-        return `${validate_component(KatexDataProp, "K").$$render($$result, { data_math: "e=mc^2" }, {}, {})}
-`;
+        return `<p>${escape(j2 + 1)}</p>
+    <div class="${"p-5"}">${validate_component(KatexDataProp, "K").$$render(
+          $$result,
+          {
+            d: true,
+            m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
+          },
+          {},
+          {}
+        )}
+    </div>`;
       })}
 `;
     });
@@ -21553,9 +21603,9 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
-    file7 = "_app/immutable/components/pages/math3/_page.md-0ce16bc7.js";
-    imports7 = ["_app/immutable/components/pages/math3/_page.md-0ce16bc7.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets7 = [];
+    file7 = "_app/immutable/components/pages/math3/_page.md-15739566.js";
+    imports7 = ["_app/immutable/components/pages/math3/_page.md-15739566.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets7 = ["_app/immutable/assets/+page-bd3438db.css"];
   }
 });
 
@@ -21564,7 +21614,7 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page6
 });
-var css$1, PlansCard, css4, Page6;
+var css$1, PlansCard, css5, Page6;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -21607,7 +21657,7 @@ var init_page_svelte4 = __esm({
   
 </div>`;
     });
-    css4 = {
+    css5 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
@@ -21635,7 +21685,7 @@ var init_page_svelte4 = __esm({
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
       ];
-      $$result.css.add(css4);
+      $$result.css.add(css5);
       return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
 
 
@@ -23801,7 +23851,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-f5c74574.js", "imports": ["_app/immutable/start-f5c74574.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-4cb27828.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-cbd6145d.js", "imports": ["_app/immutable/start-cbd6145d.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-52021ffc.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
