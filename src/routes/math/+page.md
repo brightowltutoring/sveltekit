@@ -9,7 +9,7 @@
     // two components (KatexIntersectionObserver & KatexDataProp) ... trying to use 
     // the logic all in one makes things laggy
     import K from "$lib/KatexDataProp.svelte"
-    let numMax = 4000
+    let numMax = 1000
     $: num = numMax
     let numMDMax=1
     $: numMD = numMDMax
@@ -35,7 +35,7 @@
 </span>
 
 <div class="flex justify-center">
-    <input type="range" min="0" max="1000" bind:value={x} />
+    <input type="range" min="0"  bind:value={x} />
 </div>
 
 
@@ -54,7 +54,7 @@
 Fortunately it seems to scale very slowly with more markdown (comment out each container below) -->
 
 <div class="p-4">
-    <input type="range" min="1" max="4000" bind:value={numMD} />
+    <input type="range" min="1" bind:value={numMD} />
 </div>
 
 # {numMD } lines of markdown immediately below

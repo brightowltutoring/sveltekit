@@ -1,7 +1,8 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as loop, f as set_store_value, v as validate_component, g as each, h as add_attribute } from "../../chunks/index.js";
-/* empty css                */import { p as page } from "../../chunks/stores.js";
+import { p as page } from "../../chunks/stores.js";
 import { i as isDarkMode, b as burgerBreakPoint, r as redirectAfterLoginTimeOut, a as redirectSetInterval, s as scrollY, c as instDeltaY, l as lastScrollY, d as routes, e as isLoggedIn, w as windowInnerHeight, f as scrollYMax, g as innerWidth } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
+const app = "";
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_isDarkMode;
   let $$unsubscribe_burgerBreakPoint;

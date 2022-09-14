@@ -48,22 +48,16 @@ const routes = writable({
     title: "Plans",
     isCurrent: false
   },
-  faq: {
-    name: "Faq",
-    href: "/faq",
-    title: "faq",
-    isCurrent: false
-  },
   math: {
     name: "math",
     href: "/math",
     title: "math",
     isCurrent: false
   },
-  math2: {
-    name: "math2",
-    href: "/math2",
-    title: "math2",
+  schools: {
+    name: "schools",
+    href: "/schools",
+    title: "Schools \u{1F4DA}",
     isCurrent: false
   },
   login: {

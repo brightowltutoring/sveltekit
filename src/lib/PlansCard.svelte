@@ -1,4 +1,5 @@
 <script>
+  import CalendlyJsandCss from "./CalendlyJsandCSS.svelte";
   import {
     isDarkMode,
     light,
@@ -32,18 +33,7 @@
   };
 </script>
 
-<svelte:head>
-  <!-- Calendly link widget begin -->
-  <link
-    href="https://assets.calendly.com/assets/external/widget.css"
-    rel="stylesheet"
-  />
-  <script
-    src="https://assets.calendly.com/assets/external/widget.js"
-    type="text/javascript"
-    async></script>
-  <!-- Calendly link widget end -->
-</svelte:head>
+<CalendlyJsandCss />
 
 <!-- <div class="shadow-xl rounded-xl w-[10] min-w-fit p-10 m-4 text-center duration-300 group"
      style={`background:${cardColor}; transform:perspective(1000px) ${hoverTransform};`}

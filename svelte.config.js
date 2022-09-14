@@ -4,16 +4,23 @@ import preprocess from "svelte-preprocess";
 // import adapter from '@sveltejs/adapter-auto';
 import adapter from "@sveltejs/adapter-cloudflare";
 
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+  vitePlugin: {
+    experimental: {
+      inspector: true,
+    },
+  },
   extensions: [".svelte",
    ...mdsvexConfig.extensions
   ],
-
   kit: {
     adapter: adapter(),
+    alias:{
+      '$libo/*':'/Users/brightowl/Documents/GitHub/sveltekit/src/libo/*'
+    },
   },
-
   preprocess: [
     preprocess({
       postcss: true,

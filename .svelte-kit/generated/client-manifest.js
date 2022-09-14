@@ -8,7 +8,8 @@ export const nodes = [
 	() => import('./nodes/4'),
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
-	() => import('./nodes/7')
+	() => import('./nodes/7'),
+	() => import('./nodes/8')
 ];
 
 export const dictionary = {
@@ -17,5 +18,6 @@ export const dictionary = {
 	"login": [[1], [0], 4],
 	"math": [[1], [0], 5],
 	"math2": [[1], [0], 6],
-	"plans": [[1], [0], 7]
+	"plans": [[1], [0], 7],
+	"schools": [[1], [0], 8]
 };

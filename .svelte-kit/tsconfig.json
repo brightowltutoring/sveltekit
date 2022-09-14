@@ -2,6 +2,9 @@
 	"compilerOptions": {
 		"baseUrl": "..",
 		"paths": {
+			"$libo/*": [
+				"src/libo/*"
+			],
 			"$lib": [
 				"src/lib"
 			],

@@ -1,6 +1,6 @@
 <script>
-  export let Src = "/reviews/review-ben.png";
-  export let Alt = "review ben";
+  export let Src;
+  export let Alt;
   import { isDarkMode } from "$lib/store.js";
 
   let imgBackground;
@@ -12,7 +12,7 @@
 <div class="relative">
   <input
     inputmode="none"
-    class="absolute opacity-0 w-full h-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 peer"
+    class="absolute peer opacity-0 w-full h-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
   />
 
   <img
@@ -33,3 +33,11 @@
   />
   <!-- still confused as to how this scale full screen but ok! -->
 </div>
+
+<!-- <style>
+    .relative input {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+</style> -->

@@ -1,4 +1,5 @@
-import { c as create_ssr_component, a as subscribe, e as escape, h as add_attribute, g as each, v as validate_component } from "../../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
+import { C as CalendlyJsandCSS } from "../../../chunks/CalendlyJsandCSS.js";
 import { i as isDarkMode, j as dark_lightened, k as light_darkened } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const PlansCard_svelte_svelte_type_style_lang = "";
@@ -27,7 +28,7 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$result.css.add(css$1);
   cardColor = $isDarkMode ? dark_lightened : light_darkened;
   $$unsubscribe_isDarkMode();
-  return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-mukgzh"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-mukgzh"><\/script>`, ""}
+  return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
 
 <div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
