@@ -718,16 +718,16 @@ var init_store = __esm({
         title: "faq",
         isCurrent: false
       },
-      math3: {
-        name: "math3",
-        href: "/math3",
-        title: "math3",
-        isCurrent: false
-      },
       math: {
         name: "math",
         href: "/math",
         title: "math",
+        isCurrent: false
+      },
+      math2: {
+        name: "math2",
+        href: "/math2",
+        title: "math2",
         isCurrent: false
       },
       login: {
@@ -1158,9 +1158,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-2adec3ce.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-2adec3ce.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/stores-6ebf4cd4.js", "_app/immutable/chunks/singletons-52021ffc.js", "_app/immutable/chunks/navigation-569eb330.js"];
-    stylesheets = ["_app/immutable/assets/app-58704011.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-7b9359ab.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-7b9359ab.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-5d664de8.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-2d2a58b5.js", "_app/immutable/chunks/singletons-09643a2d.js", "_app/immutable/chunks/navigation-9e2ac4e7.js"];
+    stylesheets = ["_app/immutable/assets/app-f65622ef.css"];
   }
 });
 
@@ -1204,8 +1204,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-e6eac832.js";
-    imports2 = ["_app/immutable/components/error.svelte-e6eac832.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/stores-6ebf4cd4.js", "_app/immutable/chunks/singletons-52021ffc.js", "_app/immutable/chunks/index-b80a8d4d.js"];
+    file2 = "_app/immutable/components/error.svelte-1b920d69.js";
+    imports2 = ["_app/immutable/components/error.svelte-1b920d69.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-2d2a58b5.js", "_app/immutable/chunks/singletons-09643a2d.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets2 = [];
   }
 });
@@ -14864,21 +14864,15 @@ var init_Katex = __esm({
     init_chunks();
     init_katex();
     Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let katexString;
       let { d: d2 = false } = $$props;
       let { m: m2 } = $$props;
-      let { observed = true } = $$props;
       const options = { displayMode: d2, throwOnError: false };
-      let katexString;
       if ($$props.d === void 0 && $$bindings.d && d2 !== void 0)
         $$bindings.d(d2);
       if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
         $$bindings.m(m2);
-      if ($$props.observed === void 0 && $$bindings.observed && observed !== void 0)
-        $$bindings.observed(observed);
-      {
-        if (observed)
-          katexString = katex.renderToString(m2, options);
-      }
+      katexString = katex.renderToString(m2, options);
       return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-bnfb8z">`, ""}
 
 <!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->`;
@@ -14974,9 +14968,9 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-7bfcdec2.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-7bfcdec2.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-a29f5995.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/navigation-569eb330.js", "_app/immutable/chunks/singletons-52021ffc.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
-    stylesheets3 = ["_app/immutable/assets/app-58704011.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-05fa5860.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-05fa5860.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-5d664de8.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/navigation-9e2ac4e7.js", "_app/immutable/chunks/singletons-09643a2d.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    stylesheets3 = ["_app/immutable/assets/app-f65622ef.css"];
   }
 });
 
@@ -15109,8 +15103,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/faq/_page.svelte-299f874d.js";
-    imports4 = ["_app/immutable/components/pages/faq/_page.svelte-299f874d.js", "_app/immutable/chunks/index-c3c96927.js"];
+    file4 = "_app/immutable/components/pages/faq/_page.svelte-d7a03ea8.js";
+    imports4 = ["_app/immutable/components/pages/faq/_page.svelte-d7a03ea8.js", "_app/immutable/chunks/index-d43d80ed.js"];
     stylesheets4 = ["_app/immutable/assets/+page-113a1f72.css"];
   }
 });
@@ -21361,8 +21355,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-210522f9.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-210522f9.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/navigation-569eb330.js", "_app/immutable/chunks/singletons-52021ffc.js"];
+    file5 = "_app/immutable/components/pages/login/_page.svelte-29033382.js";
+    imports5 = ["_app/immutable/components/pages/login/_page.svelte-29033382.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-5d664de8.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/navigation-9e2ac4e7.js", "_app/immutable/chunks/singletons-09643a2d.js"];
     stylesheets5 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21372,25 +21366,130 @@ var page_md_exports = {};
 __export(page_md_exports, {
   default: () => Page4
 });
-var css3, num, Page4;
+var KatexIntersectionObserver, KatexDataProp, css3, Page4;
 var init_page_md = __esm({
   ".svelte-kit/output/server/entries/pages/math/_page.md.js"() {
+    init_chunks();
+    init_katex();
+    KatexIntersectionObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { m: m2 } = $$props;
+      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
+        $$bindings.m(m2);
+      return `
+
+
+
+
+
+
+${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}`;
+    });
+    KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { m: m2 } = $$props;
+      let { d: d2 } = $$props;
+      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
+        $$bindings.m(m2);
+      if ($$props.d === void 0 && $$bindings.d && d2 !== void 0)
+        $$bindings.d(d2);
+      return `
+
+
+<div class="${"myKatex"}"${add_attribute("data-math", m2, 0)}${add_attribute("data-display", d2, 0)}>.</div>`;
+    });
+    css3 = {
+      code: "ul.svelte-1rteh51.svelte-1rteh51{list-style-type:disc;list-style-position:inside}ul.svelte-1rteh51 ul.svelte-1rteh51{list-style-type:circle;list-style-position:inside;margin-left:15px}h1.svelte-1rteh51.svelte-1rteh51{font-size:1.5rem;line-height:2rem}",
+      map: null
+    };
+    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let num2;
+      let equations = [
+        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
+      ];
+      $$result.css.add(css3);
+      num2 = 1;
+      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
+<h1 class="${"svelte-1rteh51"}">The content of this page are written in a markdown file with svelte components (tailwind too), possible due to MDsveX!</h1>
+<ul class="${"svelte-1rteh51"}"><li>The <strong>math</strong> on this page is written in both markdown (i.e. Latex) and with Katex.<ul class="${"svelte-1rteh51"}"><li>for heavy inline use, markdown is preferable</li>
+<li>for css/svelte transitions, only katex svelte components are viable<ul class="${"svelte-1rteh51"}"><li>normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant \u2026 a page full of katex math can now be arbitrarily large and loads instantly on mobile!!</li></ul></li></ul></li></ul>
+
+
+<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>
+
+
+<h1 class="${"svelte-1rteh51"}">Markdown Above; ${escape(num2 + equations.length)} lines of katex below \u2026 lazy rendered with intersection observer!!</h1>
+<ul class="${"svelte-1rteh51"}"><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
+<input type="${"range"}" min="${"1"}" max="${"10000"}"${add_attribute("value", num2, 0)}>
+${each(Array(num2), (_2, j2) => {
+        return `<p>${escape(j2 + 1)}</p>
+    <div class="${"p-5 text-red-400"}">${validate_component(KatexDataProp, "K").$$render(
+          $$result,
+          {
+            d: true,
+            m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
+          },
+          {},
+          {}
+        )}
+    </div>`;
+      })}
+${each(equations, (eqn, k) => {
+        return `<p>${escape(k + 1 + num2)}</p>
+<div class="${"p-1 text-indigo-700"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
+</div>`;
+      })}
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/5.js
+var __exports6 = {};
+__export(__exports6, {
+  component: () => component6,
+  file: () => file6,
+  imports: () => imports6,
+  index: () => index6,
+  stylesheets: () => stylesheets6
+});
+var index6, component6, file6, imports6, stylesheets6;
+var init__6 = __esm({
+  ".svelte-kit/output/server/nodes/5.js"() {
+    index6 = 5;
+    component6 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
+    file6 = "_app/immutable/components/pages/math/_page.md-e42396fe.js";
+    imports6 = ["_app/immutable/components/pages/math/_page.md-e42396fe.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets6 = ["_app/immutable/assets/+page-ff2da4ef.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/math2/_page.md.js
+var page_md_exports2 = {};
+__export(page_md_exports2, {
+  default: () => Page5
+});
+var css4, num, Page5;
+var init_page_md2 = __esm({
+  ".svelte-kit/output/server/entries/pages/math2/_page.md.js"() {
     init_chunks();
     init_store();
     init_Katex();
     init_index2();
     init_katex();
-    css3 = {
+    css4 = {
       code: "details.svelte-6gn253>summary.svelte-6gn253{list-style:none;color:transparent \n    }blockquote.svelte-6gn253.svelte-6gn253{margin:0;padding-left:1.4rem;border-left:8px solid #bbb}ul.svelte-6gn253.svelte-6gn253{list-style-type:disc;list-style-position:inside}h1.svelte-6gn253.svelte-6gn253{font-size:1.5rem;line-height:2rem}",
       map: null
     };
     num = 500;
-    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let buttonColorTransition;
       let $elementColor, $$unsubscribe_elementColor;
       $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
       let x2 = 2;
-      $$result.css.add(css3);
+      $$result.css.add(css4);
       buttonColorTransition = `background: ${$elementColor};transition: background-color 0.4s cubic-bezier(0.64, 0, 0.78, 0)`;
       $$unsubscribe_elementColor();
       return `
@@ -21479,116 +21578,6 @@ ${each(Array(num), (_2, j2) => {
   }
 });
 
-// .svelte-kit/output/server/nodes/5.js
-var __exports6 = {};
-__export(__exports6, {
-  component: () => component6,
-  file: () => file6,
-  imports: () => imports6,
-  index: () => index6,
-  stylesheets: () => stylesheets6
-});
-var index6, component6, file6, imports6, stylesheets6;
-var init__6 = __esm({
-  ".svelte-kit/output/server/nodes/5.js"() {
-    index6 = 5;
-    component6 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file6 = "_app/immutable/components/pages/math/_page.md-8838c692.js";
-    imports6 = ["_app/immutable/components/pages/math/_page.md-8838c692.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js", "_app/immutable/chunks/Katex-a29f5995.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets6 = ["_app/immutable/assets/+page-080ca6e3.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/math3/_page.md.js
-var page_md_exports2 = {};
-__export(page_md_exports2, {
-  default: () => Page5
-});
-var KatexIntersectionObserver, KatexDataProp, css4, num2, Page5;
-var init_page_md2 = __esm({
-  ".svelte-kit/output/server/entries/pages/math3/_page.md.js"() {
-    init_chunks();
-    init_katex();
-    KatexIntersectionObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { m: m2 } = $$props;
-      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
-        $$bindings.m(m2);
-      return `
-
-
-
-
-
-
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}`;
-    });
-    KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { m: m2 } = $$props;
-      let { d: d2 } = $$props;
-      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
-        $$bindings.m(m2);
-      if ($$props.d === void 0 && $$bindings.d && d2 !== void 0)
-        $$bindings.d(d2);
-      return `
-
-
-<div class="${"myKatex"}"${add_attribute("data-math", m2, 0)}${add_attribute("data-display", d2, 0)}>.</div>`;
-    });
-    css4 = {
-      code: "h1.svelte-1rteh51{font-size:1.5rem;line-height:2rem}",
-      map: null
-    };
-    num2 = 2e3;
-    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let equations = [
-        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
-        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
-        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
-        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
-        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
-      ];
-      $$result.css.add(css4);
-      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
-
-
-<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>
-
-
-<h1 class="${"svelte-1rteh51"}">Katex below, Markdown Above</h1>
-
-${validate_component(KatexDataProp, "K").$$render(
-        $$result,
-        {
-          d: true,
-          m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
-        },
-        {},
-        {}
-      )}
-${each(equations, (eqn) => {
-        return `<div class="${"p-1 text-indigo-700"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
-</div>`;
-      })}
-<h1 class="${"svelte-1rteh51"}">${escape(num2)} lines of markdown below \u2026 lazy loaded with intersection observer!!</h1>
-<h1 class="${"svelte-1rteh51"}">Would be nice to figure out displaymode as it looks nicer than inline latex math</h1>
-${each(Array(num2), (_2, j2) => {
-        return `<p>${escape(j2 + 1)}</p>
-    <div class="${"p-5"}">${validate_component(KatexDataProp, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
-          },
-          {},
-          {}
-        )}
-    </div>`;
-      })}
-`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/6.js
 var __exports7 = {};
 __export(__exports7, {
@@ -21603,9 +21592,9 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
-    file7 = "_app/immutable/components/pages/math3/_page.md-15739566.js";
-    imports7 = ["_app/immutable/components/pages/math3/_page.md-15739566.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets7 = ["_app/immutable/assets/+page-bd3438db.css"];
+    file7 = "_app/immutable/components/pages/math2/_page.md-79761bdc.js";
+    imports7 = ["_app/immutable/components/pages/math2/_page.md-79761bdc.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-5d664de8.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets7 = ["_app/immutable/assets/+page-080ca6e3.css"];
   }
 });
 
@@ -21729,8 +21718,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file8 = "_app/immutable/components/pages/plans/_page.svelte-38645774.js";
-    imports8 = ["_app/immutable/components/pages/plans/_page.svelte-38645774.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/store-b8ab12a7.js", "_app/immutable/chunks/index-b80a8d4d.js"];
+    file8 = "_app/immutable/components/pages/plans/_page.svelte-2970a557.js";
+    imports8 = ["_app/immutable/components/pages/plans/_page.svelte-2970a557.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-5d664de8.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets8 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
@@ -21900,12 +21889,12 @@ function devalue(value) {
     return str;
   }
 }
-function getName(num3) {
+function getName(num2) {
   var name4 = "";
   do {
-    name4 = chars[num3 % chars.length] + name4;
-    num3 = ~~(num3 / chars.length) - 1;
-  } while (num3 >= 0);
+    name4 = chars[num2 % chars.length] + name4;
+    num2 = ~~(num2 / chars.length) - 1;
+  } while (num2 >= 0);
   return reserved.test(name4) ? name4 + "_" : name4;
 }
 function isPrimitive(thing) {
@@ -23851,7 +23840,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-cbd6145d.js", "imports": ["_app/immutable/start-cbd6145d.js", "_app/immutable/chunks/index-c3c96927.js", "_app/immutable/chunks/singletons-52021ffc.js", "_app/immutable/chunks/index-b80a8d4d.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-dc1a2ff7.js", "imports": ["_app/immutable/start-dc1a2ff7.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-09643a2d.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -23905,8 +23894,8 @@ var manifest = {
       },
       {
         type: "page",
-        id: "math3",
-        pattern: /^\/math3\/?$/,
+        id: "math2",
+        pattern: /^\/math2\/?$/,
         names: [],
         types: [],
         errors: [1],

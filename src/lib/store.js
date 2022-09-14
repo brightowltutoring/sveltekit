@@ -122,12 +122,6 @@ export const routes = writable({
     title: "math",
     isCurrent: false,
   }, 
-  math2: {
-    name:'math2',
-    href: "/math2",
-    title: "math2",
-    isCurrent: false,
-  }, 
   login: {
     name:'Login',
     href: "/login",

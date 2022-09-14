@@ -1,3 +1,4 @@
+<!-- Essentially remounts the intersection observer when using the slider below -->
 {#key num }
 <KatexIntersectionObserver />
 {/key}
@@ -8,7 +9,10 @@
     // two components (KatexIntersectionObserver & KatexDataProp) ... trying to use 
     // the logic all in one makes things laggy
     import K from "$lib/KatexDataProp.svelte"
-    $: num = 1
+    let numMax = 4000
+    $: num = numMax
+    let numMDMax=1
+    $: numMD = numMDMax
 
      let equations = [
         "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
@@ -17,31 +21,60 @@
         "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
         "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c",
     ];
+
+
+    let x=2
 </script>
 
+
+
+<span class="text-red-700 text-7xl flex justify-center">
+
+{x}$^2$={x**2}
+
+</span>
+
+<div class="flex justify-center">
+    <input type="range" min="0" max="1000" bind:value={x} />
+</div>
+
+
 # The content of this page are written in a markdown file with svelte components (tailwind too), possible due to MDsveX! 
+* the square-slider above using svelte binding of a JS variable ... again this is possible due to MDsveX
 * The **math** on this page is written in both markdown (i.e. Latex) and with Katex.
   * for heavy inline use, markdown is preferable
   * for css/svelte transitions, only katex svelte components are viable
-    * normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant .... a page full of katex math can now be arbitrarily large and loads instantly on mobile!!
+    * normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant !!
+      * 1000 lines vs 4000-8000+ lines of math loaded instantly on page load
+      * when changing routes katex on 4000+ lines is easily transitioned ... not the same for markdown
+ 
   
 
 <!-- This markdown math is centered. Oddly the addition of this single markdown slow the katex rendering.
 Fortunately it seems to scale very slowly with more markdown (comment out each container below) -->
 
-<!-- {#each Array(100) as _,j } -->
+<div class="p-4">
+    <input type="range" min="1" max="4000" bind:value={numMD} />
+</div>
+
+# {numMD } lines of markdown immediately below
+
+{#each Array(numMD) as _,j }
+{j+1}
+
 $$
 E=mc^2 
 $$
-<!-- {/each} -->
+
+{/each}
   
 <!-- This also centers with katex + css. 
 The katex components come in use with more detailed styling AND/OR lots of math to render to a single page ... in which cased I have implemented Intersection Observer logic -->
 
-# Markdown Above; {num + equations.length} lines of katex below ... lazy rendered with intersection observer!!
+# {num + equations.length} lines of katex below... lazy rendered with intersection observer!!
 * pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)
 
-<input type="range" min="1" max="10000" bind:value={num} />
+<input type="range" min="1" max={numMax} bind:value={num} />
 
 {#each Array(num) as _,j }
     {j+1 }
