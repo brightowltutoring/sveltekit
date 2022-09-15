@@ -12,14 +12,14 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
 
 `;
 });
-let numMax = 300;
+let numMax = 500;
+let numMDMax = 1;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let num;
   let numMD;
   let proseInvert;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  let numMDMax = numMax;
   let equations = [
     "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
     "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",

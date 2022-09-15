@@ -9,7 +9,7 @@
     // two components (KatexIntersectionObserver & KatexDataProp)
     // Trying to use the logic all in one makes things laggy when using lots of math
     import K from "$lib/KatexDataProp.svelte"
-    let numMax = 500
+    let numMax = 3000
     let numMDMax = 1
     $: num = numMax
     $: numMD = numMDMax
