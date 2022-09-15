@@ -1,11 +1,11 @@
 import { c as create_ssr_component, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
 import { K as KatexIntersectionObserver, a as KatexDataProp } from "../../../chunks/KatexDataProp.js";
 import "katex";
-let numMax = 1e3;
-let numMDMax = 1e3;
+let numMax = 300;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let num;
   let numMD;
+  let numMDMax = numMax;
   let equations = [
     "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
     "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",

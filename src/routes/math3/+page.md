@@ -5,6 +5,7 @@
 <script>
 
     import KatexIntersectionObserver2 from "$lib/KatexIntersectionObserver2.svelte"
+    import { isDarkMode } from "$lib/store.js";
   
     let numMax = 300
     let numMDMax = numMax
@@ -21,10 +22,12 @@
 
 
     let x=2
+
+    $: proseInvert = $isDarkMode?  "prose-invert" : ""
 </script>
 
 <!-- <article > -->
-<article class="prose lg:prose-lg">
+<article class="prose lg:prose-lg {proseInvert}  ">
 
   <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>

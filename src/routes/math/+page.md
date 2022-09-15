@@ -3,7 +3,7 @@
 {/key}
 
 <script>
-
+    import { isDarkMode } from "$lib/store.js";
     import KatexIntersectionObserver from "$lib/KatexIntersectionObserver.svelte"
     // I have yet to figure out for the life of me why I have to break this up into 
     // two components (KatexIntersectionObserver & KatexDataProp)
@@ -24,10 +24,12 @@
 
 
     let x=2
+
+    $: proseInvert = $isDarkMode?  "prose-invert" : ""
 </script>
 
 <!-- <article class="prose "> -->
-<article class="prose lg:prose-lg">
+<article class="prose lg:prose-lg {proseInvert}">
 
   <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>

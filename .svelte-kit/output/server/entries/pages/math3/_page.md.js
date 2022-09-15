@@ -10,11 +10,11 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
 
 `;
 });
-let numMax = 1e3;
-let numMDMax = 1e3;
+let numMax = 300;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let num;
   let numMD;
+  let numMDMax = numMax;
   let equations = [
     "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
     "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
@@ -26,8 +26,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   num = numMax;
   numMD = numMDMax;
   return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
-<article>
-  <h1>Garlic bread with cheese: What the science tells us</h1>
+
+<article class="${"prose lg:prose-lg"}"><h1>Garlic bread with cheese: What the science tells us</h1>
   <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
     children, with the food earning such an iconic status in our culture that kids will often dress
     up as warm, cheesy loaf for Halloween.
@@ -69,12 +69,12 @@ ${each(Array(numMD), (_, j) => {
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 ${each(Array(num), (_, j) => {
     return `<p>${escape(j + 1)}</p>
-    <div class="${"p-5 text-red-400"}"><p${add_attribute("d", true, 0)}${add_attribute("m", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
+    <div class="${"p-5 text-red-400"}"><p d${add_attribute("m", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
     </div>`;
   })}
 ${each(equations, (eqn, k) => {
     return `<p>${escape(k + 1 + num)}</p>
-<div class="${"p-1 text-indigo-700"}"><p${add_attribute("d", true, 0)}${add_attribute("m", eqn, 0)}></p>
+<div class="${"p-1 text-indigo-700"}"><p d${add_attribute("m", eqn, 0)}></p>
 </div>`;
   })}</article>
 

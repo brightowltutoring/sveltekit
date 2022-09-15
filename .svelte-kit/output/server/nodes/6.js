@@ -2,6 +2,6 @@
 
 export const index = 6;
 export const component = async () => (await import('../entries/pages/math/_page.md.js')).default;
-export const file = '_app/immutable/components/pages/math/_page.md-d575e10e.js';
-export const imports = ["_app/immutable/components/pages/math/_page.md-d575e10e.js","_app/immutable/chunks/index-d43d80ed.js","_app/immutable/chunks/KatexDataProp-07d10ff5.js","_app/immutable/chunks/katex-15be85e5.js"];
+export const file = '_app/immutable/components/pages/math/_page.md-3eb9ec37.js';
+export const imports = ["_app/immutable/components/pages/math/_page.md-3eb9ec37.js","_app/immutable/chunks/index-d43d80ed.js","_app/immutable/chunks/KatexDataProp-07d10ff5.js","_app/immutable/chunks/katex-15be85e5.js"];
 export const stylesheets = [];
