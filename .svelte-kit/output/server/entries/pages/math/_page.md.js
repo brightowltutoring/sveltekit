@@ -20,7 +20,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   numMD = numMDMax;
   return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
 
-<body class="${"bg-white dark:bg-gray-900"}"><article class="${"prose lg:prose-lg dark:prose-invert"}"><h1>Garlic bread with cheese: What the science tells us</h1>
+ <article class="${"prose lg:prose-lg "}"><h1>Garlic bread with cheese: What the science tells us</h1>
   <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
     children, with the food earning such an iconic status in our culture that kids will often dress
     up as warm, cheesy loaf for Halloween.
@@ -85,7 +85,7 @@ ${each(equations, (eqn, k) => {
     return `<p>${escape(k + 1 + num)}</p>
 <div class="${"p-1 text-indigo-700"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
 </div>`;
-  })}</article></body>
+  })}</article>
 
 `;
 });

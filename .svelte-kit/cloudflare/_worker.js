@@ -1168,9 +1168,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-1e46a137.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-1e46a137.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-b5ebdbab.js", "_app/immutable/chunks/singletons-476a8dd5.js", "_app/immutable/chunks/navigation-e0c934ba.js"];
-    stylesheets = ["_app/immutable/assets/+layout-afbba2c3.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-a11086dc.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-a11086dc.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-eaaf7625.js", "_app/immutable/chunks/singletons-d5fb08d5.js", "_app/immutable/chunks/navigation-e74864f6.js"];
+    stylesheets = ["_app/immutable/assets/+layout-fa1274b6.css"];
   }
 });
 
@@ -1214,8 +1214,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-3c56a5ce.js";
-    imports2 = ["_app/immutable/components/error.svelte-3c56a5ce.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-b5ebdbab.js", "_app/immutable/chunks/singletons-476a8dd5.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file2 = "_app/immutable/components/error.svelte-26545ca1.js";
+    imports2 = ["_app/immutable/components/error.svelte-26545ca1.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-eaaf7625.js", "_app/immutable/chunks/singletons-d5fb08d5.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets2 = [];
   }
 });
@@ -21439,8 +21439,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-5e058606.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-5e058606.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/chunks/navigation-e0c934ba.js", "_app/immutable/chunks/singletons-476a8dd5.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-7b8cc23d.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-7b8cc23d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/chunks/navigation-e74864f6.js", "_app/immutable/chunks/singletons-d5fb08d5.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21506,7 +21506,7 @@ var init_page_md = __esm({
       numMD = numMDMax;
       return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
 
-<body class="${"bg-white dark:bg-gray-900"}"><article class="${"prose lg:prose-lg dark:prose-invert"}"><h1>Garlic bread with cheese: What the science tells us</h1>
+ <article class="${"prose lg:prose-lg "}"><h1>Garlic bread with cheese: What the science tells us</h1>
   <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
     children, with the food earning such an iconic status in our culture that kids will often dress
     up as warm, cheesy loaf for Halloween.
@@ -21571,7 +21571,7 @@ ${each(equations, (eqn, k) => {
         return `<p>${escape(k + 1 + num2)}</p>
 <div class="${"p-1 text-indigo-700"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
 </div>`;
-      })}</article></body>
+      })}</article>
 
 `;
     });
@@ -21592,8 +21592,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file7 = "_app/immutable/components/pages/math/_page.md-653872ea.js";
-    imports7 = ["_app/immutable/components/pages/math/_page.md-653872ea.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file7 = "_app/immutable/components/pages/math/_page.md-b18a9809.js";
+    imports7 = ["_app/immutable/components/pages/math/_page.md-b18a9809.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
     stylesheets7 = [];
   }
 });
@@ -24195,7 +24195,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-198ca14f.js", "imports": ["_app/immutable/start-198ca14f.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-476a8dd5.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-f81a916b.js", "imports": ["_app/immutable/start-f81a916b.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-d5fb08d5.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
