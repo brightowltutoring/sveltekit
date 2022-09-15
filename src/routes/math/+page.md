@@ -25,11 +25,13 @@
 
     let x=2
 
-    $: proseInvert = $isDarkMode?  "prose-invert" : ""
+    // $: proseInvert = $isDarkMode? "prose-invert" : ""
 </script>
 
 <!-- <article class="prose "> -->
-<article class="prose lg:prose-lg {proseInvert}">
+
+ <article class="prose lg:prose-lg ">
+
 
   <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>

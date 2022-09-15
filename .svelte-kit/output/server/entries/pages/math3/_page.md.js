@@ -1,5 +1,7 @@
-import { c as create_ssr_component, v as validate_component, h as add_attribute, e as escape, g as each } from "../../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
 import "katex";
+import { i as isDarkMode } from "../../../chunks/store.js";
+import "../../../chunks/index2.js";
 const KatexIntersectionObserver2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 
@@ -14,6 +16,9 @@ let numMax = 300;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let num;
   let numMD;
+  let proseInvert;
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   let numMDMax = numMax;
   let equations = [
     "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
@@ -25,9 +30,11 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let x = 2;
   num = numMax;
   numMD = numMDMax;
+  proseInvert = $isDarkMode ? "prose-invert" : "";
+  $$unsubscribe_isDarkMode();
   return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
 
-<article class="${"prose lg:prose-lg"}"><h1>Garlic bread with cheese: What the science tells us</h1>
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>Garlic bread with cheese: What the science tells us</h1>
   <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
     children, with the food earning such an iconic status in our culture that kids will often dress
     up as warm, cheesy loaf for Halloween.

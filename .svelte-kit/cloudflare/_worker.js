@@ -1168,9 +1168,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-a5bf79d3.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-a5bf79d3.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-de631612.js", "_app/immutable/chunks/singletons-6a6e2721.js", "_app/immutable/chunks/navigation-5d1f843f.js"];
-    stylesheets = ["_app/immutable/assets/+layout-6d7f3cf3.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-1e46a137.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-1e46a137.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-b5ebdbab.js", "_app/immutable/chunks/singletons-476a8dd5.js", "_app/immutable/chunks/navigation-e0c934ba.js"];
+    stylesheets = ["_app/immutable/assets/+layout-afbba2c3.css"];
   }
 });
 
@@ -1214,8 +1214,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-b0fa4cd4.js";
-    imports2 = ["_app/immutable/components/error.svelte-b0fa4cd4.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-de631612.js", "_app/immutable/chunks/singletons-6a6e2721.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file2 = "_app/immutable/components/error.svelte-3c56a5ce.js";
+    imports2 = ["_app/immutable/components/error.svelte-3c56a5ce.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-b5ebdbab.js", "_app/immutable/chunks/singletons-476a8dd5.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets2 = [];
   }
 });
@@ -14982,8 +14982,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-140e5eb4.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-140e5eb4.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-524b2867.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-524b2867.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = [];
   }
 });
@@ -21439,8 +21439,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-2edcd2fe.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-2edcd2fe.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/navigation-5d1f843f.js", "_app/immutable/chunks/singletons-6a6e2721.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-5e058606.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-5e058606.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/chunks/navigation-e0c934ba.js", "_app/immutable/chunks/singletons-476a8dd5.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21485,7 +21485,9 @@ var numMax, Page5;
 var init_page_md = __esm({
   ".svelte-kit/output/server/entries/pages/math/_page.md.js"() {
     init_chunks();
+    init_store();
     init_KatexDataProp();
+    init_index2();
     init_katex();
     numMax = 300;
     Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21504,7 +21506,7 @@ var init_page_md = __esm({
       numMD = numMDMax;
       return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
 
-<article class="${"prose lg:prose-lg"}"><h1>Garlic bread with cheese: What the science tells us</h1>
+<body class="${"bg-white dark:bg-gray-900"}"><article class="${"prose lg:prose-lg dark:prose-invert"}"><h1>Garlic bread with cheese: What the science tells us</h1>
   <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
     children, with the food earning such an iconic status in our culture that kids will often dress
     up as warm, cheesy loaf for Halloween.
@@ -21569,7 +21571,7 @@ ${each(equations, (eqn, k) => {
         return `<p>${escape(k + 1 + num2)}</p>
 <div class="${"p-1 text-indigo-700"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
 </div>`;
-      })}</article>
+      })}</article></body>
 
 `;
     });
@@ -21590,8 +21592,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file7 = "_app/immutable/components/pages/math/_page.md-3eb9ec37.js";
-    imports7 = ["_app/immutable/components/pages/math/_page.md-3eb9ec37.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file7 = "_app/immutable/components/pages/math/_page.md-653872ea.js";
+    imports7 = ["_app/immutable/components/pages/math/_page.md-653872ea.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
     stylesheets7 = [];
   }
 });
@@ -21722,8 +21724,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
-    file8 = "_app/immutable/components/pages/math2/_page.md-be9c8936.js";
-    imports8 = ["_app/immutable/components/pages/math2/_page.md-be9c8936.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file8 = "_app/immutable/components/pages/math2/_page.md-398d8d43.js";
+    imports8 = ["_app/immutable/components/pages/math2/_page.md-398d8d43.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/index-73fe8ffc.js"];
     stylesheets8 = ["_app/immutable/assets/+page-080ca6e3.css"];
   }
 });
@@ -21738,6 +21740,8 @@ var init_page_md3 = __esm({
   ".svelte-kit/output/server/entries/pages/math3/_page.md.js"() {
     init_chunks();
     init_katex();
+    init_store();
+    init_index2();
     KatexIntersectionObserver2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 
@@ -21752,6 +21756,9 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
     Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let num2;
       let numMD;
+      let proseInvert;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       let numMDMax = numMax2;
       let equations = [
         "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
@@ -21763,9 +21770,11 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
       let x2 = 2;
       num2 = numMax2;
       numMD = numMDMax;
+      proseInvert = $isDarkMode ? "prose-invert" : "";
+      $$unsubscribe_isDarkMode();
       return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
 
-<article class="${"prose lg:prose-lg"}"><h1>Garlic bread with cheese: What the science tells us</h1>
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>Garlic bread with cheese: What the science tells us</h1>
   <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
     children, with the food earning such an iconic status in our culture that kids will often dress
     up as warm, cheesy loaf for Halloween.
@@ -21835,8 +21844,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_md3(), page_md_exports3))).default;
-    file9 = "_app/immutable/components/pages/math3/_page.md-0a54064b.js";
-    imports9 = ["_app/immutable/components/pages/math3/_page.md-0a54064b.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file9 = "_app/immutable/components/pages/math3/_page.md-b7edcb44.js";
+    imports9 = ["_app/immutable/components/pages/math3/_page.md-b7edcb44.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets9 = [];
   }
 });
@@ -21975,8 +21984,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file10 = "_app/immutable/components/pages/plans/_page.svelte-aee97b88.js";
-    imports10 = ["_app/immutable/components/pages/plans/_page.svelte-aee97b88.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file10 = "_app/immutable/components/pages/plans/_page.svelte-c65d8d52.js";
+    imports10 = ["_app/immutable/components/pages/plans/_page.svelte-c65d8d52.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-73fe8ffc.js"];
     stylesheets10 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
@@ -24186,7 +24195,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-f9e84534.js", "imports": ["_app/immutable/start-f9e84534.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-6a6e2721.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-198ca14f.js", "imports": ["_app/immutable/start-198ca14f.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-476a8dd5.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
