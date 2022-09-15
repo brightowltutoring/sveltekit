@@ -1,9 +1,8 @@
 import { c as create_ssr_component, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
-import { K as KatexIntersectionObserver } from "../../../chunks/KatexIntersectionObserver.js";
-import { K as KatexDataProp } from "../../../chunks/KatexDataProp.js";
+import { K as KatexIntersectionObserver, a as KatexDataProp } from "../../../chunks/KatexDataProp.js";
 import "katex";
 let numMax = 1e3;
-let numMDMax = 200;
+let numMDMax = 1e3;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let num;
   let numMD;
@@ -55,7 +54,8 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <li>for css/svelte transitions, only katex svelte components are viable<ul><li>normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant !!<ul><li>1000 lines vs 4000-8000+ lines of math loaded instantly on page load</li>
 <li>when changing routes katex on 4000+ lines is easily transitioned \u2026 not the same for markdown</li></ul></li></ul></li></ul></li></ul>
 
-<div class="${"p-4"}"><input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
+<div class="${"p-4"}"><input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}>
+    <input type="${"number"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
 <h1>${escape(numMD)} lines of markdown immediately below</h1>
 ${each(Array(numMD), (_, j) => {
     return `<p>${escape(j + 1)}</p>
@@ -64,7 +64,8 @@ ${each(Array(numMD), (_, j) => {
 
 <h1>${escape(num + equations.length)} lines of katex below\u2026 lazy rendered with intersection observer!!</h1>
 <ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
-<input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
+<input type="${"number"}" min="${"1"}"${add_attribute("value", num, 0)}>
+<input type="${"range"}" min="${"1"}"${add_attribute("value", num, 0)}>
 ${each(Array(num), (_, j) => {
     return `<p>${escape(j + 1)}</p>
     <div class="${"p-5 text-red-400"}">${validate_component(KatexDataProp, "K").$$render(

@@ -6,9 +6,9 @@
 
     import KatexIntersectionObserver2 from "$lib/KatexIntersectionObserver2.svelte"
   
-    let numMax = 1000
+    let numMax = 300
+    let numMDMax = numMax
     $: num = numMax
-    let numMDMax=1000
     $: numMD = numMDMax
 
      let equations = [
@@ -23,8 +23,8 @@
     let x=2
 </script>
 
-<article >
-<!-- <article class="prose lg:prose-lg"> -->
+<!-- <article > -->
+<article class="prose lg:prose-lg">
 
   <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>
@@ -102,14 +102,14 @@ The katex components come in use with more detailed styling AND/OR lots of math 
 {#each Array(num) as _,j }
     {j+1 }
     <div class="p-5 text-red-400">
-        <p d={true} m={"\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}"}/>
+        <p d m={"\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}"}/>
     </div>
 {/each}
 
 {#each equations as eqn,k }
 {k+1 + num}
 <div class="p-1 text-indigo-700">
-    <p d={true} m={eqn}/>
+    <p d m={eqn}/>
 </div>
 {/each}
 

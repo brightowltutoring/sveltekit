@@ -1,6 +1,5 @@
 import { c as create_ssr_component, v as validate_component, g as each } from "../../../chunks/index.js";
-import { K as KatexDataProp } from "../../../chunks/KatexDataProp.js";
-import { K as KatexIntersectionObserver } from "../../../chunks/KatexIntersectionObserver.js";
+import { K as KatexIntersectionObserver, a as KatexDataProp } from "../../../chunks/KatexDataProp.js";
 import "katex";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}

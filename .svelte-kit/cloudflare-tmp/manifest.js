@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp"]),
 	mimeTypes: {".mp4":"video/mp4",".webp":"image/webp"},
 	_: {
-		entry: {"file":"_app/immutable/start-8bdcc326.js","imports":["_app/immutable/start-8bdcc326.js","_app/immutable/chunks/index-d43d80ed.js","_app/immutable/chunks/singletons-a47075d2.js","_app/immutable/chunks/index-5cb55e0e.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-14cc3d15.js","imports":["_app/immutable/start-14cc3d15.js","_app/immutable/chunks/index-d43d80ed.js","_app/immutable/chunks/singletons-098be412.js","_app/immutable/chunks/index-5cb55e0e.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),
@@ -81,8 +81,8 @@ export const manifest = {
 			},
 			{
 				type: 'page',
-				id: "mdtest",
-				pattern: /^\/mdtest\/?$/,
+				id: "math3",
+				pattern: /^\/math3\/?$/,
 				names: [],
 				types: [],
 				errors: [1],

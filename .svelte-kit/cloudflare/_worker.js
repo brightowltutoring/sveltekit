@@ -718,6 +718,12 @@ var init_store = __esm({
         title: "math",
         isCurrent: false
       },
+      math3: {
+        name: "math3",
+        href: "/math3",
+        title: "math3",
+        isCurrent: false
+      },
       schools: {
         name: "schools",
         href: "/schools",
@@ -1162,8 +1168,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-e1096465.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-e1096465.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-d4083d57.js", "_app/immutable/chunks/singletons-a47075d2.js", "_app/immutable/chunks/navigation-c6bf5ccc.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-76318960.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-76318960.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-bca037ee.js", "_app/immutable/chunks/singletons-098be412.js", "_app/immutable/chunks/navigation-5529e18b.js"];
     stylesheets = ["_app/immutable/assets/+layout-6d7f3cf3.css"];
   }
 });
@@ -1208,8 +1214,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-096de7b0.js";
-    imports2 = ["_app/immutable/components/error.svelte-096de7b0.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-d4083d57.js", "_app/immutable/chunks/singletons-a47075d2.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file2 = "_app/immutable/components/error.svelte-fbc4f12a.js";
+    imports2 = ["_app/immutable/components/error.svelte-fbc4f12a.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-bca037ee.js", "_app/immutable/chunks/singletons-098be412.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets2 = [];
   }
 });
@@ -14976,8 +14982,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-798a50de.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-798a50de.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-140e5eb4.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-140e5eb4.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = [];
   }
 });
@@ -21433,16 +21439,16 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-b112acb3.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-b112acb3.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/navigation-c6bf5ccc.js", "_app/immutable/chunks/singletons-a47075d2.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-b7cc1832.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-b7cc1832.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/navigation-5529e18b.js", "_app/immutable/chunks/singletons-098be412.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
 
-// .svelte-kit/output/server/chunks/KatexIntersectionObserver.js
-var KatexIntersectionObserver;
-var init_KatexIntersectionObserver = __esm({
-  ".svelte-kit/output/server/chunks/KatexIntersectionObserver.js"() {
+// .svelte-kit/output/server/chunks/KatexDataProp.js
+var KatexIntersectionObserver, KatexDataProp;
+var init_KatexDataProp = __esm({
+  ".svelte-kit/output/server/chunks/KatexDataProp.js"() {
     init_chunks();
     init_katex();
     KatexIntersectionObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21455,14 +21461,6 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
 
 `;
     });
-  }
-});
-
-// .svelte-kit/output/server/chunks/KatexDataProp.js
-var KatexDataProp;
-var init_KatexDataProp = __esm({
-  ".svelte-kit/output/server/chunks/KatexDataProp.js"() {
-    init_chunks();
     KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { m: m2 } = $$props;
       let { d: d2 } = $$props;
@@ -21487,11 +21485,10 @@ var numMax, numMDMax, Page5;
 var init_page_md = __esm({
   ".svelte-kit/output/server/entries/pages/math/_page.md.js"() {
     init_chunks();
-    init_KatexIntersectionObserver();
     init_KatexDataProp();
     init_katex();
     numMax = 1e3;
-    numMDMax = 200;
+    numMDMax = 1e3;
     Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let num2;
       let numMD;
@@ -21543,7 +21540,8 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <li>for css/svelte transitions, only katex svelte components are viable<ul><li>normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant !!<ul><li>1000 lines vs 4000-8000+ lines of math loaded instantly on page load</li>
 <li>when changing routes katex on 4000+ lines is easily transitioned \u2026 not the same for markdown</li></ul></li></ul></li></ul></li></ul>
 
-<div class="${"p-4"}"><input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
+<div class="${"p-4"}"><input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}>
+    <input type="${"number"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
 <h1>${escape(numMD)} lines of markdown immediately below</h1>
 ${each(Array(numMD), (_2, j2) => {
         return `<p>${escape(j2 + 1)}</p>
@@ -21552,7 +21550,8 @@ ${each(Array(numMD), (_2, j2) => {
 
 <h1>${escape(num2 + equations.length)} lines of katex below\u2026 lazy rendered with intersection observer!!</h1>
 <ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
-<input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num2, 0)}>
+<input type="${"number"}" min="${"1"}"${add_attribute("value", num2, 0)}>
+<input type="${"range"}" min="${"1"}"${add_attribute("value", num2, 0)}>
 ${each(Array(num2), (_2, j2) => {
         return `<p>${escape(j2 + 1)}</p>
     <div class="${"p-5 text-red-400"}">${validate_component(KatexDataProp, "K").$$render(
@@ -21591,8 +21590,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file7 = "_app/immutable/components/pages/math/_page.md-2b3bdea7.js";
-    imports7 = ["_app/immutable/components/pages/math/_page.md-2b3bdea7.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexIntersectionObserver-b9f9940d.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/KatexDataProp-b4a6f295.js"];
+    file7 = "_app/immutable/components/pages/math/_page.md-d575e10e.js";
+    imports7 = ["_app/immutable/components/pages/math/_page.md-d575e10e.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
     stylesheets7 = [];
   }
 });
@@ -21723,32 +21722,101 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
-    file8 = "_app/immutable/components/pages/math2/_page.md-6bf2fec1.js";
-    imports8 = ["_app/immutable/components/pages/math2/_page.md-6bf2fec1.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file8 = "_app/immutable/components/pages/math2/_page.md-be9c8936.js";
+    imports8 = ["_app/immutable/components/pages/math2/_page.md-be9c8936.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js"];
     stylesheets8 = ["_app/immutable/assets/+page-080ca6e3.css"];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/mdtest/_page.md.js
+// .svelte-kit/output/server/entries/pages/math3/_page.md.js
 var page_md_exports3 = {};
 __export(page_md_exports3, {
   default: () => Page7
 });
-var Page7;
+var KatexIntersectionObserver2, numMax2, numMDMax2, Page7;
 var init_page_md3 = __esm({
-  ".svelte-kit/output/server/entries/pages/mdtest/_page.md.js"() {
+  ".svelte-kit/output/server/entries/pages/math3/_page.md.js"() {
     init_chunks();
-    init_KatexIntersectionObserver();
     init_katex();
-    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    KatexIntersectionObserver2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
-${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
-<article class="${"prose lg:prose-lg"}"><h1>heyo</h1>
-<ul><li>first position<blockquote><ul><li>first position <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span></li>
-<li>first position</li>
-<li>first position</li></ul></blockquote></li></ul>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam fugiat itaque unde maiores repellat modi iure, numquam eum deleniti expedita rem quod velit officia assumenda dolorum nulla debitis illo tenetur eveniet quam! Itaque magnam, architecto commodi dignissimos necessitatibus numquam. Eum.</p>
-<p>The way it should\u2019ve been.</p></article>`;
+
+
+
+
+${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}
+
+`;
+    });
+    numMax2 = 1e3;
+    numMDMax2 = 1e3;
+    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let num2;
+      let numMD;
+      let equations = [
+        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
+      ];
+      let x2 = 2;
+      num2 = numMax2;
+      numMD = numMDMax2;
+      return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
+<article>
+  <h1>Garlic bread with cheese: What the science tells us</h1>
+  <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
+    children, with the food earning such an iconic status in our culture that kids will often dress
+    up as warm, cheesy loaf for Halloween.
+  </p>
+  <p>But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
+    springing up around the country.
+  </p>
+  
+<p d${add_attribute("m", "\\underbrace{u'-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}", 0)}></p>
+<div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><munder><mrow><msup><mi>u</mi><mo mathvariant="normal" lspace="0em" rspace="0em">\u2032</mo></msup><mo>\u2212</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msup><mi>u</mi><mn>2</mn></msup><mo>\u2212</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>u</mi><mo>\u2212</mo><mi>R</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo stretchy="true">\u23DF</mo></munder><mrow><mtext>=0,\xA0since\xA0</mtext><mstyle scriptlevel="0" displaystyle="false"><mi>u</mi></mstyle><mtext>\xA0is\xA0a\xA0particular\xA0solution.</mtext></mrow></munder></mrow><annotation encoding="application/x-tex">\\underbrace{u&#x27;-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.5843em;vertical-align:-1.7202em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-1.4159em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">=0,\xA0since</span><span class="mord mtight nobreak">\xA0</span><span class="mord mathnormal sizing reset-size3 size6">u</span><span class="mord mtight">\xA0is\xA0a\xA0particular\xA0solution.</span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span class="svg-align" style="top:-2.102em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMinYMin slice'><path d='M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z'/></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMidYMin slice'><path d='M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z'/></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMaxYMin slice'><path d='M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z'/></svg></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8019em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2032</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.898em;"><span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:1.7202em;"><span></span></span></span></span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div>
+<span class="${"text-red-700 text-7xl flex justify-center"}"><p>${escape(x2)}<span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>=${escape(x2 ** 2)}</p></span>
+<div class="${"flex justify-center"}"><input type="${"range"}" min="${"1"}"${add_attribute("value", x2, 0)}></div>
+<h1>The content of this page are written in a markdown file with svelte components (tailwind too), possible due to MDsveX!</h1>
+<ul><li>the square-slider above using svelte binding of a JS variable \u2026 again this is possible due to MDsveX</li>
+<li>The <strong>math</strong> on this page is written in both markdown (i.e. Latex) and with Katex.<ul><li>for heavy inline use, markdown is preferable</li>
+<li>for css/svelte transitions, only katex svelte components are viable<ul><li>normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant !!<ul><li>1000 lines vs 4000-8000+ lines of math loaded instantly on page load</li>
+<li>when changing routes katex on 4000+ lines is easily transitioned \u2026 not the same for markdown</li></ul></li></ul></li></ul></li></ul>
+
+<div class="${"p-4"}"><input type="${"number"}" min="${"1"}"${add_attribute("value", numMD, 0)}>
+    <input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
+<h1>${escape(numMD)} lines of markdown immediately below</h1>
+${each(Array(numMD), (_2, j2) => {
+        return `<p>${escape(j2 + 1)}</p>
+<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>`;
+      })}
+
+<h1>${escape(num2 + equations.length)} lines of katex below\u2026 lazy rendered with intersection observer!!</h1>
+<ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
+<input type="${"number"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num2, 0)}>
+<input type="${"range"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num2, 0)}>
+${each(Array(num2), (_2, j2) => {
+        return `<p>${escape(j2 + 1)}</p>
+    <div class="${"p-5 text-red-400"}"><p${add_attribute("d", true, 0)}${add_attribute("m", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
+    </div>`;
+      })}
+${each(equations, (eqn, k) => {
+        return `<p>${escape(k + 1 + num2)}</p>
+<div class="${"p-1 text-indigo-700"}"><p${add_attribute("d", true, 0)}${add_attribute("m", eqn, 0)}></p>
+</div>`;
+      })}</article>
+
+`;
     });
   }
 });
@@ -21767,8 +21835,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_md3(), page_md_exports3))).default;
-    file9 = "_app/immutable/components/pages/mdtest/_page.md-2198c327.js";
-    imports9 = ["_app/immutable/components/pages/mdtest/_page.md-2198c327.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexIntersectionObserver-b9f9940d.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file9 = "_app/immutable/components/pages/math3/_page.md-c23567ec.js";
+    imports9 = ["_app/immutable/components/pages/math3/_page.md-c23567ec.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/katex-15be85e5.js"];
     stylesheets9 = [];
   }
 });
@@ -21907,8 +21975,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file10 = "_app/immutable/components/pages/plans/_page.svelte-f58033cc.js";
-    imports10 = ["_app/immutable/components/pages/plans/_page.svelte-f58033cc.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file10 = "_app/immutable/components/pages/plans/_page.svelte-aee97b88.js";
+    imports10 = ["_app/immutable/components/pages/plans/_page.svelte-aee97b88.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-d0fea018.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets10 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
@@ -21923,7 +21991,6 @@ var init_page_md4 = __esm({
   ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
     init_chunks();
     init_KatexDataProp();
-    init_KatexIntersectionObserver();
     init_katex();
     Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
@@ -21949,8 +22016,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_md4(), page_md_exports4))).default;
-    file11 = "_app/immutable/components/pages/samplequiz/_page.md-3d4fee95.js";
-    imports11 = ["_app/immutable/components/pages/samplequiz/_page.md-3d4fee95.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-b4a6f295.js", "_app/immutable/chunks/KatexIntersectionObserver-b9f9940d.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file11 = "_app/immutable/components/pages/samplequiz/_page.md-23c7d95b.js";
+    imports11 = ["_app/immutable/components/pages/samplequiz/_page.md-23c7d95b.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
     stylesheets11 = [];
   }
 });
@@ -24119,7 +24186,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-8bdcc326.js", "imports": ["_app/immutable/start-8bdcc326.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-a47075d2.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-14cc3d15.js", "imports": ["_app/immutable/start-14cc3d15.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-098be412.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -24197,8 +24264,8 @@ var manifest = {
       },
       {
         type: "page",
-        id: "mdtest",
-        pattern: /^\/mdtest\/?$/,
+        id: "math3",
+        pattern: /^\/math3\/?$/,
         names: [],
         types: [],
         errors: [1],

@@ -27,7 +27,9 @@ where the myKatexEntries class element is used...
 
         let target = entry.target;
         let m = target.getAttribute("m");
-        let d = target.getAttribute("d");
+        let d = target.hasAttribute("d");
+
+        // = target.getAttribute("d");
         console.log(target);
         // console.log("math", math);
         katex.render(m, target, { displayMode: d });

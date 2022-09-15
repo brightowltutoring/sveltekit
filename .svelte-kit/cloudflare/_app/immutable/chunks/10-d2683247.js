@@ -1,1 +1,0 @@
-import{default as e}from"../components/pages/samplequiz/_page.md-3d4fee95.js";import"./index-d43d80ed.js";import"./KatexDataProp-b4a6f295.js";import"./KatexIntersectionObserver-b9f9940d.js";import"./katex-15be85e5.js";export{e as component};

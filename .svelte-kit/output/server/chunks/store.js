@@ -54,6 +54,12 @@ const routes = writable({
     title: "math",
     isCurrent: false
   },
+  math3: {
+    name: "math3",
+    href: "/math3",
+    title: "math3",
+    isCurrent: false
+  },
   schools: {
     name: "schools",
     href: "/schools",
