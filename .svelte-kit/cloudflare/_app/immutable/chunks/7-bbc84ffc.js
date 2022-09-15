@@ -1,1 +1,0 @@
-import{default as a}from"../components/pages/math2/_page.md-12c3190d.js";import"./index-d43d80ed.js";import"./store-ced1e84a.js";import"./index-5cb55e0e.js";import"./Katex-54ec90ca.js";import"./katex-15be85e5.js";export{a as component};

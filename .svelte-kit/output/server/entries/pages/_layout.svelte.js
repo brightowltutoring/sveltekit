@@ -39,8 +39,7 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_page();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_redirectSetInterval();
-  return `
-<button class="${escape(bool && `${btnColor} md:border-b-1 md:rounded md:px-3 md:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " md:hover:rounded md:hover:py-1 md:hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
+  return `<button class="${escape(bool && `${btnColor} md:border-b-1 md:rounded md:px-3 md:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " md:hover:rounded md:hover:py-1 md:hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
 });
 const hamburgerWidth = 35;
 const hamburgerPattyHeight = 2;

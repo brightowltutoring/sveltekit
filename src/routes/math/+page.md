@@ -38,7 +38,7 @@
     springing up around the country.
   </p>
   <!-- ... -->
-</article>
+
 
 <K d m={"\\underbrace{u\'-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}"}/>
 
@@ -113,7 +113,7 @@ The katex components come in use with more detailed styling AND/OR lots of math 
 {/each}
 
 
- 
+</article>
 
 
 

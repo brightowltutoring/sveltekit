@@ -1,30 +1,6 @@
-import { c as create_ssr_component, h as add_attribute, v as validate_component, e as escape, g as each } from "../../../chunks/index.js";
+import { c as create_ssr_component, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
+import { K as KatexIntersectionObserver, a as KatexDataProp } from "../../../chunks/KatexDataProp.js";
 import "katex";
-const KatexIntersectionObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { m } = $$props;
-  if ($$props.m === void 0 && $$bindings.m && m !== void 0)
-    $$bindings.m(m);
-  return `
-
-
-
-
-
-
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}`;
-});
-const KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { m } = $$props;
-  let { d } = $$props;
-  if ($$props.m === void 0 && $$bindings.m && m !== void 0)
-    $$bindings.m(m);
-  if ($$props.d === void 0 && $$bindings.d && d !== void 0)
-    $$bindings.d(d);
-  return `
-
-
-<div class="${"myKatex"}"${add_attribute("data-math", m, 0)}${add_attribute("data-display", d, 0)}>.</div>`;
-});
 const _page_md_svelte_type_style_lang = "";
 const css = {
   code: "ul.svelte-1rteh51.svelte-1rteh51{list-style-type:disc;list-style-position:inside}ul.svelte-1rteh51 ul.svelte-1rteh51{list-style-type:circle;list-style-position:inside;margin-left:15px}h1.svelte-1rteh51.svelte-1rteh51{font-size:1.5rem;line-height:2rem}",
@@ -48,6 +24,15 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   numMD = numMDMax;
   return `
 ${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
+<article class="${"prose lg:prose-lg"}"><h1 class="${"svelte-1rteh51"}">Garlic bread with cheese: What the science tells us</h1>
+  <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
+    children, with the food earning such an iconic status in our culture that kids will often dress
+    up as warm, cheesy loaf for Halloween.
+  </p>
+  <p>But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
+    springing up around the country.
+  </p>
+  </article>
 ${validate_component(KatexDataProp, "K").$$render(
     $$result,
     {
