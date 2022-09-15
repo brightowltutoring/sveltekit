@@ -140,10 +140,10 @@ export const routes = writable({
     title: "jitsi 🚀",
     isCurrent: false,
   },
-  samplequiz: {
-    name:'samplequiz',
-    href: "/samplequiz",
-    title: "samplequiz 🚀",
+  physics: {
+    name:'physics',
+    href: "/physics",
+    title: "physics 🚀",
     isCurrent: false,
   },
 })

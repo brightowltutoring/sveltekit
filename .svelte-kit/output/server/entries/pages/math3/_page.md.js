@@ -12,7 +12,7 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
 
 `;
 });
-let numMax = 500;
+let numMax = 3e3;
 let numMDMax = 1;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let num;
