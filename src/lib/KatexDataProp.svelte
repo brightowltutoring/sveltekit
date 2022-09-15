@@ -1,9 +1,7 @@
-<!-- this component wasn't need AS badly, as the div defintion below is simple enough
-It's too bad that I couldn't include this component the katex intersection observer component
--->
+<!-- I have yet to figure out for the life of me why I have to break this up into two components (KatexIntersectionObserver & KatexDataProp). Trying to use the logic all in one makes things laggy when using lots of math -->
 <script>
   export let m;
   export let d;
 </script>
 
-<div class="myKatex" data-math={m} data-display={d}>.</div>
+<div class="myKatexEntries" data-math={m} data-display={d}>.</div>

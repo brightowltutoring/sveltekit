@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component12) {
-  current_component = component12;
+function set_current_component(component13) {
+  current_component = component13;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component12, name4) {
-  if (!component12 || !component12.$$render) {
+function validate_component(component13, name4) {
+  if (!component13 || !component13.$$render) {
     if (name4 === "svelte:component")
       name4 += " this={...}";
     throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component12;
+  return component13;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css8) => css8.code).join("\n"),
+          code: Array.from(result.css).map((css7) => css7.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -310,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index12 = 0;
-      while (index12 < str.length) {
-        var eqIdx = str.indexOf("=", index12);
+      var index13 = 0;
+      while (index13 < str.length) {
+        var eqIdx = str.indexOf("=", index13);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index12);
+        var endIdx = str.indexOf(";", index13);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index12 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index13 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index12, eqIdx).trim();
+        var key2 = str.slice(index13, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,7 +331,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index12 = endIdx + 1;
+        index13 = endIdx + 1;
       }
       return obj;
     }
@@ -1162,9 +1162,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-6e0de0a3.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-6e0de0a3.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-6bab7822.js", "_app/immutable/chunks/singletons-a80afb67.js", "_app/immutable/chunks/navigation-ae39cc7b.js"];
-    stylesheets = ["_app/immutable/assets/+layout-6058b7c2.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-ff4459b4.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-ff4459b4.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-a09c4d6e.js", "_app/immutable/chunks/singletons-7337a325.js", "_app/immutable/chunks/navigation-0f1e7062.js"];
+    stylesheets = ["_app/immutable/assets/+layout-6d7f3cf3.css"];
   }
 });
 
@@ -1208,8 +1208,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-99d01ebd.js";
-    imports2 = ["_app/immutable/components/error.svelte-99d01ebd.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-6bab7822.js", "_app/immutable/chunks/singletons-a80afb67.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file2 = "_app/immutable/components/error.svelte-a6177ece.js";
+    imports2 = ["_app/immutable/components/error.svelte-a6177ece.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-a09c4d6e.js", "_app/immutable/chunks/singletons-7337a325.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets2 = [];
   }
 });
@@ -6633,8 +6633,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index12) => (n2) => {
-          nodes.splice(index12 + 1, 0, n2);
+        prev.insertAfter = ((index13) => (n2) => {
+          nodes.splice(index13 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -11918,13 +11918,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index12 = optArgs[0];
+        var index13 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index12
+          index: index13
         };
       },
       htmlBuilder(group, options) {
@@ -11990,9 +11990,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index12
+          index: index13
         } = group;
-        return index12 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index12, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index13 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index13, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -15694,8 +15694,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component12) {
-  return component12.instantiationMode === "EAGER";
+function isComponentEager(component13) {
+  return component13.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -15785,18 +15785,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component12) {
-        if (component12.name !== this.name) {
-          throw Error(`Mismatching Component ${component12.name} for Provider ${this.name}.`);
+      setComponent(component13) {
+        if (component13.name !== this.name) {
+          throw Error(`Mismatching Component ${component13.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component12;
+        this.component = component13;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component12)) {
+        if (isComponentEager(component13)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -15916,19 +15916,19 @@ var init_index_esm20172 = __esm({
         this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component12) {
-        const provider = this.getProvider(component12.name);
+      addComponent(component13) {
+        const provider = this.getProvider(component13.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component12.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component13.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component12);
+        provider.setComponent(component13);
       }
-      addOrOverwriteComponent(component12) {
-        const provider = this.getProvider(component12.name);
+      addOrOverwriteComponent(component13) {
+        const provider = this.getProvider(component13.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component12.name);
+          this.providers.delete(component13.name);
         }
-        this.addComponent(component12);
+        this.addComponent(component13);
       }
       getProvider(name4) {
         if (this.providers.has(name4)) {
@@ -16254,25 +16254,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component12 = provider.getComponent();
-  return (component12 === null || component12 === void 0 ? void 0 : component12.type) === "VERSION";
+  const component13 = provider.getComponent();
+  return (component13 === null || component13 === void 0 ? void 0 : component13.type) === "VERSION";
 }
-function _addComponent(app2, component12) {
+function _addComponent(app2, component13) {
   try {
-    app2.container.addComponent(component12);
+    app2.container.addComponent(component13);
   } catch (e3) {
-    logger.debug(`Component ${component12.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component13.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component12) {
-  const componentName = component12.name;
+function _registerComponent(component13) {
+  const componentName = component13.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component12);
+  _components.set(componentName, component13);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component12);
+    _addComponent(app2, component13);
   }
   return true;
 }
@@ -16304,8 +16304,8 @@ function initializeApp(options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name4);
-  for (const component12 of _components.values()) {
-    container.addComponent(component12);
+  for (const component13 of _components.values()) {
+    container.addComponent(component13);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name4, newApp);
@@ -18886,9 +18886,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index12 = this.queue.length - 1;
+        const index13 = this.queue.length - 1;
         return () => {
-          this.queue[index12] = () => Promise.resolve();
+          this.queue[index13] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -21433,16 +21433,16 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-b6dbc290.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-b6dbc290.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/navigation-ae39cc7b.js", "_app/immutable/chunks/singletons-a80afb67.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-a41cb8ac.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-a41cb8ac.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/navigation-0f1e7062.js", "_app/immutable/chunks/singletons-7337a325.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
 
-// .svelte-kit/output/server/chunks/KatexDataProp.js
-var KatexIntersectionObserver, KatexDataProp;
-var init_KatexDataProp = __esm({
-  ".svelte-kit/output/server/chunks/KatexDataProp.js"() {
+// .svelte-kit/output/server/chunks/KatexIntersectionObserver.js
+var KatexIntersectionObserver;
+var init_KatexIntersectionObserver = __esm({
+  ".svelte-kit/output/server/chunks/KatexIntersectionObserver.js"() {
     init_chunks();
     init_katex();
     KatexIntersectionObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21451,10 +21451,18 @@ var init_KatexDataProp = __esm({
 
 
 
+${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}
 
-
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}`;
+`;
     });
+  }
+});
+
+// .svelte-kit/output/server/chunks/KatexDataProp.js
+var KatexDataProp;
+var init_KatexDataProp = __esm({
+  ".svelte-kit/output/server/chunks/KatexDataProp.js"() {
+    init_chunks();
     KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { m: m2 } = $$props;
       let { d: d2 } = $$props;
@@ -21465,7 +21473,7 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
       return `
 
 
-<div class="${"myKatex"}"${add_attribute("data-math", m2, 0)}${add_attribute("data-display", d2, 0)}>.</div>`;
+<div class="${"myKatexEntries"}"${add_attribute("data-math", m2, 0)}${add_attribute("data-display", d2, 0)}>.</div>`;
     });
   }
 });
@@ -21475,16 +21483,13 @@ var page_md_exports = {};
 __export(page_md_exports, {
   default: () => Page5
 });
-var css4, numMax, numMDMax, Page5;
+var numMax, numMDMax, Page5;
 var init_page_md = __esm({
   ".svelte-kit/output/server/entries/pages/math/_page.md.js"() {
     init_chunks();
+    init_KatexIntersectionObserver();
     init_KatexDataProp();
     init_katex();
-    css4 = {
-      code: "ul.svelte-1rteh51.svelte-1rteh51{list-style-type:disc;list-style-position:inside}ul.svelte-1rteh51 ul.svelte-1rteh51{list-style-type:circle;list-style-position:inside;margin-left:15px}h1.svelte-1rteh51.svelte-1rteh51{font-size:1.5rem;line-height:2rem}",
-      map: null
-    };
     numMax = 1e3;
     numMDMax = 1;
     Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21498,12 +21503,11 @@ var init_page_md = __esm({
         "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
       ];
       let x2 = 2;
-      $$result.css.add(css4);
       num2 = numMax;
       numMD = numMDMax;
-      return `
-${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
-<article class="${"prose lg:prose-lg"}"><h1 class="${"svelte-1rteh51"}">Garlic bread with cheese: What the science tells us</h1>
+      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
+
+<article class="${"prose lg:prose-lg"}"><h1>Garlic bread with cheese: What the science tells us</h1>
   <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
     children, with the food earning such an iconic status in our culture that kids will often dress
     up as warm, cheesy loaf for Halloween.
@@ -21511,7 +21515,7 @@ ${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$r
   <p>But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
     springing up around the country.
   </p>
-  </article>
+  
 ${validate_component(KatexDataProp, "K").$$render(
         $$result,
         {
@@ -21533,21 +21537,21 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 -174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z'/></svg></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8019em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2032</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.898em;"><span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:1.7202em;"><span></span></span></span></span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div>
 <span class="${"text-red-700 text-7xl flex justify-center"}"><p>${escape(x2)}<span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>=${escape(x2 ** 2)}</p></span>
 <div class="${"flex justify-center"}"><input type="${"range"}" min="${"0"}"${add_attribute("value", x2, 0)}></div>
-<h1 class="${"svelte-1rteh51"}">The content of this page are written in a markdown file with svelte components (tailwind too), possible due to MDsveX!</h1>
-<ul class="${"svelte-1rteh51"}"><li>the square-slider above using svelte binding of a JS variable \u2026 again this is possible due to MDsveX</li>
-<li>The <strong>math</strong> on this page is written in both markdown (i.e. Latex) and with Katex.<ul class="${"svelte-1rteh51"}"><li>for heavy inline use, markdown is preferable</li>
-<li>for css/svelte transitions, only katex svelte components are viable<ul class="${"svelte-1rteh51"}"><li>normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant !!<ul class="${"svelte-1rteh51"}"><li>1000 lines vs 4000-8000+ lines of math loaded instantly on page load</li>
+<h1>The content of this page are written in a markdown file with svelte components (tailwind too), possible due to MDsveX!</h1>
+<ul><li>the square-slider above using svelte binding of a JS variable \u2026 again this is possible due to MDsveX</li>
+<li>The <strong>math</strong> on this page is written in both markdown (i.e. Latex) and with Katex.<ul><li>for heavy inline use, markdown is preferable</li>
+<li>for css/svelte transitions, only katex svelte components are viable<ul><li>normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant !!<ul><li>1000 lines vs 4000-8000+ lines of math loaded instantly on page load</li>
 <li>when changing routes katex on 4000+ lines is easily transitioned \u2026 not the same for markdown</li></ul></li></ul></li></ul></li></ul>
 
 <div class="${"p-4"}"><input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
-<h1 class="${"svelte-1rteh51"}">${escape(numMD)} lines of markdown immediately below</h1>
+<h1>${escape(numMD)} lines of markdown immediately below</h1>
 ${each(Array(numMD), (_2, j2) => {
         return `<p>${escape(j2 + 1)}</p>
 <div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>`;
       })}
 
-<h1 class="${"svelte-1rteh51"}">${escape(num2 + equations.length)} lines of katex below\u2026 lazy rendered with intersection observer!!</h1>
-<ul class="${"svelte-1rteh51"}"><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
+<h1>${escape(num2 + equations.length)} lines of katex below\u2026 lazy rendered with intersection observer!!</h1>
+<ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num2, 0)}>
 ${each(Array(num2), (_2, j2) => {
         return `<p>${escape(j2 + 1)}</p>
@@ -21566,7 +21570,8 @@ ${each(equations, (eqn, k) => {
         return `<p>${escape(k + 1 + num2)}</p>
 <div class="${"p-1 text-indigo-700"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
 </div>`;
-      })}
+      })}</article>
+
 `;
     });
   }
@@ -21586,9 +21591,9 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file7 = "_app/immutable/components/pages/math/_page.md-7a5497a4.js";
-    imports7 = ["_app/immutable/components/pages/math/_page.md-7a5497a4.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-82375fa1.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets7 = ["_app/immutable/assets/+page-ff2da4ef.css"];
+    file7 = "_app/immutable/components/pages/math/_page.md-d686cbdf.js";
+    imports7 = ["_app/immutable/components/pages/math/_page.md-d686cbdf.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexIntersectionObserver-b9f9940d.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/KatexDataProp-b4a6f295.js"];
+    stylesheets7 = [];
   }
 });
 
@@ -21597,7 +21602,7 @@ var page_md_exports2 = {};
 __export(page_md_exports2, {
   default: () => Page6
 });
-var css5, num, Page6;
+var css4, num, Page6;
 var init_page_md2 = __esm({
   ".svelte-kit/output/server/entries/pages/math2/_page.md.js"() {
     init_chunks();
@@ -21605,7 +21610,7 @@ var init_page_md2 = __esm({
     init_Katex();
     init_index2();
     init_katex();
-    css5 = {
+    css4 = {
       code: "details.svelte-6gn253>summary.svelte-6gn253{list-style:none;color:transparent \n    }blockquote.svelte-6gn253.svelte-6gn253{margin:0;padding-left:1.4rem;border-left:8px solid #bbb}ul.svelte-6gn253.svelte-6gn253{list-style-type:disc;list-style-position:inside}h1.svelte-6gn253.svelte-6gn253{font-size:1.5rem;line-height:2rem}",
       map: null
     };
@@ -21615,7 +21620,7 @@ var init_page_md2 = __esm({
       let $elementColor, $$unsubscribe_elementColor;
       $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
       let x2 = 2;
-      $$result.css.add(css5);
+      $$result.css.add(css4);
       buttonColorTransition = `background: ${$elementColor};transition: background-color 0.4s cubic-bezier(0.64, 0, 0.78, 0)`;
       $$unsubscribe_elementColor();
       return `
@@ -21724,6 +21729,50 @@ var init__8 = __esm({
   }
 });
 
+// .svelte-kit/output/server/entries/pages/mdtest/_page.md.js
+var page_md_exports3 = {};
+__export(page_md_exports3, {
+  default: () => Page7
+});
+var Page7;
+var init_page_md3 = __esm({
+  ".svelte-kit/output/server/entries/pages/mdtest/_page.md.js"() {
+    init_chunks();
+    init_KatexIntersectionObserver();
+    init_katex();
+    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
+<article class="${"prose lg:prose-lg"}"><h1>heyo</h1>
+<ul><li>first position<blockquote><ul><li>first position <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span></li>
+<li>first position</li>
+<li>first position</li></ul></blockquote></li></ul>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam fugiat itaque unde maiores repellat modi iure, numquam eum deleniti expedita rem quod velit officia assumenda dolorum nulla debitis illo tenetur eveniet quam! Itaque magnam, architecto commodi dignissimos necessitatibus numquam. Eum.</p>
+<p>The way it should\u2019ve been.</p></article>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/8.js
+var __exports9 = {};
+__export(__exports9, {
+  component: () => component9,
+  file: () => file9,
+  imports: () => imports9,
+  index: () => index9,
+  stylesheets: () => stylesheets9
+});
+var index9, component9, file9, imports9, stylesheets9;
+var init__9 = __esm({
+  ".svelte-kit/output/server/nodes/8.js"() {
+    index9 = 8;
+    component9 = async () => (await Promise.resolve().then(() => (init_page_md3(), page_md_exports3))).default;
+    file9 = "_app/immutable/components/pages/mdtest/_page.md-2198c327.js";
+    imports9 = ["_app/immutable/components/pages/mdtest/_page.md-2198c327.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexIntersectionObserver-b9f9940d.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets9 = [];
+  }
+});
+
 // .svelte-kit/output/server/chunks/CalendlyJsandCSS.js
 var CalendlyJsandCSS;
 var init_CalendlyJsandCSS = __esm({
@@ -21738,9 +21787,9 @@ var init_CalendlyJsandCSS = __esm({
 // .svelte-kit/output/server/entries/pages/plans/_page.svelte.js
 var page_svelte_exports5 = {};
 __export(page_svelte_exports5, {
-  default: () => Page7
+  default: () => Page8
 });
-var css$1, PlansCard, css6, Page7;
+var css$1, PlansCard, css5, Page8;
 var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -21784,11 +21833,11 @@ var init_page_svelte5 = __esm({
   
 </div>`;
     });
-    css6 = {
+    css5 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
-    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const plansCardArray = [
         {
           card: 1,
@@ -21812,7 +21861,7 @@ var init_page_svelte5 = __esm({
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
       ];
-      $$result.css.add(css6);
+      $$result.css.add(css5);
       return `<a href="${"/jitsi"}" class="${"svelte-18ymex4"}">jitsi</a>
 
 <div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
@@ -21844,51 +21893,6 @@ var init_page_svelte5 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/8.js
-var __exports9 = {};
-__export(__exports9, {
-  component: () => component9,
-  file: () => file9,
-  imports: () => imports9,
-  index: () => index9,
-  stylesheets: () => stylesheets9
-});
-var index9, component9, file9, imports9, stylesheets9;
-var init__9 = __esm({
-  ".svelte-kit/output/server/nodes/8.js"() {
-    index9 = 8;
-    component9 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file9 = "_app/immutable/components/pages/plans/_page.svelte-f58033cc.js";
-    imports9 = ["_app/immutable/components/pages/plans/_page.svelte-f58033cc.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js"];
-    stylesheets9 = ["_app/immutable/assets/+page-ebab19d4.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/samplequiz/_page.svelte.js
-var page_svelte_exports6 = {};
-__export(page_svelte_exports6, {
-  default: () => Page8
-});
-var Page8;
-var init_page_svelte6 = __esm({
-  ".svelte-kit/output/server/entries/pages/samplequiz/_page.svelte.js"() {
-    init_chunks();
-    init_KatexDataProp();
-    init_katex();
-    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-
-${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
-
-${each(Array(1e3), (_2, i) => {
-        return `${escape(i + 1)}
-  ${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: `E=mc^3` }, {}, {})}`;
-      })}`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/9.js
 var __exports10 = {};
 __export(__exports10, {
@@ -21902,37 +21906,31 @@ var index10, component10, file10, imports10, stylesheets10;
 var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
-    component10 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file10 = "_app/immutable/components/pages/samplequiz/_page.svelte-33111f70.js";
-    imports10 = ["_app/immutable/components/pages/samplequiz/_page.svelte-33111f70.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-82375fa1.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets10 = [];
+    component10 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
+    file10 = "_app/immutable/components/pages/plans/_page.svelte-f58033cc.js";
+    imports10 = ["_app/immutable/components/pages/plans/_page.svelte-f58033cc.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-49c17339.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    stylesheets10 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
-var page_svelte_exports7 = {};
-__export(page_svelte_exports7, {
+// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
+var page_md_exports4 = {};
+__export(page_md_exports4, {
   default: () => Page9
 });
-var css7, Page9;
-var init_page_svelte7 = __esm({
-  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+var Page9;
+var init_page_md4 = __esm({
+  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
     init_chunks();
-    init_CalendlyJsandCSS();
-    css7 = {
-      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
-      map: null
-    };
+    init_KatexDataProp();
+    init_KatexIntersectionObserver();
+    init_katex();
     Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css7);
-      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
-
-<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
-
-<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
-
-  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
-</div>`;
+      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
+${each(Array(1e3), (_2, i) => {
+        return `<div class="${"bg-red-100"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: `E=mc^2` }, {}, {})}
+  </div>`;
+      })}`;
     });
   }
 });
@@ -21950,10 +21948,58 @@ var index11, component11, file11, imports11, stylesheets11;
 var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
-    component11 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file11 = "_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js";
-    imports11 = ["_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js"];
-    stylesheets11 = ["_app/immutable/assets/+page-f8a180cf.css"];
+    component11 = async () => (await Promise.resolve().then(() => (init_page_md4(), page_md_exports4))).default;
+    file11 = "_app/immutable/components/pages/samplequiz/_page.md-3d4fee95.js";
+    imports11 = ["_app/immutable/components/pages/samplequiz/_page.md-3d4fee95.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-b4a6f295.js", "_app/immutable/chunks/KatexIntersectionObserver-b9f9940d.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets11 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
+var page_svelte_exports6 = {};
+__export(page_svelte_exports6, {
+  default: () => Page10
+});
+var css6, Page10;
+var init_page_svelte6 = __esm({
+  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+    init_chunks();
+    init_CalendlyJsandCSS();
+    css6 = {
+      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
+      map: null
+    };
+    Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css6);
+      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+
+<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
+
+<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
+
+  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
+</div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/11.js
+var __exports12 = {};
+__export(__exports12, {
+  component: () => component12,
+  file: () => file12,
+  imports: () => imports12,
+  index: () => index12,
+  stylesheets: () => stylesheets12
+});
+var index12, component12, file12, imports12, stylesheets12;
+var init__12 = __esm({
+  ".svelte-kit/output/server/nodes/11.js"() {
+    index12 = 11;
+    component12 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
+    file12 = "_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js";
+    imports12 = ["_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js"];
+    stylesheets12 = ["_app/immutable/assets/+page-f8a180cf.css"];
   }
 });
 
@@ -22794,7 +22840,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets12 = new Set(entry.stylesheets);
+  const stylesheets13 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -22844,7 +22890,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets12.add(url));
+        node.stylesheets.forEach((url) => stylesheets13.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -22907,7 +22953,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets12) {
+  for (const dep of stylesheets13) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -23163,14 +23209,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file12 = is_asset ? filename : filename_html;
+      const file13 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file12), {
+        response = new Response(options.read(file13), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file12}`, opts);
+        response = await fetch(`${event.url.origin}/${file13}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23531,8 +23577,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index12 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index12]();
+              const index13 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index13]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -24073,7 +24119,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-318ea3d1.js", "imports": ["_app/immutable/start-318ea3d1.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-a80afb67.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-74430641.js", "imports": ["_app/immutable/start-74430641.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-7337a325.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -24085,7 +24131,8 @@ var manifest = {
       () => Promise.resolve().then(() => (init__8(), __exports8)),
       () => Promise.resolve().then(() => (init__9(), __exports9)),
       () => Promise.resolve().then(() => (init__10(), __exports10)),
-      () => Promise.resolve().then(() => (init__11(), __exports11))
+      () => Promise.resolve().then(() => (init__11(), __exports11)),
+      () => Promise.resolve().then(() => (init__12(), __exports12))
     ],
     routes: [
       {
@@ -24150,13 +24197,23 @@ var manifest = {
       },
       {
         type: "page",
+        id: "mdtest",
+        pattern: /^\/mdtest\/?$/,
+        names: [],
+        types: [],
+        errors: [1],
+        layouts: [0],
+        leaf: 8
+      },
+      {
+        type: "page",
         id: "plans",
         pattern: /^\/plans\/?$/,
         names: [],
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 8
+        leaf: 9
       },
       {
         type: "page",
@@ -24166,7 +24223,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 9
+        leaf: 10
       },
       {
         type: "page",
@@ -24176,7 +24233,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 10
+        leaf: 11
       }
     ],
     matchers: async () => {
@@ -24239,12 +24296,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file12 = pathname.substring(1);
+      let file13 = pathname.substring(1);
       try {
-        file12 = decodeURIComponent(file12);
+        file13 = decodeURIComponent(file13);
       } catch (err) {
       }
-      if (manifest.assets.has(file12) || manifest.assets.has(file12 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file13) || manifest.assets.has(file13 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

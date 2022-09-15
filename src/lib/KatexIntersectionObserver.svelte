@@ -1,43 +1,42 @@
-<!-- this component is not being used with props (yet) .. simply as a placeholder -->
+<!-- currently, this component has to be used in conjunction with KatexDataProp component,
+where the myKatexEntries class element is used... 
+-->
 <script>
-  import { onMount } from "svelte";
   import katex from "katex";
-
-  let myKatex, observer;
+  import { onMount } from "svelte";
 
   onMount(() => {
-    myKatex = document.querySelectorAll(".myKatex");
-
-    const options = {
+    let myKatexEntries = document.querySelectorAll(".myKatexEntries");
+    let observer = new IntersectionObserver(callback, {
       root: null,
       threshold: 0,
-      rootMargin: "100px", // 800px = 1 laptop viewport
-      // rootMargin: "-100px", //shows the lag effect
-    };
-    observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // let child = entry.target.children[0]
-          let child = entry.target;
-          let math = child.dataset.math;
-          let d = child.dataset.display;
-          console.log(child);
-          // console.log("math", math);
-          katex.render(math, child, { displayMode: d });
-
-          observer.unobserve(entry.target);
-        }
-      });
-    }, options);
-
-    // for(let el of katexContainer) {
-    for (let el of myKatex) {
+      rootMargin: "100px",
+      // rootMargin: "-200px", //shows the lag effect
+    });
+    for (let el of myKatexEntries) {
       observer.observe(el);
+    }
+
+    // definition of callback; entries is a placeholder for myKatexEntries element array
+    function callback(entries, observer) {
+      for (let entry of entries) {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        // code below done when IS intersecting
+
+        let child = entry.target;
+        let math = child.dataset.math;
+        let d = child.dataset.display;
+        console.log(child);
+        // console.log("math", math);
+        katex.render(math, child, { displayMode: d });
+
+        observer.unobserve(entry.target);
+      }
     }
   });
 </script>
-
-<!-- <div class="myKatex" data-math={m}>.</div> -->
 
 <!-- TODO: NOTE: Using the data on https://www.intmath.com/cg5/katex-mathjax-comparison.php, 
 the body of which has a clientHeight of 9701 pixels, it takes 382ms to render the 
@@ -55,3 +54,19 @@ the previous render rate is about 3 pages of latex per second, on my laptop.
     crossorigin="anonymous"
   />
 </svelte:head>
+
+<!-- observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // let child = entry.target.children[0]
+          let child = entry.target;
+          let math = child.dataset.math;
+          let d = child.dataset.display;
+          console.log(child);
+          // console.log("math", math);
+          katex.render(math, child, { displayMode: d });
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options); -->

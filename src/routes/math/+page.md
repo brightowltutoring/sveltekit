@@ -1,17 +1,17 @@
-<!-- Essentially remounts the intersection observer when using the slider below -->
 {#key num }
 <KatexIntersectionObserver />
 {/key}
 
 <script>
+
     import KatexIntersectionObserver from "$lib/KatexIntersectionObserver.svelte"
     // I have yet to figure out for the life of me why I have to break this up into 
-    // two components (KatexIntersectionObserver & KatexDataProp) ... trying to use 
-    // the logic all in one makes things laggy
+    // two components (KatexIntersectionObserver & KatexDataProp)
+    // Trying to use the logic all in one makes things laggy when using lots of math
     import K from "$lib/KatexDataProp.svelte"
     let numMax = 1000
     $: num = numMax
-    let numMDMax=1
+    let numMDMax=200
     $: numMD = numMDMax
 
      let equations = [
@@ -26,7 +26,9 @@
     let x=2
 </script>
 
+<!-- <article class="prose "> -->
 <article class="prose lg:prose-lg">
+
   <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>
     For years parents have espoused the health benefits of eating garlic bread with cheese to their
@@ -120,7 +122,7 @@ The katex components come in use with more detailed styling AND/OR lots of math 
 
 
 <!-- Useful Markdown styles .. removed from tailwind   -->
-
+<!-- 
 <style>
     blockquote {  
         margin: 0;  
@@ -157,4 +159,4 @@ The katex components come in use with more detailed styling AND/OR lots of math 
     a {
     @apply text-blue-600 underline;
     }
-</style>
+</style> -->

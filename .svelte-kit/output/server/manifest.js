@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp"]),
 	mimeTypes: {".mp4":"video/mp4",".webp":"image/webp"},
 	_: {
-		entry: {"file":"_app/immutable/start-318ea3d1.js","imports":["_app/immutable/start-318ea3d1.js","_app/immutable/chunks/index-d43d80ed.js","_app/immutable/chunks/singletons-a80afb67.js","_app/immutable/chunks/index-5cb55e0e.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-74430641.js","imports":["_app/immutable/start-74430641.js","_app/immutable/chunks/index-d43d80ed.js","_app/immutable/chunks/singletons-7337a325.js","_app/immutable/chunks/index-5cb55e0e.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
@@ -15,7 +15,8 @@ export const manifest = {
 			() => import('./nodes/7.js'),
 			() => import('./nodes/8.js'),
 			() => import('./nodes/9.js'),
-			() => import('./nodes/10.js')
+			() => import('./nodes/10.js'),
+			() => import('./nodes/11.js')
 		],
 		routes: [
 			{
@@ -80,13 +81,23 @@ export const manifest = {
 			},
 			{
 				type: 'page',
+				id: "mdtest",
+				pattern: /^\/mdtest\/?$/,
+				names: [],
+				types: [],
+				errors: [1],
+				layouts: [0],
+				leaf: 8
+			},
+			{
+				type: 'page',
 				id: "plans",
 				pattern: /^\/plans\/?$/,
 				names: [],
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 8
+				leaf: 9
 			},
 			{
 				type: 'page',
@@ -96,7 +107,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 9
+				leaf: 10
 			},
 			{
 				type: 'page',
@@ -106,7 +117,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 10
+				leaf: 11
 			}
 		],
 		matchers: async () => {
