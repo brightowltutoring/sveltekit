@@ -9,15 +9,19 @@ export const nodes = [
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
 	() => import('./nodes/7'),
-	() => import('./nodes/8')
+	() => import('./nodes/8'),
+	() => import('./nodes/9'),
+	() => import('./nodes/10')
 ];
 
 export const dictionary = {
 	"": [[1], [0], 2],
 	"faq": [[1], [0], 3],
-	"login": [[1], [0], 4],
-	"math": [[1], [0], 5],
-	"math2": [[1], [0], 6],
-	"plans": [[1], [0], 7],
-	"schools": [[1], [0], 8]
+	"jitsi": [[1], [0], 4],
+	"login": [[1], [0], 5],
+	"math": [[1], [0], 6],
+	"math2": [[1], [0], 7],
+	"plans": [[1], [0], 8],
+	"samplequiz": [[1], [0], 9],
+	"schools": [[1], [0], 10]
 };

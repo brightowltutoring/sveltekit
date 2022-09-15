@@ -127,7 +127,19 @@ export const routes = writable({
     href: "/login",
     title: "Login 🚀",
     isCurrent: false,
-  }
+  },
+  jitsi: {
+    name:'jitsi',
+    href: "/jitsi",
+    title: "jitsi 🚀",
+    isCurrent: false,
+  },
+  samplequiz: {
+    name:'samplequiz',
+    href: "/samplequiz",
+    title: "samplequiz 🚀",
+    isCurrent: false,
+  },
 })
 
 

@@ -65,6 +65,12 @@ const routes = writable({
     href: "/login",
     title: "Login \u{1F680}",
     isCurrent: false
+  },
+  jitsi: {
+    name: "jitsi",
+    href: "/jitsi",
+    title: "jitsi \u{1F680}",
+    isCurrent: false
   }
 });
 const isDarkMode = writable(false);

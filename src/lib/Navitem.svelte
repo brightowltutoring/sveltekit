@@ -15,9 +15,9 @@
   // this allows going back and button click matching with route
   // could've done this in if/else but the boolean nature here made it unnecessary
   $: for (let key in routes) {
-    let condition =
-      key == $page.routeId || ($page.routeId.length == 0 && key == "home");
-    routes[key].isCurrent = condition;
+    routes[key].isCurrent = routes[key].href === $page.url.pathname;
+    // routes[key].isCurrent =
+    //   key == $page.routeId || ($page.routeId.length == 0 && key == "home");
   }
 
   let unique;
@@ -39,10 +39,14 @@
       window.document.body.classList.remove("dark-mode");
       $isDarkMode = false;
     }
+
+    // if (routes.jitsi.isCurrent) {
+    //   window.document.body.classList.add("dark-mode");
+    //   $isDarkMode = true;
+    // }
   }
 </script>
 
-<!-- href={href} -->
 {#key unique}
   <button
     in:slide={{ duration: 800, easing: elasticOut }}

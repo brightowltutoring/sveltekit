@@ -3,8 +3,7 @@
   import { onMount } from "svelte";
   import katex from "katex";
 
-  let myKatex;
-  let observer;
+  let myKatex, observer;
 
   onMount(() => {
     myKatex = document.querySelectorAll(".myKatex");
@@ -22,7 +21,7 @@
           let child = entry.target;
           let math = child.dataset.math;
           let d = child.dataset.display;
-          // console.log(child);
+          console.log(child);
           // console.log("math", math);
           katex.render(math, child, { displayMode: d });
 
@@ -36,8 +35,6 @@
       observer.observe(el);
     }
   });
-
-  export let m;
 </script>
 
 <!-- <div class="myKatex" data-math={m}>.</div> -->

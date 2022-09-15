@@ -31,8 +31,7 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.routes(routes2);
   {
     for (let key in routes2) {
-      let condition = key == $page.routeId || $page.routeId.length == 0 && key == "home";
-      routes2[key].isCurrent = condition;
+      routes2[key].isCurrent = routes2[key].href === $page.url.pathname;
     }
   }
   $$unsubscribe_isDarkMode();

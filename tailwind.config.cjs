@@ -2,6 +2,13 @@ module.exports  = {
 	content: ['./src/**/*.{html,js,svelte,ts,md}'],
 	theme: {
 		extend: {
+			typography: {
+				DEFAULT: {
+				  css: {
+					maxWidth: null,
+				  },
+				},
+			  },
 			fontFamily:{
 				Nunito:['Nunito', 'sans-serif'],
 				Poppins:['Poppins', 'sans-serif'],
@@ -14,6 +21,6 @@ module.exports  = {
 		},
 	},
 
-	plugins: []
+	plugins: [require('@tailwindcss/typography'),]
 };
 

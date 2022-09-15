@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component10) {
-  current_component = component10;
+function set_current_component(component11) {
+  current_component = component11;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component10, name4) {
-  if (!component10 || !component10.$$render) {
+function validate_component(component11, name4) {
+  if (!component11 || !component11.$$render) {
     if (name4 === "svelte:component")
       name4 += " this={...}";
     throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component10;
+  return component11;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css7) => css7.code).join("\n"),
+          code: Array.from(result.css).map((css8) => css8.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -310,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index10 = 0;
-      while (index10 < str.length) {
-        var eqIdx = str.indexOf("=", index10);
+      var index11 = 0;
+      while (index11 < str.length) {
+        var eqIdx = str.indexOf("=", index11);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index10);
+        var endIdx = str.indexOf(";", index11);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index10 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index11 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index10, eqIdx).trim();
+        var key2 = str.slice(index11, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,7 +331,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index10 = endIdx + 1;
+        index11 = endIdx + 1;
       }
       return obj;
     }
@@ -729,6 +729,12 @@ var init_store = __esm({
         href: "/login",
         title: "Login \u{1F680}",
         isCurrent: false
+      },
+      jitsi: {
+        name: "jitsi",
+        href: "/jitsi",
+        title: "jitsi \u{1F680}",
+        isCurrent: false
       }
     });
     isDarkMode = writable(false);
@@ -881,8 +887,7 @@ var init_layout_svelte = __esm({
         $$bindings.routes(routes2);
       {
         for (let key2 in routes2) {
-          let condition = key2 == $page.routeId || $page.routeId.length == 0 && key2 == "home";
-          routes2[key2].isCurrent = condition;
+          routes2[key2].isCurrent = routes2[key2].href === $page.url.pathname;
         }
       }
       $$unsubscribe_isDarkMode();
@@ -1152,8 +1157,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-c6eeb590.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-c6eeb590.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-5764cfa0.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-8335a512.js", "_app/immutable/chunks/singletons-ec6507dd.js", "_app/immutable/chunks/navigation-0c770062.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-5153dac4.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-5153dac4.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-ced1e84a.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-a67ceb03.js", "_app/immutable/chunks/singletons-867df3f5.js", "_app/immutable/chunks/navigation-55b72717.js"];
     stylesheets = ["_app/immutable/assets/+layout-fda3e3d5.css"];
   }
 });
@@ -1198,8 +1203,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-330de204.js";
-    imports2 = ["_app/immutable/components/error.svelte-330de204.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-8335a512.js", "_app/immutable/chunks/singletons-ec6507dd.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file2 = "_app/immutable/components/error.svelte-2c21dd97.js";
+    imports2 = ["_app/immutable/components/error.svelte-2c21dd97.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-a67ceb03.js", "_app/immutable/chunks/singletons-867df3f5.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets2 = [];
   }
 });
@@ -6623,8 +6628,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index10) => (n2) => {
-          nodes.splice(index10 + 1, 0, n2);
+        prev.insertAfter = ((index11) => (n2) => {
+          nodes.splice(index11 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -11908,13 +11913,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index10 = optArgs[0];
+        var index11 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index10
+          index: index11
         };
       },
       htmlBuilder(group, options) {
@@ -11980,9 +11985,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index10
+          index: index11
         } = group;
-        return index10 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index10, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index11 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index11, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -14966,8 +14971,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-8edf33e9.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-8edf33e9.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-5764cfa0.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-7e76560b.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-7e76560b.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-ced1e84a.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = [];
   }
 });
@@ -15104,6 +15109,76 @@ var init__4 = __esm({
     file4 = "_app/immutable/components/pages/faq/_page.svelte-d7a03ea8.js";
     imports4 = ["_app/immutable/components/pages/faq/_page.svelte-d7a03ea8.js", "_app/immutable/chunks/index-d43d80ed.js"];
     stylesheets4 = ["_app/immutable/assets/+page-113a1f72.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/jitsi/_page.js
+var page_exports2 = {};
+__export(page_exports2, {
+  router: () => router
+});
+var router;
+var init_page2 = __esm({
+  ".svelte-kit/output/server/entries/pages/jitsi/_page.js"() {
+    router = false;
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/jitsi/_page.svelte.js
+var page_svelte_exports3 = {};
+__export(page_svelte_exports3, {
+  default: () => Page3
+});
+var css2, JitsiUser, Page3;
+var init_page_svelte3 = __esm({
+  ".svelte-kit/output/server/entries/pages/jitsi/_page.svelte.js"() {
+    init_chunks();
+    css2 = {
+      code: '#cornerDIV.svelte-s1gz6r{position:absolute;left:48%;bottom:40px}#hangUp.svelte-s1gz6r{content:url("https://brightowltutoring.com/s/hangup-gray.png");margin:0 auto;display:flex;width:50px;aspect-ratio:1;border-radius:50%;transform:rotate(90deg);transition:0.4s ease-in-out}#hangUp.svelte-s1gz6r:hover{content:url("https://brightowltutoring.com/s/hangup-red.png");transform:scale(1.85)}',
+      map: null
+    };
+    JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css2);
+      return `${$$result.head += `<script src="${"https://meet.jit.si/external_api.js"}" data-svelte="svelte-1pkind7"><\/script>`, ""}
+
+
+
+
+
+
+
+
+<div id="${"meet"}"></div>
+
+<div id="${"cornerDIV"}" class="${"svelte-s1gz6r"}">
+  <img id="${"hangUp"}" class="${"svelte-s1gz6r"}">
+</div>`;
+    });
+    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/4.js
+var __exports5 = {};
+__export(__exports5, {
+  component: () => component5,
+  file: () => file5,
+  imports: () => imports5,
+  index: () => index5,
+  shared: () => page_exports2,
+  stylesheets: () => stylesheets5
+});
+var index5, component5, file5, imports5, stylesheets5;
+var init__5 = __esm({
+  ".svelte-kit/output/server/nodes/4.js"() {
+    init_page2();
+    index5 = 4;
+    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
+    file5 = "_app/immutable/components/pages/jitsi/_page.svelte-7e82dffe.js";
+    imports5 = ["_app/immutable/components/pages/jitsi/_page.svelte-7e82dffe.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/modules/pages/jitsi/_page.js-38969c2d.js", "_app/immutable/chunks/_page-4742a43c.js"];
+    stylesheets5 = ["_app/immutable/assets/+page-5ae0bf0d.css"];
   }
 });
 
@@ -15614,8 +15689,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component10) {
-  return component10.instantiationMode === "EAGER";
+function isComponentEager(component11) {
+  return component11.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -15705,18 +15780,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component10) {
-        if (component10.name !== this.name) {
-          throw Error(`Mismatching Component ${component10.name} for Provider ${this.name}.`);
+      setComponent(component11) {
+        if (component11.name !== this.name) {
+          throw Error(`Mismatching Component ${component11.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component10;
+        this.component = component11;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component10)) {
+        if (isComponentEager(component11)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -15836,19 +15911,19 @@ var init_index_esm20172 = __esm({
         this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component10) {
-        const provider = this.getProvider(component10.name);
+      addComponent(component11) {
+        const provider = this.getProvider(component11.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component10.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component11.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component10);
+        provider.setComponent(component11);
       }
-      addOrOverwriteComponent(component10) {
-        const provider = this.getProvider(component10.name);
+      addOrOverwriteComponent(component11) {
+        const provider = this.getProvider(component11.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component10.name);
+          this.providers.delete(component11.name);
         }
-        this.addComponent(component10);
+        this.addComponent(component11);
       }
       getProvider(name4) {
         if (this.providers.has(name4)) {
@@ -16174,25 +16249,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component10 = provider.getComponent();
-  return (component10 === null || component10 === void 0 ? void 0 : component10.type) === "VERSION";
+  const component11 = provider.getComponent();
+  return (component11 === null || component11 === void 0 ? void 0 : component11.type) === "VERSION";
 }
-function _addComponent(app2, component10) {
+function _addComponent(app2, component11) {
   try {
-    app2.container.addComponent(component10);
+    app2.container.addComponent(component11);
   } catch (e3) {
-    logger.debug(`Component ${component10.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component11.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component10) {
-  const componentName = component10.name;
+function _registerComponent(component11) {
+  const componentName = component11.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component10);
+  _components.set(componentName, component11);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component10);
+    _addComponent(app2, component11);
   }
   return true;
 }
@@ -16224,8 +16299,8 @@ function initializeApp(options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name4);
-  for (const component10 of _components.values()) {
-    container.addComponent(component10);
+  for (const component11 of _components.values()) {
+    container.addComponent(component11);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name4, newApp);
@@ -18806,9 +18881,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index10 = this.queue.length - 1;
+        const index11 = this.queue.length - 1;
         return () => {
-          this.queue[index10] = () => Promise.resolve();
+          this.queue[index11] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -21267,12 +21342,12 @@ var init_index_esm3 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/login/_page.svelte.js
-var page_svelte_exports3 = {};
-__export(page_svelte_exports3, {
-  default: () => Page3
+var page_svelte_exports4 = {};
+__export(page_svelte_exports4, {
+  default: () => Page4
 });
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css2, Page3;
-var init_page_svelte3 = __esm({
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css3, Page4;
+var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
     init_store();
@@ -21297,11 +21372,11 @@ var init_page_svelte3 = __esm({
     app = initializeApp(firebaseConfig);
     getAuth(app);
     ln(app);
-    css2 = {
+    css3 = {
       code: '#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1k1mjbo.svelte-1k1mjbo{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1k1mjbo.svelte-1k1mjbo{margin:0px auto;width:25vw;min-width:280px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo,button.svelte-1k1mjbo.svelte-1k1mjbo{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:hover{border:1px solid #999}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center}',
       map: null
     };
-    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_redirectAfterLoginTimeOut;
       let $$unsubscribe_redirectSetInterval;
       let $$unsubscribe_isLoggedIn;
@@ -21309,7 +21384,7 @@ var init_page_svelte3 = __esm({
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       let emailFieldValue = "";
-      $$result.css.add(css2);
+      $$result.css.add(css3);
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_isLoggedIn();
@@ -21339,32 +21414,32 @@ var init_page_svelte3 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/4.js
-var __exports5 = {};
-__export(__exports5, {
-  component: () => component5,
-  file: () => file5,
-  imports: () => imports5,
-  index: () => index5,
-  stylesheets: () => stylesheets5
+// .svelte-kit/output/server/nodes/5.js
+var __exports6 = {};
+__export(__exports6, {
+  component: () => component6,
+  file: () => file6,
+  imports: () => imports6,
+  index: () => index6,
+  stylesheets: () => stylesheets6
 });
-var index5, component5, file5, imports5, stylesheets5;
-var init__5 = __esm({
-  ".svelte-kit/output/server/nodes/4.js"() {
-    index5 = 4;
-    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/login/_page.svelte-adb0b46d.js";
-    imports5 = ["_app/immutable/components/pages/login/_page.svelte-adb0b46d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-5764cfa0.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/navigation-0c770062.js", "_app/immutable/chunks/singletons-ec6507dd.js"];
-    stylesheets5 = ["_app/immutable/assets/+page-6074a07d.css"];
+var index6, component6, file6, imports6, stylesheets6;
+var init__6 = __esm({
+  ".svelte-kit/output/server/nodes/5.js"() {
+    index6 = 5;
+    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
+    file6 = "_app/immutable/components/pages/login/_page.svelte-03180114.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-03180114.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-ced1e84a.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/navigation-55b72717.js", "_app/immutable/chunks/singletons-867df3f5.js"];
+    stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/math/_page.md.js
 var page_md_exports = {};
 __export(page_md_exports, {
-  default: () => Page4
+  default: () => Page5
 });
-var KatexIntersectionObserver, KatexDataProp, css3, numMax, numMDMax, Page4;
+var KatexIntersectionObserver, KatexDataProp, css4, numMax, numMDMax, Page5;
 var init_page_md = __esm({
   ".svelte-kit/output/server/entries/pages/math/_page.md.js"() {
     init_chunks();
@@ -21394,13 +21469,13 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
 
 <div class="${"myKatex"}"${add_attribute("data-math", m2, 0)}${add_attribute("data-display", d2, 0)}>.</div>`;
     });
-    css3 = {
+    css4 = {
       code: "ul.svelte-1rteh51.svelte-1rteh51{list-style-type:disc;list-style-position:inside}ul.svelte-1rteh51 ul.svelte-1rteh51{list-style-type:circle;list-style-position:inside;margin-left:15px}h1.svelte-1rteh51.svelte-1rteh51{font-size:1.5rem;line-height:2rem}",
       map: null
     };
     numMax = 1e3;
     numMDMax = 1;
-    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let num2;
       let numMD;
       let equations = [
@@ -21411,11 +21486,30 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
         "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
       ];
       let x2 = 2;
-      $$result.css.add(css3);
+      $$result.css.add(css4);
       num2 = numMax;
       numMD = numMDMax;
       return `
 ${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
+${validate_component(KatexDataProp, "K").$$render(
+        $$result,
+        {
+          d: true,
+          m: "\\underbrace{u'-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}"
+        },
+        {},
+        {}
+      )}
+<div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><munder><mrow><msup><mi>u</mi><mo mathvariant="normal" lspace="0em" rspace="0em">\u2032</mo></msup><mo>\u2212</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msup><mi>u</mi><mn>2</mn></msup><mo>\u2212</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>u</mi><mo>\u2212</mo><mi>R</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo stretchy="true">\u23DF</mo></munder><mrow><mtext>=0,\xA0since\xA0</mtext><mstyle scriptlevel="0" displaystyle="false"><mi>u</mi></mstyle><mtext>\xA0is\xA0a\xA0particular\xA0solution.</mtext></mrow></munder></mrow><annotation encoding="application/x-tex">\\underbrace{u&#x27;-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.5843em;vertical-align:-1.7202em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-1.4159em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">=0,\xA0since</span><span class="mord mtight nobreak">\xA0</span><span class="mord mathnormal sizing reset-size3 size6">u</span><span class="mord mtight">\xA0is\xA0a\xA0particular\xA0solution.</span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span class="svg-align" style="top:-2.102em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMinYMin slice'><path d='M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z'/></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMidYMin slice'><path d='M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z'/></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMaxYMin slice'><path d='M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z'/></svg></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8019em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2032</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.898em;"><span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:1.7202em;"><span></span></span></span></span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div>
 <span class="${"text-red-700 text-7xl flex justify-center"}"><p>${escape(x2)}<span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>=${escape(x2 ** 2)}</p></span>
 <div class="${"flex justify-center"}"><input type="${"range"}" min="${"0"}"${add_attribute("value", x2, 0)}></div>
 <h1 class="${"svelte-1rteh51"}">The content of this page are written in a markdown file with svelte components (tailwind too), possible due to MDsveX!</h1>
@@ -21457,32 +21551,32 @@ ${each(equations, (eqn, k) => {
   }
 });
 
-// .svelte-kit/output/server/nodes/5.js
-var __exports6 = {};
-__export(__exports6, {
-  component: () => component6,
-  file: () => file6,
-  imports: () => imports6,
-  index: () => index6,
-  stylesheets: () => stylesheets6
+// .svelte-kit/output/server/nodes/6.js
+var __exports7 = {};
+__export(__exports7, {
+  component: () => component7,
+  file: () => file7,
+  imports: () => imports7,
+  index: () => index7,
+  stylesheets: () => stylesheets7
 });
-var index6, component6, file6, imports6, stylesheets6;
-var init__6 = __esm({
-  ".svelte-kit/output/server/nodes/5.js"() {
-    index6 = 5;
-    component6 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file6 = "_app/immutable/components/pages/math/_page.md-e6dcffb6.js";
-    imports6 = ["_app/immutable/components/pages/math/_page.md-e6dcffb6.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets6 = ["_app/immutable/assets/+page-ff2da4ef.css"];
+var index7, component7, file7, imports7, stylesheets7;
+var init__7 = __esm({
+  ".svelte-kit/output/server/nodes/6.js"() {
+    index7 = 6;
+    component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
+    file7 = "_app/immutable/components/pages/math/_page.md-3822fc13.js";
+    imports7 = ["_app/immutable/components/pages/math/_page.md-3822fc13.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets7 = ["_app/immutable/assets/+page-ff2da4ef.css"];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/math2/_page.md.js
 var page_md_exports2 = {};
 __export(page_md_exports2, {
-  default: () => Page5
+  default: () => Page6
 });
-var css4, num, Page5;
+var css5, num, Page6;
 var init_page_md2 = __esm({
   ".svelte-kit/output/server/entries/pages/math2/_page.md.js"() {
     init_chunks();
@@ -21490,17 +21584,17 @@ var init_page_md2 = __esm({
     init_Katex();
     init_index2();
     init_katex();
-    css4 = {
+    css5 = {
       code: "details.svelte-6gn253>summary.svelte-6gn253{list-style:none;color:transparent \n    }blockquote.svelte-6gn253.svelte-6gn253{margin:0;padding-left:1.4rem;border-left:8px solid #bbb}ul.svelte-6gn253.svelte-6gn253{list-style-type:disc;list-style-position:inside}h1.svelte-6gn253.svelte-6gn253{font-size:1.5rem;line-height:2rem}",
       map: null
     };
     num = 500;
-    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let buttonColorTransition;
       let $elementColor, $$unsubscribe_elementColor;
       $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
       let x2 = 2;
-      $$result.css.add(css4);
+      $$result.css.add(css5);
       buttonColorTransition = `background: ${$elementColor};transition: background-color 0.4s cubic-bezier(0.64, 0, 0.78, 0)`;
       $$unsubscribe_elementColor();
       return `
@@ -21589,23 +21683,23 @@ ${each(Array(num), (_2, j2) => {
   }
 });
 
-// .svelte-kit/output/server/nodes/6.js
-var __exports7 = {};
-__export(__exports7, {
-  component: () => component7,
-  file: () => file7,
-  imports: () => imports7,
-  index: () => index7,
-  stylesheets: () => stylesheets7
+// .svelte-kit/output/server/nodes/7.js
+var __exports8 = {};
+__export(__exports8, {
+  component: () => component8,
+  file: () => file8,
+  imports: () => imports8,
+  index: () => index8,
+  stylesheets: () => stylesheets8
 });
-var index7, component7, file7, imports7, stylesheets7;
-var init__7 = __esm({
-  ".svelte-kit/output/server/nodes/6.js"() {
-    index7 = 6;
-    component7 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
-    file7 = "_app/immutable/components/pages/math2/_page.md-d1d0a6c1.js";
-    imports7 = ["_app/immutable/components/pages/math2/_page.md-d1d0a6c1.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-5764cfa0.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets7 = ["_app/immutable/assets/+page-080ca6e3.css"];
+var index8, component8, file8, imports8, stylesheets8;
+var init__8 = __esm({
+  ".svelte-kit/output/server/nodes/7.js"() {
+    index8 = 7;
+    component8 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
+    file8 = "_app/immutable/components/pages/math2/_page.md-12c3190d.js";
+    imports8 = ["_app/immutable/components/pages/math2/_page.md-12c3190d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-ced1e84a.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets8 = ["_app/immutable/assets/+page-080ca6e3.css"];
   }
 });
 
@@ -21621,12 +21715,12 @@ var init_CalendlyJsandCSS = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/plans/_page.svelte.js
-var page_svelte_exports4 = {};
-__export(page_svelte_exports4, {
-  default: () => Page6
+var page_svelte_exports5 = {};
+__export(page_svelte_exports5, {
+  default: () => Page7
 });
-var css$1, PlansCard, css5, Page6;
-var init_page_svelte4 = __esm({
+var css$1, PlansCard, css6, Page7;
+var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
     init_CalendlyJsandCSS();
@@ -21669,11 +21763,11 @@ var init_page_svelte4 = __esm({
   
 </div>`;
     });
-    css5 = {
+    css6 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
-    Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const plansCardArray = [
         {
           card: 1,
@@ -21697,7 +21791,7 @@ var init_page_svelte4 = __esm({
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
       ];
-      $$result.css.add(css5);
+      $$result.css.add(css6);
       return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
 
 
@@ -21727,54 +21821,6 @@ var init_page_svelte4 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/7.js
-var __exports8 = {};
-__export(__exports8, {
-  component: () => component8,
-  file: () => file8,
-  imports: () => imports8,
-  index: () => index8,
-  stylesheets: () => stylesheets8
-});
-var index8, component8, file8, imports8, stylesheets8;
-var init__8 = __esm({
-  ".svelte-kit/output/server/nodes/7.js"() {
-    index8 = 7;
-    component8 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file8 = "_app/immutable/components/pages/plans/_page.svelte-12d35bfa.js";
-    imports8 = ["_app/immutable/components/pages/plans/_page.svelte-12d35bfa.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-5764cfa0.js", "_app/immutable/chunks/index-5cb55e0e.js"];
-    stylesheets8 = ["_app/immutable/assets/+page-ebab19d4.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
-var page_svelte_exports5 = {};
-__export(page_svelte_exports5, {
-  default: () => Page7
-});
-var css6, Page7;
-var init_page_svelte5 = __esm({
-  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
-    init_chunks();
-    init_CalendlyJsandCSS();
-    css6 = {
-      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
-      map: null
-    };
-    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css6);
-      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
-
-<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
-
-<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
-
-  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
-</div>`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/8.js
 var __exports9 = {};
 __export(__exports9, {
@@ -21789,9 +21835,57 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file9 = "_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js";
-    imports9 = ["_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js"];
-    stylesheets9 = ["_app/immutable/assets/+page-f8a180cf.css"];
+    file9 = "_app/immutable/components/pages/plans/_page.svelte-acaa29b1.js";
+    imports9 = ["_app/immutable/components/pages/plans/_page.svelte-acaa29b1.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-ced1e84a.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    stylesheets9 = ["_app/immutable/assets/+page-ebab19d4.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
+var page_svelte_exports6 = {};
+__export(page_svelte_exports6, {
+  default: () => Page8
+});
+var css7, Page8;
+var init_page_svelte6 = __esm({
+  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+    init_chunks();
+    init_CalendlyJsandCSS();
+    css7 = {
+      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
+      map: null
+    };
+    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css7);
+      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+
+<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
+
+<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
+
+  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
+</div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/9.js
+var __exports10 = {};
+__export(__exports10, {
+  component: () => component10,
+  file: () => file10,
+  imports: () => imports10,
+  index: () => index10,
+  stylesheets: () => stylesheets10
+});
+var index10, component10, file10, imports10, stylesheets10;
+var init__10 = __esm({
+  ".svelte-kit/output/server/nodes/9.js"() {
+    index10 = 9;
+    component10 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
+    file10 = "_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js";
+    imports10 = ["_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js"];
+    stylesheets10 = ["_app/immutable/assets/+page-f8a180cf.css"];
   }
 });
 
@@ -22632,7 +22726,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets10 = new Set(entry.stylesheets);
+  const stylesheets11 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -22682,7 +22776,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets10.add(url));
+        node.stylesheets.forEach((url) => stylesheets11.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -22745,7 +22839,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets10) {
+  for (const dep of stylesheets11) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -23001,14 +23095,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file10 = is_asset ? filename : filename_html;
+      const file11 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file10), {
+        response = new Response(options.read(file11), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file10}`, opts);
+        response = await fetch(`${event.url.origin}/${file11}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23369,8 +23463,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index10 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index10]();
+              const index11 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index11]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -23911,7 +24005,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-d8d2dd9c.js", "imports": ["_app/immutable/start-d8d2dd9c.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-ec6507dd.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-3ec691b9.js", "imports": ["_app/immutable/start-3ec691b9.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-867df3f5.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -23921,7 +24015,8 @@ var manifest = {
       () => Promise.resolve().then(() => (init__6(), __exports6)),
       () => Promise.resolve().then(() => (init__7(), __exports7)),
       () => Promise.resolve().then(() => (init__8(), __exports8)),
-      () => Promise.resolve().then(() => (init__9(), __exports9))
+      () => Promise.resolve().then(() => (init__9(), __exports9)),
+      () => Promise.resolve().then(() => (init__10(), __exports10))
     ],
     routes: [
       {
@@ -23946,13 +24041,23 @@ var manifest = {
       },
       {
         type: "page",
+        id: "jitsi",
+        pattern: /^\/jitsi\/?$/,
+        names: [],
+        types: [],
+        errors: [1],
+        layouts: [0],
+        leaf: 4
+      },
+      {
+        type: "page",
         id: "login",
         pattern: /^\/login\/?$/,
         names: [],
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 4
+        leaf: 5
       },
       {
         type: "page",
@@ -23962,7 +24067,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 5
+        leaf: 6
       },
       {
         type: "page",
@@ -23972,7 +24077,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 6
+        leaf: 7
       },
       {
         type: "page",
@@ -23982,7 +24087,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 7
+        leaf: 8
       },
       {
         type: "page",
@@ -23992,7 +24097,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 8
+        leaf: 9
       }
     ],
     matchers: async () => {
@@ -24055,12 +24160,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file10 = pathname.substring(1);
+      let file11 = pathname.substring(1);
       try {
-        file10 = decodeURIComponent(file10);
+        file11 = decodeURIComponent(file11);
       } catch (err) {
       }
-      if (manifest.assets.has(file10) || manifest.assets.has(file10 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file11) || manifest.assets.has(file11 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {
