@@ -22,7 +22,7 @@ export const dictionary = {
 	"login": [[1], [0], 5],
 	"math": [[1], [0], 6],
 	"math2": [[1], [0], 7],
-	"mdtest": [[1], [0], 8],
+	"math3": [[1], [0], 8],
 	"plans": [[1], [0], 9],
 	"samplequiz": [[1], [0], 10],
 	"schools": [[1], [0], 11]

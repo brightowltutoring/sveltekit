@@ -3,7 +3,7 @@ import { K as KatexIntersectionObserver } from "../../../chunks/KatexIntersectio
 import { K as KatexDataProp } from "../../../chunks/KatexDataProp.js";
 import "katex";
 let numMax = 1e3;
-let numMDMax = 1;
+let numMDMax = 200;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let num;
   let numMD;
