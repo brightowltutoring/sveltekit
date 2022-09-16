@@ -51,17 +51,36 @@
   });
 
   let jankytown = "";
+
+  let justScrolledUp = false;
+  $: console.log("justScrolledUp", justScrolledUp);
+
+  function wasScrollingUp() {
+    if ($instDeltaY > 0) {
+      justScrolledUp = false;
+      return;
+    }
+    if ($instDeltaY < 0) {
+      justScrolledUp = true;
+      return;
+    }
+  }
+
   $: if (!$burgerBreakPoint) {
-    if ($scrollY == 0) jankytown = "top-0";
-    if ($scrollY > 10 && $instDeltaY > 0)
-      jankytown = "backdrop-blur-md -top-20";
-    if ($scrollY > 200 && $instDeltaY > 0)
-      jankytown = "backdrop-blur-md -top-20";
-    if ($scrollY > 200 && $instDeltaY < 0)
-      jankytown = "backdrop-blur-3xl top-0";
+    if (justScrolledUp) jankytown = "backdrop-blur-3xl top-0";
+    if ($scrollY == 0) jankytown = "top-3";
+    if ($scrollY > 0) jankytown = "top-0 backdrop-blur-3xl ";
+    // if ($scrollY > 100 && !justScrolledUp) jankytown = "top-0 backdrop-blur-md";
+    // if ($scrollY > 200 && !justScrolledUp) jankytown = "-top-20";
   }
 
   let xPaddingAndMargin = "px-[4%] md:px-[7%]";
+
+  // let variableTop = "top-6";
+  // $: if (!$burgerBreakPoint) {
+  //   if ($instDeltaY > 0 && $scrollY > 250) variableTop = "-top-20 ";
+  //   if ($instDeltaY < 0 && $scrollY > 250) variableTop = "top-6";
+  // }
 </script>
 
 <svelte:head>
@@ -88,9 +107,11 @@
   on:resize={setScrollYMax}
   on:contextmenu={(event) => event.preventDefault()}
   on:popstate={clearRedirectStuff}
+  on:scroll={wasScrollingUp}
 />
 
-<div class="{xPaddingAndMargin} py-2 sticky {jankytown} z-50 duration-300 ">
+<!-- <div class="{xPaddingAndMargin} py-2 sticky {variableTop} z-50 duration-300 "> -->
+<div class="{xPaddingAndMargin} py-2 sticky  {jankytown} z-50 duration-300 ">
   <Navbar bind:mobileHamburgerClosed />
 </div>
 

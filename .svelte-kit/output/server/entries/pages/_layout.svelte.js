@@ -45,38 +45,30 @@ const hamburgerWidth = 35;
 const hamburgerPattyHeight = 2;
 const hamburgerColor = "bg-red-500";
 const Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $scrollY, $$unsubscribe_scrollY;
-  let $instDeltaY, $$unsubscribe_instDeltaY;
-  let $burgerBreakPoint, $$unsubscribe_burgerBreakPoint;
+  let $$unsubscribe_scrollY;
+  let $$unsubscribe_instDeltaY;
+  let $$unsubscribe_burgerBreakPoint;
   let $$unsubscribe_lastScrollY;
-  $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
-  $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
-  $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => $burgerBreakPoint = value);
+  $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
+  $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => value);
+  $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => value);
   $$unsubscribe_lastScrollY = subscribe(lastScrollY, (value) => value);
   let { mobileOpen } = $$props;
   let { unique } = $$props;
   const hamburgerHeight = Math.floor(0.7 * hamburgerWidth);
   const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight));
   const angle = 45 + 1 * 90;
-  let variableTop = "top-6";
   if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
     $$bindings.mobileOpen(mobileOpen);
   if ($$props.unique === void 0 && $$bindings.unique && unique !== void 0)
     $$bindings.unique(unique);
-  {
-    if ($burgerBreakPoint && !mobileOpen) {
-      if ($instDeltaY > 0 && $scrollY > 250)
-        variableTop = "-top-20 ";
-      if ($instDeltaY < 0 && $scrollY > 250)
-        variableTop = "top-6";
-    }
-  }
   $$unsubscribe_scrollY();
   $$unsubscribe_instDeltaY();
   $$unsubscribe_burgerBreakPoint();
   $$unsubscribe_lastScrollY();
   return `<main>
-  <hamburger-container class="${"md:hidden z-50 text-4xl fixed right-6 " + escape(variableTop, true) + " transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+  
+  <hamburger-container class="${"md:hidden z-50 text-4xl fixed right-6 transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
       <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
@@ -233,7 +225,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {
       $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
     }
-    gradientColor = $isDarkMode ? "bg-gradient-to-b sm:bg-gradient-to-r from-[rgb(37,27,47)] via-[rgb(37,27,47)] to-[rgb(37,35,51)]" : "bg-gradient-to-b sm:bg-gradient-to-r from-[rgb(247,247,247)] via-[rgb(247,247,247)] to-red-100";
+    gradientColor = $isDarkMode ? "bg-gradient-to-b md:bg-gradient-to-r from-[rgba(255,0,0,0)] via-[rgba(255,0,0,0)] to-[rgb(37,35,91)]" : "bg-gradient-to-b md:bg-gradient-to-r from-[rgba(255,0,0,0)] via-[rgba(255,0,0,0)] to-red-100";
     $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
       $$result,
       { mobileOpen, unique },
@@ -257,7 +249,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     </div>
 
   
-  <nav class="${"p-1 " + escape(gradientColor, true) + " rounded-full hideScrollBar md:overflow-x-auto md:h-[44px] h-1/2 overflow-y-auto"}">
+  <nav class="${"md:ml-24 p-1 " + escape(gradientColor, true) + " rounded-full hideScrollBar md:overflow-x-auto md:h-[44px] h-1/2 overflow-y-auto"}">
     <ul class="${"flex flex-col md:flex-row text-3xl md:text-lg items-center"}">${$burgerBreakPoint && mobileOpen ? `<li class="${"pb-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
 
         ${each(Object.keys($routes), (KEY) => {
@@ -299,9 +291,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           </li>`;
     })}
 
-        ${!$burgerBreakPoint ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>
-
-`;
+        ${!$burgerBreakPoint ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
   } while (!$$settled);
   $$unsubscribe_isDarkMode();
   $$unsubscribe_routes();
@@ -313,9 +303,9 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 });
 let xPaddingAndMargin = "px-[4%] md:px-[7%]";
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
   let $burgerBreakPoint, $$unsubscribe_burgerBreakPoint;
+  let $$unsubscribe_instDeltaY;
   let $$unsubscribe_isLoggedIn;
   let $$unsubscribe_redirectSetInterval;
   let $$unsubscribe_redirectAfterLoginTimeOut;
@@ -324,9 +314,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
   let $$unsubscribe_innerWidth;
-  $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => $burgerBreakPoint = value);
+  $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
@@ -337,20 +327,20 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   let mobileHamburgerClosed = true;
   let jankytown = "";
+  let justScrolledUp = false;
   let $$settled;
   let $$rendered;
   do {
     $$settled = true;
     {
+      console.log("justScrolledUp", justScrolledUp);
+    }
+    {
       if (!$burgerBreakPoint) {
         if ($scrollY == 0)
-          jankytown = "top-0";
-        if ($scrollY > 10 && $instDeltaY > 0)
-          jankytown = "backdrop-blur-md -top-20";
-        if ($scrollY > 200 && $instDeltaY > 0)
-          jankytown = "backdrop-blur-md -top-20";
-        if ($scrollY > 200 && $instDeltaY < 0)
-          jankytown = "backdrop-blur-3xl top-0";
+          jankytown = "top-3";
+        if ($scrollY > 0)
+          jankytown = "top-0 backdrop-blur-3xl ";
       }
     }
     $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key) => {
@@ -359,7 +349,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${escape(xPaddingAndMargin, true) + " pt-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
+<div class="${escape(xPaddingAndMargin, true) + " py-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
       $$result,
       { mobileHamburgerClosed },
       {
@@ -373,9 +363,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 <div class="${escape(xPaddingAndMargin, true) + " " + escape(mobileHamburgerClosed && $burgerBreakPoint && "hidden opacity-0", true) + " h-[100vh] pt-20 md:block transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
   } while (!$$settled);
-  $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
   $$unsubscribe_burgerBreakPoint();
+  $$unsubscribe_instDeltaY();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_redirectSetInterval();
   $$unsubscribe_redirectAfterLoginTimeOut();

@@ -7,7 +7,7 @@
     import KatexIntersectionObserver2 from "$lib/KatexIntersectionObserver2.svelte"
     import { isDarkMode } from "$lib/store.js";
   
-    let numMax = 3000
+    let numMax = 30
     let numMDMax = 1
     $: num = numMax
     $: numMD = numMDMax

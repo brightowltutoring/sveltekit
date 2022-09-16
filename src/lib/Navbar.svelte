@@ -51,10 +51,11 @@
 
   let btnColor = "md:bg-red-300 ";
   let btnColorHover = "md:hover:bg-red-300";
-  // $: gradientColor = "bg-red-400";
+
+  // rgba(255,0,0,0) is transparent
   $: gradientColor = $isDarkMode
-    ? "bg-gradient-to-b md:bg-gradient-to-r from-[rgb(37,27,47)] via-[rgb(37,27,47)] to-[rgb(37,35,51)]"
-    : "bg-gradient-to-b md:bg-gradient-to-r from-[rgb(247,247,247)] via-[rgb(247,247,247)] to-red-100";
+    ? "bg-gradient-to-b md:bg-gradient-to-r from-[rgba(255,0,0,0)] via-[rgba(255,0,0,0)] to-[rgb(37,35,91)]"
+    : "bg-gradient-to-b md:bg-gradient-to-r from-[rgba(255,0,0,0)] via-[rgba(255,0,0,0)] to-red-100";
 
   import LightDarkMode from "$lib/LightDarkMode.svelte";
 </script>

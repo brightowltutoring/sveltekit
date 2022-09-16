@@ -40,6 +40,7 @@
 
 <main>
   <!-- version: tailwind + svelte style (css) + js variables (~20 lines code)-->
+  <!-- class="md:hidden z-50 text-4xl fixed right-6 {variableTop} transition-all duration-300" -->
   <hamburger-container
     class="md:hidden z-50 text-4xl fixed right-6 {variableTop} transition-all duration-300"
   >

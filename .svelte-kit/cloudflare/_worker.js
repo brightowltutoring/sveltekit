@@ -907,38 +907,30 @@ var init_layout_svelte = __esm({
     hamburgerPattyHeight = 2;
     hamburgerColor = "bg-red-500";
     Hamburger = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $scrollY, $$unsubscribe_scrollY;
-      let $instDeltaY, $$unsubscribe_instDeltaY;
-      let $burgerBreakPoint, $$unsubscribe_burgerBreakPoint;
+      let $$unsubscribe_scrollY;
+      let $$unsubscribe_instDeltaY;
+      let $$unsubscribe_burgerBreakPoint;
       let $$unsubscribe_lastScrollY;
-      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
-      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
-      $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => $burgerBreakPoint = value);
+      $$unsubscribe_scrollY = subscribe(scrollY, (value) => value);
+      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => value);
+      $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => value);
       $$unsubscribe_lastScrollY = subscribe(lastScrollY, (value) => value);
       let { mobileOpen } = $$props;
       let { unique } = $$props;
       const hamburgerHeight = Math.floor(0.7 * hamburgerWidth);
       const translY = Math.floor(0.5 * (hamburgerHeight - hamburgerPattyHeight));
       const angle = 45 + 1 * 90;
-      let variableTop = "top-6";
       if ($$props.mobileOpen === void 0 && $$bindings.mobileOpen && mobileOpen !== void 0)
         $$bindings.mobileOpen(mobileOpen);
       if ($$props.unique === void 0 && $$bindings.unique && unique !== void 0)
         $$bindings.unique(unique);
-      {
-        if ($burgerBreakPoint && !mobileOpen) {
-          if ($instDeltaY > 0 && $scrollY > 250)
-            variableTop = "-top-20 ";
-          if ($instDeltaY < 0 && $scrollY > 250)
-            variableTop = "top-6";
-        }
-      }
       $$unsubscribe_scrollY();
       $$unsubscribe_instDeltaY();
       $$unsubscribe_burgerBreakPoint();
       $$unsubscribe_lastScrollY();
       return `<main>
-  <hamburger-container class="${"md:hidden z-50 text-4xl fixed right-6 " + escape(variableTop, true) + " transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
+  
+  <hamburger-container class="${"md:hidden z-50 text-4xl fixed right-6 transition-all duration-300"}"><hamburger style="${"width: " + escape(hamburgerWidth, true) + "px; height:" + escape(hamburgerHeight, true) + "px"}" class="${"relative flex flex-col justify-between"}"><div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: translateY(${translY}px) rotate(-${angle}deg)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
       <div style="${"height:" + escape(hamburgerPattyHeight, true) + "px; " + escape(mobileOpen && `transform: scale(0)`, true)}" class="${escape(hamburgerColor, true) + " transition duration-300 rounded"}"></div>
 
@@ -998,7 +990,7 @@ var init_layout_svelte = __esm({
         {
           $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
         }
-        gradientColor = $isDarkMode ? "bg-gradient-to-b sm:bg-gradient-to-r from-[rgb(37,27,47)] via-[rgb(37,27,47)] to-[rgb(37,35,51)]" : "bg-gradient-to-b sm:bg-gradient-to-r from-[rgb(247,247,247)] via-[rgb(247,247,247)] to-red-100";
+        gradientColor = $isDarkMode ? "bg-gradient-to-b md:bg-gradient-to-r from-[rgba(255,0,0,0)] via-[rgba(255,0,0,0)] to-[rgb(37,35,91)]" : "bg-gradient-to-b md:bg-gradient-to-r from-[rgba(255,0,0,0)] via-[rgba(255,0,0,0)] to-red-100";
         $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
           $$result,
           { mobileOpen, unique },
@@ -1022,7 +1014,7 @@ var init_layout_svelte = __esm({
     </div>
 
   
-  <nav class="${"p-1 " + escape(gradientColor, true) + " rounded-full hideScrollBar md:overflow-x-auto md:h-[44px] h-1/2 overflow-y-auto"}">
+  <nav class="${"md:ml-24 p-1 " + escape(gradientColor, true) + " rounded-full hideScrollBar md:overflow-x-auto md:h-[44px] h-1/2 overflow-y-auto"}">
     <ul class="${"flex flex-col md:flex-row text-3xl md:text-lg items-center"}">${$burgerBreakPoint && mobileOpen ? `<li class="${"pb-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
 
         ${each(Object.keys($routes), (KEY) => {
@@ -1064,9 +1056,7 @@ var init_layout_svelte = __esm({
           </li>`;
         })}
 
-        ${!$burgerBreakPoint ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>
-
-`;
+        ${!$burgerBreakPoint ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
       } while (!$$settled);
       $$unsubscribe_isDarkMode();
       $$unsubscribe_routes();
@@ -1078,9 +1068,9 @@ var init_layout_svelte = __esm({
     });
     xPaddingAndMargin = "px-[4%] md:px-[7%]";
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $instDeltaY, $$unsubscribe_instDeltaY;
       let $scrollY, $$unsubscribe_scrollY;
       let $burgerBreakPoint, $$unsubscribe_burgerBreakPoint;
+      let $$unsubscribe_instDeltaY;
       let $$unsubscribe_isLoggedIn;
       let $$unsubscribe_redirectSetInterval;
       let $$unsubscribe_redirectAfterLoginTimeOut;
@@ -1089,9 +1079,9 @@ var init_layout_svelte = __esm({
       let $routes, $$unsubscribe_routes;
       let $page, $$unsubscribe_page;
       let $$unsubscribe_innerWidth;
-      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => $burgerBreakPoint = value);
+      $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
@@ -1102,20 +1092,20 @@ var init_layout_svelte = __esm({
       $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
       let mobileHamburgerClosed = true;
       let jankytown = "";
+      let justScrolledUp = false;
       let $$settled;
       let $$rendered;
       do {
         $$settled = true;
         {
+          console.log("justScrolledUp", justScrolledUp);
+        }
+        {
           if (!$burgerBreakPoint) {
             if ($scrollY == 0)
-              jankytown = "top-0";
-            if ($scrollY > 10 && $instDeltaY > 0)
-              jankytown = "backdrop-blur-md -top-20";
-            if ($scrollY > 200 && $instDeltaY > 0)
-              jankytown = "backdrop-blur-md -top-20";
-            if ($scrollY > 200 && $instDeltaY < 0)
-              jankytown = "backdrop-blur-3xl top-0";
+              jankytown = "top-3";
+            if ($scrollY > 0)
+              jankytown = "top-0 backdrop-blur-3xl ";
           }
         }
         $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key2) => {
@@ -1124,7 +1114,7 @@ var init_layout_svelte = __esm({
 
 
 
-<div class="${escape(xPaddingAndMargin, true) + " pt-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
+<div class="${escape(xPaddingAndMargin, true) + " py-2 sticky " + escape(jankytown, true) + " z-50 duration-300"}">${validate_component(Navbar, "Navbar").$$render(
           $$result,
           { mobileHamburgerClosed },
           {
@@ -1138,9 +1128,9 @@ var init_layout_svelte = __esm({
 
 <div class="${escape(xPaddingAndMargin, true) + " " + escape(mobileHamburgerClosed && $burgerBreakPoint && "hidden opacity-0", true) + " h-[100vh] pt-20 md:block transition-all duration-500"}">${slots.default ? slots.default({}) : ``}</div>`;
       } while (!$$settled);
-      $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
       $$unsubscribe_burgerBreakPoint();
+      $$unsubscribe_instDeltaY();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_redirectAfterLoginTimeOut();
@@ -1168,9 +1158,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-872f0e5e.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-872f0e5e.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/index-c3002381.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js", "_app/immutable/chunks/stores-16c1e9a8.js", "_app/immutable/chunks/singletons-9fff3d08.js", "_app/immutable/chunks/navigation-e18b87a9.js"];
-    stylesheets = ["_app/immutable/assets/+layout-bff75e57.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-5b678d36.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-5b678d36.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/index-c3002381.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js", "_app/immutable/chunks/stores-4b5e5852.js", "_app/immutable/chunks/singletons-a9693d18.js", "_app/immutable/chunks/navigation-8b446f23.js"];
+    stylesheets = ["_app/immutable/assets/+layout-910460d6.css"];
   }
 });
 
@@ -1214,8 +1204,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-04085157.js";
-    imports2 = ["_app/immutable/components/error.svelte-04085157.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/stores-16c1e9a8.js", "_app/immutable/chunks/singletons-9fff3d08.js", "_app/immutable/chunks/index-ee8a9e57.js"];
+    file2 = "_app/immutable/components/error.svelte-fd27ca22.js";
+    imports2 = ["_app/immutable/components/error.svelte-fd27ca22.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/stores-4b5e5852.js", "_app/immutable/chunks/singletons-a9693d18.js", "_app/immutable/chunks/index-ee8a9e57.js"];
     stylesheets2 = [];
   }
 });
@@ -21429,8 +21419,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-3f59db1d.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-3f59db1d.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js", "_app/immutable/chunks/index-c3002381.js", "_app/immutable/chunks/navigation-e18b87a9.js", "_app/immutable/chunks/singletons-9fff3d08.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-a3abc33a.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-a3abc33a.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js", "_app/immutable/chunks/index-c3002381.js", "_app/immutable/chunks/navigation-8b446f23.js", "_app/immutable/chunks/singletons-a9693d18.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21467,7 +21457,7 @@ var init_page_md = __esm({
     init_store();
     init_katex();
     init_index2();
-    numMax = 3e3;
+    numMax = 30;
     numMDMax = 1;
     Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let num;
@@ -21559,8 +21549,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file7 = "_app/immutable/components/pages/math/_page.md-34e2ef97.js";
-    imports7 = ["_app/immutable/components/pages/math/_page.md-34e2ef97.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/KatexIntersectionObserver2-79043425.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js"];
+    file7 = "_app/immutable/components/pages/math/_page.md-a7ef33cc.js";
+    imports7 = ["_app/immutable/components/pages/math/_page.md-a7ef33cc.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/KatexIntersectionObserver2-020b5bac.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js"];
     stylesheets7 = [];
   }
 });
@@ -21676,8 +21666,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
-    file8 = "_app/immutable/components/pages/physics/_page.md-3fab0507.js";
-    imports8 = ["_app/immutable/components/pages/physics/_page.md-3fab0507.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/KatexIntersectionObserver2-79043425.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js"];
+    file8 = "_app/immutable/components/pages/physics/_page.md-21291177.js";
+    imports8 = ["_app/immutable/components/pages/physics/_page.md-21291177.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/KatexIntersectionObserver2-020b5bac.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js"];
     stylesheets8 = ["_app/immutable/assets/+page-401a8e13.css"];
   }
 });
@@ -21876,8 +21866,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_md3(), page_md_exports3))).default;
-    file10 = "_app/immutable/components/pages/samplequiz/_page.md-da867186.js";
-    imports10 = ["_app/immutable/components/pages/samplequiz/_page.md-da867186.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file10 = "_app/immutable/components/pages/samplequiz/_page.md-0ca0f786.js";
+    imports10 = ["_app/immutable/components/pages/samplequiz/_page.md-0ca0f786.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/katex-15be85e5.js"];
     stylesheets10 = [];
   }
 });
@@ -24046,7 +24036,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-a52f1857.js", "imports": ["_app/immutable/start-a52f1857.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/singletons-9fff3d08.js", "_app/immutable/chunks/index-ee8a9e57.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-380aa82c.js", "imports": ["_app/immutable/start-380aa82c.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/singletons-a9693d18.js", "_app/immutable/chunks/index-ee8a9e57.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
