@@ -3,14 +3,13 @@
   import { elasticOut } from "svelte/easing";
   import { page } from "$app/stores";
   import {
-    burgerBreakPoint,
     isDarkMode,
     redirectAfterLoginTimeOut,
     redirectSetInterval,
   } from "$lib/store.js";
   import { goto, prefetch } from "$app/navigation";
 
-  export let href, content, bool, mobileOpen, btnColor, btnColorHover, routes;
+  export let href, content, bool, btnColor, btnColorHover, routes;
 
   // this allows going back and button click matching with route
   // could've done this in if/else but the boolean nature here made it unnecessary
@@ -32,8 +31,6 @@
     bool = !bool;
 
     unique = !unique; // to reanimate the non-mobile links
-
-    $burgerBreakPoint && (mobileOpen = !mobileOpen);
 
     if (routes.login.isCurrent) {
       window.document.body.classList.remove("dark-mode");

@@ -2,7 +2,6 @@
   import "../app.css";
   import Navbar from "$lib/Navbar.svelte";
   import {
-    burgerBreakPoint,
     instDeltaY,
     innerWidth,
     scrollY,
@@ -21,8 +20,6 @@
   import { onMount } from "svelte";
   // import { auth } from '$lib/firebase.js'
   // import { onAuthStateChanged } from "firebase/auth"
-
-  let mobileHamburgerClosed = true;
 
   function setScrollYMax() {
     $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
@@ -50,37 +47,18 @@
     // })
   });
 
-  let jankytown = "";
+  $: $scrollY > scrollThreshold && console.log("$scrollY > scrollThreshold");
 
-  let justScrolledUp = false;
-  $: console.log("justScrolledUp", justScrolledUp);
+  let jankytown;
+  let scrollThreshold = 1200;
 
-  function wasScrollingUp() {
-    if ($instDeltaY > 0) {
-      justScrolledUp = false;
-      return;
-    }
-    if ($instDeltaY < 0) {
-      justScrolledUp = true;
-      return;
-    }
+  $: {
+    if ($scrollY == 0 && $instDeltaY > 0) jankytown = "top-0 ";
+    if ($scrollY > 10 && $instDeltaY > 0)
+      jankytown = "top-0 backdrop-blur-3xl ";
+    if ($scrollY > 800 && $instDeltaY > 10) jankytown = "-top-20  ";
+    if ($instDeltaY < -100) jankytown = "bottom-0 backdrop-blur-3xl ";
   }
-
-  $: if (!$burgerBreakPoint) {
-    if (justScrolledUp) jankytown = "backdrop-blur-3xl top-0";
-    if ($scrollY == 0) jankytown = "top-3";
-    if ($scrollY > 0) jankytown = "top-0 backdrop-blur-3xl ";
-    // if ($scrollY > 100 && !justScrolledUp) jankytown = "top-0 backdrop-blur-md";
-    // if ($scrollY > 200 && !justScrolledUp) jankytown = "-top-20";
-  }
-
-  let xPaddingAndMargin = "px-[4%] md:px-[7%]";
-
-  // let variableTop = "top-6";
-  // $: if (!$burgerBreakPoint) {
-  //   if ($instDeltaY > 0 && $scrollY > 250) variableTop = "-top-20 ";
-  //   if ($instDeltaY < 0 && $scrollY > 250) variableTop = "top-6";
-  // }
 </script>
 
 <svelte:head>
@@ -107,18 +85,17 @@
   on:resize={setScrollYMax}
   on:contextmenu={(event) => event.preventDefault()}
   on:popstate={clearRedirectStuff}
-  on:scroll={wasScrollingUp}
 />
 
-<!-- <div class="{xPaddingAndMargin} py-2 sticky {variableTop} z-50 duration-300 "> -->
-<div class="{xPaddingAndMargin} py-2 sticky  {jankytown} z-50 duration-300 ">
-  <Navbar bind:mobileHamburgerClosed />
+<!-- TODO: this jank allows the navbar to be fixable, and elements within to be overflow scrollable -->
+<!--  style=" overflow-x: scroll; width: 100%;"  or with tailwind: "overflow-x-auto w-full"-->
+<!-- I still have to hideScrollBar inside the subcomponent of the navbar -->
+<div
+  class="px-[7%] py-2 fixed z-50 {jankytown} duration-1000 overflow-x-auto overflow-y-hidden w-full "
+>
+  <Navbar />
 </div>
 
-<div
-  class="{xPaddingAndMargin} {mobileHamburgerClosed &&
-    $burgerBreakPoint &&
-    'hidden opacity-0'} h-[100vh] pt-20 md:block transition-all duration-500"
->
+<div class="px-[7%] h-[100vh] pt-20 md:block">
   <slot />
 </div>
