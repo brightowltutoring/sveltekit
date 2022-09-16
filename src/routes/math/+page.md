@@ -1,14 +1,12 @@
 {#key num }
-<KatexIntersectionObserver />
+<KatexIntersectionObserver2 />
 {/key}
 
 <script>
+
+    import KatexIntersectionObserver2 from "$lib/KatexIntersectionObserver2.svelte"
     import { isDarkMode } from "$lib/store.js";
-    import KatexIntersectionObserver from "$lib/KatexIntersectionObserver.svelte"
-    // I have yet to figure out for the life of me why I have to break this up into 
-    // two components (KatexIntersectionObserver & KatexDataProp)
-    // Trying to use the logic all in one makes things laggy when using lots of math
-    import K from "$lib/KatexDataProp.svelte"
+  
     let numMax = 3000
     let numMDMax = 1
     $: num = numMax
@@ -25,13 +23,11 @@
 
     let x=2
 
-    // $: proseInvert = $isDarkMode? "prose-invert" : ""
+    $: proseInvert = $isDarkMode ? "prose-invert" : ""
 </script>
 
-<!-- <article class="prose "> -->
-
- <article class="prose lg:prose-lg ">
-
+<!-- <article > -->
+<article class="prose lg:prose-lg {proseInvert}">
 
   <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>
@@ -46,7 +42,7 @@
   <!-- ... -->
 
 
-<K d m={"\\underbrace{u\'-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}"}/>
+<p d m={"\\underbrace{u\'-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}"}/>
 
 
 
@@ -63,7 +59,7 @@ $$
 </span>
 
 <div class="flex justify-center">
-    <input type="range" min="0"  bind:value={x} />
+    <input type="range" min="1"  bind:value={x} />
 </div>
 
 
@@ -82,8 +78,8 @@ $$
 Fortunately it seems to scale very slowly with more markdown (comment out each container below) -->
 
 <div class="p-4">
-    <input type="range" min="1" bind:value={numMD} />
     <input type="number" min="1" bind:value={numMD} />
+    <input type="range" min="1" bind:value={numMD} />
 </div>
 
 # {numMD } lines of markdown immediately below
@@ -103,20 +99,20 @@ The katex components come in use with more detailed styling AND/OR lots of math 
 # {num + equations.length} lines of katex below... lazy rendered with intersection observer!!
 * pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)
 
-<input type="number" min="1"  bind:value={num} />
-<input type="range" min="1"  bind:value={num} />
+<input type="number" min="1" max={numMax} bind:value={num} />
+<input type="range" min="1" max={numMax} bind:value={num} />
 
 {#each Array(num) as _,j }
     {j+1 }
     <div class="p-5 text-red-400">
-        <K d m={"\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}"}/>
+        <p d m={"\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}"}/>
     </div>
 {/each}
 
 {#each equations as eqn,k }
 {k+1 + num}
 <div class="p-1 text-indigo-700">
-    <K d m={eqn}/>
+    <p d m={eqn}/>
 </div>
 {/each}
 

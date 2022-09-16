@@ -51,6 +51,9 @@
 
   let btnColor = "md:bg-red-300 ";
   let btnColorHover = "md:hover:bg-red-300";
+  $: gradientColor = $isDarkMode
+    ? "bg-gradient-to-b sm:bg-gradient-to-r from-[rgb(37,27,47)] via-[rgb(37,27,47)] to-[rgb(37,35,51)]"
+    : "bg-gradient-to-b sm:bg-gradient-to-r from-[rgb(247,247,247)] via-[rgb(247,247,247)] to-red-100";
 
   import LightDarkMode from "$lib/LightDarkMode.svelte";
 </script>
@@ -76,7 +79,14 @@
     </div>
   {/key}
 
-  <nav>
+  <!-- mx-5 shadow-xl w-1/2 -->
+  <nav
+    class="p-1 {gradientColor} rounded-full hideScrollBar  md:overflow-x-auto md:h-[44px] h-1/2 overflow-y-auto  "
+  >
+    <!-- <nav
+    class="sm:overflow-x-auto sm:overflow-y-hidden overflow-y-auto overflow-x-hidden bg-red-0 h-1/2 sm:h-full {!$burgerBreakPoint &&
+      'hideScrollBar'} overflow-scroll "
+  > -->
     {#key unique}
       <ul class="flex flex-col md:flex-row text-3xl md:text-lg items-center">
         {#if $burgerBreakPoint && mobileOpen}
@@ -120,3 +130,16 @@
     {/key}
   </nav>
 </logo-and-navbar>
+
+<!-- <style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hideScrollBar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hideScrollBar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+</style> -->

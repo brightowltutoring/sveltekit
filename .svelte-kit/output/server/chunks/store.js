@@ -78,10 +78,10 @@ const routes = writable({
     title: "jitsi \u{1F680}",
     isCurrent: false
   },
-  samplequiz: {
-    name: "samplequiz",
-    href: "/samplequiz",
-    title: "samplequiz \u{1F680}",
+  physics: {
+    name: "physics",
+    href: "/physics",
+    title: "physics \u{1F680}",
     isCurrent: false
   }
 });

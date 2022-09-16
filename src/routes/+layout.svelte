@@ -90,7 +90,7 @@
   on:popstate={clearRedirectStuff}
 />
 
-<div class="{xPaddingAndMargin} pt-2 sticky {jankytown} z-50 duration-300">
+<div class="{xPaddingAndMargin} pt-2 sticky {jankytown} z-50 duration-300 ">
   <Navbar bind:mobileHamburgerClosed />
 </div>
 

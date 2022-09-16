@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component13) {
-  current_component = component13;
+function set_current_component(component14) {
+  current_component = component14;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component13, name4) {
-  if (!component13 || !component13.$$render) {
+function validate_component(component14, name4) {
+  if (!component14 || !component14.$$render) {
     if (name4 === "svelte:component")
       name4 += " this={...}";
     throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component13;
+  return component14;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css7) => css7.code).join("\n"),
+          code: Array.from(result.css).map((css8) => css8.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -310,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index13 = 0;
-      while (index13 < str.length) {
-        var eqIdx = str.indexOf("=", index13);
+      var index14 = 0;
+      while (index14 < str.length) {
+        var eqIdx = str.indexOf("=", index14);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index13);
+        var endIdx = str.indexOf(";", index14);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index13 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index14 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index13, eqIdx).trim();
+        var key2 = str.slice(index14, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,7 +331,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index13 = endIdx + 1;
+        index14 = endIdx + 1;
       }
       return obj;
     }
@@ -742,10 +742,10 @@ var init_store = __esm({
         title: "jitsi \u{1F680}",
         isCurrent: false
       },
-      samplequiz: {
-        name: "samplequiz",
-        href: "/samplequiz",
-        title: "samplequiz \u{1F680}",
+      physics: {
+        name: "physics",
+        href: "/physics",
+        title: "physics \u{1F680}",
         isCurrent: false
       }
     });
@@ -1168,8 +1168,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-dc6479b2.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-dc6479b2.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-06c67648.js", "_app/immutable/chunks/singletons-e6322bf3.js", "_app/immutable/chunks/navigation-9b31f036.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-13d4944e.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-13d4944e.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/index-52529a6a.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-c03b7cfa.js", "_app/immutable/chunks/singletons-31b3ad8d.js", "_app/immutable/chunks/navigation-6b2fb69c.js"];
     stylesheets = ["_app/immutable/assets/+layout-fa1274b6.css"];
   }
 });
@@ -1214,8 +1214,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-47ad6918.js";
-    imports2 = ["_app/immutable/components/error.svelte-47ad6918.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-06c67648.js", "_app/immutable/chunks/singletons-e6322bf3.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file2 = "_app/immutable/components/error.svelte-cb8b5c61.js";
+    imports2 = ["_app/immutable/components/error.svelte-cb8b5c61.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-c03b7cfa.js", "_app/immutable/chunks/singletons-31b3ad8d.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets2 = [];
   }
 });
@@ -6639,8 +6639,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index13) => (n2) => {
-          nodes.splice(index13 + 1, 0, n2);
+        prev.insertAfter = ((index14) => (n2) => {
+          nodes.splice(index14 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -11924,13 +11924,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index13 = optArgs[0];
+        var index14 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index13
+          index: index14
         };
       },
       htmlBuilder(group, options) {
@@ -11996,9 +11996,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index13
+          index: index14
         } = group;
-        return index13 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index13, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index14 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index14, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -14982,8 +14982,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-524b2867.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-524b2867.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-fed70300.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-fed70300.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-52529a6a.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = [];
   }
 });
@@ -15700,8 +15700,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component13) {
-  return component13.instantiationMode === "EAGER";
+function isComponentEager(component14) {
+  return component14.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -15791,18 +15791,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component13) {
-        if (component13.name !== this.name) {
-          throw Error(`Mismatching Component ${component13.name} for Provider ${this.name}.`);
+      setComponent(component14) {
+        if (component14.name !== this.name) {
+          throw Error(`Mismatching Component ${component14.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component13;
+        this.component = component14;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component13)) {
+        if (isComponentEager(component14)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -15922,19 +15922,19 @@ var init_index_esm20172 = __esm({
         this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component13) {
-        const provider = this.getProvider(component13.name);
+      addComponent(component14) {
+        const provider = this.getProvider(component14.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component13.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component14.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component13);
+        provider.setComponent(component14);
       }
-      addOrOverwriteComponent(component13) {
-        const provider = this.getProvider(component13.name);
+      addOrOverwriteComponent(component14) {
+        const provider = this.getProvider(component14.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component13.name);
+          this.providers.delete(component14.name);
         }
-        this.addComponent(component13);
+        this.addComponent(component14);
       }
       getProvider(name4) {
         if (this.providers.has(name4)) {
@@ -16260,25 +16260,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component13 = provider.getComponent();
-  return (component13 === null || component13 === void 0 ? void 0 : component13.type) === "VERSION";
+  const component14 = provider.getComponent();
+  return (component14 === null || component14 === void 0 ? void 0 : component14.type) === "VERSION";
 }
-function _addComponent(app2, component13) {
+function _addComponent(app2, component14) {
   try {
-    app2.container.addComponent(component13);
+    app2.container.addComponent(component14);
   } catch (e3) {
-    logger.debug(`Component ${component13.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component14.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component13) {
-  const componentName = component13.name;
+function _registerComponent(component14) {
+  const componentName = component14.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component13);
+  _components.set(componentName, component14);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component13);
+    _addComponent(app2, component14);
   }
   return true;
 }
@@ -16310,8 +16310,8 @@ function initializeApp(options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name4);
-  for (const component13 of _components.values()) {
-    container.addComponent(component13);
+  for (const component14 of _components.values()) {
+    container.addComponent(component14);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name4, newApp);
@@ -18892,9 +18892,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index13 = this.queue.length - 1;
+        const index14 = this.queue.length - 1;
         return () => {
-          this.queue[index13] = () => Promise.resolve();
+          this.queue[index14] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -21439,8 +21439,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-b8f622ef.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-b8f622ef.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-73fe8ffc.js", "_app/immutable/chunks/navigation-9b31f036.js", "_app/immutable/chunks/singletons-e6322bf3.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-1ddb4387.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-1ddb4387.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-52529a6a.js", "_app/immutable/chunks/navigation-6b2fb69c.js", "_app/immutable/chunks/singletons-31b3ad8d.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21592,8 +21592,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file7 = "_app/immutable/components/pages/math/_page.md-f961ba3d.js";
-    imports7 = ["_app/immutable/components/pages/math/_page.md-f961ba3d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    file7 = "_app/immutable/components/pages/math/_page.md-a4695a67.js";
+    imports7 = ["_app/immutable/components/pages/math/_page.md-a4695a67.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
     stylesheets7 = [];
   }
 });
@@ -21724,24 +21724,18 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
-    file8 = "_app/immutable/components/pages/math2/_page.md-398d8d43.js";
-    imports8 = ["_app/immutable/components/pages/math2/_page.md-398d8d43.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/index-73fe8ffc.js"];
+    file8 = "_app/immutable/components/pages/math2/_page.md-1cb23d0e.js";
+    imports8 = ["_app/immutable/components/pages/math2/_page.md-1cb23d0e.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/index-52529a6a.js"];
     stylesheets8 = ["_app/immutable/assets/+page-080ca6e3.css"];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/math3/_page.md.js
-var page_md_exports3 = {};
-__export(page_md_exports3, {
-  default: () => Page7
-});
-var KatexIntersectionObserver2, numMax2, numMDMax2, Page7;
-var init_page_md3 = __esm({
-  ".svelte-kit/output/server/entries/pages/math3/_page.md.js"() {
+// .svelte-kit/output/server/chunks/KatexIntersectionObserver2.js
+var KatexIntersectionObserver2;
+var init_KatexIntersectionObserver2 = __esm({
+  ".svelte-kit/output/server/chunks/KatexIntersectionObserver2.js"() {
     init_chunks();
     init_katex();
-    init_store();
-    init_index2();
     KatexIntersectionObserver2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 
@@ -21752,6 +21746,22 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
 
 `;
     });
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/math3/_page.md.js
+var page_md_exports3 = {};
+__export(page_md_exports3, {
+  default: () => Page7
+});
+var numMax2, numMDMax2, Page7;
+var init_page_md3 = __esm({
+  ".svelte-kit/output/server/entries/pages/math3/_page.md.js"() {
+    init_chunks();
+    init_KatexIntersectionObserver2();
+    init_store();
+    init_katex();
+    init_index2();
     numMax2 = 3e3;
     numMDMax2 = 1;
     Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21844,9 +21854,120 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_md3(), page_md_exports3))).default;
-    file9 = "_app/immutable/components/pages/math3/_page.md-dc48d90f.js";
-    imports9 = ["_app/immutable/components/pages/math3/_page.md-dc48d90f.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file9 = "_app/immutable/components/pages/math3/_page.md-27a5957a.js";
+    imports9 = ["_app/immutable/components/pages/math3/_page.md-27a5957a.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexIntersectionObserver2-22512ad9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js"];
     stylesheets9 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/physics/_page.md.js
+var page_md_exports4 = {};
+__export(page_md_exports4, {
+  default: () => Page8
+});
+var css5, E_and_m, Page8;
+var init_page_md4 = __esm({
+  ".svelte-kit/output/server/entries/pages/physics/_page.md.js"() {
+    init_chunks();
+    init_KatexIntersectionObserver2();
+    init_store();
+    init_katex();
+    init_index2();
+    css5 = {
+      code: ".hScroll.svelte-14ocuak{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
+      map: null
+    };
+    E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css5);
+      return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
+<div id="${"charges-1"}"><h3>Two isolated point charges as shown are at a fixed distance apart (segment BC). At which point is it possible for the electric field strength to be zero?</h3>
+  <img style="${"margin: 0 auto; display:flex; width: 65vw; min-width: 280px; max-width: 600px;"}" src="${" https://raw.githubusercontent.com/brightowltutoring/web/main/two-charges.png"}">
+<p>The electric fields due to charges <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">Q_B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> and <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>C</mi></msub></mrow><annotation encoding="application/x-tex">Q_C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> for:</p>
+<ul><li><p><strong>segment BC:</strong> both point from C to B</p></li>
+<li><p><strong>segment CD:</strong> point in opposite directions</p></li>
+<li><p><strong>segment AB:</strong> point in opposite directions</p>
+<p>Therefore only the outer segments CD and AB are feasible for the net electric field to cancel \u2014 i.e. we need only compare the magnitudes from each charge.</p></li></ul>
+<ul><li>Since the magnitude of the electric field depends on both the charge magnitude, and \u201Csquare-inversely\u201D to the separation distance \u2014 i.e. <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>\u223C</mo><mi mathvariant="normal">\u2223</mi><mi>Q</mi><mi mathvariant="normal">\u2223</mi><mi mathvariant="normal">/</mi><msup><mi>d</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E \\sim |Q|/d^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">\u223C</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">\u2223</span><span class="mord mathnormal">Q</span><span class="mord">\u2223/</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> \u2014 then only a point, call it X, in segment CD is feasible as it is \u201Cclose to a weak source and far from a strong source\u201D</li></ul>
+<h3>Explicit calculation</h3>
+<p>If we can assume the fields are in opposite directions then we need only equate the magnitudes for cancellation to occur:</p>
+  <div class="${"hScroll svelte-14ocuak"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left right left" columnspacing="0em 1em 0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">\u2223</mi><msub><mi>E</mi><mi>B</mi></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi mathvariant="normal">\u2223</mi><msub><mi>E</mi><mi>C</mi></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><menclose notation="updiagonalstrike"><mi>k</mi></menclose><mi mathvariant="normal">\u2223</mi><msub><mi>Q</mi><mi>B</mi></msub><mi mathvariant="normal">\u2223</mi></mrow><mrow><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><msup><mi mathvariant="normal">\u2223</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><menclose notation="updiagonalstrike"><mi>k</mi></menclose><mi mathvariant="normal">\u2223</mi><msub><mi>Q</mi><mi>C</mi></msub><mi mathvariant="normal">\u2223</mi></mrow><mrow><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><msup><mi mathvariant="normal">\u2223</mi><mn>2</mn></msup></mrow></mfrac></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mtext>where\xA0X\xA0is\xA0some\xA0variable\xA0point\xA0on\xA0the\xA0interval</mtext></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>\u2234</mo><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msqrt><mfrac><mn>7</mn><mn>2</mn></mfrac></msqrt><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>\u2234</mo><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>&gt;</mo><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
+  \\begin{aligned}
+  |E_B| &amp;= |E_C|  \\\\ \\\\
+    \\frac{  \\cancel{ k } |Q_B| }{ |BX|^2 } &amp;= \\frac{  \\cancel{ k } |Q_C| }{ |CX|^2 }  &amp;&amp; \\text{where X is some variable point on the interval} \\\\  \\\\
+  %  \\frac{ \\cancelto{7 \\mu C}{ |Q_B| } }{  \\cancelto{2 \\mu C}{ |Q_C|  }} &amp;= \\frac{   |BX|^2 }{ |CX|^2 } \\\\
+    \\therefore |BX| &amp;= \\sqrt{\\frac{ 7 }{ 2} }|CX| \\\\ \\\\
+    \\therefore |BX| &amp; &gt; |CX| \\\\
+\\end{aligned}
+
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:12.903em;vertical-align:-6.2015em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:6.7015em;"><span style="top:-9.5131em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"><span class="mord">\u2223</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">\u2223</span></span></span><span style="top:-8.0131em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"></span></span><span style="top:-5.9261em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">\u2223</span><span class="mord mathnormal" style="margin-right:0.07847em;">BX</span><span class="mord"><span class="mord">\u2223</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8944em;"><span style="top:-3.0944em;"><span class="pstrut" style="height:3.0944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span><span class="svg-align" style="top:-2.8944em;"><span class="pstrut" style="height:3.0944em;"></span><span style="height:1.0944em;"><svg xmlns="http://www.w3.org/2000/svg" width='100%' height='1.0944em'><line x1='0' y1='100%' x2='100%' y2='0' stroke-width='0.046em'/></svg></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.2em;"><span></span></span></span></span></span><span class="mord">\u2223</span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">\u2223</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.8501em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"></span></span><span style="top:-1.5385em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"><span class="mrel amsrm">\u2234</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">\u2223</span><span class="mord mathnormal" style="margin-right:0.07847em;">BX</span><span class="mord">\u2223</span></span></span><span style="top:0.3899em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"></span></span><span style="top:1.8899em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"><span class="mrel amsrm">\u2234</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">\u2223</span><span class="mord mathnormal" style="margin-right:0.07847em;">BX</span><span class="mord">\u2223</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:6.2015em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:6.7015em;"><span style="top:-9.5131em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">\u2223</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">\u2223</span></span></span><span style="top:-5.9261em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">\u2223</span><span class="mord mathnormal" style="margin-right:0.07847em;">CX</span><span class="mord"><span class="mord">\u2223</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8944em;"><span style="top:-3.0944em;"><span class="pstrut" style="height:3.0944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span><span class="svg-align" style="top:-2.8944em;"><span class="pstrut" style="height:3.0944em;"></span><span style="height:1.0944em;"><svg xmlns="http://www.w3.org/2000/svg" width='100%' height='1.0944em'><line x1='0' y1='100%' x2='100%' y2='0' stroke-width='0.046em'/></svg></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.2em;"><span></span></span></span></span></span><span class="mord">\u2223</span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">\u2223</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-1.5385em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6516em;"><span class="svg-align" style="top:-4.4em;"><span class="pstrut" style="height:4.4em;"></span><span class="mord" style="padding-left:1em;"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">7</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.6116em;"><span class="pstrut" style="height:4.4em;"></span><span class="hide-tail" style="min-width:1.02em;height:2.48em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='2.48em' viewBox='0 0 400000 2592' preserveAspectRatio='xMinYMin slice'><path d='M424,2478
+c-1.3,-0.7,-38.5,-172,-111.5,-514c-73,-342,-109.8,-513.3,-110.5,-514
+c0,-2,-10.7,14.3,-32,49c-4.7,7.3,-9.8,15.7,-15.5,25c-5.7,9.3,-9.8,16,-12.5,20
+s-5,7,-5,7c-4,-3.3,-8.3,-7.7,-13,-13s-13,-13,-13,-13s76,-122,76,-122s77,-121,77,-121
+s209,968,209,968c0,-2,84.7,-361.7,254,-1079c169.3,-717.3,254.7,-1077.7,256,-1081
+l0 -0c4,-6.7,10,-10,18,-10 H400000
+v40H1014.6
+s-87.3,378.7,-272.6,1166c-185.3,787.3,-279.3,1182.3,-282,1185
+c-2,6,-10,9,-24,9
+c-8,0,-12,-0.7,-12,-2z M1001 80
+h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.7884em;"><span></span></span></span></span></span><span class="mord">\u2223</span><span class="mord mathnormal" style="margin-right:0.07847em;">CX</span><span class="mord">\u2223</span></span></span><span style="top:1.8899em;"><span class="pstrut" style="height:3.6516em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">\u2223</span><span class="mord mathnormal" style="margin-right:0.07847em;">CX</span><span class="mord">\u2223</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:6.2015em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-r"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:3.7015em;"><span style="top:-5.7015em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"></span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:3.7015em;"><span style="top:-5.7015em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord"></span><span class="mord text"><span class="mord">where\xA0X\xA0is\xA0some\xA0variable\xA0point\xA0on\xA0the\xA0interval</span></span></span></span></span></span></span></span></span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div></div>
+<p>Since we were limited to segments AB and CD, this result forces the point X to be in CD.</p></div>
+<div id="${"charges-2"}"><h3>Four point charges have the same magnitude of 2.4 \xD7 10\u207B\xB9\xB2 C and are fixed to the corners of a square that is 4.0 cm on a side. Three of the charges are positive and one is negative. What is the magnitude and direction of the net electric field that exists at the centre of the square?</h3>
+<p>Using symmetry arguments, at the center of the square:</p>
+<ul><li>the diagonally like-charges cancel along their joining diagonals</li>
+<li>the diagonally opposite-charges add along their joining diagonals, going from positive to negative</li></ul>
+<p>With this information therefore the magnitude is twice the magnitude along the positive-negative direction. If we call <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>'}<!-- HTML_TAG_END --></span> the diagonal-to-center distance, and <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span>'}<!-- HTML_TAG_END --></span> as the side-length of the square</p>
+<p>where <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>D</mi><mn>2</mn></msup><mo>=</mo><mo stretchy="false">(</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>=</mo><mn>2</mn><mo stretchy="false">(</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">D^2 = (\\frac{a}{2})^2 +  (\\frac{a}{2})^2 = 2(\\frac{a}{2})^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1591em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1591em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1591em;vertical-align:-0.345em;"></span><span class="mord">2</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> results from Pythagoras\u2019 Theorem. Converting everything to SI units (and then omitting the SI unit in the calculation below):</p>
+  <div class="${"hScroll svelte-14ocuak"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">\u2223</mi><msub><mover accent="true"><mi>E</mi><mo>\u20D7</mo></mover><mtext>\xA0net\xA0@center\xA0</mtext></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>4</mn><mo>\u22C5</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>9</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2.4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>\u2212</mo><mn>12</mn></mrow></msup><mo stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mn>4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>\u2212</mo><mn>2</mn></mrow></msup><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>4</mn><mo>\u22C5</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>9</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2.4</mn><mo stretchy="false">)</mo></mrow><mn>16</mn></mfrac><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mn>9</mn><mo>\u2212</mo><mn>12</mn><mo>\u2212</mo><mo stretchy="false">(</mo><mo>\u2212</mo><mn>4</mn><mo stretchy="false">)</mo></mrow></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>5.4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mn>1</mn></msup><mtext>\xA0N\xA0</mtext></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
+    \\begin{aligned} 
+  |\\vec{E}_{ \\text{ net @center }}| 
+  &amp; = 4 \\cdot \\frac{ (9 \\times 10^{9}) (2.4 \\times 10^{-12}) }{  (4 \\times 10^{-2})^2 }  \\\\
+  &amp; = 4 \\cdot \\frac{ (9 ) (2.4) }{  16  }  \\times 10^{9-12-(-4)}\\\\ 
+  &amp; = 5.4 \\times 10^{1} \\text{ N } 
+\\end{aligned}
+
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6.6642em;vertical-align:-3.0821em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.5821em;"><span style="top:-5.5821em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord">\u2223</span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">\xA0net\xA0@center\xA0</span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">\u2223</span></span></span><span style="top:-2.9191em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"></span></span><span style="top:-1.069em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:3.0821em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.5821em;"><span style="top:-5.5821em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u22C5</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2212</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">9</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2212</span><span class="mord mtight">12</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.9191em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u22C5</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">16</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">9</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2.4</span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span><span class="mbin mtight">\u2212</span><span class="mord mtight">12</span><span class="mbin mtight">\u2212</span><span class="mopen mtight">(</span><span class="mord mtight">\u2212</span><span class="mord mtight">4</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span><span style="top:-1.069em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">5.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord text"><span class="mord">\xA0N\xA0</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:3.0821em;"><span></span></span></span></span></span></span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div></div>
+  <div class="${"hScroll svelte-14ocuak"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>\u2234</mo><msub><mover accent="true"><mi>E</mi><mo>\u20D7</mo></mover><mtext>\xA0net\xA0@center\xA0</mtext></msub><mo>=</mo><mrow><mtext>\xA0</mtext><mtext mathvariant="bold">54</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">N,</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">along</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">diagonal</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">from</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">positive</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">to</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">negative</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">charge</mtext></mrow></mrow><annotation encoding="application/x-tex">\\therefore \\vec{E}_{ \\text{ net @center }} = \\textbf{ 54 N, along diagonal from positive to negative charge} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6922em;"></span><span class="mrel amsrm">\u2234</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1163em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">\xA0net\xA0@center\xA0</span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord textbf">\xA054\xA0N,\xA0along\xA0diagonal\xA0from\xA0positive\xA0to\xA0negative\xA0charge</span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div></div></div>`;
+    });
+    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let proseInvert;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      proseInvert = $isDarkMode ? "prose-invert" : "";
+      $$unsubscribe_isDarkMode();
+      return `<div class="${"prose lg:prose-lg " + escape(proseInvert, true)}">${validate_component(E_and_m, "E").$$render($$result, {}, {}, {})}</div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/9.js
+var __exports10 = {};
+__export(__exports10, {
+  component: () => component10,
+  file: () => file10,
+  imports: () => imports10,
+  index: () => index10,
+  stylesheets: () => stylesheets10
+});
+var index10, component10, file10, imports10, stylesheets10;
+var init__10 = __esm({
+  ".svelte-kit/output/server/nodes/9.js"() {
+    index10 = 9;
+    component10 = async () => (await Promise.resolve().then(() => (init_page_md4(), page_md_exports4))).default;
+    file10 = "_app/immutable/components/pages/physics/_page.md-5ac148a1.js";
+    imports10 = ["_app/immutable/components/pages/physics/_page.md-5ac148a1.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexIntersectionObserver2-22512ad9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    stylesheets10 = ["_app/immutable/assets/+page-06de6fce.css"];
   }
 });
 
@@ -21864,9 +21985,9 @@ var init_CalendlyJsandCSS = __esm({
 // .svelte-kit/output/server/entries/pages/plans/_page.svelte.js
 var page_svelte_exports5 = {};
 __export(page_svelte_exports5, {
-  default: () => Page8
+  default: () => Page9
 });
-var css$1, PlansCard, css5, Page8;
+var css$1, PlansCard, css6, Page9;
 var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -21910,11 +22031,11 @@ var init_page_svelte5 = __esm({
   
 </div>`;
     });
-    css5 = {
+    css6 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
-    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const plansCardArray = [
         {
           card: 1,
@@ -21938,7 +22059,7 @@ var init_page_svelte5 = __esm({
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
       ];
-      $$result.css.add(css5);
+      $$result.css.add(css6);
       return `<a href="${"/jitsi"}" class="${"svelte-18ymex4"}">jitsi</a>
 
 <div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
@@ -21970,47 +22091,6 @@ var init_page_svelte5 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/9.js
-var __exports10 = {};
-__export(__exports10, {
-  component: () => component10,
-  file: () => file10,
-  imports: () => imports10,
-  index: () => index10,
-  stylesheets: () => stylesheets10
-});
-var index10, component10, file10, imports10, stylesheets10;
-var init__10 = __esm({
-  ".svelte-kit/output/server/nodes/9.js"() {
-    index10 = 9;
-    component10 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file10 = "_app/immutable/components/pages/plans/_page.svelte-c65d8d52.js";
-    imports10 = ["_app/immutable/components/pages/plans/_page.svelte-c65d8d52.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-bbf0f30b.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-73fe8ffc.js"];
-    stylesheets10 = ["_app/immutable/assets/+page-ebab19d4.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
-var page_md_exports4 = {};
-__export(page_md_exports4, {
-  default: () => Page9
-});
-var Page9;
-var init_page_md4 = __esm({
-  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
-    init_chunks();
-    init_KatexDataProp();
-    init_katex();
-    Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
-${each(Array(1e3), (_2, i) => {
-        return `<div class="${"bg-red-100"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: `E=mc^2` }, {}, {})}
-  </div>`;
-      })}`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/10.js
 var __exports11 = {};
 __export(__exports11, {
@@ -22024,37 +22104,30 @@ var index11, component11, file11, imports11, stylesheets11;
 var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
-    component11 = async () => (await Promise.resolve().then(() => (init_page_md4(), page_md_exports4))).default;
-    file11 = "_app/immutable/components/pages/samplequiz/_page.md-23c7d95b.js";
-    imports11 = ["_app/immutable/components/pages/samplequiz/_page.md-23c7d95b.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets11 = [];
+    component11 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
+    file11 = "_app/immutable/components/pages/plans/_page.svelte-1ad9c019.js";
+    imports11 = ["_app/immutable/components/pages/plans/_page.svelte-1ad9c019.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-52529a6a.js"];
+    stylesheets11 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
-var page_svelte_exports6 = {};
-__export(page_svelte_exports6, {
+// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
+var page_md_exports5 = {};
+__export(page_md_exports5, {
   default: () => Page10
 });
-var css6, Page10;
-var init_page_svelte6 = __esm({
-  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+var Page10;
+var init_page_md5 = __esm({
+  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
     init_chunks();
-    init_CalendlyJsandCSS();
-    css6 = {
-      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
-      map: null
-    };
+    init_KatexDataProp();
+    init_katex();
     Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css6);
-      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
-
-<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
-
-<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
-
-  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
-</div>`;
+      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
+${each(Array(1e3), (_2, i) => {
+        return `<div class="${"bg-red-100"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: `E=mc^2` }, {}, {})}
+  </div>`;
+      })}`;
     });
   }
 });
@@ -22072,10 +22145,58 @@ var index12, component12, file12, imports12, stylesheets12;
 var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
-    component12 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file12 = "_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js";
-    imports12 = ["_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js"];
-    stylesheets12 = ["_app/immutable/assets/+page-f8a180cf.css"];
+    component12 = async () => (await Promise.resolve().then(() => (init_page_md5(), page_md_exports5))).default;
+    file12 = "_app/immutable/components/pages/samplequiz/_page.md-23c7d95b.js";
+    imports12 = ["_app/immutable/components/pages/samplequiz/_page.md-23c7d95b.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets12 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
+var page_svelte_exports6 = {};
+__export(page_svelte_exports6, {
+  default: () => Page11
+});
+var css7, Page11;
+var init_page_svelte6 = __esm({
+  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+    init_chunks();
+    init_CalendlyJsandCSS();
+    css7 = {
+      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
+      map: null
+    };
+    Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css7);
+      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+
+<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
+
+<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
+
+  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
+</div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/12.js
+var __exports13 = {};
+__export(__exports13, {
+  component: () => component13,
+  file: () => file13,
+  imports: () => imports13,
+  index: () => index13,
+  stylesheets: () => stylesheets13
+});
+var index13, component13, file13, imports13, stylesheets13;
+var init__13 = __esm({
+  ".svelte-kit/output/server/nodes/12.js"() {
+    index13 = 12;
+    component13 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
+    file13 = "_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js";
+    imports13 = ["_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js"];
+    stylesheets13 = ["_app/immutable/assets/+page-f8a180cf.css"];
   }
 });
 
@@ -22916,7 +23037,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets13 = new Set(entry.stylesheets);
+  const stylesheets14 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -22966,7 +23087,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets13.add(url));
+        node.stylesheets.forEach((url) => stylesheets14.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -23029,7 +23150,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets13) {
+  for (const dep of stylesheets14) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -23285,14 +23406,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file13 = is_asset ? filename : filename_html;
+      const file14 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file13), {
+        response = new Response(options.read(file14), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file13}`, opts);
+        response = await fetch(`${event.url.origin}/${file14}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23653,8 +23774,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index13 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index13]();
+              const index14 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index14]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -24195,7 +24316,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-d7f004ac.js", "imports": ["_app/immutable/start-d7f004ac.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-e6322bf3.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-cfe936d6.js", "imports": ["_app/immutable/start-cfe936d6.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-31b3ad8d.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -24208,7 +24329,8 @@ var manifest = {
       () => Promise.resolve().then(() => (init__9(), __exports9)),
       () => Promise.resolve().then(() => (init__10(), __exports10)),
       () => Promise.resolve().then(() => (init__11(), __exports11)),
-      () => Promise.resolve().then(() => (init__12(), __exports12))
+      () => Promise.resolve().then(() => (init__12(), __exports12)),
+      () => Promise.resolve().then(() => (init__13(), __exports13))
     ],
     routes: [
       {
@@ -24283,13 +24405,23 @@ var manifest = {
       },
       {
         type: "page",
+        id: "physics",
+        pattern: /^\/physics\/?$/,
+        names: [],
+        types: [],
+        errors: [1],
+        layouts: [0],
+        leaf: 9
+      },
+      {
+        type: "page",
         id: "plans",
         pattern: /^\/plans\/?$/,
         names: [],
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 9
+        leaf: 10
       },
       {
         type: "page",
@@ -24299,7 +24431,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 10
+        leaf: 11
       },
       {
         type: "page",
@@ -24309,7 +24441,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 11
+        leaf: 12
       }
     ],
     matchers: async () => {
@@ -24372,12 +24504,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file13 = pathname.substring(1);
+      let file14 = pathname.substring(1);
       try {
-        file13 = decodeURIComponent(file13);
+        file14 = decodeURIComponent(file14);
       } catch (err) {
       }
-      if (manifest.assets.has(file13) || manifest.assets.has(file13 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file14) || manifest.assets.has(file14 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

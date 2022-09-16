@@ -16,6 +16,7 @@
     * **segment CD:** point in opposite directions
     * **segment AB:** point in opposite directions
 
+
   Therefore only the outer segments CD and AB are feasible for the net electric field to cancel — i.e. we need only compare the magnitudes from each charge.
 
   - Since the magnitude of the electric field depends on both the charge magnitude, and "square-inversely" to the separation distance — i.e. $E \sim |Q|/d^2$ — then only a point, call it X, in segment CD is feasible as it is "close to a weak source and far from a strong source"
@@ -80,12 +81,32 @@
     $$
     \therefore \vec{E}_{ \text{ net @center }} = \textbf{ 54 N, along diagonal from positive to negative charge} 
     $$
-    
+
   </div>
 
+</div>
 
+ <div id="circuits-1">
+
+  ### A cell has an emf of 8.0 V and an internal resistance of 2.0 Ω. The ideal voltmeter reads 6.4 V. What is the resistance of R?
+
+   - A. 0.8 Ω
+   - B. 2.0 Ω
+   - C. 4.0 Ω
+   - D. 8.0 Ω
+
+
+  <img style=" margin: 0 auto; display:flex;width: 65vw;min-width: 280px;max-width: 600px;" src="https://raw.githubusercontent.com/brightowltutoring/web/main/circuits-1.png"/>
 
 </div>
+
+
+
+
+
+
+
+
 
 <style>
   .hScrollB {
@@ -98,6 +119,11 @@
     white-space: nowrap;
     margin: 0 30;
     background-color: var(--correctColour);
+  }
+
+  li { 
+    height:10px;
+
   }
 
 </style>

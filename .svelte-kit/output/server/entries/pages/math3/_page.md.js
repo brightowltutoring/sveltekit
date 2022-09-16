@@ -1,17 +1,8 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
-import "katex";
+import { K as KatexIntersectionObserver2 } from "../../../chunks/KatexIntersectionObserver2.js";
 import { i as isDarkMode } from "../../../chunks/store.js";
+import "katex";
 import "../../../chunks/index2.js";
-const KatexIntersectionObserver2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-
-
-
-
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}
-
-`;
-});
 let numMax = 3e3;
 let numMDMax = 1;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {

@@ -104,6 +104,12 @@ export const routes = writable({
     title: "Thinksolve.io 💫",
     isCurrent: false,
   }, 
+  login: {
+    name:'Login',
+    href: "/login",
+    title: "Login 🚀",
+    isCurrent: false,
+  },
   plans: {
     name:'Plans',
     href: "/plans",
@@ -116,22 +122,10 @@ export const routes = writable({
     title: "math",
     isCurrent: false,
   }, 
-  math3: {
-    name:'math3',
-    href: "/math3",
-    title: "math3",
-    isCurrent: false,
-  }, 
   schools: {
     name:'schools',
     href: "/schools",
     title: "Schools 📚",
-    isCurrent: false,
-  },
-  login: {
-    name:'Login',
-    href: "/login",
-    title: "Login 🚀",
     isCurrent: false,
   },
   jitsi: {

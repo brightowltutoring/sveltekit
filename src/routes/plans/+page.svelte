@@ -34,8 +34,6 @@
   ];
 </script>
 
-<a href="/jitsi">jitsi</a>
-
 <div class="font-Poppins text-center sm:text-7xl text-6xl pb-2  ">Plans</div>
 
 <!-- in:scale={{ duration: 1000, easing: elasticOut }} -->
