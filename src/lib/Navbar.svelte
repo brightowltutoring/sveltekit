@@ -45,8 +45,8 @@
 
   // rgba(0,0,0,0) is transparent
   $: gradientColor = $isDarkMode
-    ? "bg-gradient-to-t md:bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]"
-    : "bg-gradient-to-t md:bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
+    ? "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]"
+    : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
 </script>
 
 <logo-and-navbar

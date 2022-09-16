@@ -11,6 +11,7 @@
     redirectAfterLoginTimeOut,
     redirectSetInterval,
     routes,
+    lessThan768,
     // elementColor,
   } from "$lib/store.js";
 
@@ -52,11 +53,23 @@
   let jankytown;
   let scrollThreshold = 1200;
 
-  $: {
-    if ($scrollY == 0 && $instDeltaY > 0) jankytown = "top-0 ";
+  // bigger than med
+  $: if (!$lessThan768) {
+    jankytown = "top-0";
+    if ($scrollY == 0 && $instDeltaY > 0) jankytown = "top-0 backdrop-blur-3xl";
     if ($scrollY > 10 && $instDeltaY > 0)
       jankytown = "top-0 backdrop-blur-3xl ";
     if ($scrollY > 800 && $instDeltaY > 10) jankytown = "-top-20  ";
+    if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl ";
+  }
+  // smaller than med
+  $: if ($lessThan768) {
+    jankytown = "bottom-0 backdrop-blur-3xl ";
+    if ($scrollY == 0 && $instDeltaY > 0)
+      jankytown = "bottom-0 backdrop-blur-3xl";
+    if ($scrollY > 10 && $instDeltaY > 0)
+      jankytown = "bottom-0 backdrop-blur-3xl ";
+    if ($scrollY > 800 && $instDeltaY > 10) jankytown = "-bottom-20  ";
     if ($instDeltaY < -100) jankytown = "bottom-0 backdrop-blur-3xl ";
   }
 </script>
@@ -91,7 +104,7 @@
 <!--  style=" overflow-x: scroll; width: 100%;"  or with tailwind: "overflow-x-auto w-full"-->
 <!-- I still have to hideScrollBar inside the subcomponent of the navbar -->
 <div
-  class="px-[7%] py-2 fixed z-50 {jankytown} duration-1000 overflow-x-auto overflow-y-hidden w-full "
+  class="px-[7%] py-2 fixed z-50 {jankytown} duration-300 overflow-x-auto overflow-y-hidden w-full "
 >
   <Navbar />
 </div>
