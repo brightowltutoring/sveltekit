@@ -42,6 +42,12 @@ const routes = writable({
     title: "Thinksolve.io \u{1F4AB}",
     isCurrent: false
   },
+  login: {
+    name: "Login",
+    href: "/login",
+    title: "Login \u{1F680}",
+    isCurrent: false
+  },
   plans: {
     name: "Plans",
     href: "/plans",
@@ -54,22 +60,10 @@ const routes = writable({
     title: "math",
     isCurrent: false
   },
-  math3: {
-    name: "math3",
-    href: "/math3",
-    title: "math3",
-    isCurrent: false
-  },
   schools: {
     name: "schools",
     href: "/schools",
     title: "Schools \u{1F4DA}",
-    isCurrent: false
-  },
-  login: {
-    name: "Login",
-    href: "/login",
-    title: "Login \u{1F680}",
     isCurrent: false
   },
   jitsi: {
@@ -92,7 +86,7 @@ const light_darkened = "rgb(242,247,250)";
 const light_darkened_half = "pink";
 const dark_lightened = "rgb(38, 35, 51)";
 const dark_lightened_half = "#8f86b8";
-const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
+derived(isDarkMode, ($isDarkMode, set) => {
   $isDarkMode ? set(dark_lightened_half) : set(light_darkened_half);
 });
 export {
@@ -103,10 +97,9 @@ export {
   isLoggedIn as e,
   scrollYMax as f,
   innerWidth as g,
-  elementColor as h,
+  dark_lightened as h,
   isDarkMode as i,
-  dark_lightened as j,
-  light_darkened as k,
+  light_darkened as j,
   lastScrollY as l,
   redirectAfterLoginTimeOut as r,
   scrollY as s,

@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp"]),
 	mimeTypes: {".mp4":"video/mp4",".webp":"image/webp"},
 	_: {
-		entry: {"file":"_app/immutable/start-cfe936d6.js","imports":["_app/immutable/start-cfe936d6.js","_app/immutable/chunks/index-d43d80ed.js","_app/immutable/chunks/singletons-31b3ad8d.js","_app/immutable/chunks/index-5cb55e0e.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-a52f1857.js","imports":["_app/immutable/start-a52f1857.js","_app/immutable/chunks/index-9580a2af.js","_app/immutable/chunks/singletons-9fff3d08.js","_app/immutable/chunks/index-ee8a9e57.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),
@@ -15,9 +15,7 @@ export const manifest = {
 			() => import('../output/server/nodes/7.js'),
 			() => import('../output/server/nodes/8.js'),
 			() => import('../output/server/nodes/9.js'),
-			() => import('../output/server/nodes/10.js'),
-			() => import('../output/server/nodes/11.js'),
-			() => import('../output/server/nodes/12.js')
+			() => import('../output/server/nodes/10.js')
 		],
 		routes: [
 			{
@@ -72,33 +70,13 @@ export const manifest = {
 			},
 			{
 				type: 'page',
-				id: "math2",
-				pattern: /^\/math2\/?$/,
-				names: [],
-				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 7
-			},
-			{
-				type: 'page',
-				id: "math3",
-				pattern: /^\/math3\/?$/,
-				names: [],
-				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 8
-			},
-			{
-				type: 'page',
 				id: "physics",
 				pattern: /^\/physics\/?$/,
 				names: [],
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 9
+				leaf: 7
 			},
 			{
 				type: 'page',
@@ -108,7 +86,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 10
+				leaf: 8
 			},
 			{
 				type: 'page',
@@ -118,7 +96,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 11
+				leaf: 9
 			},
 			{
 				type: 'page',
@@ -128,7 +106,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 12
+				leaf: 10
 			}
 		],
 		matchers: async () => {

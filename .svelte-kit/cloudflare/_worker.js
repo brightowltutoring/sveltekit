@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component14) {
-  current_component = component14;
+function set_current_component(component12) {
+  current_component = component12;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component14, name4) {
-  if (!component14 || !component14.$$render) {
+function validate_component(component12, name4) {
+  if (!component12 || !component12.$$render) {
     if (name4 === "svelte:component")
       name4 += " this={...}";
     throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component14;
+  return component12;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css8) => css8.code).join("\n"),
+          code: Array.from(result.css).map((css7) => css7.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -310,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index14 = 0;
-      while (index14 < str.length) {
-        var eqIdx = str.indexOf("=", index14);
+      var index12 = 0;
+      while (index12 < str.length) {
+        var eqIdx = str.indexOf("=", index12);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index14);
+        var endIdx = str.indexOf(";", index12);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index14 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index12 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index14, eqIdx).trim();
+        var key2 = str.slice(index12, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,7 +331,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index14 = endIdx + 1;
+        index12 = endIdx + 1;
       }
       return obj;
     }
@@ -672,7 +672,7 @@ function customFade(node, { easing = elasticOut, duration = 3e3 }) {
       `
   };
 }
-var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, burgerBreakPoint, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, light_darkened_half, dark_lightened, dark_lightened_half, elementColor;
+var isLoggedIn, lastScrollY, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, burgerBreakPoint, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, light_darkened_half, dark_lightened, dark_lightened_half;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
     init_index2();
@@ -706,6 +706,12 @@ var init_store = __esm({
         title: "Thinksolve.io \u{1F4AB}",
         isCurrent: false
       },
+      login: {
+        name: "Login",
+        href: "/login",
+        title: "Login \u{1F680}",
+        isCurrent: false
+      },
       plans: {
         name: "Plans",
         href: "/plans",
@@ -718,22 +724,10 @@ var init_store = __esm({
         title: "math",
         isCurrent: false
       },
-      math3: {
-        name: "math3",
-        href: "/math3",
-        title: "math3",
-        isCurrent: false
-      },
       schools: {
         name: "schools",
         href: "/schools",
         title: "Schools \u{1F4DA}",
-        isCurrent: false
-      },
-      login: {
-        name: "Login",
-        href: "/login",
-        title: "Login \u{1F680}",
         isCurrent: false
       },
       jitsi: {
@@ -756,7 +750,7 @@ var init_store = __esm({
     light_darkened_half = "pink";
     dark_lightened = "rgb(38, 35, 51)";
     dark_lightened_half = "#8f86b8";
-    elementColor = derived(isDarkMode, ($isDarkMode, set) => {
+    derived(isDarkMode, ($isDarkMode, set) => {
       $isDarkMode ? set(dark_lightened_half) : set(light_darkened_half);
     });
   }
@@ -964,17 +958,18 @@ var init_layout_svelte = __esm({
       return `<button>${$isDarkMode ? `<svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>` : `<svg aria-label="${"Moon"}" id="${"darkIcon"}" height="${"24"}" width="${"24"}" style="${"transform: scale(1);"}" data-metatip="${"true"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`}</button>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let gradientColor;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
       let $routes, $$unsubscribe_routes;
       let $isLoggedIn, $$unsubscribe_isLoggedIn;
       let $scrollY, $$unsubscribe_scrollY;
       let $burgerBreakPoint, $$unsubscribe_burgerBreakPoint;
-      let $isDarkMode, $$unsubscribe_isDarkMode;
       let $scaleRocket, $$unsubscribe_scaleRocket;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_burgerBreakPoint = subscribe(burgerBreakPoint, (value) => $burgerBreakPoint = value);
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
       $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
       let hueRocket = 0;
@@ -1003,6 +998,7 @@ var init_layout_svelte = __esm({
         {
           $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
         }
+        gradientColor = $isDarkMode ? "bg-gradient-to-b sm:bg-gradient-to-r from-[rgb(37,27,47)] via-[rgb(37,27,47)] to-[rgb(37,35,51)]" : "bg-gradient-to-b sm:bg-gradient-to-r from-[rgb(247,247,247)] via-[rgb(247,247,247)] to-red-100";
         $$rendered = `${validate_component(Hamburger, "Hamburger").$$render(
           $$result,
           { mobileOpen, unique },
@@ -1025,7 +1021,9 @@ var init_layout_svelte = __esm({
   <div class="${"translate-y-[0.2rem] translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:pr-20 md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
-  <nav><ul class="${"flex flex-col md:flex-row text-3xl md:text-lg items-center"}">${$burgerBreakPoint && mobileOpen ? `<li class="${"pb-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
+  
+  <nav class="${"p-1 " + escape(gradientColor, true) + " rounded-full hideScrollBar md:overflow-x-auto md:h-[44px] h-1/2 overflow-y-auto"}">
+    <ul class="${"flex flex-col md:flex-row text-3xl md:text-lg items-center"}">${$burgerBreakPoint && mobileOpen ? `<li class="${"pb-3 "}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}
 
         ${each(Object.keys($routes), (KEY) => {
           return `<li class="${"py-3 md:p-0 "}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
@@ -1066,13 +1064,15 @@ var init_layout_svelte = __esm({
           </li>`;
         })}
 
-        ${!$burgerBreakPoint ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>`;
+        ${!$burgerBreakPoint ? `<li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li>` : ``}</ul></nav></logo-and-navbar>
+
+`;
       } while (!$$settled);
+      $$unsubscribe_isDarkMode();
       $$unsubscribe_routes();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_scrollY();
       $$unsubscribe_burgerBreakPoint();
-      $$unsubscribe_isDarkMode();
       $$unsubscribe_scaleRocket();
       return $$rendered;
     });
@@ -1168,9 +1168,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-13d4944e.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-13d4944e.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/index-52529a6a.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/stores-c03b7cfa.js", "_app/immutable/chunks/singletons-31b3ad8d.js", "_app/immutable/chunks/navigation-6b2fb69c.js"];
-    stylesheets = ["_app/immutable/assets/+layout-fa1274b6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-872f0e5e.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-872f0e5e.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/index-c3002381.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js", "_app/immutable/chunks/stores-16c1e9a8.js", "_app/immutable/chunks/singletons-9fff3d08.js", "_app/immutable/chunks/navigation-e18b87a9.js"];
+    stylesheets = ["_app/immutable/assets/+layout-bff75e57.css"];
   }
 });
 
@@ -1214,8 +1214,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-cb8b5c61.js";
-    imports2 = ["_app/immutable/components/error.svelte-cb8b5c61.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/stores-c03b7cfa.js", "_app/immutable/chunks/singletons-31b3ad8d.js", "_app/immutable/chunks/index-5cb55e0e.js"];
+    file2 = "_app/immutable/components/error.svelte-04085157.js";
+    imports2 = ["_app/immutable/components/error.svelte-04085157.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/stores-16c1e9a8.js", "_app/immutable/chunks/singletons-9fff3d08.js", "_app/immutable/chunks/index-ee8a9e57.js"];
     stylesheets2 = [];
   }
 });
@@ -6639,8 +6639,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index14) => (n2) => {
-          nodes.splice(index14 + 1, 0, n2);
+        prev.insertAfter = ((index12) => (n2) => {
+          nodes.splice(index12 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -11924,13 +11924,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index14 = optArgs[0];
+        var index12 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index14
+          index: index12
         };
       },
       htmlBuilder(group, options) {
@@ -11996,9 +11996,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index14
+          index: index12
         } = group;
-        return index14 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index14, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index12 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index12, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -14867,12 +14867,18 @@ var init_katex = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/Katex.js
-var Katex;
-var init_Katex = __esm({
-  ".svelte-kit/output/server/chunks/Katex.js"() {
+// .svelte-kit/output/server/entries/pages/_page.svelte.js
+var page_svelte_exports = {};
+__export(page_svelte_exports, {
+  default: () => Page
+});
+var Katex, SixMathEqnAnim, GalleryScale, Testimonials, Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
     init_katex();
+    init_store();
+    init_index2();
     Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let katexString;
       let { d: d2 = false } = $$props;
@@ -14887,22 +14893,6 @@ var init_Katex = __esm({
 
 <!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->`;
     });
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_page.svelte.js
-var page_svelte_exports = {};
-__export(page_svelte_exports, {
-  default: () => Page
-});
-var SixMathEqnAnim, GalleryScale, Testimonials, Page;
-var init_page_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
-    init_chunks();
-    init_Katex();
-    init_store();
-    init_katex();
-    init_index2();
     SixMathEqnAnim = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -14982,8 +14972,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-fed70300.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-fed70300.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-52529a6a.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-e8a6560e.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-e8a6560e.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js", "_app/immutable/chunks/index-c3002381.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = [];
   }
 });
@@ -15117,8 +15107,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/faq/_page.svelte-d7a03ea8.js";
-    imports4 = ["_app/immutable/components/pages/faq/_page.svelte-d7a03ea8.js", "_app/immutable/chunks/index-d43d80ed.js"];
+    file4 = "_app/immutable/components/pages/faq/_page.svelte-5666596c.js";
+    imports4 = ["_app/immutable/components/pages/faq/_page.svelte-5666596c.js", "_app/immutable/chunks/index-9580a2af.js"];
     stylesheets4 = ["_app/immutable/assets/+page-113a1f72.css"];
   }
 });
@@ -15187,8 +15177,8 @@ var init__5 = __esm({
     init_page2();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/jitsi/_page.svelte-f2335159.js";
-    imports5 = ["_app/immutable/components/pages/jitsi/_page.svelte-f2335159.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/modules/pages/jitsi/_page.js-0c0cfec2.js", "_app/immutable/chunks/_page-40c2b980.js"];
+    file5 = "_app/immutable/components/pages/jitsi/_page.svelte-ca864d9d.js";
+    imports5 = ["_app/immutable/components/pages/jitsi/_page.svelte-ca864d9d.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/modules/pages/jitsi/_page.js-0c0cfec2.js", "_app/immutable/chunks/_page-40c2b980.js"];
     stylesheets5 = ["_app/immutable/assets/+page-5ae0bf0d.css"];
   }
 });
@@ -15700,8 +15690,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component14) {
-  return component14.instantiationMode === "EAGER";
+function isComponentEager(component12) {
+  return component12.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -15791,18 +15781,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component14) {
-        if (component14.name !== this.name) {
-          throw Error(`Mismatching Component ${component14.name} for Provider ${this.name}.`);
+      setComponent(component12) {
+        if (component12.name !== this.name) {
+          throw Error(`Mismatching Component ${component12.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component14;
+        this.component = component12;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component14)) {
+        if (isComponentEager(component12)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -15922,19 +15912,19 @@ var init_index_esm20172 = __esm({
         this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component14) {
-        const provider = this.getProvider(component14.name);
+      addComponent(component12) {
+        const provider = this.getProvider(component12.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component14.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component12.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component14);
+        provider.setComponent(component12);
       }
-      addOrOverwriteComponent(component14) {
-        const provider = this.getProvider(component14.name);
+      addOrOverwriteComponent(component12) {
+        const provider = this.getProvider(component12.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component14.name);
+          this.providers.delete(component12.name);
         }
-        this.addComponent(component14);
+        this.addComponent(component12);
       }
       getProvider(name4) {
         if (this.providers.has(name4)) {
@@ -16260,25 +16250,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component14 = provider.getComponent();
-  return (component14 === null || component14 === void 0 ? void 0 : component14.type) === "VERSION";
+  const component12 = provider.getComponent();
+  return (component12 === null || component12 === void 0 ? void 0 : component12.type) === "VERSION";
 }
-function _addComponent(app2, component14) {
+function _addComponent(app2, component12) {
   try {
-    app2.container.addComponent(component14);
+    app2.container.addComponent(component12);
   } catch (e3) {
-    logger.debug(`Component ${component14.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component12.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component14) {
-  const componentName = component14.name;
+function _registerComponent(component12) {
+  const componentName = component12.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component14);
+  _components.set(componentName, component12);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component14);
+    _addComponent(app2, component12);
   }
   return true;
 }
@@ -16310,8 +16300,8 @@ function initializeApp(options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name4);
-  for (const component14 of _components.values()) {
-    container.addComponent(component14);
+  for (const component12 of _components.values()) {
+    container.addComponent(component12);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name4, newApp);
@@ -18892,9 +18882,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index14 = this.queue.length - 1;
+        const index12 = this.queue.length - 1;
         return () => {
-          this.queue[index14] = () => Promise.resolve();
+          this.queue[index12] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -21439,294 +21429,9 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-1ddb4387.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-1ddb4387.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-52529a6a.js", "_app/immutable/chunks/navigation-6b2fb69c.js", "_app/immutable/chunks/singletons-31b3ad8d.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-3f59db1d.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-3f59db1d.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js", "_app/immutable/chunks/index-c3002381.js", "_app/immutable/chunks/navigation-e18b87a9.js", "_app/immutable/chunks/singletons-9fff3d08.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
-  }
-});
-
-// .svelte-kit/output/server/chunks/KatexDataProp.js
-var KatexIntersectionObserver, KatexDataProp;
-var init_KatexDataProp = __esm({
-  ".svelte-kit/output/server/chunks/KatexDataProp.js"() {
-    init_chunks();
-    init_katex();
-    KatexIntersectionObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-
-
-
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}
-
-`;
-    });
-    KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { m: m2 } = $$props;
-      let { d: d2 } = $$props;
-      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
-        $$bindings.m(m2);
-      if ($$props.d === void 0 && $$bindings.d && d2 !== void 0)
-        $$bindings.d(d2);
-      return `
-
-
-<div class="${"myKatexEntries"}"${add_attribute("data-math", m2, 0)}${add_attribute("data-display", d2, 0)}>.</div>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/math/_page.md.js
-var page_md_exports = {};
-__export(page_md_exports, {
-  default: () => Page5
-});
-var numMax, numMDMax, Page5;
-var init_page_md = __esm({
-  ".svelte-kit/output/server/entries/pages/math/_page.md.js"() {
-    init_chunks();
-    init_store();
-    init_KatexDataProp();
-    init_index2();
-    init_katex();
-    numMax = 3e3;
-    numMDMax = 1;
-    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let num2;
-      let numMD;
-      let equations = [
-        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
-        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
-        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
-        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
-        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
-      ];
-      let x2 = 2;
-      num2 = numMax;
-      numMD = numMDMax;
-      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
-
- <article class="${"prose lg:prose-lg "}"><h1>Garlic bread with cheese: What the science tells us</h1>
-  <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
-    children, with the food earning such an iconic status in our culture that kids will often dress
-    up as warm, cheesy loaf for Halloween.
-  </p>
-  <p>But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
-    springing up around the country.
-  </p>
-  
-${validate_component(KatexDataProp, "K").$$render(
-        $$result,
-        {
-          d: true,
-          m: "\\underbrace{u'-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}"
-        },
-        {},
-        {}
-      )}
-<div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><munder><mrow><msup><mi>u</mi><mo mathvariant="normal" lspace="0em" rspace="0em">\u2032</mo></msup><mo>\u2212</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msup><mi>u</mi><mn>2</mn></msup><mo>\u2212</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>u</mi><mo>\u2212</mo><mi>R</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo stretchy="true">\u23DF</mo></munder><mrow><mtext>=0,\xA0since\xA0</mtext><mstyle scriptlevel="0" displaystyle="false"><mi>u</mi></mstyle><mtext>\xA0is\xA0a\xA0particular\xA0solution.</mtext></mrow></munder></mrow><annotation encoding="application/x-tex">\\underbrace{u&#x27;-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.5843em;vertical-align:-1.7202em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-1.4159em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">=0,\xA0since</span><span class="mord mtight nobreak">\xA0</span><span class="mord mathnormal sizing reset-size3 size6">u</span><span class="mord mtight">\xA0is\xA0a\xA0particular\xA0solution.</span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span class="svg-align" style="top:-2.102em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMinYMin slice'><path d='M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
- 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
- 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
--331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z'/></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMidYMin slice'><path d='M199572 214
-c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
- 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
- 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
--5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z'/></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMaxYMin slice'><path d='M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
- 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
--174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z'/></svg></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8019em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2032</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.898em;"><span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:1.7202em;"><span></span></span></span></span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div>
-<span class="${"text-red-700 text-7xl flex justify-center"}"><p>${escape(x2)}<span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>=${escape(x2 ** 2)}</p></span>
-<div class="${"flex justify-center"}"><input type="${"range"}" min="${"0"}"${add_attribute("value", x2, 0)}></div>
-<h1>The content of this page are written in a markdown file with svelte components (tailwind too), possible due to MDsveX!</h1>
-<ul><li>the square-slider above using svelte binding of a JS variable \u2026 again this is possible due to MDsveX</li>
-<li>The <strong>math</strong> on this page is written in both markdown (i.e. Latex) and with Katex.<ul><li>for heavy inline use, markdown is preferable</li>
-<li>for css/svelte transitions, only katex svelte components are viable<ul><li>normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant !!<ul><li>1000 lines vs 4000-8000+ lines of math loaded instantly on page load</li>
-<li>when changing routes katex on 4000+ lines is easily transitioned \u2026 not the same for markdown</li></ul></li></ul></li></ul></li></ul>
-
-<div class="${"p-4"}"><input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}>
-    <input type="${"number"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
-<h1>${escape(numMD)} lines of markdown immediately below</h1>
-${each(Array(numMD), (_2, j2) => {
-        return `<p>${escape(j2 + 1)}</p>
-<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>`;
-      })}
-
-<h1>${escape(num2 + equations.length)} lines of katex below\u2026 lazy rendered with intersection observer!!</h1>
-<ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
-<input type="${"number"}" min="${"1"}"${add_attribute("value", num2, 0)}>
-<input type="${"range"}" min="${"1"}"${add_attribute("value", num2, 0)}>
-${each(Array(num2), (_2, j2) => {
-        return `<p>${escape(j2 + 1)}</p>
-    <div class="${"p-5 text-red-400"}">${validate_component(KatexDataProp, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
-          },
-          {},
-          {}
-        )}
-    </div>`;
-      })}
-${each(equations, (eqn, k) => {
-        return `<p>${escape(k + 1 + num2)}</p>
-<div class="${"p-1 text-indigo-700"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
-</div>`;
-      })}</article>
-
-`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/6.js
-var __exports7 = {};
-__export(__exports7, {
-  component: () => component7,
-  file: () => file7,
-  imports: () => imports7,
-  index: () => index7,
-  stylesheets: () => stylesheets7
-});
-var index7, component7, file7, imports7, stylesheets7;
-var init__7 = __esm({
-  ".svelte-kit/output/server/nodes/6.js"() {
-    index7 = 6;
-    component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file7 = "_app/immutable/components/pages/math/_page.md-a4695a67.js";
-    imports7 = ["_app/immutable/components/pages/math/_page.md-a4695a67.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets7 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/math2/_page.md.js
-var page_md_exports2 = {};
-__export(page_md_exports2, {
-  default: () => Page6
-});
-var css4, num, Page6;
-var init_page_md2 = __esm({
-  ".svelte-kit/output/server/entries/pages/math2/_page.md.js"() {
-    init_chunks();
-    init_store();
-    init_Katex();
-    init_index2();
-    init_katex();
-    css4 = {
-      code: "details.svelte-6gn253>summary.svelte-6gn253{list-style:none;color:transparent \n    }blockquote.svelte-6gn253.svelte-6gn253{margin:0;padding-left:1.4rem;border-left:8px solid #bbb}ul.svelte-6gn253.svelte-6gn253{list-style-type:disc;list-style-position:inside}h1.svelte-6gn253.svelte-6gn253{font-size:1.5rem;line-height:2rem}",
-      map: null
-    };
-    num = 500;
-    Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let buttonColorTransition;
-      let $elementColor, $$unsubscribe_elementColor;
-      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
-      let x2 = 2;
-      $$result.css.add(css4);
-      buttonColorTransition = `background: ${$elementColor};transition: background-color 0.4s cubic-bezier(0.64, 0, 0.78, 0)`;
-      $$unsubscribe_elementColor();
-      return `
-${validate_component(Katex, "K").$$render(
-        $$result,
-        {
-          observed: true,
-          d: true,
-          m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
-        },
-        {},
-        {}
-      )}
-<h1 class="${"svelte-6gn253"}">The content on this page is written in a markdown file, which uses html, css, svelte components \u2026thanks to MDsveX + plugins!</h1>
-<p>\xA0</p>
-<p>The black math expressions are written in markdown. </p>
-<ul class="${"svelte-6gn253"}"><li><strong>Advantage1</strong>: writing lots of inline math expressions \u2014 e.g. \u201C..the general Einsteinian equation is <strong>NOT</strong> <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> \u2014 bur rather <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>E</mi><mn>3</mn></msup><mo>=</mo><msup><mi>m</mi><mn>2</mn></msup><msup><mi>c</mi><mn>4</mn></msup><mo>+</mo><msup><mi>p</mi><mn>2</mn></msup><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E^3=m^2c^4 + p^2c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0085em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>\u2026\u201D\u2014 is much simpler with markdown. <strong>Advantage2</strong>: Markdown math has identical syntax to Latex. </li>
-<li><strong>Disadvantage</strong>: cannot apply css directly to math expression</li></ul>
-<blockquote class="${"svelte-6gn253"}"><p>The base \u201C2\u201D here \u2014 <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">x=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span>'}<!-- HTML_TAG_END --></span>${escape(x2)}<span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>\u2026 \u2014  is taken from script variable. </p>
-<button class="${"p-2 shadow-2xl"}"${add_attribute("style", buttonColorTransition, 0)}>increment</button>
-<button class="${"p-2 shadow-2xl"}"${add_attribute("style", buttonColorTransition, 0)}>decrement</button></blockquote>
-
-<details class="${"eqns svelte-6gn253"}"><summary class="${"svelte-6gn253"}"></summary>
-<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div></details>
-${validate_component(Katex, "K").$$render(
-        $$result,
-        {
-          d: true,
-          m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
-        },
-        {},
-        {}
-      )}
-	${validate_component(Katex, "K").$$render($$result, { d: true, m: "I=\\int_0^1 f(x) dx" }, {}, {})}
-	${validate_component(Katex, "K").$$render(
-        $$result,
-        {
-          d: true,
-          m: "S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}"
-        },
-        {},
-        {}
-      )}
-<p>These red math expressions are (katex) svelte components. </p>
-<ul class="${"svelte-6gn253"}"><li><strong>Advantage1</strong>: can apply css; the color was done with tailwind and the bounce was done with svelte transition!! <strong>Advantage2</strong>: can use conditional logic (e.g. for loops)</li>
-<li><strong>Disadvantage1</strong>: terrible for inline math expressions. <strong>Disadvantage2</strong>: syntax starts to depart from latex: escaping characters (i.e. \u2019\\\\frac \u2026\u2019) and having to be wrapped within svelte components.</li></ul>
-<div>${validate_component(Katex, "K").$$render(
-        $$result,
-        {
-          d: true,
-          m: "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}"
-        },
-        {},
-        {}
-      )}
-	${validate_component(Katex, "K").$$render(
-        $$result,
-        {
-          d: true,
-          m: "S(\\omega)=\\frac{\\alpha g^2}{\\omega^5} ,e^{[-0.74\\bigl\\{\\frac{\\omega U_\\omega 19.5}{g}\\bigr\\}^{-4}]}"
-        },
-        {},
-        {}
-      )}</div>
-${each(Array(num), (_2, j2) => {
-        return `<details class="${"eqns svelte-6gn253"}"><summary class="${"svelte-6gn253"}">..</summary>
-<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>I</mi><mo>=</mo><msubsup><mo>\u222B</mo><mn>0</mn><mn>1</mn></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\\begin{aligned} \nI=\\int_{0}^{1}f(x)d x\n\\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.776em;vertical-align:-1.138em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.638em;"><span style="top:-3.638em;"><span class="pstrut" style="height:3.564em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011em;">\u222B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.564em;"><span style="top:-1.7881em;margin-left:-0.4445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span><span style="top:-3.8129em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.9119em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:1.138em;"><span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>
-</details>`;
-      })}
-${each(Array(num), (_2, j2) => {
-        return `
-    <details class="${"eqns svelte-6gn253"}"><summary class="${"svelte-6gn253"}">..</summary>
-        ${validate_component(Katex, "K").$$render(
-          $$result,
-          {
-            d: true,
-            m: "\\prod_{i=a}^{b} f(i)"
-          },
-          {},
-          {}
-        )}
-    </details>`;
-      })}
-`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/7.js
-var __exports8 = {};
-__export(__exports8, {
-  component: () => component8,
-  file: () => file8,
-  imports: () => imports8,
-  index: () => index8,
-  stylesheets: () => stylesheets8
-});
-var index8, component8, file8, imports8, stylesheets8;
-var init__8 = __esm({
-  ".svelte-kit/output/server/nodes/7.js"() {
-    index8 = 7;
-    component8 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
-    file8 = "_app/immutable/components/pages/math2/_page.md-1cb23d0e.js";
-    imports8 = ["_app/immutable/components/pages/math2/_page.md-1cb23d0e.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/Katex-54ec90ca.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/index-52529a6a.js"];
-    stylesheets8 = ["_app/immutable/assets/+page-080ca6e3.css"];
   }
 });
 
@@ -21749,23 +21454,23 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
   }
 });
 
-// .svelte-kit/output/server/entries/pages/math3/_page.md.js
-var page_md_exports3 = {};
-__export(page_md_exports3, {
-  default: () => Page7
+// .svelte-kit/output/server/entries/pages/math/_page.md.js
+var page_md_exports = {};
+__export(page_md_exports, {
+  default: () => Page5
 });
-var numMax2, numMDMax2, Page7;
-var init_page_md3 = __esm({
-  ".svelte-kit/output/server/entries/pages/math3/_page.md.js"() {
+var numMax, numMDMax, Page5;
+var init_page_md = __esm({
+  ".svelte-kit/output/server/entries/pages/math/_page.md.js"() {
     init_chunks();
     init_KatexIntersectionObserver2();
     init_store();
     init_katex();
     init_index2();
-    numMax2 = 3e3;
-    numMDMax2 = 1;
-    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let num2;
+    numMax = 3e3;
+    numMDMax = 1;
+    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let num;
       let numMD;
       let proseInvert;
       let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -21778,8 +21483,8 @@ var init_page_md3 = __esm({
         "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
       ];
       let x2 = 2;
-      num2 = numMax2;
-      numMD = numMDMax2;
+      num = numMax;
+      numMD = numMDMax;
       proseInvert = $isDarkMode ? "prose-invert" : "";
       $$unsubscribe_isDarkMode();
       return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
@@ -21820,17 +21525,17 @@ ${each(Array(numMD), (_2, j2) => {
 <div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>`;
       })}
 
-<h1>${escape(num2 + equations.length)} lines of katex below\u2026 lazy rendered with intersection observer!!</h1>
+<h1>${escape(num + equations.length)} lines of katex below\u2026 lazy rendered with intersection observer!!</h1>
 <ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
-<input type="${"number"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num2, 0)}>
-<input type="${"range"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num2, 0)}>
-${each(Array(num2), (_2, j2) => {
+<input type="${"number"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
+<input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
+${each(Array(num), (_2, j2) => {
         return `<p>${escape(j2 + 1)}</p>
     <div class="${"p-5 text-red-400"}"><p d${add_attribute("m", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
     </div>`;
       })}
 ${each(equations, (eqn, k) => {
-        return `<p>${escape(k + 1 + num2)}</p>
+        return `<p>${escape(k + 1 + num)}</p>
 <div class="${"p-1 text-indigo-700"}"><p d${add_attribute("m", eqn, 0)}></p>
 </div>`;
       })}</article>
@@ -21840,57 +21545,57 @@ ${each(equations, (eqn, k) => {
   }
 });
 
-// .svelte-kit/output/server/nodes/8.js
-var __exports9 = {};
-__export(__exports9, {
-  component: () => component9,
-  file: () => file9,
-  imports: () => imports9,
-  index: () => index9,
-  stylesheets: () => stylesheets9
+// .svelte-kit/output/server/nodes/6.js
+var __exports7 = {};
+__export(__exports7, {
+  component: () => component7,
+  file: () => file7,
+  imports: () => imports7,
+  index: () => index7,
+  stylesheets: () => stylesheets7
 });
-var index9, component9, file9, imports9, stylesheets9;
-var init__9 = __esm({
-  ".svelte-kit/output/server/nodes/8.js"() {
-    index9 = 8;
-    component9 = async () => (await Promise.resolve().then(() => (init_page_md3(), page_md_exports3))).default;
-    file9 = "_app/immutable/components/pages/math3/_page.md-27a5957a.js";
-    imports9 = ["_app/immutable/components/pages/math3/_page.md-27a5957a.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexIntersectionObserver2-22512ad9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js"];
-    stylesheets9 = [];
+var index7, component7, file7, imports7, stylesheets7;
+var init__7 = __esm({
+  ".svelte-kit/output/server/nodes/6.js"() {
+    index7 = 6;
+    component7 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
+    file7 = "_app/immutable/components/pages/math/_page.md-34e2ef97.js";
+    imports7 = ["_app/immutable/components/pages/math/_page.md-34e2ef97.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/KatexIntersectionObserver2-79043425.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js"];
+    stylesheets7 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/physics/_page.md.js
-var page_md_exports4 = {};
-__export(page_md_exports4, {
-  default: () => Page8
+var page_md_exports2 = {};
+__export(page_md_exports2, {
+  default: () => Page6
 });
-var css5, E_and_m, Page8;
-var init_page_md4 = __esm({
+var css4, E_and_m, Page6;
+var init_page_md2 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.md.js"() {
     init_chunks();
     init_KatexIntersectionObserver2();
     init_store();
     init_katex();
     init_index2();
-    css5 = {
-      code: ".hScroll.svelte-14ocuak{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
+    css4 = {
+      code: ".hScroll.svelte-1hdv3es{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}li.svelte-1hdv3es{height:10px}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css5);
+      $$result.css.add(css4);
       return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
 <div id="${"charges-1"}"><h3>Two isolated point charges as shown are at a fixed distance apart (segment BC). At which point is it possible for the electric field strength to be zero?</h3>
   <img style="${"margin: 0 auto; display:flex; width: 65vw; min-width: 280px; max-width: 600px;"}" src="${" https://raw.githubusercontent.com/brightowltutoring/web/main/two-charges.png"}">
 <p>The electric fields due to charges <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">Q_B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> and <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>C</mi></msub></mrow><annotation encoding="application/x-tex">Q_C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> for:</p>
-<ul><li><p><strong>segment BC:</strong> both point from C to B</p></li>
-<li><p><strong>segment CD:</strong> point in opposite directions</p></li>
-<li><p><strong>segment AB:</strong> point in opposite directions</p>
-<p>Therefore only the outer segments CD and AB are feasible for the net electric field to cancel \u2014 i.e. we need only compare the magnitudes from each charge.</p></li></ul>
-<ul><li>Since the magnitude of the electric field depends on both the charge magnitude, and \u201Csquare-inversely\u201D to the separation distance \u2014 i.e. <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>\u223C</mo><mi mathvariant="normal">\u2223</mi><mi>Q</mi><mi mathvariant="normal">\u2223</mi><mi mathvariant="normal">/</mi><msup><mi>d</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E \\sim |Q|/d^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">\u223C</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">\u2223</span><span class="mord mathnormal">Q</span><span class="mord">\u2223/</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> \u2014 then only a point, call it X, in segment CD is feasible as it is \u201Cclose to a weak source and far from a strong source\u201D</li></ul>
+<ul><li class="${"svelte-1hdv3es"}"><strong>segment BC:</strong> both point from C to B</li>
+<li class="${"svelte-1hdv3es"}"><strong>segment CD:</strong> point in opposite directions</li>
+<li class="${"svelte-1hdv3es"}"><strong>segment AB:</strong> point in opposite directions</li></ul>
+<p>Therefore only the outer segments CD and AB are feasible for the net electric field to cancel \u2014 i.e. we need only compare the magnitudes from each charge.</p>
+<ul><li class="${"svelte-1hdv3es"}">Since the magnitude of the electric field depends on both the charge magnitude, and \u201Csquare-inversely\u201D to the separation distance \u2014 i.e. <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>\u223C</mo><mi mathvariant="normal">\u2223</mi><mi>Q</mi><mi mathvariant="normal">\u2223</mi><mi mathvariant="normal">/</mi><msup><mi>d</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E \\sim |Q|/d^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">\u223C</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">\u2223</span><span class="mord mathnormal">Q</span><span class="mord">\u2223/</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> \u2014 then only a point, call it X, in segment CD is feasible as it is \u201Cclose to a weak source and far from a strong source\u201D</li></ul>
 <h3>Explicit calculation</h3>
 <p>If we can assume the fields are in opposite directions then we need only equate the magnitudes for cancellation to occur:</p>
-  <div class="${"hScroll svelte-14ocuak"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left right left" columnspacing="0em 1em 0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">\u2223</mi><msub><mi>E</mi><mi>B</mi></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi mathvariant="normal">\u2223</mi><msub><mi>E</mi><mi>C</mi></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><menclose notation="updiagonalstrike"><mi>k</mi></menclose><mi mathvariant="normal">\u2223</mi><msub><mi>Q</mi><mi>B</mi></msub><mi mathvariant="normal">\u2223</mi></mrow><mrow><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><msup><mi mathvariant="normal">\u2223</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><menclose notation="updiagonalstrike"><mi>k</mi></menclose><mi mathvariant="normal">\u2223</mi><msub><mi>Q</mi><mi>C</mi></msub><mi mathvariant="normal">\u2223</mi></mrow><mrow><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><msup><mi mathvariant="normal">\u2223</mi><mn>2</mn></msup></mrow></mfrac></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mtext>where\xA0X\xA0is\xA0some\xA0variable\xA0point\xA0on\xA0the\xA0interval</mtext></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>\u2234</mo><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msqrt><mfrac><mn>7</mn><mn>2</mn></mfrac></msqrt><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>\u2234</mo><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>&gt;</mo><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
+  <div class="${"hScroll svelte-1hdv3es"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left right left" columnspacing="0em 1em 0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">\u2223</mi><msub><mi>E</mi><mi>B</mi></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi mathvariant="normal">\u2223</mi><msub><mi>E</mi><mi>C</mi></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><menclose notation="updiagonalstrike"><mi>k</mi></menclose><mi mathvariant="normal">\u2223</mi><msub><mi>Q</mi><mi>B</mi></msub><mi mathvariant="normal">\u2223</mi></mrow><mrow><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><msup><mi mathvariant="normal">\u2223</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><menclose notation="updiagonalstrike"><mi>k</mi></menclose><mi mathvariant="normal">\u2223</mi><msub><mi>Q</mi><mi>C</mi></msub><mi mathvariant="normal">\u2223</mi></mrow><mrow><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><msup><mi mathvariant="normal">\u2223</mi><mn>2</mn></msup></mrow></mfrac></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mtext>where\xA0X\xA0is\xA0some\xA0variable\xA0point\xA0on\xA0the\xA0interval</mtext></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>\u2234</mo><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msqrt><mfrac><mn>7</mn><mn>2</mn></mfrac></msqrt><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>\u2234</mo><mi mathvariant="normal">\u2223</mi><mi>B</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>&gt;</mo><mi mathvariant="normal">\u2223</mi><mi>C</mi><mi>X</mi><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
   \\begin{aligned}
   |E_B| &amp;= |E_C|  \\\\ \\\\
     \\frac{  \\cancel{ k } |Q_B| }{ |BX|^2 } &amp;= \\frac{  \\cancel{ k } |Q_C| }{ |CX|^2 }  &amp;&amp; \\text{where X is some variable point on the interval} \\\\  \\\\
@@ -21913,11 +21618,11 @@ h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">\u200B</s
 <p>Since we were limited to segments AB and CD, this result forces the point X to be in CD.</p></div>
 <div id="${"charges-2"}"><h3>Four point charges have the same magnitude of 2.4 \xD7 10\u207B\xB9\xB2 C and are fixed to the corners of a square that is 4.0 cm on a side. Three of the charges are positive and one is negative. What is the magnitude and direction of the net electric field that exists at the centre of the square?</h3>
 <p>Using symmetry arguments, at the center of the square:</p>
-<ul><li>the diagonally like-charges cancel along their joining diagonals</li>
-<li>the diagonally opposite-charges add along their joining diagonals, going from positive to negative</li></ul>
+<ul><li class="${"svelte-1hdv3es"}">the diagonally like-charges cancel along their joining diagonals</li>
+<li class="${"svelte-1hdv3es"}">the diagonally opposite-charges add along their joining diagonals, going from positive to negative</li></ul>
 <p>With this information therefore the magnitude is twice the magnitude along the positive-negative direction. If we call <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>'}<!-- HTML_TAG_END --></span> the diagonal-to-center distance, and <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span>'}<!-- HTML_TAG_END --></span> as the side-length of the square</p>
 <p>where <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>D</mi><mn>2</mn></msup><mo>=</mo><mo stretchy="false">(</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>=</mo><mn>2</mn><mo stretchy="false">(</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">D^2 = (\\frac{a}{2})^2 +  (\\frac{a}{2})^2 = 2(\\frac{a}{2})^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1591em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1591em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1591em;vertical-align:-0.345em;"></span><span class="mord">2</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> results from Pythagoras\u2019 Theorem. Converting everything to SI units (and then omitting the SI unit in the calculation below):</p>
-  <div class="${"hScroll svelte-14ocuak"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">\u2223</mi><msub><mover accent="true"><mi>E</mi><mo>\u20D7</mo></mover><mtext>\xA0net\xA0@center\xA0</mtext></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>4</mn><mo>\u22C5</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>9</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2.4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>\u2212</mo><mn>12</mn></mrow></msup><mo stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mn>4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>\u2212</mo><mn>2</mn></mrow></msup><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>4</mn><mo>\u22C5</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>9</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2.4</mn><mo stretchy="false">)</mo></mrow><mn>16</mn></mfrac><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mn>9</mn><mo>\u2212</mo><mn>12</mn><mo>\u2212</mo><mo stretchy="false">(</mo><mo>\u2212</mo><mn>4</mn><mo stretchy="false">)</mo></mrow></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>5.4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mn>1</mn></msup><mtext>\xA0N\xA0</mtext></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
+  <div class="${"hScroll svelte-1hdv3es"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">\u2223</mi><msub><mover accent="true"><mi>E</mi><mo>\u20D7</mo></mover><mtext>\xA0net\xA0@center\xA0</mtext></msub><mi mathvariant="normal">\u2223</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>4</mn><mo>\u22C5</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>9</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2.4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>\u2212</mo><mn>12</mn></mrow></msup><mo stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mn>4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>\u2212</mo><mn>2</mn></mrow></msup><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>4</mn><mo>\u22C5</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>9</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>2.4</mn><mo stretchy="false">)</mo></mrow><mn>16</mn></mfrac><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mrow><mn>9</mn><mo>\u2212</mo><mn>12</mn><mo>\u2212</mo><mo stretchy="false">(</mo><mo>\u2212</mo><mn>4</mn><mo stretchy="false">)</mo></mrow></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>5.4</mn><mo>\xD7</mo><mn>1</mn><msup><mn>0</mn><mn>1</mn></msup><mtext>\xA0N\xA0</mtext></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
     \\begin{aligned} 
   |\\vec{E}_{ \\text{ net @center }}| 
   &amp; = 4 \\cdot \\frac{ (9 \\times 10^{9}) (2.4 \\times 10^{-12}) }{  (4 \\times 10^{-2})^2 }  \\\\
@@ -21932,15 +21637,21 @@ h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">\u200B</s
 -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
 H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
 c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">\xA0net\xA0@center\xA0</span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">\u2223</span></span></span><span style="top:-2.9191em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"></span></span><span style="top:-1.069em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:3.0821em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.5821em;"><span style="top:-5.5821em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u22C5</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2212</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">9</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2212</span><span class="mord mtight">12</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.9191em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u22C5</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">16</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">9</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">2.4</span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span><span class="mbin mtight">\u2212</span><span class="mord mtight">12</span><span class="mbin mtight">\u2212</span><span class="mopen mtight">(</span><span class="mord mtight">\u2212</span><span class="mord mtight">4</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span><span style="top:-1.069em;"><span class="pstrut" style="height:3.4911em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">5.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\xD7</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord text"><span class="mord">\xA0N\xA0</span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:3.0821em;"><span></span></span></span></span></span></span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div></div>
-  <div class="${"hScroll svelte-14ocuak"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>\u2234</mo><msub><mover accent="true"><mi>E</mi><mo>\u20D7</mo></mover><mtext>\xA0net\xA0@center\xA0</mtext></msub><mo>=</mo><mrow><mtext>\xA0</mtext><mtext mathvariant="bold">54</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">N,</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">along</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">diagonal</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">from</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">positive</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">to</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">negative</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">charge</mtext></mrow></mrow><annotation encoding="application/x-tex">\\therefore \\vec{E}_{ \\text{ net @center }} = \\textbf{ 54 N, along diagonal from positive to negative charge} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6922em;"></span><span class="mrel amsrm">\u2234</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1163em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+  <div class="${"hScroll svelte-1hdv3es"}"><div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>\u2234</mo><msub><mover accent="true"><mi>E</mi><mo>\u20D7</mo></mover><mtext>\xA0net\xA0@center\xA0</mtext></msub><mo>=</mo><mrow><mtext>\xA0</mtext><mtext mathvariant="bold">54</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">N,</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">along</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">diagonal</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">from</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">positive</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">to</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">negative</mtext><mtext>\xA0</mtext><mtext mathvariant="bold">charge</mtext></mrow></mrow><annotation encoding="application/x-tex">\\therefore \\vec{E}_{ \\text{ net @center }} = \\textbf{ 54 N, along diagonal from positive to negative charge} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6922em;"></span><span class="mrel amsrm">\u2234</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1163em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
 3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
 10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
 -1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
 -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
 H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
-c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">\xA0net\xA0@center\xA0</span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord textbf">\xA054\xA0N,\xA0along\xA0diagonal\xA0from\xA0positive\xA0to\xA0negative\xA0charge</span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div></div></div>`;
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">\xA0net\xA0@center\xA0</span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord textbf">\xA054\xA0N,\xA0along\xA0diagonal\xA0from\xA0positive\xA0to\xA0negative\xA0charge</span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div></div></div>
+ <div id="${"circuits-1"}"><h3>A cell has an emf of 8.0 V and an internal resistance of 2.0 \u03A9. The ideal voltmeter reads 6.4 V. What is the resistance of R?</h3>
+<ul><li class="${"svelte-1hdv3es"}">A. 0.8 \u03A9</li>
+<li class="${"svelte-1hdv3es"}">B. 2.0 \u03A9</li>
+<li class="${"svelte-1hdv3es"}">C. 4.0 \u03A9</li>
+<li class="${"svelte-1hdv3es"}">D. 8.0 \u03A9</li></ul>
+  <img style="${"margin: 0 auto; display:flex;width: 65vw;min-width: 280px;max-width: 600px;"}" src="${"https://raw.githubusercontent.com/brightowltutoring/web/main/circuits-1.png"}"></div>`;
     });
-    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let proseInvert;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -21951,23 +21662,23 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
   }
 });
 
-// .svelte-kit/output/server/nodes/9.js
-var __exports10 = {};
-__export(__exports10, {
-  component: () => component10,
-  file: () => file10,
-  imports: () => imports10,
-  index: () => index10,
-  stylesheets: () => stylesheets10
+// .svelte-kit/output/server/nodes/7.js
+var __exports8 = {};
+__export(__exports8, {
+  component: () => component8,
+  file: () => file8,
+  imports: () => imports8,
+  index: () => index8,
+  stylesheets: () => stylesheets8
 });
-var index10, component10, file10, imports10, stylesheets10;
-var init__10 = __esm({
-  ".svelte-kit/output/server/nodes/9.js"() {
-    index10 = 9;
-    component10 = async () => (await Promise.resolve().then(() => (init_page_md4(), page_md_exports4))).default;
-    file10 = "_app/immutable/components/pages/physics/_page.md-5ac148a1.js";
-    imports10 = ["_app/immutable/components/pages/physics/_page.md-5ac148a1.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexIntersectionObserver2-22512ad9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js"];
-    stylesheets10 = ["_app/immutable/assets/+page-06de6fce.css"];
+var index8, component8, file8, imports8, stylesheets8;
+var init__8 = __esm({
+  ".svelte-kit/output/server/nodes/7.js"() {
+    index8 = 7;
+    component8 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
+    file8 = "_app/immutable/components/pages/physics/_page.md-3fab0507.js";
+    imports8 = ["_app/immutable/components/pages/physics/_page.md-3fab0507.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/KatexIntersectionObserver2-79043425.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js"];
+    stylesheets8 = ["_app/immutable/assets/+page-401a8e13.css"];
   }
 });
 
@@ -21985,9 +21696,9 @@ var init_CalendlyJsandCSS = __esm({
 // .svelte-kit/output/server/entries/pages/plans/_page.svelte.js
 var page_svelte_exports5 = {};
 __export(page_svelte_exports5, {
-  default: () => Page9
+  default: () => Page7
 });
-var css$1, PlansCard, css6, Page9;
+var css$1, PlansCard, css5, Page7;
 var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -22031,11 +21742,11 @@ var init_page_svelte5 = __esm({
   
 </div>`;
     });
-    css6 = {
+    css5 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
-    Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const plansCardArray = [
         {
           card: 1,
@@ -22059,10 +21770,8 @@ var init_page_svelte5 = __esm({
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
       ];
-      $$result.css.add(css6);
-      return `<a href="${"/jitsi"}" class="${"svelte-18ymex4"}">jitsi</a>
-
-<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
+      $$result.css.add(css5);
+      return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
 
 
 <div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
@@ -22091,6 +21800,116 @@ var init_page_svelte5 = __esm({
   }
 });
 
+// .svelte-kit/output/server/nodes/8.js
+var __exports9 = {};
+__export(__exports9, {
+  component: () => component9,
+  file: () => file9,
+  imports: () => imports9,
+  index: () => index9,
+  stylesheets: () => stylesheets9
+});
+var index9, component9, file9, imports9, stylesheets9;
+var init__9 = __esm({
+  ".svelte-kit/output/server/nodes/8.js"() {
+    index9 = 8;
+    component9 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
+    file9 = "_app/immutable/components/pages/plans/_page.svelte-c667d81a.js";
+    imports9 = ["_app/immutable/components/pages/plans/_page.svelte-c667d81a.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/CalendlyJsandCSS-4978bb98.js", "_app/immutable/chunks/store-326982bd.js", "_app/immutable/chunks/index-ee8a9e57.js", "_app/immutable/chunks/index-c3002381.js"];
+    stylesheets9 = ["_app/immutable/assets/+page-ebab19d4.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
+var page_md_exports3 = {};
+__export(page_md_exports3, {
+  default: () => Page8
+});
+var KatexDataProp, KatexIntersectionObserver, Page8;
+var init_page_md3 = __esm({
+  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
+    init_chunks();
+    init_katex();
+    KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { m: m2 } = $$props;
+      let { d: d2 } = $$props;
+      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
+        $$bindings.m(m2);
+      if ($$props.d === void 0 && $$bindings.d && d2 !== void 0)
+        $$bindings.d(d2);
+      return `
+
+
+<div class="${"myKatexEntries"}"${add_attribute("data-math", m2, 0)}${add_attribute("data-display", d2, 0)}>.</div>`;
+    });
+    KatexIntersectionObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+
+
+
+${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}
+
+`;
+    });
+    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
+${each(Array(1e3), (_2, i) => {
+        return `<div class="${"bg-red-100"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: `E=mc^2` }, {}, {})}
+  </div>`;
+      })}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/9.js
+var __exports10 = {};
+__export(__exports10, {
+  component: () => component10,
+  file: () => file10,
+  imports: () => imports10,
+  index: () => index10,
+  stylesheets: () => stylesheets10
+});
+var index10, component10, file10, imports10, stylesheets10;
+var init__10 = __esm({
+  ".svelte-kit/output/server/nodes/9.js"() {
+    index10 = 9;
+    component10 = async () => (await Promise.resolve().then(() => (init_page_md3(), page_md_exports3))).default;
+    file10 = "_app/immutable/components/pages/samplequiz/_page.md-da867186.js";
+    imports10 = ["_app/immutable/components/pages/samplequiz/_page.md-da867186.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/katex-15be85e5.js"];
+    stylesheets10 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
+var page_svelte_exports6 = {};
+__export(page_svelte_exports6, {
+  default: () => Page9
+});
+var css6, Page9;
+var init_page_svelte6 = __esm({
+  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+    init_chunks();
+    init_CalendlyJsandCSS();
+    css6 = {
+      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
+      map: null
+    };
+    Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css6);
+      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+
+<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
+
+<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
+
+  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
+</div>`;
+    });
+  }
+});
+
 // .svelte-kit/output/server/nodes/10.js
 var __exports11 = {};
 __export(__exports11, {
@@ -22104,99 +21923,10 @@ var index11, component11, file11, imports11, stylesheets11;
 var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
-    component11 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file11 = "_app/immutable/components/pages/plans/_page.svelte-1ad9c019.js";
-    imports11 = ["_app/immutable/components/pages/plans/_page.svelte-1ad9c019.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js", "_app/immutable/chunks/store-150e4c02.js", "_app/immutable/chunks/index-5cb55e0e.js", "_app/immutable/chunks/index-52529a6a.js"];
-    stylesheets11 = ["_app/immutable/assets/+page-ebab19d4.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
-var page_md_exports5 = {};
-__export(page_md_exports5, {
-  default: () => Page10
-});
-var Page10;
-var init_page_md5 = __esm({
-  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
-    init_chunks();
-    init_KatexDataProp();
-    init_katex();
-    Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(KatexIntersectionObserver, "KatexIntersectionObserver").$$render($$result, {}, {}, {})}
-${each(Array(1e3), (_2, i) => {
-        return `<div class="${"bg-red-100"}">${validate_component(KatexDataProp, "K").$$render($$result, { d: true, m: `E=mc^2` }, {}, {})}
-  </div>`;
-      })}`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/11.js
-var __exports12 = {};
-__export(__exports12, {
-  component: () => component12,
-  file: () => file12,
-  imports: () => imports12,
-  index: () => index12,
-  stylesheets: () => stylesheets12
-});
-var index12, component12, file12, imports12, stylesheets12;
-var init__12 = __esm({
-  ".svelte-kit/output/server/nodes/11.js"() {
-    index12 = 11;
-    component12 = async () => (await Promise.resolve().then(() => (init_page_md5(), page_md_exports5))).default;
-    file12 = "_app/immutable/components/pages/samplequiz/_page.md-23c7d95b.js";
-    imports12 = ["_app/immutable/components/pages/samplequiz/_page.md-23c7d95b.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/KatexDataProp-07d10ff5.js", "_app/immutable/chunks/katex-15be85e5.js"];
-    stylesheets12 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
-var page_svelte_exports6 = {};
-__export(page_svelte_exports6, {
-  default: () => Page11
-});
-var css7, Page11;
-var init_page_svelte6 = __esm({
-  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
-    init_chunks();
-    init_CalendlyJsandCSS();
-    css7 = {
-      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
-      map: null
-    };
-    Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css7);
-      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
-
-<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
-
-<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
-
-  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
-</div>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/12.js
-var __exports13 = {};
-__export(__exports13, {
-  component: () => component13,
-  file: () => file13,
-  imports: () => imports13,
-  index: () => index13,
-  stylesheets: () => stylesheets13
-});
-var index13, component13, file13, imports13, stylesheets13;
-var init__13 = __esm({
-  ".svelte-kit/output/server/nodes/12.js"() {
-    index13 = 12;
-    component13 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file13 = "_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js";
-    imports13 = ["_app/immutable/components/pages/schools/_page.svelte-b25f1c8d.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/CalendlyJsandCSS-404e2074.js"];
-    stylesheets13 = ["_app/immutable/assets/+page-f8a180cf.css"];
+    component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
+    file11 = "_app/immutable/components/pages/schools/_page.svelte-4a33e073.js";
+    imports11 = ["_app/immutable/components/pages/schools/_page.svelte-4a33e073.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/CalendlyJsandCSS-4978bb98.js"];
+    stylesheets11 = ["_app/immutable/assets/+page-f8a180cf.css"];
   }
 });
 
@@ -22365,12 +22095,12 @@ function devalue(value) {
     return str;
   }
 }
-function getName(num2) {
+function getName(num) {
   var name4 = "";
   do {
-    name4 = chars[num2 % chars.length] + name4;
-    num2 = ~~(num2 / chars.length) - 1;
-  } while (num2 >= 0);
+    name4 = chars[num % chars.length] + name4;
+    num = ~~(num / chars.length) - 1;
+  } while (num >= 0);
   return reserved.test(name4) ? name4 + "_" : name4;
 }
 function isPrimitive(thing) {
@@ -23037,7 +22767,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets14 = new Set(entry.stylesheets);
+  const stylesheets12 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -23087,7 +22817,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets14.add(url));
+        node.stylesheets.forEach((url) => stylesheets12.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -23150,7 +22880,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets14) {
+  for (const dep of stylesheets12) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -23406,14 +23136,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file14 = is_asset ? filename : filename_html;
+      const file12 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file14), {
+        response = new Response(options.read(file12), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file14}`, opts);
+        response = await fetch(`${event.url.origin}/${file12}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23774,8 +23504,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index14 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index14]();
+              const index12 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index12]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -24316,7 +24046,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
   mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-cfe936d6.js", "imports": ["_app/immutable/start-cfe936d6.js", "_app/immutable/chunks/index-d43d80ed.js", "_app/immutable/chunks/singletons-31b3ad8d.js", "_app/immutable/chunks/index-5cb55e0e.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-a52f1857.js", "imports": ["_app/immutable/start-a52f1857.js", "_app/immutable/chunks/index-9580a2af.js", "_app/immutable/chunks/singletons-9fff3d08.js", "_app/immutable/chunks/index-ee8a9e57.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -24328,9 +24058,7 @@ var manifest = {
       () => Promise.resolve().then(() => (init__8(), __exports8)),
       () => Promise.resolve().then(() => (init__9(), __exports9)),
       () => Promise.resolve().then(() => (init__10(), __exports10)),
-      () => Promise.resolve().then(() => (init__11(), __exports11)),
-      () => Promise.resolve().then(() => (init__12(), __exports12)),
-      () => Promise.resolve().then(() => (init__13(), __exports13))
+      () => Promise.resolve().then(() => (init__11(), __exports11))
     ],
     routes: [
       {
@@ -24385,33 +24113,13 @@ var manifest = {
       },
       {
         type: "page",
-        id: "math2",
-        pattern: /^\/math2\/?$/,
-        names: [],
-        types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 7
-      },
-      {
-        type: "page",
-        id: "math3",
-        pattern: /^\/math3\/?$/,
-        names: [],
-        types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 8
-      },
-      {
-        type: "page",
         id: "physics",
         pattern: /^\/physics\/?$/,
         names: [],
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 9
+        leaf: 7
       },
       {
         type: "page",
@@ -24421,7 +24129,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 10
+        leaf: 8
       },
       {
         type: "page",
@@ -24431,7 +24139,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 11
+        leaf: 9
       },
       {
         type: "page",
@@ -24441,7 +24149,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 12
+        leaf: 10
       }
     ],
     matchers: async () => {
@@ -24504,12 +24212,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file14 = pathname.substring(1);
+      let file12 = pathname.substring(1);
       try {
-        file14 = decodeURIComponent(file14);
+        file12 = decodeURIComponent(file12);
       } catch (err) {
       }
-      if (manifest.assets.has(file14) || manifest.assets.has(file14 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file12) || manifest.assets.has(file12 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

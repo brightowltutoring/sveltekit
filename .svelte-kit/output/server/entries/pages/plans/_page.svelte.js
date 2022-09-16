@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
 import { C as CalendlyJsandCSS } from "../../../chunks/CalendlyJsandCSS.js";
-import { i as isDarkMode, j as dark_lightened, k as light_darkened } from "../../../chunks/store.js";
+import { i as isDarkMode, h as dark_lightened, j as light_darkened } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const PlansCard_svelte_svelte_type_style_lang = "";
 const css$1 = {
@@ -70,9 +70,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
   ];
   $$result.css.add(css);
-  return `<a href="${"/jitsi"}" class="${"svelte-18ymex4"}">jitsi</a>
-
-<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
+  return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
 
 
 <div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {

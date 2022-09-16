@@ -1,7 +1,7 @@
 
 
 export const index = 8;
-export const component = async () => (await import('../entries/pages/math3/_page.md.js')).default;
-export const file = '_app/immutable/components/pages/math3/_page.md-27a5957a.js';
-export const imports = ["_app/immutable/components/pages/math3/_page.md-27a5957a.js","_app/immutable/chunks/index-d43d80ed.js","_app/immutable/chunks/KatexIntersectionObserver2-22512ad9.js","_app/immutable/chunks/katex-15be85e5.js","_app/immutable/chunks/store-150e4c02.js","_app/immutable/chunks/index-5cb55e0e.js"];
-export const stylesheets = [];
+export const component = async () => (await import('../entries/pages/plans/_page.svelte.js')).default;
+export const file = '_app/immutable/components/pages/plans/_page.svelte-c667d81a.js';
+export const imports = ["_app/immutable/components/pages/plans/_page.svelte-c667d81a.js","_app/immutable/chunks/index-9580a2af.js","_app/immutable/chunks/CalendlyJsandCSS-4978bb98.js","_app/immutable/chunks/store-326982bd.js","_app/immutable/chunks/index-ee8a9e57.js","_app/immutable/chunks/index-c3002381.js"];
+export const stylesheets = ["_app/immutable/assets/+page-ebab19d4.css"];
