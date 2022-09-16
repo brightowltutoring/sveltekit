@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as now, l as loop, f as set_store_value, g as each, h as add_attribute, v as validate_component } from "../../chunks/index.js";
-import { i as isDarkMode, r as redirectAfterLoginTimeOut, a as redirectSetInterval, b as routes, c as isLoggedIn, s as scrollY, d as instDeltaY, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, r as redirectAfterLoginTimeOut, a as redirectSetInterval, b as routes, c as isLoggedIn, s as scrollY, d as instDeltaY, l as lessThan768, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/store.js";
 import { p as page } from "../../chunks/stores.js";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
@@ -168,7 +168,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {
       $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
     }
-    gradientColor = $isDarkMode ? "bg-gradient-to-t md:bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]" : "bg-gradient-to-t md:bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
+    gradientColor = $isDarkMode ? "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]" : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
     $$rendered = `<logo-and-navbar class="${"flex md:inline-flex justify-between h-10 items-center md:w-full "}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:pr-20 md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
@@ -220,6 +220,7 @@ let scrollThreshold = 1200;
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
+  let $lessThan768, $$unsubscribe_lessThan768;
   let $$unsubscribe_isLoggedIn;
   let $$unsubscribe_redirectSetInterval;
   let $$unsubscribe_redirectAfterLoginTimeOut;
@@ -230,6 +231,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_innerWidth;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+  $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
@@ -241,19 +243,34 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let jankytown;
   $scrollY > scrollThreshold && console.log("$scrollY > scrollThreshold");
   {
-    {
+    if (!$lessThan768) {
+      jankytown = "top-0";
       if ($scrollY == 0 && $instDeltaY > 0)
-        jankytown = "top-0 ";
+        jankytown = "top-0 backdrop-blur-3xl";
       if ($scrollY > 10 && $instDeltaY > 0)
         jankytown = "top-0 backdrop-blur-3xl ";
       if ($scrollY > 800 && $instDeltaY > 10)
         jankytown = "-top-20  ";
+      if ($instDeltaY < -100)
+        jankytown = "top-0 backdrop-blur-3xl ";
+    }
+  }
+  {
+    if ($lessThan768) {
+      jankytown = "bottom-0 backdrop-blur-3xl ";
+      if ($scrollY == 0 && $instDeltaY > 0)
+        jankytown = "bottom-0 backdrop-blur-3xl";
+      if ($scrollY > 10 && $instDeltaY > 0)
+        jankytown = "bottom-0 backdrop-blur-3xl ";
+      if ($scrollY > 800 && $instDeltaY > 10)
+        jankytown = "-bottom-20  ";
       if ($instDeltaY < -100)
         jankytown = "bottom-0 backdrop-blur-3xl ";
     }
   }
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
+  $$unsubscribe_lessThan768();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_redirectSetInterval();
   $$unsubscribe_redirectAfterLoginTimeOut();
@@ -271,7 +288,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"px-[7%] py-2 fixed z-50 " + escape(jankytown, true) + " duration-1000 overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
+<div class="${"px-[7%] py-2 fixed z-50 " + escape(jankytown, true) + " duration-300 overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
 <div class="${"px-[7%] h-[100vh] pt-20 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;
 });

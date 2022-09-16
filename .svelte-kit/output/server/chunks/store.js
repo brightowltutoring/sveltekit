@@ -16,6 +16,7 @@ derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
 });
 const windowInnerHeight = writable(0);
 const innerWidth = writable(0);
+const lessThan768 = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
 const routes = writable({
   home: {
     name: "Home",
@@ -78,8 +79,9 @@ export {
   scrollYMax as e,
   innerWidth as f,
   dark_lightened as g,
+  light_darkened as h,
   isDarkMode as i,
-  light_darkened as l,
+  lessThan768 as l,
   redirectAfterLoginTimeOut as r,
   scrollY as s,
   windowInnerHeight as w

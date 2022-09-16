@@ -55,20 +55,19 @@
 
   // bigger than med
   $: if (!$lessThan768) {
-    jankytown = "top-0";
-    if ($scrollY == 0 && $instDeltaY > 0) jankytown = "top-0 backdrop-blur-3xl";
+    // jankytown = "top-0";
+    if ($scrollY == 0) jankytown = "top-0";
     if ($scrollY > 10 && $instDeltaY > 0)
-      jankytown = "top-0 backdrop-blur-3xl ";
+      jankytown = "-top-20 backdrop-blur-3xl ";
     if ($scrollY > 800 && $instDeltaY > 10) jankytown = "-top-20  ";
     if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl ";
   }
   // smaller than med
   $: if ($lessThan768) {
-    jankytown = "bottom-0 backdrop-blur-3xl ";
-    if ($scrollY == 0 && $instDeltaY > 0)
-      jankytown = "bottom-0 backdrop-blur-3xl";
+    // jankytown = "bottom-0 backdrop-blur-3xl ";
+    if ($scrollY == 0) jankytown = "bottom-0 backdrop-blur-3xl";
     if ($scrollY > 10 && $instDeltaY > 0)
-      jankytown = "bottom-0 backdrop-blur-3xl ";
+      jankytown = "-bottom-20 backdrop-blur-3xl ";
     if ($scrollY > 800 && $instDeltaY > 10) jankytown = "-bottom-20  ";
     if ($instDeltaY < -100) jankytown = "bottom-0 backdrop-blur-3xl ";
   }
