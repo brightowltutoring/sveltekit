@@ -37,11 +37,8 @@
     $routes.home.isCurrent = true;
   }
 
-  // $instDeltaY>0 essentially means "currently scrolling down" as $instDeltaY relaxes to 0 shortly.
-  // $instDeltaY == 0, jankytown is not updated.
-
-  let btnColor = "md:bg-red-300 ";
-  let btnColorHover = "md:hover:bg-red-300";
+  let btnColor = "bg-red-300 rounded";
+  let btnColorHover = "hover:bg-red-300";
 
   // rgba(0,0,0,0) is transparent
   $: gradientColor = $isDarkMode
@@ -65,7 +62,7 @@
 
   <!-- class=" md:ml-24  p-1 {gradientColor} rounded-full sticky overflow-y-scroll hideScrollBar " -->
   <nav
-    class=" md:ml-24  p-1 {gradientColor} rounded-full hideScrollBar overflow-auto md:w-1/2 w-full "
+    class=" md:ml-24  p-1 {gradientColor} rounded-full hideScrollBar overflow-auto md:w-1/2 w-full"
   >
     {#key unique}
       <ul class="flex flex-row md:text-xl text-lg items-center">

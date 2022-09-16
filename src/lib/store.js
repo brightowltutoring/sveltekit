@@ -88,12 +88,7 @@ export const fractionScroll = derived([scrollY,scrollYMax],([$scrollY,$scrollYMa
 
 export const windowInnerHeight = writable(0) 
 export const innerWidth = writable(0) 
-// export const burgerBreakPoint = derived(innerWidth, $innerWidth => $innerWidth < 640  )
 export const lessThan768 = derived(innerWidth, $innerWidth => $innerWidth < 768  )
-
-
-// export const inTransition  = derived(burgerBreakPoint, $burgerBreakPoint =>  $burgerBreakPoint ? customFade :  ()=>{} )
-// export const outTransition = derived(burgerBreakPoint, $burgerBreakPoint =>  $burgerBreakPoint ? customFade :  ()=>{} )
 
 
 // the all important

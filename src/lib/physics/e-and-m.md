@@ -5,7 +5,7 @@
 
 <div id="charges-1">
 
-  ### Two isolated point charges as shown are at a fixed distance apart (segment BC). At which point is it possible for the electric field strength to be zero?
+  ## Two isolated point charges as shown are at a fixed distance apart (segment BC). At which point is it possible for the electric field strength to be zero?
 
   <img style="margin: 0 auto;  display:flex; width: 65vw; min-width: 280px; max-width: 600px;"
         src=" https://raw.githubusercontent.com/brightowltutoring/web/main/two-charges.png"
@@ -20,7 +20,6 @@
   Therefore only the outer segments CD and AB are feasible for the net electric field to cancel — i.e. we need only compare the magnitudes from each charge.
 
   - Since the magnitude of the electric field depends on both the charge magnitude, and "square-inversely" to the separation distance — i.e. $E \sim |Q|/d^2$ — then only a point, call it X, in segment CD is feasible as it is "close to a weak source and far from a strong source"
-
 
 
   ### Explicit calculation
@@ -50,7 +49,7 @@
 
 <div id="charges-2">
 
-  ### Four point charges have the same magnitude of 2.4 × 10⁻¹² C and are fixed to the corners of a square that is 4.0 cm on a side. Three of the charges are positive and one is negative. What is the magnitude and direction of the net electric field that exists at the centre of the square?
+  ## Four point charges have the same magnitude of 2.4 × 10⁻¹² C and are fixed to the corners of a square that is 4.0 cm on a side. Three of the charges are positive and one is negative. What is the magnitude and direction of the net electric field that exists at the centre of the square?
 
   Using symmetry arguments, at the center of the square:
      * the diagonally like-charges cancel along their joining diagonals
@@ -88,7 +87,7 @@
 
  <div id="circuits-1">
 
-  ### A cell has an emf of 8.0 V and an internal resistance of 2.0 Ω. The ideal voltmeter reads 6.4 V. What is the resistance of R?
+  ## A cell has an emf of 8.0 V and an internal resistance of 2.0 Ω. The ideal voltmeter reads 6.4 V. What is the resistance of R?
 
    - A. 0.8 Ω
    - B. 2.0 Ω
@@ -121,9 +120,9 @@
     background-color: var(--correctColour);
   }
 
-  li { 
+  /* li { 
     height:10px;
 
-  }
+  } */
 
 </style>

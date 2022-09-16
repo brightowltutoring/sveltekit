@@ -12,15 +12,10 @@
     redirectSetInterval,
     routes,
     lessThan768,
-    // elementColor,
   } from "$lib/store.js";
-
-  // $: console.log(" elementColor", $elementColor);
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
-  // import { auth } from '$lib/firebase.js'
-  // import { onAuthStateChanged } from "firebase/auth"
 
   function setScrollYMax() {
     $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
@@ -33,42 +28,30 @@
 
   onMount(() => {
     console.log("isLoggedIn", $isLoggedIn);
-
     setScrollYMax();
-
-    // onAuthStateChanged( auth, user => {
-    // 	if( user ) {
-    // 		$isLoggedIn = true
-    // 		console.log("$isLoggedIn",$isLoggedIn)
-    // 	}
-    // 	else {
-    // 		$isLoggedIn = false
-    // 		console.log("$isLoggedIn",$isLoggedIn)
-    // 	}
-    // })
   });
 
-  $: $scrollY > scrollThreshold && console.log("$scrollY > scrollThreshold");
-
   let jankytown;
-  let scrollThreshold = 1200;
 
-  // bigger than med
+  // sets jankytown for bigger than med
   $: if (!$lessThan768) {
-    // jankytown = "top-0";
     if ($scrollY == 0) jankytown = "top-0";
-    if ($scrollY > 10 && $instDeltaY > 0)
+
+    if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
+      jankytown = "top-0 backdrop-blur-3xl ";
+
+    if ($scrollY > 800 && $instDeltaY > 10)
       jankytown = "-top-20 backdrop-blur-3xl ";
-    if ($scrollY > 800 && $instDeltaY > 10) jankytown = "-top-20  ";
+
     if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl ";
   }
-  // smaller than med
+  // sets jankytown for smaller than med
   $: if ($lessThan768) {
-    // jankytown = "bottom-0 backdrop-blur-3xl ";
     if ($scrollY == 0) jankytown = "bottom-0 backdrop-blur-3xl";
-    if ($scrollY > 10 && $instDeltaY > 0)
-      jankytown = "-bottom-20 backdrop-blur-3xl ";
-    if ($scrollY > 800 && $instDeltaY > 10) jankytown = "-bottom-20  ";
+    if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
+      jankytown = "bottom-0 backdrop-blur-3xl ";
+    if ($scrollY > 400 && $instDeltaY > 10)
+      jankytown = "-bottom-20  backdrop-blur-3xl";
     if ($instDeltaY < -100) jankytown = "bottom-0 backdrop-blur-3xl ";
   }
 </script>
@@ -99,15 +82,17 @@
   on:popstate={clearRedirectStuff}
 />
 
-<!-- TODO: this jank allows the navbar to be fixable, and elements within to be overflow scrollable -->
-<!--  style=" overflow-x: scroll; width: 100%;"  or with tailwind: "overflow-x-auto w-full"-->
-<!-- I still have to hideScrollBar inside the subcomponent of the navbar -->
+<!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 
+I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflow-y-hidden w-full". 
+Fixed containers  apparently hate having scrollable overflow elements inside.
+-->
 <div
-  class="px-[7%] py-2 fixed z-50 {jankytown} duration-300 overflow-x-auto overflow-y-hidden w-full "
+  class="px-[7%] md:py-3 fixed z-50 {jankytown} duration-300 overflow-x-auto overflow-y-hidden w-full "
 >
   <Navbar />
 </div>
 
-<div class="px-[7%] h-[100vh] pt-20 md:block">
+<!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->
+<div class="px-[7%] h-[100vh] pt-32 md:block">
   <slot />
 </div>
