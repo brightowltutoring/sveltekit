@@ -52,7 +52,7 @@
       jankytown = "bottom-0 backdrop-blur-3xl ";
     if ($scrollY > 400 && $instDeltaY > 10)
       jankytown = "-bottom-20  backdrop-blur-3xl";
-    if ($instDeltaY < -100) jankytown = "bottom-0 backdrop-blur-3xl ";
+    if ($instDeltaY < -300) jankytown = "bottom-0 backdrop-blur-3xl ";
   }
 </script>
 
@@ -87,7 +87,7 @@ I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflo
 Fixed containers  apparently hate having scrollable overflow elements inside.
 -->
 <div
-  class="md:px-[7%] md:py-3 py-1 fixed z-50 {jankytown} duration-200 overflow-x-auto overflow-y-hidden w-full "
+  class="md:px-[7%] md:py-3 py-1 fixed z-50 {jankytown} md:duration-500 duration-200 ease-in overflow-x-auto overflow-y-hidden w-full "
 >
   <Navbar />
 </div>

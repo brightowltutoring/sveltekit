@@ -38,7 +38,7 @@
     $routes.home.isCurrent = true;
   }
 
-  let btnColor = "bg-red-300 rounded";
+  let btnColor = "sm:bg-red-300 rounded";
   let btnColorHover = "hover:bg-red-300";
 
   // rgba(0,0,0,0) is transparent

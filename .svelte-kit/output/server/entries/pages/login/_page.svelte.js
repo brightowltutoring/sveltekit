@@ -38,9 +38,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_redirectSetInterval();
   $$unsubscribe_isLoggedIn();
-  return `<main><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" style="${"min-height: 90vh; max-height: 90vh; min-width: 100vw; max-width: 100vw; position: absolute; z-index: -1; top: 0; left: 0; margin: 0; padding: 0; filter: blur(25px); "}"></video>
-
-  <div class="${"loginLogoutDivs  svelte-1k1mjbo"}" id="${"logInDiv"}" style="${"display: block; "}"><br>
+  return `<main><div class="${"loginLogoutDivs  svelte-1k1mjbo"}" id="${"logInDiv"}" style="${"display: block; "}"><br>
     <br>
 
     <button id="${"googleBtn"}" class="${"svelte-1k1mjbo"}">Sign-in with Google</button>

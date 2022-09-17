@@ -1,8 +1,40 @@
-import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, h as add_attribute, g as each } from "../../../chunks/index.js";
-import { K as KatexIntersectionObserver2 } from "../../../chunks/KatexIntersectionObserver2.js";
+import { c as create_ssr_component, a as subscribe, g as each, h as add_attribute, v as validate_component, e as escape } from "../../../chunks/index.js";
+import katex from "katex";
 import { i as isDarkMode } from "../../../chunks/store.js";
-import "katex";
+import { K as KatexIntersectionObserver2 } from "../../../chunks/KatexIntersectionObserver2.js";
 import "../../../chunks/index2.js";
+const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let katexString;
+  let { d = false } = $$props;
+  let { m } = $$props;
+  const options = { displayMode: d, throwOnError: false };
+  if ($$props.d === void 0 && $$bindings.d && d !== void 0)
+    $$bindings.d(d);
+  if ($$props.m === void 0 && $$bindings.m && m !== void 0)
+    $$bindings.m(m);
+  katexString = katex.renderToString(m, options);
+  return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-bnfb8z">`, ""}
+
+<!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->`;
+});
+const SixMathEqnAnim = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  let equations = [
+    "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+    "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+    " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+    "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+    "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c",
+    "e^{i x}=\\cos x+i\\sin x"
+  ];
+  $$unsubscribe_isDarkMode();
+  return `<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {
+    return `
+    <p${add_attribute("class", $isDarkMode ? "text-blue-100" : "text-red-500", 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
+    </p>`;
+  })}</div>`;
+});
 let numMax = 30;
 let numMDMax = 1;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -25,7 +57,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode();
   return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
 
-<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>Garlic bread with cheese: What the science tells us</h1>
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}">${validate_component(SixMathEqnAnim, "SixMathEqnAnim").$$render($$result, {}, {}, {})}
+  <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>For years parents have espoused the health benefits of eating garlic bread with cheese to their
     children, with the food earning such an iconic status in our culture that kids will often dress
     up as warm, cheesy loaf for Halloween.
