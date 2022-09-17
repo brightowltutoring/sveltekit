@@ -10,6 +10,7 @@
     scrollY,
     instDeltaY,
     isDarkMode,
+    lessThan768,
   } from "$lib/store.js";
   import { spring } from "svelte/motion";
 
@@ -46,12 +47,10 @@
     : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
 </script>
 
-<logo-and-navbar
-  class="flex md:inline-flex justify-between  items-center md:w-full "
->
+<logo-and-navbar class="flex md:justify-between justify-center w-full ">
   {#key resetLogoClick}
     <div
-      class=" translate-y-[0.2rem] translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:pr-20
+      class=" md:translate-y-[0.5rem] md:translate-x-3 hidden md:block text-xl font-Poppins font-semibold 
     md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
       in:scale={{ duration: 1200, easing: elasticOut }}
       on:mouseup={clickLogo}
@@ -62,7 +61,7 @@
 
   <!-- class=" md:ml-24  p-1 {gradientColor} rounded-full sticky overflow-y-scroll hideScrollBar " -->
   <nav
-    class=" md:ml-24 md:p-1 p-2 {gradientColor} rounded-xl hideScrollBar overflow-auto md:w-1/2 w-full"
+    class=" md:ml-24 md:p-1 p-2 {gradientColor} rounded-xl hideScrollBar overflow-auto md:w-1/2  "
   >
     {#key unique}
       <ul class="flex flex-row text-xl  items-center">

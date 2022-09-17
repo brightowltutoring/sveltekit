@@ -40,7 +40,7 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_page();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_redirectSetInterval();
-  return `<button class="${escape(bool && `${btnColor} md:border-b-1 md:rounded md:px-3 md:py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " md:hover:rounded md:hover:py-1 md:hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
+  return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
 });
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
@@ -169,12 +169,12 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
     }
     gradientColor = $isDarkMode ? "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]" : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
-    $$rendered = `<logo-and-navbar class="${"flex md:inline-flex justify-between h-10 items-center md:w-full "}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:pr-20 md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+    $$rendered = `<logo-and-navbar class="${"flex md:inline-flex justify-between items-center md:w-full "}"><div class="${"translate-y-[0.2rem] translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:pr-20 md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
   
-  <nav class="${"md:ml-24 p-1 " + escape(gradientColor, true) + " rounded-full hideScrollBar overflow-auto md:w-1/2 w-full"}"><ul class="${"flex flex-row md:text-xl text-lg items-center"}">${each(Object.keys($routes), (KEY) => {
-      return `<li class="${"py-3 md:p-0 "}"${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
+  <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto md:w-1/2 w-full"}"><ul class="${"flex flex-row text-xl items-center"}">${each(Object.keys($routes), (KEY) => {
+      return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
           href: $routes[KEY].href,
@@ -282,7 +282,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"px-[7%] md:py-3 fixed z-50 " + escape(jankytown, true) + " duration-300 overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
+<div class="${"md:px-[7%] md:py-3 py-1 fixed z-50 " + escape(jankytown, true) + " duration-300 overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
 
 <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;

@@ -87,7 +87,7 @@ I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflo
 Fixed containers  apparently hate having scrollable overflow elements inside.
 -->
 <div
-  class="md:px-[7%] md:py-3 py-1 fixed z-50 {jankytown} duration-300 overflow-x-auto overflow-y-hidden w-full "
+  class="md:px-[7%] md:py-3 py-1 fixed z-50 {jankytown} duration-200 overflow-x-auto overflow-y-hidden w-full "
 >
   <Navbar />
 </div>
