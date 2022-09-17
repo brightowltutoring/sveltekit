@@ -3,7 +3,7 @@ import { K as KatexIntersectionObserver2 } from "../../../chunks/KatexIntersecti
 import { i as isDarkMode } from "../../../chunks/store.js";
 import "katex";
 import "../../../chunks/index2.js";
-const eAndM_md_svelte_type_style_lang = "";
+const eAndM_svx_svelte_type_style_lang = "";
 const css = {
   code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
   map: null

@@ -136,7 +136,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+const NavbarTEMP = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let gradientColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $routes, $$unsubscribe_routes;
@@ -170,7 +170,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     </div>
 
   
-  <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto md:w-1/2"}"><ul class="${"flex flex-row text-xl items-center"}">${each(Object.keys($routes), (KEY) => {
+  <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">${each(Object.keys($routes).slice(0, 3), (KEY) => {
       return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -279,7 +279,8 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"md:px-[7%] md:py-3 py-1 fixed z-50 " + escape(jankytown, true) + " md:duration-500 duration-150 ease-in overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
+<div class="${"md:px-[7%] md:py-3 py-1 fixed z-50 " + escape(jankytown, true) + " md:duration-500 duration-150 ease-in overflow-x-auto overflow-y-hidden w-full"}">
+  ${validate_component(NavbarTEMP, "NavbarTEMP").$$render($$result, {}, {}, {})}</div>
 
 
 <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;

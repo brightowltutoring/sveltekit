@@ -1,4 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, h as add_attribute, g as each, v as validate_component } from "../../chunks/index.js";
+import "katex";
 import { i as isDarkMode } from "../../chunks/store.js";
 import "../../chunks/index2.js";
 const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -24,8 +25,7 @@ const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots)
 });
 const Testimonials = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
-  return `<div class="${"font-Poppins text-center sm:text-5xl text-4xl py-20 "}">TESTIMONIALS
-</div>
+  return `
 
 <div class="${"grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 "}">${each(reviewers, (name) => {
     return `${validate_component(GalleryScale, "GalleryScale").$$render(
@@ -44,6 +44,10 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_isDarkMode();
   return `<main class="${"overflow-x-hidden"}"><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video></main>
+
+<div class="${"text-6xl font-Poppins text-center pt-20 pb-40"}">We&#39;ll be back in October
+  <div class="${"font-Nunito text-[20px] text-center pt-5"}">\u{1F383} pressing inquiries can be sent to brightowl.edu[at]gmail.com
+  </div></div>
 
 
 ${validate_component(Testimonials, "Testimonials").$$render($$result, {}, {}, {})}`;
