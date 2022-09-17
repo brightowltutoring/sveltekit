@@ -1,6 +1,7 @@
 <script>
   import "../app.css";
-  import Navbar from "$lib/Navbar.svelte";
+  import NavbarTEMP from "$lib/NavbarTEMP.svelte";
+  // import Navbar from "$lib/Navbar.svelte";
   import {
     instDeltaY,
     innerWidth,
@@ -89,7 +90,8 @@ Fixed containers  apparently hate having scrollable overflow elements inside.
 <div
   class="md:px-[7%] md:py-3 py-1 fixed z-50 {jankytown} md:duration-500 duration-150 ease-in overflow-x-auto overflow-y-hidden w-full "
 >
-  <Navbar />
+  <!-- <Navbar /> -->
+  <NavbarTEMP />
 </div>
 
 <!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->

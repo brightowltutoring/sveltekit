@@ -1,5 +1,5 @@
 <script>
-  // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
+  import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
   import Testimonials from "$lib/Testimonials.svelte";
   import { isDarkMode } from "$lib/store.js";
 </script>
@@ -17,6 +17,13 @@
       : 'blur-2xl'}"
   />
 </main>
+
+<div class="text-6xl font-Poppins text-center pt-20 pb-40">
+  We'll be back in October
+  <div class="font-Nunito text-[20px] text-center pt-5">
+    🎃 pressing inquiries can be sent to brightowl.edu[at]gmail.com
+  </div>
+</div>
 
 <!-- <SixMathEqnAnim /> -->
 <Testimonials />

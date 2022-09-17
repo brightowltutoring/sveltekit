@@ -257,7 +257,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         jankytown = "bottom-0 backdrop-blur-3xl ";
       if ($scrollY > 400 && $instDeltaY > 10)
         jankytown = "-bottom-20  backdrop-blur-3xl";
-      if ($instDeltaY < -300)
+      if ($instDeltaY < -200)
         jankytown = "bottom-0 backdrop-blur-3xl ";
     }
   }
@@ -279,7 +279,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"md:px-[7%] md:py-3 py-1 fixed z-50 " + escape(jankytown, true) + " md:duration-500 duration-200 ease-in overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
+<div class="${"md:px-[7%] md:py-3 py-1 fixed z-50 " + escape(jankytown, true) + " md:duration-500 duration-150 ease-in overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
 
 <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;

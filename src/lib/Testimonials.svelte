@@ -3,9 +3,9 @@
   const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
 </script>
 
-<div class="font-Poppins text-center sm:text-5xl text-4xl py-20 ">
+<!-- <div class="font-Poppins text-center sm:text-5xl text-4xl py-20 ">
   TESTIMONIALS
-</div>
+</div> -->
 
 <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 ">
   {#each reviewers as name}
