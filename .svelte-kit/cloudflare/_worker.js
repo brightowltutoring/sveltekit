@@ -688,61 +688,16 @@ var init_store = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/stores.js
-function removed_session() {
-  throw new Error(
-    "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
-  );
-}
-var getStores, page;
-var init_stores = __esm({
-  ".svelte-kit/output/server/chunks/stores.js"() {
-    init_chunks();
-    getStores = () => {
-      const stores = getContext("__svelte__");
-      const readonly_stores = {
-        page: {
-          subscribe: stores.page.subscribe
-        },
-        navigating: {
-          subscribe: stores.navigating.subscribe
-        },
-        updated: stores.updated
-      };
-      Object.defineProperties(readonly_stores, {
-        preloading: {
-          get() {
-            console.error("stores.preloading is deprecated; use stores.navigating instead");
-            return {
-              subscribe: stores.navigating.subscribe
-            };
-          },
-          enumerable: false
-        },
-        session: {
-          get() {
-            removed_session();
-            return {};
-          },
-          enumerable: false
-        }
-      });
-      return readonly_stores;
-    };
-    page = {
-      subscribe(fn) {
-        const store = getStores().page;
-        return store.subscribe(fn);
-      }
-    };
-  }
-});
-
 // .svelte-kit/output/server/entries/pages/_layout.svelte.js
 var layout_svelte_exports = {};
 __export(layout_svelte_exports, {
   default: () => Layout
 });
+function removed_session() {
+  throw new Error(
+    "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
+  );
+}
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
 }
@@ -840,12 +795,11 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var LightDarkMode, Navitem, NavbarTEMP, Layout;
+var LightDarkMode, getStores, page, Navitem, NavbarTEMP, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
     init_store();
-    init_stores();
     init_index2();
     LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -853,6 +807,43 @@ var init_layout_svelte = __esm({
       $$unsubscribe_isDarkMode();
       return `<button>${$isDarkMode ? `<svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>` : `<svg aria-label="${"Moon"}" id="${"darkIcon"}" height="${"24"}" width="${"24"}" style="${"transform: scale(1);"}" data-metatip="${"true"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`}</button>`;
     });
+    getStores = () => {
+      const stores = getContext("__svelte__");
+      const readonly_stores = {
+        page: {
+          subscribe: stores.page.subscribe
+        },
+        navigating: {
+          subscribe: stores.navigating.subscribe
+        },
+        updated: stores.updated
+      };
+      Object.defineProperties(readonly_stores, {
+        preloading: {
+          get() {
+            console.error("stores.preloading is deprecated; use stores.navigating instead");
+            return {
+              subscribe: stores.navigating.subscribe
+            };
+          },
+          enumerable: false
+        },
+        session: {
+          get() {
+            removed_session();
+            return {};
+          },
+          enumerable: false
+        }
+      });
+      return readonly_stores;
+    };
+    page = {
+      subscribe(fn) {
+        const store = getStores().page;
+        return store.subscribe(fn);
+      }
+    };
     Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $page, $$unsubscribe_page;
       let $$unsubscribe_redirectAfterLoginTimeOut;
@@ -1049,34 +1040,27 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-7520ce00.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-7520ce00.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/stores-b6ef9a80.js", "_app/immutable/chunks/singletons-00f94cf4.js", "_app/immutable/chunks/navigation-61338128.js"];
-    stylesheets = ["_app/immutable/assets/+layout-794715ea.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-783b17ab.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-783b17ab.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/singletons-29953ccf.js", "_app/immutable/chunks/navigation-6532ac6d.js"];
+    stylesheets = ["_app/immutable/assets/+layout-49facc58.css"];
   }
 });
 
-// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
+// .svelte-kit/output/server/entries/pages/_error.svelte.js
 var error_svelte_exports = {};
 __export(error_svelte_exports, {
   default: () => Error2
 });
 var Error2;
 var init_error_svelte = __esm({
-  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
+  ".svelte-kit/output/server/entries/pages/_error.svelte.js"() {
     init_chunks();
-    init_stores();
     Error2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $page, $$unsubscribe_page;
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_page();
-      return `<h1>${escape($page.status)}</h1>
+      return `
 
-<pre>${escape($page.error.message)}</pre>
+<p class="${"text-center"}">Oops ... looks like that page doesn&#39;t exist.</p>
 
-
-
-${$page.error.frame ? `<pre>${escape($page.error.frame)}</pre>` : ``}
-${$page.error.stack ? `<pre>${escape($page.error.stack)}</pre>` : ``}`;
+<div class="${"flex justify-center"}"><img src="${"/face-palm.gif"}" alt="${"face palm star trek gif"}" class="${"w-1/3"}"></div>`;
     });
   }
 });
@@ -1095,8 +1079,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/error.svelte-81a03205.js";
-    imports2 = ["_app/immutable/components/error.svelte-81a03205.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/stores-b6ef9a80.js", "_app/immutable/chunks/singletons-00f94cf4.js", "_app/immutable/chunks/index-0ab04b87.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-d2d984ba.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-d2d984ba.js", "_app/immutable/chunks/index-63f99ff6.js"];
     stylesheets2 = [];
   }
 });
@@ -21284,8 +21268,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-e23ef87b.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-e23ef87b.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/navigation-61338128.js", "_app/immutable/chunks/singletons-00f94cf4.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-3434d575.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-3434d575.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/navigation-6532ac6d.js", "_app/immutable/chunks/singletons-29953ccf.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -23931,10 +23915,10 @@ var Server = class {
 // .svelte-kit/cloudflare-tmp/manifest.js
 var manifest = {
   appDir: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
-  mimeTypes: { ".mp4": "video/mp4", ".webp": "image/webp" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp"]),
+  mimeTypes: { ".gif": "image/gif", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-149bc1bd.js", "imports": ["_app/immutable/start-149bc1bd.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/singletons-00f94cf4.js", "_app/immutable/chunks/index-0ab04b87.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-bfad21d2.js", "imports": ["_app/immutable/start-bfad21d2.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/singletons-29953ccf.js", "_app/immutable/chunks/index-0ab04b87.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

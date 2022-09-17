@@ -1,4 +1,4 @@
-import { c as create_ssr_component, h as add_attribute, v as validate_component, g as each } from "../../../chunks/index.js";
+import { c as create_ssr_component, j as add_attribute, v as validate_component, h as each } from "../../../chunks/index.js";
 import "katex";
 const KatexDataProp = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { m } = $$props;

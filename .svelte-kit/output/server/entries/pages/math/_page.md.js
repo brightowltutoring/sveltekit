@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as subscribe, g as each, h as add_attribute, v as validate_component, e as escape } from "../../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, h as each, j as add_attribute, v as validate_component, e as escape } from "../../../chunks/index.js";
 import katex from "katex";
 import { i as isDarkMode } from "../../../chunks/store.js";
 import { K as KatexIntersectionObserver2 } from "../../../chunks/KatexIntersectionObserver2.js";
