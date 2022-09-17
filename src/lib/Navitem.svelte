@@ -3,7 +3,6 @@
   import { elasticOut } from "svelte/easing";
   import { page } from "$app/stores";
   import {
-    isDarkMode,
     redirectAfterLoginTimeOut,
     redirectSetInterval,
   } from "$lib/store.js";
@@ -15,8 +14,6 @@
   // could've done this in if/else but the boolean nature here made it unnecessary
   $: for (let key in routes) {
     routes[key].isCurrent = routes[key].href === $page.url.pathname;
-    // routes[key].isCurrent =
-    //   key == $page.routeId || ($page.routeId.length == 0 && key == "home");
   }
 
   let unique;
@@ -26,21 +23,8 @@
     for (let key in routes) {
       routes[key].isCurrent = false;
     }
-
-    //sets button click to corresponding route
-    bool = !bool;
-
+    bool = !bool; //sets button click to corresponding route
     unique = !unique; // to reanimate the non-mobile links
-
-    if (routes.login.isCurrent) {
-      window.document.body.classList.remove("dark-mode");
-      $isDarkMode = false;
-    }
-
-    // if (routes.jitsi.isCurrent) {
-    //   window.document.body.classList.add("dark-mode");
-    //   $isDarkMode = true;
-    // }
   }
 </script>
 

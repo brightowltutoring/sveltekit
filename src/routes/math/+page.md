@@ -3,7 +3,7 @@
 {/key}
 
 <script>
-
+    import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
     import KatexIntersectionObserver2 from "$lib/KatexIntersectionObserver2.svelte"
     import { isDarkMode } from "$lib/store.js";
   
@@ -28,6 +28,8 @@
 
 <!-- <article > -->
 <article class="prose lg:prose-lg {proseInvert}">
+
+  <SixMathEqnAnim />
 
   <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>
