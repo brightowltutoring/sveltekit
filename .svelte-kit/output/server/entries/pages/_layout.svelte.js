@@ -150,7 +150,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
   let hueRocket = 0;
-  let btnColor = "bg-red-300 rounded";
+  let btnColor = "sm:bg-red-300 rounded";
   let btnColorHover = "hover:bg-red-300";
   let $$settled;
   let $$rendered;
@@ -257,7 +257,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         jankytown = "bottom-0 backdrop-blur-3xl ";
       if ($scrollY > 400 && $instDeltaY > 10)
         jankytown = "-bottom-20  backdrop-blur-3xl";
-      if ($instDeltaY < -100)
+      if ($instDeltaY < -300)
         jankytown = "bottom-0 backdrop-blur-3xl ";
     }
   }
@@ -279,7 +279,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"md:px-[7%] md:py-3 py-1 fixed z-50 " + escape(jankytown, true) + " duration-200 overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
+<div class="${"md:px-[7%] md:py-3 py-1 fixed z-50 " + escape(jankytown, true) + " md:duration-500 duration-200 ease-in overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
 
 <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;
