@@ -47,7 +47,7 @@
 </script>
 
 <logo-and-navbar
-  class="flex md:inline-flex justify-between h-10  items-center md:w-full "
+  class="flex md:inline-flex justify-between  items-center md:w-full "
 >
   {#key resetLogoClick}
     <div
@@ -62,13 +62,12 @@
 
   <!-- class=" md:ml-24  p-1 {gradientColor} rounded-full sticky overflow-y-scroll hideScrollBar " -->
   <nav
-    class=" md:ml-24  p-1 {gradientColor} rounded-full hideScrollBar overflow-auto md:w-1/2 w-full"
+    class=" md:ml-24 md:p-1 p-2 {gradientColor} rounded-xl hideScrollBar overflow-auto md:w-1/2 w-full"
   >
     {#key unique}
-      <ul class="flex flex-row md:text-xl text-lg items-center">
+      <ul class="flex flex-row text-xl  items-center">
         {#each Object.keys($routes) as KEY}
           <li
-            class="py-3 md:p-0 "
             style={KEY == "login" &&
               $isLoggedIn &&
               `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}

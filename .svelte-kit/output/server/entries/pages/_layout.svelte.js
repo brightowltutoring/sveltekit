@@ -153,8 +153,8 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
   let hueRocket = 0;
-  let btnColor = "md:bg-red-300 ";
-  let btnColorHover = "md:hover:bg-red-300";
+  let btnColor = "bg-red-300 rounded";
+  let btnColorHover = "hover:bg-red-300";
   let $$settled;
   let $$rendered;
   do {
@@ -216,7 +216,6 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
-let scrollThreshold = 1200;
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
@@ -241,15 +240,14 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   let jankytown;
-  $scrollY > scrollThreshold && console.log("$scrollY > scrollThreshold");
   {
     if (!$lessThan768) {
       if ($scrollY == 0)
         jankytown = "top-0";
-      if ($scrollY > 10 && $instDeltaY > 0)
-        jankytown = "-top-20 backdrop-blur-3xl ";
+      if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
+        jankytown = "top-0 backdrop-blur-3xl ";
       if ($scrollY > 800 && $instDeltaY > 10)
-        jankytown = "-top-20  ";
+        jankytown = "-top-20 backdrop-blur-3xl ";
       if ($instDeltaY < -100)
         jankytown = "top-0 backdrop-blur-3xl ";
     }
@@ -258,10 +256,10 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     if ($lessThan768) {
       if ($scrollY == 0)
         jankytown = "bottom-0 backdrop-blur-3xl";
-      if ($scrollY > 10 && $instDeltaY > 0)
-        jankytown = "-bottom-20 backdrop-blur-3xl ";
-      if ($scrollY > 800 && $instDeltaY > 10)
-        jankytown = "-bottom-20  ";
+      if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
+        jankytown = "bottom-0 backdrop-blur-3xl ";
+      if ($scrollY > 400 && $instDeltaY > 10)
+        jankytown = "-bottom-20  backdrop-blur-3xl";
       if ($instDeltaY < -100)
         jankytown = "bottom-0 backdrop-blur-3xl ";
     }
@@ -284,11 +282,10 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
+<div class="${"px-[7%] md:py-3 fixed z-50 " + escape(jankytown, true) + " duration-300 overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
 
-<div class="${"px-[7%] py-2 fixed z-50 " + escape(jankytown, true) + " duration-300 overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
-
-<div class="${"px-[7%] h-[100vh] pt-20 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;
+<div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;
 });
 export {
   Layout as default

@@ -55,7 +55,7 @@
       goto(href);
     }}
     class="{bool &&
-      `${btnColor} md:border-b-1 md:rounded md:px-3 md:py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent {`${btnColorHover}`}  md:hover:rounded md:hover:py-1  md:hover:px-3 duration-300 hover:shadow-lg"
+      `${btnColor} border-b-1 rounded px-3 py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent {`${btnColorHover}`}  hover:rounded hover:py-1  hover:px-3 duration-300 hover:shadow-lg"
   >
     {content}
   </button>
