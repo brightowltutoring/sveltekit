@@ -20,15 +20,14 @@
   />
 </main>
 
-<div class="text-6xl font-Poppins text-center pt-20 pb-40">
-  We'll be back in October
-  <div class="font-Nunito text-[20px] text-center pt-5">
-    🎃 pressing inquiries can be sent to thinksolve.io[at]gmail.com
+<div class="flex justify-center items-center h-3/5 text-center">
+  <div class="grid grid-rows-1">
+    <div class="text-6xl font-Poppins pb-4">We'll be back in October</div>
+    <div>🎃 pressing inquiries can be sent to thinksolve.io[at]gmail.com</div>
   </div>
 </div>
 
-<!-- <SixMathEqnAnim /> -->
-<Testimonials />
+<!-- <Testimonials /> -->
 
 <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
   {#each reviews as { name, title, date, body }}
