@@ -8,7 +8,7 @@
       card: 1,
       calendlyUrl:
         "https://calendly.com/brightowltutoring/invoice-webinowl?hide_gdpr_banner=1",
-      buttonText: "Webinowl",
+      buttonText: "Classico",
       cardText:
         "  Classic 1-on-1 session with smooth screen sharing. Supported platforms: Zoom, TeamViewer Meeting, and Microsoft Teams Digital session notesavailable at a premium ",
       href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS",
@@ -17,7 +17,7 @@
       card: 2,
       calendlyUrl:
         "https://calendly.com/brightowltutoring/invoice-blitzowl?hide_gdpr_banner=1",
-      buttonText: "Blitzowl",
+      buttonText: "Blitz",
       cardText:
         "  Submit your homework Receive a personal 15-day solution URL/page Cost calculated based on number of questions submitted Single and bundled options available.",
       href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS",
@@ -26,7 +26,7 @@
       card: 3,
       calendlyUrl:
         "https://calendly.com/brightowltutoring/invoice-mockowl?hide_gdpr_banner=1",
-      buttonText: "Mockowl",
+      buttonText: "Mock",
       cardText:
         " Get test ready. We provide a mock test session complete with live support and a digital copy of answers. Solution key available at a premium",
       href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS",

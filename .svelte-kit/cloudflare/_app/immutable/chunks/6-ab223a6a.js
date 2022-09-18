@@ -1,1 +1,0 @@
-import{default as f}from"../components/pages/math/_page.md-fe5556e5.js";import"./index-63f99ff6.js";import"./katex-15be85e5.js";import"./store-4bae218e.js";import"./index-0ab04b87.js";import"./index-4caf361a.js";import"./KatexIntersectionObserver2-db8c09b8.js";export{f as component};

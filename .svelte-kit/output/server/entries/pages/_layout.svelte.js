@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, g as getContext, e as escape, d as now, l as loop, f as set_store_value, h as each, j as add_attribute, v as validate_component } from "../../chunks/index.js";
-import { i as isDarkMode, r as redirectAfterLoginTimeOut, a as redirectSetInterval, b as routes, c as isLoggedIn, s as scrollY, d as instDeltaY, l as lessThan768, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, r as redirectAfterLoginTimeOut, a as redirectSetInterval, b as instDeltaY, s as scrollY, l as lessThan768, c as routes, d as isLoggedIn, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -177,17 +177,21 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-const NavbarTEMP = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let gradientColor;
+  let $$unsubscribe_instDeltaY;
+  let $scrollY, $$unsubscribe_scrollY;
+  let $$unsubscribe_lessThan768;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $routes, $$unsubscribe_routes;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
-  let $scrollY, $$unsubscribe_scrollY;
   let $scaleRocket, $$unsubscribe_scaleRocket;
+  $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => value);
+  $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+  $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
-  $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
   let hueRocket = 0;
@@ -207,11 +211,14 @@ const NavbarTEMP = create_ssr_component(($$result, $$props, $$bindings, slots) =
       $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
     }
     gradientColor = $isDarkMode ? "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]" : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
-    $$rendered = `<logo-and-navbar class="${"flex md:justify-between justify-center w-full "}"><div class="${"md:translate-y-[0.5rem] md:translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+    $$rendered = `
+
+<logo-and-navbar class="${"flex justify-center md:justify-between gap-x-24"}"><div class="${"md:translate-y-[0.5rem] md:translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
   
-  <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">${each(Object.keys($routes).slice(0, 3), (KEY) => {
+  <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
+        ${each(Object.keys($routes).splice(0, 3), (KEY) => {
       return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -247,10 +254,12 @@ const NavbarTEMP = create_ssr_component(($$result, $$props, $$bindings, slots) =
 
         <li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul></nav></logo-and-navbar>`;
   } while (!$$settled);
+  $$unsubscribe_instDeltaY();
+  $$unsubscribe_scrollY();
+  $$unsubscribe_lessThan768();
   $$unsubscribe_isDarkMode();
   $$unsubscribe_routes();
   $$unsubscribe_isLoggedIn();
-  $$unsubscribe_scrollY();
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
@@ -298,7 +307,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         jankytown = "bottom-0 backdrop-blur-3xl ";
       if ($scrollY > 400 && $instDeltaY > 10)
         jankytown = "-bottom-20  backdrop-blur-3xl";
-      if ($instDeltaY < -200)
+      if ($instDeltaY < -150)
         jankytown = "bottom-0 backdrop-blur-3xl ";
     }
   }
@@ -320,8 +329,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"md:px-[7%] md:py-3 py-1 fixed z-50 " + escape(jankytown, true) + " md:duration-500 duration-150 ease-in overflow-x-auto overflow-y-hidden w-full"}">
-  ${validate_component(NavbarTEMP, "NavbarTEMP").$$render($$result, {}, {}, {})}</div>
+<div class="${"md:px-[7%] md:py-3 py-1 z-50 fixed " + escape(jankytown, true) + " duration-500 ease-in overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
 
 <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;

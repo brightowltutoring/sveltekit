@@ -73,9 +73,9 @@ derived(isDarkMode, ($isDarkMode, set) => {
 });
 export {
   redirectSetInterval as a,
-  routes as b,
-  isLoggedIn as c,
-  instDeltaY as d,
+  instDeltaY as b,
+  routes as c,
+  isLoggedIn as d,
   scrollYMax as e,
   innerWidth as f,
   dark_lightened as g,
