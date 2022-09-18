@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css9) => css9.code).join("\n"),
+          code: Array.from(result.css).map((css8) => css8.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -1040,8 +1040,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-ec937f50.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-ec937f50.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/singletons-252c73da.js", "_app/immutable/chunks/navigation-a24c7ea5.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-f26faf8f.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-f26faf8f.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/singletons-f7219730.js", "_app/immutable/chunks/navigation-f70e1d8c.js"];
     stylesheets = ["_app/immutable/assets/+layout-49facc58.css"];
   }
 });
@@ -14737,7 +14737,7 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var GalleryScale, Testimonials, css, ReviewCreator, reviews, Page;
+var GalleryScale, Testimonials, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
@@ -14781,41 +14781,6 @@ var init_page_svelte = __esm({
         )}`;
       })}</div>`;
     });
-    css = {
-      code: "h1.svelte-1l06vjd,span.svelte-1l06vjd{margin:0;padding:0}",
-      map: null
-    };
-    ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { title: title2 = "Great physics tutor!!" } = $$props;
-      let { name: name5 = "Thomas Finn" } = $$props;
-      let { date: date2 = "2022-06-08" } = $$props;
-      if ($$props.title === void 0 && $$bindings.title && title2 !== void 0)
-        $$bindings.title(title2);
-      if ($$props.name === void 0 && $$bindings.name && name5 !== void 0)
-        $$bindings.name(name5);
-      if ($$props.date === void 0 && $$bindings.date && date2 !== void 0)
-        $$bindings.date(date2);
-      $$result.css.add(css);
-      return `
-<div class="${"prose relative p-1"}"><div class="${"p-4"}"><h1 class="${"svelte-1l06vjd"}">${escape(title2)}</h1>
-<div class="${"flex flex-row -translate-y-3 "}"><img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}">
-  <img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}">
-  <img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}">
-  <img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}">
-  <img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}"></div>
-<span class="${"absolute p-0 m-0 italic -translate-y-8  svelte-1l06vjd"}">${escape(date2)}</span>
-${slots.default ? slots.default({}) : ``}
-</div>
-<b class="${"absolute bottom-0 right-6 p-15"}">${escape(name5)}</b></div>`;
-    });
-    reviews = [
-      {
-        name: "gato",
-        title: "heyo",
-        date: "2022-06-08",
-        body: " He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
-      }
-    ];
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -14823,20 +14788,13 @@ ${slots.default ? slots.default({}) : ``}
       return `<main class="${"overflow-x-hidden"}"><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video></main>
 
 <div class="${"text-6xl font-Poppins text-center pt-20 pb-40"}">We&#39;ll be back in October
-  <div class="${"font-Nunito text-[20px] text-center pt-5"}">\u{1F383} pressing inquiries can be sent to brightowl.edu[at]gmail.com
+  <div class="${"font-Nunito text-[20px] text-center pt-5"}">\u{1F383} pressing inquiries can be sent to thinksolve.io[at]gmail.com
   </div></div>
 
 
 ${validate_component(Testimonials, "Testimonials").$$render($$result, {}, {}, {})}
 
-<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}">${each(reviews, ({ name: name5, title: title2, date: date2, body }) => {
-        return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title: title2, name: name5, date: date2 }, {}, {
-          default: () => {
-            return `${escape(body)}
-    `;
-          }
-        })}`;
-      })}</div>`;
+`;
     });
   }
 });
@@ -14857,9 +14815,9 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-103d2704.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-103d2704.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
-    stylesheets3 = ["_app/immutable/assets/+page-821bf61a.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-2da42e63.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-2da42e63.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    stylesheets3 = ["_app/immutable/assets/+page-3e320a56.css"];
   }
 });
 
@@ -14868,16 +14826,16 @@ var page_svelte_exports2 = {};
 __export(page_svelte_exports2, {
   default: () => Page2
 });
-var css2, Page2;
+var css, Page2;
 var init_page_svelte2 = __esm({
   ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
     init_chunks();
-    css2 = {
+    css = {
       code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
       map: null
     };
     Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css2);
+      $$result.css.add(css);
       return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
 
 <details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
@@ -15015,16 +14973,16 @@ var page_svelte_exports3 = {};
 __export(page_svelte_exports3, {
   default: () => Page3
 });
-var css3, JitsiUser, Page3;
+var css2, JitsiUser, Page3;
 var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/jitsi/_page.svelte.js"() {
     init_chunks();
-    css3 = {
+    css2 = {
       code: '#cornerDIV.svelte-s1gz6r{position:absolute;left:48%;bottom:40px}#hangUp.svelte-s1gz6r{content:url("https://brightowltutoring.com/s/hangup-gray.png");margin:0 auto;display:flex;width:50px;aspect-ratio:1;border-radius:50%;transform:rotate(90deg);transition:0.4s ease-in-out}#hangUp.svelte-s1gz6r:hover{content:url("https://brightowltutoring.com/s/hangup-red.png");transform:scale(1.85)}',
       map: null
     };
     JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css3);
+      $$result.css.add(css2);
       return `${$$result.head += `<script src="${"https://meet.jit.si/external_api.js"}" data-svelte="svelte-1pkind7"><\/script>`, ""}
 
 
@@ -21232,7 +21190,7 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page4
 });
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css4, Page4;
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css3, Page4;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
@@ -21258,7 +21216,7 @@ var init_page_svelte4 = __esm({
     app = initializeApp(firebaseConfig);
     getAuth(app);
     ln(app);
-    css4 = {
+    css3 = {
       code: '#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1k1mjbo.svelte-1k1mjbo{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1k1mjbo.svelte-1k1mjbo{margin:0px auto;width:25vw;min-width:280px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo,button.svelte-1k1mjbo.svelte-1k1mjbo{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:hover{border:1px solid #999}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center}',
       map: null
     };
@@ -21270,7 +21228,7 @@ var init_page_svelte4 = __esm({
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       let emailFieldValue = "";
-      $$result.css.add(css4);
+      $$result.css.add(css3);
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_isLoggedIn();
@@ -21312,8 +21270,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-cf3d9766.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-cf3d9766.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/navigation-a24c7ea5.js", "_app/immutable/chunks/singletons-252c73da.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-fe4cd059.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-fe4cd059.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/store-4bae218e.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/navigation-f70e1d8c.js", "_app/immutable/chunks/singletons-f7219730.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21486,7 +21444,7 @@ var page_svelte_exports5 = {};
 __export(page_svelte_exports5, {
   default: () => Page6
 });
-var css5, E_and_m, Page6;
+var css4, E_and_m, Page6;
 var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
@@ -21494,12 +21452,12 @@ var init_page_svelte5 = __esm({
     init_store();
     init_katex();
     init_index2();
-    css5 = {
+    css4 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css5);
+      $$result.css.add(css4);
       return `${validate_component(KatexIntersectionObserver2, "KatexIntersectionObserver2").$$render($$result, {}, {}, {})}
 <div id="${"charges-1"}"><h2>Two isolated point charges as shown are at a fixed distance apart (segment BC). At which point is it possible for the electric field strength to be zero?</h2>
   <img style="${"margin: 0 auto; display:flex; width: 65vw; min-width: 280px; max-width: 600px;"}" src="${" https://raw.githubusercontent.com/brightowltutoring/web/main/two-charges.png"}">
@@ -21614,7 +21572,7 @@ var page_svelte_exports6 = {};
 __export(page_svelte_exports6, {
   default: () => Page7
 });
-var css$1, PlansCard, css6, Page7;
+var css$1, PlansCard, css5, Page7;
 var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -21658,7 +21616,7 @@ var init_page_svelte6 = __esm({
   
 </div>`;
     });
-    css6 = {
+    css5 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
@@ -21686,7 +21644,7 @@ var init_page_svelte6 = __esm({
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
       ];
-      $$result.css.add(css6);
+      $$result.css.add(css5);
       return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
 
 
@@ -21742,11 +21700,11 @@ __export(page_svx_exports, {
   default: () => Page8,
   metadata: () => metadata
 });
-var css7, metadata, title, name4, date, Page8;
+var css6, metadata, title, name4, date, Page8;
 var init_page_svx = __esm({
   ".svelte-kit/output/server/entries/pages/reviews/_page.svx.js"() {
     init_chunks();
-    css7 = {
+    css6 = {
       code: "h1.svelte-1l06vjd,span.svelte-1l06vjd{margin:0;padding:0}",
       map: null
     };
@@ -21757,7 +21715,7 @@ var init_page_svx = __esm({
     };
     ({ title, name: name4, date } = metadata);
     Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css7);
+      $$result.css.add(css6);
       return `<div class="${"prose relative p-1"}"><div class="${"p-4"}"><h1 class="${"svelte-1l06vjd"}">${escape(title)}</h1>
 <span class="${"flex flex-row mix-blend-multiply -translate-y-3 w-[40px] svelte-1l06vjd"}"><img src="${"star.jpeg"}" alt="${""}">
   
@@ -21858,17 +21816,17 @@ var page_svelte_exports7 = {};
 __export(page_svelte_exports7, {
   default: () => Page10
 });
-var css8, Page10;
+var css7, Page10;
 var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
     init_CalendlyJsandCSS();
-    css8 = {
+    css7 = {
       code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
       map: null
     };
     Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css8);
+      $$result.css.add(css7);
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
 <div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
@@ -24014,10 +23972,10 @@ var Server = class {
 // .svelte-kit/cloudflare-tmp/manifest.js
 var manifest = {
   appDir: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.jpeg"]),
-  mimeTypes: { ".gif": "image/gif", ".mp4": "video/mp4", ".webp": "image/webp", ".jpeg": "image/jpeg" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.jpeg", "star.png"]),
+  mimeTypes: { ".gif": "image/gif", ".mp4": "video/mp4", ".webp": "image/webp", ".jpeg": "image/jpeg", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-17e5d87a.js", "imports": ["_app/immutable/start-17e5d87a.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/singletons-252c73da.js", "_app/immutable/chunks/index-0ab04b87.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-fd048357.js", "imports": ["_app/immutable/start-fd048357.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/singletons-f7219730.js", "_app/immutable/chunks/index-0ab04b87.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

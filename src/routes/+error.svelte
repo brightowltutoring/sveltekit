@@ -7,5 +7,9 @@
 <p class="text-center">Oops ... looks like that page doesn't exist.</p>
 
 <div class="flex justify-center" style="mix-blend-mode: multiply;">
-  <img src="/face-palm.gif" alt="face palm star trek gif" class="w-1/3" />
+  <img
+    src="/facepalm.gif"
+    alt="face palm star trek gif"
+    class="w-1/3 min-w-[250px]"
+  />
 </div>
