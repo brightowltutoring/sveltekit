@@ -24,7 +24,7 @@ const GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots)
 `;
 });
 const Testimonials = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  const reviewers = ["zaara", "miranda", "ben", "efe", "paola", "rob", "tj"];
+  const reviewers = ["tj", "ben", "miranda", "efe", "paola", "rob", "zaara"];
   return `
 
 <div class="${"grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 "}">${each(reviewers, (name) => {
@@ -39,6 +39,42 @@ const Testimonials = create_ssr_component(($$result, $$props, $$bindings, slots)
     )}`;
   })}</div>`;
 });
+const reviewCreator_svx_svelte_type_style_lang = "";
+const css = {
+  code: "h1.svelte-1l06vjd,span.svelte-1l06vjd{margin:0;padding:0}",
+  map: null
+};
+const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { title = "Great physics tutor!!" } = $$props;
+  let { name = "Thomas Finn" } = $$props;
+  let { date = "2022-06-08" } = $$props;
+  if ($$props.title === void 0 && $$bindings.title && title !== void 0)
+    $$bindings.title(title);
+  if ($$props.name === void 0 && $$bindings.name && name !== void 0)
+    $$bindings.name(name);
+  if ($$props.date === void 0 && $$bindings.date && date !== void 0)
+    $$bindings.date(date);
+  $$result.css.add(css);
+  return `
+<div class="${"prose relative p-1"}"><div class="${"p-4"}"><h1 class="${"svelte-1l06vjd"}">${escape(title)}</h1>
+<div class="${"flex flex-row -translate-y-3 "}"><img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}">
+  <img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}">
+  <img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}">
+  <img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}">
+  <img src="${"star.jpeg"}" alt="${""}" class="${"mix-blend-multiply"}"></div>
+<span class="${"absolute p-0 m-0 italic -translate-y-8  svelte-1l06vjd"}">${escape(date)}</span>
+${slots.default ? slots.default({}) : ``}
+</div>
+<b class="${"absolute bottom-0 right-6 p-15"}">${escape(name)}</b></div>`;
+});
+const reviews = [
+  {
+    name: "gato",
+    title: "heyo",
+    date: "2022-06-08",
+    body: " He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
+  }
+];
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -50,7 +86,16 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   </div></div>
 
 
-${validate_component(Testimonials, "Testimonials").$$render($$result, {}, {}, {})}`;
+${validate_component(Testimonials, "Testimonials").$$render($$result, {}, {}, {})}
+
+<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}">${each(reviews, ({ name, title, date, body }) => {
+    return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
+      default: () => {
+        return `${escape(body)}
+    `;
+      }
+    })}`;
+  })}</div>`;
 });
 export {
   Page as default

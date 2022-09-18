@@ -1,0 +1,42 @@
+---
+
+title: Great physics tutor!!
+name: Thomas Finn
+date: '2022-06-08'
+
+---
+
+<div class="prose relative p-1">
+
+
+
+<div class="p-4">
+
+# {title}
+<span class="flex flex-row mix-blend-multiply -translate-y-3 w-[40px]">
+  <img src="star.jpeg" alt="" >
+  <!-- <img src="star.jpeg" alt="" > -->
+  <!-- <img src="star.jpeg" alt="" > -->
+  <!-- <img src="star.jpeg" alt="" > -->
+  <!-- <img src="star.jpeg" alt="" > -->
+</span>
+
+<span class="absolute p-0 m-0 italic -translate-y-8 "> {date} </span>
+
+He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he’s just a great person to chat with!
+
+</div>
+
+
+<b class="absolute bottom-0 right-6 p-15">{name}</b>
+
+
+</div>
+
+
+<style>
+  h1,h2,h3,h4,i,span{
+    margin: 0;
+    padding: 0;
+  }
+</style>

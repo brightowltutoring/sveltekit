@@ -1,9 +1,9 @@
 export const manifest = {
 	appDir: "_app",
-	assets: new Set([".DS_Store","face-palm.gif","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp"]),
-	mimeTypes: {".gif":"image/gif",".mp4":"video/mp4",".webp":"image/webp"},
+	assets: new Set([".DS_Store","face-palm.gif","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp","star.jpeg"]),
+	mimeTypes: {".gif":"image/gif",".mp4":"video/mp4",".webp":"image/webp",".jpeg":"image/jpeg"},
 	_: {
-		entry: {"file":"_app/immutable/start-bfad21d2.js","imports":["_app/immutable/start-bfad21d2.js","_app/immutable/chunks/index-63f99ff6.js","_app/immutable/chunks/singletons-29953ccf.js","_app/immutable/chunks/index-0ab04b87.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-17e5d87a.js","imports":["_app/immutable/start-17e5d87a.js","_app/immutable/chunks/index-63f99ff6.js","_app/immutable/chunks/singletons-252c73da.js","_app/immutable/chunks/index-0ab04b87.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),
@@ -15,7 +15,8 @@ export const manifest = {
 			() => import('../output/server/nodes/7.js'),
 			() => import('../output/server/nodes/8.js'),
 			() => import('../output/server/nodes/9.js'),
-			() => import('../output/server/nodes/10.js')
+			() => import('../output/server/nodes/10.js'),
+			() => import('../output/server/nodes/11.js')
 		],
 		routes: [
 			{
@@ -90,13 +91,23 @@ export const manifest = {
 			},
 			{
 				type: 'page',
+				id: "reviews",
+				pattern: /^\/reviews\/?$/,
+				names: [],
+				types: [],
+				errors: [1],
+				layouts: [0],
+				leaf: 9
+			},
+			{
+				type: 'page',
 				id: "samplequiz",
 				pattern: /^\/samplequiz\/?$/,
 				names: [],
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 9
+				leaf: 10
 			},
 			{
 				type: 'page',
@@ -106,7 +117,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 10
+				leaf: 11
 			}
 		],
 		matchers: async () => {
