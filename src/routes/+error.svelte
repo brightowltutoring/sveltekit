@@ -1,5 +1,4 @@
 <script>
-  import { isDarkMode } from "./../lib/store.js";
   // import { page } from "$app/stores";
 </script>
 
@@ -7,7 +6,7 @@
 
 <p class="text-center">🙈 Oops ... looks like that page doesn't exist.</p>
 
-<div class="flex justify-center " style="mix-blend-mode: multiply; ">
+<div class="flex justify-center">
   <img
     src="/facepalm.gif"
     alt="face palm star trek gif"
