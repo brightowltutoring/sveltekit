@@ -1048,8 +1048,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-7dd6bb3e.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-7dd6bb3e.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/store-ddb6966c.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/singletons-e21d6244.js", "_app/immutable/chunks/navigation-2eebc2f7.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-fa7230d8.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-fa7230d8.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/store-ddb6966c.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/singletons-b0680dd5.js", "_app/immutable/chunks/navigation-1dfefae5.js"];
     stylesheets = ["_app/immutable/assets/+layout-a999c5c6.css"];
   }
 });
@@ -21239,8 +21239,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-4034baa3.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-4034baa3.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/store-ddb6966c.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/navigation-2eebc2f7.js", "_app/immutable/chunks/singletons-e21d6244.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-5bb68ac7.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-5bb68ac7.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/store-ddb6966c.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/index-4caf361a.js", "_app/immutable/chunks/navigation-1dfefae5.js", "_app/immutable/chunks/singletons-b0680dd5.js"];
     stylesheets6 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21594,21 +21594,21 @@ var init_page_svelte6 = __esm({
         {
           card: 1,
           calendlyUrl: "https://calendly.com/brightowltutoring/invoice-webinowl?hide_gdpr_banner=1",
-          buttonText: "Webinowl",
+          buttonText: "Classico",
           cardText: "  Classic 1-on-1 session with smooth screen sharing. Supported platforms: Zoom, TeamViewer Meeting, and Microsoft Teams Digital session notesavailable at a premium ",
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         },
         {
           card: 2,
           calendlyUrl: "https://calendly.com/brightowltutoring/invoice-blitzowl?hide_gdpr_banner=1",
-          buttonText: "Blitzowl",
+          buttonText: "Blitz",
           cardText: "  Submit your homework Receive a personal 15-day solution URL/page Cost calculated based on number of questions submitted Single and bundled options available.",
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         },
         {
           card: 3,
           calendlyUrl: "https://calendly.com/brightowltutoring/invoice-mockowl?hide_gdpr_banner=1",
-          buttonText: "Mockowl",
+          buttonText: "Mock",
           cardText: " Get test ready. We provide a mock test session complete with live support and a digital copy of answers. Solution key available at a premium",
           href: "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9LTVM3TWdiUWkxNDY1Y2hnSXFhNDg0ZGJYVUlUWlJM0100zoHToCyS"
         }
@@ -21657,8 +21657,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file9 = "_app/immutable/components/pages/plans/_page.svelte-7b75bb8b.js";
-    imports9 = ["_app/immutable/components/pages/plans/_page.svelte-7b75bb8b.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/CalendlyJsandCSS-5b02d412.js", "_app/immutable/chunks/store-ddb6966c.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/index-4caf361a.js"];
+    file9 = "_app/immutable/components/pages/plans/_page.svelte-91298e88.js";
+    imports9 = ["_app/immutable/components/pages/plans/_page.svelte-91298e88.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/CalendlyJsandCSS-5b02d412.js", "_app/immutable/chunks/store-ddb6966c.js", "_app/immutable/chunks/index-0ab04b87.js", "_app/immutable/chunks/index-4caf361a.js"];
     stylesheets9 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
@@ -23944,7 +23944,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.jpeg", "star.png"]),
   mimeTypes: { ".gif": "image/gif", ".mp4": "video/mp4", ".webp": "image/webp", ".jpeg": "image/jpeg", ".png": "image/png" },
   _: {
-    entry: { "file": "_app/immutable/start-0ad72820.js", "imports": ["_app/immutable/start-0ad72820.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/singletons-e21d6244.js", "_app/immutable/chunks/index-0ab04b87.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-d693f1e3.js", "imports": ["_app/immutable/start-d693f1e3.js", "_app/immutable/chunks/index-63f99ff6.js", "_app/immutable/chunks/singletons-b0680dd5.js", "_app/immutable/chunks/index-0ab04b87.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
