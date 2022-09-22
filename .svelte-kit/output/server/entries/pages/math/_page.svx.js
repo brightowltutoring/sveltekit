@@ -38,8 +38,9 @@ const Kajax = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 
 
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-u6mfw3"><script data-svelte="svelte-u6mfw3">MathJax = {
-      startup: { typeset: false },
+${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-1yf4ic6"><script data-svelte="svelte-1yf4ic6">MathJax = {
+      // startup: { typeset: false },
+      startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
         packages: {
@@ -54,7 +55,7 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
         fontCache: "global",
       },
     };
-  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-u6mfw3"><\/script>`, ""}`;
+  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-1yf4ic6"><\/script>`, ""}`;
 });
 let numMax = 1e3;
 let numMDMax = 1;

@@ -8,11 +8,11 @@
       rootMargin: "0px",
     });
 
-    let allM = document.querySelectorAll("[m]");
+    let myMathJaxEntries = document.querySelectorAll("[m]");
 
     // lazy renders all math greater than 2000 pixels from top
     // immediately renders otherwise
-    for (let e of allM) {
+    for (let e of myMathJaxEntries) {
       if (e.offsetTop > 800) {
         observer.observe(e);
       } else {

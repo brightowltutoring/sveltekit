@@ -13,8 +13,7 @@ export const nodes = [
 	() => import('./nodes/9'),
 	() => import('./nodes/10'),
 	() => import('./nodes/11'),
-	() => import('./nodes/12'),
-	() => import('./nodes/13')
+	() => import('./nodes/12')
 ];
 
 export const dictionary = {
@@ -27,7 +26,6 @@ export const dictionary = {
 	"mathjax": [[1], [0], 8],
 	"physics": [[1], [0], 9],
 	"plans": [[1], [0], 10],
-	"reviews": [[1], [0], 11],
-	"samplequiz": [[1], [0], 12],
-	"schools": [[1], [0], 13]
+	"samplequiz": [[1], [0], 11],
+	"schools": [[1], [0], 12]
 };

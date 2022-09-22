@@ -2,9 +2,9 @@ import { c as create_ssr_component, a as subscribe, v as validate_component, e a
 import { i as isDarkMode } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${$$result.head += `<script data-svelte="svelte-1bql7jl">MathJax = {
+  return `${$$result.head += `<script data-svelte="svelte-1fd20gn">MathJax = {
       // startup: { typeset: false },
-      startup: { elements: ["[m]"] },
+      // startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
         packages: {
@@ -19,7 +19,7 @@ const MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) =>
         fontCache: "global",
       },
     };
-  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-1bql7jl"><\/script>`, ""}`;
+  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-1fd20gn"><\/script>`, ""}`;
 });
 let numMax = 1e3;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {

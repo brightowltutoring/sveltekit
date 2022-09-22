@@ -89,7 +89,7 @@ properties ... as  used in the querySelectors below
   <script>
     MathJax = {
       // startup: { typeset: false },
-      startup: { elements: ["[m]"] },
+      // startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
         packages: {

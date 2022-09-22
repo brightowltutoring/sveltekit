@@ -11,39 +11,35 @@ date: '2022-06-08'
     export let title = "Great physics tutor!!"
     export let name = "Thomas Finn"
     export let date = '2022-06-08'
+     import { isDarkMode } from "$lib/store.js"; 
+    
+    $: proseInvert = $isDarkMode ? "prose-invert" : ""
+
 </script>
 
-<div class="prose relative p-1">
+<article class="prose relative p-1 {proseInvert}">
+  <!-- need some  -->
 
+  <div class="absolute">
 
+    # {title}
 
-<div class="absolute p-4">
+    <div class="flex flex-row -translate-y-3 ">
+      {#each Array(5) as _,i }
+      <img src="star.png" alt="star" style="width:40px; height:auto"/>
+      {/each}
 
-# {title}
+    </div>
 
+    <div class="italic"> {date} </div>
 
+    <slot></slot>
 
-<div class="flex flex-row -translate-y-3 ">
-{#each Array(5) as _,i }
-<img src="star.png" alt="star" style="width:40px; height:auto"/>
-{/each}
-</div>
+    <b class="absolute right-0 bottom-0 -my-10 mx-5 ">{name}</b>
 
-<div class=""> {date} </div>
+  </div>
 
-<slot></slot>
-
-
-
-<!-- He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he’s just a great person to chat with! -->
-
-</div>
-
-
-<b class="absolute bottom-0 right-6 p-15">{name}</b>
-
-
-</div>
+</article>
 
 
 <style>
