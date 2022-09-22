@@ -31,7 +31,7 @@
 <article class="prose lg:prose-lg {proseInvert}">
 
 
-# This page lazy-rendered using Katex
+# This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)
 
 <input type="number" min="1" max={numMax} bind:value={num} />
 <input type="range" min="1" max={numMax} bind:value={num} />
