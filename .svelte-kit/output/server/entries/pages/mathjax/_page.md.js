@@ -2,7 +2,7 @@ import { c as create_ssr_component, a as subscribe, v as validate_component, e a
 import { i as isDarkMode } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${$$result.head += `<script data-svelte="svelte-16m89bi">MathJax = {
+  return `${$$result.head += `<script data-svelte="svelte-18ph2oy">MathJax = {
       startup: { typeset: false },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
@@ -18,7 +18,7 @@ const MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) =>
         fontCache: "global",
       },
     };
-  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-16m89bi"><\/script>`, ""}`;
+  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-18ph2oy"><\/script>`, ""}`;
 });
 let numMax = 1e3;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -36,7 +36,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   proseInvert = $isDarkMode ? "prose-invert" : "";
   $$unsubscribe_isDarkMode();
   return `${validate_component(MathJaxer, "MathLazyRenderer").$$render($$result, {}, {}, {})}
-<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Katex</h1>
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)</h1>
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 <h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>

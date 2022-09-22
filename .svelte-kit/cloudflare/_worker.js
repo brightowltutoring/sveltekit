@@ -1048,8 +1048,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-d09bc02a.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-d09bc02a.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-a106cc0f.js", "_app/immutable/chunks/navigation-048cfd39.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-abb70e57.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-abb70e57.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-2468af6d.js", "_app/immutable/chunks/navigation-66e56bcf.js"];
     stylesheets = ["_app/immutable/assets/+layout-1e039ce2.css"];
   }
 });
@@ -21321,8 +21321,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-24878ab2.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-24878ab2.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-048cfd39.js", "_app/immutable/chunks/singletons-a106cc0f.js"];
+    file7 = "_app/immutable/components/pages/login/_page.svelte-31f95d85.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-31f95d85.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-66e56bcf.js", "_app/immutable/chunks/singletons-2468af6d.js"];
     stylesheets7 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21496,7 +21496,7 @@ var init_page_md3 = __esm({
     init_store();
     init_index2();
     MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${$$result.head += `<script data-svelte="svelte-16m89bi">MathJax = {
+      return `${$$result.head += `<script data-svelte="svelte-18ph2oy">MathJax = {
       startup: { typeset: false },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
@@ -21512,7 +21512,7 @@ var init_page_md3 = __esm({
         fontCache: "global",
       },
     };
-  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-16m89bi"><\/script>`, ""}`;
+  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-18ph2oy"><\/script>`, ""}`;
     });
     numMax3 = 1e3;
     Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21530,7 +21530,7 @@ var init_page_md3 = __esm({
       proseInvert = $isDarkMode ? "prose-invert" : "";
       $$unsubscribe_isDarkMode();
       return `${validate_component(MathJaxer, "MathLazyRenderer").$$render($$result, {}, {}, {})}
-<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Katex</h1>
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)</h1>
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
 <h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
@@ -21558,8 +21558,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_md3(), page_md_exports3))).default;
-    file9 = "_app/immutable/components/pages/mathjax/_page.md-76de80cd.js";
-    imports9 = ["_app/immutable/components/pages/mathjax/_page.md-76de80cd.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js"];
+    file9 = "_app/immutable/components/pages/mathjax/_page.md-fc1d64c9.js";
+    imports9 = ["_app/immutable/components/pages/mathjax/_page.md-fc1d64c9.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js"];
     stylesheets9 = [];
   }
 });
@@ -24078,7 +24078,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.jpeg", "star.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp", ".jpeg": "image/jpeg" },
   _: {
-    entry: { "file": "_app/immutable/start-d58b076d.js", "imports": ["_app/immutable/start-d58b076d.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-a106cc0f.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-8269c586.js", "imports": ["_app/immutable/start-8269c586.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-2468af6d.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

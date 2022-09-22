@@ -4,7 +4,7 @@
   onMount(() => {
     let observer = new IntersectionObserver(callback, {
       root: null,
-      threshold: 1,
+      threshold: 0,
       rootMargin: "200px",
     });
 

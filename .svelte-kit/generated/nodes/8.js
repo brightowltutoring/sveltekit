@@ -1,1 +1,1 @@
-export { default as component } from "../../../src/routes/mathjax/+page.md";
+export { default as component } from "../../../src/routes/mathjax/+page.svelte";
