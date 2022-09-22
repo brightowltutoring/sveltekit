@@ -36,10 +36,19 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   proseInvert = $isDarkMode ? "prose-invert" : "";
   $$unsubscribe_isDarkMode();
   return `${validate_component(MathJaxer, "MathLazyRenderer").$$render($$result, {}, {}, {})}
-<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)</h1>
+
+
+
+
+
+
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"># This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)
+
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
-<h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
+
+## ${escape(num)} sections; ${escape(num * equations.length)} equations below 
+
 ${each(Array(num), (_, j) => {
     return `<div>${escape(j + 1)}</div>
 ${each(equations, (eqn) => {

@@ -10,7 +10,7 @@ where the myKatexEntries class element is used...
     let observer = new IntersectionObserver(callback, {
       root: null,
       threshold: 0,
-      rootMargin: "500px",
+      rootMargin: "200px",
       // rootMargin: "-200px", //shows the lag effect
     });
     for (let el of myKatexEntries) {

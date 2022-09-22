@@ -5,7 +5,7 @@
     let observer = new IntersectionObserver(callback, {
       root: null,
       threshold: 0,
-      rootMargin: "200px",
+      rootMargin: "0px",
     });
 
     let allM = document.querySelectorAll("[m]");
