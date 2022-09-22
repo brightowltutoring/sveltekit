@@ -1,6 +1,6 @@
-<KatexIntersectionObserver2 />
+<Katexer />
 <script>
-  import KatexIntersectionObserver2 from "$lib/KatexIntersectionObserver2.svelte";
+  import Katexer from "$lib/Katexer.svelte";
 </script>
 
 <div id="charges-1">

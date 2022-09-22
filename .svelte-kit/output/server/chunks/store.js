@@ -36,16 +36,16 @@ const routes = writable({
     title: "Plans",
     isCurrent: false
   },
-  math: {
-    name: "math",
-    href: "/math",
-    title: "math",
-    isCurrent: false
-  },
   schools: {
     name: "schools",
     href: "/schools",
     title: "Schools \u{1F4DA}",
+    isCurrent: false
+  },
+  math: {
+    name: "math",
+    href: "/math",
+    title: "math",
     isCurrent: false
   },
   jitsi: {

@@ -1,13 +1,15 @@
 {#key num }
-<KatexIntersectionObserver2 />
+<Katexer />
 {/key}
 
 <script>
     import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
-    import KatexIntersectionObserver2 from "$lib/KatexIntersectionObserver2.svelte"
+    // import Katexer from "$lib/MathJaxer.svelte"
+    // import Katexer from "$lib/Katexer.svelte"
+    import Katexer from "$lib/Kajax.svelte"
     import { isDarkMode } from "$lib/store.js";
   
-    let numMax = 30
+    let numMax = 500
     let numMDMax = 1
     $: num = numMax
     $: numMD = numMDMax
@@ -26,35 +28,36 @@
     $: proseInvert = $isDarkMode ? "prose-invert" : ""
 </script>
 
+
+
+<!-- $$ 
+
+\cancel{\int_0^{\infty} f(x) dx}
+
+$$
+
+<k d k={"\\cancel{ \\int_0\^\{\\infty\}f\(x\)dx }"}/> -->
+
 <!-- <article > -->
 <article class="prose lg:prose-lg {proseInvert}">
 
   <SixMathEqnAnim />
 
-  <h1>Garlic bread with cheese: What the science tells us</h1>
-  <p>
-    For years parents have espoused the health benefits of eating garlic bread with cheese to their
-    children, with the food earning such an iconic status in our culture that kids will often dress
-    up as warm, cheesy loaf for Halloween.
-  </p>
-  <p>
-    But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
-    springing up around the country.
-  </p>
-  <!-- ... -->
-
-
-<p d m={"\\underbrace{u\'-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}"}/>
+  <!-- <h1>This page has math is processed by both Katex (green) and Mathjax (blue)</h1> -->
+  <!-- <h1>Garlic bread with cheese: What the science tells us</h1> -->
+ 
 
 
 
+
+<!-- $$e^{3/2} $$ -->
 
 $$
 \underbrace{u'-P(x)u^2-Q(x)u-R(x)}_{\text{=0, since~$u$ is a particular solution.}}
 $$
 
 
-<span class="text-red-700 text-7xl flex justify-center">
+<span class=" text-7xl flex justify-center">
 
 {x}$^2$={x**2}
 
@@ -65,15 +68,11 @@ $$
 </div>
 
 
-# The content of this page are written in a markdown file with svelte components (tailwind too), possible due to MDsveX! 
+# The content of this page is written in a markdown file with svelte components (tailwind too), possible due to MDsveX! 
+## The **math** on this page is written in markdown using Katex (black), Katex (green), and Mathjax (blue), the latter two of which are lazy rendered with the Intersection Observer API!
 * the square-slider above using svelte binding of a JS variable ... again this is possible due to MDsveX
-* The **math** on this page is written in both markdown (i.e. Latex) and with Katex.
-  * for heavy inline use, markdown is preferable
-  * for css/svelte transitions, only katex svelte components are viable
-    * normally markdown is more performant, however with a recent implementation of the Intersection Observer API, I have made the katex math far more performant !!
-      * 1000 lines vs 4000-8000+ lines of math loaded instantly on page load
-      * when changing routes katex on 4000+ lines is easily transitioned ... not the same for markdown
- 
+  * the newest version of mathjax is about as performant as katex; mathjax has a wider adoption of latex functionality
+  * the math markdown uses katex as a plugin and is not lazy-rendered .... it is however easier to write
   
 
 <!-- This markdown math is centered. Oddly the addition of this single markdown slow the katex rendering.
@@ -98,7 +97,7 @@ $$
 <!-- This also centers with katex + css. 
 The katex components come in use with more detailed styling AND/OR lots of math to render to a single page ... in which cased I have implemented Intersection Observer logic -->
 
-# {num + equations.length} lines of katex below... lazy rendered with intersection observer!!
+
 * pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)
 
 <input type="number" min="1" max={numMax} bind:value={num} />
@@ -106,17 +105,17 @@ The katex components come in use with more detailed styling AND/OR lots of math 
 
 {#each Array(num) as _,j }
     {j+1 }
-    <div class="p-5 text-red-400">
-        <p d m={"\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}"}/>
+        <p class="p-1 text-indigo-700" d m={"\\cancelto{0}{\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}}"}/>
+        <p class="p-1 text-green-700" d k={"\\int\\limits_\{-\\infty\}\^\{\\infty\}\ e\^\{-x\^\{2\}\}\ \\\,\ dx\ =\ \\sqrt\{\\pi\}"}/>
+    {#each equations as eqn,k }
+    <div>
+        <p class="p-1 text-indigo-700" d k={eqn}/>
+        <p class="p-1 text-green-700" d m={eqn}/>
     </div>
+    {/each}
 {/each}
 
-{#each equations as eqn,k }
-{k+1 + num}
-<div class="p-1 text-indigo-700">
-    <p d m={eqn}/>
-</div>
-{/each}
+
 
 
 </article>

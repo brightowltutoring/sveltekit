@@ -1,0 +1,103 @@
+<!-- This file lazy renders both mathjax and katex math based on either one of two custom HTML
+properties ... as  used in the querySelectors below
+-->
+<script>
+  import katex from "katex";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    // mathjax observer
+    let mathjaxObserver = new IntersectionObserver(callback1, {
+      root: null,
+      threshold: 0,
+      rootMargin: "0px",
+    });
+
+    let myMathjaxEntries = document.querySelectorAll("[m]");
+    for (let el of myMathjaxEntries) {
+      mathjaxObserver.observe(el);
+    }
+
+    function callback1(entries, observer) {
+      for (let e of entries) {
+        if (e.isIntersecting) {
+          // console.log(e.target.offsetTop);
+          let target = e.target;
+          let d = target.hasAttribute("d");
+          let m = target.getAttribute("m");
+          target.innerHTML = d ? `$$ ${m} $$` : `$ ${m} $`;
+          MathJax.typeset([target]);
+
+          observer.unobserve(target);
+        }
+      }
+    }
+
+    // katex observer
+    let myKatexEntries = document.querySelectorAll("[k]");
+
+    let katexObserver = new IntersectionObserver(callback2, {
+      root: null,
+      threshold: 0,
+      rootMargin: "500px",
+      // rootMargin: "-200px", //shows the lag effect
+    });
+    for (let el of myKatexEntries) {
+      katexObserver.observe(el);
+    }
+
+    // definition of callback; entries is a placeholder for myKatexEntries element array
+    function callback2(entries, observer) {
+      for (let entry of entries) {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        // code below done when IS intersecting
+
+        let target = entry.target;
+        // console.log(target);
+        let k = target.getAttribute("k");
+        let d = target.hasAttribute("d");
+        katex.render(k, target, { displayMode: d });
+
+        observer.unobserve(entry.target);
+      }
+    }
+  });
+</script>
+
+<svelte:head>
+  <!-- katex part -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"
+    integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"
+    crossorigin="anonymous"
+  />
+
+  <!-- mathjax part -->
+  <script>
+    MathJax = {
+      startup: { typeset: false },
+      loader: { load: ["[tex]/physics", "[tex]/cancel"] },
+      tex: {
+        packages: {
+          "[+]": ["physics", "cancel"],
+        },
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"],
+        ],
+      },
+      svg: {
+        fontCache: "global",
+      },
+    };
+  </script>
+  <script
+    type="text/javascript"
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</svelte:head>

@@ -111,18 +111,18 @@ export const routes = writable({
     title: "Plans",
     isCurrent: false,
   }, 
-  math: {
-    name:'math',
-    href: "/math",
-    title: "math",
-    isCurrent: false,
-  }, 
   schools: {
     name:'schools',
     href: "/schools",
     title: "Schools 📚",
     isCurrent: false,
   },
+  math: {
+    name:'math',
+    href: "/math",
+    title: "math",
+    isCurrent: false,
+  }, 
   jitsi: {
     name:'jitsi',
     href: "/jitsi",
