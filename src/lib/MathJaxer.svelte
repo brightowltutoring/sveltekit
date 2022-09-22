@@ -9,23 +9,23 @@
     });
 
     let allM = document.querySelectorAll("[m]");
-    for (let el of allM) {
-      observer.observe(el);
+
+    // lazy renders all math greater than 2000 pixels from top
+    // immediately renders otherwise
+    for (let e of allM) {
+      if (e.offsetTop > 800) {
+        observer.observe(e);
+      } else {
+        let d = e.hasAttribute("d");
+        let m = e.getAttribute("m");
+        e.style.color = "yellow";
+        e.innerHTML = d ? `$$ ${m} $$` : `$ ${m} $`;
+      }
     }
 
     function callback(entries, observer) {
       for (let e of entries) {
-        // if (e.target.offsetTop < 800) {
-        //   // console.log(e.target.offsetTop);
-        //   let target = e.target;
-        //   let d = target.hasAttribute("d");
-        //   let m = target.getAttribute("m");
-        //   target.innerHTML = d ? `$$ ${m} $$` : `$ ${m} $`;
-        //   MathJax.typeset([target]);
-        //   observer.unobserve(target);
-        // }
         if (e.isIntersecting) {
-          // console.log(e.target.offsetTop);
           let target = e.target;
           let d = target.hasAttribute("d");
           let m = target.getAttribute("m");
@@ -43,7 +43,7 @@
   <script>
     MathJax = {
       // startup: { typeset: false },
-      startup: { elements: ["[m]"] },
+      // startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
         packages: {

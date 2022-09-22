@@ -662,6 +662,18 @@ var init_store = __esm({
         title: "math",
         isCurrent: false
       },
+      mathjax: {
+        name: "mathjax",
+        href: "/mathjax",
+        title: "mathjax",
+        isCurrent: false
+      },
+      katex: {
+        name: "katex",
+        href: "/katex",
+        title: "katex",
+        isCurrent: false
+      },
       jitsi: {
         name: "jitsi",
         href: "/jitsi",
@@ -915,7 +927,7 @@ var init_layout_svelte = __esm({
 
   
   <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
-        ${each(Object.keys($routes).splice(0, 3), (KEY) => {
+        ${each(Object.keys($routes).splice(0, 7), (KEY) => {
           return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
             $$result,
             {
@@ -1048,9 +1060,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-5ba3e332.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-5ba3e332.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-f6bd3080.js", "_app/immutable/chunks/navigation-27da3562.js"];
-    stylesheets = ["_app/immutable/assets/+layout-1e039ce2.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-a7efaad6.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-a7efaad6.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-3a7db21d.js", "_app/immutable/chunks/navigation-7a92f3ca.js"];
+    stylesheets = ["_app/immutable/assets/+layout-4c2443bd.css"];
   }
 });
 
@@ -14786,8 +14798,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-8c3f30c2.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-8c3f30c2.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-b6de9c86.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-b6de9c86.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = ["_app/immutable/assets/+page-3e320a56.css"];
   }
 });
@@ -15014,14 +15026,14 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
   }
 });
 
-// .svelte-kit/output/server/entries/pages/katex/_page.svelte.js
-var page_svelte_exports4 = {};
-__export(page_svelte_exports4, {
+// .svelte-kit/output/server/entries/pages/katex/_page.svx.js
+var page_svx_exports = {};
+__export(page_svx_exports, {
   default: () => Page4
 });
 var numMax, Page4;
-var init_page_svelte4 = __esm({
-  ".svelte-kit/output/server/entries/pages/katex/_page.svelte.js"() {
+var init_page_svx = __esm({
+  ".svelte-kit/output/server/entries/pages/katex/_page.svx.js"() {
     init_chunks();
     init_Katexer();
     init_store();
@@ -15043,22 +15055,13 @@ var init_page_svelte4 = __esm({
       proseInvert = $isDarkMode ? "prose-invert" : "";
       $$unsubscribe_isDarkMode();
       return `${validate_component(Katexer, "MathLazyRenderer").$$render($$result, {}, {}, {})}
-
-
-
-
-
-
-<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"># This page lazy-rendered using Katex
-
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Katex</h1>
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
-
-## ${escape(num)} sections; ${escape(num * equations.length)} equations below 
-
+<h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
 ${each(Array(num), (_2, j2) => {
         return `<div>${escape(j2 + 1)}</div>
-${each(equations, (eqn) => {
+    ${each(equations, (eqn) => {
           return `<p class="${"p-1 text-indigo-700"}" d${add_attribute("k", eqn, 0)}></p>`;
         })}`;
       })}</article>`;
@@ -15079,9 +15082,9 @@ var index6, component6, file6, imports6, stylesheets6;
 var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
-    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/katex/_page.svelte-d3cda4c7.js";
-    imports6 = ["_app/immutable/components/pages/katex/_page.svelte-d3cda4c7.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Katexer-1c9d02a8.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js"];
+    component6 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
+    file6 = "_app/immutable/components/pages/katex/_page.svx-f44c5ba0.js";
+    imports6 = ["_app/immutable/components/pages/katex/_page.svx-f44c5ba0.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Katexer-1c9d02a8.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js"];
     stylesheets6 = [];
   }
 });
@@ -21246,12 +21249,12 @@ var init_index_esm3 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/login/_page.svelte.js
-var page_svelte_exports5 = {};
-__export(page_svelte_exports5, {
+var page_svelte_exports4 = {};
+__export(page_svelte_exports4, {
   default: () => Page5
 });
 var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css3, Page5;
-var init_page_svelte5 = __esm({
+var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
     init_store();
@@ -21329,21 +21332,21 @@ var index7, component7, file7, imports7, stylesheets7;
 var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
-    component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-dd86eb33.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-dd86eb33.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-27da3562.js", "_app/immutable/chunks/singletons-f6bd3080.js"];
+    component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
+    file7 = "_app/immutable/components/pages/login/_page.svelte-316209db.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-316209db.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-7a92f3ca.js", "_app/immutable/chunks/singletons-3a7db21d.js"];
     stylesheets7 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/math/_page.md.js
-var page_md_exports = {};
-__export(page_md_exports, {
+// .svelte-kit/output/server/entries/pages/math/_page.svx.js
+var page_svx_exports2 = {};
+__export(page_svx_exports2, {
   default: () => Page6
 });
 var Katex, SixMathEqnAnim, Kajax, numMax2, numMDMax, Page6;
-var init_page_md = __esm({
-  ".svelte-kit/output/server/entries/pages/math/_page.md.js"() {
+var init_page_svx2 = __esm({
+  ".svelte-kit/output/server/entries/pages/math/_page.svx.js"() {
     init_chunks();
     init_katex();
     init_store();
@@ -21402,7 +21405,7 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
     };
   <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-u6mfw3"><\/script>`, ""}`;
     });
-    numMax2 = 100;
+    numMax2 = 1e3;
     numMDMax = 1;
     Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let num;
@@ -21422,10 +21425,11 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
       numMD = numMDMax;
       proseInvert = $isDarkMode ? "prose-invert" : "";
       $$unsubscribe_isDarkMode();
-      return `${validate_component(Kajax, "Katexer").$$render($$result, {}, {}, {})}
+      return `${validate_component(Kajax, "Kajax").$$render($$result, {}, {}, {})}
 
 
-<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}">${validate_component(SixMathEqnAnim, "SixMathEqnAnim").$$render($$result, {}, {}, {})}
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><p>ayo</p>
+${validate_component(SixMathEqnAnim, "SixMathEqnAnim").$$render($$result, {}, {}, {})}
   
   
 
@@ -21486,27 +21490,28 @@ var index8, component8, file8, imports8, stylesheets8;
 var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
-    component8 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file8 = "_app/immutable/components/pages/math/_page.md-4b01a8b3.js";
-    imports8 = ["_app/immutable/components/pages/math/_page.md-4b01a8b3.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
+    component8 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
+    file8 = "_app/immutable/components/pages/math/_page.svx-a0ed47f0.js";
+    imports8 = ["_app/immutable/components/pages/math/_page.svx-a0ed47f0.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
     stylesheets8 = [];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/mathjax/_page.svelte.js
-var page_svelte_exports6 = {};
-__export(page_svelte_exports6, {
+// .svelte-kit/output/server/entries/pages/mathjax/_page.svx.js
+var page_svx_exports3 = {};
+__export(page_svx_exports3, {
   default: () => Page7
 });
 var MathJaxer, numMax3, Page7;
-var init_page_svelte6 = __esm({
-  ".svelte-kit/output/server/entries/pages/mathjax/_page.svelte.js"() {
+var init_page_svx3 = __esm({
+  ".svelte-kit/output/server/entries/pages/mathjax/_page.svx.js"() {
     init_chunks();
     init_store();
     init_index2();
     MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${$$result.head += `<script data-svelte="svelte-18ph2oy">MathJax = {
-      startup: { typeset: false },
+      return `${$$result.head += `<script data-svelte="svelte-1bql7jl">MathJax = {
+      // startup: { typeset: false },
+      startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
         packages: {
@@ -21521,7 +21526,7 @@ var init_page_svelte6 = __esm({
         fontCache: "global",
       },
     };
-  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-18ph2oy"><\/script>`, ""}`;
+  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-1bql7jl"><\/script>`, ""}`;
     });
     numMax3 = 1e3;
     Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21539,22 +21544,13 @@ var init_page_svelte6 = __esm({
       proseInvert = $isDarkMode ? "prose-invert" : "";
       $$unsubscribe_isDarkMode();
       return `${validate_component(MathJaxer, "MathLazyRenderer").$$render($$result, {}, {}, {})}
-
-
-
-
-
-
-<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"># This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)
-
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)</h1>
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
-
-## ${escape(num)} sections; ${escape(num * equations.length)} equations below 
-
+<h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
 ${each(Array(num), (_2, j2) => {
         return `<div>${escape(j2 + 1)}</div>
-${each(equations, (eqn) => {
+    ${each(equations, (eqn) => {
           return `<p class="${"p-1 text-red-400"}" d${add_attribute("m", eqn, 0)}></p>`;
         })}`;
       })}</article>`;
@@ -21575,20 +21571,20 @@ var index9, component9, file9, imports9, stylesheets9;
 var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
-    component9 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file9 = "_app/immutable/components/pages/mathjax/_page.svelte-684f2f5f.js";
-    imports9 = ["_app/immutable/components/pages/mathjax/_page.svelte-684f2f5f.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js"];
+    component9 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
+    file9 = "_app/immutable/components/pages/mathjax/_page.svx-bb38c08e.js";
+    imports9 = ["_app/immutable/components/pages/mathjax/_page.svx-bb38c08e.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js"];
     stylesheets9 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/physics/_page.svelte.js
-var page_svelte_exports7 = {};
-__export(page_svelte_exports7, {
+var page_svelte_exports5 = {};
+__export(page_svelte_exports5, {
   default: () => Page8
 });
 var css4, E_and_m, Page8;
-var init_page_svelte7 = __esm({
+var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
     init_Katexer();
@@ -21692,9 +21688,9 @@ var index10, component10, file10, imports10, stylesheets10;
 var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
-    component10 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file10 = "_app/immutable/components/pages/physics/_page.svelte-ca76015f.js";
-    imports10 = ["_app/immutable/components/pages/physics/_page.svelte-ca76015f.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Katexer-1c9d02a8.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js"];
+    component10 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
+    file10 = "_app/immutable/components/pages/physics/_page.svelte-abd58d64.js";
+    imports10 = ["_app/immutable/components/pages/physics/_page.svelte-abd58d64.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Katexer-1c9d02a8.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js"];
     stylesheets10 = ["_app/immutable/assets/+page-fcf51fa8.css"];
   }
 });
@@ -21711,12 +21707,12 @@ var init_CalendlyJsandCSS = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/plans/_page.svelte.js
-var page_svelte_exports8 = {};
-__export(page_svelte_exports8, {
+var page_svelte_exports6 = {};
+__export(page_svelte_exports6, {
   default: () => Page9
 });
 var css$1, PlansCard, css5, sampleHref, Page9;
-var init_page_svelte8 = __esm({
+var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
     init_CalendlyJsandCSS();
@@ -21831,21 +21827,21 @@ var index11, component11, file11, imports11, stylesheets11;
 var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
-    component11 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file11 = "_app/immutable/components/pages/plans/_page.svelte-c0f00226.js";
-    imports11 = ["_app/immutable/components/pages/plans/_page.svelte-c0f00226.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js", "_app/immutable/chunks/store-ee8b7427.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
+    component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
+    file11 = "_app/immutable/components/pages/plans/_page.svelte-930ac23a.js";
+    imports11 = ["_app/immutable/components/pages/plans/_page.svelte-930ac23a.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
     stylesheets11 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/reviews/_page.svx.js
-var page_svx_exports = {};
-__export(page_svx_exports, {
+var page_svx_exports4 = {};
+__export(page_svx_exports4, {
   default: () => Page10,
   metadata: () => metadata
 });
 var css6, metadata, title, name4, date, Page10;
-var init_page_svx = __esm({
+var init_page_svx4 = __esm({
   ".svelte-kit/output/server/entries/pages/reviews/_page.svx.js"() {
     init_chunks();
     css6 = {
@@ -21886,7 +21882,7 @@ var index12, component12, file12, imports12, stylesheets12;
 var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
-    component12 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
+    component12 = async () => (await Promise.resolve().then(() => (init_page_svx4(), page_svx_exports4))).default;
     file12 = "_app/immutable/components/pages/reviews/_page.svx-fd9c3e54.js";
     imports12 = ["_app/immutable/components/pages/reviews/_page.svx-fd9c3e54.js", "_app/immutable/chunks/index-e087fcf9.js"];
     stylesheets12 = ["_app/immutable/assets/+page-821bf61a.css"];
@@ -21894,12 +21890,12 @@ var init__12 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
-var page_md_exports2 = {};
-__export(page_md_exports2, {
+var page_md_exports = {};
+__export(page_md_exports, {
   default: () => Page11
 });
 var Page11;
-var init_page_md2 = __esm({
+var init_page_md = __esm({
   ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
     init_chunks();
     Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -21925,7 +21921,7 @@ var index13, component13, file13, imports13, stylesheets13;
 var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
-    component13 = async () => (await Promise.resolve().then(() => (init_page_md2(), page_md_exports2))).default;
+    component13 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
     file13 = "_app/immutable/components/pages/samplequiz/_page.md-c8901656.js";
     imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-c8901656.js", "_app/immutable/chunks/index-e087fcf9.js"];
     stylesheets13 = [];
@@ -21933,12 +21929,12 @@ var init__13 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
-var page_svelte_exports9 = {};
-__export(page_svelte_exports9, {
+var page_svelte_exports7 = {};
+__export(page_svelte_exports7, {
   default: () => Page12
 });
 var css7, Page12;
-var init_page_svelte9 = __esm({
+var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
     init_CalendlyJsandCSS();
@@ -21973,7 +21969,7 @@ var index14, component14, file14, imports14, stylesheets14;
 var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
-    component14 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
+    component14 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
     file14 = "_app/immutable/components/pages/schools/_page.svelte-aefebccf.js";
     imports14 = ["_app/immutable/components/pages/schools/_page.svelte-aefebccf.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js"];
     stylesheets14 = ["_app/immutable/assets/+page-f8a180cf.css"];
@@ -24096,7 +24092,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.jpeg", "star.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp", ".jpeg": "image/jpeg" },
   _: {
-    entry: { "file": "_app/immutable/start-d121c2d8.js", "imports": ["_app/immutable/start-d121c2d8.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-f6bd3080.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-16a79002.js", "imports": ["_app/immutable/start-16a79002.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-3a7db21d.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

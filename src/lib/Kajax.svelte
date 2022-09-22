@@ -14,8 +14,18 @@ properties ... as  used in the querySelectors below
     });
 
     let myMathjaxEntries = document.querySelectorAll("[m]");
-    for (let el of myMathjaxEntries) {
-      mathjaxObserver.observe(el);
+
+    // lazy renders all math greater than 800 pixels from top
+    // immediately renders otherwise
+    for (let e of myMathjaxEntries) {
+      if (e.offsetTop > 800) {
+        mathjaxObserver.observe(e);
+      } else {
+        let d = e.hasAttribute("d");
+        let m = e.getAttribute("m");
+        e.style.color = "orange";
+        e.innerHTML = d ? `$$ ${m} $$` : `$ ${m} $`;
+      }
     }
 
     function callback1(entries, observer) {
@@ -78,7 +88,8 @@ properties ... as  used in the querySelectors below
   <!-- mathjax part -->
   <script>
     MathJax = {
-      startup: { typeset: false },
+      // startup: { typeset: false },
+      startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
         packages: {
