@@ -1,15 +1,15 @@
 {#key num }
-<Katexer />
+<Kajax />
 {/key}
 
 <script>
     import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
     // import Katexer from "$lib/MathJaxer.svelte"
     // import Katexer from "$lib/Katexer.svelte"
-    import Katexer from "$lib/Kajax.svelte"
+    import Kajax from "$lib/Kajax.svelte"
     import { isDarkMode } from "$lib/store.js";
   
-    let numMax = 100
+    let numMax = 1000
     let numMDMax = 1
     $: num = numMax
     $: numMD = numMDMax
@@ -41,7 +41,8 @@ $$
 <!-- <article > -->
 <article class="prose lg:prose-lg {proseInvert}">
 
-  <SixMathEqnAnim />
+    ayo
+<SixMathEqnAnim />
 
   <!-- <h1>This page has math is processed by both Katex (green) and Mathjax (blue)</h1> -->
   <!-- <h1>Garlic bread with cheese: What the science tells us</h1> -->

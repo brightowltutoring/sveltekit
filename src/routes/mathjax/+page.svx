@@ -39,12 +39,10 @@
 ## {num} sections; { (num*equations.length)} equations below 
 
 {#each Array(num) as _,j } 
-<div>
-{j+1}
-</div>
-{#each equations as eqn}
-<p class="p-1 text-red-400" d m={eqn}/>
-{/each}
+    <div>{j+1}</div>
+    {#each equations as eqn}
+    <p class="p-1 text-red-400" d m={eqn}/>
+    {/each}
 {/each}
 
 

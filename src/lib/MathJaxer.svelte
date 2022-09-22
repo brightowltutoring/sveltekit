@@ -42,7 +42,8 @@
 <svelte:head>
   <script>
     MathJax = {
-      startup: { typeset: false },
+      // startup: { typeset: false },
+      startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
         packages: {
