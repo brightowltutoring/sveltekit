@@ -9,7 +9,7 @@
     import Katexer from "$lib/Kajax.svelte"
     import { isDarkMode } from "$lib/store.js";
   
-    let numMax = 500
+    let numMax = 100
     let numMDMax = 1
     $: num = numMax
     $: numMD = numMDMax
