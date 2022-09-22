@@ -25,9 +25,9 @@ date: '2022-06-08'
     # {title}
 
     <div class="flex flex-row -translate-y-3 ">
-      {#each Array(5) as _,i }
-      <img src="star.png" alt="star" style="width:40px; height:auto"/>
-      {/each}
+  {#each Array(5) as _,i }
+  <img src="star.webp" alt="star" style="width:40px; height:auto"/>
+  {/each}
 
     </div>
 

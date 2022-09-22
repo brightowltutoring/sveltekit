@@ -12,8 +12,8 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __export = (target, all) => {
-  for (var name5 in all)
-    __defProp(target, name5, { get: all[name5], enumerable: true });
+  for (var name4 in all)
+    __defProp(target, name4, { get: all[name4], enumerable: true });
 };
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component15) {
-  current_component = component15;
+function set_current_component(component14) {
+  current_component = component14;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component15, name5) {
-  if (!component15 || !component15.$$render) {
-    if (name5 === "svelte:component")
-      name5 += " this={...}";
-    throw new Error(`<${name5}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
+function validate_component(component14, name4) {
+  if (!component14 || !component14.$$render) {
+    if (name4 === "svelte:component")
+      name4 += " this={...}";
+    throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component15;
+  return component14;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -180,11 +180,11 @@ function create_ssr_component(fn) {
     $$render
   };
 }
-function add_attribute(name5, value, boolean) {
+function add_attribute(name4, value, boolean) {
   if (value == null || boolean && !value)
     return "";
   const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
-  return ` ${name5}${assignment}`;
+  return ` ${name4}${assignment}`;
 }
 var is_client, now, raf, tasks, current_component, ATTR_REGEX, CONTENT_REGEX, missing_component, on_destroy;
 var init_chunks = __esm({
@@ -310,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index15 = 0;
-      while (index15 < str.length) {
-        var eqIdx = str.indexOf("=", index15);
+      var index14 = 0;
+      while (index14 < str.length) {
+        var eqIdx = str.indexOf("=", index14);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index15);
+        var endIdx = str.indexOf(";", index14);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index15 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index14 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index15, eqIdx).trim();
+        var key2 = str.slice(index14, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,24 +331,24 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index15 = endIdx + 1;
+        index14 = endIdx + 1;
       }
       return obj;
     }
-    function serialize2(name5, val, options) {
+    function serialize2(name4, val, options) {
       var opt = options || {};
       var enc = opt.encode || encode2;
       if (typeof enc !== "function") {
         throw new TypeError("option encode is invalid");
       }
-      if (!fieldContentRegExp.test(name5)) {
+      if (!fieldContentRegExp.test(name4)) {
         throw new TypeError("argument name is invalid");
       }
       var value = enc(val);
       if (value && !fieldContentRegExp.test(value)) {
         throw new TypeError("argument val is invalid");
       }
-      var str = name5 + "=" + value;
+      var str = name4 + "=" + value;
       if (null != opt.maxAge) {
         var maxAge = opt.maxAge - 0;
         if (isNaN(maxAge) || !isFinite(maxAge)) {
@@ -453,7 +453,7 @@ var require_set_cookie = __commonJS({
       var parts = setCookieValue.split(";").filter(isNonEmptyString);
       var nameValuePairStr = parts.shift();
       var parsed = parseNameValuePair(nameValuePairStr);
-      var name5 = parsed.name;
+      var name4 = parsed.name;
       var value = parsed.value;
       options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
       try {
@@ -465,7 +465,7 @@ var require_set_cookie = __commonJS({
         );
       }
       var cookie2 = {
-        name: name5,
+        name: name4,
         value
       };
       parts.forEach(function(part) {
@@ -489,16 +489,16 @@ var require_set_cookie = __commonJS({
       return cookie2;
     }
     function parseNameValuePair(nameValuePairStr) {
-      var name5 = "";
+      var name4 = "";
       var value = "";
       var nameValueArr = nameValuePairStr.split("=");
       if (nameValueArr.length > 1) {
-        name5 = nameValueArr.shift();
+        name4 = nameValueArr.shift();
         value = nameValueArr.join("=");
       } else {
         value = nameValuePairStr;
       }
-      return { name: name5, value };
+      return { name: name4, value };
     }
     function parse2(input, options) {
       options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
@@ -927,7 +927,7 @@ var init_layout_svelte = __esm({
 
   
   <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
-        ${each(Object.keys($routes).splice(0, 7), (KEY) => {
+        ${each(Object.keys($routes).splice(0, 3), (KEY) => {
           return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
             $$result,
             {
@@ -1060,9 +1060,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-92c4a697.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-92c4a697.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-7f297215.js", "_app/immutable/chunks/navigation-6913d74e.js"];
-    stylesheets = ["_app/immutable/assets/+layout-4c2443bd.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-66816c28.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-66816c28.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-6c53e8fb.js", "_app/immutable/chunks/navigation-29365b6b.js"];
+    stylesheets = ["_app/immutable/assets/+layout-7ef8a912.css"];
   }
 });
 
@@ -1219,14 +1219,14 @@ function assertSpan(group) {
     throw new Error("Expected span<HtmlDomNode> but got " + String(group) + ".");
   }
 }
-function defineSymbol(mode, font, group, replace, name5, acceptUnicodeChar) {
-  symbols[mode][name5] = {
+function defineSymbol(mode, font, group, replace, name4, acceptUnicodeChar) {
+  symbols[mode][name4] = {
     font,
     group,
     replace
   };
   if (acceptUnicodeChar && replace) {
-    symbols[mode][replace] = symbols[mode][name5];
+    symbols[mode][replace] = symbols[mode][name4];
   }
 }
 function defineFunction(_ref) {
@@ -1619,8 +1619,8 @@ function defineEnvironment(_ref) {
     _mathmlGroupBuilders[type] = mathmlBuilder3;
   }
 }
-function defineMacro(name5, body) {
-  _macros[name5] = body;
+function defineMacro(name4, body) {
+  _macros[name4] = body;
 }
 function getHLines(parser) {
   var hlineInfo = [];
@@ -1634,9 +1634,9 @@ function getHLines(parser) {
   }
   return hlineInfo;
 }
-function getAutoTag(name5) {
-  if (name5.indexOf("ed") === -1) {
-    return name5.indexOf("*") === -1;
+function getAutoTag(name4) {
+  if (name4.indexOf("ed") === -1) {
+    return name4.indexOf("*") === -1;
   }
 }
 function parseArray(parser, _ref, style) {
@@ -2204,8 +2204,8 @@ var init_katex = __esm({
       }
       return path2;
     };
-    innerPath = function innerPath2(name5, height) {
-      switch (name5) {
+    innerPath = function innerPath2(name4, height) {
+      switch (name4) {
         case "\u239C":
           return "M291 0 H417 V" + height + " H291z M291 0 H417 V" + height + " H291z";
         case "\u2223":
@@ -6524,8 +6524,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index15) => (n2) => {
-          nodes.splice(index15 + 1, 0, n2);
+        prev.insertAfter = ((index14) => (n2) => {
+          nodes.splice(index14 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -6594,11 +6594,11 @@ var init_katex = __esm({
         this.children = children || [];
         this.classes = classes || [];
       }
-      setAttribute(name5, value) {
-        this.attributes[name5] = value;
+      setAttribute(name4, value) {
+        this.attributes[name4] = value;
       }
-      getAttribute(name5) {
-        return this.attributes[name5];
+      getAttribute(name4) {
+        return this.attributes[name4];
       }
       toNode() {
         var node = document.createElementNS("http://www.w3.org/1998/Math/MathML", this.type);
@@ -7826,11 +7826,11 @@ var init_katex = __esm({
       "\\futurelet": "\\\\globalfuture"
     };
     checkControlSequence = (tok) => {
-      var name5 = tok.text;
-      if (/^(?:[\\{}$&#^_]|EOF)$/.test(name5)) {
+      var name4 = tok.text;
+      if (/^(?:[\\{}$&#^_]|EOF)$/.test(name4)) {
         throw new ParseError("Expected a control sequence", tok);
       }
-      return name5;
+      return name4;
     };
     getRHS = (parser) => {
       var tok = parser.gullet.popToken();
@@ -7842,7 +7842,7 @@ var init_katex = __esm({
       }
       return tok;
     };
-    letCommand = (parser, name5, tok, global2) => {
+    letCommand = (parser, name4, tok, global2) => {
       var macro = parser.gullet.macros.get(tok.text);
       if (macro == null) {
         tok.noexpand = true;
@@ -7852,7 +7852,7 @@ var init_katex = __esm({
           unexpandable: !parser.gullet.isExpandable(tok.text)
         };
       }
-      parser.gullet.macros.set(name5, macro, global2);
+      parser.gullet.macros.set(name4, macro, global2);
     };
     defineFunction({
       type: "internal",
@@ -7895,8 +7895,8 @@ var init_katex = __esm({
           funcName
         } = _ref2;
         var tok = parser.gullet.popToken();
-        var name5 = tok.text;
-        if (/^(?:[\\{}$&#^_]|EOF)$/.test(name5)) {
+        var name4 = tok.text;
+        if (/^(?:[\\{}$&#^_]|EOF)$/.test(name4)) {
           throw new ParseError("Expected a control sequence", tok);
         }
         var numArgs = 0;
@@ -7935,7 +7935,7 @@ var init_katex = __esm({
           tokens = parser.gullet.expandTokens(tokens);
           tokens.reverse();
         }
-        parser.gullet.macros.set(name5, {
+        parser.gullet.macros.set(name4, {
           tokens,
           numArgs,
           delimiters: delimiters2
@@ -7962,10 +7962,10 @@ var init_katex = __esm({
           parser,
           funcName
         } = _ref3;
-        var name5 = checkControlSequence(parser.gullet.popToken());
+        var name4 = checkControlSequence(parser.gullet.popToken());
         parser.gullet.consumeSpaces();
         var tok = getRHS(parser);
-        letCommand(parser, name5, tok, funcName === "\\\\globallet");
+        letCommand(parser, name4, tok, funcName === "\\\\globallet");
         return {
           type: "internal",
           mode: parser.mode
@@ -7988,10 +7988,10 @@ var init_katex = __esm({
           parser,
           funcName
         } = _ref4;
-        var name5 = checkControlSequence(parser.gullet.popToken());
+        var name4 = checkControlSequence(parser.gullet.popToken());
         var middle = parser.gullet.popToken();
         var tok = parser.gullet.popToken();
-        letCommand(parser, name5, tok, funcName === "\\\\globalfuture");
+        letCommand(parser, name4, tok, funcName === "\\\\globalfuture");
         parser.gullet.pushToken(tok);
         parser.gullet.pushToken(middle);
         return {
@@ -11809,13 +11809,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index15 = optArgs[0];
+        var index14 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index15
+          index: index14
         };
       },
       htmlBuilder(group, options) {
@@ -11881,9 +11881,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index15
+          index: index14
         } = group;
-        return index15 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index15, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index14 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index14, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -12513,37 +12513,37 @@ var init_katex = __esm({
           this.endGroup();
         }
       }
-      has(name5) {
-        return this.current.hasOwnProperty(name5) || this.builtins.hasOwnProperty(name5);
+      has(name4) {
+        return this.current.hasOwnProperty(name4) || this.builtins.hasOwnProperty(name4);
       }
-      get(name5) {
-        if (this.current.hasOwnProperty(name5)) {
-          return this.current[name5];
+      get(name4) {
+        if (this.current.hasOwnProperty(name4)) {
+          return this.current[name4];
         } else {
-          return this.builtins[name5];
+          return this.builtins[name4];
         }
       }
-      set(name5, value, global2) {
+      set(name4, value, global2) {
         if (global2 === void 0) {
           global2 = false;
         }
         if (global2) {
           for (var i = 0; i < this.undefStack.length; i++) {
-            delete this.undefStack[i][name5];
+            delete this.undefStack[i][name4];
           }
           if (this.undefStack.length > 0) {
-            this.undefStack[this.undefStack.length - 1][name5] = value;
+            this.undefStack[this.undefStack.length - 1][name4] = value;
           }
         } else {
           var top = this.undefStack[this.undefStack.length - 1];
-          if (top && !top.hasOwnProperty(name5)) {
-            top[name5] = this.current[name5];
+          if (top && !top.hasOwnProperty(name4)) {
+            top[name4] = this.current[name4];
           }
         }
         if (value == null) {
-          delete this.current[name5];
+          delete this.current[name4];
         } else {
-          this.current[name5] = value;
+          this.current[name4] = value;
         }
       }
     };
@@ -12677,13 +12677,13 @@ var init_katex = __esm({
       if (arg.length !== 1) {
         throw new ParseError("\\newcommand's first argument must be a macro name");
       }
-      var name5 = arg[0].text;
-      var exists = context.isDefined(name5);
+      var name4 = arg[0].text;
+      var exists = context.isDefined(name4);
       if (exists && !existsOK) {
-        throw new ParseError("\\newcommand{" + name5 + "} attempting to redefine " + (name5 + "; use \\renewcommand"));
+        throw new ParseError("\\newcommand{" + name4 + "} attempting to redefine " + (name4 + "; use \\renewcommand"));
       }
       if (!exists && !nonexistsOK) {
-        throw new ParseError("\\renewcommand{" + name5 + "} when command " + name5 + " does not yet exist; use \\newcommand");
+        throw new ParseError("\\renewcommand{" + name4 + "} when command " + name4 + " does not yet exist; use \\newcommand");
       }
       var numArgs = 0;
       arg = context.consumeArg().tokens;
@@ -12700,7 +12700,7 @@ var init_katex = __esm({
         numArgs = parseInt(argText);
         arg = context.consumeArg().tokens;
       }
-      context.macros.set(name5, {
+      context.macros.set(name4, {
         tokens: arg,
         numArgs
       });
@@ -12721,8 +12721,8 @@ var init_katex = __esm({
     });
     defineMacro("\\show", (context) => {
       var tok = context.popToken();
-      var name5 = tok.text;
-      console.log(tok, context.macros.get(name5), functions[name5], symbols.math[name5], symbols.text[name5]);
+      var name4 = tok.text;
+      console.log(tok, context.macros.get(name4), functions[name4], symbols.math[name4], symbols.text[name4]);
       return "";
     });
     defineMacro("\\bgroup", "{");
@@ -13352,11 +13352,11 @@ var init_katex = __esm({
       }
       expandOnce(expandableOnly) {
         var topToken = this.popToken();
-        var name5 = topToken.text;
-        var expansion = !topToken.noexpand ? this._getExpansion(name5) : null;
+        var name4 = topToken.text;
+        var expansion = !topToken.noexpand ? this._getExpansion(name4) : null;
         if (expansion == null || expandableOnly && expansion.unexpandable) {
-          if (expandableOnly && expansion == null && name5[0] === "\\" && !this.isDefined(name5)) {
-            throw new ParseError("Undefined control sequence: " + name5);
+          if (expandableOnly && expansion == null && name4[0] === "\\" && !this.isDefined(name4)) {
+            throw new ParseError("Undefined control sequence: " + name4);
           }
           this.pushToken(topToken);
           return topToken;
@@ -13405,8 +13405,8 @@ var init_katex = __esm({
         }
         throw new Error();
       }
-      expandMacro(name5) {
-        return this.macros.has(name5) ? this.expandTokens([new Token(name5)]) : void 0;
+      expandMacro(name4) {
+        return this.macros.has(name4) ? this.expandTokens([new Token(name4)]) : void 0;
       }
       expandTokens(tokens) {
         var output = [];
@@ -13424,21 +13424,21 @@ var init_katex = __esm({
         }
         return output;
       }
-      expandMacroAsText(name5) {
-        var tokens = this.expandMacro(name5);
+      expandMacroAsText(name4) {
+        var tokens = this.expandMacro(name4);
         if (tokens) {
           return tokens.map((token) => token.text).join("");
         } else {
           return tokens;
         }
       }
-      _getExpansion(name5) {
-        var definition = this.macros.get(name5);
+      _getExpansion(name4) {
+        var definition = this.macros.get(name4);
         if (definition == null) {
           return definition;
         }
-        if (name5.length === 1) {
-          var catcode = this.lexer.catcodes[name5];
+        if (name4.length === 1) {
+          var catcode = this.lexer.catcodes[name4];
           if (catcode != null && catcode !== 13) {
             return;
           }
@@ -13468,12 +13468,12 @@ var init_katex = __esm({
         }
         return expansion;
       }
-      isDefined(name5) {
-        return this.macros.has(name5) || functions.hasOwnProperty(name5) || symbols.math.hasOwnProperty(name5) || symbols.text.hasOwnProperty(name5) || implicitCommands.hasOwnProperty(name5);
+      isDefined(name4) {
+        return this.macros.has(name4) || functions.hasOwnProperty(name4) || symbols.math.hasOwnProperty(name4) || symbols.text.hasOwnProperty(name4) || implicitCommands.hasOwnProperty(name4);
       }
-      isExpandable(name5) {
-        var macro = this.macros.get(name5);
-        return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions.hasOwnProperty(name5) && !functions[name5].primitive;
+      isExpandable(name4) {
+        var macro = this.macros.get(name4);
+        return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions.hasOwnProperty(name4) && !functions[name4].primitive;
       }
     };
     unicodeSubRegEx = /^[₊₋₌₍₎₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ]/;
@@ -14114,12 +14114,12 @@ var init_katex = __esm({
           return body;
         }
       }
-      handleSupSubscript(name5) {
+      handleSupSubscript(name4) {
         var symbolToken = this.fetch();
         var symbol = symbolToken.text;
         this.consume();
         this.consumeSpaces();
-        var group = this.parseGroup(name5);
+        var group = this.parseGroup(name4);
         if (!group) {
           throw new ParseError("Expected group after '" + symbol + "'", symbolToken);
         }
@@ -14248,7 +14248,7 @@ var init_katex = __esm({
           return base2;
         }
       }
-      parseFunction(breakOnTokenText, name5) {
+      parseFunction(breakOnTokenText, name4) {
         var token = this.fetch();
         var func = token.text;
         var funcData = functions[func];
@@ -14256,8 +14256,8 @@ var init_katex = __esm({
           return null;
         }
         this.consume();
-        if (name5 && name5 !== "atom" && !funcData.allowedInArgument) {
-          throw new ParseError("Got function '" + func + "' with no arguments" + (name5 ? " as " + name5 : ""), token);
+        if (name4 && name4 !== "atom" && !funcData.allowedInArgument) {
+          throw new ParseError("Got function '" + func + "' with no arguments" + (name4 ? " as " + name4 : ""), token);
         } else if (this.mode === "text" && !funcData.allowedInText) {
           throw new ParseError("Can't use function '" + func + "' in text mode", token);
         } else if (this.mode === "math" && funcData.allowedInMath === false) {
@@ -14269,18 +14269,18 @@ var init_katex = __esm({
         } = this.parseArguments(func, funcData);
         return this.callFunction(func, args, optArgs, token, breakOnTokenText);
       }
-      callFunction(name5, args, optArgs, token, breakOnTokenText) {
+      callFunction(name4, args, optArgs, token, breakOnTokenText) {
         var context = {
-          funcName: name5,
+          funcName: name4,
           parser: this,
           token,
           breakOnTokenText
         };
-        var func = functions[name5];
+        var func = functions[name4];
         if (func && func.handler) {
           return func.handler(context, args, optArgs);
         } else {
-          throw new ParseError("No function handler for " + name5);
+          throw new ParseError("No function handler for " + name4);
         }
       }
       parseArguments(func, funcData) {
@@ -14313,7 +14313,7 @@ var init_katex = __esm({
           optArgs
         };
       }
-      parseGroupOfType(name5, type, optional) {
+      parseGroupOfType(name4, type, optional) {
         switch (type) {
           case "color":
             return this.parseColorGroup(optional);
@@ -14345,9 +14345,9 @@ var init_katex = __esm({
             if (optional) {
               throw new ParseError("A primitive argument cannot be optional");
             }
-            var _group = this.parseGroup(name5);
+            var _group = this.parseGroup(name4);
             if (_group == null) {
-              throw new ParseError("Expected group as " + name5, this.fetch());
+              throw new ParseError("Expected group as " + name4, this.fetch());
             }
             return _group;
           }
@@ -14356,7 +14356,7 @@ var init_katex = __esm({
           case void 0:
             return this.parseArgumentGroup(optional);
           default:
-            throw new ParseError("Unknown group type as " + name5, this.fetch());
+            throw new ParseError("Unknown group type as " + name4, this.fetch());
         }
       }
       consumeSpaces() {
@@ -14487,7 +14487,7 @@ var init_katex = __esm({
         }
         return result;
       }
-      parseGroup(name5, breakOnTokenText) {
+      parseGroup(name4, breakOnTokenText) {
         var firstToken = this.fetch();
         var text2 = firstToken.text;
         var result;
@@ -14507,7 +14507,7 @@ var init_katex = __esm({
             semisimple: text2 === "\\begingroup" || void 0
           };
         } else {
-          result = this.parseFunction(breakOnTokenText, name5) || this.parseSymbol();
+          result = this.parseFunction(breakOnTokenText, name4) || this.parseSymbol();
           if (result == null && text2[0] === "\\" && !implicitCommands.hasOwnProperty(text2)) {
             if (this.settings.throwOnError) {
               throw new ParseError("Undefined control sequence: " + text2, firstToken);
@@ -14757,13 +14757,118 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var Page;
+var GalleryScale, Testimonials, css, ReviewCreator, reviews, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
     init_katex();
     init_store();
     init_index2();
+    GalleryScale = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let { Src } = $$props;
+      let { Alt } = $$props;
+      let imgBackground;
+      if ($$props.Src === void 0 && $$bindings.Src && Src !== void 0)
+        $$bindings.Src(Src);
+      if ($$props.Alt === void 0 && $$bindings.Alt && Alt !== void 0)
+        $$bindings.Alt(Alt);
+      {
+        $isDarkMode ? imgBackground = `peer-focus:bg-[rgb(218,220,203)] peer-focus:invert` : imgBackground = `peer-focus:bg-[#f7f7f7]`;
+      }
+      $$unsubscribe_isDarkMode();
+      return `<div class="${"relative"}"><input inputmode="${"none"}" class="${"absolute peer opacity-0 w-full h-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"}">
+
+  <img class="${"hover:shadow-2xl " + escape(imgBackground, true) + " peer-hover:shadow-lg peer-focus:fixed peer-focus:top-10 peer-focus:left-10 peer-focus:z-50 peer-focus:-translate-x-8 peer-focus:scale-[1] sm:peer-focus:scale-[0.85] peer-focus:duration-300"}"${add_attribute("src", Src, 0)}${add_attribute("alt", Alt, 0)}>
+  </div>
+
+`;
+    });
+    Testimonials = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const reviewers = ["tj", "ben", "miranda", "efe", "paola", "rob", "zaara"];
+      return `
+
+<div class="${"grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 "}">${each(reviewers, (name4) => {
+        return `${validate_component(GalleryScale, "GalleryScale").$$render(
+          $$result,
+          {
+            Src: `/reviews/review-${name4}-bare.webp`,
+            Alt: `review ${name4}`
+          },
+          {},
+          {}
+        )}`;
+      })}</div>`;
+    });
+    css = {
+      code: "h1.svelte-137p84a{margin:0;padding:0}",
+      map: null
+    };
+    ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let proseInvert;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let { title = "Great physics tutor!!" } = $$props;
+      let { name: name4 = "Thomas Finn" } = $$props;
+      let { date = "2022-06-08" } = $$props;
+      if ($$props.title === void 0 && $$bindings.title && title !== void 0)
+        $$bindings.title(title);
+      if ($$props.name === void 0 && $$bindings.name && name4 !== void 0)
+        $$bindings.name(name4);
+      if ($$props.date === void 0 && $$bindings.date && date !== void 0)
+        $$bindings.date(date);
+      $$result.css.add(css);
+      proseInvert = $isDarkMode ? "prose-invert" : "";
+      $$unsubscribe_isDarkMode();
+      return `
+<article class="${"prose relative p-1 " + escape(proseInvert, true)}">
+  <div class="${"absolute"}"><h1 class="${"svelte-137p84a"}">${escape(title)}</h1>
+    <div class="${"flex flex-row -translate-y-3 "}">${each(Array(5), (_2, i) => {
+        return `<img src="${"star.png"}" alt="${"star"}" style="${"width:40px; height:auto"}">`;
+      })}</div>
+    <div class="${"italic"}">${escape(date)}</div>
+    ${slots.default ? slots.default({}) : ``}
+    <b class="${"absolute right-0 bottom-0 -my-10 mx-5 "}">${escape(name4)}</b></div></article>`;
+    });
+    reviews = [
+      {
+        name: "Thomas Finn",
+        title: "Great physics tutor!!",
+        date: "2022-06-08",
+        body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
+      },
+      {
+        name: "Parent of Rachel W",
+        title: "stellar!",
+        date: "2022-06-08",
+        body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years. Although reluctant to try out online tutoring Jon came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online (I shadowed a few sessions Jon :D !). The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
+      },
+      {
+        name: "Celia",
+        title: "amazing IBHL physics tutor ",
+        date: "2022-05-01",
+        body: "Jon explained the mechanics behind every question I had trouble with in thorough detail. If I had difficulty understanding his explanation, he would use another way to represent his knowledge such as drawing pictures and using diagrams. he taught me measurements, mechanics, waves, electromagnetism, nuclear and thermal physics. He was also a big help with my physics IA! He also made my solution space a place where I could look back if I've forgotten something."
+      },
+      {
+        name: " fernando vc",
+        title: "Great tutor for IB physics! ",
+        date: "  2021-05-03",
+        body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed."
+      },
+      {
+        name: "rozhina mazhar",
+        title: "gr 12 physics (2019-2020)",
+        date: "2021-03-07",
+        body: " John was a huge help for me in gr 12 physics at Ridley. We met once a week in the learning centre and he would help me on     everything from lab prep to assignments to homework questions ... he made me feel extra confident in my abilities!"
+      },
+      {
+        name: "  Lavinia    ",
+        title: "  Great Spanish tutor    ",
+        date: "  2021-03-03    ",
+        body: "  He is super patient with my very much broken Spanish. He is always on time and helps out a lot by giving me extra notes. Best Spanish tutor I had so far :)))"
+      }
+    ];
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -14775,9 +14880,17 @@ var init_page_svelte = __esm({
 
 
 
+${validate_component(Testimonials, "Testimonials").$$render($$result, {}, {}, {})}
 
-
-`;
+<div class="${"grid grid-cols-1 gap-y-[600px] sm:gap-y-[330px] py-20"}">${each(reviews, ({ name: name4, title, date, body }) => {
+        return `
+    ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name4, date }, {}, {
+          default: () => {
+            return `${escape(body)}
+    `;
+          }
+        })}`;
+      })}</div>`;
     });
   }
 });
@@ -14798,8 +14911,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-b6de9c86.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-b6de9c86.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-668e7e98.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-668e7e98.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = ["_app/immutable/assets/+page-3e320a56.css"];
   }
 });
@@ -14809,16 +14922,16 @@ var page_svelte_exports2 = {};
 __export(page_svelte_exports2, {
   default: () => Page2
 });
-var css, Page2;
+var css2, Page2;
 var init_page_svelte2 = __esm({
   ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
     init_chunks();
-    css = {
+    css2 = {
       code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
       map: null
     };
     Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css);
+      $$result.css.add(css2);
       return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
 
 <details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
@@ -14956,16 +15069,16 @@ var page_svelte_exports3 = {};
 __export(page_svelte_exports3, {
   default: () => Page3
 });
-var css2, JitsiUser, Page3;
+var css3, JitsiUser, Page3;
 var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/jitsi/_page.svelte.js"() {
     init_chunks();
-    css2 = {
+    css3 = {
       code: '#cornerDIV.svelte-s1gz6r{position:absolute;left:48%;bottom:40px}#hangUp.svelte-s1gz6r{content:url("https://brightowltutoring.com/s/hangup-gray.png");margin:0 auto;display:flex;width:50px;aspect-ratio:1;border-radius:50%;transform:rotate(90deg);transition:0.4s ease-in-out}#hangUp.svelte-s1gz6r:hover{content:url("https://brightowltutoring.com/s/hangup-red.png");transform:scale(1.85)}',
       map: null
     };
     JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css2);
+      $$result.css.add(css3);
       return `${$$result.head += `<script src="${"https://meet.jit.si/external_api.js"}" data-svelte="svelte-1pkind7"><\/script>`, ""}
 
 
@@ -15596,16 +15709,16 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component15) {
-  return component15.instantiationMode === "EAGER";
+function isComponentEager(component14) {
+  return component14.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
   "node_modules/@firebase/component/dist/esm/index.esm2017.js"() {
     init_index_esm2017();
     Component = class {
-      constructor(name5, instanceFactory, type) {
-        this.name = name5;
+      constructor(name4, instanceFactory, type) {
+        this.name = name4;
         this.instanceFactory = instanceFactory;
         this.type = type;
         this.multipleInstances = false;
@@ -15632,8 +15745,8 @@ var init_index_esm20172 = __esm({
     };
     DEFAULT_ENTRY_NAME = "[DEFAULT]";
     Provider = class {
-      constructor(name5, container) {
-        this.name = name5;
+      constructor(name4, container) {
+        this.name = name4;
         this.container = container;
         this.component = null;
         this.instances = /* @__PURE__ */ new Map();
@@ -15687,18 +15800,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component15) {
-        if (component15.name !== this.name) {
-          throw Error(`Mismatching Component ${component15.name} for Provider ${this.name}.`);
+      setComponent(component14) {
+        if (component14.name !== this.name) {
+          throw Error(`Mismatching Component ${component14.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component15;
+        this.component = component14;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component15)) {
+        if (isComponentEager(component14)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -15814,30 +15927,30 @@ var init_index_esm20172 = __esm({
       }
     };
     ComponentContainer = class {
-      constructor(name5) {
-        this.name = name5;
+      constructor(name4) {
+        this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component15) {
-        const provider = this.getProvider(component15.name);
+      addComponent(component14) {
+        const provider = this.getProvider(component14.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component15.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component14.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component15);
+        provider.setComponent(component14);
       }
-      addOrOverwriteComponent(component15) {
-        const provider = this.getProvider(component15.name);
+      addOrOverwriteComponent(component14) {
+        const provider = this.getProvider(component14.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component15.name);
+          this.providers.delete(component14.name);
         }
-        this.addComponent(component15);
+        this.addComponent(component14);
       }
-      getProvider(name5) {
-        if (this.providers.has(name5)) {
-          return this.providers.get(name5);
+      getProvider(name4) {
+        if (this.providers.has(name4)) {
+          return this.providers.get(name4);
         }
-        const provider = new Provider(name5, this);
-        this.providers.set(name5, provider);
+        const provider = new Provider(name4, this);
+        this.providers.set(name4, provider);
         return provider;
       }
       getProviders() {
@@ -15889,8 +16002,8 @@ var init_index_esm20173 = __esm({
       }
     };
     Logger = class {
-      constructor(name5) {
-        this.name = name5;
+      constructor(name4) {
+        this.name = name4;
         this._logLevel = defaultLogLevel;
         this._logHandler = defaultLogHandler;
         this._userLogHandler = null;
@@ -16094,8 +16207,8 @@ var init_wrap_idb_value = __esm({
 });
 
 // node_modules/idb/build/index.js
-function openDB(name5, version4, { blocked, upgrade, blocking, terminated } = {}) {
-  const request = indexedDB.open(name5, version4);
+function openDB(name4, version4, { blocked, upgrade, blocking, terminated } = {}) {
+  const request = indexedDB.open(name4, version4);
   const openPromise = wrap(request);
   if (upgrade) {
     request.addEventListener("upgradeneeded", (event) => {
@@ -16156,67 +16269,67 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component15 = provider.getComponent();
-  return (component15 === null || component15 === void 0 ? void 0 : component15.type) === "VERSION";
+  const component14 = provider.getComponent();
+  return (component14 === null || component14 === void 0 ? void 0 : component14.type) === "VERSION";
 }
-function _addComponent(app2, component15) {
+function _addComponent(app2, component14) {
   try {
-    app2.container.addComponent(component15);
+    app2.container.addComponent(component14);
   } catch (e3) {
-    logger.debug(`Component ${component15.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component14.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component15) {
-  const componentName = component15.name;
+function _registerComponent(component14) {
+  const componentName = component14.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component15);
+  _components.set(componentName, component14);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component15);
+    _addComponent(app2, component14);
   }
   return true;
 }
-function _getProvider(app2, name5) {
+function _getProvider(app2, name4) {
   const heartbeatController = app2.container.getProvider("heartbeat").getImmediate({ optional: true });
   if (heartbeatController) {
     void heartbeatController.triggerHeartbeat();
   }
-  return app2.container.getProvider(name5);
+  return app2.container.getProvider(name4);
 }
 function initializeApp(options, rawConfig = {}) {
   if (typeof rawConfig !== "object") {
-    const name6 = rawConfig;
-    rawConfig = { name: name6 };
+    const name5 = rawConfig;
+    rawConfig = { name: name5 };
   }
   const config = Object.assign({ name: DEFAULT_ENTRY_NAME2, automaticDataCollectionEnabled: false }, rawConfig);
-  const name5 = config.name;
-  if (typeof name5 !== "string" || !name5) {
+  const name4 = config.name;
+  if (typeof name4 !== "string" || !name4) {
     throw ERROR_FACTORY.create("bad-app-name", {
-      appName: String(name5)
+      appName: String(name4)
     });
   }
-  const existingApp = _apps.get(name5);
+  const existingApp = _apps.get(name4);
   if (existingApp) {
     if (deepEqual(options, existingApp.options) && deepEqual(config, existingApp.config)) {
       return existingApp;
     } else {
-      throw ERROR_FACTORY.create("duplicate-app", { appName: name5 });
+      throw ERROR_FACTORY.create("duplicate-app", { appName: name4 });
     }
   }
-  const container = new ComponentContainer(name5);
-  for (const component15 of _components.values()) {
-    container.addComponent(component15);
+  const container = new ComponentContainer(name4);
+  for (const component14 of _components.values()) {
+    container.addComponent(component14);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
-  _apps.set(name5, newApp);
+  _apps.set(name4, newApp);
   return newApp;
 }
-function getApp(name5 = DEFAULT_ENTRY_NAME2) {
-  const app2 = _apps.get(name5);
+function getApp(name4 = DEFAULT_ENTRY_NAME2) {
+  const app2 = _apps.get(name4);
   if (!app2) {
-    throw ERROR_FACTORY.create("no-app", { appName: name5 });
+    throw ERROR_FACTORY.create("no-app", { appName: name4 });
   }
   return app2;
 }
@@ -16507,14 +16620,14 @@ var init_index_esm20174 = __esm({
       async triggerHeartbeat() {
         const platformLogger = this.container.getProvider("platform-logger").getImmediate();
         const agent = platformLogger.getPlatformInfoString();
-        const date2 = getUTCDateString();
+        const date = getUTCDateString();
         if (this._heartbeatsCache === null) {
           this._heartbeatsCache = await this._heartbeatsCachePromise;
         }
-        if (this._heartbeatsCache.lastSentHeartbeatDate === date2 || this._heartbeatsCache.heartbeats.some((singleDateHeartbeat) => singleDateHeartbeat.date === date2)) {
+        if (this._heartbeatsCache.lastSentHeartbeatDate === date || this._heartbeatsCache.heartbeats.some((singleDateHeartbeat) => singleDateHeartbeat.date === date)) {
           return;
         } else {
-          this._heartbeatsCache.heartbeats.push({ date: date2, agent });
+          this._heartbeatsCache.heartbeats.push({ date, agent });
         }
         this._heartbeatsCache.heartbeats = this._heartbeatsCache.heartbeats.filter((singleDateHeartbeat) => {
           const hbTimestamp = new Date(singleDateHeartbeat.date).valueOf();
@@ -16530,10 +16643,10 @@ var init_index_esm20174 = __esm({
         if (this._heartbeatsCache === null || this._heartbeatsCache.heartbeats.length === 0) {
           return "";
         }
-        const date2 = getUTCDateString();
+        const date = getUTCDateString();
         const { heartbeatsToSend, unsentEntries } = extractHeartbeatsForHeader(this._heartbeatsCache.heartbeats);
         const headerString = base64urlEncodeWithoutPadding(JSON.stringify({ version: 2, heartbeats: heartbeatsToSend }));
-        this._heartbeatsCache.lastSentHeartbeatDate = date2;
+        this._heartbeatsCache.lastSentHeartbeatDate = date;
         if (unsentEntries.length > 0) {
           this._heartbeatsCache.heartbeats = unsentEntries;
           await this._storage.overwrite(this._heartbeatsCache);
@@ -17314,9 +17427,9 @@ function utcTimestampToDateString(utcTimestamp) {
     return void 0;
   }
   try {
-    const date2 = new Date(Number(utcTimestamp));
-    if (!isNaN(date2.getTime())) {
-      return date2.toUTCString();
+    const date = new Date(Number(utcTimestamp));
+    if (!isNaN(date.getTime())) {
+      return date.toUTCString();
     }
   } catch (e3) {
   }
@@ -18059,7 +18172,7 @@ async function _openIframe(auth) {
     });
   }));
 }
-function _open(auth, url, name5, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
+function _open(auth, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
   const top = Math.max((window.screen.availHeight - height) / 2, 0).toString();
   const left = Math.max((window.screen.availWidth - width) / 2, 0).toString();
   let target = "";
@@ -18070,8 +18183,8 @@ function _open(auth, url, name5, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT)
     left
   });
   const ua = getUA().toLowerCase();
-  if (name5) {
-    target = _isChromeIOS(ua) ? TARGET_BLANK : name5;
+  if (name4) {
+    target = _isChromeIOS(ua) ? TARGET_BLANK : name4;
   }
   if (_isFirefox(ua)) {
     url = url || FIREFOX_EMPTY_URL;
@@ -18391,9 +18504,9 @@ var init_index_90ebcfae = __esm({
         this.lastSignInTime = utcTimestampToDateString(this.lastLoginAt);
         this.creationTime = utcTimestampToDateString(this.createdAt);
       }
-      _copy(metadata2) {
-        this.createdAt = metadata2.createdAt;
-        this.lastLoginAt = metadata2.lastLoginAt;
+      _copy(metadata) {
+        this.createdAt = metadata.createdAt;
+        this.lastLoginAt = metadata.lastLoginAt;
         this._initializeTime();
       }
       toJSON() {
@@ -18693,9 +18806,9 @@ var init_index_90ebcfae = __esm({
         this.persistence = persistence;
         this.auth = auth;
         this.userKey = userKey;
-        const { config, name: name5 } = this.auth;
-        this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name5);
-        this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name5);
+        const { config, name: name4 } = this.auth;
+        this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name4);
+        this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name4);
         this.boundEventHandler = auth._onStorageEvent.bind(auth);
         this.persistence._addListener(this.fullUserKey, this.boundEventHandler);
       }
@@ -18788,9 +18901,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index15 = this.queue.length - 1;
+        const index14 = this.queue.length - 1;
         return () => {
-          this.queue[index15] = () => Promise.resolve();
+          this.queue[index14] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -21253,7 +21366,7 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page5
 });
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css3, Page5;
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, css4, Page5;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
@@ -21279,7 +21392,7 @@ var init_page_svelte4 = __esm({
     app = initializeApp(firebaseConfig);
     getAuth(app);
     ln(app);
-    css3 = {
+    css4 = {
       code: '#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1k1mjbo-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1k1mjbo.svelte-1k1mjbo::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1k1mjbo-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1k1mjbo-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1k1mjbo-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1k1mjbo-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1k1mjbo.svelte-1k1mjbo{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1k1mjbo.svelte-1k1mjbo{margin:0px auto;width:25vw;min-width:280px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo,button.svelte-1k1mjbo.svelte-1k1mjbo{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1k1mjbo.svelte-1k1mjbo:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:hover{border:1px solid #999}.loginLogoutDivs.svelte-1k1mjbo button.svelte-1k1mjbo:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1k1mjbo input.svelte-1k1mjbo:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1k1mjbo.svelte-1k1mjbo{display:flex;justify-content:center;align-items:center}',
       map: null
     };
@@ -21291,7 +21404,7 @@ var init_page_svelte4 = __esm({
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       let emailFieldValue = "";
-      $$result.css.add(css3);
+      $$result.css.add(css4);
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_isLoggedIn();
@@ -21333,8 +21446,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-7286baaf.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-7286baaf.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-6913d74e.js", "_app/immutable/chunks/singletons-7f297215.js"];
+    file7 = "_app/immutable/components/pages/login/_page.svelte-6cd66068.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-6cd66068.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-29365b6b.js", "_app/immutable/chunks/singletons-6c53e8fb.js"];
     stylesheets7 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21387,9 +21500,9 @@ var init_page_svx2 = __esm({
       return `
 
 
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-1yf4ic6"><script data-svelte="svelte-1yf4ic6">MathJax = {
+${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-15ncbow"><script data-svelte="svelte-15ncbow">MathJax = {
       // startup: { typeset: false },
-      startup: { elements: ["[m]"] },
+      // startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
       tex: {
         packages: {
@@ -21404,7 +21517,7 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
         fontCache: "global",
       },
     };
-  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-1yf4ic6"><\/script>`, ""}`;
+  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-15ncbow"><\/script>`, ""}`;
     });
     numMax2 = 1e3;
     numMDMax = 1;
@@ -21492,8 +21605,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file8 = "_app/immutable/components/pages/math/_page.svx-506adec8.js";
-    imports8 = ["_app/immutable/components/pages/math/_page.svx-506adec8.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
+    file8 = "_app/immutable/components/pages/math/_page.svx-707a06f8.js";
+    imports8 = ["_app/immutable/components/pages/math/_page.svx-707a06f8.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
     stylesheets8 = [];
   }
 });
@@ -21573,8 +21686,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file9 = "_app/immutable/components/pages/mathjax/_page.svx-48330ff4.js";
-    imports9 = ["_app/immutable/components/pages/mathjax/_page.svx-48330ff4.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js"];
+    file9 = "_app/immutable/components/pages/mathjax/_page.svx-02db9579.js";
+    imports9 = ["_app/immutable/components/pages/mathjax/_page.svx-02db9579.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js"];
     stylesheets9 = [];
   }
 });
@@ -21584,7 +21697,7 @@ var page_svelte_exports5 = {};
 __export(page_svelte_exports5, {
   default: () => Page8
 });
-var css4, E_and_m, Page8;
+var css5, E_and_m, Page8;
 var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
@@ -21592,12 +21705,12 @@ var init_page_svelte5 = __esm({
     init_store();
     init_katex();
     init_index2();
-    css4 = {
+    css5 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css4);
+      $$result.css.add(css5);
       return `${validate_component(Katexer, "Katexer").$$render($$result, {}, {}, {})}
 <div id="${"charges-1"}"><h2>Two isolated point charges as shown are at a fixed distance apart (segment BC). At which point is it possible for the electric field strength to be zero?</h2>
   <img style="${"margin: 0 auto; display:flex; width: 65vw; min-width: 280px; max-width: 600px;"}" src="${" https://raw.githubusercontent.com/brightowltutoring/web/main/two-charges.png"}">
@@ -21712,7 +21825,7 @@ var page_svelte_exports6 = {};
 __export(page_svelte_exports6, {
   default: () => Page9
 });
-var css$1, PlansCard, css5, sampleHref, Page9;
+var css$1, PlansCard, css6, sampleHref, Page9;
 var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -21756,7 +21869,7 @@ var init_page_svelte6 = __esm({
   
 </div>`;
     });
-    css5 = {
+    css6 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
@@ -21785,7 +21898,7 @@ var init_page_svelte6 = __esm({
           href: sampleHref
         }
       ];
-      $$result.css.add(css5);
+      $$result.css.add(css6);
       return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
 
 
@@ -21835,37 +21948,21 @@ var init__11 = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/reviews/_page.svx.js
-var page_svx_exports4 = {};
-__export(page_svx_exports4, {
-  default: () => Page10,
-  metadata: () => metadata
+// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
+var page_md_exports = {};
+__export(page_md_exports, {
+  default: () => Page10
 });
-var css6, metadata, title, name4, date, Page10;
-var init_page_svx4 = __esm({
-  ".svelte-kit/output/server/entries/pages/reviews/_page.svx.js"() {
+var Page10;
+var init_page_md = __esm({
+  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
     init_chunks();
-    css6 = {
-      code: "h1.svelte-1l06vjd,span.svelte-1l06vjd{margin:0;padding:0}",
-      map: null
-    };
-    metadata = {
-      "title": "Great physics tutor!!",
-      "name": "Thomas Finn",
-      "date": "2022-06-08"
-    };
-    ({ title, name: name4, date } = metadata);
     Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css6);
-      return `<div class="${"prose relative p-1"}"><div class="${"p-4"}"><h1 class="${"svelte-1l06vjd"}">${escape(title)}</h1>
-<span class="${"flex flex-row mix-blend-multiply -translate-y-3 w-[40px] svelte-1l06vjd"}"><img src="${"star.jpeg"}" alt="${""}">
-  
-  
-  
-  </span>
-<span class="${"absolute p-0 m-0 italic -translate-y-8  svelte-1l06vjd"}">${escape(date)}</span>
-<p>He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!</p></div>
-<b class="${"absolute bottom-0 right-6 p-15"}">${escape(name4)}</b></div>`;
+      return `
+${each(Array(1e3), (_2, i) => {
+        return `<div class="${"bg-red-100"}">
+  </div>`;
+      })}`;
     });
   }
 });
@@ -21883,28 +21980,37 @@ var index12, component12, file12, imports12, stylesheets12;
 var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
-    component12 = async () => (await Promise.resolve().then(() => (init_page_svx4(), page_svx_exports4))).default;
-    file12 = "_app/immutable/components/pages/reviews/_page.svx-fd9c3e54.js";
-    imports12 = ["_app/immutable/components/pages/reviews/_page.svx-fd9c3e54.js", "_app/immutable/chunks/index-e087fcf9.js"];
-    stylesheets12 = ["_app/immutable/assets/+page-821bf61a.css"];
+    component12 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
+    file12 = "_app/immutable/components/pages/samplequiz/_page.md-c8901656.js";
+    imports12 = ["_app/immutable/components/pages/samplequiz/_page.md-c8901656.js", "_app/immutable/chunks/index-e087fcf9.js"];
+    stylesheets12 = [];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
-var page_md_exports = {};
-__export(page_md_exports, {
+// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
+var page_svelte_exports7 = {};
+__export(page_svelte_exports7, {
   default: () => Page11
 });
-var Page11;
-var init_page_md = __esm({
-  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
+var css7, Page11;
+var init_page_svelte7 = __esm({
+  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
+    init_CalendlyJsandCSS();
+    css7 = {
+      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
+      map: null
+    };
     Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-${each(Array(1e3), (_2, i) => {
-        return `<div class="${"bg-red-100"}">
-  </div>`;
-      })}`;
+      $$result.css.add(css7);
+      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+
+<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
+
+<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
+
+  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
+</div>`;
     });
   }
 });
@@ -21922,58 +22028,10 @@ var index13, component13, file13, imports13, stylesheets13;
 var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
-    component13 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file13 = "_app/immutable/components/pages/samplequiz/_page.md-c8901656.js";
-    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-c8901656.js", "_app/immutable/chunks/index-e087fcf9.js"];
-    stylesheets13 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
-var page_svelte_exports7 = {};
-__export(page_svelte_exports7, {
-  default: () => Page12
-});
-var css7, Page12;
-var init_page_svelte7 = __esm({
-  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
-    init_chunks();
-    init_CalendlyJsandCSS();
-    css7 = {
-      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
-      map: null
-    };
-    Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css7);
-      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
-
-<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
-
-<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
-
-  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
-</div>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/13.js
-var __exports14 = {};
-__export(__exports14, {
-  component: () => component14,
-  file: () => file14,
-  imports: () => imports14,
-  index: () => index14,
-  stylesheets: () => stylesheets14
-});
-var index14, component14, file14, imports14, stylesheets14;
-var init__14 = __esm({
-  ".svelte-kit/output/server/nodes/13.js"() {
-    index14 = 13;
-    component14 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-aefebccf.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-aefebccf.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js"];
-    stylesheets14 = ["_app/immutable/assets/+page-f8a180cf.css"];
+    component13 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
+    file13 = "_app/immutable/components/pages/schools/_page.svelte-aefebccf.js";
+    imports13 = ["_app/immutable/components/pages/schools/_page.svelte-aefebccf.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js"];
+    stylesheets13 = ["_app/immutable/assets/+page-f8a180cf.css"];
   }
 });
 
@@ -22091,8 +22149,8 @@ function devalue(value) {
     var params_1 = [];
     var statements_1 = [];
     var values_1 = [];
-    names.forEach(function(name5, thing) {
-      params_1.push(name5);
+    names.forEach(function(name4, thing) {
+      params_1.push(name4);
       if (isPrimitive(thing)) {
         values_1.push(stringifyPrimitive(thing));
         return;
@@ -22113,18 +22171,18 @@ function devalue(value) {
         case "Array":
           values_1.push("Array(" + thing.length + ")");
           thing.forEach(function(v2, i) {
-            statements_1.push(name5 + "[" + i + "]=" + stringify(v2));
+            statements_1.push(name4 + "[" + i + "]=" + stringify(v2));
           });
           break;
         case "Set":
           values_1.push("new Set");
-          statements_1.push(name5 + "." + Array.from(thing).map(function(v2) {
+          statements_1.push(name4 + "." + Array.from(thing).map(function(v2) {
             return "add(" + stringify(v2) + ")";
           }).join("."));
           break;
         case "Map":
           values_1.push("new Map");
-          statements_1.push(name5 + "." + Array.from(thing).map(function(_a) {
+          statements_1.push(name4 + "." + Array.from(thing).map(function(_a) {
             var k = _a[0], v2 = _a[1];
             return "set(" + stringify(k) + ", " + stringify(v2) + ")";
           }).join("."));
@@ -22132,7 +22190,7 @@ function devalue(value) {
         default:
           values_1.push(Object.getPrototypeOf(thing) === null ? "Object.create(null)" : "{}");
           Object.keys(thing).forEach(function(key2) {
-            statements_1.push("" + name5 + safeProp(key2) + "=" + stringify(thing[key2]));
+            statements_1.push("" + name4 + safeProp(key2) + "=" + stringify(thing[key2]));
           });
       }
     });
@@ -22143,12 +22201,12 @@ function devalue(value) {
   }
 }
 function getName(num) {
-  var name5 = "";
+  var name4 = "";
   do {
-    name5 = chars[num % chars.length] + name5;
+    name4 = chars[num % chars.length] + name4;
     num = ~~(num / chars.length) - 1;
   } while (num >= 0);
-  return reserved.test(name5) ? name5 + "_" : name5;
+  return reserved.test(name4) ? name4 + "_" : name4;
 }
 function isPrimitive(thing) {
   return Object(thing) !== thing;
@@ -22284,13 +22342,13 @@ function error_to_pojo(error2, get_stack) {
     };
   }
   const {
-    name: name5,
+    name: name4,
     message,
     stack,
     cause,
     ...custom
   } = error2;
-  const object = { name: name5, message, stack: get_stack(error2) };
+  const object = { name: name4, message, stack: get_stack(error2) };
   if (cause)
     object.cause = error_to_pojo(cause, get_stack);
   for (const key2 in custom) {
@@ -22814,7 +22872,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets15 = new Set(entry.stylesheets);
+  const stylesheets14 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -22864,7 +22922,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets15.add(url));
+        node.stylesheets.forEach((url) => stylesheets14.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -22927,7 +22985,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets15) {
+  for (const dep of stylesheets14) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -23022,8 +23080,8 @@ async function render_response({
       headers.set("content-security-policy-report-only", report_only_header);
     }
     for (const new_cookie of cookies) {
-      const { name: name5, value, ...options2 } = new_cookie;
-      headers.append("set-cookie", cookie.serialize(name5, value, options2));
+      const { name: name4, value, ...options2 } = new_cookie;
+      headers.append("set-cookie", cookie.serialize(name4, value, options2));
     }
     if (link_header_preloads.size) {
       headers.set("link", Array.from(link_header_preloads).join(", "));
@@ -23183,14 +23241,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file15 = is_asset ? filename : filename_html;
+      const file14 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file15), {
+        response = new Response(options.read(file14), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file15}`, opts);
+        response = await fetch(`${event.url.origin}/${file14}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23203,7 +23261,7 @@ function create_fetch({ event, options, state, route }) {
             continue;
           combined_cookies[cookie3.name] = cookie3.value;
         }
-        const cookie2 = Object.entries(combined_cookies).map(([name5, value]) => `${name5}=${value}`).join("; ");
+        const cookie2 = Object.entries(combined_cookies).map(([name4, value]) => `${name4}=${value}`).join("; ");
         if (cookie2) {
           opts.headers.set("cookie", cookie2);
         }
@@ -23551,8 +23609,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index15 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index15]();
+              const index14 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index14]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -23676,7 +23734,7 @@ function compact(array2) {
 function exec(match, names, types, matchers) {
   const params = {};
   for (let i = 0; i < names.length; i += 1) {
-    const name5 = names[i];
+    const name4 = names[i];
     const type = types[i];
     const value = match[i + 1] || "";
     if (type) {
@@ -23686,7 +23744,7 @@ function exec(match, names, types, matchers) {
       if (!matcher(value))
         return;
     }
-    params[name5] = value;
+    params[name4] = value;
   }
   return params;
 }
@@ -24090,10 +24148,10 @@ var Server = class {
 // .svelte-kit/cloudflare-tmp/manifest.js
 var manifest = {
   appDir: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.jpeg", "star.png"]),
-  mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp", ".jpeg": "image/jpeg" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.png"]),
+  mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-bae397ea.js", "imports": ["_app/immutable/start-bae397ea.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-7f297215.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-01d5bfbd.js", "imports": ["_app/immutable/start-01d5bfbd.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-6c53e8fb.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -24107,8 +24165,7 @@ var manifest = {
       () => Promise.resolve().then(() => (init__10(), __exports10)),
       () => Promise.resolve().then(() => (init__11(), __exports11)),
       () => Promise.resolve().then(() => (init__12(), __exports12)),
-      () => Promise.resolve().then(() => (init__13(), __exports13)),
-      () => Promise.resolve().then(() => (init__14(), __exports14))
+      () => Promise.resolve().then(() => (init__13(), __exports13))
     ],
     routes: [
       {
@@ -24203,23 +24260,13 @@ var manifest = {
       },
       {
         type: "page",
-        id: "reviews",
-        pattern: /^\/reviews\/?$/,
-        names: [],
-        types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 11
-      },
-      {
-        type: "page",
         id: "samplequiz",
         pattern: /^\/samplequiz\/?$/,
         names: [],
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 12
+        leaf: 11
       },
       {
         type: "page",
@@ -24229,7 +24276,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 13
+        leaf: 12
       }
     ],
     matchers: async () => {
@@ -24292,12 +24339,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file15 = pathname.substring(1);
+      let file14 = pathname.substring(1);
       try {
-        file15 = decodeURIComponent(file15);
+        file14 = decodeURIComponent(file14);
       } catch (err) {
       }
-      if (manifest.assets.has(file15) || manifest.assets.has(file15 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file14) || manifest.assets.has(file14 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {
