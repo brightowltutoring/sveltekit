@@ -1,13 +1,15 @@
 <script>
   import { onMount } from "svelte";
   import { lessThan768 } from "$lib/store.js";
+  import { goto } from "$app/navigation";
 
   let domain, options, api, par, firstID;
 
   async function hangUpBtn() {
     await api.dispose();
     await setTimeout(() => {
-      window.location.href = "https://thinksolve.io";
+      goto("/");
+      // window.location.href = "https://thinksolve.io";
     }, 0);
   }
 
