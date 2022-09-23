@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component14) {
-  current_component = component14;
+function set_current_component(component15) {
+  current_component = component15;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component14, name4) {
-  if (!component14 || !component14.$$render) {
+function validate_component(component15, name4) {
+  if (!component15 || !component15.$$render) {
     if (name4 === "svelte:component")
       name4 += " this={...}";
     throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component14;
+  return component15;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -310,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index14 = 0;
-      while (index14 < str.length) {
-        var eqIdx = str.indexOf("=", index14);
+      var index15 = 0;
+      while (index15 < str.length) {
+        var eqIdx = str.indexOf("=", index15);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index14);
+        var endIdx = str.indexOf(";", index15);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index14 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index15 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index14, eqIdx).trim();
+        var key2 = str.slice(index15, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,7 +331,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index14 = endIdx + 1;
+        index15 = endIdx + 1;
       }
       return obj;
     }
@@ -1060,9 +1060,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-083b691e.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-083b691e.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-526a3321.js", "_app/immutable/chunks/navigation-9df98b6b.js"];
-    stylesheets = ["_app/immutable/assets/+layout-170a674e.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-301f2961.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-301f2961.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-e7cf9de8.js", "_app/immutable/chunks/navigation-393594f5.js"];
+    stylesheets = ["_app/immutable/assets/+layout-844cf714.css"];
   }
 });
 
@@ -6524,8 +6524,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index14) => (n2) => {
-          nodes.splice(index14 + 1, 0, n2);
+        prev.insertAfter = ((index15) => (n2) => {
+          nodes.splice(index15 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -11809,13 +11809,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index14 = optArgs[0];
+        var index15 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index14
+          index: index15
         };
       },
       htmlBuilder(group, options) {
@@ -11881,9 +11881,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index14
+          index: index15
         } = group;
-        return index14 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index14, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index15 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index15, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -14752,18 +14752,12 @@ var init_katex = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/_page.svelte.js
-var page_svelte_exports = {};
-__export(page_svelte_exports, {
-  default: () => Page
-});
-var css, ReviewCreator, reviews, Reviews, Page;
-var init_page_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+// .svelte-kit/output/server/chunks/Reviews.js
+var css, ReviewCreator, reviews, Reviews;
+var init_Reviews = __esm({
+  ".svelte-kit/output/server/chunks/Reviews.js"() {
     init_chunks();
-    init_katex();
     init_store();
-    init_index2();
     css = {
       code: "h1.svelte-137p84a{margin:0;padding:0}",
       map: null
@@ -14885,6 +14879,22 @@ var init_page_svelte = __esm({
         })}`;
       })}</div>`;
     });
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_page.svelte.js
+var page_svelte_exports = {};
+__export(page_svelte_exports, {
+  default: () => Page
+});
+var Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+    init_chunks();
+    init_katex();
+    init_store();
+    init_Reviews();
+    init_index2();
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -14892,12 +14902,14 @@ var init_page_svelte = __esm({
       return `<main class="${"overflow-x-hidden"}"><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video></main>
 
 <div class="${"flex justify-center items-center h-3/5 text-center"}"><div class="${"grid grid-rows-1"}"><div class="${"text-6xl font-Poppins pb-4"}">We&#39;ll be back in October</div>
-    <div>\u{1F383} pressing inquiries can be sent to thinksolve.io[at]gmail.com</div></div></div>
-
-
-
+    <div class="${"text-lg font-Nunito "}">\u{1F383} pressing inquiries can be sent to thinksolve.io[at]gmail.com
+      </div></div></div>
 
 <div class="${"my-80 pb-80"}">${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
+
+
+
+
 
 
 
@@ -14923,9 +14935,9 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-353a8cea.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-353a8cea.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
-    stylesheets3 = ["_app/immutable/assets/+page-3e320a56.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-4c9c8478.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-4c9c8478.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/Reviews-e8b14b20.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    stylesheets3 = ["_app/immutable/assets/Reviews-3e320a56.css"];
   }
 });
 
@@ -15721,8 +15733,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component14) {
-  return component14.instantiationMode === "EAGER";
+function isComponentEager(component15) {
+  return component15.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -15812,18 +15824,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component14) {
-        if (component14.name !== this.name) {
-          throw Error(`Mismatching Component ${component14.name} for Provider ${this.name}.`);
+      setComponent(component15) {
+        if (component15.name !== this.name) {
+          throw Error(`Mismatching Component ${component15.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component14;
+        this.component = component15;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component14)) {
+        if (isComponentEager(component15)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -15943,19 +15955,19 @@ var init_index_esm20172 = __esm({
         this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component14) {
-        const provider = this.getProvider(component14.name);
+      addComponent(component15) {
+        const provider = this.getProvider(component15.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component14.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component15.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component14);
+        provider.setComponent(component15);
       }
-      addOrOverwriteComponent(component14) {
-        const provider = this.getProvider(component14.name);
+      addOrOverwriteComponent(component15) {
+        const provider = this.getProvider(component15.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component14.name);
+          this.providers.delete(component15.name);
         }
-        this.addComponent(component14);
+        this.addComponent(component15);
       }
       getProvider(name4) {
         if (this.providers.has(name4)) {
@@ -16281,25 +16293,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component14 = provider.getComponent();
-  return (component14 === null || component14 === void 0 ? void 0 : component14.type) === "VERSION";
+  const component15 = provider.getComponent();
+  return (component15 === null || component15 === void 0 ? void 0 : component15.type) === "VERSION";
 }
-function _addComponent(app2, component14) {
+function _addComponent(app2, component15) {
   try {
-    app2.container.addComponent(component14);
+    app2.container.addComponent(component15);
   } catch (e3) {
-    logger.debug(`Component ${component14.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component15.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component14) {
-  const componentName = component14.name;
+function _registerComponent(component15) {
+  const componentName = component15.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component14);
+  _components.set(componentName, component15);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component14);
+    _addComponent(app2, component15);
   }
   return true;
 }
@@ -16331,8 +16343,8 @@ function initializeApp(options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name4);
-  for (const component14 of _components.values()) {
-    container.addComponent(component14);
+  for (const component15 of _components.values()) {
+    container.addComponent(component15);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name4, newApp);
@@ -18913,9 +18925,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index14 = this.queue.length - 1;
+        const index15 = this.queue.length - 1;
         return () => {
-          this.queue[index14] = () => Promise.resolve();
+          this.queue[index15] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -21458,8 +21470,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-5ceed0c3.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-5ceed0c3.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-9df98b6b.js", "_app/immutable/chunks/singletons-526a3321.js"];
+    file7 = "_app/immutable/components/pages/login/_page.svelte-53a44a44.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-53a44a44.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-393594f5.js", "_app/immutable/chunks/singletons-e7cf9de8.js"];
     stylesheets7 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -21960,21 +21972,20 @@ var init__11 = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
-var page_md_exports = {};
-__export(page_md_exports, {
+// .svelte-kit/output/server/entries/pages/reviews/_page.svelte.js
+var page_svelte_exports7 = {};
+__export(page_svelte_exports7, {
   default: () => Page10
 });
 var Page10;
-var init_page_md = __esm({
-  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
+var init_page_svelte7 = __esm({
+  ".svelte-kit/output/server/entries/pages/reviews/_page.svelte.js"() {
     init_chunks();
+    init_Reviews();
+    init_store();
+    init_index2();
     Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-${each(Array(1e3), (_2, i) => {
-        return `<div class="${"bg-red-100"}">
-  </div>`;
-      })}`;
+      return `<div class="${"my-80 pb-80"}">${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>`;
     });
   }
 });
@@ -21992,37 +22003,28 @@ var index12, component12, file12, imports12, stylesheets12;
 var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
-    component12 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file12 = "_app/immutable/components/pages/samplequiz/_page.md-c8901656.js";
-    imports12 = ["_app/immutable/components/pages/samplequiz/_page.md-c8901656.js", "_app/immutable/chunks/index-e087fcf9.js"];
-    stylesheets12 = [];
+    component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
+    file12 = "_app/immutable/components/pages/reviews/_page.svelte-e7f47c71.js";
+    imports12 = ["_app/immutable/components/pages/reviews/_page.svelte-e7f47c71.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Reviews-e8b14b20.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js"];
+    stylesheets12 = ["_app/immutable/assets/Reviews-3e320a56.css"];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
-var page_svelte_exports7 = {};
-__export(page_svelte_exports7, {
+// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
+var page_md_exports = {};
+__export(page_md_exports, {
   default: () => Page11
 });
-var css7, Page11;
-var init_page_svelte7 = __esm({
-  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+var Page11;
+var init_page_md = __esm({
+  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
     init_chunks();
-    init_CalendlyJsandCSS();
-    css7 = {
-      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
-      map: null
-    };
     Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css7);
-      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
-
-<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
-
-<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
-
-  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
-</div>`;
+      return `
+${each(Array(1e3), (_2, i) => {
+        return `<div class="${"bg-red-100"}">
+  </div>`;
+      })}`;
     });
   }
 });
@@ -22040,10 +22042,58 @@ var index13, component13, file13, imports13, stylesheets13;
 var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
-    component13 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file13 = "_app/immutable/components/pages/schools/_page.svelte-aefebccf.js";
-    imports13 = ["_app/immutable/components/pages/schools/_page.svelte-aefebccf.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js"];
-    stylesheets13 = ["_app/immutable/assets/+page-f8a180cf.css"];
+    component13 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
+    file13 = "_app/immutable/components/pages/samplequiz/_page.md-c8901656.js";
+    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-c8901656.js", "_app/immutable/chunks/index-e087fcf9.js"];
+    stylesheets13 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
+var page_svelte_exports8 = {};
+__export(page_svelte_exports8, {
+  default: () => Page12
+});
+var css7, Page12;
+var init_page_svelte8 = __esm({
+  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+    init_chunks();
+    init_CalendlyJsandCSS();
+    css7 = {
+      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
+      map: null
+    };
+    Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css7);
+      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+
+<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
+
+<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Webinowl </b></button>
+
+  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mockowl </b></button>
+</div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/13.js
+var __exports14 = {};
+__export(__exports14, {
+  component: () => component14,
+  file: () => file14,
+  imports: () => imports14,
+  index: () => index14,
+  stylesheets: () => stylesheets14
+});
+var index14, component14, file14, imports14, stylesheets14;
+var init__14 = __esm({
+  ".svelte-kit/output/server/nodes/13.js"() {
+    index14 = 13;
+    component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
+    file14 = "_app/immutable/components/pages/schools/_page.svelte-aefebccf.js";
+    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-aefebccf.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js"];
+    stylesheets14 = ["_app/immutable/assets/+page-f8a180cf.css"];
   }
 });
 
@@ -22884,7 +22934,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets14 = new Set(entry.stylesheets);
+  const stylesheets15 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -22934,7 +22984,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets14.add(url));
+        node.stylesheets.forEach((url) => stylesheets15.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -22997,7 +23047,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets14) {
+  for (const dep of stylesheets15) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -23253,14 +23303,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file14 = is_asset ? filename : filename_html;
+      const file15 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file14), {
+        response = new Response(options.read(file15), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file14}`, opts);
+        response = await fetch(`${event.url.origin}/${file15}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23621,8 +23671,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index14 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index14]();
+              const index15 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index15]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -24163,7 +24213,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-0f523221.js", "imports": ["_app/immutable/start-0f523221.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-526a3321.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-d41917bd.js", "imports": ["_app/immutable/start-d41917bd.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-e7cf9de8.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -24177,7 +24227,8 @@ var manifest = {
       () => Promise.resolve().then(() => (init__10(), __exports10)),
       () => Promise.resolve().then(() => (init__11(), __exports11)),
       () => Promise.resolve().then(() => (init__12(), __exports12)),
-      () => Promise.resolve().then(() => (init__13(), __exports13))
+      () => Promise.resolve().then(() => (init__13(), __exports13)),
+      () => Promise.resolve().then(() => (init__14(), __exports14))
     ],
     routes: [
       {
@@ -24272,13 +24323,23 @@ var manifest = {
       },
       {
         type: "page",
+        id: "reviews",
+        pattern: /^\/reviews\/?$/,
+        names: [],
+        types: [],
+        errors: [1],
+        layouts: [0],
+        leaf: 11
+      },
+      {
+        type: "page",
         id: "samplequiz",
         pattern: /^\/samplequiz\/?$/,
         names: [],
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 11
+        leaf: 12
       },
       {
         type: "page",
@@ -24288,7 +24349,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 12
+        leaf: 13
       }
     ],
     matchers: async () => {
@@ -24351,12 +24412,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file14 = pathname.substring(1);
+      let file15 = pathname.substring(1);
       try {
-        file14 = decodeURIComponent(file14);
+        file15 = decodeURIComponent(file15);
       } catch (err) {
       }
-      if (manifest.assets.has(file14) || manifest.assets.has(file14 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file15) || manifest.assets.has(file15 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

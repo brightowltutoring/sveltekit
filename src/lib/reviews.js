@@ -15,12 +15,6 @@ export const reviews = [
       body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he’s just a great person to chat with!",
     },
     {
-      name: "Parent of Rachel",
-      title: "stellar!",
-      date: "2022-06-08",
-      body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!",
-    },
-    {
       name: "Celia",
       title: "amazing IBHL physics tutor ",
       date: "2022-05-01",
@@ -55,6 +49,12 @@ export const reviews = [
       title: "IB Physics Year 1",
       date: "2021-02-01",
       body: "He helps through the process of answering each question by helping with each step. From test preparation to experiments, he has assisted me with every problem have encountered. He is also a fun person to talk to and a very friendly person."
+    },
+    {
+      name: "Parent of Rachel",
+      title: "stellar!",
+      date: "2020-06-08",
+      body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!",
     },
     {
       name: "Paola A.",
