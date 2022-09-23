@@ -3,12 +3,11 @@
 
   let domain, options, api, par, firstID;
 
-  function hangUpBtn() {
-    api.dispose();
-
-    setTimeout(() => {
+  async function hangUpBtn() {
+    await api.dispose();
+    await setTimeout(() => {
       window.location.href = "https://thinksolve.io";
-    }, 300);
+    }, 0);
   }
 
   onMount(() => {
@@ -16,7 +15,7 @@
     options = {
       roomName: "ThinkSolve12522",
       // width: "100%",
-      height: "740px",
+      // height: "740px",
       parentNode: document.querySelector("#meet"),
       configOverwrite: {
         disableRemoteMute: true, //TODO: USER ONLY
@@ -71,6 +70,10 @@
 
     api = new JitsiMeetExternalAPI(domain, options);
 
+    // api.addEventListener("getNumberOfParticipants", () => {
+    //   console.log("hey");
+    // });
+
     api.addEventListener("participantRoleChanged", function (event) {
       if (event.role === "moderator") {
         api.executeCommand("toggleLobby", true);
@@ -80,6 +83,7 @@
       firstID = Object.values(par[0])[3];
       api.pinParticipant(firstID);
       // alert(firstID);
+      // alert(par.length);
     });
   });
 </script>
@@ -88,11 +92,12 @@
   <script src="https://meet.jit.si/external_api.js"></script>
 </svelte:head>
 
-<div class="relative w-full">
-  <div id="meet" />
+<div class="relative -translate-y-10">
+  <div id="meet" class="w-full h-[670px]" />
   <img
     on:click={hangUpBtn}
     alt="hangup button"
-    class="absolute sm:bottom-10 sm:right-10 bottom-56 right-5 flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0  hover:content-[url('/hangup-red.png')] "
+    class="{!par &&
+      'opacity-0'} absolute sm:bottom-10 sm:right-10 bottom-[215px] right-5 flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0  hover:content-[url('/hangup-red.png')] "
   />
 </div>
