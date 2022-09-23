@@ -99,18 +99,18 @@ export const routes = writable({
     title: "Thinksolve.io 💫",
     isCurrent: false,
   }, 
-  login: {
-    name:'Login',
-    href: "/login",
-    title: "Login 🚀",
-    isCurrent: false,
-  },
   plans: {
     name:'Plans',
     href: "/plans",
     title: "Plans",
     isCurrent: false,
   }, 
+  login: {
+    name:'Login',
+    href: "/login",
+    title: "Login 🚀",
+    isCurrent: false,
+  },
   schools: {
     name:'schools',
     href: "/schools",

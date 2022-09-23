@@ -331,8 +331,8 @@
     /* background: red;  */
     margin: 0px auto;
     /* margin-top: 50px; */
-    width: 25vw;
-    min-width: 280px;
+    width: 80vw;
+    max-width: 380px;
     padding: 20px;
     font-family: "Nunito", sans-serif;
     font-weight: 400;
