@@ -1,10 +1,8 @@
 <script>
   import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
   import Testimonials from "$lib/Testimonials.svelte";
-  import Reviews from "$lib/Reviews.svelte";
   import { isDarkMode } from "$lib/store.js";
-  import ReviewCreator from "$lib/reviewCreator.svx";
-  import { reviews } from "$lib/reviews.js";
+  import Reviews from "$lib/Reviews.svelte";
 </script>
 
 <main class="overflow-x-hidden">
@@ -24,16 +22,20 @@
 <div class="flex justify-center items-center h-3/5 text-center">
   <div class="grid grid-rows-1">
     <div class="text-6xl font-Poppins pb-4">We'll be back in October</div>
-    <div>🎃 pressing inquiries can be sent to thinksolve.io[at]gmail.com</div>
+    <div class="text-lg font-Nunito ">
+      🎃 pressing inquiries can be sent to thinksolve.io[at]gmail.com
+      <!-- (check out some <a class="text-orange-500 hover:scale-150" href="/reviews">reviews</a>) -->
+    </div>
   </div>
+</div>
+
+<div class="my-80 pb-80">
+  <Reviews />
 </div>
 
 <!-- <SixMathEqnAnim /> -->
 
 <!-- <Testimonials /> -->
-<div class="my-80 pb-80">
-  <Reviews />
-</div>
 
 <!-- <div class="grid grid-cols-1 gap-y-[600px] sm:gap-y-[330px] py-20"> -->
 <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-[2000px] sm:gap-y-[330px] py-20"> -->
