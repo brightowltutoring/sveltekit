@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { lessThan768 } from "$lib/store.js";
 
   let domain, options, api, par, firstID;
 
@@ -97,7 +98,10 @@
   <img
     on:click={hangUpBtn}
     alt="hangup button"
-    class="{!par &&
-      'opacity-0'} absolute sm:bottom-10 sm:right-10 bottom-[215px] right-5 flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0  hover:content-[url('/hangup-red.png')] "
+    class="absolute {!par && 'opacity-0'} {$lessThan768
+      ? 'top-5 right-0 left-0 text-center mr-auto ml-auto'
+      : 'bottom-10 right-10 '} flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')] "
   />
 </div>
+
+<!-- sm:bottom-10 sm:right-10 top-0 right-5  -->
