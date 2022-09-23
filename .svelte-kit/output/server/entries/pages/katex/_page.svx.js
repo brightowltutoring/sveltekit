@@ -1,8 +1,15 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, j as add_attribute, h as each } from "../../../chunks/index.js";
-import { K as Katexer } from "../../../chunks/Katexer.js";
-import { i as isDarkMode } from "../../../chunks/store.js";
 import "katex";
+import { i as isDarkMode } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
+const Katexer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+
+
+
+
+${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}`;
+});
 let numMax = 1e3;
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let proseInvert;

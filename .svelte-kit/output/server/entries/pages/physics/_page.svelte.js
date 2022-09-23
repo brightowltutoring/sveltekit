@@ -1,5 +1,5 @@
-import { c as create_ssr_component, v as validate_component, a as subscribe, e as escape } from "../../../chunks/index.js";
-import { K as Katexer } from "../../../chunks/Katexer.js";
+import { c as create_ssr_component, v as validate_component, j as add_attribute, a as subscribe, e as escape } from "../../../chunks/index.js";
+import { K as Kajax } from "../../../chunks/Kajax.js";
 import { i as isDarkMode } from "../../../chunks/store.js";
 import "katex";
 import "../../../chunks/index2.js";
@@ -10,7 +10,11 @@ const css = {
 };
 const E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
-  return `${validate_component(Katexer, "Katexer").$$render($$result, {}, {}, {})}
+  return `${validate_component(Kajax, "MathRenderer").$$render($$result, {}, {}, {})}
+
+
+<p class="${"text-3xl flex justify-center"}" d${add_attribute("m", `\\cancelto{0}{x}`, 0)}></p>
+<p class="${"text-3xl flex justify-center"}" d${add_attribute("k", `\\cancel{x}`, 0)}></p>
 <div id="${"charges-1"}"><h2>Two isolated point charges as shown are at a fixed distance apart (segment BC). At which point is it possible for the electric field strength to be zero?</h2>
   <img style="${"margin: 0 auto; display:flex; width: 65vw; min-width: 280px; max-width: 600px;"}" src="${" https://raw.githubusercontent.com/brightowltutoring/web/main/two-charges.png"}">
 <p>The electric fields due to charges <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">Q_B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> and <span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>C</mi></msub></mrow><annotation encoding="application/x-tex">Q_C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span> for:</p>

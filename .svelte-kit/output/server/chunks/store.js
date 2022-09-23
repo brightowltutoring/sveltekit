@@ -30,10 +30,22 @@ const routes = writable({
     title: "Plans",
     isCurrent: false
   },
+  screenshare: {
+    name: "Screenshare",
+    href: "/screenshare",
+    title: "Screenshare \u{1F4FA}",
+    isCurrent: false
+  },
   login: {
     name: "Login",
     href: "/login",
     title: "Login \u{1F680}",
+    isCurrent: false
+  },
+  physics: {
+    name: "physics",
+    href: "/physics",
+    title: "physics \u{1F680}",
     isCurrent: false
   },
   schools: {
@@ -58,18 +70,6 @@ const routes = writable({
     name: "katex",
     href: "/katex",
     title: "katex",
-    isCurrent: false
-  },
-  jitsi: {
-    name: "jitsi",
-    href: "/jitsi",
-    title: "jitsi \u{1F680}",
-    isCurrent: false
-  },
-  physics: {
-    name: "physics",
-    href: "/physics",
-    title: "physics \u{1F680}",
     isCurrent: false
   }
 });

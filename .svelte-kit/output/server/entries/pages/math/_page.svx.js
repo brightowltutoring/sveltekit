@@ -1,6 +1,7 @@
 import { c as create_ssr_component, a as subscribe, h as each, j as add_attribute, v as validate_component, e as escape } from "../../../chunks/index.js";
 import katex from "katex";
 import { i as isDarkMode } from "../../../chunks/store.js";
+import { K as Kajax } from "../../../chunks/Kajax.js";
 import "../../../chunks/index2.js";
 const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let katexString;
@@ -33,29 +34,6 @@ const SixMathEqnAnim = create_ssr_component(($$result, $$props, $$bindings, slot
     <p${add_attribute("class", $isDarkMode ? "text-blue-100" : "text-red-500", 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
     </p>`;
   })}</div>`;
-});
-const Kajax = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-
-
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-15ncbow"><script data-svelte="svelte-15ncbow">MathJax = {
-      // startup: { typeset: false },
-      // startup: { elements: ["[m]"] },
-      loader: { load: ["[tex]/physics", "[tex]/cancel"] },
-      tex: {
-        packages: {
-          "[+]": ["physics", "cancel"],
-        },
-        inlineMath: [
-          ["$", "$"],
-          ["\\\\(", "\\\\)"],
-        ],
-      },
-      svg: {
-        fontCache: "global",
-      },
-    };
-  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-15ncbow"><\/script>`, ""}`;
 });
 let numMax = 1e3;
 let numMDMax = 1;

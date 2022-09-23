@@ -2,11 +2,10 @@ import { c as create_ssr_component, a as subscribe, e as escape, h as each, v as
 import { i as isDarkMode } from "./store.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css = {
-  code: "h1.svelte-137p84a{margin:0;padding:0}",
+  code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
   map: null
 };
 const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let proseInvert;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   let { title = "Great physics tutor!!" } = $$props;
@@ -19,11 +18,8 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
   if ($$props.date === void 0 && $$bindings.date && date !== void 0)
     $$bindings.date(date);
   $$result.css.add(css);
-  proseInvert = $isDarkMode ? "prose-invert" : "";
   $$unsubscribe_isDarkMode();
-  return `
-<article class="${"prose relative " + escape(proseInvert, true)}">
-  <div class="${"absolute "}"><h1 class="${"svelte-137p84a"}">${escape(title)}</h1>
+  return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true)}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
     return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:auto"}">`;
   })}</div>
@@ -45,6 +41,12 @@ const reviews = [
     body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
   },
   {
+    name: "Magnus",
+    title: "quantitative chem",
+    date: "2022-06-01",
+    body: "I only had him for one session ... since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!"
+  },
+  {
     name: "Celia",
     title: "amazing IBHL physics tutor ",
     date: "2022-05-01",
@@ -52,7 +54,7 @@ const reviews = [
   },
   {
     name: "fernando vc",
-    title: "Great tutor for IB physics!",
+    title: "very helpful with kinematics!",
     date: "2021-05-03",
     body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed."
   },
@@ -71,7 +73,7 @@ const reviews = [
   {
     name: "Miranda Teta",
     title: "IB Physics",
-    date: "2021-02-02",
+    date: "2021-02-05",
     body: "Jon started tutoring me in my first year of IB Physics, a very challenging course in which I had trouble understanding. He found creative ways for me to comprehend the subject and whenever I still couldn't understand, he would try other ways until I felt comfortable with the topic. He goes out of his way to make sure get the help I need and. after a few tutoring sessions, I started getting a deeper understanding of my course, which am very grateful for."
   },
   {
@@ -83,7 +85,7 @@ const reviews = [
   {
     name: "Parent of Rachel",
     title: "stellar!",
-    date: "2020-06-08",
+    date: "2020-06-03",
     body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
   },
   {
@@ -112,15 +114,17 @@ const reviews = [
   }
 ];
 const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-[600px] gap-x-10"}">${each(reviews, ({ name, title, date, body }) => {
+  return `
+
+<div class="${"scale-90"}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[550px] lg:gap-y-[700px] "}">${each(reviews, ({ name, title, date, body }) => {
     return `
-    ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
+      ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
       default: () => {
         return `${escape(body)}
-    `;
+      `;
       }
     })}`;
-  })}</div>`;
+  })}</div></div>`;
 });
 export {
   Reviews as R

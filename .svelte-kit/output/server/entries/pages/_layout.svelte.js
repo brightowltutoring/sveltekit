@@ -218,7 +218,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
   
   <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
-        ${each(Object.keys($routes).splice(0, 3), (KEY) => {
+        ${each(Object.keys($routes).splice(0, 4), (KEY) => {
       return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -294,9 +294,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
         jankytown = "top-0 backdrop-blur-3xl ";
       if ($scrollY > 800 && $instDeltaY > 10)
-        jankytown = "-top-20 backdrop-blur-3xl ";
+        jankytown = "-top-20 backdrop-blur-3xl duration-200";
       if ($instDeltaY < -100)
-        jankytown = "top-0 backdrop-blur-3xl ";
+        jankytown = "top-0 backdrop-blur-3xl duration-700";
     }
   }
   {
@@ -306,9 +306,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
         jankytown = "bottom-0 backdrop-blur-3xl ";
       if ($scrollY > 400 && $instDeltaY > 10)
-        jankytown = "-bottom-20  backdrop-blur-3xl";
-      if ($instDeltaY < -150)
-        jankytown = "bottom-0 backdrop-blur-3xl ";
+        jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
+      if ($instDeltaY < -130)
+        jankytown = "bottom-0 backdrop-blur-3xl duration-700";
     }
   }
   $$unsubscribe_instDeltaY();
@@ -329,7 +329,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"md:px-[7%] md:py-3 py-1 z-50 fixed " + escape(jankytown, true) + " duration-500 ease-in overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
+<div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
 
 <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;
