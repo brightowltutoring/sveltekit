@@ -1,6 +1,7 @@
 <script>
   import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
   import Testimonials from "$lib/Testimonials.svelte";
+  import Reviews from "$lib/Reviews.svelte";
   import { isDarkMode } from "$lib/store.js";
   import ReviewCreator from "$lib/reviewCreator.svx";
   import { reviews } from "$lib/reviews.js";
@@ -29,13 +30,18 @@
 
 <!-- <SixMathEqnAnim /> -->
 
-<Testimonials />
+<!-- <Testimonials /> -->
+<div class="my-80 pb-80">
+  <Reviews />
+</div>
 
-<div class="grid grid-cols-1 gap-y-[600px] sm:gap-y-[330px] py-20">
+<!-- <div class="grid grid-cols-1 gap-y-[600px] sm:gap-y-[330px] py-20"> -->
+<!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-[2000px] sm:gap-y-[330px] py-20"> -->
+
+<!-- <div class="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-10">
   {#each reviews as { name, title, date, body }}
-    <!-- {#each reviews.splice(0, 1) as { name, title, date, body }} -->
     <ReviewCreator {title} {name} {date}>
       {body}
     </ReviewCreator>
   {/each}
-</div>
+</div> -->

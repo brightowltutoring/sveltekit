@@ -17,21 +17,21 @@ date: '2022-06-08'
 
 </script>
 
-<article class="prose relative p-1 {proseInvert}">
+<article class="prose relative  {proseInvert}">
   <!-- need some  -->
 
-  <div class="absolute">
+  <div class="absolute ">
 
     # {title}
 
-    <div class="flex flex-row -translate-y-3 ">
+    <div class="flex flex-row">
   {#each Array(5) as _,i }
   <img src="star.webp" alt="star" style="width:40px; height:auto"/>
   {/each}
 
     </div>
 
-    <div class="italic"> {date} </div>
+    <div class="italic"> on {date} </div>
 
     <slot></slot>
 

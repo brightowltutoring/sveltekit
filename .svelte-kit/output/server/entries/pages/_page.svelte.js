@@ -64,7 +64,7 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
 <article class="${"prose relative p-1 " + escape(proseInvert, true)}">
   <div class="${"absolute"}"><h1 class="${"svelte-137p84a"}">${escape(title)}</h1>
     <div class="${"flex flex-row -translate-y-3 "}">${each(Array(5), (_, i) => {
-    return `<img src="${"star.png"}" alt="${"star"}" style="${"width:40px; height:auto"}">`;
+    return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:auto"}">`;
   })}</div>
     <div class="${"italic"}">${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
