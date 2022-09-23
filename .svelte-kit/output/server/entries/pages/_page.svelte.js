@@ -13,12 +13,6 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     <div class="${"text-lg font-Nunito "}">\u{1F383} pressing inquiries can be sent to thinksolve.io[at]gmail.com
       </div></div></div>
 
-<br>
-<br>
-<br>
-<a href="${"#reviews"}" class="${"flex justify-center items-center text-center text-6xl"}">\u{1F447}</a>
-<br>
-
 <div id="${"reviews"}" class="${"my-80 pb-80"}">${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
 
 

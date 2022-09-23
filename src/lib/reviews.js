@@ -15,6 +15,12 @@ export const reviews = [
       body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he’s just a great person to chat with!",
     },
     {
+      name: "Magnus",
+      title: "quantitative chem",
+      date: "2022-06-01",
+      body: "I only had him for one session ... since my chemistry tutor got sick before my final 😔. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!",
+    },
+    {
       name: "Celia",
       title: "amazing IBHL physics tutor ",
       date: "2022-05-01",
@@ -22,7 +28,7 @@ export const reviews = [
     },
     {
       name: "fernando vc",
-      title: "Great tutor for IB physics!",
+      title: "very helpful with kinematics!",
       date: "2021-05-03",
       body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed.",
     },
@@ -41,7 +47,7 @@ export const reviews = [
     { 
       name: "Miranda Teta",
       title: "IB Physics",
-      date: "2021-02-02",
+      date: "2021-02-05",
       body: "Jon started tutoring me in my first year of IB Physics, a very challenging course in which I had trouble understanding. He found creative ways for me to comprehend the subject and whenever I still couldn't understand, he would try other ways until I felt comfortable with the topic. He goes out of his way to make sure get the help I need and. after a few tutoring sessions, I started getting a deeper understanding of my course, which am very grateful for.",
     },
     { 
@@ -53,7 +59,7 @@ export const reviews = [
     {
       name: "Parent of Rachel",
       title: "stellar!",
-      date: "2020-06-08",
+      date: "2020-06-03",
       body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!",
     },
     {

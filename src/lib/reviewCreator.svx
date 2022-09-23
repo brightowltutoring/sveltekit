@@ -1,34 +1,24 @@
-<!-- ---
-
-title: Great physics tutor!!
-name: Thomas Finn
-date: '2022-06-08'
-
---- -->
-
-
 <script>
     export let title = "Great physics tutor!!"
     export let name = "Thomas Finn"
     export let date = '2022-06-08'
-     import { isDarkMode } from "$lib/store.js"; 
-    
-    $: proseInvert = $isDarkMode ? "prose-invert" : ""
-
+    import { isDarkMode } from "$lib/store.js"; 
 </script>
 
-<article class="prose relative  {proseInvert}">
-  <!-- need some  -->
+
+<article class="prose relative {$isDarkMode && "prose-invert"}">  
 
   <div class="absolute ">
 
     # {title}
 
     <div class="flex flex-row">
-  {#each Array(5) as _,i }
-  <img src="star.webp" alt="star" style="width:40px; height:auto"/>
-  {/each}
+      {#each Array(5) as _,i }
 
+      <img src="star.webp" alt="star" style="width:40px; height:auto"/>
+
+      {/each}
+  
     </div>
 
     <div class="italic"> on {date} </div>
@@ -44,7 +34,7 @@ date: '2022-06-08'
 
 <style>
   h1,h2,h3,h4{
-    margin: 0;
+    margin:  0;
     padding: 0;
   }
 </style>

@@ -37,6 +37,13 @@
       clearInterval($redirectSetInterval);
       prefetch(href);
       goto(href);
+
+      // this janky solution allows for the embeded jitsu to load ... otherwise I had to
+      //  manually reload the page and use "export const router = false" for the +page.js
+      if (href == "/screenshare")
+        setTimeout(() => {
+          location.reload();
+        }, 100);
     }}
     class="{bool &&
       `${btnColor} border-b-1 rounded px-3 py-1`} flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent {`${btnColorHover}`}  hover:rounded hover:py-1  hover:px-3 duration-300 hover:shadow-lg"

@@ -1,22 +1,21 @@
 <script>
   import { onMount } from "svelte";
 
-  // onDestroy(() => {
-  //   api.dispose();
-  // });
-  let domain, options, api, hangUp, meet, par, firstID;
+  let domain, options, api, par, firstID;
+
+  function hangUpBtn() {
+    api.dispose();
+
+    setTimeout(() => {
+      window.location.href = "https://thinksolve.io";
+    }, 300);
+  }
 
   onMount(() => {
-    // window.addEventListener("popstate", () => {
-    //   window.location.reload();
-    // });
-
-    meet = document.querySelector("#meet");
-
     domain = "meet.jit.si";
     options = {
-      roomName: "BrightowlTutoring12522",
-      width: "100%",
+      roomName: "ThinkSolve12522",
+      // width: "100%",
       height: "740px",
       parentNode: document.querySelector("#meet"),
       configOverwrite: {
@@ -53,7 +52,7 @@
           // 'mute-video-everyone',
           // 'mute-everyone',
           // 'security',
-          // 'hangup',
+          // "hangup",
           // 'sharedvideo',
           // 'videoquality',
           // 'profile',
@@ -69,16 +68,8 @@
         ],
       },
     };
+
     api = new JitsiMeetExternalAPI(domain, options);
-
-    hangUp = document.getElementById("hangUp");
-    hangUp.addEventListener("click", () => {
-      api.dispose();
-
-      setTimeout(() => {
-        window.location.href = "https://thinksolve.io";
-      }, 1000);
-    });
 
     api.addEventListener("participantRoleChanged", function (event) {
       if (event.role === "moderator") {
@@ -97,52 +88,11 @@
   <script src="https://meet.jit.si/external_api.js"></script>
 </svelte:head>
 
-<!-- <head> -->
-<!-- <script>
-    window.addEventListener("popstate", () => {
-      window.location.reload();
-    });
-  </script> -->
-
-<!-- </head> -->
-
-<!-- <button id="demo">demo</button> -->
-
-<div id="meet" />
-
-<div id="cornerDIV">
-  <!-- <div> -->
-  <img id="hangUp" />
+<div class="relative w-full">
+  <div id="meet" />
+  <img
+    on:click={hangUpBtn}
+    alt="hangup button"
+    class="absolute sm:bottom-10 sm:right-10 bottom-56 right-5 flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0  hover:content-[url('/hangup-red.png')] "
+  />
 </div>
-
-<style>
-  body {
-    background-color: rgb(15, 15, 15);
-    padding: 0;
-    margin: 0;
-  }
-  .overflow-wrapper {
-    display: none;
-  }
-
-  #cornerDIV {
-    position: absolute;
-    left: 48%;
-    bottom: 40px;
-  }
-  #hangUp {
-    content: url("https://brightowltutoring.com/s/hangup-gray.png");
-    margin: 0 auto;
-    display: flex;
-    width: 50px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    transform: rotate(90deg);
-    transition: 0.4s ease-in-out;
-    /* transition: transform 0.4s ease-in-out; */
-  }
-  #hangUp:hover {
-    content: url("https://brightowltutoring.com/s/hangup-red.png");
-    transform: scale(1.85);
-  }
-</style>

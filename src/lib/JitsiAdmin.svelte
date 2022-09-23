@@ -56,7 +56,7 @@
         // email: 'jonag@pm.me',
         displayName: "JA",
       },
-      roomName: "BrightowlTutoring12522",
+      roomName: "ThinkSolve12522",
       width: "100%",
       height: "740px",
       parentNode: document.querySelector("#meet"),

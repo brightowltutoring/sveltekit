@@ -105,10 +105,22 @@ export const routes = writable({
     title: "Plans",
     isCurrent: false,
   }, 
+  screenshare: {
+    name:'Screenshare',
+    href: "/screenshare",
+    title: "Screenshare 📺",
+    isCurrent: false,
+  },
   login: {
     name:'Login',
     href: "/login",
     title: "Login 🚀",
+    isCurrent: false,
+  },
+  physics: {
+    name:'physics',
+    href: "/physics",
+    title: "physics 🚀",
     isCurrent: false,
   },
   schools: {
@@ -135,18 +147,6 @@ export const routes = writable({
     title: "katex",
     isCurrent: false,
   }, 
-  jitsi: {
-    name:'jitsi',
-    href: "/jitsi",
-    title: "jitsi 🚀",
-    isCurrent: false,
-  },
-  physics: {
-    name:'physics',
-    href: "/physics",
-    title: "physics 🚀",
-    isCurrent: false,
-  },
 })
 
 

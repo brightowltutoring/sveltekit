@@ -1,11 +1,12 @@
-<!-- This file lazy renders both mathjax and katex math based on either one of two custom HTML
-properties ... as  used in the querySelectors below
--->
 <script>
   import katex from "katex";
   import { onMount } from "svelte";
 
   onMount(() => {
+    // window.addEventListener("popstate", () => {
+    //   MathJax.typeset();
+    // });
+
     // mathjax observer
     let mathjaxObserver = new IntersectionObserver(callback1, {
       root: null,
@@ -75,6 +76,10 @@ properties ... as  used in the querySelectors below
     }
   });
 </script>
+
+<!-- This file lazy renders both mathjax and katex math based on either one of two custom HTML
+properties ... as  used in the querySelectors below
+-->
 
 <svelte:head>
   <!-- katex part -->

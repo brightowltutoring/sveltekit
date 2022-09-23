@@ -1,7 +1,19 @@
-<Katexer />
+
+<MathRenderer />
 <script>
-  import Katexer from "$lib/Katexer.svelte";
+  import MathRenderer from "$lib/Kajax.svelte";
+
 </script>
+
+<!-- 
+<button on:click={()=>{
+MathJax.typeset();  
+}}>typeset
+</button> -->
+
+<p class="text-3xl flex justify-center" d m={`\\cancelto{0}{x}`}/>
+<p class="text-3xl flex justify-center" d k={`\\cancel{x}`}/>
+
 
 <div id="charges-1">
 
@@ -20,6 +32,7 @@
   Therefore only the outer segments CD and AB are feasible for the net electric field to cancel — i.e. we need only compare the magnitudes from each charge.
 
   - Since the magnitude of the electric field depends on both the charge magnitude, and "square-inversely" to the separation distance — i.e. $E \sim |Q|/d^2$ — then only a point, call it X, in segment CD is feasible as it is "close to a weak source and far from a strong source"
+
 
 
   ### Explicit calculation
@@ -96,6 +109,8 @@
 
 
   <img style=" margin: 0 auto; display:flex;width: 65vw;min-width: 280px;max-width: 600px;" src="https://raw.githubusercontent.com/brightowltutoring/web/main/circuits-1.png"/>
+
+  
 
 </div>
 
