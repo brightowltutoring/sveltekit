@@ -1060,8 +1060,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-301f2961.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-301f2961.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-e7cf9de8.js", "_app/immutable/chunks/navigation-393594f5.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-9146944b.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-9146944b.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-bbdbb26f.js", "_app/immutable/chunks/navigation-bf6ab89a.js"];
     stylesheets = ["_app/immutable/assets/+layout-844cf714.css"];
   }
 });
@@ -14802,12 +14802,6 @@ var init_Reviews = __esm({
         body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
       },
       {
-        name: "Parent of Rachel",
-        title: "stellar!",
-        date: "2022-06-08",
-        body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
-      },
-      {
         name: "Celia",
         title: "amazing IBHL physics tutor ",
         date: "2022-05-01",
@@ -14842,6 +14836,12 @@ var init_Reviews = __esm({
         title: "IB Physics Year 1",
         date: "2021-02-01",
         body: "He helps through the process of answering each question by helping with each step. From test preparation to experiments, he has assisted me with every problem have encountered. He is also a fun person to talk to and a very friendly person."
+      },
+      {
+        name: "Parent of Rachel",
+        title: "stellar!",
+        date: "2020-06-08",
+        body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
       },
       {
         name: "Paola A.",
@@ -14935,8 +14935,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-4c9c8478.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-4c9c8478.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/Reviews-e8b14b20.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-95c756bc.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-95c756bc.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/Reviews-4f8bdd03.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = ["_app/immutable/assets/Reviews-3e320a56.css"];
   }
 });
@@ -21470,8 +21470,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-53a44a44.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-53a44a44.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-393594f5.js", "_app/immutable/chunks/singletons-e7cf9de8.js"];
+    file7 = "_app/immutable/components/pages/login/_page.svelte-d3d73e45.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-d3d73e45.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-bf6ab89a.js", "_app/immutable/chunks/singletons-bbdbb26f.js"];
     stylesheets7 = ["_app/immutable/assets/+page-6074a07d.css"];
   }
 });
@@ -22004,8 +22004,8 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/reviews/_page.svelte-e7f47c71.js";
-    imports12 = ["_app/immutable/components/pages/reviews/_page.svelte-e7f47c71.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Reviews-e8b14b20.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js"];
+    file12 = "_app/immutable/components/pages/reviews/_page.svelte-ab8c247e.js";
+    imports12 = ["_app/immutable/components/pages/reviews/_page.svelte-ab8c247e.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Reviews-4f8bdd03.js", "_app/immutable/chunks/store-33b71e5f.js", "_app/immutable/chunks/index-81096dd8.js"];
     stylesheets12 = ["_app/immutable/assets/Reviews-3e320a56.css"];
   }
 });
@@ -24213,7 +24213,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-d41917bd.js", "imports": ["_app/immutable/start-d41917bd.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-e7cf9de8.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-d2a451c5.js", "imports": ["_app/immutable/start-d2a451c5.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-bbdbb26f.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

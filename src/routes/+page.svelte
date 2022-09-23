@@ -29,7 +29,15 @@
   </div>
 </div>
 
-<div class="my-80 pb-80">
+<br />
+<br />
+<br />
+<a href="#reviews" class="flex justify-center items-center text-center text-6xl"
+  >👇</a
+>
+<br />
+
+<div id="reviews" class="my-80 pb-80">
   <Reviews />
 </div>
 
