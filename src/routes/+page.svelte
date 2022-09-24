@@ -1,7 +1,7 @@
 <script>
   import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
   import Testimonials from "$lib/Testimonials.svelte";
-  import { isDarkMode, lessThan768 } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store.js";
   import Reviews from "$lib/Reviews.svelte";
 </script>
 
@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<div id="reviews" class={!$lessThan768 && "my-80 pb-80"}>
+<div id="reviews" class="md:my-80 md:pb-80">
   <Reviews />
 </div>
 

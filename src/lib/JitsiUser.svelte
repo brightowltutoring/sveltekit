@@ -21,6 +21,7 @@
       // height: "740px",
       parentNode: document.querySelector("#meet"),
       configOverwrite: {
+        disableDeepLinking: true,
         disableRemoteMute: true, //TODO: USER ONLY
         notifications: "lobby.notificationTitle", //TODO: USER ONLY
         startWithAudioMuted: true,
@@ -33,7 +34,7 @@
       },
       interfaceConfigOverwrite: {
         // DEFAULT_BACKGROUND: `#f6cf02`,
-        MOBILE_APP_PROMO: false,
+        // MOBILE_APP_PROMO: false,
         SHOW_CHROME_EXTENSION_BANNER: false,
         SETTINGS_SECTIONS: [
           "devices",
