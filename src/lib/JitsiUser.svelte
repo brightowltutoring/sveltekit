@@ -33,6 +33,7 @@
       },
       interfaceConfigOverwrite: {
         // DEFAULT_BACKGROUND: `#f6cf02`,
+        MOBILE_APP_PROMO: false,
         SHOW_CHROME_EXTENSION_BANNER: false,
         SETTINGS_SECTIONS: [
           "devices",

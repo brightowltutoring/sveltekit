@@ -1,7 +1,7 @@
 <script>
   import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
   import Testimonials from "$lib/Testimonials.svelte";
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode, lessThan768 } from "$lib/store.js";
   import Reviews from "$lib/Reviews.svelte";
 </script>
 
@@ -19,17 +19,24 @@
   />
 </main>
 
-<div class="flex justify-center items-center h-3/5 text-center">
+<div class="h-3/5 flex justify-center items-center text-center">
   <div class="grid grid-rows-1">
     <div class="text-6xl font-Poppins pb-4">We'll be back in October</div>
     <div class="text-lg font-Nunito ">
       🎃 pressing inquiries can be sent to thinksolve.io[at]gmail.com
       <!-- (check out some <a class="text-orange-500 hover:scale-150" href="/reviews">reviews</a>) -->
+      <div
+        on:click={() => {
+          window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+        }}
+      >
+        (click for reviews)
+      </div>
     </div>
   </div>
 </div>
 
-<div id="reviews" class="my-80 pb-80">
+<div id="reviews" class={!$lessThan768 && "my-80 pb-80"}>
   <Reviews />
 </div>
 
