@@ -1,1 +1,1 @@
-export { default as component } from "../../../src/routes/katex/+page.svx";
+export { default as component } from "../../../src/routes/calendly/+page.svelte";

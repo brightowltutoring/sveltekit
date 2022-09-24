@@ -13,7 +13,7 @@
 <div style="font-size:50pt; text-align:center">📚</div>
 
 <div class="flex justify-center">
-  <button
+  <!-- <button
     type="button"
     class="button"
     on:click={() => gotoCalendlyPage("webinowl-school")}
@@ -25,7 +25,7 @@
     class="button"
     on:click={() => gotoCalendlyPage("mockowl-school")}
     ><b> Mockowl </b>
-  </button>
+  </button> -->
 </div>
 
 <style>

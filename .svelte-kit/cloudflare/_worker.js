@@ -1061,8 +1061,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-104a592c.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-104a592c.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-b7cb40cb.js", "_app/immutable/chunks/navigation-f492e582.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-72c7d036.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-72c7d036.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-5f10ff70.js", "_app/immutable/chunks/navigation-e8bbd2dd.js"];
     stylesheets = ["_app/immutable/assets/+layout-1fd06fbf.css"];
   }
 });
@@ -21403,8 +21403,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-26277f05.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-26277f05.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-f492e582.js", "_app/immutable/chunks/singletons-b7cb40cb.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-966b40ae.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-966b40ae.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-e8bbd2dd.js", "_app/immutable/chunks/singletons-5f10ff70.js"];
     stylesheets6 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -21848,21 +21848,21 @@ var init_page_svelte5 = __esm({
       const plansCardArray = [
         {
           card: 1,
-          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-webinowl?hide_gdpr_banner=1",
+          calendlyUrl: "https://calendly.com/thinksolve/invoice-webinowl?hide_gdpr_banner=1",
           buttonText: "Classico",
           cardText: "  Classic 1-on-1 session with smooth screen sharing. Supported platforms: Zoom, TeamViewer Meeting, and Microsoft Teams Digital session notesavailable at a premium ",
           href: sampleHref
         },
         {
           card: 2,
-          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-blitzowl?hide_gdpr_banner=1",
+          calendlyUrl: "https://calendly.com/thinksolve/invoice-blitzowl?hide_gdpr_banner=1",
           buttonText: "Blitz",
           cardText: "  Submit your homework Receive a personal 15-day solution URL/page Cost calculated based on number of questions submitted Single and bundled options available.",
           href: sampleHref
         },
         {
           card: 3,
-          calendlyUrl: "https://calendly.com/brightowltutoring/invoice-mockowl?hide_gdpr_banner=1",
+          calendlyUrl: "https://calendly.com/thinksolve/invoice-mockowl?hide_gdpr_banner=1",
           buttonText: "Mock",
           cardText: " Get test ready. We provide a mock test session complete with live support and a digital copy of answers. Solution key available at a premium",
           href: sampleHref
@@ -21912,8 +21912,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file10 = "_app/immutable/components/pages/plans/_page.svelte-47473449.js";
-    imports10 = ["_app/immutable/components/pages/plans/_page.svelte-47473449.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
+    file10 = "_app/immutable/components/pages/plans/_page.svelte-b7d71714.js";
+    imports10 = ["_app/immutable/components/pages/plans/_page.svelte-b7d71714.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
     stylesheets10 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
@@ -22102,8 +22102,8 @@ var init__14 = __esm({
     init_page2();
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/screenshare/_page.svelte-9cd42489.js";
-    imports14 = ["_app/immutable/components/pages/screenshare/_page.svelte-9cd42489.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-f492e582.js", "_app/immutable/chunks/singletons-b7cb40cb.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
+    file14 = "_app/immutable/components/pages/screenshare/_page.svelte-d40d22e6.js";
+    imports14 = ["_app/immutable/components/pages/screenshare/_page.svelte-d40d22e6.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-e8bbd2dd.js", "_app/immutable/chunks/singletons-5f10ff70.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
     stylesheets14 = [];
   }
 });
@@ -24224,7 +24224,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "hangup-gray.png", "hangup-red.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-3b7cf3d9.js", "imports": ["_app/immutable/start-3b7cf3d9.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-b7cb40cb.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-a6b4e63c.js", "imports": ["_app/immutable/start-a6b4e63c.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-5f10ff70.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

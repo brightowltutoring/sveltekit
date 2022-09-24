@@ -123,12 +123,12 @@ export const routes = writable({
     title: "physics 🚀",
     isCurrent: false,
   },
-  schools: {
-    name:'schools',
-    href: "/schools",
-    title: "Schools 📚",
-    isCurrent: false,
-  },
+  // schools: {
+  //   name:'schools',
+  //   href: "/schools",
+  //   title: "Schools 📚",
+  //   isCurrent: false,
+  // },
   math: {
     name:'math',
     href: "/math",
