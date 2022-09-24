@@ -46,13 +46,26 @@
   }
   // sets jankytown for smaller than med
   $: if ($lessThan768) {
-    if ($scrollY == 0) jankytown = "bottom-0 backdrop-blur-3xl";
+    if ($scrollY == 0) {
+      $page.url.pathname !== "/screenshare"
+        ? (jankytown = "bottom-0 backdrop-blur-3xl ")
+        : (jankytown = "-bottom-20 backdrop-blur-3xl ");
+    }
     if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
       jankytown = "bottom-0 backdrop-blur-3xl ";
     if ($scrollY > 400 && $instDeltaY > 10)
       jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
     if ($instDeltaY < -130)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
+  }
+
+  $: if (
+    $lessThan768 &&
+    $scrollY == 0 &&
+    $page.url.pathname == "/screenshare"
+  ) {
+    jankytown = "-bottom-20";
+    // alert("ayyy");
   }
 </script>
 

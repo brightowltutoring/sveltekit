@@ -1,7 +1,13 @@
 <script>
   import { onMount } from "svelte";
-  import { lessThan768 } from "$lib/store.js";
+  import {
+    lessThan768,
+    // scrollY, jankytownSTORE
+  } from "$lib/store.js";
   import { goto } from "$app/navigation";
+  // $: if ($lessThan768 && $scrollY == 0) {
+  //   $jankytownSTORE = "bottom-0 backdrop-blur-3xl";
+  // }
 
   let domain, options, api, par, firstID;
 
