@@ -9,16 +9,22 @@ export const reviews = [
       body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!",
     },   
     {
+      name: "magnus",
+      title: "Great help before final!",
+      date: "2022-06-26",
+      body: "Waves & oscillation was not covered so well by my teacher ... the session + mock test really helped out before my final exam!",
+    },   
+    {
       name: "Thomas Finn",
       title: "Great physics tutor!!",
       date: "2022-06-08",
       body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he’s just a great person to chat with!",
     },
     {
-      name: "Magnus",
+      name: "felix belfoy",
       title: "quantitative chem",
       date: "2022-06-01",
-      body: "I only had him for one session ... since my chemistry tutor got sick before my final 😔. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!",
+      body: "I only had him for one session since my chemistry tutor got sick before my final 😔. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!",
     },
     {
       name: "Celia",
