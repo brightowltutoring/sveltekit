@@ -58,15 +58,6 @@
     if ($instDeltaY < -130)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
-
-  $: if (
-    $lessThan768 &&
-    $scrollY == 0 &&
-    $page.url.pathname == "/screenshare"
-  ) {
-    jankytown = "-bottom-20";
-    // alert("ayyy");
-  }
 </script>
 
 <svelte:head>

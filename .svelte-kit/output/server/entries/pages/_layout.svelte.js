@@ -264,27 +264,27 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return $$rendered;
 });
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $instDeltaY, $$unsubscribe_instDeltaY;
+  let $page, $$unsubscribe_page;
   let $scrollY, $$unsubscribe_scrollY;
   let $lessThan768, $$unsubscribe_lessThan768;
+  let $instDeltaY, $$unsubscribe_instDeltaY;
   let $$unsubscribe_isLoggedIn;
   let $$unsubscribe_redirectSetInterval;
   let $$unsubscribe_redirectAfterLoginTimeOut;
   let $$unsubscribe_windowInnerHeight;
   let $$unsubscribe_scrollYMax;
   let $routes, $$unsubscribe_routes;
-  let $page, $$unsubscribe_page;
   let $$unsubscribe_innerWidth;
-  $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
+  $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
-  $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   let jankytown;
   {
@@ -301,8 +301,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   }
   {
     if ($lessThan768) {
-      if ($scrollY == 0)
-        jankytown = "bottom-0 backdrop-blur-3xl";
+      if ($scrollY == 0) {
+        $page.url.pathname !== "/screenshare" ? jankytown = "bottom-0 backdrop-blur-3xl " : jankytown = "-bottom-20 backdrop-blur-3xl ";
+      }
       if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
         jankytown = "bottom-0 backdrop-blur-3xl ";
       if ($scrollY > 400 && $instDeltaY > 10)
@@ -311,16 +312,21 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         jankytown = "bottom-0 backdrop-blur-3xl duration-700";
     }
   }
-  $$unsubscribe_instDeltaY();
+  {
+    if ($lessThan768 && $scrollY == 0 && $page.url.pathname == "/screenshare") {
+      jankytown = "-bottom-20";
+    }
+  }
+  $$unsubscribe_page();
   $$unsubscribe_scrollY();
   $$unsubscribe_lessThan768();
+  $$unsubscribe_instDeltaY();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_redirectSetInterval();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_windowInnerHeight();
   $$unsubscribe_scrollYMax();
   $$unsubscribe_routes();
-  $$unsubscribe_page();
   $$unsubscribe_innerWidth();
   return `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key) => {
     return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
