@@ -1061,8 +1061,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-3ed27cc1.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-3ed27cc1.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-67c94e6e.js", "_app/immutable/chunks/navigation-4eab7c53.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-104a592c.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-104a592c.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-b7cb40cb.js", "_app/immutable/chunks/navigation-f492e582.js"];
     stylesheets = ["_app/immutable/assets/+layout-1fd06fbf.css"];
   }
 });
@@ -14793,16 +14793,22 @@ var init_Reviews = __esm({
         body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!"
       },
       {
+        name: "magnus",
+        title: "Great help before final!",
+        date: "2022-06-26",
+        body: "Waves & oscillation was not covered so well by my teacher ... the session + mock test really helped out before my final exam!"
+      },
+      {
         name: "Thomas Finn",
         title: "Great physics tutor!!",
         date: "2022-06-08",
         body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
       },
       {
-        name: "Magnus",
+        name: "felix belfoy",
         title: "quantitative chem",
         date: "2022-06-01",
-        body: "I only had him for one session ... since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!"
+        body: "I only had him for one session since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!"
       },
       {
         name: "Celia",
@@ -14942,8 +14948,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-c8c03657.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-c8c03657.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/Reviews-2e91ead2.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-6a379f6f.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-6a379f6f.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/Reviews-c3704b9d.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = ["_app/immutable/assets/Reviews-d999b052.css"];
   }
 });
@@ -21397,8 +21403,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-3874ee45.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-3874ee45.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-4eab7c53.js", "_app/immutable/chunks/singletons-67c94e6e.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-26277f05.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-26277f05.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-f492e582.js", "_app/immutable/chunks/singletons-b7cb40cb.js"];
     stylesheets6 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -21944,8 +21950,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file11 = "_app/immutable/components/pages/reviews/_page.svelte-27fb7f3c.js";
-    imports11 = ["_app/immutable/components/pages/reviews/_page.svelte-27fb7f3c.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Reviews-2e91ead2.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js"];
+    file11 = "_app/immutable/components/pages/reviews/_page.svelte-88c8ee60.js";
+    imports11 = ["_app/immutable/components/pages/reviews/_page.svelte-88c8ee60.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/Reviews-c3704b9d.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js"];
     stylesheets11 = ["_app/immutable/assets/Reviews-d999b052.css"];
   }
 });
@@ -22096,8 +22102,8 @@ var init__14 = __esm({
     init_page2();
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/screenshare/_page.svelte-2f60ffd7.js";
-    imports14 = ["_app/immutable/components/pages/screenshare/_page.svelte-2f60ffd7.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-4eab7c53.js", "_app/immutable/chunks/singletons-67c94e6e.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
+    file14 = "_app/immutable/components/pages/screenshare/_page.svelte-9cd42489.js";
+    imports14 = ["_app/immutable/components/pages/screenshare/_page.svelte-9cd42489.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-f492e582.js", "_app/immutable/chunks/singletons-b7cb40cb.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
     stylesheets14 = [];
   }
 });
@@ -24218,7 +24224,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "hangup-gray.png", "hangup-red.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-80ec2eee.js", "imports": ["_app/immutable/start-80ec2eee.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-67c94e6e.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-3b7cf3d9.js", "imports": ["_app/immutable/start-3b7cf3d9.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-b7cb40cb.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
