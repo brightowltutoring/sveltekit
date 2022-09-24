@@ -3,10 +3,10 @@ export const reviews = [
 
 
     {
-      name: "Cathy M",
-      title: "Toronto French School",
+      name: "CM",
+      title: "grade 10 math / grade 11 physics",
       date: "2022-07-11",
-      body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her grade 10 math / grade 11 physics (I shadowed a few sessions Jon :D ! .. the french jokes were also much appreciated :)",
+      body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!",
     },   
     {
       name: "Thomas Finn",

@@ -973,10 +973,10 @@ var init_layout_svelte = __esm({
       return $$rendered;
     });
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $page, $$unsubscribe_page;
-      let $scrollY, $$unsubscribe_scrollY;
-      let $lessThan768, $$unsubscribe_lessThan768;
       let $instDeltaY, $$unsubscribe_instDeltaY;
+      let $scrollY, $$unsubscribe_scrollY;
+      let $page, $$unsubscribe_page;
+      let $lessThan768, $$unsubscribe_lessThan768;
       let $$unsubscribe_isLoggedIn;
       let $$unsubscribe_redirectSetInterval;
       let $$unsubscribe_redirectAfterLoginTimeOut;
@@ -984,10 +984,10 @@ var init_layout_svelte = __esm({
       let $$unsubscribe_scrollYMax;
       let $routes, $$unsubscribe_routes;
       let $$unsubscribe_innerWidth;
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
-      $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
       $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
+      $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
@@ -1021,15 +1021,10 @@ var init_layout_svelte = __esm({
             jankytown = "bottom-0 backdrop-blur-3xl duration-700";
         }
       }
-      {
-        if ($lessThan768 && $scrollY == 0 && $page.url.pathname == "/screenshare") {
-          jankytown = "-bottom-20";
-        }
-      }
-      $$unsubscribe_page();
-      $$unsubscribe_scrollY();
-      $$unsubscribe_lessThan768();
       $$unsubscribe_instDeltaY();
+      $$unsubscribe_scrollY();
+      $$unsubscribe_page();
+      $$unsubscribe_lessThan768();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_redirectAfterLoginTimeOut();
@@ -1066,9 +1061,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-62feb68b.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-62feb68b.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-2ec26855.js", "_app/immutable/chunks/navigation-3281ec79.js"];
-    stylesheets = ["_app/immutable/assets/+layout-78765652.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-0c1efe34.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-0c1efe34.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-137f9635.js", "_app/immutable/chunks/navigation-8d76a7a2.js"];
+    stylesheets = ["_app/immutable/assets/+layout-1fd06fbf.css"];
   }
 });
 
@@ -21402,8 +21397,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file6 = "_app/immutable/components/pages/login/_page.svelte-8bc01c58.js";
-    imports6 = ["_app/immutable/components/pages/login/_page.svelte-8bc01c58.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-3281ec79.js", "_app/immutable/chunks/singletons-2ec26855.js"];
+    file6 = "_app/immutable/components/pages/login/_page.svelte-79bb08db.js";
+    imports6 = ["_app/immutable/components/pages/login/_page.svelte-79bb08db.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-8d76a7a2.js", "_app/immutable/chunks/singletons-137f9635.js"];
     stylesheets6 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -22071,11 +22066,8 @@ var init_page_svelte8 = __esm({
       $$unsubscribe_lessThan768();
       return `${$$result.head += `<script src="${"https://meet.jit.si/external_api.js"}" data-svelte="svelte-1pkind7"><\/script>`, ""}
 
-<div class="${"relative -translate-y-10"}"><div id="${"meet"}" class="${"w-full h-[670px]"}"></div>
-  <img alt="${"hangup button"}" class="${"absolute " + escape("opacity-0", true) + " " + escape(
-        $lessThan768 ? "top-5 right-0 left-0 text-center mr-auto ml-auto" : "bottom-10 right-10 ",
-        true
-      ) + " flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')]"}"></div>
+<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px]"}"></div>
+  <img alt="${"hangup button"}" class="${"absolute " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-10 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')]"}"></div>
 
 `;
     });
@@ -22104,8 +22096,8 @@ var init__14 = __esm({
     init_page2();
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/screenshare/_page.svelte-0917967b.js";
-    imports14 = ["_app/immutable/components/pages/screenshare/_page.svelte-0917967b.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-3281ec79.js", "_app/immutable/chunks/singletons-2ec26855.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
+    file14 = "_app/immutable/components/pages/screenshare/_page.svelte-49d2dc35.js";
+    imports14 = ["_app/immutable/components/pages/screenshare/_page.svelte-49d2dc35.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-3862d6ae.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-8d76a7a2.js", "_app/immutable/chunks/singletons-137f9635.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
     stylesheets14 = [];
   }
 });
@@ -24226,7 +24218,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "hangup-gray.png", "hangup-red.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-7259dce4.js", "imports": ["_app/immutable/start-7259dce4.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-2ec26855.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-f55480f5.js", "imports": ["_app/immutable/start-f55480f5.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-137f9635.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

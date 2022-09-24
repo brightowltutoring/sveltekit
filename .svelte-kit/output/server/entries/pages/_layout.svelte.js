@@ -264,10 +264,10 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return $$rendered;
 });
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $page, $$unsubscribe_page;
-  let $scrollY, $$unsubscribe_scrollY;
-  let $lessThan768, $$unsubscribe_lessThan768;
   let $instDeltaY, $$unsubscribe_instDeltaY;
+  let $scrollY, $$unsubscribe_scrollY;
+  let $page, $$unsubscribe_page;
+  let $lessThan768, $$unsubscribe_lessThan768;
   let $$unsubscribe_isLoggedIn;
   let $$unsubscribe_redirectSetInterval;
   let $$unsubscribe_redirectAfterLoginTimeOut;
@@ -275,10 +275,10 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_scrollYMax;
   let $routes, $$unsubscribe_routes;
   let $$unsubscribe_innerWidth;
-  $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
-  $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
+  $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
@@ -312,15 +312,10 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         jankytown = "bottom-0 backdrop-blur-3xl duration-700";
     }
   }
-  {
-    if ($lessThan768 && $scrollY == 0 && $page.url.pathname == "/screenshare") {
-      jankytown = "-bottom-20";
-    }
-  }
-  $$unsubscribe_page();
-  $$unsubscribe_scrollY();
-  $$unsubscribe_lessThan768();
   $$unsubscribe_instDeltaY();
+  $$unsubscribe_scrollY();
+  $$unsubscribe_page();
+  $$unsubscribe_lessThan768();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_redirectSetInterval();
   $$unsubscribe_redirectAfterLoginTimeOut();
