@@ -22,16 +22,16 @@ export const nodes = [
 export const dictionary = {
 	"": [[1], [0], 2],
 	"calcom": [[1], [0], 3],
-	"calendly": [[1], [0], 4],
-	"faq": [[1], [0], 5],
-	"katex": [[1], [0], 6],
-	"login": [[1], [0], 7],
-	"math": [[1], [0], 8],
-	"mathjax": [[1], [0], 9],
-	"physics": [[1], [0], 10],
-	"plans": [[1], [0], 11],
-	"reviews": [[1], [0], 12],
-	"samplequiz": [[1], [0], 13],
-	"schools": [[1], [0], 14],
-	"screenshare": [[1], [0], 15]
+	"faq": [[1], [0], 4],
+	"katex": [[1], [0], 5],
+	"login": [[1], [0], 6],
+	"math": [[1], [0], 7],
+	"mathjax": [[1], [0], 8],
+	"physics": [[1], [0], 9],
+	"plans": [[1], [0], 10],
+	"reviews": [[1], [0], 11],
+	"samplequiz": [[1], [0], 12],
+	"schools": [[1], [0], 13],
+	"screenshare": [[1], [0], 14],
+	"screenshareA": [[1], [0], 15]
 };

@@ -1,13 +1,7 @@
 <script>
   import { onMount } from "svelte";
-  import {
-    lessThan768,
-    // scrollY, jankytownSTORE
-  } from "$lib/store.js";
+  import { lessThan768 } from "$lib/store.js";
   import { goto } from "$app/navigation";
-  // $: if ($lessThan768 && $scrollY == 0) {
-  //   $jankytownSTORE = "bottom-0 backdrop-blur-3xl";
-  // }
 
   let domain, options, api, par, firstID;
 
@@ -22,6 +16,9 @@
   onMount(() => {
     domain = "meet.jit.si";
     options = {
+      userInfo: {
+        displayName: "ThinkSolve",
+      },
       roomName: "ThinkSolve12522",
       // width: "100%",
       // height: "740px",
@@ -29,26 +26,19 @@
       configOverwrite: {
         disabledSounds: ["KNOCKING_PARTICIPANT_SOUND"],
         disableDeepLinking: true,
-        disableRemoteMute: true, //TODO: USER ONLY
-        notifications: "lobby.notificationTitle", //TODO: USER ONLY
         startWithAudioMuted: true,
         startWithVideoMuted: true,
-        remoteVideoMenu: {
-          //TODO: USER ONLY
-          disableKick: true,
-          disablePrivateChat: true,
-        },
       },
       interfaceConfigOverwrite: {
         // DEFAULT_BACKGROUND: `#f6cf02`,
         SHOW_CHROME_EXTENSION_BANNER: false,
         SETTINGS_SECTIONS: [
           "devices",
-          // 'moderator',
-          // 'language',
-          // 'profile',
-          // 'calendar',
-          // 'sounds',
+          "moderator",
+          "language",
+          "profile",
+          "calendar",
+          "sounds",
         ],
         TOOLBAR_BUTTONS: [
           "desktop",
@@ -59,22 +49,22 @@
           "chat",
           "fodeviceselection",
           "etherpad",
-          // 'mute-video-everyone',
-          // 'mute-everyone',
-          // 'security',
+          "mute-video-everyone",
+          "mute-everyone",
+          "security",
           // "hangup",
-          // 'sharedvideo',
-          // 'videoquality',
-          // 'profile',
-          // 'raisehand',
-          // 'livestreaming',
-          // 'recording',
-          // 'closedcaptions',
-          // 'filmstrip',
-          // 'feedback',
-          // 'stats',
-          // 'shortcuts',
-          // 'tileview'
+          "sharedvideo",
+          "videoquality",
+          "profile",
+          "raisehand",
+          "livestreaming",
+          "recording",
+          "closedcaptions",
+          "filmstrip",
+          "feedback",
+          "stats",
+          "shortcuts",
+          "tileview",
         ],
       },
     };
@@ -86,9 +76,15 @@
     // });
 
     api.addEventListener("participantRoleChanged", function (event) {
+      if (event.role === "moderator") {
+        api.executeCommand("password", "thnkslv");
+        api.executeCommand("toggleLobby", true);
+      }
+
       par = [...api.getParticipantsInfo()];
       // firstID = Object.values(par[0])[3];
       // api.pinParticipant(firstID);
+
       // alert(firstID);
       // alert(par.length);
     });

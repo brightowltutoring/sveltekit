@@ -11,7 +11,8 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   let cardColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  let { calendlyUrl = "" } = $$props;
+  let { payNowUrl = "" } = $$props;
+  let { payLaterUrl = "" } = $$props;
   let { btnColorHover = "" } = $$props;
   let { card } = $$props;
   let buttonColor = {
@@ -19,8 +20,10 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     2: "bg-[rgb(244,77,77)]",
     3: "bg-[rgb(254,164,92)]"
   };
-  if ($$props.calendlyUrl === void 0 && $$bindings.calendlyUrl && calendlyUrl !== void 0)
-    $$bindings.calendlyUrl(calendlyUrl);
+  if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
+    $$bindings.payNowUrl(payNowUrl);
+  if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
+    $$bindings.payLaterUrl(payLaterUrl);
   if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
     $$bindings.btnColorHover(btnColorHover);
   if ($$props.card === void 0 && $$bindings.card && card !== void 0)
@@ -31,10 +34,19 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
 
-<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md duration-300 rounded-md p-4 " + escape(
+<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><div class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</div>
+
+  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-300 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
-  ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `default button Text`}</button>
+  ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `Pay Now`}</button>
+
+  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " bg-opacity-70 hover:shadow-md hover:scale-105 duration-300 rounded-md p-4 " + escape(
+    $isDarkMode ? "group-hover:bg-opacity-70" : "group-hover:bg-opacity-70",
+    true
+  ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `Pay Later`}</button>
+
+  
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
   
@@ -50,46 +62,62 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const plansCardArray = [
     {
       card: 1,
-      calendlyUrl: "https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&background_color=white&primary_color=2aa5d6",
+      payNowUrl: "https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&primary_color=2aa5d6",
+      payLaterUrl: "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
       buttonText: "Classico",
-      cardText: "Classic 1-on-1 session with smooth screen sharing. Supported platforms: Zoom, TeamViewer Meeting, Microsoft Teams, or /screenshare. Digital session notes available at a premium. ",
+      cardTitle: "Classico",
+      cardText: "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
       href: sampleHref
     },
     {
       card: 3,
-      calendlyUrl: "https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=fea45c",
+      payNowUrl: "https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=fea45c",
+      payLaterUrl: "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
       buttonText: "Mock",
-      cardText: " Get test ready. We provide a mock test session complete with live support and a digital copy of answers. Solution key available at a premium",
+      cardTitle: "Mock",
+      cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",
       href: sampleHref
     },
     {
       card: 2,
-      calendlyUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+      payNowUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+      payLaterUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
       buttonText: "Custom",
+      cardTitle: "Custom",
       cardText: `Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. `,
       href: sampleHref
     }
   ];
   $$result.css.add(css);
-  return `<div class="${"font-Poppins text-center sm:text-7xl text-6xl pb-2 "}">Plans</div>
+  return `
 
 
-<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
+<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
     return `<div>${validate_component(PlansCard, "PlansCard").$$render(
       $$result,
       {
         card: item.card,
-        calendlyUrl: item.calendlyUrl
+        payNowUrl: item.payNowUrl,
+        payLaterUrl: item.payLaterUrl
       },
       {},
       {
         cardText: () => {
           return `<span slot="${"cardText"}">${escape(item.cardText)}
-          ${item.buttonText == "Custom" ? `<p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">sample</a></p>` : ``}
+          
+          <p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">invoice sample</a></p>
+          
         </span>`;
         },
-        buttonText: () => {
-          return `<span slot="${"buttonText"}">${escape(item.buttonText)} </span>`;
+        cardTitle: () => {
+          return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
+        },
+        default: () => {
+          return `
+        
+
+        
+      `;
         }
       }
     )}
