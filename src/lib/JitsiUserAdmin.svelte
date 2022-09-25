@@ -30,7 +30,7 @@
         startWithVideoMuted: true,
       },
       interfaceConfigOverwrite: {
-        // DEFAULT_BACKGROUND: `#f6cf02`,
+        DEFAULT_BACKGROUND: `#130e21`,
         SHOW_CHROME_EXTENSION_BANNER: false,
         SETTINGS_SECTIONS: [
           "devices",
