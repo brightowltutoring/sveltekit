@@ -50,23 +50,23 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const plansCardArray = [
     {
       card: 1,
-      calendlyUrl: "https://calendly.com/thinksolve/invoice-webinowl?hide_gdpr_banner=1",
+      calendlyUrl: "https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&background_color=white&primary_color=2aa5d6",
       buttonText: "Classico",
-      cardText: "  Classic 1-on-1 session with smooth screen sharing. Supported platforms: Zoom, TeamViewer Meeting, and Microsoft Teams Digital session notesavailable at a premium ",
-      href: sampleHref
-    },
-    {
-      card: 2,
-      calendlyUrl: "https://calendly.com/thinksolve/invoice-blitzowl?hide_gdpr_banner=1",
-      buttonText: "Blitz",
-      cardText: "  Submit your homework Receive a personal 15-day solution URL/page Cost calculated based on number of questions submitted Single and bundled options available.",
+      cardText: "Classic 1-on-1 session with smooth screen sharing. Supported platforms: Zoom, TeamViewer Meeting, Microsoft Teams, or /screenshare. Digital session notes available at a premium. ",
       href: sampleHref
     },
     {
       card: 3,
-      calendlyUrl: "https://calendly.com/thinksolve/invoice-mockowl?hide_gdpr_banner=1",
+      calendlyUrl: "https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=fea45c",
       buttonText: "Mock",
       cardText: " Get test ready. We provide a mock test session complete with live support and a digital copy of answers. Solution key available at a premium",
+      href: sampleHref
+    },
+    {
+      card: 2,
+      calendlyUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+      buttonText: "Custom",
+      cardText: `Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. `,
       href: sampleHref
     }
   ];
@@ -85,7 +85,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       {
         cardText: () => {
           return `<span slot="${"cardText"}">${escape(item.cardText)}
-          <p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">sample</a></p>
+          ${item.buttonText == "Custom" ? `<p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">sample</a></p>` : ``}
         </span>`;
         },
         buttonText: () => {

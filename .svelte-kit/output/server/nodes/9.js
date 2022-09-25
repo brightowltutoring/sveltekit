@@ -1,7 +1,7 @@
 
 
 export const index = 9;
-export const component = async () => (await import('../entries/pages/plans/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/plans/_page.svelte-b7d71714.js';
-export const imports = ["_app/immutable/components/pages/plans/_page.svelte-b7d71714.js","_app/immutable/chunks/index-e087fcf9.js","_app/immutable/chunks/CalendlyJsandCSS-863d0839.js","_app/immutable/chunks/store-3862d6ae.js","_app/immutable/chunks/index-81096dd8.js","_app/immutable/chunks/index-adbb8214.js"];
-export const stylesheets = ["_app/immutable/assets/+page-ebab19d4.css"];
+export const component = async () => (await import('../entries/pages/mathjax/_page.svx.js')).default;
+export const file = '_app/immutable/components/pages/mathjax/_page.svx-34a6f910.js';
+export const imports = ["_app/immutable/components/pages/mathjax/_page.svx-34a6f910.js","_app/immutable/chunks/index-e087fcf9.js","_app/immutable/chunks/store-d540504c.js","_app/immutable/chunks/index-81096dd8.js"];
+export const stylesheets = [];

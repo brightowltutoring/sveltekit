@@ -11,13 +11,14 @@
   import { elasticOut } from "svelte/easing";
 
   let resetBtn = false;
-  export let calendlyUrl = "";
+  let resetBtn2 = false;
+  export let payNowUrl = "";
+  export let payLaterUrl = "";
 
-  function resetBtnValue() {
-    // hoverTransform = "rotateX(0deg)) scale(1)"
-    resetBtn = !resetBtn;
-    Calendly.initPopupWidget({ url: `${calendlyUrl}` });
-  }
+  // function resetBtnValue() {
+  //   // hoverTransform = "rotateX(0deg)) scale(1)"
+  //   Calendly.initPopupWidget({ url: `${payNowUrl}` });
+  // }
 
   export let btnColorHover = "";
   $: cardColor = $isDarkMode ? dark_lightened : light_darkened;
@@ -47,9 +48,49 @@
     : 'hover:shadow-lg'} rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"
   style={`background:${cardColor}`}
 >
+  <div class="py-6 text-5xl font-Poppins">
+    <slot name="cardTitle">Classico</slot>
+  </div>
+
   {#key resetBtn}
     <button
       in:scale={{ duration: 600, easing: elasticOut }}
+      on:click={() => {
+        resetBtn = !resetBtn;
+        Calendly.initPopupWidget({ url: `${payNowUrl}` });
+        // resetBtnValue();
+      }}
+      class=" {buttonColor[
+        card
+      ]} {btnColorHover}  hover:shadow-md hover:scale-105 duration-300 rounded-md p-4 {$isDarkMode
+        ? 'group-hover:bg-opacity-80'
+        : 'group-hover:bg-opacity-80'} text-xl text-white"
+    >
+      <slot name="buttonText">Pay Now</slot>
+    </button>
+  {/key}
+
+  {#key resetBtn2}
+    <button
+      in:scale={{ duration: 600, easing: elasticOut }}
+      on:click={() => {
+        resetBtn2 = !resetBtn2;
+        Calendly.initPopupWidget({ url: `${payLaterUrl}` });
+        // resetBtnValue();
+      }}
+      class=" {buttonColor[
+        card
+      ]} {btnColorHover} bg-opacity-70  hover:shadow-md hover:scale-105 duration-300 rounded-md p-4 {$isDarkMode
+        ? 'group-hover:bg-opacity-70'
+        : 'group-hover:bg-opacity-70'} text-xl text-white"
+    >
+      <slot name="buttonText">Pay Later</slot>
+    </button>
+  {/key}
+
+  <!-- {#key resetBtn}
+    <button
+      in:scale|self={{ duration: 600, easing: elasticOut }}
       on:click={resetBtnValue}
       class=" {buttonColor[
         card
@@ -59,7 +100,7 @@
     >
       <slot name="buttonText">default button Text</slot>
     </button>
-  {/key}
+  {/key} -->
 
   <div class="py-4">
     <slot name="cardText">default cardText</slot>
