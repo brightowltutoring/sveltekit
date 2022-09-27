@@ -12,7 +12,7 @@
 
   let resetBtn = false;
   let resetBtn2 = false;
-  export let payNowUrl = "";
+  export let schoolUrl = "";
   export let payLaterUrl = "";
 
   export let btnColorHover = "";
@@ -44,7 +44,7 @@
       in:scale={{ duration: 600, easing: elasticOut }}
       on:click={() => {
         resetBtn = !resetBtn;
-        Calendly.initPopupWidget({ url: `${payNowUrl}` });
+        Calendly.initPopupWidget({ url: `${schoolUrl}` });
       }}
       class=" {buttonColor[
         card
@@ -52,24 +52,7 @@
         ? 'group-hover:bg-opacity-80'
         : 'group-hover:bg-opacity-80'} text-xl text-white "
     >
-      <slot name="buttonText">Pay Now</slot>
-    </button>
-  {/key}
-
-  {#key resetBtn2}
-    <button
-      in:scale={{ duration: 1000, easing: elasticOut }}
-      on:click={() => {
-        resetBtn2 = !resetBtn2;
-        Calendly.initPopupWidget({ url: `${payLaterUrl}` });
-      }}
-      class=" {buttonColor[
-        card
-      ]} {btnColorHover} bg-opacity-70  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-70'
-        : 'group-hover:bg-opacity-70'} text-xl text-white"
-    >
-      <slot name="buttonText">Pay Later</slot>
+      <slot name="buttonText">buttonText</slot>
     </button>
   {/key}
 

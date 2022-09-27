@@ -41,6 +41,8 @@
           "sounds",
         ],
         TOOLBAR_BUTTONS: [
+          // "hangup",
+          "noisesuppression",
           "desktop",
           "microphone",
           "camera",
@@ -52,7 +54,6 @@
           "mute-video-everyone",
           "mute-everyone",
           "security",
-          // "hangup",
           "sharedvideo",
           "videoquality",
           "profile",

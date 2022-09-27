@@ -53,6 +53,7 @@
 <!-- <div class="font-Poppins text-center sm:text-7xl text-6xl pb-2  ">Plans</div> -->
 
 <!-- in:scale={{ duration: 1000, easing: elasticOut }} -->
+
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 ">
   {#each plansCardArray as item, i}
     <div in:scale={{ duration: 1000, easing: elasticOut, delay: 100 * i }}>

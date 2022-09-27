@@ -11,6 +11,8 @@
 
   let domain, options, api, par, firstID;
 
+  let videospace;
+
   async function hangUpBtn() {
     await api.dispose();
     await setTimeout(() => {
@@ -27,6 +29,12 @@
       // height: "740px",
       parentNode: document.querySelector("#meet"),
       configOverwrite: {
+        hideConferenceTimer: true,
+        hideConferenceSubject: true,
+        hideParticipantsStats: true,
+        disablePolls: true,
+        disableSelfView: false,
+        // disableSelfViewSettings: true,
         disabledSounds: ["KNOCKING_PARTICIPANT_SOUND"],
         disableDeepLinking: true,
         disableRemoteMute: true, //TODO: USER ONLY
@@ -55,18 +63,23 @@
           "microphone",
           "camera",
           "fullscreen",
-          "settings",
           "chat",
           "fodeviceselection",
           "etherpad",
+          // "dock-iframe",
+          // "undock-iframe",
+          // "raisehand",
+          // "noisesuppression",
+          // "settings",
+          // "select-background",
+          // "participants-pane",
+          // "highlight",
           // 'mute-video-everyone',
           // 'mute-everyone',
           // 'security',
           // "hangup",
           // 'sharedvideo',
           // 'videoquality',
-          // 'profile',
-          // 'raisehand',
           // 'livestreaming',
           // 'recording',
           // 'closedcaptions',
@@ -74,7 +87,8 @@
           // 'feedback',
           // 'stats',
           // 'shortcuts',
-          // 'tileview'
+          // "tileview",
+          // "profile",
         ],
       },
     };
@@ -86,6 +100,7 @@
     // });
 
     api.addEventListener("participantRoleChanged", function (event) {
+      // leftwatermark = document.querySelector("div.leftwatermark");
       par = [...api.getParticipantsInfo()];
       // firstID = Object.values(par[0])[3];
       // api.pinParticipant(firstID);
@@ -100,14 +115,18 @@
 </svelte:head>
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">
-  <div id="meet" class="w-full h-[95vh] md:h-[670px]" />
+  <div id="meet" class="w-full h-[95vh] md:h-[670px] peer" />
   <img
     on:click={hangUpBtn}
     alt="hangup button"
-    class="absolute {!par && 'opacity-0'} {$lessThan768
+    class="absolute brightness-50 {!par && 'opacity-0'} {$lessThan768
       ? 'top-5 right-5 '
-      : 'bottom-10 right-10 '} flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')] "
+      : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')] "
   />
 </div>
+<!-- translate-y-20 opacity-0 peer-hover:translate-y-0 peer-hover:opacity-100  -->
+<!-- bottom-5 right-0 left-0 text-center mr-auto ml-auto translate-x-52  -->
+<!-- bottom-10 right-10  -->
 <!-- top-5 right-0 left-0 text-center mr-auto ml-auto -->
+
 <!-- sm:bottom-10 sm:right-10 top-0 right-5  -->
