@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component17) {
-  current_component = component17;
+function set_current_component(component18) {
+  current_component = component18;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component17, name4) {
-  if (!component17 || !component17.$$render) {
+function validate_component(component18, name4) {
+  if (!component18 || !component18.$$render) {
     if (name4 === "svelte:component")
       name4 += " this={...}";
     throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component17;
+  return component18;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css6) => css6.code).join("\n"),
+          code: Array.from(result.css).map((css8) => css8.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -310,20 +310,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index17 = 0;
-      while (index17 < str.length) {
-        var eqIdx = str.indexOf("=", index17);
+      var index18 = 0;
+      while (index18 < str.length) {
+        var eqIdx = str.indexOf("=", index18);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index17);
+        var endIdx = str.indexOf(";", index18);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index17 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index18 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index17, eqIdx).trim();
+        var key2 = str.slice(index18, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,7 +331,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index17 = endIdx + 1;
+        index18 = endIdx + 1;
       }
       return obj;
     }
@@ -1055,9 +1055,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-59621005.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-59621005.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-539003de.js", "_app/immutable/chunks/navigation-9c0f079f.js"];
-    stylesheets = ["_app/immutable/assets/+layout-8a2f9ebe.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-3612a01b.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-3612a01b.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/singletons-707a786d.js", "_app/immutable/chunks/navigation-26a8e33b.js"];
+    stylesheets = ["_app/immutable/assets/+layout-8246c5e7.css"];
   }
 });
 
@@ -6519,8 +6519,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index17) => (n2) => {
-          nodes.splice(index17 + 1, 0, n2);
+        prev.insertAfter = ((index18) => (n2) => {
+          nodes.splice(index18 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -11804,13 +11804,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index17 = optArgs[0];
+        var index18 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index17
+          index: index18
         };
       },
       htmlBuilder(group, options) {
@@ -11876,9 +11876,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index17
+          index: index18
         } = group;
-        return index17 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index17, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index18 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index18, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -15695,8 +15695,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component17) {
-  return component17.instantiationMode === "EAGER";
+function isComponentEager(component18) {
+  return component18.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -15786,18 +15786,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component17) {
-        if (component17.name !== this.name) {
-          throw Error(`Mismatching Component ${component17.name} for Provider ${this.name}.`);
+      setComponent(component18) {
+        if (component18.name !== this.name) {
+          throw Error(`Mismatching Component ${component18.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component17;
+        this.component = component18;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component17)) {
+        if (isComponentEager(component18)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -15917,19 +15917,19 @@ var init_index_esm20172 = __esm({
         this.name = name4;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component17) {
-        const provider = this.getProvider(component17.name);
+      addComponent(component18) {
+        const provider = this.getProvider(component18.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component17.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component18.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component17);
+        provider.setComponent(component18);
       }
-      addOrOverwriteComponent(component17) {
-        const provider = this.getProvider(component17.name);
+      addOrOverwriteComponent(component18) {
+        const provider = this.getProvider(component18.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component17.name);
+          this.providers.delete(component18.name);
         }
-        this.addComponent(component17);
+        this.addComponent(component18);
       }
       getProvider(name4) {
         if (this.providers.has(name4)) {
@@ -16255,25 +16255,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component17 = provider.getComponent();
-  return (component17 === null || component17 === void 0 ? void 0 : component17.type) === "VERSION";
+  const component18 = provider.getComponent();
+  return (component18 === null || component18 === void 0 ? void 0 : component18.type) === "VERSION";
 }
-function _addComponent(app2, component17) {
+function _addComponent(app2, component18) {
   try {
-    app2.container.addComponent(component17);
+    app2.container.addComponent(component18);
   } catch (e3) {
-    logger.debug(`Component ${component17.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component18.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component17) {
-  const componentName = component17.name;
+function _registerComponent(component18) {
+  const componentName = component18.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component17);
+  _components.set(componentName, component18);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component17);
+    _addComponent(app2, component18);
   }
   return true;
 }
@@ -16305,8 +16305,8 @@ function initializeApp(options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name4);
-  for (const component17 of _components.values()) {
-    container.addComponent(component17);
+  for (const component18 of _components.values()) {
+    container.addComponent(component18);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name4, newApp);
@@ -18887,9 +18887,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index17 = this.queue.length - 1;
+        const index18 = this.queue.length - 1;
         return () => {
-          this.queue[index17] = () => Promise.resolve();
+          this.queue[index18] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -21432,8 +21432,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-cd5adfc8.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-cd5adfc8.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-9c0f079f.js", "_app/immutable/chunks/singletons-539003de.js"];
+    file7 = "_app/immutable/components/pages/login/_page.svelte-3ca04336.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-3ca04336.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/navigation-26a8e33b.js", "_app/immutable/chunks/singletons-707a786d.js"];
     stylesheets7 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -21861,23 +21861,19 @@ var init_page_svelte6 = __esm({
       $$unsubscribe_isDarkMode();
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
-
 <div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><div class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</div>
 
-  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-300 rounded-md p-4 " + escape(
+  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
         true
       ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `Pay Now`}</button>
 
-  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " bg-opacity-70 hover:shadow-md hover:scale-105 duration-300 rounded-md p-4 " + escape(
+  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " bg-opacity-70 hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-70" : "group-hover:bg-opacity-70",
         true
       ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `Pay Later`}</button>
 
-  
-
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
-  
 </div>`;
     });
     css5 = {
@@ -21917,6 +21913,7 @@ var init_page_svelte6 = __esm({
       ];
       $$result.css.add(css5);
       return `
+
 
 
 <div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
@@ -21969,8 +21966,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file11 = "_app/immutable/components/pages/plans/_page.svelte-3bc715a6.js";
-    imports11 = ["_app/immutable/components/pages/plans/_page.svelte-3bc715a6.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
+    file11 = "_app/immutable/components/pages/plans/_page.svelte-b34f19ee.js";
+    imports11 = ["_app/immutable/components/pages/plans/_page.svelte-b34f19ee.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
     stylesheets11 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
@@ -22057,17 +22054,102 @@ var page_svelte_exports8 = {};
 __export(page_svelte_exports8, {
   default: () => Page12
 });
-var Page12;
+var css6, PlansCardSchools, sampleHref2, Page12;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
     init_CalendlyJsandCSS();
-    Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    init_store();
+    init_index2();
+    css6 = {
+      code: ".cardCSS.svelte-35bofc{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.cardCSS.svelte-35bofc:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
+      map: null
+    };
+    PlansCardSchools = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let cardColor;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let { schoolUrl = "" } = $$props;
+      let { payLaterUrl = "" } = $$props;
+      let { btnColorHover = "" } = $$props;
+      let { card } = $$props;
+      let buttonColor = {
+        1: "bg-[rgb(45,165,214)]",
+        2: "bg-[rgb(244,77,77)]",
+        3: "bg-[rgb(254,164,92)]"
+      };
+      if ($$props.schoolUrl === void 0 && $$bindings.schoolUrl && schoolUrl !== void 0)
+        $$bindings.schoolUrl(schoolUrl);
+      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
+        $$bindings.payLaterUrl(payLaterUrl);
+      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
+        $$bindings.btnColorHover(btnColorHover);
+      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
+        $$bindings.card(card);
+      $$result.css.add(css6);
+      cardColor = $isDarkMode ? dark_lightened : light_darkened;
+      $$unsubscribe_isDarkMode();
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
-<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
+<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><div class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</div>
 
-<div class="${"flex justify-center"}">
+  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
+        true
+      ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
+
+  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
+</div>`;
+    });
+    sampleHref2 = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
+    Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const plansCardArray = [
+        {
+          card: 2,
+          schoolUrl: "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
+          buttonText: "Classico",
+          cardTitle: "Classico",
+          cardText: "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
+          href: sampleHref2
+        },
+        {
+          card: 1,
+          schoolUrl: "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
+          buttonText: "Mock",
+          cardTitle: "Mock",
+          cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",
+          href: sampleHref2
+        }
+      ];
+      return `
+
+
+
+<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArray, (item, i) => {
+        return `<div>${validate_component(PlansCardSchools, "PlansCardSchools").$$render(
+          $$result,
+          {
+            card: item.card,
+            schoolUrl: item.schoolUrl
+          },
+          {},
+          {
+            cardText: () => {
+              return `<span slot="${"cardText"}">${escape(item.cardText)}
+
+          
+        </span>`;
+            },
+            cardTitle: () => {
+              return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
+            },
+            buttonText: () => {
+              return `<span slot="${"buttonText"}">Book Date/Time </span>`;
+            }
+          }
+        )}
+    </div>`;
+      })}
 </div>`;
     });
   }
@@ -22087,9 +22169,57 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-142a5c7e.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-142a5c7e.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js"];
-    stylesheets14 = [];
+    file14 = "_app/immutable/components/pages/schools/_page.svelte-4adb52a4.js";
+    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-4adb52a4.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/index-adbb8214.js"];
+    stylesheets14 = ["_app/immutable/assets/+page-70af9ea0.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/schoolsOLD/_page.svelte.js
+var page_svelte_exports9 = {};
+__export(page_svelte_exports9, {
+  default: () => Page13
+});
+var css7, Page13;
+var init_page_svelte9 = __esm({
+  ".svelte-kit/output/server/entries/pages/schoolsOLD/_page.svelte.js"() {
+    init_chunks();
+    init_CalendlyJsandCSS();
+    css7 = {
+      code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
+      map: null
+    };
+    Page13 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css7);
+      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+
+<div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
+
+<div class="${"flex justify-center"}"><button type="${"button"}" class="${"button svelte-15ul978"}"><b>Classico </b></button>
+
+  <button type="${"button"}" class="${"button svelte-15ul978"}"><b>Mock </b></button>
+</div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/14.js
+var __exports15 = {};
+__export(__exports15, {
+  component: () => component15,
+  file: () => file15,
+  imports: () => imports15,
+  index: () => index15,
+  stylesheets: () => stylesheets15
+});
+var index15, component15, file15, imports15, stylesheets15;
+var init__15 = __esm({
+  ".svelte-kit/output/server/nodes/14.js"() {
+    index15 = 14;
+    component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
+    file15 = "_app/immutable/components/pages/schoolsOLD/_page.svelte-1ed7f020.js";
+    imports15 = ["_app/immutable/components/pages/schoolsOLD/_page.svelte-1ed7f020.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/index-adbb8214.js", "_app/immutable/chunks/CalendlyJsandCSS-863d0839.js"];
+    stylesheets15 = ["_app/immutable/assets/+page-f8a180cf.css"];
   }
 });
 
@@ -22106,12 +22236,12 @@ var init_page2 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/screenshare/_page.svelte.js
-var page_svelte_exports9 = {};
-__export(page_svelte_exports9, {
-  default: () => Page13
+var page_svelte_exports10 = {};
+__export(page_svelte_exports10, {
+  default: () => Page14
 });
-var JitsiUser, Page13;
-var init_page_svelte9 = __esm({
+var JitsiUser, Page14;
+var init_page_svelte10 = __esm({
   ".svelte-kit/output/server/entries/pages/screenshare/_page.svelte.js"() {
     init_chunks();
     init_store();
@@ -22122,12 +22252,16 @@ var init_page_svelte9 = __esm({
       $$unsubscribe_lessThan768();
       return `${$$result.head += `<script src="${"https://meet.jit.si/external_api.js"}" data-svelte="svelte-1pkind7"><\/script>`, ""}
 
-<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px]"}"></div>
-  <img alt="${"hangup button"}" class="${"absolute " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-10 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')]"}"></div>
+<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px] peer"}"></div>
+  <img alt="${"hangup button"}" class="${"absolute brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')]"}"></div>
+
+
+
+
 
 `;
     });
-    Page13 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page14 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
       $$unsubscribe_isDarkMode();
@@ -22136,25 +22270,25 @@ var init_page_svelte9 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/14.js
-var __exports15 = {};
-__export(__exports15, {
-  component: () => component15,
-  file: () => file15,
-  imports: () => imports15,
-  index: () => index15,
+// .svelte-kit/output/server/nodes/15.js
+var __exports16 = {};
+__export(__exports16, {
+  component: () => component16,
+  file: () => file16,
+  imports: () => imports16,
+  index: () => index16,
   shared: () => page_exports2,
-  stylesheets: () => stylesheets15
+  stylesheets: () => stylesheets16
 });
-var index15, component15, file15, imports15, stylesheets15;
-var init__15 = __esm({
-  ".svelte-kit/output/server/nodes/14.js"() {
+var index16, component16, file16, imports16, stylesheets16;
+var init__16 = __esm({
+  ".svelte-kit/output/server/nodes/15.js"() {
     init_page2();
-    index15 = 14;
-    component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-e6ff83a5.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-e6ff83a5.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-9c0f079f.js", "_app/immutable/chunks/singletons-539003de.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
-    stylesheets15 = [];
+    index16 = 15;
+    component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
+    file16 = "_app/immutable/components/pages/screenshare/_page.svelte-731c5cfd.js";
+    imports16 = ["_app/immutable/components/pages/screenshare/_page.svelte-731c5cfd.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-26a8e33b.js", "_app/immutable/chunks/singletons-707a786d.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
+    stylesheets16 = [];
   }
 });
 
@@ -22171,12 +22305,12 @@ var init_page3 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/screenshareA/_page.svelte.js
-var page_svelte_exports10 = {};
-__export(page_svelte_exports10, {
-  default: () => Page14
+var page_svelte_exports11 = {};
+__export(page_svelte_exports11, {
+  default: () => Page15
 });
-var JitsiUserAdmin, Page14;
-var init_page_svelte10 = __esm({
+var JitsiUserAdmin, Page15;
+var init_page_svelte11 = __esm({
   ".svelte-kit/output/server/entries/pages/screenshareA/_page.svelte.js"() {
     init_chunks();
     init_store();
@@ -22192,7 +22326,7 @@ var init_page_svelte10 = __esm({
 
 `;
     });
-    Page14 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
       $$unsubscribe_isDarkMode();
@@ -22201,25 +22335,25 @@ var init_page_svelte10 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/15.js
-var __exports16 = {};
-__export(__exports16, {
-  component: () => component16,
-  file: () => file16,
-  imports: () => imports16,
-  index: () => index16,
+// .svelte-kit/output/server/nodes/16.js
+var __exports17 = {};
+__export(__exports17, {
+  component: () => component17,
+  file: () => file17,
+  imports: () => imports17,
+  index: () => index17,
   shared: () => page_exports3,
-  stylesheets: () => stylesheets16
+  stylesheets: () => stylesheets17
 });
-var index16, component16, file16, imports16, stylesheets16;
-var init__16 = __esm({
-  ".svelte-kit/output/server/nodes/15.js"() {
+var index17, component17, file17, imports17, stylesheets17;
+var init__17 = __esm({
+  ".svelte-kit/output/server/nodes/16.js"() {
     init_page3();
-    index16 = 15;
-    component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-004ab58f.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-004ab58f.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-9c0f079f.js", "_app/immutable/chunks/singletons-539003de.js", "_app/immutable/modules/pages/screenshareA/_page.js-3c73fe08.js", "_app/immutable/chunks/_page-2a16a8d3.js"];
-    stylesheets16 = [];
+    index17 = 16;
+    component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
+    file17 = "_app/immutable/components/pages/screenshareA/_page.svelte-7d82effa.js";
+    imports17 = ["_app/immutable/components/pages/screenshareA/_page.svelte-7d82effa.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/store-d540504c.js", "_app/immutable/chunks/index-81096dd8.js", "_app/immutable/chunks/navigation-26a8e33b.js", "_app/immutable/chunks/singletons-707a786d.js", "_app/immutable/modules/pages/screenshareA/_page.js-3c73fe08.js", "_app/immutable/chunks/_page-2a16a8d3.js"];
+    stylesheets17 = [];
   }
 });
 
@@ -23060,7 +23194,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets17 = new Set(entry.stylesheets);
+  const stylesheets18 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -23110,7 +23244,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets17.add(url));
+        node.stylesheets.forEach((url) => stylesheets18.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -23173,7 +23307,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets17) {
+  for (const dep of stylesheets18) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -23429,14 +23563,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file17 = is_asset ? filename : filename_html;
+      const file18 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file17), {
+        response = new Response(options.read(file18), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file17}`, opts);
+        response = await fetch(`${event.url.origin}/${file18}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23797,8 +23931,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index17 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index17]();
+              const index18 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index18]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -24339,7 +24473,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "hangup-gray.png", "hangup-red.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-49bad42b.js", "imports": ["_app/immutable/start-49bad42b.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-539003de.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-3623198b.js", "imports": ["_app/immutable/start-3623198b.js", "_app/immutable/chunks/index-e087fcf9.js", "_app/immutable/chunks/singletons-707a786d.js", "_app/immutable/chunks/index-81096dd8.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -24356,7 +24490,8 @@ var manifest = {
       () => Promise.resolve().then(() => (init__13(), __exports13)),
       () => Promise.resolve().then(() => (init__14(), __exports14)),
       () => Promise.resolve().then(() => (init__15(), __exports15)),
-      () => Promise.resolve().then(() => (init__16(), __exports16))
+      () => Promise.resolve().then(() => (init__16(), __exports16)),
+      () => Promise.resolve().then(() => (init__17(), __exports17))
     ],
     routes: [
       {
@@ -24481,13 +24616,23 @@ var manifest = {
       },
       {
         type: "page",
+        id: "schoolsOLD",
+        pattern: /^\/schoolsOLD\/?$/,
+        names: [],
+        types: [],
+        errors: [1],
+        layouts: [0],
+        leaf: 14
+      },
+      {
+        type: "page",
         id: "screenshare",
         pattern: /^\/screenshare\/?$/,
         names: [],
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 14
+        leaf: 15
       },
       {
         type: "page",
@@ -24497,7 +24642,7 @@ var manifest = {
         types: [],
         errors: [1],
         layouts: [0],
-        leaf: 15
+        leaf: 16
       }
     ],
     matchers: async () => {
@@ -24560,12 +24705,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file17 = pathname.substring(1);
+      let file18 = pathname.substring(1);
       try {
-        file17 = decodeURIComponent(file17);
+        file18 = decodeURIComponent(file18);
       } catch (err) {
       }
-      if (manifest.assets.has(file17) || manifest.assets.has(file17 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file18) || manifest.assets.has(file18 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

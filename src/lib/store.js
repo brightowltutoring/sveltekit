@@ -102,13 +102,19 @@ export const routes = writable({
   plans: {
     name:'Plans',
     href: "/plans",
-    title: "Plans",
+    title: "Plans 🍎",
     isCurrent: false,
   }, 
+  schools: {
+    name:'Schools',
+    href: "/schools",
+    title: "Schools 📚",
+    isCurrent: false,
+  },
   screenshare: {
     name:'Screenshare',
     href: "/screenshare",
-    title: "Screenshare 📺",
+    title: "Screenshare 🖥",
     isCurrent: false,
   },
   login: {
@@ -123,12 +129,6 @@ export const routes = writable({
     title: "physics 🚀",
     isCurrent: false,
   },
-  // schools: {
-  //   name:'schools',
-  //   href: "/schools",
-  //   title: "Schools 📚",
-  //   isCurrent: false,
-  // },
   math: {
     name:'math',
     href: "/math",

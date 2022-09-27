@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","face-palm.gif","facepalm.gif","favicon.png","hangup-gray.png","hangup-red.png","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp","star.webp","star2.png"]),
 	mimeTypes: {".gif":"image/gif",".png":"image/png",".mp4":"video/mp4",".webp":"image/webp"},
 	_: {
-		entry: {"file":"_app/immutable/start-49bad42b.js","imports":["_app/immutable/start-49bad42b.js","_app/immutable/chunks/index-e087fcf9.js","_app/immutable/chunks/singletons-539003de.js","_app/immutable/chunks/index-81096dd8.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-3623198b.js","imports":["_app/immutable/start-3623198b.js","_app/immutable/chunks/index-e087fcf9.js","_app/immutable/chunks/singletons-707a786d.js","_app/immutable/chunks/index-81096dd8.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),
@@ -20,7 +20,8 @@ export const manifest = {
 			() => import('../output/server/nodes/12.js'),
 			() => import('../output/server/nodes/13.js'),
 			() => import('../output/server/nodes/14.js'),
-			() => import('../output/server/nodes/15.js')
+			() => import('../output/server/nodes/15.js'),
+			() => import('../output/server/nodes/16.js')
 		],
 		routes: [
 			{
@@ -145,13 +146,23 @@ export const manifest = {
 			},
 			{
 				type: 'page',
+				id: "schoolsOLD",
+				pattern: /^\/schoolsOLD\/?$/,
+				names: [],
+				types: [],
+				errors: [1],
+				layouts: [0],
+				leaf: 14
+			},
+			{
+				type: 'page',
 				id: "screenshare",
 				pattern: /^\/screenshare\/?$/,
 				names: [],
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 14
+				leaf: 15
 			},
 			{
 				type: 'page',
@@ -161,7 +172,7 @@ export const manifest = {
 				types: [],
 				errors: [1],
 				layouts: [0],
-				leaf: 15
+				leaf: 16
 			}
 		],
 		matchers: async () => {

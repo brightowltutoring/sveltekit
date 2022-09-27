@@ -33,23 +33,19 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isDarkMode();
   return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
-
 <div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><div class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</div>
 
-  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-300 rounded-md p-4 " + escape(
+  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
   ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `Pay Now`}</button>
 
-  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " bg-opacity-70 hover:shadow-md hover:scale-105 duration-300 rounded-md p-4 " + escape(
+  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " bg-opacity-70 hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-70" : "group-hover:bg-opacity-70",
     true
   ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `Pay Later`}</button>
 
-  
-
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
-  
 </div>`;
 });
 const _page_svelte_svelte_type_style_lang = "";
@@ -90,6 +86,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   ];
   $$result.css.add(css);
   return `
+
 
 
 <div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
