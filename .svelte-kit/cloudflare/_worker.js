@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css9) => css9.code).join("\n"),
+          code: Array.from(result.css).map((css8) => css8.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -6888,7 +6888,7 @@ var init_firebase = __esm({
 });
 
 // .svelte-kit/output/server/chunks/LoginCard.js
-var css, LoginCard;
+var LoginCard;
 var init_LoginCard = __esm({
   ".svelte-kit/output/server/chunks/LoginCard.js"() {
     init_chunks();
@@ -6896,10 +6896,6 @@ var init_LoginCard = __esm({
     init_firebase();
     init_index_esm3();
     init_index_esm2();
-    css = {
-      code: ".cardCSS.svelte-1swsxrt{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.cardCSS.svelte-1swsxrt:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
-      map: null
-    };
     LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let cardColor;
       let $$unsubscribe_navLoginClicked;
@@ -6913,15 +6909,14 @@ var init_LoginCard = __esm({
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       let emailFieldValue = "";
-      $$result.css.add(css);
       cardColor = $isDarkMode ? dark_lightened : light_darkened;
       $$unsubscribe_navLoginClicked();
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_isDarkMode();
-      return `<div class="${"cardCSS font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl mx-auto w-1/3 min-w-fit p-10 m-1 text-center duration-300 group svelte-1swsxrt"}"${add_attribute("style", `background:${cardColor}`, 0)}><div class="${"logInDiv"}"><div class="${"bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
+      return `<div class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-xl mx-auto w-1/3 min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${cardColor}`, 0)}><div class="${"logInDiv"}"><div class="${"bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
         true
       ) + " text-xl text-white"}">
       <ul class="${"flex justify-center items-center gap-5"}">
@@ -6939,14 +6934,13 @@ var init_LoginCard = __esm({
         <li><svg height="${"24"}" width="${"24"}" viewBox="${"0 0 485 485"}"><path fill="${"white"}" d="${"M413.974,71.026C368.171,25.225,307.274,0,242.5,0S116.829,25.225,71.026,71.026C25.225,116.829,0,177.726,0,242.5\ns25.225,125.671,71.026,171.474C116.829,459.775,177.726,485,242.5,485c32.731,0,64.491-6.414,94.397-19.063l-11.688-27.63\nC299.022,449.384,271.194,455,242.5,455C125.327,455,30,359.673,30,242.5S125.327,30,242.5,30S455,125.327,455,242.5\nc0,51.323-31.534,74.699-60.834,74.699c-29.299,0-60.833-23.375-60.833-74.699c0-50.086-40.747-90.833-90.833-90.833\ns-90.833,40.748-90.833,90.833s40.747,90.833,90.833,90.833c29.655,0,56.034-14.286,72.622-36.335\nc4.248,8.577,9.594,16.336,16.04,23.113c16.613,17.468,38.988,27.087,63.004,27.087c24.017,0,46.392-9.62,63.005-27.087\nC475.377,300.97,485,274.132,485,242.5C485,177.726,459.775,116.829,413.974,71.026z M242.5,303.333\nc-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60.833,60.833S276.043,303.333,242.5,303.333z"}"></path></svg></li>
         <li>Sign-in with Link</li></ul></div>
 
-    <input class="${"text-center p-5"}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
+    <input class="${"text-center p-3 mt-3 w-full"}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
     <span id="${"emailStatusMessage"}"></span></div>
-  
+
   <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
     <p>Redirecting to your page in</p>
     <p style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</p>
-    <button id="${"logoutBtn"}">Logout</button></div>
-</div>`;
+    <button id="${"logoutBtn"}">Logout</button></div></div>`;
     });
   }
 });
@@ -7302,7 +7296,7 @@ var init_layout_svelte = __esm({
 
 
 
-<div class="${"md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center z-10"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}</div>
+<div class="${"z-50 md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}</div>
 
 <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
@@ -7326,9 +7320,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-0ac817cf.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-0ac817cf.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/LoginCard-97b868f1.js", "_app/immutable/chunks/navigation-464fd5de.js", "_app/immutable/chunks/singletons-63d87779.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/index-e66ee8b6.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/firebase-56e225f1.js"];
-    stylesheets = ["_app/immutable/assets/+layout-b88ff3c0.css", "_app/immutable/assets/LoginCard-6f25b2ae.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-8af16e3f.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-8af16e3f.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/LoginCard-8408167a.js", "_app/immutable/chunks/navigation-e2f82875.js", "_app/immutable/chunks/singletons-bd525d79.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/index-e66ee8b6.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/firebase-f2065c54.js"];
+    stylesheets = ["_app/immutable/assets/+layout-7b3f2cb8.css"];
   }
 });
 
@@ -7379,12 +7373,12 @@ var init_page = __esm({
 });
 
 // .svelte-kit/output/server/chunks/Reviews.js
-var css2, ReviewCreator, reviews, Reviews;
+var css, ReviewCreator, reviews, Reviews;
 var init_Reviews = __esm({
   ".svelte-kit/output/server/chunks/Reviews.js"() {
     init_chunks();
     init_store();
-    css2 = {
+    css = {
       code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
       map: null
     };
@@ -7400,7 +7394,7 @@ var init_Reviews = __esm({
         $$bindings.name(name4);
       if ($$props.date === void 0 && $$bindings.date && date !== void 0)
         $$bindings.date(date);
-      $$result.css.add(css2);
+      $$result.css.add(css);
       $$unsubscribe_isDarkMode();
       return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true)}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
@@ -7618,16 +7612,16 @@ var page_svelte_exports3 = {};
 __export(page_svelte_exports3, {
   default: () => Page3
 });
-var css3, Page3;
+var css2, Page3;
 var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
     init_chunks();
-    css3 = {
+    css2 = {
       code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
       map: null
     };
     Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css3);
+      $$result.css.add(css2);
       return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
 
 <details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
@@ -21463,7 +21457,7 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page5
 });
-var css4, Page5;
+var css3, Page5;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
@@ -21473,7 +21467,7 @@ var init_page_svelte4 = __esm({
     init_index_esm2();
     init_index2();
     init_index_esm();
-    css4 = {
+    css3 = {
       code: '#flyingEmoji.svelte-1lkingg.svelte-1lkingg{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1lkingg-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1lkingg-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1lkingg.svelte-1lkingg::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1lkingg-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1lkingg-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1lkingg-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1lkingg-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1lkingg-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1lkingg-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1lkingg-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1lkingg-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1lkingg.svelte-1lkingg{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1lkingg.svelte-1lkingg{margin:0px auto;width:80vw;max-width:380px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg,button.svelte-1lkingg.svelte-1lkingg{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1lkingg.svelte-1lkingg{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1lkingg.svelte-1lkingg:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1lkingg button.svelte-1lkingg{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg:hover{border:1px solid #999}.loginLogoutDivs.svelte-1lkingg button.svelte-1lkingg:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1lkingg.svelte-1lkingg{display:flex;justify-content:center;align-items:center}',
       map: null
     };
@@ -21485,7 +21479,7 @@ var init_page_svelte4 = __esm({
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       let emailFieldValue = "";
-      $$result.css.add(css4);
+      $$result.css.add(css3);
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_isLoggedIn();
@@ -21527,8 +21521,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-52616fd5.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-52616fd5.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/index-e66ee8b6.js", "_app/immutable/chunks/firebase-56e225f1.js", "_app/immutable/chunks/navigation-464fd5de.js", "_app/immutable/chunks/singletons-63d87779.js"];
+    file7 = "_app/immutable/components/pages/login/_page.svelte-7c05255a.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-7c05255a.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/index-e66ee8b6.js", "_app/immutable/chunks/firebase-f2065c54.js", "_app/immutable/chunks/navigation-e2f82875.js", "_app/immutable/chunks/singletons-bd525d79.js"];
     stylesheets7 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -21569,9 +21563,9 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/logintest/_page.svelte-7b8239a0.js";
-    imports8 = ["_app/immutable/components/pages/logintest/_page.svelte-7b8239a0.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/LoginCard-97b868f1.js", "_app/immutable/chunks/navigation-464fd5de.js", "_app/immutable/chunks/singletons-63d87779.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/index-e66ee8b6.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/firebase-56e225f1.js"];
-    stylesheets8 = ["_app/immutable/assets/LoginCard-6f25b2ae.css"];
+    file8 = "_app/immutable/components/pages/logintest/_page.svelte-b0248d5f.js";
+    imports8 = ["_app/immutable/components/pages/logintest/_page.svelte-b0248d5f.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/LoginCard-8408167a.js", "_app/immutable/chunks/navigation-e2f82875.js", "_app/immutable/chunks/singletons-bd525d79.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/index-e66ee8b6.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/firebase-f2065c54.js"];
+    stylesheets8 = [];
   }
 });
 
@@ -21829,7 +21823,7 @@ var page_svelte_exports6 = {};
 __export(page_svelte_exports6, {
   default: () => Page9
 });
-var css5, E_and_m, Page9;
+var css4, E_and_m, Page9;
 var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
@@ -21837,12 +21831,12 @@ var init_page_svelte6 = __esm({
     init_store();
     init_katex();
     init_index2();
-    css5 = {
+    css4 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css5);
+      $$result.css.add(css4);
       return `${validate_component(Kajax, "MathRenderer").$$render($$result, {}, {}, {})}
 
 
@@ -21961,7 +21955,7 @@ var page_svelte_exports7 = {};
 __export(page_svelte_exports7, {
   default: () => Page10
 });
-var css$1, PlansCard, css6, sampleHref, Page10;
+var css$1, PlansCard, css5, sampleHref, Page10;
 var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -22013,7 +22007,7 @@ var init_page_svelte7 = __esm({
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
 </div>`;
     });
-    css6 = {
+    css5 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
@@ -22048,7 +22042,7 @@ var init_page_svelte7 = __esm({
           href: sampleHref
         }
       ];
-      $$result.css.add(css6);
+      $$result.css.add(css5);
       return `
 
 
@@ -22191,14 +22185,14 @@ var page_svelte_exports9 = {};
 __export(page_svelte_exports9, {
   default: () => Page13
 });
-var css7, PlansCardSchools, sampleHref2, Page13;
+var css6, PlansCardSchools, sampleHref2, Page13;
 var init_page_svelte9 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
     init_CalendlyJsandCSS();
     init_store();
     init_index2();
-    css7 = {
+    css6 = {
       code: ".cardCSS.svelte-35bofc{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.cardCSS.svelte-35bofc:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
@@ -22223,7 +22217,7 @@ var init_page_svelte9 = __esm({
         $$bindings.btnColorHover(btnColorHover);
       if ($$props.card === void 0 && $$bindings.card && card !== void 0)
         $$bindings.card(card);
-      $$result.css.add(css7);
+      $$result.css.add(css6);
       cardColor = $isDarkMode ? dark_lightened : light_darkened;
       $$unsubscribe_isDarkMode();
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
@@ -22317,17 +22311,17 @@ var page_svelte_exports10 = {};
 __export(page_svelte_exports10, {
   default: () => Page14
 });
-var css8, Page14;
+var css7, Page14;
 var init_page_svelte10 = __esm({
   ".svelte-kit/output/server/entries/pages/schoolsOLD/_page.svelte.js"() {
     init_chunks();
     init_CalendlyJsandCSS();
-    css8 = {
+    css7 = {
       code: '.button.svelte-15ul978{border:none;border-bottom:1px solid #bbb;padding:15px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:22px;font-family:"Nunito", sans-serif;margin:4px 2px;cursor:pointer;border-radius:6px;transition-duration:0.2s}.button.svelte-15ul978:hover{background-color:rgb(39, 69, 131);color:rgb(201, 228, 15)}.button.svelte-15ul978{color:rgb(39, 69, 131);background-color:hsl(0, 0%, 97%)}',
       map: null
     };
     Page14 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css8);
+      $$result.css.add(css7);
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
 <div style="${"font-size:50pt; text-align:center"}">\u{1F4DA}</div>
@@ -22423,8 +22417,8 @@ var init__17 = __esm({
     init_page2();
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/screenshare/_page.svelte-21caf66d.js";
-    imports17 = ["_app/immutable/components/pages/screenshare/_page.svelte-21caf66d.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/navigation-464fd5de.js", "_app/immutable/chunks/singletons-63d87779.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
+    file17 = "_app/immutable/components/pages/screenshare/_page.svelte-ee492d9d.js";
+    imports17 = ["_app/immutable/components/pages/screenshare/_page.svelte-ee492d9d.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/navigation-e2f82875.js", "_app/immutable/chunks/singletons-bd525d79.js", "_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js", "_app/immutable/chunks/_page-e8e46cca.js"];
     stylesheets17 = [];
   }
 });
@@ -22488,8 +22482,8 @@ var init__18 = __esm({
     init_page3();
     index18 = 17;
     component18 = async () => (await Promise.resolve().then(() => (init_page_svelte12(), page_svelte_exports12))).default;
-    file18 = "_app/immutable/components/pages/screenshareA/_page.svelte-7bd9978e.js";
-    imports18 = ["_app/immutable/components/pages/screenshareA/_page.svelte-7bd9978e.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/navigation-464fd5de.js", "_app/immutable/chunks/singletons-63d87779.js", "_app/immutable/modules/pages/screenshareA/_page.js-3c73fe08.js", "_app/immutable/chunks/_page-2a16a8d3.js"];
+    file18 = "_app/immutable/components/pages/screenshareA/_page.svelte-8116e910.js";
+    imports18 = ["_app/immutable/components/pages/screenshareA/_page.svelte-8116e910.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/store-593b742a.js", "_app/immutable/chunks/index-ac42c1e3.js", "_app/immutable/chunks/navigation-e2f82875.js", "_app/immutable/chunks/singletons-bd525d79.js", "_app/immutable/modules/pages/screenshareA/_page.js-3c73fe08.js", "_app/immutable/chunks/_page-2a16a8d3.js"];
     stylesheets18 = [];
   }
 });
@@ -24610,7 +24604,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "face-palm.gif", "facepalm.gif", "favicon.png", "hangup-gray.png", "hangup-red.png", "login-bg-video-blurred.mp4", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-85c71634.js", "imports": ["_app/immutable/start-85c71634.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/singletons-63d87779.js", "_app/immutable/chunks/index-ac42c1e3.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-a20881fd.js", "imports": ["_app/immutable/start-a20881fd.js", "_app/immutable/chunks/index-82240eb1.js", "_app/immutable/chunks/singletons-bd525d79.js", "_app/immutable/chunks/index-ac42c1e3.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

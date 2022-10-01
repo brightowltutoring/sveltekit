@@ -1,1 +1,0 @@
-import{_ as a}from"./_page-2a16a8d3.js";import{default as s}from"../components/pages/screenshareA/_page.svelte-7bd9978e.js";import"./index-82240eb1.js";import"./store-593b742a.js";import"./index-ac42c1e3.js";import"./navigation-464fd5de.js";import"./singletons-63d87779.js";export{s as component,a as shared};

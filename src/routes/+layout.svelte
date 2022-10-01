@@ -97,9 +97,9 @@ Fixed containers  apparently hate having scrollable overflow elements inside.
   on:click|self={() => {
     $navLoginClicked = false;
   }}
-  class=" md:py-4 py-1 md:px-[7%] {$navLoginClicked
+  class="z-50 md:py-4 py-1 md:px-[7%] {$navLoginClicked
     ? 'bg-[rgba(0,0,0,0.4)]'
-    : 'hidden'} fixed w-full h-full flex justify-center items-center z-10"
+    : 'hidden'} fixed w-full h-full flex justify-center items-center "
 >
   <LoginCard />
 </div>

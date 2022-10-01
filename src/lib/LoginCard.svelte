@@ -95,14 +95,11 @@
       emailField.style.color = "#10bb8a"; // green-ish colour
 
       // these event listeners attached ONLY when regex confirms that the format is email
-      passwordlessLoginBtn.addEventListener("click", () =>
-        signinWithLinkAndStop()
-      );
-      emailField.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          signinWithLinkAndStop();
-        }
+
+      passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop, {
+        once: true,
       });
+      emailField.addEventListener("keydown", signinWithLinkAndStop);
     }
   }
 
@@ -141,6 +138,7 @@
         handleCodeInApp: true,
       };
 
+      // this doesnt break on production build
       sendSignInLinkToEmail(auth, email, actionCodeSettings)
         .then(() => {
           // The link was successfully sent. Inform the user.
@@ -208,35 +206,40 @@
   }
   //emd
 
-  function signinWithLinkAndStop() {
-    passwordlessLoginBtn.style.opacity = "0.2";
-    passwordlessLoginBtn.style.pointerEvents = "none";
+  function signinWithLinkAndStop(e) {
+    if (e.type == "click" || e.key == "Enter") {
+      loginViaPasswordlessEmail();
 
-    loginViaPasswordlessEmail();
+      emailStatusMessage.style.display = "block";
 
-    // window.addEventListener(
-    //   "keydown",
-    //   (e) => e.stopImmediatePropagation(),
-    //   true
-    // );
-    // window.addEventListener("click", (e) => e.stopImmediatePropagation(), true);
+      emailStatusMessage.innerHTML = `
+                  <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
+                      Link sent to email 
+                  </div>
+                  `;
+      passwordlessLoginBtn.style.opacity = "0.2";
+      passwordlessLoginBtn.style.pointerEvents = "none";
 
-    // flyingEmoji.style.display = "block";
-    emailStatusMessage.style.display = "block";
-
-    emailStatusMessage.innerHTML = `
-                <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
-                    Link sent to email 
-                </div>
-                `;
+      // couldnt figure it out with removeEventListener
+      emailField.addEventListener(
+        "keydown",
+        (e) => e.stopImmediatePropagation(),
+        true
+      );
+      passwordlessLoginBtn.addEventListener(
+        "click",
+        (e) => e.stopImmediatePropagation(),
+        true
+      );
+    }
   }
 
   //  Hoisted functions
 </script>
 
 <div
-  class=" cardCSS font-Poppins shadow-md {$isDarkMode
-    ? 'hover:shadow-xl'
+  class="hover:scale-[102%] font-Poppins shadow-md {$isDarkMode
+    ? 'hover:shadow-xl '
     : 'hover:shadow-lg'} rounded-xl  mx-auto w-1/3 min-w-fit  p-10 m-1 text-center duration-300 group"
   style={`background:${cardColor}`}
 >
@@ -245,8 +248,8 @@
       on:click={GoogleLogin}
       in:scale={{ duration: 600, easing: elasticOut }}
       class="   bg-[#4285f4]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-80'
-        : 'group-hover:bg-opacity-80'} text-xl text-white "
+        ? 'group-hover:bg-opacity-90'
+        : 'group-hover:bg-opacity-90'} text-xl text-white "
     >
       <!-- google logo plus adjacent text  -->
       <ul class="flex justify-center items-center gap-5">
@@ -302,8 +305,8 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
 
     {#key emptyEmailKey}
       <input
-        on:input={onInputEmailField(emailFieldValue)}
-        class="text-center p-5"
+        on:keyup={onInputEmailField(emailFieldValue)}
+        class="text-center p-3 mt-3 w-full"
         in:scale|local={{ duration: 500, easing: elasticOut }}
         id="emailField"
         bind:value={emailFieldValue}
@@ -321,16 +324,3 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
     <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
   </div>
 </div>
-
-<style>
-  .cardCSS {
-    transform: perspective(1000px) rotateX(12deg);
-
-    z-index: 10;
-    -webkit-transform: translateZ(-1px);
-  }
-
-  .cardCSS:hover {
-    transform: perspective(1000px) rotateX(0deg) scale(1.02);
-  }
-</style>
