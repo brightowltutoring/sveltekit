@@ -90,6 +90,7 @@ export const windowInnerHeight = writable(0)
 export const innerWidth = writable(0) 
 export const lessThan768 = derived(innerWidth, $innerWidth => $innerWidth < 768  )
 
+export const navLoginClicked = writable(false)
 
 // the all important
 export const routes = writable({
@@ -154,6 +155,7 @@ export const isDarkMode = writable(false)
 
 export const redirectAfterLoginTimeOut = writable('')
 export const redirectSetInterval = writable('')
+// maybe incorporate $navLoginClicked = false;
 
 export const light = '#f7f7f7'
 export const light_darkened =  'rgb(242,247,250)'

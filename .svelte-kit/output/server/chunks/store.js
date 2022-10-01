@@ -17,6 +17,7 @@ derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
 const windowInnerHeight = writable(0);
 const innerWidth = writable(0);
 const lessThan768 = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
+const navLoginClicked = writable(false);
 const routes = writable({
   home: {
     name: "Home",
@@ -27,13 +28,19 @@ const routes = writable({
   plans: {
     name: "Plans",
     href: "/plans",
-    title: "Plans",
+    title: "Plans \u{1F34E}",
+    isCurrent: false
+  },
+  schools: {
+    name: "Schools",
+    href: "/schools",
+    title: "Schools \u{1F4DA}",
     isCurrent: false
   },
   screenshare: {
     name: "Screenshare",
     href: "/screenshare",
-    title: "Screenshare \u{1F4FA}",
+    title: "Screenshare \u{1F5A5}",
     isCurrent: false
   },
   login: {
@@ -88,6 +95,7 @@ export {
   light_darkened as h,
   isDarkMode as i,
   lessThan768 as l,
+  navLoginClicked as n,
   redirectAfterLoginTimeOut as r,
   scrollY as s,
   windowInnerHeight as w

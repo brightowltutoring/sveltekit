@@ -5,7 +5,7 @@ const firebaseConfig = {
     projectId:         NV.FIREBASE_projectId,
     storageBucket:     NV.FIREBASE_storageBucket,
     messagingSenderId: NV.FIREBASE_messagingSenderId,
-    appId:             NV.FIREBASE_appId
+    appId:             NV.FIREBASE_appId,
 }
 
 // const firebaseConfig = {

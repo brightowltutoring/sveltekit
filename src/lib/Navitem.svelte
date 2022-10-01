@@ -1,5 +1,5 @@
 <script>
-  import { isDarkMode } from "./store.js";
+  import { isDarkMode, navLoginClicked } from "./store.js";
   import { slide } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { page } from "$app/stores";
@@ -33,18 +33,23 @@
   <button
     in:slide={{ duration: 800, easing: elasticOut }}
     on:click={() => {
-      clickOnNavLinks();
-      clearTimeout($redirectAfterLoginTimeOut);
-      clearInterval($redirectSetInterval);
-      prefetch(href);
-      goto(href);
+      if (href == "/login") {
+        $navLoginClicked = true;
+      } else {
+        clickOnNavLinks();
+        clearTimeout($redirectAfterLoginTimeOut);
+        clearInterval($redirectSetInterval);
+        prefetch(href);
+        goto(href);
 
-      // this janky solution allows for the embeded jitsu to load ... otherwise I had to
-      //  manually reload the page and use "export const router = false" for the +page.js
-      if (href == "/screenshare") {
-        setTimeout(() => {
-          location.reload();
-        }, 100);
+        // this janky solution allows for the embeded jitsu to load ... otherwise I had to
+        //  manually reload the page and use "export const router = false" for the +page.js
+
+        if (href == "/screenshare") {
+          setTimeout(() => {
+            location.reload();
+          }, 100);
+        }
       }
     }}
     class="{bool &&

@@ -1,5 +1,6 @@
 <script>
   import "../app.css";
+  import LoginCard from "$lib/LoginCard.svelte";
   import Navbar from "$lib/Navbar.svelte";
   import {
     instDeltaY,
@@ -12,6 +13,7 @@
     redirectSetInterval,
     routes,
     lessThan768,
+    navLoginClicked,
   } from "$lib/store.js";
 
   import { page } from "$app/stores";
@@ -90,6 +92,18 @@
 I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflow-y-hidden w-full". 
 Fixed containers  apparently hate having scrollable overflow elements inside.
 -->
+
+<div
+  on:click|self={() => {
+    $navLoginClicked = false;
+  }}
+  class=" md:py-4 py-1 md:px-[7%] {$navLoginClicked
+    ? 'bg-[rgba(0,0,0,0.4)]'
+    : 'hidden'} fixed w-full h-full flex justify-center items-center z-10"
+>
+  <LoginCard />
+</div>
+
 <div
   class=" md:py-4 py-1 md:px-[7%] z-50 fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
 >

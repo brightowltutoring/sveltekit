@@ -1,6 +1,11 @@
 import { c as create_ssr_component, a as subscribe, g as getContext, e as escape, d as now, l as loop, f as set_store_value, h as each, j as add_attribute, v as validate_component } from "../../chunks/index.js";
-import { i as isDarkMode, r as redirectAfterLoginTimeOut, a as redirectSetInterval, b as instDeltaY, s as scrollY, l as lessThan768, c as routes, d as isLoggedIn, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/store.js";
+import { L as LoginCard } from "../../chunks/LoginCard.js";
+import { i as isDarkMode, n as navLoginClicked, r as redirectAfterLoginTimeOut, a as redirectSetInterval, b as instDeltaY, s as scrollY, l as lessThan768, c as routes, d as isLoggedIn, w as windowInnerHeight, e as scrollYMax, f as innerWidth } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
+import "../../chunks/firebase.js";
+import "firebase/app";
+import "firebase/auth";
+import "firebase/firestore/lite";
 const app = "";
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -52,9 +57,11 @@ function removed_session() {
 }
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
+  let $$unsubscribe_navLoginClicked;
   let $$unsubscribe_redirectAfterLoginTimeOut;
   let $$unsubscribe_redirectSetInterval;
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   let { href, content, bool, btnColor, btnColorHover, routes: routes2 } = $$props;
@@ -76,6 +83,7 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
   }
   $$unsubscribe_page();
+  $$unsubscribe_navLoginClicked();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_redirectSetInterval();
   return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
@@ -218,7 +226,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
   
   <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
-        ${each(Object.keys($routes).splice(0, 4), (KEY) => {
+        ${each(Object.keys($routes).splice(0, 5), (KEY) => {
       return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -275,6 +283,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_scrollYMax;
   let $routes, $$unsubscribe_routes;
   let $$unsubscribe_innerWidth;
+  let $navLoginClicked, $$unsubscribe_navLoginClicked;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
@@ -286,6 +295,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
+  $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
   let jankytown;
   {
     if (!$lessThan768) {
@@ -323,12 +333,16 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scrollYMax();
   $$unsubscribe_routes();
   $$unsubscribe_innerWidth();
+  $$unsubscribe_navLoginClicked();
   return `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key) => {
     return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
   })}`, ""}
 
 
 
+
+
+<div class="${"md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center z-10"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}</div>
 
 <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 

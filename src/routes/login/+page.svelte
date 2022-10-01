@@ -120,8 +120,8 @@
     let email = emailField.value;
     console.log(email);
 
-    // if(email.length!==0) {
-    if (email == "") {
+    if (email.length !== 0) {
+      // if (email == "") {
       const actionCodeSettings = {
         url: "https://thinksolve.io/login",
         handleCodeInApp: true,

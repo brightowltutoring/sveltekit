@@ -1,8 +1,7 @@
-import * as shared from '../entries/pages/screenshare/_page.js';
+
 
 export const index = 15;
-export const component = async () => (await import('../entries/pages/screenshare/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/screenshare/_page.svelte-731c5cfd.js';
-export { shared };
-export const imports = ["_app/immutable/components/pages/screenshare/_page.svelte-731c5cfd.js","_app/immutable/chunks/index-e087fcf9.js","_app/immutable/chunks/store-d540504c.js","_app/immutable/chunks/index-81096dd8.js","_app/immutable/chunks/navigation-26a8e33b.js","_app/immutable/chunks/singletons-707a786d.js","_app/immutable/modules/pages/screenshare/_page.js-a70bc2e1.js","_app/immutable/chunks/_page-e8e46cca.js"];
-export const stylesheets = [];
+export const component = async () => (await import('../entries/pages/schoolsOLD/_page.svelte.js')).default;
+export const file = '_app/immutable/components/pages/schoolsOLD/_page.svelte-005dde1b.js';
+export const imports = ["_app/immutable/components/pages/schoolsOLD/_page.svelte-005dde1b.js","_app/immutable/chunks/index-82240eb1.js","_app/immutable/chunks/index-e66ee8b6.js","_app/immutable/chunks/CalendlyJsandCSS-b251df21.js"];
+export const stylesheets = ["_app/immutable/assets/+page-f8a180cf.css"];

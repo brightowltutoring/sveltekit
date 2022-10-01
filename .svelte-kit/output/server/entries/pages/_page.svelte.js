@@ -1,5 +1,4 @@
 import { c as create_ssr_component, a as subscribe, e as escape, v as validate_component } from "../../chunks/index.js";
-import "katex";
 import { i as isDarkMode } from "../../chunks/store.js";
 import { R as Reviews } from "../../chunks/Reviews.js";
 import "../../chunks/index2.js";

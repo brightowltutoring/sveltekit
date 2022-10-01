@@ -1,6 +1,6 @@
 <script>
-  import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
-  import Testimonials from "$lib/Testimonials.svelte";
+  // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
+  // import Testimonials from "$lib/Testimonials.svelte";
   import { isDarkMode } from "$lib/store.js";
   import Reviews from "$lib/Reviews.svelte";
 </script>

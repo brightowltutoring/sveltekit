@@ -1,0 +1,1 @@
+import{default as e}from"../components/pages/schoolsOLD/_page.svelte-005dde1b.js";import"./index-82240eb1.js";import"./index-e66ee8b6.js";import"./CalendlyJsandCSS-b251df21.js";export{e as component};
