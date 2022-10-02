@@ -87,10 +87,10 @@ derived(isDarkMode, ($isDarkMode, set) => {
 export {
   redirectSetInterval as a,
   isDarkMode as b,
-  instDeltaY as c,
+  routes as c,
   dark_lightened as d,
-  lessThan768 as e,
-  routes as f,
+  instDeltaY as e,
+  lessThan768 as f,
   scrollYMax as g,
   innerWidth as h,
   isLoggedIn as i,

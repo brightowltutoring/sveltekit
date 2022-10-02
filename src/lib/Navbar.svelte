@@ -76,7 +76,9 @@
   class="md:px-[7%] md:py-3 py-1 fixed z-50 {jankytown} md:duration-500 duration-150 ease-in overflow-x-auto overflow-y-hidden w-full "
 > -->
 <!-- fixed z-50 {jankytown} md:duration-500 duration-150 ease-in overflow-x-auto overflow-y-hidden w-full -->
-<logo-and-navbar class="flex justify-center md:justify-between gap-x-24">
+<logo-and-navbar
+  class="flex items-center justify-center md:justify-between gap-x-24"
+>
   {#key resetLogoClick}
     <div
       class="md:translate-y-[0.5rem] md:translate-x-3 hidden md:block text-xl font-Poppins font-semibold 
@@ -90,7 +92,7 @@
 
   <!-- class=" md:ml-24  p-1 {gradientColor} rounded-full sticky overflow-y-scroll hideScrollBar " -->
   <nav
-    class="md:ml-24 md:p-1 p-2 {gradientColor} rounded-xl hideScrollBar overflow-auto  "
+    class="md:ml-24 md:p-1 p-2  {gradientColor} rounded-xl hideScrollBar overflow-auto  "
   >
     {#key unique}
       <ul class="flex flex-row text-xl  items-center">
