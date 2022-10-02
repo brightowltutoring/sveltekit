@@ -211,6 +211,7 @@
       loginViaPasswordlessEmail();
 
       emailStatusMessage.style.display = "block";
+      // flyingEmoji.style.display = "block";
 
       emailStatusMessage.innerHTML = `
                   <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
@@ -316,6 +317,7 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
       />
     {/key}
     <span id="emailStatusMessage" />
+    <!-- <span id="flyingEmoji" style="display:none" /> -->
   </div>
 
   <div class="logOutDiv" style="display:none">
@@ -325,3 +327,41 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
     <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
   </div>
 </div>
+
+<!-- <style>
+  #flyingEmoji {
+    /* height:10vh;
+        width:10vw; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: xAxis 2.5s cubic-bezier(0.02, 0.01, 0.21, 1);
+    animation-duration: 10s;
+    /* animation: xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1); */
+  }
+
+  #flyingEmoji::after {
+    content: "🛸";
+    display: block;
+    width: 1px;
+    height: 1px;
+    border-radius: 20px;
+    animation: yAxis 3s cubic-bezier(0.3, 0.27, 0.07, 1.64);
+    animation-duration: 10s;
+    /* animation: yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64); */
+  }
+
+  @keyframes yAxis {
+    80% {
+      animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+      transform: translateY(-100px) rotate(360deg) scale(2);
+    }
+  }
+
+  @keyframes xAxis {
+    20% {
+      animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+      transform: translateX(200px);
+    }
+  }
+</style> -->

@@ -48,28 +48,28 @@
     ? "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]"
     : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
 
-  let jankytown;
-  // sets jankytown for bigger than med
-  $: if (!$lessThan768) {
-    if ($scrollY == 0) jankytown = "top-0";
+  // let jankytown;
+  // // sets jankytown for bigger than med
+  // $: if (!$lessThan768) {
+  //   if ($scrollY == 0) jankytown = "top-0";
 
-    if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
-      jankytown = "top-0 backdrop-blur-3xl ";
+  //   if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
+  //     jankytown = "top-0 backdrop-blur-3xl ";
 
-    if ($scrollY > 800 && $instDeltaY > 10)
-      jankytown = "-top-20 backdrop-blur-3xl ";
+  //   if ($scrollY > 800 && $instDeltaY > 10)
+  //     jankytown = "-top-20 backdrop-blur-3xl ";
 
-    if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl ";
-  }
-  // sets jankytown for smaller than med
-  $: if ($lessThan768) {
-    if ($scrollY == 0) jankytown = "bottom-0 backdrop-blur-3xl";
-    if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
-      jankytown = "bottom-0 backdrop-blur-3xl ";
-    if ($scrollY > 400 && $instDeltaY > 10)
-      jankytown = "-bottom-20  backdrop-blur-3xl";
-    if ($instDeltaY < -200) jankytown = "bottom-0 backdrop-blur-3xl ";
-  }
+  //   if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl ";
+  // }
+  // // sets jankytown for smaller than med
+  // $: if ($lessThan768) {
+  //   if ($scrollY == 0) jankytown = "bottom-0 backdrop-blur-3xl";
+  //   if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
+  //     jankytown = "bottom-0 backdrop-blur-3xl ";
+  //   if ($scrollY > 400 && $instDeltaY > 10)
+  //     jankytown = "-bottom-20  backdrop-blur-3xl";
+  //   if ($instDeltaY < -200) jankytown = "bottom-0 backdrop-blur-3xl ";
+  // }
 </script>
 
 <!-- <div

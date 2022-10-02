@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, v as validate_component } from "../../../chunks/index.js";
-import { l as lessThan768, i as isDarkMode } from "../../../chunks/store.js";
+import { e as lessThan768, b as isDarkMode } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const JitsiUserAdmin = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $lessThan768, $$unsubscribe_lessThan768;
@@ -8,7 +8,8 @@ const JitsiUserAdmin = create_ssr_component(($$result, $$props, $$bindings, slot
   return `${$$result.head += `<script src="${"https://meet.jit.si/external_api.js"}" data-svelte="svelte-1pkind7"><\/script>`, ""}
 
 <div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px]"}"></div>
-  <img alt="${"hangup button"}" class="${"absolute " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-10 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')]"}"></div>
+  <img alt="${"hangup button"}" class="${"bg-gray-600 p-2 absolute brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0 hover:bg-red-500"}">
+  </div>
 
 `;
 });

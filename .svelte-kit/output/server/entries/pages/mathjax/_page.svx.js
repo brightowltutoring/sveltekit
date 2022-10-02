@@ -1,5 +1,5 @@
-import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, j as add_attribute, h as each } from "../../../chunks/index.js";
-import { i as isDarkMode } from "../../../chunks/store.js";
+import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute, j as each } from "../../../chunks/index.js";
+import { b as isDarkMode } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `<script data-svelte="svelte-1fd20gn">MathJax = {

@@ -34,6 +34,7 @@
   });
 
   let jankytown;
+
   // sets jankytown for bigger than med
   $: if (!$lessThan768) {
     if ($scrollY == 0) jankytown = "top-0";
@@ -49,9 +50,12 @@
   // sets jankytown for smaller than med
   $: if ($lessThan768) {
     if ($scrollY == 0) {
-      $page.url.pathname !== "/screenshare"
-        ? (jankytown = "bottom-0 backdrop-blur-3xl ")
-        : (jankytown = "-bottom-20 backdrop-blur-3xl ");
+      //   // $page.url.pathname !== "/screenshare"
+      //   // ? (jankytown = "bottom-0 backdrop-blur-3xl ")
+      //   // : (jankytown = "-bottom-20 backdrop-blur-3xl ");
+      jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl ";
+      // adding the tailwind md breakpoint here is pure jank...so that loading the page doesnt
+      // flicker with bottom-0 first when NOT below 768
     }
     if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
       jankytown = "bottom-0 backdrop-blur-3xl ";
@@ -88,11 +92,6 @@
   on:popstate={clearRedirectStuff}
 />
 
-<!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 
-I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflow-y-hidden w-full". 
-Fixed containers  apparently hate having scrollable overflow elements inside.
--->
-
 <div
   on:click|self={() => {
     $navLoginClicked = false;
@@ -104,6 +103,10 @@ Fixed containers  apparently hate having scrollable overflow elements inside.
   <LoginCard />
 </div>
 
+<!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 
+I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflow-y-hidden w-full". 
+Fixed containers  apparently hate having scrollable overflow elements inside.
+-->
 <div
   class=" md:py-4 py-1 md:px-[7%] z-50 fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
 >

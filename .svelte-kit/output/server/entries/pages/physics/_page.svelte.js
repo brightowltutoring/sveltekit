@@ -1,6 +1,6 @@
-import { c as create_ssr_component, v as validate_component, j as add_attribute, a as subscribe, e as escape } from "../../../chunks/index.js";
+import { c as create_ssr_component, v as validate_component, d as add_attribute, a as subscribe, e as escape } from "../../../chunks/index.js";
 import { K as Kajax } from "../../../chunks/Kajax.js";
-import { i as isDarkMode } from "../../../chunks/store.js";
+import { b as isDarkMode } from "../../../chunks/store.js";
 import "katex";
 import "../../../chunks/index2.js";
 const eAndM_svx_svelte_type_style_lang = "";
