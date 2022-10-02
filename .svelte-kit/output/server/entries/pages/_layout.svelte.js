@@ -192,6 +192,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_lessThan768;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $routes, $$unsubscribe_routes;
+  let $$unsubscribe_navLoginClicked;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $scaleRocket, $$unsubscribe_scaleRocket;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => value);
@@ -199,6 +200,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+  $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
@@ -267,6 +269,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_lessThan768();
   $$unsubscribe_isDarkMode();
   $$unsubscribe_routes();
+  $$unsubscribe_navLoginClicked();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_scaleRocket();
   return $$rendered;
@@ -342,7 +345,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"z-50 md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}</div>
+<div class="${"z-[50] md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}</div>
 
 <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 

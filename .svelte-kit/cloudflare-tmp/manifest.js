@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","face-palm.gif","facepalm.gif","favicon.png","hangup-gray.png","hangup-red.png","login-bg-video-blurred.mp4","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp","star.webp","star2.png"]),
 	mimeTypes: {".gif":"image/gif",".png":"image/png",".mp4":"video/mp4",".webp":"image/webp"},
 	_: {
-		entry: {"file":"_app/immutable/start-69d10994.js","imports":["_app/immutable/start-69d10994.js","_app/immutable/chunks/index-82240eb1.js","_app/immutable/chunks/singletons-7951be46.js","_app/immutable/chunks/index-ac42c1e3.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-3859fe11.js","imports":["_app/immutable/start-3859fe11.js","_app/immutable/chunks/index-82240eb1.js","_app/immutable/chunks/singletons-88c5b86f.js","_app/immutable/chunks/index-ac42c1e3.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),

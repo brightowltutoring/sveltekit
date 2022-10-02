@@ -116,13 +116,22 @@
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">
   <div id="meet" class="w-full h-[95vh] md:h-[670px] peer" />
+
   <img
+    on:click={hangUpBtn}
+    alt="hangup button"
+    class=" bg-gray-600 p-2 absolute brightness-50 {!par &&
+      'opacity-0'} {$lessThan768
+      ? 'top-5 right-5 '
+      : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0  hover:bg-red-500"
+  />
+  <!-- <img
     on:click={hangUpBtn}
     alt="hangup button"
     class="absolute brightness-50 {!par && 'opacity-0'} {$lessThan768
       ? 'top-5 right-5 '
       : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')] "
-  />
+  /> -->
 </div>
 <!-- translate-y-20 opacity-0 peer-hover:translate-y-0 peer-hover:opacity-100  -->
 <!-- bottom-5 right-0 left-0 text-center mr-auto ml-auto translate-x-52  -->
