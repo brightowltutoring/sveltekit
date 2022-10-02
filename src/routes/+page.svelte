@@ -3,6 +3,14 @@
   // import Testimonials from "$lib/Testimonials.svelte";
   import { isDarkMode } from "$lib/store.js";
   import Reviews from "$lib/Reviews.svelte";
+  import { slide } from "svelte/transition";
+  // import { quintOut } from "svelte/easing";
+  let ready = false;
+
+  import { onMount } from "svelte";
+  onMount(() => {
+    ready = true;
+  });
 </script>
 
 <main class="overflow-x-hidden">
@@ -21,10 +29,14 @@
 
 <div class="h-3/5 flex justify-center items-center text-center">
   <div class="grid grid-rows-1">
-    <div class="text-6xl font-Poppins pb-4">We'll be back in October</div>
+    {#if ready}
+      <div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4">
+        Math, Physics ... Online!
+      </div>
+    {/if}
+    <!-- <div class="text-6xl font-Poppins pb-4">We'll be back in October</div> -->
     <div class="text-lg font-Nunito ">
       🎃 pressing inquiries can be sent to thinksolve.io[at]gmail.com
-      <!-- (check out some <a class="text-orange-500 hover:scale-150" href="/reviews">reviews</a>) -->
       <div
         on:click={() => {
           window.scrollBy({ top: window.innerHeight, behavior: "smooth" });

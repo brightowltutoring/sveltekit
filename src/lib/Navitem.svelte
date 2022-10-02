@@ -36,6 +36,7 @@
       if (href == "/login") {
         $navLoginClicked = true;
       } else {
+        $navLoginClicked = false;
         clickOnNavLinks();
         clearTimeout($redirectAfterLoginTimeOut);
         clearInterval($redirectSetInterval);

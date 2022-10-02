@@ -240,9 +240,10 @@
 <div
   class="hover:scale-[102%] font-Poppins shadow-md {$isDarkMode
     ? 'hover:shadow-xl '
-    : 'hover:shadow-lg'} rounded-xl  mx-auto w-1/3 min-w-fit  p-10 m-1 text-center duration-300 group"
+    : 'hover:shadow-lg'} rounded-md  mx-auto w-1/3 min-w-fit  p-10 m-1 text-center duration-300 group"
   style={`background:${cardColor}`}
 >
+  <p class="text-5xl pb-10">Login</p>
   <div class="logInDiv">
     <div
       on:click={GoogleLogin}
