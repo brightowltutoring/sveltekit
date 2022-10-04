@@ -8,7 +8,7 @@
     {
       card: 2,
       schoolUrl:
-        "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
+        "https://calendly.com/thinksolve/school-classico?hide_gdpr_banner=1",
       buttonText: "Classico",
       cardTitle: "Classico",
       cardText:
@@ -18,7 +18,7 @@
     {
       card: 1,
       schoolUrl:
-        "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
+        "https://calendly.com/thinksolve/school-mock?hide_gdpr_banner=1",
       buttonText: "Mock",
       cardTitle: "Mock",
       cardText:
