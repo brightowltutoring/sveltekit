@@ -22,7 +22,7 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
   $$unsubscribe_isDarkMode();
   return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true)}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
-    return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:auto"}">`;
+    return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
   })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}

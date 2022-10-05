@@ -48,7 +48,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const plansCardArray = [
     {
       card: 2,
-      schoolUrl: "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
+      schoolUrl: "https://calendly.com/thinksolve/school-classico?hide_gdpr_banner=1",
       buttonText: "Classico",
       cardTitle: "Classico",
       cardText: "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
@@ -56,7 +56,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     },
     {
       card: 1,
-      schoolUrl: "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
+      schoolUrl: "https://calendly.com/thinksolve/school-mock?hide_gdpr_banner=1",
       buttonText: "Mock",
       cardTitle: "Mock",
       cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",

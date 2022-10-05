@@ -27,12 +27,28 @@
   $: cardColor = $isDarkMode ? dark_lightened : light_darkened;
   let emailFieldValue = "";
   let emptyEmailKey;
+  $: isEmail = false; // this global variable is updated with regex to verify email input
 
   //  onmount
   onMount(() => {
     const logInDiv = document.querySelector(".logInDiv");
     const logOutDiv = document.querySelector(".logOutDiv");
     const loginWelcomeText = document.querySelector("#loginWelcomeText");
+    const passwordlessLoginBtn = document.querySelector(
+      "#passwordlessLoginBtn"
+    );
+    const emailField = document.querySelector("#emailField");
+
+    // TODO: testing these out here rather than inside anothe ructoin
+
+    passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop);
+    emailField.addEventListener("keydown", signinWithLinkAndStop);
+    // passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop, {
+    //   once: true,
+    // });
+    // emailField.addEventListener("keydown", signinWithLinkAndStop, {
+    //   once: true,
+    // });
 
     // TODO: previpously missing login code for passwordless login
     // Confirm the link is a sign-in with email link.
@@ -77,10 +93,7 @@
 
   //  Hoisted Functions
   function onInputEmailField(EMAIL) {
-    // regex checks if has email format
-    const isEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
-
-    // if(EMAIL.length === 0) {
+    isEmail = regexEmailChecker(EMAIL);
     if (EMAIL == "") {
       emailField.style.border = "1px solid #aaa";
       emailField.style.color = "#aaa";
@@ -89,17 +102,10 @@
       emailField.style.border = "1.5px solid red";
       emailField.style.color = "red";
       emailField.style.fontSize = "20px";
-    } else {
+    } else if (isEmail) {
       emailField.style.border = "2px solid #59d0ae";
       emailField.style.backgroundColor = "white";
       emailField.style.color = "#10bb8a"; // green-ish colour
-
-      // these event listeners attached ONLY when regex confirms that the format is email
-
-      passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop, {
-        once: true,
-      });
-      emailField.addEventListener("keydown", signinWithLinkAndStop);
     }
   }
 
@@ -128,10 +134,20 @@
   function loginViaPasswordlessEmail() {
     // let email = emailField.value;
     let email = emailFieldValue;
-    console.log("loginViaPasswordlessEmail", email);
 
-    if (email.length !== 0) {
-      // if (email == "") {
+    // if (isEmail) {
+    if (regexEmailChecker(email)) {
+      console.log("loginViaPasswordlessEmail", email);
+
+      //TODO: where to put this
+      emailStatusMessage.style.display = "block";
+      // flyingEmoji.style.display = "block";
+
+      emailStatusMessage.innerHTML = `
+                  <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
+                      Link sent to email 🚀
+                  </div>
+                  `;
       const actionCodeSettings = {
         // url: "https://brightowltutoring.com/login",
         url: "https://thinksolve.io/login",
@@ -207,32 +223,21 @@
   //emd
 
   function signinWithLinkAndStop(e) {
-    if (e.type == "click" || e.key == "Enter") {
+    if ((e.type == "click" || e.key == "Enter") && isEmail) {
       loginViaPasswordlessEmail();
 
-      emailStatusMessage.style.display = "block";
-      // flyingEmoji.style.display = "block";
+      emailFieldValue = "";
 
-      emailStatusMessage.innerHTML = `
-                  <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
-                      Link sent to email 
-                  </div>
-                  `;
-      passwordlessLoginBtn.style.opacity = "0.2";
+      emailField.style.opacity = "0.5";
+      emailField.style.pointerEvents = "none";
+
+      passwordlessLoginBtn.style.opacity = "0.5";
       passwordlessLoginBtn.style.pointerEvents = "none";
-
-      // couldnt figure it out with removeEventListener
-      emailField.addEventListener(
-        "keydown",
-        (e) => e.stopImmediatePropagation(),
-        true
-      );
-      passwordlessLoginBtn.addEventListener(
-        "click",
-        (e) => e.stopImmediatePropagation(),
-        true
-      );
     }
+  }
+
+  function regexEmailChecker(EMAIL) {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
   }
 
   //  Hoisted functions
