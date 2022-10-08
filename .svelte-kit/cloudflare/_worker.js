@@ -12,8 +12,8 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __export = (target, all) => {
-  for (var name4 in all)
-    __defProp(target, name4, { get: all[name4], enumerable: true });
+  for (var name5 in all)
+    __defProp(target, name5, { get: all[name5], enumerable: true });
 };
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
@@ -102,8 +102,8 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component16) {
-  current_component = component16;
+function set_current_component(component17) {
+  current_component = component17;
 }
 function get_current_component() {
   if (!current_component)
@@ -138,13 +138,13 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component16, name4) {
-  if (!component16 || !component16.$$render) {
-    if (name4 === "svelte:component")
-      name4 += " this={...}";
-    throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
+function validate_component(component17, name5) {
+  if (!component17 || !component17.$$render) {
+    if (name5 === "svelte:component")
+      name5 += " this={...}";
+    throw new Error(`<${name5}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
   }
-  return component16;
+  return component17;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -180,11 +180,11 @@ function create_ssr_component(fn) {
     $$render
   };
 }
-function add_attribute(name4, value, boolean) {
+function add_attribute(name5, value, boolean) {
   if (value == null || boolean && !value)
     return "";
   const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
-  return ` ${name4}${assignment}`;
+  return ` ${name5}${assignment}`;
 }
 var is_client, now, raf, tasks, current_component, ATTR_REGEX, CONTENT_REGEX, missing_component, on_destroy;
 var init_chunks = __esm({
@@ -309,21 +309,21 @@ var require_cookie = __commonJS({
       }
       var obj = {};
       var opt = options || {};
-      var dec = opt.decode || decode;
-      var index16 = 0;
-      while (index16 < str.length) {
-        var eqIdx = str.indexOf("=", index16);
+      var dec = opt.decode || decode2;
+      var index17 = 0;
+      while (index17 < str.length) {
+        var eqIdx = str.indexOf("=", index17);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index16);
+        var endIdx = str.indexOf(";", index17);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index16 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index17 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index16, eqIdx).trim();
+        var key2 = str.slice(index17, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -331,24 +331,24 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index16 = endIdx + 1;
+        index17 = endIdx + 1;
       }
       return obj;
     }
-    function serialize2(name4, val, options) {
+    function serialize2(name5, val, options) {
       var opt = options || {};
-      var enc = opt.encode || encode2;
+      var enc = opt.encode || encode3;
       if (typeof enc !== "function") {
         throw new TypeError("option encode is invalid");
       }
-      if (!fieldContentRegExp.test(name4)) {
+      if (!fieldContentRegExp.test(name5)) {
         throw new TypeError("argument name is invalid");
       }
       var value = enc(val);
       if (value && !fieldContentRegExp.test(value)) {
         throw new TypeError("argument val is invalid");
       }
-      var str = name4 + "=" + value;
+      var str = name5 + "=" + value;
       if (null != opt.maxAge) {
         var maxAge = opt.maxAge - 0;
         if (isNaN(maxAge) || !isFinite(maxAge)) {
@@ -418,18 +418,18 @@ var require_cookie = __commonJS({
       }
       return str;
     }
-    function decode(str) {
+    function decode2(str) {
       return str.indexOf("%") !== -1 ? decodeURIComponent(str) : str;
     }
-    function encode2(val) {
+    function encode3(val) {
       return encodeURIComponent(val);
     }
     function isDate(val) {
       return __toString.call(val) === "[object Date]" || val instanceof Date;
     }
-    function tryDecode(str, decode2) {
+    function tryDecode(str, decode3) {
       try {
-        return decode2(str);
+        return decode3(str);
       } catch (e3) {
         return str;
       }
@@ -453,7 +453,7 @@ var require_set_cookie = __commonJS({
       var parts = setCookieValue.split(";").filter(isNonEmptyString);
       var nameValuePairStr = parts.shift();
       var parsed = parseNameValuePair(nameValuePairStr);
-      var name4 = parsed.name;
+      var name5 = parsed.name;
       var value = parsed.value;
       options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
       try {
@@ -465,7 +465,7 @@ var require_set_cookie = __commonJS({
         );
       }
       var cookie2 = {
-        name: name4,
+        name: name5,
         value
       };
       parts.forEach(function(part) {
@@ -489,16 +489,16 @@ var require_set_cookie = __commonJS({
       return cookie2;
     }
     function parseNameValuePair(nameValuePairStr) {
-      var name4 = "";
+      var name5 = "";
       var value = "";
       var nameValueArr = nameValuePairStr.split("=");
       if (nameValueArr.length > 1) {
-        name4 = nameValueArr.shift();
+        name5 = nameValueArr.shift();
         value = nameValueArr.join("=");
       } else {
         value = nameValuePairStr;
       }
-      return { name: name4, value };
+      return { name: name5, value };
     }
     function parse2(input, options) {
       options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
@@ -621,16 +621,25 @@ var init_store = __esm({
         set($scrollY);
       }, 50);
     });
-    instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
-      return $scrollY - $startScrollY;
-    });
+    instDeltaY = derived(
+      [scrollY, startScrollY],
+      ([$scrollY, $startScrollY]) => {
+        return $scrollY - $startScrollY;
+      }
+    );
     scrollYMax = writable(0);
-    derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
-      return 1 - $scrollY / $scrollYMax;
-    });
+    derived(
+      [scrollY, scrollYMax],
+      ([$scrollY, $scrollYMax]) => {
+        return 1 - $scrollY / $scrollYMax;
+      }
+    );
     windowInnerHeight = writable(0);
     innerWidth = writable(0);
-    lessThan768 = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
+    lessThan768 = derived(
+      innerWidth,
+      ($innerWidth) => $innerWidth < 768
+    );
     navLoginClicked = writable(false);
     routes = writable({
       home: {
@@ -661,6 +670,12 @@ var init_store = __esm({
         name: "Login",
         href: "/login",
         title: "Login \u{1F680}",
+        isCurrent: false
+      },
+      stripe: {
+        name: "Stripe",
+        href: "/stripe",
+        title: "Stripe \u{1F4B0}",
         isCurrent: false
       },
       physics: {
@@ -1208,16 +1223,16 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component16) {
-  return component16.instantiationMode === "EAGER";
+function isComponentEager(component17) {
+  return component17.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
   "node_modules/@firebase/component/dist/esm/index.esm2017.js"() {
     init_index_esm2017();
     Component = class {
-      constructor(name4, instanceFactory, type) {
-        this.name = name4;
+      constructor(name5, instanceFactory, type) {
+        this.name = name5;
         this.instanceFactory = instanceFactory;
         this.type = type;
         this.multipleInstances = false;
@@ -1244,8 +1259,8 @@ var init_index_esm20172 = __esm({
     };
     DEFAULT_ENTRY_NAME = "[DEFAULT]";
     Provider = class {
-      constructor(name4, container) {
-        this.name = name4;
+      constructor(name5, container) {
+        this.name = name5;
         this.container = container;
         this.component = null;
         this.instances = /* @__PURE__ */ new Map();
@@ -1299,18 +1314,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component16) {
-        if (component16.name !== this.name) {
-          throw Error(`Mismatching Component ${component16.name} for Provider ${this.name}.`);
+      setComponent(component17) {
+        if (component17.name !== this.name) {
+          throw Error(`Mismatching Component ${component17.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component16;
+        this.component = component17;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component16)) {
+        if (isComponentEager(component17)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -1426,30 +1441,30 @@ var init_index_esm20172 = __esm({
       }
     };
     ComponentContainer = class {
-      constructor(name4) {
-        this.name = name4;
+      constructor(name5) {
+        this.name = name5;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component16) {
-        const provider = this.getProvider(component16.name);
+      addComponent(component17) {
+        const provider = this.getProvider(component17.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component16.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component17.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component16);
+        provider.setComponent(component17);
       }
-      addOrOverwriteComponent(component16) {
-        const provider = this.getProvider(component16.name);
+      addOrOverwriteComponent(component17) {
+        const provider = this.getProvider(component17.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component16.name);
+          this.providers.delete(component17.name);
         }
-        this.addComponent(component16);
+        this.addComponent(component17);
       }
-      getProvider(name4) {
-        if (this.providers.has(name4)) {
-          return this.providers.get(name4);
+      getProvider(name5) {
+        if (this.providers.has(name5)) {
+          return this.providers.get(name5);
         }
-        const provider = new Provider(name4, this);
-        this.providers.set(name4, provider);
+        const provider = new Provider(name5, this);
+        this.providers.set(name5, provider);
         return provider;
       }
       getProviders() {
@@ -1501,8 +1516,8 @@ var init_index_esm20173 = __esm({
       }
     };
     Logger = class {
-      constructor(name4) {
-        this.name = name4;
+      constructor(name5) {
+        this.name = name5;
         this._logLevel = defaultLogLevel;
         this._logHandler = defaultLogHandler;
         this._userLogHandler = null;
@@ -1706,8 +1721,8 @@ var init_wrap_idb_value = __esm({
 });
 
 // node_modules/idb/build/index.js
-function openDB(name4, version4, { blocked, upgrade, blocking, terminated } = {}) {
-  const request = indexedDB.open(name4, version4);
+function openDB(name5, version5, { blocked, upgrade, blocking, terminated } = {}) {
+  const request = indexedDB.open(name5, version5);
   const openPromise = wrap(request);
   if (upgrade) {
     request.addEventListener("upgradeneeded", (event) => {
@@ -1768,81 +1783,81 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component16 = provider.getComponent();
-  return (component16 === null || component16 === void 0 ? void 0 : component16.type) === "VERSION";
+  const component17 = provider.getComponent();
+  return (component17 === null || component17 === void 0 ? void 0 : component17.type) === "VERSION";
 }
-function _addComponent(app2, component16) {
+function _addComponent(app2, component17) {
   try {
-    app2.container.addComponent(component16);
+    app2.container.addComponent(component17);
   } catch (e3) {
-    logger.debug(`Component ${component16.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component17.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component16) {
-  const componentName = component16.name;
+function _registerComponent(component17) {
+  const componentName = component17.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component16);
+  _components.set(componentName, component17);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component16);
+    _addComponent(app2, component17);
   }
   return true;
 }
-function _getProvider(app2, name4) {
+function _getProvider(app2, name5) {
   const heartbeatController = app2.container.getProvider("heartbeat").getImmediate({ optional: true });
   if (heartbeatController) {
     void heartbeatController.triggerHeartbeat();
   }
-  return app2.container.getProvider(name4);
+  return app2.container.getProvider(name5);
 }
 function initializeApp(options, rawConfig = {}) {
   if (typeof rawConfig !== "object") {
-    const name5 = rawConfig;
-    rawConfig = { name: name5 };
+    const name6 = rawConfig;
+    rawConfig = { name: name6 };
   }
   const config = Object.assign({ name: DEFAULT_ENTRY_NAME2, automaticDataCollectionEnabled: false }, rawConfig);
-  const name4 = config.name;
-  if (typeof name4 !== "string" || !name4) {
+  const name5 = config.name;
+  if (typeof name5 !== "string" || !name5) {
     throw ERROR_FACTORY.create("bad-app-name", {
-      appName: String(name4)
+      appName: String(name5)
     });
   }
-  const existingApp = _apps.get(name4);
+  const existingApp = _apps.get(name5);
   if (existingApp) {
     if (deepEqual(options, existingApp.options) && deepEqual(config, existingApp.config)) {
       return existingApp;
     } else {
-      throw ERROR_FACTORY.create("duplicate-app", { appName: name4 });
+      throw ERROR_FACTORY.create("duplicate-app", { appName: name5 });
     }
   }
-  const container = new ComponentContainer(name4);
-  for (const component16 of _components.values()) {
-    container.addComponent(component16);
+  const container = new ComponentContainer(name5);
+  for (const component17 of _components.values()) {
+    container.addComponent(component17);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
-  _apps.set(name4, newApp);
+  _apps.set(name5, newApp);
   return newApp;
 }
-function getApp(name4 = DEFAULT_ENTRY_NAME2) {
-  const app2 = _apps.get(name4);
+function getApp(name5 = DEFAULT_ENTRY_NAME2) {
+  const app2 = _apps.get(name5);
   if (!app2) {
-    throw ERROR_FACTORY.create("no-app", { appName: name4 });
+    throw ERROR_FACTORY.create("no-app", { appName: name5 });
   }
   return app2;
 }
-function registerVersion(libraryKeyOrName, version4, variant) {
+function registerVersion(libraryKeyOrName, version5, variant) {
   var _a;
   let library = (_a = PLATFORM_LOG_STRING[libraryKeyOrName]) !== null && _a !== void 0 ? _a : libraryKeyOrName;
   if (variant) {
     library += `-${variant}`;
   }
   const libraryMismatch = library.match(/\s|\//);
-  const versionMismatch = version4.match(/\s|\//);
+  const versionMismatch = version5.match(/\s|\//);
   if (libraryMismatch || versionMismatch) {
     const warning = [
-      `Unable to register library "${library}" with version "${version4}":`
+      `Unable to register library "${library}" with version "${version5}":`
     ];
     if (libraryMismatch) {
       warning.push(`library name "${library}" contains illegal characters (whitespace or "/")`);
@@ -1851,12 +1866,12 @@ function registerVersion(libraryKeyOrName, version4, variant) {
       warning.push("and");
     }
     if (versionMismatch) {
-      warning.push(`version name "${version4}" contains illegal characters (whitespace or "/")`);
+      warning.push(`version name "${version5}" contains illegal characters (whitespace or "/")`);
     }
     logger.warn(warning.join(" "));
     return;
   }
-  _registerComponent(new Component(`${library}-version`, () => ({ library, version: version4 }), "VERSION"));
+  _registerComponent(new Component(`${library}-version`, () => ({ library, version: version5 }), "VERSION"));
 }
 function getDbPromise() {
   if (!dbPromise) {
@@ -3671,7 +3686,7 @@ async function _openIframe(auth) {
     });
   }));
 }
-function _open(auth, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
+function _open(auth, url, name5, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
   const top = Math.max((window.screen.availHeight - height) / 2, 0).toString();
   const left = Math.max((window.screen.availWidth - width) / 2, 0).toString();
   let target = "";
@@ -3682,8 +3697,8 @@ function _open(auth, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT)
     left
   });
   const ua = getUA().toLowerCase();
-  if (name4) {
-    target = _isChromeIOS(ua) ? TARGET_BLANK : name4;
+  if (name5) {
+    target = _isChromeIOS(ua) ? TARGET_BLANK : name5;
   }
   if (_isFirefox(ua)) {
     url = url || FIREFOX_EMPTY_URL;
@@ -4305,9 +4320,9 @@ var init_index_90ebcfae = __esm({
         this.persistence = persistence;
         this.auth = auth;
         this.userKey = userKey;
-        const { config, name: name4 } = this.auth;
-        this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name4);
-        this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name4);
+        const { config, name: name5 } = this.auth;
+        this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name5);
+        this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name5);
         this.boundEventHandler = auth._onStorageEvent.bind(auth);
         this.persistence._addListener(this.fullUserKey, this.boundEventHandler);
       }
@@ -4400,9 +4415,9 @@ var init_index_90ebcfae = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index16 = this.queue.length - 1;
+        const index17 = this.queue.length - 1;
         return () => {
-          this.queue[index16] = () => Promise.resolve();
+          this.queue[index17] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -6860,13 +6875,400 @@ var init_index_esm3 = __esm({
   }
 });
 
+// node_modules/@firebase/functions/dist/index.esm2017.js
+function mapValues(o2, f2) {
+  const result = {};
+  for (const key2 in o2) {
+    if (o2.hasOwnProperty(key2)) {
+      result[key2] = f2(o2[key2]);
+    }
+  }
+  return result;
+}
+function encode2(data) {
+  if (data == null) {
+    return null;
+  }
+  if (data instanceof Number) {
+    data = data.valueOf();
+  }
+  if (typeof data === "number" && isFinite(data)) {
+    return data;
+  }
+  if (data === true || data === false) {
+    return data;
+  }
+  if (Object.prototype.toString.call(data) === "[object String]") {
+    return data;
+  }
+  if (data instanceof Date) {
+    return data.toISOString();
+  }
+  if (Array.isArray(data)) {
+    return data.map((x2) => encode2(x2));
+  }
+  if (typeof data === "function" || typeof data === "object") {
+    return mapValues(data, (x2) => encode2(x2));
+  }
+  throw new Error("Data cannot be encoded in JSON: " + data);
+}
+function decode(json2) {
+  if (json2 == null) {
+    return json2;
+  }
+  if (json2["@type"]) {
+    switch (json2["@type"]) {
+      case LONG_TYPE:
+      case UNSIGNED_LONG_TYPE: {
+        const value = Number(json2["value"]);
+        if (isNaN(value)) {
+          throw new Error("Data cannot be decoded from JSON: " + json2);
+        }
+        return value;
+      }
+      default: {
+        throw new Error("Data cannot be decoded from JSON: " + json2);
+      }
+    }
+  }
+  if (Array.isArray(json2)) {
+    return json2.map((x2) => decode(x2));
+  }
+  if (typeof json2 === "function" || typeof json2 === "object") {
+    return mapValues(json2, (x2) => decode(x2));
+  }
+  return json2;
+}
+function codeForHTTPStatus(status) {
+  if (status >= 200 && status < 300) {
+    return "ok";
+  }
+  switch (status) {
+    case 0:
+      return "internal";
+    case 400:
+      return "invalid-argument";
+    case 401:
+      return "unauthenticated";
+    case 403:
+      return "permission-denied";
+    case 404:
+      return "not-found";
+    case 409:
+      return "aborted";
+    case 429:
+      return "resource-exhausted";
+    case 499:
+      return "cancelled";
+    case 500:
+      return "internal";
+    case 501:
+      return "unimplemented";
+    case 503:
+      return "unavailable";
+    case 504:
+      return "deadline-exceeded";
+  }
+  return "unknown";
+}
+function _errorForResponse(status, bodyJSON) {
+  let code = codeForHTTPStatus(status);
+  let description = code;
+  let details = void 0;
+  try {
+    const errorJSON = bodyJSON && bodyJSON.error;
+    if (errorJSON) {
+      const status2 = errorJSON.status;
+      if (typeof status2 === "string") {
+        if (!errorCodeMap[status2]) {
+          return new FunctionsError("internal", "internal");
+        }
+        code = errorCodeMap[status2];
+        description = status2;
+      }
+      const message = errorJSON.message;
+      if (typeof message === "string") {
+        description = message;
+      }
+      details = errorJSON.details;
+      if (details !== void 0) {
+        details = decode(details);
+      }
+    }
+  } catch (e3) {
+  }
+  if (code === "ok") {
+    return null;
+  }
+  return new FunctionsError(code, description, details);
+}
+function failAfter(millis) {
+  let timer = null;
+  return {
+    promise: new Promise((_2, reject) => {
+      timer = setTimeout(() => {
+        reject(new FunctionsError("deadline-exceeded", "deadline-exceeded"));
+      }, millis);
+    }),
+    cancel: () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    }
+  };
+}
+function httpsCallable$1(functionsInstance, name5, options) {
+  return (data) => {
+    return call(functionsInstance, name5, data, options || {});
+  };
+}
+async function postJSON(url, body, headers, fetchImpl) {
+  headers["Content-Type"] = "application/json";
+  let response;
+  try {
+    response = await fetchImpl(url, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers
+    });
+  } catch (e3) {
+    return {
+      status: 0,
+      json: null
+    };
+  }
+  let json2 = null;
+  try {
+    json2 = await response.json();
+  } catch (e3) {
+  }
+  return {
+    status: response.status,
+    json: json2
+  };
+}
+function call(functionsInstance, name5, data, options) {
+  const url = functionsInstance._url(name5);
+  return callAtURL(functionsInstance, url, data, options);
+}
+async function callAtURL(functionsInstance, url, data, options) {
+  data = encode2(data);
+  const body = { data };
+  const headers = {};
+  const context = await functionsInstance.contextProvider.getContext();
+  if (context.authToken) {
+    headers["Authorization"] = "Bearer " + context.authToken;
+  }
+  if (context.messagingToken) {
+    headers["Firebase-Instance-ID-Token"] = context.messagingToken;
+  }
+  if (context.appCheckToken !== null) {
+    headers["X-Firebase-AppCheck"] = context.appCheckToken;
+  }
+  const timeout = options.timeout || 7e4;
+  const failAfterHandle = failAfter(timeout);
+  const response = await Promise.race([
+    postJSON(url, body, headers, functionsInstance.fetchImpl),
+    failAfterHandle.promise,
+    functionsInstance.cancelAllRequests
+  ]);
+  failAfterHandle.cancel();
+  if (!response) {
+    throw new FunctionsError("cancelled", "Firebase Functions instance was deleted.");
+  }
+  const error2 = _errorForResponse(response.status, response.json);
+  if (error2) {
+    throw error2;
+  }
+  if (!response.json) {
+    throw new FunctionsError("internal", "Response is not valid JSON object.");
+  }
+  let responseData = response.json.data;
+  if (typeof responseData === "undefined") {
+    responseData = response.json.result;
+  }
+  if (typeof responseData === "undefined") {
+    throw new FunctionsError("internal", "Response is missing data field.");
+  }
+  const decodedData = decode(responseData);
+  return { data: decodedData };
+}
+function registerFunctions(fetchImpl, variant) {
+  const factory = (container, { instanceIdentifier: regionOrCustomDomain }) => {
+    const app2 = container.getProvider("app").getImmediate();
+    const authProvider = container.getProvider(AUTH_INTERNAL_NAME);
+    const messagingProvider = container.getProvider(MESSAGING_INTERNAL_NAME);
+    const appCheckProvider = container.getProvider(APP_CHECK_INTERNAL_NAME);
+    return new FunctionsService(app2, authProvider, messagingProvider, appCheckProvider, regionOrCustomDomain, fetchImpl);
+  };
+  _registerComponent(new Component(FUNCTIONS_TYPE, factory, "PUBLIC").setMultipleInstances(true));
+  registerVersion(name4, version4, variant);
+  registerVersion(name4, version4, "esm2017");
+}
+function getFunctions(app2 = getApp(), regionOrCustomDomain = DEFAULT_REGION) {
+  const functionsProvider = _getProvider(getModularInstance(app2), FUNCTIONS_TYPE);
+  const functionsInstance = functionsProvider.getImmediate({
+    identifier: regionOrCustomDomain
+  });
+  return functionsInstance;
+}
+function httpsCallable(functionsInstance, name5, options) {
+  return httpsCallable$1(getModularInstance(functionsInstance), name5, options);
+}
+var LONG_TYPE, UNSIGNED_LONG_TYPE, FUNCTIONS_TYPE, errorCodeMap, FunctionsError, ContextProvider, DEFAULT_REGION, FunctionsService, name4, version4, AUTH_INTERNAL_NAME, APP_CHECK_INTERNAL_NAME, MESSAGING_INTERNAL_NAME;
+var init_index_esm20175 = __esm({
+  "node_modules/@firebase/functions/dist/index.esm2017.js"() {
+    init_index_esm20174();
+    init_index_esm2017();
+    init_index_esm20172();
+    LONG_TYPE = "type.googleapis.com/google.protobuf.Int64Value";
+    UNSIGNED_LONG_TYPE = "type.googleapis.com/google.protobuf.UInt64Value";
+    FUNCTIONS_TYPE = "functions";
+    errorCodeMap = {
+      OK: "ok",
+      CANCELLED: "cancelled",
+      UNKNOWN: "unknown",
+      INVALID_ARGUMENT: "invalid-argument",
+      DEADLINE_EXCEEDED: "deadline-exceeded",
+      NOT_FOUND: "not-found",
+      ALREADY_EXISTS: "already-exists",
+      PERMISSION_DENIED: "permission-denied",
+      UNAUTHENTICATED: "unauthenticated",
+      RESOURCE_EXHAUSTED: "resource-exhausted",
+      FAILED_PRECONDITION: "failed-precondition",
+      ABORTED: "aborted",
+      OUT_OF_RANGE: "out-of-range",
+      UNIMPLEMENTED: "unimplemented",
+      INTERNAL: "internal",
+      UNAVAILABLE: "unavailable",
+      DATA_LOSS: "data-loss"
+    };
+    FunctionsError = class extends FirebaseError {
+      constructor(code, message, details) {
+        super(`${FUNCTIONS_TYPE}/${code}`, message || "");
+        this.details = details;
+      }
+    };
+    ContextProvider = class {
+      constructor(authProvider, messagingProvider, appCheckProvider) {
+        this.auth = null;
+        this.messaging = null;
+        this.appCheck = null;
+        this.auth = authProvider.getImmediate({ optional: true });
+        this.messaging = messagingProvider.getImmediate({
+          optional: true
+        });
+        if (!this.auth) {
+          authProvider.get().then((auth) => this.auth = auth, () => {
+          });
+        }
+        if (!this.messaging) {
+          messagingProvider.get().then((messaging) => this.messaging = messaging, () => {
+          });
+        }
+        if (!this.appCheck) {
+          appCheckProvider.get().then((appCheck) => this.appCheck = appCheck, () => {
+          });
+        }
+      }
+      async getAuthToken() {
+        if (!this.auth) {
+          return void 0;
+        }
+        try {
+          const token = await this.auth.getToken();
+          return token === null || token === void 0 ? void 0 : token.accessToken;
+        } catch (e3) {
+          return void 0;
+        }
+      }
+      async getMessagingToken() {
+        if (!this.messaging || !("Notification" in self) || Notification.permission !== "granted") {
+          return void 0;
+        }
+        try {
+          return await this.messaging.getToken();
+        } catch (e3) {
+          return void 0;
+        }
+      }
+      async getAppCheckToken() {
+        if (this.appCheck) {
+          const result = await this.appCheck.getToken();
+          if (result.error) {
+            return null;
+          }
+          return result.token;
+        }
+        return null;
+      }
+      async getContext() {
+        const authToken = await this.getAuthToken();
+        const messagingToken = await this.getMessagingToken();
+        const appCheckToken = await this.getAppCheckToken();
+        return { authToken, messagingToken, appCheckToken };
+      }
+    };
+    DEFAULT_REGION = "us-central1";
+    FunctionsService = class {
+      constructor(app2, authProvider, messagingProvider, appCheckProvider, regionOrCustomDomain = DEFAULT_REGION, fetchImpl) {
+        this.app = app2;
+        this.fetchImpl = fetchImpl;
+        this.emulatorOrigin = null;
+        this.contextProvider = new ContextProvider(authProvider, messagingProvider, appCheckProvider);
+        this.cancelAllRequests = new Promise((resolve2) => {
+          this.deleteService = () => {
+            return Promise.resolve(resolve2());
+          };
+        });
+        try {
+          const url = new URL(regionOrCustomDomain);
+          this.customDomain = url.origin;
+          this.region = DEFAULT_REGION;
+        } catch (e3) {
+          this.customDomain = null;
+          this.region = regionOrCustomDomain;
+        }
+      }
+      _delete() {
+        return this.deleteService();
+      }
+      _url(name5) {
+        const projectId = this.app.options.projectId;
+        if (this.emulatorOrigin !== null) {
+          const origin = this.emulatorOrigin;
+          return `${origin}/${projectId}/${this.region}/${name5}`;
+        }
+        if (this.customDomain !== null) {
+          return `${this.customDomain}/${name5}`;
+        }
+        return `https://${this.region}-${projectId}.cloudfunctions.net/${name5}`;
+      }
+    };
+    name4 = "@firebase/functions";
+    version4 = "0.8.4";
+    AUTH_INTERNAL_NAME = "auth-internal";
+    APP_CHECK_INTERNAL_NAME = "app-check-internal";
+    MESSAGING_INTERNAL_NAME = "messaging-internal";
+    registerFunctions(fetch.bind(self));
+  }
+});
+
+// node_modules/firebase/functions/dist/index.esm.js
+var init_index_esm4 = __esm({
+  "node_modules/firebase/functions/dist/index.esm.js"() {
+    init_index_esm20175();
+  }
+});
+
 // .svelte-kit/output/server/chunks/firebase.js
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app;
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, functions;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
     init_index_esm();
     init_index_esm2();
     init_index_esm3();
+    init_index_esm4();
     FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
     FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
     FIREBASE_projectId = "thinksolve-app";
@@ -6884,6 +7286,11 @@ var init_firebase = __esm({
     app = initializeApp(firebaseConfig);
     getAuth(app);
     ln(app);
+    functions = getFunctions(app);
+    httpsCallable(
+      functions,
+      "createStripeCheckout"
+    );
   }
 });
 
@@ -7004,6 +7411,7 @@ var init_layout_svelte = __esm({
     init_index_esm2();
     init_index2();
     init_index_esm();
+    init_index_esm4();
     LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let cardColor;
       let $$unsubscribe_navLoginClicked;
@@ -7308,9 +7716,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-b8d831e8.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-b8d831e8.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/navigation-938a6172.js", "_app/immutable/chunks/singletons-4c31e384.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d09807c4.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/firebase-91e7652a.js"];
-    stylesheets = ["_app/immutable/assets/+layout-a1038451.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-6916ef5a.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-6916ef5a.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/navigation-5dcb6e10.js", "_app/immutable/chunks/singletons-95ed6d52.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d9b16c0d.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/firebase-1526a27c.js"];
+    stylesheets = ["_app/immutable/assets/+layout-594f2b54.css"];
   }
 });
 
@@ -7379,12 +7787,12 @@ var init_page_svelte = __esm({
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       let { title = "Great physics tutor!!" } = $$props;
-      let { name: name4 = "Thomas Finn" } = $$props;
+      let { name: name5 = "Thomas Finn" } = $$props;
       let { date = "2022-06-08" } = $$props;
       if ($$props.title === void 0 && $$bindings.title && title !== void 0)
         $$bindings.title(title);
-      if ($$props.name === void 0 && $$bindings.name && name4 !== void 0)
-        $$bindings.name(name4);
+      if ($$props.name === void 0 && $$bindings.name && name5 !== void 0)
+        $$bindings.name(name5);
       if ($$props.date === void 0 && $$bindings.date && date !== void 0)
         $$bindings.date(date);
       $$result.css.add(css);
@@ -7395,7 +7803,7 @@ var init_page_svelte = __esm({
       })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
-    <b class="${"absolute right-0 bottom-0 -my-10 mx-5 "}">${escape(name4)}</b></div></article>`;
+    <b class="${"absolute right-0 bottom-0 -my-10 mx-5 "}">${escape(name5)}</b></div></article>`;
     });
     reviews = [
       {
@@ -7492,9 +7900,9 @@ var init_page_svelte = __esm({
     Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 
-<div class="${"scale-90"}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[550px] lg:gap-y-[700px] "}">${each(reviews, ({ name: name4, title, date, body }) => {
+<div class="${"scale-90"}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[550px] lg:gap-y-[700px] "}">${each(reviews, ({ name: name5, title, date, body }) => {
         return `
-      ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name4, date }, {}, {
+      ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name5, date }, {}, {
           default: () => {
             return `${escape(body)}
       `;
@@ -7544,8 +7952,8 @@ var init__3 = __esm({
     init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-6e8e45a9.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-6e8e45a9.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d09807c4.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-e028d2a3.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-e028d2a3.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d9b16c0d.js", "_app/immutable/modules/pages/_page.js-ed7d2f11.js"];
     stylesheets3 = ["_app/immutable/assets/+page-d999b052.css"];
   }
 });
@@ -7827,14 +8235,14 @@ function assertSpan(group) {
     throw new Error("Expected span<HtmlDomNode> but got " + String(group) + ".");
   }
 }
-function defineSymbol(mode, font, group, replace, name4, acceptUnicodeChar) {
-  symbols[mode][name4] = {
+function defineSymbol(mode, font, group, replace, name5, acceptUnicodeChar) {
+  symbols[mode][name5] = {
     font,
     group,
     replace
   };
   if (acceptUnicodeChar && replace) {
-    symbols[mode][replace] = symbols[mode][name4];
+    symbols[mode][replace] = symbols[mode][name5];
   }
 }
 function defineFunction(_ref) {
@@ -8227,8 +8635,8 @@ function defineEnvironment(_ref) {
     _mathmlGroupBuilders[type] = mathmlBuilder3;
   }
 }
-function defineMacro(name4, body) {
-  _macros[name4] = body;
+function defineMacro(name5, body) {
+  _macros[name5] = body;
 }
 function getHLines(parser) {
   var hlineInfo = [];
@@ -8242,9 +8650,9 @@ function getHLines(parser) {
   }
   return hlineInfo;
 }
-function getAutoTag(name4) {
-  if (name4.indexOf("ed") === -1) {
-    return name4.indexOf("*") === -1;
+function getAutoTag(name5) {
+  if (name5.indexOf("ed") === -1) {
+    return name5.indexOf("*") === -1;
   }
 }
 function parseArray(parser, _ref, style) {
@@ -8390,7 +8798,7 @@ function sizingGroup(value, options, baseOptions) {
   }
   return buildCommon.makeFragment(inner2);
 }
-var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D, Dc, T, Tc, S, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
+var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D, Dc, T, Tc, S, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions2, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
 var init_katex = __esm({
   "node_modules/katex/dist/katex.mjs"() {
     SourceLocation = class {
@@ -8812,8 +9220,8 @@ var init_katex = __esm({
       }
       return path2;
     };
-    innerPath = function innerPath2(name4, height) {
-      switch (name4) {
+    innerPath = function innerPath2(name5, height) {
+      switch (name5) {
         case "\u239C":
           return "M291 0 H417 V" + height + " H291z M291 0 H417 V" + height + " H291z";
         case "\u2223":
@@ -13132,8 +13540,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index16) => (n2) => {
-          nodes.splice(index16 + 1, 0, n2);
+        prev.insertAfter = ((index17) => (n2) => {
+          nodes.splice(index17 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -13202,11 +13610,11 @@ var init_katex = __esm({
         this.children = children || [];
         this.classes = classes || [];
       }
-      setAttribute(name4, value) {
-        this.attributes[name4] = value;
+      setAttribute(name5, value) {
+        this.attributes[name5] = value;
       }
-      getAttribute(name4) {
-        return this.attributes[name4];
+      getAttribute(name5) {
+        return this.attributes[name5];
       }
       toNode() {
         var node = document.createElementNS("http://www.w3.org/1998/Math/MathML", this.type);
@@ -14434,11 +14842,11 @@ var init_katex = __esm({
       "\\futurelet": "\\\\globalfuture"
     };
     checkControlSequence = (tok) => {
-      var name4 = tok.text;
-      if (/^(?:[\\{}$&#^_]|EOF)$/.test(name4)) {
+      var name5 = tok.text;
+      if (/^(?:[\\{}$&#^_]|EOF)$/.test(name5)) {
         throw new ParseError("Expected a control sequence", tok);
       }
-      return name4;
+      return name5;
     };
     getRHS = (parser) => {
       var tok = parser.gullet.popToken();
@@ -14450,7 +14858,7 @@ var init_katex = __esm({
       }
       return tok;
     };
-    letCommand = (parser, name4, tok, global2) => {
+    letCommand = (parser, name5, tok, global2) => {
       var macro = parser.gullet.macros.get(tok.text);
       if (macro == null) {
         tok.noexpand = true;
@@ -14460,7 +14868,7 @@ var init_katex = __esm({
           unexpandable: !parser.gullet.isExpandable(tok.text)
         };
       }
-      parser.gullet.macros.set(name4, macro, global2);
+      parser.gullet.macros.set(name5, macro, global2);
     };
     defineFunction({
       type: "internal",
@@ -14503,8 +14911,8 @@ var init_katex = __esm({
           funcName
         } = _ref2;
         var tok = parser.gullet.popToken();
-        var name4 = tok.text;
-        if (/^(?:[\\{}$&#^_]|EOF)$/.test(name4)) {
+        var name5 = tok.text;
+        if (/^(?:[\\{}$&#^_]|EOF)$/.test(name5)) {
           throw new ParseError("Expected a control sequence", tok);
         }
         var numArgs = 0;
@@ -14543,7 +14951,7 @@ var init_katex = __esm({
           tokens = parser.gullet.expandTokens(tokens);
           tokens.reverse();
         }
-        parser.gullet.macros.set(name4, {
+        parser.gullet.macros.set(name5, {
           tokens,
           numArgs,
           delimiters: delimiters2
@@ -14570,10 +14978,10 @@ var init_katex = __esm({
           parser,
           funcName
         } = _ref3;
-        var name4 = checkControlSequence(parser.gullet.popToken());
+        var name5 = checkControlSequence(parser.gullet.popToken());
         parser.gullet.consumeSpaces();
         var tok = getRHS(parser);
-        letCommand(parser, name4, tok, funcName === "\\\\globallet");
+        letCommand(parser, name5, tok, funcName === "\\\\globallet");
         return {
           type: "internal",
           mode: parser.mode
@@ -14596,10 +15004,10 @@ var init_katex = __esm({
           parser,
           funcName
         } = _ref4;
-        var name4 = checkControlSequence(parser.gullet.popToken());
+        var name5 = checkControlSequence(parser.gullet.popToken());
         var middle = parser.gullet.popToken();
         var tok = parser.gullet.popToken();
-        letCommand(parser, name4, tok, funcName === "\\\\globalfuture");
+        letCommand(parser, name5, tok, funcName === "\\\\globalfuture");
         parser.gullet.pushToken(tok);
         parser.gullet.pushToken(middle);
         return {
@@ -18417,13 +18825,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index16 = optArgs[0];
+        var index17 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index16
+          index: index17
         };
       },
       htmlBuilder(group, options) {
@@ -18489,9 +18897,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index16
+          index: index17
         } = group;
-        return index16 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index16, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index17 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index17, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -19033,7 +19441,7 @@ var init_katex = __esm({
       }
     });
     makeVerb = (group) => group.body.replace(/ /g, group.star ? "\u2423" : "\xA0");
-    functions = _functions;
+    functions2 = _functions;
     spaceRegexString = "[ \r\n	]";
     controlWordRegexString = "\\\\[a-zA-Z@]+";
     controlSymbolRegexString = "\\\\[^\uD800-\uDFFF]";
@@ -19121,37 +19529,37 @@ var init_katex = __esm({
           this.endGroup();
         }
       }
-      has(name4) {
-        return this.current.hasOwnProperty(name4) || this.builtins.hasOwnProperty(name4);
+      has(name5) {
+        return this.current.hasOwnProperty(name5) || this.builtins.hasOwnProperty(name5);
       }
-      get(name4) {
-        if (this.current.hasOwnProperty(name4)) {
-          return this.current[name4];
+      get(name5) {
+        if (this.current.hasOwnProperty(name5)) {
+          return this.current[name5];
         } else {
-          return this.builtins[name4];
+          return this.builtins[name5];
         }
       }
-      set(name4, value, global2) {
+      set(name5, value, global2) {
         if (global2 === void 0) {
           global2 = false;
         }
         if (global2) {
           for (var i = 0; i < this.undefStack.length; i++) {
-            delete this.undefStack[i][name4];
+            delete this.undefStack[i][name5];
           }
           if (this.undefStack.length > 0) {
-            this.undefStack[this.undefStack.length - 1][name4] = value;
+            this.undefStack[this.undefStack.length - 1][name5] = value;
           }
         } else {
           var top = this.undefStack[this.undefStack.length - 1];
-          if (top && !top.hasOwnProperty(name4)) {
-            top[name4] = this.current[name4];
+          if (top && !top.hasOwnProperty(name5)) {
+            top[name5] = this.current[name5];
           }
         }
         if (value == null) {
-          delete this.current[name4];
+          delete this.current[name5];
         } else {
-          this.current[name4] = value;
+          this.current[name5] = value;
         }
       }
     };
@@ -19285,13 +19693,13 @@ var init_katex = __esm({
       if (arg.length !== 1) {
         throw new ParseError("\\newcommand's first argument must be a macro name");
       }
-      var name4 = arg[0].text;
-      var exists = context.isDefined(name4);
+      var name5 = arg[0].text;
+      var exists = context.isDefined(name5);
       if (exists && !existsOK) {
-        throw new ParseError("\\newcommand{" + name4 + "} attempting to redefine " + (name4 + "; use \\renewcommand"));
+        throw new ParseError("\\newcommand{" + name5 + "} attempting to redefine " + (name5 + "; use \\renewcommand"));
       }
       if (!exists && !nonexistsOK) {
-        throw new ParseError("\\renewcommand{" + name4 + "} when command " + name4 + " does not yet exist; use \\newcommand");
+        throw new ParseError("\\renewcommand{" + name5 + "} when command " + name5 + " does not yet exist; use \\newcommand");
       }
       var numArgs = 0;
       arg = context.consumeArg().tokens;
@@ -19308,7 +19716,7 @@ var init_katex = __esm({
         numArgs = parseInt(argText);
         arg = context.consumeArg().tokens;
       }
-      context.macros.set(name4, {
+      context.macros.set(name5, {
         tokens: arg,
         numArgs
       });
@@ -19329,8 +19737,8 @@ var init_katex = __esm({
     });
     defineMacro("\\show", (context) => {
       var tok = context.popToken();
-      var name4 = tok.text;
-      console.log(tok, context.macros.get(name4), functions[name4], symbols.math[name4], symbols.text[name4]);
+      var name5 = tok.text;
+      console.log(tok, context.macros.get(name5), functions2[name5], symbols.math[name5], symbols.text[name5]);
       return "";
     });
     defineMacro("\\bgroup", "{");
@@ -19960,11 +20368,11 @@ var init_katex = __esm({
       }
       expandOnce(expandableOnly) {
         var topToken = this.popToken();
-        var name4 = topToken.text;
-        var expansion = !topToken.noexpand ? this._getExpansion(name4) : null;
+        var name5 = topToken.text;
+        var expansion = !topToken.noexpand ? this._getExpansion(name5) : null;
         if (expansion == null || expandableOnly && expansion.unexpandable) {
-          if (expandableOnly && expansion == null && name4[0] === "\\" && !this.isDefined(name4)) {
-            throw new ParseError("Undefined control sequence: " + name4);
+          if (expandableOnly && expansion == null && name5[0] === "\\" && !this.isDefined(name5)) {
+            throw new ParseError("Undefined control sequence: " + name5);
           }
           this.pushToken(topToken);
           return topToken;
@@ -20013,8 +20421,8 @@ var init_katex = __esm({
         }
         throw new Error();
       }
-      expandMacro(name4) {
-        return this.macros.has(name4) ? this.expandTokens([new Token(name4)]) : void 0;
+      expandMacro(name5) {
+        return this.macros.has(name5) ? this.expandTokens([new Token(name5)]) : void 0;
       }
       expandTokens(tokens) {
         var output = [];
@@ -20032,21 +20440,21 @@ var init_katex = __esm({
         }
         return output;
       }
-      expandMacroAsText(name4) {
-        var tokens = this.expandMacro(name4);
+      expandMacroAsText(name5) {
+        var tokens = this.expandMacro(name5);
         if (tokens) {
           return tokens.map((token) => token.text).join("");
         } else {
           return tokens;
         }
       }
-      _getExpansion(name4) {
-        var definition = this.macros.get(name4);
+      _getExpansion(name5) {
+        var definition = this.macros.get(name5);
         if (definition == null) {
           return definition;
         }
-        if (name4.length === 1) {
-          var catcode = this.lexer.catcodes[name4];
+        if (name5.length === 1) {
+          var catcode = this.lexer.catcodes[name5];
           if (catcode != null && catcode !== 13) {
             return;
           }
@@ -20076,12 +20484,12 @@ var init_katex = __esm({
         }
         return expansion;
       }
-      isDefined(name4) {
-        return this.macros.has(name4) || functions.hasOwnProperty(name4) || symbols.math.hasOwnProperty(name4) || symbols.text.hasOwnProperty(name4) || implicitCommands.hasOwnProperty(name4);
+      isDefined(name5) {
+        return this.macros.has(name5) || functions2.hasOwnProperty(name5) || symbols.math.hasOwnProperty(name5) || symbols.text.hasOwnProperty(name5) || implicitCommands.hasOwnProperty(name5);
       }
-      isExpandable(name4) {
-        var macro = this.macros.get(name4);
-        return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions.hasOwnProperty(name4) && !functions[name4].primitive;
+      isExpandable(name5) {
+        var macro = this.macros.get(name5);
+        return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions2.hasOwnProperty(name5) && !functions2[name5].primitive;
       }
     };
     unicodeSubRegEx = /^[₊₋₌₍₎₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ]/;
@@ -20660,7 +21068,7 @@ var init_katex = __esm({
           if (breakOnTokenText && lex.text === breakOnTokenText) {
             break;
           }
-          if (breakOnInfix && functions[lex.text] && functions[lex.text].infix) {
+          if (breakOnInfix && functions2[lex.text] && functions2[lex.text].infix) {
             break;
           }
           var atom = this.parseAtom(breakOnTokenText);
@@ -20722,12 +21130,12 @@ var init_katex = __esm({
           return body;
         }
       }
-      handleSupSubscript(name4) {
+      handleSupSubscript(name5) {
         var symbolToken = this.fetch();
         var symbol = symbolToken.text;
         this.consume();
         this.consumeSpaces();
-        var group = this.parseGroup(name4);
+        var group = this.parseGroup(name5);
         if (!group) {
           throw new ParseError("Expected group after '" + symbol + "'", symbolToken);
         }
@@ -20856,16 +21264,16 @@ var init_katex = __esm({
           return base2;
         }
       }
-      parseFunction(breakOnTokenText, name4) {
+      parseFunction(breakOnTokenText, name5) {
         var token = this.fetch();
         var func = token.text;
-        var funcData = functions[func];
+        var funcData = functions2[func];
         if (!funcData) {
           return null;
         }
         this.consume();
-        if (name4 && name4 !== "atom" && !funcData.allowedInArgument) {
-          throw new ParseError("Got function '" + func + "' with no arguments" + (name4 ? " as " + name4 : ""), token);
+        if (name5 && name5 !== "atom" && !funcData.allowedInArgument) {
+          throw new ParseError("Got function '" + func + "' with no arguments" + (name5 ? " as " + name5 : ""), token);
         } else if (this.mode === "text" && !funcData.allowedInText) {
           throw new ParseError("Can't use function '" + func + "' in text mode", token);
         } else if (this.mode === "math" && funcData.allowedInMath === false) {
@@ -20877,18 +21285,18 @@ var init_katex = __esm({
         } = this.parseArguments(func, funcData);
         return this.callFunction(func, args, optArgs, token, breakOnTokenText);
       }
-      callFunction(name4, args, optArgs, token, breakOnTokenText) {
+      callFunction(name5, args, optArgs, token, breakOnTokenText) {
         var context = {
-          funcName: name4,
+          funcName: name5,
           parser: this,
           token,
           breakOnTokenText
         };
-        var func = functions[name4];
+        var func = functions2[name5];
         if (func && func.handler) {
           return func.handler(context, args, optArgs);
         } else {
-          throw new ParseError("No function handler for " + name4);
+          throw new ParseError("No function handler for " + name5);
         }
       }
       parseArguments(func, funcData) {
@@ -20921,7 +21329,7 @@ var init_katex = __esm({
           optArgs
         };
       }
-      parseGroupOfType(name4, type, optional) {
+      parseGroupOfType(name5, type, optional) {
         switch (type) {
           case "color":
             return this.parseColorGroup(optional);
@@ -20953,9 +21361,9 @@ var init_katex = __esm({
             if (optional) {
               throw new ParseError("A primitive argument cannot be optional");
             }
-            var _group = this.parseGroup(name4);
+            var _group = this.parseGroup(name5);
             if (_group == null) {
-              throw new ParseError("Expected group as " + name4, this.fetch());
+              throw new ParseError("Expected group as " + name5, this.fetch());
             }
             return _group;
           }
@@ -20964,7 +21372,7 @@ var init_katex = __esm({
           case void 0:
             return this.parseArgumentGroup(optional);
           default:
-            throw new ParseError("Unknown group type as " + name4, this.fetch());
+            throw new ParseError("Unknown group type as " + name5, this.fetch());
         }
       }
       consumeSpaces() {
@@ -21095,7 +21503,7 @@ var init_katex = __esm({
         }
         return result;
       }
-      parseGroup(name4, breakOnTokenText) {
+      parseGroup(name5, breakOnTokenText) {
         var firstToken = this.fetch();
         var text2 = firstToken.text;
         var result;
@@ -21115,7 +21523,7 @@ var init_katex = __esm({
             semisimple: text2 === "\\begingroup" || void 0
           };
         } else {
-          result = this.parseFunction(breakOnTokenText, name4) || this.parseSymbol();
+          result = this.parseFunction(breakOnTokenText, name5) || this.parseSymbol();
           if (result == null && text2[0] === "\\" && !implicitCommands.hasOwnProperty(text2)) {
             if (this.settings.throwOnError) {
               throw new ParseError("Undefined control sequence: " + text2, firstToken);
@@ -21424,8 +21832,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file6 = "_app/immutable/components/pages/katex/_page.svx-3c8cba4d.js";
-    imports6 = ["_app/immutable/components/pages/katex/_page.svx-3c8cba4d.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js"];
+    file6 = "_app/immutable/components/pages/katex/_page.svx-26f7901b.js";
+    imports6 = ["_app/immutable/components/pages/katex/_page.svx-26f7901b.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js"];
     stylesheets6 = [];
   }
 });
@@ -21445,6 +21853,7 @@ var init_page_svelte4 = __esm({
     init_index_esm2();
     init_index2();
     init_index_esm();
+    init_index_esm4();
     css3 = {
       code: '#flyingEmoji.svelte-1lkingg.svelte-1lkingg{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1lkingg-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1lkingg-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1lkingg.svelte-1lkingg::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1lkingg-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1lkingg-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1lkingg-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1lkingg-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1lkingg-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1lkingg-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1lkingg-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1lkingg-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1lkingg.svelte-1lkingg{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1lkingg.svelte-1lkingg{margin:0px auto;width:80vw;max-width:380px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg,button.svelte-1lkingg.svelte-1lkingg{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1lkingg.svelte-1lkingg{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1lkingg.svelte-1lkingg:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1lkingg button.svelte-1lkingg{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg:hover{border:1px solid #999}.loginLogoutDivs.svelte-1lkingg button.svelte-1lkingg:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1lkingg.svelte-1lkingg{display:flex;justify-content:center;align-items:center}',
       map: null
@@ -21499,8 +21908,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file7 = "_app/immutable/components/pages/login/_page.svelte-2efefdb8.js";
-    imports7 = ["_app/immutable/components/pages/login/_page.svelte-2efefdb8.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d09807c4.js", "_app/immutable/chunks/firebase-91e7652a.js", "_app/immutable/chunks/navigation-938a6172.js", "_app/immutable/chunks/singletons-4c31e384.js"];
+    file7 = "_app/immutable/components/pages/login/_page.svelte-1182f37a.js";
+    imports7 = ["_app/immutable/components/pages/login/_page.svelte-1182f37a.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d9b16c0d.js", "_app/immutable/chunks/firebase-1526a27c.js", "_app/immutable/chunks/navigation-5dcb6e10.js", "_app/immutable/chunks/singletons-95ed6d52.js"];
     stylesheets7 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -21667,8 +22076,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file8 = "_app/immutable/components/pages/math/_page.svx-e9685271.js";
-    imports8 = ["_app/immutable/components/pages/math/_page.svx-e9685271.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d09807c4.js", "_app/immutable/chunks/Kajax-9cabf10b.js"];
+    file8 = "_app/immutable/components/pages/math/_page.svx-b83767b4.js";
+    imports8 = ["_app/immutable/components/pages/math/_page.svx-b83767b4.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d9b16c0d.js", "_app/immutable/chunks/Kajax-9cabf10b.js"];
     stylesheets8 = [];
   }
 });
@@ -21748,8 +22157,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file9 = "_app/immutable/components/pages/mathjax/_page.svx-738c194e.js";
-    imports9 = ["_app/immutable/components/pages/mathjax/_page.svx-738c194e.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js"];
+    file9 = "_app/immutable/components/pages/mathjax/_page.svx-6d7bba08.js";
+    imports9 = ["_app/immutable/components/pages/mathjax/_page.svx-6d7bba08.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js"];
     stylesheets9 = [];
   }
 });
@@ -21869,8 +22278,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file10 = "_app/immutable/components/pages/physics/_page.svelte-37359d13.js";
-    imports10 = ["_app/immutable/components/pages/physics/_page.svelte-37359d13.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/Kajax-9cabf10b.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js"];
+    file10 = "_app/immutable/components/pages/physics/_page.svelte-5c6e7737.js";
+    imports10 = ["_app/immutable/components/pages/physics/_page.svelte-5c6e7737.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/Kajax-9cabf10b.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js"];
     stylesheets10 = ["_app/immutable/assets/+page-fcf51fa8.css"];
   }
 });
@@ -22033,8 +22442,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file11 = "_app/immutable/components/pages/plans/_page.svelte-6856cfb9.js";
-    imports11 = ["_app/immutable/components/pages/plans/_page.svelte-6856cfb9.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/CalendlyJsandCSS-5ce72353.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d09807c4.js"];
+    file11 = "_app/immutable/components/pages/plans/_page.svelte-8c3ef5f8.js";
+    imports11 = ["_app/immutable/components/pages/plans/_page.svelte-8c3ef5f8.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/CalendlyJsandCSS-5ce72353.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d9b16c0d.js"];
     stylesheets11 = ["_app/immutable/assets/+page-ebab19d4.css"];
   }
 });
@@ -22198,8 +22607,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file13 = "_app/immutable/components/pages/schools/_page.svelte-7323dba2.js";
-    imports13 = ["_app/immutable/components/pages/schools/_page.svelte-7323dba2.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/CalendlyJsandCSS-5ce72353.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d09807c4.js"];
+    file13 = "_app/immutable/components/pages/schools/_page.svelte-449fd5da.js";
+    imports13 = ["_app/immutable/components/pages/schools/_page.svelte-449fd5da.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/CalendlyJsandCSS-5ce72353.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/index-d9b16c0d.js"];
     stylesheets13 = ["_app/immutable/assets/+page-70af9ea0.css"];
   }
 });
@@ -22255,8 +22664,8 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/screenshare/_page.svelte-d52b7ed9.js";
-    imports14 = ["_app/immutable/components/pages/screenshare/_page.svelte-d52b7ed9.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/navigation-938a6172.js", "_app/immutable/chunks/singletons-4c31e384.js"];
+    file14 = "_app/immutable/components/pages/screenshare/_page.svelte-76ca8200.js";
+    imports14 = ["_app/immutable/components/pages/screenshare/_page.svelte-76ca8200.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/navigation-5dcb6e10.js", "_app/immutable/chunks/singletons-95ed6d52.js"];
     stylesheets14 = [];
   }
 });
@@ -22307,9 +22716,60 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshareA/_page.svelte-280297b6.js";
-    imports15 = ["_app/immutable/components/pages/screenshareA/_page.svelte-280297b6.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-96ddf33d.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/navigation-938a6172.js", "_app/immutable/chunks/singletons-4c31e384.js"];
+    file15 = "_app/immutable/components/pages/screenshareA/_page.svelte-61261e94.js";
+    imports15 = ["_app/immutable/components/pages/screenshareA/_page.svelte-61261e94.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/store-28576b84.js", "_app/immutable/chunks/index-125d1f03.js", "_app/immutable/chunks/navigation-5dcb6e10.js", "_app/immutable/chunks/singletons-95ed6d52.js"];
     stylesheets15 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/stripe/_page.svelte.js
+var page_svelte_exports10 = {};
+__export(page_svelte_exports10, {
+  default: () => Page14
+});
+var Page14;
+var init_page_svelte10 = __esm({
+  ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
+    init_chunks();
+    init_firebase();
+    init_index_esm();
+    init_index_esm2();
+    init_index_esm3();
+    init_index_esm4();
+    Page14 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+
+
+
+
+${$$result.head += `${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}" data-svelte="svelte-qn95fl"><\/script>`, ""}
+
+
+<main><div class="${"container pt-20"}">
+    
+    ${`<p class="${"font-Poppins text-5xl text-center "}">Session Expired</p>`}</div></main>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/15.js
+var __exports16 = {};
+__export(__exports16, {
+  component: () => component16,
+  file: () => file16,
+  imports: () => imports16,
+  index: () => index16,
+  stylesheets: () => stylesheets16
+});
+var index16, component16, file16, imports16, stylesheets16;
+var init__16 = __esm({
+  ".svelte-kit/output/server/nodes/15.js"() {
+    index16 = 15;
+    component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
+    file16 = "_app/immutable/components/pages/stripe/_page.svelte-f717d10e.js";
+    imports16 = ["_app/immutable/components/pages/stripe/_page.svelte-f717d10e.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/firebase-1526a27c.js", "_app/immutable/chunks/index-d9b16c0d.js"];
+    stylesheets16 = [];
   }
 });
 
@@ -22427,8 +22887,8 @@ function devalue(value) {
     var params_1 = [];
     var statements_1 = [];
     var values_1 = [];
-    names.forEach(function(name4, thing) {
-      params_1.push(name4);
+    names.forEach(function(name5, thing) {
+      params_1.push(name5);
       if (isPrimitive(thing)) {
         values_1.push(stringifyPrimitive(thing));
         return;
@@ -22449,18 +22909,18 @@ function devalue(value) {
         case "Array":
           values_1.push("Array(" + thing.length + ")");
           thing.forEach(function(v2, i) {
-            statements_1.push(name4 + "[" + i + "]=" + stringify(v2));
+            statements_1.push(name5 + "[" + i + "]=" + stringify(v2));
           });
           break;
         case "Set":
           values_1.push("new Set");
-          statements_1.push(name4 + "." + Array.from(thing).map(function(v2) {
+          statements_1.push(name5 + "." + Array.from(thing).map(function(v2) {
             return "add(" + stringify(v2) + ")";
           }).join("."));
           break;
         case "Map":
           values_1.push("new Map");
-          statements_1.push(name4 + "." + Array.from(thing).map(function(_a) {
+          statements_1.push(name5 + "." + Array.from(thing).map(function(_a) {
             var k = _a[0], v2 = _a[1];
             return "set(" + stringify(k) + ", " + stringify(v2) + ")";
           }).join("."));
@@ -22468,7 +22928,7 @@ function devalue(value) {
         default:
           values_1.push(Object.getPrototypeOf(thing) === null ? "Object.create(null)" : "{}");
           Object.keys(thing).forEach(function(key2) {
-            statements_1.push("" + name4 + safeProp(key2) + "=" + stringify(thing[key2]));
+            statements_1.push("" + name5 + safeProp(key2) + "=" + stringify(thing[key2]));
           });
       }
     });
@@ -22479,12 +22939,12 @@ function devalue(value) {
   }
 }
 function getName(num) {
-  var name4 = "";
+  var name5 = "";
   do {
-    name4 = chars[num % chars.length] + name4;
+    name5 = chars[num % chars.length] + name5;
     num = ~~(num / chars.length) - 1;
   } while (num >= 0);
-  return reserved.test(name4) ? name4 + "_" : name4;
+  return reserved.test(name5) ? name5 + "_" : name5;
 }
 function isPrimitive(thing) {
   return Object(thing) !== thing;
@@ -22620,13 +23080,13 @@ function error_to_pojo(error2, get_stack) {
     };
   }
   const {
-    name: name4,
+    name: name5,
     message,
     stack,
     cause,
     ...custom
   } = error2;
-  const object = { name: name4, message, stack: get_stack(error2) };
+  const object = { name: name5, message, stack: get_stack(error2) };
   if (cause)
     object.cause = error_to_pojo(cause, get_stack);
   for (const key2 in custom) {
@@ -23150,7 +23610,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets16 = new Set(entry.stylesheets);
+  const stylesheets17 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -23200,7 +23660,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets16.add(url));
+        node.stylesheets.forEach((url) => stylesheets17.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
@@ -23263,7 +23723,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets16) {
+  for (const dep of stylesheets17) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -23358,8 +23818,8 @@ async function render_response({
       headers.set("content-security-policy-report-only", report_only_header);
     }
     for (const new_cookie of cookies) {
-      const { name: name4, value, ...options2 } = new_cookie;
-      headers.append("set-cookie", cookie.serialize(name4, value, options2));
+      const { name: name5, value, ...options2 } = new_cookie;
+      headers.append("set-cookie", cookie.serialize(name5, value, options2));
     }
     if (link_header_preloads.size) {
       headers.set("link", Array.from(link_header_preloads).join(", "));
@@ -23519,14 +23979,14 @@ function create_fetch({ event, options, state, route }) {
     const is_asset = options.manifest.assets.has(filename);
     const is_asset_html = options.manifest.assets.has(filename_html);
     if (is_asset || is_asset_html) {
-      const file16 = is_asset ? filename : filename_html;
+      const file17 = is_asset ? filename : filename_html;
       if (options.read) {
         const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file16), {
+        response = new Response(options.read(file17), {
           headers: type ? { "content-type": type } : {}
         });
       } else {
-        response = await fetch(`${event.url.origin}/${file16}`, opts);
+        response = await fetch(`${event.url.origin}/${file17}`, opts);
       }
     } else if (is_root_relative(resolved)) {
       if (opts.credentials !== "omit") {
@@ -23539,7 +23999,7 @@ function create_fetch({ event, options, state, route }) {
             continue;
           combined_cookies[cookie3.name] = cookie3.value;
         }
-        const cookie2 = Object.entries(combined_cookies).map(([name4, value]) => `${name4}=${value}`).join("; ");
+        const cookie2 = Object.entries(combined_cookies).map(([name5, value]) => `${name5}=${value}`).join("; ");
         if (cookie2) {
           opts.headers.set("cookie", cookie2);
         }
@@ -23887,8 +24347,8 @@ async function render_page(event, route, options, state, resolve_opts) {
           const status2 = error2 instanceof HttpError ? error2.status : 500;
           while (i--) {
             if (route.errors[i]) {
-              const index16 = route.errors[i];
-              const node2 = await options.manifest._.nodes[index16]();
+              const index17 = route.errors[i];
+              const node2 = await options.manifest._.nodes[index17]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -24012,7 +24472,7 @@ function compact(array2) {
 function exec(match, names, types, matchers) {
   const params = {};
   for (let i = 0; i < names.length; i += 1) {
-    const name4 = names[i];
+    const name5 = names[i];
     const type = types[i];
     const value = match[i + 1] || "";
     if (type) {
@@ -24022,7 +24482,7 @@ function exec(match, names, types, matchers) {
       if (!matcher(value))
         return;
     }
-    params[name4] = value;
+    params[name5] = value;
   }
   return params;
 }
@@ -24429,7 +24889,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-183a9478.js", "imports": ["_app/immutable/start-183a9478.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/singletons-4c31e384.js", "_app/immutable/chunks/index-125d1f03.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-a5e7ca8f.js", "imports": ["_app/immutable/start-a5e7ca8f.js", "_app/immutable/chunks/index-bd8a2dbd.js", "_app/immutable/chunks/singletons-95ed6d52.js", "_app/immutable/chunks/index-125d1f03.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -24445,7 +24905,8 @@ var manifest = {
       () => Promise.resolve().then(() => (init__12(), __exports12)),
       () => Promise.resolve().then(() => (init__13(), __exports13)),
       () => Promise.resolve().then(() => (init__14(), __exports14)),
-      () => Promise.resolve().then(() => (init__15(), __exports15))
+      () => Promise.resolve().then(() => (init__15(), __exports15)),
+      () => Promise.resolve().then(() => (init__16(), __exports16))
     ],
     routes: [
       {
@@ -24577,6 +25038,16 @@ var manifest = {
         errors: [1],
         layouts: [0],
         leaf: 14
+      },
+      {
+        type: "page",
+        id: "stripe",
+        pattern: /^\/stripe\/?$/,
+        names: [],
+        types: [],
+        errors: [1],
+        layouts: [0],
+        leaf: 15
       }
     ],
     matchers: async () => {
@@ -24639,12 +25110,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file16 = pathname.substring(1);
+      let file17 = pathname.substring(1);
       try {
-        file16 = decodeURIComponent(file16);
+        file17 = decodeURIComponent(file17);
       } catch (err) {
       }
-      if (manifest.assets.has(file16) || manifest.assets.has(file16 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file17) || manifest.assets.has(file17 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

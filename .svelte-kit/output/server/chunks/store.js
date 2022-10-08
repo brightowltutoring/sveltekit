@@ -7,16 +7,25 @@ const startScrollY = derived(scrollY, ($scrollY, set) => {
     set($scrollY);
   }, 50);
 });
-const instDeltaY = derived([scrollY, startScrollY], ([$scrollY, $startScrollY]) => {
-  return $scrollY - $startScrollY;
-});
+const instDeltaY = derived(
+  [scrollY, startScrollY],
+  ([$scrollY, $startScrollY]) => {
+    return $scrollY - $startScrollY;
+  }
+);
 const scrollYMax = writable(0);
-derived([scrollY, scrollYMax], ([$scrollY, $scrollYMax]) => {
-  return 1 - $scrollY / $scrollYMax;
-});
+derived(
+  [scrollY, scrollYMax],
+  ([$scrollY, $scrollYMax]) => {
+    return 1 - $scrollY / $scrollYMax;
+  }
+);
 const windowInnerHeight = writable(0);
 const innerWidth = writable(0);
-const lessThan768 = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
+const lessThan768 = derived(
+  innerWidth,
+  ($innerWidth) => $innerWidth < 768
+);
 const navLoginClicked = writable(false);
 const routes = writable({
   home: {
@@ -47,6 +56,12 @@ const routes = writable({
     name: "Login",
     href: "/login",
     title: "Login \u{1F680}",
+    isCurrent: false
+  },
+  stripe: {
+    name: "Stripe",
+    href: "/stripe",
+    title: "Stripe \u{1F4B0}",
     isCurrent: false
   },
   physics: {

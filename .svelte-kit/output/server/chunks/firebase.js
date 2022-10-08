@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
+import { getFunctions, httpsCallable } from "firebase/functions";
 const FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
 const FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
 const FIREBASE_projectId = "thinksolve-app";
@@ -18,3 +19,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 getAuth(app);
 getFirestore(app);
+const functions = getFunctions(app);
+httpsCallable(
+  functions,
+  "createStripeCheckout"
+);

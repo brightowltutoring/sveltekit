@@ -25,8 +25,6 @@
     window.history.replaceState({}, "foo", `/stripe?${btoa(urlSearch)}`);
 
     stripeCreateCheckout = () => {
-      // e.preventDefault();
-
       let qtyFromUrl = new URLSearchParams(urlSearch).get("quantity");
       let quantity =
         qtyFromUrl || document.getElementById("inputQuantity").value;
@@ -36,7 +34,7 @@
       let service = new URLSearchParams(urlSearch).get("service");
 
       // stripe checkout session created using url params
-      if (service) {
+      if (service && quantity) {
         createStripeCheckout({
           quantity: quantity,
           email: email,
@@ -55,9 +53,6 @@
   });
 </script>
 
-<!-- vanillaJS DOMContentLoaded doesnt work ... this is alternative to SEAF inside onMount -->
-<!-- <svelte:window on:load={stripeCreateCheckout} /> -->
-
 <svelte:head>
   <title>Stripe Firebase Demo</title>
   <script src="https://js.stripe.com/v3/"></script>
@@ -68,12 +63,12 @@
   <div class="container pt-20">
     <!-- <input type="number" value="1" id="inputQuantity" /> -->
     <!-- <button id="btn">checkout</button> -->
-    {#if slideKey && urlSearch.includes("service")}
+    {#if slideKey && urlSearch.includes("service") && urlSearch.includes("quantity")}
       <p
         in:fly={{ y: -400, duration: 1000, easing: elasticOut }}
         class="font-Poppins text-6xl text-center "
       >
-        Just a moment ...
+        Just a moment...
       </p>
     {:else}
       <p class="font-Poppins text-5xl text-center ">Session Expired</p>

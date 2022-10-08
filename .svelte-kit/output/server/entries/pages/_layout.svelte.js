@@ -5,6 +5,7 @@ import "firebase/firestore/lite";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
 import "firebase/app";
+import "firebase/functions";
 const app = "";
 const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let cardColor;
