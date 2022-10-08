@@ -8,9 +8,6 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 
 
-
-
-
 ${$$result.head += `${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}" data-svelte="svelte-qn95fl"><\/script>`, ""}
 
 

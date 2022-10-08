@@ -20,9 +20,9 @@
     const btn = document.getElementById("btn");
 
     urlSearch = window.location.search.slice(1);
-
     // TODO: shows url parameters in base64
-    window.history.replaceState({}, "foo", `/stripe?${btoa(urlSearch)}`);
+    // window.history.replaceState({}, "", `/stripe?${btoa(urlSearch)}`);
+    window.history.replaceState({}, "", `/${btoa(urlSearch)}`);
 
     stripeCreateCheckout = () => {
       let qtyFromUrl = new URLSearchParams(urlSearch).get("quantity");
@@ -70,8 +70,8 @@
       >
         Just a moment...
       </p>
-    {:else}
-      <p class="font-Poppins text-5xl text-center ">Session Expired</p>
+      <!-- {:else}
+      <p class="font-Poppins text-5xl text-center ">Session Expired</p> -->
     {/if}
   </div>
 </main>
