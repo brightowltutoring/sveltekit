@@ -60,28 +60,26 @@
 <!-- on:load={stripeCreateCheckout}></script> -->
 
 <main>
-  <div class="container pt-20">
-    <!-- <input type="number" value="1" id="inputQuantity" /> -->
-    <!-- <button id="btn">checkout</button> -->
-    {#if slideKey && urlSearch.includes("service") && urlSearch.includes("quantity")}
-      <p
-        in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
-        class="font-Poppins text-6xl text-center animate-bounce"
-      >
-        Just a moment
-      </p>
+  <!-- <div class="container pt-20"> -->
 
-      <span
-        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-50"
-      />
+  <!-- <input type="number" value="1" id="inputQuantity" /> -->
+  <!-- <button id="btn">checkout</button> -->
+  {#if slideKey && urlSearch.includes("service") && urlSearch.includes("quantity")}
+    <div
+      in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
+      class="font-Poppins text-6xl text-center pt-20 animate-bounce loading"
+    >
+      Just a moment
+    </div>
 
-      <!-- {:else}
-      <p class="font-Poppins text-5xl text-center ">Session Expired</p> -->
-    {/if}
-  </div>
+    <!-- {:else}
+        <p class="font-Poppins text-5xl text-center ">Session Expired</p> -->
+  {/if}
+
+  <!-- </div> -->
 </main>
 
-<!-- <style>
+<style>
   .loading:after {
     content: " . . .";
     animation: dots 1s steps(5, end) infinite;
@@ -93,4 +91,4 @@
       color: rgba(0, 0, 0, 0);
     }
   }
-</style> -->
+</style>
