@@ -15,7 +15,8 @@ export const nodes = [
 	() => import('./nodes/11'),
 	() => import('./nodes/12'),
 	() => import('./nodes/13'),
-	() => import('./nodes/14')
+	() => import('./nodes/14'),
+	() => import('./nodes/15')
 ];
 
 export const dictionary = {
@@ -31,5 +32,6 @@ export const dictionary = {
 	"samplequiz": [[1], [0], 11],
 	"schools": [[1], [0], 12],
 	"screenshare": [[1], [0], 13],
-	"screenshareA": [[1], [0], 14]
+	"screenshareA": [[1], [0], 14],
+	"stripe": [[1], [0], 15]
 };

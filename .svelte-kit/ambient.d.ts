@@ -21,7 +21,6 @@ declare module '$env/static/private' {
 	export const CONDA_SHLVL: string;
 	export const CONDA_PROMPT_MODIFIER: string;
 	export const TERM_PROGRAM_VERSION: string;
-	export const MallocSpaceEfficient: string;
 	export const alfred_preferences_localhash: string;
 	export const ZDOTDIR: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
@@ -48,8 +47,10 @@ declare module '$env/static/private' {
 	export const PATH: string;
 	export const npm_package_json: string;
 	export const _: string;
+	export const LaunchInstanceID: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_init_module: string;
+	export const USER_ZDOTDIR: string;
 	export const CONDA_PREFIX: string;
 	export const __CFBundleIdentifier: string;
 	export const npm_command: string;
@@ -92,6 +93,7 @@ declare module '$env/static/private' {
 	export const RUBYOPT: string;
 	export const pk: string;
 	export const RUBY_VERSION: string;
+	export const SECURITYSESSIONID: string;
 	export const alfred_theme: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
@@ -102,4 +104,5 @@ declare module '$env/static/private' {
 	export const FIREBASE_storageBucket: string;
 	export const FIREBASE_messagingSenderId: string;
 	export const FIREBASE_appId: string;
+	export const STRIPE_PUBLIC_KEY: string;
 }
