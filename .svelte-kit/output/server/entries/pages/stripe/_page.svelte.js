@@ -13,7 +13,7 @@ ${$$result.head += `${$$result.title = `<title>Stripe Firebase Demo</title>`, ""
 
 <main><div class="${"container pt-20"}">
     
-    ${`<p class="${"font-Poppins text-5xl text-center "}">Session Expired</p>`}</div></main>`;
+    ${``}</div></main>`;
 });
 export {
   Page as default

@@ -65,13 +65,32 @@
     <!-- <button id="btn">checkout</button> -->
     {#if slideKey && urlSearch.includes("service") && urlSearch.includes("quantity")}
       <p
-        in:fly={{ y: -400, duration: 1000, easing: elasticOut }}
-        class="font-Poppins text-6xl text-center "
+        in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
+        class="font-Poppins text-6xl text-center animate-bounce"
       >
-        Just a moment...
+        Just a moment
       </p>
+
+      <span
+        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-50"
+      />
+
       <!-- {:else}
       <p class="font-Poppins text-5xl text-center ">Session Expired</p> -->
     {/if}
   </div>
 </main>
+
+<!-- <style>
+  .loading:after {
+    content: " . . .";
+    animation: dots 1s steps(5, end) infinite;
+  }
+
+  @keyframes dots {
+    0%,
+    40% {
+      color: rgba(0, 0, 0, 0);
+    }
+  }
+</style> -->
