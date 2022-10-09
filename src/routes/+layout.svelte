@@ -97,7 +97,7 @@
     ? 'bg-[rgba(0,0,0,0.4)]'
     : 'hidden'} fixed w-full h-full flex justify-center items-center "
 >
-  <LoginCard />`
+  <LoginCard />
 </div>
 
 <!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 
