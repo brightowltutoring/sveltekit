@@ -1,5 +1,6 @@
 <script>
   import "../app.css";
+  import UploadForm from "$lib/UploadForm.svelte";
   import LoginCard from "$lib/LoginCard.svelte";
   import Navbar from "$lib/Navbar.svelte";
   import {
@@ -14,6 +15,7 @@
     routes,
     lessThan768,
     navLoginClicked,
+    navHomeworkClicked,
   } from "$lib/store.js";
 
   import { page } from "$app/stores";
@@ -98,6 +100,17 @@
     : 'hidden'} fixed w-full h-full flex justify-center items-center "
 >
   <LoginCard />
+</div>
+
+<div
+  on:click|self={() => {
+    $navHomeworkClicked = false;
+  }}
+  class="z-[50] md:py-4 py-1 md:px-[7%] {$navHomeworkClicked
+    ? 'bg-[rgba(0,0,0,0.4)]'
+    : 'hidden'} fixed w-full h-full flex justify-center items-center "
+>
+  <UploadForm />
 </div>
 
 <!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 

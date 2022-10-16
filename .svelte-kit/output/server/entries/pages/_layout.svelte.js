@@ -385,8 +385,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"z-[50] md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}\`
-</div>
+<div class="${"z-[50] md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}</div>
 
 
 <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>

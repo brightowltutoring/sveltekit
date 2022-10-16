@@ -8,6 +8,7 @@
   let ready = false;
 
   import { onMount } from "svelte";
+  import UploadForm from "$lib/UploadForm.svelte";
   onMount(() => {
     ready = true;
   });
@@ -48,9 +49,11 @@
   </div>
 </div>
 
-<div id="reviews" class="md:my-80 md:pb-80">
+<div id="reviews" class="md:my-80 md:pb-40">
   <Reviews />
 </div>
+
+<UploadForm />
 
 <!-- <SixMathEqnAnim /> -->
 

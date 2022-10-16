@@ -106,4 +106,5 @@ declare module '$env/static/private' {
 	export const FIREBASE_messagingSenderId: string;
 	export const FIREBASE_appId: string;
 	export const STRIPE_PUBLIC_KEY: string;
+	export const UPLOAD_ENDPOINT: string;
 }

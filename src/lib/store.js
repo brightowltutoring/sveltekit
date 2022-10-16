@@ -105,6 +105,7 @@ export const lessThan768 = derived(
 );
 
 export const navLoginClicked = writable(false);
+export const navHomeworkClicked = writable(false);
 
 // the all important
 export const routes = writable({
@@ -136,6 +137,12 @@ export const routes = writable({
     name: "Login",
     href: "/login",
     title: "Login 🚀",
+    isCurrent: false,
+  },
+  homework: {
+    name: "Homework",
+    href: "/homework",
+    title: "Homework",
     isCurrent: false,
   },
   stripe: {
@@ -185,5 +192,5 @@ export const dark_lightened = "rgb(38, 35, 51)";
 export const dark_lightened_half = "#8f86b8";
 
 export const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
-  $isDarkMode ? set(dark_lightened_half) : set(light_darkened_half);
+  $isDarkMode ? set(dark_lightened) : set(light_darkened);
 });

@@ -12,6 +12,7 @@
     isDarkMode,
     lessThan768,
     navLoginClicked,
+    navHomeworkClicked,
   } from "$lib/store.js";
   import { spring } from "svelte/motion";
 
@@ -30,6 +31,7 @@
   let resetLogoClick;
   function clickLogo() {
     $navLoginClicked = false;
+    $navHomeworkClicked = false;
     goto("/");
     resetLogoClick = !resetLogoClick;
 
@@ -70,7 +72,7 @@
     {#key unique}
       <ul class="flex flex-row text-xl  items-center">
         <!-- {#each Object.keys($routes) as KEY} -->
-        {#each Object.keys($routes).splice(0, 5) as KEY}
+        {#each Object.keys($routes).splice(0, 6) as KEY}
           <li
             style={KEY == "login" &&
               $isLoggedIn &&

@@ -6,7 +6,7 @@
 <script>
   import { createStripeCheckout } from "$lib/firebase.js";
   import { onMount } from "svelte";
-  import * as NV from "$env/static/private";
+  import { STRIPE_PUBLIC_KEY } from "$env/static/private";
   import { scale, slide, fly, fade, blur } from "svelte/transition";
   import { quintOut, elasticOut } from "svelte/easing";
 
@@ -16,7 +16,7 @@
 
   onMount(() => {
     slideKey = true;
-    const stripe = Stripe(NV.STRIPE_PUBLIC_KEY);
+    const stripe = Stripe(STRIPE_PUBLIC_KEY);
     const btn = document.getElementById("btn");
 
     urlSearch = window.location.search.slice(1);

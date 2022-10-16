@@ -1,5 +1,5 @@
 <script>
-  import { isDarkMode, navLoginClicked } from "./store.js";
+  import { isDarkMode, navLoginClicked, navHomeworkClicked } from "./store.js";
   import { slide } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { page } from "$app/stores";
@@ -33,10 +33,15 @@
   <button
     in:slide={{ duration: 800, easing: elasticOut }}
     on:click={() => {
-      if (href == "/login") {
+      if (href == "/homework") {
+        $navHomeworkClicked = true;
+        $navLoginClicked = false;
+      } else if (href == "/login") {
         $navLoginClicked = true;
+        $navHomeworkClicked = false;
       } else {
         $navLoginClicked = false;
+        $navHomeworkClicked = false;
         clickOnNavLinks();
         clearTimeout($redirectAfterLoginTimeOut);
         clearInterval($redirectSetInterval);
