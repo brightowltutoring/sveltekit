@@ -40,20 +40,26 @@
       🎃 pressing inquiries can be sent to thinksolve.io[at]gmail.com
       <div
         on:click={() => {
-          window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+          // window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+          document
+            .getElementById("reviews")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
         }}
       >
-        (click for reviews)
+        👉 click for reviews
       </div>
     </div>
   </div>
 </div>
 
-<div id="reviews" class="md:my-80 md:pb-40">
-  <Reviews />
+<div class="mt-80 ">
+  <p class="text-5xl font-Poppins text-center py-10">Upload your homework</p>
+  <UploadForm dropzoneText={"🚀"} dropzoneTextSizeTW={"text-4xl"} />
 </div>
 
-<UploadForm />
+<div id="reviews" class=" md:pb-40">
+  <Reviews />
+</div>
 
 <!-- <SixMathEqnAnim /> -->
 

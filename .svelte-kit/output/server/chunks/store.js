@@ -27,6 +27,7 @@ const lessThan768 = derived(
   ($innerWidth) => $innerWidth < 768
 );
 const navLoginClicked = writable(false);
+const navHomeworkClicked = writable(false);
 const routes = writable({
   home: {
     name: "Home",
@@ -56,6 +57,12 @@ const routes = writable({
     name: "Login",
     href: "/login",
     title: "Login \u{1F680}",
+    isCurrent: false
+  },
+  homework: {
+    name: "Homework",
+    href: "/homework",
+    title: "Homework",
     isCurrent: false
   },
   stripe: {
@@ -93,22 +100,22 @@ const isDarkMode = writable(false);
 const redirectAfterLoginTimeOut = writable("");
 const redirectSetInterval = writable("");
 const light_darkened = "rgb(242,247,250)";
-const light_darkened_half = "pink";
 const dark_lightened = "rgb(38, 35, 51)";
-const dark_lightened_half = "#8f86b8";
-derived(isDarkMode, ($isDarkMode, set) => {
-  $isDarkMode ? set(dark_lightened_half) : set(light_darkened_half);
+const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
+  $isDarkMode ? set(dark_lightened) : set(light_darkened);
 });
 export {
   redirectSetInterval as a,
   isDarkMode as b,
-  routes as c,
+  navHomeworkClicked as c,
   dark_lightened as d,
-  instDeltaY as e,
-  lessThan768 as f,
-  scrollYMax as g,
-  innerWidth as h,
+  routes as e,
+  instDeltaY as f,
+  lessThan768 as g,
+  scrollYMax as h,
   isLoggedIn as i,
+  innerWidth as j,
+  elementColor as k,
   light_darkened as l,
   navLoginClicked as n,
   redirectAfterLoginTimeOut as r,

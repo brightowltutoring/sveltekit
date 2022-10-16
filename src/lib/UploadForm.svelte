@@ -1,9 +1,18 @@
 <script>
+  import { onMount } from "svelte";
   import { UPLOAD_ENDPOINT } from "$env/static/private";
   import { elementColor } from "$lib/store.js";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   let clickText = false;
+  export let dropzoneText = "Drop it like it's 🔥";
+  export let dropzoneTextSizeTW = "text-2xl";
+
+  let dzNumImages = 0;
+
+  // onMount(() => {
+  //   dzNumImages = document.querySelectorAll(".dz-image").length;
+  // });
 </script>
 
 <svelte:head>
@@ -19,22 +28,29 @@
 
 <form
   method="post"
-  class="dropzone"
+  class="dropzone flex justify-center items-center"
   action={UPLOAD_ENDPOINT}
   style:background-color={$elementColor}
+  on:click={() => {
+    dzNumImages = document.querySelectorAll(".dz-image").length;
+    console.log("dzNumImages", dzNumImages);
+  }}
 >
   <!-- dz-message is a dropzone defined class -->
 
-  <div class=" dz-message text-2xl font-Nunito text-red-400 " data-dz-message>
+  <div
+    class="dz-message {dropzoneTextSizeTW} font-Nunito text-red-400 "
+    data-dz-message
+  >
     {#key clickText}
       <span
-        class=" block"
+        class="block"
         in:scale={{ duration: 1000, easing: elasticOut }}
         on:click={() => {
           clickText = !clickText;
         }}
       >
-        Drop it like it's 🔥</span
+        {dropzoneText}</span
       >
     {/key}
   </div>
@@ -47,10 +63,8 @@
   form {
     margin-bottom: 150px;
     margin-top: 150px;
-    background: #fff;
     width: 80vw;
-    height: 30vh;
-    margin: 0 auto;
+    height: 50vh;
     border-color: #ddd;
     z-index: 999;
     border-radius: 50px;

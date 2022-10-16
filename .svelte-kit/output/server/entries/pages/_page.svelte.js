@@ -1,6 +1,8 @@
 import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component } from "../../chunks/index.js";
 import { b as isDarkMode } from "../../chunks/store.js";
+import { U as UploadForm } from "../../chunks/UploadForm.js";
 import "../../chunks/index2.js";
+import "../../chunks/private.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
@@ -145,7 +147,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       <div>(click for reviews)
       </div></div></div></div>
 
-<div id="${"reviews"}" class="${"md:my-80 md:pb-80"}">${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
+<div id="${"reviews"}" class="${"md:my-80 md:pb-40"}">${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
+
+${validate_component(UploadForm, "UploadForm").$$render($$result, {}, {}, {})}
 
 
 

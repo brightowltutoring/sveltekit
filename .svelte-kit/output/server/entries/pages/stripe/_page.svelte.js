@@ -1,5 +1,6 @@
 import { c as create_ssr_component } from "../../../chunks/index.js";
 import "../../../chunks/firebase.js";
+import "../../../chunks/private.js";
 import "firebase/app";
 import "firebase/auth";
 import "firebase/firestore/lite";

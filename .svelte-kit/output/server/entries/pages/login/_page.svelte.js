@@ -4,6 +4,7 @@ import "../../../chunks/firebase.js";
 import "firebase/firestore/lite";
 import "firebase/auth";
 import "../../../chunks/index2.js";
+import "../../../chunks/private.js";
 import "firebase/app";
 import "firebase/functions";
 const _page_svelte_svelte_type_style_lang = "";
