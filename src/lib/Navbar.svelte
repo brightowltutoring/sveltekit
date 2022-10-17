@@ -72,7 +72,7 @@
     {#key unique}
       <ul class="flex flex-row text-xl  items-center">
         <!-- {#each Object.keys($routes) as KEY} -->
-        {#each Object.keys($routes).splice(0, 6) as KEY}
+        {#each Object.keys($routes).splice(0, 5) as KEY}
           <li
             style={KEY == "login" &&
               $isLoggedIn &&

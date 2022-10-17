@@ -115,16 +115,16 @@ export const routes = writable({
     title: "Thinksolve.io 💫",
     isCurrent: false,
   },
+  login: {
+    name: "Login",
+    href: "/login",
+    title: "Login 🚀",
+    isCurrent: false,
+  },
   plans: {
     name: "Plans",
     href: "/plans",
     title: "Plans 🍎",
-    isCurrent: false,
-  },
-  schools: {
-    name: "Schools",
-    href: "/schools",
-    title: "Schools 📚",
     isCurrent: false,
   },
   screenshare: {
@@ -133,16 +133,16 @@ export const routes = writable({
     title: "Screenshare 🖥",
     isCurrent: false,
   },
-  login: {
-    name: "Login",
-    href: "/login",
-    title: "Login 🚀",
-    isCurrent: false,
-  },
   homework: {
     name: "Homework",
     href: "/homework",
     title: "Homework",
+    isCurrent: false,
+  },
+  schools: {
+    name: "Schools",
+    href: "/schools",
+    title: "Schools 📚",
     isCurrent: false,
   },
   stripe: {

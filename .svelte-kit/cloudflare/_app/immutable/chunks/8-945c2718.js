@@ -1,1 +1,0 @@
-import{default as f}from"../components/pages/math/_page.svx-88183886.js";import"./index-f33286f7.js";import"./katex-15be85e5.js";import"./store-2b620f72.js";import"./index-da484f8c.js";import"./index-c0ae932b.js";import"./Kajax-7659da5a.js";export{f as component};

@@ -3,6 +3,10 @@
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArraySchools } from "$lib/plansCardArray.js";
+  // let ready = false;
+  // onMount(() => {
+  //   ready = true;
+  // });
 </script>
 
 <!-- <div class="font-Poppins text-center sm:text-7xl text-6xl pb-2  ">Plans</div> -->
@@ -11,6 +15,7 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-2  p-7 ">
   {#each plansCardArraySchools as item, i}
+    <!-- {#if ready} -->
     <div in:scale={{ duration: 1000, easing: elasticOut, delay: 100 * i }}>
       <PlansCardSchools card={item.card} schoolUrl={item.schoolUrl}>
         <span slot="buttonText"> Book Date/Time </span>
@@ -23,6 +28,7 @@
         </span>
       </PlansCardSchools>
     </div>
+    <!-- {/if} -->
   {/each}
 </div>
 

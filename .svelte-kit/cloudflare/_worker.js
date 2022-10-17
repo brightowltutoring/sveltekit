@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css9) => css9.code).join("\n"),
+          code: Array.from(result.css).map((css10) => css10.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -623,7 +623,7 @@ var init_private = __esm({
 });
 
 // .svelte-kit/output/server/chunks/store.js
-var isLoggedIn, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, dark_lightened;
+var isLoggedIn, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, dark_lightened, elementColor;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
     init_index2();
@@ -729,7 +729,7 @@ var init_store = __esm({
     redirectSetInterval = writable("");
     light_darkened = "rgb(242,247,250)";
     dark_lightened = "rgb(38, 35, 51)";
-    derived(isDarkMode, ($isDarkMode, set) => {
+    elementColor = derived(isDarkMode, ($isDarkMode, set) => {
       $isDarkMode ? set(dark_lightened) : set(light_darkened);
     });
   }
@@ -2534,10 +2534,10 @@ var init_dropzone = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/UploadForm.js
-var css, UploadForm;
-var init_UploadForm = __esm({
-  ".svelte-kit/output/server/chunks/UploadForm.js"() {
+// .svelte-kit/output/server/chunks/Dropzone.js
+var css, Dropzone_1;
+var init_Dropzone = __esm({
+  ".svelte-kit/output/server/chunks/Dropzone.js"() {
     init_chunks();
     init_private();
     init_store();
@@ -2546,23 +2546,23 @@ var init_UploadForm = __esm({
       code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}form.svelte-1m2am6r{border-radius:50px;border-style:dotted;border-color:white}",
       map: null
     };
-    UploadForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { dropzoneText = "Drop it like it's \u{1F525}" } = $$props;
-      let { dropzoneTextSizeTW = "text-3xl" } = $$props;
+    Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { uniqueId = "default" } = $$props;
+      let { text: text2 = "Drop it like it's \u{1F525}" } = $$props;
+      let { textSizeTW = "text-3xl" } = $$props;
       let { dimensionsTW = "w-[60vw] h-[50vh]" } = $$props;
-      if ($$props.dropzoneText === void 0 && $$bindings.dropzoneText && dropzoneText !== void 0)
-        $$bindings.dropzoneText(dropzoneText);
-      if ($$props.dropzoneTextSizeTW === void 0 && $$bindings.dropzoneTextSizeTW && dropzoneTextSizeTW !== void 0)
-        $$bindings.dropzoneTextSizeTW(dropzoneTextSizeTW);
       if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
         $$bindings.uniqueId(uniqueId);
+      if ($$props.text === void 0 && $$bindings.text && text2 !== void 0)
+        $$bindings.text(text2);
+      if ($$props.textSizeTW === void 0 && $$bindings.textSizeTW && textSizeTW !== void 0)
+        $$bindings.textSizeTW(textSizeTW);
       if ($$props.dimensionsTW === void 0 && $$bindings.dimensionsTW && dimensionsTW !== void 0)
         $$bindings.dimensionsTW(dimensionsTW);
       $$result.css.add(css);
       return `
-<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" class="${"dropzone flex justify-center items-center overflow-scroll brightness-95 backdrop-blur-3xl " + escape(dropzoneTextSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto svelte-1m2am6r"}" id="${"default"}">
-  <div class="${"dz-message font-Nunito "}" data-dz-message><span class="${"block"}">${escape(dropzoneText)}</span></div></form>
+<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" class="${"dropzone flex justify-center items-center overflow-scroll brightness-95 backdrop-blur-3xl " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto svelte-1m2am6r"}" id="${"default"}">
+  <div class="${"dz-message font-Nunito "}" data-dz-message><span class="${"block"}">${escape(text2)}</span></div></form>
 
 
 
@@ -9251,11 +9251,11 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var LoginCard, LightDarkMode, getStores, page, Navitem, Navbar, Layout;
+var Modal, LoginCard, LightDarkMode, getStores, page, Navitem, Navbar, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
-    init_UploadForm();
+    init_Dropzone();
     init_store();
     init_firebase();
     init_index_esm4();
@@ -9265,29 +9265,40 @@ var init_layout_svelte = __esm({
     init_dropzone();
     init_index_esm2();
     init_index_esm5();
+    Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { showModal = false } = $$props;
+      let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
+      if ($$props.showModal === void 0 && $$bindings.showModal && showModal !== void 0)
+        $$bindings.showModal(showModal);
+      if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
+        $$bindings.bgTint(bgTint);
+      return `
+<modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
+    });
     LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let cardColor;
       let shortPing;
       let $$unsubscribe_navLoginClicked;
       let $$unsubscribe_redirectAfterLoginTimeOut;
       let $$unsubscribe_redirectSetInterval;
       let $$unsubscribe_isLoggedIn;
       let $isDarkMode, $$unsubscribe_isDarkMode;
+      let $elementColor, $$unsubscribe_elementColor;
       $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
       let emailFieldValue = "";
       let emptyEmailInputAnimated;
-      cardColor = $isDarkMode ? dark_lightened : light_darkened;
       shortPing = emptyEmailInputAnimated;
       $$unsubscribe_navLoginClicked();
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_isDarkMode();
-      return `<div class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-md mx-auto w-1/3 min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${cardColor}`, 0)}><p class="${"text-5xl pb-10"}">Login</p>
+      $$unsubscribe_elementColor();
+      return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-md mx-auto w-1/3 min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-5xl pb-10"}">Login</p>
   <div class="${"logInDiv"}"><div class="${"bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
         true
@@ -9314,7 +9325,7 @@ var init_layout_svelte = __esm({
   <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
     <p>Redirecting to your page in</p>
     <p style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</p>
-    <button id="${"logoutBtn"}">Logout</button></div></div>`;
+    <button id="${"logoutBtn"}">Logout</button></div></card>`;
     });
     LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -9507,31 +9518,92 @@ var init_layout_svelte = __esm({
       $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
       $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
       let jankytown;
-      {
-        if (!$lessThan768) {
-          if ($scrollY == 0)
-            jankytown = "top-0";
-          if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
-            jankytown = "top-0 backdrop-blur-3xl ";
-          if ($scrollY > 800 && $instDeltaY > 10)
-            jankytown = "-top-20 backdrop-blur-3xl duration-200";
-          if ($instDeltaY < -100)
-            jankytown = "top-0 backdrop-blur-3xl duration-700";
-        }
-      }
-      {
-        if ($lessThan768) {
-          if ($scrollY == 0) {
-            jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl ";
+      let $$settled;
+      let $$rendered;
+      do {
+        $$settled = true;
+        {
+          if (!$lessThan768) {
+            if ($scrollY == 0)
+              jankytown = "top-0";
+            if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
+              jankytown = "top-0 backdrop-blur-3xl ";
+            if ($scrollY > 800 && $instDeltaY > 10)
+              jankytown = "-top-20 backdrop-blur-3xl duration-200";
+            if ($instDeltaY < -100)
+              jankytown = "top-0 backdrop-blur-3xl duration-700";
           }
-          if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
-            jankytown = "bottom-0 backdrop-blur-3xl ";
-          if ($scrollY > 400 && $instDeltaY > 10)
-            jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
-          if ($instDeltaY < -130)
-            jankytown = "bottom-0 backdrop-blur-3xl duration-700";
         }
-      }
+        {
+          if ($lessThan768) {
+            if ($scrollY == 0) {
+              jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl ";
+            }
+            if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
+              jankytown = "bottom-0 backdrop-blur-3xl ";
+            if ($scrollY > 400 && $instDeltaY > 10)
+              jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
+            if ($instDeltaY < -130)
+              jankytown = "bottom-0 backdrop-blur-3xl duration-700";
+          }
+        }
+        $$rendered = `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key2) => {
+          return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)}</title>`, ""}` : ``}`}`;
+        })}`, ""}
+
+
+
+<main>${validate_component(Modal, "Modal").$$render(
+          $$result,
+          { showModal: $navLoginClicked },
+          {
+            showModal: ($$value) => {
+              $navLoginClicked = $$value;
+              $$settled = false;
+            }
+          },
+          {
+            default: () => {
+              return `${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}`;
+            }
+          }
+        )}
+
+  ${validate_component(Modal, "Modal").$$render(
+          $$result,
+          {
+            bgTint: "bg-[rgba(0,0,0,0.1)]",
+            showModal: $navHomeworkClicked
+          },
+          {
+            showModal: ($$value) => {
+              $navHomeworkClicked = $$value;
+              $$settled = false;
+            }
+          },
+          {
+            default: () => {
+              return `${validate_component(Dropzone_1, "Dropzone").$$render(
+                $$result,
+                {
+                  uniqueId: "broccoli",
+                  dimensionsTW: "w-[80vw] h-[80vh]"
+                },
+                {},
+                {}
+              )}`;
+            }
+          }
+        )}
+
+  
+
+  
+  <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
+
+  
+  <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div></main>`;
+      } while (!$$settled);
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
       $$unsubscribe_lessThan768();
@@ -9545,30 +9617,7 @@ var init_layout_svelte = __esm({
       $$unsubscribe_innerWidth();
       $$unsubscribe_navLoginClicked();
       $$unsubscribe_navHomeworkClicked();
-      return `${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key2) => {
-        return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)}</title>`, ""}` : ``}`}`;
-      })}`, ""}
-
-
-
-<div class="${"z-[50] md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}</div>
-
-<div class="${"z-[50] md:py-4 py-1 md:px-[7%] " + escape($navHomeworkClicked ? "bg-[rgba(0,0,0,0.1)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(UploadForm, "UploadForm").$$render(
-        $$result,
-        {
-          uniqueId: "broccoli",
-          dimensionsTW: "w-[80vw] h-[80vh]"
-        },
-        {},
-        {}
-      )}</div>
-
-
-
-<div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
-
-
-<div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div>`;
+      return $$rendered;
     });
   }
 });
@@ -9587,9 +9636,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-72a8da94.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-72a8da94.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/UploadForm-6ffb6caf.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js", "_app/immutable/chunks/navigation-2d780e1f.js", "_app/immutable/chunks/singletons-e99ad182.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
-    stylesheets = ["_app/immutable/assets/+layout-5978c3bf.css", "_app/immutable/assets/UploadForm-9da6f3f0.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-eb492d5c.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-eb492d5c.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-e05b1659.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-66a8a87b.js", "_app/immutable/chunks/singletons-ae68b1a3.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
+    stylesheets = ["_app/immutable/assets/+layout-af7a67f7.css", "_app/immutable/assets/Dropzone-9da6f3f0.css"];
   }
 });
 
@@ -9626,421 +9675,133 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-417fbab6.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-417fbab6.js", "_app/immutable/chunks/index-f33286f7.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-504afafa.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-504afafa.js", "_app/immutable/chunks/index-1063d0c6.js"];
     stylesheets2 = [];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/_page.svelte.js
-var page_svelte_exports = {};
-__export(page_svelte_exports, {
-  default: () => Page
-});
-var css2, ReviewCreator, reviews, Reviews, Page;
-var init_page_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+// .svelte-kit/output/server/chunks/plansCardArray.js
+var CalendlyJsandCSS, sampleHref, plansCardArray, plansCardArraySchools;
+var init_plansCardArray = __esm({
+  ".svelte-kit/output/server/chunks/plansCardArray.js"() {
     init_chunks();
-    init_store();
-    init_UploadForm();
-    init_index2();
-    init_private();
-    init_dropzone();
-    css2 = {
-      code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
-      map: null
-    };
-    ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let { title = "Great physics tutor!!" } = $$props;
-      let { name: name5 = "Thomas Finn" } = $$props;
-      let { date = "2022-06-08" } = $$props;
-      if ($$props.title === void 0 && $$bindings.title && title !== void 0)
-        $$bindings.title(title);
-      if ($$props.name === void 0 && $$bindings.name && name5 !== void 0)
-        $$bindings.name(name5);
-      if ($$props.date === void 0 && $$bindings.date && date !== void 0)
-        $$bindings.date(date);
-      $$result.css.add(css2);
-      $$unsubscribe_isDarkMode();
-      return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true)}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
-    <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
-        return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
-      })}</div>
-    <div class="${"italic"}">on ${escape(date)}</div>
-    ${slots.default ? slots.default({}) : ``}
-    <b class="${"absolute right-0 bottom-0 -my-10 mx-5 "}">${escape(name5)}</b></div></article>`;
+    CalendlyJsandCSS = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-al8i8p"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-al8i8p"><\/script>`, ""}`;
     });
-    reviews = [
+    sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
+    plansCardArray = [
       {
-        name: "CM",
-        title: "grade 10 math / grade 11 physics",
-        date: "2022-07-11",
-        body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!"
+        card: 1,
+        payNowUrl: "https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&primary_color=2aa5d6",
+        payLaterUrl: "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
+        buttonText: "Classico",
+        cardTitle: "Classico",
+        cardText: "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
+        href: sampleHref
       },
       {
-        name: "magnus",
-        title: "Great help before final!",
-        date: "2022-06-26",
-        body: "Waves & oscillation was not covered so well by my teacher ... the session + mock test really helped out before my final exam!"
+        card: 3,
+        payNowUrl: "https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=fea45c",
+        payLaterUrl: "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
+        buttonText: "Mock",
+        cardTitle: "Mock",
+        cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",
+        href: sampleHref
       },
       {
-        name: "Thomas Finn",
-        title: "Great physics tutor!!",
-        date: "2022-06-08",
-        body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
-      },
-      {
-        name: "felix belfoy",
-        title: "quantitative chem",
-        date: "2022-06-01",
-        body: "I only had him for one session since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!"
-      },
-      {
-        name: "Celia",
-        title: "amazing IBHL physics tutor ",
-        date: "2022-05-01",
-        body: "Jon explained the mechanics behind every question I had trouble with in thorough detail. If I had difficulty understanding his explanation, he would use another way to represent his knowledge such as drawing pictures and using diagrams. he taught me measurements, mechanics, waves, electromagnetism, nuclear and thermal physics. He was also a big help with my physics IA! He also made my solution space a place where I could look back if I've forgotten something."
-      },
-      {
-        name: "fernando vc",
-        title: "very helpful with kinematics!",
-        date: "2021-05-03",
-        body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed."
-      },
-      {
-        name: "Lavinia",
-        title: "Great Spanish tutor",
-        date: "2021-03-03",
-        body: "He is super patient with my very much broken Spanish. He is always on time and helps out a lot by giving me extra notes. Best Spanish tutor I had so far :)))"
-      },
-      {
-        name: "TJ Macdonald",
-        title: "Review",
-        date: "2021-02-10",
-        body: "Jon was great at understanding how to best teach me the content if I didn't fully understand at first, and broke it down into simple steps for me. he was also great at knowing when I didn't fully understand something and would clarify it easily without me having to ask which was awesome really glad to have him in my conner for tests and assignments."
-      },
-      {
-        name: "Miranda Teta",
-        title: "IB Physics",
-        date: "2021-02-05",
-        body: "Jon started tutoring me in my first year of IB Physics, a very challenging course in which I had trouble understanding. He found creative ways for me to comprehend the subject and whenever I still couldn't understand, he would try other ways until I felt comfortable with the topic. He goes out of his way to make sure get the help I need and. after a few tutoring sessions, I started getting a deeper understanding of my course, which am very grateful for."
-      },
-      {
-        name: "Efe T.",
-        title: "IB Physics Year 1",
-        date: "2021-02-01",
-        body: "He helps through the process of answering each question by helping with each step. From test preparation to experiments, he has assisted me with every problem have encountered. He is also a fun person to talk to and a very friendly person."
-      },
-      {
-        name: "Parent of Rachel",
-        title: "stellar!",
-        date: "2020-06-03",
-        body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
-      },
-      {
-        name: "Paola A.",
-        title: "1st yr at Brock University",
-        date: "2020-10-27",
-        body: "I had an awesome experience with Jon. I was a BioSci student at Brock and really needed help with Physics 1P91 and Calculus. He was clear, structured, patient and thorough. I survived! With Physics being one of my best classes."
-      },
-      {
-        name: "rob henriquez",
-        title: "mohawk college tutor",
-        date: "2020-02-18",
-        body: "Jon makes learning physics and math intuitive. He finds creative ways of teaching and is passionate about your success. I highly recommend him!!"
-      },
-      {
-        name: "rozhina mazhar",
-        title: "IB HL Physics",
-        date: "2020-03-07",
-        body: "John was a huge help for me in gr 12 physics at Ridley. We met once a week in the learning centre and he would help me on everything from lab prep to assignments to homework questions ... he made me feel extra confident in my abilities!"
-      },
-      {
-        name: "Zaara Alam",
-        title: "grade 12 physics",
-        date: "2020-10-27",
-        body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}"
+        card: 2,
+        payNowUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+        payLaterUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+        buttonText: "Custom",
+        cardTitle: "Custom",
+        cardText: `Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. `,
+        href: sampleHref
       }
     ];
-    Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-<div class="${"scale-90"}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[550px] lg:gap-y-[700px] "}">${each(reviews, ({ name: name5, title, date, body }) => {
-        return `
-      ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name5, date }, {}, {
-          default: () => {
-            return `${escape(body)}
-      `;
-          }
-        })}`;
-      })}</div></div>`;
-    });
-    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      $$unsubscribe_isDarkMode();
-      return `<main class="${"overflow-x-hidden"}"><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video></main>
-
-<div class="${"h-3/5 flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
-    
-    <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
-    </div></div></div>
-
-<div class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">Upload your homework</p>
-
-  ${validate_component(UploadForm, "UploadForm").$$render(
-        $$result,
-        {
-          dropzoneText: "\u{1F680}",
-          dropzoneTextSizeTW: "text-5xl"
-        },
-        {},
-        {}
-      )}</div>
-
-<div id="${"reviews"}" class="${"md:pb-40"}">${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
-
-
-
-
-
-
-
-
-`;
-    });
+    plansCardArraySchools = [
+      {
+        card: 2,
+        schoolUrl: "https://calendly.com/thinksolve/school-classico?hide_gdpr_banner=1",
+        buttonText: "Classico",
+        cardTitle: "Classico",
+        cardText: "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
+        href: sampleHref
+      },
+      {
+        card: 1,
+        schoolUrl: "https://calendly.com/thinksolve/school-mock?hide_gdpr_banner=1",
+        buttonText: "Mock",
+        cardTitle: "Mock",
+        cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",
+        href: sampleHref
+      }
+    ];
   }
 });
 
-// .svelte-kit/output/server/nodes/2.js
-var __exports3 = {};
-__export(__exports3, {
-  component: () => component3,
-  file: () => file3,
-  imports: () => imports3,
-  index: () => index3,
-  stylesheets: () => stylesheets3
-});
-var index3, component3, file3, imports3, stylesheets3;
-var init__3 = __esm({
-  ".svelte-kit/output/server/nodes/2.js"() {
-    index3 = 2;
-    component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-91fc718c.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-91fc718c.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm-6ffb6caf.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js"];
-    stylesheets3 = ["_app/immutable/assets/+page-d999b052.css", "_app/immutable/assets/UploadForm-9da6f3f0.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/calcom/_page.svelte.js
-var page_svelte_exports2 = {};
-__export(page_svelte_exports2, {
-  default: () => Page2
-});
-var Page2;
-var init_page_svelte2 = __esm({
-  ".svelte-kit/output/server/entries/pages/calcom/_page.svelte.js"() {
+// .svelte-kit/output/server/chunks/PlansCard.js
+var css2, PlansCard;
+var init_PlansCard = __esm({
+  ".svelte-kit/output/server/chunks/PlansCard.js"() {
     init_chunks();
-    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return ``;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/3.js
-var __exports4 = {};
-__export(__exports4, {
-  component: () => component4,
-  file: () => file4,
-  imports: () => imports4,
-  index: () => index4,
-  stylesheets: () => stylesheets4
-});
-var index4, component4, file4, imports4, stylesheets4;
-var init__4 = __esm({
-  ".svelte-kit/output/server/nodes/3.js"() {
-    index4 = 3;
-    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/calcom/_page.svelte-cf7df1c7.js";
-    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-cf7df1c7.js", "_app/immutable/chunks/index-f33286f7.js"];
-    stylesheets4 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/faq/_page.svelte.js
-var page_svelte_exports3 = {};
-__export(page_svelte_exports3, {
-  default: () => Page3
-});
-var css3, Page3;
-var init_page_svelte3 = __esm({
-  ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
-    init_chunks();
-    css3 = {
-      code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
+    init_plansCardArray();
+    init_store();
+    css2 = {
+      code: "card.svelte-1t9rwq8{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}card.svelte-1t9rwq8:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
-    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css3);
-      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
+    PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      let $elementColor, $$unsubscribe_elementColor;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
+      let { payNowUrl = "" } = $$props;
+      let { payLaterUrl = "" } = $$props;
+      const payButtons = [
+        {
+          resetter: false,
+          url: payNowUrl,
+          opacityTW: "bg-opacity-100",
+          text: "Pay Now"
+        },
+        {
+          resetter: false,
+          url: payLaterUrl,
+          opacityTW: "bg-opacity-70",
+          text: "Pay Later"
+        }
+      ];
+      let { btnColorHover = "" } = $$props;
+      let { card } = $$props;
+      let buttonColor = {
+        1: "bg-[rgb(45,165,214)]",
+        2: "bg-[rgb(244,77,77)]",
+        3: "bg-[rgb(254,164,92)]"
+      };
+      if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
+        $$bindings.payNowUrl(payNowUrl);
+      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
+        $$bindings.payLaterUrl(payLaterUrl);
+      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
+        $$bindings.btnColorHover(btnColorHover);
+      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
+        $$bindings.card(card);
+      $$result.css.add(css2);
+      $$unsubscribe_isDarkMode();
+      $$unsubscribe_elementColor();
+      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
-  </summary>
+<card class="${"block shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-1t9rwq8"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
-  <p class="${"svelte-63m8nq"}">In terms of personalized service: we offer 1-on-1 tutoring, mock test
-    sessions with solution keys, video links, and session notes; see <a>/plans</a>
-    for details.
-    <br><br>
-    We are also in the process of creating a
-    <a href="${"https://www.brightowltutoring.com/login"}">login-based</a>
-    service; users will have access to <i>interactive</i> quizzes &amp; exam-question
-    video solutions.
-  </p>
-  <p style="${"font-size:12pt"}" class="${"svelte-63m8nq"}"><b>Note</b>: we <i>only</i> provide online/digital solutions. We are so
-    confident in our workflow that we offer
-    <a>a free demo session</a> of up to 20 minutes to show it off.
-  </p></details>
+  ${each(payButtons, (button) => {
+        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
+      </button>`;
+      })}
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q2</b> How do I pay? </summary>
-  <p class="${"svelte-63m8nq"}">On <a>/plans</a>
-    build out a custom plan and we send you an invoice based on your selections.<br><br>
-    Alternatively you can toggle &quot;off&quot; to choose amongst pay-now options.
-  </p>
-
-  <p style="${"font-size:13pt; color:#777;"}" class="${"svelte-63m8nq"}">We use STRIPE to securely process all transactions \u2014 in use by companies
-    such as Google, Amazon and Shopify.
-  </p></details>
-
-<details open class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q3</b> How do I book multiple sessions at once?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Book a session on our <a>plans</a> page, and click &quot;<a>\u279C Schedule another event</a>&quot; on the confirmation page.
-    <i>If booked already, we can also book the remaining dates for you at the end
-      of the live session</i>.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q4</b> How do I share homework? </summary>
-  <p class="${"svelte-63m8nq"}">On your mobile device: go to <a>/homework</a> &gt; click Upload &gt; snap a
-    picture &gt; Submit. <i>We convert each image into clean formatted text.</i></p>
-  <p class="${"svelte-63m8nq"}">Similar steps for PC. <span style="${"font-size:12pt; font-style:italic"}">Accepted file extensions: .png, .jpg, .jpeg, .heic, .pdf, .txt, .rtf,
-      .doc, .docx, .odt, .csv, .tex, .xls, .xlsx, .ods, .ppt, .pptx.</span></p>
-
-  <p class="${"svelte-63m8nq"}"><span style="${"font-size:12pt; font-style:italic"}">For last second submissions, you may also point your homework at the
-      webcam during the live session.</span></p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q5</b> Which screen-sharing software are we using? Zoom?
-  </summary>
-  <p class="${"svelte-63m8nq"}"><a href="${"https://zoom.us/download"}">Zoom</a>,
-    <a href="${"https://www.teamviewer.com/en-us/meeting/"}">TeamViewer Meeting</a>,
-    or
-    <a href="${"https://www.microsoft.com/en-ca/microsoft-teams/group-chat-software"}">Microsoft Teams</a>
-    \u2014 these provide the smoothest screensharing experience. Click the links to download
-    or visit <a>/screenshare</a> for more info.
-
-    <br> <b>Note:</b> No sign-up required to use TeamViewer Meeting; we use this
-    exclusively for group sessions.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q6</b> What subjects do you cover? </summary>
-
-  <p class="${"svelte-63m8nq"}"><b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University <br><br>
-
-    <b>MATHEMATICS</b>\xA0 Calculus \u2022 Trigonometry \u2022 Advanced Functions \u2022
-    Complex Numbers \u2022 Linear Algebra \u2022 Probability and Statistics \xA0\xA0<b>PHYSICS</b>
-    \xA0\xA0 Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp;
-    Magnetism \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special
-    Relativity \xA0\xA0<b>SPANISH</b> \xA0\xA0 Pronunciation \u2022 Grammatical
-    Rules \u2022 Practical Examples
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q7</b> How are mock tests/ Mockowl sessions administered?
-  </summary>
-  <p class="${"svelte-63m8nq"}">The student attends a live session where we implement Google Forms. Answer
-    keys are released within an hour of completion. <i>Digitally-handwritten solution key available as a premium.</i> <br><br>
-
-    We are soon implementing a content-based subscription plan; see our sample
-    quiz app on the <a href="${"https://www.brightowltutoring.com/"}">home page</a> for
-    a preview.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q8</b> I am looking to refer a friend, do you offer any discounts based on
-    referrals?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Great question! We absolutely welcome this initiative and are pleased to
-    reward it; please visit our <a>/referrals</a> page. <br><br>
-
-    Alternatively <i>if</i> filling out an invoice-based <a>plan</a>, you will
-    have a chance to input a referral.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q9 </b>Is it possible to access all my session content in one place?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Sure can! Secure a unique URL for $5/month while booking or <a>contact us directly</a>
-    (<a href="${"https://www.brightowltutoring.com/url"}">\u{1F4AB} sample URL</a>).
-  </p>
-</details>`;
+  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
+</card>`;
     });
-  }
-});
-
-// .svelte-kit/output/server/nodes/4.js
-var __exports5 = {};
-__export(__exports5, {
-  component: () => component5,
-  file: () => file5,
-  imports: () => imports5,
-  index: () => index5,
-  stylesheets: () => stylesheets5
-});
-var index5, component5, file5, imports5, stylesheets5;
-var init__5 = __esm({
-  ".svelte-kit/output/server/nodes/4.js"() {
-    index5 = 4;
-    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/faq/_page.svelte-8210f904.js";
-    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-8210f904.js", "_app/immutable/chunks/index-f33286f7.js"];
-    stylesheets5 = ["_app/immutable/assets/+page-113a1f72.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/homework/_page.svelte.js
-var page_svelte_exports4 = {};
-__export(page_svelte_exports4, {
-  default: () => Page4
-});
-var Page4;
-var init_page_svelte4 = __esm({
-  ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
-    init_chunks();
-    init_UploadForm();
-    init_private();
-    init_store();
-    init_index2();
-    init_dropzone();
-    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(UploadForm, "UploadForm").$$render($$result, {}, {}, {})}`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/5.js
-var __exports6 = {};
-__export(__exports6, {
-  component: () => component6,
-  file: () => file6,
-  imports: () => imports6,
-  index: () => index6,
-  stylesheets: () => stylesheets6
-});
-var index6, component6, file6, imports6, stylesheets6;
-var init__6 = __esm({
-  ".svelte-kit/output/server/nodes/5.js"() {
-    index6 = 5;
-    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-2d3e7dea.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-2d3e7dea.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/UploadForm-6ffb6caf.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js"];
-    stylesheets6 = ["_app/immutable/assets/UploadForm-9da6f3f0.css"];
   }
 });
 
@@ -23684,6 +23445,461 @@ var init_katex = __esm({
   }
 });
 
+// .svelte-kit/output/server/entries/pages/_page.svelte.js
+var page_svelte_exports = {};
+__export(page_svelte_exports, {
+  default: () => Page
+});
+var css$1, PlansComponent, css3, ReviewCreator, reviews, Reviews, Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+    init_chunks();
+    init_PlansCard();
+    init_plansCardArray();
+    init_katex();
+    init_store();
+    init_Dropzone();
+    init_index2();
+    init_private();
+    init_dropzone();
+    css$1 = {
+      code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
+      map: null
+    };
+    PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css$1);
+      return `<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
+        return `<div>${validate_component(PlansCard, "PlansCard").$$render(
+          $$result,
+          {
+            card: item.card,
+            payNowUrl: item.payNowUrl,
+            payLaterUrl: item.payLaterUrl
+          },
+          {},
+          {
+            cardText: () => {
+              return `<span slot="${"cardText"}">${escape(item.cardText)}
+          
+          <p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">invoice sample</a></p>
+          
+        </span>`;
+            },
+            cardTitle: () => {
+              return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
+            },
+            default: () => {
+              return `
+        
+
+        
+      `;
+            }
+          }
+        )}
+    </div>`;
+      })}
+</div>`;
+    });
+    css3 = {
+      code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
+      map: null
+    };
+    ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let { title = "Great physics tutor!!" } = $$props;
+      let { name: name5 = "Thomas Finn" } = $$props;
+      let { date = "2022-06-08" } = $$props;
+      if ($$props.title === void 0 && $$bindings.title && title !== void 0)
+        $$bindings.title(title);
+      if ($$props.name === void 0 && $$bindings.name && name5 !== void 0)
+        $$bindings.name(name5);
+      if ($$props.date === void 0 && $$bindings.date && date !== void 0)
+        $$bindings.date(date);
+      $$result.css.add(css3);
+      $$unsubscribe_isDarkMode();
+      return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true)}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
+    <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
+        return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+      })}</div>
+    <div class="${"italic"}">on ${escape(date)}</div>
+    ${slots.default ? slots.default({}) : ``}
+    <b class="${"absolute right-0 bottom-0 -my-10 mx-5 "}">${escape(name5)}</b></div></article>`;
+    });
+    reviews = [
+      {
+        name: "CM",
+        title: "grade 10 math / grade 11 physics",
+        date: "2022-07-11",
+        body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!"
+      },
+      {
+        name: "magnus",
+        title: "Great help before final!",
+        date: "2022-06-26",
+        body: "Waves & oscillation was not covered so well by my teacher ... the session + mock test really helped out before my final exam!"
+      },
+      {
+        name: "Thomas Finn",
+        title: "Great physics tutor!!",
+        date: "2022-06-08",
+        body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
+      },
+      {
+        name: "felix belfoy",
+        title: "quantitative chem",
+        date: "2022-06-01",
+        body: "I only had him for one session since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!"
+      },
+      {
+        name: "Celia",
+        title: "amazing IBHL physics tutor ",
+        date: "2022-05-01",
+        body: "Jon explained the mechanics behind every question I had trouble with in thorough detail. If I had difficulty understanding his explanation, he would use another way to represent his knowledge such as drawing pictures and using diagrams. he taught me measurements, mechanics, waves, electromagnetism, nuclear and thermal physics. He was also a big help with my physics IA! He also made my solution space a place where I could look back if I've forgotten something."
+      },
+      {
+        name: "fernando vc",
+        title: "very helpful with kinematics!",
+        date: "2021-05-03",
+        body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed."
+      },
+      {
+        name: "Lavinia",
+        title: "Great Spanish tutor",
+        date: "2021-03-03",
+        body: "He is super patient with my very much broken Spanish. He is always on time and helps out a lot by giving me extra notes. Best Spanish tutor I had so far :)))"
+      },
+      {
+        name: "TJ Macdonald",
+        title: "Review",
+        date: "2021-02-10",
+        body: "Jon was great at understanding how to best teach me the content if I didn't fully understand at first, and broke it down into simple steps for me. he was also great at knowing when I didn't fully understand something and would clarify it easily without me having to ask which was awesome really glad to have him in my conner for tests and assignments."
+      },
+      {
+        name: "Miranda Teta",
+        title: "IB Physics",
+        date: "2021-02-05",
+        body: "Jon started tutoring me in my first year of IB Physics, a very challenging course in which I had trouble understanding. He found creative ways for me to comprehend the subject and whenever I still couldn't understand, he would try other ways until I felt comfortable with the topic. He goes out of his way to make sure get the help I need and. after a few tutoring sessions, I started getting a deeper understanding of my course, which am very grateful for."
+      },
+      {
+        name: "Efe T.",
+        title: "IB Physics Year 1",
+        date: "2021-02-01",
+        body: "He helps through the process of answering each question by helping with each step. From test preparation to experiments, he has assisted me with every problem have encountered. He is also a fun person to talk to and a very friendly person."
+      },
+      {
+        name: "Parent of Rachel",
+        title: "stellar!",
+        date: "2020-06-03",
+        body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
+      },
+      {
+        name: "Paola A.",
+        title: "1st yr at Brock University",
+        date: "2020-10-27",
+        body: "I had an awesome experience with Jon. I was a BioSci student at Brock and really needed help with Physics 1P91 and Calculus. He was clear, structured, patient and thorough. I survived! With Physics being one of my best classes."
+      },
+      {
+        name: "rob henriquez",
+        title: "mohawk college tutor",
+        date: "2020-02-18",
+        body: "Jon makes learning physics and math intuitive. He finds creative ways of teaching and is passionate about your success. I highly recommend him!!"
+      },
+      {
+        name: "rozhina mazhar",
+        title: "IB HL Physics",
+        date: "2020-03-07",
+        body: "John was a huge help for me in gr 12 physics at Ridley. We met once a week in the learning centre and he would help me on everything from lab prep to assignments to homework questions ... he made me feel extra confident in my abilities!"
+      },
+      {
+        name: "Zaara Alam",
+        title: "grade 12 physics",
+        date: "2020-10-27",
+        body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}"
+      }
+    ];
+    Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+<div class="${"scale-90"}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[550px] lg:gap-y-[700px] "}">${each(reviews, ({ name: name5, title, date, body }) => {
+        return `
+      ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name5, date }, {}, {
+          default: () => {
+            return `${escape(body)}
+      `;
+          }
+        })}`;
+      })}</div></div>`;
+    });
+    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_isDarkMode();
+      return `<main class="${"overflow-x-hidden"}"><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video></main>
+
+
+
+<div class="${"h-3/5 flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
+    
+    <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
+    </div></div></div>
+
+<div id="${"step1"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">1. Upload your homework
+  </p>
+
+  ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { text: "\u{1F680}", textSizeTW: "text-5xl" }, {}, {})}</div>
+
+<div id="${"step2"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
+  </p>
+
+  ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
+
+
+<div id="${"reviews"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">3. Do Some Reading \u{1F60E}
+  </p>
+  ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
+
+
+
+
+
+
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/2.js
+var __exports3 = {};
+__export(__exports3, {
+  component: () => component3,
+  file: () => file3,
+  imports: () => imports3,
+  index: () => index3,
+  stylesheets: () => stylesheets3
+});
+var index3, component3, file3, imports3, stylesheets3;
+var init__3 = __esm({
+  ".svelte-kit/output/server/nodes/2.js"() {
+    index3 = 2;
+    component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
+    file3 = "_app/immutable/components/pages/_page.svelte-67b96369.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-67b96369.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-690bb701.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/Dropzone-e05b1659.js", "_app/immutable/chunks/private-2f12c45b.js"];
+    stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-89686a4e.css", "_app/immutable/assets/Dropzone-9da6f3f0.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/calcom/_page.svelte.js
+var page_svelte_exports2 = {};
+__export(page_svelte_exports2, {
+  default: () => Page2
+});
+var Page2;
+var init_page_svelte2 = __esm({
+  ".svelte-kit/output/server/entries/pages/calcom/_page.svelte.js"() {
+    init_chunks();
+    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return ``;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/3.js
+var __exports4 = {};
+__export(__exports4, {
+  component: () => component4,
+  file: () => file4,
+  imports: () => imports4,
+  index: () => index4,
+  stylesheets: () => stylesheets4
+});
+var index4, component4, file4, imports4, stylesheets4;
+var init__4 = __esm({
+  ".svelte-kit/output/server/nodes/3.js"() {
+    index4 = 3;
+    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
+    file4 = "_app/immutable/components/pages/calcom/_page.svelte-606a66f2.js";
+    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-606a66f2.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    stylesheets4 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/faq/_page.svelte.js
+var page_svelte_exports3 = {};
+__export(page_svelte_exports3, {
+  default: () => Page3
+});
+var css4, Page3;
+var init_page_svelte3 = __esm({
+  ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
+    init_chunks();
+    css4 = {
+      code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
+      map: null
+    };
+    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css4);
+      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
+  </summary>
+
+  <p class="${"svelte-63m8nq"}">In terms of personalized service: we offer 1-on-1 tutoring, mock test
+    sessions with solution keys, video links, and session notes; see <a>/plans</a>
+    for details.
+    <br><br>
+    We are also in the process of creating a
+    <a href="${"https://www.brightowltutoring.com/login"}">login-based</a>
+    service; users will have access to <i>interactive</i> quizzes &amp; exam-question
+    video solutions.
+  </p>
+  <p style="${"font-size:12pt"}" class="${"svelte-63m8nq"}"><b>Note</b>: we <i>only</i> provide online/digital solutions. We are so
+    confident in our workflow that we offer
+    <a>a free demo session</a> of up to 20 minutes to show it off.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q2</b> How do I pay? </summary>
+  <p class="${"svelte-63m8nq"}">On <a>/plans</a>
+    build out a custom plan and we send you an invoice based on your selections.<br><br>
+    Alternatively you can toggle &quot;off&quot; to choose amongst pay-now options.
+  </p>
+
+  <p style="${"font-size:13pt; color:#777;"}" class="${"svelte-63m8nq"}">We use STRIPE to securely process all transactions \u2014 in use by companies
+    such as Google, Amazon and Shopify.
+  </p></details>
+
+<details open class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q3</b> How do I book multiple sessions at once?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Book a session on our <a>plans</a> page, and click &quot;<a>\u279C Schedule another event</a>&quot; on the confirmation page.
+    <i>If booked already, we can also book the remaining dates for you at the end
+      of the live session</i>.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q4</b> How do I share homework? </summary>
+  <p class="${"svelte-63m8nq"}">On your mobile device: go to <a>/homework</a> &gt; click Upload &gt; snap a
+    picture &gt; Submit. <i>We convert each image into clean formatted text.</i></p>
+  <p class="${"svelte-63m8nq"}">Similar steps for PC. <span style="${"font-size:12pt; font-style:italic"}">Accepted file extensions: .png, .jpg, .jpeg, .heic, .pdf, .txt, .rtf,
+      .doc, .docx, .odt, .csv, .tex, .xls, .xlsx, .ods, .ppt, .pptx.</span></p>
+
+  <p class="${"svelte-63m8nq"}"><span style="${"font-size:12pt; font-style:italic"}">For last second submissions, you may also point your homework at the
+      webcam during the live session.</span></p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q5</b> Which screen-sharing software are we using? Zoom?
+  </summary>
+  <p class="${"svelte-63m8nq"}"><a href="${"https://zoom.us/download"}">Zoom</a>,
+    <a href="${"https://www.teamviewer.com/en-us/meeting/"}">TeamViewer Meeting</a>,
+    or
+    <a href="${"https://www.microsoft.com/en-ca/microsoft-teams/group-chat-software"}">Microsoft Teams</a>
+    \u2014 these provide the smoothest screensharing experience. Click the links to download
+    or visit <a>/screenshare</a> for more info.
+
+    <br> <b>Note:</b> No sign-up required to use TeamViewer Meeting; we use this
+    exclusively for group sessions.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q6</b> What subjects do you cover? </summary>
+
+  <p class="${"svelte-63m8nq"}"><b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University <br><br>
+
+    <b>MATHEMATICS</b>\xA0 Calculus \u2022 Trigonometry \u2022 Advanced Functions \u2022
+    Complex Numbers \u2022 Linear Algebra \u2022 Probability and Statistics \xA0\xA0<b>PHYSICS</b>
+    \xA0\xA0 Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp;
+    Magnetism \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special
+    Relativity \xA0\xA0<b>SPANISH</b> \xA0\xA0 Pronunciation \u2022 Grammatical
+    Rules \u2022 Practical Examples
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q7</b> How are mock tests/ Mockowl sessions administered?
+  </summary>
+  <p class="${"svelte-63m8nq"}">The student attends a live session where we implement Google Forms. Answer
+    keys are released within an hour of completion. <i>Digitally-handwritten solution key available as a premium.</i> <br><br>
+
+    We are soon implementing a content-based subscription plan; see our sample
+    quiz app on the <a href="${"https://www.brightowltutoring.com/"}">home page</a> for
+    a preview.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q8</b> I am looking to refer a friend, do you offer any discounts based on
+    referrals?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Great question! We absolutely welcome this initiative and are pleased to
+    reward it; please visit our <a>/referrals</a> page. <br><br>
+
+    Alternatively <i>if</i> filling out an invoice-based <a>plan</a>, you will
+    have a chance to input a referral.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q9 </b>Is it possible to access all my session content in one place?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Sure can! Secure a unique URL for $5/month while booking or <a>contact us directly</a>
+    (<a href="${"https://www.brightowltutoring.com/url"}">\u{1F4AB} sample URL</a>).
+  </p>
+</details>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/4.js
+var __exports5 = {};
+__export(__exports5, {
+  component: () => component5,
+  file: () => file5,
+  imports: () => imports5,
+  index: () => index5,
+  stylesheets: () => stylesheets5
+});
+var index5, component5, file5, imports5, stylesheets5;
+var init__5 = __esm({
+  ".svelte-kit/output/server/nodes/4.js"() {
+    index5 = 4;
+    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
+    file5 = "_app/immutable/components/pages/faq/_page.svelte-6b6a5821.js";
+    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-6b6a5821.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    stylesheets5 = ["_app/immutable/assets/+page-113a1f72.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/homework/_page.svelte.js
+var page_svelte_exports4 = {};
+__export(page_svelte_exports4, {
+  default: () => Page4
+});
+var Page4;
+var init_page_svelte4 = __esm({
+  ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
+    init_chunks();
+    init_Dropzone();
+    init_private();
+    init_store();
+    init_index2();
+    init_dropzone();
+    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${validate_component(Dropzone_1, "Dropzone").$$render($$result, {}, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/5.js
+var __exports6 = {};
+__export(__exports6, {
+  component: () => component6,
+  file: () => file6,
+  imports: () => imports6,
+  index: () => index6,
+  stylesheets: () => stylesheets6
+});
+var index6, component6, file6, imports6, stylesheets6;
+var init__6 = __esm({
+  ".svelte-kit/output/server/nodes/5.js"() {
+    index6 = 5;
+    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-24bcb94c.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-24bcb94c.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-e05b1659.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    stylesheets6 = ["_app/immutable/assets/Dropzone-9da6f3f0.css"];
+  }
+});
+
 // .svelte-kit/output/server/entries/pages/katex/_page.svx.js
 var page_svx_exports = {};
 __export(page_svx_exports, {
@@ -23748,8 +23964,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file7 = "_app/immutable/components/pages/katex/_page.svx-3c21ebfe.js";
-    imports7 = ["_app/immutable/components/pages/katex/_page.svx-3c21ebfe.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js"];
+    file7 = "_app/immutable/components/pages/katex/_page.svx-ae7d79a3.js";
+    imports7 = ["_app/immutable/components/pages/katex/_page.svx-ae7d79a3.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js"];
     stylesheets7 = [];
   }
 });
@@ -23759,7 +23975,7 @@ var page_svelte_exports5 = {};
 __export(page_svelte_exports5, {
   default: () => Page6
 });
-var css4, Page6;
+var css5, Page6;
 var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
@@ -23771,7 +23987,7 @@ var init_page_svelte5 = __esm({
     init_private();
     init_index_esm2();
     init_index_esm5();
-    css4 = {
+    css5 = {
       code: '#flyingEmoji.svelte-1lkingg.svelte-1lkingg{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1lkingg-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1lkingg-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1lkingg.svelte-1lkingg::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1lkingg-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1lkingg-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1lkingg-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1lkingg-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1lkingg-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1lkingg-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1lkingg-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1lkingg-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1lkingg.svelte-1lkingg{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1lkingg.svelte-1lkingg{margin:0px auto;width:80vw;max-width:380px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg,button.svelte-1lkingg.svelte-1lkingg{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1lkingg.svelte-1lkingg{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1lkingg.svelte-1lkingg:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1lkingg button.svelte-1lkingg{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg:hover{border:1px solid #999}.loginLogoutDivs.svelte-1lkingg button.svelte-1lkingg:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1lkingg.svelte-1lkingg{display:flex;justify-content:center;align-items:center}',
       map: null
     };
@@ -23783,7 +23999,7 @@ var init_page_svelte5 = __esm({
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       let emailFieldValue = "";
-      $$result.css.add(css4);
+      $$result.css.add(css5);
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
       $$unsubscribe_isLoggedIn();
@@ -23825,8 +24041,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/login/_page.svelte-aa136b6e.js";
-    imports8 = ["_app/immutable/components/pages/login/_page.svelte-aa136b6e.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-2d780e1f.js", "_app/immutable/chunks/singletons-e99ad182.js"];
+    file8 = "_app/immutable/components/pages/login/_page.svelte-a9835291.js";
+    imports8 = ["_app/immutable/components/pages/login/_page.svelte-a9835291.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-66a8a87b.js", "_app/immutable/chunks/singletons-ae68b1a3.js"];
     stylesheets8 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -23903,7 +24119,7 @@ var init_page_svx2 = __esm({
       $$unsubscribe_isDarkMode();
       return `<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {
         return `
-    <p${add_attribute("class", $isDarkMode ? "text-blue-100" : "text-red-500", 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
+    <p${add_attribute("class", $isDarkMode ? "text-blue-100" : "text-indigo-900", 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
     </p>`;
       })}</div>`;
     });
@@ -23993,8 +24209,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file9 = "_app/immutable/components/pages/math/_page.svx-88183886.js";
-    imports9 = ["_app/immutable/components/pages/math/_page.svx-88183886.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/Kajax-7659da5a.js"];
+    file9 = "_app/immutable/components/pages/math/_page.svx-ae772d8a.js";
+    imports9 = ["_app/immutable/components/pages/math/_page.svx-ae772d8a.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Kajax-1ac094bf.js"];
     stylesheets9 = [];
   }
 });
@@ -24074,8 +24290,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file10 = "_app/immutable/components/pages/mathjax/_page.svx-9ff138b2.js";
-    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-9ff138b2.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js"];
+    file10 = "_app/immutable/components/pages/mathjax/_page.svx-5f26d439.js";
+    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-5f26d439.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js"];
     stylesheets10 = [];
   }
 });
@@ -24085,7 +24301,7 @@ var page_svelte_exports6 = {};
 __export(page_svelte_exports6, {
   default: () => Page9
 });
-var css5, E_and_m, Page9;
+var css6, E_and_m, Page9;
 var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
@@ -24093,12 +24309,12 @@ var init_page_svelte6 = __esm({
     init_store();
     init_katex();
     init_index2();
-    css5 = {
+    css6 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css5);
+      $$result.css.add(css6);
       return `${validate_component(Kajax, "MathRenderer").$$render($$result, {}, {}, {})}
 
 
@@ -24195,20 +24411,9 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file11 = "_app/immutable/components/pages/physics/_page.svelte-1d367335.js";
-    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-1d367335.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/Kajax-7659da5a.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js"];
+    file11 = "_app/immutable/components/pages/physics/_page.svelte-430db5cd.js";
+    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-430db5cd.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Kajax-1ac094bf.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js"];
     stylesheets11 = ["_app/immutable/assets/+page-fcf51fa8.css"];
-  }
-});
-
-// .svelte-kit/output/server/chunks/CalendlyJsandCSS.js
-var CalendlyJsandCSS;
-var init_CalendlyJsandCSS = __esm({
-  ".svelte-kit/output/server/chunks/CalendlyJsandCSS.js"() {
-    init_chunks();
-    CalendlyJsandCSS = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-al8i8p"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-al8i8p"><\/script>`, ""}`;
-    });
   }
 });
 
@@ -24217,99 +24422,21 @@ var page_svelte_exports7 = {};
 __export(page_svelte_exports7, {
   default: () => Page10
 });
-var css$1, PlansCard, css6, sampleHref, Page10;
+var css7, Page10;
 var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
-    init_CalendlyJsandCSS();
+    init_PlansCard();
+    init_plansCardArray();
     init_store();
     init_index2();
-    css$1 = {
-      code: ".cardCSS.svelte-35bofc{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.cardCSS.svelte-35bofc:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
-      map: null
-    };
-    PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let cardColor;
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let { payNowUrl = "" } = $$props;
-      let { payLaterUrl = "" } = $$props;
-      let { btnColorHover = "" } = $$props;
-      let { card } = $$props;
-      let buttonColor = {
-        1: "bg-[rgb(45,165,214)]",
-        2: "bg-[rgb(244,77,77)]",
-        3: "bg-[rgb(254,164,92)]"
-      };
-      if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
-        $$bindings.payNowUrl(payNowUrl);
-      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
-        $$bindings.payLaterUrl(payLaterUrl);
-      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
-        $$bindings.btnColorHover(btnColorHover);
-      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
-        $$bindings.card(card);
-      $$result.css.add(css$1);
-      cardColor = $isDarkMode ? dark_lightened : light_darkened;
-      $$unsubscribe_isDarkMode();
-      return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
-
-<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><div class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</div>
-
-  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
-        true
-      ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `Pay Now`}</button>
-
-  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " bg-opacity-70 hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-70" : "group-hover:bg-opacity-70",
-        true
-      ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `Pay Later`}</button>
-
-  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
-</div>`;
-    });
-    css6 = {
+    css7 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
-    sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
     Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      const plansCardArray = [
-        {
-          card: 1,
-          payNowUrl: "https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&primary_color=2aa5d6",
-          payLaterUrl: "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
-          buttonText: "Classico",
-          cardTitle: "Classico",
-          cardText: "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
-          href: sampleHref
-        },
-        {
-          card: 3,
-          payNowUrl: "https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=fea45c",
-          payLaterUrl: "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
-          buttonText: "Mock",
-          cardTitle: "Mock",
-          cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",
-          href: sampleHref
-        },
-        {
-          card: 2,
-          payNowUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
-          payLaterUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
-          buttonText: "Custom",
-          cardTitle: "Custom",
-          cardText: `Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. `,
-          href: sampleHref
-        }
-      ];
-      $$result.css.add(css6);
-      return `
-
-
-
-<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
+      $$result.css.add(css7);
+      return `<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
         return `<div>${validate_component(PlansCard, "PlansCard").$$render(
           $$result,
           {
@@ -24359,9 +24486,9 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/plans/_page.svelte-bf380fcf.js";
-    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-bf380fcf.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/CalendlyJsandCSS-84038ccf.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js"];
-    stylesheets12 = ["_app/immutable/assets/+page-ebab19d4.css"];
+    file12 = "_app/immutable/components/pages/plans/_page.svelte-f110de20.js";
+    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-f110de20.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-690bb701.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    stylesheets12 = ["_app/immutable/assets/+page-097b9a4a.css", "_app/immutable/assets/PlansCard-89686a4e.css"];
   }
 });
 
@@ -24398,8 +24525,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file13 = "_app/immutable/components/pages/samplequiz/_page.md-76aa0abf.js";
-    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-76aa0abf.js", "_app/immutable/chunks/index-f33286f7.js"];
+    file13 = "_app/immutable/components/pages/samplequiz/_page.md-1ab69c50.js";
+    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-1ab69c50.js", "_app/immutable/chunks/index-1063d0c6.js"];
     stylesheets13 = [];
   }
 });
@@ -24409,24 +24536,23 @@ var page_svelte_exports8 = {};
 __export(page_svelte_exports8, {
   default: () => Page12
 });
-var css7, PlansCardSchools, sampleHref2, Page12;
+var css8, PlansCardSchools, Page12;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
+    init_plansCardArray();
     init_store();
-    init_dropzone();
-    init_CalendlyJsandCSS();
     init_index2();
-    css7 = {
-      code: ".cardCSS.svelte-35bofc{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.cardCSS.svelte-35bofc:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
+    css8 = {
+      code: "card.svelte-1t9rwq8{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}card.svelte-1t9rwq8:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
     PlansCardSchools = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let cardColor;
       let $isDarkMode, $$unsubscribe_isDarkMode;
+      let $elementColor, $$unsubscribe_elementColor;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
       let { schoolUrl = "" } = $$props;
-      let { payLaterUrl = "" } = $$props;
       let { btnColorHover = "" } = $$props;
       let { card } = $$props;
       let buttonColor = {
@@ -24436,52 +24562,31 @@ var init_page_svelte8 = __esm({
       };
       if ($$props.schoolUrl === void 0 && $$bindings.schoolUrl && schoolUrl !== void 0)
         $$bindings.schoolUrl(schoolUrl);
-      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
-        $$bindings.payLaterUrl(payLaterUrl);
       if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
         $$bindings.btnColorHover(btnColorHover);
       if ($$props.card === void 0 && $$bindings.card && card !== void 0)
         $$bindings.card(card);
-      $$result.css.add(css7);
-      cardColor = $isDarkMode ? dark_lightened : light_darkened;
+      $$result.css.add(css8);
       $$unsubscribe_isDarkMode();
+      $$unsubscribe_elementColor();
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
-<div class="${"cardCSS shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-35bofc"}"${add_attribute("style", `background:${cardColor}`, 0)}><div class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</div>
+<card class="${"block shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-1t9rwq8"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
   <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
         true
-      ) + " text-xl text-white svelte-35bofc"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
+      ) + " text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
-</div>`;
+</card>`;
     });
-    sampleHref2 = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
     Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      const plansCardArray = [
-        {
-          card: 2,
-          schoolUrl: "https://calendly.com/thinksolve/school-classico?hide_gdpr_banner=1",
-          buttonText: "Classico",
-          cardTitle: "Classico",
-          cardText: "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
-          href: sampleHref2
-        },
-        {
-          card: 1,
-          schoolUrl: "https://calendly.com/thinksolve/school-mock?hide_gdpr_banner=1",
-          buttonText: "Mock",
-          cardTitle: "Mock",
-          cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",
-          href: sampleHref2
-        }
-      ];
       return `
 
 
 
-<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArray, (item, i) => {
+<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArraySchools, (item, i) => {
         return `<div>${validate_component(PlansCardSchools, "PlansCardSchools").$$render(
           $$result,
           {
@@ -24525,9 +24630,9 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-59ddf3a9.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-59ddf3a9.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js", "_app/immutable/chunks/CalendlyJsandCSS-84038ccf.js"];
-    stylesheets14 = ["_app/immutable/assets/+page-70af9ea0.css", "_app/immutable/assets/UploadForm-9da6f3f0.css"];
+    file14 = "_app/immutable/components/pages/schools/_page.svelte-b3bda074.js";
+    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-b3bda074.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    stylesheets14 = ["_app/immutable/assets/+page-89686a4e.css"];
   }
 });
 
@@ -24582,8 +24687,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-5d3c419a.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-5d3c419a.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/navigation-2d780e1f.js", "_app/immutable/chunks/singletons-e99ad182.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-ed3d4393.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-ed3d4393.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-66a8a87b.js", "_app/immutable/chunks/singletons-ae68b1a3.js"];
     stylesheets15 = [];
   }
 });
@@ -24634,8 +24739,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-2c72988a.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-2c72988a.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/navigation-2d780e1f.js", "_app/immutable/chunks/singletons-e99ad182.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-3915ef40.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-3915ef40.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-3796bfa4.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-66a8a87b.js", "_app/immutable/chunks/singletons-ae68b1a3.js"];
     stylesheets16 = [];
   }
 });
@@ -24645,7 +24750,7 @@ var page_svelte_exports11 = {};
 __export(page_svelte_exports11, {
   default: () => Page15
 });
-var css8, Page15;
+var css9, Page15;
 var init_page_svelte11 = __esm({
   ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
     init_chunks();
@@ -24655,12 +24760,12 @@ var init_page_svelte11 = __esm({
     init_index_esm3();
     init_index_esm4();
     init_index_esm5();
-    css8 = {
+    css9 = {
       code: '.loading.svelte-x181g1:after{content:" . . .";-webkit-animation:svelte-x181g1-dots 1s steps(5, end) infinite;animation:svelte-x181g1-dots 1s steps(5, end) infinite}@-webkit-keyframes svelte-x181g1-dots{0%,40%{color:rgba(0, 0, 0, 0)}}@keyframes svelte-x181g1-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
       map: null
     };
     Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css8);
+      $$result.css.add(css9);
       return `
 
 
@@ -24693,8 +24798,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-aeeac181.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-aeeac181.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/index-c0ae932b.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-e09c747e.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-e09c747e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/index-0fa359d1.js"];
     stylesheets17 = ["_app/immutable/assets/+page-8ee437b0.css"];
   }
 });
@@ -26815,7 +26920,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-7a4ca554.js", "imports": ["_app/immutable/start-7a4ca554.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/singletons-e99ad182.js", "_app/immutable/chunks/index-da484f8c.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-c957b37d.js", "imports": ["_app/immutable/start-c957b37d.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-ae68b1a3.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
