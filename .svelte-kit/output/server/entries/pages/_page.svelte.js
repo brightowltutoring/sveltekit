@@ -144,12 +144,21 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <div class="${"h-3/5 flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
     
     <div class="${"text-lg font-Nunito "}">\u{1F383} pressing inquiries can be sent to thinksolve.io[at]gmail.com
-      <div>(click for reviews)
+      <div>\u{1F449} click for reviews
       </div></div></div></div>
 
-<div id="${"reviews"}" class="${"md:my-80 md:pb-40"}">${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
+<div class="${"mt-80 "}"><p class="${"text-5xl font-Poppins text-center py-10"}">Upload your homework</p>
+  ${validate_component(UploadForm, "UploadForm").$$render(
+    $$result,
+    {
+      dropzoneText: "\u{1F680}",
+      dropzoneTextSizeTW: "text-4xl"
+    },
+    {},
+    {}
+  )}</div>
 
-${validate_component(UploadForm, "UploadForm").$$render($$result, {}, {}, {})}
+<div id="${"reviews"}" class="${"md:pb-40"}">${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
 
 
 

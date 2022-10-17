@@ -107,11 +107,12 @@
     $navHomeworkClicked = false;
   }}
   class="z-[50] md:py-4 py-1 md:px-[7%] {$navHomeworkClicked
-    ? 'bg-[rgba(0,0,0,0.4)]'
+    ? 'bg-[rgba(0,0,0,0.1)]'
     : 'hidden'} fixed w-full h-full flex justify-center items-center "
 >
-  <UploadForm />
+  <UploadForm uniqueId={"broccoli"} dimensionsTW={"w-[80vw] h-[80vh]"} />
 </div>
+<!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->
 
 <!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 
 I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflow-y-hidden w-full". 

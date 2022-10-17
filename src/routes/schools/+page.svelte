@@ -1,4 +1,5 @@
 <script>
+  import UploadForm from "$lib/UploadForm.svelte";
   import PlansCardSchools from "$lib/PlansCardSchools.svelte";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -31,6 +32,14 @@
 <!-- <div class="font-Poppins text-center sm:text-7xl text-6xl pb-2  ">Plans</div> -->
 
 <!-- in:scale={{ duration: 1000, easing: elasticOut }} -->
+
+<!-- TODO: testing..delete after -->
+<div class="-z-50 mt-80 hover:scale-105 duration-500 ">
+  <p class="text-5xl font-Poppins text-center">Upload your homework</p>
+
+  <UploadForm dropzoneText={"🚀"} dropzoneTextSizeTW={"text-5xl"} />
+</div>
+<!-- TODO: testing..delete after -->
 
 <div class="grid grid-cols-1 lg:grid-cols-2  p-7 ">
   {#each plansCardArray as item, i}

@@ -6,6 +6,7 @@
   import { slide } from "svelte/transition";
   // import { quintOut } from "svelte/easing";
   let ready = false;
+  // let randomNum = Math.round(10000 * Math.random());
 
   import { onMount } from "svelte";
   import UploadForm from "$lib/UploadForm.svelte";
@@ -36,25 +37,23 @@
       </div>
     {/if}
     <!-- <div class="text-6xl font-Poppins pb-4">We'll be back in October</div> -->
-    <div class="text-lg font-Nunito ">
-      🎃 pressing inquiries can be sent to thinksolve.io[at]gmail.com
-      <div
-        on:click={() => {
-          // window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
-          document
-            .getElementById("reviews")
-            .scrollIntoView({ behavior: "smooth", block: "start" });
-        }}
-      >
-        👉 click for reviews
-      </div>
+    <div
+      class="text-lg font-Nunito "
+      on:click={() => {
+        document
+          .getElementById("reviews")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      }}
+    >
+      👉 click for reviews
     </div>
   </div>
 </div>
 
-<div class="mt-80 ">
-  <p class="text-5xl font-Poppins text-center py-10">Upload your homework</p>
-  <UploadForm dropzoneText={"🚀"} dropzoneTextSizeTW={"text-4xl"} />
+<div class="-z-50 mt-80 hover:scale-105 duration-500 ">
+  <p class="text-5xl font-Poppins text-center pb-7">Upload your homework</p>
+
+  <UploadForm dropzoneText={"🚀"} dropzoneTextSizeTW={"text-5xl"} />
 </div>
 
 <div id="reviews" class=" md:pb-40">
