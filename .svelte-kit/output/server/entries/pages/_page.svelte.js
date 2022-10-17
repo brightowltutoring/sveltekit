@@ -3,6 +3,7 @@ import { b as isDarkMode } from "../../chunks/store.js";
 import { U as UploadForm } from "../../chunks/UploadForm.js";
 import "../../chunks/index2.js";
 import "../../chunks/private.js";
+import "dropzone";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
@@ -143,16 +144,16 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 <div class="${"h-3/5 flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
     
-    <div class="${"text-lg font-Nunito "}">\u{1F383} pressing inquiries can be sent to thinksolve.io[at]gmail.com
-      <div>\u{1F449} click for reviews
-      </div></div></div></div>
+    <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
+    </div></div></div>
 
-<div class="${"mt-80 "}"><p class="${"text-5xl font-Poppins text-center py-10"}">Upload your homework</p>
+<div class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">Upload your homework</p>
+
   ${validate_component(UploadForm, "UploadForm").$$render(
     $$result,
     {
       dropzoneText: "\u{1F680}",
-      dropzoneTextSizeTW: "text-4xl"
+      dropzoneTextSizeTW: "text-5xl"
     },
     {},
     {}

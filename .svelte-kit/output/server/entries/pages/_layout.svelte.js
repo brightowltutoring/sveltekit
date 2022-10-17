@@ -6,6 +6,7 @@ import "firebase/firestore/lite";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
 import "../../chunks/private.js";
+import "dropzone";
 import "firebase/app";
 import "firebase/functions";
 const app = "";
@@ -398,7 +399,16 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 <div class="${"z-[50] md:py-4 py-1 md:px-[7%] " + escape($navLoginClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(LoginCard, "LoginCard").$$render($$result, {}, {}, {})}</div>
 
-<div class="${"z-[50] md:py-4 py-1 md:px-[7%] " + escape($navHomeworkClicked ? "bg-[rgba(0,0,0,0.4)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(UploadForm, "UploadForm").$$render($$result, {}, {}, {})}</div>
+<div class="${"z-[50] md:py-4 py-1 md:px-[7%] " + escape($navHomeworkClicked ? "bg-[rgba(0,0,0,0.1)]" : "hidden", true) + " fixed w-full h-full flex justify-center items-center"}">${validate_component(UploadForm, "UploadForm").$$render(
+    $$result,
+    {
+      uniqueId: "broccoli",
+      dimensionsTW: "w-[80vw] h-[80vh]"
+    },
+    {},
+    {}
+  )}</div>
+
 
 
 <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>

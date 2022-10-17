@@ -145,13 +145,6 @@ function add_attribute(name, value, boolean) {
   const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
   return ` ${name}${assignment}`;
 }
-function style_object_to_string(style_object) {
-  return Object.keys(style_object).filter((key) => style_object[key]).map((key) => `${key}: ${style_object[key]};`).join(" ");
-}
-function add_styles(style_object) {
-  const styles = style_object_to_string(style_object);
-  return styles ? ` style="${styles}"` : "";
-}
 export {
   subscribe as a,
   safe_not_equal as b,
@@ -163,7 +156,6 @@ export {
   set_store_value as h,
   is_function as i,
   each as j,
-  add_styles as k,
   loop as l,
   missing_component as m,
   noop as n,

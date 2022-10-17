@@ -1,6 +1,9 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute, j as each } from "../../../chunks/index.js";
+import { U as UploadForm } from "../../../chunks/UploadForm.js";
 import { C as CalendlyJsandCSS } from "../../../chunks/CalendlyJsandCSS.js";
 import { b as isDarkMode, d as dark_lightened, l as light_darkened } from "../../../chunks/store.js";
+import "../../../chunks/private.js";
+import "dropzone";
 import "../../../chunks/index2.js";
 const PlansCardSchools_svelte_svelte_type_style_lang = "";
 const css = {
@@ -65,6 +68,20 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   ];
   return `
 
+
+
+
+<div class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center"}">Upload your homework</p>
+
+  ${validate_component(UploadForm, "UploadForm").$$render(
+    $$result,
+    {
+      dropzoneText: "\u{1F680}",
+      dropzoneTextSizeTW: "text-5xl"
+    },
+    {},
+    {}
+  )}</div>
 
 
 <div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArray, (item, i) => {

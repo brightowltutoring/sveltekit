@@ -101,7 +101,7 @@ const redirectAfterLoginTimeOut = writable("");
 const redirectSetInterval = writable("");
 const light_darkened = "rgb(242,247,250)";
 const dark_lightened = "rgb(38, 35, 51)";
-const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
+derived(isDarkMode, ($isDarkMode, set) => {
   $isDarkMode ? set(dark_lightened) : set(light_darkened);
 });
 export {
@@ -115,7 +115,6 @@ export {
   scrollYMax as h,
   isLoggedIn as i,
   innerWidth as j,
-  elementColor as k,
   light_darkened as l,
   navLoginClicked as n,
   redirectAfterLoginTimeOut as r,
