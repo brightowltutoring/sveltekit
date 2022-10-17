@@ -8,8 +8,7 @@
     redirectSetInterval,
     isLoggedIn,
     isDarkMode,
-    dark_lightened,
-    light_darkened,
+    elementColor,
     navLoginClicked,
   } from "$lib/store.js";
   import { db, auth } from "$lib/firebase.js";
@@ -24,7 +23,6 @@
     signInWithEmailLink,
   } from "firebase/auth";
 
-  $: cardColor = $isDarkMode ? dark_lightened : light_darkened;
   let emailFieldValue = "";
 
   $: isEmail = false; // this global variable is updated with regex to verify email input
@@ -260,11 +258,11 @@
   //  Hoisted functions
 </script>
 
-<div
+<card
   class="hover:scale-[102%] font-Poppins shadow-md {$isDarkMode
     ? 'hover:shadow-xl '
     : 'hover:shadow-lg'} rounded-md  mx-auto w-1/3 min-w-fit  p-10 m-1 text-center duration-300 group"
-  style={`background:${cardColor}`}
+  style={`background:${$elementColor}`}
 >
   <p class="text-5xl pb-10">Login</p>
   <div class="logInDiv">
@@ -342,4 +340,4 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
     <p style="font-size: 30px;" id="redirectMessage">⌊π⌋</p>
     <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
   </div>
-</div>
+</card>

@@ -1,15 +1,16 @@
 <script>
-  // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
+  import PlansComponent from "$lib/PlansComponent.svelte";
+
+  import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
   // import Testimonials from "$lib/Testimonials.svelte";
+  import Dropzone from "$lib/Dropzone.svelte";
   import { isDarkMode } from "$lib/store.js";
   import Reviews from "$lib/Reviews.svelte";
   import { slide } from "svelte/transition";
   // import { quintOut } from "svelte/easing";
-  let ready = false;
-  // let randomNum = Math.round(10000 * Math.random());
-
   import { onMount } from "svelte";
-  import UploadForm from "$lib/UploadForm.svelte";
+
+  let ready = false;
   onMount(() => {
     ready = true;
   });
@@ -28,6 +29,10 @@
       : 'blur-2xl'}"
   />
 </main>
+
+<!-- {#if ready}
+  <SixMathEqnAnim />
+{/if} -->
 
 <div class="h-3/5 flex justify-center items-center text-center">
   <div class="grid grid-rows-1">
@@ -50,17 +55,48 @@
   </div>
 </div>
 
-<div class="-z-50 mt-80 hover:scale-105 duration-500 ">
-  <p class="text-5xl font-Poppins text-center pb-7">Upload your homework</p>
+<div id="step1" class="-z-50 mt-80 hover:scale-105 duration-500 ">
+  <p
+    class="text-5xl font-Poppins text-center pb-7"
+    on:click={() => {
+      document
+        .getElementById("step2")
+        .scrollIntoView({ behavior: "smooth", block: "start" });
+    }}
+  >
+    1. Upload your homework
+  </p>
 
-  <UploadForm dropzoneText={"🚀"} dropzoneTextSizeTW={"text-5xl"} />
+  <Dropzone text={"🚀"} textSizeTW={"text-5xl"} />
 </div>
 
-<div id="reviews" class=" md:pb-40">
+<div id="step2" class="-z-50 mt-80 hover:scale-105 duration-500 ">
+  <p
+    class="text-5xl font-Poppins text-center pb-7"
+    on:click={() => {
+      document
+        .getElementById("reviews")
+        .scrollIntoView({ behavior: "smooth", block: "start" });
+    }}
+  >
+    2. Schedule a Session
+  </p>
+
+  <PlansComponent />
+</div>
+
+<!-- <div id="reviews" class=" md:pb-40"> -->
+<div id="reviews" class="-z-50 mt-80 hover:scale-105 duration-500 ">
+  <p
+    class="text-5xl font-Poppins text-center pb-7"
+    on:click={() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }}
+  >
+    3. Do Some Reading 😎
+  </p>
   <Reviews />
 </div>
-
-<!-- <SixMathEqnAnim /> -->
 
 <!-- <Testimonials /> -->
 

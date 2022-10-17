@@ -1,7 +1,7 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute, j as each } from "../../../chunks/index.js";
+import { b as isDarkMode, d as dark_lightened, l as light_darkened } from "../../../chunks/store.js";
 import "dropzone";
 /* empty css                                                        */import { C as CalendlyJsandCSS } from "../../../chunks/CalendlyJsandCSS.js";
-import { b as isDarkMode, d as dark_lightened, l as light_darkened } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const PlansCardSchools_svelte_svelte_type_style_lang = "";
 const css = {

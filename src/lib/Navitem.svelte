@@ -45,7 +45,7 @@
         clickOnNavLinks();
         clearTimeout($redirectAfterLoginTimeOut);
         clearInterval($redirectSetInterval);
-        prefetch(href);
+        // prefetch(href)
         goto(href);
 
         // this janky solution allows for the embeded jitsu to load ... otherwise I had to

@@ -1,6 +1,9 @@
 <script>
   import "../app.css";
-  import UploadForm from "$lib/UploadForm.svelte";
+  // import JitsiUser from "$lib/JitsiUser.svelte";
+
+  import Modal from "$lib/Modal.svelte";
+  import Dropzone from "$lib/Dropzone.svelte";
   import LoginCard from "$lib/LoginCard.svelte";
   import Navbar from "$lib/Navbar.svelte";
   import {
@@ -91,40 +94,29 @@
   on:popstate={clearRedirectStuff}
 />
 
-<div
-  on:click|self={() => {
-    $navLoginClicked = false;
-  }}
-  class="z-[50] md:py-4 py-1 md:px-[7%] {$navLoginClicked
-    ? 'bg-[rgba(0,0,0,0.4)]'
-    : 'hidden'} fixed w-full h-full flex justify-center items-center "
->
-  <LoginCard />
-</div>
+<main>
+  <Modal bind:showModal={$navLoginClicked}>
+    <LoginCard />
+  </Modal>
 
-<div
-  on:click|self={() => {
-    $navHomeworkClicked = false;
-  }}
-  class="z-[50] md:py-4 py-1 md:px-[7%] {$navHomeworkClicked
-    ? 'bg-[rgba(0,0,0,0.1)]'
-    : 'hidden'} fixed w-full h-full flex justify-center items-center "
->
-  <UploadForm uniqueId={"broccoli"} dimensionsTW={"w-[80vw] h-[80vh]"} />
-</div>
-<!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->
+  <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+    <Dropzone uniqueId={"broccoli"} dimensionsTW={"w-[80vw] h-[80vh]"} />
+  </Modal>
 
-<!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 
+  <!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->
+
+  <!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 
 I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflow-y-hidden w-full". 
 Fixed containers  apparently hate having scrollable overflow elements inside.
 -->
-<div
-  class="md:py-4 py-1 md:px-[7%] z-50 fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
->
-  <Navbar />
-</div>
+  <div
+    class="md:py-4 py-1 md:px-[7%] z-50 fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
+  >
+    <Navbar />
+  </div>
 
-<!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->
-<div class="px-[7%] h-[100vh] pt-32 md:block">
-  <slot />
-</div>
+  <!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->
+  <div class="px-[7%] h-[100vh] pt-32 md:block">
+    <slot />
+  </div>
+</main>

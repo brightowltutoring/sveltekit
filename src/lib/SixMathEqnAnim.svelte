@@ -18,7 +18,7 @@
     <!-- note: the animation speeds up since the delay is given by a log function ...
     and the change in logarithm DECREASES with increasing input (subsequent delays get smaller)-->
     <p
-      class={$isDarkMode ? "text-blue-100" : "text-red-500"}
+      class={$isDarkMode ? "text-blue-100" : "text-indigo-900"}
       in:scale={{
         delay: 350 * Math.log(i + 1),
         easing: quintOut,

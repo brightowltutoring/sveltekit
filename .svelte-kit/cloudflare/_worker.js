@@ -622,6 +622,119 @@ var init_private = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/store.js
+var isLoggedIn, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, dark_lightened;
+var init_store = __esm({
+  ".svelte-kit/output/server/chunks/store.js"() {
+    init_index2();
+    init_chunks();
+    isLoggedIn = writable(false);
+    scrollY = writable(0);
+    startScrollY = derived(scrollY, ($scrollY, set) => {
+      setTimeout(() => {
+        set($scrollY);
+      }, 50);
+    });
+    instDeltaY = derived(
+      [scrollY, startScrollY],
+      ([$scrollY, $startScrollY]) => {
+        return $scrollY - $startScrollY;
+      }
+    );
+    scrollYMax = writable(0);
+    derived(
+      [scrollY, scrollYMax],
+      ([$scrollY, $scrollYMax]) => {
+        return 1 - $scrollY / $scrollYMax;
+      }
+    );
+    windowInnerHeight = writable(0);
+    innerWidth = writable(0);
+    lessThan768 = derived(
+      innerWidth,
+      ($innerWidth) => $innerWidth < 768
+    );
+    navLoginClicked = writable(false);
+    navHomeworkClicked = writable(false);
+    routes = writable({
+      home: {
+        name: "Home",
+        href: "/",
+        title: "Thinksolve.io \u{1F4AB}",
+        isCurrent: false
+      },
+      plans: {
+        name: "Plans",
+        href: "/plans",
+        title: "Plans \u{1F34E}",
+        isCurrent: false
+      },
+      schools: {
+        name: "Schools",
+        href: "/schools",
+        title: "Schools \u{1F4DA}",
+        isCurrent: false
+      },
+      screenshare: {
+        name: "Screenshare",
+        href: "/screenshare",
+        title: "Screenshare \u{1F5A5}",
+        isCurrent: false
+      },
+      login: {
+        name: "Login",
+        href: "/login",
+        title: "Login \u{1F680}",
+        isCurrent: false
+      },
+      homework: {
+        name: "Homework",
+        href: "/homework",
+        title: "Homework",
+        isCurrent: false
+      },
+      stripe: {
+        name: "Stripe",
+        href: "/stripe",
+        title: "Stripe \u{1F4B0}",
+        isCurrent: false
+      },
+      physics: {
+        name: "physics",
+        href: "/physics",
+        title: "physics \u{1F680}",
+        isCurrent: false
+      },
+      math: {
+        name: "math",
+        href: "/math",
+        title: "math",
+        isCurrent: false
+      },
+      mathjax: {
+        name: "mathjax",
+        href: "/mathjax",
+        title: "mathjax",
+        isCurrent: false
+      },
+      katex: {
+        name: "katex",
+        href: "/katex",
+        title: "katex",
+        isCurrent: false
+      }
+    });
+    isDarkMode = writable(false);
+    redirectAfterLoginTimeOut = writable("");
+    redirectSetInterval = writable("");
+    light_darkened = "rgb(242,247,250)";
+    dark_lightened = "rgb(38, 35, 51)";
+    derived(isDarkMode, ($isDarkMode, set) => {
+      $isDarkMode ? set(dark_lightened) : set(light_darkened);
+    });
+  }
+});
+
 // node_modules/just-extend/index.esm.js
 function extend() {
   var args = [].slice.call(arguments);
@@ -2427,9 +2540,10 @@ var init_UploadForm = __esm({
   ".svelte-kit/output/server/chunks/UploadForm.js"() {
     init_chunks();
     init_private();
+    init_store();
     init_dropzone();
     css = {
-      code: "form.svelte-1inwhzb{margin:0 auto;border-color:white;border-radius:50px}",
+      code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}form.svelte-1m2am6r{border-radius:50px;border-style:dotted;border-color:white}",
       map: null
     };
     UploadForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -2446,127 +2560,13 @@ var init_UploadForm = __esm({
       if ($$props.dimensionsTW === void 0 && $$bindings.dimensionsTW && dimensionsTW !== void 0)
         $$bindings.dimensionsTW(dimensionsTW);
       $$result.css.add(css);
-      return `<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" class="${"dropzone flex justify-center items-center overflow-scroll brightness-95 backdrop-blur-3xl " + escape(dimensionsTW, true) + " svelte-1inwhzb"}" id="${"default"}">
-  
-
-  <div class="${"dz-message " + escape(dropzoneTextSizeTW, true) + " font-Nunito"}" data-dz-message><span class="${"block"}">${escape(dropzoneText)}</span></div></form>
-
+      return `
+<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" class="${"dropzone flex justify-center items-center overflow-scroll brightness-95 backdrop-blur-3xl " + escape(dropzoneTextSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto svelte-1m2am6r"}" id="${"default"}">
+  <div class="${"dz-message font-Nunito "}" data-dz-message><span class="${"block"}">${escape(dropzoneText)}</span></div></form>
 
 
-${$$result.head += ``, ""}`;
-    });
-  }
-});
 
-// .svelte-kit/output/server/chunks/store.js
-var isLoggedIn, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, routes, isDarkMode, redirectAfterLoginTimeOut, redirectSetInterval, light_darkened, dark_lightened;
-var init_store = __esm({
-  ".svelte-kit/output/server/chunks/store.js"() {
-    init_index2();
-    init_chunks();
-    isLoggedIn = writable(false);
-    scrollY = writable(0);
-    startScrollY = derived(scrollY, ($scrollY, set) => {
-      setTimeout(() => {
-        set($scrollY);
-      }, 50);
-    });
-    instDeltaY = derived(
-      [scrollY, startScrollY],
-      ([$scrollY, $startScrollY]) => {
-        return $scrollY - $startScrollY;
-      }
-    );
-    scrollYMax = writable(0);
-    derived(
-      [scrollY, scrollYMax],
-      ([$scrollY, $scrollYMax]) => {
-        return 1 - $scrollY / $scrollYMax;
-      }
-    );
-    windowInnerHeight = writable(0);
-    innerWidth = writable(0);
-    lessThan768 = derived(
-      innerWidth,
-      ($innerWidth) => $innerWidth < 768
-    );
-    navLoginClicked = writable(false);
-    navHomeworkClicked = writable(false);
-    routes = writable({
-      home: {
-        name: "Home",
-        href: "/",
-        title: "Thinksolve.io \u{1F4AB}",
-        isCurrent: false
-      },
-      plans: {
-        name: "Plans",
-        href: "/plans",
-        title: "Plans \u{1F34E}",
-        isCurrent: false
-      },
-      schools: {
-        name: "Schools",
-        href: "/schools",
-        title: "Schools \u{1F4DA}",
-        isCurrent: false
-      },
-      screenshare: {
-        name: "Screenshare",
-        href: "/screenshare",
-        title: "Screenshare \u{1F5A5}",
-        isCurrent: false
-      },
-      login: {
-        name: "Login",
-        href: "/login",
-        title: "Login \u{1F680}",
-        isCurrent: false
-      },
-      homework: {
-        name: "Homework",
-        href: "/homework",
-        title: "Homework",
-        isCurrent: false
-      },
-      stripe: {
-        name: "Stripe",
-        href: "/stripe",
-        title: "Stripe \u{1F4B0}",
-        isCurrent: false
-      },
-      physics: {
-        name: "physics",
-        href: "/physics",
-        title: "physics \u{1F680}",
-        isCurrent: false
-      },
-      math: {
-        name: "math",
-        href: "/math",
-        title: "math",
-        isCurrent: false
-      },
-      mathjax: {
-        name: "mathjax",
-        href: "/mathjax",
-        title: "mathjax",
-        isCurrent: false
-      },
-      katex: {
-        name: "katex",
-        href: "/katex",
-        title: "katex",
-        isCurrent: false
-      }
-    });
-    isDarkMode = writable(false);
-    redirectAfterLoginTimeOut = writable("");
-    redirectSetInterval = writable("");
-    light_darkened = "rgb(242,247,250)";
-    dark_lightened = "rgb(38, 35, 51)";
-    derived(isDarkMode, ($isDarkMode, set) => {
-      $isDarkMode ? set(dark_lightened) : set(light_darkened);
+`;
     });
   }
 });
@@ -9587,9 +9587,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-c75c5ed0.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-c75c5ed0.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/UploadForm-54ad1d5c.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js", "_app/immutable/chunks/navigation-fedd761c.js", "_app/immutable/chunks/singletons-3cd39f90.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
-    stylesheets = ["_app/immutable/assets/+layout-158e7ab3.css", "_app/immutable/assets/UploadForm-8fda5082.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-72a8da94.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-72a8da94.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/UploadForm-6ffb6caf.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js", "_app/immutable/chunks/navigation-2d780e1f.js", "_app/immutable/chunks/singletons-e99ad182.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
+    stylesheets = ["_app/immutable/assets/+layout-5978c3bf.css", "_app/immutable/assets/UploadForm-9da6f3f0.css"];
   }
 });
 
@@ -9828,9 +9828,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-ddb2bb90.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-ddb2bb90.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm-54ad1d5c.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js"];
-    stylesheets3 = ["_app/immutable/assets/+page-d999b052.css", "_app/immutable/assets/UploadForm-8fda5082.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-91fc718c.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-91fc718c.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm-6ffb6caf.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js"];
+    stylesheets3 = ["_app/immutable/assets/+page-d999b052.css", "_app/immutable/assets/UploadForm-9da6f3f0.css"];
   }
 });
 
@@ -10015,6 +10015,8 @@ var init_page_svelte4 = __esm({
     init_chunks();
     init_UploadForm();
     init_private();
+    init_store();
+    init_index2();
     init_dropzone();
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(UploadForm, "UploadForm").$$render($$result, {}, {}, {})}`;
@@ -10036,9 +10038,9 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-083ad528.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-083ad528.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/UploadForm-54ad1d5c.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js"];
-    stylesheets6 = ["_app/immutable/assets/UploadForm-8fda5082.css"];
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-2d3e7dea.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-2d3e7dea.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/UploadForm-6ffb6caf.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js"];
+    stylesheets6 = ["_app/immutable/assets/UploadForm-9da6f3f0.css"];
   }
 });
 
@@ -23823,8 +23825,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/login/_page.svelte-1c28e975.js";
-    imports8 = ["_app/immutable/components/pages/login/_page.svelte-1c28e975.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-fedd761c.js", "_app/immutable/chunks/singletons-3cd39f90.js"];
+    file8 = "_app/immutable/components/pages/login/_page.svelte-aa136b6e.js";
+    imports8 = ["_app/immutable/components/pages/login/_page.svelte-aa136b6e.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-2d780e1f.js", "_app/immutable/chunks/singletons-e99ad182.js"];
     stylesheets8 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -24411,9 +24413,9 @@ var css7, PlansCardSchools, sampleHref2, Page12;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
+    init_store();
     init_dropzone();
     init_CalendlyJsandCSS();
-    init_store();
     init_index2();
     css7 = {
       code: ".cardCSS.svelte-35bofc{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.cardCSS.svelte-35bofc:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
@@ -24523,9 +24525,9 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-2bbe9773.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-2bbe9773.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js", "_app/immutable/chunks/CalendlyJsandCSS-84038ccf.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js"];
-    stylesheets14 = ["_app/immutable/assets/+page-70af9ea0.css", "_app/immutable/assets/UploadForm-8fda5082.css"];
+    file14 = "_app/immutable/components/pages/schools/_page.svelte-59ddf3a9.js";
+    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-59ddf3a9.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/index-c0ae932b.js", "_app/immutable/chunks/UploadForm.svelte_svelte_type_style_lang-07941711.js", "_app/immutable/chunks/CalendlyJsandCSS-84038ccf.js"];
+    stylesheets14 = ["_app/immutable/assets/+page-70af9ea0.css", "_app/immutable/assets/UploadForm-9da6f3f0.css"];
   }
 });
 
@@ -24580,8 +24582,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-4c9b1b2b.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-4c9b1b2b.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/navigation-fedd761c.js", "_app/immutable/chunks/singletons-3cd39f90.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-5d3c419a.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-5d3c419a.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/navigation-2d780e1f.js", "_app/immutable/chunks/singletons-e99ad182.js"];
     stylesheets15 = [];
   }
 });
@@ -24632,8 +24634,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-bee6261d.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-bee6261d.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/navigation-fedd761c.js", "_app/immutable/chunks/singletons-3cd39f90.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-2c72988a.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-2c72988a.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/store-2b620f72.js", "_app/immutable/chunks/index-da484f8c.js", "_app/immutable/chunks/navigation-2d780e1f.js", "_app/immutable/chunks/singletons-e99ad182.js"];
     stylesheets16 = [];
   }
 });
@@ -26813,7 +26815,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-3f283a88.js", "imports": ["_app/immutable/start-3f283a88.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/singletons-3cd39f90.js", "_app/immutable/chunks/index-da484f8c.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-7a4ca554.js", "imports": ["_app/immutable/start-7a4ca554.js", "_app/immutable/chunks/index-f33286f7.js", "_app/immutable/chunks/singletons-e99ad182.js", "_app/immutable/chunks/index-da484f8c.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

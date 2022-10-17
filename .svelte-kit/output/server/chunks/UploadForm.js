@@ -1,8 +1,9 @@
 import { c as create_ssr_component, d as add_attribute, e as escape } from "./index.js";
 import { U as UPLOAD_ENDPOINT } from "./private.js";
+import "./store.js";
 import "dropzone";
 /* empty css                                          */const css = {
-  code: "form.svelte-1inwhzb{margin:0 auto;border-color:white;border-radius:50px}",
+  code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}form.svelte-1m2am6r{border-radius:50px;border-style:dotted;border-color:white}",
   map: null
 };
 const UploadForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -19,14 +20,13 @@ const UploadForm = create_ssr_component(($$result, $$props, $$bindings, slots) =
   if ($$props.dimensionsTW === void 0 && $$bindings.dimensionsTW && dimensionsTW !== void 0)
     $$bindings.dimensionsTW(dimensionsTW);
   $$result.css.add(css);
-  return `<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" class="${"dropzone flex justify-center items-center overflow-scroll brightness-95 backdrop-blur-3xl " + escape(dimensionsTW, true) + " svelte-1inwhzb"}" id="${"default"}">
-  
-
-  <div class="${"dz-message " + escape(dropzoneTextSizeTW, true) + " font-Nunito"}" data-dz-message><span class="${"block"}">${escape(dropzoneText)}</span></div></form>
-
+  return `
+<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" class="${"dropzone flex justify-center items-center overflow-scroll brightness-95 backdrop-blur-3xl " + escape(dropzoneTextSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto svelte-1m2am6r"}" id="${"default"}">
+  <div class="${"dz-message font-Nunito "}" data-dz-message><span class="${"block"}">${escape(dropzoneText)}</span></div></form>
 
 
-${$$result.head += ``, ""}`;
+
+`;
 });
 export {
   UploadForm as U

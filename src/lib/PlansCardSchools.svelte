@@ -1,22 +1,15 @@
 <script>
   import CalendlyJsandCss from "./CalendlyJsandCSS.svelte";
-  import {
-    isDarkMode,
-    light,
-    light_darkened,
-    dark,
-    dark_lightened,
-  } from "$lib/store.js";
+  import { isDarkMode, elementColor } from "$lib/store.js";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
 
   let resetBtn = false;
-  let resetBtn2 = false;
+  // let resetBtn2 = false;
   export let schoolUrl = "";
-  export let payLaterUrl = "";
+  // export let payLaterUrl = "";
 
   export let btnColorHover = "";
-  $: cardColor = $isDarkMode ? dark_lightened : light_darkened;
 
   export let card; /* 1,2,3, */
 
@@ -29,15 +22,15 @@
 
 <CalendlyJsandCss />
 
-<div
-  class="cardCSS shadow-md {$isDarkMode
+<card
+  class="block shadow-md {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"
-  style={`background:${cardColor}`}
+  style={`background:${$elementColor}`}
 >
-  <div class="py-6 text-5xl font-Poppins">
+  <p class="py-6 text-5xl font-Poppins">
     <slot name="cardTitle">Classico</slot>
-  </div>
+  </p>
 
   {#key resetBtn}
     <button
@@ -59,10 +52,10 @@
   <div class="py-4">
     <slot name="cardText">default cardText</slot>
   </div>
-</div>
+</card>
 
 <style>
-  .cardCSS {
+  card {
     transform: perspective(1000px) rotateX(12deg);
     /* transform: perspective(1000px) rotateX(0deg); */
     /* transition: transform 0.3s ease 0s; */
@@ -71,7 +64,7 @@
     -webkit-transform: translateZ(-1px);
   }
 
-  .cardCSS:hover {
+  card:hover {
     transform: perspective(1000px) rotateX(0deg) scale(1.02);
     /* transform: perspective(1000px) rotateX(12deg) scale(1.02); */
   }
