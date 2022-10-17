@@ -7,7 +7,7 @@ import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
 import "../../chunks/private.js";
 import "dropzone";
-import "firebase/app";
+/* empty css                                                     */import "firebase/app";
 import "firebase/functions";
 const app = "";
 const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {

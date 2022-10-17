@@ -26,8 +26,15 @@
 
   $: cardColor = $isDarkMode ? dark_lightened : light_darkened;
   let emailFieldValue = "";
-  let emptyEmailKey;
+
   $: isEmail = false; // this global variable is updated with regex to verify email input
+
+  // Allows to convert infinite 'animate-ping' tailwind animation to short animation;
+  // logic in 'signinWithLinkAndStop' function. Normally would do this with svelte and keyed block,
+  // however the destruction/creation of the element interferes with event fire logic I want to maintain
+  let emptyEmailInputAnimated;
+  let magicLinkSent = false;
+  $: shortPing = !magicLinkSent && emptyEmailInputAnimated && "animate-ping";
 
   //  onmount
   onMount(() => {
@@ -43,6 +50,7 @@
 
     passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop);
     emailField.addEventListener("keydown", signinWithLinkAndStop);
+
     // passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop, {
     //   once: true,
     // });
@@ -223,8 +231,17 @@
   //emd
 
   function signinWithLinkAndStop(e) {
+    if ((e.type == "click" || e.key == "Enter") && emailFieldValue == "") {
+      // console.log("testy");
+      emptyEmailInputAnimated = true;
+      setTimeout(
+        () => (emptyEmailInputAnimated = !emptyEmailInputAnimated),
+        100
+      );
+    }
     if ((e.type == "click" || e.key == "Enter") && isEmail) {
       loginViaPasswordlessEmail();
+      magicLinkSent = true;
 
       emailFieldValue = "";
 
@@ -271,7 +288,6 @@ c-35.841,0-65,29.159-65,65s29.159,65,65,65c28.867,0,53.398-18.913,61.852-45H105V
 S0,162.897,0,105z"
             />
           </svg>
-
           <!-- google logo -->
         </li>
         <li>Sign-in with Google</li>
@@ -279,18 +295,15 @@ S0,162.897,0,105z"
     </div>
 
     <p class="py-5">or</p>
+
     <div
       id="passwordlessLoginBtn"
       in:scale={{ duration: 600, easing: elasticOut }}
-      on:click={() => {
-        emailFieldValue == "" && (emptyEmailKey = !emptyEmailKey);
-      }}
       class=" bg-red-400   hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-80'
         : 'group-hover:bg-opacity-80'} text-xl text-white "
     >
       <ul class="flex justify-center items-center gap-5">
-        <!-- <ul class="flex justify-left items-center gap-7 px-10"> -->
         <li>
           <svg height="24" width="24" viewBox="0 0 485 485">
             <path
@@ -306,23 +319,21 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
             />
           </svg>
         </li>
+
         <li>Get Magic Link</li>
       </ul>
     </div>
 
-    {#key emptyEmailKey}
-      <input
-        on:keyup={onInputEmailField(emailFieldValue)}
-        class="text-center p-3 mt-3 w-full"
-        in:scale|local={{ duration: 500, easing: elasticOut }}
-        id="emailField"
-        bind:value={emailFieldValue}
-        type="email"
-        placeholder="email"
-      />
-    {/key}
+    <input
+      on:keyup={onInputEmailField(emailFieldValue)}
+      class="text-center p-3 mt-3 w-full {shortPing} "
+      id="emailField"
+      bind:value={emailFieldValue}
+      type="email"
+      placeholder="email"
+    />
+
     <span id="emailStatusMessage" />
-    <!-- <span id="flyingEmoji" style="display:none" /> -->
   </div>
 
   <div class="logOutDiv" style="display:none">
@@ -332,41 +343,3 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
     <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
   </div>
 </div>
-
-<!-- <style>
-  #flyingEmoji {
-    /* height:10vh;
-        width:10vw; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: xAxis 2.5s cubic-bezier(0.02, 0.01, 0.21, 1);
-    animation-duration: 10s;
-    /* animation: xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1); */
-  }
-
-  #flyingEmoji::after {
-    content: "🛸";
-    display: block;
-    width: 1px;
-    height: 1px;
-    border-radius: 20px;
-    animation: yAxis 3s cubic-bezier(0.3, 0.27, 0.07, 1.64);
-    animation-duration: 10s;
-    /* animation: yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64); */
-  }
-
-  @keyframes yAxis {
-    80% {
-      animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
-      transform: translateY(-100px) rotate(360deg) scale(2);
-    }
-  }
-
-  @keyframes xAxis {
-    20% {
-      animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
-      transform: translateX(200px);
-    }
-  }
-</style> -->

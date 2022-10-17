@@ -1,0 +1,1 @@
+import{default as a}from"../components/pages/homework/_page.svelte-bf0a9ea2.js";import"./index-bd8a2dbd.js";import"./UploadForm-f7094fbb.js";import"./private-2f12c45b.js";import"./index-d9b16c0d.js";import"./UploadForm.svelte_svelte_type_style_lang-07941711.js";export{a as component};

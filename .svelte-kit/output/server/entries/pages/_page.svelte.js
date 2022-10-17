@@ -4,7 +4,7 @@ import { U as UploadForm } from "../../chunks/UploadForm.js";
 import "../../chunks/index2.js";
 import "../../chunks/private.js";
 import "dropzone";
-const reviewCreator_svx_svelte_type_style_lang = "";
+/* empty css                                                     */const reviewCreator_svx_svelte_type_style_lang = "";
 const css = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
   map: null

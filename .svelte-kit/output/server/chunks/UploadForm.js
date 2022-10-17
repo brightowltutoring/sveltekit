@@ -1,9 +1,7 @@
 import { c as create_ssr_component, d as add_attribute, e as escape } from "./index.js";
 import { U as UPLOAD_ENDPOINT } from "./private.js";
 import "dropzone";
-const dropzone = "";
-const UploadForm_svelte_svelte_type_style_lang = "";
-const css = {
+/* empty css                                          */const css = {
   code: "form.svelte-1inwhzb{margin:0 auto;border-color:white;border-radius:50px}",
   map: null
 };

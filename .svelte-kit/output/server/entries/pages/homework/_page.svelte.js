@@ -2,7 +2,7 @@ import { c as create_ssr_component, v as validate_component } from "../../../chu
 import { U as UploadForm } from "../../../chunks/UploadForm.js";
 import "../../../chunks/private.js";
 import "dropzone";
-const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+/* empty css                                                        */const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(UploadForm, "UploadForm").$$render($$result, {}, {}, {})}`;
 });
 export {

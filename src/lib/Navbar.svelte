@@ -35,7 +35,7 @@
     goto("/");
     resetLogoClick = !resetLogoClick;
 
-    for (key in $routes) {
+    for (let key in $routes) {
       $routes[key].isCurrent = false;
     }
 

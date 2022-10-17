@@ -1,1 +1,0 @@
-import{default as e}from"../components/pages/homework/_page.svelte-b6447c80.js";import"./index-bd8a2dbd.js";import"./UploadForm-d57ad81f.js";import"./private-2f12c45b.js";import"./index-d9b16c0d.js";export{e as component};
