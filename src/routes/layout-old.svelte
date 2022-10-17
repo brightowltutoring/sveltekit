@@ -1,6 +1,6 @@
 <script>
   import "../app.css";
-  import UploadForm from "$lib/UploadForm.svelte";
+  // import UploadForm from "$lib/UploadForm.svelte";
   import LoginCard from "$lib/LoginCard.svelte";
   import Navbar from "$lib/Navbar.svelte";
   import {

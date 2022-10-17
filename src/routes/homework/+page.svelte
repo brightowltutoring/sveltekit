@@ -1,5 +1,5 @@
 <script>
-  import UploadForm from "$lib/UploadForm.svelte";
+  import Dropzone from "$lib/Dropzone.svelte";
 </script>
 
-<UploadForm />
+<Dropzone />
