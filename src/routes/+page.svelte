@@ -88,7 +88,7 @@
 <!-- <div id="reviews" class=" md:pb-40"> -->
 <div id="reviews" class="-z-50 mt-80 hover:scale-105 duration-500 ">
   <p
-    class="text-5xl font-Poppins text-center pb-7"
+    class="text-5xl font-Poppins text-center "
     on:click={() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }}

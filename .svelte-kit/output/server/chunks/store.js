@@ -35,16 +35,16 @@ const routes = writable({
     title: "Thinksolve.io \u{1F4AB}",
     isCurrent: false
   },
+  login: {
+    name: "Login",
+    href: "/login",
+    title: "Login \u{1F680}",
+    isCurrent: false
+  },
   plans: {
     name: "Plans",
     href: "/plans",
     title: "Plans \u{1F34E}",
-    isCurrent: false
-  },
-  schools: {
-    name: "Schools",
-    href: "/schools",
-    title: "Schools \u{1F4DA}",
     isCurrent: false
   },
   screenshare: {
@@ -53,16 +53,16 @@ const routes = writable({
     title: "Screenshare \u{1F5A5}",
     isCurrent: false
   },
-  login: {
-    name: "Login",
-    href: "/login",
-    title: "Login \u{1F680}",
-    isCurrent: false
-  },
   homework: {
     name: "Homework",
     href: "/homework",
     title: "Homework",
+    isCurrent: false
+  },
+  schools: {
+    name: "Schools",
+    href: "/schools",
+    title: "Schools \u{1F4DA}",
     isCurrent: false
   },
   stripe: {

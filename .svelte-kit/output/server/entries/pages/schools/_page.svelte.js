@@ -47,7 +47,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 <div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArraySchools, (item, i) => {
-    return `<div>${validate_component(PlansCardSchools, "PlansCardSchools").$$render(
+    return `
+    <div>${validate_component(PlansCardSchools, "PlansCardSchools").$$render(
       $$result,
       {
         card: item.card,
@@ -68,8 +69,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           return `<span slot="${"buttonText"}">Book Date/Time </span>`;
         }
       }
-    )}
-    </div>`;
+    )}</div>
+    `;
   })}
 </div>`;
 });
