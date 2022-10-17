@@ -5,8 +5,9 @@
   import { plansCardArray } from "$lib/plansCardArray.js";
 </script>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 ">
-  {#each plansCardArray as item, i}
+<!-- <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "> -->
+<div class="grid grid-cols-1 lg:grid-cols-2  p-7 ">
+  {#each [...plansCardArray].reverse().slice(1) as item, i}
     <div in:scale={{ duration: 1000, easing: elasticOut, delay: 100 * i }}>
       <PlansCard
         card={item.card}
