@@ -14,7 +14,8 @@ const css$1 = {
 };
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css$1);
-  return `<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
+  return `
+<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each([...plansCardArray].reverse().slice(1), (item, i) => {
     return `<div>${validate_component(PlansCard, "PlansCard").$$render(
       $$result,
       {

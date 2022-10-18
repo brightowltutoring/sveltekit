@@ -100,7 +100,12 @@
   </Modal>
 
   <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
-    <Dropzone uniqueId={"broccoli"} dimensionsTW={"w-[80vw] h-[80vh]"} />
+    <Dropzone
+      uniqueId={"broccoli"}
+      text={"🔥"}
+      textSizeTW={"text-6xl"}
+      dimensionsTW={"w-[80vw] h-[80vh]"}
+    />
   </Modal>
 
   <!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->

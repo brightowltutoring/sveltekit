@@ -11,6 +11,7 @@
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[60vw] h-[50vh]";
+  export let backgroundTW = "brightness-95 backdrop-blur-3xl";
   let dropzone;
 
   onMount(() => {
@@ -26,7 +27,7 @@
 <form
   action={UPLOAD_ENDPOINT}
   method="post"
-  class="dropzone flex justify-center items-center overflow-scroll brightness-95 backdrop-blur-3xl {textSizeTW} {dimensionsTW}  mx-auto "
+  class="dropzone flex justify-center items-center overflow-scroll  {backgroundTW}  {textSizeTW} {dimensionsTW}  mx-auto "
   id="default"
 >
   <!-- dz-message is a dropzone defined class -->
@@ -63,7 +64,7 @@
   form {
     border-radius: 50px;
     border-style: dotted;
-    border-color: white;
+    /* border-color: white; */
   }
   /*  The inline tailwind code "border-1 border-dotted border-white rounded-[50px]" doesn't work consistently with all dropzonejs instances... luckily using vanilla css still works */
 </style>

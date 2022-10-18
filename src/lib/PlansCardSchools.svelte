@@ -23,7 +23,7 @@
 <CalendlyJsandCss />
 
 <card
-  class="block shadow-md {$isDarkMode
+  class="block hover:scale-105 shadow-md {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"
   style={`background:${$elementColor}`}
@@ -55,7 +55,7 @@
 </card>
 
 <style>
-  card {
+  .card {
     transform: perspective(1000px) rotateX(12deg);
     /* transform: perspective(1000px) rotateX(0deg); */
     /* transition: transform 0.3s ease 0s; */
@@ -64,7 +64,7 @@
     -webkit-transform: translateZ(-1px);
   }
 
-  card:hover {
+  .card:hover {
     transform: perspective(1000px) rotateX(0deg) scale(1.02);
     /* transform: perspective(1000px) rotateX(12deg) scale(1.02); */
   }
