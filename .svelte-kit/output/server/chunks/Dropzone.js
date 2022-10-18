@@ -14,7 +14,7 @@ const Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) =
   let { uniqueId = "default" } = $$props;
   let { text = "Drop it like it's \u{1F525}" } = $$props;
   let { textSizeTW = "text-3xl" } = $$props;
-  let { dimensionsTW = "w-[70vw] h-[50vh]" } = $$props;
+  let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[50vh]" } = $$props;
   let { backgroundTW = "brightness-95 backdrop-blur-3xl" } = $$props;
   if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
     $$bindings.uniqueId(uniqueId);

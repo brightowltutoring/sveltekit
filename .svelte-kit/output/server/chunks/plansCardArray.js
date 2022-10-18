@@ -1,7 +1,3 @@
-import { c as create_ssr_component } from "./index.js";
-const CalendlyJsandCSS = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-al8i8p"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-al8i8p"><\/script>`, ""}`;
-});
 const sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
 const plansCardArray = [
   {
@@ -51,7 +47,6 @@ const plansCardArraySchools = [
   }
 ];
 export {
-  CalendlyJsandCSS as C,
   plansCardArraySchools as a,
   plansCardArray as p
 };
