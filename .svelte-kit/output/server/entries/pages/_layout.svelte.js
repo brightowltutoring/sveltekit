@@ -434,6 +434,8 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
             $$result,
             {
               uniqueId: "broccoli",
+              text: "\u{1F525}",
+              textSizeTW: "text-6xl",
               dimensionsTW: "w-[80vw] h-[80vh]"
             },
             {},

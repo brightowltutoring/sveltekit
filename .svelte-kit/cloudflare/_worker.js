@@ -2543,7 +2543,7 @@ var init_Dropzone = __esm({
     init_store();
     init_dropzone();
     css = {
-      code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}form.svelte-1m2am6r{border-radius:50px;border-style:dotted;border-color:white}",
+      code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}form.svelte-11z77ed{border-radius:50px;border-style:dotted}",
       map: null
     };
     Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -2551,6 +2551,7 @@ var init_Dropzone = __esm({
       let { text: text2 = "Drop it like it's \u{1F525}" } = $$props;
       let { textSizeTW = "text-3xl" } = $$props;
       let { dimensionsTW = "w-[60vw] h-[50vh]" } = $$props;
+      let { backgroundTW = "brightness-95 backdrop-blur-3xl" } = $$props;
       if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
         $$bindings.uniqueId(uniqueId);
       if ($$props.text === void 0 && $$bindings.text && text2 !== void 0)
@@ -2559,9 +2560,11 @@ var init_Dropzone = __esm({
         $$bindings.textSizeTW(textSizeTW);
       if ($$props.dimensionsTW === void 0 && $$bindings.dimensionsTW && dimensionsTW !== void 0)
         $$bindings.dimensionsTW(dimensionsTW);
+      if ($$props.backgroundTW === void 0 && $$bindings.backgroundTW && backgroundTW !== void 0)
+        $$bindings.backgroundTW(backgroundTW);
       $$result.css.add(css);
       return `
-<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" class="${"dropzone flex justify-center items-center overflow-scroll brightness-95 backdrop-blur-3xl " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto svelte-1m2am6r"}" id="${"default"}">
+<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" class="${"dropzone flex justify-center items-center overflow-scroll " + escape(backgroundTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto svelte-11z77ed"}" id="${"default"}">
   <div class="${"dz-message font-Nunito "}" data-dz-message><span class="${"block"}">${escape(text2)}</span></div></form>
 
 
@@ -9587,6 +9590,8 @@ var init_layout_svelte = __esm({
                 $$result,
                 {
                   uniqueId: "broccoli",
+                  text: "\u{1F525}",
+                  textSizeTW: "text-6xl",
                   dimensionsTW: "w-[80vw] h-[80vh]"
                 },
                 {},
@@ -9636,9 +9641,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-591aba88.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-591aba88.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-ecaa3557.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-5a8d80b0.js", "_app/immutable/chunks/singletons-0b3fe0bc.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
-    stylesheets = ["_app/immutable/assets/+layout-0b4ee0f4.css", "_app/immutable/assets/Dropzone-9da6f3f0.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-c345a3f5.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-c345a3f5.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-adc3b67b.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-4209de0a.js", "_app/immutable/chunks/singletons-41d19c3b.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
+    stylesheets = ["_app/immutable/assets/+layout-7c75e87f.css", "_app/immutable/assets/Dropzone-6b2c86a7.css"];
   }
 });
 
@@ -9748,7 +9753,7 @@ var init_PlansCard = __esm({
     init_plansCardArray();
     init_store();
     css2 = {
-      code: "card.svelte-1t9rwq8{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}card.svelte-1t9rwq8:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
+      code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
     PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -9792,10 +9797,10 @@ var init_PlansCard = __esm({
       $$unsubscribe_elementColor();
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
-<card class="${"block shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-1t9rwq8"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+<card class="${"block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
   ${each(payButtons, (button) => {
-        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
+        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 m-1 group-hover:bg-opacity-80 text-xl text-white svelte-h89m1w"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
       </button>`;
       })}
 
@@ -23646,10 +23651,13 @@ var init_page_svelte = __esm({
     <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
     </div></div></div>
 
-<div id="${"step1"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">1. Upload your homework
+<div id="${"step1"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}">1. Upload your homework
   </p>
 
-  ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { text: "\u{1F680}", textSizeTW: "text-5xl" }, {}, {})}</div>
+  
+  
+  ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}
+  </div>
 
 <div id="${"step2"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
   </p>
@@ -23685,9 +23693,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-adcfff3e.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-adcfff3e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-a4f7898c.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/Dropzone-ecaa3557.js", "_app/immutable/chunks/private-2f12c45b.js"];
-    stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-89686a4e.css", "_app/immutable/assets/Dropzone-9da6f3f0.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-365a3c0e.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-365a3c0e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-e3cc26c0.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/Dropzone-adc3b67b.js", "_app/immutable/chunks/private-2f12c45b.js"];
+    stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-6b2c86a7.css"];
   }
 });
 
@@ -23895,9 +23903,9 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-bd718c8c.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-bd718c8c.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-ecaa3557.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
-    stylesheets6 = ["_app/immutable/assets/Dropzone-9da6f3f0.css"];
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-6e4f92df.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-6e4f92df.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-adc3b67b.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    stylesheets6 = ["_app/immutable/assets/Dropzone-6b2c86a7.css"];
   }
 });
 
@@ -24042,8 +24050,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/login/_page.svelte-b8bdbbb9.js";
-    imports8 = ["_app/immutable/components/pages/login/_page.svelte-b8bdbbb9.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-5a8d80b0.js", "_app/immutable/chunks/singletons-0b3fe0bc.js"];
+    file8 = "_app/immutable/components/pages/login/_page.svelte-b54891ee.js";
+    imports8 = ["_app/immutable/components/pages/login/_page.svelte-b54891ee.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-4209de0a.js", "_app/immutable/chunks/singletons-41d19c3b.js"];
     stylesheets8 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -24487,9 +24495,9 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/plans/_page.svelte-281740ee.js";
-    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-281740ee.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-a4f7898c.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
-    stylesheets12 = ["_app/immutable/assets/+page-097b9a4a.css", "_app/immutable/assets/PlansCard-89686a4e.css"];
+    file12 = "_app/immutable/components/pages/plans/_page.svelte-3fe8b7d7.js";
+    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-3fe8b7d7.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-e3cc26c0.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    stylesheets12 = ["_app/immutable/assets/+page-097b9a4a.css", "_app/immutable/assets/PlansCard-fec9ec2d.css"];
   }
 });
 
@@ -24545,7 +24553,7 @@ var init_page_svelte8 = __esm({
     init_store();
     init_index2();
     css8 = {
-      code: "card.svelte-1t9rwq8{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}card.svelte-1t9rwq8:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
+      code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
     PlansCardSchools = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -24572,12 +24580,12 @@ var init_page_svelte8 = __esm({
       $$unsubscribe_elementColor();
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
-<card class="${"block shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-1t9rwq8"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+<card class="${"block hover:scale-105 shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
   <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
         true
-      ) + " text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
+      ) + " text-xl text-white svelte-h89m1w"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
 </card>`;
@@ -24632,9 +24640,9 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-c0f4c599.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-c0f4c599.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
-    stylesheets14 = ["_app/immutable/assets/+page-89686a4e.css"];
+    file14 = "_app/immutable/components/pages/schools/_page.svelte-ad6f9619.js";
+    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-ad6f9619.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/plansCardArray-d952409f.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    stylesheets14 = ["_app/immutable/assets/+page-fec9ec2d.css"];
   }
 });
 
@@ -24689,8 +24697,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-256aadd7.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-256aadd7.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-5a8d80b0.js", "_app/immutable/chunks/singletons-0b3fe0bc.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-2d8f9585.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-2d8f9585.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-4209de0a.js", "_app/immutable/chunks/singletons-41d19c3b.js"];
     stylesheets15 = [];
   }
 });
@@ -24741,8 +24749,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-6d885330.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-6d885330.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-5a8d80b0.js", "_app/immutable/chunks/singletons-0b3fe0bc.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-38de655e.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-38de655e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-4209de0a.js", "_app/immutable/chunks/singletons-41d19c3b.js"];
     stylesheets16 = [];
   }
 });
@@ -26922,7 +26930,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-9146a842.js", "imports": ["_app/immutable/start-9146a842.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-0b3fe0bc.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-011da944.js", "imports": ["_app/immutable/start-011da944.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-41d19c3b.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

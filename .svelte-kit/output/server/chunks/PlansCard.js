@@ -3,7 +3,7 @@ import { C as CalendlyJsandCSS } from "./plansCardArray.js";
 import { b as isDarkMode, e as elementColor } from "./store.js";
 const PlansCard_svelte_svelte_type_style_lang = "";
 const css = {
-  code: "card.svelte-1t9rwq8{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}card.svelte-1t9rwq8:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
+  code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
   map: null
 };
 const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -47,10 +47,10 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_elementColor();
   return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
 
-<card class="${"block shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group svelte-1t9rwq8"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+<card class="${"block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
   ${each(payButtons, (button) => {
-    return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
+    return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 m-1 group-hover:bg-opacity-80 text-xl text-white svelte-h89m1w"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
       </button>`;
   })}
 

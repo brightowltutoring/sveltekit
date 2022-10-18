@@ -73,7 +73,7 @@
   <!-- backgroundTW={"bg-purple-200 bg-opacity-20"} -->
 </div>
 
-<div id="step2" class="-z-50 mt-80 hover:scale-105 duration-500 ">
+<div id="step2" class="-z-50 mt-80 duration-500 ">
   <p
     class="text-5xl font-Poppins text-center pb-7"
     on:click={() => {
@@ -89,7 +89,7 @@
 </div>
 
 <!-- <div id="reviews" class=" md:pb-40"> -->
-<div id="reviews" class="-z-50 mt-80 hover:scale-105 duration-500 ">
+<div id="reviews" class="-z-50 mt-80 duration-500 ">
   <p
     class="text-5xl font-Poppins text-center "
     on:click={() => {

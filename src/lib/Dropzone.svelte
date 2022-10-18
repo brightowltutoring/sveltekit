@@ -1,6 +1,6 @@
 <script>
   import { UPLOAD_ENDPOINT } from "$env/static/private";
-  import { elementColor } from "$lib/store.js";
+  import { elementColor, isDarkMode } from "$lib/store.js";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   let clickText = false;
@@ -10,7 +10,7 @@
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
-  export let dimensionsTW = "w-[60vw] h-[50vh]";
+  export let dimensionsTW = "w-[70vw] h-[50vh]";
   export let backgroundTW = "brightness-95 backdrop-blur-3xl";
   let dropzone;
 
@@ -23,12 +23,15 @@
   });
 </script>
 
-<!-- style:background-color={$elementColor} -->
+<!-- for some reason using tailwing for border styles isnt working -->
 <form
   action={UPLOAD_ENDPOINT}
   method="post"
-  class="dropzone flex justify-center items-center overflow-scroll  {backgroundTW}  {textSizeTW} {dimensionsTW}  mx-auto "
   id="default"
+  class="dropzone flex justify-center items-center overflow-scroll {backgroundTW} {textSizeTW} {dimensionsTW} mx-auto"
+  style="border-radius:50px; border-style:dotted; border-color:{$isDarkMode
+    ? 'white'
+    : 'black'}"
 >
   <!-- dz-message is a dropzone defined class -->
   <div class="dz-message font-Nunito " data-dz-message>
@@ -60,11 +63,5 @@
   :global(.dropzone .dz-preview.dz-image-preview) {
     background-color: transparent;
   }
-  /*  Oddly, to remove the white background on each uploaded image, I have to use svelte's ':global' directive on the css, otherwise it works on some dropzonejs instances  */
-  form {
-    border-radius: 50px;
-    border-style: dotted;
-    /* border-color: white; */
-  }
-  /*  The inline tailwind code "border-1 border-dotted border-white rounded-[50px]" doesn't work consistently with all dropzonejs instances... luckily using vanilla css still works */
+  /*  Oddly, to remove the white background on each uploaded image, I have to use svelte's ':global' directive on the css, otherwise it works only on some dropzonejs instances  */
 </style>
