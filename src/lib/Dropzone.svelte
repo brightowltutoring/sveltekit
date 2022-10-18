@@ -10,7 +10,7 @@
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
-  export let dimensionsTW = "w-[70vw] h-[50vh]";
+  export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[50vh]";
   export let backgroundTW = "brightness-95 backdrop-blur-3xl";
   let dropzone;
 

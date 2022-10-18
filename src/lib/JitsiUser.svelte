@@ -111,7 +111,7 @@
 </script>
 
 <svelte:head>
-  <script src="https://meet.jit.si/external_api.js"></script>
+  <script async src="https://meet.jit.si/external_api.js"></script>
 </svelte:head>
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">

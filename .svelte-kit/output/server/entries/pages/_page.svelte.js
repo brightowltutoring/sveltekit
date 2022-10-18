@@ -201,13 +201,13 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}
   </div>
 
-<div id="${"step2"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
+<div id="${"step2"}" class="${"-z-50 mt-80 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
   </p>
 
   ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
 
 
-<div id="${"reviews"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}">3. Do Some Reading \u{1F60E}
+<div id="${"reviews"}" class="${"-z-50 mt-80 duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}">3. Do Some Reading \u{1F60E}
   </p>
   ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
 

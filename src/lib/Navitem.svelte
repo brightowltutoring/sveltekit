@@ -54,7 +54,7 @@
         if (href == "/screenshare") {
           setTimeout(() => {
             location.reload();
-          }, 100);
+          }, 50);
         }
       }
     }}

@@ -1,1 +1,0 @@
-import{default as f}from"../components/pages/homework/_page.svelte-6e4f92df.js";import"./index-1063d0c6.js";import"./Dropzone-adc3b67b.js";import"./private-2f12c45b.js";import"./store-817eb231.js";import"./index-6dbc7447.js";import"./index-0fa359d1.js";export{f as component};
