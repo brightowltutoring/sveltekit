@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute, j as each } from "./index.js";
-import { C as CalendlyJsandCSS } from "./CalendlyJsandCSS.js";
+import { C as CalendlyJsandCSS } from "./plansCardArray.js";
 import { b as isDarkMode, e as elementColor } from "./store.js";
 const PlansCard_svelte_svelte_type_style_lang = "";
 const css = {

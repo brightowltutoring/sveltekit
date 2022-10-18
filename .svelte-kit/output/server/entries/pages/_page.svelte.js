@@ -4,7 +4,6 @@ import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import "katex";
 import { b as isDarkMode } from "../../chunks/store.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import "../../chunks/CalendlyJsandCSS.js";
 import "../../chunks/index2.js";
 import "../../chunks/private.js";
 import "dropzone";

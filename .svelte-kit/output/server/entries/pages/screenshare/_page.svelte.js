@@ -1,6 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, v as validate_component } from "../../../chunks/index.js";
 import { l as lessThan768, b as isDarkMode } from "../../../chunks/store.js";
-import { C as CalendlyJsandCSS } from "../../../chunks/CalendlyJsandCSS.js";
 import "../../../chunks/index2.js";
 const JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $lessThan768, $$unsubscribe_lessThan768;
@@ -26,7 +25,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}
 
 
-${validate_component(CalendlyJsandCSS, "CalendlyJsandCSS").$$render($$result, {}, {}, {})}`;
+
+`;
 });
 export {
   Page as default

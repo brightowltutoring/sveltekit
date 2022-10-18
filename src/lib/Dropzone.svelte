@@ -10,9 +10,11 @@
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
-  export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[50vh]";
+  export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
   export let backgroundTW = "brightness-95 backdrop-blur-3xl";
   let dropzone;
+
+  $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
   onMount(() => {
     Dropzone.autoDiscover = false;
@@ -24,17 +26,16 @@
 </script>
 
 <!-- for some reason using tailwing for border styles isnt working -->
+<!-- style={`box-shadow: inset 0 -10px 10px ${boxShadowColor}; border-radius: 50px; border-color: transparent`} -->
 <form
   action={UPLOAD_ENDPOINT}
   method="post"
   id="default"
-  class="dropzone flex justify-center items-center overflow-scroll {backgroundTW} {textSizeTW} {dimensionsTW} mx-auto"
-  style="border-radius:50px; border-style:dotted; border-color:{$isDarkMode
-    ? 'white'
-    : 'black'}"
+  style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent"
+  class="dropzone flex justify-center items-center overflow-scroll {backgroundTW} {textSizeTW} {dimensionsTW} mx-auto "
 >
   <!-- dz-message is a dropzone defined class -->
-  <div class="dz-message font-Nunito " data-dz-message>
+  <div class="dz-message font-Nunito" data-dz-message>
     {#key clickText}
       <span
         in:scale={{ duration: 1000, easing: elasticOut }}
