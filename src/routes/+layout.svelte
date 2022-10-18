@@ -105,6 +105,7 @@
       text={"🔥"}
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[80vh]"}
+      brightnessTW={"brightness-95"}
     />
   </Modal>
 

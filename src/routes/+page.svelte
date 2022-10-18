@@ -67,10 +67,7 @@
     1. Upload your homework
   </p>
 
-  <!-- <Dropzone text={"🚀"} textSizeTW={"text-5xl"} /> -->
-  <!-- backgroundTW={" backdrop-blur-3xl"} -->
   <Dropzone textSizeTW={"text-2xl"} />
-  <!-- backgroundTW={"bg-purple-200 bg-opacity-20"} -->
 </div>
 
 <div id="step2" class="-z-50 mt-80 duration-500 ">

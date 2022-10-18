@@ -9,12 +9,13 @@ const css = {
   map: null
 };
 const Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let boxShadowColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   let { uniqueId = "default" } = $$props;
   let { text = "Drop it like it's \u{1F525}" } = $$props;
   let { textSizeTW = "text-3xl" } = $$props;
-  let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[50vh]" } = $$props;
+  let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
   let { backgroundTW = "brightness-95 backdrop-blur-3xl" } = $$props;
   if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
     $$bindings.uniqueId(uniqueId);
@@ -27,10 +28,12 @@ const Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) =
   if ($$props.backgroundTW === void 0 && $$bindings.backgroundTW && backgroundTW !== void 0)
     $$bindings.backgroundTW(backgroundTW);
   $$result.css.add(css);
+  boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
   $$unsubscribe_isDarkMode();
   return `
-<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" id="${"default"}" class="${"dropzone flex justify-center items-center overflow-scroll " + escape(backgroundTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto"}" style="${"border-radius:50px; border-style:dotted; border-color:" + escape($isDarkMode ? "white" : "black", true)}">
-  <div class="${"dz-message font-Nunito "}" data-dz-message><span class="${"block"}">${escape(text)}</span></div></form>
+
+<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll " + escape(backgroundTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto"}">
+  <div class="${"dz-message font-Nunito"}" data-dz-message><span class="${"block"}">${escape(text)}</span></div></form>
 
 
 

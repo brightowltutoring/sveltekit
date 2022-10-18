@@ -11,7 +11,7 @@
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
-  export let backgroundTW = "brightness-95 backdrop-blur-3xl";
+  export let brightnessTW = "brightness-100";
   let dropzone;
 
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
@@ -32,7 +32,7 @@
   method="post"
   id="default"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent"
-  class="dropzone flex justify-center items-center overflow-scroll {backgroundTW} {textSizeTW} {dimensionsTW} mx-auto "
+  class="dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto "
 >
   <!-- dz-message is a dropzone defined class -->
   <div class="dz-message font-Nunito" data-dz-message>
