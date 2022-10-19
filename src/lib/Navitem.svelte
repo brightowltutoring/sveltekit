@@ -41,6 +41,7 @@
       if (href !== "/login") {
         clearTimeout($redirectAfterLoginTimeOut);
         clearInterval($redirectSetInterval);
+        // these necessary, otherwise redirects when navigating away from login modal
       }
       if (href == "/homework") {
         $navHomeworkClicked = true;
@@ -59,10 +60,6 @@
       $navHomeworkClicked = false;
       clickOnNavLinks();
 
-      // without
-      // clearInterval($redirectSetInterval);
-      // clearTimeout($redirectAfterLoginTimeOut);
-
       // this janky solution allows for the embeded jitsu to load ... otherwise I had to
       //  manually reload the page and use "export const router = false" for the +page.js
 
@@ -70,9 +67,7 @@
         setTimeout(() => {
           location.reload();
           return;
-        }, 50);
-
-        // goto(href);
+        }, 100);
       }
       goto(href);
     }}
