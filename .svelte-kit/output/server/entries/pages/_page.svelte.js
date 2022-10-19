@@ -196,10 +196,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <div id="${"step1"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}">1. Upload your homework
   </p>
 
-  
-  
-  ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}
-  </div>
+  ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
 
 <div id="${"step2"}" class="${"-z-50 mt-80 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
   </p>

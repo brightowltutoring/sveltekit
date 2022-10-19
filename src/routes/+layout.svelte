@@ -6,6 +6,7 @@
   import Dropzone from "$lib/Dropzone.svelte";
   import LoginCard from "$lib/LoginCard.svelte";
   import Navbar from "$lib/Navbar.svelte";
+  import Footer from "$lib/Footer.svelte";
   import {
     instDeltaY,
     innerWidth,
@@ -124,5 +125,13 @@ Fixed containers  apparently hate having scrollable overflow elements inside.
   <!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->
   <div class="px-[7%] h-[100vh] pt-32 md:block">
     <slot />
+    <Footer />
   </div>
+
+  <!-- <div
+    class="md:py-4 py-1 md:px-[7%] z-50 fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
+  > -->
+  <!-- <div class="px-[7%] h-[100vh] pt-32 md:block">
+    <Footer />
+  </div> -->
 </main>

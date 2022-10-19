@@ -1,7 +1,7 @@
 <script>
   import PlansComponent from "$lib/PlansComponent.svelte";
 
-  import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
+  // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
   // import Testimonials from "$lib/Testimonials.svelte";
   import Dropzone from "$lib/Dropzone.svelte";
   import { isDarkMode } from "$lib/store.js";
@@ -9,6 +9,9 @@
   import { slide } from "svelte/transition";
   // import { quintOut } from "svelte/easing";
   import { onMount } from "svelte";
+  $: gradientTextColor = $isDarkMode
+    ? "bg-gradient-to-tr from-red-300 via-white to-white"
+    : "bg-gradient-to-tr from-indigo-700 to-black";
 
   let ready = false;
   onMount(() => {
@@ -34,68 +37,77 @@
   <SixMathEqnAnim />
 {/if} -->
 
-<div class="h-3/5 flex justify-center items-center text-center">
-  <div class="grid grid-rows-1">
-    {#if ready}
-      <div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4">
-        Math, Physics ... Online!
+<!-- grid incase i later want to reorganize "pages" responsively ... also footer kept interesecting with last page -->
+<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64 ">
+  <!-- main page -->
+  <div class="h-[70vh] flex justify-center items-center text-center">
+    <div class="grid grid-rows-1">
+      {#if ready}
+        <div in:slide={{ duration: 500 }} class="text-7xl font-Poppins pb-4 ">
+          <span class="text-transparent bg-clip-text {gradientTextColor}">
+            Math, Physics ... Online!
+          </span>
+        </div>
+      {/if}
+      <!-- <div class="text-6xl font-Poppins pb-4">We'll be back in October</div> -->
+      <div
+        class="text-lg font-Nunito "
+        on:click={() => {
+          document
+            .getElementById("reviews")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      >
+        👉 click for reviews
       </div>
-    {/if}
-    <!-- <div class="text-6xl font-Poppins pb-4">We'll be back in October</div> -->
-    <div
-      class="text-lg font-Nunito "
+    </div>
+  </div>
+
+  <!-- second page -->
+  <div id="step1" class="hover:scale-105 duration-500 ">
+    <p
+      class="text-5xl font-Poppins text-center pb-7 "
+      on:click={() => {
+        document
+          .getElementById("step2")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      }}
+    >
+      1. Upload your homework
+    </p>
+
+    <Dropzone textSizeTW={"text-2xl"} />
+  </div>
+
+  <!-- third page -->
+  <div id="step2" class="duration-500 ">
+    <p
+      class="text-5xl font-Poppins text-center pb-7"
       on:click={() => {
         document
           .getElementById("reviews")
           .scrollIntoView({ behavior: "smooth", block: "start" });
       }}
     >
-      👉 click for reviews
-    </div>
+      2. Schedule a Session
+    </p>
+
+    <PlansComponent />
   </div>
-</div>
 
-<div id="step1" class="-z-50 mt-80 hover:scale-105 duration-500 ">
-  <p
-    class="text-5xl font-Poppins text-center pb-7 "
-    on:click={() => {
-      document
-        .getElementById("step2")
-        .scrollIntoView({ behavior: "smooth", block: "start" });
-    }}
-  >
-    1. Upload your homework
-  </p>
-
-  <Dropzone textSizeTW={"text-2xl"} />
-</div>
-
-<div id="step2" class="-z-50 mt-80 duration-500 ">
-  <p
-    class="text-5xl font-Poppins text-center pb-7"
-    on:click={() => {
-      document
-        .getElementById("reviews")
-        .scrollIntoView({ behavior: "smooth", block: "start" });
-    }}
-  >
-    2. Schedule a Session
-  </p>
-
-  <PlansComponent />
-</div>
-
-<!-- <div id="reviews" class=" md:pb-40"> -->
-<div id="reviews" class="-z-50 mt-80 duration-500 ">
-  <p
-    class="text-5xl font-Poppins text-center "
-    on:click={() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }}
-  >
-    3. Do Some Reading 😎
-  </p>
-  <Reviews />
+  <!-- fourth page -->
+  <!-- <div id="reviews" class=" md:pb-40"> -->
+  <div id="reviews" class="mb-[200px] sm:mb-[500px]  duration-500 ">
+    <p
+      class="text-5xl font-Poppins text-center "
+      on:click={() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+    >
+      3. Do Some Reading 😎
+    </p>
+    <Reviews />
+  </div>
 </div>
 
 <!-- <Testimonials /> -->
