@@ -46,9 +46,9 @@
   let btnColorHover = "hover:bg-red-300";
 
   // rgba(0,0,0,0) is transparent
-  $: gradientColor = $isDarkMode
-    ? "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]"
-    : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
+  $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${
+    $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-100"
+  }`;
 </script>
 
 <logo-and-navbar
@@ -65,12 +65,11 @@
     </div>
   {/key}
 
-  <!-- class=" md:ml-24  p-1 {gradientColor} rounded-full sticky overflow-y-scroll hideScrollBar " -->
   <nav
-    class="md:ml-24 md:p-1 p-2  {gradientColor} rounded-xl hideScrollBar overflow-auto  "
+    class="md:ml-24 md:p-1 p-3 {bgGradientColor} rounded-md md:rounded-xl hideScrollBar overflow-auto  "
   >
     {#key unique}
-      <ul class="flex flex-row text-xl  items-center">
+      <ul class="flex flex-row text-xl items-center">
         <!-- {#each Object.keys($routes) as KEY} -->
         {#each Object.keys($routes).splice(0, 5) as KEY}
           <li

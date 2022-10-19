@@ -68,7 +68,7 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
   $$unsubscribe_isDarkMode();
   return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
-    return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+    return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}" class="${"hover:scale-150 duration-300"}">`;
   })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
@@ -181,8 +181,10 @@ const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   })}</div></div>`;
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let gradientTextColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
   return `<main class="${"overflow-x-hidden"}"><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video></main>
 
@@ -190,27 +192,25 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64 "}">
-  <div class="${"h-[70vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
+  <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
       
       <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
       </div></div></div>
 
   
-  <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}">1. Upload your homework
-    </p>
+  <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span${add_attribute("class", gradientTextColor, 0)}>1. Upload your homework </span></p>
 
     ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
 
   
-  <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
-    </p>
+  <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span${add_attribute("class", gradientTextColor, 0)}>2. Schedule a Session </span></p>
 
     ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
 
   
   
-  <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}">3. Do Some Reading \u{1F60E}
-    </p>
+  <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}"><span${add_attribute("class", gradientTextColor, 0)}>3. Do Some Reading </span><span>\u{1F60E}
+      </span></p>
     ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>
 
 

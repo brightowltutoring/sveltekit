@@ -64,7 +64,7 @@
       jankytown = "bottom-0 backdrop-blur-3xl ";
     if ($scrollY > 400 && $instDeltaY > 10)
       jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
-    if ($instDeltaY < -130)
+    if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
 </script>
