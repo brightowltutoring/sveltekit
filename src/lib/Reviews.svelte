@@ -1,5 +1,5 @@
 <script>
-  import ReviewCreator from "$lib/ReviewCreator.svx";
+  import ReviewCreator from "$lib/reviewCreator.svx";
   import { reviews } from "$lib/reviews.js";
 </script>
 
