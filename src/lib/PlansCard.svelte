@@ -55,7 +55,7 @@
         }}
         class=" {buttonColor[
           card
-        ]} {btnColorHover} {button.opacityTW}  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 m-1 group-hover:bg-opacity-80 text-xl text-white "
+        ]} {btnColorHover} {button.opacityTW}   hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white "
       >
         <slot name="buttonText">{button.text}</slot>
       </button>

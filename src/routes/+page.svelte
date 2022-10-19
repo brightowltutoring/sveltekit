@@ -9,9 +9,9 @@
   import { slide } from "svelte/transition";
   // import { quintOut } from "svelte/easing";
   import { onMount } from "svelte";
-  $: gradientTextColor = $isDarkMode
-    ? "bg-gradient-to-tr from-red-300 via-white to-white"
-    : "bg-gradient-to-tr from-indigo-700 to-black";
+  $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
+    $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
+  }`;
 
   let ready = false;
   onMount(() => {
@@ -40,13 +40,12 @@
 <!-- grid incase i later want to reorganize "pages" responsively ... also footer kept interesecting with last page -->
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64 ">
   <!-- main page -->
-  <div class="h-[70vh] flex justify-center items-center text-center">
+  <div class="h-[60vh] flex justify-center items-center text-center">
     <div class="grid grid-rows-1">
       {#if ready}
-        <div in:slide={{ duration: 500 }} class="text-7xl font-Poppins pb-4 ">
-          <span class="text-transparent bg-clip-text {gradientTextColor}">
-            Math, Physics ... Online!
-          </span>
+        <div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
+          Math, Physics
+          <span class={gradientTextColor}> ... Online! </span>
         </div>
       {/if}
       <!-- <div class="text-6xl font-Poppins pb-4">We'll be back in October</div> -->
@@ -73,7 +72,7 @@
           .scrollIntoView({ behavior: "smooth", block: "start" });
       }}
     >
-      1. Upload your homework
+      <span class={gradientTextColor}> 1. Upload your homework </span>
     </p>
 
     <Dropzone textSizeTW={"text-2xl"} />
@@ -89,7 +88,7 @@
           .scrollIntoView({ behavior: "smooth", block: "start" });
       }}
     >
-      2. Schedule a Session
+      <span class={gradientTextColor}> 2. Schedule a Session </span>
     </p>
 
     <PlansComponent />
@@ -104,7 +103,9 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       }}
     >
-      3. Do Some Reading 😎
+      <span class={gradientTextColor}> 3. Do Some Reading </span><span
+        >😎
+      </span>
     </p>
     <Reviews />
   </div>

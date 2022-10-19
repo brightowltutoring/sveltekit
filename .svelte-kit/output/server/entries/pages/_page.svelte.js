@@ -47,7 +47,7 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
   })}
 </div>`;
 });
-const ReviewCreator_svx_svelte_type_style_lang = "";
+const reviewCreator_svx_svelte_type_style_lang = "";
 const css = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
   map: null

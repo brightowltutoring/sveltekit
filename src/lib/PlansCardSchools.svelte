@@ -41,7 +41,7 @@
       }}
       class=" {buttonColor[
         card
-      ]} {btnColorHover}  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+      ]} {btnColorHover}  hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-80'
         : 'group-hover:bg-opacity-80'} text-xl text-white "
     >
