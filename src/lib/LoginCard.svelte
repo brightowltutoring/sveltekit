@@ -1,4 +1,6 @@
 <script>
+  import { page } from "$app/stores";
+  // importing page to try to fix the redirect from screenshare route with loginToRedirectUrl
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { scale } from "svelte/transition";
@@ -11,21 +13,23 @@
     elementColor,
     navLoginClicked,
   } from "$lib/store.js";
+  import {
+    GoogleLogin,
+    logoutFunction,
+    regexEmailChecker,
+    magicLinkToEmail,
+  } from "$lib/loginFunctions.js";
   import { db, auth } from "$lib/firebase.js";
   import { collection, getDocs } from "firebase/firestore/lite";
   import {
     onAuthStateChanged,
-    GoogleAuthProvider,
-    signOut,
-    signInWithPopup,
-    sendSignInLinkToEmail,
+    // sendSignInLinkToEmail,
     isSignInWithEmailLink,
     signInWithEmailLink,
   } from "firebase/auth";
 
   let emailFieldValue = "";
-
-  $: isEmail = false; // this global variable is updated with regex to verify email input
+  let isEmail = false; // this global variable is updated with regex to verify email input
 
   // Allows to convert infinite 'animate-ping' tailwind animation to short animation;
   // logic in 'signinWithLinkAndStop' function. Normally would do this with svelte and keyed block,
@@ -33,6 +37,7 @@
   let emptyEmailInputAnimated;
   let magicLinkSent = false;
   $: shortPing = !magicLinkSent && emptyEmailInputAnimated && "animate-ping";
+  let loggedInEmail;
 
   //  onmount
   onMount(() => {
@@ -49,14 +54,6 @@
     passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop);
     emailField.addEventListener("keydown", signinWithLinkAndStop);
 
-    // passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop, {
-    //   once: true,
-    // });
-    // emailField.addEventListener("keydown", signinWithLinkAndStop, {
-    //   once: true,
-    // });
-
-    // TODO: previpously missing login code for passwordless login
     // Confirm the link is a sign-in with email link.
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem("emailForSignIn");
@@ -68,20 +65,17 @@
         .catch((error) => console.log(error));
       /* Clear email from storage or throw error.*/
     }
-    // TODO: previpously missing login code for passwordless login
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
         $isLoggedIn = true;
+        loggedInEmail = user.email;
+        // get the loggedInEmail IF user is authenticated; outside logic determines redirect when login nav item clicked
 
-        console.log(`User is signed in!`);
-
-        loginToRedirectUrl(user.email);
+        console.log(`User is signed in! YEET`);
 
         logInDiv.style.display = "none";
         logOutDiv.style.display = "block";
-        // logInDiv.style.display = "none";
-        // logOutDiv.style.display = "block";
 
         loginWelcomeText.innerText = user.displayName
           ? `Hey ${user.displayName}!`
@@ -89,6 +83,8 @@
       } else {
         $isLoggedIn = false;
         $navLoginClicked = false;
+        loggedInEmail = "";
+
         console.log(`User is NOT signed in`);
         logInDiv.style.display = "block";
         logOutDiv.style.display = "none";
@@ -97,7 +93,12 @@
   });
   //   onmount
 
+  $: if ($navLoginClicked) {
+    loginToRedirectUrl(loggedInEmail);
+    // loginToRedirectUrl(user.email);
+  }
   //  Hoisted Functions
+
   function onInputEmailField(EMAIL) {
     isEmail = regexEmailChecker(EMAIL);
     if (EMAIL == "") {
@@ -115,93 +116,14 @@
     }
   }
 
-  function GoogleLogin() {
-    const provider = new GoogleAuthProvider();
-
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
-  }
-
-  function loginViaPasswordlessEmail() {
-    // let email = emailField.value;
-    let email = emailFieldValue;
-
-    // if (isEmail) {
-    if (regexEmailChecker(email)) {
-      console.log("loginViaPasswordlessEmail", email);
-
-      //TODO: where to put this
-      emailStatusMessage.style.display = "block";
-      // flyingEmoji.style.display = "block";
-
-      emailStatusMessage.innerHTML = `
-                  <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
-                      Link sent to email 🚀
-                  </div>
-                  `;
-      const actionCodeSettings = {
-        // url: "https://brightowltutoring.com/login",
-        url: "https://thinksolve.io/login",
-        handleCodeInApp: true,
-      };
-
-      // this doesnt break on production build
-      sendSignInLinkToEmail(auth, email, actionCodeSettings)
-        .then(() => {
-          // The link was successfully sent. Inform the user.
-          // Save the email locally so you don't need to ask the user for it again
-          // if they open the link on the same device.
-          window.localStorage.setItem("emailForSignIn", email);
-          console.log("success with sendSignInLinkToEmail!");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log("errorCode", errorCode);
-          console.log("errorMessage", errorMessage);
-          // console.log("error with sendSignInLinkToEmail");
-          // ...
-        });
-    }
-  }
-
-  function logoutFunction() {
-    // firebase signing out
-    signOut(auth)
-      .then(() => {
-        console.log("logged out");
-        goto("/");
-
-        // window.location.replace("/")
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log("FAILED firebase signOut function");
-      });
-  }
-
   async function loginToRedirectUrl(userEmail) {
-    const colRef = collection(db, "email");
-    const querySnapshot = await getDocs(colRef);
+    // const colRef = collection(db, "email");
+    const querySnapshot = await getDocs(collection(db, "email"));
     querySnapshot.forEach((doc) => {
       if (userEmail === doc.id) {
-        let timeInMS = 3000;
-        let seconds = parseInt(timeInMS / 1000); // i.e. 3
+        // TODO: maybe make this global
+        let redirectTimeInMS = 3000;
+        let seconds = parseInt(redirectTimeInMS / 1000); // i.e. 3
         // let userRedirectUrl =  doc.data().redirectUrl; /TODO: change this later in firebase
         let userRedirectUrl = "/";
 
@@ -211,9 +133,7 @@
         $redirectSetInterval = setInterval(() => {
           if (seconds > 0) {
             seconds += -1;
-            document.getElementById(
-              "redirectMessage"
-            ).innerHTML = ` ${seconds}`;
+            document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
           }
         }, 1000);
 
@@ -222,15 +142,13 @@
           //   $navLoginClicked = false;
           goto(userRedirectUrl);
           $navLoginClicked = false;
-        }, timeInMS);
+        }, redirectTimeInMS);
       }
     });
   }
-  //emd
 
   function signinWithLinkAndStop(e) {
     if ((e.type == "click" || e.key == "Enter") && emailFieldValue == "") {
-      // console.log("testy");
       emptyEmailInputAnimated = true;
       setTimeout(
         () => (emptyEmailInputAnimated = !emptyEmailInputAnimated),
@@ -238,10 +156,17 @@
       );
     }
     if ((e.type == "click" || e.key == "Enter") && isEmail) {
-      loginViaPasswordlessEmail();
+      magicLinkToEmail(emailFieldValue);
       magicLinkSent = true;
-
       emailFieldValue = "";
+
+      emailStatusMessage.style.display = "block";
+
+      emailStatusMessage.innerHTML = `
+                  <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
+                      Link sent to email 🚀
+                  </div>
+                  `;
 
       emailField.style.opacity = "0.5";
       emailField.style.pointerEvents = "none";
@@ -251,21 +176,17 @@
     }
   }
 
-  function regexEmailChecker(EMAIL) {
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
-  }
-
   //  Hoisted functions
 </script>
 
 <card
   class="hover:scale-[102%] font-Poppins shadow-md {$isDarkMode
     ? 'hover:shadow-xl '
-    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl  mx-auto w-1/3 min-w-fit  p-10 m-1 text-center duration-300 group"
+    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto  min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300 group"
   style={`background:${$elementColor}`}
 >
-  <p class="text-5xl pb-10">Login</p>
-  <div class="logInDiv">
+  <!-- <p class="text-5xl pb-10">Login</p> -->
+  <div class="logInDiv p-5">
     <div
       on:click={GoogleLogin}
       in:scale={{ duration: 600, easing: elasticOut }}
@@ -336,8 +257,10 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
 
   <div class="logOutDiv" style="display:none">
     <p id="loginWelcomeText">Welcome User</p>
-    <p>Redirecting to your page in</p>
-    <p style="font-size: 30px;" id="redirectMessage">⌊π⌋</p>
+    <div id="redirectMessage">
+      Redirecting to your page in
+      <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
+    </div>
     <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
   </div>
 </card>

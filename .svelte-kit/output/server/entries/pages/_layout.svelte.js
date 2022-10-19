@@ -2,8 +2,8 @@ import { c as create_ssr_component, e as escape, a as subscribe, d as add_attrib
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { n as navLoginClicked, r as redirectAfterLoginTimeOut, a as redirectSetInterval, i as isLoggedIn, b as isDarkMode, e as elementColor, c as navHomeworkClicked, d as routes, s as scrollY, f as instDeltaY, l as lessThan768, w as windowInnerHeight, g as scrollYMax, h as innerWidth } from "../../chunks/store.js";
 import "../../chunks/firebase.js";
-import "firebase/firestore/lite";
 import "firebase/auth";
+import "firebase/firestore/lite";
 import { w as writable } from "../../chunks/index2.js";
 import "../../chunks/private.js";
 import "dropzone";
@@ -43,8 +43,8 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_isDarkMode();
   $$unsubscribe_elementColor();
-  return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto w-1/3 min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-5xl pb-10"}">Login</p>
-  <div class="${"logInDiv"}"><div class="${"bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+  return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
+  <div class="${"logInDiv p-5"}"><div class="${"bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
     true
   ) + " text-xl text-white"}">
@@ -68,8 +68,8 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     <span id="${"emailStatusMessage"}"></span></div>
 
   <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
-    <p>Redirecting to your page in</p>
-    <p style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</p>
+    <div id="${"redirectMessage"}">Redirecting to your page in
+      <div style="${"font-size: 30px;"}" id="${"timeLeft"}">\u230A\u03C0\u230B</div></div>
     <button id="${"logoutBtn"}">Logout</button></div></card>`;
 });
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -122,15 +122,15 @@ function removed_session() {
 }
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
-  let $$unsubscribe_navHomeworkClicked;
-  let $$unsubscribe_navLoginClicked;
   let $$unsubscribe_redirectAfterLoginTimeOut;
   let $$unsubscribe_redirectSetInterval;
+  let $$unsubscribe_navHomeworkClicked;
+  let $$unsubscribe_navLoginClicked;
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
-  $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
   $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
   $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
+  $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
+  $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
   let { href, content, bool, btnColor, btnColorHover, routes: routes2 } = $$props;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0)
     $$bindings.href(href);
@@ -150,11 +150,11 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
   }
   $$unsubscribe_page();
-  $$unsubscribe_navHomeworkClicked();
-  $$unsubscribe_navLoginClicked();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_redirectSetInterval();
-  return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
+  $$unsubscribe_navHomeworkClicked();
+  $$unsubscribe_navLoginClicked();
+  return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
 });
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
@@ -254,7 +254,7 @@ function spring(value, opts = {}) {
   return spring2;
 }
 const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let gradientColor;
+  let bgGradientColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $routes, $$unsubscribe_routes;
   let $$unsubscribe_navHomeworkClicked;
@@ -286,12 +286,11 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {
       $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
     }
-    gradientColor = $isDarkMode ? "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]" : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
+    bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${$isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-100"}`;
     $$rendered = `<logo-and-navbar class="${"flex items-center justify-center md:justify-between gap-x-24"}"><div class="${"md:translate-y-[0.5rem] md:translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
-  
-  <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
+  <nav class="${"md:ml-24 md:p-1 p-3 " + escape(bgGradientColor, true) + " rounded-md md:rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
         ${each(Object.keys($routes).splice(0, 5), (KEY) => {
       return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
@@ -338,7 +337,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return $$rendered;
 });
 const Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="${"flex justify-center items-center"}"><span class="${"py-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
+  return `<div class="${"flex justify-center items-center "}"><span class="${"my-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
   </span></div>`;
 });
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -394,7 +393,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "bottom-0 backdrop-blur-3xl ";
         if ($scrollY > 400 && $instDeltaY > 10)
           jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
-        if ($instDeltaY < -130)
+        if ($instDeltaY < -30)
           jankytown = "bottom-0 backdrop-blur-3xl duration-700";
       }
     }

@@ -171,7 +171,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css10) => css10.code).join("\n"),
+          code: Array.from(result.css).map((css9) => css9.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -9267,8 +9267,8 @@ var init_layout_svelte = __esm({
     init_Dropzone();
     init_store();
     init_firebase();
-    init_index_esm4();
     init_index_esm3();
+    init_index_esm4();
     init_index2();
     init_private();
     init_dropzone();
@@ -9307,8 +9307,8 @@ var init_layout_svelte = __esm({
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
-      return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto w-1/3 min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-5xl pb-10"}">Login</p>
-  <div class="${"logInDiv"}"><div class="${"bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+      return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
+  <div class="${"logInDiv p-5"}"><div class="${"bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
         true
       ) + " text-xl text-white"}">
@@ -9332,8 +9332,8 @@ var init_layout_svelte = __esm({
     <span id="${"emailStatusMessage"}"></span></div>
 
   <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
-    <p>Redirecting to your page in</p>
-    <p style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</p>
+    <div id="${"redirectMessage"}">Redirecting to your page in
+      <div style="${"font-size: 30px;"}" id="${"timeLeft"}">\u230A\u03C0\u230B</div></div>
     <button id="${"logoutBtn"}">Logout</button></div></card>`;
     });
     LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -9381,15 +9381,15 @@ var init_layout_svelte = __esm({
     };
     Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $page, $$unsubscribe_page;
-      let $$unsubscribe_navHomeworkClicked;
-      let $$unsubscribe_navLoginClicked;
       let $$unsubscribe_redirectAfterLoginTimeOut;
       let $$unsubscribe_redirectSetInterval;
+      let $$unsubscribe_navHomeworkClicked;
+      let $$unsubscribe_navLoginClicked;
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
-      $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
+      $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
+      $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
       let { href, content, bool, btnColor, btnColorHover, routes: routes2 } = $$props;
       if ($$props.href === void 0 && $$bindings.href && href !== void 0)
         $$bindings.href(href);
@@ -9409,14 +9409,14 @@ var init_layout_svelte = __esm({
         }
       }
       $$unsubscribe_page();
-      $$unsubscribe_navHomeworkClicked();
-      $$unsubscribe_navLoginClicked();
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
-      return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:px-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
+      $$unsubscribe_navHomeworkClicked();
+      $$unsubscribe_navLoginClicked();
+      return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let gradientColor;
+      let bgGradientColor;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       let $routes, $$unsubscribe_routes;
       let $$unsubscribe_navHomeworkClicked;
@@ -9448,12 +9448,11 @@ var init_layout_svelte = __esm({
         {
           $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
         }
-        gradientColor = $isDarkMode ? "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgb(37,35,91)]" : "bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-100";
+        bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${$isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-100"}`;
         $$rendered = `<logo-and-navbar class="${"flex items-center justify-center md:justify-between gap-x-24"}"><div class="${"md:translate-y-[0.5rem] md:translate-x-3 hidden md:block text-xl font-Poppins font-semibold md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
-  
-  <nav class="${"md:ml-24 md:p-1 p-2 " + escape(gradientColor, true) + " rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
+  <nav class="${"md:ml-24 md:p-1 p-3 " + escape(bgGradientColor, true) + " rounded-md md:rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
         ${each(Object.keys($routes).splice(0, 5), (KEY) => {
           return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
             $$result,
@@ -9500,7 +9499,7 @@ var init_layout_svelte = __esm({
       return $$rendered;
     });
     Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<div class="${"flex justify-center items-center"}"><span class="${"py-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
+      return `<div class="${"flex justify-center items-center "}"><span class="${"my-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
   </span></div>`;
     });
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -9556,7 +9555,7 @@ var init_layout_svelte = __esm({
               jankytown = "bottom-0 backdrop-blur-3xl ";
             if ($scrollY > 400 && $instDeltaY > 10)
               jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
-            if ($instDeltaY < -130)
+            if ($instDeltaY < -30)
               jankytown = "bottom-0 backdrop-blur-3xl duration-700";
           }
         }
@@ -9656,9 +9655,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-4777a117.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-4777a117.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-523fceb5.js", "_app/immutable/chunks/singletons-077c0410.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
-    stylesheets = ["_app/immutable/assets/+layout-9fb07f19.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-b284816f.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-b284816f.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-e1427720.js", "_app/immutable/chunks/singletons-53810b47.js", "_app/immutable/chunks/firebase-eba0fe8a.js"];
+    stylesheets = ["_app/immutable/assets/+layout-fb0a1103.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
 
@@ -10027,7 +10026,7 @@ var init_page_svelte = __esm({
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64 "}">
   <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
       
-      <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
+      <div class="${"text-2xl font-Nunito "}">\u{1F449} click for reviews
       </div></div></div>
 
   
@@ -10070,8 +10069,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-a5fc0f41.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-a5fc0f41.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-3841fef2.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-4900f6fd.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-4900f6fd.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-3841fef2.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js"];
     stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
@@ -24001,54 +24000,12 @@ var page_svelte_exports5 = {};
 __export(page_svelte_exports5, {
   default: () => Page6
 });
-var css5, Page6;
+var Page6;
 var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
-    init_store();
-    init_firebase();
-    init_index_esm4();
-    init_index_esm3();
-    init_index2();
-    init_private();
-    init_index_esm2();
-    init_index_esm5();
-    css5 = {
-      code: '#flyingEmoji.svelte-1lkingg.svelte-1lkingg{display:flex;justify-content:center;align-items:center;-webkit-animation:svelte-1lkingg-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);animation:svelte-1lkingg-xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1)}#flyingEmoji.svelte-1lkingg.svelte-1lkingg::after{content:"\u{1F6F8}";display:block;width:1px;height:1px;border-radius:20px;-webkit-animation:svelte-1lkingg-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);animation:svelte-1lkingg-yAxis 3s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64)}@-webkit-keyframes svelte-1lkingg-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@keyframes svelte-1lkingg-yAxis{80%{-webkit-animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);animation-timing-function:cubic-bezier(0.02, 0.01, 0.21, 1);transform:translateY(-100px) rotate(360deg) scale(2)}}@-webkit-keyframes svelte-1lkingg-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@keyframes svelte-1lkingg-xAxis{20%{-webkit-animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);animation-timing-function:cubic-bezier(0.3, 0.27, 0.07, 1.64);transform:translateX(200px)}}@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");:root{--transition-effect:ease-in fadeIn 0.6s}@-webkit-keyframes svelte-1lkingg-fadeIn{from{opacity:0}to{opacity:1}}@keyframes svelte-1lkingg-fadeIn{from{opacity:0}to{opacity:1}}#logInDiv.svelte-1lkingg.svelte-1lkingg{animation:var(--transition-effect);-moz-animation:var(--transition-effect);-o-animation:var(--transition-effect);-ms-animation:var(--transition-effect);-webkit-animation:var(--transition-effect)}.loginLogoutDivs.svelte-1lkingg.svelte-1lkingg{margin:0px auto;width:80vw;max-width:380px;padding:20px;font-family:"Nunito", sans-serif;font-weight:400}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg,button.svelte-1lkingg.svelte-1lkingg{box-sizing:border-box;width:100%;border-radius:2px;padding:15px;outline:none;margin-bottom:15px;font-family:"Nunito", sans-serif;font-weight:400;font-size:16px;transition:0.15s;-moz-transition:0.15s;-webkit-transition:0.15s}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg{background:#fff;border:1px solid #ccc}#googleBtn.svelte-1lkingg.svelte-1lkingg{background:#4285f4;border:1px solid #4285f4}#googleBtn.svelte-1lkingg.svelte-1lkingg:hover{color:#4285f4;background:#fff;border:1px solid #4285f4}.loginLogoutDivs.svelte-1lkingg button.svelte-1lkingg{background:black;color:#fff;border:1px solid black}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg:hover{border:1px solid #999}.loginLogoutDivs.svelte-1lkingg button.svelte-1lkingg:hover{color:black;background:#fff;border:1px solid black}.loginLogoutDivs.svelte-1lkingg input.svelte-1lkingg:focus{background:rgba(255, 255, 255, 0.5)}.centering.svelte-1lkingg.svelte-1lkingg{display:flex;justify-content:center;align-items:center}',
-      map: null
-    };
     Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $$unsubscribe_redirectAfterLoginTimeOut;
-      let $$unsubscribe_redirectSetInterval;
-      let $$unsubscribe_isLoggedIn;
-      $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
-      $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
-      $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
-      let emailFieldValue = "";
-      $$result.css.add(css5);
-      $$unsubscribe_redirectAfterLoginTimeOut();
-      $$unsubscribe_redirectSetInterval();
-      $$unsubscribe_isLoggedIn();
-      return `<main><div class="${"loginLogoutDivs  svelte-1lkingg"}" id="${"logInDiv"}" style="${"display: block; "}"><br>
-    <br>
-
-    <button id="${"googleBtn"}" class="${"svelte-1lkingg"}">Sign-in with Google</button>
-    <br>
-    <br>
-
-    <button id="${"passwordlessLoginBtn"}" class="${"svelte-1lkingg"}">Sign-in via link</button>
-
-    <input id="${"emailField"}" type="${"email"}" placeholder="${"email"}" class="${"svelte-1lkingg"}"${add_attribute("value", emailFieldValue, 0)}>
-
-    <span id="${"emailStatusMessage"}" class="${"centering  svelte-1lkingg"}" style="${"display:none"}"></span>
-    <span id="${"flyingEmoji"}" style="${"display:none"}" class="${"svelte-1lkingg"}"></span></div>
-
-  <div class="${"loginLogoutDivs svelte-1lkingg"}" id="${"logOutDiv"}" style="${"display: none"}"><h2 class="${"centering svelte-1lkingg"}" id="${"loginWelcomeText"}">Welcome User</h2>
-    <h3 class="${"centering svelte-1lkingg"}">Redirecting to your page in</h3>
-    <h3 class="${"centering svelte-1lkingg"}" style="${"font-size: 30px;"}" id="${"redirectMessage"}">\u230A\u03C0\u230B</h3>
-
-    <button id="${"logoutBtn"}" class="${"svelte-1lkingg"}">Logout</button></div>
-</main>`;
+      return ``;
     });
   }
 });
@@ -24067,9 +24024,9 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/login/_page.svelte-a8400c0b.js";
-    imports8 = ["_app/immutable/components/pages/login/_page.svelte-a8400c0b.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-523fceb5.js", "_app/immutable/chunks/singletons-077c0410.js"];
-    stylesheets8 = ["_app/immutable/assets/+page-a3246318.css"];
+    file8 = "_app/immutable/components/pages/login/_page.svelte-53d51fc7.js";
+    imports8 = ["_app/immutable/components/pages/login/_page.svelte-53d51fc7.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    stylesheets8 = [];
   }
 });
 
@@ -24327,7 +24284,7 @@ var page_svelte_exports6 = {};
 __export(page_svelte_exports6, {
   default: () => Page9
 });
-var css6, E_and_m, Page9;
+var css5, E_and_m, Page9;
 var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
@@ -24335,12 +24292,12 @@ var init_page_svelte6 = __esm({
     init_store();
     init_katex();
     init_index2();
-    css6 = {
+    css5 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css6);
+      $$result.css.add(css5);
       return `${validate_component(Kajax, "MathRenderer").$$render($$result, {}, {}, {})}
 
 
@@ -24448,7 +24405,7 @@ var page_svelte_exports7 = {};
 __export(page_svelte_exports7, {
   default: () => Page10
 });
-var css7, Page10;
+var css6, Page10;
 var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
@@ -24456,12 +24413,12 @@ var init_page_svelte7 = __esm({
     init_plansCardArray();
     init_store();
     init_index2();
-    css7 = {
+    css6 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
     Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css7);
+      $$result.css.add(css6);
       return `<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
         return `<div>${validate_component(PlansCard, "PlansCard").$$render(
           $$result,
@@ -24562,14 +24519,14 @@ var page_svelte_exports8 = {};
 __export(page_svelte_exports8, {
   default: () => Page12
 });
-var css8, PlansCardSchools, Page12;
+var css7, PlansCardSchools, Page12;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
     init_plansCardArray();
     init_store();
     init_index2();
-    css8 = {
+    css7 = {
       code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
@@ -24592,7 +24549,7 @@ var init_page_svelte8 = __esm({
         $$bindings.btnColorHover(btnColorHover);
       if ($$props.card === void 0 && $$bindings.card && card !== void 0)
         $$bindings.card(card);
-      $$result.css.add(css8);
+      $$result.css.add(css7);
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
@@ -24718,8 +24675,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-346de16c.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-346de16c.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-523fceb5.js", "_app/immutable/chunks/singletons-077c0410.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-602f8838.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-602f8838.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-e1427720.js", "_app/immutable/chunks/singletons-53810b47.js"];
     stylesheets15 = [];
   }
 });
@@ -24770,8 +24727,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-38c479e4.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-38c479e4.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-523fceb5.js", "_app/immutable/chunks/singletons-077c0410.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-656bb3e6.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-656bb3e6.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-e1427720.js", "_app/immutable/chunks/singletons-53810b47.js"];
     stylesheets16 = [];
   }
 });
@@ -24781,7 +24738,7 @@ var page_svelte_exports11 = {};
 __export(page_svelte_exports11, {
   default: () => Page15
 });
-var css9, Page15;
+var css8, Page15;
 var init_page_svelte11 = __esm({
   ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
     init_chunks();
@@ -24791,12 +24748,12 @@ var init_page_svelte11 = __esm({
     init_index_esm3();
     init_index_esm4();
     init_index_esm5();
-    css9 = {
+    css8 = {
       code: '.loading.svelte-x181g1:after{content:" . . .";-webkit-animation:svelte-x181g1-dots 1s steps(5, end) infinite;animation:svelte-x181g1-dots 1s steps(5, end) infinite}@-webkit-keyframes svelte-x181g1-dots{0%,40%{color:rgba(0, 0, 0, 0)}}@keyframes svelte-x181g1-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
       map: null
     };
     Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css9);
+      $$result.css.add(css8);
       return `
 
 
@@ -24829,8 +24786,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-e09c747e.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-e09c747e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-080c6b5c.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-080c6b5c.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/firebase-eba0fe8a.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/index-0fa359d1.js"];
     stylesheets17 = ["_app/immutable/assets/+page-8ee437b0.css"];
   }
 });
@@ -26951,7 +26908,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-4a072607.js", "imports": ["_app/immutable/start-4a072607.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-077c0410.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-521e3392.js", "imports": ["_app/immutable/start-521e3392.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-53810b47.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

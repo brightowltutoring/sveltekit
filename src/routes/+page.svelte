@@ -50,7 +50,7 @@
       {/if}
       <!-- <div class="text-6xl font-Poppins pb-4">We'll be back in October</div> -->
       <div
-        class="text-lg font-Nunito "
+        class="text-2xl font-Nunito "
         on:click={() => {
           document
             .getElementById("reviews")

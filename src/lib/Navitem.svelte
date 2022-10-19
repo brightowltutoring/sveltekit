@@ -1,12 +1,15 @@
 <script>
-  import { isDarkMode, navLoginClicked, navHomeworkClicked } from "./store.js";
+  import {
+    isDarkMode,
+    navLoginClicked,
+    navHomeworkClicked,
+    redirectSetInterval,
+    redirectAfterLoginTimeOut,
+  } from "./store.js";
   import { slide } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { page } from "$app/stores";
-  import {
-    redirectAfterLoginTimeOut,
-    redirectSetInterval,
-  } from "$lib/store.js";
+
   import { goto, prefetch } from "$app/navigation";
 
   export let href, content, bool, btnColor, btnColorHover, routes;
@@ -35,30 +38,43 @@
       `${btnColor} border-b-1 rounded px-3 py-1`} flex justify-center px-2 mx-1 font-Nunito md:text-xl text-2xl selection:bg-transparent {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg"
     in:slide={{ duration: 800, easing: elasticOut }}
     on:click={() => {
+      if (href !== "/login") {
+        clearTimeout($redirectAfterLoginTimeOut);
+        clearInterval($redirectSetInterval);
+      }
       if (href == "/homework") {
         $navHomeworkClicked = true;
         $navLoginClicked = false;
-      } else if (href == "/login") {
+        return;
+      }
+      if (href == "/login") {
         $navLoginClicked = true;
         $navHomeworkClicked = false;
-      } else {
-        $navLoginClicked = false;
-        $navHomeworkClicked = false;
-        clickOnNavLinks();
         clearTimeout($redirectAfterLoginTimeOut);
         clearInterval($redirectSetInterval);
-        // prefetch(href)
-        goto(href);
-
-        // this janky solution allows for the embeded jitsu to load ... otherwise I had to
-        //  manually reload the page and use "export const router = false" for the +page.js
-
-        if (href == "/screenshare") {
-          setTimeout(() => {
-            location.reload();
-          }, 50);
-        }
+        // goto(href);
+        return;
       }
+      $navLoginClicked = false;
+      $navHomeworkClicked = false;
+      clickOnNavLinks();
+
+      // without
+      // clearInterval($redirectSetInterval);
+      // clearTimeout($redirectAfterLoginTimeOut);
+
+      // this janky solution allows for the embeded jitsu to load ... otherwise I had to
+      //  manually reload the page and use "export const router = false" for the +page.js
+
+      if (href == "/screenshare") {
+        setTimeout(() => {
+          location.reload();
+          return;
+        }, 50);
+
+        // goto(href);
+      }
+      goto(href);
     }}
   >
     {content}

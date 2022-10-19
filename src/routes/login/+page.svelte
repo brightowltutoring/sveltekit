@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import {
     redirectAfterLoginTimeOut,
     redirectSetInterval,
@@ -402,4 +402,4 @@
     justify-content: center;
     align-items: center;
   }
-</style>
+</style> -->

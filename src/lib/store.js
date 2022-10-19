@@ -181,6 +181,7 @@ export const isDarkMode = writable(false);
 
 export const redirectAfterLoginTimeOut = writable("");
 export const redirectSetInterval = writable("");
+
 // maybe incorporate $navLoginClicked = false;
 
 export const light = "#f7f7f7";
