@@ -37,5 +37,18 @@
     "mdsvex": "^0.10.6",
     "rehype-katex-svelte": "^1.1.2",
     "svelte-katex": "^0.1.2"
-  }
+  },
+  "description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
+  "main": "mdsvex.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brightowltutoring/sveltekit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brightowltutoring/sveltekit/issues"
+  },
+  "homepage": "https://github.com/brightowltutoring/sveltekit#readme"
 }
