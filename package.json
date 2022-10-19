@@ -30,6 +30,7 @@
   },
   "type": "module",
   "dependencies": {
+    "cacache": "^17.0.1",
     "dropzone": "^6.0.0-beta.2",
     "firebase": "^9.9.3",
     "katex": "^0.16.2",
