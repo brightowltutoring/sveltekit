@@ -64,6 +64,7 @@
       //  manually reload the page and use "export const router = false" for the +page.js
 
       if (href == "/screenshare") {
+        goto(href);
         setTimeout(() => {
           location.reload();
           return;
