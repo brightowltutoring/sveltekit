@@ -337,6 +337,10 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
+const Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<div class="${"flex justify-center items-center"}"><span class="${"py-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
+  </span></div>`;
+});
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
@@ -452,7 +456,11 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
   
-  <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div></main>`;
+  <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}
+    ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}</div>
+
+  
+  </main>`;
   } while (!$$settled);
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();

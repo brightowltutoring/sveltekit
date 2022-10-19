@@ -1,12 +1,11 @@
 import { c as create_ssr_component, j as each, v as validate_component, e as escape, d as add_attribute, a as subscribe } from "../../chunks/index.js";
 import { P as PlansCard } from "../../chunks/PlansCard.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
-import "katex";
-import { b as isDarkMode } from "../../chunks/store.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import "../../chunks/index2.js";
+import { b as isDarkMode } from "../../chunks/store.js";
 import "../../chunks/private.js";
 import "dropzone";
+import "../../chunks/index2.js";
 const PlansComponent_svelte_svelte_type_style_lang = "";
 const css$1 = {
   code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
@@ -48,7 +47,7 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
   })}
 </div>`;
 });
-const reviewCreator_svx_svelte_type_style_lang = "";
+const ReviewCreator_svx_svelte_type_style_lang = "";
 const css = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
   map: null
@@ -67,7 +66,7 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
     $$bindings.date(date);
   $$result.css.add(css);
   $$unsubscribe_isDarkMode();
-  return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true)}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
+  return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
     return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
   })}</div>
@@ -170,8 +169,9 @@ const reviews = [
 const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 
-<div class="${"scale-90"}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name, title, date, body }) => {
+<div class="${"scale-90 "}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name, title, date, body }) => {
     return `
+
       ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
       default: () => {
         return `${escape(body)}
@@ -188,25 +188,30 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<div class="${"h-3/5 flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
-    
-    <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
-    </div></div></div>
 
-<div id="${"step1"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}">1. Upload your homework
-  </p>
+<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64 "}">
+  <div class="${"h-[70vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
+      
+      <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
+      </div></div></div>
 
-  ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
+  
+  <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}">1. Upload your homework
+    </p>
 
-<div id="${"step2"}" class="${"-z-50 mt-80 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
-  </p>
+    ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
 
-  ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
+  
+  <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
+    </p>
 
+    ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
 
-<div id="${"reviews"}" class="${"-z-50 mt-80 duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}">3. Do Some Reading \u{1F60E}
-  </p>
-  ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
+  
+  
+  <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}">3. Do Some Reading \u{1F60E}
+    </p>
+    ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>
 
 
 

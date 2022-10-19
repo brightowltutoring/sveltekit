@@ -9260,7 +9260,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, LoginCard, LightDarkMode, getStores, page, Navitem, Navbar, Layout;
+var Modal, LoginCard, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -9499,6 +9499,10 @@ var init_layout_svelte = __esm({
       $$unsubscribe_scaleRocket();
       return $$rendered;
     });
+    Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `<div class="${"flex justify-center items-center"}"><span class="${"py-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
+  </span></div>`;
+    });
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $instDeltaY, $$unsubscribe_instDeltaY;
       let $scrollY, $$unsubscribe_scrollY;
@@ -9614,7 +9618,11 @@ var init_layout_svelte = __esm({
   <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
   
-  <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}</div></main>`;
+  <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}
+    ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}</div>
+
+  
+  </main>`;
       } while (!$$settled);
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
@@ -9648,9 +9656,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-b352a0e4.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-b352a0e4.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-96eeaa52.js", "_app/immutable/chunks/singletons-1b9a4b15.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
-    stylesheets = ["_app/immutable/assets/+layout-270121f5.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-33e78e16.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-33e78e16.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-88e7ef84.js", "_app/immutable/chunks/singletons-619413a0.js", "_app/immutable/chunks/firebase-b06eb9de.js"];
+    stylesheets = ["_app/immutable/assets/+layout-8a0a06a4.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
 
@@ -9814,6 +9822,467 @@ var init_PlansCard = __esm({
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
 </card>`;
     });
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_page.svelte.js
+var page_svelte_exports = {};
+__export(page_svelte_exports, {
+  default: () => Page
+});
+var css$1, PlansComponent, css3, ReviewCreator, reviews, Reviews, Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+    init_chunks();
+    init_PlansCard();
+    init_plansCardArray();
+    init_Dropzone();
+    init_store();
+    init_private();
+    init_dropzone();
+    init_index2();
+    css$1 = {
+      code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
+      map: null
+    };
+    PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css$1);
+      return `
+<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each([...plansCardArray].reverse().slice(1), (item, i) => {
+        return `<div>${validate_component(PlansCard, "PlansCard").$$render(
+          $$result,
+          {
+            card: item.card,
+            payNowUrl: item.payNowUrl,
+            payLaterUrl: item.payLaterUrl
+          },
+          {},
+          {
+            cardText: () => {
+              return `<span slot="${"cardText"}">${escape(item.cardText)}
+          
+          <p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">invoice sample</a></p>
+          
+        </span>`;
+            },
+            cardTitle: () => {
+              return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
+            },
+            default: () => {
+              return `
+        
+
+        
+      `;
+            }
+          }
+        )}
+    </div>`;
+      })}
+</div>`;
+    });
+    css3 = {
+      code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
+      map: null
+    };
+    ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let { title = "Great physics tutor!!" } = $$props;
+      let { name: name5 = "Thomas Finn" } = $$props;
+      let { date = "2022-06-08" } = $$props;
+      if ($$props.title === void 0 && $$bindings.title && title !== void 0)
+        $$bindings.title(title);
+      if ($$props.name === void 0 && $$bindings.name && name5 !== void 0)
+        $$bindings.name(name5);
+      if ($$props.date === void 0 && $$bindings.date && date !== void 0)
+        $$bindings.date(date);
+      $$result.css.add(css3);
+      $$unsubscribe_isDarkMode();
+      return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
+    <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
+        return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+      })}</div>
+    <div class="${"italic"}">on ${escape(date)}</div>
+    ${slots.default ? slots.default({}) : ``}
+    <b class="${"absolute right-0 bottom-0 -my-10 mx-5 "}">${escape(name5)}</b></div></article>`;
+    });
+    reviews = [
+      {
+        name: "CM",
+        title: "grade 10 math / grade 11 physics",
+        date: "2022-07-11",
+        body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!"
+      },
+      {
+        name: "magnus",
+        title: "Great help before final!",
+        date: "2022-06-26",
+        body: "Waves & oscillation was not covered so well by my teacher ... the session + mock test really helped out before my final exam!"
+      },
+      {
+        name: "Thomas Finn",
+        title: "Great physics tutor!!",
+        date: "2022-06-08",
+        body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
+      },
+      {
+        name: "felix belfoy",
+        title: "quantitative chem",
+        date: "2022-06-01",
+        body: "I only had him for one session since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!"
+      },
+      {
+        name: "Celia",
+        title: "amazing IBHL physics tutor ",
+        date: "2022-05-01",
+        body: "Jon explained the mechanics behind every question I had trouble with in thorough detail. If I had difficulty understanding his explanation, he would use another way to represent his knowledge such as drawing pictures and using diagrams. he taught me measurements, mechanics, waves, electromagnetism, nuclear and thermal physics. He was also a big help with my physics IA! He also made my solution space a place where I could look back if I've forgotten something."
+      },
+      {
+        name: "fernando vc",
+        title: "very helpful with kinematics!",
+        date: "2021-05-03",
+        body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed."
+      },
+      {
+        name: "Lavinia",
+        title: "Great Spanish tutor",
+        date: "2021-03-03",
+        body: "He is super patient with my very much broken Spanish. He is always on time and helps out a lot by giving me extra notes. Best Spanish tutor I had so far :)))"
+      },
+      {
+        name: "TJ Macdonald",
+        title: "Review",
+        date: "2021-02-10",
+        body: "Jon was great at understanding how to best teach me the content if I didn't fully understand at first, and broke it down into simple steps for me. he was also great at knowing when I didn't fully understand something and would clarify it easily without me having to ask which was awesome really glad to have him in my conner for tests and assignments."
+      },
+      {
+        name: "Miranda Teta",
+        title: "IB Physics",
+        date: "2021-02-05",
+        body: "Jon started tutoring me in my first year of IB Physics, a very challenging course in which I had trouble understanding. He found creative ways for me to comprehend the subject and whenever I still couldn't understand, he would try other ways until I felt comfortable with the topic. He goes out of his way to make sure get the help I need and. after a few tutoring sessions, I started getting a deeper understanding of my course, which am very grateful for."
+      },
+      {
+        name: "Efe T.",
+        title: "IB Physics Year 1",
+        date: "2021-02-01",
+        body: "He helps through the process of answering each question by helping with each step. From test preparation to experiments, he has assisted me with every problem have encountered. He is also a fun person to talk to and a very friendly person."
+      },
+      {
+        name: "Parent of Rachel",
+        title: "stellar!",
+        date: "2020-06-03",
+        body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
+      },
+      {
+        name: "Paola A.",
+        title: "1st yr at Brock University",
+        date: "2020-10-27",
+        body: "I had an awesome experience with Jon. I was a BioSci student at Brock and really needed help with Physics 1P91 and Calculus. He was clear, structured, patient and thorough. I survived! With Physics being one of my best classes."
+      },
+      {
+        name: "rob henriquez",
+        title: "mohawk college tutor",
+        date: "2020-02-18",
+        body: "Jon makes learning physics and math intuitive. He finds creative ways of teaching and is passionate about your success. I highly recommend him!!"
+      },
+      {
+        name: "rozhina mazhar",
+        title: "IB HL Physics",
+        date: "2020-03-07",
+        body: "John was a huge help for me in gr 12 physics at Ridley. We met once a week in the learning centre and he would help me on everything from lab prep to assignments to homework questions ... he made me feel extra confident in my abilities!"
+      },
+      {
+        name: "Zaara Alam",
+        title: "grade 12 physics",
+        date: "2020-10-27",
+        body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}"
+      }
+    ];
+    Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+<div class="${"scale-90 "}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name: name5, title, date, body }) => {
+        return `
+
+      ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name5, date }, {}, {
+          default: () => {
+            return `${escape(body)}
+      `;
+          }
+        })}`;
+      })}</div></div>`;
+    });
+    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_isDarkMode();
+      return `<main class="${"overflow-x-hidden"}"><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video></main>
+
+
+
+
+<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64 "}">
+  <div class="${"h-[70vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
+      
+      <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
+      </div></div></div>
+
+  
+  <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}">1. Upload your homework
+    </p>
+
+    ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
+
+  
+  <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
+    </p>
+
+    ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
+
+  
+  
+  <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}">3. Do Some Reading \u{1F60E}
+    </p>
+    ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>
+
+
+
+
+
+
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/2.js
+var __exports3 = {};
+__export(__exports3, {
+  component: () => component3,
+  file: () => file3,
+  imports: () => imports3,
+  index: () => index3,
+  stylesheets: () => stylesheets3
+});
+var index3, component3, file3, imports3, stylesheets3;
+var init__3 = __esm({
+  ".svelte-kit/output/server/nodes/2.js"() {
+    index3 = 2;
+    component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
+    file3 = "_app/immutable/components/pages/_page.svelte-1d80f03c.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-1d80f03c.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-fc5688ad.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js"];
+    stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/calcom/_page.svelte.js
+var page_svelte_exports2 = {};
+__export(page_svelte_exports2, {
+  default: () => Page2
+});
+var Page2;
+var init_page_svelte2 = __esm({
+  ".svelte-kit/output/server/entries/pages/calcom/_page.svelte.js"() {
+    init_chunks();
+    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return ``;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/3.js
+var __exports4 = {};
+__export(__exports4, {
+  component: () => component4,
+  file: () => file4,
+  imports: () => imports4,
+  index: () => index4,
+  stylesheets: () => stylesheets4
+});
+var index4, component4, file4, imports4, stylesheets4;
+var init__4 = __esm({
+  ".svelte-kit/output/server/nodes/3.js"() {
+    index4 = 3;
+    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
+    file4 = "_app/immutable/components/pages/calcom/_page.svelte-606a66f2.js";
+    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-606a66f2.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    stylesheets4 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/faq/_page.svelte.js
+var page_svelte_exports3 = {};
+__export(page_svelte_exports3, {
+  default: () => Page3
+});
+var css4, Page3;
+var init_page_svelte3 = __esm({
+  ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
+    init_chunks();
+    css4 = {
+      code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
+      map: null
+    };
+    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css4);
+      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
+  </summary>
+
+  <p class="${"svelte-63m8nq"}">In terms of personalized service: we offer 1-on-1 tutoring, mock test
+    sessions with solution keys, video links, and session notes; see <a>/plans</a>
+    for details.
+    <br><br>
+    We are also in the process of creating a
+    <a href="${"https://www.brightowltutoring.com/login"}">login-based</a>
+    service; users will have access to <i>interactive</i> quizzes &amp; exam-question
+    video solutions.
+  </p>
+  <p style="${"font-size:12pt"}" class="${"svelte-63m8nq"}"><b>Note</b>: we <i>only</i> provide online/digital solutions. We are so
+    confident in our workflow that we offer
+    <a>a free demo session</a> of up to 20 minutes to show it off.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q2</b> How do I pay? </summary>
+  <p class="${"svelte-63m8nq"}">On <a>/plans</a>
+    build out a custom plan and we send you an invoice based on your selections.<br><br>
+    Alternatively you can toggle &quot;off&quot; to choose amongst pay-now options.
+  </p>
+
+  <p style="${"font-size:13pt; color:#777;"}" class="${"svelte-63m8nq"}">We use STRIPE to securely process all transactions \u2014 in use by companies
+    such as Google, Amazon and Shopify.
+  </p></details>
+
+<details open class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q3</b> How do I book multiple sessions at once?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Book a session on our <a>plans</a> page, and click &quot;<a>\u279C Schedule another event</a>&quot; on the confirmation page.
+    <i>If booked already, we can also book the remaining dates for you at the end
+      of the live session</i>.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q4</b> How do I share homework? </summary>
+  <p class="${"svelte-63m8nq"}">On your mobile device: go to <a>/homework</a> &gt; click Upload &gt; snap a
+    picture &gt; Submit. <i>We convert each image into clean formatted text.</i></p>
+  <p class="${"svelte-63m8nq"}">Similar steps for PC. <span style="${"font-size:12pt; font-style:italic"}">Accepted file extensions: .png, .jpg, .jpeg, .heic, .pdf, .txt, .rtf,
+      .doc, .docx, .odt, .csv, .tex, .xls, .xlsx, .ods, .ppt, .pptx.</span></p>
+
+  <p class="${"svelte-63m8nq"}"><span style="${"font-size:12pt; font-style:italic"}">For last second submissions, you may also point your homework at the
+      webcam during the live session.</span></p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q5</b> Which screen-sharing software are we using? Zoom?
+  </summary>
+  <p class="${"svelte-63m8nq"}"><a href="${"https://zoom.us/download"}">Zoom</a>,
+    <a href="${"https://www.teamviewer.com/en-us/meeting/"}">TeamViewer Meeting</a>,
+    or
+    <a href="${"https://www.microsoft.com/en-ca/microsoft-teams/group-chat-software"}">Microsoft Teams</a>
+    \u2014 these provide the smoothest screensharing experience. Click the links to download
+    or visit <a>/screenshare</a> for more info.
+
+    <br> <b>Note:</b> No sign-up required to use TeamViewer Meeting; we use this
+    exclusively for group sessions.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q6</b> What subjects do you cover? </summary>
+
+  <p class="${"svelte-63m8nq"}"><b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University <br><br>
+
+    <b>MATHEMATICS</b>\xA0 Calculus \u2022 Trigonometry \u2022 Advanced Functions \u2022
+    Complex Numbers \u2022 Linear Algebra \u2022 Probability and Statistics \xA0\xA0<b>PHYSICS</b>
+    \xA0\xA0 Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp;
+    Magnetism \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special
+    Relativity \xA0\xA0<b>SPANISH</b> \xA0\xA0 Pronunciation \u2022 Grammatical
+    Rules \u2022 Practical Examples
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q7</b> How are mock tests/ Mockowl sessions administered?
+  </summary>
+  <p class="${"svelte-63m8nq"}">The student attends a live session where we implement Google Forms. Answer
+    keys are released within an hour of completion. <i>Digitally-handwritten solution key available as a premium.</i> <br><br>
+
+    We are soon implementing a content-based subscription plan; see our sample
+    quiz app on the <a href="${"https://www.brightowltutoring.com/"}">home page</a> for
+    a preview.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q8</b> I am looking to refer a friend, do you offer any discounts based on
+    referrals?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Great question! We absolutely welcome this initiative and are pleased to
+    reward it; please visit our <a>/referrals</a> page. <br><br>
+
+    Alternatively <i>if</i> filling out an invoice-based <a>plan</a>, you will
+    have a chance to input a referral.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q9 </b>Is it possible to access all my session content in one place?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Sure can! Secure a unique URL for $5/month while booking or <a>contact us directly</a>
+    (<a href="${"https://www.brightowltutoring.com/url"}">\u{1F4AB} sample URL</a>).
+  </p>
+</details>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/4.js
+var __exports5 = {};
+__export(__exports5, {
+  component: () => component5,
+  file: () => file5,
+  imports: () => imports5,
+  index: () => index5,
+  stylesheets: () => stylesheets5
+});
+var index5, component5, file5, imports5, stylesheets5;
+var init__5 = __esm({
+  ".svelte-kit/output/server/nodes/4.js"() {
+    index5 = 4;
+    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
+    file5 = "_app/immutable/components/pages/faq/_page.svelte-6b6a5821.js";
+    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-6b6a5821.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    stylesheets5 = ["_app/immutable/assets/+page-113a1f72.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/homework/_page.svelte.js
+var page_svelte_exports4 = {};
+__export(page_svelte_exports4, {
+  default: () => Page4
+});
+var Page4;
+var init_page_svelte4 = __esm({
+  ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
+    init_chunks();
+    init_Dropzone();
+    init_private();
+    init_store();
+    init_index2();
+    init_dropzone();
+    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${validate_component(Dropzone_1, "Dropzone").$$render($$result, {}, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/5.js
+var __exports6 = {};
+__export(__exports6, {
+  component: () => component6,
+  file: () => file6,
+  imports: () => imports6,
+  index: () => index6,
+  stylesheets: () => stylesheets6
+});
+var index6, component6, file6, imports6, stylesheets6;
+var init__6 = __esm({
+  ".svelte-kit/output/server/nodes/5.js"() {
+    index6 = 5;
+    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-0d14d2da.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-0d14d2da.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    stylesheets6 = ["_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
 
@@ -23457,462 +23926,6 @@ var init_katex = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/_page.svelte.js
-var page_svelte_exports = {};
-__export(page_svelte_exports, {
-  default: () => Page
-});
-var css$1, PlansComponent, css3, ReviewCreator, reviews, Reviews, Page;
-var init_page_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
-    init_chunks();
-    init_PlansCard();
-    init_plansCardArray();
-    init_katex();
-    init_store();
-    init_Dropzone();
-    init_index2();
-    init_private();
-    init_dropzone();
-    css$1 = {
-      code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
-      map: null
-    };
-    PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css$1);
-      return `
-<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each([...plansCardArray].reverse().slice(1), (item, i) => {
-        return `<div>${validate_component(PlansCard, "PlansCard").$$render(
-          $$result,
-          {
-            card: item.card,
-            payNowUrl: item.payNowUrl,
-            payLaterUrl: item.payLaterUrl
-          },
-          {},
-          {
-            cardText: () => {
-              return `<span slot="${"cardText"}">${escape(item.cardText)}
-          
-          <p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">invoice sample</a></p>
-          
-        </span>`;
-            },
-            cardTitle: () => {
-              return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
-            },
-            default: () => {
-              return `
-        
-
-        
-      `;
-            }
-          }
-        )}
-    </div>`;
-      })}
-</div>`;
-    });
-    css3 = {
-      code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
-      map: null
-    };
-    ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let { title = "Great physics tutor!!" } = $$props;
-      let { name: name5 = "Thomas Finn" } = $$props;
-      let { date = "2022-06-08" } = $$props;
-      if ($$props.title === void 0 && $$bindings.title && title !== void 0)
-        $$bindings.title(title);
-      if ($$props.name === void 0 && $$bindings.name && name5 !== void 0)
-        $$bindings.name(name5);
-      if ($$props.date === void 0 && $$bindings.date && date !== void 0)
-        $$bindings.date(date);
-      $$result.css.add(css3);
-      $$unsubscribe_isDarkMode();
-      return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true)}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
-    <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
-        return `<img src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
-      })}</div>
-    <div class="${"italic"}">on ${escape(date)}</div>
-    ${slots.default ? slots.default({}) : ``}
-    <b class="${"absolute right-0 bottom-0 -my-10 mx-5 "}">${escape(name5)}</b></div></article>`;
-    });
-    reviews = [
-      {
-        name: "CM",
-        title: "grade 10 math / grade 11 physics",
-        date: "2022-07-11",
-        body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!"
-      },
-      {
-        name: "magnus",
-        title: "Great help before final!",
-        date: "2022-06-26",
-        body: "Waves & oscillation was not covered so well by my teacher ... the session + mock test really helped out before my final exam!"
-      },
-      {
-        name: "Thomas Finn",
-        title: "Great physics tutor!!",
-        date: "2022-06-08",
-        body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
-      },
-      {
-        name: "felix belfoy",
-        title: "quantitative chem",
-        date: "2022-06-01",
-        body: "I only had him for one session since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!"
-      },
-      {
-        name: "Celia",
-        title: "amazing IBHL physics tutor ",
-        date: "2022-05-01",
-        body: "Jon explained the mechanics behind every question I had trouble with in thorough detail. If I had difficulty understanding his explanation, he would use another way to represent his knowledge such as drawing pictures and using diagrams. he taught me measurements, mechanics, waves, electromagnetism, nuclear and thermal physics. He was also a big help with my physics IA! He also made my solution space a place where I could look back if I've forgotten something."
-      },
-      {
-        name: "fernando vc",
-        title: "very helpful with kinematics!",
-        date: "2021-05-03",
-        body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed."
-      },
-      {
-        name: "Lavinia",
-        title: "Great Spanish tutor",
-        date: "2021-03-03",
-        body: "He is super patient with my very much broken Spanish. He is always on time and helps out a lot by giving me extra notes. Best Spanish tutor I had so far :)))"
-      },
-      {
-        name: "TJ Macdonald",
-        title: "Review",
-        date: "2021-02-10",
-        body: "Jon was great at understanding how to best teach me the content if I didn't fully understand at first, and broke it down into simple steps for me. he was also great at knowing when I didn't fully understand something and would clarify it easily without me having to ask which was awesome really glad to have him in my conner for tests and assignments."
-      },
-      {
-        name: "Miranda Teta",
-        title: "IB Physics",
-        date: "2021-02-05",
-        body: "Jon started tutoring me in my first year of IB Physics, a very challenging course in which I had trouble understanding. He found creative ways for me to comprehend the subject and whenever I still couldn't understand, he would try other ways until I felt comfortable with the topic. He goes out of his way to make sure get the help I need and. after a few tutoring sessions, I started getting a deeper understanding of my course, which am very grateful for."
-      },
-      {
-        name: "Efe T.",
-        title: "IB Physics Year 1",
-        date: "2021-02-01",
-        body: "He helps through the process of answering each question by helping with each step. From test preparation to experiments, he has assisted me with every problem have encountered. He is also a fun person to talk to and a very friendly person."
-      },
-      {
-        name: "Parent of Rachel",
-        title: "stellar!",
-        date: "2020-06-03",
-        body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
-      },
-      {
-        name: "Paola A.",
-        title: "1st yr at Brock University",
-        date: "2020-10-27",
-        body: "I had an awesome experience with Jon. I was a BioSci student at Brock and really needed help with Physics 1P91 and Calculus. He was clear, structured, patient and thorough. I survived! With Physics being one of my best classes."
-      },
-      {
-        name: "rob henriquez",
-        title: "mohawk college tutor",
-        date: "2020-02-18",
-        body: "Jon makes learning physics and math intuitive. He finds creative ways of teaching and is passionate about your success. I highly recommend him!!"
-      },
-      {
-        name: "rozhina mazhar",
-        title: "IB HL Physics",
-        date: "2020-03-07",
-        body: "John was a huge help for me in gr 12 physics at Ridley. We met once a week in the learning centre and he would help me on everything from lab prep to assignments to homework questions ... he made me feel extra confident in my abilities!"
-      },
-      {
-        name: "Zaara Alam",
-        title: "grade 12 physics",
-        date: "2020-10-27",
-        body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}"
-      }
-    ];
-    Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-<div class="${"scale-90"}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name: name5, title, date, body }) => {
-        return `
-      ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name5, date }, {}, {
-          default: () => {
-            return `${escape(body)}
-      `;
-          }
-        })}`;
-      })}</div></div>`;
-    });
-    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      $$unsubscribe_isDarkMode();
-      return `<main class="${"overflow-x-hidden"}"><video autoplay loop muted playsinline controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video></main>
-
-
-
-<div class="${"h-3/5 flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
-    
-    <div class="${"text-lg font-Nunito "}">\u{1F449} click for reviews
-    </div></div></div>
-
-<div id="${"step1"}" class="${"-z-50 mt-80 hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}">1. Upload your homework
-  </p>
-
-  ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
-
-<div id="${"step2"}" class="${"-z-50 mt-80 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}">2. Schedule a Session
-  </p>
-
-  ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
-
-
-<div id="${"reviews"}" class="${"-z-50 mt-80 duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}">3. Do Some Reading \u{1F60E}
-  </p>
-  ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div>
-
-
-
-
-
-
-`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/2.js
-var __exports3 = {};
-__export(__exports3, {
-  component: () => component3,
-  file: () => file3,
-  imports: () => imports3,
-  index: () => index3,
-  stylesheets: () => stylesheets3
-});
-var index3, component3, file3, imports3, stylesheets3;
-var init__3 = __esm({
-  ".svelte-kit/output/server/nodes/2.js"() {
-    index3 = 2;
-    component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-c2983022.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-c2983022.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-fc5688ad.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js"];
-    stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/calcom/_page.svelte.js
-var page_svelte_exports2 = {};
-__export(page_svelte_exports2, {
-  default: () => Page2
-});
-var Page2;
-var init_page_svelte2 = __esm({
-  ".svelte-kit/output/server/entries/pages/calcom/_page.svelte.js"() {
-    init_chunks();
-    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return ``;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/3.js
-var __exports4 = {};
-__export(__exports4, {
-  component: () => component4,
-  file: () => file4,
-  imports: () => imports4,
-  index: () => index4,
-  stylesheets: () => stylesheets4
-});
-var index4, component4, file4, imports4, stylesheets4;
-var init__4 = __esm({
-  ".svelte-kit/output/server/nodes/3.js"() {
-    index4 = 3;
-    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/calcom/_page.svelte-606a66f2.js";
-    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-606a66f2.js", "_app/immutable/chunks/index-1063d0c6.js"];
-    stylesheets4 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/faq/_page.svelte.js
-var page_svelte_exports3 = {};
-__export(page_svelte_exports3, {
-  default: () => Page3
-});
-var css4, Page3;
-var init_page_svelte3 = __esm({
-  ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
-    init_chunks();
-    css4 = {
-      code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
-      map: null
-    };
-    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css4);
-      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
-  </summary>
-
-  <p class="${"svelte-63m8nq"}">In terms of personalized service: we offer 1-on-1 tutoring, mock test
-    sessions with solution keys, video links, and session notes; see <a>/plans</a>
-    for details.
-    <br><br>
-    We are also in the process of creating a
-    <a href="${"https://www.brightowltutoring.com/login"}">login-based</a>
-    service; users will have access to <i>interactive</i> quizzes &amp; exam-question
-    video solutions.
-  </p>
-  <p style="${"font-size:12pt"}" class="${"svelte-63m8nq"}"><b>Note</b>: we <i>only</i> provide online/digital solutions. We are so
-    confident in our workflow that we offer
-    <a>a free demo session</a> of up to 20 minutes to show it off.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q2</b> How do I pay? </summary>
-  <p class="${"svelte-63m8nq"}">On <a>/plans</a>
-    build out a custom plan and we send you an invoice based on your selections.<br><br>
-    Alternatively you can toggle &quot;off&quot; to choose amongst pay-now options.
-  </p>
-
-  <p style="${"font-size:13pt; color:#777;"}" class="${"svelte-63m8nq"}">We use STRIPE to securely process all transactions \u2014 in use by companies
-    such as Google, Amazon and Shopify.
-  </p></details>
-
-<details open class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q3</b> How do I book multiple sessions at once?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Book a session on our <a>plans</a> page, and click &quot;<a>\u279C Schedule another event</a>&quot; on the confirmation page.
-    <i>If booked already, we can also book the remaining dates for you at the end
-      of the live session</i>.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q4</b> How do I share homework? </summary>
-  <p class="${"svelte-63m8nq"}">On your mobile device: go to <a>/homework</a> &gt; click Upload &gt; snap a
-    picture &gt; Submit. <i>We convert each image into clean formatted text.</i></p>
-  <p class="${"svelte-63m8nq"}">Similar steps for PC. <span style="${"font-size:12pt; font-style:italic"}">Accepted file extensions: .png, .jpg, .jpeg, .heic, .pdf, .txt, .rtf,
-      .doc, .docx, .odt, .csv, .tex, .xls, .xlsx, .ods, .ppt, .pptx.</span></p>
-
-  <p class="${"svelte-63m8nq"}"><span style="${"font-size:12pt; font-style:italic"}">For last second submissions, you may also point your homework at the
-      webcam during the live session.</span></p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q5</b> Which screen-sharing software are we using? Zoom?
-  </summary>
-  <p class="${"svelte-63m8nq"}"><a href="${"https://zoom.us/download"}">Zoom</a>,
-    <a href="${"https://www.teamviewer.com/en-us/meeting/"}">TeamViewer Meeting</a>,
-    or
-    <a href="${"https://www.microsoft.com/en-ca/microsoft-teams/group-chat-software"}">Microsoft Teams</a>
-    \u2014 these provide the smoothest screensharing experience. Click the links to download
-    or visit <a>/screenshare</a> for more info.
-
-    <br> <b>Note:</b> No sign-up required to use TeamViewer Meeting; we use this
-    exclusively for group sessions.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q6</b> What subjects do you cover? </summary>
-
-  <p class="${"svelte-63m8nq"}"><b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University <br><br>
-
-    <b>MATHEMATICS</b>\xA0 Calculus \u2022 Trigonometry \u2022 Advanced Functions \u2022
-    Complex Numbers \u2022 Linear Algebra \u2022 Probability and Statistics \xA0\xA0<b>PHYSICS</b>
-    \xA0\xA0 Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp;
-    Magnetism \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special
-    Relativity \xA0\xA0<b>SPANISH</b> \xA0\xA0 Pronunciation \u2022 Grammatical
-    Rules \u2022 Practical Examples
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q7</b> How are mock tests/ Mockowl sessions administered?
-  </summary>
-  <p class="${"svelte-63m8nq"}">The student attends a live session where we implement Google Forms. Answer
-    keys are released within an hour of completion. <i>Digitally-handwritten solution key available as a premium.</i> <br><br>
-
-    We are soon implementing a content-based subscription plan; see our sample
-    quiz app on the <a href="${"https://www.brightowltutoring.com/"}">home page</a> for
-    a preview.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q8</b> I am looking to refer a friend, do you offer any discounts based on
-    referrals?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Great question! We absolutely welcome this initiative and are pleased to
-    reward it; please visit our <a>/referrals</a> page. <br><br>
-
-    Alternatively <i>if</i> filling out an invoice-based <a>plan</a>, you will
-    have a chance to input a referral.
-  </p></details>
-
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q9 </b>Is it possible to access all my session content in one place?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Sure can! Secure a unique URL for $5/month while booking or <a>contact us directly</a>
-    (<a href="${"https://www.brightowltutoring.com/url"}">\u{1F4AB} sample URL</a>).
-  </p>
-</details>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/4.js
-var __exports5 = {};
-__export(__exports5, {
-  component: () => component5,
-  file: () => file5,
-  imports: () => imports5,
-  index: () => index5,
-  stylesheets: () => stylesheets5
-});
-var index5, component5, file5, imports5, stylesheets5;
-var init__5 = __esm({
-  ".svelte-kit/output/server/nodes/4.js"() {
-    index5 = 4;
-    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/faq/_page.svelte-6b6a5821.js";
-    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-6b6a5821.js", "_app/immutable/chunks/index-1063d0c6.js"];
-    stylesheets5 = ["_app/immutable/assets/+page-113a1f72.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/homework/_page.svelte.js
-var page_svelte_exports4 = {};
-__export(page_svelte_exports4, {
-  default: () => Page4
-});
-var Page4;
-var init_page_svelte4 = __esm({
-  ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
-    init_chunks();
-    init_Dropzone();
-    init_private();
-    init_store();
-    init_index2();
-    init_dropzone();
-    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(Dropzone_1, "Dropzone").$$render($$result, {}, {}, {})}`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/5.js
-var __exports6 = {};
-__export(__exports6, {
-  component: () => component6,
-  file: () => file6,
-  imports: () => imports6,
-  index: () => index6,
-  stylesheets: () => stylesheets6
-});
-var index6, component6, file6, imports6, stylesheets6;
-var init__6 = __esm({
-  ".svelte-kit/output/server/nodes/5.js"() {
-    index6 = 5;
-    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-0d14d2da.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-0d14d2da.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-cc2eeb86.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
-    stylesheets6 = ["_app/immutable/assets/Dropzone-20aff2fd.css"];
-  }
-});
-
 // .svelte-kit/output/server/entries/pages/katex/_page.svx.js
 var page_svx_exports = {};
 __export(page_svx_exports, {
@@ -24054,8 +24067,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/login/_page.svelte-0e246962.js";
-    imports8 = ["_app/immutable/components/pages/login/_page.svelte-0e246962.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-96eeaa52.js", "_app/immutable/chunks/singletons-1b9a4b15.js"];
+    file8 = "_app/immutable/components/pages/login/_page.svelte-2b78d95d.js";
+    imports8 = ["_app/immutable/components/pages/login/_page.svelte-2b78d95d.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/firebase-b06eb9de.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/navigation-88e7ef84.js", "_app/immutable/chunks/singletons-619413a0.js"];
     stylesheets8 = ["_app/immutable/assets/+page-a3246318.css"];
   }
 });
@@ -24705,8 +24718,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-df322c81.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-df322c81.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-96eeaa52.js", "_app/immutable/chunks/singletons-1b9a4b15.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-358886ec.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-358886ec.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-88e7ef84.js", "_app/immutable/chunks/singletons-619413a0.js"];
     stylesheets15 = [];
   }
 });
@@ -24757,8 +24770,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-47a0bc48.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-47a0bc48.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-96eeaa52.js", "_app/immutable/chunks/singletons-1b9a4b15.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-b42f009f.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-b42f009f.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-817eb231.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-88e7ef84.js", "_app/immutable/chunks/singletons-619413a0.js"];
     stylesheets16 = [];
   }
 });
@@ -26938,7 +26951,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-5b1389ef.js", "imports": ["_app/immutable/start-5b1389ef.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-1b9a4b15.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-0ce5f233.js", "imports": ["_app/immutable/start-0ce5f233.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-619413a0.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
