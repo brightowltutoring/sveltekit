@@ -62,7 +62,12 @@
       }
 
       signInWithEmailLink(auth, email, window.location.href)
-        .then(() => window.localStorage.removeItem("emailForSignIn"))
+        .then(() => {
+          window.localStorage.removeItem("emailForSignIn");
+          $navLoginClicked = true;
+          // navLoginClicked.set(true);
+          // navLoginClicked.subscribe((value) => (value = true)); // note: inside external javascript file, cannot use $navLoginClicked syntax ... must use subscribe way
+        })
         .catch((error) => console.log(error));
       /* Clear email from storage or throw error.*/
     }
