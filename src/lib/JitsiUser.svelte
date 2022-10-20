@@ -3,10 +3,6 @@
   import { lessThan768 } from "$lib/store.js";
   import { goto } from "$app/navigation";
 
-  let domain, options, api, par, firstID;
-
-  let videospace;
-
   async function hangUpBtn() {
     await api.dispose();
     await setTimeout(() => {
@@ -15,78 +11,81 @@
     }, 0);
   }
 
-  onMount(async () => {
-    domain = "meet.jit.si";
-    options = {
-      roomName: "ThinkSolve12522",
-      // width: "100%",
-      // height: "740px",
-      parentNode: document.querySelector("#meet"),
-      configOverwrite: {
-        hideConferenceTimer: true,
-        hideConferenceSubject: true,
-        hideParticipantsStats: true,
-        disablePolls: true,
-        disableSelfView: false,
-        // disableSelfViewSettings: true,
-        disabledSounds: ["KNOCKING_PARTICIPANT_SOUND"],
-        disableDeepLinking: true,
-        disableRemoteMute: true, //TODO: USER ONLY
-        notifications: "lobby.notificationTitle", //TODO: USER ONLY
-        startWithAudioMuted: true,
-        startWithVideoMuted: true,
-        remoteVideoMenu: {
-          //TODO: USER ONLY
-          disableKick: true,
-          disablePrivateChat: true,
-        },
-      },
-      interfaceConfigOverwrite: {
-        DEFAULT_BACKGROUND: `#130e21`,
-        SHOW_CHROME_EXTENSION_BANNER: false,
-        SETTINGS_SECTIONS: [
-          "devices",
-          // 'moderator',
-          // 'language',
-          // 'profile',
-          // 'calendar',
-          // 'sounds',
-        ],
-        TOOLBAR_BUTTONS: [
-          "desktop",
-          "microphone",
-          "camera",
-          "fullscreen",
-          "chat",
-          "fodeviceselection",
-          "etherpad",
-          // "dock-iframe",
-          // "undock-iframe",
-          // "raisehand",
-          // "noisesuppression",
-          // "settings",
-          // "select-background",
-          // "participants-pane",
-          // "highlight",
-          // 'mute-video-everyone',
-          // 'mute-everyone',
-          // 'security',
-          // "hangup",
-          // 'sharedvideo',
-          // 'videoquality',
-          // 'livestreaming',
-          // 'recording',
-          // 'closedcaptions',
-          // 'filmstrip',
-          // 'feedback',
-          // 'stats',
-          // 'shortcuts',
-          // "tileview",
-          // "profile",
-        ],
-      },
-    };
+  let api, par, firstID, videospace;
 
+  let domain = "meet.jit.si";
+  let options = {
+    roomName: "ThinkSolve12522",
+    // width: "100%",
+    // height: "740px",
+    // parentNode: document.querySelector("#meet"),
+    configOverwrite: {
+      hideConferenceTimer: true,
+      hideConferenceSubject: true,
+      hideParticipantsStats: true,
+      disablePolls: true,
+      disableSelfView: false,
+      // disableSelfViewSettings: true,
+      disabledSounds: ["KNOCKING_PARTICIPANT_SOUND"],
+      disableDeepLinking: true,
+      disableRemoteMute: true, //TODO: USER ONLY
+      notifications: "lobby.notificationTitle", //TODO: USER ONLY
+      startWithAudioMuted: true,
+      startWithVideoMuted: true,
+      remoteVideoMenu: {
+        //TODO: USER ONLY
+        disableKick: true,
+        disablePrivateChat: true,
+      },
+    },
+    interfaceConfigOverwrite: {
+      DEFAULT_BACKGROUND: `#130e21`,
+      SHOW_CHROME_EXTENSION_BANNER: false,
+      SETTINGS_SECTIONS: [
+        "devices",
+        // 'moderator',
+        // 'language',
+        // 'profile',
+        // 'calendar',
+        // 'sounds',
+      ],
+      TOOLBAR_BUTTONS: [
+        "desktop",
+        "microphone",
+        "camera",
+        "fullscreen",
+        "chat",
+        "fodeviceselection",
+        "etherpad",
+        // "dock-iframe",
+        // "undock-iframe",
+        // "raisehand",
+        // "noisesuppression",
+        // "settings",
+        // "select-background",
+        // "participants-pane",
+        // "highlight",
+        // 'mute-video-everyone',
+        // 'mute-everyone',
+        // 'security',
+        // "hangup",
+        // 'sharedvideo',
+        // 'videoquality',
+        // 'livestreaming',
+        // 'recording',
+        // 'closedcaptions',
+        // 'filmstrip',
+        // 'feedback',
+        // 'stats',
+        // 'shortcuts',
+        // "tileview",
+        // "profile",
+      ],
+    },
+  };
+
+  onMount(async () => {
+    options.parentNode = await document.querySelector("#meet");
     api = await new JitsiMeetExternalAPI(domain, options);
 
     // api.addEventListener("getNumberOfParticipants", () => {
@@ -107,9 +106,11 @@
     // namely having a global modal dropzone and a homepage dropzone was crashing app
     // Still unclear if this was the actual fix since screenshareA route does NOT have this
     // and doesnt break when navigating to/from it....
-    onDestroy(() => {
-      api.dispose();
-    });
+    //TODO: oct 20, 2022 @ 1pm ..turned off
+    // onDestroy(() => {
+    //   api.dispose();
+    //   console.log("dispose worked");
+    // });
   });
 </script>
 

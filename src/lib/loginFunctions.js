@@ -11,6 +11,7 @@ import {
 export async function GoogleLogin() {
   const provider = new GoogleAuthProvider();
 
+  // TODO: experimented with async-await version, but app crashed with jitsi and dropzone ....maybe retry in the future
   // try {
   //   const result = await signInWithPopup(auth, provider);
   //   const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -27,7 +28,6 @@ export async function GoogleLogin() {
   //   const credential = GoogleAuthProvider.credentialFromError(error);
   // }
 
-  //   //TODO: old way .. new way might be broken
   signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -65,6 +65,8 @@ export function logoutFunction() {
 export function regexEmailChecker(EMAIL) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
 }
+
+// TODO: experimented with async-await version, but app crashed with jitsi and dropzone ....maybe retry in the future
 
 // export async function magicLinkToEmail2(EMAIL) {
 //   try {
