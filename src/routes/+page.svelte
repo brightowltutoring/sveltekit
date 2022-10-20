@@ -38,7 +38,7 @@
 {/if} -->
 
 <!-- grid incase i later want to reorganize "pages" responsively ... also footer kept interesecting with last page -->
-<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64 ">
+<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
   <!-- main page -->
   <div class="h-[60vh] flex justify-center items-center text-center">
     <div class="grid grid-rows-1">

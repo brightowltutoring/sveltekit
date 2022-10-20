@@ -178,6 +178,7 @@ export const routes = writable({
   },
 });
 
+// export const isDarkMode = writable(true);
 export const isDarkMode = writable(false);
 
 // TODO: delete soon; logincard logic no longer requires these to be global

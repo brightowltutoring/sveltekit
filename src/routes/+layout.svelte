@@ -2,6 +2,7 @@
   import "../app.css";
   // import JitsiUser from "$lib/JitsiUser.svelte";
 
+  // import SwitchToDarkMode from "$lib/SwitchToDarkMode.svelte";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone.svelte";
   import LoginCard from "$lib/LoginCard.svelte";
@@ -18,6 +19,7 @@
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
+    isDarkMode,
   } from "$lib/store.js";
 
   import { page } from "$app/stores";
@@ -32,7 +34,10 @@
   //   clearInterval($redirectSetInterval);
   // }
 
+  // let darkModeStatus = window.localStorage.getItem("emailForSignIn");
+  // $isDarkMode = true;
   onMount(() => {
+    // window.document.body.classList.add("dark-mode");
     console.log("isLoggedIn", $isLoggedIn);
     setScrollYMax();
   });
@@ -65,7 +70,10 @@
     if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
+  // $isDarkMode = true;
 </script>
+
+<!-- <SwitchToDarkMode /> -->
 
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -92,6 +100,12 @@
   on:contextmenu={(event) => event.preventDefault()}
 />
 <!-- on:popstate={clearRedirectStuff} -->
+
+<!-- <main
+  class={$isDarkMode
+    ? "bg-[rgb(37,27,47)] text-white"
+    : "bg-white text-[rgb(37,27,47)]"}
+> -->
 
 <main>
   <Modal bind:showModal={$navLoginClicked}>
@@ -123,7 +137,7 @@ Fixed containers  apparently hate having scrollable overflow elements inside.
   </div>
 
   <!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->
-  <div class="px-[7%] h-[100vh] pt-32 md:block">
+  <div class="px-[7%] pt-32 md:block">
     <slot />
     <Footer />
   </div>

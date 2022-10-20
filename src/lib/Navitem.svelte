@@ -3,8 +3,8 @@
     isDarkMode,
     navLoginClicked,
     navHomeworkClicked,
-    redirectSetInterval,
-    redirectAfterLoginTimeOut,
+    // redirectSetInterval,
+    // redirectAfterLoginTimeOut,
   } from "./store.js";
   import { slide } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
