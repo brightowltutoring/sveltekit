@@ -1,9 +1,7 @@
 import { c as create_ssr_component, j as each, v as validate_component, e as escape, d as add_attribute, a as subscribe } from "../../chunks/index.js";
 import { P as PlansCard } from "../../chunks/PlansCard.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
-import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import { i as isDarkMode } from "../../chunks/store.js";
-import "../../chunks/private.js";
+import { b as isDarkMode } from "../../chunks/store.js";
 import "dropzone";
 /* empty css                                                   */import "../../chunks/index2.js";
 const PlansComponent_svelte_svelte_type_style_lang = "";
@@ -200,7 +198,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   
   <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span${add_attribute("class", gradientTextColor, 0)}>1. Upload your homework </span></p>
 
-    ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
+    </div>
 
   
   <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span${add_attribute("class", gradientTextColor, 0)}>2. Schedule a Session </span></p>

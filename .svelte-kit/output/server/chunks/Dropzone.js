@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, d as add_attribute, e as escape } from "./index.js";
 import { U as UPLOAD_ENDPOINT } from "./private.js";
-import { i as isDarkMode } from "./store.js";
+import { b as isDarkMode } from "./store.js";
 import "dropzone";
 /* empty css                                        */const css = {
   code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}",

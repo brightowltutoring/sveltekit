@@ -106,14 +106,14 @@ const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
 });
 export {
   redirectSetInterval as a,
-  navHomeworkClicked as b,
-  routes as c,
-  isLoggedIn as d,
+  isDarkMode as b,
+  navHomeworkClicked as c,
+  routes as d,
   elementColor as e,
   instDeltaY as f,
   scrollYMax as g,
   innerWidth as h,
-  isDarkMode as i,
+  isLoggedIn as i,
   lessThan768 as l,
   navLoginClicked as n,
   redirectAfterLoginTimeOut as r,

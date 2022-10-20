@@ -65,8 +65,8 @@ function run_all(fns) {
 function is_function(thing) {
   return typeof thing === "function";
 }
-function safe_not_equal(a2, b) {
-  return a2 != a2 ? b == b : a2 !== b || (a2 && typeof a2 === "object" || typeof a2 === "function");
+function safe_not_equal(a2, b2) {
+  return a2 != a2 ? b2 == b2 : a2 !== b2 || (a2 && typeof a2 === "object" || typeof a2 === "function");
 }
 function subscribe(store, ...callbacks) {
   if (store == null) {
@@ -605,6 +605,20 @@ var require_set_cookie = __commonJS({
 var hooks_exports = {};
 var init_hooks = __esm({
   ".svelte-kit/output/server/chunks/hooks.js"() {
+  }
+});
+
+// .svelte-kit/output/server/chunks/private.js
+var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, UPLOAD_ENDPOINT;
+var init_private = __esm({
+  ".svelte-kit/output/server/chunks/private.js"() {
+    FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
+    FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
+    FIREBASE_projectId = "thinksolve-app";
+    FIREBASE_storageBucket = "thinksolve-app.appspot.com";
+    FIREBASE_messagingSenderId = "490986955869";
+    FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
+    UPLOAD_ENDPOINT = "https://us-central1-thinksolve-app.cloudfunctions.net/gdUp/formidable";
   }
 });
 
@@ -2520,17 +2534,49 @@ var init_dropzone = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/private.js
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, UPLOAD_ENDPOINT;
-var init_private = __esm({
-  ".svelte-kit/output/server/chunks/private.js"() {
-    FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
-    FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
-    FIREBASE_projectId = "thinksolve-app";
-    FIREBASE_storageBucket = "thinksolve-app.appspot.com";
-    FIREBASE_messagingSenderId = "490986955869";
-    FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
-    UPLOAD_ENDPOINT = "https://us-central1-thinksolve-app.cloudfunctions.net/gdUp/formidable";
+// .svelte-kit/output/server/chunks/Dropzone.js
+var css, Dropzone_1;
+var init_Dropzone = __esm({
+  ".svelte-kit/output/server/chunks/Dropzone.js"() {
+    init_chunks();
+    init_private();
+    init_store();
+    init_dropzone();
+    css = {
+      code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}",
+      map: null
+    };
+    Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let boxShadowColor;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let { uniqueId = "default" } = $$props;
+      let { text: text2 = "Drop it like it's \u{1F525}" } = $$props;
+      let { textSizeTW = "text-3xl" } = $$props;
+      let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
+      let { brightnessTW = "brightness-100" } = $$props;
+      if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
+        $$bindings.uniqueId(uniqueId);
+      if ($$props.text === void 0 && $$bindings.text && text2 !== void 0)
+        $$bindings.text(text2);
+      if ($$props.textSizeTW === void 0 && $$bindings.textSizeTW && textSizeTW !== void 0)
+        $$bindings.textSizeTW(textSizeTW);
+      if ($$props.dimensionsTW === void 0 && $$bindings.dimensionsTW && dimensionsTW !== void 0)
+        $$bindings.dimensionsTW(dimensionsTW);
+      if ($$props.brightnessTW === void 0 && $$bindings.brightnessTW && brightnessTW !== void 0)
+        $$bindings.brightnessTW(brightnessTW);
+      $$result.css.add(css);
+      boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
+      $$unsubscribe_isDarkMode();
+      return `
+
+<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto"}">
+  <div class="${"dz-message font-Nunito"}" data-dz-message><span class="${"block"}">${escape(text2)}</span></div></form>
+
+
+
+${$$result.head += ``, ""}`;
+    });
   }
 });
 
@@ -2598,18 +2644,18 @@ function isEmpty(obj) {
   }
   return true;
 }
-function deepEqual(a2, b) {
-  if (a2 === b) {
+function deepEqual(a2, b2) {
+  if (a2 === b2) {
     return true;
   }
   const aKeys = Object.keys(a2);
-  const bKeys = Object.keys(b);
-  for (const k of aKeys) {
-    if (!bKeys.includes(k)) {
+  const bKeys = Object.keys(b2);
+  for (const k2 of aKeys) {
+    if (!bKeys.includes(k2)) {
       return false;
     }
-    const aProp = a2[k];
-    const bProp = b[k];
+    const aProp = a2[k2];
+    const bProp = b2[k2];
     if (isObject(aProp) && isObject(bProp)) {
       if (!deepEqual(aProp, bProp)) {
         return false;
@@ -2618,8 +2664,8 @@ function deepEqual(a2, b) {
       return false;
     }
   }
-  for (const k of bKeys) {
-    if (!aKeys.includes(k)) {
+  for (const k2 of bKeys) {
+    if (!aKeys.includes(k2)) {
       return false;
     }
   }
@@ -3549,11 +3595,11 @@ function openDB(name5, version5, { blocked, upgrade, blocking, terminated } = {}
   }
   if (blocked)
     request.addEventListener("blocked", () => blocked());
-  openPromise.then((db) => {
+  openPromise.then((db2) => {
     if (terminated)
-      db.addEventListener("close", () => terminated());
+      db2.addEventListener("close", () => terminated());
     if (blocking)
-      db.addEventListener("versionchange", () => blocking());
+      db2.addEventListener("versionchange", () => blocking());
   }).catch(() => {
   });
   return openPromise;
@@ -3694,10 +3740,10 @@ function registerVersion(libraryKeyOrName, version5, variant) {
 function getDbPromise() {
   if (!dbPromise) {
     dbPromise = openDB(DB_NAME, DB_VERSION, {
-      upgrade: (db, oldVersion) => {
+      upgrade: (db2, oldVersion) => {
         switch (oldVersion) {
           case 0:
-            db.createObjectStore(STORE_NAME);
+            db2.createObjectStore(STORE_NAME);
         }
       }
     }).catch((e3) => {
@@ -3711,8 +3757,8 @@ function getDbPromise() {
 async function readHeartbeatsFromIndexedDB(app2) {
   var _a;
   try {
-    const db = await getDbPromise();
-    return db.transaction(STORE_NAME).objectStore(STORE_NAME).get(computeKey(app2));
+    const db2 = await getDbPromise();
+    return db2.transaction(STORE_NAME).objectStore(STORE_NAME).get(computeKey(app2));
   } catch (e3) {
     if (e3 instanceof FirebaseError) {
       logger.warn(e3.message);
@@ -3727,8 +3773,8 @@ async function readHeartbeatsFromIndexedDB(app2) {
 async function writeHeartbeatsToIndexedDB(app2, heartbeatObject) {
   var _a;
   try {
-    const db = await getDbPromise();
-    const tx = db.transaction(STORE_NAME, "readwrite");
+    const db2 = await getDbPromise();
+    const tx = db2.transaction(STORE_NAME, "readwrite");
     const objectStore = tx.objectStore(STORE_NAME);
     await objectStore.put(heartbeatObject, computeKey(app2));
     return tx.done;
@@ -4108,21 +4154,21 @@ var require_tslib = __commonJS({
         };
       }
     })(function(exporter) {
-      var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b) {
-        d2.__proto__ = b;
-      } || function(d2, b) {
-        for (var p2 in b)
-          if (Object.prototype.hasOwnProperty.call(b, p2))
-            d2[p2] = b[p2];
+      var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+        d2.__proto__ = b2;
+      } || function(d2, b2) {
+        for (var p2 in b2)
+          if (Object.prototype.hasOwnProperty.call(b2, p2))
+            d2[p2] = b2[p2];
       };
-      __extends2 = function(d2, b) {
-        if (typeof b !== "function" && b !== null)
-          throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d2, b);
+      __extends2 = function(d2, b2) {
+        if (typeof b2 !== "function" && b2 !== null)
+          throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
+        extendStatics(d2, b2);
         function __() {
           this.constructor = d2;
         }
-        d2.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
       };
       __assign2 = Object.assign || function(t2) {
         for (var s3, i = 1, n2 = arguments.length; i < n2; i++) {
@@ -4164,13 +4210,13 @@ var require_tslib = __commonJS({
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
           return Reflect.metadata(metadataKey, metadataValue);
       };
-      __awaiter2 = function(thisArg, _arguments, P, generator) {
+      __awaiter2 = function(thisArg, _arguments, P2, generator) {
         function adopt(value) {
-          return value instanceof P ? value : new P(function(resolve2) {
+          return value instanceof P2 ? value : new P2(function(resolve2) {
             resolve2(value);
           });
         }
-        return new (P || (P = Promise))(function(resolve2, reject) {
+        return new (P2 || (P2 = Promise))(function(resolve2, reject) {
           function fulfilled(value) {
             try {
               step(generator.next(value));
@@ -4196,7 +4242,7 @@ var require_tslib = __commonJS({
           if (t2[0] & 1)
             throw t2[1];
           return t2[1];
-        }, trys: [], ops: [] }, f2, y, t2, g2;
+        }, trys: [], ops: [] }, f2, y2, t2, g2;
         return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
           return this;
         }), g2;
@@ -4210,9 +4256,9 @@ var require_tslib = __commonJS({
             throw new TypeError("Generator is already executing.");
           while (_2)
             try {
-              if (f2 = 1, y && (t2 = op2[0] & 2 ? y["return"] : op2[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op2[1])).done)
+              if (f2 = 1, y2 && (t2 = op2[0] & 2 ? y2["return"] : op2[0] ? y2["throw"] || ((t2 = y2["return"]) && t2.call(y2), 0) : y2.next) && !(t2 = t2.call(y2, op2[1])).done)
                 return t2;
-              if (y = 0, t2)
+              if (y2 = 0, t2)
                 op2 = [op2[0] & 2, t2.value];
               switch (op2[0]) {
                 case 0:
@@ -4224,7 +4270,7 @@ var require_tslib = __commonJS({
                   return { value: op2[1], done: false };
                 case 5:
                   _2.label++;
-                  y = op2[1];
+                  y2 = op2[1];
                   op2 = [0];
                   continue;
                 case 7:
@@ -4258,7 +4304,7 @@ var require_tslib = __commonJS({
               op2 = body.call(thisArg, _2);
             } catch (e3) {
               op2 = [6, e3];
-              y = 0;
+              y2 = 0;
             } finally {
               f2 = t2 = 0;
             }
@@ -4272,20 +4318,20 @@ var require_tslib = __commonJS({
           if (p2 !== "default" && !Object.prototype.hasOwnProperty.call(o2, p2))
             __createBinding2(o2, m2, p2);
       };
-      __createBinding2 = Object.create ? function(o2, m2, k, k2) {
-        if (k2 === void 0)
-          k2 = k;
-        var desc = Object.getOwnPropertyDescriptor(m2, k);
+      __createBinding2 = Object.create ? function(o2, m2, k2, k22) {
+        if (k22 === void 0)
+          k22 = k2;
+        var desc = Object.getOwnPropertyDescriptor(m2, k2);
         if (!desc || ("get" in desc ? !m2.__esModule : desc.writable || desc.configurable)) {
           desc = { enumerable: true, get: function() {
-            return m2[k];
+            return m2[k2];
           } };
         }
-        Object.defineProperty(o2, k2, desc);
-      } : function(o2, m2, k, k2) {
-        if (k2 === void 0)
-          k2 = k;
-        o2[k2] = m2[k];
+        Object.defineProperty(o2, k22, desc);
+      } : function(o2, m2, k2, k22) {
+        if (k22 === void 0)
+          k22 = k2;
+        o2[k22] = m2[k2];
       };
       __values2 = function(o2) {
         var s3 = typeof Symbol === "function" && Symbol.iterator, m2 = s3 && o2[s3], i = 0;
@@ -4330,9 +4376,9 @@ var require_tslib = __commonJS({
       __spreadArrays2 = function() {
         for (var s3 = 0, i = 0, il = arguments.length; i < il; i++)
           s3 += arguments[i].length;
-        for (var r2 = Array(s3), k = 0, i = 0; i < il; i++)
-          for (var a2 = arguments[i], j2 = 0, jl = a2.length; j2 < jl; j2++, k++)
-            r2[k] = a2[j2];
+        for (var r2 = Array(s3), k2 = 0, i = 0; i < il; i++)
+          for (var a2 = arguments[i], j2 = 0, jl = a2.length; j2 < jl; j2++, k2++)
+            r2[k2] = a2[j2];
         return r2;
       };
       __spreadArray2 = function(to, from, pack) {
@@ -4352,15 +4398,15 @@ var require_tslib = __commonJS({
       __asyncGenerator2 = function(thisArg, _arguments, generator) {
         if (!Symbol.asyncIterator)
           throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g2 = generator.apply(thisArg, _arguments || []), i, q = [];
+        var g2 = generator.apply(thisArg, _arguments || []), i, q2 = [];
         return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
           return this;
         }, i;
         function verb(n2) {
           if (g2[n2])
             i[n2] = function(v2) {
-              return new Promise(function(a2, b) {
-                q.push([n2, v2, a2, b]) > 1 || resume(n2, v2);
+              return new Promise(function(a2, b2) {
+                q2.push([n2, v2, a2, b2]) > 1 || resume(n2, v2);
               });
             };
         }
@@ -4368,11 +4414,11 @@ var require_tslib = __commonJS({
           try {
             step(g2[n2](v2));
           } catch (e3) {
-            settle(q[0][3], e3);
+            settle(q2[0][3], e3);
           }
         }
         function step(r2) {
-          r2.value instanceof __await2 ? Promise.resolve(r2.value.v).then(fulfill, reject) : settle(q[0][2], r2);
+          r2.value instanceof __await2 ? Promise.resolve(r2.value.v).then(fulfill, reject) : settle(q2[0][2], r2);
         }
         function fulfill(value) {
           resume("next", value);
@@ -4381,8 +4427,8 @@ var require_tslib = __commonJS({
           resume("throw", value);
         }
         function settle(f2, v2) {
-          if (f2(v2), q.shift(), q.length)
-            resume(q[0][0], q[0][1]);
+          if (f2(v2), q2.shift(), q2.length)
+            resume(q2[0][0], q2[0][1]);
         }
       };
       __asyncDelegator2 = function(o2) {
@@ -4436,9 +4482,9 @@ var require_tslib = __commonJS({
           return mod;
         var result = {};
         if (mod != null) {
-          for (var k in mod)
-            if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
-              __createBinding2(result, mod, k);
+          for (var k2 in mod)
+            if (k2 !== "default" && Object.prototype.hasOwnProperty.call(mod, k2))
+              __createBinding2(result, mod, k2);
         }
         __setModuleDefault(result, mod);
         return result;
@@ -5169,8 +5215,8 @@ function _getServiceWorkerController() {
 function _getWorkerGlobalScope() {
   return _isWorker() ? self : null;
 }
-function getObjectStore(db, isReadWrite) {
-  return db.transaction([DB_OBJECTSTORE_NAME], isReadWrite ? "readwrite" : "readonly").objectStore(DB_OBJECTSTORE_NAME);
+function getObjectStore(db2, isReadWrite) {
+  return db2.transaction([DB_OBJECTSTORE_NAME], isReadWrite ? "readwrite" : "readonly").objectStore(DB_OBJECTSTORE_NAME);
 }
 function _deleteDatabase() {
   const request = indexedDB.deleteDatabase(DB_NAME2);
@@ -5183,39 +5229,39 @@ function _openDatabase() {
       reject(request.error);
     });
     request.addEventListener("upgradeneeded", () => {
-      const db = request.result;
+      const db2 = request.result;
       try {
-        db.createObjectStore(DB_OBJECTSTORE_NAME, { keyPath: DB_DATA_KEYPATH });
+        db2.createObjectStore(DB_OBJECTSTORE_NAME, { keyPath: DB_DATA_KEYPATH });
       } catch (e3) {
         reject(e3);
       }
     });
     request.addEventListener("success", async () => {
-      const db = request.result;
-      if (!db.objectStoreNames.contains(DB_OBJECTSTORE_NAME)) {
-        db.close();
+      const db2 = request.result;
+      if (!db2.objectStoreNames.contains(DB_OBJECTSTORE_NAME)) {
+        db2.close();
         await _deleteDatabase();
         resolve2(await _openDatabase());
       } else {
-        resolve2(db);
+        resolve2(db2);
       }
     });
   });
 }
-async function _putObject(db, key2, value) {
-  const request = getObjectStore(db, true).put({
+async function _putObject(db2, key2, value) {
+  const request = getObjectStore(db2, true).put({
     [DB_DATA_KEYPATH]: key2,
     value
   });
   return new DBPromise(request).toPromise();
 }
-async function getObject(db, key2) {
-  const request = getObjectStore(db, false).get(key2);
+async function getObject(db2, key2) {
+  const request = getObjectStore(db2, false).get(key2);
   const data = await new DBPromise(request).toPromise();
   return data === void 0 ? null : data.value;
 }
-function _deleteObject(db, key2) {
-  const request = getObjectStore(db, true).delete(key2);
+function _deleteObject(db2, key2) {
+  const request = getObjectStore(db2, true).delete(key2);
   return new DBPromise(request).toPromise();
 }
 function startSignInPhoneMfa(auth, request) {
@@ -7468,8 +7514,8 @@ var init_index_90ebcfae = __esm({
         let numAttempts = 0;
         while (true) {
           try {
-            const db = await this._openDb();
-            return await op2(db);
+            const db2 = await this._openDb();
+            return await op2(db2);
           } catch (e3) {
             if (numAttempts++ > _TRANSACTION_RETRY_COUNT) {
               throw e3;
@@ -7529,9 +7575,9 @@ var init_index_90ebcfae = __esm({
           if (!indexedDB) {
             return false;
           }
-          const db = await _openDatabase();
-          await _putObject(db, STORAGE_AVAILABLE_KEY, "1");
-          await _deleteObject(db, STORAGE_AVAILABLE_KEY);
+          const db2 = await _openDatabase();
+          await _putObject(db2, STORAGE_AVAILABLE_KEY, "1");
+          await _deleteObject(db2, STORAGE_AVAILABLE_KEY);
           return true;
         } catch (_a) {
         }
@@ -7547,26 +7593,26 @@ var init_index_90ebcfae = __esm({
       }
       async _set(key2, value) {
         return this._withPendingWrite(async () => {
-          await this._withRetries((db) => _putObject(db, key2, value));
+          await this._withRetries((db2) => _putObject(db2, key2, value));
           this.localCache[key2] = value;
           return this.notifyServiceWorker(key2);
         });
       }
       async _get(key2) {
-        const obj = await this._withRetries((db) => getObject(db, key2));
+        const obj = await this._withRetries((db2) => getObject(db2, key2));
         this.localCache[key2] = obj;
         return obj;
       }
       async _remove(key2) {
         return this._withPendingWrite(async () => {
-          await this._withRetries((db) => _deleteObject(db, key2));
+          await this._withRetries((db2) => _deleteObject(db2, key2));
           delete this.localCache[key2];
           return this.notifyServiceWorker(key2);
         });
       }
       async _poll() {
-        const result = await this._withRetries((db) => {
-          const getAllRequest = getObjectStore(db, false).getAll();
+        const result = await this._withRetries((db2) => {
+          const getAllRequest = getObjectStore(db2, false).getAll();
           return new DBPromise(getAllRequest).toPromise();
         });
         if (!result) {
@@ -8225,6 +8271,12 @@ function p(t2, ...e3) {
     d.error(`Firestore (${f}): ${t2}`, ...n2);
   }
 }
+function y(t2, ...e3) {
+  if (d.logLevel <= LogLevel.WARN) {
+    const n2 = e3.map(_);
+    d.warn(`Firestore (${f}): ${t2}`, ...n2);
+  }
+}
 function _(t2) {
   if ("string" == typeof t2)
     return t2;
@@ -8242,13 +8294,516 @@ function g(t2 = "Unexpected state") {
 function v(t2, e3) {
   t2 || g();
 }
+function b(t2, e3) {
+  return t2;
+}
+function nt(t2, e3, n2) {
+  if (!n2)
+    throw new L(A, `Function ${t2}() cannot be called with an empty ${e3}.`);
+}
+function st(t2) {
+  if (et.isDocumentKey(t2))
+    throw new L(A, `Invalid collection reference. Collection references must have an odd number of segments, but ${t2} has ${t2.length}.`);
+}
+function it(t2) {
+  if (void 0 === t2)
+    return "undefined";
+  if (null === t2)
+    return "null";
+  if ("string" == typeof t2)
+    return t2.length > 20 && (t2 = `${t2.substring(0, 20)}...`), JSON.stringify(t2);
+  if ("number" == typeof t2 || "boolean" == typeof t2)
+    return "" + t2;
+  if ("object" == typeof t2) {
+    if (t2 instanceof Array)
+      return "an array";
+    {
+      const e3 = function(t3) {
+        if (t3.constructor)
+          return t3.constructor.name;
+        return null;
+      }(t2);
+      return e3 ? `a custom ${e3} object` : "an object";
+    }
+  }
+  return "function" == typeof t2 ? "a function" : g();
+}
+function ot(t2, e3) {
+  if ("_delegate" in t2 && (t2 = t2._delegate), !(t2 instanceof e3)) {
+    if (e3.name === t2.constructor.name)
+      throw new L(A, "Type does not match the expected instance. Did you pass a reference from a different Firestore SDK?");
+    {
+      const n2 = it(t2);
+      throw new L(A, `Expected type '${e3.name}', but it was: ${n2}`);
+    }
+  }
+  return t2;
+}
+function ct(t2) {
+  return null == t2;
+}
+function at(t2) {
+  return 0 === t2 && 1 / t2 == -1 / 0;
+}
+function dt(t2) {
+  if (void 0 === t2)
+    return p("RPC_ERROR", "HTTP error has no status"), I;
+  switch (t2) {
+    case 200:
+      return E;
+    case 400:
+      return x;
+    case 401:
+      return D;
+    case 403:
+      return N;
+    case 404:
+      return P;
+    case 409:
+      return F;
+    case 416:
+      return S;
+    case 429:
+      return $;
+    case 499:
+      return T;
+    case 500:
+      return I;
+    case 501:
+      return q;
+    case 503:
+      return k;
+    case 504:
+      return R;
+    default:
+      return t2 >= 200 && t2 < 300 ? E : t2 >= 400 && t2 < 500 ? x : t2 >= 500 && t2 < 600 ? O : I;
+  }
+}
 function yt(t2, e3) {
   return t2 < e3 ? -1 : t2 > e3 ? 1 : 0;
+}
+function _t(t2, e3, n2) {
+  return t2.length === e3.length && t2.every((t3, r2) => n2(t3, e3[r2]));
+}
+function bt(t2) {
+  let e3 = 0;
+  for (const n2 in t2)
+    Object.prototype.hasOwnProperty.call(t2, n2) && e3++;
+  return e3;
+}
+function Et(t2, e3) {
+  for (const n2 in t2)
+    Object.prototype.hasOwnProperty.call(t2, n2) && e3(n2, t2[n2]);
+}
+function $t(t2) {
+  if (v(!!t2), "string" == typeof t2) {
+    let e3 = 0;
+    const n2 = Dt.exec(t2);
+    if (v(!!n2), n2[1]) {
+      let t3 = n2[1];
+      t3 = (t3 + "000000000").substr(0, 9), e3 = Number(t3);
+    }
+    const r2 = new Date(t2);
+    return {
+      seconds: Math.floor(r2.getTime() / 1e3),
+      nanos: e3
+    };
+  }
+  return {
+    seconds: xt(t2.seconds),
+    nanos: xt(t2.nanos)
+  };
+}
+function xt(t2) {
+  return "number" == typeof t2 ? t2 : "string" == typeof t2 ? Number(t2) : 0;
+}
+function Ft(t2) {
+  return "string" == typeof t2 ? Nt.fromBase64String(t2) : Nt.fromUint8Array(t2);
+}
+function St(t2) {
+  var e3, n2;
+  return "server_timestamp" === (null === (n2 = ((null === (e3 = null == t2 ? void 0 : t2.mapValue) || void 0 === e3 ? void 0 : e3.fields) || {}).__type__) || void 0 === n2 ? void 0 : n2.stringValue);
+}
+function qt(t2) {
+  const e3 = t2.mapValue.fields.__previous_value__;
+  return St(e3) ? qt(e3) : e3;
+}
+function Ot(t2) {
+  const e3 = $t(t2.mapValue.fields.__local_write_time__.timestampValue);
+  return new gt(e3.seconds, e3.nanos);
+}
+function Ct(t2) {
+  return "nullValue" in t2 ? 0 : "booleanValue" in t2 ? 1 : "integerValue" in t2 || "doubleValue" in t2 ? 2 : "timestampValue" in t2 ? 3 : "stringValue" in t2 ? 5 : "bytesValue" in t2 ? 6 : "referenceValue" in t2 ? 7 : "geoPointValue" in t2 ? 8 : "arrayValue" in t2 ? 9 : "mapValue" in t2 ? St(t2) ? 4 : function(t3) {
+    return "__max__" === (((t3.mapValue || {}).fields || {}).__type__ || {}).stringValue;
+  }(t2) ? 9007199254740991 : 10 : g();
+}
+function Lt(t2, e3) {
+  if (t2 === e3)
+    return true;
+  const n2 = Ct(t2);
+  if (n2 !== Ct(e3))
+    return false;
+  switch (n2) {
+    case 0:
+    case 9007199254740991:
+      return true;
+    case 1:
+      return t2.booleanValue === e3.booleanValue;
+    case 4:
+      return Ot(t2).isEqual(Ot(e3));
+    case 3:
+      return function(t3, e4) {
+        if ("string" == typeof t3.timestampValue && "string" == typeof e4.timestampValue && t3.timestampValue.length === e4.timestampValue.length)
+          return t3.timestampValue === e4.timestampValue;
+        const n3 = $t(t3.timestampValue), r2 = $t(e4.timestampValue);
+        return n3.seconds === r2.seconds && n3.nanos === r2.nanos;
+      }(t2, e3);
+    case 5:
+      return t2.stringValue === e3.stringValue;
+    case 6:
+      return function(t3, e4) {
+        return Ft(t3.bytesValue).isEqual(Ft(e4.bytesValue));
+      }(t2, e3);
+    case 7:
+      return t2.referenceValue === e3.referenceValue;
+    case 8:
+      return function(t3, e4) {
+        return xt(t3.geoPointValue.latitude) === xt(e4.geoPointValue.latitude) && xt(t3.geoPointValue.longitude) === xt(e4.geoPointValue.longitude);
+      }(t2, e3);
+    case 2:
+      return function(t3, e4) {
+        if ("integerValue" in t3 && "integerValue" in e4)
+          return xt(t3.integerValue) === xt(e4.integerValue);
+        if ("doubleValue" in t3 && "doubleValue" in e4) {
+          const n3 = xt(t3.doubleValue), r2 = xt(e4.doubleValue);
+          return n3 === r2 ? at(n3) === at(r2) : isNaN(n3) && isNaN(r2);
+        }
+        return false;
+      }(t2, e3);
+    case 9:
+      return _t(t2.arrayValue.values || [], e3.arrayValue.values || [], Lt);
+    case 10:
+      return function(t3, e4) {
+        const n3 = t3.mapValue.fields || {}, r2 = e4.mapValue.fields || {};
+        if (bt(n3) !== bt(r2))
+          return false;
+        for (const t4 in n3)
+          if (n3.hasOwnProperty(t4) && (void 0 === r2[t4] || !Lt(n3[t4], r2[t4])))
+            return false;
+        return true;
+      }(t2, e3);
+    default:
+      return g();
+  }
+}
+function Gt(t2) {
+  return !!t2 && "nullValue" in t2;
+}
+function Wt(t2) {
+  return !!t2 && "doubleValue" in t2 && isNaN(Number(t2.doubleValue));
+}
+function Kt(t2) {
+  return !!t2 && "mapValue" in t2;
+}
+function Qt(t2) {
+  if (t2.geoPointValue)
+    return {
+      geoPointValue: Object.assign({}, t2.geoPointValue)
+    };
+  if (t2.timestampValue && "object" == typeof t2.timestampValue)
+    return {
+      timestampValue: Object.assign({}, t2.timestampValue)
+    };
+  if (t2.mapValue) {
+    const e3 = {
+      mapValue: {
+        fields: {}
+      }
+    };
+    return Et(t2.mapValue.fields, (t3, n2) => e3.mapValue.fields[t3] = Qt(n2)), e3;
+  }
+  if (t2.arrayValue) {
+    const e3 = {
+      arrayValue: {
+        values: []
+      }
+    };
+    for (let n2 = 0; n2 < (t2.arrayValue.values || []).length; ++n2)
+      e3.arrayValue.values[n2] = Qt(t2.arrayValue.values[n2]);
+    return e3;
+  }
+  return Object.assign({}, t2);
+}
+function Xt(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = null, o2 = null) {
+  return new Jt(t2, e3, n2, r2, s3, i, o2);
+}
+function de(t2) {
+  return t2.explicitOrderBy.length > 0 ? t2.explicitOrderBy[0].field : null;
+}
+function we(t2) {
+  for (const e3 of t2.filters)
+    if (e3.D())
+      return e3.field;
+  return null;
+}
+function pe(t2) {
+  const e3 = b(t2);
+  if (null === e3.$) {
+    e3.$ = [];
+    const t3 = we(e3), n2 = de(e3);
+    if (null !== t3 && null === n2)
+      t3.isKeyField() || e3.$.push(new ae(t3)), e3.$.push(new ae(tt.keyField(), "asc"));
+    else {
+      let t4 = false;
+      for (const n3 of e3.explicitOrderBy)
+        e3.$.push(n3), n3.field.isKeyField() && (t4 = true);
+      if (!t4) {
+        const t5 = e3.explicitOrderBy.length > 0 ? e3.explicitOrderBy[e3.explicitOrderBy.length - 1].dir : "asc";
+        e3.$.push(new ae(tt.keyField(), t5));
+      }
+    }
+  }
+  return e3.$;
+}
+function ye(t2) {
+  const e3 = b(t2);
+  if (!e3.F)
+    if ("F" === e3.limitType)
+      e3.F = Xt(e3.path, e3.collectionGroup, pe(e3), e3.filters, e3.limit, e3.startAt, e3.endAt);
+    else {
+      const t3 = [];
+      for (const n3 of pe(e3)) {
+        const e4 = "desc" === n3.dir ? "asc" : "desc";
+        t3.push(new ae(n3.field, e4));
+      }
+      const n2 = e3.endAt ? new ce(e3.endAt.position, e3.endAt.inclusive) : null, r2 = e3.startAt ? new ce(e3.startAt.position, e3.startAt.inclusive) : null;
+      e3.F = Xt(e3.path, e3.collectionGroup, t3, e3.filters, e3.limit, n2, r2);
+    }
+  return e3.F;
+}
+function Ce(t2) {
+  return v(!!t2), vt.fromTimestamp(function(t3) {
+    const e3 = $t(t3);
+    return new gt(e3.seconds, e3.nanos);
+  }(t2));
+}
+function Le(t2, e3) {
+  return function(t3) {
+    return new X(["projects", t3.projectId, "databases", t3.database]);
+  }(t2).child("documents").child(e3).canonicalString();
+}
+function Ue(t2, e3) {
+  const n2 = function(t3) {
+    const e4 = X.fromString(t3);
+    return v(Xe(e4)), e4;
+  }(e3);
+  if (n2.get(1) !== t2.databaseId.projectId)
+    throw new L(A, "Tried to deserialize key from different project: " + n2.get(1) + " vs " + t2.databaseId.projectId);
+  if (n2.get(3) !== t2.databaseId.database)
+    throw new L(A, "Tried to deserialize key from different database: " + n2.get(3) + " vs " + t2.databaseId.database);
+  return new et((v((r2 = n2).length > 4 && "documents" === r2.get(4)), r2.popFirst(5)));
+  var r2;
+}
+function je(t2, e3) {
+  return Le(t2.databaseId, e3);
+}
+function Ke(t2, e3) {
+  const n2 = {
+    structuredQuery: {}
+  }, r2 = e3.path;
+  null !== e3.collectionGroup ? (n2.parent = je(t2, r2), n2.structuredQuery.from = [{
+    collectionId: e3.collectionGroup,
+    allDescendants: true
+  }]) : (n2.parent = je(t2, r2.popLast()), n2.structuredQuery.from = [{
+    collectionId: r2.lastSegment()
+  }]);
+  const s3 = function(t3) {
+    if (0 === t3.length)
+      return;
+    const e4 = t3.map((t4) => function(t5) {
+      if ("==" === t5.op) {
+        if (Wt(t5.value))
+          return {
+            unaryFilter: {
+              field: He(t5.field),
+              op: "IS_NAN"
+            }
+          };
+        if (Gt(t5.value))
+          return {
+            unaryFilter: {
+              field: He(t5.field),
+              op: "IS_NULL"
+            }
+          };
+      } else if ("!=" === t5.op) {
+        if (Wt(t5.value))
+          return {
+            unaryFilter: {
+              field: He(t5.field),
+              op: "IS_NOT_NAN"
+            }
+          };
+        if (Gt(t5.value))
+          return {
+            unaryFilter: {
+              field: He(t5.field),
+              op: "IS_NOT_NULL"
+            }
+          };
+      }
+      return {
+        fieldFilter: {
+          field: He(t5.field),
+          op: Ye(t5.op),
+          value: t5.value
+        }
+      };
+    }(t4));
+    if (1 === e4.length)
+      return e4[0];
+    return {
+      compositeFilter: {
+        op: "AND",
+        filters: e4
+      }
+    };
+  }(e3.filters);
+  s3 && (n2.structuredQuery.where = s3);
+  const i = function(t3) {
+    if (0 === t3.length)
+      return;
+    return t3.map((t4) => function(t5) {
+      return {
+        field: He(t5.field),
+        direction: Qe(t5.dir)
+      };
+    }(t4));
+  }(e3.orderBy);
+  i && (n2.structuredQuery.orderBy = i);
+  const o2 = function(t3, e4) {
+    return t3.S || ct(e4) ? e4 : {
+      value: e4
+    };
+  }(t2, e3.limit);
+  var u;
+  return null !== o2 && (n2.structuredQuery.limit = o2), e3.startAt && (n2.structuredQuery.startAt = {
+    before: (u = e3.startAt).inclusive,
+    values: u.position
+  }), e3.endAt && (n2.structuredQuery.endAt = function(t3) {
+    return {
+      before: !t3.inclusive,
+      values: t3.position
+    };
+  }(e3.endAt)), n2;
+}
+function Qe(t2) {
+  return xe[t2];
+}
+function Ye(t2) {
+  return Fe[t2];
+}
+function He(t2) {
+  return {
+    fieldPath: t2.canonicalString()
+  };
+}
+function Xe(t2) {
+  return t2.length >= 4 && "projects" === t2.get(0) && "databases" === t2.get(2);
+}
+function Ze(t2) {
+  return new Se(t2, true);
+}
+async function sn(t2, e3) {
+  const n2 = b(t2), r2 = Ke(n2.q, ye(e3));
+  return (await n2.T("RunQuery", r2.parent, {
+    structuredQuery: r2.structuredQuery
+  })).filter((t3) => !!t3.document).map((t3) => function(t4, e4, n3) {
+    const r3 = Ue(t4, e4.name), s3 = Ce(e4.updateTime), i = new Yt({
+      mapValue: {
+        fields: e4.fields
+      }
+    }), o2 = Ht.newFoundDocument(r3, s3, i);
+    return n3 && o2.setHasCommittedMutations(), n3 ? o2.setHasCommittedMutations() : o2;
+  }(n2.q, t3.document, void 0));
+}
+function un(t2) {
+  if (t2._terminated)
+    throw new L(x, "The client has already been terminated.");
+  if (!on.has(t2)) {
+    m("ComponentProvider", "Initializing Datastore");
+    const i = function(t3) {
+      return new wt(t3, fetch.bind(null));
+    }((e3 = t2._databaseId, n2 = t2.app.options.appId || "", r2 = t2._persistenceKey, s3 = t2._freezeSettings(), new Y(e3, n2, r2, s3.host, s3.ssl, s3.experimentalForceLongPolling, s3.experimentalAutoDetectLongPolling, s3.useFetchStreams))), o2 = Ze(t2._databaseId), u = function(t3, e4, n3, r3) {
+      return new en(t3, e4, n3, r3);
+    }(t2._authCredentials, t2._appCheckCredentials, i, o2);
+    on.set(t2, u);
+  }
+  var e3, n2, r2, s3;
+  return on.get(t2);
 }
 function ln(e3 = getApp()) {
   return _getProvider(e3, "firestore/lite").getImmediate();
 }
-var l, f, d, A, x, L, U, j, z, G, W, K, Q, H, lt, ft, At, Nt, Dt, xe, Fe, on, cn, an, Yn;
+function yn(t2, e3, ...n2) {
+  if (t2 = getModularInstance(t2), nt("collection", "path", e3), t2 instanceof an) {
+    const r2 = X.fromString(e3, ...n2);
+    return st(r2), new pn(t2, null, r2);
+  }
+  {
+    if (!(t2 instanceof wn || t2 instanceof pn))
+      throw new L(A, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
+    const r2 = t2._path.child(X.fromString(e3, ...n2));
+    return st(r2), new pn(
+      t2.firestore,
+      null,
+      r2
+    );
+  }
+}
+function Hn(t2, e3, n2) {
+  if (e3.search(Yn) >= 0)
+    throw Jn(
+      `Invalid field path (${e3}). Paths must not contain '~', '*', '/', '[', or ']'`,
+      t2,
+      false,
+      void 0,
+      n2
+    );
+  try {
+    return new En(...e3.split("."))._internalPath;
+  } catch (r2) {
+    throw Jn(
+      `Invalid field path (${e3}). Paths must not be empty, begin with '.', end with '.', or contain '..'`,
+      t2,
+      false,
+      void 0,
+      n2
+    );
+  }
+}
+function Jn(t2, e3, n2, r2, s3) {
+  const i = r2 && !r2.isEmpty(), o2 = void 0 !== s3;
+  let u = `Function ${e3}() called with invalid data`;
+  n2 && (u += " (via `toFirestore()`)"), u += ". ";
+  let c2 = "";
+  return (i || o2) && (c2 += " (found", i && (c2 += ` in field ${r2}`), o2 && (c2 += ` in document ${s3}`), c2 += ")"), new L(A, u + t2 + c2);
+}
+function rr(t2, e3) {
+  return "string" == typeof e3 ? Hn(t2, e3) : e3 instanceof En ? e3._internalPath : e3._delegate._internalPath;
+}
+function Rr(t2) {
+  !function(t3) {
+    if ("L" === t3.limitType && 0 === t3.explicitOrderBy.length)
+      throw new L(q, "limitToLast() queries require specifying at least one orderBy() clause");
+  }((t2 = ot(t2, mn))._query);
+  const e3 = un(t2.firestore), n2 = new Ir(t2.firestore);
+  return sn(e3, t2._query).then((e4) => {
+    const r2 = e4.map((e5) => new tr(t2.firestore, n2, e5.key, e5, t2.converter));
+    return "L" === t2._query.limitType && r2.reverse(), new er(t2, r2);
+  });
+}
+var l, f, d, E, T, I, A, R, P, N, D, $, x, F, S, q, O, k, L, U, j, z, G, W, K, Q, Y, H, J, X, Z, tt, et, ht, lt, ft, wt, gt, vt, At, Nt, Dt, Yt, Ht, Jt, ce, ae, fe, xe, Fe, Se, en, on, cn, an, wn, mn, pn, En, In, Rn, Yn, Zn, tr, er, Ir;
 var init_index_browser_esm2017 = __esm({
   "node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js"() {
     init_index_esm20174();
@@ -8272,8 +8827,21 @@ var init_index_browser_esm2017 = __esm({
     l.UNAUTHENTICATED = new l(null), l.GOOGLE_CREDENTIALS = new l("google-credentials-uid"), l.FIRST_PARTY = new l("first-party-uid"), l.MOCK_USER = new l("mock-user");
     f = "9.9.2";
     d = new Logger("@firebase/firestore");
+    E = "ok";
+    T = "cancelled";
+    I = "unknown";
     A = "invalid-argument";
+    R = "deadline-exceeded";
+    P = "not-found";
+    N = "permission-denied";
+    D = "unauthenticated";
+    $ = "resource-exhausted";
     x = "failed-precondition";
+    F = "aborted";
+    S = "out-of-range";
+    q = "unimplemented";
+    O = "internal";
+    k = "unavailable";
     L = class extends FirebaseError {
       constructor(t2, e3) {
         super(t2, e3), this.code = t2, this.message = e3, this.toString = () => `${this.name}: [code=${this.code}]: ${this.message}`;
@@ -8355,6 +8923,11 @@ var init_index_browser_esm2017 = __esm({
       shutdown() {
       }
     };
+    Y = class {
+      constructor(t2, e3, n2, r2, s3, i, o2, u) {
+        this.databaseId = t2, this.appId = e3, this.persistenceKey = n2, this.host = r2, this.ssl = s3, this.forceLongPolling = i, this.autoDetectLongPolling = o2, this.useFetchStreams = u;
+      }
+    };
     H = class {
       constructor(t2, e3) {
         this.projectId = t2, this.database = e3 || "(default)";
@@ -8369,7 +8942,321 @@ var init_index_browser_esm2017 = __esm({
         return t2 instanceof H && t2.projectId === this.projectId && t2.database === this.database;
       }
     };
+    J = class {
+      constructor(t2, e3, n2) {
+        void 0 === e3 ? e3 = 0 : e3 > t2.length && g(), void 0 === n2 ? n2 = t2.length - e3 : n2 > t2.length - e3 && g(), this.segments = t2, this.offset = e3, this.len = n2;
+      }
+      get length() {
+        return this.len;
+      }
+      isEqual(t2) {
+        return 0 === J.comparator(this, t2);
+      }
+      child(t2) {
+        const e3 = this.segments.slice(this.offset, this.limit());
+        return t2 instanceof J ? t2.forEach((t3) => {
+          e3.push(t3);
+        }) : e3.push(t2), this.construct(e3);
+      }
+      limit() {
+        return this.offset + this.length;
+      }
+      popFirst(t2) {
+        return t2 = void 0 === t2 ? 1 : t2, this.construct(this.segments, this.offset + t2, this.length - t2);
+      }
+      popLast() {
+        return this.construct(this.segments, this.offset, this.length - 1);
+      }
+      firstSegment() {
+        return this.segments[this.offset];
+      }
+      lastSegment() {
+        return this.get(this.length - 1);
+      }
+      get(t2) {
+        return this.segments[this.offset + t2];
+      }
+      isEmpty() {
+        return 0 === this.length;
+      }
+      isPrefixOf(t2) {
+        if (t2.length < this.length)
+          return false;
+        for (let e3 = 0; e3 < this.length; e3++)
+          if (this.get(e3) !== t2.get(e3))
+            return false;
+        return true;
+      }
+      isImmediateParentOf(t2) {
+        if (this.length + 1 !== t2.length)
+          return false;
+        for (let e3 = 0; e3 < this.length; e3++)
+          if (this.get(e3) !== t2.get(e3))
+            return false;
+        return true;
+      }
+      forEach(t2) {
+        for (let e3 = this.offset, n2 = this.limit(); e3 < n2; e3++)
+          t2(this.segments[e3]);
+      }
+      toArray() {
+        return this.segments.slice(this.offset, this.limit());
+      }
+      static comparator(t2, e3) {
+        const n2 = Math.min(t2.length, e3.length);
+        for (let r2 = 0; r2 < n2; r2++) {
+          const n3 = t2.get(r2), s3 = e3.get(r2);
+          if (n3 < s3)
+            return -1;
+          if (n3 > s3)
+            return 1;
+        }
+        return t2.length < e3.length ? -1 : t2.length > e3.length ? 1 : 0;
+      }
+    };
+    X = class extends J {
+      construct(t2, e3, n2) {
+        return new X(t2, e3, n2);
+      }
+      canonicalString() {
+        return this.toArray().join("/");
+      }
+      toString() {
+        return this.canonicalString();
+      }
+      static fromString(...t2) {
+        const e3 = [];
+        for (const n2 of t2) {
+          if (n2.indexOf("//") >= 0)
+            throw new L(A, `Invalid segment (${n2}). Paths must not contain // in them.`);
+          e3.push(...n2.split("/").filter((t3) => t3.length > 0));
+        }
+        return new X(e3);
+      }
+      static emptyPath() {
+        return new X([]);
+      }
+    };
+    Z = /^[_a-zA-Z][_a-zA-Z0-9]*$/;
+    tt = class extends J {
+      construct(t2, e3, n2) {
+        return new tt(t2, e3, n2);
+      }
+      static isValidIdentifier(t2) {
+        return Z.test(t2);
+      }
+      canonicalString() {
+        return this.toArray().map((t2) => (t2 = t2.replace(/\\/g, "\\\\").replace(/`/g, "\\`"), tt.isValidIdentifier(t2) || (t2 = "`" + t2 + "`"), t2)).join(".");
+      }
+      toString() {
+        return this.canonicalString();
+      }
+      isKeyField() {
+        return 1 === this.length && "__name__" === this.get(0);
+      }
+      static keyField() {
+        return new tt(["__name__"]);
+      }
+      static fromServerFormat(t2) {
+        const e3 = [];
+        let n2 = "", r2 = 0;
+        const s3 = () => {
+          if (0 === n2.length)
+            throw new L(A, `Invalid field path (${t2}). Paths must not be empty, begin with '.', end with '.', or contain '..'`);
+          e3.push(n2), n2 = "";
+        };
+        let i = false;
+        for (; r2 < t2.length; ) {
+          const e4 = t2[r2];
+          if ("\\" === e4) {
+            if (r2 + 1 === t2.length)
+              throw new L(A, "Path has trailing escape character: " + t2);
+            const e5 = t2[r2 + 1];
+            if ("\\" !== e5 && "." !== e5 && "`" !== e5)
+              throw new L(A, "Path has invalid escape sequence: " + t2);
+            n2 += e5, r2 += 2;
+          } else
+            "`" === e4 ? (i = !i, r2++) : "." !== e4 || i ? (n2 += e4, r2++) : (s3(), r2++);
+        }
+        if (s3(), i)
+          throw new L(A, "Unterminated ` in path: " + t2);
+        return new tt(e3);
+      }
+      static emptyPath() {
+        return new tt([]);
+      }
+    };
+    et = class {
+      constructor(t2) {
+        this.path = t2;
+      }
+      static fromPath(t2) {
+        return new et(X.fromString(t2));
+      }
+      static fromName(t2) {
+        return new et(X.fromString(t2).popFirst(5));
+      }
+      static empty() {
+        return new et(X.emptyPath());
+      }
+      get collectionGroup() {
+        return this.path.popLast().lastSegment();
+      }
+      hasCollectionId(t2) {
+        return this.path.length >= 2 && this.path.get(this.path.length - 2) === t2;
+      }
+      getCollectionGroup() {
+        return this.path.get(this.path.length - 2);
+      }
+      getCollectionPath() {
+        return this.path.popLast();
+      }
+      isEqual(t2) {
+        return null !== t2 && 0 === X.comparator(this.path, t2.path);
+      }
+      toString() {
+        return this.path.toString();
+      }
+      static comparator(t2, e3) {
+        return X.comparator(t2.path, e3.path);
+      }
+      static isDocumentKey(t2) {
+        return t2.length % 2 == 0;
+      }
+      static fromSegments(t2) {
+        return new et(new X(t2.slice()));
+      }
+    };
+    ht = {
+      BatchGetDocuments: "batchGet",
+      Commit: "commit",
+      RunQuery: "runQuery"
+    };
     (ft = lt || (lt = {}))[ft.OK = 0] = "OK", ft[ft.CANCELLED = 1] = "CANCELLED", ft[ft.UNKNOWN = 2] = "UNKNOWN", ft[ft.INVALID_ARGUMENT = 3] = "INVALID_ARGUMENT", ft[ft.DEADLINE_EXCEEDED = 4] = "DEADLINE_EXCEEDED", ft[ft.NOT_FOUND = 5] = "NOT_FOUND", ft[ft.ALREADY_EXISTS = 6] = "ALREADY_EXISTS", ft[ft.PERMISSION_DENIED = 7] = "PERMISSION_DENIED", ft[ft.UNAUTHENTICATED = 16] = "UNAUTHENTICATED", ft[ft.RESOURCE_EXHAUSTED = 8] = "RESOURCE_EXHAUSTED", ft[ft.FAILED_PRECONDITION = 9] = "FAILED_PRECONDITION", ft[ft.ABORTED = 10] = "ABORTED", ft[ft.OUT_OF_RANGE = 11] = "OUT_OF_RANGE", ft[ft.UNIMPLEMENTED = 12] = "UNIMPLEMENTED", ft[ft.INTERNAL = 13] = "INTERNAL", ft[ft.UNAVAILABLE = 14] = "UNAVAILABLE", ft[ft.DATA_LOSS = 15] = "DATA_LOSS";
+    wt = class extends class {
+      constructor(t2) {
+        this.databaseInfo = t2, this.databaseId = t2.databaseId;
+        const e3 = t2.ssl ? "https" : "http";
+        this.h = e3 + "://" + t2.host, this.l = "projects/" + this.databaseId.projectId + "/databases/" + this.databaseId.database + "/documents";
+      }
+      m(t2, e3, n2, r2, s3) {
+        const i = this.p(t2, e3);
+        m("RestConnection", "Sending: ", i, n2);
+        const o2 = {};
+        return this.g(o2, r2, s3), this.v(t2, i, o2, n2).then((t3) => (m("RestConnection", "Received: ", t3), t3), (e4) => {
+          throw y("RestConnection", `${t2} failed with error: `, e4, "url: ", i, "request:", n2), e4;
+        });
+      }
+      T(t2, e3, n2, r2, s3, i) {
+        return this.m(t2, e3, n2, r2, s3);
+      }
+      g(t2, e3, n2) {
+        t2["X-Goog-Api-Client"] = "gl-js/ fire/" + f, t2["Content-Type"] = "text/plain", this.databaseInfo.appId && (t2["X-Firebase-GMPID"] = this.databaseInfo.appId), e3 && e3.headers.forEach((e4, n3) => t2[n3] = e4), n2 && n2.headers.forEach((e4, n3) => t2[n3] = e4);
+      }
+      p(t2, e3) {
+        const n2 = ht[t2];
+        return `${this.h}/v1/${e3}:${n2}`;
+      }
+    } {
+      constructor(t2, e3) {
+        super(t2), this.I = e3;
+      }
+      A(t2, e3) {
+        throw new Error("Not supported by FetchConnection");
+      }
+      async v(t2, e3, n2, r2) {
+        const s3 = JSON.stringify(r2);
+        let i;
+        try {
+          i = await this.I(e3, {
+            method: "POST",
+            headers: n2,
+            body: s3
+          });
+        } catch (t3) {
+          throw new L(dt(t3.status), "Request failed with error: " + t3.statusText);
+        }
+        if (!i.ok)
+          throw new L(dt(i.status), "Request failed with error: " + i.statusText);
+        return i.json();
+      }
+    };
+    gt = class {
+      constructor(t2, e3) {
+        if (this.seconds = t2, this.nanoseconds = e3, e3 < 0)
+          throw new L(A, "Timestamp nanoseconds out of range: " + e3);
+        if (e3 >= 1e9)
+          throw new L(A, "Timestamp nanoseconds out of range: " + e3);
+        if (t2 < -62135596800)
+          throw new L(A, "Timestamp seconds out of range: " + t2);
+        if (t2 >= 253402300800)
+          throw new L(A, "Timestamp seconds out of range: " + t2);
+      }
+      static now() {
+        return gt.fromMillis(Date.now());
+      }
+      static fromDate(t2) {
+        return gt.fromMillis(t2.getTime());
+      }
+      static fromMillis(t2) {
+        const e3 = Math.floor(t2 / 1e3), n2 = Math.floor(1e6 * (t2 - 1e3 * e3));
+        return new gt(e3, n2);
+      }
+      toDate() {
+        return new Date(this.toMillis());
+      }
+      toMillis() {
+        return 1e3 * this.seconds + this.nanoseconds / 1e6;
+      }
+      _compareTo(t2) {
+        return this.seconds === t2.seconds ? yt(this.nanoseconds, t2.nanoseconds) : yt(this.seconds, t2.seconds);
+      }
+      isEqual(t2) {
+        return t2.seconds === this.seconds && t2.nanoseconds === this.nanoseconds;
+      }
+      toString() {
+        return "Timestamp(seconds=" + this.seconds + ", nanoseconds=" + this.nanoseconds + ")";
+      }
+      toJSON() {
+        return {
+          seconds: this.seconds,
+          nanoseconds: this.nanoseconds
+        };
+      }
+      valueOf() {
+        const t2 = this.seconds - -62135596800;
+        return String(t2).padStart(12, "0") + "." + String(this.nanoseconds).padStart(9, "0");
+      }
+    };
+    vt = class {
+      constructor(t2) {
+        this.timestamp = t2;
+      }
+      static fromTimestamp(t2) {
+        return new vt(t2);
+      }
+      static min() {
+        return new vt(new gt(0, 0));
+      }
+      static max() {
+        return new vt(new gt(253402300799, 999999999));
+      }
+      compareTo(t2) {
+        return this.timestamp._compareTo(t2.timestamp);
+      }
+      isEqual(t2) {
+        return this.timestamp.isEqual(t2.timestamp);
+      }
+      toMicroseconds() {
+        return 1e6 * this.timestamp.seconds + this.timestamp.nanoseconds / 1e3;
+      }
+      toString() {
+        return "SnapshotVersion(" + this.timestamp.toString() + ")";
+      }
+      toTimestamp() {
+        return this.timestamp;
+      }
+    };
     At = class {
       constructor(t2, e3, n2, r2, s3) {
         this.key = t2, this.value = e3, this.color = null != n2 ? n2 : At.RED, this.left = null != r2 ? r2 : At.EMPTY, this.right = null != s3 ? s3 : At.EMPTY, this.size = this.left.size + 1 + this.right.size;
@@ -8569,6 +9456,157 @@ var init_index_browser_esm2017 = __esm({
     };
     Nt.EMPTY_BYTE_STRING = new Nt("");
     Dt = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
+    Yt = class {
+      constructor(t2) {
+        this.value = t2;
+      }
+      static empty() {
+        return new Yt({
+          mapValue: {}
+        });
+      }
+      field(t2) {
+        if (t2.isEmpty())
+          return this.value;
+        {
+          let e3 = this.value;
+          for (let n2 = 0; n2 < t2.length - 1; ++n2)
+            if (e3 = (e3.mapValue.fields || {})[t2.get(n2)], !Kt(e3))
+              return null;
+          return e3 = (e3.mapValue.fields || {})[t2.lastSegment()], e3 || null;
+        }
+      }
+      set(t2, e3) {
+        this.getFieldsMap(t2.popLast())[t2.lastSegment()] = Qt(e3);
+      }
+      setAll(t2) {
+        let e3 = tt.emptyPath(), n2 = {}, r2 = [];
+        t2.forEach((t3, s4) => {
+          if (!e3.isImmediateParentOf(s4)) {
+            const t4 = this.getFieldsMap(e3);
+            this.applyChanges(t4, n2, r2), n2 = {}, r2 = [], e3 = s4.popLast();
+          }
+          t3 ? n2[s4.lastSegment()] = Qt(t3) : r2.push(s4.lastSegment());
+        });
+        const s3 = this.getFieldsMap(e3);
+        this.applyChanges(s3, n2, r2);
+      }
+      delete(t2) {
+        const e3 = this.field(t2.popLast());
+        Kt(e3) && e3.mapValue.fields && delete e3.mapValue.fields[t2.lastSegment()];
+      }
+      isEqual(t2) {
+        return Lt(this.value, t2.value);
+      }
+      getFieldsMap(t2) {
+        let e3 = this.value;
+        e3.mapValue.fields || (e3.mapValue = {
+          fields: {}
+        });
+        for (let n2 = 0; n2 < t2.length; ++n2) {
+          let r2 = e3.mapValue.fields[t2.get(n2)];
+          Kt(r2) && r2.mapValue.fields || (r2 = {
+            mapValue: {
+              fields: {}
+            }
+          }, e3.mapValue.fields[t2.get(n2)] = r2), e3 = r2;
+        }
+        return e3.mapValue.fields;
+      }
+      applyChanges(t2, e3, n2) {
+        Et(e3, (e4, n3) => t2[e4] = n3);
+        for (const e4 of n2)
+          delete t2[e4];
+      }
+      clone() {
+        return new Yt(Qt(this.value));
+      }
+    };
+    Ht = class {
+      constructor(t2, e3, n2, r2, s3, i) {
+        this.key = t2, this.documentType = e3, this.version = n2, this.readTime = r2, this.data = s3, this.documentState = i;
+      }
+      static newInvalidDocument(t2) {
+        return new Ht(t2, 0, vt.min(), vt.min(), Yt.empty(), 0);
+      }
+      static newFoundDocument(t2, e3, n2) {
+        return new Ht(t2, 1, e3, vt.min(), n2, 0);
+      }
+      static newNoDocument(t2, e3) {
+        return new Ht(t2, 2, e3, vt.min(), Yt.empty(), 0);
+      }
+      static newUnknownDocument(t2, e3) {
+        return new Ht(t2, 3, e3, vt.min(), Yt.empty(), 2);
+      }
+      convertToFoundDocument(t2, e3) {
+        return this.version = t2, this.documentType = 1, this.data = e3, this.documentState = 0, this;
+      }
+      convertToNoDocument(t2) {
+        return this.version = t2, this.documentType = 2, this.data = Yt.empty(), this.documentState = 0, this;
+      }
+      convertToUnknownDocument(t2) {
+        return this.version = t2, this.documentType = 3, this.data = Yt.empty(), this.documentState = 2, this;
+      }
+      setHasCommittedMutations() {
+        return this.documentState = 2, this;
+      }
+      setHasLocalMutations() {
+        return this.documentState = 1, this.version = vt.min(), this;
+      }
+      setReadTime(t2) {
+        return this.readTime = t2, this;
+      }
+      get hasLocalMutations() {
+        return 1 === this.documentState;
+      }
+      get hasCommittedMutations() {
+        return 2 === this.documentState;
+      }
+      get hasPendingWrites() {
+        return this.hasLocalMutations || this.hasCommittedMutations;
+      }
+      isValidDocument() {
+        return 0 !== this.documentType;
+      }
+      isFoundDocument() {
+        return 1 === this.documentType;
+      }
+      isNoDocument() {
+        return 2 === this.documentType;
+      }
+      isUnknownDocument() {
+        return 3 === this.documentType;
+      }
+      isEqual(t2) {
+        return t2 instanceof Ht && this.key.isEqual(t2.key) && this.version.isEqual(t2.version) && this.documentType === t2.documentType && this.documentState === t2.documentState && this.data.isEqual(t2.data);
+      }
+      mutableCopy() {
+        return new Ht(this.key, this.documentType, this.version, this.readTime, this.data.clone(), this.documentState);
+      }
+      toString() {
+        return `Document(${this.key}, ${this.version}, ${JSON.stringify(this.data.value)}, {documentType: ${this.documentType}}), {documentState: ${this.documentState}})`;
+      }
+    };
+    Jt = class {
+      constructor(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = null, o2 = null) {
+        this.path = t2, this.collectionGroup = e3, this.orderBy = n2, this.filters = r2, this.limit = s3, this.startAt = i, this.endAt = o2, this.P = null;
+      }
+    };
+    ce = class {
+      constructor(t2, e3) {
+        this.position = t2, this.inclusive = e3;
+      }
+    };
+    ae = class {
+      constructor(t2, e3 = "asc") {
+        this.field = t2, this.dir = e3;
+      }
+    };
+    fe = class {
+      constructor(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = "F", o2 = null, u = null) {
+        this.path = t2, this.collectionGroup = e3, this.explicitOrderBy = n2, this.filters = r2, this.limit = s3, this.limitType = i, this.startAt = o2, this.endAt = u, this.$ = null, this.F = null, this.startAt, this.endAt;
+      }
+    };
     xe = (() => {
       const t2 = {
         asc: "ASCENDING",
@@ -8591,6 +9629,34 @@ var init_index_browser_esm2017 = __esm({
       };
       return t2;
     })();
+    Se = class {
+      constructor(t2, e3) {
+        this.databaseId = t2, this.S = e3;
+      }
+    };
+    en = class extends class {
+    } {
+      constructor(t2, e3, n2, r2) {
+        super(), this.authCredentials = t2, this.appCheckCredentials = e3, this.H = n2, this.q = r2, this.J = false;
+      }
+      X() {
+        if (this.J)
+          throw new L(x, "The client has already been terminated.");
+      }
+      m(t2, e3, n2) {
+        return this.X(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([r2, s3]) => this.H.m(t2, e3, n2, r2, s3)).catch((t3) => {
+          throw "FirebaseError" === t3.name ? (t3.code === D && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t3) : new L(I, t3.toString());
+        });
+      }
+      T(t2, e3, n2, r2) {
+        return this.X(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([s3, i]) => this.H.T(t2, e3, n2, s3, i, r2)).catch((t3) => {
+          throw "FirebaseError" === t3.name ? (t3.code === D && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t3) : new L(I, t3.toString());
+        });
+      }
+      terminate() {
+        this.J = true;
+      }
+    };
     on = /* @__PURE__ */ new Map();
     cn = class {
       constructor(t2) {
@@ -8676,7 +9742,254 @@ var init_index_browser_esm2017 = __esm({
         }(this), Promise.resolve();
       }
     };
+    wn = class {
+      constructor(t2, e3, n2) {
+        this.converter = e3, this._key = n2, this.type = "document", this.firestore = t2;
+      }
+      get _path() {
+        return this._key.path;
+      }
+      get id() {
+        return this._key.path.lastSegment();
+      }
+      get path() {
+        return this._key.path.canonicalString();
+      }
+      get parent() {
+        return new pn(this.firestore, this.converter, this._key.path.popLast());
+      }
+      withConverter(t2) {
+        return new wn(this.firestore, t2, this._key);
+      }
+    };
+    mn = class {
+      constructor(t2, e3, n2) {
+        this.converter = e3, this._query = n2, this.type = "query", this.firestore = t2;
+      }
+      withConverter(t2) {
+        return new mn(this.firestore, t2, this._query);
+      }
+    };
+    pn = class extends mn {
+      constructor(t2, e3, n2) {
+        super(t2, e3, new fe(n2)), this._path = n2, this.type = "collection";
+      }
+      get id() {
+        return this._query.path.lastSegment();
+      }
+      get path() {
+        return this._query.path.canonicalString();
+      }
+      get parent() {
+        const t2 = this._path.popLast();
+        return t2.isEmpty() ? null : new wn(
+          this.firestore,
+          null,
+          new et(t2)
+        );
+      }
+      withConverter(t2) {
+        return new pn(this.firestore, t2, this._path);
+      }
+    };
+    En = class {
+      constructor(...t2) {
+        for (let e3 = 0; e3 < t2.length; ++e3)
+          if (0 === t2[e3].length)
+            throw new L(A, "Invalid field name at argument $(i + 1). Field names must not be empty.");
+        this._internalPath = new tt(t2);
+      }
+      isEqual(t2) {
+        return this._internalPath.isEqual(t2._internalPath);
+      }
+    };
+    In = class {
+      constructor(t2) {
+        this._byteString = t2;
+      }
+      static fromBase64String(t2) {
+        try {
+          return new In(Nt.fromBase64String(t2));
+        } catch (t3) {
+          throw new L(A, "Failed to construct data from Base64 string: " + t3);
+        }
+      }
+      static fromUint8Array(t2) {
+        return new In(Nt.fromUint8Array(t2));
+      }
+      toBase64() {
+        return this._byteString.toBase64();
+      }
+      toUint8Array() {
+        return this._byteString.toUint8Array();
+      }
+      toString() {
+        return "Bytes(base64: " + this.toBase64() + ")";
+      }
+      isEqual(t2) {
+        return this._byteString.isEqual(t2._byteString);
+      }
+    };
+    Rn = class {
+      constructor(t2, e3) {
+        if (!isFinite(t2) || t2 < -90 || t2 > 90)
+          throw new L(A, "Latitude must be a number between -90 and 90, but was: " + t2);
+        if (!isFinite(e3) || e3 < -180 || e3 > 180)
+          throw new L(A, "Longitude must be a number between -180 and 180, but was: " + e3);
+        this._lat = t2, this._long = e3;
+      }
+      get latitude() {
+        return this._lat;
+      }
+      get longitude() {
+        return this._long;
+      }
+      isEqual(t2) {
+        return this._lat === t2._lat && this._long === t2._long;
+      }
+      toJSON() {
+        return {
+          latitude: this._lat,
+          longitude: this._long
+        };
+      }
+      _compareTo(t2) {
+        return yt(this._lat, t2._lat) || yt(this._long, t2._long);
+      }
+    };
     Yn = new RegExp("[~\\*/\\[\\]]");
+    Zn = class {
+      constructor(t2, e3, n2, r2, s3) {
+        this._firestore = t2, this._userDataWriter = e3, this._key = n2, this._document = r2, this._converter = s3;
+      }
+      get id() {
+        return this._key.path.lastSegment();
+      }
+      get ref() {
+        return new wn(this._firestore, this._converter, this._key);
+      }
+      exists() {
+        return null !== this._document;
+      }
+      data() {
+        if (this._document) {
+          if (this._converter) {
+            const t2 = new tr(
+              this._firestore,
+              this._userDataWriter,
+              this._key,
+              this._document,
+              null
+            );
+            return this._converter.fromFirestore(t2);
+          }
+          return this._userDataWriter.convertValue(this._document.data.value);
+        }
+      }
+      get(t2) {
+        if (this._document) {
+          const e3 = this._document.data.field(rr("DocumentSnapshot.get", t2));
+          if (null !== e3)
+            return this._userDataWriter.convertValue(e3);
+        }
+      }
+    };
+    tr = class extends Zn {
+      data() {
+        return super.data();
+      }
+    };
+    er = class {
+      constructor(t2, e3) {
+        this._docs = e3, this.query = t2;
+      }
+      get docs() {
+        return [...this._docs];
+      }
+      get size() {
+        return this.docs.length;
+      }
+      get empty() {
+        return 0 === this.docs.length;
+      }
+      forEach(t2, e3) {
+        this._docs.forEach(t2, e3);
+      }
+    };
+    Ir = class extends class {
+      convertValue(t2, e3 = "none") {
+        switch (Ct(t2)) {
+          case 0:
+            return null;
+          case 1:
+            return t2.booleanValue;
+          case 2:
+            return xt(t2.integerValue || t2.doubleValue);
+          case 3:
+            return this.convertTimestamp(t2.timestampValue);
+          case 4:
+            return this.convertServerTimestamp(t2, e3);
+          case 5:
+            return t2.stringValue;
+          case 6:
+            return this.convertBytes(Ft(t2.bytesValue));
+          case 7:
+            return this.convertReference(t2.referenceValue);
+          case 8:
+            return this.convertGeoPoint(t2.geoPointValue);
+          case 9:
+            return this.convertArray(t2.arrayValue, e3);
+          case 10:
+            return this.convertObject(t2.mapValue, e3);
+          default:
+            throw g();
+        }
+      }
+      convertObject(t2, e3) {
+        const n2 = {};
+        return Et(t2.fields, (t3, r2) => {
+          n2[t3] = this.convertValue(r2, e3);
+        }), n2;
+      }
+      convertGeoPoint(t2) {
+        return new Rn(xt(t2.latitude), xt(t2.longitude));
+      }
+      convertArray(t2, e3) {
+        return (t2.values || []).map((t3) => this.convertValue(t3, e3));
+      }
+      convertServerTimestamp(t2, e3) {
+        switch (e3) {
+          case "previous":
+            const n2 = qt(t2);
+            return null == n2 ? null : this.convertValue(n2, e3);
+          case "estimate":
+            return this.convertTimestamp(Ot(t2));
+          default:
+            return null;
+        }
+      }
+      convertTimestamp(t2) {
+        const e3 = $t(t2);
+        return new gt(e3.seconds, e3.nanos);
+      }
+      convertDocumentKey(t2, e3) {
+        const n2 = X.fromString(t2);
+        v(Xe(n2));
+        const r2 = new H(n2.get(1), n2.get(3)), s3 = new et(n2.popFirst(5));
+        return r2.isEqual(e3) || p(`Document ${s3} contains a document reference within a different database (${r2.projectId}/${r2.database}) which is not supported. It will be treated as a reference in the current database (${e3.projectId}/${e3.database}) instead.`), s3;
+      }
+    } {
+      constructor(t2) {
+        super(), this.firestore = t2;
+      }
+      convertBytes(t2) {
+        return new In(t2);
+      }
+      convertReference(t2) {
+        const e3 = this.convertDocumentKey(t2, this.firestore._databaseId);
+        return new wn(this.firestore, null, e3);
+      }
+    };
     !function(t2) {
       f = t2;
     }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", (t2, { options: e3 }) => {
@@ -9080,7 +10393,7 @@ var init_index_esm5 = __esm({
 });
 
 // .svelte-kit/output/server/chunks/firebase.js
-var firebaseConfig, app, functions;
+var firebaseConfig, app, db, functions;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
     init_private();
@@ -9098,7 +10411,7 @@ var init_firebase = __esm({
     };
     app = initializeApp(firebaseConfig);
     getAuth(app);
-    ln(app);
+    db = ln(app);
     functions = getFunctions(app);
     httpsCallable(
       functions,
@@ -9116,6 +10429,11 @@ function removed_session() {
   throw new Error(
     "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
   );
+}
+function guard(name5) {
+  return () => {
+    throw new Error(`Cannot call ${name5}(...) on the server`);
+  };
 }
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
@@ -9138,8 +10456,8 @@ function tick_spring(ctx, last_value, current_value, target_value) {
     return current_value.map((_2, i) => tick_spring(ctx, last_value[i], current_value[i], target_value[i]));
   } else if (typeof current_value === "object") {
     const next_value = {};
-    for (const k in current_value) {
-      next_value[k] = tick_spring(ctx, last_value[k], current_value[k], target_value[k]);
+    for (const k2 in current_value) {
+      next_value[k2] = tick_spring(ctx, last_value[k2], current_value[k2], target_value[k2]);
     }
     return next_value;
   } else {
@@ -9214,17 +10532,18 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, getStores, page, LoginCard, LightDarkMode, Navitem, Navbar, Footer, Layout;
+var Modal, getStores, page, goto, LoginCard, LightDarkMode, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
+    init_Dropzone();
     init_store();
-    init_dropzone();
     init_firebase();
     init_index_esm3();
     init_index_esm4();
     init_index2();
     init_private();
+    init_dropzone();
     init_index_esm2();
     init_index_esm5();
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -9274,24 +10593,69 @@ var init_layout_svelte = __esm({
         return store.subscribe(fn);
       }
     };
+    goto = guard("goto");
     LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let shortPing;
-      let $$unsubscribe_navLoginClicked;
-      let $$unsubscribe_redirectAfterLoginTimeOut;
-      let $$unsubscribe_redirectSetInterval;
+      let $navLoginClicked, $$unsubscribe_navLoginClicked;
+      let $redirectAfterLoginTimeOut, $$unsubscribe_redirectAfterLoginTimeOut;
+      let $redirectSetInterval, $$unsubscribe_redirectSetInterval;
+      let $$unsubscribe_isLoggedIn;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       let $elementColor, $$unsubscribe_elementColor;
-      $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
-      $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
-      $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
+      $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
+      $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => $redirectAfterLoginTimeOut = value);
+      $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => $redirectSetInterval = value);
+      $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
       let emailFieldValue = "";
       let emptyEmailInputAnimated;
+      let loggedInEmail;
+      async function loginToRedirectUrl(userEmail) {
+        const querySnapshot = await Rr(yn(db, "email"));
+        querySnapshot.forEach((doc) => {
+          if (userEmail === doc.id) {
+            let redirectTimeInMS = 3e3;
+            let seconds = parseInt(redirectTimeInMS / 1e3);
+            let userRedirectUrl = "/";
+            console.log(`A match! ${doc.id} => ${userRedirectUrl}`);
+            set_store_value(
+              redirectSetInterval,
+              $redirectSetInterval = setInterval(
+                () => {
+                  if (seconds > 0) {
+                    seconds += -1;
+                    document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
+                  }
+                },
+                1e3
+              ),
+              $redirectSetInterval
+            );
+            set_store_value(
+              redirectAfterLoginTimeOut,
+              $redirectAfterLoginTimeOut = setTimeout(
+                () => {
+                  goto(userRedirectUrl);
+                  set_store_value(navLoginClicked, $navLoginClicked = false, $navLoginClicked);
+                },
+                redirectTimeInMS
+              ),
+              $redirectAfterLoginTimeOut
+            );
+          }
+        });
+      }
       shortPing = emptyEmailInputAnimated;
+      {
+        if ($navLoginClicked) {
+          loginToRedirectUrl(loggedInEmail);
+        }
+      }
       $$unsubscribe_navLoginClicked();
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
+      $$unsubscribe_isLoggedIn();
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
       return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
@@ -9331,15 +10695,15 @@ var init_layout_svelte = __esm({
     });
     Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $page, $$unsubscribe_page;
-      let $$unsubscribe_navHomeworkClicked;
-      let $$unsubscribe_navLoginClicked;
       let $$unsubscribe_redirectAfterLoginTimeOut;
       let $$unsubscribe_redirectSetInterval;
+      let $$unsubscribe_navHomeworkClicked;
+      let $$unsubscribe_navLoginClicked;
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
-      $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
       $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
       $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
+      $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
+      $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
       let { href, content, bool, btnColor, btnColorHover, routes: routes2 } = $$props;
       if ($$props.href === void 0 && $$bindings.href && href !== void 0)
         $$bindings.href(href);
@@ -9359,10 +10723,10 @@ var init_layout_svelte = __esm({
         }
       }
       $$unsubscribe_page();
-      $$unsubscribe_navHomeworkClicked();
-      $$unsubscribe_navLoginClicked();
       $$unsubscribe_redirectAfterLoginTimeOut();
       $$unsubscribe_redirectSetInterval();
+      $$unsubscribe_navHomeworkClicked();
+      $$unsubscribe_navLoginClicked();
       return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -9465,6 +10829,7 @@ var init_layout_svelte = __esm({
       let $page, $$unsubscribe_page;
       let $$unsubscribe_innerWidth;
       let $navLoginClicked, $$unsubscribe_navLoginClicked;
+      let $navHomeworkClicked, $$unsubscribe_navHomeworkClicked;
       $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
@@ -9477,6 +10842,7 @@ var init_layout_svelte = __esm({
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
       $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
       $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
+      $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
       let jankytown;
       let $$settled;
       let $$rendered;
@@ -9530,6 +10896,35 @@ var init_layout_svelte = __esm({
         )}
 
   
+  ${validate_component(Modal, "Modal").$$render(
+          $$result,
+          {
+            bgTint: "bg-[rgba(0,0,0,0.1)]",
+            showModal: $navHomeworkClicked
+          },
+          {
+            showModal: ($$value) => {
+              $navHomeworkClicked = $$value;
+              $$settled = false;
+            }
+          },
+          {
+            default: () => {
+              return `${validate_component(Dropzone_1, "Dropzone").$$render(
+                $$result,
+                {
+                  uniqueId: "broccoli",
+                  text: "\u{1F525}",
+                  textSizeTW: "text-6xl",
+                  dimensionsTW: "w-[80vw] h-[85vh]",
+                  brightnessTW: "brightness-95"
+                },
+                {},
+                {}
+              )}`;
+            }
+          }
+        )}
   
 
   
@@ -9556,6 +10951,7 @@ var init_layout_svelte = __esm({
       $$unsubscribe_page();
       $$unsubscribe_innerWidth();
       $$unsubscribe_navLoginClicked();
+      $$unsubscribe_navHomeworkClicked();
       return $$rendered;
     });
   }
@@ -9575,8 +10971,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-9285899a.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-9285899a.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/Dropzone.svelte_svelte_type_style_lang-1dec1cfb.js", "_app/immutable/chunks/navigation-97bdfe49.js", "_app/immutable/chunks/singletons-e70a1cda.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/firebase-95e1a6a9.js", "_app/immutable/chunks/private-2f12c45b.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-1f0edd58.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-1f0edd58.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-27b3b981.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone.svelte_svelte_type_style_lang-1dec1cfb.js", "_app/immutable/chunks/navigation-54d624d6.js", "_app/immutable/chunks/singletons-a7abd873.js", "_app/immutable/chunks/firebase-9f2e011b.js"];
     stylesheets = ["_app/immutable/assets/+layout-790df171.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
@@ -9680,13 +11076,13 @@ var init_plansCardArray = __esm({
 });
 
 // .svelte-kit/output/server/chunks/PlansCard.js
-var css, PlansCard;
+var css2, PlansCard;
 var init_PlansCard = __esm({
   ".svelte-kit/output/server/chunks/PlansCard.js"() {
     init_chunks();
     init_plansCardArray();
     init_store();
-    css = {
+    css2 = {
       code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
@@ -9726,7 +11122,7 @@ var init_PlansCard = __esm({
         $$bindings.btnColorHover(btnColorHover);
       if ($$props.card === void 0 && $$bindings.card && card !== void 0)
         $$bindings.card(card);
-      $$result.css.add(css);
+      $$result.css.add(css2);
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
       return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
@@ -9744,52 +11140,6 @@ var init_PlansCard = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/Dropzone.js
-var css2, Dropzone_1;
-var init_Dropzone = __esm({
-  ".svelte-kit/output/server/chunks/Dropzone.js"() {
-    init_chunks();
-    init_private();
-    init_store();
-    init_dropzone();
-    css2 = {
-      code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}",
-      map: null
-    };
-    Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let boxShadowColor;
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let { uniqueId = "default" } = $$props;
-      let { text: text2 = "Drop it like it's \u{1F525}" } = $$props;
-      let { textSizeTW = "text-3xl" } = $$props;
-      let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
-      let { brightnessTW = "brightness-100" } = $$props;
-      if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
-        $$bindings.uniqueId(uniqueId);
-      if ($$props.text === void 0 && $$bindings.text && text2 !== void 0)
-        $$bindings.text(text2);
-      if ($$props.textSizeTW === void 0 && $$bindings.textSizeTW && textSizeTW !== void 0)
-        $$bindings.textSizeTW(textSizeTW);
-      if ($$props.dimensionsTW === void 0 && $$bindings.dimensionsTW && dimensionsTW !== void 0)
-        $$bindings.dimensionsTW(dimensionsTW);
-      if ($$props.brightnessTW === void 0 && $$bindings.brightnessTW && brightnessTW !== void 0)
-        $$bindings.brightnessTW(brightnessTW);
-      $$result.css.add(css2);
-      boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
-      $$unsubscribe_isDarkMode();
-      return `
-
-<form${add_attribute("action", UPLOAD_ENDPOINT, 0)} method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto"}">
-  <div class="${"dz-message font-Nunito"}" data-dz-message><span class="${"block"}">${escape(text2)}</span></div></form>
-
-
-
-${$$result.head += ``, ""}`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/entries/pages/_page.svelte.js
 var page_svelte_exports = {};
 __export(page_svelte_exports, {
@@ -9801,9 +11151,7 @@ var init_page_svelte = __esm({
     init_chunks();
     init_PlansCard();
     init_plansCardArray();
-    init_Dropzone();
     init_store();
-    init_private();
     init_dropzone();
     init_index2();
     css$1 = {
@@ -9998,7 +11346,7 @@ var init_page_svelte = __esm({
   
   <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span${add_attribute("class", gradientTextColor, 0)}>1. Upload your homework </span></p>
 
-    ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
+    </div>
 
   
   <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span${add_attribute("class", gradientTextColor, 0)}>2. Schedule a Session </span></p>
@@ -10035,8 +11383,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-13c93335.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-13c93335.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-2eac44a0.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone-c0928bdf.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/Dropzone.svelte_svelte_type_style_lang-1dec1cfb.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-0b79fc6a.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-0b79fc6a.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-dc0e7341.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone.svelte_svelte_type_style_lang-1dec1cfb.js"];
     stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
@@ -10245,8 +11593,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-a44e955d.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-a44e955d.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-c0928bdf.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone.svelte_svelte_type_style_lang-1dec1cfb.js"];
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-22ea661e.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-22ea661e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-27b3b981.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone.svelte_svelte_type_style_lang-1dec1cfb.js"];
     stylesheets6 = ["_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
@@ -10660,16 +12008,16 @@ function parseCD(parser) {
         else if ("<>AV".indexOf(arrowChar) > -1) {
           for (var labelNum = 0; labelNum < 2; labelNum++) {
             var inLabel = true;
-            for (var k = j2 + 1; k < rowNodes.length; k++) {
-              if (isLabelEnd(rowNodes[k], arrowChar)) {
+            for (var k2 = j2 + 1; k2 < rowNodes.length; k2++) {
+              if (isLabelEnd(rowNodes[k2], arrowChar)) {
                 inLabel = false;
-                j2 = k;
+                j2 = k2;
                 break;
               }
-              if (isStartOfArrow(rowNodes[k])) {
-                throw new ParseError("Missing a " + arrowChar + " character to complete a CD arrow.", rowNodes[k]);
+              if (isStartOfArrow(rowNodes[k2])) {
+                throw new ParseError("Missing a " + arrowChar + " character to complete a CD arrow.", rowNodes[k2]);
               }
-              labels[labelNum].body.push(rowNodes[k]);
+              labels[labelNum].body.push(rowNodes[k2]);
             }
             if (inLabel) {
               throw new ParseError("Missing a " + arrowChar + " character to complete a CD arrow.", rowNodes[j2]);
@@ -10921,7 +12269,7 @@ function sizingGroup(value, options, baseOptions) {
   }
   return buildCommon.makeFragment(inner2);
 }
-var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D, Dc, T, Tc, S, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions2, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
+var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D2, Dc, T2, Tc, S2, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions2, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
 var init_katex = __esm({
   "node_modules/katex/dist/katex.mjs"() {
     SourceLocation = class {
@@ -11243,25 +12591,25 @@ var init_katex = __esm({
         return this.size >= 2;
       }
     };
-    D = 0;
+    D2 = 0;
     Dc = 1;
-    T = 2;
+    T2 = 2;
     Tc = 3;
-    S = 4;
+    S2 = 4;
     Sc = 5;
     SS = 6;
     SSc = 7;
-    styles = [new Style(D, 0, false), new Style(Dc, 0, true), new Style(T, 1, false), new Style(Tc, 1, true), new Style(S, 2, false), new Style(Sc, 2, true), new Style(SS, 3, false), new Style(SSc, 3, true)];
-    sup = [S, Sc, S, Sc, SS, SSc, SS, SSc];
+    styles = [new Style(D2, 0, false), new Style(Dc, 0, true), new Style(T2, 1, false), new Style(Tc, 1, true), new Style(S2, 2, false), new Style(Sc, 2, true), new Style(SS, 3, false), new Style(SSc, 3, true)];
+    sup = [S2, Sc, S2, Sc, SS, SSc, SS, SSc];
     sub = [Sc, Sc, Sc, Sc, SSc, SSc, SSc, SSc];
-    fracNum = [T, Tc, S, Sc, SS, SSc, SS, SSc];
+    fracNum = [T2, Tc, S2, Sc, SS, SSc, SS, SSc];
     fracDen = [Tc, Tc, Sc, Sc, SSc, SSc, SSc, SSc];
     cramp = [Dc, Dc, Tc, Tc, Sc, Sc, SSc, SSc];
-    text$1 = [D, Dc, T, Tc, T, Tc, T, Tc];
+    text$1 = [D2, Dc, T2, Tc, T2, Tc, T2, Tc];
     Style$1 = {
-      DISPLAY: styles[D],
-      TEXT: styles[T],
-      SCRIPT: styles[S],
+      DISPLAY: styles[D2],
+      TEXT: styles[T2],
+      SCRIPT: styles[S2],
       SCRIPTSCRIPT: styles[SS]
     };
     scriptData = [{
@@ -11294,7 +12642,7 @@ var init_katex = __esm({
       blocks: [[44032, 55215]]
     }];
     allBlocks = [];
-    scriptData.forEach((s3) => s3.blocks.forEach((b) => allBlocks.push(...b)));
+    scriptData.forEach((s3) => s3.blocks.forEach((b2) => allBlocks.push(...b2)));
     hLinePad = 80;
     sqrtMain = function sqrtMain2(extraViniculum, hLinePad2) {
       return "M95," + (622 + extraViniculum + hLinePad2) + "\nc-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14\nc0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54\nc44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10\ns173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429\nc69,-144,104.5,-217.7,106.5,-221\nl" + extraViniculum / 2.075 + " -" + extraViniculum + "\nc5.3,-9.3,12,-14,20,-14\nH400000v" + (40 + extraViniculum) + "H845.2724\ns-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7\nc-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z\nM" + (834 + extraViniculum) + " " + hLinePad2 + "h400000v" + (40 + extraViniculum) + "h-400000z";
@@ -11311,9 +12659,9 @@ var init_katex = __esm({
     sqrtSize4 = function sqrtSize42(extraViniculum, hLinePad2) {
       return "M473," + (2713 + extraViniculum + hLinePad2) + "\nc339.3,-1799.3,509.3,-2700,510,-2702 l" + extraViniculum / 5.298 + " -" + extraViniculum + "\nc3.3,-7.3,9.3,-11,18,-11 H400000v" + (40 + extraViniculum) + "H1017.7\ns-90.5,478,-276.2,1466c-185.7,988,-279.5,1483,-281.5,1485c-2,6,-10,9,-24,9\nc-8,0,-12,-0.7,-12,-2c0,-1.3,-5.3,-32,-16,-92c-50.7,-293.3,-119.7,-693.3,-207,-1200\nc0,-1.3,-5.3,8.7,-16,30c-10.7,21.3,-21.3,42.7,-32,64s-16,33,-16,33s-26,-26,-26,-26\ns76,-153,76,-153s77,-151,77,-151c0.7,0.7,35.7,202,105,604c67.3,400.7,102,602.7,104,\n606zM" + (1001 + extraViniculum) + " " + hLinePad2 + "h400000v" + (40 + extraViniculum) + "H1017.7z";
     };
-    phasePath = function phasePath2(y) {
-      var x2 = y / 2;
-      return "M400000 " + y + " H0 L" + x2 + " 0 l65 45 L145 " + (y - 80) + " H400000z";
+    phasePath = function phasePath2(y2) {
+      var x2 = y2 / 2;
+      return "M400000 " + y2 + " H0 L" + x2 + " 0 l65 45 L145 " + (y2 - 80) + " H400000z";
     };
     sqrtTall = function sqrtTall2(extraViniculum, hLinePad2, viewBoxHeight) {
       var vertSegment = viewBoxHeight - 54 - hLinePad2 - extraViniculum;
@@ -23955,8 +25303,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file7 = "_app/immutable/components/pages/katex/_page.svx-e28d77ae.js";
-    imports7 = ["_app/immutable/components/pages/katex/_page.svx-e28d77ae.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js"];
+    file7 = "_app/immutable/components/pages/katex/_page.svx-f7106dd2.js";
+    imports7 = ["_app/immutable/components/pages/katex/_page.svx-f7106dd2.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js"];
     stylesheets7 = [];
   }
 });
@@ -24132,7 +25480,7 @@ ${each(Array(num), (_2, j2) => {
         return `<p>${escape(j2 + 1)}</p>
         <p class="${"p-1 text-indigo-700"}" d${add_attribute("m", "\\cancelto{0}{\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}}", 0)}></p>
         <p class="${"p-1 text-green-700"}" d${add_attribute("k", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
-    ${each(equations, (eqn, k) => {
+    ${each(equations, (eqn, k2) => {
           return `<div><p class="${"p-1 text-indigo-700"}" d${add_attribute("k", eqn, 0)}></p>
         <p class="${"p-1 text-green-700"}" d${add_attribute("m", eqn, 0)}></p>
     </div>`;
@@ -24158,8 +25506,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file9 = "_app/immutable/components/pages/math/_page.svx-c4636a8a.js";
-    imports9 = ["_app/immutable/components/pages/math/_page.svx-c4636a8a.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Kajax-1ac094bf.js"];
+    file9 = "_app/immutable/components/pages/math/_page.svx-b04552d8.js";
+    imports9 = ["_app/immutable/components/pages/math/_page.svx-b04552d8.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Kajax-1ac094bf.js"];
     stylesheets9 = [];
   }
 });
@@ -24239,8 +25587,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file10 = "_app/immutable/components/pages/mathjax/_page.svx-c0784677.js";
-    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-c0784677.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js"];
+    file10 = "_app/immutable/components/pages/mathjax/_page.svx-58f8f6bd.js";
+    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-58f8f6bd.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js"];
     stylesheets10 = [];
   }
 });
@@ -24360,8 +25708,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file11 = "_app/immutable/components/pages/physics/_page.svelte-b4724fc8.js";
-    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-b4724fc8.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Kajax-1ac094bf.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js"];
+    file11 = "_app/immutable/components/pages/physics/_page.svelte-cb7f61d5.js";
+    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-cb7f61d5.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Kajax-1ac094bf.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js"];
     stylesheets11 = ["_app/immutable/assets/+page-fcf51fa8.css"];
   }
 });
@@ -24435,8 +25783,8 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/plans/_page.svelte-7366272f.js";
-    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-7366272f.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-2eac44a0.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    file12 = "_app/immutable/components/pages/plans/_page.svelte-d27dfb22.js";
+    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-d27dfb22.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-dc0e7341.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
     stylesheets12 = ["_app/immutable/assets/+page-097b9a4a.css", "_app/immutable/assets/PlansCard-fec9ec2d.css"];
   }
 });
@@ -24580,8 +25928,8 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-220c5f68.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-220c5f68.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    file14 = "_app/immutable/components/pages/schools/_page.svelte-cebfdb7e.js";
+    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-cebfdb7e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
     stylesheets14 = ["_app/immutable/assets/+page-fec9ec2d.css"];
   }
 });
@@ -24641,8 +25989,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-1ae53d01.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-1ae53d01.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-97bdfe49.js", "_app/immutable/chunks/singletons-e70a1cda.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-b81c5a63.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-b81c5a63.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-54d624d6.js", "_app/immutable/chunks/singletons-a7abd873.js"];
     stylesheets15 = [];
   }
 });
@@ -24693,8 +26041,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-9097cb75.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-9097cb75.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-34d76d13.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-97bdfe49.js", "_app/immutable/chunks/singletons-e70a1cda.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-00bd94c1.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-00bd94c1.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-338023ad.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-54d624d6.js", "_app/immutable/chunks/singletons-a7abd873.js"];
     stylesheets16 = [];
   }
 });
@@ -24752,8 +26100,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-f81e8347.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-f81e8347.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/firebase-95e1a6a9.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-7fe8f520.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-7fe8f520.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/firebase-9f2e011b.js", "_app/immutable/chunks/private-2f12c45b.js", "_app/immutable/chunks/index-0fa359d1.js"];
     stylesheets17 = ["_app/immutable/assets/+page-8ee437b0.css"];
   }
 });
@@ -24825,8 +26173,8 @@ function devalue(value) {
   var names = /* @__PURE__ */ new Map();
   Array.from(counts).filter(function(entry) {
     return entry[1] > 1;
-  }).sort(function(a2, b) {
-    return b[1] - a2[1];
+  }).sort(function(a2, b2) {
+    return b2[1] - a2[1];
   }).forEach(function(entry, i) {
     names.set(entry[0], getName(i));
   });
@@ -24906,8 +26254,8 @@ function devalue(value) {
         case "Map":
           values_1.push("new Map");
           statements_1.push(name5 + "." + Array.from(thing).map(function(_a) {
-            var k = _a[0], v2 = _a[1];
-            return "set(" + stringify(k) + ", " + stringify(v2) + ")";
+            var k2 = _a[0], v2 = _a[1];
+            return "set(" + stringify(k2) + ", " + stringify(v2) + ")";
           }).join("."));
           break;
         default:
@@ -25153,21 +26501,21 @@ function negotiate(accept, types) {
   accept.split(",").forEach((str, i) => {
     const match = /([^/]+)\/([^;]+)(?:;q=([0-9.]+))?/.exec(str);
     if (match) {
-      const [, type, subtype, q = "1"] = match;
-      parts.push({ type, subtype, q: +q, i });
+      const [, type, subtype, q2 = "1"] = match;
+      parts.push({ type, subtype, q: +q2, i });
     }
   });
-  parts.sort((a2, b) => {
-    if (a2.q !== b.q) {
-      return b.q - a2.q;
+  parts.sort((a2, b2) => {
+    if (a2.q !== b2.q) {
+      return b2.q - a2.q;
     }
-    if (a2.subtype === "*" !== (b.subtype === "*")) {
+    if (a2.subtype === "*" !== (b2.subtype === "*")) {
       return a2.subtype === "*" ? 1 : -1;
     }
-    if (a2.type === "*" !== (b.type === "*")) {
+    if (a2.type === "*" !== (b2.type === "*")) {
       return a2.type === "*" ? 1 : -1;
     }
-    return a2.i - b.i;
+    return a2.i - b2.i;
   });
   let accepted;
   let min_priority = Infinity;
@@ -25245,7 +26593,7 @@ function sha256(data) {
     const w = array2.subarray(i, i + 16);
     let tmp;
     let a2;
-    let b;
+    let b2;
     let out0 = out[0];
     let out1 = out[1];
     let out2 = out[2];
@@ -25259,8 +26607,8 @@ function sha256(data) {
         tmp = w[i2];
       } else {
         a2 = w[i2 + 1 & 15];
-        b = w[i2 + 14 & 15];
-        tmp = w[i2 & 15] = (a2 >>> 7 ^ a2 >>> 18 ^ a2 >>> 3 ^ a2 << 25 ^ a2 << 14) + (b >>> 17 ^ b >>> 19 ^ b >>> 10 ^ b << 15 ^ b << 13) + w[i2 & 15] + w[i2 + 9 & 15] | 0;
+        b2 = w[i2 + 14 & 15];
+        tmp = w[i2 & 15] = (a2 >>> 7 ^ a2 >>> 18 ^ a2 >>> 3 ^ a2 << 25 ^ a2 << 14) + (b2 >>> 17 ^ b2 >>> 19 ^ b2 >>> 10 ^ b2 << 15 ^ b2 << 13) + w[i2 & 15] + w[i2 + 9 & 15] | 0;
       }
       tmp = tmp + out7 + (out4 >>> 6 ^ out4 >>> 11 ^ out4 >>> 25 ^ out4 << 26 ^ out4 << 21 ^ out4 << 7) + (out6 ^ out4 & (out5 ^ out6)) + key[i2];
       out7 = out6;
@@ -25312,12 +26660,12 @@ function precompute() {
 function reverse_endianness(bytes) {
   for (let i = 0; i < bytes.length; i += 4) {
     const a2 = bytes[i + 0];
-    const b = bytes[i + 1];
+    const b2 = bytes[i + 1];
     const c2 = bytes[i + 2];
     const d2 = bytes[i + 3];
     bytes[i + 0] = d2;
     bytes[i + 1] = c2;
-    bytes[i + 2] = b;
+    bytes[i + 2] = b2;
     bytes[i + 3] = a2;
   }
 }
@@ -25648,7 +26996,7 @@ async function render_response({
         node.stylesheets.forEach((url) => stylesheets18.add(url));
       }
       if (node.inline_styles) {
-        Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
+        Object.entries(await node.inline_styles()).forEach(([k2, v2]) => inline_styles.set(k2, v2));
       }
     }
   } else {
@@ -26848,8 +28196,8 @@ var Server = class {
   }
   init({ env }) {
     const entries = Object.entries(env);
-    Object.fromEntries(entries.filter(([k]) => !k.startsWith("PUBLIC_")));
-    const pub = Object.fromEntries(entries.filter(([k]) => k.startsWith("PUBLIC_")));
+    Object.fromEntries(entries.filter(([k2]) => !k2.startsWith("PUBLIC_")));
+    const pub = Object.fromEntries(entries.filter(([k2]) => k2.startsWith("PUBLIC_")));
     this.options.public_env = pub;
   }
   async respond(request, options = {}) {
@@ -26874,7 +28222,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-24ee8303.js", "imports": ["_app/immutable/start-24ee8303.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-e70a1cda.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-f965b57d.js", "imports": ["_app/immutable/start-f965b57d.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-a7abd873.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -27248,6 +28596,22 @@ export {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+* @license
+* Copyright 2018 Google LLC
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 /**
 * @license
 * Copyright 2020 Google LLC

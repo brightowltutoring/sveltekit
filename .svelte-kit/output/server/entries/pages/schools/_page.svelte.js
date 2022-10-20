@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute, j as each } from "../../../chunks/index.js";
 import { C as CalendlyJsandCSS, a as plansCardArraySchools } from "../../../chunks/plansCardArray.js";
-import { i as isDarkMode, e as elementColor } from "../../../chunks/store.js";
+import { b as isDarkMode, e as elementColor } from "../../../chunks/store.js";
 import "../../../chunks/index2.js";
 const PlansCardSchools_svelte_svelte_type_style_lang = "";
 const css = {
