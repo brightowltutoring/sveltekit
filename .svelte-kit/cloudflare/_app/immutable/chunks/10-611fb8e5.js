@@ -1,1 +1,0 @@
-import{default as a}from"../components/pages/physics/_page.svelte-ec8c6822.js";import"./index-07ba2c8b.js";import"./Kajax-95f9581c.js";import"./katex-15be85e5.js";import"./store-5cb6344d.js";import"./index-ff7f9e5a.js";export{a as component};

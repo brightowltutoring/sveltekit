@@ -57,8 +57,11 @@
     // Confirm the link is a sign-in with email link.
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem("emailForSignIn");
-      if (!email)
+      if (!email) {
         email = window.prompt("Please provide your email for confirmation");
+      }
+
+      $navLoginClicked = true;
 
       signInWithEmailLink(auth, email, window.location.href)
         .then(() => window.localStorage.removeItem("emailForSignIn"))
