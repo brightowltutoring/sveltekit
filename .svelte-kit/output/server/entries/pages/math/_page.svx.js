@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, j as each, d as add_attribute, v as validate_component, e as escape } from "../../../chunks/index.js";
 import katex from "katex";
-import { b as isDarkMode } from "../../../chunks/store.js";
+import { i as isDarkMode } from "../../../chunks/store.js";
 import { K as Kajax } from "../../../chunks/Kajax.js";
 import "../../../chunks/index2.js";
 const Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {

@@ -75,7 +75,7 @@
       <span class={gradientTextColor}> 1. Upload your homework </span>
     </p>
 
-    <Dropzone textSizeTW={"text-2xl"} />
+    <!-- <Dropzone textSizeTW={"text-2xl"} /> -->
   </div>
 
   <!-- third page -->
