@@ -1,4 +1,4 @@
-import { navLoginClicked } from "store.js";
+import { navLoginClicked } from "$lib/store.js";
 import { auth } from "$lib/firebase.js";
 import {
   GoogleAuthProvider,
