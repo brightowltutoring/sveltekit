@@ -102,6 +102,11 @@
       // alert(par.length);
     });
 
+    // wed oct 19, 2022 @ 10:25pm:
+    // this apparently fixes multiple dropzonejs instances interfering with jitsi ....
+    // namely having a global modal dropzone and a homepage dropzone was crashing app
+    // Still unclear if this was the actual fix since screenshareA route does NOT have this
+    // and doesnt break when navigating to/from it....
     onDestroy(() => {
       api.dispose();
     });

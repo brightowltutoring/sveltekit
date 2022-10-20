@@ -7,7 +7,7 @@ import { getDocs, collection } from "firebase/firestore/lite";
 import { w as writable } from "../../chunks/index2.js";
 import "../../chunks/private.js";
 import "dropzone";
-/* empty css                                                   */import "firebase/app";
+import "firebase/app";
 import "firebase/functions";
 const app = "";
 const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {

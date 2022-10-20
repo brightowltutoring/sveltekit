@@ -47,7 +47,7 @@
         $navHomeworkClicked = true;
         $navLoginClicked = false;
 
-        goto(href);
+        // goto(href);
         return;
       }
       if (href == "/login") {
@@ -65,7 +65,6 @@
       // this janky solution allows for the embeded jitsu to load ... otherwise I had to
       //  manually reload the page and use "export const router = false" for the +page.js
       if (href == "/screenshare") {
-        // goto(href);
         setTimeout(() => {
           location.reload();
           return;

@@ -1,0 +1,1 @@
+import{default as a}from"../components/pages/schools/_page.svelte-9e8c8c38.js";import"./index-07ba2c8b.js";import"./plansCardArray-b3170b38.js";import"./store-5cb6344d.js";import"./index-ff7f9e5a.js";import"./index-364c93f6.js";export{a as component};

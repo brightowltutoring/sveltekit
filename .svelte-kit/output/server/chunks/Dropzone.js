@@ -2,7 +2,9 @@ import { c as create_ssr_component, a as subscribe, d as add_attribute, e as esc
 import { U as UPLOAD_ENDPOINT } from "./private.js";
 import { b as isDarkMode } from "./store.js";
 import "dropzone";
-/* empty css                                        */const css = {
+const dropzone = "";
+const Dropzone_svelte_svelte_type_style_lang = "";
+const css = {
   code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}",
   map: null
 };
