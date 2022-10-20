@@ -1,9 +1,9 @@
-import { c as create_ssr_component, e as escape, g as getContext, a as subscribe, d as add_attribute, f as set_store_value, h as now, l as loop, j as each, v as validate_component } from "../../chunks/index.js";
+import { c as create_ssr_component, e as escape, g as getContext, a as subscribe, d as add_attribute, f as now, l as loop, h as set_store_value, j as each, v as validate_component } from "../../chunks/index.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { n as navLoginClicked, r as redirectAfterLoginTimeOut, a as redirectSetInterval, i as isLoggedIn, b as isDarkMode, e as elementColor, c as navHomeworkClicked, d as routes, s as scrollY, f as instDeltaY, l as lessThan768, w as windowInnerHeight, g as scrollYMax, h as innerWidth } from "../../chunks/store.js";
-import { d as db } from "../../chunks/firebase.js";
+import "../../chunks/firebase.js";
 import "firebase/auth";
-import { getDocs, collection } from "firebase/firestore/lite";
+import "firebase/firestore/lite";
 import { w as writable } from "../../chunks/index2.js";
 import "../../chunks/private.js";
 import "dropzone";
@@ -62,70 +62,23 @@ function removed_session() {
     "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
   );
 }
-function guard(name) {
-  return () => {
-    throw new Error(`Cannot call ${name}(...) on the server`);
-  };
-}
-const goto = guard("goto");
 const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let shortPing;
-  let $navLoginClicked, $$unsubscribe_navLoginClicked;
-  let $redirectAfterLoginTimeOut, $$unsubscribe_redirectAfterLoginTimeOut;
-  let $redirectSetInterval, $$unsubscribe_redirectSetInterval;
+  let $$unsubscribe_navLoginClicked;
+  let $$unsubscribe_redirectAfterLoginTimeOut;
+  let $$unsubscribe_redirectSetInterval;
   let $$unsubscribe_isLoggedIn;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $elementColor, $$unsubscribe_elementColor;
-  $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
-  $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => $redirectAfterLoginTimeOut = value);
-  $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => $redirectSetInterval = value);
+  $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
+  $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
+  $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
   let emailFieldValue = "";
   let emptyEmailInputAnimated;
-  let loggedInEmail;
-  async function loginToRedirectUrl(userEmail) {
-    const querySnapshot = await getDocs(collection(db, "email"));
-    querySnapshot.forEach((doc) => {
-      if (userEmail === doc.id) {
-        let redirectTimeInMS = 3e3;
-        let seconds = parseInt(redirectTimeInMS / 1e3);
-        let userRedirectUrl = "/";
-        console.log(`A match! ${doc.id} => ${userRedirectUrl}`);
-        set_store_value(
-          redirectSetInterval,
-          $redirectSetInterval = setInterval(
-            () => {
-              if (seconds > 0) {
-                seconds += -1;
-                document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
-              }
-            },
-            1e3
-          ),
-          $redirectSetInterval
-        );
-        set_store_value(
-          redirectAfterLoginTimeOut,
-          $redirectAfterLoginTimeOut = setTimeout(
-            () => {
-              goto(userRedirectUrl);
-              set_store_value(navLoginClicked, $navLoginClicked = false, $navLoginClicked);
-            },
-            redirectTimeInMS
-          ),
-          $redirectAfterLoginTimeOut
-        );
-      }
-    });
-  }
   shortPing = emptyEmailInputAnimated;
-  {
-    if ($navLoginClicked) {
-      loginToRedirectUrl(loggedInEmail);
-    }
-  }
   $$unsubscribe_navLoginClicked();
   $$unsubscribe_redirectAfterLoginTimeOut();
   $$unsubscribe_redirectSetInterval();
@@ -169,15 +122,15 @@ const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots
 });
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
-  let $$unsubscribe_redirectAfterLoginTimeOut;
-  let $$unsubscribe_redirectSetInterval;
   let $$unsubscribe_navHomeworkClicked;
   let $$unsubscribe_navLoginClicked;
+  let $$unsubscribe_redirectAfterLoginTimeOut;
+  let $$unsubscribe_redirectSetInterval;
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
-  $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
   $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
+  $$unsubscribe_redirectAfterLoginTimeOut = subscribe(redirectAfterLoginTimeOut, (value) => value);
+  $$unsubscribe_redirectSetInterval = subscribe(redirectSetInterval, (value) => value);
   let { href, content, bool, btnColor, btnColorHover, routes: routes2 } = $$props;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0)
     $$bindings.href(href);
@@ -197,10 +150,10 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
   }
   $$unsubscribe_page();
-  $$unsubscribe_redirectAfterLoginTimeOut();
-  $$unsubscribe_redirectSetInterval();
   $$unsubscribe_navHomeworkClicked();
   $$unsubscribe_navLoginClicked();
+  $$unsubscribe_redirectAfterLoginTimeOut();
+  $$unsubscribe_redirectSetInterval();
   return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
 });
 function is_date(obj) {

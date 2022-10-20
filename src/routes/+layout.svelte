@@ -100,7 +100,8 @@
     <LoginCard />
   </Modal>
 
-  <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+  <!-- TODO: temporarily stopping this to debug screenshare -->
+  <!-- <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <Dropzone
       uniqueId={"broccoli"}
       text={"🔥"}
@@ -108,7 +109,7 @@
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
     />
-  </Modal>
+  </Modal> -->
 
   <!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->
 

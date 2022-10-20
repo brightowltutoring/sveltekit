@@ -66,32 +66,32 @@
       /* Clear email from storage or throw error.*/
     }
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        $isLoggedIn = true;
-        loggedInEmail = user.email;
-        // get the loggedInEmail IF user is authenticated; outside logic determines redirect when login nav item clicked
+    // onAuthStateChanged(auth, (user) => {
+    //   if (user) {
+    //     $isLoggedIn = true;
+    //     loggedInEmail = user.email;
+    //     // get the loggedInEmail IF user is authenticated; outside logic determines redirect when login nav item clicked
 
-        // loginToRedirectUrl(user.email);
+    //     // loginToRedirectUrl(user.email);
 
-        console.log(`User is signed in! YEET`);
+    //     console.log(`User is signed in! YEET`);
 
-        logInDiv.style.display = "none";
-        logOutDiv.style.display = "block";
+    //     logInDiv.style.display = "none";
+    //     logOutDiv.style.display = "block";
 
-        loginWelcomeText.innerText = user.displayName
-          ? `Hey ${user.displayName}!`
-          : `Hey ${user.email}!`;
-      } else {
-        $isLoggedIn = false;
-        $navLoginClicked = false;
-        loggedInEmail = "";
+    //     loginWelcomeText.innerText = user.displayName
+    //       ? `Hey ${user.displayName}!`
+    //       : `Hey ${user.email}!`;
+    //   } else {
+    //     $isLoggedIn = false;
+    //     $navLoginClicked = false;
+    //     loggedInEmail = "";
 
-        console.log(`User is NOT signed in`);
-        logInDiv.style.display = "block";
-        logOutDiv.style.display = "none";
-      }
-    });
+    //     console.log(`User is NOT signed in`);
+    //     logInDiv.style.display = "block";
+    //     logOutDiv.style.display = "none";
+    //   }
+    // });
   });
   //   onmount
 

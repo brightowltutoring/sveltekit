@@ -21,7 +21,7 @@
     }, 0);
   }
 
-  onMount(() => {
+  onMount(async () => {
     domain = "meet.jit.si";
     options = {
       roomName: "ThinkSolve12522",
@@ -93,7 +93,7 @@
       },
     };
 
-    api = new JitsiMeetExternalAPI(domain, options);
+    api = await new JitsiMeetExternalAPI(domain, options);
 
     // api.addEventListener("getNumberOfParticipants", () => {
     //   console.log("hey");
@@ -111,7 +111,7 @@
 </script>
 
 <svelte:head>
-  <script async src="https://meet.jit.si/external_api.js"></script>
+  <script src="https://meet.jit.si/external_api.js"></script>
 </svelte:head>
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">

@@ -13,12 +13,9 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 getAuth(app);
-const db = getFirestore(app);
+getFirestore(app);
 const functions = getFunctions(app);
 httpsCallable(
   functions,
   "createStripeCheckout"
 );
-export {
-  db as d
-};
