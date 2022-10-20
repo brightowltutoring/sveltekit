@@ -1,3 +1,4 @@
+import { navLoginClicked } from "store.js";
 import { auth } from "$lib/firebase.js";
 import {
   GoogleAuthProvider,
@@ -88,13 +89,14 @@ export function regexEmailChecker(EMAIL) {
 
 export function magicLinkToEmail(EMAIL) {
   sendSignInLinkToEmail(auth, EMAIL, {
-    url: "https://thinksolve.io/login",
+    url: "https://thinksolve.io/",
     handleCodeInApp: true,
   })
     .then(() => {
       // The link was successfully sent. Inform the user.
       // Save the EMAIL locally so you don't need to ask the user for it again
       // if they open the link on the same device.
+      navLoginClicked.subscribe((value) => (value = true)); // note: inside external javascript file, cannot use $navLoginClicked syntax ... must use subscribe way
       window.localStorage.setItem("emailForSignIn", EMAIL);
       console.log("success with sendSignInLinkToEmail!");
     })

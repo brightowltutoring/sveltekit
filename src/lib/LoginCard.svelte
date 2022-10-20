@@ -61,8 +61,6 @@
         email = window.prompt("Please provide your email for confirmation");
       }
 
-      $navLoginClicked = true;
-
       signInWithEmailLink(auth, email, window.location.href)
         .then(() => window.localStorage.removeItem("emailForSignIn"))
         .catch((error) => console.log(error));
