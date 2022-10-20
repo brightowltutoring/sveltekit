@@ -14,8 +14,6 @@
     windowInnerHeight,
     scrollYMax,
     isLoggedIn,
-    redirectAfterLoginTimeOut,
-    redirectSetInterval,
     routes,
     lessThan768,
     navLoginClicked,
@@ -29,10 +27,10 @@
     $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
   }
 
-  function clearRedirectStuff() {
-    clearTimeout($redirectAfterLoginTimeOut);
-    clearInterval($redirectSetInterval);
-  }
+  // function clearRedirectStuff() {
+  //   clearTimeout($redirectAfterLoginTimeOut);
+  //   clearInterval($redirectSetInterval);
+  // }
 
   onMount(() => {
     console.log("isLoggedIn", $isLoggedIn);
@@ -92,8 +90,8 @@
   bind:innerHeight={$windowInnerHeight}
   on:resize={setScrollYMax}
   on:contextmenu={(event) => event.preventDefault()}
-  on:popstate={clearRedirectStuff}
 />
+<!-- on:popstate={clearRedirectStuff} -->
 
 <main>
   <Modal bind:showModal={$navLoginClicked}>

@@ -180,8 +180,9 @@ export const routes = writable({
 
 export const isDarkMode = writable(false);
 
-export const redirectAfterLoginTimeOut = writable("");
-export const redirectSetInterval = writable("");
+// TODO: delete soon; logincard logic no longer requires these to be global
+// export const redirectAfterLoginTimeOut = writable("");
+// export const redirectSetInterval = writable("");
 
 export const light = "#f7f7f7";
 export const light_darkened = "rgb(242,247,250)";

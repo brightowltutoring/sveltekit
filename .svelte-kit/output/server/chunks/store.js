@@ -97,26 +97,22 @@ const routes = writable({
   }
 });
 const isDarkMode = writable(false);
-const redirectAfterLoginTimeOut = writable("");
-const redirectSetInterval = writable("");
 const light_darkened = "rgb(242,247,250)";
 const dark_lightened = "rgb(38, 35, 51)";
 const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
   $isDarkMode ? set(dark_lightened) : set(light_darkened);
 });
 export {
-  redirectSetInterval as a,
-  isDarkMode as b,
-  navHomeworkClicked as c,
-  routes as d,
+  isDarkMode as a,
+  navHomeworkClicked as b,
+  instDeltaY as c,
+  scrollYMax as d,
   elementColor as e,
-  instDeltaY as f,
-  scrollYMax as g,
-  innerWidth as h,
+  innerWidth as f,
   isLoggedIn as i,
   lessThan768 as l,
   navLoginClicked as n,
-  redirectAfterLoginTimeOut as r,
+  routes as r,
   scrollY as s,
   windowInnerHeight as w
 };

@@ -1,13 +1,11 @@
 <script>
   import { page } from "$app/stores";
   // importing page to try to fix the redirect from screenshare route with loginToRedirectUrl
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { goto } from "$app/navigation";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import {
-    redirectAfterLoginTimeOut,
-    redirectSetInterval,
     isLoggedIn,
     isDarkMode,
     elementColor,
@@ -39,6 +37,15 @@
   $: shortPing = !magicLinkSent && emptyEmailInputAnimated && "animate-ping";
   let loggedInEmail;
 
+  // these were previously store variables, but the reactive statement below takes care of things
+  let redirectAfterLoginTimeOut;
+  let redirectSetInterval;
+
+  $: if ($navLoginClicked == false) {
+    clearInterval(redirectSetInterval);
+    clearTimeout(redirectAfterLoginTimeOut);
+  }
+
   //  onmount
   onMount(() => {
     const logInDiv = document.querySelector(".logInDiv");
@@ -65,8 +72,6 @@
         .then(() => {
           window.localStorage.removeItem("emailForSignIn");
           $navLoginClicked = true;
-          // navLoginClicked.set(true);
-          // navLoginClicked.subscribe((value) => (value = true)); // note: inside external javascript file, cannot use $navLoginClicked syntax ... must use subscribe way
         })
         .catch((error) => console.log(error));
       /* Clear email from storage or throw error.*/
@@ -138,7 +143,7 @@
         console.log(`A match! ${doc.id} => ${userRedirectUrl}`);
 
         // redirect after login
-        $redirectSetInterval = setInterval(() => {
+        redirectSetInterval = setInterval(() => {
           if (seconds > 0) {
             seconds += -1;
             document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
@@ -146,10 +151,10 @@
         }, 1000);
 
         // make this a global variable so I can cancel it elsewhere .. i.e. on route changes
-        $redirectAfterLoginTimeOut = setTimeout(() => {
-          //   $navLoginClicked = false;
-          goto(userRedirectUrl);
+        redirectAfterLoginTimeOut = setTimeout(() => {
           $navLoginClicked = false;
+          document.getElementById("timeLeft").innerHTML = 3;
+          goto(userRedirectUrl);
         }, redirectTimeInMS);
       }
     });
