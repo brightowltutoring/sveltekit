@@ -39,17 +39,17 @@
     in:slide={{ duration: 800, easing: elasticOut }}
     on:click={() => {
       if (href == "/screenshare") {
-        goto(href);
+        // goto(href);
         setTimeout(() => {
           location.reload();
           return;
         }, 100);
       }
-      if (href !== "/login") {
-        clearTimeout($redirectAfterLoginTimeOut);
-        clearInterval($redirectSetInterval);
-        // these necessary, otherwise redirects when navigating away from login modal
-      }
+      // if (href !== "/login") {
+      //   clearTimeout($redirectAfterLoginTimeOut);
+      //   clearInterval($redirectSetInterval);
+      //   // these necessary, otherwise redirects when navigating away from login modal
+      // }
       if (href == "/homework") {
         $navHomeworkClicked = true;
         $navLoginClicked = false;

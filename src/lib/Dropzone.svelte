@@ -17,7 +17,7 @@
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
   onMount(() => {
-    Dropzone.autoDiscover = false;
+    // Dropzone.autoDiscover = false;
     dropzone = new Dropzone("#default", {
       url: UPLOAD_ENDPOINT,
     });

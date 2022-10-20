@@ -72,6 +72,8 @@
         loggedInEmail = user.email;
         // get the loggedInEmail IF user is authenticated; outside logic determines redirect when login nav item clicked
 
+        // loginToRedirectUrl(user.email);
+
         console.log(`User is signed in! YEET`);
 
         logInDiv.style.display = "none";
@@ -93,10 +95,10 @@
   });
   //   onmount
 
-  $: if ($navLoginClicked) {
-    loginToRedirectUrl(loggedInEmail);
-    // loginToRedirectUrl(user.email);
-  }
+  // $: if ($navLoginClicked) {
+  //   loginToRedirectUrl(loggedInEmail);
+  //   // loginToRedirectUrl(user.email);
+  // }
   //  Hoisted Functions
 
   function onInputEmailField(EMAIL) {
