@@ -1,5 +1,28 @@
 import { writable, derived } from "svelte/store";
 import { quintOut, elasticOut } from "svelte/easing";
+// import { browser } from "$app/env";
+
+const createWritableStore = (key, startValue) => {
+  const { subscribe, set } = writable(startValue);
+
+  return {
+    subscribe,
+    set,
+    useLocalStorage: () => {
+      const json = localStorage.getItem(key);
+      if (json) {
+        set(JSON.parse(json));
+      }
+
+      subscribe((current) => {
+        localStorage.setItem(key, JSON.stringify(current));
+      });
+    },
+  };
+};
+
+export const count = createWritableStore("count", 0);
+
 // import { slide, fade, scale, fly, blur } from 'svelte/transition';
 
 // export function moduloScale(node, {easing = elasticOut, duration = 1000}) {
@@ -180,7 +203,6 @@ export const routes = writable({
 
 // export const isDarkMode = writable(true);
 export const isDarkMode = writable(false);
-
 // TODO: delete soon; logincard logic no longer requires these to be global
 // export const redirectAfterLoginTimeOut = writable("");
 // export const redirectSetInterval = writable("");

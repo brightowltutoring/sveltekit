@@ -1,7 +1,5 @@
 <script>
-  import { page } from "$app/stores";
-  // importing page to try to fix the redirect from screenshare route with loginToRedirectUrl
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -104,7 +102,6 @@
       }
     });
   });
-  //   onmount
 
   $: if ($navLoginClicked) {
     loginToRedirectUrl(loggedInEmail);

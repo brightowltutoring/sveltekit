@@ -2,7 +2,6 @@
   import "../app.css";
   // import JitsiUser from "$lib/JitsiUser.svelte";
 
-  // import SwitchToDarkMode from "$lib/SwitchToDarkMode.svelte";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone.svelte";
   import LoginCard from "$lib/LoginCard.svelte";
@@ -20,26 +19,37 @@
     navLoginClicked,
     navHomeworkClicked,
     isDarkMode,
+    // count,
   } from "$lib/store.js";
 
   import { page } from "$app/stores";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
+  import { browser } from "$app/env";
+  import { afterNavigate } from "$app/navigation";
+  afterNavigate(() => {
+    window.localStorage.setItem("isDarkModeLS", $isDarkMode);
+  });
+
+  // this works but flashes to darkmode ... maybe  GENERATE  inside store
+  // browser && ($isDarkMode = localStorage.getItem("isDarkModeLS") == "false");
+  // browser && window.document.body.classList.add("dark-mode");
+  // browser && ($isDarkMode = true);
+
+  // afterNavigate(() => {
+  //   window.localStorage.setItem("isDarkModeLS", $isDarkMode);
+  // });
+  // onDestroy(() => {
+  //   browser && localStorage.setItem("isDarkModeLS", $isDarkMode);
+  // });
+
+  $: browser && window.localStorage.setItem("isDarkModeLS", $isDarkMode);
 
   function setScrollYMax() {
     $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
   }
-
-  // function clearRedirectStuff() {
-  //   clearTimeout($redirectAfterLoginTimeOut);
-  //   clearInterval($redirectSetInterval);
-  // }
-
-  // let darkModeStatus = window.localStorage.getItem("emailForSignIn");
-  // $isDarkMode = true;
   onMount(() => {
-    // window.document.body.classList.add("dark-mode");
-    console.log("isLoggedIn", $isLoggedIn);
     setScrollYMax();
+    // count.useLocalStorage();
   });
 
   let jankytown;
@@ -70,12 +80,30 @@
     if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
-  // $isDarkMode = true;
 </script>
 
 <!-- <SwitchToDarkMode /> -->
 
 <svelte:head>
+  <!-- <script>
+    // import { isDarkMode } from "$lib/store.js";
+    // document.body.classList.remove("dark-mode");
+    // $isDarkMode = false;
+
+    // console.log(
+    //   'localStorage.getItem("isDarkModeLS") == true',
+    //   localStorage.getItem("isDarkModeLS") == "true"
+    // );
+
+    // if (localStorage.getItem("isDarkModeLS") == "true") {
+    //   document.documentElement.style.background = "black";
+    //   // document.body.classList.add("dark-mode");
+    // } else {
+    //   document.documentElement.style.background = "white";
+    //   // document.body.classList.remove("dark-mode");
+    // }
+  </script> -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -103,10 +131,9 @@
 
 <!-- <main
   class={$isDarkMode
-    ? "bg-[rgb(37,27,47)] text-white"
-    : "bg-white text-[rgb(37,27,47)]"}
+    ? "bg-[rgba(37,27,47,0.1)] text-white"
+    : "bg-[rgba(253,250,255,0.1)] text-[rgb(37,27,47)]"}
 > -->
-
 <main>
   <Modal bind:showModal={$navLoginClicked}>
     <LoginCard />

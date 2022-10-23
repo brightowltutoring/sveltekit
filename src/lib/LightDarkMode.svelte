@@ -6,10 +6,11 @@
   import { isDarkMode } from "$lib/store.js";
 
   function toggleDM() {
-    // window.document.body.classList.toggle("dark-mode");
-    $isDarkMode = !$isDarkMode;
     window.document.body.classList.toggle("dark-mode");
-    // $isDarkMode = false;
+    $isDarkMode = !$isDarkMode;
+    // $isDarkMode
+    //   ? (document.documentElement.style.background = "black")
+    //   : (document.documentElement.style.background = "white");
   }
 </script>
 

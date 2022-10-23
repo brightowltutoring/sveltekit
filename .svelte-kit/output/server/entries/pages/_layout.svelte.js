@@ -1,4 +1,4 @@
-import { c as create_ssr_component, e as escape, g as getContext, a as subscribe, d as add_attribute, f as set_store_value, h as now, l as loop, j as each, v as validate_component } from "../../chunks/index.js";
+import { c as create_ssr_component, e as escape, a as subscribe, d as add_attribute, f as set_store_value, v as validate_component, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { n as navLoginClicked, i as isLoggedIn, a as isDarkMode, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, w as windowInnerHeight, d as scrollYMax, f as innerWidth } from "../../chunks/store.js";
 import { d as db } from "../../chunks/firebase.js";
@@ -20,48 +20,6 @@ const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 <modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
 });
-const getStores = () => {
-  const stores = getContext("__svelte__");
-  const readonly_stores = {
-    page: {
-      subscribe: stores.page.subscribe
-    },
-    navigating: {
-      subscribe: stores.navigating.subscribe
-    },
-    updated: stores.updated
-  };
-  Object.defineProperties(readonly_stores, {
-    preloading: {
-      get() {
-        console.error("stores.preloading is deprecated; use stores.navigating instead");
-        return {
-          subscribe: stores.navigating.subscribe
-        };
-      },
-      enumerable: false
-    },
-    session: {
-      get() {
-        removed_session();
-        return {};
-      },
-      enumerable: false
-    }
-  });
-  return readonly_stores;
-};
-const page = {
-  subscribe(fn) {
-    const store = getStores().page;
-    return store.subscribe(fn);
-  }
-};
-function removed_session() {
-  throw new Error(
-    "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
-  );
-}
 function guard(name) {
   return () => {
     throw new Error(`Cannot call ${name}(...) on the server`);
@@ -156,12 +114,60 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
       <div style="${"font-size: 30px;"}" id="${"timeLeft"}">\u230A\u03C0\u230B</div></div>
     <button id="${"logoutBtn"}">Logout</button></div></card>`;
 });
+const IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>`;
+});
+const IconMoon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<svg aria-label="${"Moon"}" id="${"darkIcon"}" height="${"24"}" width="${"24"}" style="${"transform: scale(1);"}" data-metatip="${"true"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`;
+});
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_isDarkMode();
-  return `<button>${$isDarkMode ? `<svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>` : `<svg aria-label="${"Moon"}" id="${"darkIcon"}" height="${"24"}" width="${"24"}" style="${"transform: scale(1);"}" data-metatip="${"true"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`}</button>`;
+  return `<button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button>`;
 });
+const getStores = () => {
+  const stores = getContext("__svelte__");
+  const readonly_stores = {
+    page: {
+      subscribe: stores.page.subscribe
+    },
+    navigating: {
+      subscribe: stores.navigating.subscribe
+    },
+    updated: stores.updated
+  };
+  Object.defineProperties(readonly_stores, {
+    preloading: {
+      get() {
+        console.error("stores.preloading is deprecated; use stores.navigating instead");
+        return {
+          subscribe: stores.navigating.subscribe
+        };
+      },
+      enumerable: false
+    },
+    session: {
+      get() {
+        removed_session();
+        return {};
+      },
+      enumerable: false
+    }
+  });
+  return readonly_stores;
+};
+const page = {
+  subscribe(fn) {
+    const store = getStores().page;
+    return store.subscribe(fn);
+  }
+};
+function removed_session() {
+  throw new Error(
+    "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
+  );
+}
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
   let $$unsubscribe_navHomeworkClicked;
@@ -380,8 +386,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
   let $lessThan768, $$unsubscribe_lessThan768;
-  let $$unsubscribe_isLoggedIn;
-  let $isDarkMode, $$unsubscribe_isDarkMode;
   let $$unsubscribe_windowInnerHeight;
   let $$unsubscribe_scrollYMax;
   let $routes, $$unsubscribe_routes;
@@ -392,8 +396,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
-  $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
-  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
@@ -401,7 +403,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
   $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
-  set_store_value(isDarkMode, $isDarkMode = true, $isDarkMode);
   let jankytown;
   let $$settled;
   let $$rendered;
@@ -496,7 +497,7 @@ ${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapi
   <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
   
-  <div class="${"px-[7%] h-[100vh] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}
+  <div class="${"px-[7%] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}
     ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}</div>
 
   
@@ -505,8 +506,6 @@ ${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapi
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
   $$unsubscribe_lessThan768();
-  $$unsubscribe_isLoggedIn();
-  $$unsubscribe_isDarkMode();
   $$unsubscribe_windowInnerHeight();
   $$unsubscribe_scrollYMax();
   $$unsubscribe_routes();

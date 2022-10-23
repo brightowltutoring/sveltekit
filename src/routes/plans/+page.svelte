@@ -1,8 +1,14 @@
 <script>
+  import { isDarkMode } from "$lib/store.js";
   import PlansCard from "$lib/PlansCard.svelte";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/plansCardArray.js";
+  import { onMount } from "svelte";
+
+  // export let data;
+  // const { someMessage } = data;
+  // console.log("someMessage", someMessage);
 </script>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 ">

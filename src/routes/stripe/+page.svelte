@@ -4,52 +4,48 @@
    shows that head script is loaded last ... hence why stripe isn't defined
 -->
 <script>
-  import { createStripeCheckout } from "$lib/firebase.js";
+  import { stripeSessionIdGCF } from "$lib/firebase.js";
   import { onMount } from "svelte";
   import { STRIPE_PUBLIC_KEY } from "$env/static/private";
-  import { scale, slide, fly, fade, blur } from "svelte/transition";
-  import { quintOut, elasticOut } from "svelte/easing";
+  import { fly } from "svelte/transition";
+  import { elasticOut } from "svelte/easing";
 
   let slideKey = false;
-  let stripeCreateCheckout;
   let urlSearch;
 
   onMount(() => {
     slideKey = true;
-    const stripe = Stripe(STRIPE_PUBLIC_KEY);
-    const btn = document.getElementById("btn");
 
-    urlSearch = window.location.search.slice(1);
-    // TODO: shows url parameters in base64
-    // window.history.replaceState({}, "", `/stripe?${btoa(urlSearch)}`);
-    window.history.replaceState({}, "", `/${btoa(urlSearch)}`);
+    urlSearch = window.location.search.slice(1); // gets everything after "?" in url
+    window.history.replaceState({}, "", `/${btoa(urlSearch)}`); // shows url parameters in base64
 
-    stripeCreateCheckout = () => {
-      let qtyFromUrl = new URLSearchParams(urlSearch).get("quantity");
-      let quantity =
-        qtyFromUrl || document.getElementById("inputQuantity").value;
+    (() => stripeRedirectToCheckout())();
+    // this self-executing expression within onMount is essentially the same as listening
+    // for "DOMContentLoaded" event  ... but within the non-vanilla paradigm of Svelte
 
-      let email = new URLSearchParams(urlSearch).get("email");
-      let extra = new URLSearchParams(urlSearch).get("extra");
-      let service = new URLSearchParams(urlSearch).get("service");
+    async function stripeRedirectToCheckout() {
+      try {
+        const email = new URLSearchParams(urlSearch).get("email");
+        const extra = new URLSearchParams(urlSearch).get("extra");
+        const service = new URLSearchParams(urlSearch).get("service");
+        const quantity = new URLSearchParams(urlSearch).get("quantity");
 
-      // stripe checkout session created using url params
-      if (service && quantity) {
-        createStripeCheckout({
-          quantity: quantity,
-          email: email,
-          extra: extra,
-          service: service,
-        }).then((response) => {
+        // calls cSC() and Stripe() functions, conditionally;
+        // being a cloud function, cSC() should be called minimally
+        if (service && quantity) {
+          const response = await stripeSessionIdGCF({
+            email,
+            extra,
+            service,
+            quantity,
+          });
+          const stripe = Stripe(STRIPE_PUBLIC_KEY);
           stripe.redirectToCheckout({ sessionId: response.data.id });
-        });
+        }
+      } catch (error) {
+        console.log("stripeRedirectToCheckout failed", error);
       }
-    };
-
-    // btn.addEventListener("click", stripeCreateCheckout);
-
-    // self executing function ... domcontentloaded doesnt really work with svelte
-    (() => stripeCreateCheckout())();
+    }
   });
 </script>
 
@@ -57,13 +53,8 @@
   <title>Stripe Firebase Demo</title>
   <script src="https://js.stripe.com/v3/"></script>
 </svelte:head>
-<!-- on:load={stripeCreateCheckout}></script> -->
 
 <main>
-  <!-- <div class="container pt-20"> -->
-
-  <!-- <input type="number" value="1" id="inputQuantity" /> -->
-  <!-- <button id="btn">checkout</button> -->
   {#if slideKey && urlSearch.includes("service") && urlSearch.includes("quantity")}
     <div
       in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
@@ -71,12 +62,9 @@
     >
       Just a moment
     </div>
-
     <!-- {:else}
-        <p class="font-Poppins text-5xl text-center ">Session Expired</p> -->
+    <p class="font-Poppins text-5xl text-center ">Session Expired</p> -->
   {/if}
-
-  <!-- </div> -->
 </main>
 
 <style>

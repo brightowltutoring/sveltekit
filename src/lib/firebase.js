@@ -22,7 +22,7 @@ export const db = getFirestore(app);
 const functions = getFunctions(app);
 
 // firebase cloud function for secure stripe checkouts
-export const createStripeCheckout = httpsCallable(
+export const stripeSessionIdGCF = httpsCallable(
   functions,
-  "createStripeCheckout"
+  "stripeSessionIdGCF"
 );
