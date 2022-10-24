@@ -10962,8 +10962,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-a5a4241f.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-a5a4241f.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-e836fd72.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-3d61e1c6.js", "_app/immutable/chunks/singletons-f98f37ec.js", "_app/immutable/chunks/firebase-ae78a3e0.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-dfb363e9.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-dfb363e9.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-8b7bd4d3.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-2c1cfa2d.js", "_app/immutable/chunks/singletons-f9f4edfc.js", "_app/immutable/chunks/firebase-ae78a3e0.js"];
     stylesheets = ["_app/immutable/assets/+layout-885118c8.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
@@ -11378,8 +11378,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-c45980e1.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-c45980e1.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-01073d22.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone-e836fd72.js", "_app/immutable/chunks/private-53926b58.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-98eb4584.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-98eb4584.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-01073d22.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone-8b7bd4d3.js", "_app/immutable/chunks/private-53926b58.js"];
     stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
@@ -11588,8 +11588,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-edb7a779.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-edb7a779.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-e836fd72.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-1f6eec85.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-1f6eec85.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-8b7bd4d3.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
     stylesheets6 = ["_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
@@ -25993,8 +25993,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-fcaf2ca2.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-fcaf2ca2.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-3d61e1c6.js", "_app/immutable/chunks/singletons-f98f37ec.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-50b49eea.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-50b49eea.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-2c1cfa2d.js", "_app/immutable/chunks/singletons-f9f4edfc.js"];
     stylesheets15 = [];
   }
 });
@@ -26045,8 +26045,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-f2697a51.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-f2697a51.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-3d61e1c6.js", "_app/immutable/chunks/singletons-f98f37ec.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-bcdddd4a.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-bcdddd4a.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-2c1cfa2d.js", "_app/immutable/chunks/singletons-f9f4edfc.js"];
     stylesheets16 = [];
   }
 });
@@ -26072,10 +26072,7 @@ var init_page_svelte11 = __esm({
     };
     Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $$result.css.add(css8);
-      return `
-
-
-${$$result.head += `${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}" data-svelte="svelte-qn95fl"><\/script>`, ""}
+      return `${$$result.head += `${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}" data-svelte="svelte-qn95fl"><\/script>`, ""}
 
 <main>${``}
 </main>`;
@@ -26097,8 +26094,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-5c661f60.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-5c661f60.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/firebase-ae78a3e0.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-4e15fe99.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-4e15fe99.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/firebase-ae78a3e0.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/index-0fa359d1.js"];
     stylesheets17 = ["_app/immutable/assets/+page-8ee437b0.css"];
   }
 });
@@ -28219,7 +28216,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-97b07d6e.js", "imports": ["_app/immutable/start-97b07d6e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-f98f37ec.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-8207e48c.js", "imports": ["_app/immutable/start-8207e48c.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-f9f4edfc.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
