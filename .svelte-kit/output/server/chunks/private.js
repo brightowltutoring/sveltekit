@@ -4,7 +4,7 @@ const FIREBASE_projectId = "thinksolve-app";
 const FIREBASE_storageBucket = "thinksolve-app.appspot.com";
 const FIREBASE_messagingSenderId = "490986955869";
 const FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
-const UPLOAD_ENDPOINT = "https://us-central1-thinksolve-app.cloudfunctions.net/gdUp/formidable";
+const UPLOAD_ENDPOINT = "https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable";
 export {
   FIREBASE_apiKey as F,
   UPLOAD_ENDPOINT as U,

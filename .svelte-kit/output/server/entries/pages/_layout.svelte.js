@@ -388,6 +388,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $lessThan768, $$unsubscribe_lessThan768;
   let $$unsubscribe_windowInnerHeight;
   let $$unsubscribe_scrollYMax;
+  let $$unsubscribe_isDarkMode;
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
   let $$unsubscribe_innerWidth;
@@ -398,6 +399,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
   $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
   $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
@@ -435,7 +437,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     $$rendered = `
 
-${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-y8jogi"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-y8jogi"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-y8jogi">${each(Object.keys($routes), (key) => {
+${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1yezitl"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1yezitl"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1yezitl">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == key ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
     })}`, ""}
 
@@ -508,6 +510,7 @@ ${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapi
   $$unsubscribe_lessThan768();
   $$unsubscribe_windowInnerHeight();
   $$unsubscribe_scrollYMax();
+  $$unsubscribe_isDarkMode();
   $$unsubscribe_routes();
   $$unsubscribe_page();
   $$unsubscribe_innerWidth();

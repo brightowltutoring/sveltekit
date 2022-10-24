@@ -17,7 +17,7 @@ const db = getFirestore(app);
 const functions = getFunctions(app);
 httpsCallable(
   functions,
-  "createStripeCheckout"
+  "stripeSessionIdGCF"
 );
 export {
   db as d

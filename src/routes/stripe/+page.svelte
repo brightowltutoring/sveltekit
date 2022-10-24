@@ -1,11 +1,6 @@
-<!-- Note: this component doesnt appear to work with sveltes SSR
-  ... works on manual page load/ reload though
-  ... this link https://svelte.dev/repl/a3c995ae11b149c5b51f954d1061a5a2?version=3.42.1
-   shows that head script is loaded last ... hence why stripe isn't defined
--->
 <script>
-  import { stripeSessionIdGCF } from "$lib/firebase.js";
   import { onMount } from "svelte";
+  import { stripeSessionIdGCF } from "$lib/firebase.js";
   import { STRIPE_PUBLIC_KEY } from "$env/static/private";
   import { fly } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -19,28 +14,28 @@
     urlSearch = window.location.search.slice(1); // gets everything after "?" in url
     window.history.replaceState({}, "", `/${btoa(urlSearch)}`); // shows url parameters in base64
 
-    (() => stripeRedirectToCheckout())();
-    // this self-executing expression within onMount is essentially the same as listening
-    // for "DOMContentLoaded" event  ... but within the non-vanilla paradigm of Svelte
+    stripeRedirectToCheckout(); // calling this within onMount is similar to listening to DOMContentLoaded
 
     async function stripeRedirectToCheckout() {
       try {
-        const email = new URLSearchParams(urlSearch).get("email");
-        const extra = new URLSearchParams(urlSearch).get("extra");
-        const service = new URLSearchParams(urlSearch).get("service");
-        const quantity = new URLSearchParams(urlSearch).get("quantity");
+        const USP = new URLSearchParams(urlSearch);
 
-        // calls cSC() and Stripe() functions, conditionally;
-        // being a cloud function, cSC() should be called minimally
+        const email = USP.get("email");
+        const extra = USP.get("extra");
+        const service = USP.get("service");
+        const quantity = USP.get("quantity");
+
         if (service && quantity) {
-          const response = await stripeSessionIdGCF({
+          // create checkout session using url params; get session data
+          const { data } = await stripeSessionIdGCF({
             email,
             extra,
             service,
             quantity,
           });
-          const stripe = Stripe(STRIPE_PUBLIC_KEY);
-          stripe.redirectToCheckout({ sessionId: response.data.id });
+
+          // create checkout session; Stripe() comes from head script
+          Stripe(STRIPE_PUBLIC_KEY).redirectToCheckout({ sessionId: data.id });
         }
       } catch (error) {
         console.log("stripeRedirectToCheckout failed", error);
@@ -62,8 +57,6 @@
     >
       Just a moment
     </div>
-    <!-- {:else}
-    <p class="font-Poppins text-5xl text-center ">Session Expired</p> -->
   {/if}
 </main>
 
