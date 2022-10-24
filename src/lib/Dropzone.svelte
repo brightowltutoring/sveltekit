@@ -15,13 +15,13 @@
   let dropzone;
 
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
-  // const ACCEPTED_FILES_FRONTEND = "image/*,.txt,.pdf,.docx,.doc";
+  const ACCEPTED_FILES_FRONTEND = ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
 
   onMount(() => {
     // Dropzone.autoDiscover = false;
     dropzone = new Dropzone("#default", {
       url: UPLOAD_ENDPOINT,
-      // acceptedFiles: ACCEPTED_FILES_FRONTEND,
+      acceptedFiles: ACCEPTED_FILES_FRONTEND,
     });
 
     document.querySelector("#default").id = uniqueId;
