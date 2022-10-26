@@ -19,9 +19,10 @@
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
 
-  let ready = false;
+  // let ready = false;
+  let ready = true;
   onMount(() => {
-    ready = true;
+    // ready = true;
     // console.log("$isDarkMode", $isDarkMode);
     console.log(
       'window.localStorage.getItem("isDarkModeLS") == true:',
@@ -31,18 +32,22 @@
 </script>
 
 <!-- <div class="overflow-x-hidden"> -->
+
+<!-- src="/login-bg-video-blurred.mp4" -->
 <video
+  preload="auto"
   muted
-  defaultMuted
   autoplay
   playsinline
   loop
   controlslist="nodownload"
-  src="/login-bg-video-blurred.mp4"
   class=" absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
     ? 'invert-[0.95] blur-3xl '
     : 'blur-2xl'}"
-/>
+>
+  <source src="/login-bg-video-blurred.mp4" type="video/mp4" />
+</video>
+
 <!-- </div> -->
 
 <!-- {#if ready}
@@ -64,6 +69,11 @@
       <div
         class="text-2xl font-Nunito "
         on:click={() => {
+          document
+            .getElementById("reviews")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+        on:keydown={() => {
           document
             .getElementById("reviews")
             .scrollIntoView({ behavior: "smooth", block: "start" });
