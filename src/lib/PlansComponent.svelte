@@ -20,7 +20,8 @@
         <span slot="cardText">
           {item.cardText}
           <!-- {#if item.buttonText == "Custom"} -->
-          <p><a sveltekit:prefetch href={item.href}>invoice sample</a></p>
+          <p><a data-sveltekit-prefetch href={item.href}>invoice sample</a></p>
+          <!-- <p><a sveltekit:prefetch href={item.href}>invoice sample</a></p> -->
           <!-- {/if} -->
         </span>
       </PlansCard>

@@ -61,6 +61,7 @@
         }, 100);
       }
 
+      prefetch(href);
       goto(href);
     }}
   >
