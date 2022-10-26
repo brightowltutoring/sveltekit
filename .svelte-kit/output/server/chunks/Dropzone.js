@@ -1,7 +1,6 @@
 import { c as create_ssr_component, a as subscribe, e as escape } from "./index.js";
 import { a as isDarkMode } from "./store.js";
 import "dropzone";
-const dropzone = "";
 const Dropzone_svelte_svelte_type_style_lang = "";
 const css = {
   code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}",
@@ -37,7 +36,7 @@ const Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) =
 
 
 
-${$$result.head += `<!-- HEAD_svelte-6h0hbz_START --><!-- HEAD_svelte-6h0hbz_END -->`, ""}`;
+${$$result.head += `<!-- HEAD_svelte-19bbe0b_START --><link rel="${"stylesheet"}" href="${"/node_modules/dropzone/dist/dropzone.css"}" type="${"text/css"}"><!-- HEAD_svelte-19bbe0b_END -->`, ""}`;
 });
 export {
   Dropzone_1 as D

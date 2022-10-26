@@ -5,6 +5,7 @@
   import { elasticOut } from "svelte/easing";
   let clickText = false;
   import { Dropzone } from "dropzone";
+  import "/node_modules/dropzone/dist/dropzone.css";
   import { onMount } from "svelte";
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   export let text = "Drop it like it's 🔥";

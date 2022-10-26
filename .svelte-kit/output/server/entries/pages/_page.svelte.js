@@ -24,7 +24,8 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
         cardText: () => {
           return `<span slot="${"cardText"}">${escape(item.cardText)}
           
-          <p><a sveltekit:prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">invoice sample</a></p>
+          <p><a data-sveltekit-prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">invoice sample</a></p>
+          
           
         </span>`;
         },
