@@ -32,10 +32,11 @@
 
 <!-- <div class="overflow-x-hidden"> -->
 <video
-  autoplay
-  loop
   muted
+  defaultMuted
+  autoplay
   playsinline
+  loop
   controlslist="nodownload"
   src="/login-bg-video-blurred.mp4"
   class=" absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
