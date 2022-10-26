@@ -1,5 +1,5 @@
 <script>
-  import { UPLOAD_ENDPOINT } from "$env/static/private";
+  import { PUBLIC_UPLOAD_ENDPOINT } from "$env/static/public";
   import { elementColor, isDarkMode } from "$lib/store.js";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -20,7 +20,7 @@
   onMount(() => {
     // Dropzone.autoDiscover = false;
     dropzone = new Dropzone("#default", {
-      url: UPLOAD_ENDPOINT,
+      url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ACCEPTED_FILES_FRONTEND,
     });
 

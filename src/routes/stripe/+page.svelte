@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { stripeSessionIdGCF } from "$lib/firebase.js";
-  import { STRIPE_PUBLIC_KEY } from "$env/static/private";
+  import { PUBLIC_STRIPE_KEY } from "$env/static/public";
   import { fly } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
 
@@ -35,7 +35,7 @@
           });
 
           // create checkout session; Stripe() comes from head script
-          Stripe(STRIPE_PUBLIC_KEY).redirectToCheckout({ sessionId: data.id });
+          Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id });
         }
       } catch (error) {
         console.log("stripeRedirectToCheckout failed", error);

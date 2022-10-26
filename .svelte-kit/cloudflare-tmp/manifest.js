@@ -1,9 +1,10 @@
 export const manifest = {
 	appDir: "_app",
+	appPath: "_app",
 	assets: new Set([".DS_Store","facepalm.gif","favicon.png","login-bg-video-blurred.mp4","phone.svg","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp","star.webp","star2.png"]),
 	mimeTypes: {".gif":"image/gif",".png":"image/png",".mp4":"video/mp4",".svg":"image/svg+xml",".webp":"image/webp"},
 	_: {
-		entry: {"file":"_app/immutable/start-4d6c5d6b.js","imports":["_app/immutable/start-4d6c5d6b.js","_app/immutable/chunks/index-1063d0c6.js","_app/immutable/chunks/singletons-ba8d1508.js","_app/immutable/chunks/index-6dbc7447.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-089c606a.js","imports":["_app/immutable/start-089c606a.js","_app/immutable/chunks/index-30e2a2cf.js","_app/immutable/chunks/singletons-fa07e895.js","_app/immutable/chunks/index-99e25be1.js"],"stylesheets":[]},
 		nodes: [
 			() => import('../output/server/nodes/0.js'),
 			() => import('../output/server/nodes/1.js'),
@@ -25,154 +26,124 @@ export const manifest = {
 		],
 		routes: [
 			{
-				type: 'page',
-				id: "",
+				id: "/",
 				pattern: /^\/$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 2
+				page: { layouts: [0], errors: [1], leaf: 2 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "calcom",
+				id: "/calcom",
 				pattern: /^\/calcom\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 3
+				page: { layouts: [0], errors: [1], leaf: 3 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "faq",
+				id: "/faq",
 				pattern: /^\/faq\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 4
+				page: { layouts: [0], errors: [1], leaf: 4 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "homework",
+				id: "/homework",
 				pattern: /^\/homework\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 5
+				page: { layouts: [0], errors: [1], leaf: 5 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "katex",
+				id: "/katex",
 				pattern: /^\/katex\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 6
+				page: { layouts: [0], errors: [1], leaf: 6 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "login",
+				id: "/login",
 				pattern: /^\/login\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 7
+				page: { layouts: [0], errors: [1], leaf: 7 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "math",
-				pattern: /^\/math\/?$/,
-				names: [],
-				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 8
-			},
-			{
-				type: 'page',
-				id: "mathjax",
+				id: "/mathjax",
 				pattern: /^\/mathjax\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 9
+				page: { layouts: [0], errors: [1], leaf: 9 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "physics",
+				id: "/math",
+				pattern: /^\/math\/?$/,
+				names: [],
+				types: [],
+				page: { layouts: [0], errors: [1], leaf: 8 },
+				endpoint: null
+			},
+			{
+				id: "/physics",
 				pattern: /^\/physics\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 10
+				page: { layouts: [0], errors: [1], leaf: 10 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "plans",
+				id: "/plans",
 				pattern: /^\/plans\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 11
+				page: { layouts: [0], errors: [1], leaf: 11 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "samplequiz",
+				id: "/samplequiz",
 				pattern: /^\/samplequiz\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 12
+				page: { layouts: [0], errors: [1], leaf: 12 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "schools",
+				id: "/schools",
 				pattern: /^\/schools\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 13
+				page: { layouts: [0], errors: [1], leaf: 13 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "screenshare",
-				pattern: /^\/screenshare\/?$/,
-				names: [],
-				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 14
-			},
-			{
-				type: 'page',
-				id: "screenshareA",
+				id: "/screenshareA",
 				pattern: /^\/screenshareA\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 15
+				page: { layouts: [0], errors: [1], leaf: 15 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "stripe",
+				id: "/screenshare",
+				pattern: /^\/screenshare\/?$/,
+				names: [],
+				types: [],
+				page: { layouts: [0], errors: [1], leaf: 14 },
+				endpoint: null
+			},
+			{
+				id: "/stripe",
 				pattern: /^\/stripe\/?$/,
 				names: [],
 				types: [],
-				errors: [1],
-				layouts: [0],
-				leaf: 16
+				page: { layouts: [0], errors: [1], leaf: 16 },
+				endpoint: null
 			}
 		],
 		matchers: async () => {

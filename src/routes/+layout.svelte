@@ -24,7 +24,8 @@
 
   import { page } from "$app/stores";
   import { onMount, onDestroy } from "svelte";
-  import { browser } from "$app/env";
+  // import { browser } from "$app/env";
+  import { browser } from "$app/environment";
   import { afterNavigate } from "$app/navigation";
   afterNavigate(() => {
     window.localStorage.setItem("isDarkModeLS", $isDarkMode);

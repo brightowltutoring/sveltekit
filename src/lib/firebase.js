@@ -1,4 +1,4 @@
-import * as NV from "$env/static/private";
+import * as NV from "$env/static/public";
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -7,12 +7,12 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 // from "https://www.gstatic.com/firebasejs/9.10.0/firebase-functions.js";
 
 const firebaseConfig = {
-  apiKey: NV.FIREBASE_apiKey,
-  authDomain: NV.FIREBASE_authDomain,
-  projectId: NV.FIREBASE_projectId,
-  storageBucket: NV.FIREBASE_storageBucket,
-  messagingSenderId: NV.FIREBASE_messagingSenderId,
-  appId: NV.FIREBASE_appId,
+  apiKey: NV.PUBLIC_FIREBASE_apiKey,
+  authDomain: NV.PUBLIC_FIREBASE_authDomain,
+  projectId: NV.PUBLIC_FIREBASE_projectId,
+  storageBucket: NV.PUBLIC_FIREBASE_storageBucket,
+  messagingSenderId: NV.PUBLIC_FIREBASE_messagingSenderId,
+  appId: NV.PUBLIC_FIREBASE_appId,
 };
 
 export const app = initializeApp(firebaseConfig);

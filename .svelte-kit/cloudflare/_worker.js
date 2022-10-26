@@ -5,8 +5,8 @@ var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __defNormalProp = (obj, key2, value) => key2 in obj ? __defProp(obj, key2, { enumerable: true, configurable: true, writable: true, value }) : obj[key2] = value;
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+var __esm = (fn2, res) => function __init() {
+  return fn2 && (res = (0, fn2[__getOwnPropNames(fn2)[0]])(fn2 = 0)), res;
 };
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
@@ -53,8 +53,8 @@ var __privateSet = (obj, member, value, setter) => {
 // .svelte-kit/output/server/chunks/index.js
 function noop() {
 }
-function run(fn) {
-  return fn();
+function run(fn2) {
+  return fn2();
 }
 function blank_object() {
   return /* @__PURE__ */ Object.create(null);
@@ -119,22 +119,22 @@ function getContext(key2) {
 }
 function escape(value, is_attr = false) {
   const str = String(value);
-  const pattern = is_attr ? ATTR_REGEX : CONTENT_REGEX;
-  pattern.lastIndex = 0;
+  const pattern2 = is_attr ? ATTR_REGEX : CONTENT_REGEX;
+  pattern2.lastIndex = 0;
   let escaped2 = "";
   let last = 0;
-  while (pattern.test(str)) {
-    const i = pattern.lastIndex - 1;
+  while (pattern2.test(str)) {
+    const i = pattern2.lastIndex - 1;
     const ch = str[i];
     escaped2 += str.substring(last, i) + (ch === "&" ? "&amp;" : ch === '"' ? "&quot;" : "&lt;");
     last = i + 1;
   }
   return escaped2 + str.substring(last);
 }
-function each(items, fn) {
+function each(items, fn2) {
   let str = "";
   for (let i = 0; i < items.length; i += 1) {
-    str += fn(items[i], i);
+    str += fn2(items[i], i);
   }
   return str;
 }
@@ -142,11 +142,11 @@ function validate_component(component18, name5) {
   if (!component18 || !component18.$$render) {
     if (name5 === "svelte:component")
       name5 += " this={...}";
-    throw new Error(`<${name5}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
+    throw new Error(`<${name5}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name5}>.`);
   }
   return component18;
 }
-function create_ssr_component(fn) {
+function create_ssr_component(fn2) {
   function $$render(result, props, bindings, slots, context) {
     const parent_component = current_component;
     const $$ = {
@@ -158,7 +158,7 @@ function create_ssr_component(fn) {
       callbacks: blank_object()
     };
     set_current_component({ $$ });
-    const html = fn(result, props, bindings, slots);
+    const html = fn2(result, props, bindings, slots);
     set_current_component(parent_component);
     return html;
   }
@@ -229,8 +229,8 @@ function writable(value, start = noop) {
       }
     }
   }
-  function update(fn) {
-    set(fn(value));
+  function update(fn2) {
+    set(fn2(value));
   }
   function subscribe2(run2, invalidate = noop) {
     const subscriber = [run2, invalidate];
@@ -249,10 +249,10 @@ function writable(value, start = noop) {
   }
   return { set, update, subscribe: subscribe2 };
 }
-function derived(stores, fn, initial_value) {
+function derived(stores, fn2, initial_value) {
   const single = !Array.isArray(stores);
   const stores_array = single ? [stores] : stores;
-  const auto = fn.length < 2;
+  const auto = fn2.length < 2;
   return readable(initial_value, (set) => {
     let inited = false;
     const values = [];
@@ -263,7 +263,7 @@ function derived(stores, fn, initial_value) {
         return;
       }
       cleanup();
-      const result = fn(single ? values[0] : values, set);
+      const result = fn2(single ? values[0] : values, set);
       if (auto) {
         set(result);
       } else {
@@ -299,11 +299,11 @@ var init_index2 = __esm({
 var require_cookie = __commonJS({
   "node_modules/cookie/index.js"(exports) {
     "use strict";
-    exports.parse = parse2;
+    exports.parse = parse3;
     exports.serialize = serialize2;
     var __toString = Object.prototype.toString;
     var fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
-    function parse2(str, options) {
+    function parse3(str, options) {
       if (typeof str !== "string") {
         throw new TypeError("argument str must be a string");
       }
@@ -464,7 +464,7 @@ var require_set_cookie = __commonJS({
           e3
         );
       }
-      var cookie2 = {
+      var cookie = {
         name: name5,
         value
       };
@@ -473,20 +473,20 @@ var require_set_cookie = __commonJS({
         var key2 = sides.shift().trimLeft().toLowerCase();
         var value2 = sides.join("=");
         if (key2 === "expires") {
-          cookie2.expires = new Date(value2);
+          cookie.expires = new Date(value2);
         } else if (key2 === "max-age") {
-          cookie2.maxAge = parseInt(value2, 10);
+          cookie.maxAge = parseInt(value2, 10);
         } else if (key2 === "secure") {
-          cookie2.secure = true;
+          cookie.secure = true;
         } else if (key2 === "httponly") {
-          cookie2.httpOnly = true;
+          cookie.httpOnly = true;
         } else if (key2 === "samesite") {
-          cookie2.sameSite = value2;
+          cookie.sameSite = value2;
         } else {
-          cookie2[key2] = value2;
+          cookie[key2] = value2;
         }
       });
-      return cookie2;
+      return cookie;
     }
     function parseNameValuePair(nameValuePairStr) {
       var name5 = "";
@@ -500,7 +500,7 @@ var require_set_cookie = __commonJS({
       }
       return { name: name5, value };
     }
-    function parse2(input, options) {
+    function parse3(input, options) {
       options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
       if (!input) {
         if (!options.map) {
@@ -533,8 +533,8 @@ var require_set_cookie = __commonJS({
       } else {
         var cookies = {};
         return input.filter(isNonEmptyString).reduce(function(cookies2, str) {
-          var cookie2 = parseString2(str, options);
-          cookies2[cookie2.name] = cookie2;
+          var cookie = parseString2(str, options);
+          cookies2[cookie.name] = cookie;
           return cookies2;
         }, cookies);
       }
@@ -594,8 +594,8 @@ var require_set_cookie = __commonJS({
       }
       return cookiesStrings;
     }
-    module.exports = parse2;
-    module.exports.parse = parse2;
+    module.exports = parse3;
+    module.exports.parse = parse3;
     module.exports.parseString = parseString2;
     module.exports.splitCookiesString = splitCookiesString2;
   }
@@ -783,11 +783,11 @@ var init_dropzone = __esm({
   "node_modules/dropzone/dist/dropzone.mjs"() {
     init_index_esm();
     $4040acfd8584338d$export$2e2bcd8739ae039 = class {
-      on(event, fn) {
+      on(event, fn2) {
         this._callbacks = this._callbacks || {};
         if (!this._callbacks[event])
           this._callbacks[event] = [];
-        this._callbacks[event].push(fn);
+        this._callbacks[event].push(fn2);
         return this;
       }
       emit(event, ...args) {
@@ -816,7 +816,7 @@ var init_dropzone = __esm({
           return evt;
         }
       }
-      off(event, fn) {
+      off(event, fn2) {
         if (!this._callbacks || arguments.length === 0) {
           this._callbacks = {};
           return this;
@@ -830,7 +830,7 @@ var init_dropzone = __esm({
         }
         for (let i = 0; i < callbacks.length; i++) {
           let callback = callbacks[i];
-          if (callback === fn) {
+          if (callback === fn2) {
             callbacks.splice(i, 1);
             break;
           }
@@ -2559,7 +2559,7 @@ var init_Dropzone = __esm({
 
 
 
-${$$result.head += ``, ""}`;
+${$$result.head += `<!-- HEAD_svelte-6h0hbz_START --><!-- HEAD_svelte-6h0hbz_END -->`, ""}`;
     });
   }
 });
@@ -2590,7 +2590,7 @@ function isIndexedDBAvailable() {
   return typeof indexedDB === "object";
 }
 function validateIndexedDBOpenable() {
-  return new Promise((resolve2, reject) => {
+  return new Promise((resolve, reject) => {
     try {
       let preExist = true;
       const DB_CHECK_NAME = "validate-browser-context-for-indexeddb-analytics-module";
@@ -2600,7 +2600,7 @@ function validateIndexedDBOpenable() {
         if (!preExist) {
           self.indexedDB.deleteDatabase(DB_CHECK_NAME);
         }
-        resolve2(true);
+        resolve(true);
       };
       request.onupgradeneeded = () => {
         preExist = false;
@@ -2614,8 +2614,54 @@ function validateIndexedDBOpenable() {
     }
   });
 }
-function replaceTemplate(template2, data) {
-  return template2.replace(PATTERN, (_2, key2) => {
+function getGlobal() {
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw new Error("Unable to locate global object.");
+}
+function createMockUserToken(token, projectId) {
+  if (token.uid) {
+    throw new Error('The "uid" field is no longer supported by mockUserToken. Please use "sub" instead for Firebase Auth User ID.');
+  }
+  const header = {
+    alg: "none",
+    type: "JWT"
+  };
+  const project = projectId || "demo-project";
+  const iat = token.iat || 0;
+  const sub2 = token.sub || token.user_id;
+  if (!sub2) {
+    throw new Error("mockUserToken must contain 'sub' or 'user_id' field!");
+  }
+  const payload = Object.assign({
+    iss: `https://securetoken.google.com/${project}`,
+    aud: project,
+    iat,
+    exp: iat + 3600,
+    auth_time: iat,
+    sub: sub2,
+    user_id: sub2,
+    firebase: {
+      sign_in_provider: "custom",
+      identities: {}
+    }
+  }, token);
+  const signature = "";
+  return [
+    base64urlEncodeWithoutPadding(JSON.stringify(header)),
+    base64urlEncodeWithoutPadding(JSON.stringify(payload)),
+    signature
+  ].join(".");
+}
+function replaceTemplate(template, data) {
+  return template.replace(PATTERN, (_2, key2) => {
     const value = data[key2];
     return value != null ? String(value) : `<${key2}?>`;
   });
@@ -2714,29 +2760,29 @@ function getModularInstance(service) {
     return service;
   }
 }
-var stringToByteArray$1, byteArrayToString, base642, base64Encode, base64urlEncodeWithoutPadding, base64Decode, Deferred, ERROR_NAME, FirebaseError, ErrorFactory, PATTERN, ObserverProxy, MAX_VALUE_MILLIS;
+var stringToByteArray$1, byteArrayToString, base642, base64Encode, base64urlEncodeWithoutPadding, base64Decode, getDefaultsFromGlobal, getDefaultsFromEnvVariable, getDefaultsFromCookie, getDefaults, getDefaultEmulatorHost, getDefaultEmulatorHostnameAndPort, getDefaultAppConfig, getExperimentalSetting, Deferred, ERROR_NAME, FirebaseError, ErrorFactory, PATTERN, ObserverProxy, MAX_VALUE_MILLIS;
 var init_index_esm2017 = __esm({
   "node_modules/@firebase/util/dist/index.esm2017.js"() {
     stringToByteArray$1 = function(str) {
       const out = [];
-      let p2 = 0;
+      let p = 0;
       for (let i = 0; i < str.length; i++) {
         let c2 = str.charCodeAt(i);
         if (c2 < 128) {
-          out[p2++] = c2;
+          out[p++] = c2;
         } else if (c2 < 2048) {
-          out[p2++] = c2 >> 6 | 192;
-          out[p2++] = c2 & 63 | 128;
+          out[p++] = c2 >> 6 | 192;
+          out[p++] = c2 & 63 | 128;
         } else if ((c2 & 64512) === 55296 && i + 1 < str.length && (str.charCodeAt(i + 1) & 64512) === 56320) {
           c2 = 65536 + ((c2 & 1023) << 10) + (str.charCodeAt(++i) & 1023);
-          out[p2++] = c2 >> 18 | 240;
-          out[p2++] = c2 >> 12 & 63 | 128;
-          out[p2++] = c2 >> 6 & 63 | 128;
-          out[p2++] = c2 & 63 | 128;
+          out[p++] = c2 >> 18 | 240;
+          out[p++] = c2 >> 12 & 63 | 128;
+          out[p++] = c2 >> 6 & 63 | 128;
+          out[p++] = c2 & 63 | 128;
         } else {
-          out[p2++] = c2 >> 12 | 224;
-          out[p2++] = c2 >> 6 & 63 | 128;
-          out[p2++] = c2 & 63 | 128;
+          out[p++] = c2 >> 12 | 224;
+          out[p++] = c2 >> 6 & 63 | 128;
+          out[p++] = c2 & 63 | 128;
         }
       }
       return out;
@@ -2883,14 +2929,73 @@ var init_index_esm2017 = __esm({
       }
       return null;
     };
+    getDefaultsFromGlobal = () => getGlobal().__FIREBASE_DEFAULTS__;
+    getDefaultsFromEnvVariable = () => {
+      if (typeof process === "undefined" || typeof process.env === "undefined") {
+        return;
+      }
+      const defaultsJsonString = process.env.__FIREBASE_DEFAULTS__;
+      if (defaultsJsonString) {
+        return JSON.parse(defaultsJsonString);
+      }
+    };
+    getDefaultsFromCookie = () => {
+      if (typeof document === "undefined") {
+        return;
+      }
+      let match;
+      try {
+        match = document.cookie.match(/__FIREBASE_DEFAULTS__=([^;]+)/);
+      } catch (e3) {
+        return;
+      }
+      const decoded = match && base64Decode(match[1]);
+      return decoded && JSON.parse(decoded);
+    };
+    getDefaults = () => {
+      try {
+        return getDefaultsFromGlobal() || getDefaultsFromEnvVariable() || getDefaultsFromCookie();
+      } catch (e3) {
+        console.info(`Unable to get __FIREBASE_DEFAULTS__ due to: ${e3}`);
+        return;
+      }
+    };
+    getDefaultEmulatorHost = (productName) => {
+      var _a, _b;
+      return (_b = (_a = getDefaults()) === null || _a === void 0 ? void 0 : _a.emulatorHosts) === null || _b === void 0 ? void 0 : _b[productName];
+    };
+    getDefaultEmulatorHostnameAndPort = (productName) => {
+      const host = getDefaultEmulatorHost(productName);
+      if (!host) {
+        return void 0;
+      }
+      const separatorIndex = host.lastIndexOf(":");
+      if (separatorIndex <= 0 || separatorIndex + 1 === host.length) {
+        throw new Error(`Invalid host ${host} with no separate hostname and port!`);
+      }
+      const port = parseInt(host.substring(separatorIndex + 1), 10);
+      if (host[0] === "[") {
+        return [host.substring(1, separatorIndex - 1), port];
+      } else {
+        return [host.substring(0, separatorIndex), port];
+      }
+    };
+    getDefaultAppConfig = () => {
+      var _a;
+      return (_a = getDefaults()) === null || _a === void 0 ? void 0 : _a.config;
+    };
+    getExperimentalSetting = (name5) => {
+      var _a;
+      return (_a = getDefaults()) === null || _a === void 0 ? void 0 : _a[`_${name5}`];
+    };
     Deferred = class {
       constructor() {
         this.reject = () => {
         };
         this.resolve = () => {
         };
-        this.promise = new Promise((resolve2, reject) => {
-          this.resolve = resolve2;
+        this.promise = new Promise((resolve, reject) => {
+          this.resolve = resolve;
           this.reject = reject;
         });
       }
@@ -2935,8 +3040,8 @@ var init_index_esm2017 = __esm({
       create(code, ...data) {
         const customData = data[0] || {};
         const fullCode = `${this.service}/${code}`;
-        const template2 = this.errors[code];
-        const message = template2 ? replaceTemplate(template2, customData) : "Error";
+        const template = this.errors[code];
+        const message = template ? replaceTemplate(template, customData) : "Error";
         const fullMessage = `${this.serviceName}: ${message} (${fullCode}).`;
         const error2 = new FirebaseError(fullCode, fullMessage, customData);
         return error2;
@@ -3028,19 +3133,19 @@ var init_index_esm2017 = __esm({
           this.onNoObservers(this);
         }
       }
-      forEachObserver(fn) {
+      forEachObserver(fn2) {
         if (this.finalized) {
           return;
         }
         for (let i = 0; i < this.observers.length; i++) {
-          this.sendOne(i, fn);
+          this.sendOne(i, fn2);
         }
       }
-      sendOne(i, fn) {
+      sendOne(i, fn2) {
         this.task.then(() => {
           if (this.observers !== void 0 && this.observers[i] !== void 0) {
             try {
-              fn(this.observers[i]);
+              fn2(this.observers[i]);
             } catch (e3) {
               if (typeof console !== "undefined" && console.error) {
                 console.error(e3);
@@ -3440,13 +3545,13 @@ function getCursorAdvanceMethods() {
   ]);
 }
 function promisifyRequest(request) {
-  const promise = new Promise((resolve2, reject) => {
+  const promise = new Promise((resolve, reject) => {
     const unlisten = () => {
       request.removeEventListener("success", success);
       request.removeEventListener("error", error2);
     };
     const success = () => {
-      resolve2(wrap(request.result));
+      resolve(wrap(request.result));
       unlisten();
     };
     const error2 = () => {
@@ -3468,14 +3573,14 @@ function promisifyRequest(request) {
 function cacheDonePromiseForTransaction(tx) {
   if (transactionDoneMap.has(tx))
     return;
-  const done = new Promise((resolve2, reject) => {
+  const done = new Promise((resolve, reject) => {
     const unlisten = () => {
       tx.removeEventListener("complete", complete);
       tx.removeEventListener("error", error2);
       tx.removeEventListener("abort", error2);
     };
     const complete = () => {
-      resolve2();
+      resolve();
       unlisten();
     };
     const error2 = () => {
@@ -3660,7 +3765,8 @@ function _getProvider(app2, name5) {
   }
   return app2.container.getProvider(name5);
 }
-function initializeApp(options, rawConfig = {}) {
+function initializeApp(_options, rawConfig = {}) {
+  let options = _options;
   if (typeof rawConfig !== "object") {
     const name6 = rawConfig;
     rawConfig = { name: name6 };
@@ -3671,6 +3777,10 @@ function initializeApp(options, rawConfig = {}) {
     throw ERROR_FACTORY.create("bad-app-name", {
       appName: String(name5)
     });
+  }
+  options || (options = getDefaultAppConfig());
+  if (!options) {
+    throw ERROR_FACTORY.create("no-options");
   }
   const existingApp = _apps.get(name5);
   if (existingApp) {
@@ -3690,6 +3800,9 @@ function initializeApp(options, rawConfig = {}) {
 }
 function getApp(name5 = DEFAULT_ENTRY_NAME2) {
   const app2 = _apps.get(name5);
+  if (!app2 && name5 === DEFAULT_ENTRY_NAME2) {
+    return initializeApp();
+  }
   if (!app2) {
     throw ERROR_FACTORY.create("no-app", { appName: name5 });
   }
@@ -3845,7 +3958,7 @@ var init_index_esm20174 = __esm({
       }
     };
     name$o = "@firebase/app";
-    version$1 = "0.7.31";
+    version$1 = "0.8.2";
     logger = new Logger("@firebase/app");
     name$n = "@firebase/app-compat";
     name$m = "@firebase/analytics-compat";
@@ -3871,7 +3984,7 @@ var init_index_esm20174 = __esm({
     name$2 = "@firebase/firestore";
     name$1 = "@firebase/firestore-compat";
     name = "firebase";
-    version = "9.9.3";
+    version = "9.12.1";
     DEFAULT_ENTRY_NAME2 = "[DEFAULT]";
     PLATFORM_LOG_STRING = {
       [name$o]: "fire-core",
@@ -3908,6 +4021,7 @@ var init_index_esm20174 = __esm({
       ["bad-app-name"]: "Illegal App name: '{$appName}",
       ["duplicate-app"]: "Firebase App named '{$appName}' already exists with different options or config",
       ["app-deleted"]: "Firebase App named '{$appName}' already deleted",
+      ["no-options"]: "Need to provide options, when not being deployed to hosting via source.",
       ["invalid-app-argument"]: "firebase.{$appName}() takes either no argument or a Firebase App instance.",
       ["invalid-log-argument"]: "First argument to `onLog` must be null or a function.",
       ["idb-open"]: "Error thrown when opening IndexedDB. Original error: {$originalErrorMessage}.",
@@ -4081,7 +4195,7 @@ var init_index_esm2 = __esm({
     init_index_esm20174();
     init_index_esm20174();
     name2 = "firebase";
-    version2 = "9.9.3";
+    version2 = "9.12.1";
     registerVersion(name2, version2, "app");
   }
 });
@@ -4141,9 +4255,9 @@ var require_tslib = __commonJS({
       var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
         d2.__proto__ = b2;
       } || function(d2, b2) {
-        for (var p2 in b2)
-          if (Object.prototype.hasOwnProperty.call(b2, p2))
-            d2[p2] = b2[p2];
+        for (var p in b2)
+          if (Object.prototype.hasOwnProperty.call(b2, p))
+            d2[p] = b2[p];
       };
       __extends2 = function(d2, b2) {
         if (typeof b2 !== "function" && b2 !== null)
@@ -4157,21 +4271,21 @@ var require_tslib = __commonJS({
       __assign2 = Object.assign || function(t2) {
         for (var s3, i = 1, n2 = arguments.length; i < n2; i++) {
           s3 = arguments[i];
-          for (var p2 in s3)
-            if (Object.prototype.hasOwnProperty.call(s3, p2))
-              t2[p2] = s3[p2];
+          for (var p in s3)
+            if (Object.prototype.hasOwnProperty.call(s3, p))
+              t2[p] = s3[p];
         }
         return t2;
       };
       __rest2 = function(s3, e3) {
         var t2 = {};
-        for (var p2 in s3)
-          if (Object.prototype.hasOwnProperty.call(s3, p2) && e3.indexOf(p2) < 0)
-            t2[p2] = s3[p2];
+        for (var p in s3)
+          if (Object.prototype.hasOwnProperty.call(s3, p) && e3.indexOf(p) < 0)
+            t2[p] = s3[p];
         if (s3 != null && typeof Object.getOwnPropertySymbols === "function")
-          for (var i = 0, p2 = Object.getOwnPropertySymbols(s3); i < p2.length; i++) {
-            if (e3.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s3, p2[i]))
-              t2[p2[i]] = s3[p2[i]];
+          for (var i = 0, p = Object.getOwnPropertySymbols(s3); i < p.length; i++) {
+            if (e3.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s3, p[i]))
+              t2[p[i]] = s3[p[i]];
           }
         return t2;
       };
@@ -4196,11 +4310,11 @@ var require_tslib = __commonJS({
       };
       __awaiter2 = function(thisArg, _arguments, P2, generator) {
         function adopt(value) {
-          return value instanceof P2 ? value : new P2(function(resolve2) {
-            resolve2(value);
+          return value instanceof P2 ? value : new P2(function(resolve) {
+            resolve(value);
           });
         }
-        return new (P2 || (P2 = Promise))(function(resolve2, reject) {
+        return new (P2 || (P2 = Promise))(function(resolve, reject) {
           function fulfilled(value) {
             try {
               step(generator.next(value));
@@ -4216,7 +4330,7 @@ var require_tslib = __commonJS({
             }
           }
           function step(result) {
-            result.done ? resolve2(result.value) : adopt(result.value).then(fulfilled, rejected);
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
           }
           step((generator = generator.apply(thisArg, _arguments || [])).next());
         });
@@ -4226,7 +4340,7 @@ var require_tslib = __commonJS({
           if (t2[0] & 1)
             throw t2[1];
           return t2[1];
-        }, trys: [], ops: [] }, f2, y2, t2, g2;
+        }, trys: [], ops: [] }, f, y2, t2, g2;
         return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
           return this;
         }), g2;
@@ -4236,11 +4350,11 @@ var require_tslib = __commonJS({
           };
         }
         function step(op2) {
-          if (f2)
+          if (f)
             throw new TypeError("Generator is already executing.");
           while (_2)
             try {
-              if (f2 = 1, y2 && (t2 = op2[0] & 2 ? y2["return"] : op2[0] ? y2["throw"] || ((t2 = y2["return"]) && t2.call(y2), 0) : y2.next) && !(t2 = t2.call(y2, op2[1])).done)
+              if (f = 1, y2 && (t2 = op2[0] & 2 ? y2["return"] : op2[0] ? y2["throw"] || ((t2 = y2["return"]) && t2.call(y2), 0) : y2.next) && !(t2 = t2.call(y2, op2[1])).done)
                 return t2;
               if (y2 = 0, t2)
                 op2 = [op2[0] & 2, t2.value];
@@ -4290,7 +4404,7 @@ var require_tslib = __commonJS({
               op2 = [6, e3];
               y2 = 0;
             } finally {
-              f2 = t2 = 0;
+              f = t2 = 0;
             }
           if (op2[0] & 5)
             throw op2[1];
@@ -4298,9 +4412,9 @@ var require_tslib = __commonJS({
         }
       };
       __exportStar2 = function(m2, o2) {
-        for (var p2 in m2)
-          if (p2 !== "default" && !Object.prototype.hasOwnProperty.call(o2, p2))
-            __createBinding2(o2, m2, p2);
+        for (var p in m2)
+          if (p !== "default" && !Object.prototype.hasOwnProperty.call(o2, p))
+            __createBinding2(o2, m2, p);
       };
       __createBinding2 = Object.create ? function(o2, m2, k2, k22) {
         if (k22 === void 0)
@@ -4335,10 +4449,10 @@ var require_tslib = __commonJS({
         var m2 = typeof Symbol === "function" && o2[Symbol.iterator];
         if (!m2)
           return o2;
-        var i = m2.call(o2), r2, ar = [], e3;
+        var i = m2.call(o2), r2, ar2 = [], e3;
         try {
           while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done)
-            ar.push(r2.value);
+            ar2.push(r2.value);
         } catch (error2) {
           e3 = { error: error2 };
         } finally {
@@ -4350,31 +4464,31 @@ var require_tslib = __commonJS({
               throw e3.error;
           }
         }
-        return ar;
+        return ar2;
       };
       __spread2 = function() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-          ar = ar.concat(__read2(arguments[i]));
-        return ar;
+        for (var ar2 = [], i = 0; i < arguments.length; i++)
+          ar2 = ar2.concat(__read2(arguments[i]));
+        return ar2;
       };
       __spreadArrays2 = function() {
         for (var s3 = 0, i = 0, il = arguments.length; i < il; i++)
           s3 += arguments[i].length;
         for (var r2 = Array(s3), k2 = 0, i = 0; i < il; i++)
-          for (var a2 = arguments[i], j2 = 0, jl = a2.length; j2 < jl; j2++, k2++)
-            r2[k2] = a2[j2];
+          for (var a2 = arguments[i], j = 0, jl = a2.length; j < jl; j++, k2++)
+            r2[k2] = a2[j];
         return r2;
       };
       __spreadArray2 = function(to, from, pack) {
         if (pack || arguments.length === 2)
-          for (var i = 0, l2 = from.length, ar; i < l2; i++) {
-            if (ar || !(i in from)) {
-              if (!ar)
-                ar = Array.prototype.slice.call(from, 0, i);
-              ar[i] = from[i];
+          for (var i = 0, l = from.length, ar2; i < l; i++) {
+            if (ar2 || !(i in from)) {
+              if (!ar2)
+                ar2 = Array.prototype.slice.call(from, 0, i);
+              ar2[i] = from[i];
             }
           }
-        return to.concat(ar || Array.prototype.slice.call(from));
+        return to.concat(ar2 || Array.prototype.slice.call(from));
       };
       __await2 = function(v2) {
         return this instanceof __await2 ? (this.v = v2, this) : new __await2(v2);
@@ -4410,22 +4524,22 @@ var require_tslib = __commonJS({
         function reject(value) {
           resume("throw", value);
         }
-        function settle(f2, v2) {
-          if (f2(v2), q2.shift(), q2.length)
+        function settle(f, v2) {
+          if (f(v2), q2.shift(), q2.length)
             resume(q2[0][0], q2[0][1]);
         }
       };
       __asyncDelegator2 = function(o2) {
-        var i, p2;
+        var i, p;
         return i = {}, verb("next"), verb("throw", function(e3) {
           throw e3;
         }), verb("return"), i[Symbol.iterator] = function() {
           return this;
         }, i;
-        function verb(n2, f2) {
+        function verb(n2, f) {
           i[n2] = o2[n2] ? function(v2) {
-            return (p2 = !p2) ? { value: __await2(o2[n2](v2)), done: n2 === "return" } : f2 ? f2(v2) : v2;
-          } : f2;
+            return (p = !p) ? { value: __await2(o2[n2](v2)), done: n2 === "return" } : f ? f(v2) : v2;
+          } : f;
         }
       };
       __asyncValues2 = function(o2) {
@@ -4437,14 +4551,14 @@ var require_tslib = __commonJS({
         }, i);
         function verb(n2) {
           i[n2] = o2[n2] && function(v2) {
-            return new Promise(function(resolve2, reject) {
-              v2 = o2[n2](v2), settle(resolve2, reject, v2.done, v2.value);
+            return new Promise(function(resolve, reject) {
+              v2 = o2[n2](v2), settle(resolve, reject, v2.done, v2.value);
             });
           };
         }
-        function settle(resolve2, reject, d2, v2) {
+        function settle(resolve, reject, d2, v2) {
           Promise.resolve(v2).then(function(v3) {
-            resolve2({ value: v3, done: d2 });
+            resolve({ value: v3, done: d2 });
           }, reject);
         }
       };
@@ -4476,21 +4590,21 @@ var require_tslib = __commonJS({
       __importDefault2 = function(mod) {
         return mod && mod.__esModule ? mod : { "default": mod };
       };
-      __classPrivateFieldGet2 = function(receiver, state, kind, f2) {
-        if (kind === "a" && !f2)
+      __classPrivateFieldGet2 = function(receiver, state, kind, f) {
+        if (kind === "a" && !f)
           throw new TypeError("Private accessor was defined without a getter");
-        if (typeof state === "function" ? receiver !== state || !f2 : !state.has(receiver))
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
           throw new TypeError("Cannot read private member from an object whose class did not declare it");
-        return kind === "m" ? f2 : kind === "a" ? f2.call(receiver) : f2 ? f2.value : state.get(receiver);
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
       };
-      __classPrivateFieldSet2 = function(receiver, state, value, kind, f2) {
+      __classPrivateFieldSet2 = function(receiver, state, value, kind, f) {
         if (kind === "m")
           throw new TypeError("Private method is not writable");
-        if (kind === "a" && !f2)
+        if (kind === "a" && !f)
           throw new TypeError("Private accessor was defined without a setter");
-        if (typeof state === "function" ? receiver !== state || !f2 : !state.has(receiver))
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
           throw new TypeError("Cannot write private member to an object whose class did not declare it");
-        return kind === "a" ? f2.call(receiver, value) : f2 ? f2.value = value : state.set(receiver, value), value;
+        return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
       };
       __classPrivateFieldIn2 = function(state, receiver) {
         if (receiver === null || typeof receiver !== "object" && typeof receiver !== "function")
@@ -4561,7 +4675,7 @@ var init_modules = __esm({
   }
 });
 
-// node_modules/@firebase/auth/dist/esm2017/index-90ebcfae.js
+// node_modules/@firebase/auth/dist/esm2017/index-909bd8f4.js
 function _prodErrorMap() {
   return {
     ["dependent-sdk-initialized-before-auth"]: "Another Firebase SDK was initialized and is trying to use Auth before Auth is initialized. Please be sure to call `initializeAuth` or `getAuth` before starting any other Firebase SDK."
@@ -5032,6 +5146,85 @@ function _getClientVersion(clientPlatform, frameworks = []) {
 function _castAuth(auth) {
   return getModularInstance(auth);
 }
+function connectAuthEmulator(auth, url, options) {
+  const authInternal = _castAuth(auth);
+  _assert(authInternal._canInitEmulator, authInternal, "emulator-config-failed");
+  _assert(/^https?:\/\//.test(url), authInternal, "invalid-emulator-scheme");
+  const disableWarnings = !!(options === null || options === void 0 ? void 0 : options.disableWarnings);
+  const protocol = extractProtocol(url);
+  const { host, port } = extractHostAndPort(url);
+  const portStr = port === null ? "" : `:${port}`;
+  authInternal.config.emulator = { url: `${protocol}//${host}${portStr}/` };
+  authInternal.settings.appVerificationDisabledForTesting = true;
+  authInternal.emulatorConfig = Object.freeze({
+    host,
+    port,
+    protocol: protocol.replace(":", ""),
+    options: Object.freeze({ disableWarnings })
+  });
+  if (!disableWarnings) {
+    emitEmulatorWarning();
+  }
+}
+function extractProtocol(url) {
+  const protocolEnd = url.indexOf(":");
+  return protocolEnd < 0 ? "" : url.substr(0, protocolEnd + 1);
+}
+function extractHostAndPort(url) {
+  const protocol = extractProtocol(url);
+  const authority = /(\/\/)?([^?#/]+)/.exec(url.substr(protocol.length));
+  if (!authority) {
+    return { host: "", port: null };
+  }
+  const hostAndPort = authority[2].split("@").pop() || "";
+  const bracketedIPv6 = /^(\[[^\]]+\])(:|$)/.exec(hostAndPort);
+  if (bracketedIPv6) {
+    const host = bracketedIPv6[1];
+    return { host, port: parsePort(hostAndPort.substr(host.length + 1)) };
+  } else {
+    const [host, port] = hostAndPort.split(":");
+    return { host, port: parsePort(port) };
+  }
+}
+function parsePort(portStr) {
+  if (!portStr) {
+    return null;
+  }
+  const port = Number(portStr);
+  if (isNaN(port)) {
+    return null;
+  }
+  return port;
+}
+function emitEmulatorWarning() {
+  function attachBanner() {
+    const el = document.createElement("p");
+    const sty = el.style;
+    el.innerText = "Running in emulator mode. Do not use with production credentials.";
+    sty.position = "fixed";
+    sty.width = "100%";
+    sty.backgroundColor = "#ffffff";
+    sty.border = ".1em solid #000000";
+    sty.color = "#b50000";
+    sty.bottom = "0px";
+    sty.left = "0px";
+    sty.margin = "0px";
+    sty.zIndex = "10000";
+    sty.textAlign = "center";
+    el.classList.add("firebase-emulator-warning");
+    document.body.appendChild(el);
+  }
+  if (typeof console !== "undefined" && typeof console.info === "function") {
+    console.info("WARNING: You are using the Auth Emulator, which is intended for local testing only.  Do not use with production credentials.");
+  }
+  if (typeof window !== "undefined" && typeof document !== "undefined") {
+    if (document.readyState === "loading") {
+      window.addEventListener("DOMContentLoaded", attachBanner);
+    } else {
+      attachBanner();
+    }
+  }
+}
 async function updateEmailPassword(auth, request) {
   return _performApiRequest(auth, "POST", "/v1/accounts:update", request);
 }
@@ -5139,6 +5332,12 @@ async function _signInWithCredential(auth, credential, bypassAuthState = false) 
   }
   return userCredential;
 }
+function onIdTokenChanged(auth, nextOrObserver, error2, completed) {
+  return getModularInstance(auth).onIdTokenChanged(nextOrObserver, error2, completed);
+}
+function beforeAuthStateChanged(auth, callback, onAbort) {
+  return getModularInstance(auth).beforeAuthStateChanged(callback, onAbort);
+}
 function startEnrollPhoneMfa(auth, request) {
   return _performApiRequest(auth, "POST", "/v2/accounts/mfaEnrollment:start", _addTidIfNecessary(auth, request));
 }
@@ -5165,12 +5364,12 @@ function _allSettled(promises) {
     }
   }));
 }
-function _generateEventId(prefix2 = "", digits = 10) {
+function _generateEventId(prefix = "", digits = 10) {
   let random = "";
   for (let i = 0; i < digits; i++) {
     random += Math.floor(Math.random() * 10);
   }
-  return prefix2 + random;
+  return prefix + random;
 }
 function _window() {
   return window;
@@ -5208,7 +5407,7 @@ function _deleteDatabase() {
 }
 function _openDatabase() {
   const request = indexedDB.open(DB_NAME2, DB_VERSION2);
-  return new Promise((resolve2, reject) => {
+  return new Promise((resolve, reject) => {
     request.addEventListener("error", () => {
       reject(request.error);
     });
@@ -5225,9 +5424,9 @@ function _openDatabase() {
       if (!db2.objectStoreNames.contains(DB_OBJECTSTORE_NAME)) {
         db2.close();
         await _deleteDatabase();
-        resolve2(await _openDatabase());
+        resolve(await _openDatabase());
       } else {
-        resolve2(db2);
+        resolve(db2);
       }
     });
   });
@@ -5259,10 +5458,10 @@ function getScriptParentElement() {
   return (_b = (_a = document.getElementsByTagName("head")) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : document;
 }
 function _loadJS(url) {
-  return new Promise((resolve2, reject) => {
+  return new Promise((resolve, reject) => {
     const el = document.createElement("script");
     el.setAttribute("src", url);
-    el.onload = resolve2;
+    el.onload = resolve;
     el.onerror = (e3) => {
       const error2 = _createError("internal-error");
       error2.customData = e3;
@@ -5273,8 +5472,8 @@ function _loadJS(url) {
     getScriptParentElement().appendChild(el);
   });
 }
-function _generateCallbackName(prefix2) {
-  return `__${prefix2}${Math.floor(Math.random() * 1e6)}`;
+function _generateCallbackName(prefix) {
+  return `__${prefix}${Math.floor(Math.random() * 1e6)}`;
 }
 async function _verifyPhoneNumber(auth, options, verifier) {
   var _a;
@@ -5449,13 +5648,13 @@ function resetUnloadedGapiModules() {
   }
 }
 function loadGapi(auth) {
-  return new Promise((resolve2, reject) => {
+  return new Promise((resolve, reject) => {
     var _a, _b, _c;
     function loadGapiIframe() {
       resetUnloadedGapiModules();
       gapi.load("gapi.iframes", {
         callback: () => {
-          resolve2(gapi.iframes.getContext());
+          resolve(gapi.iframes.getContext());
         },
         ontimeout: () => {
           resetUnloadedGapiModules();
@@ -5465,7 +5664,7 @@ function loadGapi(auth) {
       });
     }
     if ((_b = (_a = _window().gapi) === null || _a === void 0 ? void 0 : _a.iframes) === null || _b === void 0 ? void 0 : _b.Iframe) {
-      resolve2(gapi.iframes.getContext());
+      resolve(gapi.iframes.getContext());
     } else if (!!((_c = _window().gapi) === null || _c === void 0 ? void 0 : _c.load)) {
       loadGapiIframe();
     } else {
@@ -5517,7 +5716,7 @@ async function _openIframe(auth) {
     messageHandlersFilter: gapi2.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
     attributes: IFRAME_ATTRIBUTES,
     dontclear: true
-  }, (iframe) => new Promise(async (resolve2, reject) => {
+  }, (iframe) => new Promise(async (resolve, reject) => {
     await iframe.restyle({
       setHideOnLeave: false
     });
@@ -5527,7 +5726,7 @@ async function _openIframe(auth) {
     }, PING_TIMEOUT.get());
     function clearTimerAndResolve() {
       _window().clearTimeout(networkErrorTimer);
-      resolve2(iframe);
+      resolve(iframe);
     }
     iframe.ping(clearTimerAndResolve).then(clearTimerAndResolve, () => {
       reject(networkError);
@@ -5670,7 +5869,7 @@ function getAuth(app2 = getApp()) {
   if (provider.isInitialized()) {
     return provider.getImmediate();
   }
-  return initializeAuth(app2, {
+  const auth = initializeAuth(app2, {
     popupRedirectResolver: browserPopupRedirectResolver,
     persistence: [
       indexedDBLocalPersistence,
@@ -5678,14 +5877,25 @@ function getAuth(app2 = getApp()) {
       browserSessionPersistence
     ]
   });
+  const authTokenSyncUrl = getExperimentalSetting("authTokenSyncURL");
+  if (authTokenSyncUrl) {
+    const mintCookie = mintCookieFactory(authTokenSyncUrl);
+    beforeAuthStateChanged(auth, mintCookie, () => mintCookie(auth.currentUser));
+    onIdTokenChanged(auth, (user) => mintCookie(user));
+  }
+  const authEmulatorHost = getDefaultEmulatorHost("auth");
+  if (authEmulatorHost) {
+    connectAuthEmulator(auth, `http://${authEmulatorHost}`);
+  }
+  return auth;
 }
-var prodErrorMap, _DEFAULT_AUTH_ERROR_FACTORY, logClient, instanceCache, Delay, FetchProvider, SERVER_ERROR_MAP, DEFAULT_API_TIMEOUT_MS, NetworkTimeout, ProactiveRefresh, UserMetadata, StsTokenManager, UserImpl, InMemoryPersistence, inMemoryPersistence, PersistenceUserManager, AuthMiddlewareQueue, AuthImpl, Subscription, AuthCredential, EmailAuthCredential, IDP_REQUEST_URI$1, OAuthCredential, VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_, PhoneAuthCredential, ActionCodeURL, EmailAuthProvider, FederatedAuthProvider, BaseOAuthProvider, FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, UserCredentialImpl, MultiFactorError, STORAGE_AVAILABLE_KEY, BrowserPersistenceClass, _POLLING_INTERVAL_MS$1, IE10_LOCAL_STORAGE_SYNC_DELAY, BrowserLocalPersistence, browserLocalPersistence, BrowserSessionPersistence, browserSessionPersistence, Receiver, Sender, DB_NAME2, DB_VERSION2, DB_OBJECTSTORE_NAME, DB_DATA_KEYPATH, DBPromise, _POLLING_INTERVAL_MS, _TRANSACTION_RETRY_COUNT, IndexedDBLocalPersistence, indexedDBLocalPersistence, _JSLOAD_CALLBACK, NETWORK_TIMEOUT_DELAY, RECAPTCHA_VERIFIER_TYPE, PhoneAuthProvider, IdpCredential, AbstractPopupRedirectOperation, _POLL_WINDOW_CLOSE_TIMEOUT, PopupOperation, PENDING_REDIRECT_KEY, redirectOutcomeMap, RedirectAction, EVENT_DUPLICATION_CACHE_DURATION_MS, AuthEventManager, IP_ADDRESS_REGEX, HTTP_REGEX, NETWORK_TIMEOUT, cachedGApiLoader, PING_TIMEOUT, IFRAME_PATH, EMULATED_IFRAME_PATH, IFRAME_ATTRIBUTES, EID_FROM_APIHOST, BASE_POPUP_OPTIONS, DEFAULT_WIDTH, DEFAULT_HEIGHT, TARGET_BLANK, FIREFOX_EMPTY_URL, AuthPopup, WIDGET_PATH, EMULATOR_WIDGET_PATH, WEB_STORAGE_SUPPORT_KEY, BrowserPopupRedirectResolver, browserPopupRedirectResolver, MultiFactorAssertionImpl, PhoneMultiFactorAssertionImpl, PhoneMultiFactorGenerator, name3, version3, AuthInterop;
-var init_index_90ebcfae = __esm({
-  "node_modules/@firebase/auth/dist/esm2017/index-90ebcfae.js"() {
+var prodErrorMap, _DEFAULT_AUTH_ERROR_FACTORY, logClient, instanceCache, Delay, FetchProvider, SERVER_ERROR_MAP, DEFAULT_API_TIMEOUT_MS, NetworkTimeout, ProactiveRefresh, UserMetadata, StsTokenManager, UserImpl, InMemoryPersistence, inMemoryPersistence, PersistenceUserManager, AuthMiddlewareQueue, AuthImpl, Subscription, AuthCredential, EmailAuthCredential, IDP_REQUEST_URI$1, OAuthCredential, VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_, PhoneAuthCredential, ActionCodeURL, EmailAuthProvider, FederatedAuthProvider, BaseOAuthProvider, FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, UserCredentialImpl, MultiFactorError, STORAGE_AVAILABLE_KEY, BrowserPersistenceClass, _POLLING_INTERVAL_MS$1, IE10_LOCAL_STORAGE_SYNC_DELAY, BrowserLocalPersistence, browserLocalPersistence, BrowserSessionPersistence, browserSessionPersistence, Receiver, Sender, DB_NAME2, DB_VERSION2, DB_OBJECTSTORE_NAME, DB_DATA_KEYPATH, DBPromise, _POLLING_INTERVAL_MS, _TRANSACTION_RETRY_COUNT, IndexedDBLocalPersistence, indexedDBLocalPersistence, _JSLOAD_CALLBACK, NETWORK_TIMEOUT_DELAY, RECAPTCHA_VERIFIER_TYPE, PhoneAuthProvider, IdpCredential, AbstractPopupRedirectOperation, _POLL_WINDOW_CLOSE_TIMEOUT, PopupOperation, PENDING_REDIRECT_KEY, redirectOutcomeMap, RedirectAction, EVENT_DUPLICATION_CACHE_DURATION_MS, AuthEventManager, IP_ADDRESS_REGEX, HTTP_REGEX, NETWORK_TIMEOUT, cachedGApiLoader, PING_TIMEOUT, IFRAME_PATH, EMULATED_IFRAME_PATH, IFRAME_ATTRIBUTES, EID_FROM_APIHOST, BASE_POPUP_OPTIONS, DEFAULT_WIDTH, DEFAULT_HEIGHT, TARGET_BLANK, FIREFOX_EMPTY_URL, AuthPopup, WIDGET_PATH, EMULATOR_WIDGET_PATH, WEB_STORAGE_SUPPORT_KEY, BrowserPopupRedirectResolver, browserPopupRedirectResolver, MultiFactorAssertionImpl, PhoneMultiFactorAssertionImpl, PhoneMultiFactorGenerator, name3, version3, AuthInterop, DEFAULT_ID_TOKEN_MAX_AGE, authIdTokenMaxAge, lastPostedIdToken, mintCookieFactory;
+var init_index_909bd8f4 = __esm({
+  "node_modules/@firebase/auth/dist/esm2017/index-909bd8f4.js"() {
     init_index_esm2017();
     init_index_esm20174();
-    init_modules();
     init_index_esm20173();
+    init_modules();
     init_index_esm20172();
     prodErrorMap = _prodErrorMap;
     _DEFAULT_AUTH_ERROR_FACTORY = new ErrorFactory("auth", "Firebase", _prodErrorMap());
@@ -6078,12 +6288,12 @@ var init_index_90ebcfae = __esm({
         return this.stsTokenManager.refreshToken || "";
       }
       static _fromJSON(auth, object) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e2, _f, _g, _h;
         const displayName = (_a = object.displayName) !== null && _a !== void 0 ? _a : void 0;
         const email = (_b = object.email) !== null && _b !== void 0 ? _b : void 0;
         const phoneNumber = (_c = object.phoneNumber) !== null && _c !== void 0 ? _c : void 0;
         const photoURL = (_d = object.photoURL) !== null && _d !== void 0 ? _d : void 0;
-        const tenantId = (_e = object.tenantId) !== null && _e !== void 0 ? _e : void 0;
+        const tenantId = (_e2 = object.tenantId) !== null && _e2 !== void 0 ? _e2 : void 0;
         const _redirectEventId = (_f = object._redirectEventId) !== null && _f !== void 0 ? _f : void 0;
         const createdAt = (_g = object.createdAt) !== null && _g !== void 0 ? _g : void 0;
         const lastLoginAt = (_h = object.lastLoginAt) !== null && _h !== void 0 ? _h : void 0;
@@ -6228,7 +6438,7 @@ var init_index_90ebcfae = __esm({
           } catch (_a) {
           }
         }
-        const migrationHierarchy = availablePersistences.filter((p2) => p2._shouldAllowMigration);
+        const migrationHierarchy = availablePersistences.filter((p) => p._shouldAllowMigration);
         if (!selectedPersistence._shouldAllowMigration || !migrationHierarchy.length) {
           return new PersistenceUserManager(selectedPersistence, auth, userKey);
         }
@@ -6253,10 +6463,10 @@ var init_index_90ebcfae = __esm({
         this.queue = [];
       }
       pushCallback(callback, onAbort) {
-        const wrappedCallback = (user) => new Promise((resolve2, reject) => {
+        const wrappedCallback = (user) => new Promise((resolve, reject) => {
           try {
             const result = callback(user);
-            resolve2(result);
+            resolve(result);
           } catch (e3) {
             reject(e3);
           }
@@ -6289,7 +6499,9 @@ var init_index_90ebcfae = __esm({
             } catch (_2) {
             }
           }
-          throw this.auth._errorFactory.create("login-blocked", { originalMessage: (_a = e3) === null || _a === void 0 ? void 0 : _a.message });
+          throw this.auth._errorFactory.create("login-blocked", {
+            originalMessage: (_a = e3) === null || _a === void 0 ? void 0 : _a.message
+          });
         }
       }
     };
@@ -6572,9 +6784,9 @@ var init_index_90ebcfae = __esm({
       async directlySetCurrentUser(user) {
         if (this.currentUser && this.currentUser !== user) {
           this._currentUser._stopProactiveRefresh();
-          if (user && this.isProactiveRefreshEnabled) {
-            user._startProactiveRefresh();
-          }
+        }
+        if (user && this.isProactiveRefreshEnabled) {
+          user._startProactiveRefresh();
         }
         this.currentUser = user;
         if (user) {
@@ -6884,7 +7096,7 @@ var init_index_90ebcfae = __esm({
     };
     ActionCodeURL = class {
       constructor(actionLink) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e2, _f;
         const searchParams = querystringDecode(extractQuerystring(actionLink));
         const apiKey = (_a = searchParams["apiKey"]) !== null && _a !== void 0 ? _a : null;
         const code = (_b = searchParams["oobCode"]) !== null && _b !== void 0 ? _b : null;
@@ -6894,7 +7106,7 @@ var init_index_90ebcfae = __esm({
         this.operation = operation;
         this.code = code;
         this.continueUrl = (_d = searchParams["continueUrl"]) !== null && _d !== void 0 ? _d : null;
-        this.languageCode = (_e = searchParams["languageCode"]) !== null && _e !== void 0 ? _e : null;
+        this.languageCode = (_e2 = searchParams["languageCode"]) !== null && _e2 !== void 0 ? _e2 : null;
         this.tenantId = (_f = searchParams["tenantId"]) !== null && _f !== void 0 ? _f : null;
       }
       static parseLink(link) {
@@ -7404,7 +7616,7 @@ var init_index_90ebcfae = __esm({
         }
         let completionTimer;
         let handler;
-        return new Promise((resolve2, reject) => {
+        return new Promise((resolve, reject) => {
           const eventId = _generateEventId("", 20);
           messageChannel.port1.start();
           const ackTimer = setTimeout(() => {
@@ -7426,7 +7638,7 @@ var init_index_90ebcfae = __esm({
                   break;
                 case "done":
                   clearTimeout(completionTimer);
-                  resolve2(messageEvent.data.response);
+                  resolve(messageEvent.data.response);
                   break;
                 default:
                   clearTimeout(ackTimer);
@@ -7459,9 +7671,9 @@ var init_index_90ebcfae = __esm({
         this.request = request;
       }
       toPromise() {
-        return new Promise((resolve2, reject) => {
+        return new Promise((resolve, reject) => {
           this.request.addEventListener("success", () => {
-            resolve2(this.request.result);
+            resolve(this.request.result);
           });
           this.request.addEventListener("error", () => {
             reject(this.request.error);
@@ -7740,8 +7952,8 @@ var init_index_90ebcfae = __esm({
         this.filter = Array.isArray(filter) ? filter : [filter];
       }
       execute() {
-        return new Promise(async (resolve2, reject) => {
-          this.pendingPromise = { resolve: resolve2, reject };
+        return new Promise(async (resolve, reject) => {
+          this.pendingPromise = { resolve, reject };
           try {
             this.eventManager = await this.resolver._initialize(this.auth);
             await this.onExecution();
@@ -8166,7 +8378,7 @@ var init_index_90ebcfae = __esm({
     };
     PhoneMultiFactorGenerator.FACTOR_ID = "phone";
     name3 = "@firebase/auth";
-    version3 = "0.20.5";
+    version3 = "0.20.10";
     AuthInterop = class {
       constructor(auth) {
         this.auth = auth;
@@ -8219,6 +8431,27 @@ var init_index_90ebcfae = __esm({
         }
       }
     };
+    DEFAULT_ID_TOKEN_MAX_AGE = 5 * 60;
+    authIdTokenMaxAge = getExperimentalSetting("authIdTokenMaxAge") || DEFAULT_ID_TOKEN_MAX_AGE;
+    lastPostedIdToken = null;
+    mintCookieFactory = (url) => async (user) => {
+      const idTokenResult = user && await user.getIdTokenResult();
+      const idTokenAge = idTokenResult && (new Date().getTime() - Date.parse(idTokenResult.issuedAtTime)) / 1e3;
+      if (idTokenAge && idTokenAge > authIdTokenMaxAge) {
+        return;
+      }
+      const idToken = idTokenResult === null || idTokenResult === void 0 ? void 0 : idTokenResult.token;
+      if (lastPostedIdToken === idToken) {
+        return;
+      }
+      lastPostedIdToken = idToken;
+      await fetch(url, {
+        method: idToken ? "POST" : "DELETE",
+        headers: idToken ? {
+          "Authorization": `Bearer ${idToken}`
+        } : {}
+      });
+    };
     registerAuth("Browser");
   }
 });
@@ -8226,11 +8459,11 @@ var init_index_90ebcfae = __esm({
 // node_modules/@firebase/auth/dist/esm2017/index.js
 var init_esm2017 = __esm({
   "node_modules/@firebase/auth/dist/esm2017/index.js"() {
-    init_index_90ebcfae();
+    init_index_909bd8f4();
     init_index_esm2017();
     init_index_esm20174();
-    init_modules();
     init_index_esm20173();
+    init_modules();
     init_index_esm20172();
   }
 });
@@ -8243,25 +8476,25 @@ var init_index_esm3 = __esm({
 });
 
 // node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js
-function m(t2, ...e3) {
-  if (d.logLevel <= LogLevel.DEBUG) {
-    const n2 = e3.map(_);
-    d.debug(`Firestore (${f}): ${t2}`, ...n2);
-  }
-}
-function p(t2, ...e3) {
-  if (d.logLevel <= LogLevel.ERROR) {
-    const n2 = e3.map(_);
-    d.error(`Firestore (${f}): ${t2}`, ...n2);
-  }
-}
 function y(t2, ...e3) {
-  if (d.logLevel <= LogLevel.WARN) {
-    const n2 = e3.map(_);
-    d.warn(`Firestore (${f}): ${t2}`, ...n2);
+  if (m.logLevel <= LogLevel.DEBUG) {
+    const n2 = e3.map(v);
+    m.debug(`Firestore (${w}): ${t2}`, ...n2);
   }
 }
-function _(t2) {
+function _(t2, ...e3) {
+  if (m.logLevel <= LogLevel.ERROR) {
+    const n2 = e3.map(v);
+    m.error(`Firestore (${w}): ${t2}`, ...n2);
+  }
+}
+function g(t2, ...e3) {
+  if (m.logLevel <= LogLevel.WARN) {
+    const n2 = e3.map(v);
+    m.warn(`Firestore (${w}): ${t2}`, ...n2);
+  }
+}
+function v(t2) {
   if ("string" == typeof t2)
     return t2;
   try {
@@ -8271,25 +8504,25 @@ function _(t2) {
   }
   var e3;
 }
-function g(t2 = "Unexpected state") {
-  const e3 = `FIRESTORE (${f}) INTERNAL ASSERTION FAILED: ` + t2;
-  throw p(e3), new Error(e3);
+function b(t2 = "Unexpected state") {
+  const e3 = `FIRESTORE (${w}) INTERNAL ASSERTION FAILED: ` + t2;
+  throw _(e3), new Error(e3);
 }
-function v(t2, e3) {
-  t2 || g();
+function E(t2, e3) {
+  t2 || b();
 }
-function b(t2, e3) {
+function I(t2, e3) {
   return t2;
 }
-function nt(t2, e3, n2) {
+function st(t2, e3, n2) {
   if (!n2)
-    throw new L(A, `Function ${t2}() cannot be called with an empty ${e3}.`);
+    throw new U(P, `Function ${t2}() cannot be called with an empty ${e3}.`);
 }
-function st(t2) {
-  if (et.isDocumentKey(t2))
-    throw new L(A, `Invalid collection reference. Collection references must have an odd number of segments, but ${t2} has ${t2.length}.`);
+function ot(t2) {
+  if (rt.isDocumentKey(t2))
+    throw new U(P, `Invalid collection reference. Collection references must have an odd number of segments, but ${t2} has ${t2.length}.`);
 }
-function it(t2) {
+function ut(t2) {
   if (void 0 === t2)
     return "undefined";
   if (null === t2)
@@ -8310,80 +8543,80 @@ function it(t2) {
       return e3 ? `a custom ${e3} object` : "an object";
     }
   }
-  return "function" == typeof t2 ? "a function" : g();
+  return "function" == typeof t2 ? "a function" : b();
 }
-function ot(t2, e3) {
+function ct(t2, e3) {
   if ("_delegate" in t2 && (t2 = t2._delegate), !(t2 instanceof e3)) {
     if (e3.name === t2.constructor.name)
-      throw new L(A, "Type does not match the expected instance. Did you pass a reference from a different Firestore SDK?");
+      throw new U(P, "Type does not match the expected instance. Did you pass a reference from a different Firestore SDK?");
     {
-      const n2 = it(t2);
-      throw new L(A, `Expected type '${e3.name}', but it was: ${n2}`);
+      const n2 = ut(t2);
+      throw new U(P, `Expected type '${e3.name}', but it was: ${n2}`);
     }
   }
   return t2;
 }
-function ct(t2) {
+function ht(t2) {
   return null == t2;
 }
-function at(t2) {
+function lt(t2) {
   return 0 === t2 && 1 / t2 == -1 / 0;
 }
-function dt(t2) {
+function mt(t2) {
   if (void 0 === t2)
-    return p("RPC_ERROR", "HTTP error has no status"), I;
+    return _("RPC_ERROR", "HTTP error has no status"), R;
   switch (t2) {
     case 200:
-      return E;
-    case 400:
-      return x;
-    case 401:
-      return D;
-    case 403:
-      return N;
-    case 404:
-      return P;
-    case 409:
-      return F;
-    case 416:
-      return S;
-    case 429:
-      return $;
-    case 499:
       return T;
-    case 500:
-      return I;
-    case 501:
+    case 400:
+      return S;
+    case 401:
+      return x;
+    case 403:
+      return $;
+    case 404:
+      return N;
+    case 409:
       return q;
-    case 503:
-      return k;
-    case 504:
+    case 416:
+      return O;
+    case 429:
+      return F;
+    case 499:
+      return A;
+    case 500:
       return R;
+    case 501:
+      return k;
+    case 503:
+      return L;
+    case 504:
+      return V;
     default:
-      return t2 >= 200 && t2 < 300 ? E : t2 >= 400 && t2 < 500 ? x : t2 >= 500 && t2 < 600 ? O : I;
+      return t2 >= 200 && t2 < 300 ? T : t2 >= 400 && t2 < 500 ? S : t2 >= 500 && t2 < 600 ? C : R;
   }
 }
-function yt(t2, e3) {
+function gt(t2, e3) {
   return t2 < e3 ? -1 : t2 > e3 ? 1 : 0;
 }
-function _t(t2, e3, n2) {
+function vt(t2, e3, n2) {
   return t2.length === e3.length && t2.every((t3, r2) => n2(t3, e3[r2]));
 }
-function bt(t2) {
+function It(t2) {
   let e3 = 0;
   for (const n2 in t2)
     Object.prototype.hasOwnProperty.call(t2, n2) && e3++;
   return e3;
 }
-function Et(t2, e3) {
+function Tt(t2, e3) {
   for (const n2 in t2)
     Object.prototype.hasOwnProperty.call(t2, n2) && e3(n2, t2[n2]);
 }
-function $t(t2) {
-  if (v(!!t2), "string" == typeof t2) {
+function Ft(t2) {
+  if (E(!!t2), "string" == typeof t2) {
     let e3 = 0;
-    const n2 = Dt.exec(t2);
-    if (v(!!n2), n2[1]) {
+    const n2 = xt.exec(t2);
+    if (E(!!n2), n2[1]) {
       let t3 = n2[1];
       t3 = (t3 + "000000000").substr(0, 9), e3 = Number(t3);
     }
@@ -8394,38 +8627,38 @@ function $t(t2) {
     };
   }
   return {
-    seconds: xt(t2.seconds),
-    nanos: xt(t2.nanos)
+    seconds: St(t2.seconds),
+    nanos: St(t2.nanos)
   };
 }
-function xt(t2) {
+function St(t2) {
   return "number" == typeof t2 ? t2 : "string" == typeof t2 ? Number(t2) : 0;
 }
-function Ft(t2) {
-  return "string" == typeof t2 ? Nt.fromBase64String(t2) : Nt.fromUint8Array(t2);
+function qt(t2) {
+  return "string" == typeof t2 ? $t.fromBase64String(t2) : $t.fromUint8Array(t2);
 }
-function St(t2) {
+function Ot(t2) {
   var e3, n2;
   return "server_timestamp" === (null === (n2 = ((null === (e3 = null == t2 ? void 0 : t2.mapValue) || void 0 === e3 ? void 0 : e3.fields) || {}).__type__) || void 0 === n2 ? void 0 : n2.stringValue);
 }
-function qt(t2) {
+function kt(t2) {
   const e3 = t2.mapValue.fields.__previous_value__;
-  return St(e3) ? qt(e3) : e3;
-}
-function Ot(t2) {
-  const e3 = $t(t2.mapValue.fields.__local_write_time__.timestampValue);
-  return new gt(e3.seconds, e3.nanos);
+  return Ot(e3) ? kt(e3) : e3;
 }
 function Ct(t2) {
-  return "nullValue" in t2 ? 0 : "booleanValue" in t2 ? 1 : "integerValue" in t2 || "doubleValue" in t2 ? 2 : "timestampValue" in t2 ? 3 : "stringValue" in t2 ? 5 : "bytesValue" in t2 ? 6 : "referenceValue" in t2 ? 7 : "geoPointValue" in t2 ? 8 : "arrayValue" in t2 ? 9 : "mapValue" in t2 ? St(t2) ? 4 : function(t3) {
-    return "__max__" === (((t3.mapValue || {}).fields || {}).__type__ || {}).stringValue;
-  }(t2) ? 9007199254740991 : 10 : g();
+  const e3 = Ft(t2.mapValue.fields.__local_write_time__.timestampValue);
+  return new bt(e3.seconds, e3.nanos);
 }
-function Lt(t2, e3) {
+function Mt(t2) {
+  return "nullValue" in t2 ? 0 : "booleanValue" in t2 ? 1 : "integerValue" in t2 || "doubleValue" in t2 ? 2 : "timestampValue" in t2 ? 3 : "stringValue" in t2 ? 5 : "bytesValue" in t2 ? 6 : "referenceValue" in t2 ? 7 : "geoPointValue" in t2 ? 8 : "arrayValue" in t2 ? 9 : "mapValue" in t2 ? Ot(t2) ? 4 : function(t3) {
+    return "__max__" === (((t3.mapValue || {}).fields || {}).__type__ || {}).stringValue;
+  }(t2) ? 9007199254740991 : 10 : b();
+}
+function Ut(t2, e3) {
   if (t2 === e3)
     return true;
-  const n2 = Ct(t2);
-  if (n2 !== Ct(e3))
+  const n2 = Mt(t2);
+  if (n2 !== Mt(e3))
     return false;
   switch (n2) {
     case 0:
@@ -8434,62 +8667,62 @@ function Lt(t2, e3) {
     case 1:
       return t2.booleanValue === e3.booleanValue;
     case 4:
-      return Ot(t2).isEqual(Ot(e3));
+      return Ct(t2).isEqual(Ct(e3));
     case 3:
       return function(t3, e4) {
         if ("string" == typeof t3.timestampValue && "string" == typeof e4.timestampValue && t3.timestampValue.length === e4.timestampValue.length)
           return t3.timestampValue === e4.timestampValue;
-        const n3 = $t(t3.timestampValue), r2 = $t(e4.timestampValue);
+        const n3 = Ft(t3.timestampValue), r2 = Ft(e4.timestampValue);
         return n3.seconds === r2.seconds && n3.nanos === r2.nanos;
       }(t2, e3);
     case 5:
       return t2.stringValue === e3.stringValue;
     case 6:
       return function(t3, e4) {
-        return Ft(t3.bytesValue).isEqual(Ft(e4.bytesValue));
+        return qt(t3.bytesValue).isEqual(qt(e4.bytesValue));
       }(t2, e3);
     case 7:
       return t2.referenceValue === e3.referenceValue;
     case 8:
       return function(t3, e4) {
-        return xt(t3.geoPointValue.latitude) === xt(e4.geoPointValue.latitude) && xt(t3.geoPointValue.longitude) === xt(e4.geoPointValue.longitude);
+        return St(t3.geoPointValue.latitude) === St(e4.geoPointValue.latitude) && St(t3.geoPointValue.longitude) === St(e4.geoPointValue.longitude);
       }(t2, e3);
     case 2:
       return function(t3, e4) {
         if ("integerValue" in t3 && "integerValue" in e4)
-          return xt(t3.integerValue) === xt(e4.integerValue);
+          return St(t3.integerValue) === St(e4.integerValue);
         if ("doubleValue" in t3 && "doubleValue" in e4) {
-          const n3 = xt(t3.doubleValue), r2 = xt(e4.doubleValue);
-          return n3 === r2 ? at(n3) === at(r2) : isNaN(n3) && isNaN(r2);
+          const n3 = St(t3.doubleValue), r2 = St(e4.doubleValue);
+          return n3 === r2 ? lt(n3) === lt(r2) : isNaN(n3) && isNaN(r2);
         }
         return false;
       }(t2, e3);
     case 9:
-      return _t(t2.arrayValue.values || [], e3.arrayValue.values || [], Lt);
+      return vt(t2.arrayValue.values || [], e3.arrayValue.values || [], Ut);
     case 10:
       return function(t3, e4) {
         const n3 = t3.mapValue.fields || {}, r2 = e4.mapValue.fields || {};
-        if (bt(n3) !== bt(r2))
+        if (It(n3) !== It(r2))
           return false;
         for (const t4 in n3)
-          if (n3.hasOwnProperty(t4) && (void 0 === r2[t4] || !Lt(n3[t4], r2[t4])))
+          if (n3.hasOwnProperty(t4) && (void 0 === r2[t4] || !Ut(n3[t4], r2[t4])))
             return false;
         return true;
       }(t2, e3);
     default:
-      return g();
+      return b();
   }
 }
-function Gt(t2) {
+function Wt(t2) {
   return !!t2 && "nullValue" in t2;
 }
-function Wt(t2) {
+function Kt(t2) {
   return !!t2 && "doubleValue" in t2 && isNaN(Number(t2.doubleValue));
 }
-function Kt(t2) {
+function Yt(t2) {
   return !!t2 && "mapValue" in t2;
 }
-function Qt(t2) {
+function Ht(t2) {
   if (t2.geoPointValue)
     return {
       geoPointValue: Object.assign({}, t2.geoPointValue)
@@ -8504,7 +8737,7 @@ function Qt(t2) {
         fields: {}
       }
     };
-    return Et(t2.mapValue.fields, (t3, n2) => e3.mapValue.fields[t3] = Qt(n2)), e3;
+    return Tt(t2.mapValue.fields, (t3, n2) => e3.mapValue.fields[t3] = Ht(n2)), e3;
   }
   if (t2.arrayValue) {
     const e3 = {
@@ -8513,92 +8746,92 @@ function Qt(t2) {
       }
     };
     for (let n2 = 0; n2 < (t2.arrayValue.values || []).length; ++n2)
-      e3.arrayValue.values[n2] = Qt(t2.arrayValue.values[n2]);
+      e3.arrayValue.values[n2] = Ht(t2.arrayValue.values[n2]);
     return e3;
   }
   return Object.assign({}, t2);
 }
-function Xt(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = null, o2 = null) {
-  return new Jt(t2, e3, n2, r2, s3, i, o2);
+function te(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = null, o2 = null) {
+  return new Zt(t2, e3, n2, r2, s3, i, o2);
 }
-function de(t2) {
+function me(t2) {
   return t2.explicitOrderBy.length > 0 ? t2.explicitOrderBy[0].field : null;
 }
-function we(t2) {
+function pe(t2) {
   for (const e3 of t2.filters)
-    if (e3.D())
+    if (e3.q())
       return e3.field;
   return null;
 }
-function pe(t2) {
-  const e3 = b(t2);
-  if (null === e3.$) {
-    e3.$ = [];
-    const t3 = we(e3), n2 = de(e3);
+function _e(t2) {
+  const e3 = I(t2);
+  if (null === e3.O) {
+    e3.O = [];
+    const t3 = pe(e3), n2 = me(e3);
     if (null !== t3 && null === n2)
-      t3.isKeyField() || e3.$.push(new ae(t3)), e3.$.push(new ae(tt.keyField(), "asc"));
+      t3.isKeyField() || e3.O.push(new le(t3)), e3.O.push(new le(nt.keyField(), "asc"));
     else {
       let t4 = false;
       for (const n3 of e3.explicitOrderBy)
-        e3.$.push(n3), n3.field.isKeyField() && (t4 = true);
+        e3.O.push(n3), n3.field.isKeyField() && (t4 = true);
       if (!t4) {
         const t5 = e3.explicitOrderBy.length > 0 ? e3.explicitOrderBy[e3.explicitOrderBy.length - 1].dir : "asc";
-        e3.$.push(new ae(tt.keyField(), t5));
+        e3.O.push(new le(nt.keyField(), t5));
       }
     }
   }
-  return e3.$;
+  return e3.O;
 }
-function ye(t2) {
-  const e3 = b(t2);
-  if (!e3.F)
+function ge(t2) {
+  const e3 = I(t2);
+  if (!e3.k)
     if ("F" === e3.limitType)
-      e3.F = Xt(e3.path, e3.collectionGroup, pe(e3), e3.filters, e3.limit, e3.startAt, e3.endAt);
+      e3.k = te(e3.path, e3.collectionGroup, _e(e3), e3.filters, e3.limit, e3.startAt, e3.endAt);
     else {
       const t3 = [];
-      for (const n3 of pe(e3)) {
+      for (const n3 of _e(e3)) {
         const e4 = "desc" === n3.dir ? "asc" : "desc";
-        t3.push(new ae(n3.field, e4));
+        t3.push(new le(n3.field, e4));
       }
-      const n2 = e3.endAt ? new ce(e3.endAt.position, e3.endAt.inclusive) : null, r2 = e3.startAt ? new ce(e3.startAt.position, e3.startAt.inclusive) : null;
-      e3.F = Xt(e3.path, e3.collectionGroup, t3, e3.filters, e3.limit, n2, r2);
+      const n2 = e3.endAt ? new he(e3.endAt.position, e3.endAt.inclusive) : null, r2 = e3.startAt ? new he(e3.startAt.position, e3.startAt.inclusive) : null;
+      e3.k = te(e3.path, e3.collectionGroup, t3, e3.filters, e3.limit, n2, r2);
     }
-  return e3.F;
+  return e3.k;
 }
-function Ce(t2) {
-  return v(!!t2), vt.fromTimestamp(function(t3) {
-    const e3 = $t(t3);
-    return new gt(e3.seconds, e3.nanos);
+function Me(t2) {
+  return E(!!t2), Et.fromTimestamp(function(t3) {
+    const e3 = Ft(t3);
+    return new bt(e3.seconds, e3.nanos);
   }(t2));
 }
-function Le(t2, e3) {
+function Ue(t2, e3) {
   return function(t3) {
-    return new X(["projects", t3.projectId, "databases", t3.database]);
+    return new tt(["projects", t3.projectId, "databases", t3.database]);
   }(t2).child("documents").child(e3).canonicalString();
 }
-function Ue(t2, e3) {
+function Be(t2, e3) {
   const n2 = function(t3) {
-    const e4 = X.fromString(t3);
-    return v(Xe(e4)), e4;
+    const e4 = tt.fromString(t3);
+    return E(tn(e4)), e4;
   }(e3);
   if (n2.get(1) !== t2.databaseId.projectId)
-    throw new L(A, "Tried to deserialize key from different project: " + n2.get(1) + " vs " + t2.databaseId.projectId);
+    throw new U(P, "Tried to deserialize key from different project: " + n2.get(1) + " vs " + t2.databaseId.projectId);
   if (n2.get(3) !== t2.databaseId.database)
-    throw new L(A, "Tried to deserialize key from different database: " + n2.get(3) + " vs " + t2.databaseId.database);
-  return new et((v((r2 = n2).length > 4 && "documents" === r2.get(4)), r2.popFirst(5)));
+    throw new U(P, "Tried to deserialize key from different database: " + n2.get(3) + " vs " + t2.databaseId.database);
+  return new rt((E((r2 = n2).length > 4 && "documents" === r2.get(4)), r2.popFirst(5)));
   var r2;
 }
-function je(t2, e3) {
-  return Le(t2.databaseId, e3);
+function Qe(t2, e3) {
+  return Ue(t2.databaseId, e3);
 }
-function Ke(t2, e3) {
+function Ye(t2, e3) {
   const n2 = {
     structuredQuery: {}
   }, r2 = e3.path;
-  null !== e3.collectionGroup ? (n2.parent = je(t2, r2), n2.structuredQuery.from = [{
+  null !== e3.collectionGroup ? (n2.parent = Qe(t2, r2), n2.structuredQuery.from = [{
     collectionId: e3.collectionGroup,
     allDescendants: true
-  }]) : (n2.parent = je(t2, r2.popLast()), n2.structuredQuery.from = [{
+  }]) : (n2.parent = Qe(t2, r2.popLast()), n2.structuredQuery.from = [{
     collectionId: r2.lastSegment()
   }]);
   const s3 = function(t3) {
@@ -8606,40 +8839,40 @@ function Ke(t2, e3) {
       return;
     const e4 = t3.map((t4) => function(t5) {
       if ("==" === t5.op) {
-        if (Wt(t5.value))
+        if (Kt(t5.value))
           return {
             unaryFilter: {
-              field: He(t5.field),
+              field: Xe(t5.field),
               op: "IS_NAN"
             }
           };
-        if (Gt(t5.value))
+        if (Wt(t5.value))
           return {
             unaryFilter: {
-              field: He(t5.field),
+              field: Xe(t5.field),
               op: "IS_NULL"
             }
           };
       } else if ("!=" === t5.op) {
-        if (Wt(t5.value))
+        if (Kt(t5.value))
           return {
             unaryFilter: {
-              field: He(t5.field),
+              field: Xe(t5.field),
               op: "IS_NOT_NAN"
             }
           };
-        if (Gt(t5.value))
+        if (Wt(t5.value))
           return {
             unaryFilter: {
-              field: He(t5.field),
+              field: Xe(t5.field),
               op: "IS_NOT_NULL"
             }
           };
       }
       return {
         fieldFilter: {
-          field: He(t5.field),
-          op: Ye(t5.op),
+          field: Xe(t5.field),
+          op: Je(t5.op),
           value: t5.value
         }
       };
@@ -8659,14 +8892,14 @@ function Ke(t2, e3) {
       return;
     return t3.map((t4) => function(t5) {
       return {
-        field: He(t5.field),
-        direction: Qe(t5.dir)
+        field: Xe(t5.field),
+        direction: He(t5.dir)
       };
     }(t4));
   }(e3.orderBy);
   i && (n2.structuredQuery.orderBy = i);
   const o2 = function(t3, e4) {
-    return t3.S || ct(e4) ? e4 : {
+    return t3.C || ht(e4) ? e4 : {
       value: e4
     };
   }(t2, e3.limit);
@@ -8681,73 +8914,100 @@ function Ke(t2, e3) {
     };
   }(e3.endAt)), n2;
 }
-function Qe(t2) {
-  return xe[t2];
-}
-function Ye(t2) {
-  return Fe[t2];
-}
 function He(t2) {
+  return Se[t2];
+}
+function Je(t2) {
+  return qe[t2];
+}
+function Xe(t2) {
   return {
     fieldPath: t2.canonicalString()
   };
 }
-function Xe(t2) {
+function tn(t2) {
   return t2.length >= 4 && "projects" === t2.get(0) && "databases" === t2.get(2);
 }
-function Ze(t2) {
-  return new Se(t2, true);
+function en(t2) {
+  return new Oe(t2, true);
 }
-async function sn(t2, e3) {
-  const n2 = b(t2), r2 = Ke(n2.q, ye(e3));
-  return (await n2.T("RunQuery", r2.parent, {
+async function un(t2, e3) {
+  const n2 = I(t2), r2 = Ye(n2.L, ge(e3));
+  return (await n2.P("RunQuery", r2.parent, {
     structuredQuery: r2.structuredQuery
   })).filter((t3) => !!t3.document).map((t3) => function(t4, e4, n3) {
-    const r3 = Ue(t4, e4.name), s3 = Ce(e4.updateTime), i = new Yt({
+    const r3 = Be(t4, e4.name), s3 = Me(e4.updateTime), i = new Jt({
       mapValue: {
         fields: e4.fields
       }
-    }), o2 = Ht.newFoundDocument(r3, s3, i);
+    }), o2 = Xt.newFoundDocument(r3, s3, i);
     return n3 && o2.setHasCommittedMutations(), n3 ? o2.setHasCommittedMutations() : o2;
-  }(n2.q, t3.document, void 0));
+  }(n2.L, t3.document, void 0));
 }
-function un(t2) {
+function hn(t2) {
   if (t2._terminated)
-    throw new L(x, "The client has already been terminated.");
-  if (!on.has(t2)) {
-    m("ComponentProvider", "Initializing Datastore");
+    throw new U(S, "The client has already been terminated.");
+  if (!an.has(t2)) {
+    y("ComponentProvider", "Initializing Datastore");
     const i = function(t3) {
-      return new wt(t3, fetch.bind(null));
-    }((e3 = t2._databaseId, n2 = t2.app.options.appId || "", r2 = t2._persistenceKey, s3 = t2._freezeSettings(), new Y(e3, n2, r2, s3.host, s3.ssl, s3.experimentalForceLongPolling, s3.experimentalAutoDetectLongPolling, s3.useFetchStreams))), o2 = Ze(t2._databaseId), u = function(t3, e4, n3, r3) {
-      return new en(t3, e4, n3, r3);
+      return new pt(t3, fetch.bind(null));
+    }((e3 = t2._databaseId, n2 = t2.app.options.appId || "", r2 = t2._persistenceKey, s3 = t2._freezeSettings(), new J(e3, n2, r2, s3.host, s3.ssl, s3.experimentalForceLongPolling, s3.experimentalAutoDetectLongPolling, s3.useFetchStreams))), o2 = en(t2._databaseId), u = function(t3, e4, n3, r3) {
+      return new rn(t3, e4, n3, r3);
     }(t2._authCredentials, t2._appCheckCredentials, i, o2);
-    on.set(t2, u);
+    an.set(t2, u);
   }
   var e3, n2, r2, s3;
-  return on.get(t2);
+  return an.get(t2);
 }
-function ln(e3 = getApp()) {
-  return _getProvider(e3, "firestore/lite").getImmediate();
+function wn(e3, n2) {
+  const r2 = "object" == typeof e3 ? e3 : getApp(), s3 = "string" == typeof e3 ? e3 : n2 || "(default)", i = _getProvider(r2, "firestore/lite").getImmediate({
+    identifier: s3
+  });
+  if (!i._initialized) {
+    const t2 = getDefaultEmulatorHostnameAndPort("firestore");
+    t2 && mn(i, ...t2);
+  }
+  return i;
 }
-function yn(t2, e3, ...n2) {
-  if (t2 = getModularInstance(t2), nt("collection", "path", e3), t2 instanceof an) {
-    const r2 = X.fromString(e3, ...n2);
-    return st(r2), new pn(t2, null, r2);
+function mn(t2, e3, n2, r2 = {}) {
+  var s3;
+  const i = (t2 = ct(t2, fn))._getSettings();
+  if ("firestore.googleapis.com" !== i.host && i.host !== e3 && g("Host has been set in both settings() and useEmulator(), emulator host will be used"), t2._setSettings(Object.assign(Object.assign({}, i), {
+    host: `${e3}:${n2}`,
+    ssl: false
+  })), r2.mockUserToken) {
+    let e4, n3;
+    if ("string" == typeof r2.mockUserToken)
+      e4 = r2.mockUserToken, n3 = d.MOCK_USER;
+    else {
+      e4 = createMockUserToken(r2.mockUserToken, null === (s3 = t2._app) || void 0 === s3 ? void 0 : s3.options.projectId);
+      const i2 = r2.mockUserToken.sub || r2.mockUserToken.user_id;
+      if (!i2)
+        throw new U(P, "mockUserToken must contain 'sub' or 'user_id' field!");
+      n3 = new d(i2);
+    }
+    t2._authCredentials = new z(new B(e4, n3));
+  }
+}
+function In(t2, e3, ...n2) {
+  if (t2 = getModularInstance(t2), st("collection", "path", e3), t2 instanceof fn) {
+    const r2 = tt.fromString(e3, ...n2);
+    return ot(r2), new En(t2, null, r2);
   }
   {
-    if (!(t2 instanceof wn || t2 instanceof pn))
-      throw new L(A, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
-    const r2 = t2._path.child(X.fromString(e3, ...n2));
-    return st(r2), new pn(
+    if (!(t2 instanceof vn || t2 instanceof En))
+      throw new U(P, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
+    const r2 = t2._path.child(tt.fromString(e3, ...n2));
+    return ot(r2), new En(
       t2.firestore,
       null,
       r2
     );
   }
 }
-function Hn(t2, e3, n2) {
-  if (e3.search(Yn) >= 0)
-    throw Jn(
+function nr(t2, e3, n2) {
+  if (e3.search(er) >= 0)
+    throw rr(
       `Invalid field path (${e3}). Paths must not contain '~', '*', '/', '[', or ']'`,
       t2,
       false,
@@ -8755,9 +9015,9 @@ function Hn(t2, e3, n2) {
       n2
     );
   try {
-    return new En(...e3.split("."))._internalPath;
+    return new Nn(...e3.split("."))._internalPath;
   } catch (r2) {
-    throw Jn(
+    throw rr(
       `Invalid field path (${e3}). Paths must not be empty, begin with '.', end with '.', or contain '..'`,
       t2,
       false,
@@ -8766,35 +9026,35 @@ function Hn(t2, e3, n2) {
     );
   }
 }
-function Jn(t2, e3, n2, r2, s3) {
+function rr(t2, e3, n2, r2, s3) {
   const i = r2 && !r2.isEmpty(), o2 = void 0 !== s3;
   let u = `Function ${e3}() called with invalid data`;
   n2 && (u += " (via `toFirestore()`)"), u += ". ";
   let c2 = "";
-  return (i || o2) && (c2 += " (found", i && (c2 += ` in field ${r2}`), o2 && (c2 += ` in document ${s3}`), c2 += ")"), new L(A, u + t2 + c2);
+  return (i || o2) && (c2 += " (found", i && (c2 += ` in field ${r2}`), o2 && (c2 += ` in document ${s3}`), c2 += ")"), new U(P, u + t2 + c2);
 }
-function rr(t2, e3) {
-  return "string" == typeof e3 ? Hn(t2, e3) : e3 instanceof En ? e3._internalPath : e3._delegate._internalPath;
+function ar(t2, e3) {
+  return "string" == typeof e3 ? nr(t2, e3) : e3 instanceof Nn ? e3._internalPath : e3._delegate._internalPath;
 }
-function Rr(t2) {
+function xr(t2) {
   !function(t3) {
     if ("L" === t3.limitType && 0 === t3.explicitOrderBy.length)
-      throw new L(q, "limitToLast() queries require specifying at least one orderBy() clause");
-  }((t2 = ot(t2, mn))._query);
-  const e3 = un(t2.firestore), n2 = new Ir(t2.firestore);
-  return sn(e3, t2._query).then((e4) => {
-    const r2 = e4.map((e5) => new tr(t2.firestore, n2, e5.key, e5, t2.converter));
-    return "L" === t2._query.limitType && r2.reverse(), new er(t2, r2);
+      throw new U(k, "limitToLast() queries require specifying at least one orderBy() clause");
+  }((t2 = ct(t2, bn))._query);
+  const e3 = hn(t2.firestore), n2 = new Dr(t2.firestore);
+  return un(e3, t2._query).then((e4) => {
+    const r2 = e4.map((e5) => new or(t2.firestore, n2, e5.key, e5, t2.converter));
+    return "L" === t2._query.limitType && r2.reverse(), new ur(t2, r2);
   });
 }
-var l, f, d, E, T, I, A, R, P, N, D, $, x, F, S, q, O, k, L, U, j, z, G, W, K, Q, Y, H, J, X, Z, tt, et, ht, lt, ft, wt, gt, vt, At, Nt, Dt, Yt, Ht, Jt, ce, ae, fe, xe, Fe, Se, en, on, cn, an, wn, mn, pn, En, In, Rn, Yn, Zn, tr, er, Ir;
+var d, w, m, T, A, R, P, V, N, $, x, F, S, q, O, k, C, L, U, B, Q, z, G, W, K, Y, H, J, X, Z, tt, et, nt, rt, ft, dt, wt, pt, bt, Et, Pt, $t, xt, Jt, Xt, Zt, he, le, we, Se, qe, Oe, rn, an, ln, fn, vn, bn, En, Vn, Nn, xn, er, ir, or, ur, Dr;
 var init_index_browser_esm2017 = __esm({
   "node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js"() {
     init_index_esm20174();
     init_index_esm20172();
     init_index_esm20173();
     init_index_esm2017();
-    l = class {
+    d = class {
       constructor(t2) {
         this.uid = t2;
       }
@@ -8808,97 +9068,119 @@ var init_index_browser_esm2017 = __esm({
         return t2.uid === this.uid;
       }
     };
-    l.UNAUTHENTICATED = new l(null), l.GOOGLE_CREDENTIALS = new l("google-credentials-uid"), l.FIRST_PARTY = new l("first-party-uid"), l.MOCK_USER = new l("mock-user");
-    f = "9.9.2";
-    d = new Logger("@firebase/firestore");
-    E = "ok";
-    T = "cancelled";
-    I = "unknown";
-    A = "invalid-argument";
-    R = "deadline-exceeded";
-    P = "not-found";
-    N = "permission-denied";
-    D = "unauthenticated";
-    $ = "resource-exhausted";
-    x = "failed-precondition";
-    F = "aborted";
-    S = "out-of-range";
-    q = "unimplemented";
-    O = "internal";
-    k = "unavailable";
-    L = class extends FirebaseError {
+    d.UNAUTHENTICATED = new d(null), d.GOOGLE_CREDENTIALS = new d("google-credentials-uid"), d.FIRST_PARTY = new d("first-party-uid"), d.MOCK_USER = new d("mock-user");
+    w = "9.12.1";
+    m = new Logger("@firebase/firestore");
+    T = "ok";
+    A = "cancelled";
+    R = "unknown";
+    P = "invalid-argument";
+    V = "deadline-exceeded";
+    N = "not-found";
+    $ = "permission-denied";
+    x = "unauthenticated";
+    F = "resource-exhausted";
+    S = "failed-precondition";
+    q = "aborted";
+    O = "out-of-range";
+    k = "unimplemented";
+    C = "internal";
+    L = "unavailable";
+    U = class extends FirebaseError {
       constructor(t2, e3) {
         super(t2, e3), this.code = t2, this.message = e3, this.toString = () => `${this.name}: [code=${this.code}]: ${this.message}`;
       }
     };
-    U = class {
+    B = class {
       constructor(t2, e3) {
         this.user = e3, this.type = "OAuth", this.headers = /* @__PURE__ */ new Map(), this.headers.set("Authorization", `Bearer ${t2}`);
       }
     };
-    j = class {
+    Q = class {
       getToken() {
         return Promise.resolve(null);
       }
       invalidateToken() {
       }
       start(t2, e3) {
-        t2.enqueueRetryable(() => e3(l.UNAUTHENTICATED));
+        t2.enqueueRetryable(() => e3(d.UNAUTHENTICATED));
       }
       shutdown() {
       }
     };
     z = class {
       constructor(t2) {
+        this.token = t2, this.changeListener = null;
+      }
+      getToken() {
+        return Promise.resolve(this.token);
+      }
+      invalidateToken() {
+      }
+      start(t2, e3) {
+        this.changeListener = e3, t2.enqueueRetryable(() => e3(this.token.user));
+      }
+      shutdown() {
+        this.changeListener = null;
+      }
+    };
+    G = class {
+      constructor(t2) {
         this.auth = null, t2.onInit((t3) => {
           this.auth = t3;
         });
       }
       getToken() {
-        return this.auth ? this.auth.getToken().then((t2) => t2 ? (v("string" == typeof t2.accessToken), new U(t2.accessToken, new l(this.auth.getUid()))) : null) : Promise.resolve(null);
+        return this.auth ? this.auth.getToken().then((t2) => t2 ? (E("string" == typeof t2.accessToken), new B(t2.accessToken, new d(this.auth.getUid()))) : null) : Promise.resolve(null);
       }
       invalidateToken() {
       }
       start(t2, e3) {
       }
       shutdown() {
-      }
-    };
-    G = class {
-      constructor(t2, e3, n2) {
-        this.type = "FirstParty", this.user = l.FIRST_PARTY, this.headers = /* @__PURE__ */ new Map(), this.headers.set("X-Goog-AuthUser", e3);
-        const r2 = t2.auth.getAuthHeaderValueForFirstParty([]);
-        r2 && this.headers.set("Authorization", r2), n2 && this.headers.set("X-Goog-Iam-Authorization-Token", n2);
       }
     };
     W = class {
-      constructor(t2, e3, n2) {
-        this.t = t2, this.i = e3, this.o = n2;
+      constructor(t2, e3, n2, r2) {
+        this.t = t2, this.i = e3, this.o = n2, this.u = r2, this.type = "FirstParty", this.user = d.FIRST_PARTY, this.h = /* @__PURE__ */ new Map();
+      }
+      l() {
+        return this.u ? this.u() : (E(!("object" != typeof this.t || null === this.t || !this.t.auth || !this.t.auth.getAuthHeaderValueForFirstParty)), this.t.auth.getAuthHeaderValueForFirstParty([]));
+      }
+      get headers() {
+        this.h.set("X-Goog-AuthUser", this.i);
+        const t2 = this.l();
+        return t2 && this.h.set("Authorization", t2), this.o && this.h.set("X-Goog-Iam-Authorization-Token", this.o), this.h;
+      }
+    };
+    K = class {
+      constructor(t2, e3, n2, r2) {
+        this.t = t2, this.i = e3, this.o = n2, this.u = r2;
       }
       getToken() {
-        return Promise.resolve(new G(this.t, this.i, this.o));
+        return Promise.resolve(new W(this.t, this.i, this.o, this.u));
       }
       start(t2, e3) {
-        t2.enqueueRetryable(() => e3(l.FIRST_PARTY));
+        t2.enqueueRetryable(() => e3(d.FIRST_PARTY));
       }
       shutdown() {
       }
       invalidateToken() {
       }
     };
-    K = class {
+    Y = class {
       constructor(t2) {
         this.value = t2, this.type = "AppCheck", this.headers = /* @__PURE__ */ new Map(), t2 && t2.length > 0 && this.headers.set("x-firebase-appcheck", this.value);
       }
     };
-    Q = class {
+    H = class {
       constructor(t2) {
-        this.u = t2, this.appCheck = null, t2.onInit((t3) => {
+        this.m = t2, this.appCheck = null, t2.onInit((t3) => {
           this.appCheck = t3;
         });
       }
       getToken() {
-        return this.appCheck ? this.appCheck.getToken().then((t2) => t2 ? (v("string" == typeof t2.token), new K(t2.token)) : null) : Promise.resolve(null);
+        return this.appCheck ? this.appCheck.getToken().then((t2) => t2 ? (E("string" == typeof t2.token), new Y(t2.token)) : null) : Promise.resolve(null);
       }
       invalidateToken() {
       }
@@ -8907,38 +9189,38 @@ var init_index_browser_esm2017 = __esm({
       shutdown() {
       }
     };
-    Y = class {
+    J = class {
       constructor(t2, e3, n2, r2, s3, i, o2, u) {
         this.databaseId = t2, this.appId = e3, this.persistenceKey = n2, this.host = r2, this.ssl = s3, this.forceLongPolling = i, this.autoDetectLongPolling = o2, this.useFetchStreams = u;
       }
     };
-    H = class {
+    X = class {
       constructor(t2, e3) {
         this.projectId = t2, this.database = e3 || "(default)";
       }
       static empty() {
-        return new H("", "");
+        return new X("", "");
       }
       get isDefaultDatabase() {
         return "(default)" === this.database;
       }
       isEqual(t2) {
-        return t2 instanceof H && t2.projectId === this.projectId && t2.database === this.database;
+        return t2 instanceof X && t2.projectId === this.projectId && t2.database === this.database;
       }
     };
-    J = class {
+    Z = class {
       constructor(t2, e3, n2) {
-        void 0 === e3 ? e3 = 0 : e3 > t2.length && g(), void 0 === n2 ? n2 = t2.length - e3 : n2 > t2.length - e3 && g(), this.segments = t2, this.offset = e3, this.len = n2;
+        void 0 === e3 ? e3 = 0 : e3 > t2.length && b(), void 0 === n2 ? n2 = t2.length - e3 : n2 > t2.length - e3 && b(), this.segments = t2, this.offset = e3, this.len = n2;
       }
       get length() {
         return this.len;
       }
       isEqual(t2) {
-        return 0 === J.comparator(this, t2);
+        return 0 === Z.comparator(this, t2);
       }
       child(t2) {
         const e3 = this.segments.slice(this.offset, this.limit());
-        return t2 instanceof J ? t2.forEach((t3) => {
+        return t2 instanceof Z ? t2.forEach((t3) => {
           e3.push(t3);
         }) : e3.push(t2), this.construct(e3);
       }
@@ -8998,9 +9280,9 @@ var init_index_browser_esm2017 = __esm({
         return t2.length < e3.length ? -1 : t2.length > e3.length ? 1 : 0;
       }
     };
-    X = class extends J {
+    tt = class extends Z {
       construct(t2, e3, n2) {
-        return new X(t2, e3, n2);
+        return new tt(t2, e3, n2);
       }
       canonicalString() {
         return this.toArray().join("/");
@@ -9012,25 +9294,25 @@ var init_index_browser_esm2017 = __esm({
         const e3 = [];
         for (const n2 of t2) {
           if (n2.indexOf("//") >= 0)
-            throw new L(A, `Invalid segment (${n2}). Paths must not contain // in them.`);
+            throw new U(P, `Invalid segment (${n2}). Paths must not contain // in them.`);
           e3.push(...n2.split("/").filter((t3) => t3.length > 0));
         }
-        return new X(e3);
+        return new tt(e3);
       }
       static emptyPath() {
-        return new X([]);
+        return new tt([]);
       }
     };
-    Z = /^[_a-zA-Z][_a-zA-Z0-9]*$/;
-    tt = class extends J {
+    et = /^[_a-zA-Z][_a-zA-Z0-9]*$/;
+    nt = class extends Z {
       construct(t2, e3, n2) {
-        return new tt(t2, e3, n2);
+        return new nt(t2, e3, n2);
       }
       static isValidIdentifier(t2) {
-        return Z.test(t2);
+        return et.test(t2);
       }
       canonicalString() {
-        return this.toArray().map((t2) => (t2 = t2.replace(/\\/g, "\\\\").replace(/`/g, "\\`"), tt.isValidIdentifier(t2) || (t2 = "`" + t2 + "`"), t2)).join(".");
+        return this.toArray().map((t2) => (t2 = t2.replace(/\\/g, "\\\\").replace(/`/g, "\\`"), nt.isValidIdentifier(t2) || (t2 = "`" + t2 + "`"), t2)).join(".");
       }
       toString() {
         return this.canonicalString();
@@ -9039,14 +9321,14 @@ var init_index_browser_esm2017 = __esm({
         return 1 === this.length && "__name__" === this.get(0);
       }
       static keyField() {
-        return new tt(["__name__"]);
+        return new nt(["__name__"]);
       }
       static fromServerFormat(t2) {
         const e3 = [];
         let n2 = "", r2 = 0;
         const s3 = () => {
           if (0 === n2.length)
-            throw new L(A, `Invalid field path (${t2}). Paths must not be empty, begin with '.', end with '.', or contain '..'`);
+            throw new U(P, `Invalid field path (${t2}). Paths must not be empty, begin with '.', end with '.', or contain '..'`);
           e3.push(n2), n2 = "";
         };
         let i = false;
@@ -9054,34 +9336,34 @@ var init_index_browser_esm2017 = __esm({
           const e4 = t2[r2];
           if ("\\" === e4) {
             if (r2 + 1 === t2.length)
-              throw new L(A, "Path has trailing escape character: " + t2);
+              throw new U(P, "Path has trailing escape character: " + t2);
             const e5 = t2[r2 + 1];
             if ("\\" !== e5 && "." !== e5 && "`" !== e5)
-              throw new L(A, "Path has invalid escape sequence: " + t2);
+              throw new U(P, "Path has invalid escape sequence: " + t2);
             n2 += e5, r2 += 2;
           } else
             "`" === e4 ? (i = !i, r2++) : "." !== e4 || i ? (n2 += e4, r2++) : (s3(), r2++);
         }
         if (s3(), i)
-          throw new L(A, "Unterminated ` in path: " + t2);
-        return new tt(e3);
+          throw new U(P, "Unterminated ` in path: " + t2);
+        return new nt(e3);
       }
       static emptyPath() {
-        return new tt([]);
+        return new nt([]);
       }
     };
-    et = class {
+    rt = class {
       constructor(t2) {
         this.path = t2;
       }
       static fromPath(t2) {
-        return new et(X.fromString(t2));
+        return new rt(tt.fromString(t2));
       }
       static fromName(t2) {
-        return new et(X.fromString(t2).popFirst(5));
+        return new rt(tt.fromString(t2).popFirst(5));
       }
       static empty() {
-        return new et(X.emptyPath());
+        return new rt(tt.emptyPath());
       }
       get collectionGroup() {
         return this.path.popLast().lastSegment();
@@ -9096,95 +9378,99 @@ var init_index_browser_esm2017 = __esm({
         return this.path.popLast();
       }
       isEqual(t2) {
-        return null !== t2 && 0 === X.comparator(this.path, t2.path);
+        return null !== t2 && 0 === tt.comparator(this.path, t2.path);
       }
       toString() {
         return this.path.toString();
       }
       static comparator(t2, e3) {
-        return X.comparator(t2.path, e3.path);
+        return tt.comparator(t2.path, e3.path);
       }
       static isDocumentKey(t2) {
         return t2.length % 2 == 0;
       }
       static fromSegments(t2) {
-        return new et(new X(t2.slice()));
+        return new rt(new tt(t2.slice()));
       }
     };
-    ht = {
+    ft = {
       BatchGetDocuments: "batchGet",
       Commit: "commit",
-      RunQuery: "runQuery"
+      RunQuery: "runQuery",
+      RunAggregationQuery: "runAggregationQuery"
     };
-    (ft = lt || (lt = {}))[ft.OK = 0] = "OK", ft[ft.CANCELLED = 1] = "CANCELLED", ft[ft.UNKNOWN = 2] = "UNKNOWN", ft[ft.INVALID_ARGUMENT = 3] = "INVALID_ARGUMENT", ft[ft.DEADLINE_EXCEEDED = 4] = "DEADLINE_EXCEEDED", ft[ft.NOT_FOUND = 5] = "NOT_FOUND", ft[ft.ALREADY_EXISTS = 6] = "ALREADY_EXISTS", ft[ft.PERMISSION_DENIED = 7] = "PERMISSION_DENIED", ft[ft.UNAUTHENTICATED = 16] = "UNAUTHENTICATED", ft[ft.RESOURCE_EXHAUSTED = 8] = "RESOURCE_EXHAUSTED", ft[ft.FAILED_PRECONDITION = 9] = "FAILED_PRECONDITION", ft[ft.ABORTED = 10] = "ABORTED", ft[ft.OUT_OF_RANGE = 11] = "OUT_OF_RANGE", ft[ft.UNIMPLEMENTED = 12] = "UNIMPLEMENTED", ft[ft.INTERNAL = 13] = "INTERNAL", ft[ft.UNAVAILABLE = 14] = "UNAVAILABLE", ft[ft.DATA_LOSS = 15] = "DATA_LOSS";
-    wt = class extends class {
+    (wt = dt || (dt = {}))[wt.OK = 0] = "OK", wt[wt.CANCELLED = 1] = "CANCELLED", wt[wt.UNKNOWN = 2] = "UNKNOWN", wt[wt.INVALID_ARGUMENT = 3] = "INVALID_ARGUMENT", wt[wt.DEADLINE_EXCEEDED = 4] = "DEADLINE_EXCEEDED", wt[wt.NOT_FOUND = 5] = "NOT_FOUND", wt[wt.ALREADY_EXISTS = 6] = "ALREADY_EXISTS", wt[wt.PERMISSION_DENIED = 7] = "PERMISSION_DENIED", wt[wt.UNAUTHENTICATED = 16] = "UNAUTHENTICATED", wt[wt.RESOURCE_EXHAUSTED = 8] = "RESOURCE_EXHAUSTED", wt[wt.FAILED_PRECONDITION = 9] = "FAILED_PRECONDITION", wt[wt.ABORTED = 10] = "ABORTED", wt[wt.OUT_OF_RANGE = 11] = "OUT_OF_RANGE", wt[wt.UNIMPLEMENTED = 12] = "UNIMPLEMENTED", wt[wt.INTERNAL = 13] = "INTERNAL", wt[wt.UNAVAILABLE = 14] = "UNAVAILABLE", wt[wt.DATA_LOSS = 15] = "DATA_LOSS";
+    pt = class extends class {
       constructor(t2) {
         this.databaseInfo = t2, this.databaseId = t2.databaseId;
         const e3 = t2.ssl ? "https" : "http";
-        this.h = e3 + "://" + t2.host, this.l = "projects/" + this.databaseId.projectId + "/databases/" + this.databaseId.database + "/documents";
+        this.p = e3 + "://" + t2.host, this.g = "projects/" + this.databaseId.projectId + "/databases/" + this.databaseId.database + "/documents";
       }
-      m(t2, e3, n2, r2, s3) {
-        const i = this.p(t2, e3);
-        m("RestConnection", "Sending: ", i, n2);
+      get v() {
+        return false;
+      }
+      I(t2, e3, n2, r2, s3) {
+        const i = this.T(t2, e3);
+        y("RestConnection", "Sending: ", i, n2);
         const o2 = {};
-        return this.g(o2, r2, s3), this.v(t2, i, o2, n2).then((t3) => (m("RestConnection", "Received: ", t3), t3), (e4) => {
-          throw y("RestConnection", `${t2} failed with error: `, e4, "url: ", i, "request:", n2), e4;
+        return this.A(o2, r2, s3), this.R(t2, i, o2, n2).then((t3) => (y("RestConnection", "Received: ", t3), t3), (e4) => {
+          throw g("RestConnection", `${t2} failed with error: `, e4, "url: ", i, "request:", n2), e4;
         });
       }
-      T(t2, e3, n2, r2, s3, i) {
-        return this.m(t2, e3, n2, r2, s3);
+      P(t2, e3, n2, r2, s3, i) {
+        return this.I(t2, e3, n2, r2, s3);
       }
-      g(t2, e3, n2) {
-        t2["X-Goog-Api-Client"] = "gl-js/ fire/" + f, t2["Content-Type"] = "text/plain", this.databaseInfo.appId && (t2["X-Firebase-GMPID"] = this.databaseInfo.appId), e3 && e3.headers.forEach((e4, n3) => t2[n3] = e4), n2 && n2.headers.forEach((e4, n3) => t2[n3] = e4);
+      A(t2, e3, n2) {
+        t2["X-Goog-Api-Client"] = "gl-js/ fire/" + w, t2["Content-Type"] = "text/plain", this.databaseInfo.appId && (t2["X-Firebase-GMPID"] = this.databaseInfo.appId), e3 && e3.headers.forEach((e4, n3) => t2[n3] = e4), n2 && n2.headers.forEach((e4, n3) => t2[n3] = e4);
       }
-      p(t2, e3) {
-        const n2 = ht[t2];
-        return `${this.h}/v1/${e3}:${n2}`;
+      T(t2, e3) {
+        const n2 = ft[t2];
+        return `${this.p}/v1/${e3}:${n2}`;
       }
     } {
       constructor(t2, e3) {
-        super(t2), this.I = e3;
+        super(t2), this.V = e3;
       }
-      A(t2, e3) {
+      N(t2, e3) {
         throw new Error("Not supported by FetchConnection");
       }
-      async v(t2, e3, n2, r2) {
+      async R(t2, e3, n2, r2) {
         const s3 = JSON.stringify(r2);
         let i;
         try {
-          i = await this.I(e3, {
+          i = await this.V(e3, {
             method: "POST",
             headers: n2,
             body: s3
           });
         } catch (t3) {
-          throw new L(dt(t3.status), "Request failed with error: " + t3.statusText);
+          throw new U(mt(t3.status), "Request failed with error: " + t3.statusText);
         }
         if (!i.ok)
-          throw new L(dt(i.status), "Request failed with error: " + i.statusText);
+          throw new U(mt(i.status), "Request failed with error: " + i.statusText);
         return i.json();
       }
     };
-    gt = class {
+    bt = class {
       constructor(t2, e3) {
         if (this.seconds = t2, this.nanoseconds = e3, e3 < 0)
-          throw new L(A, "Timestamp nanoseconds out of range: " + e3);
+          throw new U(P, "Timestamp nanoseconds out of range: " + e3);
         if (e3 >= 1e9)
-          throw new L(A, "Timestamp nanoseconds out of range: " + e3);
+          throw new U(P, "Timestamp nanoseconds out of range: " + e3);
         if (t2 < -62135596800)
-          throw new L(A, "Timestamp seconds out of range: " + t2);
+          throw new U(P, "Timestamp seconds out of range: " + t2);
         if (t2 >= 253402300800)
-          throw new L(A, "Timestamp seconds out of range: " + t2);
+          throw new U(P, "Timestamp seconds out of range: " + t2);
       }
       static now() {
-        return gt.fromMillis(Date.now());
+        return bt.fromMillis(Date.now());
       }
       static fromDate(t2) {
-        return gt.fromMillis(t2.getTime());
+        return bt.fromMillis(t2.getTime());
       }
       static fromMillis(t2) {
         const e3 = Math.floor(t2 / 1e3), n2 = Math.floor(1e6 * (t2 - 1e3 * e3));
-        return new gt(e3, n2);
+        return new bt(e3, n2);
       }
       toDate() {
         return new Date(this.toMillis());
@@ -9193,7 +9479,7 @@ var init_index_browser_esm2017 = __esm({
         return 1e3 * this.seconds + this.nanoseconds / 1e6;
       }
       _compareTo(t2) {
-        return this.seconds === t2.seconds ? yt(this.nanoseconds, t2.nanoseconds) : yt(this.seconds, t2.seconds);
+        return this.seconds === t2.seconds ? gt(this.nanoseconds, t2.nanoseconds) : gt(this.seconds, t2.seconds);
       }
       isEqual(t2) {
         return t2.seconds === this.seconds && t2.nanoseconds === this.nanoseconds;
@@ -9212,18 +9498,18 @@ var init_index_browser_esm2017 = __esm({
         return String(t2).padStart(12, "0") + "." + String(this.nanoseconds).padStart(9, "0");
       }
     };
-    vt = class {
+    Et = class {
       constructor(t2) {
         this.timestamp = t2;
       }
       static fromTimestamp(t2) {
-        return new vt(t2);
+        return new Et(t2);
       }
       static min() {
-        return new vt(new gt(0, 0));
+        return new Et(new bt(0, 0));
       }
       static max() {
-        return new vt(new gt(253402300799, 999999999));
+        return new Et(new bt(253402300799, 999999999));
       }
       compareTo(t2) {
         return this.timestamp._compareTo(t2.timestamp);
@@ -9241,12 +9527,12 @@ var init_index_browser_esm2017 = __esm({
         return this.timestamp;
       }
     };
-    At = class {
+    Pt = class {
       constructor(t2, e3, n2, r2, s3) {
-        this.key = t2, this.value = e3, this.color = null != n2 ? n2 : At.RED, this.left = null != r2 ? r2 : At.EMPTY, this.right = null != s3 ? s3 : At.EMPTY, this.size = this.left.size + 1 + this.right.size;
+        this.key = t2, this.value = e3, this.color = null != n2 ? n2 : Pt.RED, this.left = null != r2 ? r2 : Pt.EMPTY, this.right = null != s3 ? s3 : Pt.EMPTY, this.size = this.left.size + 1 + this.right.size;
       }
       copy(t2, e3, n2, r2, s3) {
-        return new At(null != t2 ? t2 : this.key, null != e3 ? e3 : this.value, null != n2 ? n2 : this.color, null != r2 ? r2 : this.left, null != s3 ? s3 : this.right);
+        return new Pt(null != t2 ? t2 : this.key, null != e3 ? e3 : this.value, null != n2 ? n2 : this.color, null != r2 ? r2 : this.left, null != s3 ? s3 : this.right);
       }
       isEmpty() {
         return false;
@@ -9273,7 +9559,7 @@ var init_index_browser_esm2017 = __esm({
       }
       removeMin() {
         if (this.left.isEmpty())
-          return At.EMPTY;
+          return Pt.EMPTY;
         let t2 = this;
         return t2.left.isRed() || t2.left.left.isRed() || (t2 = t2.moveRedLeft()), t2 = t2.copy(null, null, null, t2.left.removeMin(), null), t2.fixUp();
       }
@@ -9284,7 +9570,7 @@ var init_index_browser_esm2017 = __esm({
         else {
           if (r2.left.isRed() && (r2 = r2.rotateRight()), r2.right.isEmpty() || r2.right.isRed() || r2.right.left.isRed() || (r2 = r2.moveRedRight()), 0 === e3(t2, r2.key)) {
             if (r2.right.isEmpty())
-              return At.EMPTY;
+              return Pt.EMPTY;
             n2 = r2.right.min(), r2 = r2.copy(n2.key, n2.value, null, null, r2.right.removeMin());
           }
           r2 = r2.copy(null, null, null, null, r2.right.remove(t2, e3));
@@ -9307,11 +9593,11 @@ var init_index_browser_esm2017 = __esm({
         return t2.left.left.isRed() && (t2 = t2.rotateRight(), t2 = t2.colorFlip()), t2;
       }
       rotateLeft() {
-        const t2 = this.copy(null, null, At.RED, null, this.right.left);
+        const t2 = this.copy(null, null, Pt.RED, null, this.right.left);
         return this.right.copy(null, null, this.color, t2, null);
       }
       rotateRight() {
-        const t2 = this.copy(null, null, At.RED, this.left.right, null);
+        const t2 = this.copy(null, null, Pt.RED, this.left.right, null);
         return this.left.copy(null, null, this.color, null, t2);
       }
       colorFlip() {
@@ -9324,40 +9610,40 @@ var init_index_browser_esm2017 = __esm({
       }
       check() {
         if (this.isRed() && this.left.isRed())
-          throw g();
+          throw b();
         if (this.right.isRed())
-          throw g();
+          throw b();
         const t2 = this.left.check();
         if (t2 !== this.right.check())
-          throw g();
+          throw b();
         return t2 + (this.isRed() ? 0 : 1);
       }
     };
-    At.EMPTY = null, At.RED = true, At.BLACK = false;
-    At.EMPTY = new class {
+    Pt.EMPTY = null, Pt.RED = true, Pt.BLACK = false;
+    Pt.EMPTY = new class {
       constructor() {
         this.size = 0;
       }
       get key() {
-        throw g();
+        throw b();
       }
       get value() {
-        throw g();
+        throw b();
       }
       get color() {
-        throw g();
+        throw b();
       }
       get left() {
-        throw g();
+        throw b();
       }
       get right() {
-        throw g();
+        throw b();
       }
       copy(t2, e3, n2, r2, s3) {
         return this;
       }
       insert(t2, e3, n2) {
-        return new At(t2, e3);
+        return new Pt(t2, e3);
       }
       remove(t2, e3) {
         return this;
@@ -9387,13 +9673,13 @@ var init_index_browser_esm2017 = __esm({
         return 0;
       }
     }();
-    Nt = class {
+    $t = class {
       constructor(t2) {
         this.binaryString = t2;
       }
       static fromBase64String(t2) {
         const e3 = atob(t2);
-        return new Nt(e3);
+        return new $t(e3);
       }
       static fromUint8Array(t2) {
         const e3 = function(t3) {
@@ -9402,7 +9688,7 @@ var init_index_browser_esm2017 = __esm({
             e4 += String.fromCharCode(t3[n2]);
           return e4;
         }(t2);
-        return new Nt(e3);
+        return new $t(e3);
       }
       [Symbol.iterator]() {
         let t2 = 0;
@@ -9432,20 +9718,20 @@ var init_index_browser_esm2017 = __esm({
         return 2 * this.binaryString.length;
       }
       compareTo(t2) {
-        return yt(this.binaryString, t2.binaryString);
+        return gt(this.binaryString, t2.binaryString);
       }
       isEqual(t2) {
         return this.binaryString === t2.binaryString;
       }
     };
-    Nt.EMPTY_BYTE_STRING = new Nt("");
-    Dt = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
-    Yt = class {
+    $t.EMPTY_BYTE_STRING = new $t("");
+    xt = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
+    Jt = class {
       constructor(t2) {
         this.value = t2;
       }
       static empty() {
-        return new Yt({
+        return new Jt({
           mapValue: {}
         });
       }
@@ -9455,32 +9741,32 @@ var init_index_browser_esm2017 = __esm({
         {
           let e3 = this.value;
           for (let n2 = 0; n2 < t2.length - 1; ++n2)
-            if (e3 = (e3.mapValue.fields || {})[t2.get(n2)], !Kt(e3))
+            if (e3 = (e3.mapValue.fields || {})[t2.get(n2)], !Yt(e3))
               return null;
           return e3 = (e3.mapValue.fields || {})[t2.lastSegment()], e3 || null;
         }
       }
       set(t2, e3) {
-        this.getFieldsMap(t2.popLast())[t2.lastSegment()] = Qt(e3);
+        this.getFieldsMap(t2.popLast())[t2.lastSegment()] = Ht(e3);
       }
       setAll(t2) {
-        let e3 = tt.emptyPath(), n2 = {}, r2 = [];
+        let e3 = nt.emptyPath(), n2 = {}, r2 = [];
         t2.forEach((t3, s4) => {
           if (!e3.isImmediateParentOf(s4)) {
             const t4 = this.getFieldsMap(e3);
             this.applyChanges(t4, n2, r2), n2 = {}, r2 = [], e3 = s4.popLast();
           }
-          t3 ? n2[s4.lastSegment()] = Qt(t3) : r2.push(s4.lastSegment());
+          t3 ? n2[s4.lastSegment()] = Ht(t3) : r2.push(s4.lastSegment());
         });
         const s3 = this.getFieldsMap(e3);
         this.applyChanges(s3, n2, r2);
       }
       delete(t2) {
         const e3 = this.field(t2.popLast());
-        Kt(e3) && e3.mapValue.fields && delete e3.mapValue.fields[t2.lastSegment()];
+        Yt(e3) && e3.mapValue.fields && delete e3.mapValue.fields[t2.lastSegment()];
       }
       isEqual(t2) {
-        return Lt(this.value, t2.value);
+        return Ut(this.value, t2.value);
       }
       getFieldsMap(t2) {
         let e3 = this.value;
@@ -9489,7 +9775,7 @@ var init_index_browser_esm2017 = __esm({
         });
         for (let n2 = 0; n2 < t2.length; ++n2) {
           let r2 = e3.mapValue.fields[t2.get(n2)];
-          Kt(r2) && r2.mapValue.fields || (r2 = {
+          Yt(r2) && r2.mapValue.fields || (r2 = {
             mapValue: {
               fields: {}
             }
@@ -9498,44 +9784,44 @@ var init_index_browser_esm2017 = __esm({
         return e3.mapValue.fields;
       }
       applyChanges(t2, e3, n2) {
-        Et(e3, (e4, n3) => t2[e4] = n3);
+        Tt(e3, (e4, n3) => t2[e4] = n3);
         for (const e4 of n2)
           delete t2[e4];
       }
       clone() {
-        return new Yt(Qt(this.value));
+        return new Jt(Ht(this.value));
       }
     };
-    Ht = class {
+    Xt = class {
       constructor(t2, e3, n2, r2, s3, i) {
         this.key = t2, this.documentType = e3, this.version = n2, this.readTime = r2, this.data = s3, this.documentState = i;
       }
       static newInvalidDocument(t2) {
-        return new Ht(t2, 0, vt.min(), vt.min(), Yt.empty(), 0);
+        return new Xt(t2, 0, Et.min(), Et.min(), Jt.empty(), 0);
       }
       static newFoundDocument(t2, e3, n2) {
-        return new Ht(t2, 1, e3, vt.min(), n2, 0);
+        return new Xt(t2, 1, e3, Et.min(), n2, 0);
       }
       static newNoDocument(t2, e3) {
-        return new Ht(t2, 2, e3, vt.min(), Yt.empty(), 0);
+        return new Xt(t2, 2, e3, Et.min(), Jt.empty(), 0);
       }
       static newUnknownDocument(t2, e3) {
-        return new Ht(t2, 3, e3, vt.min(), Yt.empty(), 2);
+        return new Xt(t2, 3, e3, Et.min(), Jt.empty(), 2);
       }
       convertToFoundDocument(t2, e3) {
         return this.version = t2, this.documentType = 1, this.data = e3, this.documentState = 0, this;
       }
       convertToNoDocument(t2) {
-        return this.version = t2, this.documentType = 2, this.data = Yt.empty(), this.documentState = 0, this;
+        return this.version = t2, this.documentType = 2, this.data = Jt.empty(), this.documentState = 0, this;
       }
       convertToUnknownDocument(t2) {
-        return this.version = t2, this.documentType = 3, this.data = Yt.empty(), this.documentState = 2, this;
+        return this.version = t2, this.documentType = 3, this.data = Jt.empty(), this.documentState = 2, this;
       }
       setHasCommittedMutations() {
         return this.documentState = 2, this;
       }
       setHasLocalMutations() {
-        return this.documentState = 1, this.version = vt.min(), this;
+        return this.documentState = 1, this.version = Et.min(), this;
       }
       setReadTime(t2) {
         return this.readTime = t2, this;
@@ -9562,43 +9848,43 @@ var init_index_browser_esm2017 = __esm({
         return 3 === this.documentType;
       }
       isEqual(t2) {
-        return t2 instanceof Ht && this.key.isEqual(t2.key) && this.version.isEqual(t2.version) && this.documentType === t2.documentType && this.documentState === t2.documentState && this.data.isEqual(t2.data);
+        return t2 instanceof Xt && this.key.isEqual(t2.key) && this.version.isEqual(t2.version) && this.documentType === t2.documentType && this.documentState === t2.documentState && this.data.isEqual(t2.data);
       }
       mutableCopy() {
-        return new Ht(this.key, this.documentType, this.version, this.readTime, this.data.clone(), this.documentState);
+        return new Xt(this.key, this.documentType, this.version, this.readTime, this.data.clone(), this.documentState);
       }
       toString() {
         return `Document(${this.key}, ${this.version}, ${JSON.stringify(this.data.value)}, {documentType: ${this.documentType}}), {documentState: ${this.documentState}})`;
       }
     };
-    Jt = class {
+    Zt = class {
       constructor(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = null, o2 = null) {
-        this.path = t2, this.collectionGroup = e3, this.orderBy = n2, this.filters = r2, this.limit = s3, this.startAt = i, this.endAt = o2, this.P = null;
+        this.path = t2, this.collectionGroup = e3, this.orderBy = n2, this.filters = r2, this.limit = s3, this.startAt = i, this.endAt = o2, this.$ = null;
       }
     };
-    ce = class {
+    he = class {
       constructor(t2, e3) {
         this.position = t2, this.inclusive = e3;
       }
     };
-    ae = class {
+    le = class {
       constructor(t2, e3 = "asc") {
         this.field = t2, this.dir = e3;
       }
     };
-    fe = class {
+    we = class {
       constructor(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = "F", o2 = null, u = null) {
-        this.path = t2, this.collectionGroup = e3, this.explicitOrderBy = n2, this.filters = r2, this.limit = s3, this.limitType = i, this.startAt = o2, this.endAt = u, this.$ = null, this.F = null, this.startAt, this.endAt;
+        this.path = t2, this.collectionGroup = e3, this.explicitOrderBy = n2, this.filters = r2, this.limit = s3, this.limitType = i, this.startAt = o2, this.endAt = u, this.O = null, this.k = null, this.startAt, this.endAt;
       }
     };
-    xe = (() => {
+    Se = (() => {
       const t2 = {
         asc: "ASCENDING",
         desc: "DESCENDING"
       };
       return t2;
     })();
-    Fe = (() => {
+    qe = (() => {
       const t2 = {
         "<": "LESS_THAN",
         "<=": "LESS_THAN_OR_EQUAL",
@@ -9613,41 +9899,41 @@ var init_index_browser_esm2017 = __esm({
       };
       return t2;
     })();
-    Se = class {
+    Oe = class {
       constructor(t2, e3) {
-        this.databaseId = t2, this.S = e3;
+        this.databaseId = t2, this.C = e3;
       }
     };
-    en = class extends class {
+    rn = class extends class {
     } {
       constructor(t2, e3, n2, r2) {
-        super(), this.authCredentials = t2, this.appCheckCredentials = e3, this.H = n2, this.q = r2, this.J = false;
+        super(), this.authCredentials = t2, this.appCheckCredentials = e3, this.tt = n2, this.L = r2, this.et = false;
       }
-      X() {
-        if (this.J)
-          throw new L(x, "The client has already been terminated.");
+      nt() {
+        if (this.et)
+          throw new U(S, "The client has already been terminated.");
       }
-      m(t2, e3, n2) {
-        return this.X(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([r2, s3]) => this.H.m(t2, e3, n2, r2, s3)).catch((t3) => {
-          throw "FirebaseError" === t3.name ? (t3.code === D && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t3) : new L(I, t3.toString());
+      I(t2, e3, n2) {
+        return this.nt(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([r2, s3]) => this.tt.I(t2, e3, n2, r2, s3)).catch((t3) => {
+          throw "FirebaseError" === t3.name ? (t3.code === x && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t3) : new U(R, t3.toString());
         });
       }
-      T(t2, e3, n2, r2) {
-        return this.X(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([s3, i]) => this.H.T(t2, e3, n2, s3, i, r2)).catch((t3) => {
-          throw "FirebaseError" === t3.name ? (t3.code === D && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t3) : new L(I, t3.toString());
+      P(t2, e3, n2, r2) {
+        return this.nt(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([s3, i]) => this.tt.P(t2, e3, n2, s3, i, r2)).catch((t3) => {
+          throw "FirebaseError" === t3.name ? (t3.code === x && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t3) : new U(R, t3.toString());
         });
       }
       terminate() {
-        this.J = true;
+        this.et = true;
       }
     };
-    on = /* @__PURE__ */ new Map();
-    cn = class {
+    an = /* @__PURE__ */ new Map();
+    ln = class {
       constructor(t2) {
         var e3;
         if (void 0 === t2.host) {
           if (void 0 !== t2.ssl)
-            throw new L(A, "Can't provide ssl option if host option is not set");
+            throw new U(P, "Can't provide ssl option if host option is not set");
           this.host = "firestore.googleapis.com", this.ssl = true;
         } else
           this.host = t2.host, this.ssl = null === (e3 = t2.ssl) || void 0 === e3 || e3;
@@ -9655,29 +9941,25 @@ var init_index_browser_esm2017 = __esm({
           this.cacheSizeBytes = 41943040;
         else {
           if (-1 !== t2.cacheSizeBytes && t2.cacheSizeBytes < 1048576)
-            throw new L(A, "cacheSizeBytes must be at least 1048576");
+            throw new U(P, "cacheSizeBytes must be at least 1048576");
           this.cacheSizeBytes = t2.cacheSizeBytes;
         }
         this.experimentalForceLongPolling = !!t2.experimentalForceLongPolling, this.experimentalAutoDetectLongPolling = !!t2.experimentalAutoDetectLongPolling, this.useFetchStreams = !!t2.useFetchStreams, function(t3, e4, n2, r2) {
           if (true === e4 && true === r2)
-            throw new L(A, `${t3} and ${n2} cannot be used together.`);
+            throw new U(P, `${t3} and ${n2} cannot be used together.`);
         }("experimentalForceLongPolling", t2.experimentalForceLongPolling, "experimentalAutoDetectLongPolling", t2.experimentalAutoDetectLongPolling);
       }
       isEqual(t2) {
         return this.host === t2.host && this.ssl === t2.ssl && this.credentials === t2.credentials && this.cacheSizeBytes === t2.cacheSizeBytes && this.experimentalForceLongPolling === t2.experimentalForceLongPolling && this.experimentalAutoDetectLongPolling === t2.experimentalAutoDetectLongPolling && this.ignoreUndefinedProperties === t2.ignoreUndefinedProperties && this.useFetchStreams === t2.useFetchStreams;
       }
     };
-    an = class {
-      constructor(t2, e3, n2) {
-        this._authCredentials = e3, this._appCheckCredentials = n2, this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new cn({}), this._settingsFrozen = false, t2 instanceof H ? this._databaseId = t2 : (this._app = t2, this._databaseId = function(t3) {
-          if (!Object.prototype.hasOwnProperty.apply(t3.options, ["projectId"]))
-            throw new L(A, '"projectId" not provided in firebase.initializeApp.');
-          return new H(t3.options.projectId);
-        }(t2));
+    fn = class {
+      constructor(t2, e3, n2, r2) {
+        this._authCredentials = t2, this._appCheckCredentials = e3, this._databaseId = n2, this._app = r2, this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new ln({}), this._settingsFrozen = false;
       }
       get app() {
         if (!this._app)
-          throw new L(x, "Firestore was not initialized using the Firebase SDK. 'app' is not available");
+          throw new U(S, "Firestore was not initialized using the Firebase SDK. 'app' is not available");
         return this._app;
       }
       get _initialized() {
@@ -9688,18 +9970,18 @@ var init_index_browser_esm2017 = __esm({
       }
       _setSettings(t2) {
         if (this._settingsFrozen)
-          throw new L(x, "Firestore has already been started and its settings can no longer be changed. You can only modify settings before calling any other methods on a Firestore object.");
-        this._settings = new cn(t2), void 0 !== t2.credentials && (this._authCredentials = function(t3) {
+          throw new U(S, "Firestore has already been started and its settings can no longer be changed. You can only modify settings before calling any other methods on a Firestore object.");
+        this._settings = new ln(t2), void 0 !== t2.credentials && (this._authCredentials = function(t3) {
           if (!t3)
-            return new j();
+            return new Q();
           switch (t3.type) {
             case "gapi":
               const e3 = t3.client;
-              return v(!("object" != typeof e3 || null === e3 || !e3.auth || !e3.auth.getAuthHeaderValueForFirstParty)), new W(e3, t3.sessionIndex || "0", t3.iamToken || null);
+              return new K(e3, t3.sessionIndex || "0", t3.iamToken || null, t3.authTokenFactory || null);
             case "provider":
               return t3.client;
             default:
-              throw new L(A, "makeAuthCredentialsProvider failed due to invalid credential type");
+              throw new U(P, "makeAuthCredentialsProvider failed due to invalid credential type");
           }
         }(t2.credentials));
       }
@@ -9721,12 +10003,12 @@ var init_index_browser_esm2017 = __esm({
       }
       _terminate() {
         return function(t2) {
-          const e3 = on.get(t2);
-          e3 && (m("ComponentProvider", "Removing Datastore"), on.delete(t2), e3.terminate());
+          const e3 = an.get(t2);
+          e3 && (y("ComponentProvider", "Removing Datastore"), an.delete(t2), e3.terminate());
         }(this), Promise.resolve();
       }
     };
-    wn = class {
+    vn = class {
       constructor(t2, e3, n2) {
         this.converter = e3, this._key = n2, this.type = "document", this.firestore = t2;
       }
@@ -9740,23 +10022,23 @@ var init_index_browser_esm2017 = __esm({
         return this._key.path.canonicalString();
       }
       get parent() {
-        return new pn(this.firestore, this.converter, this._key.path.popLast());
+        return new En(this.firestore, this.converter, this._key.path.popLast());
       }
       withConverter(t2) {
-        return new wn(this.firestore, t2, this._key);
+        return new vn(this.firestore, t2, this._key);
       }
     };
-    mn = class {
+    bn = class {
       constructor(t2, e3, n2) {
         this.converter = e3, this._query = n2, this.type = "query", this.firestore = t2;
       }
       withConverter(t2) {
-        return new mn(this.firestore, t2, this._query);
+        return new bn(this.firestore, t2, this._query);
       }
     };
-    pn = class extends mn {
+    En = class extends bn {
       constructor(t2, e3, n2) {
-        super(t2, e3, new fe(n2)), this._path = n2, this.type = "collection";
+        super(t2, e3, new we(n2)), this._path = n2, this.type = "collection";
       }
       get id() {
         return this._query.path.lastSegment();
@@ -9766,40 +10048,29 @@ var init_index_browser_esm2017 = __esm({
       }
       get parent() {
         const t2 = this._path.popLast();
-        return t2.isEmpty() ? null : new wn(
+        return t2.isEmpty() ? null : new vn(
           this.firestore,
           null,
-          new et(t2)
+          new rt(t2)
         );
       }
       withConverter(t2) {
-        return new pn(this.firestore, t2, this._path);
+        return new En(this.firestore, t2, this._path);
       }
     };
-    En = class {
-      constructor(...t2) {
-        for (let e3 = 0; e3 < t2.length; ++e3)
-          if (0 === t2[e3].length)
-            throw new L(A, "Invalid field name at argument $(i + 1). Field names must not be empty.");
-        this._internalPath = new tt(t2);
-      }
-      isEqual(t2) {
-        return this._internalPath.isEqual(t2._internalPath);
-      }
-    };
-    In = class {
+    Vn = class {
       constructor(t2) {
         this._byteString = t2;
       }
       static fromBase64String(t2) {
         try {
-          return new In(Nt.fromBase64String(t2));
+          return new Vn($t.fromBase64String(t2));
         } catch (t3) {
-          throw new L(A, "Failed to construct data from Base64 string: " + t3);
+          throw new U(P, "Failed to construct data from Base64 string: " + t3);
         }
       }
       static fromUint8Array(t2) {
-        return new In(Nt.fromUint8Array(t2));
+        return new Vn($t.fromUint8Array(t2));
       }
       toBase64() {
         return this._byteString.toBase64();
@@ -9814,12 +10085,23 @@ var init_index_browser_esm2017 = __esm({
         return this._byteString.isEqual(t2._byteString);
       }
     };
-    Rn = class {
+    Nn = class {
+      constructor(...t2) {
+        for (let e3 = 0; e3 < t2.length; ++e3)
+          if (0 === t2[e3].length)
+            throw new U(P, "Invalid field name at argument $(i + 1). Field names must not be empty.");
+        this._internalPath = new nt(t2);
+      }
+      isEqual(t2) {
+        return this._internalPath.isEqual(t2._internalPath);
+      }
+    };
+    xn = class {
       constructor(t2, e3) {
         if (!isFinite(t2) || t2 < -90 || t2 > 90)
-          throw new L(A, "Latitude must be a number between -90 and 90, but was: " + t2);
+          throw new U(P, "Latitude must be a number between -90 and 90, but was: " + t2);
         if (!isFinite(e3) || e3 < -180 || e3 > 180)
-          throw new L(A, "Longitude must be a number between -180 and 180, but was: " + e3);
+          throw new U(P, "Longitude must be a number between -180 and 180, but was: " + e3);
         this._lat = t2, this._long = e3;
       }
       get latitude() {
@@ -9838,11 +10120,11 @@ var init_index_browser_esm2017 = __esm({
         };
       }
       _compareTo(t2) {
-        return yt(this._lat, t2._lat) || yt(this._long, t2._long);
+        return gt(this._lat, t2._lat) || gt(this._long, t2._long);
       }
     };
-    Yn = new RegExp("[~\\*/\\[\\]]");
-    Zn = class {
+    er = new RegExp("[~\\*/\\[\\]]");
+    ir = class {
       constructor(t2, e3, n2, r2, s3) {
         this._firestore = t2, this._userDataWriter = e3, this._key = n2, this._document = r2, this._converter = s3;
       }
@@ -9850,7 +10132,7 @@ var init_index_browser_esm2017 = __esm({
         return this._key.path.lastSegment();
       }
       get ref() {
-        return new wn(this._firestore, this._converter, this._key);
+        return new vn(this._firestore, this._converter, this._key);
       }
       exists() {
         return null !== this._document;
@@ -9858,7 +10140,7 @@ var init_index_browser_esm2017 = __esm({
       data() {
         if (this._document) {
           if (this._converter) {
-            const t2 = new tr(
+            const t2 = new or(
               this._firestore,
               this._userDataWriter,
               this._key,
@@ -9872,18 +10154,18 @@ var init_index_browser_esm2017 = __esm({
       }
       get(t2) {
         if (this._document) {
-          const e3 = this._document.data.field(rr("DocumentSnapshot.get", t2));
+          const e3 = this._document.data.field(ar("DocumentSnapshot.get", t2));
           if (null !== e3)
             return this._userDataWriter.convertValue(e3);
         }
       }
     };
-    tr = class extends Zn {
+    or = class extends ir {
       data() {
         return super.data();
       }
     };
-    er = class {
+    ur = class {
       constructor(t2, e3) {
         this._docs = e3, this.query = t2;
       }
@@ -9900,15 +10182,15 @@ var init_index_browser_esm2017 = __esm({
         this._docs.forEach(t2, e3);
       }
     };
-    Ir = class extends class {
+    Dr = class extends class {
       convertValue(t2, e3 = "none") {
-        switch (Ct(t2)) {
+        switch (Mt(t2)) {
           case 0:
             return null;
           case 1:
             return t2.booleanValue;
           case 2:
-            return xt(t2.integerValue || t2.doubleValue);
+            return St(t2.integerValue || t2.doubleValue);
           case 3:
             return this.convertTimestamp(t2.timestampValue);
           case 4:
@@ -9916,7 +10198,7 @@ var init_index_browser_esm2017 = __esm({
           case 5:
             return t2.stringValue;
           case 6:
-            return this.convertBytes(Ft(t2.bytesValue));
+            return this.convertBytes(qt(t2.bytesValue));
           case 7:
             return this.convertReference(t2.referenceValue);
           case 8:
@@ -9926,17 +10208,17 @@ var init_index_browser_esm2017 = __esm({
           case 10:
             return this.convertObject(t2.mapValue, e3);
           default:
-            throw g();
+            throw b();
         }
       }
       convertObject(t2, e3) {
         const n2 = {};
-        return Et(t2.fields, (t3, r2) => {
+        return Tt(t2.fields, (t3, r2) => {
           n2[t3] = this.convertValue(r2, e3);
         }), n2;
       }
       convertGeoPoint(t2) {
-        return new Rn(xt(t2.latitude), xt(t2.longitude));
+        return new xn(St(t2.latitude), St(t2.longitude));
       }
       convertArray(t2, e3) {
         return (t2.values || []).map((t3) => this.convertValue(t3, e3));
@@ -9944,42 +10226,46 @@ var init_index_browser_esm2017 = __esm({
       convertServerTimestamp(t2, e3) {
         switch (e3) {
           case "previous":
-            const n2 = qt(t2);
+            const n2 = kt(t2);
             return null == n2 ? null : this.convertValue(n2, e3);
           case "estimate":
-            return this.convertTimestamp(Ot(t2));
+            return this.convertTimestamp(Ct(t2));
           default:
             return null;
         }
       }
       convertTimestamp(t2) {
-        const e3 = $t(t2);
-        return new gt(e3.seconds, e3.nanos);
+        const e3 = Ft(t2);
+        return new bt(e3.seconds, e3.nanos);
       }
       convertDocumentKey(t2, e3) {
-        const n2 = X.fromString(t2);
-        v(Xe(n2));
-        const r2 = new H(n2.get(1), n2.get(3)), s3 = new et(n2.popFirst(5));
-        return r2.isEqual(e3) || p(`Document ${s3} contains a document reference within a different database (${r2.projectId}/${r2.database}) which is not supported. It will be treated as a reference in the current database (${e3.projectId}/${e3.database}) instead.`), s3;
+        const n2 = tt.fromString(t2);
+        E(tn(n2));
+        const r2 = new X(n2.get(1), n2.get(3)), s3 = new rt(n2.popFirst(5));
+        return r2.isEqual(e3) || _(`Document ${s3} contains a document reference within a different database (${r2.projectId}/${r2.database}) which is not supported. It will be treated as a reference in the current database (${e3.projectId}/${e3.database}) instead.`), s3;
       }
     } {
       constructor(t2) {
         super(), this.firestore = t2;
       }
       convertBytes(t2) {
-        return new In(t2);
+        return new Vn(t2);
       }
       convertReference(t2) {
         const e3 = this.convertDocumentKey(t2, this.firestore._databaseId);
-        return new wn(this.firestore, null, e3);
+        return new vn(this.firestore, null, e3);
       }
     };
     !function(t2) {
-      f = t2;
-    }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", (t2, { options: e3 }) => {
-      const n2 = t2.getProvider("app").getImmediate(), r2 = new an(n2, new z(t2.getProvider("auth-internal")), new Q(t2.getProvider("app-check-internal")));
-      return e3 && r2._setSettings(e3), r2;
-    }, "PUBLIC")), registerVersion("firestore-lite", "3.4.14", ""), registerVersion("firestore-lite", "3.4.14", "esm2017");
+      w = t2;
+    }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", (t2, { instanceIdentifier: e3, options: n2 }) => {
+      const r2 = t2.getProvider("app").getImmediate(), s3 = new fn(new G(t2.getProvider("auth-internal")), new H(t2.getProvider("app-check-internal")), function(t3, e4) {
+        if (!Object.prototype.hasOwnProperty.apply(t3.options, ["projectId"]))
+          throw new U(P, '"projectId" not provided in firebase.initializeApp.');
+        return new X(t3.options.projectId, e4);
+      }(r2, e3), r2);
+      return n2 && s3._setSettings(n2), s3;
+    }, "PUBLIC").setMultipleInstances(true)), registerVersion("firestore-lite", "3.7.1", ""), registerVersion("firestore-lite", "3.7.1", "esm2017");
   }
 });
 
@@ -9991,11 +10277,11 @@ var init_index_esm4 = __esm({
 });
 
 // node_modules/@firebase/functions/dist/index.esm2017.js
-function mapValues(o2, f2) {
+function mapValues(o2, f) {
   const result = {};
   for (const key2 in o2) {
     if (o2.hasOwnProperty(key2)) {
-      result[key2] = f2(o2[key2]);
+      result[key2] = f(o2[key2]);
     }
   }
   return result;
@@ -10132,6 +10418,9 @@ function failAfter(millis) {
     }
   };
 }
+function connectFunctionsEmulator$1(functionsInstance, host, port) {
+  functionsInstance.emulatorOrigin = `http://${host}:${port}`;
+}
 function httpsCallable$1(functionsInstance, name5, options) {
   return (data) => {
     return call(functionsInstance, name5, data, options || {});
@@ -10225,7 +10514,14 @@ function getFunctions(app2 = getApp(), regionOrCustomDomain = DEFAULT_REGION) {
   const functionsInstance = functionsProvider.getImmediate({
     identifier: regionOrCustomDomain
   });
+  const emulator = getDefaultEmulatorHostnameAndPort("functions");
+  if (emulator) {
+    connectFunctionsEmulator(functionsInstance, ...emulator);
+  }
   return functionsInstance;
+}
+function connectFunctionsEmulator(functionsInstance, host, port) {
+  connectFunctionsEmulator$1(getModularInstance(functionsInstance), host, port);
 }
 function httpsCallable(functionsInstance, name5, options) {
   return httpsCallable$1(getModularInstance(functionsInstance), name5, options);
@@ -10331,9 +10627,9 @@ var init_index_esm20175 = __esm({
         this.fetchImpl = fetchImpl;
         this.emulatorOrigin = null;
         this.contextProvider = new ContextProvider(authProvider, messagingProvider, appCheckProvider);
-        this.cancelAllRequests = new Promise((resolve2) => {
+        this.cancelAllRequests = new Promise((resolve) => {
           this.deleteService = () => {
-            return Promise.resolve(resolve2());
+            return Promise.resolve(resolve());
           };
         });
         try {
@@ -10361,7 +10657,7 @@ var init_index_esm20175 = __esm({
       }
     };
     name4 = "@firebase/functions";
-    version4 = "0.8.4";
+    version4 = "0.8.7";
     AUTH_INTERNAL_NAME = "auth-internal";
     APP_CHECK_INTERNAL_NAME = "app-check-internal";
     MESSAGING_INTERNAL_NAME = "messaging-internal";
@@ -10377,30 +10673,30 @@ var init_index_esm5 = __esm({
 });
 
 // .svelte-kit/output/server/chunks/firebase.js
-var FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, firebaseConfig, app, db, functions;
+var PUBLIC_FIREBASE_apiKey, PUBLIC_FIREBASE_authDomain, PUBLIC_FIREBASE_projectId, PUBLIC_FIREBASE_storageBucket, PUBLIC_FIREBASE_messagingSenderId, PUBLIC_FIREBASE_appId, firebaseConfig, app, db, functions;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
     init_index_esm2();
     init_index_esm3();
     init_index_esm4();
     init_index_esm5();
-    FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
-    FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
-    FIREBASE_projectId = "thinksolve-app";
-    FIREBASE_storageBucket = "thinksolve-app.appspot.com";
-    FIREBASE_messagingSenderId = "490986955869";
-    FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
+    PUBLIC_FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
+    PUBLIC_FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
+    PUBLIC_FIREBASE_projectId = "thinksolve-app";
+    PUBLIC_FIREBASE_storageBucket = "thinksolve-app.appspot.com";
+    PUBLIC_FIREBASE_messagingSenderId = "490986955869";
+    PUBLIC_FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
     firebaseConfig = {
-      apiKey: FIREBASE_apiKey,
-      authDomain: FIREBASE_authDomain,
-      projectId: FIREBASE_projectId,
-      storageBucket: FIREBASE_storageBucket,
-      messagingSenderId: FIREBASE_messagingSenderId,
-      appId: FIREBASE_appId
+      apiKey: PUBLIC_FIREBASE_apiKey,
+      authDomain: PUBLIC_FIREBASE_authDomain,
+      projectId: PUBLIC_FIREBASE_projectId,
+      storageBucket: PUBLIC_FIREBASE_storageBucket,
+      messagingSenderId: PUBLIC_FIREBASE_messagingSenderId,
+      appId: PUBLIC_FIREBASE_appId
     };
     app = initializeApp(firebaseConfig);
     getAuth(app);
-    db = ln(app);
+    db = wn(app);
     functions = getFunctions(app);
     httpsCallable(
       functions,
@@ -10513,7 +10809,7 @@ function spring(value, opts = {}) {
   }
   const spring2 = {
     set,
-    update: (fn, opts2) => set(fn(target_value, value), opts2),
+    update: (fn2, opts2) => set(fn2(target_value, value), opts2),
     subscribe: store.subscribe,
     stiffness,
     damping,
@@ -10531,9 +10827,6 @@ var init_layout_svelte = __esm({
     init_index_esm3();
     init_index_esm4();
     init_index2();
-    init_dropzone();
-    init_index_esm2();
-    init_index_esm5();
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { showModal = false } = $$props;
       let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
@@ -10561,7 +10854,7 @@ var init_layout_svelte = __esm({
       let redirectAfterLoginTimeOut;
       let redirectSetInterval;
       async function loginToRedirectUrl(userEmail) {
-        const querySnapshot = await Rr(yn(db, "email"));
+        const querySnapshot = await xr(In(db, "email"));
         querySnapshot.forEach((doc) => {
           if (userEmail === doc.id) {
             let redirectTimeInMS = 3e3;
@@ -10677,9 +10970,9 @@ var init_layout_svelte = __esm({
       return readonly_stores;
     };
     page = {
-      subscribe(fn) {
+      subscribe(fn2) {
         const store = getStores().page;
-        return store.subscribe(fn);
+        return store.subscribe(fn2);
       }
     };
     Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -10854,9 +11147,9 @@ var init_layout_svelte = __esm({
         }
         $$rendered = `
 
-${$$result.head += `<link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}" data-svelte="svelte-1yezitl"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin data-svelte="svelte-1yezitl"><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}" data-svelte="svelte-1yezitl">${each(Object.keys($routes), (key2) => {
+${$$result.head += `<!-- HEAD_svelte-1yezitl_START --><link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}">${each(Object.keys($routes), (key2) => {
           return `${$page.routeId == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == key2 ? `${$$result.title = `<title>${escape($routes[key2].title)}</title>`, ""}` : ``}`}`;
-        })}`, ""}
+        })}<!-- HEAD_svelte-1yezitl_END -->`, ""}
 
 
 
@@ -10952,9 +11245,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-16cec6d1.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-16cec6d1.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-d32cce16.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/navigation-310de707.js", "_app/immutable/chunks/singletons-ba8d1508.js", "_app/immutable/chunks/firebase-ae78a3e0.js"];
-    stylesheets = ["_app/immutable/assets/+layout-885118c8.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-d3942c33.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-d3942c33.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-16dc1077.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/navigation-895ef89e.js", "_app/immutable/chunks/singletons-fa07e895.js", "_app/immutable/chunks/firebase-743cf15e.js"];
+    stylesheets = ["_app/immutable/assets/_layout-2fe33a11.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
 
@@ -10991,8 +11284,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-504afafa.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-504afafa.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-61878f38.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-61878f38.js", "_app/immutable/chunks/index-30e2a2cf.js"];
     stylesheets2 = [];
   }
 });
@@ -11003,7 +11296,7 @@ var init_plansCardArray = __esm({
   ".svelte-kit/output/server/chunks/plansCardArray.js"() {
     init_chunks();
     CalendlyJsandCSS = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1787kfc"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async data-svelte="svelte-1787kfc"><\/script>`, ""}`;
+      return `${$$result.head += `<!-- HEAD_svelte-1787kfc_START --><link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" async><\/script><!-- HEAD_svelte-1787kfc_END -->`, ""}`;
     });
     sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
     plansCardArray = [
@@ -11134,8 +11427,6 @@ var init_page_svelte = __esm({
     init_plansCardArray();
     init_Dropzone();
     init_store();
-    init_dropzone();
-    init_index2();
     css$1 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
@@ -11367,9 +11658,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-ab9300ba.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-ab9300ba.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/PlansCard-01073d22.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Dropzone-d32cce16.js", "_app/immutable/chunks/private-53926b58.js"];
-    stylesheets3 = ["_app/immutable/assets/+page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-63515936.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-63515936.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/PlansCard-d6d7ce83.js", "_app/immutable/chunks/plansCardArray-e12ddae7.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/Dropzone-16dc1077.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
 
@@ -11402,8 +11693,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/calcom/_page.svelte-606a66f2.js";
-    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-606a66f2.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    file4 = "_app/immutable/components/pages/calcom/_page.svelte-0570be0f.js";
+    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-0570be0f.js", "_app/immutable/chunks/index-30e2a2cf.js"];
     stylesheets4 = [];
   }
 });
@@ -11423,7 +11714,7 @@ var init_page_svelte3 = __esm({
     };
     Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $$result.css.add(css4);
-      return `${$$result.head += `<link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}" data-svelte="svelte-1bm9itx"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}" data-svelte="svelte-1bm9itx"><\/script>`, ""}
+      return `${$$result.head += `<!-- HEAD_svelte-1bm9itx_START --><link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}"><\/script><!-- HEAD_svelte-1bm9itx_END -->`, ""}
 
 <details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
   </summary>
@@ -11537,9 +11828,9 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/faq/_page.svelte-6b6a5821.js";
-    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-6b6a5821.js", "_app/immutable/chunks/index-1063d0c6.js"];
-    stylesheets5 = ["_app/immutable/assets/+page-113a1f72.css"];
+    file5 = "_app/immutable/components/pages/faq/_page.svelte-6e446996.js";
+    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-6e446996.js", "_app/immutable/chunks/index-30e2a2cf.js"];
+    stylesheets5 = ["_app/immutable/assets/_page-113a1f72.css"];
   }
 });
 
@@ -11553,9 +11844,6 @@ var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
     init_chunks();
     init_Dropzone();
-    init_store();
-    init_index2();
-    init_dropzone();
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(Dropzone_1, "Dropzone").$$render($$result, {}, {}, {})}`;
     });
@@ -11576,8 +11864,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-482b23e3.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-482b23e3.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Dropzone-d32cce16.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-0687e73d.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-0687e73d.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-16dc1077.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js"];
     stylesheets6 = ["_app/immutable/assets/Dropzone-20aff2fd.css"];
   }
 });
@@ -11968,13 +12256,13 @@ function parseCD(parser) {
   for (var i = 0; i < parsedRows.length; i++) {
     var rowNodes = parsedRows[i];
     var cell = newCell();
-    for (var j2 = 0; j2 < rowNodes.length; j2++) {
-      if (!isStartOfArrow(rowNodes[j2])) {
-        cell.body.push(rowNodes[j2]);
+    for (var j = 0; j < rowNodes.length; j++) {
+      if (!isStartOfArrow(rowNodes[j])) {
+        cell.body.push(rowNodes[j]);
       } else {
         row.push(cell);
-        j2 += 1;
-        var arrowChar = assertSymbolNodeType(rowNodes[j2]).text;
+        j += 1;
+        var arrowChar = assertSymbolNodeType(rowNodes[j]).text;
         var labels = new Array(2);
         labels[0] = {
           type: "ordgroup",
@@ -11991,10 +12279,10 @@ function parseCD(parser) {
         else if ("<>AV".indexOf(arrowChar) > -1) {
           for (var labelNum = 0; labelNum < 2; labelNum++) {
             var inLabel = true;
-            for (var k2 = j2 + 1; k2 < rowNodes.length; k2++) {
+            for (var k2 = j + 1; k2 < rowNodes.length; k2++) {
               if (isLabelEnd(rowNodes[k2], arrowChar)) {
                 inLabel = false;
-                j2 = k2;
+                j = k2;
                 break;
               }
               if (isStartOfArrow(rowNodes[k2])) {
@@ -12003,11 +12291,11 @@ function parseCD(parser) {
               labels[labelNum].body.push(rowNodes[k2]);
             }
             if (inLabel) {
-              throw new ParseError("Missing a " + arrowChar + " character to complete a CD arrow.", rowNodes[j2]);
+              throw new ParseError("Missing a " + arrowChar + " character to complete a CD arrow.", rowNodes[j]);
             }
           }
         } else {
-          throw new ParseError('Expected one of "<>AV=|." after @', rowNodes[j2]);
+          throw new ParseError('Expected one of "<>AV=|." after @', rowNodes[j]);
         }
         var arrow = cdArrow(arrowChar, labels, parser);
         var wrappedArrow = {
@@ -12096,6 +12384,11 @@ function getHLines(parser) {
   var hlineInfo = [];
   parser.consumeSpaces();
   var nxt = parser.fetch().text;
+  if (nxt === "\\relax") {
+    parser.consume();
+    parser.consumeSpaces();
+    nxt = parser.fetch().text;
+  }
   while (nxt === "\\hline" || nxt === "\\hdashline") {
     parser.consume();
     hlineInfo.push(nxt === "\\hdashline");
@@ -12252,7 +12545,7 @@ function sizingGroup(value, options, baseOptions) {
   }
   return buildCommon.makeFragment(inner2);
 }
-var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D2, Dc, T2, Tc, S2, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions2, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
+var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D, Dc, T2, Tc, S2, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions2, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
 var init_katex = __esm({
   "node_modules/katex/dist/katex.mjs"() {
     SourceLocation = class {
@@ -12574,7 +12867,7 @@ var init_katex = __esm({
         return this.size >= 2;
       }
     };
-    D2 = 0;
+    D = 0;
     Dc = 1;
     T2 = 2;
     Tc = 3;
@@ -12582,15 +12875,15 @@ var init_katex = __esm({
     Sc = 5;
     SS = 6;
     SSc = 7;
-    styles = [new Style(D2, 0, false), new Style(Dc, 0, true), new Style(T2, 1, false), new Style(Tc, 1, true), new Style(S2, 2, false), new Style(Sc, 2, true), new Style(SS, 3, false), new Style(SSc, 3, true)];
+    styles = [new Style(D, 0, false), new Style(Dc, 0, true), new Style(T2, 1, false), new Style(Tc, 1, true), new Style(S2, 2, false), new Style(Sc, 2, true), new Style(SS, 3, false), new Style(SSc, 3, true)];
     sup = [S2, Sc, S2, Sc, SS, SSc, SS, SSc];
     sub = [Sc, Sc, Sc, Sc, SSc, SSc, SSc, SSc];
     fracNum = [T2, Tc, S2, Sc, SS, SSc, SS, SSc];
     fracDen = [Tc, Tc, Sc, Sc, SSc, SSc, SSc, SSc];
     cramp = [Dc, Dc, Tc, Tc, Sc, Sc, SSc, SSc];
-    text$1 = [D2, Dc, T2, Tc, T2, Tc, T2, Tc];
+    text$1 = [D, Dc, T2, Tc, T2, Tc, T2, Tc];
     Style$1 = {
-      DISPLAY: styles[D2],
+      DISPLAY: styles[D],
       TEXT: styles[T2],
       SCRIPT: styles[S2],
       SCRIPTSCRIPT: styles[SS]
@@ -16356,15 +16649,15 @@ var init_katex = __esm({
       var H2 = wideChar2.charCodeAt(0);
       var L2 = wideChar2.charCodeAt(1);
       var codePoint = (H2 - 55296) * 1024 + (L2 - 56320) + 65536;
-      var j2 = mode === "math" ? 0 : 1;
+      var j = mode === "math" ? 0 : 1;
       if (119808 <= codePoint && codePoint < 120484) {
         var i = Math.floor((codePoint - 119808) / 26);
-        return [wideLatinLetterData[i][2], wideLatinLetterData[i][j2]];
+        return [wideLatinLetterData[i][2], wideLatinLetterData[i][j]];
       } else if (120782 <= codePoint && codePoint <= 120831) {
         var _i = Math.floor((codePoint - 120782) / 10);
-        return [wideNumeralData[_i][2], wideNumeralData[_i][j2]];
+        return [wideNumeralData[_i][2], wideNumeralData[_i][j]];
       } else if (codePoint === 120485 || codePoint === 120486) {
-        return [wideLatinLetterData[0][2], wideLatinLetterData[0][j2]];
+        return [wideLatinLetterData[0][2], wideLatinLetterData[0][j]];
       } else if (120486 < codePoint && codePoint < 120782) {
         return ["", ""];
       } else {
@@ -19495,17 +19788,17 @@ var init_katex = __esm({
     htmlBuilder$6 = function htmlBuilder(group, options) {
       var r2;
       var c2;
-      var nr = group.body.length;
+      var nr2 = group.body.length;
       var hLinesBeforeRow = group.hLinesBeforeRow;
       var nc = 0;
-      var body = new Array(nr);
+      var body = new Array(nr2);
       var hlines = [];
       var ruleThickness = Math.max(
         options.fontMetrics().arrayRuleWidth,
         options.minRuleThickness
       );
-      var pt = 1 / options.fontMetrics().ptPerEm;
-      var arraycolsep = 5 * pt;
+      var pt2 = 1 / options.fontMetrics().ptPerEm;
+      var arraycolsep = 5 * pt2;
       if (group.colSeparationType && group.colSeparationType === "small") {
         var localMultiplier = options.havingStyle(Style$1.SCRIPT).sizeMultiplier;
         arraycolsep = 0.2778 * (localMultiplier / options.sizeMultiplier);
@@ -19513,8 +19806,8 @@ var init_katex = __esm({
       var baselineskip = group.colSeparationType === "CD" ? calculateSize({
         number: 3,
         unit: "ex"
-      }, options) : 12 * pt;
-      var jot = 3 * pt;
+      }, options) : 12 * pt2;
+      var jot = 3 * pt2;
       var arrayskip = group.arraystretch * baselineskip;
       var arstrutHeight = 0.7 * arrayskip;
       var arstrutDepth = 0.3 * arrayskip;
@@ -19579,7 +19872,7 @@ var init_katex = __esm({
       var colDescrNum;
       var tagSpans = [];
       if (group.tags && group.tags.some((tag2) => tag2)) {
-        for (r2 = 0; r2 < nr; ++r2) {
+        for (r2 = 0; r2 < nr2; ++r2) {
           var rw = body[r2];
           var shift = rw.pos - offset;
           var tag = group.tags[r2];
@@ -19641,7 +19934,7 @@ var init_katex = __esm({
           }
         }
         var col = [];
-        for (r2 = 0; r2 < nr; ++r2) {
+        for (r2 = 0; r2 < nr2; ++r2) {
           var row = body[r2];
           var elem = row[c2];
           if (!elem) {
@@ -19725,8 +20018,8 @@ var init_katex = __esm({
       for (var i = 0; i < group.body.length; i++) {
         var rw = group.body[i];
         var row = [];
-        for (var j2 = 0; j2 < rw.length; j2++) {
-          row.push(new mathMLTree.MathNode("mtd", [buildGroup2(rw[j2], options)]));
+        for (var j = 0; j < rw.length; j++) {
+          row.push(new mathMLTree.MathNode("mtd", [buildGroup2(rw[j], options)]));
         }
         if (group.tags && group.tags[i]) {
           row.unshift(glue);
@@ -24489,12 +24782,12 @@ var init_katex = __esm({
           this.gullet.macros.set("\\color", "\\textcolor");
         }
         try {
-          var parse2 = this.parseExpression(false);
+          var parse3 = this.parseExpression(false);
           this.expect("EOF");
           if (!this.settings.globalGroup) {
             this.gullet.endGroup();
           }
-          return parse2;
+          return parse3;
         } finally {
           this.gullet.endGroups();
         }
@@ -24504,10 +24797,10 @@ var init_katex = __esm({
         this.consume();
         this.gullet.pushToken(new Token("}"));
         this.gullet.pushTokens(tokens);
-        var parse2 = this.parseExpression(false);
+        var parse3 = this.parseExpression(false);
         this.expect("}");
         this.nextToken = oldToken;
-        return parse2;
+        return parse3;
       }
       parseExpression(breakOnInfix, breakOnTokenText) {
         var body = [];
@@ -25199,7 +25492,7 @@ var init_katex = __esm({
       }
     };
     katex = {
-      version: "0.16.2",
+      version: "0.16.3",
       render,
       renderToString,
       ParseError,
@@ -25233,14 +25526,13 @@ var init_page_svx = __esm({
     init_chunks();
     init_katex();
     init_store();
-    init_index2();
     Katexer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 
 
 
 
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-ztscxf">`, ""}`;
+${$$result.head += `<!-- HEAD_svelte-ztscxf_START --><link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}"><!-- HEAD_svelte-ztscxf_END -->`, ""}`;
     });
     numMax = 1e3;
     Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -25262,8 +25554,8 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 <h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
-${each(Array(num), (_2, j2) => {
-        return `<div>${escape(j2 + 1)}</div>
+${each(Array(num), (_2, j) => {
+        return `<div>${escape(j + 1)}</div>
     ${each(equations, (eqn) => {
           return `<p class="${"p-1 text-indigo-700"}" d${add_attribute("k", eqn, 0)}></p>`;
         })}`;
@@ -25286,8 +25578,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file7 = "_app/immutable/components/pages/katex/_page.svx-67f65511.js";
-    imports7 = ["_app/immutable/components/pages/katex/_page.svx-67f65511.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js"];
+    file7 = "_app/immutable/components/pages/katex/_page.svx-be3d6aed.js";
+    imports7 = ["_app/immutable/components/pages/katex/_page.svx-be3d6aed.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js"];
     stylesheets7 = [];
   }
 });
@@ -25321,8 +25613,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/login/_page.svelte-53d51fc7.js";
-    imports8 = ["_app/immutable/components/pages/login/_page.svelte-53d51fc7.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    file8 = "_app/immutable/components/pages/login/_page.svelte-7c09cc17.js";
+    imports8 = ["_app/immutable/components/pages/login/_page.svelte-7c09cc17.js", "_app/immutable/chunks/index-30e2a2cf.js"];
     stylesheets8 = [];
   }
 });
@@ -25336,7 +25628,7 @@ var init_Kajax = __esm({
     Kajax = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 
-${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}" data-svelte="svelte-15ncbow"><script data-svelte="svelte-15ncbow">MathJax = {
+${$$result.head += `<!-- HEAD_svelte-15ncbow_START --><link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}"><script>MathJax = {
       // startup: { typeset: false },
       // startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
@@ -25353,7 +25645,7 @@ ${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.ne
         fontCache: "global",
       },
     };
-  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}" data-svelte="svelte-15ncbow"><\/script>`, ""}`;
+  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}"><\/script><!-- HEAD_svelte-15ncbow_END -->`, ""}`;
     });
   }
 });
@@ -25370,7 +25662,6 @@ var init_page_svx2 = __esm({
     init_katex();
     init_store();
     init_Kajax();
-    init_index2();
     Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let katexString;
       let { d: d2 = false } = $$props;
@@ -25381,7 +25672,7 @@ var init_page_svx2 = __esm({
       if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
         $$bindings.m(m2);
       katexString = katex.renderToString(m2, options);
-      return `${$$result.head += `<link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}" data-svelte="svelte-bnfb8z">`, ""}
+      return `${$$result.head += `<!-- HEAD_svelte-bnfb8z_START --><link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}"><!-- HEAD_svelte-bnfb8z_END -->`, ""}
 
 <!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->`;
     });
@@ -25451,16 +25742,16 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <div class="${"p-4"}"><input type="${"number"}" min="${"1"}"${add_attribute("value", numMD, 0)}>
     <input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
 <h1>${escape(numMD)} lines of markdown immediately below</h1>
-${each(Array(numMD), (_2, j2) => {
-        return `<p>${escape(j2 + 1)}</p>
+${each(Array(numMD), (_2, j) => {
+        return `<p>${escape(j + 1)}</p>
 <div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>`;
       })}
 
 <ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num, 0)}>
-${each(Array(num), (_2, j2) => {
-        return `<p>${escape(j2 + 1)}</p>
+${each(Array(num), (_2, j) => {
+        return `<p>${escape(j + 1)}</p>
         <p class="${"p-1 text-indigo-700"}" d${add_attribute("m", "\\cancelto{0}{\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}}", 0)}></p>
         <p class="${"p-1 text-green-700"}" d${add_attribute("k", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
     ${each(equations, (eqn, k2) => {
@@ -25489,8 +25780,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file9 = "_app/immutable/components/pages/math/_page.svx-2df8c0b5.js";
-    imports9 = ["_app/immutable/components/pages/math/_page.svx-2df8c0b5.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/chunks/Kajax-1ac094bf.js"];
+    file9 = "_app/immutable/components/pages/math/_page.svx-c7e144d6.js";
+    imports9 = ["_app/immutable/components/pages/math/_page.svx-c7e144d6.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/Kajax-3268fc75.js"];
     stylesheets9 = [];
   }
 });
@@ -25505,9 +25796,8 @@ var init_page_svx3 = __esm({
   ".svelte-kit/output/server/entries/pages/mathjax/_page.svx.js"() {
     init_chunks();
     init_store();
-    init_index2();
     MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${$$result.head += `<script data-svelte="svelte-1fd20gn">MathJax = {
+      return `${$$result.head += `<!-- HEAD_svelte-1fd20gn_START --><script>MathJax = {
       // startup: { typeset: false },
       // startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
@@ -25524,7 +25814,7 @@ var init_page_svx3 = __esm({
         fontCache: "global",
       },
     };
-  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}" data-svelte="svelte-1fd20gn"><\/script>`, ""}`;
+  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}"><\/script><!-- HEAD_svelte-1fd20gn_END -->`, ""}`;
     });
     numMax3 = 1e3;
     Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -25546,8 +25836,8 @@ var init_page_svx3 = __esm({
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
 <h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
-${each(Array(num), (_2, j2) => {
-        return `<div>${escape(j2 + 1)}</div>
+${each(Array(num), (_2, j) => {
+        return `<div>${escape(j + 1)}</div>
     ${each(equations, (eqn) => {
           return `<p class="${"p-1 text-red-400"}" d${add_attribute("m", eqn, 0)}></p>`;
         })}`;
@@ -25570,8 +25860,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file10 = "_app/immutable/components/pages/mathjax/_page.svx-ca535c2f.js";
-    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-ca535c2f.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js"];
+    file10 = "_app/immutable/components/pages/mathjax/_page.svx-d32a0517.js";
+    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-d32a0517.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js"];
     stylesheets10 = [];
   }
 });
@@ -25587,8 +25877,6 @@ var init_page_svelte6 = __esm({
     init_chunks();
     init_Kajax();
     init_store();
-    init_katex();
-    init_index2();
     css5 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
@@ -25691,9 +25979,9 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file11 = "_app/immutable/components/pages/physics/_page.svelte-509e7ec8.js";
-    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-509e7ec8.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/Kajax-1ac094bf.js", "_app/immutable/chunks/katex-15be85e5.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js"];
-    stylesheets11 = ["_app/immutable/assets/+page-fcf51fa8.css"];
+    file11 = "_app/immutable/components/pages/physics/_page.svelte-2cff0875.js";
+    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-2cff0875.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Kajax-3268fc75.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js"];
+    stylesheets11 = ["_app/immutable/assets/_page-fcf51fa8.css"];
   }
 });
 
@@ -25716,7 +26004,6 @@ var init_page_svelte7 = __esm({
     init_store();
     init_PlansCard();
     init_plansCardArray();
-    init_index2();
     css6 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
@@ -25775,9 +26062,9 @@ var init__12 = __esm({
     init_page();
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/plans/_page.svelte-6fdb91b8.js";
-    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-6fdb91b8.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/PlansCard-01073d22.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/index-0fa359d1.js", "_app/immutable/modules/pages/plans/_page.js-a59d233a.js"];
-    stylesheets12 = ["_app/immutable/assets/+page-097b9a4a.css", "_app/immutable/assets/PlansCard-fec9ec2d.css"];
+    file12 = "_app/immutable/components/pages/plans/_page.svelte-f638fb78.js";
+    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-f638fb78.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/PlansCard-d6d7ce83.js", "_app/immutable/chunks/plansCardArray-e12ddae7.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/modules/pages/plans/_page.js-a59d233a.js"];
+    stylesheets12 = ["_app/immutable/assets/_page-097b9a4a.css", "_app/immutable/assets/PlansCard-fec9ec2d.css"];
   }
 });
 
@@ -25814,8 +26101,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file13 = "_app/immutable/components/pages/samplequiz/_page.md-1ab69c50.js";
-    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-1ab69c50.js", "_app/immutable/chunks/index-1063d0c6.js"];
+    file13 = "_app/immutable/components/pages/samplequiz/_page.md-e5707912.js";
+    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-e5707912.js", "_app/immutable/chunks/index-30e2a2cf.js"];
     stylesheets13 = [];
   }
 });
@@ -25831,7 +26118,6 @@ var init_page_svelte8 = __esm({
     init_chunks();
     init_plansCardArray();
     init_store();
-    init_index2();
     css7 = {
       code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
@@ -25920,9 +26206,9 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-443adab1.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-443adab1.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/plansCardArray-15db4566.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/index-0fa359d1.js"];
-    stylesheets14 = ["_app/immutable/assets/+page-fec9ec2d.css"];
+    file14 = "_app/immutable/components/pages/schools/_page.svelte-36123961.js";
+    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-36123961.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/plansCardArray-e12ddae7.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js"];
+    stylesheets14 = ["_app/immutable/assets/_page-fec9ec2d.css"];
   }
 });
 
@@ -25936,12 +26222,11 @@ var init_page_svelte9 = __esm({
   ".svelte-kit/output/server/entries/pages/screenshare/_page.svelte.js"() {
     init_chunks();
     init_store();
-    init_index2();
     JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $lessThan768, $$unsubscribe_lessThan768;
       $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
       $$unsubscribe_lessThan768();
-      return `${$$result.head += `<script src="${"https://meet.jit.si/external_api.js"}" data-svelte="svelte-1pkind7"><\/script>`, ""}
+      return `${$$result.head += `<!-- HEAD_svelte-1pkind7_START --><script src="${"https://meet.jit.si/external_api.js"}"><\/script><!-- HEAD_svelte-1pkind7_END -->`, ""}
 
 <div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px] peer"}"></div>
 
@@ -25981,8 +26266,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-c5cfdce5.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-c5cfdce5.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-310de707.js", "_app/immutable/chunks/singletons-ba8d1508.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-6f2ac415.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-6f2ac415.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-895ef89e.js", "_app/immutable/chunks/singletons-fa07e895.js"];
     stylesheets15 = [];
   }
 });
@@ -25997,12 +26282,11 @@ var init_page_svelte10 = __esm({
   ".svelte-kit/output/server/entries/pages/screenshareA/_page.svelte.js"() {
     init_chunks();
     init_store();
-    init_index2();
     JitsiUserAdmin = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $lessThan768, $$unsubscribe_lessThan768;
       $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
       $$unsubscribe_lessThan768();
-      return `${$$result.head += `<script src="${"https://meet.jit.si/external_api.js"}" data-svelte="svelte-1pkind7"><\/script>`, ""}
+      return `${$$result.head += `<!-- HEAD_svelte-1pkind7_START --><script src="${"https://meet.jit.si/external_api.js"}"><\/script><!-- HEAD_svelte-1pkind7_END -->`, ""}
 
 <div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px]"}"></div>
   <img alt="${"hangup button"}" class="${"bg-gray-600 p-2 absolute brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0 hover:bg-red-500"}">
@@ -26033,8 +26317,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-0a36387e.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-0a36387e.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/store-f5c4eb31.js", "_app/immutable/chunks/index-6dbc7447.js", "_app/immutable/chunks/navigation-310de707.js", "_app/immutable/chunks/singletons-ba8d1508.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-46d8ec61.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-46d8ec61.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-aa13e3e2.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-895ef89e.js", "_app/immutable/chunks/singletons-fa07e895.js"];
     stylesheets16 = [];
   }
 });
@@ -26049,17 +26333,13 @@ var init_page_svelte11 = __esm({
   ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
     init_chunks();
     init_firebase();
-    init_index_esm2();
-    init_index_esm3();
-    init_index_esm4();
-    init_index_esm5();
     css8 = {
-      code: '.loading.svelte-x181g1:after{content:" . . .";-webkit-animation:svelte-x181g1-dots 1s steps(5, end) infinite;animation:svelte-x181g1-dots 1s steps(5, end) infinite}@-webkit-keyframes svelte-x181g1-dots{0%,40%{color:rgba(0, 0, 0, 0)}}@keyframes svelte-x181g1-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
+      code: '.loading.svelte-tci3t6:after{content:" . . .";animation:svelte-tci3t6-dots 1s steps(5, end) infinite}@keyframes svelte-tci3t6-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
       map: null
     };
     Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $$result.css.add(css8);
-      return `${$$result.head += `${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}" data-svelte="svelte-qn95fl"><\/script>`, ""}
+      return `${$$result.head += `<!-- HEAD_svelte-qn95fl_START -->${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}"><\/script><!-- HEAD_svelte-qn95fl_END -->`, ""}
 
 <main>${``}
 </main>`;
@@ -26081,19 +26361,16 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-4e15fe99.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-4e15fe99.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/firebase-ae78a3e0.js", "_app/immutable/chunks/private-53926b58.js", "_app/immutable/chunks/index-0fa359d1.js"];
-    stylesheets17 = ["_app/immutable/assets/+page-8ee437b0.css"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-4ac22e6a.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-4ac22e6a.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/firebase-743cf15e.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-36fbeedd.js"];
+    stylesheets17 = ["_app/immutable/assets/_page-5c304dd7.css"];
   }
 });
 
 // .svelte-kit/output/server/index.js
 init_chunks();
 
-// node_modules/devalue/dist/devalue.esm.js
-var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$";
-var unsafeChars = /[<>\b\f\n\r\t\0\u2028\u2029]/g;
-var reserved = /^(?:do|if|in|for|int|let|new|try|var|byte|case|char|else|enum|goto|long|this|void|with|await|break|catch|class|const|final|float|short|super|throw|while|yield|delete|double|export|import|native|return|switch|throws|typeof|boolean|default|extends|finally|package|private|abstract|continue|debugger|function|volatile|interface|protected|transient|implements|instanceof|synchronized)$/;
+// node_modules/devalue/src/utils.js
 var escaped = {
   "<": "\\u003C",
   ">": "\\u003E",
@@ -26104,207 +26381,43 @@ var escaped = {
   "\n": "\\n",
   "\r": "\\r",
   "	": "\\t",
-  "\0": "\\0",
+  "\0": "\\u0000",
   "\u2028": "\\u2028",
   "\u2029": "\\u2029"
 };
-var objectProtoOwnPropertyNames = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
-function devalue(value) {
-  var counts = /* @__PURE__ */ new Map();
-  function walk(thing) {
-    if (typeof thing === "function") {
-      throw new Error("Cannot stringify a function");
-    }
-    if (counts.has(thing)) {
-      counts.set(thing, counts.get(thing) + 1);
-      return;
-    }
-    counts.set(thing, 1);
-    if (!isPrimitive(thing)) {
-      var type = getType(thing);
-      switch (type) {
-        case "Number":
-        case "String":
-        case "Boolean":
-        case "Date":
-        case "RegExp":
-          return;
-        case "Array":
-          thing.forEach(walk);
-          break;
-        case "Set":
-        case "Map":
-          Array.from(thing).forEach(walk);
-          break;
-        default:
-          var proto = Object.getPrototypeOf(thing);
-          if (proto !== Object.prototype && proto !== null && Object.getOwnPropertyNames(proto).sort().join("\0") !== objectProtoOwnPropertyNames) {
-            throw new Error("Cannot stringify arbitrary non-POJOs");
-          }
-          if (Object.getOwnPropertySymbols(thing).length > 0) {
-            throw new Error("Cannot stringify POJOs with symbolic keys");
-          }
-          Object.keys(thing).forEach(function(key2) {
-            return walk(thing[key2]);
-          });
-      }
-    }
+var DevalueError = class extends Error {
+  constructor(message, keys) {
+    super(message);
+    this.name = "DevalueError";
+    this.path = keys.join("");
   }
-  walk(value);
-  var names = /* @__PURE__ */ new Map();
-  Array.from(counts).filter(function(entry) {
-    return entry[1] > 1;
-  }).sort(function(a2, b2) {
-    return b2[1] - a2[1];
-  }).forEach(function(entry, i) {
-    names.set(entry[0], getName(i));
-  });
-  function stringify(thing) {
-    if (names.has(thing)) {
-      return names.get(thing);
-    }
-    if (isPrimitive(thing)) {
-      return stringifyPrimitive(thing);
-    }
-    var type = getType(thing);
-    switch (type) {
-      case "Number":
-      case "String":
-      case "Boolean":
-        return "Object(" + stringify(thing.valueOf()) + ")";
-      case "RegExp":
-        return "new RegExp(" + stringifyString(thing.source) + ', "' + thing.flags + '")';
-      case "Date":
-        return "new Date(" + thing.getTime() + ")";
-      case "Array":
-        var members = thing.map(function(v2, i) {
-          return i in thing ? stringify(v2) : "";
-        });
-        var tail = thing.length === 0 || thing.length - 1 in thing ? "" : ",";
-        return "[" + members.join(",") + tail + "]";
-      case "Set":
-      case "Map":
-        return "new " + type + "([" + Array.from(thing).map(stringify).join(",") + "])";
-      default:
-        var obj = "{" + Object.keys(thing).map(function(key2) {
-          return safeKey(key2) + ":" + stringify(thing[key2]);
-        }).join(",") + "}";
-        var proto = Object.getPrototypeOf(thing);
-        if (proto === null) {
-          return Object.keys(thing).length > 0 ? "Object.assign(Object.create(null)," + obj + ")" : "Object.create(null)";
-        }
-        return obj;
-    }
-  }
-  var str = stringify(value);
-  if (names.size) {
-    var params_1 = [];
-    var statements_1 = [];
-    var values_1 = [];
-    names.forEach(function(name5, thing) {
-      params_1.push(name5);
-      if (isPrimitive(thing)) {
-        values_1.push(stringifyPrimitive(thing));
-        return;
-      }
-      var type = getType(thing);
-      switch (type) {
-        case "Number":
-        case "String":
-        case "Boolean":
-          values_1.push("Object(" + stringify(thing.valueOf()) + ")");
-          break;
-        case "RegExp":
-          values_1.push(thing.toString());
-          break;
-        case "Date":
-          values_1.push("new Date(" + thing.getTime() + ")");
-          break;
-        case "Array":
-          values_1.push("Array(" + thing.length + ")");
-          thing.forEach(function(v2, i) {
-            statements_1.push(name5 + "[" + i + "]=" + stringify(v2));
-          });
-          break;
-        case "Set":
-          values_1.push("new Set");
-          statements_1.push(name5 + "." + Array.from(thing).map(function(v2) {
-            return "add(" + stringify(v2) + ")";
-          }).join("."));
-          break;
-        case "Map":
-          values_1.push("new Map");
-          statements_1.push(name5 + "." + Array.from(thing).map(function(_a) {
-            var k2 = _a[0], v2 = _a[1];
-            return "set(" + stringify(k2) + ", " + stringify(v2) + ")";
-          }).join("."));
-          break;
-        default:
-          values_1.push(Object.getPrototypeOf(thing) === null ? "Object.create(null)" : "{}");
-          Object.keys(thing).forEach(function(key2) {
-            statements_1.push("" + name5 + safeProp(key2) + "=" + stringify(thing[key2]));
-          });
-      }
-    });
-    statements_1.push("return " + str);
-    return "(function(" + params_1.join(",") + "){" + statements_1.join(";") + "}(" + values_1.join(",") + "))";
-  } else {
-    return str;
-  }
-}
-function getName(num) {
-  var name5 = "";
-  do {
-    name5 = chars[num % chars.length] + name5;
-    num = ~~(num / chars.length) - 1;
-  } while (num >= 0);
-  return reserved.test(name5) ? name5 + "_" : name5;
-}
-function isPrimitive(thing) {
+};
+function is_primitive(thing) {
   return Object(thing) !== thing;
 }
-function stringifyPrimitive(thing) {
-  if (typeof thing === "string")
-    return stringifyString(thing);
-  if (thing === void 0)
-    return "void 0";
-  if (thing === 0 && 1 / thing < 0)
-    return "-0";
-  var str = String(thing);
-  if (typeof thing === "number")
-    return str.replace(/^(-)?0\./, "$1.");
-  return str;
+var object_proto_names = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
+function is_plain_object(thing) {
+  const proto = Object.getPrototypeOf(thing);
+  return proto === Object.prototype || proto === null || Object.getOwnPropertyNames(proto).sort().join("\0") === object_proto_names;
 }
-function getType(thing) {
+function get_type(thing) {
   return Object.prototype.toString.call(thing).slice(8, -1);
 }
-function escapeUnsafeChar(c2) {
-  return escaped[c2] || c2;
-}
-function escapeUnsafeChars(str) {
-  return str.replace(unsafeChars, escapeUnsafeChar);
-}
-function safeKey(key2) {
-  return /^[_$a-zA-Z][_$a-zA-Z0-9]*$/.test(key2) ? key2 : escapeUnsafeChars(JSON.stringify(key2));
-}
-function safeProp(key2) {
-  return /^[_$a-zA-Z][_$a-zA-Z0-9]*$/.test(key2) ? "." + key2 : "[" + escapeUnsafeChars(JSON.stringify(key2)) + "]";
-}
-function stringifyString(str) {
-  var result = '"';
-  for (var i = 0; i < str.length; i += 1) {
-    var char = str.charAt(i);
-    var code = char.charCodeAt(0);
+function stringify_string(str) {
+  let result = '"';
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str.charAt(i);
+    const code = char.charCodeAt(0);
     if (char === '"') {
       result += '\\"';
     } else if (char in escaped) {
       result += escaped[char];
     } else if (code >= 55296 && code <= 57343) {
-      var next = str.charCodeAt(i + 1);
-      if (code <= 56319 && (next >= 56320 && next <= 57343)) {
+      const next = str.charCodeAt(i + 1);
+      if (code <= 56319 && next >= 56320 && next <= 57343) {
         result += char + str[++i];
       } else {
-        result += "\\u" + code.toString(16).toUpperCase();
+        result += `\\u${code.toString(16).toUpperCase()}`;
       }
     } else {
       result += char;
@@ -26313,11 +26426,358 @@ function stringifyString(str) {
   result += '"';
   return result;
 }
-var devalue_esm_default = devalue;
+
+// node_modules/devalue/src/uneval.js
+var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$";
+var unsafe_chars = /[<>\b\f\n\r\t\0\u2028\u2029]/g;
+var reserved = /^(?:do|if|in|for|int|let|new|try|var|byte|case|char|else|enum|goto|long|this|void|with|await|break|catch|class|const|final|float|short|super|throw|while|yield|delete|double|export|import|native|return|switch|throws|typeof|boolean|default|extends|finally|package|private|abstract|continue|debugger|function|volatile|interface|protected|transient|implements|instanceof|synchronized)$/;
+var object_proto_names2 = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
+function uneval(value) {
+  const counts = /* @__PURE__ */ new Map();
+  const keys = [];
+  function walk(thing) {
+    if (typeof thing === "function") {
+      throw new DevalueError(`Cannot stringify a function`, keys);
+    }
+    if (counts.has(thing)) {
+      counts.set(thing, counts.get(thing) + 1);
+      return;
+    }
+    counts.set(thing, 1);
+    if (!is_primitive(thing)) {
+      const type = get_type(thing);
+      switch (type) {
+        case "Number":
+        case "BigInt":
+        case "String":
+        case "Boolean":
+        case "Date":
+        case "RegExp":
+          return;
+        case "Array":
+          thing.forEach((value2, i) => {
+            keys.push(`[${i}]`);
+            walk(value2);
+            keys.pop();
+          });
+          break;
+        case "Set":
+          Array.from(thing).forEach(walk);
+          break;
+        case "Map":
+          for (const [key2, value2] of thing) {
+            keys.push(
+              `.get(${is_primitive(key2) ? stringify_primitive(key2) : "..."})`
+            );
+            walk(value2);
+            keys.pop();
+          }
+          break;
+        default:
+          const proto = Object.getPrototypeOf(thing);
+          if (proto !== Object.prototype && proto !== null && Object.getOwnPropertyNames(proto).sort().join("\0") !== object_proto_names2) {
+            throw new DevalueError(
+              `Cannot stringify arbitrary non-POJOs`,
+              keys
+            );
+          }
+          if (Object.getOwnPropertySymbols(thing).length > 0) {
+            throw new DevalueError(
+              `Cannot stringify POJOs with symbolic keys`,
+              keys
+            );
+          }
+          for (const key2 in thing) {
+            keys.push(`.${key2}`);
+            walk(thing[key2]);
+            keys.pop();
+          }
+      }
+    }
+  }
+  walk(value);
+  const names = /* @__PURE__ */ new Map();
+  Array.from(counts).filter((entry) => entry[1] > 1).sort((a2, b2) => b2[1] - a2[1]).forEach((entry, i) => {
+    names.set(entry[0], get_name(i));
+  });
+  function stringify2(thing) {
+    if (names.has(thing)) {
+      return names.get(thing);
+    }
+    if (is_primitive(thing)) {
+      return stringify_primitive(thing);
+    }
+    const type = get_type(thing);
+    switch (type) {
+      case "Number":
+      case "String":
+      case "Boolean":
+        return `Object(${stringify2(thing.valueOf())})`;
+      case "RegExp":
+        return `new RegExp(${stringify_string(thing.source)}, "${thing.flags}")`;
+      case "Date":
+        return `new Date(${thing.getTime()})`;
+      case "Array":
+        const members = thing.map(
+          (v2, i) => i in thing ? stringify2(v2) : ""
+        );
+        const tail = thing.length === 0 || thing.length - 1 in thing ? "" : ",";
+        return `[${members.join(",")}${tail}]`;
+      case "Set":
+      case "Map":
+        return `new ${type}([${Array.from(thing).map(stringify2).join(",")}])`;
+      default:
+        const obj = `{${Object.keys(thing).map((key2) => `${safe_key(key2)}:${stringify2(thing[key2])}`).join(",")}}`;
+        const proto = Object.getPrototypeOf(thing);
+        if (proto === null) {
+          return Object.keys(thing).length > 0 ? `Object.assign(Object.create(null),${obj})` : `Object.create(null)`;
+        }
+        return obj;
+    }
+  }
+  const str = stringify2(value);
+  if (names.size) {
+    const params = [];
+    const statements = [];
+    const values = [];
+    names.forEach((name5, thing) => {
+      params.push(name5);
+      if (is_primitive(thing)) {
+        values.push(stringify_primitive(thing));
+        return;
+      }
+      const type = get_type(thing);
+      switch (type) {
+        case "Number":
+        case "String":
+        case "Boolean":
+          values.push(`Object(${stringify2(thing.valueOf())})`);
+          break;
+        case "RegExp":
+          values.push(thing.toString());
+          break;
+        case "Date":
+          values.push(`new Date(${thing.getTime()})`);
+          break;
+        case "Array":
+          values.push(`Array(${thing.length})`);
+          thing.forEach((v2, i) => {
+            statements.push(`${name5}[${i}]=${stringify2(v2)}`);
+          });
+          break;
+        case "Set":
+          values.push(`new Set`);
+          statements.push(
+            `${name5}.${Array.from(thing).map((v2) => `add(${stringify2(v2)})`).join(".")}`
+          );
+          break;
+        case "Map":
+          values.push(`new Map`);
+          statements.push(
+            `${name5}.${Array.from(thing).map(([k2, v2]) => `set(${stringify2(k2)}, ${stringify2(v2)})`).join(".")}`
+          );
+          break;
+        default:
+          values.push(
+            Object.getPrototypeOf(thing) === null ? "Object.create(null)" : "{}"
+          );
+          Object.keys(thing).forEach((key2) => {
+            statements.push(
+              `${name5}${safe_prop(key2)}=${stringify2(thing[key2])}`
+            );
+          });
+      }
+    });
+    statements.push(`return ${str}`);
+    return `(function(${params.join(",")}){${statements.join(
+      ";"
+    )}}(${values.join(",")}))`;
+  } else {
+    return str;
+  }
+}
+function get_name(num) {
+  let name5 = "";
+  do {
+    name5 = chars[num % chars.length] + name5;
+    num = ~~(num / chars.length) - 1;
+  } while (num >= 0);
+  return reserved.test(name5) ? `${name5}0` : name5;
+}
+function escape_unsafe_char(c2) {
+  return escaped[c2] || c2;
+}
+function escape_unsafe_chars(str) {
+  return str.replace(unsafe_chars, escape_unsafe_char);
+}
+function safe_key(key2) {
+  return /^[_$a-zA-Z][_$a-zA-Z0-9]*$/.test(key2) ? key2 : escape_unsafe_chars(JSON.stringify(key2));
+}
+function safe_prop(key2) {
+  return /^[_$a-zA-Z][_$a-zA-Z0-9]*$/.test(key2) ? `.${key2}` : `[${escape_unsafe_chars(JSON.stringify(key2))}]`;
+}
+function stringify_primitive(thing) {
+  if (typeof thing === "string")
+    return stringify_string(thing);
+  if (thing === void 0)
+    return "void 0";
+  if (thing === 0 && 1 / thing < 0)
+    return "-0";
+  const str = String(thing);
+  if (typeof thing === "number")
+    return str.replace(/^(-)?0\./, "$1.");
+  if (typeof thing === "bigint")
+    return thing + "n";
+  return str;
+}
+
+// node_modules/devalue/src/constants.js
+var UNDEFINED = -1;
+var HOLE = -2;
+var NAN = -3;
+var POSITIVE_INFINITY = -4;
+var NEGATIVE_INFINITY = -5;
+var NEGATIVE_ZERO = -6;
+
+// node_modules/devalue/src/stringify.js
+function stringify(value) {
+  const stringified = [];
+  const indexes = /* @__PURE__ */ new Map();
+  const keys = [];
+  let p = 0;
+  function flatten(thing) {
+    if (typeof thing === "function") {
+      throw new DevalueError(`Cannot stringify a function`, keys);
+    }
+    if (indexes.has(thing))
+      return indexes.get(thing);
+    if (thing === void 0)
+      return UNDEFINED;
+    if (Number.isNaN(thing))
+      return NAN;
+    if (thing === Infinity)
+      return POSITIVE_INFINITY;
+    if (thing === -Infinity)
+      return NEGATIVE_INFINITY;
+    if (thing === 0 && 1 / thing < 0)
+      return NEGATIVE_ZERO;
+    const index19 = p++;
+    indexes.set(thing, index19);
+    let str = "";
+    if (is_primitive(thing)) {
+      str = stringify_primitive2(thing);
+    } else {
+      const type = get_type(thing);
+      switch (type) {
+        case "Number":
+        case "String":
+        case "Boolean":
+          str = `["Object",${stringify_primitive2(thing)}]`;
+          break;
+        case "BigInt":
+          str = `["BigInt",${thing}]`;
+          break;
+        case "Date":
+          str = `["Date","${thing.toISOString()}"]`;
+          break;
+        case "RegExp":
+          const { source, flags } = thing;
+          str = flags ? `["RegExp",${stringify_string(source)},"${flags}"]` : `["RegExp",${stringify_string(source)}]`;
+          break;
+        case "Array":
+          str = "[";
+          for (let i = 0; i < thing.length; i += 1) {
+            if (i > 0)
+              str += ",";
+            if (i in thing) {
+              keys.push(`[${i}]`);
+              str += flatten(thing[i]);
+              keys.pop();
+            } else {
+              str += HOLE;
+            }
+          }
+          str += "]";
+          break;
+        case "Set":
+          str = '["Set"';
+          for (const value2 of thing) {
+            str += `,${flatten(value2)}`;
+          }
+          str += "]";
+          break;
+        case "Map":
+          str = '["Map"';
+          for (const [key2, value2] of thing) {
+            keys.push(
+              `.get(${is_primitive(key2) ? stringify_primitive2(key2) : "..."})`
+            );
+            str += `,${flatten(key2)},${flatten(value2)}`;
+          }
+          str += "]";
+          break;
+        default:
+          if (!is_plain_object(thing)) {
+            throw new DevalueError(
+              `Cannot stringify arbitrary non-POJOs`,
+              keys
+            );
+          }
+          if (Object.getOwnPropertySymbols(thing).length > 0) {
+            throw new DevalueError(
+              `Cannot stringify POJOs with symbolic keys`,
+              keys
+            );
+          }
+          if (Object.getPrototypeOf(thing) === null) {
+            str = '["null"';
+            for (const key2 in thing) {
+              keys.push(`.${key2}`);
+              str += `,${stringify_string(key2)},${flatten(thing[key2])}`;
+              keys.pop();
+            }
+            str += "]";
+          } else {
+            str = "{";
+            let started = false;
+            for (const key2 in thing) {
+              if (started)
+                str += ",";
+              started = true;
+              keys.push(`.${key2}`);
+              str += `${stringify_string(key2)}:${flatten(thing[key2])}`;
+              keys.pop();
+            }
+            str += "}";
+          }
+      }
+    }
+    stringified[index19] = str;
+    return index19;
+  }
+  const index18 = flatten(value);
+  if (index18 < 0)
+    return `${index18}`;
+  return `[${stringified.join(",")}]`;
+}
+function stringify_primitive2(thing) {
+  const type = typeof thing;
+  if (type === "string")
+    return stringify_string(thing);
+  if (thing instanceof String)
+    return stringify_string(thing.toString());
+  if (thing === void 0)
+    return UNDEFINED.toString();
+  if (thing === 0 && 1 / thing < 0)
+    return NEGATIVE_ZERO.toString();
+  if (type === "bigint")
+    return `["BigInt","${thing}"]`;
+  return String(thing);
+}
 
 // .svelte-kit/output/server/index.js
 init_index2();
-var cookie = __toESM(require_cookie(), 1);
+var import_cookie = __toESM(require_cookie(), 1);
 var set_cookie_parser = __toESM(require_set_cookie(), 1);
 function afterUpdate() {
 }
@@ -26325,10 +26785,9 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { stores } = $$props;
   let { page: page2 } = $$props;
   let { components } = $$props;
+  let { form } = $$props;
   let { data_0 = null } = $$props;
   let { data_1 = null } = $$props;
-  let { data_2 = null } = $$props;
-  let { errors } = $$props;
   {
     setContext("__svelte__", stores);
   }
@@ -26339,14 +26798,12 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.page(page2);
   if ($$props.components === void 0 && $$bindings.components && components !== void 0)
     $$bindings.components(components);
+  if ($$props.form === void 0 && $$bindings.form && form !== void 0)
+    $$bindings.form(form);
   if ($$props.data_0 === void 0 && $$bindings.data_0 && data_0 !== void 0)
     $$bindings.data_0(data_0);
   if ($$props.data_1 === void 0 && $$bindings.data_1 && data_1 !== void 0)
     $$bindings.data_1(data_1);
-  if ($$props.data_2 === void 0 && $$bindings.data_2 && data_2 !== void 0)
-    $$bindings.data_2(data_2);
-  if ($$props.errors === void 0 && $$bindings.errors && errors !== void 0)
-    $$bindings.errors(errors);
   {
     stores.page.set(page2);
   }
@@ -26355,25 +26812,25 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 ${components[1] ? `${validate_component(components[0] || missing_component, "svelte:component").$$render($$result, { data: data_0 }, {}, {
     default: () => {
-      return `${components[2] ? `${validate_component(components[1] || missing_component, "svelte:component").$$render($$result, { data: data_1 }, {}, {
-        default: () => {
-          return `${validate_component(components[2] || missing_component, "svelte:component").$$render($$result, { data: data_2 }, {}, {})}`;
-        }
-      })}` : `${validate_component(components[1] || missing_component, "svelte:component").$$render($$result, { data: data_1, errors }, {}, {})}`}`;
+      return `${validate_component(components[1] || missing_component, "svelte:component").$$render($$result, { data: data_1, form }, {}, {})}`;
     }
-  })}` : `${validate_component(components[0] || missing_component, "svelte:component").$$render($$result, { data: data_0, errors }, {}, {})}`}
+  })}` : `${validate_component(components[0] || missing_component, "svelte:component").$$render($$result, { data: data_0, form }, {}, {})}`}
 
 ${``}`;
 });
 var HttpError = class {
-  constructor(status, message) {
-    __publicField(this, "name", "HttpError");
-    __publicField(this, "stack");
+  constructor(status, body) {
     this.status = status;
-    this.message = message ?? `Error: ${status}`;
+    if (typeof body === "string") {
+      this.body = { message: body };
+    } else if (body) {
+      this.body = body;
+    } else {
+      this.body = { message: `Error: ${status}` };
+    }
   }
   toString() {
-    return this.message;
+    return JSON.stringify(this.body);
   }
 };
 var Redirect = class {
@@ -26382,100 +26839,24 @@ var Redirect = class {
     this.location = location;
   }
 };
-function serialize_error(error2, get_stack) {
-  return JSON.stringify(error_to_pojo(error2, get_stack));
-}
-function error_to_pojo(error2, get_stack) {
-  if (error2 instanceof HttpError) {
-    return {
-      message: error2.message,
-      status: error2.status,
-      __is_http_error: true
-    };
+var ValidationError = class {
+  constructor(status, data) {
+    this.status = status;
+    this.data = data;
   }
-  const {
-    name: name5,
-    message,
-    stack,
-    cause,
-    ...custom
-  } = error2;
-  const object = { name: name5, message, stack: get_stack(error2) };
-  if (cause)
-    object.cause = error_to_pojo(cause, get_stack);
-  for (const key2 in custom) {
-    object[key2] = custom[key2];
-  }
-  return object;
-}
-function check_method_names(mod) {
-  ["get", "post", "put", "patch", "del"].forEach((m2) => {
-    if (m2 in mod) {
-      const replacement = m2 === "del" ? "DELETE" : m2.toUpperCase();
-      throw Error(
-        `Endpoint method "${m2}" has changed to "${replacement}". See https://github.com/sveltejs/kit/discussions/5359 for more information.`
-      );
-    }
-  });
-}
-var GENERIC_ERROR = {
-  id: "__error"
 };
-function method_not_allowed(mod, method) {
-  return new Response(`${method} method not allowed`, {
-    status: 405,
-    headers: {
-      allow: allowed_methods(mod).join(", ")
-    }
+function error(status, message) {
+  return new HttpError(status, message);
+}
+function json(data, init2) {
+  const headers = new Headers(init2 == null ? void 0 : init2.headers);
+  if (!headers.has("content-type")) {
+    headers.set("content-type", "application/json");
+  }
+  return new Response(JSON.stringify(data), {
+    ...init2,
+    headers
   });
-}
-function allowed_methods(mod) {
-  const allowed = [];
-  for (const method in ["GET", "POST", "PUT", "PATCH", "DELETE"]) {
-    if (method in mod)
-      allowed.push(method);
-  }
-  if (mod.GET || mod.HEAD)
-    allowed.push("HEAD");
-  return allowed;
-}
-async function render_endpoint(event, route) {
-  const method = event.request.method;
-  const mod = await route.load();
-  check_method_names(mod);
-  let handler = mod[method];
-  if (!handler && method === "HEAD") {
-    handler = mod.GET;
-  }
-  if (!handler) {
-    if (event.request.headers.get("x-sveltekit-load")) {
-      return new Response(void 0, { status: 204 });
-    }
-    return method_not_allowed(mod, method);
-  }
-  try {
-    const response = await handler(
-      event
-    );
-    if (!(response instanceof Response)) {
-      return new Response(
-        `Invalid response from route ${event.url.pathname}: handler should return a Response object`,
-        { status: 500 }
-      );
-    }
-    return response;
-  } catch (error2) {
-    if (error2 instanceof HttpError) {
-      return new Response(error2.message, { status: error2.status });
-    } else if (error2 instanceof Redirect) {
-      return new Response(void 0, {
-        status: error2.status,
-        headers: { Location: error2.location }
-      });
-    } else {
-      throw error2;
-    }
-  }
 }
 function negotiate(accept, types) {
   const parts = [];
@@ -26512,39 +26893,576 @@ function negotiate(accept, types) {
   }
   return accepted;
 }
+function is_content_type(request, ...types) {
+  var _a;
+  const type = ((_a = request.headers.get("content-type")) == null ? void 0 : _a.split(";", 1)[0].trim()) ?? "";
+  return types.includes(type);
+}
+function is_form_content_type(request) {
+  return is_content_type(request, "application/x-www-form-urlencoded", "multipart/form-data");
+}
+var DATA_SUFFIX = "/__data.json";
+function check_method_names(mod) {
+  ["get", "post", "put", "patch", "del"].forEach((m2) => {
+    if (m2 in mod) {
+      const replacement = m2 === "del" ? "DELETE" : m2.toUpperCase();
+      throw Error(
+        `Endpoint method "${m2}" has changed to "${replacement}". See https://github.com/sveltejs/kit/discussions/5359 for more information.`
+      );
+    }
+  });
+}
+var GENERIC_ERROR = {
+  id: "__error"
+};
+function method_not_allowed(mod, method) {
+  return new Response(`${method} method not allowed`, {
+    status: 405,
+    headers: {
+      allow: allowed_methods(mod).join(", ")
+    }
+  });
+}
+function allowed_methods(mod) {
+  const allowed = [];
+  for (const method in ["GET", "POST", "PUT", "PATCH", "DELETE"]) {
+    if (method in mod)
+      allowed.push(method);
+  }
+  if (mod.GET || mod.HEAD)
+    allowed.push("HEAD");
+  return allowed;
+}
+function data_response(data, event) {
+  const headers = {
+    "content-type": "application/json",
+    "cache-control": "private, no-store"
+  };
+  try {
+    return new Response(stringify(data), { headers });
+  } catch (e3) {
+    const error2 = e3;
+    const match = /\[(\d+)\]\.data\.(.+)/.exec(error2.path);
+    const message = match ? `Data returned from \`load\` while rendering ${event.routeId} is not serializable: ${error2.message} (data.${match[2]})` : error2.message;
+    return new Response(JSON.stringify(message), { headers, status: 500 });
+  }
+}
+function get_option(nodes, option) {
+  return nodes.reduce((value, node) => {
+    var _a, _b;
+    for (const thing of [node == null ? void 0 : node.server, node == null ? void 0 : node.shared]) {
+      if (thing && ("router" in thing || "hydrate" in thing)) {
+        throw new Error(
+          "`export const hydrate` and `export const router` have been replaced with `export const csr`. See https://github.com/sveltejs/kit/pull/6446"
+        );
+      }
+    }
+    return ((_a = node == null ? void 0 : node.shared) == null ? void 0 : _a[option]) ?? ((_b = node == null ? void 0 : node.server) == null ? void 0 : _b[option]) ?? value;
+  }, void 0);
+}
+function static_error_page(options, status, message) {
+  return new Response(options.error_template({ status, message }), {
+    headers: { "content-type": "text/html; charset=utf-8" },
+    status
+  });
+}
+function handle_fatal_error(event, options, error2) {
+  const status = error2 instanceof HttpError ? error2.status : 500;
+  const body = handle_error_and_jsonify(event, options, error2);
+  const type = negotiate(event.request.headers.get("accept") || "text/html", [
+    "application/json",
+    "text/html"
+  ]);
+  if (event.url.pathname.endsWith(DATA_SUFFIX) || type === "application/json") {
+    return new Response(JSON.stringify(body), {
+      status,
+      headers: { "content-type": "application/json; charset=utf-8" }
+    });
+  }
+  return static_error_page(options, status, body.message);
+}
+function handle_error_and_jsonify(event, options, error2) {
+  if (error2 instanceof HttpError) {
+    return error2.body;
+  } else {
+    return options.handle_error(error2, event);
+  }
+}
+function redirect_response(status, location) {
+  const response = new Response(void 0, {
+    status,
+    headers: { location }
+  });
+  return response;
+}
+async function render_endpoint(event, mod, state) {
+  const method = event.request.method;
+  check_method_names(mod);
+  let handler = mod[method];
+  if (!handler && method === "HEAD") {
+    handler = mod.GET;
+  }
+  if (!handler) {
+    return method_not_allowed(mod, method);
+  }
+  const prerender = mod.prerender ?? state.prerender_default;
+  if (prerender && (mod.POST || mod.PATCH || mod.PUT || mod.DELETE)) {
+    throw new Error("Cannot prerender endpoints that have mutative methods");
+  }
+  if (state.prerendering && !prerender) {
+    if (state.initiator) {
+      throw new Error(`${event.routeId} is not prerenderable`);
+    } else {
+      return new Response(void 0, { status: 204 });
+    }
+  }
+  try {
+    const response = await handler(
+      event
+    );
+    if (!(response instanceof Response)) {
+      throw new Error(
+        `Invalid response from route ${event.url.pathname}: handler should return a Response object`
+      );
+    }
+    if (state.prerendering) {
+      response.headers.set("x-sveltekit-prerender", String(prerender));
+    }
+    return response;
+  } catch (error2) {
+    if (error2 instanceof Redirect) {
+      return new Response(void 0, {
+        status: error2.status,
+        headers: { location: error2.location }
+      });
+    } else if (error2 instanceof ValidationError) {
+      return json(error2.data, { status: error2.status });
+    }
+    throw error2;
+  }
+}
+function is_endpoint_request(event) {
+  const { method, headers } = event.request;
+  if (method === "PUT" || method === "PATCH" || method === "DELETE") {
+    return true;
+  }
+  if (method === "POST" && headers.get("x-sveltekit-action") === "true")
+    return false;
+  const accept = event.request.headers.get("accept") ?? "*/*";
+  return negotiate(accept, ["*", "text/html"]) !== "text/html";
+}
+function compact(arr) {
+  return arr.filter((val) => val != null);
+}
+function coalesce_to_error(err) {
+  return err instanceof Error || err && err.name && err.message ? err : new Error(JSON.stringify(err));
+}
+function normalize_error(error2) {
+  return error2;
+}
+function is_action_json_request(event) {
+  const accept = negotiate(event.request.headers.get("accept") ?? "*/*", [
+    "application/json",
+    "text/html"
+  ]);
+  return accept === "application/json" && event.request.method === "POST";
+}
+async function handle_action_json_request(event, options, server2) {
+  const actions = server2.actions;
+  if (!actions) {
+    maybe_throw_migration_error(server2);
+    return new Response("POST method not allowed. No actions exist for this page", {
+      status: 405,
+      headers: {
+        allow: "GET"
+      }
+    });
+  }
+  check_named_default_separate(actions);
+  try {
+    const data = await call_action(event, actions);
+    if (data instanceof ValidationError) {
+      check_serializability(data.data, event.routeId, "data");
+      return action_json({ type: "invalid", status: data.status, data: data.data });
+    } else {
+      check_serializability(data, event.routeId, "data");
+      return action_json({
+        type: "success",
+        status: data ? 200 : 204,
+        data
+      });
+    }
+  } catch (e3) {
+    const error2 = normalize_error(e3);
+    if (error2 instanceof Redirect) {
+      return action_json({
+        type: "redirect",
+        status: error2.status,
+        location: error2.location
+      });
+    }
+    return action_json(
+      {
+        type: "error",
+        error: handle_error_and_jsonify(event, options, check_incorrect_invalid_use(error2))
+      },
+      {
+        status: error2 instanceof HttpError ? error2.status : 500
+      }
+    );
+  }
+}
+function check_incorrect_invalid_use(error2) {
+  return error2 instanceof ValidationError ? new Error(`Cannot "throw invalid()". Use "return invalid()"`) : error2;
+}
+function action_json(data, init2) {
+  return json(data, init2);
+}
+function is_action_request(event, leaf_node) {
+  return leaf_node.server && event.request.method !== "GET" && event.request.method !== "HEAD";
+}
+async function handle_action_request(event, server2) {
+  const actions = server2.actions;
+  if (!actions) {
+    maybe_throw_migration_error(server2);
+    event.setHeaders({
+      allow: "GET"
+    });
+    return {
+      type: "error",
+      error: error(405, "POST method not allowed. No actions exist for this page")
+    };
+  }
+  check_named_default_separate(actions);
+  try {
+    const data = await call_action(event, actions);
+    if (data instanceof ValidationError) {
+      return { type: "invalid", status: data.status, data: data.data };
+    } else {
+      return {
+        type: "success",
+        status: 200,
+        data
+      };
+    }
+  } catch (e3) {
+    const error2 = normalize_error(e3);
+    if (error2 instanceof Redirect) {
+      return {
+        type: "redirect",
+        status: error2.status,
+        location: error2.location
+      };
+    }
+    return {
+      type: "error",
+      error: check_incorrect_invalid_use(error2)
+    };
+  }
+}
+function check_named_default_separate(actions) {
+  if (actions.default && Object.keys(actions).length > 1) {
+    throw new Error(
+      `When using named actions, the default action cannot be used. See the docs for more info: https://kit.svelte.dev/docs/form-actions#named-actions`
+    );
+  }
+}
+async function call_action(event, actions) {
+  const url = new URL(event.request.url);
+  let name5 = "default";
+  for (const param of url.searchParams) {
+    if (param[0].startsWith("/")) {
+      name5 = param[0].slice(1);
+      if (name5 === "default") {
+        throw new Error('Cannot use reserved action name "default"');
+      }
+      break;
+    }
+  }
+  const action = actions[name5];
+  if (!action) {
+    throw new Error(`No action with name '${name5}' found`);
+  }
+  if (!is_form_content_type(event.request)) {
+    throw new Error(
+      `Actions expect form-encoded data (received ${event.request.headers.get("content-type")}`
+    );
+  }
+  return action(event);
+}
+function maybe_throw_migration_error(server2) {
+  for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
+    if (server2[method]) {
+      throw new Error(
+        `${method} method no longer allowed in +page.server, use actions instead. See the PR for more info: https://github.com/sveltejs/kit/pull/6469`
+      );
+    }
+  }
+}
+function check_serializability(value, id, path2) {
+  const type = typeof value;
+  if (type === "string" || type === "boolean" || type === "number" || type === "undefined") {
+    return;
+  }
+  if (type === "object") {
+    if (!value)
+      return;
+    if (Array.isArray(value)) {
+      value.forEach((child, i) => {
+        check_serializability(child, id, `${path2}[${i}]`);
+      });
+      return;
+    }
+    if (Object.getPrototypeOf(value) === Object.prototype) {
+      for (const key2 in value) {
+        check_serializability(value[key2], id, `${path2}.${key2}`);
+      }
+      return;
+    }
+  }
+  throw new Error(
+    `${path2} returned from action in ${id} cannot be serialized as JSON without losing its original type` + (value instanceof Date ? " (Date objects are serialized as strings)" : "")
+  );
+}
+function normalize_path(path2, trailing_slash) {
+  if (path2 === "/" || trailing_slash === "ignore")
+    return path2;
+  if (trailing_slash === "never") {
+    return path2.endsWith("/") ? path2.slice(0, -1) : path2;
+  } else if (trailing_slash === "always" && !path2.endsWith("/")) {
+    return path2 + "/";
+  }
+  return path2;
+}
+function decode_params(params) {
+  for (const key2 in params) {
+    params[key2] = params[key2].replace(/%23/g, "#").replace(/%3[Bb]/g, ";").replace(/%2[Cc]/g, ",").replace(/%2[Ff]/g, "/").replace(/%3[Ff]/g, "?").replace(/%3[Aa]/g, ":").replace(/%40/g, "@").replace(/%26/g, "&").replace(/%3[Dd]/g, "=").replace(/%2[Bb]/g, "+").replace(/%24/g, "$");
+  }
+  return params;
+}
+var tracked_url_properties = ["href", "pathname", "search", "searchParams", "toString", "toJSON"];
+function make_trackable(url, callback) {
+  const tracked = new URL(url);
+  for (const property of tracked_url_properties) {
+    let value = tracked[property];
+    Object.defineProperty(tracked, property, {
+      get() {
+        callback();
+        return value;
+      },
+      enumerable: true,
+      configurable: true
+    });
+  }
+  {
+    tracked[Symbol.for("nodejs.util.inspect.custom")] = (depth, opts, inspect) => {
+      return inspect(url, opts);
+    };
+  }
+  disable_hash(tracked);
+  return tracked;
+}
+function disable_hash(url) {
+  Object.defineProperty(url, "hash", {
+    get() {
+      throw new Error(
+        "Cannot access event.url.hash. Consider using `$page.url.hash` inside a component instead"
+      );
+    }
+  });
+}
+function disable_search(url) {
+  for (const property of ["search", "searchParams"]) {
+    Object.defineProperty(url, property, {
+      get() {
+        throw new Error(`Cannot access url.${property} on a page with prerendering enabled`);
+      }
+    });
+  }
+}
+async function unwrap_promises(object) {
+  var _a;
+  for (const key2 in object) {
+    if (typeof ((_a = object[key2]) == null ? void 0 : _a.then) === "function") {
+      return Object.fromEntries(
+        await Promise.all(Object.entries(object).map(async ([key3, value]) => [key3, await value]))
+      );
+    }
+  }
+  return object;
+}
+async function load_server_data({ event, state, node, parent }) {
+  var _a;
+  if (!(node == null ? void 0 : node.server))
+    return null;
+  const uses = {
+    dependencies: /* @__PURE__ */ new Set(),
+    params: /* @__PURE__ */ new Set(),
+    parent: false,
+    url: false
+  };
+  const url = make_trackable(event.url, () => {
+    uses.url = true;
+  });
+  if (state.prerendering) {
+    disable_search(url);
+  }
+  const result = await ((_a = node.server.load) == null ? void 0 : _a.call(null, {
+    ...event,
+    depends: (...deps) => {
+      for (const dep of deps) {
+        const { href } = new URL(dep, event.url);
+        uses.dependencies.add(href);
+      }
+    },
+    params: new Proxy(event.params, {
+      get: (target, key2) => {
+        uses.params.add(key2);
+        return target[key2];
+      }
+    }),
+    parent: async () => {
+      uses.parent = true;
+      return parent();
+    },
+    url
+  }));
+  const data = result ? await unwrap_promises(result) : null;
+  return {
+    type: "data",
+    data,
+    uses: {
+      dependencies: uses.dependencies.size > 0 ? Array.from(uses.dependencies) : void 0,
+      params: uses.params.size > 0 ? Array.from(uses.params) : void 0,
+      parent: uses.parent ? 1 : void 0,
+      url: uses.url ? 1 : void 0
+    }
+  };
+}
+async function load_data({
+  event,
+  fetched,
+  node,
+  parent,
+  server_data_promise,
+  state,
+  resolve_opts,
+  csr
+}) {
+  var _a;
+  const server_data_node = await server_data_promise;
+  if (!((_a = node == null ? void 0 : node.shared) == null ? void 0 : _a.load)) {
+    return (server_data_node == null ? void 0 : server_data_node.data) ?? null;
+  }
+  const load_event = {
+    url: event.url,
+    params: event.params,
+    data: (server_data_node == null ? void 0 : server_data_node.data) ?? null,
+    routeId: event.routeId,
+    fetch: async (input, init2) => {
+      const response = await event.fetch(input, init2);
+      const url = new URL(input instanceof Request ? input.url : input, event.url);
+      const same_origin = url.origin === event.url.origin;
+      let dependency;
+      if (same_origin && state.prerendering) {
+        dependency = { response, body: null };
+        state.prerendering.dependencies.set(url.pathname, dependency);
+      }
+      const proxy = new Proxy(response, {
+        get(response2, key2, _receiver) {
+          async function text2() {
+            const body = await response2.text();
+            if (!body || typeof body === "string") {
+              const status_number = Number(response2.status);
+              if (isNaN(status_number)) {
+                throw new Error(
+                  `response.status is not a number. value: "${response2.status}" type: ${typeof response2.status}`
+                );
+              }
+              fetched.push({
+                url: same_origin ? url.href.slice(event.url.origin.length) : url.href,
+                method: event.request.method,
+                request_body: init2 == null ? void 0 : init2.body,
+                response_body: body,
+                response: response2
+              });
+            }
+            if (dependency) {
+              dependency.body = body;
+            }
+            return body;
+          }
+          if (key2 === "arrayBuffer") {
+            return async () => {
+              const buffer = await response2.arrayBuffer();
+              if (dependency) {
+                dependency.body = new Uint8Array(buffer);
+              }
+              return buffer;
+            };
+          }
+          if (key2 === "text") {
+            return text2;
+          }
+          if (key2 === "json") {
+            return async () => {
+              return JSON.parse(await text2());
+            };
+          }
+          return Reflect.get(response2, key2, response2);
+        }
+      });
+      if (csr) {
+        const get = response.headers.get;
+        response.headers.get = (key2) => {
+          const lower = key2.toLowerCase();
+          const value = get.call(response.headers, lower);
+          if (value && !lower.startsWith("x-sveltekit-")) {
+            const included = resolve_opts.filterSerializedResponseHeaders(lower, value);
+            if (!included) {
+              throw new Error(
+                `Failed to get response header "${lower}" \u2014 it must be included by the \`filterSerializedResponseHeaders\` option: https://kit.svelte.dev/docs/hooks#server-hooks-handle (at ${event.routeId})`
+              );
+            }
+          }
+          return value;
+        };
+      }
+      return proxy;
+    },
+    setHeaders: event.setHeaders,
+    depends: () => {
+    },
+    parent
+  };
+  Object.defineProperties(load_event, {
+    session: {
+      get() {
+        throw new Error(
+          "session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
+        );
+      },
+      enumerable: false
+    }
+  });
+  const data = await node.shared.load.call(null, load_event);
+  return data ? unwrap_promises(data) : null;
+}
 function hash(value) {
   let hash2 = 5381;
-  let i = value.length;
   if (typeof value === "string") {
+    let i = value.length;
     while (i)
       hash2 = hash2 * 33 ^ value.charCodeAt(--i);
-  } else {
+  } else if (ArrayBuffer.isView(value)) {
+    const buffer = new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+    let i = buffer.length;
     while (i)
-      hash2 = hash2 * 33 ^ value[--i];
+      hash2 = hash2 * 33 ^ buffer[--i];
+  } else {
+    throw new TypeError("value must be a string or TypedArray");
   }
   return (hash2 >>> 0).toString(36);
-}
-var render_json_payload_script_dict = {
-  "<": "\\u003C",
-  "\u2028": "\\u2028",
-  "\u2029": "\\u2029"
-};
-var render_json_payload_script_regex = new RegExp(
-  `[${Object.keys(render_json_payload_script_dict).join("")}]`,
-  "g"
-);
-function render_json_payload_script(attrs, payload) {
-  const safe_payload = JSON.stringify(payload).replace(
-    render_json_payload_script_regex,
-    (match) => render_json_payload_script_dict[match]
-  );
-  let safe_attrs = "";
-  for (const [key2, value] of Object.entries(attrs)) {
-    if (value === void 0)
-      continue;
-    safe_attrs += ` sveltekit:data-${key2}=${escape_html_attr(value)}`;
-  }
-  return `<script type="application/json"${safe_attrs}>${safe_payload}<\/script>`;
 }
 var escape_html_attr_dict = {
   "&": "&amp;",
@@ -26563,6 +27481,49 @@ function escape_html_attr(str) {
   });
   return `"${escaped_str}"`;
 }
+var replacements = {
+  "<": "\\u003C",
+  "\u2028": "\\u2028",
+  "\u2029": "\\u2029"
+};
+var pattern = new RegExp(`[${Object.keys(replacements).join("")}]`, "g");
+function serialize_data(fetched, filter, prerendering = false) {
+  const headers = {};
+  let cache_control = null;
+  let age = null;
+  for (const [key2, value] of fetched.response.headers) {
+    if (filter(key2, value)) {
+      headers[key2] = value;
+    }
+    if (key2 === "cache-control")
+      cache_control = value;
+    if (key2 === "age")
+      age = value;
+  }
+  const payload = {
+    status: fetched.response.status,
+    statusText: fetched.response.statusText,
+    headers,
+    body: fetched.response_body
+  };
+  const safe_payload = JSON.stringify(payload).replace(pattern, (match) => replacements[match]);
+  const attrs = [
+    'type="application/json"',
+    "data-sveltekit-fetched",
+    `data-url=${escape_html_attr(fetched.url)}`
+  ];
+  if (fetched.request_body) {
+    attrs.push(`data-hash=${escape_html_attr(hash(fetched.request_body))}`);
+  }
+  if (!prerendering && fetched.method === "GET" && cache_control) {
+    const match = /s-maxage=(\d+)/g.exec(cache_control) ?? /max-age=(\d+)/g.exec(cache_control);
+    if (match) {
+      const ttl = +match[1] - +(age ?? "0");
+      attrs.push(`data-ttl="${ttl}"`);
+    }
+  }
+  return `<script ${attrs.join(" ")}>${safe_payload}<\/script>`;
+}
 var s = JSON.stringify;
 var encoder = new TextEncoder();
 function sha256(data) {
@@ -26571,7 +27532,7 @@ function sha256(data) {
   const out = init.slice(0);
   const array2 = encode(data);
   for (let i = 0; i < array2.length; i += 16) {
-    const w = array2.subarray(i, i + 16);
+    const w2 = array2.subarray(i, i + 16);
     let tmp;
     let a2;
     let b2;
@@ -26585,11 +27546,11 @@ function sha256(data) {
     let out7 = out[7];
     for (let i2 = 0; i2 < 64; i2++) {
       if (i2 < 16) {
-        tmp = w[i2];
+        tmp = w2[i2];
       } else {
-        a2 = w[i2 + 1 & 15];
-        b2 = w[i2 + 14 & 15];
-        tmp = w[i2 & 15] = (a2 >>> 7 ^ a2 >>> 18 ^ a2 >>> 3 ^ a2 << 25 ^ a2 << 14) + (b2 >>> 17 ^ b2 >>> 19 ^ b2 >>> 10 ^ b2 << 15 ^ b2 << 13) + w[i2 & 15] + w[i2 + 9 & 15] | 0;
+        a2 = w2[i2 + 1 & 15];
+        b2 = w2[i2 + 14 & 15];
+        tmp = w2[i2 & 15] = (a2 >>> 7 ^ a2 >>> 18 ^ a2 >>> 3 ^ a2 << 25 ^ a2 << 14) + (b2 >>> 17 ^ b2 >>> 19 ^ b2 >>> 10 ^ b2 << 15 ^ b2 << 13) + w2[i2 & 15] + w2[i2 + 9 & 15] | 0;
       }
       tmp = tmp + out7 + (out4 >>> 6 ^ out4 >>> 11 ^ out4 >>> 25 ^ out4 << 26 ^ out4 << 21 ^ out4 << 7) + (out6 ^ out4 & (out5 ^ out6)) + key[i2];
       out7 = out6;
@@ -26665,21 +27626,21 @@ function encode(str) {
 }
 var chars2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split("");
 function base64(bytes) {
-  const l2 = bytes.length;
+  const l = bytes.length;
   let result = "";
   let i;
-  for (i = 2; i < l2; i += 3) {
+  for (i = 2; i < l; i += 3) {
     result += chars2[bytes[i - 2] >> 2];
     result += chars2[(bytes[i - 2] & 3) << 4 | bytes[i - 1] >> 4];
     result += chars2[(bytes[i - 1] & 15) << 2 | bytes[i] >> 6];
     result += chars2[bytes[i] & 63];
   }
-  if (i === l2 + 1) {
+  if (i === l + 1) {
     result += chars2[bytes[i - 2] >> 2];
     result += chars2[(bytes[i - 2] & 3) << 4];
     result += "==";
   }
-  if (i === l2) {
+  if (i === l) {
     result += chars2[bytes[i - 2] >> 2];
     result += chars2[(bytes[i - 2] & 3) << 4 | bytes[i - 1] >> 4];
     result += chars2[(bytes[i - 1] & 15) << 2];
@@ -26699,7 +27660,8 @@ var quoted = /* @__PURE__ */ new Set([
   "unsafe-inline",
   "none",
   "strict-dynamic",
-  "report-sample"
+  "report-sample",
+  "wasm-unsafe-eval"
 ]);
 var crypto_pattern = /^(nonce|sha\d\d\d)-/;
 var _use_hashes, _script_needs_csp, _style_needs_csp, _directives, _script_src, _style_src, _nonce;
@@ -26838,65 +27800,6 @@ var Csp = class {
     this.report_only_provider.add_style(content);
   }
 };
-var absolute = /^([a-z]+:)?\/?\//;
-var scheme = /^[a-z]+:/;
-function resolve(base2, path2) {
-  if (scheme.test(path2))
-    return path2;
-  const base_match = absolute.exec(base2);
-  const path_match = absolute.exec(path2);
-  if (!base_match) {
-    throw new Error(`bad base path: "${base2}"`);
-  }
-  const baseparts = path_match ? [] : base2.slice(base_match[0].length).split("/");
-  const pathparts = path_match ? path2.slice(path_match[0].length).split("/") : path2.split("/");
-  baseparts.pop();
-  for (let i = 0; i < pathparts.length; i += 1) {
-    const part = pathparts[i];
-    if (part === ".")
-      continue;
-    else if (part === "..")
-      baseparts.pop();
-    else
-      baseparts.push(part);
-  }
-  const prefix2 = path_match && path_match[0] || base_match && base_match[0] || "";
-  return `${prefix2}${baseparts.join("/")}`;
-}
-function is_root_relative(path2) {
-  return path2[0] === "/" && path2[1] !== "/";
-}
-function normalize_path(path2, trailing_slash) {
-  if (path2 === "/" || trailing_slash === "ignore")
-    return path2;
-  if (trailing_slash === "never") {
-    return path2.endsWith("/") ? path2.slice(0, -1) : path2;
-  } else if (trailing_slash === "always" && !path2.endsWith("/")) {
-    return path2 + "/";
-  }
-  return path2;
-}
-function decode_params(params) {
-  for (const key2 in params) {
-    params[key2] = params[key2].replace(/%23/g, "#").replace(/%3[Bb]/g, ";").replace(/%2[Cc]/g, ",").replace(/%2[Ff]/g, "/").replace(/%3[Ff]/g, "?").replace(/%3[Aa]/g, ":").replace(/%40/g, "@").replace(/%26/g, "&").replace(/%3[Dd]/g, "=").replace(/%2[Bb]/g, "+").replace(/%24/g, "$");
-  }
-  return params;
-}
-var LoadURL = class extends URL {
-  get hash() {
-    throw new Error(
-      "url.hash is inaccessible from load. Consider accessing hash from the page store within the script tag of your component."
-    );
-  }
-};
-var PrerenderingURL = class extends URL {
-  get search() {
-    throw new Error("Cannot access url.search on a page with prerendering enabled");
-  }
-  get searchParams() {
-    throw new Error("Cannot access url.searchParams on a page with prerendering enabled");
-  }
-};
 var updated = {
   ...readable(false),
   check: () => false
@@ -26904,7 +27807,6 @@ var updated = {
 async function render_response({
   branch,
   fetched,
-  cookies,
   options,
   state,
   page_config,
@@ -26912,14 +27814,14 @@ async function render_response({
   error: error2 = null,
   event,
   resolve_opts,
-  validation_errors
+  action_result
 }) {
   var _a;
   if (state.prerendering) {
     if (options.csp.mode === "nonce") {
       throw new Error('Cannot use prerendering if config.kit.csp.mode === "nonce"');
     }
-    if (options.template_contains_nonce) {
+    if (options.app_template_contains_nonce) {
       throw new Error("Cannot use prerendering if page template contains %sveltekit.nonce%");
     }
   }
@@ -26929,18 +27831,16 @@ async function render_response({
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
   let rendered;
-  const stack = error2 instanceof HttpError ? void 0 : error2 == null ? void 0 : error2.stack;
-  if (error2 && options.dev && !(error2 instanceof HttpError)) {
-    error2.stack = options.get_stack(error2);
-  }
-  if (resolve_opts.ssr) {
+  const form_value = (action_result == null ? void 0 : action_result.type) === "success" || (action_result == null ? void 0 : action_result.type) === "invalid" ? action_result.data ?? null : null;
+  if (page_config.ssr) {
     const props = {
       stores: {
         page: writable(null),
         navigating: writable(null),
         updated
       },
-      components: await Promise.all(branch.map(({ node }) => node.component()))
+      components: await Promise.all(branch.map(({ node }) => node.component())),
+      form: form_value
     };
     let data = {};
     for (let i = 0; i < branch.length; i += 1) {
@@ -26952,12 +27852,10 @@ async function render_response({
       params: event.params,
       routeId: event.routeId,
       status,
-      url: state.prerendering ? new PrerenderingURL(event.url) : event.url,
-      data
+      url: event.url,
+      data,
+      form: form_value
     };
-    if (validation_errors) {
-      props.errors = validation_errors;
-    }
     const print_error = (property, replacement) => {
       Object.defineProperty(props.page, property, {
         get: () => {
@@ -26983,7 +27881,8 @@ async function render_response({
   } else {
     rendered = { head: "", html: "", css: { code: "", map: null } };
   }
-  let { head, html: body } = rendered;
+  let head = "";
+  let body = rendered.html;
   const csp = new Csp(options.csp, {
     dev: options.dev,
     prerender: !!state.prerendering
@@ -26999,33 +27898,22 @@ async function render_response({
     assets2 = segments.length > 0 ? segments.map(() => "..").join("/") : ".";
   }
   const prefixed = (path2) => path2.startsWith("/") ? path2 : `${assets2}/${path2}`;
-  const init_app = `
-		import { set_public_env, start } from ${s(prefixed(entry.file))};
-
-		set_public_env(${s(options.public_env)});
-
-		start({
-			target: document.querySelector('[data-sveltekit-hydrate="${target}"]').parentNode,
-			paths: ${s(options.paths)},
-			route: ${!!page_config.router},
-			spa: ${!resolve_opts.ssr},
-			trailing_slash: ${s(options.trailing_slash)},
-			hydrate: ${resolve_opts.ssr && page_config.hydrate ? `{
-				status: ${status},
-				error: ${error2 && serialize_error(error2, (e3) => e3.stack)},
-				node_ids: [${branch.map(({ node }) => node.index).join(", ")}],
-				params: ${devalue_esm_default(event.params)},
-				routeId: ${s(event.routeId)}
-			}` : "null"}
-		});
-	`;
-  const init_service_worker = `
-		if ('serviceWorker' in navigator) {
-			addEventListener('load', function () {
-				navigator.serviceWorker.register('${options.service_worker}');
-			});
-		}
-	`;
+  const serialized = { data: "", form: "null" };
+  try {
+    serialized.data = uneval(branch.map(({ server_data }) => server_data));
+  } catch (e3) {
+    const error3 = e3;
+    const match = /\[(\d+)\]\.data\.(.+)/.exec(error3.path);
+    if (match) {
+      throw new Error(
+        `Data returned from \`load\` while rendering ${event.routeId} is not serializable: ${error3.message} (data.${match[2]})`
+      );
+    }
+    throw error3;
+  }
+  if (form_value) {
+    serialized.form = uneval(form_value);
+  }
   if (inline_styles.size > 0) {
     const content = Array.from(inline_styles.values()).join("\n");
     const attributes = [];
@@ -27051,15 +27939,34 @@ async function render_response({
     }
     attributes.unshift('rel="stylesheet"');
     head += `
-	<link href="${path2}" ${attributes.join(" ")}>`;
+		<link href="${path2}" ${attributes.join(" ")}>`;
   }
-  if (page_config.router || page_config.hydrate) {
+  if (page_config.csr) {
+    const init_app = `
+			import { start } from ${s(prefixed(entry.file))};
+
+			start({
+				env: ${s(options.public_env)},
+				hydrate: ${page_config.ssr ? `{
+					status: ${status},
+					error: ${s(error2)},
+					node_ids: [${branch.map(({ node }) => node.index).join(", ")}],
+					params: ${uneval(event.params)},
+					routeId: ${s(event.routeId)},
+					data: ${serialized.data},
+					form: ${serialized.form}
+				}` : "null"},
+				paths: ${s(options.paths)},
+				target: document.querySelector('[data-sveltekit-hydrate="${target}"]').parentNode,
+				trailing_slash: ${s(options.trailing_slash)}
+			});
+		`;
     for (const dep of modulepreloads) {
       const path2 = prefixed(dep);
       link_header_preloads.add(`<${encodeURI(path2)}>; rel="modulepreload"; nopush`);
       if (state.prerendering) {
         head += `
-	<link rel="modulepreload" href="${path2}">`;
+		<link rel="modulepreload" href="${path2}">`;
       }
     }
     const attributes = ['type="module"', `data-sveltekit-hydrate="${target}"`];
@@ -27070,36 +27977,23 @@ async function render_response({
     body += `
 		<script ${attributes.join(" ")}>${init_app}<\/script>`;
   }
-  if (resolve_opts.ssr && page_config.hydrate) {
-    const serialized_data = [];
-    for (const { url, body: body2, response } of fetched) {
-      serialized_data.push(
-        render_json_payload_script(
-          { type: "data", url, body: typeof body2 === "string" ? hash(body2) : void 0 },
-          response
-        )
-      );
-    }
-    if (branch.some((node) => node.server_data)) {
-      serialized_data.push(
-        render_json_payload_script(
-          { type: "server_data" },
-          branch.map(({ server_data }) => server_data)
-        )
-      );
-    }
-    if (validation_errors) {
-      serialized_data.push(
-        render_json_payload_script({ type: "validation_errors" }, validation_errors)
-      );
-    }
+  if (page_config.ssr && page_config.csr) {
     body += `
-	${serialized_data.join("\n	")}`;
+	${fetched.map(
+      (item) => serialize_data(item, resolve_opts.filterSerializedResponseHeaders, !!state.prerendering)
+    ).join("\n	")}`;
   }
   if (options.service_worker) {
+    const init_service_worker = `
+			if ('serviceWorker' in navigator) {
+				addEventListener('load', function () {
+					navigator.serviceWorker.register('${prefixed("service-worker.js")}');
+				});
+			}
+		`;
     csp.add_script(init_service_worker);
     head += `
-			<script${csp.script_needs_nonce ? ` nonce="${csp.nonce}"` : ""}>${init_service_worker}<\/script>`;
+		<script${csp.script_needs_nonce ? ` nonce="${csp.nonce}"` : ""}>${init_service_worker}<\/script>`;
   }
   if (state.prerendering) {
     const http_equiv = [];
@@ -27114,11 +28008,13 @@ async function render_response({
       head = http_equiv.join("\n") + head;
     }
   }
+  head += rendered.head;
   const html = await resolve_opts.transformPageChunk({
-    html: options.template({ head, body, assets: assets2, nonce: csp.nonce }),
+    html: options.app_template({ head, body, assets: assets2, nonce: csp.nonce }),
     done: true
   }) || "";
   const headers = new Headers({
+    "x-sveltekit-page": "true",
     "content-type": "text/html",
     etag: `"${hash(html)}"`
   });
@@ -27131,312 +28027,40 @@ async function render_response({
     if (report_only_header) {
       headers.set("content-security-policy-report-only", report_only_header);
     }
-    for (const new_cookie of cookies) {
-      const { name: name5, value, ...options2 } = new_cookie;
-      headers.append("set-cookie", cookie.serialize(name5, value, options2));
-    }
     if (link_header_preloads.size) {
       headers.set("link", Array.from(link_header_preloads).join(", "));
     }
-  }
-  if (error2 && options.dev && !(error2 instanceof HttpError)) {
-    error2.stack = stack;
   }
   return new Response(html, {
     status,
     headers
   });
 }
-async function load_server_data({ dev, event, node, parent }) {
-  var _a;
-  if (!(node == null ? void 0 : node.server))
-    return null;
-  const server_data = await ((_a = node.server.load) == null ? void 0 : _a.call(null, {
-    get clientAddress() {
-      return event.clientAddress;
-    },
-    locals: event.locals,
-    params: event.params,
-    parent,
-    platform: event.platform,
-    request: event.request,
-    routeId: event.routeId,
-    setHeaders: event.setHeaders,
-    url: event.url
-  }));
-  const result = server_data ? await unwrap_promises(server_data) : null;
-  if (dev) {
-    check_serializability(result, node.server_id, "data");
-  }
-  return result;
-}
-async function load_data({ event, fetcher, node, parent, server_data_promise, state }) {
-  var _a;
-  const server_data = await server_data_promise;
-  if (!((_a = node == null ? void 0 : node.shared) == null ? void 0 : _a.load)) {
-    return server_data;
-  }
-  const load_input = {
-    url: state.prerendering ? new PrerenderingURL(event.url) : new LoadURL(event.url),
-    params: event.params,
-    data: server_data,
-    routeId: event.routeId,
-    fetch: fetcher,
-    setHeaders: event.setHeaders,
-    depends: () => {
-    },
-    parent
-  };
-  Object.defineProperties(load_input, {
-    session: {
-      get() {
-        throw new Error(
-          "session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
-        );
-      },
-      enumerable: false
-    }
-  });
-  const data = await node.shared.load.call(null, load_input);
-  return data ? unwrap_promises(data) : null;
-}
-async function unwrap_promises(object) {
-  const unwrapped = {};
-  for (const key2 in object) {
-    unwrapped[key2] = await object[key2];
-  }
-  return unwrapped;
-}
-function check_serializability(value, id, path2) {
-  const type = typeof value;
-  if (type === "string" || type === "boolean" || type === "number" || type === "undefined") {
-    return;
-  }
-  if (type === "object") {
-    if (!value)
-      return;
-    if (Array.isArray(value)) {
-      value.forEach((child, i) => {
-        check_serializability(child, id, `${path2}[${i}]`);
-      });
-      return;
-    }
-    const tag = Object.prototype.toString.call(value);
-    if (tag === "[object Object]") {
-      for (const key2 in value) {
-        check_serializability(value[key2], id, `${path2}.${key2}`);
-      }
-      return;
-    }
-  }
-  throw new Error(`${path2} returned from 'load' in ${id} cannot be serialized as JSON`);
-}
-function coalesce_to_error(err) {
-  return err instanceof Error || err && err.name && err.message ? err : new Error(JSON.stringify(err));
-}
-function normalize_error(error2) {
-  return error2;
-}
-function domain_matches(hostname, constraint) {
-  if (!constraint)
-    return true;
-  const normalized = constraint[0] === "." ? constraint.slice(1) : constraint;
-  if (hostname === normalized)
-    return true;
-  return hostname.endsWith("." + normalized);
-}
-function path_matches(path2, constraint) {
-  if (!constraint)
-    return true;
-  const normalized = constraint.endsWith("/") ? constraint.slice(0, -1) : constraint;
-  if (path2 === normalized)
-    return true;
-  return path2.startsWith(normalized + "/");
-}
-function create_fetch({ event, options, state, route }) {
-  const fetched = [];
-  const initial_cookies = cookie.parse(event.request.headers.get("cookie") || "");
-  const cookies = [];
-  const fetcher = async (resource, opts = {}) => {
-    let requested;
-    if (typeof resource === "string" || resource instanceof URL) {
-      requested = resource.toString();
-    } else {
-      requested = resource.url;
-      opts = {
-        method: resource.method,
-        headers: resource.headers,
-        body: resource.body,
-        mode: resource.mode,
-        credentials: resource.credentials,
-        cache: resource.cache,
-        redirect: resource.redirect,
-        referrer: resource.referrer,
-        integrity: resource.integrity,
-        ...opts
-      };
-    }
-    opts.headers = new Headers(opts.headers);
-    for (const [key2, value] of event.request.headers) {
-      if (key2 !== "authorization" && key2 !== "connection" && key2 !== "content-length" && key2 !== "cookie" && key2 !== "host" && key2 !== "if-none-match" && !opts.headers.has(key2)) {
-        opts.headers.set(key2, value);
-      }
-    }
-    const resolved = resolve(event.url.pathname, requested.split("?")[0]);
-    let response;
-    let dependency;
-    const prefix2 = options.paths.assets || options.paths.base;
-    const filename = decodeURIComponent(
-      resolved.startsWith(prefix2) ? resolved.slice(prefix2.length) : resolved
-    ).slice(1);
-    const filename_html = `${filename}/index.html`;
-    const is_asset = options.manifest.assets.has(filename);
-    const is_asset_html = options.manifest.assets.has(filename_html);
-    if (is_asset || is_asset_html) {
-      const file18 = is_asset ? filename : filename_html;
-      if (options.read) {
-        const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-        response = new Response(options.read(file18), {
-          headers: type ? { "content-type": type } : {}
-        });
-      } else {
-        response = await fetch(`${event.url.origin}/${file18}`, opts);
-      }
-    } else if (is_root_relative(resolved)) {
-      if (opts.credentials !== "omit") {
-        const authorization = event.request.headers.get("authorization");
-        const combined_cookies = { ...initial_cookies };
-        for (const cookie3 of cookies) {
-          if (!domain_matches(event.url.hostname, cookie3.domain))
-            continue;
-          if (!path_matches(resolved, cookie3.path))
-            continue;
-          combined_cookies[cookie3.name] = cookie3.value;
-        }
-        const cookie2 = Object.entries(combined_cookies).map(([name5, value]) => `${name5}=${value}`).join("; ");
-        if (cookie2) {
-          opts.headers.set("cookie", cookie2);
-        }
-        if (authorization && !opts.headers.has("authorization")) {
-          opts.headers.set("authorization", authorization);
-        }
-      }
-      if (opts.body && typeof opts.body !== "string") {
-        throw new Error("Request body must be a string");
-      }
-      response = await respond(
-        new Request(new URL(requested, event.url).href, { ...opts }),
-        options,
-        {
-          ...state,
-          initiator: route
-        }
-      );
-      if (state.prerendering) {
-        dependency = { response, body: null };
-        state.prerendering.dependencies.set(resolved, dependency);
-      }
-    } else {
-      if (resolved.startsWith("//")) {
-        requested = event.url.protocol + requested;
-      }
-      if (`.${new URL(requested).hostname}`.endsWith(`.${event.url.hostname}`) && opts.credentials !== "omit") {
-        const cookie2 = event.request.headers.get("cookie");
-        if (cookie2)
-          opts.headers.set("cookie", cookie2);
-      }
-      opts.headers.delete("connection");
-      const external_request = new Request(requested, opts);
-      response = await options.hooks.externalFetch.call(null, external_request);
-    }
-    const set_cookie = response.headers.get("set-cookie");
-    if (set_cookie) {
-      cookies.push(
-        ...set_cookie_parser.splitCookiesString(set_cookie).map((str) => set_cookie_parser.parseString(str))
-      );
-    }
-    const proxy = new Proxy(response, {
-      get(response2, key2, _receiver) {
-        async function text2() {
-          const body = await response2.text();
-          const headers = {};
-          for (const [key3, value] of response2.headers) {
-            if (key3 !== "set-cookie" && key3 !== "etag") {
-              headers[key3] = value;
-            }
-          }
-          if (!opts.body || typeof opts.body === "string") {
-            const status_number = Number(response2.status);
-            if (isNaN(status_number)) {
-              throw new Error(
-                `response.status is not a number. value: "${response2.status}" type: ${typeof response2.status}`
-              );
-            }
-            fetched.push({
-              url: requested,
-              body: opts.body,
-              response: {
-                status: status_number,
-                statusText: response2.statusText,
-                headers,
-                body
-              }
-            });
-          }
-          if (dependency) {
-            dependency.body = body;
-          }
-          return body;
-        }
-        if (key2 === "arrayBuffer") {
-          return async () => {
-            const buffer = await response2.arrayBuffer();
-            if (dependency) {
-              dependency.body = new Uint8Array(buffer);
-            }
-            return buffer;
-          };
-        }
-        if (key2 === "text") {
-          return text2;
-        }
-        if (key2 === "json") {
-          return async () => {
-            return JSON.parse(await text2());
-          };
-        }
-        return Reflect.get(response2, key2, response2);
-      }
-    });
-    return proxy;
-  };
-  return { fetcher, fetched, cookies };
-}
 async function respond_with_error({ event, options, state, status, error: error2, resolve_opts }) {
-  const { fetcher, fetched, cookies } = create_fetch({
-    event,
-    options,
-    state,
-    route: GENERIC_ERROR
-  });
+  const fetched = [];
   try {
     const branch = [];
-    if (resolve_opts.ssr) {
-      const default_layout = await options.manifest._.nodes[0]();
+    const default_layout = await options.manifest._.nodes[0]();
+    const ssr = get_option([default_layout], "ssr") ?? true;
+    const csr = get_option([default_layout], "csr") ?? true;
+    if (ssr) {
+      state.initiator = GENERIC_ERROR;
       const server_data_promise = load_server_data({
-        dev: options.dev,
         event,
+        state,
         node: default_layout,
         parent: async () => ({})
       });
       const server_data = await server_data_promise;
       const data = await load_data({
         event,
-        fetcher,
+        fetched,
         node: default_layout,
         parent: async () => ({}),
+        resolve_opts,
         server_data_promise,
-        state
+        state,
+        csr
       });
       branch.push(
         {
@@ -27455,103 +28079,83 @@ async function respond_with_error({ event, options, state, status, error: error2
       options,
       state,
       page_config: {
-        hydrate: options.hydrate,
-        router: options.router
+        ssr,
+        csr: get_option([default_layout], "csr") ?? true
       },
       status,
-      error: error2,
+      error: handle_error_and_jsonify(event, options, error2),
       branch,
       fetched,
-      cookies,
       event,
-      resolve_opts,
-      validation_errors: void 0
+      resolve_opts
     });
-  } catch (err) {
-    const error3 = coalesce_to_error(err);
-    options.handle_error(error3, event);
-    return new Response(error3.stack, {
-      status: 500
-    });
+  } catch (error3) {
+    if (error3 instanceof Redirect) {
+      return redirect_response(error3.status, error3.location);
+    }
+    return static_error_page(
+      options,
+      error3 instanceof HttpError ? error3.status : 500,
+      handle_error_and_jsonify(event, options, error3).message
+    );
   }
 }
-function error(status, message) {
-  return new HttpError(status, message);
-}
-function json(data, init2) {
-  const headers = new Headers(init2 == null ? void 0 : init2.headers);
-  if (!headers.has("content-type")) {
-    headers.set("content-type", "application/json");
-  }
-  return new Response(JSON.stringify(data), {
-    ...init2,
-    headers
-  });
-}
-async function render_page(event, route, options, state, resolve_opts) {
-  var _a, _b;
+async function render_page(event, route, page2, options, state, resolve_opts) {
   if (state.initiator === route) {
     return new Response(`Not found: ${event.url.pathname}`, {
       status: 404
     });
   }
-  const accept = negotiate(event.request.headers.get("accept") || "text/html", [
-    "text/html",
-    "application/json"
-  ]);
-  if (accept === "application/json" && event.request.method !== "GET" && event.request.method !== "HEAD") {
-    const node = await options.manifest._.nodes[route.leaf]();
+  state.initiator = route;
+  if (is_action_json_request(event)) {
+    const node = await options.manifest._.nodes[page2.leaf]();
     if (node.server) {
-      return handle_json_request(event, options, node.server);
+      return handle_action_json_request(event, options, node.server);
     }
   }
-  const { fetcher, fetched, cookies } = create_fetch({ event, options, state, route });
   try {
     const nodes = await Promise.all([
-      ...route.layouts.map((n2) => n2 == void 0 ? n2 : options.manifest._.nodes[n2]()),
-      options.manifest._.nodes[route.leaf]()
+      ...page2.layouts.map((n2) => n2 == void 0 ? n2 : options.manifest._.nodes[n2]()),
+      options.manifest._.nodes[page2.leaf]()
     ]);
     const leaf_node = nodes.at(-1);
     let status = 200;
-    let mutation_error;
-    let validation_errors;
-    if (leaf_node.server && event.request.method !== "GET" && event.request.method !== "HEAD") {
-      try {
-        const method = event.request.method;
-        const handler = leaf_node.server[method];
-        if (handler) {
-          const result = await handler.call(null, event);
-          if (result == null ? void 0 : result.errors) {
-            validation_errors = result.errors;
-            status = result.status ?? 400;
-          }
-          if (event.request.method === "POST" && (result == null ? void 0 : result.location)) {
-            return redirect_response(303, result.location);
-          }
-        } else {
-          event.setHeaders({
-            allow: allowed_methods(leaf_node.server).join(", ")
-          });
-          mutation_error = error(405, "Method not allowed");
-        }
-      } catch (e3) {
-        if (e3 instanceof Redirect) {
-          return redirect_response(e3.status, e3.location);
-        }
-        mutation_error = e3;
+    let action_result = void 0;
+    if (is_action_request(event, leaf_node)) {
+      action_result = await handle_action_request(event, leaf_node.server);
+      if ((action_result == null ? void 0 : action_result.type) === "redirect") {
+        return redirect_response(303, action_result.location);
+      }
+      if ((action_result == null ? void 0 : action_result.type) === "error") {
+        const error2 = action_result.error;
+        status = error2 instanceof HttpError ? error2.status : 500;
+      }
+      if ((action_result == null ? void 0 : action_result.type) === "invalid") {
+        status = action_result.status;
       }
     }
     const should_prerender_data = nodes.some((node) => node == null ? void 0 : node.server);
-    const data_pathname = `${event.url.pathname.replace(/\/$/, "")}/__data.json`;
-    if (!resolve_opts.ssr) {
+    const data_pathname = event.url.pathname.replace(/\/$/, "") + DATA_SUFFIX;
+    const should_prerender = get_option(nodes, "prerender") ?? false;
+    if (should_prerender) {
+      const mod = leaf_node.server;
+      if (mod && mod.actions) {
+        throw new Error("Cannot prerender pages with actions");
+      }
+    } else if (state.prerendering) {
+      return new Response(void 0, {
+        status: 204
+      });
+    }
+    state.prerender_default = should_prerender;
+    const fetched = [];
+    if (get_option(nodes, "ssr") === false) {
       return await render_response({
         branch: [],
-        validation_errors: void 0,
         fetched,
-        cookies,
         page_config: {
-          hydrate: true,
-          router: true
+          ssr: false,
+          csr: get_option(nodes, "csr") ?? true
         },
         status,
         error: null,
@@ -27561,19 +28165,6 @@ async function render_page(event, route, options, state, resolve_opts) {
         resolve_opts
       });
     }
-    const should_prerender = ((_a = leaf_node.shared) == null ? void 0 : _a.prerender) ?? ((_b = leaf_node.server) == null ? void 0 : _b.prerender) ?? options.prerender.default;
-    if (should_prerender) {
-      const mod = leaf_node.server;
-      if (mod && (mod.POST || mod.PUT || mod.DELETE || mod.PATCH)) {
-        throw new Error("Cannot prerender pages that have endpoints with mutative methods");
-      }
-    } else if (state.prerendering) {
-      if (!should_prerender) {
-        return new Response(void 0, {
-          status: 204
-        });
-      }
-    }
     let branch = [];
     let load_error = null;
     const server_promises = nodes.map((node, i) => {
@@ -27582,17 +28173,19 @@ async function render_page(event, route, options, state, resolve_opts) {
       }
       return Promise.resolve().then(async () => {
         try {
-          if (node === leaf_node && mutation_error) {
-            throw mutation_error;
+          if (node === leaf_node && (action_result == null ? void 0 : action_result.type) === "error") {
+            throw action_result.error;
           }
           return await load_server_data({
-            dev: options.dev,
             event,
+            state,
             node,
             parent: async () => {
               const data = {};
-              for (let j2 = 0; j2 < i; j2 += 1) {
-                Object.assign(data, await server_promises[j2]);
+              for (let j = 0; j < i; j += 1) {
+                const parent = await server_promises[j];
+                if (parent)
+                  Object.assign(data, await parent.data);
               }
               return data;
             }
@@ -27603,6 +28196,7 @@ async function render_page(event, route, options, state, resolve_opts) {
         }
       });
     });
+    const csr = get_option(nodes, "csr") ?? true;
     const load_promises = nodes.map((node, i) => {
       if (load_error)
         throw load_error;
@@ -27610,17 +28204,19 @@ async function render_page(event, route, options, state, resolve_opts) {
         try {
           return await load_data({
             event,
-            fetcher,
+            fetched,
             node,
             parent: async () => {
               const data = {};
-              for (let j2 = 0; j2 < i; j2 += 1) {
-                Object.assign(data, await load_promises[j2]);
+              for (let j = 0; j < i; j += 1) {
+                Object.assign(data, await load_promises[j]);
               }
               return data;
             },
+            resolve_opts,
             server_data_promise: server_promises[i],
-            state
+            state,
+            csr
           });
         } catch (e3) {
           load_error = e3;
@@ -27628,11 +28224,11 @@ async function render_page(event, route, options, state, resolve_opts) {
         }
       });
     });
-    for (const p2 of server_promises)
-      p2.catch(() => {
+    for (const p of server_promises)
+      p.catch(() => {
       });
-    for (const p2 of load_promises)
-      p2.catch(() => {
+    for (const p of load_promises)
+      p.catch(() => {
       });
     for (let i = 0; i < nodes.length; i += 1) {
       const node = nodes[i];
@@ -27642,65 +28238,60 @@ async function render_page(event, route, options, state, resolve_opts) {
           const data = await load_promises[i];
           branch.push({ node, server_data, data });
         } catch (e3) {
-          const error2 = normalize_error(e3);
-          if (error2 instanceof Redirect) {
+          const err = normalize_error(e3);
+          if (err instanceof Redirect) {
             if (state.prerendering && should_prerender_data) {
+              const body = stringify({
+                type: "redirect",
+                location: err.location
+              });
               state.prerendering.dependencies.set(data_pathname, {
-                response: new Response(void 0),
-                body: JSON.stringify({
-                  type: "redirect",
-                  location: error2.location
-                })
+                response: new Response(body),
+                body
               });
             }
-            return redirect_response(error2.status, error2.location);
+            return redirect_response(err.status, err.location);
           }
-          if (!(error2 instanceof HttpError)) {
-            options.handle_error(error2, event);
-          }
-          const status2 = error2 instanceof HttpError ? error2.status : 500;
+          const status2 = err instanceof HttpError ? err.status : 500;
+          const error2 = handle_error_and_jsonify(event, options, err);
           while (i--) {
-            if (route.errors[i]) {
-              const index18 = route.errors[i];
+            if (page2.errors[i]) {
+              const index18 = page2.errors[i];
               const node2 = await options.manifest._.nodes[index18]();
-              let j2 = i;
-              while (!branch[j2])
-                j2 -= 1;
+              let j = i;
+              while (!branch[j])
+                j -= 1;
               return await render_response({
                 event,
                 options,
                 state,
                 resolve_opts,
-                page_config: { router: true, hydrate: true },
+                page_config: { ssr: true, csr: true },
                 status: status2,
                 error: error2,
-                branch: compact(branch.slice(0, j2 + 1)).concat({
+                branch: compact(branch.slice(0, j + 1)).concat({
                   node: node2,
                   data: null,
                   server_data: null
                 }),
-                fetched,
-                cookies,
-                validation_errors: void 0
+                fetched
               });
             }
           }
-          return new Response(
-            error2 instanceof HttpError ? error2.message : options.get_stack(error2),
-            { status: status2 }
-          );
+          return static_error_page(options, status2, error2.message);
         }
       } else {
         branch.push(null);
       }
     }
     if (state.prerendering && should_prerender_data) {
+      const body = stringify({
+        type: "data",
+        nodes: branch.map((branch_node) => branch_node == null ? void 0 : branch_node.server_data)
+      });
       state.prerendering.dependencies.set(data_pathname, {
-        response: new Response(void 0),
-        body: JSON.stringify({
-          type: "data",
-          nodes: branch.map((branch_node) => ({ data: branch_node == null ? void 0 : branch_node.server_data }))
-        })
+        response: new Response(body),
+        body
       });
     }
     return await render_response({
@@ -27708,16 +28299,17 @@ async function render_page(event, route, options, state, resolve_opts) {
       options,
       state,
       resolve_opts,
-      page_config: get_page_config(leaf_node, options),
+      page_config: {
+        csr: get_option(nodes, "csr") ?? true,
+        ssr: true
+      },
       status,
       error: null,
       branch: compact(branch),
-      validation_errors,
-      fetched,
-      cookies
+      action_result,
+      fetched
     });
   } catch (error2) {
-    options.handle_error(error2, event);
     return await respond_with_error({
       event,
       options,
@@ -27728,104 +28320,322 @@ async function render_page(event, route, options, state, resolve_opts) {
     });
   }
 }
-function get_page_config(leaf, options) {
-  var _a, _b;
-  if (leaf.shared && "ssr" in leaf.shared) {
-    throw new Error(
-      "`export const ssr` has been removed \u2014 use the handle hook instead: https://kit.svelte.dev/docs/hooks#handle"
-    );
-  }
-  return {
-    router: ((_a = leaf.shared) == null ? void 0 : _a.router) ?? options.router,
-    hydrate: ((_b = leaf.shared) == null ? void 0 : _b.hydrate) ?? options.hydrate
-  };
-}
-async function handle_json_request(event, options, mod) {
-  const method = event.request.method;
-  const handler = mod[method];
-  if (!handler) {
-    return method_not_allowed(mod, method);
-  }
-  try {
-    const result = await handler.call(null, event);
-    if (result == null ? void 0 : result.errors) {
-      return json({ errors: result.errors }, { status: result.status || 400 });
-    }
-    return new Response(void 0, {
-      status: 204,
-      headers: (result == null ? void 0 : result.location) ? { location: result.location } : void 0
-    });
-  } catch (e3) {
-    const error2 = normalize_error(e3);
-    if (error2 instanceof Redirect) {
-      return redirect_response(error2.status, error2.location);
-    }
-    if (!(error2 instanceof HttpError)) {
-      options.handle_error(error2, event);
-    }
-    return json(error_to_pojo(error2, options.get_stack), {
-      status: error2 instanceof HttpError ? error2.status : 500
-    });
-  }
-}
-function redirect_response(status, location) {
-  return new Response(void 0, {
-    status,
-    headers: { location }
-  });
-}
-function compact(array2) {
-  const compacted = [];
-  for (const item of array2) {
-    if (item) {
-      compacted.push(item);
-    }
-  }
-  return compacted;
-}
-function exec(match, names, types, matchers) {
+function exec(match, routeId, names, types, matchers) {
   const params = {};
+  let last_type_idx = -1;
   for (let i = 0; i < names.length; i += 1) {
     const name5 = names[i];
     const type = types[i];
-    const value = match[i + 1] || "";
+    let value = match[i + 1] || "";
     if (type) {
       const matcher = matchers[type];
       if (!matcher)
         throw new Error(`Missing "${type}" param matcher`);
-      if (!matcher(value))
+      last_type_idx = routeId.indexOf(`=${type}`, last_type_idx + 1);
+      const is_empty_optional_param = !value && routeId.lastIndexOf("[[", last_type_idx) > routeId.lastIndexOf("[...", last_type_idx);
+      if (!is_empty_optional_param && !matcher(value))
         return;
     }
     params[name5] = value;
   }
   return params;
 }
-var DATA_SUFFIX = "/__data.json";
-var default_transform = ({ html }) => html;
-async function respond(request, options, state) {
-  var _a, _b, _c, _d;
-  let url = new URL(request.url);
-  const { parameter, allowed } = options.method_override;
-  const method_override = (_a = url.searchParams.get(parameter)) == null ? void 0 : _a.toUpperCase();
-  if (method_override) {
-    if (request.method === "POST") {
-      if (allowed.includes(method_override)) {
-        request = new Proxy(request, {
-          get: (target, property, _receiver) => {
-            if (property === "method")
-              return method_override;
-            return Reflect.get(target, property, target);
+function once(fn2) {
+  let done = false;
+  let result;
+  return () => {
+    if (done)
+      return result;
+    done = true;
+    return result = fn2();
+  };
+}
+async function render_data(event, route, options, state) {
+  var _a;
+  if (!route.page) {
+    return new Response(void 0, {
+      status: 404
+    });
+  }
+  try {
+    const node_ids = [...route.page.layouts, route.page.leaf];
+    const invalidated = ((_a = event.request.headers.get("x-sveltekit-invalidated")) == null ? void 0 : _a.split(",").map(Boolean)) ?? node_ids.map(() => true);
+    let aborted = false;
+    const url = new URL(event.url);
+    url.pathname = normalize_path(
+      url.pathname.slice(0, -DATA_SUFFIX.length),
+      options.trailing_slash
+    );
+    const new_event = { ...event, url };
+    const functions3 = node_ids.map((n2, i) => {
+      return once(async () => {
+        try {
+          if (aborted) {
+            return {
+              type: "skip"
+            };
           }
-        });
-      } else {
-        const verb = allowed.length === 0 ? "enabled" : "allowed";
-        const body = `${parameter}=${method_override} is not ${verb}. See https://kit.svelte.dev/docs/configuration#methodoverride`;
-        return new Response(body, {
-          status: 400
-        });
+          const node = n2 == void 0 ? n2 : await options.manifest._.nodes[n2]();
+          return load_server_data({
+            event: new_event,
+            state,
+            node,
+            parent: async () => {
+              const data = {};
+              for (let j = 0; j < i; j += 1) {
+                const parent = await functions3[j]();
+                if (parent) {
+                  Object.assign(data, parent.data);
+                }
+              }
+              return data;
+            }
+          });
+        } catch (e3) {
+          aborted = true;
+          throw e3;
+        }
+      });
+    });
+    const promises = functions3.map(async (fn2, i) => {
+      if (!invalidated[i]) {
+        return {
+          type: "skip"
+        };
       }
+      return fn2();
+    });
+    let length = promises.length;
+    const nodes = await Promise.all(
+      promises.map(
+        (p, i) => p.catch((error2) => {
+          if (error2 instanceof Redirect) {
+            throw error2;
+          }
+          length = Math.min(length, i + 1);
+          return {
+            type: "error",
+            error: handle_error_and_jsonify(event, options, error2),
+            status: error2 instanceof HttpError ? error2.status : void 0
+          };
+        })
+      )
+    );
+    const server_data = {
+      type: "data",
+      nodes: nodes.slice(0, length)
+    };
+    return data_response(server_data, event);
+  } catch (e3) {
+    const error2 = normalize_error(e3);
+    if (error2 instanceof Redirect) {
+      const server_data = {
+        type: "redirect",
+        location: error2.location
+      };
+      return data_response(server_data, event);
     } else {
-      throw new Error(`${parameter}=${method_override} is only allowed with POST requests`);
+      return data_response(handle_error_and_jsonify(event, options, error2), event);
+    }
+  }
+}
+function get_cookies(request, url) {
+  const header = request.headers.get("cookie") ?? "";
+  const initial_cookies = (0, import_cookie.parse)(header);
+  const new_cookies = {};
+  const defaults = {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: url.hostname === "localhost" && url.protocol === "http:" ? false : true
+  };
+  const cookies = {
+    get(name5, opts) {
+      const c2 = new_cookies[name5];
+      if (c2 && domain_matches(url.hostname, c2.options.domain) && path_matches(url.pathname, c2.options.path)) {
+        return c2.value;
+      }
+      const decode2 = (opts == null ? void 0 : opts.decode) || decodeURIComponent;
+      const req_cookies = (0, import_cookie.parse)(header, { decode: decode2 });
+      return req_cookies[name5];
+    },
+    set(name5, value, opts = {}) {
+      new_cookies[name5] = {
+        name: name5,
+        value,
+        options: {
+          ...defaults,
+          ...opts
+        }
+      };
+    },
+    delete(name5, opts = {}) {
+      new_cookies[name5] = {
+        name: name5,
+        value: "",
+        options: {
+          ...defaults,
+          ...opts,
+          maxAge: 0
+        }
+      };
+    },
+    serialize(name5, value, opts) {
+      return (0, import_cookie.serialize)(name5, value, {
+        ...defaults,
+        ...opts
+      });
+    }
+  };
+  function get_cookie_header(destination, header2) {
+    const combined_cookies = {};
+    for (const name5 in initial_cookies) {
+      combined_cookies[name5] = initial_cookies[name5];
+    }
+    for (const key2 in new_cookies) {
+      const cookie = new_cookies[key2];
+      if (!domain_matches(destination.hostname, cookie.options.domain))
+        continue;
+      if (!path_matches(destination.pathname, cookie.options.path))
+        continue;
+      combined_cookies[cookie.name] = cookie.value;
+    }
+    if (header2) {
+      const parsed = (0, import_cookie.parse)(header2);
+      for (const name5 in parsed) {
+        combined_cookies[name5] = parsed[name5];
+      }
+    }
+    return Object.entries(combined_cookies).map(([name5, value]) => `${name5}=${value}`).join("; ");
+  }
+  return { cookies, new_cookies, get_cookie_header };
+}
+function domain_matches(hostname, constraint) {
+  if (!constraint)
+    return true;
+  const normalized = constraint[0] === "." ? constraint.slice(1) : constraint;
+  if (hostname === normalized)
+    return true;
+  return hostname.endsWith("." + normalized);
+}
+function path_matches(path2, constraint) {
+  if (!constraint)
+    return true;
+  const normalized = constraint.endsWith("/") ? constraint.slice(0, -1) : constraint;
+  if (path2 === normalized)
+    return true;
+  return path2.startsWith(normalized + "/");
+}
+function add_cookies_to_headers(headers, cookies) {
+  for (const new_cookie of cookies) {
+    const { name: name5, value, options } = new_cookie;
+    headers.append("set-cookie", (0, import_cookie.serialize)(name5, value, options));
+  }
+}
+function create_fetch({ event, options, state, get_cookie_header }) {
+  return async (info, init2) => {
+    const request = normalize_fetch_input(info, init2, event.url);
+    const request_body = init2 == null ? void 0 : init2.body;
+    return await options.hooks.handleFetch({
+      event,
+      request,
+      fetch: async (info2, init3) => {
+        const request2 = normalize_fetch_input(info2, init3, event.url);
+        const url = new URL(request2.url);
+        if (!request2.headers.has("origin")) {
+          request2.headers.set("origin", event.url.origin);
+        }
+        if ((request2.method === "GET" || request2.method === "HEAD") && (request2.mode === "no-cors" && url.origin !== event.url.origin || url.origin === event.url.origin)) {
+          request2.headers.delete("origin");
+        }
+        if (url.origin !== event.url.origin) {
+          if (`.${url.hostname}`.endsWith(`.${event.url.hostname}`) && request2.credentials !== "omit") {
+            const cookie = get_cookie_header(url, request2.headers.get("cookie"));
+            if (cookie)
+              request2.headers.set("cookie", cookie);
+          }
+          let response2 = await fetch(request2);
+          if (request2.mode === "no-cors") {
+            response2 = new Response("", {
+              status: response2.status,
+              statusText: response2.statusText,
+              headers: response2.headers
+            });
+          } else {
+            if (url.origin !== event.url.origin) {
+              const acao = response2.headers.get("access-control-allow-origin");
+              if (!acao || acao !== event.url.origin && acao !== "*") {
+                throw new Error(
+                  `CORS error: ${acao ? "Incorrect" : "No"} 'Access-Control-Allow-Origin' header is present on the requested resource`
+                );
+              }
+            }
+          }
+          return response2;
+        }
+        let response;
+        const prefix = options.paths.assets || options.paths.base;
+        const decoded = decodeURIComponent(url.pathname);
+        const filename = (decoded.startsWith(prefix) ? decoded.slice(prefix.length) : decoded).slice(1);
+        const filename_html = `${filename}/index.html`;
+        const is_asset = options.manifest.assets.has(filename);
+        const is_asset_html = options.manifest.assets.has(filename_html);
+        if (is_asset || is_asset_html) {
+          const file18 = is_asset ? filename : filename_html;
+          if (options.read) {
+            const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
+            return new Response(options.read(file18), {
+              headers: type ? { "content-type": type } : {}
+            });
+          }
+          return await fetch(request2);
+        }
+        if (request2.credentials !== "omit") {
+          const cookie = get_cookie_header(url, request2.headers.get("cookie"));
+          if (cookie) {
+            request2.headers.set("cookie", cookie);
+          }
+          const authorization = event.request.headers.get("authorization");
+          if (authorization && !request2.headers.has("authorization")) {
+            request2.headers.set("authorization", authorization);
+          }
+        }
+        if (request_body && typeof request_body !== "string" && !ArrayBuffer.isView(request_body)) {
+          throw new Error("Request body must be a string or TypedArray");
+        }
+        response = await respond(request2, options, state);
+        const set_cookie = response.headers.get("set-cookie");
+        if (set_cookie) {
+          for (const str of set_cookie_parser.splitCookiesString(set_cookie)) {
+            const { name: name5, value, ...options2 } = set_cookie_parser.parseString(str);
+            event.cookies.set(
+              name5,
+              value,
+              options2
+            );
+          }
+        }
+        return response;
+      }
+    });
+  };
+}
+function normalize_fetch_input(info, init2, url) {
+  if (info instanceof Request) {
+    return info;
+  }
+  return new Request(typeof info === "string" ? new URL(info, url) : info, init2);
+}
+var default_transform = ({ html }) => html;
+var default_filter = () => false;
+async function respond(request, options, state) {
+  var _a, _b, _c;
+  let url = new URL(request.url);
+  if (options.csrf.check_origin) {
+    const forbidden = request.method === "POST" && request.headers.get("origin") !== url.origin && is_form_content_type(request);
+    if (forbidden) {
+      return new Response(`Cross-site ${request.method} form submissions are forbidden`, {
+        status: 403
+      });
     }
   }
   let decoded;
@@ -27836,25 +28646,22 @@ async function respond(request, options, state) {
   }
   let route = null;
   let params = {};
-  if (options.paths.base && !((_b = state.prerendering) == null ? void 0 : _b.fallback)) {
+  if (options.paths.base && !((_a = state.prerendering) == null ? void 0 : _a.fallback)) {
     if (!decoded.startsWith(options.paths.base)) {
       return new Response("Not found", { status: 404 });
     }
     decoded = decoded.slice(options.paths.base.length) || "/";
   }
   const is_data_request = decoded.endsWith(DATA_SUFFIX);
-  if (is_data_request) {
-    const data_suffix_length = DATA_SUFFIX.length - (options.trailing_slash === "always" ? 1 : 0);
-    decoded = decoded.slice(0, -data_suffix_length) || "/";
-    url = new URL(url.origin + url.pathname.slice(0, -data_suffix_length) + url.search);
-  }
-  if (!((_c = state.prerendering) == null ? void 0 : _c.fallback)) {
+  if (is_data_request)
+    decoded = decoded.slice(0, -DATA_SUFFIX.length) || "/";
+  if (!((_b = state.prerendering) == null ? void 0 : _b.fallback)) {
     const matchers = await options.manifest._.matchers();
     for (const candidate of options.manifest._.routes) {
       const match = candidate.pattern.exec(decoded);
       if (!match)
         continue;
-      const matched = exec(match, candidate.names, candidate.types, matchers);
+      const matched = exec(match, candidate.id, candidate.names, candidate.types, matchers);
       if (matched) {
         route = candidate;
         params = decode_params(matched);
@@ -27862,38 +28669,30 @@ async function respond(request, options, state) {
       }
     }
   }
-  if (route) {
-    if (route.type === "page") {
-      const normalized = normalize_path(url.pathname, options.trailing_slash);
-      if (normalized !== url.pathname && !((_d = state.prerendering) == null ? void 0 : _d.fallback)) {
-        return new Response(void 0, {
-          status: 301,
-          headers: {
-            "x-sveltekit-normalize": "1",
-            location: (normalized.startsWith("//") ? url.origin + normalized : normalized) + (url.search === "?" ? "" : url.search)
-          }
-        });
-      }
-    } else if (is_data_request) {
+  if ((route == null ? void 0 : route.page) && !is_data_request) {
+    const normalized = normalize_path(url.pathname, options.trailing_slash);
+    if (normalized !== url.pathname && !((_c = state.prerendering) == null ? void 0 : _c.fallback)) {
       return new Response(void 0, {
-        status: 404
+        status: 301,
+        headers: {
+          "x-sveltekit-normalize": "1",
+          location: (normalized.startsWith("//") ? url.origin + normalized : normalized) + (url.search === "?" ? "" : url.search)
+        }
       });
     }
   }
   const headers = {};
-  const cookies = [];
+  const { cookies, new_cookies, get_cookie_header } = get_cookies(request, url);
+  if (state.prerendering)
+    disable_search(url);
   const event = {
-    get clientAddress() {
-      if (!state.getClientAddress) {
-        throw new Error(
-          `${"@sveltejs/adapter-cloudflare"} does not specify getClientAddress. Please raise an issue`
-        );
-      }
-      Object.defineProperty(event, "clientAddress", {
-        value: state.getClientAddress()
-      });
-      return event.clientAddress;
-    },
+    cookies,
+    fetch: null,
+    getClientAddress: state.getClientAddress || (() => {
+      throw new Error(
+        `${"@sveltejs/adapter-cloudflare"} does not specify getClientAddress. Please raise an issue`
+      );
+    }),
     locals: {},
     params,
     platform: state.platform,
@@ -27904,13 +28703,9 @@ async function respond(request, options, state) {
         const lower = key2.toLowerCase();
         const value = new_headers[key2];
         if (lower === "set-cookie") {
-          const new_cookies = Array.isArray(value) ? value : [value];
-          for (const cookie2 of new_cookies) {
-            if (cookies.includes(cookie2)) {
-              throw new Error(`"${key2}" header already has cookie with same value`);
-            }
-            cookies.push(cookie2);
-          }
+          throw new Error(
+            `Use \`event.cookies.set(name, value, options)\` instead of \`event.setHeaders\` to set cookies`
+          );
         } else if (lower in headers) {
           throw new Error(`"${key2}" header is already set`);
         } else {
@@ -27923,6 +28718,7 @@ async function respond(request, options, state) {
     },
     url
   };
+  event.fetch = create_fetch({ event, options, state, get_cookie_header });
   const removed = (property, replacement, suffix = "") => ({
     get: () => {
       throw new Error(`event.${property} has been replaced by event.${replacement}` + suffix);
@@ -27937,6 +28733,7 @@ async function respond(request, options, state) {
     }
   };
   Object.defineProperties(event, {
+    clientAddress: removed("clientAddress", "getClientAddress"),
     method: removed("method", "request.method", details),
     headers: removed("headers", "request.headers", details),
     origin: removed("origin", "url.origin"),
@@ -27946,189 +28743,135 @@ async function respond(request, options, state) {
     rawBody: body_getter
   });
   let resolve_opts = {
-    ssr: true,
-    transformPageChunk: default_transform
+    transformPageChunk: default_transform,
+    filterSerializedResponseHeaders: default_filter
   };
+  async function resolve(event2, opts) {
+    var _a2;
+    try {
+      if (opts) {
+        if ("transformPage" in opts) {
+          throw new Error(
+            "transformPage has been replaced by transformPageChunk \u2014 see https://github.com/sveltejs/kit/pull/5657 for more information"
+          );
+        }
+        if ("ssr" in opts) {
+          throw new Error(
+            "ssr has been removed, set it in the appropriate +layout.js instead. See the PR for more information: https://github.com/sveltejs/kit/pull/6197"
+          );
+        }
+        resolve_opts = {
+          transformPageChunk: opts.transformPageChunk || default_transform,
+          filterSerializedResponseHeaders: opts.filterSerializedResponseHeaders || default_filter
+        };
+      }
+      if ((_a2 = state.prerendering) == null ? void 0 : _a2.fallback) {
+        return await render_response({
+          event: event2,
+          options,
+          state,
+          page_config: { ssr: false, csr: true },
+          status: 200,
+          error: null,
+          branch: [],
+          fetched: [],
+          resolve_opts
+        });
+      }
+      if (route) {
+        let response;
+        if (is_data_request) {
+          response = await render_data(event2, route, options, state);
+        } else if (route.endpoint && (!route.page || is_endpoint_request(event2))) {
+          response = await render_endpoint(event2, await route.endpoint(), state);
+        } else if (route.page) {
+          response = await render_page(event2, route, route.page, options, state, resolve_opts);
+        } else {
+          throw new Error("This should never happen");
+        }
+        return response;
+      }
+      if (state.initiator === GENERIC_ERROR) {
+        return new Response("Internal Server Error", {
+          status: 500
+        });
+      }
+      if (!state.initiator) {
+        return await respond_with_error({
+          event: event2,
+          options,
+          state,
+          status: 404,
+          error: new Error(`Not found: ${event2.url.pathname}`),
+          resolve_opts
+        });
+      }
+      if (state.prerendering) {
+        return new Response("not found", { status: 404 });
+      }
+      return await fetch(request);
+    } catch (e3) {
+      const error2 = e3 instanceof HttpError ? e3 : coalesce_to_error(e3);
+      return handle_fatal_error(event2, options, error2);
+    } finally {
+      event2.cookies.set = () => {
+        throw new Error("Cannot use `cookies.set(...)` after the response has been generated");
+      };
+      event2.setHeaders = () => {
+        throw new Error("Cannot use `setHeaders(...)` after the response has been generated");
+      };
+    }
+  }
   try {
     const response = await options.hooks.handle({
       event,
-      resolve: async (event2, opts) => {
-        var _a2;
-        if (opts) {
-          if (opts.transformPage) {
-            throw new Error(
-              "transformPage has been replaced by transformPageChunk \u2014 see https://github.com/sveltejs/kit/pull/5657 for more information"
-            );
+      resolve: (event2, opts) => resolve(event2, opts).then((response2) => {
+        if (!is_data_request) {
+          for (const key2 in headers) {
+            const value = headers[key2];
+            response2.headers.set(key2, value);
           }
-          resolve_opts = {
-            ssr: opts.ssr !== false,
-            transformPageChunk: opts.transformPageChunk || default_transform
-          };
         }
-        if ((_a2 = state.prerendering) == null ? void 0 : _a2.fallback) {
-          return await render_response({
-            event: event2,
-            options,
-            state,
-            page_config: { router: true, hydrate: true },
-            status: 200,
-            error: null,
-            branch: [],
-            fetched: [],
-            validation_errors: void 0,
-            cookies: [],
-            resolve_opts: {
-              ...resolve_opts,
-              ssr: false
-            }
-          });
+        add_cookies_to_headers(response2.headers, Object.values(new_cookies));
+        if (state.prerendering && event2.routeId !== null) {
+          response2.headers.set("x-sveltekit-routeid", encodeURI(event2.routeId));
         }
-        if (route) {
-          let response2;
-          if (is_data_request && route.type === "page") {
-            try {
-              let error2;
-              const promises = [...route.layouts, route.leaf].map(async (n2, i) => {
-                try {
-                  if (error2)
-                    return;
-                  const node = n2 == void 0 ? n2 : await options.manifest._.nodes[n2]();
-                  return {
-                    data: await load_server_data({
-                      dev: options.dev,
-                      event: event2,
-                      node,
-                      parent: async () => {
-                        const data = {};
-                        for (let j2 = 0; j2 < i; j2 += 1) {
-                          const parent = await promises[j2];
-                          if (!parent || parent instanceof HttpError || "error" in parent) {
-                            return data;
-                          }
-                          Object.assign(data, parent.data);
-                        }
-                        return data;
-                      }
-                    })
-                  };
-                } catch (e3) {
-                  error2 = normalize_error(e3);
-                  if (error2 instanceof Redirect) {
-                    throw error2;
-                  }
-                  if (error2 instanceof HttpError) {
-                    return error2;
-                  }
-                  options.handle_error(error2, event2);
-                  return {
-                    error: error_to_pojo(error2, options.get_stack)
-                  };
-                }
-              });
-              response2 = json({
-                type: "data",
-                nodes: await Promise.all(promises)
-              });
-            } catch (e3) {
-              const error2 = normalize_error(e3);
-              if (error2 instanceof Redirect) {
-                response2 = json({
-                  type: "redirect",
-                  location: error2.location
-                });
-              } else {
-                response2 = json(error_to_pojo(error2, options.get_stack), { status: 500 });
-              }
-            }
-          } else {
-            response2 = route.type === "endpoint" ? await render_endpoint(event2, route) : await render_page(event2, route, options, state, resolve_opts);
-          }
-          if (!is_data_request) {
-            for (const key2 in headers) {
-              const value = headers[key2];
-              response2.headers.set(key2, value);
-            }
-          }
-          for (const cookie2 of cookies) {
-            response2.headers.append("set-cookie", cookie2);
-          }
-          if (response2.status === 200 && response2.headers.has("etag")) {
-            let if_none_match_value = request.headers.get("if-none-match");
-            if (if_none_match_value == null ? void 0 : if_none_match_value.startsWith('W/"')) {
-              if_none_match_value = if_none_match_value.substring(2);
-            }
-            const etag = response2.headers.get("etag");
-            if (if_none_match_value === etag) {
-              const headers2 = new Headers({ etag });
-              for (const key2 of ["cache-control", "content-location", "date", "expires", "vary"]) {
-                const value = response2.headers.get(key2);
-                if (value)
-                  headers2.set(key2, value);
-              }
-              return new Response(void 0, {
-                status: 304,
-                headers: headers2
-              });
-            }
-          }
-          return response2;
-        }
-        if (state.initiator === GENERIC_ERROR) {
-          return new Response("Internal Server Error", {
-            status: 500
-          });
-        }
-        if (!state.initiator) {
-          return await respond_with_error({
-            event: event2,
-            options,
-            state,
-            status: 404,
-            error: new Error(`Not found: ${event2.url.pathname}`),
-            resolve_opts
-          });
-        }
-        if (state.prerendering) {
-          return new Response("not found", { status: 404 });
-        }
-        return await fetch(request);
-      },
+        return response2;
+      }),
       get request() {
         throw new Error("request in handle has been replaced with event" + details);
       }
     });
-    if (response && !(response instanceof Response)) {
-      throw new Error("handle must return a Response object" + details);
+    if (response.status === 200 && response.headers.has("etag")) {
+      let if_none_match_value = request.headers.get("if-none-match");
+      if (if_none_match_value == null ? void 0 : if_none_match_value.startsWith('W/"')) {
+        if_none_match_value = if_none_match_value.substring(2);
+      }
+      const etag = response.headers.get("etag");
+      if (if_none_match_value === etag) {
+        const headers2 = new Headers({ etag });
+        for (const key2 of [
+          "cache-control",
+          "content-location",
+          "date",
+          "expires",
+          "vary",
+          "set-cookie"
+        ]) {
+          const value = response.headers.get(key2);
+          if (value)
+            headers2.set(key2, value);
+        }
+        return new Response(void 0, {
+          status: 304,
+          headers: headers2
+        });
+      }
     }
     return response;
   } catch (e3) {
     const error2 = coalesce_to_error(e3);
-    options.handle_error(error2, event);
-    const type = negotiate(event.request.headers.get("accept") || "text/html", [
-      "text/html",
-      "application/json"
-    ]);
-    if (is_data_request || type === "application/json") {
-      return new Response(serialize_error(error2, options.get_stack), {
-        status: 500,
-        headers: { "content-type": "application/json; charset=utf-8" }
-      });
-    }
-    try {
-      return await respond_with_error({
-        event,
-        options,
-        state,
-        status: 500,
-        error: error2,
-        resolve_opts
-      });
-    } catch (e22) {
-      const error3 = coalesce_to_error(e22);
-      return new Response(options.dev ? error3.stack : error3.message, {
-        status: 500
-      });
-    }
+    return handle_fatal_error(event, options, error2);
   }
 }
 var base = "";
@@ -28137,61 +28880,105 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
+var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
+var error_template = ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
+
+		<style>
+			body {
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+					Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+			}
+
+			.error {
+				display: flex;
+				align-items: center;
+				max-width: 32rem;
+				margin: 0 1rem;
+			}
+
+			.status {
+				font-weight: 200;
+				font-size: 3rem;
+				line-height: 1;
+				position: relative;
+				top: -0.05rem;
+			}
+
+			.message {
+				border-left: 1px solid #ccc;
+				padding: 0 0 0 1rem;
+				margin: 0 0 0 1rem;
+				min-height: 2.5rem;
+				display: flex;
+				align-items: center;
+			}
+
+			.message h1 {
+				font-weight: 400;
+				font-size: 1em;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="error">
+			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n";
 var read = null;
 set_paths({ "base": "", "assets": "" });
 var Server = class {
   constructor(manifest2) {
     this.options = {
       csp: { "mode": "auto", "directives": { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, "reportOnly": { "upgrade-insecure-requests": false, "block-all-mixed-content": false } },
+      csrf: {
+        check_origin: true
+      },
       dev: false,
-      get_stack: (error2) => String(error2),
       handle_error: (error2, event) => {
-        this.options.hooks.handleError({
+        return this.options.hooks.handleError({
           error: error2,
           event,
           get request() {
             throw new Error("request in handleError has been replaced with event. See https://github.com/sveltejs/kit/pull/3384 for details");
           }
-        });
-        error2.stack = this.options.get_stack(error2);
+        }) ?? { message: event.routeId != null ? "Internal Error" : "Not Found" };
       },
       hooks: null,
-      hydrate: true,
       manifest: manifest2,
-      method_override: { "parameter": "_method", "allowed": [] },
       paths: { base, assets },
-      prerender: {
-        default: false,
-        enabled: true
-      },
       public_env: {},
       read,
       root: Root,
-      service_worker: null,
-      router: true,
-      template,
-      template_contains_nonce: false,
+      service_worker: false,
+      app_template,
+      app_template_contains_nonce: false,
+      error_template,
       trailing_slash: "never"
     };
   }
-  init({ env }) {
+  async init({ env }) {
     const entries = Object.entries(env);
     Object.fromEntries(entries.filter(([k2]) => !k2.startsWith("PUBLIC_")));
     const pub = Object.fromEntries(entries.filter(([k2]) => k2.startsWith("PUBLIC_")));
     this.options.public_env = pub;
+    if (!this.options.hooks) {
+      const module = await Promise.resolve().then(() => (init_hooks(), hooks_exports));
+      if (module.externalFetch) {
+        throw new Error("externalFetch has been removed \u2014 use handleFetch instead. See https://github.com/sveltejs/kit/pull/6565 for details");
+      }
+      this.options.hooks = {
+        handle: module.handle || (({ event, resolve }) => resolve(event)),
+        handleError: module.handleError || (({ error: error2 }) => console.error(error2.stack)),
+        handleFetch: module.handleFetch || (({ request, fetch: fetch2 }) => fetch2(request))
+      };
+    }
   }
   async respond(request, options = {}) {
     if (!(request instanceof Request)) {
       throw new Error("The first argument to server.respond must be a Request object. See https://github.com/sveltejs/kit/pull/3384 for details");
-    }
-    if (!this.options.hooks) {
-      const module = await Promise.resolve().then(() => (init_hooks(), hooks_exports));
-      this.options.hooks = {
-        handle: module.handle || (({ event, resolve: resolve2 }) => resolve2(event)),
-        handleError: module.handleError || (({ error: error2 }) => console.error(error2.stack)),
-        externalFetch: module.externalFetch || fetch
-      };
     }
     return respond(request, this.options, options);
   }
@@ -28200,10 +28987,11 @@ var Server = class {
 // .svelte-kit/cloudflare-tmp/manifest.js
 var manifest = {
   appDir: "_app",
+  appPath: "_app",
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp" },
   _: {
-    entry: { "file": "_app/immutable/start-4d6c5d6b.js", "imports": ["_app/immutable/start-4d6c5d6b.js", "_app/immutable/chunks/index-1063d0c6.js", "_app/immutable/chunks/singletons-ba8d1508.js", "_app/immutable/chunks/index-6dbc7447.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-089c606a.js", "imports": ["_app/immutable/start-089c606a.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/singletons-fa07e895.js", "_app/immutable/chunks/index-99e25be1.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -28225,154 +29013,124 @@ var manifest = {
     ],
     routes: [
       {
-        type: "page",
-        id: "",
+        id: "/",
         pattern: /^\/$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 2
+        page: { layouts: [0], errors: [1], leaf: 2 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "calcom",
+        id: "/calcom",
         pattern: /^\/calcom\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 3
+        page: { layouts: [0], errors: [1], leaf: 3 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "faq",
+        id: "/faq",
         pattern: /^\/faq\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 4
+        page: { layouts: [0], errors: [1], leaf: 4 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "homework",
+        id: "/homework",
         pattern: /^\/homework\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 5
+        page: { layouts: [0], errors: [1], leaf: 5 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "katex",
+        id: "/katex",
         pattern: /^\/katex\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 6
+        page: { layouts: [0], errors: [1], leaf: 6 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "login",
+        id: "/login",
         pattern: /^\/login\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 7
+        page: { layouts: [0], errors: [1], leaf: 7 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "math",
-        pattern: /^\/math\/?$/,
-        names: [],
-        types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 8
-      },
-      {
-        type: "page",
-        id: "mathjax",
+        id: "/mathjax",
         pattern: /^\/mathjax\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 9
+        page: { layouts: [0], errors: [1], leaf: 9 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "physics",
+        id: "/math",
+        pattern: /^\/math\/?$/,
+        names: [],
+        types: [],
+        page: { layouts: [0], errors: [1], leaf: 8 },
+        endpoint: null
+      },
+      {
+        id: "/physics",
         pattern: /^\/physics\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 10
+        page: { layouts: [0], errors: [1], leaf: 10 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "plans",
+        id: "/plans",
         pattern: /^\/plans\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 11
+        page: { layouts: [0], errors: [1], leaf: 11 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "samplequiz",
+        id: "/samplequiz",
         pattern: /^\/samplequiz\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 12
+        page: { layouts: [0], errors: [1], leaf: 12 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "schools",
+        id: "/schools",
         pattern: /^\/schools\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 13
+        page: { layouts: [0], errors: [1], leaf: 13 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "screenshare",
-        pattern: /^\/screenshare\/?$/,
-        names: [],
-        types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 14
-      },
-      {
-        type: "page",
-        id: "screenshareA",
+        id: "/screenshareA",
         pattern: /^\/screenshareA\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 15
+        page: { layouts: [0], errors: [1], leaf: 15 },
+        endpoint: null
       },
       {
-        type: "page",
-        id: "stripe",
+        id: "/screenshare",
+        pattern: /^\/screenshare\/?$/,
+        names: [],
+        types: [],
+        page: { layouts: [0], errors: [1], leaf: 14 },
+        endpoint: null
+      },
+      {
+        id: "/stripe",
         pattern: /^\/stripe\/?$/,
         names: [],
         types: [],
-        errors: [1],
-        layouts: [0],
-        leaf: 16
+        page: { layouts: [0], errors: [1], leaf: 16 },
+        endpoint: null
       }
     ],
     matchers: async () => {
@@ -28414,7 +29172,7 @@ var e2 = t.bind(0, s2);
 var c = e.bind(0, s2);
 var r = o.bind(0, s2);
 var server = new Server(manifest);
-var prefix = `/${manifest.appDir}/`;
+var app_path = `/${manifest.appPath}/`;
 var worker = {
   async fetch(req, env, context) {
     await server.init({ env });
@@ -28423,9 +29181,11 @@ var worker = {
     if (res)
       return res;
     let { pathname } = new URL(req.url);
-    if (pathname.startsWith(prefix)) {
+    if (pathname.startsWith(app_path)) {
       res = await env.ASSETS.fetch(req);
-      const cache_control = pathname.startsWith(prefix + "immutable/") ? "public, immutable, max-age=31536000" : "no-cache";
+      if (!res.ok)
+        return res;
+      const cache_control = pathname.startsWith(app_path + "immutable/") ? "public, immutable, max-age=31536000" : "no-cache";
       res = new Response(res.body, {
         headers: {
           "cache-control": cache_control,
@@ -28452,7 +29212,7 @@ var worker = {
       }
     }
     pragma = res.headers.get("cache-control");
-    return pragma ? e2(req, res, context) : res;
+    return pragma && res.ok ? e2(req, res, context) : res;
   }
 };
 var worker_default = worker;

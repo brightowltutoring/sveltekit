@@ -38,7 +38,7 @@ var r = o.bind(0, s);
 
 // src/worker.js
 var server = new Server(manifest);
-var prefix = `/${manifest.appDir}/`;
+var app_path = `/${manifest.appPath}/`;
 var worker = {
   async fetch(req, env, context) {
     await server.init({ env });
@@ -47,9 +47,11 @@ var worker = {
     if (res)
       return res;
     let { pathname } = new URL(req.url);
-    if (pathname.startsWith(prefix)) {
+    if (pathname.startsWith(app_path)) {
       res = await env.ASSETS.fetch(req);
-      const cache_control = pathname.startsWith(prefix + "immutable/") ? "public, immutable, max-age=31536000" : "no-cache";
+      if (!res.ok)
+        return res;
+      const cache_control = pathname.startsWith(app_path + "immutable/") ? "public, immutable, max-age=31536000" : "no-cache";
       res = new Response(res.body, {
         headers: {
           "cache-control": cache_control,
@@ -76,7 +78,7 @@ var worker = {
       }
     }
     pragma = res.headers.get("cache-control");
-    return pragma ? e2(req, res, context) : res;
+    return pragma && res.ok ? e2(req, res, context) : res;
   }
 };
 var worker_default = worker;

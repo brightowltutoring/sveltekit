@@ -2,9 +2,6 @@
 	"compilerOptions": {
 		"baseUrl": "..",
 		"paths": {
-			"$libo/*": [
-				"src/libo/*"
-			],
 			"$lib": [
 				"src/lib"
 			],
@@ -30,6 +27,8 @@
 	},
 	"include": [
 		"ambient.d.ts",
+		"./types/**/$types.d.ts",
+		"../vite.config.ts",
 		"../src/**/*.js",
 		"../src/**/*.ts",
 		"../src/**/*.svelte",
