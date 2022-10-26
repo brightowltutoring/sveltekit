@@ -3,7 +3,6 @@ import { P as PlansCard } from "../../chunks/PlansCard.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { a as isDarkMode } from "../../chunks/store.js";
-import "../../chunks/private.js";
 import "dropzone";
 import "../../chunks/index2.js";
 const PlansComponent_svelte_svelte_type_style_lang = "";

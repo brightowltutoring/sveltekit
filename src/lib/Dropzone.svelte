@@ -30,8 +30,8 @@
 
 <!-- for some reason using tailwing for border styles isnt working -->
 <!-- style={`box-shadow: inset 0 -10px 10px ${boxShadowColor}; border-radius: 50px; border-color: transparent`} -->
+<!-- action={UPLOAD_ENDPOINT} -->
 <form
-  action={UPLOAD_ENDPOINT}
   method="post"
   id="default"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent"

@@ -1,8 +1,13 @@
-import { F as FIREBASE_apiKey, a as FIREBASE_authDomain, b as FIREBASE_projectId, c as FIREBASE_storageBucket, d as FIREBASE_messagingSenderId, e as FIREBASE_appId } from "./private.js";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 import { getFunctions, httpsCallable } from "firebase/functions";
+const FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
+const FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
+const FIREBASE_projectId = "thinksolve-app";
+const FIREBASE_storageBucket = "thinksolve-app.appspot.com";
+const FIREBASE_messagingSenderId = "490986955869";
+const FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
 const firebaseConfig = {
   apiKey: FIREBASE_apiKey,
   authDomain: FIREBASE_authDomain,

@@ -5,7 +5,6 @@ import { d as db } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { getDocs, collection } from "firebase/firestore/lite";
 import { w as writable } from "../../chunks/index2.js";
-import "../../chunks/private.js";
 import "dropzone";
 import "firebase/app";
 import "firebase/functions";
