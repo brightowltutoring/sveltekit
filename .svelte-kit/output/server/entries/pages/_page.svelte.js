@@ -185,14 +185,18 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
   return `
-<video muted defaultmuted autoplay playsinline loop controlslist="${"nodownload"}" src="${"/login-bg-video-blurred.mp4"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"></video>
+
+
+<video preload="${"auto"}" muted autoplay playsinline loop controlslist="${"nodownload"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"><source src="${"/login-bg-video-blurred.mp4"}" type="${"video/mp4"}"></video>
+
 
 
 
 
 
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
-  <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
+  <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${`<div class="${"text-6xl font-Poppins pb-4 "}">Math, Physics
+          <span${add_attribute("class", gradientTextColor, 0)}>... Online! </span></div>`}
       
       <div class="${"text-2xl font-Nunito "}">\u{1F449} click for reviews
       </div></div></div>

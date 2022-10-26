@@ -21,7 +21,9 @@
 
   // let ready = false;
   let ready = true;
+  let video;
   onMount(() => {
+    video.play();
     // ready = true;
     // console.log("$isDarkMode", $isDarkMode);
     console.log(
@@ -35,6 +37,7 @@
 
 <!-- src="/login-bg-video-blurred.mp4" -->
 <video
+  bind:this={video}
   preload="auto"
   muted
   autoplay
