@@ -20,9 +20,9 @@
   }`;
 
   let ready = false;
-  let vid;
+  // let vid;
   onMount(() => {
-    vid.play();
+    // vid.play();
     ready = true;
     // console.log("$isDarkMode", $isDarkMode);
     console.log(
@@ -33,6 +33,21 @@
 </script>
 
 <video
+  class=" absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
+    ? 'invert-[0.95] blur-3xl '
+    : 'blur-2xl'}"
+  autoplay="autoplay"
+  loop="loop"
+  muted
+  defaultMuted
+  playsinline
+  oncontextmenu="return false;"
+  preload="auto"
+>
+  <source src="/login-bg-video-blurred.mp4" type="video/mp4" />
+</video>
+
+<!-- <video
   bind:this={vid}
   preload="auto"
   muted
@@ -45,8 +60,8 @@
     : 'blur-2xl'}"
   src="/login-bg-video-blurred.mp4"
 >
-  <!-- <source src="/login-bg-video-blurred.mp4" type="video/mp4" /> -->
-</video>
+  <source src="/login-bg-video-blurred.mp4" type="video/mp4" />
+</video> -->
 
 <!-- </div> -->
 
