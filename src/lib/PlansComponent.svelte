@@ -7,7 +7,8 @@
 
 <!-- <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "> -->
 <div class="grid grid-cols-1 lg:grid-cols-2  p-7 ">
-  {#each [...plansCardArray].reverse().slice(1) as item, i}
+  <!-- using splice(0,n) to remove everything after and including index n .. pop() doenst work -->
+  {#each [...plansCardArray].splice(0, 2) as item, i}
     <div in:scale={{ duration: 1000, easing: elasticOut, delay: 100 * i }}>
       <PlansCard
         card={item.card}

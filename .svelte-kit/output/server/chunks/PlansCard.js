@@ -30,9 +30,9 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   let { btnColorHover = "" } = $$props;
   let { card } = $$props;
   let buttonColor = {
-    1: "bg-[rgb(45,165,214)]",
-    2: "bg-[rgb(244,77,77)]",
-    3: "bg-[rgb(254,164,92)]"
+    1: "bg-[rgb(244,77,77)]",
+    2: "bg-[rgb(254,164,92)]",
+    3: "bg-[rgb(45,165,214)]"
   };
   if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
     $$bindings.payNowUrl(payNowUrl);

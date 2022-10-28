@@ -21,14 +21,14 @@
 
   let ready = false;
   // let vid;
+
   onMount(() => {
-    // vid.play();
     ready = true;
-    // console.log("$isDarkMode", $isDarkMode);
-    console.log(
-      'window.localStorage.getItem("isDarkModeLS") == true:',
-      window.localStorage.getItem("isDarkModeLS") == "true"
-    );
+    // vid.play();
+    // console.log(
+    //   'window.localStorage.getItem("isDarkModeLS") == true:',
+    //   window.localStorage.getItem("isDarkModeLS") == "true"
+    // );
   });
 </script>
 
@@ -46,19 +46,21 @@
 >
   <source src="/login-bg-video-blurred.mp4" type="video/mp4" />
 </video> -->
+<!-- preload="auto" -->
+<!-- still not able to autoplay on mobile or safari  -->
 
 <video
-  preload="auto"
-  muted
-  autoplay
-  playsinline
-  loop
   controlslist="nodownload"
+  playsinline
+  autoplay
+  muted
+  loop
   class=" absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
     ? 'invert-[0.95] blur-3xl '
     : 'blur-2xl'}"
-  src="/login-bg-video-blurred.mp4"
-/>
+>
+  <source src="/login-bg-video-blurred.mp4" type="video/mp4" />
+</video>
 
 <!-- </div> -->
 
@@ -100,6 +102,11 @@
   <div id="step1" class="hover:scale-105 duration-500 ">
     <p
       class="text-5xl font-Poppins text-center pb-7 "
+      on:keydown={() => {
+        document
+          .getElementById("step2")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      }}
       on:click={() => {
         document
           .getElementById("step2")
@@ -116,6 +123,11 @@
   <div id="step2" class="duration-500 ">
     <p
       class="text-5xl font-Poppins text-center pb-7"
+      on:keydown={() => {
+        document
+          .getElementById("reviews")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      }}
       on:click={() => {
         document
           .getElementById("reviews")
@@ -133,6 +145,9 @@
   <div id="reviews" class="mb-[200px] sm:mb-[500px]  duration-500 ">
     <p
       class="text-5xl font-Poppins text-center "
+      on:keydown={() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
       on:click={() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }}

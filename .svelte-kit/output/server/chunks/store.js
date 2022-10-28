@@ -82,18 +82,6 @@ const routes = writable({
     href: "/math",
     title: "math",
     isCurrent: false
-  },
-  mathjax: {
-    name: "mathjax",
-    href: "/mathjax",
-    title: "mathjax",
-    isCurrent: false
-  },
-  katex: {
-    name: "katex",
-    href: "/katex",
-    title: "katex",
-    isCurrent: false
   }
 });
 const isDarkMode = writable(false);

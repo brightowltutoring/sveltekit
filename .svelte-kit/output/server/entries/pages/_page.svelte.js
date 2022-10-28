@@ -184,9 +184,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
-  return `<video class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" autoplay="${"autoplay"}" loop="${"loop"}" muted defaultmuted playsinline oncontextmenu="${"return false;"}" preload="${"auto"}"><source src="${"/login-bg-video-blurred.mp4"}" type="${"video/mp4"}"></video>
+  return `
 
-
+<video preload="${"auto"}" muted autoplay playsinline loop controlslist="${"nodownload"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
 
 
 
