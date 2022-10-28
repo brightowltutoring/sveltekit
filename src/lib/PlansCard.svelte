@@ -27,9 +27,9 @@
   export let card; /* 1,2,3, */
 
   let buttonColor = {
-    1: "bg-[rgb(45,165,214)]" /* blue */,
-    2: "bg-[rgb(244,77,77)]" /* red */,
-    3: "bg-[rgb(254,164,92)]" /* yellow */,
+    1: "bg-[rgb(244,77,77)]" /* red */,
+    2: "bg-[rgb(254,164,92)]" /* yellow */,
+    3: "bg-[rgb(45,165,214)]" /* blue */,
   };
 </script>
 

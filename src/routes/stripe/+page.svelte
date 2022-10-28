@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  // import { stripeSessionIdGCF } from "$lib/server/firebase.js";
   import { stripeSessionIdGCF } from "$lib/firebase.js";
   import { PUBLIC_STRIPE_KEY } from "$env/static/public";
   import { fly } from "svelte/transition";

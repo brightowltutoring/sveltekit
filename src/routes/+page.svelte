@@ -32,7 +32,7 @@
   });
 </script>
 
-<video
+<!-- <video
   class=" absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
     ? 'invert-[0.95] blur-3xl '
     : 'blur-2xl'}"
@@ -45,10 +45,9 @@
   preload="auto"
 >
   <source src="/login-bg-video-blurred.mp4" type="video/mp4" />
-</video>
+</video> -->
 
-<!-- <video
-  bind:this={vid}
+<video
   preload="auto"
   muted
   autoplay
@@ -59,9 +58,7 @@
     ? 'invert-[0.95] blur-3xl '
     : 'blur-2xl'}"
   src="/login-bg-video-blurred.mp4"
->
-  <source src="/login-bg-video-blurred.mp4" type="video/mp4" />
-</video> -->
+/>
 
 <!-- </div> -->
 

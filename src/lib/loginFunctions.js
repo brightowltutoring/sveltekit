@@ -1,3 +1,4 @@
+// import { auth } from "$lib/server/firebase.js";
 import { auth } from "$lib/firebase.js";
 import {
   GoogleAuthProvider,

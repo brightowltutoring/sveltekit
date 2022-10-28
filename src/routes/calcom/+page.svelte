@@ -46,4 +46,8 @@
   });
 </script>
 
-<!-- <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline" /> -->
+<div
+  data-sveltekit-prefetch
+  style="width:100%;height:100%;overflow:scroll"
+  id="my-cal-inline"
+/>
