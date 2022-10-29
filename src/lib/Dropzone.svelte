@@ -59,21 +59,23 @@
 
 <!-- TODO: Importing dropzone via https link is buggy with multiple dropzone instances and/or svelte's component mounting. Also limited in modifying css when importing from https link -->
 
-<svelte:head>
-  <!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> -->
-
-  <!-- <link
+<!-- <svelte:head>
+  <link
     rel="stylesheet"
     href="/node_modules/dropzone/dist/dropzone.css"
     type="text/css"
-  /> -->
-  <!-- <link
+  />
+</svelte:head> -->
+<!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> -->
+
+<!-- 
+<svelte:head>
+  <link
     rel="stylesheet"
     href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
     type="text/css"
-  /> -->
-</svelte:head>
-
+  />
+</svelte:head> -->
 <style>
   :global(.dropzone .dz-preview.dz-image-preview) {
     background-color: transparent !important;

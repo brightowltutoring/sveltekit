@@ -1,15 +1,17 @@
 // import { auth } from "$lib/server/firebase.js";
 import { auth } from "$lib/firebase.js";
-import {
-  GoogleAuthProvider,
-  signOut,
-  signInWithPopup,
-  sendSignInLinkToEmail,
-} from "firebase/auth";
+// import {
+//   GoogleAuthProvider,
+//   signOut,
+//   signInWithPopup,
+//   sendSignInLinkToEmail,
+// } from "firebase/auth";
 
 // breaks with Screenshare route when doing "npm run dev"
 // export function GoogleLogin() {
 export async function GoogleLogin() {
+  const { GoogleAuthProvider, signInWithPopup } = await import("firebase/auth");
+  // const { GoogleAuthProvider } = await import("firebase/auth");
   const provider = new GoogleAuthProvider();
 
   // TODO: experimented with async-await version, but app crashed with jitsi and dropzone ....maybe retry in the future
@@ -29,7 +31,7 @@ export async function GoogleLogin() {
   //   const credential = GoogleAuthProvider.credentialFromError(error);
   // }
 
-  signInWithPopup(auth, provider)
+  await signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -48,9 +50,11 @@ export async function GoogleLogin() {
     });
 }
 
-export function logoutFunction() {
+export async function logoutFunction() {
+  const { signOut } = await import("firebase/auth");
+
   // firebase signing out
-  signOut(auth)
+  await signOut(auth)
     .then(() => {
       console.log("logged out");
       goto("/");
@@ -87,8 +91,10 @@ export function regexEmailChecker(EMAIL) {
 //   }
 // }
 
-export function magicLinkToEmail(EMAIL) {
-  sendSignInLinkToEmail(auth, EMAIL, {
+export async function magicLinkToEmail(EMAIL) {
+  const { sendSignInLinkToEmail } = await import("firebase/auth");
+
+  await sendSignInLinkToEmail(auth, EMAIL, {
     url: "https://thinksolve.io/",
     handleCodeInApp: true,
   })

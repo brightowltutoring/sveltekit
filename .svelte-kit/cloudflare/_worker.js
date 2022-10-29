@@ -2547,7 +2547,7 @@ var init_Dropzone = __esm({
 
 
 
-${$$result.head += `<!-- HEAD_svelte-vuldc9_START --><link rel="${"stylesheet"}" href="${"/node_modules/dropzone/dist/dropzone.css"}" type="${"text/css"}"><!-- HEAD_svelte-vuldc9_END -->`, ""}`;
+${$$result.head += `<!-- HEAD_svelte-7aecm8_START --><!-- HEAD_svelte-7aecm8_END -->`, ""}`;
     });
   }
 });
@@ -11237,9 +11237,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-e07260ea.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-e07260ea.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-994cc8f6.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/navigation-48a3c995.js", "_app/immutable/chunks/singletons-6a8c120f.js", "_app/immutable/chunks/firebase-800dbd3c.js"];
-    stylesheets = ["_app/immutable/assets/_layout-1c2fad79.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-dd285897.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-dd285897.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-067ae166.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/navigation-238032ec.js", "_app/immutable/chunks/singletons-8498de45.js", "_app/immutable/chunks/firebase-800dbd3c.js"];
+    stylesheets = ["_app/immutable/assets/_layout-1c2fad79.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
 
@@ -11654,9 +11654,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-a6594c0e.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-a6594c0e.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/PlansCard-a5c474b9.js", "_app/immutable/chunks/plansCardArray-e12ddae7.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/Dropzone-994cc8f6.js", "_app/immutable/chunks/public-fe26cbe2.js"];
-    stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-c59e269e.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-c59e269e.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/PlansCard-a5c474b9.js", "_app/immutable/chunks/plansCardArray-e12ddae7.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/Dropzone-067ae166.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
 
@@ -11860,9 +11860,9 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-7820441b.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-7820441b.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-994cc8f6.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js"];
-    stylesheets6 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-d9e8ac3d.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-d9e8ac3d.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-067ae166.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js"];
+    stylesheets6 = ["_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
 
@@ -26263,8 +26263,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-93fc9737.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-93fc9737.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-48a3c995.js", "_app/immutable/chunks/singletons-6a8c120f.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-5ac5df17.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-5ac5df17.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-238032ec.js", "_app/immutable/chunks/singletons-8498de45.js"];
     stylesheets15 = [];
   }
 });
@@ -26314,8 +26314,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-8c5dd9e3.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-8c5dd9e3.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-48a3c995.js", "_app/immutable/chunks/singletons-6a8c120f.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-65f32f26.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-65f32f26.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-238032ec.js", "_app/immutable/chunks/singletons-8498de45.js"];
     stylesheets16 = [];
   }
 });
@@ -28988,7 +28988,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-f83156d5.js", "imports": ["_app/immutable/start-f83156d5.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/singletons-6a8c120f.js", "_app/immutable/chunks/index-99e25be1.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-45f54374.js", "imports": ["_app/immutable/start-45f54374.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/singletons-8498de45.js", "_app/immutable/chunks/index-99e25be1.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -1,19 +1,17 @@
 import * as NV from "$env/static/public";
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore/lite";
-import { getFunctions, httpsCallable } from "firebase/functions";
+// const { initializeApp } = await import("firebase/app");
+// import { getAuth } from "firebase/auth";
+const { getAuth } = await import("firebase/auth");
+
+const { getFirestore } = await import("firebase/firestore/lite");
+// import { getFirestore } from "firebase/firestore/lite";
+
+// import { getFunctions, httpsCallable } from "firebase/functions";
+const { getFunctions, httpsCallable } = await import("firebase/functions");
 // from "https://www.gstatic.com/firebasejs/9.10.0/firebase-functions.js";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo",
-//   authDomain: "thinksolve-app.firebaseapp.com",
-//   projectId: "thinksolve-app",
-//   storageBucket: "thinksolve-app.appspot.com",
-//   messagingSenderId: "490986955869",
-//   appId: "1:490986955869:web:433c6f7b31865fed5099b4",
-// };
 const firebaseConfig = {
   apiKey: NV.PUBLIC_FIREBASE_apiKey,
   authDomain: NV.PUBLIC_FIREBASE_authDomain,
