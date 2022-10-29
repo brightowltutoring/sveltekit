@@ -11,7 +11,7 @@ import { auth } from "$lib/firebase.js";
 // export function GoogleLogin() {
 export async function GoogleLogin() {
   const { GoogleAuthProvider, signInWithPopup } = await import("firebase/auth");
-  // const { GoogleAuthProvider } = await import("firebase/auth");
+
   const provider = new GoogleAuthProvider();
 
   // TODO: experimented with async-await version, but app crashed with jitsi and dropzone ....maybe retry in the future
@@ -94,7 +94,7 @@ export function regexEmailChecker(EMAIL) {
 export async function magicLinkToEmail(EMAIL) {
   const { sendSignInLinkToEmail } = await import("firebase/auth");
 
-  await sendSignInLinkToEmail(auth, EMAIL, {
+  sendSignInLinkToEmail(auth, EMAIL, {
     url: "https://thinksolve.io/",
     handleCodeInApp: true,
   })

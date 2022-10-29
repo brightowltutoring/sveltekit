@@ -2,14 +2,14 @@ import * as NV from "$env/static/public";
 
 import { initializeApp } from "firebase/app";
 // const { initializeApp } = await import("firebase/app");
-// import { getAuth } from "firebase/auth";
-const { getAuth } = await import("firebase/auth");
+import { getAuth } from "firebase/auth";
+// const { getAuth } = await import("firebase/auth");
 
-const { getFirestore } = await import("firebase/firestore/lite");
-// import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore/lite";
+// const { getFirestore } = await import("firebase/firestore/lite");
 
-// import { getFunctions, httpsCallable } from "firebase/functions";
-const { getFunctions, httpsCallable } = await import("firebase/functions");
+import { getFunctions, httpsCallable } from "firebase/functions";
+// const { getFunctions, httpsCallable } = await import("firebase/functions");
 // from "https://www.gstatic.com/firebasejs/9.10.0/firebase-functions.js";
 
 const firebaseConfig = {

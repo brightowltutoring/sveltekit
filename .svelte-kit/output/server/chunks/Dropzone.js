@@ -37,7 +37,10 @@ const Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) =
 
 
 
-${$$result.head += `<!-- HEAD_svelte-7aecm8_START --><!-- HEAD_svelte-7aecm8_END -->`, ""}`;
+
+
+
+`;
 });
 export {
   Dropzone_1 as D
