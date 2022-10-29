@@ -1,6 +1,5 @@
 <script>
   import JitsiUser from "$lib/JitsiUser.svelte";
-  // import CalendlyJsandCSS from "$lib/CalendlyJsandCSS.svelte";
 
   import { onMount } from "svelte";
   import { isDarkMode } from "$lib/store.js";

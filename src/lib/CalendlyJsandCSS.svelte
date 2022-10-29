@@ -1,21 +1,33 @@
+<!-- TODO: experimental code -->
+<!-- <script>
+  function getCalendlyCSS() {
+    let link = document.createElement("link");
+    link.href = "https://assets.calendly.com/assets/external/widget.css";
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+  }
+
+  function getCalendlyJS() {
+    let script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.css";
+    script.type = "text/javascript";
+    document.head.appendChild(script);
+    // htmlHeader.appendChild(script);
+  }
+</script> -->
+
+<!-- TODO: put this back! -->
+
 <svelte:head>
   <link
     href="https://assets.calendly.com/assets/external/widget.css"
     rel="stylesheet"
   />
 
-  <!-- loading non-critical css this is faster on page speeed insights, not clear with lighthouse though. Cost however with svelte it seems to bug out at times...notably if i dont import this component inside the screenshare page, the website crashes -->
-  <!-- <script>
-    window.addEventListener("load", () => {
-      let link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.type = "text/css";
-      link.href = "https://assets.calendly.com/assets/external/widget.css";
-      document.head.appendChild(link);
-    });
-  </script> -->
   <script
     src="https://assets.calendly.com/assets/external/widget.js"
     type="text/javascript"
-    async></script>
+    async
+  ></script>
 </svelte:head>

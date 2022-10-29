@@ -11240,8 +11240,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-c08c0317.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-c08c0317.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-a3fe2965.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/navigation-631adae1.js", "_app/immutable/chunks/singletons-28d1678e.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/firebase-3c7a60ba.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-bb8098c2.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-bb8098c2.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-a3fe2965.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/navigation-a225bd42.js", "_app/immutable/chunks/singletons-ed6bd239.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/firebase-3c7a60ba.js"];
     stylesheets = ["_app/immutable/assets/_layout-1c2fad79.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
@@ -26266,8 +26266,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-e58d4cc6.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-e58d4cc6.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-631adae1.js", "_app/immutable/chunks/singletons-28d1678e.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-9f6d1dd1.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-9f6d1dd1.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-a225bd42.js", "_app/immutable/chunks/singletons-ed6bd239.js"];
     stylesheets15 = [];
   }
 });
@@ -26317,8 +26317,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-91e4bbe4.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-91e4bbe4.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-631adae1.js", "_app/immutable/chunks/singletons-28d1678e.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-59ea2dcf.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-59ea2dcf.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-a225bd42.js", "_app/immutable/chunks/singletons-ed6bd239.js"];
     stylesheets16 = [];
   }
 });
@@ -28991,7 +28991,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-1c1a14b7.js", "imports": ["_app/immutable/start-1c1a14b7.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/singletons-28d1678e.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-22639625.js", "imports": ["_app/immutable/start-22639625.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/singletons-ed6bd239.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -6,7 +6,6 @@
   let clickText = false;
   import { Dropzone } from "dropzone";
   import "/node_modules/dropzone/dist/dropzone.css";
-  // import "/Users/brightowl/Documents/GitHub/sveltekit/node_modules/dropzone/dist/dropzone.css";
   import { onMount } from "svelte";
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   export let text = "Drop it like it's 🔥";
@@ -19,19 +18,23 @@
   const ACCEPTED_FILES_FRONTEND = ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
 
   onMount(() => {
-    // Dropzone.autoDiscover = false;
     dropzone = new Dropzone("#default", {
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ACCEPTED_FILES_FRONTEND,
     });
 
+    // Dropzone.autoDiscover = false;
     document.querySelector("#default").id = uniqueId;
+    // many forms
+    // let formy = document.querySelectorAll("form");
+    // formy.forEach((el) => {
+    //   el.onclick = async () => {
+    //     console.log('"dont touch my form"');
+    //   };
+    // });
   });
 </script>
 
-<!-- for some reason using tailwing for border styles isnt working -->
-<!-- style={`box-shadow: inset 0 -10px 10px ${boxShadowColor}; border-radius: 50px; border-color: transparent`} -->
-<!-- action={UPLOAD_ENDPOINT} -->
 <form
   method="post"
   id="default"
@@ -80,6 +83,5 @@
   :global(.dropzone .dz-preview.dz-image-preview) {
     background-color: transparent !important;
   }
-
   /*  Oddly, to remove the white background on each uploaded image, I have to use svelte's ':global' directive on the css, otherwise it works only on some dropzonejs instances  */
 </style>

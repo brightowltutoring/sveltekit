@@ -1,5 +1,6 @@
 <script>
-  import CalendlyJsandCss from "./CalendlyJsandCSS.svelte";
+  // import CalendlyJsandCss from "./CalendlyJsandCSS.svelte";
+  import { getCalendlyCSS, getCalendlyJS } from "$lib/GetCalendlyLinks.js";
   import { isDarkMode, elementColor } from "$lib/store.js";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -33,7 +34,7 @@
   };
 </script>
 
-<CalendlyJsandCss />
+<!-- <CalendlyJsandCss /> -->
 
 <card
   class="block shadow-md hover:scale-105 {$isDarkMode
@@ -50,8 +51,14 @@
       <button
         in:scale={{ duration: 600, easing: elasticOut }}
         on:click={() => {
+          getCalendlyCSS();
+          getCalendlyJS();
+
+          setTimeout(() => {
+            Calendly.initPopupWidget({ url: `${button.url}` });
+          }, 100);
+
           button.resetter = !button.resetter;
-          Calendly.initPopupWidget({ url: `${button.url}` });
         }}
         class=" {buttonColor[
           card
