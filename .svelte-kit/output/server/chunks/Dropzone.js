@@ -3,7 +3,7 @@ import { a as isDarkMode } from "./store.js";
 import "dropzone";
 const Dropzone_svelte_svelte_type_style_lang = "";
 const css = {
-  code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent}",
+  code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}",
   map: null
 };
 const Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -31,12 +31,12 @@ const Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) =
   return `
 
 
-<form method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto"}">
+<form method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto"}">
   <div class="${"dz-message font-Nunito"}" data-dz-message><span class="${"block"}">${escape(text)}</span></div></form>
 
 
 
-${$$result.head += `<!-- HEAD_svelte-1cdr5os_START --><!-- HEAD_svelte-1cdr5os_END -->`, ""}`;
+${$$result.head += `<!-- HEAD_svelte-vuldc9_START --><link rel="${"stylesheet"}" href="${"/node_modules/dropzone/dist/dropzone.css"}" type="${"text/css"}"><!-- HEAD_svelte-vuldc9_END -->`, ""}`;
 });
 export {
   Dropzone_1 as D

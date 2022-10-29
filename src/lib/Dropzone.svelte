@@ -5,6 +5,7 @@
   import { elasticOut } from "svelte/easing";
   let clickText = false;
   import { Dropzone } from "dropzone";
+  import "/node_modules/dropzone/dist/dropzone.css";
   // import "/Users/brightowl/Documents/GitHub/sveltekit/node_modules/dropzone/dist/dropzone.css";
   import { onMount } from "svelte";
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
@@ -61,11 +62,11 @@
 <svelte:head>
   <!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> -->
 
-  <link
+  <!-- <link
     rel="stylesheet"
     href="/node_modules/dropzone/dist/dropzone.css"
     type="text/css"
-  />
+  /> -->
   <!-- <link
     rel="stylesheet"
     href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
