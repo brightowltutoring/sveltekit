@@ -12,7 +12,7 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
   $$result.css.add(css$1);
   return `
 <div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">
-  ${each([...plansCardArray].splice(0, 2), (item, i) => {
+  ${each(plansCardArray.slice(0, 2), (item, i) => {
     return `<div>${validate_component(PlansCard, "PlansCard").$$render(
       $$result,
       {
@@ -169,9 +169,7 @@ const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 
 <div class="${"scale-90 "}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name, title, date, body }) => {
-    return `
-
-      ${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
+    return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
       default: () => {
         return `${escape(body)}
       `;

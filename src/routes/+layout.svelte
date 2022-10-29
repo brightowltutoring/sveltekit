@@ -82,12 +82,19 @@
   />
 
   {#each Object.keys($routes) as key}
+    {#if $page.routeId == "/"}
+      <title>{$routes.home.title}</title>
+    {:else if $page.routeId == `/${key}`}
+      <title>{$routes[key].title}</title>
+    {/if}
+  {/each}
+  <!-- {#each Object.keys($routes) as key}
     {#if $page.routeId.slice(1) == ""}
       <title>{$routes.home.title}</title>
     {:else if $page.routeId.slice(1) == key}
       <title>{$routes[key].title}</title>
     {/if}
-  {/each}
+  {/each} -->
 </svelte:head>
 
 <svelte:window
