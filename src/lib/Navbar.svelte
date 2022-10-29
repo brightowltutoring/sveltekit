@@ -59,6 +59,7 @@
       class="md:translate-y-[0.5rem] md:translate-x-3 hidden md:block text-xl font-Poppins font-semibold 
     md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
       in:scale={{ duration: 1200, easing: elasticOut }}
+      on:keydown={clickLogo}
       on:click={clickLogo}
     >
       THINKSOLVE

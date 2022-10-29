@@ -11,7 +11,8 @@ const css$1 = {
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css$1);
   return `
-<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each([...plansCardArray].reverse().slice(1), (item, i) => {
+<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">
+  ${each([...plansCardArray].splice(0, 2), (item, i) => {
     return `<div>${validate_component(PlansCard, "PlansCard").$$render(
       $$result,
       {
@@ -186,7 +187,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode();
   return `
 
-<video preload="${"auto"}" muted autoplay playsinline loop controlslist="${"nodownload"}" class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
+
+
+<video controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"><source src="${"/login-bg-video-blurred.mp4"}" type="${"video/mp4"}"></video>
 
 
 

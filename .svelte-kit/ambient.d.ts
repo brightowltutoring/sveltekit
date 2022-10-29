@@ -118,6 +118,12 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
+	export const SECRET_FIREBASE_apiKey: string;
+	export const SECRET_FIREBASE_authDomain: string;
+	export const SECRET_FIREBASE_projectId: string;
+	export const SECRET_FIREBASE_storageBucket: string;
+	export const SECRET_FIREBASE_messagingSenderId: string;
+	export const SECRET_FIREBASE_appId: string;
 }
 
 /**
@@ -246,6 +252,12 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		COLORTERM: string;
+		SECRET_FIREBASE_apiKey: string;
+		SECRET_FIREBASE_authDomain: string;
+		SECRET_FIREBASE_projectId: string;
+		SECRET_FIREBASE_storageBucket: string;
+		SECRET_FIREBASE_messagingSenderId: string;
+		SECRET_FIREBASE_appId: string;
 		[key: string]: string | undefined;
 	}
 }

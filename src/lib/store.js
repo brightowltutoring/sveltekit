@@ -163,12 +163,6 @@ export const routes = writable({
     title: "Homework",
     isCurrent: false,
   },
-  // calcom: {
-  //   name: "calcom",
-  //   href: "/calcom",
-  //   title: "calcom",
-  //   isCurrent: false,
-  // },
   schools: {
     name: "Schools",
     href: "/schools",
@@ -193,6 +187,12 @@ export const routes = writable({
     title: "math",
     isCurrent: false,
   },
+  // calcom: {
+  //   name: "calcom",
+  //   href: "/calcom",
+  //   title: "calcom",
+  //   isCurrent: false,
+  // },
   // mathjax: {
   //   name: "mathjax",
   //   href: "/mathjax",

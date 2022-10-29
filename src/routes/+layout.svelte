@@ -23,7 +23,7 @@
   } from "$lib/store.js";
 
   import { page } from "$app/stores";
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   // import { browser } from "$app/env";
   import { browser } from "$app/environment";
   import { afterNavigate } from "$app/navigation";
@@ -31,19 +31,7 @@
     window.localStorage.setItem("isDarkModeLS", $isDarkMode);
   });
 
-  // this works but flashes to darkmode ... maybe  GENERATE  inside store
-  // browser && ($isDarkMode = localStorage.getItem("isDarkModeLS") == "false");
-  // browser && window.document.body.classList.add("dark-mode");
-  // browser && ($isDarkMode = true);
-
-  // afterNavigate(() => {
-  //   window.localStorage.setItem("isDarkModeLS", $isDarkMode);
-  // });
-  // onDestroy(() => {
-  //   browser && localStorage.setItem("isDarkModeLS", $isDarkMode);
-  // });
-
-  $: browser && window.localStorage.setItem("isDarkModeLS", $isDarkMode);
+  // $: browser && window.localStorage.setItem("isDarkModeLS", $isDarkMode);
 
   function setScrollYMax() {
     $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
@@ -86,25 +74,6 @@
 <!-- <SwitchToDarkMode /> -->
 
 <svelte:head>
-  <!-- <script>
-    // import { isDarkMode } from "$lib/store.js";
-    // document.body.classList.remove("dark-mode");
-    // $isDarkMode = false;
-
-    // console.log(
-    //   'localStorage.getItem("isDarkModeLS") == true',
-    //   localStorage.getItem("isDarkModeLS") == "true"
-    // );
-
-    // if (localStorage.getItem("isDarkModeLS") == "true") {
-    //   document.documentElement.style.background = "black";
-    //   // document.body.classList.add("dark-mode");
-    // } else {
-    //   document.documentElement.style.background = "white";
-    //   // document.body.classList.remove("dark-mode");
-    // }
-  </script> -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -113,9 +82,9 @@
   />
 
   {#each Object.keys($routes) as key}
-    {#if $page.routeId == ""}
+    {#if $page.routeId.slice(1) == ""}
       <title>{$routes.home.title}</title>
-    {:else if $page.routeId == key}
+    {:else if $page.routeId.slice(1) == key}
       <title>{$routes[key].title}</title>
     {/if}
   {/each}

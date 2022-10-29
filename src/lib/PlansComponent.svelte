@@ -7,7 +7,7 @@
 
 <!-- <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "> -->
 <div class="grid grid-cols-1 lg:grid-cols-2  p-7 ">
-  <!-- using splice(0,n) to remove everything after and including index n .. pop() doenst work -->
+  <!-- using splice(0,n) returns array cut off after index 2 -->
   {#each [...plansCardArray].splice(0, 2) as item, i}
     <div in:scale={{ duration: 1000, easing: elasticOut, delay: 100 * i }}>
       <PlansCard
