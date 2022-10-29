@@ -1,6 +1,6 @@
-import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute, j as each } from "../../../chunks/index.js";
-import { C as CalendlyJsandCSS, a as plansCardArraySchools } from "../../../chunks/plansCardArray.js";
+import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, v as validate_component } from "../../../chunks/index.js";
 import { a as isDarkMode, e as elementColor } from "../../../chunks/store.js";
+import { a as plansCardArraySchools } from "../../../chunks/plansCardArray.js";
 const PlansCardSchools_svelte_svelte_type_style_lang = "";
 const css = {
   code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
@@ -28,7 +28,7 @@ const PlansCardSchools = create_ssr_component(($$result, $$props, $$bindings, sl
   $$result.css.add(css);
   $$unsubscribe_isDarkMode();
   $$unsubscribe_elementColor();
-  return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+  return `
 
 <card class="${"block hover:scale-105 shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 

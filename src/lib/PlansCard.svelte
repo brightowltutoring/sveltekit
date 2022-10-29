@@ -1,9 +1,36 @@
 <script>
   // import CalendlyJsandCss from "./CalendlyJsandCSS.svelte";
-  import { getCalendlyCSS, getCalendlyJS } from "$lib/GetCalendlyLinks.js";
+  import { getCalendlyJSandCSS } from "$lib/GetCalendlyLinks.js";
   import { isDarkMode, elementColor } from "$lib/store.js";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
+
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    let cardIdentifier = document.querySelector(".cardIdentifier");
+    let observer = new IntersectionObserver(callback, {
+      root: null,
+      threshold: 0,
+      rootMargin: "0px",
+    });
+
+    observer.observe(cardIdentifier);
+
+    function callback(entries, observer) {
+      for (let entry of entries) {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        console.log("i see you");
+
+        getCalendlyJSandCSS();
+
+        observer.unobserve(entry.target);
+      }
+    }
+  });
 
   export let payNowUrl = "";
   export let payLaterUrl = "";
@@ -37,7 +64,7 @@
 <!-- <CalendlyJsandCss /> -->
 
 <card
-  class="block shadow-md hover:scale-105 {$isDarkMode
+  class="cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"
   style={`background:${$elementColor}`}
@@ -51,12 +78,12 @@
       <button
         in:scale={{ duration: 600, easing: elasticOut }}
         on:click={() => {
-          getCalendlyCSS();
-          getCalendlyJS();
+          // getCalendlyJSandCSS();
 
+          // TODO: this logic has to be fixed as a promise of sorts .. maybe mutation observer the head links before calling calendly
           setTimeout(() => {
             Calendly.initPopupWidget({ url: `${button.url}` });
-          }, 100);
+          }, 50);
 
           button.resetter = !button.resetter;
         }}

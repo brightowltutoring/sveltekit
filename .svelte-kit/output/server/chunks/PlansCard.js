@@ -1,5 +1,4 @@
-import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute, j as each } from "./index.js";
-import { C as CalendlyJsandCSS } from "./plansCardArray.js";
+import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each } from "./index.js";
 import { a as isDarkMode, e as elementColor } from "./store.js";
 const PlansCard_svelte_svelte_type_style_lang = "";
 const css = {
@@ -45,7 +44,7 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$result.css.add(css);
   $$unsubscribe_isDarkMode();
   $$unsubscribe_elementColor();
-  return `${validate_component(CalendlyJsandCSS, "CalendlyJsandCss").$$render($$result, {}, {}, {})}
+  return `
 
 <card class="${"block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
