@@ -5,7 +5,7 @@
   import { elasticOut } from "svelte/easing";
   let clickText = false;
   import { Dropzone } from "dropzone";
-  // import "/node_modules/dropzone/dist/dropzone.css";
+  // import "/Users/brightowl/Documents/GitHub/sveltekit/node_modules/dropzone/dist/dropzone.css";
   import { onMount } from "svelte";
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   export let text = "Drop it like it's 🔥";
@@ -34,7 +34,7 @@
 <form
   method="post"
   id="default"
-  style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent"
+  style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
   class="dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto "
 >
   <!-- dz-message is a dropzone defined class -->
@@ -60,11 +60,12 @@
 
 <svelte:head>
   <!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> -->
-  <!-- <link
+
+  <link
     rel="stylesheet"
     href="/node_modules/dropzone/dist/dropzone.css"
     type="text/css"
-  /> -->
+  />
   <!-- <link
     rel="stylesheet"
     href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
@@ -74,7 +75,8 @@
 
 <style>
   :global(.dropzone .dz-preview.dz-image-preview) {
-    background-color: transparent;
+    background-color: transparent !important;
   }
+
   /*  Oddly, to remove the white background on each uploaded image, I have to use svelte's ':global' directive on the css, otherwise it works only on some dropzonejs instances  */
 </style>

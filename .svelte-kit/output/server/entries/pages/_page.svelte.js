@@ -187,7 +187,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<video controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}"><source src="${"/login-bg-video-blurred.mp4"}" type="${"video/mp4"}"></video>
+<video controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
 
 
 
