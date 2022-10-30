@@ -171,7 +171,7 @@ function create_ssr_component(fn2) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css9) => css9.code).join("\n"),
+          code: Array.from(result.css).map((css8) => css8.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -10805,7 +10805,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, goto, GoogleLogo, EmailLogo, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
+var PlansCardObserver, Modal, goto, GoogleLogo, EmailLogo, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -10815,6 +10815,13 @@ var init_layout_svelte = __esm({
     init_index_esm4();
     init_index_esm3();
     init_index2();
+    PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+
+
+`;
+    });
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { showModal = false } = $$props;
       let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
@@ -11137,7 +11144,9 @@ var init_layout_svelte = __esm({
               jankytown = "bottom-0 backdrop-blur-3xl duration-700";
           }
         }
-        $$rendered = `
+        $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
+
+
 
 ${$$result.head += `<!-- HEAD_svelte-e21tyb_START --><link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}">${each(Object.keys($routes), (key2) => {
           return `${$page.routeId == "/" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == `/${key2}` ? `${$$result.title = `<title>${escape($routes[key2].title)}</title>`, ""}` : ``}`}`;
@@ -11237,8 +11246,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-b843da59.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-b843da59.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-4d76d7fc.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/navigation-fd6ec734.js", "_app/immutable/chunks/singletons-dcbff018.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/firebase-3c7a60ba.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-b59348a7.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-b59348a7.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/Dropzone-15ce251b.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/navigation-3b35a7d3.js", "_app/immutable/chunks/singletons-1c1c46c3.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/firebase-3c7a60ba.js"];
     stylesheets = ["_app/immutable/assets/_layout-1c2fad79.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
@@ -11276,22 +11285,18 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-61878f38.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-61878f38.js", "_app/immutable/chunks/index-30e2a2cf.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-a47df134.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-a47df134.js", "_app/immutable/chunks/index-2ea15190.js"];
     stylesheets2 = [];
   }
 });
 
 // .svelte-kit/output/server/chunks/PlansCard.js
-var css2, PlansCard;
+var PlansCard;
 var init_PlansCard = __esm({
   ".svelte-kit/output/server/chunks/PlansCard.js"() {
     init_chunks();
     init_store();
-    css2 = {
-      code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
-      map: null
-    };
     PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       let $elementColor, $$unsubscribe_elementColor;
@@ -11328,33 +11333,34 @@ var init_PlansCard = __esm({
         $$bindings.btnColorHover(btnColorHover);
       if ($$props.card === void 0 && $$bindings.card && card !== void 0)
         $$bindings.card(card);
-      $$result.css.add(css2);
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
-      return `
-
-<card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+      return `<plans-card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
   ${each(payButtons, (button) => {
-        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white svelte-h89m1w"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
+        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
       </button>`;
       })}
 
-  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
-</card>`;
+  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
     });
   }
 });
 
 // .svelte-kit/output/server/chunks/plansCardArray.js
-var sampleHref, plansCardArray, plansCardArraySchools;
+var sampleHref, color, plansCardArray, plansCardArraySchools;
 var init_plansCardArray = __esm({
   ".svelte-kit/output/server/chunks/plansCardArray.js"() {
     sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
+    color = {
+      red: "f34d4e",
+      yellow: "fea45c",
+      blue: "2aa5d6"
+    };
     plansCardArray = [
       {
         card: 1,
-        payNowUrl: "https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&primary_color=2aa5d6",
+        payNowUrl: `https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&primary_color=${color.red}`,
         payLaterUrl: "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
         buttonText: "Classico",
         cardTitle: "Classico",
@@ -11363,7 +11369,7 @@ var init_plansCardArray = __esm({
       },
       {
         card: 3,
-        payNowUrl: "https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=fea45c",
+        payNowUrl: `https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=${color.blue}`,
         payLaterUrl: "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
         buttonText: "Mock",
         cardTitle: "Mock",
@@ -11406,7 +11412,7 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var css$1, PlansComponent, css3, ReviewCreator, reviews, Reviews, Page;
+var css$1, PlansComponent, css2, ReviewCreator, reviews, Reviews, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
@@ -11456,7 +11462,7 @@ var init_page_svelte = __esm({
       })}
 </div>`;
     });
-    css3 = {
+    css2 = {
       code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
       map: null
     };
@@ -11472,7 +11478,7 @@ var init_page_svelte = __esm({
         $$bindings.name(name5);
       if ($$props.date === void 0 && $$bindings.date && date !== void 0)
         $$bindings.date(date);
-      $$result.css.add(css3);
+      $$result.css.add(css2);
       $$unsubscribe_isDarkMode();
       return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
@@ -11649,9 +11655,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-b015b001.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-b015b001.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/PlansCard-081e2417.js", "_app/immutable/chunks/plansCardArray-dd6ed761.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/Dropzone-4d76d7fc.js", "_app/immutable/chunks/public-fe26cbe2.js"];
-    stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/PlansCard-fec9ec2d.css", "_app/immutable/assets/Dropzone-cce97800.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-83680e9b.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-83680e9b.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/PlansCard-2e6fc812.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js", "_app/immutable/chunks/Dropzone-15ce251b.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
 
@@ -11684,8 +11690,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/calcom/_page.svelte-82d0a99c.js";
-    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-82d0a99c.js", "_app/immutable/chunks/index-30e2a2cf.js"];
+    file4 = "_app/immutable/components/pages/calcom/_page.svelte-7cfe46fc.js";
+    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-7cfe46fc.js", "_app/immutable/chunks/index-2ea15190.js"];
     stylesheets4 = [];
   }
 });
@@ -11695,16 +11701,16 @@ var page_svelte_exports3 = {};
 __export(page_svelte_exports3, {
   default: () => Page3
 });
-var css4, Page3;
+var css3, Page3;
 var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
     init_chunks();
-    css4 = {
+    css3 = {
       code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
       map: null
     };
     Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css4);
+      $$result.css.add(css3);
       return `${$$result.head += `<!-- HEAD_svelte-1bm9itx_START --><link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}"><\/script><!-- HEAD_svelte-1bm9itx_END -->`, ""}
 
 <details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
@@ -11819,8 +11825,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/faq/_page.svelte-6e446996.js";
-    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-6e446996.js", "_app/immutable/chunks/index-30e2a2cf.js"];
+    file5 = "_app/immutable/components/pages/faq/_page.svelte-4e1492ba.js";
+    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-4e1492ba.js", "_app/immutable/chunks/index-2ea15190.js"];
     stylesheets5 = ["_app/immutable/assets/_page-113a1f72.css"];
   }
 });
@@ -11855,8 +11861,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-e5e23c2a.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-e5e23c2a.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Dropzone-4d76d7fc.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js"];
+    file6 = "_app/immutable/components/pages/homework/_page.svelte-fb771f27.js";
+    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-fb771f27.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/Dropzone-15ce251b.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js"];
     stylesheets6 = ["_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
@@ -12701,7 +12707,7 @@ var init_katex = __esm({
         default: "#cc0000",
         cli: "-c, --error-color <color>",
         cliDescription: "A color string given in the format 'rgb' or 'rrggbb' (no #). This option determines the color of errors rendered by the -t option.",
-        cliProcessor: (color) => "#" + color
+        cliProcessor: (color2) => "#" + color2
       },
       macros: {
         type: "object",
@@ -15422,9 +15428,9 @@ var init_katex = __esm({
           size
         });
       }
-      withColor(color) {
+      withColor(color2) {
         return this.extend({
-          color
+          color: color2
         });
       }
       withPhantom() {
@@ -15552,9 +15558,9 @@ var init_katex = __esm({
         if (options.style.isTight()) {
           this.classes.push("mtight");
         }
-        var color = options.getColor();
-        if (color) {
-          this.style.color = color;
+        var color2 = options.getColor();
+        if (color2) {
+          this.style.color = color2;
         }
       }
     };
@@ -16684,9 +16690,9 @@ var init_katex = __esm({
         if (options.style.isTight()) {
           symbolNode.classes.push("mtight");
         }
-        var color = options.getColor();
-        if (color) {
-          symbolNode.style.color = color;
+        var color2 = options.getColor();
+        if (color2) {
+          symbolNode.style.color = color2;
         }
       }
       return symbolNode;
@@ -17839,9 +17845,9 @@ var init_katex = __esm({
       if (/fbox|color|angl/.test(label)) {
         img = buildCommon.makeSpan(["stretchy", label], [], options);
         if (label === "fbox") {
-          var color = options.color && options.getColor();
-          if (color) {
-            img.style.borderColor = color;
+          var color2 = options.color && options.getColor();
+          if (color2) {
+            img.style.borderColor = color2;
           }
         }
       } else {
@@ -18487,12 +18493,12 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var color = assertNodeType(args[0], "color-token").color;
+        var color2 = assertNodeType(args[0], "color-token").color;
         var body = args[1];
         return {
           type: "color",
           mode: parser.mode,
-          color,
+          color: color2,
           body: ordargument(body)
         };
       },
@@ -18512,13 +18518,13 @@ var init_katex = __esm({
           parser,
           breakOnTokenText
         } = _ref2;
-        var color = assertNodeType(args[0], "color-token").color;
-        parser.gullet.macros.set("\\current@color", color);
+        var color2 = assertNodeType(args[0], "color-token").color;
+        parser.gullet.macros.set("\\current@color", color2);
         var body = parser.parseExpression(true, breakOnTokenText);
         return {
           type: "color",
           mode: parser.mode,
-          color,
+          color: color2,
           body
         };
       },
@@ -19343,15 +19349,15 @@ var init_katex = __esm({
         primitive: true
       },
       handler: (context, args) => {
-        var color = context.parser.gullet.macros.get("\\current@color");
-        if (color && typeof color !== "string") {
+        var color2 = context.parser.gullet.macros.get("\\current@color");
+        if (color2 && typeof color2 !== "string") {
           throw new ParseError("\\current@color set to non-string in \\right");
         }
         return {
           type: "leftright-right",
           mode: context.parser.mode,
           delim: checkDelimiter(args[0], context).text,
-          color
+          color: color2
         };
       }
     });
@@ -19665,13 +19671,13 @@ var init_katex = __esm({
           parser,
           funcName
         } = _ref;
-        var color = assertNodeType(args[0], "color-token").color;
+        var color2 = assertNodeType(args[0], "color-token").color;
         var body = args[1];
         return {
           type: "enclose",
           mode: parser.mode,
           label: funcName,
-          backgroundColor: color,
+          backgroundColor: color2,
           body
         };
       },
@@ -22417,9 +22423,9 @@ var init_katex = __esm({
         var width = calculateSize(group.width, options);
         var height = calculateSize(group.height, options);
         var shift = group.shift ? calculateSize(group.shift, options) : 0;
-        var color = options.color && options.getColor() || "black";
+        var color2 = options.color && options.getColor() || "black";
         var rule = new mathMLTree.MathNode("mspace");
-        rule.setAttribute("mathbackground", color);
+        rule.setAttribute("mathbackground", color2);
         rule.setAttribute("width", makeEm(width));
         rule.setAttribute("height", makeEm(height));
         var wrapper = new mathMLTree.MathNode("mpadded", [rule]);
@@ -25157,14 +25163,14 @@ var init_katex = __esm({
         if (!match) {
           throw new ParseError("Invalid color: '" + res.text + "'", res);
         }
-        var color = match[0];
-        if (/^[0-9a-f]{6}$/i.test(color)) {
-          color = "#" + color;
+        var color2 = match[0];
+        if (/^[0-9a-f]{6}$/i.test(color2)) {
+          color2 = "#" + color2;
         }
         return {
           type: "color-token",
           mode: this.mode,
-          color
+          color: color2
         };
       }
       parseSizeGroup(optional) {
@@ -25569,8 +25575,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file7 = "_app/immutable/components/pages/katex/_page.svx-4d307886.js";
-    imports7 = ["_app/immutable/components/pages/katex/_page.svx-4d307886.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js"];
+    file7 = "_app/immutable/components/pages/katex/_page.svx-48deb5f0.js";
+    imports7 = ["_app/immutable/components/pages/katex/_page.svx-48deb5f0.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js"];
     stylesheets7 = [];
   }
 });
@@ -25604,8 +25610,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/login/_page.svelte-7c09cc17.js";
-    imports8 = ["_app/immutable/components/pages/login/_page.svelte-7c09cc17.js", "_app/immutable/chunks/index-30e2a2cf.js"];
+    file8 = "_app/immutable/components/pages/login/_page.svelte-9ccd339b.js";
+    imports8 = ["_app/immutable/components/pages/login/_page.svelte-9ccd339b.js", "_app/immutable/chunks/index-2ea15190.js"];
     stylesheets8 = [];
   }
 });
@@ -25771,8 +25777,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file9 = "_app/immutable/components/pages/math/_page.svx-7e2c7b1b.js";
-    imports9 = ["_app/immutable/components/pages/math/_page.svx-7e2c7b1b.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/chunks/Kajax-3268fc75.js"];
+    file9 = "_app/immutable/components/pages/math/_page.svx-f3529ea9.js";
+    imports9 = ["_app/immutable/components/pages/math/_page.svx-f3529ea9.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/Kajax-78c004d3.js"];
     stylesheets9 = [];
   }
 });
@@ -25851,8 +25857,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file10 = "_app/immutable/components/pages/mathjax/_page.svx-569c6719.js";
-    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-569c6719.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js"];
+    file10 = "_app/immutable/components/pages/mathjax/_page.svx-32ecb0a2.js";
+    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-32ecb0a2.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js"];
     stylesheets10 = [];
   }
 });
@@ -25862,18 +25868,18 @@ var page_svelte_exports6 = {};
 __export(page_svelte_exports6, {
   default: () => Page9
 });
-var css5, E_and_m, Page9;
+var css4, E_and_m, Page9;
 var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
     init_Kajax();
     init_store();
-    css5 = {
+    css4 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css5);
+      $$result.css.add(css4);
       return `${validate_component(Kajax, "MathRenderer").$$render($$result, {}, {}, {})}
 
 
@@ -25970,8 +25976,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file11 = "_app/immutable/components/pages/physics/_page.svelte-e406bb60.js";
-    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-e406bb60.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/Kajax-3268fc75.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js"];
+    file11 = "_app/immutable/components/pages/physics/_page.svelte-e7c379c3.js";
+    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-e7c379c3.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/Kajax-78c004d3.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js"];
     stylesheets11 = ["_app/immutable/assets/_page-fcf51fa8.css"];
   }
 });
@@ -25988,19 +25994,19 @@ var page_svelte_exports7 = {};
 __export(page_svelte_exports7, {
   default: () => Page10
 });
-var css6, Page10;
+var css5, Page10;
 var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
     init_store();
     init_PlansCard();
     init_plansCardArray();
-    css6 = {
+    css5 = {
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
     Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css6);
+      $$result.css.add(css5);
       return `<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
         return `<div>${validate_component(PlansCard, "PlansCard").$$render(
           $$result,
@@ -26054,9 +26060,9 @@ var init__12 = __esm({
     init_page();
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/plans/_page.svelte-fc8c48a2.js";
-    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-fc8c48a2.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/PlansCard-081e2417.js", "_app/immutable/chunks/plansCardArray-dd6ed761.js", "_app/immutable/chunks/index-36fbeedd.js", "_app/immutable/modules/pages/plans/_page.js-a59d233a.js"];
-    stylesheets12 = ["_app/immutable/assets/_page-097b9a4a.css", "_app/immutable/assets/PlansCard-fec9ec2d.css"];
+    file12 = "_app/immutable/components/pages/plans/_page.svelte-35ba1db6.js";
+    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-35ba1db6.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/PlansCard-2e6fc812.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js", "_app/immutable/modules/pages/plans/_page.js-a59d233a.js"];
+    stylesheets12 = ["_app/immutable/assets/_page-097b9a4a.css"];
   }
 });
 
@@ -26093,8 +26099,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file13 = "_app/immutable/components/pages/samplequiz/_page.md-e5707912.js";
-    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-e5707912.js", "_app/immutable/chunks/index-30e2a2cf.js"];
+    file13 = "_app/immutable/components/pages/samplequiz/_page.md-5805688e.js";
+    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-5805688e.js", "_app/immutable/chunks/index-2ea15190.js"];
     stylesheets13 = [];
   }
 });
@@ -26104,13 +26110,13 @@ var page_svelte_exports8 = {};
 __export(page_svelte_exports8, {
   default: () => Page12
 });
-var css7, PlansCardSchools, Page12;
+var css6, PlansCardSchools, Page12;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
     init_store();
     init_plansCardArray();
-    css7 = {
+    css6 = {
       code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
       map: null
     };
@@ -26133,12 +26139,12 @@ var init_page_svelte8 = __esm({
         $$bindings.btnColorHover(btnColorHover);
       if ($$props.card === void 0 && $$bindings.card && card !== void 0)
         $$bindings.card(card);
-      $$result.css.add(css7);
+      $$result.css.add(css6);
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
       return `
 
-<card class="${"block hover:scale-105 shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+<plans-card class="${"block hover:scale-105 shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
   <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
@@ -26146,7 +26152,7 @@ var init_page_svelte8 = __esm({
       ) + " text-xl text-white svelte-h89m1w"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
-</card>`;
+</plans-card>`;
     });
     Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
@@ -26198,8 +26204,8 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-580f2cc1.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-580f2cc1.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/plansCardArray-dd6ed761.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/index-36fbeedd.js"];
+    file14 = "_app/immutable/components/pages/schools/_page.svelte-456d8fc0.js";
+    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-456d8fc0.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js"];
     stylesheets14 = ["_app/immutable/assets/_page-fec9ec2d.css"];
   }
 });
@@ -26258,8 +26264,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-315419b4.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-315419b4.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-fd6ec734.js", "_app/immutable/chunks/singletons-dcbff018.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-5e3eaa97.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-5e3eaa97.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/navigation-3b35a7d3.js", "_app/immutable/chunks/singletons-1c1c46c3.js"];
     stylesheets15 = [];
   }
 });
@@ -26309,8 +26315,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-011577f3.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-011577f3.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/store-d1c055f5.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/navigation-fd6ec734.js", "_app/immutable/chunks/singletons-dcbff018.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-be894264.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-be894264.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-0b213626.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/navigation-3b35a7d3.js", "_app/immutable/chunks/singletons-1c1c46c3.js"];
     stylesheets16 = [];
   }
 });
@@ -26320,17 +26326,17 @@ var page_svelte_exports11 = {};
 __export(page_svelte_exports11, {
   default: () => Page15
 });
-var css8, Page15;
+var css7, Page15;
 var init_page_svelte11 = __esm({
   ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
     init_chunks();
     init_firebase();
-    css8 = {
+    css7 = {
       code: '.loading.svelte-tci3t6:after{content:" . . .";animation:svelte-tci3t6-dots 1s steps(5, end) infinite}@keyframes svelte-tci3t6-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
       map: null
     };
     Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css8);
+      $$result.css.add(css7);
       return `${$$result.head += `<!-- HEAD_svelte-qn95fl_START -->${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}"><\/script><!-- HEAD_svelte-qn95fl_END -->`, ""}
 
 <main>${``}
@@ -26353,8 +26359,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-4909acbd.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-4909acbd.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/firebase-3c7a60ba.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-36fbeedd.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-6e29c057.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-6e29c057.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/firebase-3c7a60ba.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-bb4a86c3.js"];
     stylesheets17 = ["_app/immutable/assets/_page-5c304dd7.css"];
   }
 });
@@ -28983,7 +28989,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-ce75908f.js", "imports": ["_app/immutable/start-ce75908f.js", "_app/immutable/chunks/index-30e2a2cf.js", "_app/immutable/chunks/singletons-dcbff018.js", "_app/immutable/chunks/index-99e25be1.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-6cf1950e.js", "imports": ["_app/immutable/start-6cf1950e.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/singletons-1c1c46c3.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

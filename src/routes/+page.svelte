@@ -20,6 +20,7 @@
   }`;
 
   let ready = false;
+
   // let vid;
 
   onMount(() => {

@@ -54,6 +54,7 @@
 
       // this janky solution allows for the embeded jitsu to load ... otherwise I had to
       //  manually reload the page and use "export const router = false" for the +page.js
+      // TODO:
       if (href == "/screenshare") {
         setTimeout(() => {
           location.reload();
@@ -61,7 +62,7 @@
         }, 100);
       }
 
-      prefetch(href);
+      // prefetch(href);
       goto(href);
     }}
   >

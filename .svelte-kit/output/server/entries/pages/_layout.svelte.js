@@ -6,6 +6,13 @@ import { getDocs, collection } from "firebase/firestore/lite";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
+const PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+
+
+
+`;
+});
 const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { showModal = false } = $$props;
   let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
@@ -435,7 +442,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "bottom-0 backdrop-blur-3xl duration-700";
       }
     }
-    $$rendered = `
+    $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
+
+
 
 ${$$result.head += `<!-- HEAD_svelte-e21tyb_START --><link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin><link href="${"https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"}" rel="${"stylesheet"}">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "/" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;

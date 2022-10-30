@@ -1,8 +1,13 @@
 const sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
+const color = {
+  red: "f34d4e",
+  yellow: "fea45c",
+  blue: "2aa5d6"
+};
 const plansCardArray = [
   {
     card: 1,
-    payNowUrl: "https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&primary_color=2aa5d6",
+    payNowUrl: `https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&primary_color=${color.red}`,
     payLaterUrl: "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
     buttonText: "Classico",
     cardTitle: "Classico",
@@ -11,7 +16,7 @@ const plansCardArray = [
   },
   {
     card: 3,
-    payNowUrl: "https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=fea45c",
+    payNowUrl: `https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=${color.blue}`,
     payLaterUrl: "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
     buttonText: "Mock",
     cardTitle: "Mock",

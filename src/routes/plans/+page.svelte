@@ -1,18 +1,27 @@
 <script>
   import { isDarkMode } from "$lib/store.js";
+  // annoying that I have to import this component here and in layout, otherwise doesnt work as expected
+  import PlansCardObserver from "$lib/PlansCardObserver.svelte";
   import PlansCard from "$lib/PlansCard.svelte";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/plansCardArray.js";
   import { onMount } from "svelte";
 
+  // let ready = false;
+  // onMount(() => {
+  //   ready = true;
+  // });
+
   // export let data;
   // const { someMessage } = data;
   // console.log("someMessage", someMessage);
 </script>
 
+<PlansCardObserver />
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 ">
   {#each plansCardArray as item, i}
+    <!-- {#if ready} -->
     <div in:scale={{ duration: 1000, easing: elasticOut, delay: 100 * i }}>
       <PlansCard
         card={item.card}
@@ -26,11 +35,14 @@
           {item.cardText}
           <!-- {#if item.buttonText == "Custom"} -->
           <!-- <p><a sveltekit:prefetch href={item.href}>invoice sample</a></p> -->
-          <p><a data-sveltekit-prefetch href={item.href}>invoice sample</a></p>
+          <p>
+            <a data-sveltekit-prefetch href={item.href}>invoice sample</a>
+          </p>
           <!-- {/if} -->
         </span>
       </PlansCard>
     </div>
+    <!-- {/if} -->
   {/each}
 </div>
 

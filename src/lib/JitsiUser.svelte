@@ -1,13 +1,22 @@
+<!--TODO: for some reason have to add back external calendly js/css into head tag (below) or app breaks when leaving screenshare route, where this JitsiUser component is mounted-->
 <script>
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import { lessThan768 } from "$lib/store.js";
-  import { goto } from "$app/navigation";
+  // import { goto } from "$app/navigation";
+
+  // function loadJitsiExternal() {
+  //   const jitsiJS = document.createElement("script");
+  //   jitsiJS.src = "https://meet.jit.si/external_api.js";
+  //   jitsiJS.type = "text/javascript";
+  //   document.head.appendChild(jitsiJS);
+  // }
+  // loadJitsiExternal();
 
   async function hangUpBtn() {
     await api.dispose();
     await setTimeout(() => {
-      goto("/");
-      // window.location.href = "https://thinksolve.io";
+      // goto("/");
+      window.location.href = "/";
     }, 0);
   }
 
@@ -100,22 +109,22 @@
       // alert(firstID);
       // alert(par.length);
     });
-
-    // wed oct 19, 2022 @ 10:25pm:
-    // this apparently fixes multiple dropzonejs instances interfering with jitsi ....
-    // namely having a global modal dropzone and a homepage dropzone was crashing app
-    // Still unclear if this was the actual fix since screenshareA route does NOT have this
-    // and doesnt break when navigating to/from it....
-    //TODO: oct 20, 2022 @ 1pm ..turned off
-    // onDestroy(() => {
-    //   api.dispose();
-    //   console.log("dispose worked");
-    // });
   });
 </script>
 
 <svelte:head>
   <script src="https://meet.jit.si/external_api.js"></script>
+
+  <!--TODO: for some reason have to add back external calendly or app breaks when leaving screenshare route, where this JitsiUser component is mounted-->
+  <link
+    href="https://assets.calendly.com/assets/external/widget.css"
+    rel="stylesheet"
+  />
+  <script
+    src="https://assets.calendly.com/assets/external/widget.js"
+    type="text/javascript"
+    async
+  ></script>
 </svelte:head>
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">
@@ -123,6 +132,7 @@
 
   <img
     on:click={hangUpBtn}
+    on:keydown={hangUpBtn}
     alt="hangup button"
     class=" bg-gray-600 p-2 absolute brightness-50 {!par &&
       'opacity-0'} {$lessThan768
