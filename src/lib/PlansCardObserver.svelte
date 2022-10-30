@@ -12,7 +12,7 @@
     document.head.appendChild(calendlyCSS);
   }
 
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
 
   onMount(() => {
     const plansCard = document.querySelector("plans-card");
@@ -23,29 +23,24 @@
     };
 
     const observer = new IntersectionObserver(function (entries, observer) {
-      // for (let entry of entries) {
-      //   if (!entry.isIntersecting) {
-      //     return;
-      //   }
-      //   // if (entry.isIntersecting) {
-      //   console.log("i c u baby");
-      //   calendlyJSandCSStoHead();
-      //   observer.unobserve(entry.target);
-      //   // }
-      // }
-      if (entries[0].isIntersecting) {
+      for (let entry of entries) {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        // if (entry.isIntersecting) {
         console.log("i c u baby");
         calendlyJSandCSStoHead();
-        observer.unobserve(entries[0].target);
+        observer.unobserve(entry.target);
+        // }
       }
+      // if (entries[0].isIntersecting) {
+      //   console.log("i c u baby");
+      //   calendlyJSandCSStoHead();
+      //   observer.unobserve(entries[0].target);
+      // }
     }, options);
 
     observer.observe(plansCard);
-
-    // onDestroy(() => {
-    //   document.head.removeChild(calendlyJS);
-    //   document.head.removeChild(calendlyCSS);
-    // });
   });
 </script>
 

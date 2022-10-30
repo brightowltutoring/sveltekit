@@ -1,4 +1,5 @@
 import { c as create_ssr_component, e as escape, a as subscribe, d as add_attribute, v as validate_component, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
+import { P as PlansCardObserver } from "../../chunks/PlansCardObserver.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { n as navLoginClicked, i as isLoggedIn, a as isDarkMode, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, w as windowInnerHeight, d as scrollYMax, f as innerWidth } from "../../chunks/store.js";
 import { d as db } from "../../chunks/firebase.js";
@@ -6,13 +7,6 @@ import { getDocs, collection } from "firebase/firestore/lite";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
-const PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-
-
-
-`;
-});
 const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { showModal = false } = $$props;
   let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;

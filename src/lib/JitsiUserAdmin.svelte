@@ -8,8 +8,8 @@
   async function hangUpBtn() {
     await api.dispose();
     await setTimeout(() => {
-      goto("/");
-      // window.location.href = "https://thinksolve.io";
+      // goto("/");
+      window.location.href = "/";
     }, 0);
   }
 
@@ -99,6 +99,7 @@
 <div class="relative md:-translate-y-10 -translate-y-32 ">
   <div id="meet" class="w-full h-[95vh] md:h-[670px]" />
   <img
+    on:keydown={hangUpBtn}
     on:click={hangUpBtn}
     alt="hangup button"
     class=" bg-gray-600 p-2 absolute brightness-50 {!par &&
@@ -106,13 +107,4 @@
       ? 'top-5 right-5 '
       : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0  hover:bg-red-500"
   />
-  <!-- <img
-    on:click={hangUpBtn}
-    alt="hangup button"
-    class="absolute {!par && 'opacity-0'} {$lessThan768
-      ? 'top-5 right-5 '
-      : 'bottom-10 right-10 '} flex w-[50px] rounded-full content-[url('/hangup-gray.png')] rotate-90 duration-[0.4s] hover:scale-[1.8] hover:rotate-0 hover:content-[url('/hangup-red.png')] "
-  /> -->
 </div>
-<!-- top-5 right-0 left-0 text-center mr-auto ml-auto -->
-<!-- sm:bottom-10 sm:right-10 top-0 right-5  -->

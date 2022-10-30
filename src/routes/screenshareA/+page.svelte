@@ -1,12 +1,17 @@
 <script>
   import JitsiUserAdmin from "$lib/JitsiUserAdmin.svelte";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { isDarkMode } from "$lib/store.js";
 
   onMount(() => {
     $isDarkMode = true;
-    window.document.body.classList.toggle("dark-mode");
+    window.document.body.classList.add("dark-mode");
   });
+  // onDestroy(() => {
+  //   $isDarkMode = false;
+  //   api.dispose();
+  //   window.document.body.classList.remove("dark-mode");
+  // });
 </script>
 
 <JitsiUserAdmin />
