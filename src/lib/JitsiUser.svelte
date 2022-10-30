@@ -133,8 +133,16 @@
       console.log("onMount for JitsiMeetExternalAPI broken", error);
     }
   });
-  afterNavigate(async () => {
-    await hangUpBtn();
+  // afterNavigate(async () => {
+  //   await hangUpBtn();
+  // });
+
+  beforeNavigate(() => {
+    console.log("beforeNavigate from ....");
+    // api.dispose();
+    // setTimeout(() => {
+    //   location.reload();
+    // }, 100);
   });
 </script>
 

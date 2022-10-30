@@ -1,9 +1,8 @@
 <script>
   import JitsiUser from "$lib/JitsiUser.svelte";
-
+  import { beforeNavigate } from "$app/navigation";
   import { onMount, onDestroy } from "svelte";
   import { isDarkMode } from "$lib/store.js";
-  import { browser, dev } from "$app/environment";
 
   // let jitsiExternal = false;
   // async function loadJitsiExternal() {
@@ -26,12 +25,18 @@
   });
   onDestroy(() => {
     $isDarkMode = false;
-    (browser || dev) && window.document.body.classList.remove("dark-mode");
+    // (browser || dev) && window.document.body.classList.remove("dark-mode");
+    window.document.body.classList.remove("dark-mode");
     console.log("heyy");
   });
+
+  // beforeNavigate(() => {
+  //   console.log("beforeNavigate from /screenshare");
+  // });
 </script>
 
 <JitsiUser />
+
 <!-- 
 <svelte:head>
   <script

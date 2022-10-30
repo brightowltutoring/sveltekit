@@ -21,8 +21,8 @@
 
 <!-- <CalendlyJsandCss /> -->
 
-<plans-card
-  class="block hover:scale-105 shadow-md {$isDarkMode
+<div
+  class="plansCard block hover:scale-105 shadow-md {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"
   style={`background:${$elementColor}`}
@@ -51,7 +51,7 @@
   <div class="py-4">
     <slot name="cardText">default cardText</slot>
   </div>
-</plans-card>
+</div>
 
 <style>
   .card {

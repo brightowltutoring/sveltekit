@@ -28,6 +28,7 @@
   // import { browser } from "$app/env";
   import { browser } from "$app/environment";
   import { afterNavigate } from "$app/navigation";
+  import { claim_svg_element } from "svelte/internal";
   afterNavigate(() => {
     window.localStorage.setItem("isDarkModeLS", $isDarkMode);
   });
