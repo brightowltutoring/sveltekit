@@ -1,36 +1,7 @@
 <script>
-  // import CalendlyJsandCss from "./CalendlyJsandCSS.svelte";
-  import { getCalendlyJSandCSS } from "$lib/GetCalendlyLinks.js";
   import { isDarkMode, elementColor } from "$lib/store.js";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
-
-  import { onMount } from "svelte";
-
-  onMount(() => {
-    let cardIdentifier = document.querySelector(".cardIdentifier");
-    let observer = new IntersectionObserver(callback, {
-      root: null,
-      threshold: 0,
-      rootMargin: "0px",
-    });
-
-    observer.observe(cardIdentifier);
-
-    function callback(entries, observer) {
-      for (let entry of entries) {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        console.log("i see you");
-
-        getCalendlyJSandCSS();
-
-        observer.unobserve(entry.target);
-      }
-    }
-  });
 
   export let payNowUrl = "";
   export let payLaterUrl = "";
@@ -61,9 +32,7 @@
   };
 </script>
 
-<!-- <CalendlyJsandCss /> -->
-
-<card
+<plans-card
   class="cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"
@@ -78,13 +47,7 @@
       <button
         in:scale={{ duration: 600, easing: elasticOut }}
         on:click={() => {
-          // getCalendlyJSandCSS();
-
-          // TODO: this logic has to be fixed as a promise of sorts .. maybe mutation observer the head links before calling calendly
-          setTimeout(() => {
-            Calendly.initPopupWidget({ url: `${button.url}` });
-          }, 50);
-
+          Calendly.initPopupWidget({ url: `${button.url}` });
           button.resetter = !button.resetter;
         }}
         class=" {buttonColor[
@@ -99,20 +62,4 @@
   <div class="py-4">
     <slot name="cardText">default cardText</slot>
   </div>
-</card>
-
-<style>
-  .card {
-    transform: perspective(1000px) rotateX(12deg);
-    /* transform: perspective(1000px) rotateX(0deg); */
-    /* transition: transform 0.3s ease 0s; */
-    /* transition: 500ms; */
-    z-index: 10;
-    -webkit-transform: translateZ(-1px);
-  }
-
-  .card:hover {
-    transform: perspective(1000px) rotateX(0deg) scale(1.02);
-    /* transform: perspective(1000px) rotateX(12deg) scale(1.02); */
-  }
-</style>
+</plans-card>

@@ -2,6 +2,7 @@
   import "../app.css";
   // import JitsiUser from "$lib/JitsiUser.svelte";
 
+  import PlansCardObserver from "$lib/PlansCardObserver.svelte";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone.svelte";
   import LoginCard from "$lib/LoginCard.svelte";
@@ -70,6 +71,8 @@
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
 </script>
+
+<PlansCardObserver />
 
 <!-- <SwitchToDarkMode /> -->
 

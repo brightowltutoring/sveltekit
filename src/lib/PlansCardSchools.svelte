@@ -1,7 +1,4 @@
 <script>
-  // import CalendlyJsandCss from "./CalendlyJsandCSS.svelte";
-  import { getCalendlyCSS, getCalendlyJS } from "$lib/GetCalendlyLinks.js";
-
   import { isDarkMode, elementColor } from "$lib/store.js";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -24,7 +21,7 @@
 
 <!-- <CalendlyJsandCss /> -->
 
-<card
+<plans-card
   class="block hover:scale-105 shadow-md {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"
@@ -38,12 +35,7 @@
     <button
       in:scale={{ duration: 600, easing: elasticOut }}
       on:click={() => {
-        getCalendlyCSS();
-        getCalendlyJS();
-
-        setTimeout(() => {
-          Calendly.initPopupWidget({ url: `${button.url}` });
-        }, 100);
+        Calendly.initPopupWidget({ url: `${schoolUrl}` });
         resetBtn = !resetBtn;
       }}
       class=" {buttonColor[
@@ -59,7 +51,7 @@
   <div class="py-4">
     <slot name="cardText">default cardText</slot>
   </div>
-</card>
+</plans-card>
 
 <style>
   .card {
