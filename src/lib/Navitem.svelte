@@ -62,7 +62,7 @@
       //   }, 500);
       // }
 
-      prefetch(href);
+      // prefetch(href);
       goto(href);
     }}
   >

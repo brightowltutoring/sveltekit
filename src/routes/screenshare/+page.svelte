@@ -3,9 +3,10 @@
 
   import { onMount, onDestroy } from "svelte";
   import { isDarkMode } from "$lib/store.js";
+  import { browser, dev } from "$app/environment";
 
   // let jitsiExternal = false;
-  // function loadJitsiExternal() {
+  // async function loadJitsiExternal() {
   //   if (!document.getElementById("jitsiId")) {
   //     const jitsiJS = document.createElement("script");
   //     jitsiJS.id = "jitsiId";
@@ -25,14 +26,28 @@
   });
   onDestroy(() => {
     $isDarkMode = false;
-    window.document.body.classList.remove("dark-mode");
+    (browser || dev) && window.document.body.classList.remove("dark-mode");
+    console.log("heyy");
   });
 </script>
 
-<!-- {#if jitsiExternal} -->
 <JitsiUser />
-<!-- {/if} -->
+<!-- 
+<svelte:head>
+  <script
+    async
+    src="https://meet.jit.si/external_api.js"
+    onload={console.log("jitsi external api loaded")}
+  >
+  </script>
 
-<!-- TODO: -->
-<!-- jank alert! onoading this page, other pages break that make use of calendly component ... unless i import the calendly component here... Something about jitsi's head links interferes with calendly head links, when importing calendly css via js element creation -->
-<!-- <CalendlyJsandCSS /> -->
+  <link
+    href="https://assets.calendly.com/assets/external/widget.css"
+    rel="stylesheet"
+  />
+  <script
+    src="https://assets.calendly.com/assets/external/widget.js"
+    type="text/javascript"
+    async
+  ></script>
+</svelte:head> -->
