@@ -22,6 +22,7 @@
 </script>
 
 <video
+  loading="lazy"
   controlslist="nodownload"
   playsinline
   autoplay

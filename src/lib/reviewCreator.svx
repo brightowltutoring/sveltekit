@@ -15,7 +15,7 @@
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
-      <img src="star.webp" alt="star" style="width:40px; height:40px" class="hover:scale-150 duration-300"/>
+      <img loading="lazy "src="star.webp" alt="star" style="width:40px; height:40px" class="hover:scale-150 duration-300"/>
 
       {/each}
   
