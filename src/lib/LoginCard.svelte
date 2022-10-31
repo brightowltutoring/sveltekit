@@ -11,6 +11,7 @@
   } from "$lib/store.js";
   import {
     GoogleLogin,
+    TwitterLogin,
     logoutFunction,
     regexEmailChecker,
     magicLinkToEmail,
@@ -20,6 +21,7 @@
   import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
   import IconGoogle from "$lib/IconGoogle.svelte";
   import IconEmail from "$lib/IconEmail.svelte";
+  import IconTwitter from "$lib/IconTwitter.svelte";
 
   let emailFieldValue = "";
   let isEmail = false; // this global variable is updated with regex to verify email input
@@ -195,34 +197,24 @@
   style={`background:${$elementColor}`}
 >
   <div class="logInDiv p-5">
-    <div
-      on:click={GoogleLogin}
-      on:keydown={GoogleLogin}
-      in:scale={{ duration: 600, easing: elasticOut }}
-      class="   bg-[#4285f4]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'} text-xl text-white "
-    >
-      <signin-button class="flex justify-center items-center gap-5">
-        <IconGoogle />
-        <span>Sign-in with Google</span>
-      </signin-button>
-    </div>
-
-    <p class="py-5">or</p>
-
-    <div
+    <!-- <div
       id="passwordlessLoginBtn"
       in:scale={{ duration: 600, easing: elasticOut }}
       class=" bg-red-400   hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-80'
         : 'group-hover:bg-opacity-80'} text-xl text-white "
+    > -->
+    <signin-button
+      id="passwordlessLoginBtn"
+      in:scale={{ duration: 600, easing: elasticOut }}
+      class=" bg-red-400   hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+        ? 'group-hover:bg-opacity-80'
+        : 'group-hover:bg-opacity-80'} text-xl text-white flex justify-center items-center gap-5"
     >
-      <signin-button class="flex justify-center items-center gap-5">
-        <IconEmail />
-        <span>Get Magic Link</span>
-      </signin-button>
-    </div>
+      <IconEmail />
+      <span>Get Magic Link</span>
+    </signin-button>
+    <!-- </div> -->
 
     <input
       on:keyup={onInputEmailField(emailFieldValue)}
@@ -234,6 +226,49 @@
     />
 
     <span id="emailStatusMessage" />
+
+    <p class="py-5">or</p>
+    <!-- <div
+      on:click={GoogleLogin}
+      on:keydown={GoogleLogin}
+      in:scale={{ duration: 600, easing: elasticOut }}
+      class="   bg-[#4285f4]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+        ? 'group-hover:bg-opacity-90'
+        : 'group-hover:bg-opacity-90'} text-xl text-white "
+    > -->
+    <signin-button
+      on:click={GoogleLogin}
+      on:keydown={GoogleLogin}
+      in:scale={{ duration: 600, easing: elasticOut }}
+      class=" mb-6  bg-[#4285f4]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+        ? 'group-hover:bg-opacity-90'
+        : 'group-hover:bg-opacity-90'} text-xl text-white  flex justify-center items-center gap-5"
+    >
+      <IconGoogle />
+      <span>Sign-in with Google</span>
+    </signin-button>
+    <!-- </div> -->
+
+    <!-- <div
+      on:click={TwitterLogin}
+      on:keydown={TwitterLogin}
+      in:scale={{ duration: 600, easing: elasticOut }}
+      class="   bg-[#1d9bf0]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+        ? 'group-hover:bg-opacity-90'
+        : 'group-hover:bg-opacity-90'} text-xl text-white "
+    > -->
+    <signin-button
+      on:click={TwitterLogin}
+      on:keydown={TwitterLogin}
+      in:scale={{ duration: 600, easing: elasticOut }}
+      class="   bg-[#1d9bf0]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+        ? 'group-hover:bg-opacity-90'
+        : 'group-hover:bg-opacity-90'} text-xl text-white  flex justify-center items-center gap-5"
+    >
+      <IconTwitter />
+      <span>Sign-in with Twitter</span>
+    </signin-button>
+    <!-- </div> -->
   </div>
 
   <div class="logOutDiv" style="display:none">
