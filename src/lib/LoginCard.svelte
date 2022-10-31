@@ -16,16 +16,9 @@
     magicLinkToEmail,
   } from "$lib/loginFunctions.js";
 
-  import {
-    auth,
-    // db,
-  } from "$lib/firebase.js";
+  import { auth } from "$lib/firebase.js";
   import { collection, getDocs } from "firebase/firestore/lite";
-  import {
-    onAuthStateChanged,
-    isSignInWithEmailLink,
-    // signInWithEmailLink,
-  } from "firebase/auth";
+  import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
   import IconGoogle from "$lib/IconGoogle.svelte";
   import IconEmail from "$lib/IconEmail.svelte";
 
@@ -49,7 +42,6 @@
     clearTimeout(redirectAfterLoginTimeOut);
   }
 
-  //  onmount
   onMount(async () => {
     const logInDiv = document.querySelector(".logInDiv");
     const logOutDiv = document.querySelector(".logOutDiv");
@@ -58,8 +50,6 @@
       "#passwordlessLoginBtn"
     );
     const emailField = document.querySelector("#emailField");
-
-    // TODO: testing these out here rather than inside anothe ructoin
 
     passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop);
     emailField.addEventListener("keydown", signinWithLinkAndStop);

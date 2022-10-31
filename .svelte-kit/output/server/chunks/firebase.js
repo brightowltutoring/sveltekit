@@ -17,13 +17,16 @@ const firebaseConfig = {
   appId: PUBLIC_FIREBASE_appId
 };
 const app = initializeApp(firebaseConfig);
-getAuth(app);
+const auth = getAuth(app);
 const db = getFirestore(app);
 const functions = getFunctions(app);
-httpsCallable(
+const stripeSessionIdGCF = httpsCallable(
   functions,
   "stripeSessionIdGCF"
 );
 export {
-  db as d
+  app,
+  auth,
+  db,
+  stripeSessionIdGCF
 };

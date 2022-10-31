@@ -1,11 +1,6 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, v as validate_component } from "../../../chunks/index.js";
 import { a as isDarkMode, e as elementColor } from "../../../chunks/store.js";
 import { a as plansCardArraySchools } from "../../../chunks/plansCardArray.js";
-const PlansCardSchools_svelte_svelte_type_style_lang = "";
-const css = {
-  code: ".card.svelte-h89m1w{transform:perspective(1000px) rotateX(12deg);z-index:10;-webkit-transform:translateZ(-1px)}.card.svelte-h89m1w:hover{transform:perspective(1000px) rotateX(0deg) scale(1.02)}",
-  map: null
-};
 const PlansCardSchools = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $elementColor, $$unsubscribe_elementColor;
@@ -25,27 +20,21 @@ const PlansCardSchools = create_ssr_component(($$result, $$props, $$bindings, sl
     $$bindings.btnColorHover(btnColorHover);
   if ($$props.card === void 0 && $$bindings.card && card !== void 0)
     $$bindings.card(card);
-  $$result.css.add(css);
   $$unsubscribe_isDarkMode();
   $$unsubscribe_elementColor();
   return `
 
-<div class="${"plansCard block hover:scale-105 shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+<plans-card class="${"block hover:scale-105 shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
   <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
-  ) + " text-xl text-white svelte-h89m1w"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
+  ) + " text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
 
-  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div>
-</div>`;
+  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-
-
-
-<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArraySchools, (item, i) => {
+  return `<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArraySchools, (item, i) => {
     return `
     <div>${validate_component(PlansCardSchools, "PlansCardSchools").$$render(
       $$result,

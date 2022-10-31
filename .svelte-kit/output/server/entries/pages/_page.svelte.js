@@ -183,20 +183,11 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
-  return `
-
-
-
-<video controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
-
-
-
-
-
+  return `<video controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
 
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
   <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
-      
+
       <div class="${"text-2xl font-Nunito "}">\u{1F449} click for reviews
       </div></div></div>
 
@@ -211,7 +202,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
 
   
-  
+
   <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}"><span${add_attribute("class", gradientTextColor, 0)}>3. Do Some Reading </span><span>\u{1F60E}
       </span></p>
     ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>
