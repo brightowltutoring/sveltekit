@@ -1,11 +1,11 @@
 {
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-7ce97443.js",
+    "file": "_app/immutable/start-b625ce50.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
       "_index-2ea15190.js",
-      "_singletons-2dc448c9.js",
+      "_singletons-0a56d931.js",
       "_preload-helper-b21cceae.js"
     ],
     "dynamicImports": [
@@ -29,7 +29,7 @@
     ]
   },
   "src/routes/+layout.svelte": {
-    "file": "_app/immutable/components/pages/_layout.svelte-85273918.js",
+    "file": "_app/immutable/components/pages/_layout.svelte-f268c93d.js",
     "src": "src/routes/+layout.svelte",
     "isEntry": true,
     "imports": [
@@ -37,11 +37,11 @@
       "_PlansCardObserver-a59a4974.js",
       "_Dropzone-90bbc3c0.js",
       "_preload-helper-b21cceae.js",
-      "_navigation-dc373fda.js",
+      "_navigation-60784fe9.js",
       "_index-bb4a86c3.js",
       "_store-51cc123c.js",
       "_firebase-0942ef91.js",
-      "_singletons-2dc448c9.js",
+      "_singletons-0a56d931.js",
       "_index-b2a33226.js"
     ],
     "dynamicImports": [
@@ -192,23 +192,23 @@
     ]
   },
   "src/routes/screenshare/+page.svelte": {
-    "file": "_app/immutable/components/pages/screenshare/_page.svelte-fc247abb.js",
+    "file": "_app/immutable/components/pages/screenshare/_page.svelte-ba3761e8.js",
     "src": "src/routes/screenshare/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-2ea15190.js",
-      "_navigation-dc373fda.js",
+      "_navigation-60784fe9.js",
       "_store-51cc123c.js"
     ]
   },
   "src/routes/screenshareA/+page.svelte": {
-    "file": "_app/immutable/components/pages/screenshareA/_page.svelte-93a6db9e.js",
+    "file": "_app/immutable/components/pages/screenshareA/_page.svelte-478ea420.js",
     "src": "src/routes/screenshareA/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-2ea15190.js",
       "_store-51cc123c.js",
-      "_navigation-dc373fda.js"
+      "_navigation-60784fe9.js"
     ]
   },
   "src/routes/stripe/+page.svelte": {
@@ -233,8 +233,8 @@
       "__page-b7043975.js"
     ]
   },
-  "_singletons-2dc448c9.js": {
-    "file": "_app/immutable/chunks/singletons-2dc448c9.js",
+  "_singletons-0a56d931.js": {
+    "file": "_app/immutable/chunks/singletons-0a56d931.js",
     "imports": [
       "_index-b2a33226.js"
     ]
@@ -285,10 +285,10 @@
       "_index-2ea15190.js"
     ]
   },
-  "_navigation-dc373fda.js": {
-    "file": "_app/immutable/chunks/navigation-dc373fda.js",
+  "_navigation-60784fe9.js": {
+    "file": "_app/immutable/chunks/navigation-60784fe9.js",
     "imports": [
-      "_singletons-2dc448c9.js"
+      "_singletons-0a56d931.js"
     ]
   },
   "_firebase-0942ef91.js": {
@@ -323,7 +323,7 @@
     "file": "_app/immutable/chunks/_page-b7043975.js"
   },
   ".svelte-kit/generated/nodes/0.js": {
-    "file": "_app/immutable/chunks/0-2989f71d.js",
+    "file": "_app/immutable/chunks/0-92c763cc.js",
     "src": ".svelte-kit/generated/nodes/0.js",
     "isDynamicEntry": true,
     "imports": [
@@ -435,7 +435,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/14.js": {
-    "file": "_app/immutable/chunks/14-03151800.js",
+    "file": "_app/immutable/chunks/14-c39beaef.js",
     "src": ".svelte-kit/generated/nodes/14.js",
     "isDynamicEntry": true,
     "imports": [
@@ -444,7 +444,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/15.js": {
-    "file": "_app/immutable/chunks/15-89f5dec7.js",
+    "file": "_app/immutable/chunks/15-e1f444bc.js",
     "src": ".svelte-kit/generated/nodes/15.js",
     "isDynamicEntry": true,
     "imports": [
@@ -467,29 +467,29 @@
       "_firebase-0942ef91.js"
     ]
   },
-  "src/routes/+page.css": {
-    "file": "_app/immutable/assets/_page-410c3bc4.css",
-    "src": "src/routes/+page.css"
+  "src/routes/physics/+page.css": {
+    "file": "_app/immutable/assets/_page-fcf51fa8.css",
+    "src": "src/routes/physics/+page.css"
   },
   "src/routes/faq/+page.css": {
     "file": "_app/immutable/assets/_page-113a1f72.css",
     "src": "src/routes/faq/+page.css"
   },
+  "src/routes/plans/+page.css": {
+    "file": "_app/immutable/assets/_page-097b9a4a.css",
+    "src": "src/routes/plans/+page.css"
+  },
   "src/routes/stripe/+page.css": {
     "file": "_app/immutable/assets/_page-5c304dd7.css",
     "src": "src/routes/stripe/+page.css"
   },
-  "src/routes/physics/+page.css": {
-    "file": "_app/immutable/assets/_page-fcf51fa8.css",
-    "src": "src/routes/physics/+page.css"
+  "src/routes/+page.css": {
+    "file": "_app/immutable/assets/_page-410c3bc4.css",
+    "src": "src/routes/+page.css"
   },
   "Dropzone.css": {
     "file": "_app/immutable/assets/Dropzone-cce97800.css",
     "src": "Dropzone.css"
-  },
-  "src/routes/plans/+page.css": {
-    "file": "_app/immutable/assets/_page-097b9a4a.css",
-    "src": "src/routes/plans/+page.css"
   },
   "src/routes/+layout.css": {
     "file": "_app/immutable/assets/_layout-a031b3fe.css",

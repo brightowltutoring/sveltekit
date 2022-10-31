@@ -45,7 +45,7 @@
       {/if}
 
       <div
-        class="text-2xl font-Nunito "
+        class="text-2xl font-Nunito font-thin"
         on:click={() => {
           document
             .getElementById("reviews")
