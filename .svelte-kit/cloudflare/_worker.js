@@ -12364,7 +12364,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, goto, IconGoogle, IconEmail, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
+var Modal, goto, IconGoogle, IconEmail, IconTwitter, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -12390,6 +12390,9 @@ var init_layout_svelte = __esm({
     });
     IconEmail = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 485 485"}"><path fill="${"white"}" d="${"M413.974,71.026C368.171,25.225,307.274,0,242.5,0S116.829,25.225,71.026,71.026C25.225,116.829,0,177.726,0,242.5\ns25.225,125.671,71.026,171.474C116.829,459.775,177.726,485,242.5,485c32.731,0,64.491-6.414,94.397-19.063l-11.688-27.63\nC299.022,449.384,271.194,455,242.5,455C125.327,455,30,359.673,30,242.5S125.327,30,242.5,30S455,125.327,455,242.5\nc0,51.323-31.534,74.699-60.834,74.699c-29.299,0-60.833-23.375-60.833-74.699c0-50.086-40.747-90.833-90.833-90.833\ns-90.833,40.748-90.833,90.833s40.747,90.833,90.833,90.833c29.655,0,56.034-14.286,72.622-36.335\nc4.248,8.577,9.594,16.336,16.04,23.113c16.613,17.468,38.988,27.087,63.004,27.087c24.017,0,46.392-9.62,63.005-27.087\nC475.377,300.97,485,274.132,485,242.5C485,177.726,459.775,116.829,413.974,71.026z M242.5,303.333\nc-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60.833,60.833S276.043,303.333,242.5,303.333z"}"></path></svg>`;
+    });
+    IconTwitter = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `<svg xmlns="${"http://www.w3.org/2000/svg"}" width="${"24"}" height="${"24"}" viewBox="${"0 0 24 24"}"><path fill="${"white"}" d="${"M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"}"></path></svg>`;
     });
     LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let shortPing;
@@ -12452,23 +12455,34 @@ var init_layout_svelte = __esm({
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
-      return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><div class="${"logInDiv p-5"}"><div class="${"bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
-        true
-      ) + " text-xl text-white"}"><signin-button class="${"flex justify-center items-center gap-5"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}
-        <span>Sign-in with Google</span></signin-button></div>
-
-    <p class="${"py-5"}">or</p>
-
-    <div id="${"passwordlessLoginBtn"}" class="${"bg-red-400 hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+      return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><div class="${"logInDiv p-5"}">
+    <signin-button id="${"passwordlessLoginBtn"}" class="${"bg-red-400 hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
         true
-      ) + " text-xl text-white"}"><signin-button class="${"flex justify-center items-center gap-5"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}
-        <span>Get Magic Link</span></signin-button></div>
+      ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}
+      <span>Get Magic Link</span></signin-button>
+    
 
     <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true)}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
 
-    <span id="${"emailStatusMessage"}"></span></div>
+    <span id="${"emailStatusMessage"}"></span>
+
+    <p class="${"py-5"}">or</p>
+    
+    <signin-button class="${"mb-6 bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
+        true
+      ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}
+      <span>Sign-in with Google</span></signin-button>
+    
+
+    
+    <signin-button class="${"bg-[#1d9bf0] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
+        true
+      ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}
+      <span>Sign-in with Twitter</span></signin-button>
+    </div>
 
   <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
     <div id="${"redirectMessage"}">Redirecting to your page in
@@ -12789,9 +12803,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-ee722570.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-ee722570.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/PlansCardObserver-a59a4974.js", "_app/immutable/chunks/Dropzone-90bbc3c0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-9d714fc6.js", "_app/immutable/chunks/singletons-82fa1a16.js", "_app/immutable/chunks/firebase-2afcabcb.js"];
-    stylesheets = ["_app/immutable/assets/_layout-5622e2dd.css", "_app/immutable/assets/Dropzone-cce97800.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-b9803dc8.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-b9803dc8.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/PlansCardObserver-a59a4974.js", "_app/immutable/chunks/Dropzone-90bbc3c0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-711660c8.js", "_app/immutable/chunks/singletons-6d97d045.js", "_app/immutable/chunks/firebase-2afcabcb.js"];
+    stylesheets = ["_app/immutable/assets/_layout-4ea07b0c.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
 
@@ -29104,8 +29118,8 @@ var init__15 = __esm({
     init_page();
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-aef73650.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-aef73650.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/navigation-9d714fc6.js", "_app/immutable/chunks/singletons-82fa1a16.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js", "_app/immutable/chunks/_page-b7043975.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-2ac64887.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-2ac64887.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/navigation-711660c8.js", "_app/immutable/chunks/singletons-6d97d045.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js", "_app/immutable/chunks/_page-b7043975.js"];
     stylesheets15 = [];
   }
 });
@@ -29152,8 +29166,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-a6f9f772.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-a6f9f772.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/navigation-9d714fc6.js", "_app/immutable/chunks/singletons-82fa1a16.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-78500f6c.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-78500f6c.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/navigation-711660c8.js", "_app/immutable/chunks/singletons-6d97d045.js"];
     stylesheets16 = [];
   }
 });
@@ -31974,10 +31988,10 @@ var Server = class {
 var manifest = {
   appDir: "_app",
   appPath: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp"]),
-  mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp"]),
+  mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-200261db.js", "imports": ["_app/immutable/start-200261db.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/singletons-82fa1a16.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-a6adca0a.js", "imports": ["_app/immutable/start-a6adca0a.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/singletons-6d97d045.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
