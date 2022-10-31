@@ -1,7 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  // import { stripeSessionIdGCF } from "$lib/server/firebase.js";
-  import { stripeSessionIdGCF } from "$lib/firebase.js";
   import { PUBLIC_STRIPE_KEY } from "$env/static/public";
   import { fly } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -9,13 +7,22 @@
   let slideKey = false;
   let urlSearch;
 
-  onMount(() => {
+  // import { stripeSessionIdGCF } from "$lib/firebase.js";
+  // TODO:testing
+  import { app } from "$lib/firebase.js";
+  import { getFunctions, httpsCallable } from "firebase/functions";
+  const functions = getFunctions(app);
+
+  // const stripeSessionIdGCF = httpsCallable(functions, "stripeSessionIdGCF");
+
+  // TODO:testing
+
+  onMount(async () => {
     slideKey = true;
 
     urlSearch = window.location.search.slice(1); // gets everything after "?" in url
     window.history.replaceState({}, "", `/${btoa(urlSearch)}`); // shows url parameters in base64
-
-    stripeRedirectToCheckout(); // calling this within onMount is similar to listening to DOMContentLoaded
+    stripeRedirectToCheckout();
 
     async function stripeRedirectToCheckout() {
       try {
@@ -28,6 +35,11 @@
 
         if (service && quantity) {
           // create checkout session using url params; get session data
+          // don't forget await!
+          const stripeSessionIdGCF = await httpsCallable(
+            functions,
+            "stripeSessionIdGCF"
+          );
           const { data } = await stripeSessionIdGCF({
             email,
             extra,

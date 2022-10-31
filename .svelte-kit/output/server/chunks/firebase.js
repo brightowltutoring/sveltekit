@@ -1,7 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore/lite";
-import { getFunctions, httpsCallable } from "firebase/functions";
 const PUBLIC_FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
 const PUBLIC_FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
 const PUBLIC_FIREBASE_projectId = "thinksolve-app";
@@ -17,16 +15,7 @@ const firebaseConfig = {
   appId: PUBLIC_FIREBASE_appId
 };
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const functions = getFunctions(app);
-const stripeSessionIdGCF = httpsCallable(
-  functions,
-  "stripeSessionIdGCF"
-);
+getAuth(app);
 export {
-  app,
-  auth,
-  db,
-  stripeSessionIdGCF
+  app as a
 };

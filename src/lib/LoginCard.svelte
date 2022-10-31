@@ -16,8 +16,7 @@
     magicLinkToEmail,
   } from "$lib/loginFunctions.js";
 
-  import { auth } from "$lib/firebase.js";
-  import { collection, getDocs } from "firebase/firestore/lite";
+  import { app, auth } from "$lib/firebase.js";
   import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
   import IconGoogle from "$lib/IconGoogle.svelte";
   import IconEmail from "$lib/IconEmail.svelte";
@@ -123,7 +122,11 @@
   }
 
   async function loginToRedirectUrl(userEmail) {
-    const { db } = await import("$lib/firebase.js");
+    const { getFirestore, collection, getDocs } = await import(
+      "firebase/firestore/lite"
+    );
+    const db = getFirestore(app);
+    // const { db } = await import("$lib/firebase.js");
     const querySnapshot = await getDocs(collection(db, "email"));
     querySnapshot.forEach((doc) => {
       if (userEmail === doc.id) {

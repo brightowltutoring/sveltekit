@@ -2,8 +2,7 @@ import { c as create_ssr_component, e as escape, a as subscribe, d as add_attrib
 import { P as PlansCardObserver } from "../../chunks/PlansCardObserver.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { n as navLoginClicked, i as isLoggedIn, a as isDarkMode, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, w as windowInnerHeight, d as scrollYMax, f as innerWidth } from "../../chunks/store.js";
-import "../../chunks/firebase.js";
-import { getDocs, collection } from "firebase/firestore/lite";
+import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
@@ -45,7 +44,8 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   let redirectAfterLoginTimeOut;
   let redirectSetInterval;
   async function loginToRedirectUrl(userEmail) {
-    const { db } = await import("../../chunks/firebase.js");
+    const { getFirestore, collection, getDocs } = await import("firebase/firestore/lite");
+    const db = getFirestore(app$1);
     const querySnapshot = await getDocs(collection(db, "email"));
     querySnapshot.forEach((doc) => {
       if (userEmail === doc.id) {

@@ -312,7 +312,7 @@ var require_cookie = __commonJS({
       }
       var obj = {};
       var opt = options || {};
-      var dec = opt.decode || decode2;
+      var dec = opt.decode || decode;
       var index18 = 0;
       while (index18 < str.length) {
         var eqIdx = str.indexOf("=", index18);
@@ -340,7 +340,7 @@ var require_cookie = __commonJS({
     }
     function serialize2(name5, val, options) {
       var opt = options || {};
-      var enc = opt.encode || encode3;
+      var enc = opt.encode || encode2;
       if (typeof enc !== "function") {
         throw new TypeError("option encode is invalid");
       }
@@ -421,18 +421,18 @@ var require_cookie = __commonJS({
       }
       return str;
     }
-    function decode2(str) {
+    function decode(str) {
       return str.indexOf("%") !== -1 ? decodeURIComponent(str) : str;
     }
-    function encode3(val) {
+    function encode2(val) {
       return encodeURIComponent(val);
     }
     function isDate(val) {
       return __toString.call(val) === "[object Date]" || val instanceof Date;
     }
-    function tryDecode(str, decode3) {
+    function tryDecode(str, decode2) {
       try {
-        return decode3(str);
+        return decode2(str);
       } catch (e3) {
         return str;
       }
@@ -2771,24 +2771,24 @@ var init_index_esm2017 = __esm({
   "node_modules/@firebase/util/dist/index.esm2017.js"() {
     stringToByteArray$1 = function(str) {
       const out = [];
-      let p = 0;
+      let p2 = 0;
       for (let i = 0; i < str.length; i++) {
         let c2 = str.charCodeAt(i);
         if (c2 < 128) {
-          out[p++] = c2;
+          out[p2++] = c2;
         } else if (c2 < 2048) {
-          out[p++] = c2 >> 6 | 192;
-          out[p++] = c2 & 63 | 128;
+          out[p2++] = c2 >> 6 | 192;
+          out[p2++] = c2 & 63 | 128;
         } else if ((c2 & 64512) === 55296 && i + 1 < str.length && (str.charCodeAt(i + 1) & 64512) === 56320) {
           c2 = 65536 + ((c2 & 1023) << 10) + (str.charCodeAt(++i) & 1023);
-          out[p++] = c2 >> 18 | 240;
-          out[p++] = c2 >> 12 & 63 | 128;
-          out[p++] = c2 >> 6 & 63 | 128;
-          out[p++] = c2 & 63 | 128;
+          out[p2++] = c2 >> 18 | 240;
+          out[p2++] = c2 >> 12 & 63 | 128;
+          out[p2++] = c2 >> 6 & 63 | 128;
+          out[p2++] = c2 & 63 | 128;
         } else {
-          out[p++] = c2 >> 12 | 224;
-          out[p++] = c2 >> 6 & 63 | 128;
-          out[p++] = c2 & 63 | 128;
+          out[p2++] = c2 >> 12 | 224;
+          out[p2++] = c2 >> 6 & 63 | 128;
+          out[p2++] = c2 & 63 | 128;
         }
       }
       return out;
@@ -3690,11 +3690,11 @@ function openDB(name5, version5, { blocked, upgrade, blocking, terminated } = {}
   }
   if (blocked)
     request.addEventListener("blocked", () => blocked());
-  openPromise.then((db2) => {
+  openPromise.then((db) => {
     if (terminated)
-      db2.addEventListener("close", () => terminated());
+      db.addEventListener("close", () => terminated());
     if (blocking)
-      db2.addEventListener("versionchange", () => blocking());
+      db.addEventListener("versionchange", () => blocking());
   }).catch(() => {
   });
   return openPromise;
@@ -3771,6 +3771,9 @@ function _getProvider(app2, name5) {
   }
   return app2.container.getProvider(name5);
 }
+function _removeServiceInstance(app2, name5, instanceIdentifier = DEFAULT_ENTRY_NAME2) {
+  _getProvider(app2, name5).clearInstance(instanceIdentifier);
+}
 function initializeApp(_options, rawConfig = {}) {
   let options = _options;
   if (typeof rawConfig !== "object") {
@@ -3843,10 +3846,10 @@ function registerVersion(libraryKeyOrName, version5, variant) {
 function getDbPromise() {
   if (!dbPromise) {
     dbPromise = openDB(DB_NAME, DB_VERSION, {
-      upgrade: (db2, oldVersion) => {
+      upgrade: (db, oldVersion) => {
         switch (oldVersion) {
           case 0:
-            db2.createObjectStore(STORE_NAME);
+            db.createObjectStore(STORE_NAME);
         }
       }
     }).catch((e3) => {
@@ -3860,8 +3863,8 @@ function getDbPromise() {
 async function readHeartbeatsFromIndexedDB(app2) {
   var _a;
   try {
-    const db2 = await getDbPromise();
-    return db2.transaction(STORE_NAME).objectStore(STORE_NAME).get(computeKey(app2));
+    const db = await getDbPromise();
+    return db.transaction(STORE_NAME).objectStore(STORE_NAME).get(computeKey(app2));
   } catch (e3) {
     if (e3 instanceof FirebaseError) {
       logger.warn(e3.message);
@@ -3876,8 +3879,8 @@ async function readHeartbeatsFromIndexedDB(app2) {
 async function writeHeartbeatsToIndexedDB(app2, heartbeatObject) {
   var _a;
   try {
-    const db2 = await getDbPromise();
-    const tx = db2.transaction(STORE_NAME, "readwrite");
+    const db = await getDbPromise();
+    const tx = db.transaction(STORE_NAME, "readwrite");
     const objectStore = tx.objectStore(STORE_NAME);
     await objectStore.put(heartbeatObject, computeKey(app2));
     return tx.done;
@@ -4261,9 +4264,9 @@ var require_tslib = __commonJS({
       var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
         d2.__proto__ = b2;
       } || function(d2, b2) {
-        for (var p in b2)
-          if (Object.prototype.hasOwnProperty.call(b2, p))
-            d2[p] = b2[p];
+        for (var p2 in b2)
+          if (Object.prototype.hasOwnProperty.call(b2, p2))
+            d2[p2] = b2[p2];
       };
       __extends2 = function(d2, b2) {
         if (typeof b2 !== "function" && b2 !== null)
@@ -4277,21 +4280,21 @@ var require_tslib = __commonJS({
       __assign2 = Object.assign || function(t2) {
         for (var s3, i = 1, n2 = arguments.length; i < n2; i++) {
           s3 = arguments[i];
-          for (var p in s3)
-            if (Object.prototype.hasOwnProperty.call(s3, p))
-              t2[p] = s3[p];
+          for (var p2 in s3)
+            if (Object.prototype.hasOwnProperty.call(s3, p2))
+              t2[p2] = s3[p2];
         }
         return t2;
       };
       __rest2 = function(s3, e3) {
         var t2 = {};
-        for (var p in s3)
-          if (Object.prototype.hasOwnProperty.call(s3, p) && e3.indexOf(p) < 0)
-            t2[p] = s3[p];
+        for (var p2 in s3)
+          if (Object.prototype.hasOwnProperty.call(s3, p2) && e3.indexOf(p2) < 0)
+            t2[p2] = s3[p2];
         if (s3 != null && typeof Object.getOwnPropertySymbols === "function")
-          for (var i = 0, p = Object.getOwnPropertySymbols(s3); i < p.length; i++) {
-            if (e3.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s3, p[i]))
-              t2[p[i]] = s3[p[i]];
+          for (var i = 0, p2 = Object.getOwnPropertySymbols(s3); i < p2.length; i++) {
+            if (e3.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s3, p2[i]))
+              t2[p2[i]] = s3[p2[i]];
           }
         return t2;
       };
@@ -4418,9 +4421,9 @@ var require_tslib = __commonJS({
         }
       };
       __exportStar2 = function(m2, o2) {
-        for (var p in m2)
-          if (p !== "default" && !Object.prototype.hasOwnProperty.call(o2, p))
-            __createBinding2(o2, m2, p);
+        for (var p2 in m2)
+          if (p2 !== "default" && !Object.prototype.hasOwnProperty.call(o2, p2))
+            __createBinding2(o2, m2, p2);
       };
       __createBinding2 = Object.create ? function(o2, m2, k2, k22) {
         if (k22 === void 0)
@@ -4481,8 +4484,8 @@ var require_tslib = __commonJS({
         for (var s3 = 0, i = 0, il = arguments.length; i < il; i++)
           s3 += arguments[i].length;
         for (var r2 = Array(s3), k2 = 0, i = 0; i < il; i++)
-          for (var a2 = arguments[i], j = 0, jl = a2.length; j < jl; j++, k2++)
-            r2[k2] = a2[j];
+          for (var a2 = arguments[i], j2 = 0, jl = a2.length; j2 < jl; j2++, k2++)
+            r2[k2] = a2[j2];
         return r2;
       };
       __spreadArray2 = function(to, from, pack) {
@@ -4536,7 +4539,7 @@ var require_tslib = __commonJS({
         }
       };
       __asyncDelegator2 = function(o2) {
-        var i, p;
+        var i, p2;
         return i = {}, verb("next"), verb("throw", function(e3) {
           throw e3;
         }), verb("return"), i[Symbol.iterator] = function() {
@@ -4544,7 +4547,7 @@ var require_tslib = __commonJS({
         }, i;
         function verb(n2, f) {
           i[n2] = o2[n2] ? function(v2) {
-            return (p = !p) ? { value: __await2(o2[n2](v2)), done: n2 === "return" } : f ? f(v2) : v2;
+            return (p2 = !p2) ? { value: __await2(o2[n2](v2)), done: n2 === "return" } : f ? f(v2) : v2;
           } : f;
         }
       };
@@ -4698,11 +4701,11 @@ function _fail(authOrCode, ...rest) {
 function _createError(authOrCode, ...rest) {
   return createErrorInternal(authOrCode, ...rest);
 }
-function _errorWithCustomMessage(auth2, code, message) {
+function _errorWithCustomMessage(auth, code, message) {
   const errorMap = Object.assign(Object.assign({}, prodErrorMap()), { [code]: message });
   const factory = new ErrorFactory("auth", "Firebase", errorMap);
   return factory.create(code, {
-    appName: auth2.name
+    appName: auth.name
   });
 }
 function createErrorInternal(authOrCode, ...rest) {
@@ -4745,24 +4748,24 @@ function _getInstance(cls) {
 function initializeAuth(app2, deps) {
   const provider = _getProvider(app2, "auth");
   if (provider.isInitialized()) {
-    const auth3 = provider.getImmediate();
+    const auth2 = provider.getImmediate();
     const initialOptions = provider.getOptions();
     if (deepEqual(initialOptions, deps !== null && deps !== void 0 ? deps : {})) {
-      return auth3;
+      return auth2;
     } else {
-      _fail(auth3, "already-initialized");
+      _fail(auth2, "already-initialized");
     }
   }
-  const auth2 = provider.initialize({ options: deps });
-  return auth2;
+  const auth = provider.initialize({ options: deps });
+  return auth;
 }
-function _initializeAuthInstance(auth2, deps) {
+function _initializeAuthInstance(auth, deps) {
   const persistence = (deps === null || deps === void 0 ? void 0 : deps.persistence) || [];
   const hierarchy = (Array.isArray(persistence) ? persistence : [persistence]).map(_getInstance);
   if (deps === null || deps === void 0 ? void 0 : deps.errorMap) {
-    auth2._updateErrorMap(deps.errorMap);
+    auth._updateErrorMap(deps.errorMap);
   }
-  auth2._initializeWithPersistence(hierarchy, deps === null || deps === void 0 ? void 0 : deps.popupRedirectResolver);
+  auth._initializeWithPersistence(hierarchy, deps === null || deps === void 0 ? void 0 : deps.popupRedirectResolver);
 }
 function _getCurrentUrl() {
   var _a;
@@ -4796,14 +4799,14 @@ function _emulatorUrl(config, path2) {
   }
   return `${url}${path2.startsWith("/") ? path2.slice(1) : path2}`;
 }
-function _addTidIfNecessary(auth2, request) {
-  if (auth2.tenantId && !request.tenantId) {
-    return Object.assign(Object.assign({}, request), { tenantId: auth2.tenantId });
+function _addTidIfNecessary(auth, request) {
+  if (auth.tenantId && !request.tenantId) {
+    return Object.assign(Object.assign({}, request), { tenantId: auth.tenantId });
   }
   return request;
 }
-async function _performApiRequest(auth2, method, path2, request, customErrorMap = {}) {
-  return _performFetchWithErrorHandling(auth2, customErrorMap, async () => {
+async function _performApiRequest(auth, method, path2, request, customErrorMap = {}) {
+  return _performFetchWithErrorHandling(auth, customErrorMap, async () => {
     let body = {};
     let params = {};
     if (request) {
@@ -4815,24 +4818,24 @@ async function _performApiRequest(auth2, method, path2, request, customErrorMap 
         };
       }
     }
-    const query = querystring(Object.assign({ key: auth2.config.apiKey }, params)).slice(1);
-    const headers = await auth2._getAdditionalHeaders();
+    const query = querystring(Object.assign({ key: auth.config.apiKey }, params)).slice(1);
+    const headers = await auth._getAdditionalHeaders();
     headers["Content-Type"] = "application/json";
-    if (auth2.languageCode) {
-      headers["X-Firebase-Locale"] = auth2.languageCode;
+    if (auth.languageCode) {
+      headers["X-Firebase-Locale"] = auth.languageCode;
     }
-    return FetchProvider.fetch()(_getFinalTarget(auth2, auth2.config.apiHost, path2, query), Object.assign({
+    return FetchProvider.fetch()(_getFinalTarget(auth, auth.config.apiHost, path2, query), Object.assign({
       method,
       headers,
       referrerPolicy: "no-referrer"
     }, body));
   });
 }
-async function _performFetchWithErrorHandling(auth2, customErrorMap, fetchFn) {
-  auth2._canInitEmulator = false;
+async function _performFetchWithErrorHandling(auth, customErrorMap, fetchFn) {
+  auth._canInitEmulator = false;
   const errorMap = Object.assign(Object.assign({}, SERVER_ERROR_MAP), customErrorMap);
   try {
-    const networkTimeout = new NetworkTimeout(auth2);
+    const networkTimeout = new NetworkTimeout(auth);
     const response = await Promise.race([
       fetchFn(),
       networkTimeout.promise
@@ -4840,7 +4843,7 @@ async function _performFetchWithErrorHandling(auth2, customErrorMap, fetchFn) {
     networkTimeout.clearNetworkTimeout();
     const json2 = await response.json();
     if ("needConfirmation" in json2) {
-      throw _makeTaggedError(auth2, "account-exists-with-different-credential", json2);
+      throw _makeTaggedError(auth, "account-exists-with-different-credential", json2);
     }
     if (response.ok && !("errorMessage" in json2)) {
       return json2;
@@ -4848,45 +4851,45 @@ async function _performFetchWithErrorHandling(auth2, customErrorMap, fetchFn) {
       const errorMessage = response.ok ? json2.errorMessage : json2.error.message;
       const [serverErrorCode, serverErrorMessage] = errorMessage.split(" : ");
       if (serverErrorCode === "FEDERATED_USER_ID_ALREADY_LINKED") {
-        throw _makeTaggedError(auth2, "credential-already-in-use", json2);
+        throw _makeTaggedError(auth, "credential-already-in-use", json2);
       } else if (serverErrorCode === "EMAIL_EXISTS") {
-        throw _makeTaggedError(auth2, "email-already-in-use", json2);
+        throw _makeTaggedError(auth, "email-already-in-use", json2);
       } else if (serverErrorCode === "USER_DISABLED") {
-        throw _makeTaggedError(auth2, "user-disabled", json2);
+        throw _makeTaggedError(auth, "user-disabled", json2);
       }
       const authError = errorMap[serverErrorCode] || serverErrorCode.toLowerCase().replace(/[_\s]+/g, "-");
       if (serverErrorMessage) {
-        throw _errorWithCustomMessage(auth2, authError, serverErrorMessage);
+        throw _errorWithCustomMessage(auth, authError, serverErrorMessage);
       } else {
-        _fail(auth2, authError);
+        _fail(auth, authError);
       }
     }
   } catch (e3) {
     if (e3 instanceof FirebaseError) {
       throw e3;
     }
-    _fail(auth2, "network-request-failed");
+    _fail(auth, "network-request-failed");
   }
 }
-async function _performSignInRequest(auth2, method, path2, request, customErrorMap = {}) {
-  const serverResponse = await _performApiRequest(auth2, method, path2, request, customErrorMap);
+async function _performSignInRequest(auth, method, path2, request, customErrorMap = {}) {
+  const serverResponse = await _performApiRequest(auth, method, path2, request, customErrorMap);
   if ("mfaPendingCredential" in serverResponse) {
-    _fail(auth2, "multi-factor-auth-required", {
+    _fail(auth, "multi-factor-auth-required", {
       _serverResponse: serverResponse
     });
   }
   return serverResponse;
 }
-function _getFinalTarget(auth2, host, path2, query) {
+function _getFinalTarget(auth, host, path2, query) {
   const base2 = `${host}${path2}?${query}`;
-  if (!auth2.config.emulator) {
-    return `${auth2.config.apiScheme}://${base2}`;
+  if (!auth.config.emulator) {
+    return `${auth.config.apiScheme}://${base2}`;
   }
-  return _emulatorUrl(auth2.config, base2);
+  return _emulatorUrl(auth.config, base2);
 }
-function _makeTaggedError(auth2, code, response) {
+function _makeTaggedError(auth, code, response) {
   const errorParams = {
-    appName: auth2.name
+    appName: auth.name
   };
   if (response.email) {
     errorParams.email = response.email;
@@ -4894,15 +4897,15 @@ function _makeTaggedError(auth2, code, response) {
   if (response.phoneNumber) {
     errorParams.phoneNumber = response.phoneNumber;
   }
-  const error2 = _createError(auth2, code, errorParams);
+  const error2 = _createError(auth, code, errorParams);
   error2.customData._tokenResponse = response;
   return error2;
 }
-async function deleteAccount(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v1/accounts:delete", request);
+async function deleteAccount(auth, request) {
+  return _performApiRequest(auth, "POST", "/v1/accounts:delete", request);
 }
-async function getAccountInfo(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v1/accounts:lookup", request);
+async function getAccountInfo(auth, request) {
+  return _performApiRequest(auth, "POST", "/v1/accounts:lookup", request);
 }
 function utcTimestampToDateString(utcTimestamp) {
   if (!utcTimestamp) {
@@ -4983,10 +4986,10 @@ function isUserInvalidated({ code }) {
 }
 async function _reloadWithoutSaving(user) {
   var _a;
-  const auth2 = user.auth;
+  const auth = user.auth;
   const idToken = await user.getIdToken();
-  const response = await _logoutIfInvalidated(user, getAccountInfo(auth2, { idToken }));
-  _assert(response === null || response === void 0 ? void 0 : response.users.length, auth2, "internal-error");
+  const response = await _logoutIfInvalidated(user, getAccountInfo(auth, { idToken }));
+  _assert(response === null || response === void 0 ? void 0 : response.users.length, auth, "internal-error");
   const coreAccount = response.users[0];
   user._notifyReloadListener(coreAccount);
   const newProviderData = ((_a = coreAccount.providerUserInfo) === null || _a === void 0 ? void 0 : _a.length) ? extractProviderData(coreAccount.providerUserInfo) : [];
@@ -5031,15 +5034,15 @@ function extractProviderData(providers) {
     };
   });
 }
-async function requestStsToken(auth2, refreshToken) {
-  const response = await _performFetchWithErrorHandling(auth2, {}, async () => {
+async function requestStsToken(auth, refreshToken) {
+  const response = await _performFetchWithErrorHandling(auth, {}, async () => {
     const body = querystring({
       "grant_type": "refresh_token",
       "refresh_token": refreshToken
     }).slice(1);
-    const { tokenApiHost, apiKey } = auth2.config;
-    const url = _getFinalTarget(auth2, tokenApiHost, "/v1/token", `key=${apiKey}`);
-    const headers = await auth2._getAdditionalHeaders();
+    const { tokenApiHost, apiKey } = auth.config;
+    const url = _getFinalTarget(auth, tokenApiHost, "/v1/token", `key=${apiKey}`);
+    const headers = await auth._getAdditionalHeaders();
     headers["Content-Type"] = "application/x-www-form-urlencoded";
     return FetchProvider.fetch()(url, {
       method: "POST",
@@ -5084,8 +5087,8 @@ function _getBrowserName(userAgent) {
   } else if (_isAndroid(ua)) {
     return "Android";
   } else {
-    const re = /([a-zA-Z\d\.]+)\/[a-zA-Z\d\.]*$/;
-    const matches = userAgent.match(re);
+    const re2 = /([a-zA-Z\d\.]+)\/[a-zA-Z\d\.]*$/;
+    const matches = userAgent.match(re2);
     if ((matches === null || matches === void 0 ? void 0 : matches.length) === 2) {
       return matches[1];
     }
@@ -5149,11 +5152,11 @@ function _getClientVersion(clientPlatform, frameworks = []) {
   const reportedFrameworks = frameworks.length ? frameworks.join(",") : "FirebaseCore-web";
   return `${reportedPlatform}/${"JsCore"}/${SDK_VERSION}/${reportedFrameworks}`;
 }
-function _castAuth(auth2) {
-  return getModularInstance(auth2);
+function _castAuth(auth) {
+  return getModularInstance(auth);
 }
-function connectAuthEmulator(auth2, url, options) {
-  const authInternal = _castAuth(auth2);
+function connectAuthEmulator(auth, url, options) {
+  const authInternal = _castAuth(auth);
   _assert(authInternal._canInitEmulator, authInternal, "emulator-config-failed");
   _assert(/^https?:\/\//.test(url), authInternal, "invalid-emulator-scheme");
   const disableWarnings = !!(options === null || options === void 0 ? void 0 : options.disableWarnings);
@@ -5231,37 +5234,37 @@ function emitEmulatorWarning() {
     }
   }
 }
-async function updateEmailPassword(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v1/accounts:update", request);
+async function updateEmailPassword(auth, request) {
+  return _performApiRequest(auth, "POST", "/v1/accounts:update", request);
 }
-async function signInWithPassword(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPassword", _addTidIfNecessary(auth2, request));
+async function signInWithPassword(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPassword", _addTidIfNecessary(auth, request));
 }
-async function signInWithEmailLink$1(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth2, request));
+async function signInWithEmailLink$1(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth, request));
 }
-async function signInWithEmailLinkForLinking(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth2, request));
+async function signInWithEmailLinkForLinking(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth, request));
 }
-async function signInWithIdp(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithIdp", _addTidIfNecessary(auth2, request));
+async function signInWithIdp(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithIdp", _addTidIfNecessary(auth, request));
 }
-async function sendPhoneVerificationCode(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v1/accounts:sendVerificationCode", _addTidIfNecessary(auth2, request));
+async function sendPhoneVerificationCode(auth, request) {
+  return _performApiRequest(auth, "POST", "/v1/accounts:sendVerificationCode", _addTidIfNecessary(auth, request));
 }
-async function signInWithPhoneNumber$1(auth2, request) {
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, request));
+async function signInWithPhoneNumber$1(auth, request) {
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, request));
 }
-async function linkWithPhoneNumber$1(auth2, request) {
-  const response = await _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, request));
+async function linkWithPhoneNumber$1(auth, request) {
+  const response = await _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, request));
   if (response.temporaryProof) {
-    throw _makeTaggedError(auth2, "account-exists-with-different-credential", response);
+    throw _makeTaggedError(auth, "account-exists-with-different-credential", response);
   }
   return response;
 }
-async function verifyPhoneNumberForExisting(auth2, request) {
+async function verifyPhoneNumberForExisting(auth, request) {
   const apiRequest = Object.assign(Object.assign({}, request), { operation: "REAUTH" });
-  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, apiRequest), VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_);
+  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, apiRequest), VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_);
 }
 function parseMode(mode) {
   switch (mode) {
@@ -5297,11 +5300,11 @@ function providerIdForResponse(response) {
   }
   return null;
 }
-function _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential, user) {
-  const idTokenProvider = operationType === "reauthenticate" ? credential._getReauthenticationResolver(auth2) : credential._getIdTokenResponse(auth2);
+function _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential, user) {
+  const idTokenProvider = operationType === "reauthenticate" ? credential._getReauthenticationResolver(auth) : credential._getIdTokenResponse(auth);
   return idTokenProvider.catch((error2) => {
     if (error2.code === `auth/${"multi-factor-auth-required"}`) {
-      throw MultiFactorError._fromErrorAndOperation(auth2, error2, operationType, user);
+      throw MultiFactorError._fromErrorAndOperation(auth, error2, operationType, user);
     }
     throw error2;
   });
@@ -5312,43 +5315,43 @@ async function _link$1(user, credential, bypassAuthState = false) {
 }
 async function _reauthenticate(user, credential, bypassAuthState = false) {
   var _a;
-  const { auth: auth2 } = user;
+  const { auth } = user;
   const operationType = "reauthenticate";
   try {
-    const response = await _logoutIfInvalidated(user, _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential, user), bypassAuthState);
-    _assert(response.idToken, auth2, "internal-error");
+    const response = await _logoutIfInvalidated(user, _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential, user), bypassAuthState);
+    _assert(response.idToken, auth, "internal-error");
     const parsed = _parseToken(response.idToken);
-    _assert(parsed, auth2, "internal-error");
+    _assert(parsed, auth, "internal-error");
     const { sub: localId } = parsed;
-    _assert(user.uid === localId, auth2, "user-mismatch");
+    _assert(user.uid === localId, auth, "user-mismatch");
     return UserCredentialImpl._forOperation(user, operationType, response);
   } catch (e3) {
     if (((_a = e3) === null || _a === void 0 ? void 0 : _a.code) === `auth/${"user-not-found"}`) {
-      _fail(auth2, "user-mismatch");
+      _fail(auth, "user-mismatch");
     }
     throw e3;
   }
 }
-async function _signInWithCredential(auth2, credential, bypassAuthState = false) {
+async function _signInWithCredential(auth, credential, bypassAuthState = false) {
   const operationType = "signIn";
-  const response = await _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential);
-  const userCredential = await UserCredentialImpl._fromIdTokenResponse(auth2, operationType, response);
+  const response = await _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential);
+  const userCredential = await UserCredentialImpl._fromIdTokenResponse(auth, operationType, response);
   if (!bypassAuthState) {
-    await auth2._updateCurrentUser(userCredential.user);
+    await auth._updateCurrentUser(userCredential.user);
   }
   return userCredential;
 }
-function onIdTokenChanged(auth2, nextOrObserver, error2, completed) {
-  return getModularInstance(auth2).onIdTokenChanged(nextOrObserver, error2, completed);
+function onIdTokenChanged(auth, nextOrObserver, error2, completed) {
+  return getModularInstance(auth).onIdTokenChanged(nextOrObserver, error2, completed);
 }
-function beforeAuthStateChanged(auth2, callback, onAbort) {
-  return getModularInstance(auth2).beforeAuthStateChanged(callback, onAbort);
+function beforeAuthStateChanged(auth, callback, onAbort) {
+  return getModularInstance(auth).beforeAuthStateChanged(callback, onAbort);
 }
-function startEnrollPhoneMfa(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaEnrollment:start", _addTidIfNecessary(auth2, request));
+function startEnrollPhoneMfa(auth, request) {
+  return _performApiRequest(auth, "POST", "/v2/accounts/mfaEnrollment:start", _addTidIfNecessary(auth, request));
 }
-function finalizeEnrollPhoneMfa(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaEnrollment:finalize", _addTidIfNecessary(auth2, request));
+function finalizeEnrollPhoneMfa(auth, request) {
+  return _performApiRequest(auth, "POST", "/v2/accounts/mfaEnrollment:finalize", _addTidIfNecessary(auth, request));
 }
 function _iframeCannotSyncWebStorage() {
   const ua = getUA();
@@ -5404,8 +5407,8 @@ function _getServiceWorkerController() {
 function _getWorkerGlobalScope() {
   return _isWorker() ? self : null;
 }
-function getObjectStore(db2, isReadWrite) {
-  return db2.transaction([DB_OBJECTSTORE_NAME], isReadWrite ? "readwrite" : "readonly").objectStore(DB_OBJECTSTORE_NAME);
+function getObjectStore(db, isReadWrite) {
+  return db.transaction([DB_OBJECTSTORE_NAME], isReadWrite ? "readwrite" : "readonly").objectStore(DB_OBJECTSTORE_NAME);
 }
 function _deleteDatabase() {
   const request = indexedDB.deleteDatabase(DB_NAME2);
@@ -5418,46 +5421,46 @@ function _openDatabase() {
       reject(request.error);
     });
     request.addEventListener("upgradeneeded", () => {
-      const db2 = request.result;
+      const db = request.result;
       try {
-        db2.createObjectStore(DB_OBJECTSTORE_NAME, { keyPath: DB_DATA_KEYPATH });
+        db.createObjectStore(DB_OBJECTSTORE_NAME, { keyPath: DB_DATA_KEYPATH });
       } catch (e3) {
         reject(e3);
       }
     });
     request.addEventListener("success", async () => {
-      const db2 = request.result;
-      if (!db2.objectStoreNames.contains(DB_OBJECTSTORE_NAME)) {
-        db2.close();
+      const db = request.result;
+      if (!db.objectStoreNames.contains(DB_OBJECTSTORE_NAME)) {
+        db.close();
         await _deleteDatabase();
         resolve(await _openDatabase());
       } else {
-        resolve(db2);
+        resolve(db);
       }
     });
   });
 }
-async function _putObject(db2, key2, value) {
-  const request = getObjectStore(db2, true).put({
+async function _putObject(db, key2, value) {
+  const request = getObjectStore(db, true).put({
     [DB_DATA_KEYPATH]: key2,
     value
   });
   return new DBPromise(request).toPromise();
 }
-async function getObject(db2, key2) {
-  const request = getObjectStore(db2, false).get(key2);
+async function getObject(db, key2) {
+  const request = getObjectStore(db, false).get(key2);
   const data = await new DBPromise(request).toPromise();
   return data === void 0 ? null : data.value;
 }
-function _deleteObject(db2, key2) {
-  const request = getObjectStore(db2, true).delete(key2);
+function _deleteObject(db, key2) {
+  const request = getObjectStore(db, true).delete(key2);
   return new DBPromise(request).toPromise();
 }
-function startSignInPhoneMfa(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaSignIn:start", _addTidIfNecessary(auth2, request));
+function startSignInPhoneMfa(auth, request) {
+  return _performApiRequest(auth, "POST", "/v2/accounts/mfaSignIn:start", _addTidIfNecessary(auth, request));
 }
-function finalizeSignInPhoneMfa(auth2, request) {
-  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaSignIn:finalize", _addTidIfNecessary(auth2, request));
+function finalizeSignInPhoneMfa(auth, request) {
+  return _performApiRequest(auth, "POST", "/v2/accounts/mfaSignIn:finalize", _addTidIfNecessary(auth, request));
 }
 function getScriptParentElement() {
   var _a, _b;
@@ -5481,12 +5484,12 @@ function _loadJS(url) {
 function _generateCallbackName(prefix) {
   return `__${prefix}${Math.floor(Math.random() * 1e6)}`;
 }
-async function _verifyPhoneNumber(auth2, options, verifier) {
+async function _verifyPhoneNumber(auth, options, verifier) {
   var _a;
   const recaptchaToken = await verifier.verify();
   try {
-    _assert(typeof recaptchaToken === "string", auth2, "argument-error");
-    _assert(verifier.type === RECAPTCHA_VERIFIER_TYPE, auth2, "argument-error");
+    _assert(typeof recaptchaToken === "string", auth, "argument-error");
+    _assert(verifier.type === RECAPTCHA_VERIFIER_TYPE, auth, "argument-error");
     let phoneInfoOptions;
     if (typeof options === "string") {
       phoneInfoOptions = {
@@ -5498,8 +5501,8 @@ async function _verifyPhoneNumber(auth2, options, verifier) {
     if ("session" in phoneInfoOptions) {
       const session = phoneInfoOptions.session;
       if ("phoneNumber" in phoneInfoOptions) {
-        _assert(session.type === "enroll", auth2, "internal-error");
-        const response = await startEnrollPhoneMfa(auth2, {
+        _assert(session.type === "enroll", auth, "internal-error");
+        const response = await startEnrollPhoneMfa(auth, {
           idToken: session.credential,
           phoneEnrollmentInfo: {
             phoneNumber: phoneInfoOptions.phoneNumber,
@@ -5508,10 +5511,10 @@ async function _verifyPhoneNumber(auth2, options, verifier) {
         });
         return response.phoneSessionInfo.sessionInfo;
       } else {
-        _assert(session.type === "signin", auth2, "internal-error");
+        _assert(session.type === "signin", auth, "internal-error");
         const mfaEnrollmentId = ((_a = phoneInfoOptions.multiFactorHint) === null || _a === void 0 ? void 0 : _a.uid) || phoneInfoOptions.multiFactorUid;
-        _assert(mfaEnrollmentId, auth2, "missing-multi-factor-info");
-        const response = await startSignInPhoneMfa(auth2, {
+        _assert(mfaEnrollmentId, auth, "missing-multi-factor-info");
+        const response = await startSignInPhoneMfa(auth, {
           mfaPendingCredential: session.credential,
           mfaEnrollmentId,
           phoneSignInInfo: {
@@ -5521,7 +5524,7 @@ async function _verifyPhoneNumber(auth2, options, verifier) {
         return response.phoneResponseInfo.sessionInfo;
       }
     } else {
-      const { sessionInfo } = await sendPhoneVerificationCode(auth2, {
+      const { sessionInfo } = await sendPhoneVerificationCode(auth, {
         phoneNumber: phoneInfoOptions.phoneNumber,
         recaptchaToken
       });
@@ -5531,28 +5534,28 @@ async function _verifyPhoneNumber(auth2, options, verifier) {
     verifier._reset();
   }
 }
-function _withDefaultResolver(auth2, resolverOverride) {
+function _withDefaultResolver(auth, resolverOverride) {
   if (resolverOverride) {
     return _getInstance(resolverOverride);
   }
-  _assert(auth2._popupRedirectResolver, auth2, "argument-error");
-  return auth2._popupRedirectResolver;
+  _assert(auth._popupRedirectResolver, auth, "argument-error");
+  return auth._popupRedirectResolver;
 }
 function _signIn(params) {
   return _signInWithCredential(params.auth, new IdpCredential(params), params.bypassAuthState);
 }
 function _reauth(params) {
-  const { auth: auth2, user } = params;
-  _assert(user, auth2, "internal-error");
+  const { auth, user } = params;
+  _assert(user, auth, "internal-error");
   return _reauthenticate(user, new IdpCredential(params), params.bypassAuthState);
 }
 async function _link(params) {
-  const { auth: auth2, user } = params;
-  _assert(user, auth2, "internal-error");
+  const { auth, user } = params;
+  _assert(user, auth, "internal-error");
   return _link$1(user, new IdpCredential(params), params.bypassAuthState);
 }
-async function _getAndClearPendingRedirectStatus(resolver, auth2) {
-  const key2 = pendingRedirectKey(auth2);
+async function _getAndClearPendingRedirectStatus(resolver, auth) {
+  const key2 = pendingRedirectKey(auth);
   const persistence = resolverPersistence(resolver);
   if (!await persistence._isAvailable()) {
     return false;
@@ -5561,17 +5564,17 @@ async function _getAndClearPendingRedirectStatus(resolver, auth2) {
   await persistence._remove(key2);
   return hasPendingRedirect;
 }
-function _overrideRedirectResult(auth2, result) {
-  redirectOutcomeMap.set(auth2._key(), result);
+function _overrideRedirectResult(auth, result) {
+  redirectOutcomeMap.set(auth._key(), result);
 }
 function resolverPersistence(resolver) {
   return _getInstance(resolver._redirectPersistence);
 }
-function pendingRedirectKey(auth2) {
-  return _persistenceKeyName(PENDING_REDIRECT_KEY, auth2.config.apiKey, auth2.name);
+function pendingRedirectKey(auth) {
+  return _persistenceKeyName(PENDING_REDIRECT_KEY, auth.config.apiKey, auth.name);
 }
-async function _getRedirectResult(auth2, resolverExtern, bypassAuthState = false) {
-  const authInternal = _castAuth(auth2);
+async function _getRedirectResult(auth, resolverExtern, bypassAuthState = false) {
+  const authInternal = _castAuth(auth);
   const resolver = _withDefaultResolver(authInternal, resolverExtern);
   const action = new RedirectAction(authInternal, resolver, bypassAuthState);
   const result = await action.execute();
@@ -5600,14 +5603,14 @@ function isRedirectEvent(event) {
       return false;
   }
 }
-async function _getProjectConfig(auth2, request = {}) {
-  return _performApiRequest(auth2, "GET", "/v1/projects", request);
+async function _getProjectConfig(auth, request = {}) {
+  return _performApiRequest(auth, "GET", "/v1/projects", request);
 }
-async function _validateOrigin(auth2) {
-  if (auth2.config.emulator) {
+async function _validateOrigin(auth) {
+  if (auth.config.emulator) {
     return;
   }
-  const { authorizedDomains } = await _getProjectConfig(auth2);
+  const { authorizedDomains } = await _getProjectConfig(auth);
   for (const domain of authorizedDomains) {
     try {
       if (matchDomain(domain)) {
@@ -5616,7 +5619,7 @@ async function _validateOrigin(auth2) {
     } catch (_a) {
     }
   }
-  _fail(auth2, "unauthorized-domain");
+  _fail(auth, "unauthorized-domain");
 }
 function matchDomain(expected) {
   const currentUrl = _getCurrentUrl();
@@ -5635,8 +5638,8 @@ function matchDomain(expected) {
     return hostname === expected;
   }
   const escapedDomainPattern = expected.replace(/\./g, "\\.");
-  const re = new RegExp("^(.+\\." + escapedDomainPattern + "|" + escapedDomainPattern + ")$", "i");
-  return re.test(hostname);
+  const re2 = new RegExp("^(.+\\." + escapedDomainPattern + "|" + escapedDomainPattern + ")$", "i");
+  return re2.test(hostname);
 }
 function resetUnloadedGapiModules() {
   const beacon = _window().___jsl;
@@ -5653,7 +5656,7 @@ function resetUnloadedGapiModules() {
     }
   }
 }
-function loadGapi(auth2) {
+function loadGapi(auth) {
   return new Promise((resolve, reject) => {
     var _a, _b, _c;
     function loadGapiIframe() {
@@ -5664,7 +5667,7 @@ function loadGapi(auth2) {
         },
         ontimeout: () => {
           resetUnloadedGapiModules();
-          reject(_createError(auth2, "network-request-failed"));
+          reject(_createError(auth, "network-request-failed"));
         },
         timeout: NETWORK_TIMEOUT.get()
       });
@@ -5679,7 +5682,7 @@ function loadGapi(auth2) {
         if (!!gapi.load) {
           loadGapiIframe();
         } else {
-          reject(_createError(auth2, "network-request-failed"));
+          reject(_createError(auth, "network-request-failed"));
         }
       };
       return _loadJS(`https://apis.google.com/js/api.js?onload=${cbName}`).catch((e3) => reject(e3));
@@ -5689,36 +5692,36 @@ function loadGapi(auth2) {
     throw error2;
   });
 }
-function _loadGapi(auth2) {
-  cachedGApiLoader = cachedGApiLoader || loadGapi(auth2);
+function _loadGapi(auth) {
+  cachedGApiLoader = cachedGApiLoader || loadGapi(auth);
   return cachedGApiLoader;
 }
-function getIframeUrl(auth2) {
-  const config = auth2.config;
-  _assert(config.authDomain, auth2, "auth-domain-config-required");
-  const url = config.emulator ? _emulatorUrl(config, EMULATED_IFRAME_PATH) : `https://${auth2.config.authDomain}/${IFRAME_PATH}`;
+function getIframeUrl(auth) {
+  const config = auth.config;
+  _assert(config.authDomain, auth, "auth-domain-config-required");
+  const url = config.emulator ? _emulatorUrl(config, EMULATED_IFRAME_PATH) : `https://${auth.config.authDomain}/${IFRAME_PATH}`;
   const params = {
     apiKey: config.apiKey,
-    appName: auth2.name,
+    appName: auth.name,
     v: SDK_VERSION
   };
-  const eid = EID_FROM_APIHOST.get(auth2.config.apiHost);
+  const eid = EID_FROM_APIHOST.get(auth.config.apiHost);
   if (eid) {
     params.eid = eid;
   }
-  const frameworks = auth2._getFrameworks();
+  const frameworks = auth._getFrameworks();
   if (frameworks.length) {
     params.fw = frameworks.join(",");
   }
   return `${url}?${querystring(params).slice(1)}`;
 }
-async function _openIframe(auth2) {
-  const context = await _loadGapi(auth2);
+async function _openIframe(auth) {
+  const context = await _loadGapi(auth);
   const gapi2 = _window().gapi;
-  _assert(gapi2, auth2, "internal-error");
+  _assert(gapi2, auth, "internal-error");
   return context.open({
     where: document.body,
-    url: getIframeUrl(auth2),
+    url: getIframeUrl(auth),
     messageHandlersFilter: gapi2.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
     attributes: IFRAME_ATTRIBUTES,
     dontclear: true
@@ -5726,7 +5729,7 @@ async function _openIframe(auth2) {
     await iframe.restyle({
       setHideOnLeave: false
     });
-    const networkError = _createError(auth2, "network-request-failed");
+    const networkError = _createError(auth, "network-request-failed");
     const networkErrorTimer = _window().setTimeout(() => {
       reject(networkError);
     }, PING_TIMEOUT.get());
@@ -5739,7 +5742,7 @@ async function _openIframe(auth2) {
     });
   }));
 }
-function _open(auth2, url, name5, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
+function _open(auth, url, name5, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
   const top = Math.max((window.screen.availHeight - height) / 2, 0).toString();
   const left = Math.max((window.screen.availWidth - width) / 2, 0).toString();
   let target = "";
@@ -5763,7 +5766,7 @@ function _open(auth2, url, name5, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT
     return new AuthPopup(null);
   }
   const newWin = window.open(url || "", target, optionsString);
-  _assert(newWin, auth2, "popup-blocked");
+  _assert(newWin, auth, "popup-blocked");
   try {
     newWin.focus();
   } catch (e3) {
@@ -5778,19 +5781,19 @@ function openAsNewWindowIOS(url, target) {
   click.initMouseEvent("click", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 1, null);
   el.dispatchEvent(click);
 }
-function _getRedirectUrl(auth2, provider, authType, redirectUrl, eventId, additionalParams) {
-  _assert(auth2.config.authDomain, auth2, "auth-domain-config-required");
-  _assert(auth2.config.apiKey, auth2, "invalid-api-key");
+function _getRedirectUrl(auth, provider, authType, redirectUrl, eventId, additionalParams) {
+  _assert(auth.config.authDomain, auth, "auth-domain-config-required");
+  _assert(auth.config.apiKey, auth, "invalid-api-key");
   const params = {
-    apiKey: auth2.config.apiKey,
-    appName: auth2.name,
+    apiKey: auth.config.apiKey,
+    appName: auth.name,
     authType,
     redirectUrl,
     v: SDK_VERSION,
     eventId
   };
   if (provider instanceof FederatedAuthProvider) {
-    provider.setDefaultLanguage(auth2.languageCode);
+    provider.setDefaultLanguage(auth.languageCode);
     params.providerId = provider.providerId || "";
     if (!isEmpty(provider.getCustomParameters())) {
       params.customParameters = JSON.stringify(provider.getCustomParameters());
@@ -5805,8 +5808,8 @@ function _getRedirectUrl(auth2, provider, authType, redirectUrl, eventId, additi
       params.scopes = scopes.join(",");
     }
   }
-  if (auth2.tenantId) {
-    params.tid = auth2.tenantId;
+  if (auth.tenantId) {
+    params.tid = auth.tenantId;
   }
   const paramsDict = params;
   for (const key2 of Object.keys(paramsDict)) {
@@ -5814,7 +5817,7 @@ function _getRedirectUrl(auth2, provider, authType, redirectUrl, eventId, additi
       delete paramsDict[key2];
     }
   }
-  return `${getHandlerBase(auth2)}?${querystring(paramsDict).slice(1)}`;
+  return `${getHandlerBase(auth)}?${querystring(paramsDict).slice(1)}`;
 }
 function getHandlerBase({ config }) {
   if (!config.emulator) {
@@ -5864,8 +5867,8 @@ function registerAuth(clientPlatform) {
     authInternalProvider.initialize();
   }));
   _registerComponent(new Component("auth-internal", (container) => {
-    const auth2 = _castAuth(container.getProvider("auth").getImmediate());
-    return ((auth3) => new AuthInterop(auth3))(auth2);
+    const auth = _castAuth(container.getProvider("auth").getImmediate());
+    return ((auth2) => new AuthInterop(auth2))(auth);
   }, "PRIVATE").setInstantiationMode("EXPLICIT"));
   registerVersion(name3, version3, getVersionForPlatform(clientPlatform));
   registerVersion(name3, version3, "esm2017");
@@ -5875,7 +5878,7 @@ function getAuth(app2 = getApp()) {
   if (provider.isInitialized()) {
     return provider.getImmediate();
   }
-  const auth2 = initializeAuth(app2, {
+  const auth = initializeAuth(app2, {
     popupRedirectResolver: browserPopupRedirectResolver,
     persistence: [
       indexedDBLocalPersistence,
@@ -5886,14 +5889,14 @@ function getAuth(app2 = getApp()) {
   const authTokenSyncUrl = getExperimentalSetting("authTokenSyncURL");
   if (authTokenSyncUrl) {
     const mintCookie = mintCookieFactory(authTokenSyncUrl);
-    beforeAuthStateChanged(auth2, mintCookie, () => mintCookie(auth2.currentUser));
-    onIdTokenChanged(auth2, (user) => mintCookie(user));
+    beforeAuthStateChanged(auth, mintCookie, () => mintCookie(auth.currentUser));
+    onIdTokenChanged(auth, (user) => mintCookie(user));
   }
   const authEmulatorHost = getDefaultEmulatorHost("auth");
   if (authEmulatorHost) {
-    connectAuthEmulator(auth2, `http://${authEmulatorHost}`);
+    connectAuthEmulator(auth, `http://${authEmulatorHost}`);
   }
-  return auth2;
+  return auth;
 }
 var prodErrorMap, _DEFAULT_AUTH_ERROR_FACTORY, logClient, instanceCache, Delay, FetchProvider, SERVER_ERROR_MAP, DEFAULT_API_TIMEOUT_MS, NetworkTimeout, ProactiveRefresh, UserMetadata, StsTokenManager, UserImpl, InMemoryPersistence, inMemoryPersistence, PersistenceUserManager, AuthMiddlewareQueue, AuthImpl, Subscription, AuthCredential, EmailAuthCredential, IDP_REQUEST_URI$1, OAuthCredential, VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_, PhoneAuthCredential, ActionCodeURL, EmailAuthProvider, FederatedAuthProvider, BaseOAuthProvider, FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, UserCredentialImpl, MultiFactorError, STORAGE_AVAILABLE_KEY, BrowserPersistenceClass, _POLLING_INTERVAL_MS$1, IE10_LOCAL_STORAGE_SYNC_DELAY, BrowserLocalPersistence, browserLocalPersistence, BrowserSessionPersistence, browserSessionPersistence, Receiver, Sender, DB_NAME2, DB_VERSION2, DB_OBJECTSTORE_NAME, DB_DATA_KEYPATH, DBPromise, _POLLING_INTERVAL_MS, _TRANSACTION_RETRY_COUNT, IndexedDBLocalPersistence, indexedDBLocalPersistence, _JSLOAD_CALLBACK, NETWORK_TIMEOUT_DELAY, RECAPTCHA_VERIFIER_TYPE, PhoneAuthProvider, IdpCredential, AbstractPopupRedirectOperation, _POLL_WINDOW_CLOSE_TIMEOUT, PopupOperation, PENDING_REDIRECT_KEY, redirectOutcomeMap, RedirectAction, EVENT_DUPLICATION_CACHE_DURATION_MS, AuthEventManager, IP_ADDRESS_REGEX, HTTP_REGEX, NETWORK_TIMEOUT, cachedGApiLoader, PING_TIMEOUT, IFRAME_PATH, EMULATED_IFRAME_PATH, IFRAME_ATTRIBUTES, EID_FROM_APIHOST, BASE_POPUP_OPTIONS, DEFAULT_WIDTH, DEFAULT_HEIGHT, TARGET_BLANK, FIREFOX_EMPTY_URL, AuthPopup, WIDGET_PATH, EMULATOR_WIDGET_PATH, WEB_STORAGE_SUPPORT_KEY, BrowserPopupRedirectResolver, browserPopupRedirectResolver, MultiFactorAssertionImpl, PhoneMultiFactorAssertionImpl, PhoneMultiFactorGenerator, name3, version3, AuthInterop, DEFAULT_ID_TOKEN_MAX_AGE, authIdTokenMaxAge, lastPostedIdToken, mintCookieFactory;
 var init_index_909bd8f4 = __esm({
@@ -6001,8 +6004,8 @@ var init_index_909bd8f4 = __esm({
     };
     DEFAULT_API_TIMEOUT_MS = new Delay(3e4, 6e4);
     NetworkTimeout = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.timer = null;
         this.promise = new Promise((_2, reject) => {
           this.timer = setTimeout(() => {
@@ -6110,13 +6113,13 @@ var init_index_909bd8f4 = __esm({
         const expiresIn = "expiresIn" in response && typeof response.expiresIn !== "undefined" ? Number(response.expiresIn) : _tokenExpiresIn(response.idToken);
         this.updateTokensAndExpiration(response.idToken, response.refreshToken, expiresIn);
       }
-      async getToken(auth2, forceRefresh = false) {
-        _assert(!this.accessToken || this.refreshToken, auth2, "user-token-expired");
+      async getToken(auth, forceRefresh = false) {
+        _assert(!this.accessToken || this.refreshToken, auth, "user-token-expired");
         if (!forceRefresh && this.accessToken && !this.isExpired) {
           return this.accessToken;
         }
         if (this.refreshToken) {
-          await this.refresh(auth2, this.refreshToken);
+          await this.refresh(auth, this.refreshToken);
           return this.accessToken;
         }
         return null;
@@ -6124,8 +6127,8 @@ var init_index_909bd8f4 = __esm({
       clearRefreshToken() {
         this.refreshToken = null;
       }
-      async refresh(auth2, oldToken) {
-        const { accessToken, refreshToken, expiresIn } = await requestStsToken(auth2, oldToken);
+      async refresh(auth, oldToken) {
+        const { accessToken, refreshToken, expiresIn } = await requestStsToken(auth, oldToken);
         this.updateTokensAndExpiration(accessToken, refreshToken, Number(expiresIn));
       }
       updateTokensAndExpiration(accessToken, refreshToken, expiresInSec) {
@@ -6177,13 +6180,13 @@ var init_index_909bd8f4 = __esm({
     };
     UserImpl = class {
       constructor(_a) {
-        var { uid, auth: auth2, stsTokenManager } = _a, opt = __rest(_a, ["uid", "auth", "stsTokenManager"]);
+        var { uid, auth, stsTokenManager } = _a, opt = __rest(_a, ["uid", "auth", "stsTokenManager"]);
         this.providerId = "firebase";
         this.proactiveRefresh = new ProactiveRefresh(this);
         this.reloadUserInfo = null;
         this.reloadListener = null;
         this.uid = uid;
-        this.auth = auth2;
+        this.auth = auth;
         this.stsTokenManager = stsTokenManager;
         this.accessToken = stsTokenManager.accessToken;
         this.displayName = opt.displayName || null;
@@ -6228,8 +6231,8 @@ var init_index_909bd8f4 = __esm({
         this.metadata._copy(user.metadata);
         this.stsTokenManager._assign(user.stsTokenManager);
       }
-      _clone(auth2) {
-        return new UserImpl(Object.assign(Object.assign({}, this), { auth: auth2, stsTokenManager: this.stsTokenManager._clone() }));
+      _clone(auth) {
+        return new UserImpl(Object.assign(Object.assign({}, this), { auth, stsTokenManager: this.stsTokenManager._clone() }));
       }
       _onReload(callback) {
         _assert(!this.reloadListener, this.auth, "internal-error");
@@ -6293,7 +6296,7 @@ var init_index_909bd8f4 = __esm({
       get refreshToken() {
         return this.stsTokenManager.refreshToken || "";
       }
-      static _fromJSON(auth2, object) {
+      static _fromJSON(auth, object) {
         var _a, _b, _c, _d, _e2, _f, _g, _h;
         const displayName = (_a = object.displayName) !== null && _a !== void 0 ? _a : void 0;
         const email = (_b = object.email) !== null && _b !== void 0 ? _b : void 0;
@@ -6304,22 +6307,22 @@ var init_index_909bd8f4 = __esm({
         const createdAt = (_g = object.createdAt) !== null && _g !== void 0 ? _g : void 0;
         const lastLoginAt = (_h = object.lastLoginAt) !== null && _h !== void 0 ? _h : void 0;
         const { uid, emailVerified, isAnonymous, providerData, stsTokenManager: plainObjectTokenManager } = object;
-        _assert(uid && plainObjectTokenManager, auth2, "internal-error");
+        _assert(uid && plainObjectTokenManager, auth, "internal-error");
         const stsTokenManager = StsTokenManager.fromJSON(this.name, plainObjectTokenManager);
-        _assert(typeof uid === "string", auth2, "internal-error");
-        assertStringOrUndefined(displayName, auth2.name);
-        assertStringOrUndefined(email, auth2.name);
-        _assert(typeof emailVerified === "boolean", auth2, "internal-error");
-        _assert(typeof isAnonymous === "boolean", auth2, "internal-error");
-        assertStringOrUndefined(phoneNumber, auth2.name);
-        assertStringOrUndefined(photoURL, auth2.name);
-        assertStringOrUndefined(tenantId, auth2.name);
-        assertStringOrUndefined(_redirectEventId, auth2.name);
-        assertStringOrUndefined(createdAt, auth2.name);
-        assertStringOrUndefined(lastLoginAt, auth2.name);
+        _assert(typeof uid === "string", auth, "internal-error");
+        assertStringOrUndefined(displayName, auth.name);
+        assertStringOrUndefined(email, auth.name);
+        _assert(typeof emailVerified === "boolean", auth, "internal-error");
+        _assert(typeof isAnonymous === "boolean", auth, "internal-error");
+        assertStringOrUndefined(phoneNumber, auth.name);
+        assertStringOrUndefined(photoURL, auth.name);
+        assertStringOrUndefined(tenantId, auth.name);
+        assertStringOrUndefined(_redirectEventId, auth.name);
+        assertStringOrUndefined(createdAt, auth.name);
+        assertStringOrUndefined(lastLoginAt, auth.name);
         const user = new UserImpl({
           uid,
-          auth: auth2,
+          auth,
           email,
           emailVerified,
           displayName,
@@ -6339,12 +6342,12 @@ var init_index_909bd8f4 = __esm({
         }
         return user;
       }
-      static async _fromIdTokenResponse(auth2, idTokenResponse, isAnonymous = false) {
+      static async _fromIdTokenResponse(auth, idTokenResponse, isAnonymous = false) {
         const stsTokenManager = new StsTokenManager();
         stsTokenManager.updateFromServerResponse(idTokenResponse);
         const user = new UserImpl({
           uid: idTokenResponse.localId,
-          auth: auth2,
+          auth,
           stsTokenManager,
           isAnonymous
         });
@@ -6380,14 +6383,14 @@ var init_index_909bd8f4 = __esm({
     InMemoryPersistence.type = "NONE";
     inMemoryPersistence = InMemoryPersistence;
     PersistenceUserManager = class {
-      constructor(persistence, auth2, userKey) {
+      constructor(persistence, auth, userKey) {
         this.persistence = persistence;
-        this.auth = auth2;
+        this.auth = auth;
         this.userKey = userKey;
         const { config, name: name5 } = this.auth;
         this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name5);
         this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name5);
-        this.boundEventHandler = auth2._onStorageEvent.bind(auth2);
+        this.boundEventHandler = auth._onStorageEvent.bind(auth);
         this.persistence._addListener(this.fullUserKey, this.boundEventHandler);
       }
       setCurrentUser(user) {
@@ -6417,9 +6420,9 @@ var init_index_909bd8f4 = __esm({
       delete() {
         this.persistence._removeListener(this.fullUserKey, this.boundEventHandler);
       }
-      static async create(auth2, persistenceHierarchy, userKey = "authUser") {
+      static async create(auth, persistenceHierarchy, userKey = "authUser") {
         if (!persistenceHierarchy.length) {
-          return new PersistenceUserManager(_getInstance(inMemoryPersistence), auth2, userKey);
+          return new PersistenceUserManager(_getInstance(inMemoryPersistence), auth, userKey);
         }
         const availablePersistences = (await Promise.all(persistenceHierarchy.map(async (persistence) => {
           if (await persistence._isAvailable()) {
@@ -6428,13 +6431,13 @@ var init_index_909bd8f4 = __esm({
           return void 0;
         }))).filter((persistence) => persistence);
         let selectedPersistence = availablePersistences[0] || _getInstance(inMemoryPersistence);
-        const key2 = _persistenceKeyName(userKey, auth2.config.apiKey, auth2.name);
+        const key2 = _persistenceKeyName(userKey, auth.config.apiKey, auth.name);
         let userToMigrate = null;
         for (const persistence of persistenceHierarchy) {
           try {
             const blob = await persistence._get(key2);
             if (blob) {
-              const user = UserImpl._fromJSON(auth2, blob);
+              const user = UserImpl._fromJSON(auth, blob);
               if (persistence !== selectedPersistence) {
                 userToMigrate = user;
               }
@@ -6444,9 +6447,9 @@ var init_index_909bd8f4 = __esm({
           } catch (_a) {
           }
         }
-        const migrationHierarchy = availablePersistences.filter((p) => p._shouldAllowMigration);
+        const migrationHierarchy = availablePersistences.filter((p2) => p2._shouldAllowMigration);
         if (!selectedPersistence._shouldAllowMigration || !migrationHierarchy.length) {
-          return new PersistenceUserManager(selectedPersistence, auth2, userKey);
+          return new PersistenceUserManager(selectedPersistence, auth, userKey);
         }
         selectedPersistence = migrationHierarchy[0];
         if (userToMigrate) {
@@ -6460,12 +6463,12 @@ var init_index_909bd8f4 = __esm({
             }
           }
         }));
-        return new PersistenceUserManager(selectedPersistence, auth2, userKey);
+        return new PersistenceUserManager(selectedPersistence, auth, userKey);
       }
     };
     AuthMiddlewareQueue = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.queue = [];
       }
       pushCallback(callback, onAbort) {
@@ -6838,8 +6841,8 @@ var init_index_909bd8f4 = __esm({
       }
     };
     Subscription = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.observer = null;
         this.addObserver = createSubscribe((observer) => this.observer = observer);
       }
@@ -6898,44 +6901,44 @@ var init_index_909bd8f4 = __esm({
         }
         return null;
       }
-      async _getIdTokenResponse(auth2) {
+      async _getIdTokenResponse(auth) {
         switch (this.signInMethod) {
           case "password":
-            return signInWithPassword(auth2, {
+            return signInWithPassword(auth, {
               returnSecureToken: true,
               email: this._email,
               password: this._password
             });
           case "emailLink":
-            return signInWithEmailLink$1(auth2, {
+            return signInWithEmailLink$1(auth, {
               email: this._email,
               oobCode: this._password
             });
           default:
-            _fail(auth2, "internal-error");
+            _fail(auth, "internal-error");
         }
       }
-      async _linkToIdToken(auth2, idToken) {
+      async _linkToIdToken(auth, idToken) {
         switch (this.signInMethod) {
           case "password":
-            return updateEmailPassword(auth2, {
+            return updateEmailPassword(auth, {
               idToken,
               returnSecureToken: true,
               email: this._email,
               password: this._password
             });
           case "emailLink":
-            return signInWithEmailLinkForLinking(auth2, {
+            return signInWithEmailLinkForLinking(auth, {
               idToken,
               email: this._email,
               oobCode: this._password
             });
           default:
-            _fail(auth2, "internal-error");
+            _fail(auth, "internal-error");
         }
       }
-      _getReauthenticationResolver(auth2) {
-        return this._getIdTokenResponse(auth2);
+      _getReauthenticationResolver(auth) {
+        return this._getIdTokenResponse(auth);
       }
     };
     IDP_REQUEST_URI$1 = "http://localhost";
@@ -6992,19 +6995,19 @@ var init_index_909bd8f4 = __esm({
         cred.pendingToken = rest.pendingToken || null;
         return cred;
       }
-      _getIdTokenResponse(auth2) {
+      _getIdTokenResponse(auth) {
         const request = this.buildRequest();
-        return signInWithIdp(auth2, request);
+        return signInWithIdp(auth, request);
       }
-      _linkToIdToken(auth2, idToken) {
+      _linkToIdToken(auth, idToken) {
         const request = this.buildRequest();
         request.idToken = idToken;
-        return signInWithIdp(auth2, request);
+        return signInWithIdp(auth, request);
       }
-      _getReauthenticationResolver(auth2) {
+      _getReauthenticationResolver(auth) {
         const request = this.buildRequest();
         request.autoCreate = false;
-        return signInWithIdp(auth2, request);
+        return signInWithIdp(auth, request);
       }
       buildRequest() {
         const request = {
@@ -7047,14 +7050,14 @@ var init_index_909bd8f4 = __esm({
       static _fromTokenResponse(phoneNumber, temporaryProof) {
         return new PhoneAuthCredential({ phoneNumber, temporaryProof });
       }
-      _getIdTokenResponse(auth2) {
-        return signInWithPhoneNumber$1(auth2, this._makeVerificationRequest());
+      _getIdTokenResponse(auth) {
+        return signInWithPhoneNumber$1(auth, this._makeVerificationRequest());
       }
-      _linkToIdToken(auth2, idToken) {
-        return linkWithPhoneNumber$1(auth2, Object.assign({ idToken }, this._makeVerificationRequest()));
+      _linkToIdToken(auth, idToken) {
+        return linkWithPhoneNumber$1(auth, Object.assign({ idToken }, this._makeVerificationRequest()));
       }
-      _getReauthenticationResolver(auth2) {
-        return verifyPhoneNumberForExisting(auth2, this._makeVerificationRequest());
+      _getReauthenticationResolver(auth) {
+        return verifyPhoneNumberForExisting(auth, this._makeVerificationRequest());
       }
       _makeVerificationRequest() {
         const { temporaryProof, phoneNumber, verificationId, verificationCode } = this.params;
@@ -7316,8 +7319,8 @@ var init_index_909bd8f4 = __esm({
         this._tokenResponse = params._tokenResponse;
         this.operationType = params.operationType;
       }
-      static async _fromIdTokenResponse(auth2, operationType, idTokenResponse, isAnonymous = false) {
-        const user = await UserImpl._fromIdTokenResponse(auth2, idTokenResponse, isAnonymous);
+      static async _fromIdTokenResponse(auth, operationType, idTokenResponse, isAnonymous = false) {
+        const user = await UserImpl._fromIdTokenResponse(auth, idTokenResponse, isAnonymous);
         const providerId = providerIdForResponse(idTokenResponse);
         const userCred = new UserCredentialImpl({
           user,
@@ -7339,21 +7342,21 @@ var init_index_909bd8f4 = __esm({
       }
     };
     MultiFactorError = class extends FirebaseError {
-      constructor(auth2, error2, operationType, user) {
+      constructor(auth, error2, operationType, user) {
         var _a;
         super(error2.code, error2.message);
         this.operationType = operationType;
         this.user = user;
         Object.setPrototypeOf(this, MultiFactorError.prototype);
         this.customData = {
-          appName: auth2.name,
-          tenantId: (_a = auth2.tenantId) !== null && _a !== void 0 ? _a : void 0,
+          appName: auth.name,
+          tenantId: (_a = auth.tenantId) !== null && _a !== void 0 ? _a : void 0,
           _serverResponse: error2.customData._serverResponse,
           operationType
         };
       }
-      static _fromErrorAndOperation(auth2, error2, operationType, user) {
-        return new MultiFactorError(auth2, error2, operationType, user);
+      static _fromErrorAndOperation(auth, error2, operationType, user) {
+        return new MultiFactorError(auth, error2, operationType, user);
       }
     };
     STORAGE_AVAILABLE_KEY = "__sak";
@@ -7716,8 +7719,8 @@ var init_index_909bd8f4 = __esm({
         let numAttempts = 0;
         while (true) {
           try {
-            const db2 = await this._openDb();
-            return await op2(db2);
+            const db = await this._openDb();
+            return await op2(db);
           } catch (e3) {
             if (numAttempts++ > _TRANSACTION_RETRY_COUNT) {
               throw e3;
@@ -7777,9 +7780,9 @@ var init_index_909bd8f4 = __esm({
           if (!indexedDB) {
             return false;
           }
-          const db2 = await _openDatabase();
-          await _putObject(db2, STORAGE_AVAILABLE_KEY, "1");
-          await _deleteObject(db2, STORAGE_AVAILABLE_KEY);
+          const db = await _openDatabase();
+          await _putObject(db, STORAGE_AVAILABLE_KEY, "1");
+          await _deleteObject(db, STORAGE_AVAILABLE_KEY);
           return true;
         } catch (_a) {
         }
@@ -7795,26 +7798,26 @@ var init_index_909bd8f4 = __esm({
       }
       async _set(key2, value) {
         return this._withPendingWrite(async () => {
-          await this._withRetries((db2) => _putObject(db2, key2, value));
+          await this._withRetries((db) => _putObject(db, key2, value));
           this.localCache[key2] = value;
           return this.notifyServiceWorker(key2);
         });
       }
       async _get(key2) {
-        const obj = await this._withRetries((db2) => getObject(db2, key2));
+        const obj = await this._withRetries((db) => getObject(db, key2));
         this.localCache[key2] = obj;
         return obj;
       }
       async _remove(key2) {
         return this._withPendingWrite(async () => {
-          await this._withRetries((db2) => _deleteObject(db2, key2));
+          await this._withRetries((db) => _deleteObject(db, key2));
           delete this.localCache[key2];
           return this.notifyServiceWorker(key2);
         });
       }
       async _poll() {
-        const result = await this._withRetries((db2) => {
-          const getAllRequest = getObjectStore(db2, false).getAll();
+        const result = await this._withRetries((db) => {
+          const getAllRequest = getObjectStore(db, false).getAll();
           return new DBPromise(getAllRequest).toPromise();
         });
         if (!result) {
@@ -7887,9 +7890,9 @@ var init_index_909bd8f4 = __esm({
     NETWORK_TIMEOUT_DELAY = new Delay(3e4, 6e4);
     RECAPTCHA_VERIFIER_TYPE = "recaptcha";
     PhoneAuthProvider = class {
-      constructor(auth2) {
+      constructor(auth) {
         this.providerId = PhoneAuthProvider.PROVIDER_ID;
-        this.auth = _castAuth(auth2);
+        this.auth = _castAuth(auth);
       }
       verifyPhoneNumber(phoneOptions, applicationVerifier) {
         return _verifyPhoneNumber(this.auth, phoneOptions, getModularInstance(applicationVerifier));
@@ -7922,14 +7925,14 @@ var init_index_909bd8f4 = __esm({
         super("custom", "custom");
         this.params = params;
       }
-      _getIdTokenResponse(auth2) {
-        return signInWithIdp(auth2, this._buildIdpRequest());
+      _getIdTokenResponse(auth) {
+        return signInWithIdp(auth, this._buildIdpRequest());
       }
-      _linkToIdToken(auth2, idToken) {
-        return signInWithIdp(auth2, this._buildIdpRequest(idToken));
+      _linkToIdToken(auth, idToken) {
+        return signInWithIdp(auth, this._buildIdpRequest(idToken));
       }
-      _getReauthenticationResolver(auth2) {
-        return signInWithIdp(auth2, this._buildIdpRequest());
+      _getReauthenticationResolver(auth) {
+        return signInWithIdp(auth, this._buildIdpRequest());
       }
       _buildIdpRequest(idToken) {
         const request = {
@@ -7948,8 +7951,8 @@ var init_index_909bd8f4 = __esm({
       }
     };
     AbstractPopupRedirectOperation = class {
-      constructor(auth2, filter, resolver, user, bypassAuthState = false) {
-        this.auth = auth2;
+      constructor(auth, filter, resolver, user, bypassAuthState = false) {
+        this.auth = auth;
         this.resolver = resolver;
         this.user = user;
         this.bypassAuthState = bypassAuthState;
@@ -8028,8 +8031,8 @@ var init_index_909bd8f4 = __esm({
     };
     _POLL_WINDOW_CLOSE_TIMEOUT = new Delay(2e3, 1e4);
     PopupOperation = class extends AbstractPopupRedirectOperation {
-      constructor(auth2, filter, provider, resolver, user) {
-        super(auth2, filter, resolver, user);
+      constructor(auth, filter, provider, resolver, user) {
+        super(auth, filter, resolver, user);
         this.provider = provider;
         this.authWindow = null;
         this.pollId = null;
@@ -8100,8 +8103,8 @@ var init_index_909bd8f4 = __esm({
     PENDING_REDIRECT_KEY = "pendingRedirect";
     redirectOutcomeMap = /* @__PURE__ */ new Map();
     RedirectAction = class extends AbstractPopupRedirectOperation {
-      constructor(auth2, resolver, bypassAuthState = false) {
-        super(auth2, [
+      constructor(auth, resolver, bypassAuthState = false) {
+        super(auth, [
           "signInViaRedirect",
           "linkViaRedirect",
           "reauthViaRedirect",
@@ -8150,8 +8153,8 @@ var init_index_909bd8f4 = __esm({
     };
     EVENT_DUPLICATION_CACHE_DURATION_MS = 10 * 60 * 1e3;
     AuthEventManager = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.cachedEventUids = /* @__PURE__ */ new Set();
         this.consumers = /* @__PURE__ */ new Set();
         this.queuedRedirectEvent = null;
@@ -8273,20 +8276,20 @@ var init_index_909bd8f4 = __esm({
         this._completeRedirectFn = _getRedirectResult;
         this._overrideRedirectResult = _overrideRedirectResult;
       }
-      async _openPopup(auth2, provider, authType, eventId) {
+      async _openPopup(auth, provider, authType, eventId) {
         var _a;
-        debugAssert((_a = this.eventManagers[auth2._key()]) === null || _a === void 0 ? void 0 : _a.manager, "_initialize() not called before _openPopup()");
-        const url = _getRedirectUrl(auth2, provider, authType, _getCurrentUrl(), eventId);
-        return _open(auth2, url, _generateEventId());
+        debugAssert((_a = this.eventManagers[auth._key()]) === null || _a === void 0 ? void 0 : _a.manager, "_initialize() not called before _openPopup()");
+        const url = _getRedirectUrl(auth, provider, authType, _getCurrentUrl(), eventId);
+        return _open(auth, url, _generateEventId());
       }
-      async _openRedirect(auth2, provider, authType, eventId) {
-        await this._originValidation(auth2);
-        _setWindowLocation(_getRedirectUrl(auth2, provider, authType, _getCurrentUrl(), eventId));
+      async _openRedirect(auth, provider, authType, eventId) {
+        await this._originValidation(auth);
+        _setWindowLocation(_getRedirectUrl(auth, provider, authType, _getCurrentUrl(), eventId));
         return new Promise(() => {
         });
       }
-      _initialize(auth2) {
-        const key2 = auth2._key();
+      _initialize(auth) {
+        const key2 = auth._key();
         if (this.eventManagers[key2]) {
           const { manager, promise: promise2 } = this.eventManagers[key2];
           if (manager) {
@@ -8296,40 +8299,40 @@ var init_index_909bd8f4 = __esm({
             return promise2;
           }
         }
-        const promise = this.initAndGetManager(auth2);
+        const promise = this.initAndGetManager(auth);
         this.eventManagers[key2] = { promise };
         promise.catch(() => {
           delete this.eventManagers[key2];
         });
         return promise;
       }
-      async initAndGetManager(auth2) {
-        const iframe = await _openIframe(auth2);
-        const manager = new AuthEventManager(auth2);
+      async initAndGetManager(auth) {
+        const iframe = await _openIframe(auth);
+        const manager = new AuthEventManager(auth);
         iframe.register("authEvent", (iframeEvent) => {
-          _assert(iframeEvent === null || iframeEvent === void 0 ? void 0 : iframeEvent.authEvent, auth2, "invalid-auth-event");
+          _assert(iframeEvent === null || iframeEvent === void 0 ? void 0 : iframeEvent.authEvent, auth, "invalid-auth-event");
           const handled = manager.onEvent(iframeEvent.authEvent);
           return { status: handled ? "ACK" : "ERROR" };
         }, gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER);
-        this.eventManagers[auth2._key()] = { manager };
-        this.iframes[auth2._key()] = iframe;
+        this.eventManagers[auth._key()] = { manager };
+        this.iframes[auth._key()] = iframe;
         return manager;
       }
-      _isIframeWebStorageSupported(auth2, cb) {
-        const iframe = this.iframes[auth2._key()];
+      _isIframeWebStorageSupported(auth, cb) {
+        const iframe = this.iframes[auth._key()];
         iframe.send(WEB_STORAGE_SUPPORT_KEY, { type: WEB_STORAGE_SUPPORT_KEY }, (result) => {
           var _a;
           const isSupported = (_a = result === null || result === void 0 ? void 0 : result[0]) === null || _a === void 0 ? void 0 : _a[WEB_STORAGE_SUPPORT_KEY];
           if (isSupported !== void 0) {
             cb(!!isSupported);
           }
-          _fail(auth2, "internal-error");
+          _fail(auth, "internal-error");
         }, gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER);
       }
-      _originValidation(auth2) {
-        const key2 = auth2._key();
+      _originValidation(auth) {
+        const key2 = auth._key();
         if (!this.originValidationPromises[key2]) {
-          this.originValidationPromises[key2] = _validateOrigin(auth2);
+          this.originValidationPromises[key2] = _validateOrigin(auth);
         }
         return this.originValidationPromises[key2];
       }
@@ -8342,12 +8345,12 @@ var init_index_909bd8f4 = __esm({
       constructor(factorId) {
         this.factorId = factorId;
       }
-      _process(auth2, session, displayName) {
+      _process(auth, session, displayName) {
         switch (session.type) {
           case "enroll":
-            return this._finalizeEnroll(auth2, session.credential, displayName);
+            return this._finalizeEnroll(auth, session.credential, displayName);
           case "signin":
-            return this._finalizeSignIn(auth2, session.credential);
+            return this._finalizeSignIn(auth, session.credential);
           default:
             return debugFail("unexpected MultiFactorSessionType");
         }
@@ -8361,15 +8364,15 @@ var init_index_909bd8f4 = __esm({
       static _fromCredential(credential) {
         return new PhoneMultiFactorAssertionImpl(credential);
       }
-      _finalizeEnroll(auth2, idToken, displayName) {
-        return finalizeEnrollPhoneMfa(auth2, {
+      _finalizeEnroll(auth, idToken, displayName) {
+        return finalizeEnrollPhoneMfa(auth, {
           idToken,
           displayName,
           phoneVerificationInfo: this.credential._makeVerificationRequest()
         });
       }
-      _finalizeSignIn(auth2, mfaPendingCredential) {
-        return finalizeSignInPhoneMfa(auth2, {
+      _finalizeSignIn(auth, mfaPendingCredential) {
+        return finalizeSignInPhoneMfa(auth, {
           mfaPendingCredential,
           phoneVerificationInfo: this.credential._makeVerificationRequest()
         });
@@ -8386,8 +8389,8 @@ var init_index_909bd8f4 = __esm({
     name3 = "@firebase/auth";
     version3 = "0.20.10";
     AuthInterop = class {
-      constructor(auth2) {
-        this.auth = auth2;
+      constructor(auth) {
+        this.auth = auth;
         this.internalListeners = /* @__PURE__ */ new Map();
       }
       getUid() {
@@ -8481,7 +8484,35 @@ var init_index_esm3 = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/firebase.js
+var PUBLIC_FIREBASE_apiKey, PUBLIC_FIREBASE_authDomain, PUBLIC_FIREBASE_projectId, PUBLIC_FIREBASE_storageBucket, PUBLIC_FIREBASE_messagingSenderId, PUBLIC_FIREBASE_appId, firebaseConfig, app;
+var init_firebase = __esm({
+  ".svelte-kit/output/server/chunks/firebase.js"() {
+    init_index_esm2();
+    init_index_esm3();
+    PUBLIC_FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
+    PUBLIC_FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
+    PUBLIC_FIREBASE_projectId = "thinksolve-app";
+    PUBLIC_FIREBASE_storageBucket = "thinksolve-app.appspot.com";
+    PUBLIC_FIREBASE_messagingSenderId = "490986955869";
+    PUBLIC_FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
+    firebaseConfig = {
+      apiKey: PUBLIC_FIREBASE_apiKey,
+      authDomain: PUBLIC_FIREBASE_authDomain,
+      projectId: PUBLIC_FIREBASE_projectId,
+      storageBucket: PUBLIC_FIREBASE_storageBucket,
+      messagingSenderId: PUBLIC_FIREBASE_messagingSenderId,
+      appId: PUBLIC_FIREBASE_appId
+    };
+    app = initializeApp(firebaseConfig);
+    getAuth(app);
+  }
+});
+
 // node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js
+function p(t2) {
+  m.setLogLevel(t2);
+}
 function y(t2, ...e3) {
   if (m.logLevel <= LogLevel.DEBUG) {
     const n2 = e3.map(v);
@@ -8524,6 +8555,10 @@ function st(t2, e3, n2) {
   if (!n2)
     throw new U(P, `Function ${t2}() cannot be called with an empty ${e3}.`);
 }
+function it(t2) {
+  if (!rt.isDocumentKey(t2))
+    throw new U(P, `Invalid document reference. Document references must have an even number of segments, but ${t2} has ${t2.length}.`);
+}
 function ot(t2) {
   if (rt.isDocumentKey(t2))
     throw new U(P, `Invalid collection reference. Collection references must have an odd number of segments, but ${t2} has ${t2.length}.`);
@@ -8561,6 +8596,10 @@ function ct(t2, e3) {
     }
   }
   return t2;
+}
+function at(t2, e3) {
+  if (e3 <= 0)
+    throw new U(P, `Function ${t2}() requires a positive number, but it was: ${e3}.`);
 }
 function ht(t2) {
   return null == t2;
@@ -8601,6 +8640,15 @@ function mt(t2) {
     default:
       return t2 >= 200 && t2 < 300 ? T : t2 >= 400 && t2 < 500 ? S : t2 >= 500 && t2 < 600 ? C : R;
   }
+}
+function yt(t2) {
+  const e3 = "undefined" != typeof self && (self.crypto || self.msCrypto), n2 = new Uint8Array(t2);
+  if (e3 && "function" == typeof e3.getRandomValues)
+    e3.getRandomValues(n2);
+  else
+    for (let e4 = 0; e4 < t2; e4++)
+      n2[e4] = Math.floor(256 * Math.random());
+  return n2;
 }
 function gt(t2, e3) {
   return t2 < e3 ? -1 : t2 > e3 ? 1 : 0;
@@ -8719,6 +8767,102 @@ function Ut(t2, e3) {
       return b();
   }
 }
+function jt(t2, e3) {
+  return void 0 !== (t2.values || []).find((t3) => Ut(t3, e3));
+}
+function Bt(t2, e3) {
+  if (t2 === e3)
+    return 0;
+  const n2 = Mt(t2), r2 = Mt(e3);
+  if (n2 !== r2)
+    return gt(n2, r2);
+  switch (n2) {
+    case 0:
+    case 9007199254740991:
+      return 0;
+    case 1:
+      return gt(t2.booleanValue, e3.booleanValue);
+    case 2:
+      return function(t3, e4) {
+        const n3 = St(t3.integerValue || t3.doubleValue), r3 = St(e4.integerValue || e4.doubleValue);
+        return n3 < r3 ? -1 : n3 > r3 ? 1 : n3 === r3 ? 0 : isNaN(n3) ? isNaN(r3) ? 0 : -1 : 1;
+      }(t2, e3);
+    case 3:
+      return Qt(t2.timestampValue, e3.timestampValue);
+    case 4:
+      return Qt(Ct(t2), Ct(e3));
+    case 5:
+      return gt(t2.stringValue, e3.stringValue);
+    case 6:
+      return function(t3, e4) {
+        const n3 = qt(t3), r3 = qt(e4);
+        return n3.compareTo(r3);
+      }(t2.bytesValue, e3.bytesValue);
+    case 7:
+      return function(t3, e4) {
+        const n3 = t3.split("/"), r3 = e4.split("/");
+        for (let t4 = 0; t4 < n3.length && t4 < r3.length; t4++) {
+          const e5 = gt(n3[t4], r3[t4]);
+          if (0 !== e5)
+            return e5;
+        }
+        return gt(n3.length, r3.length);
+      }(t2.referenceValue, e3.referenceValue);
+    case 8:
+      return function(t3, e4) {
+        const n3 = gt(St(t3.latitude), St(e4.latitude));
+        if (0 !== n3)
+          return n3;
+        return gt(St(t3.longitude), St(e4.longitude));
+      }(t2.geoPointValue, e3.geoPointValue);
+    case 9:
+      return function(t3, e4) {
+        const n3 = t3.values || [], r3 = e4.values || [];
+        for (let t4 = 0; t4 < n3.length && t4 < r3.length; ++t4) {
+          const e5 = Bt(n3[t4], r3[t4]);
+          if (e5)
+            return e5;
+        }
+        return gt(n3.length, r3.length);
+      }(t2.arrayValue, e3.arrayValue);
+    case 10:
+      return function(t3, e4) {
+        if (t3 === Lt && e4 === Lt)
+          return 0;
+        if (t3 === Lt)
+          return 1;
+        if (e4 === Lt)
+          return -1;
+        const n3 = t3.fields || {}, r3 = Object.keys(n3), s3 = e4.fields || {}, i = Object.keys(s3);
+        r3.sort(), i.sort();
+        for (let t4 = 0; t4 < r3.length && t4 < i.length; ++t4) {
+          const e5 = gt(r3[t4], i[t4]);
+          if (0 !== e5)
+            return e5;
+          const o2 = Bt(n3[r3[t4]], s3[i[t4]]);
+          if (0 !== o2)
+            return o2;
+        }
+        return gt(r3.length, i.length);
+      }(t2.mapValue, e3.mapValue);
+    default:
+      throw b();
+  }
+}
+function Qt(t2, e3) {
+  if ("string" == typeof t2 && "string" == typeof e3 && t2.length === e3.length)
+    return gt(t2, e3);
+  const n2 = Ft(t2), r2 = Ft(e3), s3 = gt(n2.seconds, r2.seconds);
+  return 0 !== s3 ? s3 : gt(n2.nanos, r2.nanos);
+}
+function zt(t2, e3) {
+  return {
+    referenceValue: `projects/${t2.projectId}/databases/${t2.database}/documents/${e3.path.canonicalString()}`
+  };
+}
+function Gt(t2) {
+  return !!t2 && "arrayValue" in t2;
+}
 function Wt(t2) {
   return !!t2 && "nullValue" in t2;
 }
@@ -8760,6 +8904,26 @@ function Ht(t2) {
 function te(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = null, o2 = null) {
   return new Zt(t2, e3, n2, r2, s3, i, o2);
 }
+function ie(t2, e3) {
+  var n2;
+  return ((null === (n2 = e3.arrayValue) || void 0 === n2 ? void 0 : n2.values) || []).map((t3) => rt.fromName(t3.referenceValue));
+}
+function fe(t2, e3) {
+  return t2.dir === e3.dir && t2.field.isEqual(e3.field);
+}
+function de(t2, e3) {
+  if (null === t2)
+    return null === e3;
+  if (null === e3)
+    return false;
+  if (t2.inclusive !== e3.inclusive || t2.position.length !== e3.position.length)
+    return false;
+  for (let n2 = 0; n2 < t2.position.length; n2++) {
+    if (!Ut(t2.position[n2], e3.position[n2]))
+      return false;
+  }
+  return true;
+}
 function me(t2) {
   return t2.explicitOrderBy.length > 0 ? t2.explicitOrderBy[0].field : null;
 }
@@ -8768,6 +8932,9 @@ function pe(t2) {
     if (e3.q())
       return e3.field;
   return null;
+}
+function ye(t2) {
+  return null !== t2.collectionGroup;
 }
 function _e(t2) {
   const e3 = I(t2);
@@ -8804,6 +8971,66 @@ function ge(t2) {
     }
   return e3.k;
 }
+function ve(t2, e3) {
+  return function(t3, e4) {
+    if (t3.limit !== e4.limit)
+      return false;
+    if (t3.orderBy.length !== e4.orderBy.length)
+      return false;
+    for (let n3 = 0; n3 < t3.orderBy.length; n3++)
+      if (!fe(t3.orderBy[n3], e4.orderBy[n3]))
+        return false;
+    if (t3.filters.length !== e4.filters.length)
+      return false;
+    for (let s3 = 0; s3 < t3.filters.length; s3++)
+      if (n2 = t3.filters[s3], r2 = e4.filters[s3], n2.op !== r2.op || !n2.field.isEqual(r2.field) || !Ut(n2.value, r2.value))
+        return false;
+    var n2, r2;
+    return t3.collectionGroup === e4.collectionGroup && !!t3.path.isEqual(e4.path) && !!de(t3.startAt, e4.startAt) && de(t3.endAt, e4.endAt);
+  }(ge(t2), ge(e3)) && t2.limitType === e3.limitType;
+}
+function be(t2, e3) {
+  return function(t3) {
+    return "number" == typeof t3 && Number.isInteger(t3) && !lt(t3) && t3 <= Number.MAX_SAFE_INTEGER && t3 >= Number.MIN_SAFE_INTEGER;
+  }(e3) ? function(t3) {
+    return {
+      integerValue: "" + t3
+    };
+  }(e3) : function(t3, e4) {
+    if (t3.C) {
+      if (isNaN(e4))
+        return {
+          doubleValue: "NaN"
+        };
+      if (e4 === 1 / 0)
+        return {
+          doubleValue: "Infinity"
+        };
+      if (e4 === -1 / 0)
+        return {
+          doubleValue: "-Infinity"
+        };
+    }
+    return {
+      doubleValue: lt(e4) ? "-0" : e4
+    };
+  }(t2, e3);
+}
+function ke(t2, e3) {
+  if (t2.C) {
+    return `${new Date(1e3 * e3.seconds).toISOString().replace(/\.\d*/, "").replace("Z", "")}.${("000000000" + e3.nanoseconds).slice(-9)}Z`;
+  }
+  return {
+    seconds: "" + e3.seconds,
+    nanos: e3.nanoseconds
+  };
+}
+function Ce(t2, e3) {
+  return t2.C ? e3.toBase64() : e3.toUint8Array();
+}
+function Le(t2, e3) {
+  return ke(t2, e3.toTimestamp());
+}
 function Me(t2) {
   return E(!!t2), Et.fromTimestamp(function(t3) {
     const e3 = Ft(t3);
@@ -8814,6 +9041,9 @@ function Ue(t2, e3) {
   return function(t3) {
     return new tt(["projects", t3.projectId, "databases", t3.database]);
   }(t2).child("documents").child(e3).canonicalString();
+}
+function je(t2, e3) {
+  return Ue(t2.databaseId, e3.path);
 }
 function Be(t2, e3) {
   const n2 = function(t3) {
@@ -8829,6 +9059,87 @@ function Be(t2, e3) {
 }
 function Qe(t2, e3) {
   return Ue(t2.databaseId, e3);
+}
+function ze(t2) {
+  return new tt(["projects", t2.databaseId.projectId, "databases", t2.databaseId.database]).canonicalString();
+}
+function Ge(t2, e3, n2) {
+  return {
+    name: je(t2, e3),
+    fields: n2.value.mapValue.fields
+  };
+}
+function We(t2, e3) {
+  return "found" in e3 ? function(t3, e4) {
+    E(!!e4.found), e4.found.name, e4.found.updateTime;
+    const n2 = Be(t3, e4.found.name), r2 = Me(e4.found.updateTime), s3 = new Jt({
+      mapValue: {
+        fields: e4.found.fields
+      }
+    });
+    return Xt.newFoundDocument(n2, r2, s3);
+  }(t2, e3) : "missing" in e3 ? function(t3, e4) {
+    E(!!e4.missing), E(!!e4.readTime);
+    const n2 = Be(t3, e4.missing), r2 = Me(e4.readTime);
+    return Xt.newNoDocument(n2, r2);
+  }(t2, e3) : b();
+}
+function Ke(t2, e3) {
+  let n2;
+  if (e3 instanceof De)
+    n2 = {
+      update: Ge(t2, e3.key, e3.value)
+    };
+  else if (e3 instanceof xe)
+    n2 = {
+      delete: je(t2, e3.key)
+    };
+  else if (e3 instanceof $e)
+    n2 = {
+      update: Ge(t2, e3.key, e3.data),
+      updateMask: Ze(e3.fieldMask)
+    };
+  else {
+    if (!(e3 instanceof Fe))
+      return b();
+    n2 = {
+      verify: je(t2, e3.key)
+    };
+  }
+  return e3.fieldTransforms.length > 0 && (n2.updateTransforms = e3.fieldTransforms.map((t3) => function(t4, e4) {
+    const n3 = e4.transform;
+    if (n3 instanceof Ie)
+      return {
+        fieldPath: e4.field.canonicalString(),
+        setToServerValue: "REQUEST_TIME"
+      };
+    if (n3 instanceof Te)
+      return {
+        fieldPath: e4.field.canonicalString(),
+        appendMissingElements: {
+          values: n3.elements
+        }
+      };
+    if (n3 instanceof Ae)
+      return {
+        fieldPath: e4.field.canonicalString(),
+        removeAllFromArray: {
+          values: n3.elements
+        }
+      };
+    if (n3 instanceof Re)
+      return {
+        fieldPath: e4.field.canonicalString(),
+        increment: n3.M
+      };
+    throw b();
+  }(0, t3))), e3.precondition.isNone || (n2.currentDocument = function(t3, e4) {
+    return void 0 !== e4.updateTime ? {
+      updateTime: Le(t3, e4.updateTime)
+    } : void 0 !== e4.exists ? {
+      exists: e4.exists
+    } : b();
+  }(t2, e3.precondition)), n2;
 }
 function Ye(t2, e3) {
   const n2 = {
@@ -8931,11 +9242,37 @@ function Xe(t2) {
     fieldPath: t2.canonicalString()
   };
 }
+function Ze(t2) {
+  const e3 = [];
+  return t2.fields.forEach((t3) => e3.push(t3.canonicalString())), {
+    fieldPaths: e3
+  };
+}
 function tn(t2) {
   return t2.length >= 4 && "projects" === t2.get(0) && "databases" === t2.get(2);
 }
 function en(t2) {
   return new Oe(t2, true);
+}
+async function sn(t2, e3) {
+  const n2 = I(t2), r2 = ze(n2.L) + "/documents", s3 = {
+    writes: e3.map((t3) => Ke(n2.L, t3))
+  };
+  await n2.I("Commit", r2, s3);
+}
+async function on(t2, e3) {
+  const n2 = I(t2), r2 = ze(n2.L) + "/documents", s3 = {
+    documents: e3.map((t3) => je(n2.L, t3))
+  }, i = await n2.P("BatchGetDocuments", r2, s3, e3.length), o2 = /* @__PURE__ */ new Map();
+  i.forEach((t3) => {
+    const e4 = We(n2.L, t3);
+    o2.set(e4.key.toString(), e4);
+  });
+  const u = [];
+  return e3.forEach((t3) => {
+    const e4 = o2.get(t3.toString());
+    E(!!e4), u.push(e4);
+  }), u;
 }
 async function un(t2, e3) {
   const n2 = I(t2), r2 = Ye(n2.L, ge(e3));
@@ -8949,6 +9286,23 @@ async function un(t2, e3) {
     }), o2 = Xt.newFoundDocument(r3, s3, i);
     return n3 && o2.setHasCommittedMutations(), n3 ? o2.setHasCommittedMutations() : o2;
   }(n2.L, t3.document, void 0));
+}
+async function cn(t2, e3) {
+  const n2 = I(t2), r2 = function(t3, e4) {
+    const n3 = Ye(t3, e4);
+    return {
+      structuredAggregationQuery: {
+        aggregations: [{
+          count: {},
+          alias: "count_alias"
+        }],
+        structuredQuery: n3.structuredQuery
+      },
+      parent: n3.parent
+    };
+  }(n2.L, ge(e3)), s3 = r2.parent;
+  n2.tt.v || delete r2.parent;
+  return (await n2.P("RunAggregationQuery", s3, r2, 1)).filter((t3) => !!t3.result).map((t3) => t3.result.aggregateFields);
 }
 function hn(t2) {
   if (t2._terminated)
@@ -8964,6 +9318,16 @@ function hn(t2) {
   }
   var e3, n2, r2, s3;
   return an.get(t2);
+}
+function dn(t2, e3, n2) {
+  n2 || (n2 = "(default)");
+  const r2 = _getProvider(t2, "firestore/lite");
+  if (r2.isInitialized(n2))
+    throw new U(S, "Firestore can only be initialized once per app.");
+  return r2.initialize({
+    options: e3,
+    instanceIdentifier: n2
+  });
 }
 function wn(e3, n2) {
   const r2 = "object" == typeof e3 ? e3 : getApp(), s3 = "string" == typeof e3 ? e3 : n2 || "(default)", i = _getProvider(r2, "firestore/lite").getImmediate({
@@ -8995,6 +9359,9 @@ function mn(t2, e3, n2, r2 = {}) {
     t2._authCredentials = new z(new B(e4, n3));
   }
 }
+function pn(t2) {
+  return t2 = ct(t2, fn), _removeServiceInstance(t2.app, "firestore/lite"), t2._delete();
+}
 function In(t2, e3, ...n2) {
   if (t2 = getModularInstance(t2), st("collection", "path", e3), t2 instanceof fn) {
     const r2 = tt.fromString(e3, ...n2);
@@ -9010,6 +9377,255 @@ function In(t2, e3, ...n2) {
       r2
     );
   }
+}
+function Tn(t2, e3) {
+  if (t2 = ct(t2, fn), st("collectionGroup", "collection id", e3), e3.indexOf("/") >= 0)
+    throw new U(P, `Invalid collection ID '${e3}' passed to function collectionGroup(). Collection IDs must not contain '/'.`);
+  return new bn(
+    t2,
+    null,
+    function(t3) {
+      return new we(tt.emptyPath(), t3);
+    }(e3)
+  );
+}
+function An(t2, e3, ...n2) {
+  if (t2 = getModularInstance(t2), 1 === arguments.length && (e3 = _t.D()), st("doc", "path", e3), t2 instanceof fn) {
+    const r2 = tt.fromString(e3, ...n2);
+    return it(r2), new vn(
+      t2,
+      null,
+      new rt(r2)
+    );
+  }
+  {
+    if (!(t2 instanceof vn || t2 instanceof En))
+      throw new U(P, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
+    const r2 = t2._path.child(tt.fromString(e3, ...n2));
+    return it(r2), new vn(t2.firestore, t2 instanceof En ? t2.converter : null, new rt(r2));
+  }
+}
+function Rn(t2, e3) {
+  return t2 = getModularInstance(t2), e3 = getModularInstance(e3), (t2 instanceof vn || t2 instanceof En) && (e3 instanceof vn || e3 instanceof En) && (t2.firestore === e3.firestore && t2.path === e3.path && t2.converter === e3.converter);
+}
+function Pn(t2, e3) {
+  return t2 = getModularInstance(t2), e3 = getModularInstance(e3), t2 instanceof bn && e3 instanceof bn && (t2.firestore === e3.firestore && ve(t2._query, e3._query) && t2.converter === e3.converter);
+}
+function Dn() {
+  return new Nn("__name__");
+}
+function On(t2) {
+  switch (t2) {
+    case 0:
+    case 2:
+    case 1:
+      return true;
+    case 3:
+    case 4:
+      return false;
+    default:
+      throw b();
+  }
+}
+function Ln(t2) {
+  const e3 = t2._freezeSettings(), n2 = en(t2._databaseId);
+  return new Cn(t2._databaseId, !!e3.ignoreUndefinedProperties, n2);
+}
+function Mn(t2, e3, n2, r2, s3, i = {}) {
+  const o2 = t2.wt(i.merge || i.mergeFields ? 2 : 0, e3, n2, s3);
+  Zn("Data must be an object, but it was:", o2, r2);
+  const u = Jn(r2, o2);
+  let c2, a2;
+  if (i.merge)
+    c2 = new Dt(o2.fieldMask), a2 = o2.fieldTransforms;
+  else if (i.mergeFields) {
+    const t3 = [];
+    for (const r3 of i.mergeFields) {
+      const s4 = tr(e3, r3, n2);
+      if (!o2.contains(s4))
+        throw new U(P, `Field '${s4}' is specified in your field mask but missing from your input data.`);
+      sr(t3, s4) || t3.push(s4);
+    }
+    c2 = new Dt(t3), a2 = o2.fieldTransforms.filter((t4) => c2.covers(t4.field));
+  } else
+    c2 = null, a2 = o2.fieldTransforms;
+  return new Sn(new Jt(u), c2, a2);
+}
+function jn(t2, e3, n2) {
+  return new kn({
+    st: 3,
+    dt: e3.settings.dt,
+    methodName: t2._methodName,
+    ut: n2
+  }, e3.databaseId, e3.L, e3.ignoreUndefinedProperties);
+}
+function Wn(t2, e3, n2, r2) {
+  const s3 = t2.wt(1, e3, n2);
+  Zn("Data must be an object, but it was:", s3, r2);
+  const i = [], o2 = Jt.empty();
+  Tt(r2, (t3, r3) => {
+    const u2 = nr(e3, t3, n2);
+    r3 = getModularInstance(r3);
+    const c2 = s3.at(u2);
+    if (r3 instanceof Un)
+      i.push(u2);
+    else {
+      const t4 = Hn(r3, c2);
+      null != t4 && (i.push(u2), o2.set(u2, t4));
+    }
+  });
+  const u = new Dt(i);
+  return new qn(o2, u, s3.fieldTransforms);
+}
+function Kn(t2, e3, n2, r2, s3, i) {
+  const o2 = t2.wt(1, e3, n2), u = [tr(e3, r2, n2)], c2 = [s3];
+  if (i.length % 2 != 0)
+    throw new U(P, `Function ${e3}() needs to be called with an even number of arguments that alternate between field names and values.`);
+  for (let t3 = 0; t3 < i.length; t3 += 2)
+    u.push(tr(e3, i[t3])), c2.push(i[t3 + 1]);
+  const a2 = [], h = Jt.empty();
+  for (let t3 = u.length - 1; t3 >= 0; --t3)
+    if (!sr(a2, u[t3])) {
+      const e4 = u[t3];
+      let n3 = c2[t3];
+      n3 = getModularInstance(n3);
+      const r3 = o2.at(e4);
+      if (n3 instanceof Un)
+        a2.push(e4);
+      else {
+        const t4 = Hn(n3, r3);
+        null != t4 && (a2.push(e4), h.set(e4, t4));
+      }
+    }
+  const f = new Dt(a2);
+  return new qn(h, f, o2.fieldTransforms);
+}
+function Yn(t2, e3, n2, r2 = false) {
+  return Hn(n2, t2.wt(r2 ? 4 : 3, e3));
+}
+function Hn(t2, e3) {
+  if (Xn(
+    t2 = getModularInstance(t2)
+  ))
+    return Zn("Unsupported field value:", e3, t2), Jn(t2, e3);
+  if (t2 instanceof $n)
+    return function(t3, e4) {
+      if (!On(e4.st))
+        throw e4.lt(`${t3._methodName}() can only be used with update() and set()`);
+      if (!e4.path)
+        throw e4.lt(`${t3._methodName}() is not currently supported inside arrays`);
+      const n2 = t3._toFieldTransform(e4);
+      n2 && e4.fieldTransforms.push(n2);
+    }(t2, e3), null;
+  if (void 0 === t2 && e3.ignoreUndefinedProperties)
+    return null;
+  if (e3.path && e3.fieldMask.push(e3.path), t2 instanceof Array) {
+    if (e3.settings.ut && 4 !== e3.st)
+      throw e3.lt("Nested arrays are not supported");
+    return function(t3, e4) {
+      const n2 = [];
+      let r2 = 0;
+      for (const s3 of t3) {
+        let t4 = Hn(s3, e4.ht(r2));
+        null == t4 && (t4 = {
+          nullValue: "NULL_VALUE"
+        }), n2.push(t4), r2++;
+      }
+      return {
+        arrayValue: {
+          values: n2
+        }
+      };
+    }(t2, e3);
+  }
+  return function(t3, e4) {
+    if (null === (t3 = getModularInstance(t3)))
+      return {
+        nullValue: "NULL_VALUE"
+      };
+    if ("number" == typeof t3)
+      return be(e4.L, t3);
+    if ("boolean" == typeof t3)
+      return {
+        booleanValue: t3
+      };
+    if ("string" == typeof t3)
+      return {
+        stringValue: t3
+      };
+    if (t3 instanceof Date) {
+      const n2 = bt.fromDate(t3);
+      return {
+        timestampValue: ke(e4.L, n2)
+      };
+    }
+    if (t3 instanceof bt) {
+      const n2 = new bt(t3.seconds, 1e3 * Math.floor(t3.nanoseconds / 1e3));
+      return {
+        timestampValue: ke(e4.L, n2)
+      };
+    }
+    if (t3 instanceof xn)
+      return {
+        geoPointValue: {
+          latitude: t3.latitude,
+          longitude: t3.longitude
+        }
+      };
+    if (t3 instanceof Vn)
+      return {
+        bytesValue: Ce(e4.L, t3._byteString)
+      };
+    if (t3 instanceof vn) {
+      const n2 = e4.databaseId, r2 = t3.firestore._databaseId;
+      if (!r2.isEqual(n2))
+        throw e4.lt(`Document reference is for database ${r2.projectId}/${r2.database} but should be for database ${n2.projectId}/${n2.database}`);
+      return {
+        referenceValue: Ue(t3.firestore._databaseId || e4.databaseId, t3._key.path)
+      };
+    }
+    throw e4.lt(`Unsupported field value: ${ut(t3)}`);
+  }(t2, e3);
+}
+function Jn(t2, e3) {
+  const n2 = {};
+  return !function(t3) {
+    for (const e4 in t3)
+      if (Object.prototype.hasOwnProperty.call(t3, e4))
+        return false;
+    return true;
+  }(t2) ? Tt(t2, (t3, r2) => {
+    const s3 = Hn(r2, e3.ot(t3));
+    null != s3 && (n2[t3] = s3);
+  }) : e3.path && e3.path.length > 0 && e3.fieldMask.push(e3.path), {
+    mapValue: {
+      fields: n2
+    }
+  };
+}
+function Xn(t2) {
+  return !("object" != typeof t2 || null === t2 || t2 instanceof Array || t2 instanceof Date || t2 instanceof bt || t2 instanceof xn || t2 instanceof Vn || t2 instanceof vn || t2 instanceof $n);
+}
+function Zn(t2, e3, n2) {
+  if (!Xn(n2) || !function(t3) {
+    return "object" == typeof t3 && null !== t3 && (Object.getPrototypeOf(t3) === Object.prototype || null === Object.getPrototypeOf(t3));
+  }(n2)) {
+    const r2 = ut(n2);
+    throw "an object" === r2 ? e3.lt(t2 + " a custom object") : e3.lt(t2 + " " + r2);
+  }
+}
+function tr(t2, e3, n2) {
+  if ((e3 = getModularInstance(e3)) instanceof Nn)
+    return e3._internalPath;
+  if ("string" == typeof e3)
+    return nr(t2, e3);
+  throw rr(
+    "Field path arguments must be of type string or ",
+    t2,
+    false,
+    void 0,
+    n2
+  );
 }
 function nr(t2, e3, n2) {
   if (e3.search(er) >= 0)
@@ -9039,8 +9655,143 @@ function rr(t2, e3, n2, r2, s3) {
   let c2 = "";
   return (i || o2) && (c2 += " (found", i && (c2 += ` in field ${r2}`), o2 && (c2 += ` in document ${s3}`), c2 += ")"), new U(P, u + t2 + c2);
 }
+function sr(t2, e3) {
+  return t2.some((t3) => t3.isEqual(e3));
+}
+function cr(t2, e3) {
+  return t2 = getModularInstance(t2), e3 = getModularInstance(e3), t2 instanceof ir && e3 instanceof ir ? t2._firestore === e3._firestore && t2._key.isEqual(e3._key) && (null === t2._document ? null === e3._document : t2._document.isEqual(e3._document)) && t2._converter === e3._converter : t2 instanceof ur && e3 instanceof ur && (Pn(t2.query, e3.query) && vt(t2.docs, e3.docs, cr));
+}
 function ar(t2, e3) {
   return "string" == typeof e3 ? nr(t2, e3) : e3 instanceof Nn ? e3._internalPath : e3._delegate._internalPath;
+}
+function lr(t2, ...e3) {
+  for (const n2 of e3)
+    t2 = n2._apply(t2);
+  return t2;
+}
+function dr(t2, e3, n2) {
+  const r2 = e3, s3 = ar("where", t2);
+  return new fr(s3, r2, n2);
+}
+function mr(t2, e3 = "asc") {
+  const n2 = e3, r2 = ar("orderBy", t2);
+  return new wr(r2, n2);
+}
+function yr(t2) {
+  return at("limit", t2), new pr("limit", t2, "F");
+}
+function _r(t2) {
+  return at("limitToLast", t2), new pr("limitToLast", t2, "L");
+}
+function vr(...t2) {
+  return new gr(
+    "startAt",
+    t2,
+    true
+  );
+}
+function br(...t2) {
+  return new gr(
+    "startAfter",
+    t2,
+    false
+  );
+}
+function Ir(...t2) {
+  return new Er(
+    "endBefore",
+    t2,
+    false
+  );
+}
+function Tr(...t2) {
+  return new Er("endAt", t2, true);
+}
+function Ar(t2, e3, n2, r2) {
+  if (n2[0] = getModularInstance(n2[0]), n2[0] instanceof ir)
+    return function(t3, e4, n3, r3, s3) {
+      if (!r3)
+        throw new U(N, `Can't use a DocumentSnapshot that doesn't exist for ${n3}().`);
+      const i = [];
+      for (const n4 of _e(t3))
+        if (n4.field.isKeyField())
+          i.push(zt(e4, r3.key));
+        else {
+          const t4 = r3.data.field(n4.field);
+          if (Ot(t4))
+            throw new U(P, 'Invalid query. You are trying to start or end a query using a document for which the field "' + n4.field + '" is an uncommitted server timestamp. (Since the value of this field is unknown, you cannot start/end a query with it.)');
+          if (null === t4) {
+            const t5 = n4.field.canonicalString();
+            throw new U(P, `Invalid query. You are trying to start or end a query using a document for which the field '${t5}' (used as the orderBy) does not exist.`);
+          }
+          i.push(t4);
+        }
+      return new he(i, s3);
+    }(t2._query, t2.firestore._databaseId, e3, n2[0]._document, r2);
+  {
+    const s3 = Ln(t2.firestore);
+    return function(t3, e4, n3, r3, s4, i) {
+      const o2 = t3.explicitOrderBy;
+      if (s4.length > o2.length)
+        throw new U(P, `Too many arguments provided to ${r3}(). The number of arguments must be less than or equal to the number of orderBy() clauses`);
+      const u = [];
+      for (let i2 = 0; i2 < s4.length; i2++) {
+        const c2 = s4[i2];
+        if (o2[i2].field.isKeyField()) {
+          if ("string" != typeof c2)
+            throw new U(P, `Invalid query. Expected a string for document ID in ${r3}(), but got a ${typeof c2}`);
+          if (!ye(t3) && -1 !== c2.indexOf("/"))
+            throw new U(P, `Invalid query. When querying a collection and ordering by documentId(), the value passed to ${r3}() must be a plain document ID, but '${c2}' contains a slash.`);
+          const n4 = t3.path.child(tt.fromString(c2));
+          if (!rt.isDocumentKey(n4))
+            throw new U(P, `Invalid query. When querying a collection group and ordering by documentId(), the value passed to ${r3}() must result in a valid document path, but '${n4}' is not because it contains an odd number of segments.`);
+          const s5 = new rt(n4);
+          u.push(zt(e4, s5));
+        } else {
+          const t4 = Yn(n3, r3, c2);
+          u.push(t4);
+        }
+      }
+      return new he(u, i);
+    }(t2._query, t2.firestore._databaseId, s3, e3, n2, r2);
+  }
+}
+function Rr(t2, e3, n2) {
+  if ("string" == typeof (n2 = getModularInstance(n2))) {
+    if ("" === n2)
+      throw new U(P, "Invalid query. When querying with documentId(), you must provide a valid document ID, but it was an empty string.");
+    if (!ye(e3) && -1 !== n2.indexOf("/"))
+      throw new U(P, `Invalid query. When querying a collection by documentId(), you must provide a plain document ID, but '${n2}' contains a '/' character.`);
+    const r2 = e3.path.child(tt.fromString(n2));
+    if (!rt.isDocumentKey(r2))
+      throw new U(P, `Invalid query. When querying a collection group by documentId(), the value provided must result in a valid document path, but '${r2}' is not because it has an odd number of segments (${r2.length}).`);
+    return zt(t2, new rt(r2));
+  }
+  if (n2 instanceof vn)
+    return zt(t2, n2._key);
+  throw new U(P, `Invalid query. When querying with documentId(), you must provide a valid string or a DocumentReference, but it was: ${ut(n2)}.`);
+}
+function Pr(t2, e3) {
+  if (!Array.isArray(t2) || 0 === t2.length)
+    throw new U(P, `Invalid Query. A non-empty array is required for '${e3.toString()}' filters.`);
+  if (t2.length > 10)
+    throw new U(P, `Invalid Query. '${e3.toString()}' filters support a maximum of 10 elements in the value array.`);
+}
+function Vr(t2, e3, n2) {
+  if (!n2.isEqual(e3))
+    throw new U(P, `Invalid query. You have a where filter with an inequality (<, <=, !=, not-in, >, or >=) on field '${e3.toString()}' and so you must also use '${e3.toString()}' as your first argument to orderBy(), but your first orderBy() is on field '${n2.toString()}' instead.`);
+}
+function Nr(t2, e3, n2) {
+  let r2;
+  return r2 = t2 ? n2 && (n2.merge || n2.mergeFields) ? t2.toFirestore(e3, n2) : t2.toFirestore(e3) : e3, r2;
+}
+function $r(t2) {
+  const e3 = hn((t2 = ct(t2, vn)).firestore), n2 = new Dr(t2.firestore);
+  return on(e3, [t2._key]).then((e4) => {
+    E(1 === e4.length);
+    const r2 = e4[0];
+    return new ir(t2.firestore, n2, t2._key, r2.isFoundDocument() ? r2 : null, t2.converter);
+  });
 }
 function xr(t2) {
   !function(t3) {
@@ -9053,7 +9804,67 @@ function xr(t2) {
     return "L" === t2._query.limitType && r2.reverse(), new ur(t2, r2);
   });
 }
-var d, w, m, T, A, R, P, V, N, $, x, F, S, q, O, k, C, L, U, B, Q, z, G, W, K, Y, H, J, X, Z, tt, et, nt, rt, ft, dt, wt, pt, bt, Et, Pt, $t, xt, Jt, Xt, Zt, he, le, we, Se, qe, Oe, rn, an, ln, fn, vn, bn, En, Vn, Nn, xn, er, ir, or, ur, Dr;
+function Fr(t2, e3, n2) {
+  const r2 = Nr((t2 = ct(t2, vn)).converter, e3, n2), s3 = Mn(Ln(t2.firestore), "setDoc", t2._key, r2, null !== t2.converter, n2);
+  return sn(hn(t2.firestore), [s3.toMutation(t2._key, Ve.none())]);
+}
+function Sr(t2, e3, n2, ...r2) {
+  const s3 = Ln((t2 = ct(t2, vn)).firestore);
+  let i;
+  i = "string" == typeof (e3 = getModularInstance(e3)) || e3 instanceof Nn ? Kn(s3, "updateDoc", t2._key, e3, n2, r2) : Wn(s3, "updateDoc", t2._key, e3);
+  return sn(hn(t2.firestore), [i.toMutation(t2._key, Ve.exists(true))]);
+}
+function qr(t2) {
+  return sn(hn((t2 = ct(t2, vn)).firestore), [new xe(t2._key, Ve.none())]);
+}
+function Or(t2, e3) {
+  const n2 = An(t2 = ct(t2, En)), r2 = Nr(t2.converter, e3), s3 = Mn(Ln(t2.firestore), "addDoc", n2._key, r2, null !== n2.converter, {});
+  return sn(hn(t2.firestore), [s3.toMutation(n2._key, Ve.exists(false))]).then(() => n2);
+}
+function kr(t2) {
+  const e3 = ct(t2.firestore, fn), n2 = hn(e3), r2 = new Dr(e3);
+  return new gn(t2, n2, r2).run();
+}
+function Cr(t2, e3) {
+  return Pn(t2.query, e3.query) && deepEqual(t2.data(), e3.data());
+}
+function Lr() {
+  return new Un("deleteField");
+}
+function Mr() {
+  return new Bn("serverTimestamp");
+}
+function Ur(...t2) {
+  return new Qn("arrayUnion", t2);
+}
+function jr(...t2) {
+  return new zn("arrayRemove", t2);
+}
+function Br(t2) {
+  return new Gn("increment", t2);
+}
+function zr(t2, e3) {
+  if ((t2 = getModularInstance(t2)).firestore !== e3)
+    throw new U(P, "Provided document reference is from a different Firestore instance.");
+  return t2;
+}
+function Gr(t2) {
+  const e3 = hn(t2 = ct(t2, fn));
+  return new Qr(t2, (t3) => sn(e3, t3));
+}
+function Hr() {
+  return "undefined" != typeof document ? document : null;
+}
+function ts(t2, e3, n2) {
+  const r2 = hn(t2 = ct(t2, fn)), s3 = Object.assign(Object.assign({}, Kr), n2);
+  !function(t3) {
+    if (t3.maxAttempts < 1)
+      throw new U(P, "Max attempts must be at least 1");
+  }(s3);
+  const i = new j();
+  return new Yr(new Xr(), r2, s3, (n3) => e3(new Zr(t2, n3)), i).run(), i.promise;
+}
+var d, w, m, T, A, R, P, V, N, D, $, x, F, S, q, O, k, C, L, M, U, j, B, Q, z, G, W, K, Y, H, J, X, Z, tt, et, nt, rt, ft, dt, wt, pt, _t, bt, Et, At, Rt, Pt, Vt, Nt, Dt, $t, xt, Lt, Jt, Xt, Zt, ee, ne, re, se, oe, ue, ce, ae, he, le, we, Ee, Ie, Te, Ae, Re, Pe, Ve, Ne, De, $e, xe, Fe, Se, qe, Oe, nn, rn, an, ln, fn, yn, _n, gn, vn, bn, En, Vn, Nn, $n, xn, Fn, Sn, qn, kn, Cn, Un, Bn, Qn, zn, Gn, er, ir, or, ur, hr, fr, wr, pr, gr, Er, Dr, Qr, Wr, Kr, Yr, Jr, Xr, Zr;
 var init_index_browser_esm2017 = __esm({
   "node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js"() {
     init_index_esm20174();
@@ -9083,6 +9894,7 @@ var init_index_browser_esm2017 = __esm({
     P = "invalid-argument";
     V = "deadline-exceeded";
     N = "not-found";
+    D = "already-exists";
     $ = "permission-denied";
     x = "unauthenticated";
     F = "resource-exhausted";
@@ -9092,9 +9904,17 @@ var init_index_browser_esm2017 = __esm({
     k = "unimplemented";
     C = "internal";
     L = "unavailable";
+    M = "data-loss";
     U = class extends FirebaseError {
       constructor(t2, e3) {
         super(t2, e3), this.code = t2, this.message = e3, this.toString = () => `${this.name}: [code=${this.code}]: ${this.message}`;
+      }
+    };
+    j = class {
+      constructor() {
+        this.promise = new Promise((t2, e3) => {
+          this.resolve = t2, this.reject = e3;
+        });
       }
     };
     B = class {
@@ -9457,6 +10277,18 @@ var init_index_browser_esm2017 = __esm({
         return i.json();
       }
     };
+    _t = class {
+      static D() {
+        const t2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", e3 = Math.floor(256 / t2.length) * t2.length;
+        let n2 = "";
+        for (; n2.length < 20; ) {
+          const r2 = yt(40);
+          for (let s3 = 0; s3 < r2.length; ++s3)
+            n2.length < 20 && r2[s3] < e3 && (n2 += t2.charAt(r2[s3] % t2.length));
+        }
+        return n2;
+      }
+    };
     bt = class {
       constructor(t2, e3) {
         if (this.seconds = t2, this.nanoseconds = e3, e3 < 0)
@@ -9531,6 +10363,116 @@ var init_index_browser_esm2017 = __esm({
       }
       toTimestamp() {
         return this.timestamp;
+      }
+    };
+    At = class {
+      constructor(t2, e3) {
+        this.comparator = t2, this.root = e3 || Pt.EMPTY;
+      }
+      insert(t2, e3) {
+        return new At(this.comparator, this.root.insert(t2, e3, this.comparator).copy(null, null, Pt.BLACK, null, null));
+      }
+      remove(t2) {
+        return new At(this.comparator, this.root.remove(t2, this.comparator).copy(null, null, Pt.BLACK, null, null));
+      }
+      get(t2) {
+        let e3 = this.root;
+        for (; !e3.isEmpty(); ) {
+          const n2 = this.comparator(t2, e3.key);
+          if (0 === n2)
+            return e3.value;
+          n2 < 0 ? e3 = e3.left : n2 > 0 && (e3 = e3.right);
+        }
+        return null;
+      }
+      indexOf(t2) {
+        let e3 = 0, n2 = this.root;
+        for (; !n2.isEmpty(); ) {
+          const r2 = this.comparator(t2, n2.key);
+          if (0 === r2)
+            return e3 + n2.left.size;
+          r2 < 0 ? n2 = n2.left : (e3 += n2.left.size + 1, n2 = n2.right);
+        }
+        return -1;
+      }
+      isEmpty() {
+        return this.root.isEmpty();
+      }
+      get size() {
+        return this.root.size;
+      }
+      minKey() {
+        return this.root.minKey();
+      }
+      maxKey() {
+        return this.root.maxKey();
+      }
+      inorderTraversal(t2) {
+        return this.root.inorderTraversal(t2);
+      }
+      forEach(t2) {
+        this.inorderTraversal((e3, n2) => (t2(e3, n2), false));
+      }
+      toString() {
+        const t2 = [];
+        return this.inorderTraversal((e3, n2) => (t2.push(`${e3}:${n2}`), false)), `{${t2.join(", ")}}`;
+      }
+      reverseTraversal(t2) {
+        return this.root.reverseTraversal(t2);
+      }
+      getIterator() {
+        return new Rt(this.root, null, this.comparator, false);
+      }
+      getIteratorFrom(t2) {
+        return new Rt(this.root, t2, this.comparator, false);
+      }
+      getReverseIterator() {
+        return new Rt(this.root, null, this.comparator, true);
+      }
+      getReverseIteratorFrom(t2) {
+        return new Rt(this.root, t2, this.comparator, true);
+      }
+    };
+    Rt = class {
+      constructor(t2, e3, n2, r2) {
+        this.isReverse = r2, this.nodeStack = [];
+        let s3 = 1;
+        for (; !t2.isEmpty(); )
+          if (s3 = e3 ? n2(t2.key, e3) : 1, e3 && r2 && (s3 *= -1), s3 < 0)
+            t2 = this.isReverse ? t2.left : t2.right;
+          else {
+            if (0 === s3) {
+              this.nodeStack.push(t2);
+              break;
+            }
+            this.nodeStack.push(t2), t2 = this.isReverse ? t2.right : t2.left;
+          }
+      }
+      getNext() {
+        let t2 = this.nodeStack.pop();
+        const e3 = {
+          key: t2.key,
+          value: t2.value
+        };
+        if (this.isReverse)
+          for (t2 = t2.left; !t2.isEmpty(); )
+            this.nodeStack.push(t2), t2 = t2.right;
+        else
+          for (t2 = t2.right; !t2.isEmpty(); )
+            this.nodeStack.push(t2), t2 = t2.left;
+        return e3;
+      }
+      hasNext() {
+        return this.nodeStack.length > 0;
+      }
+      peek() {
+        if (0 === this.nodeStack.length)
+          return null;
+        const t2 = this.nodeStack[this.nodeStack.length - 1];
+        return {
+          key: t2.key,
+          value: t2.value
+        };
       }
     };
     Pt = class {
@@ -9679,6 +10621,133 @@ var init_index_browser_esm2017 = __esm({
         return 0;
       }
     }();
+    Vt = class {
+      constructor(t2) {
+        this.comparator = t2, this.data = new At(this.comparator);
+      }
+      has(t2) {
+        return null !== this.data.get(t2);
+      }
+      first() {
+        return this.data.minKey();
+      }
+      last() {
+        return this.data.maxKey();
+      }
+      get size() {
+        return this.data.size;
+      }
+      indexOf(t2) {
+        return this.data.indexOf(t2);
+      }
+      forEach(t2) {
+        this.data.inorderTraversal((e3, n2) => (t2(e3), false));
+      }
+      forEachInRange(t2, e3) {
+        const n2 = this.data.getIteratorFrom(t2[0]);
+        for (; n2.hasNext(); ) {
+          const r2 = n2.getNext();
+          if (this.comparator(r2.key, t2[1]) >= 0)
+            return;
+          e3(r2.key);
+        }
+      }
+      forEachWhile(t2, e3) {
+        let n2;
+        for (n2 = void 0 !== e3 ? this.data.getIteratorFrom(e3) : this.data.getIterator(); n2.hasNext(); ) {
+          if (!t2(n2.getNext().key))
+            return;
+        }
+      }
+      firstAfterOrEqual(t2) {
+        const e3 = this.data.getIteratorFrom(t2);
+        return e3.hasNext() ? e3.getNext().key : null;
+      }
+      getIterator() {
+        return new Nt(this.data.getIterator());
+      }
+      getIteratorFrom(t2) {
+        return new Nt(this.data.getIteratorFrom(t2));
+      }
+      add(t2) {
+        return this.copy(this.data.remove(t2).insert(t2, true));
+      }
+      delete(t2) {
+        return this.has(t2) ? this.copy(this.data.remove(t2)) : this;
+      }
+      isEmpty() {
+        return this.data.isEmpty();
+      }
+      unionWith(t2) {
+        let e3 = this;
+        return e3.size < t2.size && (e3 = t2, t2 = this), t2.forEach((t3) => {
+          e3 = e3.add(t3);
+        }), e3;
+      }
+      isEqual(t2) {
+        if (!(t2 instanceof Vt))
+          return false;
+        if (this.size !== t2.size)
+          return false;
+        const e3 = this.data.getIterator(), n2 = t2.data.getIterator();
+        for (; e3.hasNext(); ) {
+          const t3 = e3.getNext().key, r2 = n2.getNext().key;
+          if (0 !== this.comparator(t3, r2))
+            return false;
+        }
+        return true;
+      }
+      toArray() {
+        const t2 = [];
+        return this.forEach((e3) => {
+          t2.push(e3);
+        }), t2;
+      }
+      toString() {
+        const t2 = [];
+        return this.forEach((e3) => t2.push(e3)), "SortedSet(" + t2.toString() + ")";
+      }
+      copy(t2) {
+        const e3 = new Vt(this.comparator);
+        return e3.data = t2, e3;
+      }
+    };
+    Nt = class {
+      constructor(t2) {
+        this.iter = t2;
+      }
+      getNext() {
+        return this.iter.getNext().key;
+      }
+      hasNext() {
+        return this.iter.hasNext();
+      }
+    };
+    Dt = class {
+      constructor(t2) {
+        this.fields = t2, t2.sort(nt.comparator);
+      }
+      static empty() {
+        return new Dt([]);
+      }
+      unionWith(t2) {
+        let e3 = new Vt(nt.comparator);
+        for (const t3 of this.fields)
+          e3 = e3.add(t3);
+        for (const n2 of t2)
+          e3 = e3.add(n2);
+        return new Dt(e3.toArray());
+      }
+      covers(t2) {
+        for (const e3 of this.fields)
+          if (e3.isPrefixOf(t2))
+            return true;
+        return false;
+      }
+      isEqual(t2) {
+        return vt(this.fields, t2.fields, (t3, e3) => t3.isEqual(e3));
+      }
+    };
     $t = class {
       constructor(t2) {
         this.binaryString = t2;
@@ -9732,6 +10801,13 @@ var init_index_browser_esm2017 = __esm({
     };
     $t.EMPTY_BYTE_STRING = new $t("");
     xt = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
+    Lt = {
+      fields: {
+        __type__: {
+          stringValue: "__max__"
+        }
+      }
+    };
     Jt = class {
       constructor(t2) {
         this.value = t2;
@@ -9868,6 +10944,108 @@ var init_index_browser_esm2017 = __esm({
         this.path = t2, this.collectionGroup = e3, this.orderBy = n2, this.filters = r2, this.limit = s3, this.startAt = i, this.endAt = o2, this.$ = null;
       }
     };
+    ee = class extends class {
+    } {
+      constructor(t2, e3, n2) {
+        super(), this.field = t2, this.op = e3, this.value = n2;
+      }
+      static create(t2, e3, n2) {
+        return t2.isKeyField() ? "in" === e3 || "not-in" === e3 ? this.F(t2, e3, n2) : new ne(t2, e3, n2) : "array-contains" === e3 ? new oe(t2, n2) : "in" === e3 ? new ue(t2, n2) : "not-in" === e3 ? new ce(t2, n2) : "array-contains-any" === e3 ? new ae(t2, n2) : new ee(t2, e3, n2);
+      }
+      static F(t2, e3, n2) {
+        return "in" === e3 ? new re(t2, n2) : new se(t2, n2);
+      }
+      matches(t2) {
+        const e3 = t2.data.field(this.field);
+        return "!=" === this.op ? null !== e3 && this.S(Bt(e3, this.value)) : null !== e3 && Mt(this.value) === Mt(e3) && this.S(Bt(e3, this.value));
+      }
+      S(t2) {
+        switch (this.op) {
+          case "<":
+            return t2 < 0;
+          case "<=":
+            return t2 <= 0;
+          case "==":
+            return 0 === t2;
+          case "!=":
+            return 0 !== t2;
+          case ">":
+            return t2 > 0;
+          case ">=":
+            return t2 >= 0;
+          default:
+            return b();
+        }
+      }
+      q() {
+        return ["<", "<=", ">", ">=", "!=", "not-in"].indexOf(this.op) >= 0;
+      }
+    };
+    ne = class extends ee {
+      constructor(t2, e3, n2) {
+        super(t2, e3, n2), this.key = rt.fromName(n2.referenceValue);
+      }
+      matches(t2) {
+        const e3 = rt.comparator(t2.key, this.key);
+        return this.S(e3);
+      }
+    };
+    re = class extends ee {
+      constructor(t2, e3) {
+        super(t2, "in", e3), this.keys = ie("in", e3);
+      }
+      matches(t2) {
+        return this.keys.some((e3) => e3.isEqual(t2.key));
+      }
+    };
+    se = class extends ee {
+      constructor(t2, e3) {
+        super(t2, "not-in", e3), this.keys = ie("not-in", e3);
+      }
+      matches(t2) {
+        return !this.keys.some((e3) => e3.isEqual(t2.key));
+      }
+    };
+    oe = class extends ee {
+      constructor(t2, e3) {
+        super(t2, "array-contains", e3);
+      }
+      matches(t2) {
+        const e3 = t2.data.field(this.field);
+        return Gt(e3) && jt(e3.arrayValue, this.value);
+      }
+    };
+    ue = class extends ee {
+      constructor(t2, e3) {
+        super(t2, "in", e3);
+      }
+      matches(t2) {
+        const e3 = t2.data.field(this.field);
+        return null !== e3 && jt(this.value.arrayValue, e3);
+      }
+    };
+    ce = class extends ee {
+      constructor(t2, e3) {
+        super(t2, "not-in", e3);
+      }
+      matches(t2) {
+        if (jt(this.value.arrayValue, {
+          nullValue: "NULL_VALUE"
+        }))
+          return false;
+        const e3 = t2.data.field(this.field);
+        return null !== e3 && !jt(this.value.arrayValue, e3);
+      }
+    };
+    ae = class extends ee {
+      constructor(t2, e3) {
+        super(t2, "array-contains-any", e3);
+      }
+      matches(t2) {
+        const e3 = t2.data.field(this.field);
+        return !(!Gt(e3) || !e3.arrayValue.values) && e3.arrayValue.values.some((t3) => jt(this.value.arrayValue, t3));
+      }
+    };
     he = class {
       constructor(t2, e3) {
         this.position = t2, this.inclusive = e3;
@@ -9881,6 +11059,87 @@ var init_index_browser_esm2017 = __esm({
     we = class {
       constructor(t2, e3 = null, n2 = [], r2 = [], s3 = null, i = "F", o2 = null, u = null) {
         this.path = t2, this.collectionGroup = e3, this.explicitOrderBy = n2, this.filters = r2, this.limit = s3, this.limitType = i, this.startAt = o2, this.endAt = u, this.O = null, this.k = null, this.startAt, this.endAt;
+      }
+    };
+    Ee = class {
+      constructor() {
+        this._ = void 0;
+      }
+    };
+    Ie = class extends Ee {
+    };
+    Te = class extends Ee {
+      constructor(t2) {
+        super(), this.elements = t2;
+      }
+    };
+    Ae = class extends Ee {
+      constructor(t2) {
+        super(), this.elements = t2;
+      }
+    };
+    Re = class extends Ee {
+      constructor(t2, e3) {
+        super(), this.L = t2, this.M = e3;
+      }
+    };
+    Pe = class {
+      constructor(t2, e3) {
+        this.field = t2, this.transform = e3;
+      }
+    };
+    Ve = class {
+      constructor(t2, e3) {
+        this.updateTime = t2, this.exists = e3;
+      }
+      static none() {
+        return new Ve();
+      }
+      static exists(t2) {
+        return new Ve(void 0, t2);
+      }
+      static updateTime(t2) {
+        return new Ve(t2);
+      }
+      get isNone() {
+        return void 0 === this.updateTime && void 0 === this.exists;
+      }
+      isEqual(t2) {
+        return this.exists === t2.exists && (this.updateTime ? !!t2.updateTime && this.updateTime.isEqual(t2.updateTime) : !t2.updateTime);
+      }
+    };
+    Ne = class {
+    };
+    De = class extends Ne {
+      constructor(t2, e3, n2, r2 = []) {
+        super(), this.key = t2, this.value = e3, this.precondition = n2, this.fieldTransforms = r2, this.type = 0;
+      }
+      getFieldMask() {
+        return null;
+      }
+    };
+    $e = class extends Ne {
+      constructor(t2, e3, n2, r2, s3 = []) {
+        super(), this.key = t2, this.data = e3, this.fieldMask = n2, this.precondition = r2, this.fieldTransforms = s3, this.type = 1;
+      }
+      getFieldMask() {
+        return this.fieldMask;
+      }
+    };
+    xe = class extends Ne {
+      constructor(t2, e3) {
+        super(), this.key = t2, this.precondition = e3, this.type = 2, this.fieldTransforms = [];
+      }
+      getFieldMask() {
+        return null;
+      }
+    };
+    Fe = class extends Ne {
+      constructor(t2, e3) {
+        super(), this.key = t2, this.precondition = e3, this.type = 3, this.fieldTransforms = [];
+      }
+      getFieldMask() {
+        return null;
       }
     };
     Se = (() => {
@@ -9908,6 +11167,31 @@ var init_index_browser_esm2017 = __esm({
     Oe = class {
       constructor(t2, e3) {
         this.databaseId = t2, this.C = e3;
+      }
+    };
+    nn = class {
+      constructor(t2, e3, n2 = 1e3, r2 = 1.5, s3 = 6e4) {
+        this.U = t2, this.timerId = e3, this.j = n2, this.B = r2, this.G = s3, this.W = 0, this.K = null, this.Y = Date.now(), this.reset();
+      }
+      reset() {
+        this.W = 0;
+      }
+      H() {
+        this.W = this.G;
+      }
+      J(t2) {
+        this.cancel();
+        const e3 = Math.floor(this.W + this.X()), n2 = Math.max(0, Date.now() - this.Y), r2 = Math.max(0, e3 - n2);
+        r2 > 0 && y("ExponentialBackoff", `Backing off for ${r2} ms (base delay: ${this.W} ms, delay with jitter: ${e3} ms, last attempt: ${n2} ms ago)`), this.K = this.U.enqueueAfterDelay(this.timerId, r2, () => (this.Y = Date.now(), t2())), this.W *= this.B, this.W < this.j && (this.W = this.j), this.W > this.G && (this.W = this.G);
+      }
+      Z() {
+        null !== this.K && (this.K.skipDelay(), this.K = null);
+      }
+      cancel() {
+        null !== this.K && (this.K.cancel(), this.K = null);
+      }
+      X() {
+        return (Math.random() - 0.5) * this.W;
       }
     };
     rn = class extends class {
@@ -10014,6 +11298,33 @@ var init_index_browser_esm2017 = __esm({
         }(this), Promise.resolve();
       }
     };
+    yn = class {
+      constructor() {
+        this.type = "AggregateField";
+      }
+    };
+    _n = class {
+      constructor(t2, e3) {
+        this._data = e3, this.type = "AggregateQuerySnapshot", this.query = t2;
+      }
+      data() {
+        return this._data;
+      }
+    };
+    gn = class {
+      constructor(t2, e3, n2) {
+        this.query = t2, this.datastore = e3, this.userDataWriter = n2;
+      }
+      run() {
+        return cn(this.datastore, this.query._query).then((t2) => {
+          E(void 0 !== t2[0]);
+          const e3 = Object.entries(t2[0]).filter(([t3, e4]) => "count_alias" === t3).map(([t3, e4]) => this.userDataWriter.convertValue(e4))[0];
+          return E("number" == typeof e3), Promise.resolve(new _n(this.query, {
+            count: e3
+          }));
+        });
+      }
+    };
     vn = class {
       constructor(t2, e3, n2) {
         this.converter = e3, this._key = n2, this.type = "document", this.firestore = t2;
@@ -10102,6 +11413,11 @@ var init_index_browser_esm2017 = __esm({
         return this._internalPath.isEqual(t2._internalPath);
       }
     };
+    $n = class {
+      constructor(t2) {
+        this._methodName = t2;
+      }
+    };
     xn = class {
       constructor(t2, e3) {
         if (!isFinite(t2) || t2 < -90 || t2 > 90)
@@ -10127,6 +11443,153 @@ var init_index_browser_esm2017 = __esm({
       }
       _compareTo(t2) {
         return gt(this._lat, t2._lat) || gt(this._long, t2._long);
+      }
+    };
+    Fn = /^__.*__$/;
+    Sn = class {
+      constructor(t2, e3, n2) {
+        this.data = t2, this.fieldMask = e3, this.fieldTransforms = n2;
+      }
+      toMutation(t2, e3) {
+        return null !== this.fieldMask ? new $e(t2, this.data, this.fieldMask, e3, this.fieldTransforms) : new De(t2, this.data, e3, this.fieldTransforms);
+      }
+    };
+    qn = class {
+      constructor(t2, e3, n2) {
+        this.data = t2, this.fieldMask = e3, this.fieldTransforms = n2;
+      }
+      toMutation(t2, e3) {
+        return new $e(t2, this.data, this.fieldMask, e3, this.fieldTransforms);
+      }
+    };
+    kn = class {
+      constructor(t2, e3, n2, r2, s3, i) {
+        this.settings = t2, this.databaseId = e3, this.L = n2, this.ignoreUndefinedProperties = r2, void 0 === s3 && this.rt(), this.fieldTransforms = s3 || [], this.fieldMask = i || [];
+      }
+      get path() {
+        return this.settings.path;
+      }
+      get st() {
+        return this.settings.st;
+      }
+      it(t2) {
+        return new kn(Object.assign(Object.assign({}, this.settings), t2), this.databaseId, this.L, this.ignoreUndefinedProperties, this.fieldTransforms, this.fieldMask);
+      }
+      ot(t2) {
+        var e3;
+        const n2 = null === (e3 = this.path) || void 0 === e3 ? void 0 : e3.child(t2), r2 = this.it({
+          path: n2,
+          ut: false
+        });
+        return r2.ct(t2), r2;
+      }
+      at(t2) {
+        var e3;
+        const n2 = null === (e3 = this.path) || void 0 === e3 ? void 0 : e3.child(t2), r2 = this.it({
+          path: n2,
+          ut: false
+        });
+        return r2.rt(), r2;
+      }
+      ht(t2) {
+        return this.it({
+          path: void 0,
+          ut: true
+        });
+      }
+      lt(t2) {
+        return rr(t2, this.settings.methodName, this.settings.ft || false, this.path, this.settings.dt);
+      }
+      contains(t2) {
+        return void 0 !== this.fieldMask.find((e3) => t2.isPrefixOf(e3)) || void 0 !== this.fieldTransforms.find((e3) => t2.isPrefixOf(e3.field));
+      }
+      rt() {
+        if (this.path)
+          for (let t2 = 0; t2 < this.path.length; t2++)
+            this.ct(this.path.get(t2));
+      }
+      ct(t2) {
+        if (0 === t2.length)
+          throw this.lt("Document fields must not be empty");
+        if (On(this.st) && Fn.test(t2))
+          throw this.lt('Document fields cannot begin and end with "__"');
+      }
+    };
+    Cn = class {
+      constructor(t2, e3, n2) {
+        this.databaseId = t2, this.ignoreUndefinedProperties = e3, this.L = n2 || en(t2);
+      }
+      wt(t2, e3, n2, r2 = false) {
+        return new kn({
+          st: t2,
+          methodName: e3,
+          dt: n2,
+          path: nt.emptyPath(),
+          ut: false,
+          ft: r2
+        }, this.databaseId, this.L, this.ignoreUndefinedProperties);
+      }
+    };
+    Un = class extends $n {
+      _toFieldTransform(t2) {
+        if (2 !== t2.st)
+          throw 1 === t2.st ? t2.lt(`${this._methodName}() can only appear at the top level of your update data`) : t2.lt(`${this._methodName}() cannot be used with set() unless you pass {merge:true}`);
+        return t2.fieldMask.push(t2.path), null;
+      }
+      isEqual(t2) {
+        return t2 instanceof Un;
+      }
+    };
+    Bn = class extends $n {
+      _toFieldTransform(t2) {
+        return new Pe(t2.path, new Ie());
+      }
+      isEqual(t2) {
+        return t2 instanceof Bn;
+      }
+    };
+    Qn = class extends $n {
+      constructor(t2, e3) {
+        super(t2), this.yt = e3;
+      }
+      _toFieldTransform(t2) {
+        const e3 = jn(
+          this,
+          t2,
+          true
+        ), n2 = this.yt.map((t3) => Hn(t3, e3)), r2 = new Te(n2);
+        return new Pe(t2.path, r2);
+      }
+      isEqual(t2) {
+        return this === t2;
+      }
+    };
+    zn = class extends $n {
+      constructor(t2, e3) {
+        super(t2), this.yt = e3;
+      }
+      _toFieldTransform(t2) {
+        const e3 = jn(
+          this,
+          t2,
+          true
+        ), n2 = this.yt.map((t3) => Hn(t3, e3)), r2 = new Ae(n2);
+        return new Pe(t2.path, r2);
+      }
+      isEqual(t2) {
+        return this === t2;
+      }
+    };
+    Gn = class extends $n {
+      constructor(t2, e3) {
+        super(t2), this._t = e3;
+      }
+      _toFieldTransform(t2) {
+        const e3 = new Re(t2.L, be(t2.L, this._t));
+        return new Pe(t2.path, e3);
+      }
+      isEqual(t2) {
+        return this === t2;
       }
     };
     er = new RegExp("[~\\*/\\[\\]]");
@@ -10186,6 +11649,136 @@ var init_index_browser_esm2017 = __esm({
       }
       forEach(t2, e3) {
         this._docs.forEach(t2, e3);
+      }
+    };
+    hr = class {
+    };
+    fr = class extends hr {
+      constructor(t2, e3, n2) {
+        super(), this.gt = t2, this.vt = e3, this.bt = n2, this.type = "where";
+      }
+      _apply(t2) {
+        const e3 = Ln(t2.firestore), n2 = function(t3, e4, n3, r2, s3, i, o2) {
+          let u;
+          if (s3.isKeyField()) {
+            if ("array-contains" === i || "array-contains-any" === i)
+              throw new U(P, `Invalid Query. You can't perform '${i}' queries on documentId().`);
+            if ("in" === i || "not-in" === i) {
+              Pr(o2, i);
+              const e5 = [];
+              for (const n4 of o2)
+                e5.push(Rr(r2, t3, n4));
+              u = {
+                arrayValue: {
+                  values: e5
+                }
+              };
+            } else
+              u = Rr(r2, t3, o2);
+          } else
+            "in" !== i && "not-in" !== i && "array-contains-any" !== i || Pr(o2, i), u = Yn(
+              n3,
+              e4,
+              o2,
+              "in" === i || "not-in" === i
+            );
+          const c2 = ee.create(s3, i, u);
+          return function(t4, e5) {
+            if (e5.q()) {
+              const n5 = pe(t4);
+              if (null !== n5 && !n5.isEqual(e5.field))
+                throw new U(P, `Invalid query. All where filters with an inequality (<, <=, !=, not-in, >, or >=) must be on the same field. But you have inequality filters on '${n5.toString()}' and '${e5.field.toString()}'`);
+              const r3 = me(t4);
+              null !== r3 && Vr(t4, e5.field, r3);
+            }
+            const n4 = function(t5, e6) {
+              for (const n5 of t5.filters)
+                if (e6.indexOf(n5.op) >= 0)
+                  return n5.op;
+              return null;
+            }(
+              t4,
+              function(t5) {
+                switch (t5) {
+                  case "!=":
+                    return ["!=", "not-in"];
+                  case "array-contains":
+                    return ["array-contains", "array-contains-any", "not-in"];
+                  case "in":
+                    return ["array-contains-any", "in", "not-in"];
+                  case "array-contains-any":
+                    return ["array-contains", "array-contains-any", "in", "not-in"];
+                  case "not-in":
+                    return ["array-contains", "array-contains-any", "in", "not-in", "!="];
+                  default:
+                    return [];
+                }
+              }(e5.op)
+            );
+            if (null !== n4)
+              throw n4 === e5.op ? new U(P, `Invalid query. You cannot use more than one '${e5.op.toString()}' filter.`) : new U(P, `Invalid query. You cannot use '${e5.op.toString()}' filters with '${n4.toString()}' filters.`);
+          }(t3, c2), c2;
+        }(t2._query, "where", e3, t2.firestore._databaseId, this.gt, this.vt, this.bt);
+        return new bn(t2.firestore, t2.converter, function(t3, e4) {
+          const n3 = t3.filters.concat([e4]);
+          return new we(t3.path, t3.collectionGroup, t3.explicitOrderBy.slice(), n3, t3.limit, t3.limitType, t3.startAt, t3.endAt);
+        }(t2._query, n2));
+      }
+    };
+    wr = class extends hr {
+      constructor(t2, e3) {
+        super(), this.gt = t2, this.Et = e3, this.type = "orderBy";
+      }
+      _apply(t2) {
+        const e3 = function(t3, e4, n2) {
+          if (null !== t3.startAt)
+            throw new U(P, "Invalid query. You must not call startAt() or startAfter() before calling orderBy().");
+          if (null !== t3.endAt)
+            throw new U(P, "Invalid query. You must not call endAt() or endBefore() before calling orderBy().");
+          const r2 = new le(e4, n2);
+          return function(t4, e5) {
+            if (null === me(t4)) {
+              const n3 = pe(t4);
+              null !== n3 && Vr(t4, n3, e5.field);
+            }
+          }(t3, r2), r2;
+        }(t2._query, this.gt, this.Et);
+        return new bn(t2.firestore, t2.converter, function(t3, e4) {
+          const n2 = t3.explicitOrderBy.concat([e4]);
+          return new we(t3.path, t3.collectionGroup, n2, t3.filters.slice(), t3.limit, t3.limitType, t3.startAt, t3.endAt);
+        }(t2._query, e3));
+      }
+    };
+    pr = class extends hr {
+      constructor(t2, e3, n2) {
+        super(), this.type = t2, this.It = e3, this.Tt = n2;
+      }
+      _apply(t2) {
+        return new bn(t2.firestore, t2.converter, function(t3, e3, n2) {
+          return new we(t3.path, t3.collectionGroup, t3.explicitOrderBy.slice(), t3.filters.slice(), e3, n2, t3.startAt, t3.endAt);
+        }(t2._query, this.It, this.Tt));
+      }
+    };
+    gr = class extends hr {
+      constructor(t2, e3, n2) {
+        super(), this.type = t2, this.At = e3, this.Rt = n2;
+      }
+      _apply(t2) {
+        const e3 = Ar(t2, this.type, this.At, this.Rt);
+        return new bn(t2.firestore, t2.converter, function(t3, e4) {
+          return new we(t3.path, t3.collectionGroup, t3.explicitOrderBy.slice(), t3.filters.slice(), t3.limit, t3.limitType, e4, t3.endAt);
+        }(t2._query, e3));
+      }
+    };
+    Er = class extends hr {
+      constructor(t2, e3, n2) {
+        super(), this.type = t2, this.At = e3, this.Rt = n2;
+      }
+      _apply(t2) {
+        const e3 = Ar(t2, this.type, this.At, this.Rt);
+        return new bn(t2.firestore, t2.converter, function(t3, e4) {
+          return new we(t3.path, t3.collectionGroup, t3.explicitOrderBy.slice(), t3.filters.slice(), t3.limit, t3.limitType, t3.startAt, e4);
+        }(t2._query, e3));
       }
     };
     Dr = class extends class {
@@ -10262,6 +11855,326 @@ var init_index_browser_esm2017 = __esm({
         return new vn(this.firestore, null, e3);
       }
     };
+    Qr = class {
+      constructor(t2, e3) {
+        this._firestore = t2, this._commitHandler = e3, this._mutations = [], this._committed = false, this._dataReader = Ln(t2);
+      }
+      set(t2, e3, n2) {
+        this._verifyNotCommitted();
+        const r2 = zr(t2, this._firestore), s3 = Nr(r2.converter, e3, n2), i = Mn(this._dataReader, "WriteBatch.set", r2._key, s3, null !== r2.converter, n2);
+        return this._mutations.push(i.toMutation(r2._key, Ve.none())), this;
+      }
+      update(t2, e3, n2, ...r2) {
+        this._verifyNotCommitted();
+        const s3 = zr(t2, this._firestore);
+        let i;
+        return i = "string" == typeof (e3 = getModularInstance(e3)) || e3 instanceof Nn ? Kn(this._dataReader, "WriteBatch.update", s3._key, e3, n2, r2) : Wn(this._dataReader, "WriteBatch.update", s3._key, e3), this._mutations.push(i.toMutation(s3._key, Ve.exists(true))), this;
+      }
+      delete(t2) {
+        this._verifyNotCommitted();
+        const e3 = zr(t2, this._firestore);
+        return this._mutations = this._mutations.concat(new xe(e3._key, Ve.none())), this;
+      }
+      commit() {
+        return this._verifyNotCommitted(), this._committed = true, this._mutations.length > 0 ? this._commitHandler(this._mutations) : Promise.resolve();
+      }
+      _verifyNotCommitted() {
+        if (this._committed)
+          throw new U(S, "A write batch can no longer be used after commit() has been called.");
+      }
+    };
+    Wr = class {
+      constructor(t2) {
+        this.datastore = t2, this.readVersions = /* @__PURE__ */ new Map(), this.mutations = [], this.committed = false, this.lastWriteError = null, this.writtenDocs = /* @__PURE__ */ new Set();
+      }
+      async lookup(t2) {
+        if (this.ensureCommitNotCalled(), this.mutations.length > 0)
+          throw new U(P, "Firestore transactions require all reads to be executed before all writes.");
+        const e3 = await on(this.datastore, t2);
+        return e3.forEach((t3) => this.recordVersion(t3)), e3;
+      }
+      set(t2, e3) {
+        this.write(e3.toMutation(t2, this.precondition(t2))), this.writtenDocs.add(t2.toString());
+      }
+      update(t2, e3) {
+        try {
+          this.write(e3.toMutation(t2, this.preconditionForUpdate(t2)));
+        } catch (t3) {
+          this.lastWriteError = t3;
+        }
+        this.writtenDocs.add(t2.toString());
+      }
+      delete(t2) {
+        this.write(new xe(t2, this.precondition(t2))), this.writtenDocs.add(t2.toString());
+      }
+      async commit() {
+        if (this.ensureCommitNotCalled(), this.lastWriteError)
+          throw this.lastWriteError;
+        const t2 = this.readVersions;
+        this.mutations.forEach((e3) => {
+          t2.delete(e3.key.toString());
+        }), t2.forEach((t3, e3) => {
+          const n2 = rt.fromPath(e3);
+          this.mutations.push(new Fe(n2, this.precondition(n2)));
+        }), await sn(this.datastore, this.mutations), this.committed = true;
+      }
+      recordVersion(t2) {
+        let e3;
+        if (t2.isFoundDocument())
+          e3 = t2.version;
+        else {
+          if (!t2.isNoDocument())
+            throw b();
+          e3 = Et.min();
+        }
+        const n2 = this.readVersions.get(t2.key.toString());
+        if (n2) {
+          if (!e3.isEqual(n2))
+            throw new U(q, "Document version changed between two reads.");
+        } else
+          this.readVersions.set(t2.key.toString(), e3);
+      }
+      precondition(t2) {
+        const e3 = this.readVersions.get(t2.toString());
+        return !this.writtenDocs.has(t2.toString()) && e3 ? e3.isEqual(Et.min()) ? Ve.exists(false) : Ve.updateTime(e3) : Ve.none();
+      }
+      preconditionForUpdate(t2) {
+        const e3 = this.readVersions.get(t2.toString());
+        if (!this.writtenDocs.has(t2.toString()) && e3) {
+          if (e3.isEqual(Et.min()))
+            throw new U(P, "Can't update a document that doesn't exist.");
+          return Ve.updateTime(e3);
+        }
+        return Ve.exists(true);
+      }
+      write(t2) {
+        this.ensureCommitNotCalled(), this.mutations.push(t2);
+      }
+      ensureCommitNotCalled() {
+      }
+    };
+    Kr = {
+      maxAttempts: 5
+    };
+    Yr = class {
+      constructor(t2, e3, n2, r2, s3) {
+        this.asyncQueue = t2, this.datastore = e3, this.options = n2, this.updateFunction = r2, this.deferred = s3, this.Pt = n2.maxAttempts, this.Vt = new nn(this.asyncQueue, "transaction_retry");
+      }
+      run() {
+        this.Pt -= 1, this.Nt();
+      }
+      Nt() {
+        this.Vt.J(async () => {
+          const t2 = new Wr(this.datastore), e3 = this.Dt(t2);
+          e3 && e3.then((e4) => {
+            this.asyncQueue.enqueueAndForget(() => t2.commit().then(() => {
+              this.deferred.resolve(e4);
+            }).catch((t3) => {
+              this.$t(t3);
+            }));
+          }).catch((t3) => {
+            this.$t(t3);
+          });
+        });
+      }
+      Dt(t2) {
+        try {
+          const e3 = this.updateFunction(t2);
+          return !ht(e3) && e3.catch && e3.then ? e3 : (this.deferred.reject(Error("Transaction callback must return a Promise")), null);
+        } catch (t3) {
+          return this.deferred.reject(t3), null;
+        }
+      }
+      $t(t2) {
+        this.Pt > 0 && this.xt(t2) ? (this.Pt -= 1, this.asyncQueue.enqueueAndForget(() => (this.Nt(), Promise.resolve()))) : this.deferred.reject(t2);
+      }
+      xt(t2) {
+        if ("FirebaseError" === t2.name) {
+          const e3 = t2.code;
+          return "aborted" === e3 || "failed-precondition" === e3 || !function(t3) {
+            switch (t3) {
+              default:
+                return b();
+              case A:
+              case R:
+              case V:
+              case F:
+              case C:
+              case L:
+              case x:
+                return false;
+              case P:
+              case N:
+              case D:
+              case $:
+              case S:
+              case q:
+              case O:
+              case k:
+              case M:
+                return true;
+            }
+          }(e3);
+        }
+        return false;
+      }
+    };
+    Jr = class {
+      constructor(t2, e3, n2, r2, s3) {
+        this.asyncQueue = t2, this.timerId = e3, this.targetTimeMs = n2, this.op = r2, this.removalCallback = s3, this.deferred = new j(), this.then = this.deferred.promise.then.bind(this.deferred.promise), this.deferred.promise.catch((t3) => {
+        });
+      }
+      static createAndSchedule(t2, e3, n2, r2, s3) {
+        const i = Date.now() + n2, o2 = new Jr(t2, e3, i, r2, s3);
+        return o2.start(n2), o2;
+      }
+      start(t2) {
+        this.timerHandle = setTimeout(() => this.handleDelayElapsed(), t2);
+      }
+      skipDelay() {
+        return this.handleDelayElapsed();
+      }
+      cancel(t2) {
+        null !== this.timerHandle && (this.clearTimeout(), this.deferred.reject(new U(A, "Operation cancelled" + (t2 ? ": " + t2 : ""))));
+      }
+      handleDelayElapsed() {
+        this.asyncQueue.enqueueAndForget(() => null !== this.timerHandle ? (this.clearTimeout(), this.op().then((t2) => this.deferred.resolve(t2))) : Promise.resolve());
+      }
+      clearTimeout() {
+        null !== this.timerHandle && (this.removalCallback(this), clearTimeout(this.timerHandle), this.timerHandle = null);
+      }
+    };
+    Xr = class {
+      constructor() {
+        this.Ft = Promise.resolve(), this.St = [], this.qt = false, this.Ot = [], this.kt = null, this.Ct = false, this.Lt = false, this.Mt = [], this.Vt = new nn(this, "async_queue_retry"), this.Ut = () => {
+          const t3 = Hr();
+          t3 && y("AsyncQueue", "Visibility state changed to " + t3.visibilityState), this.Vt.Z();
+        };
+        const t2 = Hr();
+        t2 && "function" == typeof t2.addEventListener && t2.addEventListener("visibilitychange", this.Ut);
+      }
+      get isShuttingDown() {
+        return this.qt;
+      }
+      enqueueAndForget(t2) {
+        this.enqueue(t2);
+      }
+      enqueueAndForgetEvenWhileRestricted(t2) {
+        this.jt(), this.Bt(t2);
+      }
+      enterRestrictedMode(t2) {
+        if (!this.qt) {
+          this.qt = true, this.Lt = t2 || false;
+          const e3 = Hr();
+          e3 && "function" == typeof e3.removeEventListener && e3.removeEventListener("visibilitychange", this.Ut);
+        }
+      }
+      enqueue(t2) {
+        if (this.jt(), this.qt)
+          return new Promise(() => {
+          });
+        const e3 = new j();
+        return this.Bt(() => this.qt && this.Lt ? Promise.resolve() : (t2().then(e3.resolve, e3.reject), e3.promise)).then(() => e3.promise);
+      }
+      enqueueRetryable(t2) {
+        this.enqueueAndForget(() => (this.St.push(t2), this.Qt()));
+      }
+      async Qt() {
+        if (0 !== this.St.length) {
+          try {
+            await this.St[0](), this.St.shift(), this.Vt.reset();
+          } catch (t2) {
+            if (!function(t3) {
+              return "IndexedDbTransactionError" === t3.name;
+            }(t2))
+              throw t2;
+            y("AsyncQueue", "Operation failed with retryable error: " + t2);
+          }
+          this.St.length > 0 && this.Vt.J(() => this.Qt());
+        }
+      }
+      Bt(t2) {
+        const e3 = this.Ft.then(() => (this.Ct = true, t2().catch((t3) => {
+          this.kt = t3, this.Ct = false;
+          const e4 = function(t4) {
+            let e5 = t4.message || "";
+            t4.stack && (e5 = t4.stack.includes(t4.message) ? t4.stack : t4.message + "\n" + t4.stack);
+            return e5;
+          }(t3);
+          throw _("INTERNAL UNHANDLED ERROR: ", e4), t3;
+        }).then((t3) => (this.Ct = false, t3))));
+        return this.Ft = e3, e3;
+      }
+      enqueueAfterDelay(t2, e3, n2) {
+        this.jt(), this.Mt.indexOf(t2) > -1 && (e3 = 0);
+        const r2 = Jr.createAndSchedule(this, t2, e3, n2, (t3) => this.zt(t3));
+        return this.Ot.push(r2), r2;
+      }
+      jt() {
+        this.kt && b();
+      }
+      verifyOperationInProgress() {
+      }
+      async Gt() {
+        let t2;
+        do {
+          t2 = this.Ft, await t2;
+        } while (t2 !== this.Ft);
+      }
+      Wt(t2) {
+        for (const e3 of this.Ot)
+          if (e3.timerId === t2)
+            return true;
+        return false;
+      }
+      Kt(t2) {
+        return this.Gt().then(() => {
+          this.Ot.sort((t3, e3) => t3.targetTimeMs - e3.targetTimeMs);
+          for (const e3 of this.Ot)
+            if (e3.skipDelay(), "all" !== t2 && e3.timerId === t2)
+              break;
+          return this.Gt();
+        });
+      }
+      Yt(t2) {
+        this.Mt.push(t2);
+      }
+      zt(t2) {
+        const e3 = this.Ot.indexOf(t2);
+        this.Ot.splice(e3, 1);
+      }
+    };
+    Zr = class {
+      constructor(t2, e3) {
+        this._firestore = t2, this._transaction = e3, this._dataReader = Ln(t2);
+      }
+      get(t2) {
+        const e3 = zr(t2, this._firestore), n2 = new Dr(this._firestore);
+        return this._transaction.lookup([e3._key]).then((t3) => {
+          if (!t3 || 1 !== t3.length)
+            return b();
+          const r2 = t3[0];
+          if (r2.isFoundDocument())
+            return new ir(this._firestore, n2, r2.key, r2, e3.converter);
+          if (r2.isNoDocument())
+            return new ir(this._firestore, n2, e3._key, null, e3.converter);
+          throw b();
+        });
+      }
+      set(t2, e3, n2) {
+        const r2 = zr(t2, this._firestore), s3 = Nr(r2.converter, e3, n2), i = Mn(this._dataReader, "Transaction.set", r2._key, s3, null !== r2.converter, n2);
+        return this._transaction.set(r2._key, i), this;
+      }
+      update(t2, e3, n2, ...r2) {
+        const s3 = zr(t2, this._firestore);
+        let i;
+        return i = "string" == typeof (e3 = getModularInstance(e3)) || e3 instanceof Nn ? Kn(this._dataReader, "Transaction.update", s3._key, e3, n2, r2) : Wn(this._dataReader, "Transaction.update", s3._key, e3), this._transaction.update(s3._key, i), this;
+      }
+      delete(t2) {
+        const e3 = zr(t2, this._firestore);
+        return this._transaction.delete(e3._key), this;
+      }
+    };
     !function(t2) {
       w = t2;
     }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", (t2, { instanceIdentifier: e3, options: n2 }) => {
@@ -10276,445 +12189,66 @@ var init_index_browser_esm2017 = __esm({
 });
 
 // node_modules/firebase/firestore/lite/dist/index.esm.js
+var index_esm_exports = {};
+__export(index_esm_exports, {
+  AggregateField: () => yn,
+  AggregateQuerySnapshot: () => _n,
+  Bytes: () => Vn,
+  CollectionReference: () => En,
+  DocumentReference: () => vn,
+  DocumentSnapshot: () => ir,
+  FieldPath: () => Nn,
+  FieldValue: () => $n,
+  Firestore: () => fn,
+  FirestoreError: () => U,
+  GeoPoint: () => xn,
+  Query: () => bn,
+  QueryConstraint: () => hr,
+  QueryDocumentSnapshot: () => or,
+  QuerySnapshot: () => ur,
+  Timestamp: () => bt,
+  Transaction: () => Zr,
+  WriteBatch: () => Qr,
+  addDoc: () => Or,
+  aggregateQuerySnapshotEqual: () => Cr,
+  arrayRemove: () => jr,
+  arrayUnion: () => Ur,
+  collection: () => In,
+  collectionGroup: () => Tn,
+  connectFirestoreEmulator: () => mn,
+  deleteDoc: () => qr,
+  deleteField: () => Lr,
+  doc: () => An,
+  documentId: () => Dn,
+  endAt: () => Tr,
+  endBefore: () => Ir,
+  getCount: () => kr,
+  getDoc: () => $r,
+  getDocs: () => xr,
+  getFirestore: () => wn,
+  increment: () => Br,
+  initializeFirestore: () => dn,
+  limit: () => yr,
+  limitToLast: () => _r,
+  orderBy: () => mr,
+  query: () => lr,
+  queryEqual: () => Pn,
+  refEqual: () => Rn,
+  runTransaction: () => ts,
+  serverTimestamp: () => Mr,
+  setDoc: () => Fr,
+  setLogLevel: () => p,
+  snapshotEqual: () => cr,
+  startAfter: () => br,
+  startAt: () => vr,
+  terminate: () => pn,
+  updateDoc: () => Sr,
+  where: () => dr,
+  writeBatch: () => Gr
+});
 var init_index_esm4 = __esm({
   "node_modules/firebase/firestore/lite/dist/index.esm.js"() {
     init_index_browser_esm2017();
-  }
-});
-
-// node_modules/@firebase/functions/dist/index.esm2017.js
-function mapValues(o2, f) {
-  const result = {};
-  for (const key2 in o2) {
-    if (o2.hasOwnProperty(key2)) {
-      result[key2] = f(o2[key2]);
-    }
-  }
-  return result;
-}
-function encode2(data) {
-  if (data == null) {
-    return null;
-  }
-  if (data instanceof Number) {
-    data = data.valueOf();
-  }
-  if (typeof data === "number" && isFinite(data)) {
-    return data;
-  }
-  if (data === true || data === false) {
-    return data;
-  }
-  if (Object.prototype.toString.call(data) === "[object String]") {
-    return data;
-  }
-  if (data instanceof Date) {
-    return data.toISOString();
-  }
-  if (Array.isArray(data)) {
-    return data.map((x2) => encode2(x2));
-  }
-  if (typeof data === "function" || typeof data === "object") {
-    return mapValues(data, (x2) => encode2(x2));
-  }
-  throw new Error("Data cannot be encoded in JSON: " + data);
-}
-function decode(json2) {
-  if (json2 == null) {
-    return json2;
-  }
-  if (json2["@type"]) {
-    switch (json2["@type"]) {
-      case LONG_TYPE:
-      case UNSIGNED_LONG_TYPE: {
-        const value = Number(json2["value"]);
-        if (isNaN(value)) {
-          throw new Error("Data cannot be decoded from JSON: " + json2);
-        }
-        return value;
-      }
-      default: {
-        throw new Error("Data cannot be decoded from JSON: " + json2);
-      }
-    }
-  }
-  if (Array.isArray(json2)) {
-    return json2.map((x2) => decode(x2));
-  }
-  if (typeof json2 === "function" || typeof json2 === "object") {
-    return mapValues(json2, (x2) => decode(x2));
-  }
-  return json2;
-}
-function codeForHTTPStatus(status) {
-  if (status >= 200 && status < 300) {
-    return "ok";
-  }
-  switch (status) {
-    case 0:
-      return "internal";
-    case 400:
-      return "invalid-argument";
-    case 401:
-      return "unauthenticated";
-    case 403:
-      return "permission-denied";
-    case 404:
-      return "not-found";
-    case 409:
-      return "aborted";
-    case 429:
-      return "resource-exhausted";
-    case 499:
-      return "cancelled";
-    case 500:
-      return "internal";
-    case 501:
-      return "unimplemented";
-    case 503:
-      return "unavailable";
-    case 504:
-      return "deadline-exceeded";
-  }
-  return "unknown";
-}
-function _errorForResponse(status, bodyJSON) {
-  let code = codeForHTTPStatus(status);
-  let description = code;
-  let details = void 0;
-  try {
-    const errorJSON = bodyJSON && bodyJSON.error;
-    if (errorJSON) {
-      const status2 = errorJSON.status;
-      if (typeof status2 === "string") {
-        if (!errorCodeMap[status2]) {
-          return new FunctionsError("internal", "internal");
-        }
-        code = errorCodeMap[status2];
-        description = status2;
-      }
-      const message = errorJSON.message;
-      if (typeof message === "string") {
-        description = message;
-      }
-      details = errorJSON.details;
-      if (details !== void 0) {
-        details = decode(details);
-      }
-    }
-  } catch (e3) {
-  }
-  if (code === "ok") {
-    return null;
-  }
-  return new FunctionsError(code, description, details);
-}
-function failAfter(millis) {
-  let timer = null;
-  return {
-    promise: new Promise((_2, reject) => {
-      timer = setTimeout(() => {
-        reject(new FunctionsError("deadline-exceeded", "deadline-exceeded"));
-      }, millis);
-    }),
-    cancel: () => {
-      if (timer) {
-        clearTimeout(timer);
-      }
-    }
-  };
-}
-function connectFunctionsEmulator$1(functionsInstance, host, port) {
-  functionsInstance.emulatorOrigin = `http://${host}:${port}`;
-}
-function httpsCallable$1(functionsInstance, name5, options) {
-  return (data) => {
-    return call(functionsInstance, name5, data, options || {});
-  };
-}
-async function postJSON(url, body, headers, fetchImpl) {
-  headers["Content-Type"] = "application/json";
-  let response;
-  try {
-    response = await fetchImpl(url, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers
-    });
-  } catch (e3) {
-    return {
-      status: 0,
-      json: null
-    };
-  }
-  let json2 = null;
-  try {
-    json2 = await response.json();
-  } catch (e3) {
-  }
-  return {
-    status: response.status,
-    json: json2
-  };
-}
-function call(functionsInstance, name5, data, options) {
-  const url = functionsInstance._url(name5);
-  return callAtURL(functionsInstance, url, data, options);
-}
-async function callAtURL(functionsInstance, url, data, options) {
-  data = encode2(data);
-  const body = { data };
-  const headers = {};
-  const context = await functionsInstance.contextProvider.getContext();
-  if (context.authToken) {
-    headers["Authorization"] = "Bearer " + context.authToken;
-  }
-  if (context.messagingToken) {
-    headers["Firebase-Instance-ID-Token"] = context.messagingToken;
-  }
-  if (context.appCheckToken !== null) {
-    headers["X-Firebase-AppCheck"] = context.appCheckToken;
-  }
-  const timeout = options.timeout || 7e4;
-  const failAfterHandle = failAfter(timeout);
-  const response = await Promise.race([
-    postJSON(url, body, headers, functionsInstance.fetchImpl),
-    failAfterHandle.promise,
-    functionsInstance.cancelAllRequests
-  ]);
-  failAfterHandle.cancel();
-  if (!response) {
-    throw new FunctionsError("cancelled", "Firebase Functions instance was deleted.");
-  }
-  const error2 = _errorForResponse(response.status, response.json);
-  if (error2) {
-    throw error2;
-  }
-  if (!response.json) {
-    throw new FunctionsError("internal", "Response is not valid JSON object.");
-  }
-  let responseData = response.json.data;
-  if (typeof responseData === "undefined") {
-    responseData = response.json.result;
-  }
-  if (typeof responseData === "undefined") {
-    throw new FunctionsError("internal", "Response is missing data field.");
-  }
-  const decodedData = decode(responseData);
-  return { data: decodedData };
-}
-function registerFunctions(fetchImpl, variant) {
-  const factory = (container, { instanceIdentifier: regionOrCustomDomain }) => {
-    const app2 = container.getProvider("app").getImmediate();
-    const authProvider = container.getProvider(AUTH_INTERNAL_NAME);
-    const messagingProvider = container.getProvider(MESSAGING_INTERNAL_NAME);
-    const appCheckProvider = container.getProvider(APP_CHECK_INTERNAL_NAME);
-    return new FunctionsService(app2, authProvider, messagingProvider, appCheckProvider, regionOrCustomDomain, fetchImpl);
-  };
-  _registerComponent(new Component(FUNCTIONS_TYPE, factory, "PUBLIC").setMultipleInstances(true));
-  registerVersion(name4, version4, variant);
-  registerVersion(name4, version4, "esm2017");
-}
-function getFunctions(app2 = getApp(), regionOrCustomDomain = DEFAULT_REGION) {
-  const functionsProvider = _getProvider(getModularInstance(app2), FUNCTIONS_TYPE);
-  const functionsInstance = functionsProvider.getImmediate({
-    identifier: regionOrCustomDomain
-  });
-  const emulator = getDefaultEmulatorHostnameAndPort("functions");
-  if (emulator) {
-    connectFunctionsEmulator(functionsInstance, ...emulator);
-  }
-  return functionsInstance;
-}
-function connectFunctionsEmulator(functionsInstance, host, port) {
-  connectFunctionsEmulator$1(getModularInstance(functionsInstance), host, port);
-}
-function httpsCallable(functionsInstance, name5, options) {
-  return httpsCallable$1(getModularInstance(functionsInstance), name5, options);
-}
-var LONG_TYPE, UNSIGNED_LONG_TYPE, FUNCTIONS_TYPE, errorCodeMap, FunctionsError, ContextProvider, DEFAULT_REGION, FunctionsService, name4, version4, AUTH_INTERNAL_NAME, APP_CHECK_INTERNAL_NAME, MESSAGING_INTERNAL_NAME;
-var init_index_esm20175 = __esm({
-  "node_modules/@firebase/functions/dist/index.esm2017.js"() {
-    init_index_esm20174();
-    init_index_esm2017();
-    init_index_esm20172();
-    LONG_TYPE = "type.googleapis.com/google.protobuf.Int64Value";
-    UNSIGNED_LONG_TYPE = "type.googleapis.com/google.protobuf.UInt64Value";
-    FUNCTIONS_TYPE = "functions";
-    errorCodeMap = {
-      OK: "ok",
-      CANCELLED: "cancelled",
-      UNKNOWN: "unknown",
-      INVALID_ARGUMENT: "invalid-argument",
-      DEADLINE_EXCEEDED: "deadline-exceeded",
-      NOT_FOUND: "not-found",
-      ALREADY_EXISTS: "already-exists",
-      PERMISSION_DENIED: "permission-denied",
-      UNAUTHENTICATED: "unauthenticated",
-      RESOURCE_EXHAUSTED: "resource-exhausted",
-      FAILED_PRECONDITION: "failed-precondition",
-      ABORTED: "aborted",
-      OUT_OF_RANGE: "out-of-range",
-      UNIMPLEMENTED: "unimplemented",
-      INTERNAL: "internal",
-      UNAVAILABLE: "unavailable",
-      DATA_LOSS: "data-loss"
-    };
-    FunctionsError = class extends FirebaseError {
-      constructor(code, message, details) {
-        super(`${FUNCTIONS_TYPE}/${code}`, message || "");
-        this.details = details;
-      }
-    };
-    ContextProvider = class {
-      constructor(authProvider, messagingProvider, appCheckProvider) {
-        this.auth = null;
-        this.messaging = null;
-        this.appCheck = null;
-        this.auth = authProvider.getImmediate({ optional: true });
-        this.messaging = messagingProvider.getImmediate({
-          optional: true
-        });
-        if (!this.auth) {
-          authProvider.get().then((auth2) => this.auth = auth2, () => {
-          });
-        }
-        if (!this.messaging) {
-          messagingProvider.get().then((messaging) => this.messaging = messaging, () => {
-          });
-        }
-        if (!this.appCheck) {
-          appCheckProvider.get().then((appCheck) => this.appCheck = appCheck, () => {
-          });
-        }
-      }
-      async getAuthToken() {
-        if (!this.auth) {
-          return void 0;
-        }
-        try {
-          const token = await this.auth.getToken();
-          return token === null || token === void 0 ? void 0 : token.accessToken;
-        } catch (e3) {
-          return void 0;
-        }
-      }
-      async getMessagingToken() {
-        if (!this.messaging || !("Notification" in self) || Notification.permission !== "granted") {
-          return void 0;
-        }
-        try {
-          return await this.messaging.getToken();
-        } catch (e3) {
-          return void 0;
-        }
-      }
-      async getAppCheckToken() {
-        if (this.appCheck) {
-          const result = await this.appCheck.getToken();
-          if (result.error) {
-            return null;
-          }
-          return result.token;
-        }
-        return null;
-      }
-      async getContext() {
-        const authToken = await this.getAuthToken();
-        const messagingToken = await this.getMessagingToken();
-        const appCheckToken = await this.getAppCheckToken();
-        return { authToken, messagingToken, appCheckToken };
-      }
-    };
-    DEFAULT_REGION = "us-central1";
-    FunctionsService = class {
-      constructor(app2, authProvider, messagingProvider, appCheckProvider, regionOrCustomDomain = DEFAULT_REGION, fetchImpl) {
-        this.app = app2;
-        this.fetchImpl = fetchImpl;
-        this.emulatorOrigin = null;
-        this.contextProvider = new ContextProvider(authProvider, messagingProvider, appCheckProvider);
-        this.cancelAllRequests = new Promise((resolve) => {
-          this.deleteService = () => {
-            return Promise.resolve(resolve());
-          };
-        });
-        try {
-          const url = new URL(regionOrCustomDomain);
-          this.customDomain = url.origin;
-          this.region = DEFAULT_REGION;
-        } catch (e3) {
-          this.customDomain = null;
-          this.region = regionOrCustomDomain;
-        }
-      }
-      _delete() {
-        return this.deleteService();
-      }
-      _url(name5) {
-        const projectId = this.app.options.projectId;
-        if (this.emulatorOrigin !== null) {
-          const origin = this.emulatorOrigin;
-          return `${origin}/${projectId}/${this.region}/${name5}`;
-        }
-        if (this.customDomain !== null) {
-          return `${this.customDomain}/${name5}`;
-        }
-        return `https://${this.region}-${projectId}.cloudfunctions.net/${name5}`;
-      }
-    };
-    name4 = "@firebase/functions";
-    version4 = "0.8.7";
-    AUTH_INTERNAL_NAME = "auth-internal";
-    APP_CHECK_INTERNAL_NAME = "app-check-internal";
-    MESSAGING_INTERNAL_NAME = "messaging-internal";
-    registerFunctions(fetch.bind(self));
-  }
-});
-
-// node_modules/firebase/functions/dist/index.esm.js
-var init_index_esm5 = __esm({
-  "node_modules/firebase/functions/dist/index.esm.js"() {
-    init_index_esm20175();
-  }
-});
-
-// .svelte-kit/output/server/chunks/firebase.js
-var firebase_exports = {};
-__export(firebase_exports, {
-  app: () => app,
-  auth: () => auth,
-  db: () => db,
-  stripeSessionIdGCF: () => stripeSessionIdGCF
-});
-var PUBLIC_FIREBASE_apiKey, PUBLIC_FIREBASE_authDomain, PUBLIC_FIREBASE_projectId, PUBLIC_FIREBASE_storageBucket, PUBLIC_FIREBASE_messagingSenderId, PUBLIC_FIREBASE_appId, firebaseConfig, app, auth, db, functions, stripeSessionIdGCF;
-var init_firebase = __esm({
-  ".svelte-kit/output/server/chunks/firebase.js"() {
-    init_index_esm2();
-    init_index_esm3();
-    init_index_esm4();
-    init_index_esm5();
-    PUBLIC_FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
-    PUBLIC_FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
-    PUBLIC_FIREBASE_projectId = "thinksolve-app";
-    PUBLIC_FIREBASE_storageBucket = "thinksolve-app.appspot.com";
-    PUBLIC_FIREBASE_messagingSenderId = "490986955869";
-    PUBLIC_FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
-    firebaseConfig = {
-      apiKey: PUBLIC_FIREBASE_apiKey,
-      authDomain: PUBLIC_FIREBASE_authDomain,
-      projectId: PUBLIC_FIREBASE_projectId,
-      storageBucket: PUBLIC_FIREBASE_storageBucket,
-      messagingSenderId: PUBLIC_FIREBASE_messagingSenderId,
-      appId: PUBLIC_FIREBASE_appId
-    };
-    app = initializeApp(firebaseConfig);
-    auth = getAuth(app);
-    db = wn(app);
-    functions = getFunctions(app);
-    stripeSessionIdGCF = httpsCallable(
-      functions,
-      "stripeSessionIdGCF"
-    );
   }
 });
 
@@ -10838,7 +12372,6 @@ var init_layout_svelte = __esm({
     init_Dropzone();
     init_store();
     init_firebase();
-    init_index_esm4();
     init_index_esm3();
     init_index2();
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -10874,8 +12407,9 @@ var init_layout_svelte = __esm({
       let redirectAfterLoginTimeOut;
       let redirectSetInterval;
       async function loginToRedirectUrl(userEmail) {
-        const { db: db2 } = await Promise.resolve().then(() => (init_firebase(), firebase_exports));
-        const querySnapshot = await xr(In(db2, "email"));
+        const { getFirestore, collection, getDocs } = await Promise.resolve().then(() => (init_index_esm4(), index_esm_exports));
+        const db = getFirestore(app);
+        const querySnapshot = await getDocs(collection(db, "email"));
         querySnapshot.forEach((doc) => {
           if (userEmail === doc.id) {
             let redirectTimeInMS = 3e3;
@@ -11255,8 +12789,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-1ff4e094.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-1ff4e094.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/PlansCardObserver-a59a4974.js", "_app/immutable/chunks/Dropzone-90bbc3c0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-fb61bc3d.js", "_app/immutable/chunks/singletons-52ba78bf.js", "_app/immutable/chunks/firebase-0942ef91.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-042f0f9b.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-042f0f9b.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/PlansCardObserver-a59a4974.js", "_app/immutable/chunks/Dropzone-90bbc3c0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-8ccfde8a.js", "_app/immutable/chunks/singletons-e3b9dc57.js", "_app/immutable/chunks/firebase-2afcabcb.js"];
     stylesheets = ["_app/immutable/assets/_layout-5622e2dd.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
@@ -12253,13 +13787,13 @@ function parseCD(parser) {
   for (var i = 0; i < parsedRows.length; i++) {
     var rowNodes = parsedRows[i];
     var cell = newCell();
-    for (var j = 0; j < rowNodes.length; j++) {
-      if (!isStartOfArrow(rowNodes[j])) {
-        cell.body.push(rowNodes[j]);
+    for (var j2 = 0; j2 < rowNodes.length; j2++) {
+      if (!isStartOfArrow(rowNodes[j2])) {
+        cell.body.push(rowNodes[j2]);
       } else {
         row.push(cell);
-        j += 1;
-        var arrowChar = assertSymbolNodeType(rowNodes[j]).text;
+        j2 += 1;
+        var arrowChar = assertSymbolNodeType(rowNodes[j2]).text;
         var labels = new Array(2);
         labels[0] = {
           type: "ordgroup",
@@ -12276,10 +13810,10 @@ function parseCD(parser) {
         else if ("<>AV".indexOf(arrowChar) > -1) {
           for (var labelNum = 0; labelNum < 2; labelNum++) {
             var inLabel = true;
-            for (var k2 = j + 1; k2 < rowNodes.length; k2++) {
+            for (var k2 = j2 + 1; k2 < rowNodes.length; k2++) {
               if (isLabelEnd(rowNodes[k2], arrowChar)) {
                 inLabel = false;
-                j = k2;
+                j2 = k2;
                 break;
               }
               if (isStartOfArrow(rowNodes[k2])) {
@@ -12288,11 +13822,11 @@ function parseCD(parser) {
               labels[labelNum].body.push(rowNodes[k2]);
             }
             if (inLabel) {
-              throw new ParseError("Missing a " + arrowChar + " character to complete a CD arrow.", rowNodes[j]);
+              throw new ParseError("Missing a " + arrowChar + " character to complete a CD arrow.", rowNodes[j2]);
             }
           }
         } else {
-          throw new ParseError('Expected one of "<>AV=|." after @', rowNodes[j]);
+          throw new ParseError('Expected one of "<>AV=|." after @', rowNodes[j2]);
         }
         var arrow = cdArrow(arrowChar, labels, parser);
         var wrappedArrow = {
@@ -12542,7 +14076,7 @@ function sizingGroup(value, options, baseOptions) {
   }
   return buildCommon.makeFragment(inner2);
 }
-var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D, Dc, T2, Tc, S2, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions2, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
+var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D2, Dc, T2, Tc, S2, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
 var init_katex = __esm({
   "node_modules/katex/dist/katex.mjs"() {
     SourceLocation = class {
@@ -12864,7 +14398,7 @@ var init_katex = __esm({
         return this.size >= 2;
       }
     };
-    D = 0;
+    D2 = 0;
     Dc = 1;
     T2 = 2;
     Tc = 3;
@@ -12872,15 +14406,15 @@ var init_katex = __esm({
     Sc = 5;
     SS = 6;
     SSc = 7;
-    styles = [new Style(D, 0, false), new Style(Dc, 0, true), new Style(T2, 1, false), new Style(Tc, 1, true), new Style(S2, 2, false), new Style(Sc, 2, true), new Style(SS, 3, false), new Style(SSc, 3, true)];
+    styles = [new Style(D2, 0, false), new Style(Dc, 0, true), new Style(T2, 1, false), new Style(Tc, 1, true), new Style(S2, 2, false), new Style(Sc, 2, true), new Style(SS, 3, false), new Style(SSc, 3, true)];
     sup = [S2, Sc, S2, Sc, SS, SSc, SS, SSc];
     sub = [Sc, Sc, Sc, Sc, SSc, SSc, SSc, SSc];
     fracNum = [T2, Tc, S2, Sc, SS, SSc, SS, SSc];
     fracDen = [Tc, Tc, Sc, Sc, SSc, SSc, SSc, SSc];
     cramp = [Dc, Dc, Tc, Tc, Sc, Sc, SSc, SSc];
-    text$1 = [D, Dc, T2, Tc, T2, Tc, T2, Tc];
+    text$1 = [D2, Dc, T2, Tc, T2, Tc, T2, Tc];
     Style$1 = {
-      DISPLAY: styles[D],
+      DISPLAY: styles[D2],
       TEXT: styles[T2],
       SCRIPT: styles[S2],
       SCRIPTSCRIPT: styles[SS]
@@ -16646,15 +18180,15 @@ var init_katex = __esm({
       var H2 = wideChar2.charCodeAt(0);
       var L2 = wideChar2.charCodeAt(1);
       var codePoint = (H2 - 55296) * 1024 + (L2 - 56320) + 65536;
-      var j = mode === "math" ? 0 : 1;
+      var j2 = mode === "math" ? 0 : 1;
       if (119808 <= codePoint && codePoint < 120484) {
         var i = Math.floor((codePoint - 119808) / 26);
-        return [wideLatinLetterData[i][2], wideLatinLetterData[i][j]];
+        return [wideLatinLetterData[i][2], wideLatinLetterData[i][j2]];
       } else if (120782 <= codePoint && codePoint <= 120831) {
         var _i = Math.floor((codePoint - 120782) / 10);
-        return [wideNumeralData[_i][2], wideNumeralData[_i][j]];
+        return [wideNumeralData[_i][2], wideNumeralData[_i][j2]];
       } else if (codePoint === 120485 || codePoint === 120486) {
-        return [wideLatinLetterData[0][2], wideLatinLetterData[0][j]];
+        return [wideLatinLetterData[0][2], wideLatinLetterData[0][j2]];
       } else if (120486 < codePoint && codePoint < 120782) {
         return ["", ""];
       } else {
@@ -20015,8 +21549,8 @@ var init_katex = __esm({
       for (var i = 0; i < group.body.length; i++) {
         var rw = group.body[i];
         var row = [];
-        for (var j = 0; j < rw.length; j++) {
-          row.push(new mathMLTree.MathNode("mtd", [buildGroup2(rw[j], options)]));
+        for (var j2 = 0; j2 < rw.length; j2++) {
+          row.push(new mathMLTree.MathNode("mtd", [buildGroup2(rw[j2], options)]));
         }
         if (group.tags && group.tags[i]) {
           row.unshift(glue);
@@ -23185,7 +24719,7 @@ var init_katex = __esm({
       }
     });
     makeVerb = (group) => group.body.replace(/ /g, group.star ? "\u2423" : "\xA0");
-    functions2 = _functions;
+    functions = _functions;
     spaceRegexString = "[ \r\n	]";
     controlWordRegexString = "\\\\[a-zA-Z@]+";
     controlSymbolRegexString = "\\\\[^\uD800-\uDFFF]";
@@ -23482,7 +25016,7 @@ var init_katex = __esm({
     defineMacro("\\show", (context) => {
       var tok = context.popToken();
       var name5 = tok.text;
-      console.log(tok, context.macros.get(name5), functions2[name5], symbols.math[name5], symbols.text[name5]);
+      console.log(tok, context.macros.get(name5), functions[name5], symbols.math[name5], symbols.text[name5]);
       return "";
     });
     defineMacro("\\bgroup", "{");
@@ -24229,11 +25763,11 @@ var init_katex = __esm({
         return expansion;
       }
       isDefined(name5) {
-        return this.macros.has(name5) || functions2.hasOwnProperty(name5) || symbols.math.hasOwnProperty(name5) || symbols.text.hasOwnProperty(name5) || implicitCommands.hasOwnProperty(name5);
+        return this.macros.has(name5) || functions.hasOwnProperty(name5) || symbols.math.hasOwnProperty(name5) || symbols.text.hasOwnProperty(name5) || implicitCommands.hasOwnProperty(name5);
       }
       isExpandable(name5) {
         var macro = this.macros.get(name5);
-        return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions2.hasOwnProperty(name5) && !functions2[name5].primitive;
+        return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions.hasOwnProperty(name5) && !functions[name5].primitive;
       }
     };
     unicodeSubRegEx = /^[₊₋₌₍₎₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ]/;
@@ -24812,7 +26346,7 @@ var init_katex = __esm({
           if (breakOnTokenText && lex.text === breakOnTokenText) {
             break;
           }
-          if (breakOnInfix && functions2[lex.text] && functions2[lex.text].infix) {
+          if (breakOnInfix && functions[lex.text] && functions[lex.text].infix) {
             break;
           }
           var atom = this.parseAtom(breakOnTokenText);
@@ -25011,7 +26545,7 @@ var init_katex = __esm({
       parseFunction(breakOnTokenText, name5) {
         var token = this.fetch();
         var func = token.text;
-        var funcData = functions2[func];
+        var funcData = functions[func];
         if (!funcData) {
           return null;
         }
@@ -25036,7 +26570,7 @@ var init_katex = __esm({
           token,
           breakOnTokenText
         };
-        var func = functions2[name5];
+        var func = functions[name5];
         if (func && func.handler) {
           return func.handler(context, args, optArgs);
         } else {
@@ -25551,8 +27085,8 @@ ${$$result.head += `<!-- HEAD_svelte-ztscxf_START --><link rel="${"stylesheet"}"
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
 <h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
-${each(Array(num), (_2, j) => {
-        return `<div>${escape(j + 1)}</div>
+${each(Array(num), (_2, j2) => {
+        return `<div>${escape(j2 + 1)}</div>
     ${each(equations, (eqn) => {
           return `<p class="${"p-1 text-indigo-700"}" d${add_attribute("k", eqn, 0)}></p>`;
         })}`;
@@ -25739,16 +27273,16 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <div class="${"p-4"}"><input type="${"number"}" min="${"1"}"${add_attribute("value", numMD, 0)}>
     <input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
 <h1>${escape(numMD)} lines of markdown immediately below</h1>
-${each(Array(numMD), (_2, j) => {
-        return `<p>${escape(j + 1)}</p>
+${each(Array(numMD), (_2, j2) => {
+        return `<p>${escape(j2 + 1)}</p>
 <div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>`;
       })}
 
 <ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num, 0)}>
-${each(Array(num), (_2, j) => {
-        return `<p>${escape(j + 1)}</p>
+${each(Array(num), (_2, j2) => {
+        return `<p>${escape(j2 + 1)}</p>
         <p class="${"p-1 text-indigo-700"}" d${add_attribute("m", "\\cancelto{0}{\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}}", 0)}></p>
         <p class="${"p-1 text-green-700"}" d${add_attribute("k", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
     ${each(equations, (eqn, k2) => {
@@ -25833,8 +27367,8 @@ var init_page_svx3 = __esm({
 <input type="${"number"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
 <input type="${"range"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
 <h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
-${each(Array(num), (_2, j) => {
-        return `<div>${escape(j + 1)}</div>
+${each(Array(num), (_2, j2) => {
+        return `<div>${escape(j2 + 1)}</div>
     ${each(equations, (eqn) => {
           return `<p class="${"p-1 text-red-400"}" d${add_attribute("m", eqn, 0)}></p>`;
         })}`;
@@ -26356,7 +27890,7 @@ var init_page_svelte9 = __esm({
               let o22 = "";
               return r22 && (o22 += r22), n3 && (o22 += `//${n3}`), o22 += i2 || "/", s22 && (o22 += s22), t3 && (o22 += t3), o22;
             }
-            function p(e32) {
+            function p2(e32) {
               let t3;
               t3 = e32.serverURL && e32.room ? new URL(e32.room, e32.serverURL).toString() : e32.room ? e32.room : e32.url || "";
               const n3 = u(l(t3));
@@ -26383,8 +27917,8 @@ var init_page_svelte9 = __esm({
               s22 && c22.set("jwt", s22);
               const { defaultLanguage: h2 } = e32.configOverwrite || {};
               (o22 || h2) && c22.set("lang", o22 || h2), a22 && c22.set("release", a22);
-              const p2 = c22.toString();
-              p2 && (n3.search = `?${p2}`);
+              const p22 = c22.toString();
+              p22 && (n3.search = `?${p22}`);
               let { hash: g22 } = n3;
               for (const t4 of [
                 "config",
@@ -26453,11 +27987,11 @@ var init_page_svelte9 = __esm({
                     destroy: function(e5) {
                       clearInterval(t3), l2 = false, r22 && "function" == typeof r22.removeEventListener && r22.removeEventListener("message", u2), e5 && e5();
                     }
-                  }, p2 = +new Date() + Math.random() + "";
+                  }, p22 = +new Date() + Math.random() + "";
                   return t3 = setInterval(function() {
-                    h2.send({ method: d22, params: p2 });
+                    h2.send({ method: d22, params: p22 });
                   }, 50), h2.listen(d22, function(e5) {
-                    if (e5 === p2) {
+                    if (e5 === p22) {
                       clearInterval(t3), l2 = true;
                       for (var n4 = 0; n4 < a22.length; n4++)
                         h2.send(a22[n4]);
@@ -26762,7 +28296,7 @@ var init_page_svelte9 = __esm({
                   }
                 }(n3), L22 = o2.getItem("jitsiLocalStorage");
                 this._parentNode = c22, this._url = function(e4) {
-                  return p({
+                  return p2({
                     ...arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
                     url: `https://${e4}/#jitsi_meet_external_api_id=${x2}`
                   });
@@ -27243,8 +28777,8 @@ var init_page_svelte9 = __esm({
                   if (u && "function" == typeof u) {
                     var h = [];
                     h.push(new Date().toISOString()), e32.id && h.push("[" + e32.id + "]"), a2 && a2.methodName.length > 1 && h.push("<" + a2.methodName + ">: ");
-                    var p = h.concat(o22);
-                    u.bind(d2).apply(d2, p);
+                    var p2 = h.concat(o22);
+                    u.bind(d2).apply(d2, p2);
                   }
                 }
             }
@@ -27378,7 +28912,7 @@ var init_page_svelte9 = __esm({
                 return t4;
               }(r22) : g2(r22, r22.length);
             }
-            function p(e32) {
+            function p2(e32) {
               var t3 = this._events;
               if (void 0 !== t3) {
                 var n3 = t3[e32];
@@ -27511,8 +29045,8 @@ var init_page_svelte9 = __esm({
             }, s3.prototype.rawListeners = function(e32) {
               return h(this, e32, false);
             }, s3.listenerCount = function(e32, t3) {
-              return "function" == typeof e32.listenerCount ? e32.listenerCount(t3) : p.call(e32, t3);
-            }, s3.prototype.listenerCount = p, s3.prototype.eventNames = function() {
+              return "function" == typeof e32.listenerCount ? e32.listenerCount(t3) : p2.call(e32, t3);
+            }, s3.prototype.listenerCount = p2, s3.prototype.eventNames = function() {
               return this._eventsCount > 0 ? t22(this._events) : [];
             };
           }
@@ -27570,8 +29104,8 @@ var init__15 = __esm({
     init_page();
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-6068c597.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-6068c597.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/navigation-fb61bc3d.js", "_app/immutable/chunks/singletons-52ba78bf.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js", "_app/immutable/chunks/_page-b7043975.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-22d11453.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-22d11453.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/navigation-8ccfde8a.js", "_app/immutable/chunks/singletons-e3b9dc57.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js", "_app/immutable/chunks/_page-b7043975.js"];
     stylesheets15 = [];
   }
 });
@@ -27618,9 +29152,158 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-f76c4d85.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-f76c4d85.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/navigation-fb61bc3d.js", "_app/immutable/chunks/singletons-52ba78bf.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-79de4847.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-79de4847.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/navigation-8ccfde8a.js", "_app/immutable/chunks/singletons-e3b9dc57.js"];
     stylesheets16 = [];
+  }
+});
+
+// node_modules/@firebase/functions/dist/index.esm2017.js
+function connectFunctionsEmulator$1(functionsInstance, host, port) {
+  functionsInstance.emulatorOrigin = `http://${host}:${port}`;
+}
+function registerFunctions(fetchImpl, variant) {
+  const factory = (container, { instanceIdentifier: regionOrCustomDomain }) => {
+    const app2 = container.getProvider("app").getImmediate();
+    const authProvider = container.getProvider(AUTH_INTERNAL_NAME);
+    const messagingProvider = container.getProvider(MESSAGING_INTERNAL_NAME);
+    const appCheckProvider = container.getProvider(APP_CHECK_INTERNAL_NAME);
+    return new FunctionsService(app2, authProvider, messagingProvider, appCheckProvider, regionOrCustomDomain, fetchImpl);
+  };
+  _registerComponent(new Component(FUNCTIONS_TYPE, factory, "PUBLIC").setMultipleInstances(true));
+  registerVersion(name4, version4, variant);
+  registerVersion(name4, version4, "esm2017");
+}
+function getFunctions(app2 = getApp(), regionOrCustomDomain = DEFAULT_REGION) {
+  const functionsProvider = _getProvider(getModularInstance(app2), FUNCTIONS_TYPE);
+  const functionsInstance = functionsProvider.getImmediate({
+    identifier: regionOrCustomDomain
+  });
+  const emulator = getDefaultEmulatorHostnameAndPort("functions");
+  if (emulator) {
+    connectFunctionsEmulator(functionsInstance, ...emulator);
+  }
+  return functionsInstance;
+}
+function connectFunctionsEmulator(functionsInstance, host, port) {
+  connectFunctionsEmulator$1(getModularInstance(functionsInstance), host, port);
+}
+var FUNCTIONS_TYPE, ContextProvider, DEFAULT_REGION, FunctionsService, name4, version4, AUTH_INTERNAL_NAME, APP_CHECK_INTERNAL_NAME, MESSAGING_INTERNAL_NAME;
+var init_index_esm20175 = __esm({
+  "node_modules/@firebase/functions/dist/index.esm2017.js"() {
+    init_index_esm20174();
+    init_index_esm2017();
+    init_index_esm20172();
+    FUNCTIONS_TYPE = "functions";
+    ContextProvider = class {
+      constructor(authProvider, messagingProvider, appCheckProvider) {
+        this.auth = null;
+        this.messaging = null;
+        this.appCheck = null;
+        this.auth = authProvider.getImmediate({ optional: true });
+        this.messaging = messagingProvider.getImmediate({
+          optional: true
+        });
+        if (!this.auth) {
+          authProvider.get().then((auth) => this.auth = auth, () => {
+          });
+        }
+        if (!this.messaging) {
+          messagingProvider.get().then((messaging) => this.messaging = messaging, () => {
+          });
+        }
+        if (!this.appCheck) {
+          appCheckProvider.get().then((appCheck) => this.appCheck = appCheck, () => {
+          });
+        }
+      }
+      async getAuthToken() {
+        if (!this.auth) {
+          return void 0;
+        }
+        try {
+          const token = await this.auth.getToken();
+          return token === null || token === void 0 ? void 0 : token.accessToken;
+        } catch (e3) {
+          return void 0;
+        }
+      }
+      async getMessagingToken() {
+        if (!this.messaging || !("Notification" in self) || Notification.permission !== "granted") {
+          return void 0;
+        }
+        try {
+          return await this.messaging.getToken();
+        } catch (e3) {
+          return void 0;
+        }
+      }
+      async getAppCheckToken() {
+        if (this.appCheck) {
+          const result = await this.appCheck.getToken();
+          if (result.error) {
+            return null;
+          }
+          return result.token;
+        }
+        return null;
+      }
+      async getContext() {
+        const authToken = await this.getAuthToken();
+        const messagingToken = await this.getMessagingToken();
+        const appCheckToken = await this.getAppCheckToken();
+        return { authToken, messagingToken, appCheckToken };
+      }
+    };
+    DEFAULT_REGION = "us-central1";
+    FunctionsService = class {
+      constructor(app2, authProvider, messagingProvider, appCheckProvider, regionOrCustomDomain = DEFAULT_REGION, fetchImpl) {
+        this.app = app2;
+        this.fetchImpl = fetchImpl;
+        this.emulatorOrigin = null;
+        this.contextProvider = new ContextProvider(authProvider, messagingProvider, appCheckProvider);
+        this.cancelAllRequests = new Promise((resolve) => {
+          this.deleteService = () => {
+            return Promise.resolve(resolve());
+          };
+        });
+        try {
+          const url = new URL(regionOrCustomDomain);
+          this.customDomain = url.origin;
+          this.region = DEFAULT_REGION;
+        } catch (e3) {
+          this.customDomain = null;
+          this.region = regionOrCustomDomain;
+        }
+      }
+      _delete() {
+        return this.deleteService();
+      }
+      _url(name5) {
+        const projectId = this.app.options.projectId;
+        if (this.emulatorOrigin !== null) {
+          const origin = this.emulatorOrigin;
+          return `${origin}/${projectId}/${this.region}/${name5}`;
+        }
+        if (this.customDomain !== null) {
+          return `${this.customDomain}/${name5}`;
+        }
+        return `https://${this.region}-${projectId}.cloudfunctions.net/${name5}`;
+      }
+    };
+    name4 = "@firebase/functions";
+    version4 = "0.8.7";
+    AUTH_INTERNAL_NAME = "auth-internal";
+    APP_CHECK_INTERNAL_NAME = "app-check-internal";
+    MESSAGING_INTERNAL_NAME = "messaging-internal";
+    registerFunctions(fetch.bind(self));
+  }
+});
+
+// node_modules/firebase/functions/dist/index.esm.js
+var init_index_esm5 = __esm({
+  "node_modules/firebase/functions/dist/index.esm.js"() {
+    init_index_esm20175();
   }
 });
 
@@ -27634,11 +29317,13 @@ var init_page_svelte11 = __esm({
   ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
     init_chunks();
     init_firebase();
+    init_index_esm5();
     css6 = {
       code: '.loading.svelte-tci3t6:after{content:" . . .";animation:svelte-tci3t6-dots 1s steps(5, end) infinite}@keyframes svelte-tci3t6-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
       map: null
     };
     Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      getFunctions(app);
       $$result.css.add(css6);
       return `${$$result.head += `<!-- HEAD_svelte-qn95fl_START -->${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}"><\/script><!-- HEAD_svelte-qn95fl_END -->`, ""}
 
@@ -27662,8 +29347,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-e20de427.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-e20de427.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/firebase-0942ef91.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-bb4a86c3.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-17284a12.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-17284a12.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/firebase-2afcabcb.js"];
     stylesheets17 = ["_app/immutable/assets/_page-5c304dd7.css"];
   }
 });
@@ -27945,7 +29630,7 @@ function stringify(value) {
   const stringified = [];
   const indexes = /* @__PURE__ */ new Map();
   const keys = [];
-  let p = 0;
+  let p2 = 0;
   function flatten(thing) {
     if (typeof thing === "function") {
       throw new DevalueError(`Cannot stringify a function`, keys);
@@ -27962,7 +29647,7 @@ function stringify(value) {
       return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0)
       return NEGATIVE_ZERO;
-    const index19 = p++;
+    const index19 = p2++;
     indexes.set(thing, index19);
     let str = "";
     if (is_primitive(thing)) {
@@ -29483,8 +31168,8 @@ async function render_page(event, route, page2, options, state, resolve_opts) {
             node,
             parent: async () => {
               const data = {};
-              for (let j = 0; j < i; j += 1) {
-                const parent = await server_promises[j];
+              for (let j2 = 0; j2 < i; j2 += 1) {
+                const parent = await server_promises[j2];
                 if (parent)
                   Object.assign(data, await parent.data);
               }
@@ -29509,8 +31194,8 @@ async function render_page(event, route, page2, options, state, resolve_opts) {
             node,
             parent: async () => {
               const data = {};
-              for (let j = 0; j < i; j += 1) {
-                Object.assign(data, await load_promises[j]);
+              for (let j2 = 0; j2 < i; j2 += 1) {
+                Object.assign(data, await load_promises[j2]);
               }
               return data;
             },
@@ -29525,11 +31210,11 @@ async function render_page(event, route, page2, options, state, resolve_opts) {
         }
       });
     });
-    for (const p of server_promises)
-      p.catch(() => {
+    for (const p2 of server_promises)
+      p2.catch(() => {
       });
-    for (const p of load_promises)
-      p.catch(() => {
+    for (const p2 of load_promises)
+      p2.catch(() => {
       });
     for (let i = 0; i < nodes.length; i += 1) {
       const node = nodes[i];
@@ -29559,9 +31244,9 @@ async function render_page(event, route, page2, options, state, resolve_opts) {
             if (page2.errors[i]) {
               const index18 = page2.errors[i];
               const node2 = await options.manifest._.nodes[index18]();
-              let j = i;
-              while (!branch[j])
-                j -= 1;
+              let j2 = i;
+              while (!branch[j2])
+                j2 -= 1;
               return await render_response({
                 event,
                 options,
@@ -29570,7 +31255,7 @@ async function render_page(event, route, page2, options, state, resolve_opts) {
                 page_config: { ssr: true, csr: true },
                 status: status2,
                 error: error2,
-                branch: compact(branch.slice(0, j + 1)).concat({
+                branch: compact(branch.slice(0, j2 + 1)).concat({
                   node: node2,
                   data: null,
                   server_data: null
@@ -29668,7 +31353,7 @@ async function render_data(event, route, options, state) {
       options.trailing_slash
     );
     const new_event = { ...event, url };
-    const functions3 = node_ids.map((n2, i) => {
+    const functions2 = node_ids.map((n2, i) => {
       return once(async () => {
         try {
           if (aborted) {
@@ -29683,8 +31368,8 @@ async function render_data(event, route, options, state) {
             node,
             parent: async () => {
               const data = {};
-              for (let j = 0; j < i; j += 1) {
-                const parent = await functions3[j]();
+              for (let j2 = 0; j2 < i; j2 += 1) {
+                const parent = await functions2[j2]();
                 if (parent) {
                   Object.assign(data, parent.data);
                 }
@@ -29698,7 +31383,7 @@ async function render_data(event, route, options, state) {
         }
       });
     });
-    const promises = functions3.map(async (fn2, i) => {
+    const promises = functions2.map(async (fn2, i) => {
       if (!invalidated[i]) {
         return {
           type: "skip"
@@ -29709,7 +31394,7 @@ async function render_data(event, route, options, state) {
     let length = promises.length;
     const nodes = await Promise.all(
       promises.map(
-        (p, i) => p.catch((error2) => {
+        (p2, i) => p2.catch((error2) => {
           if (error2 instanceof Redirect) {
             throw error2;
           }
@@ -29755,8 +31440,8 @@ function get_cookies(request, url) {
       if (c2 && domain_matches(url.hostname, c2.options.domain) && path_matches(url.pathname, c2.options.path)) {
         return c2.value;
       }
-      const decode2 = (opts == null ? void 0 : opts.decode) || decodeURIComponent;
-      const req_cookies = (0, import_cookie.parse)(header, { decode: decode2 });
+      const decode = (opts == null ? void 0 : opts.decode) || decodeURIComponent;
+      const req_cookies = (0, import_cookie.parse)(header, { decode });
       return req_cookies[name5];
     },
     set(name5, value, opts = {}) {
@@ -30292,7 +31977,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "star2.png"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".mp4": "video/mp4", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-e5bd72c7.js", "imports": ["_app/immutable/start-e5bd72c7.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/singletons-52ba78bf.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-cf1db0df.js", "imports": ["_app/immutable/start-cf1db0df.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/singletons-e3b9dc57.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
