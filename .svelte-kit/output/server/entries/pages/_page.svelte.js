@@ -188,7 +188,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
   <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
 
-      <div class="${"text-2xl font-Nunito "}">\u{1F449} click for reviews
+      <div class="${"text-2xl font-Nunito font-thin"}">\u{1F449} click for reviews
       </div></div></div>
 
   
