@@ -3,15 +3,7 @@
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArraySchools } from "$lib/plansCardArray.js";
-  // let ready = false;
-  // onMount(() => {
-  //   ready = true;
-  // });
 </script>
-
-<!-- <div class="font-Poppins text-center sm:text-7xl text-6xl pb-2  ">Plans</div> -->
-
-<!-- in:scale={{ duration: 1000, easing: elasticOut }} -->
 
 <div class="grid grid-cols-1 lg:grid-cols-2  p-7 ">
   {#each plansCardArraySchools as item, i}

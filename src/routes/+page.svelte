@@ -7,13 +7,8 @@
   import { isDarkMode } from "$lib/store.js";
   import Reviews from "$lib/Reviews.svelte";
   import { slide } from "svelte/transition";
-  // import { quintOut } from "svelte/easing";
 
   import { onMount } from "svelte";
-  // import { afterNavigate } from "$app/navigation";
-  // afterNavigate(() => {
-  //   window.localStorage.setItem("isDarkModeLS", $isDarkMode);
-  // });
 
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
@@ -21,34 +16,10 @@
 
   let ready = false;
 
-  // let vid;
-
   onMount(() => {
     ready = true;
-    // vid.play();
-    // console.log(
-    //   'window.localStorage.getItem("isDarkModeLS") == true:',
-    //   window.localStorage.getItem("isDarkModeLS") == "true"
-    // );
   });
 </script>
-
-<!-- <video
-  class=" absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
-    ? 'invert-[0.95] blur-3xl '
-    : 'blur-2xl'}"
-  autoplay="autoplay"
-  loop="loop"
-  muted
-  defaultMuted
-  playsinline
-  oncontextmenu="return false;"
-  preload="auto"
->
-  <source src="/login-bg-video-blurred.mp4" type="video/mp4" />
-</video> -->
-<!-- preload="auto" -->
-<!-- still not able to autoplay on mobile or safari  -->
 
 <video
   controlslist="nodownload"
@@ -62,13 +33,6 @@
   src="/login-bg-video-blurred.mp4"
 />
 
-<!-- </div> -->
-
-<!-- {#if ready}
-  <SixMathEqnAnim />
-{/if} -->
-
-<!-- grid incase i later want to reorganize "pages" responsively ... also footer kept interesecting with last page -->
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
   <!-- main page -->
   <div class="h-[60vh] flex justify-center items-center text-center">
@@ -79,7 +43,7 @@
           <span class={gradientTextColor}> ... Online! </span>
         </div>
       {/if}
-      <!-- <div class="text-6xl font-Poppins pb-4">We'll be back in October</div> -->
+
       <div
         class="text-2xl font-Nunito "
         on:click={() => {
@@ -141,7 +105,7 @@
   </div>
 
   <!-- fourth page -->
-  <!-- <div id="reviews" class=" md:pb-40"> -->
+
   <div id="reviews" class="mb-[200px] sm:mb-[500px]  duration-500 ">
     <p
       class="text-5xl font-Poppins text-center "

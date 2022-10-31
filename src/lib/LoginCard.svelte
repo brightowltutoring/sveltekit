@@ -15,17 +15,19 @@
     regexEmailChecker,
     magicLinkToEmail,
   } from "$lib/loginFunctions.js";
-  // import { db, auth } from "$lib/server/firebase.js";
-  import { db, auth } from "$lib/firebase.js";
+
+  import {
+    auth,
+    // db,
+  } from "$lib/firebase.js";
   import { collection, getDocs } from "firebase/firestore/lite";
   import {
     onAuthStateChanged,
-    // sendSignInLinkToEmail,
     isSignInWithEmailLink,
-    signInWithEmailLink,
+    // signInWithEmailLink,
   } from "firebase/auth";
-  import GoogleLogo from "$lib/GoogleLogo.svelte";
-  import EmailLogo from "$lib/EmailLogo.svelte";
+  import IconGoogle from "$lib/IconGoogle.svelte";
+  import IconEmail from "$lib/IconEmail.svelte";
 
   let emailFieldValue = "";
   let isEmail = false; // this global variable is updated with regex to verify email input
@@ -48,7 +50,7 @@
   }
 
   //  onmount
-  onMount(() => {
+  onMount(async () => {
     const logInDiv = document.querySelector(".logInDiv");
     const logOutDiv = document.querySelector(".logOutDiv");
     const loginWelcomeText = document.querySelector("#loginWelcomeText");
@@ -69,6 +71,7 @@
         email = window.prompt("Please provide your email for confirmation");
       }
 
+      const { signInWithEmailLink } = await import("firebase/auth");
       signInWithEmailLink(auth, email, window.location.href)
         .then(() => {
           window.localStorage.removeItem("emailForSignIn");
@@ -130,7 +133,7 @@
   }
 
   async function loginToRedirectUrl(userEmail) {
-    // const colRef = collection(db, "email");
+    const { db } = await import("$lib/firebase.js");
     const querySnapshot = await getDocs(collection(db, "email"));
     querySnapshot.forEach((doc) => {
       if (userEmail === doc.id) {
@@ -198,7 +201,6 @@
     : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto  min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300 group"
   style={`background:${$elementColor}`}
 >
-  <!-- <p class="text-5xl pb-10">Login</p> -->
   <div class="logInDiv p-5">
     <div
       on:click={GoogleLogin}
@@ -208,17 +210,10 @@
         ? 'group-hover:bg-opacity-90'
         : 'group-hover:bg-opacity-90'} text-xl text-white "
     >
-      <!-- google logo plus adjacent text  -->
       <signin-button class="flex justify-center items-center gap-5">
-        <GoogleLogo />
+        <IconGoogle />
         <span>Sign-in with Google</span>
       </signin-button>
-      <!-- <ul class="flex justify-center items-center gap-5">
-        <li>
-          <GoogleLogo />
-        </li>
-        <li>Sign-in with Google</li>
-      </ul> -->
     </div>
 
     <p class="py-5">or</p>
@@ -231,15 +226,9 @@
         : 'group-hover:bg-opacity-80'} text-xl text-white "
     >
       <signin-button class="flex justify-center items-center gap-5">
-        <EmailLogo />
+        <IconEmail />
         <span>Get Magic Link</span>
       </signin-button>
-      <!-- <ul class="flex justify-center items-center gap-5">
-        <li>
-          <EmailLogo />
-        </li>
-        <li>Get Magic Link</li>
-      </ul> -->
     </div>
 
     <input

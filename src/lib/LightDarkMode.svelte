@@ -8,9 +8,6 @@
   function toggleDM() {
     window.document.body.classList.toggle("dark-mode");
     $isDarkMode = !$isDarkMode;
-    // $isDarkMode
-    //   ? (document.documentElement.style.background = "black")
-    //   : (document.documentElement.style.background = "white");
   }
 </script>
 

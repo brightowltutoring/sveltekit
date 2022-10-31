@@ -1,6 +1,5 @@
 <script>
   import "../app.css";
-  // import JitsiUser from "$lib/JitsiUser.svelte";
 
   import PlansCardObserver from "$lib/PlansCardObserver.svelte";
   import Modal from "$lib/Modal.svelte";
@@ -14,33 +13,22 @@
     scrollY,
     windowInnerHeight,
     scrollYMax,
-    isLoggedIn,
     routes,
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
     isDarkMode,
-    // count,
+    // isLoggedIn,
   } from "$lib/store.js";
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
-  // import { browser } from "$app/env";
-  import { browser } from "$app/environment";
-  import { afterNavigate } from "$app/navigation";
-  import { claim_svg_element } from "svelte/internal";
-  afterNavigate(() => {
-    window.localStorage.setItem("isDarkModeLS", $isDarkMode);
-  });
-
-  // $: browser && window.localStorage.setItem("isDarkModeLS", $isDarkMode);
 
   function setScrollYMax() {
     $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
   }
   onMount(() => {
     setScrollYMax();
-    // count.useLocalStorage();
   });
 
   let jankytown;
@@ -75,8 +63,6 @@
 
 <PlansCardObserver />
 
-<!-- <SwitchToDarkMode /> -->
-
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -92,13 +78,6 @@
       <title>{$routes[key].title}</title>
     {/if}
   {/each}
-  <!-- {#each Object.keys($routes) as key}
-    {#if $page.routeId.slice(1) == ""}
-      <title>{$routes.home.title}</title>
-    {:else if $page.routeId.slice(1) == key}
-      <title>{$routes[key].title}</title>
-    {/if}
-  {/each} -->
 </svelte:head>
 
 <svelte:window
@@ -108,7 +87,6 @@
   on:resize={setScrollYMax}
   on:contextmenu={(event) => event.preventDefault()}
 />
-<!-- on:popstate={clearRedirectStuff} -->
 
 <!-- <main
   class={$isDarkMode
@@ -130,7 +108,6 @@
       brightnessTW={"brightness-95"}
     />
   </Modal>
-  <!-- TODO: temporarily stopping this to debug screenshare -->
 
   <!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->
 

@@ -1,36 +1,19 @@
-<!--TODO: for some reason have to add back external calendly js/css into head tag (below) or app breaks when leaving screenshare route, where this JitsiUser component is mounted-->
 <script>
-  console.log("jitsiUser component mounted");
-  import "$lib/jitsi_api.js";
-  import { browser, dev } from "$app/environment";
-  import { beforeNavigate, afterNavigate } from "$app/navigation";
-  import { onMount, onDestroy } from "svelte";
+  import "$lib/jitsi_api.js"; // contains JitsiMeetExternalAPI ..used to import via link
+  import { onMount } from "svelte";
+  import { goto } from "$app/navigation";
   import { lessThan768 } from "$lib/store.js";
-
-  // import { goto } from "$app/navigation";
-
-  async function loadJitsiExternal() {
-    const jitsiJS = document.createElement("script");
-    jitsiJS.src = "https://meet.jit.si/external_api.js";
-    jitsiJS.type = "text/javascript";
-    document.head.appendChild(jitsiJS);
-  }
 
   async function hangUpBtn() {
     await api.dispose();
-    setTimeout(() => {
-      // goto("/");
-      window.location.href = "/";
-    }, 0);
+    goto("/");
   }
 
-  let api;
-  let par;
+  let api, par;
   let domain = "meet.jit.si";
   let options = {
     roomName: "ThinkSolve12522",
-    // width: "100%",
-    // height: "740px",
+    // width: "100%", height: "740px",
     // parentNode: document.querySelector("#meet"),
     configOverwrite: {
       hideConferenceTimer: true,
@@ -96,87 +79,32 @@
       ],
     },
   };
-  // loadJitsiExternal();
-  // options.parentNode = await document.querySelector("#meet");
-  // (browser || dev) && (api = new JitsiMeetExternalAPI(domain, options));
-  // api = new JitsiMeetExternalAPI(domain, options);
 
-  // api.addEventListener("participantRoleChanged", function (event) {
-  //   par = [...api.getParticipantsInfo()];
-  // });
-
-  // api.addEventListener("participantRoleChanged", function (event) {
-  //   // leftwatermark = document.querySelector("div.leftwatermark");
-  //   par = [...api.getParticipantsInfo()];
-  //   // firstID = Object.values(par[0])[3];
-  //   // api.pinParticipant(firstID);
-  //   // alert(firstID);
-  //   // alert(par.length);
-  // });
-
-  // api.addEventListener("getNumberOfParticipants", () => {
-  //   console.log("hey");
-  // });
-
-  // jitsiStuff();
-  onMount(async () => {
+  onMount(() => {
     options.parentNode = document.querySelector("#meet"); // this options depends on the dom being created
 
     try {
-      // if (document.querySelector("#meet")) {
-      api = await new JitsiMeetExternalAPI("meet.jit.si", options);
+      api = new JitsiMeetExternalAPI(domain, options);
       api.addEventListener("participantRoleChanged", function (event) {
         par = [...api.getParticipantsInfo()];
       });
-      // }
+      // api.addEventListener("participantRoleChanged", function (event) {
+      //   // leftwatermark = document.querySelector("div.leftwatermark");
+      //   par = [...api.getParticipantsInfo()];
+      //   // firstID = Object.values(par[0])[3];
+      //   // api.pinParticipant(firstID);
+      //   // alert(firstID);
+      //   // alert(par.length);
+      // });
+
+      // api.addEventListener("getNumberOfParticipants", () => {
+      //   console.log("hey");
+      // });
     } catch (error) {
       console.log("onMount for JitsiMeetExternalAPI broken", error);
     }
   });
-  // afterNavigate(async () => {
-  //   await hangUpBtn();
-  // });
-
-  beforeNavigate(() => {
-    console.log("beforeNavigate from ....");
-    // api.dispose();
-    // setTimeout(() => {
-    //   location.reload();
-    // }, 100);
-  });
 </script>
-
-<!-- <svelte:body
-  on:load={() => {
-    api = new JitsiMeetExternalAPI(domain, options);
-    // await loadJitsiExternal();
-    jitsiStuff();
-  }}
-/> -->
-
-<!-- <svelte:head>
-  <script
-    async
-    src="https://meet.jit.si/external_api.js"
-    onload={console.log("jitsi external api loaded")}
-  >
-  </script>
-</svelte:head> -->
-
-<!--TODO: for some reason have to add back external calendly or app breaks when leaving screenshare route, where this JitsiUser component is mounted-->
-<!-- <svelte:head>
-  <script src="https://meet.jit.si/external_api.js"></script>
-
-  <link
-    href="https://assets.calendly.com/assets/external/widget.css"
-    rel="stylesheet"
-  />
-  <script
-    src="https://assets.calendly.com/assets/external/widget.js"
-    type="text/javascript"
-    async
-  ></script>
-</svelte:head> -->
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">
   <div id="meet" class="w-full h-[95vh] md:h-[670px] peer" />

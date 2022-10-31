@@ -16,8 +16,8 @@
 
   onMount(() => {
     // TODO: WOW!! without this existence check app kept crashing
-    if (document.querySelector(".plansCard")) {
-      const plansCard = document.querySelector(".plansCard");
+    if (document.querySelector("plans-card")) {
+      const plansCard = document.querySelector("plans-card");
       const options = {
         root: null,
         threshold: 0,

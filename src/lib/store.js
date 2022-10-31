@@ -157,6 +157,12 @@ export const routes = writable({
     title: "Screenshare 🖥",
     isCurrent: false,
   },
+  // screenshareA: {
+  //   name: "ScreenshareA",
+  //   href: "/screenshareA",
+  //   title: "ScreenshareA 🖥",
+  //   isCurrent: false,
+  // },
   homework: {
     name: "Homework",
     href: "/homework",
