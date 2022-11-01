@@ -81,7 +81,7 @@
   };
 
   onMount(() => {
-    options.parentNode = document.querySelector("#meet"); // this options depends on the dom being created
+    options.parentNode = document.querySelector("#meet"); // this option depends on the dom being created
 
     try {
       api = new JitsiMeetExternalAPI(domain, options);
@@ -107,6 +107,22 @@
 </script>
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">
+  <div id="meet" class="w-full h-[95vh] md:h-[670px] " />
+  <!-- <div id="meet" class="w-full h-[95vh] md:h-[670px]" /> -->
+
+  <img
+    on:click={hangUpBtn}
+    on:keydown={hangUpBtn}
+    alt="hangup button"
+    class="absolute bg-gray-600 p-2 brightness-50 {!par &&
+      'opacity-0'} {$lessThan768
+      ? 'top-5 right-5 '
+      : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/phone.svg')] hover:bg-red-500 rotate-90  hover:scale-[1.5] hover:rotate-0 transition-transform duration-100"
+  />
+</div>
+
+<!-- version: oct 31, 2022 -->
+<!-- <div class="relative md:-translate-y-10 -translate-y-32 ">
   <div id="meet" class="w-full h-[95vh] md:h-[670px] peer" />
 
   <img
@@ -118,4 +134,4 @@
       ? 'top-5 right-5 '
       : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0  hover:bg-red-500"
   />
-</div>
+</div> -->

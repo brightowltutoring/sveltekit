@@ -102,7 +102,7 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
       <span>Get Magic Link</span></signin-button>
     
 
-    <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true)}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
+    <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
 
     <span id="${"emailStatusMessage"}"></span>
 

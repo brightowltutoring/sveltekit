@@ -190,10 +190,16 @@
   //  Hoisted functions
 </script>
 
-<card
+<!-- <card
   class="hover:scale-[102%] font-Poppins shadow-md {$isDarkMode
     ? 'hover:shadow-xl '
     : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto  min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300 group"
+  style={`background:${$elementColor}`}
+> -->
+<card
+  class="hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
+    ? 'hover:shadow-xl '
+    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto  min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300 "
   style={`background:${$elementColor}`}
 >
   <div class="logInDiv p-5">
@@ -207,11 +213,13 @@
     <signin-button
       id="passwordlessLoginBtn"
       in:scale={{ duration: 600, easing: elasticOut }}
-      class=" bg-red-400   hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+      class="group bg-red-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-80'
         : 'group-hover:bg-opacity-80'} text-xl text-white flex justify-center items-center gap-5"
     >
-      <IconEmail />
+      <span class="group-hover:scale-[1.15] duration-500">
+        <IconEmail />
+      </span>
       <span>Get Magic Link</span>
     </signin-button>
     <!-- </div> -->
@@ -240,11 +248,13 @@
       on:click={GoogleLogin}
       on:keydown={GoogleLogin}
       in:scale={{ duration: 600, easing: elasticOut }}
-      class=" mb-6  bg-[#4285f4]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+      class="group mb-6  bg-[#4285f4]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-90'
         : 'group-hover:bg-opacity-90'} text-xl text-white  flex justify-center items-center gap-5"
     >
-      <IconGoogle />
+      <span class="group-hover:scale-[1.15] duration-500">
+        <IconGoogle />
+      </span>
       <span>Sign-in with Google</span>
     </signin-button>
     <!-- </div> -->
@@ -261,11 +271,13 @@
       on:click={TwitterLogin}
       on:keydown={TwitterLogin}
       in:scale={{ duration: 600, easing: elasticOut }}
-      class="   bg-[#1d9bf0]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
+      class=" group bg-[#1d9bf0]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-90'
         : 'group-hover:bg-opacity-90'} text-xl text-white  flex justify-center items-center gap-5"
     >
-      <IconTwitter />
+      <span class="group-hover:scale-[1.15] duration-500">
+        <IconTwitter />
+      </span>
       <span>Sign-in with Twitter</span>
     </signin-button>
     <!-- </div> -->
