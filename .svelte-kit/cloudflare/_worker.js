@@ -12399,11 +12399,11 @@ var init_layout_svelte = __esm({
     LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let shortPing;
       let $navLoginClicked, $$unsubscribe_navLoginClicked;
-      let $$unsubscribe_isLoggedIn;
+      let $isLoggedIn, $$unsubscribe_isLoggedIn;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       let $elementColor, $$unsubscribe_elementColor;
       $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
-      $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
+      $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
       let emailFieldValue = "";
@@ -12411,84 +12411,106 @@ var init_layout_svelte = __esm({
       let loggedInEmail;
       let redirectAfterLoginTimeOut;
       let redirectSetInterval;
-      async function loginToRedirectUrl(userEmail) {
-        const { getFirestore, collection, getDocs } = await Promise.resolve().then(() => (init_index_esm4(), index_esm_exports));
-        const db = getFirestore(app);
-        const querySnapshot = await getDocs(collection(db, "email"));
-        querySnapshot.forEach((doc) => {
-          if (userEmail === doc.id) {
-            let redirectTimeInMS = 3e3;
-            let seconds = parseInt(redirectTimeInMS / 1e3);
-            let userRedirectUrl = "/";
-            console.log(`A match! ${doc.id} => ${userRedirectUrl}`);
-            redirectSetInterval = setInterval(
-              () => {
-                if (seconds > 0) {
-                  seconds += -1;
-                  document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
-                }
-              },
-              1e3
-            );
-            redirectAfterLoginTimeOut = setTimeout(
-              () => {
-                set_store_value(navLoginClicked, $navLoginClicked = false, $navLoginClicked);
-                document.getElementById("timeLeft").innerHTML = 3;
-                goto(userRedirectUrl);
-              },
-              redirectTimeInMS
-            );
+      function redirectLogic(userRedirectUrl = "/login") {
+        let redirectTimeInMS = 3e3;
+        let seconds = parseInt(redirectTimeInMS / 1e3);
+        redirectSetInterval = setInterval(
+          () => {
+            if (seconds > 0) {
+              seconds += -1;
+              document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
+            }
+          },
+          1e3
+        );
+        redirectAfterLoginTimeOut = setTimeout(
+          () => {
+            set_store_value(navLoginClicked, $navLoginClicked = false, $navLoginClicked);
+            document.getElementById("timeLeft").innerHTML = 3;
+            goto(userRedirectUrl);
+          },
+          redirectTimeInMS
+        );
+      }
+      async function navLoginClickedRedirect(userEmail) {
+        let redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+        console.log("redirectUrlFromLS", redirectUrlFromLS);
+        if (redirectUrlFromLS) {
+          redirectLogic(redirectUrlFromLS);
+        } else {
+          const { getFirestore, collection, getDocs } = await Promise.resolve().then(() => (init_index_esm4(), index_esm_exports));
+          const db = getFirestore(app);
+          const querySnapshot = await getDocs(collection(db, "email"));
+          const querySnapshotSize = querySnapshot.size;
+          const docs = querySnapshot.docs;
+          for (const i in docs) {
+            const doc = docs[i];
+            if (userEmail === doc.id) {
+              localStorage.setItem("redirectUrlFromLS", doc.data().redirectUrl);
+              redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+              redirectLogic(redirectUrlFromLS);
+              return;
+            }
+            if (parseInt(i) === querySnapshotSize - 1) {
+              localStorage.setItem("redirectUrlFromLS", "/");
+              redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+              redirectLogic(redirectUrlFromLS);
+            }
           }
-        });
+        }
       }
       shortPing = emptyEmailInputAnimated;
       {
-        if ($navLoginClicked == false) {
+        if (!$navLoginClicked) {
           clearInterval(redirectSetInterval);
           clearTimeout(redirectAfterLoginTimeOut);
         }
       }
       {
         if ($navLoginClicked) {
-          loginToRedirectUrl(loggedInEmail);
+          console.log("$navLoginClicked", $navLoginClicked);
+        }
+      }
+      {
+        if ($navLoginClicked && $isLoggedIn) {
+          navLoginClickedRedirect(loggedInEmail);
         }
       }
       $$unsubscribe_navLoginClicked();
       $$unsubscribe_isLoggedIn();
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
-      return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><div class="${"logInDiv p-5"}">
-    <signin-button id="${"passwordlessLoginBtn"}" class="${"bg-red-400 hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+      return `
+
+
+<card class="${"hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300"}"${add_attribute("style", `background:${$elementColor}`, 0)}><div class="${"logInDiv p-5"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
         true
-      ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}
+      ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
       <span>Get Magic Link</span></signin-button>
-    
 
     <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
 
     <span id="${"emailStatusMessage"}"></span>
 
     <p class="${"py-5"}">or</p>
-    
-    <signin-button class="${"mb-6 bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
-        true
-      ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}
-      <span>Sign-in with Google</span></signin-button>
-    
 
-    
-    <signin-button class="${"bg-[#1d9bf0] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+    <signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
         true
-      ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}
-      <span>Sign-in with Twitter</span></signin-button>
-    </div>
+      ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
+      <span>Sign-in with Google</span></signin-button>
+
+    <signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
+        true
+      ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
+      <span>Sign-in with Twitter</span></signin-button></div>
 
   <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
     <div id="${"redirectMessage"}">Redirecting to your page in
       <div style="${"font-size: 30px;"}" id="${"timeLeft"}">\u230A\u03C0\u230B</div></div>
+
     <button id="${"logoutBtn"}">Logout</button></div></card>`;
     });
     IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -12805,9 +12827,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-467106ad.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-467106ad.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/PlansCardObserver-a59a4974.js", "_app/immutable/chunks/Dropzone-90bbc3c0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-6932e18f.js", "_app/immutable/chunks/singletons-b17ac08a.js", "_app/immutable/chunks/firebase-2afcabcb.js"];
-    stylesheets = ["_app/immutable/assets/_layout-de68cee3.css", "_app/immutable/assets/Dropzone-cce97800.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-a942a86d.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-a942a86d.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/PlansCardObserver-a59a4974.js", "_app/immutable/chunks/Dropzone-90bbc3c0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/index-bb4a86c3.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-16e0d424.js", "_app/immutable/chunks/singletons-b83708c3.js", "_app/immutable/chunks/firebase-2afcabcb.js"];
+    stylesheets = ["_app/immutable/assets/_layout-fa619fe9.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
 
@@ -29087,9 +29109,13 @@ var init_page_svelte9 = __esm({
       let $lessThan768, $$unsubscribe_lessThan768;
       $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
       $$unsubscribe_lessThan768();
-      return `<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px] peer"}"></div>
+      return `<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px] "}"></div>
+  
 
-  <img alt="${"hangup button"}" class="${"bg-gray-600 p-2 absolute brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0 hover:bg-red-500"}"></div>`;
+  <img alt="${"hangup button"}" class="${"absolute bg-gray-600 p-2 brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] hover:bg-red-500 rotate-90 hover:scale-[1.5] hover:rotate-0 transition-transform duration-100"}"></div>
+
+
+`;
     });
     Page13 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -29120,8 +29146,8 @@ var init__15 = __esm({
     init_page();
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-8c896660.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-8c896660.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/navigation-6932e18f.js", "_app/immutable/chunks/singletons-b17ac08a.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js", "_app/immutable/chunks/_page-b7043975.js"];
+    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-2b4c52f8.js";
+    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-2b4c52f8.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/navigation-16e0d424.js", "_app/immutable/chunks/singletons-b83708c3.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js", "_app/immutable/chunks/_page-b7043975.js"];
     stylesheets15 = [];
   }
 });
@@ -29168,8 +29194,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-a764f55e.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-a764f55e.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/navigation-6932e18f.js", "_app/immutable/chunks/singletons-b17ac08a.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-b9c63c2a.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-b9c63c2a.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/store-51cc123c.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/navigation-16e0d424.js", "_app/immutable/chunks/singletons-b83708c3.js"];
     stylesheets16 = [];
   }
 });
@@ -31993,7 +32019,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-b03d5a7e.js", "imports": ["_app/immutable/start-b03d5a7e.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/singletons-b17ac08a.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-c100fb93.js", "imports": ["_app/immutable/start-c100fb93.js", "_app/immutable/chunks/index-2ea15190.js", "_app/immutable/chunks/singletons-b83708c3.js", "_app/immutable/chunks/index-b2a33226.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -36,11 +36,11 @@ const IconTwitter = create_ssr_component(($$result, $$props, $$bindings, slots) 
 const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let shortPing;
   let $navLoginClicked, $$unsubscribe_navLoginClicked;
-  let $$unsubscribe_isLoggedIn;
+  let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $elementColor, $$unsubscribe_elementColor;
   $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
-  $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => value);
+  $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
   let emailFieldValue = "";
@@ -48,84 +48,106 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   let loggedInEmail;
   let redirectAfterLoginTimeOut;
   let redirectSetInterval;
-  async function loginToRedirectUrl(userEmail) {
-    const { getFirestore, collection, getDocs } = await import("firebase/firestore/lite");
-    const db = getFirestore(app$1);
-    const querySnapshot = await getDocs(collection(db, "email"));
-    querySnapshot.forEach((doc) => {
-      if (userEmail === doc.id) {
-        let redirectTimeInMS = 3e3;
-        let seconds = parseInt(redirectTimeInMS / 1e3);
-        let userRedirectUrl = "/";
-        console.log(`A match! ${doc.id} => ${userRedirectUrl}`);
-        redirectSetInterval = setInterval(
-          () => {
-            if (seconds > 0) {
-              seconds += -1;
-              document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
-            }
-          },
-          1e3
-        );
-        redirectAfterLoginTimeOut = setTimeout(
-          () => {
-            set_store_value(navLoginClicked, $navLoginClicked = false, $navLoginClicked);
-            document.getElementById("timeLeft").innerHTML = 3;
-            goto(userRedirectUrl);
-          },
-          redirectTimeInMS
-        );
+  function redirectLogic(userRedirectUrl = "/login") {
+    let redirectTimeInMS = 3e3;
+    let seconds = parseInt(redirectTimeInMS / 1e3);
+    redirectSetInterval = setInterval(
+      () => {
+        if (seconds > 0) {
+          seconds += -1;
+          document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
+        }
+      },
+      1e3
+    );
+    redirectAfterLoginTimeOut = setTimeout(
+      () => {
+        set_store_value(navLoginClicked, $navLoginClicked = false, $navLoginClicked);
+        document.getElementById("timeLeft").innerHTML = 3;
+        goto(userRedirectUrl);
+      },
+      redirectTimeInMS
+    );
+  }
+  async function navLoginClickedRedirect(userEmail) {
+    let redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+    console.log("redirectUrlFromLS", redirectUrlFromLS);
+    if (redirectUrlFromLS) {
+      redirectLogic(redirectUrlFromLS);
+    } else {
+      const { getFirestore, collection, getDocs } = await import("firebase/firestore/lite");
+      const db = getFirestore(app$1);
+      const querySnapshot = await getDocs(collection(db, "email"));
+      const querySnapshotSize = querySnapshot.size;
+      const docs = querySnapshot.docs;
+      for (const i in docs) {
+        const doc = docs[i];
+        if (userEmail === doc.id) {
+          localStorage.setItem("redirectUrlFromLS", doc.data().redirectUrl);
+          redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+          redirectLogic(redirectUrlFromLS);
+          return;
+        }
+        if (parseInt(i) === querySnapshotSize - 1) {
+          localStorage.setItem("redirectUrlFromLS", "/");
+          redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+          redirectLogic(redirectUrlFromLS);
+        }
       }
-    });
+    }
   }
   shortPing = emptyEmailInputAnimated;
   {
-    if ($navLoginClicked == false) {
+    if (!$navLoginClicked) {
       clearInterval(redirectSetInterval);
       clearTimeout(redirectAfterLoginTimeOut);
     }
   }
   {
     if ($navLoginClicked) {
-      loginToRedirectUrl(loggedInEmail);
+      console.log("$navLoginClicked", $navLoginClicked);
+    }
+  }
+  {
+    if ($navLoginClicked && $isLoggedIn) {
+      navLoginClickedRedirect(loggedInEmail);
     }
   }
   $$unsubscribe_navLoginClicked();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_isDarkMode();
   $$unsubscribe_elementColor();
-  return `<card class="${"hover:scale-[102%] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><div class="${"logInDiv p-5"}">
-    <signin-button id="${"passwordlessLoginBtn"}" class="${"bg-red-400 hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+  return `
+
+
+<card class="${"hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300"}"${add_attribute("style", `background:${$elementColor}`, 0)}><div class="${"logInDiv p-5"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
-  ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}
+  ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
       <span>Get Magic Link</span></signin-button>
-    
 
     <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
 
     <span id="${"emailStatusMessage"}"></span>
 
     <p class="${"py-5"}">or</p>
-    
-    <signin-button class="${"mb-6 bg-[#4285f4] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
-    $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
-    true
-  ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}
-      <span>Sign-in with Google</span></signin-button>
-    
 
-    
-    <signin-button class="${"bg-[#1d9bf0] hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 " + escape(
+    <signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
     true
-  ) + " text-xl text-white flex justify-center items-center gap-5"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}
-      <span>Sign-in with Twitter</span></signin-button>
-    </div>
+  ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
+      <span>Sign-in with Google</span></signin-button>
+
+    <signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
+    $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
+    true
+  ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
+      <span>Sign-in with Twitter</span></signin-button></div>
 
   <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
     <div id="${"redirectMessage"}">Redirecting to your page in
       <div style="${"font-size: 30px;"}" id="${"timeLeft"}">\u230A\u03C0\u230B</div></div>
+
     <button id="${"logoutBtn"}">Logout</button></div></card>`;
 });
 const IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {

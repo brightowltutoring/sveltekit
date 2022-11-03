@@ -1,3 +1,4 @@
+<!-- TODO: find nicer way to deal with logincard logic .. -->
 <script>
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
@@ -38,12 +39,22 @@
   let redirectAfterLoginTimeOut;
   let redirectSetInterval;
 
-  $: if ($navLoginClicked == false) {
+  // !$navLoginClicked just means when unclicking login button ... rename at a future date?
+  $: if (!$navLoginClicked) {
     clearInterval(redirectSetInterval);
     clearTimeout(redirectAfterLoginTimeOut);
   }
 
+  // $: if ($navLoginClicked) {
+  //   console.log("$navLoginClicked", $navLoginClicked);
+  // }
+
+  $: if ($navLoginClicked && $isLoggedIn) {
+    navLoginClickedRedirect(loggedInEmail);
+  }
+
   onMount(async () => {
+    $navLoginClicked = false;
     const logInDiv = document.querySelector(".logInDiv");
     const logOutDiv = document.querySelector(".logOutDiv");
     const loginWelcomeText = document.querySelector("#loginWelcomeText");
@@ -68,19 +79,21 @@
           window.localStorage.removeItem("emailForSignIn");
           $navLoginClicked = true;
         })
-        .catch((error) => console.log(error));
-      /* Clear email from storage or throw error.*/
+        .catch((error) => console.log("signInWithEmailLink:", error));
     }
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        // let providerId = user.providerData[0].providerId; // TODO: have to check this or email
+        // console.log("providerId", providerId);
         $isLoggedIn = true;
         loggedInEmail = user.email;
         // get the loggedInEmail IF user is authenticated; outside logic determines redirect when login nav item clicked
 
-        // loginToRedirectUrl(user.email);
+        // navLoginClickedRedirect(user.email);
+        // navLoginClickedRedirect(loggedInEmail);
 
-        console.log(`User is signed in! YEET`);
+        console.log(`User is signed in!`);
 
         logInDiv.style.display = "none";
         logOutDiv.style.display = "block";
@@ -89,6 +102,7 @@
           ? `Hey ${user.displayName}!`
           : `Hey ${user.email}!`;
       } else {
+        localStorage.removeItem("redirectUrlFromLS"); // clears on logout only; local storage keeps it even if page refreshes!
         $isLoggedIn = false;
         $navLoginClicked = false;
         loggedInEmail = "";
@@ -100,10 +114,6 @@
     });
   });
 
-  $: if ($navLoginClicked) {
-    loginToRedirectUrl(loggedInEmail);
-    // loginToRedirectUrl(user.email);
-  }
   //  Hoisted Functions
 
   function onInputEmailField(EMAIL) {
@@ -123,39 +133,58 @@
     }
   }
 
-  async function loginToRedirectUrl(userEmail) {
-    const { getFirestore, collection, getDocs } = await import(
-      "firebase/firestore/lite"
-    );
-    const db = getFirestore(app);
-    // const { db } = await import("$lib/firebase.js");
-    const querySnapshot = await getDocs(collection(db, "email"));
-    querySnapshot.forEach((doc) => {
-      if (userEmail === doc.id) {
-        // TODO: maybe make this global
-        let redirectTimeInMS = 3000;
-        let seconds = parseInt(redirectTimeInMS / 1000); // i.e. 3
-        // let userRedirectUrl =  doc.data().redirectUrl; /TODO: change this later in firebase
-        let userRedirectUrl = "/";
+  // this function needs to detect logout too to reset store
+  function redirectLogic(userRedirectUrl = "/login") {
+    let redirectTimeInMS = 3000;
+    let seconds = parseInt(redirectTimeInMS / 1000); // i.e. 3
 
-        console.log(`A match! ${doc.id} => ${userRedirectUrl}`);
+    // redirectSetInterval and redirectAfterLoginTimeOut are global variables, the state of which is also controlled above via a reactive statement
 
-        // redirect after login
-        redirectSetInterval = setInterval(() => {
-          if (seconds > 0) {
-            seconds += -1;
-            document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
-          }
-        }, 1000);
-
-        // make this a global variable so I can cancel it elsewhere .. i.e. on route changes
-        redirectAfterLoginTimeOut = setTimeout(() => {
-          $navLoginClicked = false;
-          document.getElementById("timeLeft").innerHTML = 3;
-          goto(userRedirectUrl);
-        }, redirectTimeInMS);
+    redirectSetInterval = setInterval(() => {
+      if (seconds > 0) {
+        seconds += -1;
+        document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
       }
-    });
+    }, 1000);
+
+    redirectAfterLoginTimeOut = setTimeout(() => {
+      $navLoginClicked = false;
+      document.getElementById("timeLeft").innerHTML = 3;
+      goto(userRedirectUrl);
+    }, redirectTimeInMS);
+  }
+
+  async function navLoginClickedRedirect(userEmail) {
+    let redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+    console.log("redirectUrlFromLS", redirectUrlFromLS);
+
+    if (redirectUrlFromLS) {
+      redirectLogic(redirectUrlFromLS);
+    } else {
+      const { getFirestore, collection, getDocs } = await import(
+        "firebase/firestore/lite"
+      );
+      const db = getFirestore(app);
+      const querySnapshot = await getDocs(collection(db, "email"));
+      const querySnapshotSize = querySnapshot.size;
+      const docs = querySnapshot.docs; // forEach can use querySnapshot directly, however 'break' logic becomes convoluted with try-catch block and throwing 'BreakException={}' (see: https://stackoverflow.com/questions/2641347/short-circuit-array-foreach-like-calling-break)
+      for (const i in docs) {
+        const doc = docs[i];
+
+        if (userEmail === doc.id) {
+          localStorage.setItem("redirectUrlFromLS", doc.data().redirectUrl);
+          redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+          redirectLogic(redirectUrlFromLS);
+          return; // break;
+        }
+        // without parseInt(i) this math conditional breaks
+        if (parseInt(i) === querySnapshotSize - 1) {
+          localStorage.setItem("redirectUrlFromLS", "/");
+          redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+          redirectLogic(redirectUrlFromLS);
+        }
+      }
+    }
   }
 
   function signinWithLinkAndStop(e) {
@@ -186,16 +215,8 @@
       passwordlessLoginBtn.style.pointerEvents = "none";
     }
   }
-
-  //  Hoisted functions
 </script>
 
-<!-- <card
-  class="hover:scale-[102%] font-Poppins shadow-md {$isDarkMode
-    ? 'hover:shadow-xl '
-    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto  min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300 group"
-  style={`background:${$elementColor}`}
-> -->
 <card
   class="hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
     ? 'hover:shadow-xl '
@@ -203,13 +224,6 @@
   style={`background:${$elementColor}`}
 >
   <div class="logInDiv p-5">
-    <!-- <div
-      id="passwordlessLoginBtn"
-      in:scale={{ duration: 600, easing: elasticOut }}
-      class=" bg-red-400   hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-80'
-        : 'group-hover:bg-opacity-80'} text-xl text-white "
-    > -->
     <signin-button
       id="passwordlessLoginBtn"
       in:scale={{ duration: 600, easing: elasticOut }}
@@ -222,7 +236,6 @@
       </span>
       <span>Get Magic Link</span>
     </signin-button>
-    <!-- </div> -->
 
     <input
       on:keyup={onInputEmailField(emailFieldValue)}
@@ -236,14 +249,7 @@
     <span id="emailStatusMessage" />
 
     <p class="py-5">or</p>
-    <!-- <div
-      on:click={GoogleLogin}
-      on:keydown={GoogleLogin}
-      in:scale={{ duration: 600, easing: elasticOut }}
-      class="   bg-[#4285f4]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'} text-xl text-white "
-    > -->
+
     <signin-button
       on:click={GoogleLogin}
       on:keydown={GoogleLogin}
@@ -257,16 +263,7 @@
       </span>
       <span>Sign-in with Google</span>
     </signin-button>
-    <!-- </div> -->
 
-    <!-- <div
-      on:click={TwitterLogin}
-      on:keydown={TwitterLogin}
-      in:scale={{ duration: 600, easing: elasticOut }}
-      class="   bg-[#1d9bf0]  hover:shadow-md hover:scale-105 duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'} text-xl text-white "
-    > -->
     <signin-button
       on:click={TwitterLogin}
       on:keydown={TwitterLogin}
@@ -280,7 +277,6 @@
       </span>
       <span>Sign-in with Twitter</span>
     </signin-button>
-    <!-- </div> -->
   </div>
 
   <div class="logOutDiv" style="display:none">
@@ -289,6 +285,7 @@
       Redirecting to your page in
       <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
     </div>
+
     <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
   </div>
 </card>
