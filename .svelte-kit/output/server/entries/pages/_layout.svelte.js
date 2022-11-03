@@ -104,11 +104,6 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     }
   }
   {
-    if ($navLoginClicked) {
-      console.log("$navLoginClicked", $navLoginClicked);
-    }
-  }
-  {
     if ($navLoginClicked && $isLoggedIn) {
       navLoginClickedRedirect(loggedInEmail);
     }

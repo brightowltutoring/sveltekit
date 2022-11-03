@@ -71,9 +71,16 @@
     rel="stylesheet"
   /> -->
 
+  <!-- should show up once each!! -->
   {#each Object.keys($routes) as key}
-    {#if $page.routeId == "/"}
+    {#if $page.routeId == "/" && key == "home"}
       <title>{$routes.home.title}</title>
+      <meta
+        name="description"
+        content="Math and Physics Tutoring for the Modern Age."
+      />
+      <meta og:url="https://thinksolve.io/" />
+      <!-- <meta name="image" content="LOGO" /> -->
     {:else if $page.routeId == `/${key}`}
       <title>{$routes[key].title}</title>
     {/if}

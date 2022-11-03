@@ -2,7 +2,7 @@ import * as shared from '../entries/pages/screenshare/_page.js';
 
 export const index = 14;
 export const component = async () => (await import('../entries/pages/screenshare/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/screenshare/_page.svelte-2b4c52f8.js';
+export const file = '_app/immutable/components/pages/screenshare/_page.svelte-75c0b60f.js';
 export { shared };
-export const imports = ["_app/immutable/components/pages/screenshare/_page.svelte-2b4c52f8.js","_app/immutable/chunks/index-2ea15190.js","_app/immutable/chunks/navigation-16e0d424.js","_app/immutable/chunks/singletons-b83708c3.js","_app/immutable/chunks/index-b2a33226.js","_app/immutable/chunks/store-51cc123c.js","_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js","_app/immutable/chunks/_page-b7043975.js"];
+export const imports = ["_app/immutable/components/pages/screenshare/_page.svelte-75c0b60f.js","_app/immutable/chunks/index-2ea15190.js","_app/immutable/chunks/navigation-5e04613c.js","_app/immutable/chunks/singletons-be4b1d53.js","_app/immutable/chunks/index-b2a33226.js","_app/immutable/chunks/store-51cc123c.js","_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js","_app/immutable/chunks/_page-b7043975.js"];
 export const stylesheets = [];
