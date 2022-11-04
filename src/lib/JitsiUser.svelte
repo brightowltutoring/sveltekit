@@ -85,6 +85,7 @@
 
     try {
       api = new JitsiMeetExternalAPI(domain, options);
+
       api.addEventListener("participantRoleChanged", function (event) {
         par = [...api.getParticipantsInfo()];
       });
@@ -122,6 +123,7 @@
 </div>
 
 <!-- version: oct 31, 2022 -->
+
 <!-- <div class="relative md:-translate-y-10 -translate-y-32 ">
   <div id="meet" class="w-full h-[95vh] md:h-[670px] peer" />
 

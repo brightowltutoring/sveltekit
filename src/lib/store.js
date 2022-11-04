@@ -161,13 +161,13 @@ export const routes = writable({
   plans: {
     name: "Plans",
     href: "/plans",
-    title: "Plans 🍎",
+    title: "Plans 💡",
     isCurrent: false,
   },
-  screenshare: {
-    name: "Screenshare",
-    href: "/screenshare",
-    title: "Screenshare 🖥",
+  classroom: {
+    name: "Classroom",
+    href: "/classroom",
+    title: "Classroom 🍎",
     isCurrent: false,
   },
   // screenshareA: {
@@ -179,13 +179,13 @@ export const routes = writable({
   homework: {
     name: "Homework",
     href: "/homework",
-    title: "Homework",
+    title: "Homework 📚",
     isCurrent: false,
   },
   schools: {
     name: "Schools",
     href: "/schools",
-    title: "Schools 📚",
+    title: "Schools",
     isCurrent: false,
   },
   stripe: {

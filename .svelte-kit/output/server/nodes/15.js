@@ -2,6 +2,6 @@
 
 export const index = 15;
 export const component = async () => (await import('../entries/pages/screenshareA/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/screenshareA/_page.svelte-75eda2ba.js';
-export const imports = ["_app/immutable/components/pages/screenshareA/_page.svelte-75eda2ba.js","_app/immutable/chunks/index-2ea15190.js","_app/immutable/chunks/store-51cc123c.js","_app/immutable/chunks/index-b2a33226.js","_app/immutable/chunks/navigation-629854d9.js","_app/immutable/chunks/singletons-aed54e3c.js"];
+export const file = '_app/immutable/components/pages/screenshareA/_page.svelte-545f74e9.js';
+export const imports = ["_app/immutable/components/pages/screenshareA/_page.svelte-545f74e9.js","_app/immutable/chunks/index-cb50693d.js","_app/immutable/chunks/store-f2d73c15.js","_app/immutable/chunks/index-07a383db.js","_app/immutable/chunks/navigation-370c7d9f.js","_app/immutable/chunks/singletons-14ffcb78.js"];
 export const stylesheets = [];
