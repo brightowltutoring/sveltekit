@@ -131,6 +131,19 @@ export const lessThan768 = derived(
 export const navLoginClicked = writable(false);
 export const navHomeworkClicked = writable(false);
 
+// export const navModals = {
+//   login: writable(false),
+//   homework: writable(false),
+// }
+
+// function oneModalOnly() {
+
+//   for (let key in navModals) {
+//     navModals[key] = false;
+//   }
+
+// }
+
 // the all important
 export const routes = writable({
   home: {

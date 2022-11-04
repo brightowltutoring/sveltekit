@@ -22,11 +22,19 @@
 
   let unique;
 
+  // TODO: want to single make modal nav buttons be truthy at a time
+  // let modals = [$navLoginClicked, $navHomeworkClicked];
+
   function clickOnNavLinks() {
     // on each click, clears rest of button clicks
     for (let key in routes) {
       routes[key].isCurrent = false;
     }
+    // TODO: want to single make modal nav buttons be truthy at a time
+    // for (let modal of modals) {
+    //   modal = false;
+    // }
+    // modal = !bool;
     bool = !bool; //sets button click to corresponding route
     unique = !unique; // to reanimate the non-mobile links
   }
@@ -51,24 +59,9 @@
       $navLoginClicked = false;
       $navHomeworkClicked = false;
       clickOnNavLinks();
-
-      // this janky solution allows for the embeded jitsu to load ... otherwise I had to
-      //  manually reload the page and use "export const router = false" for the +page.js
-      // TODO:
-      // if (href == "/screenshare") {
-      //   setTimeout(() => {
-      //     location.reload();
-      //     return;
-      //   }, 500);
-      // }
-
-      // prefetch(href);
       goto(href);
     }}
   >
     {content}
   </button>
 {/key}
-
-<style>
-</style>

@@ -45,8 +45,12 @@
     clearTimeout(redirectAfterLoginTimeOut);
   }
 
+  // let auth = {};
   // $: if ($navLoginClicked) {
-  //   console.log("$navLoginClicked", $navLoginClicked);
+  //   (async () => {
+  //     const { getAuth } = await import("firebase/auth");
+  //     auth = getAuth(app);
+  //   })();
   // }
 
   $: if ($navLoginClicked && $isLoggedIn) {
@@ -54,7 +58,6 @@
   }
 
   onMount(async () => {
-    $navLoginClicked = false;
     const logInDiv = document.querySelector(".logInDiv");
     const logOutDiv = document.querySelector(".logOutDiv");
     const loginWelcomeText = document.querySelector("#loginWelcomeText");
@@ -66,7 +69,7 @@
     passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop);
     emailField.addEventListener("keydown", signinWithLinkAndStop);
 
-    // Confirm the link is a sign-in with email link.
+    // Confirm the link is a sign-in with email link. TODO: place in function??
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem("emailForSignIn");
       if (!email) {
@@ -88,10 +91,6 @@
         // console.log("providerId", providerId);
         $isLoggedIn = true;
         loggedInEmail = user.email;
-        // get the loggedInEmail IF user is authenticated; outside logic determines redirect when login nav item clicked
-
-        // navLoginClickedRedirect(user.email);
-        // navLoginClickedRedirect(loggedInEmail);
 
         console.log(`User is signed in!`);
 
@@ -102,7 +101,7 @@
           ? `Hey ${user.displayName}!`
           : `Hey ${user.email}!`;
       } else {
-        localStorage.removeItem("redirectUrlFromLS"); // clears on logout only; local storage keeps it even if page refreshes!
+        localStorage.removeItem("redirectUrlFromLS"); // clears on logout only; stays even on refresh/exit!
         $isLoggedIn = false;
         $navLoginClicked = false;
         loggedInEmail = "";

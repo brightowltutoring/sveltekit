@@ -6,6 +6,9 @@
 
 <!-- note this is not a special component .. just an aptly named container -->
 <modal-container
+  on:keydown|self={() => {
+    showModal = false;
+  }}
   on:click|self={() => {
     showModal = false;
   }}

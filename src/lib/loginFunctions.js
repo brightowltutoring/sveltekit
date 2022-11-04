@@ -1,104 +1,82 @@
 import { auth } from "$lib/firebase.js";
 import { goto } from "$app/navigation";
+import { get } from "svelte/store";
+import { lessThan768 } from "$lib/store.js";
 
 export async function TwitterLogin() {
-  const { TwitterAuthProvider, signInWithPopup } = await import(
-    "firebase/auth"
-  );
-
+  const { TwitterAuthProvider } = await import("firebase/auth");
   const provider = new TwitterAuthProvider();
-  // console.log("twitter provider?", provider.providerId);
 
-  await signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-      // You can use these server side with your app's credentials to access the Twitter API.
-      const credential = TwitterAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const secret = credential.secret;
+  if (get(lessThan768)) {
+    const { signInWithRedirect } = await import("firebase/auth");
+    signInWithRedirect(auth, provider);
+  } else {
+    const { signInWithPopup } = await import("firebase/auth");
+    // console.log("twitter provider?", provider.providerId);
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+        // You can use these server side with your app's credentials to access the Twitter API.
+        const credential = TwitterAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const secret = credential.secret;
 
-      // The signed-in user info.
-      const user = result.user;
-      // ...
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = TwitterAuthProvider.credentialFromError(error);
-      // ...
-    });
+        // The signed-in user info.
+        const user = result.user;
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = TwitterAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
 }
 
-// export async function GoogleLogin() {
-//   const { signInWithRedirect, getRedirectResult, GoogleAuthProvider } =
-//     await import("firebase/auth");
-
-//   const provider = new GoogleAuthProvider();
-//   await signInWithRedirect(auth, provider);
-
-//   // getRedirectResult(auth)
-//   //   .then((result) => {
-//   //     // This gives you a Google Access Token. You can use it to access Google APIs.
-//   //     const credential = GoogleAuthProvider.credentialFromResult(result);
-//   //     const token = credential.accessToken;
-
-//   //     // The signed-in user info.
-//   //     const user = result.user;
-//   //   })
-//   //   .catch((error) => {
-//   //     // Handle Errors here.
-//   //     const errorCode = error.code;
-//   //     const errorMessage = error.message;
-//   //     // The email of the user's account used.
-//   //     const email = error.customData.email;
-//   //     // The AuthCredential type that was used.
-//   //     const credential = GoogleAuthProvider.credentialFromError(error);
-//   //     // ...
-//   //   });
-// }
-
 export async function GoogleLogin() {
-  const { GoogleAuthProvider, signInWithPopup } = await import("firebase/auth");
+  const { GoogleAuthProvider } = await import("firebase/auth");
   const provider = new GoogleAuthProvider();
-  // console.log("google provider?", provider.providerId);
 
-  await signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-    });
+  if (get(lessThan768)) {
+    const { signInWithRedirect } = await import("firebase/auth");
+    signInWithRedirect(auth, provider);
+  } else {
+    const { signInWithPopup } = await import("firebase/auth");
+    // console.log("google provider?", provider.providerId);
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  }
 }
 
 export async function logoutFunction() {
   const { signOut } = await import("firebase/auth");
-
-  // firebase signing out ... doesnt allow signin with other google though..
-  await signOut(auth)
+  signOut(auth)
     .then(() => {
       console.log("logged out");
       goto("/");
-
-      // window.location.replace("/")
     })
     .catch((error) => {
-      console.log(error);
-      console.log("FAILED firebase signOut function");
+      console.log("logoutFunction failed", error);
     });
 }
 
@@ -121,9 +99,6 @@ export async function magicLinkToEmail(EMAIL) {
     handleCodeInApp: true,
   })
     .then(() => {
-      // The link was successfully sent. Inform the user.
-      // Save the EMAIL locally so you don't need to ask the user for it again
-      // if they open the link on the same device.
       window.localStorage.setItem("emailForSignIn", EMAIL);
       console.log("success with sendSignInLinkToEmail!");
     })
@@ -132,7 +107,5 @@ export async function magicLinkToEmail(EMAIL) {
       const errorMessage = error.message;
       console.log("errorCode", errorCode);
       console.log("errorMessage", errorMessage);
-      // console.log("error with sendSignInLinkToEmail");
-      // ...
     });
 }

@@ -466,9 +466,12 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
 
-${$$result.head += `<!-- HEAD_svelte-rhl0e7_START -->${each(Object.keys($routes), (key) => {
-      return `${$page.routeId == "/" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
-    })}<!-- HEAD_svelte-rhl0e7_END -->`, ""}
+${$$result.head += `<!-- HEAD_svelte-66550r_START -->${each(Object.keys($routes), (key) => {
+      return `${$page.routeId == "/" && key == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
+      <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
+      <meta og:url="${"https://thinksolve.io/"}">
+      ` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
+    })}<!-- HEAD_svelte-66550r_END -->`, ""}
 
 
 

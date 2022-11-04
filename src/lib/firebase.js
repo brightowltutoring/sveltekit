@@ -15,3 +15,4 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+// this is used when website is mounted to persist login state ... maybe import when login clicked instead??
