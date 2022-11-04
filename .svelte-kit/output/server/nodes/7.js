@@ -1,7 +1,7 @@
 
 
 export const index = 7;
-export const component = async () => (await import('../entries/pages/login/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/login/_page.svelte-fef3700c.js';
-export const imports = ["_app/immutable/components/pages/login/_page.svelte-fef3700c.js","_app/immutable/chunks/index-cb50693d.js"];
+export const component = async () => (await import('../entries/pages/katex/_page.svx.js')).default;
+export const file = '_app/immutable/components/pages/katex/_page.svx-31f5f368.js';
+export const imports = ["_app/immutable/components/pages/katex/_page.svx-31f5f368.js","_app/immutable/chunks/index-2bdb53b3.js","_app/immutable/chunks/katex-d33715d1.js","_app/immutable/chunks/store-fa0b0b0c.js","_app/immutable/chunks/index-e434d87f.js"];
 export const stylesheets = [];

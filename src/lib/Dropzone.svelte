@@ -1,11 +1,12 @@
 <script>
   import { PUBLIC_UPLOAD_ENDPOINT } from "$env/static/public";
-  import { elementColor, isDarkMode } from "$lib/store.js";
-  import { scale } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
-  let clickText = false;
+  import { isDarkMode } from "$lib/store.js";
+  // import { scale } from "svelte/transition";
+  // import { elasticOut } from "svelte/easing";
+  // let clickText = false;
   import { Dropzone } from "dropzone";
-  import "/node_modules/dropzone/dist/dropzone.css";
+  import "$lib/dropzone.css";
+  // import "/node_modules/dropzone/dist/dropzone.css";
   import { onMount } from "svelte";
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   export let text = "Drop it like it's 🔥";
@@ -22,16 +23,8 @@
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ACCEPTED_FILES_FRONTEND,
     });
-
     // Dropzone.autoDiscover = false;
     document.querySelector("#default").id = uniqueId;
-    // many forms
-    // let formy = document.querySelectorAll("form");
-    // formy.forEach((el) => {
-    //   el.onclick = async () => {
-    //     console.log('"dont touch my form"');
-    //   };
-    // });
   });
 </script>
 
@@ -39,11 +32,12 @@
   method="post"
   id="default"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
-  class="dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto "
+  class="dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
 >
   <!-- dz-message is a dropzone defined class -->
-  <div class="dz-message font-Nunito" data-dz-message>
-    {#key clickText}
+  <div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
+    <span>{text}</span>
+    <!-- {#key clickText}
       <span
         in:scale={{ duration: 1000, easing: elasticOut }}
         on:click={() => {
@@ -56,7 +50,7 @@
       >
         {text}</span
       >
-    {/key}
+    {/key} -->
   </div>
 </form>
 

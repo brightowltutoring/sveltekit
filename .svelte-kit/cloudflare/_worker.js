@@ -604,10 +604,25 @@ var require_set_cookie = __commonJS({
   }
 });
 
-// .svelte-kit/output/server/chunks/hooks.js
-var hooks_exports = {};
-var init_hooks = __esm({
-  ".svelte-kit/output/server/chunks/hooks.js"() {
+// .svelte-kit/output/server/chunks/hooks.server.js
+var hooks_server_exports = {};
+__export(hooks_server_exports, {
+  handle: () => handle
+});
+var urlRedirects, handle;
+var init_hooks_server = __esm({
+  ".svelte-kit/output/server/chunks/hooks.server.js"() {
+    urlRedirects = {
+      screenshare: "classroom"
+    };
+    handle = async ({ event, resolve }) => {
+      for (const [key2, value] of Object.entries(urlRedirects)) {
+        if (event.url.pathname === `/${key2}`) {
+          return Response.redirect(`${event.url.origin}/${value}`, 301);
+        }
+      }
+      return await resolve(event);
+    };
   }
 });
 
@@ -676,25 +691,25 @@ var init_store = __esm({
       plans: {
         name: "Plans",
         href: "/plans",
-        title: "Plans \u{1F34E}",
+        title: "Plans \u{1F4A1}",
         isCurrent: false
       },
-      screenshare: {
-        name: "Screenshare",
-        href: "/screenshare",
-        title: "Screenshare \u{1F5A5}",
+      classroom: {
+        name: "Classroom",
+        href: "/classroom",
+        title: "Classroom \u{1F34E}",
         isCurrent: false
       },
       homework: {
         name: "Homework",
         href: "/homework",
-        title: "Homework",
+        title: "Homework \u{1F4DA}",
         isCurrent: false
       },
       schools: {
         name: "Schools",
         href: "/schools",
-        title: "Schools \u{1F4DA}",
+        title: "Schools",
         isCurrent: false
       },
       stripe: {
@@ -12825,8 +12840,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-d7eed928.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-d7eed928.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/PlansCardObserver-40ef2ee6.js", "_app/immutable/chunks/Dropzone-b89565bc.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/index-99a2a668.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-370c7d9f.js", "_app/immutable/chunks/singletons-14ffcb78.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-42c52251.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-42c52251.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-d2ce729c.js", "_app/immutable/chunks/Dropzone-3e543bd8.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-6a52d76d.js", "_app/immutable/chunks/singletons-940ef1ec.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
     stylesheets = ["_app/immutable/assets/_layout-fa619fe9.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
@@ -12864,8 +12879,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-4fd672d9.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-4fd672d9.js", "_app/immutable/chunks/index-cb50693d.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-4e49e236.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-4e49e236.js", "_app/immutable/chunks/index-2bdb53b3.js"];
     stylesheets2 = [];
   }
 });
@@ -13225,8 +13240,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-98e17ac7.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-98e17ac7.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/PlansCard-5e157baf.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/index-99a2a668.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js", "_app/immutable/chunks/Dropzone-b89565bc.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-66fe8a6e.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-66fe8a6e.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-812257c3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js", "_app/immutable/chunks/Dropzone-3e543bd8.js", "_app/immutable/chunks/public-fe26cbe2.js"];
     stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
@@ -13260,26 +13275,1413 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/calcom/_page.svelte-b8778c03.js";
-    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-b8778c03.js", "_app/immutable/chunks/index-cb50693d.js"];
+    file4 = "_app/immutable/components/pages/calcom/_page.svelte-b19a8ea7.js";
+    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-b19a8ea7.js", "_app/immutable/chunks/index-2bdb53b3.js"];
     stylesheets4 = [];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/faq/_page.svelte.js
+// .svelte-kit/output/server/entries/pages/classroom/_page.js
+var page_exports = {};
+__export(page_exports, {
+  ssr: () => ssr
+});
+var ssr;
+var init_page = __esm({
+  ".svelte-kit/output/server/entries/pages/classroom/_page.js"() {
+    ssr = false;
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/classroom/_page.svelte.js
 var page_svelte_exports3 = {};
 __export(page_svelte_exports3, {
   default: () => Page3
 });
-var css3, Page3;
+var JitsiUser, Page3;
 var init_page_svelte3 = __esm({
+  ".svelte-kit/output/server/entries/pages/classroom/_page.svelte.js"() {
+    init_chunks();
+    init_store();
+    !function(e3, t2) {
+      "object" == typeof exports && "object" == typeof module ? module.exports = t2() : "function" == typeof define && define.amd ? define([], t2) : "object" == typeof exports ? exports.JitsiMeetExternalAPI = t2() : e3.JitsiMeetExternalAPI = t2();
+    }(self, function() {
+      return (() => {
+        var e3 = {
+          820: (e22, t22, n22) => {
+            n22.d(t22, { default: () => S3 });
+            var i = n22(620), r2 = n22.n(i);
+            class s3 extends i {
+              constructor() {
+                var e32, t3;
+                super(...arguments), t3 = {}, (e32 = "_storage") in this ? Object.defineProperty(this, e32, {
+                  value: t3,
+                  enumerable: true,
+                  configurable: true,
+                  writable: true
+                }) : this[e32] = t3;
+              }
+              clear() {
+                this._storage = {};
+              }
+              get length() {
+                return Object.keys(this._storage).length;
+              }
+              getItem(e32) {
+                return this._storage[e32];
+              }
+              setItem(e32, t3) {
+                this._storage[e32] = t3;
+              }
+              removeItem(e32) {
+                delete this._storage[e32];
+              }
+              key(e32) {
+                const t3 = Object.keys(this._storage);
+                if (!(t3.length <= e32))
+                  return t3[e32];
+              }
+              serialize() {
+                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                if (0 === e32.length)
+                  return JSON.stringify(this._storage);
+                const t3 = { ...this._storage };
+                return e32.forEach((e4) => {
+                  delete t3[e4];
+                }), JSON.stringify(t3);
+              }
+            }
+            const o2 = new class extends i {
+              constructor() {
+                super();
+                try {
+                  this._storage = window.localStorage, this._localStorageDisabled = false;
+                } catch (e32) {
+                }
+                this._storage || (console.warn("Local storage is disabled."), this._storage = new s3(), this._localStorageDisabled = true);
+              }
+              isLocalStorageDisabled() {
+                return this._localStorageDisabled;
+              }
+              clear() {
+                this._storage.clear(), this.emit("changed");
+              }
+              get length() {
+                return this._storage.length;
+              }
+              getItem(e32) {
+                return this._storage.getItem(e32);
+              }
+              setItem(e32, t3) {
+                let n3 = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
+                this._storage.setItem(e32, t3), n3 || this.emit("changed");
+              }
+              removeItem(e32) {
+                this._storage.removeItem(e32), this.emit("changed");
+              }
+              key(e32) {
+                return this._storage.key(e32);
+              }
+              serialize() {
+                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                if (this.isLocalStorageDisabled())
+                  return this._storage.serialize(e32);
+                const t3 = this._storage.length, n3 = {};
+                for (let i2 = 0; i2 < t3; i2++) {
+                  const t4 = this._storage.key(i2);
+                  e32.includes(t4) || (n3[t4] = this._storage.getItem(t4));
+                }
+                return JSON.stringify(n3);
+              }
+            }();
+            var a2 = n22(571);
+            const c2 = ["__proto__", "constructor", "prototype"];
+            function l(e32) {
+              const t3 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)+", "gi"), n3 = t3.exec(e32);
+              if (n3) {
+                let i2 = n3[n3.length - 1].toLowerCase();
+                "http:" !== i2 && "https:" !== i2 && (i2 = "https:"), (e32 = e32.substring(t3.lastIndex)).startsWith("//") && (e32 = i2 + e32);
+              }
+              return e32;
+            }
+            function d2(e32 = {}) {
+              const t3 = [];
+              for (const n3 in e32)
+                try {
+                  t3.push(`${n3}=${encodeURIComponent(JSON.stringify(e32[n3]))}`);
+                } catch (e4) {
+                  console.warn(`Error encoding ${n3}: ${e4}`);
+                }
+              return t3;
+            }
+            function u(e32) {
+              const t3 = { toString: h };
+              let n3, i2, r22;
+              if (e32 = e32.replace(/\s/g, ""), n3 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)", "gi"), i2 = n3.exec(e32), i2 && (t3.protocol = i2[1].toLowerCase(), e32 = e32.substring(n3.lastIndex)), n3 = new RegExp("^(//[^/?#]+)", "gi"), i2 = n3.exec(e32), i2) {
+                let r3 = i2[1].substring(2);
+                e32 = e32.substring(n3.lastIndex);
+                const s22 = r3.indexOf("@");
+                -1 !== s22 && (r3 = r3.substring(s22 + 1)), t3.host = r3;
+                const o22 = r3.lastIndexOf(":");
+                -1 !== o22 && (t3.port = r3.substring(o22 + 1), r3 = r3.substring(0, o22)), t3.hostname = r3;
+              }
+              if (n3 = new RegExp("^([^?#]*)", "gi"), i2 = n3.exec(e32), i2 && (r22 = i2[1], e32 = e32.substring(n3.lastIndex)), r22 ? r22.startsWith("/") || (r22 = `/${r22}`) : r22 = "/", t3.pathname = r22, e32.startsWith("?")) {
+                let n4 = e32.indexOf("#", 1);
+                -1 === n4 && (n4 = e32.length), t3.search = e32.substring(0, n4), e32 = e32.substring(n4);
+              } else
+                t3.search = "";
+              return t3.hash = e32.startsWith("#") ? e32 : "", t3;
+            }
+            function h(e32) {
+              const {
+                hash: t3,
+                host: n3,
+                pathname: i2,
+                protocol: r22,
+                search: s22
+              } = e32 || this;
+              let o22 = "";
+              return r22 && (o22 += r22), n3 && (o22 += `//${n3}`), o22 += i2 || "/", s22 && (o22 += s22), t3 && (o22 += t3), o22;
+            }
+            function p2(e32) {
+              let t3;
+              t3 = e32.serverURL && e32.room ? new URL(e32.room, e32.serverURL).toString() : e32.room ? e32.room : e32.url || "";
+              const n3 = u(l(t3));
+              if (!n3.protocol) {
+                let t4 = e32.protocol || e32.scheme;
+                t4 && (t4.endsWith(":") || (t4 += ":"), n3.protocol = t4);
+              }
+              let { pathname: i2 } = n3;
+              if (!n3.host) {
+                const t4 = e32.domain || e32.host || e32.hostname;
+                if (t4) {
+                  const {
+                    host: e4,
+                    hostname: r3,
+                    pathname: s32,
+                    port: o3
+                  } = u(l(`org.jitsi.meet://${t4}`));
+                  e4 && (n3.host = e4, n3.hostname = r3, n3.port = o3), "/" === i2 && "/" !== s32 && (i2 = s32);
+                }
+              }
+              const r22 = e32.roomName || e32.room;
+              !r22 || !n3.pathname.endsWith("/") && n3.pathname.endsWith(`/${r22}`) || (i2.endsWith("/") || (i2 += "/"), i2 += r22), n3.pathname = i2;
+              const { jwt: s22, lang: o22, release: a22 } = e32, c22 = new URLSearchParams(n3.search);
+              s22 && c22.set("jwt", s22);
+              const { defaultLanguage: h2 } = e32.configOverwrite || {};
+              (o22 || h2) && c22.set("lang", o22 || h2), a22 && c22.set("release", a22);
+              const p22 = c22.toString();
+              p22 && (n3.search = `?${p22}`);
+              let { hash: g22 } = n3;
+              for (const t4 of [
+                "config",
+                "interfaceConfig",
+                "devices",
+                "userInfo",
+                "appData"
+              ]) {
+                const n4 = d2(e32[`${t4}Overwrite`] || e32[t4] || e32[`${t4}Override`]);
+                if (n4.length) {
+                  let e4 = `${t4}.${n4.join(`&${t4}.`)}`;
+                  g22.length ? e4 = `&${e4}` : g22 = "#", g22 += e4;
+                }
+              }
+              return n3.hash = g22, n3.toString() || void 0;
+            }
+            const g2 = { window: window.opener || window.parent }, m2 = "message";
+            class f {
+              constructor() {
+                let { postisOptions: e32 } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+                this.postis = function(e4) {
+                  var t3, n3 = e4.scope, i2 = e4.window, r22 = e4.windowForEventListening || window, s22 = e4.allowedOrigin, o22 = {}, a22 = [], c22 = {}, l2 = false, d22 = "__ready__", u2 = function(e5) {
+                    var t4;
+                    try {
+                      t4 = JSON.parse(e5.data);
+                    } catch (e6) {
+                      return;
+                    }
+                    if ((!s22 || e5.origin === s22) && t4 && t4.postis && t4.scope === n3) {
+                      var i3 = o22[t4.method];
+                      if (i3)
+                        for (var r3 = 0; r3 < i3.length; r3++)
+                          i3[r3].call(null, t4.params);
+                      else
+                        c22[t4.method] = c22[t4.method] || [], c22[t4.method].push(t4.params);
+                    }
+                  };
+                  r22.addEventListener("message", u2, false);
+                  var h2 = {
+                    listen: function(e5, t4) {
+                      o22[e5] = o22[e5] || [], o22[e5].push(t4);
+                      var n4 = c22[e5];
+                      if (n4)
+                        for (var i3 = o22[e5], r3 = 0; r3 < i3.length; r3++)
+                          for (var s32 = 0; s32 < n4.length; s32++)
+                            i3[r3].call(null, n4[s32]);
+                      delete c22[e5];
+                    },
+                    send: function(e5) {
+                      var t4 = e5.method;
+                      (l2 || e5.method === d22) && i2 && "function" == typeof i2.postMessage ? i2.postMessage(
+                        JSON.stringify({
+                          postis: true,
+                          scope: n3,
+                          method: t4,
+                          params: e5.params
+                        }),
+                        "*"
+                      ) : a22.push(e5);
+                    },
+                    ready: function(e5) {
+                      l2 ? e5() : setTimeout(function() {
+                        h2.ready(e5);
+                      }, 50);
+                    },
+                    destroy: function(e5) {
+                      clearInterval(t3), l2 = false, r22 && "function" == typeof r22.removeEventListener && r22.removeEventListener("message", u2), e5 && e5();
+                    }
+                  }, p22 = +new Date() + Math.random() + "";
+                  return t3 = setInterval(function() {
+                    h2.send({ method: d22, params: p22 });
+                  }, 50), h2.listen(d22, function(e5) {
+                    if (e5 === p22) {
+                      clearInterval(t3), l2 = true;
+                      for (var n4 = 0; n4 < a22.length; n4++)
+                        h2.send(a22[n4]);
+                      a22 = [];
+                    } else
+                      h2.send({ method: d22, params: e5 });
+                  }), h2;
+                }({ ...g2, ...e32 }), this._receiveCallback = () => {
+                }, this.postis.listen(m2, (e4) => this._receiveCallback(e4));
+              }
+              dispose() {
+                this.postis.destroy();
+              }
+              send(e32) {
+                this.postis.send({ method: m2, params: e32 });
+              }
+              setReceiveCallback(e32) {
+                this._receiveCallback = e32;
+              }
+            }
+            const v2 = "request", y2 = "response";
+            class _2 {
+              constructor() {
+                let { backend: e32 } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+                this._listeners = /* @__PURE__ */ new Map(), this._requestID = 0, this._responseHandlers = /* @__PURE__ */ new Map(), this._unprocessedMessages = /* @__PURE__ */ new Set(), this.addListener = this.on, e32 && this.setBackend(e32);
+              }
+              _disposeBackend() {
+                this._backend && (this._backend.dispose(), this._backend = null);
+              }
+              _onMessageReceived(e32) {
+                if (e32.type === y2) {
+                  const t3 = this._responseHandlers.get(e32.id);
+                  t3 && (t3(e32), this._responseHandlers.delete(e32.id));
+                } else
+                  e32.type === v2 ? this.emit("request", e32.data, (t3, n3) => {
+                    this._backend.send({
+                      type: y2,
+                      error: n3,
+                      id: e32.id,
+                      result: t3
+                    });
+                  }) : this.emit("event", e32.data);
+              }
+              dispose() {
+                this._responseHandlers.clear(), this._unprocessedMessages.clear(), this.removeAllListeners(), this._disposeBackend();
+              }
+              emit(e32) {
+                for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
+                  n3[i2 - 1] = arguments[i2];
+                const r22 = this._listeners.get(e32);
+                let s22 = false;
+                return r22 && r22.size && r22.forEach((e4) => {
+                  s22 = e4(...n3) || s22;
+                }), s22 || this._unprocessedMessages.add(n3), s22;
+              }
+              on(e32, t3) {
+                let n3 = this._listeners.get(e32);
+                return n3 || (n3 = /* @__PURE__ */ new Set(), this._listeners.set(e32, n3)), n3.add(t3), this._unprocessedMessages.forEach((e4) => {
+                  t3(...e4) && this._unprocessedMessages.delete(e4);
+                }), this;
+              }
+              removeAllListeners(e32) {
+                return e32 ? this._listeners.delete(e32) : this._listeners.clear(), this;
+              }
+              removeListener(e32, t3) {
+                const n3 = this._listeners.get(e32);
+                return n3 && n3.delete(t3), this;
+              }
+              sendEvent() {
+                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+                this._backend && this._backend.send({ type: "event", data: e32 });
+              }
+              sendRequest(e32) {
+                if (!this._backend)
+                  return Promise.reject(
+                    new Error("No transport backend defined!")
+                  );
+                this._requestID++;
+                const t3 = this._requestID;
+                return new Promise((n3, i2) => {
+                  this._responseHandlers.set(t3, (e4) => {
+                    let { error: t4, result: r22 } = e4;
+                    void 0 !== r22 ? n3(r22) : i2(
+                      void 0 !== t4 ? t4 : new Error("Unexpected response format!")
+                    );
+                  }), this._backend.send({ type: v2, data: e32, id: t3 });
+                });
+              }
+              setBackend(e32) {
+                this._disposeBackend(), this._backend = e32, this._backend.setReceiveCallback(
+                  this._onMessageReceived.bind(this)
+                );
+              }
+            }
+            (function(e32, t3 = false, n3 = "hash") {
+              "string" == typeof e32 && (e32 = new URL(e32));
+              const i2 = "search" === n3 ? e32.search : e32.hash, r22 = {}, s22 = (null == i2 ? void 0 : i2.substr(1).split("&")) || [];
+              if ("hash" === n3 && 1 === s22.length) {
+                const e4 = s22[0];
+                if (e4.startsWith("/") && 1 === e4.split("&").length)
+                  return r22;
+              }
+              return s22.forEach((e4) => {
+                const n4 = e4.split("="), i3 = n4[0];
+                if (!i3 || i3.split(".").some((e5) => c2.includes(e5)))
+                  return;
+                let s32;
+                try {
+                  if (s32 = n4[1], !t3) {
+                    const e5 = decodeURIComponent(s32).replace(/\\&/, "&");
+                    s32 = "undefined" === e5 ? void 0 : a2.parse(e5);
+                  }
+                } catch (e5) {
+                  return void function(e6, t4 = "") {
+                    var n5;
+                    console.error(t4, e6), null === (n5 = window.onerror) || void 0 === n5 || n5.call(window, t4, void 0, void 0, void 0, e6);
+                  }(e5, `Failed to parse URL parameter value: ${String(s32)}`);
+                }
+                r22[i3] = s32;
+              }), r22;
+            })(window.location).jitsi_meet_external_api_id;
+            (window.JitsiMeetJS || (window.JitsiMeetJS = {}), window.JitsiMeetJS.app || (window.JitsiMeetJS.app = {}), window.JitsiMeetJS.app).setExternalTransportBackend = (e32) => (void 0).setBackend(e32);
+            var b2 = n22(860);
+            const w2 = n22.n(b2)().getLogger("modules/API/external/functions.js");
+            function L2(e32, t3) {
+              return e32.sendRequest({
+                type: "devices",
+                name: "setDevice",
+                device: t3
+              });
+            }
+            const k2 = ["css/all.css", "libs/alwaysontop.min.js"], E2 = {
+              addBreakoutRoom: "add-breakout-room",
+              answerKnockingParticipant: "answer-knocking-participant",
+              approveVideo: "approve-video",
+              askToUnmute: "ask-to-unmute",
+              autoAssignToBreakoutRooms: "auto-assign-to-breakout-rooms",
+              avatarUrl: "avatar-url",
+              cancelPrivateChat: "cancel-private-chat",
+              closeBreakoutRoom: "close-breakout-room",
+              displayName: "display-name",
+              e2eeKey: "e2ee-key",
+              email: "email",
+              grantModerator: "grant-moderator",
+              hangup: "video-hangup",
+              hideNotification: "hide-notification",
+              initiatePrivateChat: "initiate-private-chat",
+              joinBreakoutRoom: "join-breakout-room",
+              localSubject: "local-subject",
+              kickParticipant: "kick-participant",
+              muteEveryone: "mute-everyone",
+              overwriteConfig: "overwrite-config",
+              overwriteNames: "overwrite-names",
+              password: "password",
+              pinParticipant: "pin-participant",
+              rejectParticipant: "reject-participant",
+              removeBreakoutRoom: "remove-breakout-room",
+              resizeFilmStrip: "resize-film-strip",
+              resizeLargeVideo: "resize-large-video",
+              sendChatMessage: "send-chat-message",
+              sendEndpointTextMessage: "send-endpoint-text-message",
+              sendParticipantToRoom: "send-participant-to-room",
+              sendTones: "send-tones",
+              setFollowMe: "set-follow-me",
+              setLargeVideoParticipant: "set-large-video-participant",
+              setMediaEncryptionKey: "set-media-encryption-key",
+              setNoiseSuppressionEnabled: "set-noise-suppression-enabled",
+              setParticipantVolume: "set-participant-volume",
+              setSubtitles: "set-subtitles",
+              setTileView: "set-tile-view",
+              setVideoQuality: "set-video-quality",
+              showNotification: "show-notification",
+              startRecording: "start-recording",
+              startShareVideo: "start-share-video",
+              stopRecording: "stop-recording",
+              stopShareVideo: "stop-share-video",
+              subject: "subject",
+              submitFeedback: "submit-feedback",
+              toggleAudio: "toggle-audio",
+              toggleCamera: "toggle-camera",
+              toggleCameraMirror: "toggle-camera-mirror",
+              toggleChat: "toggle-chat",
+              toggleE2EE: "toggle-e2ee",
+              toggleFilmStrip: "toggle-film-strip",
+              toggleLobby: "toggle-lobby",
+              toggleModeration: "toggle-moderation",
+              toggleNoiseSuppression: "toggle-noise-suppression",
+              toggleParticipantsPane: "toggle-participants-pane",
+              toggleRaiseHand: "toggle-raise-hand",
+              toggleShareScreen: "toggle-share-screen",
+              toggleSubtitles: "toggle-subtitles",
+              toggleTileView: "toggle-tile-view",
+              toggleVirtualBackgroundDialog: "toggle-virtual-background",
+              toggleVideo: "toggle-video"
+            }, C2 = {
+              "avatar-changed": "avatarChanged",
+              "audio-availability-changed": "audioAvailabilityChanged",
+              "audio-mute-status-changed": "audioMuteStatusChanged",
+              "audio-or-video-sharing-toggled": "audioOrVideoSharingToggled",
+              "breakout-rooms-updated": "breakoutRoomsUpdated",
+              "browser-support": "browserSupport",
+              "camera-error": "cameraError",
+              "chat-updated": "chatUpdated",
+              "content-sharing-participants-changed": "contentSharingParticipantsChanged",
+              "data-channel-opened": "dataChannelOpened",
+              "device-list-changed": "deviceListChanged",
+              "display-name-change": "displayNameChange",
+              "email-change": "emailChange",
+              "error-occurred": "errorOccurred",
+              "endpoint-text-message-received": "endpointTextMessageReceived",
+              "face-landmark-detected": "faceLandmarkDetected",
+              "feedback-submitted": "feedbackSubmitted",
+              "feedback-prompt-displayed": "feedbackPromptDisplayed",
+              "filmstrip-display-changed": "filmstripDisplayChanged",
+              "iframe-dock-state-changed": "iframeDockStateChanged",
+              "incoming-message": "incomingMessage",
+              "knocking-participant": "knockingParticipant",
+              log: "log",
+              "mic-error": "micError",
+              "moderation-participant-approved": "moderationParticipantApproved",
+              "moderation-participant-rejected": "moderationParticipantRejected",
+              "moderation-status-changed": "moderationStatusChanged",
+              "mouse-enter": "mouseEnter",
+              "mouse-leave": "mouseLeave",
+              "mouse-move": "mouseMove",
+              "outgoing-message": "outgoingMessage",
+              "participant-joined": "participantJoined",
+              "participant-kicked-out": "participantKickedOut",
+              "participant-left": "participantLeft",
+              "participant-role-changed": "participantRoleChanged",
+              "participants-pane-toggled": "participantsPaneToggled",
+              "password-required": "passwordRequired",
+              "prejoin-screen-loaded": "prejoinScreenLoaded",
+              "proxy-connection-event": "proxyConnectionEvent",
+              "raise-hand-updated": "raiseHandUpdated",
+              "recording-link-available": "recordingLinkAvailable",
+              "recording-status-changed": "recordingStatusChanged",
+              "video-ready-to-close": "readyToClose",
+              "video-conference-joined": "videoConferenceJoined",
+              "video-conference-left": "videoConferenceLeft",
+              "video-availability-changed": "videoAvailabilityChanged",
+              "video-mute-status-changed": "videoMuteStatusChanged",
+              "video-quality-changed": "videoQualityChanged",
+              "screen-sharing-status-changed": "screenSharingStatusChanged",
+              "dominant-speaker-changed": "dominantSpeakerChanged",
+              "subject-change": "subjectChange",
+              "suspend-detected": "suspendDetected",
+              "tile-view-changed": "tileViewChanged",
+              "toolbar-button-clicked": "toolbarButtonClicked"
+            };
+            let x2 = 0;
+            function O2(e32, t3) {
+              e32._numberOfParticipants += t3;
+            }
+            function R2(e32) {
+              let t3;
+              return "string" == typeof e32 && null !== String(e32).match(/([0-9]*\.?[0-9]+)(em|pt|px|%)$/) ? t3 = e32 : "number" == typeof e32 && (t3 = `${e32}px`), t3;
+            }
+            class S3 extends r2() {
+              constructor(e32) {
+                super();
+                for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
+                  n3[i2 - 1] = arguments[i2];
+                const {
+                  roomName: r22 = "",
+                  width: s22 = "100%",
+                  height: a22 = "100%",
+                  parentNode: c22 = document.body,
+                  configOverwrite: l2 = {},
+                  interfaceConfigOverwrite: d22 = {},
+                  jwt: u2,
+                  lang: h2,
+                  onload: g22,
+                  invitees: m22,
+                  devices: v22,
+                  userInfo: y22,
+                  e2eeKey: b22,
+                  release: w22
+                } = function(e4) {
+                  if (!e4.length)
+                    return {};
+                  switch (typeof e4[0]) {
+                    case "string":
+                    case "undefined": {
+                      const [t4, n4, i3, r3, s32, o22, a3, c3, l3] = e4;
+                      return {
+                        roomName: t4,
+                        width: n4,
+                        height: i3,
+                        parentNode: r3,
+                        configOverwrite: s32,
+                        interfaceConfigOverwrite: o22,
+                        jwt: a3,
+                        onload: c3,
+                        lang: l3
+                      };
+                    }
+                    case "object":
+                      return e4[0];
+                    default:
+                      throw new Error("Can't parse the arguments!");
+                  }
+                }(n3), L22 = o2.getItem("jitsiLocalStorage");
+                this._parentNode = c22, this._url = function(e4) {
+                  return p2({
+                    ...arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                    url: `https://${e4}/#jitsi_meet_external_api_id=${x2}`
+                  });
+                }(e32, {
+                  configOverwrite: l2,
+                  interfaceConfigOverwrite: d22,
+                  jwt: u2,
+                  lang: h2,
+                  roomName: r22,
+                  devices: v22,
+                  userInfo: y22,
+                  appData: { localStorageContent: L22 },
+                  release: w22
+                }), this._createIFrame(a22, s22, g22), this._transport = new _2({
+                  backend: new f({
+                    postisOptions: {
+                      allowedOrigin: new URL(this._url).origin,
+                      scope: `jitsi_meet_external_api_${x2}`,
+                      window: this._frame.contentWindow
+                    }
+                  })
+                }), Array.isArray(m22) && m22.length > 0 && this.invite(m22), this._tmpE2EEKey = b22, this._isLargeVideoVisible = false, this._isPrejoinVideoVisible = false, this._numberOfParticipants = 0, this._participants = {}, this._myUserID = void 0, this._onStageParticipant = void 0, this._setupListeners(), x2++;
+              }
+              _createIFrame(e32, t3, n3) {
+                const i2 = `jitsiConferenceFrame${x2}`;
+                this._frame = document.createElement("iframe"), this._frame.allow = "camera; microphone; display-capture; autoplay; clipboard-write", this._frame.src = this._url, this._frame.name = i2, this._frame.id = i2, this._setSize(e32, t3), this._frame.setAttribute("allowFullScreen", "true"), this._frame.style.border = 0, n3 && (this._frame.onload = n3), this._frame = this._parentNode.appendChild(this._frame);
+              }
+              _getAlwaysOnTopResources() {
+                const e32 = this._frame.contentWindow, t3 = e32.document;
+                let n3 = "";
+                const i2 = t3.querySelector("base");
+                if (i2 && i2.href)
+                  n3 = i2.href;
+                else {
+                  const { protocol: t4, host: i3 } = e32.location;
+                  n3 = `${t4}//${i3}`;
+                }
+                return k2.map((e4) => new URL(e4, n3).href);
+              }
+              _getFormattedDisplayName(e32) {
+                const { formattedDisplayName: t3 } = this._participants[e32] || {};
+                return t3;
+              }
+              _getOnStageParticipant() {
+                return this._onStageParticipant;
+              }
+              _getLargeVideo() {
+                const e32 = this.getIFrame();
+                if (this._isLargeVideoVisible && e32 && e32.contentWindow && e32.contentWindow.document)
+                  return e32.contentWindow.document.getElementById("largeVideo");
+              }
+              _getPrejoinVideo() {
+                const e32 = this.getIFrame();
+                if (this._isPrejoinVideoVisible && e32 && e32.contentWindow && e32.contentWindow.document)
+                  return e32.contentWindow.document.getElementById("prejoinVideo");
+              }
+              _getParticipantVideo(e32) {
+                const t3 = this.getIFrame();
+                if (t3 && t3.contentWindow && t3.contentWindow.document)
+                  return void 0 === e32 || e32 === this._myUserID ? t3.contentWindow.document.getElementById(
+                    "localVideo_container"
+                  ) : t3.contentWindow.document.querySelector(
+                    `#participant_${e32} video`
+                  );
+              }
+              _setSize(e32, t3) {
+                const n3 = R2(e32), i2 = R2(t3);
+                void 0 !== n3 && (this._height = e32, this._frame.style.height = n3), void 0 !== i2 && (this._width = t3, this._frame.style.width = i2);
+              }
+              _setupListeners() {
+                this._transport.on("event", (e32) => {
+                  let { name: t3, ...n3 } = e32;
+                  const i2 = n3.id;
+                  switch (t3) {
+                    case "video-conference-joined":
+                      void 0 !== this._tmpE2EEKey && (this.executeCommand(E2.e2eeKey, this._tmpE2EEKey), this._tmpE2EEKey = void 0), this._myUserID = i2, this._participants[i2] = {
+                        email: n3.email,
+                        avatarURL: n3.avatarURL
+                      };
+                    case "participant-joined":
+                      this._participants[i2] = this._participants[i2] || {}, this._participants[i2].displayName = n3.displayName, this._participants[i2].formattedDisplayName = n3.formattedDisplayName, O2(this, 1);
+                      break;
+                    case "participant-left":
+                      O2(this, -1), delete this._participants[i2];
+                      break;
+                    case "display-name-change": {
+                      const e4 = this._participants[i2];
+                      e4 && (e4.displayName = n3.displayname, e4.formattedDisplayName = n3.formattedDisplayName);
+                      break;
+                    }
+                    case "email-change": {
+                      const e4 = this._participants[i2];
+                      e4 && (e4.email = n3.email);
+                      break;
+                    }
+                    case "avatar-changed": {
+                      const e4 = this._participants[i2];
+                      e4 && (e4.avatarURL = n3.avatarURL);
+                      break;
+                    }
+                    case "on-stage-participant-changed":
+                      this._onStageParticipant = i2, this.emit("largeVideoChanged");
+                      break;
+                    case "large-video-visibility-changed":
+                      this._isLargeVideoVisible = n3.isVisible, this.emit("largeVideoChanged");
+                      break;
+                    case "prejoin-screen-loaded":
+                      this._participants[i2] = {
+                        displayName: n3.displayName,
+                        formattedDisplayName: n3.formattedDisplayName
+                      };
+                      break;
+                    case "on-prejoin-video-changed":
+                      this._isPrejoinVideoVisible = n3.isVisible, this.emit("prejoinVideoChanged");
+                      break;
+                    case "video-conference-left":
+                      O2(this, -1), delete this._participants[this._myUserID];
+                      break;
+                    case "video-quality-changed":
+                      this._videoQuality = n3.videoQuality;
+                      break;
+                    case "breakout-rooms-updated":
+                      this.updateNumberOfParticipants(n3.rooms);
+                      break;
+                    case "local-storage-changed":
+                      return o2.setItem("jitsiLocalStorage", n3.localStorageContent), true;
+                  }
+                  const r22 = C2[t3];
+                  return !!r22 && (this.emit(r22, n3), true);
+                });
+              }
+              updateNumberOfParticipants(e32) {
+                if (!e32 || !Object.keys(e32).length)
+                  return;
+                const t3 = Object.keys(e32).reduce((t4, n3) => {
+                  var i2;
+                  return null !== (i2 = e32[n3]) && void 0 !== i2 && i2.participants ? Object.keys(e32[n3].participants).length + t4 : t4;
+                }, 0);
+                this._numberOfParticipants = t3;
+              }
+              async getRoomsInfo() {
+                return this._transport.sendRequest({ name: "rooms-info" });
+              }
+              addEventListener(e32, t3) {
+                this.on(e32, t3);
+              }
+              addEventListeners(e32) {
+                for (const t3 in e32)
+                  this.addEventListener(t3, e32[t3]);
+              }
+              captureLargeVideoScreenshot() {
+                return this._transport.sendRequest({
+                  name: "capture-largevideo-screenshot"
+                });
+              }
+              dispose() {
+                this.emit("_willDispose"), this._transport.dispose(), this.removeAllListeners(), this._frame && this._frame.parentNode && this._frame.parentNode.removeChild(this._frame);
+              }
+              executeCommand(e32) {
+                if (e32 in E2) {
+                  for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
+                    n3[i2 - 1] = arguments[i2];
+                  this._transport.sendEvent({ data: n3, name: E2[e32] });
+                } else
+                  console.error("Not supported command name.");
+              }
+              executeCommands(e32) {
+                for (const t3 in e32)
+                  this.executeCommand(t3, e32[t3]);
+              }
+              getAvailableDevices() {
+                return function(e32) {
+                  return e32.sendRequest({ type: "devices", name: "getAvailableDevices" }).catch((e4) => (w2.error(e4), {}));
+                }(this._transport);
+              }
+              getContentSharingParticipants() {
+                return this._transport.sendRequest({
+                  name: "get-content-sharing-participants"
+                });
+              }
+              getCurrentDevices() {
+                return function(e32) {
+                  return e32.sendRequest({ type: "devices", name: "getCurrentDevices" }).catch((e4) => (w2.error(e4), {}));
+                }(this._transport);
+              }
+              getCustomAvatarBackgrounds() {
+                return this._transport.sendRequest({
+                  name: "get-custom-avatar-backgrounds"
+                });
+              }
+              getLivestreamUrl() {
+                return this._transport.sendRequest({
+                  name: "get-livestream-url"
+                });
+              }
+              getParticipantsInfo() {
+                const e32 = Object.keys(this._participants), t3 = Object.values(this._participants);
+                return t3.forEach((t4, n3) => {
+                  t4.participantId = e32[n3];
+                }), t3;
+              }
+              getVideoQuality() {
+                return this._videoQuality;
+              }
+              isAudioAvailable() {
+                return this._transport.sendRequest({
+                  name: "is-audio-available"
+                });
+              }
+              isDeviceChangeAvailable(e32) {
+                return function(e4, t3) {
+                  return e4.sendRequest({
+                    deviceType: t3,
+                    type: "devices",
+                    name: "isDeviceChangeAvailable"
+                  });
+                }(this._transport, e32);
+              }
+              isDeviceListAvailable() {
+                return function(e32) {
+                  return e32.sendRequest({
+                    type: "devices",
+                    name: "isDeviceListAvailable"
+                  });
+                }(this._transport);
+              }
+              isMultipleAudioInputSupported() {
+                return function(e32) {
+                  return e32.sendRequest({
+                    type: "devices",
+                    name: "isMultipleAudioInputSupported"
+                  });
+                }(this._transport);
+              }
+              invite(e32) {
+                return Array.isArray(e32) && 0 !== e32.length ? this._transport.sendRequest({ name: "invite", invitees: e32 }) : Promise.reject(new TypeError("Invalid Argument"));
+              }
+              isAudioMuted() {
+                return this._transport.sendRequest({ name: "is-audio-muted" });
+              }
+              isAudioDisabled() {
+                return this._transport.sendRequest({ name: "is-audio-disabled" });
+              }
+              isModerationOn(e32) {
+                return this._transport.sendRequest({
+                  name: "is-moderation-on",
+                  mediaType: e32
+                });
+              }
+              isParticipantForceMuted(e32, t3) {
+                return this._transport.sendRequest({
+                  name: "is-participant-force-muted",
+                  participantId: e32,
+                  mediaType: t3
+                });
+              }
+              isParticipantsPaneOpen() {
+                return this._transport.sendRequest({
+                  name: "is-participants-pane-open"
+                });
+              }
+              isSharingScreen() {
+                return this._transport.sendRequest({ name: "is-sharing-screen" });
+              }
+              isStartSilent() {
+                return this._transport.sendRequest({ name: "is-start-silent" });
+              }
+              getAvatarURL(e32) {
+                const { avatarURL: t3 } = this._participants[e32] || {};
+                return t3;
+              }
+              getDeploymentInfo() {
+                return this._transport.sendRequest({ name: "deployment-info" });
+              }
+              getDisplayName(e32) {
+                const { displayName: t3 } = this._participants[e32] || {};
+                return t3;
+              }
+              getEmail(e32) {
+                const { email: t3 } = this._participants[e32] || {};
+                return t3;
+              }
+              getIFrame() {
+                return this._frame;
+              }
+              getNumberOfParticipants() {
+                return this._numberOfParticipants;
+              }
+              isVideoAvailable() {
+                return this._transport.sendRequest({
+                  name: "is-video-available"
+                });
+              }
+              isVideoMuted() {
+                return this._transport.sendRequest({ name: "is-video-muted" });
+              }
+              listBreakoutRooms() {
+                return this._transport.sendRequest({
+                  name: "list-breakout-rooms"
+                });
+              }
+              pinParticipant(e32) {
+                this.executeCommand("pinParticipant", e32);
+              }
+              removeEventListener(e32) {
+                this.removeAllListeners(e32);
+              }
+              removeEventListeners(e32) {
+                e32.forEach((e4) => this.removeEventListener(e4));
+              }
+              resizeLargeVideo(e32, t3) {
+                e32 <= this._width && t3 <= this._height && this.executeCommand("resizeLargeVideo", e32, t3);
+              }
+              sendProxyConnectionEvent(e32) {
+                this._transport.sendEvent({
+                  data: [e32],
+                  name: "proxy-connection-event"
+                });
+              }
+              setAudioInputDevice(e32, t3) {
+                return function(e4, t4, n3) {
+                  return L2(e4, { id: n3, kind: "audioinput", label: t4 });
+                }(this._transport, e32, t3);
+              }
+              setAudioOutputDevice(e32, t3) {
+                return function(e4, t4, n3) {
+                  return L2(e4, { id: n3, kind: "audiooutput", label: t4 });
+                }(this._transport, e32, t3);
+              }
+              setLargeVideoParticipant(e32) {
+                this.executeCommand("setLargeVideoParticipant", e32);
+              }
+              setVideoInputDevice(e32, t3) {
+                return function(e4, t4, n3) {
+                  return L2(e4, { id: n3, kind: "videoinput", label: t4 });
+                }(this._transport, e32, t3);
+              }
+              startRecording(e32) {
+                this.executeCommand("startRecording", e32);
+              }
+              stopRecording(e32) {
+                this.executeCommand("stopRecording", e32);
+              }
+              toggleE2EE(e32) {
+                this.executeCommand("toggleE2EE", e32);
+              }
+              async setMediaEncryptionKey(e32) {
+                const { key: t3, index: n3 } = e32;
+                if (t3) {
+                  const e4 = await crypto.subtle.exportKey("raw", t3);
+                  this.executeCommand(
+                    "setMediaEncryptionKey",
+                    JSON.stringify({
+                      exportedKey: Array.from(new Uint8Array(e4)),
+                      index: n3
+                    })
+                  );
+                } else
+                  this.executeCommand(
+                    "setMediaEncryptionKey",
+                    JSON.stringify({ exportedKey: false, index: n3 })
+                  );
+              }
+            }
+          },
+          872: (e22, t22, n22) => {
+            e22.exports = n22(820).default;
+          },
+          571: (e22, t22) => {
+            const n22 = /"(?:_|\\u005[Ff])(?:_|\\u005[Ff])(?:p|\\u0070)(?:r|\\u0072)(?:o|\\u006[Ff])(?:t|\\u0074)(?:o|\\u006[Ff])(?:_|\\u005[Ff])(?:_|\\u005[Ff])"\s*\:/;
+            t22.parse = function(e32) {
+              const i = "object" == typeof (arguments.length <= 1 ? void 0 : arguments[1]) && (arguments.length <= 1 ? void 0 : arguments[1]), r2 = (arguments.length <= 1 ? 0 : arguments.length - 1) > 1 || !i ? arguments.length <= 1 ? void 0 : arguments[1] : void 0, s3 = (arguments.length <= 1 ? 0 : arguments.length - 1) > 1 && (arguments.length <= 2 ? void 0 : arguments[2]) || i || {}, o2 = JSON.parse(e32, r2);
+              return "ignore" === s3.protoAction ? o2 : o2 && "object" == typeof o2 && e32.match(n22) ? (t22.scan(o2, s3), o2) : o2;
+            }, t22.scan = function(e32) {
+              let t3 = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}, n3 = [e32];
+              for (; n3.length; ) {
+                const e4 = n3;
+                n3 = [];
+                for (const i of e4) {
+                  if (Object.prototype.hasOwnProperty.call(i, "__proto__")) {
+                    if ("remove" !== t3.protoAction)
+                      throw new SyntaxError(
+                        "Object contains forbidden prototype property"
+                      );
+                    delete i.__proto__;
+                  }
+                  for (const e5 in i) {
+                    const t4 = i[e5];
+                    t4 && "object" == typeof t4 && n3.push(i[e5]);
+                  }
+                }
+              }
+            }, t22.safeParse = function(e32, n3) {
+              try {
+                return t22.parse(e32, n3);
+              } catch (e4) {
+                return null;
+              }
+            };
+          },
+          369: (e22, t22, n22) => {
+            var i = n22(7);
+            function r2(e32, t3) {
+              this.logStorage = e32, this.stringifyObjects = !(!t3 || !t3.stringifyObjects) && t3.stringifyObjects, this.storeInterval = t3 && t3.storeInterval ? t3.storeInterval : 3e4, this.maxEntryLength = t3 && t3.maxEntryLength ? t3.maxEntryLength : 1e4, Object.keys(i.levels).forEach(
+                function(e4) {
+                  this[i.levels[e4]] = function() {
+                    this._log.apply(this, arguments);
+                  }.bind(this, e4);
+                }.bind(this)
+              ), this.storeLogsIntervalID = null, this.queue = [], this.totalLen = 0, this.outputCache = [];
+            }
+            r2.prototype.stringify = function(e32) {
+              try {
+                return JSON.stringify(e32);
+              } catch (e4) {
+                return "[object with circular refs?]";
+              }
+            }, r2.prototype.formatLogMessage = function(e32) {
+              for (var t3 = "", n3 = 1, r22 = arguments.length; n3 < r22; n3++) {
+                var s3 = arguments[n3];
+                !this.stringifyObjects && e32 !== i.levels.ERROR || "object" != typeof s3 || (s3 = this.stringify(s3)), t3 += s3, n3 !== r22 - 1 && (t3 += " ");
+              }
+              return t3.length ? t3 : null;
+            }, r2.prototype._log = function() {
+              var e32 = arguments[1], t3 = this.formatLogMessage.apply(this, arguments);
+              if (t3) {
+                var n3 = this.queue[this.queue.length - 1], i2 = n3 && n3.text;
+                i2 === t3 ? n3.count += 1 : (this.queue.push({ text: t3, timestamp: e32, count: 1 }), this.totalLen += t3.length);
+              }
+              this.totalLen >= this.maxEntryLength && this._flush(true, true);
+            }, r2.prototype.start = function() {
+              this._reschedulePublishInterval();
+            }, r2.prototype._reschedulePublishInterval = function() {
+              this.storeLogsIntervalID && (window.clearTimeout(this.storeLogsIntervalID), this.storeLogsIntervalID = null), this.storeLogsIntervalID = window.setTimeout(
+                this._flush.bind(this, false, true),
+                this.storeInterval
+              );
+            }, r2.prototype.flush = function() {
+              this._flush(false, true);
+            }, r2.prototype._flush = function(e32, t3) {
+              this.totalLen > 0 && (this.logStorage.isReady() || e32) && (this.logStorage.isReady() ? (this.outputCache.length && (this.outputCache.forEach(
+                function(e4) {
+                  this.logStorage.storeLogs(e4);
+                }.bind(this)
+              ), this.outputCache = []), this.logStorage.storeLogs(this.queue)) : this.outputCache.push(this.queue), this.queue = [], this.totalLen = 0), t3 && this._reschedulePublishInterval();
+            }, r2.prototype.stop = function() {
+              this._flush(false, false);
+            }, e22.exports = r2;
+          },
+          7: (e22) => {
+            var t22 = { trace: 0, debug: 1, info: 2, log: 3, warn: 4, error: 5 };
+            o2.consoleTransport = console;
+            var n22 = [o2.consoleTransport];
+            o2.addGlobalTransport = function(e32) {
+              -1 === n22.indexOf(e32) && n22.push(e32);
+            }, o2.removeGlobalTransport = function(e32) {
+              var t3 = n22.indexOf(e32);
+              -1 !== t3 && n22.splice(t3, 1);
+            };
+            var i = {};
+            function r2() {
+              var e32 = {
+                methodName: "",
+                fileLocation: "",
+                line: null,
+                column: null
+              }, t3 = new Error(), n3 = t3.stack ? t3.stack.split("\n") : [];
+              if (!n3 || n3.length < 3)
+                return e32;
+              var i2 = null;
+              return n3[3] && (i2 = n3[3].match(/\s*at\s*(.+?)\s*\((\S*)\s*:(\d*)\s*:(\d*)\)/)), !i2 || i2.length <= 4 ? (0 === n3[2].indexOf("log@") ? e32.methodName = n3[3].substr(0, n3[3].indexOf("@")) : e32.methodName = n3[2].substr(0, n3[2].indexOf("@")), e32) : (e32.methodName = i2[1], e32.fileLocation = i2[2], e32.line = i2[3], e32.column = i2[4], e32);
+            }
+            function s3() {
+              var e32 = arguments[0], s22 = arguments[1], o22 = Array.prototype.slice.call(arguments, 2);
+              if (!(t22[s22] < e32.level))
+                for (var a2 = !(e32.options.disableCallerInfo || i.disableCallerInfo) && r2(), c2 = n22.concat(e32.transports), l = 0; l < c2.length; l++) {
+                  var d2 = c2[l], u = d2[s22];
+                  if (u && "function" == typeof u) {
+                    var h = [];
+                    h.push(new Date().toISOString()), e32.id && h.push("[" + e32.id + "]"), a2 && a2.methodName.length > 1 && h.push("<" + a2.methodName + ">: ");
+                    var p2 = h.concat(o22);
+                    u.bind(d2).apply(d2, p2);
+                  }
+                }
+            }
+            function o2(e32, n3, i2, r22) {
+              this.id = n3, this.options = r22 || {}, this.transports = i2, this.transports || (this.transports = []), this.level = t22[e32];
+              for (var o22 = Object.keys(t22), a2 = 0; a2 < o22.length; a2++)
+                this[o22[a2]] = s3.bind(null, this, o22[a2]);
+            }
+            o2.setGlobalOptions = function(e32) {
+              i = e32 || {};
+            }, o2.prototype.setLevel = function(e32) {
+              this.level = t22[e32];
+            }, e22.exports = o2, o2.levels = {
+              TRACE: "trace",
+              DEBUG: "debug",
+              INFO: "info",
+              LOG: "log",
+              WARN: "warn",
+              ERROR: "error"
+            };
+          },
+          860: (e22, t22, n22) => {
+            var i = n22(7), r2 = n22(369), s3 = {}, o2 = [], a2 = i.levels.TRACE;
+            e22.exports = {
+              addGlobalTransport: function(e32) {
+                i.addGlobalTransport(e32);
+              },
+              removeGlobalTransport: function(e32) {
+                i.removeGlobalTransport(e32);
+              },
+              setGlobalOptions: function(e32) {
+                i.setGlobalOptions(e32);
+              },
+              getLogger: function(e32, t3, n3) {
+                var r22 = new i(a2, e32, t3, n3);
+                return e32 ? (s3[e32] = s3[e32] || [], s3[e32].push(r22)) : o2.push(r22), r22;
+              },
+              setLogLevelById: function(e32, t3) {
+                for (var n3 = t3 ? s3[t3] || [] : o2, i2 = 0; i2 < n3.length; i2++)
+                  n3[i2].setLevel(e32);
+              },
+              setLogLevel: function(e32) {
+                a2 = e32;
+                for (var t3 = 0; t3 < o2.length; t3++)
+                  o2[t3].setLevel(e32);
+                for (var n3 in s3) {
+                  var i2 = s3[n3] || [];
+                  for (t3 = 0; t3 < i2.length; t3++)
+                    i2[t3].setLevel(e32);
+                }
+              },
+              levels: i.levels,
+              LogCollector: r2
+            };
+          },
+          620: (e22) => {
+            var t22, n22 = "object" == typeof Reflect ? Reflect : null, i = n22 && "function" == typeof n22.apply ? n22.apply : function(e32, t3, n3) {
+              return Function.prototype.apply.call(e32, t3, n3);
+            };
+            t22 = n22 && "function" == typeof n22.ownKeys ? n22.ownKeys : Object.getOwnPropertySymbols ? function(e32) {
+              return Object.getOwnPropertyNames(e32).concat(
+                Object.getOwnPropertySymbols(e32)
+              );
+            } : function(e32) {
+              return Object.getOwnPropertyNames(e32);
+            };
+            var r2 = Number.isNaN || function(e32) {
+              return e32 != e32;
+            };
+            function s3() {
+              s3.init.call(this);
+            }
+            e22.exports = s3, e22.exports.once = function(e32, t3) {
+              return new Promise(function(n3, i2) {
+                function r22(n4) {
+                  e32.removeListener(t3, s22), i2(n4);
+                }
+                function s22() {
+                  "function" == typeof e32.removeListener && e32.removeListener("error", r22), n3([].slice.call(arguments));
+                }
+                m2(e32, t3, s22, { once: true }), "error" !== t3 && function(e4, t4, n4) {
+                  "function" == typeof e4.on && m2(e4, "error", t4, { once: true });
+                }(e32, r22);
+              });
+            }, s3.EventEmitter = s3, s3.prototype._events = void 0, s3.prototype._eventsCount = 0, s3.prototype._maxListeners = void 0;
+            var o2 = 10;
+            function a2(e32) {
+              if ("function" != typeof e32)
+                throw new TypeError(
+                  'The "listener" argument must be of type Function. Received type ' + typeof e32
+                );
+            }
+            function c2(e32) {
+              return void 0 === e32._maxListeners ? s3.defaultMaxListeners : e32._maxListeners;
+            }
+            function l(e32, t3, n3, i2) {
+              var r22, s22, o22, l2;
+              if (a2(n3), void 0 === (s22 = e32._events) ? (s22 = e32._events = /* @__PURE__ */ Object.create(null), e32._eventsCount = 0) : (void 0 !== s22.newListener && (e32.emit("newListener", t3, n3.listener ? n3.listener : n3), s22 = e32._events), o22 = s22[t3]), void 0 === o22)
+                o22 = s22[t3] = n3, ++e32._eventsCount;
+              else if ("function" == typeof o22 ? o22 = s22[t3] = i2 ? [n3, o22] : [o22, n3] : i2 ? o22.unshift(n3) : o22.push(n3), (r22 = c2(e32)) > 0 && o22.length > r22 && !o22.warned) {
+                o22.warned = true;
+                var d22 = new Error(
+                  "Possible EventEmitter memory leak detected. " + o22.length + " " + String(t3) + " listeners added. Use emitter.setMaxListeners() to increase limit"
+                );
+                d22.name = "MaxListenersExceededWarning", d22.emitter = e32, d22.type = t3, d22.count = o22.length, l2 = d22, console && console.warn && console.warn(l2);
+              }
+              return e32;
+            }
+            function d2() {
+              if (!this.fired)
+                return this.target.removeListener(this.type, this.wrapFn), this.fired = true, 0 === arguments.length ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
+            }
+            function u(e32, t3, n3) {
+              var i2 = {
+                fired: false,
+                wrapFn: void 0,
+                target: e32,
+                type: t3,
+                listener: n3
+              }, r22 = d2.bind(i2);
+              return r22.listener = n3, i2.wrapFn = r22, r22;
+            }
+            function h(e32, t3, n3) {
+              var i2 = e32._events;
+              if (void 0 === i2)
+                return [];
+              var r22 = i2[t3];
+              return void 0 === r22 ? [] : "function" == typeof r22 ? n3 ? [r22.listener || r22] : [r22] : n3 ? function(e4) {
+                for (var t4 = new Array(e4.length), n4 = 0; n4 < t4.length; ++n4)
+                  t4[n4] = e4[n4].listener || e4[n4];
+                return t4;
+              }(r22) : g2(r22, r22.length);
+            }
+            function p2(e32) {
+              var t3 = this._events;
+              if (void 0 !== t3) {
+                var n3 = t3[e32];
+                if ("function" == typeof n3)
+                  return 1;
+                if (void 0 !== n3)
+                  return n3.length;
+              }
+              return 0;
+            }
+            function g2(e32, t3) {
+              for (var n3 = new Array(t3), i2 = 0; i2 < t3; ++i2)
+                n3[i2] = e32[i2];
+              return n3;
+            }
+            function m2(e32, t3, n3, i2) {
+              if ("function" == typeof e32.on)
+                i2.once ? e32.once(t3, n3) : e32.on(t3, n3);
+              else {
+                if ("function" != typeof e32.addEventListener)
+                  throw new TypeError(
+                    'The "emitter" argument must be of type EventEmitter. Received type ' + typeof e32
+                  );
+                e32.addEventListener(t3, function r22(s22) {
+                  i2.once && e32.removeEventListener(t3, r22), n3(s22);
+                });
+              }
+            }
+            Object.defineProperty(s3, "defaultMaxListeners", {
+              enumerable: true,
+              get: function() {
+                return o2;
+              },
+              set: function(e32) {
+                if ("number" != typeof e32 || e32 < 0 || r2(e32))
+                  throw new RangeError(
+                    'The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + e32 + "."
+                  );
+                o2 = e32;
+              }
+            }), s3.init = function() {
+              void 0 !== this._events && this._events !== Object.getPrototypeOf(this)._events || (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
+            }, s3.prototype.setMaxListeners = function(e32) {
+              if ("number" != typeof e32 || e32 < 0 || r2(e32))
+                throw new RangeError(
+                  'The value of "n" is out of range. It must be a non-negative number. Received ' + e32 + "."
+                );
+              return this._maxListeners = e32, this;
+            }, s3.prototype.getMaxListeners = function() {
+              return c2(this);
+            }, s3.prototype.emit = function(e32) {
+              for (var t3 = [], n3 = 1; n3 < arguments.length; n3++)
+                t3.push(arguments[n3]);
+              var r22 = "error" === e32, s22 = this._events;
+              if (void 0 !== s22)
+                r22 = r22 && void 0 === s22.error;
+              else if (!r22)
+                return false;
+              if (r22) {
+                var o22;
+                if (t3.length > 0 && (o22 = t3[0]), o22 instanceof Error)
+                  throw o22;
+                var a22 = new Error(
+                  "Unhandled error." + (o22 ? " (" + o22.message + ")" : "")
+                );
+                throw a22.context = o22, a22;
+              }
+              var c22 = s22[e32];
+              if (void 0 === c22)
+                return false;
+              if ("function" == typeof c22)
+                i(c22, this, t3);
+              else {
+                var l2 = c22.length, d22 = g2(c22, l2);
+                for (n3 = 0; n3 < l2; ++n3)
+                  i(d22[n3], this, t3);
+              }
+              return true;
+            }, s3.prototype.addListener = function(e32, t3) {
+              return l(this, e32, t3, false);
+            }, s3.prototype.on = s3.prototype.addListener, s3.prototype.prependListener = function(e32, t3) {
+              return l(this, e32, t3, true);
+            }, s3.prototype.once = function(e32, t3) {
+              return a2(t3), this.on(e32, u(this, e32, t3)), this;
+            }, s3.prototype.prependOnceListener = function(e32, t3) {
+              return a2(t3), this.prependListener(e32, u(this, e32, t3)), this;
+            }, s3.prototype.removeListener = function(e32, t3) {
+              var n3, i2, r22, s22, o22;
+              if (a2(t3), void 0 === (i2 = this._events))
+                return this;
+              if (void 0 === (n3 = i2[e32]))
+                return this;
+              if (n3 === t3 || n3.listener === t3)
+                0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : (delete i2[e32], i2.removeListener && this.emit("removeListener", e32, n3.listener || t3));
+              else if ("function" != typeof n3) {
+                for (r22 = -1, s22 = n3.length - 1; s22 >= 0; s22--)
+                  if (n3[s22] === t3 || n3[s22].listener === t3) {
+                    o22 = n3[s22].listener, r22 = s22;
+                    break;
+                  }
+                if (r22 < 0)
+                  return this;
+                0 === r22 ? n3.shift() : function(e4, t4) {
+                  for (; t4 + 1 < e4.length; t4++)
+                    e4[t4] = e4[t4 + 1];
+                  e4.pop();
+                }(n3, r22), 1 === n3.length && (i2[e32] = n3[0]), void 0 !== i2.removeListener && this.emit("removeListener", e32, o22 || t3);
+              }
+              return this;
+            }, s3.prototype.off = s3.prototype.removeListener, s3.prototype.removeAllListeners = function(e32) {
+              var t3, n3, i2;
+              if (void 0 === (n3 = this._events))
+                return this;
+              if (void 0 === n3.removeListener)
+                return 0 === arguments.length ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : void 0 !== n3[e32] && (0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : delete n3[e32]), this;
+              if (0 === arguments.length) {
+                var r22, s22 = Object.keys(n3);
+                for (i2 = 0; i2 < s22.length; ++i2)
+                  "removeListener" !== (r22 = s22[i2]) && this.removeAllListeners(r22);
+                return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
+              }
+              if ("function" == typeof (t3 = n3[e32]))
+                this.removeListener(e32, t3);
+              else if (void 0 !== t3)
+                for (i2 = t3.length - 1; i2 >= 0; i2--)
+                  this.removeListener(e32, t3[i2]);
+              return this;
+            }, s3.prototype.listeners = function(e32) {
+              return h(this, e32, true);
+            }, s3.prototype.rawListeners = function(e32) {
+              return h(this, e32, false);
+            }, s3.listenerCount = function(e32, t3) {
+              return "function" == typeof e32.listenerCount ? e32.listenerCount(t3) : p2.call(e32, t3);
+            }, s3.prototype.listenerCount = p2, s3.prototype.eventNames = function() {
+              return this._eventsCount > 0 ? t22(this._events) : [];
+            };
+          }
+        }, t2 = {};
+        function n2(i) {
+          var r2 = t2[i];
+          if (void 0 !== r2)
+            return r2.exports;
+          var s3 = t2[i] = { exports: {} };
+          return e3[i](s3, s3.exports, n2), s3.exports;
+        }
+        return n2.n = (e22) => {
+          var t22 = e22 && e22.__esModule ? () => e22.default : () => e22;
+          return n2.d(t22, { a: t22 }), t22;
+        }, n2.d = (e22, t22) => {
+          for (var i in t22)
+            n2.o(t22, i) && !n2.o(e22, i) && Object.defineProperty(e22, i, { enumerable: true, get: t22[i] });
+        }, n2.o = (e22, t22) => Object.prototype.hasOwnProperty.call(e22, t22), n2(872);
+      })();
+    });
+    JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $lessThan768, $$unsubscribe_lessThan768;
+      $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
+      $$unsubscribe_lessThan768();
+      return `<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px] "}"></div>
+  
+
+  <img alt="${"hangup button"}" class="${"absolute bg-gray-600 p-2 brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] hover:bg-red-500 rotate-90 hover:scale-[1.5] hover:rotate-0 transition-transform duration-100"}"></div>
+
+
+
+`;
+    });
+    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      onDestroy(() => {
+        set_store_value(isDarkMode, $isDarkMode = false, $isDarkMode);
+        window.document.body.classList.remove("dark-mode");
+      });
+      $$unsubscribe_isDarkMode();
+      return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/4.js
+var __exports5 = {};
+__export(__exports5, {
+  component: () => component5,
+  file: () => file5,
+  imports: () => imports5,
+  index: () => index5,
+  shared: () => page_exports,
+  stylesheets: () => stylesheets5
+});
+var index5, component5, file5, imports5, stylesheets5;
+var init__5 = __esm({
+  ".svelte-kit/output/server/nodes/4.js"() {
+    init_page();
+    index5 = 4;
+    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-fefb9d75.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-fefb9d75.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-6a52d76d.js", "_app/immutable/chunks/singletons-940ef1ec.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    stylesheets5 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/faq/_page.svelte.js
+var page_svelte_exports4 = {};
+__export(page_svelte_exports4, {
+  default: () => Page4
+});
+var css3, Page4;
+var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
     init_chunks();
     css3 = {
       code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
       map: null
     };
-    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $$result.css.add(css3);
       return `${$$result.head += `<!-- HEAD_svelte-1bm9itx_START --><link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}"><\/script><!-- HEAD_svelte-1bm9itx_END -->`, ""}
 
@@ -13381,42 +14783,6 @@ var init_page_svelte3 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/4.js
-var __exports5 = {};
-__export(__exports5, {
-  component: () => component5,
-  file: () => file5,
-  imports: () => imports5,
-  index: () => index5,
-  stylesheets: () => stylesheets5
-});
-var index5, component5, file5, imports5, stylesheets5;
-var init__5 = __esm({
-  ".svelte-kit/output/server/nodes/4.js"() {
-    index5 = 4;
-    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/faq/_page.svelte-f0117d67.js";
-    imports5 = ["_app/immutable/components/pages/faq/_page.svelte-f0117d67.js", "_app/immutable/chunks/index-cb50693d.js"];
-    stylesheets5 = ["_app/immutable/assets/_page-113a1f72.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/homework/_page.svelte.js
-var page_svelte_exports4 = {};
-__export(page_svelte_exports4, {
-  default: () => Page4
-});
-var Page4;
-var init_page_svelte4 = __esm({
-  ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
-    init_chunks();
-    init_Dropzone();
-    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(Dropzone_1, "Dropzone").$$render($$result, {}, {}, {})}`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/5.js
 var __exports6 = {};
 __export(__exports6, {
@@ -13431,9 +14797,45 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/homework/_page.svelte-0d92c344.js";
-    imports6 = ["_app/immutable/components/pages/homework/_page.svelte-0d92c344.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/Dropzone-b89565bc.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/index-99a2a668.js"];
-    stylesheets6 = ["_app/immutable/assets/Dropzone-cce97800.css"];
+    file6 = "_app/immutable/components/pages/faq/_page.svelte-8edab0ca.js";
+    imports6 = ["_app/immutable/components/pages/faq/_page.svelte-8edab0ca.js", "_app/immutable/chunks/index-2bdb53b3.js"];
+    stylesheets6 = ["_app/immutable/assets/_page-113a1f72.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/homework/_page.svelte.js
+var page_svelte_exports5 = {};
+__export(page_svelte_exports5, {
+  default: () => Page5
+});
+var Page5;
+var init_page_svelte5 = __esm({
+  ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
+    init_chunks();
+    init_Dropzone();
+    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${validate_component(Dropzone_1, "Dropzone").$$render($$result, {}, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/6.js
+var __exports7 = {};
+__export(__exports7, {
+  component: () => component7,
+  file: () => file7,
+  imports: () => imports7,
+  index: () => index7,
+  stylesheets: () => stylesheets7
+});
+var index7, component7, file7, imports7, stylesheets7;
+var init__7 = __esm({
+  ".svelte-kit/output/server/nodes/6.js"() {
+    index7 = 6;
+    component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-6fb41455.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-6fb41455.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Dropzone-3e543bd8.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js"];
+    stylesheets7 = ["_app/immutable/assets/Dropzone-cce97800.css"];
   }
 });
 
@@ -27085,9 +28487,9 @@ var init_katex = __esm({
 // .svelte-kit/output/server/entries/pages/katex/_page.svx.js
 var page_svx_exports = {};
 __export(page_svx_exports, {
-  default: () => Page5
+  default: () => Page6
 });
-var Katexer, numMax, Page5;
+var Katexer, numMax, Page6;
 var init_page_svx = __esm({
   ".svelte-kit/output/server/entries/pages/katex/_page.svx.js"() {
     init_chunks();
@@ -27102,7 +28504,7 @@ var init_page_svx = __esm({
 ${$$result.head += `<!-- HEAD_svelte-ztscxf_START --><link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}"><!-- HEAD_svelte-ztscxf_END -->`, ""}`;
     });
     numMax = 1e3;
-    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let proseInvert;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -27131,41 +28533,6 @@ ${each(Array(num), (_2, j2) => {
   }
 });
 
-// .svelte-kit/output/server/nodes/6.js
-var __exports7 = {};
-__export(__exports7, {
-  component: () => component7,
-  file: () => file7,
-  imports: () => imports7,
-  index: () => index7,
-  stylesheets: () => stylesheets7
-});
-var index7, component7, file7, imports7, stylesheets7;
-var init__7 = __esm({
-  ".svelte-kit/output/server/nodes/6.js"() {
-    index7 = 6;
-    component7 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file7 = "_app/immutable/components/pages/katex/_page.svx-a74e20e4.js";
-    imports7 = ["_app/immutable/components/pages/katex/_page.svx-a74e20e4.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js"];
-    stylesheets7 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/login/_page.svelte.js
-var page_svelte_exports5 = {};
-__export(page_svelte_exports5, {
-  default: () => Page6
-});
-var Page6;
-var init_page_svelte5 = __esm({
-  ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
-    init_chunks();
-    Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return ``;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/7.js
 var __exports8 = {};
 __export(__exports8, {
@@ -27179,10 +28546,45 @@ var index8, component8, file8, imports8, stylesheets8;
 var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
-    component8 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file8 = "_app/immutable/components/pages/login/_page.svelte-fef3700c.js";
-    imports8 = ["_app/immutable/components/pages/login/_page.svelte-fef3700c.js", "_app/immutable/chunks/index-cb50693d.js"];
+    component8 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
+    file8 = "_app/immutable/components/pages/katex/_page.svx-31f5f368.js";
+    imports8 = ["_app/immutable/components/pages/katex/_page.svx-31f5f368.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js"];
     stylesheets8 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/login/_page.svelte.js
+var page_svelte_exports6 = {};
+__export(page_svelte_exports6, {
+  default: () => Page7
+});
+var Page7;
+var init_page_svelte6 = __esm({
+  ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
+    init_chunks();
+    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return ``;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/8.js
+var __exports9 = {};
+__export(__exports9, {
+  component: () => component9,
+  file: () => file9,
+  imports: () => imports9,
+  index: () => index9,
+  stylesheets: () => stylesheets9
+});
+var index9, component9, file9, imports9, stylesheets9;
+var init__9 = __esm({
+  ".svelte-kit/output/server/nodes/8.js"() {
+    index9 = 8;
+    component9 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
+    file9 = "_app/immutable/components/pages/login/_page.svelte-bc665d36.js";
+    imports9 = ["_app/immutable/components/pages/login/_page.svelte-bc665d36.js", "_app/immutable/chunks/index-2bdb53b3.js"];
+    stylesheets9 = [];
   }
 });
 
@@ -27220,9 +28622,9 @@ ${$$result.head += `<!-- HEAD_svelte-15ncbow_START --><link rel="${"stylesheet"}
 // .svelte-kit/output/server/entries/pages/math/_page.svx.js
 var page_svx_exports2 = {};
 __export(page_svx_exports2, {
-  default: () => Page7
+  default: () => Page8
 });
-var Katex, SixMathEqnAnim, numMax2, numMDMax, Page7;
+var Katex, SixMathEqnAnim, numMax2, numMDMax, Page8;
 var init_page_svx2 = __esm({
   ".svelte-kit/output/server/entries/pages/math/_page.svx.js"() {
     init_chunks();
@@ -27263,7 +28665,7 @@ var init_page_svx2 = __esm({
     });
     numMax2 = 1e3;
     numMDMax = 1;
-    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let num;
       let numMD;
       let proseInvert;
@@ -27333,32 +28735,32 @@ ${each(Array(num), (_2, j2) => {
   }
 });
 
-// .svelte-kit/output/server/nodes/8.js
-var __exports9 = {};
-__export(__exports9, {
-  component: () => component9,
-  file: () => file9,
-  imports: () => imports9,
-  index: () => index9,
-  stylesheets: () => stylesheets9
+// .svelte-kit/output/server/nodes/9.js
+var __exports10 = {};
+__export(__exports10, {
+  component: () => component10,
+  file: () => file10,
+  imports: () => imports10,
+  index: () => index10,
+  stylesheets: () => stylesheets10
 });
-var index9, component9, file9, imports9, stylesheets9;
-var init__9 = __esm({
-  ".svelte-kit/output/server/nodes/8.js"() {
-    index9 = 8;
-    component9 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file9 = "_app/immutable/components/pages/math/_page.svx-e1bb42a9.js";
-    imports9 = ["_app/immutable/components/pages/math/_page.svx-e1bb42a9.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/index-99a2a668.js", "_app/immutable/chunks/Kajax-6a0f294b.js"];
-    stylesheets9 = [];
+var index10, component10, file10, imports10, stylesheets10;
+var init__10 = __esm({
+  ".svelte-kit/output/server/nodes/9.js"() {
+    index10 = 9;
+    component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
+    file10 = "_app/immutable/components/pages/math/_page.svx-8f9974b6.js";
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-8f9974b6.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/Kajax-5fca555e.js"];
+    stylesheets10 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/mathjax/_page.svx.js
 var page_svx_exports3 = {};
 __export(page_svx_exports3, {
-  default: () => Page8
+  default: () => Page9
 });
-var MathJaxer, numMax3, Page8;
+var MathJaxer, numMax3, Page9;
 var init_page_svx3 = __esm({
   ".svelte-kit/output/server/entries/pages/mathjax/_page.svx.js"() {
     init_chunks();
@@ -27384,7 +28786,7 @@ var init_page_svx3 = __esm({
   <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}"><\/script><!-- HEAD_svelte-1fd20gn_END -->`, ""}`;
     });
     numMax3 = 1e3;
-    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let proseInvert;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -27413,33 +28815,33 @@ ${each(Array(num), (_2, j2) => {
   }
 });
 
-// .svelte-kit/output/server/nodes/9.js
-var __exports10 = {};
-__export(__exports10, {
-  component: () => component10,
-  file: () => file10,
-  imports: () => imports10,
-  index: () => index10,
-  stylesheets: () => stylesheets10
+// .svelte-kit/output/server/nodes/10.js
+var __exports11 = {};
+__export(__exports11, {
+  component: () => component11,
+  file: () => file11,
+  imports: () => imports11,
+  index: () => index11,
+  stylesheets: () => stylesheets11
 });
-var index10, component10, file10, imports10, stylesheets10;
-var init__10 = __esm({
-  ".svelte-kit/output/server/nodes/9.js"() {
-    index10 = 9;
-    component10 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file10 = "_app/immutable/components/pages/mathjax/_page.svx-5f293e86.js";
-    imports10 = ["_app/immutable/components/pages/mathjax/_page.svx-5f293e86.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js"];
-    stylesheets10 = [];
+var index11, component11, file11, imports11, stylesheets11;
+var init__11 = __esm({
+  ".svelte-kit/output/server/nodes/10.js"() {
+    index11 = 10;
+    component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
+    file11 = "_app/immutable/components/pages/mathjax/_page.svx-06c017d9.js";
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-06c017d9.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js"];
+    stylesheets11 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/physics/_page.svelte.js
-var page_svelte_exports6 = {};
-__export(page_svelte_exports6, {
-  default: () => Page9
+var page_svelte_exports7 = {};
+__export(page_svelte_exports7, {
+  default: () => Page10
 });
-var css4, E_and_m, Page9;
-var init_page_svelte6 = __esm({
+var css4, E_and_m, Page10;
+var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
     init_Kajax();
@@ -27521,7 +28923,7 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <li>D. 8.0 \u03A9</li></ul>
   <img style="${"margin: 0 auto; display:flex;width: 65vw;min-width: 280px;max-width: 600px;"}" src="${"https://raw.githubusercontent.com/brightowltutoring/web/main/circuits-1.png"}"></div>`;
     });
-    Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let proseInvert;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -27532,33 +28934,33 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
   }
 });
 
-// .svelte-kit/output/server/nodes/10.js
-var __exports11 = {};
-__export(__exports11, {
-  component: () => component11,
-  file: () => file11,
-  imports: () => imports11,
-  index: () => index11,
-  stylesheets: () => stylesheets11
+// .svelte-kit/output/server/nodes/11.js
+var __exports12 = {};
+__export(__exports12, {
+  component: () => component12,
+  file: () => file12,
+  imports: () => imports12,
+  index: () => index12,
+  stylesheets: () => stylesheets12
 });
-var index11, component11, file11, imports11, stylesheets11;
-var init__11 = __esm({
-  ".svelte-kit/output/server/nodes/10.js"() {
-    index11 = 10;
-    component11 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file11 = "_app/immutable/components/pages/physics/_page.svelte-8b0189a7.js";
-    imports11 = ["_app/immutable/components/pages/physics/_page.svelte-8b0189a7.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/Kajax-6a0f294b.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js"];
-    stylesheets11 = ["_app/immutable/assets/_page-fcf51fa8.css"];
+var index12, component12, file12, imports12, stylesheets12;
+var init__12 = __esm({
+  ".svelte-kit/output/server/nodes/11.js"() {
+    index12 = 11;
+    component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
+    file12 = "_app/immutable/components/pages/physics/_page.svelte-376748f4.js";
+    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-376748f4.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Kajax-5fca555e.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js"];
+    stylesheets12 = ["_app/immutable/assets/_page-fcf51fa8.css"];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/plans/_page.svelte.js
-var page_svelte_exports7 = {};
-__export(page_svelte_exports7, {
-  default: () => Page10
+var page_svelte_exports8 = {};
+__export(page_svelte_exports8, {
+  default: () => Page11
 });
-var css5, Page10;
-var init_page_svelte7 = __esm({
+var css5, Page11;
+var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
     init_store();
@@ -27569,7 +28971,7 @@ var init_page_svelte7 = __esm({
       code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
       map: null
     };
-    Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $$result.css.add(css5);
       return `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
 <div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
@@ -27610,45 +29012,6 @@ var init_page_svelte7 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/11.js
-var __exports12 = {};
-__export(__exports12, {
-  component: () => component12,
-  file: () => file12,
-  imports: () => imports12,
-  index: () => index12,
-  stylesheets: () => stylesheets12
-});
-var index12, component12, file12, imports12, stylesheets12;
-var init__12 = __esm({
-  ".svelte-kit/output/server/nodes/11.js"() {
-    index12 = 11;
-    component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/plans/_page.svelte-266a009c.js";
-    imports12 = ["_app/immutable/components/pages/plans/_page.svelte-266a009c.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/PlansCardObserver-40ef2ee6.js", "_app/immutable/chunks/PlansCard-5e157baf.js", "_app/immutable/chunks/index-99a2a668.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js"];
-    stylesheets12 = ["_app/immutable/assets/_page-097b9a4a.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
-var page_md_exports = {};
-__export(page_md_exports, {
-  default: () => Page11
-});
-var Page11;
-var init_page_md = __esm({
-  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
-    init_chunks();
-    Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-${each(Array(1e3), (_2, i) => {
-        return `<div class="${"bg-red-100"}">
-  </div>`;
-      })}`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/12.js
 var __exports13 = {};
 __export(__exports13, {
@@ -27662,20 +29025,59 @@ var index13, component13, file13, imports13, stylesheets13;
 var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
-    component13 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file13 = "_app/immutable/components/pages/samplequiz/_page.md-5f1f1395.js";
-    imports13 = ["_app/immutable/components/pages/samplequiz/_page.md-5f1f1395.js", "_app/immutable/chunks/index-cb50693d.js"];
-    stylesheets13 = [];
+    component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-9b87c316.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-9b87c316.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/PlansCardObserver-d2ce729c.js", "_app/immutable/chunks/PlansCard-812257c3.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js"];
+    stylesheets13 = ["_app/immutable/assets/_page-097b9a4a.css"];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
+var page_md_exports = {};
+__export(page_md_exports, {
+  default: () => Page12
+});
+var Page12;
+var init_page_md = __esm({
+  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
+    init_chunks();
+    Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+${each(Array(1e3), (_2, i) => {
+        return `<div class="${"bg-red-100"}">
+  </div>`;
+      })}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/13.js
+var __exports14 = {};
+__export(__exports14, {
+  component: () => component14,
+  file: () => file14,
+  imports: () => imports14,
+  index: () => index14,
+  stylesheets: () => stylesheets14
+});
+var index14, component14, file14, imports14, stylesheets14;
+var init__14 = __esm({
+  ".svelte-kit/output/server/nodes/13.js"() {
+    index14 = 13;
+    component14 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
+    file14 = "_app/immutable/components/pages/samplequiz/_page.md-e1ef8b40.js";
+    imports14 = ["_app/immutable/components/pages/samplequiz/_page.md-e1ef8b40.js", "_app/immutable/chunks/index-2bdb53b3.js"];
+    stylesheets14 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
-var page_svelte_exports8 = {};
-__export(page_svelte_exports8, {
-  default: () => Page12
+var page_svelte_exports9 = {};
+__export(page_svelte_exports9, {
+  default: () => Page13
 });
-var PlansCardSchools, Page12;
-var init_page_svelte8 = __esm({
+var PlansCardSchools, Page13;
+var init_page_svelte9 = __esm({
   ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
     init_chunks();
     init_store();
@@ -27712,7 +29114,7 @@ var init_page_svelte8 = __esm({
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
     });
-    Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page13 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArraySchools, (item, i) => {
         return `
     <div>${validate_component(PlansCardSchools, "PlansCardSchools").$$render(
@@ -27744,1390 +29146,6 @@ var init_page_svelte8 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/13.js
-var __exports14 = {};
-__export(__exports14, {
-  component: () => component14,
-  file: () => file14,
-  imports: () => imports14,
-  index: () => index14,
-  stylesheets: () => stylesheets14
-});
-var index14, component14, file14, imports14, stylesheets14;
-var init__14 = __esm({
-  ".svelte-kit/output/server/nodes/13.js"() {
-    index14 = 13;
-    component14 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file14 = "_app/immutable/components/pages/schools/_page.svelte-00822c2f.js";
-    imports14 = ["_app/immutable/components/pages/schools/_page.svelte-00822c2f.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/index-99a2a668.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js"];
-    stylesheets14 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/screenshare/_page.js
-var page_exports = {};
-__export(page_exports, {
-  ssr: () => ssr
-});
-var ssr;
-var init_page = __esm({
-  ".svelte-kit/output/server/entries/pages/screenshare/_page.js"() {
-    ssr = false;
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/screenshare/_page.svelte.js
-var page_svelte_exports9 = {};
-__export(page_svelte_exports9, {
-  default: () => Page13
-});
-var JitsiUser, Page13;
-var init_page_svelte9 = __esm({
-  ".svelte-kit/output/server/entries/pages/screenshare/_page.svelte.js"() {
-    init_chunks();
-    init_store();
-    !function(e3, t2) {
-      "object" == typeof exports && "object" == typeof module ? module.exports = t2() : "function" == typeof define && define.amd ? define([], t2) : "object" == typeof exports ? exports.JitsiMeetExternalAPI = t2() : e3.JitsiMeetExternalAPI = t2();
-    }(self, function() {
-      return (() => {
-        var e3 = {
-          820: (e22, t22, n22) => {
-            n22.d(t22, { default: () => S3 });
-            var i = n22(620), r2 = n22.n(i);
-            class s3 extends i {
-              constructor() {
-                var e32, t3;
-                super(...arguments), t3 = {}, (e32 = "_storage") in this ? Object.defineProperty(this, e32, {
-                  value: t3,
-                  enumerable: true,
-                  configurable: true,
-                  writable: true
-                }) : this[e32] = t3;
-              }
-              clear() {
-                this._storage = {};
-              }
-              get length() {
-                return Object.keys(this._storage).length;
-              }
-              getItem(e32) {
-                return this._storage[e32];
-              }
-              setItem(e32, t3) {
-                this._storage[e32] = t3;
-              }
-              removeItem(e32) {
-                delete this._storage[e32];
-              }
-              key(e32) {
-                const t3 = Object.keys(this._storage);
-                if (!(t3.length <= e32))
-                  return t3[e32];
-              }
-              serialize() {
-                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
-                if (0 === e32.length)
-                  return JSON.stringify(this._storage);
-                const t3 = { ...this._storage };
-                return e32.forEach((e4) => {
-                  delete t3[e4];
-                }), JSON.stringify(t3);
-              }
-            }
-            const o2 = new class extends i {
-              constructor() {
-                super();
-                try {
-                  this._storage = window.localStorage, this._localStorageDisabled = false;
-                } catch (e32) {
-                }
-                this._storage || (console.warn("Local storage is disabled."), this._storage = new s3(), this._localStorageDisabled = true);
-              }
-              isLocalStorageDisabled() {
-                return this._localStorageDisabled;
-              }
-              clear() {
-                this._storage.clear(), this.emit("changed");
-              }
-              get length() {
-                return this._storage.length;
-              }
-              getItem(e32) {
-                return this._storage.getItem(e32);
-              }
-              setItem(e32, t3) {
-                let n3 = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
-                this._storage.setItem(e32, t3), n3 || this.emit("changed");
-              }
-              removeItem(e32) {
-                this._storage.removeItem(e32), this.emit("changed");
-              }
-              key(e32) {
-                return this._storage.key(e32);
-              }
-              serialize() {
-                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
-                if (this.isLocalStorageDisabled())
-                  return this._storage.serialize(e32);
-                const t3 = this._storage.length, n3 = {};
-                for (let i2 = 0; i2 < t3; i2++) {
-                  const t4 = this._storage.key(i2);
-                  e32.includes(t4) || (n3[t4] = this._storage.getItem(t4));
-                }
-                return JSON.stringify(n3);
-              }
-            }();
-            var a2 = n22(571);
-            const c2 = ["__proto__", "constructor", "prototype"];
-            function l(e32) {
-              const t3 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)+", "gi"), n3 = t3.exec(e32);
-              if (n3) {
-                let i2 = n3[n3.length - 1].toLowerCase();
-                "http:" !== i2 && "https:" !== i2 && (i2 = "https:"), (e32 = e32.substring(t3.lastIndex)).startsWith("//") && (e32 = i2 + e32);
-              }
-              return e32;
-            }
-            function d2(e32 = {}) {
-              const t3 = [];
-              for (const n3 in e32)
-                try {
-                  t3.push(`${n3}=${encodeURIComponent(JSON.stringify(e32[n3]))}`);
-                } catch (e4) {
-                  console.warn(`Error encoding ${n3}: ${e4}`);
-                }
-              return t3;
-            }
-            function u(e32) {
-              const t3 = { toString: h };
-              let n3, i2, r22;
-              if (e32 = e32.replace(/\s/g, ""), n3 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)", "gi"), i2 = n3.exec(e32), i2 && (t3.protocol = i2[1].toLowerCase(), e32 = e32.substring(n3.lastIndex)), n3 = new RegExp("^(//[^/?#]+)", "gi"), i2 = n3.exec(e32), i2) {
-                let r3 = i2[1].substring(2);
-                e32 = e32.substring(n3.lastIndex);
-                const s22 = r3.indexOf("@");
-                -1 !== s22 && (r3 = r3.substring(s22 + 1)), t3.host = r3;
-                const o22 = r3.lastIndexOf(":");
-                -1 !== o22 && (t3.port = r3.substring(o22 + 1), r3 = r3.substring(0, o22)), t3.hostname = r3;
-              }
-              if (n3 = new RegExp("^([^?#]*)", "gi"), i2 = n3.exec(e32), i2 && (r22 = i2[1], e32 = e32.substring(n3.lastIndex)), r22 ? r22.startsWith("/") || (r22 = `/${r22}`) : r22 = "/", t3.pathname = r22, e32.startsWith("?")) {
-                let n4 = e32.indexOf("#", 1);
-                -1 === n4 && (n4 = e32.length), t3.search = e32.substring(0, n4), e32 = e32.substring(n4);
-              } else
-                t3.search = "";
-              return t3.hash = e32.startsWith("#") ? e32 : "", t3;
-            }
-            function h(e32) {
-              const {
-                hash: t3,
-                host: n3,
-                pathname: i2,
-                protocol: r22,
-                search: s22
-              } = e32 || this;
-              let o22 = "";
-              return r22 && (o22 += r22), n3 && (o22 += `//${n3}`), o22 += i2 || "/", s22 && (o22 += s22), t3 && (o22 += t3), o22;
-            }
-            function p2(e32) {
-              let t3;
-              t3 = e32.serverURL && e32.room ? new URL(e32.room, e32.serverURL).toString() : e32.room ? e32.room : e32.url || "";
-              const n3 = u(l(t3));
-              if (!n3.protocol) {
-                let t4 = e32.protocol || e32.scheme;
-                t4 && (t4.endsWith(":") || (t4 += ":"), n3.protocol = t4);
-              }
-              let { pathname: i2 } = n3;
-              if (!n3.host) {
-                const t4 = e32.domain || e32.host || e32.hostname;
-                if (t4) {
-                  const {
-                    host: e4,
-                    hostname: r3,
-                    pathname: s32,
-                    port: o3
-                  } = u(l(`org.jitsi.meet://${t4}`));
-                  e4 && (n3.host = e4, n3.hostname = r3, n3.port = o3), "/" === i2 && "/" !== s32 && (i2 = s32);
-                }
-              }
-              const r22 = e32.roomName || e32.room;
-              !r22 || !n3.pathname.endsWith("/") && n3.pathname.endsWith(`/${r22}`) || (i2.endsWith("/") || (i2 += "/"), i2 += r22), n3.pathname = i2;
-              const { jwt: s22, lang: o22, release: a22 } = e32, c22 = new URLSearchParams(n3.search);
-              s22 && c22.set("jwt", s22);
-              const { defaultLanguage: h2 } = e32.configOverwrite || {};
-              (o22 || h2) && c22.set("lang", o22 || h2), a22 && c22.set("release", a22);
-              const p22 = c22.toString();
-              p22 && (n3.search = `?${p22}`);
-              let { hash: g22 } = n3;
-              for (const t4 of [
-                "config",
-                "interfaceConfig",
-                "devices",
-                "userInfo",
-                "appData"
-              ]) {
-                const n4 = d2(e32[`${t4}Overwrite`] || e32[t4] || e32[`${t4}Override`]);
-                if (n4.length) {
-                  let e4 = `${t4}.${n4.join(`&${t4}.`)}`;
-                  g22.length ? e4 = `&${e4}` : g22 = "#", g22 += e4;
-                }
-              }
-              return n3.hash = g22, n3.toString() || void 0;
-            }
-            const g2 = { window: window.opener || window.parent }, m2 = "message";
-            class f {
-              constructor() {
-                let { postisOptions: e32 } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-                this.postis = function(e4) {
-                  var t3, n3 = e4.scope, i2 = e4.window, r22 = e4.windowForEventListening || window, s22 = e4.allowedOrigin, o22 = {}, a22 = [], c22 = {}, l2 = false, d22 = "__ready__", u2 = function(e5) {
-                    var t4;
-                    try {
-                      t4 = JSON.parse(e5.data);
-                    } catch (e6) {
-                      return;
-                    }
-                    if ((!s22 || e5.origin === s22) && t4 && t4.postis && t4.scope === n3) {
-                      var i3 = o22[t4.method];
-                      if (i3)
-                        for (var r3 = 0; r3 < i3.length; r3++)
-                          i3[r3].call(null, t4.params);
-                      else
-                        c22[t4.method] = c22[t4.method] || [], c22[t4.method].push(t4.params);
-                    }
-                  };
-                  r22.addEventListener("message", u2, false);
-                  var h2 = {
-                    listen: function(e5, t4) {
-                      o22[e5] = o22[e5] || [], o22[e5].push(t4);
-                      var n4 = c22[e5];
-                      if (n4)
-                        for (var i3 = o22[e5], r3 = 0; r3 < i3.length; r3++)
-                          for (var s32 = 0; s32 < n4.length; s32++)
-                            i3[r3].call(null, n4[s32]);
-                      delete c22[e5];
-                    },
-                    send: function(e5) {
-                      var t4 = e5.method;
-                      (l2 || e5.method === d22) && i2 && "function" == typeof i2.postMessage ? i2.postMessage(
-                        JSON.stringify({
-                          postis: true,
-                          scope: n3,
-                          method: t4,
-                          params: e5.params
-                        }),
-                        "*"
-                      ) : a22.push(e5);
-                    },
-                    ready: function(e5) {
-                      l2 ? e5() : setTimeout(function() {
-                        h2.ready(e5);
-                      }, 50);
-                    },
-                    destroy: function(e5) {
-                      clearInterval(t3), l2 = false, r22 && "function" == typeof r22.removeEventListener && r22.removeEventListener("message", u2), e5 && e5();
-                    }
-                  }, p22 = +new Date() + Math.random() + "";
-                  return t3 = setInterval(function() {
-                    h2.send({ method: d22, params: p22 });
-                  }, 50), h2.listen(d22, function(e5) {
-                    if (e5 === p22) {
-                      clearInterval(t3), l2 = true;
-                      for (var n4 = 0; n4 < a22.length; n4++)
-                        h2.send(a22[n4]);
-                      a22 = [];
-                    } else
-                      h2.send({ method: d22, params: e5 });
-                  }), h2;
-                }({ ...g2, ...e32 }), this._receiveCallback = () => {
-                }, this.postis.listen(m2, (e4) => this._receiveCallback(e4));
-              }
-              dispose() {
-                this.postis.destroy();
-              }
-              send(e32) {
-                this.postis.send({ method: m2, params: e32 });
-              }
-              setReceiveCallback(e32) {
-                this._receiveCallback = e32;
-              }
-            }
-            const v2 = "request", y2 = "response";
-            class _2 {
-              constructor() {
-                let { backend: e32 } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-                this._listeners = /* @__PURE__ */ new Map(), this._requestID = 0, this._responseHandlers = /* @__PURE__ */ new Map(), this._unprocessedMessages = /* @__PURE__ */ new Set(), this.addListener = this.on, e32 && this.setBackend(e32);
-              }
-              _disposeBackend() {
-                this._backend && (this._backend.dispose(), this._backend = null);
-              }
-              _onMessageReceived(e32) {
-                if (e32.type === y2) {
-                  const t3 = this._responseHandlers.get(e32.id);
-                  t3 && (t3(e32), this._responseHandlers.delete(e32.id));
-                } else
-                  e32.type === v2 ? this.emit("request", e32.data, (t3, n3) => {
-                    this._backend.send({
-                      type: y2,
-                      error: n3,
-                      id: e32.id,
-                      result: t3
-                    });
-                  }) : this.emit("event", e32.data);
-              }
-              dispose() {
-                this._responseHandlers.clear(), this._unprocessedMessages.clear(), this.removeAllListeners(), this._disposeBackend();
-              }
-              emit(e32) {
-                for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
-                  n3[i2 - 1] = arguments[i2];
-                const r22 = this._listeners.get(e32);
-                let s22 = false;
-                return r22 && r22.size && r22.forEach((e4) => {
-                  s22 = e4(...n3) || s22;
-                }), s22 || this._unprocessedMessages.add(n3), s22;
-              }
-              on(e32, t3) {
-                let n3 = this._listeners.get(e32);
-                return n3 || (n3 = /* @__PURE__ */ new Set(), this._listeners.set(e32, n3)), n3.add(t3), this._unprocessedMessages.forEach((e4) => {
-                  t3(...e4) && this._unprocessedMessages.delete(e4);
-                }), this;
-              }
-              removeAllListeners(e32) {
-                return e32 ? this._listeners.delete(e32) : this._listeners.clear(), this;
-              }
-              removeListener(e32, t3) {
-                const n3 = this._listeners.get(e32);
-                return n3 && n3.delete(t3), this;
-              }
-              sendEvent() {
-                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-                this._backend && this._backend.send({ type: "event", data: e32 });
-              }
-              sendRequest(e32) {
-                if (!this._backend)
-                  return Promise.reject(
-                    new Error("No transport backend defined!")
-                  );
-                this._requestID++;
-                const t3 = this._requestID;
-                return new Promise((n3, i2) => {
-                  this._responseHandlers.set(t3, (e4) => {
-                    let { error: t4, result: r22 } = e4;
-                    void 0 !== r22 ? n3(r22) : i2(
-                      void 0 !== t4 ? t4 : new Error("Unexpected response format!")
-                    );
-                  }), this._backend.send({ type: v2, data: e32, id: t3 });
-                });
-              }
-              setBackend(e32) {
-                this._disposeBackend(), this._backend = e32, this._backend.setReceiveCallback(
-                  this._onMessageReceived.bind(this)
-                );
-              }
-            }
-            (function(e32, t3 = false, n3 = "hash") {
-              "string" == typeof e32 && (e32 = new URL(e32));
-              const i2 = "search" === n3 ? e32.search : e32.hash, r22 = {}, s22 = (null == i2 ? void 0 : i2.substr(1).split("&")) || [];
-              if ("hash" === n3 && 1 === s22.length) {
-                const e4 = s22[0];
-                if (e4.startsWith("/") && 1 === e4.split("&").length)
-                  return r22;
-              }
-              return s22.forEach((e4) => {
-                const n4 = e4.split("="), i3 = n4[0];
-                if (!i3 || i3.split(".").some((e5) => c2.includes(e5)))
-                  return;
-                let s32;
-                try {
-                  if (s32 = n4[1], !t3) {
-                    const e5 = decodeURIComponent(s32).replace(/\\&/, "&");
-                    s32 = "undefined" === e5 ? void 0 : a2.parse(e5);
-                  }
-                } catch (e5) {
-                  return void function(e6, t4 = "") {
-                    var n5;
-                    console.error(t4, e6), null === (n5 = window.onerror) || void 0 === n5 || n5.call(window, t4, void 0, void 0, void 0, e6);
-                  }(e5, `Failed to parse URL parameter value: ${String(s32)}`);
-                }
-                r22[i3] = s32;
-              }), r22;
-            })(window.location).jitsi_meet_external_api_id;
-            (window.JitsiMeetJS || (window.JitsiMeetJS = {}), window.JitsiMeetJS.app || (window.JitsiMeetJS.app = {}), window.JitsiMeetJS.app).setExternalTransportBackend = (e32) => (void 0).setBackend(e32);
-            var b2 = n22(860);
-            const w2 = n22.n(b2)().getLogger("modules/API/external/functions.js");
-            function L2(e32, t3) {
-              return e32.sendRequest({
-                type: "devices",
-                name: "setDevice",
-                device: t3
-              });
-            }
-            const k2 = ["css/all.css", "libs/alwaysontop.min.js"], E2 = {
-              addBreakoutRoom: "add-breakout-room",
-              answerKnockingParticipant: "answer-knocking-participant",
-              approveVideo: "approve-video",
-              askToUnmute: "ask-to-unmute",
-              autoAssignToBreakoutRooms: "auto-assign-to-breakout-rooms",
-              avatarUrl: "avatar-url",
-              cancelPrivateChat: "cancel-private-chat",
-              closeBreakoutRoom: "close-breakout-room",
-              displayName: "display-name",
-              e2eeKey: "e2ee-key",
-              email: "email",
-              grantModerator: "grant-moderator",
-              hangup: "video-hangup",
-              hideNotification: "hide-notification",
-              initiatePrivateChat: "initiate-private-chat",
-              joinBreakoutRoom: "join-breakout-room",
-              localSubject: "local-subject",
-              kickParticipant: "kick-participant",
-              muteEveryone: "mute-everyone",
-              overwriteConfig: "overwrite-config",
-              overwriteNames: "overwrite-names",
-              password: "password",
-              pinParticipant: "pin-participant",
-              rejectParticipant: "reject-participant",
-              removeBreakoutRoom: "remove-breakout-room",
-              resizeFilmStrip: "resize-film-strip",
-              resizeLargeVideo: "resize-large-video",
-              sendChatMessage: "send-chat-message",
-              sendEndpointTextMessage: "send-endpoint-text-message",
-              sendParticipantToRoom: "send-participant-to-room",
-              sendTones: "send-tones",
-              setFollowMe: "set-follow-me",
-              setLargeVideoParticipant: "set-large-video-participant",
-              setMediaEncryptionKey: "set-media-encryption-key",
-              setNoiseSuppressionEnabled: "set-noise-suppression-enabled",
-              setParticipantVolume: "set-participant-volume",
-              setSubtitles: "set-subtitles",
-              setTileView: "set-tile-view",
-              setVideoQuality: "set-video-quality",
-              showNotification: "show-notification",
-              startRecording: "start-recording",
-              startShareVideo: "start-share-video",
-              stopRecording: "stop-recording",
-              stopShareVideo: "stop-share-video",
-              subject: "subject",
-              submitFeedback: "submit-feedback",
-              toggleAudio: "toggle-audio",
-              toggleCamera: "toggle-camera",
-              toggleCameraMirror: "toggle-camera-mirror",
-              toggleChat: "toggle-chat",
-              toggleE2EE: "toggle-e2ee",
-              toggleFilmStrip: "toggle-film-strip",
-              toggleLobby: "toggle-lobby",
-              toggleModeration: "toggle-moderation",
-              toggleNoiseSuppression: "toggle-noise-suppression",
-              toggleParticipantsPane: "toggle-participants-pane",
-              toggleRaiseHand: "toggle-raise-hand",
-              toggleShareScreen: "toggle-share-screen",
-              toggleSubtitles: "toggle-subtitles",
-              toggleTileView: "toggle-tile-view",
-              toggleVirtualBackgroundDialog: "toggle-virtual-background",
-              toggleVideo: "toggle-video"
-            }, C2 = {
-              "avatar-changed": "avatarChanged",
-              "audio-availability-changed": "audioAvailabilityChanged",
-              "audio-mute-status-changed": "audioMuteStatusChanged",
-              "audio-or-video-sharing-toggled": "audioOrVideoSharingToggled",
-              "breakout-rooms-updated": "breakoutRoomsUpdated",
-              "browser-support": "browserSupport",
-              "camera-error": "cameraError",
-              "chat-updated": "chatUpdated",
-              "content-sharing-participants-changed": "contentSharingParticipantsChanged",
-              "data-channel-opened": "dataChannelOpened",
-              "device-list-changed": "deviceListChanged",
-              "display-name-change": "displayNameChange",
-              "email-change": "emailChange",
-              "error-occurred": "errorOccurred",
-              "endpoint-text-message-received": "endpointTextMessageReceived",
-              "face-landmark-detected": "faceLandmarkDetected",
-              "feedback-submitted": "feedbackSubmitted",
-              "feedback-prompt-displayed": "feedbackPromptDisplayed",
-              "filmstrip-display-changed": "filmstripDisplayChanged",
-              "iframe-dock-state-changed": "iframeDockStateChanged",
-              "incoming-message": "incomingMessage",
-              "knocking-participant": "knockingParticipant",
-              log: "log",
-              "mic-error": "micError",
-              "moderation-participant-approved": "moderationParticipantApproved",
-              "moderation-participant-rejected": "moderationParticipantRejected",
-              "moderation-status-changed": "moderationStatusChanged",
-              "mouse-enter": "mouseEnter",
-              "mouse-leave": "mouseLeave",
-              "mouse-move": "mouseMove",
-              "outgoing-message": "outgoingMessage",
-              "participant-joined": "participantJoined",
-              "participant-kicked-out": "participantKickedOut",
-              "participant-left": "participantLeft",
-              "participant-role-changed": "participantRoleChanged",
-              "participants-pane-toggled": "participantsPaneToggled",
-              "password-required": "passwordRequired",
-              "prejoin-screen-loaded": "prejoinScreenLoaded",
-              "proxy-connection-event": "proxyConnectionEvent",
-              "raise-hand-updated": "raiseHandUpdated",
-              "recording-link-available": "recordingLinkAvailable",
-              "recording-status-changed": "recordingStatusChanged",
-              "video-ready-to-close": "readyToClose",
-              "video-conference-joined": "videoConferenceJoined",
-              "video-conference-left": "videoConferenceLeft",
-              "video-availability-changed": "videoAvailabilityChanged",
-              "video-mute-status-changed": "videoMuteStatusChanged",
-              "video-quality-changed": "videoQualityChanged",
-              "screen-sharing-status-changed": "screenSharingStatusChanged",
-              "dominant-speaker-changed": "dominantSpeakerChanged",
-              "subject-change": "subjectChange",
-              "suspend-detected": "suspendDetected",
-              "tile-view-changed": "tileViewChanged",
-              "toolbar-button-clicked": "toolbarButtonClicked"
-            };
-            let x2 = 0;
-            function O2(e32, t3) {
-              e32._numberOfParticipants += t3;
-            }
-            function R2(e32) {
-              let t3;
-              return "string" == typeof e32 && null !== String(e32).match(/([0-9]*\.?[0-9]+)(em|pt|px|%)$/) ? t3 = e32 : "number" == typeof e32 && (t3 = `${e32}px`), t3;
-            }
-            class S3 extends r2() {
-              constructor(e32) {
-                super();
-                for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
-                  n3[i2 - 1] = arguments[i2];
-                const {
-                  roomName: r22 = "",
-                  width: s22 = "100%",
-                  height: a22 = "100%",
-                  parentNode: c22 = document.body,
-                  configOverwrite: l2 = {},
-                  interfaceConfigOverwrite: d22 = {},
-                  jwt: u2,
-                  lang: h2,
-                  onload: g22,
-                  invitees: m22,
-                  devices: v22,
-                  userInfo: y22,
-                  e2eeKey: b22,
-                  release: w22
-                } = function(e4) {
-                  if (!e4.length)
-                    return {};
-                  switch (typeof e4[0]) {
-                    case "string":
-                    case "undefined": {
-                      const [t4, n4, i3, r3, s32, o22, a3, c3, l3] = e4;
-                      return {
-                        roomName: t4,
-                        width: n4,
-                        height: i3,
-                        parentNode: r3,
-                        configOverwrite: s32,
-                        interfaceConfigOverwrite: o22,
-                        jwt: a3,
-                        onload: c3,
-                        lang: l3
-                      };
-                    }
-                    case "object":
-                      return e4[0];
-                    default:
-                      throw new Error("Can't parse the arguments!");
-                  }
-                }(n3), L22 = o2.getItem("jitsiLocalStorage");
-                this._parentNode = c22, this._url = function(e4) {
-                  return p2({
-                    ...arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-                    url: `https://${e4}/#jitsi_meet_external_api_id=${x2}`
-                  });
-                }(e32, {
-                  configOverwrite: l2,
-                  interfaceConfigOverwrite: d22,
-                  jwt: u2,
-                  lang: h2,
-                  roomName: r22,
-                  devices: v22,
-                  userInfo: y22,
-                  appData: { localStorageContent: L22 },
-                  release: w22
-                }), this._createIFrame(a22, s22, g22), this._transport = new _2({
-                  backend: new f({
-                    postisOptions: {
-                      allowedOrigin: new URL(this._url).origin,
-                      scope: `jitsi_meet_external_api_${x2}`,
-                      window: this._frame.contentWindow
-                    }
-                  })
-                }), Array.isArray(m22) && m22.length > 0 && this.invite(m22), this._tmpE2EEKey = b22, this._isLargeVideoVisible = false, this._isPrejoinVideoVisible = false, this._numberOfParticipants = 0, this._participants = {}, this._myUserID = void 0, this._onStageParticipant = void 0, this._setupListeners(), x2++;
-              }
-              _createIFrame(e32, t3, n3) {
-                const i2 = `jitsiConferenceFrame${x2}`;
-                this._frame = document.createElement("iframe"), this._frame.allow = "camera; microphone; display-capture; autoplay; clipboard-write", this._frame.src = this._url, this._frame.name = i2, this._frame.id = i2, this._setSize(e32, t3), this._frame.setAttribute("allowFullScreen", "true"), this._frame.style.border = 0, n3 && (this._frame.onload = n3), this._frame = this._parentNode.appendChild(this._frame);
-              }
-              _getAlwaysOnTopResources() {
-                const e32 = this._frame.contentWindow, t3 = e32.document;
-                let n3 = "";
-                const i2 = t3.querySelector("base");
-                if (i2 && i2.href)
-                  n3 = i2.href;
-                else {
-                  const { protocol: t4, host: i3 } = e32.location;
-                  n3 = `${t4}//${i3}`;
-                }
-                return k2.map((e4) => new URL(e4, n3).href);
-              }
-              _getFormattedDisplayName(e32) {
-                const { formattedDisplayName: t3 } = this._participants[e32] || {};
-                return t3;
-              }
-              _getOnStageParticipant() {
-                return this._onStageParticipant;
-              }
-              _getLargeVideo() {
-                const e32 = this.getIFrame();
-                if (this._isLargeVideoVisible && e32 && e32.contentWindow && e32.contentWindow.document)
-                  return e32.contentWindow.document.getElementById("largeVideo");
-              }
-              _getPrejoinVideo() {
-                const e32 = this.getIFrame();
-                if (this._isPrejoinVideoVisible && e32 && e32.contentWindow && e32.contentWindow.document)
-                  return e32.contentWindow.document.getElementById("prejoinVideo");
-              }
-              _getParticipantVideo(e32) {
-                const t3 = this.getIFrame();
-                if (t3 && t3.contentWindow && t3.contentWindow.document)
-                  return void 0 === e32 || e32 === this._myUserID ? t3.contentWindow.document.getElementById(
-                    "localVideo_container"
-                  ) : t3.contentWindow.document.querySelector(
-                    `#participant_${e32} video`
-                  );
-              }
-              _setSize(e32, t3) {
-                const n3 = R2(e32), i2 = R2(t3);
-                void 0 !== n3 && (this._height = e32, this._frame.style.height = n3), void 0 !== i2 && (this._width = t3, this._frame.style.width = i2);
-              }
-              _setupListeners() {
-                this._transport.on("event", (e32) => {
-                  let { name: t3, ...n3 } = e32;
-                  const i2 = n3.id;
-                  switch (t3) {
-                    case "video-conference-joined":
-                      void 0 !== this._tmpE2EEKey && (this.executeCommand(E2.e2eeKey, this._tmpE2EEKey), this._tmpE2EEKey = void 0), this._myUserID = i2, this._participants[i2] = {
-                        email: n3.email,
-                        avatarURL: n3.avatarURL
-                      };
-                    case "participant-joined":
-                      this._participants[i2] = this._participants[i2] || {}, this._participants[i2].displayName = n3.displayName, this._participants[i2].formattedDisplayName = n3.formattedDisplayName, O2(this, 1);
-                      break;
-                    case "participant-left":
-                      O2(this, -1), delete this._participants[i2];
-                      break;
-                    case "display-name-change": {
-                      const e4 = this._participants[i2];
-                      e4 && (e4.displayName = n3.displayname, e4.formattedDisplayName = n3.formattedDisplayName);
-                      break;
-                    }
-                    case "email-change": {
-                      const e4 = this._participants[i2];
-                      e4 && (e4.email = n3.email);
-                      break;
-                    }
-                    case "avatar-changed": {
-                      const e4 = this._participants[i2];
-                      e4 && (e4.avatarURL = n3.avatarURL);
-                      break;
-                    }
-                    case "on-stage-participant-changed":
-                      this._onStageParticipant = i2, this.emit("largeVideoChanged");
-                      break;
-                    case "large-video-visibility-changed":
-                      this._isLargeVideoVisible = n3.isVisible, this.emit("largeVideoChanged");
-                      break;
-                    case "prejoin-screen-loaded":
-                      this._participants[i2] = {
-                        displayName: n3.displayName,
-                        formattedDisplayName: n3.formattedDisplayName
-                      };
-                      break;
-                    case "on-prejoin-video-changed":
-                      this._isPrejoinVideoVisible = n3.isVisible, this.emit("prejoinVideoChanged");
-                      break;
-                    case "video-conference-left":
-                      O2(this, -1), delete this._participants[this._myUserID];
-                      break;
-                    case "video-quality-changed":
-                      this._videoQuality = n3.videoQuality;
-                      break;
-                    case "breakout-rooms-updated":
-                      this.updateNumberOfParticipants(n3.rooms);
-                      break;
-                    case "local-storage-changed":
-                      return o2.setItem("jitsiLocalStorage", n3.localStorageContent), true;
-                  }
-                  const r22 = C2[t3];
-                  return !!r22 && (this.emit(r22, n3), true);
-                });
-              }
-              updateNumberOfParticipants(e32) {
-                if (!e32 || !Object.keys(e32).length)
-                  return;
-                const t3 = Object.keys(e32).reduce((t4, n3) => {
-                  var i2;
-                  return null !== (i2 = e32[n3]) && void 0 !== i2 && i2.participants ? Object.keys(e32[n3].participants).length + t4 : t4;
-                }, 0);
-                this._numberOfParticipants = t3;
-              }
-              async getRoomsInfo() {
-                return this._transport.sendRequest({ name: "rooms-info" });
-              }
-              addEventListener(e32, t3) {
-                this.on(e32, t3);
-              }
-              addEventListeners(e32) {
-                for (const t3 in e32)
-                  this.addEventListener(t3, e32[t3]);
-              }
-              captureLargeVideoScreenshot() {
-                return this._transport.sendRequest({
-                  name: "capture-largevideo-screenshot"
-                });
-              }
-              dispose() {
-                this.emit("_willDispose"), this._transport.dispose(), this.removeAllListeners(), this._frame && this._frame.parentNode && this._frame.parentNode.removeChild(this._frame);
-              }
-              executeCommand(e32) {
-                if (e32 in E2) {
-                  for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
-                    n3[i2 - 1] = arguments[i2];
-                  this._transport.sendEvent({ data: n3, name: E2[e32] });
-                } else
-                  console.error("Not supported command name.");
-              }
-              executeCommands(e32) {
-                for (const t3 in e32)
-                  this.executeCommand(t3, e32[t3]);
-              }
-              getAvailableDevices() {
-                return function(e32) {
-                  return e32.sendRequest({ type: "devices", name: "getAvailableDevices" }).catch((e4) => (w2.error(e4), {}));
-                }(this._transport);
-              }
-              getContentSharingParticipants() {
-                return this._transport.sendRequest({
-                  name: "get-content-sharing-participants"
-                });
-              }
-              getCurrentDevices() {
-                return function(e32) {
-                  return e32.sendRequest({ type: "devices", name: "getCurrentDevices" }).catch((e4) => (w2.error(e4), {}));
-                }(this._transport);
-              }
-              getCustomAvatarBackgrounds() {
-                return this._transport.sendRequest({
-                  name: "get-custom-avatar-backgrounds"
-                });
-              }
-              getLivestreamUrl() {
-                return this._transport.sendRequest({
-                  name: "get-livestream-url"
-                });
-              }
-              getParticipantsInfo() {
-                const e32 = Object.keys(this._participants), t3 = Object.values(this._participants);
-                return t3.forEach((t4, n3) => {
-                  t4.participantId = e32[n3];
-                }), t3;
-              }
-              getVideoQuality() {
-                return this._videoQuality;
-              }
-              isAudioAvailable() {
-                return this._transport.sendRequest({
-                  name: "is-audio-available"
-                });
-              }
-              isDeviceChangeAvailable(e32) {
-                return function(e4, t3) {
-                  return e4.sendRequest({
-                    deviceType: t3,
-                    type: "devices",
-                    name: "isDeviceChangeAvailable"
-                  });
-                }(this._transport, e32);
-              }
-              isDeviceListAvailable() {
-                return function(e32) {
-                  return e32.sendRequest({
-                    type: "devices",
-                    name: "isDeviceListAvailable"
-                  });
-                }(this._transport);
-              }
-              isMultipleAudioInputSupported() {
-                return function(e32) {
-                  return e32.sendRequest({
-                    type: "devices",
-                    name: "isMultipleAudioInputSupported"
-                  });
-                }(this._transport);
-              }
-              invite(e32) {
-                return Array.isArray(e32) && 0 !== e32.length ? this._transport.sendRequest({ name: "invite", invitees: e32 }) : Promise.reject(new TypeError("Invalid Argument"));
-              }
-              isAudioMuted() {
-                return this._transport.sendRequest({ name: "is-audio-muted" });
-              }
-              isAudioDisabled() {
-                return this._transport.sendRequest({ name: "is-audio-disabled" });
-              }
-              isModerationOn(e32) {
-                return this._transport.sendRequest({
-                  name: "is-moderation-on",
-                  mediaType: e32
-                });
-              }
-              isParticipantForceMuted(e32, t3) {
-                return this._transport.sendRequest({
-                  name: "is-participant-force-muted",
-                  participantId: e32,
-                  mediaType: t3
-                });
-              }
-              isParticipantsPaneOpen() {
-                return this._transport.sendRequest({
-                  name: "is-participants-pane-open"
-                });
-              }
-              isSharingScreen() {
-                return this._transport.sendRequest({ name: "is-sharing-screen" });
-              }
-              isStartSilent() {
-                return this._transport.sendRequest({ name: "is-start-silent" });
-              }
-              getAvatarURL(e32) {
-                const { avatarURL: t3 } = this._participants[e32] || {};
-                return t3;
-              }
-              getDeploymentInfo() {
-                return this._transport.sendRequest({ name: "deployment-info" });
-              }
-              getDisplayName(e32) {
-                const { displayName: t3 } = this._participants[e32] || {};
-                return t3;
-              }
-              getEmail(e32) {
-                const { email: t3 } = this._participants[e32] || {};
-                return t3;
-              }
-              getIFrame() {
-                return this._frame;
-              }
-              getNumberOfParticipants() {
-                return this._numberOfParticipants;
-              }
-              isVideoAvailable() {
-                return this._transport.sendRequest({
-                  name: "is-video-available"
-                });
-              }
-              isVideoMuted() {
-                return this._transport.sendRequest({ name: "is-video-muted" });
-              }
-              listBreakoutRooms() {
-                return this._transport.sendRequest({
-                  name: "list-breakout-rooms"
-                });
-              }
-              pinParticipant(e32) {
-                this.executeCommand("pinParticipant", e32);
-              }
-              removeEventListener(e32) {
-                this.removeAllListeners(e32);
-              }
-              removeEventListeners(e32) {
-                e32.forEach((e4) => this.removeEventListener(e4));
-              }
-              resizeLargeVideo(e32, t3) {
-                e32 <= this._width && t3 <= this._height && this.executeCommand("resizeLargeVideo", e32, t3);
-              }
-              sendProxyConnectionEvent(e32) {
-                this._transport.sendEvent({
-                  data: [e32],
-                  name: "proxy-connection-event"
-                });
-              }
-              setAudioInputDevice(e32, t3) {
-                return function(e4, t4, n3) {
-                  return L2(e4, { id: n3, kind: "audioinput", label: t4 });
-                }(this._transport, e32, t3);
-              }
-              setAudioOutputDevice(e32, t3) {
-                return function(e4, t4, n3) {
-                  return L2(e4, { id: n3, kind: "audiooutput", label: t4 });
-                }(this._transport, e32, t3);
-              }
-              setLargeVideoParticipant(e32) {
-                this.executeCommand("setLargeVideoParticipant", e32);
-              }
-              setVideoInputDevice(e32, t3) {
-                return function(e4, t4, n3) {
-                  return L2(e4, { id: n3, kind: "videoinput", label: t4 });
-                }(this._transport, e32, t3);
-              }
-              startRecording(e32) {
-                this.executeCommand("startRecording", e32);
-              }
-              stopRecording(e32) {
-                this.executeCommand("stopRecording", e32);
-              }
-              toggleE2EE(e32) {
-                this.executeCommand("toggleE2EE", e32);
-              }
-              async setMediaEncryptionKey(e32) {
-                const { key: t3, index: n3 } = e32;
-                if (t3) {
-                  const e4 = await crypto.subtle.exportKey("raw", t3);
-                  this.executeCommand(
-                    "setMediaEncryptionKey",
-                    JSON.stringify({
-                      exportedKey: Array.from(new Uint8Array(e4)),
-                      index: n3
-                    })
-                  );
-                } else
-                  this.executeCommand(
-                    "setMediaEncryptionKey",
-                    JSON.stringify({ exportedKey: false, index: n3 })
-                  );
-              }
-            }
-          },
-          872: (e22, t22, n22) => {
-            e22.exports = n22(820).default;
-          },
-          571: (e22, t22) => {
-            const n22 = /"(?:_|\\u005[Ff])(?:_|\\u005[Ff])(?:p|\\u0070)(?:r|\\u0072)(?:o|\\u006[Ff])(?:t|\\u0074)(?:o|\\u006[Ff])(?:_|\\u005[Ff])(?:_|\\u005[Ff])"\s*\:/;
-            t22.parse = function(e32) {
-              const i = "object" == typeof (arguments.length <= 1 ? void 0 : arguments[1]) && (arguments.length <= 1 ? void 0 : arguments[1]), r2 = (arguments.length <= 1 ? 0 : arguments.length - 1) > 1 || !i ? arguments.length <= 1 ? void 0 : arguments[1] : void 0, s3 = (arguments.length <= 1 ? 0 : arguments.length - 1) > 1 && (arguments.length <= 2 ? void 0 : arguments[2]) || i || {}, o2 = JSON.parse(e32, r2);
-              return "ignore" === s3.protoAction ? o2 : o2 && "object" == typeof o2 && e32.match(n22) ? (t22.scan(o2, s3), o2) : o2;
-            }, t22.scan = function(e32) {
-              let t3 = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}, n3 = [e32];
-              for (; n3.length; ) {
-                const e4 = n3;
-                n3 = [];
-                for (const i of e4) {
-                  if (Object.prototype.hasOwnProperty.call(i, "__proto__")) {
-                    if ("remove" !== t3.protoAction)
-                      throw new SyntaxError(
-                        "Object contains forbidden prototype property"
-                      );
-                    delete i.__proto__;
-                  }
-                  for (const e5 in i) {
-                    const t4 = i[e5];
-                    t4 && "object" == typeof t4 && n3.push(i[e5]);
-                  }
-                }
-              }
-            }, t22.safeParse = function(e32, n3) {
-              try {
-                return t22.parse(e32, n3);
-              } catch (e4) {
-                return null;
-              }
-            };
-          },
-          369: (e22, t22, n22) => {
-            var i = n22(7);
-            function r2(e32, t3) {
-              this.logStorage = e32, this.stringifyObjects = !(!t3 || !t3.stringifyObjects) && t3.stringifyObjects, this.storeInterval = t3 && t3.storeInterval ? t3.storeInterval : 3e4, this.maxEntryLength = t3 && t3.maxEntryLength ? t3.maxEntryLength : 1e4, Object.keys(i.levels).forEach(
-                function(e4) {
-                  this[i.levels[e4]] = function() {
-                    this._log.apply(this, arguments);
-                  }.bind(this, e4);
-                }.bind(this)
-              ), this.storeLogsIntervalID = null, this.queue = [], this.totalLen = 0, this.outputCache = [];
-            }
-            r2.prototype.stringify = function(e32) {
-              try {
-                return JSON.stringify(e32);
-              } catch (e4) {
-                return "[object with circular refs?]";
-              }
-            }, r2.prototype.formatLogMessage = function(e32) {
-              for (var t3 = "", n3 = 1, r22 = arguments.length; n3 < r22; n3++) {
-                var s3 = arguments[n3];
-                !this.stringifyObjects && e32 !== i.levels.ERROR || "object" != typeof s3 || (s3 = this.stringify(s3)), t3 += s3, n3 !== r22 - 1 && (t3 += " ");
-              }
-              return t3.length ? t3 : null;
-            }, r2.prototype._log = function() {
-              var e32 = arguments[1], t3 = this.formatLogMessage.apply(this, arguments);
-              if (t3) {
-                var n3 = this.queue[this.queue.length - 1], i2 = n3 && n3.text;
-                i2 === t3 ? n3.count += 1 : (this.queue.push({ text: t3, timestamp: e32, count: 1 }), this.totalLen += t3.length);
-              }
-              this.totalLen >= this.maxEntryLength && this._flush(true, true);
-            }, r2.prototype.start = function() {
-              this._reschedulePublishInterval();
-            }, r2.prototype._reschedulePublishInterval = function() {
-              this.storeLogsIntervalID && (window.clearTimeout(this.storeLogsIntervalID), this.storeLogsIntervalID = null), this.storeLogsIntervalID = window.setTimeout(
-                this._flush.bind(this, false, true),
-                this.storeInterval
-              );
-            }, r2.prototype.flush = function() {
-              this._flush(false, true);
-            }, r2.prototype._flush = function(e32, t3) {
-              this.totalLen > 0 && (this.logStorage.isReady() || e32) && (this.logStorage.isReady() ? (this.outputCache.length && (this.outputCache.forEach(
-                function(e4) {
-                  this.logStorage.storeLogs(e4);
-                }.bind(this)
-              ), this.outputCache = []), this.logStorage.storeLogs(this.queue)) : this.outputCache.push(this.queue), this.queue = [], this.totalLen = 0), t3 && this._reschedulePublishInterval();
-            }, r2.prototype.stop = function() {
-              this._flush(false, false);
-            }, e22.exports = r2;
-          },
-          7: (e22) => {
-            var t22 = { trace: 0, debug: 1, info: 2, log: 3, warn: 4, error: 5 };
-            o2.consoleTransport = console;
-            var n22 = [o2.consoleTransport];
-            o2.addGlobalTransport = function(e32) {
-              -1 === n22.indexOf(e32) && n22.push(e32);
-            }, o2.removeGlobalTransport = function(e32) {
-              var t3 = n22.indexOf(e32);
-              -1 !== t3 && n22.splice(t3, 1);
-            };
-            var i = {};
-            function r2() {
-              var e32 = {
-                methodName: "",
-                fileLocation: "",
-                line: null,
-                column: null
-              }, t3 = new Error(), n3 = t3.stack ? t3.stack.split("\n") : [];
-              if (!n3 || n3.length < 3)
-                return e32;
-              var i2 = null;
-              return n3[3] && (i2 = n3[3].match(/\s*at\s*(.+?)\s*\((\S*)\s*:(\d*)\s*:(\d*)\)/)), !i2 || i2.length <= 4 ? (0 === n3[2].indexOf("log@") ? e32.methodName = n3[3].substr(0, n3[3].indexOf("@")) : e32.methodName = n3[2].substr(0, n3[2].indexOf("@")), e32) : (e32.methodName = i2[1], e32.fileLocation = i2[2], e32.line = i2[3], e32.column = i2[4], e32);
-            }
-            function s3() {
-              var e32 = arguments[0], s22 = arguments[1], o22 = Array.prototype.slice.call(arguments, 2);
-              if (!(t22[s22] < e32.level))
-                for (var a2 = !(e32.options.disableCallerInfo || i.disableCallerInfo) && r2(), c2 = n22.concat(e32.transports), l = 0; l < c2.length; l++) {
-                  var d2 = c2[l], u = d2[s22];
-                  if (u && "function" == typeof u) {
-                    var h = [];
-                    h.push(new Date().toISOString()), e32.id && h.push("[" + e32.id + "]"), a2 && a2.methodName.length > 1 && h.push("<" + a2.methodName + ">: ");
-                    var p2 = h.concat(o22);
-                    u.bind(d2).apply(d2, p2);
-                  }
-                }
-            }
-            function o2(e32, n3, i2, r22) {
-              this.id = n3, this.options = r22 || {}, this.transports = i2, this.transports || (this.transports = []), this.level = t22[e32];
-              for (var o22 = Object.keys(t22), a2 = 0; a2 < o22.length; a2++)
-                this[o22[a2]] = s3.bind(null, this, o22[a2]);
-            }
-            o2.setGlobalOptions = function(e32) {
-              i = e32 || {};
-            }, o2.prototype.setLevel = function(e32) {
-              this.level = t22[e32];
-            }, e22.exports = o2, o2.levels = {
-              TRACE: "trace",
-              DEBUG: "debug",
-              INFO: "info",
-              LOG: "log",
-              WARN: "warn",
-              ERROR: "error"
-            };
-          },
-          860: (e22, t22, n22) => {
-            var i = n22(7), r2 = n22(369), s3 = {}, o2 = [], a2 = i.levels.TRACE;
-            e22.exports = {
-              addGlobalTransport: function(e32) {
-                i.addGlobalTransport(e32);
-              },
-              removeGlobalTransport: function(e32) {
-                i.removeGlobalTransport(e32);
-              },
-              setGlobalOptions: function(e32) {
-                i.setGlobalOptions(e32);
-              },
-              getLogger: function(e32, t3, n3) {
-                var r22 = new i(a2, e32, t3, n3);
-                return e32 ? (s3[e32] = s3[e32] || [], s3[e32].push(r22)) : o2.push(r22), r22;
-              },
-              setLogLevelById: function(e32, t3) {
-                for (var n3 = t3 ? s3[t3] || [] : o2, i2 = 0; i2 < n3.length; i2++)
-                  n3[i2].setLevel(e32);
-              },
-              setLogLevel: function(e32) {
-                a2 = e32;
-                for (var t3 = 0; t3 < o2.length; t3++)
-                  o2[t3].setLevel(e32);
-                for (var n3 in s3) {
-                  var i2 = s3[n3] || [];
-                  for (t3 = 0; t3 < i2.length; t3++)
-                    i2[t3].setLevel(e32);
-                }
-              },
-              levels: i.levels,
-              LogCollector: r2
-            };
-          },
-          620: (e22) => {
-            var t22, n22 = "object" == typeof Reflect ? Reflect : null, i = n22 && "function" == typeof n22.apply ? n22.apply : function(e32, t3, n3) {
-              return Function.prototype.apply.call(e32, t3, n3);
-            };
-            t22 = n22 && "function" == typeof n22.ownKeys ? n22.ownKeys : Object.getOwnPropertySymbols ? function(e32) {
-              return Object.getOwnPropertyNames(e32).concat(
-                Object.getOwnPropertySymbols(e32)
-              );
-            } : function(e32) {
-              return Object.getOwnPropertyNames(e32);
-            };
-            var r2 = Number.isNaN || function(e32) {
-              return e32 != e32;
-            };
-            function s3() {
-              s3.init.call(this);
-            }
-            e22.exports = s3, e22.exports.once = function(e32, t3) {
-              return new Promise(function(n3, i2) {
-                function r22(n4) {
-                  e32.removeListener(t3, s22), i2(n4);
-                }
-                function s22() {
-                  "function" == typeof e32.removeListener && e32.removeListener("error", r22), n3([].slice.call(arguments));
-                }
-                m2(e32, t3, s22, { once: true }), "error" !== t3 && function(e4, t4, n4) {
-                  "function" == typeof e4.on && m2(e4, "error", t4, { once: true });
-                }(e32, r22);
-              });
-            }, s3.EventEmitter = s3, s3.prototype._events = void 0, s3.prototype._eventsCount = 0, s3.prototype._maxListeners = void 0;
-            var o2 = 10;
-            function a2(e32) {
-              if ("function" != typeof e32)
-                throw new TypeError(
-                  'The "listener" argument must be of type Function. Received type ' + typeof e32
-                );
-            }
-            function c2(e32) {
-              return void 0 === e32._maxListeners ? s3.defaultMaxListeners : e32._maxListeners;
-            }
-            function l(e32, t3, n3, i2) {
-              var r22, s22, o22, l2;
-              if (a2(n3), void 0 === (s22 = e32._events) ? (s22 = e32._events = /* @__PURE__ */ Object.create(null), e32._eventsCount = 0) : (void 0 !== s22.newListener && (e32.emit("newListener", t3, n3.listener ? n3.listener : n3), s22 = e32._events), o22 = s22[t3]), void 0 === o22)
-                o22 = s22[t3] = n3, ++e32._eventsCount;
-              else if ("function" == typeof o22 ? o22 = s22[t3] = i2 ? [n3, o22] : [o22, n3] : i2 ? o22.unshift(n3) : o22.push(n3), (r22 = c2(e32)) > 0 && o22.length > r22 && !o22.warned) {
-                o22.warned = true;
-                var d22 = new Error(
-                  "Possible EventEmitter memory leak detected. " + o22.length + " " + String(t3) + " listeners added. Use emitter.setMaxListeners() to increase limit"
-                );
-                d22.name = "MaxListenersExceededWarning", d22.emitter = e32, d22.type = t3, d22.count = o22.length, l2 = d22, console && console.warn && console.warn(l2);
-              }
-              return e32;
-            }
-            function d2() {
-              if (!this.fired)
-                return this.target.removeListener(this.type, this.wrapFn), this.fired = true, 0 === arguments.length ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
-            }
-            function u(e32, t3, n3) {
-              var i2 = {
-                fired: false,
-                wrapFn: void 0,
-                target: e32,
-                type: t3,
-                listener: n3
-              }, r22 = d2.bind(i2);
-              return r22.listener = n3, i2.wrapFn = r22, r22;
-            }
-            function h(e32, t3, n3) {
-              var i2 = e32._events;
-              if (void 0 === i2)
-                return [];
-              var r22 = i2[t3];
-              return void 0 === r22 ? [] : "function" == typeof r22 ? n3 ? [r22.listener || r22] : [r22] : n3 ? function(e4) {
-                for (var t4 = new Array(e4.length), n4 = 0; n4 < t4.length; ++n4)
-                  t4[n4] = e4[n4].listener || e4[n4];
-                return t4;
-              }(r22) : g2(r22, r22.length);
-            }
-            function p2(e32) {
-              var t3 = this._events;
-              if (void 0 !== t3) {
-                var n3 = t3[e32];
-                if ("function" == typeof n3)
-                  return 1;
-                if (void 0 !== n3)
-                  return n3.length;
-              }
-              return 0;
-            }
-            function g2(e32, t3) {
-              for (var n3 = new Array(t3), i2 = 0; i2 < t3; ++i2)
-                n3[i2] = e32[i2];
-              return n3;
-            }
-            function m2(e32, t3, n3, i2) {
-              if ("function" == typeof e32.on)
-                i2.once ? e32.once(t3, n3) : e32.on(t3, n3);
-              else {
-                if ("function" != typeof e32.addEventListener)
-                  throw new TypeError(
-                    'The "emitter" argument must be of type EventEmitter. Received type ' + typeof e32
-                  );
-                e32.addEventListener(t3, function r22(s22) {
-                  i2.once && e32.removeEventListener(t3, r22), n3(s22);
-                });
-              }
-            }
-            Object.defineProperty(s3, "defaultMaxListeners", {
-              enumerable: true,
-              get: function() {
-                return o2;
-              },
-              set: function(e32) {
-                if ("number" != typeof e32 || e32 < 0 || r2(e32))
-                  throw new RangeError(
-                    'The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + e32 + "."
-                  );
-                o2 = e32;
-              }
-            }), s3.init = function() {
-              void 0 !== this._events && this._events !== Object.getPrototypeOf(this)._events || (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
-            }, s3.prototype.setMaxListeners = function(e32) {
-              if ("number" != typeof e32 || e32 < 0 || r2(e32))
-                throw new RangeError(
-                  'The value of "n" is out of range. It must be a non-negative number. Received ' + e32 + "."
-                );
-              return this._maxListeners = e32, this;
-            }, s3.prototype.getMaxListeners = function() {
-              return c2(this);
-            }, s3.prototype.emit = function(e32) {
-              for (var t3 = [], n3 = 1; n3 < arguments.length; n3++)
-                t3.push(arguments[n3]);
-              var r22 = "error" === e32, s22 = this._events;
-              if (void 0 !== s22)
-                r22 = r22 && void 0 === s22.error;
-              else if (!r22)
-                return false;
-              if (r22) {
-                var o22;
-                if (t3.length > 0 && (o22 = t3[0]), o22 instanceof Error)
-                  throw o22;
-                var a22 = new Error(
-                  "Unhandled error." + (o22 ? " (" + o22.message + ")" : "")
-                );
-                throw a22.context = o22, a22;
-              }
-              var c22 = s22[e32];
-              if (void 0 === c22)
-                return false;
-              if ("function" == typeof c22)
-                i(c22, this, t3);
-              else {
-                var l2 = c22.length, d22 = g2(c22, l2);
-                for (n3 = 0; n3 < l2; ++n3)
-                  i(d22[n3], this, t3);
-              }
-              return true;
-            }, s3.prototype.addListener = function(e32, t3) {
-              return l(this, e32, t3, false);
-            }, s3.prototype.on = s3.prototype.addListener, s3.prototype.prependListener = function(e32, t3) {
-              return l(this, e32, t3, true);
-            }, s3.prototype.once = function(e32, t3) {
-              return a2(t3), this.on(e32, u(this, e32, t3)), this;
-            }, s3.prototype.prependOnceListener = function(e32, t3) {
-              return a2(t3), this.prependListener(e32, u(this, e32, t3)), this;
-            }, s3.prototype.removeListener = function(e32, t3) {
-              var n3, i2, r22, s22, o22;
-              if (a2(t3), void 0 === (i2 = this._events))
-                return this;
-              if (void 0 === (n3 = i2[e32]))
-                return this;
-              if (n3 === t3 || n3.listener === t3)
-                0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : (delete i2[e32], i2.removeListener && this.emit("removeListener", e32, n3.listener || t3));
-              else if ("function" != typeof n3) {
-                for (r22 = -1, s22 = n3.length - 1; s22 >= 0; s22--)
-                  if (n3[s22] === t3 || n3[s22].listener === t3) {
-                    o22 = n3[s22].listener, r22 = s22;
-                    break;
-                  }
-                if (r22 < 0)
-                  return this;
-                0 === r22 ? n3.shift() : function(e4, t4) {
-                  for (; t4 + 1 < e4.length; t4++)
-                    e4[t4] = e4[t4 + 1];
-                  e4.pop();
-                }(n3, r22), 1 === n3.length && (i2[e32] = n3[0]), void 0 !== i2.removeListener && this.emit("removeListener", e32, o22 || t3);
-              }
-              return this;
-            }, s3.prototype.off = s3.prototype.removeListener, s3.prototype.removeAllListeners = function(e32) {
-              var t3, n3, i2;
-              if (void 0 === (n3 = this._events))
-                return this;
-              if (void 0 === n3.removeListener)
-                return 0 === arguments.length ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : void 0 !== n3[e32] && (0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : delete n3[e32]), this;
-              if (0 === arguments.length) {
-                var r22, s22 = Object.keys(n3);
-                for (i2 = 0; i2 < s22.length; ++i2)
-                  "removeListener" !== (r22 = s22[i2]) && this.removeAllListeners(r22);
-                return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
-              }
-              if ("function" == typeof (t3 = n3[e32]))
-                this.removeListener(e32, t3);
-              else if (void 0 !== t3)
-                for (i2 = t3.length - 1; i2 >= 0; i2--)
-                  this.removeListener(e32, t3[i2]);
-              return this;
-            }, s3.prototype.listeners = function(e32) {
-              return h(this, e32, true);
-            }, s3.prototype.rawListeners = function(e32) {
-              return h(this, e32, false);
-            }, s3.listenerCount = function(e32, t3) {
-              return "function" == typeof e32.listenerCount ? e32.listenerCount(t3) : p2.call(e32, t3);
-            }, s3.prototype.listenerCount = p2, s3.prototype.eventNames = function() {
-              return this._eventsCount > 0 ? t22(this._events) : [];
-            };
-          }
-        }, t2 = {};
-        function n2(i) {
-          var r2 = t2[i];
-          if (void 0 !== r2)
-            return r2.exports;
-          var s3 = t2[i] = { exports: {} };
-          return e3[i](s3, s3.exports, n2), s3.exports;
-        }
-        return n2.n = (e22) => {
-          var t22 = e22 && e22.__esModule ? () => e22.default : () => e22;
-          return n2.d(t22, { a: t22 }), t22;
-        }, n2.d = (e22, t22) => {
-          for (var i in t22)
-            n2.o(t22, i) && !n2.o(e22, i) && Object.defineProperty(e22, i, { enumerable: true, get: t22[i] });
-        }, n2.o = (e22, t22) => Object.prototype.hasOwnProperty.call(e22, t22), n2(872);
-      })();
-    });
-    JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $lessThan768, $$unsubscribe_lessThan768;
-      $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
-      $$unsubscribe_lessThan768();
-      return `<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px] "}"></div>
-  
-
-  <img alt="${"hangup button"}" class="${"absolute bg-gray-600 p-2 brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] hover:bg-red-500 rotate-90 hover:scale-[1.5] hover:rotate-0 transition-transform duration-100"}"></div>
-
-
-`;
-    });
-    Page13 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      onDestroy(() => {
-        set_store_value(isDarkMode, $isDarkMode = false, $isDarkMode);
-        window.document.body.classList.remove("dark-mode");
-      });
-      $$unsubscribe_isDarkMode();
-      return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/14.js
 var __exports15 = {};
 __export(__exports15, {
@@ -29135,17 +29153,15 @@ __export(__exports15, {
   file: () => file15,
   imports: () => imports15,
   index: () => index15,
-  shared: () => page_exports,
   stylesheets: () => stylesheets15
 });
 var index15, component15, file15, imports15, stylesheets15;
 var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
-    init_page();
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/screenshare/_page.svelte-37428947.js";
-    imports15 = ["_app/immutable/components/pages/screenshare/_page.svelte-37428947.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/navigation-370c7d9f.js", "_app/immutable/chunks/singletons-14ffcb78.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js", "_app/immutable/chunks/_page-b7043975.js"];
+    file15 = "_app/immutable/components/pages/schools/_page.svelte-44ef79c6.js";
+    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-44ef79c6.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js"];
     stylesheets15 = [];
   }
 });
@@ -29192,8 +29208,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-545f74e9.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-545f74e9.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/store-f2d73c15.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/navigation-370c7d9f.js", "_app/immutable/chunks/singletons-14ffcb78.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-5af92dfc.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-5af92dfc.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-6a52d76d.js", "_app/immutable/chunks/singletons-940ef1ec.js"];
     stylesheets16 = [];
   }
 });
@@ -29387,8 +29403,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-8ee9d3cc.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-8ee9d3cc.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-99a2a668.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-fe1174a7.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-fe1174a7.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
     stylesheets17 = ["_app/immutable/assets/_page-5c304dd7.css"];
   }
 });
@@ -31991,7 +32007,7 @@ var Server = class {
     const pub = Object.fromEntries(entries.filter(([k2]) => k2.startsWith("PUBLIC_")));
     this.options.public_env = pub;
     if (!this.options.hooks) {
-      const module2 = await Promise.resolve().then(() => (init_hooks(), hooks_exports));
+      const module2 = await Promise.resolve().then(() => (init_hooks_server(), hooks_server_exports));
       if (module2.externalFetch) {
         throw new Error("externalFetch has been removed \u2014 use handleFetch instead. See https://github.com/sveltejs/kit/pull/6565 for details");
       }
@@ -32017,7 +32033,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-fafd6a76.js", "imports": ["_app/immutable/start-fafd6a76.js", "_app/immutable/chunks/index-cb50693d.js", "_app/immutable/chunks/singletons-14ffcb78.js", "_app/immutable/chunks/index-07a383db.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-4680bb28.js", "imports": ["_app/immutable/start-4680bb28.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-940ef1ec.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -32055,11 +32071,19 @@ var manifest = {
         endpoint: null
       },
       {
+        id: "/classroom",
+        pattern: /^\/classroom\/?$/,
+        names: [],
+        types: [],
+        page: { layouts: [0], errors: [1], leaf: 4 },
+        endpoint: null
+      },
+      {
         id: "/faq",
         pattern: /^\/faq\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 4 },
+        page: { layouts: [0], errors: [1], leaf: 5 },
         endpoint: null
       },
       {
@@ -32067,7 +32091,7 @@ var manifest = {
         pattern: /^\/homework\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 5 },
+        page: { layouts: [0], errors: [1], leaf: 6 },
         endpoint: null
       },
       {
@@ -32075,7 +32099,7 @@ var manifest = {
         pattern: /^\/katex\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 6 },
+        page: { layouts: [0], errors: [1], leaf: 7 },
         endpoint: null
       },
       {
@@ -32083,7 +32107,7 @@ var manifest = {
         pattern: /^\/login\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 7 },
+        page: { layouts: [0], errors: [1], leaf: 8 },
         endpoint: null
       },
       {
@@ -32091,7 +32115,7 @@ var manifest = {
         pattern: /^\/mathjax\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 9 },
+        page: { layouts: [0], errors: [1], leaf: 10 },
         endpoint: null
       },
       {
@@ -32099,7 +32123,7 @@ var manifest = {
         pattern: /^\/math\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 8 },
+        page: { layouts: [0], errors: [1], leaf: 9 },
         endpoint: null
       },
       {
@@ -32107,7 +32131,7 @@ var manifest = {
         pattern: /^\/physics\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 10 },
+        page: { layouts: [0], errors: [1], leaf: 11 },
         endpoint: null
       },
       {
@@ -32115,7 +32139,7 @@ var manifest = {
         pattern: /^\/plans\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 11 },
+        page: { layouts: [0], errors: [1], leaf: 12 },
         endpoint: null
       },
       {
@@ -32123,7 +32147,7 @@ var manifest = {
         pattern: /^\/samplequiz\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 12 },
+        page: { layouts: [0], errors: [1], leaf: 13 },
         endpoint: null
       },
       {
@@ -32131,7 +32155,7 @@ var manifest = {
         pattern: /^\/schools\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 13 },
+        page: { layouts: [0], errors: [1], leaf: 14 },
         endpoint: null
       },
       {
@@ -32140,14 +32164,6 @@ var manifest = {
         names: [],
         types: [],
         page: { layouts: [0], errors: [1], leaf: 15 },
-        endpoint: null
-      },
-      {
-        id: "/screenshare",
-        pattern: /^\/screenshare\/?$/,
-        names: [],
-        types: [],
-        page: { layouts: [0], errors: [1], leaf: 14 },
         endpoint: null
       },
       {

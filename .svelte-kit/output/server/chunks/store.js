@@ -44,25 +44,25 @@ const routes = writable({
   plans: {
     name: "Plans",
     href: "/plans",
-    title: "Plans \u{1F34E}",
+    title: "Plans \u{1F4A1}",
     isCurrent: false
   },
-  screenshare: {
-    name: "Screenshare",
-    href: "/screenshare",
-    title: "Screenshare \u{1F5A5}",
+  classroom: {
+    name: "Classroom",
+    href: "/classroom",
+    title: "Classroom \u{1F34E}",
     isCurrent: false
   },
   homework: {
     name: "Homework",
     href: "/homework",
-    title: "Homework",
+    title: "Homework \u{1F4DA}",
     isCurrent: false
   },
   schools: {
     name: "Schools",
     href: "/schools",
-    title: "Schools \u{1F4DA}",
+    title: "Schools",
     isCurrent: false
   },
   stripe: {

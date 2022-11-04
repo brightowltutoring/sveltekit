@@ -1,8 +1,7 @@
-import * as shared from '../entries/pages/screenshare/_page.js';
+
 
 export const index = 14;
-export const component = async () => (await import('../entries/pages/screenshare/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/screenshare/_page.svelte-37428947.js';
-export { shared };
-export const imports = ["_app/immutable/components/pages/screenshare/_page.svelte-37428947.js","_app/immutable/chunks/index-cb50693d.js","_app/immutable/chunks/navigation-370c7d9f.js","_app/immutable/chunks/singletons-14ffcb78.js","_app/immutable/chunks/index-07a383db.js","_app/immutable/chunks/store-f2d73c15.js","_app/immutable/modules/pages/screenshare/_page.js-cf5600d0.js","_app/immutable/chunks/_page-b7043975.js"];
+export const component = async () => (await import('../entries/pages/schools/_page.svelte.js')).default;
+export const file = '_app/immutable/components/pages/schools/_page.svelte-44ef79c6.js';
+export const imports = ["_app/immutable/components/pages/schools/_page.svelte-44ef79c6.js","_app/immutable/chunks/index-2bdb53b3.js","_app/immutable/chunks/store-fa0b0b0c.js","_app/immutable/chunks/index-e434d87f.js","_app/immutable/chunks/index-2fe84d9c.js","_app/immutable/chunks/plansCardArray-aa3d067a.js"];
 export const stylesheets = [];
