@@ -609,14 +609,14 @@ var hooks_server_exports = {};
 __export(hooks_server_exports, {
   handle: () => handle
 });
-var urlRedirects, handle;
+var urlMap, handle;
 var init_hooks_server = __esm({
   ".svelte-kit/output/server/chunks/hooks.server.js"() {
-    urlRedirects = {
-      screenshare: "classroom"
-    };
+    urlMap = /* @__PURE__ */ new Map([
+      ["screenshare", "classroom"]
+    ]);
     handle = async ({ event, resolve }) => {
-      for (const [key2, value] of Object.entries(urlRedirects)) {
+      for (const [key2, value] of urlMap) {
         if (event.url.pathname === `/${key2}`) {
           return Response.redirect(`${event.url.origin}/${value}`, 301);
         }
@@ -2572,8 +2572,9 @@ var init_Dropzone = __esm({
       $$result.css.add(css);
       boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
       $$unsubscribe_isDarkMode();
-      return `<form method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto"}">
-  <div class="${"dz-message font-Nunito"}" data-dz-message><span class="${"block"}">${escape(text2)}</span></div></form>
+      return `<form method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}">
+  <div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message><span>${escape(text2)}</span>
+    </div></form>
 
 
 
@@ -12840,9 +12841,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-42c52251.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-42c52251.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-d2ce729c.js", "_app/immutable/chunks/Dropzone-3e543bd8.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-6a52d76d.js", "_app/immutable/chunks/singletons-940ef1ec.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
-    stylesheets = ["_app/immutable/assets/_layout-fa619fe9.css", "_app/immutable/assets/Dropzone-cce97800.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-0b263205.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-0b263205.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-d2ce729c.js", "_app/immutable/chunks/Dropzone-dd5309fa.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-13ee2189.js", "_app/immutable/chunks/singletons-0bc78c2f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    stylesheets = ["_app/immutable/assets/_layout-0244d451.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -13240,9 +13241,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-66fe8a6e.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-66fe8a6e.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-812257c3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js", "_app/immutable/chunks/Dropzone-3e543bd8.js", "_app/immutable/chunks/public-fe26cbe2.js"];
-    stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/Dropzone-cce97800.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-88ebc64f.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-88ebc64f.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-812257c3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-aa3d067a.js", "_app/immutable/chunks/Dropzone-dd5309fa.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -14662,8 +14663,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-fefb9d75.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-fefb9d75.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-6a52d76d.js", "_app/immutable/chunks/singletons-940ef1ec.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-d03a66a1.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-d03a66a1.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-13ee2189.js", "_app/immutable/chunks/singletons-0bc78c2f.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -14833,9 +14834,9 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-6fb41455.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-6fb41455.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Dropzone-3e543bd8.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js"];
-    stylesheets7 = ["_app/immutable/assets/Dropzone-cce97800.css"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-22b96184.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-22b96184.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Dropzone-dd5309fa.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js"];
+    stylesheets7 = ["_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -29208,8 +29209,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-5af92dfc.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-5af92dfc.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-6a52d76d.js", "_app/immutable/chunks/singletons-940ef1ec.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-8556f9ff.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-8556f9ff.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-13ee2189.js", "_app/immutable/chunks/singletons-0bc78c2f.js"];
     stylesheets16 = [];
   }
 });
@@ -32033,7 +32034,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-4680bb28.js", "imports": ["_app/immutable/start-4680bb28.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-940ef1ec.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-5f45816b.js", "imports": ["_app/immutable/start-5f45816b.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-0bc78c2f.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

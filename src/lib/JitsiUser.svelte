@@ -111,6 +111,18 @@
   <div id="meet" class="w-full h-[95vh] md:h-[670px] " />
   <!-- <div id="meet" class="w-full h-[95vh] md:h-[670px]" /> -->
 
+  <button
+    class="bg-blue-300"
+    on:click={() => {
+      // document.querySelector(".watermark .leftwatermark").style.visibility =
+      //   "invisible";
+      // if (document.getElementsByTagName("iframe")[0].contentWindow.document) {
+      //   alert("bey");
+      // }
+      // document.querySelector("DIV.watermark").style.display = "none";
+    }}>hey</button
+  >
+
   <img
     on:click={hangUpBtn}
     on:keydown={hangUpBtn}

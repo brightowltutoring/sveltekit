@@ -29,8 +29,9 @@ const Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) =
   $$result.css.add(css);
   boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
   $$unsubscribe_isDarkMode();
-  return `<form method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto"}">
-  <div class="${"dz-message font-Nunito"}" data-dz-message><span class="${"block"}">${escape(text)}</span></div></form>
+  return `<form method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}">
+  <div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message><span>${escape(text)}</span>
+    </div></form>
 
 
 
