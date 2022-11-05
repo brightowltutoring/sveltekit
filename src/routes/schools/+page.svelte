@@ -1,8 +1,8 @@
 <script>
-  import PlansCardSchools from "$lib/PlansCardSchools.svelte";
+  import PlansCardSchools from "$lib/Plans/PlansCardSchools.svelte";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
-  import { plansCardArraySchools } from "$lib/plansCardArray.js";
+  import { plansCardArraySchools } from "$lib/Plans/plansCardArray.js";
 </script>
 
 <div class="grid grid-cols-1 lg:grid-cols-2  p-7 ">
