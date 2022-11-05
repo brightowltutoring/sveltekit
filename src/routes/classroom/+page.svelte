@@ -1,5 +1,5 @@
 <script>
-  import JitsiUser from "$lib/JitsiUser.svelte";
+  import JitsiUser from "$lib/Jitsi/JitsiUser.svelte";
   import { onMount, onDestroy } from "svelte";
   import { isDarkMode } from "$lib/store.js";
 

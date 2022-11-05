@@ -1324,6 +1324,8 @@ const JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   return `<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px] "}"></div>
   
 
+  <button class="${"bg-blue-300"}">hey</button>
+
   <img alt="${"hangup button"}" class="${"absolute bg-gray-600 p-2 brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] hover:bg-red-500 rotate-90 hover:scale-[1.5] hover:rotate-0 transition-transform duration-100"}"></div>
 
 
@@ -1338,7 +1340,13 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     window.document.body.classList.remove("dark-mode");
   });
   $$unsubscribe_isDarkMode();
-  return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}`;
+  return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}
+
+
+
+
+
+`;
 });
 export {
   Page as default

@@ -1,9 +1,9 @@
 <script>
-  import PlansComponent from "$lib/PlansComponent.svelte";
+  import PlansComponent from "$lib/Plans/PlansComponent.svelte";
 
   // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
   // import Testimonials from "$lib/Testimonials.svelte";
-  import Dropzone from "$lib/Dropzone.svelte";
+  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import { isDarkMode } from "$lib/store.js";
   import Reviews from "$lib/Reviews.svelte";
   import { slide } from "svelte/transition";

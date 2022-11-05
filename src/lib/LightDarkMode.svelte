@@ -1,6 +1,6 @@
 <script>
-  import IconSun from "$lib/IconSun.svelte";
-  import IconMoon from "$lib/IconMoon.svelte";
+  import IconSun from "$lib/Icons/IconSun.svelte";
+  import IconMoon from "$lib/Icons/IconMoon.svelte";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { isDarkMode } from "$lib/store.js";

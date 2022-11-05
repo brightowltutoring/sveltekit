@@ -1,10 +1,10 @@
 <script>
   import "../app.css";
 
-  import PlansCardObserver from "$lib/PlansCardObserver.svelte";
+  import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
   import Modal from "$lib/Modal.svelte";
-  import Dropzone from "$lib/Dropzone.svelte";
-  import LoginCard from "$lib/LoginCard.svelte";
+  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  import LoginCard from "$lib/Login/LoginCard.svelte";
   import Navbar from "$lib/Navbar.svelte";
   import Footer from "$lib/Footer.svelte";
   import {
