@@ -32,6 +32,7 @@
         const extra = USP.get("extra");
         const service = USP.get("service");
         const quantity = USP.get("quantity");
+        const cents_minute_rate = USP.get("cents_minute_rate");
 
         if (service && quantity) {
           // create checkout session using url params; get session data
@@ -45,6 +46,7 @@
             extra,
             service,
             quantity,
+            cents_minute_rate,
           });
 
           // create checkout session; Stripe() comes from head script
