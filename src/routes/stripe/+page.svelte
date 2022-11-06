@@ -7,7 +7,7 @@
   let slideKey = false;
   let urlSearch;
   let service;
-  let extra;
+  let extra = false;
   let quantity;
   let email;
 
