@@ -6,6 +6,10 @@
 
   let slideKey = false;
   let urlSearch;
+  let service;
+  let extra;
+  let quantity;
+  let email;
 
   // import { stripeSessionIdGCF } from "$lib/firebase.js";
   // TODO:testing
@@ -28,31 +32,28 @@
       try {
         const USP = new URLSearchParams(urlSearch);
 
+        // OLD CODE:
         // const email = USP.get("email");
         // const quantity = USP.get("quantity");
         // const dollar_hourly_rate = USP.get("dollar_hourly_rate");
         // const extra = USP.get("extra");
 
-        const email = USP.get("invitee_email");
+        email = USP.get("invitee_email");
 
-        const event_type_name = USP.get("event_type_name");
-        let service;
+        // converts answer_1 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
+        quantity = USP.get("answer_1").match(/\d+(\.\d{1,2})/)[0] * 60;
+
+        // answer_2 decides to add digital session notes
+        if (USP.get("answer_2").toLowerCase().includes("yes")) {
+          extra = true;
+        }
+
+        // event_type_name sets session as classico or mock
         for (let el of ["classico", "mock"]) {
-          if (event_type_name.toLowerCase().includes(el)) {
+          if (USP.get("event_type_name").toLowerCase().includes(el)) {
             service = el;
             break;
           }
-        }
-
-        const answer_1 = USP.get("answer_1");
-        const duration_hour_value = answer_1.match(/\d+(\.\d{1,2})/)[0]; // i.e. converts 1.25 hr to 1.25
-        const quantity = duration_hour_value * 60; // i.e. in minutes
-
-        const answer_2 = USP.get("answer_2");
-
-        let extra;
-        if (answer_2.toLowerCase().includes("yes")) {
-          extra = true;
         }
 
         if (service && quantity) {
@@ -86,7 +87,8 @@
 </svelte:head>
 
 <main>
-  {#if slideKey && urlSearch.includes("service") && urlSearch.includes("quantity")}
+  {#if slideKey && service && quantity}
+    <!-- {#if slideKey && urlSearch.includes("service") && urlSearch.includes("quantity")} -->
     <div
       in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
       class="font-Poppins text-6xl text-center pt-20 animate-bounce loading"
