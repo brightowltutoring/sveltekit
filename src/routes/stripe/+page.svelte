@@ -7,7 +7,7 @@
   let slideKey = false;
   let urlSearch;
   let service;
-  let extra = false;
+  let extra;
   let quantity;
   let email;
 
@@ -44,7 +44,8 @@
         quantity = USP.get("answer_1").match(/\d+(\.\d{1,2})/)[0] * 60;
 
         // answer_2 decides to add digital session notes
-        if (USP.get("answer_2").toLowerCase().includes("yes")) {
+        if (USP.get("answer_2")) {
+          USP.get("answer_2").toLowerCase().includes("yes");
           extra = true;
         }
 

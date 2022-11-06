@@ -2,7 +2,7 @@ import * as shared from '../entries/pages/classroom/_page.js';
 
 export const index = 4;
 export const component = async () => (await import('../entries/pages/classroom/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/classroom/_page.svelte-e352b271.js';
+export const file = '_app/immutable/components/pages/classroom/_page.svelte-1fdf0c5f.js';
 export { shared };
-export const imports = ["_app/immutable/components/pages/classroom/_page.svelte-e352b271.js","_app/immutable/chunks/index-2bdb53b3.js","_app/immutable/chunks/navigation-06c0178d.js","_app/immutable/chunks/singletons-02933786.js","_app/immutable/chunks/index-e434d87f.js","_app/immutable/chunks/store-fa0b0b0c.js","_app/immutable/modules/pages/classroom/_page.js-44466bcb.js","_app/immutable/chunks/_page-50113cbf.js"];
+export const imports = ["_app/immutable/components/pages/classroom/_page.svelte-1fdf0c5f.js","_app/immutable/chunks/index-2bdb53b3.js","_app/immutable/chunks/navigation-a72bfded.js","_app/immutable/chunks/singletons-3c1967a1.js","_app/immutable/chunks/index-e434d87f.js","_app/immutable/chunks/store-fa0b0b0c.js","_app/immutable/modules/pages/classroom/_page.js-44466bcb.js","_app/immutable/chunks/_page-50113cbf.js"];
 export const stylesheets = [];
