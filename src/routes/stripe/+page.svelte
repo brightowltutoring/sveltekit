@@ -5,21 +5,14 @@
   import { elasticOut } from "svelte/easing";
 
   let slideKey = false;
-  let urlSearch;
-  let service;
-  let extra;
-  let quantity;
-  let email;
 
-  // import { stripeSessionIdGCF } from "$lib/firebase.js";
-  // TODO:testing
+  // variables related to url parameters
+  let urlSearch, service, extra, quantity, email;
+  $: name = "";
+
   import { app } from "$lib/firebase.js";
   import { getFunctions, httpsCallable } from "firebase/functions";
   const functions = getFunctions(app);
-
-  // const stripeSessionIdGCF = httpsCallable(functions, "stripeSessionIdGCF");
-
-  // TODO:testing
 
   onMount(async () => {
     slideKey = true;
@@ -32,20 +25,21 @@
       try {
         const USP = new URLSearchParams(urlSearch);
 
-        // OLD CODE:
-        // const email = USP.get("email");
-        // const quantity = USP.get("quantity");
-        // const dollar_hourly_rate = USP.get("dollar_hourly_rate");
-        // const extra = USP.get("extra");
+        const invitee_full_name = USP.get("invitee_full_name").toLowerCase();
+
+        name =
+          invitee_full_name.charAt(0).toUpperCase() +
+          invitee_full_name.slice(1);
 
         email = USP.get("invitee_email");
 
         // converts answer_1 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
         quantity = USP.get("answer_1").match(/\d+(\.\d{1,2})/)[0] * 60;
 
-        // answer_2 decides to add digital session notes
+        // answer_2 relates to adding digital session notes
         if (USP.get("answer_2")) {
-          USP.get("answer_2").toLowerCase().includes("yes");
+          // USP.get("answer_2").toLowerCase().includes("yes");
+          // since this quesiton only has "yes" as an optoin then don't need to check anything other than existence
           extra = true;
         }
 
@@ -58,9 +52,8 @@
         }
 
         if (service && quantity) {
-          // create checkout session using url params; get session data
-          // don't forget await!
-          const stripeSessionIdGCF = await httpsCallable(
+          // create checkout session using url params ... but only if some actually exist
+          const stripeSessionIdGCF = httpsCallable(
             functions,
             "stripeSessionIdGCF"
           );
@@ -83,22 +76,27 @@
 </script>
 
 <svelte:head>
-  <title>Stripe Firebase Demo</title>
+  <title>Stripe Checkout</title>
   <script src="https://js.stripe.com/v3/"></script>
 </svelte:head>
 
 <main>
   {#if slideKey && service && quantity}
-    <!-- {#if slideKey && urlSearch.includes("service") && urlSearch.includes("quantity")} -->
     <div
       in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
-      class="font-Poppins text-6xl text-center pt-20 animate-bounce loading"
+      class="font-Poppins text-5xl text-center pt-20 animate-bounce loading"
     >
-      Just a moment
+      Almost there {name}
     </div>
   {/if}
 </main>
 
+<!-- OLD CODE: -->
+<!-- const email = USP.get("email"); -->
+<!-- const quantity = USP.get("quantity"); -->
+<!-- const dollar_hourly_rate = USP.get("dollar_hourly_rate"); -->
+
+<!-- const extra = USP.get("extra"); -->
 <style>
   .loading:after {
     content: " . . .";
