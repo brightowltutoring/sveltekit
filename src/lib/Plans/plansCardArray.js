@@ -7,36 +7,29 @@ const color = {
   blue: "2aa5d6",
 };
 
-function payUrl(session_type, payment_type) {
-  return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1`;
+function payUrl(session_type, payment_type, color) {
+  return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1&primary_color=${color}`;
 }
 
 export const plansCardArray = [
   {
     card: 1,
-    // payNowUrl: `https://calendly.com/d/d52-rxr-74f?hide_gdpr_banner=1&primary_color=${color.red}`,
-    payNowUrl: payUrl("classico", "stripe"),
-    payLaterUrl: payUrl("classico", "invoice"),
-    // "https://calendly.com/thinksolve/classico-stripe?hide_gdpr_banner=1",
-    // "https://calendly.com/thinksolve/classico-invoice?hide_gdpr_banner=1",
+    payNowUrl: payUrl("classico", "stripe", color.red),
+    payLaterUrl: payUrl("classico", "invoice", color.red),
     buttonText: "Classico",
     cardTitle: "Classico",
     cardText:
-      "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
+      "Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.",
     href: sampleHref,
   },
   {
     card: 3,
-    // payNowUrl: `https://calendly.com/d/dyv-xc8-bx6?hide_gdpr_banner=1&primary_color=${color.blue}`,
-    payNowUrl: payUrl("mock", "stripe"),
-    payLaterUrl: payUrl("mock", "invoice"),
-    // payNowUrl: "https://calendly.com/thinksolve/mock-stripe?hide_gdpr_banner=1",
-    // payLaterUrl:
-    //   "https://calendly.com/thinksolve/mock-invoice?hide_gdpr_banner=1",
+    payNowUrl: payUrl("mock", "stripe", color.blue),
+    payLaterUrl: payUrl("mock", "invoice", color.blue),
     buttonText: "Mock",
     cardTitle: "Mock",
     cardText:
-      " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",
+      " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key available as a +2hr premium.",
     href: sampleHref,
   },
   {
