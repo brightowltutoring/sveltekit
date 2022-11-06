@@ -28,22 +28,32 @@
       try {
         const USP = new URLSearchParams(urlSearch);
 
-        // TODO: these have to be updated with calendly url params
-
-        const email = USP.get("email");
-        const extra = USP.get("extra");
-        const service = USP.get("service");
-        const quantity = USP.get("quantity");
-        const dollar_hourly_rate = USP.get("dollar_hourly_rate");
-
-        // // calendly URL parameters versions
-        // const answer_1 = USP.get("answer_1");
-        // // const quantity = someFunction(answer_1)
-        // const invitee_email = USP.get("invitee_email");
-        // // const email = invitee_email
-        // const extra = USP.get("extra");
-        // const service = USP.get("service");
+        // const email = USP.get("email");
+        // const quantity = USP.get("quantity");
         // const dollar_hourly_rate = USP.get("dollar_hourly_rate");
+        // const extra = USP.get("extra");
+
+        const email = USP.get("invitee_email");
+
+        const event_type_name = USP.get("event_type_name");
+        let service;
+        for (let el of ["classico", "mock"]) {
+          if (event_type_name.toLowerCase().includes(el)) {
+            service = el;
+            break;
+          }
+        }
+
+        const answer_1 = USP.get("answer_1");
+        const duration_hour_value = answer_1.match(/\d+(\.\d{1,2})/)[0]; // i.e. converts 1.25 hr to 1.25
+        const quantity = duration_hour_value * 60; // i.e. in minutes
+
+        const answer_2 = USP.get("answer_2");
+
+        let extra;
+        if (answer_2.toLowerCase().includes("yes")) {
+          extra = true;
+        }
 
         if (service && quantity) {
           // create checkout session using url params; get session data
@@ -57,7 +67,7 @@
             extra,
             service,
             quantity,
-            dollar_hourly_rate,
+            // dollar_hourly_rate,
           });
 
           // create checkout session; Stripe() comes from head script
