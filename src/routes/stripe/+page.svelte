@@ -28,11 +28,22 @@
       try {
         const USP = new URLSearchParams(urlSearch);
 
+        // TODO: these have to be updated with calendly url params
+
         const email = USP.get("email");
         const extra = USP.get("extra");
         const service = USP.get("service");
         const quantity = USP.get("quantity");
-        const cents_minute_rate = USP.get("cents_minute_rate");
+        const dollar_hourly_rate = USP.get("dollar_hourly_rate");
+
+        // // calendly URL parameters versions
+        // const answer_1 = USP.get("answer_1");
+        // // const quantity = someFunction(answer_1)
+        // const invitee_email = USP.get("invitee_email");
+        // // const email = invitee_email
+        // const extra = USP.get("extra");
+        // const service = USP.get("service");
+        // const dollar_hourly_rate = USP.get("dollar_hourly_rate");
 
         if (service && quantity) {
           // create checkout session using url params; get session data
@@ -46,7 +57,7 @@
             extra,
             service,
             quantity,
-            cents_minute_rate,
+            dollar_hourly_rate,
           });
 
           // create checkout session; Stripe() comes from head script
