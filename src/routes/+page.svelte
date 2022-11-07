@@ -17,19 +17,18 @@
 
   let ready = false;
 
-  // console.log("home sweet home");
-
   onMount(() => {
     ready = true;
   });
   onDestroy(() => {
+    // currently this code has no purpose other than "cool" scroll effect; initially was written to hide addressbar while on mobile ... browsers likely also detect touch events
     setTimeout(() => {
       (browser || dev) &&
         window.scrollTo({
-          top: 70,
+          top: 200,
           behavior: "smooth",
         });
-    }, 0);
+    }, 1000);
   });
 </script>
 
