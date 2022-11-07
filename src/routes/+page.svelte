@@ -20,7 +20,14 @@
 
   onMount(() => {
     ready = true;
-    window.scrollTo(0, 500); //TODO: testing for mobile to hide addressbar
+    //TODO: testing for mobile to hide addressbar
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        // This hides the address bar:
+        window.scrollTo(0, 1);
+      }, 0);
+    });
+    //TODO: testing for mobile to hide addressbar
   });
 </script>
 
