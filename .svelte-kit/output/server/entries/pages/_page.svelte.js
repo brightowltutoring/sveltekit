@@ -177,6 +177,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   onDestroy(() => {
     setTimeout(
       () => {
+        window.scrollTo({ top: 200, behavior: "smooth" });
       },
       1e3
     );
