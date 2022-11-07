@@ -5,6 +5,7 @@
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
+  console.log("loaded window");
 </script>
 
 <PlansCardObserver />

@@ -19,15 +19,22 @@
 
   onMount(() => {
     ready = true;
+    // document.dispatchEvent(new Event("touch")); // fires touch event, even without user input
+
+    document.addEventListener("touch", () => {
+      console.log("document touched (actually fired dispatch event)");
+    });
   });
   onDestroy(() => {
     // currently this code has no purpose other than "cool" scroll effect; initially was written to hide addressbar while on mobile ... browsers likely also detect touch events
+
     setTimeout(() => {
-      (browser || dev) &&
-        window.scrollTo({
-          top: 200,
-          behavior: "smooth",
-        });
+      (browser || dev) && document.dispatchEvent(new Event("touch"));
+
+      window.scrollTo({
+        top: 200,
+        behavior: "smooth",
+      });
     }, 1000);
   });
 </script>
