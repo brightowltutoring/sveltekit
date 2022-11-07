@@ -1,4 +1,5 @@
 <script>
+  import { browser, dev } from "$app/environment";
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
 
   // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
@@ -23,10 +24,11 @@
   });
   onDestroy(() => {
     setTimeout(() => {
-      window.scrollTo({
-        top: 20,
-        behavior: "smooth",
-      });
+      (browser || dev) &&
+        window.scrollTo({
+          top: 200,
+          behavior: "smooth",
+        });
     }, 0);
   });
 </script>
