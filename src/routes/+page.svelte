@@ -20,6 +20,7 @@
 
   onMount(() => {
     ready = true;
+    window.scrollTo(0, 500); //TODO: testing for mobile to hide addressbar
   });
 </script>
 
