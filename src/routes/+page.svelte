@@ -26,7 +26,7 @@
     setTimeout(() => {
       (browser || dev) &&
         window.scrollTo({
-          top: 200,
+          top: 70,
           behavior: "smooth",
         });
     }, 0);
