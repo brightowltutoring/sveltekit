@@ -227,7 +227,8 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_page();
   $$unsubscribe_navHomeworkClicked();
   $$unsubscribe_navLoginClicked();
-  return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
+  return `
+<a data-sveltekit-prefetch${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</a>`;
 });
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";

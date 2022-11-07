@@ -53,13 +53,15 @@
     class="{bool &&
       `${btnColor} border-b-1 rounded px-3 py-1`} flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg"
     in:slide={{ duration: 800, easing: elasticOut }}
-    on:click={() => {
+    on:click={(e) => {
       if (href == "/homework") {
+        e.preventDefault();
         $navHomeworkClicked = true;
         $navLoginClicked = false;
         return;
       }
       if (href == "/login") {
+        e.preventDefault();
         $navLoginClicked = true;
         $navHomeworkClicked = false;
         return;

@@ -12601,7 +12601,8 @@ var init_layout_svelte = __esm({
       $$unsubscribe_page();
       $$unsubscribe_navHomeworkClicked();
       $$unsubscribe_navLoginClicked();
-      return `<button class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</button>`;
+      return `
+<a data-sveltekit-prefetch${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</a>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let bgGradientColor;
@@ -12841,9 +12842,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-7ae7cb9c.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-7ae7cb9c.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-776e7363.js", "_app/immutable/chunks/singletons-304701c5.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
-    stylesheets = ["_app/immutable/assets/_layout-5697d519.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-c6f904c0.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-c6f904c0.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-bc5dbab0.js", "_app/immutable/chunks/singletons-edc413f4.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    stylesheets = ["_app/immutable/assets/_layout-8d9daaee.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -12930,11 +12931,14 @@ var init_PlansCard = __esm({
         $$bindings.card(card);
       $$unsubscribe_isDarkMode();
       $$unsubscribe_elementColor();
-      return `<plans-card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+      return `<plans-card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl m-1 p-7 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-4xl font-Poppins py-5 text-center"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
 
+  
   ${each(payButtons, (button) => {
-        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
-      </button>`;
+        return `
+    
+    <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}</button>
+    `;
       })}
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
@@ -13010,7 +13014,7 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var css$1, PlansComponent, css2, ReviewCreator, reviews, Reviews, Page;
+var PlansComponent, css2, ReviewCreator, reviews, Reviews, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
@@ -13018,16 +13022,12 @@ var init_page_svelte = __esm({
     init_plansCardArray();
     init_Dropzone();
     init_store();
-    css$1 = {
-      code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
-      map: null
-    };
     PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css$1);
       return `
-<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">
+<div class="${"grid grid-cols-1 lg:grid-cols-2 "}">
   ${each(plansCardArray.slice(0, 2), (item, i) => {
-        return `<div>${validate_component(PlansCard, "PlansCard").$$render(
+        return `<div>
+      ${validate_component(PlansCard, "PlansCard").$$render(
           $$result,
           {
             card: item.card,
@@ -13038,8 +13038,6 @@ var init_page_svelte = __esm({
           {
             cardText: () => {
               return `<span slot="${"cardText"}">${escape(item.cardText)}
-          
-          <p><a data-sveltekit-prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">invoice sample</a></p>
           
           
         </span>`;
@@ -13244,9 +13242,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-489c73b1.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-489c73b1.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-915789ec.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js"];
-    stylesheets3 = ["_app/immutable/assets/_page-410c3bc4.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-64a677d0.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-64a677d0.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-daad155a.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-2fe84d9c.js"];
+    stylesheets3 = ["_app/immutable/assets/_page-d999b052.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -14668,8 +14666,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-8b26e290.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-8b26e290.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-776e7363.js", "_app/immutable/chunks/singletons-304701c5.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-cd072675.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-cd072675.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-bc5dbab0.js", "_app/immutable/chunks/singletons-edc413f4.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -28969,15 +28967,13 @@ var Page11;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
-    init_store();
     init_PlansCardObserver();
     init_PlansCard();
     init_plansCardArray();
     Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
-<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "}">${each(plansCardArray, (item, i) => {
-        return `
-    <div>${validate_component(PlansCard, "PlansCard").$$render(
+<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-5 m-2 md:m-7 "}">${each(plansCardArray, (item, i) => {
+        return `<div>${validate_component(PlansCard, "PlansCard").$$render(
           $$result,
           {
             card: item.card,
@@ -28988,10 +28984,6 @@ var init_page_svelte8 = __esm({
           {
             cardText: () => {
               return `<span slot="${"cardText"}">${escape(item.cardText)}
-          
-          
-          
-          
         </span>`;
             },
             cardTitle: () => {
@@ -29005,8 +28997,8 @@ var init_page_svelte8 = __esm({
       `;
             }
           }
-        )}</div>
-    `;
+        )}
+    </div>`;
       })}
 </div>`;
     });
@@ -29027,8 +29019,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-a57f206a.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-a57f206a.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/PlansCard-915789ec.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-048f401a.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-048f401a.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/PlansCard-daad155a.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets13 = [];
   }
 });
@@ -29209,8 +29201,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-96527de6.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-96527de6.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-776e7363.js", "_app/immutable/chunks/singletons-304701c5.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-7c3c0e45.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-7c3c0e45.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-bc5dbab0.js", "_app/immutable/chunks/singletons-edc413f4.js"];
     stylesheets16 = [];
   }
 });
@@ -29410,8 +29402,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-5d3eb55f.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-5d3eb55f.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-7854add4.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-7854add4.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
     stylesheets17 = ["_app/immutable/assets/_page-5c304dd7.css"];
   }
 });
@@ -32040,7 +32032,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-174d24a1.js", "imports": ["_app/immutable/start-174d24a1.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-304701c5.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-931e16d7.js", "imports": ["_app/immutable/start-931e16d7.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-edc413f4.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

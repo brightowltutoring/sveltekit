@@ -1,19 +1,14 @@
-import { c as create_ssr_component, j as each, v as validate_component, e as escape, d as add_attribute, a as subscribe } from "../../chunks/index.js";
+import { c as create_ssr_component, j as each, v as validate_component, e as escape, a as subscribe, d as add_attribute } from "../../chunks/index.js";
 import { P as PlansCard } from "../../chunks/PlansCard.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { a as isDarkMode } from "../../chunks/store.js";
-const PlansComponent_svelte_svelte_type_style_lang = "";
-const css$1 = {
-  code: "a.svelte-18ymex4{color:var(--anchor)}a.svelte-18ymex4:hover{color:var(--anchor_hover)}",
-  map: null
-};
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$1);
   return `
-<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">
+<div class="${"grid grid-cols-1 lg:grid-cols-2 "}">
   ${each(plansCardArray.slice(0, 2), (item, i) => {
-    return `<div>${validate_component(PlansCard, "PlansCard").$$render(
+    return `<div>
+      ${validate_component(PlansCard, "PlansCard").$$render(
       $$result,
       {
         card: item.card,
@@ -24,8 +19,6 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
       {
         cardText: () => {
           return `<span slot="${"cardText"}">${escape(item.cardText)}
-          
-          <p><a data-sveltekit-prefetch${add_attribute("href", item.href, 0)} class="${"svelte-18ymex4"}">invoice sample</a></p>
           
           
         </span>`;
