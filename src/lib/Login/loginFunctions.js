@@ -1,5 +1,6 @@
 import { auth } from "$lib/firebase.js";
 import { goto } from "$app/navigation";
+// import { TwitterAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 // these two are necessary to grab the browsers width, i.e. import module depending if mobile or not
 import { get } from "svelte/store";

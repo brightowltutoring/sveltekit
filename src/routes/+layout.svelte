@@ -29,6 +29,7 @@
   }
   onMount(() => {
     setScrollYMax();
+    window.scrollTo(0, 1); //TODO: testing for mobile to hide addressbar
   });
 
   let jankytown;

@@ -53,6 +53,12 @@
   //   })();
   // }
 
+  // TODO: broken coode; want to import authproviders on loginclick
+  // let TwitterAuthProvider;
+  // $: if ($navLoginClicked) {
+  //   const { TwitterAuthProvider } = import("firebase/auth");
+  // }
+
   $: if ($navLoginClicked && $isLoggedIn) {
     navLoginClickedRedirect(loggedInEmail);
   }
