@@ -8,7 +8,7 @@
   import Reviews from "$lib/Reviews.svelte";
   import { slide } from "svelte/transition";
 
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
@@ -20,14 +20,14 @@
 
   onMount(() => {
     ready = true;
-    //TODO: testing for mobile to hide addressbar
-    window.addEventListener("load", function () {
-      setTimeout(function () {
-        // This hides the address bar:
-        window.scrollTo(0, 1);
-      }, 0);
-    });
-    //TODO: testing for mobile to hide addressbar
+  });
+  onDestroy(() => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 20,
+        behavior: "smooth",
+      });
+    }, 0);
   });
 </script>
 

@@ -5,7 +5,15 @@
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
-  import { onMount } from "svelte";
+  import { onDestroy } from "svelte";
+  // onDestroy(() => {
+  //   setTimeout(() => {
+  //     window.scrollTo({
+  //       top: 500,
+  //       behavior: "smooth",
+  //     });
+  //   }, 0);
+  // });
 </script>
 
 <PlansCardObserver />
