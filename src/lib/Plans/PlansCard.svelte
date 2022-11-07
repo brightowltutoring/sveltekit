@@ -33,30 +33,31 @@
 </script>
 
 <plans-card
-  class="cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
+  class=" cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
     ? 'hover:shadow-xl'
-    : 'hover:shadow-lg'} rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"
+    : 'hover:shadow-lg'} rounded-xl m-1 p-7 text-center duration-300 group"
   style={`background:${$elementColor}`}
 >
-  <p class="py-6 text-5xl font-Poppins">
+  <p class="text-4xl font-Poppins py-5 text-center">
     <slot name="cardTitle">Classico</slot>
   </p>
 
+  <!-- TODO: turning off this transition does nothingg?? -->
   {#each payButtons as button}
-    {#key button.resetter}
-      <button
-        in:scale={{ duration: 600, easing: elasticOut }}
-        on:click={() => {
-          Calendly.initPopupWidget({ url: `${button.url}` });
-          button.resetter = !button.resetter;
-        }}
-        class=" {buttonColor[
-          card
-        ]} {btnColorHover} {button.opacityTW}   hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white "
-      >
-        <slot name="buttonText">{button.text}</slot>
-      </button>
-    {/key}
+    <!-- {#key button.resetter} -->
+    <!-- in:scale={{ duration: 600, easing: elasticOut }} -->
+    <button
+      on:click={() => {
+        Calendly.initPopupWidget({ url: `${button.url}` });
+        button.resetter = !button.resetter;
+      }}
+      class=" {buttonColor[
+        card
+      ]} {btnColorHover} {button.opacityTW}   hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white "
+    >
+      <slot name="buttonText">{button.text}</slot>
+    </button>
+    <!-- {/key} -->
   {/each}
 
   <div class="py-4">

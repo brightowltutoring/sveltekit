@@ -1,6 +1,6 @@
 <script>
   import {
-    isDarkMode,
+    // isDarkMode,
     navLoginClicked,
     navHomeworkClicked,
     // redirectSetInterval,
@@ -10,7 +10,7 @@
   import { elasticOut } from "svelte/easing";
   import { page } from "$app/stores";
 
-  import { goto, prefetch } from "$app/navigation";
+  // import { goto, prefetch } from "$app/navigation";
 
   export let href, content, bool, btnColor, btnColorHover, routes;
 
@@ -40,8 +40,16 @@
   }
 </script>
 
+<!--  on:mouseover={() => {
+      prefetch(href);
+    }}
+    on:focus={() => {
+      prefetch(href);
+    }} -->
 {#key unique}
-  <button
+  <a
+    data-sveltekit-prefetch
+    {href}
     class="{bool &&
       `${btnColor} border-b-1 rounded px-3 py-1`} flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg"
     in:slide={{ duration: 800, easing: elasticOut }}
@@ -59,9 +67,10 @@
       $navLoginClicked = false;
       $navHomeworkClicked = false;
       clickOnNavLinks();
-      goto(href);
+      // prefetch(href);
+      // goto(href);
     }}
   >
     {content}
-  </button>
+  </a>
 {/key}

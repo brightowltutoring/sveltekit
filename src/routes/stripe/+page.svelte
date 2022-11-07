@@ -8,7 +8,7 @@
 
   // variables related to url parameters
   let urlSearch, service, extra, quantity, email;
-  $: name = "";
+  $: firstName = "";
 
   import { app } from "$lib/firebase.js";
   import { getFunctions, httpsCallable } from "firebase/functions";
@@ -25,11 +25,14 @@
       try {
         const USP = new URLSearchParams(urlSearch);
 
-        const invitee_full_name = USP.get("invitee_full_name").toLowerCase();
+        const invitee_full_name = USP.get("invitee_full_name");
+        const firstNameLowerCase = invitee_full_name
+          .split(" ")[0]
+          .toLowerCase();
 
-        name =
-          invitee_full_name.charAt(0).toUpperCase() +
-          invitee_full_name.slice(1);
+        firstName =
+          firstNameLowerCase.charAt(0).toUpperCase() +
+          firstNameLowerCase.slice(1);
 
         email = USP.get("invitee_email");
 
@@ -86,7 +89,7 @@
       in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
       class="font-Poppins text-5xl text-center pt-20 animate-bounce loading"
     >
-      Almost there {name}
+      Almost there {firstName}
     </div>
   {/if}
 </main>

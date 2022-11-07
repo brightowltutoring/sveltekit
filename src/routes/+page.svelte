@@ -16,6 +16,8 @@
 
   let ready = false;
 
+  // console.log("home sweet home");
+
   onMount(() => {
     ready = true;
   });
@@ -85,7 +87,7 @@
   </div>
 
   <!-- third page -->
-  <div id="step2" class="duration-500 ">
+  <div id="step2" class="duration-500  ">
     <p
       class="text-5xl font-Poppins text-center pb-7"
       on:keydown={() => {

@@ -9,10 +9,16 @@ const css = {
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   getFunctions(app);
   $$result.css.add(css);
-  return `${$$result.head += `<!-- HEAD_svelte-qn95fl_START -->${$$result.title = `<title>Stripe Firebase Demo</title>`, ""}<script src="${"https://js.stripe.com/v3/"}"><\/script><!-- HEAD_svelte-qn95fl_END -->`, ""}
+  return `${$$result.head += `<!-- HEAD_svelte-1jxl9zf_START -->${$$result.title = `<title>Stripe Checkout</title>`, ""}<script src="${"https://js.stripe.com/v3/"}"><\/script><!-- HEAD_svelte-1jxl9zf_END -->`, ""}
 
-<main>${``}
-</main>`;
+<main>${``}</main>
+
+
+
+
+
+
+`;
 });
 export {
   Page as default
