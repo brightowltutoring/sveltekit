@@ -1,5 +1,4 @@
 <script>
-  import { browser, dev } from "$app/environment";
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
 
   // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
@@ -20,17 +19,26 @@
   onMount(() => {
     ready = true;
 
-    window.addEventListener("touch", () => {
-      console.log("window touched (actually fired dispatch event)");
-    });
-    setTimeout(() => {
-      (browser || dev) && window.dispatchEvent(new Event("touch"));
+    // window.addEventListener("touchstart", () => {
+    //   console.log("window touchstart (actually fired dispatch event)");
+    // });
+    // window.addEventListener("touchend", () => {
+    //   console.log("window touchend (actually fired dispatch event)");
+    // });
 
-      (browser || dev) &&
-        window.scrollTo({
-          top: 200,
-          behavior: "smooth",
-        });
+    // these four blocks of code is my attempt to simulate a user dragging their screen down on mobile device .. again goal is to hide addressbar in doing so
+    window.dispatchEvent(new Event("touchstart"));
+
+    window.dispatchEvent(new Event("touchmove"));
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: 100,
+        behavior: "smooth",
+      });
+    }, 500);
+    setTimeout(() => {
+      window.dispatchEvent(new Event("touchend"));
     }, 1000);
   });
 </script>

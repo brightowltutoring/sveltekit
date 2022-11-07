@@ -1,4 +1,4 @@
-import { c as create_ssr_component, j as each, v as validate_component, e as escape, a as subscribe, o as onDestroy, d as add_attribute } from "../../chunks/index.js";
+import { c as create_ssr_component, j as each, v as validate_component, e as escape, a as subscribe, d as add_attribute } from "../../chunks/index.js";
 import { P as PlansCard } from "../../chunks/PlansCard.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
@@ -174,14 +174,6 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let gradientTextColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  onDestroy(() => {
-    setTimeout(
-      () => {
-        window.scrollTo({ top: 200, behavior: "smooth" });
-      },
-      1e3
-    );
-  });
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
   return `<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
