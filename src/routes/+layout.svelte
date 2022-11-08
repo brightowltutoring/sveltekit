@@ -64,6 +64,10 @@
 <PlansCardObserver />
 
 <svelte:head>
+  <!-- <meta
+    name="viewport"
+    content="initial-scale=1, viewport-fit=cover, user-scalable=no"
+  /> -->
   <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link

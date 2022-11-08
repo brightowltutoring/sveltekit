@@ -1,11 +1,5 @@
 <script>
-  import {
-    // isDarkMode,
-    navLoginClicked,
-    navHomeworkClicked,
-    // redirectSetInterval,
-    // redirectAfterLoginTimeOut,
-  } from "./store.js";
+  import { navLoginClicked, navHomeworkClicked } from "./store.js";
   import { slide } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { page } from "$app/stores";
@@ -22,37 +16,26 @@
 
   let unique;
 
-  // TODO: want to single make modal nav buttons be truthy at a time
-  // let modals = [$navLoginClicked, $navHomeworkClicked];
-
   function clickOnNavLinks() {
     // on each click, clears rest of button clicks
     for (let key in routes) {
       routes[key].isCurrent = false;
     }
-    // TODO: want to single make modal nav buttons be truthy at a time
-    // for (let modal of modals) {
-    //   modal = false;
-    // }
-    // modal = !bool;
-    bool = !bool; //sets button click to corresponding route
-    unique = !unique; // to reanimate the non-mobile links
+
+    bool = !bool;
+    unique = !unique;
   }
 </script>
 
-<!--  on:mouseover={() => {
-      prefetch(href);
-    }}
-    on:focus={() => {
-      prefetch(href);
-    }} -->
 {#key unique}
+  <!-- in:slide={{ duration: 800, easing: elasticOut }} -->
+  <!--  class="{bool &&
+      `${btnColor} border-b-1 rounded px-3 py-1`} flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg" -->
   <a
     data-sveltekit-prefetch
+    class="flex justify-center px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl  {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
+      `${btnColor} border-b-1 rounded px-3 py-1`}"
     {href}
-    class="{bool &&
-      `${btnColor} border-b-1 rounded px-3 py-1`} flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg"
-    in:slide={{ duration: 800, easing: elasticOut }}
     on:click={(e) => {
       if (href == "/homework") {
         e.preventDefault();

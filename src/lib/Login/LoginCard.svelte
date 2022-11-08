@@ -222,19 +222,46 @@
   }
 </script>
 
-<card
-  class="hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
+<!--  class="hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
     ? 'hover:shadow-xl '
-    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto  min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300 "
+    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300" -->
+
+<card
+  class="relative hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
+    ? 'hover:shadow-xl '
+    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3  text-center duration-300 m-1"
   style={`background:${$elementColor}`}
 >
+  <!--  -->
+  <close-button
+    style={`border-color:${$elementColor}`}
+    class="absolute hover:scale-125 duration-300 rounded-full p-4 -top-2 -right-2  flex justify-center items-center border {$isDarkMode
+      ? 'bg-[#8f86b8] '
+      : 'bg-red-200'}  "
+    on:click={() => {
+      $navLoginClicked = false;
+    }}
+    on:keydown={() => {
+      $navLoginClicked = false;
+    }}
+  >
+    <div
+      class="absolute w-1/2 h-[2px] rounded rotate-45"
+      style={`background:${$elementColor}`}
+    />
+    <div
+      class="absolute w-1/2 h-[2px] rounded -rotate-45"
+      style={`background:${$elementColor}`}
+    />
+  </close-button>
+
   <div class="logInDiv p-5">
     <signin-button
       id="passwordlessLoginBtn"
       in:scale={{ duration: 600, easing: elasticOut }}
       class="group bg-red-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-80'
-        : 'group-hover:bg-opacity-80'} text-xl text-white flex justify-center items-center gap-5"
+        : 'group-hover:bg-opacity-80'} text-lg text-white flex justify-center items-center gap-5"
     >
       <span class="group-hover:scale-[1.15] duration-500">
         <IconEmail />
@@ -256,12 +283,12 @@
     <p class="py-5">or</p>
 
     <signin-button
-      on:click={GoogleLogin}
       on:keydown={GoogleLogin}
+      on:click={GoogleLogin}
       in:scale={{ duration: 600, easing: elasticOut }}
       class="group mb-6  bg-[#4285f4]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'} text-xl text-white  flex justify-center items-center gap-5"
+        : 'group-hover:bg-opacity-90'} text-lg text-white  flex justify-center items-center gap-5"
     >
       <span class="group-hover:scale-[1.15] duration-500">
         <IconGoogle />
@@ -275,7 +302,7 @@
       in:scale={{ duration: 600, easing: elasticOut }}
       class=" group bg-[#1d9bf0]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'} text-xl text-white  flex justify-center items-center gap-5"
+        : 'group-hover:bg-opacity-90'} text-lg text-white  flex justify-center items-center gap-5"
     >
       <span class="group-hover:scale-[1.15] duration-500">
         <IconTwitter />

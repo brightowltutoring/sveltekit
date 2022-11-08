@@ -43,7 +43,7 @@
   }
 
   let btnColor = "sm:bg-red-300 rounded";
-  let btnColorHover = "hover:bg-red-300";
+  let btnColorHover = "hover:bg-red-300 ";
 
   // rgba(0,0,0,0) is transparent
   $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${

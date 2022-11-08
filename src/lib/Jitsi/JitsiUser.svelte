@@ -81,9 +81,9 @@
   };
 
   onMount(() => {
-    options.parentNode = document.querySelector("#meet"); // this option depends on the dom being created
-
+    // can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
     try {
+      options.parentNode = document.querySelector("#meet");
       api = new JitsiMeetExternalAPI(domain, options);
 
       api.addEventListener("participantRoleChanged", function (event) {
@@ -109,8 +109,6 @@
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">
   <div id="meet" class="w-full h-[80vh] md:h-[670px] " />
-  <!-- <div id="meet" class="w-full h-[95vh] md:h-[670px]" /> -->
-
   <img
     on:click={hangUpBtn}
     on:keydown={hangUpBtn}
