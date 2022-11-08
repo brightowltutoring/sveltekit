@@ -16,6 +16,8 @@
 
   let ready = false;
 
+  console.log("home sweet home!");
+
   onMount(() => {
     ready = true;
   });
