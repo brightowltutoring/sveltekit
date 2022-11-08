@@ -229,7 +229,7 @@
 <card
   class="relative hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
     ? 'hover:shadow-xl '
-    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3  text-center duration-300 m-1"
+    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 m-1 sm:w-[500px] "
   style={`background:${$elementColor}`}
 >
   <!--  -->
@@ -255,13 +255,13 @@
     />
   </close-button>
 
-  <div class="logInDiv p-5">
+  <div class="logInDiv p-5 text-xl">
     <signin-button
       id="passwordlessLoginBtn"
       in:scale={{ duration: 600, easing: elasticOut }}
       class="group bg-red-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-80'
-        : 'group-hover:bg-opacity-80'} text-lg text-white flex justify-center items-center gap-5"
+        : 'group-hover:bg-opacity-80'}  text-white flex justify-center items-center gap-5"
     >
       <span class="group-hover:scale-[1.15] duration-500">
         <IconEmail />
@@ -288,7 +288,7 @@
       in:scale={{ duration: 600, easing: elasticOut }}
       class="group mb-6  bg-[#4285f4]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'} text-lg text-white  flex justify-center items-center gap-5"
+        : 'group-hover:bg-opacity-90'}  text-white  flex justify-center items-center gap-5"
     >
       <span class="group-hover:scale-[1.15] duration-500">
         <IconGoogle />
@@ -302,7 +302,7 @@
       in:scale={{ duration: 600, easing: elasticOut }}
       class=" group bg-[#1d9bf0]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'} text-lg text-white  flex justify-center items-center gap-5"
+        : 'group-hover:bg-opacity-90'} text-white  flex justify-center items-center gap-5"
     >
       <span class="group-hover:scale-[1.15] duration-500">
         <IconTwitter />
