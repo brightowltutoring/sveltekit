@@ -16,7 +16,7 @@
 
   let ready = false;
 
-  console.log("sweet home alabama");
+  console.log("do it big in texas");
 
   onMount(() => {
     ready = true;
