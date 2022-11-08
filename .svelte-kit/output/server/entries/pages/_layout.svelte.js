@@ -115,10 +115,16 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   return `
 
 
-<card class="${"hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg p-10 m-1 text-center duration-300"}"${add_attribute("style", `background:${$elementColor}`, 0)}><div class="${"logInDiv p-5"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
+
+
+<card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 text-center duration-300 m-1"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
+  <close-button${add_attribute("style", `border-color:${$elementColor}`, 0)} class="${"absolute hover:scale-125 duration-300 rounded-full p-4 -top-2 -right-2 flex justify-center items-center border " + escape($isDarkMode ? "bg-[#8f86b8] " : "bg-red-200", true)}"><div class="${"absolute w-1/2 h-[2px] rounded rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div>
+    <div class="${"absolute w-1/2 h-[2px] rounded -rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div></close-button>
+
+  <div class="${"logInDiv p-5"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
-  ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
+  ) + " text-lg text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
       <span>Get Magic Link</span></signin-button>
 
     <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
@@ -130,13 +136,13 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     <signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
     true
-  ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
+  ) + " text-lg text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
       <span>Sign-in with Google</span></signin-button>
 
     <signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
     true
-  ) + " text-xl text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
+  ) + " text-lg text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
       <span>Sign-in with Twitter</span></signin-button></div>
 
   <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
@@ -228,7 +234,8 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_navHomeworkClicked();
   $$unsubscribe_navLoginClicked();
   return `
-<a data-sveltekit-prefetch${add_attribute("href", href, 0)} class="${escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true) + " flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg"}">${escape(content)}</a>`;
+  
+  <a data-sveltekit-prefetch class="${"flex justify-center px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true)}"${add_attribute("href", href, 0)}>${escape(content)}</a>`;
 });
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
@@ -346,7 +353,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
   let hueRocket = 0;
   let btnColor = "sm:bg-red-300 rounded";
-  let btnColorHover = "hover:bg-red-300";
+  let btnColorHover = "hover:bg-red-300 ";
   let $$settled;
   let $$rendered;
   do {
@@ -467,12 +474,12 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
 
-${$$result.head += `<!-- HEAD_svelte-66550r_START -->${each(Object.keys($routes), (key) => {
+${$$result.head += `<!-- HEAD_svelte-nuxozs_START -->${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "/" && key == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
-    })}<!-- HEAD_svelte-66550r_END -->`, ""}
+    })}<!-- HEAD_svelte-nuxozs_END -->`, ""}
 
 
 
