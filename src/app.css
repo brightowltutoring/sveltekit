@@ -51,9 +51,8 @@
 
 
 body {
-  -webkit-tap-highlight-color: transparent; 
+  /* -webkit-tap-highlight-color: transparent;  */
   /* removes gray background when clicking buttons; great for mobile */
-
   overscroll-behavior-y: none;
   
   background: var(--light);
