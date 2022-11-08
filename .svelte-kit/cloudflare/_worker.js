@@ -12751,12 +12751,12 @@ var init_layout_svelte = __esm({
         }
         $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
 
-${$$result.head += `<!-- HEAD_svelte-nuxozs_START -->${each(Object.keys($routes), (key2) => {
+${$$result.head += `<!-- HEAD_svelte-y3e22o_START -->${each(Object.keys($routes), (key2) => {
           return `${$page.routeId == "/" && key2 == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key2}` ? `${$$result.title = `<title>${escape($routes[key2].title)}</title>`, ""}` : ``}`}`;
-        })}<!-- HEAD_svelte-nuxozs_END -->`, ""}
+        })}<!-- HEAD_svelte-y3e22o_END -->`, ""}
 
 
 
@@ -12849,9 +12849,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-0867e86b.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-0867e86b.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-b47b3f70.js", "_app/immutable/chunks/singletons-54d71843.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
-    stylesheets = ["_app/immutable/assets/_layout-39f26d9b.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-ff58b966.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-ff58b966.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-895a4901.js", "_app/immutable/chunks/singletons-89d55e32.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    stylesheets = ["_app/immutable/assets/_layout-0b958775.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -14674,8 +14674,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-db1b1a2e.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-db1b1a2e.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-b47b3f70.js", "_app/immutable/chunks/singletons-54d71843.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-b381da2a.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-b381da2a.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-895a4901.js", "_app/immutable/chunks/singletons-89d55e32.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -29211,8 +29211,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-9b0ae8e8.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-9b0ae8e8.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-b47b3f70.js", "_app/immutable/chunks/singletons-54d71843.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-ed1e7a53.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-ed1e7a53.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-895a4901.js", "_app/immutable/chunks/singletons-89d55e32.js"];
     stylesheets16 = [];
   }
 });
@@ -31931,7 +31931,7 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <!-- <meta name="viewport" content="width=device-width" /> -->\n\n    <!-- <meta\n      name="viewport"\n      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"\n    /> -->\n    <meta\n      name="viewport"\n      content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, height=device-height, target-densitydpi=device-dpi"\n    />\n\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
+var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
 var error_template = ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -32042,7 +32042,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-c12ade8b.js", "imports": ["_app/immutable/start-c12ade8b.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-54d71843.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-2e9f361a.js", "imports": ["_app/immutable/start-2e9f361a.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-89d55e32.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
