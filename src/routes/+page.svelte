@@ -18,28 +18,6 @@
 
   onMount(() => {
     ready = true;
-
-    // window.addEventListener("touchstart", () => {
-    //   console.log("window touchstart (actually fired dispatch event)");
-    // });
-    // window.addEventListener("touchend", () => {
-    //   console.log("window touchend (actually fired dispatch event)");
-    // });
-
-    // these four blocks of code is my attempt to simulate a user dragging their screen down on mobile device .. again goal is to hide addressbar in doing so
-    window.dispatchEvent(new Event("touchstart"));
-
-    window.dispatchEvent(new Event("touchmove"));
-
-    setTimeout(() => {
-      window.scrollTo({
-        top: 100,
-        behavior: "smooth",
-      });
-    }, 500);
-    setTimeout(() => {
-      window.dispatchEvent(new Event("touchend"));
-    }, 1000);
   });
 </script>
 
@@ -159,3 +137,25 @@
     </ReviewCreator>
   {/each}
 </div> -->
+
+<!-- // TODO: these four blocks of code were my attempt to simulate a user dragging their screen down on mobile device .. again goal is to hide addressbar in doing so
+    window.dispatchEvent(new Event("touchstart"));
+
+    window.dispatchEvent(new Event("touchmove"));
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: 100,
+        behavior: "smooth",
+      });
+    }, 500);
+    setTimeout(() => {
+      window.dispatchEvent(new Event("touchend"));
+    }, 1000);
+
+     // window.addEventListener("touchstart", () => {
+    //   console.log("window touchstart (actually fired dispatch event)");
+    // });
+    // window.addEventListener("touchend", () => {
+    //   console.log("window touchend (actually fired dispatch event)");
+    // }); -->

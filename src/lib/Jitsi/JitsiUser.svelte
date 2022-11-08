@@ -108,7 +108,7 @@
 </script>
 
 <div class="relative md:-translate-y-10 -translate-y-32 ">
-  <div id="meet" class="w-full h-[95vh] md:h-[670px] " />
+  <div id="meet" class="w-full h-[80vh] md:h-[670px] " />
   <!-- <div id="meet" class="w-full h-[95vh] md:h-[670px]" /> -->
 
   <img

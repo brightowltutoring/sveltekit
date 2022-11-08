@@ -3,7 +3,6 @@ import { P as PlansCardObserver } from "../../../chunks/PlansCardObserver.js";
 import { P as PlansCard } from "../../../chunks/PlansCard.js";
 import { p as plansCardArray } from "../../../chunks/plansCardArray.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  console.log("loaded window");
   return `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
 <div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-5 m-2 md:m-7 "}">${each(plansCardArray, (item, i) => {
     return `<div>${validate_component(PlansCard, "PlansCard").$$render(
