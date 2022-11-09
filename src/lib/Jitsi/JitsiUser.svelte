@@ -35,6 +35,7 @@
       },
     },
     interfaceConfigOverwrite: {
+      VIDEO_QUALITY_LABEL_DISABLED: true,
       DEFAULT_BACKGROUND: `#130e21`,
       SHOW_CHROME_EXTENSION_BANNER: false,
       SETTINGS_SECTIONS: [
@@ -53,6 +54,7 @@
         "chat",
         "fodeviceselection",
         "etherpad",
+        // "hangup",
         // "dock-iframe",
         // "undock-iframe",
         // "raisehand",
@@ -64,7 +66,6 @@
         // 'mute-video-everyone',
         // 'mute-everyone',
         // 'security',
-        // "hangup",
         // 'sharedvideo',
         // 'videoquality',
         // 'livestreaming',
@@ -89,6 +90,7 @@
       api.addEventListener("participantRoleChanged", function (event) {
         par = [...api.getParticipantsInfo()];
       });
+
       // api.addEventListener("participantRoleChanged", function (event) {
       //   // leftwatermark = document.querySelector("div.leftwatermark");
       //   par = [...api.getParticipantsInfo()];
@@ -115,7 +117,7 @@
     alt="hangup button"
     class="absolute bg-gray-600 p-2 brightness-50 {!par &&
       'opacity-0'} {$lessThan768
-      ? 'top-5 right-5 '
-      : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/phone.svg')] hover:bg-red-500 rotate-90  hover:scale-[1.5] hover:rotate-0 transition-transform duration-100"
+      ? 'left-0 right-0 ml-auto mr-auto -bottom-15'
+      : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/phone.svg')] active:bg-red-500 rotate-90  active:scale-[1.3] active:rotate-0 transition-transform duration-300"
   />
 </div>

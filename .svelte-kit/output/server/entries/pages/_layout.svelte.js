@@ -5,13 +5,6 @@ import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
-const PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-
-
-
-`;
-});
 const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { showModal = false } = $$props;
   let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
@@ -476,14 +469,12 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "bottom-0 backdrop-blur-3xl duration-700";
       }
     }
-    $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
-
-${$$result.head += `<!-- HEAD_svelte-1fe03l4_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key) => {
+    $$rendered = `${$$result.head += `<!-- HEAD_svelte-1x4fmg5_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "/" && key == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
-    })}<!-- HEAD_svelte-1fe03l4_END -->`, ""}
+    })}<!-- HEAD_svelte-1x4fmg5_END -->`, ""}
 
 
 

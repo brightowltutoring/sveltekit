@@ -2,6 +2,13 @@ import { c as create_ssr_component, a as subscribe, e as escape, d as add_attrib
 import { a as isDarkMode, e as elementColor } from "../../chunks/store.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
+const PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+
+
+
+`;
+});
 const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $elementColor, $$unsubscribe_elementColor;
@@ -51,7 +58,8 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 });
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
-<div class="${"grid grid-cols-1 lg:grid-cols-2 "}">
+
+<div class="${"grid grid-cols-1 lg:grid-cols-2 px-6 md:m-7"}">
   ${each(plansCardArray.slice(0, 2), (item, i) => {
     return `<div>
       ${validate_component(PlansCard, "PlansCard").$$render(
@@ -220,10 +228,11 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let gradientTextColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  console.log("do it big in texas");
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
-  return `<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
+  return `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
+
+<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
 
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
   <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}

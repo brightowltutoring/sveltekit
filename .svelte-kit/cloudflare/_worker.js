@@ -12365,7 +12365,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var PlansCardObserver, Modal, goto, IconGoogle, IconEmail, IconTwitter, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
+var Modal, goto, IconGoogle, IconEmail, IconTwitter, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -12374,13 +12374,6 @@ var init_layout_svelte = __esm({
     init_firebase();
     init_index_esm3();
     init_index2();
-    PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-
-
-`;
-    });
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { showModal = false } = $$props;
       let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
@@ -12738,14 +12731,12 @@ var init_layout_svelte = __esm({
               jankytown = "bottom-0 backdrop-blur-3xl duration-700";
           }
         }
-        $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
-
-${$$result.head += `<!-- HEAD_svelte-1fe03l4_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key2) => {
+        $$rendered = `${$$result.head += `<!-- HEAD_svelte-1x4fmg5_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key2) => {
           return `${$page.routeId == "/" && key2 == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key2}` ? `${$$result.title = `<title>${escape($routes[key2].title)}</title>`, ""}` : ``}`}`;
-        })}<!-- HEAD_svelte-1fe03l4_END -->`, ""}
+        })}<!-- HEAD_svelte-1x4fmg5_END -->`, ""}
 
 
 
@@ -12838,9 +12829,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-8971810b.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-8971810b.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-9c12f7c6.js", "_app/immutable/chunks/singletons-bf3fae6c.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
-    stylesheets = ["_app/immutable/assets/_layout-c0ead8f2.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-99a06097.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-99a06097.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-1c210212.js", "_app/immutable/chunks/singletons-d322c572.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    stylesheets = ["_app/immutable/assets/_layout-d1e4a16a.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -12951,13 +12942,20 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var PlansCard, PlansComponent, css2, ReviewCreator, reviews, Reviews, Page;
+var PlansCardObserver, PlansCard, PlansComponent, css2, ReviewCreator, reviews, Reviews, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
     init_store();
     init_plansCardArray();
     init_Dropzone();
+    PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+
+
+`;
+    });
     PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       let $elementColor, $$unsubscribe_elementColor;
@@ -13007,7 +13005,8 @@ var init_page_svelte = __esm({
     });
     PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
-<div class="${"grid grid-cols-1 lg:grid-cols-2 "}">
+
+<div class="${"grid grid-cols-1 lg:grid-cols-2 px-6 md:m-7"}">
   ${each(plansCardArray.slice(0, 2), (item, i) => {
         return `<div>
       ${validate_component(PlansCard, "PlansCard").$$render(
@@ -13175,10 +13174,11 @@ var init_page_svelte = __esm({
       let gradientTextColor;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      console.log("do it big in texas");
       gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
       $$unsubscribe_isDarkMode();
-      return `<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
+      return `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
+
+<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
 
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
   <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
@@ -13228,8 +13228,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-8342b968.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-8342b968.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-88ba9f84.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-db490b2a.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-db490b2a.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-7ce4376d.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js"];
     stylesheets3 = ["_app/immutable/assets/_page-d999b052.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -14650,8 +14650,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-97e00686.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-97e00686.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-9c12f7c6.js", "_app/immutable/chunks/singletons-bf3fae6c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-1363e9e5.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-1363e9e5.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-1c210212.js", "_app/immutable/chunks/singletons-d322c572.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -28551,7 +28551,11 @@ var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
     Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return ``;
+      return `
+
+
+
+`;
     });
   }
 });
@@ -28947,20 +28951,28 @@ var page_svelte_exports8 = {};
 __export(page_svelte_exports8, {
   default: () => Page11
 });
-var Page11;
+var PlansComponentComplete, Page11;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
     init_store();
     init_plansCardArray();
-    Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    PlansComponentComplete = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { zeroTransition = false } = $$props;
+      if ($$props.zeroTransition === void 0 && $$bindings.zeroTransition && zeroTransition !== void 0)
+        $$bindings.zeroTransition(zeroTransition);
       return `${``}
 
 
 <div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 px-6 md:m-7"}">${each(plansCardArray, (item, i) => {
         return `${``}`;
-      })}
-</div>`;
+      })}</div>
+
+`;
+    });
+    Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${validate_component(PlansComponentComplete, "PlansComponentComplete").$$render($$result, {}, {}, {})}
+`;
     });
   }
 });
@@ -28979,8 +28991,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-16907d3f.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-16907d3f.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/PlansCard-88ba9f84.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-6f96cae8.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-6f96cae8.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-7ce4376d.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets13 = [];
   }
 });
@@ -29161,8 +29173,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-26298486.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-26298486.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-9c12f7c6.js", "_app/immutable/chunks/singletons-bf3fae6c.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-dd66e9b4.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-dd66e9b4.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-1c210212.js", "_app/immutable/chunks/singletons-d322c572.js"];
     stylesheets16 = [];
   }
 });
@@ -31881,7 +31893,7 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
+var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n\n    <!-- <meta\n      name="viewport"\n      content="width=device-width, initial-scale=1, minimum-scale=1"\n    /> -->\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
 var error_template = ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -31992,7 +32004,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-0ae0ed2e.js", "imports": ["_app/immutable/start-0ae0ed2e.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-bf3fae6c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-32421f55.js", "imports": ["_app/immutable/start-32421f55.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-d322c572.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
