@@ -227,12 +227,12 @@
     : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300" -->
 
 <card
-  class="relative hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
+  class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
     ? 'hover:shadow-xl '
     : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px] "
   style={`background:${$elementColor}`}
 >
-  <close-button
+  <!-- <close-button
     style={`border-color:${$elementColor}`}
     class="absolute hover:scale-125 duration-300 rounded-full p-4 -top-2 -right-2  flex justify-center items-center border {$isDarkMode
       ? 'bg-[#8f86b8] '
@@ -243,7 +243,7 @@
     on:keydown={() => {
       $navLoginClicked = false;
     }}
-  >
+   >
     <div
       class="absolute w-1/2 h-[2px] rounded rotate-45"
       style={`background:${$elementColor}`}
@@ -252,9 +252,9 @@
       class="absolute w-1/2 h-[2px] rounded -rotate-45"
       style={`background:${$elementColor}`}
     />
-  </close-button>
+  </close-button> -->
 
-  <div class="logInDiv p-5 text-lg sm:text-xl font-bold">
+  <div class="logInDiv p-5 text-xl">
     <signin-button
       id="passwordlessLoginBtn"
       in:scale={{ duration: 600, easing: elasticOut }}

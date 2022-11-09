@@ -27,8 +27,17 @@
   function setScrollYMax() {
     $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
   }
+  // disables pinchzoom on ios/safari simulator
+  function disablePinchZoom() {
+    document.addEventListener("gesturestart", (e) => {
+      e.preventDefault();
+      return false;
+    });
+  }
   onMount(() => {
     setScrollYMax();
+
+    disablePinchZoom();
   });
 
   let jankytown;
@@ -64,6 +73,7 @@
 <PlansCardObserver />
 
 <svelte:head>
+  <link rel="manifest" href="/manifest.json" />
   <!-- <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"

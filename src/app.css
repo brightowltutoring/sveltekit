@@ -50,10 +50,21 @@
 }
 
 
-body {
+/* for Chrome, Safari and Opera */
+body::-webkit-scrollbar{
+  display: none;
+}
+/* IE and Edge */
+/* Firefox */
+body{
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+
   -webkit-tap-highlight-color: transparent; 
   /* removes gray background when clicking buttons; great for mobile */
-  overscroll-behavior-y: none;
+  
+  /* TODO: what does this do?? */
+  /* overscroll-behavior-y: none; */
   
   background: var(--light);
 	color: var(--dark);

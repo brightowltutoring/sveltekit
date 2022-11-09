@@ -12496,7 +12496,7 @@ var init_layout_svelte = __esm({
 
 
 
-<card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 m-1 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><close-button${add_attribute("style", `border-color:${$elementColor}`, 0)} class="${"absolute hover:scale-125 duration-300 rounded-full p-4 -top-2 -right-2 flex justify-center items-center border " + escape($isDarkMode ? "bg-[#8f86b8] " : "bg-red-200", true)}"><div class="${"absolute w-1/2 h-[2px] rounded rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div>
+<card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><close-button${add_attribute("style", `border-color:${$elementColor}`, 0)} class="${"absolute hover:scale-125 duration-300 rounded-full p-4 -top-2 -right-2 flex justify-center items-center border " + escape($isDarkMode ? "bg-[#8f86b8] " : "bg-red-200", true)}"><div class="${"absolute w-1/2 h-[2px] rounded rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div>
     <div class="${"absolute w-1/2 h-[2px] rounded -rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div></close-button>
 
   <div class="${"logInDiv p-5 text-lg sm:text-xl font-bold"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
@@ -12848,8 +12848,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-bfe39cd5.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-bfe39cd5.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-5acf333d.js", "_app/immutable/chunks/singletons-dd5514c5.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-43c42988.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-43c42988.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-02599c47.js", "_app/immutable/chunks/singletons-47ecfa7f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
     stylesheets = ["_app/immutable/assets/_layout-ad5f67c2.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -14673,8 +14673,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-0e2167e5.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-0e2167e5.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-5acf333d.js", "_app/immutable/chunks/singletons-dd5514c5.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-3d3a62eb.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-3d3a62eb.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-02599c47.js", "_app/immutable/chunks/singletons-47ecfa7f.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -29210,8 +29210,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-7439fdc7.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-7439fdc7.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-5acf333d.js", "_app/immutable/chunks/singletons-dd5514c5.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-a7f650dd.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-a7f650dd.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-02599c47.js", "_app/immutable/chunks/singletons-47ecfa7f.js"];
     stylesheets16 = [];
   }
 });
@@ -32041,7 +32041,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-7a6462e4.js", "imports": ["_app/immutable/start-7a6462e4.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-dd5514c5.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-e603cc71.js", "imports": ["_app/immutable/start-e603cc71.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-47ecfa7f.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

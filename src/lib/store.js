@@ -164,22 +164,17 @@ export const routes = writable({
     title: "Plans 💡",
     isCurrent: false,
   },
-  classroom: {
-    name: "Classroom",
-    href: "/classroom",
-    title: "Classroom 🍎",
-    isCurrent: false,
-  },
-  // screenshareA: {
-  //   name: "ScreenshareA",
-  //   href: "/screenshareA",
-  //   title: "ScreenshareA 🖥",
-  //   isCurrent: false,
-  // },
+
   homework: {
     name: "Homework",
     href: "/homework",
     title: "Homework 📚",
+    isCurrent: false,
+  },
+  classroom: {
+    name: "Classroom",
+    href: "/classroom",
+    title: "Classroom 🍎",
     isCurrent: false,
   },
   schools: {
@@ -188,6 +183,12 @@ export const routes = writable({
     title: "Schools",
     isCurrent: false,
   },
+  // screenshareA: {
+  //   name: "ScreenshareA",
+  //   href: "/screenshareA",
+  //   title: "ScreenshareA 🖥",
+  //   isCurrent: false,
+  // },
   stripe: {
     name: "Stripe",
     href: "/stripe",

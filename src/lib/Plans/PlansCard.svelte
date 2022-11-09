@@ -42,22 +42,21 @@
     <slot name="cardTitle">Classico</slot>
   </p>
 
-  <!-- TODO: turning off this transition does nothingg?? -->
   {#each payButtons as button}
-    <!-- {#key button.resetter} -->
-    <!-- in:scale={{ duration: 600, easing: elasticOut }} -->
-    <button
-      on:click={() => {
-        Calendly.initPopupWidget({ url: `${button.url}` });
-        button.resetter = !button.resetter;
-      }}
-      class=" {buttonColor[
-        card
-      ]} {btnColorHover} {button.opacityTW}   hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white "
-    >
-      <slot name="buttonText">{button.text}</slot>
-    </button>
-    <!-- {/key} -->
+    {#key button.resetter}
+      <button
+        in:scale={{ duration: 600, easing: elasticOut }}
+        on:click={() => {
+          Calendly.initPopupWidget({ url: `${button.url}` });
+          button.resetter = !button.resetter;
+        }}
+        class=" {buttonColor[
+          card
+        ]} {btnColorHover} {button.opacityTW}   hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white "
+      >
+        <slot name="buttonText">{button.text}</slot>
+      </button>
+    {/key}
   {/each}
 
   <div class="py-4">
