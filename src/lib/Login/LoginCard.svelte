@@ -270,6 +270,7 @@
 
     <input
       on:keyup={onInputEmailField(emailFieldValue)}
+      on:paste={onInputEmailField(emailFieldValue)}
       class="text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
       id="emailField"
       bind:value={emailFieldValue}

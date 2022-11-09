@@ -1,4 +1,5 @@
 <script>
+  import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
 
   // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
@@ -8,7 +9,7 @@
   import Reviews from "$lib/Reviews.svelte";
   import { slide } from "svelte/transition";
 
-  import { onDestroy, onMount } from "svelte";
+  import { onMount } from "svelte";
 
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
@@ -16,12 +17,12 @@
 
   let ready = false;
 
-  console.log("do it big in texas");
-
   onMount(() => {
     ready = true;
   });
 </script>
+
+<PlansCardObserver />
 
 <video
   loading="lazy"

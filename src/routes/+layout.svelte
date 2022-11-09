@@ -1,7 +1,6 @@
 <script>
   import "../app.css";
 
-  import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import LoginCard from "$lib/Login/LoginCard.svelte";
@@ -17,7 +16,7 @@
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
-    isDarkMode,
+    // isDarkMode,
     // isLoggedIn,
   } from "$lib/store.js";
 
@@ -70,18 +69,9 @@
   }
 </script>
 
-<PlansCardObserver />
-
 <svelte:head>
   <link rel="manifest" href="/manifest.json" />
-  <!-- <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    /> -->
-  <!-- <meta
-      name="viewport"
-      content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, height=device-height, target-densitydpi=device-dpi"
-    /> -->
+
   <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link

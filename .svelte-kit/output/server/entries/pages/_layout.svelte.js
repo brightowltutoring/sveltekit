@@ -1,11 +1,17 @@
 import { c as create_ssr_component, e as escape, a as subscribe, d as add_attribute, v as validate_component, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
-import { P as PlansCardObserver } from "../../chunks/PlansCardObserver.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { n as navLoginClicked, i as isLoggedIn, a as isDarkMode, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, w as windowInnerHeight, d as scrollYMax, f as innerWidth } from "../../chunks/store.js";
 import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
+const PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+
+
+
+`;
+});
 const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { showModal = false } = $$props;
   let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
@@ -117,10 +123,9 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 
 
 
-<card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><close-button${add_attribute("style", `border-color:${$elementColor}`, 0)} class="${"absolute hover:scale-125 duration-300 rounded-full p-4 -top-2 -right-2 flex justify-center items-center border " + escape($isDarkMode ? "bg-[#8f86b8] " : "bg-red-200", true)}"><div class="${"absolute w-1/2 h-[2px] rounded rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div>
-    <div class="${"absolute w-1/2 h-[2px] rounded -rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div></close-button>
+<card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
-  <div class="${"logInDiv p-5 text-lg sm:text-xl font-bold"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
+  <div class="${"logInDiv p-5 text-xl"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
   ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
@@ -473,12 +478,12 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
 
-${$$result.head += `<!-- HEAD_svelte-y3e22o_START -->${each(Object.keys($routes), (key) => {
+${$$result.head += `<!-- HEAD_svelte-1fe03l4_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "/" && key == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
-    })}<!-- HEAD_svelte-y3e22o_END -->`, ""}
+    })}<!-- HEAD_svelte-1fe03l4_END -->`, ""}
 
 
 

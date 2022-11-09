@@ -47,16 +47,16 @@ const routes = writable({
     title: "Plans \u{1F4A1}",
     isCurrent: false
   },
-  classroom: {
-    name: "Classroom",
-    href: "/classroom",
-    title: "Classroom \u{1F34E}",
-    isCurrent: false
-  },
   homework: {
     name: "Homework",
     href: "/homework",
     title: "Homework \u{1F4DA}",
+    isCurrent: false
+  },
+  classroom: {
+    name: "Classroom",
+    href: "/classroom",
+    title: "Classroom \u{1F34E}",
     isCurrent: false
   },
   schools: {

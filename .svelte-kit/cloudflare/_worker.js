@@ -626,21 +626,6 @@ var init_hooks_server = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/PlansCardObserver.js
-var PlansCardObserver;
-var init_PlansCardObserver = __esm({
-  ".svelte-kit/output/server/chunks/PlansCardObserver.js"() {
-    init_chunks();
-    PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-
-
-`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/chunks/store.js
 var isLoggedIn, scrollY, startScrollY, instDeltaY, scrollYMax, windowInnerHeight, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, routes, isDarkMode, light_darkened, dark_lightened, elementColor;
 var init_store = __esm({
@@ -694,16 +679,16 @@ var init_store = __esm({
         title: "Plans \u{1F4A1}",
         isCurrent: false
       },
-      classroom: {
-        name: "Classroom",
-        href: "/classroom",
-        title: "Classroom \u{1F34E}",
-        isCurrent: false
-      },
       homework: {
         name: "Homework",
         href: "/homework",
         title: "Homework \u{1F4DA}",
+        isCurrent: false
+      },
+      classroom: {
+        name: "Classroom",
+        href: "/classroom",
+        title: "Classroom \u{1F34E}",
         isCurrent: false
       },
       schools: {
@@ -12380,16 +12365,22 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, goto, IconGoogle, IconEmail, IconTwitter, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
+var PlansCardObserver, Modal, goto, IconGoogle, IconEmail, IconTwitter, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
-    init_PlansCardObserver();
     init_Dropzone();
     init_store();
     init_firebase();
     init_index_esm3();
     init_index2();
+    PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+
+
+`;
+    });
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { showModal = false } = $$props;
       let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
@@ -12496,10 +12487,9 @@ var init_layout_svelte = __esm({
 
 
 
-<card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><close-button${add_attribute("style", `border-color:${$elementColor}`, 0)} class="${"absolute hover:scale-125 duration-300 rounded-full p-4 -top-2 -right-2 flex justify-center items-center border " + escape($isDarkMode ? "bg-[#8f86b8] " : "bg-red-200", true)}"><div class="${"absolute w-1/2 h-[2px] rounded rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div>
-    <div class="${"absolute w-1/2 h-[2px] rounded -rotate-45"}"${add_attribute("style", `background:${$elementColor}`, 0)}></div></close-button>
+<card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
-  <div class="${"logInDiv p-5 text-lg sm:text-xl font-bold"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
+  <div class="${"logInDiv p-5 text-xl"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
         $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
         true
       ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
@@ -12750,12 +12740,12 @@ var init_layout_svelte = __esm({
         }
         $$rendered = `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
 
-${$$result.head += `<!-- HEAD_svelte-y3e22o_START -->${each(Object.keys($routes), (key2) => {
+${$$result.head += `<!-- HEAD_svelte-1fe03l4_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key2) => {
           return `${$page.routeId == "/" && key2 == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key2}` ? `${$$result.title = `<title>${escape($routes[key2].title)}</title>`, ""}` : ``}`}`;
-        })}<!-- HEAD_svelte-y3e22o_END -->`, ""}
+        })}<!-- HEAD_svelte-1fe03l4_END -->`, ""}
 
 
 
@@ -12848,9 +12838,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-43c42988.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-43c42988.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-02599c47.js", "_app/immutable/chunks/singletons-47ecfa7f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
-    stylesheets = ["_app/immutable/assets/_layout-ad5f67c2.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-8971810b.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-8971810b.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-9c12f7c6.js", "_app/immutable/chunks/singletons-bf3fae6c.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    stylesheets = ["_app/immutable/assets/_layout-c0ead8f2.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -12890,65 +12880,6 @@ var init__2 = __esm({
     file2 = "_app/immutable/components/pages/_error.svelte-4e49e236.js";
     imports2 = ["_app/immutable/components/pages/_error.svelte-4e49e236.js", "_app/immutable/chunks/index-2bdb53b3.js"];
     stylesheets2 = [];
-  }
-});
-
-// .svelte-kit/output/server/chunks/PlansCard.js
-var PlansCard;
-var init_PlansCard = __esm({
-  ".svelte-kit/output/server/chunks/PlansCard.js"() {
-    init_chunks();
-    init_store();
-    PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      let $elementColor, $$unsubscribe_elementColor;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
-      let { payNowUrl = "" } = $$props;
-      let { payLaterUrl = "" } = $$props;
-      const payButtons = [
-        {
-          resetter: false,
-          url: payNowUrl,
-          opacityTW: "bg-opacity-100",
-          text: "Pay Now"
-        },
-        {
-          resetter: false,
-          url: payLaterUrl,
-          opacityTW: "bg-opacity-70",
-          text: "Pay Later"
-        }
-      ];
-      let { btnColorHover = "" } = $$props;
-      let { card } = $$props;
-      let buttonColor = {
-        1: "bg-[rgb(244,77,77)]",
-        2: "bg-[rgb(254,164,92)]",
-        3: "bg-[rgb(45,165,214)]"
-      };
-      if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
-        $$bindings.payNowUrl(payNowUrl);
-      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
-        $$bindings.payLaterUrl(payLaterUrl);
-      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
-        $$bindings.btnColorHover(btnColorHover);
-      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
-        $$bindings.card(card);
-      $$unsubscribe_isDarkMode();
-      $$unsubscribe_elementColor();
-      return `<plans-card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl m-1 p-7 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-4xl font-Poppins py-5 text-center"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
-
-  
-  ${each(payButtons, (button) => {
-        return `
-    
-    <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}</button>
-    `;
-      })}
-
-  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
-    });
   }
 });
 
@@ -13020,14 +12951,60 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var PlansComponent, css2, ReviewCreator, reviews, Reviews, Page;
+var PlansCard, PlansComponent, css2, ReviewCreator, reviews, Reviews, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
-    init_PlansCard();
+    init_store();
     init_plansCardArray();
     init_Dropzone();
-    init_store();
+    PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      let $elementColor, $$unsubscribe_elementColor;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
+      let { payNowUrl = "" } = $$props;
+      let { payLaterUrl = "" } = $$props;
+      const payButtons = [
+        {
+          resetter: false,
+          url: payNowUrl,
+          opacityTW: "bg-opacity-100",
+          text: "Pay Now"
+        },
+        {
+          resetter: false,
+          url: payLaterUrl,
+          opacityTW: "bg-opacity-70",
+          text: "Pay Later"
+        }
+      ];
+      let { btnColorHover = "" } = $$props;
+      let { card } = $$props;
+      let buttonColor = {
+        1: "bg-[rgb(244,77,77)]",
+        2: "bg-[rgb(254,164,92)]",
+        3: "bg-[rgb(45,165,214)]"
+      };
+      if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
+        $$bindings.payNowUrl(payNowUrl);
+      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
+        $$bindings.payLaterUrl(payLaterUrl);
+      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
+        $$bindings.btnColorHover(btnColorHover);
+      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
+        $$bindings.card(card);
+      $$unsubscribe_isDarkMode();
+      $$unsubscribe_elementColor();
+      return `<plans-card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl m-1 p-7 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-4xl font-Poppins py-5 text-center"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+
+  ${each(payButtons, (button) => {
+        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
+      </button>`;
+      })}
+
+  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
+    });
     PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 <div class="${"grid grid-cols-1 lg:grid-cols-2 "}">
@@ -13251,8 +13228,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-9dcdd6e2.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-9dcdd6e2.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-daad155a.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-2fe84d9c.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-8342b968.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-8342b968.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-88ba9f84.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js"];
     stylesheets3 = ["_app/immutable/assets/_page-d999b052.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -14673,8 +14650,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-3d3a62eb.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-3d3a62eb.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-02599c47.js", "_app/immutable/chunks/singletons-47ecfa7f.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-97e00686.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-97e00686.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-9c12f7c6.js", "_app/immutable/chunks/singletons-bf3fae6c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -14844,8 +14821,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-4a9e32d0.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-4a9e32d0.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Dropzone-bbb0d1e0.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-bbe7633f.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-bbe7633f.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js"];
     stylesheets7 = ["_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -28558,8 +28535,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file8 = "_app/immutable/components/pages/katex/_page.svx-31f5f368.js";
-    imports8 = ["_app/immutable/components/pages/katex/_page.svx-31f5f368.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js"];
+    file8 = "_app/immutable/components/pages/katex/_page.svx-2b4b40e1.js";
+    imports8 = ["_app/immutable/components/pages/katex/_page.svx-2b4b40e1.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js"];
     stylesheets8 = [];
   }
 });
@@ -28760,8 +28737,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file10 = "_app/immutable/components/pages/math/_page.svx-8f9974b6.js";
-    imports10 = ["_app/immutable/components/pages/math/_page.svx-8f9974b6.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/Kajax-5fca555e.js"];
+    file10 = "_app/immutable/components/pages/math/_page.svx-9ba73063.js";
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-9ba73063.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/Kajax-5fca555e.js"];
     stylesheets10 = [];
   }
 });
@@ -28840,8 +28817,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file11 = "_app/immutable/components/pages/mathjax/_page.svx-06c017d9.js";
-    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-06c017d9.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js"];
+    file11 = "_app/immutable/components/pages/mathjax/_page.svx-aff51c7e.js";
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-aff51c7e.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js"];
     stylesheets11 = [];
   }
 });
@@ -28959,8 +28936,8 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/physics/_page.svelte-376748f4.js";
-    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-376748f4.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Kajax-5fca555e.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js"];
+    file12 = "_app/immutable/components/pages/physics/_page.svelte-e317b4f4.js";
+    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-e317b4f4.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Kajax-5fca555e.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js"];
     stylesheets12 = ["_app/immutable/assets/_page-fcf51fa8.css"];
   }
 });
@@ -28974,40 +28951,14 @@ var Page11;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
-    init_PlansCardObserver();
-    init_PlansCard();
+    init_store();
     init_plansCardArray();
     Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
+      return `${``}
 
 
 <div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 px-6 md:m-7"}">${each(plansCardArray, (item, i) => {
-        return `<div>${validate_component(PlansCard, "PlansCard").$$render(
-          $$result,
-          {
-            card: item.card,
-            payNowUrl: item.payNowUrl,
-            payLaterUrl: item.payLaterUrl
-          },
-          {},
-          {
-            cardText: () => {
-              return `<span slot="${"cardText"}">${escape(item.cardText)}
-        </span>`;
-            },
-            cardTitle: () => {
-              return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
-            },
-            default: () => {
-              return `
-        
-
-        
-      `;
-            }
-          }
-        )}
-    </div>`;
+        return `${``}`;
       })}
 </div>`;
     });
@@ -29028,8 +28979,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-fc928803.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-fc928803.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/PlansCard-daad155a.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-16907d3f.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-16907d3f.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCardObserver-34b43ded.js", "_app/immutable/chunks/PlansCard-88ba9f84.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets13 = [];
   }
 });
@@ -29162,8 +29113,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/schools/_page.svelte-48398c64.js";
-    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-48398c64.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file15 = "_app/immutable/components/pages/schools/_page.svelte-0a8840d9.js";
+    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-0a8840d9.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets15 = [];
   }
 });
@@ -29210,8 +29161,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-a7f650dd.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-a7f650dd.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-fa0b0b0c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-02599c47.js", "_app/immutable/chunks/singletons-47ecfa7f.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-26298486.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-26298486.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-9c12f7c6.js", "_app/immutable/chunks/singletons-bf3fae6c.js"];
     stylesheets16 = [];
   }
 });
@@ -31930,7 +31881,7 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
+var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
 var error_template = ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -32038,10 +31989,10 @@ var Server = class {
 var manifest = {
   appDir: "_app",
   appPath: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
-  mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webp": "image/webp", ".txt": "text/plain" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
+  mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-e603cc71.js", "imports": ["_app/immutable/start-e603cc71.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-47ecfa7f.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-0ae0ed2e.js", "imports": ["_app/immutable/start-0ae0ed2e.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-bf3fae6c.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -6,7 +6,8 @@
 </script>
 
 <!-- <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-7 "> -->
-<div class="grid grid-cols-1 lg:grid-cols-2 ">
+<!-- <div class="grid grid-cols-1 lg:grid-cols-2 "> -->
+<div class="grid grid-cols-1 lg:grid-cols-2 px-6 md:m-7">
   <!-- {#each [...plansCardArray].splice(0, 2) as item, i} -->
   {#each plansCardArray.slice(0, 2) as item, i}
     <div>

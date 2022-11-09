@@ -1,4 +1,12 @@
 <!-- <script>
+  import LoginCard from "$lib/Login/LoginCard.svelte";
+</script>
+
+<LoginCard /> -->
+<!-- TODO: new code below. Without modal, the background card just floats to the top left  -->
+
+<!-- TODO: old code below -->
+<!-- <script>
   import {
     redirectAfterLoginTimeOut,
     redirectSetInterval,
