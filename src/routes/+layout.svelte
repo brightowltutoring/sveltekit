@@ -16,7 +16,7 @@
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
-    // isDarkMode,
+    isDarkMode,
     // isLoggedIn,
   } from "$lib/store.js";
 
@@ -103,11 +103,10 @@
   on:contextmenu={(event) => event.preventDefault()}
 />
 
-<!-- <main
-  class={$isDarkMode
+<!-- class={$isDarkMode
     ? "bg-[rgba(37,27,47,0.1)] text-white"
-    : "bg-[rgba(253,250,255,0.1)] text-[rgb(37,27,47)]"}
-> -->
+    : "bg-[rgba(253,250,255,0.1)] text-[rgb(37,27,47)]"} -->
+
 <main>
   <Modal bind:showModal={$navLoginClicked}>
     <LoginCard />

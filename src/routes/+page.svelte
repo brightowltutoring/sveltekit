@@ -1,25 +1,18 @@
 <script>
   import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
-
-  // import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
-  // import Testimonials from "$lib/Testimonials.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  import { isDarkMode } from "$lib/store.js";
   import Reviews from "$lib/Reviews.svelte";
+  import { isDarkMode } from "$lib/store.js";
   import { slide } from "svelte/transition";
-
   import { onMount } from "svelte";
+
+  let ready = false;
+  onMount(() => (ready = true));
 
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
-
-  let ready = false;
-
-  onMount(() => {
-    ready = true;
-  });
 </script>
 
 <PlansCardObserver />

@@ -1,4 +1,3 @@
-<!-- TODO: find nicer way to deal with logincard logic .. -->
 <script>
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
@@ -44,20 +43,6 @@
     clearInterval(redirectSetInterval);
     clearTimeout(redirectAfterLoginTimeOut);
   }
-
-  // let auth = {};
-  // $: if ($navLoginClicked) {
-  //   (async () => {
-  //     const { getAuth } = await import("firebase/auth");
-  //     auth = getAuth(app);
-  //   })();
-  // }
-
-  // TODO: broken coode; want to import authproviders on loginclick
-  // let TwitterAuthProvider;
-  // $: if ($navLoginClicked) {
-  //   const { TwitterAuthProvider } = import("firebase/auth");
-  // }
 
   $: if ($navLoginClicked && $isLoggedIn) {
     navLoginClickedRedirect(loggedInEmail);

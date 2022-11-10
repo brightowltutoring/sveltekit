@@ -1,16 +1,14 @@
 <script>
   import LightDarkMode from "$lib/LightDarkMode.svelte";
-  import { scale, slide /* fly, fade, blur, */ } from "svelte/transition";
-  import { quintOut, elasticOut } from "svelte/easing";
+  import { scale } from "svelte/transition";
+  import { elasticOut } from "svelte/easing";
   import Navitem from "./Navitem.svelte";
   import { goto } from "$app/navigation";
   import {
     isLoggedIn,
     routes,
     scrollY,
-    instDeltaY,
     isDarkMode,
-    lessThan768,
     navLoginClicked,
     navHomeworkClicked,
   } from "$lib/store.js";
@@ -45,7 +43,6 @@
   let btnColor = "sm:bg-red-300 rounded";
   let btnColorHover = "hover:bg-red-300 ";
 
-  // rgba(0,0,0,0) is transparent
   $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${
     $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-100"
   }`;
@@ -89,14 +86,9 @@
           </li>
         {/each}
 
-        {#key !$isDarkMode}
-          <li
-            in:slide={{ duration: 600, easing: quintOut }}
-            class="px-3 translate-y-1"
-          >
-            <LightDarkMode />
-          </li>
-        {/key}
+        <li class="px-3 translate-y-1">
+          <LightDarkMode />
+        </li>
       </ul>
     {/key}
   </nav>

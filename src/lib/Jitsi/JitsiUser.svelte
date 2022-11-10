@@ -40,11 +40,7 @@
       SHOW_CHROME_EXTENSION_BANNER: false,
       SETTINGS_SECTIONS: [
         "devices",
-        // 'moderator',
-        // 'language',
-        // 'profile',
-        // 'calendar',
-        // 'sounds',
+        // 'moderator','language','profile','calendar','sounds',
       ],
       TOOLBAR_BUTTONS: [
         "desktop",
@@ -54,32 +50,13 @@
         "chat",
         "fodeviceselection",
         "etherpad",
-        // "hangup",
-        // "dock-iframe",
-        // "undock-iframe",
-        // "raisehand",
-        // "noisesuppression",
-        // "settings",
-        // "select-background",
-        // "participants-pane",
-        // "highlight",
-        // 'mute-video-everyone',
-        // 'mute-everyone',
-        // 'security',
-        // 'sharedvideo',
-        // 'videoquality',
-        // 'livestreaming',
-        // 'recording',
-        // 'closedcaptions',
-        // 'filmstrip',
-        // 'feedback',
-        // 'stats',
-        // 'shortcuts',
-        // "tileview",
-        // "profile",
+        // "hangup","dock-iframe","undock-iframe","raisehand","noisesuppression","settings","select-background","participants-pane","highlight",'mute-video-everyone','mute-everyone','security','sharedvideo','videoquality','livestreaming','recording','closedcaptions','filmstrip','feedback','stats','shortcuts',"tileview","profile",
       ],
     },
   };
+
+  // let leftwatermark;
+  // $: alert(leftwatermark);
 
   onMount(() => {
     // can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
@@ -88,45 +65,29 @@
       api = new JitsiMeetExternalAPI(domain, options);
 
       api.addEventListener("participantRoleChanged", function (event) {
-        par = [...api.getParticipantsInfo()];
+        par = [...api.getParticipantsInfo()]; // the last person to join sees the most people...
+        // firstID = Object.values(par[0])[3];
+        // api.pinParticipant(firstID);
+        // alert(firstID);
+        // leftwatermark = document.querySelector("div.watermark.leftwatermark");
       });
-
-      // api.addEventListener("participantRoleChanged", function (event) {
-      //   // leftwatermark = document.querySelector("div.leftwatermark");
-      //   par = [...api.getParticipantsInfo()];
-      //   // firstID = Object.values(par[0])[3];
-      //   // api.pinParticipant(firstID);
-      //   // alert(firstID);
-      //   // alert(par.length);
-      // });
-
-      // api.addEventListener("getNumberOfParticipants", () => {
-      //   console.log("hey");
-      // });
     } catch (error) {
       console.log("onMount for JitsiMeetExternalAPI broken", error);
     }
   });
 </script>
 
-<div class="relative md:-translate-y-10 -translate-y-36">
-  <div id="meet" class="w-full h-[82vh] md:h-[670px]" />
+<main>
+  <div class="relative md:-translate-y-10 -translate-y-36">
+    <div id="meet" class="w-full h-[82vh] md:h-[670px]" />
 
-  <img
-    on:click={hangUpBtn}
-    on:keydown={hangUpBtn}
-    alt="hangup button"
-    class="absolute p-2 {!par && 'opacity-0'} {$lessThan768
-      ? 'top-10 right-0'
-      : 'bottom-5 right-10 '}  w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44]  active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"
-  />
-</div>
-<!-- <img
-  on:click={hangUpBtn}
-  on:keydown={hangUpBtn}
-  alt="hangup button"
-  class="absolute bg-gray-600 p-2 brightness-50 {!par &&
-    'opacity-0'} {$lessThan768
-    ? 'left-0 right-0 ml-auto mr-auto -bottom-20'
-    : 'bottom-5 right-10 '} flex w-[50px] rounded-full content-[url('/phone.svg')] active:bg-red-500 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"
-/> -->
+    <img
+      on:click={hangUpBtn}
+      on:keydown={hangUpBtn}
+      alt="hangup button"
+      class="absolute p-2 {!par && 'opacity-0'} {$lessThan768
+        ? 'top-10 right-0'
+        : 'bottom-5 right-10 '}  w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44]  active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"
+    />
+  </div>
+</main>

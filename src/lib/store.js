@@ -62,8 +62,12 @@ export function customEase(t) {
   // return 1;
 }
 
-function customFade(node, { easing = elasticOut, duration = 3000 }) {
+export function customFade(
+  node,
+  { delay = 0, easing = elasticOut, duration = 3000 }
+) {
   return {
+    delay,
     easing,
     duration,
     css: (t, u) =>

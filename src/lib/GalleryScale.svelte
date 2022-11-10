@@ -1,4 +1,5 @@
-<script>
+<!-- TODO: no longer using this code -->
+<!-- <script>
   export let Src;
   export let Alt;
   import { isDarkMode } from "$lib/store.js";
@@ -31,8 +32,8 @@
     src={Src}
     alt={Alt}
   />
-  <!-- still confused as to how this scale full screen but ok! -->
-</div>
+</div> -->
+<!-- still confused as to how this scale full screen but ok! -->
 
 <!-- <style>
     .relative input {

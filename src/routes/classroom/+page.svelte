@@ -5,21 +5,16 @@
 
   onMount(() => {
     $isDarkMode = true;
-    window.document.body.classList.add("dark-mode");
-    // setTimeout(() => {
-    //   document.querySelector(".content-controls .title").innerHTML = "yo";
-    // }, 5000);
-    // if (document.querySelector("DIV .watermark .leftwatermark")) {
-    //   alert("heyoo");
-    //   document.querySelector("DIV .watermark .leftwatermark").style.background =
-    //     "black";
-    // }
+    document.body.classList.add("dark-mode");
   });
   onDestroy(() => {
     $isDarkMode = false;
     window.document.body.classList.remove("dark-mode");
   });
 </script>
+
+<!-- <div in:fade={{ duration: 1000, easing: elasticOut }}> -->
+<!-- <div in:customFade={{ duration: 6000, delay: 1000 }}> -->
 
 <JitsiUser />
 

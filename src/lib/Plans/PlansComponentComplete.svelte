@@ -1,22 +1,22 @@
 <script>
   import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
   import PlansCard from "$lib/Plans/PlansCard.svelte";
-  import { scale, fade } from "svelte/transition";
+  import {
+    scale,
+    // fade
+  } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import { onMount } from "svelte";
-
-  // customizations for importing component
-  export let zeroTransition = false;
 
   // const scaleMod = (node, args) => {
   //   return args.bool ? fade(node, { duration: 0 }) : scale(node, args);
   // };
 
-  let ready = false;
-  onMount(() => {
-    ready = true;
-  });
+  // When the importing component has 'zeroTransition = true' this component produces no transition animation for both navbar AND direct navigation
+  export let zeroTransition = false;
+  let ready = zeroTransition;
+  onMount(() => (ready = true));
   // the 'ready' variable logic allows the in:scale div to animate (svelte transition) when going directly to this plans route ..otherwise only works when navigating from another route
   // NOTE: the intersection observer component 'PlansCardObserver' also has to be "ready-ed" in, otherwise the button doesn't become 'hydrated' as intended
 </script>
@@ -25,8 +25,9 @@
   <PlansCardObserver />
 {/if}
 
-<!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-5 m-2 md:m-7 bg-red-400 " -->
-<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 px-6 md:m-7">
+<div
+  class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-[6%] md:m-7"
+>
   {#each plansCardArray as item, i}
     {#if ready}
       <div

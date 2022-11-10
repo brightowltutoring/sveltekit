@@ -1,12 +1,8 @@
 <script>
-  import { navLoginClicked, navHomeworkClicked } from "./store.js";
-  import { slide } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
-  import { page } from "$app/stores";
-
-  // import { goto, prefetch } from "$app/navigation";
-
   export let href, content, bool, btnColor, btnColorHover, routes;
+
+  import { navLoginClicked, navHomeworkClicked } from "./store.js";
+  import { page } from "$app/stores";
 
   // this allows going back and button click matching with route
   // could've done this in if/else but the boolean nature here made it unnecessary

@@ -2,7 +2,6 @@
 <MathRenderer />
 <script>
   import MathRenderer from "$lib/Kajax.svelte";
-
 </script>
 
 <!-- 
