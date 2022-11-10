@@ -1,6 +1,6 @@
 <script>
-  import PlansComponentComplete from "$lib/Plans/PlansComponentComplete.svelte";
+  import PlansComponent from "$lib/Plans/PlansComponent.svelte";
 </script>
 
-<PlansComponentComplete />
-<!-- <PlansComponentComplete zeroTransition={true} /> -->
+<PlansComponent />
+<!-- <PlansComponent zeroTransition={true} /> -->

@@ -1321,10 +1321,9 @@ const JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   let $lessThan768, $$unsubscribe_lessThan768;
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
   $$unsubscribe_lessThan768();
-  return `<div class="${"relative md:-translate-y-10 -translate-y-36"}"><div id="${"meet"}" class="${"w-full h-[82vh] md:h-[670px]"}"></div>
+  return `<main><div class="${"relative md:-translate-y-10 -translate-y-36"}"><div id="${"meet"}" class="${"w-full h-[82vh] md:h-[670px]"}"></div>
 
-  <img alt="${"hangup button"}" class="${"absolute p-2 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-10 right-0" : "bottom-5 right-10 ", true) + " w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></div>
-`;
+    <img alt="${"hangup button"}" class="${"absolute p-2 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-10 right-0" : "bottom-5 right-10 ", true) + " w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></div></main>`;
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -1334,7 +1333,10 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     window.document.body.classList.remove("dark-mode");
   });
   $$unsubscribe_isDarkMode();
-  return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}
+  return `
+
+
+${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}
 
 
 

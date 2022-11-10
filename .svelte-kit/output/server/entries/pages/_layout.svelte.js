@@ -12,8 +12,7 @@ const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.showModal(showModal);
   if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
     $$bindings.bgTint(bgTint);
-  return `
-<modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
+  return `<modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
 });
 function guard(name) {
   return () => {
@@ -113,9 +112,6 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_elementColor();
   return `
 
-
-
-
 <card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
   <div class="${"logInDiv p-5 text-xl"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
@@ -154,11 +150,18 @@ const IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 const IconMoon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<svg aria-label="${"Moon"}" id="${"darkIcon"}" height="${"24"}" width="${"24"}" style="${"transform: scale(1);"}" data-metatip="${"true"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`;
 });
+const LightDarkMode_svelte_svelte_type_style_lang = "";
+const css = {
+  code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}",
+  map: null
+};
 const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  $$result.css.add(css);
   $$unsubscribe_isDarkMode();
-  return `<button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button>`;
+  return `
+  <div><button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button></div>`;
 });
 const getStores = () => {
   const stores = getContext("__svelte__");
@@ -475,6 +478,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
     })}<!-- HEAD_svelte-1x4fmg5_END -->`, ""}
+
 
 
 

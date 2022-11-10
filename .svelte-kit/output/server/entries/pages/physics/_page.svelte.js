@@ -10,7 +10,6 @@ const E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
   return `${validate_component(Kajax, "MathRenderer").$$render($$result, {}, {}, {})}
 
-
 <p class="${"text-3xl flex justify-center"}" d${add_attribute("m", `\\cancelto{0}{x}`, 0)}></p>
 <p class="${"text-3xl flex justify-center"}" d${add_attribute("k", `\\cancel{x}`, 0)}></p>
 <div id="${"charges-1"}"><h2>Two isolated point charges as shown are at a fixed distance apart (segment BC). At which point is it possible for the electric field strength to be zero?</h2>

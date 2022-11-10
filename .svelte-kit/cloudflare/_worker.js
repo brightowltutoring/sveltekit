@@ -174,7 +174,7 @@ function create_ssr_component(fn2) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css6) => css6.code).join("\n"),
+          code: Array.from(result.css).map((css7) => css7.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -12365,7 +12365,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, goto, IconGoogle, IconEmail, IconTwitter, LoginCard, IconSun, IconMoon, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
+var Modal, goto, IconGoogle, IconEmail, IconTwitter, LoginCard, IconSun, IconMoon, css2, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -12381,8 +12381,7 @@ var init_layout_svelte = __esm({
         $$bindings.showModal(showModal);
       if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
         $$bindings.bgTint(bgTint);
-      return `
-<modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
+      return `<modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
     });
     goto = guard("goto");
     IconGoogle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -12477,9 +12476,6 @@ var init_layout_svelte = __esm({
       $$unsubscribe_elementColor();
       return `
 
-
-
-
 <card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
   <div class="${"logInDiv p-5 text-xl"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
@@ -12518,11 +12514,17 @@ var init_layout_svelte = __esm({
     IconMoon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<svg aria-label="${"Moon"}" id="${"darkIcon"}" height="${"24"}" width="${"24"}" style="${"transform: scale(1);"}" data-metatip="${"true"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`;
     });
+    css2 = {
+      code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}",
+      map: null
+    };
     LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$result.css.add(css2);
       $$unsubscribe_isDarkMode();
-      return `<button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button>`;
+      return `
+  <div><button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button></div>`;
     });
     getStores = () => {
       const stores = getContext("__svelte__");
@@ -12741,6 +12743,7 @@ var init_layout_svelte = __esm({
 
 
 
+
 <main>${validate_component(Modal, "Modal").$$render(
           $$result,
           { showModal: $navLoginClicked },
@@ -12829,9 +12832,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-2564ff9b.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-2564ff9b.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-4d095b13.js", "_app/immutable/chunks/singletons-d5c6ed27.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
-    stylesheets = ["_app/immutable/assets/_layout-b7997d06.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-2c511c33.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-2c511c33.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-b235ea41.js", "_app/immutable/chunks/singletons-424c6ad3.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    stylesheets = ["_app/immutable/assets/_layout-5c164deb.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -12871,6 +12874,69 @@ var init__2 = __esm({
     file2 = "_app/immutable/components/pages/_error.svelte-4e49e236.js";
     imports2 = ["_app/immutable/components/pages/_error.svelte-4e49e236.js", "_app/immutable/chunks/index-2bdb53b3.js"];
     stylesheets2 = [];
+  }
+});
+
+// .svelte-kit/output/server/chunks/PlansCard.js
+var PlansCardObserver, PlansCard;
+var init_PlansCard = __esm({
+  ".svelte-kit/output/server/chunks/PlansCard.js"() {
+    init_chunks();
+    init_store();
+    PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+
+
+`;
+    });
+    PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      let $elementColor, $$unsubscribe_elementColor;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
+      let { payNowUrl = "" } = $$props;
+      let { payLaterUrl = "" } = $$props;
+      const payButtons = [
+        {
+          resetter: false,
+          url: payNowUrl,
+          opacityTW: "bg-opacity-100",
+          text: "Pay Now"
+        },
+        {
+          resetter: false,
+          url: payLaterUrl,
+          opacityTW: "bg-opacity-70",
+          text: "Pay Later"
+        }
+      ];
+      let { btnColorHover = "" } = $$props;
+      let { card } = $$props;
+      let buttonColor = {
+        1: "bg-[rgb(244,77,77)]",
+        2: "bg-[rgb(254,164,92)]",
+        3: "bg-[rgb(45,165,214)]"
+      };
+      if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
+        $$bindings.payNowUrl(payNowUrl);
+      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
+        $$bindings.payLaterUrl(payLaterUrl);
+      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
+        $$bindings.btnColorHover(btnColorHover);
+      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
+        $$bindings.card(card);
+      $$unsubscribe_isDarkMode();
+      $$unsubscribe_elementColor();
+      return `<plans-card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl m-1 p-7 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-4xl font-Poppins py-5 text-center"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+
+  ${each(payButtons, (button) => {
+        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
+      </button>`;
+      })}
+
+  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
+    });
   }
 });
 
@@ -12942,67 +13008,14 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var PlansCardObserver, PlansCard, PlansComponent, css2, ReviewCreator, reviews, Reviews, Page;
+var PlansComponent, css3, ReviewCreator, reviews, Reviews, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_chunks();
-    init_store();
+    init_PlansCard();
     init_plansCardArray();
     init_Dropzone();
-    PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-
-
-`;
-    });
-    PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      let $elementColor, $$unsubscribe_elementColor;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
-      let { payNowUrl = "" } = $$props;
-      let { payLaterUrl = "" } = $$props;
-      const payButtons = [
-        {
-          resetter: false,
-          url: payNowUrl,
-          opacityTW: "bg-opacity-100",
-          text: "Pay Now"
-        },
-        {
-          resetter: false,
-          url: payLaterUrl,
-          opacityTW: "bg-opacity-70",
-          text: "Pay Later"
-        }
-      ];
-      let { btnColorHover = "" } = $$props;
-      let { card } = $$props;
-      let buttonColor = {
-        1: "bg-[rgb(244,77,77)]",
-        2: "bg-[rgb(254,164,92)]",
-        3: "bg-[rgb(45,165,214)]"
-      };
-      if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
-        $$bindings.payNowUrl(payNowUrl);
-      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
-        $$bindings.payLaterUrl(payLaterUrl);
-      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
-        $$bindings.btnColorHover(btnColorHover);
-      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
-        $$bindings.card(card);
-      $$unsubscribe_isDarkMode();
-      $$unsubscribe_elementColor();
-      return `<plans-card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl m-1 p-7 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-4xl font-Poppins py-5 text-center"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
-
-  ${each(payButtons, (button) => {
-        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
-      </button>`;
-      })}
-
-  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
-    });
+    init_store();
     PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 
@@ -13040,7 +13053,7 @@ var init_page_svelte = __esm({
       })}
 </div>`;
     });
-    css2 = {
+    css3 = {
       code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
       map: null
     };
@@ -13056,7 +13069,7 @@ var init_page_svelte = __esm({
         $$bindings.name(name5);
       if ($$props.date === void 0 && $$bindings.date && date !== void 0)
         $$bindings.date(date);
-      $$result.css.add(css2);
+      $$result.css.add(css3);
       $$unsubscribe_isDarkMode();
       return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
@@ -13228,8 +13241,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-db490b2a.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-db490b2a.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-7ce4376d.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-3621c400.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-3621c400.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-7ce4376d.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-1e703c33.js", "_app/immutable/chunks/public-fe26cbe2.js"];
     stylesheets3 = ["_app/immutable/assets/_page-d999b052.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -14612,10 +14625,9 @@ var init_page_svelte3 = __esm({
       let $lessThan768, $$unsubscribe_lessThan768;
       $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
       $$unsubscribe_lessThan768();
-      return `<div class="${"relative md:-translate-y-10 -translate-y-36"}"><div id="${"meet"}" class="${"w-full h-[82vh] md:h-[670px]"}"></div>
+      return `<main><div class="${"relative md:-translate-y-10 -translate-y-36"}"><div id="${"meet"}" class="${"w-full h-[82vh] md:h-[670px]"}"></div>
 
-  <img alt="${"hangup button"}" class="${"absolute p-2 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-10 right-0" : "bottom-5 right-10 ", true) + " w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></div>
-`;
+    <img alt="${"hangup button"}" class="${"absolute p-2 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-10 right-0" : "bottom-5 right-10 ", true) + " w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></div></main>`;
     });
     Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -14625,7 +14637,10 @@ var init_page_svelte3 = __esm({
         window.document.body.classList.remove("dark-mode");
       });
       $$unsubscribe_isDarkMode();
-      return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}
+      return `
+
+
+${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}
 
 
 
@@ -14652,8 +14667,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-0adfe50b.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-0adfe50b.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-4d095b13.js", "_app/immutable/chunks/singletons-d5c6ed27.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-3e933d10.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-3e933d10.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/navigation-b235ea41.js", "_app/immutable/chunks/singletons-424c6ad3.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -14663,16 +14678,16 @@ var page_svelte_exports4 = {};
 __export(page_svelte_exports4, {
   default: () => Page4
 });
-var css3, Page4;
+var css4, Page4;
 var init_page_svelte4 = __esm({
   ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
     init_chunks();
-    css3 = {
+    css4 = {
       code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
       map: null
     };
     Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css3);
+      $$result.css.add(css4);
       return `${$$result.head += `<!-- HEAD_svelte-1bm9itx_START --><link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}"><\/script><!-- HEAD_svelte-1bm9itx_END -->`, ""}
 
 <details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
@@ -28834,20 +28849,19 @@ var page_svelte_exports7 = {};
 __export(page_svelte_exports7, {
   default: () => Page10
 });
-var css4, E_and_m, Page10;
+var css5, E_and_m, Page10;
 var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
     init_Kajax();
     init_store();
-    css4 = {
+    css5 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css4);
+      $$result.css.add(css5);
       return `${validate_component(Kajax, "MathRenderer").$$render($$result, {}, {}, {})}
-
 
 <p class="${"text-3xl flex justify-center"}" d${add_attribute("m", `\\cancelto{0}{x}`, 0)}></p>
 <p class="${"text-3xl flex justify-center"}" d${add_attribute("k", `\\cancel{x}`, 0)}></p>
@@ -28957,17 +28971,43 @@ var PlansComponentComplete, Page11;
 var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
-    init_store();
+    init_PlansCard();
     init_plansCardArray();
     PlansComponentComplete = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { zeroTransition = false } = $$props;
+      let ready = zeroTransition;
       if ($$props.zeroTransition === void 0 && $$bindings.zeroTransition && zeroTransition !== void 0)
         $$bindings.zeroTransition(zeroTransition);
-      return `${``}
+      return `${ready ? `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}` : ``}
 
+<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-[6%] md:m-7"}">${each(plansCardArray, (item, i) => {
+        return `${ready ? `<div>
+        ${validate_component(PlansCard, "PlansCard").$$render(
+          $$result,
+          {
+            card: item.card,
+            payNowUrl: item.payNowUrl,
+            payLaterUrl: item.payLaterUrl
+          },
+          {},
+          {
+            cardText: () => {
+              return `<span slot="${"cardText"}">${escape(item.cardText)}
+          </span>`;
+            },
+            cardTitle: () => {
+              return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
+            },
+            default: () => {
+              return `
+          
 
-<div class="${"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 px-6 md:m-7"}">${each(plansCardArray, (item, i) => {
-        return `${``}`;
+          
+        `;
+            }
+          }
+        )}
+      </div>` : ``}`;
       })}</div>
 
 `;
@@ -28993,8 +29033,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-6f96cae8.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-6f96cae8.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-7ce4376d.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-a3ad3559.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-a3ad3559.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/PlansCard-7ce4376d.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/index-2fe84d9c.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets13 = [];
   }
 });
@@ -29175,8 +29215,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-80f49a37.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-80f49a37.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-4d095b13.js", "_app/immutable/chunks/singletons-d5c6ed27.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-cc4942e2.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-cc4942e2.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/store-26fab694.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/navigation-b235ea41.js", "_app/immutable/chunks/singletons-424c6ad3.js"];
     stylesheets16 = [];
   }
 });
@@ -29335,19 +29375,19 @@ var page_svelte_exports11 = {};
 __export(page_svelte_exports11, {
   default: () => Page15
 });
-var css5, Page15;
+var css6, Page15;
 var init_page_svelte11 = __esm({
   ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
     init_chunks();
     init_firebase();
     init_index_esm5();
-    css5 = {
+    css6 = {
       code: '.loading.svelte-tci3t6:after{content:" . . .";animation:svelte-tci3t6-dots 1s steps(5, end) infinite}@keyframes svelte-tci3t6-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
       map: null
     };
     Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       getFunctions(app);
-      $$result.css.add(css5);
+      $$result.css.add(css6);
       return `${$$result.head += `<!-- HEAD_svelte-1jxl9zf_START -->${$$result.title = `<title>Stripe Checkout</title>`, ""}<script src="${"https://js.stripe.com/v3/"}"><\/script><!-- HEAD_svelte-1jxl9zf_END -->`, ""}
 
 <main>${``}</main>
@@ -31895,7 +31935,7 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n\n    <!-- <meta\n      name="viewport"\n      content="width=device-width, initial-scale=1, minimum-scale=1"\n    /> -->\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
+var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
 var error_template = ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -32006,7 +32046,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-7dca2223.js", "imports": ["_app/immutable/start-7dca2223.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-d5c6ed27.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-72ac2cb1.js", "imports": ["_app/immutable/start-72ac2cb1.js", "_app/immutable/chunks/index-2bdb53b3.js", "_app/immutable/chunks/singletons-424c6ad3.js", "_app/immutable/chunks/index-e434d87f.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

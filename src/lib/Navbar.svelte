@@ -48,12 +48,11 @@
   }`;
 </script>
 
-<logo-and-navbar
-  class="flex items-center justify-center md:justify-between gap-x-24"
->
+<!-- gap-x-24 -->
+<logo-and-navbar class="flex items-center justify-center md:justify-between ">
   {#key resetLogoClick}
     <div
-      class="md:translate-y-[0.5rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
+      class="md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
     md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
       in:scale={{ duration: 1200, easing: elasticOut }}
       on:keydown={clickLogo}

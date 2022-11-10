@@ -1,6 +1,7 @@
 <script>
   import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
+  import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews.svelte";
   import { isDarkMode } from "$lib/store.js";
@@ -98,7 +99,7 @@
       <span class={gradientTextColor}> 2. Schedule a Session </span>
     </p>
 
-    <PlansComponent />
+    <PlansComponent plansCards={plansCardArray.slice(0, 2)} />
   </div>
 
   <!-- fourth page -->

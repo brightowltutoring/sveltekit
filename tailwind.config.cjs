@@ -3,6 +3,9 @@ module.exports = {
   plugins: [require("@tailwindcss/typography")],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        dynamic: "repeat(auto-fit, minmax(20rem, 1fr))",
+      },
       typography: {
         DEFAULT: {
           css: {
