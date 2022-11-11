@@ -1,5 +1,6 @@
-import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each } from "./index.js";
+import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, v as validate_component } from "./index.js";
 import { a as isDarkMode, e as elementColor } from "./store.js";
+import { p as plansCardArray } from "./plansCardArray.js";
 const PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 
@@ -54,7 +55,52 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
 });
+const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { plansCards = plansCardArray } = $$props;
+  let { zeroTransition = false } = $$props;
+  let ready = zeroTransition;
+  if ($$props.plansCards === void 0 && $$bindings.plansCards && plansCards !== void 0)
+    $$bindings.plansCards(plansCards);
+  if ($$props.zeroTransition === void 0 && $$bindings.zeroTransition && zeroTransition !== void 0)
+    $$bindings.zeroTransition(zeroTransition);
+  return `${ready ? `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}` : ``}
+
+
+
+<div class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-10 md:m-7"}">${each(plansCards, (item, i) => {
+    return `${ready ? `<div>
+        ${validate_component(PlansCard, "PlansCard").$$render(
+      $$result,
+      {
+        card: item.card,
+        payNowUrl: item.payNowUrl,
+        payLaterUrl: item.payLaterUrl
+      },
+      {},
+      {
+        cardText: () => {
+          return `<span slot="${"cardText"}">${escape(item.cardText)}
+          </span>`;
+        },
+        cardTitle: () => {
+          return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
+        },
+        default: () => {
+          return `
+          
+
+          
+        `;
+        }
+      }
+    )}
+      </div>` : ``}`;
+  })}</div>
+
+
+`;
+});
 export {
-  PlansCard as P,
-  PlansCardObserver as a
+  PlansCardObserver as P,
+  PlansComponent as a
 };

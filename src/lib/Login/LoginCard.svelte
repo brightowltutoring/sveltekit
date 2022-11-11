@@ -1,8 +1,14 @@
 <script>
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  import { scale } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
+  import { scale, slide, fly, fade } from "svelte/transition";
+  import {
+    elasticOut,
+    quintIn,
+    quintOut,
+    sineIn,
+    sineOut,
+  } from "svelte/easing";
   import {
     isLoggedIn,
     isDarkMode,
@@ -22,8 +28,16 @@
   import IconGoogle from "$lib/Icons/IconGoogle.svelte";
   import IconEmail from "$lib/Icons/IconEmail.svelte";
   import IconTwitter from "$lib/Icons/IconTwitter.svelte";
+  // import Layout from "../../routes/+layout.svelte";
+  // import CloseButton from "$lib/CloseButton.svelte";
 
+  // element identifiers (previously referenced via queryselectors and ids)
+  let passwordlessLoginBtn;
+  let emailField;
+
+  let loginWelcomeText;
   let emailFieldValue = "";
+
   let isEmail = false; // this global variable is updated with regex to verify email input
 
   // Allows to convert infinite 'animate-ping' tailwind animation to short animation;
@@ -49,17 +63,6 @@
   }
 
   onMount(async () => {
-    const logInDiv = document.querySelector(".logInDiv");
-    const logOutDiv = document.querySelector(".logOutDiv");
-    const loginWelcomeText = document.querySelector("#loginWelcomeText");
-    const passwordlessLoginBtn = document.querySelector(
-      "#passwordlessLoginBtn"
-    );
-    const emailField = document.querySelector("#emailField");
-
-    passwordlessLoginBtn.addEventListener("click", signinWithLinkAndStop);
-    emailField.addEventListener("keydown", signinWithLinkAndStop);
-
     // Confirm the link is a sign-in with email link. TODO: place in function??
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem("emailForSignIn");
@@ -85,9 +88,6 @@
 
         console.log(`User is signed in!`);
 
-        logInDiv.style.display = "none";
-        logOutDiv.style.display = "block";
-
         loginWelcomeText.innerText = user.displayName
           ? `Hey ${user.displayName}!`
           : `Hey ${user.email}!`;
@@ -98,8 +98,6 @@
         loggedInEmail = "";
 
         console.log(`User is NOT signed in`);
-        logInDiv.style.display = "block";
-        logOutDiv.style.display = "none";
       }
     });
   });
@@ -207,41 +205,22 @@
   }
 </script>
 
-<!--  class="hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
-    ? 'hover:shadow-xl '
-    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto min-w-fit w-full sm:max-w-lg  p-10 m-1 text-center duration-300" -->
+{#if $navLoginClicked && !$isLoggedIn}
+  <login-card
+    in:slide={{ duration: 400, easing: quintOut }}
+    class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
+      ? 'hover:shadow-xl '
+      : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px] "
+    style={`background:${$elementColor}`}
+  >
+    <!-- <div class="absolute -top-2 -right-2">
+        <CloseButton />
+      </div> -->
 
-<card
-  class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
-    ? 'hover:shadow-xl '
-    : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px] "
-  style={`background:${$elementColor}`}
->
-  <!-- <close-button
-    style={`border-color:${$elementColor}`}
-    class="absolute hover:scale-125 duration-300 rounded-full p-4 -top-2 -right-2  flex justify-center items-center border {$isDarkMode
-      ? 'bg-[#8f86b8] '
-      : 'bg-red-200'}  "
-    on:click={() => {
-      $navLoginClicked = false;
-    }}
-    on:keydown={() => {
-      $navLoginClicked = false;
-    }}
-   >
-    <div
-      class="absolute w-1/2 h-[2px] rounded rotate-45"
-      style={`background:${$elementColor}`}
-    />
-    <div
-      class="absolute w-1/2 h-[2px] rounded -rotate-45"
-      style={`background:${$elementColor}`}
-    />
-  </close-button> -->
-
-  <div class="logInDiv p-5 text-xl">
     <signin-button
-      id="passwordlessLoginBtn"
+      bind:this={passwordlessLoginBtn}
+      on:click={signinWithLinkAndStop}
+      on:keydown={signinWithLinkAndStop}
       in:scale={{ duration: 600, easing: elasticOut }}
       class="group bg-red-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-80'
@@ -256,8 +235,11 @@
     <input
       on:keyup={onInputEmailField(emailFieldValue)}
       on:paste={onInputEmailField(emailFieldValue)}
+      on:keydown={(e) => {
+        signinWithLinkAndStop(e);
+      }}
+      bind:this={emailField}
       class="text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
-      id="emailField"
       bind:value={emailFieldValue}
       type="email"
       placeholder="email"
@@ -267,10 +249,10 @@
 
     <p class="py-5">or</p>
 
+    <!-- in:scale={{ duration: 600, easing: elasticOut }} -->
     <signin-button
       on:keydown={GoogleLogin}
       on:click={GoogleLogin}
-      in:scale={{ duration: 600, easing: elasticOut }}
       class="group mb-6  bg-[#4285f4]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-90'
         : 'group-hover:bg-opacity-90'}  text-white  flex justify-center items-center gap-5"
@@ -281,10 +263,10 @@
       <span>Sign-in with Google</span>
     </signin-button>
 
+    <!-- in:scale={{ duration: 600, easing: elasticOut }} -->
     <signin-button
       on:click={TwitterLogin}
       on:keydown={TwitterLogin}
-      in:scale={{ duration: 600, easing: elasticOut }}
       class=" group bg-[#1d9bf0]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-90'
         : 'group-hover:bg-opacity-90'} text-white  flex justify-center items-center gap-5"
@@ -294,15 +276,23 @@
       </span>
       <span>Sign-in with Twitter</span>
     </signin-button>
-  </div>
+  </login-card>
+{/if}
 
-  <div class="logOutDiv" style="display:none">
-    <p id="loginWelcomeText">Welcome User</p>
+{#if $navLoginClicked && $isLoggedIn}
+  <logout-card
+    in:slide={{ duration: 800, easing: elasticOut }}
+    class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
+      ? 'hover:shadow-xl '
+      : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px] "
+    style={`background:${$elementColor}`}
+  >
+    <p bind:this={loginWelcomeText}>Welcome User</p>
     <div id="redirectMessage">
       Redirecting to your page in
       <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
     </div>
 
     <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
-  </div>
-</card>
+  </logout-card>
+{/if}

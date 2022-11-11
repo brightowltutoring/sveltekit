@@ -1,5 +1,4 @@
 <script>
-  import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
@@ -15,8 +14,6 @@
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
 </script>
-
-<PlansCardObserver />
 
 <video
   loading="lazy"
@@ -99,7 +96,11 @@
       <span class={gradientTextColor}> 2. Schedule a Session </span>
     </p>
 
-    <PlansComponent plansCards={plansCardArray.slice(0, 2)} />
+    <!-- <PlansComponent plansCards={plansCardArray.slice(0, 2)} /> -->
+    <PlansComponent
+      plansCards={plansCardArray.slice(0, 2)}
+      hasTransition={false}
+    />
   </div>
 
   <!-- fourth page -->

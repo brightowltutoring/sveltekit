@@ -1,6 +1,7 @@
 <script>
+  import { scale, fly } from "svelte/transition";
+  import { elasticOut } from "svelte/easing";
   import "../app.css";
-
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import LoginCard from "$lib/Login/LoginCard.svelte";

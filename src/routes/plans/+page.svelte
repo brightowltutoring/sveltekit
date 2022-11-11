@@ -3,4 +3,4 @@
 </script>
 
 <PlansComponent />
-<!-- <PlansComponent zeroTransition={true} /> -->
+<!-- <PlansComponent hasTransition={false} /> -->

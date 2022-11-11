@@ -1,45 +1,8 @@
-import { c as create_ssr_component, j as each, v as validate_component, e as escape, a as subscribe, d as add_attribute } from "../../chunks/index.js";
-import { P as PlansCard, a as PlansCardObserver } from "../../chunks/PlansCard.js";
+import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, d as add_attribute } from "../../chunks/index.js";
+import { P as PlansCardObserver, a as PlansComponent } from "../../chunks/PlansComponent.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { a as isDarkMode } from "../../chunks/store.js";
-const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-
-<div class="${"grid grid-cols-1 lg:grid-cols-2 px-6 md:m-7"}">
-  ${each(plansCardArray.slice(0, 2), (item, i) => {
-    return `<div>
-      ${validate_component(PlansCard, "PlansCard").$$render(
-      $$result,
-      {
-        card: item.card,
-        payNowUrl: item.payNowUrl,
-        payLaterUrl: item.payLaterUrl
-      },
-      {},
-      {
-        cardText: () => {
-          return `<span slot="${"cardText"}">${escape(item.cardText)}
-          
-          
-        </span>`;
-        },
-        cardTitle: () => {
-          return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
-        },
-        default: () => {
-          return `
-        
-
-        
-      `;
-        }
-      }
-    )}
-    </div>`;
-  })}
-</div>`;
-});
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
@@ -195,7 +158,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   
   <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span${add_attribute("class", gradientTextColor, 0)}>2. Schedule a Session </span></p>
 
-    ${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}</div>
+    ${validate_component(PlansComponent, "PlansComponent").$$render($$result, { plansCards: plansCardArray.slice(0, 2) }, {}, {})}</div>
 
   
 
