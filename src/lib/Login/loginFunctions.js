@@ -6,6 +6,36 @@ import { goto } from "$app/navigation";
 import { get } from "svelte/store";
 import { lessThan768 } from "$lib/store.js";
 
+export function regexEmailChecker(EMAIL) {
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
+}
+
+export async function magicLinkToEmail(EMAIL) {
+  const {
+    sendSignInLinkToEmail,
+    // EmailAuthProvider
+  } = await import("firebase/auth");
+
+  // let provider = new EmailAuthProvider();
+  // let providerId = provider.providerId;
+  // console.log("providerId", providerId);
+
+  await sendSignInLinkToEmail(auth, EMAIL, {
+    url: "https://thinksolve.io/",
+    handleCodeInApp: true,
+  })
+    .then(() => {
+      window.localStorage.setItem("emailForSignIn", EMAIL);
+      console.log("success with sendSignInLinkToEmail!");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log("errorCode", errorCode);
+      console.log("errorMessage", errorMessage);
+    });
+}
+
 export async function TwitterLogin() {
   const { TwitterAuthProvider } = await import("firebase/auth");
   const provider = new TwitterAuthProvider();
@@ -117,35 +147,5 @@ export async function logoutFunction() {
     })
     .catch((error) => {
       console.log("logoutFunction failed", error);
-    });
-}
-
-export function regexEmailChecker(EMAIL) {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
-}
-
-export async function magicLinkToEmail(EMAIL) {
-  const {
-    sendSignInLinkToEmail,
-    // EmailAuthProvider
-  } = await import("firebase/auth");
-
-  // let provider = new EmailAuthProvider();
-  // let providerId = provider.providerId;
-  // console.log("providerId", providerId);
-
-  await sendSignInLinkToEmail(auth, EMAIL, {
-    url: "https://thinksolve.io/",
-    handleCodeInApp: true,
-  })
-    .then(() => {
-      window.localStorage.setItem("emailForSignIn", EMAIL);
-      console.log("success with sendSignInLinkToEmail!");
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("errorCode", errorCode);
-      console.log("errorMessage", errorMessage);
     });
 }

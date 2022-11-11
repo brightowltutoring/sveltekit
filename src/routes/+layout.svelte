@@ -24,6 +24,10 @@
   import { page } from "$app/stores";
   import { onMount } from "svelte";
 
+  // function isRunningStandalone() {
+  //   return window.matchMedia("(display-mode: standalone)").matches;
+  // }
+
   function setScrollYMax() {
     $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
   }
@@ -38,6 +42,9 @@
     setScrollYMax();
 
     disablePinchZoom();
+
+    // isRunningStandalone() ? alert("standalone!") : alert("NOT standalone");
+    // TODO: ui change based on standalone ...particularly the login options
   });
 
   let jankytown;
@@ -68,6 +75,8 @@
     if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
+
+  // might need to add browser && dev conditional
 </script>
 
 <svelte:head>

@@ -2,44 +2,32 @@
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { slide } from "svelte/transition";
-  import { elasticOut, quintOut } from "svelte/easing";
+  import { quintOut } from "svelte/easing";
   import {
     isLoggedIn,
     isDarkMode,
     elementColor,
     navLoginClicked,
   } from "$lib/store.js";
-  import {
-    GoogleLogin,
-    TwitterLogin,
-    logoutFunction,
-    regexEmailChecker,
-    magicLinkToEmail,
-  } from "$lib/Login/loginFunctions.js";
+  import { logoutFunction } from "$lib/Login/loginFunctions.js";
 
   import { app, auth } from "$lib/firebase.js";
   import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
-  import IconGoogle from "$lib/Icons/IconGoogle.svelte";
-  import IconEmail from "$lib/Icons/IconEmail.svelte";
-  import IconTwitter from "$lib/Icons/IconTwitter.svelte";
-  // import Layout from "../../routes/+layout.svelte";
+
+  import TwitterLoginButton from "$lib/Login/TwitterLoginButton.svelte";
+  import GoogleLoginButton from "$lib/Login/GoogleLoginButton.svelte";
+  import MagicLinkSection from "$lib/Login/MagicLinkSection.svelte";
+  import PhoneAuthSection from "$lib/Login/PhoneAuthSection.svelte";
   // import CloseButton from "$lib/CloseButton.svelte";
 
   // element identifiers (previously referenced via queryselectors and ids)
-  let magicLinkBtn;
-  let emailField;
 
   let loginWelcomeText;
-  let emailFieldValue = "";
-
-  let isEmail = false; // this global variable is updated with regex to verify email input
 
   // Allows to convert infinite 'animate-ping' tailwind animation to short animation;
   // logic in 'signinWithLinkAndStop' function. Normally would do this with svelte and keyed block,
   // however the destruction/creation of the element interferes with event fire logic I want to maintain
-  let emptyEmailInputAnimated;
-  let magicLinkSent = false;
-  $: shortPing = !magicLinkSent && emptyEmailInputAnimated && "animate-ping";
+
   let loggedInEmail;
 
   // these were previously store variables, but the reactive statement below takes care of things
@@ -98,21 +86,8 @@
 
   //  Hoisted Functions
 
-  function onInputEmailField(EMAIL) {
-    isEmail = regexEmailChecker(EMAIL);
-    if (EMAIL == "") {
-      emailField.style.border = "1px solid #aaa";
-      emailField.style.color = "#aaa";
-      emailField.style.fontSize = "16px";
-    } else if (!isEmail) {
-      emailField.style.border = "1.5px solid red";
-      emailField.style.color = "red";
-      emailField.style.fontSize = "20px";
-    } else if (isEmail) {
-      emailField.style.border = "2px solid #59d0ae";
-      emailField.style.backgroundColor = "white";
-      emailField.style.color = "#10bb8a"; // green-ish colour
-    }
+  function isRunningStandalone() {
+    return window.matchMedia("(display-mode: standalone)").matches;
   }
 
   // this function needs to detect logout too to reset store
@@ -168,35 +143,6 @@
       }
     }
   }
-
-  function signinWithLinkAndStop(e) {
-    if ((e.type == "click" || e.key == "Enter") && emailFieldValue == "") {
-      emptyEmailInputAnimated = true;
-      setTimeout(
-        () => (emptyEmailInputAnimated = !emptyEmailInputAnimated),
-        100
-      );
-    }
-    if ((e.type == "click" || e.key == "Enter") && isEmail) {
-      magicLinkToEmail(emailFieldValue);
-      magicLinkSent = true;
-      emailFieldValue = "";
-
-      emailStatusMessage.style.display = "block";
-
-      emailStatusMessage.innerHTML = `
-                  <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
-                      Link sent to email 🚀
-                  </div>
-                  `;
-
-      emailField.style.opacity = "0.5";
-      emailField.style.pointerEvents = "none";
-
-      magicLinkBtn.style.opacity = "0.5";
-      magicLinkBtn.style.pointerEvents = "none";
-    }
-  }
 </script>
 
 {#if $navLoginClicked && !$isLoggedIn}
@@ -211,72 +157,19 @@
         <CloseButton />
       </div> -->
 
-    <!-- in:scale={{ duration: 600, easing: elasticOut }} -->
-    <signin-button
-      bind:this={magicLinkBtn}
-      on:click={signinWithLinkAndStop}
-      on:keydown={signinWithLinkAndStop}
-      class="group bg-red-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-80'
-        : 'group-hover:bg-opacity-80'}  text-white flex justify-center items-center gap-5"
-    >
-      <span class="group-hover:scale-[1.15] duration-500">
-        <IconEmail />
-      </span>
-      <span>Get Magic Link</span>
-    </signin-button>
-
-    <!-- on:keydown={(e) => {
-        signinWithLinkAndStop(e);
-      }} -->
-    <input
-      on:keydown={(e) => {
-        signinWithLinkAndStop(e);
-      }}
-      on:paste={onInputEmailField(emailFieldValue)}
-      on:keyup={onInputEmailField(emailFieldValue)}
-      bind:this={emailField}
-      class="text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
-      bind:value={emailFieldValue}
-      type="email"
-      placeholder="email"
-    />
-
-    <span id="emailStatusMessage" />
+    {#if !isRunningStandalone()}
+      <MagicLinkSection />
+    {:else}
+      <PhoneAuthSection />
+    {/if}
 
     <p class="py-5">or</p>
 
-    <!-- in:scale={{ duration: 600, easing: elasticOut }} -->
-    <signin-button
-      on:keydown={GoogleLogin}
-      on:click={GoogleLogin}
-      class="group mb-6  bg-[#4285f4]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'}  text-white  flex justify-center items-center gap-5"
-    >
-      <span class="group-hover:scale-[1.15] duration-500">
-        <IconGoogle />
-      </span>
-      <span>Sign-in with Google</span>
-    </signin-button>
-
-    <!-- in:scale={{ duration: 600, easing: elasticOut }} -->
-    <signin-button
-      on:click={TwitterLogin}
-      on:keydown={TwitterLogin}
-      class=" group bg-[#1d9bf0]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
-        ? 'group-hover:bg-opacity-90'
-        : 'group-hover:bg-opacity-90'} text-white  flex justify-center items-center gap-5"
-    >
-      <span class="group-hover:scale-[1.15] duration-500">
-        <IconTwitter />
-      </span>
-      <span>Sign-in with Twitter</span>
-    </signin-button>
+    <!-- since these don't update the DOM, placed them in separate components -->
+    <GoogleLoginButton />
+    <TwitterLoginButton />
   </login-card>
-{/if}
-
-{#if $navLoginClicked && $isLoggedIn}
+{:else if $navLoginClicked && $isLoggedIn}
   <logout-card
     in:slide={{ duration: 100, easing: quintOut }}
     class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
@@ -293,3 +186,5 @@
     <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
   </logout-card>
 {/if}
+
+<!-- {#if $navLoginClicked && $isLoggedIn}{/if} -->

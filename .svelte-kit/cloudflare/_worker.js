@@ -12841,8 +12841,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-16241bbe.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-16241bbe.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/index-d0d6b326.js", "_app/immutable/chunks/Dropzone-2241311d.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-6d8cdc9a.js", "_app/immutable/chunks/singletons-23f2f5ad.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-f01861be.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-f01861be.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/index-d0d6b326.js", "_app/immutable/chunks/Dropzone-2241311d.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-d7f5f040.js", "_app/immutable/chunks/singletons-6111dd05.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
     stylesheets = ["_app/immutable/assets/_layout-6d22f32b.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -14694,8 +14694,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-d123c283.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-d123c283.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/navigation-6d8cdc9a.js", "_app/immutable/chunks/singletons-23f2f5ad.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-3b8ba2c5.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-3b8ba2c5.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/navigation-d7f5f040.js", "_app/immutable/chunks/singletons-6111dd05.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -29202,8 +29202,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-9bcd1b9a.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-9bcd1b9a.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/navigation-6d8cdc9a.js", "_app/immutable/chunks/singletons-23f2f5ad.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-73b72862.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-73b72862.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/navigation-d7f5f040.js", "_app/immutable/chunks/singletons-6111dd05.js"];
     stylesheets16 = [];
   }
 });
@@ -32030,10 +32030,10 @@ var Server = class {
 var manifest = {
   appDir: "_app",
   appPath: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
-  mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
+  mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-6934473a.js", "imports": ["_app/immutable/start-6934473a.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/singletons-23f2f5ad.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-c394ae8e.js", "imports": ["_app/immutable/start-c394ae8e.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/singletons-6111dd05.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
