@@ -1,10 +1,10 @@
-import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, d as add_attribute } from "../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, k as null_to_empty } from "../../chunks/index.js";
 import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { a as isDarkMode } from "../../chunks/store.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
-const css = {
+const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
   map: null
 };
@@ -20,7 +20,7 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
     $$bindings.name(name);
   if ($$props.date === void 0 && $$bindings.date && date !== void 0)
     $$bindings.date(date);
-  $$result.css.add(css);
+  $$result.css.add(css$1);
   $$unsubscribe_isDarkMode();
   return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
@@ -135,27 +135,30 @@ const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     })}`;
   })}</div></div>`;
 });
+const _page_svelte_svelte_type_style_lang = "";
+const css = {
+  code: ".page.svelte-iq6ytm{display:grid;grid-gap:10px;grid-template-rows:repeat(auto-fit, minmax(100vh, 1fr))}",
+  map: null
+};
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let gradientTextColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  $$result.css.add(css);
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
   return `<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
 
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
-  <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
-
-      <div class="${"text-2xl font-Nunito font-thin"}">\u{1F449} click for reviews
-      </div></div></div>
+  <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}</div></div>
 
   
-  <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span${add_attribute("class", gradientTextColor, 0)}>1. Upload your homework </span></p>
+  <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></p>
 
     ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
 
   
-  <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span${add_attribute("class", gradientTextColor, 0)}>2. Schedule a Session </span></p>
+  <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></p>
 
     
     ${validate_component(PlansComponent, "PlansComponent").$$render(
@@ -170,7 +173,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
   
 
-  <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}"><span${add_attribute("class", gradientTextColor, 0)}>3. Do Some Reading </span><span>\u{1F60E}
+  <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">3. Do Some Reading </span><span>\u{1F60E}
       </span></p>
     ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>
 

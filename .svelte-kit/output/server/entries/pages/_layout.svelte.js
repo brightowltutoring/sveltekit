@@ -42,7 +42,7 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
-  let passwordlessLoginBtn;
+  let magicLinkBtn;
   let emailField;
   let loginWelcomeText;
   let emailFieldValue = "";
@@ -114,14 +114,16 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_isDarkMode();
   $$unsubscribe_elementColor();
-  return `${$navLoginClicked && !$isLoggedIn ? `<login-card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
+  return `${$navLoginClicked && !$isLoggedIn ? `<login-card class="${"relative text-xl hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
+    
     <signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
-  ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", passwordlessLoginBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
+  ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
       <span>Get Magic Link</span></signin-button>
 
+    
     <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"email"}" placeholder="${"email"}"${add_attribute("this", emailField, 0)}${add_attribute("value", emailFieldValue, 0)}>
 
     <span id="${"emailStatusMessage"}"></span>
@@ -373,7 +375,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${$isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-100"}`;
     $$rendered = `
-<logo-and-navbar class="${"flex items-center justify-center md:justify-between "}"><div class="${"md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+<logo-and-navbar class="${"flex items-center justify-center md:justify-between gap-x-10 "}"><div class="${"md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
   <nav class="${"md:ml-24 md:p-1 p-3 " + escape(bgGradientColor, true) + " rounded-md md:rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
@@ -504,7 +506,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       }
     )}
 
-  
   ${validate_component(Modal, "Modal").$$render(
       $$result,
       {
@@ -519,10 +520,10 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       },
       {
         default: () => {
-          return `${validate_component(Dropzone_1, "Dropzone").$$render(
+          return `${$navHomeworkClicked ? `<div>${validate_component(Dropzone_1, "Dropzone").$$render(
             $$result,
             {
-              uniqueId: "broccoli",
+              uniqueId: "broccolii",
               text: "\u{1F525}",
               textSizeTW: "text-6xl",
               dimensionsTW: "w-[80vw] h-[85vh]",
@@ -530,7 +531,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
             },
             {},
             {}
-          )}`;
+          )}</div>` : ``}`;
         }
       }
     )}

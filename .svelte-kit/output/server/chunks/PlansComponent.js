@@ -73,8 +73,7 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
       {
         card: item.card,
         payNowUrl: item.payNowUrl,
-        payLaterUrl: item.payLaterUrl,
-        zeroTransition: true
+        payLaterUrl: item.payLaterUrl
       },
       {},
       {

@@ -4,7 +4,7 @@ export const manifest = {
 	assets: new Set([".DS_Store","facepalm.gif","favicon.png","iconmonstr-twitter-1.svg","login-bg-video-blurred.mp4","manifest.json","phone.svg","reviews/.DS_Store","reviews/review-ben-bare.webp","reviews/review-efe-bare.webp","reviews/review-miranda-bare.webp","reviews/review-paola-bare.webp","reviews/review-rob-bare.webp","reviews/review-tj-bare.webp","reviews/review-zaara-bare.webp","robots.txt","star.webp","starOLD.webp","tesla-svgrepo-com.svg"]),
 	mimeTypes: {".gif":"image/gif",".png":"image/png",".svg":"image/svg+xml",".mp4":"video/mp4",".json":"application/json",".webp":"image/webp",".txt":"text/plain"},
 	_: {
-		entry: {"file":"_app/immutable/start-d876e37c.js","imports":["_app/immutable/start-d876e37c.js","_app/immutable/chunks/index-a3a1ba83.js","_app/immutable/chunks/singletons-c2e12d1c.js","_app/immutable/chunks/index-0f1664cf.js","_app/immutable/chunks/preload-helper-b21cceae.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-6934473a.js","imports":["_app/immutable/start-6934473a.js","_app/immutable/chunks/index-d1ecae71.js","_app/immutable/chunks/singletons-23f2f5ad.js","_app/immutable/chunks/index-3eff9ffe.js","_app/immutable/chunks/preload-helper-b21cceae.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
