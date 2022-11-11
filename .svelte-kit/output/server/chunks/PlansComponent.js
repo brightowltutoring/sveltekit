@@ -57,24 +57,24 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 });
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { plansCards = plansCardArray } = $$props;
-  let { zeroTransition = false } = $$props;
-  let ready = zeroTransition;
+  let { hasTransition = true } = $$props;
+  let ready = !hasTransition;
   if ($$props.plansCards === void 0 && $$bindings.plansCards && plansCards !== void 0)
     $$bindings.plansCards(plansCards);
-  if ($$props.zeroTransition === void 0 && $$bindings.zeroTransition && zeroTransition !== void 0)
-    $$bindings.zeroTransition(zeroTransition);
+  if ($$props.hasTransition === void 0 && $$bindings.hasTransition && hasTransition !== void 0)
+    $$bindings.hasTransition(hasTransition);
   return `${ready ? `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}` : ``}
 
 
 
-<div class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-10 md:m-7"}">${each(plansCards, (item, i) => {
-    return `${ready ? `<div>
-        ${validate_component(PlansCard, "PlansCard").$$render(
+<div class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"}">${each(plansCards, (item, i) => {
+    return `${ready ? `<div>${validate_component(PlansCard, "PlansCard").$$render(
       $$result,
       {
         card: item.card,
         payNowUrl: item.payNowUrl,
-        payLaterUrl: item.payLaterUrl
+        payLaterUrl: item.payLaterUrl,
+        zeroTransition: true
       },
       {},
       {
@@ -101,6 +101,5 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
 `;
 });
 export {
-  PlansCardObserver as P,
-  PlansComponent as a
+  PlansComponent as P
 };

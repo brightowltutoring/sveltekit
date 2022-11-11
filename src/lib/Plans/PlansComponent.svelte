@@ -56,7 +56,6 @@
           card={item.card}
           payNowUrl={item.payNowUrl}
           payLaterUrl={item.payLaterUrl}
-          zeroTransition
         >
           <!-- <span slot="buttonText"> {item.buttonText} </span> -->
           <span slot="cardTitle"> {item.cardTitle} </span>

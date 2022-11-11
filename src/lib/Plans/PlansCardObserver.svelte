@@ -23,7 +23,12 @@
 
   onMount(() => {
     // TODO: WOW!! without this existence check app kept crashing
-    if (document.querySelector("plans-card")) {
+    const conditionsForObservation =
+      document.querySelector("plans-card") &&
+      !document.getElementById("calendlyJS") &&
+      !document.getElementById("calendlyCSS");
+
+    if (conditionsForObservation) {
       const plansCards = document.querySelectorAll("plans-card");
       const options = {
         root: null,

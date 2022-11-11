@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, d as add_attribute } from "../../chunks/index.js";
-import { P as PlansCardObserver, a as PlansComponent } from "../../chunks/PlansComponent.js";
+import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
 import { a as isDarkMode } from "../../chunks/store.js";
@@ -125,7 +125,8 @@ const reviews = [
 const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 
-<div class="${"scale-90 "}"><div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name, title, date, body }) => {
+<div class="${"scale-90 "}"><div class="${"grid grid-cols-dynamic gap-x-10 gap-y-[80vw] sm:gap-y-[55vw] md:gap-y-[65vw] lg:gap-y-[45vw] -translate-y-60 sm:translate-y-0"}">
+    ${each(reviews, ({ name, title, date, body }) => {
     return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
       default: () => {
         return `${escape(body)}
@@ -140,9 +141,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
-  return `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}
-
-<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
+  return `<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
 
 <div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
   <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}
@@ -158,7 +157,16 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   
   <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span${add_attribute("class", gradientTextColor, 0)}>2. Schedule a Session </span></p>
 
-    ${validate_component(PlansComponent, "PlansComponent").$$render($$result, { plansCards: plansCardArray.slice(0, 2) }, {}, {})}</div>
+    
+    ${validate_component(PlansComponent, "PlansComponent").$$render(
+    $$result,
+    {
+      plansCards: plansCardArray.slice(0, 2),
+      hasTransition: false
+    },
+    {},
+    {}
+  )}</div>
 
   
 

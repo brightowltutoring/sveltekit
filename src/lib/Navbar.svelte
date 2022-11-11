@@ -49,7 +49,9 @@
 </script>
 
 <!-- gap-x-24 -->
-<logo-and-navbar class="flex items-center justify-center md:justify-between ">
+<logo-and-navbar
+  class="flex items-center justify-center md:justify-between gap-x-10 "
+>
   {#key resetLogoClick}
     <div
       class="md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 

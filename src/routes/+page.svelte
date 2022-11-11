@@ -2,7 +2,7 @@
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  import Reviews from "$lib/Reviews.svelte";
+  import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isDarkMode } from "$lib/store.js";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
@@ -37,23 +37,25 @@
           Math, Physics
           <span class={gradientTextColor}> ... Online! </span>
         </div>
-      {/if}
 
-      <div
-        class="text-2xl font-Nunito font-thin"
-        on:click={() => {
-          document
-            .getElementById("reviews")
-            .scrollIntoView({ behavior: "smooth", block: "start" });
-        }}
-        on:keydown={() => {
-          document
-            .getElementById("reviews")
-            .scrollIntoView({ behavior: "smooth", block: "start" });
-        }}
-      >
-        👉 click for reviews
-      </div>
+        <div
+          class="text-2xl font-Nunito font-thin "
+          on:click={() => {
+            document
+              // .getElementById("reviews")
+              .getElementById("step1")
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+          on:keydown={() => {
+            document
+              .getElementById("reviews")
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+        >
+          <!-- 👉 click for reviews -->
+          👇 get started
+        </div>
+      {/if}
     </div>
   </div>
 
@@ -157,3 +159,10 @@
     // window.addEventListener("touchend", () => {
     //   console.log("window touchend (actually fired dispatch event)");
     // }); -->
+<style>
+  .page {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: repeat(auto-fit, minmax(100vh, 1fr));
+  }
+</style>

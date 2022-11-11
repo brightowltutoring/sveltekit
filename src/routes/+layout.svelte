@@ -1,6 +1,6 @@
 <script>
-  import { scale, fly } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
+  import { scale, fly, slide } from "svelte/transition";
+  import { elasticOut, quintOut } from "svelte/easing";
   import "../app.css";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
@@ -113,15 +113,18 @@
     <LoginCard />
   </Modal>
 
-  <!-- TODO: temporarily stopping this to debug screenshare -->
   <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
-    <Dropzone
-      uniqueId={"broccoli"}
-      text={"🔥"}
-      textSizeTW={"text-6xl"}
-      dimensionsTW={"w-[80vw] h-[85vh]"}
-      brightnessTW={"brightness-95"}
-    />
+    {#if $navHomeworkClicked}
+      <div in:scale={{ duration: 300, easing: quintOut }}>
+        <Dropzone
+          uniqueId={"broccolii"}
+          text={"🔥"}
+          textSizeTW={"text-6xl"}
+          dimensionsTW={"w-[80vw] h-[85vh]"}
+          brightnessTW={"brightness-95"}
+        />
+      </div>
+    {/if}
   </Modal>
 
   <!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->

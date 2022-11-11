@@ -1,8 +1,6 @@
 <script>
   import { PUBLIC_UPLOAD_ENDPOINT } from "$env/static/public";
   import { isDarkMode } from "$lib/store.js";
-  // import { scale } from "svelte/transition";
-  // import { elasticOut } from "svelte/easing";
   // let clickText = false;
   import { Dropzone } from "dropzone";
   import "$lib/Dropzone/dropzone.css";

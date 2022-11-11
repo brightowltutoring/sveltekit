@@ -12,7 +12,8 @@ const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.showModal(showModal);
   if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
     $$bindings.bgTint(bgTint);
-  return `<modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
+  return `${`
+  <modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`}`;
 });
 function guard(name) {
   return () => {
@@ -41,6 +42,9 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
+  let passwordlessLoginBtn;
+  let emailField;
+  let loginWelcomeText;
   let emailFieldValue = "";
   let emptyEmailInputAnimated;
   let loggedInEmail;
@@ -110,39 +114,39 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_isDarkMode();
   $$unsubscribe_elementColor();
-  return `
+  return `${$navLoginClicked && !$isLoggedIn ? `<login-card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
-<card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
-
-  <div class="${"logInDiv p-5 text-xl"}"><signin-button id="${"passwordlessLoginBtn"}" class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
+    <signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
     true
-  ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
+  ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", passwordlessLoginBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
       <span>Get Magic Link</span></signin-button>
 
-    <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" id="${"emailField"}" type="${"email"}" placeholder="${"email"}"${add_attribute("value", emailFieldValue, 0)}>
+    <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"email"}" placeholder="${"email"}"${add_attribute("this", emailField, 0)}${add_attribute("value", emailFieldValue, 0)}>
 
     <span id="${"emailStatusMessage"}"></span>
 
     <p class="${"py-5"}">or</p>
 
+    
     <signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
     true
   ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
       <span>Sign-in with Google</span></signin-button>
 
+    
     <signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
     $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
     true
   ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
-      <span>Sign-in with Twitter</span></signin-button></div>
+      <span>Sign-in with Twitter</span></signin-button></login-card>` : ``}
 
-  <div class="${"logOutDiv"}" style="${"display:none"}"><p id="${"loginWelcomeText"}">Welcome User</p>
+${$navLoginClicked && $isLoggedIn ? `<logout-card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p${add_attribute("this", loginWelcomeText, 0)}>Welcome User</p>
     <div id="${"redirectMessage"}">Redirecting to your page in
       <div style="${"font-size: 30px;"}" id="${"timeLeft"}">\u230A\u03C0\u230B</div></div>
 
-    <button id="${"logoutBtn"}">Logout</button></div></card>`;
+    <button id="${"logoutBtn"}">Logout</button></logout-card>` : ``}`;
 });
 const IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>`;

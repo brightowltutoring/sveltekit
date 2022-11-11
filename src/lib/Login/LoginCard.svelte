@@ -1,14 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  import { scale, slide, fly, fade } from "svelte/transition";
-  import {
-    elasticOut,
-    quintIn,
-    quintOut,
-    sineIn,
-    sineOut,
-  } from "svelte/easing";
+  import { slide } from "svelte/transition";
+  import { elasticOut, quintOut } from "svelte/easing";
   import {
     isLoggedIn,
     isDarkMode,
@@ -32,7 +26,7 @@
   // import CloseButton from "$lib/CloseButton.svelte";
 
   // element identifiers (previously referenced via queryselectors and ids)
-  let passwordlessLoginBtn;
+  let magicLinkBtn;
   let emailField;
 
   let loginWelcomeText;
@@ -199,8 +193,8 @@
       emailField.style.opacity = "0.5";
       emailField.style.pointerEvents = "none";
 
-      passwordlessLoginBtn.style.opacity = "0.5";
-      passwordlessLoginBtn.style.pointerEvents = "none";
+      magicLinkBtn.style.opacity = "0.5";
+      magicLinkBtn.style.pointerEvents = "none";
     }
   }
 </script>
@@ -208,7 +202,7 @@
 {#if $navLoginClicked && !$isLoggedIn}
   <login-card
     in:slide={{ duration: 400, easing: quintOut }}
-    class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
+    class="relative text-xl hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
       ? 'hover:shadow-xl '
       : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px] "
     style={`background:${$elementColor}`}
@@ -217,11 +211,11 @@
         <CloseButton />
       </div> -->
 
+    <!-- in:scale={{ duration: 600, easing: elasticOut }} -->
     <signin-button
-      bind:this={passwordlessLoginBtn}
+      bind:this={magicLinkBtn}
       on:click={signinWithLinkAndStop}
       on:keydown={signinWithLinkAndStop}
-      in:scale={{ duration: 600, easing: elasticOut }}
       class="group bg-red-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
         ? 'group-hover:bg-opacity-80'
         : 'group-hover:bg-opacity-80'}  text-white flex justify-center items-center gap-5"
@@ -232,12 +226,15 @@
       <span>Get Magic Link</span>
     </signin-button>
 
+    <!-- on:keydown={(e) => {
+        signinWithLinkAndStop(e);
+      }} -->
     <input
-      on:keyup={onInputEmailField(emailFieldValue)}
-      on:paste={onInputEmailField(emailFieldValue)}
       on:keydown={(e) => {
         signinWithLinkAndStop(e);
       }}
+      on:paste={onInputEmailField(emailFieldValue)}
+      on:keyup={onInputEmailField(emailFieldValue)}
       bind:this={emailField}
       class="text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
       bind:value={emailFieldValue}
@@ -281,7 +278,7 @@
 
 {#if $navLoginClicked && $isLoggedIn}
   <logout-card
-    in:slide={{ duration: 800, easing: elasticOut }}
+    in:slide={{ duration: 100, easing: quintOut }}
     class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
       ? 'hover:shadow-xl '
       : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px] "
