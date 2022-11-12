@@ -86,7 +86,6 @@ export {
   isLoggedIn as a,
   navHomeworkClicked as b,
   instDeltaY as c,
-  innerWidth as d,
   elementColor as e,
   isDarkMode as i,
   lessThan768 as l,

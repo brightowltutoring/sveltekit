@@ -133,9 +133,12 @@ export const instDeltaY = derived(
 // TODO: remove?
 
 export const innerWidth = writable(0);
+export const lessThan768 = derived(
+  innerWidth,
+  ($innerWidth) => $innerWidth < 768
+);
 
-// considerably more code than the distributed logic (code) pertaining to 'lessThan768', however this only listens on the onMount and threshold-crossings, not at every resize event
-
+// the code for 'setInnerWidthViaMatchMedia()' is considerably more than doing '<svelte:window bind:innerWidth={$innerWidth} />' however the latter updates $innerWidth — and all dependent code — continuously on screen resize ...
 export function setInnerWidthViaMatchMedia() {
   // return browser && window.matchMedia("(max-width: 768px)").matches;
   const pixelWidth = 768;
@@ -157,11 +160,6 @@ export function setInnerWidthViaMatchMedia() {
     });
   }
 }
-
-export const lessThan768 = derived(
-  innerWidth,
-  ($innerWidth) => $innerWidth < 768
-);
 
 // these nav items only since theyre modals, rather than actual routes
 export const navLoginClicked = writable(false);

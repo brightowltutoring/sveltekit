@@ -1,6 +1,6 @@
 import { c as create_ssr_component, e as escape, a as subscribe, v as validate_component, d as add_attribute, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, d as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768 } from "../../chunks/store.js";
 import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
@@ -466,7 +466,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $lessThan768, $$unsubscribe_lessThan768;
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
-  let $$unsubscribe_innerWidth;
   let $navLoginClicked, $$unsubscribe_navLoginClicked;
   let $navHomeworkClicked, $$unsubscribe_navHomeworkClicked;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
@@ -474,7 +473,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
   $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
   $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
   let jankytown;
@@ -513,7 +511,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
     })}<!-- HEAD_svelte-vmk4yk_END -->`, ""}
-
 
 
 
@@ -588,7 +585,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_lessThan768();
   $$unsubscribe_routes();
   $$unsubscribe_page();
-  $$unsubscribe_innerWidth();
   $$unsubscribe_navLoginClicked();
   $$unsubscribe_navHomeworkClicked();
   return $$rendered;
