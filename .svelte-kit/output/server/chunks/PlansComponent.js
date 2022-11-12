@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, v as validate_component } from "./index.js";
-import { a as isDarkMode, e as elementColor } from "./store.js";
+import { i as isDarkMode, e as elementColor } from "./store.js";
 import { p as plansCardArray } from "./plansCardArray.js";
 const PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `

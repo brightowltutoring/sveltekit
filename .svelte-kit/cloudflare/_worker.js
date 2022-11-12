@@ -12266,6 +12266,9 @@ function guard(name5) {
     throw new Error(`Cannot call ${name5}(...) on the server`);
   };
 }
+function isRunningStandalone() {
+  return window.matchMedia("(display-mode: standalone)").matches;
+}
 function removed_session() {
   throw new Error(
     "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
@@ -12368,7 +12371,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, goto, IconGoogle, IconEmail, IconTwitter, LoginCard, IconSun, IconMoon, css2, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
+var Modal, goto, IconTwitter, TwitterLoginButton, IconGoogle, GoogleLoginButton, IconEmail, MagicLinkSection, IconPhone, PhoneAuthSection, LoginCard, IconSun, IconMoon, css2, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -12388,19 +12391,82 @@ var init_layout_svelte = __esm({
   <modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`}`;
     });
     goto = guard("goto");
-    IconGoogle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 210 210"}"><path fill="${"white"}" d="${"M0,105C0,47.103,47.103,0,105,0c23.383,0,45.515,7.523,64.004,21.756l-24.4,31.696C133.172,44.652,119.477,40,105,40\nc-35.841,0-65,29.159-65,65s29.159,65,65,65c28.867,0,53.398-18.913,61.852-45H105V85h105v20c0,57.897-47.103,105-105,105\nS0,162.897,0,105z"}"></path></svg>`;
-    });
-    IconEmail = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 485 485"}"><path fill="${"white"}" d="${"M413.974,71.026C368.171,25.225,307.274,0,242.5,0S116.829,25.225,71.026,71.026C25.225,116.829,0,177.726,0,242.5\ns25.225,125.671,71.026,171.474C116.829,459.775,177.726,485,242.5,485c32.731,0,64.491-6.414,94.397-19.063l-11.688-27.63\nC299.022,449.384,271.194,455,242.5,455C125.327,455,30,359.673,30,242.5S125.327,30,242.5,30S455,125.327,455,242.5\nc0,51.323-31.534,74.699-60.834,74.699c-29.299,0-60.833-23.375-60.833-74.699c0-50.086-40.747-90.833-90.833-90.833\ns-90.833,40.748-90.833,90.833s40.747,90.833,90.833,90.833c29.655,0,56.034-14.286,72.622-36.335\nc4.248,8.577,9.594,16.336,16.04,23.113c16.613,17.468,38.988,27.087,63.004,27.087c24.017,0,46.392-9.62,63.005-27.087\nC475.377,300.97,485,274.132,485,242.5C485,177.726,459.775,116.829,413.974,71.026z M242.5,303.333\nc-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60.833,60.833S276.043,303.333,242.5,303.333z"}"></path></svg>`;
-    });
     IconTwitter = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 
 <svg width="${"32px"}" height="${"32px"}" viewBox="${"0 0 32 32"}" xmlns="${"http://www.w3.org/2000/svg"}"><path fill="${"white"}" d="${"M16 7.151l3.302-4.036c0 0 5.656 0.12 11.292 2.74-1.443 2.182-4.307 3.25-4.307 3.25-0.193-1.917-1.536-2.385-5.807-2.385l-4.479 25.281-4.51-25.286c-4.24 0-5.583 0.469-5.776 2.385 0 0-2.865-1.057-4.307-3.24 5.635-2.62 11.292-2.74 11.292-2.74l3.302 4.031h-0.005zM16 1.953c4.552-0.042 9.766 0.703 15.104 3.036 0.714-1.292 0.896-1.859 0.896-1.859-5.833-2.313-11.297-3.109-16-3.13-4.703 0.021-10.167 0.813-16 3.13 0 0 0.26 0.703 0.896 1.865 5.339-2.344 10.552-3.083 15.104-3.047z"}"></path></svg>`;
     });
-    LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    TwitterLoginButton = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_isDarkMode();
+      return `<signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
+        true
+      ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
+  <span>Sign-in with Twitter</span></signin-button>`;
+    });
+    IconGoogle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 210 210"}"><path fill="${"white"}" d="${"M0,105C0,47.103,47.103,0,105,0c23.383,0,45.515,7.523,64.004,21.756l-24.4,31.696C133.172,44.652,119.477,40,105,40\nc-35.841,0-65,29.159-65,65s29.159,65,65,65c28.867,0,53.398-18.913,61.852-45H105V85h105v20c0,57.897-47.103,105-105,105\nS0,162.897,0,105z"}"></path></svg>`;
+    });
+    GoogleLoginButton = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_isDarkMode();
+      return `<signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
+        true
+      ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
+  <span>Sign-in with Google</span></signin-button>`;
+    });
+    IconEmail = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 485 485"}"><path fill="${"white"}" d="${"M413.974,71.026C368.171,25.225,307.274,0,242.5,0S116.829,25.225,71.026,71.026C25.225,116.829,0,177.726,0,242.5\ns25.225,125.671,71.026,171.474C116.829,459.775,177.726,485,242.5,485c32.731,0,64.491-6.414,94.397-19.063l-11.688-27.63\nC299.022,449.384,271.194,455,242.5,455C125.327,455,30,359.673,30,242.5S125.327,30,242.5,30S455,125.327,455,242.5\nc0,51.323-31.534,74.699-60.834,74.699c-29.299,0-60.833-23.375-60.833-74.699c0-50.086-40.747-90.833-90.833-90.833\ns-90.833,40.748-90.833,90.833s40.747,90.833,90.833,90.833c29.655,0,56.034-14.286,72.622-36.335\nc4.248,8.577,9.594,16.336,16.04,23.113c16.613,17.468,38.988,27.087,63.004,27.087c24.017,0,46.392-9.62,63.005-27.087\nC475.377,300.97,485,274.132,485,242.5C485,177.726,459.775,116.829,413.974,71.026z M242.5,303.333\nc-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60.833,60.833S276.043,303.333,242.5,303.333z"}"></path></svg>`;
+    });
+    MagicLinkSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let shortPing;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let emptyEmailInputAnimated;
+      let magicLinkBtn;
+      let emailField;
+      let emailFieldValue = "";
+      shortPing = emptyEmailInputAnimated;
+      $$unsubscribe_isDarkMode();
+      return `<signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
+        true
+      ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
+  <span>Get Magic Link</span></signin-button>
+
+<input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"email"}" placeholder="${"email"}"${add_attribute("this", emailField, 0)}${add_attribute("value", emailFieldValue, 0)}>
+
+<span id="${"emailStatusMessage"}"></span>`;
+    });
+    IconPhone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+<svg class="${"-rotate-90"}" width="${"24px"}" height="${"24px"}" viewBox="${"0 0 24 24"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"white"}"><path fill="${"white"}" d="${"M23 12.5 20.5 15l-3-2V8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842V13l-3 2L1 12.5c.665-.997 2.479-2.657 5.5-3.658C8.024 8.337 9.855 8 12 8c2.146 0 3.976.337 5.5.842 3.021 1 4.835 2.66 5.5 3.658z"}"></path><path stroke="${"white"}" stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M17.5 8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842m11 0c3.021 1 4.835 2.66 5.5 3.658L20.5 15l-3-2V8.842zm-11 0c-3.021 1-4.835 2.66-5.5 3.658L3.5 15l3-2V8.842z"}"></path></svg>`;
+    });
+    PhoneAuthSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let shortPing;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let emptyPhoneInputAnimated;
+      let magicLinkBtn;
+      let phoneField;
+      let phoneFieldValue = "";
+      shortPing = emptyPhoneInputAnimated;
+      $$unsubscribe_isDarkMode();
+      return `${`<signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
+        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
+        true
+      ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconPhone, "IconPhone").$$render($$result, {}, {}, {})}</span>
+    <span>Get SMS Code</span></signin-button>
+
+  <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"phone"}" placeholder="${"phone"}"${add_attribute("this", phoneField, 0)}${add_attribute("value", phoneFieldValue, 0)}>`}
+
+<span id="${"phoneStatusMessage"}"></span>`;
+    });
+    LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $navLoginClicked, $$unsubscribe_navLoginClicked;
       let $isLoggedIn, $$unsubscribe_isLoggedIn;
       let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -12409,11 +12475,7 @@ var init_layout_svelte = __esm({
       $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
-      let magicLinkBtn;
-      let emailField;
       let loginWelcomeText;
-      let emailFieldValue = "";
-      let emptyEmailInputAnimated;
       let loggedInEmail;
       let redirectAfterLoginTimeOut;
       let redirectSetInterval;
@@ -12465,7 +12527,6 @@ var init_layout_svelte = __esm({
           }
         }
       }
-      shortPing = emptyEmailInputAnimated;
       {
         if (!$navLoginClicked) {
           clearInterval(redirectSetInterval);
@@ -12483,39 +12544,19 @@ var init_layout_svelte = __esm({
       $$unsubscribe_elementColor();
       return `${$navLoginClicked && !$isLoggedIn ? `<login-card class="${"relative text-xl hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
-    
-    <signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
-        true
-      ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
-      <span>Get Magic Link</span></signin-button>
-
-    
-    <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"email"}" placeholder="${"email"}"${add_attribute("this", emailField, 0)}${add_attribute("value", emailFieldValue, 0)}>
-
-    <span id="${"emailStatusMessage"}"></span>
+    ${!isRunningStandalone() ? `${validate_component(MagicLinkSection, "MagicLinkSection").$$render($$result, {}, {}, {})}` : `${validate_component(PhoneAuthSection, "PhoneAuthSection").$$render($$result, {}, {}, {})}`}
 
     <p class="${"py-5"}">or</p>
 
     
-    <signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
-        true
-      ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
-      <span>Sign-in with Google</span></signin-button>
-
-    
-    <signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
-        true
-      ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
-      <span>Sign-in with Twitter</span></signin-button></login-card>` : ``}
-
-${$navLoginClicked && $isLoggedIn ? `<logout-card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p${add_attribute("this", loginWelcomeText, 0)}>Welcome User</p>
+    ${validate_component(GoogleLoginButton, "GoogleLoginButton").$$render($$result, {}, {}, {})}
+    ${validate_component(TwitterLoginButton, "TwitterLoginButton").$$render($$result, {}, {}, {})}</login-card>` : `${$navLoginClicked && $isLoggedIn ? `<logout-card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p${add_attribute("this", loginWelcomeText, 0)}>Welcome User</p>
     <div id="${"redirectMessage"}">Redirecting to your page in
       <div style="${"font-size: 30px;"}" id="${"timeLeft"}">\u230A\u03C0\u230B</div></div>
 
-    <button id="${"logoutBtn"}">Logout</button></logout-card>` : ``}`;
+    <button id="${"logoutBtn"}">Logout</button></logout-card>` : ``}`}
+
+`;
     });
     IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>`;
@@ -12841,9 +12882,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-f01861be.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-f01861be.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/index-d0d6b326.js", "_app/immutable/chunks/Dropzone-2241311d.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-d7f5f040.js", "_app/immutable/chunks/singletons-6111dd05.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
-    stylesheets = ["_app/immutable/assets/_layout-6d22f32b.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-01d25dce.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-01d25dce.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-d549c8e3.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-6672f04a.js", "_app/immutable/chunks/singletons-554e5df5.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    stylesheets = ["_app/immutable/assets/_layout-1e462191.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
 
@@ -12880,8 +12921,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-e57ed6bf.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-e57ed6bf.js", "_app/immutable/chunks/index-d1ecae71.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-3d06481a.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-3d06481a.js", "_app/immutable/chunks/index-abd81730.js"];
     stylesheets2 = [];
   }
 });
@@ -13268,8 +13309,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-6d2b2cc8.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-6d2b2cc8.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/PlansComponent-50de11ec.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/index-d0d6b326.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-2241311d.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-29dee6c6.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-29dee6c6.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-6b39d9e0.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-d549c8e3.js", "_app/immutable/chunks/public-fe26cbe2.js"];
     stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -13303,8 +13344,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/calcom/_page.svelte-84f5a66e.js";
-    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-84f5a66e.js", "_app/immutable/chunks/index-d1ecae71.js"];
+    file4 = "_app/immutable/components/pages/calcom/_page.svelte-40c45306.js";
+    imports4 = ["_app/immutable/components/pages/calcom/_page.svelte-40c45306.js", "_app/immutable/chunks/index-abd81730.js"];
     stylesheets4 = [];
   }
 });
@@ -14694,8 +14735,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-3b8ba2c5.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-3b8ba2c5.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/navigation-d7f5f040.js", "_app/immutable/chunks/singletons-6111dd05.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-7f6f3edf.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-7f6f3edf.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-6672f04a.js", "_app/immutable/chunks/singletons-554e5df5.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -14829,8 +14870,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/faq/_page.svelte-d5673d79.js";
-    imports6 = ["_app/immutable/components/pages/faq/_page.svelte-d5673d79.js", "_app/immutable/chunks/index-d1ecae71.js"];
+    file6 = "_app/immutable/components/pages/faq/_page.svelte-f6cd8a99.js";
+    imports6 = ["_app/immutable/components/pages/faq/_page.svelte-f6cd8a99.js", "_app/immutable/chunks/index-abd81730.js"];
     stylesheets6 = ["_app/immutable/assets/_page-113a1f72.css"];
   }
 });
@@ -14865,8 +14906,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-4a1cb63a.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-4a1cb63a.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/Dropzone-2241311d.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-9f29670d.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-9f29670d.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Dropzone-d549c8e3.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets7 = ["_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -28579,8 +28620,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file8 = "_app/immutable/components/pages/katex/_page.svx-2771e3f8.js";
-    imports8 = ["_app/immutable/components/pages/katex/_page.svx-2771e3f8.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js"];
+    file8 = "_app/immutable/components/pages/katex/_page.svx-3ea806ec.js";
+    imports8 = ["_app/immutable/components/pages/katex/_page.svx-3ea806ec.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets8 = [];
   }
 });
@@ -28618,8 +28659,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file9 = "_app/immutable/components/pages/login/_page.svelte-5922ca81.js";
-    imports9 = ["_app/immutable/components/pages/login/_page.svelte-5922ca81.js", "_app/immutable/chunks/index-d1ecae71.js"];
+    file9 = "_app/immutable/components/pages/login/_page.svelte-c56126c5.js";
+    imports9 = ["_app/immutable/components/pages/login/_page.svelte-c56126c5.js", "_app/immutable/chunks/index-abd81730.js"];
     stylesheets9 = [];
   }
 });
@@ -28785,8 +28826,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file10 = "_app/immutable/components/pages/math/_page.svx-f24d47d2.js";
-    imports10 = ["_app/immutable/components/pages/math/_page.svx-f24d47d2.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/index-d0d6b326.js", "_app/immutable/chunks/Kajax-e3e219b5.js"];
+    file10 = "_app/immutable/components/pages/math/_page.svx-ffe69cee.js";
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-ffe69cee.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Kajax-61ac142f.js"];
     stylesheets10 = [];
   }
 });
@@ -28865,8 +28906,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file11 = "_app/immutable/components/pages/mathjax/_page.svx-2cf64a7e.js";
-    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-2cf64a7e.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js"];
+    file11 = "_app/immutable/components/pages/mathjax/_page.svx-36d17fcd.js";
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-36d17fcd.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets11 = [];
   }
 });
@@ -28983,8 +29024,8 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/physics/_page.svelte-994ca58a.js";
-    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-994ca58a.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/Kajax-e3e219b5.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js"];
+    file12 = "_app/immutable/components/pages/physics/_page.svelte-ff1edce4.js";
+    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-ff1edce4.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Kajax-61ac142f.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets12 = ["_app/immutable/assets/_page-fcf51fa8.css"];
   }
 });
@@ -29020,8 +29061,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-f7bda7bc.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-f7bda7bc.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/PlansComponent-50de11ec.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/index-d0d6b326.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-15652a33.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-15652a33.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-6b39d9e0.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets13 = [];
   }
 });
@@ -29059,8 +29100,8 @@ var init__14 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     index14 = 13;
     component14 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
-    file14 = "_app/immutable/components/pages/samplequiz/_page.md-4e019f0b.js";
-    imports14 = ["_app/immutable/components/pages/samplequiz/_page.md-4e019f0b.js", "_app/immutable/chunks/index-d1ecae71.js"];
+    file14 = "_app/immutable/components/pages/samplequiz/_page.md-6a9f848d.js";
+    imports14 = ["_app/immutable/components/pages/samplequiz/_page.md-6a9f848d.js", "_app/immutable/chunks/index-abd81730.js"];
     stylesheets14 = [];
   }
 });
@@ -29154,8 +29195,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/schools/_page.svelte-f2ffddc2.js";
-    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-f2ffddc2.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/index-d0d6b326.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file15 = "_app/immutable/components/pages/schools/_page.svelte-825de8af.js";
+    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-825de8af.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets15 = [];
   }
 });
@@ -29202,8 +29243,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-73b72862.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-73b72862.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/store-f085937f.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/navigation-d7f5f040.js", "_app/immutable/chunks/singletons-6111dd05.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-e62e0e94.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-e62e0e94.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-e521e5b5.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-6672f04a.js", "_app/immutable/chunks/singletons-554e5df5.js"];
     stylesheets16 = [];
   }
 });
@@ -29403,8 +29444,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-b9d8c546.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-b9d8c546.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-d0d6b326.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-199a99ba.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-199a99ba.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
     stylesheets17 = ["_app/immutable/assets/_page-5c304dd7.css"];
   }
 });
@@ -32033,7 +32074,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-c394ae8e.js", "imports": ["_app/immutable/start-c394ae8e.js", "_app/immutable/chunks/index-d1ecae71.js", "_app/immutable/chunks/singletons-6111dd05.js", "_app/immutable/chunks/index-3eff9ffe.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-69af81da.js", "imports": ["_app/immutable/start-69af81da.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-554e5df5.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

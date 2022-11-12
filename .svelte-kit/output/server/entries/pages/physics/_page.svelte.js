@@ -1,6 +1,6 @@
 import { c as create_ssr_component, v as validate_component, d as add_attribute, a as subscribe, e as escape } from "../../../chunks/index.js";
 import { K as Kajax } from "../../../chunks/Kajax.js";
-import { a as isDarkMode } from "../../../chunks/store.js";
+import { i as isDarkMode } from "../../../chunks/store.js";
 const eAndM_svx_svelte_type_style_lang = "";
 const css = {
   code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",

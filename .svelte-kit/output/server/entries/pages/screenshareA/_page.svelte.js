@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, v as validate_component } from "../../../chunks/index.js";
-import { l as lessThan768, a as isDarkMode } from "../../../chunks/store.js";
+import { l as lessThan768, i as isDarkMode } from "../../../chunks/store.js";
 const JitsiUserAdmin = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $lessThan768, $$unsubscribe_lessThan768;
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);

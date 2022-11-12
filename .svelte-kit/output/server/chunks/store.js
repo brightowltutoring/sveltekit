@@ -91,13 +91,13 @@ const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
   $isDarkMode ? set(dark_lightened) : set(light_darkened);
 });
 export {
-  isDarkMode as a,
+  isLoggedIn as a,
   navHomeworkClicked as b,
   instDeltaY as c,
   scrollYMax as d,
   elementColor as e,
   innerWidth as f,
-  isLoggedIn as i,
+  isDarkMode as i,
   lessThan768 as l,
   navLoginClicked as n,
   routes as r,

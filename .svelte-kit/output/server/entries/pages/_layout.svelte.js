@@ -1,6 +1,6 @@
-import { c as create_ssr_component, e as escape, a as subscribe, d as add_attribute, v as validate_component, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
+import { c as create_ssr_component, e as escape, a as subscribe, v as validate_component, d as add_attribute, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import { n as navLoginClicked, i as isLoggedIn, a as isDarkMode, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, w as windowInnerHeight, d as scrollYMax, f as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, w as windowInnerHeight, d as scrollYMax, f as innerWidth } from "../../chunks/store.js";
 import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
@@ -21,19 +21,85 @@ function guard(name) {
   };
 }
 const goto = guard("goto");
-const IconGoogle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 210 210"}"><path fill="${"white"}" d="${"M0,105C0,47.103,47.103,0,105,0c23.383,0,45.515,7.523,64.004,21.756l-24.4,31.696C133.172,44.652,119.477,40,105,40\nc-35.841,0-65,29.159-65,65s29.159,65,65,65c28.867,0,53.398-18.913,61.852-45H105V85h105v20c0,57.897-47.103,105-105,105\nS0,162.897,0,105z"}"></path></svg>`;
-});
-const IconEmail = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 485 485"}"><path fill="${"white"}" d="${"M413.974,71.026C368.171,25.225,307.274,0,242.5,0S116.829,25.225,71.026,71.026C25.225,116.829,0,177.726,0,242.5\ns25.225,125.671,71.026,171.474C116.829,459.775,177.726,485,242.5,485c32.731,0,64.491-6.414,94.397-19.063l-11.688-27.63\nC299.022,449.384,271.194,455,242.5,455C125.327,455,30,359.673,30,242.5S125.327,30,242.5,30S455,125.327,455,242.5\nc0,51.323-31.534,74.699-60.834,74.699c-29.299,0-60.833-23.375-60.833-74.699c0-50.086-40.747-90.833-90.833-90.833\ns-90.833,40.748-90.833,90.833s40.747,90.833,90.833,90.833c29.655,0,56.034-14.286,72.622-36.335\nc4.248,8.577,9.594,16.336,16.04,23.113c16.613,17.468,38.988,27.087,63.004,27.087c24.017,0,46.392-9.62,63.005-27.087\nC475.377,300.97,485,274.132,485,242.5C485,177.726,459.775,116.829,413.974,71.026z M242.5,303.333\nc-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60.833,60.833S276.043,303.333,242.5,303.333z"}"></path></svg>`;
-});
 const IconTwitter = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 
 <svg width="${"32px"}" height="${"32px"}" viewBox="${"0 0 32 32"}" xmlns="${"http://www.w3.org/2000/svg"}"><path fill="${"white"}" d="${"M16 7.151l3.302-4.036c0 0 5.656 0.12 11.292 2.74-1.443 2.182-4.307 3.25-4.307 3.25-0.193-1.917-1.536-2.385-5.807-2.385l-4.479 25.281-4.51-25.286c-4.24 0-5.583 0.469-5.776 2.385 0 0-2.865-1.057-4.307-3.24 5.635-2.62 11.292-2.74 11.292-2.74l3.302 4.031h-0.005zM16 1.953c4.552-0.042 9.766 0.703 15.104 3.036 0.714-1.292 0.896-1.859 0.896-1.859-5.833-2.313-11.297-3.109-16-3.13-4.703 0.021-10.167 0.813-16 3.13 0 0 0.26 0.703 0.896 1.865 5.339-2.344 10.552-3.083 15.104-3.047z"}"></path></svg>`;
 });
-const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+const TwitterLoginButton = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  $$unsubscribe_isDarkMode();
+  return `<signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
+    $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
+    true
+  ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
+  <span>Sign-in with Twitter</span></signin-button>`;
+});
+const IconGoogle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 210 210"}"><path fill="${"white"}" d="${"M0,105C0,47.103,47.103,0,105,0c23.383,0,45.515,7.523,64.004,21.756l-24.4,31.696C133.172,44.652,119.477,40,105,40\nc-35.841,0-65,29.159-65,65s29.159,65,65,65c28.867,0,53.398-18.913,61.852-45H105V85h105v20c0,57.897-47.103,105-105,105\nS0,162.897,0,105z"}"></path></svg>`;
+});
+const GoogleLoginButton = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  $$unsubscribe_isDarkMode();
+  return `<signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
+    $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
+    true
+  ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
+  <span>Sign-in with Google</span></signin-button>`;
+});
+const IconEmail = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<svg height="${"24"}" width="${"24"}" viewBox="${"0 0 485 485"}"><path fill="${"white"}" d="${"M413.974,71.026C368.171,25.225,307.274,0,242.5,0S116.829,25.225,71.026,71.026C25.225,116.829,0,177.726,0,242.5\ns25.225,125.671,71.026,171.474C116.829,459.775,177.726,485,242.5,485c32.731,0,64.491-6.414,94.397-19.063l-11.688-27.63\nC299.022,449.384,271.194,455,242.5,455C125.327,455,30,359.673,30,242.5S125.327,30,242.5,30S455,125.327,455,242.5\nc0,51.323-31.534,74.699-60.834,74.699c-29.299,0-60.833-23.375-60.833-74.699c0-50.086-40.747-90.833-90.833-90.833\ns-90.833,40.748-90.833,90.833s40.747,90.833,90.833,90.833c29.655,0,56.034-14.286,72.622-36.335\nc4.248,8.577,9.594,16.336,16.04,23.113c16.613,17.468,38.988,27.087,63.004,27.087c24.017,0,46.392-9.62,63.005-27.087\nC475.377,300.97,485,274.132,485,242.5C485,177.726,459.775,116.829,413.974,71.026z M242.5,303.333\nc-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60.833,60.833S276.043,303.333,242.5,303.333z"}"></path></svg>`;
+});
+const MagicLinkSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let shortPing;
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  let emptyEmailInputAnimated;
+  let magicLinkBtn;
+  let emailField;
+  let emailFieldValue = "";
+  shortPing = emptyEmailInputAnimated;
+  $$unsubscribe_isDarkMode();
+  return `<signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
+    $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
+    true
+  ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
+  <span>Get Magic Link</span></signin-button>
+
+<input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"email"}" placeholder="${"email"}"${add_attribute("this", emailField, 0)}${add_attribute("value", emailFieldValue, 0)}>
+
+<span id="${"emailStatusMessage"}"></span>`;
+});
+const IconPhone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+<svg class="${"-rotate-90"}" width="${"24px"}" height="${"24px"}" viewBox="${"0 0 24 24"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"white"}"><path fill="${"white"}" d="${"M23 12.5 20.5 15l-3-2V8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842V13l-3 2L1 12.5c.665-.997 2.479-2.657 5.5-3.658C8.024 8.337 9.855 8 12 8c2.146 0 3.976.337 5.5.842 3.021 1 4.835 2.66 5.5 3.658z"}"></path><path stroke="${"white"}" stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M17.5 8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842m11 0c3.021 1 4.835 2.66 5.5 3.658L20.5 15l-3-2V8.842zm-11 0c-3.021 1-4.835 2.66-5.5 3.658L3.5 15l3-2V8.842z"}"></path></svg>`;
+});
+const PhoneAuthSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let shortPing;
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  let emptyPhoneInputAnimated;
+  let magicLinkBtn;
+  let phoneField;
+  let phoneFieldValue = "";
+  shortPing = emptyPhoneInputAnimated;
+  $$unsubscribe_isDarkMode();
+  return `${`<signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
+    $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
+    true
+  ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconPhone, "IconPhone").$$render($$result, {}, {}, {})}</span>
+    <span>Get SMS Code</span></signin-button>
+
+  <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"phone"}" placeholder="${"phone"}"${add_attribute("this", phoneField, 0)}${add_attribute("value", phoneFieldValue, 0)}>`}
+
+<span id="${"phoneStatusMessage"}"></span>`;
+});
+function isRunningStandalone() {
+  return window.matchMedia("(display-mode: standalone)").matches;
+}
+const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $navLoginClicked, $$unsubscribe_navLoginClicked;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -42,11 +108,7 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
-  let magicLinkBtn;
-  let emailField;
   let loginWelcomeText;
-  let emailFieldValue = "";
-  let emptyEmailInputAnimated;
   let loggedInEmail;
   let redirectAfterLoginTimeOut;
   let redirectSetInterval;
@@ -98,7 +160,6 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
       }
     }
   }
-  shortPing = emptyEmailInputAnimated;
   {
     if (!$navLoginClicked) {
       clearInterval(redirectSetInterval);
@@ -116,39 +177,19 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_elementColor();
   return `${$navLoginClicked && !$isLoggedIn ? `<login-card class="${"relative text-xl hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
-    
-    <signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
-    $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
-    true
-  ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconEmail, "IconEmail").$$render($$result, {}, {}, {})}</span>
-      <span>Get Magic Link</span></signin-button>
-
-    
-    <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"email"}" placeholder="${"email"}"${add_attribute("this", emailField, 0)}${add_attribute("value", emailFieldValue, 0)}>
-
-    <span id="${"emailStatusMessage"}"></span>
+    ${!isRunningStandalone() ? `${validate_component(MagicLinkSection, "MagicLinkSection").$$render($$result, {}, {}, {})}` : `${validate_component(PhoneAuthSection, "PhoneAuthSection").$$render($$result, {}, {}, {})}`}
 
     <p class="${"py-5"}">or</p>
 
     
-    <signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
-    $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
-    true
-  ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconGoogle, "IconGoogle").$$render($$result, {}, {}, {})}</span>
-      <span>Sign-in with Google</span></signin-button>
-
-    
-    <signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + escape(
-    $isDarkMode ? "group-hover:bg-opacity-90" : "group-hover:bg-opacity-90",
-    true
-  ) + " text-white flex justify-center items-center gap-5"}"><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconTwitter, "IconTwitter").$$render($$result, {}, {}, {})}</span>
-      <span>Sign-in with Twitter</span></signin-button></login-card>` : ``}
-
-${$navLoginClicked && $isLoggedIn ? `<logout-card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p${add_attribute("this", loginWelcomeText, 0)}>Welcome User</p>
+    ${validate_component(GoogleLoginButton, "GoogleLoginButton").$$render($$result, {}, {}, {})}
+    ${validate_component(TwitterLoginButton, "TwitterLoginButton").$$render($$result, {}, {}, {})}</login-card>` : `${$navLoginClicked && $isLoggedIn ? `<logout-card class="${"relative hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p${add_attribute("this", loginWelcomeText, 0)}>Welcome User</p>
     <div id="${"redirectMessage"}">Redirecting to your page in
       <div style="${"font-size: 30px;"}" id="${"timeLeft"}">\u230A\u03C0\u230B</div></div>
 
-    <button id="${"logoutBtn"}">Logout</button></logout-card>` : ``}`;
+    <button id="${"logoutBtn"}">Logout</button></logout-card>` : ``}`}
+
+`;
 });
 const IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<svg aria-label="${"Sun"}" id="${"lightIcon"}" height="${"24"}" width="${"24"}" viewBox="${"0 0 182 182"}" style="${"transform: scale(1);"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>`;

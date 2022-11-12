@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape } from "./index.js";
-import { a as isDarkMode } from "./store.js";
+import { i as isDarkMode } from "./store.js";
 import "dropzone";
 const dropzone = "";
 const Dropzone_svelte_svelte_type_style_lang = "";

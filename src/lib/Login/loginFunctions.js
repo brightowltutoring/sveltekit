@@ -9,6 +9,9 @@ import { lessThan768 } from "$lib/store.js";
 export function regexEmailChecker(EMAIL) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
 }
+export function regexPhoneChecker(PHONE) {
+  return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(PHONE);
+}
 
 export async function magicLinkToEmail(EMAIL) {
   const {
@@ -136,6 +139,25 @@ export async function GoogleLogin() {
         const credential = GoogleAuthProvider.credentialFromError(error);
       });
   }
+}
+export async function PhoneLogin(PHONE_NUMBER) {
+  const { signInWithPhoneNumber } = await import("firebase/auth");
+
+  //TODO: these have yet to be implemented
+  // const phoneNumber = getPhoneNumberFromUserInput();
+  const appVerifier = window.recaptchaVerifier;
+
+  signInWithPhoneNumber(auth, PHONE_NUMBER, appVerifier)
+    .then((confirmationResult) => {
+      // SMS sent. Prompt user to type the code from the message, then sign the
+      // user in with confirmationResult.confirm(code).
+      window.confirmationResult = confirmationResult;
+      // ...
+    })
+    .catch((error) => {
+      // Error; SMS not sent
+      // ...
+    });
 }
 
 export async function logoutFunction() {

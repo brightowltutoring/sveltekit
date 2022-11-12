@@ -39,7 +39,6 @@ declare module '$env/static/private' {
 	export const TMPDIR: string;
 	export const npm_config_global_prefix: string;
 	export const CONDA_SHLVL: string;
-	export const CONDA_PROMPT_MODIFIER: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const alfred_preferences_localhash: string;
 	export const ZDOTDIR: string;
@@ -61,7 +60,6 @@ declare module '$env/static/private' {
 	export const npm_execpath: string;
 	export const alfred_theme_selection_background: string;
 	export const PAGER: string;
-	export const _CE_CONDA: string;
 	export const LSCOLORS: string;
 	export const alfred_theme_subtext: string;
 	export const PATH: string;
@@ -85,7 +83,6 @@ declare module '$env/static/private' {
 	export const RUBY_ENGINE: string;
 	export const npm_config_node_gyp: string;
 	export const npm_package_version: string;
-	export const _CE_M: string;
 	export const XPC_SERVICE_NAME: string;
 	export const VSCODE_INJECTION: string;
 	export const HOME: string;
@@ -173,7 +170,6 @@ declare module '$env/dynamic/private' {
 		TMPDIR: string;
 		npm_config_global_prefix: string;
 		CONDA_SHLVL: string;
-		CONDA_PROMPT_MODIFIER: string;
 		TERM_PROGRAM_VERSION: string;
 		alfred_preferences_localhash: string;
 		ZDOTDIR: string;
@@ -195,7 +191,6 @@ declare module '$env/dynamic/private' {
 		npm_execpath: string;
 		alfred_theme_selection_background: string;
 		PAGER: string;
-		_CE_CONDA: string;
 		LSCOLORS: string;
 		alfred_theme_subtext: string;
 		PATH: string;
@@ -219,7 +214,6 @@ declare module '$env/dynamic/private' {
 		RUBY_ENGINE: string;
 		npm_config_node_gyp: string;
 		npm_package_version: string;
-		_CE_M: string;
 		XPC_SERVICE_NAME: string;
 		VSCODE_INJECTION: string;
 		HOME: string;

@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, o as onDestroy, v as validate_component, f as set_store_value } from "../../../chunks/index.js";
-import { l as lessThan768, a as isDarkMode } from "../../../chunks/store.js";
+import { l as lessThan768, i as isDarkMode } from "../../../chunks/store.js";
 !function(e, t) {
   "object" == typeof exports && "object" == typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define([], t) : "object" == typeof exports ? exports.JitsiMeetExternalAPI = t() : e.JitsiMeetExternalAPI = t();
 }(self, function() {

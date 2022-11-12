@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, v as validate_component } from "../../../chunks/index.js";
-import { a as isDarkMode, e as elementColor } from "../../../chunks/store.js";
+import { i as isDarkMode, e as elementColor } from "../../../chunks/store.js";
 import { a as plansCardArraySchools } from "../../../chunks/plansCardArray.js";
 const PlansCardSchools = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;

@@ -3,8 +3,8 @@
   // updates once code sent
 
   import {
-    regexEmailChecker,
-    magicLinkToEmail,
+    regexPhoneChecker,
+    PhoneLogin, // this takes phoneNumber as a parameter
   } from "$lib/Login/loginFunctions.js";
   import IconPhone from "$lib/Icons/IconPhone.svelte";
   import { isDarkMode } from "$lib/store.js";
@@ -16,7 +16,7 @@
   let magicLinkBtn;
   let phoneField;
   let phoneFieldValue = "";
-  let isEmail = false;
+  let isPhoneNumber = false;
 
   function signinWithLinkAndStop(e) {
     if ((e.type == "click" || e.key == "Enter") && phoneFieldValue == "") {
@@ -26,16 +26,14 @@
         100
       );
     }
-    if ((e.type == "click" || e.key == "Enter") && isEmail) {
-      // magicLinkToEmail(phoneFieldValue); TODO: replace with phone sms logic
-      magicLinkSent = true;
-      phoneFieldValue = "";
+    if ((e.type == "click" || e.key == "Enter") && isPhoneNumber) {
+      // Phonelogin(phoneFieldValue)
 
       phoneStatusMessage.style.display = "block";
 
       phoneStatusMessage.innerHTML = `
                   <div class="p-3 font-Poppins" style=" color: #10bb8a"> 
-                      Link sent to email 🚀
+                      Code sent to ${phoneFieldValue}  🚀
                   </div>
                   `;
 
@@ -44,20 +42,23 @@
 
       magicLinkBtn.style.opacity = "0.5";
       magicLinkBtn.style.pointerEvents = "none";
+
+      magicLinkSent = true;
+      phoneFieldValue = "";
     }
   }
 
-  function onInputphoneField(EMAIL) {
-    isEmail = regexEmailChecker(EMAIL);
-    if (EMAIL == "") {
+  function onInputphoneField(PHONE) {
+    isPhoneNumber = regexPhoneChecker(PHONE);
+    if (PHONE == "") {
       phoneField.style.border = "1px solid #aaa";
       phoneField.style.color = "#aaa";
       phoneField.style.fontSize = "16px";
-    } else if (!isEmail) {
+    } else if (!isPhoneNumber) {
       phoneField.style.border = "1.5px solid red";
       phoneField.style.color = "red";
       phoneField.style.fontSize = "20px";
-    } else if (isEmail) {
+    } else if (isPhoneNumber) {
       phoneField.style.border = "2px solid #59d0ae";
       phoneField.style.backgroundColor = "white";
       phoneField.style.color = "#10bb8a"; // green-ish colour
@@ -94,6 +95,7 @@
   />
 {:else}
   <!-- button and input section updates  -->
+  <!-- on:click={()=>Phonelogin(phoneFieldValue) } -->
 {/if}
 
 <span id="phoneStatusMessage" />

@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute, j as each } from "../../../chunks/index.js";
-import { a as isDarkMode } from "../../../chunks/store.js";
+import { i as isDarkMode } from "../../../chunks/store.js";
 const MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `<!-- HEAD_svelte-1fd20gn_START --><script>MathJax = {
       // startup: { typeset: false },
