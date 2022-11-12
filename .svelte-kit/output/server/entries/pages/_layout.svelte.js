@@ -1,6 +1,6 @@
 import { c as create_ssr_component, e as escape, a as subscribe, v as validate_component, d as add_attribute, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as isRunningStandalone, c as navHomeworkClicked, r as routes, s as scrollY, d as instDeltaY, l as lessThan768, f as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, d as innerWidth } from "../../chunks/store.js";
 import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
@@ -71,30 +71,6 @@ const MagicLinkSection = create_ssr_component(($$result, $$props, $$bindings, sl
 <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"email"}" placeholder="${"email"}"${add_attribute("this", emailField, 0)}${add_attribute("value", emailFieldValue, 0)}>
 
 <span id="${"emailStatusMessage"}"></span>`;
-});
-const IconPhone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-<svg class="${"-rotate-90"}" width="${"24px"}" height="${"24px"}" viewBox="${"0 0 24 24"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"white"}"><path fill="${"white"}" d="${"M23 12.5 20.5 15l-3-2V8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842V13l-3 2L1 12.5c.665-.997 2.479-2.657 5.5-3.658C8.024 8.337 9.855 8 12 8c2.146 0 3.976.337 5.5.842 3.021 1 4.835 2.66 5.5 3.658z"}"></path><path stroke="${"white"}" stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M17.5 8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842m11 0c3.021 1 4.835 2.66 5.5 3.658L20.5 15l-3-2V8.842zm-11 0c-3.021 1-4.835 2.66-5.5 3.658L3.5 15l3-2V8.842z"}"></path></svg>`;
-});
-const PhoneAuthSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let shortPing;
-  let $isDarkMode, $$unsubscribe_isDarkMode;
-  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  let emptyPhoneInputAnimated;
-  let magicLinkBtn;
-  let phoneField;
-  let phoneFieldValue = "";
-  shortPing = emptyPhoneInputAnimated;
-  $$unsubscribe_isDarkMode();
-  return `${`<signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
-    $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
-    true
-  ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconPhone, "IconPhone").$$render($$result, {}, {}, {})}</span>
-    <span>Get SMS Code</span></signin-button>
-
-  <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"phone"}" placeholder="${"phone"}"${add_attribute("this", phoneField, 0)}${add_attribute("value", phoneFieldValue, 0)}>`}
-
-<span id="${"phoneStatusMessage"}"></span>`;
 });
 const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $navLoginClicked, $$unsubscribe_navLoginClicked;
@@ -176,7 +152,7 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   
   <login-card class="${"block relative text-xl hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
-    ${!isRunningStandalone() ? `${validate_component(MagicLinkSection, "MagicLinkSection").$$render($$result, {}, {}, {})}` : `${validate_component(PhoneAuthSection, "PhoneAuthSection").$$render($$result, {}, {}, {})}`}
+    ${`${validate_component(MagicLinkSection, "MagicLinkSection").$$render($$result, {}, {}, {})}`}
 
     <p class="${"py-5"}">or</p>
 

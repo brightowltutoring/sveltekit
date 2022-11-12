@@ -6,6 +6,7 @@
   import { isDarkMode, isRunningStandalone } from "$lib/store.js";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
+  import { goto } from "$app/navigation";
 
   let ready = false;
 
@@ -130,8 +131,12 @@
   </div>
 {:else}
   <!-- main page -->
-  <div class="h-[60vh] flex justify-center items-center text-center">
-    <div class="grid grid-rows-1">
+  <div class="h-[70vh] flex justify-center items-center text-center ">
+    <div
+      class="grid grid-rows-1"
+      on:click={() => goto("/plans")}
+      on:keydown={() => goto("/plans")}
+    >
       {#if ready}
         <div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
           You're on the
@@ -139,7 +144,6 @@
         </div>
 
         <div class="text-2xl font-Nunito font-thin ">
-          <!-- 👉 click for reviews -->
           the navbar is now your friend 🤝
         </div>
       {/if}

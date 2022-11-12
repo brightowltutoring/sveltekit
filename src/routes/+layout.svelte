@@ -144,6 +144,7 @@ Fixed containers  apparently hate having scrollable overflow elements inside.
   </div>
 
   <!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->
+  <!-- TODO: this padding is not needed for smaller than md -->
   <div class="px-[7%] pt-32 md:block">
     <slot />
     <Footer />

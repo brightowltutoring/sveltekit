@@ -1,8 +1,5 @@
 import { d as derived, w as writable } from "./index2.js";
 import "./index.js";
-function isRunningStandalone() {
-  return window.matchMedia("(display-mode: standalone)").matches;
-}
 const isLoggedIn = writable(false);
 const scrollY = writable(0);
 const startScrollY = derived(scrollY, ($scrollY, set) => {
@@ -87,11 +84,10 @@ const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
 });
 export {
   isLoggedIn as a,
-  isRunningStandalone as b,
-  navHomeworkClicked as c,
-  instDeltaY as d,
+  navHomeworkClicked as b,
+  instDeltaY as c,
+  innerWidth as d,
   elementColor as e,
-  innerWidth as f,
   isDarkMode as i,
   lessThan768 as l,
   navLoginClicked as n,

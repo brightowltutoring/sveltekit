@@ -630,9 +630,6 @@ var init_hooks_server = __esm({
 });
 
 // .svelte-kit/output/server/chunks/store.js
-function isRunningStandalone() {
-  return window.matchMedia("(display-mode: standalone)").matches;
-}
 var isLoggedIn, scrollY, startScrollY, instDeltaY, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, routes, isDarkMode, light_darkened, dark_lightened, elementColor;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
@@ -12363,7 +12360,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, goto, IconTwitter, TwitterLoginButton, IconGoogle, GoogleLoginButton, IconEmail, MagicLinkSection, IconPhone, PhoneAuthSection, LoginCard, IconSun, IconMoon, css2, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
+var Modal, goto, IconTwitter, TwitterLoginButton, IconGoogle, GoogleLoginButton, IconEmail, MagicLinkSection, LoginCard, IconSun, IconMoon, css2, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -12433,30 +12430,6 @@ var init_layout_svelte = __esm({
 <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"email"}" placeholder="${"email"}"${add_attribute("this", emailField, 0)}${add_attribute("value", emailFieldValue, 0)}>
 
 <span id="${"emailStatusMessage"}"></span>`;
-    });
-    IconPhone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-<svg class="${"-rotate-90"}" width="${"24px"}" height="${"24px"}" viewBox="${"0 0 24 24"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"white"}"><path fill="${"white"}" d="${"M23 12.5 20.5 15l-3-2V8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842V13l-3 2L1 12.5c.665-.997 2.479-2.657 5.5-3.658C8.024 8.337 9.855 8 12 8c2.146 0 3.976.337 5.5.842 3.021 1 4.835 2.66 5.5 3.658z"}"></path><path stroke="${"white"}" stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M17.5 8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842m11 0c3.021 1 4.835 2.66 5.5 3.658L20.5 15l-3-2V8.842zm-11 0c-3.021 1-4.835 2.66-5.5 3.658L3.5 15l3-2V8.842z"}"></path></svg>`;
-    });
-    PhoneAuthSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let shortPing;
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let emptyPhoneInputAnimated;
-      let magicLinkBtn;
-      let phoneField;
-      let phoneFieldValue = "";
-      shortPing = emptyPhoneInputAnimated;
-      $$unsubscribe_isDarkMode();
-      return `${`<signin-button class="${"group bg-red-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
-        true
-      ) + " text-white flex justify-center items-center gap-5"}"${add_attribute("this", magicLinkBtn, 0)}><span class="${"group-hover:scale-[1.15] duration-500"}">${validate_component(IconPhone, "IconPhone").$$render($$result, {}, {}, {})}</span>
-    <span>Get SMS Code</span></signin-button>
-
-  <input class="${"text-center p-3 mt-3 w-full " + escape(shortPing, true) + " focus:outline-none"}" type="${"phone"}" placeholder="${"phone"}"${add_attribute("this", phoneField, 0)}${add_attribute("value", phoneFieldValue, 0)}>`}
-
-<span id="${"phoneStatusMessage"}"></span>`;
     });
     LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $navLoginClicked, $$unsubscribe_navLoginClicked;
@@ -12538,7 +12511,7 @@ var init_layout_svelte = __esm({
   
   <login-card class="${"block relative text-xl hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
-    ${!isRunningStandalone() ? `${validate_component(MagicLinkSection, "MagicLinkSection").$$render($$result, {}, {}, {})}` : `${validate_component(PhoneAuthSection, "PhoneAuthSection").$$render($$result, {}, {}, {})}`}
+    ${`${validate_component(MagicLinkSection, "MagicLinkSection").$$render($$result, {}, {}, {})}`}
 
     <p class="${"py-5"}">or</p>
 
@@ -12880,8 +12853,8 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-ae18f68d.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-ae18f68d.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-48bf2c83.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-b72b47c8.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-65565caa.js", "_app/immutable/chunks/singletons-da55f50f.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-741ecaad.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-741ecaad.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-48bf2c83.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-b72b47c8.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-da8649f3.js", "_app/immutable/chunks/singletons-37ec3c74.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
     stylesheets = ["_app/immutable/assets/_layout-af89b20a.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -13307,8 +13280,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-f2a501e0.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-f2a501e0.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-3b35c815.js", "_app/immutable/chunks/store-b72b47c8.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-48bf2c83.js", "_app/immutable/chunks/public-fe26cbe2.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-af8ce6e3.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-af8ce6e3.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-3b35c815.js", "_app/immutable/chunks/store-b72b47c8.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-48bf2c83.js", "_app/immutable/chunks/public-fe26cbe2.js"];
     stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
   }
 });
@@ -14724,8 +14697,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-3a0ba0f2.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-3a0ba0f2.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-65565caa.js", "_app/immutable/chunks/singletons-da55f50f.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-b72b47c8.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-4ee9f007.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-4ee9f007.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-da8649f3.js", "_app/immutable/chunks/singletons-37ec3c74.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-b72b47c8.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -29230,8 +29203,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-3ebdf389.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-3ebdf389.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-b72b47c8.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-65565caa.js", "_app/immutable/chunks/singletons-da55f50f.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-fb37bad5.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-fb37bad5.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-b72b47c8.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-da8649f3.js", "_app/immutable/chunks/singletons-37ec3c74.js"];
     stylesheets16 = [];
   }
 });
@@ -32061,7 +32034,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-42b946a2.js", "imports": ["_app/immutable/start-42b946a2.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-da55f50f.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-e3ad947e.js", "imports": ["_app/immutable/start-e3ad947e.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-37ec3c74.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
