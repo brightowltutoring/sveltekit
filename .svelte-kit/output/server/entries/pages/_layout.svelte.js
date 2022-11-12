@@ -1,6 +1,6 @@
 import { c as create_ssr_component, e as escape, a as subscribe, v as validate_component, d as add_attribute, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, d as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as isRunningStandalone, c as navHomeworkClicked, r as routes, s as scrollY, d as instDeltaY, l as lessThan768, f as innerWidth } from "../../chunks/store.js";
 import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
@@ -96,9 +96,6 @@ const PhoneAuthSection = create_ssr_component(($$result, $$props, $$bindings, sl
 
 <span id="${"phoneStatusMessage"}"></span>`;
 });
-function isRunningStandalone() {
-  return window.matchMedia("(display-mode: standalone)").matches;
-}
 const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $navLoginClicked, $$unsubscribe_navLoginClicked;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;

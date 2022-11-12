@@ -8,7 +8,12 @@
   import { onMount } from "svelte";
 
   let ready = false;
-  onMount(() => (ready = true));
+  let isRunningStandaloneVar;
+
+  onMount(() => {
+    ready = true;
+    isRunningStandaloneVar = isRunningStandalone();
+  });
 
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
@@ -28,7 +33,7 @@
   src="/login-bg-video-blurred.mp4"
 />
 
-{#if !isRunningStandalone()}
+{#if !isRunningStandaloneVar}
   <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
     <!-- main page -->
     <div class="h-[60vh] flex justify-center items-center text-center">
