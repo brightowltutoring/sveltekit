@@ -1333,16 +1333,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     window.document.body.classList.remove("dark-mode");
   });
   $$unsubscribe_isDarkMode();
-  return `
-
-
-${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}
-
-
-
-
-
-`;
+  return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}`;
 });
 export {
   Page as default

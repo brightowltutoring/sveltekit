@@ -8,6 +8,7 @@
     isDarkMode,
     elementColor,
     navLoginClicked,
+    isRunningStandalone,
   } from "$lib/store.js";
   import { logoutFunction } from "$lib/Login/loginFunctions.js";
 
@@ -86,9 +87,9 @@
 
   //  Hoisted Functions
 
-  function isRunningStandalone() {
-    return window.matchMedia("(display-mode: standalone)").matches;
-  }
+  // function isRunningStandalone() {
+  //   return window.matchMedia("(display-mode: standalone)").matches;
+  // }
 
   // this function needs to detect logout too to reset store
   function redirectLogic(userRedirectUrl = "/login") {

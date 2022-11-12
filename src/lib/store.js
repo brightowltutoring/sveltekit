@@ -1,6 +1,10 @@
 import { writable, derived } from "svelte/store";
 import { quintOut, elasticOut } from "svelte/easing";
 
+export function isRunningStandalone() {
+  return window.matchMedia("(display-mode: standalone)").matches;
+}
+
 const createWritableStore = (key, startValue) => {
   const { subscribe, set } = writable(startValue);
 

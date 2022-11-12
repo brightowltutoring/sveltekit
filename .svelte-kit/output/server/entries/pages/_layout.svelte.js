@@ -1,6 +1,6 @@
 import { c as create_ssr_component, e as escape, a as subscribe, v as validate_component, d as add_attribute, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, w as windowInnerHeight, d as scrollYMax, f as innerWidth } from "../../chunks/store.js";
+import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768, d as innerWidth } from "../../chunks/store.js";
 import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
 import { w as writable } from "../../chunks/index2.js";
@@ -12,8 +12,8 @@ const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.showModal(showModal);
   if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
     $$bindings.bgTint(bgTint);
-  return `${`
-  <modal-container class="${"fixed w-full h-full flex justify-center items-center z-[50] md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`}`;
+  return `
+<modal-container class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
 });
 function guard(name) {
   return () => {
@@ -286,7 +286,11 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_navLoginClicked();
   return `
   
-  <a data-sveltekit-prefetch class="${"flex justify-center px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true)}"${add_attribute("href", href, 0)}>${escape(content)}</a>`;
+
+  
+  
+  
+  <a data-sveltekit-prefetch class="${"px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true)}"${add_attribute("href", href, 0)}>${escape(content)}</a>`;
 });
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
@@ -477,8 +481,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
   let $lessThan768, $$unsubscribe_lessThan768;
-  let $$unsubscribe_windowInnerHeight;
-  let $$unsubscribe_scrollYMax;
   let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
   let $$unsubscribe_innerWidth;
@@ -487,8 +489,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
-  $$unsubscribe_windowInnerHeight = subscribe(windowInnerHeight, (value) => value);
-  $$unsubscribe_scrollYMax = subscribe(scrollYMax, (value) => value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_innerWidth = subscribe(innerWidth, (value) => value);
@@ -524,12 +524,16 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "bottom-0 backdrop-blur-3xl duration-700";
       }
     }
-    $$rendered = `${$$result.head += `<!-- HEAD_svelte-1x4fmg5_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key) => {
+    $$rendered = `${$$result.head += `<!-- HEAD_svelte-vmk4yk_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key) => {
       return `${$page.routeId == "/" && key == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.routeId == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
-    })}<!-- HEAD_svelte-1x4fmg5_END -->`, ""}
+    })}<!-- HEAD_svelte-vmk4yk_END -->`, ""}
+
+
+
+
 
 
 
@@ -596,8 +600,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
   $$unsubscribe_lessThan768();
-  $$unsubscribe_windowInnerHeight();
-  $$unsubscribe_scrollYMax();
   $$unsubscribe_routes();
   $$unsubscribe_page();
   $$unsubscribe_innerWidth();

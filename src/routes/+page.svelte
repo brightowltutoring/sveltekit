@@ -3,7 +3,7 @@
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode, isRunningStandalone } from "$lib/store.js";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
 
@@ -28,102 +28,121 @@
   src="/login-bg-video-blurred.mp4"
 />
 
-<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
+{#if !isRunningStandalone()}
+  <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
+    <!-- main page -->
+    <div class="h-[60vh] flex justify-center items-center text-center">
+      <div class="grid grid-rows-1">
+        {#if ready}
+          <div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
+            Math, Physics
+            <span class={gradientTextColor}> ... Online! </span>
+          </div>
+
+          <div
+            class="text-2xl font-Nunito font-thin "
+            on:click={() => {
+              document
+                // .getElementById("reviews")
+                .getElementById("step1")
+                .scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            on:keydown={() => {
+              document
+                .getElementById("reviews")
+                .scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+          >
+            <!-- 👉 click for reviews -->
+            👇 get started
+          </div>
+        {/if}
+      </div>
+    </div>
+
+    <!-- second page -->
+    <div id="step1" class="hover:scale-105 duration-500 ">
+      <p
+        class="text-5xl font-Poppins text-center pb-7 "
+        on:keydown={() => {
+          document
+            .getElementById("step2")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+        on:click={() => {
+          document
+            .getElementById("step2")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      >
+        <span class={gradientTextColor}> 1. Upload your homework </span>
+      </p>
+
+      <Dropzone textSizeTW={"text-2xl"} />
+    </div>
+
+    <!-- third page -->
+    <div id="step2" class="duration-500  ">
+      <p
+        class="text-5xl font-Poppins text-center pb-7"
+        on:keydown={() => {
+          document
+            .getElementById("reviews")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+        on:click={() => {
+          document
+            .getElementById("reviews")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      >
+        <span class={gradientTextColor}> 2. Schedule a Session </span>
+      </p>
+
+      <!-- <PlansComponent plansCards={plansCardArray.slice(0, 2)} /> -->
+      <PlansComponent
+        plansCards={plansCardArray.slice(0, 2)}
+        hasTransition={false}
+      />
+    </div>
+
+    <!-- fourth page -->
+
+    <div id="reviews" class="mb-[200px] sm:mb-[500px]  duration-500 ">
+      <p
+        class="text-5xl font-Poppins text-center "
+        on:keydown={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+        on:click={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      >
+        <span class={gradientTextColor}> 3. Do Some Reading </span><span
+          >😎
+        </span>
+      </p>
+      <Reviews />
+    </div>
+  </div>
+{:else}
   <!-- main page -->
   <div class="h-[60vh] flex justify-center items-center text-center">
     <div class="grid grid-rows-1">
       {#if ready}
         <div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
-          Math, Physics
-          <span class={gradientTextColor}> ... Online! </span>
+          You're on the
+          <span class={gradientTextColor}> App! </span>
         </div>
 
-        <div
-          class="text-2xl font-Nunito font-thin "
-          on:click={() => {
-            document
-              // .getElementById("reviews")
-              .getElementById("step1")
-              .scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
-          on:keydown={() => {
-            document
-              .getElementById("reviews")
-              .scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
-        >
+        <div class="text-2xl font-Nunito font-thin ">
           <!-- 👉 click for reviews -->
-          👇 get started
+          the navbar is now your friend 🤝
         </div>
       {/if}
     </div>
   </div>
-
-  <!-- second page -->
-  <div id="step1" class="hover:scale-105 duration-500 ">
-    <p
-      class="text-5xl font-Poppins text-center pb-7 "
-      on:keydown={() => {
-        document
-          .getElementById("step2")
-          .scrollIntoView({ behavior: "smooth", block: "start" });
-      }}
-      on:click={() => {
-        document
-          .getElementById("step2")
-          .scrollIntoView({ behavior: "smooth", block: "start" });
-      }}
-    >
-      <span class={gradientTextColor}> 1. Upload your homework </span>
-    </p>
-
-    <Dropzone textSizeTW={"text-2xl"} />
-  </div>
-
-  <!-- third page -->
-  <div id="step2" class="duration-500  ">
-    <p
-      class="text-5xl font-Poppins text-center pb-7"
-      on:keydown={() => {
-        document
-          .getElementById("reviews")
-          .scrollIntoView({ behavior: "smooth", block: "start" });
-      }}
-      on:click={() => {
-        document
-          .getElementById("reviews")
-          .scrollIntoView({ behavior: "smooth", block: "start" });
-      }}
-    >
-      <span class={gradientTextColor}> 2. Schedule a Session </span>
-    </p>
-
-    <!-- <PlansComponent plansCards={plansCardArray.slice(0, 2)} /> -->
-    <PlansComponent
-      plansCards={plansCardArray.slice(0, 2)}
-      hasTransition={false}
-    />
-  </div>
-
-  <!-- fourth page -->
-
-  <div id="reviews" class="mb-[200px] sm:mb-[500px]  duration-500 ">
-    <p
-      class="text-5xl font-Poppins text-center "
-      on:keydown={() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }}
-      on:click={() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }}
-    >
-      <span class={gradientTextColor}> 3. Do Some Reading </span><span
-        >😎
-      </span>
-    </p>
-    <Reviews />
-  </div>
-</div>
+{/if}
 
 <!-- <Testimonials /> -->
 

@@ -13,14 +13,6 @@ const instDeltaY = derived(
     return $scrollY - $startScrollY;
   }
 );
-const scrollYMax = writable(0);
-derived(
-  [scrollY, scrollYMax],
-  ([$scrollY, $scrollYMax]) => {
-    return 1 - $scrollY / $scrollYMax;
-  }
-);
-const windowInnerHeight = writable(0);
 const innerWidth = writable(0);
 const lessThan768 = derived(
   innerWidth,
@@ -94,13 +86,11 @@ export {
   isLoggedIn as a,
   navHomeworkClicked as b,
   instDeltaY as c,
-  scrollYMax as d,
+  innerWidth as d,
   elementColor as e,
-  innerWidth as f,
   isDarkMode as i,
   lessThan768 as l,
   navLoginClicked as n,
   routes as r,
-  scrollY as s,
-  windowInnerHeight as w
+  scrollY as s
 };
