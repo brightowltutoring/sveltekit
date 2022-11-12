@@ -146,37 +146,39 @@
 </script>
 
 {#if $navLoginClicked && !$isLoggedIn}
-  <div
+  <!-- <div
     class="w-11/12 sm:w-[500px]"
     in:fly={{ y: 300, duration: 1000, easing: elasticOut }}
+  > -->
+  <!-- in:scale={{ duration: 500, easing: quintOut }} -->
+  <login-card
+    in:slide={{ duration: 400, easing: quintOut }}
+    class=" block relative text-xl hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
+      ? 'hover:shadow-xl '
+      : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"
+    style={`background:${$elementColor}`}
   >
-    <login-card
-      in:scale={{ duration: 500, easing: quintOut }}
-      class=" block relative text-xl hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
-        ? 'hover:shadow-xl '
-        : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 "
-      style={`background:${$elementColor}`}
-    >
-      <!-- <div class="absolute -top-2 -right-2">
+    <!-- <div class="absolute -top-2 -right-2">
           <CloseButton />
         </div> -->
 
-      {#if !isRunningStandalone()}
-        <MagicLinkSection />
-      {:else}
-        <PhoneAuthSection />
-      {/if}
+    {#if !isRunningStandalone()}
+      <MagicLinkSection />
+    {:else}
+      <PhoneAuthSection />
+    {/if}
 
-      <p class="py-5">or</p>
+    <p class="py-5">or</p>
 
-      <!-- since these don't update the DOM, placed them in separate components -->
-      <GoogleLoginButton />
-      <TwitterLoginButton />
-    </login-card>
-  </div>
+    <!-- since these don't update the DOM, placed them in separate components -->
+    <GoogleLoginButton />
+    <TwitterLoginButton />
+  </login-card>
+  <!-- </div> -->
 {:else if $navLoginClicked && $isLoggedIn}
+  <!-- in:slide={{ duration: 400, easing: quintOut }} -->
   <logout-card
-    in:slide={{ duration: 400, easing: quintOut }}
+    in:slide={{ duration: 1000, easing: elasticOut }}
     class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
       ? 'hover:shadow-xl '
       : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px] "
