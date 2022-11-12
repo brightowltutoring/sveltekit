@@ -45,7 +45,7 @@
   }
 
   onMount(async () => {
-    // Confirm the link is a sign-in with email link. TODO: place in function??
+    // Confirm the link is a sign-in with email link.
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem("emailForSignIn");
       if (!email) {
@@ -63,7 +63,7 @@
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // let providerId = user.providerData[0].providerId; // TODO: have to check this or email
+        // let providerId = user.providerData[0].providerId;
         // console.log("providerId", providerId);
         $isLoggedIn = true;
         loggedInEmail = user.email;

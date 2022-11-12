@@ -27,9 +27,13 @@
   <!-- in:slide={{ duration: 800, easing: elasticOut }} -->
   <!--  class="{bool &&
       `${btnColor} border-b-1 rounded px-3 py-1`} flex justify-center px-2 mx-1 font-Nunito font-thin md:text-xl text-2xl selection:bg-transparent {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg" -->
+
+  <!-- TODO: centering doesnt seem to matter -->
+  <!-- grid place-items-center -->
+  <!-- flex justify-center  -->
   <a
     data-sveltekit-prefetch
-    class="flex justify-center px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl  {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
+    class=" px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
       `${btnColor} border-b-1 rounded px-3 py-1`}"
     {href}
     on:click={(e) => {

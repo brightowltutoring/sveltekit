@@ -1,6 +1,5 @@
 import { writable, derived } from "svelte/store";
 import { quintOut, elasticOut } from "svelte/easing";
-// import { browser } from "$app/env";
 
 const createWritableStore = (key, startValue) => {
   const { subscribe, set } = writable(startValue);
@@ -115,16 +114,18 @@ export const instDeltaY = derived(
   }
 );
 
-export const scrollHeight = writable(0);
-export const scrollYMax = writable(0);
-export const fractionScroll = derived(
-  [scrollY, scrollYMax],
-  ([$scrollY, $scrollYMax]) => {
-    return 1 - $scrollY / $scrollYMax;
-  }
-);
+// TODO: remove?
+// export const scrollHeight = writable(0);
+// export const scrollYMax = writable(0);
+// export const fractionScroll = derived(
+//   [scrollY, scrollYMax],
+//   ([$scrollY, $scrollYMax]) => {
+//     return 1 - $scrollY / $scrollYMax;
+//   }
+// );
+// export const windowInnerHeight = writable(0);
+// TODO: remove?
 
-export const windowInnerHeight = writable(0);
 export const innerWidth = writable(0);
 export const lessThan768 = derived(
   innerWidth,
@@ -135,20 +136,6 @@ export const lessThan768 = derived(
 export const navLoginClicked = writable(false);
 export const navHomeworkClicked = writable(false);
 
-// export const navModals = {
-//   login: writable(false),
-//   homework: writable(false),
-// }
-
-// function oneModalOnly() {
-
-//   for (let key in navModals) {
-//     navModals[key] = false;
-//   }
-
-// }
-
-// the all important
 export const routes = writable({
   home: {
     name: "Home",
@@ -233,9 +220,6 @@ export const routes = writable({
 
 // export const isDarkMode = writable(true);
 export const isDarkMode = writable(false);
-// TODO: delete soon; logincard logic no longer requires these to be global
-// export const redirectAfterLoginTimeOut = writable("");
-// export const redirectSetInterval = writable("");
 
 export const light = "#f7f7f7";
 export const light_darkened = "rgb(242,247,250)";

@@ -1,7 +1,6 @@
 <script>
   import { PUBLIC_UPLOAD_ENDPOINT } from "$env/static/public";
   import { isDarkMode } from "$lib/store.js";
-  // let clickText = false;
   import { Dropzone } from "dropzone";
   import "$lib/Dropzone/dropzone.css";
   // import "/node_modules/dropzone/dist/dropzone.css";
@@ -26,33 +25,20 @@
   });
 </script>
 
+<!-- flex justify-center items-center -->
 <form
   method="post"
   id="default"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
-  class="dropzone flex justify-center items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
+  class="dropzone grid place-items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
 >
   <!-- dz-message is a dropzone defined class -->
   <div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
     <span>{text}</span>
-    <!-- {#key clickText}
-      <span
-        in:scale={{ duration: 1000, easing: elasticOut }}
-        on:click={() => {
-          clickText = !clickText;
-        }}
-        on:keydown={() => {
-          clickText = !clickText;
-        }}
-        class="block"
-      >
-        {text}</span
-      >
-    {/key} -->
   </div>
 </form>
 
-<!-- TODO: Importing dropzone via https link is buggy with multiple dropzone instances and/or svelte's component mounting. Also limited in modifying css when importing from https link -->
+<!-- Note: Importing dropzone via https link is buggy with multiple dropzone instances and/or svelte's component mounting. Also limited in modifying css when importing from https link -->
 
 <!-- <svelte:head>
   <link

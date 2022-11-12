@@ -22,7 +22,6 @@
   import { onMount } from "svelte";
 
   onMount(() => {
-    // TODO: WOW!! without this existence check app kept crashing
     const conditionsForObservation =
       document.querySelector("plans-card") &&
       !document.getElementById("calendlyJS") &&

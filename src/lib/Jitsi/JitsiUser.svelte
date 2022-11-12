@@ -24,12 +24,11 @@
       // disableSelfViewSettings: true,
       disabledSounds: ["KNOCKING_PARTICIPANT_SOUND"],
       disableDeepLinking: true,
-      disableRemoteMute: true, //TODO: USER ONLY
-      notifications: "lobby.notificationTitle", //TODO: USER ONLY
+      disableRemoteMute: true,
+      notifications: "lobby.notificationTitle",
       startWithAudioMuted: true,
       startWithVideoMuted: true,
       remoteVideoMenu: {
-        //TODO: USER ONLY
         disableKick: true,
         disablePrivateChat: true,
       },

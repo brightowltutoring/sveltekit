@@ -50,7 +50,7 @@
 
 <!-- gap-x-24 -->
 <logo-and-navbar
-  class="flex items-center justify-center md:justify-between gap-x-10 "
+  class=" flex items-center justify-center  md:justify-between gap-x-10 "
 >
   {#key resetLogoClick}
     <div

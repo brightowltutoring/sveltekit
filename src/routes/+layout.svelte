@@ -1,6 +1,12 @@
 <script>
-  import { scale, fly, slide } from "svelte/transition";
-  import { elasticOut, quintOut } from "svelte/easing";
+  import {
+    scale,
+    // fly, slide
+  } from "svelte/transition";
+  import {
+    quintOut,
+    // elasticOut,
+  } from "svelte/easing";
   import "../app.css";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
@@ -11,26 +17,25 @@
     instDeltaY,
     innerWidth,
     scrollY,
-    windowInnerHeight,
-    scrollYMax,
+    // windowInnerHeight, TODO: remove?
+    // scrollYMax, TODO: remove?
     routes,
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
     isDarkMode,
     // isLoggedIn,
+    lastScrollY,
   } from "$lib/store.js";
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
 
-  // function isRunningStandalone() {
-  //   return window.matchMedia("(display-mode: standalone)").matches;
+  // TODO: remove?
+  // function setScrollYMax() {
+  //   $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
   // }
 
-  function setScrollYMax() {
-    $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
-  }
   // disables pinchzoom on ios/safari simulator
   function disablePinchZoom() {
     document.addEventListener("gesturestart", (e) => {
@@ -39,17 +44,14 @@
     });
   }
   onMount(() => {
-    setScrollYMax();
-
+    // setScrollYMax(); TODO: remove?
     disablePinchZoom();
-
-    // isRunningStandalone() ? alert("standalone!") : alert("NOT standalone");
-    // TODO: ui change based on standalone ...particularly the login options
   });
 
   let jankytown;
 
-  // sets jankytown for bigger than med
+  // sets jankytown for bigger than med.
+  //  TODO: reframe these in terms of matchmedia?
   $: if (!$lessThan768) {
     if ($scrollY == 0) jankytown = "top-0";
 
@@ -62,6 +64,7 @@
     if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl duration-700";
   }
   // sets jankytown for smaller than med
+  //  TODO: reframe these in terms of matchmedia?
   $: if ($lessThan768) {
     if ($scrollY == 0) {
       jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl ";
@@ -75,19 +78,10 @@
     if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
-
-  // might need to add browser && dev conditional
 </script>
 
 <svelte:head>
   <link rel="manifest" href="/manifest.json" />
-
-  <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap"
-    rel="stylesheet"
-  /> -->
 
   <!-- should show up once each!! -->
   {#each Object.keys($routes) as key}
@@ -108,10 +102,12 @@
 <svelte:window
   bind:scrollY={$scrollY}
   bind:innerWidth={$innerWidth}
-  bind:innerHeight={$windowInnerHeight}
-  on:resize={setScrollYMax}
-  on:contextmenu={(event) => event.preventDefault()}
+  on:contextmenu={(e) => e.preventDefault()}
 />
+
+<!-- TODO: remove? -->
+<!-- bind:innerHeight={$windowInnerHeight} -->
+<!-- on:resize={setScrollYMax} -->
 
 <!-- class={$isDarkMode
     ? "bg-[rgba(37,27,47,0.1)] text-white"
