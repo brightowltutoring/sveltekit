@@ -1,8 +1,9 @@
 import { writable, derived } from "svelte/store";
 import { quintOut, elasticOut } from "svelte/easing";
+import { browser } from "$app/environment";
 
 export function isRunningStandalone() {
-  return window.matchMedia("(display-mode: standalone)").matches;
+  return browser && window.matchMedia("(display-mode: standalone)").matches;
 }
 
 const createWritableStore = (key, startValue) => {

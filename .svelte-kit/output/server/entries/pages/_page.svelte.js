@@ -2,7 +2,7 @@ import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as
 import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
-import { i as isDarkMode, b as isRunningStandalone } from "../../chunks/store.js";
+import { i as isDarkMode } from "../../chunks/store.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
@@ -149,7 +149,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_isDarkMode();
   return `<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
 
-${!isRunningStandalone() ? `<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
+${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}</div></div>
 
     
@@ -175,8 +175,7 @@ ${!isRunningStandalone() ? `<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64
 
     <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">3. Do Some Reading </span><span>\u{1F60E}
         </span></p>
-      ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>` : `
-  <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}</div></div>`}
+      ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>`}
 
 
 

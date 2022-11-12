@@ -25,7 +25,6 @@
     navHomeworkClicked,
     isDarkMode,
     // isLoggedIn,
-    lastScrollY,
   } from "$lib/store.js";
 
   import { page } from "$app/stores";

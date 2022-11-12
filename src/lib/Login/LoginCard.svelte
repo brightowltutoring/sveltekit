@@ -87,10 +87,6 @@
 
   //  Hoisted Functions
 
-  // function isRunningStandalone() {
-  //   return window.matchMedia("(display-mode: standalone)").matches;
-  // }
-
   // this function needs to detect logout too to reset store
   function redirectLogic(userRedirectUrl = "/login") {
     let redirectTimeInMS = 3000;
