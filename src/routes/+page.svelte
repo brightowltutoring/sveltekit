@@ -143,7 +143,7 @@
           <span class={gradientTextColor}> App! </span>
         </div>
 
-        <div class="text-2xl font-Nunito font-thin ">
+        <div class="grid px-6 text-2xl font-Nunito font-thin ">
           the navbar is now your friend 🤝
         </div>
       {/if}

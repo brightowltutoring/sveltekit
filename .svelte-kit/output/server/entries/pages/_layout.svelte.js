@@ -370,6 +370,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_navLoginClicked;
   let $isLoggedIn, $$unsubscribe_isLoggedIn;
   let $scrollY, $$unsubscribe_scrollY;
+  let $elementColor, $$unsubscribe_elementColor;
   let $scaleRocket, $$unsubscribe_scaleRocket;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
@@ -377,6 +378,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
   $$unsubscribe_isLoggedIn = subscribe(isLoggedIn, (value) => $isLoggedIn = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
+  $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   $$unsubscribe_scaleRocket = subscribe(scaleRocket, (value) => $scaleRocket = value);
   let hueRocket = 0;
@@ -395,12 +397,19 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {
       $isLoggedIn ? set_store_value(routes, $routes.login.name = "\u{1F680}", $routes) : set_store_value(routes, $routes.login.name = "Login", $routes);
     }
-    bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${$isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-100"}`;
+    bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${$isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"}`;
     $$rendered = `
 <logo-and-navbar class="${"flex items-center justify-center md:justify-between gap-x-10 "}"><div class="${"md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
   <nav class="${"md:ml-24 md:p-1 p-3 " + escape(bgGradientColor, true) + " rounded-md md:rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
+        ${`
+          
+          <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " active:bg-indigo-400 active:text-white duration-200 border-b-1 rounded px-3 py-1"}">App
+          </li>
+          `}
+
+        
         ${each(Object.keys($routes).slice(0, 5), (KEY) => {
       return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
@@ -443,6 +452,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_navLoginClicked();
   $$unsubscribe_isLoggedIn();
   $$unsubscribe_scrollY();
+  $$unsubscribe_elementColor();
   $$unsubscribe_scaleRocket();
   return $$rendered;
 });
@@ -512,6 +522,8 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
+
+
 <main>${validate_component(Modal, "Modal").$$render(
       $$result,
       { showModal: $navLoginClicked },
@@ -563,6 +575,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   
   <div class="${"md:py-4 py-1 md:px-[7%] z-50 fixed " + escape(jankytown, true) + " ease-in-out overflow-x-auto overflow-y-hidden w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
 
+  
   
   <div class="${"px-[7%] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}
     ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}</div>

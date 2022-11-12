@@ -11,6 +11,8 @@
     isDarkMode,
     navLoginClicked,
     navHomeworkClicked,
+    elementColor,
+    isRunningStandalone,
   } from "$lib/store.js";
   import { spring } from "svelte/motion";
 
@@ -43,9 +45,12 @@
   let btnColor = "sm:bg-red-300 rounded";
   let btnColorHover = "hover:bg-red-300 ";
 
-  $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${
-    $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-100"
+  // via-[rgba(0,0,0,0)]
+  $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${
+    $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"
   }`;
+
+  // let app = true;
 </script>
 
 <!-- gap-x-24 -->
@@ -69,6 +74,25 @@
   >
     {#key unique}
       <ul class="flex flex-row text-xl items-center">
+        <!-- TODO: on:click directs to download the PWA -->
+        {#if !isRunningStandalone()}
+          <!-- {#key app} -->
+          <!-- in:scale={{ duration: 800, easing: elasticOut }} -->
+          <li
+            on:click={() => {
+              // app = !app;
+              alert("Coming soon 🚀");
+              $navLoginClicked = false;
+              $navHomeworkClicked = false;
+            }}
+            class=" mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} active:bg-indigo-400 active:text-white duration-200
+               border-b-1 rounded px-3 py-1 "
+          >
+            App
+          </li>
+          <!-- {/key} -->
+        {/if}
+
         <!-- {#each Object.keys($routes).splice(0, 5) as KEY} -->
         {#each Object.keys($routes).slice(0, 5) as KEY}
           <li

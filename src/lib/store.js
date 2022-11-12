@@ -4,6 +4,7 @@ import { browser } from "$app/environment";
 
 export function isRunningStandalone() {
   return browser && window.matchMedia("(display-mode: standalone)").matches;
+  // sveltekit's 'browser' since window cannot be used with SSR (which is the default for first page load with sveltekit)
 }
 
 const createWritableStore = (key, startValue) => {
@@ -132,6 +133,31 @@ export const instDeltaY = derived(
 // TODO: remove?
 
 export const innerWidth = writable(0);
+
+// considerably more code than the distributed logic (code) pertaining to 'lessThan768', however this only listens on the onMount and threshold-crossings, not at every resize event
+
+export function setInnerWidthViaMatchMedia() {
+  // return browser && window.matchMedia("(max-width: 768px)").matches;
+  const pixelWidth = 768;
+  if (browser) {
+    const mediaQueryList = window.matchMedia(`(max-width: ${pixelWidth}px)`);
+
+    console.log("LANDED");
+    innerWidth.set(window.innerWidth);
+    //Note: can use '$innerWidth = window.innerWidth' when inside .svelte file, instead
+
+    mediaQueryList.addEventListener("change", (event) => {
+      if (event.matches) {
+        innerWidth.set(window.innerWidth);
+        console.log(`UNDER ${pixelWidth}px`);
+      } else {
+        innerWidth.set(window.innerWidth);
+        console.log(`OVER ${pixelWidth}px`);
+      }
+    });
+  }
+}
+
 export const lessThan768 = derived(
   innerWidth,
   ($innerWidth) => $innerWidth < 768

@@ -20,6 +20,7 @@
     // windowInnerHeight, TODO: remove?
     // scrollYMax, TODO: remove?
     routes,
+    setInnerWidthViaMatchMedia,
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
@@ -42,9 +43,12 @@
       return false;
     });
   }
+
   onMount(() => {
     // setScrollYMax(); TODO: remove?
     disablePinchZoom();
+
+    setInnerWidthViaMatchMedia();
   });
 
   let jankytown;
@@ -52,6 +56,7 @@
   // sets jankytown for bigger than med.
   //  TODO: reframe these in terms of matchmedia?
   $: if (!$lessThan768) {
+    // $: if (!lessThan768v2) {
     if ($scrollY == 0) jankytown = "top-0";
 
     if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
@@ -65,6 +70,7 @@
   // sets jankytown for smaller than med
   //  TODO: reframe these in terms of matchmedia?
   $: if ($lessThan768) {
+    // $: if (lessThan768v2) {
     if ($scrollY == 0) {
       jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl ";
       // adding the md tailwind breakpoint here is pure jank...so onpageload
@@ -98,9 +104,9 @@
   {/each}
 </svelte:head>
 
+<!-- bind:innerWidth={$innerWidth} --><!-- this now taken care of with 'setInnerWidthViaMatchMedia()' -->
 <svelte:window
   bind:scrollY={$scrollY}
-  bind:innerWidth={$innerWidth}
   on:contextmenu={(e) => e.preventDefault()}
 />
 
