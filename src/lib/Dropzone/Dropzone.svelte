@@ -1,29 +1,16 @@
 <script>
-  import { PUBLIC_UPLOAD_ENDPOINT } from "$env/static/public";
+  import DropzoneHydrator from "$lib/Dropzone/DropzoneHydrator.svelte";
   import { isDarkMode } from "$lib/store.js";
-  import { Dropzone } from "dropzone";
   import "$lib/Dropzone/dropzone.css";
-  // import "/node_modules/dropzone/dist/dropzone.css";
-  import { onMount } from "svelte";
-  export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
   export let brightnessTW = "brightness-100";
-  let dropzone;
 
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
-  const ACCEPTED_FILES_FRONTEND = ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
-
-  onMount(() => {
-    dropzone = new Dropzone("#default", {
-      url: PUBLIC_UPLOAD_ENDPOINT,
-      acceptedFiles: ACCEPTED_FILES_FRONTEND,
-    });
-    // Dropzone.autoDiscover = false;
-    document.querySelector("#default").id = uniqueId;
-  });
 </script>
+
+<DropzoneHydrator />
 
 <!-- flex justify-center items-center -->
 <form

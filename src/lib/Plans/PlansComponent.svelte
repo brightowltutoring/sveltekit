@@ -1,7 +1,7 @@
 <script>
   import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
   import PlansCard from "$lib/Plans/PlansCard.svelte";
-  import { scale, fly } from "svelte/transition";
+  import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import { onMount } from "svelte";

@@ -13,7 +13,7 @@ const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
     $$bindings.bgTint(bgTint);
   return `
-<modal-container class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true)}">${slots.default ? slots.default({}) : ``}</modal-container>`;
+<modal-container class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint}` : "hidden", true) + " overflow-y-scroll"}">${slots.default ? slots.default({}) : ``}</modal-container>`;
 });
 function guard(name) {
   return () => {
@@ -149,6 +149,8 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_isDarkMode();
   $$unsubscribe_elementColor();
   return `${$navLoginClicked && !$isLoggedIn ? `
+  
+
   
   <login-card class="${"block relative text-xl hover:scale-[1.01] font-Poppins shadow-md " + escape($isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"}"${add_attribute("style", `background:${$elementColor}`, 0)}>
 
