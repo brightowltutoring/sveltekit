@@ -33,7 +33,7 @@
 </script>
 
 <plans-card
-  class=" cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
+  class="cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} rounded-xl m-1 p-7 text-center duration-300 group"
   style={`background:${$elementColor}`}

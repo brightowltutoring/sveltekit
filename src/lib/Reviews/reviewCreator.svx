@@ -4,9 +4,12 @@
     export let date = '2022-06-08'
     import { isDarkMode } from "$lib/store.js"; 
     import HydrateReviewStars from "$lib/Reviews/HydrateReviewStars.svelte"
+    let whenImageNotLoaded = 'opacity-0 transition-opacity duration-200 ease-in'
+
 </script>
 
-<HydrateReviewStars/>
+<HydrateReviewStars/> 
+<!-- upon intersection with img elements below, this code adds img src and removes the 'opacity-0' tailwiind-css fallback -->
 <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">  
 
   <div class="absolute ">
@@ -16,7 +19,7 @@
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
-      <img class="stars hover:scale-150 duration-300 " loading="lazy"  alt="star" style="width:40px; height:40px" >
+      <img class="stars {whenImageNotLoaded} hover:scale-150 duration-300" alt="star" style="width:40px; height:40px" >
 
       {/each}
   

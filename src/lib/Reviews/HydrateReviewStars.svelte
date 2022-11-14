@@ -1,6 +1,9 @@
+<!-- Only downside is hard reload page while scrolled down to reviews section ... results in an empty flash -->
 <script>
   function hydrateReviewStars(star) {
     star.src = "/star.webp";
+    // star.classList.remove("invisible");
+    star.classList.remove("opacity-0");
   }
 
   import { onMount } from "svelte";
@@ -9,7 +12,7 @@
     const options = {
       root: null,
       threshold: 0,
-      rootMargin: "100px",
+      rootMargin: "400px",
     };
     const observer = new IntersectionObserver(function (entries, observer) {
       for (let entry of entries) {

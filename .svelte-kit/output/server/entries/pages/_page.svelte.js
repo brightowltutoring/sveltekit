@@ -1,8 +1,11 @@
-import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, k as null_to_empty } from "../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, j as each, k as null_to_empty } from "../../chunks/index.js";
 import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
+const HydrateReviewStars = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return ``;
+});
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
@@ -22,9 +25,10 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
     $$bindings.date(date);
   $$result.css.add(css$1);
   $$unsubscribe_isDarkMode();
-  return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
+  return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})}
+<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
-    return `<img loading="${"lazy "}" src="${"star.webp"}" alt="${"star"}" style="${"width:40px; height:40px"}" class="${"hover:scale-150 duration-300"}">`;
+    return `<img class="${"stars hover:scale-150 duration-300 "}" loading="${"lazy"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
   })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
