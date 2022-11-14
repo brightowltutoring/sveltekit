@@ -8,7 +8,6 @@
       calendlyJS.type = "text/javascript";
       document.head.appendChild(calendlyJS);
     }
-
     if (!document.getElementById("calendlyCSS")) {
       const calendlyCSS = document.createElement("link");
       calendlyCSS.id = "calendlyCSS";
@@ -34,15 +33,19 @@
         threshold: 0,
         rootMargin: "100px",
       };
-      const observer = new IntersectionObserver(function (entries, observer) {
+      const observer = new IntersectionObserver(async function (
+        entries,
+        observer
+      ) {
         for (let entry of entries) {
           if (entry.isIntersecting) {
-            calendlyJSandCSStoHead();
+            await calendlyJSandCSStoHead();
             observer.unobserve(entry.target);
             console.log("i c u baby");
           }
         }
-      }, options);
+      },
+      options);
 
       for (let card of plansCards) {
         observer.observe(card);

@@ -3,9 +3,10 @@
     export let name = "Thomas Finn"
     export let date = '2022-06-08'
     import { isDarkMode } from "$lib/store.js"; 
+    import HydrateReviewStars from "$lib/Reviews/HydrateReviewStars.svelte"
 </script>
 
-
+<HydrateReviewStars/>
 <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">  
 
   <div class="absolute ">
@@ -15,7 +16,7 @@
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
-      <img loading="lazy "src="star.webp" alt="star" style="width:40px; height:40px" class="hover:scale-150 duration-300"/>
+      <img class="stars hover:scale-150 duration-300 " loading="lazy"  alt="star" style="width:40px; height:40px" >
 
       {/each}
   

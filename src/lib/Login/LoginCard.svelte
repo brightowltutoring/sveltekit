@@ -13,6 +13,7 @@
   import { logoutFunction } from "$lib/Login/loginFunctions.js";
 
   import { app, auth } from "$lib/firebase.js";
+
   import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
   import TwitterLoginButton from "$lib/Login/TwitterLoginButton.svelte";

@@ -16,3 +16,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 // this is used when website is mounted to persist login state ... maybe import when login clicked instead??
+
+// idea: import getAuth on page load IF visitor as logged in before ... e.g. can set a localstorage variable ("previouslyLoggedIn") inside the logged in logic (not here)
+// otherwise: import getAuth only on the first login button click
+//  ...this idea is useful for the majority of people who never log in

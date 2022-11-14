@@ -41,7 +41,12 @@
   class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7"
 > -->
 <!--  .. I have to add back in grid-cols-1 as the custom 'grid-cols-dynamic' doesnt seem to take care of this case (the cards are not centered and the svelte transition rattles) -->
-<div class="grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7">
+<div
+  class="grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"
+  on:DOMContentLoaded={() => {
+    console.log("loaded!");
+  }}
+>
   {#each plansCards as item, i}
     {#if ready}
       <div
