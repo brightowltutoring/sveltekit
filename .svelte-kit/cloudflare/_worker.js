@@ -720,1827 +720,30 @@ var init_store = __esm({
   }
 });
 
-// node_modules/just-extend/index.esm.js
-function extend() {
-  var args = [].slice.call(arguments);
-  var deep = false;
-  if (typeof args[0] == "boolean") {
-    deep = args.shift();
-  }
-  var result = args[0];
-  if (isUnextendable(result)) {
-    throw new Error("extendee must be an object");
-  }
-  var extenders = args.slice(1);
-  var len = extenders.length;
-  for (var i = 0; i < len; i++) {
-    var extender = extenders[i];
-    for (var key2 in extender) {
-      if (Object.prototype.hasOwnProperty.call(extender, key2)) {
-        var value = extender[key2];
-        if (deep && isCloneable(value)) {
-          var base2 = Array.isArray(value) ? [] : {};
-          result[key2] = extend(
-            true,
-            Object.prototype.hasOwnProperty.call(result, key2) && !isUnextendable(result[key2]) ? result[key2] : base2,
-            value
-          );
-        } else {
-          result[key2] = value;
-        }
-      }
-    }
-  }
-  return result;
-}
-function isCloneable(obj) {
-  return Array.isArray(obj) || {}.toString.call(obj) == "[object Object]";
-}
-function isUnextendable(val) {
-  return !val || typeof val != "object" && typeof val != "function";
-}
-var objectExtend;
-var init_index_esm = __esm({
-  "node_modules/just-extend/index.esm.js"() {
-    objectExtend = extend;
-  }
-});
-
-// node_modules/dropzone/dist/dropzone.mjs
-function $parcel$interopDefault(a2) {
-  return a2 && a2.__esModule ? a2.default : a2;
-}
-function $3ed269f2f0fb224b$var$__guard__(value, transform) {
-  return typeof value !== "undefined" && value !== null ? transform(value) : void 0;
-}
-function $3ed269f2f0fb224b$var$__guardMethod__(obj, methodName, transform) {
-  if (typeof obj !== "undefined" && obj !== null && typeof obj[methodName] === "function")
-    return transform(obj, methodName);
-  else
-    return void 0;
-}
-var $4040acfd8584338d$export$2e2bcd8739ae039, $fd6031f88dce2e32$exports, $4ca367182776f80b$var$defaultOptions, $4ca367182776f80b$export$2e2bcd8739ae039, $3ed269f2f0fb224b$export$2e2bcd8739ae039, $3ed269f2f0fb224b$var$without, $3ed269f2f0fb224b$var$camelize, $3ed269f2f0fb224b$var$detectVerticalSquash, $3ed269f2f0fb224b$var$drawImageIOSFix, $3ed269f2f0fb224b$var$ExifRestore;
-var init_dropzone = __esm({
-  "node_modules/dropzone/dist/dropzone.mjs"() {
-    init_index_esm();
-    $4040acfd8584338d$export$2e2bcd8739ae039 = class {
-      on(event, fn2) {
-        this._callbacks = this._callbacks || {};
-        if (!this._callbacks[event])
-          this._callbacks[event] = [];
-        this._callbacks[event].push(fn2);
-        return this;
-      }
-      emit(event, ...args) {
-        this._callbacks = this._callbacks || {};
-        let callbacks = this._callbacks[event];
-        if (callbacks)
-          for (let callback of callbacks)
-            callback.apply(this, args);
-        if (this.element)
-          this.element.dispatchEvent(this.makeEvent("dropzone:" + event, {
-            args
-          }));
-        return this;
-      }
-      makeEvent(eventName, detail) {
-        let params = {
-          bubbles: true,
-          cancelable: true,
-          detail
-        };
-        if (typeof window.CustomEvent === "function")
-          return new CustomEvent(eventName, params);
-        else {
-          var evt = document.createEvent("CustomEvent");
-          evt.initCustomEvent(eventName, params.bubbles, params.cancelable, params.detail);
-          return evt;
-        }
-      }
-      off(event, fn2) {
-        if (!this._callbacks || arguments.length === 0) {
-          this._callbacks = {};
-          return this;
-        }
-        let callbacks = this._callbacks[event];
-        if (!callbacks)
-          return this;
-        if (arguments.length === 1) {
-          delete this._callbacks[event];
-          return this;
-        }
-        for (let i = 0; i < callbacks.length; i++) {
-          let callback = callbacks[i];
-          if (callback === fn2) {
-            callbacks.splice(i, 1);
-            break;
-          }
-        }
-        return this;
-      }
-    };
-    $fd6031f88dce2e32$exports = {};
-    $fd6031f88dce2e32$exports = '<div class="dz-preview dz-file-preview">\n  <div class="dz-image"><img data-dz-thumbnail=""></div>\n  <div class="dz-details">\n    <div class="dz-size"><span data-dz-size=""></span></div>\n    <div class="dz-filename"><span data-dz-name=""></span></div>\n  </div>\n  <div class="dz-progress">\n    <span class="dz-upload" data-dz-uploadprogress=""></span>\n  </div>\n  <div class="dz-error-message"><span data-dz-errormessage=""></span></div>\n  <div class="dz-success-mark">\n    <svg width="54" height="54" viewBox="0 0 54 54" fill="white" xmlns="http://www.w3.org/2000/svg">\n      <path d="M10.2071 29.7929L14.2929 25.7071C14.6834 25.3166 15.3166 25.3166 15.7071 25.7071L21.2929 31.2929C21.6834 31.6834 22.3166 31.6834 22.7071 31.2929L38.2929 15.7071C38.6834 15.3166 39.3166 15.3166 39.7071 15.7071L43.7929 19.7929C44.1834 20.1834 44.1834 20.8166 43.7929 21.2071L22.7071 42.2929C22.3166 42.6834 21.6834 42.6834 21.2929 42.2929L10.2071 31.2071C9.81658 30.8166 9.81658 30.1834 10.2071 29.7929Z"></path>\n    </svg>\n  </div>\n  <div class="dz-error-mark">\n    <svg width="54" height="54" viewBox="0 0 54 54" fill="white" xmlns="http://www.w3.org/2000/svg">\n      <path d="M26.2929 20.2929L19.2071 13.2071C18.8166 12.8166 18.1834 12.8166 17.7929 13.2071L13.2071 17.7929C12.8166 18.1834 12.8166 18.8166 13.2071 19.2071L20.2929 26.2929C20.6834 26.6834 20.6834 27.3166 20.2929 27.7071L13.2071 34.7929C12.8166 35.1834 12.8166 35.8166 13.2071 36.2071L17.7929 40.7929C18.1834 41.1834 18.8166 41.1834 19.2071 40.7929L26.2929 33.7071C26.6834 33.3166 27.3166 33.3166 27.7071 33.7071L34.7929 40.7929C35.1834 41.1834 35.8166 41.1834 36.2071 40.7929L40.7929 36.2071C41.1834 35.8166 41.1834 35.1834 40.7929 34.7929L33.7071 27.7071C33.3166 27.3166 33.3166 26.6834 33.7071 26.2929L40.7929 19.2071C41.1834 18.8166 41.1834 18.1834 40.7929 17.7929L36.2071 13.2071C35.8166 12.8166 35.1834 12.8166 34.7929 13.2071L27.7071 20.2929C27.3166 20.6834 26.6834 20.6834 26.2929 20.2929Z"></path>\n    </svg>\n  </div>\n</div>\n';
-    $4ca367182776f80b$var$defaultOptions = {
-      url: null,
-      method: "post",
-      withCredentials: false,
-      timeout: null,
-      parallelUploads: 2,
-      uploadMultiple: false,
-      chunking: false,
-      forceChunking: false,
-      chunkSize: 2097152,
-      parallelChunkUploads: false,
-      retryChunks: false,
-      retryChunksLimit: 3,
-      maxFilesize: 256,
-      paramName: "file",
-      createImageThumbnails: true,
-      maxThumbnailFilesize: 10,
-      thumbnailWidth: 120,
-      thumbnailHeight: 120,
-      thumbnailMethod: "crop",
-      resizeWidth: null,
-      resizeHeight: null,
-      resizeMimeType: null,
-      resizeQuality: 0.8,
-      resizeMethod: "contain",
-      filesizeBase: 1e3,
-      maxFiles: null,
-      headers: null,
-      defaultHeaders: true,
-      clickable: true,
-      ignoreHiddenFiles: true,
-      acceptedFiles: null,
-      acceptedMimeTypes: null,
-      autoProcessQueue: true,
-      autoQueue: true,
-      addRemoveLinks: false,
-      previewsContainer: null,
-      disablePreviews: false,
-      hiddenInputContainer: "body",
-      capture: null,
-      renameFilename: null,
-      renameFile: null,
-      forceFallback: false,
-      dictDefaultMessage: "Drop files here to upload",
-      dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
-      dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
-      dictFileTooBig: "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
-      dictInvalidFileType: "You can't upload files of this type.",
-      dictResponseError: "Server responded with {{statusCode}} code.",
-      dictCancelUpload: "Cancel upload",
-      dictUploadCanceled: "Upload canceled.",
-      dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
-      dictRemoveFile: "Remove file",
-      dictRemoveFileConfirmation: null,
-      dictMaxFilesExceeded: "You can not upload any more files.",
-      dictFileSizeUnits: {
-        tb: "TB",
-        gb: "GB",
-        mb: "MB",
-        kb: "KB",
-        b: "b"
-      },
-      init() {
-      },
-      params(files, xhr, chunk) {
-        if (chunk)
-          return {
-            dzuuid: chunk.file.upload.uuid,
-            dzchunkindex: chunk.index,
-            dztotalfilesize: chunk.file.size,
-            dzchunksize: this.options.chunkSize,
-            dztotalchunkcount: chunk.file.upload.totalChunkCount,
-            dzchunkbyteoffset: chunk.index * this.options.chunkSize
-          };
-      },
-      accept(file18, done) {
-        return done();
-      },
-      chunksUploaded: function(file18, done) {
-        done();
-      },
-      binaryBody: false,
-      fallback() {
-        let messageElement;
-        this.element.className = `${this.element.className} dz-browser-not-supported`;
-        for (let child of this.element.getElementsByTagName("div"))
-          if (/(^| )dz-message($| )/.test(child.className)) {
-            messageElement = child;
-            child.className = "dz-message";
-            break;
-          }
-        if (!messageElement) {
-          messageElement = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement('<div class="dz-message"><span></span></div>');
-          this.element.appendChild(messageElement);
-        }
-        let span = messageElement.getElementsByTagName("span")[0];
-        if (span) {
-          if (span.textContent != null)
-            span.textContent = this.options.dictFallbackMessage;
-          else if (span.innerText != null)
-            span.innerText = this.options.dictFallbackMessage;
-        }
-        return this.element.appendChild(this.getFallbackForm());
-      },
-      resize(file18, width, height, resizeMethod) {
-        let info = {
-          srcX: 0,
-          srcY: 0,
-          srcWidth: file18.width,
-          srcHeight: file18.height
-        };
-        let srcRatio = file18.width / file18.height;
-        if (width == null && height == null) {
-          width = info.srcWidth;
-          height = info.srcHeight;
-        } else if (width == null)
-          width = height * srcRatio;
-        else if (height == null)
-          height = width / srcRatio;
-        width = Math.min(width, info.srcWidth);
-        height = Math.min(height, info.srcHeight);
-        let trgRatio = width / height;
-        if (info.srcWidth > width || info.srcHeight > height) {
-          if (resizeMethod === "crop") {
-            if (srcRatio > trgRatio) {
-              info.srcHeight = file18.height;
-              info.srcWidth = info.srcHeight * trgRatio;
-            } else {
-              info.srcWidth = file18.width;
-              info.srcHeight = info.srcWidth / trgRatio;
-            }
-          } else if (resizeMethod === "contain") {
-            if (srcRatio > trgRatio)
-              height = width / srcRatio;
-            else
-              width = height * srcRatio;
-          } else
-            throw new Error(`Unknown resizeMethod '${resizeMethod}'`);
-        }
-        info.srcX = (file18.width - info.srcWidth) / 2;
-        info.srcY = (file18.height - info.srcHeight) / 2;
-        info.trgWidth = width;
-        info.trgHeight = height;
-        return info;
-      },
-      transformFile(file18, done) {
-        if ((this.options.resizeWidth || this.options.resizeHeight) && file18.type.match(/image.*/))
-          return this.resizeImage(file18, this.options.resizeWidth, this.options.resizeHeight, this.options.resizeMethod, done);
-        else
-          return done(file18);
-      },
-      previewTemplate: /* @__PURE__ */ $parcel$interopDefault($fd6031f88dce2e32$exports),
-      drop(e3) {
-        return this.element.classList.remove("dz-drag-hover");
-      },
-      dragstart(e3) {
-      },
-      dragend(e3) {
-        return this.element.classList.remove("dz-drag-hover");
-      },
-      dragenter(e3) {
-        return this.element.classList.add("dz-drag-hover");
-      },
-      dragover(e3) {
-        return this.element.classList.add("dz-drag-hover");
-      },
-      dragleave(e3) {
-        return this.element.classList.remove("dz-drag-hover");
-      },
-      paste(e3) {
-      },
-      reset() {
-        return this.element.classList.remove("dz-started");
-      },
-      addedfile(file18) {
-        if (this.element === this.previewsContainer)
-          this.element.classList.add("dz-started");
-        if (this.previewsContainer && !this.options.disablePreviews) {
-          file18.previewElement = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(this.options.previewTemplate.trim());
-          file18.previewTemplate = file18.previewElement;
-          this.previewsContainer.appendChild(file18.previewElement);
-          for (var node of file18.previewElement.querySelectorAll("[data-dz-name]"))
-            node.textContent = file18.name;
-          for (node of file18.previewElement.querySelectorAll("[data-dz-size]"))
-            node.innerHTML = this.filesize(file18.size);
-          if (this.options.addRemoveLinks) {
-            file18._removeLink = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(`<a class="dz-remove" href="javascript:undefined;" data-dz-remove>${this.options.dictRemoveFile}</a>`);
-            file18.previewElement.appendChild(file18._removeLink);
-          }
-          let removeFileEvent = (e3) => {
-            e3.preventDefault();
-            e3.stopPropagation();
-            if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
-              return $3ed269f2f0fb224b$export$2e2bcd8739ae039.confirm(
-                this.options.dictCancelUploadConfirmation,
-                () => this.removeFile(file18)
-              );
-            else {
-              if (this.options.dictRemoveFileConfirmation)
-                return $3ed269f2f0fb224b$export$2e2bcd8739ae039.confirm(
-                  this.options.dictRemoveFileConfirmation,
-                  () => this.removeFile(file18)
-                );
-              else
-                return this.removeFile(file18);
-            }
-          };
-          for (let removeLink of file18.previewElement.querySelectorAll("[data-dz-remove]"))
-            removeLink.addEventListener("click", removeFileEvent);
-        }
-      },
-      removedfile(file18) {
-        if (file18.previewElement != null && file18.previewElement.parentNode != null)
-          file18.previewElement.parentNode.removeChild(file18.previewElement);
-        return this._updateMaxFilesReachedClass();
-      },
-      thumbnail(file18, dataUrl) {
-        if (file18.previewElement) {
-          file18.previewElement.classList.remove("dz-file-preview");
-          for (let thumbnailElement of file18.previewElement.querySelectorAll("[data-dz-thumbnail]")) {
-            thumbnailElement.alt = file18.name;
-            thumbnailElement.src = dataUrl;
-          }
-          return setTimeout(
-            () => file18.previewElement.classList.add("dz-image-preview"),
-            1
-          );
-        }
-      },
-      error(file18, message) {
-        if (file18.previewElement) {
-          file18.previewElement.classList.add("dz-error");
-          if (typeof message !== "string" && message.error)
-            message = message.error;
-          for (let node of file18.previewElement.querySelectorAll("[data-dz-errormessage]"))
-            node.textContent = message;
-        }
-      },
-      errormultiple() {
-      },
-      processing(file18) {
-        if (file18.previewElement) {
-          file18.previewElement.classList.add("dz-processing");
-          if (file18._removeLink)
-            return file18._removeLink.innerHTML = this.options.dictCancelUpload;
-        }
-      },
-      processingmultiple() {
-      },
-      uploadprogress(file18, progress, bytesSent) {
-        if (file18.previewElement)
-          for (let node of file18.previewElement.querySelectorAll("[data-dz-uploadprogress]"))
-            node.nodeName === "PROGRESS" ? node.value = progress : node.style.width = `${progress}%`;
-      },
-      totaluploadprogress() {
-      },
-      sending() {
-      },
-      sendingmultiple() {
-      },
-      success(file18) {
-        if (file18.previewElement)
-          return file18.previewElement.classList.add("dz-success");
-      },
-      successmultiple() {
-      },
-      canceled(file18) {
-        return this.emit("error", file18, this.options.dictUploadCanceled);
-      },
-      canceledmultiple() {
-      },
-      complete(file18) {
-        if (file18._removeLink)
-          file18._removeLink.innerHTML = this.options.dictRemoveFile;
-        if (file18.previewElement)
-          return file18.previewElement.classList.add("dz-complete");
-      },
-      completemultiple() {
-      },
-      maxfilesexceeded() {
-      },
-      maxfilesreached() {
-      },
-      queuecomplete() {
-      },
-      addedfiles() {
-      }
-    };
-    $4ca367182776f80b$export$2e2bcd8739ae039 = $4ca367182776f80b$var$defaultOptions;
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039 = class extends $4040acfd8584338d$export$2e2bcd8739ae039 {
-      static initClass() {
-        this.prototype.Emitter = $4040acfd8584338d$export$2e2bcd8739ae039;
-        this.prototype.events = [
-          "drop",
-          "dragstart",
-          "dragend",
-          "dragenter",
-          "dragover",
-          "dragleave",
-          "addedfile",
-          "addedfiles",
-          "removedfile",
-          "thumbnail",
-          "error",
-          "errormultiple",
-          "processing",
-          "processingmultiple",
-          "uploadprogress",
-          "totaluploadprogress",
-          "sending",
-          "sendingmultiple",
-          "success",
-          "successmultiple",
-          "canceled",
-          "canceledmultiple",
-          "complete",
-          "completemultiple",
-          "reset",
-          "maxfilesexceeded",
-          "maxfilesreached",
-          "queuecomplete"
-        ];
-        this.prototype._thumbnailQueue = [];
-        this.prototype._processingThumbnail = false;
-      }
-      getAcceptedFiles() {
-        return this.files.filter(
-          (file18) => file18.accepted
-        ).map(
-          (file18) => file18
-        );
-      }
-      getRejectedFiles() {
-        return this.files.filter(
-          (file18) => !file18.accepted
-        ).map(
-          (file18) => file18
-        );
-      }
-      getFilesWithStatus(status) {
-        return this.files.filter(
-          (file18) => file18.status === status
-        ).map(
-          (file18) => file18
-        );
-      }
-      getQueuedFiles() {
-        return this.getFilesWithStatus($3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED);
-      }
-      getUploadingFiles() {
-        return this.getFilesWithStatus($3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING);
-      }
-      getAddedFiles() {
-        return this.getFilesWithStatus($3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED);
-      }
-      getActiveFiles() {
-        return this.files.filter(
-          (file18) => file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED
-        ).map(
-          (file18) => file18
-        );
-      }
-      init() {
-        if (this.element.tagName === "form")
-          this.element.setAttribute("enctype", "multipart/form-data");
-        if (this.element.classList.contains("dropzone") && !this.element.querySelector(".dz-message"))
-          this.element.appendChild($3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(`<div class="dz-default dz-message"><button class="dz-button" type="button">${this.options.dictDefaultMessage}</button></div>`));
-        if (this.clickableElements.length) {
-          let setupHiddenFileInput = () => {
-            if (this.hiddenFileInput)
-              this.hiddenFileInput.parentNode.removeChild(this.hiddenFileInput);
-            this.hiddenFileInput = document.createElement("input");
-            this.hiddenFileInput.setAttribute("type", "file");
-            if (this.options.maxFiles === null || this.options.maxFiles > 1)
-              this.hiddenFileInput.setAttribute("multiple", "multiple");
-            this.hiddenFileInput.className = "dz-hidden-input";
-            if (this.options.acceptedFiles !== null)
-              this.hiddenFileInput.setAttribute("accept", this.options.acceptedFiles);
-            if (this.options.capture !== null)
-              this.hiddenFileInput.setAttribute("capture", this.options.capture);
-            this.hiddenFileInput.setAttribute("tabindex", "-1");
-            this.hiddenFileInput.style.visibility = "hidden";
-            this.hiddenFileInput.style.position = "absolute";
-            this.hiddenFileInput.style.top = "0";
-            this.hiddenFileInput.style.left = "0";
-            this.hiddenFileInput.style.height = "0";
-            this.hiddenFileInput.style.width = "0";
-            $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElement(this.options.hiddenInputContainer, "hiddenInputContainer").appendChild(this.hiddenFileInput);
-            this.hiddenFileInput.addEventListener("change", () => {
-              let { files } = this.hiddenFileInput;
-              if (files.length)
-                for (let file18 of files)
-                  this.addFile(file18);
-              this.emit("addedfiles", files);
-              setupHiddenFileInput();
-            });
-          };
-          setupHiddenFileInput();
-        }
-        this.URL = window.URL !== null ? window.URL : window.webkitURL;
-        for (let eventName of this.events)
-          this.on(eventName, this.options[eventName]);
-        this.on(
-          "uploadprogress",
-          () => this.updateTotalUploadProgress()
-        );
-        this.on(
-          "removedfile",
-          () => this.updateTotalUploadProgress()
-        );
-        this.on(
-          "canceled",
-          (file18) => this.emit("complete", file18)
-        );
-        this.on("complete", (file18) => {
-          if (this.getAddedFiles().length === 0 && this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0)
-            return setTimeout(
-              () => this.emit("queuecomplete"),
-              0
-            );
-        });
-        const containsFiles = function(e3) {
-          if (e3.dataTransfer.types)
-            for (var i = 0; i < e3.dataTransfer.types.length; i++) {
-              if (e3.dataTransfer.types[i] === "Files")
-                return true;
-            }
-          return false;
-        };
-        let noPropagation = function(e3) {
-          if (!containsFiles(e3))
-            return;
-          e3.stopPropagation();
-          if (e3.preventDefault)
-            return e3.preventDefault();
-          else
-            return e3.returnValue = false;
-        };
-        this.listeners = [
-          {
-            element: this.element,
-            events: {
-              dragstart: (e3) => {
-                return this.emit("dragstart", e3);
-              },
-              dragenter: (e3) => {
-                noPropagation(e3);
-                return this.emit("dragenter", e3);
-              },
-              dragover: (e3) => {
-                let efct;
-                try {
-                  efct = e3.dataTransfer.effectAllowed;
-                } catch (error2) {
-                }
-                e3.dataTransfer.dropEffect = "move" === efct || "linkMove" === efct ? "move" : "copy";
-                noPropagation(e3);
-                return this.emit("dragover", e3);
-              },
-              dragleave: (e3) => {
-                return this.emit("dragleave", e3);
-              },
-              drop: (e3) => {
-                noPropagation(e3);
-                return this.drop(e3);
-              },
-              dragend: (e3) => {
-                return this.emit("dragend", e3);
-              }
-            }
-          }
-        ];
-        this.clickableElements.forEach((clickableElement) => {
-          return this.listeners.push({
-            element: clickableElement,
-            events: {
-              click: (evt) => {
-                if (clickableElement !== this.element || evt.target === this.element || $3ed269f2f0fb224b$export$2e2bcd8739ae039.elementInside(evt.target, this.element.querySelector(".dz-message")))
-                  this.hiddenFileInput.click();
-                return true;
-              }
-            }
-          });
-        });
-        this.enable();
-        return this.options.init.call(this);
-      }
-      destroy() {
-        this.disable();
-        this.removeAllFiles(true);
-        if (this.hiddenFileInput != null ? this.hiddenFileInput.parentNode : void 0) {
-          this.hiddenFileInput.parentNode.removeChild(this.hiddenFileInput);
-          this.hiddenFileInput = null;
-        }
-        delete this.element.dropzone;
-        return $3ed269f2f0fb224b$export$2e2bcd8739ae039.instances.splice($3ed269f2f0fb224b$export$2e2bcd8739ae039.instances.indexOf(this), 1);
-      }
-      updateTotalUploadProgress() {
-        let totalUploadProgress;
-        let totalBytesSent = 0;
-        let totalBytes = 0;
-        let activeFiles = this.getActiveFiles();
-        if (activeFiles.length) {
-          for (let file18 of this.getActiveFiles()) {
-            totalBytesSent += file18.upload.bytesSent;
-            totalBytes += file18.upload.total;
-          }
-          totalUploadProgress = 100 * totalBytesSent / totalBytes;
-        } else
-          totalUploadProgress = 100;
-        return this.emit("totaluploadprogress", totalUploadProgress, totalBytes, totalBytesSent);
-      }
-      _getParamName(n2) {
-        if (typeof this.options.paramName === "function")
-          return this.options.paramName(n2);
-        else
-          return `${this.options.paramName}${this.options.uploadMultiple ? `[${n2}]` : ""}`;
-      }
-      _renameFile(file18) {
-        if (typeof this.options.renameFile !== "function")
-          return file18.name;
-        return this.options.renameFile(file18);
-      }
-      getFallbackForm() {
-        let existingFallback, form;
-        if (existingFallback = this.getExistingFallback())
-          return existingFallback;
-        let fieldsString = '<div class="dz-fallback">';
-        if (this.options.dictFallbackText)
-          fieldsString += `<p>${this.options.dictFallbackText}</p>`;
-        fieldsString += `<input type="file" name="${this._getParamName(0)}" ${this.options.uploadMultiple ? 'multiple="multiple"' : void 0} /><input type="submit" value="Upload!"></div>`;
-        let fields = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(fieldsString);
-        if (this.element.tagName !== "FORM") {
-          form = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(`<form action="${this.options.url}" enctype="multipart/form-data" method="${this.options.method}"></form>`);
-          form.appendChild(fields);
-        } else {
-          this.element.setAttribute("enctype", "multipart/form-data");
-          this.element.setAttribute("method", this.options.method);
-        }
-        return form != null ? form : fields;
-      }
-      getExistingFallback() {
-        let getFallback = function(elements) {
-          for (let el of elements) {
-            if (/(^| )fallback($| )/.test(el.className))
-              return el;
-          }
-        };
-        for (let tagName of [
-          "div",
-          "form"
-        ]) {
-          var fallback;
-          if (fallback = getFallback(this.element.getElementsByTagName(tagName)))
-            return fallback;
-        }
-      }
-      setupEventListeners() {
-        return this.listeners.map(
-          (elementListeners) => (() => {
-            let result = [];
-            for (let event in elementListeners.events) {
-              let listener = elementListeners.events[event];
-              result.push(elementListeners.element.addEventListener(event, listener, false));
-            }
-            return result;
-          })()
-        );
-      }
-      removeEventListeners() {
-        return this.listeners.map(
-          (elementListeners) => (() => {
-            let result = [];
-            for (let event in elementListeners.events) {
-              let listener = elementListeners.events[event];
-              result.push(elementListeners.element.removeEventListener(event, listener, false));
-            }
-            return result;
-          })()
-        );
-      }
-      disable() {
-        this.clickableElements.forEach(
-          (element) => element.classList.remove("dz-clickable")
-        );
-        this.removeEventListeners();
-        this.disabled = true;
-        return this.files.map(
-          (file18) => this.cancelUpload(file18)
-        );
-      }
-      enable() {
-        delete this.disabled;
-        this.clickableElements.forEach(
-          (element) => element.classList.add("dz-clickable")
-        );
-        return this.setupEventListeners();
-      }
-      filesize(size) {
-        let selectedSize = 0;
-        let selectedUnit = "b";
-        if (size > 0) {
-          let units = [
-            "tb",
-            "gb",
-            "mb",
-            "kb",
-            "b"
-          ];
-          for (let i = 0; i < units.length; i++) {
-            let unit = units[i];
-            let cutoff = Math.pow(this.options.filesizeBase, 4 - i) / 10;
-            if (size >= cutoff) {
-              selectedSize = size / Math.pow(this.options.filesizeBase, 4 - i);
-              selectedUnit = unit;
-              break;
-            }
-          }
-          selectedSize = Math.round(10 * selectedSize) / 10;
-        }
-        return `<strong>${selectedSize}</strong> ${this.options.dictFileSizeUnits[selectedUnit]}`;
-      }
-      _updateMaxFilesReachedClass() {
-        if (this.options.maxFiles != null && this.getAcceptedFiles().length >= this.options.maxFiles) {
-          if (this.getAcceptedFiles().length === this.options.maxFiles)
-            this.emit("maxfilesreached", this.files);
-          return this.element.classList.add("dz-max-files-reached");
-        } else
-          return this.element.classList.remove("dz-max-files-reached");
-      }
-      drop(e3) {
-        if (!e3.dataTransfer)
-          return;
-        this.emit("drop", e3);
-        let files = [];
-        for (let i = 0; i < e3.dataTransfer.files.length; i++)
-          files[i] = e3.dataTransfer.files[i];
-        if (files.length) {
-          let { items } = e3.dataTransfer;
-          if (items && items.length && items[0].webkitGetAsEntry != null)
-            this._addFilesFromItems(items);
-          else
-            this.handleFiles(files);
-        }
-        this.emit("addedfiles", files);
-      }
-      paste(e3) {
-        if ($3ed269f2f0fb224b$var$__guard__(
-          e3 != null ? e3.clipboardData : void 0,
-          (x2) => x2.items
-        ) == null)
-          return;
-        this.emit("paste", e3);
-        let { items } = e3.clipboardData;
-        if (items.length)
-          return this._addFilesFromItems(items);
-      }
-      handleFiles(files) {
-        for (let file18 of files)
-          this.addFile(file18);
-      }
-      _addFilesFromItems(items) {
-        return (() => {
-          let result = [];
-          for (let item of items) {
-            var entry;
-            if (item.webkitGetAsEntry != null && (entry = item.webkitGetAsEntry())) {
-              if (entry.isFile)
-                result.push(this.addFile(item.getAsFile()));
-              else if (entry.isDirectory)
-                result.push(this._addFilesFromDirectory(entry, entry.name));
-              else
-                result.push(void 0);
-            } else if (item.getAsFile != null) {
-              if (item.kind == null || item.kind === "file")
-                result.push(this.addFile(item.getAsFile()));
-              else
-                result.push(void 0);
-            } else
-              result.push(void 0);
-          }
-          return result;
-        })();
-      }
-      _addFilesFromDirectory(directory, path2) {
-        let dirReader = directory.createReader();
-        let errorHandler = (error2) => $3ed269f2f0fb224b$var$__guardMethod__(
-          console,
-          "log",
-          (o2) => o2.log(error2)
-        );
-        var readEntries = () => {
-          return dirReader.readEntries((entries) => {
-            if (entries.length > 0) {
-              for (let entry of entries) {
-                if (entry.isFile)
-                  entry.file((file18) => {
-                    if (this.options.ignoreHiddenFiles && file18.name.substring(0, 1) === ".")
-                      return;
-                    file18.fullPath = `${path2}/${file18.name}`;
-                    return this.addFile(file18);
-                  });
-                else if (entry.isDirectory)
-                  this._addFilesFromDirectory(entry, `${path2}/${entry.name}`);
-              }
-              readEntries();
-            }
-            return null;
-          }, errorHandler);
-        };
-        return readEntries();
-      }
-      accept(file18, done) {
-        if (this.options.maxFilesize && file18.size > this.options.maxFilesize * 1048576)
-          done(this.options.dictFileTooBig.replace("{{filesize}}", Math.round(file18.size / 1024 / 10.24) / 100).replace("{{maxFilesize}}", this.options.maxFilesize));
-        else if (!$3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile(file18, this.options.acceptedFiles))
-          done(this.options.dictInvalidFileType);
-        else if (this.options.maxFiles != null && this.getAcceptedFiles().length >= this.options.maxFiles) {
-          done(this.options.dictMaxFilesExceeded.replace("{{maxFiles}}", this.options.maxFiles));
-          this.emit("maxfilesexceeded", file18);
-        } else
-          this.options.accept.call(this, file18, done);
-      }
-      addFile(file18) {
-        file18.upload = {
-          uuid: $3ed269f2f0fb224b$export$2e2bcd8739ae039.uuidv4(),
-          progress: 0,
-          total: file18.size,
-          bytesSent: 0,
-          filename: this._renameFile(file18)
-        };
-        this.files.push(file18);
-        file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED;
-        this.emit("addedfile", file18);
-        this._enqueueThumbnail(file18);
-        this.accept(file18, (error2) => {
-          if (error2) {
-            file18.accepted = false;
-            this._errorProcessing([
-              file18
-            ], error2);
-          } else {
-            file18.accepted = true;
-            if (this.options.autoQueue)
-              this.enqueueFile(file18);
-          }
-          this._updateMaxFilesReachedClass();
-        });
-      }
-      enqueueFiles(files) {
-        for (let file18 of files)
-          this.enqueueFile(file18);
-        return null;
-      }
-      enqueueFile(file18) {
-        if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED && file18.accepted === true) {
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED;
-          if (this.options.autoProcessQueue)
-            return setTimeout(
-              () => this.processQueue(),
-              0
-            );
-        } else
-          throw new Error("This file can't be queued because it has already been processed or was rejected.");
-      }
-      _enqueueThumbnail(file18) {
-        if (this.options.createImageThumbnails && file18.type.match(/image.*/) && file18.size <= this.options.maxThumbnailFilesize * 1048576) {
-          this._thumbnailQueue.push(file18);
-          return setTimeout(
-            () => this._processThumbnailQueue(),
-            0
-          );
-        }
-      }
-      _processThumbnailQueue() {
-        if (this._processingThumbnail || this._thumbnailQueue.length === 0)
-          return;
-        this._processingThumbnail = true;
-        let file18 = this._thumbnailQueue.shift();
-        return this.createThumbnail(file18, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, true, (dataUrl) => {
-          this.emit("thumbnail", file18, dataUrl);
-          this._processingThumbnail = false;
-          return this._processThumbnailQueue();
-        });
-      }
-      removeFile(file18) {
-        if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
-          this.cancelUpload(file18);
-        this.files = $3ed269f2f0fb224b$var$without(this.files, file18);
-        this.emit("removedfile", file18);
-        if (this.files.length === 0)
-          return this.emit("reset");
-      }
-      removeAllFiles(cancelIfNecessary) {
-        if (cancelIfNecessary == null)
-          cancelIfNecessary = false;
-        for (let file18 of this.files.slice())
-          if (file18.status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || cancelIfNecessary)
-            this.removeFile(file18);
-        return null;
-      }
-      resizeImage(file18, width, height, resizeMethod, callback) {
-        return this.createThumbnail(file18, width, height, resizeMethod, true, (dataUrl, canvas) => {
-          if (canvas == null)
-            return callback(file18);
-          else {
-            let { resizeMimeType } = this.options;
-            if (resizeMimeType == null)
-              resizeMimeType = file18.type;
-            let resizedDataURL = canvas.toDataURL(resizeMimeType, this.options.resizeQuality);
-            if (resizeMimeType === "image/jpeg" || resizeMimeType === "image/jpg")
-              resizedDataURL = $3ed269f2f0fb224b$var$ExifRestore.restore(file18.dataURL, resizedDataURL);
-            return callback($3ed269f2f0fb224b$export$2e2bcd8739ae039.dataURItoBlob(resizedDataURL));
-          }
-        });
-      }
-      createThumbnail(file18, width, height, resizeMethod, fixOrientation, callback) {
-        let fileReader = new FileReader();
-        fileReader.onload = () => {
-          file18.dataURL = fileReader.result;
-          if (file18.type === "image/svg+xml") {
-            if (callback != null)
-              callback(fileReader.result);
-            return;
-          }
-          this.createThumbnailFromUrl(file18, width, height, resizeMethod, fixOrientation, callback);
-        };
-        fileReader.readAsDataURL(file18);
-      }
-      displayExistingFile(mockFile, imageUrl, callback, crossOrigin, resizeThumbnail = true) {
-        this.emit("addedfile", mockFile);
-        this.emit("complete", mockFile);
-        if (!resizeThumbnail) {
-          this.emit("thumbnail", mockFile, imageUrl);
-          if (callback)
-            callback();
-        } else {
-          let onDone = (thumbnail) => {
-            this.emit("thumbnail", mockFile, thumbnail);
-            if (callback)
-              callback();
-          };
-          mockFile.dataURL = imageUrl;
-          this.createThumbnailFromUrl(mockFile, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, this.options.fixOrientation, onDone, crossOrigin);
-        }
-      }
-      createThumbnailFromUrl(file18, width, height, resizeMethod, fixOrientation, callback, crossOrigin) {
-        let img = document.createElement("img");
-        if (crossOrigin)
-          img.crossOrigin = crossOrigin;
-        fixOrientation = getComputedStyle(document.body)["imageOrientation"] == "from-image" ? false : fixOrientation;
-        img.onload = () => {
-          let loadExif = (callback2) => callback2(1);
-          if (typeof EXIF !== "undefined" && EXIF !== null && fixOrientation)
-            loadExif = (callback2) => EXIF.getData(img, function() {
-              return callback2(EXIF.getTag(this, "Orientation"));
-            });
-          return loadExif((orientation) => {
-            file18.width = img.width;
-            file18.height = img.height;
-            let resizeInfo = this.options.resize.call(this, file18, width, height, resizeMethod);
-            let canvas = document.createElement("canvas");
-            let ctx = canvas.getContext("2d");
-            canvas.width = resizeInfo.trgWidth;
-            canvas.height = resizeInfo.trgHeight;
-            if (orientation > 4) {
-              canvas.width = resizeInfo.trgHeight;
-              canvas.height = resizeInfo.trgWidth;
-            }
-            switch (orientation) {
-              case 2:
-                ctx.translate(canvas.width, 0);
-                ctx.scale(-1, 1);
-                break;
-              case 3:
-                ctx.translate(canvas.width, canvas.height);
-                ctx.rotate(Math.PI);
-                break;
-              case 4:
-                ctx.translate(0, canvas.height);
-                ctx.scale(1, -1);
-                break;
-              case 5:
-                ctx.rotate(0.5 * Math.PI);
-                ctx.scale(1, -1);
-                break;
-              case 6:
-                ctx.rotate(0.5 * Math.PI);
-                ctx.translate(0, -canvas.width);
-                break;
-              case 7:
-                ctx.rotate(0.5 * Math.PI);
-                ctx.translate(canvas.height, -canvas.width);
-                ctx.scale(-1, 1);
-                break;
-              case 8:
-                ctx.rotate(-0.5 * Math.PI);
-                ctx.translate(-canvas.height, 0);
-                break;
-            }
-            $3ed269f2f0fb224b$var$drawImageIOSFix(ctx, img, resizeInfo.srcX != null ? resizeInfo.srcX : 0, resizeInfo.srcY != null ? resizeInfo.srcY : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, resizeInfo.trgX != null ? resizeInfo.trgX : 0, resizeInfo.trgY != null ? resizeInfo.trgY : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
-            let thumbnail = canvas.toDataURL("image/png");
-            if (callback != null)
-              return callback(thumbnail, canvas);
-          });
-        };
-        if (callback != null)
-          img.onerror = callback;
-        return img.src = file18.dataURL;
-      }
-      processQueue() {
-        let { parallelUploads } = this.options;
-        let processingLength = this.getUploadingFiles().length;
-        let i = processingLength;
-        if (processingLength >= parallelUploads)
-          return;
-        let queuedFiles = this.getQueuedFiles();
-        if (!(queuedFiles.length > 0))
-          return;
-        if (this.options.uploadMultiple)
-          return this.processFiles(queuedFiles.slice(0, parallelUploads - processingLength));
-        else
-          while (i < parallelUploads) {
-            if (!queuedFiles.length)
-              return;
-            this.processFile(queuedFiles.shift());
-            i++;
-          }
-      }
-      processFile(file18) {
-        return this.processFiles([
-          file18
-        ]);
-      }
-      processFiles(files) {
-        for (let file18 of files) {
-          file18.processing = true;
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING;
-          this.emit("processing", file18);
-        }
-        if (this.options.uploadMultiple)
-          this.emit("processingmultiple", files);
-        return this.uploadFiles(files);
-      }
-      _getFilesWithXhr(xhr) {
-        let files;
-        return files = this.files.filter(
-          (file18) => file18.xhr === xhr
-        ).map(
-          (file18) => file18
-        );
-      }
-      cancelUpload(file18) {
-        if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING) {
-          let groupedFiles = this._getFilesWithXhr(file18.xhr);
-          for (let groupedFile of groupedFiles)
-            groupedFile.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED;
-          if (typeof file18.xhr !== "undefined")
-            file18.xhr.abort();
-          for (let groupedFile1 of groupedFiles)
-            this.emit("canceled", groupedFile1);
-          if (this.options.uploadMultiple)
-            this.emit("canceledmultiple", groupedFiles);
-        } else if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED || file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED) {
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED;
-          this.emit("canceled", file18);
-          if (this.options.uploadMultiple)
-            this.emit("canceledmultiple", [
-              file18
-            ]);
-        }
-        if (this.options.autoProcessQueue)
-          return this.processQueue();
-      }
-      resolveOption(option, ...args) {
-        if (typeof option === "function")
-          return option.apply(this, args);
-        return option;
-      }
-      uploadFile(file18) {
-        return this.uploadFiles([
-          file18
-        ]);
-      }
-      uploadFiles(files) {
-        this._transformFiles(files, (transformedFiles) => {
-          if (this.options.chunking) {
-            let transformedFile = transformedFiles[0];
-            files[0].upload.chunked = this.options.chunking && (this.options.forceChunking || transformedFile.size > this.options.chunkSize);
-            files[0].upload.totalChunkCount = Math.ceil(transformedFile.size / this.options.chunkSize);
-          }
-          if (files[0].upload.chunked) {
-            let file18 = files[0];
-            let transformedFile = transformedFiles[0];
-            let startedChunkCount = 0;
-            file18.upload.chunks = [];
-            let handleNextChunk = () => {
-              let chunkIndex = 0;
-              while (file18.upload.chunks[chunkIndex] !== void 0)
-                chunkIndex++;
-              if (chunkIndex >= file18.upload.totalChunkCount)
-                return;
-              startedChunkCount++;
-              let start = chunkIndex * this.options.chunkSize;
-              let end = Math.min(start + this.options.chunkSize, transformedFile.size);
-              let dataBlock = {
-                name: this._getParamName(0),
-                data: transformedFile.webkitSlice ? transformedFile.webkitSlice(start, end) : transformedFile.slice(start, end),
-                filename: file18.upload.filename,
-                chunkIndex
-              };
-              file18.upload.chunks[chunkIndex] = {
-                file: file18,
-                index: chunkIndex,
-                dataBlock,
-                status: $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING,
-                progress: 0,
-                retries: 0
-              };
-              this._uploadData(files, [
-                dataBlock
-              ]);
-            };
-            file18.upload.finishedChunkUpload = (chunk, response) => {
-              let allFinished = true;
-              chunk.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS;
-              chunk.dataBlock = null;
-              chunk.response = chunk.xhr.responseText;
-              chunk.responseHeaders = chunk.xhr.getAllResponseHeaders();
-              chunk.xhr = null;
-              for (let i = 0; i < file18.upload.totalChunkCount; i++) {
-                if (file18.upload.chunks[i] === void 0)
-                  return handleNextChunk();
-                if (file18.upload.chunks[i].status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS)
-                  allFinished = false;
-              }
-              if (allFinished)
-                this.options.chunksUploaded(file18, () => {
-                  this._finished(files, response, null);
-                });
-            };
-            if (this.options.parallelChunkUploads)
-              for (let i = 0; i < file18.upload.totalChunkCount; i++)
-                handleNextChunk();
-            else
-              handleNextChunk();
-          } else {
-            let dataBlocks = [];
-            for (let i = 0; i < files.length; i++)
-              dataBlocks[i] = {
-                name: this._getParamName(i),
-                data: transformedFiles[i],
-                filename: files[i].upload.filename
-              };
-            this._uploadData(files, dataBlocks);
-          }
-        });
-      }
-      _getChunk(file18, xhr) {
-        for (let i = 0; i < file18.upload.totalChunkCount; i++) {
-          if (file18.upload.chunks[i] !== void 0 && file18.upload.chunks[i].xhr === xhr)
-            return file18.upload.chunks[i];
-        }
-      }
-      _uploadData(files, dataBlocks) {
-        let xhr = new XMLHttpRequest();
-        for (let file18 of files)
-          file18.xhr = xhr;
-        if (files[0].upload.chunked)
-          files[0].upload.chunks[dataBlocks[0].chunkIndex].xhr = xhr;
-        let method = this.resolveOption(this.options.method, files, dataBlocks);
-        let url = this.resolveOption(this.options.url, files, dataBlocks);
-        xhr.open(method, url, true);
-        let timeout = this.resolveOption(this.options.timeout, files);
-        if (timeout)
-          xhr.timeout = this.resolveOption(this.options.timeout, files);
-        xhr.withCredentials = !!this.options.withCredentials;
-        xhr.onload = (e3) => {
-          this._finishedUploading(files, xhr, e3);
-        };
-        xhr.ontimeout = () => {
-          this._handleUploadError(files, xhr, `Request timedout after ${this.options.timeout / 1e3} seconds`);
-        };
-        xhr.onerror = () => {
-          this._handleUploadError(files, xhr);
-        };
-        let progressObj = xhr.upload != null ? xhr.upload : xhr;
-        progressObj.onprogress = (e3) => this._updateFilesUploadProgress(files, xhr, e3);
-        let headers = this.options.defaultHeaders ? {
-          Accept: "application/json",
-          "Cache-Control": "no-cache",
-          "X-Requested-With": "XMLHttpRequest"
-        } : {};
-        if (this.options.binaryBody)
-          headers["Content-Type"] = files[0].type;
-        if (this.options.headers)
-          objectExtend(headers, this.options.headers);
-        for (let headerName in headers) {
-          let headerValue = headers[headerName];
-          if (headerValue)
-            xhr.setRequestHeader(headerName, headerValue);
-        }
-        if (this.options.binaryBody) {
-          for (let file18 of files)
-            this.emit("sending", file18, xhr);
-          if (this.options.uploadMultiple)
-            this.emit("sendingmultiple", files, xhr);
-          this.submitRequest(xhr, null, files);
-        } else {
-          let formData = new FormData();
-          if (this.options.params) {
-            let additionalParams = this.options.params;
-            if (typeof additionalParams === "function")
-              additionalParams = additionalParams.call(this, files, xhr, files[0].upload.chunked ? this._getChunk(files[0], xhr) : null);
-            for (let key2 in additionalParams) {
-              let value = additionalParams[key2];
-              if (Array.isArray(value))
-                for (let i = 0; i < value.length; i++)
-                  formData.append(key2, value[i]);
-              else
-                formData.append(key2, value);
-            }
-          }
-          for (let file18 of files)
-            this.emit("sending", file18, xhr, formData);
-          if (this.options.uploadMultiple)
-            this.emit("sendingmultiple", files, xhr, formData);
-          this._addFormElementData(formData);
-          for (let i = 0; i < dataBlocks.length; i++) {
-            let dataBlock = dataBlocks[i];
-            formData.append(dataBlock.name, dataBlock.data, dataBlock.filename);
-          }
-          this.submitRequest(xhr, formData, files);
-        }
-      }
-      _transformFiles(files, done) {
-        let transformedFiles = [];
-        let doneCounter = 0;
-        for (let i = 0; i < files.length; i++)
-          this.options.transformFile.call(this, files[i], (transformedFile) => {
-            transformedFiles[i] = transformedFile;
-            if (++doneCounter === files.length)
-              done(transformedFiles);
-          });
-      }
-      _addFormElementData(formData) {
-        if (this.element.tagName === "FORM")
-          for (let input of this.element.querySelectorAll("input, textarea, select, button")) {
-            let inputName = input.getAttribute("name");
-            let inputType = input.getAttribute("type");
-            if (inputType)
-              inputType = inputType.toLowerCase();
-            if (typeof inputName === "undefined" || inputName === null)
-              continue;
-            if (input.tagName === "SELECT" && input.hasAttribute("multiple")) {
-              for (let option of input.options)
-                if (option.selected)
-                  formData.append(inputName, option.value);
-            } else if (!inputType || inputType !== "checkbox" && inputType !== "radio" || input.checked)
-              formData.append(inputName, input.value);
-          }
-      }
-      _updateFilesUploadProgress(files, xhr, e3) {
-        if (!files[0].upload.chunked)
-          for (let file18 of files) {
-            if (file18.upload.total && file18.upload.bytesSent && file18.upload.bytesSent == file18.upload.total)
-              continue;
-            if (e3) {
-              file18.upload.progress = 100 * e3.loaded / e3.total;
-              file18.upload.total = e3.total;
-              file18.upload.bytesSent = e3.loaded;
-            } else {
-              file18.upload.progress = 100;
-              file18.upload.bytesSent = file18.upload.total;
-            }
-            this.emit("uploadprogress", file18, file18.upload.progress, file18.upload.bytesSent);
-          }
-        else {
-          let file18 = files[0];
-          let chunk = this._getChunk(file18, xhr);
-          if (e3) {
-            chunk.progress = 100 * e3.loaded / e3.total;
-            chunk.total = e3.total;
-            chunk.bytesSent = e3.loaded;
-          } else {
-            chunk.progress = 100;
-            chunk.bytesSent = chunk.total;
-          }
-          file18.upload.progress = 0;
-          file18.upload.total = 0;
-          file18.upload.bytesSent = 0;
-          for (let i = 0; i < file18.upload.totalChunkCount; i++)
-            if (file18.upload.chunks[i] && typeof file18.upload.chunks[i].progress !== "undefined") {
-              file18.upload.progress += file18.upload.chunks[i].progress;
-              file18.upload.total += file18.upload.chunks[i].total;
-              file18.upload.bytesSent += file18.upload.chunks[i].bytesSent;
-            }
-          file18.upload.progress = file18.upload.progress / file18.upload.totalChunkCount;
-          this.emit("uploadprogress", file18, file18.upload.progress, file18.upload.bytesSent);
-        }
-      }
-      _finishedUploading(files, xhr, e3) {
-        let response;
-        if (files[0].status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED)
-          return;
-        if (xhr.readyState !== 4)
-          return;
-        if (xhr.responseType !== "arraybuffer" && xhr.responseType !== "blob") {
-          response = xhr.responseText;
-          if (xhr.getResponseHeader("content-type") && ~xhr.getResponseHeader("content-type").indexOf("application/json"))
-            try {
-              response = JSON.parse(response);
-            } catch (error2) {
-              e3 = error2;
-              response = "Invalid JSON response from server.";
-            }
-        }
-        this._updateFilesUploadProgress(files, xhr);
-        if (!(200 <= xhr.status && xhr.status < 300))
-          this._handleUploadError(files, xhr, response);
-        else if (files[0].upload.chunked)
-          files[0].upload.finishedChunkUpload(this._getChunk(files[0], xhr), response);
-        else
-          this._finished(files, response, e3);
-      }
-      _handleUploadError(files, xhr, response) {
-        if (files[0].status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED)
-          return;
-        if (files[0].upload.chunked && this.options.retryChunks) {
-          let chunk = this._getChunk(files[0], xhr);
-          if (chunk.retries++ < this.options.retryChunksLimit) {
-            this._uploadData(files, [
-              chunk.dataBlock
-            ]);
-            return;
-          } else
-            console.warn("Retried this chunk too often. Giving up.");
-        }
-        this._errorProcessing(files, response || this.options.dictResponseError.replace("{{statusCode}}", xhr.status), xhr);
-      }
-      submitRequest(xhr, formData, files) {
-        if (xhr.readyState != 1) {
-          console.warn("Cannot send this request because the XMLHttpRequest.readyState is not OPENED.");
-          return;
-        }
-        if (this.options.binaryBody) {
-          if (files[0].upload.chunked) {
-            const chunk = this._getChunk(files[0], xhr);
-            xhr.send(chunk.dataBlock.data);
-          } else
-            xhr.send(files[0]);
-        } else
-          xhr.send(formData);
-      }
-      _finished(files, responseText, e3) {
-        for (let file18 of files) {
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS;
-          this.emit("success", file18, responseText, e3);
-          this.emit("complete", file18);
-        }
-        if (this.options.uploadMultiple) {
-          this.emit("successmultiple", files, responseText, e3);
-          this.emit("completemultiple", files);
-        }
-        if (this.options.autoProcessQueue)
-          return this.processQueue();
-      }
-      _errorProcessing(files, message, xhr) {
-        for (let file18 of files) {
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ERROR;
-          this.emit("error", file18, message, xhr);
-          this.emit("complete", file18);
-        }
-        if (this.options.uploadMultiple) {
-          this.emit("errormultiple", files, message, xhr);
-          this.emit("completemultiple", files);
-        }
-        if (this.options.autoProcessQueue)
-          return this.processQueue();
-      }
-      static uuidv4() {
-        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c2) {
-          let r2 = Math.random() * 16 | 0, v2 = c2 === "x" ? r2 : r2 & 3 | 8;
-          return v2.toString(16);
-        });
-      }
-      constructor(el, options) {
-        super();
-        let fallback, left;
-        this.element = el;
-        this.clickableElements = [];
-        this.listeners = [];
-        this.files = [];
-        if (typeof this.element === "string")
-          this.element = document.querySelector(this.element);
-        if (!this.element || this.element.nodeType == null)
-          throw new Error("Invalid dropzone element.");
-        if (this.element.dropzone)
-          throw new Error("Dropzone already attached.");
-        $3ed269f2f0fb224b$export$2e2bcd8739ae039.instances.push(this);
-        this.element.dropzone = this;
-        let elementOptions = (left = $3ed269f2f0fb224b$export$2e2bcd8739ae039.optionsForElement(this.element)) != null ? left : {};
-        this.options = objectExtend(true, {}, $4ca367182776f80b$export$2e2bcd8739ae039, elementOptions, options != null ? options : {});
-        this.options.previewTemplate = this.options.previewTemplate.replace(/\n*/g, "");
-        if (this.options.forceFallback || !$3ed269f2f0fb224b$export$2e2bcd8739ae039.isBrowserSupported())
-          return this.options.fallback.call(this);
-        if (this.options.url == null)
-          this.options.url = this.element.getAttribute("action");
-        if (!this.options.url)
-          throw new Error("No URL provided.");
-        if (this.options.acceptedFiles && this.options.acceptedMimeTypes)
-          throw new Error("You can't provide both 'acceptedFiles' and 'acceptedMimeTypes'. 'acceptedMimeTypes' is deprecated.");
-        if (this.options.uploadMultiple && this.options.chunking)
-          throw new Error("You cannot set both: uploadMultiple and chunking.");
-        if (this.options.binaryBody && this.options.uploadMultiple)
-          throw new Error("You cannot set both: binaryBody and uploadMultiple.");
-        if (this.options.acceptedMimeTypes) {
-          this.options.acceptedFiles = this.options.acceptedMimeTypes;
-          delete this.options.acceptedMimeTypes;
-        }
-        if (this.options.renameFilename != null)
-          this.options.renameFile = (file18) => this.options.renameFilename.call(this, file18.name, file18);
-        if (typeof this.options.method === "string")
-          this.options.method = this.options.method.toUpperCase();
-        if ((fallback = this.getExistingFallback()) && fallback.parentNode)
-          fallback.parentNode.removeChild(fallback);
-        if (this.options.previewsContainer !== false) {
-          if (this.options.previewsContainer)
-            this.previewsContainer = $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElement(this.options.previewsContainer, "previewsContainer");
-          else
-            this.previewsContainer = this.element;
-        }
-        if (this.options.clickable) {
-          if (this.options.clickable === true)
-            this.clickableElements = [
-              this.element
-            ];
-          else
-            this.clickableElements = $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElements(this.options.clickable, "clickable");
-        }
-        this.init();
-      }
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.initClass();
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.options = {};
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.optionsForElement = function(element) {
-      if (element.getAttribute("id"))
-        return $3ed269f2f0fb224b$export$2e2bcd8739ae039.options[$3ed269f2f0fb224b$var$camelize(element.getAttribute("id"))];
-      else
-        return void 0;
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.instances = [];
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.forElement = function(element) {
-      if (typeof element === "string")
-        element = document.querySelector(element);
-      if ((element != null ? element.dropzone : void 0) == null)
-        throw new Error("No Dropzone found for given element. This is probably because you're trying to access it before Dropzone had the time to initialize. Use the `init` option to setup any additional observers on your Dropzone.");
-      return element.dropzone;
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.discover = function() {
-      let dropzones;
-      if (document.querySelectorAll)
-        dropzones = document.querySelectorAll(".dropzone");
-      else {
-        dropzones = [];
-        let checkElements = (elements) => (() => {
-          let result = [];
-          for (let el of elements)
-            if (/(^| )dropzone($| )/.test(el.className))
-              result.push(dropzones.push(el));
-            else
-              result.push(void 0);
-          return result;
-        })();
-        checkElements(document.getElementsByTagName("div"));
-        checkElements(document.getElementsByTagName("form"));
-      }
-      return (() => {
-        let result = [];
-        for (let dropzone of dropzones)
-          if ($3ed269f2f0fb224b$export$2e2bcd8739ae039.optionsForElement(dropzone) !== false)
-            result.push(new $3ed269f2f0fb224b$export$2e2bcd8739ae039(dropzone));
-          else
-            result.push(void 0);
-        return result;
-      })();
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.blockedBrowsers = [
-      /opera.*(Macintosh|Windows Phone).*version\/12/i
-    ];
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.isBrowserSupported = function() {
-      let capableBrowser = true;
-      if (window.File && window.FileReader && window.FileList && window.Blob && window.FormData && document.querySelector) {
-        if (!("classList" in document.createElement("a")))
-          capableBrowser = false;
-        else {
-          if ($3ed269f2f0fb224b$export$2e2bcd8739ae039.blacklistedBrowsers !== void 0)
-            $3ed269f2f0fb224b$export$2e2bcd8739ae039.blockedBrowsers = $3ed269f2f0fb224b$export$2e2bcd8739ae039.blacklistedBrowsers;
-          for (let regex of $3ed269f2f0fb224b$export$2e2bcd8739ae039.blockedBrowsers)
-            if (regex.test(navigator.userAgent)) {
-              capableBrowser = false;
-              continue;
-            }
-        }
-      } else
-        capableBrowser = false;
-      return capableBrowser;
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.dataURItoBlob = function(dataURI) {
-      let byteString = atob(dataURI.split(",")[1]);
-      let mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
-      let ab = new ArrayBuffer(byteString.length);
-      let ia = new Uint8Array(ab);
-      for (let i = 0, end = byteString.length, asc = 0 <= end; asc ? i <= end : i >= end; asc ? i++ : i--)
-        ia[i] = byteString.charCodeAt(i);
-      return new Blob([
-        ab
-      ], {
-        type: mimeString
-      });
-    };
-    $3ed269f2f0fb224b$var$without = (list, rejectedItem) => list.filter(
-      (item) => item !== rejectedItem
-    ).map(
-      (item) => item
-    );
-    $3ed269f2f0fb224b$var$camelize = (str) => str.replace(
-      /[\-_](\w)/g,
-      (match) => match.charAt(1).toUpperCase()
-    );
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement = function(string) {
-      let div = document.createElement("div");
-      div.innerHTML = string;
-      return div.childNodes[0];
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.elementInside = function(element, container) {
-      if (element === container)
-        return true;
-      while (element = element.parentNode) {
-        if (element === container)
-          return true;
-      }
-      return false;
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElement = function(el, name5) {
-      let element;
-      if (typeof el === "string")
-        element = document.querySelector(el);
-      else if (el.nodeType != null)
-        element = el;
-      if (element == null)
-        throw new Error(`Invalid \`${name5}\` option provided. Please provide a CSS selector or a plain HTML element.`);
-      return element;
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElements = function(els, name5) {
-      let el, elements;
-      if (els instanceof Array) {
-        elements = [];
-        try {
-          for (el of els)
-            elements.push(this.getElement(el, name5));
-        } catch (e3) {
-          elements = null;
-        }
-      } else if (typeof els === "string") {
-        elements = [];
-        for (el of document.querySelectorAll(els))
-          elements.push(el);
-      } else if (els.nodeType != null)
-        elements = [
-          els
-        ];
-      if (elements == null || !elements.length)
-        throw new Error(`Invalid \`${name5}\` option provided. Please provide a CSS selector, a plain HTML element or a list of those.`);
-      return elements;
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.confirm = function(question, accepted, rejected) {
-      if (window.confirm(question))
-        return accepted();
-      else if (rejected != null)
-        return rejected();
-    };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile = function(file18, acceptedFiles) {
-      if (!acceptedFiles)
-        return true;
-      acceptedFiles = acceptedFiles.split(",");
-      let mimeType = file18.type;
-      let baseMimeType = mimeType.replace(/\/.*$/, "");
-      for (let validType of acceptedFiles) {
-        validType = validType.trim();
-        if (validType.charAt(0) === ".") {
-          if (file18.name.toLowerCase().indexOf(validType.toLowerCase(), file18.name.length - validType.length) !== -1)
-            return true;
-        } else if (/\/\*$/.test(validType)) {
-          if (baseMimeType === validType.replace(/\/.*$/, ""))
-            return true;
-        } else {
-          if (mimeType === validType)
-            return true;
-        }
-      }
-      return false;
-    };
-    if (typeof jQuery !== "undefined" && jQuery !== null)
-      jQuery.fn.dropzone = function(options) {
-        return this.each(function() {
-          return new $3ed269f2f0fb224b$export$2e2bcd8739ae039(this, options);
-        });
-      };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED = "added";
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED = "queued";
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.ACCEPTED = $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED;
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING = "uploading";
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.PROCESSING = $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING;
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED = "canceled";
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.ERROR = "error";
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS = "success";
-    $3ed269f2f0fb224b$var$detectVerticalSquash = function(img) {
-      let iw = img.naturalWidth;
-      let ih = img.naturalHeight;
-      let canvas = document.createElement("canvas");
-      canvas.width = 1;
-      canvas.height = ih;
-      let ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-      let { data } = ctx.getImageData(1, 0, 1, ih);
-      let sy = 0;
-      let ey = ih;
-      let py = ih;
-      while (py > sy) {
-        let alpha = data[(py - 1) * 4 + 3];
-        if (alpha === 0)
-          ey = py;
-        else
-          sy = py;
-        py = ey + sy >> 1;
-      }
-      let ratio = py / ih;
-      if (ratio === 0)
-        return 1;
-      else
-        return ratio;
-    };
-    $3ed269f2f0fb224b$var$drawImageIOSFix = function(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
-      let vertSquashRatio = $3ed269f2f0fb224b$var$detectVerticalSquash(img);
-      return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
-    };
-    $3ed269f2f0fb224b$var$ExifRestore = class {
-      static initClass() {
-        this.KEY_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-      }
-      static encode64(input) {
-        let output = "";
-        let chr1 = void 0;
-        let chr2 = void 0;
-        let chr3 = "";
-        let enc1 = void 0;
-        let enc2 = void 0;
-        let enc3 = void 0;
-        let enc4 = "";
-        let i = 0;
-        while (true) {
-          chr1 = input[i++];
-          chr2 = input[i++];
-          chr3 = input[i++];
-          enc1 = chr1 >> 2;
-          enc2 = (chr1 & 3) << 4 | chr2 >> 4;
-          enc3 = (chr2 & 15) << 2 | chr3 >> 6;
-          enc4 = chr3 & 63;
-          if (isNaN(chr2))
-            enc3 = enc4 = 64;
-          else if (isNaN(chr3))
-            enc4 = 64;
-          output = output + this.KEY_STR.charAt(enc1) + this.KEY_STR.charAt(enc2) + this.KEY_STR.charAt(enc3) + this.KEY_STR.charAt(enc4);
-          chr1 = chr2 = chr3 = "";
-          enc1 = enc2 = enc3 = enc4 = "";
-          if (!(i < input.length))
-            break;
-        }
-        return output;
-      }
-      static restore(origFileBase64, resizedFileBase64) {
-        if (!origFileBase64.match("data:image/jpeg;base64,"))
-          return resizedFileBase64;
-        let rawImage = this.decode64(origFileBase64.replace("data:image/jpeg;base64,", ""));
-        let segments = this.slice2Segments(rawImage);
-        let image = this.exifManipulation(resizedFileBase64, segments);
-        return `data:image/jpeg;base64,${this.encode64(image)}`;
-      }
-      static exifManipulation(resizedFileBase64, segments) {
-        let exifArray = this.getExifArray(segments);
-        let newImageArray = this.insertExif(resizedFileBase64, exifArray);
-        let aBuffer = new Uint8Array(newImageArray);
-        return aBuffer;
-      }
-      static getExifArray(segments) {
-        let seg = void 0;
-        let x2 = 0;
-        while (x2 < segments.length) {
-          seg = segments[x2];
-          if (seg[0] === 255 & seg[1] === 225)
-            return seg;
-          x2++;
-        }
-        return [];
-      }
-      static insertExif(resizedFileBase64, exifArray) {
-        let imageData = resizedFileBase64.replace("data:image/jpeg;base64,", "");
-        let buf = this.decode64(imageData);
-        let separatePoint = buf.indexOf(255, 3);
-        let mae = buf.slice(0, separatePoint);
-        let ato = buf.slice(separatePoint);
-        let array2 = mae;
-        array2 = array2.concat(exifArray);
-        array2 = array2.concat(ato);
-        return array2;
-      }
-      static slice2Segments(rawImageArray) {
-        let head = 0;
-        let segments = [];
-        while (true) {
-          var length;
-          if (rawImageArray[head] === 255 & rawImageArray[head + 1] === 218)
-            break;
-          if (rawImageArray[head] === 255 & rawImageArray[head + 1] === 216)
-            head += 2;
-          else {
-            length = rawImageArray[head + 2] * 256 + rawImageArray[head + 3];
-            let endPoint = head + length + 2;
-            let seg = rawImageArray.slice(head, endPoint);
-            segments.push(seg);
-            head = endPoint;
-          }
-          if (head > rawImageArray.length)
-            break;
-        }
-        return segments;
-      }
-      static decode64(input) {
-        let output = "";
-        let chr1 = void 0;
-        let chr2 = void 0;
-        let chr3 = "";
-        let enc1 = void 0;
-        let enc2 = void 0;
-        let enc3 = void 0;
-        let enc4 = "";
-        let i = 0;
-        let buf = [];
-        let base64test = /[^A-Za-z0-9\+\/\=]/g;
-        if (base64test.exec(input))
-          console.warn("There were invalid base64 characters in the input text.\nValid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\nExpect errors in decoding.");
-        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-        while (true) {
-          enc1 = this.KEY_STR.indexOf(input.charAt(i++));
-          enc2 = this.KEY_STR.indexOf(input.charAt(i++));
-          enc3 = this.KEY_STR.indexOf(input.charAt(i++));
-          enc4 = this.KEY_STR.indexOf(input.charAt(i++));
-          chr1 = enc1 << 2 | enc2 >> 4;
-          chr2 = (enc2 & 15) << 4 | enc3 >> 2;
-          chr3 = (enc3 & 3) << 6 | enc4;
-          buf.push(chr1);
-          if (enc3 !== 64)
-            buf.push(chr2);
-          if (enc4 !== 64)
-            buf.push(chr3);
-          chr1 = chr2 = chr3 = "";
-          enc1 = enc2 = enc3 = enc4 = "";
-          if (!(i < input.length))
-            break;
-        }
-        return buf;
-      }
-    };
-    $3ed269f2f0fb224b$var$ExifRestore.initClass();
-  }
-});
-
 // .svelte-kit/output/server/chunks/Dropzone.js
-var css, Dropzone_1;
+var HydrateDropzone, css, Dropzone;
 var init_Dropzone = __esm({
   ".svelte-kit/output/server/chunks/Dropzone.js"() {
     init_chunks();
     init_store();
-    init_dropzone();
+    HydrateDropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { uniqueId = "default" } = $$props;
+      if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
+        $$bindings.uniqueId(uniqueId);
+      return ``;
+    });
     css = {
       code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}",
       map: null
     };
-    Dropzone_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let boxShadowColor;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let { uniqueId = "default" } = $$props;
       let { text: text2 = "Drop it like it's \u{1F525}" } = $$props;
       let { textSizeTW = "text-3xl" } = $$props;
       let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
       let { brightnessTW = "brightness-100" } = $$props;
-      if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
-        $$bindings.uniqueId(uniqueId);
       if ($$props.text === void 0 && $$bindings.text && text2 !== void 0)
         $$bindings.text(text2);
       if ($$props.textSizeTW === void 0 && $$bindings.textSizeTW && textSizeTW !== void 0)
@@ -2552,7 +755,9 @@ var init_Dropzone = __esm({
       $$result.css.add(css);
       boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
       $$unsubscribe_isDarkMode();
-      return `
+      return `${validate_component(HydrateDropzone, "HydrateDropzone").$$render($$result, {}, {}, {})}
+
+
 <form method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone grid place-items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}">
   <div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message><span>${escape(text2)}</span></div></form>
 
@@ -4195,7 +2400,7 @@ var init_index_esm20174 = __esm({
 
 // node_modules/firebase/app/dist/index.esm.js
 var name2, version2;
-var init_index_esm2 = __esm({
+var init_index_esm = __esm({
   "node_modules/firebase/app/dist/index.esm.js"() {
     init_index_esm20174();
     init_index_esm20174();
@@ -8474,7 +6679,7 @@ var init_esm2017 = __esm({
 });
 
 // node_modules/firebase/auth/dist/index.esm.js
-var init_index_esm3 = __esm({
+var init_index_esm2 = __esm({
   "node_modules/firebase/auth/dist/index.esm.js"() {
     init_esm2017();
   }
@@ -8484,8 +6689,8 @@ var init_index_esm3 = __esm({
 var PUBLIC_FIREBASE_apiKey, PUBLIC_FIREBASE_authDomain, PUBLIC_FIREBASE_projectId, PUBLIC_FIREBASE_storageBucket, PUBLIC_FIREBASE_messagingSenderId, PUBLIC_FIREBASE_appId, firebaseConfig, app;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
+    init_index_esm();
     init_index_esm2();
-    init_index_esm3();
     PUBLIC_FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
     PUBLIC_FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
     PUBLIC_FIREBASE_projectId = "thinksolve-app";
@@ -12242,7 +10447,7 @@ __export(index_esm_exports, {
   where: () => dr,
   writeBatch: () => Gr
 });
-var init_index_esm4 = __esm({
+var init_index_esm3 = __esm({
   "node_modules/firebase/firestore/lite/dist/index.esm.js"() {
     init_index_browser_esm2017();
   }
@@ -12367,7 +10572,7 @@ var init_layout_svelte = __esm({
     init_Dropzone();
     init_store();
     init_firebase();
-    init_index_esm3();
+    init_index_esm2();
     init_index2();
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { showModal = false } = $$props;
@@ -12471,7 +10676,7 @@ var init_layout_svelte = __esm({
         if (redirectUrlFromLS) {
           redirectLogic(redirectUrlFromLS);
         } else {
-          const { getFirestore, collection, getDocs } = await Promise.resolve().then(() => (init_index_esm4(), index_esm_exports));
+          const { getFirestore, collection, getDocs } = await Promise.resolve().then(() => (init_index_esm3(), index_esm_exports));
           const db = getFirestore(app);
           const querySnapshot = await getDocs(collection(db, "email"));
           const querySnapshotSize = querySnapshot.size;
@@ -12585,12 +10790,12 @@ var init_layout_svelte = __esm({
       }
     };
     Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $page, $$unsubscribe_page;
       let $$unsubscribe_navHomeworkClicked;
       let $$unsubscribe_navLoginClicked;
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      let $page, $$unsubscribe_page;
       $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
       $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
       let { href, content, bool, btnColor, btnColorHover, routes: routes2 } = $$props;
       if ($$props.href === void 0 && $$bindings.href && href !== void 0)
         $$bindings.href(href);
@@ -12609,16 +10814,13 @@ var init_layout_svelte = __esm({
           routes2[key2].isCurrent = routes2[key2].href === $page.url.pathname;
         }
       }
-      $$unsubscribe_page();
       $$unsubscribe_navHomeworkClicked();
       $$unsubscribe_navLoginClicked();
+      $$unsubscribe_page();
       return `
-  
 
-  
-  
-  
-  <a data-sveltekit-prefetch class="${"px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true)}"${add_attribute("href", href, 0)}>${escape(content)}</a>`;
+
+<a data-sveltekit-prefetch class="${"px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true)}"${add_attribute("href", href, 0)}>${escape(content)}</a>`;
     });
     Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let bgGradientColor;
@@ -12663,7 +10865,7 @@ var init_layout_svelte = __esm({
   <nav class="${"md:ml-24 md:p-1 p-3 " + escape(bgGradientColor, true) + " rounded-md md:rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
         ${`
           
-          <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " active:bg-indigo-400 active:text-white duration-200 border-b-1 rounded px-3 py-1"}">App
+          <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded px-3 py-1"}">App
           </li>
           `}
 
@@ -12809,7 +11011,7 @@ var init_layout_svelte = __esm({
           },
           {
             default: () => {
-              return `${$navHomeworkClicked ? `<div>${validate_component(Dropzone_1, "Dropzone").$$render(
+              return `${$navHomeworkClicked ? `<div>${validate_component(Dropzone, "Dropzone").$$render(
                 $$result,
                 {
                   uniqueId: "broccolii",
@@ -12864,9 +11066,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-21aa489a.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-21aa489a.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-b344988b.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-b3f032ee.js", "_app/immutable/chunks/singletons-5fd8dedb.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
-    stylesheets = ["_app/immutable/assets/_layout-46a1521a.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-fc411731.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-fc411731.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-12537733.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-79f31873.js", "_app/immutable/chunks/singletons-7286828f.js", "_app/immutable/chunks/firebase-ac905731.js"];
+    stylesheets = ["_app/immutable/assets/_layout-a6657307.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
 
@@ -12973,13 +11175,13 @@ var init_plansCardArray = __esm({
 });
 
 // .svelte-kit/output/server/chunks/PlansComponent.js
-var PlansCardObserver, PlansCard, PlansComponent;
+var HydratePlansCard, PlansCard, PlansComponent;
 var init_PlansComponent = __esm({
   ".svelte-kit/output/server/chunks/PlansComponent.js"() {
     init_chunks();
     init_store();
     init_plansCardArray();
-    PlansCardObserver = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    HydratePlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
 
 
@@ -13041,7 +11243,7 @@ var init_PlansComponent = __esm({
         $$bindings.plansCards(plansCards);
       if ($$props.hasTransition === void 0 && $$bindings.hasTransition && hasTransition !== void 0)
         $$bindings.hasTransition(hasTransition);
-      return `${ready ? `${validate_component(PlansCardObserver, "PlansCardObserver").$$render($$result, {}, {}, {})}` : ``}
+      return `${ready ? `${validate_component(HydratePlansCard, "HydratePlansCard").$$render($$result, {}, {}, {})}` : ``}
 
 
 
@@ -13243,7 +11445,7 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     
     <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></p>
 
-      ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
+      ${validate_component(Dropzone, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
 
     
     <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></p>
@@ -13291,9 +11493,9 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-2fee6586.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-2fee6586.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-f521009f.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-b344988b.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/navigation-b3f032ee.js", "_app/immutable/chunks/singletons-5fd8dedb.js"];
-    stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file3 = "_app/immutable/components/pages/_page.svelte-f7bf98ac.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-f7bf98ac.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-886d4051.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-12537733.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-79f31873.js", "_app/immutable/chunks/singletons-7286828f.js"];
+    stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
 
@@ -14708,8 +12910,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-0a4354b8.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-0a4354b8.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-b3f032ee.js", "_app/immutable/chunks/singletons-5fd8dedb.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-b9974f46.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-b9974f46.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-79f31873.js", "_app/immutable/chunks/singletons-7286828f.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -14860,7 +13062,7 @@ var init_page_svelte5 = __esm({
     init_chunks();
     init_Dropzone();
     Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(Dropzone_1, "Dropzone").$$render($$result, {}, {}, {})}`;
+      return `${validate_component(Dropzone, "Dropzone").$$render($$result, {}, {}, {})}`;
     });
   }
 });
@@ -14879,9 +13081,9 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-af370c2d.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-af370c2d.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Dropzone-b344988b.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js"];
-    stylesheets7 = ["_app/immutable/assets/Dropzone-c21dfa0a.css"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-b04d8307.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-b04d8307.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Dropzone-12537733.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    stylesheets7 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
 
@@ -29032,8 +27234,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-db7b758c.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-db7b758c.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-f521009f.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-52656b32.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-52656b32.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-886d4051.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets13 = [];
   }
 });
@@ -29214,8 +27416,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-0b748667.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-0b748667.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-b3f032ee.js", "_app/immutable/chunks/singletons-5fd8dedb.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-f88a526a.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-f88a526a.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-79f31873.js", "_app/immutable/chunks/singletons-7286828f.js"];
     stylesheets16 = [];
   }
 });
@@ -29363,7 +27565,7 @@ var init_index_esm20175 = __esm({
 });
 
 // node_modules/firebase/functions/dist/index.esm.js
-var init_index_esm5 = __esm({
+var init_index_esm4 = __esm({
   "node_modules/firebase/functions/dist/index.esm.js"() {
     init_index_esm20175();
   }
@@ -29379,7 +27581,7 @@ var init_page_svelte11 = __esm({
   ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
     init_chunks();
     init_firebase();
-    init_index_esm5();
+    init_index_esm4();
     css6 = {
       code: '.loading.svelte-tci3t6:after{content:" . . .";animation:svelte-tci3t6-dots 1s steps(5, end) infinite}@keyframes svelte-tci3t6-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
       map: null
@@ -29415,8 +27617,8 @@ var init__17 = __esm({
   ".svelte-kit/output/server/nodes/16.js"() {
     index17 = 16;
     component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-199a99ba.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-199a99ba.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/public-fe26cbe2.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/firebase-ac77fa18.js"];
+    file17 = "_app/immutable/components/pages/stripe/_page.svelte-d3f72ffa.js";
+    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-d3f72ffa.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/firebase-ac905731.js"];
     stylesheets17 = ["_app/immutable/assets/_page-5c304dd7.css"];
   }
 });
@@ -32045,7 +30247,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "starOLD.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-c8f57a91.js", "imports": ["_app/immutable/start-c8f57a91.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-5fd8dedb.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-7336a402.js", "imports": ["_app/immutable/start-7336a402.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-7286828f.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

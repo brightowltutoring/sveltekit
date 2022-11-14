@@ -85,7 +85,7 @@
               $navLoginClicked = false;
               $navHomeworkClicked = false;
             }}
-            class=" mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} active:bg-indigo-400 active:text-white duration-200
+            class=" mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
                border-b-1 rounded px-3 py-1 "
           >
             App

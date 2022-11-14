@@ -1,5 +1,5 @@
 <script>
-  import PlansCardObserver from "$lib/Plans/PlansCardObserver.svelte";
+  import HydratePlansCard from "$lib/Plans/HydratePlansCard.svelte";
   import PlansCard from "$lib/Plans/PlansCard.svelte";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -29,11 +29,11 @@
   let ready = !hasTransition;
   onMount(() => (ready = true));
   // the 'ready' variable logic allows the in:scale div to animate (svelte transition) when going directly to this plans route ..otherwise only works when navigating from another route
-  // NOTE: the intersection observer component 'PlansCardObserver' also has to be "ready-ed" in, otherwise the button doesn't become 'hydrated' as intended
+  // NOTE: the intersection observer component 'HydratePlansCard' also has to be "ready-ed" in, otherwise the button doesn't become 'hydrated' as intended
 </script>
 
 {#if ready}
-  <PlansCardObserver />
+  <HydratePlansCard />
 {/if}
 
 <!-- OLD CODE: 

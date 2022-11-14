@@ -1,7 +1,11 @@
 <script>
-  import DropzoneHydrator from "$lib/Dropzone/DropzoneHydrator.svelte";
+  import HydrateDropzone from "$lib/Dropzone/HydrateDropzone.svelte";
+  // import { dropzoneHydrationOnMount } from "$lib/Dropzone/_HydrateDropzone.js";
+  // import { onMount } from "svelte";
+  // onMount(() => {
+  //   dropzoneHydrationOnMount();
+  // });
   import { isDarkMode } from "$lib/store.js";
-  import "$lib/Dropzone/dropzone.css";
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
@@ -10,7 +14,7 @@
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 </script>
 
-<DropzoneHydrator />
+<HydrateDropzone />
 
 <!-- flex justify-center items-center -->
 <form

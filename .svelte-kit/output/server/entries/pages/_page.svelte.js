@@ -1,7 +1,7 @@
 import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, k as null_to_empty } from "../../chunks/index.js";
 import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
-import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
+import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css$1 = {
@@ -155,7 +155,7 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     
     <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></p>
 
-      ${validate_component(Dropzone_1, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
+      ${validate_component(Dropzone, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
 
     
     <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></p>

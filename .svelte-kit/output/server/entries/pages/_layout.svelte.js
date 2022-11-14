@@ -1,5 +1,5 @@
 import { c as create_ssr_component, e as escape, a as subscribe, v as validate_component, d as add_attribute, f as set_store_value, g as getContext, h as now, l as loop, j as each } from "../../chunks/index.js";
-import { D as Dropzone_1 } from "../../chunks/Dropzone.js";
+import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode, n as navLoginClicked, a as isLoggedIn, e as elementColor, b as navHomeworkClicked, r as routes, s as scrollY, c as instDeltaY, l as lessThan768 } from "../../chunks/store.js";
 import { a as app$1 } from "../../chunks/firebase.js";
 import "firebase/auth";
@@ -232,12 +232,12 @@ function removed_session() {
   );
 }
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $page, $$unsubscribe_page;
   let $$unsubscribe_navHomeworkClicked;
   let $$unsubscribe_navLoginClicked;
-  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  let $page, $$unsubscribe_page;
   $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
   $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => value);
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
   let { href, content, bool, btnColor, btnColorHover, routes: routes2 } = $$props;
   if ($$props.href === void 0 && $$bindings.href && href !== void 0)
     $$bindings.href(href);
@@ -256,16 +256,13 @@ const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       routes2[key].isCurrent = routes2[key].href === $page.url.pathname;
     }
   }
-  $$unsubscribe_page();
   $$unsubscribe_navHomeworkClicked();
   $$unsubscribe_navLoginClicked();
+  $$unsubscribe_page();
   return `
-  
 
-  
-  
-  
-  <a data-sveltekit-prefetch class="${"px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true)}"${add_attribute("href", href, 0)}>${escape(content)}</a>`;
+
+<a data-sveltekit-prefetch class="${"px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl " + escape(`${btnColorHover}`, true) + " hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape(bool && `${btnColor} border-b-1 rounded px-3 py-1`, true)}"${add_attribute("href", href, 0)}>${escape(content)}</a>`;
 });
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
@@ -407,7 +404,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   <nav class="${"md:ml-24 md:p-1 p-3 " + escape(bgGradientColor, true) + " rounded-md md:rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
         ${`
           
-          <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " active:bg-indigo-400 active:text-white duration-200 border-b-1 rounded px-3 py-1"}">App
+          <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded px-3 py-1"}">App
           </li>
           `}
 
@@ -553,7 +550,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       },
       {
         default: () => {
-          return `${$navHomeworkClicked ? `<div>${validate_component(Dropzone_1, "Dropzone").$$render(
+          return `${$navHomeworkClicked ? `<div>${validate_component(Dropzone, "Dropzone").$$render(
             $$result,
             {
               uniqueId: "broccolii",

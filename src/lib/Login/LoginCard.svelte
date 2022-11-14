@@ -62,10 +62,14 @@
         .catch((error) => console.log("signInWithEmailLink:", error));
     }
 
+    // window.localStorage.removeItem("previouslySignedIn");
+    // let previouslySignedIn = JSON.parse(
+    //   window.localStorage.getItem("previouslySignedIn")
+    // );
+    // if (previouslySignedIn === true) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // let providerId = user.providerData[0].providerId;
-        // console.log("providerId", providerId);
+        // window.localStorage.setItem("previouslySignedIn", true);
         $isLoggedIn = true;
         loggedInEmail = user.email;
 
@@ -83,6 +87,7 @@
         console.log(`User is NOT signed in`);
       }
     });
+    // }
   });
 
   //  Hoisted Functions
