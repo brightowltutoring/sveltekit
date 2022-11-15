@@ -1,23 +1,23 @@
-import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, j as each, k as null_to_empty } from "../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, k as null_to_empty } from "../../chunks/index.js";
 import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
-const HydrateReviewStars = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return ``;
-});
+import { I as IntersectionObserver_1 } from "../../chunks/IntersectionObserver.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
   map: null
 };
-let whenImageNotLoaded = "opacity-0 transition-opacity duration-200 ease-in";
 const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  let { whenImageNotLoaded: whenImageNotLoaded2 } = $$props;
   let { title = "Great physics tutor!!" } = $$props;
   let { name = "Thomas Finn" } = $$props;
   let { date = "2022-06-08" } = $$props;
+  if ($$props.whenImageNotLoaded === void 0 && $$bindings.whenImageNotLoaded && whenImageNotLoaded2 !== void 0)
+    $$bindings.whenImageNotLoaded(whenImageNotLoaded2);
   if ($$props.title === void 0 && $$bindings.title && title !== void 0)
     $$bindings.title(title);
   if ($$props.name === void 0 && $$bindings.name && name !== void 0)
@@ -26,11 +26,9 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
     $$bindings.date(date);
   $$result.css.add(css$1);
   $$unsubscribe_isDarkMode();
-  return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})} 
-
-<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
+  return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
-    return `<img class="${"stars " + escape(whenImageNotLoaded, true) + " hover:scale-150 duration-300"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+    return `<img class="${"stars " + escape(whenImageNotLoaded2, true) + " hover:scale-150 duration-300"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
   })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
@@ -128,12 +126,35 @@ const reviews = [
     body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}"
   }
 ];
-const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+function hydrateReviewStars(star) {
+  console.log("\u{1F4AB}");
+  star.src = "/star.webp";
+  star.classList.remove("opacity-0");
+}
+const HydrateReviewStars = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
+
+
+${validate_component(IntersectionObserver_1, "IntersectionObserver").$$render(
+    $$result,
+    {
+      querySelectees: ".stars",
+      once: true,
+      action: (star) => hydrateReviewStars(star),
+      margin: "300px"
+    },
+    {},
+    {}
+  )}`;
+});
+let whenImageNotLoaded = "opacity-0 transition-opacity duration-200 ease-in";
+const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})}
+
 
 <div class="${"scale-90 "}"><div class="${"grid grid-cols-dynamic gap-x-10 gap-y-[80vw] sm:gap-y-[55vw] md:gap-y-[65vw] lg:gap-y-[45vw] -translate-y-60 sm:translate-y-0"}">
     ${each(reviews, ({ name, title, date, body }) => {
-    return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
+    return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date, whenImageNotLoaded }, {}, {
       default: () => {
         return `${escape(body)}
       `;

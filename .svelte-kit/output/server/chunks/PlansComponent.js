@@ -1,12 +1,42 @@
-import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, v as validate_component } from "./index.js";
+import { c as create_ssr_component, v as validate_component, a as subscribe, e as escape, d as add_attribute, j as each } from "./index.js";
+import { I as IntersectionObserver_1 } from "./IntersectionObserver.js";
 import { i as isDarkMode, e as elementColor } from "./store.js";
 import { p as plansCardArray } from "./plansCardArray.js";
+const browser = false;
+async function calendlyJSandCSStoHead() {
+  console.log("\u{1F441}\u{1FAE6}\u{1F441}");
+  if (!document.getElementById("calendlyJS")) {
+    const calendlyJS = document.createElement("script");
+    calendlyJS.id = "calendlyJS";
+    calendlyJS.src = "https://assets.calendly.com/assets/external/widget.js";
+    calendlyJS.type = "text/javascript";
+    document.head.appendChild(calendlyJS);
+  }
+  if (!document.getElementById("calendlyCSS")) {
+    const calendlyCSS = document.createElement("link");
+    calendlyCSS.id = "calendlyCSS";
+    calendlyCSS.href = "https://assets.calendly.com/assets/external/widget.css";
+    calendlyCSS.rel = "stylesheet";
+    document.head.appendChild(calendlyCSS);
+  }
+}
 const HydratePlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let conditionsForObservation = browser;
   return `
 
 
-
-`;
+${validate_component(IntersectionObserver_1, "IntersectionObserver").$$render(
+    $$result,
+    {
+      condition: conditionsForObservation,
+      querySelectees: "plans-card",
+      once: true,
+      action: calendlyJSandCSStoHead,
+      margin: "200px"
+    },
+    {},
+    {}
+  )}`;
 });
 const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;

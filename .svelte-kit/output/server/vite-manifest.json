@@ -1,0 +1,270 @@
+{
+  ".svelte-kit/build/index.js": {
+    "file": "index.js",
+    "src": ".svelte-kit/build/index.js",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_index2.js"
+    ],
+    "dynamicImports": [
+      "src/hooks.server.js"
+    ]
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_Dropzone.js",
+      "_store.js",
+      "_firebase.js",
+      "_index2.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout-f8c39b57.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
+      "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
+      "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
+      "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
+      "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
+      "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff"
+    ]
+  },
+  "src/routes/+error.svelte": {
+    "file": "entries/pages/_error.svelte.js",
+    "src": "src/routes/+error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_PlansComponent.js",
+      "_plansCardArray.js",
+      "_Dropzone.js",
+      "_store.js",
+      "_IntersectionObserver.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page-a19c453c.css"
+    ]
+  },
+  "src/routes/calcom/+page.svelte": {
+    "file": "entries/pages/calcom/_page.svelte.js",
+    "src": "src/routes/calcom/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/classroom/+page.svelte": {
+    "file": "entries/pages/classroom/_page.svelte.js",
+    "src": "src/routes/classroom/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_store.js"
+    ]
+  },
+  "src/routes/classroom/+page.js": {
+    "file": "entries/pages/classroom/_page.js",
+    "src": "src/routes/classroom/+page.js",
+    "isEntry": true
+  },
+  "src/routes/faq/+page.svelte": {
+    "file": "entries/pages/faq/_page.svelte.js",
+    "src": "src/routes/faq/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page-773dce27.css"
+    ]
+  },
+  "src/routes/homework/+page.svelte": {
+    "file": "entries/pages/homework/_page.svelte.js",
+    "src": "src/routes/homework/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_Dropzone.js"
+    ]
+  },
+  "src/routes/katex/+page.svx": {
+    "file": "entries/pages/katex/_page.svx.js",
+    "src": "src/routes/katex/+page.svx",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_store.js"
+    ]
+  },
+  "src/routes/login/+page.svelte": {
+    "file": "entries/pages/login/_page.svelte.js",
+    "src": "src/routes/login/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/math/+page.svx": {
+    "file": "entries/pages/math/_page.svx.js",
+    "src": "src/routes/math/+page.svx",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_store.js",
+      "_Kajax.js"
+    ]
+  },
+  "src/routes/mathjax/+page.svx": {
+    "file": "entries/pages/mathjax/_page.svx.js",
+    "src": "src/routes/mathjax/+page.svx",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_store.js"
+    ]
+  },
+  "src/routes/physics/+page.svelte": {
+    "file": "entries/pages/physics/_page.svelte.js",
+    "src": "src/routes/physics/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_Kajax.js",
+      "_store.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page-aad257a1.css"
+    ]
+  },
+  "src/routes/plans/+page.svelte": {
+    "file": "entries/pages/plans/_page.svelte.js",
+    "src": "src/routes/plans/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_PlansComponent.js"
+    ]
+  },
+  "src/routes/samplequiz/+page.md": {
+    "file": "entries/pages/samplequiz/_page.md.js",
+    "src": "src/routes/samplequiz/+page.md",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/schools/+page.svelte": {
+    "file": "entries/pages/schools/_page.svelte.js",
+    "src": "src/routes/schools/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_store.js",
+      "_plansCardArray.js"
+    ]
+  },
+  "src/routes/screenshareA/+page.svelte": {
+    "file": "entries/pages/screenshareA/_page.svelte.js",
+    "src": "src/routes/screenshareA/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_store.js"
+    ]
+  },
+  "src/routes/stripe/+page.svelte": {
+    "file": "entries/pages/stripe/_page.svelte.js",
+    "src": "src/routes/stripe/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_firebase.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page-a47298de.css"
+    ]
+  },
+  "_index.js": {
+    "file": "chunks/index.js"
+  },
+  "_index2.js": {
+    "file": "chunks/index2.js",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "_Dropzone.js": {
+    "file": "chunks/Dropzone.js",
+    "imports": [
+      "_index.js",
+      "_IntersectionObserver.js",
+      "_store.js"
+    ],
+    "dynamicImports": [
+      "$env/static/public"
+    ],
+    "css": [
+      "_app/immutable/assets/Dropzone-bce196bc.css"
+    ]
+  },
+  "_store.js": {
+    "file": "chunks/store.js",
+    "imports": [
+      "_index2.js",
+      "_index.js"
+    ]
+  },
+  "_firebase.js": {
+    "file": "chunks/firebase.js",
+    "imports": [
+      "$env/static/public"
+    ]
+  },
+  "_IntersectionObserver.js": {
+    "file": "chunks/IntersectionObserver.js",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "$env/static/public": {
+    "file": "chunks/public.js",
+    "src": "$env/static/public",
+    "isDynamicEntry": true
+  },
+  "_PlansComponent.js": {
+    "file": "chunks/PlansComponent.js",
+    "imports": [
+      "_index.js",
+      "_IntersectionObserver.js",
+      "_store.js",
+      "_plansCardArray.js"
+    ]
+  },
+  "_plansCardArray.js": {
+    "file": "chunks/plansCardArray.js"
+  },
+  "_Kajax.js": {
+    "file": "chunks/Kajax.js",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/hooks.server.js": {
+    "file": "chunks/hooks.server.js",
+    "src": "src/hooks.server.js",
+    "isDynamicEntry": true
+  }
+}
