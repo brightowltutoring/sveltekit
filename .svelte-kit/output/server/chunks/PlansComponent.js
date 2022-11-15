@@ -1,8 +1,27 @@
 import { c as create_ssr_component, v as validate_component, a as subscribe, e as escape, d as add_attribute, j as each } from "./index.js";
-import { I as IntersectionObserver_1 } from "./IntersectionObserver.js";
 import { i as isDarkMode, e as elementColor } from "./store.js";
 import { p as plansCardArray } from "./plansCardArray.js";
 const browser = false;
+const IntersectionObserver_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { once = false } = $$props;
+  let { condition = true } = $$props;
+  let { querySelectees = ".stars" } = $$props;
+  let { action = () => {
+    console.log("intersectionAction!");
+  } } = $$props;
+  let { margin = "0px" } = $$props;
+  if ($$props.once === void 0 && $$bindings.once && once !== void 0)
+    $$bindings.once(once);
+  if ($$props.condition === void 0 && $$bindings.condition && condition !== void 0)
+    $$bindings.condition(condition);
+  if ($$props.querySelectees === void 0 && $$bindings.querySelectees && querySelectees !== void 0)
+    $$bindings.querySelectees(querySelectees);
+  if ($$props.action === void 0 && $$bindings.action && action !== void 0)
+    $$bindings.action(action);
+  if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
+    $$bindings.margin(margin);
+  return ``;
+});
 async function calendlyJSandCSStoHead() {
   console.log("\u{1F441}\u{1FAE6}\u{1F441}");
   if (!document.getElementById("calendlyJS")) {
@@ -130,5 +149,6 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
 `;
 });
 export {
+  IntersectionObserver_1 as I,
   PlansComponent as P
 };

@@ -1,5 +1,4 @@
-<!-- <script>
-
+<script>
   import { onMount } from "svelte";
 
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
@@ -49,8 +48,9 @@
     }
     // }
   });
-</script> -->
-<script>
+</script>
+
+<!-- <script>
   import IntersectionObserver from "$lib/IntersectionObserver.svelte";
   export let uniqueId = "default";
   let dropzone;
@@ -79,4 +79,4 @@
   querySelectees={".dropzone"}
   action={hydrateDropzoneDomEls}
   once
-/>
+/> -->

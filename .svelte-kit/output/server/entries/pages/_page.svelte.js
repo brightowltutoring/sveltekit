@@ -1,9 +1,8 @@
 import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, k as null_to_empty } from "../../chunks/index.js";
-import { P as PlansComponent } from "../../chunks/PlansComponent.js";
+import { I as IntersectionObserver_1, P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
-import { I as IntersectionObserver_1 } from "../../chunks/IntersectionObserver.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",

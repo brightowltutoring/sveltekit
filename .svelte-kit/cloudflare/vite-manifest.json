@@ -24,12 +24,12 @@
     "src": "src/fonts/poppins-v20-latin-100.woff"
   },
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-1e09af97.js",
+    "file": "_app/immutable/start-1487aa8b.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
       "_index-abd81730.js",
-      "_singletons-b902437d.js",
+      "_singletons-3f9d7892.js",
       "_preload-helper-b21cceae.js"
     ],
     "dynamicImports": [
@@ -53,18 +53,18 @@
     ]
   },
   "src/routes/+layout.svelte": {
-    "file": "_app/immutable/components/pages/_layout.svelte-d37667b8.js",
+    "file": "_app/immutable/components/pages/_layout.svelte-6ae0e9ac.js",
     "src": "src/routes/+layout.svelte",
     "isEntry": true,
     "imports": [
       "_index-abd81730.js",
       "_index-2bc37e0b.js",
-      "_Dropzone-adf7b626.js",
+      "_Dropzone-75bb5a9d.js",
       "_preload-helper-b21cceae.js",
-      "_navigation-57cd444a.js",
+      "_navigation-254cf653.js",
       "_store-16f0cf2b.js",
       "_firebase-7217deba.js",
-      "_singletons-b902437d.js",
+      "_singletons-3f9d7892.js",
       "_index-f3ce743b.js"
     ],
     "dynamicImports": [
@@ -92,18 +92,17 @@
     ]
   },
   "src/routes/+page.svelte": {
-    "file": "_app/immutable/components/pages/_page.svelte-e95968c1.js",
+    "file": "_app/immutable/components/pages/_page.svelte-679d96f1.js",
     "src": "src/routes/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-abd81730.js",
-      "_PlansComponent-99107499.js",
+      "_PlansComponent-2a8ede6c.js",
       "_plansCardArray-7bd812c4.js",
-      "_Dropzone-adf7b626.js",
+      "_Dropzone-75bb5a9d.js",
       "_store-16f0cf2b.js",
-      "_IntersectionObserver-dfa9b9ef.js",
       "_index-2bc37e0b.js",
-      "_navigation-57cd444a.js"
+      "_navigation-254cf653.js"
     ],
     "css": [
       "_app/immutable/assets/_page-7d3eabbd.css"
@@ -118,12 +117,12 @@
     ]
   },
   "src/routes/classroom/+page.svelte": {
-    "file": "_app/immutable/components/pages/classroom/_page.svelte-f7e1864f.js",
+    "file": "_app/immutable/components/pages/classroom/_page.svelte-b4c61cdc.js",
     "src": "src/routes/classroom/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-abd81730.js",
-      "_navigation-57cd444a.js",
+      "_navigation-254cf653.js",
       "_store-16f0cf2b.js"
     ]
   },
@@ -139,12 +138,12 @@
     ]
   },
   "src/routes/homework/+page.svelte": {
-    "file": "_app/immutable/components/pages/homework/_page.svelte-535abaea.js",
+    "file": "_app/immutable/components/pages/homework/_page.svelte-e52dbfb4.js",
     "src": "src/routes/homework/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-abd81730.js",
-      "_Dropzone-adf7b626.js"
+      "_Dropzone-75bb5a9d.js"
     ]
   },
   "src/routes/katex/+page.svx": {
@@ -200,12 +199,12 @@
     ]
   },
   "src/routes/plans/+page.svelte": {
-    "file": "_app/immutable/components/pages/plans/_page.svelte-3b8aaec0.js",
+    "file": "_app/immutable/components/pages/plans/_page.svelte-6e37952c.js",
     "src": "src/routes/plans/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-abd81730.js",
-      "_PlansComponent-99107499.js"
+      "_PlansComponent-2a8ede6c.js"
     ]
   },
   "src/routes/samplequiz/+page.md": {
@@ -228,13 +227,13 @@
     ]
   },
   "src/routes/screenshareA/+page.svelte": {
-    "file": "_app/immutable/components/pages/screenshareA/_page.svelte-1b52992c.js",
+    "file": "_app/immutable/components/pages/screenshareA/_page.svelte-09761f9d.js",
     "src": "src/routes/screenshareA/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-abd81730.js",
       "_store-16f0cf2b.js",
-      "_navigation-57cd444a.js"
+      "_navigation-254cf653.js"
     ]
   },
   "src/routes/stripe/+page.svelte": {
@@ -259,8 +258,8 @@
       "__page-50113cbf.js"
     ]
   },
-  "_singletons-b902437d.js": {
-    "file": "_app/immutable/chunks/singletons-b902437d.js",
+  "_singletons-3f9d7892.js": {
+    "file": "_app/immutable/chunks/singletons-3f9d7892.js",
     "imports": [
       "_index-f3ce743b.js"
     ]
@@ -283,12 +282,11 @@
       "_index-abd81730.js"
     ]
   },
-  "_Dropzone-adf7b626.js": {
-    "file": "_app/immutable/chunks/Dropzone-adf7b626.js",
+  "_Dropzone-75bb5a9d.js": {
+    "file": "_app/immutable/chunks/Dropzone-75bb5a9d.js",
     "imports": [
       "_index-abd81730.js",
       "_preload-helper-b21cceae.js",
-      "_IntersectionObserver-dfa9b9ef.js",
       "_store-16f0cf2b.js"
     ],
     "dynamicImports": [
@@ -306,10 +304,10 @@
       "_index-abd81730.js"
     ]
   },
-  "_navigation-57cd444a.js": {
-    "file": "_app/immutable/chunks/navigation-57cd444a.js",
+  "_navigation-254cf653.js": {
+    "file": "_app/immutable/chunks/navigation-254cf653.js",
     "imports": [
-      "_singletons-b902437d.js"
+      "_singletons-3f9d7892.js"
     ]
   },
   "_firebase-7217deba.js": {
@@ -318,22 +316,15 @@
       "$env/static/public"
     ]
   },
-  "_IntersectionObserver-dfa9b9ef.js": {
-    "file": "_app/immutable/chunks/IntersectionObserver-dfa9b9ef.js",
-    "imports": [
-      "_index-abd81730.js"
-    ]
-  },
   "$env/static/public": {
     "file": "_app/immutable/chunks/public-e0b14f20.js",
     "src": "$env/static/public",
     "isDynamicEntry": true
   },
-  "_PlansComponent-99107499.js": {
-    "file": "_app/immutable/chunks/PlansComponent-99107499.js",
+  "_PlansComponent-2a8ede6c.js": {
+    "file": "_app/immutable/chunks/PlansComponent-2a8ede6c.js",
     "imports": [
       "_index-abd81730.js",
-      "_IntersectionObserver-dfa9b9ef.js",
       "_store-16f0cf2b.js",
       "_index-2bc37e0b.js",
       "_plansCardArray-7bd812c4.js"
@@ -356,7 +347,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/0.js": {
-    "file": "_app/immutable/chunks/0-4b5f3404.js",
+    "file": "_app/immutable/chunks/0-07408f28.js",
     "src": ".svelte-kit/generated/nodes/0.js",
     "isDynamicEntry": true,
     "imports": [
@@ -372,7 +363,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/2.js": {
-    "file": "_app/immutable/chunks/2-e4ae4e1c.js",
+    "file": "_app/immutable/chunks/2-33d933b7.js",
     "src": ".svelte-kit/generated/nodes/2.js",
     "isDynamicEntry": true,
     "imports": [
@@ -388,7 +379,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/4.js": {
-    "file": "_app/immutable/chunks/4-fa539ea2.js",
+    "file": "_app/immutable/chunks/4-6fce5228.js",
     "src": ".svelte-kit/generated/nodes/4.js",
     "isDynamicEntry": true,
     "imports": [
@@ -405,7 +396,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/6.js": {
-    "file": "_app/immutable/chunks/6-ef107e8c.js",
+    "file": "_app/immutable/chunks/6-aad95700.js",
     "src": ".svelte-kit/generated/nodes/6.js",
     "isDynamicEntry": true,
     "imports": [
@@ -453,7 +444,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/12.js": {
-    "file": "_app/immutable/chunks/12-3f5951b7.js",
+    "file": "_app/immutable/chunks/12-4c269e5b.js",
     "src": ".svelte-kit/generated/nodes/12.js",
     "isDynamicEntry": true,
     "imports": [
@@ -477,7 +468,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/15.js": {
-    "file": "_app/immutable/chunks/15-752b5ee8.js",
+    "file": "_app/immutable/chunks/15-9fc439fb.js",
     "src": ".svelte-kit/generated/nodes/15.js",
     "isDynamicEntry": true,
     "imports": [
@@ -513,21 +504,21 @@
     "src": "node_modules/dropzone/dist/dropzone.mjs",
     "isDynamicEntry": true
   },
-  "src/routes/+page.css": {
-    "file": "_app/immutable/assets/_page-7d3eabbd.css",
-    "src": "src/routes/+page.css"
-  },
   "Dropzone.css": {
     "file": "_app/immutable/assets/Dropzone-ad1f3da6.css",
     "src": "Dropzone.css"
   },
-  "src/routes/physics/+page.css": {
-    "file": "_app/immutable/assets/_page-fcf51fa8.css",
-    "src": "src/routes/physics/+page.css"
+  "src/routes/+page.css": {
+    "file": "_app/immutable/assets/_page-7d3eabbd.css",
+    "src": "src/routes/+page.css"
   },
   "src/routes/faq/+page.css": {
     "file": "_app/immutable/assets/_page-113a1f72.css",
     "src": "src/routes/faq/+page.css"
+  },
+  "src/routes/physics/+page.css": {
+    "file": "_app/immutable/assets/_page-fcf51fa8.css",
+    "src": "src/routes/physics/+page.css"
   },
   "src/routes/stripe/+page.css": {
     "file": "_app/immutable/assets/_page-5c304dd7.css",
