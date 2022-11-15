@@ -1,15 +1,13 @@
 <script>
+    export let whenImageNotLoaded  
+    //fallback css containing 'opacity-0'..which is removed once the element is intersected
+    
     export let title = "Great physics tutor!!"
     export let name = "Thomas Finn"
     export let date = '2022-06-08'
     import { isDarkMode } from "$lib/store.js"; 
-    import HydrateReviewStars from "$lib/Reviews/HydrateReviewStars.svelte"
-    let whenImageNotLoaded = 'opacity-0 transition-opacity duration-200 ease-in'
-
 </script>
 
-<HydrateReviewStars/> 
-<!-- upon intersection with img elements below, this code adds img src and removes the 'opacity-0' tailwiind-css fallback -->
 <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">  
 
   <div class="absolute ">

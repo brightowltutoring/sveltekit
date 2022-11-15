@@ -44,7 +44,6 @@
           </div>
 
           <div
-            class="text-2xl font-Nunito font-thin "
             on:click={() => {
               document
                 // .getElementById("reviews")
@@ -56,8 +55,8 @@
                 .getElementById("reviews")
                 .scrollIntoView({ behavior: "smooth", block: "start" });
             }}
+            class="animate-bounce text-2xl font-Nunito font-thin "
           >
-            <!-- 👉 click for reviews -->
             👇 get started
           </div>
         {/if}

@@ -1,8 +1,6 @@
-<!-- Only downside is hard reload page while scrolled down to reviews section ... results in an empty flash -->
-<script>
+<!-- <script>
   function hydrateReviewStars(star) {
     star.src = "/star.webp";
-    // star.classList.remove("invisible");
     star.classList.remove("opacity-0");
   }
 
@@ -30,4 +28,20 @@
       observer.observe(star);
     }
   });
+</script> -->
+<script>
+  import IntersectionObserver from "$lib/IntersectionObserver.svelte";
+
+  function hydrateReviewStars(star) {
+    console.log("💫");
+    star.src = "/star.webp";
+    star.classList.remove("opacity-0");
+  }
 </script>
+
+<IntersectionObserver
+  querySelectees={".stars"}
+  once
+  action={(star) => hydrateReviewStars(star)}
+  margin={"300px"}
+/>

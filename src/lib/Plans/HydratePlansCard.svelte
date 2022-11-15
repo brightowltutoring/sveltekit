@@ -1,5 +1,4 @@
-<!-- The plans sections depend on external calendly js and css; instead of loading these in the head of the document, I lazy load them into the head of the document when a plans card is observed (cuz performance gain) -->
-<script>
+<!-- <script>
   async function calendlyJSandCSStoHead() {
     if (!document.getElementById("calendlyJS")) {
       const calendlyJS = document.createElement("script");
@@ -53,17 +52,48 @@
     }
   });
 </script>
+ -->
+<script>
+  import IntersectionObserver from "$lib/IntersectionObserver.svelte";
+  import { browser } from "$app/environment";
+  let conditionsForObservation =
+    browser &&
+    document.querySelector("plans-card") &&
+    !document.getElementById("calendlyJS") &&
+    !document.getElementById("calendlyCSS");
 
-<!-- Below is the lazy, not-lazy-loaded way of using calendy's js and css -->
-<!-- <svelte:head>
-  <link
-    href="https://assets.calendly.com/assets/external/widget.css"
-    rel="stylesheet"
-  />
+  // TODO: alternative pass as string and use eval() in IntersectionObserver.svelte
+  // let conditionsForObservation = `
+  // document.querySelector("plans-card") &&
+  // !document.getElementById("calendlyJS") &&
+  //   !document.getElementById("calendlyCSS")
+  //   `;
 
-  <script
-    src="https://assets.calendly.com/assets/external/widget.js"
-    type="text/javascript"
-    async
-  ></script>
-</svelte:head> -->
+  async function calendlyJSandCSStoHead() {
+    console.log("👁🫦👁");
+
+    if (!document.getElementById("calendlyJS")) {
+      const calendlyJS = document.createElement("script");
+      calendlyJS.id = "calendlyJS";
+      calendlyJS.src = "https://assets.calendly.com/assets/external/widget.js";
+      calendlyJS.type = "text/javascript";
+      document.head.appendChild(calendlyJS);
+    }
+    if (!document.getElementById("calendlyCSS")) {
+      const calendlyCSS = document.createElement("link");
+      calendlyCSS.id = "calendlyCSS";
+      calendlyCSS.href =
+        "https://assets.calendly.com/assets/external/widget.css";
+      calendlyCSS.rel = "stylesheet";
+      document.head.appendChild(calendlyCSS);
+    }
+  }
+</script>
+
+<IntersectionObserver
+  condition={conditionsForObservation}
+  querySelectees={"plans-card"}
+  once
+  action={calendlyJSandCSStoHead}
+  margin={"200px"}
+/>

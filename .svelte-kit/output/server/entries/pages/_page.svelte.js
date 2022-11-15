@@ -11,6 +11,7 @@ const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
   map: null
 };
+let whenImageNotLoaded = "opacity-0 transition-opacity duration-200 ease-in";
 const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -25,10 +26,11 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
     $$bindings.date(date);
   $$result.css.add(css$1);
   $$unsubscribe_isDarkMode();
-  return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})}
+  return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})} 
+
 <article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
-    return `<img class="${"stars hover:scale-150 duration-300 "}" loading="${"lazy"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+    return `<img class="${"stars " + escape(whenImageNotLoaded, true) + " hover:scale-150 duration-300"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
   })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}

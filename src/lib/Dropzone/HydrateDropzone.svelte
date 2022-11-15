@@ -1,4 +1,5 @@
-<script>
+<!-- <script>
+
   import { onMount } from "svelte";
 
   export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
@@ -48,4 +49,34 @@
     }
     // }
   });
+</script> -->
+<script>
+  import IntersectionObserver from "$lib/IntersectionObserver.svelte";
+  export let uniqueId = "default";
+  let dropzone;
+
+  async function hydrateDropzoneDomEls() {
+    console.log("drop it like its 🔥");
+
+    const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
+
+    const ACCEPTED_FILES_FRONTEND =
+      ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
+
+    await import("$lib/Dropzone/dropzone.css");
+    const { Dropzone } = await import("dropzone");
+
+    dropzone = new Dropzone("#default", {
+      url: PUBLIC_UPLOAD_ENDPOINT,
+      acceptedFiles: ACCEPTED_FILES_FRONTEND,
+    });
+
+    document.querySelector("#default").id = uniqueId;
+  }
 </script>
+
+<IntersectionObserver
+  querySelectees={".dropzone"}
+  action={hydrateDropzoneDomEls}
+  once
+/>
