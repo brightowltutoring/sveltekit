@@ -56,9 +56,10 @@
 <script>
   import IntersectionObserver from "$lib/IntersectionObserver.svelte";
   import { browser } from "$app/environment";
+  // let conditionsForObservation = browser && true;
   let conditionsForObservation =
     browser &&
-    document.querySelector("plans-card") &&
+    // document.querySelector("plans-card") &&=
     !document.getElementById("calendlyJS") &&
     !document.getElementById("calendlyCSS");
 
