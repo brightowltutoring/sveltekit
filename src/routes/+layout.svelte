@@ -90,9 +90,10 @@
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
   // this exception hides the navbar on '/classroom' on initial page load for mobile sized screens
-  $: if ($lessThan768 && $page.routeId == "/classroom") {
-    jankytown = "-bottom-20";
-  }
+  // ...might remove this later as it's not that useful
+  // $: if ($lessThan768 && $page.routeId == "/classroom") {
+  //   jankytown = "-bottom-20";
+  // }
 </script>
 
 <svelte:head>

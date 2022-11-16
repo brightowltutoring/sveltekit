@@ -4,7 +4,14 @@
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
-  import { onMount } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
+
+  let fire = createEventDispatcher();
+
+  function boop() {
+    // console.log("booped!"); // this works, but want to pass information to parent component instead
+    fire("boop", { message: "b-boop!", data: plansCardArray });
+  }
 
   function scaleYN(node, args) {
     return args.hasTransition ? scale(node, args) : null;
@@ -40,12 +47,10 @@
   <div
   class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7"
 > -->
-<!--  .. I have to add back in grid-cols-1 as the custom 'grid-cols-dynamic' doesnt seem to take care of this case (the cards are not centered and the svelte transition rattles) -->
 <div
+  use:boop
+  id="elem"
   class="grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"
-  on:DOMContentLoaded={() => {
-    console.log("loaded!");
-  }}
 >
   {#each plansCards as item, i}
     {#if ready}
@@ -82,3 +87,19 @@
   } 
 </style> -->
 <!-- The above grid logic now achieved with the custom 'grid-cols-dynamic' as speficifid in tailwind.config.cjs  -->
+
+<!-- TODO: was using this code to try to fire a custom event based on the creation of a dom element ... but this can be done with svelte's use: directive coupled with a function using svelte's createEventDispatcher -->
+<!-- const build = new Event("build");
+
+    let elem = document.getElementById("elem");
+    // Listen for the event.
+    elem.addEventListener(
+      "build",
+      (e) => {
+        console.log("elem fired");
+      },
+      false
+    );
+
+    // Dispatch the event.
+    elem.dispatchEvent(build); -->

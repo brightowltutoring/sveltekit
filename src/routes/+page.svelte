@@ -1,6 +1,7 @@
 <script>
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
-  import { plansCardArray } from "$lib/Plans/plansCardArray.js";
+  let data; // this is data that is sent UP from PlansComponent.svelte ... namely the plansCardArray ... useful
+  // $: console.log("data", data);
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isDarkMode, isRunningStandalone } from "$lib/store.js";
@@ -104,9 +105,13 @@
 
       <!-- <PlansComponent plansCards={plansCardArray.slice(0, 2)} /> -->
       <PlansComponent
-        plansCards={plansCardArray.slice(0, 2)}
         hasTransition={false}
+        on:boop={(e) => {
+          data = e.detail.data.slice(0, 2);
+        }}
+        plansCards={data}
       />
+      <!-- plansCards={plansCardArray.slice(0, 2)} -->
     </div>
 
     <!-- fourth page -->
