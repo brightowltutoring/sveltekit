@@ -51,7 +51,7 @@
     setInnerWidthViaMatchMedia();
   });
 
-  $: console.log("$instDeltaY", $instDeltaY);
+  // $: console.log("$instDeltaY", $instDeltaY);
 
   let jankytown;
 
@@ -65,11 +65,9 @@
 
   $: if (!$lessThan768) {
     // console.log("yeet over");
-    // if ($scrollY == 0) jankytown = "top-0";
+    if ($scrollY < 10) jankytown = "top-0";
 
-    // if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
-    //   jankytown = "top-0 backdrop-blur-3xl ";
-    if ($scrollY >= 0 && $scrollY < verticalThreshold)
+    if ($scrollY > 10 && $scrollY < verticalThreshold)
       jankytown = "top-0 backdrop-blur-3xl duration-1000";
 
     if ($scrollY > verticalThreshold && $instDeltaY > 10) {
@@ -82,16 +80,18 @@
   $: if ($lessThan768) {
     // console.log("yeet under");
 
-    // if ($scrollY ==0) {
-    if ($scrollY < verticalThresholdMobile) {
+    if ($scrollY < 10) jankytown = "bottom-0";
+    if ($scrollY > 10 && $scrollY < verticalThresholdMobile) {
       jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl";
     }
-    // if ($scrollY > 10 && $scrollY < verticalThresholdMobile && $instDeltaY > 0)
-    //   jankytown = "bottom-0 backdrop-blur-3xl ";
     if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
       jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
     if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
+  }
+  // this exception hides the navbar on '/classroom' on initial page load for mobile sized screens
+  $: if ($lessThan768 && $page.routeId == "/classroom") {
+    jankytown = "-bottom-20";
   }
 </script>
 
