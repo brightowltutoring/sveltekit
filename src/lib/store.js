@@ -1,5 +1,6 @@
-import { writable, derived } from "svelte/store";
+import { writable, derived, get } from "svelte/store";
 import { quintOut, elasticOut } from "svelte/easing";
+// import { slide, fade, scale, fly, blur } from 'svelte/transition';
 import { browser } from "$app/environment";
 
 export function isRunningStandalone() {
@@ -7,28 +8,26 @@ export function isRunningStandalone() {
   // sveltekit's 'browser' since window cannot be used with SSR (which is the default for first page load with sveltekit)
 }
 
-const createWritableStore = (key, startValue) => {
-  const { subscribe, set } = writable(startValue);
+// const createWritableStore = (key, startValue) => {
+//   const { subscribe, set } = writable(startValue);
 
-  return {
-    subscribe,
-    set,
-    useLocalStorage: () => {
-      const json = localStorage.getItem(key);
-      if (json) {
-        set(JSON.parse(json));
-      }
+//   return {
+//     subscribe,
+//     set,
+//     useLocalStorage: () => {
+//       const json = localStorage.getItem(key);
+//       if (json) {
+//         set(JSON.parse(json));
+//       }
 
-      subscribe((current) => {
-        localStorage.setItem(key, JSON.stringify(current));
-      });
-    },
-  };
-};
+//       subscribe((current) => {
+//         localStorage.setItem(key, JSON.stringify(current));
+//       });
+//     },
+//   };
+// };
 
-export const count = createWritableStore("count", 0);
-
-// import { slide, fade, scale, fly, blur } from 'svelte/transition';
+// export const count = createWritableStore("count", 0);
 
 // export function moduloScale(node, {easing = elasticOut, duration = 1000}) {
 
@@ -106,6 +105,10 @@ export const scrollY = writable(0);
 // This is equivalent to "setTimeout(()=>{ $startScrollY = $scrollY },200)"
 // if placed inside +layout.svelte .. under an onscroll event attached to the window
 export const startScrollY = derived(scrollY, ($scrollY, set) => {
+  // set both values initially equal
+  set($scrollY);
+
+  // ... then set it as the old scrollY value
   setTimeout(() => {
     set($scrollY);
   }, 50);
@@ -139,26 +142,23 @@ export const lessThan768 = derived(
 );
 
 // the code for 'setInnerWidthViaMatchMedia()' is considerably more than doing '<svelte:window bind:innerWidth={$innerWidth} />' however the latter updates $innerWidth — and all dependent code — continuously on screen resize ...
-export function setInnerWidthViaMatchMedia() {
+export function setInnerWidthViaMatchMedia(pixelWidth = 768) {
   // return browser && window.matchMedia("(max-width: 768px)").matches;
-  const pixelWidth = 768;
-  if (browser) {
-    const mediaQueryList = window.matchMedia(`(max-width: ${pixelWidth}px)`);
 
-    console.log("LANDED");
+  // browser is needed if this function isn't set in the onMount
+  // if (browser) {
+  innerWidth.set(window.innerWidth);
+  console.log(`LANDED at ${get(innerWidth)}`);
+
+  const mediaQueryList = window.matchMedia(`(max-width: ${pixelWidth}px)`);
+  //Note: can use '$innerWidth = window.innerWidth' when inside .svelte file, instead
+  mediaQueryList.addEventListener("change", (event) => {
     innerWidth.set(window.innerWidth);
-    //Note: can use '$innerWidth = window.innerWidth' when inside .svelte file, instead
-
-    mediaQueryList.addEventListener("change", (event) => {
-      if (event.matches) {
-        innerWidth.set(window.innerWidth);
-        console.log(`UNDER ${pixelWidth}px`);
-      } else {
-        innerWidth.set(window.innerWidth);
-        console.log(`OVER ${pixelWidth}px`);
-      }
-    });
-  }
+    event.matches
+      ? console.log(`UNDER ${pixelWidth}px 🙈`)
+      : console.log(`OVER ${pixelWidth}px 😄`);
+  });
+  // }
 }
 
 // these nav items only since theyre modals, rather than actual routes

@@ -11060,9 +11060,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-a160fc44.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-a160fc44.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-75bb5a9d.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-a72fa80d.js", "_app/immutable/chunks/singletons-43033c53.js", "_app/immutable/chunks/firebase-7217deba.js"];
-    stylesheets = ["_app/immutable/assets/_layout-303da50f.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-4dceb5cb.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-4dceb5cb.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-d99f5f61.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-7364be8b.js", "_app/immutable/chunks/singletons-b40bc4a4.js", "_app/immutable/chunks/firebase-7217deba.js"];
+    stylesheets = ["_app/immutable/assets/_layout-ade4ceb0.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
 
@@ -11169,8 +11169,8 @@ var init_plansCardArray = __esm({
 });
 
 // .svelte-kit/output/server/chunks/PlansComponent.js
-async function calendlyJSandCSStoHead() {
-  console.log("\u{1F441}\u{1FAE6}\u{1F441}");
+function calendlyJSandCSStoHead() {
+  console.log("\u{1F4C5}");
   if (!document.getElementById("calendlyJS")) {
     const calendlyJS = document.createElement("script");
     calendlyJS.id = "calendlyJS";
@@ -11364,9 +11364,9 @@ var init_page_svelte = __esm({
         $$bindings.date(date);
       $$result.css.add(css$1);
       $$unsubscribe_isDarkMode();
-      return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
+      return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute"}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
-        return `<img class="${"stars " + escape(whenImageNotLoaded2, true) + " hover:scale-150 duration-300"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+        return `<img class="${"stars " + escape(whenImageNotLoaded2, true) + " hover:scale-125"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
       })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
@@ -11480,7 +11480,7 @@ ${validate_component(IntersectionObserver_1, "IntersectionObserver").$$render(
         {}
       )}`;
     });
-    whenImageNotLoaded = "opacity-0 transition-opacity duration-200 ease-in";
+    whenImageNotLoaded = "opacity-0 transition-opacity duration-500 ease-in";
     Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})}
 
@@ -11562,8 +11562,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-5184265c.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-5184265c.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-2a8ede6c.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-75bb5a9d.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-a72fa80d.js", "_app/immutable/chunks/singletons-43033c53.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-09bf4171.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-09bf4171.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-15f97a67.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-d99f5f61.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-7364be8b.js", "_app/immutable/chunks/singletons-b40bc4a4.js"];
     stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
@@ -12979,8 +12979,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-fb856ef7.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-fb856ef7.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-a72fa80d.js", "_app/immutable/chunks/singletons-43033c53.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-4a32e4b3.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-4a32e4b3.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-7364be8b.js", "_app/immutable/chunks/singletons-b40bc4a4.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -13150,8 +13150,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-e52dbfb4.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-e52dbfb4.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Dropzone-75bb5a9d.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-de049ef4.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-de049ef4.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Dropzone-d99f5f61.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets7 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
@@ -26864,8 +26864,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file8 = "_app/immutable/components/pages/katex/_page.svx-3d9b814f.js";
-    imports8 = ["_app/immutable/components/pages/katex/_page.svx-3d9b814f.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    file8 = "_app/immutable/components/pages/katex/_page.svx-04763d84.js";
+    imports8 = ["_app/immutable/components/pages/katex/_page.svx-04763d84.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets8 = [];
   }
 });
@@ -27068,8 +27068,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file10 = "_app/immutable/components/pages/math/_page.svx-6f2e5412.js";
-    imports10 = ["_app/immutable/components/pages/math/_page.svx-6f2e5412.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Kajax-61ac142f.js"];
+    file10 = "_app/immutable/components/pages/math/_page.svx-34fd4c09.js";
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-34fd4c09.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Kajax-61ac142f.js"];
     stylesheets10 = [];
   }
 });
@@ -27148,8 +27148,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file11 = "_app/immutable/components/pages/mathjax/_page.svx-f19a6fa9.js";
-    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-f19a6fa9.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    file11 = "_app/immutable/components/pages/mathjax/_page.svx-32dd0ef9.js";
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-32dd0ef9.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets11 = [];
   }
 });
@@ -27266,8 +27266,8 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/physics/_page.svelte-0c726147.js";
-    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-0c726147.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Kajax-61ac142f.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    file12 = "_app/immutable/components/pages/physics/_page.svelte-bc969975.js";
+    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-bc969975.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Kajax-61ac142f.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets12 = ["_app/immutable/assets/_page-fcf51fa8.css"];
   }
 });
@@ -27303,8 +27303,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-6e37952c.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-6e37952c.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-2a8ede6c.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-5f5c0e3e.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-5f5c0e3e.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-15f97a67.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets13 = [];
   }
 });
@@ -27437,8 +27437,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/schools/_page.svelte-6770273c.js";
-    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-6770273c.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file15 = "_app/immutable/components/pages/schools/_page.svelte-d0db7b20.js";
+    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-d0db7b20.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets15 = [];
   }
 });
@@ -27485,8 +27485,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-7da021e3.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-7da021e3.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-16f0cf2b.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-a72fa80d.js", "_app/immutable/chunks/singletons-43033c53.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-d7c30d82.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-d7c30d82.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-7364be8b.js", "_app/immutable/chunks/singletons-b40bc4a4.js"];
     stylesheets16 = [];
   }
 });
@@ -30316,7 +30316,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-1af466e8.js", "imports": ["_app/immutable/start-1af466e8.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-43033c53.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-7bef0b98.js", "imports": ["_app/immutable/start-7bef0b98.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-b40bc4a4.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

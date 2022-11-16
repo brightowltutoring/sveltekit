@@ -70,8 +70,8 @@
   //   !document.getElementById("calendlyCSS")
   //   `;
 
-  async function calendlyJSandCSStoHead() {
-    console.log("👁🫦👁");
+  function calendlyJSandCSStoHead() {
+    console.log("📅");
 
     if (!document.getElementById("calendlyJS")) {
       const calendlyJS = document.createElement("script");

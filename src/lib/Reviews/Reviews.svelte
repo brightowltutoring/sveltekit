@@ -2,7 +2,7 @@
   import ReviewCreator from "$lib/Reviews/reviewCreator.svx";
   import { reviews } from "$lib/Reviews/reviews.js";
   import HydrateReviewStars from "$lib/Reviews/HydrateReviewStars.svelte";
-  let whenImageNotLoaded = "opacity-0 transition-opacity duration-200 ease-in";
+  let whenImageNotLoaded = "opacity-0 transition-opacity duration-500 ease-in";
 </script>
 
 <HydrateReviewStars />

@@ -15,7 +15,7 @@
   import Footer from "$lib/Footer.svelte";
   import {
     instDeltaY,
-    innerWidth,
+    // innerWidth,
     scrollY,
     // windowInnerHeight, TODO: remove?
     // scrollYMax, TODO: remove?
@@ -24,7 +24,7 @@
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
-    isDarkMode,
+    // isDarkMode,
     // isLoggedIn,
   } from "$lib/store.js";
 
@@ -36,7 +36,7 @@
   //   $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
   // }
 
-  // disables pinchzoom on ios/safari simulator
+  // disables pinchzoom
   function disablePinchZoom() {
     document.addEventListener("gesturestart", (e) => {
       e.preventDefault();
@@ -51,34 +51,44 @@
     setInnerWidthViaMatchMedia();
   });
 
+  // $: console.log("$instDeltaY", $instDeltaY);
+
   let jankytown;
 
+  // Since '$instDeltaY' is updated continuously on scroll, the entire reactive statement blocks below are checked continuously (as evidenced by a top console log) is there a way to do this without refiring the entire block??
+  // Maybe only check speeds as thresholds and not every single speed....kinda like match media??
+
   // sets jankytown for bigger than med.
-  //  TODO: reframe these in terms of matchmedia?
+
+  let verticalThreshold = 800;
+  let verticalThresholdMobile = 400;
+
   $: if (!$lessThan768) {
-    // $: if (!lessThan768v2) {
-    if ($scrollY == 0) jankytown = "top-0";
+    // console.log("yeet over");
+    // if ($scrollY == 0) jankytown = "top-0";
 
-    if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
-      jankytown = "top-0 backdrop-blur-3xl ";
+    // if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
+    //   jankytown = "top-0 backdrop-blur-3xl ";
+    if ($scrollY >= 0 && $scrollY < verticalThreshold)
+      jankytown = "top-0 backdrop-blur-3xl duration-1000";
 
-    if ($scrollY > 800 && $instDeltaY > 10)
+    if ($scrollY > verticalThreshold && $instDeltaY > 10) {
       jankytown = "-top-20 backdrop-blur-3xl duration-200";
+    }
 
     if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl duration-700";
   }
   // sets jankytown for smaller than med
-  //  TODO: reframe these in terms of matchmedia?
   $: if ($lessThan768) {
-    // $: if (lessThan768v2) {
-    if ($scrollY == 0) {
-      jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl ";
-      // adding the md tailwind breakpoint here is pure jank...so onpageload
-      // the page doesnt flicker with bottom-0 first, then settles to top-0
+    // console.log("yeet under");
+
+    // if ($scrollY ==0) {
+    if ($scrollY < verticalThresholdMobile) {
+      jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl";
     }
-    if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
-      jankytown = "bottom-0 backdrop-blur-3xl ";
-    if ($scrollY > 400 && $instDeltaY > 10)
+    // if ($scrollY > 10 && $scrollY < verticalThresholdMobile && $instDeltaY > 0)
+    //   jankytown = "bottom-0 backdrop-blur-3xl ";
+    if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
       jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
     if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";

@@ -10,14 +10,14 @@
 
 <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">  
 
-  <div class="absolute ">
+  <div class="absolute">
 
     # {title}
 
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
-      <img class="stars {whenImageNotLoaded} hover:scale-150 duration-300" alt="star" style="width:40px; height:40px" >
+      <img class="stars {whenImageNotLoaded} hover:scale-125" alt="star" style="width:40px; height:40px" >
 
       {/each}
   
@@ -25,7 +25,7 @@
 
     <div class="italic"> on {date} </div>
 
-    <slot></slot>
+    <slot/>
 
     <b class="absolute right-0 bottom-0 -my-10 mx-5 ">{name}</b>
 

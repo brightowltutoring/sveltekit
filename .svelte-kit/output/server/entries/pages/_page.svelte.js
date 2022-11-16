@@ -25,9 +25,9 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
     $$bindings.date(date);
   $$result.css.add(css$1);
   $$unsubscribe_isDarkMode();
-  return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute "}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
+  return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute"}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
-    return `<img class="${"stars " + escape(whenImageNotLoaded2, true) + " hover:scale-150 duration-300"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+    return `<img class="${"stars " + escape(whenImageNotLoaded2, true) + " hover:scale-125"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
   })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
@@ -146,7 +146,7 @@ ${validate_component(IntersectionObserver_1, "IntersectionObserver").$$render(
     {}
   )}`;
 });
-let whenImageNotLoaded = "opacity-0 transition-opacity duration-200 ease-in";
+let whenImageNotLoaded = "opacity-0 transition-opacity duration-500 ease-in";
 const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})}
 

@@ -15,6 +15,7 @@
     isRunningStandalone,
   } from "$lib/store.js";
   import { spring } from "svelte/motion";
+  import { onMount } from "svelte";
 
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   let hueRocket = 0;
@@ -45,17 +46,27 @@
   let btnColor = "sm:bg-red-300 rounded";
   let btnColorHover = "hover:bg-red-300 ";
 
-  // via-[rgba(0,0,0,0)]
   $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${
     $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"
   }`;
 
   // let app = true;
+
+  // TODO: supposed to convert vertical scroll on target element into horizontal, leaving regular horizontal unchanged
+  // onMount(() => {
+  //   Observer.create({
+  //     target: body,
+  //     type: "wheel",
+  //     onChangeY: (self) => {
+  //       document.documentElement.scrollLeft += self.deltaY;
+  //     },
+  //   });
+  // });
 </script>
 
 <!-- gap-x-24 -->
 <logo-and-navbar
-  class=" flex items-center justify-center  md:justify-between gap-x-10 "
+  class=" flex items-center justify-center md:justify-between gap-x-10 "
 >
   {#key resetLogoClick}
     <div
@@ -69,52 +80,52 @@
     </div>
   {/key}
 
-  <nav
-    class="md:ml-24 md:p-1 p-3 {bgGradientColor} rounded-md md:rounded-xl hideScrollBar overflow-auto  "
-  >
-    {#key unique}
-      <ul class="flex flex-row text-xl items-center">
-        <!-- TODO: on:click directs to download the PWA -->
-        {#if !isRunningStandalone()}
-          <!-- {#key app} -->
-          <!-- in:scale={{ duration: 800, easing: elasticOut }} -->
-          <li
-            on:click={() => {
-              // app = !app;
-              alert("Coming soon 🚀");
-              $navLoginClicked = false;
-              $navHomeworkClicked = false;
-            }}
-            class=" mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
+  <!-- <nav class="md:ml-24 md:p-1 p-3 "> -->
+  {#key unique}
+    <ul
+      class="flex flex-row text-xl items-center {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
+    >
+      <!-- TODO: on:click directs to download the PWA -->
+      {#if !isRunningStandalone()}
+        <!-- {#key app} -->
+        <!-- in:scale={{ duration: 800, easing: elasticOut }} -->
+        <li
+          on:click={() => {
+            // app = !app;
+            alert("Coming soon 🚀");
+            $navLoginClicked = false;
+            $navHomeworkClicked = false;
+          }}
+          class=" mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
                border-b-1 rounded px-3 py-1 "
-          >
-            App
-          </li>
-          <!-- {/key} -->
-        {/if}
-
-        <!-- {#each Object.keys($routes).splice(0, 5) as KEY} -->
-        {#each Object.keys($routes).slice(0, 5) as KEY}
-          <li
-            style={KEY == "login" &&
-              $isLoggedIn &&
-              `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
-          >
-            <Navitem
-              href={$routes[KEY].href}
-              content={$routes[KEY].name}
-              bind:bool={$routes[KEY].isCurrent}
-              bind:routes={$routes}
-              bind:btnColor
-              bind:btnColorHover
-            />
-          </li>
-        {/each}
-
-        <li class="px-3 translate-y-1">
-          <LightDarkMode />
+        >
+          App
         </li>
-      </ul>
-    {/key}
-  </nav>
+        <!-- {/key} -->
+      {/if}
+
+      <!-- {#each Object.keys($routes).splice(0, 5) as KEY} -->
+      {#each Object.keys($routes).slice(0, 5) as KEY}
+        <li
+          style={KEY == "login" &&
+            $isLoggedIn &&
+            `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
+        >
+          <Navitem
+            href={$routes[KEY].href}
+            content={$routes[KEY].name}
+            bind:bool={$routes[KEY].isCurrent}
+            bind:routes={$routes}
+            bind:btnColor
+            bind:btnColorHover
+          />
+        </li>
+      {/each}
+
+      <li class="px-3 translate-y-1">
+        <LightDarkMode />
+      </li>
+    </ul>
+  {/key}
+  <!-- </nav> -->
 </logo-and-navbar>

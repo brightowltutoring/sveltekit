@@ -22,8 +22,8 @@ const IntersectionObserver_1 = create_ssr_component(($$result, $$props, $$bindin
     $$bindings.margin(margin);
   return ``;
 });
-async function calendlyJSandCSStoHead() {
-  console.log("\u{1F441}\u{1FAE6}\u{1F441}");
+function calendlyJSandCSStoHead() {
+  console.log("\u{1F4C5}");
   if (!document.getElementById("calendlyJS")) {
     const calendlyJS = document.createElement("script");
     calendlyJS.id = "calendlyJS";
