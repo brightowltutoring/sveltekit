@@ -108,6 +108,7 @@
         hasTransition={false}
         on:boop={(e) => {
           data = e.detail.data.slice(0, 2);
+          console.log("n i oop!");
         }}
         plansCards={data}
       />
