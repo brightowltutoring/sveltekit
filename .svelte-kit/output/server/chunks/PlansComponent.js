@@ -1,4 +1,4 @@
-import { c as create_ssr_component, v as validate_component, a as subscribe, e as escape, d as add_attribute, j as each } from "./index.js";
+import { c as create_ssr_component, v as validate_component, a as subscribe, e as escape, d as add_attribute, j as each, p as createEventDispatcher } from "./index.js";
 import { i as isDarkMode, e as elementColor } from "./store.js";
 import { p as plansCardArray } from "./plansCardArray.js";
 const browser = false;
@@ -105,6 +105,7 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
 });
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  createEventDispatcher();
   let { plansCards = plansCardArray } = $$props;
   let { hasTransition = true } = $$props;
   let ready = !hasTransition;
@@ -115,8 +116,7 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
   return `${ready ? `${validate_component(HydratePlansCard, "HydratePlansCard").$$render($$result, {}, {}, {})}` : ``}
 
 
-
-<div class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"}">${each(plansCards, (item, i) => {
+<div id="${"elem"}" class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"}">${each(plansCards, (item, i) => {
     return `${ready ? `<div>${validate_component(PlansCard, "PlansCard").$$render(
       $$result,
       {
@@ -144,6 +144,9 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
     )}
       </div>` : ``}`;
   })}</div>
+
+
+
 
 
 `;

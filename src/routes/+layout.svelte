@@ -80,8 +80,7 @@
   $: if ($lessThan768) {
     // console.log("yeet under");
 
-    if ($scrollY < 10) jankytown = "bottom-0";
-    if ($scrollY > 10 && $scrollY < verticalThresholdMobile) {
+    if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
       jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl";
     }
     if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)

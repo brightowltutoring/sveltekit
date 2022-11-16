@@ -484,11 +484,10 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   do {
     $$settled = true;
     {
-      console.log("$instDeltaY", $instDeltaY);
-    }
-    {
       if (!$lessThan768) {
-        if ($scrollY >= 0 && $scrollY < verticalThreshold)
+        if ($scrollY < 10)
+          jankytown = "top-0";
+        if ($scrollY > 10 && $scrollY < verticalThreshold)
           jankytown = "top-0 backdrop-blur-3xl duration-1000";
         if ($scrollY > verticalThreshold && $instDeltaY > 10) {
           jankytown = "-top-20 backdrop-blur-3xl duration-200";
@@ -499,7 +498,9 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     {
       if ($lessThan768) {
-        if ($scrollY < verticalThresholdMobile) {
+        if ($scrollY < 10)
+          jankytown = "bottom-0";
+        if ($scrollY > 10 && $scrollY < verticalThresholdMobile) {
           jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl";
         }
         if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)

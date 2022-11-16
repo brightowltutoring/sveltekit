@@ -1,6 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, o as null_to_empty } from "../../chunks/index.js";
 import { I as IntersectionObserver_1, P as PlansComponent } from "../../chunks/PlansComponent.js";
-import { p as plansCardArray } from "../../chunks/plansCardArray.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
@@ -151,8 +150,9 @@ const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})}
 
 
-<div class="${"scale-90 "}"><div class="${"grid grid-cols-dynamic gap-x-10 gap-y-[80vw] sm:gap-y-[55vw] md:gap-y-[65vw] lg:gap-y-[45vw] -translate-y-60 sm:translate-y-0"}">
-    ${each(reviews, ({ name, title, date, body }) => {
+<div class="${"scale-90 "}">
+
+  <div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name, title, date, body }) => {
     return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date, whenImageNotLoaded }, {}, {
       default: () => {
         return `${escape(body)}
@@ -170,6 +170,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let gradientTextColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  let data;
   $$result.css.add(css);
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
@@ -187,15 +188,8 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></p>
 
       
-      ${validate_component(PlansComponent, "PlansComponent").$$render(
-    $$result,
-    {
-      plansCards: plansCardArray.slice(0, 2),
-      hasTransition: false
-    },
-    {},
-    {}
-  )}</div>
+      ${validate_component(PlansComponent, "PlansComponent").$$render($$result, { hasTransition: false, plansCards: data }, {}, {})}
+      </div>
 
     
 

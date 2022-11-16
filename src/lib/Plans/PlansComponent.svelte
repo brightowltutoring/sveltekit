@@ -27,7 +27,7 @@
     //   </div>
   }
 
-  export let plansCards = plansCardArray; //TODO: would be nice to send this to the parent component
+  export let plansCards = plansCardArray;
 
   // When the importing component has 'zeroTransition = true' this component produces no transition animation for both navbar AND direct navigation
   export let hasTransition = true;
