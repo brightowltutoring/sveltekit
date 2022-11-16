@@ -51,7 +51,7 @@
     setInnerWidthViaMatchMedia();
   });
 
-  // $: console.log("$instDeltaY", $instDeltaY);
+  $: console.log("$instDeltaY", $instDeltaY);
 
   let jankytown;
 

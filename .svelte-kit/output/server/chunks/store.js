@@ -1,18 +1,14 @@
 import { d as derived, w as writable } from "./index2.js";
-import "./index.js";
+import { k as get_store_value } from "./index.js";
 const isLoggedIn = writable(false);
 const scrollY = writable(0);
-const startScrollY = derived(scrollY, ($scrollY, set) => {
+let delayedScrollY = get_store_value(scrollY);
+const instDeltaY = derived(scrollY, ($scrollY) => {
   setTimeout(() => {
-    set($scrollY);
+    delayedScrollY = get_store_value(scrollY);
   }, 50);
+  return $scrollY - delayedScrollY;
 });
-const instDeltaY = derived(
-  [scrollY, startScrollY],
-  ([$scrollY, $startScrollY]) => {
-    return $scrollY - $startScrollY;
-  }
-);
 const innerWidth = writable(0);
 const lessThan768 = derived(
   innerWidth,

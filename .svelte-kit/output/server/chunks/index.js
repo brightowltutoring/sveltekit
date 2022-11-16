@@ -22,6 +22,11 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+function get_store_value(store) {
+  let value;
+  subscribe(store, (_) => value = _)();
+  return value;
+}
 function null_to_empty(value) {
   return value == null ? "" : value;
 }
@@ -162,11 +167,12 @@ export {
   now as h,
   is_function as i,
   each as j,
-  null_to_empty as k,
+  get_store_value as k,
   loop as l,
   missing_component as m,
   noop as n,
-  onDestroy as o,
+  null_to_empty as o,
+  onDestroy as p,
   run_all as r,
   setContext as s,
   validate_component as v

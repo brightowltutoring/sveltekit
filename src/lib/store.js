@@ -104,24 +104,37 @@ export const scrollY = writable(0);
 
 // This is equivalent to "setTimeout(()=>{ $startScrollY = $scrollY },200)"
 // if placed inside +layout.svelte .. under an onscroll event attached to the window
-export const startScrollY = derived(scrollY, ($scrollY, set) => {
-  // set both values initially equal
-  set($scrollY);
-
-  // ... then set it as the old scrollY value
-  setTimeout(() => {
-    set($scrollY);
-  }, 50);
-});
 
 // Conceptually this is like an inst. change, since it sets back to zero
 // however the time step is 200 not infinitesimal
-export const instDeltaY = derived(
-  [scrollY, startScrollY],
-  ([$scrollY, $startScrollY]) => {
-    return $scrollY - $startScrollY;
-  }
-);
+
+// TODO: this new way of calculating 'instDeltaY' has the advantage of not dropping to 0 .. and thus can be used for 'was scrolling down/up' logic. For some reason this code, with the same 50ms delay, updates 'instDeltaY' less frequently than the older method ... which is actually better for performance (the updating is still smooth)
+let delayedScrollY = get(scrollY);
+export const instDeltaY = derived(scrollY, ($scrollY) => {
+  setTimeout(() => {
+    delayedScrollY = get(scrollY);
+  }, 50);
+
+  return $scrollY - delayedScrollY;
+});
+
+// TODO: old way of calculating instDeltaY  ...
+// export const startScrollY = derived(scrollY, ($scrollY, set) => {
+//   // set both values initially equal
+//   set($scrollY);
+
+//   // ... then set it as the old scrollY value
+//   setTimeout(() => {
+//     set($scrollY);
+//   }, 50);
+// });
+// export const instDeltaY = derived(
+//   [scrollY, startScrollY],
+//   ([$scrollY, $startScrollY]) => {
+//     return $scrollY - $startScrollY;
+//   }
+// );
+// TODO: old way of calculating instDeltaY  ...
 
 // TODO: remove?
 // export const scrollHeight = writable(0);

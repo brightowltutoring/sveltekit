@@ -5,9 +5,9 @@ const browser = false;
 const IntersectionObserver_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { once = false } = $$props;
   let { condition = true } = $$props;
-  let { querySelectees = ".stars" } = $$props;
+  let { querySelectees = "div" } = $$props;
   let { action = () => {
-    console.log("intersectionAction!");
+    console.log("i c u div \u{1F441}\u{1FAE6}\u{1F441}");
   } } = $$props;
   let { margin = "0px" } = $$props;
   if ($$props.once === void 0 && $$bindings.once && once !== void 0)

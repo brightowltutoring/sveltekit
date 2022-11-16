@@ -401,15 +401,16 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <logo-and-navbar class="${"flex items-center justify-center md:justify-between gap-x-10 "}"><div class="${"md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
-  <nav class="${"md:ml-24 md:p-1 p-3 " + escape(bgGradientColor, true) + " rounded-md md:rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
-        ${`
-          
-          <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded px-3 py-1"}">App
-          </li>
-          `}
-
+  
+  <ul class="${"flex flex-row text-xl items-center " + escape(bgGradientColor, true) + " hideScrollBar overflow-x-scroll rounded-md md:rounded-xl md:ml-24 md:p-1 py-3 px-5"}">
+      ${`
         
-        ${each(Object.keys($routes).slice(0, 5), (KEY) => {
+        <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded px-3 py-1"}">App
+        </li>
+        `}
+
+      
+      ${each(Object.keys($routes).slice(0, 5), (KEY) => {
       return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
         $$result,
         {
@@ -440,10 +441,11 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         },
         {}
       )}
-          </li>`;
+        </li>`;
     })}
 
-        <li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul></nav></logo-and-navbar>`;
+      <li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul>
+  </logo-and-navbar>`;
   } while (!$$settled);
   $$unsubscribe_isDarkMode();
   $$unsubscribe_routes();
@@ -459,6 +461,8 @@ const Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<div class="${"flex justify-center items-center "}"><span class="${"my-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
   </span></div>`;
 });
+let verticalThreshold = 800;
+let verticalThresholdMobile = 400;
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
@@ -480,25 +484,25 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   do {
     $$settled = true;
     {
+      console.log("$instDeltaY", $instDeltaY);
+    }
+    {
       if (!$lessThan768) {
-        if ($scrollY == 0)
-          jankytown = "top-0";
-        if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
-          jankytown = "top-0 backdrop-blur-3xl ";
-        if ($scrollY > 800 && $instDeltaY > 10)
+        if ($scrollY >= 0 && $scrollY < verticalThreshold)
+          jankytown = "top-0 backdrop-blur-3xl duration-1000";
+        if ($scrollY > verticalThreshold && $instDeltaY > 10) {
           jankytown = "-top-20 backdrop-blur-3xl duration-200";
+        }
         if ($instDeltaY < -100)
           jankytown = "top-0 backdrop-blur-3xl duration-700";
       }
     }
     {
       if ($lessThan768) {
-        if ($scrollY == 0) {
-          jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl ";
+        if ($scrollY < verticalThresholdMobile) {
+          jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl";
         }
-        if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
-          jankytown = "bottom-0 backdrop-blur-3xl ";
-        if ($scrollY > 400 && $instDeltaY > 10)
+        if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
           jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
         if ($instDeltaY < -30)
           jankytown = "bottom-0 backdrop-blur-3xl duration-700";

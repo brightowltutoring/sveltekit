@@ -118,6 +118,7 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
+	export const NODE_ENV: string;
 	export const SECRET_FIREBASE_apiKey: string;
 	export const SECRET_FIREBASE_authDomain: string;
 	export const SECRET_FIREBASE_projectId: string;
@@ -252,6 +253,7 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		COLORTERM: string;
+		NODE_ENV: string;
 		SECRET_FIREBASE_apiKey: string;
 		SECRET_FIREBASE_authDomain: string;
 		SECRET_FIREBASE_projectId: string;

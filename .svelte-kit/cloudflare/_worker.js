@@ -75,6 +75,11 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+function get_store_value(store) {
+  let value;
+  subscribe(store, (_2) => value = _2)();
+  return value;
+}
 function null_to_empty(value) {
   return value == null ? "" : value;
 }
@@ -630,24 +635,20 @@ var init_hooks_server = __esm({
 });
 
 // .svelte-kit/output/server/chunks/store.js
-var isLoggedIn, scrollY, startScrollY, instDeltaY, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, routes, isDarkMode, light_darkened, dark_lightened, elementColor;
+var isLoggedIn, scrollY, delayedScrollY, instDeltaY, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, routes, isDarkMode, light_darkened, dark_lightened, elementColor;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
     init_index2();
     init_chunks();
     isLoggedIn = writable(false);
     scrollY = writable(0);
-    startScrollY = derived(scrollY, ($scrollY, set) => {
+    delayedScrollY = get_store_value(scrollY);
+    instDeltaY = derived(scrollY, ($scrollY) => {
       setTimeout(() => {
-        set($scrollY);
+        delayedScrollY = get_store_value(scrollY);
       }, 50);
+      return $scrollY - delayedScrollY;
     });
-    instDeltaY = derived(
-      [scrollY, startScrollY],
-      ([$scrollY, $startScrollY]) => {
-        return $scrollY - $startScrollY;
-      }
-    );
     innerWidth = writable(0);
     lessThan768 = derived(
       innerWidth,
@@ -10559,7 +10560,7 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var Modal, goto, IconTwitter, TwitterLoginButton, IconGoogle, GoogleLoginButton, IconEmail, MagicLinkSection, LoginCard, IconSun, IconMoon, css2, LightDarkMode, getStores, page, Navitem, Navbar, Footer, Layout;
+var Modal, goto, IconTwitter, TwitterLoginButton, IconGoogle, GoogleLoginButton, IconEmail, MagicLinkSection, LoginCard, IconSun, IconMoon, css2, LightDarkMode, getStores, page, Navitem, Navbar, Footer, verticalThreshold, verticalThresholdMobile, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
@@ -10856,15 +10857,16 @@ var init_layout_svelte = __esm({
 <logo-and-navbar class="${"flex items-center justify-center md:justify-between gap-x-10 "}"><div class="${"md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </div>
 
-  <nav class="${"md:ml-24 md:p-1 p-3 " + escape(bgGradientColor, true) + " rounded-md md:rounded-xl hideScrollBar overflow-auto"}"><ul class="${"flex flex-row text-xl items-center"}">
-        ${`
-          
-          <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded px-3 py-1"}">App
-          </li>
-          `}
-
+  
+  <ul class="${"flex flex-row text-xl items-center " + escape(bgGradientColor, true) + " hideScrollBar overflow-x-scroll rounded-md md:rounded-xl md:ml-24 md:p-1 py-3 px-5"}">
+      ${`
         
-        ${each(Object.keys($routes).slice(0, 5), (KEY) => {
+        <li class="${"mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg " + escape($elementColor, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded px-3 py-1"}">App
+        </li>
+        `}
+
+      
+      ${each(Object.keys($routes).slice(0, 5), (KEY) => {
           return `<li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
             $$result,
             {
@@ -10895,10 +10897,11 @@ var init_layout_svelte = __esm({
             },
             {}
           )}
-          </li>`;
+        </li>`;
         })}
 
-        <li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul></nav></logo-and-navbar>`;
+      <li class="${"px-3 translate-y-1"}">${validate_component(LightDarkMode, "LightDarkMode").$$render($$result, {}, {}, {})}</li></ul>
+  </logo-and-navbar>`;
       } while (!$$settled);
       $$unsubscribe_isDarkMode();
       $$unsubscribe_routes();
@@ -10914,6 +10917,8 @@ var init_layout_svelte = __esm({
       return `<div class="${"flex justify-center items-center "}"><span class="${"my-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
   </span></div>`;
     });
+    verticalThreshold = 800;
+    verticalThresholdMobile = 400;
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $instDeltaY, $$unsubscribe_instDeltaY;
       let $scrollY, $$unsubscribe_scrollY;
@@ -10935,25 +10940,25 @@ var init_layout_svelte = __esm({
       do {
         $$settled = true;
         {
+          console.log("$instDeltaY", $instDeltaY);
+        }
+        {
           if (!$lessThan768) {
-            if ($scrollY == 0)
-              jankytown = "top-0";
-            if ($scrollY > 10 && $scrollY < 800 && $instDeltaY > 0)
-              jankytown = "top-0 backdrop-blur-3xl ";
-            if ($scrollY > 800 && $instDeltaY > 10)
+            if ($scrollY >= 0 && $scrollY < verticalThreshold)
+              jankytown = "top-0 backdrop-blur-3xl duration-1000";
+            if ($scrollY > verticalThreshold && $instDeltaY > 10) {
               jankytown = "-top-20 backdrop-blur-3xl duration-200";
+            }
             if ($instDeltaY < -100)
               jankytown = "top-0 backdrop-blur-3xl duration-700";
           }
         }
         {
           if ($lessThan768) {
-            if ($scrollY == 0) {
-              jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl ";
+            if ($scrollY < verticalThresholdMobile) {
+              jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl";
             }
-            if ($scrollY > 10 && $scrollY < 400 && $instDeltaY > 0)
-              jankytown = "bottom-0 backdrop-blur-3xl ";
-            if ($scrollY > 400 && $instDeltaY > 10)
+            if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
               jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
             if ($instDeltaY < -30)
               jankytown = "bottom-0 backdrop-blur-3xl duration-700";
@@ -11060,9 +11065,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-4dceb5cb.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-4dceb5cb.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-d99f5f61.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-7364be8b.js", "_app/immutable/chunks/singletons-b40bc4a4.js", "_app/immutable/chunks/firebase-7217deba.js"];
-    stylesheets = ["_app/immutable/assets/_layout-ade4ceb0.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-6946ab98.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-6946ab98.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Dropzone-4a511ec8.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-1fa294eb.js", "_app/immutable/chunks/singletons-0ae8d958.js", "_app/immutable/chunks/firebase-7217deba.js"];
+    stylesheets = ["_app/immutable/assets/_layout-7d3066ce.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
 
@@ -11196,9 +11201,9 @@ var init_PlansComponent = __esm({
     IntersectionObserver_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { once: once2 = false } = $$props;
       let { condition = true } = $$props;
-      let { querySelectees = ".stars" } = $$props;
+      let { querySelectees = "div" } = $$props;
       let { action = () => {
-        console.log("intersectionAction!");
+        console.log("i c u div \u{1F441}\u{1FAE6}\u{1F441}");
       } } = $$props;
       let { margin = "0px" } = $$props;
       if ($$props.once === void 0 && $$bindings.once && once2 !== void 0)
@@ -11562,8 +11567,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-09bf4171.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-09bf4171.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-15f97a67.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-d99f5f61.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-7364be8b.js", "_app/immutable/chunks/singletons-b40bc4a4.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-eff29d01.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-eff29d01.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-cf6b1bac.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-4a511ec8.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-1fa294eb.js", "_app/immutable/chunks/singletons-0ae8d958.js"];
     stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
@@ -12979,8 +12984,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-4a32e4b3.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-4a32e4b3.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-7364be8b.js", "_app/immutable/chunks/singletons-b40bc4a4.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-3dc02a8a.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-3dc02a8a.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/navigation-1fa294eb.js", "_app/immutable/chunks/singletons-0ae8d958.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -13150,8 +13155,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-de049ef4.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-de049ef4.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Dropzone-d99f5f61.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-c6786f60.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-c6786f60.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Dropzone-4a511ec8.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets7 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
@@ -26864,8 +26869,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file8 = "_app/immutable/components/pages/katex/_page.svx-04763d84.js";
-    imports8 = ["_app/immutable/components/pages/katex/_page.svx-04763d84.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    file8 = "_app/immutable/components/pages/katex/_page.svx-cd81e00e.js";
+    imports8 = ["_app/immutable/components/pages/katex/_page.svx-cd81e00e.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets8 = [];
   }
 });
@@ -27068,8 +27073,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file10 = "_app/immutable/components/pages/math/_page.svx-34fd4c09.js";
-    imports10 = ["_app/immutable/components/pages/math/_page.svx-34fd4c09.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Kajax-61ac142f.js"];
+    file10 = "_app/immutable/components/pages/math/_page.svx-6f11abe2.js";
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-6f11abe2.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/Kajax-61ac142f.js"];
     stylesheets10 = [];
   }
 });
@@ -27148,8 +27153,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file11 = "_app/immutable/components/pages/mathjax/_page.svx-32dd0ef9.js";
-    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-32dd0ef9.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    file11 = "_app/immutable/components/pages/mathjax/_page.svx-18c126ca.js";
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-18c126ca.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets11 = [];
   }
 });
@@ -27266,8 +27271,8 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/physics/_page.svelte-bc969975.js";
-    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-bc969975.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Kajax-61ac142f.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js"];
+    file12 = "_app/immutable/components/pages/physics/_page.svelte-720c8ba7.js";
+    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-720c8ba7.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/Kajax-61ac142f.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js"];
     stylesheets12 = ["_app/immutable/assets/_page-fcf51fa8.css"];
   }
 });
@@ -27303,8 +27308,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-5f5c0e3e.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-5f5c0e3e.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-15f97a67.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-0827e3ec.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-0827e3ec.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/PlansComponent-cf6b1bac.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets13 = [];
   }
 });
@@ -27437,8 +27442,8 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/schools/_page.svelte-d0db7b20.js";
-    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-d0db7b20.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file15 = "_app/immutable/components/pages/schools/_page.svelte-4b0a2c7c.js";
+    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-4b0a2c7c.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/index-2bc37e0b.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
     stylesheets15 = [];
   }
 });
@@ -27485,8 +27490,8 @@ var init__16 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     index16 = 15;
     component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-d7c30d82.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-d7c30d82.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-692170bd.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-7364be8b.js", "_app/immutable/chunks/singletons-b40bc4a4.js"];
+    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-b106f722.js";
+    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-b106f722.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/store-b585fb0e.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/navigation-1fa294eb.js", "_app/immutable/chunks/singletons-0ae8d958.js"];
     stylesheets16 = [];
   }
 });
@@ -30316,7 +30321,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-7bef0b98.js", "imports": ["_app/immutable/start-7bef0b98.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-b40bc4a4.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-5b105234.js", "imports": ["_app/immutable/start-5b105234.js", "_app/immutable/chunks/index-abd81730.js", "_app/immutable/chunks/singletons-0ae8d958.js", "_app/immutable/chunks/index-f3ce743b.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

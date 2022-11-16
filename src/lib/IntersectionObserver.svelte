@@ -5,9 +5,9 @@
 
   export let once = false;
   export let condition = true;
-  export let querySelectees = ".stars";
+  export let querySelectees = "div";
   export let action = () => {
-    console.log("intersectionAction!");
+    console.log("i c u div 👁🫦👁");
   };
   export let margin = "0px";
 
