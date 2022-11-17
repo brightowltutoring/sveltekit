@@ -1,4 +1,11 @@
 <script>
+    import InView from "$lib/InView.svelte";
+    function hydrateReviewStars(star) {
+      console.log("💫");
+      star.src = "/star.webp";
+      star.classList.remove("opacity-0");
+    }
+
     export let whenImageNotLoaded  
     //fallback css containing 'opacity-0'..which is removed once the element is intersected
     
@@ -17,7 +24,11 @@
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
+      <InView once action={(star) => hydrateReviewStars(star)} containee>
+        
        <img class="stars {whenImageNotLoaded} hover:scale-125" src="" alt="star" style="width:40px; height:40px" >
+
+      </InView>
 
       {/each}
     </div>
