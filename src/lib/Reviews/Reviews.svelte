@@ -4,6 +4,7 @@
   // import HydrateReviewStars from "$lib/Reviews/HydrateReviewStars.svelte";
   // <HydrateReviewStars /> adds star.webp images to ReviewCreator component (which contains img elements); removes opacity-0 from the css prop 'whenImageNotLoaded' ..i.e. this logic is a fallback when the image is not loaded in time
   let whenImageNotLoaded = "opacity-0 transition-opacity duration-500 ease-in";
+  console.log("reviews now with slots");
 </script>
 
 <div class="scale-90 ">
