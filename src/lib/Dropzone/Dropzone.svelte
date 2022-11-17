@@ -1,5 +1,6 @@
 <script>
   import HydrateDropzone from "$lib/Dropzone/HydrateDropzone.svelte";
+  // import InView from "$lib/InView.svelte";
   import { isDarkMode } from "$lib/store.js";
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
@@ -7,7 +8,7 @@
   export let brightnessTW = "brightness-100";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
-  // TODO: for some reason using <InView><slot/></Inview> logic works in development but not in production; when running npm run dev I get the message 'ERROR: Could not resolve "./dropzone2.js"'
+  // TODO: for some reason using <InView><slot/></Inview> logic works in development but not in production; when running 'npm run dev' I get the message 'ERROR: Could not resolve "./dropzone2.js"'
   // import InView from "$lib/InView.svelte";
   // export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
   // let dropzone;
@@ -28,11 +29,9 @@
 
   //   document.querySelector("#default").id = uniqueId;
   // }
-  // <InView once action={hydrateDropzoneDomEls}>
 </script>
 
 <HydrateDropzone />
-
 <form
   method="post"
   id="default"

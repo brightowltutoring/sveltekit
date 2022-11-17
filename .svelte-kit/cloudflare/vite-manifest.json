@@ -1,8 +1,4 @@
 {
-  "src/fonts/poppins-v20-latin-100.woff2": {
-    "file": "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
-    "src": "src/fonts/poppins-v20-latin-100.woff2"
-  },
   "src/fonts/nunito-v25-latin-200.woff2": {
     "file": "_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
     "src": "src/fonts/nunito-v25-latin-200.woff2"
@@ -11,25 +7,29 @@
     "file": "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
     "src": "src/fonts/nunito-v25-latin-regular.woff2"
   },
+  "src/fonts/poppins-v20-latin-100.woff2": {
+    "file": "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
+    "src": "src/fonts/poppins-v20-latin-100.woff2"
+  },
   "src/fonts/nunito-v25-latin-regular.woff": {
     "file": "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
     "src": "src/fonts/nunito-v25-latin-regular.woff"
-  },
-  "src/fonts/nunito-v25-latin-200.woff": {
-    "file": "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
-    "src": "src/fonts/nunito-v25-latin-200.woff"
   },
   "src/fonts/poppins-v20-latin-100.woff": {
     "file": "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
     "src": "src/fonts/poppins-v20-latin-100.woff"
   },
+  "src/fonts/nunito-v25-latin-200.woff": {
+    "file": "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
+    "src": "src/fonts/nunito-v25-latin-200.woff"
+  },
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-39cb7262.js",
+    "file": "_app/immutable/start-6c2df4b4.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
       "_index-bde2f6de.js",
-      "_singletons-3f8b2a49.js",
+      "_singletons-dc5c6f2c.js",
       "_preload-helper-b21cceae.js"
     ],
     "dynamicImports": [
@@ -53,7 +53,7 @@
     ]
   },
   "src/routes/+layout.svelte": {
-    "file": "_app/immutable/components/pages/_layout.svelte-8f646864.js",
+    "file": "_app/immutable/components/pages/_layout.svelte-088e8e21.js",
     "src": "src/routes/+layout.svelte",
     "isEntry": true,
     "imports": [
@@ -61,10 +61,10 @@
       "_index-1001f052.js",
       "_Dropzone-bde91afa.js",
       "_preload-helper-b21cceae.js",
-      "_navigation-74ad8b7b.js",
+      "_navigation-1a026987.js",
       "_store-62dfb2f9.js",
       "_firebase-7217deba.js",
-      "_singletons-3f8b2a49.js",
+      "_singletons-dc5c6f2c.js",
       "_index-8e40acaa.js"
     ],
     "dynamicImports": [
@@ -92,7 +92,7 @@
     ]
   },
   "src/routes/+page.svelte": {
-    "file": "_app/immutable/components/pages/_page.svelte-86884879.js",
+    "file": "_app/immutable/components/pages/_page.svelte-445ed323.js",
     "src": "src/routes/+page.svelte",
     "isEntry": true,
     "imports": [
@@ -101,7 +101,7 @@
       "_Dropzone-bde91afa.js",
       "_store-62dfb2f9.js",
       "_index-1001f052.js",
-      "_navigation-74ad8b7b.js"
+      "_navigation-1a026987.js"
     ],
     "css": [
       "_app/immutable/assets/_page-7d3eabbd.css"
@@ -116,12 +116,12 @@
     ]
   },
   "src/routes/classroom/+page.svelte": {
-    "file": "_app/immutable/components/pages/classroom/_page.svelte-0cb5f54d.js",
+    "file": "_app/immutable/components/pages/classroom/_page.svelte-4ae66a92.js",
     "src": "src/routes/classroom/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-bde2f6de.js",
-      "_navigation-74ad8b7b.js",
+      "_navigation-1a026987.js",
       "_store-62dfb2f9.js"
     ]
   },
@@ -226,13 +226,13 @@
     ]
   },
   "src/routes/screenshareA/+page.svelte": {
-    "file": "_app/immutable/components/pages/screenshareA/_page.svelte-0c35095f.js",
+    "file": "_app/immutable/components/pages/screenshareA/_page.svelte-8f942841.js",
     "src": "src/routes/screenshareA/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-bde2f6de.js",
       "_store-62dfb2f9.js",
-      "_navigation-74ad8b7b.js"
+      "_navigation-1a026987.js"
     ]
   },
   "src/routes/stripe/+page.svelte": {
@@ -257,8 +257,8 @@
       "__page-50113cbf.js"
     ]
   },
-  "_singletons-3f8b2a49.js": {
-    "file": "_app/immutable/chunks/singletons-3f8b2a49.js",
+  "_singletons-dc5c6f2c.js": {
+    "file": "_app/immutable/chunks/singletons-dc5c6f2c.js",
     "imports": [
       "_index-8e40acaa.js"
     ]
@@ -303,10 +303,10 @@
       "_index-bde2f6de.js"
     ]
   },
-  "_navigation-74ad8b7b.js": {
-    "file": "_app/immutable/chunks/navigation-74ad8b7b.js",
+  "_navigation-1a026987.js": {
+    "file": "_app/immutable/chunks/navigation-1a026987.js",
     "imports": [
-      "_singletons-3f8b2a49.js"
+      "_singletons-dc5c6f2c.js"
     ]
   },
   "_firebase-7217deba.js": {
@@ -346,7 +346,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/0.js": {
-    "file": "_app/immutable/chunks/0-86506717.js",
+    "file": "_app/immutable/chunks/0-ec84d3fa.js",
     "src": ".svelte-kit/generated/nodes/0.js",
     "isDynamicEntry": true,
     "imports": [
@@ -362,7 +362,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/2.js": {
-    "file": "_app/immutable/chunks/2-c409441c.js",
+    "file": "_app/immutable/chunks/2-2c41cbd3.js",
     "src": ".svelte-kit/generated/nodes/2.js",
     "isDynamicEntry": true,
     "imports": [
@@ -378,7 +378,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/4.js": {
-    "file": "_app/immutable/chunks/4-b44cf7a3.js",
+    "file": "_app/immutable/chunks/4-90508b16.js",
     "src": ".svelte-kit/generated/nodes/4.js",
     "isDynamicEntry": true,
     "imports": [
@@ -467,7 +467,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/15.js": {
-    "file": "_app/immutable/chunks/15-8c270a15.js",
+    "file": "_app/immutable/chunks/15-c6c1c212.js",
     "src": ".svelte-kit/generated/nodes/15.js",
     "isDynamicEntry": true,
     "imports": [
@@ -503,25 +503,25 @@
     "src": "node_modules/dropzone/dist/dropzone.mjs",
     "isDynamicEntry": true
   },
-  "src/routes/+page.css": {
-    "file": "_app/immutable/assets/_page-7d3eabbd.css",
-    "src": "src/routes/+page.css"
-  },
   "Dropzone.css": {
     "file": "_app/immutable/assets/Dropzone-ad1f3da6.css",
     "src": "Dropzone.css"
-  },
-  "src/routes/physics/+page.css": {
-    "file": "_app/immutable/assets/_page-fcf51fa8.css",
-    "src": "src/routes/physics/+page.css"
   },
   "src/routes/faq/+page.css": {
     "file": "_app/immutable/assets/_page-113a1f72.css",
     "src": "src/routes/faq/+page.css"
   },
+  "src/routes/+page.css": {
+    "file": "_app/immutable/assets/_page-7d3eabbd.css",
+    "src": "src/routes/+page.css"
+  },
   "src/routes/stripe/+page.css": {
     "file": "_app/immutable/assets/_page-5c304dd7.css",
     "src": "src/routes/stripe/+page.css"
+  },
+  "src/routes/physics/+page.css": {
+    "file": "_app/immutable/assets/_page-fcf51fa8.css",
+    "src": "src/routes/physics/+page.css"
   },
   "src/lib/Dropzone/dropzone.css": {
     "file": "_app/immutable/assets/dropzone-1f8a37e8.css",
