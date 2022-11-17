@@ -85,7 +85,7 @@
         $navLoginClicked = false;
         loggedInEmail = "";
 
-        console.log(`User is NOT signed in`);
+        // console.log(`User is NOT signed in`);
       }
     });
     // }

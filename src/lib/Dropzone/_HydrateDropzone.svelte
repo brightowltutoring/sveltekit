@@ -1,3 +1,4 @@
+<!-- TODO: no longer in use; replaced with slot logic of InView.svelte -->
 <script>
   import { onMount } from "svelte";
 

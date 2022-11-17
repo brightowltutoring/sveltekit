@@ -17,10 +17,9 @@
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
-      <img class="stars {whenImageNotLoaded} hover:scale-125" alt="star" style="width:40px; height:40px" >
+       <img class="stars {whenImageNotLoaded} hover:scale-125" src="" alt="star" style="width:40px; height:40px" >
 
       {/each}
-  
     </div>
 
     <div class="italic"> on {date} </div>

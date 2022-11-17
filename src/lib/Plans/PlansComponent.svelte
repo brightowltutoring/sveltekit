@@ -1,6 +1,10 @@
 <script>
-  import HydratePlansCard from "$lib/Plans/HydratePlansCard.svelte";
+  // import HydratePlansCard from "$lib/Plans/HydratePlansCard.svelte";
+  // {#if ready}
+  //   <HydratePlansCard />
+  // {/if}
   import PlansCard from "$lib/Plans/PlansCard.svelte";
+  import InView from "$lib/InView.svelte";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
@@ -35,50 +39,66 @@
   export let hasTransition = true;
   // default true; if false then two lines below keep ready as 'true'
 
+  // let ready = true;
   let ready = !hasTransition;
   onMount(() => (ready = true));
   // the 'ready' variable logic allows the in:scale div to animate (svelte transition) when going directly to this plans route ..otherwise only works when navigating from another route
   // NOTE: the intersection observer component 'HydratePlansCard' also has to be "ready-ed" in, otherwise the button doesn't become 'hydrated' as intended
+
+  function calendlyJSandCSStoHead() {
+    console.log("📅");
+
+    if (!document.getElementById("calendlyJS")) {
+      const calendlyJS = document.createElement("script");
+      calendlyJS.id = "calendlyJS";
+      calendlyJS.src = "https://assets.calendly.com/assets/external/widget.js";
+      calendlyJS.type = "text/javascript";
+      document.head.appendChild(calendlyJS);
+    }
+    if (!document.getElementById("calendlyCSS")) {
+      const calendlyCSS = document.createElement("link");
+      calendlyCSS.id = "calendlyCSS";
+      calendlyCSS.href =
+        "https://assets.calendly.com/assets/external/widget.css";
+      calendlyCSS.rel = "stylesheet";
+      document.head.appendChild(calendlyCSS);
+    }
+  }
 </script>
 
-{#if ready}
-  <HydratePlansCard />
-{/if}
-
-<!-- OLD CODE: 
-  <div
-  class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7"
-> -->
 <div
   use:boop
   id="elem"
   class="grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"
 >
-  {#each plansCards as item, i}
-    {#if ready}
-      <div
-        in:scaleYN={{
-          hasTransition: hasTransition,
-          duration: 1000,
-          easing: elasticOut,
-          delay: 100 * i,
-        }}
-      >
-        <PlansCard
-          card={item.card}
-          payNowUrl={item.payNowUrl}
-          payLaterUrl={item.payLaterUrl}
+  <!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7" -->
+  <InView once action={calendlyJSandCSStoHead} margin={"200px"}>
+    {#each plansCards as item, i}
+      {#if ready}
+        <div
+          in:scaleYN={{
+            hasTransition: hasTransition,
+            duration: 1000,
+            easing: elasticOut,
+            delay: 100 * i,
+          }}
         >
-          <!-- <span slot="buttonText"> {item.buttonText} </span> -->
-          <span slot="cardTitle"> {item.cardTitle} </span>
+          <PlansCard
+            card={item.card}
+            payNowUrl={item.payNowUrl}
+            payLaterUrl={item.payLaterUrl}
+          >
+            <!-- <span slot="buttonText"> {item.buttonText} </span> -->
+            <span slot="cardTitle"> {item.cardTitle} </span>
 
-          <span slot="cardText">
-            {item.cardText}
-          </span>
-        </PlansCard>
-      </div>
-    {/if}
-  {/each}
+            <span slot="cardText">
+              {item.cardText}
+            </span>
+          </PlansCard>
+        </div>
+      {/if}
+    {/each}
+  </InView>
 </div>
 
 <!-- <style>
@@ -93,15 +113,14 @@
 <!-- TODO: was using this code to try to fire a custom event based on the creation of a dom element ... but this can be done with svelte's use: directive coupled with a function using svelte's createEventDispatcher -->
 <!-- const build = new Event("build");
 
-    let elem = document.getElementById("elem");
-    // Listen for the event.
-    elem.addEventListener(
-      "build",
-      (e) => {
-        console.log("elem fired");
-      },
-      false
-    );
-
-    // Dispatch the event.
-    elem.dispatchEvent(build); -->
+ document.getElementById("elem").addEventListener("doggo", (e) => {
+      console.log(e.detail.name);
+    });
+    document.getElementById("elem").dispatchEvent(
+      new CustomEvent("doggo", {
+        detail: {
+          name: "doggo found!",
+        },
+      })
+    );  
+-->
