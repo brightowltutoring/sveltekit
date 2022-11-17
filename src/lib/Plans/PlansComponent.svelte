@@ -5,12 +5,14 @@
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import { onMount, createEventDispatcher } from "svelte";
-
   let fire = createEventDispatcher();
 
   function boop() {
     // console.log("booped!"); // this works, but want to pass information to parent component instead
-    fire("boop", { message: "b-boop!", data: plansCardArray });
+    fire("boop", {
+      message: "n i boop",
+      plansCardArray: plansCardArray,
+    });
   }
 
   function scaleYN(node, args) {

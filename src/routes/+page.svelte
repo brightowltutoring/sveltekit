@@ -1,7 +1,6 @@
 <script>
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
-  let data; // this is data that is sent UP from PlansComponent.svelte ... namely the plansCardArray ... useful
-  // $: console.log("data", data);
+  let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isDarkMode, isRunningStandalone } from "$lib/store.js";
@@ -107,10 +106,10 @@
       <PlansComponent
         hasTransition={false}
         on:boop={(e) => {
-          data = e.detail.data.slice(0, 2);
-          console.log("n i oop!");
+          classicoAndMock = e.detail.plansCardArray.slice(0, 2);
+          console.log("🏡", e.detail.message);
         }}
-        plansCards={data}
+        plansCards={classicoAndMock}
       />
       <!-- plansCards={plansCardArray.slice(0, 2)} -->
     </div>
