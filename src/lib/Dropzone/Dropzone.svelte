@@ -1,6 +1,5 @@
 <script>
-  // import HydrateDropzone from "$lib/Dropzone/HydrateDropzone.svelte";  <HydrateDropzone />
-  import InView from "$lib/InView.svelte";
+  import HydrateDropzone from "$lib/Dropzone/HydrateDropzone.svelte";
   import { isDarkMode } from "$lib/store.js";
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
@@ -8,45 +7,43 @@
   export let brightnessTW = "brightness-100";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
-  export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
+  // TODO: for some reason using <InView><slot/></Inview> logic works in development but not in production; when running npm run dev I get the message 'ERROR: Could not resolve "./dropzone2.js"'
+  // import InView from "$lib/InView.svelte";
+  // export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
+  // let dropzone;
+  // async function hydrateDropzoneDomEls() {
+  //   console.log("drop it like its 🔥");
+  //   const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
 
-  let dropzone;
+  //   const ACCEPTED_FILES_FRONTEND =
+  //     ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
 
-  async function hydrateDropzoneDomEls() {
-    console.log("drop it like its 🔥");
-    const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
+  //   const { Dropzone } = await import("dropzone");
+  //   await import("$lib/Dropzone/dropzone.css");
 
-    const ACCEPTED_FILES_FRONTEND =
-      ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
+  //   dropzone = new Dropzone("#default", {
+  //     url: PUBLIC_UPLOAD_ENDPOINT,
+  //     acceptedFiles: ACCEPTED_FILES_FRONTEND,
+  //   });
 
-    const { Dropzone } = await import("dropzone");
-    await import("$lib/Dropzone/dropzone.css");
-
-    dropzone = new Dropzone("#default", {
-      url: PUBLIC_UPLOAD_ENDPOINT,
-      acceptedFiles: ACCEPTED_FILES_FRONTEND,
-    });
-
-    document.querySelector("#default").id = uniqueId;
-  }
+  //   document.querySelector("#default").id = uniqueId;
+  // }
+  // <InView once action={hydrateDropzoneDomEls}>
 </script>
 
-<InView once action={hydrateDropzoneDomEls}>
-  <form
-    method="post"
-    id="default"
-    style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
-    class="dropzone grid place-items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group "
-  >
-    <div
-      class="dz-message font-Nunito group-hover:animate-pulse"
-      data-dz-message
-    >
-      <!-- dz-message is a dropzone defined class -->
-      <span>{text}</span>
-    </div>
-  </form>
-</InView>
+<HydrateDropzone />
+
+<form
+  method="post"
+  id="default"
+  style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
+  class="dropzone grid place-items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group "
+>
+  <div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
+    <!-- dz-message is a dropzone defined class -->
+    <span>{text}</span>
+  </div>
+</form>
 
 <!-- Note: Importing dropzone via head external links is buggy with multiple dropzone instances. Also limited when modifying css.
 <svelte:head>

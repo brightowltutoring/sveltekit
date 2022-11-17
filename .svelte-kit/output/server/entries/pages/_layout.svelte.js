@@ -498,9 +498,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     }
     {
       if ($lessThan768) {
-        if ($scrollY < 10)
-          jankytown = "bottom-0";
-        if ($scrollY > 10 && $scrollY < verticalThresholdMobile) {
+        if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
           jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl";
         }
         if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)

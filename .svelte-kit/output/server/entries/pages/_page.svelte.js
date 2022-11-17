@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, o as null_to_empty } from "../../chunks/index.js";
-import { I as IntersectionObserver_1, P as PlansComponent } from "../../chunks/PlansComponent.js";
+import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
@@ -26,7 +26,7 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
   $$unsubscribe_isDarkMode();
   return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute"}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
-    return `<img class="${"stars " + escape(whenImageNotLoaded2, true) + " hover:scale-125"}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+    return `<img class="${"stars " + escape(whenImageNotLoaded2, true) + " hover:scale-125"}" src="${""}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
   })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
@@ -124,6 +124,26 @@ const reviews = [
     body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}"
   }
 ];
+const IntersectionObserver_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { once = false } = $$props;
+  let { condition = true } = $$props;
+  let { querySelectees = "div" } = $$props;
+  let { action = () => {
+    console.log("i c u div \u{1F441}\u{1FAE6}\u{1F441}");
+  } } = $$props;
+  let { margin = "0px" } = $$props;
+  if ($$props.once === void 0 && $$bindings.once && once !== void 0)
+    $$bindings.once(once);
+  if ($$props.condition === void 0 && $$bindings.condition && condition !== void 0)
+    $$bindings.condition(condition);
+  if ($$props.querySelectees === void 0 && $$bindings.querySelectees && querySelectees !== void 0)
+    $$bindings.querySelectees(querySelectees);
+  if ($$props.action === void 0 && $$bindings.action && action !== void 0)
+    $$bindings.action(action);
+  if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
+    $$bindings.margin(margin);
+  return ``;
+});
 function hydrateReviewStars(star) {
   console.log("\u{1F4AB}");
   star.src = "/star.webp";
@@ -170,7 +190,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let gradientTextColor;
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  let data;
+  let classicoAndMock;
   $$result.css.add(css);
   gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
   $$unsubscribe_isDarkMode();
@@ -188,7 +208,15 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></p>
 
       
-      ${validate_component(PlansComponent, "PlansComponent").$$render($$result, { hasTransition: false, plansCards: data }, {}, {})}
+      ${validate_component(PlansComponent, "PlansComponent").$$render(
+    $$result,
+    {
+      hasTransition: false,
+      plansCards: classicoAndMock
+    },
+    {},
+    {}
+  )}
       </div>
 
     

@@ -4,7 +4,10 @@ const HydrateDropzone = create_ssr_component(($$result, $$props, $$bindings, slo
   let { uniqueId = "default" } = $$props;
   if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
     $$bindings.uniqueId(uniqueId);
-  return ``;
+  return `
+
+
+`;
 });
 const Dropzone_svelte_svelte_type_style_lang = "";
 const css = {

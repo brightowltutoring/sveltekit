@@ -1,62 +1,6 @@
-import { c as create_ssr_component, v as validate_component, a as subscribe, e as escape, d as add_attribute, j as each, p as createEventDispatcher } from "./index.js";
+import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, p as createEventDispatcher, v as validate_component } from "./index.js";
 import { i as isDarkMode, e as elementColor } from "./store.js";
 import { p as plansCardArray } from "./plansCardArray.js";
-const browser = false;
-const IntersectionObserver_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { once = false } = $$props;
-  let { condition = true } = $$props;
-  let { querySelectees = "div" } = $$props;
-  let { action = () => {
-    console.log("i c u div \u{1F441}\u{1FAE6}\u{1F441}");
-  } } = $$props;
-  let { margin = "0px" } = $$props;
-  if ($$props.once === void 0 && $$bindings.once && once !== void 0)
-    $$bindings.once(once);
-  if ($$props.condition === void 0 && $$bindings.condition && condition !== void 0)
-    $$bindings.condition(condition);
-  if ($$props.querySelectees === void 0 && $$bindings.querySelectees && querySelectees !== void 0)
-    $$bindings.querySelectees(querySelectees);
-  if ($$props.action === void 0 && $$bindings.action && action !== void 0)
-    $$bindings.action(action);
-  if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
-    $$bindings.margin(margin);
-  return ``;
-});
-function calendlyJSandCSStoHead() {
-  console.log("\u{1F4C5}");
-  if (!document.getElementById("calendlyJS")) {
-    const calendlyJS = document.createElement("script");
-    calendlyJS.id = "calendlyJS";
-    calendlyJS.src = "https://assets.calendly.com/assets/external/widget.js";
-    calendlyJS.type = "text/javascript";
-    document.head.appendChild(calendlyJS);
-  }
-  if (!document.getElementById("calendlyCSS")) {
-    const calendlyCSS = document.createElement("link");
-    calendlyCSS.id = "calendlyCSS";
-    calendlyCSS.href = "https://assets.calendly.com/assets/external/widget.css";
-    calendlyCSS.rel = "stylesheet";
-    document.head.appendChild(calendlyCSS);
-  }
-}
-const HydratePlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let conditionsForObservation = browser;
-  return `
-
-
-${validate_component(IntersectionObserver_1, "IntersectionObserver").$$render(
-    $$result,
-    {
-      condition: conditionsForObservation,
-      querySelectees: "plans-card",
-      once: true,
-      action: calendlyJSandCSStoHead,
-      margin: "200px"
-    },
-    {},
-    {}
-  )}`;
-});
 const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $elementColor, $$unsubscribe_elementColor;
@@ -104,6 +48,41 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
 });
+const InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { once = false } = $$props;
+  let { action = () => {
+    console.log("slots slots ssslots");
+  } } = $$props;
+  let { margin = "0px" } = $$props;
+  let element;
+  if ($$props.once === void 0 && $$bindings.once && once !== void 0)
+    $$bindings.once(once);
+  if ($$props.action === void 0 && $$bindings.action && action !== void 0)
+    $$bindings.action(action);
+  if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
+    $$bindings.margin(margin);
+  return `
+
+
+<div${add_attribute("this", element, 0)}>${slots.default ? slots.default({}) : ``}</div>`;
+});
+function calendlyJSandCSStoHead() {
+  console.log("\u{1F4C5}");
+  if (!document.getElementById("calendlyJS")) {
+    const calendlyJS = document.createElement("script");
+    calendlyJS.id = "calendlyJS";
+    calendlyJS.src = "https://assets.calendly.com/assets/external/widget.js";
+    calendlyJS.type = "text/javascript";
+    document.head.appendChild(calendlyJS);
+  }
+  if (!document.getElementById("calendlyCSS")) {
+    const calendlyCSS = document.createElement("link");
+    calendlyCSS.id = "calendlyCSS";
+    calendlyCSS.href = "https://assets.calendly.com/assets/external/widget.css";
+    calendlyCSS.rel = "stylesheet";
+    document.head.appendChild(calendlyCSS);
+  }
+}
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   createEventDispatcher();
   let { plansCards = plansCardArray } = $$props;
@@ -113,37 +92,48 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
     $$bindings.plansCards(plansCards);
   if ($$props.hasTransition === void 0 && $$bindings.hasTransition && hasTransition !== void 0)
     $$bindings.hasTransition(hasTransition);
-  return `${ready ? `${validate_component(HydratePlansCard, "HydratePlansCard").$$render($$result, {}, {}, {})}` : ``}
+  return `<div id="${"elem"}" class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"}">
+  ${validate_component(InView, "InView").$$render(
+    $$result,
+    {
+      once: true,
+      action: calendlyJSandCSStoHead,
+      margin: "200px"
+    },
+    {},
+    {
+      default: () => {
+        return `${each(plansCards, (item, i) => {
+          return `${ready ? `<div>${validate_component(PlansCard, "PlansCard").$$render(
+            $$result,
+            {
+              card: item.card,
+              payNowUrl: item.payNowUrl,
+              payLaterUrl: item.payLaterUrl
+            },
+            {},
+            {
+              cardText: () => {
+                return `<span slot="${"cardText"}">${escape(item.cardText)}
+            </span>`;
+              },
+              cardTitle: () => {
+                return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
+              },
+              default: () => {
+                return `
+            
 
-
-<div id="${"elem"}" class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"}">${each(plansCards, (item, i) => {
-    return `${ready ? `<div>${validate_component(PlansCard, "PlansCard").$$render(
-      $$result,
-      {
-        card: item.card,
-        payNowUrl: item.payNowUrl,
-        payLaterUrl: item.payLaterUrl
-      },
-      {},
-      {
-        cardText: () => {
-          return `<span slot="${"cardText"}">${escape(item.cardText)}
-          </span>`;
-        },
-        cardTitle: () => {
-          return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
-        },
-        default: () => {
-          return `
-          
-
-          
-        `;
-        }
+            
+          `;
+              }
+            }
+          )}
+        </div>` : ``}`;
+        })}`;
       }
-    )}
-      </div>` : ``}`;
-  })}</div>
+    }
+  )}</div>
 
 
 
@@ -152,6 +142,5 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
 `;
 });
 export {
-  IntersectionObserver_1 as I,
   PlansComponent as P
 };
