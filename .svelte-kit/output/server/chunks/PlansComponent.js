@@ -49,22 +49,29 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
 });
 const InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { once = false } = $$props;
-  let { action = () => {
-    console.log("slots slots ssslots");
-  } } = $$props;
+  let container;
+  let { once } = $$props;
+  let { single } = $$props;
+  let { action = () => console.log("i \u2764\uFE0F slots") } = $$props;
+  let { root = null } = $$props;
+  let { threshold = 0 } = $$props;
   let { margin = "0px" } = $$props;
-  let element;
   if ($$props.once === void 0 && $$bindings.once && once !== void 0)
     $$bindings.once(once);
+  if ($$props.single === void 0 && $$bindings.single && single !== void 0)
+    $$bindings.single(single);
   if ($$props.action === void 0 && $$bindings.action && action !== void 0)
     $$bindings.action(action);
+  if ($$props.root === void 0 && $$bindings.root && root !== void 0)
+    $$bindings.root(root);
+  if ($$props.threshold === void 0 && $$bindings.threshold && threshold !== void 0)
+    $$bindings.threshold(threshold);
   if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
     $$bindings.margin(margin);
   return `
 
 
-<div${add_attribute("this", element, 0)}>${slots.default ? slots.default({}) : ``}</div>`;
+<div${add_attribute("this", container, 0)}>${slots.default ? slots.default({}) : ``}</div>`;
 });
 function calendlyJSandCSStoHead() {
   console.log("\u{1F4C5}");
@@ -142,5 +149,6 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
 `;
 });
 export {
+  InView as I,
   PlansComponent as P
 };

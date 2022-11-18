@@ -1,6 +1,8 @@
 <script>
   import HydrateDropzone from "$lib/Dropzone/HydrateDropzone.svelte";
   // import InView from "$lib/InView.svelte";
+
+  // export let uniqueId = "default";
   import { isDarkMode } from "$lib/store.js";
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
@@ -32,9 +34,11 @@
 </script>
 
 <HydrateDropzone />
+
+<!-- id={uniqueId} -->
 <form
-  method="post"
   id="default"
+  method="post"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
   class="dropzone grid place-items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group "
 >

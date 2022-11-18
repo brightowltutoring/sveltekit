@@ -2,7 +2,8 @@
 <script>
   import { onMount } from "svelte";
 
-  export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
+  export let uniqueId;
+  // needed in order to instantiate multiple dropzones on one page
   // TODO: this was previously inside Dropzone.svelte, which is a component imported elsewhere that uses 'uniqueId' as a param ..might neeed to fix this logic later
 
   let dropzone;
@@ -26,9 +27,6 @@
   }
 
   onMount(() => {
-    // let conditionsForObservation = true;
-    // if (conditionsForObservation) {
-
     const options = {
       root: null,
       threshold: 0,
@@ -44,10 +42,10 @@
     }, options);
 
     const dropzones = document.querySelectorAll(".dropzone");
-    for (let dropzone of dropzones) {
-      observer.observe(dropzone);
+
+    for (let dz of dropzones) {
+      observer.observe(dz);
     }
-    // }
   });
 </script>
 

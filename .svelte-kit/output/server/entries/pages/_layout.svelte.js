@@ -553,10 +553,11 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       },
       {
         default: () => {
-          return `${$navHomeworkClicked ? `<div>${validate_component(Dropzone, "Dropzone").$$render(
+          return `
+    <div>
+      ${validate_component(Dropzone, "Dropzone").$$render(
             $$result,
             {
-              uniqueId: "broccolii",
               text: "\u{1F525}",
               textSizeTW: "text-6xl",
               dimensionsTW: "w-[80vw] h-[85vh]",
@@ -564,7 +565,8 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
             },
             {},
             {}
-          )}</div>` : ``}`;
+          )}</div>
+    `;
         }
       }
     )}

@@ -1,7 +1,7 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape } from "./index.js";
 import { i as isDarkMode } from "./store.js";
 const HydrateDropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { uniqueId = "default" } = $$props;
+  let { uniqueId } = $$props;
   if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
     $$bindings.uniqueId(uniqueId);
   return `
@@ -34,7 +34,9 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
   $$unsubscribe_isDarkMode();
   return `${validate_component(HydrateDropzone, "HydrateDropzone").$$render($$result, {}, {}, {})}
-<form method="${"post"}" id="${"default"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone grid place-items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}"><div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>
+
+
+<form id="${"default"}" method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone grid place-items-center overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}"><div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>
     <span>${escape(text)}</span></div></form>
 
 `;

@@ -1,36 +1,35 @@
 <script>
-    import InView from "$lib/InView.svelte";
-    function hydrateReviewStars(star) {
-      console.log("💫");
-      star.src = "/star.webp";
-      star.classList.remove("opacity-0");
-    }
-
-    export let whenImageNotLoaded  
-    //fallback css containing 'opacity-0'..which is removed once the element is intersected
-    
-    export let title = "Great physics tutor!!"
-    export let name = "Thomas Finn"
-    export let date = '2022-06-08'
-    import { isDarkMode } from "$lib/store.js"; 
+  import { isDarkMode } from "$lib/store.js"; 
+  
+  import InView from "$lib/InView.svelte";
+ 
+  export let title = "Great physics tutor!!"
+  export let name = "Thomas Finn"
+  export let date = '2022-06-08'
+  
+  let whenImageNotLoaded = "opacity-0 transition-opacity duration-300 ease-in";
+  //fallback css containing 'opacity-0'..which is removed once the element is intersected
 </script>
 
 <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">  
 
   <div class="absolute">
 
-    # {title}
+   # {title}
 
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
-      <InView once action={(star) => hydrateReviewStars(star)} containee>
-        
+      <InView once single action={ target => {
+          console.log("💫");
+          target.src = "/star.webp";
+          target.classList.remove("opacity-0");
+        }} >
        <img class="stars {whenImageNotLoaded} hover:scale-125" src="" alt="star" style="width:40px; height:40px" >
-
       </InView>
 
       {/each}
+
     </div>
 
     <div class="italic"> on {date} </div>

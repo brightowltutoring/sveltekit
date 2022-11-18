@@ -1,21 +1,19 @@
 import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, o as null_to_empty } from "../../chunks/index.js";
-import { P as PlansComponent } from "../../chunks/PlansComponent.js";
+import { I as InView, P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
-const reviewCreator_svx_svelte_type_style_lang = "";
+const ReviewCreator_svx_svelte_type_style_lang = "";
 const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
   map: null
 };
+let whenImageNotLoaded = "opacity-0 transition-opacity duration-300 ease-in";
 const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  let { whenImageNotLoaded: whenImageNotLoaded2 } = $$props;
   let { title = "Great physics tutor!!" } = $$props;
   let { name = "Thomas Finn" } = $$props;
   let { date = "2022-06-08" } = $$props;
-  if ($$props.whenImageNotLoaded === void 0 && $$bindings.whenImageNotLoaded && whenImageNotLoaded2 !== void 0)
-    $$bindings.whenImageNotLoaded(whenImageNotLoaded2);
   if ($$props.title === void 0 && $$bindings.title && title !== void 0)
     $$bindings.title(title);
   if ($$props.name === void 0 && $$bindings.name && name !== void 0)
@@ -26,7 +24,25 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
   $$unsubscribe_isDarkMode();
   return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute"}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
     <div class="${"flex flex-row"}">${each(Array(5), (_, i) => {
-    return `<img class="${"stars " + escape(whenImageNotLoaded2, true) + " hover:scale-125"}" src="${""}" alt="${"star"}" style="${"width:40px; height:40px"}">`;
+    return `${validate_component(InView, "InView").$$render(
+      $$result,
+      {
+        once: true,
+        single: true,
+        action: (target) => {
+          console.log("\u{1F4AB}");
+          target.src = "/star.webp";
+          target.classList.remove("opacity-0");
+        }
+      },
+      {},
+      {
+        default: () => {
+          return `<img class="${"stars " + escape(whenImageNotLoaded, true) + " hover:scale-125"}" src="${""}" alt="${"star"}" style="${"width:40px; height:40px"}">
+      `;
+        }
+      }
+    )}`;
   })}</div>
     <div class="${"italic"}">on ${escape(date)}</div>
     ${slots.default ? slots.default({}) : ``}
@@ -124,56 +140,11 @@ const reviews = [
     body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}"
   }
 ];
-const IntersectionObserver_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { once = false } = $$props;
-  let { condition = true } = $$props;
-  let { querySelectees = "div" } = $$props;
-  let { action = () => {
-    console.log("i c u div \u{1F441}\u{1FAE6}\u{1F441}");
-  } } = $$props;
-  let { margin = "0px" } = $$props;
-  if ($$props.once === void 0 && $$bindings.once && once !== void 0)
-    $$bindings.once(once);
-  if ($$props.condition === void 0 && $$bindings.condition && condition !== void 0)
-    $$bindings.condition(condition);
-  if ($$props.querySelectees === void 0 && $$bindings.querySelectees && querySelectees !== void 0)
-    $$bindings.querySelectees(querySelectees);
-  if ($$props.action === void 0 && $$bindings.action && action !== void 0)
-    $$bindings.action(action);
-  if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
-    $$bindings.margin(margin);
-  return ``;
-});
-function hydrateReviewStars(star) {
-  console.log("\u{1F4AB}");
-  star.src = "/star.webp";
-  star.classList.remove("opacity-0");
-}
-const HydrateReviewStars = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-
-
-${validate_component(IntersectionObserver_1, "IntersectionObserver").$$render(
-    $$result,
-    {
-      querySelectees: ".stars",
-      once: true,
-      action: (star) => hydrateReviewStars(star),
-      margin: "300px"
-    },
-    {},
-    {}
-  )}`;
-});
-let whenImageNotLoaded = "opacity-0 transition-opacity duration-500 ease-in";
 const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${validate_component(HydrateReviewStars, "HydrateReviewStars").$$render($$result, {}, {}, {})}
-
-
-<div class="${"scale-90 "}">
+  return `<div class="${"scale-90 "}">
 
   <div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name, title, date, body }) => {
-    return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date, whenImageNotLoaded }, {}, {
+    return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
       default: () => {
         return `${escape(body)}
       `;
@@ -202,7 +173,15 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     
     <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></p>
 
-      ${validate_component(Dropzone, "Dropzone").$$render($$result, { textSizeTW: "text-2xl" }, {}, {})}</div>
+      ${validate_component(Dropzone, "Dropzone").$$render(
+    $$result,
+    {
+      textSizeTW: "text-2xl",
+      uniqueId: "tomato"
+    },
+    {},
+    {}
+  )}</div>
 
     
     <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></p>
