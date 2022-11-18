@@ -100,7 +100,6 @@
         <span class={gradientTextColor}> 2. Schedule a Session </span>
       </p>
 
-      <!-- <PlansComponent plansCards={plansCardArray.slice(0, 2)} /> -->
       <PlansComponent
         hasTransition={false}
         on:boop={(e) => {
@@ -109,7 +108,7 @@
         }}
         plansCards={classicoAndMock}
       />
-      <!-- plansCards={plansCardArray.slice(0, 2)} -->
+      <!-- TODO: 'boop' is a custom svelte event sent from within planscomponent.svelte, containing 'plansCardArray'; here I decide to modify a copy of this data and name it 'classicoAndMock' ... upside of this is not having to import 'plansCardArray' from a js file ...downside is while waiting for this boop event the change in content flashes on the home route (when refreshing the page at the plans section)-->
     </div>
 
     <!-- fourth page -->

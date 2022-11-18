@@ -1,8 +1,5 @@
 <script>
   import HydrateDropzone from "$lib/Dropzone/HydrateDropzone.svelte";
-  // import InView from "$lib/InView.svelte";
-
-  // export let uniqueId = "default";
   import { isDarkMode } from "$lib/store.js";
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
@@ -10,9 +7,9 @@
   export let brightnessTW = "brightness-100";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
-  // TODO: for some reason using <InView><slot/></Inview> logic works in development but not in production; when running 'npm run dev' I get the message 'ERROR: Could not resolve "./dropzone2.js"'
+  // TODO:testing
   // import InView from "$lib/InView.svelte";
-  // export let uniqueId = "default"; // needed in order to instantiate multiple dropzones on one page
+  // // export let uniqueId; // needed in order to instantiate multiple dropzones on one page
   // let dropzone;
   // async function hydrateDropzoneDomEls() {
   //   console.log("drop it like its 🔥");
@@ -31,12 +28,12 @@
 
   //   document.querySelector("#default").id = uniqueId;
   // }
+  // TODO:testing
 </script>
 
 <HydrateDropzone />
 
-<!-- id={uniqueId} -->
-<!-- grid place-items-center -->
+<!-- <InView once onview={hydrateDropzoneDomEls}> -->
 <form
   id="default"
   method="post"
@@ -44,10 +41,10 @@
   class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group "
 >
   <div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
-    <!-- dz-message is a dropzone defined class -->
     <span>{text}</span>
   </div>
 </form>
+<!-- </InView> -->
 
 <!-- Note: Importing dropzone via head external links is buggy with multiple dropzone instances. Also limited when modifying css.
 <svelte:head>
@@ -59,9 +56,8 @@
   />
 </svelte:head> -->
 <style>
+  /* Oddly without specifiying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
   :global(.dropzone .dz-preview.dz-image-preview) {
     background-color: transparent !important;
   }
-
-  /* Oddly without specifiying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
 </style>

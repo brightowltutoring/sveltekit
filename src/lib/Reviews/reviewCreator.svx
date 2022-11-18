@@ -7,8 +7,6 @@
   export let name = "Thomas Finn"
   export let date = '2022-06-08'
   
-  let whenImageNotLoaded = "opacity-0 transition-opacity duration-300 ease-in";
-  //fallback css containing 'opacity-0'..which is removed once the element is intersected
 </script>
 
 <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">  
@@ -20,12 +18,12 @@
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
-      <InView once single action={ target => {
+      <InView once single onview={ target => {
           console.log("💫");
-          target.src = "/star.webp";
           target.classList.remove("opacity-0");
+          target.src = "/star.webp";
         }} >
-       <img class="stars {whenImageNotLoaded} hover:scale-125" src="" alt="star" style="width:40px; height:40px" >
+       <img src="" class="opacity-0 transition-opacity duration-300 ease-in hover:scale-125" alt="star" style="width:40px; height:40px" >
       </InView>
 
       {/each}

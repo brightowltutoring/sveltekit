@@ -1,10 +1,7 @@
-<!-- TODO: no longer in use; replaced with slot logic of InView.svelte -->
 <script>
   import { onMount } from "svelte";
 
-  export let uniqueId;
-  // needed in order to instantiate multiple dropzones on one page
-  // TODO: this was previously inside Dropzone.svelte, which is a component imported elsewhere that uses 'uniqueId' as a param ..might neeed to fix this logic later
+  export let uniqueId; // needed in order to instantiate multiple dropzones on one page
 
   let dropzone;
 

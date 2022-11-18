@@ -50,18 +50,18 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 });
 const InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let container;
+  let { onview = () => console.log("i \u2764\uFE0F slots") } = $$props;
   let { once } = $$props;
   let { single } = $$props;
-  let { action = () => console.log("i \u2764\uFE0F slots") } = $$props;
   let { root = null } = $$props;
   let { threshold = 0 } = $$props;
   let { margin = "0px" } = $$props;
+  if ($$props.onview === void 0 && $$bindings.onview && onview !== void 0)
+    $$bindings.onview(onview);
   if ($$props.once === void 0 && $$bindings.once && once !== void 0)
     $$bindings.once(once);
   if ($$props.single === void 0 && $$bindings.single && single !== void 0)
     $$bindings.single(single);
-  if ($$props.action === void 0 && $$bindings.action && action !== void 0)
-    $$bindings.action(action);
   if ($$props.root === void 0 && $$bindings.root && root !== void 0)
     $$bindings.root(root);
   if ($$props.threshold === void 0 && $$bindings.threshold && threshold !== void 0)
@@ -91,7 +91,7 @@ function calendlyJSandCSStoHead() {
   }
 }
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  createEventDispatcher();
+  let dispatch = createEventDispatcher();
   let { plansCards = plansCardArray } = $$props;
   let { hasTransition = true } = $$props;
   let ready = !hasTransition;
@@ -99,18 +99,19 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
     $$bindings.plansCards(plansCards);
   if ($$props.hasTransition === void 0 && $$bindings.hasTransition && hasTransition !== void 0)
     $$bindings.hasTransition(hasTransition);
-  return `<div id="${"elem"}" class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"}">
-  ${validate_component(InView, "InView").$$render(
+  return `${validate_component(InView, "InView").$$render(
     $$result,
     {
       once: true,
-      action: calendlyJSandCSStoHead,
+      onview: calendlyJSandCSStoHead,
       margin: "200px"
     },
     {},
     {
       default: () => {
-        return `${each(plansCards, (item, i) => {
+        return `
+  <plans-section${add_attribute("use", dispatch("boop", { plansCardArray, message: "n i boop" }), 0)} class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"}">
+    ${each(plansCards, (item, i) => {
           return `${ready ? `<div>${validate_component(PlansCard, "PlansCard").$$render(
             $$result,
             {
@@ -137,13 +138,10 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
             }
           )}
         </div>` : ``}`;
-        })}`;
+        })}</plans-section>`;
       }
     }
-  )}</div>
-
-
-
+  )}
 
 
 `;
