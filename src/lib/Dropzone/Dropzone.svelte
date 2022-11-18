@@ -1,5 +1,4 @@
 <script>
-  import HydrateDropzone from "$lib/Dropzone/HydrateDropzone.svelte";
   import { isDarkMode } from "$lib/store.js";
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
@@ -7,33 +6,36 @@
   export let brightnessTW = "brightness-100";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
-  // TODO:testing
-  // import InView from "$lib/InView.svelte";
-  // // export let uniqueId; // needed in order to instantiate multiple dropzones on one page
-  // let dropzone;
-  // async function hydrateDropzoneDomEls() {
-  //   console.log("drop it like its 🔥");
-  //   const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
+  // import HydrateDropzone from "$lib/Dropzone/HydrateDropzone.svelte";
+  import InView from "$lib/InView.svelte";
+  import { cssToHead } from "$lib/utils.js";
+  export let uniqueId; // needed in order to instantiate multiple dropzones on one page
+  let dropzone;
 
-  //   const ACCEPTED_FILES_FRONTEND =
-  //     ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
+  async function hydrateDropzoneDomEls() {
+    console.log("drop it like its 🔥");
+    const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
 
-  //   const { Dropzone } = await import("dropzone");
-  //   await import("$lib/Dropzone/dropzone.css");
+    const ACCEPTED_FILES_FRONTEND =
+      ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
 
-  //   dropzone = new Dropzone("#default", {
-  //     url: PUBLIC_UPLOAD_ENDPOINT,
-  //     acceptedFiles: ACCEPTED_FILES_FRONTEND,
-  //   });
+    const { Dropzone } = await import("dropzone");
 
-  //   document.querySelector("#default").id = uniqueId;
-  // }
-  // TODO:testing
+    // await import("$lib/Dropzone/dropzone.css");
+    //TODO: this crashes when using InView.svelte with this function; it appears to be an issue with vite's 'npm run build' when dynamically importing css. TODO: WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
+    cssToHead("dropzoneCSS", "/dropzone.css");
+
+    dropzone = new Dropzone("#default", {
+      url: PUBLIC_UPLOAD_ENDPOINT,
+      acceptedFiles: ACCEPTED_FILES_FRONTEND,
+    });
+
+    document.querySelector("#default").id = uniqueId;
+  }
 </script>
 
-<HydrateDropzone />
+<InView once vanilla={".dropzone"} onview={hydrateDropzoneDomEls} />
 
-<!-- <InView once onview={hydrateDropzoneDomEls}> -->
 <form
   id="default"
   method="post"
@@ -44,6 +46,7 @@
     <span>{text}</span>
   </div>
 </form>
+
 <!-- </InView> -->
 
 <!-- Note: Importing dropzone via head external links is buggy with multiple dropzone instances. Also limited when modifying css.

@@ -1,5 +1,6 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, p as createEventDispatcher, v as validate_component } from "./index.js";
 import { i as isDarkMode, e as elementColor } from "./store.js";
+import { I as InView, j as jsToHead, c as cssToHead } from "./utils.js";
 import { p as plansCardArray } from "./plansCardArray.js";
 const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
@@ -48,48 +49,6 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
 });
-const InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let container;
-  let { onview = () => console.log("i \u2764\uFE0F slots") } = $$props;
-  let { once } = $$props;
-  let { single } = $$props;
-  let { root = null } = $$props;
-  let { threshold = 0 } = $$props;
-  let { margin = "0px" } = $$props;
-  if ($$props.onview === void 0 && $$bindings.onview && onview !== void 0)
-    $$bindings.onview(onview);
-  if ($$props.once === void 0 && $$bindings.once && once !== void 0)
-    $$bindings.once(once);
-  if ($$props.single === void 0 && $$bindings.single && single !== void 0)
-    $$bindings.single(single);
-  if ($$props.root === void 0 && $$bindings.root && root !== void 0)
-    $$bindings.root(root);
-  if ($$props.threshold === void 0 && $$bindings.threshold && threshold !== void 0)
-    $$bindings.threshold(threshold);
-  if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
-    $$bindings.margin(margin);
-  return `
-
-
-<div${add_attribute("this", container, 0)}>${slots.default ? slots.default({}) : ``}</div>`;
-});
-function calendlyJSandCSStoHead() {
-  console.log("\u{1F4C5}");
-  if (!document.getElementById("calendlyJS")) {
-    const calendlyJS = document.createElement("script");
-    calendlyJS.id = "calendlyJS";
-    calendlyJS.src = "https://assets.calendly.com/assets/external/widget.js";
-    calendlyJS.type = "text/javascript";
-    document.head.appendChild(calendlyJS);
-  }
-  if (!document.getElementById("calendlyCSS")) {
-    const calendlyCSS = document.createElement("link");
-    calendlyCSS.id = "calendlyCSS";
-    calendlyCSS.href = "https://assets.calendly.com/assets/external/widget.css";
-    calendlyCSS.rel = "stylesheet";
-    document.head.appendChild(calendlyCSS);
-  }
-}
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let dispatch = createEventDispatcher();
   let { plansCards = plansCardArray } = $$props;
@@ -103,7 +62,11 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
     $$result,
     {
       once: true,
-      onview: calendlyJSandCSStoHead,
+      onview: () => {
+        console.log("\u{1F4C5}");
+        jsToHead("calendlyJS", "https://assets.calendly.com/assets/external/widget.js");
+        cssToHead("calendlyCSS", "https://assets.calendly.com/assets/external/widget.css");
+      },
       margin: "200px"
     },
     {},
@@ -147,6 +110,5 @@ const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slot
 `;
 });
 export {
-  InView as I,
   PlansComponent as P
 };

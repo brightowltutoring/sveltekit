@@ -45,6 +45,7 @@ On my laptop the viewport on brave is ~800 pixels (i.e. window.innerHeight) — 
 the previous render rate is about 3 pages of latex per second, on my laptop.
 -->
 
+<!-- TODO: append this on the first observation event and check to not re-append -->
 <svelte:head>
   <link
     rel="stylesheet"

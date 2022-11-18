@@ -18,7 +18,7 @@
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
-      <InView once single onview={ target => {
+      <InView single once onview={ target => {
           console.log("💫");
           target.classList.remove("opacity-0");
           target.src = "/star.webp";

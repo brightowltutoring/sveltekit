@@ -7,6 +7,7 @@ const Katexer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
+
 ${$$result.head += `<!-- HEAD_svelte-ztscxf_START --><link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}"><!-- HEAD_svelte-ztscxf_END -->`, ""}`;
 });
 let numMax = 1e3;

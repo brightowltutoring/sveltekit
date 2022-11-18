@@ -1,7 +1,8 @@
 import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as validate_component, o as null_to_empty } from "../../chunks/index.js";
-import { I as InView, P as PlansComponent } from "../../chunks/PlansComponent.js";
+import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
+import { I as InView } from "../../chunks/utils.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
@@ -26,8 +27,8 @@ const ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots
     return `${validate_component(InView, "InView").$$render(
       $$result,
       {
-        once: true,
         single: true,
+        once: true,
         onview: (target) => {
           console.log("\u{1F4AB}");
           target.classList.remove("opacity-0");

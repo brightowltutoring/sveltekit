@@ -9,6 +9,7 @@
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import { onMount, createEventDispatcher } from "svelte";
+  import { cssToHead, jsToHead } from "$lib/utils.js";
   let dispatch = createEventDispatcher();
 
   function scaleYN(node, args) {
@@ -25,26 +26,6 @@
     //   </div>
   }
 
-  function calendlyJSandCSStoHead() {
-    console.log("📅");
-
-    if (!document.getElementById("calendlyJS")) {
-      const calendlyJS = document.createElement("script");
-      calendlyJS.id = "calendlyJS";
-      calendlyJS.src = "https://assets.calendly.com/assets/external/widget.js";
-      calendlyJS.type = "text/javascript";
-      document.head.appendChild(calendlyJS);
-    }
-    if (!document.getElementById("calendlyCSS")) {
-      const calendlyCSS = document.createElement("link");
-      calendlyCSS.id = "calendlyCSS";
-      calendlyCSS.href =
-        "https://assets.calendly.com/assets/external/widget.css";
-      calendlyCSS.rel = "stylesheet";
-      document.head.appendChild(calendlyCSS);
-    }
-  }
-
   export let plansCards = plansCardArray;
   // When the importing component has 'zeroTransition = true' this component produces no transition animation for both navbar AND direct navigation
   export let hasTransition = true;
@@ -56,7 +37,21 @@
   // the 'ready' variable logic allows the in:scale div to animate (svelte transition) when going directly to this plans route ..otherwise only works when navigating from another route
 </script>
 
-<InView once onview={calendlyJSandCSStoHead} margin={"200px"}>
+<InView
+  once
+  onview={() => {
+    console.log("📅");
+    jsToHead(
+      "calendlyJS",
+      "https://assets.calendly.com/assets/external/widget.js"
+    );
+    cssToHead(
+      "calendlyCSS",
+      "https://assets.calendly.com/assets/external/widget.css"
+    );
+  }}
+  margin={"200px"}
+>
   <!-- Can also do 'use:boop' where boop() is a function containing the dispatch logic. -->
   <plans-section
     use={dispatch("boop", { plansCardArray, message: "n i boop" })}
