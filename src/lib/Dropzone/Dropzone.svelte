@@ -36,11 +36,12 @@
 <HydrateDropzone />
 
 <!-- id={uniqueId} -->
+<!-- grid place-items-center -->
 <form
   id="default"
   method="post"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
-  class="dropzone grid place-items-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group "
+  class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group "
 >
   <div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
     <!-- dz-message is a dropzone defined class -->
@@ -61,5 +62,6 @@
   :global(.dropzone .dz-preview.dz-image-preview) {
     background-color: transparent !important;
   }
+
   /* Oddly without specifiying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
 </style>

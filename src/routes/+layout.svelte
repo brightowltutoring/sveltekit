@@ -136,7 +136,7 @@
   <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <div in:scale={{ duration: 300, easing: quintOut }}>
       <Dropzone
-        uniqueId={"broccolii"}
+        uniqueId={"broccoli"}
         text={"🔥"}
         textSizeTW={"text-6xl"}
         dimensionsTW={"w-[80vw] h-[85vh]"}
