@@ -84,28 +84,33 @@
       class="flex flex-row text-xl items-center {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
     >
       <!-- TODO: on:click directs to download the PWA -->
-      {#if !isRunningStandalone()}
-        <!-- {#key app} -->
-        <!-- in:scale={{ duration: 800, easing: elasticOut }} -->
-        <li
-          on:click={() => {
+      <!-- {#if !isRunningStandalone()} -->
+      <!-- {#key app} -->
+      <!-- in:scale={{ duration: 800, easing: elasticOut }} -->
+      <li
+        on:click={() => {
+          clearNavModals();
+          $navAppClicked = true;
+          setTimeout(() => {
             clearNavModals();
-            $navAppClicked = true;
-            setTimeout(() => {
-              clearNavModals();
-            }, 2000);
-          }}
-          class=" mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
+          }, 2000);
+        }}
+        class="{isRunningStandalone() &&
+          'hidden'}  mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
                border-b-1 rounded px-3 py-1 "
-        >
-          App
-        </li>
-        <!-- {/key} -->
-      {/if}
+      >
+        App
+      </li>
+      <!-- {/key} -->
+      <!-- {/if} -->
 
       <!-- {#each Object.keys($routes).splice(0, 5) as KEY} -->
+      <!-- style={KEY == "login" &&
+            $isLoggedIn &&
+            `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`} -->
       {#each Object.keys($routes).slice(0, 5) as KEY}
         <li
+          class={KEY == "home" && isRunningStandalone() && "hidden"}
           style={KEY == "login" &&
             $isLoggedIn &&
             `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
