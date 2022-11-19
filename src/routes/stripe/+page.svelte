@@ -10,7 +10,7 @@
   let urlSearch, service, extra, quantity, email;
   $: firstName = "";
 
-  import { app } from "$lib/firebase.js";
+  import { app } from "$lib/firebase";
   import { getFunctions, httpsCallable } from "firebase/functions";
   const functions = getFunctions(app);
 

@@ -1,6 +1,6 @@
 <script>
-  import { GoogleLogin } from "$lib/Login/loginFunctions.js";
-  import { isDarkMode } from "$lib/store.js";
+  import { GoogleLogin } from "$lib/Login/loginFunctions";
+  import { isDarkMode } from "$lib/store";
   import IconGoogle from "$lib/Icons/IconGoogle.svelte";
 </script>
 

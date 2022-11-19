@@ -1,6 +1,7 @@
 <!-- note: due to logincard logic this component will only appear (as of nov11,2022) when $navloginclicked is true -->
-
-<!-- <script>
+<script>
   import LoginCard from "$lib/Login/LoginCard.svelte";
+  console.log("back in black!");
 </script>
-<LoginCard /> -->
+
+<LoginCard noTransition />

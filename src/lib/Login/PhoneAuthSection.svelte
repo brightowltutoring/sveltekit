@@ -4,10 +4,10 @@
 
   import {
     regexPhoneChecker,
-    PhoneLogin, // this takes phoneNumber as a parameter
-  } from "$lib/Login/loginFunctions.js";
+    // PhoneLogin, // this takes phoneNumber as a parameter
+  } from "$lib/Login/loginFunctions";
   import IconPhone from "$lib/Icons/IconPhone.svelte";
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
 
   let magicLinkSent = false;
   let emptyPhoneInputAnimated;

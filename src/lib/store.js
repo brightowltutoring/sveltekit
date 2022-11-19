@@ -136,12 +136,6 @@ export const routes = writable({
     title: "Classroom 🍎",
     isCurrent: false,
   },
-  schools: {
-    name: "Schools",
-    href: "/schools",
-    title: "Schools",
-    isCurrent: false,
-  },
   // screenshareA: {
   //   name: "ScreenshareA",
   //   href: "/screenshareA",

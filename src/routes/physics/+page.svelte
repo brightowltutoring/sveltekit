@@ -1,6 +1,6 @@
 <script>
   import E from "$lib/physics/e-and-m.svx";
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
   $: proseInvert = $isDarkMode ? "prose-invert" : "";
 </script>
 

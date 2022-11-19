@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
-  import { lessThan768 } from "$lib/store.js";
-  import { goto } from "$app/navigation";
+  import { lessThan768 } from "$lib/store";
+  // import { goto } from "$app/navigation";
 
   let domain, options, api, par, firstID;
 

@@ -1,8 +1,8 @@
 <script>
-  import "$lib/Jitsi/jitsi_api.js"; // contains JitsiMeetExternalAPI ... used to import via link
+  import "$lib/Jitsi/jitsi_api"; // contains JitsiMeetExternalAPI ... used to import via link
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  import { lessThan768 } from "$lib/store.js";
+  import { lessThan768 } from "$lib/store";
 
   async function hangUpBtn() {
     await api.dispose();

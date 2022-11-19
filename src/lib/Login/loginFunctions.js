@@ -1,10 +1,10 @@
-import { auth } from "$lib/firebase.js";
+import { auth } from "$lib/firebase";
 import { goto } from "$app/navigation";
 // import { TwitterAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 // these two are necessary to grab the browsers width, i.e. import module depending if mobile or not
 import { get } from "svelte/store";
-import { lessThan768 } from "$lib/store.js";
+import { lessThan768 } from "$lib/store";
 
 export function regexEmailChecker(EMAIL) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
@@ -14,6 +14,7 @@ export function regexPhoneChecker(PHONE) {
 }
 
 export async function magicLinkToEmail(EMAIL) {
+  // const auth = await import("$lib/firebase");
   const {
     sendSignInLinkToEmail,
     // EmailAuthProvider
@@ -40,6 +41,7 @@ export async function magicLinkToEmail(EMAIL) {
 }
 
 export async function TwitterLogin() {
+  // const auth = await import("$lib/firebase");
   const { TwitterAuthProvider } = await import("firebase/auth");
   const provider = new TwitterAuthProvider();
 
@@ -96,6 +98,7 @@ export async function TwitterLogin() {
 }
 
 export async function GoogleLogin() {
+  // const auth = await import("$lib/firebase");
   const { GoogleAuthProvider } = await import("firebase/auth");
   const provider = new GoogleAuthProvider();
 
@@ -141,10 +144,10 @@ export async function GoogleLogin() {
   }
 }
 export async function PhoneLogin(PHONE_NUMBER) {
+  // const auth = await import("$lib/firebase");
   const { signInWithPhoneNumber } = await import("firebase/auth");
 
-  //TODO: these have yet to be implemented
-  // const phoneNumber = getPhoneNumberFromUserInput();
+  //TODO: .. const phoneNumber = getPhoneNumberFromUserInput();
   const appVerifier = window.recaptchaVerifier;
 
   signInWithPhoneNumber(auth, PHONE_NUMBER, appVerifier)

@@ -3,7 +3,7 @@
   import IconMoon from "$lib/Icons/IconMoon.svelte";
   import { scale, slide } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
 
   function toggleDM() {
     document.body.classList.toggle("dark-mode");

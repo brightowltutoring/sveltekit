@@ -1,18 +1,20 @@
 <script>
+  export let noTransition = false;
+
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  import { slide, fly, scale } from "svelte/transition";
+  import { slide } from "svelte/transition";
   import { quintOut, elasticOut } from "svelte/easing";
-  import { isRunningStandalone } from "$lib/utils.js";
+  import { isRunningStandalone } from "$lib/utils";
   import {
     isLoggedIn,
     isDarkMode,
     elementColor,
     navLoginClicked,
-  } from "$lib/store.js";
-  import { logoutFunction } from "$lib/Login/loginFunctions.js";
+  } from "$lib/store";
+  import { logoutFunction } from "$lib/Login/loginFunctions";
 
-  import { app, auth } from "$lib/firebase.js";
+  import { app, auth } from "$lib/firebase";
 
   import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
@@ -148,55 +150,55 @@
   }
 </script>
 
-{#if $navLoginClicked && !$isLoggedIn}
-  <!-- <div
-    class="w-11/12 sm:w-[500px]"
-    in:fly={{ y: 300, duration: 1000, easing: elasticOut }}
-  > -->
-  <!-- in:scale={{ duration: 500, easing: quintOut }} -->
-
-  <!-- TODO: testing: my-20 -->
-  <login-card
-    in:slide={{ duration: 400, easing: quintOut }}
-    class=" block relative text-xl hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
-      ? 'hover:shadow-xl '
-      : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"
-    style={`background:${$elementColor}`}
-  >
-    <!-- <div class="absolute -top-2 -right-2">
+{#if !$isLoggedIn}
+  {#key !noTransition && $navLoginClicked}
+    <login-card
+      in:slide={{ duration: 400, easing: quintOut }}
+      class=" block relative text-xl hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
+        ? 'hover:shadow-xl '
+        : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"
+      style={`background:${$elementColor}`}
+    >
+      <!-- <div class="absolute -top-2 -right-2">
           <CloseButton />
         </div> -->
 
-    {#if !isRunningStandalone()}
-      <MagicLinkSection />
-    {:else}
-      <PhoneAuthSection />
-    {/if}
+      {#if !isRunningStandalone()}
+        <MagicLinkSection />
+      {:else}
+        <PhoneAuthSection />
+      {/if}
 
-    <p class="py-5">or</p>
+      <p class="py-5">or</p>
 
-    <!-- since these don't update the DOM, placed them in separate components -->
-    <GoogleLoginButton />
-    <TwitterLoginButton />
-  </login-card>
+      <!-- since these don't update the DOM, placed them in separate components -->
+      <GoogleLoginButton />
+      <TwitterLoginButton />
+    </login-card>
+  {/key}
   <!-- </div> -->
-{:else if $navLoginClicked && $isLoggedIn}
-  <!-- in:slide={{ duration: 400, easing: quintOut }} -->
-  <logout-card
-    in:slide={{ duration: 1000, easing: elasticOut }}
-    class="relative hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
-      ? 'hover:shadow-xl '
-      : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px] "
-    style={`background:${$elementColor}`}
-  >
-    <p bind:this={loginWelcomeText}>Welcome User</p>
-    <div id="redirectMessage">
-      Redirecting to your page in
-      <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
-    </div>
+{/if}
 
-    <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
-  </logout-card>
+<!-- {:else} -->
+{#if $isLoggedIn}
+  {#key !noTransition && $navLoginClicked}
+    <!-- {#key $navLoginClicked} -->
+    <logout-card
+      in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
+      class="relative block  hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
+        ? 'hover:shadow-xl '
+        : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px] "
+      style={`background:${$elementColor}`}
+    >
+      <p bind:this={loginWelcomeText}>Welcome User</p>
+      <div id="redirectMessage">
+        Redirecting to your page in
+        <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
+      </div>
+
+      <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
+    </logout-card>
+  {/key}
 {/if}
 
 <!-- {#if $navLoginClicked && $isLoggedIn}{/if} -->

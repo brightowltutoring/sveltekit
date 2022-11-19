@@ -2,7 +2,7 @@
 <!-- <script>
   export let Src;
   export let Alt;
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
 
   let imgBackground;
   $: $isDarkMode

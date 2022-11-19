@@ -14,28 +14,24 @@ export { matchers } from './client-matchers.js';
 	() => import('./nodes/11'),
 	() => import('./nodes/12'),
 	() => import('./nodes/13'),
-	() => import('./nodes/14'),
-	() => import('./nodes/15'),
-	() => import('./nodes/16')];
+	() => import('./nodes/14')];
 
 			export const server_loads = [];
 
 			export const dictionary = {
 	"/": [2],
-	"/calcom": [3],
-	"/classroom": [4],
-	"/faq": [5],
-	"/homework": [6],
-	"/katex": [7],
-	"/login": [8],
-	"/mathjax": [10],
-	"/math": [9],
-	"/physics": [11],
-	"/plans": [12],
-	"/samplequiz": [13],
-	"/schools": [14],
-	"/screenshareA": [15],
-	"/stripe": [16]
+	"/classroom": [3],
+	"/faq": [4],
+	"/homework": [5],
+	"/katex": [6],
+	"/login": [7],
+	"/mathjax": [9],
+	"/math": [8],
+	"/physics": [10],
+	"/plans": [11],
+	"/samplequiz": [12],
+	"/screenshareA": [13],
+	"/stripe": [14]
 };
 
 			export const hooks = {

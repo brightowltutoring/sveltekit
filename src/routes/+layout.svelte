@@ -1,7 +1,5 @@
 <script>
   import "../app.css";
-  import { scale } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import LoginCard from "$lib/Login/LoginCard.svelte";
@@ -10,33 +8,24 @@
   import {
     instDeltaY,
     scrollY,
-    // windowInnerHeight, TODO: remove?
-    // scrollYMax, TODO: remove?
     routes,
     setInnerWidthViaMatchMedia,
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
-  } from "$lib/store.js";
+  } from "$lib/store";
 
-  import { disablePinchZoom } from "$lib/utils.js";
+  import { disablePinchZoom } from "$lib/utils";
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
 
-  // TODO: remove?
-  // function setScrollYMax() {
-  //   $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
-  // }
-
   onMount(() => {
-    // setScrollYMax(); TODO: remove?
     disablePinchZoom();
     setInnerWidthViaMatchMedia();
   });
 
   // $: console.log("$instDeltaY", $instDeltaY);
-
   let jankytown;
 
   // Since '$instDeltaY' is updated continuously on scroll, the entire reactive statement blocks below are checked continuously (as evidenced by a top console log) is there a way to do this without refiring the entire block??
@@ -118,15 +107,13 @@
   </Modal>
 
   <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
-    <div in:scale={{ duration: 300, easing: quintOut }}>
-      <Dropzone
-        uniqueId={"broccoli"}
-        text={"🔥"}
-        textSizeTW={"text-6xl"}
-        dimensionsTW={"w-[80vw] h-[85vh]"}
-        brightnessTW={"brightness-95"}
-      />
-    </div>
+    <Dropzone
+      uniqueId={"broccoli"}
+      text={"🔥"}
+      textSizeTW={"text-6xl"}
+      dimensionsTW={"w-[80vw] h-[85vh]"}
+      brightnessTW={"brightness-95"}
+    />
   </Modal>
 
   <!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->

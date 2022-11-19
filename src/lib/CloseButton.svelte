@@ -1,5 +1,5 @@
 <script>
-  import { elementColor, navLoginClicked, isDarkMode } from "$lib/store.js";
+  import { elementColor, navLoginClicked, isDarkMode } from "$lib/store";
 </script>
 
 <close-button

@@ -1,7 +1,7 @@
 <script>
   import JitsiUserAdmin from "$lib/Jitsi/JitsiUserAdmin.svelte";
   import { onMount, onDestroy } from "svelte";
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
 
   onMount(() => {
     $isDarkMode = true;

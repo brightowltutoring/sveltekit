@@ -4,7 +4,7 @@
     lastScrollY,
     burgerBreakPoint,
     instDeltaY,
-  } from "$lib/store.js";
+  } from "$lib/store";
 
   // export let hamburgerBtn
   export let mobileOpen;

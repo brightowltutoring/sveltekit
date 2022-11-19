@@ -4,7 +4,7 @@
   import { elasticOut } from "svelte/easing";
   import Navitem from "./Navitem.svelte";
   import { goto } from "$app/navigation";
-  import { isRunningStandalone } from "$lib/utils.js";
+  import { isRunningStandalone } from "$lib/utils";
   import {
     isLoggedIn,
     routes,
@@ -13,7 +13,7 @@
     navLoginClicked,
     navHomeworkClicked,
     elementColor,
-  } from "$lib/store.js";
+  } from "$lib/store";
   import { spring } from "svelte/motion";
   // import { onMount } from "svelte";
 

@@ -1,5 +1,5 @@
 <script>
-  import { isDarkMode, elementColor } from "$lib/store.js";
+  import { isDarkMode, elementColor } from "$lib/store";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
 

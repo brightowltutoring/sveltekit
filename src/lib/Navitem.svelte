@@ -1,7 +1,7 @@
 <script>
   export let href, content, bool, btnColor, btnColorHover, routes;
 
-  import { navLoginClicked, navHomeworkClicked, navModal } from "./store.js";
+  import { navLoginClicked, navHomeworkClicked, navModal } from "./store";
   import { page } from "$app/stores";
 
   // this allows going back and button click matching with route

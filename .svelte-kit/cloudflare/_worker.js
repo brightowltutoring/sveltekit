@@ -115,8 +115,8 @@ function custom_event(type, detail, { bubbles = false, cancelable = false } = {}
   e3.initCustomEvent(type, bubbles, cancelable, detail);
   return e3;
 }
-function set_current_component(component18) {
-  current_component = component18;
+function set_current_component(component17) {
+  current_component = component17;
 }
 function get_current_component() {
   if (!current_component)
@@ -127,13 +127,13 @@ function onDestroy(fn2) {
   get_current_component().$$.on_destroy.push(fn2);
 }
 function createEventDispatcher() {
-  const component18 = get_current_component();
+  const component17 = get_current_component();
   return (type, detail, { cancelable = false } = {}) => {
-    const callbacks = component18.$$.callbacks[type];
+    const callbacks = component17.$$.callbacks[type];
     if (callbacks) {
       const event = custom_event(type, detail, { cancelable });
       callbacks.slice().forEach((fn2) => {
-        fn2.call(component18, event);
+        fn2.call(component17, event);
       });
       return !event.defaultPrevented;
     }
@@ -168,13 +168,13 @@ function each(items, fn2) {
   }
   return str;
 }
-function validate_component(component18, name5) {
-  if (!component18 || !component18.$$render) {
+function validate_component(component17, name5) {
+  if (!component17 || !component17.$$render) {
     if (name5 === "svelte:component")
       name5 += " this={...}";
     throw new Error(`<${name5}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name5}>.`);
   }
-  return component18;
+  return component17;
 }
 function create_ssr_component(fn2) {
   function $$render(result, props, bindings, slots, context) {
@@ -340,20 +340,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode;
-      var index18 = 0;
-      while (index18 < str.length) {
-        var eqIdx = str.indexOf("=", index18);
+      var index17 = 0;
+      while (index17 < str.length) {
+        var eqIdx = str.indexOf("=", index17);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index18);
+        var endIdx = str.indexOf(";", index17);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index18 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index17 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index18, eqIdx).trim();
+        var key2 = str.slice(index17, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -361,7 +361,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index18 = endIdx + 1;
+        index17 = endIdx + 1;
       }
       return obj;
     }
@@ -706,12 +706,6 @@ var init_store = __esm({
         title: "Classroom \u{1F34E}",
         isCurrent: false
       },
-      schools: {
-        name: "Schools",
-        href: "/schools",
-        title: "Schools",
-        isCurrent: false
-      },
       stripe: {
         name: "Stripe",
         href: "/stripe",
@@ -1021,10 +1015,10 @@ var init_dropzone = __esm({
             dzchunkbyteoffset: chunk.index * this.options.chunkSize
           };
       },
-      accept(file18, done) {
+      accept(file17, done) {
         return done();
       },
-      chunksUploaded: function(file18, done) {
+      chunksUploaded: function(file17, done) {
         done();
       },
       binaryBody: false,
@@ -1050,14 +1044,14 @@ var init_dropzone = __esm({
         }
         return this.element.appendChild(this.getFallbackForm());
       },
-      resize(file18, width, height, resizeMethod) {
+      resize(file17, width, height, resizeMethod) {
         let info = {
           srcX: 0,
           srcY: 0,
-          srcWidth: file18.width,
-          srcHeight: file18.height
+          srcWidth: file17.width,
+          srcHeight: file17.height
         };
-        let srcRatio = file18.width / file18.height;
+        let srcRatio = file17.width / file17.height;
         if (width == null && height == null) {
           width = info.srcWidth;
           height = info.srcHeight;
@@ -1071,10 +1065,10 @@ var init_dropzone = __esm({
         if (info.srcWidth > width || info.srcHeight > height) {
           if (resizeMethod === "crop") {
             if (srcRatio > trgRatio) {
-              info.srcHeight = file18.height;
+              info.srcHeight = file17.height;
               info.srcWidth = info.srcHeight * trgRatio;
             } else {
-              info.srcWidth = file18.width;
+              info.srcWidth = file17.width;
               info.srcHeight = info.srcWidth / trgRatio;
             }
           } else if (resizeMethod === "contain") {
@@ -1085,17 +1079,17 @@ var init_dropzone = __esm({
           } else
             throw new Error(`Unknown resizeMethod '${resizeMethod}'`);
         }
-        info.srcX = (file18.width - info.srcWidth) / 2;
-        info.srcY = (file18.height - info.srcHeight) / 2;
+        info.srcX = (file17.width - info.srcWidth) / 2;
+        info.srcY = (file17.height - info.srcHeight) / 2;
         info.trgWidth = width;
         info.trgHeight = height;
         return info;
       },
-      transformFile(file18, done) {
-        if ((this.options.resizeWidth || this.options.resizeHeight) && file18.type.match(/image.*/))
-          return this.resizeImage(file18, this.options.resizeWidth, this.options.resizeHeight, this.options.resizeMethod, done);
+      transformFile(file17, done) {
+        if ((this.options.resizeWidth || this.options.resizeHeight) && file17.type.match(/image.*/))
+          return this.resizeImage(file17, this.options.resizeWidth, this.options.resizeHeight, this.options.resizeMethod, done);
         else
-          return done(file18);
+          return done(file17);
       },
       previewTemplate: /* @__PURE__ */ $parcel$interopDefault($fd6031f88dce2e32$exports),
       drop(e3) {
@@ -1120,84 +1114,84 @@ var init_dropzone = __esm({
       reset() {
         return this.element.classList.remove("dz-started");
       },
-      addedfile(file18) {
+      addedfile(file17) {
         if (this.element === this.previewsContainer)
           this.element.classList.add("dz-started");
         if (this.previewsContainer && !this.options.disablePreviews) {
-          file18.previewElement = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(this.options.previewTemplate.trim());
-          file18.previewTemplate = file18.previewElement;
-          this.previewsContainer.appendChild(file18.previewElement);
-          for (var node of file18.previewElement.querySelectorAll("[data-dz-name]"))
-            node.textContent = file18.name;
-          for (node of file18.previewElement.querySelectorAll("[data-dz-size]"))
-            node.innerHTML = this.filesize(file18.size);
+          file17.previewElement = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(this.options.previewTemplate.trim());
+          file17.previewTemplate = file17.previewElement;
+          this.previewsContainer.appendChild(file17.previewElement);
+          for (var node of file17.previewElement.querySelectorAll("[data-dz-name]"))
+            node.textContent = file17.name;
+          for (node of file17.previewElement.querySelectorAll("[data-dz-size]"))
+            node.innerHTML = this.filesize(file17.size);
           if (this.options.addRemoveLinks) {
-            file18._removeLink = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(`<a class="dz-remove" href="javascript:undefined;" data-dz-remove>${this.options.dictRemoveFile}</a>`);
-            file18.previewElement.appendChild(file18._removeLink);
+            file17._removeLink = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(`<a class="dz-remove" href="javascript:undefined;" data-dz-remove>${this.options.dictRemoveFile}</a>`);
+            file17.previewElement.appendChild(file17._removeLink);
           }
           let removeFileEvent = (e3) => {
             e3.preventDefault();
             e3.stopPropagation();
-            if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
+            if (file17.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
               return $3ed269f2f0fb224b$export$2e2bcd8739ae039.confirm(
                 this.options.dictCancelUploadConfirmation,
-                () => this.removeFile(file18)
+                () => this.removeFile(file17)
               );
             else {
               if (this.options.dictRemoveFileConfirmation)
                 return $3ed269f2f0fb224b$export$2e2bcd8739ae039.confirm(
                   this.options.dictRemoveFileConfirmation,
-                  () => this.removeFile(file18)
+                  () => this.removeFile(file17)
                 );
               else
-                return this.removeFile(file18);
+                return this.removeFile(file17);
             }
           };
-          for (let removeLink of file18.previewElement.querySelectorAll("[data-dz-remove]"))
+          for (let removeLink of file17.previewElement.querySelectorAll("[data-dz-remove]"))
             removeLink.addEventListener("click", removeFileEvent);
         }
       },
-      removedfile(file18) {
-        if (file18.previewElement != null && file18.previewElement.parentNode != null)
-          file18.previewElement.parentNode.removeChild(file18.previewElement);
+      removedfile(file17) {
+        if (file17.previewElement != null && file17.previewElement.parentNode != null)
+          file17.previewElement.parentNode.removeChild(file17.previewElement);
         return this._updateMaxFilesReachedClass();
       },
-      thumbnail(file18, dataUrl) {
-        if (file18.previewElement) {
-          file18.previewElement.classList.remove("dz-file-preview");
-          for (let thumbnailElement of file18.previewElement.querySelectorAll("[data-dz-thumbnail]")) {
-            thumbnailElement.alt = file18.name;
+      thumbnail(file17, dataUrl) {
+        if (file17.previewElement) {
+          file17.previewElement.classList.remove("dz-file-preview");
+          for (let thumbnailElement of file17.previewElement.querySelectorAll("[data-dz-thumbnail]")) {
+            thumbnailElement.alt = file17.name;
             thumbnailElement.src = dataUrl;
           }
           return setTimeout(
-            () => file18.previewElement.classList.add("dz-image-preview"),
+            () => file17.previewElement.classList.add("dz-image-preview"),
             1
           );
         }
       },
-      error(file18, message) {
-        if (file18.previewElement) {
-          file18.previewElement.classList.add("dz-error");
+      error(file17, message) {
+        if (file17.previewElement) {
+          file17.previewElement.classList.add("dz-error");
           if (typeof message !== "string" && message.error)
             message = message.error;
-          for (let node of file18.previewElement.querySelectorAll("[data-dz-errormessage]"))
+          for (let node of file17.previewElement.querySelectorAll("[data-dz-errormessage]"))
             node.textContent = message;
         }
       },
       errormultiple() {
       },
-      processing(file18) {
-        if (file18.previewElement) {
-          file18.previewElement.classList.add("dz-processing");
-          if (file18._removeLink)
-            return file18._removeLink.innerHTML = this.options.dictCancelUpload;
+      processing(file17) {
+        if (file17.previewElement) {
+          file17.previewElement.classList.add("dz-processing");
+          if (file17._removeLink)
+            return file17._removeLink.innerHTML = this.options.dictCancelUpload;
         }
       },
       processingmultiple() {
       },
-      uploadprogress(file18, progress, bytesSent) {
-        if (file18.previewElement)
-          for (let node of file18.previewElement.querySelectorAll("[data-dz-uploadprogress]"))
+      uploadprogress(file17, progress, bytesSent) {
+        if (file17.previewElement)
+          for (let node of file17.previewElement.querySelectorAll("[data-dz-uploadprogress]"))
             node.nodeName === "PROGRESS" ? node.value = progress : node.style.width = `${progress}%`;
       },
       totaluploadprogress() {
@@ -1206,22 +1200,22 @@ var init_dropzone = __esm({
       },
       sendingmultiple() {
       },
-      success(file18) {
-        if (file18.previewElement)
-          return file18.previewElement.classList.add("dz-success");
+      success(file17) {
+        if (file17.previewElement)
+          return file17.previewElement.classList.add("dz-success");
       },
       successmultiple() {
       },
-      canceled(file18) {
-        return this.emit("error", file18, this.options.dictUploadCanceled);
+      canceled(file17) {
+        return this.emit("error", file17, this.options.dictUploadCanceled);
       },
       canceledmultiple() {
       },
-      complete(file18) {
-        if (file18._removeLink)
-          file18._removeLink.innerHTML = this.options.dictRemoveFile;
-        if (file18.previewElement)
-          return file18.previewElement.classList.add("dz-complete");
+      complete(file17) {
+        if (file17._removeLink)
+          file17._removeLink.innerHTML = this.options.dictRemoveFile;
+        if (file17.previewElement)
+          return file17.previewElement.classList.add("dz-complete");
       },
       completemultiple() {
       },
@@ -1273,23 +1267,23 @@ var init_dropzone = __esm({
       }
       getAcceptedFiles() {
         return this.files.filter(
-          (file18) => file18.accepted
+          (file17) => file17.accepted
         ).map(
-          (file18) => file18
+          (file17) => file17
         );
       }
       getRejectedFiles() {
         return this.files.filter(
-          (file18) => !file18.accepted
+          (file17) => !file17.accepted
         ).map(
-          (file18) => file18
+          (file17) => file17
         );
       }
       getFilesWithStatus(status) {
         return this.files.filter(
-          (file18) => file18.status === status
+          (file17) => file17.status === status
         ).map(
-          (file18) => file18
+          (file17) => file17
         );
       }
       getQueuedFiles() {
@@ -1303,9 +1297,9 @@ var init_dropzone = __esm({
       }
       getActiveFiles() {
         return this.files.filter(
-          (file18) => file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED
+          (file17) => file17.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || file17.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED
         ).map(
-          (file18) => file18
+          (file17) => file17
         );
       }
       init() {
@@ -1337,8 +1331,8 @@ var init_dropzone = __esm({
             this.hiddenFileInput.addEventListener("change", () => {
               let { files } = this.hiddenFileInput;
               if (files.length)
-                for (let file18 of files)
-                  this.addFile(file18);
+                for (let file17 of files)
+                  this.addFile(file17);
               this.emit("addedfiles", files);
               setupHiddenFileInput();
             });
@@ -1358,9 +1352,9 @@ var init_dropzone = __esm({
         );
         this.on(
           "canceled",
-          (file18) => this.emit("complete", file18)
+          (file17) => this.emit("complete", file17)
         );
-        this.on("complete", (file18) => {
+        this.on("complete", (file17) => {
           if (this.getAddedFiles().length === 0 && this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0)
             return setTimeout(
               () => this.emit("queuecomplete"),
@@ -1449,9 +1443,9 @@ var init_dropzone = __esm({
         let totalBytes = 0;
         let activeFiles = this.getActiveFiles();
         if (activeFiles.length) {
-          for (let file18 of this.getActiveFiles()) {
-            totalBytesSent += file18.upload.bytesSent;
-            totalBytes += file18.upload.total;
+          for (let file17 of this.getActiveFiles()) {
+            totalBytesSent += file17.upload.bytesSent;
+            totalBytes += file17.upload.total;
           }
           totalUploadProgress = 100 * totalBytesSent / totalBytes;
         } else
@@ -1464,10 +1458,10 @@ var init_dropzone = __esm({
         else
           return `${this.options.paramName}${this.options.uploadMultiple ? `[${n2}]` : ""}`;
       }
-      _renameFile(file18) {
+      _renameFile(file17) {
         if (typeof this.options.renameFile !== "function")
-          return file18.name;
-        return this.options.renameFile(file18);
+          return file17.name;
+        return this.options.renameFile(file17);
       }
       getFallbackForm() {
         let existingFallback, form;
@@ -1534,7 +1528,7 @@ var init_dropzone = __esm({
         this.removeEventListeners();
         this.disabled = true;
         return this.files.map(
-          (file18) => this.cancelUpload(file18)
+          (file17) => this.cancelUpload(file17)
         );
       }
       enable() {
@@ -1604,8 +1598,8 @@ var init_dropzone = __esm({
           return this._addFilesFromItems(items);
       }
       handleFiles(files) {
-        for (let file18 of files)
-          this.addFile(file18);
+        for (let file17 of files)
+          this.addFile(file17);
       }
       _addFilesFromItems(items) {
         return (() => {
@@ -1642,11 +1636,11 @@ var init_dropzone = __esm({
             if (entries.length > 0) {
               for (let entry of entries) {
                 if (entry.isFile)
-                  entry.file((file18) => {
-                    if (this.options.ignoreHiddenFiles && file18.name.substring(0, 1) === ".")
+                  entry.file((file17) => {
+                    if (this.options.ignoreHiddenFiles && file17.name.substring(0, 1) === ".")
                       return;
-                    file18.fullPath = `${path2}/${file18.name}`;
-                    return this.addFile(file18);
+                    file17.fullPath = `${path2}/${file17.name}`;
+                    return this.addFile(file17);
                   });
                 else if (entry.isDirectory)
                   this._addFilesFromDirectory(entry, `${path2}/${entry.name}`);
@@ -1658,51 +1652,51 @@ var init_dropzone = __esm({
         };
         return readEntries();
       }
-      accept(file18, done) {
-        if (this.options.maxFilesize && file18.size > this.options.maxFilesize * 1048576)
-          done(this.options.dictFileTooBig.replace("{{filesize}}", Math.round(file18.size / 1024 / 10.24) / 100).replace("{{maxFilesize}}", this.options.maxFilesize));
-        else if (!$3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile(file18, this.options.acceptedFiles))
+      accept(file17, done) {
+        if (this.options.maxFilesize && file17.size > this.options.maxFilesize * 1048576)
+          done(this.options.dictFileTooBig.replace("{{filesize}}", Math.round(file17.size / 1024 / 10.24) / 100).replace("{{maxFilesize}}", this.options.maxFilesize));
+        else if (!$3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile(file17, this.options.acceptedFiles))
           done(this.options.dictInvalidFileType);
         else if (this.options.maxFiles != null && this.getAcceptedFiles().length >= this.options.maxFiles) {
           done(this.options.dictMaxFilesExceeded.replace("{{maxFiles}}", this.options.maxFiles));
-          this.emit("maxfilesexceeded", file18);
+          this.emit("maxfilesexceeded", file17);
         } else
-          this.options.accept.call(this, file18, done);
+          this.options.accept.call(this, file17, done);
       }
-      addFile(file18) {
-        file18.upload = {
+      addFile(file17) {
+        file17.upload = {
           uuid: $3ed269f2f0fb224b$export$2e2bcd8739ae039.uuidv4(),
           progress: 0,
-          total: file18.size,
+          total: file17.size,
           bytesSent: 0,
-          filename: this._renameFile(file18)
+          filename: this._renameFile(file17)
         };
-        this.files.push(file18);
-        file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED;
-        this.emit("addedfile", file18);
-        this._enqueueThumbnail(file18);
-        this.accept(file18, (error2) => {
+        this.files.push(file17);
+        file17.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED;
+        this.emit("addedfile", file17);
+        this._enqueueThumbnail(file17);
+        this.accept(file17, (error2) => {
           if (error2) {
-            file18.accepted = false;
+            file17.accepted = false;
             this._errorProcessing([
-              file18
+              file17
             ], error2);
           } else {
-            file18.accepted = true;
+            file17.accepted = true;
             if (this.options.autoQueue)
-              this.enqueueFile(file18);
+              this.enqueueFile(file17);
           }
           this._updateMaxFilesReachedClass();
         });
       }
       enqueueFiles(files) {
-        for (let file18 of files)
-          this.enqueueFile(file18);
+        for (let file17 of files)
+          this.enqueueFile(file17);
         return null;
       }
-      enqueueFile(file18) {
-        if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED && file18.accepted === true) {
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED;
+      enqueueFile(file17) {
+        if (file17.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED && file17.accepted === true) {
+          file17.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED;
           if (this.options.autoProcessQueue)
             return setTimeout(
               () => this.processQueue(),
@@ -1711,9 +1705,9 @@ var init_dropzone = __esm({
         } else
           throw new Error("This file can't be queued because it has already been processed or was rejected.");
       }
-      _enqueueThumbnail(file18) {
-        if (this.options.createImageThumbnails && file18.type.match(/image.*/) && file18.size <= this.options.maxThumbnailFilesize * 1048576) {
-          this._thumbnailQueue.push(file18);
+      _enqueueThumbnail(file17) {
+        if (this.options.createImageThumbnails && file17.type.match(/image.*/) && file17.size <= this.options.maxThumbnailFilesize * 1048576) {
+          this._thumbnailQueue.push(file17);
           return setTimeout(
             () => this._processThumbnailQueue(),
             0
@@ -1724,56 +1718,56 @@ var init_dropzone = __esm({
         if (this._processingThumbnail || this._thumbnailQueue.length === 0)
           return;
         this._processingThumbnail = true;
-        let file18 = this._thumbnailQueue.shift();
-        return this.createThumbnail(file18, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, true, (dataUrl) => {
-          this.emit("thumbnail", file18, dataUrl);
+        let file17 = this._thumbnailQueue.shift();
+        return this.createThumbnail(file17, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, true, (dataUrl) => {
+          this.emit("thumbnail", file17, dataUrl);
           this._processingThumbnail = false;
           return this._processThumbnailQueue();
         });
       }
-      removeFile(file18) {
-        if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
-          this.cancelUpload(file18);
-        this.files = $3ed269f2f0fb224b$var$without(this.files, file18);
-        this.emit("removedfile", file18);
+      removeFile(file17) {
+        if (file17.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
+          this.cancelUpload(file17);
+        this.files = $3ed269f2f0fb224b$var$without(this.files, file17);
+        this.emit("removedfile", file17);
         if (this.files.length === 0)
           return this.emit("reset");
       }
       removeAllFiles(cancelIfNecessary) {
         if (cancelIfNecessary == null)
           cancelIfNecessary = false;
-        for (let file18 of this.files.slice())
-          if (file18.status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || cancelIfNecessary)
-            this.removeFile(file18);
+        for (let file17 of this.files.slice())
+          if (file17.status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || cancelIfNecessary)
+            this.removeFile(file17);
         return null;
       }
-      resizeImage(file18, width, height, resizeMethod, callback) {
-        return this.createThumbnail(file18, width, height, resizeMethod, true, (dataUrl, canvas) => {
+      resizeImage(file17, width, height, resizeMethod, callback) {
+        return this.createThumbnail(file17, width, height, resizeMethod, true, (dataUrl, canvas) => {
           if (canvas == null)
-            return callback(file18);
+            return callback(file17);
           else {
             let { resizeMimeType } = this.options;
             if (resizeMimeType == null)
-              resizeMimeType = file18.type;
+              resizeMimeType = file17.type;
             let resizedDataURL = canvas.toDataURL(resizeMimeType, this.options.resizeQuality);
             if (resizeMimeType === "image/jpeg" || resizeMimeType === "image/jpg")
-              resizedDataURL = $3ed269f2f0fb224b$var$ExifRestore.restore(file18.dataURL, resizedDataURL);
+              resizedDataURL = $3ed269f2f0fb224b$var$ExifRestore.restore(file17.dataURL, resizedDataURL);
             return callback($3ed269f2f0fb224b$export$2e2bcd8739ae039.dataURItoBlob(resizedDataURL));
           }
         });
       }
-      createThumbnail(file18, width, height, resizeMethod, fixOrientation, callback) {
+      createThumbnail(file17, width, height, resizeMethod, fixOrientation, callback) {
         let fileReader = new FileReader();
         fileReader.onload = () => {
-          file18.dataURL = fileReader.result;
-          if (file18.type === "image/svg+xml") {
+          file17.dataURL = fileReader.result;
+          if (file17.type === "image/svg+xml") {
             if (callback != null)
               callback(fileReader.result);
             return;
           }
-          this.createThumbnailFromUrl(file18, width, height, resizeMethod, fixOrientation, callback);
+          this.createThumbnailFromUrl(file17, width, height, resizeMethod, fixOrientation, callback);
         };
-        fileReader.readAsDataURL(file18);
+        fileReader.readAsDataURL(file17);
       }
       displayExistingFile(mockFile, imageUrl, callback, crossOrigin, resizeThumbnail = true) {
         this.emit("addedfile", mockFile);
@@ -1792,7 +1786,7 @@ var init_dropzone = __esm({
           this.createThumbnailFromUrl(mockFile, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, this.options.fixOrientation, onDone, crossOrigin);
         }
       }
-      createThumbnailFromUrl(file18, width, height, resizeMethod, fixOrientation, callback, crossOrigin) {
+      createThumbnailFromUrl(file17, width, height, resizeMethod, fixOrientation, callback, crossOrigin) {
         let img = document.createElement("img");
         if (crossOrigin)
           img.crossOrigin = crossOrigin;
@@ -1804,9 +1798,9 @@ var init_dropzone = __esm({
               return callback2(EXIF.getTag(this, "Orientation"));
             });
           return loadExif((orientation) => {
-            file18.width = img.width;
-            file18.height = img.height;
-            let resizeInfo = this.options.resize.call(this, file18, width, height, resizeMethod);
+            file17.width = img.width;
+            file17.height = img.height;
+            let resizeInfo = this.options.resize.call(this, file17, width, height, resizeMethod);
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
             canvas.width = resizeInfo.trgWidth;
@@ -1854,7 +1848,7 @@ var init_dropzone = __esm({
         };
         if (callback != null)
           img.onerror = callback;
-        return img.src = file18.dataURL;
+        return img.src = file17.dataURL;
       }
       processQueue() {
         let { parallelUploads } = this.options;
@@ -1875,16 +1869,16 @@ var init_dropzone = __esm({
             i++;
           }
       }
-      processFile(file18) {
+      processFile(file17) {
         return this.processFiles([
-          file18
+          file17
         ]);
       }
       processFiles(files) {
-        for (let file18 of files) {
-          file18.processing = true;
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING;
-          this.emit("processing", file18);
+        for (let file17 of files) {
+          file17.processing = true;
+          file17.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING;
+          this.emit("processing", file17);
         }
         if (this.options.uploadMultiple)
           this.emit("processingmultiple", files);
@@ -1893,28 +1887,28 @@ var init_dropzone = __esm({
       _getFilesWithXhr(xhr) {
         let files;
         return files = this.files.filter(
-          (file18) => file18.xhr === xhr
+          (file17) => file17.xhr === xhr
         ).map(
-          (file18) => file18
+          (file17) => file17
         );
       }
-      cancelUpload(file18) {
-        if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING) {
-          let groupedFiles = this._getFilesWithXhr(file18.xhr);
+      cancelUpload(file17) {
+        if (file17.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING) {
+          let groupedFiles = this._getFilesWithXhr(file17.xhr);
           for (let groupedFile of groupedFiles)
             groupedFile.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED;
-          if (typeof file18.xhr !== "undefined")
-            file18.xhr.abort();
+          if (typeof file17.xhr !== "undefined")
+            file17.xhr.abort();
           for (let groupedFile1 of groupedFiles)
             this.emit("canceled", groupedFile1);
           if (this.options.uploadMultiple)
             this.emit("canceledmultiple", groupedFiles);
-        } else if (file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED || file18.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED) {
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED;
-          this.emit("canceled", file18);
+        } else if (file17.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED || file17.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED) {
+          file17.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED;
+          this.emit("canceled", file17);
           if (this.options.uploadMultiple)
             this.emit("canceledmultiple", [
-              file18
+              file17
             ]);
         }
         if (this.options.autoProcessQueue)
@@ -1925,9 +1919,9 @@ var init_dropzone = __esm({
           return option.apply(this, args);
         return option;
       }
-      uploadFile(file18) {
+      uploadFile(file17) {
         return this.uploadFiles([
-          file18
+          file17
         ]);
       }
       uploadFiles(files) {
@@ -1938,15 +1932,15 @@ var init_dropzone = __esm({
             files[0].upload.totalChunkCount = Math.ceil(transformedFile.size / this.options.chunkSize);
           }
           if (files[0].upload.chunked) {
-            let file18 = files[0];
+            let file17 = files[0];
             let transformedFile = transformedFiles[0];
             let startedChunkCount = 0;
-            file18.upload.chunks = [];
+            file17.upload.chunks = [];
             let handleNextChunk = () => {
               let chunkIndex = 0;
-              while (file18.upload.chunks[chunkIndex] !== void 0)
+              while (file17.upload.chunks[chunkIndex] !== void 0)
                 chunkIndex++;
-              if (chunkIndex >= file18.upload.totalChunkCount)
+              if (chunkIndex >= file17.upload.totalChunkCount)
                 return;
               startedChunkCount++;
               let start = chunkIndex * this.options.chunkSize;
@@ -1954,11 +1948,11 @@ var init_dropzone = __esm({
               let dataBlock = {
                 name: this._getParamName(0),
                 data: transformedFile.webkitSlice ? transformedFile.webkitSlice(start, end) : transformedFile.slice(start, end),
-                filename: file18.upload.filename,
+                filename: file17.upload.filename,
                 chunkIndex
               };
-              file18.upload.chunks[chunkIndex] = {
-                file: file18,
+              file17.upload.chunks[chunkIndex] = {
+                file: file17,
                 index: chunkIndex,
                 dataBlock,
                 status: $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING,
@@ -1969,26 +1963,26 @@ var init_dropzone = __esm({
                 dataBlock
               ]);
             };
-            file18.upload.finishedChunkUpload = (chunk, response) => {
+            file17.upload.finishedChunkUpload = (chunk, response) => {
               let allFinished = true;
               chunk.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS;
               chunk.dataBlock = null;
               chunk.response = chunk.xhr.responseText;
               chunk.responseHeaders = chunk.xhr.getAllResponseHeaders();
               chunk.xhr = null;
-              for (let i = 0; i < file18.upload.totalChunkCount; i++) {
-                if (file18.upload.chunks[i] === void 0)
+              for (let i = 0; i < file17.upload.totalChunkCount; i++) {
+                if (file17.upload.chunks[i] === void 0)
                   return handleNextChunk();
-                if (file18.upload.chunks[i].status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS)
+                if (file17.upload.chunks[i].status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS)
                   allFinished = false;
               }
               if (allFinished)
-                this.options.chunksUploaded(file18, () => {
+                this.options.chunksUploaded(file17, () => {
                   this._finished(files, response, null);
                 });
             };
             if (this.options.parallelChunkUploads)
-              for (let i = 0; i < file18.upload.totalChunkCount; i++)
+              for (let i = 0; i < file17.upload.totalChunkCount; i++)
                 handleNextChunk();
             else
               handleNextChunk();
@@ -2004,16 +1998,16 @@ var init_dropzone = __esm({
           }
         });
       }
-      _getChunk(file18, xhr) {
-        for (let i = 0; i < file18.upload.totalChunkCount; i++) {
-          if (file18.upload.chunks[i] !== void 0 && file18.upload.chunks[i].xhr === xhr)
-            return file18.upload.chunks[i];
+      _getChunk(file17, xhr) {
+        for (let i = 0; i < file17.upload.totalChunkCount; i++) {
+          if (file17.upload.chunks[i] !== void 0 && file17.upload.chunks[i].xhr === xhr)
+            return file17.upload.chunks[i];
         }
       }
       _uploadData(files, dataBlocks) {
         let xhr = new XMLHttpRequest();
-        for (let file18 of files)
-          file18.xhr = xhr;
+        for (let file17 of files)
+          file17.xhr = xhr;
         if (files[0].upload.chunked)
           files[0].upload.chunks[dataBlocks[0].chunkIndex].xhr = xhr;
         let method = this.resolveOption(this.options.method, files, dataBlocks);
@@ -2049,8 +2043,8 @@ var init_dropzone = __esm({
             xhr.setRequestHeader(headerName, headerValue);
         }
         if (this.options.binaryBody) {
-          for (let file18 of files)
-            this.emit("sending", file18, xhr);
+          for (let file17 of files)
+            this.emit("sending", file17, xhr);
           if (this.options.uploadMultiple)
             this.emit("sendingmultiple", files, xhr);
           this.submitRequest(xhr, null, files);
@@ -2069,8 +2063,8 @@ var init_dropzone = __esm({
                 formData.append(key2, value);
             }
           }
-          for (let file18 of files)
-            this.emit("sending", file18, xhr, formData);
+          for (let file17 of files)
+            this.emit("sending", file17, xhr, formData);
           if (this.options.uploadMultiple)
             this.emit("sendingmultiple", files, xhr, formData);
           this._addFormElementData(formData);
@@ -2110,22 +2104,22 @@ var init_dropzone = __esm({
       }
       _updateFilesUploadProgress(files, xhr, e3) {
         if (!files[0].upload.chunked)
-          for (let file18 of files) {
-            if (file18.upload.total && file18.upload.bytesSent && file18.upload.bytesSent == file18.upload.total)
+          for (let file17 of files) {
+            if (file17.upload.total && file17.upload.bytesSent && file17.upload.bytesSent == file17.upload.total)
               continue;
             if (e3) {
-              file18.upload.progress = 100 * e3.loaded / e3.total;
-              file18.upload.total = e3.total;
-              file18.upload.bytesSent = e3.loaded;
+              file17.upload.progress = 100 * e3.loaded / e3.total;
+              file17.upload.total = e3.total;
+              file17.upload.bytesSent = e3.loaded;
             } else {
-              file18.upload.progress = 100;
-              file18.upload.bytesSent = file18.upload.total;
+              file17.upload.progress = 100;
+              file17.upload.bytesSent = file17.upload.total;
             }
-            this.emit("uploadprogress", file18, file18.upload.progress, file18.upload.bytesSent);
+            this.emit("uploadprogress", file17, file17.upload.progress, file17.upload.bytesSent);
           }
         else {
-          let file18 = files[0];
-          let chunk = this._getChunk(file18, xhr);
+          let file17 = files[0];
+          let chunk = this._getChunk(file17, xhr);
           if (e3) {
             chunk.progress = 100 * e3.loaded / e3.total;
             chunk.total = e3.total;
@@ -2134,17 +2128,17 @@ var init_dropzone = __esm({
             chunk.progress = 100;
             chunk.bytesSent = chunk.total;
           }
-          file18.upload.progress = 0;
-          file18.upload.total = 0;
-          file18.upload.bytesSent = 0;
-          for (let i = 0; i < file18.upload.totalChunkCount; i++)
-            if (file18.upload.chunks[i] && typeof file18.upload.chunks[i].progress !== "undefined") {
-              file18.upload.progress += file18.upload.chunks[i].progress;
-              file18.upload.total += file18.upload.chunks[i].total;
-              file18.upload.bytesSent += file18.upload.chunks[i].bytesSent;
+          file17.upload.progress = 0;
+          file17.upload.total = 0;
+          file17.upload.bytesSent = 0;
+          for (let i = 0; i < file17.upload.totalChunkCount; i++)
+            if (file17.upload.chunks[i] && typeof file17.upload.chunks[i].progress !== "undefined") {
+              file17.upload.progress += file17.upload.chunks[i].progress;
+              file17.upload.total += file17.upload.chunks[i].total;
+              file17.upload.bytesSent += file17.upload.chunks[i].bytesSent;
             }
-          file18.upload.progress = file18.upload.progress / file18.upload.totalChunkCount;
-          this.emit("uploadprogress", file18, file18.upload.progress, file18.upload.bytesSent);
+          file17.upload.progress = file17.upload.progress / file17.upload.totalChunkCount;
+          this.emit("uploadprogress", file17, file17.upload.progress, file17.upload.bytesSent);
         }
       }
       _finishedUploading(files, xhr, e3) {
@@ -2201,10 +2195,10 @@ var init_dropzone = __esm({
           xhr.send(formData);
       }
       _finished(files, responseText, e3) {
-        for (let file18 of files) {
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS;
-          this.emit("success", file18, responseText, e3);
-          this.emit("complete", file18);
+        for (let file17 of files) {
+          file17.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS;
+          this.emit("success", file17, responseText, e3);
+          this.emit("complete", file17);
         }
         if (this.options.uploadMultiple) {
           this.emit("successmultiple", files, responseText, e3);
@@ -2214,10 +2208,10 @@ var init_dropzone = __esm({
           return this.processQueue();
       }
       _errorProcessing(files, message, xhr) {
-        for (let file18 of files) {
-          file18.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ERROR;
-          this.emit("error", file18, message, xhr);
-          this.emit("complete", file18);
+        for (let file17 of files) {
+          file17.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ERROR;
+          this.emit("error", file17, message, xhr);
+          this.emit("complete", file17);
         }
         if (this.options.uploadMultiple) {
           this.emit("errormultiple", files, message, xhr);
@@ -2267,7 +2261,7 @@ var init_dropzone = __esm({
           delete this.options.acceptedMimeTypes;
         }
         if (this.options.renameFilename != null)
-          this.options.renameFile = (file18) => this.options.renameFilename.call(this, file18.name, file18);
+          this.options.renameFile = (file17) => this.options.renameFilename.call(this, file17.name, file17);
         if (typeof this.options.method === "string")
           this.options.method = this.options.method.toUpperCase();
         if ((fallback = this.getExistingFallback()) && fallback.parentNode)
@@ -2428,16 +2422,16 @@ var init_dropzone = __esm({
       else if (rejected != null)
         return rejected();
     };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile = function(file18, acceptedFiles) {
+    $3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile = function(file17, acceptedFiles) {
       if (!acceptedFiles)
         return true;
       acceptedFiles = acceptedFiles.split(",");
-      let mimeType = file18.type;
+      let mimeType = file17.type;
       let baseMimeType = mimeType.replace(/\/.*$/, "");
       for (let validType of acceptedFiles) {
         validType = validType.trim();
         if (validType.charAt(0) === ".") {
-          if (file18.name.toLowerCase().indexOf(validType.toLowerCase(), file18.name.length - validType.length) !== -1)
+          if (file17.name.toLowerCase().indexOf(validType.toLowerCase(), file17.name.length - validType.length) !== -1)
             return true;
         } else if (/\/\*$/.test(validType)) {
           if (baseMimeType === validType.replace(/\/.*$/, ""))
@@ -3305,8 +3299,8 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component18) {
-  return component18.instantiationMode === "EAGER";
+function isComponentEager(component17) {
+  return component17.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
@@ -3396,18 +3390,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component18) {
-        if (component18.name !== this.name) {
-          throw Error(`Mismatching Component ${component18.name} for Provider ${this.name}.`);
+      setComponent(component17) {
+        if (component17.name !== this.name) {
+          throw Error(`Mismatching Component ${component17.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component18;
+        this.component = component17;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component18)) {
+        if (isComponentEager(component17)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -3527,19 +3521,19 @@ var init_index_esm20172 = __esm({
         this.name = name5;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component18) {
-        const provider = this.getProvider(component18.name);
+      addComponent(component17) {
+        const provider = this.getProvider(component17.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component18.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component17.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component18);
+        provider.setComponent(component17);
       }
-      addOrOverwriteComponent(component18) {
-        const provider = this.getProvider(component18.name);
+      addOrOverwriteComponent(component17) {
+        const provider = this.getProvider(component17.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component18.name);
+          this.providers.delete(component17.name);
         }
-        this.addComponent(component18);
+        this.addComponent(component17);
       }
       getProvider(name5) {
         if (this.providers.has(name5)) {
@@ -3865,25 +3859,25 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component18 = provider.getComponent();
-  return (component18 === null || component18 === void 0 ? void 0 : component18.type) === "VERSION";
+  const component17 = provider.getComponent();
+  return (component17 === null || component17 === void 0 ? void 0 : component17.type) === "VERSION";
 }
-function _addComponent(app2, component18) {
+function _addComponent(app2, component17) {
   try {
-    app2.container.addComponent(component18);
+    app2.container.addComponent(component17);
   } catch (e3) {
-    logger.debug(`Component ${component18.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component17.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component18) {
-  const componentName = component18.name;
+function _registerComponent(component17) {
+  const componentName = component17.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component18);
+  _components.set(componentName, component17);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component18);
+    _addComponent(app2, component17);
   }
   return true;
 }
@@ -3923,8 +3917,8 @@ function initializeApp(_options, rawConfig = {}) {
     }
   }
   const container = new ComponentContainer(name5);
-  for (const component18 of _components.values()) {
-    container.addComponent(component18);
+  for (const component17 of _components.values()) {
+    container.addComponent(component17);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
   _apps.set(name5, newApp);
@@ -6605,9 +6599,9 @@ var init_index_909bd8f4 = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index18 = this.queue.length - 1;
+        const index17 = this.queue.length - 1;
         return () => {
-          this.queue[index18] = () => Promise.resolve();
+          this.queue[index17] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -12986,9 +12980,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-19e2de81.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-19e2de81.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/Dropzone-d08f2570.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/utils-d53d7585.js", "_app/immutable/chunks/navigation-18644b52.js", "_app/immutable/chunks/singletons-79591b06.js", "_app/immutable/chunks/firebase-7217deba.js"];
-    stylesheets = ["_app/immutable/assets/_layout-277d00b3.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-a65c331e.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-a65c331e.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/Dropzone-58a5ce0b.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/utils-d53d7585.js", "_app/immutable/chunks/navigation-86dab4f0.js", "_app/immutable/chunks/singletons-07a2299f.js", "_app/immutable/chunks/firebase-7217deba.js"];
+    stylesheets = ["_app/immutable/assets/_layout-d2fefeb1.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
 
@@ -13031,77 +13025,16 @@ var init__2 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/plansCardArray.js
+// .svelte-kit/output/server/chunks/PlansComponent.js
 function payUrl(session_type, payment_type, color2) {
   return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1&primary_color=${color2}`;
 }
-var sampleHref, color, plansCardArray, plansCardArraySchools;
-var init_plansCardArray = __esm({
-  ".svelte-kit/output/server/chunks/plansCardArray.js"() {
-    sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
-    color = {
-      red: "f34d4e",
-      yellow: "fea45c",
-      blue: "2aa5d6"
-    };
-    plansCardArray = [
-      {
-        card: 1,
-        payNowUrl: payUrl("classico", "stripe", color.red),
-        payLaterUrl: payUrl("classico", "invoice", color.red),
-        buttonText: "Classico",
-        cardTitle: "Classico",
-        cardText: "Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.",
-        href: sampleHref
-      },
-      {
-        card: 3,
-        payNowUrl: payUrl("mock", "stripe", color.blue),
-        payLaterUrl: payUrl("mock", "invoice", color.blue),
-        buttonText: "Mock",
-        cardTitle: "Mock",
-        cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key available as a +2hr premium.",
-        href: sampleHref
-      },
-      {
-        card: 2,
-        payNowUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
-        payLaterUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
-        buttonText: "Custom",
-        cardTitle: "Custom",
-        cardText: `Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. `,
-        href: sampleHref
-      }
-    ];
-    plansCardArraySchools = [
-      {
-        card: 2,
-        schoolUrl: "https://calendly.com/thinksolve/school-classico?hide_gdpr_banner=1",
-        buttonText: "Classico",
-        cardTitle: "Classico",
-        cardText: "Classic 1-on-1 session with smooth screen-sharing. Session notes/solutions on a personal URL available as a +2hr premium.",
-        href: sampleHref
-      },
-      {
-        card: 1,
-        schoolUrl: "https://calendly.com/thinksolve/school-mock?hide_gdpr_banner=1",
-        buttonText: "Mock",
-        cardTitle: "Mock",
-        cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key on a personal URL available as a +2hr premium.",
-        href: sampleHref
-      }
-    ];
-  }
-});
-
-// .svelte-kit/output/server/chunks/PlansComponent.js
-var PlansCard, PlansComponent;
+var PlansCard, sampleHref, color, plansCardArray, PlansComponent;
 var init_PlansComponent = __esm({
   ".svelte-kit/output/server/chunks/PlansComponent.js"() {
     init_chunks();
     init_store();
     init_utils();
-    init_plansCardArray();
     PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       let $elementColor, $$unsubscribe_elementColor;
@@ -13149,6 +13082,41 @@ var init_PlansComponent = __esm({
 
   <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
     });
+    sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
+    color = {
+      red: "f34d4e",
+      yellow: "fea45c",
+      blue: "2aa5d6"
+    };
+    plansCardArray = [
+      {
+        card: 1,
+        payNowUrl: payUrl("classico", "stripe", color.red),
+        payLaterUrl: payUrl("classico", "invoice", color.red),
+        buttonText: "Classico",
+        cardTitle: "Classico",
+        cardText: "Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.",
+        href: sampleHref
+      },
+      {
+        card: 3,
+        payNowUrl: payUrl("mock", "stripe", color.blue),
+        payLaterUrl: payUrl("mock", "invoice", color.blue),
+        buttonText: "Mock",
+        cardTitle: "Mock",
+        cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key available as a +2hr premium.",
+        href: sampleHref
+      },
+      {
+        card: 2,
+        payNowUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+        payLaterUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+        buttonText: "Custom",
+        cardTitle: "Custom",
+        cardText: `Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. `,
+        href: sampleHref
+      }
+    ];
     PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let dispatch = createEventDispatcher();
       let { plansCards = plansCardArray } = $$props;
@@ -13362,10 +13330,7 @@ var init_page_svelte = __esm({
       }
     ];
     Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-
-<div class="${"scale-90 "}">
+      return `<div class="${"scale-90 "}">
 
   <div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name: name5, title, date, body }) => {
         return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name5, date }, {}, {
@@ -13452,8 +13417,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-78e0f3fc.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-78e0f3fc.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/PlansComponent-887ac67a.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/utils-d53d7585.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js", "_app/immutable/chunks/Dropzone-d08f2570.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-18644b52.js", "_app/immutable/chunks/singletons-79591b06.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-232fc645.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-232fc645.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/PlansComponent-a53779b7.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/utils-d53d7585.js", "_app/immutable/chunks/Dropzone-58a5ce0b.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/navigation-86dab4f0.js", "_app/immutable/chunks/singletons-07a2299f.js"];
     stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
@@ -14869,8 +14834,8 @@ var init__5 = __esm({
     init_page();
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroom/_page.svelte-ad044079.js";
-    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-ad044079.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/navigation-18644b52.js", "_app/immutable/chunks/singletons-79591b06.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    file5 = "_app/immutable/components/pages/classroom/_page.svelte-7a7b3fa3.js";
+    imports5 = ["_app/immutable/components/pages/classroom/_page.svelte-7a7b3fa3.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/navigation-86dab4f0.js", "_app/immutable/chunks/singletons-07a2299f.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
     stylesheets5 = [];
   }
 });
@@ -15040,8 +15005,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-08697a43.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-08697a43.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/Dropzone-d08f2570.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/utils-d53d7585.js", "_app/immutable/chunks/index-fe5964cf.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-e49ed28a.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-e49ed28a.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/Dropzone-58a5ce0b.js", "_app/immutable/chunks/preload-helper-b21cceae.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/utils-d53d7585.js", "_app/immutable/chunks/index-fe5964cf.js"];
     stylesheets7 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
   }
 });
@@ -20463,8 +20428,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index18) => (n2) => {
-          nodes.splice(index18 + 1, 0, n2);
+        prev.insertAfter = ((index17) => (n2) => {
+          nodes.splice(index17 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -25748,13 +25713,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index18 = optArgs[0];
+        var index17 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index18
+          index: index17
         };
       },
       htmlBuilder(group, options) {
@@ -25820,9 +25785,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index18
+          index: index17
         } = group;
-        return index18 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index18, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index17 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index17, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -28755,8 +28720,8 @@ var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file8 = "_app/immutable/components/pages/katex/_page.svx-829177dd.js";
-    imports8 = ["_app/immutable/components/pages/katex/_page.svx-829177dd.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js"];
+    file8 = "_app/immutable/components/pages/katex/_page.svx-a2697981.js";
+    imports8 = ["_app/immutable/components/pages/katex/_page.svx-a2697981.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js"];
     stylesheets8 = [];
   }
 });
@@ -28959,8 +28924,8 @@ var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file10 = "_app/immutable/components/pages/math/_page.svx-f2433669.js";
-    imports10 = ["_app/immutable/components/pages/math/_page.svx-f2433669.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/Kajax-3fb1168d.js"];
+    file10 = "_app/immutable/components/pages/math/_page.svx-fbf9da3d.js";
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-fbf9da3d.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/Kajax-3fb1168d.js"];
     stylesheets10 = [];
   }
 });
@@ -29039,8 +29004,8 @@ var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file11 = "_app/immutable/components/pages/mathjax/_page.svx-f22bb6a2.js";
-    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-f22bb6a2.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js"];
+    file11 = "_app/immutable/components/pages/mathjax/_page.svx-8c47c968.js";
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-8c47c968.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js"];
     stylesheets11 = [];
   }
 });
@@ -29157,8 +29122,8 @@ var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/physics/_page.svelte-2f84ff72.js";
-    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-2f84ff72.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/Kajax-3fb1168d.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js"];
+    file12 = "_app/immutable/components/pages/physics/_page.svelte-f605d5a7.js";
+    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-f605d5a7.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/Kajax-3fb1168d.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js"];
     stylesheets12 = ["_app/immutable/assets/_page-fcf51fa8.css"];
   }
 });
@@ -29194,8 +29159,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-c277b08c.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-c277b08c.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/PlansComponent-887ac67a.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/utils-d53d7585.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-ceb29b3b.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-ceb29b3b.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/PlansComponent-a53779b7.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/utils-d53d7585.js"];
     stylesheets13 = [];
   }
 });
@@ -29239,77 +29204,30 @@ var init__14 = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/schools/_page.svelte.js
+// .svelte-kit/output/server/entries/pages/screenshareA/_page.svelte.js
 var page_svelte_exports9 = {};
 __export(page_svelte_exports9, {
   default: () => Page13
 });
-var PlansCardSchools, Page13;
+var JitsiUserAdmin, Page13;
 var init_page_svelte9 = __esm({
-  ".svelte-kit/output/server/entries/pages/schools/_page.svelte.js"() {
+  ".svelte-kit/output/server/entries/pages/screenshareA/_page.svelte.js"() {
     init_chunks();
     init_store();
-    init_plansCardArray();
-    PlansCardSchools = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      let $elementColor, $$unsubscribe_elementColor;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
-      let { schoolUrl = "" } = $$props;
-      let { btnColorHover = "" } = $$props;
-      let { card } = $$props;
-      let buttonColor = {
-        1: "bg-[rgb(45,165,214)]",
-        2: "bg-[rgb(244,77,77)]",
-        3: "bg-[rgb(254,164,92)]"
-      };
-      if ($$props.schoolUrl === void 0 && $$bindings.schoolUrl && schoolUrl !== void 0)
-        $$bindings.schoolUrl(schoolUrl);
-      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
-        $$bindings.btnColorHover(btnColorHover);
-      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
-        $$bindings.card(card);
-      $$unsubscribe_isDarkMode();
-      $$unsubscribe_elementColor();
-      return `
+    JitsiUserAdmin = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $lessThan768, $$unsubscribe_lessThan768;
+      $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
+      $$unsubscribe_lessThan768();
+      return `${$$result.head += `<!-- HEAD_svelte-1pkind7_START --><script src="${"https://meet.jit.si/external_api.js"}"><\/script><!-- HEAD_svelte-1pkind7_END -->`, ""}
 
-<plans-card class="${"block hover:scale-105 shadow-md " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl w-[10] min-w-fit p-10 m-1 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"py-6 text-5xl font-Poppins"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
-
-  <button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 " + escape(
-        $isDarkMode ? "group-hover:bg-opacity-80" : "group-hover:bg-opacity-80",
-        true
-      ) + " text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `buttonText`}</button>
-
-  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
+<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px]"}"></div>
+  <img alt="${"hangup button"}" class="${"bg-gray-600 p-2 absolute brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0 hover:bg-red-500"}"></div>`;
     });
     Page13 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<div class="${"grid grid-cols-1 lg:grid-cols-2 p-7 "}">${each(plansCardArraySchools, (item, i) => {
-        return `
-    <div>${validate_component(PlansCardSchools, "PlansCardSchools").$$render(
-          $$result,
-          {
-            card: item.card,
-            schoolUrl: item.schoolUrl
-          },
-          {},
-          {
-            cardText: () => {
-              return `<span slot="${"cardText"}">${escape(item.cardText)}
-
-          
-        </span>`;
-            },
-            cardTitle: () => {
-              return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
-            },
-            buttonText: () => {
-              return `<span slot="${"buttonText"}">Book Date/Time </span>`;
-            }
-          }
-        )}</div>
-    `;
-      })}
-</div>`;
+      let $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
+      $$unsubscribe_isDarkMode();
+      return `${validate_component(JitsiUserAdmin, "JitsiUserAdmin").$$render($$result, {}, {}, {})}`;
     });
   }
 });
@@ -29328,57 +29246,9 @@ var init__15 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     index15 = 14;
     component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
-    file15 = "_app/immutable/components/pages/schools/_page.svelte-a18b78b7.js";
-    imports15 = ["_app/immutable/components/pages/schools/_page.svelte-a18b78b7.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/plansCardArray-7bd812c4.js"];
+    file15 = "_app/immutable/components/pages/screenshareA/_page.svelte-846c202d.js";
+    imports15 = ["_app/immutable/components/pages/screenshareA/_page.svelte-846c202d.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/store-121681c1.js", "_app/immutable/chunks/index-4b764cf1.js"];
     stylesheets15 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/screenshareA/_page.svelte.js
-var page_svelte_exports10 = {};
-__export(page_svelte_exports10, {
-  default: () => Page14
-});
-var JitsiUserAdmin, Page14;
-var init_page_svelte10 = __esm({
-  ".svelte-kit/output/server/entries/pages/screenshareA/_page.svelte.js"() {
-    init_chunks();
-    init_store();
-    JitsiUserAdmin = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $lessThan768, $$unsubscribe_lessThan768;
-      $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
-      $$unsubscribe_lessThan768();
-      return `${$$result.head += `<!-- HEAD_svelte-1pkind7_START --><script src="${"https://meet.jit.si/external_api.js"}"><\/script><!-- HEAD_svelte-1pkind7_END -->`, ""}
-
-<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px]"}"></div>
-  <img alt="${"hangup button"}" class="${"bg-gray-600 p-2 absolute brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0 hover:bg-red-500"}"></div>`;
-    });
-    Page14 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
-      $$unsubscribe_isDarkMode();
-      return `${validate_component(JitsiUserAdmin, "JitsiUserAdmin").$$render($$result, {}, {}, {})}`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/15.js
-var __exports16 = {};
-__export(__exports16, {
-  component: () => component16,
-  file: () => file16,
-  imports: () => imports16,
-  index: () => index16,
-  stylesheets: () => stylesheets16
-});
-var index16, component16, file16, imports16, stylesheets16;
-var init__16 = __esm({
-  ".svelte-kit/output/server/nodes/15.js"() {
-    index16 = 15;
-    component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
-    file16 = "_app/immutable/components/pages/screenshareA/_page.svelte-c1c87f2d.js";
-    imports16 = ["_app/immutable/components/pages/screenshareA/_page.svelte-c1c87f2d.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/store-68a4b875.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/navigation-18644b52.js", "_app/immutable/chunks/singletons-79591b06.js"];
-    stylesheets16 = [];
   }
 });
 
@@ -29532,12 +29402,12 @@ var init_index_esm5 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/stripe/_page.svelte.js
-var page_svelte_exports11 = {};
-__export(page_svelte_exports11, {
-  default: () => Page15
+var page_svelte_exports10 = {};
+__export(page_svelte_exports10, {
+  default: () => Page14
 });
-var css6, Page15;
-var init_page_svelte11 = __esm({
+var css6, Page14;
+var init_page_svelte10 = __esm({
   ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
     init_chunks();
     init_firebase();
@@ -29546,7 +29416,7 @@ var init_page_svelte11 = __esm({
       code: '.loading.svelte-tci3t6:after{content:" . . .";animation:svelte-tci3t6-dots 1s steps(5, end) infinite}@keyframes svelte-tci3t6-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
       map: null
     };
-    Page15 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page14 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       getFunctions(app);
       $$result.css.add(css6);
       return `${$$result.head += `<!-- HEAD_svelte-1jxl9zf_START -->${$$result.title = `<title>Stripe Checkout</title>`, ""}<script src="${"https://js.stripe.com/v3/"}"><\/script><!-- HEAD_svelte-1jxl9zf_END -->`, ""}
@@ -29563,23 +29433,23 @@ var init_page_svelte11 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/16.js
-var __exports17 = {};
-__export(__exports17, {
-  component: () => component17,
-  file: () => file17,
-  imports: () => imports17,
-  index: () => index17,
-  stylesheets: () => stylesheets17
+// .svelte-kit/output/server/nodes/15.js
+var __exports16 = {};
+__export(__exports16, {
+  component: () => component16,
+  file: () => file16,
+  imports: () => imports16,
+  index: () => index16,
+  stylesheets: () => stylesheets16
 });
-var index17, component17, file17, imports17, stylesheets17;
-var init__17 = __esm({
-  ".svelte-kit/output/server/nodes/16.js"() {
-    index17 = 16;
-    component17 = async () => (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
-    file17 = "_app/immutable/components/pages/stripe/_page.svelte-258cf2f6.js";
-    imports17 = ["_app/immutable/components/pages/stripe/_page.svelte-258cf2f6.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/firebase-7217deba.js"];
-    stylesheets17 = ["_app/immutable/assets/_page-5c304dd7.css"];
+var index16, component16, file16, imports16, stylesheets16;
+var init__16 = __esm({
+  ".svelte-kit/output/server/nodes/15.js"() {
+    index16 = 15;
+    component16 = async () => (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
+    file16 = "_app/immutable/components/pages/stripe/_page.svelte-258cf2f6.js";
+    imports16 = ["_app/immutable/components/pages/stripe/_page.svelte-258cf2f6.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/index-fe5964cf.js", "_app/immutable/chunks/firebase-7217deba.js"];
+    stylesheets16 = ["_app/immutable/assets/_page-5c304dd7.css"];
   }
 });
 
@@ -29877,8 +29747,8 @@ function stringify(value) {
       return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0)
       return NEGATIVE_ZERO;
-    const index19 = p2++;
-    indexes.set(thing, index19);
+    const index18 = p2++;
+    indexes.set(thing, index18);
     let str = "";
     if (is_primitive(thing)) {
       str = stringify_primitive2(thing);
@@ -29968,12 +29838,12 @@ function stringify(value) {
           }
       }
     }
-    stringified[index19] = str;
-    return index19;
+    stringified[index18] = str;
+    return index18;
   }
-  const index18 = flatten(value);
-  if (index18 < 0)
-    return `${index18}`;
+  const index17 = flatten(value);
+  if (index17 < 0)
+    return `${index17}`;
   return `[${stringified.join(",")}]`;
 }
 function stringify_primitive2(thing) {
@@ -31042,7 +30912,7 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets18 = new Set(entry.stylesheets);
+  const stylesheets17 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -31088,7 +30958,7 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets18.add(url));
+        node.stylesheets.forEach((url) => stylesheets17.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k2, v2]) => inline_styles.set(k2, v2));
@@ -31141,7 +31011,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets18) {
+  for (const dep of stylesheets17) {
     const path2 = prefixed(dep);
     const attributes = [];
     if (csp.style_needs_nonce) {
@@ -31472,8 +31342,8 @@ async function render_page(event, route, page2, options, state, resolve_opts) {
           const error2 = handle_error_and_jsonify(event, options, err);
           while (i--) {
             if (page2.errors[i]) {
-              const index18 = page2.errors[i];
-              const node2 = await options.manifest._.nodes[index18]();
+              const index17 = page2.errors[i];
+              const node2 = await options.manifest._.nodes[index17]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -31796,10 +31666,10 @@ function create_fetch({ event, options, state, get_cookie_header }) {
         const is_asset = options.manifest.assets.has(filename);
         const is_asset_html = options.manifest.assets.has(filename_html);
         if (is_asset || is_asset_html) {
-          const file18 = is_asset ? filename : filename_html;
+          const file17 = is_asset ? filename : filename_html;
           if (options.read) {
             const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-            return new Response(options.read(file18), {
+            return new Response(options.read(file17), {
               headers: type ? { "content-type": type } : {}
             });
           }
@@ -32207,7 +32077,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "facepalm.gif", "favicon.png", "iconmonstr-twitter-1.svg", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "tesla-svgrepo-com.svg"]),
   mimeTypes: { ".css": "text/css", ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-38aab468.js", "imports": ["_app/immutable/start-38aab468.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/singletons-79591b06.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-237c96a2.js", "imports": ["_app/immutable/start-237c96a2.js", "_app/immutable/chunks/index-680b99e4.js", "_app/immutable/chunks/singletons-07a2299f.js", "_app/immutable/chunks/index-4b764cf1.js", "_app/immutable/chunks/preload-helper-b21cceae.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -32224,8 +32094,7 @@ var manifest = {
       () => Promise.resolve().then(() => (init__13(), __exports13)),
       () => Promise.resolve().then(() => (init__14(), __exports14)),
       () => Promise.resolve().then(() => (init__15(), __exports15)),
-      () => Promise.resolve().then(() => (init__16(), __exports16)),
-      () => Promise.resolve().then(() => (init__17(), __exports17))
+      () => Promise.resolve().then(() => (init__16(), __exports16))
     ],
     routes: [
       {
@@ -32325,19 +32194,11 @@ var manifest = {
         endpoint: null
       },
       {
-        id: "/schools",
-        pattern: /^\/schools\/?$/,
-        names: [],
-        types: [],
-        page: { layouts: [0], errors: [1], leaf: 14 },
-        endpoint: null
-      },
-      {
         id: "/screenshareA",
         pattern: /^\/screenshareA\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 15 },
+        page: { layouts: [0], errors: [1], leaf: 14 },
         endpoint: null
       },
       {
@@ -32345,7 +32206,7 @@ var manifest = {
         pattern: /^\/stripe\/?$/,
         names: [],
         types: [],
-        page: { layouts: [0], errors: [1], leaf: 16 },
+        page: { layouts: [0], errors: [1], leaf: 15 },
         endpoint: null
       }
     ],
@@ -32411,12 +32272,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file18 = pathname.substring(1);
+      let file17 = pathname.substring(1);
       try {
-        file18 = decodeURIComponent(file18);
+        file17 = decodeURIComponent(file17);
       } catch (err) {
       }
-      if (manifest.assets.has(file18) || manifest.assets.has(file18 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file17) || manifest.assets.has(file17 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {

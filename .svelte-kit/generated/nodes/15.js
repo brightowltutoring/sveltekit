@@ -1,1 +1,1 @@
-export { default as component } from "../../../src/routes/screenshareA/+page.svelte";
+export { default as component } from "../../../src/routes/stripe/+page.svelte";

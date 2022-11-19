@@ -1,14 +1,10 @@
 <script>
-  // import HydratePlansCard from "$lib/Plans/HydratePlansCard.svelte";
-  // {#if ready}
-  //   <HydratePlansCard />
-  // {/if}
   import PlansCard from "$lib/Plans/PlansCard.svelte";
   import InView from "$lib/InView.svelte";
   import { elasticOut } from "svelte/easing";
-  import { plansCardArray } from "$lib/Plans/plansCardArray.js";
+  import { plansCardArray } from "$lib/Plans/plansCardArray";
   import { onMount, createEventDispatcher } from "svelte";
-  import { cssToHead, jsToHead, scaleYN } from "$lib/utils.js";
+  import { cssToHead, jsToHead, scaleYN } from "$lib/utils";
   let dispatch = createEventDispatcher();
 
   export let plansCards = plansCardArray;

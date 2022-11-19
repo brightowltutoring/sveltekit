@@ -2,9 +2,9 @@
   import {
     regexEmailChecker,
     magicLinkToEmail,
-  } from "$lib/Login/loginFunctions.js";
+  } from "$lib/Login/loginFunctions";
   import IconEmail from "$lib/Icons/IconEmail.svelte";
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
 
   let magicLinkSent = false;
   let emptyEmailInputAnimated;

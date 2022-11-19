@@ -1,6 +1,6 @@
 <script>
   import K from "$lib/Katex.svelte";
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
   import { blur, scale, fly, fade } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
   let equations = [
