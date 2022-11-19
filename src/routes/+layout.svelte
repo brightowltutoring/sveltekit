@@ -1,13 +1,7 @@
 <script>
-  import {
-    scale,
-    // fly, slide
-  } from "svelte/transition";
-  import {
-    quintOut,
-    // elasticOut,
-  } from "svelte/easing";
   import "../app.css";
+  import { scale } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import LoginCard from "$lib/Login/LoginCard.svelte";
@@ -15,7 +9,6 @@
   import Footer from "$lib/Footer.svelte";
   import {
     instDeltaY,
-    // innerWidth,
     scrollY,
     // windowInnerHeight, TODO: remove?
     // scrollYMax, TODO: remove?
@@ -24,9 +17,9 @@
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
-    // isDarkMode,
-    // isLoggedIn,
   } from "$lib/store.js";
+
+  import { disablePinchZoom } from "$lib/utils.js";
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
@@ -36,18 +29,9 @@
   //   $scrollYMax = document.body.scrollHeight - $windowInnerHeight;
   // }
 
-  // disables pinchzoom
-  function disablePinchZoom() {
-    document.addEventListener("gesturestart", (e) => {
-      e.preventDefault();
-      return false;
-    });
-  }
-
   onMount(() => {
     // setScrollYMax(); TODO: remove?
     disablePinchZoom();
-
     setInnerWidthViaMatchMedia();
   });
 

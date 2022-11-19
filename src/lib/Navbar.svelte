@@ -4,6 +4,7 @@
   import { elasticOut } from "svelte/easing";
   import Navitem from "./Navitem.svelte";
   import { goto } from "$app/navigation";
+  import { isRunningStandalone } from "$lib/utils.js";
   import {
     isLoggedIn,
     routes,
@@ -12,10 +13,9 @@
     navLoginClicked,
     navHomeworkClicked,
     elementColor,
-    isRunningStandalone,
   } from "$lib/store.js";
   import { spring } from "svelte/motion";
-  import { onMount } from "svelte";
+  // import { onMount } from "svelte";
 
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   let hueRocket = 0;

@@ -3,12 +3,12 @@
   import { goto } from "$app/navigation";
   import { slide, fly, scale } from "svelte/transition";
   import { quintOut, elasticOut } from "svelte/easing";
+  import { isRunningStandalone } from "$lib/utils.js";
   import {
     isLoggedIn,
     isDarkMode,
     elementColor,
     navLoginClicked,
-    isRunningStandalone,
   } from "$lib/store.js";
   import { logoutFunction } from "$lib/Login/loginFunctions.js";
 

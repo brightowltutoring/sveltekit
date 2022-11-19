@@ -1,12 +1,4 @@
 import { writable, derived, get } from "svelte/store";
-import { quintOut, elasticOut } from "svelte/easing";
-// import { slide, fade, scale, fly, blur } from 'svelte/transition';
-import { browser } from "$app/environment";
-
-export function isRunningStandalone() {
-  return browser && window.matchMedia("(display-mode: standalone)").matches;
-  // sveltekit's 'browser' since window cannot be used with SSR (which is the default for first page load with sveltekit)
-}
 
 // const createWritableStore = (key, startValue) => {
 //   const { subscribe, set } = writable(startValue);
@@ -28,75 +20,6 @@ export function isRunningStandalone() {
 // };
 
 // export const count = createWritableStore("count", 0);
-
-// export function moduloScale(node, {easing = elasticOut, duration = 1000}) {
-
-//   return {
-//     easing,
-//     duration,
-//     css: (t,u) =>
-//     ` filter: hue-rotate(${10*u}turn) blur(${t*4}px);
-//     `
-//   }
-// }
-
-export function customEase(t) {
-  // supercon function
-  // let a = 0.344
-  // let b = 1.4
-  // let a = 1
-  // let b = 2.7
-  // return b*Math.exp(-a/t)
-
-  // curtain effect created on: https://www.desmos.com/calculator/kr2w0zv092
-  // return 2*Math.tanh(t)*Math.sin(8*t)
-
-  let u = t;
-  return (1 / 8) * (8 * u) * Math.sin(8 * u); // less dramatic takeoff
-
-  // ... i think this reproduces sineOut svelte easing
-  // let τ = 4
-  // return Math.sin( (2 * Math.PI / τ ) * t );
-  // with period of 4, goes from 0 to 1 when t∈[0,1]
-
-  // step function
-  // if (t < 0.3) return 0;
-  // if (t < 0.6) return 0.3;
-  // if (t < 0.9) return 0.6;
-  // return 1;
-}
-
-export function customFade(
-  node,
-  { delay = 0, easing = elasticOut, duration = 3000 }
-) {
-  return {
-    delay,
-    easing,
-    duration,
-    css: (t, u) =>
-      ` opacity: ${0.8 * u + t};
-        filter: hue-rotate(${0.15 * u}turn) 
-                blur(${u}px);
-      `,
-  };
-}
-
-export function slider(
-  node,
-  { X = 0, Y = -100, easing = quintOut, duration = 300 }
-) {
-  return {
-    X,
-    Y,
-    easing,
-    duration,
-    css: (t, u) =>
-      ` transform: translate(${X * u}px, ${Y * u}px);
-        opacity: ${t};
-      `,
-  };
-}
 
 export const isLoggedIn = writable(false);
 export const lastScrollY = writable(0);

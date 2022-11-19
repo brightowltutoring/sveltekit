@@ -34,6 +34,7 @@
   }
 </script>
 
+<!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence this component acts as a placeholder for the vanilla intersection observer code -->
 <InView once vanilla={".dropzone"} onview={hydrateDropzoneDomEls} />
 
 <form

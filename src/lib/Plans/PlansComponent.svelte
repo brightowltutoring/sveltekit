@@ -5,40 +5,25 @@
   // {/if}
   import PlansCard from "$lib/Plans/PlansCard.svelte";
   import InView from "$lib/InView.svelte";
-  import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import { plansCardArray } from "$lib/Plans/plansCardArray.js";
   import { onMount, createEventDispatcher } from "svelte";
-  import { cssToHead, jsToHead } from "$lib/utils.js";
+  import { cssToHead, jsToHead, scaleYN } from "$lib/utils.js";
   let dispatch = createEventDispatcher();
-
-  function scaleYN(node, args) {
-    return args.hasTransition ? scale(node, args) : null;
-    // This conditionally returns scale or no transition
-    // Alternatively can use the following code to produce the same effect:
-    //  <div
-    //     in:scale={{
-    //       duration: hasTransition ? 0 : 1000,
-    //       delay: hasTransition ? 0 : 100 * i,
-    //       easing: elasticOut,
-    //     }}
-    //     >
-    //   </div>
-  }
 
   export let plansCards = plansCardArray;
   // When the importing component has 'zeroTransition = true' this component produces no transition animation for both navbar AND direct navigation
-  export let hasTransition = true;
-  // default true; if false then two lines below keep ready as 'true'
 
-  // let ready = true;
-  let ready = !hasTransition;
+  export let noTransition = false; // when user does include noTransition as a prop then this is rewritten to 'true'
+
+  let ready = noTransition;
   onMount(() => (ready = true));
   // the 'ready' variable logic allows the in:scale div to animate (svelte transition) when going directly to this plans route ..otherwise only works when navigating from another route
 </script>
 
 <InView
   once
+  margin={"200px"}
   onview={() => {
     console.log("📅");
     jsToHead(
@@ -50,7 +35,6 @@
       "https://assets.calendly.com/assets/external/widget.css"
     );
   }}
-  margin={"200px"}
 >
   <!-- Can also do 'use:boop' where boop() is a function containing the dispatch logic. -->
   <plans-section
@@ -62,7 +46,7 @@
       {#if ready}
         <div
           in:scaleYN={{
-            hasTransition: hasTransition,
+            noTransition: noTransition,
             duration: 1000,
             easing: elasticOut,
             delay: 100 * i,

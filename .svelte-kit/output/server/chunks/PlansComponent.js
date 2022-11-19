@@ -52,22 +52,22 @@ const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 const PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let dispatch = createEventDispatcher();
   let { plansCards = plansCardArray } = $$props;
-  let { hasTransition = true } = $$props;
-  let ready = !hasTransition;
+  let { noTransition = false } = $$props;
+  let ready = noTransition;
   if ($$props.plansCards === void 0 && $$bindings.plansCards && plansCards !== void 0)
     $$bindings.plansCards(plansCards);
-  if ($$props.hasTransition === void 0 && $$bindings.hasTransition && hasTransition !== void 0)
-    $$bindings.hasTransition(hasTransition);
+  if ($$props.noTransition === void 0 && $$bindings.noTransition && noTransition !== void 0)
+    $$bindings.noTransition(noTransition);
   return `${validate_component(InView, "InView").$$render(
     $$result,
     {
       once: true,
+      margin: "200px",
       onview: () => {
         console.log("\u{1F4C5}");
         jsToHead("calendlyJS", "https://assets.calendly.com/assets/external/widget.js");
         cssToHead("calendlyCSS", "https://assets.calendly.com/assets/external/widget.css");
-      },
-      margin: "200px"
+      }
     },
     {},
     {

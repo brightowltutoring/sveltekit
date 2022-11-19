@@ -43,7 +43,8 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   $$result.css.add(css);
   boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
   $$unsubscribe_isDarkMode();
-  return `${validate_component(InView, "InView").$$render(
+  return `
+${validate_component(InView, "InView").$$render(
     $$result,
     {
       once: true,

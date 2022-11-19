@@ -192,7 +192,7 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
       ${validate_component(PlansComponent, "PlansComponent").$$render(
     $$result,
     {
-      hasTransition: false,
+      noTransition: true,
       plansCards: classicoAndMock
     },
     {},

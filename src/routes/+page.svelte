@@ -3,7 +3,8 @@
   let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
-  import { isDarkMode, isRunningStandalone } from "$lib/store.js";
+  import { isRunningStandalone } from "$lib/utils.js";
+  import { isDarkMode } from "$lib/store.js";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
@@ -101,7 +102,7 @@
       </p>
 
       <PlansComponent
-        hasTransition={false}
+        noTransition
         on:boop={(e) => {
           classicoAndMock = e.detail.plansCardArray.slice(0, 2);
           console.log("🏡", e.detail.message);
