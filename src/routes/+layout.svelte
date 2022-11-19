@@ -1,4 +1,6 @@
 <script>
+  import { slide } from "svelte/transition";
+  import { elasticOut } from "svelte/easing";
   import "../app.css";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
@@ -13,6 +15,7 @@
     lessThan768,
     navLoginClicked,
     navHomeworkClicked,
+    navAppClicked,
   } from "$lib/store";
 
   import { disablePinchZoom } from "$lib/utils";
@@ -102,11 +105,22 @@
     : "bg-[rgba(253,250,255,0.1)] text-[rgb(37,27,47)]"} -->
 
 <main>
-  <Modal bind:showModal={$navLoginClicked}>
+  <Modal showModal={$navAppClicked} bgTint={"bg-[#818cf8]"}>
+    {#key $navAppClicked}
+      <div
+        in:slide={{ duration: 1000, easing: elasticOut }}
+        class=" font-Poppins font-bold text-5xl sm:text-6xl text-center p-10"
+      >
+        Coming soon! 🚀
+      </div>
+    {/key}
+  </Modal>
+
+  <Modal showModal={$navLoginClicked}>
     <LoginCard />
   </Modal>
 
-  <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+  <Modal showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <Dropzone
       uniqueId={"broccoli"}
       text={"🔥"}
@@ -122,8 +136,9 @@
 I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflow-y-hidden w-full". 
 Fixed containers  apparently hate having scrollable overflow elements inside.
 -->
+
   <div
-    class="md:py-4 py-1 md:px-[7%] z-50 fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
+    class=" z-50 md:py-4 py-1 md:px-[7%] fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
   >
     <Navbar />
   </div>

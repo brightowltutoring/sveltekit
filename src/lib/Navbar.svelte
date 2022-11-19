@@ -10,11 +10,12 @@
     routes,
     scrollY,
     isDarkMode,
-    navLoginClicked,
-    navHomeworkClicked,
+    navAppClicked,
+    clearNavModals,
     elementColor,
   } from "$lib/store";
   import { spring } from "svelte/motion";
+
   // import { onMount } from "svelte";
 
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
@@ -31,8 +32,7 @@
 
   let resetLogoClick;
   function clickLogo() {
-    $navLoginClicked = false;
-    $navHomeworkClicked = false;
+    clearNavModals();
     goto("/");
     resetLogoClick = !resetLogoClick;
 
@@ -50,8 +50,6 @@
     $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"
   }`;
 
-  // let app = true;
-
   // TODO: supposed to convert vertical scroll on target element into horizontal, leaving regular horizontal unchanged
   // onMount(() => {
   //   Observer.create({
@@ -66,7 +64,7 @@
 
 <!-- gap-x-24 -->
 <logo-and-navbar
-  class=" flex items-center justify-center md:justify-between gap-x-10 "
+  class=" flex items-center justify-center md:justify-between gap-x-10"
 >
   {#key resetLogoClick}
     <div
@@ -91,10 +89,11 @@
         <!-- in:scale={{ duration: 800, easing: elasticOut }} -->
         <li
           on:click={() => {
-            // app = !app;
-            alert("Coming soon 🚀");
-            $navLoginClicked = false;
-            $navHomeworkClicked = false;
+            clearNavModals();
+            $navAppClicked = true;
+            setTimeout(() => {
+              clearNavModals();
+            }, 2000);
           }}
           class=" mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
                border-b-1 rounded px-3 py-1 "

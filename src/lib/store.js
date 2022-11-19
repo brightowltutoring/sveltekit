@@ -100,9 +100,13 @@ export function setInnerWidthViaMatchMedia(pixelWidth = 768) {
 // these nav items only since theyre modals, rather than actual routes
 export const navLoginClicked = writable(false);
 export const navHomeworkClicked = writable(false);
+export const navAppClicked = writable(false);
 
-// TODO: testing... want to consolidate logic two modal nav buttons above
-export const navModal = writable({ login: false, homework: false });
+export function clearNavModals() {
+  navLoginClicked.set(false);
+  navHomeworkClicked.set(false);
+  navAppClicked.set(false);
+}
 
 export const routes = writable({
   home: {

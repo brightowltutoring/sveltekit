@@ -1,7 +1,7 @@
 <script>
   export let href, content, bool, btnColor, btnColorHover, routes;
 
-  import { navLoginClicked, navHomeworkClicked, navModal } from "./store";
+  import { navLoginClicked, navHomeworkClicked, clearNavModals } from "./store";
   import { page } from "$app/stores";
 
   // this allows going back and button click matching with route
@@ -22,55 +22,23 @@
     bool = !bool; // TODO: is this necessary?
   }
 
-  // added nov13, 2022
-  // $: $navHomeworkClicked = $navModal.homework;
-  // $: $navLoginClicked = $navModal.login;
-
-  // const navModalKeys = Object.keys($navModal);
-  // const navModalValues = Object.values($navModal);
-
   function handleNavButtonClicks(e) {
-    // still haven't figured a nice way to consolidate this logic ... especially if wanting to add a third modal '$navXClicked' button variable. Unfortunately since svelte derived stores are not writable, cannot simply create an array of store variables whereby I can ensure some correlated logic (i.e. only one element can be truthy at a time). Moving away from stores doesnt seem to an answer due to prop drill hell
+    // resets all modals (so modals don't continuously pile up)
+    clearNavModals();
 
-    // use for in loop instead
-    // // TODO: what to do with this code
-    // const slashlessRoute = href.slice(1);
-    // const indexOfMatch = navModalKeys.indexOf(slashlessRoute);
-    // if (indexOfMatch != -1) {
-    //   // if (navModalKeys.includes(slashlessRoute)) {
-    //   e.preventDefault();
-
-    //   for (let value of Object.values($navModal)) {
-    //     value = false;
-    //   }
-    //   // $navModal[navModalKeys[indexOfMatch]] = true;
-    //   $navModal[navModalKeys[parseInt(indexOfMatch)]] = true;
-    // }
-    // // TODO: what to do with this code
-
+    // sets the correct modal
     if (href == "/homework") {
       e.preventDefault();
       $navHomeworkClicked = true;
-      $navLoginClicked = false;
-      // $navModal.homework = true;
-      // $navModal.login = false;
-
       return;
     }
     if (href == "/login") {
       e.preventDefault();
       $navLoginClicked = true;
-      $navHomeworkClicked = false;
-
-      // $navModal.login = true;
-      // $navModal.homework = false;
-
       return;
     }
-    $navLoginClicked = false;
-    $navHomeworkClicked = false;
 
-    // clickOnNavLinks(); //TODO: what does this do again??
+    // clickOnNavLinks();
   }
 </script>
 
