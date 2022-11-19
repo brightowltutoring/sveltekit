@@ -93,7 +93,7 @@
           $navAppClicked = true;
           setTimeout(() => {
             clearNavModals();
-          }, 2000);
+          }, 800);
         }}
         class="{isRunningStandalone() &&
           'hidden'}  mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
