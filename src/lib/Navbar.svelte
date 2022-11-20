@@ -1,6 +1,7 @@
 <script>
+  import { browser } from "$app/environment";
   import LightDarkMode from "$lib/LightDarkMode.svelte";
-  import { scale } from "svelte/transition";
+  import { scale, blur } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import Navitem from "./Navitem.svelte";
   import { goto } from "$app/navigation";
@@ -50,21 +51,15 @@
     $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"
   }`;
 
-  // TODO: supposed to convert vertical scroll on target element into horizontal, leaving regular horizontal unchanged
-  // onMount(() => {
-  //   Observer.create({
-  //     target: body,
-  //     type: "wheel",
-  //     onChangeY: (self) => {
-  //       document.documentElement.scrollLeft += self.deltaY;
-  //     },
-  //   });
-  // });
+  // These two conditional tailwind classes work together; 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
+  let hideIfRunningStandalone = isRunningStandalone() && "hidden";
+  let fadeInToFullOpacity =
+    browser && "opacity-100 transition-opacity duration-500 ease-in";
 </script>
 
 <!-- gap-x-24 -->
 <logo-and-navbar
-  class=" flex items-center justify-center md:justify-between gap-x-10"
+  class=" flex items-center justify-center md:justify-between gap-x-10 {fadeInToFullOpacity} opacity-0"
 >
   {#key resetLogoClick}
     <div
@@ -79,57 +74,48 @@
   {/key}
 
   <!-- <nav class="md:ml-24 md:p-1 p-3 "> -->
-  {#key unique}
-    <ul
-      class="flex flex-row text-xl items-center {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
-    >
-      <!-- TODO: on:click directs to download the PWA -->
-      <!-- {#if !isRunningStandalone()} -->
-      <!-- {#key app} -->
-      <!-- in:scale={{ duration: 800, easing: elasticOut }} -->
-      <li
-        on:click={() => {
-          clearNavModals();
-          $navAppClicked = true;
-          setTimeout(() => {
-            clearNavModals();
-          }, 800);
-        }}
-        class="{isRunningStandalone() &&
-          'hidden'}  mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
+  <!-- {#key unique} -->
+  <!-- in:blur={{ duration: 5000 }} -->
+  <!-- {isRunningStandalone()
+      ? 'opacity-100'
+      : 'opacity-0'} -->
+  <ul
+    class=" flex flex-row text-xl items-center {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
+  >
+    <li
+      on:click={() => {
+        clearNavModals();
+        $navAppClicked = true;
+        setTimeout(() => clearNavModals(), 1200);
+      }}
+      class="{hideIfRunningStandalone} mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
                border-b-1 rounded px-3 py-1 "
+    >
+      App
+    </li>
+
+    {#each Object.keys($routes).slice(0, 5) as KEY}
+      <li
+        class={KEY == "home" && hideIfRunningStandalone}
+        style={KEY == "login" &&
+          $isLoggedIn &&
+          `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
       >
-        App
+        <Navitem
+          href={$routes[KEY].href}
+          content={$routes[KEY].name}
+          bind:bool={$routes[KEY].isCurrent}
+          bind:routes={$routes}
+          bind:btnColor
+          bind:btnColorHover
+        />
       </li>
-      <!-- {/key} -->
-      <!-- {/if} -->
+    {/each}
 
-      <!-- {#each Object.keys($routes).splice(0, 5) as KEY} -->
-      <!-- style={KEY == "login" &&
-            $isLoggedIn &&
-            `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`} -->
-      {#each Object.keys($routes).slice(0, 5) as KEY}
-        <li
-          class={KEY == "home" && isRunningStandalone() && "hidden"}
-          style={KEY == "login" &&
-            $isLoggedIn &&
-            `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
-        >
-          <Navitem
-            href={$routes[KEY].href}
-            content={$routes[KEY].name}
-            bind:bool={$routes[KEY].isCurrent}
-            bind:routes={$routes}
-            bind:btnColor
-            bind:btnColorHover
-          />
-        </li>
-      {/each}
-
-      <li class="px-3 translate-y-1">
-        <LightDarkMode />
-      </li>
-    </ul>
-  {/key}
+    <li class="px-3 translate-y-1">
+      <LightDarkMode />
+    </li>
+  </ul>
+  <!-- {/key} -->
   <!-- </nav> -->
 </logo-and-navbar>

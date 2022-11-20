@@ -1,6 +1,6 @@
 <script>
-  import { slide } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
+  import { slide, fly, fade, blur, scale } from "svelte/transition";
+  import { elasticOut, quintOut } from "svelte/easing";
   import "../app.css";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
@@ -106,9 +106,9 @@
 
 <main>
   <Modal showModal={$navAppClicked} bgTint={"bg-[#818cf8]"}>
-    {#key $navAppClicked}
+    {#key !$navAppClicked}
       <div
-        in:slide={{ duration: 1000, easing: elasticOut }}
+        in:slide={{ duration: 1300, easing: elasticOut }}
         class=" font-Poppins font-bold text-5xl sm:text-6xl text-center p-10"
       >
         Coming soon! 🚀
