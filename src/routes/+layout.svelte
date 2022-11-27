@@ -57,18 +57,15 @@
     // console.log("yeet under");
 
     if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
-      jankytown = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl";
+      // if ($scrollY <= verticalThresholdMobile) {
+      jankytown =
+        "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200";
     }
     if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
-      jankytown = "-bottom-20 backdrop-blur-3xl duration-200";
+      jankytown = "-bottom-28 duration-400";
     if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
-  // this exception hides the navbar on '/classroom' on initial page load for mobile sized screens
-  // ...might remove this later as it's not that useful
-  // $: if ($lessThan768 && $page.routeId == "/classroom") {
-  //   jankytown = "-bottom-20";
-  // }
 </script>
 
 <svelte:head>
@@ -138,7 +135,7 @@ Fixed containers  apparently hate having scrollable overflow elements inside.
 -->
 
   <div
-    class=" z-50 md:py-4 py-1 md:px-[7%] fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
+    class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden  h-[80px] w-full"
   >
     <Navbar />
   </div>

@@ -1,8 +1,8 @@
-import IconHome from "$lib/Icons/IconHome.svelte";
-import IconHomework from "$lib/Icons/IconHomework.svelte";
-import IconClassroom from "$lib/Icons/IconClassroom.svelte";
+// import IconHome from "$lib/Icons/IconHome.svelte";
 import IconLogin from "$lib/Icons/IconLogin.svelte";
 import IconPlans from "$lib/Icons/IconPlans.svelte";
+import IconHomework from "$lib/Icons/IconHomework.svelte";
+import IconClassroom from "$lib/Icons/IconClassroom.svelte";
 
 import { writable, derived, get } from "svelte/store";
 
@@ -114,14 +114,13 @@ export function clearNavModals() {
   navAppClicked.set(false);
 }
 
-// TODO: trying to incorporate svg into navbar icons ... in a programmatic way. Currently (nov26,2022) using svg via svelte components, but clearly that wont work with this new way
 export const routes = writable({
   home: {
     name: "Home",
     href: "/",
     title: "Thinksolve.io 💫",
     isCurrent: false,
-    icon: IconHome,
+    // icon: IconHome,
   },
   login: {
     name: "Login",

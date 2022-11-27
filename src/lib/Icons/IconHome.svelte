@@ -1,9 +1,11 @@
 <script>
   import { isDarkMode } from "$lib/store.js";
   $: fillColor = $isDarkMode ? "white" : "black";
+  let size = 39.434;
 </script>
 
-<svg width="39.434px" height="39.434px" viewBox="0 0 39.434 39.434">
+<!-- <svg width="39.434px" height="39.434px" viewBox="0 0 39.434 39.434"> -->
+<svg width={size} height={size} viewBox="0 0 {size} {size}">
   <path
     fill={fillColor}
     d="M39.434,20.718c0,1.104-0.895,2-2,2c-0.004,0-0.012,0-0.02,0h-3.805v10.637c0,1.104-0.896,2-2,2h-6.568

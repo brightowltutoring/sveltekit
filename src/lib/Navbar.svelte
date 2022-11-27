@@ -32,6 +32,7 @@
   function clickLogo() {
     clearNavModals();
     goto("/");
+
     resetLogoClick = !resetLogoClick;
 
     for (let key in $routes) {
@@ -39,6 +40,12 @@
     }
 
     $routes.home.isCurrent = true;
+  }
+
+  function handleAppNavClick() {
+    clearNavModals();
+    $navAppClicked = true;
+    setTimeout(() => clearNavModals(), 1200);
   }
 
   let btnColor = "sm:bg-red-300 rounded";
@@ -52,12 +59,12 @@
   // TODO: i wonder if app splashscreen would make 'fadeInToFullOpacity' unneeded
   let hideIfRunningStandalone = isRunningStandalone() && "hidden";
   let fadeInToFullOpacity =
-    browser && "opacity-100 transition-opacity duration-300 ease-in";
+    browser && "opacity-100 transition-opacity duration-100 ease-in";
 </script>
 
 <!-- gap-x-24 -->
 <logo-and-navbar
-  class=" flex items-center justify-center md:justify-between gap-x-10 {fadeInToFullOpacity} opacity-0"
+  class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center md:justify-between gap-x-10 w-full "
 >
   {#key resetLogoClick}
     <div
@@ -71,23 +78,15 @@
     </div>
   {/key}
 
-  <!-- <nav class="md:ml-24 md:p-1 p-3 "> -->
-  <!-- {#key unique} -->
-  <!-- in:blur={{ duration: 5000 }} -->
-  <!-- {isRunningStandalone()
-      ? 'opacity-100'
-      : 'opacity-0'} -->
+  <!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
   <ul
-    class=" flex flex-row text-xl items-center {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
+    class=" grid grid-flow-col place-items-center md:w-auto w-screen  text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   >
     <li
-      on:click={() => {
-        clearNavModals();
-        $navAppClicked = true;
-        setTimeout(() => clearNavModals(), 1200);
-      }}
-      class="{hideIfRunningStandalone} mx-1 font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
-               border-b-1 rounded px-3 py-1 "
+      class="{hideIfRunningStandalone}  font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
+    border-b-1 rounded px-3 py-1 mx-1"
+      on:click={handleAppNavClick}
+      on:keydown={handleAppNavClick}
     >
       App
     </li>
@@ -112,10 +111,10 @@
       </li>
     {/each}
 
-    <li class="px-3 translate-y-1 ">
+    <li
+      class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}"
+    >
       <LightDarkMode />
     </li>
   </ul>
-  <!-- {/key} -->
-  <!-- </nav> -->
 </logo-and-navbar>

@@ -1,6 +1,5 @@
 <script>
   let size = 24;
-  //  style="transform: scale(1);"
 </script>
 
 <svg
