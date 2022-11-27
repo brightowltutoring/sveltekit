@@ -41,7 +41,7 @@
   {href}
   on:click={handleNavButtonClicks}
   class=" block px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl {!isRunningStandalone() &&
-    btnColorHover}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
+    ` ${btnColorHover} hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg`} {bool &&
     `${btnColor} border-b-1 rounded px-3 py-1`}"
 >
   {#if !isRunningStandalone()}
@@ -52,7 +52,7 @@
       <div class="w-1/2 h-1/2 grid place-content-center">
         <svelte:component this={icon} />
       </div>
-      <div class="text-xs ">{content}</div>
+      <div class="text-xs p-2">{content}</div>
     </div>
   {/if}
 </a>
