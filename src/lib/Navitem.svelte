@@ -40,10 +40,16 @@
   data-sveltekit-prefetch
   {href}
   on:click={handleNavButtonClicks}
-  class=" block px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl {!isRunningStandalone() &&
-    ` ${btnColorHover} hover:rounded hover:py-1 hover:p-3 duration-300 hover:shadow-lg`} {bool &&
-    `${btnColor} border-b-1 rounded px-3 py-1`}"
+  class=" block px-2 mx-1 font-Nunito font-thin 
+  {!isRunningStandalone() &&
+    ` ${btnColorHover} hover:rounded hover:py-1 hover:p-3 duration-200 ease-in-out hover:shadow-lg text-2xl md:text-xl`} "
 >
+  <!-- {isRunningStandalone() &&
+    'hover:scale-125 transition-transform duration-300'}  -->
+
+  <!-- TODO: removing this seems to do nothing?? -->
+  <!-- {bool &&
+    `${btnColor} border-b-1 rounded px-3 py-1`} -->
   {#if !isRunningStandalone()}
     <!-- {#if !$lessThan768} -->
     {content}

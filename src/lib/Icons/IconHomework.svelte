@@ -1,7 +1,9 @@
 <script>
   import { isDarkMode } from "$lib/store.js";
   $: fillColor = $isDarkMode ? "white" : "black";
-
+  $: hoverFillColorTW = $isDarkMode
+    ? "hover:fill-green-400"
+    : "hover:fill-red-800";
   let size = 204.376;
 </script>
 
@@ -9,6 +11,7 @@
 
 <svg height={size / 7} width={size / 7} viewBox="0 0 {size} {size}">
   <path
+    class={hoverFillColorTW}
     fill={fillColor}
     d="M171.247,204.376c2.484,0,4.5-2.015,4.5-4.5V61.35h-51.744c-7.502,0-13.605-6.107-13.605-13.614V0H33.13
 	c-2.485,0-4.5,2.015-4.5,4.5v195.376c0,2.485,2.015,4.5,4.5,4.5H171.247z M74.999,94.627h79.5v10h-79.5V94.627z M74.999,119.627
