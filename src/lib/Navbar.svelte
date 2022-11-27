@@ -80,7 +80,7 @@
 
   <!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
   <ul
-    class=" grid grid-flow-col place-items-center md:w-auto w-screen  text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
+    class="grid grid-flow-col place-items-center md:w-auto w-screen  text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   >
     <li
       class="{hideIfRunningStandalone}  font-Nunito font-thin text-2xl md:text-xl hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
@@ -93,7 +93,7 @@
 
     {#each Object.keys($routes).slice(0, 5) as KEY}
       <li
-        class={KEY == "home" && hideIfRunningStandalone}
+        class={`${KEY == "home" && hideIfRunningStandalone}`}
         style={KEY == "login" &&
           $isLoggedIn &&
           `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
