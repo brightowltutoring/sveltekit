@@ -56,7 +56,7 @@
     {content}
   {:else}
     <div class="flex flex-col justify-around items-center w-[60px] h-[60px]">
-      <div class="grid place-content-center ">
+      <div class="grid place-content-center">
         <svelte:component this={icon} />
       </div>
       <div class="text-xs p-2">{content}</div>

@@ -14,7 +14,7 @@
   <!-- class={focusFillColorTW} -->
   <!-- tabindex="-1" -->
   <path
-    class="hover:fill-red-500"
+    class="focus:fill-red-500 hover:fill-red-500 z-[999px]"
     fill={fillColor}
     d="M14 10L8 5v3H1v4h7v3l6-5zm3 7H9v2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2H9v2h8v14z"
   /></svg
