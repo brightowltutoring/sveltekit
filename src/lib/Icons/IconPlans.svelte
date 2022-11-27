@@ -11,9 +11,12 @@
 <!-- I have no idea why 1/15 here ends up with the icon centered in the navbar -->
 <!-- class={focusFillColorTW} -->
 <svg height={size / 15} width={size / 15} viewBox="0 0 {size} {size}">
+  <!--  on:keydown={() => {
+    fillColor = "blue";
+  }} -->
   <path
-    tabindex="0"
-    class="focus:rotate-45"
+    tabindex="-1"
+    class="focus:fill-red-500 hover:fill-red-500"
     fill={fillColor}
     d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
 			c4.5,0,8.1,3.6,8.1,8.1V238.1z M241.3,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
