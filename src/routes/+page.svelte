@@ -10,7 +10,6 @@
   import { goto } from "$app/navigation";
 
   let ready = false;
-
   onMount(() => (ready = true));
 
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
@@ -80,7 +79,7 @@
         <span class={gradientTextColor}> 1. Upload your homework </span>
       </p>
 
-      <Dropzone textSizeTW={"text-2xl"} uniqueId={"tomato"} />
+      <Dropzone textSizeTW={"text-2xl"} uniqueId={"homeDropzone"} />
     </div>
 
     <!-- third page -->

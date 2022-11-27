@@ -122,7 +122,7 @@
 
   <Modal showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <Dropzone
-      uniqueId={"broccoli"}
+      uniqueId={"modalDropzone"}
       text={"🔥"}
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}

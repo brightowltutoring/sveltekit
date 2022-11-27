@@ -1,7 +1,7 @@
 <script>
   import { browser } from "$app/environment";
   import LightDarkMode from "$lib/LightDarkMode.svelte";
-  import { scale, blur } from "svelte/transition";
+  import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
   import Navitem from "./Navitem.svelte";
   import { goto } from "$app/navigation";
@@ -14,10 +14,9 @@
     navAppClicked,
     clearNavModals,
     elementColor,
+    lessThan768,
   } from "$lib/store";
   import { spring } from "svelte/motion";
-
-  // import { onMount } from "svelte";
 
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   let hueRocket = 0;
@@ -28,8 +27,6 @@
   }
 
   $: $isLoggedIn ? ($routes.login.name = "🚀") : ($routes.login.name = "Login");
-
-  let unique;
 
   let resetLogoClick;
   function clickLogo() {
@@ -52,9 +49,10 @@
   }`;
 
   // These two conditional tailwind classes work together; 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
+  // TODO: i wonder if app splashscreen would make 'fadeInToFullOpacity' unneeded
   let hideIfRunningStandalone = isRunningStandalone() && "hidden";
   let fadeInToFullOpacity =
-    browser && "opacity-100 transition-opacity duration-500 ease-in";
+    browser && "opacity-100 transition-opacity duration-300 ease-in";
 </script>
 
 <!-- gap-x-24 -->
@@ -108,11 +106,13 @@
           bind:routes={$routes}
           bind:btnColor
           bind:btnColorHover
+          icon={$routes[KEY].icon}
         />
+        <!-- TODO: do all these need to be 'bind:' -->
       </li>
     {/each}
 
-    <li class="px-3 translate-y-1">
+    <li class="px-3 translate-y-1 ">
       <LightDarkMode />
     </li>
   </ul>

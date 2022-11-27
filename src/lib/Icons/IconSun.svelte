@@ -1,10 +1,15 @@
+<script>
+  let size = 24;
+  //  style="transform: scale(1);"
+</script>
+
 <svg
   aria-label="Sun"
   id="lightIcon"
-  height="24"
-  width="24"
-  viewBox="0 0 182 182"
-  style="transform: scale(1);"
+  height={size}
+  width={size}
+  viewBox="0 0 {8 * size} {8 * size}"
+  class="mx-3"
 >
   <path
     fill="rgb(247,247,247)"

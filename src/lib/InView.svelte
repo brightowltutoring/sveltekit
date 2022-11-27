@@ -2,7 +2,7 @@
 <script>
   import { onMount } from "svelte";
 
-  export let vanilla; // IF doing intersection observer the vanilla javascript way, user specifies this parameter as the querySelectee ... i.e. vanilla = '#someId'
+  export let vanilla; // IF doing intersection observer the vanilla javascript way, user specifies this parameter as the querySelectee ... i.e. vanilla = {'#someId'}
   export let once; // existence prop; when declared observation happens once per 'element'
   export let onview = () => console.log("i ❤️ slots");
 
@@ -16,26 +16,26 @@
   const options = { root, threshold, rootMargin: margin };
 
   function handleIntersect(entries, observer) {
-    let entrees = vanilla ? entries : [entries[0]];
-    // note when NOT vanilla then we have a single entry 'entries[0]', however in order to consolidate with iterators (either forEach or for loop) it has to be wrapped in '[...]' ..which is array notation
-
-    entrees.forEach((entry) => {
+    // let entrees = vanilla ? entries : [entries[0]];
+    // TODO: UPDATE: when doing for loop it seems to not matter to 'array-ify' even if entries is a single element
+    for (const entry of entries) {
+      // for (const entry of entrees) {
       if (entry.isIntersecting) {
         onview(entry.target);
         once && observer.unobserve(entry.target);
       }
-    });
+    }
   }
 
   onMount(() => {
     const observer = new IntersectionObserver(handleIntersect, options);
 
-    if (vanilla)
-      document.querySelectorAll(vanilla).forEach((el) => observer.observe(el));
-
-    if (!vanilla && !single) observer.observe(container);
+    if (!vanilla && !single) observer.observe(container); // default use case
 
     if (!vanilla && single) observer.observe(container.children[0]);
+
+    if (vanilla)
+      document.querySelectorAll(vanilla).forEach((el) => observer.observe(el));
   });
 </script>
 

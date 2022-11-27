@@ -1,25 +1,19 @@
 <script>
-  export let href, content, bool, btnColor, btnColorHover, routes;
+  import { isRunningStandalone } from "$lib/utils";
+  export let href, content, bool, btnColor, btnColorHover, routes, icon;
 
-  import { navLoginClicked, navHomeworkClicked, clearNavModals } from "./store";
+  import {
+    navLoginClicked,
+    navHomeworkClicked,
+    clearNavModals,
+    lessThan768,
+  } from "./store";
   import { page } from "$app/stores";
 
   // this allows going back and button click matching with route
   // could've done this in if/else but the boolean nature here made it unnecessary
   $: for (let key in routes) {
     routes[key].isCurrent = routes[key].href === $page.url.pathname;
-  }
-
-  // not using since nov13, 2022
-  function clickOnNavLinks() {
-    // on each click, clears rest of button clicks
-    // TODO: this doesnt seem to matter anymore... maybe this was necessary when using svelte-transitions on the buttons before
-
-    for (let key in routes) {
-      routes[key].isCurrent = false; //TODO: is this necessary?
-    }
-
-    bool = !bool; // TODO: is this necessary?
   }
 
   function handleNavButtonClicks(e) {
@@ -37,8 +31,6 @@
       $navLoginClicked = true;
       return;
     }
-
-    // clickOnNavLinks();
   }
 </script>
 
@@ -48,10 +40,26 @@
 
 <a
   data-sveltekit-prefetch
-  class=" px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
+  class=" block px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
     `${btnColor} border-b-1 rounded px-3 py-1`}"
   {href}
   on:click={handleNavButtonClicks}
 >
-  {content}
+  <!-- {#if !isRunningStandalone()} -->
+  {#if !$lessThan768}
+    {content}
+  {:else}
+    <!-- {#if isRunningStandalone()} -->
+    <div class="flex flex-col justify-around items-center w-[60px] h-[60px]">
+      <div class="w-1/2 h-1/2 grid place-content-center">
+        <svelte:component this={icon} />
+      </div>
+      <div class="text-xs">{content}</div>
+    </div>
+  {/if}
 </a>
+<!--  {#if svg && $lessThan768}
+    {@html svg}
+  {:else}
+    {content}
+  {/if} -->
