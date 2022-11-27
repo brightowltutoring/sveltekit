@@ -45,8 +45,8 @@
   {href}
   on:click={handleNavButtonClicks}
 >
-  <!-- {#if !isRunningStandalone()} -->
-  {#if !$lessThan768}
+  {#if !isRunningStandalone()}
+    <!-- {#if !$lessThan768} -->
     {content}
   {:else}
     <!-- {#if isRunningStandalone()} -->
