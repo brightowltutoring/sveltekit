@@ -135,7 +135,7 @@ Fixed containers  apparently hate having scrollable overflow elements inside.
 -->
 
   <div
-    class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden  h-[80px] w-full"
+    class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden  h-[70px] w-full"
   >
     <Navbar />
   </div>

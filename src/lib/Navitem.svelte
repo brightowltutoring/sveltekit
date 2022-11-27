@@ -34,22 +34,25 @@
   }
 </script>
 
+<!-- class=" block px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
+    `${btnColor} border-b-1 rounded px-3 py-1`}" -->
 <a
   data-sveltekit-prefetch
-  class=" block px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl {`${btnColorHover}`}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
-    `${btnColor} border-b-1 rounded px-3 py-1`}"
   {href}
   on:click={handleNavButtonClicks}
+  class=" block px-2 mx-1 font-Nunito font-thin text-2xl md:text-xl {!isRunningStandalone() &&
+    btnColorHover}  hover:rounded hover:py-1  hover:p-3 duration-300 hover:shadow-lg {bool &&
+    `${btnColor} border-b-1 rounded px-3 py-1`}"
 >
   {#if !isRunningStandalone()}
     <!-- {#if !$lessThan768} -->
     {content}
   {:else}
-    <div class="flex flex-col justify-around items-center w-[60px] h-[60px] ">
+    <div class="flex flex-col justify-around items-center w-[60px] h-[60px]">
       <div class="w-1/2 h-1/2 grid place-content-center">
         <svelte:component this={icon} />
       </div>
-      <div class="text-xs">{content}</div>
+      <div class="text-xs ">{content}</div>
     </div>
   {/if}
 </a>
