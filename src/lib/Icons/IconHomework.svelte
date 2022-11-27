@@ -2,8 +2,8 @@
   import { isDarkMode } from "$lib/store.js";
   $: fillColor = $isDarkMode ? "white" : "black";
   $: focusFillColorTW = $isDarkMode
-    ? "focus:fill-green-400"
-    : "focus:fill-red-500";
+    ? "focus:fill-green-400 focus:outline-none"
+    : "focus:fill-red-500 focus:outline-none";
   let size = 204.376;
 </script>
 
@@ -11,6 +11,7 @@
 
 <svg height={size / 7} width={size / 7} viewBox="0 0 {size} {size}">
   <path
+    tabindex="-1"
     class={focusFillColorTW}
     fill={fillColor}
     d="M171.247,204.376c2.484,0,4.5-2.015,4.5-4.5V61.35h-51.744c-7.502,0-13.605-6.107-13.605-13.614V0H33.13

@@ -2,25 +2,20 @@
   import { isDarkMode } from "$lib/store.js";
   $: fillColor = $isDarkMode ? "white" : "black";
   $: focusFillColorTW = $isDarkMode
-    ? "focus:fill-green-400"
-    : "focus:fill-red-500";
+    ? "focus:fill-green-400 focus:outline-none"
+    : "focus:fill-red-500 focus:outline-none";
 </script>
 
 <svg
-  version="1.1"
-  id="Capa_1"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
   x="0px"
   y="0px"
   width="31.886px"
   height="31.886px"
   viewBox="0 0 31.886 31.886"
-  style="enable-background:new 0 0 31.886 31.886;"
-  xml:space="preserve"
 >
   <g>
     <path
+      tabindex="-1"
       class={focusFillColorTW}
       fill={fillColor}
       d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
