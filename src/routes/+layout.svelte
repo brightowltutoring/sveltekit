@@ -134,9 +134,9 @@ I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflo
 Fixed containers  apparently hate having scrollable overflow elements inside.
 -->
 
-  <div
-    class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full"
-  >
+  <!-- TODO: removed nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
+  <!-- overflow-x-auto overflow-y-hidden -->
+  <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out  w-full">
     <Navbar />
   </div>
 
