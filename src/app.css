@@ -44,7 +44,9 @@ body {
   -webkit-tap-highlight-color: transparent; /* removes gray background when clicking buttons; for native app feel*/
   user-select: none; /* removes user highlighting; for native app feel */
 
-  /* touch-action: manipulation; */ /* TODO: what does this do?? */
+  /* touch-action: manipulation; */
+  /* TODO: apparently this removes double-click zoom */
+
   /* overscroll-behavior-y: none; */ /* TODO: what does this do?? */
 
   /* --anchor: rgb(253, 148, 148); */

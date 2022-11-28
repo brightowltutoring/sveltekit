@@ -1,9 +1,15 @@
 import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
 
-export function disablePinchZoom() {
+export function disableZoomGestures() {
   browser &&
     document.addEventListener("gesturestart", (e) => {
+      e.preventDefault();
+      return false;
+    });
+
+  browser &&
+    document.addEventListener("dblclick", (e) => {
       e.preventDefault();
       return false;
     });

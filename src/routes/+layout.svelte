@@ -24,13 +24,13 @@
     navAppClicked,
   } from "$lib/store";
 
-  import { disablePinchZoom } from "$lib/utils";
+  import { disableZoomGestures, isRunningStandalone } from "$lib/utils";
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
 
   onMount(() => {
-    disablePinchZoom();
+    isRunningStandalone() && disableZoomGestures();
     setInnerWidthViaMatchMedia();
   });
 
