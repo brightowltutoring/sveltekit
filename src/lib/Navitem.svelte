@@ -43,8 +43,9 @@
   class="block font-Nunito font-thin 
 
   {!isRunningStandalone() &&
-    ` ${btnColorHover} px-2 hover:rounded hover:py-1 hover:p-3 duration-200 ease-in-out hover:shadow-lg text-2xl md:text-xl`} "
+    ` ${btnColorHover}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`} "
 >
+  <!-- px-2 -->
   <!-- {isRunningStandalone() &&
     'hover:scale-125 transition-transform duration-300'}  -->
 
@@ -55,11 +56,15 @@
     <!-- {#if !$lessThan768} -->
     {content}
   {:else}
-    <div class="flex flex-col justify-around items-center w-[60px] h-[60px]">
-      <div class="grid place-content-center">
-        <svelte:component this={icon} />
-      </div>
-      <div class="text-xs p-2">{content}</div>
+    <div
+      class="flex flex-col justify-between items-center w-[60px] h-[60px] active:animate-pulse"
+    >
+      <!-- <div> -->
+      <!-- <div class="flex flex-col "> -->
+      <!-- <div class="grid place-content-center "> -->
+      <svelte:component this={icon} />
+      <!-- </div> -->
+      <span class="text-xs text-center ">{content}</span>
     </div>
   {/if}
 </a>
