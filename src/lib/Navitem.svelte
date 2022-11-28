@@ -57,14 +57,11 @@
     {content}
   {:else}
     <div
-      class="flex flex-col justify-between items-center w-[60px] h-[60px] active:animate-pulse"
+      class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-2 active:animate-pulse"
     >
-      <!-- <div> -->
-      <!-- <div class="flex flex-col "> -->
-      <!-- <div class="grid place-content-center "> -->
       <svelte:component this={icon} />
-      <!-- </div> -->
-      <span class="text-xs text-center ">{content}</span>
+
+      <span class="text-xs text-center">{content}</span>
     </div>
   {/if}
 </a>

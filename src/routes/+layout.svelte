@@ -1,6 +1,12 @@
 <script>
-  import { slide, fly, fade, blur, scale } from "svelte/transition";
-  import { elasticOut, quintOut } from "svelte/easing";
+  import {
+    slide,
+    // fly, fade, blur, scale
+  } from "svelte/transition";
+  import {
+    elasticOut,
+    // quintOut
+  } from "svelte/easing";
   import "../app.css";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
@@ -31,16 +37,12 @@
   // $: console.log("$instDeltaY", $instDeltaY);
   let jankytown;
 
-  // Since '$instDeltaY' is updated continuously on scroll, the entire reactive statement blocks below are checked continuously (as evidenced by a top console log) is there a way to do this without refiring the entire block??
-  // Maybe only check speeds as thresholds and not every single speed....kinda like match media??
-
   // sets jankytown for bigger than med.
 
   let verticalThreshold = 800;
   let verticalThresholdMobile = 400;
 
   $: if (!$lessThan768) {
-    // console.log("yeet over");
     if ($scrollY < 10) jankytown = "top-0";
 
     if ($scrollY > 10 && $scrollY < verticalThreshold)
@@ -54,8 +56,6 @@
   }
   // sets jankytown for smaller than med
   $: if ($lessThan768) {
-    // console.log("yeet under");
-
     if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
       // if ($scrollY <= verticalThresholdMobile) {
       jankytown =
@@ -87,19 +87,10 @@
   {/each}
 </svelte:head>
 
-<!-- bind:innerWidth={$innerWidth} --><!-- this now taken care of with 'setInnerWidthViaMatchMedia()' -->
 <svelte:window
   bind:scrollY={$scrollY}
   on:contextmenu={(e) => e.preventDefault()}
 />
-
-<!-- TODO: remove? -->
-<!-- bind:innerHeight={$windowInnerHeight} -->
-<!-- on:resize={setScrollYMax} -->
-
-<!-- class={$isDarkMode
-    ? "bg-[rgba(37,27,47,0.1)] text-white"
-    : "bg-[rgba(253,250,255,0.1)] text-[rgb(37,27,47)]"} -->
 
 <main>
   <Modal showModal={$navAppClicked} bgTint={"bg-[#818cf8]"}>
@@ -127,15 +118,7 @@
     />
   </Modal>
 
-  <!-- a unique id is necessary if more than one dropzone exists on the same page... such as with this 'global' modal   -->
-
-  <!-- In order to allow the overflow subcomponent of Navbar (defined in that component) to scroll, 
-I have to ALSO put this jank in its wrapping container: "overflow-x-auto overflow-y-hidden w-full". 
-Fixed containers  apparently hate having scrollable overflow elements inside.
--->
-
-  <!-- TODO: removed nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
-  <!-- overflow-x-auto overflow-y-hidden -->
+  <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
   <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out  w-full">
     <Navbar />
   </div>
