@@ -30,7 +30,8 @@
   import { onMount } from "svelte";
 
   onMount(() => {
-    isRunningStandalone() && disableZoomGestures();
+    $lessThan768 && disableZoomGestures();
+    // isRunningStandalone() && disableZoomGestures();
     setInnerWidthViaMatchMedia();
   });
 
