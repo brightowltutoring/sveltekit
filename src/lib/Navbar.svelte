@@ -23,7 +23,7 @@
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   let hueRocket = 0;
 
-  $: if ($isLoggedIn) {
+  $: if ($isLoggedIn && !isRunningStandalone()) {
     hueRocket = $isDarkMode ? 0.75 : 0;
     scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
   }

@@ -127,7 +127,6 @@ export const routes = writable({
     href: "/login",
     title: "Login 🚀",
     isCurrent: false,
-    // || get(navLoginClicked),
     icon: IconLogin,
   },
   plans: {
@@ -143,7 +142,6 @@ export const routes = writable({
     href: "/homework",
     title: "Homework 📚",
     isCurrent: false,
-    //  || get(navHomeworkClicked),
     icon: IconHomework,
   },
   classroom: {
