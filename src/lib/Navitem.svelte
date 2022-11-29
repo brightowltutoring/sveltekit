@@ -46,8 +46,9 @@
   {#if !isRunningStandalone()}
     {content}
   {:else}
+    <!-- md:px-10 added in case downloaded on ipad/mac .. makes the icon buttons spaced out in top right corner of screen -->
     <div
-      class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 active:animate-pulse"
+      class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 active:animate-pulse md:px-10"
     >
       <svelte:component this={icon} bind:navIconClicked />
 

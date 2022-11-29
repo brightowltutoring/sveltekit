@@ -133,7 +133,6 @@
       </li>
     {/each}
 
-    <!-- {hideIfRunningStandalone} -->
     <li class="py-2 translate-y-1 scale-125 md:scale-100 ">
       <LightDarkMode />
     </li>
