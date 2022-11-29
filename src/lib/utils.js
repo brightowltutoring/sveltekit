@@ -1,6 +1,34 @@
 import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
 
+// modified on nov29,2022 from: https://stackoverflow.com/questions/38241480/detect-macos-ios-windows-android-and-linux-os-with-js
+// TODO: might need to add 'browser &&' if this function is not called inside an onMount
+// TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios'
+export function getOS() {
+  let userAgent = navigator.userAgent;
+  let platform = navigator.platform;
+  let macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
+  let windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"];
+  let iosPlatforms = ["iPhone", "iPad", "iPod"];
+  let os = null;
+
+  // if (macosPlatforms.indexOf(platform) !== -1) {
+  if (macosPlatforms.includes(platform)) {
+    os = "Mac OS";
+  } else if (iosPlatforms.includes(platform)) {
+    os = "iOS";
+  } else if (windowsPlatforms.includes(platform)) {
+    os = "Windows";
+  } else if (/Android/.test(userAgent)) {
+    os = "Android";
+  } else if (/Linux/.test(platform)) {
+    os = "Linux";
+  }
+
+  // alert(os);
+  return os;
+}
+
 export function disableZoomGestures() {
   for (let eventName of ["gesturestart", "dblclick"]) {
     browser &&

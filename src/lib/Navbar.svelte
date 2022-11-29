@@ -14,7 +14,7 @@
     navAppClicked,
     clearNavModals,
     elementColor,
-    // lessThan768,
+    lessThan768,
     navLoginClicked,
     navHomeworkClicked,
   } from "$lib/store";
@@ -59,17 +59,10 @@
 
   // These two conditional tailwind classes work together; 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
   // TODO: i wonder if app splashscreen would make 'fadeInToFullOpacity' unneeded
+  // let hideIfRunningStandalone = $lessThan768 && "hidden";
   let hideIfRunningStandalone = isRunningStandalone() && "hidden";
   let fadeInToFullOpacity =
     browser && "opacity-100 transition-opacity duration-100 ease-in";
-
-  // let navIconClickedFn = (KEY) => {
-  //   if ($routes[KEY].href == "/homework") {
-  //     return $navHomeworkClicked;
-  //   } else if ($routes[KEY].href == "/login") {
-  //     return $navLoginClicked;
-  //   } else return $routes[KEY].isCurrent;
-  // };
 </script>
 
 <!-- gap-x-24 -->
@@ -125,15 +118,13 @@
             ($routes[KEY].href == "/login" && $navLoginClicked) ||
             $routes[KEY].isCurrent}
         />
-
-        <!-- bind:navIconClicked={navIconClickedFn} -->
-        <!--TODO: navIconClicked logic is only partially true ... IconHomework.svelte and IconLogin.svelte explicitly bind the fill color to  $navHomeworkClicked and $navLoginClicked respectively ....consolidate?? -->
-
         <!-- TODO: do all these need to be 'bind:' -->
       </li>
     {/each}
 
-    <li class="py-2 translate-y-1 scale-125 md:scale-100 ">
+    <li
+      class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone} "
+    >
       <LightDarkMode />
     </li>
   </ul>

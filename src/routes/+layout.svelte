@@ -24,7 +24,7 @@
     navAppClicked,
   } from "$lib/store";
 
-  import { disableZoomGestures, isRunningStandalone } from "$lib/utils";
+  import { disableZoomGestures, isRunningStandalone, getOS } from "$lib/utils";
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
@@ -33,6 +33,8 @@
     $lessThan768 && disableZoomGestures();
     // isRunningStandalone() && disableZoomGestures();
     setInnerWidthViaMatchMedia();
+    // alert(getOS());
+    // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
   });
 
   // $: console.log("$instDeltaY", $instDeltaY);

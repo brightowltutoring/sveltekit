@@ -4,7 +4,12 @@
   // bool, btnColor,
 
   import { isRunningStandalone } from "$lib/utils";
-  import { navLoginClicked, navHomeworkClicked, clearNavModals } from "./store";
+  import {
+    navLoginClicked,
+    navHomeworkClicked,
+    clearNavModals,
+    lessThan768,
+  } from "./store";
   import { page } from "$app/stores";
 
   // this allows going back and button click matching with route
@@ -43,6 +48,7 @@
   <!-- TODO: removing this seems to do nothing?? -->
   <!-- {bool &&
     `${btnColor} border-b-1 rounded px-3 py-1`} -->
+  <!-- {#if !$lessThan768} -->
   {#if !isRunningStandalone()}
     {content}
   {:else}
