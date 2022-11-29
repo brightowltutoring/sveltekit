@@ -1,9 +1,16 @@
 <script>
   // import("$lib/Dropzone/dropzone.css");
+  // transition-transform duration-1000  {$navHomeworkClicked
+  //   ? 'scale-100'
+  //   : 'scale-0'}
   import {
     isDarkMode,
-    // navLoginClicked, navHomeworkClicked
+    // navLoginClicked,
+    navHomeworkClicked,
   } from "$lib/store";
+  export let testingCSS;
+  $: testingCSS = $navHomeworkClicked && "bg-blue-400";
+
   export let text = "Drop it like it's 🔥";
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
@@ -42,12 +49,14 @@
 
 <InView once vanilla={".dropzone"} onview={hydrateDropzoneDomEls} />
 
+<!--  -->
 <form
   id="default"
   method="post"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
-  class=" transition-transform duration-1000 dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
+  class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
 >
+  <!-- transition-transform duration-1000 -->
   <div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
     <span>{text}</span>
   </div>

@@ -1,10 +1,11 @@
-import { auth } from "$lib/firebase";
+import { auth } from "$lib/firebase.js";
 import { goto } from "$app/navigation";
 // import { TwitterAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 // these two are necessary to grab the browsers width, i.e. import module depending if mobile or not
-import { get } from "svelte/store";
-import { lessThan768 } from "$lib/store";
+// TODO: on nov29,2022 these became unncessary since we are not doing 'signinWithRedirect' for either google or twitter login (see code comment below for google and twitter login)
+// import { get } from "svelte/store";
+// import { lessThan768 } from "$lib/store";
 
 export function regexEmailChecker(EMAIL) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
@@ -40,108 +41,112 @@ export async function magicLinkToEmail(EMAIL) {
     });
 }
 
+// TODO: nov29.2022 : google login didnt work with 'signInWithRedirect' logic, so assuming the same for twitter login .. getting rid of the if-else logic and keeping only the 'signInWithPopup' logic
 export async function TwitterLogin() {
   // const auth = await import("$lib/firebase");
   const { TwitterAuthProvider } = await import("firebase/auth");
   const provider = new TwitterAuthProvider();
 
-  if (get(lessThan768)) {
-    const { signInWithRedirect } = await import("firebase/auth");
-    signInWithRedirect(auth, provider)
-      .then((result) => {
-        // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-        // You can use these server side with your app's credentials to access the Twitter API.
-        const credential = TwitterAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const secret = credential.secret;
+  // if (get(lessThan768)) {
+  //   const { signInWithRedirect } = await import("firebase/auth");
+  //   signInWithRedirect(auth, provider)
+  //     .then((result) => {
+  //       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+  //       // You can use these server side with your app's credentials to access the Twitter API.
+  //       const credential = TwitterAuthProvider.credentialFromResult(result);
+  //       const token = credential.accessToken;
+  //       const secret = credential.secret;
 
-        // The signed-in user info.
-        const user = result.user;
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = TwitterAuthProvider.credentialFromError(error);
-        // ...
-      });
-  } else {
-    const { signInWithPopup } = await import("firebase/auth");
-    // console.log("twitter provider?", provider.providerId);
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-        // You can use these server side with your app's credentials to access the Twitter API.
-        const credential = TwitterAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const secret = credential.secret;
+  //       // The signed-in user info.
+  //       const user = result.user;
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       // Handle Errors here.
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       // The email of the user's account used.
+  //       const email = error.customData.email;
+  //       // The AuthCredential type that was used.
+  //       const credential = TwitterAuthProvider.credentialFromError(error);
+  //       // ...
+  //     });
+  // }
+  // else {
+  const { signInWithPopup } = await import("firebase/auth");
+  // console.log("twitter provider?", provider.providerId);
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+      // You can use these server side with your app's credentials to access the Twitter API.
+      const credential = TwitterAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const secret = credential.secret;
 
-        // The signed-in user info.
-        const user = result.user;
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = TwitterAuthProvider.credentialFromError(error);
-        // ...
-      });
-  }
+      // The signed-in user info.
+      const user = result.user;
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = TwitterAuthProvider.credentialFromError(error);
+      // ...
+    });
+  // }
 }
 
+// TODO: nov29.2022 noticed that 'signinWithRedirect' logic did not sign me in ... furthermore 'signInWithPopup' worked perfectly on both the PWA and on the mobile version of the website ... It appears firebase has consolidated the two??
 export async function GoogleLogin() {
   // const auth = await import("$lib/firebase");
   const { GoogleAuthProvider } = await import("firebase/auth");
   const provider = new GoogleAuthProvider();
 
-  if (get(lessThan768)) {
-    const { signInWithRedirect } = await import("firebase/auth");
-    signInWithRedirect(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
-  } else {
-    const { signInWithPopup } = await import("firebase/auth");
-    // console.log("google provider?", provider.providerId);
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
-  }
+  // if (get(lessThan768)) {
+  // const { signInWithRedirect } = await import("firebase/auth");
+  // signInWithRedirect(auth, provider)
+  //   .then((result) => {
+  //     // This gives you a Google Access Token. You can use it to access the Google API.
+  //     const credential = GoogleAuthProvider.credentialFromResult(result);
+  //     const token = credential.accessToken;
+  //     // The signed-in user info.
+  //     const user = result.user;
+  //   })
+  //   .catch((error) => {
+  //     // Handle Errors here.
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     // The email of the user's account used.
+  //     const email = error.customData.email;
+  //     // The AuthCredential type that was used.
+  //     const credential = GoogleAuthProvider.credentialFromError(error);
+  //   });
+  // }
+  // else {
+  const { signInWithPopup } = await import("firebase/auth");
+  // console.log("google provider?", provider.providerId);
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    });
+  // }
 }
 export async function PhoneLogin(PHONE_NUMBER) {
   // const auth = await import("$lib/firebase");
