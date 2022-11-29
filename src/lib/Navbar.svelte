@@ -14,7 +14,9 @@
     navAppClicked,
     clearNavModals,
     elementColor,
-    lessThan768,
+    // lessThan768,
+    navLoginClicked,
+    navHomeworkClicked,
   } from "$lib/store";
   import { spring } from "svelte/motion";
 
@@ -60,11 +62,19 @@
   let hideIfRunningStandalone = isRunningStandalone() && "hidden";
   let fadeInToFullOpacity =
     browser && "opacity-100 transition-opacity duration-100 ease-in";
+
+  // let navIconClickedFn = (KEY) => {
+  //   if ($routes[KEY].href == "/homework") {
+  //     return $navHomeworkClicked;
+  //   } else if ($routes[KEY].href == "/login") {
+  //     return $navLoginClicked;
+  //   } else return $routes[KEY].isCurrent;
+  // };
 </script>
 
 <!-- gap-x-24 -->
 <logo-and-navbar
-  class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center md:justify-between w-full "
+  class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center md:justify-between w-full"
 >
   {#key resetLogoClick}
     <div
@@ -80,7 +90,7 @@
 
   <!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
   <ul
-    class="grid grid-flow-col place-items-center  gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll overflow-y-hidden"
+    class="text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto  {bgGradientColor} hideScrollBar overflow-x-scroll overflow-y-hidden"
   >
     <!-- py-3 px-5 -->
     <!-- <ul
@@ -106,16 +116,24 @@
         <Navitem
           href={$routes[KEY].href}
           content={$routes[KEY].name}
-          bind:bool={$routes[KEY].isCurrent}
           bind:routes={$routes}
           bind:btnColor
           bind:btnColorHover
           icon={$routes[KEY].icon}
+          navIconClicked={($routes[KEY].href == "/homework" &&
+            $navHomeworkClicked) ||
+            ($routes[KEY].href == "/login" && $navLoginClicked) ||
+            $routes[KEY].isCurrent}
         />
+
+        <!-- bind:navIconClicked={navIconClickedFn} -->
+        <!--TODO: navIconClicked logic is only partially true ... IconHomework.svelte and IconLogin.svelte explicitly bind the fill color to  $navHomeworkClicked and $navLoginClicked respectively ....consolidate?? -->
+
         <!-- TODO: do all these need to be 'bind:' -->
       </li>
     {/each}
 
+    <!-- {hideIfRunningStandalone} -->
     <li class="py-2 translate-y-1 scale-125 md:scale-100 ">
       <LightDarkMode />
     </li>

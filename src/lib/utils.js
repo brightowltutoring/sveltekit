@@ -2,17 +2,13 @@ import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
 
 export function disableZoomGestures() {
-  browser &&
-    document.addEventListener("gesturestart", (e) => {
-      e.preventDefault();
-      return false;
-    });
-
-  browser &&
-    document.addEventListener("dblclick", (e) => {
-      e.preventDefault();
-      return false;
-    });
+  for (let eventName of ["gesturestart", "dblclick"]) {
+    browser &&
+      document.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        return false;
+      });
+  }
 }
 
 export function isRunningStandalone() {

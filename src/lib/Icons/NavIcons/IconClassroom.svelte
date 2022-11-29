@@ -1,4 +1,6 @@
 <script>
+  export let navIconClicked;
+
   import { isDarkMode } from "$lib/store.js";
   $: fillColor = $isDarkMode ? "white" : "black";
   // $: focusFillColorTW = $isDarkMode
@@ -12,6 +14,7 @@
     <!-- class={focusFillColorTW} -->
     <!-- tabindex="-1" -->
     <path
+      class={navIconClicked && "fill-red-500"}
       fill={fillColor}
       d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
 		H19.021z M16.693,19.229c-0.5,0-0.905-0.492-0.905-1.098s0.405-1.098,0.905-1.098c0.5,0,0.905,0.49,0.905,1.098

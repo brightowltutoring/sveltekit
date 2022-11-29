@@ -6,7 +6,7 @@
     regexPhoneChecker,
     // PhoneLogin, // this takes phoneNumber as a parameter
   } from "$lib/Login/loginFunctions";
-  import IconPhone from "$lib/Icons/IconPhone.svelte";
+  import IconPhone from "$lib/Icons/LoginIcons/IconPhone.svelte";
   import { isDarkMode } from "$lib/store";
 
   let magicLinkSent = false;

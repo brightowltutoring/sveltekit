@@ -104,11 +104,11 @@
     {/key}
   </Modal>
 
-  <Modal showModal={$navLoginClicked}>
+  <Modal bind:showModal={$navLoginClicked}>
     <LoginCard />
   </Modal>
 
-  <Modal showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+  <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <Dropzone
       uniqueId={"modalDropzone"}
       text={"🔥"}
@@ -119,7 +119,7 @@
   </Modal>
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
-  <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out  w-full">
+  <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
     <Navbar />
   </div>
 

@@ -1,8 +1,8 @@
 // import IconHome from "$lib/Icons/IconHome.svelte";
-import IconLogin from "$lib/Icons/IconLogin.svelte";
-import IconPlans from "$lib/Icons/IconPlans.svelte";
-import IconHomework from "$lib/Icons/IconHomework.svelte";
-import IconClassroom from "$lib/Icons/IconClassroom.svelte";
+import IconLogin from "$lib/Icons/NavIcons/IconLogin.svelte";
+import IconPlans from "$lib/Icons/NavIcons/IconPlans.svelte";
+import IconHomework from "$lib/Icons/NavIcons/IconHomework.svelte";
+import IconClassroom from "$lib/Icons/NavIcons/IconClassroom.svelte";
 
 import { writable, derived, get } from "svelte/store";
 
@@ -127,6 +127,7 @@ export const routes = writable({
     href: "/login",
     title: "Login 🚀",
     isCurrent: false,
+    // || get(navLoginClicked),
     icon: IconLogin,
   },
   plans: {
@@ -142,6 +143,7 @@ export const routes = writable({
     href: "/homework",
     title: "Homework 📚",
     isCurrent: false,
+    //  || get(navHomeworkClicked),
     icon: IconHomework,
   },
   classroom: {

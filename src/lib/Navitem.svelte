@@ -1,4 +1,5 @@
 <script>
+  export let navIconClicked = false;
   export let href, content, btnColorHover, routes, icon;
   // bool, btnColor,
 
@@ -48,7 +49,7 @@
     <div
       class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 active:animate-pulse"
     >
-      <svelte:component this={icon} />
+      <svelte:component this={icon} bind:navIconClicked />
 
       <span class="text-xs text-center">{content}</span>
     </div>

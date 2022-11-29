@@ -3,7 +3,7 @@
     regexEmailChecker,
     magicLinkToEmail,
   } from "$lib/Login/loginFunctions";
-  import IconEmail from "$lib/Icons/IconEmail.svelte";
+  import IconEmail from "$lib/Icons/LoginIcons/IconEmail.svelte";
   import { isDarkMode } from "$lib/store";
 
   let magicLinkSent = false;
