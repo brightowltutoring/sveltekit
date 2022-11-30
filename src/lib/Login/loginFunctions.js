@@ -1,4 +1,4 @@
-import { auth } from "$lib/firebase.js";
+import { auth } from "$lib/firebase";
 import { goto } from "$app/navigation";
 // import { TwitterAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
@@ -103,8 +103,12 @@ export async function TwitterLogin() {
 // TODO: nov29.2022 noticed that 'signinWithRedirect' logic did not sign me in ... furthermore 'signInWithPopup' worked perfectly on both the PWA and on the mobile version of the website ... It appears firebase has consolidated the two??
 export async function GoogleLogin() {
   // const auth = await import("$lib/firebase");
-  const { GoogleAuthProvider } = await import("firebase/auth");
-  const provider = new GoogleAuthProvider();
+  const {
+    GoogleAuthProvider,
+    setPersistence,
+    browserSessionPersistence,
+    // inMemoryPersistence,
+  } = await import("firebase/auth");
 
   // if (get(lessThan768)) {
   // const { signInWithRedirect } = await import("firebase/auth");
@@ -129,30 +133,56 @@ export async function GoogleLogin() {
   // else {
   const { signInWithPopup } = await import("firebase/auth");
   // console.log("google provider?", provider.providerId);
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-    });
+
+  setPersistence(auth, browserSessionPersistence).then(() => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  }); // set persistence block
+
   // }
 }
 export async function PhoneLogin(PHONE_NUMBER) {
   // const auth = await import("$lib/firebase");
-  const { signInWithPhoneNumber } = await import("firebase/auth");
+  // alert(PHONE_NUMBER); // maybe double check if number is formatted
 
-  //TODO: .. const phoneNumber = getPhoneNumberFromUserInput();
+  const {
+    RecaptchaVerifier,
+    signInWithPhoneNumber,
+    // setPersistence,
+    // browserSessionPersistence,
+  } = await import("firebase/auth");
+
+  // nov30,2022: added this unchecked 'setPersistence' wrapper (which worked with GoogleLogin); 'browserSessionPersistence' makes sure to log user out once the session is closed; for phone authentication this is desirable to discourage multiple people sharing one account
+  // setPersistence(auth, browserSessionPersistence).then(() => {})
+
+  // window.recaptchaVerifier = new RecaptchaVerifier(
+  //   "sign-in-button",
+  //   {
+  //     size: "invisible",
+  //     callback: (response) => {
+  //       // reCAPTCHA solved, allow signInWithPhoneNumber.
+  //       onSignInSubmit();
+  //     },
+  //   },
+  //   auth
+  // );
+
   const appVerifier = window.recaptchaVerifier;
 
   signInWithPhoneNumber(auth, PHONE_NUMBER, appVerifier)
