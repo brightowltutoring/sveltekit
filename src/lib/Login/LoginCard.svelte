@@ -11,6 +11,7 @@
     isDarkMode,
     elementColor,
     navLoginClicked,
+    lessThan768,
   } from "$lib/store";
   import { logoutFunction } from "$lib/Login/loginFunctions";
 
@@ -163,7 +164,8 @@
           <CloseButton />
         </div> -->
 
-      {#if !isRunningStandalone()}
+      <!-- {#if isRunningStandalone()} -->
+      {#if $lessThan768}
         <PhoneAuthSection />
       {:else}
         <MagicLinkSection />

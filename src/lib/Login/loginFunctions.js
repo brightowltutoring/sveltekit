@@ -1,8 +1,7 @@
 import { auth } from "$lib/firebase";
 import { goto } from "$app/navigation";
-// import { TwitterAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { RecaptchaVerifier } from "firebase/auth"; // can I import this dynamically inside generateRecaptcha() function instead??
 
-// these two are necessary to grab the browsers width, i.e. import module depending if mobile or not
 // TODO: on nov29,2022 these became unncessary since we are not doing 'signinWithRedirect' for either google or twitter login (see code comment below for google and twitter login)
 // import { get } from "svelte/store";
 // import { lessThan768 } from "$lib/store";
@@ -158,7 +157,18 @@ export async function GoogleLogin() {
   // }
 }
 
-export async function CheckPhoneCodeAndSignIn() {}
+export async function generateRecaptcha2() {
+  // const { RecaptchaVerifier } = await import("firebase/auth");
+
+  window.recaptchaVerifier = new RecaptchaVerifier(
+    "recaptcha-container",
+    {
+      size: "invisible",
+      callback: (response) => {},
+    },
+    auth
+  );
+}
 
 export async function SendCodeToPhone(PHONE_NUMBER, APP_VERIFIER) {
   // const auth = await import("$lib/firebase");
@@ -197,3 +207,5 @@ export async function logoutFunction() {
       console.log("logoutFunction failed", error);
     });
 }
+
+export async function CheckPhoneCodeAndSignIn() {}
