@@ -164,9 +164,9 @@
         </div> -->
 
       {#if !isRunningStandalone()}
-        <MagicLinkSection />
-      {:else}
         <PhoneAuthSection />
+      {:else}
+        <MagicLinkSection />
       {/if}
 
       <p class="py-5">or</p>

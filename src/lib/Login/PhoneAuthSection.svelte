@@ -6,6 +6,7 @@
 
   function generateRecaptcha() {
     window.recaptchaVerifier = new RecaptchaVerifier(
+      // "phoneStatusMessage",
       "recaptcha-container",
       // "sign-in-button",
       {
@@ -38,7 +39,7 @@
   let phoneFieldValue = "";
   let isPhoneNumber = false;
 
-  function signinWithLinkAndStop(e) {
+  async function signinWithLinkAndStop(e) {
     if ((e.type == "click" || e.key == "Enter") && phoneFieldValue == "") {
       emptyPhoneInputAnimated = true;
       setTimeout(
@@ -46,13 +47,16 @@
         100
       );
     }
+    if (isPhoneNumber) {
+      generateRecaptcha();
+    }
     if ((e.type == "click" || e.key == "Enter") && isPhoneNumber) {
       let formattedPhoneNumber = "+1" + phoneFieldValue.replace(/\D/g, "");
       // alert( `original:${phoneFieldValue}\nformatted:${formattedPhoneNumber}` );
 
       // SendCodeToPhone(phoneFieldValue);
       // SendCodeToPhone(formattedPhoneNumber, APP_VERIFIER);
-      generateRecaptcha();
+
       let appVerifier = window.recaptchaVerifier;
       SendCodeToPhone(formattedPhoneNumber, appVerifier);
 
@@ -74,7 +78,7 @@
       sendPhoneCodeBtn.style.pointerEvents = "none";
 
       phoneCodeSent = true;
-      phoneFieldValue = "";
+      // phoneFieldValue = "";
     }
   }
 
@@ -144,14 +148,14 @@
   type="phone"
   placeholder="phone"
 />
+<div id="recaptcha-container">recaptcha-container</div>
+
 <!-- {:else} -->
 <!-- button and input section updates  -->
 <!-- on:click={()=>SendCodeToPhone(phoneFieldValue) } -->
 <!-- {/if} -->
 
 <span id="phoneStatusMessage" />
-
-<div id="recaptcha-container" />
 
 <!-- TODO: later only show this when regex-verified number sent -->
 
