@@ -1,19 +1,41 @@
 <script>
-  let smsCodeSent = false;
-  // updates once code sent
+  // const { RecaptchaVerifier } = import("firebase/auth");
+  import { RecaptchaVerifier } from "firebase/auth";
+  import { auth } from "$lib/firebase";
+  import { onMount } from "svelte";
+
+  let APP_VERIFIER;
+  onMount(() => {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "sign-in-button",
+      {
+        size: "invisible",
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          onSignInSubmit();
+        },
+      },
+      auth
+    );
+
+    APP_VERIFIER = window.recaptchaVerifier;
+  });
+
+  // TODO: the above is experimental
 
   import {
     regexPhoneChecker,
-    PhoneLogin, // this takes phoneNumber as a parameter
+    SendCodeToPhone,
+    // CheckPhoneCodeAndSignIn
   } from "$lib/Login/loginFunctions";
   import IconPhone from "$lib/Icons/LoginIcons/IconPhone.svelte";
   import { isDarkMode } from "$lib/store";
 
-  let magicLinkSent = false;
+  let phoneCodeSent = false;
   let emptyPhoneInputAnimated;
-  $: shortPing = !magicLinkSent && emptyPhoneInputAnimated && "animate-ping";
+  $: shortPing = !phoneCodeSent && emptyPhoneInputAnimated && "animate-ping";
 
-  let magicLinkBtn;
+  let sendPhoneCodeBtn;
   let phoneField;
   let phoneFieldValue = "";
   let isPhoneNumber = false;
@@ -27,13 +49,13 @@
       );
     }
     if ((e.type == "click" || e.key == "Enter") && isPhoneNumber) {
-      smsCodeSent = true; //conditionally exposes a dom block (to enter code)
-
-      let formattedPhoneNumber = "+1" + phoneFieldValue.replace(/\D/g, "");
+      let formattedPhoneNumber = phoneFieldValue.replace(/\D/g, "");
+      // let formattedPhoneNumber = "+1" + phoneFieldValue.replace(/\D/g, "");
       // alert( `original:${phoneFieldValue}\nformatted:${formattedPhoneNumber}` );
 
-      // PhoneLogin(phoneFieldValue);
-      PhoneLogin(formattedPhoneNumber);
+      // SendCodeToPhone(phoneFieldValue);
+      // SendCodeToPhone(formattedPhoneNumber, APP_VERIFIER);
+      SendCodeToPhone(formattedPhoneNumber, window.recaptchaVerifier);
 
       phoneStatusMessage.style.display = "block";
 
@@ -49,10 +71,10 @@
       phoneField.style.opacity = "0.5";
       phoneField.style.pointerEvents = "none";
 
-      magicLinkBtn.style.opacity = "0.5";
-      magicLinkBtn.style.pointerEvents = "none";
+      sendPhoneCodeBtn.style.opacity = "0.5";
+      sendPhoneCodeBtn.style.pointerEvents = "none";
 
-      magicLinkSent = true;
+      phoneCodeSent = true;
       phoneFieldValue = "";
     }
   }
@@ -76,29 +98,29 @@
 
   let smsCodeInputField;
 
-  import { onMount } from "svelte";
-  import { auth } from "$lib/firebase";
+  // import { onMount } from "svelte";
+  // import { auth, RecaptchaVerifier } from "$lib/firebase";
 
-  onMount(() => {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "sign-in-button",
-      {
-        size: "invisible",
-        callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          onSignInSubmit();
-        },
-      },
-      auth
-    );
-  });
+  // onMount(async () => {
+  //   window.recaptchaVerifier = new RecaptchaVerifier(
+  //     "sign-in-button",
+  //     {
+  //       size: "invisible",
+  //       callback: (response) => {
+  //         // reCAPTCHA solved, allow signInWithPhoneNumber.
+  //         onSignInSubmit();
+  //       },
+  //     },
+  //     auth
+  //   );
+  // });
 </script>
 
 <!-- {#if !smsCodeSent} -->
 <!-- id 'sign-in-button' used here for recaptcha logic in loginFunctions.js -->
 <signin-button
   id="sign-in-button"
-  bind:this={magicLinkBtn}
+  bind:this={sendPhoneCodeBtn}
   on:click={signinWithLinkAndStop}
   on:keydown={signinWithLinkAndStop}
   class="group bg-rose-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
@@ -125,14 +147,14 @@
 />
 <!-- {:else} -->
 <!-- button and input section updates  -->
-<!-- on:click={()=>Phonelogin(phoneFieldValue) } -->
+<!-- on:click={()=>SendCodeToPhone(phoneFieldValue) } -->
 <!-- {/if} -->
 
 <span id="phoneStatusMessage" />
 
 <!-- TODO: later only show this when regex-verified number sent -->
 
-{#if smsCodeSent}
+{#if phoneCodeSent}
   <div class="grid grid-cols-3">
     <input
       id="smsCodeInputField"

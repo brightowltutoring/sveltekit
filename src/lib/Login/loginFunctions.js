@@ -105,8 +105,8 @@ export async function GoogleLogin() {
   // const auth = await import("$lib/firebase");
   const {
     GoogleAuthProvider,
-    setPersistence,
-    browserSessionPersistence,
+    // setPersistence,
+    // browserSessionPersistence,
     // inMemoryPersistence,
   } = await import("firebase/auth");
 
@@ -134,35 +134,37 @@ export async function GoogleLogin() {
   const { signInWithPopup } = await import("firebase/auth");
   // console.log("google provider?", provider.providerId);
 
-  setPersistence(auth, browserSessionPersistence).then(() => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
-  }); // set persistence block
+  // setPersistence(auth, browserSessionPersistence).then(() => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    });
+  // }); // set persistence block
 
   // }
 }
-export async function PhoneLogin(PHONE_NUMBER) {
+
+export async function CheckPhoneCodeAndSignIn() {}
+
+export async function SendCodeToPhone(PHONE_NUMBER, APP_VERIFIER) {
   // const auth = await import("$lib/firebase");
   // alert(PHONE_NUMBER); // maybe double check if number is formatted
 
   const {
-    RecaptchaVerifier,
     signInWithPhoneNumber,
     // setPersistence,
     // browserSessionPersistence,
@@ -171,6 +173,7 @@ export async function PhoneLogin(PHONE_NUMBER) {
   // nov30,2022: added this unchecked 'setPersistence' wrapper (which worked with GoogleLogin); 'browserSessionPersistence' makes sure to log user out once the session is closed; for phone authentication this is desirable to discourage multiple people sharing one account
   // setPersistence(auth, browserSessionPersistence).then(() => {})
 
+  // const {RecaptchaVerifier} = await import("firebase/auth")
   // window.recaptchaVerifier = new RecaptchaVerifier(
   //   "sign-in-button",
   //   {
@@ -183,7 +186,8 @@ export async function PhoneLogin(PHONE_NUMBER) {
   //   auth
   // );
 
-  const appVerifier = window.recaptchaVerifier;
+  // const appVerifier = window.recaptchaVerifier;
+  const appVerifier = APP_VERIFIER;
 
   signInWithPhoneNumber(auth, PHONE_NUMBER, appVerifier)
     .then((confirmationResult) => {
