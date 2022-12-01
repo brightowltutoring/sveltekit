@@ -173,23 +173,7 @@ export async function SendCodeToPhone(PHONE_NUMBER, APP_VERIFIER) {
   // nov30,2022: added this unchecked 'setPersistence' wrapper (which worked with GoogleLogin); 'browserSessionPersistence' makes sure to log user out once the session is closed; for phone authentication this is desirable to discourage multiple people sharing one account
   // setPersistence(auth, browserSessionPersistence).then(() => {})
 
-  // const {RecaptchaVerifier} = await import("firebase/auth")
-  // window.recaptchaVerifier = new RecaptchaVerifier(
-  //   "sign-in-button",
-  //   {
-  //     size: "invisible",
-  //     callback: (response) => {
-  //       // reCAPTCHA solved, allow signInWithPhoneNumber.
-  //       onSignInSubmit();
-  //     },
-  //   },
-  //   auth
-  // );
-
-  // const appVerifier = window.recaptchaVerifier;
-  const appVerifier = APP_VERIFIER;
-
-  signInWithPhoneNumber(auth, PHONE_NUMBER, appVerifier)
+  signInWithPhoneNumber(auth, PHONE_NUMBER, APP_VERIFIER)
     .then((confirmationResult) => {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).

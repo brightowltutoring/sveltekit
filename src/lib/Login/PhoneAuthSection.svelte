@@ -4,22 +4,20 @@
   import { auth } from "$lib/firebase";
   import { onMount } from "svelte";
 
-  let APP_VERIFIER;
-  onMount(() => {
+  function generateRecaptcha() {
     window.recaptchaVerifier = new RecaptchaVerifier(
-      "sign-in-button",
+      "recaptcha-container",
+      // "sign-in-button",
       {
         size: "invisible",
         callback: (response) => {
           // reCAPTCHA solved, allow signInWithPhoneNumber.
-          onSignInSubmit();
+          // onSignInSubmit();
         },
       },
       auth
     );
-
-    APP_VERIFIER = window.recaptchaVerifier;
-  });
+  }
 
   // TODO: the above is experimental
 
@@ -49,13 +47,14 @@
       );
     }
     if ((e.type == "click" || e.key == "Enter") && isPhoneNumber) {
-      let formattedPhoneNumber = phoneFieldValue.replace(/\D/g, "");
-      // let formattedPhoneNumber = "+1" + phoneFieldValue.replace(/\D/g, "");
+      let formattedPhoneNumber = "+1" + phoneFieldValue.replace(/\D/g, "");
       // alert( `original:${phoneFieldValue}\nformatted:${formattedPhoneNumber}` );
 
       // SendCodeToPhone(phoneFieldValue);
       // SendCodeToPhone(formattedPhoneNumber, APP_VERIFIER);
-      SendCodeToPhone(formattedPhoneNumber, window.recaptchaVerifier);
+      generateRecaptcha();
+      let appVerifier = window.recaptchaVerifier;
+      SendCodeToPhone(formattedPhoneNumber, appVerifier);
 
       phoneStatusMessage.style.display = "block";
 
@@ -151,6 +150,8 @@
 <!-- {/if} -->
 
 <span id="phoneStatusMessage" />
+
+<div id="recaptcha-container" />
 
 <!-- TODO: later only show this when regex-verified number sent -->
 
