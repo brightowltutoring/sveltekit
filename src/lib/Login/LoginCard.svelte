@@ -164,8 +164,8 @@
           <CloseButton />
         </div> -->
 
-      <!-- {#if isRunningStandalone()} -->
-      {#if $lessThan768}
+      {#if isRunningStandalone()}
+        <!-- {#if $lessThan768} -->
         <PhoneAuthSection />
       {:else}
         <MagicLinkSection />
