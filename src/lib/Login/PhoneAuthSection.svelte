@@ -79,12 +79,14 @@
   }
 </script>
 
-<!-- dec1,2022: changed from 'signin-button' to 'button' since otherwise I needed to add both keydown and click -->
+<!-- dec1,2022 earlier: changed from 'signin-button' to 'button' since otherwise I needed to add both keydown and click -->
+<!-- dec1,2022 night: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
 {#if !phoneCodeSent}
-  <button
-    id="sign-in-button"
+  <div
     bind:this={sendPhoneCodeBtn}
+    id="sign-in-button"
     on:click={submitPhoneNumber}
+    on:keydown={submitPhoneNumber}
     class="w-full group bg-rose-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
       ? 'group-hover:bg-opacity-80'
       : 'group-hover:bg-opacity-80'}  text-white flex justify-center items-center gap-5"
@@ -93,7 +95,7 @@
       <IconPhone />
     </span>
     <span>Get SMS Code</span>
-  </button>
+  </div>
 
   <div class="grid grid-cols-6 w-full">
     <input
@@ -115,7 +117,6 @@
 {/if}
 
 <div id="recaptcha-container" />
-
 <div id="phoneStatusMessage" />
 
 {#if phoneCodeSent}

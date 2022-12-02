@@ -164,17 +164,20 @@
           <CloseButton />
         </div> -->
 
-      {#if isRunningStandalone()}
-        <!-- {#if $lessThan768} -->
+      <!-- <MagicLinkSection /> -->
+      {#if !isRunningStandalone()}
+        <MagicLinkSection />
+        <p class="py-5" />
         <PhoneAuthSection />
       {:else}
-        <MagicLinkSection />
+        <PhoneAuthSection />
       {/if}
 
-      <p class="py-5">or</p>
+      <p class="py-5" />
 
       <!-- since these don't update the DOM, placed them in separate components -->
       <GoogleLoginButton />
+
       <TwitterLoginButton />
     </login-card>
   {/key}

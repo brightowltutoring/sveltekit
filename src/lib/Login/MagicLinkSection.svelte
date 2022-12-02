@@ -66,7 +66,7 @@
   bind:this={magicLinkBtn}
   on:click={signinWithLinkAndStop}
   on:keydown={signinWithLinkAndStop}
-  class="group bg-red-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
+  class="group bg-emerald-500 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
     ? 'group-hover:bg-opacity-80'
     : 'group-hover:bg-opacity-80'}  text-white flex justify-center items-center gap-5"
 >
