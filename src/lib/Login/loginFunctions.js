@@ -1,6 +1,5 @@
 import { auth } from "$lib/firebase";
 import { goto } from "$app/navigation";
-import { RecaptchaVerifier } from "firebase/auth"; // can I import this dynamically inside generateRecaptcha() function instead??
 
 // TODO: on nov29,2022 these became unncessary since we are not doing 'signinWithRedirect' for either google or twitter login (see code comment below for google and twitter login)
 // import { get } from "svelte/store";
@@ -157,43 +156,41 @@ export async function GoogleLogin() {
   // }
 }
 
-export async function generateRecaptcha2() {
-  // const { RecaptchaVerifier } = await import("firebase/auth");
+export async function generateRecaptchaVerifier(
+  RECAPTCHA_CONTAINER_ID = "recaptcha-container"
+) {
+  const { RecaptchaVerifier } = await import("firebase/auth");
 
-  window.recaptchaVerifier = new RecaptchaVerifier(
-    "recaptcha-container",
+  // Could also do 'window.recaptchaVerifier = new RecaptchaVerifier ..' and return nothing, however using this function modularly elsewhere it is more readable return the desired 'verifier' variable as the output of this called function
+  const recaptchaVerifier = new RecaptchaVerifier(
+    RECAPTCHA_CONTAINER_ID,
     {
       size: "invisible",
       callback: (response) => {},
     },
     auth
   );
+  return recaptchaVerifier;
 }
 
-export async function SendCodeToPhone(PHONE_NUMBER, APP_VERIFIER) {
-  // const auth = await import("$lib/firebase");
-  // alert(PHONE_NUMBER); // maybe double check if number is formatted
+export async function sendCodeToPhone(PHONE_NUMBER, RECAPTCHA_VERIFIER) {
+  const { setPersistence, browserSessionPersistence, signInWithPhoneNumber } =
+    await import("firebase/auth");
 
-  const {
-    signInWithPhoneNumber,
-    // setPersistence,
-    // browserSessionPersistence,
-  } = await import("firebase/auth");
-
-  // nov30,2022: added this unchecked 'setPersistence' wrapper (which worked with GoogleLogin); 'browserSessionPersistence' makes sure to log user out once the session is closed; for phone authentication this is desirable to discourage multiple people sharing one account
-  // setPersistence(auth, browserSessionPersistence).then(() => {})
-
-  signInWithPhoneNumber(auth, PHONE_NUMBER, APP_VERIFIER)
-    .then((confirmationResult) => {
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-      window.confirmationResult = confirmationResult;
-      // ...
-    })
-    .catch((error) => {
-      // Error; SMS not sent
-      // ...
-    });
+  // dec1,2022: added this unchecked 'setPersistence' wrapper to log user out once the session is closed; for phone authentication this is desirable to discourage multiple people sharing one account
+  setPersistence(auth, browserSessionPersistence).then(() => {
+    signInWithPhoneNumber(auth, PHONE_NUMBER, RECAPTCHA_VERIFIER)
+      .then((confirmationResult) => {
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        window.confirmationResult = confirmationResult;
+        // ...
+      })
+      .catch((error) => {
+        // Error; SMS not sent
+        // ...
+      });
+  }); // setPersistence block
 }
 
 export async function logoutFunction() {
@@ -208,4 +205,26 @@ export async function logoutFunction() {
     });
 }
 
-export async function CheckPhoneCodeAndSignIn() {}
+export function verifySMSCode(SMS_CODE, e) {
+  // let code = smsCode;
+  let clickOrEnterFired = e.type == "click" || e.key == "Enter";
+  let code = SMS_CODE;
+  let confirmationResult = window.confirmationResult;
+
+  // sms code is 6 digits-long as of dec1,2022
+  if (clickOrEnterFired && code.length >= 6 && confirmationResult) {
+    confirmationResult
+      .confirm(code)
+      .then((result) => {
+        // User signed in successfully.
+        // const user = result.user;
+        // ...
+        console.log("result", result);
+      })
+      .catch((error) => {
+        // User couldn't sign in (bad verification code?)
+        // ...
+        console.log("error", error);
+      });
+  }
+}
