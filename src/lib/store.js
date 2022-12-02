@@ -151,10 +151,10 @@ export const routes = writable({
     isCurrent: false,
     icon: IconClassroom,
   },
-  // screenshareA: {
-  //   name: "ScreenshareA",
-  //   href: "/screenshareA",
-  //   title: "ScreenshareA 🖥",
+  // classroomA: {
+  //   name: "ClassroomA",
+  //   href: "/classroomA",
+  //   title: "ClassroomA 🖥",
   //   isCurrent: false,
   // },
   stripe: {

@@ -80,13 +80,13 @@
   <div class="relative md:-translate-y-10 -translate-y-36">
     <div id="meet" class="w-full h-[82vh] md:h-[670px]" />
 
-    <img
-      on:click={hangUpBtn}
-      on:keydown={hangUpBtn}
-      alt="hangup button"
-      class="absolute p-2 {!par && 'opacity-0'} {$lessThan768
-        ? 'top-10 right-0'
-        : 'bottom-5 right-10 '}  w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44]  active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"
-    />
+    <button on:click={hangUpBtn}>
+      <img
+        alt="hangup button"
+        class="absolute p-2 {!par && 'opacity-0'} {$lessThan768
+          ? 'top-10 right-0'
+          : 'bottom-5 right-10 '}  w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44]  active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"
+      />
+    </button>
   </div>
 </main>

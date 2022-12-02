@@ -107,11 +107,11 @@
     {/key}
   </Modal>
 
-  <Modal showModal={$navLoginClicked}>
+  <Modal bind:showModal={$navLoginClicked}>
     <LoginCard />
   </Modal>
 
-  <Modal showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+  <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <Dropzone
       uniqueId={"modalDropzone"}
       text={"🔥"}

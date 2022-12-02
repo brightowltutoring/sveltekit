@@ -70,15 +70,14 @@
   class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center md:justify-between w-full"
 >
   {#key resetLogoClick}
-    <div
+    <button
       class="md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
     md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
       in:scale={{ duration: 1200, easing: elasticOut }}
-      on:keydown={clickLogo}
       on:click={clickLogo}
     >
       THINKSOLVE
-    </div>
+    </button>
   {/key}
 
   <!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
@@ -89,14 +88,14 @@
     <!-- <ul
     class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   > -->
-    <li
-      class="{hideIfRunningStandalone}  font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
-    border-b-1 rounded "
-      on:click={handleAppNavClick}
-      on:keydown={handleAppNavClick}
-    >
-      <!-- px-3 py-1 mx-1 -->
-      App
+    <li class={hideIfRunningStandalone}>
+      <button
+        class=" font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
+      border-b-1 rounded "
+        on:click={handleAppNavClick}
+      >
+        App
+      </button>
     </li>
 
     {#each Object.keys($routes).slice(0, 5) as KEY}

@@ -20,17 +20,17 @@ export { matchers } from './client-matchers.js';
 
 			export const dictionary = {
 	"/": [2],
+	"/classroomA": [4],
 	"/classroom": [3],
-	"/faq": [4],
-	"/homework": [5],
-	"/katex": [6],
-	"/login": [7],
-	"/mathjax": [9],
-	"/math": [8],
-	"/physics": [10],
-	"/plans": [11],
-	"/samplequiz": [12],
-	"/screenshareA": [13],
+	"/faq": [5],
+	"/homework": [6],
+	"/katex": [7],
+	"/login": [8],
+	"/mathjax": [10],
+	"/math": [9],
+	"/physics": [11],
+	"/plans": [12],
+	"/samplequiz": [13],
 	"/stripe": [14]
 };
 
