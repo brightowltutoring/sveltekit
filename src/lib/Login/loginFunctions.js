@@ -206,13 +206,14 @@ export async function logoutFunction() {
 }
 
 export function verifySMSCode(SMS_CODE, e) {
-  // let code = smsCode;
+  // export function verifySMSCode(SMS_CODE) {
   let clickOrEnterFired = e.type == "click" || e.key == "Enter";
   let code = SMS_CODE;
   let confirmationResult = window.confirmationResult;
 
   // sms code is 6 digits-long as of dec1,2022
   if (clickOrEnterFired && code.length >= 6 && confirmationResult) {
+    // if (code.length >= 6 && confirmationResult) {
     confirmationResult
       .confirm(code)
       .then((result) => {

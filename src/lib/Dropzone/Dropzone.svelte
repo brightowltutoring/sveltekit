@@ -11,7 +11,7 @@
   export let testingCSS;
   $: testingCSS = $navHomeworkClicked && "bg-blue-400";
 
-  export let text = "Drop it like it's 🔥";
+  export let text = "🔥";
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
   export let brightnessTW = "brightness-100";
@@ -22,19 +22,18 @@
 
   import InView from "$lib/InView.svelte";
   import { cssToHead } from "$lib/utils";
+  // import { onMount } from "svelte";
 
   async function hydrateDropzoneDomEls() {
     // await import("$lib/Dropzone/dropzone.css");
     //TODO: this crashes when using InView.svelte with this function; it appears to be an issue with vite's 'npm run build' when dynamically importing css. TODO: WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
     cssToHead("dropzoneCSS", "/dropzone.css");
-
+    const { Dropzone } = await import("dropzone");
     console.log("drop it like its 🔥");
-    const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
 
+    const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
     const ACCEPTED_FILES_FRONTEND =
       ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
-
-    const { Dropzone } = await import("dropzone");
 
     dropzone = new Dropzone("#default", {
       url: PUBLIC_UPLOAD_ENDPOINT,
@@ -43,10 +42,13 @@
 
     document.querySelector("#default").id = uniqueId;
   }
+
+  // onMount(() => {
+  //   document.querySelector("#default").id = uniqueId;
+  // });
 </script>
 
 <!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence this component acts as a placeholder for the vanilla intersection observer code -->
-
 <InView once vanilla={".dropzone"} onview={hydrateDropzoneDomEls} />
 
 <!--  -->

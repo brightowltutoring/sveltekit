@@ -73,7 +73,7 @@
   <span class="group-hover:scale-[1.15] duration-500">
     <IconEmail />
   </span>
-  <span>Get Magic Link</span>
+  <span class="font-bold">Get Magic Link</span>
 </signin-button>
 
 <input

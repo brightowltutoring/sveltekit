@@ -1,31 +1,28 @@
 <script>
-  export let noTransition = false;
-
-  import { onMount } from "svelte";
-  import { goto } from "$app/navigation";
-  import { slide } from "svelte/transition";
-  import { quintOut, elasticOut } from "svelte/easing";
-  import { isRunningStandalone } from "$lib/utils";
-  import {
-    isLoggedIn,
-    isDarkMode,
-    elementColor,
-    navLoginClicked,
-    lessThan768,
-  } from "$lib/store";
-  import { logoutFunction } from "$lib/Login/loginFunctions";
-
-  import { app, auth } from "$lib/firebase";
-
-  import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
-
   import TwitterLoginButton from "$lib/Login/TwitterLoginButton.svelte";
   import GoogleLoginButton from "$lib/Login/GoogleLoginButton.svelte";
   import MagicLinkSection from "$lib/Login/MagicLinkSection.svelte";
   import PhoneAuthSection from "$lib/Login/PhoneAuthSection.svelte";
   // import CloseButton from "$lib/CloseButton.svelte";
 
-  // element identifiers (previously referenced via queryselectors and ids)
+  import { app, auth } from "$lib/firebase";
+  import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
+
+  import { onMount } from "svelte";
+  import { goto } from "$app/navigation";
+  import { slide } from "svelte/transition";
+  import { quintOut, elasticOut } from "svelte/easing";
+  import { isRunningStandalone } from "$lib/utils";
+  import { logoutFunction } from "$lib/Login/loginFunctions";
+  import {
+    isLoggedIn,
+    isDarkMode,
+    elementColor,
+    navLoginClicked,
+    // lessThan768,
+  } from "$lib/store";
+
+  export let noTransition = false;
 
   let loginWelcomeText;
 
@@ -164,30 +161,23 @@
           <CloseButton />
         </div> -->
 
-      <!-- <MagicLinkSection /> -->
-      {#if !isRunningStandalone()}
-        <MagicLinkSection />
-        <p class="py-5" />
+      {#if isRunningStandalone()}
         <PhoneAuthSection />
       {:else}
+        <MagicLinkSection />
+        <p class="py-5" />
         <PhoneAuthSection />
       {/if}
 
       <p class="py-5" />
-
-      <!-- since these don't update the DOM, placed them in separate components -->
       <GoogleLoginButton />
-
       <TwitterLoginButton />
     </login-card>
   {/key}
-  <!-- </div> -->
 {/if}
 
-<!-- {:else} -->
 {#if $isLoggedIn}
   {#key !noTransition && $navLoginClicked}
-    <!-- {#key $navLoginClicked} -->
     <logout-card
       in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
       class="relative block  hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
@@ -196,14 +186,15 @@
       style={`background:${$elementColor}`}
     >
       <p bind:this={loginWelcomeText}>Welcome User</p>
-      <div id="redirectMessage">
+
+      <!-- <div id="redirectMessage"> -->
+      <div>
         Redirecting to your page in
         <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
       </div>
 
-      <button id="logoutBtn" on:click={logoutFunction}>Logout</button>
+      <!-- <button id="logoutBtn" on:click={logoutFunction}>Logout</button> -->
+      <button on:click={logoutFunction}>Logout</button>
     </logout-card>
   {/key}
 {/if}
-
-<!-- {#if $navLoginClicked && $isLoggedIn}{/if} -->

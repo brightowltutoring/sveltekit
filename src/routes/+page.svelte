@@ -72,7 +72,11 @@
         <span class={gradientTextColor}> 1. Upload your homework </span>
       </button>
 
-      <Dropzone textSizeTW={"text-2xl"} uniqueId={"homeDropzone"} />
+      <Dropzone
+        text={"Drop it like it's 🔥"}
+        textSizeTW={"text-2xl"}
+        uniqueId={"homeRouteDropzone"}
+      />
     </div>
 
     <!-- third page -->

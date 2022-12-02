@@ -41,14 +41,7 @@
 
       phoneStatusMessage.style.display = "block";
 
-      // style=" color: #10bb8a"
-      phoneStatusMessage.innerHTML = `
-                  <div class="p-3 font-Poppins ${
-                    $isDarkMode ? "text-lime-100" : "text-rose-800"
-                  }" > 
-                      Code sent to ${formattedPhoneNumber} 
-                  </div>
-                  `;
+      phoneStatusMessage.innerHTML = `Code sent to ${formattedPhoneNumber} `;
 
       phoneField.style.opacity = "0.5";
       phoneField.style.pointerEvents = "none";
@@ -57,7 +50,6 @@
       sendPhoneCodeBtn.style.pointerEvents = "none";
 
       phoneCodeSent = true;
-      phoneFieldValue = "";
     }
   }
 
@@ -84,7 +76,6 @@
 {#if !phoneCodeSent}
   <div
     bind:this={sendPhoneCodeBtn}
-    id="sign-in-button"
     on:click={submitPhoneNumber}
     on:keydown={submitPhoneNumber}
     class="w-full group bg-rose-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
@@ -94,21 +85,20 @@
     <span class="group-hover:scale-[1.15] duration-500">
       <IconPhone />
     </span>
-    <span>Get SMS Code</span>
+    <span class="font-bold">Get SMS Code</span>
   </div>
 
-  <div class="grid grid-cols-6 w-full">
+  <div class="grid grid-cols-6 w-full text-black">
     <input
-      type="text"
       bind:value={countryCode}
-      class="text-center p-3 mt-3  col-span-1"
+      class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"
     />
     <input
       on:keydown={(e) => submitPhoneNumber(e)}
       on:paste={onInputPhoneField(phoneFieldValue)}
       on:keyup={onInputPhoneField(phoneFieldValue)}
       bind:this={phoneField}
-      class="text-center p-3 mt-3 {shortPing} focus:outline-none col-span-5"
+      class="col-span-5 text-center p-3 mt-3 focus:outline-none {shortPing}"
       bind:value={phoneFieldValue}
       type="phone"
       placeholder="phone"
@@ -117,10 +107,15 @@
 {/if}
 
 <div id="recaptcha-container" />
-<div id="phoneStatusMessage" />
+<div
+  id="phoneStatusMessage"
+  class="p-3 font-Poppins {$isDarkMode ? 'text-lime-100' : 'text-rose-600'}"
+/>
 
 {#if phoneCodeSent}
   <div class="grid grid-cols-3">
+    <!-- on:keyup={verifySMSCode(smsCode)}
+      on:paste={verifySMSCode(smsCode)} -->
     <input
       on:keydown={(e) => verifySMSCode(smsCode, e)}
       bind:value={smsCode}
@@ -128,8 +123,8 @@
       placeholder="enter sms code"
     />
     <button
-      class="text-center p-3 mt-3 bg-rose-300 text-white font-bold"
       on:click={(e) => verifySMSCode(smsCode, e)}
+      class="col-span-1 text-center p-3 mt-3 bg-rose-300 text-white font-bold"
       >Enter
     </button>
   </div>

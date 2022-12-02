@@ -14,5 +14,5 @@
   <span class="group-hover:scale-[1.15] duration-500">
     <IconTwitter />
   </span>
-  <span>Sign-in with Twitter</span>
+  <span class="font-bold">Sign-in with Twitter</span>
 </signin-button>
