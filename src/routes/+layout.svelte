@@ -109,7 +109,6 @@
 
   <!-- WITHOUT bind I am able to keep state on the logincard ...which is useful for phone auth sms code logic, however annoyingly the svg icon color does not update back to default color when unclicking -->
   <Modal bind:showModal={$navLoginClicked}>
-    <!-- <Modal showModal={$navLoginClicked}> -->
     <LoginCard />
   </Modal>
 
