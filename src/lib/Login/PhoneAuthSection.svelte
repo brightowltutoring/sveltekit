@@ -10,6 +10,7 @@
   } from "$lib/Login/loginFunctions";
   import IconPhone from "$lib/Icons/LoginIcons/IconPhone.svelte";
   import { isDarkMode } from "$lib/store";
+  import { onMount } from "svelte";
 
   let phoneCodeSent = false;
   let emptyPhoneInputAnimated;
@@ -21,6 +22,9 @@
   let isPhoneNumber = false;
 
   async function submitPhoneNumber(e) {
+    // userInputVisible alone allows for immediate change in dom; window.userInputVisible allows for persistence given that the compoinent is destroyed (logincard is destroyed when modal closes)
+    window.userInputVisible = userInputVisible = true;
+
     let clickOrEnterFired = e.type == "click" || e.key == "Enter";
 
     if (clickOrEnterFired && phoneFieldValue == "") {
@@ -69,10 +73,13 @@
       phoneField.style.color = "#10bb8a"; // green-ish colour
     }
   }
+
+  import { browser } from "$app/environment";
+  $: userInputVisible = browser && window.userInputVisible;
+  // userInputVisible controls the visibility of an input dom element; starts as false, but then persisted as true even when the component is destroyed ...thanks to storing the truthiness globally in window.userInputVisible (which is set to true on an onclick). Note: using 'window.userInputVisible' alone does not update immediately (updates only on the next closing-openining of the modal)
 </script>
 
-<!-- dec1,2022 earlier: changed from 'signin-button' to 'button' since otherwise I needed to add both keydown and click -->
-<!-- dec1,2022 night: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
+<!-- dec1,2022: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
 {#if !phoneCodeSent}
   <div
     bind:this={sendPhoneCodeBtn}
@@ -85,24 +92,27 @@
     <span class="group-hover:scale-[1.15] duration-500">
       <IconPhone />
     </span>
-    <span class="font-bold">Get SMS Code</span>
+    <!-- <span class="font-bold">Get SMS Code</span> -->
+    <span>Get SMS Code</span>
   </div>
 
   <div class="grid grid-cols-6 w-full text-black">
-    <input
-      bind:value={countryCode}
-      class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"
-    />
-    <input
-      on:keydown={(e) => submitPhoneNumber(e)}
-      on:paste={onInputPhoneField(phoneFieldValue)}
-      on:keyup={onInputPhoneField(phoneFieldValue)}
-      bind:this={phoneField}
-      class="col-span-5 text-center p-3 mt-3 focus:outline-none {shortPing}"
-      bind:value={phoneFieldValue}
-      type="phone"
-      placeholder="phone"
-    />
+    {#if userInputVisible}
+      <input
+        bind:value={countryCode}
+        class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"
+      />
+      <input
+        on:keydown={(e) => submitPhoneNumber(e)}
+        on:paste={onInputPhoneField(phoneFieldValue)}
+        on:keyup={onInputPhoneField(phoneFieldValue)}
+        bind:this={phoneField}
+        class="col-span-5 text-center p-3 mt-3 focus:outline-none {shortPing}"
+        bind:value={phoneFieldValue}
+        type="phone"
+        placeholder="phone"
+      />
+    {/if}
   </div>
 {/if}
 
@@ -113,7 +123,7 @@
 />
 
 {#if phoneCodeSent}
-  <div class="grid grid-cols-3">
+  <div class="grid grid-cols-3 pb-5">
     <!-- on:keyup={verifySMSCode(smsCode)}
       on:paste={verifySMSCode(smsCode)} -->
     <input

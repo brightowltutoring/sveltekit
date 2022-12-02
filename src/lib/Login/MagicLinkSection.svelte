@@ -16,6 +16,8 @@
   let isEmail = false;
 
   function signinWithLinkAndStop(e) {
+    window.userInputVisible = userInputVisible = true;
+
     if ((e.type == "click" || e.key == "Enter") && emailFieldValue == "") {
       emptyEmailInputAnimated = true;
       setTimeout(
@@ -60,6 +62,9 @@
       emailField.style.color = "#10bb8a"; // green-ish colour
     }
   }
+
+  import { browser } from "$app/environment";
+  $: userInputVisible = browser && window.userInputVisible;
 </script>
 
 <signin-button
@@ -73,20 +78,23 @@
   <span class="group-hover:scale-[1.15] duration-500">
     <IconEmail />
   </span>
-  <span class="font-bold">Get Magic Link</span>
+  <!-- <span class="font-bold">Get Magic Link</span> -->
+  <span>Get Magic Link</span>
 </signin-button>
 
-<input
-  on:keydown={(e) => {
-    signinWithLinkAndStop(e);
-  }}
-  on:paste={onInputEmailField(emailFieldValue)}
-  on:keyup={onInputEmailField(emailFieldValue)}
-  bind:this={emailField}
-  class="text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
-  bind:value={emailFieldValue}
-  type="email"
-  placeholder="email"
-/>
+{#if userInputVisible}
+  <input
+    on:keydown={(e) => {
+      signinWithLinkAndStop(e);
+    }}
+    on:paste={onInputEmailField(emailFieldValue)}
+    on:keyup={onInputEmailField(emailFieldValue)}
+    bind:this={emailField}
+    class="  text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
+    bind:value={emailFieldValue}
+    type="email"
+    placeholder="email"
+  />
+{/if}
 
 <span id="emailStatusMessage" />

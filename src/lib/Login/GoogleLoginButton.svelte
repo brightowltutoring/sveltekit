@@ -26,5 +26,6 @@
       />
     </svg>`} -->
   </span>
-  <span class="font-bold">Sign-in with Google</span>
+  <!-- <span class="font-bold">Sign-in with Google</span> -->
+  <span>Sign-in with Google</span>
 </signin-button>
