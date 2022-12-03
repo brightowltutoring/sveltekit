@@ -1,15 +1,15 @@
 {
-  "src/fonts/poppins-v20-latin-100.woff2": {
-    "file": "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
-    "src": "src/fonts/poppins-v20-latin-100.woff2"
+  "src/fonts/nunito-v25-latin-regular.woff2": {
+    "file": "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
+    "src": "src/fonts/nunito-v25-latin-regular.woff2"
   },
   "src/fonts/nunito-v25-latin-200.woff2": {
     "file": "_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
     "src": "src/fonts/nunito-v25-latin-200.woff2"
   },
-  "src/fonts/nunito-v25-latin-regular.woff2": {
-    "file": "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
-    "src": "src/fonts/nunito-v25-latin-regular.woff2"
+  "src/fonts/poppins-v20-latin-100.woff2": {
+    "file": "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
+    "src": "src/fonts/poppins-v20-latin-100.woff2"
   },
   "src/fonts/nunito-v25-latin-200.woff": {
     "file": "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
@@ -24,7 +24,7 @@
     "src": "src/fonts/poppins-v20-latin-100.woff"
   },
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-dcbbd068.js",
+    "file": "_app/immutable/start-f5244317.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -51,7 +51,7 @@
     ]
   },
   "src/routes/+layout.svelte": {
-    "file": "_app/immutable/components/pages/_layout.svelte-10e936a6.js",
+    "file": "_app/immutable/components/pages/_layout.svelte-38353a34.js",
     "src": "src/routes/+layout.svelte",
     "isEntry": true,
     "imports": [
@@ -351,7 +351,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/0.js": {
-    "file": "_app/immutable/chunks/0-02eab8d3.js",
+    "file": "_app/immutable/chunks/0-f062886e.js",
     "src": ".svelte-kit/generated/nodes/0.js",
     "isDynamicEntry": true,
     "imports": [
@@ -496,21 +496,21 @@
     "file": "_app/immutable/assets/Dropzone-ad1f3da6.css",
     "src": "Dropzone.css"
   },
+  "src/routes/stripe/+page.css": {
+    "file": "_app/immutable/assets/_page-5c304dd7.css",
+    "src": "src/routes/stripe/+page.css"
+  },
   "src/routes/+page.css": {
     "file": "_app/immutable/assets/_page-7d3eabbd.css",
     "src": "src/routes/+page.css"
-  },
-  "src/routes/faq/+page.css": {
-    "file": "_app/immutable/assets/_page-113a1f72.css",
-    "src": "src/routes/faq/+page.css"
   },
   "src/routes/physics/+page.css": {
     "file": "_app/immutable/assets/_page-fcf51fa8.css",
     "src": "src/routes/physics/+page.css"
   },
-  "src/routes/stripe/+page.css": {
-    "file": "_app/immutable/assets/_page-5c304dd7.css",
-    "src": "src/routes/stripe/+page.css"
+  "src/routes/faq/+page.css": {
+    "file": "_app/immutable/assets/_page-113a1f72.css",
+    "src": "src/routes/faq/+page.css"
   },
   "src/routes/+layout.css": {
     "file": "_app/immutable/assets/_layout-51882a2f.css",

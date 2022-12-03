@@ -342,6 +342,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_navAppClicked = subscribe(navAppClicked, (value) => $navAppClicked = value);
   $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
   $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
+  console.log("testing new");
   let jankytown;
   let $$settled;
   let $$rendered;

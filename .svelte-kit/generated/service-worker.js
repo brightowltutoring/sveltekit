@@ -6,14 +6,14 @@ export const timestamp = {
 };
 
 export const build = [
-	"/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
-	"/_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
 	"/_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
+	"/_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
+	"/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
 	"/_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
 	"/_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
 	"/_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
-	"/_app/immutable/start-dcbbd068.js",
-	"/_app/immutable/components/pages/_layout.svelte-10e936a6.js",
+	"/_app/immutable/start-f5244317.js",
+	"/_app/immutable/components/pages/_layout.svelte-38353a34.js",
 	"/_app/immutable/assets/_layout-51882a2f.css",
 	"/_app/immutable/components/pages/_error.svelte-2a71ff81.js",
 	"/_app/immutable/components/pages/_page.svelte-80573496.js",
@@ -52,7 +52,7 @@ export const build = [
 	"/_app/immutable/chunks/_page-50113cbf.js",
 	"/_app/immutable/chunks/katex-d33715d1.js",
 	"/_app/immutable/chunks/Kajax-96592336.js",
-	"/_app/immutable/chunks/0-02eab8d3.js",
+	"/_app/immutable/chunks/0-f062886e.js",
 	"/_app/immutable/chunks/1-7df71eda.js",
 	"/_app/immutable/chunks/2-1fc7ff1a.js",
 	"/_app/immutable/chunks/3-ce758bdc.js",
@@ -131,4 +131,4 @@ export const prerendered = [
 	
 ];
 
-export const version = "1670101470035";
+export const version = "1670101828042";
