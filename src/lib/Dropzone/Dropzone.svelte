@@ -27,21 +27,47 @@
 
   import InView from "$lib/InView.svelte";
   import { cssToHead } from "$lib/utils";
+
   // import { onMount } from "svelte";
 
-  // Note: when dropzone object property 'autoProcessQueue' is set to true (default setting), uploads are attempted and fail while offline. The function below (along with 'autoProcessQueue' set to false) makes sure that offline uploads are processed as soon as internet reconnects, rather than only returning error.
-  function dropzoneProcessQueueWhenOnline() {
-    dropzone.options.autoProcessQueue = false;
+  // By default (i.e. when 'dropzone.options.autoProcessQueue = true') dropzone uploads are never re-attempted if internet cuts out OR upload was started while internet was off. The function below works normally when online, but deals with the aforementioned two offline cases to resume/retry upload.
 
-    // For some reason need to add 'parallelUploads' value, when 'autoProcessQueue' is set to false, otherwise 'dropzoneProcessQueueWhenOnline()' results in only some uploads going through
+  function dropzoneProcessUploads() {
+    dropzone.options.autoProcessQueue = false;
     dropzone.options.parallelUploads = 20;
 
-    // when offline, and then coming back online proceed with uploading files in queue
-    window?.addEventListener("online", () => dropzone.processQueue());
-
-    // when online proceed regularly
+    // When online proceed regularly
     dropzone.on("addedfile", () => {
       setTimeout(() => navigator?.onLine && dropzone.processQueue(), 0);
+      // for some reason setTimeout is necessary .. something something js event cycle?
+    });
+
+    // When coming back online proceed with uploading files in queue
+    window?.addEventListener("online", () => {
+      dropzone.processQueue();
+    });
+
+    // When internet cuts out mid-upload, collect files and reprocess when internet comes back
+    let filesToRetry = [];
+    dropzone.on("error", (file) => filesToRetry.push(file));
+
+    window?.addEventListener("online", () => {
+      if (filesToRetry.length > 0) {
+        for (const file of filesToRetry) {
+          dropzone.processFile(file);
+
+          // removes error mark css after the files have been processed
+          file.previewElement.querySelector(".dz-error-mark").style.visibility =
+            "hidden";
+          // removes error message css after the files have been processed
+          file.previewElement.querySelector(
+            ".dz-error-message"
+          ).style.visibility = "hidden";
+        }
+
+        // reset collected files array for good measure (not really needed)
+        filesToRetry.length == 0;
+      }
     });
   }
 
@@ -61,7 +87,7 @@
       acceptedFiles: ACCEPTED_FILES_FRONTEND,
     });
 
-    dropzoneProcessQueueWhenOnline();
+    dropzoneProcessUploads();
 
     document.querySelector("#default").id = uniqueId;
   }
