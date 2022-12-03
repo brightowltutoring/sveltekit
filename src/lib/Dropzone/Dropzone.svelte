@@ -21,26 +21,28 @@
   export let uniqueId; // needed in order to instantiate multiple dropzones on one page
   let dropzone;
 
-  $: if (browser && dropzone?.files.length) {
-    dropzone.processQueue();
-  }
+  // $: if (browser && dropzone?.files.length) {
+  //   dropzone.processQueue();
+  // }
 
   import InView from "$lib/InView.svelte";
   import { cssToHead } from "$lib/utils";
   // import { onMount } from "svelte";
 
-  // setting 'autoProcessQueue: false' in the dropzone object, coupled with calling ' dropzoneProcessQueueIfOnline()' ensures that when offline (such as a sudden disconnection) the uploaded files are not processed and then processed when reconnecting
-  // TODO: note: im noticing that the uploaded files are done slower now
-  function dropzoneProcessQueueIfOnline() {
-    dropzone.on("addedfile", () => {
-      setTimeout(() => {
-        navigator?.onLine && dropzone.processQueue();
-      }, 0);
-    });
+  // Note: when dropzone object property 'autoProcessQueue' is set to true (default setting), uploads are attempted and fail while offline. The function below (along with 'autoProcessQueue' set to false) makes sure that offline uploads are processed as soon as internet reconnects, rather than only returning error.
+  function dropzoneProcessQueueWhenOnline() {
+    // dropzone = DROPZONE;
+    dropzone.options.autoProcessQueue = false;
 
-    // add once?
-    window?.addEventListener("online", () => {
-      dropzone.processQueue();
+    //  For some reason need to add 'parallelUploads' value, otherwise 'dropzoneProcessQueueWhenOnline()' results in only some uploads going through
+    dropzone.options.parallelUploads = 20;
+
+    // when offline, and then coming back online proceed with uploading files in queue
+    window?.addEventListener("online", () => dropzone.processQueue());
+
+    // when online proceed regularly
+    dropzone.on("addedfile", () => {
+      setTimeout(() => navigator?.onLine && dropzone.processQueue(), 0);
     });
   }
 
@@ -58,11 +60,9 @@
     dropzone = new Dropzone("#default", {
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ACCEPTED_FILES_FRONTEND,
-      autoProcessQueue: false, // used with dropzoneProcessQueueIfOnline();
-      parallelUploads: 10, // used with dropzoneProcessQueueIfOnline();
     });
-    // this function works in conjunction with 'autoProcessQueue: false' ... Update: for some reason need to add 'parallelUploads: 10', otherwise 'dropzoneProcessQueueIfOnline()' results in only some uploads going through
-    dropzoneProcessQueueIfOnline();
+
+    dropzoneProcessQueueWhenOnline();
 
     document.querySelector("#default").id = uniqueId;
   }
@@ -71,18 +71,10 @@
 <!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence this component acts as a placeholder for the vanilla intersection observer code -->
 <InView once vanilla={".dropzone"} onview={hydrateDropzoneDomEls} />
 
-<!--  -->
 <!-- on:click={() => {
-    alert(dropzone.files.length);
+    dropzone.processQueue();
   }} -->
 <form
-  on:click={() => {
-    dropzone.processQueue();
-    // alert(`dropzone.files.length:${dropzone.files.length}`);
-    // if (dropzone.files.length) {
-    //   dropzone.processQueue();
-    // }
-  }}
   id="default"
   method="post"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
