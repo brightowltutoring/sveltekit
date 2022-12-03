@@ -31,10 +31,9 @@
 
   // Note: when dropzone object property 'autoProcessQueue' is set to true (default setting), uploads are attempted and fail while offline. The function below (along with 'autoProcessQueue' set to false) makes sure that offline uploads are processed as soon as internet reconnects, rather than only returning error.
   function dropzoneProcessQueueWhenOnline() {
-    // dropzone = DROPZONE;
     dropzone.options.autoProcessQueue = false;
 
-    //  For some reason need to add 'parallelUploads' value, otherwise 'dropzoneProcessQueueWhenOnline()' results in only some uploads going through
+    // For some reason need to add 'parallelUploads' value, when 'autoProcessQueue' is set to false, otherwise 'dropzoneProcessQueueWhenOnline()' results in only some uploads going through
     dropzone.options.parallelUploads = 20;
 
     // when offline, and then coming back online proceed with uploading files in queue

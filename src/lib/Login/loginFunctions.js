@@ -156,12 +156,10 @@ export async function GoogleLogin() {
   // }
 }
 
-export async function generateRecaptchaVerifier(
-  RECAPTCHA_CONTAINER_ID = "recaptcha-container"
-) {
+export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID) {
   const { RecaptchaVerifier } = await import("firebase/auth");
 
-  // Could also do 'window.recaptchaVerifier = new RecaptchaVerifier ..' and return nothing, however using this function modularly elsewhere it is more readable return the desired 'verifier' variable as the output of this called function
+  // Could also do 'window.recaptchaVerifier = new RecaptchaVerifier ..' and return nothing, however using this function modularly elsewhere it is more readable to return the desired 'verifier' variable as the output of this called function
   const recaptchaVerifier = new RecaptchaVerifier(
     RECAPTCHA_CONTAINER_ID,
     {
@@ -170,6 +168,7 @@ export async function generateRecaptchaVerifier(
     },
     auth
   );
+
   return recaptchaVerifier;
 }
 
@@ -191,18 +190,6 @@ export async function sendCodeToPhone(PHONE_NUMBER, RECAPTCHA_VERIFIER) {
         // ...
       });
   }); // setPersistence block
-}
-
-export async function logoutFunction() {
-  const { signOut } = await import("firebase/auth");
-  signOut(auth)
-    .then(() => {
-      console.log("logged out");
-      goto("/");
-    })
-    .catch((error) => {
-      console.log("logoutFunction failed", error);
-    });
 }
 
 export function verifySMSCode(SMS_CODE, e) {
@@ -228,4 +215,16 @@ export function verifySMSCode(SMS_CODE, e) {
         console.log("error", error);
       });
   }
+}
+
+export async function logoutFunction() {
+  const { signOut } = await import("firebase/auth");
+  signOut(auth)
+    .then(() => {
+      console.log("logged out");
+      goto("/");
+    })
+    .catch((error) => {
+      console.log("logoutFunction failed", error);
+    });
 }

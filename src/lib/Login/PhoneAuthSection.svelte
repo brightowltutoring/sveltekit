@@ -22,7 +22,7 @@
   let isPhoneNumber = false;
 
   async function submitPhoneNumber(e) {
-    // userInputVisible alone allows for immediate change in dom; window.userInputVisible allows for persistence given that the compoinent is destroyed (logincard is destroyed when modal closes)
+    // userInputVisible alone allows for immediate change in dom; window.userInputVisible allows for persistence given that the component is destroyed (logincard is destroyed when modal closes)
     window.userInputVisible = userInputVisible = true;
 
     let clickOrEnterFired = e.type == "click" || e.key == "Enter";
@@ -38,10 +38,10 @@
       let formattedPhoneNumber =
         countryCode + phoneFieldValue.replace(/\D/g, "");
 
-      sendCodeToPhone(
-        formattedPhoneNumber,
-        await generateRecaptchaVerifier("recaptcha-container")
+      let recaptchaVerifier = await generateRecaptchaVerifier(
+        "recaptcha-container"
       );
+      sendCodeToPhone(formattedPhoneNumber, recaptchaVerifier);
 
       phoneStatusMessage.style.display = "block";
 
@@ -76,7 +76,7 @@
 
   import { browser } from "$app/environment";
   $: userInputVisible = browser && window.userInputVisible;
-  // userInputVisible controls the visibility of an input dom element; starts as false, but then persisted as true even when the component is destroyed ...thanks to storing the truthiness globally in window.userInputVisible (which is set to true on an onclick). Note: using 'window.userInputVisible' alone does not update immediately (updates only on the next closing-openining of the modal)
+  // userInputVisible controls the visibility of an input dom element; starts as false, but then persisted as true even when the component is destroyed ...thanks to storing the truthiness globally in window.userInputVisible (which is set to true on an onclick). Note: using 'window.userInputVisible' alone does not update DOM immediately (updates only on the next closing-openining of the modal), therefore need userInputVisible as well.
 </script>
 
 <!-- dec1,2022: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
