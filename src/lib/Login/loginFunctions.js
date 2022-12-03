@@ -192,15 +192,15 @@ export async function sendCodeToPhone(PHONE_NUMBER, RECAPTCHA_VERIFIER) {
   }); // setPersistence block
 }
 
-export function verifySMSCode(SMS_CODE, e) {
-  // export function verifySMSCode(SMS_CODE) {
-  let clickOrEnterFired = e.type == "click" || e.key == "Enter";
+// export function verifySMSCode(SMS_CODE, e) {
+// let clickOrEnterFired = e.type == "click" || e.key == "Enter";
+export function verifySMSCode(SMS_CODE) {
   let code = SMS_CODE;
   let confirmationResult = window.confirmationResult;
 
   // sms code is 6 digits-long as of dec1,2022
-  if (clickOrEnterFired && code.length >= 6 && confirmationResult) {
-    // if (code.length >= 6 && confirmationResult) {
+  // if (clickOrEnterFired && code.length >= 5 && confirmationResult) {
+  if (code.length >= 6 && confirmationResult) {
     confirmationResult
       .confirm(code)
       .then((result) => {

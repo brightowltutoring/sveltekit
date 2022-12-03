@@ -18,14 +18,16 @@
   function signinWithLinkAndStop(e) {
     window.userInputVisible = userInputVisible = true;
 
-    if ((e.type == "click" || e.key == "Enter") && emailFieldValue == "") {
+    let clickOrEnterFired = e.type == "click" || e.key == "Enter";
+
+    if (clickOrEnterFired && emailFieldValue == "") {
       emptyEmailInputAnimated = true;
       setTimeout(
         () => (emptyEmailInputAnimated = !emptyEmailInputAnimated),
         100
       );
     }
-    if ((e.type == "click" || e.key == "Enter") && isEmail) {
+    if (clickOrEnterFired && isEmail) {
       magicLinkToEmail(emailFieldValue);
       magicLinkSent = true;
       emailFieldValue = "";

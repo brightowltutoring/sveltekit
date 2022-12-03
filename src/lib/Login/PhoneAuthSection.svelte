@@ -10,7 +10,6 @@
   } from "$lib/Login/loginFunctions";
   import IconPhone from "$lib/Icons/LoginIcons/IconPhone.svelte";
   import { isDarkMode } from "$lib/store";
-  import { onMount } from "svelte";
 
   let phoneCodeSent = false;
   let emptyPhoneInputAnimated;
@@ -44,7 +43,6 @@
       sendCodeToPhone(formattedPhoneNumber, recaptchaVerifier);
 
       phoneStatusMessage.style.display = "block";
-
       phoneStatusMessage.innerHTML = `Code sent to ${formattedPhoneNumber} `;
 
       phoneField.style.opacity = "0.5";
@@ -123,19 +121,22 @@
 />
 
 {#if phoneCodeSent}
+  <!-- {#if true} -->
   <div class="grid grid-cols-3 pb-5">
-    <!-- on:keyup={verifySMSCode(smsCode)}
-      on:paste={verifySMSCode(smsCode)} -->
+    <!-- on:keydown={(e) => verifySMSCode(smsCode, e)} -->
+    <!-- col-span-2 -->
     <input
-      on:keydown={(e) => verifySMSCode(smsCode, e)}
+      on:keyup={verifySMSCode(smsCode)}
+      on:paste={verifySMSCode(smsCode)}
       bind:value={smsCode}
-      class="col-span-2 text-center p-3 mt-3 focus:outline-none "
+      class="col-span-3 text-center p-3 mt-3 focus:outline-none "
       placeholder="enter sms code"
     />
-    <button
-      on:click={(e) => verifySMSCode(smsCode, e)}
+
+    <!-- <button
+    on:click={(e) => verifySMSCode(smsCode, e)}
       class="col-span-1 text-center p-3 mt-3 bg-rose-300 text-white font-bold"
       >Enter
-    </button>
+    </button> -->
   </div>
 {/if}
