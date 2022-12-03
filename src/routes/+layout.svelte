@@ -76,7 +76,7 @@
 
   <!-- should show up once each!! -->
   {#each Object.keys($routes) as key}
-    {#if $page.routeId == "/" && key == "home"}
+    {#if $page.route.id == "/" && key == "home"}
       <title>{$routes.home.title}</title>
       <meta
         name="description"
@@ -84,7 +84,7 @@
       />
       <meta og:url="https://thinksolve.io/" />
       <!-- <meta name="image" content="LOGO" /> -->
-    {:else if $page.routeId == `/${key}`}
+    {:else if $page.route.id == `/${key}`}
       <title>{$routes[key].title}</title>
     {/if}
   {/each}

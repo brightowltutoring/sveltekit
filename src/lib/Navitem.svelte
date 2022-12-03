@@ -38,7 +38,7 @@
 
 <a
   on:click={handleNavButtonClicks}
-  data-sveltekit-prefetch
+  data-sveltekit-preload-data
   {href}
   class="block font-Nunito font-thin 
 

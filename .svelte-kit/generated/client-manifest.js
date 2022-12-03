@@ -1,6 +1,6 @@
 export { matchers } from './client-matchers.js';
 
-			export const nodes = [() => import('./nodes/0'),
+export const nodes = [() => import('./nodes/0'),
 	() => import('./nodes/1'),
 	() => import('./nodes/2'),
 	() => import('./nodes/3'),
@@ -16,9 +16,9 @@ export { matchers } from './client-matchers.js';
 	() => import('./nodes/13'),
 	() => import('./nodes/14')];
 
-			export const server_loads = [];
+export const server_loads = [];
 
-			export const dictionary = {
+export const dictionary = {
 	"/": [2],
 	"/classroomA": [4],
 	"/classroom": [3],
@@ -34,6 +34,6 @@ export { matchers } from './client-matchers.js';
 	"/stripe": [14]
 };
 
-			export const hooks = {
-				handleError: (({ error }) => { console.error(error) }),
-			};
+export const hooks = {
+	handleError: (({ error }) => { console.error(error) }),
+};
