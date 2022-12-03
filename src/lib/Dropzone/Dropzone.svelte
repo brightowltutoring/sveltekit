@@ -1,4 +1,5 @@
 <script>
+  import { browser } from "$app/environment";
   // import("$lib/Dropzone/dropzone.css");
   // transition-transform duration-1000  {$navHomeworkClicked
   //   ? 'scale-100'
@@ -20,9 +21,28 @@
   export let uniqueId; // needed in order to instantiate multiple dropzones on one page
   let dropzone;
 
+  $: if (browser && dropzone?.files.length) {
+    dropzone.processQueue();
+  }
+
   import InView from "$lib/InView.svelte";
   import { cssToHead } from "$lib/utils";
   // import { onMount } from "svelte";
+
+  // setting 'autoProcessQueue: false' in the dropzone object, coupled with calling ' dropzoneProcessQueueIfOnline()' ensures that when offline (such as a sudden disconnection) the uploaded files are not processed and then processed when reconnecting
+  // TODO: note: im noticing that the uploaded files are done slower now
+  function dropzoneProcessQueueIfOnline() {
+    dropzone.on("addedfile", () => {
+      setTimeout(() => {
+        navigator?.onLine && dropzone.processQueue();
+      }, 0);
+    });
+
+    // add once?
+    window?.addEventListener("online", () => {
+      dropzone.processQueue();
+    });
+  }
 
   async function hydrateDropzoneDomEls() {
     // await import("$lib/Dropzone/dropzone.css");
@@ -38,21 +58,31 @@
     dropzone = new Dropzone("#default", {
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ACCEPTED_FILES_FRONTEND,
+      autoProcessQueue: false, // used with dropzoneProcessQueueIfOnline();
+      parallelUploads: 10, // used with dropzoneProcessQueueIfOnline();
     });
+    // this function works in conjunction with 'autoProcessQueue: false' ... Update: for some reason need to add 'parallelUploads: 10', otherwise 'dropzoneProcessQueueIfOnline()' results in only some uploads going through
+    dropzoneProcessQueueIfOnline();
 
     document.querySelector("#default").id = uniqueId;
   }
-
-  // onMount(() => {
-  //   document.querySelector("#default").id = uniqueId;
-  // });
 </script>
 
 <!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence this component acts as a placeholder for the vanilla intersection observer code -->
 <InView once vanilla={".dropzone"} onview={hydrateDropzoneDomEls} />
 
 <!--  -->
+<!-- on:click={() => {
+    alert(dropzone.files.length);
+  }} -->
 <form
+  on:click={() => {
+    dropzone.processQueue();
+    // alert(`dropzone.files.length:${dropzone.files.length}`);
+    // if (dropzone.files.length) {
+    //   dropzone.processQueue();
+    // }
+  }}
   id="default"
   method="post"
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"

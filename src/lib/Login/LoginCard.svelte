@@ -152,7 +152,7 @@
   {#key !noTransition && $navLoginClicked}
     <login-card
       in:slide={{ duration: 400, easing: quintOut }}
-      class=" block relative text-xl hover:scale-[1.01]  font-Poppins font-semibold  shadow-md {$isDarkMode
+      class=" block relative text-xl hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
         ? 'hover:shadow-xl '
         : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-11/12 sm:w-[500px]"
       style={`background:${$elementColor}`}
