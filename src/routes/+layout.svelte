@@ -29,7 +29,6 @@
   import { page } from "$app/stores";
   import { onMount } from "svelte";
 
-  console.log("testing new");
   onMount(() => {
     $lessThan768 && disableZoomGestures();
     // isRunningStandalone() && disableZoomGestures();
