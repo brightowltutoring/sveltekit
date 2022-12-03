@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as subscribe, e as escape, q as onDestroy, v as validate_component, f as set_store_value } from "../../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe, e as escape, q as onDestroy, v as validate_component, h as set_store_value } from "../../../chunks/index.js";
 import { l as lessThan768, i as isDarkMode } from "../../../chunks/store.js";
 !function(e, t) {
   "object" == typeof exports && "object" == typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define([], t) : "object" == typeof exports ? exports.JitsiMeetExternalAPI = t() : e.JitsiMeetExternalAPI = t();
@@ -1323,7 +1323,7 @@ const JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_lessThan768();
   return `<main><div class="${"relative md:-translate-y-10 -translate-y-36"}"><div id="${"meet"}" class="${"w-full h-[82vh] md:h-[670px]"}"></div>
 
-    <img alt="${"hangup button"}" class="${"absolute p-2 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-10 right-0" : "bottom-5 right-10 ", true) + " w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></div></main>`;
+    <button><img alt="${"hangup button"}" class="${"absolute p-2 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-10 right-0" : "bottom-5 right-10 ", true) + " w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></button></div></main>`;
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;

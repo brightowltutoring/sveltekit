@@ -141,7 +141,7 @@ const reviews = [
   }
 ];
 const Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="${"scale-90 "}">
+  return `<div class="${"scale-90"}">
 
   <div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name, title, date, body }) => {
     return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name, date }, {}, {
@@ -171,20 +171,21 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}</div></div>
 
     
-    <div id="${"step1"}" class="${"hover:scale-105 duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></p>
+    <div id="${"step1"}" class="${"hover:scale-105 duration-500 grid place-content-center"}"><button class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></button>
 
       ${validate_component(Dropzone, "Dropzone").$$render(
     $$result,
     {
+      text: "Drop it like it's \u{1F525}",
       textSizeTW: "text-2xl",
-      uniqueId: "tomato"
+      uniqueId: "homeRouteDropzone"
     },
     {},
     {}
   )}</div>
 
     
-    <div id="${"step2"}" class="${"duration-500 "}"><p class="${"text-5xl font-Poppins text-center pb-7"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></p>
+    <div id="${"step2"}" class="${"duration-500 grid place-content-center"}"><button class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></button>
 
       ${validate_component(PlansComponent, "PlansComponent").$$render(
     $$result,
@@ -198,9 +199,7 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
       </div>
 
     
-
-    <div id="${"reviews"}" class="${"mb-[200px] sm:mb-[500px] duration-500 "}"><p class="${"text-5xl font-Poppins text-center "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">3. Do Some Reading </span><span>\u{1F60E}
-        </span></p>
+    <div id="${"reviews"}" class="${"duration-500 mb-[200px] sm:mb-[500px]"}"><button class="${"text-5xl font-Poppins w-full flex justify-center"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">3. Do Some Reading <span class="${"text-black"}">\u{1F60E} </span></span></button>
       ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>`}
 
 

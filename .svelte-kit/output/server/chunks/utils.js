@@ -1,4 +1,5 @@
 import { c as create_ssr_component, d as add_attribute } from "./index.js";
+import { b as browser } from "./environment.js";
 const InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { vanilla } = $$props;
   let { once } = $$props;
@@ -27,6 +28,9 @@ const InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 ${!vanilla ? `<div${add_attribute("this", container, 0)}>${slots.default ? slots.default({}) : ``}</div>` : ``}`;
 });
+function isRunningStandalone() {
+  return browser;
+}
 function cssToHead(id = "dropzoneCSS", path = "/dropzone.css") {
   if (!document.getElementById(id)) {
     const element = document.createElement("link");
@@ -48,5 +52,6 @@ function jsToHead(id = "calendlyJS", path = "external-website.com/calendly.js") 
 export {
   InView as I,
   cssToHead as c,
+  isRunningStandalone as i,
   jsToHead as j
 };

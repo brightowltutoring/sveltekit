@@ -2,7 +2,7 @@
 import root from '__GENERATED__/root.svelte';
 import { respond } from '../../node_modules/@sveltejs/kit/src/runtime/server/index.js';
 import { set_paths, assets, base } from '../../node_modules/@sveltejs/kit/src/runtime/paths.js';
-import { set_prerendering } from '../../node_modules/@sveltejs/kit/src/runtime/env.js';
+import { set_building, set_version } from '../../node_modules/@sveltejs/kit/src/runtime/env.js';
 import { set_private_env } from '../../node_modules/@sveltejs/kit/src/runtime/env-private.js';
 import { set_public_env } from '../../node_modules/@sveltejs/kit/src/runtime/env-public.js';
 
@@ -13,6 +13,7 @@ const error_template = ({ status, message }) => "<!DOCTYPE html>\n<html lang=\"e
 let read = null;
 
 set_paths({"base":"","assets":""});
+set_version("1670101470035");
 
 let default_protocol = 'https';
 
@@ -21,7 +22,7 @@ let default_protocol = 'https';
 export function override(settings) {
 	default_protocol = settings.protocol || default_protocol;
 	set_paths(settings.paths);
-	set_prerendering(settings.prerendering);
+	set_building(settings.building);
 	read = settings.read;
 }
 
@@ -43,7 +44,7 @@ export class Server {
 					get request() {
 						throw new Error('request in handleError has been replaced with event. See https://github.com/sveltejs/kit/pull/3384 for details');
 					}
-				}) ?? { message: event.routeId != null ? 'Internal Error' : 'Not Found' };
+				}) ?? { message: event.route.id != null ? 'Internal Error' : 'Not Found' };
 			},
 			hooks: null,
 			manifest,
@@ -51,11 +52,11 @@ export class Server {
 			public_env: {},
 			read,
 			root,
-			service_worker: false,
+			service_worker: true,
 			app_template,
 			app_template_contains_nonce: false,
 			error_template,
-			trailing_slash: "never"
+			version: "1670101470035"
 		};
 	}
 

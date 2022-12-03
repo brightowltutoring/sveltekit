@@ -2,6 +2,7 @@
 
 export const index = 6;
 export const component = async () => (await import('../entries/pages/homework/_page.svelte.js')).default;
-export const file = '_app/immutable/components/pages/homework/_page.svelte-e49ed28a.js';
-export const imports = ["_app/immutable/components/pages/homework/_page.svelte-e49ed28a.js","_app/immutable/chunks/index-680b99e4.js","_app/immutable/chunks/Dropzone-58a5ce0b.js","_app/immutable/chunks/preload-helper-b21cceae.js","_app/immutable/chunks/store-121681c1.js","_app/immutable/chunks/index-4b764cf1.js","_app/immutable/chunks/utils-d53d7585.js","_app/immutable/chunks/index-fe5964cf.js"];
+export const file = '_app/immutable/components/pages/homework/_page.svelte-7d53dff2.js';
+export const imports = ["_app/immutable/components/pages/homework/_page.svelte-7d53dff2.js","_app/immutable/chunks/index-95872f21.js","_app/immutable/chunks/Dropzone-9df718b2.js","_app/immutable/chunks/preload-helper-9b728935.js","_app/immutable/chunks/store-825ff2b0.js","_app/immutable/chunks/index-ec5f67c4.js","_app/immutable/chunks/InView-2eeb4aa0.js","_app/immutable/chunks/utils-8c22039c.js","_app/immutable/chunks/index-4d5c3e31.js"];
 export const stylesheets = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
+export const fonts = [];
