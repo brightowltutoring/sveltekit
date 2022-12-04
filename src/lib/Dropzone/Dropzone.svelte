@@ -50,10 +50,11 @@
     // When coming back online proceed with uploading files in queue
     window?.addEventListener("online", () => dropzone.processQueue());
 
-    // When internet cuts out mid-upload, collect 'errored' files ...
+    // When internet cuts out mid-upload, collect 'errored' files (which are of the acceptable type) ...
     let filesToRetry = [];
-    dropzone.on("error", (file) => filesToRetry.push(file));
-    //  ... and reprocess 'errored' files when internet comes back
+    dropzone.on("error", (file) => file.accepted && filesToRetry.push(file));
+
+    // ... and reprocess files when internet comes back
     window?.addEventListener("online", () => {
       if (filesToRetry.length > 0) {
         for (const file of filesToRetry) {
@@ -68,10 +69,14 @@
           ).style.visibility = "hidden";
         }
 
-        // reset collected files array for good measure
+        // reset collected files array when done
         filesToRetry.length == 0;
       }
     });
+
+    // OLD WAY OF DOING 'file.accepted' logic; also required ACCEPTED_FILES_FRONTEND to be defined globally:
+    // let fileExt = file.name.split(".").pop(); // e.g png, md, txt
+    // if (ACCEPTED_FILES_FRONTEND.includes(fileExt)) filesToRetry.push(file);
   }
 </script>
 
