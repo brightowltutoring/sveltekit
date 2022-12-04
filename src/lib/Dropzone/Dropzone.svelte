@@ -32,29 +32,17 @@
       acceptedFiles: ACCEPTED_FILES_FRONTEND,
     });
 
-    dropzoneProcessUploads();
+    dropzoneHandleErroredUploads();
 
     document.querySelector("#default").id = uniqueId;
   }
 
-  // By default dropzone uploads are never re-attempted if internet cuts out OR upload was started while internet was off. The function below works normally when online, but deals with the aforementioned two offline cases to resume/retry uploads.
-  function dropzoneProcessUploads() {
-    dropzone.options.autoProcessQueue = false; // default set to true ... which is troublesome for offline cases
-    dropzone.options.parallelUploads = 50;
-
-    // When online, proceed normally. Note: for some reason setTimeout is necessary .. something something js event cycle?
-    dropzone.on("addedfile", () =>
-      setTimeout(() => navigator?.onLine && dropzone.processQueue(), 0)
-    );
-
-    // When coming back online proceed with uploading files in queue
-    window?.addEventListener("online", () => dropzone.processQueue());
-
-    // When internet cuts out mid-upload, collect 'errored' files (which are of the acceptable type) ...
+  // Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
+  // Tested use cases: internet cuts out mid-upload, and internet off when upload started.
+  function dropzoneHandleErroredUploads() {
     let filesToRetry = [];
     dropzone.on("error", (file) => file.accepted && filesToRetry.push(file));
 
-    // ... and reprocess files when internet comes back
     window?.addEventListener("online", () => {
       if (filesToRetry.length > 0) {
         for (const file of filesToRetry) {
@@ -73,10 +61,6 @@
         filesToRetry.length == 0;
       }
     });
-
-    // OLD WAY OF DOING 'file.accepted' logic; also required ACCEPTED_FILES_FRONTEND to be defined globally:
-    // let fileExt = file.name.split(".").pop(); // e.g png, md, txt
-    // if (ACCEPTED_FILES_FRONTEND.includes(fileExt)) filesToRetry.push(file);
   }
 </script>
 
@@ -101,6 +85,47 @@
   </div>
 </form>
 
+<!-- function OLD_WAY_dropzoneHandleErroredUploads() {
+  // dropzone.options.autoProcessQueue = false; // default set to true 
+  // dropzone.options.parallelUploads = 50;
+
+  // When online, proceed normally. Note: for some reason setTimeout is necessary .. something something js event cycle?
+
+  // dropzone.on("addedfile", () => navigator?.onLine &&
+  //   setTimeout(() => dropzone.processQueue(), 0)
+  // );
+
+  // When coming back online proceed with uploading files in queue
+  // window?.addEventListener("online", () => dropzone.processQueue());
+
+  // When internet cuts out mid-upload, collect 'errored' files (which are of the acceptable type) ...
+  let filesToRetry = [];
+  dropzone.on("error", (file) => file.accepted && filesToRetry.push(file));
+
+  // ... and reprocess files when internet comes back
+  window?.addEventListener("online", () => {
+    if (filesToRetry.length > 0) {
+      for (const file of filesToRetry) {
+        dropzone.processFile(file);
+
+        // removes error mark css after the files have been processed
+        file.previewElement.querySelector(".dz-error-mark").style.visibility =
+          "hidden";
+        // removes error message css after the files have been processed
+        file.previewElement.querySelector(
+          ".dz-error-message"
+        ).style.visibility = "hidden";
+      }
+
+      // reset collected files array when done
+      filesToRetry.length == 0;
+    }
+  });
+
+  // OLD WAY OF DOING 'file.accepted' logic; also required ACCEPTED_FILES_FRONTEND to be defined globally:
+  // let fileExt = file.name.split(".").pop(); // e.g png, md, txt
+  // if (ACCEPTED_FILES_FRONTEND.includes(fileExt)) filesToRetry.push(file);
+} -->
 <style>
   /* Oddly without specifiying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
   :global(.dropzone .dz-preview.dz-image-preview) {
