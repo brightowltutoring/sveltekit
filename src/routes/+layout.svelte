@@ -73,6 +73,7 @@
 
 <svelte:head>
   <link rel="manifest" href="/manifest.json" />
+  <!-- <link rel="apple-touch-icon" href="" /> -->
 
   <!-- should show up once each!! -->
   {#each Object.keys($routes) as key}

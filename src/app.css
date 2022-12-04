@@ -33,19 +33,20 @@
 /* OLD WAY: link import flickers on page load */
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap'); */
 
-html {
-  scrollbar-width: none; /* hide scrollbar Firefox */
-}
-body::-webkit-scrollbar {
-  display: none; /* hide scrollbar Chrome, Safari, Opera */
-}
+/* hide scrollbar Firefox */
+/* html {
+  scrollbar-width: none; 
+} */
+/* hide scrollbar Chrome, Safari, Opera */
+/* body::-webkit-scrollbar {
+  display: none; 
+} */
 body {
-  -ms-overflow-style: none; /* hide scrollbar IE and Edge */
-  -webkit-tap-highlight-color: transparent; /* removes gray background when clicking buttons; for native app feel*/
+  /* -ms-overflow-style: none;  */
+  /* hide scrollbar IE and Edge */
+  /* -webkit-tap-highlight-color: transparent;  */
+  /* removes gray background when clicking buttons; for native app feel*/
   user-select: none; /* removes user highlighting; for native app feel */
-
-  /* touch-action: manipulation; */
-  /* TODO: apparently this removes double-click zoom */
 
   /* overscroll-behavior-y: none; */ /* TODO: what does this do?? */
 

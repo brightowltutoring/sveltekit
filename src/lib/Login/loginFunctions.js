@@ -177,6 +177,7 @@ export async function sendCodeToPhone(PHONE_NUMBER, RECAPTCHA_VERIFIER) {
     await import("firebase/auth");
 
   // dec1,2022: added this unchecked 'setPersistence' wrapper to log user out once the session is closed; for phone authentication this is desirable to discourage multiple people sharing one account
+
   setPersistence(auth, browserSessionPersistence).then(() => {
     signInWithPhoneNumber(auth, PHONE_NUMBER, RECAPTCHA_VERIFIER)
       .then((confirmationResult) => {

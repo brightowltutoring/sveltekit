@@ -12,6 +12,7 @@
 
   import InView from "$lib/InView.svelte";
   import { cssToHead } from "$lib/utils";
+  import { on } from "stream";
 
   export let uniqueId; // needed in order to instantiate multiple dropzones on one page
   let dropzone;
@@ -37,12 +38,12 @@
     document.querySelector("#default").id = uniqueId;
   }
 
-  // By default (i.e. when 'dropzone.options.autoProcessQueue = true') dropzone uploads are never re-attempted if internet cuts out OR upload was started while internet was off. The function below works normally when online, but deals with the aforementioned two offline cases to resume/retry uploads.
+  // By default dropzone uploads are never re-attempted if internet cuts out OR upload was started while internet was off. The function below works normally when online, but deals with the aforementioned two offline cases to resume/retry uploads.
   function dropzoneProcessUploads() {
-    dropzone.options.autoProcessQueue = false;
+    dropzone.options.autoProcessQueue = false; // default set to true ... which is troublesome for offline cases
     dropzone.options.parallelUploads = 50;
 
-    // When online proceed normally. Note: for some reason setTimeout is necessary .. something something js event cycle?
+    // When online, proceed normally. Note: for some reason setTimeout is necessary .. something something js event cycle?
     dropzone.on("addedfile", () =>
       setTimeout(() => navigator?.onLine && dropzone.processQueue(), 0)
     );
@@ -84,6 +85,13 @@
   style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
   class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
 >
+  <!-- <input
+    style="text-align: center"
+    type="text"
+    id="gdf"
+    name="gdf"
+    placeholder="1nQLtENA2318gXFsNbPklccxA-oz8Anfz"
+  /> -->
   <div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
     {text}
   </div>
