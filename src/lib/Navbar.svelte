@@ -5,7 +5,7 @@
   import { elasticOut } from "svelte/easing";
   import Navitem from "./Navitem.svelte";
   import { goto } from "$app/navigation";
-  import { isRunningStandalone } from "$lib/utils";
+  import { isRunningStandalone, getOS } from "$lib/utils";
   import {
     isLoggedIn,
     routes,
@@ -60,6 +60,10 @@
   // These two conditional tailwind classes work together; 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
   // TODO: i wonder if app splashscreen would make 'fadeInToFullOpacity' unneeded
   // let hideIfRunningStandalone = $lessThan768 && "hidden";
+
+  let hideIfNotIOS = getOS() !== "iOS" && "hidden";
+  // added dec4,2022 after noticing that the PWA download popup shows on android already
+
   let hideIfRunningStandalone = isRunningStandalone() && "hidden";
   let fadeInToFullOpacity =
     browser && "opacity-100 transition-opacity duration-100 ease-in";
@@ -88,7 +92,7 @@
     <!-- <ul
     class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   > -->
-    <li class={hideIfRunningStandalone}>
+    <li class={hideIfRunningStandalone || hideIfNotIOS}>
       <button
         class=" font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
       border-b-1 rounded "

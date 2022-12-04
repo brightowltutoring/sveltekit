@@ -5,8 +5,8 @@ import { scale } from "svelte/transition";
 // TODO: might need to add 'browser &&' if this function is not called inside an onMount
 // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios'
 export function getOS() {
-  let userAgent = navigator.userAgent;
-  let platform = navigator.platform;
+  let userAgent = browser && navigator.userAgent;
+  let platform = browser && navigator.platform;
   let macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
   let windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"];
   let iosPlatforms = ["iPhone", "iPad", "iPod"];
