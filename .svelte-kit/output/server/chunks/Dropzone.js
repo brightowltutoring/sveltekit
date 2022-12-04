@@ -1,6 +1,7 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape } from "./index.js";
 import { i as isDarkMode, a as navHomeworkClicked } from "./store.js";
 import { I as InView, c as cssToHead } from "./utils.js";
+import "stream";
 const Dropzone_svelte_svelte_type_style_lang = "";
 const css = {
   code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}",
@@ -81,7 +82,8 @@ ${validate_component(InView, "InView").$$render(
     {}
   )}
 
-<form id="${"default"}" method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}"><div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>${escape(text)}</div>
+<form id="${"default"}" method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}">
+  <div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>${escape(text)}</div>
 </form>`;
 });
 export {

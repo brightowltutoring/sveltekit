@@ -12,7 +12,6 @@
 
   import InView from "$lib/InView.svelte";
   import { cssToHead } from "$lib/utils";
-  import { on } from "stream";
 
   export let uniqueId; // needed in order to instantiate multiple dropzones on one page
   let dropzone;

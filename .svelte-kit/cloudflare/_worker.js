@@ -865,6 +865,154 @@ ${!vanilla ? `<div${add_attribute("this", container, 0)}>${slots.default ? slots
   }
 });
 
+// ../../../node_modules/emitter-component/index.js
+var require_emitter_component = __commonJS({
+  "../../../node_modules/emitter-component/index.js"(exports2, module2) {
+    module2.exports = Emitter;
+    function Emitter(obj) {
+      if (obj)
+        return mixin(obj);
+    }
+    function mixin(obj) {
+      for (var key2 in Emitter.prototype) {
+        obj[key2] = Emitter.prototype[key2];
+      }
+      return obj;
+    }
+    Emitter.prototype.on = Emitter.prototype.addEventListener = function(event, fn2) {
+      this._callbacks = this._callbacks || {};
+      (this._callbacks[event] = this._callbacks[event] || []).push(fn2);
+      return this;
+    };
+    Emitter.prototype.once = function(event, fn2) {
+      var self2 = this;
+      this._callbacks = this._callbacks || {};
+      function on2() {
+        self2.off(event, on2);
+        fn2.apply(this, arguments);
+      }
+      on2.fn = fn2;
+      this.on(event, on2);
+      return this;
+    };
+    Emitter.prototype.off = Emitter.prototype.removeListener = Emitter.prototype.removeAllListeners = Emitter.prototype.removeEventListener = function(event, fn2) {
+      this._callbacks = this._callbacks || {};
+      if (0 == arguments.length) {
+        this._callbacks = {};
+        return this;
+      }
+      var callbacks = this._callbacks[event];
+      if (!callbacks)
+        return this;
+      if (1 == arguments.length) {
+        delete this._callbacks[event];
+        return this;
+      }
+      var cb;
+      for (var i = 0; i < callbacks.length; i++) {
+        cb = callbacks[i];
+        if (cb === fn2 || cb.fn === fn2) {
+          callbacks.splice(i, 1);
+          break;
+        }
+      }
+      return this;
+    };
+    Emitter.prototype.emit = function(event) {
+      this._callbacks = this._callbacks || {};
+      var args = [].slice.call(arguments, 1), callbacks = this._callbacks[event];
+      if (callbacks) {
+        callbacks = callbacks.slice(0);
+        for (var i = 0, len = callbacks.length; i < len; ++i) {
+          callbacks[i].apply(this, args);
+        }
+      }
+      return this;
+    };
+    Emitter.prototype.listeners = function(event) {
+      this._callbacks = this._callbacks || {};
+      return this._callbacks[event] || [];
+    };
+    Emitter.prototype.hasListeners = function(event) {
+      return !!this.listeners(event).length;
+    };
+  }
+});
+
+// ../../../node_modules/stream/index.js
+var require_stream = __commonJS({
+  "../../../node_modules/stream/index.js"(exports2, module2) {
+    var Emitter = require_emitter_component();
+    function Stream() {
+      Emitter.call(this);
+    }
+    Stream.prototype = new Emitter();
+    module2.exports = Stream;
+    Stream.Stream = Stream;
+    Stream.prototype.pipe = function(dest, options) {
+      var source = this;
+      function ondata(chunk) {
+        if (dest.writable) {
+          if (false === dest.write(chunk) && source.pause) {
+            source.pause();
+          }
+        }
+      }
+      source.on("data", ondata);
+      function ondrain() {
+        if (source.readable && source.resume) {
+          source.resume();
+        }
+      }
+      dest.on("drain", ondrain);
+      if (!dest._isStdio && (!options || options.end !== false)) {
+        source.on("end", onend);
+        source.on("close", onclose);
+      }
+      var didOnEnd = false;
+      function onend() {
+        if (didOnEnd)
+          return;
+        didOnEnd = true;
+        dest.end();
+      }
+      function onclose() {
+        if (didOnEnd)
+          return;
+        didOnEnd = true;
+        if (typeof dest.destroy === "function")
+          dest.destroy();
+      }
+      function onerror(er2) {
+        cleanup();
+        if (!this.hasListeners("error")) {
+          throw er2;
+        }
+      }
+      source.on("error", onerror);
+      dest.on("error", onerror);
+      function cleanup() {
+        source.off("data", ondata);
+        dest.off("drain", ondrain);
+        source.off("end", onend);
+        source.off("close", onclose);
+        source.off("error", onerror);
+        dest.off("error", onerror);
+        source.off("end", cleanup);
+        source.off("close", cleanup);
+        dest.off("end", cleanup);
+        dest.off("close", cleanup);
+      }
+      source.on("end", cleanup);
+      source.on("close", cleanup);
+      dest.on("end", cleanup);
+      dest.on("close", cleanup);
+      dest.emit("pipe", source);
+      return dest;
+    };
+  }
+});
+
 // node_modules/just-extend/index.esm.js
 function extend() {
   var args = [].slice.call(arguments);
@@ -2696,12 +2844,13 @@ var init_public = __esm({
 });
 
 // .svelte-kit/output/server/chunks/Dropzone.js
-var css, Dropzone;
+var import_stream, css, Dropzone;
 var init_Dropzone = __esm({
   ".svelte-kit/output/server/chunks/Dropzone.js"() {
     init_chunks();
     init_store();
     init_utils();
+    import_stream = __toESM(require_stream(), 1);
     css = {
       code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}",
       map: null
@@ -2781,7 +2930,8 @@ ${validate_component(InView, "InView").$$render(
         {}
       )}
 
-<form id="${"default"}" method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}"><div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>${escape(text2)}</div>
+<form id="${"default"}" method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}">
+  <div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>${escape(text2)}</div>
 </form>`;
     });
   }
@@ -13026,7 +13176,6 @@ var init_layout_svelte = __esm({
       $$unsubscribe_navAppClicked = subscribe(navAppClicked, (value) => $navAppClicked = value);
       $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
       $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
-      console.log("testing new");
       let jankytown;
       let $$settled;
       let $$rendered;
@@ -13056,12 +13205,12 @@ var init_layout_svelte = __esm({
               jankytown = "bottom-0 backdrop-blur-3xl duration-700";
           }
         }
-        $$rendered = `${$$result.head += `<!-- HEAD_svelte-pwuun0_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key2) => {
+        $$rendered = `${$$result.head += `<!-- HEAD_svelte-1v8kdsi_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key2) => {
           return `${$page.route.id == "/" && key2 == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.route.id == `/${key2}` ? `${$$result.title = `<title>${escape($routes[key2].title)}</title>`, ""}` : ``}`}`;
-        })}<!-- HEAD_svelte-pwuun0_END -->`, ""}
+        })}<!-- HEAD_svelte-1v8kdsi_END -->`, ""}
 
 
 
@@ -13167,9 +13316,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-38353a34.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-38353a34.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Dropzone-9df718b2.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-8c22039c.js", "_app/immutable/chunks/LoginCard-14a53e3d.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
-    stylesheets = ["_app/immutable/assets/_layout-51882a2f.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-181433b6.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-181433b6.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Dropzone-22f6f96a.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-8c22039c.js", "_app/immutable/chunks/LoginCard-482b512d.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
+    stylesheets = ["_app/immutable/assets/_layout-677c9f45.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff"];
   }
 });
@@ -13607,8 +13756,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-80573496.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-80573496.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/PlansComponent-b5e630d1.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-8c22039c.js", "_app/immutable/chunks/Dropzone-9df718b2.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-ebcde46a.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-ebcde46a.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/PlansComponent-b5e630d1.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-8c22039c.js", "_app/immutable/chunks/Dropzone-22f6f96a.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
     stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts3 = [];
   }
@@ -15216,8 +15365,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-7d53dff2.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-7d53dff2.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Dropzone-9df718b2.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-8c22039c.js", "_app/immutable/chunks/index-4d5c3e31.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-055208fe.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-055208fe.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Dropzone-22f6f96a.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-8c22039c.js", "_app/immutable/chunks/index-4d5c3e31.js"];
     stylesheets7 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts7 = [];
   }
@@ -28975,8 +29124,8 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file9 = "_app/immutable/components/pages/login/_page.svelte-cb6a908d.js";
-    imports9 = ["_app/immutable/components/pages/login/_page.svelte-cb6a908d.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/LoginCard-14a53e3d.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/utils-8c22039c.js"];
+    file9 = "_app/immutable/components/pages/login/_page.svelte-0406fea8.js";
+    imports9 = ["_app/immutable/components/pages/login/_page.svelte-0406fea8.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/LoginCard-482b512d.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/utils-8c22039c.js"];
     stylesheets9 = [];
     fonts9 = [];
   }
@@ -32359,7 +32508,7 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
+var app_template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width" />\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
 var error_template = ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -32435,7 +32584,7 @@ var Server = class {
       app_template,
       app_template_contains_nonce: false,
       error_template,
-      version: "1670101828042"
+      version: "1670184930806"
     };
   }
   async init({ env }) {
@@ -32467,10 +32616,10 @@ var Server = class {
 var manifest = {
   appDir: "_app",
   appPath: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "facepalm.gif", "favicon.png", "google.svg", "iconmonstr-twitter-1.svg", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "tesla-svgrepo-com.svg", "service-worker.js"]),
-  mimeTypes: { ".css": "text/css", ".gif": "image/gif", ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".webp": "image/webp", ".txt": "text/plain" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "facepalm.gif", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "service-worker.js"]),
+  mimeTypes: { ".css": "text/css", ".gif": "image/gif", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-f5244317.js", "imports": ["_app/immutable/start-f5244317.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-2cb59c27.js", "imports": ["_app/immutable/start-2cb59c27.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

@@ -342,7 +342,6 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_navAppClicked = subscribe(navAppClicked, (value) => $navAppClicked = value);
   $$unsubscribe_navLoginClicked = subscribe(navLoginClicked, (value) => $navLoginClicked = value);
   $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
-  console.log("testing new");
   let jankytown;
   let $$settled;
   let $$rendered;
@@ -372,12 +371,12 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "bottom-0 backdrop-blur-3xl duration-700";
       }
     }
-    $$rendered = `${$$result.head += `<!-- HEAD_svelte-pwuun0_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key) => {
+    $$rendered = `${$$result.head += `<!-- HEAD_svelte-1v8kdsi_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key) => {
       return `${$page.route.id == "/" && key == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
       <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
       <meta og:url="${"https://thinksolve.io/"}">
       ` : `${$page.route.id == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
-    })}<!-- HEAD_svelte-pwuun0_END -->`, ""}
+    })}<!-- HEAD_svelte-1v8kdsi_END -->`, ""}
 
 
 

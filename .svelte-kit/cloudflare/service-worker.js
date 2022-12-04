@@ -1,23 +1,23 @@
-const m = [
+const o = [
   "/_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
   "/_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
   "/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
   "/_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
   "/_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
   "/_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
-  "/_app/immutable/start-f5244317.js",
-  "/_app/immutable/components/pages/_layout.svelte-38353a34.js",
-  "/_app/immutable/assets/_layout-51882a2f.css",
+  "/_app/immutable/start-2cb59c27.js",
+  "/_app/immutable/components/pages/_layout.svelte-181433b6.js",
+  "/_app/immutable/assets/_layout-677c9f45.css",
   "/_app/immutable/components/pages/_error.svelte-2a71ff81.js",
-  "/_app/immutable/components/pages/_page.svelte-80573496.js",
+  "/_app/immutable/components/pages/_page.svelte-ebcde46a.js",
   "/_app/immutable/assets/_page-7d3eabbd.css",
   "/_app/immutable/components/pages/classroom/_page.svelte-857e9198.js",
   "/_app/immutable/components/pages/classroomA/_page.svelte-af4eafd3.js",
   "/_app/immutable/components/pages/faq/_page.svelte-8c58e1f3.js",
   "/_app/immutable/assets/_page-113a1f72.css",
-  "/_app/immutable/components/pages/homework/_page.svelte-7d53dff2.js",
+  "/_app/immutable/components/pages/homework/_page.svelte-055208fe.js",
   "/_app/immutable/components/pages/katex/_page.svx-375c723b.js",
-  "/_app/immutable/components/pages/login/_page.svelte-cb6a908d.js",
+  "/_app/immutable/components/pages/login/_page.svelte-0406fea8.js",
   "/_app/immutable/components/pages/math/_page.svx-9c180668.js",
   "/_app/immutable/components/pages/mathjax/_page.svx-1fbbf044.js",
   "/_app/immutable/components/pages/physics/_page.svelte-7d211271.js",
@@ -32,9 +32,9 @@ const m = [
   "/_app/immutable/chunks/index-ec5f67c4.js",
   "/_app/immutable/chunks/preload-helper-9b728935.js",
   "/_app/immutable/chunks/index-4d5c3e31.js",
-  "/_app/immutable/chunks/Dropzone-9df718b2.js",
+  "/_app/immutable/chunks/Dropzone-22f6f96a.js",
   "/_app/immutable/assets/Dropzone-ad1f3da6.css",
-  "/_app/immutable/chunks/LoginCard-14a53e3d.js",
+  "/_app/immutable/chunks/LoginCard-482b512d.js",
   "/_app/immutable/chunks/store-825ff2b0.js",
   "/_app/immutable/chunks/utils-8c22039c.js",
   "/_app/immutable/chunks/InView-2eeb4aa0.js",
@@ -45,15 +45,15 @@ const m = [
   "/_app/immutable/chunks/_page-50113cbf.js",
   "/_app/immutable/chunks/katex-d33715d1.js",
   "/_app/immutable/chunks/Kajax-96592336.js",
-  "/_app/immutable/chunks/0-f062886e.js",
+  "/_app/immutable/chunks/0-b80f6ee9.js",
   "/_app/immutable/chunks/1-7df71eda.js",
-  "/_app/immutable/chunks/2-1fc7ff1a.js",
+  "/_app/immutable/chunks/2-76228c93.js",
   "/_app/immutable/chunks/3-ce758bdc.js",
   "/_app/immutable/chunks/4-c6b6f6d7.js",
   "/_app/immutable/chunks/5-054bf839.js",
-  "/_app/immutable/chunks/6-b2182cd4.js",
+  "/_app/immutable/chunks/6-7302715e.js",
   "/_app/immutable/chunks/7-89feaf45.js",
-  "/_app/immutable/chunks/8-a6b43435.js",
+  "/_app/immutable/chunks/8-c474cecc.js",
   "/_app/immutable/chunks/9-6a2eae16.js",
   "/_app/immutable/chunks/10-c822cfcd.js",
   "/_app/immutable/chunks/11-5f5be218.js",
@@ -67,8 +67,6 @@ const m = [
   "/dropzone.css",
   "/facepalm.gif",
   "/favicon.png",
-  "/google.svg",
-  "/iconmonstr-twitter-1.svg",
   "/icons/apple-icon-180.png",
   "/icons/apple-splash-1125-2436.jpg",
   "/icons/apple-splash-1136-640.jpg",
@@ -114,9 +112,8 @@ const m = [
   "/reviews/review-tj-bare.webp",
   "/reviews/review-zaara-bare.webp",
   "/robots.txt",
-  "/star.webp",
-  "/tesla-svgrepo-com.svg"
-], c = "1670101828042", p = self, i = `cache${c}`, l = m.concat(u), b = new Set(l);
+  "/star.webp"
+], n = "1670184930806", p = self, i = `cache${n}`, l = o.concat(u), b = new Set(l);
 p.addEventListener("install", (s) => {
   s.waitUntil(
     caches.open(i).then((a) => a.addAll(l)).then(() => {
@@ -134,7 +131,7 @@ p.addEventListener("activate", (s) => {
   );
 });
 async function h(s) {
-  const a = await caches.open(`offline${c}`);
+  const a = await caches.open(`offline${n}`);
   try {
     const e = await fetch(s);
     return a.put(s, e.clone()), e;
@@ -148,8 +145,8 @@ async function h(s) {
 p.addEventListener("fetch", (s) => {
   if (s.request.method !== "GET" || s.request.headers.has("range"))
     return;
-  const a = new URL(s.request.url), e = a.protocol.startsWith("http"), t = a.hostname === self.location.hostname && a.port !== self.location.port, n = a.host === self.location.host && b.has(a.pathname), o = s.request.cache === "only-if-cached" && !n;
-  e && !t && !o && s.respondWith(
-    (async () => n && await caches.match(s.request) || h(s.request))()
+  const a = new URL(s.request.url), e = a.protocol.startsWith("http"), t = a.hostname === self.location.hostname && a.port !== self.location.port, c = a.host === self.location.host && b.has(a.pathname), m = s.request.cache === "only-if-cached" && !c;
+  e && !t && !m && s.respondWith(
+    (async () => c && await caches.match(s.request) || h(s.request))()
   );
 });
