@@ -61,8 +61,7 @@
   // TODO: i wonder if app splashscreen would make 'fadeInToFullOpacity' unneeded
   // let hideIfRunningStandalone = $lessThan768 && "hidden";
 
-  let hideIfNotIOS = getOS() !== "iOS" && "hidden";
-  // added dec4,2022 after noticing that the PWA download popup shows on android already
+  let hideIfNotIOS = getOS() !== "iOS" && "hidden"; // added dec4,2022 after noticing that the PWA download popup shows on android already
 
   let hideIfRunningStandalone = isRunningStandalone() && "hidden";
   let fadeInToFullOpacity =

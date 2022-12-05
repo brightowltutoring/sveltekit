@@ -1,8 +1,7 @@
 <script>
-  // import("$lib/Dropzone/dropzone.css");
   import { isDarkMode, navHomeworkClicked } from "$lib/store";
-  export let testingCSS;
-  $: testingCSS = $navHomeworkClicked && "bg-blue-400";
+  // export let testingCSS;
+  // $: testingCSS = $navHomeworkClicked && "bg-blue-400";
 
   export let text = "🔥";
   export let textSizeTW = "text-3xl";
@@ -17,19 +16,18 @@
   let dropzone;
 
   async function hydrateDropzoneDomEls() {
-    // await import("$lib/Dropzone/dropzone.css");
-    //TODO: this crashes when using InView.svelte with this function; it appears to be an issue with vite's 'npm run build' when dynamically importing css. TODO: WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
-    cssToHead("dropzoneCSS", "/dropzone.css");
-    const { Dropzone } = await import("dropzone");
     console.log("drop it like its 🔥");
 
+    cssToHead("dropzoneCSS", "/dropzone.css"); // await import("$lib/Dropzone/dropzone.css");
+    // Dynamic import of 'dropzone.css' crashes when using InView.svelte with this function; it appears to be an issue with vite's 'npm run build'; oddly works fine with 'npm run dev'
+    // WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
+
+    const { Dropzone } = await import("dropzone");
     const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
-    const ACCEPTED_FILES_FRONTEND =
-      ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc";
 
     dropzone = new Dropzone("#default", {
       url: PUBLIC_UPLOAD_ENDPOINT,
-      acceptedFiles: ACCEPTED_FILES_FRONTEND,
+      acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
     });
 
     dropzoneHandleErroredUploads();
@@ -62,6 +60,38 @@
       }
     });
   }
+
+  import { onMount } from "svelte";
+
+  let form;
+  let evento;
+  let homeworkBtn;
+  let filesPreviouslyAdded = false;
+  onMount(() => {
+    // form = document.querySelector("#default");
+    form = document.querySelector(".dropzone");
+    // evento = new CustomEvent("input");
+    evento = new CustomEvent("click");
+
+    let homeworkBtn = document.querySelector("a[href='/homework']");
+
+    function homeworkBtnCallBack() {
+      // NOTE: window.filesPreviouslyAdded is null before this (not declared); '!null' returns truthy
+
+      if (
+        $navHomeworkClicked &&
+        !window.filesPreviouslyAdded &&
+        !filesPreviouslyAdded
+      ) {
+        // if ($navHomeworkClicked && !filesPreviouslyAdded) {
+        setTimeout(() => {
+          form.dispatchEvent(evento);
+          window.filesPreviouslyAdded = filesPreviouslyAdded = true;
+        }, 50);
+      }
+    }
+    homeworkBtn.addEventListener("click", homeworkBtnCallBack);
+  });
 </script>
 
 <!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence ... -->
