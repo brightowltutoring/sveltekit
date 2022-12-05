@@ -1,4 +1,19 @@
 <script>
+  import { onMount } from "svelte";
+  let form;
+  let evento;
+  let homeworkBtn;
+  let filesPreviouslyAdded = false;
+  onMount(() => {
+    // form = document.querySelector(".dropzone");
+    form = document.querySelector(".dropzone:not(#homeRouteDropzone)");
+    evento = new CustomEvent("click");
+    homeworkBtn = document.querySelector("a[href='/homework']");
+    homeworkBtn.addEventListener("click", homeworkBtnCallBack, {
+      once: true,
+    });
+  });
+
   import { isDarkMode, navHomeworkClicked } from "$lib/store";
   // export let testingCSS;
   // $: testingCSS = $navHomeworkClicked && "bg-blue-400";
@@ -33,6 +48,7 @@
     dropzoneHandleErroredUploads();
 
     document.querySelector("#default").id = uniqueId;
+    // uploadPopUpOnce();
   }
 
   // Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
@@ -61,37 +77,44 @@
     });
   }
 
-  import { onMount } from "svelte";
+  // function uploadPopUpOnce() {
+  //   // form = document.querySelector(".dropzone:not(#homeRouteDropzone)");
+  //   // form = document.querySelector(".dropzone:not(.ignoreDisDropzone)");
+  //   form = document.querySelector(".dropzone");
 
-  let form;
-  let evento;
-  let homeworkBtn;
-  let filesPreviouslyAdded = false;
-  onMount(() => {
-    // maybe the creation of this is problematic since intersection observer logic??
-    form = document.querySelector(".dropzone");
-    // evento = new CustomEvent("input");
-    evento = new CustomEvent("click");
+  //   evento = new CustomEvent("click");
 
-    let homeworkBtn = document.querySelector("a[href='/homework']");
+  //   homeworkBtn = document.querySelector("a[href='/homework']");
 
-    function homeworkBtnCallBack() {
-      // NOTE: window.filesPreviouslyAdded is null before this (not declared); '!null' returns truthy
+  //   homeworkBtn.addEventListener("click", homeworkBtnCallBack);
 
-      if (
-        $navHomeworkClicked &&
-        !window.filesPreviouslyAdded &&
-        !filesPreviouslyAdded
-      ) {
-        // if ($navHomeworkClicked && !filesPreviouslyAdded) {
-        setTimeout(() => {
-          form.dispatchEvent(evento);
-          window.filesPreviouslyAdded = filesPreviouslyAdded = true;
-        }, 300);
-      }
+  //   function homeworkBtnCallBack() {
+  //     if (
+  //       $navHomeworkClicked &&
+  //       !window.filesPreviouslyAdded &&
+  //       !filesPreviouslyAdded
+  //     ) {
+  //       setTimeout(() => {
+  //         form.dispatchEvent(evento);
+  //         window.filesPreviouslyAdded = filesPreviouslyAdded = true;
+  //       }, 50);
+  //     }
+  //   }
+  // }
+
+  function homeworkBtnCallBack() {
+    // if (
+    //   $navHomeworkClicked &&
+    //   !window.filesPreviouslyAdded &&
+    //   !filesPreviouslyAdded
+    // ) {
+    if ($navHomeworkClicked) {
+      setTimeout(() => {
+        form.dispatchEvent(evento);
+        // window.filesPreviouslyAdded = filesPreviouslyAdded = true;
+      }, 100);
     }
-    homeworkBtn.addEventListener("click", homeworkBtnCallBack);
-  });
+  }
 </script>
 
 <!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence ... -->

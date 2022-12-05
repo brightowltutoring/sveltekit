@@ -1,8 +1,4 @@
 {
-  "src/fonts/poppins-v20-latin-100.woff2": {
-    "file": "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
-    "src": "src/fonts/poppins-v20-latin-100.woff2"
-  },
   "src/fonts/nunito-v25-latin-200.woff2": {
     "file": "_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
     "src": "src/fonts/nunito-v25-latin-200.woff2"
@@ -11,9 +7,9 @@
     "file": "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
     "src": "src/fonts/nunito-v25-latin-regular.woff2"
   },
-  "src/fonts/poppins-v20-latin-100.woff": {
-    "file": "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
-    "src": "src/fonts/poppins-v20-latin-100.woff"
+  "src/fonts/poppins-v20-latin-100.woff2": {
+    "file": "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
+    "src": "src/fonts/poppins-v20-latin-100.woff2"
   },
   "src/fonts/nunito-v25-latin-200.woff": {
     "file": "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
@@ -23,8 +19,12 @@
     "file": "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
     "src": "src/fonts/nunito-v25-latin-regular.woff"
   },
+  "src/fonts/poppins-v20-latin-100.woff": {
+    "file": "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
+    "src": "src/fonts/poppins-v20-latin-100.woff"
+  },
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-f4b262fd.js",
+    "file": "_app/immutable/start-3cd2ed52.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -51,13 +51,13 @@
     ]
   },
   "src/routes/+layout.svelte": {
-    "file": "_app/immutable/components/pages/_layout.svelte-67a8522d.js",
+    "file": "_app/immutable/components/pages/_layout.svelte-1c23f23c.js",
     "src": "src/routes/+layout.svelte",
     "isEntry": true,
     "imports": [
       "_index-95872f21.js",
       "_index-4d5c3e31.js",
-      "_Dropzone-a07c7b7a.js",
+      "_Dropzone-4ee5b22d.js",
       "_LoginCard-6dde83eb.js",
       "_store-825ff2b0.js",
       "_utils-aab06870.js",
@@ -86,13 +86,13 @@
     ]
   },
   "src/routes/+page.svelte": {
-    "file": "_app/immutable/components/pages/_page.svelte-befcdacb.js",
+    "file": "_app/immutable/components/pages/_page.svelte-5242b2c2.js",
     "src": "src/routes/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-95872f21.js",
       "_PlansComponent-2eba8233.js",
-      "_Dropzone-a07c7b7a.js",
+      "_Dropzone-4ee5b22d.js",
       "_store-825ff2b0.js",
       "_InView-2eeb4aa0.js",
       "_utils-aab06870.js",
@@ -134,12 +134,12 @@
     ]
   },
   "src/routes/homework/+page.svelte": {
-    "file": "_app/immutable/components/pages/homework/_page.svelte-33f6dbd7.js",
+    "file": "_app/immutable/components/pages/homework/_page.svelte-ef7eac0c.js",
     "src": "src/routes/homework/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-95872f21.js",
-      "_Dropzone-a07c7b7a.js"
+      "_Dropzone-4ee5b22d.js"
     ]
   },
   "src/routes/katex/+page.svx": {
@@ -258,8 +258,8 @@
       "_index-95872f21.js"
     ]
   },
-  "_Dropzone-a07c7b7a.js": {
-    "file": "_app/immutable/chunks/Dropzone-a07c7b7a.js",
+  "_Dropzone-4ee5b22d.js": {
+    "file": "_app/immutable/chunks/Dropzone-4ee5b22d.js",
     "imports": [
       "_preload-helper-9b728935.js",
       "_index-95872f21.js",
@@ -351,7 +351,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/0.js": {
-    "file": "_app/immutable/chunks/0-4de14686.js",
+    "file": "_app/immutable/chunks/0-99898f0c.js",
     "src": ".svelte-kit/generated/nodes/0.js",
     "isDynamicEntry": true,
     "imports": [
@@ -367,7 +367,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/2.js": {
-    "file": "_app/immutable/chunks/2-a2c6dd02.js",
+    "file": "_app/immutable/chunks/2-191b5da5.js",
     "src": ".svelte-kit/generated/nodes/2.js",
     "isDynamicEntry": true,
     "imports": [
@@ -400,7 +400,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/6.js": {
-    "file": "_app/immutable/chunks/6-17b79737.js",
+    "file": "_app/immutable/chunks/6-43a8f80e.js",
     "src": ".svelte-kit/generated/nodes/6.js",
     "isDynamicEntry": true,
     "imports": [
@@ -500,13 +500,13 @@
     "file": "_app/immutable/assets/_page-7d3eabbd.css",
     "src": "src/routes/+page.css"
   },
-  "src/routes/physics/+page.css": {
-    "file": "_app/immutable/assets/_page-fcf51fa8.css",
-    "src": "src/routes/physics/+page.css"
-  },
   "src/routes/faq/+page.css": {
     "file": "_app/immutable/assets/_page-113a1f72.css",
     "src": "src/routes/faq/+page.css"
+  },
+  "src/routes/physics/+page.css": {
+    "file": "_app/immutable/assets/_page-fcf51fa8.css",
+    "src": "src/routes/physics/+page.css"
   },
   "src/routes/stripe/+page.css": {
     "file": "_app/immutable/assets/_page-5c304dd7.css",

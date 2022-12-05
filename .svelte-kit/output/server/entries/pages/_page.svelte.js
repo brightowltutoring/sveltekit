@@ -177,7 +177,7 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     $$result,
     {
       text: "Drop it like it's \u{1F525}",
-      textSizeTW: "text-2xl",
+      textSizeTW: "text-2xl ignoreDisDropzone",
       uniqueId: "homeRouteDropzone"
     },
     {},

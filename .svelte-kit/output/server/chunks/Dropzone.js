@@ -8,10 +8,13 @@ const css = {
 };
 const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let boxShadowColor;
-  let $$unsubscribe_navHomeworkClicked;
+  let $navHomeworkClicked, $$unsubscribe_navHomeworkClicked;
   let $isDarkMode, $$unsubscribe_isDarkMode;
-  $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => value);
+  $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  let form;
+  let evento;
+  let homeworkBtn;
   let { text = "\u{1F525}" } = $$props;
   let { textSizeTW = "text-3xl" } = $$props;
   let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
@@ -32,6 +35,7 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     );
     dropzoneHandleErroredUploads();
     document.querySelector("#default").id = uniqueId;
+    homeworkBtn.addEventListener("click", homeworkBtnCallBack, { once: true });
   }
   function dropzoneHandleErroredUploads() {
     let filesToRetry = [];
@@ -45,6 +49,16 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
         }
       }
     });
+  }
+  function homeworkBtnCallBack() {
+    if ($navHomeworkClicked) {
+      setTimeout(
+        () => {
+          form.dispatchEvent(evento);
+        },
+        100
+      );
+    }
   }
   if ($$props.text === void 0 && $$bindings.text && text !== void 0)
     $$bindings.text(text);

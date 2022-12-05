@@ -74,7 +74,7 @@
 
       <Dropzone
         text={"Drop it like it's 🔥"}
-        textSizeTW={"text-2xl"}
+        textSizeTW={"text-2xl ignoreDisDropzone"}
         uniqueId={"homeRouteDropzone"}
       />
     </div>

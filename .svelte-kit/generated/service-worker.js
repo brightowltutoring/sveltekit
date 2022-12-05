@@ -6,23 +6,23 @@ export const timestamp = {
 };
 
 export const build = [
-	"/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
 	"/_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
 	"/_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
-	"/_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
+	"/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
 	"/_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
 	"/_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
-	"/_app/immutable/start-f4b262fd.js",
-	"/_app/immutable/components/pages/_layout.svelte-67a8522d.js",
+	"/_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
+	"/_app/immutable/start-3cd2ed52.js",
+	"/_app/immutable/components/pages/_layout.svelte-1c23f23c.js",
 	"/_app/immutable/assets/_layout-677c9f45.css",
 	"/_app/immutable/components/pages/_error.svelte-2a71ff81.js",
-	"/_app/immutable/components/pages/_page.svelte-befcdacb.js",
+	"/_app/immutable/components/pages/_page.svelte-5242b2c2.js",
 	"/_app/immutable/assets/_page-7d3eabbd.css",
 	"/_app/immutable/components/pages/classroom/_page.svelte-857e9198.js",
 	"/_app/immutable/components/pages/classroomA/_page.svelte-af4eafd3.js",
 	"/_app/immutable/components/pages/faq/_page.svelte-8c58e1f3.js",
 	"/_app/immutable/assets/_page-113a1f72.css",
-	"/_app/immutable/components/pages/homework/_page.svelte-33f6dbd7.js",
+	"/_app/immutable/components/pages/homework/_page.svelte-ef7eac0c.js",
 	"/_app/immutable/components/pages/katex/_page.svx-375c723b.js",
 	"/_app/immutable/components/pages/login/_page.svelte-a5d861a7.js",
 	"/_app/immutable/components/pages/math/_page.svx-9c180668.js",
@@ -39,7 +39,7 @@ export const build = [
 	"/_app/immutable/chunks/index-ec5f67c4.js",
 	"/_app/immutable/chunks/preload-helper-9b728935.js",
 	"/_app/immutable/chunks/index-4d5c3e31.js",
-	"/_app/immutable/chunks/Dropzone-a07c7b7a.js",
+	"/_app/immutable/chunks/Dropzone-4ee5b22d.js",
 	"/_app/immutable/assets/Dropzone-ad1f3da6.css",
 	"/_app/immutable/chunks/LoginCard-6dde83eb.js",
 	"/_app/immutable/chunks/store-825ff2b0.js",
@@ -52,13 +52,13 @@ export const build = [
 	"/_app/immutable/chunks/_page-50113cbf.js",
 	"/_app/immutable/chunks/katex-d33715d1.js",
 	"/_app/immutable/chunks/Kajax-96592336.js",
-	"/_app/immutable/chunks/0-4de14686.js",
+	"/_app/immutable/chunks/0-99898f0c.js",
 	"/_app/immutable/chunks/1-7df71eda.js",
-	"/_app/immutable/chunks/2-a2c6dd02.js",
+	"/_app/immutable/chunks/2-191b5da5.js",
 	"/_app/immutable/chunks/3-ce758bdc.js",
 	"/_app/immutable/chunks/4-c6b6f6d7.js",
 	"/_app/immutable/chunks/5-054bf839.js",
-	"/_app/immutable/chunks/6-17b79737.js",
+	"/_app/immutable/chunks/6-43a8f80e.js",
 	"/_app/immutable/chunks/7-89feaf45.js",
 	"/_app/immutable/chunks/8-9448ff09.js",
 	"/_app/immutable/chunks/9-6a2eae16.js",
@@ -128,4 +128,4 @@ export const prerendered = [
 	
 ];
 
-export const version = "1670268816974";
+export const version = "1670273644332";
