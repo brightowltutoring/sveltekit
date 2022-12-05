@@ -68,7 +68,7 @@
   let homeworkBtn;
   let filesPreviouslyAdded = false;
   onMount(() => {
-    // form = document.querySelector("#default");
+    // maybe the creation of this is problematic since intersection observer logic??
     form = document.querySelector(".dropzone");
     // evento = new CustomEvent("input");
     evento = new CustomEvent("click");
@@ -87,7 +87,7 @@
         setTimeout(() => {
           form.dispatchEvent(evento);
           window.filesPreviouslyAdded = filesPreviouslyAdded = true;
-        }, 50);
+        }, 300);
       }
     }
     homeworkBtn.addEventListener("click", homeworkBtnCallBack);
