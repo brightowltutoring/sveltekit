@@ -4,10 +4,11 @@
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
-  import { isDarkMode } from "$lib/store";
+  import { isDarkMode, scrollY } from "$lib/store";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
+  import InView from "../lib/InView.svelte";
 
   let ready = false;
   onMount(() => (ready = true));
@@ -72,11 +73,14 @@
         <span class={gradientTextColor}> 1. Upload your homework </span>
       </button>
 
-      <Dropzone
-        text={"Drop it like it's 🔥"}
-        textSizeTW={"text-2xl ignoreDisDropzone"}
-        uniqueId={"homeRouteDropzone"}
-      />
+      <!-- TODO: for some reason when this element is rendered, clicking on homework nav button doesnt have the intended 'auto popup' functionality. Therefore added a 50px buffer  -->
+      {#if $scrollY > 50}
+        <Dropzone
+          text={"Drop it like it's 🔥"}
+          textSizeTW={"text-2xl ignoreDisDropzone"}
+          uniqueId={"homeRouteDropzone"}
+        />
+      {/if}
     </div>
 
     <!-- third page -->

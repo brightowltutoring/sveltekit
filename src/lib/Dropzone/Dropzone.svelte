@@ -6,7 +6,8 @@
   let filesPreviouslyAdded = false;
   onMount(() => {
     // form = document.querySelector(".dropzone");
-    form = document.querySelector(".dropzone:not(#homeRouteDropzone)");
+    // form = document.querySelector(".dropzone:not(#homeRouteDropzone)");
+    form = document.querySelector(".dropzone:not(.ignoreDisDropzone)");
     evento = new CustomEvent("click");
     homeworkBtn = document.querySelector("a[href='/homework']");
     homeworkBtn.addEventListener("click", homeworkBtnCallBack, {
@@ -118,7 +119,12 @@
 </script>
 
 <!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence ... -->
-<InView once vanilla={".dropzone"} onview={hydrateDropzoneDomEls} />
+<InView
+  once
+  vanilla={".dropzone"}
+  onview={hydrateDropzoneDomEls}
+  margin={"400px"}
+/>
 
 <form
   id="default"
