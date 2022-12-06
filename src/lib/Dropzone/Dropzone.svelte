@@ -1,23 +1,25 @@
 <script>
+  // import("$lib/Dropzone/dropzone.css");
+  // import { Dropzone } from "dropzone";
+  export let uniqueId; // needed in order to instantiate multiple dropzones on one page
+
+  import {
+    cssToHead,
+    // isRunningStandalone
+  } from "$lib/utils";
+
   import { onMount } from "svelte";
-  let form;
-  let evento;
-  let homeworkBtn;
-  let filesPreviouslyAdded = false;
+
   onMount(() => {
-    // form = document.querySelector(".dropzone");
-    // form = document.querySelector(".dropzone:not(#homeRouteDropzone)");
-    form = document.querySelector(".dropzone:not(.ignoreDisDropzone)");
-    evento = new CustomEvent("click");
-    homeworkBtn = document.querySelector("a[href='/homework']");
-    homeworkBtn.addEventListener("click", homeworkBtnCallBack, {
-      once: true,
-    });
+    // isRunningStandalone() &&
+    document
+      .querySelector("a[href='/homework']")
+      .addEventListener("click", homeworkBtnCallBack, {
+        once: true,
+      });
   });
 
   import { isDarkMode, navHomeworkClicked } from "$lib/store";
-  // export let testingCSS;
-  // $: testingCSS = $navHomeworkClicked && "bg-blue-400";
 
   export let text = "🔥";
   export let textSizeTW = "text-3xl";
@@ -26,13 +28,15 @@
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
   import InView from "$lib/InView.svelte";
-  import { cssToHead } from "$lib/utils";
 
-  export let uniqueId; // needed in order to instantiate multiple dropzones on one page
   let dropzone;
 
   async function hydrateDropzoneDomEls() {
-    console.log("drop it like its 🔥");
+    // console.log("drop it like its 🔥");
+    console.log(
+      '🔥 document.querySelector(".dropzone").id',
+      document.querySelector(".dropzone").id
+    );
 
     cssToHead("dropzoneCSS", "/dropzone.css"); // await import("$lib/Dropzone/dropzone.css");
     // Dynamic import of 'dropzone.css' crashes when using InView.svelte with this function; it appears to be an issue with vite's 'npm run build'; oddly works fine with 'npm run dev'
@@ -42,6 +46,8 @@
     const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
 
     dropzone = new Dropzone("#default", {
+      // dropzone = new Dropzone(".dropzone", {
+      // dropzone = new Dropzone("#homeRouteDropzone", {
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
     });
@@ -49,7 +55,6 @@
     dropzoneHandleErroredUploads();
 
     document.querySelector("#default").id = uniqueId;
-    // uploadPopUpOnce();
   }
 
   // Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
@@ -78,43 +83,27 @@
     });
   }
 
-  // function uploadPopUpOnce() {
-  //   // form = document.querySelector(".dropzone:not(#homeRouteDropzone)");
-  //   // form = document.querySelector(".dropzone:not(.ignoreDisDropzone)");
-  //   form = document.querySelector(".dropzone");
-
-  //   evento = new CustomEvent("click");
-
-  //   homeworkBtn = document.querySelector("a[href='/homework']");
-
-  //   homeworkBtn.addEventListener("click", homeworkBtnCallBack);
-
-  //   function homeworkBtnCallBack() {
-  //     if (
-  //       $navHomeworkClicked &&
-  //       !window.filesPreviouslyAdded &&
-  //       !filesPreviouslyAdded
-  //     ) {
-  //       setTimeout(() => {
-  //         form.dispatchEvent(evento);
-  //         window.filesPreviouslyAdded = filesPreviouslyAdded = true;
-  //       }, 50);
-  //     }
-  //   }
-  // }
-
   function homeworkBtnCallBack() {
+    let evento = new CustomEvent("click");
+    // if ($navHomeworkClicked) alert("3ee");
     // if (
     //   $navHomeworkClicked &&
     //   !window.filesPreviouslyAdded &&
     //   !filesPreviouslyAdded
     // ) {
-    if ($navHomeworkClicked) {
-      setTimeout(() => {
-        form.dispatchEvent(evento);
-        // window.filesPreviouslyAdded = filesPreviouslyAdded = true;
-      }, 100);
-    }
+
+    setTimeout(() => {
+      // for (let form of document.querySelectorAll(".dropzone")) {
+      for (let form of document.querySelectorAll(".dropzone")) {
+        if (form.id === "modalDropzone") {
+          form.dispatchEvent(evento);
+          console.log("evento", form.id);
+          return;
+        }
+      }
+
+      // window.filesPreviouslyAdded = filesPreviouslyAdded = true;
+    }, 100);
   }
 </script>
 
@@ -124,8 +113,10 @@
   vanilla={".dropzone"}
   onview={hydrateDropzoneDomEls}
   margin={"400px"}
+  threshold={1}
 />
 
+<!-- id={uniqueId} -->
 <form
   id="default"
   method="post"

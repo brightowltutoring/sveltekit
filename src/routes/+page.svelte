@@ -74,13 +74,14 @@
       </button>
 
       <!-- TODO: for some reason when this element is rendered, clicking on homework nav button doesnt have the intended 'auto popup' functionality. Therefore added a 50px buffer  -->
-      {#if $scrollY > 50}
-        <Dropzone
-          text={"Drop it like it's 🔥"}
-          textSizeTW={"text-2xl ignoreDisDropzone"}
-          uniqueId={"homeRouteDropzone"}
-        />
-      {/if}
+      <!-- UPDATE: had to remove this as the hydration was not working -->
+      <!-- {#if $scrollY > 10} -->
+      <Dropzone
+        text={"Drop it like it's 🔥"}
+        textSizeTW={"text-2xl ignoreDisDropzone"}
+        uniqueId={"homeRouteDropzone"}
+      />
+      <!-- {/if} -->
     </div>
 
     <!-- third page -->
