@@ -109,19 +109,22 @@
   </Modal>
 
   <!-- WITHOUT bind I am able to keep state on the logincard ...which is useful for phone auth sms code logic, however annoyingly the svg icon color does not update back to default color when unclicking -->
+
   <Modal bind:showModal={$navLoginClicked}>
     <LoginCard />
   </Modal>
 
   <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+    <!-- Dec6,2022: For some reason WITHOUT this if block this modal dropzone interferes with homepage dropzone ... and I cannot implement the 'popup' logic on the modal dropzone consistently across all browsers. Vanilla dropzone doesnt play well with multiple copies on "same page".  -->
+    <!-- TODO: this deletes history though :/ -->
+    <!-- {#if $navHomeworkClicked} -->
     <Dropzone
       uniqueId={"modalDropzone"}
-      textSizeTW={"text-6xl"}
+      textSizeTW={"text-6xl yeetModal"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
     />
-    <!-- testingCSS={$navHomeworkClicked && "scale-50"} -->
-    <!-- testingCSS={"scale-100 transition-transform duration-1000"} -->
+    <!-- {/if} -->
   </Modal>
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->

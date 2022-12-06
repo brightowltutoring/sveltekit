@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, j as each, p as createEventDispatcher, v as validate_component } from "./index.js";
 import { i as isDarkMode, e as elementColor } from "./store.js";
-import { I as InView, j as jsToHead, c as cssToHead } from "./utils.js";
+import { I as InView, j as jsToHead, c as cssToHead } from "./InView.js";
 const PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isDarkMode, $$unsubscribe_isDarkMode;
   let $elementColor, $$unsubscribe_elementColor;

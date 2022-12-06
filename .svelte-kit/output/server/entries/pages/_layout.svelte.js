@@ -3,7 +3,7 @@ import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { L as LoginCard } from "../../chunks/LoginCard.js";
 import { b as browser } from "../../chunks/environment.js";
 import { i as isDarkMode, n as navLoginClicked, a as navHomeworkClicked, b as navAppClicked, r as routes, c as isLoggedIn, s as scrollY, e as elementColor, d as instDeltaY, l as lessThan768 } from "../../chunks/store.js";
-import { g as getOS, i as isRunningStandalone } from "../../chunks/utils.js";
+import { g as getOS, i as isRunningStandalone } from "../../chunks/InView.js";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
 const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -18,6 +18,7 @@ const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 <button class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}">${slots.default ? slots.default({}) : ``}</button>
+
 
 `;
 });
@@ -397,6 +398,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     )}
 
   
+
   ${validate_component(Modal, "Modal").$$render(
       $$result,
       { showModal: $navLoginClicked },
@@ -427,18 +429,20 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       },
       {
         default: () => {
-          return `${validate_component(Dropzone, "Dropzone").$$render(
+          return `
+    
+    
+    ${validate_component(Dropzone, "Dropzone").$$render(
             $$result,
             {
               uniqueId: "modalDropzone",
-              textSizeTW: "text-6xl",
+              textSizeTW: "text-6xl yeetModal",
               dimensionsTW: "w-[80vw] h-[85vh]",
               brightnessTW: "brightness-95"
             },
             {},
             {}
           )}
-    
     `;
         }
       }

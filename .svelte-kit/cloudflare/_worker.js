@@ -653,6 +653,92 @@ var init_hooks_server = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/environment.js
+var browser2;
+var init_environment = __esm({
+  ".svelte-kit/output/server/chunks/environment.js"() {
+    browser2 = false;
+  }
+});
+
+// .svelte-kit/output/server/chunks/InView.js
+function getOS() {
+  let userAgent = browser2;
+  let platform = browser2;
+  let macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
+  let windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"];
+  let iosPlatforms = ["iPhone", "iPad", "iPod"];
+  let os = null;
+  if (macosPlatforms.includes(platform)) {
+    os = "Mac OS";
+  } else if (iosPlatforms.includes(platform)) {
+    os = "iOS";
+  } else if (windowsPlatforms.includes(platform)) {
+    os = "Windows";
+  } else if (/Android/.test(userAgent)) {
+    os = "Android";
+  } else if (/Linux/.test(platform)) {
+    os = "Linux";
+  }
+  return os;
+}
+function isRunningStandalone() {
+  return browser2;
+}
+function cssToHead(id = "dropzoneCSS", path2 = "/dropzone.css") {
+  if (!document.getElementById(id)) {
+    const element = document.createElement("link");
+    element.id = id;
+    element.href = path2;
+    element.rel = "stylesheet";
+    document.head.appendChild(element);
+  }
+}
+function jsToHead(id = "calendlyJS", path2 = "external-website.com/calendly.js") {
+  if (!document.getElementById(id)) {
+    const element = document.createElement("script");
+    element.id = id;
+    element.src = path2;
+    element.type = "text/javascript";
+    document.head.appendChild(element);
+  }
+}
+var InView;
+var init_InView = __esm({
+  ".svelte-kit/output/server/chunks/InView.js"() {
+    init_environment();
+    init_chunks();
+    InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { vanilla } = $$props;
+      let { once: once2 } = $$props;
+      let { onview = () => console.log("i \u2764\uFE0F slots") } = $$props;
+      let container;
+      let { single } = $$props;
+      let { root = null } = $$props;
+      let { threshold = 0 } = $$props;
+      let { margin = "0px" } = $$props;
+      if ($$props.vanilla === void 0 && $$bindings.vanilla && vanilla !== void 0)
+        $$bindings.vanilla(vanilla);
+      if ($$props.once === void 0 && $$bindings.once && once2 !== void 0)
+        $$bindings.once(once2);
+      if ($$props.onview === void 0 && $$bindings.onview && onview !== void 0)
+        $$bindings.onview(onview);
+      if ($$props.single === void 0 && $$bindings.single && single !== void 0)
+        $$bindings.single(single);
+      if ($$props.root === void 0 && $$bindings.root && root !== void 0)
+        $$bindings.root(root);
+      if ($$props.threshold === void 0 && $$bindings.threshold && threshold !== void 0)
+        $$bindings.threshold(threshold);
+      if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
+        $$bindings.margin(margin);
+      return `
+
+
+${!vanilla ? `<div${add_attribute("this", container, 0)}>${slots.default ? slots.default({}) : ``}</div>` : ``}`;
+    });
+  }
+});
+
 // .svelte-kit/output/server/chunks/store.js
 var size$3, IconLogin, size$2, IconPlans, size$1, IconHomework, size, IconClassroom, isLoggedIn, scrollY, delayedScrollY, instDeltaY, innerWidth, lessThan768, navLoginClicked, navHomeworkClicked, navAppClicked, routes, isDarkMode, light_darkened, dark_lightened, elementColor;
 var init_store = __esm({
@@ -795,92 +881,6 @@ var init_store = __esm({
     dark_lightened = "rgb(38, 35, 51)";
     elementColor = derived(isDarkMode, ($isDarkMode, set) => {
       $isDarkMode ? set(dark_lightened) : set(light_darkened);
-    });
-  }
-});
-
-// .svelte-kit/output/server/chunks/environment.js
-var browser2;
-var init_environment = __esm({
-  ".svelte-kit/output/server/chunks/environment.js"() {
-    browser2 = false;
-  }
-});
-
-// .svelte-kit/output/server/chunks/utils.js
-function getOS() {
-  let userAgent = browser2;
-  let platform = browser2;
-  let macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
-  let windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"];
-  let iosPlatforms = ["iPhone", "iPad", "iPod"];
-  let os = null;
-  if (macosPlatforms.includes(platform)) {
-    os = "Mac OS";
-  } else if (iosPlatforms.includes(platform)) {
-    os = "iOS";
-  } else if (windowsPlatforms.includes(platform)) {
-    os = "Windows";
-  } else if (/Android/.test(userAgent)) {
-    os = "Android";
-  } else if (/Linux/.test(platform)) {
-    os = "Linux";
-  }
-  return os;
-}
-function isRunningStandalone() {
-  return browser2;
-}
-function cssToHead(id = "dropzoneCSS", path2 = "/dropzone.css") {
-  if (!document.getElementById(id)) {
-    const element = document.createElement("link");
-    element.id = id;
-    element.href = path2;
-    element.rel = "stylesheet";
-    document.head.appendChild(element);
-  }
-}
-function jsToHead(id = "calendlyJS", path2 = "external-website.com/calendly.js") {
-  if (!document.getElementById(id)) {
-    const element = document.createElement("script");
-    element.id = id;
-    element.src = path2;
-    element.type = "text/javascript";
-    document.head.appendChild(element);
-  }
-}
-var InView;
-var init_utils = __esm({
-  ".svelte-kit/output/server/chunks/utils.js"() {
-    init_chunks();
-    init_environment();
-    InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { vanilla } = $$props;
-      let { once: once2 } = $$props;
-      let { onview = () => console.log("i \u2764\uFE0F slots") } = $$props;
-      let container;
-      let { single } = $$props;
-      let { root = null } = $$props;
-      let { threshold = 0 } = $$props;
-      let { margin = "0px" } = $$props;
-      if ($$props.vanilla === void 0 && $$bindings.vanilla && vanilla !== void 0)
-        $$bindings.vanilla(vanilla);
-      if ($$props.once === void 0 && $$bindings.once && once2 !== void 0)
-        $$bindings.once(once2);
-      if ($$props.onview === void 0 && $$bindings.onview && onview !== void 0)
-        $$bindings.onview(onview);
-      if ($$props.single === void 0 && $$bindings.single && single !== void 0)
-        $$bindings.single(single);
-      if ($$props.root === void 0 && $$bindings.root && root !== void 0)
-        $$bindings.root(root);
-      if ($$props.threshold === void 0 && $$bindings.threshold && threshold !== void 0)
-        $$bindings.threshold(threshold);
-      if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
-        $$bindings.margin(margin);
-      return `
-
-
-${!vanilla ? `<div${add_attribute("this", container, 0)}>${slots.default ? slots.default({}) : ``}</div>` : ``}`;
     });
   }
 });
@@ -2720,26 +2720,21 @@ var css, Dropzone;
 var init_Dropzone = __esm({
   ".svelte-kit/output/server/chunks/Dropzone.js"() {
     init_chunks();
+    init_InView();
     init_store();
-    init_utils();
     css = {
       code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}",
       map: null
     };
     Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let boxShadowColor;
-      let $navHomeworkClicked, $$unsubscribe_navHomeworkClicked;
       let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      let form;
-      let evento;
-      let homeworkBtn;
+      let { uniqueId } = $$props;
       let { text: text2 = "\u{1F525}" } = $$props;
       let { textSizeTW = "text-3xl" } = $$props;
       let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
       let { brightnessTW = "brightness-100" } = $$props;
-      let { uniqueId } = $$props;
       let dropzone;
       async function hydrateDropzoneDomEls() {
         console.log("drop it like its \u{1F525}");
@@ -2755,7 +2750,6 @@ var init_Dropzone = __esm({
         );
         dropzoneHandleErroredUploads();
         document.querySelector("#default").id = uniqueId;
-        homeworkBtn.addEventListener("click", homeworkBtnCallBack, { once: true });
       }
       function dropzoneHandleErroredUploads() {
         let filesToRetry = [];
@@ -2770,16 +2764,8 @@ var init_Dropzone = __esm({
           }
         });
       }
-      function homeworkBtnCallBack() {
-        if ($navHomeworkClicked) {
-          setTimeout(
-            () => {
-              form.dispatchEvent(evento);
-            },
-            100
-          );
-        }
-      }
+      if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
+        $$bindings.uniqueId(uniqueId);
       if ($$props.text === void 0 && $$bindings.text && text2 !== void 0)
         $$bindings.text(text2);
       if ($$props.textSizeTW === void 0 && $$bindings.textSizeTW && textSizeTW !== void 0)
@@ -2788,11 +2774,8 @@ var init_Dropzone = __esm({
         $$bindings.dimensionsTW(dimensionsTW);
       if ($$props.brightnessTW === void 0 && $$bindings.brightnessTW && brightnessTW !== void 0)
         $$bindings.brightnessTW(brightnessTW);
-      if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
-        $$bindings.uniqueId(uniqueId);
       $$result.css.add(css);
       boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
-      $$unsubscribe_navHomeworkClicked();
       $$unsubscribe_isDarkMode();
       return `
 ${validate_component(InView, "InView").$$render(
@@ -2800,11 +2783,14 @@ ${validate_component(InView, "InView").$$render(
         {
           once: true,
           vanilla: ".dropzone",
-          onview: hydrateDropzoneDomEls
+          onview: hydrateDropzoneDomEls,
+          margin: "400px",
+          threshold: 1
         },
         {},
         {}
       )}
+
 
 <form id="${"default"}" method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}">
   <div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>${escape(text2)}</div></form>
@@ -12818,7 +12804,7 @@ var init_layout_svelte = __esm({
     init_LoginCard();
     init_environment();
     init_store();
-    init_utils();
+    init_InView();
     init_index2();
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { showModal = false } = $$props;
@@ -12832,6 +12818,7 @@ var init_layout_svelte = __esm({
 
 
 <button class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}">${slots.default ? slots.default({}) : ``}</button>
+
 
 `;
     });
@@ -13108,6 +13095,7 @@ var init_layout_svelte = __esm({
         )}
 
   
+
   ${validate_component(Modal, "Modal").$$render(
           $$result,
           { showModal: $navLoginClicked },
@@ -13138,18 +13126,20 @@ var init_layout_svelte = __esm({
           },
           {
             default: () => {
-              return `${validate_component(Dropzone, "Dropzone").$$render(
+              return `
+    
+    
+    ${validate_component(Dropzone, "Dropzone").$$render(
                 $$result,
                 {
                   uniqueId: "modalDropzone",
-                  textSizeTW: "text-6xl",
+                  textSizeTW: "text-6xl yeetModal",
                   dimensionsTW: "w-[80vw] h-[85vh]",
                   brightnessTW: "brightness-95"
                 },
                 {},
                 {}
               )}
-    
     `;
             }
           }
@@ -13194,9 +13184,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-1c23f23c.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-1c23f23c.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Dropzone-4ee5b22d.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/LoginCard-6dde83eb.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
-    stylesheets = ["_app/immutable/assets/_layout-677c9f45.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-04e40cef.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-04e40cef.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Dropzone-60702672.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/LoginCard-6dde83eb.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
+    stylesheets = ["_app/immutable/assets/_layout-6d537e35.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff"];
   }
 });
@@ -13251,7 +13241,7 @@ var init_PlansComponent = __esm({
   ".svelte-kit/output/server/chunks/PlansComponent.js"() {
     init_chunks();
     init_store();
-    init_utils();
+    init_InView();
     PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isDarkMode, $$unsubscribe_isDarkMode;
       let $elementColor, $$unsubscribe_elementColor;
@@ -13409,7 +13399,7 @@ var init_page_svelte = __esm({
     init_PlansComponent();
     init_Dropzone();
     init_store();
-    init_utils();
+    init_InView();
     css$1 = {
       code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
       map: null
@@ -13578,16 +13568,20 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     
     <div id="${"step1"}" class="${"hover:scale-105 duration-500 grid place-content-center"}"><button class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></button>
 
+      
+      
+      
       ${validate_component(Dropzone, "Dropzone").$$render(
         $$result,
         {
           text: "Drop it like it's \u{1F525}",
-          textSizeTW: "text-2xl ignoreDisDropzone",
+          textSizeTW: "text-2xl yeetHome",
           uniqueId: "homeRouteDropzone"
         },
         {},
         {}
-      )}</div>
+      )}
+      </div>
 
     
     <div id="${"step2"}" class="${"duration-500 grid place-content-center"}"><button class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></button>
@@ -13634,8 +13628,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-5242b2c2.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-5242b2c2.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/PlansComponent-2eba8233.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/Dropzone-4ee5b22d.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-c2c94332.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-c2c94332.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/PlansComponent-2eba8233.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/Dropzone-60702672.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
     stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts3 = [];
   }
@@ -15243,8 +15237,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-ef7eac0c.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-ef7eac0c.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Dropzone-4ee5b22d.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/index-4d5c3e31.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-5ecc1cac.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-5ecc1cac.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Dropzone-60702672.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/store-825ff2b0.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/InView-2eeb4aa0.js"];
     stylesheets7 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts7 = [];
   }
@@ -32462,7 +32456,7 @@ var Server = class {
       app_template,
       app_template_contains_nonce: false,
       error_template,
-      version: "1670273644332"
+      version: "1670368918145"
     };
   }
   async init({ env }) {
@@ -32497,7 +32491,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "facepalm.gif", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "service-worker.js"]),
   mimeTypes: { ".css": "text/css", ".gif": "image/gif", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-3cd2ed52.js", "imports": ["_app/immutable/start-3cd2ed52.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-3ea45b95.js", "imports": ["_app/immutable/start-3ea45b95.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

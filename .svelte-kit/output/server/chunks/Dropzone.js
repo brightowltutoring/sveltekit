@@ -1,6 +1,6 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape } from "./index.js";
-import { a as navHomeworkClicked, i as isDarkMode } from "./store.js";
-import { I as InView, c as cssToHead } from "./utils.js";
+import { I as InView, c as cssToHead } from "./InView.js";
+import { i as isDarkMode } from "./store.js";
 const Dropzone_svelte_svelte_type_style_lang = "";
 const css = {
   code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}",
@@ -8,18 +8,13 @@ const css = {
 };
 const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let boxShadowColor;
-  let $navHomeworkClicked, $$unsubscribe_navHomeworkClicked;
   let $isDarkMode, $$unsubscribe_isDarkMode;
-  $$unsubscribe_navHomeworkClicked = subscribe(navHomeworkClicked, (value) => $navHomeworkClicked = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  let form;
-  let evento;
-  let homeworkBtn;
+  let { uniqueId } = $$props;
   let { text = "\u{1F525}" } = $$props;
   let { textSizeTW = "text-3xl" } = $$props;
   let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
   let { brightnessTW = "brightness-100" } = $$props;
-  let { uniqueId } = $$props;
   let dropzone;
   async function hydrateDropzoneDomEls() {
     console.log("drop it like its \u{1F525}");
@@ -35,7 +30,6 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     );
     dropzoneHandleErroredUploads();
     document.querySelector("#default").id = uniqueId;
-    homeworkBtn.addEventListener("click", homeworkBtnCallBack, { once: true });
   }
   function dropzoneHandleErroredUploads() {
     let filesToRetry = [];
@@ -50,16 +44,8 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
       }
     });
   }
-  function homeworkBtnCallBack() {
-    if ($navHomeworkClicked) {
-      setTimeout(
-        () => {
-          form.dispatchEvent(evento);
-        },
-        100
-      );
-    }
-  }
+  if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
+    $$bindings.uniqueId(uniqueId);
   if ($$props.text === void 0 && $$bindings.text && text !== void 0)
     $$bindings.text(text);
   if ($$props.textSizeTW === void 0 && $$bindings.textSizeTW && textSizeTW !== void 0)
@@ -68,11 +54,8 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     $$bindings.dimensionsTW(dimensionsTW);
   if ($$props.brightnessTW === void 0 && $$bindings.brightnessTW && brightnessTW !== void 0)
     $$bindings.brightnessTW(brightnessTW);
-  if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
-    $$bindings.uniqueId(uniqueId);
   $$result.css.add(css);
   boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
-  $$unsubscribe_navHomeworkClicked();
   $$unsubscribe_isDarkMode();
   return `
 ${validate_component(InView, "InView").$$render(
@@ -80,11 +63,14 @@ ${validate_component(InView, "InView").$$render(
     {
       once: true,
       vanilla: ".dropzone",
-      onview: hydrateDropzoneDomEls
+      onview: hydrateDropzoneDomEls,
+      margin: "400px",
+      threshold: 1
     },
     {},
     {}
   )}
+
 
 <form id="${"default"}" method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}">
   <div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>${escape(text)}</div></form>

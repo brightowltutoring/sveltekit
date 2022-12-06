@@ -8,17 +8,6 @@
     // isRunningStandalone
   } from "$lib/utils";
 
-  import { onMount } from "svelte";
-
-  onMount(() => {
-    // isRunningStandalone() &&
-    document
-      .querySelector("a[href='/homework']")
-      .addEventListener("click", homeworkBtnCallBack, {
-        once: true,
-      });
-  });
-
   import { isDarkMode, navHomeworkClicked } from "$lib/store";
 
   export let text = "🔥";
@@ -32,11 +21,7 @@
   let dropzone;
 
   async function hydrateDropzoneDomEls() {
-    // console.log("drop it like its 🔥");
-    console.log(
-      '🔥 document.querySelector(".dropzone").id',
-      document.querySelector(".dropzone").id
-    );
+    console.log("drop it like its 🔥");
 
     cssToHead("dropzoneCSS", "/dropzone.css"); // await import("$lib/Dropzone/dropzone.css");
     // Dynamic import of 'dropzone.css' crashes when using InView.svelte with this function; it appears to be an issue with vite's 'npm run build'; oddly works fine with 'npm run dev'
@@ -46,7 +31,7 @@
     const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
 
     dropzone = new Dropzone("#default", {
-      // dropzone = new Dropzone(".dropzone", {
+      // dropzone = new Dropzone(".dropzone:not(#default)", {
       // dropzone = new Dropzone("#homeRouteDropzone", {
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
@@ -83,28 +68,24 @@
     });
   }
 
-  function homeworkBtnCallBack() {
+  function dropzonePopUp() {
     let evento = new CustomEvent("click");
-    // if ($navHomeworkClicked) alert("3ee");
-    // if (
-    //   $navHomeworkClicked &&
-    //   !window.filesPreviouslyAdded &&
-    //   !filesPreviouslyAdded
-    // ) {
-
     setTimeout(() => {
-      // for (let form of document.querySelectorAll(".dropzone")) {
-      for (let form of document.querySelectorAll(".dropzone")) {
-        if (form.id === "modalDropzone") {
-          form.dispatchEvent(evento);
-          console.log("evento", form.id);
-          return;
-        }
+      let test = document.querySelectorAll(".dropzone")[0];
+      if (!window.testy) {
+        test.dispatchEvent(evento) && console.log("evento fired on", test);
+        window.testy = true;
       }
-
-      // window.filesPreviouslyAdded = filesPreviouslyAdded = true;
-    }, 100);
+    }, 500);
   }
+
+  import { onMount } from "svelte";
+  onMount(() => {
+    document
+      .querySelector('a[href="/homework"]')
+      .addEventListener("click", dropzonePopUp);
+  });
+  // !!! Previously, instead of the more vanilla-y eventlistener approach just above, I was using '$navHomeworkClicked && dropzonePopUp()' inside the intersection observer function 'hydrateDropzoneDomEls()' .. which worked on chrome, firefox but NOT safari or the PWA on ios simulator ... NO idea why ... assuming intersection observer is buggier on safari
 </script>
 
 <!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence ... -->

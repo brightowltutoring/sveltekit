@@ -78,7 +78,7 @@
       <!-- {#if $scrollY > 10} -->
       <Dropzone
         text={"Drop it like it's 🔥"}
-        textSizeTW={"text-2xl ignoreDisDropzone"}
+        textSizeTW={"text-2xl yeetHome"}
         uniqueId={"homeRouteDropzone"}
       />
       <!-- {/if} -->

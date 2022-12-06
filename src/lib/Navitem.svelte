@@ -20,6 +20,7 @@
 
   function handleNavButtonClicks(e) {
     // resets all modals (so modals don't continuously pile up)
+    // e.preventDefault();
     clearNavModals();
 
     // sets the correct modal
