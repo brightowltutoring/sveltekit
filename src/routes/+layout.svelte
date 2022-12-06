@@ -114,18 +114,17 @@
     <LoginCard />
   </Modal>
 
+  <!-- previously used this if block due to multiple-dropzone-on-one-page-interference ..  -->
+  <!-- {#if $navHomeworkClicked} -->
   <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
-    <!-- Dec6,2022: For some reason WITHOUT this if block this modal dropzone interferes with homepage dropzone ... and I cannot implement the 'popup' logic on the modal dropzone consistently across all browsers. Vanilla dropzone doesnt play well with multiple copies on "same page".  -->
-    <!-- TODO: this deletes history though :/ -->
-    <!-- {#if $navHomeworkClicked} -->
     <Dropzone
       uniqueId={"modalDropzone"}
       textSizeTW={"text-6xl yeetModal"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
     />
-    <!-- {/if} -->
   </Modal>
+  <!-- {/if} -->
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
   <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">

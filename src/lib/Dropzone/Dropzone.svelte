@@ -69,14 +69,16 @@
   }
 
   function dropzonePopUp() {
-    let evento = new CustomEvent("click");
+    let clicko = new CustomEvent("click");
     setTimeout(() => {
-      let test = document.querySelectorAll(".dropzone")[0];
-      if (!window.testy) {
-        test.dispatchEvent(evento) && console.log("evento fired on", test);
-        window.testy = true;
+      let dropzone0 = document.querySelectorAll(".dropzone")[0];
+      // without the initially-undefined, global variable logic of 'window.clickoFiredOnce', the custom click event would fire twice on the homepage .. i guess because two dropzones were visible there (homepage and modal)
+      if (!window.clickoFiredOnce) {
+        dropzone0.dispatchEvent(clicko);
+        // &&console.log("evento fired on", dropzone0);
+        window.clickoFiredOnce = true;
       }
-    }, 500);
+    }, 50);
   }
 
   import { onMount } from "svelte";

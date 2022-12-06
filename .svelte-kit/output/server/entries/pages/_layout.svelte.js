@@ -415,6 +415,8 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       }
     )}
 
+  
+  
   ${validate_component(Modal, "Modal").$$render(
       $$result,
       {
@@ -429,10 +431,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       },
       {
         default: () => {
-          return `
-    
-    
-    ${validate_component(Dropzone, "Dropzone").$$render(
+          return `${validate_component(Dropzone, "Dropzone").$$render(
             $$result,
             {
               uniqueId: "modalDropzone",
@@ -442,11 +441,11 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
             },
             {},
             {}
-          )}
-    `;
+          )}`;
         }
       }
     )}
+  
 
   
   <div class="${"z-50 md:py-4 md:px-[7%] fixed " + escape(jankytown, true) + " ease-in-out w-full"}">${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}</div>
