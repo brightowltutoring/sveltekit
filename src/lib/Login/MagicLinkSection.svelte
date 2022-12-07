@@ -16,7 +16,7 @@
   let isEmail = false;
 
   function signinWithLinkAndStop(e) {
-    window.userInputVisible = userInputVisible = true;
+    magicLinkInputVisible = globalThis.magicLinkInputVisible = true;
 
     let clickOrEnterFired = e.type == "click" || e.key == "Enter";
 
@@ -65,8 +65,7 @@
     }
   }
 
-  import { browser } from "$app/environment";
-  $: userInputVisible = browser && window.userInputVisible;
+  let magicLinkInputVisible = globalThis.magicLinkInputVisible;
 </script>
 
 <signin-button
@@ -84,7 +83,7 @@
   <span>Get Magic Link</span>
 </signin-button>
 
-{#if userInputVisible}
+{#if magicLinkInputVisible}
   <input
     on:keydown={(e) => {
       signinWithLinkAndStop(e);

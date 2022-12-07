@@ -1,4 +1,10 @@
 <script>
+  // import("$lib/Dropzone/dropzone.css");
+  // import { Dropzone } from "dropzone";
+  import InView from "$lib/InView.svelte";
+  import { cssToHead } from "$lib/utils";
+  import { isDarkMode } from "$lib/store";
+
   import { onMount } from "svelte";
   // !!! Previously, instead of the eventlistener approach just below, I was using '$showHomeworkModal && dropzonePopUp()' inside the intersection observer function 'hydrateDropzoneDomEls()' .. which worked on chrome, firefox but NOT safari or the PWA on ios simulator ... NO idea why
   onMount(() => {
@@ -6,27 +12,13 @@
     homeworkBtn.addEventListener("click", dropzonePopUp, { once: true }); // once logic?
   });
 
-  // import("$lib/Dropzone/dropzone.css");
-  // import { Dropzone } from "dropzone";
   export let uniqueId; // needed in order to instantiate multiple dropzones on one page
-
-  import {
-    cssToHead,
-    // isRunningStandalone
-  } from "$lib/utils";
-
-  import {
-    isDarkMode,
-    // showHomeworkModal
-  } from "$lib/store";
 
   export let text = "🔥";
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
   export let brightnessTW = "brightness-100";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
-
-  import InView from "$lib/InView.svelte";
 
   let dropzone;
 
@@ -119,15 +111,14 @@
   }
 
   function dropzonePopUp() {
-    let clicko = new CustomEvent("click");
-    setTimeout(() => {
-      // without the initially-undefined, global variable logic of 'window.clickoFiredOnce', the custom click event would fire twice on the homepage .. i guess because two dropzones were visible there (homepage and modal)
-      if (!window.clickoFiredOnce) {
+    // without the initially-undefined-variable logic of 'globalThis.clickoFiredOnce', the custom click event would fire twice on the homepage .. i guess because two dropzones were visible there (homepage and modal)
+    if (!globalThis.clickoFiredOnce) {
+      let clicko = new CustomEvent("click");
+      setTimeout(() => {
         document.querySelector(".dropzone").dispatchEvent(clicko);
-        // &&console.log("evento fired on", dropzone0);
-        window.clickoFiredOnce = true;
-      }
-    }, 50);
+        globalThis.clickoFiredOnce = true;
+      }, 50);
+    }
   }
 </script>
 

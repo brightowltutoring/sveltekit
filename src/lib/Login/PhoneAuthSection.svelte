@@ -21,8 +21,8 @@
   let isPhoneNumber = false;
 
   async function submitPhoneNumber(e) {
-    // userInputVisible alone allows for immediate change in dom; window.userInputVisible allows for persistence given that the component is destroyed (logincard is destroyed when modal closes)
-    window.userInputVisible = userInputVisible = true;
+    // phoneInputVisible alone allows for immediate change in dom; globalThis.phoneInputVisible allows for persistence given that the component is destroyed (logincard is destroyed when modal closes)
+    phoneInputVisible = globalThis.phoneInputVisible = true;
 
     let clickOrEnterFired = e.type == "click" || e.key == "Enter";
 
@@ -72,9 +72,12 @@
     }
   }
 
-  import { browser } from "$app/environment";
-  $: userInputVisible = browser && window.userInputVisible;
-  // userInputVisible controls the visibility of an input dom element; starts as false, but then persisted as true even when the component is destroyed ...thanks to storing the truthiness globally in window.userInputVisible (which is set to true on an onclick). Note: using 'window.userInputVisible' alone does not update DOM immediately (updates only on the next closing-openining of the modal), therefore need userInputVisible as well.
+  // import { browser } from "$app/environment";
+  // $: phoneInputVisible = browser && window.phoneInputVisible;
+  // phoneInputVisible controls the visibility of an input dom element; starts as false, but then persisted as true even when the component is destroyed ...thanks to storing the truthiness globally in window.phoneInputVisible (which is set to true on an onclick). Note: using 'window.phoneInputVisible' alone does not update DOM immediately (updates only on the next closing-openining of the modal), therefore need phoneInputVisible as well.
+
+  // Update: using the modern 'globalThis' instead of 'window' means I don't need to use the sveltekit browser check
+  let phoneInputVisible = globalThis.phoneInputVisible;
 </script>
 
 <!-- dec1,2022: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
@@ -95,7 +98,7 @@
   </div>
 
   <div class="grid grid-cols-6 w-full text-black">
-    {#if userInputVisible}
+    {#if phoneInputVisible}
       <input
         bind:value={countryCode}
         class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"
