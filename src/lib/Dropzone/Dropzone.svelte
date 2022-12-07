@@ -1,10 +1,9 @@
 <script>
   import { onMount } from "svelte";
-  // !!! Previously, instead of the eventlistener approach just below, I was using '$navHomeworkClicked && dropzonePopUp()' inside the intersection observer function 'hydrateDropzoneDomEls()' .. which worked on chrome, firefox but NOT safari or the PWA on ios simulator ... NO idea why ... assuming intersection observer is buggier on safari
+  // !!! Previously, instead of the eventlistener approach just below, I was using '$showHomeworkModal && dropzonePopUp()' inside the intersection observer function 'hydrateDropzoneDomEls()' .. which worked on chrome, firefox but NOT safari or the PWA on ios simulator ... NO idea why
   onMount(() => {
-    document
-      .querySelector('a[href="/homework"]')
-      .addEventListener("click", dropzonePopUp);
+    const homeworkBtn = document.querySelector('a[href="/homework"]');
+    homeworkBtn.addEventListener("click", dropzonePopUp, { once: true }); // once logic?
   });
 
   // import("$lib/Dropzone/dropzone.css");
@@ -18,7 +17,7 @@
 
   import {
     isDarkMode,
-    // navHomeworkClicked
+    // showHomeworkModal
   } from "$lib/store";
 
   export let text = "🔥";
@@ -42,14 +41,11 @@
     const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
 
     dropzone = new Dropzone("#default", {
-      // dropzone = new Dropzone(".dropzone:not(#default)", {
-      // dropzone = new Dropzone("#homeRouteDropzone", {
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
     });
 
-    dropzoneHandleErroredUploads();
-    // dropzoneHandleErroredUploads_OLD();
+    dropzoneHandleErroredUploads(); // dropzoneHandleErroredUploads_OLD();
 
     document.querySelector("#default").id = uniqueId;
   }
@@ -125,10 +121,9 @@
   function dropzonePopUp() {
     let clicko = new CustomEvent("click");
     setTimeout(() => {
-      let dropzone0 = document.querySelectorAll(".dropzone")[0];
       // without the initially-undefined, global variable logic of 'window.clickoFiredOnce', the custom click event would fire twice on the homepage .. i guess because two dropzones were visible there (homepage and modal)
       if (!window.clickoFiredOnce) {
-        dropzone0.dispatchEvent(clicko);
+        document.querySelector(".dropzone").dispatchEvent(clicko);
         // &&console.log("evento fired on", dropzone0);
         window.clickoFiredOnce = true;
       }

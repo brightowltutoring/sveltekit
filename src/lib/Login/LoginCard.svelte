@@ -18,7 +18,7 @@
     isLoggedIn,
     isDarkMode,
     elementColor,
-    navLoginClicked,
+    showLoginModal,
     // lessThan768,
   } from "$lib/store";
 
@@ -36,14 +36,14 @@
   let redirectAfterLoginTimeOut;
   let redirectSetInterval;
 
-  // !$navLoginClicked just means when unclicking login button ... rename at a future date?
-  $: if (!$navLoginClicked) {
+  // !$showLoginModal just means when unclicking login button ... rename at a future date?
+  $: if (!$showLoginModal) {
     clearInterval(redirectSetInterval);
     clearTimeout(redirectAfterLoginTimeOut);
   }
 
-  $: if ($navLoginClicked && $isLoggedIn) {
-    navLoginClickedRedirect(loggedInEmail);
+  $: if ($showLoginModal && $isLoggedIn) {
+    showLoginModalRedirect(loggedInEmail);
   }
 
   onMount(async () => {
@@ -58,7 +58,7 @@
       signInWithEmailLink(auth, email, window.location.href)
         .then(() => {
           window.localStorage.removeItem("emailForSignIn");
-          $navLoginClicked = true;
+          $showLoginModal = true;
         })
         .catch((error) => console.log("signInWithEmailLink:", error));
     }
@@ -82,7 +82,7 @@
       } else {
         localStorage.removeItem("redirectUrlFromLS"); // clears on logout only; stays even on refresh/exit!
         $isLoggedIn = false;
-        $navLoginClicked = false;
+        $showLoginModal = false;
         loggedInEmail = "";
 
         // console.log(`User is NOT signed in`);
@@ -108,13 +108,13 @@
     }, 1000);
 
     redirectAfterLoginTimeOut = setTimeout(() => {
-      $navLoginClicked = false;
+      $showLoginModal = false;
       document.getElementById("timeLeft").innerHTML = 3;
       goto(userRedirectUrl);
     }, redirectTimeInMS);
   }
 
-  async function navLoginClickedRedirect(userEmail) {
+  async function showLoginModalRedirect(userEmail) {
     let redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
     console.log("redirectUrlFromLS", redirectUrlFromLS);
 
@@ -149,7 +149,7 @@
 </script>
 
 {#if !$isLoggedIn}
-  {#key !noTransition && $navLoginClicked}
+  {#key !noTransition && $showLoginModal}
     <login-card
       in:slide={{ duration: 400, easing: quintOut }}
       class=" block relative text-xl hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
@@ -178,7 +178,7 @@
 {/if}
 
 {#if $isLoggedIn}
-  {#key !noTransition && $navLoginClicked}
+  {#key !noTransition && $showLoginModal}
     <logout-card
       in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
       class="relative block  hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode

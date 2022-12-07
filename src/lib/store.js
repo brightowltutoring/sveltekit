@@ -98,13 +98,13 @@ export function setInnerWidthViaMatchMedia(pixelWidth = 768) {
 }
 
 // these nav items only since theyre modals, rather than actual routes
-export const navLoginClicked = writable(false);
-export const navHomeworkClicked = writable(false);
+export const showLoginModal = writable(false);
+export const showHomeworkModal = writable(false);
 export const navAppClicked = writable(false);
 
 export function clearNavModals() {
-  navLoginClicked.set(false);
-  navHomeworkClicked.set(false);
+  showLoginModal.set(false);
+  showHomeworkModal.set(false);
   navAppClicked.set(false);
 }
 

@@ -19,8 +19,8 @@
     routes,
     setInnerWidthViaMatchMedia,
     lessThan768,
-    navLoginClicked,
-    navHomeworkClicked,
+    showLoginModal,
+    showHomeworkModal,
     navAppClicked,
   } from "$lib/store";
 
@@ -110,16 +110,16 @@
 
   <!-- WITHOUT bind I am able to keep state on the logincard ...which is useful for phone auth sms code logic, however annoyingly the svg icon color does not update back to default color when unclicking -->
 
-  <Modal bind:showModal={$navLoginClicked}>
+  <Modal bind:showModal={$showLoginModal}>
     <LoginCard />
   </Modal>
 
   <!-- previously used this if block due to multiple-dropzone-on-one-page-interference ..  -->
-  <!-- {#if $navHomeworkClicked} -->
-  <Modal bind:showModal={$navHomeworkClicked} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+  <!-- {#if $showHomeworkModal} -->
+  <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <Dropzone
       uniqueId={"modalDropzone"}
-      textSizeTW={"text-6xl yeetModal"}
+      textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
     />

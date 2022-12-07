@@ -1,5 +1,5 @@
 <script>
-  import { elementColor, navLoginClicked, isDarkMode } from "$lib/store";
+  import { elementColor, showLoginModal, isDarkMode } from "$lib/store";
 </script>
 
 <close-button
@@ -8,10 +8,10 @@
     ? 'bg-[#8f86b8] '
     : 'bg-red-200'}  "
   on:click={() => {
-    $navLoginClicked = false;
+    $showLoginModal = false;
   }}
   on:keydown={() => {
-    $navLoginClicked = false;
+    $showLoginModal = false;
   }}
 >
   <div

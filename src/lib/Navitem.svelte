@@ -9,8 +9,8 @@
 
   import { isRunningStandalone } from "$lib/utils";
   import {
-    navLoginClicked,
-    navHomeworkClicked,
+    showLoginModal,
+    showHomeworkModal,
     clearNavModals,
     // lessThan768,
   } from "./store";
@@ -30,12 +30,12 @@
     // sets the correct modal
     if (href == "/homework") {
       e.preventDefault();
-      $navHomeworkClicked = true;
+      $showHomeworkModal = true;
       return;
     }
     if (href == "/login") {
       e.preventDefault();
-      $navLoginClicked = true;
+      $showLoginModal = true;
       return;
     }
   }

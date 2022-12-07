@@ -15,8 +15,8 @@
     clearNavModals,
     elementColor,
     lessThan768,
-    navLoginClicked,
-    navHomeworkClicked,
+    showLoginModal,
+    showHomeworkModal,
   } from "$lib/store";
   import { spring } from "svelte/motion";
 
@@ -116,8 +116,8 @@
           bind:btnColorHover
           icon={$routes[KEY].icon}
           navIconClicked={($routes[KEY].href == "/homework" &&
-            $navHomeworkClicked) ||
-            ($routes[KEY].href == "/login" && $navLoginClicked) ||
+            $showHomeworkModal) ||
+            ($routes[KEY].href == "/login" && $showLoginModal) ||
             $routes[KEY].isCurrent}
         />
         <!-- TODO: do all these need to be 'bind:' -->
