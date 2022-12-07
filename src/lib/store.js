@@ -1,9 +1,3 @@
-// import IconHome from "$lib/Icons/IconHome.svelte";
-import IconLogin from "$lib/Icons/NavIcons/IconLogin.svelte";
-import IconPlans from "$lib/Icons/NavIcons/IconPlans.svelte";
-import IconHomework from "$lib/Icons/NavIcons/IconHomework.svelte";
-import IconClassroom from "$lib/Icons/NavIcons/IconClassroom.svelte";
-
 import { writable, derived, get } from "svelte/store";
 
 // const createWritableStore = (key, startValue) => {
@@ -113,6 +107,12 @@ export function clearNavModals() {
   navHomeworkClicked.set(false);
   navAppClicked.set(false);
 }
+
+// import IconHome from "$lib/Icons/IconHome.svelte";
+import IconLogin from "$lib/Icons/NavIcons/IconLogin.svelte";
+import IconPlans from "$lib/Icons/NavIcons/IconPlans.svelte";
+import IconHomework from "$lib/Icons/NavIcons/IconHomework.svelte";
+import IconClassroom from "$lib/Icons/NavIcons/IconClassroom.svelte";
 
 export const routes = writable({
   home: {

@@ -1,6 +1,10 @@
 <script>
-  export let navIconClicked = false;
-  export let href, content, btnColorHover, routes, icon;
+  export let href,
+    content,
+    routes,
+    btnColorHover,
+    icon,
+    navIconClicked = false;
   // bool, btnColor,
 
   import { isRunningStandalone } from "$lib/utils";
@@ -8,7 +12,7 @@
     navLoginClicked,
     navHomeworkClicked,
     clearNavModals,
-    lessThan768,
+    // lessThan768,
   } from "./store";
   import { page } from "$app/stores";
 
@@ -46,20 +50,17 @@
   {!isRunningStandalone() &&
     ` ${btnColorHover}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`} "
 >
-  <!-- TODO: removing this seems to do nothing?? -->
-  <!-- {bool &&
-    `${btnColor} border-b-1 rounded px-3 py-1`} -->
-  <!-- {#if !$lessThan768} -->
-  {#if !isRunningStandalone()}
-    {content}
-  {:else}
-    <!-- md:px-10 added in case downloaded on ipad/mac .. makes the icon buttons spaced out in top right corner of screen -->
+  <!-- {#if $lessThan768} -->
+  {#if isRunningStandalone()}
     <div
-      class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 active:animate-pulse md:px-10"
+      class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 md:px-10"
     >
       <svelte:component this={icon} bind:navIconClicked />
+      <!-- svg icon associated with nav item -->
 
       <span class="text-xs text-center">{content}</span>
     </div>
+  {:else}
+    {content}
   {/if}
 </a>

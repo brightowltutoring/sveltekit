@@ -1,4 +1,12 @@
 <script>
+  import { onMount } from "svelte";
+  // !!! Previously, instead of the eventlistener approach just below, I was using '$navHomeworkClicked && dropzonePopUp()' inside the intersection observer function 'hydrateDropzoneDomEls()' .. which worked on chrome, firefox but NOT safari or the PWA on ios simulator ... NO idea why ... assuming intersection observer is buggier on safari
+  onMount(() => {
+    document
+      .querySelector('a[href="/homework"]')
+      .addEventListener("click", dropzonePopUp);
+  });
+
   // import("$lib/Dropzone/dropzone.css");
   // import { Dropzone } from "dropzone";
   export let uniqueId; // needed in order to instantiate multiple dropzones on one page
@@ -8,7 +16,10 @@
     // isRunningStandalone
   } from "$lib/utils";
 
-  import { isDarkMode, navHomeworkClicked } from "$lib/store";
+  import {
+    isDarkMode,
+    // navHomeworkClicked
+  } from "$lib/store";
 
   export let text = "🔥";
   export let textSizeTW = "text-3xl";
@@ -38,6 +49,7 @@
     });
 
     dropzoneHandleErroredUploads();
+    // dropzoneHandleErroredUploads_OLD();
 
     document.querySelector("#default").id = uniqueId;
   }
@@ -68,6 +80,48 @@
     });
   }
 
+  function dropzoneHandleErroredUploads_OLD() {
+    dropzone.options.autoProcessQueue = false; // default set to true
+    dropzone.options.parallelUploads = 50;
+
+    // When online, proceed normally. Note: for some reason setTimeout is necessary .. something something js event cycle?
+    dropzone.on(
+      "addedfile",
+      () => navigator?.onLine && setTimeout(() => dropzone.processQueue(), 0)
+    );
+
+    // When coming back online proceed with uploading files in queue
+    window?.addEventListener("online", () => dropzone.processQueue());
+
+    // When internet cuts out mid-upload, collect 'errored' files (which are of the acceptable type) ...
+    let filesToRetry = [];
+    dropzone.on("error", (file) => file.accepted && filesToRetry.push(file));
+
+    // ... and reprocess files when internet comes back
+    window?.addEventListener("online", () => {
+      if (filesToRetry.length > 0) {
+        for (const file of filesToRetry) {
+          dropzone.processFile(file);
+
+          // removes error mark css after the files have been processed
+          file.previewElement.querySelector(".dz-error-mark").style.visibility =
+            "hidden";
+          // removes error message css after the files have been processed
+          file.previewElement.querySelector(
+            ".dz-error-message"
+          ).style.visibility = "hidden";
+        }
+
+        // reset collected files array when done
+        filesToRetry.length == 0;
+      }
+    });
+
+    // OLD WAY OF DOING 'file.accepted' logic; also required ACCEPTED_FILES_FRONTEND to be defined globally:
+    // let fileExt = file.name.split(".").pop(); // e.g png, md, txt
+    // if (ACCEPTED_FILES_FRONTEND.includes(fileExt)) filesToRetry.push(file);
+  }
+
   function dropzonePopUp() {
     let clicko = new CustomEvent("click");
     setTimeout(() => {
@@ -80,14 +134,6 @@
       }
     }, 50);
   }
-
-  import { onMount } from "svelte";
-  onMount(() => {
-    document
-      .querySelector('a[href="/homework"]')
-      .addEventListener("click", dropzonePopUp);
-  });
-  // !!! Previously, instead of the more vanilla-y eventlistener approach just above, I was using '$navHomeworkClicked && dropzonePopUp()' inside the intersection observer function 'hydrateDropzoneDomEls()' .. which worked on chrome, firefox but NOT safari or the PWA on ios simulator ... NO idea why ... assuming intersection observer is buggier on safari
 </script>
 
 <!-- dropzone doesnt work well with non-vanilla intersection observer logic, hence ... -->
@@ -118,47 +164,6 @@
   </div>
 </form>
 
-<!-- function OLD_WAY_dropzoneHandleErroredUploads() {
-  // dropzone.options.autoProcessQueue = false; // default set to true 
-  // dropzone.options.parallelUploads = 50;
-
-  // When online, proceed normally. Note: for some reason setTimeout is necessary .. something something js event cycle?
-
-  // dropzone.on("addedfile", () => navigator?.onLine &&
-  //   setTimeout(() => dropzone.processQueue(), 0)
-  // );
-
-  // When coming back online proceed with uploading files in queue
-  // window?.addEventListener("online", () => dropzone.processQueue());
-
-  // When internet cuts out mid-upload, collect 'errored' files (which are of the acceptable type) ...
-  let filesToRetry = [];
-  dropzone.on("error", (file) => file.accepted && filesToRetry.push(file));
-
-  // ... and reprocess files when internet comes back
-  window?.addEventListener("online", () => {
-    if (filesToRetry.length > 0) {
-      for (const file of filesToRetry) {
-        dropzone.processFile(file);
-
-        // removes error mark css after the files have been processed
-        file.previewElement.querySelector(".dz-error-mark").style.visibility =
-          "hidden";
-        // removes error message css after the files have been processed
-        file.previewElement.querySelector(
-          ".dz-error-message"
-        ).style.visibility = "hidden";
-      }
-
-      // reset collected files array when done
-      filesToRetry.length == 0;
-    }
-  });
-
-  // OLD WAY OF DOING 'file.accepted' logic; also required ACCEPTED_FILES_FRONTEND to be defined globally:
-  // let fileExt = file.name.split(".").pop(); // e.g png, md, txt
-  // if (ACCEPTED_FILES_FRONTEND.includes(fileExt)) filesToRetry.push(file);
-} -->
 <style>
   /* Oddly without specifiying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
   :global(.dropzone .dz-preview.dz-image-preview) {
