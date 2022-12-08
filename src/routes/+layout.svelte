@@ -1,13 +1,6 @@
 <script>
-  import { isDarkMode } from "./../lib/store.js";
-  import {
-    slide,
-    // fly, fade, blur, scale
-  } from "svelte/transition";
-  import {
-    elasticOut,
-    // quintOut
-  } from "svelte/easing";
+  import { slide, scale, fly, fade, blur } from "svelte/transition";
+  import { elasticOut, quintOut } from "svelte/easing";
   import "../app.css";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
@@ -23,6 +16,7 @@
     showLoginModal,
     showHomeworkModal,
     navAppClicked,
+    // isDarkMode
   } from "$lib/store";
 
   import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
@@ -100,25 +94,43 @@
 <main>
   <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
   {#if getOS() == "iOS"}
-    <Modal
-      showModal={$navAppClicked}
-      bgTint={$isDarkMode ? "bg-[#5262f7]" : "bg-[#a5adf5]"}
-    >
+    <Modal showModal={$navAppClicked} bgTint={"bg-[#6c79f4] text-white"}>
+      <!-- bgTint={$isDarkMode ? "bg-[#5262f7]" : "bg-[#a5adf5]"} -->
       {#key !$navAppClicked}
         <!-- bg-[#818cf8] -->
+        <!-- in:slide={{ duration: 1300, easing: elasticOut }} -->
         <div
-          in:slide={{ duration: 1300, easing: elasticOut }}
-          class="font-Poppins font-bold text-4xl sm:text-6xl  p-10"
+          in:fly={{ x: 100, duration: 1300, easing: elasticOut }}
+          class="font-Poppins text-5xl sm:text-6xl p-10 "
         >
           On iOS Safari 🚀
 
-          <ul class="pt-10">
-            <span>1.</span>
-            <li class="text-xl">
+          <ul class="pt-10 flex flex-col gap-y-10">
+            <li
+              class="text-xl font-bold"
+              in:fly={{
+                x: 100,
+                delay: 200,
+                duration: 1300,
+                easing: quintOut,
+              }}
+            >
+              <div class="text-6xl">1.</div>
               Click share icon (box-and-arrow) at the bottom of screen
             </li>
-            <span>2.</span>
-            <li class="text-xl">Click 'Add to Home Screen'</li>
+
+            <li
+              class="text-xl font-bold"
+              in:fly={{
+                x: 100,
+                delay: 400,
+                duration: 1000,
+                easing: quintOut,
+              }}
+            >
+              <div class="text-6xl">2.</div>
+              Click 'Add to Home Screen'
+            </li>
           </ul>
         </div>
       {/key}
