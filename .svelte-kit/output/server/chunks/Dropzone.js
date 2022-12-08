@@ -1,14 +1,25 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute } from "./index.js";
 import { I as InView, c as cssToHead } from "./utils.js";
-import { i as isDarkMode } from "./store.js";
+import { a as showHomeworkModal, i as isDarkMode } from "./store.js";
 const Dropzone_svelte_svelte_type_style_lang = "";
 const css = {
   code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}",
   map: null
 };
+function dropzonePopUp() {
+  let clicko = new CustomEvent("click");
+  setTimeout(
+    () => {
+      document.querySelector(".dropzone").dispatchEvent(clicko);
+    },
+    50
+  );
+}
 const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let boxShadowColor;
+  let $showHomeworkModal, $$unsubscribe_showHomeworkModal;
   let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => $showHomeworkModal = value);
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   let { uniqueId } = $$props;
   let daForm;
@@ -57,6 +68,8 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     $$bindings.brightnessTW(brightnessTW);
   $$result.css.add(css);
   boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
+  $showHomeworkModal && dropzonePopUp();
+  $$unsubscribe_showHomeworkModal();
   $$unsubscribe_isDarkMode();
   return `${validate_component(InView, "InView").$$render(
     $$result,

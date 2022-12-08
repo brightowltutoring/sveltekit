@@ -1,3 +1,4 @@
+<!-- Avoid using this vanilla approach .. makes event listener logic and other things more difficult -->
 <script>
   // let daForm;
   // import("$lib/Dropzone/dropzone.css");

@@ -114,8 +114,6 @@
     <LoginCard />
   </Modal>
 
-  <!-- previously used this if block due to multiple-dropzone-on-one-page-interference ..  -->
-  <!-- {#if $showHomeworkModal} -->
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <Dropzone
       uniqueId={"modalDropzone"}
@@ -124,7 +122,6 @@
       brightnessTW={"brightness-95"}
     />
   </Modal>
-  <!-- {/if} -->
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
   <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">

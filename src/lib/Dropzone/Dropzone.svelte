@@ -3,14 +3,27 @@
   // import { Dropzone } from "dropzone";
   import InView from "$lib/InView.svelte";
   import { cssToHead } from "$lib/utils";
-  import { isDarkMode } from "$lib/store";
+  import { isDarkMode, showHomeworkModal } from "$lib/store";
 
   import { onMount } from "svelte";
-  // !!! Previously, instead of the eventlistener approach just below, I was using '$showHomeworkModal && dropzonePopUp()' inside the intersection observer function 'hydrateDropzoneDomEls()' .. which worked on chrome, firefox but NOT safari or the PWA on ios simulator ... NO idea why
   onMount(() => {
-    const homeworkBtn = document.querySelector('a[href="/homework"]');
-    homeworkBtn.addEventListener("click", dropzonePopUp, { once: true }); // once logic?
+    document
+      .querySelector('a[href="/homework"]')
+      .addEventListener("click", dropzonePopUp, { once: true });
   });
+
+  function dropzonePopUp() {
+    let clicko = new CustomEvent("click");
+    setTimeout(() => {
+      document.querySelector(".dropzone").dispatchEvent(clicko);
+    }, 50);
+  }
+
+  // Unorthodox alternative to using onmMount + eventListener with once attribute ...as above
+  // $: if ($showHomeworkModal && !globalThis.onceBoolean) {
+  //   dropzonePopUp();
+  //   globalThis.onceBoolean = true;
+  // }
 
   export let uniqueId; // needed in order to instantiate multiple dropzones on one page
   let daForm;
@@ -36,10 +49,9 @@
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
     });
+    daForm.id = uniqueId;
 
     dropzoneHandleErroredUploads();
-
-    daForm.id = uniqueId;
   }
 
   // Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
@@ -68,16 +80,16 @@
     });
   }
 
-  function dropzonePopUp() {
-    // without the initially-undefined-variable logic of 'globalThis.clickoFiredOnce', the custom click event would fire twice on the homepage .. i guess because two dropzones were visible there (homepage and modal)
-    if (!globalThis.clickoFiredOnce) {
-      let clicko = new CustomEvent("click");
-      setTimeout(() => {
-        document.querySelector(".dropzone").dispatchEvent(clicko);
-        globalThis.clickoFiredOnce = true;
-      }, 50);
-    }
-  }
+  // function dropzonePopUp_OLD() {
+  //   // without the initially-undefined-variable logic of 'globalThis.clickoFiredOnce', the custom click event would fire twice on the homepage .. this appears to be a problem when using the vanilla intersection observer logic over the NOW slotted version (i.e. wrapping form with the Inview component)
+  //   if (!globalThis.clickoFiredOnce) {
+  //     let clicko = new CustomEvent("click");
+  //     setTimeout(() => {
+  //       document.querySelector(".dropzone").dispatchEvent(clicko);
+  //       globalThis.clickoFiredOnce = true;
+  //     }, 50);
+  //   }
+  // }
 </script>
 
 <InView once onview={hydrateDropzoneDomEls} margin={"400px"} threshold={1}>
