@@ -1,4 +1,5 @@
 <script>
+  import { isDarkMode } from "./../lib/store.js";
   import {
     slide,
     // fly, fade, blur, scale
@@ -99,11 +100,15 @@
 <main>
   <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
   {#if getOS() == "iOS"}
-    <Modal showModal={$navAppClicked} bgTint={"bg-[#818cf8]"}>
+    <Modal
+      showModal={$navAppClicked}
+      bgTint={$isDarkMode ? "bg-[#5262f7]" : "bg-[#a5adf5]"}
+    >
       {#key !$navAppClicked}
+        <!-- bg-[#818cf8] -->
         <div
           in:slide={{ duration: 1300, easing: elasticOut }}
-          class=" font-Poppins font-bold text-6xl sm:text-6xl  p-10"
+          class="font-Poppins font-bold text-4xl sm:text-6xl  p-10"
         >
           On iOS Safari 🚀
 

@@ -47,7 +47,7 @@
   function handleAppNavClick() {
     clearNavModals();
     $navAppClicked = true;
-    setTimeout(() => clearNavModals(), 15000);
+    // setTimeout(() => clearNavModals(), 15000);
   }
 
   let btnColor = "sm:bg-red-300 rounded";
