@@ -5,28 +5,18 @@
   import { cssToHead } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
 
-  import { onMount } from "svelte";
-  onMount(() => {
-    document
-      .querySelector('a[href="/homework"]')
-      .addEventListener("click", dropzonePopUp, { once: true });
-  });
+  // import { onMount } from "svelte";
+  // onMount(() => {
+  //   document
+  //     .querySelector('a[href="/homework"]')
+  //     .addEventListener("click", dropzonePopUpOnce);
+  // });
+  // TODO: Note: using {once:true} inside the event listener would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
 
-  function dropzonePopUp() {
-    let clicko = new CustomEvent("click");
-    setTimeout(() => {
-      document.querySelector(".dropzone").dispatchEvent(clicko);
-    }, 50);
-  }
-
-  // Unorthodox alternative to using onmMount + eventListener with once attribute ...as above
-  // $: if ($showHomeworkModal && !globalThis.onceBoolean) {
-  //   dropzonePopUp();
-  //   globalThis.onceBoolean = true;
-  // }
+  // Alternative to the vanilla-y eventListener logic commented out above.
+  $: $showHomeworkModal && dropzonePopUpOnce();
 
   export let uniqueId; // needed in order to instantiate multiple dropzones on one page
-  let daForm;
   let dropzone;
 
   export let text = "🔥";
@@ -35,7 +25,7 @@
   export let brightnessTW = "brightness-100";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
-  async function hydrateDropzoneDomEls() {
+  async function hydrateDropzoneDomEls(target) {
     console.log("drop it like its 🔥");
 
     cssToHead("dropzoneCSS", "/dropzone.css"); // await import("$lib/Dropzone/dropzone.css");
@@ -45,11 +35,13 @@
     const { Dropzone } = await import("dropzone");
     const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
 
-    dropzone = new Dropzone(daForm, {
+    dropzone = new Dropzone(target, {
+      // dropzone = new Dropzone(daForm, {
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
     });
-    daForm.id = uniqueId;
+
+    target.id = uniqueId;
 
     dropzoneHandleErroredUploads();
   }
@@ -80,8 +72,21 @@
     });
   }
 
-  // function dropzonePopUp_OLD() {
-  //   // without the initially-undefined-variable logic of 'globalThis.clickoFiredOnce', the custom click event would fire twice on the homepage .. this appears to be a problem when using the vanilla intersection observer logic over the NOW slotted version (i.e. wrapping form with the Inview component)
+  function dropzonePopUpOnce() {
+    let clicko = new CustomEvent("click");
+
+    // The enclosed code fires once since 'globalThis.onceBoolean' starts out as undefined, then switched to true inside
+    if (!globalThis.onceBoolean) {
+      setTimeout(() => {
+        document.querySelector(".dropzone").dispatchEvent(clicko);
+      }, 50);
+
+      globalThis.onceBoolean = true;
+    }
+  }
+
+  // function dropzonePopUpOnce_OLD() {
+  //   // without the initially-undefined-variable logic of 'globalThis.clickoFiredOnce', the custom click event would fire twice on the homepage .. this appears to be a problem when using the vanilla intersection observer logic over the NOW slotted version ..specifically multiple dropzone instances seem to interfere using the vanilla mode of InView
   //   if (!globalThis.clickoFiredOnce) {
   //     let clicko = new CustomEvent("click");
   //     setTimeout(() => {
@@ -92,9 +97,14 @@
   // }
 </script>
 
-<InView once onview={hydrateDropzoneDomEls} margin={"400px"} threshold={1}>
+<InView
+  single
+  onview={(target) => hydrateDropzoneDomEls(target)}
+  once
+  margin={"400px"}
+  threshold={1}
+>
   <form
-    bind:this={daForm}
     method="post"
     style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
     class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"

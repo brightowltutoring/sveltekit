@@ -1,47 +1,49 @@
-import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape, d as add_attribute } from "./index.js";
+import { c as create_ssr_component, a as subscribe, v as validate_component, e as escape } from "./index.js";
 import { I as InView, c as cssToHead } from "./utils.js";
-import { a as showHomeworkModal, i as isDarkMode } from "./store.js";
+import { i as isDarkMode, a as showHomeworkModal } from "./store.js";
 const Dropzone_svelte_svelte_type_style_lang = "";
 const css = {
   code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}",
   map: null
 };
-function dropzonePopUp() {
+function dropzonePopUpOnce() {
   let clicko = new CustomEvent("click");
-  setTimeout(
-    () => {
-      document.querySelector(".dropzone").dispatchEvent(clicko);
-    },
-    50
-  );
+  if (!globalThis.onceBoolean) {
+    setTimeout(
+      () => {
+        document.querySelector(".dropzone").dispatchEvent(clicko);
+      },
+      50
+    );
+    globalThis.onceBoolean = true;
+  }
 }
 const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let boxShadowColor;
-  let $showHomeworkModal, $$unsubscribe_showHomeworkModal;
   let $isDarkMode, $$unsubscribe_isDarkMode;
-  $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => $showHomeworkModal = value);
+  let $showHomeworkModal, $$unsubscribe_showHomeworkModal;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => $showHomeworkModal = value);
   let { uniqueId } = $$props;
-  let daForm;
   let dropzone;
   let { text = "\u{1F525}" } = $$props;
   let { textSizeTW = "text-3xl" } = $$props;
   let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
   let { brightnessTW = "brightness-100" } = $$props;
-  async function hydrateDropzoneDomEls() {
+  async function hydrateDropzoneDomEls(target) {
     console.log("drop it like its \u{1F525}");
     cssToHead("dropzoneCSS", "/dropzone.css");
     const { Dropzone: Dropzone2 } = await import("dropzone");
     const { PUBLIC_UPLOAD_ENDPOINT } = await import("./public.js");
     dropzone = new Dropzone2(
-      daForm,
+      target,
       {
         url: PUBLIC_UPLOAD_ENDPOINT,
         acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc"
       }
     );
+    target.id = uniqueId;
     dropzoneHandleErroredUploads();
-    daForm.id = uniqueId;
   }
   function dropzoneHandleErroredUploads() {
     let filesToRetry = [];
@@ -67,22 +69,23 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   if ($$props.brightnessTW === void 0 && $$bindings.brightnessTW && brightnessTW !== void 0)
     $$bindings.brightnessTW(brightnessTW);
   $$result.css.add(css);
+  $showHomeworkModal && dropzonePopUpOnce();
   boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
-  $showHomeworkModal && dropzonePopUp();
-  $$unsubscribe_showHomeworkModal();
   $$unsubscribe_isDarkMode();
+  $$unsubscribe_showHomeworkModal();
   return `${validate_component(InView, "InView").$$render(
     $$result,
     {
+      single: true,
+      onview: (target) => hydrateDropzoneDomEls(target),
       once: true,
-      onview: hydrateDropzoneDomEls,
       margin: "400px",
       threshold: 1
     },
     {},
     {
       default: () => {
-        return `<form method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}"${add_attribute("this", daForm, 0)}>
+        return `<form method="${"post"}" style="${"box-shadow: inset 0 -10px 10px " + escape(boxShadowColor, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + escape(brightnessTW, true) + " " + escape(textSizeTW, true) + " " + escape(dimensionsTW, true) + " mx-auto group"}">
     <div class="${"dz-message font-Nunito group-hover:animate-pulse"}" data-dz-message>${escape(text)}</div></form>`;
       }
     }
