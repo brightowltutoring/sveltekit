@@ -2,7 +2,7 @@ import { c as create_ssr_component, a as subscribe, e as escape, j as each, v as
 import { P as PlansComponent } from "../../chunks/PlansComponent.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { i as isDarkMode } from "../../chunks/store.js";
-import { I as InView } from "../../chunks/InView.js";
+import { I as InView } from "../../chunks/utils.js";
 const reviewCreator_svx_svelte_type_style_lang = "";
 const css$1 = {
   code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
@@ -180,7 +180,7 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     $$result,
     {
       text: "Drop it like it's \u{1F525}",
-      textSizeTW: "text-2xl yeetHome",
+      textSizeTW: "text-2xl",
       uniqueId: "homeRouteDropzone"
     },
     {},
