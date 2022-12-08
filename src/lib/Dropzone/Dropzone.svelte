@@ -84,17 +84,6 @@
       globalThis.onceBoolean = true;
     }
   }
-
-  // function dropzonePopUpOnce_OLD() {
-  //   // without the initially-undefined-variable logic of 'globalThis.clickoFiredOnce', the custom click event would fire twice on the homepage .. this appears to be a problem when using the vanilla intersection observer logic over the NOW slotted version ..specifically multiple dropzone instances seem to interfere using the vanilla mode of InView
-  //   if (!globalThis.clickoFiredOnce) {
-  //     let clicko = new CustomEvent("click");
-  //     setTimeout(() => {
-  //       document.querySelector(".dropzone").dispatchEvent(clicko);
-  //       globalThis.clickoFiredOnce = true;
-  //     }, 50);
-  //   }
-  // }
 </script>
 
 <InView

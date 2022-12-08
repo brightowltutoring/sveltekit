@@ -24,14 +24,14 @@
     navAppClicked,
   } from "$lib/store";
 
-  import { disableZoomGestures, isRunningStandalone, getOS } from "$lib/utils";
+  import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
 
   onMount(() => {
-    $lessThan768 && disableZoomGestures();
-    // isRunningStandalone() && disableZoomGestures();
+    // $lessThan768 && disableZoomGestures();
+    (isRunningStandalone() || $lessThan768) && disableZoomGestures();
     setInnerWidthViaMatchMedia();
     // alert(getOS());
     // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
@@ -97,16 +97,28 @@
 />
 
 <main>
-  <Modal showModal={$navAppClicked} bgTint={"bg-[#818cf8]"}>
-    {#key !$navAppClicked}
-      <div
-        in:slide={{ duration: 1300, easing: elasticOut }}
-        class=" font-Poppins font-bold text-5xl sm:text-6xl text-center p-10"
-      >
-        Coming soon! 🚀
-      </div>
-    {/key}
-  </Modal>
+  <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
+  {#if getOS() == "iOS"}
+    <Modal showModal={$navAppClicked} bgTint={"bg-[#818cf8]"}>
+      {#key !$navAppClicked}
+        <div
+          in:slide={{ duration: 1300, easing: elasticOut }}
+          class=" font-Poppins font-bold text-6xl sm:text-6xl  p-10"
+        >
+          On iOS Safari 🚀
+
+          <ul class="pt-10">
+            <span>1.</span>
+            <li class="text-xl">
+              Click share icon (box-and-arrow) at the bottom of screen
+            </li>
+            <span>2.</span>
+            <li class="text-xl">Click 'Add to Home Screen'</li>
+          </ul>
+        </div>
+      {/key}
+    </Modal>
+  {/if}
 
   <!-- WITHOUT bind I am able to keep state on the logincard ...which is useful for phone auth sms code logic, however annoyingly the svg icon color does not update back to default color when unclicking -->
 
@@ -130,6 +142,7 @@
 
   <!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->
   <!-- TODO: this padding is not needed for smaller than md -->
+
   <div class="px-[7%] pt-32 md:block">
     <slot />
     <Footer />
