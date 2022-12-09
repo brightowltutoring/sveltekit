@@ -99,40 +99,46 @@
       {#key !$navAppClicked}
         <!-- bg-[#818cf8] -->
         <!-- in:slide={{ duration: 1300, easing: elasticOut }} -->
-        <div
-          in:fly={{ x: 100, duration: 1300, easing: elasticOut }}
-          class="font-Poppins text-5xl sm:text-6xl p-10 "
-        >
-          On iOS Safari 🚀
 
-          <ul class="pt-10 flex flex-col gap-y-10">
-            <li
-              class="text-xl font-bold"
-              in:fly={{
-                x: 100,
-                delay: 200,
-                duration: 1300,
-                easing: quintOut,
-              }}
-            >
-              <div class="text-6xl">1.</div>
-              Click share icon (box-and-arrow) at the bottom of screen
-            </li>
+        <!-- in:fly={{ x: 100, duration: 1300, easing: elasticOut }} -->
+        <ul class="p-10 flex flex-col gap-y-8 font-Poppins  sm:text-6xl">
+          <li
+            class="text-xl font-bold"
+            in:scale={{
+              x: 100,
+              duration: 1300,
+              easing: elasticOut,
+            }}
+          >
+            <div class="text-6xl">1.</div>
+            Open Safari
+          </li>
+          <li
+            class="text-xl font-bold"
+            in:fly={{
+              x: 100,
+              delay: 1000,
+              duration: 1000,
+              easing: quintOut,
+            }}
+          >
+            <div class="text-6xl">2.</div>
+            Click share icon (box-and-arrow at bottom of the screen)
+          </li>
 
-            <li
-              class="text-xl font-bold"
-              in:fly={{
-                x: 100,
-                delay: 400,
-                duration: 1000,
-                easing: quintOut,
-              }}
-            >
-              <div class="text-6xl">2.</div>
-              Click 'Add to Home Screen'
-            </li>
-          </ul>
-        </div>
+          <li
+            class="text-xl font-bold"
+            in:fly={{
+              x: -100,
+              delay: 2800,
+              duration: 400,
+              easing: quintOut,
+            }}
+          >
+            <div class="text-6xl">3.</div>
+            Click 'Add to Home Screen' 🚀
+          </li>
+        </ul>
       {/key}
     </Modal>
   {/if}
