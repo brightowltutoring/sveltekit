@@ -16,32 +16,26 @@
   // Alternative to the vanilla-y eventListener logic commented out above.
   $: $showHomeworkModal && dropzonePopUpOnce();
 
-  export let uniqueId; // needed in order to instantiate multiple dropzones on one page
-  let dropzone;
-
   export let text = "🔥";
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
   export let brightnessTW = "brightness-100";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
+  let dropzone;
+
   async function hydrateDropzoneDomEls(target) {
     console.log("drop it like its 🔥");
 
-    cssToHead("dropzoneCSS", "/dropzone.css"); // await import("$lib/Dropzone/dropzone.css");
-    // Dynamic import of 'dropzone.css' crashes when using InView.svelte with this function; it appears to be an issue with vite's 'npm run build'; oddly works fine with 'npm run dev'
-    // WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
+    cssToHead("dropzoneCSS", "/dropzone.css"); // Dynamic import of 'dropzone.css' crashes with vite's 'npm run build'; oddly works fine with 'npm run dev'. WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
 
-    const { Dropzone } = await import("dropzone");
     const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
+    const { Dropzone } = await import("dropzone");
 
     dropzone = new Dropzone(target, {
-      // dropzone = new Dropzone(daForm, {
       url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
     });
-
-    target.id = uniqueId;
 
     dropzoneHandleErroredUploads();
   }
@@ -73,12 +67,12 @@
   }
 
   function dropzonePopUpOnce() {
-    let clicko = new CustomEvent("click");
-
-    // The enclosed code fires once since 'globalThis.onceBoolean' starts out as undefined, then switched to true inside
+    // This code fires once since 'globalThis.onceBoolean' starts out as undefined, then switched to true inside
     if (!globalThis.onceBoolean) {
       setTimeout(() => {
-        document.querySelector(".dropzone").dispatchEvent(clicko);
+        document
+          .querySelector(".dropzone")
+          .dispatchEvent(new CustomEvent("click"));
       }, 50);
 
       globalThis.onceBoolean = true;
@@ -86,13 +80,7 @@
   }
 </script>
 
-<InView
-  single
-  onview={(target) => hydrateDropzoneDomEls(target)}
-  once
-  margin={"400px"}
-  threshold={1}
->
+<InView single onview={hydrateDropzoneDomEls} once margin={"0px"}>
   <form
     method="post"
     style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
@@ -115,7 +103,7 @@
 </InView>
 
 <style>
-  /* Oddly without specifiying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
+  /* Oddly without specifying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
   :global(.dropzone .dz-preview.dz-image-preview) {
     background-color: transparent !important;
   }

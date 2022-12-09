@@ -158,8 +158,8 @@
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+    <!-- uniqueId={"modalDropzone"} -->
     <Dropzone
-      uniqueId={"modalDropzone"}
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}

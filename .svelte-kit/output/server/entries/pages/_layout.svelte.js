@@ -375,20 +375,36 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 
-<main>${validate_component(Modal, "Modal").$$render(
+<main>
+  ${getOS() == "iOS" ? `
+
+    ${validate_component(Modal, "Modal").$$render(
       $$result,
       {
         showModal: $navAppClicked,
-        bgTint: "bg-[#818cf8]"
+        bgTint: "text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"
       },
       {},
       {
         default: () => {
-          return `<div class="${"font-Poppins font-bold text-5xl sm:text-6xl text-center p-10"}">Coming soon! \u{1F680}
-      </div>`;
+          return `
+      
+        
+
+        
+        <ul class="${"p-10 flex flex-col gap-y-8 font-Poppins sm:text-6xl"}"><li class="${"text-xl font-bold"}"><div class="${"text-6xl"}">1.</div>
+            Open Safari
+          </li>
+          <li class="${"text-xl font-bold"}"><div class="${"text-6xl"}">2.</div>
+            Click share icon (box-and-arrow at bottom of the screen)
+          </li>
+
+          <li class="${"text-xl font-bold text-black"}"><div class="${"text-6xl "}">3.</div>
+            Click &#39;Add to Home Screen&#39; \u{1F680}
+          </li></ul>`;
         }
       }
-    )}
+    )}` : ``}
 
   
 
@@ -422,10 +438,10 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       },
       {
         default: () => {
-          return `${validate_component(Dropzone, "Dropzone").$$render(
+          return `
+    ${validate_component(Dropzone, "Dropzone").$$render(
             $$result,
             {
-              uniqueId: "modalDropzone",
               textSizeTW: "text-6xl",
               dimensionsTW: "w-[80vw] h-[85vh]",
               brightnessTW: "brightness-95"
@@ -442,6 +458,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
   
   
+
   <div class="${"px-[7%] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}
     ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}</div>
 

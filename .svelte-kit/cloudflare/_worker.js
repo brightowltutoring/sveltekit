@@ -877,6 +877,32 @@ var init_store = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/public.js
+var public_exports = {};
+__export(public_exports, {
+  PUBLIC_FIREBASE_apiKey: () => PUBLIC_FIREBASE_apiKey,
+  PUBLIC_FIREBASE_appId: () => PUBLIC_FIREBASE_appId,
+  PUBLIC_FIREBASE_authDomain: () => PUBLIC_FIREBASE_authDomain,
+  PUBLIC_FIREBASE_messagingSenderId: () => PUBLIC_FIREBASE_messagingSenderId,
+  PUBLIC_FIREBASE_projectId: () => PUBLIC_FIREBASE_projectId,
+  PUBLIC_FIREBASE_storageBucket: () => PUBLIC_FIREBASE_storageBucket,
+  PUBLIC_STRIPE_KEY: () => PUBLIC_STRIPE_KEY,
+  PUBLIC_UPLOAD_ENDPOINT: () => PUBLIC_UPLOAD_ENDPOINT
+});
+var PUBLIC_FIREBASE_apiKey, PUBLIC_FIREBASE_authDomain, PUBLIC_FIREBASE_projectId, PUBLIC_FIREBASE_storageBucket, PUBLIC_FIREBASE_messagingSenderId, PUBLIC_FIREBASE_appId, PUBLIC_STRIPE_KEY, PUBLIC_UPLOAD_ENDPOINT;
+var init_public = __esm({
+  ".svelte-kit/output/server/chunks/public.js"() {
+    PUBLIC_FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
+    PUBLIC_FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
+    PUBLIC_FIREBASE_projectId = "thinksolve-app";
+    PUBLIC_FIREBASE_storageBucket = "thinksolve-app.appspot.com";
+    PUBLIC_FIREBASE_messagingSenderId = "490986955869";
+    PUBLIC_FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
+    PUBLIC_STRIPE_KEY = "pk_live_jSWXLtQJOoDeKiw3oRF9CuCs00PsrnADWR";
+    PUBLIC_UPLOAD_ENDPOINT = "https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable";
+  }
+});
+
 // node_modules/just-extend/index.esm.js
 function extend() {
   var args = [].slice.call(arguments);
@@ -2681,39 +2707,12 @@ var init_dropzone = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/public.js
-var public_exports = {};
-__export(public_exports, {
-  PUBLIC_FIREBASE_apiKey: () => PUBLIC_FIREBASE_apiKey,
-  PUBLIC_FIREBASE_appId: () => PUBLIC_FIREBASE_appId,
-  PUBLIC_FIREBASE_authDomain: () => PUBLIC_FIREBASE_authDomain,
-  PUBLIC_FIREBASE_messagingSenderId: () => PUBLIC_FIREBASE_messagingSenderId,
-  PUBLIC_FIREBASE_projectId: () => PUBLIC_FIREBASE_projectId,
-  PUBLIC_FIREBASE_storageBucket: () => PUBLIC_FIREBASE_storageBucket,
-  PUBLIC_STRIPE_KEY: () => PUBLIC_STRIPE_KEY,
-  PUBLIC_UPLOAD_ENDPOINT: () => PUBLIC_UPLOAD_ENDPOINT
-});
-var PUBLIC_FIREBASE_apiKey, PUBLIC_FIREBASE_authDomain, PUBLIC_FIREBASE_projectId, PUBLIC_FIREBASE_storageBucket, PUBLIC_FIREBASE_messagingSenderId, PUBLIC_FIREBASE_appId, PUBLIC_STRIPE_KEY, PUBLIC_UPLOAD_ENDPOINT;
-var init_public = __esm({
-  ".svelte-kit/output/server/chunks/public.js"() {
-    PUBLIC_FIREBASE_apiKey = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
-    PUBLIC_FIREBASE_authDomain = "thinksolve-app.firebaseapp.com";
-    PUBLIC_FIREBASE_projectId = "thinksolve-app";
-    PUBLIC_FIREBASE_storageBucket = "thinksolve-app.appspot.com";
-    PUBLIC_FIREBASE_messagingSenderId = "490986955869";
-    PUBLIC_FIREBASE_appId = "1:490986955869:web:433c6f7b31865fed5099b4";
-    PUBLIC_STRIPE_KEY = "pk_live_jSWXLtQJOoDeKiw3oRF9CuCs00PsrnADWR";
-    PUBLIC_UPLOAD_ENDPOINT = "https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable";
-  }
-});
-
 // .svelte-kit/output/server/chunks/Dropzone.js
 function dropzonePopUpOnce() {
-  let clicko = new CustomEvent("click");
   if (!globalThis.onceBoolean) {
     setTimeout(
       () => {
-        document.querySelector(".dropzone").dispatchEvent(clicko);
+        document.querySelector(".dropzone").dispatchEvent(new CustomEvent("click"));
       },
       50
     );
@@ -2736,17 +2735,16 @@ var init_Dropzone = __esm({
       let $showHomeworkModal, $$unsubscribe_showHomeworkModal;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
       $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => $showHomeworkModal = value);
-      let { uniqueId } = $$props;
-      let dropzone;
       let { text: text2 = "\u{1F525}" } = $$props;
       let { textSizeTW = "text-3xl" } = $$props;
       let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
       let { brightnessTW = "brightness-100" } = $$props;
+      let dropzone;
       async function hydrateDropzoneDomEls(target) {
         console.log("drop it like its \u{1F525}");
         cssToHead("dropzoneCSS", "/dropzone.css");
-        const { Dropzone: Dropzone2 } = await Promise.resolve().then(() => (init_dropzone(), dropzone_exports));
         const { PUBLIC_UPLOAD_ENDPOINT: PUBLIC_UPLOAD_ENDPOINT2 } = await Promise.resolve().then(() => (init_public(), public_exports));
+        const { Dropzone: Dropzone2 } = await Promise.resolve().then(() => (init_dropzone(), dropzone_exports));
         dropzone = new Dropzone2(
           target,
           {
@@ -2754,7 +2752,6 @@ var init_Dropzone = __esm({
             acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc"
           }
         );
-        target.id = uniqueId;
         dropzoneHandleErroredUploads();
       }
       function dropzoneHandleErroredUploads() {
@@ -2770,8 +2767,6 @@ var init_Dropzone = __esm({
           }
         });
       }
-      if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
-        $$bindings.uniqueId(uniqueId);
       if ($$props.text === void 0 && $$bindings.text && text2 !== void 0)
         $$bindings.text(text2);
       if ($$props.textSizeTW === void 0 && $$bindings.textSizeTW && textSizeTW !== void 0)
@@ -2789,10 +2784,9 @@ var init_Dropzone = __esm({
         $$result,
         {
           single: true,
-          onview: (target) => hydrateDropzoneDomEls(target),
+          onview: hydrateDropzoneDomEls,
           once: true,
-          margin: "400px",
-          threshold: 1
+          margin: "0px"
         },
         {},
         {
@@ -13075,20 +13069,36 @@ var init_layout_svelte = __esm({
 
 
 
-<main>${validate_component(Modal, "Modal").$$render(
+<main>
+  ${getOS() == "iOS" ? `
+
+    ${validate_component(Modal, "Modal").$$render(
           $$result,
           {
             showModal: $navAppClicked,
-            bgTint: "bg-[#818cf8]"
+            bgTint: "text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"
           },
           {},
           {
             default: () => {
-              return `<div class="${"font-Poppins font-bold text-5xl sm:text-6xl text-center p-10"}">Coming soon! \u{1F680}
-      </div>`;
+              return `
+      
+        
+
+        
+        <ul class="${"p-10 flex flex-col gap-y-8 font-Poppins sm:text-6xl"}"><li class="${"text-xl font-bold"}"><div class="${"text-6xl"}">1.</div>
+            Open Safari
+          </li>
+          <li class="${"text-xl font-bold"}"><div class="${"text-6xl"}">2.</div>
+            Click share icon (box-and-arrow at bottom of the screen)
+          </li>
+
+          <li class="${"text-xl font-bold text-black"}"><div class="${"text-6xl "}">3.</div>
+            Click &#39;Add to Home Screen&#39; \u{1F680}
+          </li></ul>`;
             }
           }
-        )}
+        )}` : ``}
 
   
 
@@ -13122,10 +13132,10 @@ var init_layout_svelte = __esm({
           },
           {
             default: () => {
-              return `${validate_component(Dropzone, "Dropzone").$$render(
+              return `
+    ${validate_component(Dropzone, "Dropzone").$$render(
                 $$result,
                 {
-                  uniqueId: "modalDropzone",
                   textSizeTW: "text-6xl",
                   dimensionsTW: "w-[80vw] h-[85vh]",
                   brightnessTW: "brightness-95"
@@ -13142,6 +13152,7 @@ var init_layout_svelte = __esm({
 
   
   
+
   <div class="${"px-[7%] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}
     ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}</div>
 
@@ -13176,9 +13187,9 @@ var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-1dffe789.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-1dffe789.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Dropzone-7f941f90.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/LoginCard-169786e8.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
-    stylesheets = ["_app/immutable/assets/_layout-1de97219.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-21f4ab48.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-21f4ab48.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Dropzone-3e249038.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/LoginCard-169786e8.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
+    stylesheets = ["_app/immutable/assets/_layout-f56b309e.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff"];
   }
 });
@@ -13561,19 +13572,15 @@ ${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
     <div id="${"step1"}" class="${"hover:scale-105 duration-500 grid place-content-center"}"><button class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></button>
 
       
-      
-      
       ${validate_component(Dropzone, "Dropzone").$$render(
         $$result,
         {
           text: "Drop it like it's \u{1F525}",
-          textSizeTW: "text-2xl",
-          uniqueId: "homeRouteDropzone"
+          textSizeTW: "text-2xl"
         },
         {},
         {}
-      )}
-      </div>
+      )}</div>
 
     
     <div id="${"step2"}" class="${"duration-500 grid place-content-center"}"><button class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></button>
@@ -13620,8 +13627,8 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-f0b90059.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-f0b90059.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/PlansComponent-2d3ca242.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/Dropzone-7f941f90.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-b780ed30.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-b780ed30.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/PlansComponent-2d3ca242.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/Dropzone-3e249038.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
     stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts3 = [];
   }
@@ -15209,7 +15216,8 @@ var init_page_svelte5 = __esm({
     init_chunks();
     init_Dropzone();
     Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(Dropzone, "Dropzone").$$render($$result, { uniqueId: "homeworkRouteDropzone" }, {}, {})}`;
+      return `
+${validate_component(Dropzone, "Dropzone").$$render($$result, {}, {}, {})}`;
     });
   }
 });
@@ -15229,8 +15237,8 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-69eabd3f.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-69eabd3f.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Dropzone-7f941f90.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-8ce003bd.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-8ce003bd.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Dropzone-3e249038.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js"];
     stylesheets7 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts7 = [];
   }
@@ -32448,7 +32456,7 @@ var Server = class {
       app_template,
       app_template_contains_nonce: false,
       error_template,
-      version: "1670534248184"
+      version: "1670563718060"
     };
   }
   async init({ env }) {
@@ -32483,7 +32491,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "facepalm.gif", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "service-worker.js"]),
   mimeTypes: { ".css": "text/css", ".gif": "image/gif", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-4e5c8860.js", "imports": ["_app/immutable/start-4e5c8860.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-90bacf41.js", "imports": ["_app/immutable/start-90bacf41.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

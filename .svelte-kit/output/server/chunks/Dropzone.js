@@ -7,11 +7,10 @@ const css = {
   map: null
 };
 function dropzonePopUpOnce() {
-  let clicko = new CustomEvent("click");
   if (!globalThis.onceBoolean) {
     setTimeout(
       () => {
-        document.querySelector(".dropzone").dispatchEvent(clicko);
+        document.querySelector(".dropzone").dispatchEvent(new CustomEvent("click"));
       },
       50
     );
@@ -24,17 +23,16 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   let $showHomeworkModal, $$unsubscribe_showHomeworkModal;
   $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
   $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => $showHomeworkModal = value);
-  let { uniqueId } = $$props;
-  let dropzone;
   let { text = "\u{1F525}" } = $$props;
   let { textSizeTW = "text-3xl" } = $$props;
   let { dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]" } = $$props;
   let { brightnessTW = "brightness-100" } = $$props;
+  let dropzone;
   async function hydrateDropzoneDomEls(target) {
     console.log("drop it like its \u{1F525}");
     cssToHead("dropzoneCSS", "/dropzone.css");
-    const { Dropzone: Dropzone2 } = await import("dropzone");
     const { PUBLIC_UPLOAD_ENDPOINT } = await import("./public.js");
+    const { Dropzone: Dropzone2 } = await import("dropzone");
     dropzone = new Dropzone2(
       target,
       {
@@ -42,7 +40,6 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
         acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc"
       }
     );
-    target.id = uniqueId;
     dropzoneHandleErroredUploads();
   }
   function dropzoneHandleErroredUploads() {
@@ -58,8 +55,6 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
       }
     });
   }
-  if ($$props.uniqueId === void 0 && $$bindings.uniqueId && uniqueId !== void 0)
-    $$bindings.uniqueId(uniqueId);
   if ($$props.text === void 0 && $$bindings.text && text !== void 0)
     $$bindings.text(text);
   if ($$props.textSizeTW === void 0 && $$bindings.textSizeTW && textSizeTW !== void 0)
@@ -77,10 +72,9 @@ const Dropzone = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     $$result,
     {
       single: true,
-      onview: (target) => hydrateDropzoneDomEls(target),
+      onview: hydrateDropzoneDomEls,
       once: true,
-      margin: "400px",
-      threshold: 1
+      margin: "0px"
     },
     {},
     {

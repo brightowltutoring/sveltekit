@@ -2,4 +2,5 @@
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
 </script>
 
-<Dropzone uniqueId={"homeworkRouteDropzone"} />
+<!-- uniqueId={"homeworkRouteDropzone"} -->
+<Dropzone />
