@@ -1,11 +1,11 @@
 {
-  "src/fonts/nunito-v25-latin-200.woff2": {
-    "file": "_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
-    "src": "src/fonts/nunito-v25-latin-200.woff2"
-  },
   "src/fonts/nunito-v25-latin-regular.woff2": {
     "file": "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
     "src": "src/fonts/nunito-v25-latin-regular.woff2"
+  },
+  "src/fonts/nunito-v25-latin-200.woff2": {
+    "file": "_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
+    "src": "src/fonts/nunito-v25-latin-200.woff2"
   },
   "src/fonts/poppins-v20-latin-100.woff2": {
     "file": "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
@@ -24,7 +24,7 @@
     "src": "src/fonts/poppins-v20-latin-100.woff"
   },
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-90bacf41.js",
+    "file": "_app/immutable/start-4ebf8aed.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -226,12 +226,28 @@
       "_app/immutable/assets/_page-5c304dd7.css"
     ]
   },
+  "src/routes/+layout.js": {
+    "file": "_app/immutable/modules/pages/_layout.js-d1ec873b.js",
+    "src": "src/routes/+layout.js",
+    "isEntry": true,
+    "imports": [
+      "__layout-86260db2.js"
+    ]
+  },
   "src/routes/classroom/+page.js": {
     "file": "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js",
     "src": "src/routes/classroom/+page.js",
     "isEntry": true,
     "imports": [
       "__page-50113cbf.js"
+    ]
+  },
+  "src/routes/physics/+page.js": {
+    "file": "_app/immutable/modules/pages/physics/_page.js-134697de.js",
+    "src": "src/routes/physics/+page.js",
+    "isEntry": true,
+    "imports": [
+      "__page-d949538d.js"
     ]
   },
   "_singletons-307c7dec.js": {
@@ -327,6 +343,9 @@
     "src": "$env/static/public",
     "isDynamicEntry": true
   },
+  "__layout-86260db2.js": {
+    "file": "_app/immutable/chunks/_layout-86260db2.js"
+  },
   "_PlansComponent-2d3ca242.js": {
     "file": "_app/immutable/chunks/PlansComponent-2d3ca242.js",
     "imports": [
@@ -350,11 +369,15 @@
       "_katex-d33715d1.js"
     ]
   },
+  "__page-d949538d.js": {
+    "file": "_app/immutable/chunks/_page-d949538d.js"
+  },
   ".svelte-kit/generated/nodes/0.js": {
-    "file": "_app/immutable/chunks/0-af012b97.js",
+    "file": "_app/immutable/chunks/0-c26746be.js",
     "src": ".svelte-kit/generated/nodes/0.js",
     "isDynamicEntry": true,
     "imports": [
+      "__layout-86260db2.js",
       "src/routes/+layout.svelte"
     ]
   },
@@ -440,10 +463,11 @@
     ]
   },
   ".svelte-kit/generated/nodes/11.js": {
-    "file": "_app/immutable/chunks/11-866b7862.js",
+    "file": "_app/immutable/chunks/11-1df31019.js",
     "src": ".svelte-kit/generated/nodes/11.js",
     "isDynamicEntry": true,
     "imports": [
+      "__page-d949538d.js",
       "src/routes/physics/+page.svelte"
     ]
   },
@@ -492,25 +516,25 @@
       "_firebase-ca849276.js"
     ]
   },
-  "src/routes/stripe/+page.css": {
-    "file": "_app/immutable/assets/_page-5c304dd7.css",
-    "src": "src/routes/stripe/+page.css"
-  },
   "src/routes/physics/+page.css": {
     "file": "_app/immutable/assets/_page-fcf51fa8.css",
     "src": "src/routes/physics/+page.css"
   },
-  "src/routes/+page.css": {
-    "file": "_app/immutable/assets/_page-7d3eabbd.css",
-    "src": "src/routes/+page.css"
+  "src/routes/stripe/+page.css": {
+    "file": "_app/immutable/assets/_page-5c304dd7.css",
+    "src": "src/routes/stripe/+page.css"
+  },
+  "Dropzone.css": {
+    "file": "_app/immutable/assets/Dropzone-ad1f3da6.css",
+    "src": "Dropzone.css"
   },
   "src/routes/faq/+page.css": {
     "file": "_app/immutable/assets/_page-113a1f72.css",
     "src": "src/routes/faq/+page.css"
   },
-  "Dropzone.css": {
-    "file": "_app/immutable/assets/Dropzone-ad1f3da6.css",
-    "src": "Dropzone.css"
+  "src/routes/+page.css": {
+    "file": "_app/immutable/assets/_page-7d3eabbd.css",
+    "src": "src/routes/+page.css"
   },
   "src/routes/+layout.css": {
     "file": "_app/immutable/assets/_layout-f56b309e.css",
