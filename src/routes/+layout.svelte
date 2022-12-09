@@ -94,14 +94,22 @@
 <main>
   <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
   {#if getOS() == "iOS"}
-    <Modal showModal={$navAppClicked} bgTint={"bg-[#6c79f4] text-white"}>
+    <!-- <Modal showModal={$navAppClicked} bgTint={"bg-[#6c79f4] text-white"}> -->
+
+    <Modal
+      showModal={$navAppClicked}
+      bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"}
+    >
       <!-- bgTint={$isDarkMode ? "bg-[#5262f7]" : "bg-[#a5adf5]"} -->
       {#key !$navAppClicked}
         <!-- bg-[#818cf8] -->
         <!-- in:slide={{ duration: 1300, easing: elasticOut }} -->
 
         <!-- in:fly={{ x: 100, duration: 1300, easing: elasticOut }} -->
-        <ul class="p-10 flex flex-col gap-y-8 font-Poppins  sm:text-6xl">
+        <ul
+          in:scale
+          class="p-10 flex flex-col gap-y-8 font-Poppins sm:text-6xl"
+        >
           <li
             class="text-xl font-bold"
             in:scale={{
@@ -127,7 +135,7 @@
           </li>
 
           <li
-            class="text-xl font-bold"
+            class="text-xl font-bold text-black"
             in:fly={{
               x: -100,
               delay: 2800,
@@ -135,7 +143,7 @@
               easing: quintOut,
             }}
           >
-            <div class="text-6xl">3.</div>
+            <div class="text-6xl ">3.</div>
             Click 'Add to Home Screen' 🚀
           </li>
         </ul>
