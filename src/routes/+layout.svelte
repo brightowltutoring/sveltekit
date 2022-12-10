@@ -23,10 +23,11 @@
 
   import { page } from "$app/stores";
   import { onMount } from "svelte";
+  import { each } from "svelte/internal";
 
   onMount(() => {
     // $lessThan768 && disableZoomGestures();
-    (isRunningStandalone() || $lessThan768) && disableZoomGestures();
+    // (isRunningStandalone() || $lessThan768) && disableZoomGestures();
     setInnerWidthViaMatchMedia();
     // alert(getOS());
     // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
@@ -66,24 +67,50 @@
   }
 </script>
 
-<svelte:head>
+<!-- this version works on 'npm run dev', but also janky reactivity in head title -->
+<!-- <svelte:head>
   <link rel="manifest" href="/manifest.json" />
-  <!-- <link rel="apple-touch-icon" href="" /> -->
 
-  <!-- should show up once each!! -->
-  {#each Object.keys($routes) as key}
-    {#if $page.route.id == "/" && key == "home"}
+  {#if $page.status == 200}
+    {@const slashlessRoute = $page.route.id.slice(1)}
+
+    {#if slashlessRoute == ""}
       <title>{$routes.home.title}</title>
       <meta
         name="description"
         content="Math and Physics Tutoring for the Modern Age."
       />
       <meta og:url="https://thinksolve.io/" />
-      <!-- <meta name="image" content="LOGO" /> -->
-    {:else if $page.route.id == `/${key}`}
-      <title>{$routes[key].title}</title>
+    {:else}
+      <title>{$routes[slashlessRoute].title}</title>
     {/if}
-  {/each}
+  {:else}
+    <title>Oops 💩</title>
+  {/if}
+</svelte:head> -->
+
+<svelte:head>
+  <link rel="manifest" href="/manifest.json" />
+
+  {#if $page.status == 200}
+    {#each Object.keys($routes) as key}
+      {@const title = $routes[key].title}
+      {@const slashlessRoute = $page.route.id.slice(1)}
+
+      {#if slashlessRoute == "" && key == "home"}
+        <title>{title}</title>
+        <meta
+          name="description"
+          content="Math and Physics Tutoring for the Modern Age."
+        />
+        <meta og:url="https://thinksolve.io/" />
+      {:else if slashlessRoute == key}
+        <title>{title}</title>
+      {/if}
+    {/each}
+  {:else}
+    <title>Oops 💩</title>
+  {/if}
 </svelte:head>
 
 <svelte:window

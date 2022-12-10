@@ -324,16 +324,16 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
   let $lessThan768, $$unsubscribe_lessThan768;
-  let $routes, $$unsubscribe_routes;
   let $page, $$unsubscribe_page;
+  let $routes, $$unsubscribe_routes;
   let $navAppClicked, $$unsubscribe_navAppClicked;
   let $showLoginModal, $$unsubscribe_showLoginModal;
   let $showHomeworkModal, $$unsubscribe_showHomeworkModal;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
-  $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_navAppClicked = subscribe(navAppClicked, (value) => $navAppClicked = value);
   $$unsubscribe_showLoginModal = subscribe(showLoginModal, (value) => $showLoginModal = value);
   $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => $showHomeworkModal = value);
@@ -366,12 +366,18 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "bottom-0 backdrop-blur-3xl duration-700";
       }
     }
-    $$rendered = `${$$result.head += `<!-- HEAD_svelte-1v8kdsi_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${each(Object.keys($routes), (key) => {
-      return `${$page.route.id == "/" && key == "home" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
-      <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
-      <meta og:url="${"https://thinksolve.io/"}">
-      ` : `${$page.route.id == `/${key}` ? `${$$result.title = `<title>${escape($routes[key].title)}</title>`, ""}` : ``}`}`;
-    })}<!-- HEAD_svelte-1v8kdsi_END -->`, ""}
+    $$rendered = `
+
+
+${$$result.head += `<!-- HEAD_svelte-1azegxo_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${$page.status == 200 ? `${each(Object.keys($routes), (key) => {
+      let title = $routes[key].title, slashlessRoute = $page.route.id.slice(1);
+      return `
+      
+
+      ${slashlessRoute == "" && key == "home" ? `${$$result.title = `<title>${escape(title)}</title>`, ""}
+        <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
+        <meta og:url="${"https://thinksolve.io/"}">` : `${slashlessRoute == key ? `${$$result.title = `<title>${escape(title)}</title>`, ""}` : ``}`}`;
+    })}` : `${$$result.title = `<title>Oops \u{1F4A9}</title>`, ""}`}<!-- HEAD_svelte-1azegxo_END -->`, ""}
 
 
 
@@ -468,8 +474,8 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
   $$unsubscribe_lessThan768();
-  $$unsubscribe_routes();
   $$unsubscribe_page();
+  $$unsubscribe_routes();
   $$unsubscribe_navAppClicked();
   $$unsubscribe_showLoginModal();
   $$unsubscribe_showHomeworkModal();
