@@ -12,8 +12,8 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __export = (target, all) => {
-  for (var name4 in all)
-    __defProp(target, name4, { get: all[name4], enumerable: true });
+  for (var name5 in all)
+    __defProp(target, name5, { get: all[name5], enumerable: true });
 };
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
@@ -80,6 +80,9 @@ function get_store_value(store) {
   subscribe(store, (_2) => value = _2)();
   return value;
 }
+function null_to_empty(value) {
+  return value == null ? "" : value;
+}
 function set_store_value(store, ret, value) {
   store.set(value);
   return ret;
@@ -107,13 +110,35 @@ function loop(callback) {
     }
   };
 }
-function set_current_component(component4) {
-  current_component = component4;
+function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
+  const e3 = document.createEvent("CustomEvent");
+  e3.initCustomEvent(type, bubbles, cancelable, detail);
+  return e3;
+}
+function set_current_component(component16) {
+  current_component = component16;
 }
 function get_current_component() {
   if (!current_component)
     throw new Error("Function called outside component initialization");
   return current_component;
+}
+function onDestroy(fn2) {
+  get_current_component().$$.on_destroy.push(fn2);
+}
+function createEventDispatcher() {
+  const component16 = get_current_component();
+  return (type, detail, { cancelable = false } = {}) => {
+    const callbacks = component16.$$.callbacks[type];
+    if (callbacks) {
+      const event = custom_event(type, detail, { cancelable });
+      callbacks.slice().forEach((fn2) => {
+        fn2.call(component16, event);
+      });
+      return !event.defaultPrevented;
+    }
+    return true;
+  };
 }
 function setContext(key2, context) {
   get_current_component().$$.context.set(key2, context);
@@ -143,13 +168,13 @@ function each(items, fn2) {
   }
   return str;
 }
-function validate_component(component4, name4) {
-  if (!component4 || !component4.$$render) {
-    if (name4 === "svelte:component")
-      name4 += " this={...}";
-    throw new Error(`<${name4}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name4}>.`);
+function validate_component(component16, name5) {
+  if (!component16 || !component16.$$render) {
+    if (name5 === "svelte:component")
+      name5 += " this={...}";
+    throw new Error(`<${name5}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name5}>.`);
   }
-  return component4;
+  return component16;
 }
 function create_ssr_component(fn2) {
   function $$render(result, props, bindings, slots, context) {
@@ -176,7 +201,7 @@ function create_ssr_component(fn2) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css4) => css4.code).join("\n"),
+          code: Array.from(result.css).map((css7) => css7.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -185,11 +210,11 @@ function create_ssr_component(fn2) {
     $$render
   };
 }
-function add_attribute(name4, value, boolean) {
+function add_attribute(name5, value, boolean) {
   if (value == null || boolean && !value)
     return "";
   const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
-  return ` ${name4}${assignment}`;
+  return ` ${name5}${assignment}`;
 }
 var is_client, now, raf, tasks, current_component, ATTR_REGEX, CONTENT_REGEX, missing_component, on_destroy;
 var init_chunks = __esm({
@@ -302,10 +327,10 @@ var init_index2 = __esm({
 
 // node_modules/cookie/index.js
 var require_cookie = __commonJS({
-  "node_modules/cookie/index.js"(exports) {
+  "node_modules/cookie/index.js"(exports2) {
     "use strict";
-    exports.parse = parse3;
-    exports.serialize = serialize2;
+    exports2.parse = parse3;
+    exports2.serialize = serialize2;
     var __toString = Object.prototype.toString;
     var fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
     function parse3(str, options) {
@@ -315,20 +340,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options || {};
       var dec = opt.decode || decode2;
-      var index4 = 0;
-      while (index4 < str.length) {
-        var eqIdx = str.indexOf("=", index4);
+      var index16 = 0;
+      while (index16 < str.length) {
+        var eqIdx = str.indexOf("=", index16);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index4);
+        var endIdx = str.indexOf(";", index16);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index4 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index16 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index4, eqIdx).trim();
+        var key2 = str.slice(index16, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -336,24 +361,24 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index4 = endIdx + 1;
+        index16 = endIdx + 1;
       }
       return obj;
     }
-    function serialize2(name4, val, options) {
+    function serialize2(name5, val, options) {
       var opt = options || {};
       var enc = opt.encode || encode2;
       if (typeof enc !== "function") {
         throw new TypeError("option encode is invalid");
       }
-      if (!fieldContentRegExp.test(name4)) {
+      if (!fieldContentRegExp.test(name5)) {
         throw new TypeError("argument name is invalid");
       }
       var value = enc(val);
       if (value && !fieldContentRegExp.test(value)) {
         throw new TypeError("argument val is invalid");
       }
-      var str = name4 + "=" + value;
+      var str = name5 + "=" + value;
       if (null != opt.maxAge) {
         var maxAge = opt.maxAge - 0;
         if (isNaN(maxAge) || !isFinite(maxAge)) {
@@ -444,7 +469,7 @@ var require_cookie = __commonJS({
 
 // node_modules/set-cookie-parser/lib/set-cookie.js
 var require_set_cookie = __commonJS({
-  "node_modules/set-cookie-parser/lib/set-cookie.js"(exports, module) {
+  "node_modules/set-cookie-parser/lib/set-cookie.js"(exports2, module2) {
     "use strict";
     var defaultParseOptions = {
       decodeValues: true,
@@ -458,7 +483,7 @@ var require_set_cookie = __commonJS({
       var parts = setCookieValue.split(";").filter(isNonEmptyString);
       var nameValuePairStr = parts.shift();
       var parsed = parseNameValuePair(nameValuePairStr);
-      var name4 = parsed.name;
+      var name5 = parsed.name;
       var value = parsed.value;
       options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
       try {
@@ -470,7 +495,7 @@ var require_set_cookie = __commonJS({
         );
       }
       var cookie = {
-        name: name4,
+        name: name5,
         value
       };
       parts.forEach(function(part) {
@@ -494,16 +519,16 @@ var require_set_cookie = __commonJS({
       return cookie;
     }
     function parseNameValuePair(nameValuePairStr) {
-      var name4 = "";
+      var name5 = "";
       var value = "";
       var nameValueArr = nameValuePairStr.split("=");
       if (nameValueArr.length > 1) {
-        name4 = nameValueArr.shift();
+        name5 = nameValueArr.shift();
         value = nameValueArr.join("=");
       } else {
         value = nameValuePairStr;
       }
-      return { name: name4, value };
+      return { name: name5, value };
     }
     function parse3(input, options) {
       options = options ? Object.assign({}, defaultParseOptions, options) : defaultParseOptions;
@@ -599,10 +624,10 @@ var require_set_cookie = __commonJS({
       }
       return cookiesStrings;
     }
-    module.exports = parse3;
-    module.exports.parse = parse3;
-    module.exports.parseString = parseString2;
-    module.exports.splitCookiesString = splitCookiesString2;
+    module2.exports = parse3;
+    module2.exports.parse = parse3;
+    module2.exports.parseString = parseString2;
+    module2.exports.splitCookiesString = splitCookiesString2;
   }
 });
 
@@ -630,13 +655,8 @@ var init_hooks_server = __esm({
 
 // .svelte-kit/output/server/entries/pages/_layout.js
 var layout_exports = {};
-__export(layout_exports, {
-  prerender: () => prerender
-});
-var prerender;
 var init_layout = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.js"() {
-    prerender = true;
   }
 });
 
@@ -670,6 +690,15 @@ function cssToHead(id = "dropzoneCSS", path2 = "/dropzone.css") {
     element.id = id;
     element.href = path2;
     element.rel = "stylesheet";
+    document.head.appendChild(element);
+  }
+}
+function jsToHead(id = "calendlyJS", path2 = "external-website.com/calendly.js") {
+  if (!document.getElementById(id)) {
+    const element = document.createElement("script");
+    element.id = id;
+    element.src = path2;
+    element.type = "text/javascript";
     document.head.appendChild(element);
   }
 }
@@ -1082,10 +1111,10 @@ var init_dropzone = __esm({
             dzchunkbyteoffset: chunk.index * this.options.chunkSize
           };
       },
-      accept(file4, done) {
+      accept(file16, done) {
         return done();
       },
-      chunksUploaded: function(file4, done) {
+      chunksUploaded: function(file16, done) {
         done();
       },
       binaryBody: false,
@@ -1111,14 +1140,14 @@ var init_dropzone = __esm({
         }
         return this.element.appendChild(this.getFallbackForm());
       },
-      resize(file4, width, height, resizeMethod) {
+      resize(file16, width, height, resizeMethod) {
         let info = {
           srcX: 0,
           srcY: 0,
-          srcWidth: file4.width,
-          srcHeight: file4.height
+          srcWidth: file16.width,
+          srcHeight: file16.height
         };
-        let srcRatio = file4.width / file4.height;
+        let srcRatio = file16.width / file16.height;
         if (width == null && height == null) {
           width = info.srcWidth;
           height = info.srcHeight;
@@ -1132,10 +1161,10 @@ var init_dropzone = __esm({
         if (info.srcWidth > width || info.srcHeight > height) {
           if (resizeMethod === "crop") {
             if (srcRatio > trgRatio) {
-              info.srcHeight = file4.height;
+              info.srcHeight = file16.height;
               info.srcWidth = info.srcHeight * trgRatio;
             } else {
-              info.srcWidth = file4.width;
+              info.srcWidth = file16.width;
               info.srcHeight = info.srcWidth / trgRatio;
             }
           } else if (resizeMethod === "contain") {
@@ -1146,17 +1175,17 @@ var init_dropzone = __esm({
           } else
             throw new Error(`Unknown resizeMethod '${resizeMethod}'`);
         }
-        info.srcX = (file4.width - info.srcWidth) / 2;
-        info.srcY = (file4.height - info.srcHeight) / 2;
+        info.srcX = (file16.width - info.srcWidth) / 2;
+        info.srcY = (file16.height - info.srcHeight) / 2;
         info.trgWidth = width;
         info.trgHeight = height;
         return info;
       },
-      transformFile(file4, done) {
-        if ((this.options.resizeWidth || this.options.resizeHeight) && file4.type.match(/image.*/))
-          return this.resizeImage(file4, this.options.resizeWidth, this.options.resizeHeight, this.options.resizeMethod, done);
+      transformFile(file16, done) {
+        if ((this.options.resizeWidth || this.options.resizeHeight) && file16.type.match(/image.*/))
+          return this.resizeImage(file16, this.options.resizeWidth, this.options.resizeHeight, this.options.resizeMethod, done);
         else
-          return done(file4);
+          return done(file16);
       },
       previewTemplate: /* @__PURE__ */ $parcel$interopDefault($fd6031f88dce2e32$exports),
       drop(e3) {
@@ -1181,84 +1210,84 @@ var init_dropzone = __esm({
       reset() {
         return this.element.classList.remove("dz-started");
       },
-      addedfile(file4) {
+      addedfile(file16) {
         if (this.element === this.previewsContainer)
           this.element.classList.add("dz-started");
         if (this.previewsContainer && !this.options.disablePreviews) {
-          file4.previewElement = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(this.options.previewTemplate.trim());
-          file4.previewTemplate = file4.previewElement;
-          this.previewsContainer.appendChild(file4.previewElement);
-          for (var node of file4.previewElement.querySelectorAll("[data-dz-name]"))
-            node.textContent = file4.name;
-          for (node of file4.previewElement.querySelectorAll("[data-dz-size]"))
-            node.innerHTML = this.filesize(file4.size);
+          file16.previewElement = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(this.options.previewTemplate.trim());
+          file16.previewTemplate = file16.previewElement;
+          this.previewsContainer.appendChild(file16.previewElement);
+          for (var node of file16.previewElement.querySelectorAll("[data-dz-name]"))
+            node.textContent = file16.name;
+          for (node of file16.previewElement.querySelectorAll("[data-dz-size]"))
+            node.innerHTML = this.filesize(file16.size);
           if (this.options.addRemoveLinks) {
-            file4._removeLink = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(`<a class="dz-remove" href="javascript:undefined;" data-dz-remove>${this.options.dictRemoveFile}</a>`);
-            file4.previewElement.appendChild(file4._removeLink);
+            file16._removeLink = $3ed269f2f0fb224b$export$2e2bcd8739ae039.createElement(`<a class="dz-remove" href="javascript:undefined;" data-dz-remove>${this.options.dictRemoveFile}</a>`);
+            file16.previewElement.appendChild(file16._removeLink);
           }
           let removeFileEvent = (e3) => {
             e3.preventDefault();
             e3.stopPropagation();
-            if (file4.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
+            if (file16.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
               return $3ed269f2f0fb224b$export$2e2bcd8739ae039.confirm(
                 this.options.dictCancelUploadConfirmation,
-                () => this.removeFile(file4)
+                () => this.removeFile(file16)
               );
             else {
               if (this.options.dictRemoveFileConfirmation)
                 return $3ed269f2f0fb224b$export$2e2bcd8739ae039.confirm(
                   this.options.dictRemoveFileConfirmation,
-                  () => this.removeFile(file4)
+                  () => this.removeFile(file16)
                 );
               else
-                return this.removeFile(file4);
+                return this.removeFile(file16);
             }
           };
-          for (let removeLink of file4.previewElement.querySelectorAll("[data-dz-remove]"))
+          for (let removeLink of file16.previewElement.querySelectorAll("[data-dz-remove]"))
             removeLink.addEventListener("click", removeFileEvent);
         }
       },
-      removedfile(file4) {
-        if (file4.previewElement != null && file4.previewElement.parentNode != null)
-          file4.previewElement.parentNode.removeChild(file4.previewElement);
+      removedfile(file16) {
+        if (file16.previewElement != null && file16.previewElement.parentNode != null)
+          file16.previewElement.parentNode.removeChild(file16.previewElement);
         return this._updateMaxFilesReachedClass();
       },
-      thumbnail(file4, dataUrl) {
-        if (file4.previewElement) {
-          file4.previewElement.classList.remove("dz-file-preview");
-          for (let thumbnailElement of file4.previewElement.querySelectorAll("[data-dz-thumbnail]")) {
-            thumbnailElement.alt = file4.name;
+      thumbnail(file16, dataUrl) {
+        if (file16.previewElement) {
+          file16.previewElement.classList.remove("dz-file-preview");
+          for (let thumbnailElement of file16.previewElement.querySelectorAll("[data-dz-thumbnail]")) {
+            thumbnailElement.alt = file16.name;
             thumbnailElement.src = dataUrl;
           }
           return setTimeout(
-            () => file4.previewElement.classList.add("dz-image-preview"),
+            () => file16.previewElement.classList.add("dz-image-preview"),
             1
           );
         }
       },
-      error(file4, message) {
-        if (file4.previewElement) {
-          file4.previewElement.classList.add("dz-error");
+      error(file16, message) {
+        if (file16.previewElement) {
+          file16.previewElement.classList.add("dz-error");
           if (typeof message !== "string" && message.error)
             message = message.error;
-          for (let node of file4.previewElement.querySelectorAll("[data-dz-errormessage]"))
+          for (let node of file16.previewElement.querySelectorAll("[data-dz-errormessage]"))
             node.textContent = message;
         }
       },
       errormultiple() {
       },
-      processing(file4) {
-        if (file4.previewElement) {
-          file4.previewElement.classList.add("dz-processing");
-          if (file4._removeLink)
-            return file4._removeLink.innerHTML = this.options.dictCancelUpload;
+      processing(file16) {
+        if (file16.previewElement) {
+          file16.previewElement.classList.add("dz-processing");
+          if (file16._removeLink)
+            return file16._removeLink.innerHTML = this.options.dictCancelUpload;
         }
       },
       processingmultiple() {
       },
-      uploadprogress(file4, progress, bytesSent) {
-        if (file4.previewElement)
-          for (let node of file4.previewElement.querySelectorAll("[data-dz-uploadprogress]"))
+      uploadprogress(file16, progress, bytesSent) {
+        if (file16.previewElement)
+          for (let node of file16.previewElement.querySelectorAll("[data-dz-uploadprogress]"))
             node.nodeName === "PROGRESS" ? node.value = progress : node.style.width = `${progress}%`;
       },
       totaluploadprogress() {
@@ -1267,22 +1296,22 @@ var init_dropzone = __esm({
       },
       sendingmultiple() {
       },
-      success(file4) {
-        if (file4.previewElement)
-          return file4.previewElement.classList.add("dz-success");
+      success(file16) {
+        if (file16.previewElement)
+          return file16.previewElement.classList.add("dz-success");
       },
       successmultiple() {
       },
-      canceled(file4) {
-        return this.emit("error", file4, this.options.dictUploadCanceled);
+      canceled(file16) {
+        return this.emit("error", file16, this.options.dictUploadCanceled);
       },
       canceledmultiple() {
       },
-      complete(file4) {
-        if (file4._removeLink)
-          file4._removeLink.innerHTML = this.options.dictRemoveFile;
-        if (file4.previewElement)
-          return file4.previewElement.classList.add("dz-complete");
+      complete(file16) {
+        if (file16._removeLink)
+          file16._removeLink.innerHTML = this.options.dictRemoveFile;
+        if (file16.previewElement)
+          return file16.previewElement.classList.add("dz-complete");
       },
       completemultiple() {
       },
@@ -1334,23 +1363,23 @@ var init_dropzone = __esm({
       }
       getAcceptedFiles() {
         return this.files.filter(
-          (file4) => file4.accepted
+          (file16) => file16.accepted
         ).map(
-          (file4) => file4
+          (file16) => file16
         );
       }
       getRejectedFiles() {
         return this.files.filter(
-          (file4) => !file4.accepted
+          (file16) => !file16.accepted
         ).map(
-          (file4) => file4
+          (file16) => file16
         );
       }
       getFilesWithStatus(status) {
         return this.files.filter(
-          (file4) => file4.status === status
+          (file16) => file16.status === status
         ).map(
-          (file4) => file4
+          (file16) => file16
         );
       }
       getQueuedFiles() {
@@ -1364,9 +1393,9 @@ var init_dropzone = __esm({
       }
       getActiveFiles() {
         return this.files.filter(
-          (file4) => file4.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || file4.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED
+          (file16) => file16.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || file16.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED
         ).map(
-          (file4) => file4
+          (file16) => file16
         );
       }
       init() {
@@ -1398,8 +1427,8 @@ var init_dropzone = __esm({
             this.hiddenFileInput.addEventListener("change", () => {
               let { files } = this.hiddenFileInput;
               if (files.length)
-                for (let file4 of files)
-                  this.addFile(file4);
+                for (let file16 of files)
+                  this.addFile(file16);
               this.emit("addedfiles", files);
               setupHiddenFileInput();
             });
@@ -1419,9 +1448,9 @@ var init_dropzone = __esm({
         );
         this.on(
           "canceled",
-          (file4) => this.emit("complete", file4)
+          (file16) => this.emit("complete", file16)
         );
-        this.on("complete", (file4) => {
+        this.on("complete", (file16) => {
           if (this.getAddedFiles().length === 0 && this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0)
             return setTimeout(
               () => this.emit("queuecomplete"),
@@ -1510,9 +1539,9 @@ var init_dropzone = __esm({
         let totalBytes = 0;
         let activeFiles = this.getActiveFiles();
         if (activeFiles.length) {
-          for (let file4 of this.getActiveFiles()) {
-            totalBytesSent += file4.upload.bytesSent;
-            totalBytes += file4.upload.total;
+          for (let file16 of this.getActiveFiles()) {
+            totalBytesSent += file16.upload.bytesSent;
+            totalBytes += file16.upload.total;
           }
           totalUploadProgress = 100 * totalBytesSent / totalBytes;
         } else
@@ -1525,10 +1554,10 @@ var init_dropzone = __esm({
         else
           return `${this.options.paramName}${this.options.uploadMultiple ? `[${n2}]` : ""}`;
       }
-      _renameFile(file4) {
+      _renameFile(file16) {
         if (typeof this.options.renameFile !== "function")
-          return file4.name;
-        return this.options.renameFile(file4);
+          return file16.name;
+        return this.options.renameFile(file16);
       }
       getFallbackForm() {
         let existingFallback, form;
@@ -1595,7 +1624,7 @@ var init_dropzone = __esm({
         this.removeEventListeners();
         this.disabled = true;
         return this.files.map(
-          (file4) => this.cancelUpload(file4)
+          (file16) => this.cancelUpload(file16)
         );
       }
       enable() {
@@ -1665,8 +1694,8 @@ var init_dropzone = __esm({
           return this._addFilesFromItems(items);
       }
       handleFiles(files) {
-        for (let file4 of files)
-          this.addFile(file4);
+        for (let file16 of files)
+          this.addFile(file16);
       }
       _addFilesFromItems(items) {
         return (() => {
@@ -1703,11 +1732,11 @@ var init_dropzone = __esm({
             if (entries.length > 0) {
               for (let entry of entries) {
                 if (entry.isFile)
-                  entry.file((file4) => {
-                    if (this.options.ignoreHiddenFiles && file4.name.substring(0, 1) === ".")
+                  entry.file((file16) => {
+                    if (this.options.ignoreHiddenFiles && file16.name.substring(0, 1) === ".")
                       return;
-                    file4.fullPath = `${path2}/${file4.name}`;
-                    return this.addFile(file4);
+                    file16.fullPath = `${path2}/${file16.name}`;
+                    return this.addFile(file16);
                   });
                 else if (entry.isDirectory)
                   this._addFilesFromDirectory(entry, `${path2}/${entry.name}`);
@@ -1719,51 +1748,51 @@ var init_dropzone = __esm({
         };
         return readEntries();
       }
-      accept(file4, done) {
-        if (this.options.maxFilesize && file4.size > this.options.maxFilesize * 1048576)
-          done(this.options.dictFileTooBig.replace("{{filesize}}", Math.round(file4.size / 1024 / 10.24) / 100).replace("{{maxFilesize}}", this.options.maxFilesize));
-        else if (!$3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile(file4, this.options.acceptedFiles))
+      accept(file16, done) {
+        if (this.options.maxFilesize && file16.size > this.options.maxFilesize * 1048576)
+          done(this.options.dictFileTooBig.replace("{{filesize}}", Math.round(file16.size / 1024 / 10.24) / 100).replace("{{maxFilesize}}", this.options.maxFilesize));
+        else if (!$3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile(file16, this.options.acceptedFiles))
           done(this.options.dictInvalidFileType);
         else if (this.options.maxFiles != null && this.getAcceptedFiles().length >= this.options.maxFiles) {
           done(this.options.dictMaxFilesExceeded.replace("{{maxFiles}}", this.options.maxFiles));
-          this.emit("maxfilesexceeded", file4);
+          this.emit("maxfilesexceeded", file16);
         } else
-          this.options.accept.call(this, file4, done);
+          this.options.accept.call(this, file16, done);
       }
-      addFile(file4) {
-        file4.upload = {
+      addFile(file16) {
+        file16.upload = {
           uuid: $3ed269f2f0fb224b$export$2e2bcd8739ae039.uuidv4(),
           progress: 0,
-          total: file4.size,
+          total: file16.size,
           bytesSent: 0,
-          filename: this._renameFile(file4)
+          filename: this._renameFile(file16)
         };
-        this.files.push(file4);
-        file4.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED;
-        this.emit("addedfile", file4);
-        this._enqueueThumbnail(file4);
-        this.accept(file4, (error2) => {
+        this.files.push(file16);
+        file16.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED;
+        this.emit("addedfile", file16);
+        this._enqueueThumbnail(file16);
+        this.accept(file16, (error2) => {
           if (error2) {
-            file4.accepted = false;
+            file16.accepted = false;
             this._errorProcessing([
-              file4
+              file16
             ], error2);
           } else {
-            file4.accepted = true;
+            file16.accepted = true;
             if (this.options.autoQueue)
-              this.enqueueFile(file4);
+              this.enqueueFile(file16);
           }
           this._updateMaxFilesReachedClass();
         });
       }
       enqueueFiles(files) {
-        for (let file4 of files)
-          this.enqueueFile(file4);
+        for (let file16 of files)
+          this.enqueueFile(file16);
         return null;
       }
-      enqueueFile(file4) {
-        if (file4.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED && file4.accepted === true) {
-          file4.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED;
+      enqueueFile(file16) {
+        if (file16.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED && file16.accepted === true) {
+          file16.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED;
           if (this.options.autoProcessQueue)
             return setTimeout(
               () => this.processQueue(),
@@ -1772,9 +1801,9 @@ var init_dropzone = __esm({
         } else
           throw new Error("This file can't be queued because it has already been processed or was rejected.");
       }
-      _enqueueThumbnail(file4) {
-        if (this.options.createImageThumbnails && file4.type.match(/image.*/) && file4.size <= this.options.maxThumbnailFilesize * 1048576) {
-          this._thumbnailQueue.push(file4);
+      _enqueueThumbnail(file16) {
+        if (this.options.createImageThumbnails && file16.type.match(/image.*/) && file16.size <= this.options.maxThumbnailFilesize * 1048576) {
+          this._thumbnailQueue.push(file16);
           return setTimeout(
             () => this._processThumbnailQueue(),
             0
@@ -1785,56 +1814,56 @@ var init_dropzone = __esm({
         if (this._processingThumbnail || this._thumbnailQueue.length === 0)
           return;
         this._processingThumbnail = true;
-        let file4 = this._thumbnailQueue.shift();
-        return this.createThumbnail(file4, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, true, (dataUrl) => {
-          this.emit("thumbnail", file4, dataUrl);
+        let file16 = this._thumbnailQueue.shift();
+        return this.createThumbnail(file16, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, true, (dataUrl) => {
+          this.emit("thumbnail", file16, dataUrl);
           this._processingThumbnail = false;
           return this._processThumbnailQueue();
         });
       }
-      removeFile(file4) {
-        if (file4.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
-          this.cancelUpload(file4);
-        this.files = $3ed269f2f0fb224b$var$without(this.files, file4);
-        this.emit("removedfile", file4);
+      removeFile(file16) {
+        if (file16.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING)
+          this.cancelUpload(file16);
+        this.files = $3ed269f2f0fb224b$var$without(this.files, file16);
+        this.emit("removedfile", file16);
         if (this.files.length === 0)
           return this.emit("reset");
       }
       removeAllFiles(cancelIfNecessary) {
         if (cancelIfNecessary == null)
           cancelIfNecessary = false;
-        for (let file4 of this.files.slice())
-          if (file4.status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || cancelIfNecessary)
-            this.removeFile(file4);
+        for (let file16 of this.files.slice())
+          if (file16.status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING || cancelIfNecessary)
+            this.removeFile(file16);
         return null;
       }
-      resizeImage(file4, width, height, resizeMethod, callback) {
-        return this.createThumbnail(file4, width, height, resizeMethod, true, (dataUrl, canvas) => {
+      resizeImage(file16, width, height, resizeMethod, callback) {
+        return this.createThumbnail(file16, width, height, resizeMethod, true, (dataUrl, canvas) => {
           if (canvas == null)
-            return callback(file4);
+            return callback(file16);
           else {
             let { resizeMimeType } = this.options;
             if (resizeMimeType == null)
-              resizeMimeType = file4.type;
+              resizeMimeType = file16.type;
             let resizedDataURL = canvas.toDataURL(resizeMimeType, this.options.resizeQuality);
             if (resizeMimeType === "image/jpeg" || resizeMimeType === "image/jpg")
-              resizedDataURL = $3ed269f2f0fb224b$var$ExifRestore.restore(file4.dataURL, resizedDataURL);
+              resizedDataURL = $3ed269f2f0fb224b$var$ExifRestore.restore(file16.dataURL, resizedDataURL);
             return callback($3ed269f2f0fb224b$export$2e2bcd8739ae039.dataURItoBlob(resizedDataURL));
           }
         });
       }
-      createThumbnail(file4, width, height, resizeMethod, fixOrientation, callback) {
+      createThumbnail(file16, width, height, resizeMethod, fixOrientation, callback) {
         let fileReader = new FileReader();
         fileReader.onload = () => {
-          file4.dataURL = fileReader.result;
-          if (file4.type === "image/svg+xml") {
+          file16.dataURL = fileReader.result;
+          if (file16.type === "image/svg+xml") {
             if (callback != null)
               callback(fileReader.result);
             return;
           }
-          this.createThumbnailFromUrl(file4, width, height, resizeMethod, fixOrientation, callback);
+          this.createThumbnailFromUrl(file16, width, height, resizeMethod, fixOrientation, callback);
         };
-        fileReader.readAsDataURL(file4);
+        fileReader.readAsDataURL(file16);
       }
       displayExistingFile(mockFile, imageUrl, callback, crossOrigin, resizeThumbnail = true) {
         this.emit("addedfile", mockFile);
@@ -1853,7 +1882,7 @@ var init_dropzone = __esm({
           this.createThumbnailFromUrl(mockFile, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, this.options.fixOrientation, onDone, crossOrigin);
         }
       }
-      createThumbnailFromUrl(file4, width, height, resizeMethod, fixOrientation, callback, crossOrigin) {
+      createThumbnailFromUrl(file16, width, height, resizeMethod, fixOrientation, callback, crossOrigin) {
         let img = document.createElement("img");
         if (crossOrigin)
           img.crossOrigin = crossOrigin;
@@ -1865,9 +1894,9 @@ var init_dropzone = __esm({
               return callback2(EXIF.getTag(this, "Orientation"));
             });
           return loadExif((orientation) => {
-            file4.width = img.width;
-            file4.height = img.height;
-            let resizeInfo = this.options.resize.call(this, file4, width, height, resizeMethod);
+            file16.width = img.width;
+            file16.height = img.height;
+            let resizeInfo = this.options.resize.call(this, file16, width, height, resizeMethod);
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
             canvas.width = resizeInfo.trgWidth;
@@ -1915,7 +1944,7 @@ var init_dropzone = __esm({
         };
         if (callback != null)
           img.onerror = callback;
-        return img.src = file4.dataURL;
+        return img.src = file16.dataURL;
       }
       processQueue() {
         let { parallelUploads } = this.options;
@@ -1936,16 +1965,16 @@ var init_dropzone = __esm({
             i++;
           }
       }
-      processFile(file4) {
+      processFile(file16) {
         return this.processFiles([
-          file4
+          file16
         ]);
       }
       processFiles(files) {
-        for (let file4 of files) {
-          file4.processing = true;
-          file4.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING;
-          this.emit("processing", file4);
+        for (let file16 of files) {
+          file16.processing = true;
+          file16.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING;
+          this.emit("processing", file16);
         }
         if (this.options.uploadMultiple)
           this.emit("processingmultiple", files);
@@ -1954,28 +1983,28 @@ var init_dropzone = __esm({
       _getFilesWithXhr(xhr) {
         let files;
         return files = this.files.filter(
-          (file4) => file4.xhr === xhr
+          (file16) => file16.xhr === xhr
         ).map(
-          (file4) => file4
+          (file16) => file16
         );
       }
-      cancelUpload(file4) {
-        if (file4.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING) {
-          let groupedFiles = this._getFilesWithXhr(file4.xhr);
+      cancelUpload(file16) {
+        if (file16.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING) {
+          let groupedFiles = this._getFilesWithXhr(file16.xhr);
           for (let groupedFile of groupedFiles)
             groupedFile.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED;
-          if (typeof file4.xhr !== "undefined")
-            file4.xhr.abort();
+          if (typeof file16.xhr !== "undefined")
+            file16.xhr.abort();
           for (let groupedFile1 of groupedFiles)
             this.emit("canceled", groupedFile1);
           if (this.options.uploadMultiple)
             this.emit("canceledmultiple", groupedFiles);
-        } else if (file4.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED || file4.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED) {
-          file4.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED;
-          this.emit("canceled", file4);
+        } else if (file16.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.ADDED || file16.status === $3ed269f2f0fb224b$export$2e2bcd8739ae039.QUEUED) {
+          file16.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.CANCELED;
+          this.emit("canceled", file16);
           if (this.options.uploadMultiple)
             this.emit("canceledmultiple", [
-              file4
+              file16
             ]);
         }
         if (this.options.autoProcessQueue)
@@ -1986,9 +2015,9 @@ var init_dropzone = __esm({
           return option.apply(this, args);
         return option;
       }
-      uploadFile(file4) {
+      uploadFile(file16) {
         return this.uploadFiles([
-          file4
+          file16
         ]);
       }
       uploadFiles(files) {
@@ -1999,15 +2028,15 @@ var init_dropzone = __esm({
             files[0].upload.totalChunkCount = Math.ceil(transformedFile.size / this.options.chunkSize);
           }
           if (files[0].upload.chunked) {
-            let file4 = files[0];
+            let file16 = files[0];
             let transformedFile = transformedFiles[0];
             let startedChunkCount = 0;
-            file4.upload.chunks = [];
+            file16.upload.chunks = [];
             let handleNextChunk = () => {
               let chunkIndex = 0;
-              while (file4.upload.chunks[chunkIndex] !== void 0)
+              while (file16.upload.chunks[chunkIndex] !== void 0)
                 chunkIndex++;
-              if (chunkIndex >= file4.upload.totalChunkCount)
+              if (chunkIndex >= file16.upload.totalChunkCount)
                 return;
               startedChunkCount++;
               let start = chunkIndex * this.options.chunkSize;
@@ -2015,11 +2044,11 @@ var init_dropzone = __esm({
               let dataBlock = {
                 name: this._getParamName(0),
                 data: transformedFile.webkitSlice ? transformedFile.webkitSlice(start, end) : transformedFile.slice(start, end),
-                filename: file4.upload.filename,
+                filename: file16.upload.filename,
                 chunkIndex
               };
-              file4.upload.chunks[chunkIndex] = {
-                file: file4,
+              file16.upload.chunks[chunkIndex] = {
+                file: file16,
                 index: chunkIndex,
                 dataBlock,
                 status: $3ed269f2f0fb224b$export$2e2bcd8739ae039.UPLOADING,
@@ -2030,26 +2059,26 @@ var init_dropzone = __esm({
                 dataBlock
               ]);
             };
-            file4.upload.finishedChunkUpload = (chunk, response) => {
+            file16.upload.finishedChunkUpload = (chunk, response) => {
               let allFinished = true;
               chunk.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS;
               chunk.dataBlock = null;
               chunk.response = chunk.xhr.responseText;
               chunk.responseHeaders = chunk.xhr.getAllResponseHeaders();
               chunk.xhr = null;
-              for (let i = 0; i < file4.upload.totalChunkCount; i++) {
-                if (file4.upload.chunks[i] === void 0)
+              for (let i = 0; i < file16.upload.totalChunkCount; i++) {
+                if (file16.upload.chunks[i] === void 0)
                   return handleNextChunk();
-                if (file4.upload.chunks[i].status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS)
+                if (file16.upload.chunks[i].status !== $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS)
                   allFinished = false;
               }
               if (allFinished)
-                this.options.chunksUploaded(file4, () => {
+                this.options.chunksUploaded(file16, () => {
                   this._finished(files, response, null);
                 });
             };
             if (this.options.parallelChunkUploads)
-              for (let i = 0; i < file4.upload.totalChunkCount; i++)
+              for (let i = 0; i < file16.upload.totalChunkCount; i++)
                 handleNextChunk();
             else
               handleNextChunk();
@@ -2065,16 +2094,16 @@ var init_dropzone = __esm({
           }
         });
       }
-      _getChunk(file4, xhr) {
-        for (let i = 0; i < file4.upload.totalChunkCount; i++) {
-          if (file4.upload.chunks[i] !== void 0 && file4.upload.chunks[i].xhr === xhr)
-            return file4.upload.chunks[i];
+      _getChunk(file16, xhr) {
+        for (let i = 0; i < file16.upload.totalChunkCount; i++) {
+          if (file16.upload.chunks[i] !== void 0 && file16.upload.chunks[i].xhr === xhr)
+            return file16.upload.chunks[i];
         }
       }
       _uploadData(files, dataBlocks) {
         let xhr = new XMLHttpRequest();
-        for (let file4 of files)
-          file4.xhr = xhr;
+        for (let file16 of files)
+          file16.xhr = xhr;
         if (files[0].upload.chunked)
           files[0].upload.chunks[dataBlocks[0].chunkIndex].xhr = xhr;
         let method = this.resolveOption(this.options.method, files, dataBlocks);
@@ -2110,8 +2139,8 @@ var init_dropzone = __esm({
             xhr.setRequestHeader(headerName, headerValue);
         }
         if (this.options.binaryBody) {
-          for (let file4 of files)
-            this.emit("sending", file4, xhr);
+          for (let file16 of files)
+            this.emit("sending", file16, xhr);
           if (this.options.uploadMultiple)
             this.emit("sendingmultiple", files, xhr);
           this.submitRequest(xhr, null, files);
@@ -2130,8 +2159,8 @@ var init_dropzone = __esm({
                 formData.append(key2, value);
             }
           }
-          for (let file4 of files)
-            this.emit("sending", file4, xhr, formData);
+          for (let file16 of files)
+            this.emit("sending", file16, xhr, formData);
           if (this.options.uploadMultiple)
             this.emit("sendingmultiple", files, xhr, formData);
           this._addFormElementData(formData);
@@ -2171,22 +2200,22 @@ var init_dropzone = __esm({
       }
       _updateFilesUploadProgress(files, xhr, e3) {
         if (!files[0].upload.chunked)
-          for (let file4 of files) {
-            if (file4.upload.total && file4.upload.bytesSent && file4.upload.bytesSent == file4.upload.total)
+          for (let file16 of files) {
+            if (file16.upload.total && file16.upload.bytesSent && file16.upload.bytesSent == file16.upload.total)
               continue;
             if (e3) {
-              file4.upload.progress = 100 * e3.loaded / e3.total;
-              file4.upload.total = e3.total;
-              file4.upload.bytesSent = e3.loaded;
+              file16.upload.progress = 100 * e3.loaded / e3.total;
+              file16.upload.total = e3.total;
+              file16.upload.bytesSent = e3.loaded;
             } else {
-              file4.upload.progress = 100;
-              file4.upload.bytesSent = file4.upload.total;
+              file16.upload.progress = 100;
+              file16.upload.bytesSent = file16.upload.total;
             }
-            this.emit("uploadprogress", file4, file4.upload.progress, file4.upload.bytesSent);
+            this.emit("uploadprogress", file16, file16.upload.progress, file16.upload.bytesSent);
           }
         else {
-          let file4 = files[0];
-          let chunk = this._getChunk(file4, xhr);
+          let file16 = files[0];
+          let chunk = this._getChunk(file16, xhr);
           if (e3) {
             chunk.progress = 100 * e3.loaded / e3.total;
             chunk.total = e3.total;
@@ -2195,17 +2224,17 @@ var init_dropzone = __esm({
             chunk.progress = 100;
             chunk.bytesSent = chunk.total;
           }
-          file4.upload.progress = 0;
-          file4.upload.total = 0;
-          file4.upload.bytesSent = 0;
-          for (let i = 0; i < file4.upload.totalChunkCount; i++)
-            if (file4.upload.chunks[i] && typeof file4.upload.chunks[i].progress !== "undefined") {
-              file4.upload.progress += file4.upload.chunks[i].progress;
-              file4.upload.total += file4.upload.chunks[i].total;
-              file4.upload.bytesSent += file4.upload.chunks[i].bytesSent;
+          file16.upload.progress = 0;
+          file16.upload.total = 0;
+          file16.upload.bytesSent = 0;
+          for (let i = 0; i < file16.upload.totalChunkCount; i++)
+            if (file16.upload.chunks[i] && typeof file16.upload.chunks[i].progress !== "undefined") {
+              file16.upload.progress += file16.upload.chunks[i].progress;
+              file16.upload.total += file16.upload.chunks[i].total;
+              file16.upload.bytesSent += file16.upload.chunks[i].bytesSent;
             }
-          file4.upload.progress = file4.upload.progress / file4.upload.totalChunkCount;
-          this.emit("uploadprogress", file4, file4.upload.progress, file4.upload.bytesSent);
+          file16.upload.progress = file16.upload.progress / file16.upload.totalChunkCount;
+          this.emit("uploadprogress", file16, file16.upload.progress, file16.upload.bytesSent);
         }
       }
       _finishedUploading(files, xhr, e3) {
@@ -2262,10 +2291,10 @@ var init_dropzone = __esm({
           xhr.send(formData);
       }
       _finished(files, responseText, e3) {
-        for (let file4 of files) {
-          file4.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS;
-          this.emit("success", file4, responseText, e3);
-          this.emit("complete", file4);
+        for (let file16 of files) {
+          file16.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.SUCCESS;
+          this.emit("success", file16, responseText, e3);
+          this.emit("complete", file16);
         }
         if (this.options.uploadMultiple) {
           this.emit("successmultiple", files, responseText, e3);
@@ -2275,10 +2304,10 @@ var init_dropzone = __esm({
           return this.processQueue();
       }
       _errorProcessing(files, message, xhr) {
-        for (let file4 of files) {
-          file4.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ERROR;
-          this.emit("error", file4, message, xhr);
-          this.emit("complete", file4);
+        for (let file16 of files) {
+          file16.status = $3ed269f2f0fb224b$export$2e2bcd8739ae039.ERROR;
+          this.emit("error", file16, message, xhr);
+          this.emit("complete", file16);
         }
         if (this.options.uploadMultiple) {
           this.emit("errormultiple", files, message, xhr);
@@ -2328,7 +2357,7 @@ var init_dropzone = __esm({
           delete this.options.acceptedMimeTypes;
         }
         if (this.options.renameFilename != null)
-          this.options.renameFile = (file4) => this.options.renameFilename.call(this, file4.name, file4);
+          this.options.renameFile = (file16) => this.options.renameFilename.call(this, file16.name, file16);
         if (typeof this.options.method === "string")
           this.options.method = this.options.method.toUpperCase();
         if ((fallback = this.getExistingFallback()) && fallback.parentNode)
@@ -2451,23 +2480,23 @@ var init_dropzone = __esm({
       }
       return false;
     };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElement = function(el, name4) {
+    $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElement = function(el, name5) {
       let element;
       if (typeof el === "string")
         element = document.querySelector(el);
       else if (el.nodeType != null)
         element = el;
       if (element == null)
-        throw new Error(`Invalid \`${name4}\` option provided. Please provide a CSS selector or a plain HTML element.`);
+        throw new Error(`Invalid \`${name5}\` option provided. Please provide a CSS selector or a plain HTML element.`);
       return element;
     };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElements = function(els, name4) {
+    $3ed269f2f0fb224b$export$2e2bcd8739ae039.getElements = function(els, name5) {
       let el, elements;
       if (els instanceof Array) {
         elements = [];
         try {
           for (el of els)
-            elements.push(this.getElement(el, name4));
+            elements.push(this.getElement(el, name5));
         } catch (e3) {
           elements = null;
         }
@@ -2480,7 +2509,7 @@ var init_dropzone = __esm({
           els
         ];
       if (elements == null || !elements.length)
-        throw new Error(`Invalid \`${name4}\` option provided. Please provide a CSS selector, a plain HTML element or a list of those.`);
+        throw new Error(`Invalid \`${name5}\` option provided. Please provide a CSS selector, a plain HTML element or a list of those.`);
       return elements;
     };
     $3ed269f2f0fb224b$export$2e2bcd8739ae039.confirm = function(question, accepted, rejected) {
@@ -2489,16 +2518,16 @@ var init_dropzone = __esm({
       else if (rejected != null)
         return rejected();
     };
-    $3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile = function(file4, acceptedFiles) {
+    $3ed269f2f0fb224b$export$2e2bcd8739ae039.isValidFile = function(file16, acceptedFiles) {
       if (!acceptedFiles)
         return true;
       acceptedFiles = acceptedFiles.split(",");
-      let mimeType = file4.type;
+      let mimeType = file16.type;
       let baseMimeType = mimeType.replace(/\/.*$/, "");
       for (let validType of acceptedFiles) {
         validType = validType.trim();
         if (validType.charAt(0) === ".") {
-          if (file4.name.toLowerCase().indexOf(validType.toLowerCase(), file4.name.length - validType.length) !== -1)
+          if (file16.name.toLowerCase().indexOf(validType.toLowerCase(), file16.name.length - validType.length) !== -1)
             return true;
         } else if (/\/\*$/.test(validType)) {
           if (baseMimeType === validType.replace(/\/.*$/, ""))
@@ -2734,13 +2763,13 @@ var init_Dropzone = __esm({
       }
       function dropzoneHandleErroredUploads() {
         let filesToRetry = [];
-        dropzone.on("error", (file4) => file4.accepted && filesToRetry.push(file4));
+        dropzone.on("error", (file16) => file16.accepted && filesToRetry.push(file16));
         window == null ? void 0 : window.addEventListener("online", () => {
           if (filesToRetry.length > 0) {
-            for (const file4 of filesToRetry) {
-              dropzone.processFile(file4);
-              file4.previewElement.querySelector(".dz-error-mark").style.visibility = "hidden";
-              file4.previewElement.querySelector(".dz-error-message").style.visibility = "hidden";
+            for (const file16 of filesToRetry) {
+              dropzone.processFile(file16);
+              file16.previewElement.querySelector(".dz-error-mark").style.visibility = "hidden";
+              file16.previewElement.querySelector(".dz-error-message").style.visibility = "hidden";
             }
           }
         });
@@ -3198,9 +3227,9 @@ var init_index_esm2017 = __esm({
       var _a;
       return (_a = getDefaults()) === null || _a === void 0 ? void 0 : _a.config;
     };
-    getExperimentalSetting = (name4) => {
+    getExperimentalSetting = (name5) => {
       var _a;
-      return (_a = getDefaults()) === null || _a === void 0 ? void 0 : _a[`_${name4}`];
+      return (_a = getDefaults()) === null || _a === void 0 ? void 0 : _a[`_${name5}`];
     };
     Deferred = class {
       constructor() {
@@ -3390,16 +3419,16 @@ var init_index_esm2017 = __esm({
 function normalizeIdentifierForFactory(identifier) {
   return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
 }
-function isComponentEager(component4) {
-  return component4.instantiationMode === "EAGER";
+function isComponentEager(component16) {
+  return component16.instantiationMode === "EAGER";
 }
 var Component, DEFAULT_ENTRY_NAME, Provider, ComponentContainer;
 var init_index_esm20172 = __esm({
   "node_modules/@firebase/component/dist/esm/index.esm2017.js"() {
     init_index_esm2017();
     Component = class {
-      constructor(name4, instanceFactory, type) {
-        this.name = name4;
+      constructor(name5, instanceFactory, type) {
+        this.name = name5;
         this.instanceFactory = instanceFactory;
         this.type = type;
         this.multipleInstances = false;
@@ -3426,8 +3455,8 @@ var init_index_esm20172 = __esm({
     };
     DEFAULT_ENTRY_NAME = "[DEFAULT]";
     Provider = class {
-      constructor(name4, container) {
-        this.name = name4;
+      constructor(name5, container) {
+        this.name = name5;
         this.container = container;
         this.component = null;
         this.instances = /* @__PURE__ */ new Map();
@@ -3481,18 +3510,18 @@ var init_index_esm20172 = __esm({
       getComponent() {
         return this.component;
       }
-      setComponent(component4) {
-        if (component4.name !== this.name) {
-          throw Error(`Mismatching Component ${component4.name} for Provider ${this.name}.`);
+      setComponent(component16) {
+        if (component16.name !== this.name) {
+          throw Error(`Mismatching Component ${component16.name} for Provider ${this.name}.`);
         }
         if (this.component) {
           throw Error(`Component for ${this.name} has already been provided`);
         }
-        this.component = component4;
+        this.component = component16;
         if (!this.shouldAutoInitialize()) {
           return;
         }
-        if (isComponentEager(component4)) {
+        if (isComponentEager(component16)) {
           try {
             this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
           } catch (e3) {
@@ -3608,30 +3637,30 @@ var init_index_esm20172 = __esm({
       }
     };
     ComponentContainer = class {
-      constructor(name4) {
-        this.name = name4;
+      constructor(name5) {
+        this.name = name5;
         this.providers = /* @__PURE__ */ new Map();
       }
-      addComponent(component4) {
-        const provider = this.getProvider(component4.name);
+      addComponent(component16) {
+        const provider = this.getProvider(component16.name);
         if (provider.isComponentSet()) {
-          throw new Error(`Component ${component4.name} has already been registered with ${this.name}`);
+          throw new Error(`Component ${component16.name} has already been registered with ${this.name}`);
         }
-        provider.setComponent(component4);
+        provider.setComponent(component16);
       }
-      addOrOverwriteComponent(component4) {
-        const provider = this.getProvider(component4.name);
+      addOrOverwriteComponent(component16) {
+        const provider = this.getProvider(component16.name);
         if (provider.isComponentSet()) {
-          this.providers.delete(component4.name);
+          this.providers.delete(component16.name);
         }
-        this.addComponent(component4);
+        this.addComponent(component16);
       }
-      getProvider(name4) {
-        if (this.providers.has(name4)) {
-          return this.providers.get(name4);
+      getProvider(name5) {
+        if (this.providers.has(name5)) {
+          return this.providers.get(name5);
         }
-        const provider = new Provider(name4, this);
-        this.providers.set(name4, provider);
+        const provider = new Provider(name5, this);
+        this.providers.set(name5, provider);
         return provider;
       }
       getProviders() {
@@ -3683,8 +3712,8 @@ var init_index_esm20173 = __esm({
       }
     };
     Logger = class {
-      constructor(name4) {
-        this.name = name4;
+      constructor(name5) {
+        this.name = name5;
         this._logLevel = defaultLogLevel;
         this._logHandler = defaultLogHandler;
         this._userLogHandler = null;
@@ -3888,8 +3917,8 @@ var init_wrap_idb_value = __esm({
 });
 
 // node_modules/idb/build/index.js
-function openDB(name4, version4, { blocked, upgrade, blocking, terminated } = {}) {
-  const request = indexedDB.open(name4, version4);
+function openDB(name5, version5, { blocked, upgrade, blocking, terminated } = {}) {
+  const request = indexedDB.open(name5, version5);
   const openPromise = wrap(request);
   if (upgrade) {
     request.addEventListener("upgradeneeded", (event) => {
@@ -3950,92 +3979,92 @@ var init_build = __esm({
 
 // node_modules/@firebase/app/dist/esm/index.esm2017.js
 function isVersionServiceProvider(provider) {
-  const component4 = provider.getComponent();
-  return (component4 === null || component4 === void 0 ? void 0 : component4.type) === "VERSION";
+  const component16 = provider.getComponent();
+  return (component16 === null || component16 === void 0 ? void 0 : component16.type) === "VERSION";
 }
-function _addComponent(app2, component4) {
+function _addComponent(app2, component16) {
   try {
-    app2.container.addComponent(component4);
+    app2.container.addComponent(component16);
   } catch (e3) {
-    logger.debug(`Component ${component4.name} failed to register with FirebaseApp ${app2.name}`, e3);
+    logger.debug(`Component ${component16.name} failed to register with FirebaseApp ${app2.name}`, e3);
   }
 }
-function _registerComponent(component4) {
-  const componentName = component4.name;
+function _registerComponent(component16) {
+  const componentName = component16.name;
   if (_components.has(componentName)) {
     logger.debug(`There were multiple attempts to register component ${componentName}.`);
     return false;
   }
-  _components.set(componentName, component4);
+  _components.set(componentName, component16);
   for (const app2 of _apps.values()) {
-    _addComponent(app2, component4);
+    _addComponent(app2, component16);
   }
   return true;
 }
-function _getProvider(app2, name4) {
+function _getProvider(app2, name5) {
   const heartbeatController = app2.container.getProvider("heartbeat").getImmediate({ optional: true });
   if (heartbeatController) {
     void heartbeatController.triggerHeartbeat();
   }
-  return app2.container.getProvider(name4);
+  return app2.container.getProvider(name5);
 }
-function _removeServiceInstance(app2, name4, instanceIdentifier = DEFAULT_ENTRY_NAME2) {
-  _getProvider(app2, name4).clearInstance(instanceIdentifier);
+function _removeServiceInstance(app2, name5, instanceIdentifier = DEFAULT_ENTRY_NAME2) {
+  _getProvider(app2, name5).clearInstance(instanceIdentifier);
 }
 function initializeApp(_options, rawConfig = {}) {
   let options = _options;
   if (typeof rawConfig !== "object") {
-    const name5 = rawConfig;
-    rawConfig = { name: name5 };
+    const name6 = rawConfig;
+    rawConfig = { name: name6 };
   }
   const config = Object.assign({ name: DEFAULT_ENTRY_NAME2, automaticDataCollectionEnabled: false }, rawConfig);
-  const name4 = config.name;
-  if (typeof name4 !== "string" || !name4) {
+  const name5 = config.name;
+  if (typeof name5 !== "string" || !name5) {
     throw ERROR_FACTORY.create("bad-app-name", {
-      appName: String(name4)
+      appName: String(name5)
     });
   }
   options || (options = getDefaultAppConfig());
   if (!options) {
     throw ERROR_FACTORY.create("no-options");
   }
-  const existingApp = _apps.get(name4);
+  const existingApp = _apps.get(name5);
   if (existingApp) {
     if (deepEqual(options, existingApp.options) && deepEqual(config, existingApp.config)) {
       return existingApp;
     } else {
-      throw ERROR_FACTORY.create("duplicate-app", { appName: name4 });
+      throw ERROR_FACTORY.create("duplicate-app", { appName: name5 });
     }
   }
-  const container = new ComponentContainer(name4);
-  for (const component4 of _components.values()) {
-    container.addComponent(component4);
+  const container = new ComponentContainer(name5);
+  for (const component16 of _components.values()) {
+    container.addComponent(component16);
   }
   const newApp = new FirebaseAppImpl(options, config, container);
-  _apps.set(name4, newApp);
+  _apps.set(name5, newApp);
   return newApp;
 }
-function getApp(name4 = DEFAULT_ENTRY_NAME2) {
-  const app2 = _apps.get(name4);
-  if (!app2 && name4 === DEFAULT_ENTRY_NAME2) {
+function getApp(name5 = DEFAULT_ENTRY_NAME2) {
+  const app2 = _apps.get(name5);
+  if (!app2 && name5 === DEFAULT_ENTRY_NAME2) {
     return initializeApp();
   }
   if (!app2) {
-    throw ERROR_FACTORY.create("no-app", { appName: name4 });
+    throw ERROR_FACTORY.create("no-app", { appName: name5 });
   }
   return app2;
 }
-function registerVersion(libraryKeyOrName, version4, variant) {
+function registerVersion(libraryKeyOrName, version5, variant) {
   var _a;
   let library = (_a = PLATFORM_LOG_STRING[libraryKeyOrName]) !== null && _a !== void 0 ? _a : libraryKeyOrName;
   if (variant) {
     library += `-${variant}`;
   }
   const libraryMismatch = library.match(/\s|\//);
-  const versionMismatch = version4.match(/\s|\//);
+  const versionMismatch = version5.match(/\s|\//);
   if (libraryMismatch || versionMismatch) {
     const warning = [
-      `Unable to register library "${library}" with version "${version4}":`
+      `Unable to register library "${library}" with version "${version5}":`
     ];
     if (libraryMismatch) {
       warning.push(`library name "${library}" contains illegal characters (whitespace or "/")`);
@@ -4044,12 +4073,12 @@ function registerVersion(libraryKeyOrName, version4, variant) {
       warning.push("and");
     }
     if (versionMismatch) {
-      warning.push(`version name "${version4}" contains illegal characters (whitespace or "/")`);
+      warning.push(`version name "${version5}" contains illegal characters (whitespace or "/")`);
     }
     logger.warn(warning.join(" "));
     return;
   }
-  _registerComponent(new Component(`${library}-version`, () => ({ library, version: version4 }), "VERSION"));
+  _registerComponent(new Component(`${library}-version`, () => ({ library, version: version5 }), "VERSION"));
 }
 function getDbPromise() {
   if (!dbPromise) {
@@ -4419,7 +4448,7 @@ var init_index_esm2 = __esm({
 
 // node_modules/tslib/tslib.js
 var require_tslib = __commonJS({
-  "node_modules/tslib/tslib.js"(exports, module) {
+  "node_modules/tslib/tslib.js"(exports2, module2) {
     var __extends2;
     var __assign2;
     var __rest2;
@@ -4448,24 +4477,24 @@ var require_tslib = __commonJS({
     (function(factory) {
       var root = typeof global === "object" ? global : typeof self === "object" ? self : typeof this === "object" ? this : {};
       if (typeof define === "function" && define.amd) {
-        define("tslib", ["exports"], function(exports2) {
-          factory(createExporter(root, createExporter(exports2)));
+        define("tslib", ["exports"], function(exports3) {
+          factory(createExporter(root, createExporter(exports3)));
         });
-      } else if (typeof module === "object" && typeof module.exports === "object") {
-        factory(createExporter(root, createExporter(module.exports)));
+      } else if (typeof module2 === "object" && typeof module2.exports === "object") {
+        factory(createExporter(root, createExporter(module2.exports)));
       } else {
         factory(createExporter(root));
       }
-      function createExporter(exports2, previous) {
-        if (exports2 !== root) {
+      function createExporter(exports3, previous) {
+        if (exports3 !== root) {
           if (typeof Object.create === "function") {
-            Object.defineProperty(exports2, "__esModule", { value: true });
+            Object.defineProperty(exports3, "__esModule", { value: true });
           } else {
-            exports2.__esModule = true;
+            exports3.__esModule = true;
           }
         }
         return function(id, v2) {
-          return exports2[id] = previous ? previous(id, v2) : v2;
+          return exports3[id] = previous ? previous(id, v2) : v2;
         };
       }
     })(function(exporter) {
@@ -5950,7 +5979,7 @@ async function _openIframe(auth) {
     });
   }));
 }
-function _open(auth, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
+function _open(auth, url, name5, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
   const top = Math.max((window.screen.availHeight - height) / 2, 0).toString();
   const left = Math.max((window.screen.availWidth - width) / 2, 0).toString();
   let target = "";
@@ -5961,8 +5990,8 @@ function _open(auth, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT)
     left
   });
   const ua = getUA().toLowerCase();
-  if (name4) {
-    target = _isChromeIOS(ua) ? TARGET_BLANK : name4;
+  if (name5) {
+    target = _isChromeIOS(ua) ? TARGET_BLANK : name5;
   }
   if (_isFirefox(ua)) {
     url = url || FIREFOX_EMPTY_URL;
@@ -6595,9 +6624,9 @@ var init_index_0bb4da3b = __esm({
         this.persistence = persistence;
         this.auth = auth;
         this.userKey = userKey;
-        const { config, name: name4 } = this.auth;
-        this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name4);
-        this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name4);
+        const { config, name: name5 } = this.auth;
+        this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name5);
+        this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name5);
         this.boundEventHandler = auth._onStorageEvent.bind(auth);
         this.persistence._addListener(this.fullUserKey, this.boundEventHandler);
       }
@@ -6690,9 +6719,9 @@ var init_index_0bb4da3b = __esm({
         });
         wrappedCallback.onAbort = onAbort;
         this.queue.push(wrappedCallback);
-        const index4 = this.queue.length - 1;
+        const index16 = this.queue.length - 1;
         return () => {
-          this.queue[index4] = () => Promise.resolve();
+          this.queue[index16] = () => Promise.resolve();
         };
       }
       async runMiddleware(nextUser) {
@@ -12461,9 +12490,9 @@ var init_index_esm4 = __esm({
 });
 
 // .svelte-kit/output/server/chunks/LoginCard.js
-function guard(name4) {
+function guard(name5) {
   return () => {
-    throw new Error(`Cannot call ${name4}(...) on the server`);
+    throw new Error(`Cannot call ${name5}(...) on the server`);
   };
 }
 var goto, IconTwitter, TwitterLoginButton, IconGoogle, GoogleLoginButton, IconEmail, MagicLinkSection, IconPhone, PhoneAuthSection, LoginCard;
@@ -13168,7 +13197,7 @@ var init__ = __esm({
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
     file = "_app/immutable/components/pages/_layout.svelte-21f4ab48.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-21f4ab48.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Dropzone-3e249038.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/LoginCard-169786e8.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/modules/pages/_layout.js-d1ec873b.js", "_app/immutable/chunks/_layout-86260db2.js"];
+    imports = ["_app/immutable/components/pages/_layout.svelte-21f4ab48.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Dropzone-3e249038.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/LoginCard-169786e8.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/_layout-f56b309e.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff"];
   }
@@ -13215,15 +13244,2012 @@ var init__2 = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/physics/_page.js
+// .svelte-kit/output/server/chunks/PlansComponent.js
+function payUrl(session_type, payment_type, color2) {
+  return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1&primary_color=${color2}`;
+}
+var PlansCard, sampleHref, color, plansCardArray, PlansComponent;
+var init_PlansComponent = __esm({
+  ".svelte-kit/output/server/chunks/PlansComponent.js"() {
+    init_chunks();
+    init_store();
+    init_utils();
+    PlansCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      let $elementColor, $$unsubscribe_elementColor;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$unsubscribe_elementColor = subscribe(elementColor, (value) => $elementColor = value);
+      let { payNowUrl = "" } = $$props;
+      let { payLaterUrl = "" } = $$props;
+      const payButtons = [
+        {
+          resetter: false,
+          url: payNowUrl,
+          opacityTW: "bg-opacity-100",
+          text: "Pay Now"
+        },
+        {
+          resetter: false,
+          url: payLaterUrl,
+          opacityTW: "bg-opacity-70",
+          text: "Pay Later"
+        }
+      ];
+      let { btnColorHover = "" } = $$props;
+      let { card } = $$props;
+      let buttonColor = {
+        1: "bg-[rgb(244,77,77)]",
+        2: "bg-[rgb(254,164,92)]",
+        3: "bg-[rgb(45,165,214)]"
+      };
+      if ($$props.payNowUrl === void 0 && $$bindings.payNowUrl && payNowUrl !== void 0)
+        $$bindings.payNowUrl(payNowUrl);
+      if ($$props.payLaterUrl === void 0 && $$bindings.payLaterUrl && payLaterUrl !== void 0)
+        $$bindings.payLaterUrl(payLaterUrl);
+      if ($$props.btnColorHover === void 0 && $$bindings.btnColorHover && btnColorHover !== void 0)
+        $$bindings.btnColorHover(btnColorHover);
+      if ($$props.card === void 0 && $$bindings.card && card !== void 0)
+        $$bindings.card(card);
+      $$unsubscribe_isDarkMode();
+      $$unsubscribe_elementColor();
+      return `<plans-card class="${"cardIdentifier block shadow-md hover:scale-105 " + escape($isDarkMode ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl m-1 p-7 text-center duration-300 group"}"${add_attribute("style", `background:${$elementColor}`, 0)}><p class="${"text-4xl font-Poppins py-5 text-center"}">${slots.cardTitle ? slots.cardTitle({}) : `Classico`}</p>
+
+  ${each(payButtons, (button) => {
+        return `<button class="${"" + escape(buttonColor[card], true) + " " + escape(btnColorHover, true) + " " + escape(button.opacityTW, true) + " hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white"}">${slots.buttonText ? slots.buttonText({}) : `${escape(button.text)}`}
+      </button>`;
+      })}
+
+  <div class="${"py-4"}">${slots.cardText ? slots.cardText({}) : `default cardText`}</div></plans-card>`;
+    });
+    sampleHref = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
+    color = {
+      red: "f34d4e",
+      yellow: "fea45c",
+      blue: "2aa5d6"
+    };
+    plansCardArray = [
+      {
+        card: 1,
+        payNowUrl: payUrl("classico", "stripe", color.red),
+        payLaterUrl: payUrl("classico", "invoice", color.red),
+        buttonText: "Classico",
+        cardTitle: "Classico",
+        cardText: "Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.",
+        href: sampleHref
+      },
+      {
+        card: 3,
+        payNowUrl: payUrl("mock", "stripe", color.blue),
+        payLaterUrl: payUrl("mock", "invoice", color.blue),
+        buttonText: "Mock",
+        cardTitle: "Mock",
+        cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key available as a +2hr premium.",
+        href: sampleHref
+      },
+      {
+        card: 2,
+        payNowUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+        payLaterUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+        buttonText: "Custom",
+        cardTitle: "Custom",
+        cardText: `Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. `,
+        href: sampleHref
+      }
+    ];
+    PlansComponent = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let dispatch = createEventDispatcher();
+      let { plansCards = plansCardArray } = $$props;
+      let { noTransition = false } = $$props;
+      let ready = noTransition;
+      if ($$props.plansCards === void 0 && $$bindings.plansCards && plansCards !== void 0)
+        $$bindings.plansCards(plansCards);
+      if ($$props.noTransition === void 0 && $$bindings.noTransition && noTransition !== void 0)
+        $$bindings.noTransition(noTransition);
+      return `${validate_component(InView, "InView").$$render(
+        $$result,
+        {
+          once: true,
+          margin: "200px",
+          onview: () => {
+            console.log("\u{1F4C5}");
+            jsToHead("calendlyJS", "https://assets.calendly.com/assets/external/widget.js");
+            cssToHead("calendlyCSS", "https://assets.calendly.com/assets/external/widget.css");
+          }
+        },
+        {},
+        {
+          default: () => {
+            return `
+  <plans-section${add_attribute("use", dispatch("boop", { plansCardArray, message: "n i boop" }), 0)} class="${"grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"}">
+    ${each(plansCards, (item, i) => {
+              return `${ready ? `<div>${validate_component(PlansCard, "PlansCard").$$render(
+                $$result,
+                {
+                  card: item.card,
+                  payNowUrl: item.payNowUrl,
+                  payLaterUrl: item.payLaterUrl
+                },
+                {},
+                {
+                  cardText: () => {
+                    return `<span slot="${"cardText"}">${escape(item.cardText)}
+            </span>`;
+                  },
+                  cardTitle: () => {
+                    return `<span slot="${"cardTitle"}">${escape(item.cardTitle)} </span>`;
+                  },
+                  default: () => {
+                    return `
+            
+
+            
+          `;
+                  }
+                }
+              )}
+        </div>` : ``}`;
+            })}</plans-section>`;
+          }
+        }
+      )}
+
+
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_page.svelte.js
+var page_svelte_exports = {};
+__export(page_svelte_exports, {
+  default: () => Page
+});
+var css$1, ReviewCreator, reviews, Reviews, css3, Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+    init_chunks();
+    init_PlansComponent();
+    init_Dropzone();
+    init_store();
+    init_utils();
+    css$1 = {
+      code: "h1.svelte-1hvhqpo{margin:0;padding:0}",
+      map: null
+    };
+    ReviewCreator = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let { title = "Great physics tutor!!" } = $$props;
+      let { name: name5 = "Thomas Finn" } = $$props;
+      let { date = "2022-06-08" } = $$props;
+      if ($$props.title === void 0 && $$bindings.title && title !== void 0)
+        $$bindings.title(title);
+      if ($$props.name === void 0 && $$bindings.name && name5 !== void 0)
+        $$bindings.name(name5);
+      if ($$props.date === void 0 && $$bindings.date && date !== void 0)
+        $$bindings.date(date);
+      $$result.css.add(css$1);
+      $$unsubscribe_isDarkMode();
+      return `<article class="${"prose relative " + escape($isDarkMode && "prose-invert", true) + " md:pb-[5vw]"}"><div class="${"absolute"}"><h1 class="${"svelte-1hvhqpo"}">${escape(title)}</h1>
+    <div class="${"flex flex-row"}">${each(Array(5), (_2, i) => {
+        return `${validate_component(InView, "InView").$$render(
+          $$result,
+          {
+            single: true,
+            once: true,
+            onview: (target) => {
+              console.log("\u{1F4AB}");
+              target.classList.remove("opacity-0");
+              target.src = "/star.webp";
+            }
+          },
+          {},
+          {
+            default: () => {
+              return `<img src="${""}" class="${"opacity-0 transition-opacity duration-300 ease-in hover:scale-125"}" alt="${"star"}" style="${"width:40px; height:40px"}">
+      `;
+            }
+          }
+        )}`;
+      })}</div>
+    <div class="${"italic"}">on ${escape(date)}</div>
+    ${slots.default ? slots.default({}) : ``}
+    <b class="${"absolute right-0 bottom-0 -my-10 mx-5 "}">${escape(name5)}</b></div></article>`;
+    });
+    reviews = [
+      {
+        name: "CM",
+        title: "grade 10 math / grade 11 physics",
+        date: "2022-07-11",
+        body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!"
+      },
+      {
+        name: "magnus",
+        title: "Great help before final!",
+        date: "2022-06-26",
+        body: "Waves & oscillation was not covered so well by my teacher ... the session + mock test really helped out before my final exam!"
+      },
+      {
+        name: "Thomas Finn",
+        title: "Great physics tutor!!",
+        date: "2022-06-08",
+        body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!"
+      },
+      {
+        name: "felix belfoy",
+        title: "quantitative chem",
+        date: "2022-06-01",
+        body: "I only had him for one session since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!"
+      },
+      {
+        name: "Celia",
+        title: "amazing IBHL physics tutor ",
+        date: "2022-05-01",
+        body: "Jon explained the mechanics behind every question I had trouble with in thorough detail. If I had difficulty understanding his explanation, he would use another way to represent his knowledge such as drawing pictures and using diagrams. he taught me measurements, mechanics, waves, electromagnetism, nuclear and thermal physics. He was also a big help with my physics IA! He also made my solution space a place where I could look back if I've forgotten something."
+      },
+      {
+        name: "fernando vc",
+        title: "very helpful with kinematics!",
+        date: "2021-05-03",
+        body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed."
+      },
+      {
+        name: "Lavinia",
+        title: "Great Spanish tutor",
+        date: "2021-03-03",
+        body: "He is super patient with my very much broken Spanish. He is always on time and helps out a lot by giving me extra notes. Best Spanish tutor I had so far :)))"
+      },
+      {
+        name: "TJ Macdonald",
+        title: "Review",
+        date: "2021-02-10",
+        body: "Jon was great at understanding how to best teach me the content if I didn't fully understand at first, and broke it down into simple steps for me. he was also great at knowing when I didn't fully understand something and would clarify it easily without me having to ask which was awesome really glad to have him in my conner for tests and assignments."
+      },
+      {
+        name: "Miranda Teta",
+        title: "IB Physics",
+        date: "2021-02-05",
+        body: "Jon started tutoring me in my first year of IB Physics, a very challenging course in which I had trouble understanding. He found creative ways for me to comprehend the subject and whenever I still couldn't understand, he would try other ways until I felt comfortable with the topic. He goes out of his way to make sure get the help I need and. after a few tutoring sessions, I started getting a deeper understanding of my course, which am very grateful for."
+      },
+      {
+        name: "Efe T.",
+        title: "IB Physics Year 1",
+        date: "2021-02-01",
+        body: "He helps through the process of answering each question by helping with each step. From test preparation to experiments, he has assisted me with every problem have encountered. He is also a fun person to talk to and a very friendly person."
+      },
+      {
+        name: "Parent of Rachel",
+        title: "stellar!",
+        date: "2020-06-03",
+        body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!"
+      },
+      {
+        name: "Paola A.",
+        title: "1st yr at Brock University",
+        date: "2020-10-27",
+        body: "I had an awesome experience with Jon. I was a BioSci student at Brock and really needed help with Physics 1P91 and Calculus. He was clear, structured, patient and thorough. I survived! With Physics being one of my best classes."
+      },
+      {
+        name: "rob henriquez",
+        title: "mohawk college tutor",
+        date: "2020-02-18",
+        body: "Jon makes learning physics and math intuitive. He finds creative ways of teaching and is passionate about your success. I highly recommend him!!"
+      },
+      {
+        name: "rozhina mazhar",
+        title: "IB HL Physics",
+        date: "2020-03-07",
+        body: "John was a huge help for me in gr 12 physics at Ridley. We met once a week in the learning centre and he would help me on everything from lab prep to assignments to homework questions ... he made me feel extra confident in my abilities!"
+      },
+      {
+        name: "Zaara Alam",
+        title: "grade 12 physics",
+        date: "2020-10-27",
+        body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}"
+      }
+    ];
+    Reviews = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `<div class="${"scale-90"}">
+
+  <div class="${"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"}">${each(reviews, ({ name: name5, title, date, body }) => {
+        return `${validate_component(ReviewCreator, "ReviewCreator").$$render($$result, { title, name: name5, date }, {}, {
+          default: () => {
+            return `${escape(body)}
+      `;
+          }
+        })}`;
+      })}</div></div>`;
+    });
+    css3 = {
+      code: ".page.svelte-iq6ytm{display:grid;grid-gap:10px;grid-template-rows:repeat(auto-fit, minmax(100vh, 1fr))}",
+      map: null
+    };
+    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let gradientTextColor;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let classicoAndMock;
+      $$result.css.add(css3);
+      gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${$isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`;
+      $$unsubscribe_isDarkMode();
+      return `<video loading="${"lazy"}" controlslist="${"nodownload"}" playsinline autoplay muted loop class="${"absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full " + escape($isDarkMode ? "invert-[0.95] blur-3xl " : "blur-2xl", true)}" src="${"/login-bg-video-blurred.mp4"}"></video>
+
+${`<div class="${"grid grid-cols-1 gap-y-52 lg:gap-y-64"}">
+    <div class="${"h-[60vh] flex justify-center items-center text-center"}"><div class="${"grid grid-rows-1"}">${``}</div></div>
+
+    
+    <div id="${"step1"}" class="${"hover:scale-105 duration-500 grid place-content-center"}"><button class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">1. Upload your homework </span></button>
+
+      
+      ${validate_component(Dropzone, "Dropzone").$$render(
+        $$result,
+        {
+          text: "Drop it like it's \u{1F525}",
+          textSizeTW: "text-2xl"
+        },
+        {},
+        {}
+      )}</div>
+
+    
+    <div id="${"step2"}" class="${"duration-500 grid place-content-center"}"><button class="${"text-5xl font-Poppins text-center pb-7 "}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">2. Schedule a Session </span></button>
+
+      ${validate_component(PlansComponent, "PlansComponent").$$render(
+        $$result,
+        {
+          noTransition: true,
+          plansCards: classicoAndMock
+        },
+        {},
+        {}
+      )}
+      </div>
+
+    
+    <div id="${"reviews"}" class="${"duration-500 mb-[200px] sm:mb-[500px]"}"><button class="${"text-5xl font-Poppins w-full flex justify-center"}"><span class="${escape(null_to_empty(gradientTextColor), true) + " svelte-iq6ytm"}">3. Do Some Reading <span class="${"text-black"}">\u{1F60E} </span></span></button>
+      ${validate_component(Reviews, "Reviews").$$render($$result, {}, {}, {})}</div></div>`}
+
+
+
+
+
+
+
+
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/2.js
+var __exports3 = {};
+__export(__exports3, {
+  component: () => component3,
+  file: () => file3,
+  fonts: () => fonts3,
+  imports: () => imports3,
+  index: () => index3,
+  stylesheets: () => stylesheets3
+});
+var index3, component3, file3, imports3, stylesheets3, fonts3;
+var init__3 = __esm({
+  ".svelte-kit/output/server/nodes/2.js"() {
+    index3 = 2;
+    component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
+    file3 = "_app/immutable/components/pages/_page.svelte-b780ed30.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-b780ed30.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/PlansComponent-2d3ca242.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/Dropzone-3e249038.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js"];
+    stylesheets3 = ["_app/immutable/assets/_page-7d3eabbd.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    fonts3 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/classroom/_page.js
 var page_exports = {};
 __export(page_exports, {
-  prerender: () => prerender2
+  ssr: () => ssr
 });
-var prerender2;
+var ssr;
 var init_page = __esm({
-  ".svelte-kit/output/server/entries/pages/physics/_page.js"() {
-    prerender2 = false;
+  ".svelte-kit/output/server/entries/pages/classroom/_page.js"() {
+    ssr = false;
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/classroom/_page.svelte.js
+var page_svelte_exports2 = {};
+__export(page_svelte_exports2, {
+  default: () => Page2
+});
+var JitsiUser, Page2;
+var init_page_svelte2 = __esm({
+  ".svelte-kit/output/server/entries/pages/classroom/_page.svelte.js"() {
+    init_chunks();
+    init_store();
+    !function(e3, t2) {
+      "object" == typeof exports && "object" == typeof module ? module.exports = t2() : "function" == typeof define && define.amd ? define([], t2) : "object" == typeof exports ? exports.JitsiMeetExternalAPI = t2() : e3.JitsiMeetExternalAPI = t2();
+    }(self, function() {
+      return (() => {
+        var e3 = {
+          820: (e22, t22, n22) => {
+            n22.d(t22, { default: () => S3 });
+            var i = n22(620), r2 = n22.n(i);
+            class s3 extends i {
+              constructor() {
+                var e32, t3;
+                super(...arguments), t3 = {}, (e32 = "_storage") in this ? Object.defineProperty(this, e32, {
+                  value: t3,
+                  enumerable: true,
+                  configurable: true,
+                  writable: true
+                }) : this[e32] = t3;
+              }
+              clear() {
+                this._storage = {};
+              }
+              get length() {
+                return Object.keys(this._storage).length;
+              }
+              getItem(e32) {
+                return this._storage[e32];
+              }
+              setItem(e32, t3) {
+                this._storage[e32] = t3;
+              }
+              removeItem(e32) {
+                delete this._storage[e32];
+              }
+              key(e32) {
+                const t3 = Object.keys(this._storage);
+                if (!(t3.length <= e32))
+                  return t3[e32];
+              }
+              serialize() {
+                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                if (0 === e32.length)
+                  return JSON.stringify(this._storage);
+                const t3 = { ...this._storage };
+                return e32.forEach((e4) => {
+                  delete t3[e4];
+                }), JSON.stringify(t3);
+              }
+            }
+            const o2 = new class extends i {
+              constructor() {
+                super();
+                try {
+                  this._storage = window.localStorage, this._localStorageDisabled = false;
+                } catch (e32) {
+                }
+                this._storage || (console.warn("Local storage is disabled."), this._storage = new s3(), this._localStorageDisabled = true);
+              }
+              isLocalStorageDisabled() {
+                return this._localStorageDisabled;
+              }
+              clear() {
+                this._storage.clear(), this.emit("changed");
+              }
+              get length() {
+                return this._storage.length;
+              }
+              getItem(e32) {
+                return this._storage.getItem(e32);
+              }
+              setItem(e32, t3) {
+                let n3 = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
+                this._storage.setItem(e32, t3), n3 || this.emit("changed");
+              }
+              removeItem(e32) {
+                this._storage.removeItem(e32), this.emit("changed");
+              }
+              key(e32) {
+                return this._storage.key(e32);
+              }
+              serialize() {
+                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                if (this.isLocalStorageDisabled())
+                  return this._storage.serialize(e32);
+                const t3 = this._storage.length, n3 = {};
+                for (let i2 = 0; i2 < t3; i2++) {
+                  const t4 = this._storage.key(i2);
+                  e32.includes(t4) || (n3[t4] = this._storage.getItem(t4));
+                }
+                return JSON.stringify(n3);
+              }
+            }();
+            var a2 = n22(571);
+            const c2 = ["__proto__", "constructor", "prototype"];
+            function l(e32) {
+              const t3 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)+", "gi"), n3 = t3.exec(e32);
+              if (n3) {
+                let i2 = n3[n3.length - 1].toLowerCase();
+                "http:" !== i2 && "https:" !== i2 && (i2 = "https:"), (e32 = e32.substring(t3.lastIndex)).startsWith("//") && (e32 = i2 + e32);
+              }
+              return e32;
+            }
+            function d2(e32 = {}) {
+              const t3 = [];
+              for (const n3 in e32)
+                try {
+                  t3.push(`${n3}=${encodeURIComponent(JSON.stringify(e32[n3]))}`);
+                } catch (e4) {
+                  console.warn(`Error encoding ${n3}: ${e4}`);
+                }
+              return t3;
+            }
+            function u(e32) {
+              const t3 = { toString: h };
+              let n3, i2, r22;
+              if (e32 = e32.replace(/\s/g, ""), n3 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)", "gi"), i2 = n3.exec(e32), i2 && (t3.protocol = i2[1].toLowerCase(), e32 = e32.substring(n3.lastIndex)), n3 = new RegExp("^(//[^/?#]+)", "gi"), i2 = n3.exec(e32), i2) {
+                let r3 = i2[1].substring(2);
+                e32 = e32.substring(n3.lastIndex);
+                const s22 = r3.indexOf("@");
+                -1 !== s22 && (r3 = r3.substring(s22 + 1)), t3.host = r3;
+                const o22 = r3.lastIndexOf(":");
+                -1 !== o22 && (t3.port = r3.substring(o22 + 1), r3 = r3.substring(0, o22)), t3.hostname = r3;
+              }
+              if (n3 = new RegExp("^([^?#]*)", "gi"), i2 = n3.exec(e32), i2 && (r22 = i2[1], e32 = e32.substring(n3.lastIndex)), r22 ? r22.startsWith("/") || (r22 = `/${r22}`) : r22 = "/", t3.pathname = r22, e32.startsWith("?")) {
+                let n4 = e32.indexOf("#", 1);
+                -1 === n4 && (n4 = e32.length), t3.search = e32.substring(0, n4), e32 = e32.substring(n4);
+              } else
+                t3.search = "";
+              return t3.hash = e32.startsWith("#") ? e32 : "", t3;
+            }
+            function h(e32) {
+              const {
+                hash: t3,
+                host: n3,
+                pathname: i2,
+                protocol: r22,
+                search: s22
+              } = e32 || this;
+              let o22 = "";
+              return r22 && (o22 += r22), n3 && (o22 += `//${n3}`), o22 += i2 || "/", s22 && (o22 += s22), t3 && (o22 += t3), o22;
+            }
+            function p2(e32) {
+              let t3;
+              t3 = e32.serverURL && e32.room ? new URL(e32.room, e32.serverURL).toString() : e32.room ? e32.room : e32.url || "";
+              const n3 = u(l(t3));
+              if (!n3.protocol) {
+                let t4 = e32.protocol || e32.scheme;
+                t4 && (t4.endsWith(":") || (t4 += ":"), n3.protocol = t4);
+              }
+              let { pathname: i2 } = n3;
+              if (!n3.host) {
+                const t4 = e32.domain || e32.host || e32.hostname;
+                if (t4) {
+                  const {
+                    host: e4,
+                    hostname: r3,
+                    pathname: s32,
+                    port: o3
+                  } = u(l(`org.jitsi.meet://${t4}`));
+                  e4 && (n3.host = e4, n3.hostname = r3, n3.port = o3), "/" === i2 && "/" !== s32 && (i2 = s32);
+                }
+              }
+              const r22 = e32.roomName || e32.room;
+              !r22 || !n3.pathname.endsWith("/") && n3.pathname.endsWith(`/${r22}`) || (i2.endsWith("/") || (i2 += "/"), i2 += r22), n3.pathname = i2;
+              const { jwt: s22, lang: o22, release: a22 } = e32, c22 = new URLSearchParams(n3.search);
+              s22 && c22.set("jwt", s22);
+              const { defaultLanguage: h2 } = e32.configOverwrite || {};
+              (o22 || h2) && c22.set("lang", o22 || h2), a22 && c22.set("release", a22);
+              const p22 = c22.toString();
+              p22 && (n3.search = `?${p22}`);
+              let { hash: g22 } = n3;
+              for (const t4 of [
+                "config",
+                "interfaceConfig",
+                "devices",
+                "userInfo",
+                "appData"
+              ]) {
+                const n4 = d2(e32[`${t4}Overwrite`] || e32[t4] || e32[`${t4}Override`]);
+                if (n4.length) {
+                  let e4 = `${t4}.${n4.join(`&${t4}.`)}`;
+                  g22.length ? e4 = `&${e4}` : g22 = "#", g22 += e4;
+                }
+              }
+              return n3.hash = g22, n3.toString() || void 0;
+            }
+            const g2 = { window: window.opener || window.parent }, m2 = "message";
+            class f {
+              constructor() {
+                let { postisOptions: e32 } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+                this.postis = function(e4) {
+                  var t3, n3 = e4.scope, i2 = e4.window, r22 = e4.windowForEventListening || window, s22 = e4.allowedOrigin, o22 = {}, a22 = [], c22 = {}, l2 = false, d22 = "__ready__", u2 = function(e5) {
+                    var t4;
+                    try {
+                      t4 = JSON.parse(e5.data);
+                    } catch (e6) {
+                      return;
+                    }
+                    if ((!s22 || e5.origin === s22) && t4 && t4.postis && t4.scope === n3) {
+                      var i3 = o22[t4.method];
+                      if (i3)
+                        for (var r3 = 0; r3 < i3.length; r3++)
+                          i3[r3].call(null, t4.params);
+                      else
+                        c22[t4.method] = c22[t4.method] || [], c22[t4.method].push(t4.params);
+                    }
+                  };
+                  r22.addEventListener("message", u2, false);
+                  var h2 = {
+                    listen: function(e5, t4) {
+                      o22[e5] = o22[e5] || [], o22[e5].push(t4);
+                      var n4 = c22[e5];
+                      if (n4)
+                        for (var i3 = o22[e5], r3 = 0; r3 < i3.length; r3++)
+                          for (var s32 = 0; s32 < n4.length; s32++)
+                            i3[r3].call(null, n4[s32]);
+                      delete c22[e5];
+                    },
+                    send: function(e5) {
+                      var t4 = e5.method;
+                      (l2 || e5.method === d22) && i2 && "function" == typeof i2.postMessage ? i2.postMessage(
+                        JSON.stringify({
+                          postis: true,
+                          scope: n3,
+                          method: t4,
+                          params: e5.params
+                        }),
+                        "*"
+                      ) : a22.push(e5);
+                    },
+                    ready: function(e5) {
+                      l2 ? e5() : setTimeout(function() {
+                        h2.ready(e5);
+                      }, 50);
+                    },
+                    destroy: function(e5) {
+                      clearInterval(t3), l2 = false, r22 && "function" == typeof r22.removeEventListener && r22.removeEventListener("message", u2), e5 && e5();
+                    }
+                  }, p22 = +new Date() + Math.random() + "";
+                  return t3 = setInterval(function() {
+                    h2.send({ method: d22, params: p22 });
+                  }, 50), h2.listen(d22, function(e5) {
+                    if (e5 === p22) {
+                      clearInterval(t3), l2 = true;
+                      for (var n4 = 0; n4 < a22.length; n4++)
+                        h2.send(a22[n4]);
+                      a22 = [];
+                    } else
+                      h2.send({ method: d22, params: e5 });
+                  }), h2;
+                }({ ...g2, ...e32 }), this._receiveCallback = () => {
+                }, this.postis.listen(m2, (e4) => this._receiveCallback(e4));
+              }
+              dispose() {
+                this.postis.destroy();
+              }
+              send(e32) {
+                this.postis.send({ method: m2, params: e32 });
+              }
+              setReceiveCallback(e32) {
+                this._receiveCallback = e32;
+              }
+            }
+            const v2 = "request", y2 = "response";
+            class _2 {
+              constructor() {
+                let { backend: e32 } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+                this._listeners = /* @__PURE__ */ new Map(), this._requestID = 0, this._responseHandlers = /* @__PURE__ */ new Map(), this._unprocessedMessages = /* @__PURE__ */ new Set(), this.addListener = this.on, e32 && this.setBackend(e32);
+              }
+              _disposeBackend() {
+                this._backend && (this._backend.dispose(), this._backend = null);
+              }
+              _onMessageReceived(e32) {
+                if (e32.type === y2) {
+                  const t3 = this._responseHandlers.get(e32.id);
+                  t3 && (t3(e32), this._responseHandlers.delete(e32.id));
+                } else
+                  e32.type === v2 ? this.emit("request", e32.data, (t3, n3) => {
+                    this._backend.send({
+                      type: y2,
+                      error: n3,
+                      id: e32.id,
+                      result: t3
+                    });
+                  }) : this.emit("event", e32.data);
+              }
+              dispose() {
+                this._responseHandlers.clear(), this._unprocessedMessages.clear(), this.removeAllListeners(), this._disposeBackend();
+              }
+              emit(e32) {
+                for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
+                  n3[i2 - 1] = arguments[i2];
+                const r22 = this._listeners.get(e32);
+                let s22 = false;
+                return r22 && r22.size && r22.forEach((e4) => {
+                  s22 = e4(...n3) || s22;
+                }), s22 || this._unprocessedMessages.add(n3), s22;
+              }
+              on(e32, t3) {
+                let n3 = this._listeners.get(e32);
+                return n3 || (n3 = /* @__PURE__ */ new Set(), this._listeners.set(e32, n3)), n3.add(t3), this._unprocessedMessages.forEach((e4) => {
+                  t3(...e4) && this._unprocessedMessages.delete(e4);
+                }), this;
+              }
+              removeAllListeners(e32) {
+                return e32 ? this._listeners.delete(e32) : this._listeners.clear(), this;
+              }
+              removeListener(e32, t3) {
+                const n3 = this._listeners.get(e32);
+                return n3 && n3.delete(t3), this;
+              }
+              sendEvent() {
+                let e32 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+                this._backend && this._backend.send({ type: "event", data: e32 });
+              }
+              sendRequest(e32) {
+                if (!this._backend)
+                  return Promise.reject(
+                    new Error("No transport backend defined!")
+                  );
+                this._requestID++;
+                const t3 = this._requestID;
+                return new Promise((n3, i2) => {
+                  this._responseHandlers.set(t3, (e4) => {
+                    let { error: t4, result: r22 } = e4;
+                    void 0 !== r22 ? n3(r22) : i2(
+                      void 0 !== t4 ? t4 : new Error("Unexpected response format!")
+                    );
+                  }), this._backend.send({ type: v2, data: e32, id: t3 });
+                });
+              }
+              setBackend(e32) {
+                this._disposeBackend(), this._backend = e32, this._backend.setReceiveCallback(
+                  this._onMessageReceived.bind(this)
+                );
+              }
+            }
+            (function(e32, t3 = false, n3 = "hash") {
+              "string" == typeof e32 && (e32 = new URL(e32));
+              const i2 = "search" === n3 ? e32.search : e32.hash, r22 = {}, s22 = (null == i2 ? void 0 : i2.substr(1).split("&")) || [];
+              if ("hash" === n3 && 1 === s22.length) {
+                const e4 = s22[0];
+                if (e4.startsWith("/") && 1 === e4.split("&").length)
+                  return r22;
+              }
+              return s22.forEach((e4) => {
+                const n4 = e4.split("="), i3 = n4[0];
+                if (!i3 || i3.split(".").some((e5) => c2.includes(e5)))
+                  return;
+                let s32;
+                try {
+                  if (s32 = n4[1], !t3) {
+                    const e5 = decodeURIComponent(s32).replace(/\\&/, "&");
+                    s32 = "undefined" === e5 ? void 0 : a2.parse(e5);
+                  }
+                } catch (e5) {
+                  return void function(e6, t4 = "") {
+                    var n5;
+                    console.error(t4, e6), null === (n5 = window.onerror) || void 0 === n5 || n5.call(window, t4, void 0, void 0, void 0, e6);
+                  }(e5, `Failed to parse URL parameter value: ${String(s32)}`);
+                }
+                r22[i3] = s32;
+              }), r22;
+            })(window.location).jitsi_meet_external_api_id;
+            (window.JitsiMeetJS || (window.JitsiMeetJS = {}), window.JitsiMeetJS.app || (window.JitsiMeetJS.app = {}), window.JitsiMeetJS.app).setExternalTransportBackend = (e32) => (void 0).setBackend(e32);
+            var b2 = n22(860);
+            const w2 = n22.n(b2)().getLogger("modules/API/external/functions.js");
+            function L2(e32, t3) {
+              return e32.sendRequest({
+                type: "devices",
+                name: "setDevice",
+                device: t3
+              });
+            }
+            const k2 = ["css/all.css", "libs/alwaysontop.min.js"], E2 = {
+              addBreakoutRoom: "add-breakout-room",
+              answerKnockingParticipant: "answer-knocking-participant",
+              approveVideo: "approve-video",
+              askToUnmute: "ask-to-unmute",
+              autoAssignToBreakoutRooms: "auto-assign-to-breakout-rooms",
+              avatarUrl: "avatar-url",
+              cancelPrivateChat: "cancel-private-chat",
+              closeBreakoutRoom: "close-breakout-room",
+              displayName: "display-name",
+              e2eeKey: "e2ee-key",
+              email: "email",
+              grantModerator: "grant-moderator",
+              hangup: "video-hangup",
+              hideNotification: "hide-notification",
+              initiatePrivateChat: "initiate-private-chat",
+              joinBreakoutRoom: "join-breakout-room",
+              localSubject: "local-subject",
+              kickParticipant: "kick-participant",
+              muteEveryone: "mute-everyone",
+              overwriteConfig: "overwrite-config",
+              overwriteNames: "overwrite-names",
+              password: "password",
+              pinParticipant: "pin-participant",
+              rejectParticipant: "reject-participant",
+              removeBreakoutRoom: "remove-breakout-room",
+              resizeFilmStrip: "resize-film-strip",
+              resizeLargeVideo: "resize-large-video",
+              sendChatMessage: "send-chat-message",
+              sendEndpointTextMessage: "send-endpoint-text-message",
+              sendParticipantToRoom: "send-participant-to-room",
+              sendTones: "send-tones",
+              setFollowMe: "set-follow-me",
+              setLargeVideoParticipant: "set-large-video-participant",
+              setMediaEncryptionKey: "set-media-encryption-key",
+              setNoiseSuppressionEnabled: "set-noise-suppression-enabled",
+              setParticipantVolume: "set-participant-volume",
+              setSubtitles: "set-subtitles",
+              setTileView: "set-tile-view",
+              setVideoQuality: "set-video-quality",
+              showNotification: "show-notification",
+              startRecording: "start-recording",
+              startShareVideo: "start-share-video",
+              stopRecording: "stop-recording",
+              stopShareVideo: "stop-share-video",
+              subject: "subject",
+              submitFeedback: "submit-feedback",
+              toggleAudio: "toggle-audio",
+              toggleCamera: "toggle-camera",
+              toggleCameraMirror: "toggle-camera-mirror",
+              toggleChat: "toggle-chat",
+              toggleE2EE: "toggle-e2ee",
+              toggleFilmStrip: "toggle-film-strip",
+              toggleLobby: "toggle-lobby",
+              toggleModeration: "toggle-moderation",
+              toggleNoiseSuppression: "toggle-noise-suppression",
+              toggleParticipantsPane: "toggle-participants-pane",
+              toggleRaiseHand: "toggle-raise-hand",
+              toggleShareScreen: "toggle-share-screen",
+              toggleSubtitles: "toggle-subtitles",
+              toggleTileView: "toggle-tile-view",
+              toggleVirtualBackgroundDialog: "toggle-virtual-background",
+              toggleVideo: "toggle-video"
+            }, C2 = {
+              "avatar-changed": "avatarChanged",
+              "audio-availability-changed": "audioAvailabilityChanged",
+              "audio-mute-status-changed": "audioMuteStatusChanged",
+              "audio-or-video-sharing-toggled": "audioOrVideoSharingToggled",
+              "breakout-rooms-updated": "breakoutRoomsUpdated",
+              "browser-support": "browserSupport",
+              "camera-error": "cameraError",
+              "chat-updated": "chatUpdated",
+              "content-sharing-participants-changed": "contentSharingParticipantsChanged",
+              "data-channel-opened": "dataChannelOpened",
+              "device-list-changed": "deviceListChanged",
+              "display-name-change": "displayNameChange",
+              "email-change": "emailChange",
+              "error-occurred": "errorOccurred",
+              "endpoint-text-message-received": "endpointTextMessageReceived",
+              "face-landmark-detected": "faceLandmarkDetected",
+              "feedback-submitted": "feedbackSubmitted",
+              "feedback-prompt-displayed": "feedbackPromptDisplayed",
+              "filmstrip-display-changed": "filmstripDisplayChanged",
+              "iframe-dock-state-changed": "iframeDockStateChanged",
+              "incoming-message": "incomingMessage",
+              "knocking-participant": "knockingParticipant",
+              log: "log",
+              "mic-error": "micError",
+              "moderation-participant-approved": "moderationParticipantApproved",
+              "moderation-participant-rejected": "moderationParticipantRejected",
+              "moderation-status-changed": "moderationStatusChanged",
+              "mouse-enter": "mouseEnter",
+              "mouse-leave": "mouseLeave",
+              "mouse-move": "mouseMove",
+              "outgoing-message": "outgoingMessage",
+              "participant-joined": "participantJoined",
+              "participant-kicked-out": "participantKickedOut",
+              "participant-left": "participantLeft",
+              "participant-role-changed": "participantRoleChanged",
+              "participants-pane-toggled": "participantsPaneToggled",
+              "password-required": "passwordRequired",
+              "prejoin-screen-loaded": "prejoinScreenLoaded",
+              "proxy-connection-event": "proxyConnectionEvent",
+              "raise-hand-updated": "raiseHandUpdated",
+              "recording-link-available": "recordingLinkAvailable",
+              "recording-status-changed": "recordingStatusChanged",
+              "video-ready-to-close": "readyToClose",
+              "video-conference-joined": "videoConferenceJoined",
+              "video-conference-left": "videoConferenceLeft",
+              "video-availability-changed": "videoAvailabilityChanged",
+              "video-mute-status-changed": "videoMuteStatusChanged",
+              "video-quality-changed": "videoQualityChanged",
+              "screen-sharing-status-changed": "screenSharingStatusChanged",
+              "dominant-speaker-changed": "dominantSpeakerChanged",
+              "subject-change": "subjectChange",
+              "suspend-detected": "suspendDetected",
+              "tile-view-changed": "tileViewChanged",
+              "toolbar-button-clicked": "toolbarButtonClicked"
+            };
+            let x2 = 0;
+            function O2(e32, t3) {
+              e32._numberOfParticipants += t3;
+            }
+            function R2(e32) {
+              let t3;
+              return "string" == typeof e32 && null !== String(e32).match(/([0-9]*\.?[0-9]+)(em|pt|px|%)$/) ? t3 = e32 : "number" == typeof e32 && (t3 = `${e32}px`), t3;
+            }
+            class S3 extends r2() {
+              constructor(e32) {
+                super();
+                for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
+                  n3[i2 - 1] = arguments[i2];
+                const {
+                  roomName: r22 = "",
+                  width: s22 = "100%",
+                  height: a22 = "100%",
+                  parentNode: c22 = document.body,
+                  configOverwrite: l2 = {},
+                  interfaceConfigOverwrite: d22 = {},
+                  jwt: u2,
+                  lang: h2,
+                  onload: g22,
+                  invitees: m22,
+                  devices: v22,
+                  userInfo: y22,
+                  e2eeKey: b22,
+                  release: w22
+                } = function(e4) {
+                  if (!e4.length)
+                    return {};
+                  switch (typeof e4[0]) {
+                    case "string":
+                    case "undefined": {
+                      const [t4, n4, i3, r3, s32, o22, a3, c3, l3] = e4;
+                      return {
+                        roomName: t4,
+                        width: n4,
+                        height: i3,
+                        parentNode: r3,
+                        configOverwrite: s32,
+                        interfaceConfigOverwrite: o22,
+                        jwt: a3,
+                        onload: c3,
+                        lang: l3
+                      };
+                    }
+                    case "object":
+                      return e4[0];
+                    default:
+                      throw new Error("Can't parse the arguments!");
+                  }
+                }(n3), L22 = o2.getItem("jitsiLocalStorage");
+                this._parentNode = c22, this._url = function(e4) {
+                  return p2({
+                    ...arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                    url: `https://${e4}/#jitsi_meet_external_api_id=${x2}`
+                  });
+                }(e32, {
+                  configOverwrite: l2,
+                  interfaceConfigOverwrite: d22,
+                  jwt: u2,
+                  lang: h2,
+                  roomName: r22,
+                  devices: v22,
+                  userInfo: y22,
+                  appData: { localStorageContent: L22 },
+                  release: w22
+                }), this._createIFrame(a22, s22, g22), this._transport = new _2({
+                  backend: new f({
+                    postisOptions: {
+                      allowedOrigin: new URL(this._url).origin,
+                      scope: `jitsi_meet_external_api_${x2}`,
+                      window: this._frame.contentWindow
+                    }
+                  })
+                }), Array.isArray(m22) && m22.length > 0 && this.invite(m22), this._tmpE2EEKey = b22, this._isLargeVideoVisible = false, this._isPrejoinVideoVisible = false, this._numberOfParticipants = 0, this._participants = {}, this._myUserID = void 0, this._onStageParticipant = void 0, this._setupListeners(), x2++;
+              }
+              _createIFrame(e32, t3, n3) {
+                const i2 = `jitsiConferenceFrame${x2}`;
+                this._frame = document.createElement("iframe"), this._frame.allow = "camera; microphone; display-capture; autoplay; clipboard-write", this._frame.src = this._url, this._frame.name = i2, this._frame.id = i2, this._setSize(e32, t3), this._frame.setAttribute("allowFullScreen", "true"), this._frame.style.border = 0, n3 && (this._frame.onload = n3), this._frame = this._parentNode.appendChild(this._frame);
+              }
+              _getAlwaysOnTopResources() {
+                const e32 = this._frame.contentWindow, t3 = e32.document;
+                let n3 = "";
+                const i2 = t3.querySelector("base");
+                if (i2 && i2.href)
+                  n3 = i2.href;
+                else {
+                  const { protocol: t4, host: i3 } = e32.location;
+                  n3 = `${t4}//${i3}`;
+                }
+                return k2.map((e4) => new URL(e4, n3).href);
+              }
+              _getFormattedDisplayName(e32) {
+                const { formattedDisplayName: t3 } = this._participants[e32] || {};
+                return t3;
+              }
+              _getOnStageParticipant() {
+                return this._onStageParticipant;
+              }
+              _getLargeVideo() {
+                const e32 = this.getIFrame();
+                if (this._isLargeVideoVisible && e32 && e32.contentWindow && e32.contentWindow.document)
+                  return e32.contentWindow.document.getElementById("largeVideo");
+              }
+              _getPrejoinVideo() {
+                const e32 = this.getIFrame();
+                if (this._isPrejoinVideoVisible && e32 && e32.contentWindow && e32.contentWindow.document)
+                  return e32.contentWindow.document.getElementById("prejoinVideo");
+              }
+              _getParticipantVideo(e32) {
+                const t3 = this.getIFrame();
+                if (t3 && t3.contentWindow && t3.contentWindow.document)
+                  return void 0 === e32 || e32 === this._myUserID ? t3.contentWindow.document.getElementById(
+                    "localVideo_container"
+                  ) : t3.contentWindow.document.querySelector(
+                    `#participant_${e32} video`
+                  );
+              }
+              _setSize(e32, t3) {
+                const n3 = R2(e32), i2 = R2(t3);
+                void 0 !== n3 && (this._height = e32, this._frame.style.height = n3), void 0 !== i2 && (this._width = t3, this._frame.style.width = i2);
+              }
+              _setupListeners() {
+                this._transport.on("event", (e32) => {
+                  let { name: t3, ...n3 } = e32;
+                  const i2 = n3.id;
+                  switch (t3) {
+                    case "video-conference-joined":
+                      void 0 !== this._tmpE2EEKey && (this.executeCommand(E2.e2eeKey, this._tmpE2EEKey), this._tmpE2EEKey = void 0), this._myUserID = i2, this._participants[i2] = {
+                        email: n3.email,
+                        avatarURL: n3.avatarURL
+                      };
+                    case "participant-joined":
+                      this._participants[i2] = this._participants[i2] || {}, this._participants[i2].displayName = n3.displayName, this._participants[i2].formattedDisplayName = n3.formattedDisplayName, O2(this, 1);
+                      break;
+                    case "participant-left":
+                      O2(this, -1), delete this._participants[i2];
+                      break;
+                    case "display-name-change": {
+                      const e4 = this._participants[i2];
+                      e4 && (e4.displayName = n3.displayname, e4.formattedDisplayName = n3.formattedDisplayName);
+                      break;
+                    }
+                    case "email-change": {
+                      const e4 = this._participants[i2];
+                      e4 && (e4.email = n3.email);
+                      break;
+                    }
+                    case "avatar-changed": {
+                      const e4 = this._participants[i2];
+                      e4 && (e4.avatarURL = n3.avatarURL);
+                      break;
+                    }
+                    case "on-stage-participant-changed":
+                      this._onStageParticipant = i2, this.emit("largeVideoChanged");
+                      break;
+                    case "large-video-visibility-changed":
+                      this._isLargeVideoVisible = n3.isVisible, this.emit("largeVideoChanged");
+                      break;
+                    case "prejoin-screen-loaded":
+                      this._participants[i2] = {
+                        displayName: n3.displayName,
+                        formattedDisplayName: n3.formattedDisplayName
+                      };
+                      break;
+                    case "on-prejoin-video-changed":
+                      this._isPrejoinVideoVisible = n3.isVisible, this.emit("prejoinVideoChanged");
+                      break;
+                    case "video-conference-left":
+                      O2(this, -1), delete this._participants[this._myUserID];
+                      break;
+                    case "video-quality-changed":
+                      this._videoQuality = n3.videoQuality;
+                      break;
+                    case "breakout-rooms-updated":
+                      this.updateNumberOfParticipants(n3.rooms);
+                      break;
+                    case "local-storage-changed":
+                      return o2.setItem("jitsiLocalStorage", n3.localStorageContent), true;
+                  }
+                  const r22 = C2[t3];
+                  return !!r22 && (this.emit(r22, n3), true);
+                });
+              }
+              updateNumberOfParticipants(e32) {
+                if (!e32 || !Object.keys(e32).length)
+                  return;
+                const t3 = Object.keys(e32).reduce((t4, n3) => {
+                  var i2;
+                  return null !== (i2 = e32[n3]) && void 0 !== i2 && i2.participants ? Object.keys(e32[n3].participants).length + t4 : t4;
+                }, 0);
+                this._numberOfParticipants = t3;
+              }
+              async getRoomsInfo() {
+                return this._transport.sendRequest({ name: "rooms-info" });
+              }
+              addEventListener(e32, t3) {
+                this.on(e32, t3);
+              }
+              addEventListeners(e32) {
+                for (const t3 in e32)
+                  this.addEventListener(t3, e32[t3]);
+              }
+              captureLargeVideoScreenshot() {
+                return this._transport.sendRequest({
+                  name: "capture-largevideo-screenshot"
+                });
+              }
+              dispose() {
+                this.emit("_willDispose"), this._transport.dispose(), this.removeAllListeners(), this._frame && this._frame.parentNode && this._frame.parentNode.removeChild(this._frame);
+              }
+              executeCommand(e32) {
+                if (e32 in E2) {
+                  for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), i2 = 1; i2 < t3; i2++)
+                    n3[i2 - 1] = arguments[i2];
+                  this._transport.sendEvent({ data: n3, name: E2[e32] });
+                } else
+                  console.error("Not supported command name.");
+              }
+              executeCommands(e32) {
+                for (const t3 in e32)
+                  this.executeCommand(t3, e32[t3]);
+              }
+              getAvailableDevices() {
+                return function(e32) {
+                  return e32.sendRequest({ type: "devices", name: "getAvailableDevices" }).catch((e4) => (w2.error(e4), {}));
+                }(this._transport);
+              }
+              getContentSharingParticipants() {
+                return this._transport.sendRequest({
+                  name: "get-content-sharing-participants"
+                });
+              }
+              getCurrentDevices() {
+                return function(e32) {
+                  return e32.sendRequest({ type: "devices", name: "getCurrentDevices" }).catch((e4) => (w2.error(e4), {}));
+                }(this._transport);
+              }
+              getCustomAvatarBackgrounds() {
+                return this._transport.sendRequest({
+                  name: "get-custom-avatar-backgrounds"
+                });
+              }
+              getLivestreamUrl() {
+                return this._transport.sendRequest({
+                  name: "get-livestream-url"
+                });
+              }
+              getParticipantsInfo() {
+                const e32 = Object.keys(this._participants), t3 = Object.values(this._participants);
+                return t3.forEach((t4, n3) => {
+                  t4.participantId = e32[n3];
+                }), t3;
+              }
+              getVideoQuality() {
+                return this._videoQuality;
+              }
+              isAudioAvailable() {
+                return this._transport.sendRequest({
+                  name: "is-audio-available"
+                });
+              }
+              isDeviceChangeAvailable(e32) {
+                return function(e4, t3) {
+                  return e4.sendRequest({
+                    deviceType: t3,
+                    type: "devices",
+                    name: "isDeviceChangeAvailable"
+                  });
+                }(this._transport, e32);
+              }
+              isDeviceListAvailable() {
+                return function(e32) {
+                  return e32.sendRequest({
+                    type: "devices",
+                    name: "isDeviceListAvailable"
+                  });
+                }(this._transport);
+              }
+              isMultipleAudioInputSupported() {
+                return function(e32) {
+                  return e32.sendRequest({
+                    type: "devices",
+                    name: "isMultipleAudioInputSupported"
+                  });
+                }(this._transport);
+              }
+              invite(e32) {
+                return Array.isArray(e32) && 0 !== e32.length ? this._transport.sendRequest({ name: "invite", invitees: e32 }) : Promise.reject(new TypeError("Invalid Argument"));
+              }
+              isAudioMuted() {
+                return this._transport.sendRequest({ name: "is-audio-muted" });
+              }
+              isAudioDisabled() {
+                return this._transport.sendRequest({ name: "is-audio-disabled" });
+              }
+              isModerationOn(e32) {
+                return this._transport.sendRequest({
+                  name: "is-moderation-on",
+                  mediaType: e32
+                });
+              }
+              isParticipantForceMuted(e32, t3) {
+                return this._transport.sendRequest({
+                  name: "is-participant-force-muted",
+                  participantId: e32,
+                  mediaType: t3
+                });
+              }
+              isParticipantsPaneOpen() {
+                return this._transport.sendRequest({
+                  name: "is-participants-pane-open"
+                });
+              }
+              isSharingScreen() {
+                return this._transport.sendRequest({ name: "is-sharing-screen" });
+              }
+              isStartSilent() {
+                return this._transport.sendRequest({ name: "is-start-silent" });
+              }
+              getAvatarURL(e32) {
+                const { avatarURL: t3 } = this._participants[e32] || {};
+                return t3;
+              }
+              getDeploymentInfo() {
+                return this._transport.sendRequest({ name: "deployment-info" });
+              }
+              getDisplayName(e32) {
+                const { displayName: t3 } = this._participants[e32] || {};
+                return t3;
+              }
+              getEmail(e32) {
+                const { email: t3 } = this._participants[e32] || {};
+                return t3;
+              }
+              getIFrame() {
+                return this._frame;
+              }
+              getNumberOfParticipants() {
+                return this._numberOfParticipants;
+              }
+              isVideoAvailable() {
+                return this._transport.sendRequest({
+                  name: "is-video-available"
+                });
+              }
+              isVideoMuted() {
+                return this._transport.sendRequest({ name: "is-video-muted" });
+              }
+              listBreakoutRooms() {
+                return this._transport.sendRequest({
+                  name: "list-breakout-rooms"
+                });
+              }
+              pinParticipant(e32) {
+                this.executeCommand("pinParticipant", e32);
+              }
+              removeEventListener(e32) {
+                this.removeAllListeners(e32);
+              }
+              removeEventListeners(e32) {
+                e32.forEach((e4) => this.removeEventListener(e4));
+              }
+              resizeLargeVideo(e32, t3) {
+                e32 <= this._width && t3 <= this._height && this.executeCommand("resizeLargeVideo", e32, t3);
+              }
+              sendProxyConnectionEvent(e32) {
+                this._transport.sendEvent({
+                  data: [e32],
+                  name: "proxy-connection-event"
+                });
+              }
+              setAudioInputDevice(e32, t3) {
+                return function(e4, t4, n3) {
+                  return L2(e4, { id: n3, kind: "audioinput", label: t4 });
+                }(this._transport, e32, t3);
+              }
+              setAudioOutputDevice(e32, t3) {
+                return function(e4, t4, n3) {
+                  return L2(e4, { id: n3, kind: "audiooutput", label: t4 });
+                }(this._transport, e32, t3);
+              }
+              setLargeVideoParticipant(e32) {
+                this.executeCommand("setLargeVideoParticipant", e32);
+              }
+              setVideoInputDevice(e32, t3) {
+                return function(e4, t4, n3) {
+                  return L2(e4, { id: n3, kind: "videoinput", label: t4 });
+                }(this._transport, e32, t3);
+              }
+              startRecording(e32) {
+                this.executeCommand("startRecording", e32);
+              }
+              stopRecording(e32) {
+                this.executeCommand("stopRecording", e32);
+              }
+              toggleE2EE(e32) {
+                this.executeCommand("toggleE2EE", e32);
+              }
+              async setMediaEncryptionKey(e32) {
+                const { key: t3, index: n3 } = e32;
+                if (t3) {
+                  const e4 = await crypto.subtle.exportKey("raw", t3);
+                  this.executeCommand(
+                    "setMediaEncryptionKey",
+                    JSON.stringify({
+                      exportedKey: Array.from(new Uint8Array(e4)),
+                      index: n3
+                    })
+                  );
+                } else
+                  this.executeCommand(
+                    "setMediaEncryptionKey",
+                    JSON.stringify({ exportedKey: false, index: n3 })
+                  );
+              }
+            }
+          },
+          872: (e22, t22, n22) => {
+            e22.exports = n22(820).default;
+          },
+          571: (e22, t22) => {
+            const n22 = /"(?:_|\\u005[Ff])(?:_|\\u005[Ff])(?:p|\\u0070)(?:r|\\u0072)(?:o|\\u006[Ff])(?:t|\\u0074)(?:o|\\u006[Ff])(?:_|\\u005[Ff])(?:_|\\u005[Ff])"\s*\:/;
+            t22.parse = function(e32) {
+              const i = "object" == typeof (arguments.length <= 1 ? void 0 : arguments[1]) && (arguments.length <= 1 ? void 0 : arguments[1]), r2 = (arguments.length <= 1 ? 0 : arguments.length - 1) > 1 || !i ? arguments.length <= 1 ? void 0 : arguments[1] : void 0, s3 = (arguments.length <= 1 ? 0 : arguments.length - 1) > 1 && (arguments.length <= 2 ? void 0 : arguments[2]) || i || {}, o2 = JSON.parse(e32, r2);
+              return "ignore" === s3.protoAction ? o2 : o2 && "object" == typeof o2 && e32.match(n22) ? (t22.scan(o2, s3), o2) : o2;
+            }, t22.scan = function(e32) {
+              let t3 = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {}, n3 = [e32];
+              for (; n3.length; ) {
+                const e4 = n3;
+                n3 = [];
+                for (const i of e4) {
+                  if (Object.prototype.hasOwnProperty.call(i, "__proto__")) {
+                    if ("remove" !== t3.protoAction)
+                      throw new SyntaxError(
+                        "Object contains forbidden prototype property"
+                      );
+                    delete i.__proto__;
+                  }
+                  for (const e5 in i) {
+                    const t4 = i[e5];
+                    t4 && "object" == typeof t4 && n3.push(i[e5]);
+                  }
+                }
+              }
+            }, t22.safeParse = function(e32, n3) {
+              try {
+                return t22.parse(e32, n3);
+              } catch (e4) {
+                return null;
+              }
+            };
+          },
+          369: (e22, t22, n22) => {
+            var i = n22(7);
+            function r2(e32, t3) {
+              this.logStorage = e32, this.stringifyObjects = !(!t3 || !t3.stringifyObjects) && t3.stringifyObjects, this.storeInterval = t3 && t3.storeInterval ? t3.storeInterval : 3e4, this.maxEntryLength = t3 && t3.maxEntryLength ? t3.maxEntryLength : 1e4, Object.keys(i.levels).forEach(
+                function(e4) {
+                  this[i.levels[e4]] = function() {
+                    this._log.apply(this, arguments);
+                  }.bind(this, e4);
+                }.bind(this)
+              ), this.storeLogsIntervalID = null, this.queue = [], this.totalLen = 0, this.outputCache = [];
+            }
+            r2.prototype.stringify = function(e32) {
+              try {
+                return JSON.stringify(e32);
+              } catch (e4) {
+                return "[object with circular refs?]";
+              }
+            }, r2.prototype.formatLogMessage = function(e32) {
+              for (var t3 = "", n3 = 1, r22 = arguments.length; n3 < r22; n3++) {
+                var s3 = arguments[n3];
+                !this.stringifyObjects && e32 !== i.levels.ERROR || "object" != typeof s3 || (s3 = this.stringify(s3)), t3 += s3, n3 !== r22 - 1 && (t3 += " ");
+              }
+              return t3.length ? t3 : null;
+            }, r2.prototype._log = function() {
+              var e32 = arguments[1], t3 = this.formatLogMessage.apply(this, arguments);
+              if (t3) {
+                var n3 = this.queue[this.queue.length - 1], i2 = n3 && n3.text;
+                i2 === t3 ? n3.count += 1 : (this.queue.push({ text: t3, timestamp: e32, count: 1 }), this.totalLen += t3.length);
+              }
+              this.totalLen >= this.maxEntryLength && this._flush(true, true);
+            }, r2.prototype.start = function() {
+              this._reschedulePublishInterval();
+            }, r2.prototype._reschedulePublishInterval = function() {
+              this.storeLogsIntervalID && (window.clearTimeout(this.storeLogsIntervalID), this.storeLogsIntervalID = null), this.storeLogsIntervalID = window.setTimeout(
+                this._flush.bind(this, false, true),
+                this.storeInterval
+              );
+            }, r2.prototype.flush = function() {
+              this._flush(false, true);
+            }, r2.prototype._flush = function(e32, t3) {
+              this.totalLen > 0 && (this.logStorage.isReady() || e32) && (this.logStorage.isReady() ? (this.outputCache.length && (this.outputCache.forEach(
+                function(e4) {
+                  this.logStorage.storeLogs(e4);
+                }.bind(this)
+              ), this.outputCache = []), this.logStorage.storeLogs(this.queue)) : this.outputCache.push(this.queue), this.queue = [], this.totalLen = 0), t3 && this._reschedulePublishInterval();
+            }, r2.prototype.stop = function() {
+              this._flush(false, false);
+            }, e22.exports = r2;
+          },
+          7: (e22) => {
+            var t22 = { trace: 0, debug: 1, info: 2, log: 3, warn: 4, error: 5 };
+            o2.consoleTransport = console;
+            var n22 = [o2.consoleTransport];
+            o2.addGlobalTransport = function(e32) {
+              -1 === n22.indexOf(e32) && n22.push(e32);
+            }, o2.removeGlobalTransport = function(e32) {
+              var t3 = n22.indexOf(e32);
+              -1 !== t3 && n22.splice(t3, 1);
+            };
+            var i = {};
+            function r2() {
+              var e32 = {
+                methodName: "",
+                fileLocation: "",
+                line: null,
+                column: null
+              }, t3 = new Error(), n3 = t3.stack ? t3.stack.split("\n") : [];
+              if (!n3 || n3.length < 3)
+                return e32;
+              var i2 = null;
+              return n3[3] && (i2 = n3[3].match(/\s*at\s*(.+?)\s*\((\S*)\s*:(\d*)\s*:(\d*)\)/)), !i2 || i2.length <= 4 ? (0 === n3[2].indexOf("log@") ? e32.methodName = n3[3].substr(0, n3[3].indexOf("@")) : e32.methodName = n3[2].substr(0, n3[2].indexOf("@")), e32) : (e32.methodName = i2[1], e32.fileLocation = i2[2], e32.line = i2[3], e32.column = i2[4], e32);
+            }
+            function s3() {
+              var e32 = arguments[0], s22 = arguments[1], o22 = Array.prototype.slice.call(arguments, 2);
+              if (!(t22[s22] < e32.level))
+                for (var a2 = !(e32.options.disableCallerInfo || i.disableCallerInfo) && r2(), c2 = n22.concat(e32.transports), l = 0; l < c2.length; l++) {
+                  var d2 = c2[l], u = d2[s22];
+                  if (u && "function" == typeof u) {
+                    var h = [];
+                    h.push(new Date().toISOString()), e32.id && h.push("[" + e32.id + "]"), a2 && a2.methodName.length > 1 && h.push("<" + a2.methodName + ">: ");
+                    var p2 = h.concat(o22);
+                    u.bind(d2).apply(d2, p2);
+                  }
+                }
+            }
+            function o2(e32, n3, i2, r22) {
+              this.id = n3, this.options = r22 || {}, this.transports = i2, this.transports || (this.transports = []), this.level = t22[e32];
+              for (var o22 = Object.keys(t22), a2 = 0; a2 < o22.length; a2++)
+                this[o22[a2]] = s3.bind(null, this, o22[a2]);
+            }
+            o2.setGlobalOptions = function(e32) {
+              i = e32 || {};
+            }, o2.prototype.setLevel = function(e32) {
+              this.level = t22[e32];
+            }, e22.exports = o2, o2.levels = {
+              TRACE: "trace",
+              DEBUG: "debug",
+              INFO: "info",
+              LOG: "log",
+              WARN: "warn",
+              ERROR: "error"
+            };
+          },
+          860: (e22, t22, n22) => {
+            var i = n22(7), r2 = n22(369), s3 = {}, o2 = [], a2 = i.levels.TRACE;
+            e22.exports = {
+              addGlobalTransport: function(e32) {
+                i.addGlobalTransport(e32);
+              },
+              removeGlobalTransport: function(e32) {
+                i.removeGlobalTransport(e32);
+              },
+              setGlobalOptions: function(e32) {
+                i.setGlobalOptions(e32);
+              },
+              getLogger: function(e32, t3, n3) {
+                var r22 = new i(a2, e32, t3, n3);
+                return e32 ? (s3[e32] = s3[e32] || [], s3[e32].push(r22)) : o2.push(r22), r22;
+              },
+              setLogLevelById: function(e32, t3) {
+                for (var n3 = t3 ? s3[t3] || [] : o2, i2 = 0; i2 < n3.length; i2++)
+                  n3[i2].setLevel(e32);
+              },
+              setLogLevel: function(e32) {
+                a2 = e32;
+                for (var t3 = 0; t3 < o2.length; t3++)
+                  o2[t3].setLevel(e32);
+                for (var n3 in s3) {
+                  var i2 = s3[n3] || [];
+                  for (t3 = 0; t3 < i2.length; t3++)
+                    i2[t3].setLevel(e32);
+                }
+              },
+              levels: i.levels,
+              LogCollector: r2
+            };
+          },
+          620: (e22) => {
+            var t22, n22 = "object" == typeof Reflect ? Reflect : null, i = n22 && "function" == typeof n22.apply ? n22.apply : function(e32, t3, n3) {
+              return Function.prototype.apply.call(e32, t3, n3);
+            };
+            t22 = n22 && "function" == typeof n22.ownKeys ? n22.ownKeys : Object.getOwnPropertySymbols ? function(e32) {
+              return Object.getOwnPropertyNames(e32).concat(
+                Object.getOwnPropertySymbols(e32)
+              );
+            } : function(e32) {
+              return Object.getOwnPropertyNames(e32);
+            };
+            var r2 = Number.isNaN || function(e32) {
+              return e32 != e32;
+            };
+            function s3() {
+              s3.init.call(this);
+            }
+            e22.exports = s3, e22.exports.once = function(e32, t3) {
+              return new Promise(function(n3, i2) {
+                function r22(n4) {
+                  e32.removeListener(t3, s22), i2(n4);
+                }
+                function s22() {
+                  "function" == typeof e32.removeListener && e32.removeListener("error", r22), n3([].slice.call(arguments));
+                }
+                m2(e32, t3, s22, { once: true }), "error" !== t3 && function(e4, t4, n4) {
+                  "function" == typeof e4.on && m2(e4, "error", t4, { once: true });
+                }(e32, r22);
+              });
+            }, s3.EventEmitter = s3, s3.prototype._events = void 0, s3.prototype._eventsCount = 0, s3.prototype._maxListeners = void 0;
+            var o2 = 10;
+            function a2(e32) {
+              if ("function" != typeof e32)
+                throw new TypeError(
+                  'The "listener" argument must be of type Function. Received type ' + typeof e32
+                );
+            }
+            function c2(e32) {
+              return void 0 === e32._maxListeners ? s3.defaultMaxListeners : e32._maxListeners;
+            }
+            function l(e32, t3, n3, i2) {
+              var r22, s22, o22, l2;
+              if (a2(n3), void 0 === (s22 = e32._events) ? (s22 = e32._events = /* @__PURE__ */ Object.create(null), e32._eventsCount = 0) : (void 0 !== s22.newListener && (e32.emit("newListener", t3, n3.listener ? n3.listener : n3), s22 = e32._events), o22 = s22[t3]), void 0 === o22)
+                o22 = s22[t3] = n3, ++e32._eventsCount;
+              else if ("function" == typeof o22 ? o22 = s22[t3] = i2 ? [n3, o22] : [o22, n3] : i2 ? o22.unshift(n3) : o22.push(n3), (r22 = c2(e32)) > 0 && o22.length > r22 && !o22.warned) {
+                o22.warned = true;
+                var d22 = new Error(
+                  "Possible EventEmitter memory leak detected. " + o22.length + " " + String(t3) + " listeners added. Use emitter.setMaxListeners() to increase limit"
+                );
+                d22.name = "MaxListenersExceededWarning", d22.emitter = e32, d22.type = t3, d22.count = o22.length, l2 = d22, console && console.warn && console.warn(l2);
+              }
+              return e32;
+            }
+            function d2() {
+              if (!this.fired)
+                return this.target.removeListener(this.type, this.wrapFn), this.fired = true, 0 === arguments.length ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
+            }
+            function u(e32, t3, n3) {
+              var i2 = {
+                fired: false,
+                wrapFn: void 0,
+                target: e32,
+                type: t3,
+                listener: n3
+              }, r22 = d2.bind(i2);
+              return r22.listener = n3, i2.wrapFn = r22, r22;
+            }
+            function h(e32, t3, n3) {
+              var i2 = e32._events;
+              if (void 0 === i2)
+                return [];
+              var r22 = i2[t3];
+              return void 0 === r22 ? [] : "function" == typeof r22 ? n3 ? [r22.listener || r22] : [r22] : n3 ? function(e4) {
+                for (var t4 = new Array(e4.length), n4 = 0; n4 < t4.length; ++n4)
+                  t4[n4] = e4[n4].listener || e4[n4];
+                return t4;
+              }(r22) : g2(r22, r22.length);
+            }
+            function p2(e32) {
+              var t3 = this._events;
+              if (void 0 !== t3) {
+                var n3 = t3[e32];
+                if ("function" == typeof n3)
+                  return 1;
+                if (void 0 !== n3)
+                  return n3.length;
+              }
+              return 0;
+            }
+            function g2(e32, t3) {
+              for (var n3 = new Array(t3), i2 = 0; i2 < t3; ++i2)
+                n3[i2] = e32[i2];
+              return n3;
+            }
+            function m2(e32, t3, n3, i2) {
+              if ("function" == typeof e32.on)
+                i2.once ? e32.once(t3, n3) : e32.on(t3, n3);
+              else {
+                if ("function" != typeof e32.addEventListener)
+                  throw new TypeError(
+                    'The "emitter" argument must be of type EventEmitter. Received type ' + typeof e32
+                  );
+                e32.addEventListener(t3, function r22(s22) {
+                  i2.once && e32.removeEventListener(t3, r22), n3(s22);
+                });
+              }
+            }
+            Object.defineProperty(s3, "defaultMaxListeners", {
+              enumerable: true,
+              get: function() {
+                return o2;
+              },
+              set: function(e32) {
+                if ("number" != typeof e32 || e32 < 0 || r2(e32))
+                  throw new RangeError(
+                    'The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + e32 + "."
+                  );
+                o2 = e32;
+              }
+            }), s3.init = function() {
+              void 0 !== this._events && this._events !== Object.getPrototypeOf(this)._events || (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
+            }, s3.prototype.setMaxListeners = function(e32) {
+              if ("number" != typeof e32 || e32 < 0 || r2(e32))
+                throw new RangeError(
+                  'The value of "n" is out of range. It must be a non-negative number. Received ' + e32 + "."
+                );
+              return this._maxListeners = e32, this;
+            }, s3.prototype.getMaxListeners = function() {
+              return c2(this);
+            }, s3.prototype.emit = function(e32) {
+              for (var t3 = [], n3 = 1; n3 < arguments.length; n3++)
+                t3.push(arguments[n3]);
+              var r22 = "error" === e32, s22 = this._events;
+              if (void 0 !== s22)
+                r22 = r22 && void 0 === s22.error;
+              else if (!r22)
+                return false;
+              if (r22) {
+                var o22;
+                if (t3.length > 0 && (o22 = t3[0]), o22 instanceof Error)
+                  throw o22;
+                var a22 = new Error(
+                  "Unhandled error." + (o22 ? " (" + o22.message + ")" : "")
+                );
+                throw a22.context = o22, a22;
+              }
+              var c22 = s22[e32];
+              if (void 0 === c22)
+                return false;
+              if ("function" == typeof c22)
+                i(c22, this, t3);
+              else {
+                var l2 = c22.length, d22 = g2(c22, l2);
+                for (n3 = 0; n3 < l2; ++n3)
+                  i(d22[n3], this, t3);
+              }
+              return true;
+            }, s3.prototype.addListener = function(e32, t3) {
+              return l(this, e32, t3, false);
+            }, s3.prototype.on = s3.prototype.addListener, s3.prototype.prependListener = function(e32, t3) {
+              return l(this, e32, t3, true);
+            }, s3.prototype.once = function(e32, t3) {
+              return a2(t3), this.on(e32, u(this, e32, t3)), this;
+            }, s3.prototype.prependOnceListener = function(e32, t3) {
+              return a2(t3), this.prependListener(e32, u(this, e32, t3)), this;
+            }, s3.prototype.removeListener = function(e32, t3) {
+              var n3, i2, r22, s22, o22;
+              if (a2(t3), void 0 === (i2 = this._events))
+                return this;
+              if (void 0 === (n3 = i2[e32]))
+                return this;
+              if (n3 === t3 || n3.listener === t3)
+                0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : (delete i2[e32], i2.removeListener && this.emit("removeListener", e32, n3.listener || t3));
+              else if ("function" != typeof n3) {
+                for (r22 = -1, s22 = n3.length - 1; s22 >= 0; s22--)
+                  if (n3[s22] === t3 || n3[s22].listener === t3) {
+                    o22 = n3[s22].listener, r22 = s22;
+                    break;
+                  }
+                if (r22 < 0)
+                  return this;
+                0 === r22 ? n3.shift() : function(e4, t4) {
+                  for (; t4 + 1 < e4.length; t4++)
+                    e4[t4] = e4[t4 + 1];
+                  e4.pop();
+                }(n3, r22), 1 === n3.length && (i2[e32] = n3[0]), void 0 !== i2.removeListener && this.emit("removeListener", e32, o22 || t3);
+              }
+              return this;
+            }, s3.prototype.off = s3.prototype.removeListener, s3.prototype.removeAllListeners = function(e32) {
+              var t3, n3, i2;
+              if (void 0 === (n3 = this._events))
+                return this;
+              if (void 0 === n3.removeListener)
+                return 0 === arguments.length ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : void 0 !== n3[e32] && (0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : delete n3[e32]), this;
+              if (0 === arguments.length) {
+                var r22, s22 = Object.keys(n3);
+                for (i2 = 0; i2 < s22.length; ++i2)
+                  "removeListener" !== (r22 = s22[i2]) && this.removeAllListeners(r22);
+                return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
+              }
+              if ("function" == typeof (t3 = n3[e32]))
+                this.removeListener(e32, t3);
+              else if (void 0 !== t3)
+                for (i2 = t3.length - 1; i2 >= 0; i2--)
+                  this.removeListener(e32, t3[i2]);
+              return this;
+            }, s3.prototype.listeners = function(e32) {
+              return h(this, e32, true);
+            }, s3.prototype.rawListeners = function(e32) {
+              return h(this, e32, false);
+            }, s3.listenerCount = function(e32, t3) {
+              return "function" == typeof e32.listenerCount ? e32.listenerCount(t3) : p2.call(e32, t3);
+            }, s3.prototype.listenerCount = p2, s3.prototype.eventNames = function() {
+              return this._eventsCount > 0 ? t22(this._events) : [];
+            };
+          }
+        }, t2 = {};
+        function n2(i) {
+          var r2 = t2[i];
+          if (void 0 !== r2)
+            return r2.exports;
+          var s3 = t2[i] = { exports: {} };
+          return e3[i](s3, s3.exports, n2), s3.exports;
+        }
+        return n2.n = (e22) => {
+          var t22 = e22 && e22.__esModule ? () => e22.default : () => e22;
+          return n2.d(t22, { a: t22 }), t22;
+        }, n2.d = (e22, t22) => {
+          for (var i in t22)
+            n2.o(t22, i) && !n2.o(e22, i) && Object.defineProperty(e22, i, { enumerable: true, get: t22[i] });
+        }, n2.o = (e22, t22) => Object.prototype.hasOwnProperty.call(e22, t22), n2(872);
+      })();
+    });
+    JitsiUser = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $lessThan768, $$unsubscribe_lessThan768;
+      $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
+      $$unsubscribe_lessThan768();
+      return `<main><div class="${"relative md:-translate-y-10 -translate-y-36"}"><div id="${"meet"}" class="${"w-full h-[82vh] md:h-[670px]"}"></div>
+
+    <button><img alt="${"hangup button"}" class="${"absolute p-2 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-10 right-0" : "bottom-5 right-10 ", true) + " w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></button></div></main>`;
+    });
+    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      onDestroy(() => {
+        set_store_value(isDarkMode, $isDarkMode = false, $isDarkMode);
+        window.document.body.classList.remove("dark-mode");
+      });
+      $$unsubscribe_isDarkMode();
+      return `${validate_component(JitsiUser, "JitsiUser").$$render($$result, {}, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/3.js
+var __exports4 = {};
+__export(__exports4, {
+  component: () => component4,
+  file: () => file4,
+  fonts: () => fonts4,
+  imports: () => imports4,
+  index: () => index4,
+  shared: () => page_exports,
+  stylesheets: () => stylesheets4
+});
+var index4, component4, file4, imports4, stylesheets4, fonts4;
+var init__4 = __esm({
+  ".svelte-kit/output/server/nodes/3.js"() {
+    init_page();
+    index4 = 3;
+    component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
+    file4 = "_app/immutable/components/pages/classroom/_page.svelte-7e25694b.js";
+    imports4 = ["_app/immutable/components/pages/classroom/_page.svelte-7e25694b.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/modules/pages/classroom/_page.js-44466bcb.js", "_app/immutable/chunks/_page-50113cbf.js"];
+    stylesheets4 = [];
+    fonts4 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/classroomA/_page.svelte.js
+var page_svelte_exports3 = {};
+__export(page_svelte_exports3, {
+  default: () => Page3
+});
+var JitsiUserAdmin, Page3;
+var init_page_svelte3 = __esm({
+  ".svelte-kit/output/server/entries/pages/classroomA/_page.svelte.js"() {
+    init_chunks();
+    init_store();
+    JitsiUserAdmin = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $lessThan768, $$unsubscribe_lessThan768;
+      $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
+      $$unsubscribe_lessThan768();
+      return `${$$result.head += `<!-- HEAD_svelte-1pkind7_START --><script src="${"https://meet.jit.si/external_api.js"}"><\/script><!-- HEAD_svelte-1pkind7_END -->`, ""}
+
+<div class="${"relative md:-translate-y-10 -translate-y-32 "}"><div id="${"meet"}" class="${"w-full h-[95vh] md:h-[670px]"}"></div>
+  <button><img alt="${"hangup button"}" class="${"bg-gray-600 p-2 absolute brightness-50 " + escape("opacity-0", true) + " " + escape($lessThan768 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0 hover:bg-red-500"}"></button></div>`;
+    });
+    Page3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => value);
+      $$unsubscribe_isDarkMode();
+      return `${validate_component(JitsiUserAdmin, "JitsiUserAdmin").$$render($$result, {}, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/4.js
+var __exports5 = {};
+__export(__exports5, {
+  component: () => component5,
+  file: () => file5,
+  fonts: () => fonts5,
+  imports: () => imports5,
+  index: () => index5,
+  stylesheets: () => stylesheets5
+});
+var index5, component5, file5, imports5, stylesheets5, fonts5;
+var init__5 = __esm({
+  ".svelte-kit/output/server/nodes/4.js"() {
+    index5 = 4;
+    component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
+    file5 = "_app/immutable/components/pages/classroomA/_page.svelte-318b28e8.js";
+    imports5 = ["_app/immutable/components/pages/classroomA/_page.svelte-318b28e8.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js"];
+    stylesheets5 = [];
+    fonts5 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/faq/_page.svelte.js
+var page_svelte_exports4 = {};
+__export(page_svelte_exports4, {
+  default: () => Page4
+});
+var css4, Page4;
+var init_page_svelte4 = __esm({
+  ".svelte-kit/output/server/entries/pages/faq/_page.svelte.js"() {
+    init_chunks();
+    css4 = {
+      code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
+      map: null
+    };
+    Page4 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css4);
+      return `${$$result.head += `<!-- HEAD_svelte-1bm9itx_START --><link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}"><\/script><!-- HEAD_svelte-1bm9itx_END -->`, ""}
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
+  </summary>
+
+  <p class="${"svelte-63m8nq"}">In terms of personalized service: we offer 1-on-1 tutoring, mock test
+    sessions with solution keys, video links, and session notes; see <a>/plans</a>
+    for details.
+    <br><br>
+    We are also in the process of creating a
+    <a href="${"https://www.brightowltutoring.com/login"}">login-based</a>
+    service; users will have access to <i>interactive</i> quizzes &amp; exam-question
+    video solutions.
+  </p>
+  <p style="${"font-size:12pt"}" class="${"svelte-63m8nq"}"><b>Note</b>: we <i>only</i> provide online/digital solutions. We are so
+    confident in our workflow that we offer
+    <a>a free demo session</a> of up to 20 minutes to show it off.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q2</b> How do I pay? </summary>
+  <p class="${"svelte-63m8nq"}">On <a>/plans</a>
+    build out a custom plan and we send you an invoice based on your selections.<br><br>
+    Alternatively you can toggle &quot;off&quot; to choose amongst pay-now options.
+  </p>
+
+  <p style="${"font-size:13pt; color:#777;"}" class="${"svelte-63m8nq"}">We use STRIPE to securely process all transactions \u2014 in use by companies
+    such as Google, Amazon and Shopify.
+  </p></details>
+
+<details open class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q3</b> How do I book multiple sessions at once?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Book a session on our <a>plans</a> page, and click &quot;<a>\u279C Schedule another event</a>&quot; on the confirmation page.
+    <i>If booked already, we can also book the remaining dates for you at the end
+      of the live session</i>.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q4</b> How do I share homework? </summary>
+  <p class="${"svelte-63m8nq"}">On your mobile device: go to <a>/homework</a> &gt; click Upload &gt; snap a
+    picture &gt; Submit. <i>We convert each image into clean formatted text.</i></p>
+  <p class="${"svelte-63m8nq"}">Similar steps for PC. <span style="${"font-size:12pt; font-style:italic"}">Accepted file extensions: .png, .jpg, .jpeg, .heic, .pdf, .txt, .rtf,
+      .doc, .docx, .odt, .csv, .tex, .xls, .xlsx, .ods, .ppt, .pptx.</span></p>
+
+  <p class="${"svelte-63m8nq"}"><span style="${"font-size:12pt; font-style:italic"}">For last second submissions, you may also point your homework at the
+      webcam during the live session.</span></p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q5</b> Which screen-sharing software are we using? Zoom?
+  </summary>
+  <p class="${"svelte-63m8nq"}"><a href="${"https://zoom.us/download"}">Zoom</a>,
+    <a href="${"https://www.teamviewer.com/en-us/meeting/"}">TeamViewer Meeting</a>,
+    or
+    <a href="${"https://www.microsoft.com/en-ca/microsoft-teams/group-chat-software"}">Microsoft Teams</a>
+    \u2014 these provide the smoothest screensharing experience. Click the links to download
+    or visit <a>/screenshare</a> for more info.
+
+    <br> <b>Note:</b> No sign-up required to use TeamViewer Meeting; we use this
+    exclusively for group sessions.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q6</b> What subjects do you cover? </summary>
+
+  <p class="${"svelte-63m8nq"}"><b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University <br><br>
+
+    <b>MATHEMATICS</b>\xA0 Calculus \u2022 Trigonometry \u2022 Advanced Functions \u2022
+    Complex Numbers \u2022 Linear Algebra \u2022 Probability and Statistics \xA0\xA0<b>PHYSICS</b>
+    \xA0\xA0 Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp;
+    Magnetism \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special
+    Relativity \xA0\xA0<b>SPANISH</b> \xA0\xA0 Pronunciation \u2022 Grammatical
+    Rules \u2022 Practical Examples
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q7</b> How are mock tests/ Mockowl sessions administered?
+  </summary>
+  <p class="${"svelte-63m8nq"}">The student attends a live session where we implement Google Forms. Answer
+    keys are released within an hour of completion. <i>Digitally-handwritten solution key available as a premium.</i> <br><br>
+
+    We are soon implementing a content-based subscription plan; see our sample
+    quiz app on the <a href="${"https://www.brightowltutoring.com/"}">home page</a> for
+    a preview.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q8</b> I am looking to refer a friend, do you offer any discounts based on
+    referrals?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Great question! We absolutely welcome this initiative and are pleased to
+    reward it; please visit our <a>/referrals</a> page. <br><br>
+
+    Alternatively <i>if</i> filling out an invoice-based <a>plan</a>, you will
+    have a chance to input a referral.
+  </p></details>
+
+<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q9 </b>Is it possible to access all my session content in one place?
+  </summary>
+  <p class="${"svelte-63m8nq"}">Sure can! Secure a unique URL for $5/month while booking or <a>contact us directly</a>
+    (<a href="${"https://www.brightowltutoring.com/url"}">\u{1F4AB} sample URL</a>).
+  </p>
+</details>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/5.js
+var __exports6 = {};
+__export(__exports6, {
+  component: () => component6,
+  file: () => file6,
+  fonts: () => fonts6,
+  imports: () => imports6,
+  index: () => index6,
+  stylesheets: () => stylesheets6
+});
+var index6, component6, file6, imports6, stylesheets6, fonts6;
+var init__6 = __esm({
+  ".svelte-kit/output/server/nodes/5.js"() {
+    index6 = 5;
+    component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
+    file6 = "_app/immutable/components/pages/faq/_page.svelte-8c58e1f3.js";
+    imports6 = ["_app/immutable/components/pages/faq/_page.svelte-8c58e1f3.js", "_app/immutable/chunks/index-95872f21.js"];
+    stylesheets6 = ["_app/immutable/assets/_page-113a1f72.css"];
+    fonts6 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/homework/_page.svelte.js
+var page_svelte_exports5 = {};
+__export(page_svelte_exports5, {
+  default: () => Page5
+});
+var Page5;
+var init_page_svelte5 = __esm({
+  ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
+    init_chunks();
+    init_Dropzone();
+    Page5 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+${validate_component(Dropzone, "Dropzone").$$render($$result, {}, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/6.js
+var __exports7 = {};
+__export(__exports7, {
+  component: () => component7,
+  file: () => file7,
+  fonts: () => fonts7,
+  imports: () => imports7,
+  index: () => index7,
+  stylesheets: () => stylesheets7
+});
+var index7, component7, file7, imports7, stylesheets7, fonts7;
+var init__7 = __esm({
+  ".svelte-kit/output/server/nodes/6.js"() {
+    index7 = 6;
+    component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-8ce003bd.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-8ce003bd.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Dropzone-3e249038.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js"];
+    stylesheets7 = ["_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    fonts7 = [];
   }
 });
 
@@ -13270,6 +15296,9 @@ function supportedCodepoint(codepoint) {
     }
   }
   return false;
+}
+function setFontMetrics(fontName, metrics) {
+  fontMetricsData[fontName] = metrics;
 }
 function getCharacterMetrics(character, font, mode) {
   if (!fontMetricsData[font]) {
@@ -13331,14 +15360,14 @@ function assertSpan(group) {
     throw new Error("Expected span<HtmlDomNode> but got " + String(group) + ".");
   }
 }
-function defineSymbol(mode, font, group, replace, name4, acceptUnicodeChar) {
-  symbols[mode][name4] = {
+function defineSymbol(mode, font, group, replace, name5, acceptUnicodeChar) {
+  symbols[mode][name5] = {
     font,
     group,
     replace
   };
   if (acceptUnicodeChar && replace) {
-    symbols[mode][replace] = symbols[mode][name4];
+    symbols[mode][replace] = symbols[mode][name5];
   }
 }
 function defineFunction(_ref) {
@@ -13731,8 +15760,8 @@ function defineEnvironment(_ref) {
     _mathmlGroupBuilders[type] = mathmlBuilder3;
   }
 }
-function defineMacro(name4, body) {
-  _macros[name4] = body;
+function defineMacro(name5, body) {
+  _macros[name5] = body;
 }
 function getHLines(parser) {
   var hlineInfo = [];
@@ -13751,9 +15780,9 @@ function getHLines(parser) {
   }
   return hlineInfo;
 }
-function getAutoTag(name4) {
-  if (name4.indexOf("ed") === -1) {
-    return name4.indexOf("*") === -1;
+function getAutoTag(name5) {
+  if (name5.indexOf("ed") === -1) {
+    return name5.indexOf("*") === -1;
   }
 }
 function parseArray(parser, _ref, style) {
@@ -13899,7 +15928,7 @@ function sizingGroup(value, options, baseOptions) {
   }
   return buildCommon.makeFragment(inner2);
 }
-var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D2, Dc, T2, Tc, S2, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderError, renderToDomTree;
+var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D2, Dc, T2, Tc, S2, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
 var init_katex = __esm({
   "node_modules/katex/dist/katex.mjs"() {
     SourceLocation = class {
@@ -14064,7 +16093,7 @@ var init_katex = __esm({
         default: "#cc0000",
         cli: "-c, --error-color <color>",
         cliDescription: "A color string given in the format 'rgb' or 'rrggbb' (no #). This option determines the color of errors rendered by the -t option.",
-        cliProcessor: (color) => "#" + color
+        cliProcessor: (color2) => "#" + color2
       },
       macros: {
         type: "object",
@@ -14321,8 +16350,8 @@ var init_katex = __esm({
       }
       return path2;
     };
-    innerPath = function innerPath2(name4, height) {
-      switch (name4) {
+    innerPath = function innerPath2(name5, height) {
+      switch (name5) {
         case "\u239C":
           return "M291 0 H417 V" + height + " H291z M291 0 H417 V" + height + " H291z";
         case "\u2223":
@@ -16785,9 +18814,9 @@ var init_katex = __esm({
           size: size3
         });
       }
-      withColor(color) {
+      withColor(color2) {
         return this.extend({
-          color
+          color: color2
         });
       }
       withPhantom() {
@@ -16915,9 +18944,9 @@ var init_katex = __esm({
         if (options.style.isTight()) {
           this.classes.push("mtight");
         }
-        var color = options.getColor();
-        if (color) {
-          this.style.color = color;
+        var color2 = options.getColor();
+        if (color2) {
+          this.style.color = color2;
         }
       }
     };
@@ -18047,9 +20076,9 @@ var init_katex = __esm({
         if (options.style.isTight()) {
           symbolNode.classes.push("mtight");
         }
-        var color = options.getColor();
-        if (color) {
-          symbolNode.style.color = color;
+        var color2 = options.getColor();
+        if (color2) {
+          symbolNode.style.color = color2;
         }
       }
       return symbolNode;
@@ -18641,8 +20670,8 @@ var init_katex = __esm({
         } else if (isRoot && node.hasClass("newline")) {
           prev.node = makeSpan$1(["leftmost"]);
         }
-        prev.insertAfter = ((index4) => (n2) => {
-          nodes.splice(index4 + 1, 0, n2);
+        prev.insertAfter = ((index16) => (n2) => {
+          nodes.splice(index16 + 1, 0, n2);
           i++;
         })(i);
       }
@@ -18711,11 +20740,11 @@ var init_katex = __esm({
         this.children = children || [];
         this.classes = classes || [];
       }
-      setAttribute(name4, value) {
-        this.attributes[name4] = value;
+      setAttribute(name5, value) {
+        this.attributes[name5] = value;
       }
-      getAttribute(name4) {
-        return this.attributes[name4];
+      getAttribute(name5) {
+        return this.attributes[name5];
       }
       toNode() {
         var node = document.createElementNS("http://www.w3.org/1998/Math/MathML", this.type);
@@ -18984,6 +21013,12 @@ var init_katex = __esm({
       }
       return displayWrap(katexNode, settings);
     };
+    buildHTMLTree = function buildHTMLTree2(tree, expression, settings) {
+      var options = optionsFromSettings(settings);
+      var htmlNode = buildHTML(tree, options);
+      var katexNode = buildCommon.makeSpan(["katex"], [htmlNode]);
+      return displayWrap(katexNode, settings);
+    };
     stretchyCodePoint = {
       widehat: "^",
       widecheck: "\u02C7",
@@ -19196,9 +21231,9 @@ var init_katex = __esm({
       if (/fbox|color|angl/.test(label)) {
         img = buildCommon.makeSpan(["stretchy", label], [], options);
         if (label === "fbox") {
-          var color = options.color && options.getColor();
-          if (color) {
-            img.style.borderColor = color;
+          var color2 = options.color && options.getColor();
+          if (color2) {
+            img.style.borderColor = color2;
           }
         }
       } else {
@@ -19844,12 +21879,12 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var color = assertNodeType(args[0], "color-token").color;
+        var color2 = assertNodeType(args[0], "color-token").color;
         var body = args[1];
         return {
           type: "color",
           mode: parser.mode,
-          color,
+          color: color2,
           body: ordargument(body)
         };
       },
@@ -19869,13 +21904,13 @@ var init_katex = __esm({
           parser,
           breakOnTokenText
         } = _ref2;
-        var color = assertNodeType(args[0], "color-token").color;
-        parser.gullet.macros.set("\\current@color", color);
+        var color2 = assertNodeType(args[0], "color-token").color;
+        parser.gullet.macros.set("\\current@color", color2);
         var body = parser.parseExpression(true, breakOnTokenText);
         return {
           type: "color",
           mode: parser.mode,
-          color,
+          color: color2,
           body
         };
       },
@@ -19937,11 +21972,11 @@ var init_katex = __esm({
       "\\futurelet": "\\\\globalfuture"
     };
     checkControlSequence = (tok) => {
-      var name4 = tok.text;
-      if (/^(?:[\\{}$&#^_]|EOF)$/.test(name4)) {
+      var name5 = tok.text;
+      if (/^(?:[\\{}$&#^_]|EOF)$/.test(name5)) {
         throw new ParseError("Expected a control sequence", tok);
       }
-      return name4;
+      return name5;
     };
     getRHS = (parser) => {
       var tok = parser.gullet.popToken();
@@ -19953,7 +21988,7 @@ var init_katex = __esm({
       }
       return tok;
     };
-    letCommand = (parser, name4, tok, global2) => {
+    letCommand = (parser, name5, tok, global2) => {
       var macro = parser.gullet.macros.get(tok.text);
       if (macro == null) {
         tok.noexpand = true;
@@ -19963,7 +21998,7 @@ var init_katex = __esm({
           unexpandable: !parser.gullet.isExpandable(tok.text)
         };
       }
-      parser.gullet.macros.set(name4, macro, global2);
+      parser.gullet.macros.set(name5, macro, global2);
     };
     defineFunction({
       type: "internal",
@@ -20006,8 +22041,8 @@ var init_katex = __esm({
           funcName
         } = _ref2;
         var tok = parser.gullet.popToken();
-        var name4 = tok.text;
-        if (/^(?:[\\{}$&#^_]|EOF)$/.test(name4)) {
+        var name5 = tok.text;
+        if (/^(?:[\\{}$&#^_]|EOF)$/.test(name5)) {
           throw new ParseError("Expected a control sequence", tok);
         }
         var numArgs = 0;
@@ -20046,7 +22081,7 @@ var init_katex = __esm({
           tokens = parser.gullet.expandTokens(tokens);
           tokens.reverse();
         }
-        parser.gullet.macros.set(name4, {
+        parser.gullet.macros.set(name5, {
           tokens,
           numArgs,
           delimiters: delimiters2
@@ -20073,10 +22108,10 @@ var init_katex = __esm({
           parser,
           funcName
         } = _ref3;
-        var name4 = checkControlSequence(parser.gullet.popToken());
+        var name5 = checkControlSequence(parser.gullet.popToken());
         parser.gullet.consumeSpaces();
         var tok = getRHS(parser);
-        letCommand(parser, name4, tok, funcName === "\\\\globallet");
+        letCommand(parser, name5, tok, funcName === "\\\\globallet");
         return {
           type: "internal",
           mode: parser.mode
@@ -20099,10 +22134,10 @@ var init_katex = __esm({
           parser,
           funcName
         } = _ref4;
-        var name4 = checkControlSequence(parser.gullet.popToken());
+        var name5 = checkControlSequence(parser.gullet.popToken());
         var middle = parser.gullet.popToken();
         var tok = parser.gullet.popToken();
-        letCommand(parser, name4, tok, funcName === "\\\\globalfuture");
+        letCommand(parser, name5, tok, funcName === "\\\\globalfuture");
         parser.gullet.pushToken(tok);
         parser.gullet.pushToken(middle);
         return {
@@ -20700,15 +22735,15 @@ var init_katex = __esm({
         primitive: true
       },
       handler: (context, args) => {
-        var color = context.parser.gullet.macros.get("\\current@color");
-        if (color && typeof color !== "string") {
+        var color2 = context.parser.gullet.macros.get("\\current@color");
+        if (color2 && typeof color2 !== "string") {
           throw new ParseError("\\current@color set to non-string in \\right");
         }
         return {
           type: "leftright-right",
           mode: context.parser.mode,
           delim: checkDelimiter(args[0], context).text,
-          color
+          color: color2
         };
       }
     });
@@ -21022,13 +23057,13 @@ var init_katex = __esm({
           parser,
           funcName
         } = _ref;
-        var color = assertNodeType(args[0], "color-token").color;
+        var color2 = assertNodeType(args[0], "color-token").color;
         var body = args[1];
         return {
           type: "enclose",
           mode: parser.mode,
           label: funcName,
-          backgroundColor: color,
+          backgroundColor: color2,
           body
         };
       },
@@ -23774,9 +25809,9 @@ var init_katex = __esm({
         var width = calculateSize(group.width, options);
         var height = calculateSize(group.height, options);
         var shift = group.shift ? calculateSize(group.shift, options) : 0;
-        var color = options.color && options.getColor() || "black";
+        var color2 = options.color && options.getColor() || "black";
         var rule = new mathMLTree.MathNode("mspace");
-        rule.setAttribute("mathbackground", color);
+        rule.setAttribute("mathbackground", color2);
         rule.setAttribute("width", makeEm(width));
         rule.setAttribute("height", makeEm(height));
         var wrapper = new mathMLTree.MathNode("mpadded", [rule]);
@@ -23920,13 +25955,13 @@ var init_katex = __esm({
         var {
           parser
         } = _ref;
-        var index4 = optArgs[0];
+        var index16 = optArgs[0];
         var body = args[0];
         return {
           type: "sqrt",
           mode: parser.mode,
           body,
-          index: index4
+          index: index16
         };
       },
       htmlBuilder(group, options) {
@@ -23992,9 +26027,9 @@ var init_katex = __esm({
       mathmlBuilder(group, options) {
         var {
           body,
-          index: index4
+          index: index16
         } = group;
-        return index4 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index4, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
+        return index16 ? new mathMLTree.MathNode("mroot", [buildGroup2(body, options), buildGroup2(index16, options)]) : new mathMLTree.MathNode("msqrt", [buildGroup2(body, options)]);
       }
     });
     styleMap = {
@@ -24624,37 +26659,37 @@ var init_katex = __esm({
           this.endGroup();
         }
       }
-      has(name4) {
-        return this.current.hasOwnProperty(name4) || this.builtins.hasOwnProperty(name4);
+      has(name5) {
+        return this.current.hasOwnProperty(name5) || this.builtins.hasOwnProperty(name5);
       }
-      get(name4) {
-        if (this.current.hasOwnProperty(name4)) {
-          return this.current[name4];
+      get(name5) {
+        if (this.current.hasOwnProperty(name5)) {
+          return this.current[name5];
         } else {
-          return this.builtins[name4];
+          return this.builtins[name5];
         }
       }
-      set(name4, value, global2) {
+      set(name5, value, global2) {
         if (global2 === void 0) {
           global2 = false;
         }
         if (global2) {
           for (var i = 0; i < this.undefStack.length; i++) {
-            delete this.undefStack[i][name4];
+            delete this.undefStack[i][name5];
           }
           if (this.undefStack.length > 0) {
-            this.undefStack[this.undefStack.length - 1][name4] = value;
+            this.undefStack[this.undefStack.length - 1][name5] = value;
           }
         } else {
           var top = this.undefStack[this.undefStack.length - 1];
-          if (top && !top.hasOwnProperty(name4)) {
-            top[name4] = this.current[name4];
+          if (top && !top.hasOwnProperty(name5)) {
+            top[name5] = this.current[name5];
           }
         }
         if (value == null) {
-          delete this.current[name4];
+          delete this.current[name5];
         } else {
-          this.current[name4] = value;
+          this.current[name5] = value;
         }
       }
     };
@@ -24788,13 +26823,13 @@ var init_katex = __esm({
       if (arg.length !== 1) {
         throw new ParseError("\\newcommand's first argument must be a macro name");
       }
-      var name4 = arg[0].text;
-      var exists = context.isDefined(name4);
+      var name5 = arg[0].text;
+      var exists = context.isDefined(name5);
       if (exists && !existsOK) {
-        throw new ParseError("\\newcommand{" + name4 + "} attempting to redefine " + (name4 + "; use \\renewcommand"));
+        throw new ParseError("\\newcommand{" + name5 + "} attempting to redefine " + (name5 + "; use \\renewcommand"));
       }
       if (!exists && !nonexistsOK) {
-        throw new ParseError("\\renewcommand{" + name4 + "} when command " + name4 + " does not yet exist; use \\newcommand");
+        throw new ParseError("\\renewcommand{" + name5 + "} when command " + name5 + " does not yet exist; use \\newcommand");
       }
       var numArgs = 0;
       arg = context.consumeArg().tokens;
@@ -24811,7 +26846,7 @@ var init_katex = __esm({
         numArgs = parseInt(argText);
         arg = context.consumeArg().tokens;
       }
-      context.macros.set(name4, {
+      context.macros.set(name5, {
         tokens: arg,
         numArgs
       });
@@ -24832,8 +26867,8 @@ var init_katex = __esm({
     });
     defineMacro("\\show", (context) => {
       var tok = context.popToken();
-      var name4 = tok.text;
-      console.log(tok, context.macros.get(name4), functions[name4], symbols.math[name4], symbols.text[name4]);
+      var name5 = tok.text;
+      console.log(tok, context.macros.get(name5), functions[name5], symbols.math[name5], symbols.text[name5]);
       return "";
     });
     defineMacro("\\bgroup", "{");
@@ -25463,11 +27498,11 @@ var init_katex = __esm({
       }
       expandOnce(expandableOnly) {
         var topToken = this.popToken();
-        var name4 = topToken.text;
-        var expansion = !topToken.noexpand ? this._getExpansion(name4) : null;
+        var name5 = topToken.text;
+        var expansion = !topToken.noexpand ? this._getExpansion(name5) : null;
         if (expansion == null || expandableOnly && expansion.unexpandable) {
-          if (expandableOnly && expansion == null && name4[0] === "\\" && !this.isDefined(name4)) {
-            throw new ParseError("Undefined control sequence: " + name4);
+          if (expandableOnly && expansion == null && name5[0] === "\\" && !this.isDefined(name5)) {
+            throw new ParseError("Undefined control sequence: " + name5);
           }
           this.pushToken(topToken);
           return topToken;
@@ -25516,8 +27551,8 @@ var init_katex = __esm({
         }
         throw new Error();
       }
-      expandMacro(name4) {
-        return this.macros.has(name4) ? this.expandTokens([new Token(name4)]) : void 0;
+      expandMacro(name5) {
+        return this.macros.has(name5) ? this.expandTokens([new Token(name5)]) : void 0;
       }
       expandTokens(tokens) {
         var output = [];
@@ -25535,21 +27570,21 @@ var init_katex = __esm({
         }
         return output;
       }
-      expandMacroAsText(name4) {
-        var tokens = this.expandMacro(name4);
+      expandMacroAsText(name5) {
+        var tokens = this.expandMacro(name5);
         if (tokens) {
           return tokens.map((token) => token.text).join("");
         } else {
           return tokens;
         }
       }
-      _getExpansion(name4) {
-        var definition = this.macros.get(name4);
+      _getExpansion(name5) {
+        var definition = this.macros.get(name5);
         if (definition == null) {
           return definition;
         }
-        if (name4.length === 1) {
-          var catcode = this.lexer.catcodes[name4];
+        if (name5.length === 1) {
+          var catcode = this.lexer.catcodes[name5];
           if (catcode != null && catcode !== 13) {
             return;
           }
@@ -25579,12 +27614,12 @@ var init_katex = __esm({
         }
         return expansion;
       }
-      isDefined(name4) {
-        return this.macros.has(name4) || functions.hasOwnProperty(name4) || symbols.math.hasOwnProperty(name4) || symbols.text.hasOwnProperty(name4) || implicitCommands.hasOwnProperty(name4);
+      isDefined(name5) {
+        return this.macros.has(name5) || functions.hasOwnProperty(name5) || symbols.math.hasOwnProperty(name5) || symbols.text.hasOwnProperty(name5) || implicitCommands.hasOwnProperty(name5);
       }
-      isExpandable(name4) {
-        var macro = this.macros.get(name4);
-        return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions.hasOwnProperty(name4) && !functions[name4].primitive;
+      isExpandable(name5) {
+        var macro = this.macros.get(name5);
+        return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions.hasOwnProperty(name5) && !functions[name5].primitive;
       }
     };
     unicodeSubRegEx = /^[₊₋₌₍₎₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ]/;
@@ -26225,12 +28260,12 @@ var init_katex = __esm({
           return body;
         }
       }
-      handleSupSubscript(name4) {
+      handleSupSubscript(name5) {
         var symbolToken = this.fetch();
         var symbol = symbolToken.text;
         this.consume();
         this.consumeSpaces();
-        var group = this.parseGroup(name4);
+        var group = this.parseGroup(name5);
         if (!group) {
           throw new ParseError("Expected group after '" + symbol + "'", symbolToken);
         }
@@ -26359,7 +28394,7 @@ var init_katex = __esm({
           return base2;
         }
       }
-      parseFunction(breakOnTokenText, name4) {
+      parseFunction(breakOnTokenText, name5) {
         var token = this.fetch();
         var func = token.text;
         var funcData = functions[func];
@@ -26367,8 +28402,8 @@ var init_katex = __esm({
           return null;
         }
         this.consume();
-        if (name4 && name4 !== "atom" && !funcData.allowedInArgument) {
-          throw new ParseError("Got function '" + func + "' with no arguments" + (name4 ? " as " + name4 : ""), token);
+        if (name5 && name5 !== "atom" && !funcData.allowedInArgument) {
+          throw new ParseError("Got function '" + func + "' with no arguments" + (name5 ? " as " + name5 : ""), token);
         } else if (this.mode === "text" && !funcData.allowedInText) {
           throw new ParseError("Can't use function '" + func + "' in text mode", token);
         } else if (this.mode === "math" && funcData.allowedInMath === false) {
@@ -26380,18 +28415,18 @@ var init_katex = __esm({
         } = this.parseArguments(func, funcData);
         return this.callFunction(func, args, optArgs, token, breakOnTokenText);
       }
-      callFunction(name4, args, optArgs, token, breakOnTokenText) {
+      callFunction(name5, args, optArgs, token, breakOnTokenText) {
         var context = {
-          funcName: name4,
+          funcName: name5,
           parser: this,
           token,
           breakOnTokenText
         };
-        var func = functions[name4];
+        var func = functions[name5];
         if (func && func.handler) {
           return func.handler(context, args, optArgs);
         } else {
-          throw new ParseError("No function handler for " + name4);
+          throw new ParseError("No function handler for " + name5);
         }
       }
       parseArguments(func, funcData) {
@@ -26424,7 +28459,7 @@ var init_katex = __esm({
           optArgs
         };
       }
-      parseGroupOfType(name4, type, optional) {
+      parseGroupOfType(name5, type, optional) {
         switch (type) {
           case "color":
             return this.parseColorGroup(optional);
@@ -26456,9 +28491,9 @@ var init_katex = __esm({
             if (optional) {
               throw new ParseError("A primitive argument cannot be optional");
             }
-            var _group = this.parseGroup(name4);
+            var _group = this.parseGroup(name5);
             if (_group == null) {
-              throw new ParseError("Expected group as " + name4, this.fetch());
+              throw new ParseError("Expected group as " + name5, this.fetch());
             }
             return _group;
           }
@@ -26467,7 +28502,7 @@ var init_katex = __esm({
           case void 0:
             return this.parseArgumentGroup(optional);
           default:
-            throw new ParseError("Unknown group type as " + name4, this.fetch());
+            throw new ParseError("Unknown group type as " + name5, this.fetch());
         }
       }
       consumeSpaces() {
@@ -26514,14 +28549,14 @@ var init_katex = __esm({
         if (!match) {
           throw new ParseError("Invalid color: '" + res.text + "'", res);
         }
-        var color = match[0];
-        if (/^[0-9a-f]{6}$/i.test(color)) {
-          color = "#" + color;
+        var color2 = match[0];
+        if (/^[0-9a-f]{6}$/i.test(color2)) {
+          color2 = "#" + color2;
         }
         return {
           type: "color-token",
           mode: this.mode,
-          color
+          color: color2
         };
       }
       parseSizeGroup(optional) {
@@ -26598,7 +28633,7 @@ var init_katex = __esm({
         }
         return result;
       }
-      parseGroup(name4, breakOnTokenText) {
+      parseGroup(name5, breakOnTokenText) {
         var firstToken = this.fetch();
         var text2 = firstToken.text;
         var result;
@@ -26618,7 +28653,7 @@ var init_katex = __esm({
             semisimple: text2 === "\\begingroup" || void 0
           };
         } else {
-          result = this.parseFunction(breakOnTokenText, name4) || this.parseSymbol();
+          result = this.parseFunction(breakOnTokenText, name5) || this.parseSymbol();
           if (result == null && text2[0] === "\\" && !implicitCommands.hasOwnProperty(text2)) {
             if (this.settings.throwOnError) {
               throw new ParseError("Undefined control sequence: " + text2, firstToken);
@@ -26804,6 +28839,14 @@ var init_katex = __esm({
         };
       }
     }
+    renderToString = function renderToString2(expression, options) {
+      var markup = renderToDomTree(expression, options).toMarkup();
+      return markup;
+    };
+    generateParseTree = function generateParseTree2(expression, options) {
+      var settings = new Settings(options);
+      return parseTree(expression, settings);
+    };
     renderError = function renderError2(error2, expression, options) {
       if (options.throwOnError || !(error2 instanceof ParseError)) {
         throw error2;
@@ -26822,6 +28865,150 @@ var init_katex = __esm({
         return renderError(error2, expression, settings);
       }
     };
+    renderToHTMLTree = function renderToHTMLTree2(expression, options) {
+      var settings = new Settings(options);
+      try {
+        var tree = parseTree(expression, settings);
+        return buildHTMLTree(tree, expression, settings);
+      } catch (error2) {
+        return renderError(error2, expression, settings);
+      }
+    };
+    katex = {
+      version: "0.16.3",
+      render,
+      renderToString,
+      ParseError,
+      SETTINGS_SCHEMA,
+      __parse: generateParseTree,
+      __renderToDomTree: renderToDomTree,
+      __renderToHTMLTree: renderToHTMLTree,
+      __setFontMetrics: setFontMetrics,
+      __defineSymbol: defineSymbol,
+      __defineMacro: defineMacro,
+      __domTree: {
+        Span,
+        Anchor,
+        SymbolNode,
+        SvgNode,
+        PathNode,
+        LineNode
+      }
+    };
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/katex/_page.svx.js
+var page_svx_exports = {};
+__export(page_svx_exports, {
+  default: () => Page6
+});
+var Katexer, numMax, Page6;
+var init_page_svx = __esm({
+  ".svelte-kit/output/server/entries/pages/katex/_page.svx.js"() {
+    init_chunks();
+    init_katex();
+    init_store();
+    Katexer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+
+
+
+
+${$$result.head += `<!-- HEAD_svelte-ztscxf_START --><link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}"><!-- HEAD_svelte-ztscxf_END -->`, ""}`;
+    });
+    numMax = 1e3;
+    Page6 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let proseInvert;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let num = numMax;
+      let equations = [
+        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
+      ];
+      proseInvert = $isDarkMode ? "prose-invert" : "";
+      $$unsubscribe_isDarkMode();
+      return `${validate_component(Katexer, "MathLazyRenderer").$$render($$result, {}, {}, {})}
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Katex</h1>
+<input type="${"number"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
+<input type="${"range"}" min="${"1"}"${add_attribute("max", numMax, 0)}${add_attribute("value", num, 0)}>
+<h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
+${each(Array(num), (_2, j2) => {
+        return `<div>${escape(j2 + 1)}</div>
+    ${each(equations, (eqn) => {
+          return `<p class="${"p-1 text-indigo-700"}" d${add_attribute("k", eqn, 0)}></p>`;
+        })}`;
+      })}</article>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/7.js
+var __exports8 = {};
+__export(__exports8, {
+  component: () => component8,
+  file: () => file8,
+  fonts: () => fonts8,
+  imports: () => imports8,
+  index: () => index8,
+  stylesheets: () => stylesheets8
+});
+var index8, component8, file8, imports8, stylesheets8, fonts8;
+var init__8 = __esm({
+  ".svelte-kit/output/server/nodes/7.js"() {
+    index8 = 7;
+    component8 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
+    file8 = "_app/immutable/components/pages/katex/_page.svx-ec98b2e4.js";
+    imports8 = ["_app/immutable/components/pages/katex/_page.svx-ec98b2e4.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js"];
+    stylesheets8 = [];
+    fonts8 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/login/_page.svelte.js
+var page_svelte_exports6 = {};
+__export(page_svelte_exports6, {
+  default: () => Page7
+});
+var Page7;
+var init_page_svelte6 = __esm({
+  ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
+    init_chunks();
+    init_LoginCard();
+    Page7 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      console.log("back in black!");
+      return `
+
+
+${validate_component(LoginCard, "LoginCard").$$render($$result, { noTransition: true }, {}, {})}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/8.js
+var __exports9 = {};
+__export(__exports9, {
+  component: () => component9,
+  file: () => file9,
+  fonts: () => fonts9,
+  imports: () => imports9,
+  index: () => index9,
+  stylesheets: () => stylesheets9
+});
+var index9, component9, file9, imports9, stylesheets9, fonts9;
+var init__9 = __esm({
+  ".svelte-kit/output/server/nodes/8.js"() {
+    index9 = 8;
+    component9 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
+    file9 = "_app/immutable/components/pages/login/_page.svelte-49a93f4f.js";
+    imports9 = ["_app/immutable/components/pages/login/_page.svelte-49a93f4f.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/LoginCard-169786e8.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/navigation-b70c4e1d.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/utils-aab06870.js"];
+    stylesheets9 = [];
+    fonts9 = [];
   }
 });
 
@@ -26856,23 +29043,255 @@ ${$$result.head += `<!-- HEAD_svelte-15ncbow_START --><link rel="${"stylesheet"}
   }
 });
 
-// .svelte-kit/output/server/entries/pages/physics/_page.svelte.js
-var page_svelte_exports = {};
-__export(page_svelte_exports, {
-  default: () => Page
+// .svelte-kit/output/server/entries/pages/math/_page.svx.js
+var page_svx_exports2 = {};
+__export(page_svx_exports2, {
+  default: () => Page8
 });
-var css3, E_and_m, Page;
-var init_page_svelte = __esm({
+var Katex, SixMathEqnAnim, numMax2, numMDMax, Page8;
+var init_page_svx2 = __esm({
+  ".svelte-kit/output/server/entries/pages/math/_page.svx.js"() {
+    init_chunks();
+    init_katex();
+    init_store();
+    init_Kajax();
+    Katex = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let katexString;
+      let { d: d2 = false } = $$props;
+      let { m: m2 } = $$props;
+      const options = { displayMode: d2, throwOnError: false };
+      if ($$props.d === void 0 && $$bindings.d && d2 !== void 0)
+        $$bindings.d(d2);
+      if ($$props.m === void 0 && $$bindings.m && m2 !== void 0)
+        $$bindings.m(m2);
+      katexString = katex.renderToString(m2, options);
+      return `${$$result.head += `<!-- HEAD_svelte-bnfb8z_START --><link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"}" integrity="${"sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"}" crossorigin="${"anonymous"}"><!-- HEAD_svelte-bnfb8z_END -->`, ""}
+
+<!-- HTML_TAG_START -->${katexString}<!-- HTML_TAG_END -->`;
+    });
+    SixMathEqnAnim = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let equations = [
+        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c",
+        "e^{i x}=\\cos x+i\\sin x"
+      ];
+      $$unsubscribe_isDarkMode();
+      return `<div class="${"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"}">${each(equations, (eqn, i) => {
+        return `
+    <p${add_attribute("class", $isDarkMode ? "text-blue-100" : "text-indigo-900", 0)}>${validate_component(Katex, "K").$$render($$result, { d: true, m: eqn }, {}, {})}
+    </p>`;
+      })}</div>`;
+    });
+    numMax2 = 1e3;
+    numMDMax = 1;
+    Page8 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let num;
+      let numMD;
+      let proseInvert;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let equations = [
+        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
+      ];
+      let x2 = 2;
+      num = numMax2;
+      numMD = numMDMax;
+      proseInvert = $isDarkMode ? "prose-invert" : "";
+      $$unsubscribe_isDarkMode();
+      return `${validate_component(Kajax, "Kajax").$$render($$result, {}, {}, {})}
+
+
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><p>ayo</p>
+${validate_component(SixMathEqnAnim, "SixMathEqnAnim").$$render($$result, {}, {}, {})}
+  
+  
+
+<div class="${"math math-display"}"><!-- HTML_TAG_START -->${`<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><munder><mrow><msup><mi>u</mi><mo mathvariant="normal" lspace="0em" rspace="0em">\u2032</mo></msup><mo>\u2212</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msup><mi>u</mi><mn>2</mn></msup><mo>\u2212</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>u</mi><mo>\u2212</mo><mi>R</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo stretchy="true">\u23DF</mo></munder><mrow><mtext>=0,\xA0since\xA0</mtext><mstyle scriptlevel="0" displaystyle="false"><mi>u</mi></mstyle><mtext>\xA0is\xA0a\xA0particular\xA0solution.</mtext></mrow></munder></mrow><annotation encoding="application/x-tex">\\underbrace{u&#x27;-P(x)u^2-Q(x)u-R(x)}_{\\text{=0, since~$u$ is a particular solution.}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.5843em;vertical-align:-1.7202em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-1.4159em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">=0,\xA0since</span><span class="mord mtight nobreak">\xA0</span><span class="mord mathnormal sizing reset-size3 size6">u</span><span class="mord mtight">\xA0is\xA0a\xA0particular\xA0solution.</span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span class="svg-align" style="top:-2.102em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMinYMin slice'><path d='M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z'/></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMidYMin slice'><path d='M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z'/></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMaxYMin slice'><path d='M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z'/></svg></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8019em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">\u2032</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">\u2212</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:0.898em;"><span></span></span></span></span></span></span></span><span class="vlist-s">\u200B</span></span><span class="vlist-r"><span class="vlist" style="height:1.7202em;"><span></span></span></span></span></span></span></span></span></span>`}<!-- HTML_TAG_END --></div>
+<span class="${"text-7xl flex justify-center"}"><p>${escape(x2)}<span class="${"math math-inline"}"><!-- HTML_TAG_START -->${'<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></span>=${escape(x2 ** 2)}</p></span>
+<div class="${"flex justify-center"}"><input type="${"range"}" min="${"1"}"${add_attribute("value", x2, 0)}></div>
+<h1>The content of this page is written in a markdown file with svelte components (tailwind too), possible due to MDsveX!</h1>
+<h2>The <strong>math</strong> on this page is written in markdown using Katex (black), Katex (green), and Mathjax (blue), the latter two of which are lazy rendered with the Intersection Observer API!</h2>
+<ul><li>the square-slider above using svelte binding of a JS variable \u2026 again this is possible due to MDsveX<ul><li>the newest version of mathjax is about as performant as katex; mathjax has a wider adoption of latex functionality</li>
+<li>the math markdown uses katex as a plugin and is not lazy-rendered \u2026 it is however easier to write</li></ul></li></ul>
+
+<div class="${"p-4"}"><input type="${"number"}" min="${"1"}"${add_attribute("value", numMD, 0)}>
+    <input type="${"range"}" min="${"1"}"${add_attribute("value", numMD, 0)}></div>
+<h1>${escape(numMD)} lines of markdown immediately below</h1>
+${each(Array(numMD), (_2, j2) => {
+        return `<p>${escape(j2 + 1)}</p>
+<div class="${"math math-display"}"><!-- HTML_TAG_START -->${'<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>'}<!-- HTML_TAG_END --></div>`;
+      })}
+
+<ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
+<input type="${"number"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num, 0)}>
+<input type="${"range"}" min="${"1"}"${add_attribute("max", numMax2, 0)}${add_attribute("value", num, 0)}>
+${each(Array(num), (_2, j2) => {
+        return `<p>${escape(j2 + 1)}</p>
+        <p class="${"p-1 text-indigo-700"}" d${add_attribute("m", "\\cancelto{0}{\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}}", 0)}></p>
+        <p class="${"p-1 text-green-700"}" d${add_attribute("k", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
+    ${each(equations, (eqn, k2) => {
+          return `<div><p class="${"p-1 text-indigo-700"}" d${add_attribute("k", eqn, 0)}></p>
+        <p class="${"p-1 text-green-700"}" d${add_attribute("m", eqn, 0)}></p>
+    </div>`;
+        })}`;
+      })}</article>
+
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/9.js
+var __exports10 = {};
+__export(__exports10, {
+  component: () => component10,
+  file: () => file10,
+  fonts: () => fonts10,
+  imports: () => imports10,
+  index: () => index10,
+  stylesheets: () => stylesheets10
+});
+var index10, component10, file10, imports10, stylesheets10, fonts10;
+var init__10 = __esm({
+  ".svelte-kit/output/server/nodes/9.js"() {
+    index10 = 9;
+    component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
+    file10 = "_app/immutable/components/pages/math/_page.svx-9678cfef.js";
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-9678cfef.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/Kajax-96592336.js"];
+    stylesheets10 = [];
+    fonts10 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/mathjax/_page.svx.js
+var page_svx_exports3 = {};
+__export(page_svx_exports3, {
+  default: () => Page9
+});
+var MathJaxer, numMax3, Page9;
+var init_page_svx3 = __esm({
+  ".svelte-kit/output/server/entries/pages/mathjax/_page.svx.js"() {
+    init_chunks();
+    init_store();
+    MathJaxer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${$$result.head += `<!-- HEAD_svelte-1fd20gn_START --><script>MathJax = {
+      // startup: { typeset: false },
+      // startup: { elements: ["[m]"] },
+      loader: { load: ["[tex]/physics", "[tex]/cancel"] },
+      tex: {
+        packages: {
+          "[+]": ["physics", "cancel"],
+        },
+        inlineMath: [
+          ["$", "$"],
+          ["\\\\(", "\\\\)"],
+        ],
+      },
+      svg: {
+        fontCache: "global",
+      },
+    };
+  <\/script><script id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"}"><\/script><!-- HEAD_svelte-1fd20gn_END -->`, ""}`;
+    });
+    numMax3 = 1e3;
+    Page9 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let proseInvert;
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      let num = numMax3;
+      let equations = [
+        "\\int_{M}d\\omega=\\int_{\\partial M}\\omega",
+        "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}",
+        " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ",
+        "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}",
+        "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"
+      ];
+      proseInvert = $isDarkMode ? "prose-invert" : "";
+      $$unsubscribe_isDarkMode();
+      return `${validate_component(MathJaxer, "MathLazyRenderer").$$render($$result, {}, {}, {})}
+<article class="${"prose lg:prose-lg " + escape(proseInvert, true)}"><h1>This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)</h1>
+<input type="${"number"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
+<input type="${"range"}" min="${"1"}"${add_attribute("max", numMax3, 0)}${add_attribute("value", num, 0)}>
+<h2>${escape(num)} sections; ${escape(num * equations.length)} equations below</h2>
+${each(Array(num), (_2, j2) => {
+        return `<div>${escape(j2 + 1)}</div>
+    ${each(equations, (eqn) => {
+          return `<p class="${"p-1 text-red-400"}" d${add_attribute("m", eqn, 0)}></p>`;
+        })}`;
+      })}</article>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/10.js
+var __exports11 = {};
+__export(__exports11, {
+  component: () => component11,
+  file: () => file11,
+  fonts: () => fonts11,
+  imports: () => imports11,
+  index: () => index11,
+  stylesheets: () => stylesheets11
+});
+var index11, component11, file11, imports11, stylesheets11, fonts11;
+var init__11 = __esm({
+  ".svelte-kit/output/server/nodes/10.js"() {
+    index11 = 10;
+    component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
+    file11 = "_app/immutable/components/pages/mathjax/_page.svx-73476e45.js";
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-73476e45.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js"];
+    stylesheets11 = [];
+    fonts11 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/physics/_page.js
+var page_exports2 = {};
+__export(page_exports2, {
+  prerender: () => prerender
+});
+var prerender;
+var init_page2 = __esm({
+  ".svelte-kit/output/server/entries/pages/physics/_page.js"() {
+    prerender = false;
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/physics/_page.svelte.js
+var page_svelte_exports7 = {};
+__export(page_svelte_exports7, {
+  default: () => Page10
+});
+var css5, E_and_m, Page10;
+var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
     init_Kajax();
     init_store();
-    css3 = {
+    css5 = {
       code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}",
       map: null
     };
     E_and_m = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      $$result.css.add(css3);
+      $$result.css.add(css5);
       return `${validate_component(Kajax, "MathRenderer").$$render($$result, {}, {}, {})}
 
 <p class="${"text-3xl flex justify-center"}" d${add_attribute("m", `\\cancelto{0}{x}`, 0)}></p>
@@ -26943,7 +29362,7 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <li>D. 8.0 \u03A9</li></ul>
   <img style="${"margin: 0 auto; display:flex;width: 65vw;min-width: 280px;max-width: 600px;"}" src="${"https://raw.githubusercontent.com/brightowltutoring/web/main/circuits-1.png"}"></div>`;
     });
-    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page10 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let proseInvert;
       let $isDarkMode, $$unsubscribe_isDarkMode;
       $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
@@ -26955,26 +29374,318 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 });
 
 // .svelte-kit/output/server/nodes/11.js
-var __exports3 = {};
-__export(__exports3, {
-  component: () => component3,
-  file: () => file3,
-  fonts: () => fonts3,
-  imports: () => imports3,
-  index: () => index3,
-  shared: () => page_exports,
-  stylesheets: () => stylesheets3
+var __exports12 = {};
+__export(__exports12, {
+  component: () => component12,
+  file: () => file12,
+  fonts: () => fonts12,
+  imports: () => imports12,
+  index: () => index12,
+  shared: () => page_exports2,
+  stylesheets: () => stylesheets12
 });
-var index3, component3, file3, imports3, stylesheets3, fonts3;
-var init__3 = __esm({
+var index12, component12, file12, imports12, stylesheets12, fonts12;
+var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
-    init_page();
-    index3 = 11;
-    component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/physics/_page.svelte-2784cc57.js";
-    imports3 = ["_app/immutable/components/pages/physics/_page.svelte-2784cc57.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Kajax-96592336.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/modules/pages/physics/_page.js-134697de.js", "_app/immutable/chunks/_page-d949538d.js"];
-    stylesheets3 = ["_app/immutable/assets/_page-fcf51fa8.css"];
-    fonts3 = [];
+    init_page2();
+    index12 = 11;
+    component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
+    file12 = "_app/immutable/components/pages/physics/_page.svelte-2784cc57.js";
+    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-2784cc57.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/Kajax-96592336.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/modules/pages/physics/_page.js-134697de.js", "_app/immutable/chunks/_page-d949538d.js"];
+    stylesheets12 = ["_app/immutable/assets/_page-fcf51fa8.css"];
+    fonts12 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/plans/_page.svelte.js
+var page_svelte_exports8 = {};
+__export(page_svelte_exports8, {
+  default: () => Page11
+});
+var Page11;
+var init_page_svelte8 = __esm({
+  ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
+    init_chunks();
+    init_PlansComponent();
+    Page11 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${validate_component(PlansComponent, "PlansComponent").$$render($$result, {}, {}, {})}
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/12.js
+var __exports13 = {};
+__export(__exports13, {
+  component: () => component13,
+  file: () => file13,
+  fonts: () => fonts13,
+  imports: () => imports13,
+  index: () => index13,
+  stylesheets: () => stylesheets13
+});
+var index13, component13, file13, imports13, stylesheets13, fonts13;
+var init__13 = __esm({
+  ".svelte-kit/output/server/nodes/12.js"() {
+    index13 = 12;
+    component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-d4aea7ab.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-d4aea7ab.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/PlansComponent-2d3ca242.js", "_app/immutable/chunks/store-8af68461.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/InView-2eeb4aa0.js", "_app/immutable/chunks/utils-aab06870.js"];
+    stylesheets13 = [];
+    fonts13 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/samplequiz/_page.md.js
+var page_md_exports = {};
+__export(page_md_exports, {
+  default: () => Page12
+});
+var Page12;
+var init_page_md = __esm({
+  ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
+    init_chunks();
+    Page12 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+${each(Array(1e3), (_2, i) => {
+        return `<div class="${"bg-red-100"}">
+  </div>`;
+      })}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/13.js
+var __exports14 = {};
+__export(__exports14, {
+  component: () => component14,
+  file: () => file14,
+  fonts: () => fonts14,
+  imports: () => imports14,
+  index: () => index14,
+  stylesheets: () => stylesheets14
+});
+var index14, component14, file14, imports14, stylesheets14, fonts14;
+var init__14 = __esm({
+  ".svelte-kit/output/server/nodes/13.js"() {
+    index14 = 13;
+    component14 = async () => (await Promise.resolve().then(() => (init_page_md(), page_md_exports))).default;
+    file14 = "_app/immutable/components/pages/samplequiz/_page.md-e9a18c36.js";
+    imports14 = ["_app/immutable/components/pages/samplequiz/_page.md-e9a18c36.js", "_app/immutable/chunks/index-95872f21.js"];
+    stylesheets14 = [];
+    fonts14 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/stripe/_page.js
+var page_exports3 = {};
+var init_page3 = __esm({
+  ".svelte-kit/output/server/entries/pages/stripe/_page.js"() {
+  }
+});
+
+// node_modules/@firebase/functions/dist/index.esm2017.js
+function connectFunctionsEmulator$1(functionsInstance, host, port) {
+  functionsInstance.emulatorOrigin = `http://${host}:${port}`;
+}
+function registerFunctions(fetchImpl, variant) {
+  const factory = (container, { instanceIdentifier: regionOrCustomDomain }) => {
+    const app2 = container.getProvider("app").getImmediate();
+    const authProvider = container.getProvider(AUTH_INTERNAL_NAME);
+    const messagingProvider = container.getProvider(MESSAGING_INTERNAL_NAME);
+    const appCheckProvider = container.getProvider(APP_CHECK_INTERNAL_NAME);
+    return new FunctionsService(app2, authProvider, messagingProvider, appCheckProvider, regionOrCustomDomain, fetchImpl);
+  };
+  _registerComponent(new Component(FUNCTIONS_TYPE, factory, "PUBLIC").setMultipleInstances(true));
+  registerVersion(name4, version4, variant);
+  registerVersion(name4, version4, "esm2017");
+}
+function getFunctions(app2 = getApp(), regionOrCustomDomain = DEFAULT_REGION) {
+  const functionsProvider = _getProvider(getModularInstance(app2), FUNCTIONS_TYPE);
+  const functionsInstance = functionsProvider.getImmediate({
+    identifier: regionOrCustomDomain
+  });
+  const emulator = getDefaultEmulatorHostnameAndPort("functions");
+  if (emulator) {
+    connectFunctionsEmulator(functionsInstance, ...emulator);
+  }
+  return functionsInstance;
+}
+function connectFunctionsEmulator(functionsInstance, host, port) {
+  connectFunctionsEmulator$1(getModularInstance(functionsInstance), host, port);
+}
+var FUNCTIONS_TYPE, ContextProvider, DEFAULT_REGION, FunctionsService, name4, version4, AUTH_INTERNAL_NAME, APP_CHECK_INTERNAL_NAME, MESSAGING_INTERNAL_NAME;
+var init_index_esm20175 = __esm({
+  "node_modules/@firebase/functions/dist/index.esm2017.js"() {
+    init_index_esm20174();
+    init_index_esm2017();
+    init_index_esm20172();
+    FUNCTIONS_TYPE = "functions";
+    ContextProvider = class {
+      constructor(authProvider, messagingProvider, appCheckProvider) {
+        this.auth = null;
+        this.messaging = null;
+        this.appCheck = null;
+        this.auth = authProvider.getImmediate({ optional: true });
+        this.messaging = messagingProvider.getImmediate({
+          optional: true
+        });
+        if (!this.auth) {
+          authProvider.get().then((auth) => this.auth = auth, () => {
+          });
+        }
+        if (!this.messaging) {
+          messagingProvider.get().then((messaging) => this.messaging = messaging, () => {
+          });
+        }
+        if (!this.appCheck) {
+          appCheckProvider.get().then((appCheck) => this.appCheck = appCheck, () => {
+          });
+        }
+      }
+      async getAuthToken() {
+        if (!this.auth) {
+          return void 0;
+        }
+        try {
+          const token = await this.auth.getToken();
+          return token === null || token === void 0 ? void 0 : token.accessToken;
+        } catch (e3) {
+          return void 0;
+        }
+      }
+      async getMessagingToken() {
+        if (!this.messaging || !("Notification" in self) || Notification.permission !== "granted") {
+          return void 0;
+        }
+        try {
+          return await this.messaging.getToken();
+        } catch (e3) {
+          return void 0;
+        }
+      }
+      async getAppCheckToken() {
+        if (this.appCheck) {
+          const result = await this.appCheck.getToken();
+          if (result.error) {
+            return null;
+          }
+          return result.token;
+        }
+        return null;
+      }
+      async getContext() {
+        const authToken = await this.getAuthToken();
+        const messagingToken = await this.getMessagingToken();
+        const appCheckToken = await this.getAppCheckToken();
+        return { authToken, messagingToken, appCheckToken };
+      }
+    };
+    DEFAULT_REGION = "us-central1";
+    FunctionsService = class {
+      constructor(app2, authProvider, messagingProvider, appCheckProvider, regionOrCustomDomain = DEFAULT_REGION, fetchImpl) {
+        this.app = app2;
+        this.fetchImpl = fetchImpl;
+        this.emulatorOrigin = null;
+        this.contextProvider = new ContextProvider(authProvider, messagingProvider, appCheckProvider);
+        this.cancelAllRequests = new Promise((resolve) => {
+          this.deleteService = () => {
+            return Promise.resolve(resolve());
+          };
+        });
+        try {
+          const url = new URL(regionOrCustomDomain);
+          this.customDomain = url.origin;
+          this.region = DEFAULT_REGION;
+        } catch (e3) {
+          this.customDomain = null;
+          this.region = regionOrCustomDomain;
+        }
+      }
+      _delete() {
+        return this.deleteService();
+      }
+      _url(name5) {
+        const projectId = this.app.options.projectId;
+        if (this.emulatorOrigin !== null) {
+          const origin = this.emulatorOrigin;
+          return `${origin}/${projectId}/${this.region}/${name5}`;
+        }
+        if (this.customDomain !== null) {
+          return `${this.customDomain}/${name5}`;
+        }
+        return `https://${this.region}-${projectId}.cloudfunctions.net/${name5}`;
+      }
+    };
+    name4 = "@firebase/functions";
+    version4 = "0.8.8";
+    AUTH_INTERNAL_NAME = "auth-internal";
+    APP_CHECK_INTERNAL_NAME = "app-check-internal";
+    MESSAGING_INTERNAL_NAME = "messaging-internal";
+    registerFunctions(fetch.bind(self));
+  }
+});
+
+// node_modules/firebase/functions/dist/index.esm.js
+var init_index_esm5 = __esm({
+  "node_modules/firebase/functions/dist/index.esm.js"() {
+    init_index_esm20175();
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/stripe/_page.svelte.js
+var page_svelte_exports9 = {};
+__export(page_svelte_exports9, {
+  default: () => Page13
+});
+var css6, Page13;
+var init_page_svelte9 = __esm({
+  ".svelte-kit/output/server/entries/pages/stripe/_page.svelte.js"() {
+    init_chunks();
+    init_firebase();
+    init_index_esm5();
+    css6 = {
+      code: '.loading.svelte-tci3t6:after{content:" . . .";animation:svelte-tci3t6-dots 1s steps(5, end) infinite}@keyframes svelte-tci3t6-dots{0%,40%{color:rgba(0, 0, 0, 0)}}',
+      map: null
+    };
+    Page13 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      getFunctions(app);
+      $$result.css.add(css6);
+      return `${$$result.head += `<!-- HEAD_svelte-1jxl9zf_START -->${$$result.title = `<title>Stripe Checkout</title>`, ""}<script src="${"https://js.stripe.com/v3/"}"><\/script><!-- HEAD_svelte-1jxl9zf_END -->`, ""}
+
+<main>${``}</main>
+
+
+
+
+
+
+`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/14.js
+var __exports15 = {};
+__export(__exports15, {
+  component: () => component15,
+  file: () => file15,
+  fonts: () => fonts15,
+  imports: () => imports15,
+  index: () => index15,
+  shared: () => page_exports3,
+  stylesheets: () => stylesheets15
+});
+var index15, component15, file15, imports15, stylesheets15, fonts15;
+var init__15 = __esm({
+  ".svelte-kit/output/server/nodes/14.js"() {
+    init_page3();
+    index15 = 14;
+    component15 = async () => (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
+    file15 = "_app/immutable/components/pages/stripe/_page.svelte-c9616edb.js";
+    imports15 = ["_app/immutable/components/pages/stripe/_page.svelte-c9616edb.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/index-4d5c3e31.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/modules/pages/stripe/_page.js-335ae76b.js"];
+    stylesheets15 = ["_app/immutable/assets/_page-5c304dd7.css"];
+    fonts15 = [];
   }
 });
 
@@ -27151,8 +29862,8 @@ function uneval(value) {
     const params = [];
     const statements = [];
     const values = [];
-    names.forEach((name4, thing) => {
-      params.push(name4);
+    names.forEach((name5, thing) => {
+      params.push(name5);
       if (is_primitive(thing)) {
         values.push(stringify_primitive(thing));
         return;
@@ -27173,19 +29884,19 @@ function uneval(value) {
         case "Array":
           values.push(`Array(${thing.length})`);
           thing.forEach((v2, i) => {
-            statements.push(`${name4}[${i}]=${stringify2(v2)}`);
+            statements.push(`${name5}[${i}]=${stringify2(v2)}`);
           });
           break;
         case "Set":
           values.push(`new Set`);
           statements.push(
-            `${name4}.${Array.from(thing).map((v2) => `add(${stringify2(v2)})`).join(".")}`
+            `${name5}.${Array.from(thing).map((v2) => `add(${stringify2(v2)})`).join(".")}`
           );
           break;
         case "Map":
           values.push(`new Map`);
           statements.push(
-            `${name4}.${Array.from(thing).map(([k2, v2]) => `set(${stringify2(k2)}, ${stringify2(v2)})`).join(".")}`
+            `${name5}.${Array.from(thing).map(([k2, v2]) => `set(${stringify2(k2)}, ${stringify2(v2)})`).join(".")}`
           );
           break;
         default:
@@ -27194,7 +29905,7 @@ function uneval(value) {
           );
           Object.keys(thing).forEach((key2) => {
             statements.push(
-              `${name4}${safe_prop(key2)}=${stringify2(thing[key2])}`
+              `${name5}${safe_prop(key2)}=${stringify2(thing[key2])}`
             );
           });
       }
@@ -27208,12 +29919,12 @@ function uneval(value) {
   }
 }
 function get_name(num) {
-  let name4 = "";
+  let name5 = "";
   do {
-    name4 = chars[num % chars.length] + name4;
+    name5 = chars[num % chars.length] + name5;
     num = ~~(num / chars.length) - 1;
   } while (num >= 0);
-  return reserved.test(name4) ? `${name4}0` : name4;
+  return reserved.test(name5) ? `${name5}0` : name5;
 }
 function escape_unsafe_char(c2) {
   return escaped[c2] || c2;
@@ -27272,8 +29983,8 @@ function stringify(value) {
       return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0)
       return NEGATIVE_ZERO;
-    const index5 = p2++;
-    indexes.set(thing, index5);
+    const index17 = p2++;
+    indexes.set(thing, index17);
     let str = "";
     if (is_primitive(thing)) {
       str = stringify_primitive2(thing);
@@ -27363,12 +30074,12 @@ function stringify(value) {
           }
       }
     }
-    stringified[index5] = str;
-    return index5;
+    stringified[index17] = str;
+    return index17;
   }
-  const index4 = flatten(value);
-  if (index4 < 0)
-    return `${index4}`;
+  const index16 = flatten(value);
+  if (index16 < 0)
+    return `${index16}`;
   return `[${stringified.join(",")}]`;
 }
 function stringify_primitive2(thing) {
@@ -27695,11 +30406,11 @@ async function render_endpoint(event, mod, state) {
   if (!handler) {
     return method_not_allowed(mod, method);
   }
-  const prerender3 = mod.prerender ?? state.prerender_default;
-  if (prerender3 && (mod.POST || mod.PATCH || mod.PUT || mod.DELETE)) {
+  const prerender2 = mod.prerender ?? state.prerender_default;
+  if (prerender2 && (mod.POST || mod.PATCH || mod.PUT || mod.DELETE)) {
     throw new Error("Cannot prerender endpoints that have mutative methods");
   }
-  if (state.prerendering && !prerender3) {
+  if (state.prerendering && !prerender2) {
     if (state.initiator) {
       throw new Error(`${event.route.id} is not prerenderable`);
     } else {
@@ -27716,7 +30427,7 @@ async function render_endpoint(event, mod, state) {
       );
     }
     if (state.prerendering) {
-      response.headers.set("x-sveltekit-prerender", String(prerender3));
+      response.headers.set("x-sveltekit-prerender", String(prerender2));
     }
     return response;
   } catch (error2) {
@@ -27869,19 +30580,19 @@ function check_named_default_separate(actions) {
 }
 async function call_action(event, actions) {
   const url = new URL(event.request.url);
-  let name4 = "default";
+  let name5 = "default";
   for (const param of url.searchParams) {
     if (param[0].startsWith("/")) {
-      name4 = param[0].slice(1);
-      if (name4 === "default") {
+      name5 = param[0].slice(1);
+      if (name5 === "default") {
         throw new Error('Cannot use reserved action name "default"');
       }
       break;
     }
   }
-  const action = actions[name4];
+  const action = actions[name5];
   if (!action) {
-    throw new Error(`No action with name '${name4}' found`);
+    throw new Error(`No action with name '${name5}' found`);
   }
   if (!is_form_content_type(event.request)) {
     throw new Error(
@@ -28445,11 +31156,11 @@ var CspReportOnlyProvider = class extends BaseProvider {
   }
 };
 var Csp = class {
-  constructor({ mode, directives, reportOnly }, { prerender: prerender3, dev }) {
+  constructor({ mode, directives, reportOnly }, { prerender: prerender2, dev }) {
     __publicField(this, "nonce", generate_nonce());
     __publicField(this, "csp_provider");
     __publicField(this, "report_only_provider");
-    const use_hashes = mode === "hash" || mode === "auto" && prerender3;
+    const use_hashes = mode === "hash" || mode === "auto" && prerender2;
     this.csp_provider = new CspProvider(use_hashes, directives, this.nonce, dev);
     this.report_only_provider = new CspReportOnlyProvider(use_hashes, reportOnly, this.nonce, dev);
   }
@@ -28494,9 +31205,9 @@ async function render_response({
     }
   }
   const { entry } = options.manifest._;
-  const stylesheets4 = new Set(entry.stylesheets);
+  const stylesheets16 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
-  const fonts4 = new Set(options.manifest._.entry.fonts);
+  const fonts16 = new Set(options.manifest._.entry.fonts);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
   let rendered;
@@ -28541,10 +31252,10 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets4.add(url));
+        node.stylesheets.forEach((url) => stylesheets16.add(url));
       }
       if (node.fonts) {
-        node.fonts.forEach((url) => fonts4.add(url));
+        node.fonts.forEach((url) => fonts16.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k2, v2]) => inline_styles.set(k2, v2));
@@ -28610,7 +31321,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets4) {
+  for (const dep of stylesheets16) {
     const path2 = prefixed(dep);
     if (resolve_opts.preload({ type: "css", path: path2 })) {
       const attributes = [];
@@ -28628,7 +31339,7 @@ async function render_response({
 		<link href="${path2}" ${attributes.join(" ")}>`;
     }
   }
-  for (const dep of fonts4) {
+  for (const dep of fonts16) {
     const path2 = prefixed(dep);
     if (resolve_opts.preload({ type: "font", path: path2 })) {
       const ext = dep.slice(dep.lastIndexOf(".") + 1);
@@ -28746,9 +31457,9 @@ async function respond_with_error({ event, options, state, status, error: error2
   try {
     const branch = [];
     const default_layout = await options.manifest._.nodes[0]();
-    const ssr = get_option([default_layout], "ssr") ?? true;
+    const ssr2 = get_option([default_layout], "ssr") ?? true;
     const csr = get_option([default_layout], "csr") ?? true;
-    if (ssr) {
+    if (ssr2) {
       state.initiator = GENERIC_ERROR;
       const server_data_promise = load_server_data({
         event,
@@ -28784,7 +31495,7 @@ async function respond_with_error({ event, options, state, status, error: error2
       options,
       state,
       page_config: {
-        ssr,
+        ssr: ssr2,
         csr: get_option([default_layout], "csr") ?? true
       },
       status,
@@ -28961,8 +31672,8 @@ async function render_page(event, route, page2, options, state, resolve_opts) {
           const error2 = await handle_error_and_jsonify(event, options, err);
           while (i--) {
             if (page2.errors[i]) {
-              const index4 = page2.errors[i];
-              const node2 = await options.manifest._.nodes[index4]();
+              const index16 = page2.errors[i];
+              const node2 = await options.manifest._.nodes[index16]();
               let j2 = i;
               while (!branch[j2])
                 j2 -= 1;
@@ -29189,17 +31900,17 @@ function get_cookies(request, url, dev, trailing_slash) {
   );
   const default_path = normalized_url.split("/").slice(0, -1).join("/") || "/";
   if (dev) {
-    for (const name4 of Object.keys(cookie_paths)) {
-      cookie_paths[name4] = new Set(
-        [...cookie_paths[name4]].filter(
-          (path2) => !path_matches(normalized_url, path2) || name4 in initial_cookies
+    for (const name5 of Object.keys(cookie_paths)) {
+      cookie_paths[name5] = new Set(
+        [...cookie_paths[name5]].filter(
+          (path2) => !path_matches(normalized_url, path2) || name5 in initial_cookies
         )
       );
     }
-    for (const name4 in initial_cookies) {
-      cookie_paths[name4] = cookie_paths[name4] ?? /* @__PURE__ */ new Set();
-      if (![...cookie_paths[name4]].some((path2) => path_matches(normalized_url, path2))) {
-        cookie_paths[name4].add(default_path);
+    for (const name5 in initial_cookies) {
+      cookie_paths[name5] = cookie_paths[name5] ?? /* @__PURE__ */ new Set();
+      if (![...cookie_paths[name5]].some((path2) => path_matches(normalized_url, path2))) {
+        cookie_paths[name5].add(default_path);
       }
     }
   }
@@ -29210,31 +31921,31 @@ function get_cookies(request, url, dev, trailing_slash) {
     secure: url.hostname === "localhost" && url.protocol === "http:" ? false : true
   };
   const cookies = {
-    get(name4, opts) {
-      const c2 = new_cookies[name4];
+    get(name5, opts) {
+      const c2 = new_cookies[name5];
       if (c2 && domain_matches(url.hostname, c2.options.domain) && path_matches(url.pathname, c2.options.path)) {
         return c2.value;
       }
       const decoder = (opts == null ? void 0 : opts.decode) || decode;
       const req_cookies = (0, import_cookie.parse)(header, { decode: decoder });
-      const cookie = req_cookies[name4];
+      const cookie = req_cookies[name5];
       if (!dev || cookie) {
         return cookie;
       }
-      const paths = /* @__PURE__ */ new Set([...cookie_paths[name4] ?? []]);
+      const paths = /* @__PURE__ */ new Set([...cookie_paths[name5] ?? []]);
       if (c2) {
         paths.add(c2.options.path ?? default_path);
       }
       if (paths.size > 0) {
         console.warn(
-          `Cookie with name '${name4}' was not found at path '${url.pathname}', but a cookie with that name exists at these paths: '${[...paths].join("', '")}'. Did you mean to set its 'path' to '/' instead?`
+          `Cookie with name '${name5}' was not found at path '${url.pathname}', but a cookie with that name exists at these paths: '${[...paths].join("', '")}'. Did you mean to set its 'path' to '/' instead?`
         );
       }
     },
-    set(name4, value, opts = {}) {
+    set(name5, value, opts = {}) {
       let path2 = opts.path ?? default_path;
-      new_cookies[name4] = {
-        name: name4,
+      new_cookies[name5] = {
+        name: name5,
         value,
         options: {
           ...defaults,
@@ -29243,28 +31954,28 @@ function get_cookies(request, url, dev, trailing_slash) {
         }
       };
       if (dev) {
-        cookie_paths[name4] = cookie_paths[name4] ?? /* @__PURE__ */ new Set();
+        cookie_paths[name5] = cookie_paths[name5] ?? /* @__PURE__ */ new Set();
         if (!value) {
-          if (!cookie_paths[name4].has(path2) && cookie_paths[name4].size > 0) {
-            const paths = `'${Array.from(cookie_paths[name4]).join("', '")}'`;
+          if (!cookie_paths[name5].has(path2) && cookie_paths[name5].size > 0) {
+            const paths = `'${Array.from(cookie_paths[name5]).join("', '")}'`;
             console.warn(
-              `Trying to delete cookie '${name4}' at path '${path2}', but a cookie with that name only exists at these paths: ${paths}.`
+              `Trying to delete cookie '${name5}' at path '${path2}', but a cookie with that name only exists at these paths: ${paths}.`
             );
           }
-          cookie_paths[name4].delete(path2);
+          cookie_paths[name5].delete(path2);
         } else {
-          cookie_paths[name4].add(path2);
+          cookie_paths[name5].add(path2);
         }
       }
     },
-    delete(name4, opts = {}) {
-      cookies.set(name4, "", {
+    delete(name5, opts = {}) {
+      cookies.set(name5, "", {
         ...opts,
         maxAge: 0
       });
     },
-    serialize(name4, value, opts) {
-      return (0, import_cookie.serialize)(name4, value, {
+    serialize(name5, value, opts) {
+      return (0, import_cookie.serialize)(name5, value, {
         ...defaults,
         ...opts
       });
@@ -29272,8 +31983,8 @@ function get_cookies(request, url, dev, trailing_slash) {
   };
   function get_cookie_header(destination, header2) {
     const combined_cookies = {};
-    for (const name4 in initial_cookies) {
-      combined_cookies[name4] = encode(initial_cookies[name4]);
+    for (const name5 in initial_cookies) {
+      combined_cookies[name5] = encode(initial_cookies[name5]);
     }
     for (const key2 in new_cookies) {
       const cookie = new_cookies[key2];
@@ -29286,11 +31997,11 @@ function get_cookies(request, url, dev, trailing_slash) {
     }
     if (header2) {
       const parsed = (0, import_cookie.parse)(header2, { decode });
-      for (const name4 in parsed) {
-        combined_cookies[name4] = encode(parsed[name4]);
+      for (const name5 in parsed) {
+        combined_cookies[name5] = encode(parsed[name5]);
       }
     }
-    return Object.entries(combined_cookies).map(([name4, value]) => `${name4}=${value}`).join("; ");
+    return Object.entries(combined_cookies).map(([name5, value]) => `${name5}=${value}`).join("; ");
   }
   return { cookies, new_cookies, get_cookie_header };
 }
@@ -29312,8 +32023,8 @@ function path_matches(path2, constraint) {
 }
 function add_cookies_to_headers(headers, cookies) {
   for (const new_cookie of cookies) {
-    const { name: name4, value, options } = new_cookie;
-    headers.append("set-cookie", (0, import_cookie.serialize)(name4, value, options));
+    const { name: name5, value, options } = new_cookie;
+    headers.append("set-cookie", (0, import_cookie.serialize)(name5, value, options));
   }
 }
 function create_fetch({ event, options, state, get_cookie_header }) {
@@ -29362,10 +32073,10 @@ function create_fetch({ event, options, state, get_cookie_header }) {
         const is_asset = options.manifest.assets.has(filename);
         const is_asset_html = options.manifest.assets.has(filename_html);
         if (is_asset || is_asset_html) {
-          const file4 = is_asset ? filename : filename_html;
+          const file16 = is_asset ? filename : filename_html;
           if (options.read) {
             const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-            return new Response(options.read(file4), {
+            return new Response(options.read(file16), {
               headers: type ? { "content-type": type } : {}
             });
           }
@@ -29397,9 +32108,9 @@ function create_fetch({ event, options, state, get_cookie_header }) {
         const set_cookie = response.headers.get("set-cookie");
         if (set_cookie) {
           for (const str of set_cookie_parser.splitCookiesString(set_cookie)) {
-            const { name: name4, value, ...options2 } = set_cookie_parser.parseString(str);
+            const { name: name5, value, ...options2 } = set_cookie_parser.parseString(str);
             event.cookies.set(
-              name4,
+              name5,
               value,
               options2
             );
@@ -29777,7 +32488,7 @@ var Server = class {
       app_template,
       app_template_contains_nonce: false,
       error_template,
-      version: "1670629218451"
+      version: "1670649539207"
     };
   }
   async init({ env }) {
@@ -29786,14 +32497,14 @@ var Server = class {
     const pub = Object.fromEntries(entries.filter(([k2]) => k2.startsWith("PUBLIC_")));
     this.options.public_env = pub;
     if (!this.options.hooks) {
-      const module = await Promise.resolve().then(() => (init_hooks_server(), hooks_server_exports));
-      if (module.externalFetch) {
+      const module2 = await Promise.resolve().then(() => (init_hooks_server(), hooks_server_exports));
+      if (module2.externalFetch) {
         throw new Error("externalFetch has been removed \u2014 use handleFetch instead. See https://github.com/sveltejs/kit/pull/6565 for details");
       }
       this.options.hooks = {
-        handle: module.handle || (({ event, resolve }) => resolve(event)),
-        handleError: module.handleError || (({ error: error2 }) => console.error(error2.stack)),
-        handleFetch: module.handleFetch || (({ request, fetch: fetch2 }) => fetch2(request))
+        handle: module2.handle || (({ event, resolve }) => resolve(event)),
+        handleError: module2.handleError || (({ error: error2 }) => console.error(error2.stack)),
+        handleFetch: module2.handleFetch || (({ request, fetch: fetch2 }) => fetch2(request))
       };
     }
   }
@@ -29812,18 +32523,114 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "facepalm.gif", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "service-worker.js"]),
   mimeTypes: { ".css": "text/css", ".gif": "image/gif", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-4ebf8aed.js", "imports": ["_app/immutable/start-4ebf8aed.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-04200cf6.js", "imports": ["_app/immutable/start-04200cf6.js", "_app/immutable/chunks/index-95872f21.js", "_app/immutable/chunks/singletons-307c7dec.js", "_app/immutable/chunks/index-ec5f67c4.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
-      () => Promise.resolve().then(() => (init__3(), __exports3))
+      () => Promise.resolve().then(() => (init__3(), __exports3)),
+      () => Promise.resolve().then(() => (init__4(), __exports4)),
+      () => Promise.resolve().then(() => (init__5(), __exports5)),
+      () => Promise.resolve().then(() => (init__6(), __exports6)),
+      () => Promise.resolve().then(() => (init__7(), __exports7)),
+      () => Promise.resolve().then(() => (init__8(), __exports8)),
+      () => Promise.resolve().then(() => (init__9(), __exports9)),
+      () => Promise.resolve().then(() => (init__10(), __exports10)),
+      () => Promise.resolve().then(() => (init__11(), __exports11)),
+      () => Promise.resolve().then(() => (init__12(), __exports12)),
+      () => Promise.resolve().then(() => (init__13(), __exports13)),
+      () => Promise.resolve().then(() => (init__14(), __exports14)),
+      () => Promise.resolve().then(() => (init__15(), __exports15))
     ],
     routes: [
+      {
+        id: "/",
+        pattern: /^\/$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 2 },
+        endpoint: null
+      },
+      {
+        id: "/classroomA",
+        pattern: /^\/classroomA\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 4 },
+        endpoint: null
+      },
+      {
+        id: "/classroom",
+        pattern: /^\/classroom\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 3 },
+        endpoint: null
+      },
+      {
+        id: "/faq",
+        pattern: /^\/faq\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 5 },
+        endpoint: null
+      },
+      {
+        id: "/homework",
+        pattern: /^\/homework\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 6 },
+        endpoint: null
+      },
+      {
+        id: "/katex",
+        pattern: /^\/katex\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 7 },
+        endpoint: null
+      },
+      {
+        id: "/login",
+        pattern: /^\/login\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 8 },
+        endpoint: null
+      },
+      {
+        id: "/mathjax",
+        pattern: /^\/mathjax\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 10 },
+        endpoint: null
+      },
+      {
+        id: "/math",
+        pattern: /^\/math\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 9 },
+        endpoint: null
+      },
       {
         id: "/physics",
         pattern: /^\/physics\/?$/,
         params: [],
-        page: { layouts: [0], errors: [1], leaf: 2 },
+        page: { layouts: [0], errors: [1], leaf: 11 },
+        endpoint: null
+      },
+      {
+        id: "/plans",
+        pattern: /^\/plans\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 12 },
+        endpoint: null
+      },
+      {
+        id: "/samplequiz",
+        pattern: /^\/samplequiz\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 13 },
+        endpoint: null
+      },
+      {
+        id: "/stripe",
+        pattern: /^\/stripe\/?$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 14 },
         endpoint: null
       }
     ],
@@ -29832,7 +32639,7 @@ var manifest = {
     }
   }
 };
-var prerendered = /* @__PURE__ */ new Set(["/", "/classroomA", "/classroom", "/faq", "/homework", "/katex", "/login", "/mathjax", "/math", "/plans", "/samplequiz", "/stripe"]);
+var prerendered = /* @__PURE__ */ new Set([]);
 
 // .svelte-kit/cloudflare-tmp/_worker.js
 async function e(e3, t2) {
@@ -29889,12 +32696,12 @@ var worker = {
       });
     } else {
       pathname = pathname.replace(/\/$/, "") || "/";
-      let file4 = pathname.substring(1);
+      let file16 = pathname.substring(1);
       try {
-        file4 = decodeURIComponent(file4);
+        file16 = decodeURIComponent(file16);
       } catch (err) {
       }
-      if (manifest.assets.has(file4) || manifest.assets.has(file4 + "/index.html") || prerendered.has(pathname)) {
+      if (manifest.assets.has(file16) || manifest.assets.has(file16 + "/index.html") || prerendered.has(pathname)) {
         res = await env.ASSETS.fetch(req);
       } else {
         res = await server.respond(req, {
