@@ -1,47 +1,10 @@
-import { c as create_ssr_component, e as escape, d as add_attribute, a as subscribe, v as validate_component, g as getContext, f as now, l as loop, h as set_store_value, j as each } from "../../chunks/index.js";
+import { g as getContext, c as create_ssr_component, a as subscribe, e as escape, d as add_attribute, v as validate_component, f as now, l as loop, h as set_store_value, j as each } from "../../chunks/index.js";
+import { r as routes, i as isDarkMode, s as showLoginModal, a as showHomeworkModal, n as navAppClicked, b as isLoggedIn, c as scrollY, e as elementColor, d as instDeltaY, l as lessThan768 } from "../../chunks/store.js";
 import { D as Dropzone } from "../../chunks/Dropzone.js";
 import { L as LoginCard } from "../../chunks/LoginCard.js";
 import { g as getOS, i as isRunningStandalone, b as browser } from "../../chunks/utils.js";
-import { i as isDarkMode, s as showLoginModal, a as showHomeworkModal, n as navAppClicked, r as routes, b as isLoggedIn, c as scrollY, e as elementColor, d as instDeltaY, l as lessThan768 } from "../../chunks/store.js";
 import { w as writable } from "../../chunks/index2.js";
 const app = "";
-const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { showModal = false } = $$props;
-  let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
-  if ($$props.showModal === void 0 && $$bindings.showModal && showModal !== void 0)
-    $$bindings.showModal(showModal);
-  if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
-    $$bindings.bgTint(bgTint);
-  return `
-
-<button class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}">${slots.default ? slots.default({}) : ``}</button>
-
-`;
-});
-let size$1 = 24;
-const IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<svg aria-label="${"Sun"}" id="${"lightIcon"}"${add_attribute("height", size$1, 0)}${add_attribute("width", size$1, 0)} viewBox="${"0 0 " + escape(8 * size$1, true) + " " + escape(8 * size$1, true)}" class="${"mx-3"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>`;
-});
-let size = 24;
-const IconMoon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-
-
-<svg aria-label="${"Moon"}" id="${"darkIcon"}"${add_attribute("height", size, 0)}${add_attribute("width", size, 0)} class="${"mx-3"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`;
-});
-const LightDarkMode_svelte_svelte_type_style_lang = "";
-const css = {
-  code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}",
-  map: null
-};
-const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $isDarkMode, $$unsubscribe_isDarkMode;
-  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-  $$result.css.add(css);
-  $$unsubscribe_isDarkMode();
-  return `
-  <div><button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button></div>`;
-});
 const getStores = () => {
   const stores = getContext("__svelte__");
   const readonly_stores = {
@@ -84,6 +47,78 @@ function removed_session() {
     "stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883"
   );
 }
+const TitlesHead = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $page, $$unsubscribe_page;
+  let $routes, $$unsubscribe_routes;
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
+  $$unsubscribe_page();
+  $$unsubscribe_routes();
+  return `
+
+
+
+
+${$page.status == 200 ? (() => {
+    let slashlessRoute = $page.route.id.slice(1);
+    return `
+  
+
+  ${slashlessRoute == "" ? `<title>${escape($routes.home.title)}</title>
+    <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
+    <meta og:url="${"https://thinksolve.io/"}">` : `${Object.keys($routes).includes(slashlessRoute) ? `
+    <title>${escape($routes[slashlessRoute].title)}</title>
+    
+    
+    
+    
+    
+    
+
+    
+    
+
+    
+    ` : ``}`}`;
+  })() : `${$page.status == 404 ? `<title>Oops \u{1F4A9}</title>` : `<title>Unexpected query ... </title>`}`}`;
+});
+const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { showModal = false } = $$props;
+  let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
+  if ($$props.showModal === void 0 && $$bindings.showModal && showModal !== void 0)
+    $$bindings.showModal(showModal);
+  if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
+    $$bindings.bgTint(bgTint);
+  return `
+
+<button class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}">${slots.default ? slots.default({}) : ``}</button>
+
+`;
+});
+let size$1 = 24;
+const IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<svg aria-label="${"Sun"}" id="${"lightIcon"}"${add_attribute("height", size$1, 0)}${add_attribute("width", size$1, 0)} viewBox="${"0 0 " + escape(8 * size$1, true) + " " + escape(8 * size$1, true)}" class="${"mx-3"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>`;
+});
+let size = 24;
+const IconMoon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+
+
+<svg aria-label="${"Moon"}" id="${"darkIcon"}"${add_attribute("height", size, 0)}${add_attribute("width", size, 0)} class="${"mx-3"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`;
+});
+const LightDarkMode_svelte_svelte_type_style_lang = "";
+const css = {
+  code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}",
+  map: null
+};
+const LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $isDarkMode, $$unsubscribe_isDarkMode;
+  $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+  $$result.css.add(css);
+  $$unsubscribe_isDarkMode();
+  return `
+  <div><button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button></div>`;
+});
 const Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$unsubscribe_showLoginModal;
   let $$unsubscribe_showHomeworkModal;
@@ -324,16 +359,12 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $instDeltaY, $$unsubscribe_instDeltaY;
   let $scrollY, $$unsubscribe_scrollY;
   let $lessThan768, $$unsubscribe_lessThan768;
-  let $page, $$unsubscribe_page;
-  let $routes, $$unsubscribe_routes;
   let $navAppClicked, $$unsubscribe_navAppClicked;
   let $showLoginModal, $$unsubscribe_showLoginModal;
   let $showHomeworkModal, $$unsubscribe_showHomeworkModal;
   $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
   $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
   $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
-  $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
   $$unsubscribe_navAppClicked = subscribe(navAppClicked, (value) => $navAppClicked = value);
   $$unsubscribe_showLoginModal = subscribe(showLoginModal, (value) => $showLoginModal = value);
   $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => $showHomeworkModal = value);
@@ -366,18 +397,8 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
           jankytown = "bottom-0 backdrop-blur-3xl duration-700";
       }
     }
-    $$rendered = `
+    $$rendered = `${$$result.head += `<!-- HEAD_svelte-ia2qsi_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${validate_component(TitlesHead, "TitlesHead").$$render($$result, {}, {}, {})}<!-- HEAD_svelte-ia2qsi_END -->`, ""}
 
-
-${$$result.head += `<!-- HEAD_svelte-1azegxo_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${$page.status == 200 ? `${each(Object.keys($routes), (key) => {
-      let title = $routes[key].title, slashlessRoute = $page.route.id.slice(1);
-      return `
-      
-
-      ${slashlessRoute == "" && key == "home" ? `${$$result.title = `<title>${escape(title)}</title>`, ""}
-        <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
-        <meta og:url="${"https://thinksolve.io/"}">` : `${slashlessRoute == key ? `${$$result.title = `<title>${escape(title)}</title>`, ""}` : ``}`}`;
-    })}` : `${$$result.title = `<title>Oops \u{1F4A9}</title>`, ""}`}<!-- HEAD_svelte-1azegxo_END -->`, ""}
 
 
 
@@ -474,8 +495,6 @@ ${$$result.head += `<!-- HEAD_svelte-1azegxo_START --><link rel="${"manifest"}" 
   $$unsubscribe_instDeltaY();
   $$unsubscribe_scrollY();
   $$unsubscribe_lessThan768();
-  $$unsubscribe_page();
-  $$unsubscribe_routes();
   $$unsubscribe_navAppClicked();
   $$unsubscribe_showLoginModal();
   $$unsubscribe_showHomeworkModal();

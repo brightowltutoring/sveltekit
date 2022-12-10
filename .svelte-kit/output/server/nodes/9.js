@@ -2,7 +2,7 @@
 
 export const index = 9;
 export const component = async () => (await import('../entries/pages/math/_page.svx.js')).default;
-export const file = '_app/immutable/components/pages/math/_page.svx-9678cfef.js';
-export const imports = ["_app/immutable/components/pages/math/_page.svx-9678cfef.js","_app/immutable/chunks/index-95872f21.js","_app/immutable/chunks/katex-d33715d1.js","_app/immutable/chunks/store-8af68461.js","_app/immutable/chunks/index-ec5f67c4.js","_app/immutable/chunks/index-4d5c3e31.js","_app/immutable/chunks/Kajax-96592336.js"];
+export const file = '_app/immutable/components/pages/math/_page.svx-8e4b4e22.js';
+export const imports = ["_app/immutable/components/pages/math/_page.svx-8e4b4e22.js","_app/immutable/chunks/index-524831df.js","_app/immutable/chunks/katex-d33715d1.js","_app/immutable/chunks/store-dd53313b.js","_app/immutable/chunks/index-a7779f4f.js","_app/immutable/chunks/index-03ced1f9.js","_app/immutable/chunks/Kajax-23f3473a.js"];
 export const stylesheets = [];
 export const fonts = [];

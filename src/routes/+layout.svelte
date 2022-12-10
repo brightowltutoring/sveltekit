@@ -1,7 +1,12 @@
 <script>
-  import { slide, scale, fly, fade, blur } from "svelte/transition";
-  import { elasticOut, quintOut } from "svelte/easing";
   import "../app.css";
+  import {
+    scale,
+    fly,
+    // slide, fade, blur
+  } from "svelte/transition";
+  import { elasticOut, quintOut } from "svelte/easing";
+  import TitlesHead from "$lib/TitlesHead.svelte";
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import LoginCard from "$lib/Login/LoginCard.svelte";
@@ -10,7 +15,6 @@
   import {
     instDeltaY,
     scrollY,
-    routes,
     setInnerWidthViaMatchMedia,
     lessThan768,
     showLoginModal,
@@ -21,13 +25,11 @@
 
   import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
 
-  import { page } from "$app/stores";
   import { onMount } from "svelte";
-  import { each } from "svelte/internal";
 
   onMount(() => {
     // $lessThan768 && disableZoomGestures();
-    // (isRunningStandalone() || $lessThan768) && disableZoomGestures();
+    (isRunningStandalone() || $lessThan768) && disableZoomGestures();
     setInnerWidthViaMatchMedia();
     // alert(getOS());
     // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
@@ -67,56 +69,13 @@
   }
 </script>
 
-<!-- this version works on 'npm run dev', but also janky reactivity in head title -->
-<!-- <svelte:head>
-  <link rel="manifest" href="/manifest.json" />
-
-  {#if $page.status == 200}
-    {@const slashlessRoute = $page.route.id.slice(1)}
-
-    {#if slashlessRoute == ""}
-      <title>{$routes.home.title}</title>
-      <meta
-        name="description"
-        content="Math and Physics Tutoring for the Modern Age."
-      />
-      <meta og:url="https://thinksolve.io/" />
-    {:else}
-      <title>{$routes[slashlessRoute].title}</title>
-    {/if}
-  {:else}
-    <title>Oops 💩</title>
-  {/if}
-</svelte:head> -->
-
 <svelte:head>
   <link rel="manifest" href="/manifest.json" />
-
-  {#if $page.status == 200}
-    {#each Object.keys($routes) as key}
-      {@const title = $routes[key].title}
-      {@const slashlessRoute = $page.route.id.slice(1)}
-
-      {#if slashlessRoute == "" && key == "home"}
-        <title>{title}</title>
-        <meta
-          name="description"
-          content="Math and Physics Tutoring for the Modern Age."
-        />
-        <meta og:url="https://thinksolve.io/" />
-      {:else if slashlessRoute == key}
-        <title>{title}</title>
-      {/if}
-    {/each}
-  {:else}
-    <title>Oops 💩</title>
-  {/if}
+  <TitlesHead />
 </svelte:head>
 
-<svelte:window
-  bind:scrollY={$scrollY}
-  on:contextmenu={(e) => e.preventDefault()}
-/>
+<svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
+<!-- on:contextmenu={(e) => e.preventDefault()} -->
 
 <main>
   <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
