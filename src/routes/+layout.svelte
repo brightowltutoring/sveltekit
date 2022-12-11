@@ -145,8 +145,14 @@
             }}
           >
             <div class="text-6xl">2.</div>
-            Click share icon (box-and-arrow at bottom of the screen)
-            <img src="/safari-share-icon.png" alt="safari share icon" />
+            <div class="flex flex-row justify-center items-center gap-x-2">
+              <span> Click share icon </span>
+              <img
+                class="w-6 h-6 invert"
+                src="/safari-share-icon.png"
+                alt="safari share icon"
+              />
+            </div>
           </li>
 
           <li
