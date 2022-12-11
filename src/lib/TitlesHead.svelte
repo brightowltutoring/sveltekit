@@ -6,7 +6,7 @@
 
 <!-- when going to a crashed page, I notice that titles arent reset :/ -->
 
-<!-- This way works during 'npm run dev/build' ..but not when deployed!! -->
+<!-- This way works during 'npm run dev/build' ..but not when deployed!!. UPDATE: this breaks on deployment when using as component .. but also breaks when a page has ssr false (such as with classroom) -->
 {#if $page.status == 200}
   {@const slashlessRoute = $page.route.id.slice(1)}
 

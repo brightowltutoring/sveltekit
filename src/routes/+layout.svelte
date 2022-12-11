@@ -85,8 +85,16 @@
         content="Math and Physics Tutoring for the Modern Age."
       />
       <meta og:url="https://thinksolve.io/" />
-    {:else if Object.keys($routes).includes(slashlessRoute)}
-      <title>{$routes[slashlessRoute].title}</title>
+      <!-- {:else if Object.keys($routes).includes(slashlessRoute)}
+      <title>{$routes[slashlessRoute].title}</title> -->
+    {:else}
+      {#each Object.keys($routes).slice(1) as key}
+        {@const title = $routes[key].title}
+
+        {#if slashlessRoute.startsWith(key)}
+          <title>{title}</title>
+        {/if}
+      {/each}
     {/if}
   {:else if $page.status == 404}
     <title>Oops 💩</title>
