@@ -1,12 +1,8 @@
 <script>
   import "../app.css";
-  import {
-    scale,
-    fly,
-    // slide, fade, blur
-  } from "svelte/transition";
+  import { scale, fly, slide, fade, blur } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
-  import TitlesHead from "$lib/TitlesHead.svelte";
+
   import Modal from "$lib/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import LoginCard from "$lib/Login/LoginCard.svelte";
@@ -139,16 +135,16 @@
             class="text-xl font-bold"
             in:fly={{
               x: 100,
-              delay: 1000,
+              delay: 1200,
               duration: 1000,
               easing: quintOut,
             }}
           >
             <div class="text-6xl">2.</div>
-            <div class="flex flex-row justify-center items-center gap-x-2">
-              <span> Click share icon </span>
+            <div class="flex flex-row justify-center items-center gap-x-2 pt-2">
+              <span> Click share icon</span>
               <img
-                class="w-6 h-6 invert"
+                class="w-7 h-7 -translate-y-1  invert"
                 src="/safari-share-icon.png"
                 alt="safari share icon"
               />
@@ -158,9 +154,9 @@
           <li
             class="text-xl font-bold text-black"
             in:fly={{
-              x: -100,
-              delay: 2800,
-              duration: 400,
+              x: 200,
+              delay: 2000,
+              duration: 1200,
               easing: quintOut,
             }}
           >
