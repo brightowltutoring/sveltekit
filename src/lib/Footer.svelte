@@ -1,7 +1,36 @@
-<div class="flex justify-center items-center ">
+<script>
+  export let contactLinkClicked = false; // this variable is bound to correspinding modal in +layout.svelte
+
+  let contactLinkTimeout;
+
+  function handleContactLinkClicked(e) {
+    if (e.target.id !== "contactLinkClicked") {
+      contactLinkClicked = false;
+      clearTimeout(contactLinkTimeout);
+    }
+    if (e.target.id === "contactLinkClicked") {
+      contactLinkClicked = true;
+      contactLinkTimeout = setTimeout(() => {
+        contactLinkClicked = false;
+      }, 4000);
+    }
+  }
+
+  import { onMount } from "svelte";
+  onMount(() => {
+    // using event delegation logic to do X when target is clicked and do Y when not-target is clicked ... previously had to implement this with store variables and manually resetting logic ... TODO: possibly refactor the resetting logic use this
+    document.addEventListener("click", handleContactLinkClicked);
+  });
+</script>
+
+<div
+  class="text-xs mt-20 mb-10 flex justify-center items-center flex-row gap-x-1 "
+>
   <span
-    class="my-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500  to-pink-600"
+    class=" text-transparent bg-clip-text bg-gradient-to-l from-blue-500  to-pink-600"
   >
-    Need help? Contact thinksolve.io[at]gmail.com
+    <a data-sveltekit-preload-data href="/faq">faq</a>
+    <span class="text-gray-300">|</span>
+    <span id="contactLinkClicked"> contact </span>
   </span>
 </div>

@@ -1,4 +1,5 @@
 <script>
+  import { preloadCode } from "$app/navigation";
   import { isDarkMode, elementColor } from "$lib/store";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
@@ -47,8 +48,9 @@
       <button
         in:scale={{ duration: 600, easing: elasticOut }}
         on:click={() => {
-          Calendly.initPopupWidget({ url: `${button.url}` });
-          button.resetter = !button.resetter;
+          // Calendly.initPopupWidget({ url: button.url });
+          preloadCode(Calendly.initPopupWidget({ url: button.url })); // unsure if this works
+          // button.resetter = !button.resetter;
         }}
         class=" {buttonColor[
           card

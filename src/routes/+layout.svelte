@@ -66,6 +66,8 @@
 
   import { page } from "$app/stores";
   import { routes } from "$lib/store";
+
+  let contactLinkClicked = false;
 </script>
 
 <svelte:head>
@@ -102,6 +104,24 @@
 <!-- on:contextmenu={(e) => e.preventDefault()} -->
 
 <main>
+  <Modal
+    showModal={contactLinkClicked}
+    bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"}
+  >
+    {#key !contactLinkClicked}
+      <ul
+        in:scale={{
+          duration: 1500,
+          easing: elasticOut,
+        }}
+        class="p-10 flex flex-col gap-y-2 font-Poppins text-2xl"
+      >
+        <li>Send your inquiries to:</li>
+        <li>thinksolve.io@gmail.com</li>
+      </ul>
+    {/key}
+  </Modal>
+
   <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
   {#if getOS() == "iOS"}
     <!-- <Modal showModal={$navAppClicked} bgTint={"bg-[#6c79f4] text-white"}> -->
@@ -193,7 +213,7 @@
 
   <div class="px-[7%] pt-32 md:block">
     <slot />
-    <Footer />
+    <Footer bind:contactLinkClicked />
   </div>
 
   <!-- <div
