@@ -58,29 +58,28 @@ const TitlesHead = create_ssr_component(($$result, $$props, $$bindings, slots) =
 
 
 
-
 ${$page.status == 200 ? (() => {
     let slashlessRoute = $page.route.id.slice(1);
     return `
-  
 
   ${slashlessRoute == "" ? `<title>${escape($routes.home.title)}</title>
     <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
-    <meta og:url="${"https://thinksolve.io/"}">` : `${Object.keys($routes).includes(slashlessRoute) ? `
-    <title>${escape($routes[slashlessRoute].title)}</title>
-    
-    
-    
-    
-    
-    
+    <meta og:url="${"https://thinksolve.io/"}">` : `${Object.keys($routes).includes(slashlessRoute) ? `<title>${escape($routes[slashlessRoute].title)}</title>` : ``}`}`;
+  })() : `${$page.status == 404 ? `<title>Oops \u{1F4A9}</title>` : ``}`}
 
-    
-    
 
-    
-    ` : ``}`}`;
-  })() : `${$page.status == 404 ? `<title>Oops \u{1F4A9}</title>` : `<title>Unexpected query ... </title>`}`}`;
+
+
+
+
+
+
+
+
+
+
+
+`;
 });
 const Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { showModal = false } = $$props;

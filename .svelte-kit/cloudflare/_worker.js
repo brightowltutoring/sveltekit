@@ -12828,29 +12828,28 @@ var init_layout_svelte = __esm({
 
 
 
-
 ${$page.status == 200 ? (() => {
         let slashlessRoute = $page.route.id.slice(1);
         return `
-  
 
   ${slashlessRoute == "" ? `<title>${escape($routes.home.title)}</title>
     <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
-    <meta og:url="${"https://thinksolve.io/"}">` : `${Object.keys($routes).includes(slashlessRoute) ? `
-    <title>${escape($routes[slashlessRoute].title)}</title>
-    
-    
-    
-    
-    
-    
+    <meta og:url="${"https://thinksolve.io/"}">` : `${Object.keys($routes).includes(slashlessRoute) ? `<title>${escape($routes[slashlessRoute].title)}</title>` : ``}`}`;
+      })() : `${$page.status == 404 ? `<title>Oops \u{1F4A9}</title>` : ``}`}
 
-    
-    
 
-    
-    ` : ``}`}`;
-      })() : `${$page.status == 404 ? `<title>Oops \u{1F4A9}</title>` : `<title>Unexpected query ... </title>`}`}`;
+
+
+
+
+
+
+
+
+
+
+
+`;
     });
     Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { showModal = false } = $$props;
@@ -13192,8 +13191,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-a904345a.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-a904345a.js", "_app/immutable/chunks/index-524831df.js", "_app/immutable/chunks/index-03ced1f9.js", "_app/immutable/chunks/singletons-2ad11f3f.js", "_app/immutable/chunks/index-a7779f4f.js", "_app/immutable/chunks/store-dd53313b.js", "_app/immutable/chunks/Dropzone-267bdfe1.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-d3aa955d.js", "_app/immutable/chunks/utils-f8629961.js", "_app/immutable/chunks/LoginCard-57a9ce58.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-df1147ba.js", "_app/immutable/modules/pages/_layout.js-d1ec873b.js", "_app/immutable/chunks/_layout-86260db2.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-4d0f927d.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-4d0f927d.js", "_app/immutable/chunks/index-524831df.js", "_app/immutable/chunks/index-03ced1f9.js", "_app/immutable/chunks/singletons-2ad11f3f.js", "_app/immutable/chunks/index-a7779f4f.js", "_app/immutable/chunks/store-dd53313b.js", "_app/immutable/chunks/Dropzone-267bdfe1.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-d3aa955d.js", "_app/immutable/chunks/utils-f8629961.js", "_app/immutable/chunks/LoginCard-57a9ce58.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-df1147ba.js", "_app/immutable/modules/pages/_layout.js-d1ec873b.js", "_app/immutable/chunks/_layout-86260db2.js"];
     stylesheets = ["_app/immutable/assets/_layout-f56b309e.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff"];
   }
@@ -29802,7 +29801,7 @@ var Server = class {
       app_template,
       app_template_contains_nonce: false,
       error_template,
-      version: "1670716464008"
+      version: "1670717715018"
     };
   }
   async init({ env }) {
@@ -29837,7 +29836,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "service-worker.js"]),
   mimeTypes: { ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-cbd0014b.js", "imports": ["_app/immutable/start-cbd0014b.js", "_app/immutable/chunks/index-524831df.js", "_app/immutable/chunks/singletons-2ad11f3f.js", "_app/immutable/chunks/index-a7779f4f.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-8e4966c1.js", "imports": ["_app/immutable/start-8e4966c1.js", "_app/immutable/chunks/index-524831df.js", "_app/immutable/chunks/singletons-2ad11f3f.js", "_app/immutable/chunks/index-a7779f4f.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

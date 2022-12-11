@@ -4,9 +4,9 @@
   import { routes } from "$lib/store";
 </script>
 
+<!-- when going to a crashed page, I notice that titles arent reset :/ -->
 {#if $page.status == 200}
   {@const slashlessRoute = $page.route.id.slice(1)}
-  <!-- e.g. /plans becomes plans -->
 
   {#if slashlessRoute == ""}
     <title>{$routes.home.title}</title>
@@ -15,32 +15,31 @@
       content="Math and Physics Tutoring for the Modern Age."
     />
     <meta og:url="https://thinksolve.io/" />
-    <!-- METHOD 1: -->
   {:else if Object.keys($routes).includes(slashlessRoute)}
     <title>{$routes[slashlessRoute].title}</title>
-    <!-- {:else} -->
-    <!-- METHOD 2: -->
-    <!-- i.e. I have removed the 'home' key -->
-    <!-- {@const homeLessKeys = Object.keys($routes).slice(1)} -->
-    <!-- {@const matchIndex = homeLessKeys.indexOf(slashlessRoute)} -->
-    <!-- {@const titulo = $routes[homeLessKeys[matchIndex]].title} -->
+  {/if}
+{:else if $page.status == 404}
+  <title>Oops 💩</title>
+{/if}
 
-    <!-- {@const matchKey = Object.keys($routes)
+<!-- OLD CODE FOR DETERMINING NON-HOME-ROUTE TITLE -->
+<!-- {:else} -->
+<!-- METHOD 2: -->
+<!-- i.e. I have removed the 'home' key -->
+<!-- {@const homeLessKeys = Object.keys($routes).slice(1)} -->
+<!-- {@const matchIndex = homeLessKeys.indexOf(slashlessRoute)} -->
+<!-- {@const titulo = $routes[homeLessKeys[matchIndex]].title} -->
+
+<!-- {@const matchKey = Object.keys($routes)
       .slice(1)
       .find((key) => key == slashlessRoute)} -->
-    <!-- {@const titulo = $routes[matchKey].title} -->
+<!-- {@const titulo = $routes[matchKey].title} -->
 
-    <!-- METHOD 3: -->
-    <!-- {#each homeLessKeys as key}
+<!-- METHOD 3: -->
+<!-- {#each homeLessKeys as key}
       {@const title = $routes[key].title}
 
       {#if slashlessRoute.startsWith(key)}
         <title>{title}</title>
       {/if}
     {/each} -->
-  {/if}
-{:else if $page.status == 404}
-  <title>Oops 💩</title>
-{:else}
-  <title> Unexpected query ... </title>
-{/if}
