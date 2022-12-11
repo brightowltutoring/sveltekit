@@ -1,4 +1,5 @@
 <script>
+  import { isRunningStandalone } from "$lib/utils";
   export let contactLinkClicked = false; // this variable is bound to correspinding modal in +layout.svelte
 
   let contactLinkTimeout;
@@ -24,13 +25,17 @@
 </script>
 
 <div
-  class="text-xs mt-20 mb-10 flex justify-center items-center flex-row gap-x-1 "
+  class="text-xs mt-20  {isRunningStandalone()
+    ? 'mb-32'
+    : 'mb-10'} flex justify-center items-center flex-row gap-x-1 "
 >
   <span
     class=" text-transparent bg-clip-text bg-gradient-to-l from-blue-500  to-pink-600"
   >
-    <a data-sveltekit-preload-data href="/faq">faq</a>
-    <span class="text-gray-300">|</span>
+    {#if !isRunningStandalone()}
+      <a data-sveltekit-preload-data href="/faq">faq</a>
+      <span class="text-gray-300">|</span>
+    {/if}
     <span id="contactLinkClicked"> contact </span>
   </span>
 </div>

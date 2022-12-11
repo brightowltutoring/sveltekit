@@ -1,12 +1,4 @@
-<!-- <svelte:head>
-  <link
-    href="https://assets.calendly.com/assets/external/widget.css"
-    rel="stylesheet"
-  /><script
-    src="https://assets.calendly.com/assets/external/widget.js"
-    type="text/javascript"
-  ></script>
-</svelte:head> -->
+<!-- TODO: noticed a pattern ... the markdown of this component being repetitive, makes it easier to use vanilla css approach (also the event delegation classList add logic works easiest with vanilla css) -->
 <script>
   let faqContainer;
   let selectedTd;
