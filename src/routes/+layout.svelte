@@ -85,6 +85,7 @@
         content="Math and Physics Tutoring for the Modern Age."
       />
       <meta og:url="https://thinksolve.io/" />
+      <!-- TODO: for some reason this doesn't work when site is deployed to cloudflare -->
       <!-- {:else if Object.keys($routes).includes(slashlessRoute)}
       <title>{$routes[slashlessRoute].title}</title> -->
     {:else}
@@ -145,6 +146,7 @@
           >
             <div class="text-6xl">2.</div>
             Click share icon (box-and-arrow at bottom of the screen)
+            <img src="/safari-share-icon.png" alt="safari share icon" />
           </li>
 
           <li
