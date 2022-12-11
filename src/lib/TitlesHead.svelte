@@ -5,6 +5,8 @@
 </script>
 
 <!-- when going to a crashed page, I notice that titles arent reset :/ -->
+
+<!-- This way works during 'npm run dev/build' ..but not when deployed!! -->
 {#if $page.status == 200}
   {@const slashlessRoute = $page.route.id.slice(1)}
 

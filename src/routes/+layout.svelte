@@ -67,11 +67,30 @@
     if ($instDeltaY < -30)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
+
+  import { page } from "$app/stores";
+  import { routes } from "$lib/store";
 </script>
 
 <svelte:head>
   <link rel="manifest" href="/manifest.json" />
-  <TitlesHead />
+  <!-- <TitlesHead /> -->
+  {#if $page.status == 200}
+    {@const slashlessRoute = $page.route.id.slice(1)}
+
+    {#if slashlessRoute == ""}
+      <title>{$routes.home.title}</title>
+      <meta
+        name="description"
+        content="Math and Physics Tutoring for the Modern Age."
+      />
+      <meta og:url="https://thinksolve.io/" />
+    {:else if Object.keys($routes).includes(slashlessRoute)}
+      <title>{$routes[slashlessRoute].title}</title>
+    {/if}
+  {:else if $page.status == 404}
+    <title>Oops 💩</title>
+  {/if}
 </svelte:head>
 
 <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
