@@ -44,10 +44,8 @@
     // closes all details elements (easter eggy)
   }}
 >
-  <span
-    in:fade
-    class="font-Poppins text-center text-6xl text-transparent bg-clip-text bg-gradient-to-l from-teal-500 to-pink-600 "
-  >
+  <!-- class="font-Poppins text-center text-6xl text-transparent bg-clip-text bg-gradient-to-l from-teal-500 to-pink-600 " -->
+  <span in:fade class="font-Poppins text-center text-5xl font-semibold ">
     FAQ
   </span>
 </div>
@@ -184,11 +182,15 @@
 </div>
 
 <style>
+  .faqContainer {
+    display: grid;
+    place-content: center;
+  }
+
   :root {
     --light-green: rgb(230, 255, 249);
     --green: rgb(89, 208, 174);
-    /* --light-blue: #bac2f3;
-    --blue: #5465c8; */
+
     --red: rgb(230, 59, 96);
     --light-red: rgb(243, 186, 198);
     --borderRadius: 15px;
@@ -221,6 +223,18 @@
     border: 0px solid #eee;
     border-radius: var(--borderRadius);
     padding: 0.5em 0.5em 0;
+    font-size: 18px;
+  }
+
+  @media screen and (min-width: 768px) {
+    details {
+      width: 60vw;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    details {
+      width: 80vw;
+    }
   }
 
   summary {

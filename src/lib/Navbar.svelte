@@ -70,7 +70,7 @@
 
 <!-- gap-x-24 -->
 <logo-and-navbar
-  class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center md:justify-between w-full"
+  class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center gap-x-32 md:justify-between w-full"
 >
   {#key resetLogoClick}
     <button
