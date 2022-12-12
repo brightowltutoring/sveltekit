@@ -46,12 +46,12 @@
       Is it possible to access all my session content in one place?
     </summary>
     <p>
-      Sure can! Contact us directly to set up a personalized page, or click the
-      corresponding option as input when booking! You will be page <button
+      Sure can! Contact us directly to set up a personalized page, or check the
+      option when booking! You will be <button
         class="text-rose-500"
         on:click={() => ($showLoginModal = true)}
         >redirected to your personal page upon logging in
-      </button>, which is now available via email, phone, gmail, and twitter!
+      </button>.
     </p>
   </details>
 
@@ -148,8 +148,11 @@
       reward it; please visit our <a>/referrals</a> page. <br /><br /> -->
 
       Great question! You can enter your referral as an input when booking; for
-      this initiative we are pleased to offer a 25% discount on the next
-      applicable session!
+      this initiative we are pleased to offer a
+      <span
+        class=" text-transparent bg-clip-text bg-gradient-to-b from-rose-700 via-rose-600 to-yellow-300"
+        >25%
+      </span> discount on the next applicable session!
     </p>
   </details>
 </div>
