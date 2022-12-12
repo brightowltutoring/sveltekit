@@ -1,6 +1,6 @@
 <!-- Update dec, 12 2022: first time using css has selector; doesnt yet work in firefox -->
 <script>
-  import { fly, fade } from "svelte/transition";
+  import { fly, fade, slide } from "svelte/transition";
   import { showHomeworkModal, showLoginModal } from "$lib/store";
   let faqContainer;
   let selectedTd;
@@ -36,8 +36,9 @@
 
 <!-- TODO: noticed a pattern ... the markdown of this component being repetitive, makes it easier to use vanilla css approach (also the event delegation classList add logic works easiest with vanilla css) -->
 
+<!-- in:fly={{ y: 50, duration: 800 }} -->
 <div
-  in:fly={{ y: 50, duration: 800 }}
+  in:slide={{ duration: 800 }}
   class="grid place-content-center py-16"
   on:dblclick={() => {
     faqContainer.querySelectorAll("DETAILS").forEach((el) => (el.open = false));
