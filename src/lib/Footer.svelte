@@ -34,7 +34,7 @@
   >
     {#if !isRunningStandalone()}
       <a data-sveltekit-preload-data href="/faq">faq</a>
-      <span class="text-gray-300">|</span>
+      &nbsp; | &nbsp;
     {/if}
     <span id="contactLinkClicked"> contact </span>
   </span>

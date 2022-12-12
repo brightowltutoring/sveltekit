@@ -1,16 +1,18 @@
-<!-- TODO: noticed a pattern ... the markdown of this component being repetitive, makes it easier to use vanilla css approach (also the event delegation classList add logic works easiest with vanilla css) -->
+<!-- Update dec, 12 2022: first time using css has selector; doesnt yet work in firefox -->
 <script>
+  import { fly, fade } from "svelte/transition";
   import { showHomeworkModal, showLoginModal } from "$lib/store";
   let faqContainer;
   let selectedTd;
 
-  function highlight(td) {
+  function highlightAndKeepOpen(td) {
     if (selectedTd) {
       // remove the existing highlight if any
       selectedTd.classList.remove("highlight");
     }
     selectedTd = td;
     selectedTd.classList.add("highlight"); // highlight the new td
+    selectedTd.parentElement.open = false; // this disables closing the details element going forward
   }
 
   import { onMount } from "svelte";
@@ -27,11 +29,21 @@
       let target = event.target;
 
       if (target.tagName !== "SUMMARY") return; // commonly used ... does this matter? optimization?
-      if (target.tagName === "SUMMARY") highlight(target);
+      if (target.tagName === "SUMMARY") highlightAndKeepOpen(target);
     });
   });
 </script>
 
+<!-- TODO: noticed a pattern ... the markdown of this component being repetitive, makes it easier to use vanilla css approach (also the event delegation classList add logic works easiest with vanilla css) -->
+
+<div in:fly={{ y: 50, duration: 800 }} class="grid place-content-center py-16">
+  <span
+    in:fade
+    class="font-Poppins text-center text-6xl text-transparent bg-clip-text bg-gradient-to-l from-teal-500 to-pink-600 "
+  >
+    FAQ
+  </span>
+</div>
 <!-- TODO: some weird reason I have to add 'class="highlight"' ot at least one summary element before the css/js logic can work -->
 <div class="faqContainer">
   <details>
@@ -161,52 +173,66 @@
   :root {
     --light-green: rgb(230, 255, 249);
     --green: rgb(89, 208, 174);
+    /* --light-blue: #bac2f3;
+    --blue: #5465c8; */
     --red: rgb(230, 59, 96);
+    --light-red: rgb(243, 186, 198);
     --borderRadius: 15px;
   }
 
+  /* opacity seems to not do much */
   @keyframes sweep {
     0% {
       opacity: 0;
       margin-top: -15px;
     }
+
     100% {
       opacity: 1;
       margin-top: 0px;
     }
   }
 
-  a {
-    color: var(--red);
-  }
-  a:hover {
-    color: rgb(0, 98, 255);
-  }
-
+  /* remove arrow  */
   details > summary {
     list-style: none;
   }
+  /* remove arrow  */
   details > summary::-webkit-details-marker {
     display: none;
   }
 
   details {
+    @apply font-Nunito;
     border: 0px solid #eee;
     border-radius: var(--borderRadius);
     padding: 0.5em 0.5em 0;
+  }
+
+  summary {
+    margin: -0.5em -0.5em 0;
+    padding: 0.5em;
+    border-radius: var(--borderRadius) var(--borderRadius) 0 0;
   }
 
   details:hover {
     background: #ddd;
   }
 
+  /* svelte :global needed to use predefined darkmode logic */
   :global(body.dark-mode) details:hover {
     background: #211f51;
   }
 
-  summary {
-    margin: -0.5em -0.5em 0;
-    padding: 0.5em;
+  details p {
+    padding: 10px;
+  }
+
+  details a {
+    color: var(--red);
+  }
+  details a:hover {
+    color: rgb(46, 126, 253);
   }
 
   details[open] {
@@ -216,6 +242,7 @@
     margin-bottom: 10px;
   }
 
+  /* svelte :global needed to use predefined darkmode logic */
   :global(body.dark-mode) details[open] {
     background: var(--light-green);
     color: black;
@@ -226,23 +253,17 @@
     margin-bottom: 0.5em;
     background-color: var(--green);
     outline: none;
-    border-radius: var(--borderRadius) var(--borderRadius) 0 0;
   }
 
-  details[open] > summary.highlight {
+  details[open] summary.highlight {
     background: var(--red);
     color: white;
+    transition: 0.2s ease-in-out;
   }
 
-  details p {
-    /*background-color: rgb(237, 252, 248); */
-    padding: 4px;
-    margin: 0;
-    /*box-shadow: 1px 1px 2px #bbbbbb;*/
-  }
-
-  /*<p style="font-size:18px"> */
-  details {
-    @apply font-Nunito;
+  /* dec11,2022: doesnt work on firefox */
+  details[open]:has(summary.highlight) {
+    background: var(--light-red);
+    transition: 0.2s ease-in-out;
   }
 </style>

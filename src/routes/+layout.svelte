@@ -113,9 +113,9 @@
           duration: 1500,
           easing: elasticOut,
         }}
-        class="p-10 flex flex-col gap-y-2 font-Poppins text-2xl"
+        class="text-center flex flex-col gap-y-2 font-Poppins sm:text-4xl text-3xl "
       >
-        <li>Send your inquiries to:</li>
+        <li>Email:</li>
         <li>thinksolve.io@gmail.com</li>
       </ul>
     {/key}
