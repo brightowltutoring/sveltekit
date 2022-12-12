@@ -36,7 +36,14 @@
 
 <!-- TODO: noticed a pattern ... the markdown of this component being repetitive, makes it easier to use vanilla css approach (also the event delegation classList add logic works easiest with vanilla css) -->
 
-<div in:fly={{ y: 50, duration: 800 }} class="grid place-content-center py-16">
+<div
+  in:fly={{ y: 50, duration: 800 }}
+  class="grid place-content-center py-16"
+  on:dblclick={() => {
+    // closes all details elements (easter eggy)
+    faqContainer.querySelectorAll("DETAILS").forEach((el) => (el.open = false));
+  }}
+>
   <span
     in:fade
     class="font-Poppins text-center text-6xl text-transparent bg-clip-text bg-gradient-to-l from-teal-500 to-pink-600 "

@@ -176,6 +176,12 @@ export const routes = writable({
     title: "math",
     isCurrent: false,
   },
+  faq: {
+    name: "faq",
+    href: "/faq",
+    title: "FAQ 🙋‍♀️",
+    isCurrent: false,
+  },
   // calcom: {
   //   name: "calcom",
   //   href: "/calcom",
