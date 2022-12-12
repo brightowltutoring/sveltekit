@@ -101,9 +101,10 @@
       </button>
     </li>
 
-    {#each Object.keys($routes).slice(0, 5) as KEY}
+    {#each Object.keys($routes).slice(0, 6) as KEY}
+      <!-- class={`${(KEY == "home" || KEY == "faq") && hideIfRunningStandalone}`} -->
       <li
-        class={`${KEY == "home" && hideIfRunningStandalone}`}
+        class={(KEY == "home" || KEY == "faq") && hideIfRunningStandalone}
         style={KEY == "login" &&
           $isLoggedIn &&
           `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}

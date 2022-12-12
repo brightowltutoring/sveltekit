@@ -152,6 +152,12 @@ export const routes = writable({
     isCurrent: false,
     icon: IconClassroom,
   },
+  faq: {
+    name: "FAQ",
+    href: "/faq",
+    title: "FAQ 🙋‍♀️",
+    isCurrent: false,
+  },
   // classroomA: {
   //   name: "ClassroomA",
   //   href: "/classroomA",
@@ -176,12 +182,7 @@ export const routes = writable({
     title: "math",
     isCurrent: false,
   },
-  faq: {
-    name: "faq",
-    href: "/faq",
-    title: "FAQ 🙋‍♀️",
-    isCurrent: false,
-  },
+
   // calcom: {
   //   name: "calcom",
   //   href: "/calcom",

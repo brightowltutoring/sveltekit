@@ -40,8 +40,8 @@
   in:fly={{ y: 50, duration: 800 }}
   class="grid place-content-center py-16"
   on:dblclick={() => {
-    // closes all details elements (easter eggy)
     faqContainer.querySelectorAll("DETAILS").forEach((el) => (el.open = false));
+    // closes all details elements (easter eggy)
   }}
 >
   <span
@@ -86,17 +86,24 @@
     </p>
 
     <p>
-      Note: if you are a frequent tutee, download the standalone app for added
-      convenience. On android devices you should be prompted automatically on
-      Chrome; on ios devices you should see "App" as the first button of the
-      navigation bar ... which will walk you through the steps.
+      For added convenience in future submissions, consider downloading the app
+      on your mobile device. Using Safari on iOS devices:
     </p>
+    <span class="flex flex-col justify-center items-center gap-x-2 ">
+      <span class="flex flex-row  gap-x-1">
+        Click share icon
+        <img
+          class="w-5 h-5 "
+          src="/safari-share-icon.png"
+          alt="safari share icon"
+        />
+      </span>
 
+      <span> Click "Add to Homescreen"</span>
+    </span>
     <p>
-      <span style="font-size:12pt; font-style:italic">
-        For last second submissions, you may also point your homework at the
-        webcam during the live session.</span
-      >
+      Using Chrome on Android devices, you should be prompted automatically
+      (usually at the bottom of the screen).
     </p>
   </details>
 
