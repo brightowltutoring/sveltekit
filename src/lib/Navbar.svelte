@@ -102,10 +102,10 @@
     </li>
 
     <!-- {#each Object.keys($routes).slice(0, 6) as KEY} -->
-    {#each Object.keys($routes).slice(0, 5) as KEY}
+    {#each Object.keys($routes).slice(1, 5) as KEY}
       <!-- class={(KEY == "home" || KEY == "faq") && hideIfRunningStandalone} -->
+      <!-- class={KEY == "home" && hideIfRunningStandalone} -->
       <li
-        class={KEY == "home" && hideIfRunningStandalone}
         style={KEY == "login" &&
           $isLoggedIn &&
           `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
