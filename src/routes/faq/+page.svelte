@@ -1,5 +1,6 @@
 <!-- TODO: noticed a pattern ... the markdown of this component being repetitive, makes it easier to use vanilla css approach (also the event delegation classList add logic works easiest with vanilla css) -->
 <script>
+  import { showHomeworkModal, showLoginModal } from "$lib/store";
   let faqContainer;
   let selectedTd;
 
@@ -16,20 +17,17 @@
   onMount(() => {
     faqContainer = document.querySelector(".faqContainer");
 
-    // using 'event delegation' technique (rather than querySelectorAll logic) to listen to events for multiple elements ...which happen to be children of a common parent element
+    // too annoying to change the markup manually for "Q1, .., Q8" ..so using this javascript
+    faqContainer.querySelectorAll("SUMMARY").forEach((el, index) => {
+      el.insertAdjacentHTML("afterbegin", `Q${index + 1}. `);
+    });
+
+    // using 'event delegation' technique (rather than querySelectorAll logic) when listening to events for multiple children elements of a common parent element
     faqContainer.addEventListener("click", (event) => {
       let target = event.target;
 
-      // if (target.tagName !== "SUMMARY") return;
-      if (target.tagName === "SUMMARY") {
-        // alert(target.tagName);
-        highlight(target);
-      }
-    });
-
-    // here I 'revert' to querySelector logic for the children of 'faqContainer'... since not listening for events
-    faqContainer.querySelectorAll("SUMMARY").forEach((el, index) => {
-      el.insertAdjacentHTML("afterbegin", `Q${index + 1}. `);
+      if (target.tagName !== "SUMMARY") return; // commonly used ... does this matter? optimization?
+      if (target.tagName === "SUMMARY") highlight(target);
     });
   });
 </script>
@@ -37,74 +35,42 @@
 <!-- TODO: some weird reason I have to add 'class="highlight"' ot at least one summary element before the css/js logic can work -->
 <div class="faqContainer">
   <details>
-    <summary class="highlight">
-      Which screen-sharing software are we using? Zoom?
+    <summary class="highlight"> How are we screen-sharing? Zoom? </summary>
+
+    Nope, our sessions happen on-site
+    <a data-sveltekit-preload-data href="/classroom"> in the classroom</a>.
+  </details>
+
+  <details>
+    <summary>
+      Is it possible to access all my session content in one place?
     </summary>
-
-    Nope, our sessions happen right here on the
-    <a data-sveltekit-preload-data href="/classroom">classroom page</a>.
-  </details>
-  <!-- <details>
-    <summary> Can you briefly state your services? </summary>
-
     <p>
-      In terms of personalized service: we offer 1-on-1 tutoring, mock test
-      sessions with solution keys, video links, and session notes; see <a
-        >/plans</a
-      >
-      for details.
-      <br /><br />
-      We are also in the process of creating a
-      <a href="https://www.brightowltutoring.com/login">login-based</a>
-      service; users will have access to <i>interactive</i> quizzes & exam-question
-      video solutions.
-    </p>
-    <p style="font-size:12pt">
-      <b>Note</b>: we <i>only</i> provide online/digital solutions. We are so
-      confident in our workflow that we offer
-      <a> a free demo session</a> of up to 20 minutes to show it off.
-    </p>
-  </details> -->
-
-  <details>
-    <summary> How do I pay? </summary>
-    <p>
-      On the <a data-sveltekit-preload-data href="/plans">plans page</a> you have
-      two payment modes per service.
-    </p>
-    <p>
-      After booking details have been entered, the "pay now" option generates a
-      STRIPE checkout page in which you will be prompted to pay with credit
-      card, Apple Pay, Google Pay, etc. A similar process happens for "pay
-      later", however we will send a custom STRIPE invoice to the preferred
-      email.
-    </p>
-
-    <!-- <p>
-      We use STRIPE to securely process all transactions — in use by companies
-      such as Google, Amazon and Shopify.
-    </p> -->
-  </details>
-
-  <details>
-    <summary> How do I book multiple sessions at once? </summary>
-    <p>
-      Book a session on the <a>plans</a> page and click "➜ Schedule another event"
-      on the confirmation page.
-    </p>
-    <p>
-      Alternatively we can book the remaining dates for you at the beginning /
-      end of the live session
+      Sure can! Contact us directly to set up a personalized page, or click the
+      corresponding option as input when booking! You will be page <button
+        class="text-rose-500"
+        on:click={() => ($showLoginModal = true)}
+        >redirected to your personal page upon logging in
+      </button>, which is now available via email, phone, gmail, and twitter!
     </p>
   </details>
 
   <details>
     <summary> How do I share homework? </summary>
     <p>
-      Click on "Homework" in the navbar and submit, or visit the home page or <a
-        data-sveltekit-preload-data
-        href="/homework">/homework</a
-      > page and submit.
+      Click on "<button
+        class="text-rose-500"
+        on:click={() => ($showHomeworkModal = true)}
+      >
+        Homework</button
+      >" in the navbar and submit screenshots/ PDFs/ etc.
+    </p>
+
+    <p>
+      Note: if you are a frequent tutee, download the standalone app for added
+      convenience. On android devices you should be prompted automatically on
+      Chrome; on ios devices you should see "App" as the first button of the
+      navigation bar ... which will walk you through the steps.
     </p>
 
     <p>
@@ -112,6 +78,32 @@
         For last second submissions, you may also point your homework at the
         webcam during the live session.</span
       >
+    </p>
+  </details>
+
+  <details>
+    <summary> How do I pay? </summary>
+    <p>
+      On the <a data-sveltekit-preload-data href="/plans">plans page</a> you can
+      either "pay now" or "pay later", per service.
+    </p>
+    <p>
+      After booking details have been confirmed the "pay now" option will
+      redirect you to a checkout page. Similarly, with "pay later" we send a
+      custom STRIPE invoice to the preferred email, to be completed within 24
+      hours of receiving. In both cases you will have the option to pay with
+      credit card, Apple Pay, or Google Pay!
+    </p>
+  </details>
+
+  <details>
+    <summary> How do I book multiple sessions at once? </summary>
+    <!-- <p>
+      Click "➜ Schedule another event" on the confirmation page.
+    </p> -->
+    <p>
+      We can book the remaining dates for you at the beginning / end of the live
+      session.
     </p>
   </details>
 
@@ -133,18 +125,16 @@
   </details>
 
   <details>
-    <summary> How are mock tests/ Mockowl sessions administered? </summary>
+    <summary> How are mock tests administered? </summary>
     <p>
-      After booking a "Mockowl" session on <a
+      After booking a "Mock" session on <a
         data-sveltekit-preload-data
         href="/plans">plans</a
       >, the student attends a live session where we will be sharing a Google
       Forms link. Answers to completed questions are discussed and provided
-      during session time. An in depth, digital solution key via personal page
-      is also available at a premium;
-      <span class="italic">
-        note: the solution key is updated upon completion of test questions.</span
-      >
+      during session time. A detailed, digital solution key
+      <span class="italic">of completed questions</span>
+      is also available at a premium, to be populated on your personal page.
     </p>
   </details>
 
@@ -160,16 +150,6 @@
       Great question! You can enter your referral as an input when booking; for
       this initiative we are pleased to offer a 25% discount on the next
       applicable session!
-    </p>
-  </details>
-
-  <details>
-    <summary>
-      Is it possible to access all my session content in one place?
-    </summary>
-    <p>
-      Sure can! Contact us directly to set up a personalized page, or click the
-      corresponding option as input when booking!
     </p>
   </details>
 </div>
@@ -222,7 +202,6 @@
   }
 
   summary {
-    font-weight: bold;
     margin: -0.5em -0.5em 0;
     padding: 0.5em;
   }

@@ -1,6 +1,6 @@
 <script>
   import { isRunningStandalone } from "$lib/utils";
-  export let contactLinkClicked = false; // this variable is bound to correspinding modal in +layout.svelte
+  export let contactLinkClicked = false; // this variable is bound to corresponding modal in +layout.svelte
 
   let contactLinkTimeout;
 

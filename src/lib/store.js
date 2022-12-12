@@ -102,6 +102,7 @@ export const showLoginModal = writable(false);
 export const showHomeworkModal = writable(false);
 export const navAppClicked = writable(false);
 
+// TODO: dec11,2022: I just noticed that the logic of this function (when used inside Navitem.svelte & Navbar.svelte ) is possible with 'event delegation' technique ... i.e. attaching a click event listener on the entire documment, and filtering for event.target.node; might change this to that at a future date. ASIDE: The way I did it here is sveltier (less general) but in some sense more readable WITHIN this framework.
 export function clearNavModals() {
   showLoginModal.set(false);
   showHomeworkModal.set(false);

@@ -101,7 +101,6 @@
 </svelte:head>
 
 <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
-<!-- on:contextmenu={(e) => e.preventDefault()} -->
 
 <main>
   <Modal
