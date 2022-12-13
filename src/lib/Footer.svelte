@@ -25,7 +25,7 @@
 </script>
 
 <div
-  class="text-xs mt-20  {isRunningStandalone()
+  class="text-sm mt-20  {isRunningStandalone()
     ? 'mb-32'
     : 'mb-10'} flex justify-center items-center flex-row gap-x-1 "
 >

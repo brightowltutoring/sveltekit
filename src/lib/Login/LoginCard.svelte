@@ -5,8 +5,9 @@
   import PhoneAuthSection from "$lib/Login/PhoneAuthSection.svelte";
   // import CloseButton from "$lib/CloseButton.svelte";
 
-  import { app, auth } from "$lib/firebase";
-  import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
+  // TODO: commented out on dec12, 2022  due to dynamicimporting
+  // import { app, auth } from "$lib/firebase";
+  // import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
@@ -46,8 +47,13 @@
     showLoginModalRedirect(loggedInEmail);
   }
 
-  onMount(async () => {
+  async function onMountFirebase() {
+    // TODO:dynamic importing added on dec12,2022
+    const { auth } = await import("$lib/firebase");
+    const { onAuthStateChanged } = await import("firebase/auth");
+    const { isSignInWithEmailLink } = await import("firebase/auth");
     // Confirm the link is a sign-in with email link.
+
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem("emailForSignIn");
       if (!email) {
@@ -89,6 +95,15 @@
       }
     });
     // }
+  }
+
+  onMount(() => {
+    document.querySelector('a[href="/login"]').addEventListener("click", () => {
+      if (!globalThis.loginFirstClickHappened) {
+        onMountFirebase();
+        globalThis.loginFirstClickHappened = true;
+      }
+    });
   });
 
   //  Hoisted Functions
@@ -124,6 +139,10 @@
       const { getFirestore, collection, getDocs } = await import(
         "firebase/firestore/lite"
       );
+
+      // TODO:dynamic importing added on dec12,2022
+      const { app } = await import("$lib/firebase");
+
       const db = getFirestore(app);
       const querySnapshot = await getDocs(collection(db, "email"));
       const querySnapshotSize = querySnapshot.size;

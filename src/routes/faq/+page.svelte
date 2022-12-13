@@ -36,9 +36,9 @@
 
 <!-- TODO: noticed a pattern ... the markdown of this component being repetitive, makes it easier to use vanilla css approach (also the event delegation classList add logic works easiest with vanilla css) -->
 
-<!-- in:fly={{ y: 50, duration: 800 }} -->
+<!-- in:slide={{ duration: 800 }} -->
 <div
-  in:slide={{ duration: 800 }}
+  in:fly={{ y: 50, duration: 500 }}
   class="grid place-content-center py-16"
   on:dblclick={() => {
     faqContainer.querySelectorAll("DETAILS").forEach((el) => (el.open = false));
@@ -46,7 +46,7 @@
   }}
 >
   <!-- class="font-Poppins text-center text-6xl text-transparent bg-clip-text bg-gradient-to-l from-teal-500 to-pink-600 " -->
-  <span in:fade class="font-Poppins text-center text-5xl font-semibold ">
+  <span in:fade class="font-Poppins text-center text-5xl font-bold ">
     FAQ
   </span>
 </div>
@@ -114,21 +114,18 @@
     </p>
     <p>
       After booking details have been confirmed the "pay now" option will
-      redirect you to a checkout page. Similarly, with "pay later" we send a
-      custom STRIPE invoice to the preferred email, to be completed within 24
-      hours of receiving. In both cases you will have the option to pay with
-      credit card, Apple Pay, or Google Pay!
+      redirect you to a checkout page. With "pay later" we send a custom STRIPE
+      invoice to the preferred email. In both cases you will have the option to
+      pay with credit card, Apple Pay, or Google Pay!
     </p>
   </details>
 
   <details>
     <summary> How do I book multiple sessions at once? </summary>
-    <!-- <p>
-      Click "➜ Schedule another event" on the confirmation page.
-    </p> -->
+
     <p>
-      We can book the remaining dates for you at the beginning / end of the live
-      session.
+      We will book the remaining times for you at the beginning / end of the
+      scheduled session.
     </p>
   </details>
 
@@ -136,16 +133,18 @@
     <summary> What subjects do you cover? </summary>
 
     <p>
-      <b>Levels:</b> IB / AP / OSSD (9-12) / College & University <br /><br />
-
-      <b>MATHEMATICS</b>&nbsp; Calculus • Trigonometry • Advanced Functions •
-      Complex Numbers • Linear Algebra • Probability and Statistics &nbsp;&nbsp;<b
-        >PHYSICS</b
+      <span class="font-Poppins font-bold">MATHEMATICS</span>&nbsp; Calculus •
+      Trigonometry • Advanced Functions • Complex Numbers • Linear Algebra •
+      Probability and Statistics &nbsp;&nbsp;<span
+        class="font-Poppins font-bold">PHYSICS</span
       >
-      &nbsp;&nbsp; Kinematics • Mechanics • Thermodynamics • Fluids • Electricity
-      & Magnetism • Circuit Analysis • Waves • Optics • Atomic & Quantum Physics
-      • Special Relativity &nbsp;&nbsp;<b>SPANISH</b> &nbsp;&nbsp; Pronunciation
-      • Grammatical Rules • Practical Examples
+      &nbsp;Kinematics • Mechanics • Thermodynamics • Fluids • Electricity & Magnetism
+      • Circuit Analysis • Waves • Optics • Atomic & Quantum Physics • Special Relativity
+      &nbsp;&nbsp;<span class="font-Poppins font-bold">SPANISH</span>
+      &nbsp; Pronunciation • Grammatical Rules • Practical Examples
+
+      <br /><br />
+      <b>Levels:</b> IB / AP / OSSD (9-12) / College & University
     </p>
   </details>
 
@@ -155,15 +154,20 @@
       After booking a "Mock" session on <a
         data-sveltekit-preload-data
         href="/plans">plans</a
-      >, the student attends a live session where we will be sharing a Google
-      Forms link. Answers to completed questions are discussed and provided
-      during session time. A detailed, digital solution key
-      <span class="italic">of completed questions</span>
+      >, the student attends a live session where a prepared examination — in
+      the form of a Google Forms link — will be shared at the beginning of the
+      session. The topics are chosen based on input during booking, as well as
+      prior discussion with the student.
+    </p>
+    <p>
+      <span class="font-Poppins font-bold"
+        >In regards to completed questions only:</span
+      > answers are discussed during session time. A detailed, digital solution key
       is also available at a premium, to be populated on your personal page.
     </p>
   </details>
 
-  <details>
+  <details class="group">
     <summary>
       I am looking to refer a friend, do you offer any discounts based on
       referrals?
@@ -174,10 +178,13 @@
 
       Great question! You can enter your referral as an input when booking; for
       this initiative we are pleased to offer a
+      <!-- group-active:animate-ping -->
       <span
-        class=" text-transparent bg-clip-text bg-gradient-to-b from-rose-700 via-rose-600 to-yellow-300"
-        >25%
-      </span> discount on the next applicable session!
+        class="hover:opacity-100 group-active:opacity-100 opacity-0 text-transparent bg-clip-text bg-gradient-to-b from-rose-700 via-rose-600 to-yellow-300"
+      >
+        25%
+      </span>
+      discount on the next applicable session!
     </p>
   </details>
 </div>

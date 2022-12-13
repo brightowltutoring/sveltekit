@@ -37,7 +37,10 @@
     <div class="h-[60vh] flex justify-center items-center text-center">
       <div class="grid grid-rows-1">
         {#if ready}
-          <div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
+          <div
+            in:slide={{ duration: 500 }}
+            class="text-6xl font-Poppins  pb-4 "
+          >
             Math, Physics
             <span class={gradientTextColor}> ... Online! </span>
           </div>

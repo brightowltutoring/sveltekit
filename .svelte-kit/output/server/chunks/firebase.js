@@ -10,7 +10,8 @@ const firebaseConfig = {
   appId: PUBLIC_FIREBASE_appId
 };
 const app = initializeApp(firebaseConfig);
-getAuth(app);
+const auth = getAuth(app);
 export {
-  app as a
+  app,
+  auth
 };

@@ -11,10 +11,11 @@
     /* Chrome 26+, Opera 23+, Firefox 39+ */
       url("./fonts/nunito-v25-latin-200.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
 /* nunito-regular - latin */
 @font-face {
   font-family: "Nunito";
-  font-style: normal;
+  font-style: bold;
   font-weight: 400;
   src: local(""), url("./fonts/nunito-v25-latin-regular.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
@@ -27,11 +28,37 @@
   font-style: normal;
   font-weight: 100;
   src: local(""), url("./fonts/poppins-v20-latin-100.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("./fonts/poppins-v20-latin-100.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url("./fonts/poppins-v20-latin-100.woff") format("woff");
 }
+/* poppins-regular - latin */
+/* @font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("./fonts/poppins-v20-latin-regular.woff2") format("woff2"),
+    url("./fonts/poppins-v20-latin-regular.woff") format("woff");
+} */
+
+/* poppins-700 - latin */
+@font-face {
+  font-family: "Poppins";
+  font-style: bold;
+  font-weight: 700;
+  src: local(""), url("./fonts/poppins-v20-latin-700.woff2") format("woff2"),
+    url("./fonts/poppins-v20-latin-700.woff") format("woff");
+}
+/* poppins-900 - latin */
+/* @font-face {
+  font-family: "Poppins";
+  font-style: bold;
+  font-weight: 900;
+  src: local(""), url("./fonts/poppins-v20-latin-900.woff2") format("woff2"),
+      url("./fonts/poppins-v20-latin-900.woff") format("woff");
+} */
+
 /* OLD WAY: link import flickers on page load */
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap'); */
+/* dec12,2022: this doesnt seem to work anymore */
 
 /* hide scrollbar Firefox */
 /* html {

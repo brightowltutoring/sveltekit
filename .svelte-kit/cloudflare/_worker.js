@@ -640,6 +640,75 @@ var init_layout = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/utils.js
+function getOS() {
+  let userAgent = browser2;
+  let platform = browser2;
+  let macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
+  let windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"];
+  let iosPlatforms = ["iPhone", "iPad", "iPod"];
+  let os = null;
+  if (macosPlatforms.includes(platform)) {
+    os = "Mac OS";
+  } else if (iosPlatforms.includes(platform)) {
+    os = "iOS";
+  } else if (windowsPlatforms.includes(platform)) {
+    os = "Windows";
+  } else if (/Android/.test(userAgent)) {
+    os = "Android";
+  } else if (/Linux/.test(platform)) {
+    os = "Linux";
+  }
+  return os;
+}
+function isRunningStandalone() {
+  return browser2;
+}
+function cssToHead(id = "dropzoneCSS", path2 = "/dropzone.css") {
+  if (!document.getElementById(id)) {
+    const element = document.createElement("link");
+    element.id = id;
+    element.href = path2;
+    element.rel = "stylesheet";
+    document.head.appendChild(element);
+  }
+}
+var browser2, InView;
+var init_utils = __esm({
+  ".svelte-kit/output/server/chunks/utils.js"() {
+    init_chunks();
+    browser2 = false;
+    InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { vanilla } = $$props;
+      let { once: once2 } = $$props;
+      let { onview = () => console.log("i \u2764\uFE0F slots") } = $$props;
+      let container;
+      let { single } = $$props;
+      let { root = null } = $$props;
+      let { threshold = 0 } = $$props;
+      let { margin = "0px" } = $$props;
+      if ($$props.vanilla === void 0 && $$bindings.vanilla && vanilla !== void 0)
+        $$bindings.vanilla(vanilla);
+      if ($$props.once === void 0 && $$bindings.once && once2 !== void 0)
+        $$bindings.once(once2);
+      if ($$props.onview === void 0 && $$bindings.onview && onview !== void 0)
+        $$bindings.onview(onview);
+      if ($$props.single === void 0 && $$bindings.single && single !== void 0)
+        $$bindings.single(single);
+      if ($$props.root === void 0 && $$bindings.root && root !== void 0)
+        $$bindings.root(root);
+      if ($$props.threshold === void 0 && $$bindings.threshold && threshold !== void 0)
+        $$bindings.threshold(threshold);
+      if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
+        $$bindings.margin(margin);
+      return `
+
+
+${!vanilla ? `<div${add_attribute("this", container, 0)}>${slots.default ? slots.default({}) : ``}</div>` : ``}`;
+    });
+  }
+});
+
 // .svelte-kit/output/server/chunks/store.js
 var size$3, IconLogin, size$2, IconPlans, size$1, IconHomework, size, IconClassroom, isLoggedIn, scrollY, delayedScrollY, instDeltaY, innerWidth, lessThan768, showLoginModal, showHomeworkModal, navAppClicked, routes, isDarkMode, light_darkened, dark_lightened, elementColor;
 var init_store = __esm({
@@ -758,6 +827,12 @@ var init_store = __esm({
         isCurrent: false,
         icon: IconClassroom
       },
+      faq: {
+        name: "FAQ",
+        href: "/faq",
+        title: "FAQ \u{1F64B}\u200D\u2640\uFE0F",
+        isCurrent: false
+      },
       stripe: {
         name: "Stripe",
         href: "/stripe",
@@ -782,75 +857,6 @@ var init_store = __esm({
     dark_lightened = "rgb(38, 35, 51)";
     elementColor = derived(isDarkMode, ($isDarkMode, set) => {
       $isDarkMode ? set(dark_lightened) : set(light_darkened);
-    });
-  }
-});
-
-// .svelte-kit/output/server/chunks/utils.js
-function getOS() {
-  let userAgent = browser2;
-  let platform = browser2;
-  let macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
-  let windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"];
-  let iosPlatforms = ["iPhone", "iPad", "iPod"];
-  let os = null;
-  if (macosPlatforms.includes(platform)) {
-    os = "Mac OS";
-  } else if (iosPlatforms.includes(platform)) {
-    os = "iOS";
-  } else if (windowsPlatforms.includes(platform)) {
-    os = "Windows";
-  } else if (/Android/.test(userAgent)) {
-    os = "Android";
-  } else if (/Linux/.test(platform)) {
-    os = "Linux";
-  }
-  return os;
-}
-function isRunningStandalone() {
-  return browser2;
-}
-function cssToHead(id = "dropzoneCSS", path2 = "/dropzone.css") {
-  if (!document.getElementById(id)) {
-    const element = document.createElement("link");
-    element.id = id;
-    element.href = path2;
-    element.rel = "stylesheet";
-    document.head.appendChild(element);
-  }
-}
-var browser2, InView;
-var init_utils = __esm({
-  ".svelte-kit/output/server/chunks/utils.js"() {
-    init_chunks();
-    browser2 = false;
-    InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { vanilla } = $$props;
-      let { once: once2 } = $$props;
-      let { onview = () => console.log("i \u2764\uFE0F slots") } = $$props;
-      let container;
-      let { single } = $$props;
-      let { root = null } = $$props;
-      let { threshold = 0 } = $$props;
-      let { margin = "0px" } = $$props;
-      if ($$props.vanilla === void 0 && $$bindings.vanilla && vanilla !== void 0)
-        $$bindings.vanilla(vanilla);
-      if ($$props.once === void 0 && $$bindings.once && once2 !== void 0)
-        $$bindings.once(once2);
-      if ($$props.onview === void 0 && $$bindings.onview && onview !== void 0)
-        $$bindings.onview(onview);
-      if ($$props.single === void 0 && $$bindings.single && single !== void 0)
-        $$bindings.single(single);
-      if ($$props.root === void 0 && $$bindings.root && root !== void 0)
-        $$bindings.root(root);
-      if ($$props.threshold === void 0 && $$bindings.threshold && threshold !== void 0)
-        $$bindings.threshold(threshold);
-      if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
-        $$bindings.margin(margin);
-      return `
-
-
-${!vanilla ? `<div${add_attribute("this", container, 0)}>${slots.default ? slots.default({}) : ``}</div>` : ``}`;
     });
   }
 });
@@ -4909,11 +4915,11 @@ function _fail(authOrCode, ...rest) {
 function _createError(authOrCode, ...rest) {
   return createErrorInternal(authOrCode, ...rest);
 }
-function _errorWithCustomMessage(auth, code, message) {
+function _errorWithCustomMessage(auth2, code, message) {
   const errorMap = Object.assign(Object.assign({}, prodErrorMap()), { [code]: message });
   const factory = new ErrorFactory("auth", "Firebase", errorMap);
   return factory.create(code, {
-    appName: auth.name
+    appName: auth2.name
   });
 }
 function createErrorInternal(authOrCode, ...rest) {
@@ -4956,24 +4962,24 @@ function _getInstance(cls) {
 function initializeAuth(app2, deps) {
   const provider = _getProvider(app2, "auth");
   if (provider.isInitialized()) {
-    const auth2 = provider.getImmediate();
+    const auth3 = provider.getImmediate();
     const initialOptions = provider.getOptions();
     if (deepEqual(initialOptions, deps !== null && deps !== void 0 ? deps : {})) {
-      return auth2;
+      return auth3;
     } else {
-      _fail(auth2, "already-initialized");
+      _fail(auth3, "already-initialized");
     }
   }
-  const auth = provider.initialize({ options: deps });
-  return auth;
+  const auth2 = provider.initialize({ options: deps });
+  return auth2;
 }
-function _initializeAuthInstance(auth, deps) {
+function _initializeAuthInstance(auth2, deps) {
   const persistence = (deps === null || deps === void 0 ? void 0 : deps.persistence) || [];
   const hierarchy = (Array.isArray(persistence) ? persistence : [persistence]).map(_getInstance);
   if (deps === null || deps === void 0 ? void 0 : deps.errorMap) {
-    auth._updateErrorMap(deps.errorMap);
+    auth2._updateErrorMap(deps.errorMap);
   }
-  auth._initializeWithPersistence(hierarchy, deps === null || deps === void 0 ? void 0 : deps.popupRedirectResolver);
+  auth2._initializeWithPersistence(hierarchy, deps === null || deps === void 0 ? void 0 : deps.popupRedirectResolver);
 }
 function _getCurrentUrl() {
   var _a;
@@ -5007,14 +5013,14 @@ function _emulatorUrl(config, path2) {
   }
   return `${url}${path2.startsWith("/") ? path2.slice(1) : path2}`;
 }
-function _addTidIfNecessary(auth, request) {
-  if (auth.tenantId && !request.tenantId) {
-    return Object.assign(Object.assign({}, request), { tenantId: auth.tenantId });
+function _addTidIfNecessary(auth2, request) {
+  if (auth2.tenantId && !request.tenantId) {
+    return Object.assign(Object.assign({}, request), { tenantId: auth2.tenantId });
   }
   return request;
 }
-async function _performApiRequest(auth, method, path2, request, customErrorMap = {}) {
-  return _performFetchWithErrorHandling(auth, customErrorMap, async () => {
+async function _performApiRequest(auth2, method, path2, request, customErrorMap = {}) {
+  return _performFetchWithErrorHandling(auth2, customErrorMap, async () => {
     let body = {};
     let params = {};
     if (request) {
@@ -5026,24 +5032,24 @@ async function _performApiRequest(auth, method, path2, request, customErrorMap =
         };
       }
     }
-    const query = querystring(Object.assign({ key: auth.config.apiKey }, params)).slice(1);
-    const headers = await auth._getAdditionalHeaders();
+    const query = querystring(Object.assign({ key: auth2.config.apiKey }, params)).slice(1);
+    const headers = await auth2._getAdditionalHeaders();
     headers["Content-Type"] = "application/json";
-    if (auth.languageCode) {
-      headers["X-Firebase-Locale"] = auth.languageCode;
+    if (auth2.languageCode) {
+      headers["X-Firebase-Locale"] = auth2.languageCode;
     }
-    return FetchProvider.fetch()(_getFinalTarget(auth, auth.config.apiHost, path2, query), Object.assign({
+    return FetchProvider.fetch()(_getFinalTarget(auth2, auth2.config.apiHost, path2, query), Object.assign({
       method,
       headers,
       referrerPolicy: "no-referrer"
     }, body));
   });
 }
-async function _performFetchWithErrorHandling(auth, customErrorMap, fetchFn) {
-  auth._canInitEmulator = false;
+async function _performFetchWithErrorHandling(auth2, customErrorMap, fetchFn) {
+  auth2._canInitEmulator = false;
   const errorMap = Object.assign(Object.assign({}, SERVER_ERROR_MAP), customErrorMap);
   try {
-    const networkTimeout = new NetworkTimeout(auth);
+    const networkTimeout = new NetworkTimeout(auth2);
     const response = await Promise.race([
       fetchFn(),
       networkTimeout.promise
@@ -5051,7 +5057,7 @@ async function _performFetchWithErrorHandling(auth, customErrorMap, fetchFn) {
     networkTimeout.clearNetworkTimeout();
     const json2 = await response.json();
     if ("needConfirmation" in json2) {
-      throw _makeTaggedError(auth, "account-exists-with-different-credential", json2);
+      throw _makeTaggedError(auth2, "account-exists-with-different-credential", json2);
     }
     if (response.ok && !("errorMessage" in json2)) {
       return json2;
@@ -5059,45 +5065,45 @@ async function _performFetchWithErrorHandling(auth, customErrorMap, fetchFn) {
       const errorMessage = response.ok ? json2.errorMessage : json2.error.message;
       const [serverErrorCode, serverErrorMessage] = errorMessage.split(" : ");
       if (serverErrorCode === "FEDERATED_USER_ID_ALREADY_LINKED") {
-        throw _makeTaggedError(auth, "credential-already-in-use", json2);
+        throw _makeTaggedError(auth2, "credential-already-in-use", json2);
       } else if (serverErrorCode === "EMAIL_EXISTS") {
-        throw _makeTaggedError(auth, "email-already-in-use", json2);
+        throw _makeTaggedError(auth2, "email-already-in-use", json2);
       } else if (serverErrorCode === "USER_DISABLED") {
-        throw _makeTaggedError(auth, "user-disabled", json2);
+        throw _makeTaggedError(auth2, "user-disabled", json2);
       }
       const authError = errorMap[serverErrorCode] || serverErrorCode.toLowerCase().replace(/[_\s]+/g, "-");
       if (serverErrorMessage) {
-        throw _errorWithCustomMessage(auth, authError, serverErrorMessage);
+        throw _errorWithCustomMessage(auth2, authError, serverErrorMessage);
       } else {
-        _fail(auth, authError);
+        _fail(auth2, authError);
       }
     }
   } catch (e3) {
     if (e3 instanceof FirebaseError) {
       throw e3;
     }
-    _fail(auth, "network-request-failed");
+    _fail(auth2, "network-request-failed");
   }
 }
-async function _performSignInRequest(auth, method, path2, request, customErrorMap = {}) {
-  const serverResponse = await _performApiRequest(auth, method, path2, request, customErrorMap);
+async function _performSignInRequest(auth2, method, path2, request, customErrorMap = {}) {
+  const serverResponse = await _performApiRequest(auth2, method, path2, request, customErrorMap);
   if ("mfaPendingCredential" in serverResponse) {
-    _fail(auth, "multi-factor-auth-required", {
+    _fail(auth2, "multi-factor-auth-required", {
       _serverResponse: serverResponse
     });
   }
   return serverResponse;
 }
-function _getFinalTarget(auth, host, path2, query) {
+function _getFinalTarget(auth2, host, path2, query) {
   const base2 = `${host}${path2}?${query}`;
-  if (!auth.config.emulator) {
-    return `${auth.config.apiScheme}://${base2}`;
+  if (!auth2.config.emulator) {
+    return `${auth2.config.apiScheme}://${base2}`;
   }
-  return _emulatorUrl(auth.config, base2);
+  return _emulatorUrl(auth2.config, base2);
 }
-function _makeTaggedError(auth, code, response) {
+function _makeTaggedError(auth2, code, response) {
   const errorParams = {
-    appName: auth.name
+    appName: auth2.name
   };
   if (response.email) {
     errorParams.email = response.email;
@@ -5105,15 +5111,15 @@ function _makeTaggedError(auth, code, response) {
   if (response.phoneNumber) {
     errorParams.phoneNumber = response.phoneNumber;
   }
-  const error2 = _createError(auth, code, errorParams);
+  const error2 = _createError(auth2, code, errorParams);
   error2.customData._tokenResponse = response;
   return error2;
 }
-async function deleteAccount(auth, request) {
-  return _performApiRequest(auth, "POST", "/v1/accounts:delete", request);
+async function deleteAccount(auth2, request) {
+  return _performApiRequest(auth2, "POST", "/v1/accounts:delete", request);
 }
-async function getAccountInfo(auth, request) {
-  return _performApiRequest(auth, "POST", "/v1/accounts:lookup", request);
+async function getAccountInfo(auth2, request) {
+  return _performApiRequest(auth2, "POST", "/v1/accounts:lookup", request);
 }
 function utcTimestampToDateString(utcTimestamp) {
   if (!utcTimestamp) {
@@ -5194,10 +5200,10 @@ function isUserInvalidated({ code }) {
 }
 async function _reloadWithoutSaving(user) {
   var _a;
-  const auth = user.auth;
+  const auth2 = user.auth;
   const idToken = await user.getIdToken();
-  const response = await _logoutIfInvalidated(user, getAccountInfo(auth, { idToken }));
-  _assert(response === null || response === void 0 ? void 0 : response.users.length, auth, "internal-error");
+  const response = await _logoutIfInvalidated(user, getAccountInfo(auth2, { idToken }));
+  _assert(response === null || response === void 0 ? void 0 : response.users.length, auth2, "internal-error");
   const coreAccount = response.users[0];
   user._notifyReloadListener(coreAccount);
   const newProviderData = ((_a = coreAccount.providerUserInfo) === null || _a === void 0 ? void 0 : _a.length) ? extractProviderData(coreAccount.providerUserInfo) : [];
@@ -5242,15 +5248,15 @@ function extractProviderData(providers) {
     };
   });
 }
-async function requestStsToken(auth, refreshToken) {
-  const response = await _performFetchWithErrorHandling(auth, {}, async () => {
+async function requestStsToken(auth2, refreshToken) {
+  const response = await _performFetchWithErrorHandling(auth2, {}, async () => {
     const body = querystring({
       "grant_type": "refresh_token",
       "refresh_token": refreshToken
     }).slice(1);
-    const { tokenApiHost, apiKey } = auth.config;
-    const url = _getFinalTarget(auth, tokenApiHost, "/v1/token", `key=${apiKey}`);
-    const headers = await auth._getAdditionalHeaders();
+    const { tokenApiHost, apiKey } = auth2.config;
+    const url = _getFinalTarget(auth2, tokenApiHost, "/v1/token", `key=${apiKey}`);
+    const headers = await auth2._getAdditionalHeaders();
     headers["Content-Type"] = "application/x-www-form-urlencoded";
     return FetchProvider.fetch()(url, {
       method: "POST",
@@ -5360,11 +5366,11 @@ function _getClientVersion(clientPlatform, frameworks = []) {
   const reportedFrameworks = frameworks.length ? frameworks.join(",") : "FirebaseCore-web";
   return `${reportedPlatform}/${"JsCore"}/${SDK_VERSION}/${reportedFrameworks}`;
 }
-function _castAuth(auth) {
-  return getModularInstance(auth);
+function _castAuth(auth2) {
+  return getModularInstance(auth2);
 }
-function connectAuthEmulator(auth, url, options) {
-  const authInternal = _castAuth(auth);
+function connectAuthEmulator(auth2, url, options) {
+  const authInternal = _castAuth(auth2);
   _assert(authInternal._canInitEmulator, authInternal, "emulator-config-failed");
   _assert(/^https?:\/\//.test(url), authInternal, "invalid-emulator-scheme");
   const disableWarnings = !!(options === null || options === void 0 ? void 0 : options.disableWarnings);
@@ -5442,37 +5448,37 @@ function emitEmulatorWarning() {
     }
   }
 }
-async function updateEmailPassword(auth, request) {
-  return _performApiRequest(auth, "POST", "/v1/accounts:update", request);
+async function updateEmailPassword(auth2, request) {
+  return _performApiRequest(auth2, "POST", "/v1/accounts:update", request);
 }
-async function signInWithPassword(auth, request) {
-  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPassword", _addTidIfNecessary(auth, request));
+async function signInWithPassword(auth2, request) {
+  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPassword", _addTidIfNecessary(auth2, request));
 }
-async function signInWithEmailLink$1(auth, request) {
-  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth, request));
+async function signInWithEmailLink$1(auth2, request) {
+  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth2, request));
 }
-async function signInWithEmailLinkForLinking(auth, request) {
-  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth, request));
+async function signInWithEmailLinkForLinking(auth2, request) {
+  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithEmailLink", _addTidIfNecessary(auth2, request));
 }
-async function signInWithIdp(auth, request) {
-  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithIdp", _addTidIfNecessary(auth, request));
+async function signInWithIdp(auth2, request) {
+  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithIdp", _addTidIfNecessary(auth2, request));
 }
-async function sendPhoneVerificationCode(auth, request) {
-  return _performApiRequest(auth, "POST", "/v1/accounts:sendVerificationCode", _addTidIfNecessary(auth, request));
+async function sendPhoneVerificationCode(auth2, request) {
+  return _performApiRequest(auth2, "POST", "/v1/accounts:sendVerificationCode", _addTidIfNecessary(auth2, request));
 }
-async function signInWithPhoneNumber$1(auth, request) {
-  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, request));
+async function signInWithPhoneNumber$1(auth2, request) {
+  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, request));
 }
-async function linkWithPhoneNumber$1(auth, request) {
-  const response = await _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, request));
+async function linkWithPhoneNumber$1(auth2, request) {
+  const response = await _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, request));
   if (response.temporaryProof) {
-    throw _makeTaggedError(auth, "account-exists-with-different-credential", response);
+    throw _makeTaggedError(auth2, "account-exists-with-different-credential", response);
   }
   return response;
 }
-async function verifyPhoneNumberForExisting(auth, request) {
+async function verifyPhoneNumberForExisting(auth2, request) {
   const apiRequest = Object.assign(Object.assign({}, request), { operation: "REAUTH" });
-  return _performSignInRequest(auth, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth, apiRequest), VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_);
+  return _performSignInRequest(auth2, "POST", "/v1/accounts:signInWithPhoneNumber", _addTidIfNecessary(auth2, apiRequest), VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_);
 }
 function parseMode(mode) {
   switch (mode) {
@@ -5508,11 +5514,11 @@ function providerIdForResponse(response) {
   }
   return null;
 }
-function _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential, user) {
-  const idTokenProvider = operationType === "reauthenticate" ? credential._getReauthenticationResolver(auth) : credential._getIdTokenResponse(auth);
+function _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential, user) {
+  const idTokenProvider = operationType === "reauthenticate" ? credential._getReauthenticationResolver(auth2) : credential._getIdTokenResponse(auth2);
   return idTokenProvider.catch((error2) => {
     if (error2.code === `auth/${"multi-factor-auth-required"}`) {
-      throw MultiFactorError._fromErrorAndOperation(auth, error2, operationType, user);
+      throw MultiFactorError._fromErrorAndOperation(auth2, error2, operationType, user);
     }
     throw error2;
   });
@@ -5523,43 +5529,43 @@ async function _link$1(user, credential, bypassAuthState = false) {
 }
 async function _reauthenticate(user, credential, bypassAuthState = false) {
   var _a;
-  const { auth } = user;
+  const { auth: auth2 } = user;
   const operationType = "reauthenticate";
   try {
-    const response = await _logoutIfInvalidated(user, _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential, user), bypassAuthState);
-    _assert(response.idToken, auth, "internal-error");
+    const response = await _logoutIfInvalidated(user, _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential, user), bypassAuthState);
+    _assert(response.idToken, auth2, "internal-error");
     const parsed = _parseToken(response.idToken);
-    _assert(parsed, auth, "internal-error");
+    _assert(parsed, auth2, "internal-error");
     const { sub: localId } = parsed;
-    _assert(user.uid === localId, auth, "user-mismatch");
+    _assert(user.uid === localId, auth2, "user-mismatch");
     return UserCredentialImpl._forOperation(user, operationType, response);
   } catch (e3) {
     if (((_a = e3) === null || _a === void 0 ? void 0 : _a.code) === `auth/${"user-not-found"}`) {
-      _fail(auth, "user-mismatch");
+      _fail(auth2, "user-mismatch");
     }
     throw e3;
   }
 }
-async function _signInWithCredential(auth, credential, bypassAuthState = false) {
+async function _signInWithCredential(auth2, credential, bypassAuthState = false) {
   const operationType = "signIn";
-  const response = await _processCredentialSavingMfaContextIfNecessary(auth, operationType, credential);
-  const userCredential = await UserCredentialImpl._fromIdTokenResponse(auth, operationType, response);
+  const response = await _processCredentialSavingMfaContextIfNecessary(auth2, operationType, credential);
+  const userCredential = await UserCredentialImpl._fromIdTokenResponse(auth2, operationType, response);
   if (!bypassAuthState) {
-    await auth._updateCurrentUser(userCredential.user);
+    await auth2._updateCurrentUser(userCredential.user);
   }
   return userCredential;
 }
-function onIdTokenChanged(auth, nextOrObserver, error2, completed) {
-  return getModularInstance(auth).onIdTokenChanged(nextOrObserver, error2, completed);
+function onIdTokenChanged(auth2, nextOrObserver, error2, completed) {
+  return getModularInstance(auth2).onIdTokenChanged(nextOrObserver, error2, completed);
 }
-function beforeAuthStateChanged(auth, callback, onAbort) {
-  return getModularInstance(auth).beforeAuthStateChanged(callback, onAbort);
+function beforeAuthStateChanged(auth2, callback, onAbort) {
+  return getModularInstance(auth2).beforeAuthStateChanged(callback, onAbort);
 }
-function startEnrollPhoneMfa(auth, request) {
-  return _performApiRequest(auth, "POST", "/v2/accounts/mfaEnrollment:start", _addTidIfNecessary(auth, request));
+function startEnrollPhoneMfa(auth2, request) {
+  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaEnrollment:start", _addTidIfNecessary(auth2, request));
 }
-function finalizeEnrollPhoneMfa(auth, request) {
-  return _performApiRequest(auth, "POST", "/v2/accounts/mfaEnrollment:finalize", _addTidIfNecessary(auth, request));
+function finalizeEnrollPhoneMfa(auth2, request) {
+  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaEnrollment:finalize", _addTidIfNecessary(auth2, request));
 }
 function _iframeCannotSyncWebStorage() {
   const ua = getUA();
@@ -5664,11 +5670,11 @@ function _deleteObject(db, key2) {
   const request = getObjectStore(db, true).delete(key2);
   return new DBPromise(request).toPromise();
 }
-function startSignInPhoneMfa(auth, request) {
-  return _performApiRequest(auth, "POST", "/v2/accounts/mfaSignIn:start", _addTidIfNecessary(auth, request));
+function startSignInPhoneMfa(auth2, request) {
+  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaSignIn:start", _addTidIfNecessary(auth2, request));
 }
-function finalizeSignInPhoneMfa(auth, request) {
-  return _performApiRequest(auth, "POST", "/v2/accounts/mfaSignIn:finalize", _addTidIfNecessary(auth, request));
+function finalizeSignInPhoneMfa(auth2, request) {
+  return _performApiRequest(auth2, "POST", "/v2/accounts/mfaSignIn:finalize", _addTidIfNecessary(auth2, request));
 }
 function getScriptParentElement() {
   var _a, _b;
@@ -5692,12 +5698,12 @@ function _loadJS(url) {
 function _generateCallbackName(prefix) {
   return `__${prefix}${Math.floor(Math.random() * 1e6)}`;
 }
-async function _verifyPhoneNumber(auth, options, verifier) {
+async function _verifyPhoneNumber(auth2, options, verifier) {
   var _a;
   const recaptchaToken = await verifier.verify();
   try {
-    _assert(typeof recaptchaToken === "string", auth, "argument-error");
-    _assert(verifier.type === RECAPTCHA_VERIFIER_TYPE, auth, "argument-error");
+    _assert(typeof recaptchaToken === "string", auth2, "argument-error");
+    _assert(verifier.type === RECAPTCHA_VERIFIER_TYPE, auth2, "argument-error");
     let phoneInfoOptions;
     if (typeof options === "string") {
       phoneInfoOptions = {
@@ -5709,8 +5715,8 @@ async function _verifyPhoneNumber(auth, options, verifier) {
     if ("session" in phoneInfoOptions) {
       const session = phoneInfoOptions.session;
       if ("phoneNumber" in phoneInfoOptions) {
-        _assert(session.type === "enroll", auth, "internal-error");
-        const response = await startEnrollPhoneMfa(auth, {
+        _assert(session.type === "enroll", auth2, "internal-error");
+        const response = await startEnrollPhoneMfa(auth2, {
           idToken: session.credential,
           phoneEnrollmentInfo: {
             phoneNumber: phoneInfoOptions.phoneNumber,
@@ -5719,10 +5725,10 @@ async function _verifyPhoneNumber(auth, options, verifier) {
         });
         return response.phoneSessionInfo.sessionInfo;
       } else {
-        _assert(session.type === "signin", auth, "internal-error");
+        _assert(session.type === "signin", auth2, "internal-error");
         const mfaEnrollmentId = ((_a = phoneInfoOptions.multiFactorHint) === null || _a === void 0 ? void 0 : _a.uid) || phoneInfoOptions.multiFactorUid;
-        _assert(mfaEnrollmentId, auth, "missing-multi-factor-info");
-        const response = await startSignInPhoneMfa(auth, {
+        _assert(mfaEnrollmentId, auth2, "missing-multi-factor-info");
+        const response = await startSignInPhoneMfa(auth2, {
           mfaPendingCredential: session.credential,
           mfaEnrollmentId,
           phoneSignInInfo: {
@@ -5732,7 +5738,7 @@ async function _verifyPhoneNumber(auth, options, verifier) {
         return response.phoneResponseInfo.sessionInfo;
       }
     } else {
-      const { sessionInfo } = await sendPhoneVerificationCode(auth, {
+      const { sessionInfo } = await sendPhoneVerificationCode(auth2, {
         phoneNumber: phoneInfoOptions.phoneNumber,
         recaptchaToken
       });
@@ -5742,28 +5748,28 @@ async function _verifyPhoneNumber(auth, options, verifier) {
     verifier._reset();
   }
 }
-function _withDefaultResolver(auth, resolverOverride) {
+function _withDefaultResolver(auth2, resolverOverride) {
   if (resolverOverride) {
     return _getInstance(resolverOverride);
   }
-  _assert(auth._popupRedirectResolver, auth, "argument-error");
-  return auth._popupRedirectResolver;
+  _assert(auth2._popupRedirectResolver, auth2, "argument-error");
+  return auth2._popupRedirectResolver;
 }
 function _signIn(params) {
   return _signInWithCredential(params.auth, new IdpCredential(params), params.bypassAuthState);
 }
 function _reauth(params) {
-  const { auth, user } = params;
-  _assert(user, auth, "internal-error");
+  const { auth: auth2, user } = params;
+  _assert(user, auth2, "internal-error");
   return _reauthenticate(user, new IdpCredential(params), params.bypassAuthState);
 }
 async function _link(params) {
-  const { auth, user } = params;
-  _assert(user, auth, "internal-error");
+  const { auth: auth2, user } = params;
+  _assert(user, auth2, "internal-error");
   return _link$1(user, new IdpCredential(params), params.bypassAuthState);
 }
-async function _getAndClearPendingRedirectStatus(resolver, auth) {
-  const key2 = pendingRedirectKey(auth);
+async function _getAndClearPendingRedirectStatus(resolver, auth2) {
+  const key2 = pendingRedirectKey(auth2);
   const persistence = resolverPersistence(resolver);
   if (!await persistence._isAvailable()) {
     return false;
@@ -5772,17 +5778,17 @@ async function _getAndClearPendingRedirectStatus(resolver, auth) {
   await persistence._remove(key2);
   return hasPendingRedirect;
 }
-function _overrideRedirectResult(auth, result) {
-  redirectOutcomeMap.set(auth._key(), result);
+function _overrideRedirectResult(auth2, result) {
+  redirectOutcomeMap.set(auth2._key(), result);
 }
 function resolverPersistence(resolver) {
   return _getInstance(resolver._redirectPersistence);
 }
-function pendingRedirectKey(auth) {
-  return _persistenceKeyName(PENDING_REDIRECT_KEY, auth.config.apiKey, auth.name);
+function pendingRedirectKey(auth2) {
+  return _persistenceKeyName(PENDING_REDIRECT_KEY, auth2.config.apiKey, auth2.name);
 }
-async function _getRedirectResult(auth, resolverExtern, bypassAuthState = false) {
-  const authInternal = _castAuth(auth);
+async function _getRedirectResult(auth2, resolverExtern, bypassAuthState = false) {
+  const authInternal = _castAuth(auth2);
   const resolver = _withDefaultResolver(authInternal, resolverExtern);
   const action = new RedirectAction(authInternal, resolver, bypassAuthState);
   const result = await action.execute();
@@ -5811,14 +5817,14 @@ function isRedirectEvent(event) {
       return false;
   }
 }
-async function _getProjectConfig(auth, request = {}) {
-  return _performApiRequest(auth, "GET", "/v1/projects", request);
+async function _getProjectConfig(auth2, request = {}) {
+  return _performApiRequest(auth2, "GET", "/v1/projects", request);
 }
-async function _validateOrigin(auth) {
-  if (auth.config.emulator) {
+async function _validateOrigin(auth2) {
+  if (auth2.config.emulator) {
     return;
   }
-  const { authorizedDomains } = await _getProjectConfig(auth);
+  const { authorizedDomains } = await _getProjectConfig(auth2);
   for (const domain of authorizedDomains) {
     try {
       if (matchDomain(domain)) {
@@ -5827,7 +5833,7 @@ async function _validateOrigin(auth) {
     } catch (_a) {
     }
   }
-  _fail(auth, "unauthorized-domain");
+  _fail(auth2, "unauthorized-domain");
 }
 function matchDomain(expected) {
   const currentUrl = _getCurrentUrl();
@@ -5864,7 +5870,7 @@ function resetUnloadedGapiModules() {
     }
   }
 }
-function loadGapi(auth) {
+function loadGapi(auth2) {
   return new Promise((resolve, reject) => {
     var _a, _b, _c;
     function loadGapiIframe() {
@@ -5875,7 +5881,7 @@ function loadGapi(auth) {
         },
         ontimeout: () => {
           resetUnloadedGapiModules();
-          reject(_createError(auth, "network-request-failed"));
+          reject(_createError(auth2, "network-request-failed"));
         },
         timeout: NETWORK_TIMEOUT.get()
       });
@@ -5890,7 +5896,7 @@ function loadGapi(auth) {
         if (!!gapi.load) {
           loadGapiIframe();
         } else {
-          reject(_createError(auth, "network-request-failed"));
+          reject(_createError(auth2, "network-request-failed"));
         }
       };
       return _loadJS(`https://apis.google.com/js/api.js?onload=${cbName}`).catch((e3) => reject(e3));
@@ -5900,36 +5906,36 @@ function loadGapi(auth) {
     throw error2;
   });
 }
-function _loadGapi(auth) {
-  cachedGApiLoader = cachedGApiLoader || loadGapi(auth);
+function _loadGapi(auth2) {
+  cachedGApiLoader = cachedGApiLoader || loadGapi(auth2);
   return cachedGApiLoader;
 }
-function getIframeUrl(auth) {
-  const config = auth.config;
-  _assert(config.authDomain, auth, "auth-domain-config-required");
-  const url = config.emulator ? _emulatorUrl(config, EMULATED_IFRAME_PATH) : `https://${auth.config.authDomain}/${IFRAME_PATH}`;
+function getIframeUrl(auth2) {
+  const config = auth2.config;
+  _assert(config.authDomain, auth2, "auth-domain-config-required");
+  const url = config.emulator ? _emulatorUrl(config, EMULATED_IFRAME_PATH) : `https://${auth2.config.authDomain}/${IFRAME_PATH}`;
   const params = {
     apiKey: config.apiKey,
-    appName: auth.name,
+    appName: auth2.name,
     v: SDK_VERSION
   };
-  const eid = EID_FROM_APIHOST.get(auth.config.apiHost);
+  const eid = EID_FROM_APIHOST.get(auth2.config.apiHost);
   if (eid) {
     params.eid = eid;
   }
-  const frameworks = auth._getFrameworks();
+  const frameworks = auth2._getFrameworks();
   if (frameworks.length) {
     params.fw = frameworks.join(",");
   }
   return `${url}?${querystring(params).slice(1)}`;
 }
-async function _openIframe(auth) {
-  const context = await _loadGapi(auth);
+async function _openIframe(auth2) {
+  const context = await _loadGapi(auth2);
   const gapi2 = _window().gapi;
-  _assert(gapi2, auth, "internal-error");
+  _assert(gapi2, auth2, "internal-error");
   return context.open({
     where: document.body,
-    url: getIframeUrl(auth),
+    url: getIframeUrl(auth2),
     messageHandlersFilter: gapi2.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
     attributes: IFRAME_ATTRIBUTES,
     dontclear: true
@@ -5937,7 +5943,7 @@ async function _openIframe(auth) {
     await iframe.restyle({
       setHideOnLeave: false
     });
-    const networkError = _createError(auth, "network-request-failed");
+    const networkError = _createError(auth2, "network-request-failed");
     const networkErrorTimer = _window().setTimeout(() => {
       reject(networkError);
     }, PING_TIMEOUT.get());
@@ -5950,7 +5956,7 @@ async function _openIframe(auth) {
     });
   }));
 }
-function _open(auth, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
+function _open(auth2, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
   const top = Math.max((window.screen.availHeight - height) / 2, 0).toString();
   const left = Math.max((window.screen.availWidth - width) / 2, 0).toString();
   let target = "";
@@ -5974,7 +5980,7 @@ function _open(auth, url, name4, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT)
     return new AuthPopup(null);
   }
   const newWin = window.open(url || "", target, optionsString);
-  _assert(newWin, auth, "popup-blocked");
+  _assert(newWin, auth2, "popup-blocked");
   try {
     newWin.focus();
   } catch (e3) {
@@ -5989,19 +5995,19 @@ function openAsNewWindowIOS(url, target) {
   click.initMouseEvent("click", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 1, null);
   el.dispatchEvent(click);
 }
-function _getRedirectUrl(auth, provider, authType, redirectUrl, eventId, additionalParams) {
-  _assert(auth.config.authDomain, auth, "auth-domain-config-required");
-  _assert(auth.config.apiKey, auth, "invalid-api-key");
+function _getRedirectUrl(auth2, provider, authType, redirectUrl, eventId, additionalParams) {
+  _assert(auth2.config.authDomain, auth2, "auth-domain-config-required");
+  _assert(auth2.config.apiKey, auth2, "invalid-api-key");
   const params = {
-    apiKey: auth.config.apiKey,
-    appName: auth.name,
+    apiKey: auth2.config.apiKey,
+    appName: auth2.name,
     authType,
     redirectUrl,
     v: SDK_VERSION,
     eventId
   };
   if (provider instanceof FederatedAuthProvider) {
-    provider.setDefaultLanguage(auth.languageCode);
+    provider.setDefaultLanguage(auth2.languageCode);
     params.providerId = provider.providerId || "";
     if (!isEmpty(provider.getCustomParameters())) {
       params.customParameters = JSON.stringify(provider.getCustomParameters());
@@ -6016,8 +6022,8 @@ function _getRedirectUrl(auth, provider, authType, redirectUrl, eventId, additio
       params.scopes = scopes.join(",");
     }
   }
-  if (auth.tenantId) {
-    params.tid = auth.tenantId;
+  if (auth2.tenantId) {
+    params.tid = auth2.tenantId;
   }
   const paramsDict = params;
   for (const key2 of Object.keys(paramsDict)) {
@@ -6025,7 +6031,7 @@ function _getRedirectUrl(auth, provider, authType, redirectUrl, eventId, additio
       delete paramsDict[key2];
     }
   }
-  return `${getHandlerBase(auth)}?${querystring(paramsDict).slice(1)}`;
+  return `${getHandlerBase(auth2)}?${querystring(paramsDict).slice(1)}`;
 }
 function getHandlerBase({ config }) {
   if (!config.emulator) {
@@ -6075,8 +6081,8 @@ function registerAuth(clientPlatform) {
     authInternalProvider.initialize();
   }));
   _registerComponent(new Component("auth-internal", (container) => {
-    const auth = _castAuth(container.getProvider("auth").getImmediate());
-    return ((auth2) => new AuthInterop(auth2))(auth);
+    const auth2 = _castAuth(container.getProvider("auth").getImmediate());
+    return ((auth3) => new AuthInterop(auth3))(auth2);
   }, "PRIVATE").setInstantiationMode("EXPLICIT"));
   registerVersion(name3, version3, getVersionForPlatform(clientPlatform));
   registerVersion(name3, version3, "esm2017");
@@ -6086,7 +6092,7 @@ function getAuth(app2 = getApp()) {
   if (provider.isInitialized()) {
     return provider.getImmediate();
   }
-  const auth = initializeAuth(app2, {
+  const auth2 = initializeAuth(app2, {
     popupRedirectResolver: browserPopupRedirectResolver,
     persistence: [
       indexedDBLocalPersistence,
@@ -6097,14 +6103,14 @@ function getAuth(app2 = getApp()) {
   const authTokenSyncUrl = getExperimentalSetting("authTokenSyncURL");
   if (authTokenSyncUrl) {
     const mintCookie = mintCookieFactory(authTokenSyncUrl);
-    beforeAuthStateChanged(auth, mintCookie, () => mintCookie(auth.currentUser));
-    onIdTokenChanged(auth, (user) => mintCookie(user));
+    beforeAuthStateChanged(auth2, mintCookie, () => mintCookie(auth2.currentUser));
+    onIdTokenChanged(auth2, (user) => mintCookie(user));
   }
   const authEmulatorHost = getDefaultEmulatorHost("auth");
   if (authEmulatorHost) {
-    connectAuthEmulator(auth, `http://${authEmulatorHost}`);
+    connectAuthEmulator(auth2, `http://${authEmulatorHost}`);
   }
-  return auth;
+  return auth2;
 }
 var prodErrorMap, _DEFAULT_AUTH_ERROR_FACTORY, logClient, instanceCache, Delay, FetchProvider, SERVER_ERROR_MAP, DEFAULT_API_TIMEOUT_MS, NetworkTimeout, ProactiveRefresh, UserMetadata, StsTokenManager, UserImpl, InMemoryPersistence, inMemoryPersistence, PersistenceUserManager, AuthMiddlewareQueue, AuthImpl, Subscription, AuthCredential, EmailAuthCredential, IDP_REQUEST_URI$1, OAuthCredential, VERIFY_PHONE_NUMBER_FOR_EXISTING_ERROR_MAP_, PhoneAuthCredential, ActionCodeURL, EmailAuthProvider, FederatedAuthProvider, BaseOAuthProvider, FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, UserCredentialImpl, MultiFactorError, STORAGE_AVAILABLE_KEY, BrowserPersistenceClass, _POLLING_INTERVAL_MS$1, IE10_LOCAL_STORAGE_SYNC_DELAY, BrowserLocalPersistence, browserLocalPersistence, BrowserSessionPersistence, browserSessionPersistence, Receiver, Sender, DB_NAME2, DB_VERSION2, DB_OBJECTSTORE_NAME, DB_DATA_KEYPATH, DBPromise, _POLLING_INTERVAL_MS, _TRANSACTION_RETRY_COUNT, IndexedDBLocalPersistence, indexedDBLocalPersistence, _JSLOAD_CALLBACK, NETWORK_TIMEOUT_DELAY, RECAPTCHA_VERIFIER_TYPE, PhoneAuthProvider, IdpCredential, AbstractPopupRedirectOperation, _POLL_WINDOW_CLOSE_TIMEOUT, PopupOperation, PENDING_REDIRECT_KEY, redirectOutcomeMap, RedirectAction, EVENT_DUPLICATION_CACHE_DURATION_MS, AuthEventManager, IP_ADDRESS_REGEX, HTTP_REGEX, NETWORK_TIMEOUT, cachedGApiLoader, PING_TIMEOUT, IFRAME_PATH, EMULATED_IFRAME_PATH, IFRAME_ATTRIBUTES, EID_FROM_APIHOST, BASE_POPUP_OPTIONS, DEFAULT_WIDTH, DEFAULT_HEIGHT, TARGET_BLANK, FIREFOX_EMPTY_URL, AuthPopup, WIDGET_PATH, EMULATOR_WIDGET_PATH, WEB_STORAGE_SUPPORT_KEY, BrowserPopupRedirectResolver, browserPopupRedirectResolver, MultiFactorAssertionImpl, PhoneMultiFactorAssertionImpl, PhoneMultiFactorGenerator, name3, version3, AuthInterop, DEFAULT_ID_TOKEN_MAX_AGE, authIdTokenMaxAge, lastPostedIdToken, mintCookieFactory;
 var init_index_0bb4da3b = __esm({
@@ -6212,8 +6218,8 @@ var init_index_0bb4da3b = __esm({
     };
     DEFAULT_API_TIMEOUT_MS = new Delay(3e4, 6e4);
     NetworkTimeout = class {
-      constructor(auth) {
-        this.auth = auth;
+      constructor(auth2) {
+        this.auth = auth2;
         this.timer = null;
         this.promise = new Promise((_2, reject) => {
           this.timer = setTimeout(() => {
@@ -6321,13 +6327,13 @@ var init_index_0bb4da3b = __esm({
         const expiresIn = "expiresIn" in response && typeof response.expiresIn !== "undefined" ? Number(response.expiresIn) : _tokenExpiresIn(response.idToken);
         this.updateTokensAndExpiration(response.idToken, response.refreshToken, expiresIn);
       }
-      async getToken(auth, forceRefresh = false) {
-        _assert(!this.accessToken || this.refreshToken, auth, "user-token-expired");
+      async getToken(auth2, forceRefresh = false) {
+        _assert(!this.accessToken || this.refreshToken, auth2, "user-token-expired");
         if (!forceRefresh && this.accessToken && !this.isExpired) {
           return this.accessToken;
         }
         if (this.refreshToken) {
-          await this.refresh(auth, this.refreshToken);
+          await this.refresh(auth2, this.refreshToken);
           return this.accessToken;
         }
         return null;
@@ -6335,8 +6341,8 @@ var init_index_0bb4da3b = __esm({
       clearRefreshToken() {
         this.refreshToken = null;
       }
-      async refresh(auth, oldToken) {
-        const { accessToken, refreshToken, expiresIn } = await requestStsToken(auth, oldToken);
+      async refresh(auth2, oldToken) {
+        const { accessToken, refreshToken, expiresIn } = await requestStsToken(auth2, oldToken);
         this.updateTokensAndExpiration(accessToken, refreshToken, Number(expiresIn));
       }
       updateTokensAndExpiration(accessToken, refreshToken, expiresInSec) {
@@ -6388,13 +6394,13 @@ var init_index_0bb4da3b = __esm({
     };
     UserImpl = class {
       constructor(_a) {
-        var { uid, auth, stsTokenManager } = _a, opt = __rest(_a, ["uid", "auth", "stsTokenManager"]);
+        var { uid, auth: auth2, stsTokenManager } = _a, opt = __rest(_a, ["uid", "auth", "stsTokenManager"]);
         this.providerId = "firebase";
         this.proactiveRefresh = new ProactiveRefresh(this);
         this.reloadUserInfo = null;
         this.reloadListener = null;
         this.uid = uid;
-        this.auth = auth;
+        this.auth = auth2;
         this.stsTokenManager = stsTokenManager;
         this.accessToken = stsTokenManager.accessToken;
         this.displayName = opt.displayName || null;
@@ -6439,8 +6445,8 @@ var init_index_0bb4da3b = __esm({
         this.metadata._copy(user.metadata);
         this.stsTokenManager._assign(user.stsTokenManager);
       }
-      _clone(auth) {
-        return new UserImpl(Object.assign(Object.assign({}, this), { auth, stsTokenManager: this.stsTokenManager._clone() }));
+      _clone(auth2) {
+        return new UserImpl(Object.assign(Object.assign({}, this), { auth: auth2, stsTokenManager: this.stsTokenManager._clone() }));
       }
       _onReload(callback) {
         _assert(!this.reloadListener, this.auth, "internal-error");
@@ -6504,7 +6510,7 @@ var init_index_0bb4da3b = __esm({
       get refreshToken() {
         return this.stsTokenManager.refreshToken || "";
       }
-      static _fromJSON(auth, object) {
+      static _fromJSON(auth2, object) {
         var _a, _b, _c, _d, _e2, _f, _g, _h;
         const displayName = (_a = object.displayName) !== null && _a !== void 0 ? _a : void 0;
         const email = (_b = object.email) !== null && _b !== void 0 ? _b : void 0;
@@ -6515,22 +6521,22 @@ var init_index_0bb4da3b = __esm({
         const createdAt = (_g = object.createdAt) !== null && _g !== void 0 ? _g : void 0;
         const lastLoginAt = (_h = object.lastLoginAt) !== null && _h !== void 0 ? _h : void 0;
         const { uid, emailVerified, isAnonymous, providerData, stsTokenManager: plainObjectTokenManager } = object;
-        _assert(uid && plainObjectTokenManager, auth, "internal-error");
+        _assert(uid && plainObjectTokenManager, auth2, "internal-error");
         const stsTokenManager = StsTokenManager.fromJSON(this.name, plainObjectTokenManager);
-        _assert(typeof uid === "string", auth, "internal-error");
-        assertStringOrUndefined(displayName, auth.name);
-        assertStringOrUndefined(email, auth.name);
-        _assert(typeof emailVerified === "boolean", auth, "internal-error");
-        _assert(typeof isAnonymous === "boolean", auth, "internal-error");
-        assertStringOrUndefined(phoneNumber, auth.name);
-        assertStringOrUndefined(photoURL, auth.name);
-        assertStringOrUndefined(tenantId, auth.name);
-        assertStringOrUndefined(_redirectEventId, auth.name);
-        assertStringOrUndefined(createdAt, auth.name);
-        assertStringOrUndefined(lastLoginAt, auth.name);
+        _assert(typeof uid === "string", auth2, "internal-error");
+        assertStringOrUndefined(displayName, auth2.name);
+        assertStringOrUndefined(email, auth2.name);
+        _assert(typeof emailVerified === "boolean", auth2, "internal-error");
+        _assert(typeof isAnonymous === "boolean", auth2, "internal-error");
+        assertStringOrUndefined(phoneNumber, auth2.name);
+        assertStringOrUndefined(photoURL, auth2.name);
+        assertStringOrUndefined(tenantId, auth2.name);
+        assertStringOrUndefined(_redirectEventId, auth2.name);
+        assertStringOrUndefined(createdAt, auth2.name);
+        assertStringOrUndefined(lastLoginAt, auth2.name);
         const user = new UserImpl({
           uid,
-          auth,
+          auth: auth2,
           email,
           emailVerified,
           displayName,
@@ -6550,12 +6556,12 @@ var init_index_0bb4da3b = __esm({
         }
         return user;
       }
-      static async _fromIdTokenResponse(auth, idTokenResponse, isAnonymous = false) {
+      static async _fromIdTokenResponse(auth2, idTokenResponse, isAnonymous = false) {
         const stsTokenManager = new StsTokenManager();
         stsTokenManager.updateFromServerResponse(idTokenResponse);
         const user = new UserImpl({
           uid: idTokenResponse.localId,
-          auth,
+          auth: auth2,
           stsTokenManager,
           isAnonymous
         });
@@ -6591,14 +6597,14 @@ var init_index_0bb4da3b = __esm({
     InMemoryPersistence.type = "NONE";
     inMemoryPersistence = InMemoryPersistence;
     PersistenceUserManager = class {
-      constructor(persistence, auth, userKey) {
+      constructor(persistence, auth2, userKey) {
         this.persistence = persistence;
-        this.auth = auth;
+        this.auth = auth2;
         this.userKey = userKey;
         const { config, name: name4 } = this.auth;
         this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name4);
         this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name4);
-        this.boundEventHandler = auth._onStorageEvent.bind(auth);
+        this.boundEventHandler = auth2._onStorageEvent.bind(auth2);
         this.persistence._addListener(this.fullUserKey, this.boundEventHandler);
       }
       setCurrentUser(user) {
@@ -6628,9 +6634,9 @@ var init_index_0bb4da3b = __esm({
       delete() {
         this.persistence._removeListener(this.fullUserKey, this.boundEventHandler);
       }
-      static async create(auth, persistenceHierarchy, userKey = "authUser") {
+      static async create(auth2, persistenceHierarchy, userKey = "authUser") {
         if (!persistenceHierarchy.length) {
-          return new PersistenceUserManager(_getInstance(inMemoryPersistence), auth, userKey);
+          return new PersistenceUserManager(_getInstance(inMemoryPersistence), auth2, userKey);
         }
         const availablePersistences = (await Promise.all(persistenceHierarchy.map(async (persistence) => {
           if (await persistence._isAvailable()) {
@@ -6639,13 +6645,13 @@ var init_index_0bb4da3b = __esm({
           return void 0;
         }))).filter((persistence) => persistence);
         let selectedPersistence = availablePersistences[0] || _getInstance(inMemoryPersistence);
-        const key2 = _persistenceKeyName(userKey, auth.config.apiKey, auth.name);
+        const key2 = _persistenceKeyName(userKey, auth2.config.apiKey, auth2.name);
         let userToMigrate = null;
         for (const persistence of persistenceHierarchy) {
           try {
             const blob = await persistence._get(key2);
             if (blob) {
-              const user = UserImpl._fromJSON(auth, blob);
+              const user = UserImpl._fromJSON(auth2, blob);
               if (persistence !== selectedPersistence) {
                 userToMigrate = user;
               }
@@ -6657,7 +6663,7 @@ var init_index_0bb4da3b = __esm({
         }
         const migrationHierarchy = availablePersistences.filter((p2) => p2._shouldAllowMigration);
         if (!selectedPersistence._shouldAllowMigration || !migrationHierarchy.length) {
-          return new PersistenceUserManager(selectedPersistence, auth, userKey);
+          return new PersistenceUserManager(selectedPersistence, auth2, userKey);
         }
         selectedPersistence = migrationHierarchy[0];
         if (userToMigrate) {
@@ -6671,12 +6677,12 @@ var init_index_0bb4da3b = __esm({
             }
           }
         }));
-        return new PersistenceUserManager(selectedPersistence, auth, userKey);
+        return new PersistenceUserManager(selectedPersistence, auth2, userKey);
       }
     };
     AuthMiddlewareQueue = class {
-      constructor(auth) {
-        this.auth = auth;
+      constructor(auth2) {
+        this.auth = auth2;
         this.queue = [];
       }
       pushCallback(callback, onAbort) {
@@ -7049,8 +7055,8 @@ var init_index_0bb4da3b = __esm({
       }
     };
     Subscription = class {
-      constructor(auth) {
-        this.auth = auth;
+      constructor(auth2) {
+        this.auth = auth2;
         this.observer = null;
         this.addObserver = createSubscribe((observer) => this.observer = observer);
       }
@@ -7109,44 +7115,44 @@ var init_index_0bb4da3b = __esm({
         }
         return null;
       }
-      async _getIdTokenResponse(auth) {
+      async _getIdTokenResponse(auth2) {
         switch (this.signInMethod) {
           case "password":
-            return signInWithPassword(auth, {
+            return signInWithPassword(auth2, {
               returnSecureToken: true,
               email: this._email,
               password: this._password
             });
           case "emailLink":
-            return signInWithEmailLink$1(auth, {
+            return signInWithEmailLink$1(auth2, {
               email: this._email,
               oobCode: this._password
             });
           default:
-            _fail(auth, "internal-error");
+            _fail(auth2, "internal-error");
         }
       }
-      async _linkToIdToken(auth, idToken) {
+      async _linkToIdToken(auth2, idToken) {
         switch (this.signInMethod) {
           case "password":
-            return updateEmailPassword(auth, {
+            return updateEmailPassword(auth2, {
               idToken,
               returnSecureToken: true,
               email: this._email,
               password: this._password
             });
           case "emailLink":
-            return signInWithEmailLinkForLinking(auth, {
+            return signInWithEmailLinkForLinking(auth2, {
               idToken,
               email: this._email,
               oobCode: this._password
             });
           default:
-            _fail(auth, "internal-error");
+            _fail(auth2, "internal-error");
         }
       }
-      _getReauthenticationResolver(auth) {
-        return this._getIdTokenResponse(auth);
+      _getReauthenticationResolver(auth2) {
+        return this._getIdTokenResponse(auth2);
       }
     };
     IDP_REQUEST_URI$1 = "http://localhost";
@@ -7203,19 +7209,19 @@ var init_index_0bb4da3b = __esm({
         cred.pendingToken = rest.pendingToken || null;
         return cred;
       }
-      _getIdTokenResponse(auth) {
+      _getIdTokenResponse(auth2) {
         const request = this.buildRequest();
-        return signInWithIdp(auth, request);
+        return signInWithIdp(auth2, request);
       }
-      _linkToIdToken(auth, idToken) {
+      _linkToIdToken(auth2, idToken) {
         const request = this.buildRequest();
         request.idToken = idToken;
-        return signInWithIdp(auth, request);
+        return signInWithIdp(auth2, request);
       }
-      _getReauthenticationResolver(auth) {
+      _getReauthenticationResolver(auth2) {
         const request = this.buildRequest();
         request.autoCreate = false;
-        return signInWithIdp(auth, request);
+        return signInWithIdp(auth2, request);
       }
       buildRequest() {
         const request = {
@@ -7258,14 +7264,14 @@ var init_index_0bb4da3b = __esm({
       static _fromTokenResponse(phoneNumber, temporaryProof) {
         return new PhoneAuthCredential({ phoneNumber, temporaryProof });
       }
-      _getIdTokenResponse(auth) {
-        return signInWithPhoneNumber$1(auth, this._makeVerificationRequest());
+      _getIdTokenResponse(auth2) {
+        return signInWithPhoneNumber$1(auth2, this._makeVerificationRequest());
       }
-      _linkToIdToken(auth, idToken) {
-        return linkWithPhoneNumber$1(auth, Object.assign({ idToken }, this._makeVerificationRequest()));
+      _linkToIdToken(auth2, idToken) {
+        return linkWithPhoneNumber$1(auth2, Object.assign({ idToken }, this._makeVerificationRequest()));
       }
-      _getReauthenticationResolver(auth) {
-        return verifyPhoneNumberForExisting(auth, this._makeVerificationRequest());
+      _getReauthenticationResolver(auth2) {
+        return verifyPhoneNumberForExisting(auth2, this._makeVerificationRequest());
       }
       _makeVerificationRequest() {
         const { temporaryProof, phoneNumber, verificationId, verificationCode } = this.params;
@@ -7527,8 +7533,8 @@ var init_index_0bb4da3b = __esm({
         this._tokenResponse = params._tokenResponse;
         this.operationType = params.operationType;
       }
-      static async _fromIdTokenResponse(auth, operationType, idTokenResponse, isAnonymous = false) {
-        const user = await UserImpl._fromIdTokenResponse(auth, idTokenResponse, isAnonymous);
+      static async _fromIdTokenResponse(auth2, operationType, idTokenResponse, isAnonymous = false) {
+        const user = await UserImpl._fromIdTokenResponse(auth2, idTokenResponse, isAnonymous);
         const providerId = providerIdForResponse(idTokenResponse);
         const userCred = new UserCredentialImpl({
           user,
@@ -7550,21 +7556,21 @@ var init_index_0bb4da3b = __esm({
       }
     };
     MultiFactorError = class extends FirebaseError {
-      constructor(auth, error2, operationType, user) {
+      constructor(auth2, error2, operationType, user) {
         var _a;
         super(error2.code, error2.message);
         this.operationType = operationType;
         this.user = user;
         Object.setPrototypeOf(this, MultiFactorError.prototype);
         this.customData = {
-          appName: auth.name,
-          tenantId: (_a = auth.tenantId) !== null && _a !== void 0 ? _a : void 0,
+          appName: auth2.name,
+          tenantId: (_a = auth2.tenantId) !== null && _a !== void 0 ? _a : void 0,
           _serverResponse: error2.customData._serverResponse,
           operationType
         };
       }
-      static _fromErrorAndOperation(auth, error2, operationType, user) {
-        return new MultiFactorError(auth, error2, operationType, user);
+      static _fromErrorAndOperation(auth2, error2, operationType, user) {
+        return new MultiFactorError(auth2, error2, operationType, user);
       }
     };
     STORAGE_AVAILABLE_KEY = "__sak";
@@ -8098,9 +8104,9 @@ var init_index_0bb4da3b = __esm({
     NETWORK_TIMEOUT_DELAY = new Delay(3e4, 6e4);
     RECAPTCHA_VERIFIER_TYPE = "recaptcha";
     PhoneAuthProvider = class {
-      constructor(auth) {
+      constructor(auth2) {
         this.providerId = PhoneAuthProvider.PROVIDER_ID;
-        this.auth = _castAuth(auth);
+        this.auth = _castAuth(auth2);
       }
       verifyPhoneNumber(phoneOptions, applicationVerifier) {
         return _verifyPhoneNumber(this.auth, phoneOptions, getModularInstance(applicationVerifier));
@@ -8133,14 +8139,14 @@ var init_index_0bb4da3b = __esm({
         super("custom", "custom");
         this.params = params;
       }
-      _getIdTokenResponse(auth) {
-        return signInWithIdp(auth, this._buildIdpRequest());
+      _getIdTokenResponse(auth2) {
+        return signInWithIdp(auth2, this._buildIdpRequest());
       }
-      _linkToIdToken(auth, idToken) {
-        return signInWithIdp(auth, this._buildIdpRequest(idToken));
+      _linkToIdToken(auth2, idToken) {
+        return signInWithIdp(auth2, this._buildIdpRequest(idToken));
       }
-      _getReauthenticationResolver(auth) {
-        return signInWithIdp(auth, this._buildIdpRequest());
+      _getReauthenticationResolver(auth2) {
+        return signInWithIdp(auth2, this._buildIdpRequest());
       }
       _buildIdpRequest(idToken) {
         const request = {
@@ -8159,8 +8165,8 @@ var init_index_0bb4da3b = __esm({
       }
     };
     AbstractPopupRedirectOperation = class {
-      constructor(auth, filter, resolver, user, bypassAuthState = false) {
-        this.auth = auth;
+      constructor(auth2, filter, resolver, user, bypassAuthState = false) {
+        this.auth = auth2;
         this.resolver = resolver;
         this.user = user;
         this.bypassAuthState = bypassAuthState;
@@ -8239,8 +8245,8 @@ var init_index_0bb4da3b = __esm({
     };
     _POLL_WINDOW_CLOSE_TIMEOUT = new Delay(2e3, 1e4);
     PopupOperation = class extends AbstractPopupRedirectOperation {
-      constructor(auth, filter, provider, resolver, user) {
-        super(auth, filter, resolver, user);
+      constructor(auth2, filter, provider, resolver, user) {
+        super(auth2, filter, resolver, user);
         this.provider = provider;
         this.authWindow = null;
         this.pollId = null;
@@ -8311,8 +8317,8 @@ var init_index_0bb4da3b = __esm({
     PENDING_REDIRECT_KEY = "pendingRedirect";
     redirectOutcomeMap = /* @__PURE__ */ new Map();
     RedirectAction = class extends AbstractPopupRedirectOperation {
-      constructor(auth, resolver, bypassAuthState = false) {
-        super(auth, [
+      constructor(auth2, resolver, bypassAuthState = false) {
+        super(auth2, [
           "signInViaRedirect",
           "linkViaRedirect",
           "reauthViaRedirect",
@@ -8361,8 +8367,8 @@ var init_index_0bb4da3b = __esm({
     };
     EVENT_DUPLICATION_CACHE_DURATION_MS = 10 * 60 * 1e3;
     AuthEventManager = class {
-      constructor(auth) {
-        this.auth = auth;
+      constructor(auth2) {
+        this.auth = auth2;
         this.cachedEventUids = /* @__PURE__ */ new Set();
         this.consumers = /* @__PURE__ */ new Set();
         this.queuedRedirectEvent = null;
@@ -8484,20 +8490,20 @@ var init_index_0bb4da3b = __esm({
         this._completeRedirectFn = _getRedirectResult;
         this._overrideRedirectResult = _overrideRedirectResult;
       }
-      async _openPopup(auth, provider, authType, eventId) {
+      async _openPopup(auth2, provider, authType, eventId) {
         var _a;
-        debugAssert((_a = this.eventManagers[auth._key()]) === null || _a === void 0 ? void 0 : _a.manager, "_initialize() not called before _openPopup()");
-        const url = _getRedirectUrl(auth, provider, authType, _getCurrentUrl(), eventId);
-        return _open(auth, url, _generateEventId());
+        debugAssert((_a = this.eventManagers[auth2._key()]) === null || _a === void 0 ? void 0 : _a.manager, "_initialize() not called before _openPopup()");
+        const url = _getRedirectUrl(auth2, provider, authType, _getCurrentUrl(), eventId);
+        return _open(auth2, url, _generateEventId());
       }
-      async _openRedirect(auth, provider, authType, eventId) {
-        await this._originValidation(auth);
-        _setWindowLocation(_getRedirectUrl(auth, provider, authType, _getCurrentUrl(), eventId));
+      async _openRedirect(auth2, provider, authType, eventId) {
+        await this._originValidation(auth2);
+        _setWindowLocation(_getRedirectUrl(auth2, provider, authType, _getCurrentUrl(), eventId));
         return new Promise(() => {
         });
       }
-      _initialize(auth) {
-        const key2 = auth._key();
+      _initialize(auth2) {
+        const key2 = auth2._key();
         if (this.eventManagers[key2]) {
           const { manager, promise: promise2 } = this.eventManagers[key2];
           if (manager) {
@@ -8507,40 +8513,40 @@ var init_index_0bb4da3b = __esm({
             return promise2;
           }
         }
-        const promise = this.initAndGetManager(auth);
+        const promise = this.initAndGetManager(auth2);
         this.eventManagers[key2] = { promise };
         promise.catch(() => {
           delete this.eventManagers[key2];
         });
         return promise;
       }
-      async initAndGetManager(auth) {
-        const iframe = await _openIframe(auth);
-        const manager = new AuthEventManager(auth);
+      async initAndGetManager(auth2) {
+        const iframe = await _openIframe(auth2);
+        const manager = new AuthEventManager(auth2);
         iframe.register("authEvent", (iframeEvent) => {
-          _assert(iframeEvent === null || iframeEvent === void 0 ? void 0 : iframeEvent.authEvent, auth, "invalid-auth-event");
+          _assert(iframeEvent === null || iframeEvent === void 0 ? void 0 : iframeEvent.authEvent, auth2, "invalid-auth-event");
           const handled = manager.onEvent(iframeEvent.authEvent);
           return { status: handled ? "ACK" : "ERROR" };
         }, gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER);
-        this.eventManagers[auth._key()] = { manager };
-        this.iframes[auth._key()] = iframe;
+        this.eventManagers[auth2._key()] = { manager };
+        this.iframes[auth2._key()] = iframe;
         return manager;
       }
-      _isIframeWebStorageSupported(auth, cb) {
-        const iframe = this.iframes[auth._key()];
+      _isIframeWebStorageSupported(auth2, cb) {
+        const iframe = this.iframes[auth2._key()];
         iframe.send(WEB_STORAGE_SUPPORT_KEY, { type: WEB_STORAGE_SUPPORT_KEY }, (result) => {
           var _a;
           const isSupported = (_a = result === null || result === void 0 ? void 0 : result[0]) === null || _a === void 0 ? void 0 : _a[WEB_STORAGE_SUPPORT_KEY];
           if (isSupported !== void 0) {
             cb(!!isSupported);
           }
-          _fail(auth, "internal-error");
+          _fail(auth2, "internal-error");
         }, gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER);
       }
-      _originValidation(auth) {
-        const key2 = auth._key();
+      _originValidation(auth2) {
+        const key2 = auth2._key();
         if (!this.originValidationPromises[key2]) {
-          this.originValidationPromises[key2] = _validateOrigin(auth);
+          this.originValidationPromises[key2] = _validateOrigin(auth2);
         }
         return this.originValidationPromises[key2];
       }
@@ -8553,12 +8559,12 @@ var init_index_0bb4da3b = __esm({
       constructor(factorId) {
         this.factorId = factorId;
       }
-      _process(auth, session, displayName) {
+      _process(auth2, session, displayName) {
         switch (session.type) {
           case "enroll":
-            return this._finalizeEnroll(auth, session.credential, displayName);
+            return this._finalizeEnroll(auth2, session.credential, displayName);
           case "signin":
-            return this._finalizeSignIn(auth, session.credential);
+            return this._finalizeSignIn(auth2, session.credential);
           default:
             return debugFail("unexpected MultiFactorSessionType");
         }
@@ -8572,15 +8578,15 @@ var init_index_0bb4da3b = __esm({
       static _fromCredential(credential) {
         return new PhoneMultiFactorAssertionImpl(credential);
       }
-      _finalizeEnroll(auth, idToken, displayName) {
-        return finalizeEnrollPhoneMfa(auth, {
+      _finalizeEnroll(auth2, idToken, displayName) {
+        return finalizeEnrollPhoneMfa(auth2, {
           idToken,
           displayName,
           phoneVerificationInfo: this.credential._makeVerificationRequest()
         });
       }
-      _finalizeSignIn(auth, mfaPendingCredential) {
-        return finalizeSignInPhoneMfa(auth, {
+      _finalizeSignIn(auth2, mfaPendingCredential) {
+        return finalizeSignInPhoneMfa(auth2, {
           mfaPendingCredential,
           phoneVerificationInfo: this.credential._makeVerificationRequest()
         });
@@ -8597,8 +8603,8 @@ var init_index_0bb4da3b = __esm({
     name3 = "@firebase/auth";
     version3 = "0.20.11";
     AuthInterop = class {
-      constructor(auth) {
-        this.auth = auth;
+      constructor(auth2) {
+        this.auth = auth2;
         this.internalListeners = /* @__PURE__ */ new Map();
       }
       getUid() {
@@ -8693,7 +8699,12 @@ var init_index_esm3 = __esm({
 });
 
 // .svelte-kit/output/server/chunks/firebase.js
-var firebaseConfig, app;
+var firebase_exports = {};
+__export(firebase_exports, {
+  app: () => app,
+  auth: () => auth
+});
+var firebaseConfig, app, auth;
 var init_firebase = __esm({
   ".svelte-kit/output/server/chunks/firebase.js"() {
     init_public();
@@ -8708,7 +8719,7 @@ var init_firebase = __esm({
       appId: PUBLIC_FIREBASE_appId
     };
     app = initializeApp(firebaseConfig);
-    getAuth(app);
+    auth = getAuth(app);
   }
 });
 
@@ -12472,7 +12483,6 @@ var init_LoginCard = __esm({
     init_chunks();
     init_firebase();
     init_store();
-    init_index_esm3();
     goto = guard("goto");
     IconTwitter = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `
@@ -12604,7 +12614,8 @@ ${``}`;
           redirectLogic(redirectUrlFromLS);
         } else {
           const { getFirestore, collection, getDocs } = await Promise.resolve().then(() => (init_index_esm4(), index_esm_exports));
-          const db = getFirestore(app);
+          const { app: app2 } = await Promise.resolve().then(() => (init_firebase(), firebase_exports));
+          const db = getFirestore(app2);
           const querySnapshot = await getDocs(collection(db, "email"));
           const querySnapshotSize = querySnapshot.size;
           const docs = querySnapshot.docs;
@@ -12771,15 +12782,51 @@ function spring(value, opts = {}) {
   };
   return spring2;
 }
-var getStores, page, TitlesHead, Modal, size$12, IconSun, size2, IconMoon, css2, LightDarkMode, Navitem, Navbar, Footer, verticalThreshold, verticalThresholdMobile, Layout;
+var Modal, size$12, IconSun, size2, IconMoon, css2, LightDarkMode, getStores, page, Navitem, Navbar, Footer, verticalThreshold, verticalThresholdMobile, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
-    init_store();
     init_Dropzone();
     init_LoginCard();
     init_utils();
+    init_store();
     init_index2();
+    Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { showModal = false } = $$props;
+      let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
+      if ($$props.showModal === void 0 && $$bindings.showModal && showModal !== void 0)
+        $$bindings.showModal(showModal);
+      if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
+        $$bindings.bgTint(bgTint);
+      return `
+
+<button class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}">${slots.default ? slots.default({}) : ``}</button>
+
+`;
+    });
+    size$12 = 24;
+    IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `<svg aria-label="${"Sun"}" id="${"lightIcon"}"${add_attribute("height", size$12, 0)}${add_attribute("width", size$12, 0)} viewBox="${"0 0 " + escape(8 * size$12, true) + " " + escape(8 * size$12, true)}" class="${"mx-3"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>`;
+    });
+    size2 = 24;
+    IconMoon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `
+
+
+<svg aria-label="${"Moon"}" id="${"darkIcon"}"${add_attribute("height", size2, 0)}${add_attribute("width", size2, 0)} class="${"mx-3"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`;
+    });
+    css2 = {
+      code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}",
+      map: null
+    };
+    LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isDarkMode, $$unsubscribe_isDarkMode;
+      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
+      $$result.css.add(css2);
+      $$unsubscribe_isDarkMode();
+      return `
+  <div><button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button></div>`;
+    });
     getStores = () => {
       const stores = getContext("__svelte__");
       const readonly_stores = {
@@ -12817,76 +12864,6 @@ var init_layout_svelte = __esm({
         return store.subscribe(fn2);
       }
     };
-    TitlesHead = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $page, $$unsubscribe_page;
-      let $routes, $$unsubscribe_routes;
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
-      $$unsubscribe_page();
-      $$unsubscribe_routes();
-      return `
-
-
-
-${$page.status == 200 ? (() => {
-        let slashlessRoute = $page.route.id.slice(1);
-        return `
-
-  ${slashlessRoute == "" ? `<title>${escape($routes.home.title)}</title>
-    <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
-    <meta og:url="${"https://thinksolve.io/"}">` : `${Object.keys($routes).includes(slashlessRoute) ? `<title>${escape($routes[slashlessRoute].title)}</title>` : ``}`}`;
-      })() : `${$page.status == 404 ? `<title>Oops \u{1F4A9}</title>` : ``}`}
-
-
-
-
-
-
-
-
-
-
-
-
-
-`;
-    });
-    Modal = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { showModal = false } = $$props;
-      let { bgTint = "bg-[rgba(0,0,0,0.4)]" } = $$props;
-      if ($$props.showModal === void 0 && $$bindings.showModal && showModal !== void 0)
-        $$bindings.showModal(showModal);
-      if ($$props.bgTint === void 0 && $$bindings.bgTint && bgTint !== void 0)
-        $$bindings.bgTint(bgTint);
-      return `
-
-<button class="${"fixed w-full h-full grid place-items-center z-50 md:py-4 py-1 md:px-[7%] " + escape(showModal ? `${bgTint} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}">${slots.default ? slots.default({}) : ``}</button>
-
-`;
-    });
-    size$12 = 24;
-    IconSun = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<svg aria-label="${"Sun"}" id="${"lightIcon"}"${add_attribute("height", size$12, 0)}${add_attribute("width", size$12, 0)} viewBox="${"0 0 " + escape(8 * size$12, true) + " " + escape(8 * size$12, true)}" class="${"mx-3"}"><path fill="${"rgb(247,247,247)"}" d="${"M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"}"></path></svg>`;
-    });
-    size2 = 24;
-    IconMoon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-
-
-<svg aria-label="${"Moon"}" id="${"darkIcon"}"${add_attribute("height", size2, 0)}${add_attribute("width", size2, 0)} class="${"mx-3"}"><path d="${"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"}"></path></svg>`;
-    });
-    css2 = {
-      code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}",
-      map: null
-    };
-    LightDarkMode = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isDarkMode, $$unsubscribe_isDarkMode;
-      $$unsubscribe_isDarkMode = subscribe(isDarkMode, (value) => $isDarkMode = value);
-      $$result.css.add(css2);
-      $$unsubscribe_isDarkMode();
-      return `
-  <div><button>${$isDarkMode ? `${validate_component(IconSun, "IconSun").$$render($$result, {}, {}, {})}` : `${validate_component(IconMoon, "IconMoon").$$render($$result, {}, {}, {})}`}</button></div>`;
-    });
     Navitem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$unsubscribe_showLoginModal;
       let $$unsubscribe_showHomeworkModal;
@@ -12966,7 +12943,7 @@ ${$page.status == 200 ? (() => {
         }
         bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${$isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"}`;
         $$rendered = `
-<logo-and-navbar class="${"opacity-0 " + escape(fadeInToFullOpacity, true) + " flex items-center justify-center md:justify-between w-full"}"><button class="${"md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
+<logo-and-navbar class="${"opacity-0 " + escape(fadeInToFullOpacity, true) + " flex items-center justify-center gap-x-32 md:justify-between w-full"}"><button class="${"md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"}">THINKSOLVE
     </button>
 
   
@@ -12975,8 +12952,11 @@ ${$page.status == 200 ? (() => {
     <li${add_attribute("class", hideIfNotIOS, 0)}><button class="${"font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg " + escape($elementColor, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded"}">App
       </button></li>
 
-    ${each(Object.keys($routes).slice(0, 5), (KEY) => {
-          return `<li${add_attribute("class", `${KEY == "home" && hideIfRunningStandalone}`, 0)}${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
+    
+    ${each(Object.keys($routes).slice(1, 5), (KEY) => {
+          return `
+      
+      <li${add_attribute("style", KEY == "login" && $isLoggedIn && `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`, 0)}>${validate_component(Navitem, "Navitem").$$render(
             $$result,
             {
               href: $routes[KEY].href,
@@ -13021,8 +13001,12 @@ ${$page.status == 200 ? (() => {
       return $$rendered;
     });
     Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<div class="${"flex justify-center items-center "}"><span class="${"my-20 text-xs text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">Need help? Contact thinksolve.io[at]gmail.com
-  </span></div>`;
+      let { contactLinkClicked = false } = $$props;
+      if ($$props.contactLinkClicked === void 0 && $$bindings.contactLinkClicked && contactLinkClicked !== void 0)
+        $$bindings.contactLinkClicked(contactLinkClicked);
+      return `<div class="${"text-sm mt-20 " + escape("mb-10", true) + " flex justify-center items-center flex-row gap-x-1"}"><span class="${"text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"}">${`<a data-sveltekit-preload-data href="${"/faq"}">faq</a>
+      \xA0 | \xA0`}
+    <span id="${"contactLinkClicked"}">contact </span></span></div>`;
     });
     verticalThreshold = 800;
     verticalThresholdMobile = 400;
@@ -13030,16 +13014,21 @@ ${$page.status == 200 ? (() => {
       let $instDeltaY, $$unsubscribe_instDeltaY;
       let $scrollY, $$unsubscribe_scrollY;
       let $lessThan768, $$unsubscribe_lessThan768;
+      let $page, $$unsubscribe_page;
+      let $routes, $$unsubscribe_routes;
       let $navAppClicked, $$unsubscribe_navAppClicked;
       let $showLoginModal, $$unsubscribe_showLoginModal;
       let $showHomeworkModal, $$unsubscribe_showHomeworkModal;
       $$unsubscribe_instDeltaY = subscribe(instDeltaY, (value) => $instDeltaY = value);
       $$unsubscribe_scrollY = subscribe(scrollY, (value) => $scrollY = value);
       $$unsubscribe_lessThan768 = subscribe(lessThan768, (value) => $lessThan768 = value);
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_routes = subscribe(routes, (value) => $routes = value);
       $$unsubscribe_navAppClicked = subscribe(navAppClicked, (value) => $navAppClicked = value);
       $$unsubscribe_showLoginModal = subscribe(showLoginModal, (value) => $showLoginModal = value);
       $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => $showHomeworkModal = value);
       let jankytown;
+      let contactLinkClicked = false;
       let $$settled;
       let $$rendered;
       do {
@@ -13068,12 +13057,41 @@ ${$page.status == 200 ? (() => {
               jankytown = "bottom-0 backdrop-blur-3xl duration-700";
           }
         }
-        $$rendered = `${$$result.head += `<!-- HEAD_svelte-ia2qsi_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${validate_component(TitlesHead, "TitlesHead").$$render($$result, {}, {}, {})}<!-- HEAD_svelte-ia2qsi_END -->`, ""}
+        $$rendered = `${$$result.head += `<!-- HEAD_svelte-1pgxeq7_START --><link rel="${"manifest"}" href="${"/manifest.json"}">${$page.status == 200 ? (() => {
+          let slashlessRoute = $page.route.id.slice(1);
+          return `
+
+    ${slashlessRoute == "" ? `${$$result.title = `<title>${escape($routes.home.title)}</title>`, ""}
+      <meta name="${"description"}" content="${"Math and Physics Tutoring for the Modern Age."}">
+      <meta og:url="${"https://thinksolve.io/"}">
+      
+      ` : `${each(Object.keys($routes).slice(1), (key2) => {
+            let title = $routes[key2].title;
+            return `
+
+        ${slashlessRoute.startsWith(key2) ? `${$$result.title = `<title>${escape(title)}</title>`, ""}` : ``}`;
+          })}`}`;
+        })() : `${$page.status == 404 ? `${$$result.title = `<title>Oops \u{1F4A9}</title>`, ""}` : ``}`}<!-- HEAD_svelte-1pgxeq7_END -->`, ""}
 
 
 
 
-<main>
+<main>${validate_component(Modal, "Modal").$$render(
+          $$result,
+          {
+            showModal: contactLinkClicked,
+            bgTint: "backdrop-blur-xl "
+          },
+          {},
+          {
+            default: () => {
+              return `<ul class="${"text-center flex flex-col gap-y-2 font-Poppins sm:text-5xl text-3xl text-transparent bg-clip-text bg-gradient-to-r from-teal-500 via-rose-600 to-pink-600 "}"><li>Email:</li>
+        <li>thinksolve.io@gmail.com</li></ul>`;
+            }
+          }
+        )}
+
+  
   ${getOS() == "iOS" ? `
 
     ${validate_component(Modal, "Modal").$$render(
@@ -13094,8 +13112,8 @@ ${$page.status == 200 ? (() => {
             Open Safari
           </li>
           <li class="${"text-xl font-bold"}"><div class="${"text-6xl"}">2.</div>
-            Click share icon (box-and-arrow at bottom of the screen)
-          </li>
+            <div class="${"flex flex-row justify-center items-center gap-x-2 pt-2"}"><span>Click share icon</span>
+              <img class="${"w-7 h-7 -translate-y-1 invert"}" src="${"/safari-share-icon.png"}" alt="${"safari share icon"}"></div></li>
 
           <li class="${"text-xl font-bold text-black"}"><div class="${"text-6xl "}">3.</div>
             Click &#39;Add to Home Screen&#39; \u{1F680}
@@ -13158,7 +13176,17 @@ ${$page.status == 200 ? (() => {
   
 
   <div class="${"px-[7%] pt-32 md:block"}">${slots.default ? slots.default({}) : ``}
-    ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}</div>
+    ${validate_component(Footer, "Footer").$$render(
+          $$result,
+          { contactLinkClicked },
+          {
+            contactLinkClicked: ($$value) => {
+              contactLinkClicked = $$value;
+              $$settled = false;
+            }
+          },
+          {}
+        )}</div>
 
   
   </main>`;
@@ -13166,6 +13194,8 @@ ${$page.status == 200 ? (() => {
       $$unsubscribe_instDeltaY();
       $$unsubscribe_scrollY();
       $$unsubscribe_lessThan768();
+      $$unsubscribe_page();
+      $$unsubscribe_routes();
       $$unsubscribe_navAppClicked();
       $$unsubscribe_showLoginModal();
       $$unsubscribe_showHomeworkModal();
@@ -13191,10 +13221,10 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-4d0f927d.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-4d0f927d.js", "_app/immutable/chunks/index-524831df.js", "_app/immutable/chunks/index-03ced1f9.js", "_app/immutable/chunks/singletons-2ad11f3f.js", "_app/immutable/chunks/index-a7779f4f.js", "_app/immutable/chunks/store-dd53313b.js", "_app/immutable/chunks/Dropzone-267bdfe1.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-d3aa955d.js", "_app/immutable/chunks/utils-f8629961.js", "_app/immutable/chunks/LoginCard-57a9ce58.js", "_app/immutable/chunks/firebase-ca849276.js", "_app/immutable/chunks/navigation-df1147ba.js", "_app/immutable/modules/pages/_layout.js-d1ec873b.js", "_app/immutable/chunks/_layout-86260db2.js"];
-    stylesheets = ["_app/immutable/assets/_layout-f56b309e.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
-    fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff"];
+    file = "_app/immutable/components/pages/_layout.svelte-0905a611.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-0905a611.js", "_app/immutable/chunks/index-688ca27e.js", "_app/immutable/chunks/index-bc1dfd37.js", "_app/immutable/chunks/Dropzone-c86da3f1.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/InView-0d386055.js", "_app/immutable/chunks/utils-1732f5f3.js", "_app/immutable/chunks/store-f125ca13.js", "_app/immutable/chunks/index-9324b184.js", "_app/immutable/chunks/LoginCard-d73b20be.js", "_app/immutable/chunks/firebase-3d254dab.js", "_app/immutable/chunks/navigation-1f7860eb.js", "_app/immutable/chunks/singletons-eab4def7.js", "_app/immutable/modules/pages/_layout.js-d1ec873b.js", "_app/immutable/chunks/_layout-86260db2.js"];
+    stylesheets = ["_app/immutable/assets/_layout-86d15dd8.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff", "_app/immutable/assets/poppins-v20-latin-700-9338e65f.woff2", "_app/immutable/assets/poppins-v20-latin-700-da36c916.woff"];
   }
 });
 
@@ -13232,8 +13262,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-fee4ef7e.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-fee4ef7e.js", "_app/immutable/chunks/index-524831df.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-823144e9.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-823144e9.js", "_app/immutable/chunks/index-688ca27e.js"];
     stylesheets2 = [];
     fonts2 = [];
   }
@@ -26995,8 +27025,8 @@ var init__3 = __esm({
     init_page();
     index3 = 11;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/physics/_page.svelte-5093b26e.js";
-    imports3 = ["_app/immutable/components/pages/physics/_page.svelte-5093b26e.js", "_app/immutable/chunks/index-524831df.js", "_app/immutable/chunks/Kajax-23f3473a.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-dd53313b.js", "_app/immutable/chunks/index-a7779f4f.js", "_app/immutable/modules/pages/physics/_page.js-134697de.js", "_app/immutable/chunks/_page-d949538d.js"];
+    file3 = "_app/immutable/components/pages/physics/_page.svelte-0047fad3.js";
+    imports3 = ["_app/immutable/components/pages/physics/_page.svelte-0047fad3.js", "_app/immutable/chunks/index-688ca27e.js", "_app/immutable/chunks/Kajax-7f84c8ad.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-f125ca13.js", "_app/immutable/chunks/index-9324b184.js", "_app/immutable/modules/pages/physics/_page.js-134697de.js", "_app/immutable/chunks/_page-d949538d.js"];
     stylesheets3 = ["_app/immutable/assets/_page-fcf51fa8.css"];
     fonts3 = [];
   }
@@ -29801,7 +29831,7 @@ var Server = class {
       app_template,
       app_template_contains_nonce: false,
       error_template,
-      version: "1670717715018"
+      version: "1670891787488"
     };
   }
   async init({ env }) {
@@ -29833,10 +29863,10 @@ var Server = class {
 var manifest = {
   appDir: "_app",
   appPath: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "star.webp", "service-worker.js"]),
+  assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "safari-share-icon.png", "star.webp", "service-worker.js"]),
   mimeTypes: { ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-8e4966c1.js", "imports": ["_app/immutable/start-8e4966c1.js", "_app/immutable/chunks/index-524831df.js", "_app/immutable/chunks/singletons-2ad11f3f.js", "_app/immutable/chunks/index-a7779f4f.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-c5eedbaf.js", "imports": ["_app/immutable/start-c5eedbaf.js", "_app/immutable/chunks/index-688ca27e.js", "_app/immutable/chunks/singletons-eab4def7.js", "_app/immutable/chunks/index-9324b184.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

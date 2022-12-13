@@ -1,5 +1,5 @@
 import { c as create_ssr_component } from "../../../chunks/index.js";
-import { a as app } from "../../../chunks/firebase.js";
+import { app } from "../../../chunks/firebase.js";
 import { getFunctions } from "firebase/functions";
 const _page_svelte_svelte_type_style_lang = "";
 const css = {

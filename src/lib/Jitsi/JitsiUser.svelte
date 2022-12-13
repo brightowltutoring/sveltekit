@@ -100,6 +100,10 @@
   });
 </script>
 
+<!-- <svelte:head>
+  <script src="https://meet.jit.si/external_api.js"></script>
+</svelte:head> -->
+
 <main>
   <div class="relative md:-translate-y-10 -translate-y-36">
     <div id="meet" class="w-full h-[82vh] md:h-[670px]" />

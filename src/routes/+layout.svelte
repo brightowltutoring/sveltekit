@@ -102,18 +102,16 @@
 
 <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
 
+<!-- bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"} -->
 <main>
-  <Modal
-    showModal={contactLinkClicked}
-    bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"}
-  >
+  <Modal showModal={contactLinkClicked} bgTint={"backdrop-blur-xl "}>
     {#key !contactLinkClicked}
       <ul
         in:scale={{
           duration: 1500,
           easing: elasticOut,
         }}
-        class="text-center flex flex-col gap-y-2 font-Poppins sm:text-4xl text-3xl "
+        class="text-center flex flex-col gap-y-2 font-Poppins sm:text-5xl text-3xl text-transparent bg-clip-text bg-gradient-to-r  from-teal-500 via-rose-600 to-pink-600  "
       >
         <li>Email:</li>
         <li>thinksolve.io@gmail.com</li>

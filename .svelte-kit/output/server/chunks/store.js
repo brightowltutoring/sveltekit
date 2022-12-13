@@ -112,6 +112,12 @@ const routes = writable({
     isCurrent: false,
     icon: IconClassroom
   },
+  faq: {
+    name: "FAQ",
+    href: "/faq",
+    title: "FAQ \u{1F64B}\u200D\u2640\uFE0F",
+    isCurrent: false
+  },
   stripe: {
     name: "Stripe",
     href: "/stripe",

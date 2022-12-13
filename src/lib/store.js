@@ -152,6 +152,13 @@ export const routes = writable({
     isCurrent: false,
     icon: IconClassroom,
   },
+  // classroomA: {
+  //   name: "ClassroomA",
+  //   href: "/classroomA",
+  //   title: "ClassroomA 🍎",
+  //   isCurrent: false,
+  //   icon: IconClassroom,
+  // },
   faq: {
     name: "FAQ",
     href: "/faq",

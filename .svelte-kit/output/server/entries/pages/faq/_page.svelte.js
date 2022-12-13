@@ -1,107 +1,109 @@
-import { c as create_ssr_component } from "../../../chunks/index.js";
+import { c as create_ssr_component, a as subscribe } from "../../../chunks/index.js";
+import { s as showLoginModal, a as showHomeworkModal } from "../../../chunks/store.js";
 const _page_svelte_svelte_type_style_lang = "";
 const css = {
-  code: "details.svelte-63m8nq summary.svelte-63m8nq::-webkit-details-marker{display:none}.mydetails.svelte-63m8nq.svelte-63m8nq{border:0px solid #eee;border-radius:5%;padding:0.5em 0.5em 0}.mydetails.svelte-63m8nq.svelte-63m8nq:hover{background:#ddd}.mysummary.svelte-63m8nq.svelte-63m8nq{font-weight:bold;margin:-0.5em -0.5em 0;padding:0.5em}.mydetails[open].svelte-63m8nq.svelte-63m8nq{padding:0.5em;background:rgb(230, 255, 249)}.mydetails[open].svelte-63m8nq summary.svelte-63m8nq{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:rgb(89, 208, 174);outline:none}.mydetails.svelte-63m8nq p.svelte-63m8nq{padding:4px;margin:0}details.svelte-63m8nq.svelte-63m8nq{font-family:Nunito, sans-serif}",
+  code: ".faqContainer.svelte-1yyztah.svelte-1yyztah{display:grid;place-content:center}:root{--light-green:rgb(230, 255, 249);--green:rgb(89, 208, 174);--red:rgb(230, 59, 96);--light-red:rgb(243, 186, 198);--borderRadius:15px}@keyframes svelte-1yyztah-sweep{0%{opacity:0;margin-top:-15px}100%{opacity:1;margin-top:0px}}details.svelte-1yyztah>summary.svelte-1yyztah{list-style:none}details.svelte-1yyztah>summary.svelte-1yyztah::-webkit-details-marker{display:none}details.svelte-1yyztah.svelte-1yyztah{font-family:Nunito, sans-serif;border:0px solid #eee;border-radius:var(--borderRadius);padding:0.5em 0.5em 0;font-size:18px}@media screen and (min-width: 768px){details.svelte-1yyztah.svelte-1yyztah{width:60vw}}@media screen and (max-width: 768px){details.svelte-1yyztah.svelte-1yyztah{width:80vw}}summary.svelte-1yyztah.svelte-1yyztah{margin:-0.5em -0.5em 0;padding:0.5em;border-radius:var(--borderRadius) var(--borderRadius) 0 0}details.svelte-1yyztah.svelte-1yyztah:hover{background:#ddd}body.dark-mode details.svelte-1yyztah.svelte-1yyztah:hover{background:#211f51}details.svelte-1yyztah p.svelte-1yyztah{padding:10px}details.svelte-1yyztah a.svelte-1yyztah{color:var(--red)}details.svelte-1yyztah a.svelte-1yyztah:hover{color:rgb(46, 126, 253)}details[open].svelte-1yyztah.svelte-1yyztah{padding:0.5em;background:var(--light-green);animation:svelte-1yyztah-sweep 0.25s ease-in-out;margin-bottom:10px}body.dark-mode details[open].svelte-1yyztah.svelte-1yyztah{background:var(--light-green);color:black}details[open].svelte-1yyztah summary.svelte-1yyztah{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:var(--green);outline:none}details[open].svelte-1yyztah summary.highlight.svelte-1yyztah{background:var(--red);color:white;transition:0.2s ease-in-out}details[open].svelte-1yyztah.svelte-1yyztah:has(summary.highlight){background:var(--light-red);transition:0.2s ease-in-out}",
   map: null
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$unsubscribe_showLoginModal;
+  let $$unsubscribe_showHomeworkModal;
+  $$unsubscribe_showLoginModal = subscribe(showLoginModal, (value) => value);
+  $$unsubscribe_showHomeworkModal = subscribe(showHomeworkModal, (value) => value);
   $$result.css.add(css);
-  return `${$$result.head += `<!-- HEAD_svelte-1bm9itx_START --><link href="${"https://assets.calendly.com/assets/external/widget.css"}" rel="${"stylesheet"}"><script src="${"https://assets.calendly.com/assets/external/widget.js"}" type="${"text/javascript"}"><\/script><!-- HEAD_svelte-1bm9itx_END -->`, ""}
+  $$unsubscribe_showLoginModal();
+  $$unsubscribe_showHomeworkModal();
+  return `
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q1</b> Can you briefly state your services?
-  </summary>
 
-  <p class="${"svelte-63m8nq"}">In terms of personalized service: we offer 1-on-1 tutoring, mock test
-    sessions with solution keys, video links, and session notes; see <a>/plans</a>
-    for details.
-    <br><br>
-    We are also in the process of creating a
-    <a href="${"https://www.brightowltutoring.com/login"}">login-based</a>
-    service; users will have access to <i>interactive</i> quizzes &amp; exam-question
-    video solutions.
-  </p>
-  <p style="${"font-size:12pt"}" class="${"svelte-63m8nq"}"><b>Note</b>: we <i>only</i> provide online/digital solutions. We are so
-    confident in our workflow that we offer
-    <a>a free demo session</a> of up to 20 minutes to show it off.
-  </p></details>
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q2</b> How do I pay? </summary>
-  <p class="${"svelte-63m8nq"}">On <a>/plans</a>
-    build out a custom plan and we send you an invoice based on your selections.<br><br>
-    Alternatively you can toggle &quot;off&quot; to choose amongst pay-now options.
-  </p>
 
-  <p style="${"font-size:13pt; color:#777;"}" class="${"svelte-63m8nq"}">We use STRIPE to securely process all transactions \u2014 in use by companies
-    such as Google, Amazon and Shopify.
-  </p></details>
 
-<details open class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q3</b> How do I book multiple sessions at once?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Book a session on our <a>plans</a> page, and click &quot;<a>\u279C Schedule another event</a>&quot; on the confirmation page.
-    <i>If booked already, we can also book the remaining dates for you at the end
-      of the live session</i>.
-  </p></details>
+<div class="${"grid place-content-center py-16"}">
+  <span class="${"font-Poppins text-center text-5xl font-bold "}">FAQ
+  </span></div>
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q4</b> How do I share homework? </summary>
-  <p class="${"svelte-63m8nq"}">On your mobile device: go to <a>/homework</a> &gt; click Upload &gt; snap a
-    picture &gt; Submit. <i>We convert each image into clean formatted text.</i></p>
-  <p class="${"svelte-63m8nq"}">Similar steps for PC. <span style="${"font-size:12pt; font-style:italic"}">Accepted file extensions: .png, .jpg, .jpeg, .heic, .pdf, .txt, .rtf,
-      .doc, .docx, .odt, .csv, .tex, .xls, .xlsx, .ods, .ppt, .pptx.</span></p>
+<div class="${"faqContainer svelte-1yyztah"}"><details class="${"svelte-1yyztah"}"><summary class="${"highlight svelte-1yyztah"}">How are we screen-sharing? Zoom? </summary>
 
-  <p class="${"svelte-63m8nq"}"><span style="${"font-size:12pt; font-style:italic"}">For last second submissions, you may also point your homework at the
-      webcam during the live session.</span></p></details>
+    Nope, our sessions happen on-site
+    <a data-sveltekit-preload-data href="${"/classroom"}" class="${"svelte-1yyztah"}">in the classroom</a>.
+  </details>
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q5</b> Which screen-sharing software are we using? Zoom?
-  </summary>
-  <p class="${"svelte-63m8nq"}"><a href="${"https://zoom.us/download"}">Zoom</a>,
-    <a href="${"https://www.teamviewer.com/en-us/meeting/"}">TeamViewer Meeting</a>,
-    or
-    <a href="${"https://www.microsoft.com/en-ca/microsoft-teams/group-chat-software"}">Microsoft Teams</a>
-    \u2014 these provide the smoothest screensharing experience. Click the links to download
-    or visit <a>/screenshare</a> for more info.
+  <details class="${"svelte-1yyztah"}"><summary class="${"svelte-1yyztah"}">Is it possible to access all my session content in one place?
+    </summary>
+    <p class="${"svelte-1yyztah"}">Sure can! Contact us directly to set up a personalized page, or check the
+      option when booking! You will be <button class="${"text-rose-500"}">redirected to your personal page upon logging in
+      </button>.
+    </p></details>
 
-    <br> <b>Note:</b> No sign-up required to use TeamViewer Meeting; we use this
-    exclusively for group sessions.
-  </p></details>
+  <details class="${"svelte-1yyztah"}"><summary class="${"svelte-1yyztah"}">How do I share homework? </summary>
+    <p class="${"svelte-1yyztah"}">Click on &quot;<button class="${"text-rose-500"}">Homework</button>&quot; in the navbar and submit screenshots/ PDFs/ etc.
+    </p>
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q6</b> What subjects do you cover? </summary>
+    <p class="${"svelte-1yyztah"}">For added convenience in future submissions, consider downloading the app
+      on your mobile device. Using Safari on iOS devices:
+    </p>
+    <span class="${"flex flex-col justify-center items-center gap-x-2 "}"><span class="${"flex flex-row gap-x-1"}">Click share icon
+        <img class="${"w-5 h-5 "}" src="${"/safari-share-icon.png"}" alt="${"safari share icon"}"></span>
 
-  <p class="${"svelte-63m8nq"}"><b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University <br><br>
+      <span>Click &quot;Add to Homescreen&quot;</span></span>
+    <p class="${"svelte-1yyztah"}">Using Chrome on Android devices, you should be prompted automatically
+      (usually at the bottom of the screen).
+    </p></details>
 
-    <b>MATHEMATICS</b>\xA0 Calculus \u2022 Trigonometry \u2022 Advanced Functions \u2022
-    Complex Numbers \u2022 Linear Algebra \u2022 Probability and Statistics \xA0\xA0<b>PHYSICS</b>
-    \xA0\xA0 Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp;
-    Magnetism \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special
-    Relativity \xA0\xA0<b>SPANISH</b> \xA0\xA0 Pronunciation \u2022 Grammatical
-    Rules \u2022 Practical Examples
-  </p></details>
+  <details class="${"svelte-1yyztah"}"><summary class="${"svelte-1yyztah"}">How do I pay? </summary>
+    <p class="${"svelte-1yyztah"}">On the <a data-sveltekit-preload-data href="${"/plans"}" class="${"svelte-1yyztah"}">plans page</a> you can
+      either &quot;pay now&quot; or &quot;pay later&quot;, per service.
+    </p>
+    <p class="${"svelte-1yyztah"}">After booking details have been confirmed the &quot;pay now&quot; option will
+      redirect you to a checkout page. With &quot;pay later&quot; we send a custom STRIPE
+      invoice to the preferred email. In both cases you will have the option to
+      pay with credit card, Apple Pay, or Google Pay!
+    </p></details>
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q7</b> How are mock tests/ Mockowl sessions administered?
-  </summary>
-  <p class="${"svelte-63m8nq"}">The student attends a live session where we implement Google Forms. Answer
-    keys are released within an hour of completion. <i>Digitally-handwritten solution key available as a premium.</i> <br><br>
+  <details class="${"svelte-1yyztah"}"><summary class="${"svelte-1yyztah"}">How do I book multiple sessions at once? </summary>
 
-    We are soon implementing a content-based subscription plan; see our sample
-    quiz app on the <a href="${"https://www.brightowltutoring.com/"}">home page</a> for
-    a preview.
-  </p></details>
+    <p class="${"svelte-1yyztah"}">We will book the remaining times for you at the beginning / end of the
+      scheduled session.
+    </p></details>
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q8</b> I am looking to refer a friend, do you offer any discounts based on
-    referrals?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Great question! We absolutely welcome this initiative and are pleased to
-    reward it; please visit our <a>/referrals</a> page. <br><br>
+  <details class="${"svelte-1yyztah"}"><summary class="${"svelte-1yyztah"}">What subjects do you cover? </summary>
 
-    Alternatively <i>if</i> filling out an invoice-based <a>plan</a>, you will
-    have a chance to input a referral.
-  </p></details>
+    <p class="${"svelte-1yyztah"}"><span class="${"font-Poppins font-bold"}">MATHEMATICS</span>\xA0 Calculus \u2022
+      Trigonometry \u2022 Advanced Functions \u2022 Complex Numbers \u2022 Linear Algebra \u2022
+      Probability and Statistics \xA0\xA0<span class="${"font-Poppins font-bold"}">PHYSICS</span>
+      \xA0Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp; Magnetism
+      \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special Relativity
+      \xA0\xA0<span class="${"font-Poppins font-bold"}">SPANISH</span>
+      \xA0 Pronunciation \u2022 Grammatical Rules \u2022 Practical Examples
 
-<details class="${"mydetails svelte-63m8nq"}"><summary class="${"mysummary svelte-63m8nq"}"><b>Q9 </b>Is it possible to access all my session content in one place?
-  </summary>
-  <p class="${"svelte-63m8nq"}">Sure can! Secure a unique URL for $5/month while booking or <a>contact us directly</a>
-    (<a href="${"https://www.brightowltutoring.com/url"}">\u{1F4AB} sample URL</a>).
-  </p>
-</details>`;
+      <br><br>
+      <b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University
+    </p></details>
+
+  <details class="${"svelte-1yyztah"}"><summary class="${"svelte-1yyztah"}">How are mock tests administered? </summary>
+    <p class="${"svelte-1yyztah"}">After booking a &quot;Mock&quot; session on <a data-sveltekit-preload-data href="${"/plans"}" class="${"svelte-1yyztah"}">plans</a>, the student attends a live session where a prepared examination \u2014 in
+      the form of a Google Forms link \u2014 will be shared at the beginning of the
+      session. The topics are chosen based on input during booking, as well as
+      prior discussion with the student.
+    </p>
+    <p class="${"svelte-1yyztah"}"><span class="${"font-Poppins font-bold"}">In regards to completed questions only:</span> answers are discussed during session time. A detailed, digital solution key
+      is also available at a premium, to be populated on your personal page.
+    </p></details>
+
+  <details class="${"group svelte-1yyztah"}"><summary class="${"svelte-1yyztah"}">I am looking to refer a friend, do you offer any discounts based on
+      referrals?
+    </summary>
+    <p class="${"svelte-1yyztah"}">
+
+      Great question! You can enter your referral as an input when booking; for
+      this initiative we are pleased to offer a
+      
+      <span class="${"hover:opacity-100 group-active:opacity-100 opacity-0 text-transparent bg-clip-text bg-gradient-to-b from-rose-700 via-rose-600 to-yellow-300"}">25%
+      </span>
+      discount on the next applicable session!
+    </p></details>
+</div>`;
 });
 export {
   Page as default

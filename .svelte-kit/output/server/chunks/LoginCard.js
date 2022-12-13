@@ -1,7 +1,6 @@
 import { c as create_ssr_component, a as subscribe, e as escape, v as validate_component, d as add_attribute, h as set_store_value } from "./index.js";
-import { a as app } from "./firebase.js";
+import "./firebase.js";
 import { i as isDarkMode, s as showLoginModal, b as isLoggedIn, e as elementColor } from "./store.js";
-import "firebase/auth";
 function guard(name) {
   return () => {
     throw new Error(`Cannot call ${name}(...) on the server`);
@@ -138,6 +137,7 @@ const LoginCard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
       redirectLogic(redirectUrlFromLS);
     } else {
       const { getFirestore, collection, getDocs } = await import("firebase/firestore/lite");
+      const { app } = await import("./firebase.js");
       const db = getFirestore(app);
       const querySnapshot = await getDocs(collection(db, "email"));
       const querySnapshotSize = querySnapshot.size;
