@@ -11,7 +11,9 @@
     ? `${bgTint} `
     : 'hidden'} overflow-y-scroll overflow-x-clip"
 >
+  <!-- {#if showModal} -->
   <slot />
+  <!-- {/if} -->
 </button>
 
 <!-- switched from 'hidden' to opacity-0... otherwise tailwind animations aren't working on this

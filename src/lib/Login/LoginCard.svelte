@@ -7,6 +7,7 @@
 
   // TODO: commented out on dec12, 2022  due to dynamicimporting
   // import { app, auth } from "$lib/firebase";
+  // import { auth } from "$lib/firebase";
   // import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
   import { onMount } from "svelte";
@@ -50,8 +51,10 @@
   async function onMountFirebase() {
     // TODO:dynamic importing added on dec12,2022
     const { auth } = await import("$lib/firebase");
-    const { onAuthStateChanged } = await import("firebase/auth");
-    const { isSignInWithEmailLink } = await import("firebase/auth");
+    const { onAuthStateChanged, isSignInWithEmailLink } = await import(
+      "firebase/auth"
+    );
+
     // Confirm the link is a sign-in with email link.
 
     if (isSignInWithEmailLink(auth, window.location.href)) {
@@ -96,14 +99,24 @@
     });
     // }
   }
+  // globalThis.loginFirstClickHappened = false;
+  // $: if ($showLoginModal == true && !globalThis.loginFirstClickHappened) {
+  //   onMountFirebase();
+  //   globalThis.loginFirstClickHappened = true;
+  // }
+
+  // TODO: placing 'onMountFirebase()' inside an onclick .. requires to click twice...???
 
   onMount(() => {
-    document.querySelector('a[href="/login"]').addEventListener("click", () => {
-      if (!globalThis.loginFirstClickHappened) {
-        onMountFirebase();
-        globalThis.loginFirstClickHappened = true;
-      }
-    });
+    onMountFirebase();
+    // document
+    //   .querySelector('a[href="/login"]')
+    //   .addEventListener("dblclick", () => {
+    //     if (!globalThis.loginFirstClickHappened) {
+    //       onMountFirebase();
+    //       globalThis.loginFirstClickHappened = true;
+    //     }
+    //   });
   });
 
   //  Hoisted Functions
