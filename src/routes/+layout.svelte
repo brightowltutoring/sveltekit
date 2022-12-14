@@ -7,11 +7,16 @@
   } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
 
+  import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
-  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  import LoginCard from "$lib/Login/LoginCard.svelte";
+  let DropzoneComponent;
+  // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  // import LoginCard from "$lib/Login/LoginCard.svelte";
+
   import Navbar from "$lib/Nav/Navbar.svelte";
-  import Footer from "$lib/Footer.svelte";
+
+  // import Footer from "$lib/Footer.svelte";
+
   import {
     instDeltaY,
     scrollY,
@@ -70,6 +75,7 @@
 
   import { page } from "$app/stores";
   import { routes } from "$lib/store";
+  import LazyMount from "../lib/Wrappers/LazyMount.svelte";
 
   let contactLinkClicked = false;
 </script>
@@ -187,16 +193,56 @@
   <!-- WITHOUT bind I am able to keep state on the logincard ...which is useful for phone auth sms code logic, however annoyingly the svg icon color does not update back to default color when unclicking -->
 
   <Modal bind:showModal={$showLoginModal}>
-    <LoginCard />
+    <!-- <LoginCard /> -->
+
+    <!-- This works but have to click login button twice ... -->
+    <LazyMount
+      Import={async () => {
+        setTimeout(() => {
+          $showLoginModal = true;
+        }, 50);
+        // for some reason $showLoginModal is being set to false when using LazyMount logic to import Logincard...therefore using this jank to set true here. Overall it's better to lazy load components anyway, even if there is a little jank involved.
+        // Bright side: flashes modal on the first time, and remaining times it doesnt
+        return await import("$lib/Login/LoginCard.svelte");
+      }}
+    />
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <!-- uniqueId={"modalDropzone"} -->
-    <Dropzone
+    <!-- <Dropzone
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
-    />
+    /> -->
+
+    <InView
+      onview={async () => {
+        // $showHomeworkModal = true;
+        return (DropzoneComponent = await import(
+          "$lib/Dropzone/Dropzone.svelte"
+        ));
+      }}
+    >
+      {#if DropzoneComponent}
+        <DropzoneComponent.default
+          textSizeTW={"text-6xl"}
+          dimensionsTW={"w-[80vw] h-[85vh]"}
+          brightnessTW={"brightness-95"}
+        />
+      {/if}
+    </InView>
+
+    <!-- TODO: OLD ATTEMPT -->
+    <!-- <InView>
+      {#await import("$lib/Dropzone/Dropzone.svelte") then Dropzone}
+        <Dropzone.default
+          textSizeTW={"text-6xl"}
+          dimensionsTW={"w-[80vw] h-[85vh]"}
+          brightnessTW={"brightness-95"}
+        />
+      {/await}
+    </InView> -->
   </Modal>
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
@@ -209,13 +255,20 @@
 
   <div class="px-[7%] pt-32 md:block">
     <slot />
-    <Footer bind:contactLinkClicked />
-  </div>
 
-  <!-- <div
-    class="md:py-4 py-1 md:px-[7%] z-50 fixed {jankytown} ease-in-out overflow-x-auto overflow-y-hidden w-full "
-  > -->
-  <!-- <div class="px-[7%] h-[100vh] pt-32 md:block">
-    <Footer />
-  </div> -->
+    <!-- <Footer bind:contactLinkClicked /> -->
+
+    <!--TODO: LAZY IMPORTING COMPONENT!!! -->
+    <!-- <InView onview={async () => (Footer = await import("$lib/Footer.svelte"))}>
+      {#if Footer}
+        <Footer.default bind:contactLinkClicked />
+      {/if}
+    </InView> -->
+
+    <LazyMount
+      bind:X={contactLinkClicked}
+      Import={async () => await import("$lib/Footer.svelte")}
+    />
+    <!-- Failed attempt to consolidate lazy import block; comes down to import statement disallowing variable path. Update: passing import via a function prop seems to work, but then passing bounded props doesnt seem to work ..also the markup is already as large as the original  -->
+  </div>
 </main>

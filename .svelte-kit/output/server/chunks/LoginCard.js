@@ -50,4 +50,4 @@ ${n?`<logout-card class="${"relative block hover:scale-[1.01] font-Poppins shado
         <div style="font-size: 30px;" id="timeLeft">\u230A\u03C0\u230B</div></div>
 
       
-      <button>Logout</button></logout-card>`:""}`});export{ee as L};
+      <button>Logout</button></logout-card>`:""}`});export{ee as default};
