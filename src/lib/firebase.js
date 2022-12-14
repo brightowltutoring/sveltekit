@@ -21,8 +21,10 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-// export const auth = getAuth(app);
 
+// export const auth = getAuth(app);
+// TODO: Update dec13, 2022: oer the suggestions on 'https://github.com/firebase/firebase-js-sdk/issues/4946' and 'https://firebase.google.com/docs/auth/web/custom-dependencies' I am swapping 'getAuth' for 'initializeAuth', which allows me to code split the previously implicit 'browserPopupRedirectResolver' ... specifically I can dynamically import 'browserPopupRedirectResolver' and pass as a third argument to 'signinWithPopup' inside the google/twitter login functions in loginFunctions.js
+// RESULT: mobile doesnt load 273 kb of unnecessary js, as complained about on pagespeed insights etc
 export const auth = initializeAuth(app, {
   persistence: [
     indexedDBLocalPersistence,
