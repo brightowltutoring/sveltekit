@@ -42,7 +42,9 @@ export async function magicLinkToEmail(EMAIL) {
 // TODO: nov29.2022 : google login didnt work with 'signInWithRedirect' logic, so assuming the same for twitter login .. getting rid of the if-else logic and keeping only the 'signInWithPopup' logic
 export async function TwitterLogin() {
   // const auth = await import("$lib/firebase");
-  const { TwitterAuthProvider } = await import("firebase/auth");
+  const { TwitterAuthProvider, browserPopupRedirectResolver } = await import(
+    "firebase/auth"
+  );
   const provider = new TwitterAuthProvider();
 
   // if (get(lessThan768)) {
@@ -73,7 +75,8 @@ export async function TwitterLogin() {
   // else {
   const { signInWithPopup } = await import("firebase/auth");
   // console.log("twitter provider?", provider.providerId);
-  signInWithPopup(auth, provider)
+  // signInWithPopup(auth, provider)
+  signInWithPopup(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
       // You can use these server side with your app's credentials to access the Twitter API.
@@ -101,11 +104,13 @@ export async function TwitterLogin() {
 // TODO: nov29.2022 noticed that 'signinWithRedirect' logic did not sign me in ... furthermore 'signInWithPopup' worked perfectly on both the PWA and on the mobile version of the website ... It appears firebase has consolidated the two??
 export async function GoogleLogin() {
   // const auth = await import("$lib/firebase");
+
   const {
     GoogleAuthProvider,
     // setPersistence,
     // browserSessionPersistence,
     // inMemoryPersistence,
+    browserPopupRedirectResolver,
   } = await import("firebase/auth");
 
   // if (get(lessThan768)) {
@@ -134,7 +139,8 @@ export async function GoogleLogin() {
 
   // setPersistence(auth, browserSessionPersistence).then(() => {
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
+  // signInWithPopup(auth, provider)
+  signInWithPopup(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);

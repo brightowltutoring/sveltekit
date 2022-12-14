@@ -4,7 +4,7 @@ import { sveltekit } from "@sveltejs/kit/vite";
 const config = {
   plugins: [sveltekit()],
   build: {
-    minify: true,
+    minify: true, // added dec 13,2022; not sure of perf gains
     rollupOptions: {
       external: [
         "/Users/brightowl/Documents/GitHub/sveltekit/node_modules/dropzone/dist/dropzone.css",

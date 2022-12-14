@@ -1,6 +1,13 @@
 import * as NV from "$env/static/public";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+// import { getAuth } from "firebase/auth";
+
+import {
+  initializeAuth,
+  indexedDBLocalPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 
 // import { getFirestore } from "firebase/firestore/lite";
 
@@ -14,7 +21,16 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+// export const auth = getAuth(app);
+
+export const auth = initializeAuth(app, {
+  persistence: [
+    indexedDBLocalPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence,
+  ],
+});
+
 // this is used when website is mounted to persist login state ... maybe import when login clicked instead??
 
 // idea: import getAuth on page load IF visitor as logged in before ... e.g. can set a localstorage variable ("previouslyLoggedIn") inside the logged in logic (not here)
