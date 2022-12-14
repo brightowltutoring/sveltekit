@@ -1,12 +1,4 @@
-import { c as create_ssr_component, v as validate_component } from "../../../chunks/index.js";
-import { L as LoginCard } from "../../../chunks/LoginCard.js";
-const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  console.log("back in black!");
-  return `
+import{c as n,v as r}from"../../../chunks/index.js";import{L as a}from"../../../chunks/LoginCard.js";const p=n((o,e,s,t)=>(console.log("back in black!"),`
 
 
-${validate_component(LoginCard, "LoginCard").$$render($$result, { noTransition: true }, {}, {})}`;
-});
-export {
-  Page as default
-};
+${r(a,"LoginCard").$$render(o,{noTransition:!0},{},{})}`));export{p as default};

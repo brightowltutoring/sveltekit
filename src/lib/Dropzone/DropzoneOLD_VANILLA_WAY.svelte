@@ -3,7 +3,7 @@
   // let daForm;
   // import("$lib/Dropzone/dropzone.css");
   // import { Dropzone } from "dropzone";
-  import InView from "$lib/InView.svelte";
+  import InView from "$lib/Wrappers/InView.svelte";
   import { cssToHead } from "$lib/utils";
   import { isDarkMode } from "$lib/store";
 

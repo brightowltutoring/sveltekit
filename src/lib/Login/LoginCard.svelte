@@ -6,8 +6,8 @@
   // import CloseButton from "$lib/CloseButton.svelte";
 
   // TODO: commented out on dec12, 2022  due to dynamicimporting
-  // import { app, auth } from "$lib/firebase";
-  // import { auth } from "$lib/firebase";
+  // import { app, auth } from "$lib/Login/firebase";
+  // import { auth } from "$lib/Login/firebase";
   // import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
   import { onMount } from "svelte";
@@ -50,7 +50,7 @@
 
   async function onMountFirebase() {
     // TODO:dynamic importing added on dec12,2022
-    const { auth } = await import("$lib/firebase");
+    const { auth } = await import("$lib/Login/firebase");
     const { onAuthStateChanged, isSignInWithEmailLink } = await import(
       "firebase/auth"
     );
@@ -154,7 +154,7 @@
       );
 
       // TODO:dynamic importing added on dec12,2022
-      const { app } = await import("$lib/firebase");
+      const { app } = await import("$lib/Login/firebase");
 
       const db = getFirestore(app);
       const querySnapshot = await getDocs(collection(db, "email"));

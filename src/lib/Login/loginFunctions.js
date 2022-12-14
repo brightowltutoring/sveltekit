@@ -1,4 +1,4 @@
-import { auth } from "$lib/firebase";
+import { auth } from "$lib/Login/firebase";
 import { goto } from "$app/navigation";
 
 // TODO: on nov29,2022 these became unncessary since we are not doing 'signinWithRedirect' for either google or twitter login (see code comment below for google and twitter login)
@@ -14,7 +14,7 @@ export function regexPhoneChecker(PHONE) {
 }
 
 export async function magicLinkToEmail(EMAIL) {
-  // const auth = await import("$lib/firebase");
+  // const auth = await import("$lib/Login/firebase");
   const {
     sendSignInLinkToEmail,
     // EmailAuthProvider
@@ -42,7 +42,7 @@ export async function magicLinkToEmail(EMAIL) {
 
 // TODO: nov29.2022 : google login didnt work with 'signInWithRedirect' logic, so assuming the same for twitter login .. getting rid of the if-else logic and keeping only the 'signInWithPopup' logic
 export async function TwitterLogin() {
-  // const auth = await import("$lib/firebase");
+  // const auth = await import("$lib/Login/firebase");
   const { TwitterAuthProvider, browserPopupRedirectResolver } = await import(
     "firebase/auth"
   );
@@ -104,7 +104,7 @@ export async function TwitterLogin() {
 
 // TODO: nov29.2022 noticed that 'signinWithRedirect' logic did not sign me in ... furthermore 'signInWithPopup' worked perfectly on both the PWA and on the mobile version of the website ... It appears firebase has consolidated the two??
 export async function GoogleLogin() {
-  // const auth = await import("$lib/firebase");
+  // const auth = await import("$lib/Login/firebase");
 
   const {
     GoogleAuthProvider,

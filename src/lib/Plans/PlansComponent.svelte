@@ -1,6 +1,6 @@
 <script>
   import PlansCard from "$lib/Plans/PlansCard.svelte";
-  import InView from "$lib/InView.svelte";
+  import InView from "$lib/Wrappers/InView.svelte";
   import { elasticOut } from "svelte/easing";
   import { scaleYN } from "$lib/utils";
   // import { fade, fly, scale, slide } from "svelte/transition";

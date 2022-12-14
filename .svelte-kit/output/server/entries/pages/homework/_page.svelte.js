@@ -1,9 +1,2 @@
-import { c as create_ssr_component, v as validate_component } from "../../../chunks/index.js";
-import { D as Dropzone } from "../../../chunks/Dropzone.js";
-const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `
-${validate_component(Dropzone, "Dropzone").$$render($$result, {}, {}, {})}`;
-});
-export {
-  Page as default
-};
+import{c as r,v as e}from"../../../chunks/index.js";import{D as n}from"../../../chunks/Dropzone.js";const m=r((o,s,t,a)=>`
+${e(n,"Dropzone").$$render(o,{},{},{})}`);export{m as default};

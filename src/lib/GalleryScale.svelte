@@ -1,5 +1,5 @@
 <!-- TODO: no longer using this code -->
-<!-- <script>
+<script>
   export let Src;
   export let Alt;
   import { isDarkMode } from "$lib/store";
@@ -32,13 +32,13 @@
     src={Src}
     alt={Alt}
   />
-</div> -->
-<!-- still confused as to how this scale full screen but ok! -->
+</div>
 
-<!-- <style>
-    .relative input {
+<!-- still confused as to how this scale full screen but ok! -->
+<style>
+  .relative input {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-}
-</style> -->
+  }
+</style>

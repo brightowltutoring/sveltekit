@@ -1,7 +1,7 @@
 <script>
   // import("$lib/Dropzone/dropzone.css");
   // import { Dropzone } from "dropzone";
-  import InView from "$lib/InView.svelte";
+  import InView from "$lib/Wrappers/InView.svelte";
   import { cssToHead } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
 
@@ -45,6 +45,10 @@
   function dropzoneHandleErroredUploads() {
     let filesToRetry = [];
     dropzone.on("error", (file) => file.accepted && filesToRetry.push(file));
+
+    dropzone.on("queuecomplete", () => {
+      setTimeout(() => ($showHomeworkModal = false), 1000);
+    });
 
     window?.addEventListener("online", () => {
       if (filesToRetry.length > 0) {

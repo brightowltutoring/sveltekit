@@ -1,7 +1,6 @@
 <script>
   import { isDarkMode } from "$lib/store"; 
-  
-  import InView from "$lib/InView.svelte";
+  import InView from "$lib/Wrappers/InView.svelte";
  
   export let title = "Great physics tutor!!"
   export let name = "Thomas Finn"
@@ -23,7 +22,9 @@
           target.classList.remove("opacity-0");
           target.src = "/star.webp";
         }} >
+
        <img src="" class="opacity-0 transition-opacity duration-300 ease-in hover:scale-125" alt="star" style="width:40px; height:40px" >
+       
       </InView>
 
       {/each}

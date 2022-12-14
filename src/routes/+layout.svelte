@@ -1,13 +1,16 @@
 <script>
-  import { isDarkMode } from "./../lib/store.js";
   import "../app.css";
-  import { scale, fly, slide, fade, blur } from "svelte/transition";
+  import {
+    scale,
+    fly,
+    // slide, fade, blur
+  } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
 
-  import Modal from "$lib/Modal.svelte";
+  import Modal from "$lib/Wrappers/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import LoginCard from "$lib/Login/LoginCard.svelte";
-  import Navbar from "$lib/Navbar.svelte";
+  import Navbar from "$lib/Nav/Navbar.svelte";
   import Footer from "$lib/Footer.svelte";
   import {
     instDeltaY,
@@ -17,7 +20,7 @@
     showLoginModal,
     showHomeworkModal,
     navAppClicked,
-    // isDarkMode
+    isDarkMode,
   } from "$lib/store";
 
   import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
@@ -130,18 +133,12 @@
       showModal={$navAppClicked}
       bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"}
     >
-      <!-- bgTint={$isDarkMode ? "bg-[#5262f7]" : "bg-[#a5adf5]"} -->
       {#key !$navAppClicked}
-        <!-- bg-[#818cf8] -->
-        <!-- in:slide={{ duration: 1300, easing: elasticOut }} -->
-
-        <!-- in:fly={{ x: 100, duration: 1300, easing: elasticOut }} -->
         <ul
           in:scale
-          class="p-10 flex flex-col gap-y-8 font-Poppins sm:text-6xl"
+          class="p-10 flex flex-col gap-y-8 font-Poppins text-3xl sm:text-6xl"
         >
           <li
-            class="text-xl font-bold"
             in:scale={{
               x: 100,
               duration: 1300,
@@ -152,7 +149,6 @@
             Open Safari
           </li>
           <li
-            class="text-xl font-bold"
             in:fly={{
               x: 100,
               delay: 1200,
@@ -172,7 +168,7 @@
           </li>
 
           <li
-            class="text-xl font-bold text-black"
+            class=" text-black"
             in:fly={{
               x: 200,
               delay: 2000,

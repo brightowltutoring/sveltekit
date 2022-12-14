@@ -1,14 +1,17 @@
 <script>
+  import { showHomeworkModal } from "./../lib/store.js";
   import PlansComponent from "$lib/Plans/PlansComponent.svelte";
   let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
-  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
-  import { isDarkMode, scrollY } from "$lib/store";
+  import {
+    isDarkMode,
+    //  scrollY
+  } from "$lib/store";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  import InView from "../lib/InView.svelte";
 
   let ready = false;
   onMount(() => (ready = true));
@@ -16,6 +19,9 @@
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
+
+  // TODO: added dec 14; remove?
+  $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 </script>
 
 <video
@@ -77,7 +83,19 @@
       </button>
 
       <!-- uniqueId={"homeRouteDropzone"} -->
-      <Dropzone text={"Drop it like it's 🔥"} textSizeTW={"text-2xl"} />
+      <!-- <Dropzone text={"Drop it like it's 🔥"} textSizeTW={"text-2xl"} /> -->
+      <button
+        on:click={() => {
+          $showHomeworkModal = true;
+          // globalThis.onceBoolean = false;
+        }}
+        style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
+        class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl  text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
+      >
+        <div class="font-Nunito group-hover:animate-pulse">
+          Drop it like it's 🔥
+        </div>
+      </button>
     </div>
 
     <!-- third page -->
