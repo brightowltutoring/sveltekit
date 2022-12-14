@@ -4,6 +4,7 @@ import { goto } from "$app/navigation";
 // TODO: on nov29,2022 these became unncessary since we are not doing 'signinWithRedirect' for either google or twitter login (see code comment below for google and twitter login)
 import { get } from "svelte/store";
 import { lessThan768 } from "$lib/store";
+import { isRunningStandalone } from "$lib/utils";
 
 export function regexEmailChecker(EMAIL) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
@@ -47,7 +48,8 @@ export async function TwitterLogin() {
   );
   const provider = new TwitterAuthProvider();
 
-  if (get(lessThan768)) {
+  // if (get(lessThan768)) {
+  if (isRunningStandalone()) {
     const { signInWithRedirect } = await import("firebase/auth");
     signInWithRedirect(auth, provider, browserPopupRedirectResolver)
       .then((result) => {
@@ -114,7 +116,8 @@ export async function GoogleLogin() {
 
   const provider = new GoogleAuthProvider();
 
-  if (get(lessThan768)) {
+  // if (get(lessThan768)) {
+  if (isRunningStandalone()) {
     const { signInWithRedirect } = await import("firebase/auth");
     signInWithRedirect(auth, provider, browserPopupRedirectResolver)
       .then((result) => {
