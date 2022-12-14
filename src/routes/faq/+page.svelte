@@ -1,6 +1,7 @@
 <!-- Update dec, 12 2022: first time using css has selector; doesnt yet work in firefox -->
 <script>
   import { fly, fade, slide } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
   import { showHomeworkModal, showLoginModal } from "$lib/store";
   let faqContainer;
   let selectedTd;
@@ -38,7 +39,7 @@
 
 <!-- in:slide={{ duration: 800 }} -->
 <div
-  in:fly={{ y: 50, duration: 500 }}
+  in:fly={{ y: 50, duration: 800, easing: quintOut }}
   class="grid place-content-center py-16"
   on:dblclick={() => {
     faqContainer.querySelectorAll("DETAILS").forEach((el) => (el.open = false));
@@ -51,7 +52,8 @@
   </span>
 </div>
 <!-- TODO: some weird reason I have to add 'class="highlight"' ot at least one summary element before the css/js logic can work -->
-<div class="faqContainer">
+
+<div in:fly={{ y: -50, duration: 500 }} class="faqContainer">
   <details>
     <summary class="highlight"> How are we screen-sharing? Zoom? </summary>
 

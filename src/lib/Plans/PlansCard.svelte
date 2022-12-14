@@ -1,6 +1,7 @@
 <script>
   import { preloadCode } from "$app/navigation";
   import { isDarkMode, elementColor } from "$lib/store";
+
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
 

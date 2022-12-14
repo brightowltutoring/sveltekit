@@ -2,25 +2,21 @@
   import PlansCard from "$lib/Plans/PlansCard.svelte";
   import InView from "$lib/InView.svelte";
   import { elasticOut } from "svelte/easing";
+  import { scaleYN } from "$lib/utils";
+  // import { fade, fly, scale, slide } from "svelte/transition";
   import { plansCardArray } from "$lib/Plans/plansCardArray";
   import { onMount, createEventDispatcher } from "svelte";
-  import { cssToHead, jsToHead, scaleYN } from "$lib/utils";
+  import { cssToHead, jsToHead } from "$lib/utils";
   let dispatch = createEventDispatcher();
 
   export let plansCards = plansCardArray;
-  // When the importing component has 'zeroTransition = true' this component produces no transition animation for both navbar AND direct navigation
 
   export let noTransition = false; // when user does include noTransition as a prop then this is rewritten to 'true'
 
   let ready = noTransition;
   onMount(() => (ready = true));
   // the 'ready' variable logic allows the in:scale div to animate (svelte transition) when going directly to this plans route ..otherwise only works when navigating from another route
-</script>
-
-<InView
-  once
-  margin={"200px"}
-  onview={() => {
+  function addCalendlyCSSandJS() {
     console.log("📅");
     jsToHead(
       "calendlyJS",
@@ -30,39 +26,38 @@
       "calendlyCSS",
       "https://assets.calendly.com/assets/external/widget.css"
     );
-  }}
->
-  <!-- Can also do 'use:boop' where boop() is a function containing the dispatch logic. -->
+  }
+
+  // This 'boop-function' dispatches a 'boop-event' when called; below, it's called as soon as the element is created with 'use:boop'.  An alternative to 'use:boop' logic is 'use={ dispatch("boop", OBJECT) }' ... but I think the former is more html-readable
+  function boop() {
+    dispatch("boop", { plansCardArray, message: "n i boop" });
+  }
+</script>
+
+<InView once margin={"200px"} onview={addCalendlyCSSandJS}>
   <plans-section
-    use={dispatch("boop", { plansCardArray, message: "n i boop" })}
+    use:boop
     class="grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"
   >
     <!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7" -->
-    {#each plansCards as item, i}
-      {#if ready}
+    {#if ready}
+      {#each plansCards as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
         <div
           in:scaleYN={{
-            noTransition: noTransition,
+            delay: 100 * i,
             duration: 1000,
             easing: elasticOut,
-            delay: 100 * i,
+            noTransition,
           }}
         >
-          <PlansCard
-            card={item.card}
-            payNowUrl={item.payNowUrl}
-            payLaterUrl={item.payLaterUrl}
-          >
-            <!-- <span slot="buttonText"> {item.buttonText} </span> -->
-            <span slot="cardTitle"> {item.cardTitle} </span>
-
-            <span slot="cardText">
-              {item.cardText}
-            </span>
+          <PlansCard {card} {payNowUrl} {payLaterUrl}>
+            <!-- <span slot="buttonText"> {buttonText} </span> -->
+            <span slot="cardTitle"> {cardTitle} </span>
+            <span slot="cardText"> {cardText} </span>
           </PlansCard>
         </div>
-      {/if}
-    {/each}
+      {/each}
+    {/if}
   </plans-section>
 </InView>
 

@@ -4,6 +4,7 @@ import { sveltekit } from "@sveltejs/kit/vite";
 const config = {
   plugins: [sveltekit()],
   build: {
+    minify: true,
     rollupOptions: {
       external: [
         "/Users/brightowl/Documents/GitHub/sveltekit/node_modules/dropzone/dist/dropzone.css",

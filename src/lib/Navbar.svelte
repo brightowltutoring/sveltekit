@@ -74,7 +74,7 @@
 >
   {#key resetLogoClick}
     <button
-      class="md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
+      class=" p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
     md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
       in:scale={{ duration: 1200, easing: elasticOut }}
       on:click={clickLogo}

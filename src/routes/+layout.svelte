@@ -1,4 +1,5 @@
 <script>
+  import { isDarkMode } from "./../lib/store.js";
   import "../app.css";
   import { scale, fly, slide, fade, blur } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
@@ -104,17 +105,19 @@
 
 <!-- bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"} -->
 <main>
-  <Modal showModal={contactLinkClicked} bgTint={"backdrop-blur-xl "}>
+  <Modal showModal={contactLinkClicked} bgTint={"backdrop-blur-3xl "}>
     {#key !contactLinkClicked}
       <ul
         in:scale={{
           duration: 1500,
           easing: elasticOut,
         }}
-        class="text-center flex flex-col gap-y-2 font-Poppins sm:text-5xl text-3xl text-transparent bg-clip-text bg-gradient-to-r  from-teal-500 via-rose-600 to-pink-600  "
+        class="text-center flex flex-col gap-y-2 font-Poppins sm:text-5xl text-3xl text-transparent bg-clip-text bg-gradient-to-r  {$isDarkMode
+          ? 'from-teal-200 via-rose-300 to-pink-200 '
+          : 'from-teal-700 via-rose-700 to-pink-700 '}"
       >
         <li>Email:</li>
-        <li>thinksolve.io@gmail.com</li>
+        <li class="p-5">thinksolve.io@gmail.com</li>
       </ul>
     {/key}
   </Modal>
