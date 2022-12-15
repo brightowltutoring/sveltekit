@@ -7,14 +7,12 @@
   } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
 
+  import Navbar from "$lib/Nav/Navbar.svelte";
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
   let DropzoneComponent;
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import LoginCard from "$lib/Login/LoginCard.svelte";
-
-  import Navbar from "$lib/Nav/Navbar.svelte";
-
   // import Footer from "$lib/Footer.svelte";
 
   import {
@@ -36,7 +34,7 @@
     // $lessThan768 && disableZoomGestures();
     (isRunningStandalone() || $lessThan768) && disableZoomGestures();
     setInnerWidthViaMatchMedia();
-    // alert(getOS());
+
     // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
   });
 
@@ -247,6 +245,7 @@
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
   <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
+    <!-- <div class=" z-50 fixed {jankytown} ease-in-out w-full"> -->
     <Navbar />
   </div>
 
@@ -254,6 +253,7 @@
   <!-- TODO: this padding is not needed for smaller than md -->
 
   <div class="px-[7%] pt-32 md:block">
+    <!-- <div class=" md:block"> -->
     <slot />
 
     <!-- <Footer bind:contactLinkClicked /> -->
