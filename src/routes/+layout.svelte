@@ -11,8 +11,9 @@
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
   let DropzoneComponent;
+  let LoginCardComponent;
+  import LoginCard from "$lib/Login/LoginCard.svelte";
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  // import LoginCard from "$lib/Login/LoginCard.svelte";
   // import Footer from "$lib/Footer.svelte";
 
   import {
@@ -191,19 +192,29 @@
   <!-- WITHOUT bind I am able to keep state on the logincard ...which is useful for phone auth sms code logic, however annoyingly the svg icon color does not update back to default color when unclicking -->
 
   <Modal bind:showModal={$showLoginModal}>
-    <!-- <LoginCard /> -->
+    <LoginCard />
 
-    <!-- This works but have to click login button twice ... -->
-    <LazyMount
+    <!-- Update: on fast 3g this the $showLoginModal flickers to false; stopping this jank for now -->
+    <!-- 25ms setTimeout reduces flicker .. still annoying that I have to manually add '$showLoginModal = true' in order for this to work. I suppose the asynchronous mounting of <LoginCard />  requires this-->
+    <!-- <LazyMount
       Import={async () => {
         setTimeout(() => {
           $showLoginModal = true;
-        }, 50);
-        // for some reason $showLoginModal is being set to false when using LazyMount logic to import Logincard...therefore using this jank to set true here. Overall it's better to lazy load components anyway, even if there is a little jank involved.
-        // Bright side: flashes modal on the first time, and remaining times it doesnt
+        }, 25);
+
         return await import("$lib/Login/LoginCard.svelte");
       }}
-    />
+    /> -->
+
+    <!-- Older way, without LazyMount component -->
+    <!-- <InView
+      onview={async () =>
+        (LoginCardComponent = await import("$lib/Login/LoginCard.svelte"))}
+    >
+      {#if LoginCardComponent}
+        <LoginCardComponent.default />
+      {/if}
+    </InView> -->
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
@@ -215,12 +226,8 @@
     /> -->
 
     <InView
-      onview={async () => {
-        // $showHomeworkModal = true;
-        return (DropzoneComponent = await import(
-          "$lib/Dropzone/Dropzone.svelte"
-        ));
-      }}
+      onview={async () =>
+        (DropzoneComponent = await import("$lib/Dropzone/Dropzone.svelte"))}
     >
       {#if DropzoneComponent}
         <DropzoneComponent.default

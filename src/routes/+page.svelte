@@ -92,7 +92,7 @@
         style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
         class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl  text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
       >
-        <div class="font-Nunito group-hover:animate-pulse">
+        <div class="font-Nunito group-hover:animate-pulse text-2xl">
           Drop it like it's 🔥
         </div>
       </button>
