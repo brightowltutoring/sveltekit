@@ -1,16 +1,16 @@
 <script>
-  import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
-  // import InView from "$lib/Wrappers/InView.svelte";
-  import { showHomeworkModal } from "./../lib/store.js";
+  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
+  import InView from "$lib/Wrappers/InView.svelte";
   // import PlansComponent from "$lib/Plans/PlansComponent.svelte";
-  // let PlansComponent;
-  // let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
+  let PlansComponent;
+  let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
   import {
     isDarkMode,
-    //  scrollY
+    //  scrollY,
+    showHomeworkModal,
   } from "$lib/store";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
@@ -90,7 +90,7 @@
       <button
         on:click={() => {
           $showHomeworkModal = true;
-          // globalThis.onceBoolean = false;
+          globalThis.onceBoolean = false;
         }}
         style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
         class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl  text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
@@ -115,19 +115,19 @@
       </button>
 
       <!-- Dec16,2022: able to handle unbounded props now! However not sure how to handle the custom dispatched event, as before. Maybe rethink PlansComponent logic -->
-      <LazyMount2
+      <!-- <LazyMount2
         Import={async () => await import("$lib/Plans/PlansComponent.svelte")}
         noTransition
-      />
+      /> -->
 
       <!-- Dec15,2022 lazy mounting manually since not sure how to deal with unbounded props -->
-      <!-- <InView
+      <InView
         margin={"500px"}
         onview={async () => {
           PlansComponent = (await import("$lib/Plans/PlansComponent.svelte"))
             .default;
         }}
-       >
+      >
         <svelte:component
           this={PlansComponent}
           noTransition
@@ -137,7 +137,7 @@
             console.log("🏡", e.detail.message);
           }}
         />
-      </InView> -->
+      </InView>
       <!-- {#if PlansComponent}
         <PlansComponent
           noTransition
