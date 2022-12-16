@@ -1,10 +1,11 @@
 <script>
-  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
-  import InView from "$lib/Wrappers/InView.svelte";
   // import PlansComponent from "$lib/Plans/PlansComponent.svelte";
-  let PlansComponent;
-  let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
+  // let PlansComponent;
+  // let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  // import InView from "$lib/Wrappers/InView.svelte";
+  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
+  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
   import {
@@ -115,27 +116,28 @@
       </button>
 
       <!-- Dec16,2022: able to handle unbounded props now! However not sure how to handle the custom dispatched event, as before. Maybe rethink PlansComponent logic -->
-      <!-- <LazyMount2
+      <LazyMount
         Import={async () => await import("$lib/Plans/PlansComponent.svelte")}
-        noTransition
-      /> -->
+      />
+      <!-- noTransition -->
 
-      <!-- TODO: UPDATE: dec 17,2022: somehow this is better than using LazyMount2 ... getting perfect lighthouse score when I manually lazy mount this component... -->
+      <!-- TODO: UPDATE: dec 17,2022: somehow this is better than using LazyMount2 ... getting perfect lighthouse score when I manually lazy mount this component. HOWEVER the simplicity of LazyMount2, near perfect lighthouse score (96/100/100/100), and identical page speed score tilts me to the latter. -->
       <!-- Dec15,2022 lazy mounting manually since not sure how to deal with unbounded props -->
       <!-- margin={"500px"} -->
-      <InView
+      <!-- <InView
         onview={async () => {
           PlansComponent = (await import("$lib/Plans/PlansComponent.svelte"))
             .default;
         }}
       >
-        <svelte:component this={PlansComponent} noTransition />
-        <!-- plansCards={classicoAndMock} -->
-        <!-- on:boop={(e) => {
+        <svelte:component this={PlansComponent} noTransition
+        plansCards={classicoAndMock}
+        on:boop={(e) => {
             classicoAndMock = e.detail.plansCardArray.slice(0, 2);
             console.log("🏡", e.detail.message);
-          }} -->
-      </InView>
+          }}
+         />
+      </InView> -->
       <!-- {#if PlansComponent}
         <PlansComponent
           noTransition
