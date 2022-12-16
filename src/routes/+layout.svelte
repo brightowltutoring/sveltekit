@@ -115,7 +115,7 @@
 
 <!-- bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"} -->
 <main>
-  <Modal showModal={contactLinkClicked} bgTint={"backdrop-blur-3xl "}>
+  <Modal showModal={contactLinkClicked} bgTint={"backdrop-blur-3xl"}>
     {#key !contactLinkClicked}
       <ul
         in:scale={{
@@ -196,11 +196,11 @@
   <Modal
     bind:showModal={$showLoginModal}
     bgTint={"backdrop-blur-md bg-[rgba(0,0,0,0.3)]"}
+    opacityEase
   >
     <!-- <LoginCard /> -->
 
-    <!-- Update: on fast 3g and iphone simulator this the $showLoginModal flickers to false; stopping this jank for now -->
-    <!-- 25ms setTimeout reduces flicker .. still annoying that I have to manually add '$showLoginModal = true' in order for this to work. I suppose the asynchronous mounting of <LoginCard />  requires this-->
+    <!--dec 16, 2022: $showLoginModal flickers to false; have to do '$showLoginModal = true' 100ms setTimeout. To reduce flicker I have modified Modal.svelte to include an opacity easing -->
     <LazyMount2
       Import={async () => {
         setTimeout(() => ($showLoginModal = true), 100);

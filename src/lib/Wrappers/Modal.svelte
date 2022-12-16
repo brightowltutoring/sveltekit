@@ -1,21 +1,27 @@
 <script>
+  import { isLoggedIn } from "$lib/store";
+
+  export let opacityEase; //added dec 16 to allow easing for the janky lazymounted logincard component in +layout.svelte
   export let showModal = false;
   export let bgTint = "bg-[rgba(0,0,0,0.4)]";
   // export let bod = false;
 
   // without this body append logic, the modal inherits strange padding when used inside other components; originally no issues when using modal at the layout level ... which makes sense as it is the top most level in sveltekit
   let container;
-  import { onMount } from "svelte";
-  onMount(() => {
-    document.body.appendChild(container);
-  });
+  // import { onMount } from "svelte";
+  // onMount(() => {
+  //   document.body.appendChild(container);
+  // });
 
+  //added dec 16 to allow easing for the janky lazymounted logincard component in +layout.svelte
   let changeOpacityTo100;
-  $: if (showModal) {
+  $: if (opacityEase && showModal && !$isLoggedIn) {
     setTimeout(() => {
       changeOpacityTo100 =
-        "opacity-100 transition-opacity duration-1000 ease-in";
+        "opacity-100 transition-opacity duration-300 ease-in";
     }, 50);
+  } else {
+    changeOpacityTo100 = "opacity-100 transition-opacity";
   }
 </script>
 
