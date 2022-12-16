@@ -6,8 +6,6 @@
   const getComponent = async () => (Component = await Import());
 
   import InView from "$lib/Wrappers/InView.svelte";
-
-  // export let X;
 </script>
 
 <InView onview={getComponent}>
