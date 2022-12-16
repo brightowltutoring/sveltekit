@@ -5,10 +5,10 @@
 
   // without this body append logic, the modal inherits strange padding when used inside other components; originally no issues when using modal at the layout level ... which makes sense as it is the top most level in sveltekit
   let container;
-  import { onMount } from "svelte";
-  onMount(() => {
-    document.body.appendChild(container);
-  });
+  // import { onMount } from "svelte";
+  // onMount(() => {
+  //   document.body.appendChild(container);
+  // });
 
   // let changeOpacityTo100;
   // $: if (showModal) {
