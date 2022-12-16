@@ -80,7 +80,7 @@
       in:scale={{ duration: 600, easing: elasticOut }}
       on:click={() => {
         // handlePlansModal(button.url);
-        Calendly.initPopupWidget({ url: button.url });
+        // Calendly.initPopupWidget({ url: button.url });
         // button.resetter = !button.resetter;
       }}
       class=" {buttonColor[
