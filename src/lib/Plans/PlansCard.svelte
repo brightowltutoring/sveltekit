@@ -5,9 +5,9 @@
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
 
-  let showMe = false;
-  $: src = "";
-  let changeOpacityTo100;
+  // let showMe = false;
+  // $: src = "";
+  // let changeOpacityTo100;
 
   export let payNowUrl = "";
   export let payLaterUrl = "";
@@ -37,32 +37,30 @@
     3: "bg-[rgb(45,165,214)]" /* blue */,
   };
 
-  async function handlePlansModal(BUTTON_URL) {
-    src = `${BUTTON_URL}?hide_gdpr_banner=1`;
-    // src = BUTTON_URL;
-    // src = "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1";
+  // async function handlePlansModal(BUTTON_URL) {
+  //   src = `${BUTTON_URL}?hide_gdpr_banner=1`;
+  //   // src = BUTTON_URL;
+  //   // src = "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1";
 
-    // src = button.url;
-    // showMe = src.length > 0;
-    showMe = true;
-    setTimeout(() => {
-      changeOpacityTo100 =
-        "opacity-100 transition-opacity duration-300 ease-in";
-    }, 100);
-  }
+  //   // src = button.url;
+  //   // showMe = src.length > 0;
+  //   showMe = true;
+  //   setTimeout(() => {
+  //     changeOpacityTo100 =
+  //       "opacity-100 transition-opacity duration-300 ease-in";
+  //   }, 100);
+  // }
 </script>
 
 <!-- TODO: added dec 15 ... to replace the 'Calendly.initPopupWidget' logic; this modal is switched ON via handlePlansModal() function defined -->
 <!-- UPDATE: had to remove this due to iframes and calendly's website clashing with the ability to hide the calendly cookie banner  -->
-<Modal bind:showModal={showMe} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+<!-- <Modal bind:showModal={showMe} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
   <embed
     title="Thinksolve Plans"
     class=" bg-red-500 {changeOpacityTo100} opacity-0 w-full fixed bottom-0 md:w-[80vw] h-[90vh] md:-translate-y-5 backdrop-blur-3xl  rounded-xl border-dotted border-gray-500"
     {src}
   />
-
-  <!-- sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" -->
-</Modal>
+</Modal> -->
 
 <plans-card
   class="cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
@@ -99,15 +97,3 @@
     <slot name="cardText">default cardText</slot>
   </div>
 </plans-card>
-
-<svelte:head>
-  <script
-    type="text/javascript"
-    src="https://assets.calendly.com/assets/external/widget.js"
-    async
-  ></script>
-  <link
-    href="https://assets.calendly.com/assets/external/widget.css"
-    rel="stylesheet"
-  />
-</svelte:head>
