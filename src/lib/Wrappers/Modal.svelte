@@ -5,30 +5,21 @@
 
   // without this body append logic, the modal inherits strange padding when used inside other components; originally no issues when using modal at the layout level ... which makes sense as it is the top most level in sveltekit
   let container;
-  // import { onMount } from "svelte";
-  // onMount(() => {
-  //   document.body.appendChild(container);
-  // });
-
-  // let changeOpacityTo100;
-  // $: if (showModal) {
-  //   setTimeout(() => {
-  //     changeOpacityTo100 =
-  //       "opacity-100 transition-opacity duration-1000 ease-in";
-  //   }, 1000);
-  // }
+  import { onMount } from "svelte";
+  onMount(() => {
+    document.body.appendChild(container);
+  });
 </script>
 
 <!-- md:py-4 py-1 md:px-[7%] z-50 -->
-<!-- {changeOpacityTo100} opacity-0 -->
+<!-- grid place-items-center  --><!-- grid centering breaks on safari .. -->
+
 <button
   bind:this={container}
-  class="  z-50 top-0 left-0 fixed w-full h-full grid place-items-center  {showModal
+  class="z-50 fixed top-0 left-0 w-full h-full flex justify-center items-center  {showModal
     ? `${bgTint} `
     : 'hidden'} overflow-y-scroll overflow-x-clip"
   on:click|self={() => (showModal = false)}
 >
-  <!-- <div class="{changeOpacityTo100} opacity-0"> -->
   <slot />
-  <!-- </div> -->
 </button>
