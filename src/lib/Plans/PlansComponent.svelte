@@ -1,12 +1,12 @@
 <script>
   import PlansCard from "$lib/Plans/PlansCard.svelte";
-  import InView from "$lib/Wrappers/InView.svelte";
+  // import InView from "$lib/Wrappers/InView.svelte";
   import { elasticOut } from "svelte/easing";
   import { scaleYN } from "$lib/utils";
   // import { fade, fly, scale, slide } from "svelte/transition";
   import { plansCardArray } from "$lib/Plans/plansCardArray";
   import { onMount, createEventDispatcher } from "svelte";
-  import { cssToHead, jsToHead } from "$lib/utils";
+  // import { cssToHead, jsToHead } from "$lib/utils";
   let dispatch = createEventDispatcher();
 
   export let plansCards = plansCardArray;
@@ -16,17 +16,17 @@
   let ready = noTransition;
   onMount(() => (ready = true));
   // the 'ready' variable logic allows the in:scale div to animate (svelte transition) when going directly to this plans route ..otherwise only works when navigating from another route
-  function addCalendlyCSSandJS() {
-    console.log("📅");
-    jsToHead(
-      "calendlyJS",
-      "https://assets.calendly.com/assets/external/widget.js"
-    );
-    cssToHead(
-      "calendlyCSS",
-      "https://assets.calendly.com/assets/external/widget.css"
-    );
-  }
+  // function addCalendlyCSSandJS() {
+  //   console.log("📅");
+  //   jsToHead(
+  //     "calendlyJS",
+  //     "https://assets.calendly.com/assets/external/widget.js"
+  //   );
+  //   cssToHead(
+  //     "calendlyCSS",
+  //     "https://assets.calendly.com/assets/external/widget.css"
+  //   );
+  // }
 
   // This 'boop-function' dispatches a 'boop-event' when called; below, it's called as soon as the element is created with 'use:boop'.  An alternative to 'use:boop' logic is 'use={ dispatch("boop", OBJECT) }' ... but I think the former is more html-readable
   function boop() {
