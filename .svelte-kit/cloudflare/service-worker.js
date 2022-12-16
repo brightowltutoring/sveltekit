@@ -3,15 +3,15 @@ const o = [
   "/_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
   "/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
   "/_app/immutable/assets/poppins-v20-latin-700-9338e65f.woff2",
-  "/_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
   "/_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
+  "/_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
   "/_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
   "/_app/immutable/assets/poppins-v20-latin-700-da36c916.woff",
-  "/_app/immutable/start-4fac1be1.js",
+  "/_app/immutable/start-d852ac7e.js",
   "/_app/immutable/components/pages/_layout.svelte-bc8d895e.js",
   "/_app/immutable/assets/_layout-06b94399.css",
   "/_app/immutable/components/pages/_error.svelte-57c49de1.js",
-  "/_app/immutable/components/pages/_page.svelte-9a652441.js",
+  "/_app/immutable/components/pages/_page.svelte-e453f5df.js",
   "/_app/immutable/assets/_page-7d3eabbd.css",
   "/_app/immutable/components/pages/classroom/_page.svelte-98d9fd3c.js",
   "/_app/immutable/components/pages/classroomA/_page.svelte-fb0238cc.js",
@@ -24,7 +24,7 @@ const o = [
   "/_app/immutable/components/pages/mathjax/_page.svx-6fc0b15c.js",
   "/_app/immutable/components/pages/physics/_page.svelte-62c9e2b1.js",
   "/_app/immutable/assets/_page-fcf51fa8.css",
-  "/_app/immutable/components/pages/plans/_page.svelte-5f6725a8.js",
+  "/_app/immutable/components/pages/plans/_page.svelte-fafd69b3.js",
   "/_app/immutable/components/pages/samplequiz/_page.md-dbc926b8.js",
   "/_app/immutable/components/pages/stripe/_page.svelte-7e4e24b7.js",
   "/_app/immutable/assets/_page-5c304dd7.css",
@@ -51,10 +51,10 @@ const o = [
   "/_app/immutable/chunks/katex-d33715d1.js",
   "/_app/immutable/chunks/Kajax-bb2f8499.js",
   "/_app/immutable/chunks/_page-d949538d.js",
-  "/_app/immutable/chunks/PlansComponent-4df50c87.js",
+  "/_app/immutable/chunks/PlansComponent-7297b41d.js",
   "/_app/immutable/chunks/0-53661ef3.js",
   "/_app/immutable/chunks/1-9518dc6e.js",
-  "/_app/immutable/chunks/2-4b4935b1.js",
+  "/_app/immutable/chunks/2-bd222b5a.js",
   "/_app/immutable/chunks/3-8930e23b.js",
   "/_app/immutable/chunks/4-f39ea997.js",
   "/_app/immutable/chunks/5-189ad8a8.js",
@@ -64,7 +64,7 @@ const o = [
   "/_app/immutable/chunks/9-dd8a3c8b.js",
   "/_app/immutable/chunks/10-9f2f3454.js",
   "/_app/immutable/chunks/11-751fe9c4.js",
-  "/_app/immutable/chunks/12-8c4e1e8c.js",
+  "/_app/immutable/chunks/12-7cf6c87f.js",
   "/_app/immutable/chunks/13-872151bc.js",
   "/_app/immutable/chunks/14-20a5a817.js",
   "/_app/immutable/chunks/Footer-38486e73.js",
@@ -121,7 +121,7 @@ const o = [
   "/robots.txt",
   "/safari-share-icon.png",
   "/star.webp"
-], c = "1671163929760", p = self, i = `cache${c}`, l = o.concat(u), b = new Set(l);
+], c = "1671167319356", p = self, i = `cache${c}`, l = o.concat(u), b = new Set(l);
 p.addEventListener("install", (s) => {
   s.waitUntil(
     caches.open(i).then((a) => a.addAll(l)).then(() => {

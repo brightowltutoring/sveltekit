@@ -6,7 +6,7 @@
   import { elasticOut } from "svelte/easing";
 
   let showMe = false;
-  let src;
+  $: src = "";
   let changeOpacityTo100;
 
   export let payNowUrl = "";
@@ -38,8 +38,9 @@
   };
 
   async function handlePlansModal(BUTTON_URL) {
-    // src = `${BUTTON_URL}?hide_gdpr_banner=1`;
-    src = BUTTON_URL;
+    src = `${BUTTON_URL}?hide_gdpr_banner=1`;
+    // src = BUTTON_URL;
+    // src = "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1";
 
     // src = button.url;
     // showMe = src.length > 0;
@@ -54,11 +55,13 @@
 <!-- TODO: added dec 15 ... to replace the 'Calendly.initPopupWidget' logic; this modal is switched ON via handlePlansModal() function defined -->
 <!-- UPDATE: had to remove this due to iframes and calendly's website clashing with the ability to hide the calendly cookie banner  -->
 <Modal bind:showModal={showMe} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
-  <iframe
+  <embed
     title="Thinksolve Plans"
-    class="{changeOpacityTo100} opacity-0 w-full fixed bottom-0 md:w-[80vw] h-[90vh] md:-translate-y-5 backdrop-blur-3xl  rounded-xl border-dotted border-gray-500"
+    class=" bg-red-500 {changeOpacityTo100} opacity-0 w-full fixed bottom-0 md:w-[80vw] h-[90vh] md:-translate-y-5 backdrop-blur-3xl  rounded-xl border-dotted border-gray-500"
     {src}
   />
+
+  <!-- sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" -->
 </Modal>
 
 <plans-card
@@ -79,8 +82,8 @@
     <button
       in:scale={{ duration: 600, easing: elasticOut }}
       on:click={() => {
-        handlePlansModal(button.url);
-        // Calendly.initPopupWidget({ url: button.url });
+        // handlePlansModal(button.url);
+        Calendly.initPopupWidget({ url: button.url });
         // button.resetter = !button.resetter;
       }}
       class=" {buttonColor[
@@ -96,3 +99,15 @@
     <slot name="cardText">default cardText</slot>
   </div>
 </plans-card>
+
+<svelte:head>
+  <script
+    type="text/javascript"
+    src="https://assets.calendly.com/assets/external/widget.js"
+    async
+  ></script>
+  <link
+    href="https://assets.calendly.com/assets/external/widget.css"
+    rel="stylesheet"
+  />
+</svelte:head>
