@@ -11,9 +11,9 @@
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
   let DropzoneComponent;
-  let LoginCardComponent;
-  let FooterComponent;
+
   import LoginCard from "$lib/Login/LoginCard.svelte";
+  let FooterComponent;
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import Footer from "$lib/Footer.svelte";
 
@@ -75,7 +75,8 @@
 
   import { page } from "$app/stores";
   import { routes } from "$lib/store";
-  import LazyMount from "../lib/Wrappers/LazyMount.svelte";
+  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
+  import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
 
   let contactLinkClicked = false;
 </script>
@@ -195,27 +196,14 @@
   <Modal bind:showModal={$showLoginModal}>
     <LoginCard />
 
-    <!-- Update: on fast 3g this the $showLoginModal flickers to false; stopping this jank for now -->
+    <!-- Update: on fast 3g and iphone simulator this the $showLoginModal flickers to false; stopping this jank for now -->
     <!-- 25ms setTimeout reduces flicker .. still annoying that I have to manually add '$showLoginModal = true' in order for this to work. I suppose the asynchronous mounting of <LoginCard />  requires this-->
     <!-- <LazyMount
       Import={async () => {
-        setTimeout(() => {
-          $showLoginModal = true;
-        }, 25);
-
+        setTimeout(() => ($showLoginModal = true), 25);
         return await import("$lib/Login/LoginCard.svelte");
       }}
     /> -->
-
-    <!-- Older way, without LazyMount component -->
-    <!-- <InView
-      onview={async () =>
-        (LoginCardComponent = await import("$lib/Login/LoginCard.svelte"))}
-    >
-      {#if LoginCardComponent}
-        <LoginCardComponent.default />
-      {/if}
-    </InView> -->
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
@@ -226,7 +214,15 @@
       brightnessTW={"brightness-95"}
     /> -->
 
-    <InView
+    <!-- TODO: dec 16 figured out passing (unbounded) props !! Requires '$$props' syntax inside component definition -->
+    <LazyMount2
+      Import={async () => await import("$lib/Dropzone/Dropzone.svelte")}
+      textSizeTW={"text-6xl"}
+      dimensionsTW={"w-[80vw] h-[85vh]"}
+      brightnessTW={"brightness-95"}
+    />
+
+    <!-- <InView
       onview={async () =>
         (DropzoneComponent = await import("$lib/Dropzone/Dropzone.svelte"))}
     >
@@ -237,17 +233,6 @@
           brightnessTW={"brightness-95"}
         />
       {/if}
-    </InView>
-
-    <!-- TODO: OLD ATTEMPT -->
-    <!-- <InView>
-      {#await import("$lib/Dropzone/Dropzone.svelte") then Dropzone}
-        <Dropzone.default
-          textSizeTW={"text-6xl"}
-          dimensionsTW={"w-[80vw] h-[85vh]"}
-          brightnessTW={"brightness-95"}
-        />
-      {/await}
     </InView> -->
   </Modal>
 
@@ -277,12 +262,11 @@
       {/if}
     </InView>
 
-    <!-- <LazyMount
-      X={contactLinkClicked}
-      Import={async () => {
-        return await import("$lib/Footer.svelte");
-      }}
+    <!-- <LazyMount2
+      bind:contactLinkClicked
+      Import={async () => await import("$lib/Footer.svelte")}
     /> -->
+
     <!-- Failed attempt to consolidate lazy import block; comes down to import statement disallowing variable path. Update: passing import via a function prop seems to work, but then passing bounded props doesnt seem to work ..also the markup is already as large as the original  -->
   </div>
 </main>
