@@ -10,7 +10,8 @@ const color = {
 function payUrl(session_type, payment_type, color) {
   // return `https://calendly.com/thinksolve/${session_type}-${payment_type}`;
   // return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1&primary_color=${color}`;
-  return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1`;
+  // return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1`;
+  return `https://calendly.com/thinksolve/`;
 }
 
 export const plansCardArray = [

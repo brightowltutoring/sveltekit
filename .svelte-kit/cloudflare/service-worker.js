@@ -1,17 +1,17 @@
 const o = [
+  "/_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
   "/_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
   "/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
-  "/_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
   "/_app/immutable/assets/poppins-v20-latin-700-9338e65f.woff2",
+  "/_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
   "/_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
   "/_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
-  "/_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
   "/_app/immutable/assets/poppins-v20-latin-700-da36c916.woff",
-  "/_app/immutable/start-49bd9d46.js",
+  "/_app/immutable/start-fc2abfc4.js",
   "/_app/immutable/components/pages/_layout.svelte-96aefa88.js",
   "/_app/immutable/assets/_layout-06b94399.css",
   "/_app/immutable/components/pages/_error.svelte-0267bc1c.js",
-  "/_app/immutable/components/pages/_page.svelte-47a230c6.js",
+  "/_app/immutable/components/pages/_page.svelte-edda87f7.js",
   "/_app/immutable/assets/_page-7d3eabbd.css",
   "/_app/immutable/components/pages/classroom/_page.svelte-2348b0b5.js",
   "/_app/immutable/components/pages/classroomA/_page.svelte-333ae1ef.js",
@@ -24,7 +24,7 @@ const o = [
   "/_app/immutable/components/pages/mathjax/_page.svx-812db5ad.js",
   "/_app/immutable/components/pages/physics/_page.svelte-d31ed2fc.js",
   "/_app/immutable/assets/_page-fcf51fa8.css",
-  "/_app/immutable/components/pages/plans/_page.svelte-651ee912.js",
+  "/_app/immutable/components/pages/plans/_page.svelte-8fe7f326.js",
   "/_app/immutable/components/pages/samplequiz/_page.md-93f702e3.js",
   "/_app/immutable/components/pages/stripe/_page.svelte-c12a7579.js",
   "/_app/immutable/assets/_page-5c304dd7.css",
@@ -45,7 +45,7 @@ const o = [
   "/_app/immutable/chunks/firebase-cb9dba95.js",
   "/_app/immutable/chunks/public-e0b14f20.js",
   "/_app/immutable/chunks/_layout-86260db2.js",
-  "/_app/immutable/chunks/PlansComponent-bfb1e67c.js",
+  "/_app/immutable/chunks/PlansComponent-0b8031a5.js",
   "/_app/immutable/chunks/_page-372e4857.js",
   "/_app/immutable/chunks/Dropzone-61ede847.js",
   "/_app/immutable/assets/Dropzone-ad1f3da6.css",
@@ -54,7 +54,7 @@ const o = [
   "/_app/immutable/chunks/_page-d949538d.js",
   "/_app/immutable/chunks/0-f99195fa.js",
   "/_app/immutable/chunks/1-3ed9a07c.js",
-  "/_app/immutable/chunks/2-bab53c6f.js",
+  "/_app/immutable/chunks/2-0a9aa646.js",
   "/_app/immutable/chunks/3-95bba8ca.js",
   "/_app/immutable/chunks/4-9bffa5ab.js",
   "/_app/immutable/chunks/5-a627f461.js",
@@ -64,7 +64,7 @@ const o = [
   "/_app/immutable/chunks/9-42f99bdd.js",
   "/_app/immutable/chunks/10-fd7ac6e4.js",
   "/_app/immutable/chunks/11-1a3094a1.js",
-  "/_app/immutable/chunks/12-39b34946.js",
+  "/_app/immutable/chunks/12-c0c71466.js",
   "/_app/immutable/chunks/13-cc7b4dd3.js",
   "/_app/immutable/chunks/14-11bd5a91.js",
   "/_app/immutable/chunks/Footer-391a2201.js",
@@ -121,40 +121,40 @@ const o = [
   "/robots.txt",
   "/safari-share-icon.png",
   "/star.webp"
-], i = "1671160704640", p = self, l = `cache${i}`, c = o.concat(u), b = new Set(c);
-p.addEventListener("install", (s) => {
-  s.waitUntil(
-    caches.open(l).then((a) => a.addAll(c)).then(() => {
+], i = "1671162551047", p = self, c = `cache${i}`, l = o.concat(u), b = new Set(l);
+p.addEventListener("install", (a) => {
+  a.waitUntil(
+    caches.open(c).then((s) => s.addAll(l)).then(() => {
       p.skipWaiting();
     })
   );
 });
-p.addEventListener("activate", (s) => {
-  s.waitUntil(
-    caches.keys().then(async (a) => {
-      for (const e of a)
-        e !== l && await caches.delete(e);
+p.addEventListener("activate", (a) => {
+  a.waitUntil(
+    caches.keys().then(async (s) => {
+      for (const e of s)
+        e !== c && await caches.delete(e);
       p.clients.claim();
     })
   );
 });
-async function h(s) {
-  const a = await caches.open(`offline${i}`);
+async function h(a) {
+  const s = await caches.open(`offline${i}`);
   try {
-    const e = await fetch(s);
-    return a.put(s, e.clone()), e;
+    const e = await fetch(a);
+    return s.put(a, e.clone()), e;
   } catch (e) {
-    const t = await a.match(s);
+    const t = await s.match(a);
     if (t)
       return t;
     throw e;
   }
 }
-p.addEventListener("fetch", (s) => {
-  if (s.request.method !== "GET" || s.request.headers.has("range"))
+p.addEventListener("fetch", (a) => {
+  if (a.request.method !== "GET" || a.request.headers.has("range"))
     return;
-  const a = new URL(s.request.url), e = a.protocol.startsWith("http"), t = a.hostname === self.location.hostname && a.port !== self.location.port, n = a.host === self.location.host && b.has(a.pathname), m = s.request.cache === "only-if-cached" && !n;
-  e && !t && !m && s.respondWith(
-    (async () => n && await caches.match(s.request) || h(s.request))()
+  const s = new URL(a.request.url), e = s.protocol.startsWith("http"), t = s.hostname === self.location.hostname && s.port !== self.location.port, n = s.host === self.location.host && b.has(s.pathname), m = a.request.cache === "only-if-cached" && !n;
+  e && !t && !m && a.respondWith(
+    (async () => n && await caches.match(a.request) || h(a.request))()
   );
 });
