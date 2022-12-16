@@ -10,9 +10,8 @@ const color = {
 function payUrl(session_type, payment_type, color) {
   // return `https://calendly.com/thinksolve/${session_type}-${payment_type}`;
   // return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1&primary_color=${color}`;
-  return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1`;
-  // return `https://calendly.com/thinksolve/${session_type}-${payment_type}`;
-  // return `https://calendly.com/thinksolve/`;
+  // return `https://calendly.com/thinksolve/${session_type}-${payment_type}?hide_gdpr_banner=1`;
+  return `https://calendly.com/thinksolve/${session_type}-${payment_type}?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1&primary_color=${color}`;
 }
 
 export const plansCardArray = [
@@ -38,8 +37,10 @@ export const plansCardArray = [
   },
   {
     card: 2,
-    payNowUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
-    payLaterUrl: "https://calendly.com/thinksolve/custom?hide_gdpr_banner=1",
+    payNowUrl:
+      "https://calendly.com/thinksolve/custom?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1",
+    payLaterUrl:
+      "https://calendly.com/thinksolve/custom?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1",
     buttonText: "Custom",
     cardTitle: "Custom",
     cardText: `Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. `,
