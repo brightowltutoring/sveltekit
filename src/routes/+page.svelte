@@ -24,7 +24,7 @@
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 </script>
 
-<!-- <video
+<video
   loading="lazy"
   controlslist="nodownload"
   playsinline
@@ -35,7 +35,7 @@
     ? 'invert-[0.95] blur-3xl '
     : 'blur-2xl'}"
   src="/login-bg-video-blurred.mp4"
-/> -->
+/>
 
 {#if !isRunningStandalone()}
   <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
