@@ -9,6 +9,14 @@
   onMount(() => {
     document.body.appendChild(container);
   });
+
+  let changeOpacityTo100;
+  $: if (showModal) {
+    setTimeout(() => {
+      changeOpacityTo100 =
+        "opacity-100 transition-opacity duration-1000 ease-in";
+    }, 50);
+  }
 </script>
 
 <!-- md:py-4 py-1 md:px-[7%] z-50 -->
@@ -16,7 +24,7 @@
 
 <button
   bind:this={container}
-  class="z-50 fixed top-0 left-0 w-full h-full flex justify-center items-center  {showModal
+  class="opacity-0 {changeOpacityTo100} z-50 fixed top-0 left-0 w-full h-full flex justify-center items-center  {showModal
     ? `${bgTint} `
     : 'hidden'} overflow-y-scroll overflow-x-clip"
   on:click|self={() => (showModal = false)}

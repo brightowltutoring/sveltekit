@@ -12,7 +12,7 @@
   import Modal from "$lib/Wrappers/Modal.svelte";
   // let DropzoneComponent;
 
-  import LoginCard from "$lib/Login/LoginCard.svelte";
+  // import LoginCard from "$lib/Login/LoginCard.svelte";
   let FooterComponent;
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import Footer from "$lib/Footer.svelte";
@@ -193,17 +193,20 @@
 
   <!-- WITHOUT bind I am able to keep state on the logincard ...which is useful for phone auth sms code logic, however annoyingly the svg icon color does not update back to default color when unclicking -->
 
-  <Modal bind:showModal={$showLoginModal}>
-    <LoginCard />
+  <Modal
+    bind:showModal={$showLoginModal}
+    bgTint={"backdrop-blur-md bg-[rgba(0,0,0,0.3)]"}
+  >
+    <!-- <LoginCard /> -->
 
     <!-- Update: on fast 3g and iphone simulator this the $showLoginModal flickers to false; stopping this jank for now -->
     <!-- 25ms setTimeout reduces flicker .. still annoying that I have to manually add '$showLoginModal = true' in order for this to work. I suppose the asynchronous mounting of <LoginCard />  requires this-->
-    <!-- <LazyMount
+    <LazyMount2
       Import={async () => {
-        setTimeout(() => ($showLoginModal = true), 25);
+        setTimeout(() => ($showLoginModal = true), 100);
         return await import("$lib/Login/LoginCard.svelte");
       }}
-    /> -->
+    />
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
@@ -237,7 +240,7 @@
   </Modal>
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
-  <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
+  <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full ">
     <!-- <div class=" z-50 fixed {jankytown} ease-in-out w-full"> -->
     <Navbar />
   </div>

@@ -35,7 +35,9 @@
     }
     if (href == "/login") {
       e.preventDefault();
+
       $showLoginModal = true;
+
       return;
     }
   }

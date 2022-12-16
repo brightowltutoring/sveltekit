@@ -6,7 +6,7 @@
   // import InView from "$lib/Wrappers/InView.svelte";
   // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-  // import Reviews from "$lib/Reviews/Reviews.svelte";
+  import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
   import { slide } from "svelte/transition";
@@ -87,7 +87,7 @@
       <button
         on:click={() => {
           $showHomeworkModal = true;
-          globalThis.onceBoolean = false;
+          // globalThis.onceBoolean = false;
         }}
         style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
         class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl  text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
@@ -169,11 +169,11 @@
         >
       </button>
 
-      <!-- <Reviews /> -->
+      <Reviews />
 
-      <LazyMount
+      <!-- <LazyMount
         Import={async () => await import("$lib/Reviews/Reviews.svelte")}
-      />
+      /> -->
     </div>
   </div>
 {:else}
