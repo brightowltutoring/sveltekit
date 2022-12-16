@@ -12,6 +12,7 @@
   import Modal from "$lib/Wrappers/Modal.svelte";
   let DropzoneComponent;
   let LoginCardComponent;
+  let FooterComponent;
   import LoginCard from "$lib/Login/LoginCard.svelte";
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import Footer from "$lib/Footer.svelte";
@@ -265,17 +266,23 @@
 
     <!-- <Footer bind:contactLinkClicked /> -->
 
-    <!--TODO: LAZY IMPORTING COMPONENT!!! -->
-    <!-- <InView onview={async () => (Footer = await import("$lib/Footer.svelte"))}>
-      {#if Footer}
-        <Footer.default bind:contactLinkClicked />
+    <!-- When passing bounded variables, cannot (yet) use the LazyMount way-->
+    <InView
+      margin={"400px"}
+      onview={async () =>
+        (FooterComponent = await import("$lib/Footer.svelte"))}
+    >
+      {#if FooterComponent}
+        <FooterComponent.default bind:contactLinkClicked />
       {/if}
-    </InView> -->
+    </InView>
 
-    <LazyMount
-      bind:X={contactLinkClicked}
-      Import={async () => await import("$lib/Footer.svelte")}
-    />
+    <!-- <LazyMount
+      X={contactLinkClicked}
+      Import={async () => {
+        return await import("$lib/Footer.svelte");
+      }}
+    /> -->
     <!-- Failed attempt to consolidate lazy import block; comes down to import statement disallowing variable path. Update: passing import via a function prop seems to work, but then passing bounded props doesnt seem to work ..also the markup is already as large as the original  -->
   </div>
 </main>

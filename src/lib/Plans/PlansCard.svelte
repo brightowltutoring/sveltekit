@@ -1,9 +1,13 @@
 <script>
-  import { preloadCode } from "$app/navigation";
+  import Modal from "$lib/Wrappers/Modal.svelte";
   import { isDarkMode, elementColor } from "$lib/store";
 
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
+
+  let showMe = false;
+  let src;
+  let changeOpacityTo100;
 
   export let payNowUrl = "";
   export let payLaterUrl = "";
@@ -32,7 +36,27 @@
     2: "bg-[rgb(254,164,92)]" /* yellow */,
     3: "bg-[rgb(45,165,214)]" /* blue */,
   };
+
+  async function handlePlansModal(BUTTON_URL) {
+    src = BUTTON_URL;
+    // src = button.url;
+    showMe = src.length > 0;
+    // showMe = true;
+    setTimeout(() => {
+      changeOpacityTo100 =
+        "opacity-100 transition-opacity duration-300 ease-in";
+    }, 100);
+  }
 </script>
+
+<!-- TODO: added dec 15 ... to replace the 'Calendly.initPopupWidget' logic; this modal is switched ON via handlePlansModal() function defined -->
+<Modal bind:showModal={showMe} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+  <iframe
+    title="Thinksolve Plans"
+    class="{changeOpacityTo100} opacity-0 w-full fixed bottom-0 md:w-[80vw] h-[90vh] md:-translate-y-5 backdrop-blur-3xl  rounded-xl border-dotted border-gray-500"
+    {src}
+  />
+</Modal>
 
 <plans-card
   class="cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
@@ -45,21 +69,24 @@
   </p>
 
   {#each payButtons as button}
-    {#key button.resetter}
-      <button
-        in:scale={{ duration: 600, easing: elasticOut }}
-        on:click={() => {
-          // Calendly.initPopupWidget({ url: button.url });
-          preloadCode(Calendly.initPopupWidget({ url: button.url })); // unsure if this works
-          // button.resetter = !button.resetter;
-        }}
-        class=" {buttonColor[
-          card
-        ]} {btnColorHover} {button.opacityTW}   hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white "
-      >
-        <slot name="buttonText">{button.text}</slot>
-      </button>
-    {/key}
+    <!-- {#key button.resetter} -->
+
+    <button
+      in:scale={{ duration: 600, easing: elasticOut }}
+      on:mouseover={() => (src = button.url)}
+      on:focus={() => (src = button.url)}
+      on:click={() => {
+        handlePlansModal(button.url);
+        // Calendly.initPopupWidget({ url: button.url });
+        // button.resetter = !button.resetter;
+      }}
+      class=" {buttonColor[
+        card
+      ]} {btnColorHover} {button.opacityTW}   hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white "
+    >
+      <slot name="buttonText">{button.text}</slot>
+    </button>
+    <!-- {/key} -->
   {/each}
 
   <div class="py-4">
