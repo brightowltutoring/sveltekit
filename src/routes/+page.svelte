@@ -120,23 +120,21 @@
         noTransition
       /> -->
 
+      <!-- TODO: UPDATE: dec 17,2022: somehow this is better than using LazyMount2 ... getting perfect lighthouse score when I manually lazy mount this component... -->
       <!-- Dec15,2022 lazy mounting manually since not sure how to deal with unbounded props -->
+      <!-- margin={"500px"} -->
       <InView
-        margin={"500px"}
         onview={async () => {
           PlansComponent = (await import("$lib/Plans/PlansComponent.svelte"))
             .default;
         }}
       >
-        <svelte:component
-          this={PlansComponent}
-          noTransition
-          plansCards={classicoAndMock}
-          on:boop={(e) => {
+        <svelte:component this={PlansComponent} noTransition />
+        <!-- plansCards={classicoAndMock} -->
+        <!-- on:boop={(e) => {
             classicoAndMock = e.detail.plansCardArray.slice(0, 2);
             console.log("🏡", e.detail.message);
-          }}
-        />
+          }} -->
       </InView>
       <!-- {#if PlansComponent}
         <PlansComponent
