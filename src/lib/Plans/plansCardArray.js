@@ -73,24 +73,3 @@ export const plansCardArraySchools = [
     href: sampleHref,
   },
 ];
-
-// TODO: i dont know where to put this yet
-// function showPlansModal() {
-//   showMe = true;
-//   src =
-//     "https://calendly.com/thinksolve/mock-stripe?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1&primary_color=2aa5d6";
-//   setTimeout(() => {
-//     changeOpacityTo100 = "opacity-100 transition-opacity duration-300 ";
-//   }, 50);
-// }
-{
-  /* <button on:click={showPlansModal}>show me</button>
-
-<Modal bind:showModal={showMe}>
-  <iframe
-    class="{changeOpacityTo100} w-full fixed bottom-0 md:w-[80vw] h-[90vh] md:-translate-y-5 backdrop-blur-3xl  rounded-xl border-dotted border-gray-500"
-    {src}
-  />
-</Modal> */
-}
-// TODO: i dont know where to put this yet

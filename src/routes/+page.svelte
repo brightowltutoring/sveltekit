@@ -1,6 +1,8 @@
 <script>
+  import InView from "$lib/Wrappers/InView.svelte";
   import { showHomeworkModal } from "./../lib/store.js";
-  import PlansComponent from "$lib/Plans/PlansComponent.svelte";
+  // import PlansComponent from "$lib/Plans/PlansComponent.svelte";
+  let PlansComponent;
   let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
@@ -111,14 +113,33 @@
         <span class={gradientTextColor}> 2. Schedule a Session </span>
       </button>
 
-      <PlansComponent
+      <!-- TODO: dec15,2022 (manually) lazy mounting the plans component over using LazyMount.svelte wrapper ..since as of yet that component can't handle general props -->
+      <InView
+        margin={"400px"}
+        onview={async () =>
+          (PlansComponent = await import("$lib/Plans/PlansComponent.svelte"))}
+      >
+        {#if PlansComponent}
+          <PlansComponent.default
+            noTransition
+            plansCards={classicoAndMock}
+            on:boop={(e) => {
+              classicoAndMock = e.detail.plansCardArray.slice(0, 2);
+              console.log("🏡", e.detail.message);
+            }}
+          />
+        {/if}
+      </InView>
+
+      <!-- OLD WAY -->
+      <!-- <PlansComponent
         noTransition
         on:boop={(e) => {
           classicoAndMock = e.detail.plansCardArray.slice(0, 2);
           console.log("🏡", e.detail.message);
         }}
         plansCards={classicoAndMock}
-      />
+      /> -->
 
       <!-- TODO: 'boop' is a custom svelte event sent from within planscomponent.svelte, containing 'plansCardArray'; here I decide to modify a copy of this data and name it 'classicoAndMock' ... upside of this is not having to import 'plansCardArray' from a js file ...downside is while waiting for this boop event the change in content flashes on the home route (when refreshing the page at the plans section)-->
     </div>
