@@ -10,6 +10,6 @@
 
 <InView onview={getComponent}>
   {#if Component}
-    <Component.default />
+    <Component.default {...$$props} />
   {/if}
 </InView>

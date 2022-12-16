@@ -13,7 +13,7 @@ ${`<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
     <div class="h-[60vh] flex justify-center items-center text-center"><div class="grid grid-rows-1"></div></div>
 
     
-    <div id="step1" class="hover:scale-105 duration-500 grid place-content-center"><button class="text-5xl font-Poppins text-center pb-7 "><span class="${t(m(a),!0)+" svelte-iq6ytm"}">1. Upload your homework </span></button>
+    <div id="step1" class="hover:scale-105 duration-500 grid place-content-center"><button class="text-5xl font-Poppins text-center pb-7"><span class="${t(m(a),!0)+" svelte-iq6ytm"}">1. Upload your homework </span></button>
 
       
       
@@ -24,9 +24,10 @@ ${`<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
     <div id="step2" class="duration-500 grid place-content-center"><button class="text-5xl font-Poppins text-center pb-7 "><span class="${t(m(a),!0)+" svelte-iq6ytm"}">2. Schedule a Session </span></button>
 
       
-      ${c(v,"LazyMount2").$$render(s,{Import:async()=>await import("../../chunks/PlansComponent.js"),noTransition:!0},{},{})}
+      ${c(v,"LazyMount2").$$render(s,{Import:async()=>await import("../../chunks/PlansComponent.js")},{},{})}
 
       
+
       
       
 

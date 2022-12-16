@@ -10,7 +10,7 @@
   import Navbar from "$lib/Nav/Navbar.svelte";
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
-  let DropzoneComponent;
+  // let DropzoneComponent;
 
   import LoginCard from "$lib/Login/LoginCard.svelte";
   let FooterComponent;
@@ -75,7 +75,7 @@
 
   import { page } from "$app/stores";
   import { routes } from "$lib/store";
-  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
+  // import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
 
   let contactLinkClicked = false;

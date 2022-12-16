@@ -4,7 +4,8 @@
   // let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import InView from "$lib/Wrappers/InView.svelte";
-  import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
+  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
+  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
@@ -111,7 +112,7 @@
       </button>
 
       <!-- Dec16,2022: able to handle unbounded props now! However not sure how to handle the custom dispatched event, as before. Maybe rethink PlansComponent logic -->
-      <LazyMount2
+      <LazyMount
         Import={async () => await import("$lib/Plans/PlansComponent.svelte")}
       />
 
