@@ -6,19 +6,19 @@ export const timestamp = {
 };
 
 export const build = [
-	"/_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
-	"/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
-	"/_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
 	"/_app/immutable/assets/poppins-v20-latin-700-9338e65f.woff2",
-	"/_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
-	"/_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
+	"/_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2",
+	"/_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2",
+	"/_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2",
 	"/_app/immutable/assets/poppins-v20-latin-700-da36c916.woff",
+	"/_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff",
 	"/_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff",
-	"/_app/immutable/start-8fe4a92a.js",
+	"/_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff",
+	"/_app/immutable/start-8a62c876.js",
 	"/_app/immutable/components/pages/_layout.svelte-8ae6a75a.js",
 	"/_app/immutable/assets/_layout-06b94399.css",
 	"/_app/immutable/components/pages/_error.svelte-9e3efa9e.js",
-	"/_app/immutable/components/pages/_page.svelte-cd976236.js",
+	"/_app/immutable/components/pages/_page.svelte-6558e067.js",
 	"/_app/immutable/assets/_page-7d3eabbd.css",
 	"/_app/immutable/components/pages/classroom/_page.svelte-6e8bad58.js",
 	"/_app/immutable/components/pages/classroomA/_page.svelte-037385be.js",
@@ -31,7 +31,7 @@ export const build = [
 	"/_app/immutable/components/pages/mathjax/_page.svx-2587bd73.js",
 	"/_app/immutable/components/pages/physics/_page.svelte-91b294ed.js",
 	"/_app/immutable/assets/_page-fcf51fa8.css",
-	"/_app/immutable/components/pages/plans/_page.svelte-a2fa31a7.js",
+	"/_app/immutable/components/pages/plans/_page.svelte-ef2b1841.js",
 	"/_app/immutable/components/pages/samplequiz/_page.md-2b05af74.js",
 	"/_app/immutable/components/pages/stripe/_page.svelte-fb2bb104.js",
 	"/_app/immutable/assets/_page-5c304dd7.css",
@@ -57,10 +57,10 @@ export const build = [
 	"/_app/immutable/chunks/katex-d33715d1.js",
 	"/_app/immutable/chunks/Kajax-9ae94ba7.js",
 	"/_app/immutable/chunks/_page-d949538d.js",
-	"/_app/immutable/chunks/PlansComponent-de267b3e.js",
+	"/_app/immutable/chunks/PlansComponent-cc92b59d.js",
 	"/_app/immutable/chunks/0-105d5a51.js",
 	"/_app/immutable/chunks/1-276a099c.js",
-	"/_app/immutable/chunks/2-d0db7302.js",
+	"/_app/immutable/chunks/2-c8bb6a38.js",
 	"/_app/immutable/chunks/3-315b2104.js",
 	"/_app/immutable/chunks/4-0be30d14.js",
 	"/_app/immutable/chunks/5-dc3536c1.js",
@@ -70,7 +70,7 @@ export const build = [
 	"/_app/immutable/chunks/9-a7335a07.js",
 	"/_app/immutable/chunks/10-378eb87d.js",
 	"/_app/immutable/chunks/11-3f622829.js",
-	"/_app/immutable/chunks/12-cdacb909.js",
+	"/_app/immutable/chunks/12-e17a8c47.js",
 	"/_app/immutable/chunks/13-24d5acbc.js",
 	"/_app/immutable/chunks/14-f28b82e5.js",
 	"/_app/immutable/chunks/Footer-63d2bd2f.js",
@@ -146,4 +146,4 @@ export const prerendered = [
 	"/stripe"
 ];
 
-export const version = "1671157855320";
+export const version = "1671158363433";
