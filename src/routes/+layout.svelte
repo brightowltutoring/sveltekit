@@ -1,4 +1,5 @@
 <script>
+  import { isLoggedIn } from "./../lib/store.js";
   import "../app.css";
   import {
     scale,
@@ -79,6 +80,13 @@
   import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
 
   let contactLinkClicked = false;
+
+  // let LoginCard;
+  async function importLoginCardModule() {
+    //  import LoginCard from "$lib/Login/LoginCard.svelte";/
+    // LoginCard = (await import("$lib/Login/LoginCard.svelte")).default;
+    return await import("$lib/Login/LoginCard.svelte");
+  }
 </script>
 
 <svelte:head>
@@ -198,15 +206,23 @@
     bgTint={"backdrop-blur-md bg-[rgba(0,0,0,0.3)]"}
     opacityEase
   >
-    <!-- <LoginCard /> -->
-
+    <!-- <LoginCard/> -->
     <!--dec 16, 2022: $showLoginModal flickers to false; have to do '$showLoginModal = true' 100ms setTimeout. To reduce flicker I have modified Modal.svelte to include an opacity easing -->
+
+    <!-- TODO: maybe replace isLoggedIn with cookie check -->
+    <!-- {#if $isLoggedIn}
+      {#await importLoginCardModule() then LoginCardComponent}
+        <LoginCardComponent.default />
+      {/await}
+    {:else} -->
+
     <LazyMount2
       Import={async () => {
         setTimeout(() => ($showLoginModal = true), 100);
         return await import("$lib/Login/LoginCard.svelte");
       }}
     />
+    <!-- {/if} -->
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
