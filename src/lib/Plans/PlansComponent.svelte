@@ -1,6 +1,6 @@
 <script>
   import PlansCard from "$lib/Plans/PlansCard.svelte";
-  // import InView from "$lib/Wrappers/InView.svelte";
+  import InView from "$lib/Wrappers/InView.svelte";
   import { elasticOut } from "svelte/easing";
   import { scaleYN } from "$lib/utils";
   // import { fade, fly, scale, slide } from "svelte/transition";
@@ -34,32 +34,32 @@
   }
 </script>
 
-<!-- <InView once margin={"200px"} onview={addCalendlyCSSandJS}> -->
-<plans-section
-  use:boop
-  class="grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"
->
-  <!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7" -->
-  {#if ready}
-    {#each plansCards as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
-      <div
-        in:scaleYN={{
-          delay: 100 * i,
-          duration: 1000,
-          easing: elasticOut,
-          noTransition,
-        }}
-      >
-        <PlansCard {card} {payNowUrl} {payLaterUrl}>
-          <!-- <span slot="buttonText"> {buttonText} </span> -->
-          <span slot="cardTitle"> {cardTitle} </span>
-          <span slot="cardText"> {cardText} </span>
-        </PlansCard>
-      </div>
-    {/each}
-  {/if}
-</plans-section>
-<!-- </InView> -->
+<InView once margin={"200px"} onview={addCalendlyCSSandJS}>
+  <plans-section
+    use:boop
+    class="grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7"
+  >
+    <!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7" -->
+    {#if ready}
+      {#each plansCards as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
+        <div
+          in:scaleYN={{
+            delay: 100 * i,
+            duration: 1000,
+            easing: elasticOut,
+            noTransition,
+          }}
+        >
+          <PlansCard {card} {payNowUrl} {payLaterUrl}>
+            <!-- <span slot="buttonText"> {buttonText} </span> -->
+            <span slot="cardTitle"> {cardTitle} </span>
+            <span slot="cardText"> {cardText} </span>
+          </PlansCard>
+        </div>
+      {/each}
+    {/if}
+  </plans-section>
+</InView>
 
 <!-- <style>
     .dynamic-col {
@@ -70,7 +70,7 @@
 </style> -->
 <!-- The above grid logic now achieved with the custom 'grid-cols-dynamic' as speficifid in tailwind.config.cjs  -->
 
-<svelte:head>
+<!-- <svelte:head>
   <script
     type="text/javascript"
     src="https://assets.calendly.com/assets/external/widget.js"
@@ -80,4 +80,4 @@
     href="https://assets.calendly.com/assets/external/widget.css"
     rel="stylesheet"
   />
-</svelte:head>
+</svelte:head> -->

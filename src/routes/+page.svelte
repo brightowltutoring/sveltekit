@@ -115,7 +115,7 @@
 
       <!-- TODO: dec15,2022 (manually) lazy mounting the plans component over using LazyMount.svelte wrapper ..since as of yet that component can't handle general props -->
       <InView
-        margin={"400px"}
+        margin={"500px"}
         onview={async () =>
           (PlansComponent = await import("$lib/Plans/PlansComponent.svelte"))}
       >
