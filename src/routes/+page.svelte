@@ -6,7 +6,7 @@
   // import InView from "$lib/Wrappers/InView.svelte";
   // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-  import Reviews from "$lib/Reviews/Reviews.svelte";
+  // import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
   import { slide } from "svelte/transition";
@@ -168,7 +168,12 @@
           >3. Do Some Reading <span class="text-black">😎 </span></span
         >
       </button>
-      <Reviews />
+
+      <!-- <Reviews /> -->
+
+      <LazyMount
+        Import={async () => await import("$lib/Reviews/Reviews.svelte")}
+      />
     </div>
   </div>
 {:else}
