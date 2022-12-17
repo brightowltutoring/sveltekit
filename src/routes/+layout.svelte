@@ -81,7 +81,7 @@
   let contactLinkClicked = false;
 
   // for logincard ui .. which is lazy loaded below
-  const opacityEasingDelay = 50;
+  const opacityEasingDelay = 100;
   let changeOpacityTo100;
   $: if ($showLoginModal && !$isLoggedIn) {
     setTimeout(() => {
@@ -214,7 +214,7 @@
     <!-- <LoginCard /> -->
     <LazyMount
       Import={() => {
-        setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 50ms
+        setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
         return import("$lib/Login/LoginCard.svelte");
       }}
     />

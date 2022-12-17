@@ -1,7 +1,6 @@
 import { auth } from "$lib/Login/firebase";
 import { goto } from "$app/navigation";
 
-// TODO: on nov29,2022 these became unncessary since we are not doing 'signinWithRedirect' for either google or twitter login (see code comment below for google and twitter login)
 // import { get } from "svelte/store";
 // import { lessThan768 } from "$lib/store";
 // import { isRunningStandalone } from "$lib/utils";
@@ -40,7 +39,8 @@ export async function magicLinkToEmail(EMAIL) {
     });
 }
 
-// TODO: nov29.2022 : google login didnt work with 'signInWithRedirect' logic, so assuming the same for twitter login .. getting rid of the if-else logic and keeping only the 'signInWithPopup' logic
+// nov29.2022 : google login didnt work with 'signInWithRedirect' logic, so assuming the same for twitter login .. getting rid of the if-else logic and keeping only the 'signInWithPopup' logic
+// UPDATE:  dec17,2022: 'https://firebase.google.com/docs/auth/web/redirect-best-practices' explains how and why 'signInWithRedirect' fails .. seems like just using 'signInWithPopup' is easiest option
 export async function TwitterLogin() {
   // const auth = await import("$lib/Login/firebase");
   const { TwitterAuthProvider, browserPopupRedirectResolver } = await import(
@@ -74,10 +74,12 @@ export async function TwitterLogin() {
   //       // ...
   //     });
   // } else {
-  const { signInWithPopup } = await import("firebase/auth");
+  // const { signInWithPopup } = await import("firebase/auth");
   // console.log("twitter provider?", provider.providerId);
 
-  signInWithPopup(auth, provider, browserPopupRedirectResolver)
+  // signInWithPopup(auth, provider, browserPopupRedirectResolver)
+  const { signInWithRedirect } = await import("firebase/auth");
+  signInWithRedirect(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
       // You can use these server side with your app's credentials to access the Twitter API.
@@ -102,8 +104,9 @@ export async function TwitterLogin() {
   // }
 }
 
-// TODO: nov29.2022 noticed that 'signinWithRedirect' logic did not sign me in ... furthermore 'signInWithPopup' worked perfectly on both the PWA and on the mobile version of the website ... It appears firebase has consolidated the two??
-export async function GoogleLogin(e) {
+// TODOnov29.2022 noticed that 'signinWithRedirect' logic did not sign me in ... furthermore 'signInWithPopup' worked perfectly on both the PWA and on the mobile version of the website ... It appears firebase has consolidated the two??
+// UPDATE:  dec17,2022: 'https://firebase.google.com/docs/auth/web/redirect-best-practices' explains how and why 'signInWithRedirect' fails .. seems like just using 'signInWithPopup' is easiest option
+export async function GoogleLogin() {
   // const auth = await import("$lib/Login/firebase");
 
   const {
@@ -137,13 +140,15 @@ export async function GoogleLogin(e) {
   //       const credential = GoogleAuthProvider.credentialFromError(error);
   //     });
   // } else {
-  const { signInWithPopup } = await import("firebase/auth");
+  // const { signInWithPopup } = await import("firebase/auth");
   // console.log("google provider?", provider.providerId);
 
   // setPersistence(auth, browserSessionPersistence).then(() => {
   // signInWithPopup(auth, provider)
 
-  signInWithPopup(auth, provider, browserPopupRedirectResolver)
+  // signInWithPopup(auth, provider, browserPopupRedirectResolver)
+  const { signInWithRedirect } = await import("firebase/auth");
+  signInWithRedirect(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
