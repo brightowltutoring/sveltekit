@@ -4,14 +4,11 @@
   export let opacityEase; //added dec 16 to allow easing for the janky lazymounted logincard component in +layout.svelte
   export let showModal = false;
   export let bgTint = "bg-[rgba(0,0,0,0.4)]";
-  // export let bod = false;
 
-  // without this body append logic, the modal inherits strange padding when used inside other components; originally no issues when using modal at the layout level ... which makes sense as it is the top most level in sveltekit
   let container;
   import { onMount } from "svelte";
-  onMount(() => {
-    document.body.appendChild(container);
-  });
+  // without this body append logic, the modal inherits strange padding when used inside other components; originally no issues when using modal at the layout level ... which makes sense as it is the top most level in sveltekit
+  onMount(() => document.body.appendChild(container));
 
   //added dec 16 to allow easing for the janky lazymounted logincard component in +layout.svelte
   let changeOpacityTo100;

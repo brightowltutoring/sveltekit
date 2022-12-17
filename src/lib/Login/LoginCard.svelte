@@ -180,54 +180,62 @@
   }
 </script>
 
-{#if !$isLoggedIn}
-  {#key !noTransition && $showLoginModal}
-    <login-card
-      in:slide={{ duration: 400, easing: quintOut }}
-      class=" block relative text-xl hover:scale-[1.01] font-Poppins shadow-md {$isDarkMode
-        ? 'hover:shadow-xl '
-        : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-screen sm:w-[500px]"
-      style={`background:${$elementColor}`}
-    >
-      <!-- <div class="absolute -top-2 -right-2">
+<main class="w-[80vw] flex justify-center items-center">
+  {#if !$isLoggedIn}
+    {#key !noTransition && $showLoginModal}
+      <login-card
+        in:slide={{ duration: 400, easing: quintOut }}
+        class="card-styles text-xl {$isDarkMode
+          ? 'hover:shadow-xl '
+          : 'hover:shadow-lg'}"
+        style={`background:${$elementColor}`}
+      >
+        <!-- <div class="absolute -top-2 -right-2">
           <CloseButton />
         </div> -->
 
-      {#if isRunningStandalone()}
-        <PhoneAuthSection />
-      {:else}
-        <MagicLinkSection />
-        <p class="py-3" />
-        <PhoneAuthSection />
-      {/if}
+        {#if isRunningStandalone()}
+          <PhoneAuthSection />
+        {:else}
+          <MagicLinkSection />
+          <p class="py-3" />
+          <PhoneAuthSection />
+        {/if}
 
-      <!-- <div class="grid grid-flow-col gap-2 "> -->
+        <!-- <div class="grid grid-flow-col gap-2 "> -->
 
-      <GoogleLoginButton />
-      <TwitterLoginButton />
-    </login-card>
-  {/key}
-{/if}
+        <GoogleLoginButton />
+        <TwitterLoginButton />
+      </login-card>
+    {/key}
+  {/if}
 
-{#if $isLoggedIn}
-  {#key !noTransition && $showLoginModal}
-    <logout-card
-      in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
-      class="relative block  hover:scale-[1.01]  font-Poppins  shadow-md {$isDarkMode
-        ? 'hover:shadow-xl '
-        : 'hover:shadow-lg'} rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px] "
-      style={`background:${$elementColor}`}
-    >
-      <p bind:this={loginWelcomeText}>Welcome User</p>
+  {#if $isLoggedIn}
+    {#key !noTransition && $showLoginModal}
+      <logout-card
+        in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
+        class="card-styles {$isDarkMode
+          ? 'hover:shadow-xl '
+          : 'hover:shadow-lg'}"
+        style={`background:${$elementColor} `}
+      >
+        <p bind:this={loginWelcomeText}>Welcome User</p>
 
-      <!-- <div id="redirectMessage"> -->
-      <div>
-        Redirecting to your page in
-        <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
-      </div>
+        <!-- <div id="redirectMessage"> -->
+        <div>
+          Redirecting to your page in
+          <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
+        </div>
 
-      <!-- <button id="logoutBtn" on:click={logoutFunction}>Logout</button> -->
-      <button on:click={logoutFunction}>Logout</button>
-    </logout-card>
-  {/key}
-{/if}
+        <!-- <button id="logoutBtn" on:click={logoutFunction}>Logout</button> -->
+        <button on:click={logoutFunction}>Logout</button>
+      </logout-card>
+    {/key}
+  {/if}
+</main>
+
+<style>
+  .card-styles {
+    @apply relative block font-Poppins mx-auto py-10 px-5 sm:p-10 w-[90vw] sm:w-[500px] shadow-md hover:scale-[1.01] rounded-2xl hover:rounded-3xl duration-300;
+  }
+</style>

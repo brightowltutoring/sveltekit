@@ -203,7 +203,7 @@
 
   <Modal
     bind:showModal={$showLoginModal}
-    bgTint={"backdrop-blur-md bg-[rgba(0,0,0,0.3)]"}
+    bgTint={"backdrop-blur-md"}
     opacityEase
   >
     <!-- <LoginCard/> -->
@@ -218,7 +218,7 @@
 
     <LazyMount2
       Import={async () => {
-        setTimeout(() => ($showLoginModal = true), 100);
+        setTimeout(() => ($showLoginModal = true), 25);
         return await import("$lib/Login/LoginCard.svelte");
       }}
     />

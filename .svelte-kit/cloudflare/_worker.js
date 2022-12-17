@@ -113,8 +113,8 @@ function j(t3, n4 = false) {
   o5.lastIndex = 0;
   let s5 = "", r4 = 0;
   for (; o5.test(e5); ) {
-    const c4 = o5.lastIndex - 1, u3 = e5[c4];
-    s5 += e5.substring(r4, c4) + (u3 === "&" ? "&amp;" : u3 === '"' ? "&quot;" : "&lt;"), r4 = c4 + 1;
+    const c4 = o5.lastIndex - 1, u2 = e5[c4];
+    s5 += e5.substring(r4, c4) + (u2 === "&" ? "&amp;" : u2 === '"' ? "&quot;" : "&lt;"), r4 = c4 + 1;
   }
   return s5 + e5.substring(r4);
 }
@@ -131,15 +131,15 @@ function M(t3, n4) {
 }
 function N(t3) {
   function n4(e5, o5, s5, r4, c4) {
-    const u3 = a, h = { on_destroy: f, context: new Map(c4 || (u3 ? u3.$$.context : [])), on_mount: [], before_update: [], after_update: [], callbacks: g() };
+    const u2 = a, h = { on_destroy: f, context: new Map(c4 || (u2 ? u2.$$.context : [])), on_mount: [], before_update: [], after_update: [], callbacks: g() };
     d({ $$: h });
     const b3 = t3(e5, o5, s5, r4);
-    return d(u3), b3;
+    return d(u2), b3;
   }
   return { render: (e5 = {}, { $$slots: o5 = {}, context: s5 = /* @__PURE__ */ new Map() } = {}) => {
     f = [];
     const r4 = { title: "", head: "", css: /* @__PURE__ */ new Set() }, c4 = n4(r4, e5, {}, o5, s5);
-    return E(f), { html: c4, css: { code: Array.from(r4.css).map((u3) => u3.code).join(`
+    return E(f), { html: c4, css: { code: Array.from(r4.css).map((u2) => u2.code).join(`
 `), map: null }, head: r4.title + r4.head };
   }, $$render: n4 };
 }
@@ -168,10 +168,10 @@ function z2(n4, i2) {
   return { subscribe: A2(n4, i2).subscribe };
 }
 function A2(n4, i2 = p) {
-  let u3;
+  let u2;
   const t3 = /* @__PURE__ */ new Set();
   function a5(e5) {
-    if (S(n4, e5) && (n4 = e5, u3)) {
+    if (S(n4, e5) && (n4 = e5, u2)) {
       const r4 = !o.length;
       for (const s5 of t3)
         s5[1](), o.push(s5, n4);
@@ -182,20 +182,20 @@ function A2(n4, i2 = p) {
       }
     }
   }
-  function l4(e5) {
+  function l3(e5) {
     a5(e5(n4));
   }
   function f3(e5, r4 = p) {
     const s5 = [e5, r4];
-    return t3.add(s5), t3.size === 1 && (u3 = i2(a5) || p), e5(n4), () => {
-      t3.delete(s5), t3.size === 0 && (u3(), u3 = null);
+    return t3.add(s5), t3.size === 1 && (u2 = i2(a5) || p), e5(n4), () => {
+      t3.delete(s5), t3.size === 0 && (u2(), u2 = null);
     };
   }
-  return { set: a5, update: l4, subscribe: f3 };
+  return { set: a5, update: l3, subscribe: f3 };
 }
-function S2(n4, i2, u3) {
-  const t3 = !Array.isArray(n4), a5 = t3 ? [n4] : n4, l4 = i2.length < 2;
-  return z2(u3, (f3) => {
+function S2(n4, i2, u2) {
+  const t3 = !Array.isArray(n4), a5 = t3 ? [n4] : n4, l3 = i2.length < 2;
+  return z2(u2, (f3) => {
     let e5 = false;
     const r4 = [];
     let s5 = 0, d4 = p;
@@ -204,11 +204,11 @@ function S2(n4, i2, u3) {
         return;
       d4();
       const c4 = i2(t3 ? r4[0] : r4, f3);
-      l4 ? f3(c4) : d4 = C(c4) ? c4 : p;
-    }, _5 = a5.map((c4, p5) => v(c4, (h) => {
-      r4[p5] = h, s5 &= ~(1 << p5), e5 && g4();
+      l3 ? f3(c4) : d4 = C(c4) ? c4 : p;
+    }, _5 = a5.map((c4, p6) => v(c4, (h) => {
+      r4[p6] = h, s5 &= ~(1 << p6), e5 && g4();
     }, () => {
-      s5 |= 1 << p5;
+      s5 |= 1 << p6;
     }));
     return e5 = true, g4(), function() {
       E(_5), d4();
@@ -559,28 +559,6 @@ var init_layout = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/utils.js
-function a2() {
-  let i2 = s2, e5 = s2, n4 = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"], o5 = ["Win32", "Win64", "Windows", "WinCE"], l4 = ["iPhone", "iPad", "iPod"], t3 = null;
-  return n4.includes(e5) ? t3 = "Mac OS" : l4.includes(e5) ? t3 = "iOS" : o5.includes(e5) ? t3 = "Windows" : /Android/.test(i2) ? t3 = "Android" : /Linux/.test(e5) && (t3 = "Linux"), t3;
-}
-function c() {
-  return s2;
-}
-function r(i2 = "dropzoneCSS", e5 = "/dropzone.css") {
-  if (!document.getElementById(i2)) {
-    const n4 = document.createElement("link");
-    n4.id = i2, n4.href = e5, n4.rel = "stylesheet", document.head.appendChild(n4);
-  }
-}
-var s2;
-var init_utils = __esm({
-  ".svelte-kit/output/server/chunks/utils.js"() {
-    init_chunks();
-    s2 = false;
-  }
-});
-
 // .svelte-kit/output/server/chunks/store.js
 var C2, V2, M2, w2, p2, H2, $2, b, F3, u, g2, x2, L2, B2, A4, P2, T2, Y2, d2, _2, D, q2;
 var init_store = __esm({
@@ -588,18 +566,18 @@ var init_store = __esm({
     init_index2();
     init_chunks();
     C2 = 20;
-    V2 = N((i2, c4, l4, f3) => {
+    V2 = N((i2, c4, l3, f3) => {
       let s5, a5, n4, o5;
       o5 = v(d2, (v4) => n4 = v4);
       let { navIconClicked: e5 } = c4;
-      return c4.navIconClicked === void 0 && l4.navIconClicked && e5 !== void 0 && l4.navIconClicked(e5), s5 = e5 && "fill-rose-300", a5 = n4 ? "white" : "black", o5(), `<svg class="scale-[1.5] origin-top bg-"${X("width", C2, 0)}${X("height", C2, 0)} viewBox="${"0 0 " + j(C2, true) + " " + j(C2, true)}"><path${X("class", s5, 0)}${X("fill", a5, 0)} d="M14 10L8 5v3H1v4h7v3l6-5zm3 7H9v2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2H9v2h8v14z"></path></svg>`;
+      return c4.navIconClicked === void 0 && l3.navIconClicked && e5 !== void 0 && l3.navIconClicked(e5), s5 = e5 && "fill-rose-300", a5 = n4 ? "white" : "black", o5(), `<svg class="scale-[1.5] origin-top bg-"${X("width", C2, 0)}${X("height", C2, 0)} viewBox="${"0 0 " + j(C2, true) + " " + j(C2, true)}"><path${X("class", s5, 0)}${X("fill", a5, 0)} d="M14 10L8 5v3H1v4h7v3l6-5zm3 7H9v2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2H9v2h8v14z"></path></svg>`;
     });
     M2 = 489.2;
-    w2 = N((i2, c4, l4, f3) => {
+    w2 = N((i2, c4, l3, f3) => {
       let s5, a5, n4, o5;
       o5 = v(d2, (v4) => n4 = v4);
       let { navIconClicked: e5 } = c4;
-      return c4.navIconClicked === void 0 && l4.navIconClicked && e5 !== void 0 && l4.navIconClicked(e5), s5 = e5 && "fill-rose-600", a5 = n4 ? "white" : "black", o5(), `
+      return c4.navIconClicked === void 0 && l3.navIconClicked && e5 !== void 0 && l3.navIconClicked(e5), s5 = e5 && "fill-rose-600", a5 = n4 ? "white" : "black", o5(), `
 
 <svg${X("height", M2 / 15, 0)}${X("width", M2 / 15, 0)} viewBox="${"0 0 " + j(M2, true) + " " + j(M2, true)}"><path${X("class", s5, 0)}${X("fill", a5, 0)} d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
 			c4.5,0,8.1,3.6,8.1,8.1V238.1z M241.3,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
@@ -621,11 +599,11 @@ var init_store = __esm({
 			c0,2.9,1.1,5.7,3.2,7.7l22.9,22.9c4.3,4.3,11.2,4.3,15.5,0l47.3-47.3C443,379.8,444.1,377,444.1,374.1z"></path></svg>`;
     });
     p2 = 204.376;
-    H2 = N((i2, c4, l4, f3) => {
+    H2 = N((i2, c4, l3, f3) => {
       let s5, a5, n4, o5;
       o5 = v(d2, (v4) => n4 = v4);
       let { navIconClicked: e5 } = c4;
-      return c4.navIconClicked === void 0 && l4.navIconClicked && e5 !== void 0 && l4.navIconClicked(e5), s5 = e5 && "fill-rose-300", a5 = n4 ? "white" : "black", o5(), `
+      return c4.navIconClicked === void 0 && l3.navIconClicked && e5 !== void 0 && l3.navIconClicked(e5), s5 = e5 && "fill-rose-300", a5 = n4 ? "white" : "black", o5(), `
 
 <svg${X("height", p2 / 7, 0)}${X("width", p2 / 7, 0)} viewBox="${"0 0 " + j(p2, true) + " " + j(p2, true)}"><path${X("class", s5, 0)}${X("fill", a5, 0)} d="M171.247,204.376c2.484,0,4.5-2.015,4.5-4.5V61.35h-51.744c-7.502,0-13.605-6.107-13.605-13.614V0H33.13
 	c-2.485,0-4.5,2.015-4.5,4.5v195.376c0,2.485,2.015,4.5,4.5,4.5H171.247z M74.999,94.627h79.5v10h-79.5V94.627z M74.999,119.627
@@ -635,11 +613,11 @@ var init_store = __esm({
 	 M120.397,47.736V10.396l43.802,40.953h-40.196C122.014,51.35,120.397,49.729,120.397,47.736z"></path></svg>`;
     });
     $2 = 31.886;
-    b = N((i2, c4, l4, f3) => {
+    b = N((i2, c4, l3, f3) => {
       let s5, a5, n4, o5;
       o5 = v(d2, (v4) => n4 = v4);
       let { navIconClicked: e5 } = c4;
-      return c4.navIconClicked === void 0 && l4.navIconClicked && e5 !== void 0 && l4.navIconClicked(e5), s5 = e5 && "fill-rose-600", a5 = n4 ? "white" : "black", o5(), `<svg${X("width", $2, 0)}${X("height", $2, 0)} viewBox="${"0 0 " + j($2, true) + " " + j($2, true)}"><g><path${X("class", s5, 0)}${X("fill", a5, 0)} d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
+      return c4.navIconClicked === void 0 && l3.navIconClicked && e5 !== void 0 && l3.navIconClicked(e5), s5 = e5 && "fill-rose-600", a5 = n4 ? "white" : "black", o5(), `<svg${X("width", $2, 0)}${X("height", $2, 0)} viewBox="${"0 0 " + j($2, true) + " " + j($2, true)}"><g><path${X("class", s5, 0)}${X("fill", a5, 0)} d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
 		H19.021z M16.693,19.229c-0.5,0-0.905-0.492-0.905-1.098s0.405-1.098,0.905-1.098c0.5,0,0.905,0.49,0.905,1.098
 		C17.598,18.736,17.193,19.229,16.693,19.229z"></path><g><path d="M19.852,5.718c-1.7,0-3.083,1.384-3.083,3.084c0,1.7,1.383,3.083,3.083,3.083c1.701,0,3.084-1.383,3.084-3.083
 			C22.936,7.102,21.553,5.718,19.852,5.718z M19.852,11.606c-1.546,0-2.805-1.258-2.805-2.805c0-1.547,1.258-2.806,2.805-2.806
@@ -667,14 +645,36 @@ var init_store = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/utils.js
+function a2() {
+  let i2 = s2, e5 = s2, n4 = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"], o5 = ["Win32", "Win64", "Windows", "WinCE"], l3 = ["iPhone", "iPad", "iPod"], t3 = null;
+  return n4.includes(e5) ? t3 = "Mac OS" : l3.includes(e5) ? t3 = "iOS" : o5.includes(e5) ? t3 = "Windows" : /Android/.test(i2) ? t3 = "Android" : /Linux/.test(e5) && (t3 = "Linux"), t3;
+}
+function c() {
+  return s2;
+}
+function r(i2 = "dropzoneCSS", e5 = "/dropzone.css") {
+  if (!document.getElementById(i2)) {
+    const n4 = document.createElement("link");
+    n4.id = i2, n4.href = e5, n4.rel = "stylesheet", document.head.appendChild(n4);
+  }
+}
+var s2;
+var init_utils = __esm({
+  ".svelte-kit/output/server/chunks/utils.js"() {
+    init_chunks();
+    s2 = false;
+  }
+});
+
 // .svelte-kit/output/server/chunks/InView.js
 var n;
 var init_InView = __esm({
   ".svelte-kit/output/server/chunks/InView.js"() {
     init_chunks();
-    n = N((u3, e5, l4, t3) => {
+    n = N((u2, e5, l3, t3) => {
       let { vanilla: o5 } = e5, { once: v4 } = e5, { onview: a5 = () => console.log("i \u2764\uFE0F slots") } = e5, h, { single: i2 } = e5, { root: d4 = null } = e5, { threshold: c4 = 0 } = e5, { margin: f3 = "0px" } = e5;
-      return e5.vanilla === void 0 && l4.vanilla && o5 !== void 0 && l4.vanilla(o5), e5.once === void 0 && l4.once && v4 !== void 0 && l4.once(v4), e5.onview === void 0 && l4.onview && a5 !== void 0 && l4.onview(a5), e5.single === void 0 && l4.single && i2 !== void 0 && l4.single(i2), e5.root === void 0 && l4.root && d4 !== void 0 && l4.root(d4), e5.threshold === void 0 && l4.threshold && c4 !== void 0 && l4.threshold(c4), e5.margin === void 0 && l4.margin && f3 !== void 0 && l4.margin(f3), `
+      return e5.vanilla === void 0 && l3.vanilla && o5 !== void 0 && l3.vanilla(o5), e5.once === void 0 && l3.once && v4 !== void 0 && l3.once(v4), e5.onview === void 0 && l3.onview && a5 !== void 0 && l3.onview(a5), e5.single === void 0 && l3.single && i2 !== void 0 && l3.single(i2), e5.root === void 0 && l3.root && d4 !== void 0 && l3.root(d4), e5.threshold === void 0 && l3.threshold && c4 !== void 0 && l3.threshold(c4), e5.margin === void 0 && l3.margin && f3 !== void 0 && l3.margin(f3), `
 
 
 ${o5 ? "" : `<div${X("this", h, 0)}>${t3.default ? t3.default({}) : ""}</div>`}`;
@@ -683,16 +683,21 @@ ${o5 ? "" : `<div${X("this", h, 0)}>${t3.default ? t3.default({}) : ""}</div>`}`
 });
 
 // .svelte-kit/output/server/chunks/Modal.js
-var u2;
+var p3;
 var init_Modal = __esm({
   ".svelte-kit/output/server/chunks/Modal.js"() {
     init_chunks();
-    u2 = N((s5, t3, e5, a5) => {
-      let { showModal: o5 = false } = t3, { bgTint: l4 = "bg-[rgba(0,0,0,0.4)]" } = t3, d4;
-      return t3.showModal === void 0 && e5.showModal && o5 !== void 0 && e5.showModal(o5), t3.bgTint === void 0 && e5.bgTint && l4 !== void 0 && e5.bgTint(l4), `
+    init_store();
+    p3 = N((h, t3, e5, s5) => {
+      let c4, r4;
+      r4 = v(F3, (u2) => c4 = u2);
+      let { opacityEase: a5 } = t3, { showModal: o5 = false } = t3, { bgTint: i2 = "bg-[rgba(0,0,0,0.4)]" } = t3, f3, l3;
+      return t3.opacityEase === void 0 && e5.opacityEase && a5 !== void 0 && e5.opacityEase(a5), t3.showModal === void 0 && e5.showModal && o5 !== void 0 && e5.showModal(o5), t3.bgTint === void 0 && e5.bgTint && i2 !== void 0 && e5.bgTint(i2), a5 && o5 && !c4 ? setTimeout(() => {
+        l3 = "opacity-100 transition-opacity duration-300 ease-in";
+      }, 50) : l3 = "opacity-100 transition-opacity", r4(), `
 
 
-<button class="${"z-50 fixed top-0 left-0 w-full h-full flex justify-center items-center " + j(o5 ? `${l4} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}"${X("this", d4, 0)}>${a5.default ? a5.default({}) : ""}</button>`;
+<button class="${"opacity-0 " + j(l3, true) + " z-50 fixed top-0 left-0 w-full h-full flex justify-center items-center " + j(o5 ? `${i2} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}"${X("this", f3, 0)}>${s5.default ? s5.default({}) : ""}</button>`;
     });
   }
 });
@@ -703,20 +708,20 @@ __export(public_exports, {
   PUBLIC_FIREBASE_apiKey: () => o3,
   PUBLIC_FIREBASE_appId: () => n2,
   PUBLIC_FIREBASE_authDomain: () => s3,
-  PUBLIC_FIREBASE_messagingSenderId: () => p3,
+  PUBLIC_FIREBASE_messagingSenderId: () => p4,
   PUBLIC_FIREBASE_projectId: () => t,
   PUBLIC_FIREBASE_storageBucket: () => e2,
   PUBLIC_STRIPE_KEY: () => I3,
   PUBLIC_UPLOAD_ENDPOINT: () => _3
 });
-var o3, s3, t, e2, p3, n2, I3, _3;
+var o3, s3, t, e2, p4, n2, I3, _3;
 var init_public = __esm({
   ".svelte-kit/output/server/chunks/public.js"() {
     o3 = "AIzaSyDSux33iJAZsssEo2Za7As_eGGEThwXQZo";
     s3 = "thinksolve-app.firebaseapp.com";
     t = "thinksolve-app";
     e2 = "thinksolve-app.appspot.com";
-    p3 = "490986955869";
+    p4 = "490986955869";
     n2 = "1:490986955869:web:433c6f7b31865fed5099b4";
     I3 = "pk_live_jSWXLtQJOoDeKiw3oRF9CuCs00PsrnADWR";
     _3 = "https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable";
@@ -916,24 +921,24 @@ var init_index_esm2017 = __esm({
   "node_modules/@firebase/util/dist/index.esm2017.js"() {
     stringToByteArray$1 = function(str) {
       const out = [];
-      let p5 = 0;
+      let p6 = 0;
       for (let i2 = 0; i2 < str.length; i2++) {
         let c4 = str.charCodeAt(i2);
         if (c4 < 128) {
-          out[p5++] = c4;
+          out[p6++] = c4;
         } else if (c4 < 2048) {
-          out[p5++] = c4 >> 6 | 192;
-          out[p5++] = c4 & 63 | 128;
+          out[p6++] = c4 >> 6 | 192;
+          out[p6++] = c4 & 63 | 128;
         } else if ((c4 & 64512) === 55296 && i2 + 1 < str.length && (str.charCodeAt(i2 + 1) & 64512) === 56320) {
           c4 = 65536 + ((c4 & 1023) << 10) + (str.charCodeAt(++i2) & 1023);
-          out[p5++] = c4 >> 18 | 240;
-          out[p5++] = c4 >> 12 & 63 | 128;
-          out[p5++] = c4 >> 6 & 63 | 128;
-          out[p5++] = c4 & 63 | 128;
+          out[p6++] = c4 >> 18 | 240;
+          out[p6++] = c4 >> 12 & 63 | 128;
+          out[p6++] = c4 >> 6 & 63 | 128;
+          out[p6++] = c4 & 63 | 128;
         } else {
-          out[p5++] = c4 >> 12 | 224;
-          out[p5++] = c4 >> 6 & 63 | 128;
-          out[p5++] = c4 & 63 | 128;
+          out[p6++] = c4 >> 12 | 224;
+          out[p6++] = c4 >> 6 & 63 | 128;
+          out[p6++] = c4 & 63 | 128;
         }
       }
       return out;
@@ -952,9 +957,9 @@ var init_index_esm2017 = __esm({
           const c22 = bytes[pos++];
           const c32 = bytes[pos++];
           const c42 = bytes[pos++];
-          const u3 = ((c1 & 7) << 18 | (c22 & 63) << 12 | (c32 & 63) << 6 | c42 & 63) - 65536;
-          out[c4++] = String.fromCharCode(55296 + (u3 >> 10));
-          out[c4++] = String.fromCharCode(56320 + (u3 & 1023));
+          const u2 = ((c1 & 7) << 18 | (c22 & 63) << 12 | (c32 & 63) << 6 | c42 & 63) - 65536;
+          out[c4++] = String.fromCharCode(55296 + (u2 >> 10));
+          out[c4++] = String.fromCharCode(56320 + (u2 & 1023));
         } else {
           const c22 = bytes[pos++];
           const c32 = bytes[pos++];
@@ -2409,9 +2414,9 @@ var require_tslib = __commonJS({
       var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d4, b3) {
         d4.__proto__ = b3;
       } || function(d4, b3) {
-        for (var p5 in b3)
-          if (Object.prototype.hasOwnProperty.call(b3, p5))
-            d4[p5] = b3[p5];
+        for (var p6 in b3)
+          if (Object.prototype.hasOwnProperty.call(b3, p6))
+            d4[p6] = b3[p6];
       };
       __extends2 = function(d4, b3) {
         if (typeof b3 !== "function" && b3 !== null)
@@ -2425,21 +2430,21 @@ var require_tslib = __commonJS({
       __assign2 = Object.assign || function(t3) {
         for (var s5, i2 = 1, n4 = arguments.length; i2 < n4; i2++) {
           s5 = arguments[i2];
-          for (var p5 in s5)
-            if (Object.prototype.hasOwnProperty.call(s5, p5))
-              t3[p5] = s5[p5];
+          for (var p6 in s5)
+            if (Object.prototype.hasOwnProperty.call(s5, p6))
+              t3[p6] = s5[p6];
         }
         return t3;
       };
       __rest2 = function(s5, e5) {
         var t3 = {};
-        for (var p5 in s5)
-          if (Object.prototype.hasOwnProperty.call(s5, p5) && e5.indexOf(p5) < 0)
-            t3[p5] = s5[p5];
+        for (var p6 in s5)
+          if (Object.prototype.hasOwnProperty.call(s5, p6) && e5.indexOf(p6) < 0)
+            t3[p6] = s5[p6];
         if (s5 != null && typeof Object.getOwnPropertySymbols === "function")
-          for (var i2 = 0, p5 = Object.getOwnPropertySymbols(s5); i2 < p5.length; i2++) {
-            if (e5.indexOf(p5[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s5, p5[i2]))
-              t3[p5[i2]] = s5[p5[i2]];
+          for (var i2 = 0, p6 = Object.getOwnPropertySymbols(s5); i2 < p6.length; i2++) {
+            if (e5.indexOf(p6[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s5, p6[i2]))
+              t3[p6[i2]] = s5[p6[i2]];
           }
         return t3;
       };
@@ -2462,13 +2467,13 @@ var require_tslib = __commonJS({
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
           return Reflect.metadata(metadataKey, metadataValue);
       };
-      __awaiter2 = function(thisArg, _arguments, P5, generator) {
+      __awaiter2 = function(thisArg, _arguments, P6, generator) {
         function adopt(value) {
-          return value instanceof P5 ? value : new P5(function(resolve) {
+          return value instanceof P6 ? value : new P6(function(resolve) {
             resolve(value);
           });
         }
-        return new (P5 || (P5 = Promise))(function(resolve, reject) {
+        return new (P6 || (P6 = Promise))(function(resolve, reject) {
           function fulfilled(value) {
             try {
               step(generator.next(value));
@@ -2566,9 +2571,9 @@ var require_tslib = __commonJS({
         }
       };
       __exportStar2 = function(m3, o5) {
-        for (var p5 in m3)
-          if (p5 !== "default" && !Object.prototype.hasOwnProperty.call(o5, p5))
-            __createBinding2(o5, m3, p5);
+        for (var p6 in m3)
+          if (p6 !== "default" && !Object.prototype.hasOwnProperty.call(o5, p6))
+            __createBinding2(o5, m3, p6);
       };
       __createBinding2 = Object.create ? function(o5, m3, k3, k22) {
         if (k22 === void 0)
@@ -2635,7 +2640,7 @@ var require_tslib = __commonJS({
       };
       __spreadArray2 = function(to, from, pack) {
         if (pack || arguments.length === 2)
-          for (var i2 = 0, l4 = from.length, ar2; i2 < l4; i2++) {
+          for (var i2 = 0, l3 = from.length, ar2; i2 < l3; i2++) {
             if (ar2 || !(i2 in from)) {
               if (!ar2)
                 ar2 = Array.prototype.slice.call(from, 0, i2);
@@ -2684,7 +2689,7 @@ var require_tslib = __commonJS({
         }
       };
       __asyncDelegator2 = function(o5) {
-        var i2, p5;
+        var i2, p6;
         return i2 = {}, verb("next"), verb("throw", function(e5) {
           throw e5;
         }), verb("return"), i2[Symbol.iterator] = function() {
@@ -2692,7 +2697,7 @@ var require_tslib = __commonJS({
         }, i2;
         function verb(n4, f3) {
           i2[n4] = o5[n4] ? function(v4) {
-            return (p5 = !p5) ? { value: __await2(o5[n4](v4)), done: n4 === "return" } : f3 ? f3(v4) : v4;
+            return (p6 = !p6) ? { value: __await2(o5[n4](v4)), done: n4 === "return" } : f3 ? f3(v4) : v4;
           } : f3;
         }
       };
@@ -3228,8 +3233,8 @@ function _getBrowserName(userAgent) {
   } else if (_isAndroid(ua)) {
     return "Android";
   } else {
-    const re3 = /([a-zA-Z\d\.]+)\/[a-zA-Z\d\.]*$/;
-    const matches = userAgent.match(re3);
+    const re4 = /([a-zA-Z\d\.]+)\/[a-zA-Z\d\.]*$/;
+    const matches = userAgent.match(re4);
     if ((matches === null || matches === void 0 ? void 0 : matches.length) === 2) {
       return matches[1];
     }
@@ -4174,7 +4179,7 @@ var init_index_0bb4da3b = __esm({
           } catch (_a2) {
           }
         }
-        const migrationHierarchy = availablePersistences.filter((p5) => p5._shouldAllowMigration);
+        const migrationHierarchy = availablePersistences.filter((p6) => p6._shouldAllowMigration);
         if (!selectedPersistence._shouldAllowMigration || !migrationHierarchy.length) {
           return new PersistenceUserManager(selectedPersistence, auth, userKey);
         }
@@ -5966,14 +5971,14 @@ var init_firebase = __esm({
     init_public();
     init_index_esm();
     init_index_esm2();
-    c2 = { apiKey: o3, authDomain: s3, projectId: t, storageBucket: e2, messagingSenderId: p3, appId: n2 };
+    c2 = { apiKey: o3, authDomain: s3, projectId: t, storageBucket: e2, messagingSenderId: p4, appId: n2 };
     E2 = initializeApp(c2);
     P3 = initializeAuth(E2, { persistence: [indexedDBLocalPersistence, browserLocalPersistence, browserSessionPersistence] });
   }
 });
 
 // node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js
-function p4(t3) {
+function p5(t3) {
   m2.setLogLevel(t3);
 }
 function y(t3, ...e5) {
@@ -6683,10 +6688,10 @@ function Ye(t3, e5) {
       value: e6
     };
   }(t3, e5.limit);
-  var u3;
+  var u2;
   return null !== o5 && (n4.structuredQuery.limit = o5), e5.startAt && (n4.structuredQuery.startAt = {
-    before: (u3 = e5.startAt).inclusive,
-    values: u3.position
+    before: (u2 = e5.startAt).inclusive,
+    values: u2.position
   }), e5.endAt && (n4.structuredQuery.endAt = function(t4) {
     return {
       before: !t4.inclusive,
@@ -6731,11 +6736,11 @@ async function on(t3, e5) {
     const e6 = We2(n4.L, t4);
     o5.set(e6.key.toString(), e6);
   });
-  const u3 = [];
+  const u2 = [];
   return e5.forEach((t4) => {
     const e6 = o5.get(t4.toString());
-    E3(!!e6), u3.push(e6);
-  }), u3;
+    E3(!!e6), u2.push(e6);
+  }), u2;
 }
 async function un(t3, e5) {
   const n4 = I4(t3), r4 = Ye(n4.L, ge2(e5));
@@ -6774,10 +6779,10 @@ function hn(t3) {
     y("ComponentProvider", "Initializing Datastore");
     const i2 = function(t4) {
       return new pt2(t4, fetch.bind(null));
-    }((e5 = t3._databaseId, n4 = t3.app.options.appId || "", r4 = t3._persistenceKey, s5 = t3._freezeSettings(), new J2(e5, n4, r4, s5.host, s5.ssl, s5.experimentalForceLongPolling, s5.experimentalAutoDetectLongPolling, s5.useFetchStreams))), o5 = en(t3._databaseId), u3 = function(t4, e6, n5, r5) {
+    }((e5 = t3._databaseId, n4 = t3.app.options.appId || "", r4 = t3._persistenceKey, s5 = t3._freezeSettings(), new J2(e5, n4, r4, s5.host, s5.ssl, s5.experimentalForceLongPolling, s5.experimentalAutoDetectLongPolling, s5.useFetchStreams))), o5 = en(t3._databaseId), u2 = function(t4, e6, n5, r5) {
       return new rn(t4, e6, n5, r5);
     }(t3._authCredentials, t3._appCheckCredentials, i2, o5);
-    an.set(t3, u3);
+    an.set(t3, u2);
   }
   var e5, n4, r4, s5;
   return an.get(t3);
@@ -6897,7 +6902,7 @@ function Ln(t3) {
 function Mn(t3, e5, n4, r4, s5, i2 = {}) {
   const o5 = t3.dt(i2.merge || i2.mergeFields ? 2 : 0, e5, n4, s5);
   Zn("Data must be an object, but it was:", o5, r4);
-  const u3 = Jn(r4, o5);
+  const u2 = Jn(r4, o5);
   let c4, a5;
   if (i2.merge)
     c4 = new $t2(o5.fieldMask), a5 = o5.fieldTransforms;
@@ -6912,7 +6917,7 @@ function Mn(t3, e5, n4, r4, s5, i2 = {}) {
     c4 = new $t2(t4), a5 = o5.fieldTransforms.filter((t5) => c4.covers(t5.field));
   } else
     c4 = null, a5 = o5.fieldTransforms;
-  return new Sn(new Jt(u3), c4, a5);
+  return new Sn(new Jt(u2), c4, a5);
 }
 function jn(t3, e5, n4) {
   return new kn({
@@ -6927,29 +6932,29 @@ function Wn(t3, e5, n4, r4) {
   Zn("Data must be an object, but it was:", s5, r4);
   const i2 = [], o5 = Jt.empty();
   Tt2(r4, (t4, r5) => {
-    const u4 = nr(e5, t4, n4);
+    const u3 = nr(e5, t4, n4);
     r5 = getModularInstance(r5);
-    const c4 = s5.ct(u4);
+    const c4 = s5.ct(u3);
     if (r5 instanceof Un)
-      i2.push(u4);
+      i2.push(u3);
     else {
       const t5 = Hn(r5, c4);
-      null != t5 && (i2.push(u4), o5.set(u4, t5));
+      null != t5 && (i2.push(u3), o5.set(u3, t5));
     }
   });
-  const u3 = new $t2(i2);
-  return new qn(o5, u3, s5.fieldTransforms);
+  const u2 = new $t2(i2);
+  return new qn(o5, u2, s5.fieldTransforms);
 }
 function Kn(t3, e5, n4, r4, s5, i2) {
-  const o5 = t3.dt(1, e5, n4), u3 = [tr(e5, r4, n4)], c4 = [s5];
+  const o5 = t3.dt(1, e5, n4), u2 = [tr(e5, r4, n4)], c4 = [s5];
   if (i2.length % 2 != 0)
     throw new U2(P4, `Function ${e5}() needs to be called with an even number of arguments that alternate between field names and values.`);
   for (let t4 = 0; t4 < i2.length; t4 += 2)
-    u3.push(tr(e5, i2[t4])), c4.push(i2[t4 + 1]);
+    u2.push(tr(e5, i2[t4])), c4.push(i2[t4 + 1]);
   const a5 = [], h = Jt.empty();
-  for (let t4 = u3.length - 1; t4 >= 0; --t4)
-    if (!sr(a5, u3[t4])) {
-      const e6 = u3[t4];
+  for (let t4 = u2.length - 1; t4 >= 0; --t4)
+    if (!sr(a5, u2[t4])) {
+      const e6 = u2[t4];
       let n5 = c4[t4];
       n5 = getModularInstance(n5);
       const r5 = o5.ct(e6);
@@ -7113,10 +7118,10 @@ function nr(t3, e5, n4) {
 }
 function rr(t3, e5, n4, r4, s5) {
   const i2 = r4 && !r4.isEmpty(), o5 = void 0 !== s5;
-  let u3 = `Function ${e5}() called with invalid data`;
-  n4 && (u3 += " (via `toFirestore()`)"), u3 += ". ";
+  let u2 = `Function ${e5}() called with invalid data`;
+  n4 && (u2 += " (via `toFirestore()`)"), u2 += ". ";
   let c4 = "";
-  return (i2 || o5) && (c4 += " (found", i2 && (c4 += ` in field ${r4}`), o5 && (c4 += ` in document ${s5}`), c4 += ")"), new U2(P4, u3 + t3 + c4);
+  return (i2 || o5) && (c4 += " (found", i2 && (c4 += ` in field ${r4}`), o5 && (c4 += ` in document ${s5}`), c4 += ")"), new U2(P4, u2 + t3 + c4);
 }
 function sr(t3, e5) {
   return t3.some((t4) => t4.isEqual(e5));
@@ -7197,7 +7202,7 @@ function Ar(t3, e5, n4, r4) {
       const o5 = t4.explicitOrderBy;
       if (s6.length > o5.length)
         throw new U2(P4, `Too many arguments provided to ${r5}(). The number of arguments must be less than or equal to the number of orderBy() clauses`);
-      const u3 = [];
+      const u2 = [];
       for (let i3 = 0; i3 < s6.length; i3++) {
         const c4 = s6[i3];
         if (o5[i3].field.isKeyField()) {
@@ -7209,13 +7214,13 @@ function Ar(t3, e5, n4, r4) {
           if (!rt2.isDocumentKey(n6))
             throw new U2(P4, `Invalid query. When querying a collection group and ordering by documentId(), the value passed to ${r5}() must result in a valid document path, but '${n6}' is not because it contains an odd number of segments.`);
           const s7 = new rt2(n6);
-          u3.push(zt2(e6, s7));
+          u2.push(zt2(e6, s7));
         } else {
           const t5 = Yn(n5, r5, c4);
-          u3.push(t5);
+          u2.push(t5);
         }
       }
-      return new he2(u3, i2);
+      return new he2(u2, i2);
     }(t3._query, t3.firestore._databaseId, s5, e5, n4, r4);
   }
 }
@@ -7479,8 +7484,8 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     J2 = class {
-      constructor(t3, e5, n4, r4, s5, i2, o5, u3) {
-        this.databaseId = t3, this.appId = e5, this.persistenceKey = n4, this.host = r4, this.ssl = s5, this.forceLongPolling = i2, this.autoDetectLongPolling = o5, this.useFetchStreams = u3;
+      constructor(t3, e5, n4, r4, s5, i2, o5, u2) {
+        this.databaseId = t3, this.appId = e5, this.persistenceKey = n4, this.host = r4, this.ssl = s5, this.forceLongPolling = i2, this.autoDetectLongPolling = o5, this.useFetchStreams = u2;
       }
     };
     X3 = class {
@@ -8525,8 +8530,8 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     we2 = class {
-      constructor(t3, e5 = null, n4 = [], r4 = [], s5 = null, i2 = "F", o5 = null, u3 = null) {
-        this.path = t3, this.collectionGroup = e5, this.explicitOrderBy = n4, this.filters = r4, this.limit = s5, this.limitType = i2, this.startAt = o5, this.endAt = u3, this.O = null, this.k = null, this.startAt, this.endAt;
+      constructor(t3, e5 = null, n4 = [], r4 = [], s5 = null, i2 = "F", o5 = null, u2 = null) {
+        this.path = t3, this.collectionGroup = e5, this.explicitOrderBy = n4, this.filters = r4, this.limit = s5, this.limitType = i2, this.startAt = o5, this.endAt = u2, this.O = null, this.k = null, this.startAt, this.endAt;
       }
     };
     Ee2 = class {
@@ -9127,7 +9132,7 @@ var init_index_browser_esm2017 = __esm({
       }
       _apply(t3) {
         const e5 = Ln(t3.firestore), n4 = function(t4, e6, n5, r4, s5, i2, o5) {
-          let u3;
+          let u2;
           if (s5.isKeyField()) {
             if ("array-contains" === i2 || "array-contains-any" === i2)
               throw new U2(P4, `Invalid Query. You can't perform '${i2}' queries on documentId().`);
@@ -9136,21 +9141,21 @@ var init_index_browser_esm2017 = __esm({
               const e7 = [];
               for (const n6 of o5)
                 e7.push(Rr(r4, t4, n6));
-              u3 = {
+              u2 = {
                 arrayValue: {
                   values: e7
                 }
               };
             } else
-              u3 = Rr(r4, t4, o5);
+              u2 = Rr(r4, t4, o5);
           } else
-            "in" !== i2 && "not-in" !== i2 && "array-contains-any" !== i2 || Pr(o5, i2), u3 = Yn(
+            "in" !== i2 && "not-in" !== i2 && "array-contains-any" !== i2 || Pr(o5, i2), u2 = Yn(
               n5,
               e6,
               o5,
               "in" === i2 || "not-in" === i2
             );
-          const c4 = ee2.create(s5, i2, u3);
+          const c4 = ee2.create(s5, i2, u2);
           return function(t5, e7) {
             if (e7.q()) {
               const n7 = pe2(t5);
@@ -9705,7 +9710,7 @@ __export(index_esm_exports, {
   runTransaction: () => ts,
   serverTimestamp: () => Mr,
   setDoc: () => Fr,
-  setLogLevel: () => p4,
+  setLogLevel: () => p5,
   snapshotEqual: () => cr,
   startAfter: () => br,
   startAt: () => vr,
@@ -9721,38 +9726,42 @@ var init_index_esm3 = __esm({
 });
 
 // .svelte-kit/output/server/chunks/LoginCard.js
+var LoginCard_exports = {};
+__export(LoginCard_exports, {
+  default: () => te3
+});
 function A6(e5) {
   return () => {
     throw new Error(`Cannot call ${e5}(...) on the server`);
   };
 }
-var H4, q4, R2, W3, O3, J3, K3, N4, Q3, ee3;
+var H4, q4, R2, W3, O3, J3, K3, N4, Q3, X4, te3;
 var init_LoginCard = __esm({
   ".svelte-kit/output/server/chunks/LoginCard.js"() {
     init_chunks();
     init_firebase();
     init_store();
     H4 = A6("goto");
-    q4 = N((e5, s5, i2, $4) => `
+    q4 = N((e5, s5, r4, $4) => `
 
 <svg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M16 7.151l3.302-4.036c0 0 5.656 0.12 11.292 2.74-1.443 2.182-4.307 3.25-4.307 3.25-0.193-1.917-1.536-2.385-5.807-2.385l-4.479 25.281-4.51-25.286c-4.24 0-5.583 0.469-5.776 2.385 0 0-2.865-1.057-4.307-3.24 5.635-2.62 11.292-2.74 11.292-2.74l3.302 4.031h-0.005zM16 1.953c4.552-0.042 9.766 0.703 15.104 3.036 0.714-1.292 0.896-1.859 0.896-1.859-5.833-2.313-11.297-3.109-16-3.13-4.703 0.021-10.167 0.813-16 3.13 0 0 0.26 0.703 0.896 1.865 5.339-2.344 10.552-3.083 15.104-3.047z"></path></svg>`);
-    R2 = N((e5, s5, i2, $4) => {
+    R2 = N((e5, s5, r4, $4) => {
       let t3, o5;
       return o5 = v(d2, (n4) => t3 = n4), o5(), `<signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-90", true) + " text-white flex justify-center items-center gap-5"}"><span class="group-hover:scale-[1.15] duration-500">${M(q4, "IconTwitter").$$render(e5, {}, {}, {})}</span>
   
   <span>Sign-in with Twitter</span></signin-button>`;
     });
-    W3 = N((e5, s5, i2, $4) => `<svg height="24" width="24" viewBox="0 0 210 210"><path fill="white" d="M0,105C0,47.103,47.103,0,105,0c23.383,0,45.515,7.523,64.004,21.756l-24.4,31.696C133.172,44.652,119.477,40,105,40
+    W3 = N((e5, s5, r4, $4) => `<svg height="24" width="24" viewBox="0 0 210 210"><path fill="white" d="M0,105C0,47.103,47.103,0,105,0c23.383,0,45.515,7.523,64.004,21.756l-24.4,31.696C133.172,44.652,119.477,40,105,40
 c-35.841,0-65,29.159-65,65s29.159,65,65,65c28.867,0,53.398-18.913,61.852-45H105V85h105v20c0,57.897-47.103,105-105,105
 S0,162.897,0,105z"></path></svg>`);
-    O3 = N((e5, s5, i2, $4) => {
+    O3 = N((e5, s5, r4, $4) => {
       let t3, o5;
       return o5 = v(d2, (n4) => t3 = n4), o5(), `<signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-90", true) + " text-white flex justify-center items-center gap-5"}"><span class="group-hover:scale-[1.15] duration-500">${M(W3, "IconGoogle").$$render(e5, {}, {}, {})}
     </span>
   
   <span>Sign-in with Google</span></signin-button>`;
     });
-    J3 = N((e5, s5, i2, $4) => `<svg height="24" width="24" viewBox="0 0 485 485"><path fill="white" d="M413.974,71.026C368.171,25.225,307.274,0,242.5,0S116.829,25.225,71.026,71.026C25.225,116.829,0,177.726,0,242.5
+    J3 = N((e5, s5, r4, $4) => `<svg height="24" width="24" viewBox="0 0 485 485"><path fill="white" d="M413.974,71.026C368.171,25.225,307.274,0,242.5,0S116.829,25.225,71.026,71.026C25.225,116.829,0,177.726,0,242.5
 s25.225,125.671,71.026,171.474C116.829,459.775,177.726,485,242.5,485c32.731,0,64.491-6.414,94.397-19.063l-11.688-27.63
 C299.022,449.384,271.194,455,242.5,455C125.327,455,30,359.673,30,242.5S125.327,30,242.5,30S455,125.327,455,242.5
 c0,51.323-31.534,74.699-60.834,74.699c-29.299,0-60.833-23.375-60.833-74.699c0-50.086-40.747-90.833-90.833-90.833
@@ -9760,102 +9769,88 @@ s-90.833,40.748-90.833,90.833s40.747,90.833,90.833,90.833c29.655,0,56.034-14.286
 c4.248,8.577,9.594,16.336,16.04,23.113c16.613,17.468,38.988,27.087,63.004,27.087c24.017,0,46.392-9.62,63.005-27.087
 C475.377,300.97,485,274.132,485,242.5C485,177.726,459.775,116.829,413.974,71.026z M242.5,303.333
 c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60.833,60.833S276.043,303.333,242.5,303.333z"></path></svg>`);
-    K3 = N((e5, s5, i2, $4) => {
+    K3 = N((e5, s5, r4, $4) => {
       let t3, o5, n4;
-      n4 = v(d2, (w4) => o5 = w4);
-      let m3, g4, v4, h = "", b3 = globalThis.magicLinkInputVisible;
-      return t3 = m3, n4(), `<signin-button class="${"group bg-emerald-500 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${X("this", g4, 0)}><span class="group-hover:scale-[1.15] duration-500">${M(J3, "IconEmail").$$render(e5, {}, {}, {})}</span>
+      n4 = v(d2, (b3) => o5 = b3);
+      let m3, u2, v4, h = "", w4 = globalThis.magicLinkInputVisible;
+      return t3 = m3, n4(), `<signin-button class="${"group bg-emerald-500 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${X("this", u2, 0)}><span class="group-hover:scale-[1.15] duration-500">${M(J3, "IconEmail").$$render(e5, {}, {}, {})}</span>
   
   <span>Get Magic Link</span></signin-button>
 
-${b3 ? `<input class="${"text-center p-3 mt-3 w-full " + j(t3, true) + " focus:outline-none"}" type="email" placeholder="email"${X("this", v4, 0)}${X("value", h, 0)}>` : ""}
+${w4 ? `<input class="${"text-center p-3 mt-3 w-full " + j(t3, true) + " focus:outline-none"}" type="email" placeholder="email"${X("this", v4, 0)}${X("value", h, 0)}>` : ""}
 
 <span id="emailStatusMessage"></span>`;
     });
-    N4 = N((e5, s5, i2, $4) => `
+    N4 = N((e5, s5, r4, $4) => `
 <svg class="-rotate-90" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white"><path fill="white" d="M23 12.5 20.5 15l-3-2V8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842V13l-3 2L1 12.5c.665-.997 2.479-2.657 5.5-3.658C8.024 8.337 9.855 8 12 8c2.146 0 3.976.337 5.5.842 3.021 1 4.835 2.66 5.5 3.658z"></path><path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.5 8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842m11 0c3.021 1 4.835 2.66 5.5 3.658L20.5 15l-3-2V8.842zm-11 0c-3.021 1-4.835 2.66-5.5 3.658L3.5 15l3-2V8.842z"></path></svg>`);
-    Q3 = N((e5, s5, i2, $4) => {
+    Q3 = N((e5, s5, r4, $4) => {
       let t3, o5, n4;
       n4 = v(d2, (L4) => o5 = L4);
-      let m3 = "+1", g4, v4, h, b3 = "", w4 = globalThis.phoneInputVisible;
-      return t3 = g4, n4(), `
+      let m3 = "+1", u2, v4, h, w4 = "", b3 = globalThis.phoneInputVisible;
+      return t3 = u2, n4(), `
 ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${X("this", v4, 0)}><span class="group-hover:scale-[1.15] duration-500">${M(N4, "IconPhone").$$render(e5, {}, {}, {})}</span>
     
     <span>Get SMS Code</span></div>
 
-  <div class="grid grid-cols-6 w-full text-black">${w4 ? `<input class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"${X("value", m3, 0)}>
-      <input class="${"col-span-5 text-center p-3 mt-3 focus:outline-none " + j(t3, true)}" type="phone" placeholder="phone"${X("this", h, 0)}${X("value", b3, 0)}>` : ""}</div>`}
+  <div class="grid grid-cols-6 w-full text-black">${b3 ? `<input class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"${X("value", m3, 0)}>
+      <input class="${"col-span-5 text-center p-3 mt-3 focus:outline-none " + j(t3, true)}" type="phone" placeholder="phone"${X("this", h, 0)}${X("value", w4, 0)}>` : ""}</div>`}
 
 <div id="recaptcha-container"></div>
 <div id="phoneStatusMessage" class="${"p-3 font-Poppins " + j(o5 ? "text-lime-100" : "text-rose-600", true)}"></div>
 
 `;
     });
-    ee3 = N((e5, s5, i2, $4) => {
-      let t3, o5, n4, m3, g4, v4, h, b3;
-      o5 = v(A4, (r4) => t3 = r4), m3 = v(F3, (r4) => n4 = r4), v4 = v(d2, (r4) => g4 = r4), b3 = v(q2, (r4) => h = r4);
-      let { noTransition: w4 = false } = s5, L4, B4, I5, M4;
-      function S6(r4 = "/login") {
-        let l4 = 3e3, f3 = parseInt(l4 / 1e3);
+    X4 = { code: `.btn-width.svelte-9ewaz{margin-left:auto;margin-right:auto;width:90vw;padding-top:2.5rem;padding-bottom:2.5rem;padding-left:1.25rem;padding-right:1.25rem
+}@media(min-width: 640px){.btn-width.svelte-9ewaz{width:500px;padding:2.5rem
+    }}`, map: null };
+    te3 = N((e5, s5, r4, $4) => {
+      let t3, o5, n4, m3, u2, v4, h, w4;
+      o5 = v(A4, (i2) => t3 = i2), m3 = v(F3, (i2) => n4 = i2), v4 = v(d2, (i2) => u2 = i2), w4 = v(q2, (i2) => h = i2);
+      let { noTransition: b3 = false } = s5, L4, z5, I5, M4;
+      function S6(i2 = "/login") {
+        let a5 = 3e3, f3 = parseInt(a5 / 1e3);
         M4 = setInterval(() => {
           f3 > 0 && (f3 += -1, document.getElementById("timeLeft").innerHTML = ` ${f3}`);
         }, 1e3), I5 = setTimeout(() => {
-          T(A4, t3 = false, t3), document.getElementById("timeLeft").innerHTML = 3, H4(r4);
-        }, l4);
+          T(A4, t3 = false, t3), document.getElementById("timeLeft").innerHTML = 3, H4(i2);
+        }, a5);
       }
-      async function D5(r4) {
-        let l4 = localStorage.getItem("redirectUrlFromLS");
-        if (console.log("redirectUrlFromLS", l4), l4)
-          S6(l4);
+      async function B4(i2) {
+        let a5 = localStorage.getItem("redirectUrlFromLS");
+        if (console.log("redirectUrlFromLS", a5), a5)
+          S6(a5);
         else {
-          const { getFirestore: f3, collection: F5, getDocs: z6 } = await Promise.resolve().then(() => (init_index_esm3(), index_esm_exports)), { app: P5 } = await Promise.resolve().then(() => (init_firebase(), firebase_exports)), V4 = f3(P5), y3 = await z6(F5(V4, "email")), U4 = y3.size, k3 = y3.docs;
+          const { getFirestore: f3, collection: D5, getDocs: F5 } = await Promise.resolve().then(() => (init_index_esm3(), index_esm_exports)), { app: P6 } = await Promise.resolve().then(() => (init_firebase(), firebase_exports)), V4 = f3(P6), y3 = await F5(D5(V4, "email")), U4 = y3.size, k3 = y3.docs;
           for (const C5 in k3) {
-            const T5 = k3[C5];
-            if (r4 === T5.id) {
-              localStorage.setItem("redirectUrlFromLS", T5.data().redirectUrl), l4 = localStorage.getItem("redirectUrlFromLS"), S6(l4);
+            const _5 = k3[C5];
+            if (i2 === _5.id) {
+              localStorage.setItem("redirectUrlFromLS", _5.data().redirectUrl), a5 = localStorage.getItem("redirectUrlFromLS"), S6(a5);
               return;
             }
-            parseInt(C5) === U4 - 1 && (localStorage.setItem("redirectUrlFromLS", "/"), l4 = localStorage.getItem("redirectUrlFromLS"), S6(l4));
+            parseInt(C5) === U4 - 1 && (localStorage.setItem("redirectUrlFromLS", "/"), a5 = localStorage.getItem("redirectUrlFromLS"), S6(a5));
           }
         }
       }
-      return s5.noTransition === void 0 && i2.noTransition && w4 !== void 0 && i2.noTransition(w4), t3 || (clearInterval(M4), clearTimeout(I5)), t3 && n4 && D5(B4), o5(), m3(), v4(), b3(), `${n4 ? "" : `<login-card class="${"block relative text-xl hover:scale-[1.01] font-Poppins shadow-md " + j(g4 ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-10 px-5 sm:p-10 text-center duration-300 w-screen sm:w-[500px]"}"${X("style", `background:${h}`, 0)}>
+      return s5.noTransition === void 0 && r4.noTransition && b3 !== void 0 && r4.noTransition(b3), e5.css.add(X4), t3 || (clearInterval(M4), clearTimeout(I5)), t3 && n4 && B4(z5), o5(), m3(), v4(), w4(), `<main class="w-[80vw] flex justify-center items-center">${n4 ? "" : `<login-card class="${"duration-300 block relative text-xl hover:scale-[1.01] font-Poppins shadow-md " + j(u2 ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl btn-width svelte-9ewaz"}"${X("style", `background:${h}`, 0)}>
 
-      ${`${M(K3, "MagicLinkSection").$$render(e5, {}, {}, {})}
-        <p class="py-3"></p>
-        ${M(Q3, "PhoneAuthSection").$$render(e5, {}, {}, {})}`}
+        ${`${M(K3, "MagicLinkSection").$$render(e5, {}, {}, {})}
+          <p class="py-3"></p>
+          ${M(Q3, "PhoneAuthSection").$$render(e5, {}, {}, {})}`}
 
-      
+        
 
-      ${M(O3, "GoogleLoginButton").$$render(e5, {}, {}, {})}
-      ${M(R2, "TwitterLoginButton").$$render(e5, {}, {}, {})}</login-card>`}
+        ${M(O3, "GoogleLoginButton").$$render(e5, {}, {}, {})}
+        ${M(R2, "TwitterLoginButton").$$render(e5, {}, {}, {})}</login-card>`}
 
-${n4 ? `<logout-card class="${"relative block hover:scale-[1.01] font-Poppins shadow-md " + j(g4 ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl mx-auto py-5 px-3 sm:p-7 text-center duration-300 w-11/12 sm:w-[500px]"}"${X("style", `background:${h}`, 0)}><p${X("this", L4, 0)}>Welcome User</p>
+  ${n4 ? `<logout-card class="${"relative block hover:scale-[1.01] font-Poppins shadow-md " + j(u2 ? "hover:shadow-xl " : "hover:shadow-lg", true) + " rounded-2xl hover:rounded-3xl duration-300 btn-width svelte-9ewaz"}"${X("style", `background:${h} `, 0)}><p${X("this", L4, 0)}>Welcome User</p>
 
-      
-      <div>Redirecting to your page in
-        <div style="font-size: 30px;" id="timeLeft">\u230A\u03C0\u230B</div></div>
+        
+        <div>Redirecting to your page in
+          <div style="font-size: 30px;" id="timeLeft">\u230A\u03C0\u230B</div></div>
 
-      
-      <button>Logout</button></logout-card>` : ""}`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/chunks/LazyMount2.js
-var l2;
-var init_LazyMount2 = __esm({
-  ".svelte-kit/output/server/chunks/LazyMount2.js"() {
-    init_chunks();
-    init_InView();
-    l2 = N((o5, t3, n4, p5) => {
-      let { Import: e5 = async () => {
-      } } = t3, a5;
-      const r4 = async () => a5 = (await e5()).default;
-      return t3.Import === void 0 && n4.Import && e5 !== void 0 && n4.Import(e5), `
-
-
-${M(n, "InView").$$render(o5, { onview: r4 }, {}, { default: () => `${M(a5 || I, "svelte:component").$$render(o5, Object.assign(t3), {}, {})}` })}`;
+        
+        <button>Logout</button></logout-card>` : ""}
+</main>`;
     });
   }
 });
@@ -11683,15 +11678,15 @@ var init_Dropzone = __esm({
     init_store();
     D3 = { code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}", map: null };
     C4 = N((m3, o5, t3, E4) => {
-      let p5, i2, u3, v4, f3;
-      u3 = v(P2, (e5) => i2 = e5), f3 = v(d2, (e5) => v4 = e5);
-      let { text: a5 = "\u{1F525}" } = o5, { textSizeTW: l4 = "text-3xl" } = o5, { dimensionsTW: d4 = "w-[65vw] sm:w-[60vw] h-[60vh]" } = o5, { brightnessTW: c4 = "brightness-100" } = o5, n4;
+      let p6, i2, u2, v4, f3;
+      u2 = v(P2, (e5) => i2 = e5), f3 = v(d2, (e5) => v4 = e5);
+      let { text: a5 = "\u{1F525}" } = o5, { textSizeTW: l3 = "text-3xl" } = o5, { dimensionsTW: d4 = "w-[65vw] sm:w-[60vw] h-[60vh]" } = o5, { brightnessTW: c4 = "brightness-100" } = o5, n4;
       async function x4(e5) {
         console.log("drop it like its \u{1F525}"), r("dropzoneCSS", "/dropzone.css");
         const { PUBLIC_UPLOAD_ENDPOINT: r4 } = await Promise.resolve().then(() => (init_public(), public_exports)), { Dropzone: T5 } = await Promise.resolve().then(() => (init_dropzone(), dropzone_exports));
-        n4 = new T5(e5, { url: r4, acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc" }), z6();
+        n4 = new T5(e5, { url: r4, acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc" }), z5();
       }
-      function z6() {
+      function z5() {
         let e5 = [];
         n4.on("error", (r4) => r4.accepted && e5.push(r4)), n4.on("queuecomplete", () => {
           setTimeout(() => T(P2, i2 = false, i2), 1e3);
@@ -11701,7 +11696,7 @@ var init_Dropzone = __esm({
               n4.processFile(r4), r4.previewElement.querySelector(".dz-error-mark").style.visibility = "hidden", r4.previewElement.querySelector(".dz-error-message").style.visibility = "hidden";
         });
       }
-      return o5.text === void 0 && t3.text && a5 !== void 0 && t3.text(a5), o5.textSizeTW === void 0 && t3.textSizeTW && l4 !== void 0 && t3.textSizeTW(l4), o5.dimensionsTW === void 0 && t3.dimensionsTW && d4 !== void 0 && t3.dimensionsTW(d4), o5.brightnessTW === void 0 && t3.brightnessTW && c4 !== void 0 && t3.brightnessTW(c4), m3.css.add(D3), i2 && S4(), p5 = v4 ? "#1d1c43" : "#ddd", u3(), f3(), `${M(n, "InView").$$render(m3, { single: true, onview: x4, once: true, margin: "0px" }, {}, { default: () => `<form method="post" style="${"box-shadow: inset 0 -10px 10px " + j(p5, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + j(c4, true) + " " + j(l4, true) + " " + j(d4, true) + " mx-auto group"}">
+      return o5.text === void 0 && t3.text && a5 !== void 0 && t3.text(a5), o5.textSizeTW === void 0 && t3.textSizeTW && l3 !== void 0 && t3.textSizeTW(l3), o5.dimensionsTW === void 0 && t3.dimensionsTW && d4 !== void 0 && t3.dimensionsTW(d4), o5.brightnessTW === void 0 && t3.brightnessTW && c4 !== void 0 && t3.brightnessTW(c4), m3.css.add(D3), i2 && S4(), p6 = v4 ? "#1d1c43" : "#ddd", u2(), f3(), `${M(n, "InView").$$render(m3, { single: true, onview: x4, once: true, margin: "0px" }, {}, { default: () => `<form method="post" style="${"box-shadow: inset 0 -10px 10px " + j(p6, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + j(c4, true) + " " + j(l3, true) + " " + j(d4, true) + " mx-auto group"}">
     <div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>${j(a5)}</div></form>` })}`;
     });
   }
@@ -11710,13 +11705,13 @@ var init_Dropzone = __esm({
 // .svelte-kit/output/server/chunks/Footer.js
 var Footer_exports = {};
 __export(Footer_exports, {
-  default: () => l3
+  default: () => l2
 });
-var l3;
+var l2;
 var init_Footer = __esm({
   ".svelte-kit/output/server/chunks/Footer.js"() {
     init_chunks();
-    l3 = N((s5, t3, e5, i2) => {
+    l2 = N((s5, t3, e5, i2) => {
       let { contactLinkClicked: a5 = false } = t3;
       return t3.contactLinkClicked === void 0 && e5.contactLinkClicked && a5 !== void 0 && e5.contactLinkClicked(a5), `<div class="${"text-sm mt-20 " + j("mb-10", true) + " flex justify-center items-center flex-row gap-x-1"}"><span class="text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"><a data-sveltekit-preload-data href="/faq">faq</a>
       \xA0 | \xA0
@@ -11728,7 +11723,7 @@ var init_Footer = __esm({
 // .svelte-kit/output/server/entries/pages/_layout.svelte.js
 var layout_svelte_exports = {};
 __export(layout_svelte_exports, {
-  default: () => He3
+  default: () => Te3
 });
 function ve3() {
   throw new Error("stores.session is no longer available. See https://github.com/sveltejs/kit/discussions/5883");
@@ -11736,160 +11731,167 @@ function ve3() {
 function J4(e5) {
   return Object.prototype.toString.call(e5) === "[object Date]";
 }
-function z5(e5, a5, t3, f3) {
+function P5(e5, i2, t3, $4) {
   if (typeof t3 == "number" || J4(t3)) {
-    const i2 = f3 - t3, r4 = (t3 - a5) / (e5.dt || 1 / 60), l4 = e5.opts.stiffness * i2, $4 = e5.opts.damping * r4, s5 = (l4 - $4) * e5.inv_mass, b3 = (r4 + s5) * e5.dt;
-    return Math.abs(b3) < e5.opts.precision && Math.abs(i2) < e5.opts.precision ? f3 : (e5.settled = false, J4(t3) ? new Date(t3.getTime() + b3) : t3 + b3);
+    const r4 = $4 - t3, o5 = (t3 - i2) / (e5.dt || 1 / 60), l3 = e5.opts.stiffness * r4, f3 = e5.opts.damping * o5, n4 = (l3 - f3) * e5.inv_mass, b3 = (o5 + n4) * e5.dt;
+    return Math.abs(b3) < e5.opts.precision && Math.abs(r4) < e5.opts.precision ? $4 : (e5.settled = false, J4(t3) ? new Date(t3.getTime() + b3) : t3 + b3);
   } else {
     if (Array.isArray(t3))
-      return t3.map((i2, r4) => z5(e5, a5[r4], t3[r4], f3[r4]));
+      return t3.map((r4, o5) => P5(e5, i2[o5], t3[o5], $4[o5]));
     if (typeof t3 == "object") {
-      const i2 = {};
-      for (const r4 in t3)
-        i2[r4] = z5(e5, a5[r4], t3[r4], f3[r4]);
-      return i2;
+      const r4 = {};
+      for (const o5 in t3)
+        r4[o5] = P5(e5, i2[o5], t3[o5], $4[o5]);
+      return r4;
     } else
       throw new Error(`Cannot spring ${typeof t3} values`);
   }
 }
-function xe3(e5, a5 = {}) {
-  const t3 = A2(e5), { stiffness: f3 = 0.15, damping: i2 = 0.8, precision: r4 = 0.01 } = a5;
-  let l4, $4, s5, b3 = e5, c4 = e5, p5 = 1, m3 = 0, g4 = false;
-  function w4(u3, k3 = {}) {
-    c4 = u3;
-    const C5 = s5 = {};
-    return e5 == null || k3.hard || h.stiffness >= 1 && h.damping >= 1 ? (g4 = true, l4 = z(), b3 = u3, t3.set(e5 = c4), Promise.resolve()) : (k3.soft && (m3 = 1 / ((k3.soft === true ? 0.5 : +k3.soft) * 60), p5 = 0), $4 || (l4 = z(), g4 = false, $4 = A((M4) => {
-      if (g4)
-        return g4 = false, $4 = null, false;
-      p5 = Math.min(p5 + m3, 1);
-      const y3 = { inv_mass: p5, opts: h, settled: true, dt: (M4 - l4) * 60 / 1e3 }, L4 = z5(y3, b3, e5, c4);
-      return l4 = M4, b3 = e5, t3.set(e5 = L4), y3.settled && ($4 = null), !y3.settled;
+function we3(e5, i2 = {}) {
+  const t3 = A2(e5), { stiffness: $4 = 0.15, damping: r4 = 0.8, precision: o5 = 0.01 } = i2;
+  let l3, f3, n4, b3 = e5, c4 = e5, m3 = 1, g4 = 0, h = false;
+  function x4(u2, k3 = {}) {
+    c4 = u2;
+    const C5 = n4 = {};
+    return e5 == null || k3.hard || v4.stiffness >= 1 && v4.damping >= 1 ? (h = true, l3 = z(), b3 = u2, t3.set(e5 = c4), Promise.resolve()) : (k3.soft && (g4 = 1 / ((k3.soft === true ? 0.5 : +k3.soft) * 60), m3 = 0), f3 || (l3 = z(), h = false, f3 = A((M4) => {
+      if (h)
+        return h = false, f3 = null, false;
+      m3 = Math.min(m3 + g4, 1);
+      const _5 = { inv_mass: m3, opts: v4, settled: true, dt: (M4 - l3) * 60 / 1e3 }, L4 = P5(_5, b3, e5, c4);
+      return l3 = M4, b3 = e5, t3.set(e5 = L4), _5.settled && (f3 = null), !_5.settled;
     })), new Promise((M4) => {
-      $4.promise.then(() => {
-        C5 === s5 && M4();
+      f3.promise.then(() => {
+        C5 === n4 && M4();
       });
     }));
   }
-  const h = { set: w4, update: (u3, k3) => w4(u3(c4, e5), k3), subscribe: t3.subscribe, stiffness: f3, damping: i2, precision: r4 };
-  return h;
+  const v4 = { set: x4, update: (u2, k3) => x4(u2(c4, e5), k3), subscribe: t3.subscribe, stiffness: $4, damping: r4, precision: o5 };
+  return v4;
 }
-var R3, fe3, G3, pe3, me3, ge3, he3, oe3, ke3, we3, Q4, U3, He3;
+var R3, $e3, G3, pe3, me3, ge3, he3, re3, ke3, xe3, Q4, U3, X5, Te3;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
-    init_utils();
     init_store();
+    init_utils();
     init_index2();
     init_InView();
     init_Modal();
-    init_LoginCard();
-    init_LazyMount2();
     R3 = 24;
-    fe3 = N((e5, a5, t3, f3) => `<svg aria-label="Sun" id="lightIcon"${X("height", R3, 0)}${X("width", R3, 0)} viewBox="${"0 0 " + j(8 * R3, true) + " " + j(8 * R3, true)}" class="mx-3"><path fill="rgb(247,247,247)" d="M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"></path></svg>`);
+    $e3 = N((e5, i2, t3, $4) => `<svg aria-label="Sun" id="lightIcon"${X("height", R3, 0)}${X("width", R3, 0)} viewBox="${"0 0 " + j(8 * R3, true) + " " + j(8 * R3, true)}" class="mx-3"><path fill="rgb(247,247,247)" d="M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"></path></svg>`);
     G3 = 24;
-    pe3 = N((e5, a5, t3, f3) => `
+    pe3 = N((e5, i2, t3, $4) => `
 
 
 <svg aria-label="Moon" id="darkIcon"${X("height", G3, 0)}${X("width", G3, 0)} class="mx-3"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"></path></svg>`);
     me3 = { code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}", map: null };
-    ge3 = N((e5, a5, t3, f3) => {
-      let i2, r4;
-      return r4 = v(d2, (l4) => i2 = l4), e5.css.add(me3), r4(), `
-  <div><button>${i2 ? `${M(fe3, "IconSun").$$render(e5, {}, {}, {})}` : `${M(pe3, "IconMoon").$$render(e5, {}, {}, {})}`}</button></div>`;
+    ge3 = N((e5, i2, t3, $4) => {
+      let r4, o5;
+      return o5 = v(d2, (l3) => r4 = l3), e5.css.add(me3), o5(), `
+  <div><button>${r4 ? `${M($e3, "IconSun").$$render(e5, {}, {}, {})}` : `${M(pe3, "IconMoon").$$render(e5, {}, {}, {})}`}</button></div>`;
     });
     he3 = () => {
-      const e5 = F("__svelte__"), a5 = { page: { subscribe: e5.page.subscribe }, navigating: { subscribe: e5.navigating.subscribe }, updated: e5.updated };
-      return Object.defineProperties(a5, { preloading: { get() {
+      const e5 = F("__svelte__"), i2 = { page: { subscribe: e5.page.subscribe }, navigating: { subscribe: e5.navigating.subscribe }, updated: e5.updated };
+      return Object.defineProperties(i2, { preloading: { get() {
         return console.error("stores.preloading is deprecated; use stores.navigating instead"), { subscribe: e5.navigating.subscribe };
       }, enumerable: false }, session: { get() {
         return ve3(), {};
-      }, enumerable: false } }), a5;
+      }, enumerable: false } }), i2;
     };
-    oe3 = { subscribe(e5) {
+    re3 = { subscribe(e5) {
       return he3().page.subscribe(e5);
     } };
-    ke3 = N((e5, a5, t3, f3) => {
-      let i2, r4, l4, $4;
-      i2 = v(A4, (u3) => u3), r4 = v(P2, (u3) => u3), $4 = v(oe3, (u3) => l4 = u3);
-      let { href: s5, content: b3, routes: c4, btnColorHover: p5, icon: m3, navIconClicked: g4 = false } = a5;
-      a5.href === void 0 && t3.href && s5 !== void 0 && t3.href(s5), a5.content === void 0 && t3.content && b3 !== void 0 && t3.content(b3), a5.routes === void 0 && t3.routes && c4 !== void 0 && t3.routes(c4), a5.btnColorHover === void 0 && t3.btnColorHover && p5 !== void 0 && t3.btnColorHover(p5), a5.icon === void 0 && t3.icon && m3 !== void 0 && t3.icon(m3), a5.navIconClicked === void 0 && t3.navIconClicked && g4 !== void 0 && t3.navIconClicked(g4);
-      let w4, h;
+    ke3 = N((e5, i2, t3, $4) => {
+      let r4, o5, l3, f3;
+      r4 = v(A4, (u2) => u2), o5 = v(P2, (u2) => u2), f3 = v(re3, (u2) => l3 = u2);
+      let { href: n4, content: b3, routes: c4, btnColorHover: m3, icon: g4, navIconClicked: h = false } = i2;
+      i2.href === void 0 && t3.href && n4 !== void 0 && t3.href(n4), i2.content === void 0 && t3.content && b3 !== void 0 && t3.content(b3), i2.routes === void 0 && t3.routes && c4 !== void 0 && t3.routes(c4), i2.btnColorHover === void 0 && t3.btnColorHover && m3 !== void 0 && t3.btnColorHover(m3), i2.icon === void 0 && t3.icon && g4 !== void 0 && t3.icon(g4), i2.navIconClicked === void 0 && t3.navIconClicked && h !== void 0 && t3.navIconClicked(h);
+      let x4, v4;
       do {
-        w4 = true;
-        for (let u3 in c4)
-          c4[u3].isCurrent = c4[u3].href === l4.url.pathname;
-        h = `<a data-sveltekit-preload-data${X("href", s5, 0)} class="${"block font-Nunito font-thin " + j(` ${p5}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`, true)}">
+        x4 = true;
+        for (let u2 in c4)
+          c4[u2].isCurrent = c4[u2].href === l3.url.pathname;
+        v4 = `<a data-sveltekit-preload-data${X("href", n4, 0)} class="${"block font-Nunito font-thin " + j(` ${m3}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`, true)}">
   ${`${j(b3)}`}</a>`;
-      } while (!w4);
-      return i2(), r4(), $4(), h;
+      } while (!x4);
+      return r4(), o5(), f3(), v4;
     });
-    we3 = N((e5, a5, t3, f3) => {
-      let i2, r4, l4, $4, s5, b3, c4, p5, m3, g4, w4, h, u3, k3, C5, M4, y3, L4;
-      l4 = v(d2, (n4) => r4 = n4), $4 = v(T2, (n4) => n4), b3 = v(Y2, (n4) => s5 = n4), p5 = v(F3, (n4) => c4 = n4), g4 = v(u, (n4) => m3 = n4), h = v(q2, (n4) => w4 = n4), M4 = v(P2, (n4) => C5 = n4), L4 = v(A4, (n4) => y3 = n4);
-      let H5 = xe3(1, { stiffness: 0.1, damping: 0.25 });
-      k3 = v(H5, (n4) => u3 = n4);
-      let _5 = 0, T5 = "sm:bg-red-300 rounded", I5 = "hover:bg-red-300 ", O4 = a2() !== "iOS" && "hidden", o5 = c(), Z3 = s2, D5, q5;
+    xe3 = N((e5, i2, t3, $4) => {
+      let r4, o5, l3, f3, n4, b3, c4, m3, g4, h, x4, v4, u2, k3, C5, M4, _5, L4;
+      l3 = v(d2, (a5) => o5 = a5), f3 = v(T2, (a5) => a5), b3 = v(Y2, (a5) => n4 = a5), m3 = v(F3, (a5) => c4 = a5), h = v(u, (a5) => g4 = a5), v4 = v(q2, (a5) => x4 = a5), M4 = v(P2, (a5) => C5 = a5), L4 = v(A4, (a5) => _5 = a5);
+      let H5 = we3(1, { stiffness: 0.1, damping: 0.25 });
+      k3 = v(H5, (a5) => u2 = a5);
+      let y3 = 0, j3 = "sm:bg-red-300 rounded", I5 = "hover:bg-red-300 ", A7 = a2() !== "iOS" && "hidden", s5 = c(), Z3 = s2, T5, q5;
       do
-        D5 = true, c4 && !c() && (_5 = r4 ? 0.75 : 0, H5.set(1 + 0.5 * Math.sin(m3))), c4 ? T(Y2, s5.login.name = "\u{1F680}", s5) : T(Y2, s5.login.name = "Login", s5), i2 = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${r4 ? "to-[rgb(37,35,91)]" : "to-red-200"}`, q5 = `
+        T5 = true, c4 && !c() && (y3 = o5 ? 0.75 : 0, H5.set(1 + 0.5 * Math.sin(g4))), c4 ? T(Y2, n4.login.name = "\u{1F680}", n4) : T(Y2, n4.login.name = "Login", n4), r4 = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${o5 ? "to-[rgb(37,35,91)]" : "to-red-200"}`, q5 = `
 <logo-and-navbar class="${"opacity-0 " + j(Z3, true) + " flex items-center justify-center gap-x-32 md:justify-between w-full"}"><button class="p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent">THINKSOLVE
     </button>
 
   
-  <ul class="${"text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto " + j(i2, true) + " hideScrollBar overflow-x-scroll overflow-y-hidden"}">
+  <ul class="${"text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto " + j(r4, true) + " hideScrollBar overflow-x-scroll overflow-y-hidden"}">
     
-    <li${X("class", O4, 0)}><button class="${"font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg " + j(w4, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded"}">App
+    <li${X("class", A7, 0)}><button class="${"font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg " + j(x4, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded"}">App
       </button></li>
 
     
-    ${G(Object.keys(s5).slice(1, 5), (n4) => `
+    ${G(Object.keys(n4).slice(1, 5), (a5) => `
       
-      <li${X("style", n4 == "login" && c4 && `transform:scale(${u3}); filter:hue-rotate(${_5}turn)`, 0)}>${M(ke3, "Navitem").$$render(e5, { href: s5[n4].href, content: s5[n4].name, icon: s5[n4].icon, navIconClicked: s5[n4].href == "/homework" && C5 || s5[n4].href == "/login" && y3 || s5[n4].isCurrent, routes: s5, btnColor: T5, btnColorHover: I5 }, { routes: (A7) => {
-          s5 = A7, D5 = false;
-        }, btnColor: (A7) => {
-          T5 = A7, D5 = false;
-        }, btnColorHover: (A7) => {
-          I5 = A7, D5 = false;
+      <li${X("style", a5 == "login" && c4 && `transform:scale(${u2}); filter:hue-rotate(${y3}turn)`, 0)}>${M(ke3, "Navitem").$$render(e5, { href: n4[a5].href, content: n4[a5].name, icon: n4[a5].icon, navIconClicked: n4[a5].href == "/homework" && C5 || n4[a5].href == "/login" && _5 || n4[a5].isCurrent, routes: n4, btnColor: j3, btnColorHover: I5 }, { routes: (O4) => {
+          n4 = O4, T5 = false;
+        }, btnColor: (O4) => {
+          j3 = O4, T5 = false;
+        }, btnColorHover: (O4) => {
+          I5 = O4, T5 = false;
         } }, {})}
         
       </li>`)}
 
-    <li class="${"py-2 translate-y-1 scale-125 md:scale-100 " + j(o5, true)}">${M(ge3, "LightDarkMode").$$render(e5, {}, {}, {})}</li></ul></logo-and-navbar>`;
-      while (!D5);
-      return l4(), $4(), b3(), p5(), g4(), h(), k3(), M4(), L4(), q5;
+    <li class="${"py-2 translate-y-1 scale-125 md:scale-100 " + j(s5, true)}">${M(ge3, "LightDarkMode").$$render(e5, {}, {}, {})}</li></ul></logo-and-navbar>`;
+      while (!T5);
+      return l3(), f3(), b3(), m3(), h(), v4(), k3(), M4(), L4(), q5;
     });
-    Q4 = 800;
-    U3 = 400;
-    He3 = N((e5, a5, t3, f3) => {
-      let i2, r4, l4, $4, s5, b3, c4, p5, m3, g4, w4, h, u3, k3, C5, M4, y3, L4;
-      r4 = v(x2, (o5) => i2 = o5), $4 = v(u, (o5) => l4 = o5), b3 = v(B2, (o5) => s5 = o5), p5 = v(oe3, (o5) => c4 = o5), g4 = v(Y2, (o5) => m3 = o5), h = v(d2, (o5) => w4 = o5), k3 = v(T2, (o5) => u3 = o5), M4 = v(A4, (o5) => C5 = o5), L4 = v(P2, (o5) => y3 = o5);
-      let H5, _5, T5 = false, I5, O4;
+    Q4 = N((e5, i2, t3, $4) => {
+      let { Import: r4 = async () => {
+      } } = i2, o5;
+      const l3 = async () => o5 = (await r4()).default;
+      return i2.Import === void 0 && t3.Import && r4 !== void 0 && t3.Import(r4), `
+
+
+${M(n, "InView").$$render(e5, { onview: l3 }, {}, { default: () => `${M(o5 || I, "svelte:component").$$render(e5, Object.assign(i2), {}, {})}` })}`;
+    });
+    U3 = 800;
+    X5 = 400;
+    Te3 = N((e5, i2, t3, $4) => {
+      let r4, o5, l3, f3, n4, b3, c4, m3, g4, h, x4, v4, u2, k3, C5, M4, _5, L4;
+      o5 = v(x2, (s5) => r4 = s5), f3 = v(u, (s5) => l3 = s5), b3 = v(B2, (s5) => n4 = s5), m3 = v(re3, (s5) => c4 = s5), h = v(Y2, (s5) => g4 = s5), v4 = v(d2, (s5) => x4 = s5), k3 = v(T2, (s5) => u2 = s5), M4 = v(A4, (s5) => C5 = s5), L4 = v(P2, (s5) => _5 = s5);
+      let H5, y3, j3 = false, I5, A7;
       do
-        I5 = true, s5 || (l4 < 10 && (_5 = "top-0"), l4 > 10 && l4 < Q4 && (_5 = "top-0 backdrop-blur-3xl duration-1000"), l4 > Q4 && i2 > 10 && (_5 = "-top-20 backdrop-blur-3xl duration-200"), i2 < -100 && (_5 = "top-0 backdrop-blur-3xl duration-700")), s5 && (l4 >= 0 && l4 < U3 && (_5 = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200"), l4 > U3 && i2 > 20 && (_5 = "-bottom-28 duration-400"), i2 < -30 && (_5 = "bottom-0 backdrop-blur-3xl duration-700")), O4 = `${e5.head += `<!-- HEAD_svelte-1pgxeq7_START --><link rel="manifest" href="/manifest.json">${c4.status == 200 ? (() => {
-          let o5 = c4.route.id.slice(1);
+        I5 = true, n4 || (l3 < 10 && (y3 = "top-0"), l3 > 10 && l3 < U3 && (y3 = "top-0 backdrop-blur-3xl duration-1000"), l3 > U3 && r4 > 10 && (y3 = "-top-20 backdrop-blur-3xl duration-200"), r4 < -100 && (y3 = "top-0 backdrop-blur-3xl duration-700")), n4 && (l3 >= 0 && l3 < X5 && (y3 = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200"), l3 > X5 && r4 > 20 && (y3 = "-bottom-28 duration-400"), r4 < -30 && (y3 = "bottom-0 backdrop-blur-3xl duration-700")), A7 = `${e5.head += `<!-- HEAD_svelte-1pgxeq7_START --><link rel="manifest" href="/manifest.json">${c4.status == 200 ? (() => {
+          let s5 = c4.route.id.slice(1);
           return `
 
-    ${o5 == "" ? `${e5.title = `<title>${j(m3.home.title)}</title>`, ""}
+    ${s5 == "" ? `${e5.title = `<title>${j(g4.home.title)}</title>`, ""}
       <meta name="description" content="Math and Physics Tutoring for the Modern Age.">
       <meta og:url="https://thinksolve.io/">
       
-      ` : `${G(Object.keys(m3).slice(1), (Z3) => {
-            let D5 = m3[Z3].title;
+      ` : `${G(Object.keys(g4).slice(1), (Z3) => {
+            let T5 = g4[Z3].title;
             return `
 
-        ${o5.startsWith(Z3) ? `${e5.title = `<title>${j(D5)}</title>`, ""}` : ""}`;
+        ${s5.startsWith(Z3) ? `${e5.title = `<title>${j(T5)}</title>`, ""}` : ""}`;
           })}`}`;
         })() : `${c4.status == 404 ? `${e5.title = "<title>Oops \u{1F4A9}</title>", ""}` : ""}`}<!-- HEAD_svelte-1pgxeq7_END -->`, ""}
 
 
 
 
-<main>${M(u2, "Modal").$$render(e5, { showModal: T5, bgTint: "backdrop-blur-3xl " }, {}, { default: () => `<ul class="${"text-center flex flex-col gap-y-2 font-Poppins sm:text-5xl text-3xl text-transparent bg-clip-text bg-gradient-to-r " + j(w4 ? "from-teal-200 via-rose-300 to-pink-200 " : "from-teal-700 via-rose-700 to-pink-700 ", true)}"><li>Email:</li>
+<main>${M(p3, "Modal").$$render(e5, { showModal: j3, bgTint: "backdrop-blur-3xl" }, {}, { default: () => `<ul class="${"text-center flex flex-col gap-y-2 font-Poppins sm:text-5xl text-3xl text-transparent bg-clip-text bg-gradient-to-r " + j(x4 ? "from-teal-200 via-rose-300 to-pink-200 " : "from-teal-700 via-rose-700 to-pink-700 ", true)}"><li>Email:</li>
         <li class="p-5">thinksolve.io@gmail.com</li></ul>` })}
 
   
   ${a2() == "iOS" ? `
 
-    ${M(u2, "Modal").$$render(e5, { showModal: u3, bgTint: "text-white bg-gradient-to-br from-[#6c79f4] to-rose-400" }, {}, { default: () => `<ul class="p-10 flex flex-col gap-y-8 font-Poppins text-3xl sm:text-6xl"><li><div class="text-6xl">1.</div>
+    ${M(p3, "Modal").$$render(e5, { showModal: u2, bgTint: "text-white bg-gradient-to-br from-[#6c79f4] to-rose-400" }, {}, { default: () => `<ul class="p-10 flex flex-col gap-y-8 font-Poppins text-3xl sm:text-6xl"><li><div class="text-6xl">1.</div>
             Open Safari
           </li>
           <li><div class="text-6xl">2.</div>
@@ -11902,46 +11904,49 @@ var init_layout_svelte = __esm({
 
   
 
-  ${M(u2, "Modal").$$render(e5, { showModal: C5 }, { showModal: (o5) => {
-          C5 = o5, I5 = false;
-        } }, { default: () => `${M(ee3, "LoginCard").$$render(e5, {}, {}, {})}
-
-    
-    
-    ` })}
-
-  ${M(u2, "Modal").$$render(e5, { bgTint: "bg-[rgba(0,0,0,0.1)]", showModal: y3 }, { showModal: (o5) => {
-          y3 = o5, I5 = false;
+  ${M(p3, "Modal").$$render(e5, { bgTint: "backdrop-blur-md", opacityEase: true, showModal: C5 }, { showModal: (s5) => {
+          C5 = s5, I5 = false;
         } }, { default: () => `
     
 
     
-    ${M(l2, "LazyMount2").$$render(e5, { Import: async () => await Promise.resolve().then(() => (init_Dropzone(), Dropzone_exports)), textSizeTW: "text-6xl", dimensionsTW: "w-[80vw] h-[85vh]", brightnessTW: "brightness-95" }, {}, {})}
+    
+
+    ${M(Q4, "LazyMount2").$$render(e5, { Import: async () => (setTimeout(() => C5 = true, 25), await Promise.resolve().then(() => (init_LoginCard(), LoginCard_exports))) }, {}, {})}
+    ` })}
+
+  ${M(p3, "Modal").$$render(e5, { bgTint: "bg-[rgba(0,0,0,0.1)]", showModal: _5 }, { showModal: (s5) => {
+          _5 = s5, I5 = false;
+        } }, { default: () => `
+    
+
+    
+    ${M(Q4, "LazyMount2").$$render(e5, { Import: async () => await Promise.resolve().then(() => (init_Dropzone(), Dropzone_exports)), textSizeTW: "text-6xl", dimensionsTW: "w-[80vw] h-[85vh]", brightnessTW: "brightness-95" }, {}, {})}
 
     ` })}
 
   
-  <div class="${"z-50 md:py-4 md:px-[7%] fixed " + j(_5, true) + " ease-in-out w-full"}">
-    ${M(we3, "Navbar").$$render(e5, {}, {}, {})}</div>
+  <div class="${"z-50 md:py-4 md:px-[7%] fixed " + j(y3, true) + " ease-in-out w-full"}">
+    ${M(xe3, "Navbar").$$render(e5, {}, {}, {})}</div>
 
   
   
 
   <div class="px-[7%] pt-32 md:block">
-    ${f3.default ? f3.default({}) : ""}
+    ${$4.default ? $4.default({}) : ""}
 
     
 
     
-    ${M(n, "InView").$$render(e5, { margin: "400px", onview: async () => H5 = await Promise.resolve().then(() => (init_Footer(), Footer_exports)) }, {}, { default: () => `${H5 ? `${M(H5.default, "FooterComponent.default").$$render(e5, { contactLinkClicked: T5 }, { contactLinkClicked: (o5) => {
-          T5 = o5, I5 = false;
+    ${M(n, "InView").$$render(e5, { margin: "400px", onview: async () => H5 = await Promise.resolve().then(() => (init_Footer(), Footer_exports)) }, {}, { default: () => `${H5 ? `${M(H5.default, "FooterComponent.default").$$render(e5, { contactLinkClicked: j3 }, { contactLinkClicked: (s5) => {
+          j3 = s5, I5 = false;
         } }, {})}` : ""}` })}
 
     
 
     </div></main>`;
       while (!I5);
-      return r4(), $4(), b3(), p5(), g4(), h(), k3(), M4(), L4(), O4;
+      return o5(), f3(), b3(), m3(), h(), v4(), k3(), M4(), L4(), A7;
     });
   }
 });
@@ -11963,9 +11968,9 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-00795438.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-00795438.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/index-97de35bf.js", "_app/immutable/chunks/index-426d3133.js", "_app/immutable/chunks/store-6c7086f1.js", "_app/immutable/chunks/index-bee2e4ee.js", "_app/immutable/chunks/utils-4472118d.js", "_app/immutable/chunks/singletons-043cfb89.js", "_app/immutable/chunks/navigation-515f9e1c.js", "_app/immutable/chunks/InView-039b0397.js", "_app/immutable/chunks/Modal-cbc15ce4.js", "_app/immutable/chunks/LoginCard-0db5f335.js", "_app/immutable/chunks/firebase-cb9dba95.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/LazyMount2-d271e331.js", "_app/immutable/modules/pages/_layout.js-d1ec873b.js", "_app/immutable/chunks/_layout-86260db2.js"];
-    stylesheets = ["_app/immutable/assets/_layout-70f0d853.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
+    file = "_app/immutable/components/pages/_layout.svelte-d2441bc5.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-d2441bc5.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/index-6601576b.js", "_app/immutable/chunks/store-786043c4.js", "_app/immutable/chunks/index-fbb691a0.js", "_app/immutable/chunks/index-736bd204.js", "_app/immutable/chunks/utils-efa24aa2.js", "_app/immutable/chunks/singletons-c91f5b07.js", "_app/immutable/chunks/navigation-9cf51005.js", "_app/immutable/chunks/InView-44f860ed.js", "_app/immutable/chunks/Modal-7525f3f1.js", "_app/immutable/modules/pages/_layout.js-d1ec873b.js", "_app/immutable/chunks/_layout-86260db2.js"];
+    stylesheets = ["_app/immutable/assets/_layout-fbff77c6.css", "_app/immutable/assets/LoginCard-bbce9bff.css", "_app/immutable/assets/Dropzone-ad1f3da6.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff", "_app/immutable/assets/poppins-v20-latin-700-9338e65f.woff2", "_app/immutable/assets/poppins-v20-latin-700-da36c916.woff"];
   }
 });
@@ -12002,8 +12007,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-83782c7d.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-83782c7d.js", "_app/immutable/chunks/index-97de35bf.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-a59fe484.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-a59fe484.js", "_app/immutable/chunks/index-6601576b.js"];
     stylesheets2 = [];
     fonts2 = [];
   }
@@ -25753,8 +25758,8 @@ var init__3 = __esm({
     init_page();
     index3 = 11;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/physics/_page.svelte-5e0f775e.js";
-    imports3 = ["_app/immutable/components/pages/physics/_page.svelte-5e0f775e.js", "_app/immutable/chunks/index-97de35bf.js", "_app/immutable/chunks/Kajax-48ff9b9d.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-6c7086f1.js", "_app/immutable/chunks/index-bee2e4ee.js", "_app/immutable/modules/pages/physics/_page.js-134697de.js", "_app/immutable/chunks/_page-d949538d.js"];
+    file3 = "_app/immutable/components/pages/physics/_page.svelte-b0a44394.js";
+    imports3 = ["_app/immutable/components/pages/physics/_page.svelte-b0a44394.js", "_app/immutable/chunks/index-6601576b.js", "_app/immutable/chunks/Kajax-b8507920.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-786043c4.js", "_app/immutable/chunks/index-fbb691a0.js", "_app/immutable/modules/pages/physics/_page.js-134697de.js", "_app/immutable/chunks/_page-d949538d.js"];
     stylesheets3 = ["_app/immutable/assets/_page-fcf51fa8.css"];
     fonts3 = [];
   }
@@ -26037,7 +26042,7 @@ function stringify(value) {
   const stringified = [];
   const indexes = /* @__PURE__ */ new Map();
   const keys = [];
-  let p5 = 0;
+  let p6 = 0;
   function flatten(thing) {
     if (typeof thing === "function") {
       throw new DevalueError(`Cannot stringify a function`, keys);
@@ -26054,7 +26059,7 @@ function stringify(value) {
       return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0)
       return NEGATIVE_ZERO;
-    const index5 = p5++;
+    const index5 = p6++;
     indexes.set(thing, index5);
     let str = "";
     if (is_primitive(thing)) {
@@ -26173,11 +26178,11 @@ init_index2();
 var import_cookie = __toESM(require_cookie(), 1);
 var ue = __toESM(require_set_cookie(), 1);
 var Qe = N((e5, t3, r4, n4) => {
-  let { stores: s5 } = t3, { page: o5 } = t3, { components: a5 } = t3, { form: i2 } = t3, { data_0: c4 = null } = t3, { data_1: l4 = null } = t3;
-  return P("__svelte__", s5), s5.page.notify, t3.stores === void 0 && r4.stores && s5 !== void 0 && r4.stores(s5), t3.page === void 0 && r4.page && o5 !== void 0 && r4.page(o5), t3.components === void 0 && r4.components && a5 !== void 0 && r4.components(a5), t3.form === void 0 && r4.form && i2 !== void 0 && r4.form(i2), t3.data_0 === void 0 && r4.data_0 && c4 !== void 0 && r4.data_0(c4), t3.data_1 === void 0 && r4.data_1 && l4 !== void 0 && r4.data_1(l4), s5.page.set(o5), `
+  let { stores: s5 } = t3, { page: o5 } = t3, { components: a5 } = t3, { form: i2 } = t3, { data_0: c4 = null } = t3, { data_1: l3 = null } = t3;
+  return P("__svelte__", s5), s5.page.notify, t3.stores === void 0 && r4.stores && s5 !== void 0 && r4.stores(s5), t3.page === void 0 && r4.page && o5 !== void 0 && r4.page(o5), t3.components === void 0 && r4.components && a5 !== void 0 && r4.components(a5), t3.form === void 0 && r4.form && i2 !== void 0 && r4.form(i2), t3.data_0 === void 0 && r4.data_0 && c4 !== void 0 && r4.data_0(c4), t3.data_1 === void 0 && r4.data_1 && l3 !== void 0 && r4.data_1(l3), s5.page.set(o5), `
 
 
-${a5[1] ? `${M(a5[0] || I, "svelte:component").$$render(e5, { data: c4 }, {}, { default: () => `${M(a5[1] || I, "svelte:component").$$render(e5, { data: l4, form: i2 }, {}, {})}` })}` : `${M(a5[0] || I, "svelte:component").$$render(e5, { data: c4, form: i2 }, {}, {})}`}
+${a5[1] ? `${M(a5[0] || I, "svelte:component").$$render(e5, { data: c4 }, {}, { default: () => `${M(a5[1] || I, "svelte:component").$$render(e5, { data: l3, form: i2 }, {}, {})}` })}` : `${M(a5[0] || I, "svelte:component").$$render(e5, { data: c4, form: i2 }, {}, {})}`}
 
 `;
 });
@@ -26186,13 +26191,13 @@ function re(e5, t3) {
   e5.split(",").forEach((o5, a5) => {
     const i2 = /([^/]+)\/([^;]+)(?:;q=([0-9.]+))?/.exec(o5);
     if (i2) {
-      const [, c4, l4, p5 = "1"] = i2;
-      r4.push({ type: c4, subtype: l4, q: +p5, i: a5 });
+      const [, c4, l3, p6 = "1"] = i2;
+      r4.push({ type: c4, subtype: l3, q: +p6, i: a5 });
     }
   }), r4.sort((o5, a5) => o5.q !== a5.q ? a5.q - o5.q : o5.subtype === "*" != (a5.subtype === "*") ? o5.subtype === "*" ? 1 : -1 : o5.type === "*" != (a5.type === "*") ? o5.type === "*" ? 1 : -1 : o5.i - a5.i);
   let n4, s5 = 1 / 0;
   for (const o5 of t3) {
-    const [a5, i2] = o5.split("/"), c4 = r4.findIndex((l4) => (l4.type === a5 || l4.type === "*") && (l4.subtype === i2 || l4.subtype === "*"));
+    const [a5, i2] = o5.split("/"), c4 = r4.findIndex((l3) => (l3.type === a5 || l3.type === "*") && (l3.subtype === i2 || l3.subtype === "*"));
     c4 !== -1 && c4 < s5 && (n4 = o5, s5 = c4);
   }
   return n4;
@@ -26463,12 +26468,12 @@ async function le({ event: e5, state: t3, node: r4, parent: n4 }) {
     s5.url = true;
   });
   t3.prerendering && ve(o5);
-  const a5 = await ((c4 = r4.server.load) == null ? void 0 : c4.call(null, { ...e5, depends: (...l4) => {
-    for (const p5 of l4) {
-      const { href: j3 } = new URL(p5, e5.url);
+  const a5 = await ((c4 = r4.server.load) == null ? void 0 : c4.call(null, { ...e5, depends: (...l3) => {
+    for (const p6 of l3) {
+      const { href: j3 } = new URL(p6, e5.url);
       s5.dependencies.add(j3);
     }
-  }, params: new Proxy(e5.params, { get: (l4, p5) => (s5.params.add(p5), l4[p5]) }), parent: async () => (s5.parent = true, n4()), route: { get id() {
+  }, params: new Proxy(e5.params, { get: (l3, p6) => (s5.params.add(p6), l3[p6]) }), parent: async () => (s5.parent = true, n4()), route: { get id() {
     return s5.route = true, e5.route.id;
   } }, url: o5 }));
   return { type: "data", data: a5 ? await Ue(a5) : null, uses: s5, slash: r4.server.trailingSlash };
@@ -26478,7 +26483,7 @@ async function ze({ event: e5, fetched: t3, node: r4, parent: n4, server_data_pr
   const c4 = await s5;
   if (!((j3 = r4 == null ? void 0 : r4.shared) != null && j3.load))
     return (c4 == null ? void 0 : c4.data) ?? null;
-  const l4 = { url: e5.url, params: e5.params, data: (c4 == null ? void 0 : c4.data) ?? null, route: e5.route, fetch: async (d4, m3) => {
+  const l3 = { url: e5.url, params: e5.params, data: (c4 == null ? void 0 : c4.data) ?? null, route: e5.route, fetch: async (d4, m3) => {
     const b3 = d4 instanceof Request && d4.body ? d4.clone().body : null, y3 = await e5.fetch(d4, m3), w4 = new URL(d4 instanceof Request ? d4.url : d4, e5.url), E4 = w4.origin === e5.url.origin;
     let x4;
     if (E4)
@@ -26488,7 +26493,7 @@ async function ze({ event: e5, fetched: t3, node: r4, parent: n4, server_data_pr
       if (!k3 || k3 !== e5.url.origin && k3 !== "*")
         throw new Error(`CORS error: ${k3 ? "Incorrect" : "No"} 'Access-Control-Allow-Origin' header is present on the requested resource`);
     }
-    const u3 = new Proxy(y3, { get(h, k3, f3) {
+    const u2 = new Proxy(y3, { get(h, k3, f3) {
       async function _5() {
         const v4 = await h.text();
         if (!v4 || typeof v4 == "string") {
@@ -26513,14 +26518,14 @@ async function ze({ event: e5, fetched: t3, node: r4, parent: n4, server_data_pr
         return _5;
       };
     }
-    return u3;
+    return u2;
   }, setHeaders: e5.setHeaders, depends: () => {
   }, parent: n4 };
-  Object.defineProperties(l4, { session: { get() {
+  Object.defineProperties(l3, { session: { get() {
     throw new Error("session is no longer available. See https://github.com/sveltejs/kit/discussions/5883");
   }, enumerable: false } });
-  const p5 = await r4.shared.load.call(null, l4);
-  return p5 ? Ue(p5) : null;
+  const p6 = await r4.shared.load.call(null, l3);
+  return p6 ? Ue(p6) : null;
 }
 async function _t(e5) {
   let t3 = "";
@@ -26558,14 +26563,14 @@ var kt = new RegExp(`[${Object.keys(He).join("")}]`, "g");
 function Et(e5, t3, r4 = false) {
   const n4 = {};
   let s5 = null, o5 = null;
-  for (const [l4, p5] of e5.response.headers)
-    t3(l4, p5) && (n4[l4] = p5), l4 === "cache-control" && (s5 = p5), l4 === "age" && (o5 = p5);
-  const a5 = { status: e5.response.status, statusText: e5.response.statusText, headers: n4, body: e5.response_body }, i2 = JSON.stringify(a5).replace(kt, (l4) => He[l4]), c4 = ['type="application/json"', "data-sveltekit-fetched", `data-url=${Q(e5.url)}`];
+  for (const [l3, p6] of e5.response.headers)
+    t3(l3, p6) && (n4[l3] = p6), l3 === "cache-control" && (s5 = p6), l3 === "age" && (o5 = p6);
+  const a5 = { status: e5.response.status, statusText: e5.response.statusText, headers: n4, body: e5.response_body }, i2 = JSON.stringify(a5).replace(kt, (l3) => He[l3]), c4 = ['type="application/json"', "data-sveltekit-fetched", `data-url=${Q(e5.url)}`];
   if (e5.request_body && c4.push(`data-hash=${Q(K(e5.request_body))}`), !r4 && e5.method === "GET" && s5) {
-    const l4 = /s-maxage=(\d+)/g.exec(s5) ?? /max-age=(\d+)/g.exec(s5);
-    if (l4) {
-      const p5 = +l4[1] - +(o5 ?? "0");
-      c4.push(`data-ttl="${p5}"`);
+    const l3 = /s-maxage=(\d+)/g.exec(s5) ?? /max-age=(\d+)/g.exec(s5);
+    if (l3) {
+      const p6 = +l3[1] - +(o5 ?? "0");
+      c4.push(`data-ttl="${p6}"`);
     }
   }
   return `<script ${c4.join(" ")}>${i2}<\/script>`;
@@ -26577,10 +26582,10 @@ function me(e5) {
   const t3 = Ie.slice(0), r4 = $t(e5);
   for (let s5 = 0; s5 < r4.length; s5 += 16) {
     const o5 = r4.subarray(s5, s5 + 16);
-    let a5, i2, c4, l4 = t3[0], p5 = t3[1], j3 = t3[2], d4 = t3[3], m3 = t3[4], b3 = t3[5], y3 = t3[6], w4 = t3[7];
+    let a5, i2, c4, l3 = t3[0], p6 = t3[1], j3 = t3[2], d4 = t3[3], m3 = t3[4], b3 = t3[5], y3 = t3[6], w4 = t3[7];
     for (let E4 = 0; E4 < 64; E4++)
-      E4 < 16 ? a5 = o5[E4] : (i2 = o5[E4 + 1 & 15], c4 = o5[E4 + 14 & 15], a5 = o5[E4 & 15] = (i2 >>> 7 ^ i2 >>> 18 ^ i2 >>> 3 ^ i2 << 25 ^ i2 << 14) + (c4 >>> 17 ^ c4 >>> 19 ^ c4 >>> 10 ^ c4 << 15 ^ c4 << 13) + o5[E4 & 15] + o5[E4 + 9 & 15] | 0), a5 = a5 + w4 + (m3 >>> 6 ^ m3 >>> 11 ^ m3 >>> 25 ^ m3 << 26 ^ m3 << 21 ^ m3 << 7) + (y3 ^ m3 & (b3 ^ y3)) + Z[E4], w4 = y3, y3 = b3, b3 = m3, m3 = d4 + a5 | 0, d4 = j3, j3 = p5, p5 = l4, l4 = a5 + (p5 & j3 ^ d4 & (p5 ^ j3)) + (p5 >>> 2 ^ p5 >>> 13 ^ p5 >>> 22 ^ p5 << 30 ^ p5 << 19 ^ p5 << 10) | 0;
-    t3[0] = t3[0] + l4 | 0, t3[1] = t3[1] + p5 | 0, t3[2] = t3[2] + j3 | 0, t3[3] = t3[3] + d4 | 0, t3[4] = t3[4] + m3 | 0, t3[5] = t3[5] + b3 | 0, t3[6] = t3[6] + y3 | 0, t3[7] = t3[7] + w4 | 0;
+      E4 < 16 ? a5 = o5[E4] : (i2 = o5[E4 + 1 & 15], c4 = o5[E4 + 14 & 15], a5 = o5[E4 & 15] = (i2 >>> 7 ^ i2 >>> 18 ^ i2 >>> 3 ^ i2 << 25 ^ i2 << 14) + (c4 >>> 17 ^ c4 >>> 19 ^ c4 >>> 10 ^ c4 << 15 ^ c4 << 13) + o5[E4 & 15] + o5[E4 + 9 & 15] | 0), a5 = a5 + w4 + (m3 >>> 6 ^ m3 >>> 11 ^ m3 >>> 25 ^ m3 << 26 ^ m3 << 21 ^ m3 << 7) + (y3 ^ m3 & (b3 ^ y3)) + Z[E4], w4 = y3, y3 = b3, b3 = m3, m3 = d4 + a5 | 0, d4 = j3, j3 = p6, p6 = l3, l3 = a5 + (p6 & j3 ^ d4 & (p6 ^ j3)) + (p6 >>> 2 ^ p6 >>> 13 ^ p6 >>> 22 ^ p6 << 30 ^ p6 << 19 ^ p6 << 10) | 0;
+    t3[0] = t3[0] + l3 | 0, t3[1] = t3[1] + p6 | 0, t3[2] = t3[2] + j3 | 0, t3[3] = t3[3] + d4 | 0, t3[4] = t3[4] + m3 | 0, t3[5] = t3[5] + b3 | 0, t3[6] = t3[6] + y3 | 0, t3[7] = t3[7] + w4 | 0;
   }
   const n4 = new Uint8Array(t3.buffer);
   return De(n4), Le(n4);
@@ -26715,7 +26720,7 @@ var Pt = class {
   }
 };
 var Ct = { ...z2(false), check: () => false };
-async function L({ branch: e5, fetched: t3, options: r4, state: n4, page_config: s5, status: o5, error: a5 = null, event: i2, resolve_opts: c4, action_result: l4 }) {
+async function L({ branch: e5, fetched: t3, options: r4, state: n4, page_config: s5, status: o5, error: a5 = null, event: i2, resolve_opts: c4, action_result: l3 }) {
   var C5;
   if (n4.prerendering) {
     if (r4.csp.mode === "nonce")
@@ -26723,9 +26728,9 @@ async function L({ branch: e5, fetched: t3, options: r4, state: n4, page_config:
     if (r4.app_template_contains_nonce)
       throw new Error("Cannot use prerendering if page template contains %sveltekit.nonce%");
   }
-  const { entry: p5 } = r4.manifest._, j3 = new Set(p5.stylesheets), d4 = new Set(p5.imports), m3 = new Set(r4.manifest._.entry.fonts), b3 = /* @__PURE__ */ new Set(), y3 = /* @__PURE__ */ new Map();
+  const { entry: p6 } = r4.manifest._, j3 = new Set(p6.stylesheets), d4 = new Set(p6.imports), m3 = new Set(r4.manifest._.entry.fonts), b3 = /* @__PURE__ */ new Set(), y3 = /* @__PURE__ */ new Map();
   let w4;
-  const E4 = (l4 == null ? void 0 : l4.type) === "success" || (l4 == null ? void 0 : l4.type) === "invalid" ? l4.data ?? null : null;
+  const E4 = (l3 == null ? void 0 : l3.type) === "success" || (l3 == null ? void 0 : l3.type) === "invalid" ? l3.data ?? null : null;
   if (s5.ssr) {
     const g4 = { stores: { page: A2(null), navigating: A2(null), updated: Ct }, components: await Promise.all(e5.map(({ node: R4 }) => R4.component())), form: E4 };
     let $4 = {};
@@ -26742,8 +26747,8 @@ async function L({ branch: e5, fetched: t3, options: r4, state: n4, page_config:
       R4.imports && R4.imports.forEach((T5) => d4.add(T5)), R4.stylesheets && R4.stylesheets.forEach((T5) => j3.add(T5)), R4.fonts && R4.fonts.forEach((T5) => m3.add(T5)), R4.inline_styles && Object.entries(await R4.inline_styles()).forEach(([T5, Ve2]) => y3.set(T5, Ve2));
   } else
     w4 = { head: "", html: "", css: { code: "", map: null } };
-  let x4 = "", u3 = w4.html;
-  const h = new Pt(r4.csp, { dev: r4.dev, prerender: !!n4.prerendering }), k3 = K(u3);
+  let x4 = "", u2 = w4.html;
+  const h = new Pt(r4.csp, { dev: r4.dev, prerender: !!n4.prerendering }), k3 = K(u2);
   let f3;
   if (r4.paths.assets)
     f3 = r4.paths.assets;
@@ -26796,7 +26801,7 @@ async function L({ branch: e5, fetched: t3, options: r4, state: n4, page_config:
   }
   if (s5.csr) {
     const g4 = `
-			import { start } from ${A3(_5(p5.file))};
+			import { start } from ${A3(_5(p6.file))};
 
 			start({
 				env: ${A3(r4.public_env)},
@@ -26820,10 +26825,10 @@ async function L({ branch: e5, fetched: t3, options: r4, state: n4, page_config:
 		<link rel="modulepreload" href="${R4}">`));
     }
     const $4 = ['type="module"', `data-sveltekit-hydrate="${k3}"`];
-    h.add_script(g4), h.script_needs_nonce && $4.push(`nonce="${h.nonce}"`), u3 += `
+    h.add_script(g4), h.script_needs_nonce && $4.push(`nonce="${h.nonce}"`), u2 += `
 		<script ${$4.join(" ")}>${g4}<\/script>`;
   }
-  if (s5.ssr && s5.csr && (u3 += `
+  if (s5.ssr && s5.csr && (u2 += `
 	${t3.map((g4) => Et(g4, c4.filterSerializedResponseHeaders, !!n4.prerendering)).join(`
 	`)}`), r4.service_worker) {
     const g4 = r4.dev ? ", { type: 'module' }" : "", $4 = `
@@ -26842,25 +26847,25 @@ async function L({ branch: e5, fetched: t3, options: r4, state: n4, page_config:
 `) + x4);
   }
   x4 += w4.head;
-  const S6 = await c4.transformPageChunk({ html: r4.app_template({ head: x4, body: u3, assets: f3, nonce: h.nonce }), done: true }) || "", P5 = new Headers({ "x-sveltekit-page": "true", "content-type": "text/html", etag: `"${K(S6)}"` });
+  const S6 = await c4.transformPageChunk({ html: r4.app_template({ head: x4, body: u2, assets: f3, nonce: h.nonce }), done: true }) || "", P6 = new Headers({ "x-sveltekit-page": "true", "content-type": "text/html", etag: `"${K(S6)}"` });
   if (!n4.prerendering) {
     const g4 = h.csp_provider.get_header();
-    g4 && P5.set("content-security-policy", g4);
+    g4 && P6.set("content-security-policy", g4);
     const $4 = h.report_only_provider.get_header();
-    $4 && P5.set("content-security-policy-report-only", $4), b3.size && P5.set("link", Array.from(b3).join(", "));
+    $4 && P6.set("content-security-policy-report-only", $4), b3.size && P6.set("link", Array.from(b3).join(", "));
   }
-  return new Response(S6, { status: o5, headers: P5 });
+  return new Response(S6, { status: o5, headers: P6 });
 }
 async function Je({ event: e5, options: t3, state: r4, status: n4, error: s5, resolve_opts: o5 }) {
   const a5 = [];
   try {
-    const i2 = [], c4 = await t3.manifest._.nodes[0](), l4 = z3([c4], "ssr") ?? true, p5 = z3([c4], "csr") ?? true;
-    if (l4) {
+    const i2 = [], c4 = await t3.manifest._.nodes[0](), l3 = z3([c4], "ssr") ?? true, p6 = z3([c4], "csr") ?? true;
+    if (l3) {
       r4.initiator = Re;
-      const j3 = le({ event: e5, state: r4, node: c4, parent: async () => ({}) }), d4 = await j3, m3 = await ze({ event: e5, fetched: a5, node: c4, parent: async () => ({}), resolve_opts: o5, server_data_promise: j3, state: r4, csr: p5 });
+      const j3 = le({ event: e5, state: r4, node: c4, parent: async () => ({}) }), d4 = await j3, m3 = await ze({ event: e5, fetched: a5, node: c4, parent: async () => ({}), resolve_opts: o5, server_data_promise: j3, state: r4, csr: p6 });
       i2.push({ node: c4, server_data: d4, data: m3 }, { node: await t3.manifest._.nodes[1](), data: null, server_data: null });
     }
-    return await L({ options: t3, state: r4, page_config: { ssr: l4, csr: z3([c4], "csr") ?? true }, status: n4, error: await I2(e5, t3, s5), branch: i2, fetched: a5, event: e5, resolve_opts: o5 });
+    return await L({ options: t3, state: r4, page_config: { ssr: l3, csr: z3([c4], "csr") ?? true }, status: n4, error: await I2(e5, t3, s5), branch: i2, fetched: a5, event: e5, resolve_opts: o5 });
   } catch (i2) {
     return i2 instanceof H ? F2(i2.status, i2.location) : ce(t3, i2 instanceof N2 ? i2.status : 500, (await I2(e5, t3, i2)).message);
   }
@@ -26874,21 +26879,21 @@ async function Tt(e5, t3, r4, n4, s5, o5) {
       return mt(e5, n4, a5.server);
   }
   try {
-    const a5 = await Promise.all([...r4.layouts.map((u3) => u3 == null ? u3 : n4.manifest._.nodes[u3]()), n4.manifest._.nodes[r4.leaf]()]), i2 = a5.at(-1);
-    let c4 = 200, l4;
+    const a5 = await Promise.all([...r4.layouts.map((u2) => u2 == null ? u2 : n4.manifest._.nodes[u2]()), n4.manifest._.nodes[r4.leaf]()]), i2 = a5.at(-1);
+    let c4 = 200, l3;
     if (yt(e5, i2)) {
-      if (l4 = await gt(e5, i2.server), (l4 == null ? void 0 : l4.type) === "redirect")
-        return F2(303, l4.location);
-      if ((l4 == null ? void 0 : l4.type) === "error") {
-        const u3 = l4.error;
-        c4 = u3 instanceof N2 ? u3.status : 500;
+      if (l3 = await gt(e5, i2.server), (l3 == null ? void 0 : l3.type) === "redirect")
+        return F2(303, l3.location);
+      if ((l3 == null ? void 0 : l3.type) === "error") {
+        const u2 = l3.error;
+        c4 = u2 instanceof N2 ? u2.status : 500;
       }
-      (l4 == null ? void 0 : l4.type) === "invalid" && (c4 = l4.status);
+      (l3 == null ? void 0 : l3.type) === "invalid" && (c4 = l3.status);
     }
-    const p5 = a5.some((u3) => u3 == null ? void 0 : u3.server), j3 = at(e5.url.pathname), d4 = z3(a5, "prerender") ?? false;
+    const p6 = a5.some((u2) => u2 == null ? void 0 : u2.server), j3 = at(e5.url.pathname), d4 = z3(a5, "prerender") ?? false;
     if (d4) {
-      const u3 = i2.server;
-      if (u3 && u3.actions)
+      const u2 = i2.server;
+      if (u2 && u2.actions)
         throw new Error("Cannot prerender pages with actions");
     } else if (s5.prerendering)
       return new Response(void 0, { status: 204 });
@@ -26897,14 +26902,14 @@ async function Tt(e5, t3, r4, n4, s5, o5) {
     if (z3(a5, "ssr") === false)
       return await L({ branch: [], fetched: m3, page_config: { ssr: false, csr: z3(a5, "csr") ?? true }, status: c4, error: null, event: e5, options: n4, state: s5, resolve_opts: o5 });
     let b3 = [], y3 = null;
-    const w4 = a5.map((u3, h) => {
+    const w4 = a5.map((u2, h) => {
       if (y3)
         throw y3;
       return Promise.resolve().then(async () => {
         try {
-          if (u3 === i2 && (l4 == null ? void 0 : l4.type) === "error")
-            throw l4.error;
-          return await le({ event: e5, state: s5, node: u3, parent: async () => {
+          if (u2 === i2 && (l3 == null ? void 0 : l3.type) === "error")
+            throw l3.error;
+          return await le({ event: e5, state: s5, node: u2, parent: async () => {
             const k3 = {};
             for (let f3 = 0; f3 < h; f3 += 1) {
               const _5 = await w4[f3];
@@ -26916,12 +26921,12 @@ async function Tt(e5, t3, r4, n4, s5, o5) {
           throw y3 = k3, y3;
         }
       });
-    }), E4 = z3(a5, "csr") ?? true, x4 = a5.map((u3, h) => {
+    }), E4 = z3(a5, "csr") ?? true, x4 = a5.map((u2, h) => {
       if (y3)
         throw y3;
       return Promise.resolve().then(async () => {
         try {
-          return await ze({ event: e5, fetched: m3, node: u3, parent: async () => {
+          return await ze({ event: e5, fetched: m3, node: u2, parent: async () => {
             const k3 = {};
             for (let f3 = 0; f3 < h; f3 += 1)
               Object.assign(k3, await x4[f3]);
@@ -26932,46 +26937,46 @@ async function Tt(e5, t3, r4, n4, s5, o5) {
         }
       });
     });
-    for (const u3 of w4)
-      u3.catch(() => {
+    for (const u2 of w4)
+      u2.catch(() => {
       });
-    for (const u3 of x4)
-      u3.catch(() => {
+    for (const u2 of x4)
+      u2.catch(() => {
       });
-    for (let u3 = 0; u3 < a5.length; u3 += 1) {
-      const h = a5[u3];
+    for (let u2 = 0; u2 < a5.length; u2 += 1) {
+      const h = a5[u2];
       if (h)
         try {
-          const k3 = await w4[u3], f3 = await x4[u3];
+          const k3 = await w4[u2], f3 = await x4[u2];
           b3.push({ node: h, server_data: k3, data: f3 });
         } catch (k3) {
           const f3 = k3;
           if (f3 instanceof H) {
-            if (s5.prerendering && p5) {
+            if (s5.prerendering && p6) {
               const S6 = JSON.stringify({ type: "redirect", location: f3.location });
               s5.prerendering.dependencies.set(j3, { response: new Response(S6), body: S6 });
             }
             return F2(f3.status, f3.location);
           }
           const _5 = f3 instanceof N2 ? f3.status : 500, v4 = await I2(e5, n4, f3);
-          for (; u3--; )
-            if (r4.errors[u3]) {
-              const S6 = r4.errors[u3], P5 = await n4.manifest._.nodes[S6]();
-              let C5 = u3;
+          for (; u2--; )
+            if (r4.errors[u2]) {
+              const S6 = r4.errors[u2], P6 = await n4.manifest._.nodes[S6]();
+              let C5 = u2;
               for (; !b3[C5]; )
                 C5 -= 1;
-              return await L({ event: e5, options: n4, state: s5, resolve_opts: o5, page_config: { ssr: true, csr: true }, status: _5, error: v4, branch: he(b3.slice(0, C5 + 1)).concat({ node: P5, data: null, server_data: null }), fetched: m3 });
+              return await L({ event: e5, options: n4, state: s5, resolve_opts: o5, page_config: { ssr: true, csr: true }, status: _5, error: v4, branch: he(b3.slice(0, C5 + 1)).concat({ node: P6, data: null, server_data: null }), fetched: m3 });
             }
           return ce(n4, _5, v4.message);
         }
       else
         b3.push(null);
     }
-    if (s5.prerendering && p5) {
-      const u3 = `{"type":"data","nodes":[${b3.map((h) => qe(h == null ? void 0 : h.server_data)).join(",")}]}`;
-      s5.prerendering.dependencies.set(j3, { response: new Response(u3), body: u3 });
+    if (s5.prerendering && p6) {
+      const u2 = `{"type":"data","nodes":[${b3.map((h) => qe(h == null ? void 0 : h.server_data)).join(",")}]}`;
+      s5.prerendering.dependencies.set(j3, { response: new Response(u2), body: u2 });
     }
-    return await L({ event: e5, options: n4, state: s5, resolve_opts: o5, page_config: { csr: z3(a5, "csr") ?? true, ssr: true }, status: c4, error: null, branch: he(b3), action_result: l4, fetched: m3 });
+    return await L({ event: e5, options: n4, state: s5, resolve_opts: o5, page_config: { csr: z3(a5, "csr") ?? true, ssr: true }, status: c4, error: null, branch: he(b3), action_result: l3, fetched: m3 });
   } catch (a5) {
     return await Je({ event: e5, options: n4, state: s5, status: 500, error: a5, resolve_opts: o5 });
   }
@@ -26987,16 +26992,16 @@ function At(e5, t3, r4) {
     else {
       if (i2.matcher && !r4[i2.matcher](c4)) {
         if (i2.optional && i2.chained) {
-          let l4 = s5.indexOf(void 0, a5);
-          if (l4 === -1) {
-            const p5 = t3[a5 + 1];
-            if ((p5 == null ? void 0 : p5.rest) && p5.chained)
+          let l3 = s5.indexOf(void 0, a5);
+          if (l3 === -1) {
+            const p6 = t3[a5 + 1];
+            if ((p6 == null ? void 0 : p6.rest) && p6.chained)
               o5 = c4;
             else
               return;
           }
-          for (; l4 >= a5; )
-            s5[l4] = s5[l4 - 1], l4 -= 1;
+          for (; l3 >= a5; )
+            s5[l3] = s5[l3 - 1], l3 -= 1;
           continue;
         }
         return;
@@ -27020,17 +27025,17 @@ async function zt(e5, t3, r4, n4, s5) {
     const a5 = [...t3.page.layouts, t3.page.leaf], i2 = ((o5 = e5.url.searchParams.get(ge)) == null ? void 0 : o5.split("_").map(Boolean)) ?? a5.map(() => true);
     e5.url.searchParams.delete(ge);
     let c4 = false;
-    const l4 = new URL(e5.url);
-    l4.pathname = se(ie(l4.pathname), s5);
-    const p5 = { ...e5, url: l4 }, j3 = a5.map((y3, w4) => Ut(async () => {
+    const l3 = new URL(e5.url);
+    l3.pathname = se(ie(l3.pathname), s5);
+    const p6 = { ...e5, url: l3 }, j3 = a5.map((y3, w4) => Ut(async () => {
       try {
         if (c4)
           return { type: "skip" };
         const E4 = y3 == null ? y3 : await r4.manifest._.nodes[y3]();
-        return le({ event: p5, state: n4, node: E4, parent: async () => {
+        return le({ event: p6, state: n4, node: E4, parent: async () => {
           const x4 = {};
-          for (let u3 = 0; u3 < w4; u3 += 1) {
-            const h = await j3[u3]();
+          for (let u2 = 0; u2 < w4; u2 += 1) {
+            const h = await j3[u2]();
             h && Object.assign(x4, h.data);
           }
           return x4;
@@ -27074,7 +27079,7 @@ function Nt(e5, t3, r4, n4) {
     for (const d4 in o5)
       O[d4] = O[d4] ?? /* @__PURE__ */ new Set(), [...O[d4]].some((m3) => J(a5, m3)) || O[d4].add(i2);
   }
-  const c4 = {}, l4 = { httpOnly: true, sameSite: "lax", secure: !(t3.hostname === "localhost" && t3.protocol === "http:") }, p5 = { get(d4, m3) {
+  const c4 = {}, l3 = { httpOnly: true, sameSite: "lax", secure: !(t3.hostname === "localhost" && t3.protocol === "http:") }, p6 = { get(d4, m3) {
     const b3 = c4[d4];
     if (b3 && we(t3.hostname, b3.options.domain) && J(t3.pathname, b3.options.path))
       return b3.value;
@@ -27085,7 +27090,7 @@ function Nt(e5, t3, r4, n4) {
     b3 && x4.add(b3.options.path ?? i2), x4.size > 0 && console.warn(`Cookie with name '${d4}' was not found at path '${t3.pathname}', but a cookie with that name exists at these paths: '${[...x4].join("', '")}'. Did you mean to set its 'path' to '/' instead?`);
   }, set(d4, m3, b3 = {}) {
     let y3 = b3.path ?? i2;
-    if (c4[d4] = { name: d4, value: m3, options: { ...l4, ...b3, path: y3 } }, r4)
+    if (c4[d4] = { name: d4, value: m3, options: { ...l3, ...b3, path: y3 } }, r4)
       if (O[d4] = O[d4] ?? /* @__PURE__ */ new Set(), m3)
         O[d4].add(y3);
       else {
@@ -27096,9 +27101,9 @@ function Nt(e5, t3, r4, n4) {
         O[d4].delete(y3);
       }
   }, delete(d4, m3 = {}) {
-    p5.set(d4, "", { ...m3, maxAge: 0 });
+    p6.set(d4, "", { ...m3, maxAge: 0 });
   }, serialize(d4, m3, b3) {
-    return (0, import_cookie.serialize)(d4, m3, { ...l4, ...b3 });
+    return (0, import_cookie.serialize)(d4, m3, { ...l3, ...b3 });
   } };
   function j3(d4, m3) {
     const b3 = {};
@@ -27118,7 +27123,7 @@ function Nt(e5, t3, r4, n4) {
     }
     return Object.entries(b3).map(([y3, w4]) => `${y3}=${w4}`).join("; ");
   }
-  return { cookies: p5, new_cookies: c4, get_cookie_header: j3 };
+  return { cookies: p6, new_cookies: c4, get_cookie_header: j3 };
 }
 function we(e5, t3) {
   if (!t3)
@@ -27141,11 +27146,11 @@ function Ht(e5, t3) {
 function It({ event: e5, options: t3, state: r4, get_cookie_header: n4 }) {
   return async (s5, o5) => {
     const a5 = _e2(s5, o5, e5.url), i2 = o5 == null ? void 0 : o5.body;
-    let c4 = (s5 instanceof Request ? s5.mode : o5 == null ? void 0 : o5.mode) ?? "cors", l4 = (s5 instanceof Request ? s5.credentials : o5 == null ? void 0 : o5.credentials) ?? "same-origin";
-    return await t3.hooks.handleFetch({ event: e5, request: a5, fetch: async (p5, j3) => {
-      const d4 = _e2(p5, j3, e5.url), m3 = new URL(d4.url);
-      if (d4.headers.has("origin") || d4.headers.set("origin", e5.url.origin), p5 !== a5 && (c4 = (p5 instanceof Request ? p5.mode : j3 == null ? void 0 : j3.mode) ?? "cors", l4 = (p5 instanceof Request ? p5.credentials : j3 == null ? void 0 : j3.credentials) ?? "same-origin"), (d4.method === "GET" || d4.method === "HEAD") && (c4 === "no-cors" && m3.origin !== e5.url.origin || m3.origin === e5.url.origin) && d4.headers.delete("origin"), m3.origin !== e5.url.origin) {
-        if (`.${m3.hostname}`.endsWith(`.${e5.url.hostname}`) && l4 !== "omit") {
+    let c4 = (s5 instanceof Request ? s5.mode : o5 == null ? void 0 : o5.mode) ?? "cors", l3 = (s5 instanceof Request ? s5.credentials : o5 == null ? void 0 : o5.credentials) ?? "same-origin";
+    return await t3.hooks.handleFetch({ event: e5, request: a5, fetch: async (p6, j3) => {
+      const d4 = _e2(p6, j3, e5.url), m3 = new URL(d4.url);
+      if (d4.headers.has("origin") || d4.headers.set("origin", e5.url.origin), p6 !== a5 && (c4 = (p6 instanceof Request ? p6.mode : j3 == null ? void 0 : j3.mode) ?? "cors", l3 = (p6 instanceof Request ? p6.credentials : j3 == null ? void 0 : j3.credentials) ?? "same-origin"), (d4.method === "GET" || d4.method === "HEAD") && (c4 === "no-cors" && m3.origin !== e5.url.origin || m3.origin === e5.url.origin) && d4.headers.delete("origin"), m3.origin !== e5.url.origin) {
+        if (`.${m3.hostname}`.endsWith(`.${e5.url.hostname}`) && l3 !== "omit") {
           const _5 = n4(m3, d4.headers.get("cookie"));
           _5 && d4.headers.set("cookie", _5);
         }
@@ -27153,16 +27158,16 @@ function It({ event: e5, options: t3, state: r4, get_cookie_header: n4 }) {
         return c4 === "no-cors" && (f3 = new Response("", { status: f3.status, statusText: f3.statusText, headers: f3.headers })), f3;
       }
       let b3;
-      const y3 = t3.paths.assets || t3.paths.base, w4 = decodeURIComponent(m3.pathname), E4 = (w4.startsWith(y3) ? w4.slice(y3.length) : w4).slice(1), x4 = `${E4}/index.html`, u3 = t3.manifest.assets.has(E4), h = t3.manifest.assets.has(x4);
-      if (u3 || h) {
-        const f3 = u3 ? E4 : x4;
+      const y3 = t3.paths.assets || t3.paths.base, w4 = decodeURIComponent(m3.pathname), E4 = (w4.startsWith(y3) ? w4.slice(y3.length) : w4).slice(1), x4 = `${E4}/index.html`, u2 = t3.manifest.assets.has(E4), h = t3.manifest.assets.has(x4);
+      if (u2 || h) {
+        const f3 = u2 ? E4 : x4;
         if (t3.read) {
-          const _5 = u3 ? t3.manifest.mimeTypes[E4.slice(E4.lastIndexOf("."))] : "text/html";
+          const _5 = u2 ? t3.manifest.mimeTypes[E4.slice(E4.lastIndexOf("."))] : "text/html";
           return new Response(t3.read(f3), { headers: _5 ? { "content-type": _5 } : {} });
         }
         return await fetch(d4);
       }
-      if (l4 !== "omit") {
+      if (l3 !== "omit") {
         const f3 = n4(m3, d4.headers.get("cookie"));
         f3 && d4.headers.set("cookie", f3);
         const _5 = e5.request.headers.get("authorization");
@@ -27206,12 +27211,12 @@ async function Be(e5, t3, r4) {
   }
   const i2 = ae(s5);
   if (i2 && (s5 = ie(s5) || "/"), !((E4 = r4.prerendering) != null && E4.fallback)) {
-    const u3 = await t3.manifest._.matchers();
+    const u2 = await t3.manifest._.matchers();
     for (const h of t3.manifest._.routes) {
       const k3 = h.pattern.exec(s5);
       if (!k3)
         continue;
-      const f3 = At(k3, h.params, u3);
+      const f3 = At(k3, h.params, u2);
       if (f3) {
         o5 = h, a5 = rt(f3);
         break;
@@ -27219,23 +27224,23 @@ async function Be(e5, t3, r4) {
     }
   }
   let c4;
-  const l4 = {}, p5 = { cookies: null, fetch: null, getClientAddress: r4.getClientAddress || (() => {
+  const l3 = {}, p6 = { cookies: null, fetch: null, getClientAddress: r4.getClientAddress || (() => {
     throw new Error("@sveltejs/adapter-cloudflare does not specify getClientAddress. Please raise an issue");
-  }), locals: {}, params: a5, platform: r4.platform, request: e5, route: { id: (o5 == null ? void 0 : o5.id) ?? null }, setHeaders: (u3) => {
-    for (const h in u3) {
-      const k3 = h.toLowerCase(), f3 = u3[h];
+  }), locals: {}, params: a5, platform: r4.platform, request: e5, route: { id: (o5 == null ? void 0 : o5.id) ?? null }, setHeaders: (u2) => {
+    for (const h in u2) {
+      const k3 = h.toLowerCase(), f3 = u2[h];
       if (k3 === "set-cookie")
         throw new Error("Use `event.cookies.set(name, value, options)` instead of `event.setHeaders` to set cookies");
-      if (k3 in l4)
+      if (k3 in l3)
         throw new Error(`"${h}" header is already set`);
-      l4[k3] = f3, r4.prerendering && k3 === "cache-control" && (r4.prerendering.cache = f3);
+      l3[k3] = f3, r4.prerendering && k3 === "cache-control" && (r4.prerendering.cache = f3);
     }
-  }, url: n4 }, j3 = (u3, h, k3 = "") => ({ get: () => {
-    throw new Error(`event.${u3} has been replaced by event.${h}` + k3);
+  }, url: n4 }, j3 = (u2, h, k3 = "") => ({ get: () => {
+    throw new Error(`event.${u2} has been replaced by event.${h}` + k3);
   } }), d4 = ". See https://github.com/sveltejs/kit/pull/3384 for details", m3 = { get: () => {
     throw new Error("To access the request body use the text/json/arrayBuffer/formData methods, e.g. `body = await request.json()`" + d4);
   } };
-  Object.defineProperties(p5, { clientAddress: j3("clientAddress", "getClientAddress"), method: j3("method", "request.method", d4), headers: j3("headers", "request.headers", d4), origin: j3("origin", "url.origin"), path: j3("path", "url.pathname"), query: j3("query", "url.searchParams"), body: m3, rawBody: m3, routeId: j3("routeId", "route.id") });
+  Object.defineProperties(p6, { clientAddress: j3("clientAddress", "getClientAddress"), method: j3("method", "request.method", d4), headers: j3("headers", "request.headers", d4), origin: j3("origin", "url.origin"), path: j3("path", "url.pathname"), query: j3("query", "url.searchParams"), body: m3, rawBody: m3, routeId: j3("routeId", "route.id") });
   let b3 = { transformPageChunk: be, filterSerializedResponseHeaders: ke, preload: Ee };
   try {
     if (o5 && !i2) {
@@ -27248,12 +27253,12 @@ async function Be(e5, t3, r4) {
       if (_5 !== n4.pathname && !((x4 = r4.prerendering) != null && x4.fallback))
         return new Response(void 0, { status: 301, headers: { "x-sveltekit-normalize": "1", location: (_5.startsWith("//") ? n4.origin + _5 : _5) + (n4.search === "?" ? "" : n4.search) } });
     }
-    const { cookies: u3, new_cookies: h, get_cookie_header: k3 } = Nt(e5, n4, t3.dev, c4 ?? "never");
-    p5.cookies = u3, p5.fetch = It({ event: p5, options: t3, state: r4, get_cookie_header: k3 }), r4.prerendering && !r4.prerendering.fallback && ve(n4);
-    const f3 = await t3.hooks.handle({ event: p5, resolve: (_5, v4) => y3(_5, v4).then((S6) => {
-      for (const P5 in l4) {
-        const C5 = l4[P5];
-        S6.headers.set(P5, C5);
+    const { cookies: u2, new_cookies: h, get_cookie_header: k3 } = Nt(e5, n4, t3.dev, c4 ?? "never");
+    p6.cookies = u2, p6.fetch = It({ event: p6, options: t3, state: r4, get_cookie_header: k3 }), r4.prerendering && !r4.prerendering.fallback && ve(n4);
+    const f3 = await t3.hooks.handle({ event: p6, resolve: (_5, v4) => y3(_5, v4).then((S6) => {
+      for (const P6 in l3) {
+        const C5 = l3[P6];
+        S6.headers.set(P6, C5);
       }
       return Ht(S6.headers, Object.values(h)), r4.prerendering && _5.route.id !== null && S6.headers.set("x-sveltekit-routeid", encodeURI(_5.route.id)), S6;
     }), get request() {
@@ -27265,9 +27270,9 @@ async function Be(e5, t3, r4) {
       const v4 = f3.headers.get("etag");
       if (_5 === v4) {
         const S6 = new Headers({ etag: v4 });
-        for (const P5 of ["cache-control", "content-location", "date", "expires", "vary", "set-cookie"]) {
-          const C5 = f3.headers.get(P5);
-          C5 && S6.set(P5, C5);
+        for (const P6 of ["cache-control", "content-location", "date", "expires", "vary", "set-cookie"]) {
+          const C5 = f3.headers.get(P6);
+          C5 && S6.set(P6, C5);
         }
         return new Response(void 0, { status: 304, headers: S6 });
       }
@@ -27278,10 +27283,10 @@ async function Be(e5, t3, r4) {
         return ee(new H(f3.status, _5));
     }
     return f3;
-  } catch (u3) {
-    return u3 instanceof H ? i2 ? ee(u3) : F2(u3.status, u3.location) : await fe(p5, t3, u3);
+  } catch (u2) {
+    return u2 instanceof H ? i2 ? ee(u2) : F2(u2.status, u2.location) : await fe(p6, t3, u2);
   }
-  async function y3(u3, h) {
+  async function y3(u2, h) {
     var k3;
     try {
       if (h) {
@@ -27292,26 +27297,26 @@ async function Be(e5, t3, r4) {
         b3 = { transformPageChunk: h.transformPageChunk || be, filterSerializedResponseHeaders: h.filterSerializedResponseHeaders || ke, preload: h.preload || Ee };
       }
       if ((k3 = r4.prerendering) != null && k3.fallback)
-        return await L({ event: u3, options: t3, state: r4, page_config: { ssr: false, csr: true }, status: 200, error: null, branch: [], fetched: [], resolve_opts: b3 });
+        return await L({ event: u2, options: t3, state: r4, page_config: { ssr: false, csr: true }, status: 200, error: null, branch: [], fetched: [], resolve_opts: b3 });
       if (o5) {
         let f3;
         if (i2)
-          f3 = await zt(u3, o5, t3, r4, c4 ?? "never");
-        else if (o5.endpoint && (!o5.page || ut(u3)))
-          f3 = await dt(u3, await o5.endpoint(), r4);
+          f3 = await zt(u2, o5, t3, r4, c4 ?? "never");
+        else if (o5.endpoint && (!o5.page || ut(u2)))
+          f3 = await dt(u2, await o5.endpoint(), r4);
         else if (o5.page)
-          f3 = await Tt(u3, o5, o5.page, t3, r4, b3);
+          f3 = await Tt(u2, o5, o5.page, t3, r4, b3);
         else
           throw new Error("This should never happen");
         return f3;
       }
-      return r4.initiator === Re ? new Response("Internal Server Error", { status: 500 }) : r4.initiator ? r4.prerendering ? new Response("not found", { status: 404 }) : await fetch(e5) : await Je({ event: u3, options: t3, state: r4, status: 404, error: new Error(`Not found: ${u3.url.pathname}`), resolve_opts: b3 });
+      return r4.initiator === Re ? new Response("Internal Server Error", { status: 500 }) : r4.initiator ? r4.prerendering ? new Response("not found", { status: 404 }) : await fetch(e5) : await Je({ event: u2, options: t3, state: r4, status: 404, error: new Error(`Not found: ${u2.url.pathname}`), resolve_opts: b3 });
     } catch (f3) {
-      return await fe(u3, t3, f3);
+      return await fe(u2, t3, f3);
     } finally {
-      u3.cookies.set = () => {
+      u2.cookies.set = () => {
         throw new Error("Cannot use `cookies.set(...)` after the response has been generated");
-      }, u3.setHeaders = () => {
+      }, u2.setHeaders = () => {
         throw new Error("Cannot use `setHeaders(...)` after the response has been generated");
       };
     }
@@ -27398,7 +27403,7 @@ var Gt = class {
   constructor(t3) {
     this.options = { csp: { mode: "auto", directives: { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf: { check_origin: true }, dev: false, handle_error: (r4, n4) => this.options.hooks.handleError({ error: r4, event: n4, get request() {
       throw new Error("request in handleError has been replaced with event. See https://github.com/sveltejs/kit/pull/3384 for details");
-    } }) ?? { message: n4.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: te, assets: Fe }, public_env: {}, read: Me, root: Qe, service_worker: true, app_template: Dt, app_template_contains_nonce: false, error_template: Lt, version: "1671202997446" };
+    } }) ?? { message: n4.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: te, assets: Fe }, public_env: {}, read: Me, root: Qe, service_worker: true, app_template: Dt, app_template_contains_nonce: false, error_template: Lt, version: "1671236875211" };
   }
   async init({ env: t3 }) {
     const r4 = Object.entries(t3);
@@ -27425,7 +27430,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "safari-share-icon.png", "star.webp", "service-worker.js"]),
   mimeTypes: { ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-05422573.js", "imports": ["_app/immutable/start-05422573.js", "_app/immutable/chunks/index-97de35bf.js", "_app/immutable/chunks/singletons-043cfb89.js", "_app/immutable/chunks/index-bee2e4ee.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-d1f65dd9.js", "imports": ["_app/immutable/start-d1f65dd9.js", "_app/immutable/chunks/index-6601576b.js", "_app/immutable/chunks/singletons-c91f5b07.js", "_app/immutable/chunks/index-fbb691a0.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
