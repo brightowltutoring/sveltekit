@@ -1,5 +1,4 @@
 <script>
-  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
   import TwitterLoginButton from "$lib/Login/TwitterLoginButton.svelte";
   import GoogleLoginButton from "$lib/Login/GoogleLoginButton.svelte";
   import MagicLinkSection from "$lib/Login/MagicLinkSection.svelte";
@@ -120,15 +119,6 @@
     //   });
   });
 
-  // $: if ($showLoginModal) {
-  //   // TwitterLoginButton = import("$lib/Login/TwitterLoginButton.svelte");
-  //   // getLoginButtons();
-  //   // (async () =>
-  //   //   (TwitterLoginButton = (
-  //   //     await import("$lib/Login/TwitterLoginButton.svelte")
-  //   //   ).default))();
-  // }
-
   //  Hoisted Functions
 
   // this function needs to detect logout too to reset store
@@ -188,25 +178,9 @@
       }
     }
   }
-
-  // // Dec16,2022: imported individual buttons provided on measurable benefit, while at the cost of sluggish UI
-  // let TwitterLoginButton, PhoneAuthSection, MagicLinkSection, GoogleLoginButton;
-  // async function getLoginButtons() {
-  //   TwitterLoginButton = (await import("$lib/Login/TwitterLoginButton.svelte"))
-  //     .default;
-  //   PhoneAuthSection = (await import("$lib/Login/PhoneAuthSection.svelte"))
-  //     .default;
-  //   MagicLinkSection = (await import("$lib/Login/MagicLinkSection.svelte"))
-  //     .default;
-  //   GoogleLoginButton = (await import("$lib/Login/GoogleLoginButton.svelte"))
-  //     .default;
-  // }
-
-  // const getComponent = async () => (Component = (await Import()).default);
-  // <svelte:component this={Component} {...$$props} />
 </script>
 
-<main class="w-[80vw] flex justify-center items-center">
+<main class="w-screen flex justify-center items-center">
   {#if !$isLoggedIn}
     {#key !noTransition && $showLoginModal}
       <login-card
@@ -216,29 +190,18 @@
           : 'hover:shadow-lg'}"
         style={`background:${$elementColor}`}
       >
-        <!-- <div class="absolute -top-2 -right-2">
-          <CloseButton />
-        </div> -->
-
         {#if isRunningStandalone()}
           <PhoneAuthSection />
-          <!-- <svelte:component this={PhoneAuthSection} /> -->
         {:else}
           <MagicLinkSection />
-          <!-- <svelte:component this={MagicLinkSection} /> -->
 
           <p class="py-3" />
           <PhoneAuthSection />
-          <!-- <svelte:component this={PhoneAuthSection} /> -->
         {/if}
 
-        <!-- <div class="grid grid-flow-col gap-2 "> -->
-
         <GoogleLoginButton />
-        <!-- <svelte:component this={GoogleLoginButton} /> -->
 
         <TwitterLoginButton />
-        <!-- <svelte:component this={TwitterLoginButton} /> -->
       </login-card>
     {/key}
   {/if}

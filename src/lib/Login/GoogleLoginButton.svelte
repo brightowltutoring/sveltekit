@@ -2,13 +2,7 @@
   import { GoogleLogin } from "$lib/Login/loginFunctions";
   import { isDarkMode } from "$lib/store";
   import IconGoogle from "$lib/Icons/LoginIcons/IconGoogle.svelte";
-
-  // import IconGoogle from "$lib/Icons/IconPlans.svelte";
-  // import IconGoogle from "$lib/Icons/IconHome.svelte";
-  // import IconGoogle from "$lib/Icons/IconHomework.svelte";
-
-  // import IconGoogle from "$lib/Icons/IconClassroom.svelte";
-  // import IconGoogle from "$lib/Icons/IconLogin.svelte";
+  // import {pre}
 </script>
 
 <signin-button

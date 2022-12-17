@@ -1,12 +1,12 @@
 <script>
-  // import PlansComponent from "$lib/Plans/PlansComponent.svelte";
-  // let PlansComponent;
-  // let classicoAndMock; // this refers to data that is sent UP from PlansComponent.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
+  // import PlansSection from "$lib/Plans/PlansSection.svelte";
+  // let PlansSection;
+  // let classicoAndMock; // this refers to data that is sent UP from PlansSection.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import InView from "$lib/Wrappers/InView.svelte";
   // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-  import Reviews from "$lib/Reviews/Reviews.svelte";
+  // import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
   import { slide } from "svelte/transition";
@@ -111,20 +111,20 @@
         <span class={gradientTextColor}> 2. Schedule a Session </span>
       </button>
 
-      <!-- Dec16,2022: able to handle unbounded props now! However not sure how to handle the custom dispatched event, as before. Maybe rethink PlansComponent logic -->
+      <!-- Dec16,2022: able to handle unbounded props now! However not sure how to handle the custom dispatched event, as before. Maybe rethink PlansSection logic -->
       <LazyMount
-        Import={async () => await import("$lib/Plans/PlansComponent.svelte")}
+        Import={async () => await import("$lib/Plans/PlansSection.svelte")}
       />
 
       <!-- TODO: UPDATE: dec 17,2022: somehow this is getting perfect lighthouse score when I manually lazy mount this component. HOWEVER the simplicity of LazyMount2, near perfect lighthouse score (96/100/100/100), and identical page speed score tilts me to the latter. -->
 
       <!-- <InView
         onview={async () => {
-          PlansComponent = (await import("$lib/Plans/PlansComponent.svelte"))
+          PlansSection = (await import("$lib/Plans/PlansSection.svelte"))
             .default;
         }}
       >
-        <svelte:component this={PlansComponent} noTransition
+        <svelte:component this={PlansSection} noTransition
         plansCards={classicoAndMock}
         on:boop={(e) => {
             classicoAndMock = e.detail.plansCardArray.slice(0, 2);
@@ -132,8 +132,8 @@
           }}
          />
       </InView> -->
-      <!-- {#if PlansComponent}
-        <PlansComponent
+      <!-- {#if PlansSection}
+        <PlansSection
           noTransition
           plansCards={classicoAndMock}
           on:boop={(e) => {
@@ -144,7 +144,7 @@
       {/if} -->
 
       <!-- OLD WAY: component is not dynamically imported -->
-      <!-- <PlansComponent
+      <!-- <PlansSection
         noTransition
         on:boop={(e) => {
           classicoAndMock = e.detail.plansCardArray.slice(0, 2);
@@ -153,7 +153,7 @@
         plansCards={classicoAndMock}
       /> -->
 
-      <!-- Note: 'boop' is a custom svelte event sent from within planscomponent.svelte, containing 'plansCardArray'; here I decide to modify a copy of this data and name it 'classicoAndMock' ... upside of this is not having to import 'plansCardArray' from a js file ...downside is while waiting for this boop event the change in content flashes on the home route (when refreshing the page at the plans section)-->
+      <!-- Note: 'boop' is a custom svelte event sent from within PlansSection.svelte, containing 'plansCardArray'; here I decide to modify a copy of this data and name it 'classicoAndMock' ... upside of this is not having to import 'plansCardArray' from a js file ...downside is while waiting for this boop event the change in content flashes on the home route (when refreshing the page at the plans section)-->
     </div>
 
     <!-- fourth page -->
@@ -169,11 +169,10 @@
         >
       </button>
 
-      <Reviews />
-
-      <!-- <LazyMount
+      <!-- <Reviews /> -->
+      <LazyMount
         Import={async () => await import("$lib/Reviews/Reviews.svelte")}
-      /> -->
+      />
     </div>
   </div>
 {:else}

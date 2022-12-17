@@ -103,7 +103,7 @@ export async function TwitterLogin() {
 }
 
 // TODO: nov29.2022 noticed that 'signinWithRedirect' logic did not sign me in ... furthermore 'signInWithPopup' worked perfectly on both the PWA and on the mobile version of the website ... It appears firebase has consolidated the two??
-export async function GoogleLogin() {
+export async function GoogleLogin(e) {
   // const auth = await import("$lib/Login/firebase");
 
   const {
@@ -142,6 +142,7 @@ export async function GoogleLogin() {
 
   // setPersistence(auth, browserSessionPersistence).then(() => {
   // signInWithPopup(auth, provider)
+
   signInWithPopup(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.

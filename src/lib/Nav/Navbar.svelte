@@ -14,7 +14,7 @@
     navAppClicked,
     clearNavModals,
     elementColor,
-    lessThan768,
+    // lessThan768,
     showLoginModal,
     showHomeworkModal,
   } from "$lib/store";

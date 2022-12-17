@@ -76,8 +76,8 @@
 
   import { page } from "$app/stores";
   import { routes } from "$lib/store";
-  // import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-  import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
+  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
+  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
 
   let contactLinkClicked = false;
 
@@ -213,7 +213,7 @@
   >
     <!-- opacityEase -->
     <!-- <LoginCard /> -->
-    <LazyMount2
+    <LazyMount
       Import={async () => {
         setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
         return await import("$lib/Login/LoginCard.svelte");
@@ -230,7 +230,7 @@
     /> -->
 
     <!-- TODO: dec 16 figured out passing (unbounded) props !! Requires '$$props' syntax inside component definition -->
-    <LazyMount2
+    <LazyMount
       Import={async () => await import("$lib/Dropzone/Dropzone.svelte")}
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}

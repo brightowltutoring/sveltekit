@@ -1,4 +1,5 @@
 <script>
+  // import InView from "$lib/Wrappers/InView.svelte";
   export let href,
     content,
     routes,
@@ -58,7 +59,9 @@
       class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 md:px-10"
     >
       <svelte:component this={icon} bind:navIconClicked />
-      <!-- svg icon associated with nav item -->
+      <!-- <InView margin={"400px"}>
+        <svelte:component this={icon} bind:navIconClicked />
+      </InView> -->
 
       <span class="text-xs text-center">{content}</span>
     </div>
