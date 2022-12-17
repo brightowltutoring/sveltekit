@@ -77,7 +77,6 @@
   import { page } from "$app/stores";
   import { routes } from "$lib/store";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
 
   let contactLinkClicked = false;
 
@@ -277,7 +276,7 @@
       {/if}
     </InView>
 
-    <!-- <LazyMount2
+    <!-- <LazyMount
       bind:contactLinkClicked
       Import={ () => import("$lib/Footer.svelte")}
     /> -->

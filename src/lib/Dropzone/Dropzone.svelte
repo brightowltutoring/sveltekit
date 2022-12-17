@@ -15,6 +15,7 @@
 
   // Alternative to the vanilla-y eventListener logic commented out above.
   $: $showHomeworkModal && dropzonePopUpOnce();
+  //TODO: as of dec 13-ish the 'dropzonePopUpOnce()' logic does not work on safari, and hence not on ios PWA :/
 
   export let text = "🔥";
   export let textSizeTW = "text-3xl";
@@ -69,17 +70,18 @@
       }
     });
   }
+  // ? { bubbles: true,cancelable: true }
 
   function dropzonePopUpOnce() {
     // This code fires once since 'globalThis.onceBoolean' starts out as undefined, then switched to true inside
-    if (!globalThis.onceBoolean) {
+    if (!globalThis.onceBooleany) {
       setTimeout(() => {
         document
           .querySelector(".dropzone")
           .dispatchEvent(new CustomEvent("click"));
-      }, 50);
+      }, 1000);
 
-      globalThis.onceBoolean = true;
+      globalThis.onceBooleany = true;
     }
   }
 </script>
@@ -91,12 +93,12 @@
     class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
   >
     <!-- <input
-    style="text-align: center"
-    type="text"
-    id="gdf"
-    name="gdf"
-    placeholder="1nQLtENA2318gXFsNbPklccxA-oz8Anfz"
-  /> -->
+      style="text-align: center"
+      type="text"
+      id="gdf"
+      name="gdf"
+      placeholder="1nQLtENA2318gXFsNbPklccxA-oz8Anfz"
+    /> -->
     <div
       class="dz-message font-Nunito group-hover:animate-pulse"
       data-dz-message

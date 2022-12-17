@@ -1,12 +1,12 @@
 <script>
+  // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  // import Reviews from "$lib/Reviews/Reviews.svelte";
   // import PlansSection from "$lib/Plans/PlansSection.svelte";
+
   // let PlansSection;
   // let classicoAndMock; // this refers to data that is sent UP from PlansSection.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
-  // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import InView from "$lib/Wrappers/InView.svelte";
-  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-  // import Reviews from "$lib/Reviews/Reviews.svelte";
   import { isRunningStandalone } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
   import { slide } from "svelte/transition";
@@ -20,7 +20,6 @@
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
 
-  // TODO: added dec 14; remove?
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 </script>
 
@@ -31,7 +30,7 @@
   autoplay
   muted
   loop
-  class=" absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
+  class="absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
     ? 'invert-[0.95] blur-3xl '
     : 'blur-2xl'}"
   src="/login-bg-video-blurred.mp4"
@@ -85,10 +84,7 @@
       <!-- uniqueId={"homeRouteDropzone"} -->
       <!-- <Dropzone text={"Drop it like it's 🔥"} textSizeTW={"text-2xl"} /> -->
       <button
-        on:click={() => {
-          $showHomeworkModal = true;
-          // globalThis.onceBoolean = false;
-        }}
+        on:click={() => ($showHomeworkModal = true)}
         style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
         class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl  text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
       >
@@ -111,45 +107,26 @@
         <span class={gradientTextColor}> 2. Schedule a Session </span>
       </button>
 
-      <!-- Dec16,2022: able to handle unbounded props now! However not sure how to handle the custom dispatched event, as before. Maybe rethink PlansSection logic -->
+      <!-- Dec17,2022: not sure how to handle the custom dispatched event, as before. Maybe rethink PlansSection logic -->
       <LazyMount Import={() => import("$lib/Plans/PlansSection.svelte")} />
 
-      <!-- TODO: UPDATE: dec 17,2022: somehow this is getting perfect lighthouse score when I manually lazy mount this component. HOWEVER the simplicity of LazyMount2, near perfect lighthouse score (96/100/100/100), and identical page speed score tilts me to the latter. -->
+      <!-- TODO: not yet sure how to deal with on:boop in LazyMount ... this is doing things manually; maybe rethink props logic inside PlansSection to do what on:boop accomplishes (i.e. reducing the card elements to first two) -->
 
       <!-- <InView
         onview={async () => {
           PlansSection = (await import("$lib/Plans/PlansSection.svelte"))
             .default;
         }}
-      >
-        <svelte:component this={PlansSection} noTransition
-        plansCards={classicoAndMock}
-        on:boop={(e) => {
-            classicoAndMock = e.detail.plansCardArray.slice(0, 2);
-            console.log("🏡", e.detail.message);
-          }}
-         />
-      </InView> -->
-      <!-- {#if PlansSection}
-        <PlansSection
-          noTransition
+       >
+        <svelte:component
+          this={PlansSection}
           plansCards={classicoAndMock}
           on:boop={(e) => {
             classicoAndMock = e.detail.plansCardArray.slice(0, 2);
             console.log("🏡", e.detail.message);
           }}
         />
-      {/if} -->
-
-      <!-- OLD WAY: component is not dynamically imported -->
-      <!-- <PlansSection
-        noTransition
-        on:boop={(e) => {
-          classicoAndMock = e.detail.plansCardArray.slice(0, 2);
-          console.log("🏡", e.detail.message);
-        }}
-        plansCards={classicoAndMock}
-      /> -->
+      </InView> -->
 
       <!-- Note: 'boop' is a custom svelte event sent from within PlansSection.svelte, containing 'plansCardArray'; here I decide to modify a copy of this data and name it 'classicoAndMock' ... upside of this is not having to import 'plansCardArray' from a js file ...downside is while waiting for this boop event the change in content flashes on the home route (when refreshing the page at the plans section)-->
     </div>
@@ -157,10 +134,8 @@
     <!-- fourth page -->
     <div id="reviews" class="duration-500 mb-[200px] sm:mb-[500px]">
       <button
+        on:click={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         class="text-5xl font-Poppins w-full flex justify-center"
-        on:click={() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
       >
         <span class={gradientTextColor}
           >3. Do Some Reading <span class="text-black">😎 </span></span
@@ -174,11 +149,10 @@
 {:else}
   <!-- main page -->
   <div class="h-[70vh] flex justify-center items-center text-center ">
-    <button class="grid grid-rows-1" on:click={() => goto("/plans")}>
+    <button on:click={() => goto("/plans")} class="grid grid-rows-1">
       {#if ready}
         <div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
-          You're on the
-          <span class={gradientTextColor}> App! </span>
+          You're on the <span class={gradientTextColor}> App!</span>
         </div>
 
         <div class="grid px-6 text-2xl font-Nunito font-thin ">
@@ -188,8 +162,6 @@
     </button>
   </div>
 {/if}
-
-<!-- <Testimonials /> -->
 
 <!-- <div class="grid grid-cols-1 gap-y-[600px] sm:gap-y-[330px] py-20"> -->
 <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-[2000px] sm:gap-y-[330px] py-20"> -->
@@ -223,10 +195,11 @@
     // window.addEventListener("touchend", () => {
     //   console.log("window touchend (actually fired dispatch event)");
     // }); -->
-<style>
+
+<!-- <style>
   .page {
     display: grid;
     grid-gap: 10px;
     grid-template-rows: repeat(auto-fit, minmax(100vh, 1fr));
   }
-</style>
+</style> -->
