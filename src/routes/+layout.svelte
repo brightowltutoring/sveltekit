@@ -1,5 +1,4 @@
 <script>
-  // import { isLoggedIn } from "./../lib/store.js";
   import "../app.css";
   import {
     scale,
@@ -27,6 +26,7 @@
     showHomeworkModal,
     navAppClicked,
     isDarkMode,
+    isLoggedIn,
   } from "$lib/store";
 
   import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
@@ -81,12 +81,15 @@
 
   let contactLinkClicked = false;
 
-  // let LoginCard;
-  // async function importLoginCardModule() {
-  //   //  import LoginCard from "$lib/Login/LoginCard.svelte";/
-  //   // LoginCard = (await import("$lib/Login/LoginCard.svelte")).default;
-  //   return await import("$lib/Login/LoginCard.svelte");
-  // }
+  // for logincard ui .. which is lazy loaded below
+  const opacityEasingTime = 100;
+  let changeOpacityTo100;
+  $: if ($showLoginModal && !$isLoggedIn) {
+    setTimeout(() => {
+      changeOpacityTo100 =
+        "opacity-100 transition-opacity duration-100 ease-in";
+    }, opacityEasingTime);
+  }
 </script>
 
 <svelte:head>
@@ -201,19 +204,20 @@
 
   <!--dec 16,2022: Logincard contains firebase modules and svg icon in svelte components ... lazy loading this yields a perfect lighthouse score (Logincard.svelte is loaded!), however due to the asynchronous nature of dynamic import the UI takes a hit ... which is why I also use 'opacity easing' in Modal.svelte. Seems so janky, however the alternative is much worse: granularly dynamic import everything inside Logincard. Oh and for some reason have to reset '$showLoginModal = true' ... haven't yet figured why it flicker to false when first clicking the login button -->
 
+  <!-- UPDATE: the timeout here is 250ms and 100 ms and in opacity easing logic defined above. These are magic numbers as far as im concerned, up until now the logincard has been jittery on mobile -->
+
   <Modal
     bind:showModal={$showLoginModal}
-    bgTint={"backdrop-blur-md"}
-    opacityEase
+    bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`}
   >
+    <!-- opacityEase -->
     <!-- <LoginCard /> -->
     <LazyMount2
       Import={async () => {
-        setTimeout(() => ($showLoginModal = true), 250);
+        setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingTime); //opacityEasingTime = 100ms
         return await import("$lib/Login/LoginCard.svelte");
       }}
     />
-    <!-- {/if} -->
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
