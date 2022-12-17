@@ -82,7 +82,7 @@
   let contactLinkClicked = false;
 
   // for logincard ui .. which is lazy loaded below
-  const opacityEasingDelay = 100;
+  const opacityEasingDelay = 50;
   let changeOpacityTo100;
   $: if ($showLoginModal && !$isLoggedIn) {
     setTimeout(() => {
@@ -214,9 +214,9 @@
     <!-- opacityEase -->
     <!-- <LoginCard /> -->
     <LazyMount
-      Import={async () => {
-        setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
-        return await import("$lib/Login/LoginCard.svelte");
+      Import={() => {
+        setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 50ms
+        return import("$lib/Login/LoginCard.svelte");
       }}
     />
   </Modal>
@@ -231,7 +231,7 @@
 
     <!-- TODO: dec 16 figured out passing (unbounded) props !! Requires '$$props' syntax inside component definition -->
     <LazyMount
-      Import={async () => await import("$lib/Dropzone/Dropzone.svelte")}
+      Import={() => import("$lib/Dropzone/Dropzone.svelte")}
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
@@ -279,7 +279,7 @@
 
     <!-- <LazyMount2
       bind:contactLinkClicked
-      Import={async () => await import("$lib/Footer.svelte")}
+      Import={ () => import("$lib/Footer.svelte")}
     /> -->
 
     <!-- Failed attempt to consolidate lazy import block; comes down to import statement disallowing variable path. Update: passing import via a function prop seems to work, but then passing bounded props doesnt seem to work ..also the markup is already as large as the original  -->

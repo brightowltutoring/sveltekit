@@ -112,9 +112,7 @@
       </button>
 
       <!-- Dec16,2022: able to handle unbounded props now! However not sure how to handle the custom dispatched event, as before. Maybe rethink PlansSection logic -->
-      <LazyMount
-        Import={async () => await import("$lib/Plans/PlansSection.svelte")}
-      />
+      <LazyMount Import={() => import("$lib/Plans/PlansSection.svelte")} />
 
       <!-- TODO: UPDATE: dec 17,2022: somehow this is getting perfect lighthouse score when I manually lazy mount this component. HOWEVER the simplicity of LazyMount2, near perfect lighthouse score (96/100/100/100), and identical page speed score tilts me to the latter. -->
 
@@ -170,9 +168,7 @@
       </button>
 
       <!-- <Reviews /> -->
-      <LazyMount
-        Import={async () => await import("$lib/Reviews/Reviews.svelte")}
-      />
+      <LazyMount Import={() => import("$lib/Reviews/Reviews.svelte")} />
     </div>
   </div>
 {:else}
