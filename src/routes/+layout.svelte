@@ -207,6 +207,7 @@
   <!-- UPDATE: the timeout here is 250ms and 100 ms and in opacity easing logic defined above. These are magic numbers as far as im concerned, up until now the logincard has been jittery on mobile -->
 
   <Modal
+    body
     bind:showModal={$showLoginModal}
     bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`}
   >

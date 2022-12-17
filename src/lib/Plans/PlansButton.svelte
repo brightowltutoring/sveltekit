@@ -28,7 +28,7 @@
 </script>
 
 <!-- With modal inside this button component, each calendly modal plan's state is preserved! No unnecessary reloading of content -->
-<Modal bind:showModal={showMe} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
+<Modal body bind:showModal={showMe} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
   <iframe
     title="Thinksolve Plans"
     class="{changeOpacityTo100} opacity-0 fixed bottom-0 w-full md:w-[80%] h-[90%] md:-translate-y-5 backdrop-blur-3xl  rounded-xl border-dotted border-gray-500"
