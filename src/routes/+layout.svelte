@@ -82,13 +82,13 @@
   let contactLinkClicked = false;
 
   // for logincard ui .. which is lazy loaded below
-  const opacityEasingTime = 100;
+  const opacityEasingDelay = 100;
   let changeOpacityTo100;
   $: if ($showLoginModal && !$isLoggedIn) {
     setTimeout(() => {
       changeOpacityTo100 =
         "opacity-100 transition-opacity duration-100 ease-in";
-    }, opacityEasingTime);
+    }, opacityEasingDelay);
   }
 </script>
 
@@ -214,7 +214,7 @@
     <!-- <LoginCard /> -->
     <LazyMount2
       Import={async () => {
-        setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingTime); //opacityEasingTime = 100ms
+        setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
         return await import("$lib/Login/LoginCard.svelte");
       }}
     />
