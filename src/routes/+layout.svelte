@@ -13,7 +13,7 @@
   import Modal from "$lib/Wrappers/Modal.svelte";
   // let DropzoneComponent;
 
-  import LoginCard from "$lib/Login/LoginCard.svelte";
+  // import LoginCard from "$lib/Login/LoginCard.svelte";
   let FooterComponent;
   // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import Footer from "$lib/Footer.svelte";
@@ -199,30 +199,20 @@
     </Modal>
   {/if}
 
-  <!-- WITHOUT bind I am able to keep state on the logincard ...which is useful for phone auth sms code logic, however annoyingly the svg icon color does not update back to default color when unclicking -->
+  <!--dec 16,2022: Logincard contains firebase modules and svg icon in svelte components ... lazy loading this yields a perfect lighthouse score (Logincard.svelte is loaded!), however due to the asynchronous nature of dynamic import the UI takes a hit ... which is why I also use 'opacity easing' in Modal.svelte. Seems so janky, however the alternative is much worse: granularly dynamic import everything inside Logincard. Oh and for some reason have to reset '$showLoginModal = true' ... haven't yet figured why it flicker to false when first clicking the login button -->
 
   <Modal
     bind:showModal={$showLoginModal}
     bgTint={"backdrop-blur-md"}
     opacityEase
   >
-    <!--dec 16, 2022: $showLoginModal flickers to false; have to do '$showLoginModal = true' 100ms setTimeout. To reduce flicker I have modified Modal.svelte to include an opacity easing -->
-
-    <!-- TODO: maybe replace isLoggedIn with cookie check -->
-    <!-- {#if $isLoggedIn}
-      {#await importLoginCardModule() then LoginCardComponent}
-        <LoginCardComponent.default />
-      {/await}
-    {:else} -->
-
-    <LoginCard />
-
-    <!-- <LazyMount2
+    <!-- <LoginCard /> -->
+    <LazyMount2
       Import={async () => {
-        setTimeout(() => ($showLoginModal = true), 25);
+        setTimeout(() => ($showLoginModal = true), 250);
         return await import("$lib/Login/LoginCard.svelte");
       }}
-    /> -->
+    />
     <!-- {/if} -->
   </Modal>
 
