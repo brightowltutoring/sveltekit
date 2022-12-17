@@ -74,12 +74,8 @@ export async function TwitterLogin() {
   //       // ...
   //     });
   // } else {
-  // const { signInWithPopup } = await import("firebase/auth");
-  // console.log("twitter provider?", provider.providerId);
-
-  // signInWithPopup(auth, provider, browserPopupRedirectResolver)
-  const { signInWithRedirect } = await import("firebase/auth");
-  signInWithRedirect(auth, provider, browserPopupRedirectResolver)
+  const { signInWithPopup } = await import("firebase/auth");
+  signInWithPopup(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
       // You can use these server side with your app's credentials to access the Twitter API.
@@ -140,15 +136,10 @@ export async function GoogleLogin() {
   //       const credential = GoogleAuthProvider.credentialFromError(error);
   //     });
   // } else {
-  // const { signInWithPopup } = await import("firebase/auth");
-  // console.log("google provider?", provider.providerId);
+  const { signInWithPopup } = await import("firebase/auth");
 
   // setPersistence(auth, browserSessionPersistence).then(() => {
-  // signInWithPopup(auth, provider)
-
-  // signInWithPopup(auth, provider, browserPopupRedirectResolver)
-  const { signInWithRedirect } = await import("firebase/auth");
-  signInWithRedirect(auth, provider, browserPopupRedirectResolver)
+  signInWithPopup(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
