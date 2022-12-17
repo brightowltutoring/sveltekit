@@ -1,8 +1,9 @@
 <script>
-  import TwitterLoginButton from "$lib/Login/TwitterLoginButton.svelte";
-  import GoogleLoginButton from "$lib/Login/GoogleLoginButton.svelte";
-  import MagicLinkSection from "$lib/Login/MagicLinkSection.svelte";
-  import PhoneAuthSection from "$lib/Login/PhoneAuthSection.svelte";
+  // import LazyMount2 from "$lib/Wrappers/LazyMount2.svelte";
+  // import TwitterLoginButton from "$lib/Login/TwitterLoginButton.svelte";
+  // import GoogleLoginButton from "$lib/Login/GoogleLoginButton.svelte";
+  // import MagicLinkSection from "$lib/Login/MagicLinkSection.svelte";
+  // import PhoneAuthSection from "$lib/Login/PhoneAuthSection.svelte";
   // import CloseButton from "$lib/CloseButton.svelte";
 
   // TODO: commented out on dec12, 2022  due to dynamicimporting
@@ -178,6 +179,32 @@
       }
     }
   }
+
+  async function getLoginButtons() {
+    TwitterLoginButton = (await import("$lib/Login/TwitterLoginButton.svelte"))
+      .default;
+    PhoneAuthSection = (await import("$lib/Login/PhoneAuthSection.svelte"))
+      .default;
+    MagicLinkSection = (await import("$lib/Login/MagicLinkSection.svelte"))
+      .default;
+    GoogleLoginButton = (await import("$lib/Login/GoogleLoginButton.svelte"))
+      .default;
+  }
+
+  let TwitterLoginButton, PhoneAuthSection, MagicLinkSection, GoogleLoginButton;
+
+  $: if ($showLoginModal) {
+    // TwitterLoginButton = import("$lib/Login/TwitterLoginButton.svelte");
+
+    getLoginButtons();
+    // (async () =>
+    //   (TwitterLoginButton = (
+    //     await import("$lib/Login/TwitterLoginButton.svelte")
+    //   ).default))();
+  }
+
+  // const getComponent = async () => (Component = (await Import()).default);
+  // <svelte:component this={Component} {...$$props} />
 </script>
 
 <main class="w-[80vw] flex justify-center items-center">
@@ -195,17 +222,24 @@
         </div> -->
 
         {#if isRunningStandalone()}
-          <PhoneAuthSection />
+          <!-- <PhoneAuthSection /> -->
+          <svelte:component this={PhoneAuthSection} />
         {:else}
-          <MagicLinkSection />
+          <!-- <MagicLinkSection /> -->
+          <svelte:component this={MagicLinkSection} />
+
           <p class="py-3" />
-          <PhoneAuthSection />
+          <!-- <PhoneAuthSection /> -->
+          <svelte:component this={PhoneAuthSection} />
         {/if}
 
         <!-- <div class="grid grid-flow-col gap-2 "> -->
 
-        <GoogleLoginButton />
-        <TwitterLoginButton />
+        <!-- <GoogleLoginButton /> -->
+        <svelte:component this={GoogleLoginButton} />
+
+        <svelte:component this={TwitterLoginButton} />
+        <!-- <TwitterLoginButton /> -->
       </login-card>
     {/key}
   {/if}
@@ -215,7 +249,7 @@
       <logout-card
         in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
         class="card-styles {$isDarkMode
-          ? 'hover:shadow-xl '
+          ? 'hover:shadow-xl'
           : 'hover:shadow-lg'}"
         style={`background:${$elementColor} `}
       >

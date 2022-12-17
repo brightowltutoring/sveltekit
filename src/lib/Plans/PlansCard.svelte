@@ -49,7 +49,7 @@
 </script>
 
 <plans-card
-  class="cardIdentifier block shadow-md hover:scale-105 {$isDarkMode
+  class="block shadow-md hover:scale-105 {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} rounded-xl m-1 p-7 text-center duration-300 group"
   style={`background:${$elementColor}`}
@@ -65,7 +65,7 @@
     <Modal bind:showModal={showMe} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
       <iframe
         title="Thinksolve Plans"
-        class="{changeOpacityTo100} opacity-0  fixed bottom-0 w-full md:w-[80%] h-[90%] md:-translate-y-5 backdrop-blur-3xl  rounded-xl border-dotted border-gray-500"
+        class="{changeOpacityTo100} opacity-0 fixed bottom-0 w-full md:w-[80%] h-[90%] md:-translate-y-5 backdrop-blur-3xl  rounded-xl border-dotted border-gray-500"
         {src}
       />
     </Modal>
