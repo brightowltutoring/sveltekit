@@ -77,9 +77,10 @@
     // This code fires once since 'globalThis.onceBoolean' starts out as undefined, then switched to true inside
     if (!globalThis.onceBoolean) {
       setTimeout(() => {
-        const dropzoneForm = document.querySelector(".dropzone");
-        dropzoneForm.dispatchEvent(new CustomEvent("click"));
-      }, 100);
+        document
+          .querySelector(".dropzone")
+          .dispatchEvent(new CustomEvent("click"));
+      }, 50);
       globalThis.onceBoolean = true;
     }
   }

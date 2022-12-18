@@ -1,5 +1,6 @@
 <script>
-  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
   // import Reviews from "$lib/Reviews/Reviews.svelte";
   // import PlansSection from "$lib/Plans/PlansSection.svelte";
 
@@ -71,27 +72,18 @@
       class="hover:scale-105 duration-500 grid place-content-center"
     >
       <button
-        class="text-5xl font-Poppins text-center pb-7"
         on:click={() => {
           document
             .getElementById("step2")
             .scrollIntoView({ behavior: "smooth", block: "start" });
         }}
+        class="text-5xl font-Poppins text-center pb-7"
       >
         <span class={gradientTextColor}> 1. Upload your homework </span>
       </button>
 
-      <!-- uniqueId={"homeRouteDropzone"} -->
-
-      <!-- <Dropzone text={"Drop it like it's 🔥"} textSizeTW={"text-2xl"} /> -->
-
-      <!-- <LazyMount
-        Import={() => import("$lib/Dropzone/Dropzone.svelte")}
-        text={"Drop it like it's 🔥"}
-        textSizeTW={"text-2xl"}
-      /> -->
-
-      <button
+      <!-- This opens the modal dropzone; no need to instantiate more than one dropzone component since already available at the layout (i.e root) level of the app. -->
+      <!-- <button
         on:click={() => ($showHomeworkModal = true)}
         style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
         class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl  text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
@@ -99,7 +91,8 @@
         <div class="font-Nunito group-hover:animate-pulse text-2xl">
           Drop it like it's 🔥
         </div>
-      </button>
+      </button> -->
+      <DropzoneOpener />
     </div>
 
     <!-- third page -->

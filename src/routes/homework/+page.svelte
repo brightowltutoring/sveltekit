@@ -1,6 +1,5 @@
 <script>
-  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
 </script>
 
-<!-- uniqueId={"homeworkRouteDropzone"} -->
-<Dropzone />
+<DropzoneOpener />

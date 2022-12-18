@@ -11,7 +11,6 @@
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  // let DropzoneComponent;
 
   // import LoginCard from "$lib/Login/LoginCard.svelte";
   let FooterComponent;
@@ -222,33 +221,20 @@
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <!-- uniqueId={"modalDropzone"} -->
+
     <Dropzone
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
     />
-    <!-- dec 17 ... for some odd reason i cannot trigger the popupOnce logic if lazyMounting the modal Dropzone component. This was discovered when returning a non lazy mounted Dropzone component to home page (which has since been removed, given this understanding). I still dont understand how the setTimeout delay doesnt work with the dropzone modal -->
+    <!--TODO: note: luckily this one modal dropzone has no impact on the perfect lightscore .. having the Dropzone lazyMounted (which I had done before) would prevent the 'popupOnce' logic defined inside Dropzone.svelte; even WITH timeout delay it would not work -->
 
-    <!-- TODO: dec 16 figured out passing (unbounded) props !! Requires '$$props' syntax inside component definition -->
     <!-- <LazyMount
-      Import={() => import("$lib/Dropzone/Dropzone.svelte")}
-      textSizeTW={"text-6xl"}
-      dimensionsTW={"w-[80vw] h-[85vh]"}
-      brightnessTW={"brightness-95"}
-    /> -->
-
-    <!-- <InView
-      onview={async () =>
-        (DropzoneComponent = await import("$lib/Dropzone/Dropzone.svelte"))}
-    >
-      {#if DropzoneComponent}
-        <DropzoneComponent.default
-          textSizeTW={"text-6xl"}
-          dimensionsTW={"w-[80vw] h-[85vh]"}
-          brightnessTW={"brightness-95"}
-        />
-      {/if}
-    </InView> -->
+    Import={() => import("$lib/Dropzone/Dropzone.svelte")}
+    textSizeTW={"text-6xl"}
+    dimensionsTW={"w-[80vw] h-[85vh]"}
+    brightnessTW={"brightness-95"}
+  /> -->
   </Modal>
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
