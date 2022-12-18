@@ -33,10 +33,12 @@
   muted
   loop
   src="/login-bg-video-blurred.mp4"
-  class="absolute -z-10 top-0 object-cover w-screen h-screen {$isDarkMode
+  class="absolute -z-10 top-0 object-cover w-11/12 h-screen {$isDarkMode
     ? 'invert-[0.95] blur-3xl'
     : 'blur-2xl'}"
 />
+<!-- dec 18 2022: noticed that 'object-cover' makes the pwa navbar shake on opening the pwa-->
+<!-- not sure to keep 'object-cover' -->
 
 {#if !isRunningStandalone()}
   <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">

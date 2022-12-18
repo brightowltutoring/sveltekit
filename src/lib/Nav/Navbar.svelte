@@ -65,7 +65,7 @@
 
   let hideIfRunningStandalone = isRunningStandalone() && "hidden";
   let fadeInToFullOpacity =
-    browser && "opacity-100 transition-opacity duration-100 ease-in";
+    browser && "opacity-100 transition-opacity duration-1000 ease-in";
 </script>
 
 <!-- gap-x-24 -->
