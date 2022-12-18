@@ -10,11 +10,11 @@
   import Navbar from "$lib/Nav/Navbar.svelte";
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
+  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // let DropzoneComponent;
 
   // import LoginCard from "$lib/Login/LoginCard.svelte";
   let FooterComponent;
-  // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import Footer from "$lib/Footer.svelte";
 
   import {
@@ -222,19 +222,20 @@
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
     <!-- uniqueId={"modalDropzone"} -->
-    <!-- <Dropzone
-      textSizeTW={"text-6xl"}
-      dimensionsTW={"w-[80vw] h-[85vh]"}
-      brightnessTW={"brightness-95"}
-    /> -->
-
-    <!-- TODO: dec 16 figured out passing (unbounded) props !! Requires '$$props' syntax inside component definition -->
-    <LazyMount
-      Import={() => import("$lib/Dropzone/Dropzone.svelte")}
+    <Dropzone
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
     />
+    <!-- dec 17 ... for some odd reason i cannot trigger the popupOnce logic if lazyMounting the modal Dropzone component. This was discovered when returning a non lazy mounted Dropzone component to home page (which has since been removed, given this understanding). I still dont understand how the setTimeout delay doesnt work with the dropzone modal -->
+
+    <!-- TODO: dec 16 figured out passing (unbounded) props !! Requires '$$props' syntax inside component definition -->
+    <!-- <LazyMount
+      Import={() => import("$lib/Dropzone/Dropzone.svelte")}
+      textSizeTW={"text-6xl"}
+      dimensionsTW={"w-[80vw] h-[85vh]"}
+      brightnessTW={"brightness-95"}
+    /> -->
 
     <!-- <InView
       onview={async () =>

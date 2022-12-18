@@ -1,5 +1,5 @@
 <script>
-  // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   // import Reviews from "$lib/Reviews/Reviews.svelte";
   // import PlansSection from "$lib/Plans/PlansSection.svelte";
 
@@ -82,7 +82,15 @@
       </button>
 
       <!-- uniqueId={"homeRouteDropzone"} -->
+
       <!-- <Dropzone text={"Drop it like it's 🔥"} textSizeTW={"text-2xl"} /> -->
+
+      <!-- <LazyMount
+        Import={() => import("$lib/Dropzone/Dropzone.svelte")}
+        text={"Drop it like it's 🔥"}
+        textSizeTW={"text-2xl"}
+      /> -->
+
       <button
         on:click={() => ($showHomeworkModal = true)}
         style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"

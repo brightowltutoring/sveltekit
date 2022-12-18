@@ -19,10 +19,6 @@ export async function magicLinkToEmail(EMAIL) {
     // EmailAuthProvider
   } = await import("firebase/auth");
 
-  // let provider = new EmailAuthProvider();
-  // let providerId = provider.providerId;
-  // console.log("providerId", providerId);
-
   await sendSignInLinkToEmail(auth, EMAIL, {
     url: "https://thinksolve.io/",
     handleCodeInApp: true,

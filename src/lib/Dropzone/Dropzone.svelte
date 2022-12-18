@@ -1,11 +1,13 @@
 <script>
   // import("$lib/Dropzone/dropzone.css");
   // import { Dropzone } from "dropzone";
+
   import InView from "$lib/Wrappers/InView.svelte";
   import { cssToHead } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
 
   // import { onMount } from "svelte";
+
   // onMount(() => {
   //   document
   //     .querySelector('a[href="/homework"]')
@@ -70,23 +72,25 @@
       }
     });
   }
-  // ? { bubbles: true,cancelable: true }
 
   function dropzonePopUpOnce() {
     // This code fires once since 'globalThis.onceBoolean' starts out as undefined, then switched to true inside
-    if (!globalThis.onceBooleany) {
+    if (!globalThis.onceBoolean) {
       setTimeout(() => {
-        document
-          .querySelector(".dropzone")
-          .dispatchEvent(new CustomEvent("click"));
-      }, 1000);
-
-      globalThis.onceBooleany = true;
+        const dropzoneForm = document.querySelector(".dropzone");
+        dropzoneForm.dispatchEvent(new CustomEvent("click"));
+      }, 100);
+      globalThis.onceBoolean = true;
     }
   }
 </script>
 
-<InView single onview={hydrateDropzoneDomEls} once margin={"0px"}>
+<InView
+  single
+  onview={(target) => hydrateDropzoneDomEls(target)}
+  once
+  margin={"0px"}
+>
   <form
     method="post"
     style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
