@@ -6,16 +6,20 @@
   let Component;
   const getComponent = async () => (Component = await Import());
 
-  // // Comment out this onMount section and InView wrapper below, to test website when components are not lazy Mounted
-  import { onMount } from "svelte";
-  onMount(() => getComponent());
+  // import { onMount } from "svelte";
+  // onMount(() => getComponent());
+  // TESTING: Comment out this onMount section and InView wrapper below, to test website when components are not lazy Mounted
+  // no lazy mount: pagespeedinsights-86/97/100/10 (firefox); lighthouse-98/97/100/100
+  // lazy mount:    pagespeedinsights-86/97/100/10 (firefox); lighthouse-86/97/100
+
+  // lighthouse for no lazy explainable since inview is already built into many components ...even without lazymount i'm not getting a true baseline, i suppose. I think chrome might also have some memory of previous version since safari and firefox load noticeably slow with the no lazy version
 </script>
 
-<!-- <InView onview={getComponent}> -->
-{#if Component}
-  <Component.default {...$$props} />
-{/if}
-<!-- </InView> -->
+<InView onview={getComponent}>
+  {#if Component}
+    <Component.default {...$$props} />
+  {/if}
+</InView>
 
 <!-- ALTERNATIVE: using svelte:component ... I find it less readable -->
 <!-- 
