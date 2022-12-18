@@ -1,7 +1,7 @@
 <script>
   import Modal from "$lib/Wrappers/Modal.svelte";
-  import { scale } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
+  // import { scale } from "svelte/transition";
+  // import { elasticOut } from "svelte/easing";
   let buttonColor = {
     1: "bg-[rgb(244,77,77)]" /* red */,
     2: "bg-[rgb(254,164,92)]" /* yellow */,
@@ -20,10 +20,12 @@
     src = BUTTON_URL;
 
     showMe = true;
+
+    // setTimeout is necessary since iframe doesnt yet exist. I.e. a css transition requires the element to exist, in this case create at opacity-0 and then change to opacity-100 after delay, hopefully when already created.
     setTimeout(() => {
       changeOpacityTo100 =
         "opacity-100 transition-opacity duration-200 ease-in";
-    }, 50);
+    }, 25);
   }
 </script>
 
@@ -36,14 +38,13 @@
   />
 </Modal>
 
+<!-- in:scale={{ duration: 600, easing: elasticOut }} -->
 <button
-  in:scale={{ duration: 600, easing: elasticOut }}
   on:mouseover={() => (src = button.url)}
   on:focus={() => (src = button.url)}
   on:click={() => {
     handlePlansModal(button.url);
     // Calendly.initPopupWidget({ url: button.url });
-    // button.resetter = !button.resetter;
   }}
   class="hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white {buttonColor[
     card

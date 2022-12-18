@@ -17,7 +17,6 @@
 
   // Alternative to the vanilla-y eventListener logic commented out above.
   $: $showHomeworkModal && dropzonePopUpOnce();
-  //TODO: as of dec 13-ish the 'dropzonePopUpOnce()' logic does not work on safari, and hence not on ios PWA :/
 
   export let text = "🔥";
   export let textSizeTW = "text-3xl";
@@ -86,6 +85,13 @@
   }
 </script>
 
+<!-- <input
+      style="text-align: center"
+      type="text"
+      id="gdf"
+      name="gdf"
+      placeholder="1nQLtENA2318gXFsNbPklccxA-oz8Anfz"
+    /> -->
 <InView
   single
   onview={(target) => hydrateDropzoneDomEls(target)}
@@ -97,13 +103,6 @@
     style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
     class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
   >
-    <!-- <input
-      style="text-align: center"
-      type="text"
-      id="gdf"
-      name="gdf"
-      placeholder="1nQLtENA2318gXFsNbPklccxA-oz8Anfz"
-    /> -->
     <div
       class="dz-message font-Nunito group-hover:animate-pulse"
       data-dz-message

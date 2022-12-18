@@ -1,4 +1,6 @@
 <script>
+  // import FormSubmitter from "../lib/FormSubmitter.svelte";
+
   // import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
   // import Reviews from "$lib/Reviews/Reviews.svelte";
   // import PlansSection from "$lib/Plans/PlansSection.svelte";
@@ -21,6 +23,8 @@
   }`;
 </script>
 
+<!-- <FormSubmitter /> -->
+
 <video
   loading="lazy"
   controlslist="nodownload"
@@ -28,10 +32,10 @@
   autoplay
   muted
   loop
-  class="absolute -z-10 top-0 m-0 p-0 w-11/12 sm:h-full {$isDarkMode
-    ? 'invert-[0.95] blur-3xl '
-    : 'blur-2xl'}"
   src="/login-bg-video-blurred.mp4"
+  class="absolute -z-10 top-0 object-cover w-screen h-screen {$isDarkMode
+    ? 'invert-[0.95] blur-3xl'
+    : 'blur-2xl'}"
 />
 
 {#if !isRunningStandalone()}
