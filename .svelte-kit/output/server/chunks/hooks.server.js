@@ -1,1 +1,14 @@
-const o=new Map([["screenshare","classroom"]]),s=async({event:r,resolve:a})=>{for(const[e,n]of o)if(r.url.pathname===`/${e}`)return Response.redirect(`${r.url.origin}/${n}`,301);return await a(r)};export{s as handle};
+const urlMap = /* @__PURE__ */ new Map([
+  ["screenshare", "classroom"]
+]);
+const handle = async ({ event, resolve }) => {
+  for (const [key, value] of urlMap) {
+    if (event.url.pathname === `/${key}`) {
+      return Response.redirect(`${event.url.origin}/${value}`, 301);
+    }
+  }
+  return await resolve(event);
+};
+export {
+  handle
+};

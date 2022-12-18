@@ -1,5 +1,5 @@
 <script>
-  import { showHomeworkModal, isDarkMode } from "$lib/store";
+  import { isDarkMode, showHomeworkModal } from "$lib/store";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 </script>
 

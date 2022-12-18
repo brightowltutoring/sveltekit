@@ -1,6 +1,9 @@
-import{c as s}from"./index.js";import"katex";const r=s((t,e,a,c)=>`
+import { c as create_ssr_component } from "./index.js";
+import "katex";
+const Kajax = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
 
-${t.head+=`<!-- HEAD_svelte-15ncbow_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous"><script>MathJax = {
+${$$result.head += `<!-- HEAD_svelte-15ncbow_START --><link rel="${"stylesheet"}" href="${"https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"}" integrity="${"sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X"}" crossorigin="${"anonymous"}"><script>MathJax = {
       // startup: { typeset: false },
       // startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
@@ -17,4 +20,8 @@ ${t.head+=`<!-- HEAD_svelte-15ncbow_START --><link rel="stylesheet" href="https:
         fontCache: "global",
       },
     };
-  <\/script><script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"><\/script><!-- HEAD_svelte-15ncbow_END -->`,""}`);export{r as K};
+  <\/script><script type="${"text/javascript"}" id="${"MathJax-script"}" async src="${"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"}"><\/script><!-- HEAD_svelte-15ncbow_END -->`, ""}`;
+});
+export {
+  Kajax as K
+};

@@ -1,6 +1,5 @@
 <script>
-  // import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
+  // import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
   // import Reviews from "$lib/Reviews/Reviews.svelte";
   // import PlansSection from "$lib/Plans/PlansSection.svelte";
 
@@ -9,7 +8,7 @@
   // import InView from "$lib/Wrappers/InView.svelte";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import { isRunningStandalone } from "$lib/utils";
-  import { isDarkMode, showHomeworkModal } from "$lib/store";
+  import { isDarkMode } from "$lib/store";
   import { slide } from "svelte/transition";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
@@ -20,8 +19,6 @@
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
-
-  $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 </script>
 
 <video
@@ -83,16 +80,7 @@
       </button>
 
       <!-- This opens the modal dropzone; no need to instantiate more than one dropzone component since already available at the layout (i.e root) level of the app. -->
-      <!-- <button
-        on:click={() => ($showHomeworkModal = true)}
-        style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
-        class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl  text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
-      >
-        <div class="font-Nunito group-hover:animate-pulse text-2xl">
-          Drop it like it's 🔥
-        </div>
-      </button> -->
-      <DropzoneOpener />
+      <LazyMount Import={() => import("$lib/Dropzone/DropzoneOpener.svelte")} />
     </div>
 
     <!-- third page -->

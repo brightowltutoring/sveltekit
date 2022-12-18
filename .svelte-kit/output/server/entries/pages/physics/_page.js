@@ -1,1 +1,4 @@
-const e=!1;export{e as prerender};
+const prerender = false;
+export {
+  prerender
+};
