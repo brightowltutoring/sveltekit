@@ -5,13 +5,17 @@
   export let Import = async () => {};
   let Component;
   const getComponent = async () => (Component = await Import());
+
+  // // Comment out this onMount section and InView wrapper below, to test website when components are not lazy Mounted
+  import { onMount } from "svelte";
+  onMount(() => getComponent());
 </script>
 
-<InView onview={getComponent}>
-  {#if Component}
-    <Component.default {...$$props} />
-  {/if}
-</InView>
+<!-- <InView onview={getComponent}> -->
+{#if Component}
+  <Component.default {...$$props} />
+{/if}
+<!-- </InView> -->
 
 <!-- ALTERNATIVE: using svelte:component ... I find it less readable -->
 <!-- 
