@@ -83,9 +83,7 @@
         $isLoggedIn = true;
         loggedInEmail = user.email;
 
-        console.log(`User is signed in!`);
-
-        loginWelcomeText.innerText = user.displayName
+        loginWelcomeText = user.displayName
           ? `Hey ${user.displayName}!`
           : `Hey ${user.email}!`;
       } else {
@@ -93,8 +91,6 @@
         $isLoggedIn = false;
         $showLoginModal = false;
         loggedInEmail = "";
-
-        // console.log(`User is NOT signed in`);
       }
     });
     // }
@@ -210,21 +206,22 @@
     {#key !noTransition && $showLoginModal}
       <logout-card
         in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
-        class="card-styles {$isDarkMode
+        class="text-xl card-styles {$isDarkMode
           ? 'hover:shadow-xl'
           : 'hover:shadow-lg'}"
         style={`background:${$elementColor} `}
       >
-        <p bind:this={loginWelcomeText}>Welcome User</p>
+        <p>{loginWelcomeText}</p>
 
-        <!-- <div id="redirectMessage"> -->
         <div>
-          Redirecting to your page in
-          <div style="font-size: 30px;" id="timeLeft">⌊π⌋</div>
+          Redirecting in
+          <div class="text-5xl p-5" id="timeLeft">3</div>
         </div>
 
-        <!-- <button id="logoutBtn" on:click={logoutFunction}>Logout</button> -->
-        <button on:click={logoutFunction}>Logout</button>
+        <button
+          class="text-2xl font-medium bg-rose-300 text-white rounded-lg p-4 hover:scale-110 hover:rounded-xl duration-200 ease-in"
+          on:click={logoutFunction}>Logout</button
+        >
       </logout-card>
     {/key}
   {/if}

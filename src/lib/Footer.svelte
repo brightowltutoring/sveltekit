@@ -30,7 +30,7 @@
     : 'mb-10'} flex justify-center items-center flex-row gap-x-1 "
 >
   <span
-    class=" text-transparent bg-clip-text bg-gradient-to-l from-blue-500  to-pink-600"
+    class="text-transparent bg-clip-text bg-gradient-to-l from-blue-500  to-pink-600"
   >
     {#if !isRunningStandalone()}
       <a data-sveltekit-preload-data href="/faq">faq</a>
