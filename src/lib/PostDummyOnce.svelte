@@ -2,9 +2,9 @@
 <script>
   import { showHomeworkModal } from "$lib/store";
 
-  $: $showHomeworkModal && submitDummyOnce();
+  $: $showHomeworkModal && PostDummyOnce();
 
-  async function submitDummyOnce() {
+  async function PostDummyOnce() {
     // NOTE: the 'globalThis.submitOnce' logic makes sure that the function can only fire once per SESSION ... specifically due to component lifecycles; Using '{ once: true }' inside a click event listener (attached to a dom element) ... would reset when changing routes (caveat: '{once:true}' would suffice if the component is attached to the body of the document)
 
     if (!globalThis.submitOnce) {
