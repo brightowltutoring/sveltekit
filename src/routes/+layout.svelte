@@ -13,8 +13,8 @@
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
 
   // import LoginCard from "$lib/Login/LoginCard.svelte";
-  let FooterComponent;
   // import Footer from "$lib/Footer.svelte";
+  let FooterComponent;
 
   import {
     instDeltaY,
@@ -92,7 +92,7 @@
 
 <svelte:head>
   <link rel="manifest" href="/manifest.json" />
-  <!-- <TitlesHead /> -->
+
   {#if $page.status == 200}
     {@const slashlessRoute = $page.route.id.slice(1)}
 
@@ -103,9 +103,6 @@
         content="Math and Physics Tutoring for the Modern Age."
       />
       <meta og:url="https://thinksolve.io/" />
-      <!-- TODO: for some reason this doesn't work when site is deployed to cloudflare -->
-      <!-- {:else if Object.keys($routes).includes(slashlessRoute)}
-      <title>{$routes[slashlessRoute].title}</title> -->
     {:else}
       {#each Object.keys($routes).slice(1) as key}
         {@const title = $routes[key].title}
@@ -122,7 +119,6 @@
 
 <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
 
-<!-- bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"} -->
 <main>
   <Modal showModal={contactLinkClicked} bgTint={"backdrop-blur-3xl"}>
     {#key !contactLinkClicked}
@@ -143,8 +139,6 @@
 
   <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
   {#if getOS() == "iOS"}
-    <!-- <Modal showModal={$navAppClicked} bgTint={"bg-[#6c79f4] text-white"}> -->
-
     <Modal
       showModal={$navAppClicked}
       bgTint={"text-white bg-gradient-to-br from-[#6c79f4] to-rose-400"}
@@ -209,7 +203,6 @@
     bind:showModal={$showLoginModal}
     bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`}
   >
-    <!-- opacityEase -->
     <!-- <LoginCard /> -->
     <LazyMount
       Import={() => {
@@ -220,8 +213,6 @@
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
-    <!-- uniqueId={"modalDropzone"} -->
-
     <Dropzone
       textSizeTW={"text-6xl"}
       dimensionsTW={"w-[80vw] h-[85vh]"}
@@ -239,7 +230,6 @@
 
   <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
   <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full ">
-    <!-- <div class=" z-50 fixed {jankytown} ease-in-out w-full"> -->
     <Navbar />
   </div>
 
@@ -247,14 +237,13 @@
   <!-- TODO: this padding is not needed for smaller than md -->
 
   <div class="px-[7%] pt-32 md:block">
-    <!-- <div class=" md:block"> -->
     <slot />
 
     <!-- <Footer bind:contactLinkClicked /> -->
 
     <!-- When passing bounded variables, cannot (yet) use the LazyMount way-->
     <InView
-      margin={"400px"}
+      margin={"200px"}
       onview={async () =>
         (FooterComponent = await import("$lib/Footer.svelte"))}
     >

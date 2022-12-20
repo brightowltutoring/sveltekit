@@ -1,4 +1,5 @@
 <script>
+  import SubmitDummyOnce from "$lib/SubmitDummyOnce.svelte";
   // import("$lib/Dropzone/dropzone.css");
   // import { Dropzone } from "dropzone";
 
@@ -84,6 +85,8 @@
     }
   }
 </script>
+
+<SubmitDummyOnce />
 
 <!-- <input
       style="text-align: center"

@@ -5,7 +5,7 @@
   import PhoneAuthSection from "$lib/Login/PhoneAuthSection.svelte";
   // import CloseButton from "$lib/CloseButton.svelte";
 
-  // TODO: commented out on dec12, 2022  due to dynamicimporting
+  // TODO: commented out on dec12, 2022  due to code splitting / dynamic importing
   // import { app, auth } from "$lib/Login/firebase";
   // import { auth } from "$lib/Login/firebase";
   // import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
@@ -95,24 +95,9 @@
     });
     // }
   }
-  // globalThis.loginFirstClickHappened = false;
-  // $: if ($showLoginModal == true && !globalThis.loginFirstClickHappened) {
-  //   onMountFirebase();
-  //   globalThis.loginFirstClickHappened = true;
-  // }
-
-  // TODO: placing 'onMountFirebase()' inside an onclick .. requires to click twice...???
 
   onMount(() => {
     onMountFirebase();
-    // document
-    //   .querySelector('a[href="/login"]')
-    //   .addEventListener("dblclick", () => {
-    //     if (!globalThis.loginFirstClickHappened) {
-    //       onMountFirebase();
-    //       globalThis.loginFirstClickHappened = true;
-    //     }
-    //   });
   });
 
   //  Hoisted Functions
