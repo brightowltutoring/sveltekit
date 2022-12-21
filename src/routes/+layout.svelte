@@ -108,9 +108,10 @@
 
         {#if slashlessRoute.startsWith(key)}
           <title>{title}</title>
-          {#if $routes[key].meta}
+          <!-- //TODO: meta tags are not attaching uniquely on route changes -->
+          <!-- {#if $routes[key].meta}
             {@html $routes[key].meta}
-          {/if}
+          {/if} -->
         {/if}
       {/each}
     {/if}

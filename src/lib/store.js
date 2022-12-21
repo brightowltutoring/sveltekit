@@ -115,6 +115,7 @@ import IconPlans from "$lib/Icons/NavIcons/IconPlans.svelte";
 import IconHomework from "$lib/Icons/NavIcons/IconHomework.svelte";
 import IconClassroom from "$lib/Icons/NavIcons/IconClassroom.svelte";
 
+//TODO: meta tags are not attaching uniquely on route changes
 export const routes = writable({
   home: {
     name: "Home",
