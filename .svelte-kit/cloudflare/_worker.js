@@ -207,18 +207,18 @@ function S2(n3, i2, u) {
     let e8 = false;
     const r5 = [];
     let s5 = 0, d6 = p;
-    const g5 = () => {
+    const g4 = () => {
       if (s5)
         return;
       d6();
       const c3 = i2(t3 ? r5[0] : r5, f5);
       l4 ? f5(c3) : d6 = S(c3) ? c3 : p;
     }, _6 = a4.map((c3, p5) => x(c3, (h2) => {
-      r5[p5] = h2, s5 &= ~(1 << p5), e8 && g5();
+      r5[p5] = h2, s5 &= ~(1 << p5), e8 && g4();
     }, () => {
       s5 |= 1 << p5;
     }));
-    return e8 = true, g5(), function() {
+    return e8 = true, g4(), function() {
       y(_6), d6();
     };
   });
@@ -542,38 +542,35 @@ var hooks_server_exports = {};
 __export(hooks_server_exports, {
   handle: () => d2,
   metaTagFixWhenSSR: () => k2,
-  redirectOldUrls: () => y2
+  redirectOldUrls: () => h
 });
-function g2(...r5) {
-  const n3 = r5.length;
-  return n3 ? ({ event: e8, resolve: a4 }) => {
-    return s5(0, e8, {});
+function m2(...e8) {
+  const a4 = e8.length;
+  return a4 ? ({ event: r5, resolve: n3 }) => {
+    return s5(0, r5, {});
     function s5(o4, f5, c3) {
-      const m4 = r5[o4];
-      return m4({ event: f5, resolve: (u, i2) => {
+      const g4 = e8[o4];
+      return g4({ event: f5, resolve: (u, i2) => {
         const l4 = async ({ html: t3, done: p5 }) => (i2?.transformPageChunk && (t3 = await i2.transformPageChunk({ html: t3, done: p5 }) ?? ""), c3?.transformPageChunk && (t3 = await c3.transformPageChunk({ html: t3, done: p5 }) ?? ""), t3);
-        return o4 < n3 - 1 ? s5(o4 + 1, u, { transformPageChunk: l4 }) : a4(u, { transformPageChunk: l4 });
+        return o4 < a4 - 1 ? s5(o4 + 1, u, { transformPageChunk: l4 }) : n3(u, { transformPageChunk: l4 });
       } });
     }
-  } : ({ event: e8, resolve: a4 }) => a4(e8);
+  } : ({ event: r5, resolve: n3 }) => n3(r5);
 }
-async function y2({ event: r5, resolve: n3 }) {
-  for (const [e8, a4] of h)
-    if (r5.url.pathname === `/${e8}`)
-      return Response.redirect(`${r5.url.origin}/${a4}`, 301);
-  return await n3(r5);
+async function h({ event: e8, resolve: a4 }) {
+  for (const [r5, n3] of y2)
+    if (e8.url.pathname === `/${r5}`)
+      return Response.redirect(`${e8.url.origin}/${n3}`, 301);
+  return await a4(e8);
 }
-async function k2({ event: r5, resolve: n3 }) {
-  function e8({ html: a4 }) {
-    return a4.replace(/<link\s+rel="canonical"[^>]*>/, "").replace(/<meta\s+name="description"[^>]*>/, "").replace(/<meta\s+name="keywords"[^>]*>/, "").replace(/<meta\s+property="og:url"[^>]*>/, "").replace(/<meta\s+property="og:title"[^>]*>/, "").replace(/<meta\s+property="og:image"[^>]*>/, "").replace(/<meta\s+property="og:description"[^>]*>/, "");
-  }
-  return await n3(r5, { transformPageChunk: e8 });
+async function k2({ event: e8, resolve: a4 }) {
+  return await a4(e8, { transformPageChunk: ({ html: r5 }) => r5.replace(/<link\s+rel="canonical"[^>]*>/, "").replace(/<meta\s+name="description"[^>]*>/, "").replace(/<meta\s+name="keywords"[^>]*>/, "").replace(/<meta\s+property="og:url"[^>]*>/, "").replace(/<meta\s+property="og:title"[^>]*>/, "").replace(/<meta\s+property="og:image"[^>]*>/, "").replace(/<meta\s+property="og:description"[^>]*>/, "") });
 }
-var h, d2;
+var y2, d2;
 var init_hooks_server = __esm({
   ".svelte-kit/output/server/chunks/hooks.server.js"() {
-    h = /* @__PURE__ */ new Map([["screenshare", "classroom"]]);
-    d2 = g2(k2, y2);
+    y2 = /* @__PURE__ */ new Map([["screenshare", "classroom"]]);
+    d2 = m2(k2, h);
   }
 });
 
@@ -590,7 +587,7 @@ var init_layout = __esm({
 });
 
 // .svelte-kit/output/server/chunks/store.js
-var p2, I3, m2, V2, C3, b2, k3, H, F2, $2, g3, x2, y3, A3, B2, P2, T2, Y2, d3, L2, _2, q3;
+var p2, I3, m3, V2, C3, b2, k3, H, F2, $2, g2, x2, y3, A3, B2, P2, T2, Y2, d3, L2, _2, q3;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
     init_index2();
@@ -602,14 +599,14 @@ var init_store = __esm({
       let { navIconClicked: e8 } = o4;
       return o4.navIconClicked === void 0 && l4.navIconClicked && e8 !== void 0 && l4.navIconClicked(e8), c3 = e8 && "fill-rose-300", s5 = n3 ? "white" : "black", a4(), `<svg class="scale-[1.5] origin-top bg-"${M("width", p2, 0)}${M("height", p2, 0)} viewBox="${"0 0 " + j(p2, true) + " " + j(p2, true)}"><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M14 10L8 5v3H1v4h7v3l6-5zm3 7H9v2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2H9v2h8v14z"></path></svg>`;
     });
-    m2 = 489.2;
+    m3 = 489.2;
     V2 = I((i2, o4, l4, f5) => {
       let c3, s5, n3, a4;
       a4 = x(d3, (v6) => n3 = v6);
       let { navIconClicked: e8 } = o4;
       return o4.navIconClicked === void 0 && l4.navIconClicked && e8 !== void 0 && l4.navIconClicked(e8), c3 = e8 && "fill-rose-600", s5 = n3 ? "white" : "black", a4(), `
 
-<svg${M("height", m2 / 15, 0)}${M("width", m2 / 15, 0)} viewBox="${"0 0 " + j(m2, true) + " " + j(m2, true)}"><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
+<svg${M("height", m3 / 15, 0)}${M("width", m3 / 15, 0)} viewBox="${"0 0 " + j(m3, true) + " " + j(m3, true)}"><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
 			c4.5,0,8.1,3.6,8.1,8.1V238.1z M241.3,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
 			c4.5,0,8.1-3.6,8.1-8.1V207.8z M304.8,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
 			c4.5,0,8.1-3.6,8.1-8.1V207.8z M177.8,269.6c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1V300c0,4.5,3.6,8.1,8.1,8.1h30.4
@@ -656,10 +653,10 @@ var init_store = __esm({
     });
     F2 = A(false);
     $2 = A(0);
-    g3 = R($2);
+    g2 = R($2);
     x2 = S2($2, (i2) => (setTimeout(() => {
-      g3 = R($2);
-    }, 50), i2 - g3));
+      g2 = R($2);
+    }, 50), i2 - g2));
     y3 = A(0);
     A3 = S2(y3, (i2) => i2 < 768);
     B2 = A(false);
@@ -4325,10 +4322,10 @@ var require_tslib = __commonJS({
           if (t3[0] & 1)
             throw t3[1];
           return t3[1];
-        }, trys: [], ops: [] }, f5, y6, t3, g5;
-        return g5 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g5[Symbol.iterator] = function() {
+        }, trys: [], ops: [] }, f5, y6, t3, g4;
+        return g4 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g4[Symbol.iterator] = function() {
           return this;
-        }), g5;
+        }), g4;
         function verb(n3) {
           return function(v6) {
             return step([n3, v6]);
@@ -4337,7 +4334,7 @@ var require_tslib = __commonJS({
         function step(op2) {
           if (f5)
             throw new TypeError("Generator is already executing.");
-          while (g5 && (g5 = 0, op2[0] && (_6 = 0)), _6)
+          while (g4 && (g4 = 0, op2[0] && (_6 = 0)), _6)
             try {
               if (f5 = 1, y6 && (t3 = op2[0] & 2 ? y6["return"] : op2[0] ? y6["throw"] || ((t3 = y6["return"]) && t3.call(y6), 0) : y6.next) && !(t3 = t3.call(y6, op2[1])).done)
                 return t3;
@@ -4396,30 +4393,30 @@ var require_tslib = __commonJS({
           return { value: op2[0] ? op2[1] : void 0, done: true };
         }
       };
-      __exportStar2 = function(m4, o4) {
-        for (var p5 in m4)
+      __exportStar2 = function(m5, o4) {
+        for (var p5 in m5)
           if (p5 !== "default" && !Object.prototype.hasOwnProperty.call(o4, p5))
-            __createBinding2(o4, m4, p5);
+            __createBinding2(o4, m5, p5);
       };
-      __createBinding2 = Object.create ? function(o4, m4, k6, k22) {
+      __createBinding2 = Object.create ? function(o4, m5, k6, k22) {
         if (k22 === void 0)
           k22 = k6;
-        var desc = Object.getOwnPropertyDescriptor(m4, k6);
-        if (!desc || ("get" in desc ? !m4.__esModule : desc.writable || desc.configurable)) {
+        var desc = Object.getOwnPropertyDescriptor(m5, k6);
+        if (!desc || ("get" in desc ? !m5.__esModule : desc.writable || desc.configurable)) {
           desc = { enumerable: true, get: function() {
-            return m4[k6];
+            return m5[k6];
           } };
         }
         Object.defineProperty(o4, k22, desc);
-      } : function(o4, m4, k6, k22) {
+      } : function(o4, m5, k6, k22) {
         if (k22 === void 0)
           k22 = k6;
-        o4[k22] = m4[k6];
+        o4[k22] = m5[k6];
       };
       __values2 = function(o4) {
-        var s5 = typeof Symbol === "function" && Symbol.iterator, m4 = s5 && o4[s5], i2 = 0;
-        if (m4)
-          return m4.call(o4);
+        var s5 = typeof Symbol === "function" && Symbol.iterator, m5 = s5 && o4[s5], i2 = 0;
+        if (m5)
+          return m5.call(o4);
         if (o4 && typeof o4.length === "number")
           return {
             next: function() {
@@ -4431,10 +4428,10 @@ var require_tslib = __commonJS({
         throw new TypeError(s5 ? "Object is not iterable." : "Symbol.iterator is not defined.");
       };
       __read2 = function(o4, n3) {
-        var m4 = typeof Symbol === "function" && o4[Symbol.iterator];
-        if (!m4)
+        var m5 = typeof Symbol === "function" && o4[Symbol.iterator];
+        if (!m5)
           return o4;
-        var i2 = m4.call(o4), r5, ar2 = [], e8;
+        var i2 = m5.call(o4), r5, ar2 = [], e8;
         try {
           while ((n3 === void 0 || n3-- > 0) && !(r5 = i2.next()).done)
             ar2.push(r5.value);
@@ -4442,8 +4439,8 @@ var require_tslib = __commonJS({
           e8 = { error };
         } finally {
           try {
-            if (r5 && !r5.done && (m4 = i2["return"]))
-              m4.call(i2);
+            if (r5 && !r5.done && (m5 = i2["return"]))
+              m5.call(i2);
           } finally {
             if (e8)
               throw e8.error;
@@ -4481,12 +4478,12 @@ var require_tslib = __commonJS({
       __asyncGenerator2 = function(thisArg, _arguments, generator) {
         if (!Symbol.asyncIterator)
           throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g5 = generator.apply(thisArg, _arguments || []), i2, q7 = [];
+        var g4 = generator.apply(thisArg, _arguments || []), i2, q7 = [];
         return i2 = {}, verb("next"), verb("throw"), verb("return"), i2[Symbol.asyncIterator] = function() {
           return this;
         }, i2;
         function verb(n3) {
-          if (g5[n3])
+          if (g4[n3])
             i2[n3] = function(v6) {
               return new Promise(function(a4, b4) {
                 q7.push([n3, v6, a4, b4]) > 1 || resume(n3, v6);
@@ -4495,7 +4492,7 @@ var require_tslib = __commonJS({
         }
         function resume(n3, v6) {
           try {
-            step(g5[n3](v6));
+            step(g4[n3](v6));
           } catch (e8) {
             settle(q7[0][3], e8);
           }
@@ -4530,8 +4527,8 @@ var require_tslib = __commonJS({
       __asyncValues2 = function(o4) {
         if (!Symbol.asyncIterator)
           throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m4 = o4[Symbol.asyncIterator], i2;
-        return m4 ? m4.call(o4) : (o4 = typeof __values2 === "function" ? __values2(o4) : o4[Symbol.iterator](), i2 = {}, verb("next"), verb("throw"), verb("return"), i2[Symbol.asyncIterator] = function() {
+        var m5 = o4[Symbol.asyncIterator], i2;
+        return m5 ? m5.call(o4) : (o4 = typeof __values2 === "function" ? __values2(o4) : o4[Symbol.iterator](), i2 = {}, verb("next"), verb("throw"), verb("return"), i2[Symbol.asyncIterator] = function() {
           return this;
         }, i2);
         function verb(n3) {
@@ -7799,24 +7796,24 @@ var init_firebase = __esm({
 
 // node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js
 function p4(t3) {
-  m3.setLogLevel(t3);
+  m4.setLogLevel(t3);
 }
 function y4(t3, ...e8) {
-  if (m3.logLevel <= LogLevel.DEBUG) {
+  if (m4.logLevel <= LogLevel.DEBUG) {
     const n3 = e8.map(v2);
-    m3.debug(`Firestore (${w2}): ${t3}`, ...n3);
+    m4.debug(`Firestore (${w2}): ${t3}`, ...n3);
   }
 }
-function g4(t3, ...e8) {
-  if (m3.logLevel <= LogLevel.ERROR) {
+function g3(t3, ...e8) {
+  if (m4.logLevel <= LogLevel.ERROR) {
     const n3 = e8.map(v2);
-    m3.error(`Firestore (${w2}): ${t3}`, ...n3);
+    m4.error(`Firestore (${w2}): ${t3}`, ...n3);
   }
 }
 function _5(t3, ...e8) {
-  if (m3.logLevel <= LogLevel.WARN) {
+  if (m4.logLevel <= LogLevel.WARN) {
     const n3 = e8.map(v2);
-    m3.warn(`Firestore (${w2}): ${t3}`, ...n3);
+    m4.warn(`Firestore (${w2}): ${t3}`, ...n3);
   }
 }
 function v2(t3) {
@@ -7831,7 +7828,7 @@ function v2(t3) {
 }
 function b3(t3 = "Unexpected state") {
   const e8 = `FIRESTORE (${w2}) INTERNAL ASSERTION FAILED: ` + t3;
-  throw g4(e8), new Error(e8);
+  throw g3(e8), new Error(e8);
 }
 function E3(t3, e8) {
   t3 || b3();
@@ -7897,7 +7894,7 @@ function lt2(t3) {
 }
 function mt2(t3) {
   if (void 0 === t3)
-    return g4("RPC_ERROR", "HTTP error has no status"), R2;
+    return g3("RPC_ERROR", "HTTP error has no status"), R2;
   switch (t3) {
     case 200:
       return T3;
@@ -9229,7 +9226,7 @@ function ds(t3, e8, n3) {
   const i2 = new j2();
   return new cs(new ls(), r5, s5, (n4) => e8(new fs(t3, n4)), i2).run(), i2.promise;
 }
-var d4, w2, m3, T3, A4, R2, P4, V3, $3, N, D2, F3, x3, S4, q4, O2, k4, C4, L3, M2, U2, j2, B3, Q2, z4, W2, G3, K2, Y3, H2, J2, X2, Z2, tt2, et2, nt2, rt2, ft2, dt2, wt2, pt2, gt2, It2, Tt2, Vt2, Ft2, Qt, Wt, Gt2, Kt, Ht2, Jt, Xt, te2, ee2, ne2, re2, se2, oe2, ue2, ce, ae2, he2, le2, fe2, de2, we2, me2, ye2, Re2, Pe2, Ve2, $e2, Ne2, De2, Fe2, xe2, Se2, qe2, Oe2, ke2, Ce2, Le2, Me2, Ue2, hn, ln, pn, gn, _n2, Tn, An, Rn, Pn, Vn, $n, qn, On, Cn, Ln, Mn, Un, jn, Qn, zn, Kn, Hn, Jn, Xn, Zn, cr, fr, dr, wr, yr, gr, vr, Er, Ar, Pr, Nr, xr, Br, rs, os, us, cs, hs, ls, fs;
+var d4, w2, m4, T3, A4, R2, P4, V3, $3, N, D2, F3, x3, S4, q4, O2, k4, C4, L3, M2, U2, j2, B3, Q2, z4, W2, G3, K2, Y3, H2, J2, X2, Z2, tt2, et2, nt2, rt2, ft2, dt2, wt2, pt2, gt2, It2, Tt2, Vt2, Ft2, Qt, Wt, Gt2, Kt, Ht2, Jt, Xt, te2, ee2, ne2, re2, se2, oe2, ue2, ce, ae2, he2, le2, fe2, de2, we2, me2, ye2, Re2, Pe2, Ve2, $e2, Ne2, De2, Fe2, xe2, Se2, qe2, Oe2, ke2, Ce2, Le2, Me2, Ue2, hn, ln, pn, gn, _n2, Tn, An, Rn, Pn, Vn, $n, qn, On, Cn, Ln, Mn, Un, jn, Qn, zn, Kn, Hn, Jn, Xn, Zn, cr, fr, dr, wr, yr, gr, vr, Er, Ar, Pr, Nr, xr, Br, rs, os, us, cs, hs, ls, fs;
 var init_index_browser_esm2017 = __esm({
   "node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js"() {
     init_index_esm20174();
@@ -9252,7 +9249,7 @@ var init_index_browser_esm2017 = __esm({
     };
     d4.UNAUTHENTICATED = new d4(null), d4.GOOGLE_CREDENTIALS = new d4("google-credentials-uid"), d4.FIRST_PARTY = new d4("first-party-uid"), d4.MOCK_USER = new d4("mock-user");
     w2 = "9.15.0";
-    m3 = new Logger("@firebase/firestore");
+    m4 = new Logger("@firebase/firestore");
     T3 = "ok";
     A4 = "cancelled";
     R2 = "unknown";
@@ -11298,7 +11295,7 @@ var init_index_browser_esm2017 = __esm({
         const n3 = tt2.fromString(t3);
         E3(cn(n3));
         const r5 = new X2(n3.get(1), n3.get(3)), s5 = new rt2(n3.popFirst(5));
-        return r5.isEqual(e8) || g4(`Document ${s5} contains a document reference within a different database (${r5.projectId}/${r5.database}) which is not supported. It will be treated as a reference in the current database (${e8.projectId}/${e8.database}) instead.`), s5;
+        return r5.isEqual(e8) || g3(`Document ${s5} contains a document reference within a different database (${r5.projectId}/${r5.database}) which is not supported. It will be treated as a reference in the current database (${e8.projectId}/${e8.database}) instead.`), s5;
       }
     } {
       constructor(t3) {
@@ -11558,7 +11555,7 @@ var init_index_browser_esm2017 = __esm({
             t5.stack && (e10 = t5.stack.includes(t5.message) ? t5.stack : t5.message + "\n" + t5.stack);
             return e10;
           }(t4);
-          throw g4("INTERNAL UNHANDLED ERROR: ", e9), t4;
+          throw g3("INTERNAL UNHANDLED ERROR: ", e9), t4;
         }).then((t4) => (this.Vt = false, t4))));
         return this.It = e8, e8;
       }
@@ -11764,8 +11761,8 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
     W3 = I((e8, n3, i2, p5) => {
       let t3, o4, s5;
       s5 = x(d3, (b4) => o4 = b4);
-      let m4, u, w3, h2 = "", v6 = globalThis.magicLinkInputVisible;
-      return t3 = m4, s5(), `<signin-button class="${"group bg-emerald-500 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", u, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(O3, "IconEmail").$$render(e8, {}, {}, {})}</span>
+      let m5, u, w3, h2 = "", v6 = globalThis.magicLinkInputVisible;
+      return t3 = m5, s5(), `<signin-button class="${"group bg-emerald-500 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", u, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(O3, "IconEmail").$$render(e8, {}, {}, {})}</span>
   
   <span>Get Magic Link</span></signin-button>
 
@@ -11778,13 +11775,13 @@ ${v6 ? `<input class="${"text-center p-3 mt-3 w-full " + j(t3, true) + " focus:o
     K3 = I((e8, n3, i2, p5) => {
       let t3, o4, s5;
       s5 = x(d3, (y6) => o4 = y6);
-      let m4 = "+1", u, w3, h2, v6 = "", b4 = globalThis.phoneInputVisible;
+      let m5 = "+1", u, w3, h2, v6 = "", b4 = globalThis.phoneInputVisible;
       return t3 = u, s5(), `
 ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", w3, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(J3, "IconPhone").$$render(e8, {}, {}, {})}</span>
     
     <span>Get SMS Code</span></div>
 
-  <div class="grid grid-cols-6 w-full text-black">${b4 ? `<input class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"${M("value", m4, 0)}>
+  <div class="grid grid-cols-6 w-full text-black">${b4 ? `<input class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"${M("value", m5, 0)}>
       <input class="${"col-span-5 text-center p-3 mt-3 focus:outline-none " + j(t3, true)}" type="phone" placeholder="phone"${M("this", h2, 0)}${M("value", v6, 0)}>` : ""}</div>`}
 
 <div id="recaptcha-container"></div>
@@ -11797,8 +11794,8 @@ ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md du
 }@media(min-width: 640px){.card-styles.svelte-kjxzgo{width:500px;padding:2.5rem
     }}`, map: null };
     te3 = I((e8, n3, i2, p5) => {
-      let t3, o4, s5, m4, u, w3, h2, v6;
-      o4 = x(B2, (r5) => t3 = r5), m4 = x(F2, (r5) => s5 = r5), w3 = x(d3, (r5) => u = r5), v6 = x(q3, (r5) => h2 = r5);
+      let t3, o4, s5, m5, u, w3, h2, v6;
+      o4 = x(B2, (r5) => t3 = r5), m5 = x(F2, (r5) => s5 = r5), w3 = x(d3, (r5) => u = r5), v6 = x(q3, (r5) => h2 = r5);
       let { noTransition: b4 = false } = n3, y6, z6, k6, S6;
       function L5(r5 = "/login") {
         let a4 = 3e3, x4 = parseInt(a4 / 1e3);
@@ -11824,7 +11821,7 @@ ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md du
           }
         }
       }
-      return n3.noTransition === void 0 && i2.noTransition && b4 !== void 0 && i2.noTransition(b4), e8.css.add(N2), t3 || (clearInterval(S6), clearTimeout(k6)), t3 && s5 && B4(z6), o4(), m4(), w3(), v6(), `<main class="w-screen flex justify-center items-center">${s5 ? "" : `<login-card class="${"card-styles text-xl " + j(u ? "hover:shadow-xl " : "hover:shadow-lg", true) + " svelte-kjxzgo"}"${M("style", `background:${h2}`, 0)}>${`${G(W3, "MagicLinkSection").$$render(e8, {}, {}, {})}
+      return n3.noTransition === void 0 && i2.noTransition && b4 !== void 0 && i2.noTransition(b4), e8.css.add(N2), t3 || (clearInterval(S6), clearTimeout(k6)), t3 && s5 && B4(z6), o4(), m5(), w3(), v6(), `<main class="w-screen flex justify-center items-center">${s5 ? "" : `<login-card class="${"card-styles text-xl " + j(u ? "hover:shadow-xl " : "hover:shadow-lg", true) + " svelte-kjxzgo"}"${M("style", `background:${h2}`, 0)}>${`${G(W3, "MagicLinkSection").$$render(e8, {}, {}, {})}
 
           <p class="py-3"></p>
           ${G(K3, "PhoneAuthSection").$$render(e8, {}, {}, {})}`}
@@ -11867,14 +11864,14 @@ var layout_svelte_exports = {};
 __export(layout_svelte_exports, {
   default: () => Pe3
 });
-function ne3() {
-  let e8 = Z3, s5 = Z3, t3 = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"], m4 = ["Win32", "Win64", "Windows", "WinCE"], a4 = ["iPhone", "iPad", "iPod"], o4 = null;
-  return t3.includes(s5) ? o4 = "Mac OS" : a4.includes(s5) ? o4 = "iOS" : m4.includes(s5) ? o4 = "Windows" : /Android/.test(e8) ? o4 = "Android" : /Linux/.test(s5) && (o4 = "Linux"), o4;
+function ie2() {
+  let e8 = Z3, s5 = Z3, t3 = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"], m5 = ["Win32", "Win64", "Windows", "WinCE"], a4 = ["iPhone", "iPad", "iPod"], o4 = null;
+  return t3.includes(s5) ? o4 = "Mac OS" : a4.includes(s5) ? o4 = "iOS" : m5.includes(s5) ? o4 = "Windows" : /Android/.test(e8) ? o4 = "Android" : /Linux/.test(s5) && (o4 = "Linux"), o4;
 }
 function Y5() {
   return Z3;
 }
-function ve3(e8 = "dropzoneCSS", s5 = "/dropzone.css") {
+function we3(e8 = "dropzoneCSS", s5 = "/dropzone.css") {
   if (!document.getElementById(e8)) {
     const t3 = document.createElement("link");
     t3.id = e8, t3.href = s5, t3.rel = "stylesheet", document.head.appendChild(t3);
@@ -11883,24 +11880,24 @@ function ve3(e8 = "dropzoneCSS", s5 = "/dropzone.css") {
 function J4(e8) {
   return Object.prototype.toString.call(e8) === "[object Date]";
 }
-function U3(e8, s5, t3, m4) {
+function U3(e8, s5, t3, m5) {
   if (typeof t3 == "number" || J4(t3)) {
-    const a4 = m4 - t3, o4 = (t3 - s5) / (e8.dt || 1 / 60), u = e8.opts.stiffness * a4, b4 = e8.opts.damping * o4, n3 = (u - b4) * e8.inv_mass, f5 = (o4 + n3) * e8.dt;
-    return Math.abs(f5) < e8.opts.precision && Math.abs(a4) < e8.opts.precision ? m4 : (e8.settled = false, J4(t3) ? new Date(t3.getTime() + f5) : t3 + f5);
+    const a4 = m5 - t3, o4 = (t3 - s5) / (e8.dt || 1 / 60), u = e8.opts.stiffness * a4, b4 = e8.opts.damping * o4, n3 = (u - b4) * e8.inv_mass, f5 = (o4 + n3) * e8.dt;
+    return Math.abs(f5) < e8.opts.precision && Math.abs(a4) < e8.opts.precision ? m5 : (e8.settled = false, J4(t3) ? new Date(t3.getTime() + f5) : t3 + f5);
   } else {
     if (Array.isArray(t3))
-      return t3.map((a4, o4) => U3(e8, s5[o4], t3[o4], m4[o4]));
+      return t3.map((a4, o4) => U3(e8, s5[o4], t3[o4], m5[o4]));
     if (typeof t3 == "object") {
       const a4 = {};
       for (const o4 in t3)
-        a4[o4] = U3(e8, s5[o4], t3[o4], m4[o4]);
+        a4[o4] = U3(e8, s5[o4], t3[o4], m5[o4]);
       return a4;
     } else
       throw new Error(`Cannot spring ${typeof t3} values`);
   }
 }
 function ke3(e8, s5 = {}) {
-  const t3 = A(e8), { stiffness: m4 = 0.15, damping: a4 = 0.8, precision: o4 = 0.01 } = s5;
+  const t3 = A(e8), { stiffness: m5 = 0.15, damping: a4 = 0.8, precision: o4 = 0.01 } = s5;
   let u, b4, n3, f5 = e8, d6 = e8, $4 = 1, v6 = 0, h2 = false;
   function w3(r5, p5 = {}) {
     d6 = r5;
@@ -11917,13 +11914,13 @@ function ke3(e8, s5 = {}) {
       });
     }));
   }
-  const x4 = { set: w3, update: (r5, p5) => w3(r5(d6, e8), p5), subscribe: t3.subscribe, stiffness: m4, damping: a4, precision: o4 };
+  const x4 = { set: w3, update: (r5, p5) => w3(r5(d6, e8), p5), subscribe: t3.subscribe, stiffness: m5, damping: a4, precision: o4 };
   return x4;
 }
 async function Me3() {
   if (!globalThis.submitOnce) {
-    const { PUBLIC_UPLOAD_ENDPOINT: e8 } = await Promise.resolve().then(() => (init_public(), public_exports)), s5 = e8, t3 = new FormData(), m4 = new File(["foo"], "foo.txt", { type: "text/plain" });
-    t3.append("file", m4), fetch(s5, { method: "POST", body: t3 }), globalThis.submitOnce = true;
+    const { PUBLIC_UPLOAD_ENDPOINT: e8 } = await Promise.resolve().then(() => (init_public(), public_exports)), s5 = e8, t3 = new FormData(), m5 = new File(["foo"], "foo.txt", { type: "text/plain" });
+    t3.append("file", m5), fetch(s5, { method: "POST", body: t3 }), globalThis.submitOnce = true;
   }
 }
 function Ce3() {
@@ -11931,39 +11928,39 @@ function Ce3() {
     document.querySelector(".dropzone").dispatchEvent(new CustomEvent("click"));
   }, 25), globalThis.onceBoolean = true);
 }
-var Z3, j3, be3, q6, $e3, he3, ge3, we3, ie2, xe3, ye3, _e4, Te3, De3, Q3, X4, K4, Pe3;
+var Z3, be3, ne3, j3, $e3, q6, he3, ge3, ve3, xe3, ye3, _e4, Te3, De3, Q3, X4, K4, Pe3;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_chunks();
-    init_prod_ssr();
     init_store();
-    init_index2();
     init_LazyMount();
     init_Modal();
+    init_prod_ssr();
+    init_index2();
     Z3 = s;
-    j3 = 24;
-    be3 = I((e8, s5, t3, m4) => `<svg aria-label="Sun" id="lightIcon"${M("height", j3, 0)}${M("width", j3, 0)} viewBox="${"0 0 " + j(8 * j3, true) + " " + j(8 * j3, true)}" class="mx-3"><path fill="rgb(247,247,247)" d="M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"></path></svg>`);
-    q6 = 24;
-    $e3 = I((e8, s5, t3, m4) => `
-
-
-<svg aria-label="Moon" id="darkIcon"${M("height", q6, 0)}${M("width", q6, 0)} class="mx-3"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"></path></svg>`);
-    he3 = { code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}", map: null };
-    ge3 = I((e8, s5, t3, m4) => {
-      let a4, o4;
-      return o4 = x(d3, (u) => a4 = u), e8.css.add(he3), o4(), `
-  <div><button>${a4 ? `${G(be3, "IconSun").$$render(e8, {}, {}, {})}` : `${G($e3, "IconMoon").$$render(e8, {}, {}, {})}`}</button></div>`;
-    });
-    we3 = () => {
+    be3 = () => {
       const e8 = O("__svelte__");
       return { page: { subscribe: e8.page.subscribe }, navigating: { subscribe: e8.navigating.subscribe }, updated: e8.updated };
     };
-    ie2 = { subscribe(e8) {
-      return we3().page.subscribe(e8);
+    ne3 = { subscribe(e8) {
+      return be3().page.subscribe(e8);
     } };
-    xe3 = I((e8, s5, t3, m4) => {
+    j3 = 24;
+    $e3 = I((e8, s5, t3, m5) => `<svg aria-label="Sun" id="lightIcon"${M("height", j3, 0)}${M("width", j3, 0)} viewBox="${"0 0 " + j(8 * j3, true) + " " + j(8 * j3, true)}" class="mx-3"><path fill="rgb(247,247,247)" d="M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"></path></svg>`);
+    q6 = 24;
+    he3 = I((e8, s5, t3, m5) => `
+
+
+<svg aria-label="Moon" id="darkIcon"${M("height", q6, 0)}${M("width", q6, 0)} class="mx-3"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"></path></svg>`);
+    ge3 = { code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}", map: null };
+    ve3 = I((e8, s5, t3, m5) => {
+      let a4, o4;
+      return o4 = x(d3, (u) => a4 = u), e8.css.add(ge3), o4(), `
+  <div><button>${a4 ? `${G($e3, "IconSun").$$render(e8, {}, {}, {})}` : `${G(he3, "IconMoon").$$render(e8, {}, {}, {})}`}</button></div>`;
+    });
+    xe3 = I((e8, s5, t3, m5) => {
       let a4, o4, u, b4;
-      a4 = x(B2, (r5) => r5), o4 = x(P2, (r5) => r5), b4 = x(ie2, (r5) => u = r5);
+      a4 = x(B2, (r5) => r5), o4 = x(P2, (r5) => r5), b4 = x(ne3, (r5) => u = r5);
       let { href: n3, content: f5, routes: d6, btnColorHover: $4, icon: v6, navIconClicked: h2 = false } = s5;
       s5.href === void 0 && t3.href && n3 !== void 0 && t3.href(n3), s5.content === void 0 && t3.content && f5 !== void 0 && t3.content(f5), s5.routes === void 0 && t3.routes && d6 !== void 0 && t3.routes(d6), s5.btnColorHover === void 0 && t3.btnColorHover && $4 !== void 0 && t3.btnColorHover($4), s5.icon === void 0 && t3.icon && v6 !== void 0 && t3.icon(v6), s5.navIconClicked === void 0 && t3.navIconClicked && h2 !== void 0 && t3.navIconClicked(h2);
       let w3, x4;
@@ -11976,12 +11973,12 @@ var init_layout_svelte = __esm({
       } while (!w3);
       return a4(), o4(), b4(), x4;
     });
-    ye3 = I((e8, s5, t3, m4) => {
+    ye3 = I((e8, s5, t3, m5) => {
       let a4, o4, u, b4, n3, f5, d6, $4, v6, h2, w3, x4, r5, p5, _6, y6, T6, S6;
       u = x(d3, (l4) => o4 = l4), b4 = x(T2, (l4) => l4), f5 = x(Y2, (l4) => n3 = l4), $4 = x(F2, (l4) => d6 = l4), h2 = x($2, (l4) => v6 = l4), x4 = x(q3, (l4) => w3 = l4), y6 = x(P2, (l4) => _6 = l4), S6 = x(B2, (l4) => T6 = l4);
       let H4 = ke3(1, { stiffness: 0.1, damping: 0.25 });
       p5 = x(H4, (l4) => r5 = l4);
-      let A6 = 0, O4 = "sm:bg-red-300 rounded", M3 = "hover:bg-red-300 ", W4 = ne3() !== "iOS" && "hidden", E4 = Y5(), z6 = Z3, C5, i2;
+      let A6 = 0, O4 = "sm:bg-red-300 rounded", M3 = "hover:bg-red-300 ", W4 = ie2() !== "iOS" && "hidden", E4 = Y5(), z6 = Z3, C5, i2;
       do
         C5 = true, d6 && !Y5() && (A6 = o4 ? 0.75 : 0, H4.set(1 + 0.5 * Math.sin(v6))), d6 ? T(Y2, n3.login.name = "\u{1F680}", n3) : T(Y2, n3.login.name = "Login", n3), a4 = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${o4 ? "to-[rgb(37,35,91)]" : "to-red-200"}`, i2 = `
 <logo-and-navbar class="${"opacity-0 " + j(z6, true) + " flex items-center justify-center gap-x-32 md:justify-between w-full"}"><button class="p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent">THINKSOLVE
@@ -12006,11 +12003,11 @@ var init_layout_svelte = __esm({
         
       </li>`)}
 
-    <li class="${"py-2 translate-y-1 scale-125 md:scale-100 " + j(E4, true)}">${G(ge3, "LightDarkMode").$$render(e8, {}, {}, {})}</li></ul></logo-and-navbar>`;
+    <li class="${"py-2 translate-y-1 scale-125 md:scale-100 " + j(E4, true)}">${G(ve3, "LightDarkMode").$$render(e8, {}, {}, {})}</li></ul></logo-and-navbar>`;
       while (!C5);
       return u(), b4(), f5(), $4(), h2(), x4(), p5(), y6(), S6(), i2;
     });
-    _e4 = I((e8, s5, t3, m4) => {
+    _e4 = I((e8, s5, t3, m5) => {
       let a4, o4;
       return o4 = x(P2, (u) => a4 = u), a4 && Me3(), o4(), `
 
@@ -12018,12 +12015,12 @@ var init_layout_svelte = __esm({
 `;
     });
     Te3 = { code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}", map: null };
-    De3 = I((e8, s5, t3, m4) => {
+    De3 = I((e8, s5, t3, m5) => {
       let a4, o4, u, b4, n3;
       u = x(P2, (r5) => o4 = r5), n3 = x(d3, (r5) => b4 = r5);
       let { text: f5 = "\u{1F525}" } = s5, { textSizeTW: d6 = "text-3xl" } = s5, { dimensionsTW: $4 = "w-[65vw] sm:w-[60vw] h-[60vh]" } = s5, { brightnessTW: v6 = "brightness-100" } = s5, h2;
       async function w3(r5) {
-        console.log("drop it like its \u{1F525}"), ve3("dropzoneCSS", "/dropzone.css");
+        console.log("drop it like its \u{1F525}"), we3("dropzoneCSS", "/dropzone.css");
         const { PUBLIC_UPLOAD_ENDPOINT: p5 } = await Promise.resolve().then(() => (init_public(), public_exports)), { Dropzone: _6 } = await Promise.resolve().then(() => (init_dropzone(), dropzone_exports));
         h2 = new _6(r5, { url: p5, acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc" }), x4();
       }
@@ -12045,9 +12042,9 @@ ${G(w, "InView").$$render(e8, { single: true, onview: (r5) => w3(r5), once: true
     Q3 = 800;
     X4 = 400;
     K4 = 100;
-    Pe3 = I((e8, s5, t3, m4) => {
+    Pe3 = I((e8, s5, t3, m5) => {
       let a4, o4, u, b4, n3, f5, d6, $4, v6, h2, w3, x4, r5, p5, _6, y6, T6, S6, H4, A6;
-      o4 = x(F2, (i2) => a4 = i2), b4 = x(B2, (i2) => u = i2), f5 = x(x2, (i2) => n3 = i2), $4 = x($2, (i2) => d6 = i2), h2 = x(A3, (i2) => v6 = i2), x4 = x(ie2, (i2) => w3 = i2), p5 = x(Y2, (i2) => r5 = i2), y6 = x(d3, (i2) => _6 = i2), S6 = x(T2, (i2) => T6 = i2), A6 = x(P2, (i2) => H4 = i2);
+      o4 = x(F2, (i2) => a4 = i2), b4 = x(B2, (i2) => u = i2), f5 = x(x2, (i2) => n3 = i2), $4 = x($2, (i2) => d6 = i2), h2 = x(A3, (i2) => v6 = i2), x4 = x(ne3, (i2) => w3 = i2), p5 = x(Y2, (i2) => r5 = i2), y6 = x(d3, (i2) => _6 = i2), S6 = x(T2, (i2) => T6 = i2), A6 = x(P2, (i2) => H4 = i2);
       let O4, M3, W4 = false, E4, z6, C5;
       do
         z6 = true, v6 || (d6 < 10 && (M3 = "top-0"), d6 > 10 && d6 < Q3 && (M3 = "top-0 backdrop-blur-3xl duration-1000"), d6 > Q3 && n3 > 10 && (M3 = "-top-20 backdrop-blur-3xl duration-200"), n3 < -100 && (M3 = "top-0 backdrop-blur-3xl duration-700")), v6 && (d6 >= 0 && d6 < X4 && (M3 = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200"), d6 > X4 && n3 > 20 && (M3 = "-bottom-28 duration-400"), n3 < -30 && (M3 = "bottom-0 backdrop-blur-3xl duration-700")), u && !a4 && setTimeout(() => {
@@ -12076,7 +12073,7 @@ ${G(w, "InView").$$render(e8, { single: true, onview: (r5) => w3(r5), once: true
         <li class="p-5">thinksolve.io@gmail.com</li></ul>` })}
 
   
-  ${ne3() == "iOS" ? `${G(s2, "Modal").$$render(e8, { showModal: T6, bgTint: "text-white bg-gradient-to-br from-[#6c79f4] to-rose-400" }, {}, { default: () => `<ul class="p-10 flex flex-col gap-y-8 font-Poppins text-3xl sm:text-6xl"><li><div class="text-6xl">1.</div>
+  ${ie2() == "iOS" ? `${G(s2, "Modal").$$render(e8, { showModal: T6, bgTint: "text-white bg-gradient-to-br from-[#6c79f4] to-rose-400" }, {}, { default: () => `<ul class="p-10 flex flex-col gap-y-8 font-Poppins text-3xl sm:text-6xl"><li><div class="text-6xl">1.</div>
             Open Safari
           </li>
           <li><div class="text-6xl">2.</div>
@@ -12105,7 +12102,7 @@ ${G(w, "InView").$$render(e8, { single: true, onview: (r5) => w3(r5), once: true
 
   <div class="${"z-50 md:py-4 md:px-[7%] fixed " + j(M3, true) + " ease-in-out w-full"}">${G(ye3, "Navbar").$$render(e8, {}, {}, {})}</div>
 
-  <div class="px-[7%] pt-32 md:block">${m4.default ? m4.default({}) : ""}
+  <div class="px-[7%] pt-32 md:block">${m5.default ? m5.default({}) : ""}
 
     
 
@@ -12135,8 +12132,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-c11c743e.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-c11c743e.js", "_app/immutable/chunks/preload-helper-41c905a7.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/index-c4fdc548.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/chunks/utils-cee92a91.js", "_app/immutable/chunks/singletons-f7512b57.js", "_app/immutable/chunks/navigation-b45bea8c.js", "_app/immutable/chunks/LazyMount-5fb7f1c0.js", "_app/immutable/chunks/Modal-930f9c3e.js", "_app/immutable/modules/pages/_layout.js-9cbb603b.js", "_app/immutable/chunks/_layout-da46b06b.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-38fa0a3e.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-38fa0a3e.js", "_app/immutable/chunks/preload-helper-41c905a7.js", "_app/immutable/chunks/index-9b429969.js", "_app/immutable/chunks/index-63149bc0.js", "_app/immutable/chunks/singletons-af14374d.js", "_app/immutable/chunks/index-e3b0f912.js", "_app/immutable/chunks/store-94618c59.js", "_app/immutable/chunks/LazyMount-7ae37b42.js", "_app/immutable/chunks/Modal-aaa8b2cc.js", "_app/immutable/chunks/utils-a33472a0.js", "_app/immutable/chunks/navigation-9bf8abeb.js", "_app/immutable/modules/pages/_layout.js-9cbb603b.js", "_app/immutable/chunks/_layout-da46b06b.js"];
     stylesheets = ["_app/immutable/assets/_layout-240f4f06.css", "_app/immutable/assets/LoginCard-b78ac858.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff", "_app/immutable/assets/poppins-v20-latin-700-9338e65f.woff2", "_app/immutable/assets/poppins-v20-latin-700-da36c916.woff"];
   }
@@ -12174,8 +12171,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-7060b602.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-7060b602.js", "_app/immutable/chunks/index-72912202.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-d3a3b596.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-d3a3b596.js", "_app/immutable/chunks/index-9b429969.js"];
     stylesheets2 = [];
     fonts2 = [];
   }
@@ -25848,7 +25845,7 @@ var init_page_svx = __esm({
     init_chunks();
     init_katex();
     init_store();
-    v3 = I((s5, m4, d6, c3) => `
+    v3 = I((s5, m5, d6, c3) => `
 
 
 
@@ -25856,7 +25853,7 @@ var init_page_svx = __esm({
 
 ${s5.head += '<!-- HEAD_svelte-ztscxf_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous"><!-- HEAD_svelte-ztscxf_END -->', ""}`);
     r = 1e3;
-    z5 = I((s5, m4, d6, c3) => {
+    z5 = I((s5, m5, d6, c3) => {
       let n3, i2, o4;
       o4 = x(d3, (l4) => i2 = l4);
       let e8 = r, $4 = ["\\int_{M}d\\omega=\\int_{\\partial M}\\omega", "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}", " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ", "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}", "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"];
@@ -25865,7 +25862,7 @@ ${s5.head += '<!-- HEAD_svelte-ztscxf_START --><link rel="stylesheet" href="http
 <input type="number" min="1"${M("max", r, 0)}${M("value", e8, 0)}>
 <input type="range" min="1"${M("max", r, 0)}${M("value", e8, 0)}>
 <h2>${j(e8)} sections; ${j(e8 * $4.length)} equations below</h2>
-${D(Array(e8), (l4, g5) => `<div>${j(g5 + 1)}</div>
+${D(Array(e8), (l4, g4) => `<div>${j(g4 + 1)}</div>
     ${D($4, (_6) => `<p class="p-1 text-indigo-700" d${M("k", _6, 0)}></p>`)}`)}</article>`;
     });
   }
@@ -25888,8 +25885,8 @@ var init__3 = __esm({
     init_page();
     index3 = 7;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file3 = "_app/immutable/components/pages/katex/_page.svx-73e86ee5.js";
-    imports3 = ["_app/immutable/components/pages/katex/_page.svx-73e86ee5.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/modules/pages/katex/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-4039aba4.js"];
+    file3 = "_app/immutable/components/pages/katex/_page.svx-69befb69.js";
+    imports3 = ["_app/immutable/components/pages/katex/_page.svx-69befb69.js", "_app/immutable/chunks/index-9b429969.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-94618c59.js", "_app/immutable/chunks/index-e3b0f912.js", "_app/immutable/modules/pages/katex/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-4039aba4.js"];
     stylesheets3 = [];
     fonts3 = [];
   }
@@ -25997,13 +25994,13 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <div class="p-4"><input type="number" min="1"${M("value", s5, 0)}>
     <input type="range" min="1"${M("value", s5, 0)}></div>
 <h1>${j(s5)} lines of markdown immediately below</h1>
-${D(Array(s5), (h2, g5) => `<p>${j(g5 + 1)}</p>
+${D(Array(s5), (h2, g4) => `<p>${j(g4 + 1)}</p>
 <div class="math math-display"><!-- HTML_TAG_START --><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><!-- HTML_TAG_END --></div>`)}
 
 <ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
 <input type="number" min="1"${M("max", d5, 0)}${M("value", t3, 0)}>
 <input type="range" min="1"${M("max", d5, 0)}${M("value", t3, 0)}>
-${D(Array(t3), (h2, g5) => `<p>${j(g5 + 1)}</p>
+${D(Array(t3), (h2, g4) => `<p>${j(g4 + 1)}</p>
         <p class="p-1 text-indigo-700" d${M("m", "\\cancelto{0}{\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}}", 0)}></p>
         <p class="p-1 text-green-700" d${M("k", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
     ${D(b4, (y6, z6) => `<div><p class="p-1 text-indigo-700" d${M("k", y6, 0)}></p>
@@ -26032,8 +26029,8 @@ var init__4 = __esm({
     init_page2();
     index4 = 9;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file4 = "_app/immutable/components/pages/math/_page.svx-68c1a319.js";
-    imports4 = ["_app/immutable/components/pages/math/_page.svx-68c1a319.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/chunks/index-c4fdc548.js", "_app/immutable/chunks/Kajax-40bc98d8.js", "_app/immutable/modules/pages/math/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-bfda8c82.js"];
+    file4 = "_app/immutable/components/pages/math/_page.svx-4a9a591e.js";
+    imports4 = ["_app/immutable/components/pages/math/_page.svx-4a9a591e.js", "_app/immutable/chunks/index-9b429969.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-94618c59.js", "_app/immutable/chunks/index-e3b0f912.js", "_app/immutable/chunks/index-63149bc0.js", "_app/immutable/chunks/Kajax-0cfcbd1e.js", "_app/immutable/modules/pages/math/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-bfda8c82.js"];
     stylesheets4 = [];
     fonts4 = [];
   }
@@ -26089,7 +26086,7 @@ var init_page_svx3 = __esm({
 <input type="number" min="1"${M("max", r3, 0)}${M("value", e8, 0)}>
 <input type="range" min="1"${M("max", r3, 0)}${M("value", e8, 0)}>
 <h2>${j(e8)} sections; ${j(e8 * p5.length)} equations below</h2>
-${D(Array(e8), (c3, g5) => `<div>${j(g5 + 1)}</div>
+${D(Array(e8), (c3, g4) => `<div>${j(g4 + 1)}</div>
     ${D(p5, (h2) => `<p class="p-1 text-red-400" d${M("m", h2, 0)}></p>`)}`)}</article>`;
     });
   }
@@ -26112,8 +26109,8 @@ var init__5 = __esm({
     init_page3();
     index5 = 10;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file5 = "_app/immutable/components/pages/mathjax/_page.svx-c2fed9c2.js";
-    imports5 = ["_app/immutable/components/pages/mathjax/_page.svx-c2fed9c2.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/modules/pages/mathjax/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-621564aa.js"];
+    file5 = "_app/immutable/components/pages/mathjax/_page.svx-0be5f06e.js";
+    imports5 = ["_app/immutable/components/pages/mathjax/_page.svx-0be5f06e.js", "_app/immutable/chunks/index-9b429969.js", "_app/immutable/chunks/store-94618c59.js", "_app/immutable/chunks/index-e3b0f912.js", "_app/immutable/modules/pages/mathjax/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-621564aa.js"];
     stylesheets5 = [];
     fonts5 = [];
   }
@@ -26143,7 +26140,7 @@ var init_page_svelte = __esm({
     init_Kajax();
     init_store();
     y5 = { code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}", map: null };
-    v5 = I((s5, m4, i2, r5) => (s5.css.add(y5), `${G(r2, "MathRenderer").$$render(s5, {}, {}, {})}
+    v5 = I((s5, m5, i2, r5) => (s5.css.add(y5), `${G(r2, "MathRenderer").$$render(s5, {}, {}, {})}
 
 <p class="text-3xl flex justify-center" d${M("m", "\\cancelto{0}{x}", 0)}></p>
 <p class="text-3xl flex justify-center" d${M("k", "\\cancel{x}", 0)}></p>
@@ -26212,7 +26209,7 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <li>C. 4.0 \u03A9</li>
 <li>D. 8.0 \u03A9</li></ul>
   <img style="margin: 0 auto; display:flex;width: 65vw;min-width: 280px;max-width: 600px;" src="https://raw.githubusercontent.com/brightowltutoring/web/main/circuits-1.png"></div>`));
-    f4 = I((s5, m4, i2, r5) => {
+    f4 = I((s5, m5, i2, r5) => {
       let a4, n3, t3;
       return t3 = x(d3, (c3) => n3 = c3), a4 = n3 ? "prose-invert" : "", t3(), `<div class="${"prose lg:prose-lg " + j(a4, true)}">${G(v5, "E").$$render(s5, {}, {}, {})}</div>`;
     });
@@ -26236,8 +26233,8 @@ var init__6 = __esm({
     init_page4();
     index6 = 11;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file6 = "_app/immutable/components/pages/physics/_page.svelte-cb0bc643.js";
-    imports6 = ["_app/immutable/components/pages/physics/_page.svelte-cb0bc643.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/Kajax-40bc98d8.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/modules/pages/physics/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-37f6be6a.js"];
+    file6 = "_app/immutable/components/pages/physics/_page.svelte-075333a7.js";
+    imports6 = ["_app/immutable/components/pages/physics/_page.svelte-075333a7.js", "_app/immutable/chunks/index-9b429969.js", "_app/immutable/chunks/Kajax-0cfcbd1e.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-94618c59.js", "_app/immutable/chunks/index-e3b0f912.js", "_app/immutable/modules/pages/physics/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-37f6be6a.js"];
     stylesheets6 = ["_app/immutable/assets/_page-fcf51fa8.css"];
     fonts6 = [];
   }
@@ -26948,15 +26945,15 @@ async function Ne({ event: e8, fetched: t3, node: r5, parent: n3, server_data_pr
     return c3?.data ?? null;
   const f5 = await r5.universal.load.call(null, { url: e8.url, params: e8.params, data: c3?.data ?? null, route: e8.route, fetch: async (k6, u) => {
     const _6 = k6 instanceof Request && k6.body ? k6.clone().body : null, l4 = await e8.fetch(k6, u), d6 = new URL(k6 instanceof Request ? k6.url : k6, e8.url), p5 = d6.origin === e8.url.origin;
-    let m4;
+    let m5;
     if (p5)
-      o4.prerendering && (m4 = { response: l4, body: null }, o4.prerendering.dependencies.set(d6.pathname, m4));
+      o4.prerendering && (m5 = { response: l4, body: null }, o4.prerendering.dependencies.set(d6.pathname, m5));
     else if ((k6 instanceof Request ? k6.mode : u?.mode ?? "cors") !== "no-cors") {
-      const g5 = l4.headers.get("access-control-allow-origin");
-      if (!g5 || g5 !== e8.url.origin && g5 !== "*")
-        throw new Error(`CORS error: ${g5 ? "Incorrect" : "No"} 'Access-Control-Allow-Origin' header is present on the requested resource`);
+      const g4 = l4.headers.get("access-control-allow-origin");
+      if (!g4 || g4 !== e8.url.origin && g4 !== "*")
+        throw new Error(`CORS error: ${g4 ? "Incorrect" : "No"} 'Access-Control-Allow-Origin' header is present on the requested resource`);
     }
-    const E4 = new Proxy(l4, { get(h2, g5, R4) {
+    const E4 = new Proxy(l4, { get(h2, g4, R4) {
       async function b4() {
         const j4 = await h2.text();
         if (!j4 || typeof j4 == "string") {
@@ -26965,17 +26962,17 @@ async function Ne({ event: e8, fetched: t3, node: r5, parent: n3, server_data_pr
             throw new Error(`response.status is not a number. value: "${h2.status}" type: ${typeof h2.status}`);
           t3.push({ url: p5 ? d6.href.slice(e8.url.origin.length) : d6.href, method: e8.request.method, request_body: k6 instanceof Request && _6 ? await yt(_6) : u?.body, response_body: j4, response: h2 });
         }
-        return m4 && (m4.body = j4), j4;
+        return m5 && (m5.body = j4), j4;
       }
-      return g5 === "arrayBuffer" ? async () => {
+      return g4 === "arrayBuffer" ? async () => {
         const j4 = await h2.arrayBuffer();
-        return m4 && (m4.body = new Uint8Array(j4)), j4;
-      } : g5 === "text" ? b4 : g5 === "json" ? async () => JSON.parse(await b4()) : Reflect.get(h2, g5, h2);
+        return m5 && (m5.body = new Uint8Array(j4)), j4;
+      } : g4 === "text" ? b4 : g4 === "json" ? async () => JSON.parse(await b4()) : Reflect.get(h2, g4, h2);
     } });
     if (i2) {
       const h2 = l4.headers.get;
-      l4.headers.get = (g5) => {
-        const R4 = g5.toLowerCase(), b4 = h2.call(l4.headers, R4);
+      l4.headers.get = (g4) => {
+        const R4 = g4.toLowerCase(), b4 = h2.call(l4.headers, R4);
         if (b4 && !R4.startsWith("x-sveltekit-") && !a4.filterSerializedResponseHeaders(R4, b4))
           throw new Error(`Failed to get response header "${R4}" \u2014 it must be included by the \`filterSerializedResponseHeaders\` option: https://kit.svelte.dev/docs/hooks#server-hooks-handle (at ${e8.route})`);
         return b4;
@@ -27046,8 +27043,8 @@ function pe(e8) {
   for (let s5 = 0; s5 < r5.length; s5 += 16) {
     const o4 = r5.subarray(s5, s5 + 16);
     let a4, i2, c3, f5 = t3[0], y6 = t3[1], k6 = t3[2], u = t3[3], _6 = t3[4], l4 = t3[5], d6 = t3[6], p5 = t3[7];
-    for (let m4 = 0; m4 < 64; m4++)
-      m4 < 16 ? a4 = o4[m4] : (i2 = o4[m4 + 1 & 15], c3 = o4[m4 + 14 & 15], a4 = o4[m4 & 15] = (i2 >>> 7 ^ i2 >>> 18 ^ i2 >>> 3 ^ i2 << 25 ^ i2 << 14) + (c3 >>> 17 ^ c3 >>> 19 ^ c3 >>> 10 ^ c3 << 15 ^ c3 << 13) + o4[m4 & 15] + o4[m4 + 9 & 15] | 0), a4 = a4 + p5 + (_6 >>> 6 ^ _6 >>> 11 ^ _6 >>> 25 ^ _6 << 26 ^ _6 << 21 ^ _6 << 7) + (d6 ^ _6 & (l4 ^ d6)) + X[m4], p5 = d6, d6 = l4, l4 = _6, _6 = u + a4 | 0, u = k6, k6 = y6, y6 = f5, f5 = a4 + (y6 & k6 ^ u & (y6 ^ k6)) + (y6 >>> 2 ^ y6 >>> 13 ^ y6 >>> 22 ^ y6 << 30 ^ y6 << 19 ^ y6 << 10) | 0;
+    for (let m5 = 0; m5 < 64; m5++)
+      m5 < 16 ? a4 = o4[m5] : (i2 = o4[m5 + 1 & 15], c3 = o4[m5 + 14 & 15], a4 = o4[m5 & 15] = (i2 >>> 7 ^ i2 >>> 18 ^ i2 >>> 3 ^ i2 << 25 ^ i2 << 14) + (c3 >>> 17 ^ c3 >>> 19 ^ c3 >>> 10 ^ c3 << 15 ^ c3 << 13) + o4[m5 & 15] + o4[m5 + 9 & 15] | 0), a4 = a4 + p5 + (_6 >>> 6 ^ _6 >>> 11 ^ _6 >>> 25 ^ _6 << 26 ^ _6 << 21 ^ _6 << 7) + (d6 ^ _6 & (l4 ^ d6)) + X[m5], p5 = d6, d6 = l4, l4 = _6, _6 = u + a4 | 0, u = k6, k6 = y6, y6 = f5, f5 = a4 + (y6 & k6 ^ u & (y6 ^ k6)) + (y6 >>> 2 ^ y6 >>> 13 ^ y6 >>> 22 ^ y6 << 30 ^ y6 << 19 ^ y6 << 10) | 0;
     t3[0] = t3[0] + f5 | 0, t3[1] = t3[1] + y6 | 0, t3[2] = t3[2] + k6 | 0, t3[3] = t3[3] + u | 0, t3[4] = t3[4] + _6 | 0, t3[5] = t3[5] + l4 | 0, t3[6] = t3[6] + d6 | 0, t3[7] = t3[7] + p5 | 0;
   }
   const n3 = new Uint8Array(t3.buffer);
@@ -27191,19 +27188,19 @@ async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config
   }
   const { entry: y6 } = r5.manifest._, k6 = new Set(y6.stylesheets), u = new Set(y6.imports), _6 = new Set(r5.manifest._.entry.fonts), l4 = /* @__PURE__ */ new Set(), d6 = /* @__PURE__ */ new Map();
   let p5;
-  const m4 = f5?.type === "success" || f5?.type === "failure" ? f5.data ?? null : null;
+  const m5 = f5?.type === "success" || f5?.type === "failure" ? f5.data ?? null : null;
   if (s5.ssr) {
-    const w3 = { stores: { page: A(null), navigating: A(null), updated: Pt }, components: await Promise.all(e8.map(({ node: x4 }) => x4.component())), form: m4 };
+    const w3 = { stores: { page: A(null), navigating: A(null), updated: Pt }, components: await Promise.all(e8.map(({ node: x4 }) => x4.component())), form: m5 };
     let $4 = {};
     for (let x4 = 0; x4 < e8.length; x4 += 1)
       $4 = { ...$4, ...e8[x4].data }, w3[`data_${x4}`] = $4;
-    w3.page = { error: a4, params: i2.params, route: i2.route, status: o4, url: i2.url, data: $4, form: m4 }, p5 = r5.root.render(w3);
+    w3.page = { error: a4, params: i2.params, route: i2.route, status: o4, url: i2.url, data: $4, form: m5 }, p5 = r5.root.render(w3);
     for (const { node: x4 } of e8)
       x4.imports && x4.imports.forEach((v6) => u.add(v6)), x4.stylesheets && x4.stylesheets.forEach((v6) => k6.add(v6)), x4.fonts && x4.fonts.forEach((v6) => _6.add(v6)), x4.inline_styles && Object.entries(await x4.inline_styles()).forEach(([v6, N3]) => d6.set(v6, N3));
   } else
     p5 = { head: "", html: "", css: { code: "", map: null } };
   let E4 = "", h2 = p5.html;
-  const g5 = new Ot(r5.csp, { dev: r5.dev, prerender: !!n3.prerendering }), R4 = V(h2);
+  const g4 = new Ot(r5.csp, { dev: r5.dev, prerender: !!n3.prerendering }), R4 = V(h2);
   let b4;
   if (r5.paths.assets)
     b4 = r5.paths.assets;
@@ -27226,17 +27223,17 @@ async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config
     const $4 = w3;
     throw new Error(Se(i2, $4));
   }
-  if (m4 && (O4.form = _t(m4, i2.route.id)), d6.size > 0) {
+  if (m5 && (O4.form = _t(m5, i2.route.id)), d6.size > 0) {
     const w3 = Array.from(d6.values()).join(`
 `), $4 = [];
-    r5.dev && $4.push(" data-sveltekit"), g5.style_needs_nonce && $4.push(` nonce="${g5.nonce}"`), g5.add_style(w3), E4 += `
+    r5.dev && $4.push(" data-sveltekit"), g4.style_needs_nonce && $4.push(` nonce="${g4.nonce}"`), g4.add_style(w3), E4 += `
 	<style${$4.join("")}>${w3}</style>`;
   }
   for (const w3 of k6) {
     const $4 = j4(w3);
     if (c3.preload({ type: "css", path: $4 })) {
       const x4 = [];
-      if (g5.style_needs_nonce && x4.push(`nonce="${g5.nonce}"`), d6.has(w3))
+      if (g4.style_needs_nonce && x4.push(`nonce="${g4.nonce}"`), d6.has(w3))
         x4.push("disabled", 'media="(max-width: 0)"');
       else {
         const v6 = ['rel="preload"', 'as="style"'].concat(x4);
@@ -27277,7 +27274,7 @@ async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config
 		<link rel="modulepreload" href="${N3}">`));
     }
     const x4 = ['type="module"', `data-sveltekit-hydrate="${R4}"`];
-    g5.add_script($4), g5.script_needs_nonce && x4.push(`nonce="${g5.nonce}"`), h2 += `
+    g4.add_script($4), g4.script_needs_nonce && x4.push(`nonce="${g4.nonce}"`), h2 += `
 		<script ${x4.join(" ")}>${$4}<\/script>`;
   }
   if (s5.ssr && s5.csr && (h2 += `
@@ -27290,20 +27287,20 @@ async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config
 				});
 			}
 		`;
-    g5.add_script($4), E4 += `
-		<script${g5.script_needs_nonce ? ` nonce="${g5.nonce}"` : ""}>${$4}<\/script>`;
+    g4.add_script($4), E4 += `
+		<script${g4.script_needs_nonce ? ` nonce="${g4.nonce}"` : ""}>${$4}<\/script>`;
   }
   if (n3.prerendering) {
-    const w3 = [], $4 = g5.csp_provider.get_meta();
+    const w3 = [], $4 = g4.csp_provider.get_meta();
     $4 && w3.push($4), n3.prerendering.cache && w3.push(`<meta http-equiv="cache-control" content="${n3.prerendering.cache}">`), w3.length > 0 && (E4 = w3.join(`
 `) + E4);
   }
   E4 += p5.head;
-  const T6 = await c3.transformPageChunk({ html: r5.app_template({ head: E4, body: h2, assets: b4, nonce: g5.nonce }), done: true }) || "", H4 = new Headers({ "x-sveltekit-page": "true", "content-type": "text/html", etag: `"${V(T6)}"` });
+  const T6 = await c3.transformPageChunk({ html: r5.app_template({ head: E4, body: h2, assets: b4, nonce: g4.nonce }), done: true }) || "", H4 = new Headers({ "x-sveltekit-page": "true", "content-type": "text/html", etag: `"${V(T6)}"` });
   if (!n3.prerendering) {
-    const w3 = g5.csp_provider.get_header();
+    const w3 = g4.csp_provider.get_header();
     w3 && H4.set("content-security-policy", w3);
-    const $4 = g5.report_only_provider.get_header();
+    const $4 = g4.report_only_provider.get_header();
     $4 && H4.set("content-security-policy-report-only", $4), l4.size && H4.set("link", Array.from(l4).join(", "));
   }
   return new Response(T6, { status: o4, headers: H4 });
@@ -27353,7 +27350,7 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
     if (P(a4, "ssr") === false)
       return await I2({ branch: [], fetched: _6, page_config: { ssr: false, csr: P(a4, "csr") ?? true }, status: c3, error: null, event: e8, options: n3, state: s5, resolve_opts: o4 });
     let l4 = [], d6 = null;
-    const p5 = a4.map((h2, g5) => {
+    const p5 = a4.map((h2, g4) => {
       if (d6)
         throw d6;
       return Promise.resolve().then(async () => {
@@ -27362,7 +27359,7 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
             throw f5.error;
           return await oe({ event: e8, options: n3, state: s5, node: h2, parent: async () => {
             const R4 = {};
-            for (let b4 = 0; b4 < g5; b4 += 1) {
+            for (let b4 = 0; b4 < g4; b4 += 1) {
               const j4 = await p5[b4];
               j4 && Object.assign(R4, await j4.data);
             }
@@ -27372,17 +27369,17 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
           throw d6 = R4, d6;
         }
       });
-    }), m4 = P(a4, "csr") ?? true, E4 = a4.map((h2, g5) => {
+    }), m5 = P(a4, "csr") ?? true, E4 = a4.map((h2, g4) => {
       if (d6)
         throw d6;
       return Promise.resolve().then(async () => {
         try {
           return await Ne({ event: e8, fetched: _6, node: h2, parent: async () => {
             const R4 = {};
-            for (let b4 = 0; b4 < g5; b4 += 1)
+            for (let b4 = 0; b4 < g4; b4 += 1)
               Object.assign(R4, await E4[b4]);
             return R4;
-          }, resolve_opts: o4, server_data_promise: p5[g5], state: s5, csr: m4 });
+          }, resolve_opts: o4, server_data_promise: p5[g4], state: s5, csr: m5 });
         } catch (R4) {
           throw d6 = R4, d6;
         }
@@ -27395,11 +27392,11 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
       h2.catch(() => {
       });
     for (let h2 = 0; h2 < a4.length; h2 += 1) {
-      const g5 = a4[h2];
-      if (g5)
+      const g4 = a4[h2];
+      if (g4)
         try {
           const R4 = await p5[h2], b4 = await E4[h2];
-          l4.push({ node: g5, server_data: R4, data: b4 });
+          l4.push({ node: g4, server_data: R4, data: b4 });
         } catch (R4) {
           const b4 = R4;
           if (b4 instanceof U) {
@@ -27424,7 +27421,7 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
         l4.push(null);
     }
     if (s5.prerendering && y6) {
-      const h2 = `{"type":"data","nodes":[${l4.map((g5) => Oe(g5?.server_data)).join(",")}]}`;
+      const h2 = `{"type":"data","nodes":[${l4.map((g4) => Oe(g4?.server_data)).join(",")}]}`;
       s5.prerendering.dependencies.set(k6, { response: new Response(h2), body: h2 });
     }
     return await I2({ event: e8, options: n3, state: s5, resolve_opts: o4, page_config: { csr: P(a4, "csr") ?? true, ssr: true }, status: c3, error: null, branch: fe(l4), action_result: f5, fetched: _6 });
@@ -27480,24 +27477,24 @@ async function Ct(e8, t3, r5, n3, s5, o4) {
       try {
         if (c3)
           return { type: "skip" };
-        const m4 = d6 == null ? d6 : await r5.manifest._.nodes[d6]();
-        return oe({ event: y6, options: r5, state: n3, node: m4, parent: async () => {
+        const m5 = d6 == null ? d6 : await r5.manifest._.nodes[d6]();
+        return oe({ event: y6, options: r5, state: n3, node: m5, parent: async () => {
           const E4 = {};
           for (let h2 = 0; h2 < p5; h2 += 1) {
-            const g5 = await k6[h2]();
-            g5 && Object.assign(E4, g5.data);
+            const g4 = await k6[h2]();
+            g4 && Object.assign(E4, g4.data);
           }
           return E4;
         } });
-      } catch (m4) {
-        throw c3 = true, m4;
+      } catch (m5) {
+        throw c3 = true, m5;
       }
     })), u = k6.map(async (d6, p5) => i2[p5] ? d6() : { type: "skip" });
     let _6 = u.length;
-    const l4 = await Promise.all(u.map((d6, p5) => d6.catch(async (m4) => {
-      if (m4 instanceof U)
-        throw m4;
-      return _6 = Math.min(_6, p5 + 1), { type: "error", error: await z3(e8, r5, m4), status: m4 instanceof C2 ? m4.status : void 0 };
+    const l4 = await Promise.all(u.map((d6, p5) => d6.catch(async (m5) => {
+      if (m5 instanceof U)
+        throw m5;
+      return _6 = Math.min(_6, p5 + 1), { type: "error", error: await z3(e8, r5, m5), status: m5 instanceof C2 ? m5.status : void 0 };
     })));
     try {
       const p5 = `{"type":"data","nodes":[${l4.slice(0, _6).map(Oe).join(",")}]}`;
@@ -27531,9 +27528,9 @@ function Ut(e8, t3, r5, n3) {
     const l4 = c3[u];
     if (l4 && ye(t3.hostname, l4.options.domain) && J(t3.pathname, l4.options.path))
       return l4.value;
-    const d6 = _6?.decode || decodeURIComponent, m4 = (0, import_cookie.parse)(s5, { decode: d6 })[u];
-    if (!r5 || m4)
-      return m4;
+    const d6 = _6?.decode || decodeURIComponent, m5 = (0, import_cookie.parse)(s5, { decode: d6 })[u];
+    if (!r5 || m5)
+      return m5;
     const E4 = /* @__PURE__ */ new Set([...S3[u] ?? []]);
     l4 && E4.add(l4.options.path ?? i2), E4.size > 0 && console.warn(`Cookie with name '${u}' was not found at path '${t3.pathname}', but a cookie with that name exists at these paths: '${[...E4].join("', '")}'. Did you mean to set its 'path' to '/' instead?`);
   }, set(u, _6, l4 = {}) {
@@ -27559,8 +27556,8 @@ function Ut(e8, t3, r5, n3) {
       const p5 = c3[d6];
       if (!ye(u.hostname, p5.options.domain) || !J(u.pathname, p5.options.path))
         continue;
-      const m4 = p5.options.encode || encodeURIComponent;
-      l4[p5.name] = m4(p5.value);
+      const m5 = p5.options.encode || encodeURIComponent;
+      l4[p5.name] = m5(p5.value);
     }
     if (_6) {
       const d6 = (0, import_cookie.parse)(_6, { decode: (p5) => p5 });
@@ -27604,11 +27601,11 @@ function Nt({ event: e8, options: t3, state: r5, get_cookie_header: n3 }) {
         return c3 === "no-cors" && (b4 = new Response("", { status: b4.status, statusText: b4.statusText, headers: b4.headers })), b4;
       }
       let l4;
-      const d6 = t3.paths.assets || t3.paths.base, p5 = decodeURIComponent(_6.pathname), m4 = (p5.startsWith(d6) ? p5.slice(d6.length) : p5).slice(1), E4 = `${m4}/index.html`, h2 = t3.manifest.assets.has(m4), g5 = t3.manifest.assets.has(E4);
-      if (h2 || g5) {
-        const b4 = h2 ? m4 : E4;
+      const d6 = t3.paths.assets || t3.paths.base, p5 = decodeURIComponent(_6.pathname), m5 = (p5.startsWith(d6) ? p5.slice(d6.length) : p5).slice(1), E4 = `${m5}/index.html`, h2 = t3.manifest.assets.has(m5), g4 = t3.manifest.assets.has(E4);
+      if (h2 || g4) {
+        const b4 = h2 ? m5 : E4;
         if (t3.read) {
-          const j4 = h2 ? t3.manifest.mimeTypes[m4.slice(m4.lastIndexOf("."))] : "text/html";
+          const j4 = h2 ? t3.manifest.mimeTypes[m5.slice(m5.lastIndexOf("."))] : "text/html";
           return new Response(t3.read(b4), { headers: j4 ? { "content-type": j4 } : {} });
         }
         return await fetch(u);
@@ -27680,9 +27677,9 @@ async function Fe(e8, t3, r5) {
       const p5 = d6.pattern.exec(s5);
       if (!p5)
         continue;
-      const m4 = qt(p5, d6.params, l4);
-      if (m4) {
-        o4 = d6, a4 = nt(m4);
+      const m5 = qt(p5, d6.params, l4);
+      if (m5) {
+        o4 = d6, a4 = nt(m5);
         break;
       }
     }
@@ -27692,19 +27689,19 @@ async function Fe(e8, t3, r5) {
     throw new Error("@sveltejs/adapter-cloudflare does not specify getClientAddress. Please raise an issue");
   }), locals: {}, params: a4, platform: r5.platform, request: e8, route: { id: o4?.id ?? null }, setHeaders: (l4) => {
     for (const d6 in l4) {
-      const p5 = d6.toLowerCase(), m4 = l4[d6];
+      const p5 = d6.toLowerCase(), m5 = l4[d6];
       if (p5 === "set-cookie")
         throw new Error("Use `event.cookies.set(name, value, options)` instead of `event.setHeaders` to set cookies");
       if (p5 in y6)
         throw new Error(`"${d6}" header is already set`);
-      y6[p5] = m4, r5.prerendering && p5 === "cache-control" && (r5.prerendering.cache = m4);
+      y6[p5] = m5, r5.prerendering && p5 === "cache-control" && (r5.prerendering.cache = m5);
     }
   }, url: n3, isDataRequest: i2 };
   let u = { transformPageChunk: we, filterSerializedResponseHeaders: be, preload: ke };
   try {
     if (o4 && !i2) {
       if (o4.page) {
-        const h2 = await Promise.all([...o4.page.layouts.map((g5) => g5 == null ? g5 : t3.manifest._.nodes[g5]()), t3.manifest._.nodes[o4.page.leaf]()]);
+        const h2 = await Promise.all([...o4.page.layouts.map((g4) => g4 == null ? g4 : t3.manifest._.nodes[g4]()), t3.manifest._.nodes[o4.page.leaf]()]);
         f5 = P(h2, "trailingSlash");
       } else
         o4.endpoint && (f5 = (await o4.endpoint()).trailingSlash);
@@ -27714,32 +27711,32 @@ async function Fe(e8, t3, r5) {
     }
     const { cookies: l4, new_cookies: d6, get_cookie_header: p5 } = Ut(e8, n3, t3.dev, f5 ?? "never");
     k6.cookies = l4, k6.fetch = Nt({ event: k6, options: t3, state: r5, get_cookie_header: p5 }), r5.prerendering && !r5.prerendering.fallback && Re(n3);
-    const m4 = await t3.hooks.handle({ event: k6, resolve: (E4, h2) => _6(E4, h2).then((g5) => {
+    const m5 = await t3.hooks.handle({ event: k6, resolve: (E4, h2) => _6(E4, h2).then((g4) => {
       for (const R4 in y6) {
         const b4 = y6[R4];
-        g5.headers.set(R4, b4);
+        g4.headers.set(R4, b4);
       }
-      return zt(g5.headers, Object.values(d6)), r5.prerendering && E4.route.id !== null && g5.headers.set("x-sveltekit-routeid", encodeURI(E4.route.id)), g5;
+      return zt(g4.headers, Object.values(d6)), r5.prerendering && E4.route.id !== null && g4.headers.set("x-sveltekit-routeid", encodeURI(E4.route.id)), g4;
     }) });
-    if (m4.status === 200 && m4.headers.has("etag")) {
+    if (m5.status === 200 && m5.headers.has("etag")) {
       let E4 = e8.headers.get("if-none-match");
       E4?.startsWith('W/"') && (E4 = E4.substring(2));
-      const h2 = m4.headers.get("etag");
+      const h2 = m5.headers.get("etag");
       if (E4 === h2) {
-        const g5 = new Headers({ etag: h2 });
+        const g4 = new Headers({ etag: h2 });
         for (const R4 of ["cache-control", "content-location", "date", "expires", "vary", "set-cookie"]) {
-          const b4 = m4.headers.get(R4);
-          b4 && g5.set(R4, b4);
+          const b4 = m5.headers.get(R4);
+          b4 && g4.set(R4, b4);
         }
-        return new Response(void 0, { status: 304, headers: g5 });
+        return new Response(void 0, { status: 304, headers: g4 });
       }
     }
-    if (i2 && m4.status >= 300 && m4.status <= 308) {
-      const E4 = m4.headers.get("location");
+    if (i2 && m5.status >= 300 && m5.status <= 308) {
+      const E4 = m5.headers.get("location");
       if (E4)
-        return K(new U(m4.status, E4));
+        return K(new U(m5.status, E4));
     }
-    return m4;
+    return m5;
   } catch (l4) {
     return l4 instanceof U ? i2 ? K(l4) : B(l4.status, l4.location) : await ue(k6, t3, l4);
   }
@@ -27855,7 +27852,7 @@ var Ye = null;
 Ve({ base: "", assets: "" });
 var Vt = class {
   constructor(t3) {
-    this.options = { csp: { mode: "auto", directives: { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf: { check_origin: true }, dev: false, embedded: false, handle_error: (r5, n3) => this.options.hooks.handleError({ error: r5, event: n3 }) ?? { message: n3.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: Q, assets: Me }, public_env: {}, read: Ye, root: Ze, service_worker: true, app_template: Ht, app_template_contains_nonce: false, error_template: It, version: "1671647289051" };
+    this.options = { csp: { mode: "auto", directives: { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf: { check_origin: true }, dev: false, embedded: false, handle_error: (r5, n3) => this.options.hooks.handleError({ error: r5, event: n3 }) ?? { message: n3.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: Q, assets: Me }, public_env: {}, read: Ye, root: Ze, service_worker: true, app_template: Ht, app_template_contains_nonce: false, error_template: It, version: "1671648450469" };
   }
   async init({ env: t3 }) {
     const r5 = Object.entries(t3);
@@ -27880,7 +27877,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "facepalm.gif", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "safari-share-icon.png", "star.webp", "service-worker.js"]),
   mimeTypes: { ".css": "text/css", ".gif": "image/gif", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-4a524add.js", "imports": ["_app/immutable/start-4a524add.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/singletons-f7512b57.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/chunks/preload-helper-41c905a7.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-beac3cf3.js", "imports": ["_app/immutable/start-beac3cf3.js", "_app/immutable/chunks/index-9b429969.js", "_app/immutable/chunks/singletons-af14374d.js", "_app/immutable/chunks/index-e3b0f912.js", "_app/immutable/chunks/preload-helper-41c905a7.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
