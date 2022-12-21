@@ -1,6 +1,13 @@
 <script>
+  // $page.route.id.slice(1)
+  import { page } from "$app/stores";
+  import { routes } from "$lib/store"; // used in svelte:tag
   import PlansSection from "$lib/Plans/PlansSection.svelte";
 </script>
+
+<svelte:head>
+  {@html $routes[$page.route.id.slice(1)].meta}
+</svelte:head>
 
 <PlansSection />
 <!-- <PlansSection on:boop={(e) => console.log("😮", e.detail.message)} /> -->

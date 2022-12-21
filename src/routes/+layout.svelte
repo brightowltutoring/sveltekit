@@ -97,9 +97,9 @@
     {@const slashlessRoute = $page.route.id.slice(1)}
 
     {#if slashlessRoute == ""}
-      <title>{$routes.home.title}</title>
+      <!-- <title>{$routes.home.title}</title>
 
-      {@html $routes.home.meta}
+      {@html $routes.home.meta} -->
       <!-- meta tag now included in store object -->
       <!-- for some reason without svelte's '@html', the meta tags break upon reloading certain routes (like plans) -->
     {:else}

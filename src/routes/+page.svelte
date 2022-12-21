@@ -1,4 +1,15 @@
 <script>
+  // import { page } from "$app/stores";
+  // console.log("$page.data.post.title", $page.data.post.title);
+
+  // export let data;
+  // const { post } = data;
+  // console.log("post.title", post.title);
+
+  import { routes } from "$lib/store"; // used in svelte:tag
+
+  // TODO: above code is experimental; deciding on how to implement head tags
+
   // import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
   // import Reviews from "$lib/Reviews/Reviews.svelte";
   // import PlansSection from "$lib/Plans/PlansSection.svelte";
@@ -20,6 +31,10 @@
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
 </script>
+
+<svelte:head>
+  {@html $routes.home.meta}
+</svelte:head>
 
 <video
   loading="lazy"
