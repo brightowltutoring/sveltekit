@@ -21,7 +21,8 @@ export async function redirectOldUrls({ event, resolve }) {
 }
 
 // This hook function — with 'transformPage' updated to 'transformPageChunk' — as provided by mihaon on 'https://github.com/sveltejs/svelte/issues/7444' fixes duplicate meta tags when starting with an SSR loaded page; I first surmised this could be a SSR/SSG-related issue  when starting with non-SSR route '/classroom' and no meta tag duplication persisted upon route changes
-export async function metaTagFixWhenSSR({ event, resolve }) {
+export const handle = async ({ event, resolve }) => {
+  // export async function metaTagFixWhenSSR({ event, resolve }) {
   function htmlTransformer({ html }) {
     return html
       .replace(/<link\s+rel="canonical"[^>]*>/, "")
@@ -34,7 +35,7 @@ export async function metaTagFixWhenSSR({ event, resolve }) {
   }
 
   return await resolve(event, { transformPageChunk: htmlTransformer });
-}
+};
 
-import { sequence } from "@sveltejs/kit/hooks";
-export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
+// import { sequence } from "@sveltejs/kit/hooks";
+// export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
