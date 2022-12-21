@@ -32,6 +32,7 @@ export async function redirectOldUrls({ event, resolve }) {
 // }
 
 // As suggested by mihaon on 'https://github.com/sveltejs/svelte/issues/7444', this is a dirty fix to remove duplicate meta tags  ... which I also discovered was an issue with SSR pages
+// Update: this function doesnt work even with updated package.json; conduitry mentioned that in svelte 3.51^ the issue was resolved
 export async function metaTagFixWhenSSR({ event, resolve }) {
   let response = await resolve(event, {
     transformPage: ({ html }) => {
@@ -50,4 +51,5 @@ export async function metaTagFixWhenSSR({ event, resolve }) {
 }
 
 import { sequence } from "@sveltejs/kit/hooks";
-export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
+// export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
+export const handle = sequence(redirectOldUrls);
