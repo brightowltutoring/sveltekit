@@ -96,8 +96,6 @@
 <svelte:head>
   <link rel="manifest" href="/manifest.json" />
 
-  <link rel="manifest" href="/manifest.json" />
-
   {#if $page.status == 200}
     {@const slashlessRoute = $page.route.id.slice(1)}
 
