@@ -53,66 +53,66 @@ var __privateSet = (obj, member, value, setter) => {
 // .svelte-kit/output/server/chunks/index.js
 function p() {
 }
-function b(t3) {
-  return t3();
+function b(t4) {
+  return t4();
 }
 function g() {
   return /* @__PURE__ */ Object.create(null);
 }
-function y(t3) {
-  t3.forEach(b);
+function y(t4) {
+  t4.forEach(b);
 }
-function S(t3) {
-  return typeof t3 == "function";
+function S(t4) {
+  return typeof t4 == "function";
 }
-function k(t3, n3) {
-  return t3 != t3 ? n3 == n3 : t3 !== n3 || t3 && typeof t3 == "object" || typeof t3 == "function";
+function k(t4, n3) {
+  return t4 != t4 ? n3 == n3 : t4 !== n3 || t4 && typeof t4 == "object" || typeof t4 == "function";
 }
-function x(t3, ...n3) {
-  if (t3 == null)
+function x(t4, ...n3) {
+  if (t4 == null)
     return p;
-  const e7 = t3.subscribe(...n3);
+  const e7 = t4.subscribe(...n3);
   return e7.unsubscribe ? () => e7.unsubscribe() : e7;
 }
-function R(t3) {
+function R(t4) {
   let n3;
-  return x(t3, (e7) => n3 = e7)(), n3;
+  return x(t4, (e7) => n3 = e7)(), n3;
 }
-function T(t3, n3, e7) {
-  return t3.set(e7), n3;
+function T(t4, n3, e7) {
+  return t4.set(e7), n3;
 }
-function $(t3) {
+function $(t4) {
   i.forEach((n3) => {
-    n3.c(t3) || (i.delete(n3), n3.f());
+    n3.c(t4) || (i.delete(n3), n3.f());
   }), i.size !== 0 && m($);
 }
-function z(t3) {
+function z(t4) {
   let n3;
   return i.size === 0 && m($), { promise: new Promise((e7) => {
-    i.add(n3 = { c: t3, f: e7 });
+    i.add(n3 = { c: t4, f: e7 });
   }), abort() {
     i.delete(n3);
   } };
 }
-function d(t3) {
-  a = t3;
+function d(t4) {
+  a = t4;
 }
 function l() {
   if (!a)
     throw new Error("Function called outside component initialization");
   return a;
 }
-function A(t3) {
-  l().$$.on_destroy.push(t3);
+function A(t4) {
+  l().$$.on_destroy.push(t4);
 }
-function C(t3, n3) {
-  return l().$$.context.set(t3, n3), n3;
+function C(t4, n3) {
+  return l().$$.context.set(t4, n3), n3;
 }
-function O(t3) {
-  return l().$$.context.get(t3);
+function O(t4) {
+  return l().$$.context.get(t4);
 }
-function j(t3, n3 = false) {
-  const e7 = String(t3), o5 = n3 ? E : v;
+function j(t4, n3 = false) {
+  const e7 = String(t4), o5 = n3 ? E : v;
   o5.lastIndex = 0;
   let u = "", r6 = 0;
   for (; o5.test(e7); ) {
@@ -121,22 +121,22 @@ function j(t3, n3 = false) {
   }
   return u + e7.substring(r6);
 }
-function D(t3, n3) {
+function D(t4, n3) {
   let e7 = "";
-  for (let o5 = 0; o5 < t3.length; o5 += 1)
-    e7 += n3(t3[o5], o5);
+  for (let o5 = 0; o5 < t4.length; o5 += 1)
+    e7 += n3(t4[o5], o5);
   return e7;
 }
-function G(t3, n3) {
-  if (!t3 || !t3.$$render)
+function G(t4, n3) {
+  if (!t4 || !t4.$$render)
     throw n3 === "svelte:component" && (n3 += " this={...}"), new Error(`<${n3}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${n3}>.`);
-  return t3;
+  return t4;
 }
-function I(t3) {
+function I(t4) {
   function n3(e7, o5, u, r6, c4) {
     const s6 = a, h2 = { on_destroy: f, context: new Map(c4 || (s6 ? s6.$$.context : [])), on_mount: [], before_update: [], after_update: [], callbacks: g() };
     d({ $$: h2 });
-    const w5 = t3(e7, o5, u, r6);
+    const w5 = t4(e7, o5, u, r6);
     return d(s6), w5;
   }
   return { render: (e7 = {}, { $$slots: o5 = {}, context: u = /* @__PURE__ */ new Map() } = {}) => {
@@ -146,18 +146,18 @@ function I(t3) {
 `), map: null }, head: r6.title + r6.head };
   }, $$render: n3 };
 }
-function M(t3, n3, e7) {
+function M(t4, n3, e7) {
   if (n3 == null || e7 && !n3)
     return "";
   const o5 = e7 && n3 === true ? "" : `="${j(n3, true)}"`;
-  return ` ${t3}${o5}`;
+  return ` ${t4}${o5}`;
 }
 var _, q, m, i, a, E, v, F, f;
 var init_chunks = __esm({
   ".svelte-kit/output/server/chunks/index.js"() {
     _ = typeof window < "u";
     q = _ ? () => window.performance.now() : () => Date.now();
-    m = _ ? (t3) => requestAnimationFrame(t3) : p;
+    m = _ ? (t4) => requestAnimationFrame(t4) : p;
     i = /* @__PURE__ */ new Set();
     Promise.resolve();
     E = /[&"]/g;
@@ -172,11 +172,11 @@ function z2(n3, i4) {
 }
 function A2(n3, i4 = p) {
   let u;
-  const t3 = /* @__PURE__ */ new Set();
+  const t4 = /* @__PURE__ */ new Set();
   function a4(e7) {
     if (k(n3, e7) && (n3 = e7, u)) {
       const r6 = !o.length;
-      for (const s6 of t3)
+      for (const s6 of t4)
         s6[1](), o.push(s6, n3);
       if (r6) {
         for (let s6 = 0; s6 < o.length; s6 += 2)
@@ -190,14 +190,14 @@ function A2(n3, i4 = p) {
   }
   function f7(e7, r6 = p) {
     const s6 = [e7, r6];
-    return t3.add(s6), t3.size === 1 && (u = i4(a4) || p), e7(n3), () => {
-      t3.delete(s6), t3.size === 0 && (u(), u = null);
+    return t4.add(s6), t4.size === 1 && (u = i4(a4) || p), e7(n3), () => {
+      t4.delete(s6), t4.size === 0 && (u(), u = null);
     };
   }
   return { set: a4, update: l3, subscribe: f7 };
 }
 function S2(n3, i4, u) {
-  const t3 = !Array.isArray(n3), a4 = t3 ? [n3] : n3, l3 = i4.length < 2;
+  const t4 = !Array.isArray(n3), a4 = t4 ? [n3] : n3, l3 = i4.length < 2;
   return z2(u, (f7) => {
     let e7 = false;
     const r6 = [];
@@ -206,7 +206,7 @@ function S2(n3, i4, u) {
       if (s6)
         return;
       d5();
-      const c4 = i4(t3 ? r6[0] : r6, f7);
+      const c4 = i4(t4 ? r6[0] : r6, f7);
       l3 ? f7(c4) : d5 = S(c4) ? c4 : p;
     }, _6 = a4.map((c4, p7) => x(c4, (h2) => {
       r6[p7] = h2, s6 &= ~(1 << p7), e7 && g5();
@@ -558,26 +558,26 @@ var init_layout = __esm({
 });
 
 // .svelte-kit/output/server/chunks/store.js
-var p2, V2, C2, w, k2, H2, M2, b2, F3, f2, g2, x2, L2, A4, B2, P, T2, q2, d2, _2, D2, Y2;
+var p2, V2, C2, w, k2, H2, M2, b2, F3, f2, g2, x2, L2, A4, B2, P, T2, q2, d2, y2, _2, Y2;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
     init_index2();
     init_chunks();
     p2 = 20;
     V2 = I((i4, l3, c4, $3) => {
-      let s6, a4, o5, n3;
-      n3 = x(d2, (v7) => o5 = v7);
+      let o5, s6, a4, n3;
+      n3 = x(d2, (v7) => a4 = v7);
       let { navIconClicked: e7 } = l3;
-      return l3.navIconClicked === void 0 && c4.navIconClicked && e7 !== void 0 && c4.navIconClicked(e7), s6 = e7 && "fill-rose-300", a4 = o5 ? "white" : "black", n3(), `<svg class="scale-[1.5] origin-top bg-"${M("width", p2, 0)}${M("height", p2, 0)} viewBox="${"0 0 " + j(p2, true) + " " + j(p2, true)}"><path${M("class", s6, 0)}${M("fill", a4, 0)} d="M14 10L8 5v3H1v4h7v3l6-5zm3 7H9v2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2H9v2h8v14z"></path></svg>`;
+      return l3.navIconClicked === void 0 && c4.navIconClicked && e7 !== void 0 && c4.navIconClicked(e7), o5 = e7 && "fill-rose-300", s6 = a4 ? "white" : "black", n3(), `<svg class="scale-[1.5] origin-top bg-"${M("width", p2, 0)}${M("height", p2, 0)} viewBox="${"0 0 " + j(p2, true) + " " + j(p2, true)}"><path${M("class", o5, 0)}${M("fill", s6, 0)} d="M14 10L8 5v3H1v4h7v3l6-5zm3 7H9v2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2H9v2h8v14z"></path></svg>`;
     });
     C2 = 489.2;
     w = I((i4, l3, c4, $3) => {
-      let s6, a4, o5, n3;
-      n3 = x(d2, (v7) => o5 = v7);
+      let o5, s6, a4, n3;
+      n3 = x(d2, (v7) => a4 = v7);
       let { navIconClicked: e7 } = l3;
-      return l3.navIconClicked === void 0 && c4.navIconClicked && e7 !== void 0 && c4.navIconClicked(e7), s6 = e7 && "fill-rose-600", a4 = o5 ? "white" : "black", n3(), `
+      return l3.navIconClicked === void 0 && c4.navIconClicked && e7 !== void 0 && c4.navIconClicked(e7), o5 = e7 && "fill-rose-600", s6 = a4 ? "white" : "black", n3(), `
 
-<svg${M("height", C2 / 15, 0)}${M("width", C2 / 15, 0)} viewBox="${"0 0 " + j(C2, true) + " " + j(C2, true)}"><path${M("class", s6, 0)}${M("fill", a4, 0)} d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
+<svg${M("height", C2 / 15, 0)}${M("width", C2 / 15, 0)} viewBox="${"0 0 " + j(C2, true) + " " + j(C2, true)}"><path${M("class", o5, 0)}${M("fill", s6, 0)} d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
 			c4.5,0,8.1,3.6,8.1,8.1V238.1z M241.3,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
 			c4.5,0,8.1-3.6,8.1-8.1V207.8z M304.8,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
 			c4.5,0,8.1-3.6,8.1-8.1V207.8z M177.8,269.6c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1V300c0,4.5,3.6,8.1,8.1,8.1h30.4
@@ -598,12 +598,12 @@ var init_store = __esm({
     });
     k2 = 204.376;
     H2 = I((i4, l3, c4, $3) => {
-      let s6, a4, o5, n3;
-      n3 = x(d2, (v7) => o5 = v7);
+      let o5, s6, a4, n3;
+      n3 = x(d2, (v7) => a4 = v7);
       let { navIconClicked: e7 } = l3;
-      return l3.navIconClicked === void 0 && c4.navIconClicked && e7 !== void 0 && c4.navIconClicked(e7), s6 = e7 && "fill-rose-300", a4 = o5 ? "white" : "black", n3(), `
+      return l3.navIconClicked === void 0 && c4.navIconClicked && e7 !== void 0 && c4.navIconClicked(e7), o5 = e7 && "fill-rose-300", s6 = a4 ? "white" : "black", n3(), `
 
-<svg${M("height", k2 / 7, 0)}${M("width", k2 / 7, 0)} viewBox="${"0 0 " + j(k2, true) + " " + j(k2, true)}"><path${M("class", s6, 0)}${M("fill", a4, 0)} d="M171.247,204.376c2.484,0,4.5-2.015,4.5-4.5V61.35h-51.744c-7.502,0-13.605-6.107-13.605-13.614V0H33.13
+<svg${M("height", k2 / 7, 0)}${M("width", k2 / 7, 0)} viewBox="${"0 0 " + j(k2, true) + " " + j(k2, true)}"><path${M("class", o5, 0)}${M("fill", s6, 0)} d="M171.247,204.376c2.484,0,4.5-2.015,4.5-4.5V61.35h-51.744c-7.502,0-13.605-6.107-13.605-13.614V0H33.13
 	c-2.485,0-4.5,2.015-4.5,4.5v195.376c0,2.485,2.015,4.5,4.5,4.5H171.247z M74.999,94.627h79.5v10h-79.5V94.627z M74.999,119.627
 	h79.5v10h-79.5V119.627z M74.999,144.626h79.5v10h-79.5V144.626z M57.999,92.627c3.865,0,7,3.134,7,7s-3.135,7-7,7s-7-3.134-7-7
 	S54.134,92.627,57.999,92.627z M57.999,117.627c3.865,0,7,3.134,7,7s-3.135,7-7,7s-7-3.134-7-7S54.134,117.627,57.999,117.627z
@@ -612,10 +612,10 @@ var init_store = __esm({
     });
     M2 = 31.886;
     b2 = I((i4, l3, c4, $3) => {
-      let s6, a4, o5, n3;
-      n3 = x(d2, (v7) => o5 = v7);
+      let o5, s6, a4, n3;
+      n3 = x(d2, (v7) => a4 = v7);
       let { navIconClicked: e7 } = l3;
-      return l3.navIconClicked === void 0 && c4.navIconClicked && e7 !== void 0 && c4.navIconClicked(e7), s6 = e7 && "fill-rose-600", a4 = o5 ? "white" : "black", n3(), `<svg${M("width", M2, 0)}${M("height", M2, 0)} viewBox="${"0 0 " + j(M2, true) + " " + j(M2, true)}"><g><path${M("class", s6, 0)}${M("fill", a4, 0)} d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
+      return l3.navIconClicked === void 0 && c4.navIconClicked && e7 !== void 0 && c4.navIconClicked(e7), o5 = e7 && "fill-rose-600", s6 = a4 ? "white" : "black", n3(), `<svg${M("width", M2, 0)}${M("height", M2, 0)} viewBox="${"0 0 " + j(M2, true) + " " + j(M2, true)}"><g><path${M("class", o5, 0)}${M("fill", s6, 0)} d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
 		H19.021z M16.693,19.229c-0.5,0-0.905-0.492-0.905-1.098s0.405-1.098,0.905-1.098c0.5,0,0.905,0.49,0.905,1.098
 		C17.598,18.736,17.193,19.229,16.693,19.229z"></path><g><path d="M19.852,5.718c-1.7,0-3.083,1.384-3.083,3.084c0,1.7,1.383,3.083,3.083,3.083c1.701,0,3.084-1.383,3.084-3.083
 			C22.936,7.102,21.553,5.718,19.852,5.718z M19.852,11.606c-1.546,0-2.805-1.258-2.805-2.805c0-1.547,1.258-2.806,2.805-2.806
@@ -634,13 +634,13 @@ var init_store = __esm({
     P = A2(false);
     T2 = A2(false);
     q2 = A2({ home: { name: "Home", href: "/", title: "Thinksolve.io \u{1F4AB}", isCurrent: false, meta: `<meta name="description" content="Math and Physics Tutoring for the Stone Age."/>
-    <meta og:url="https://thinksolve.io/" />
-    ` }, login: { name: "Login", href: "/login", title: "Login \u{1F680}", isCurrent: false, icon: V2, meta: '<meta og:url="https://thinksolve.io/login" />' }, plans: { name: "Plans", href: "/plans", title: "Plans \u{1F4A1}", isCurrent: false, icon: w, meta: '<meta og:url="https://thinksolve.io/plans" />' }, homework: { name: "Homework", href: "/homework", title: "Homework \u{1F4DA}", isCurrent: false, icon: H2, meta: '<meta og:url="https://thinksolve.io/homework" />' }, classroom: { name: "Classroom", href: "/classroom", title: "Classroom \u{1F34E}", isCurrent: false, icon: b2, meta: '<meta og:url="https://thinksolve.io/classroom" />' }, faq: { name: "FAQ", href: "/faq", title: "FAQ \u{1F64B}\u200D\u2640\uFE0F", isCurrent: false, meta: '<meta og:url="https://thinksolve.io/faq" />' }, stripe: { name: "Stripe", href: "/stripe", title: "Stripe \u{1F4B0}", isCurrent: false }, physics: { name: "physics", href: "/physics", title: "physics \u{1F680}", isCurrent: false }, math: { name: "math", href: "/math", title: "math", isCurrent: false } });
+    <meta property="og:url" content="https://thinksolve.io/">
+    ` }, login: { name: "Login", href: "/login", title: "Login \u{1F680}", isCurrent: false, icon: V2, meta: '<meta property="og:url" content="https://thinksolve.io/login">' }, plans: { name: "Plans", href: "/plans", title: "Plans \u{1F4A1}", isCurrent: false, icon: w, meta: '<meta property="og:url" content="https://thinksolve.io/plans">' }, homework: { name: "Homework", href: "/homework", title: "Homework \u{1F4DA}", isCurrent: false, icon: H2, meta: '<meta property="og:url" content="https://thinksolve.io/homework">' }, classroom: { name: "Classroom", href: "/classroom", title: "Classroom \u{1F34E}", isCurrent: false, icon: b2, meta: '<meta property="og:url" content="https://thinksolve.io/classroom">' }, faq: { name: "FAQ", href: "/faq", title: "FAQ \u{1F64B}\u200D\u2640\uFE0F", isCurrent: false, meta: '<meta og:url="https://thinksolve.io/faq" />' }, stripe: { name: "Stripe", href: "/stripe", title: "Stripe \u{1F4B0}", isCurrent: false }, physics: { name: "physics", href: "/physics", title: "physics \u{1F680}", isCurrent: false }, math: { name: "math", href: "/math", title: "math", isCurrent: false } });
     d2 = A2(false);
-    _2 = "rgb(242,247,250)";
-    D2 = "rgb(38, 35, 51)";
+    y2 = "rgb(242,247,250)";
+    _2 = "rgb(38, 35, 51)";
     Y2 = S2(d2, (i4, l3) => {
-      l3(i4 ? D2 : _2);
+      l3(i4 ? _2 : y2);
     });
   }
 });
@@ -650,18 +650,18 @@ var w2, _3;
 var init_LazyMount = __esm({
   ".svelte-kit/output/server/chunks/LazyMount.js"() {
     init_chunks();
-    w2 = I((v7, e7, t3, i4) => {
+    w2 = I((v7, e7, t4, i4) => {
       let { vanilla: o5 } = e7, { once: l3 } = e7, { onview: a4 = () => console.log("i \u2764\uFE0F slots") } = e7, u, { single: n3 } = e7, { root: d5 = null } = e7, { threshold: r6 = 0 } = e7, { margin: c4 = "0px" } = e7;
-      return e7.vanilla === void 0 && t3.vanilla && o5 !== void 0 && t3.vanilla(o5), e7.once === void 0 && t3.once && l3 !== void 0 && t3.once(l3), e7.onview === void 0 && t3.onview && a4 !== void 0 && t3.onview(a4), e7.single === void 0 && t3.single && n3 !== void 0 && t3.single(n3), e7.root === void 0 && t3.root && d5 !== void 0 && t3.root(d5), e7.threshold === void 0 && t3.threshold && r6 !== void 0 && t3.threshold(r6), e7.margin === void 0 && t3.margin && c4 !== void 0 && t3.margin(c4), `
+      return e7.vanilla === void 0 && t4.vanilla && o5 !== void 0 && t4.vanilla(o5), e7.once === void 0 && t4.once && l3 !== void 0 && t4.once(l3), e7.onview === void 0 && t4.onview && a4 !== void 0 && t4.onview(a4), e7.single === void 0 && t4.single && n3 !== void 0 && t4.single(n3), e7.root === void 0 && t4.root && d5 !== void 0 && t4.root(d5), e7.threshold === void 0 && t4.threshold && r6 !== void 0 && t4.threshold(r6), e7.margin === void 0 && t4.margin && c4 !== void 0 && t4.margin(c4), `
 
 
 ${o5 ? "" : `<div${M("this", u, 0)}>${i4.default ? i4.default({}) : ""}</div>`}`;
     });
-    _3 = I((v7, e7, t3, i4) => {
+    _3 = I((v7, e7, t4, i4) => {
       let { Import: o5 = async () => {
       } } = e7, l3;
       const a4 = async () => l3 = await o5();
-      return e7.Import === void 0 && t3.Import && o5 !== void 0 && t3.Import(o5), `
+      return e7.Import === void 0 && t4.Import && o5 !== void 0 && t4.Import(o5), `
 
 
 ${G(w2, "InView").$$render(v7, { onview: a4 }, {}, { default: () => `${l3 ? `${G(l3.default, "Component.default").$$render(v7, Object.assign(e7), {}, {})}` : ""}` })}
@@ -677,9 +677,9 @@ var s2;
 var init_Modal = __esm({
   ".svelte-kit/output/server/chunks/Modal.js"() {
     init_chunks();
-    s2 = I((u, t3, e7, a4) => {
-      let { showModal: o5 = false } = t3, { bgTint: l3 = "bg-[rgba(0,0,0,0.4)]" } = t3, { body: d5 } = t3, f7;
-      return t3.showModal === void 0 && e7.showModal && o5 !== void 0 && e7.showModal(o5), t3.bgTint === void 0 && e7.bgTint && l3 !== void 0 && e7.bgTint(l3), t3.body === void 0 && e7.body && d5 !== void 0 && e7.body(d5), `
+    s2 = I((u, t4, e7, a4) => {
+      let { showModal: o5 = false } = t4, { bgTint: l3 = "bg-[rgba(0,0,0,0.4)]" } = t4, { body: d5 } = t4, f7;
+      return t4.showModal === void 0 && e7.showModal && o5 !== void 0 && e7.showModal(o5), t4.bgTint === void 0 && e7.bgTint && l3 !== void 0 && e7.bgTint(l3), t4.body === void 0 && e7.body && d5 !== void 0 && e7.body(d5), `
 
 
 <button class="${"z-50 fixed top-0 left-0 w-full h-full flex justify-center items-center " + j(o5 ? `${l3} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}"${M("this", f7, 0)}>${a4.default ? a4.default({}) : ""}</button>`;
@@ -4216,26 +4216,26 @@ var require_tslib = __commonJS({
         }
         d5.prototype = b6 === null ? Object.create(b6) : (__.prototype = b6.prototype, new __());
       };
-      __assign2 = Object.assign || function(t3) {
+      __assign2 = Object.assign || function(t4) {
         for (var s6, i4 = 1, n3 = arguments.length; i4 < n3; i4++) {
           s6 = arguments[i4];
           for (var p7 in s6)
             if (Object.prototype.hasOwnProperty.call(s6, p7))
-              t3[p7] = s6[p7];
+              t4[p7] = s6[p7];
         }
-        return t3;
+        return t4;
       };
       __rest2 = function(s6, e7) {
-        var t3 = {};
+        var t4 = {};
         for (var p7 in s6)
           if (Object.prototype.hasOwnProperty.call(s6, p7) && e7.indexOf(p7) < 0)
-            t3[p7] = s6[p7];
+            t4[p7] = s6[p7];
         if (s6 != null && typeof Object.getOwnPropertySymbols === "function")
           for (var i4 = 0, p7 = Object.getOwnPropertySymbols(s6); i4 < p7.length; i4++) {
             if (e7.indexOf(p7[i4]) < 0 && Object.prototype.propertyIsEnumerable.call(s6, p7[i4]))
-              t3[p7[i4]] = s6[p7[i4]];
+              t4[p7[i4]] = s6[p7[i4]];
           }
-        return t3;
+        return t4;
       };
       __decorate2 = function(decorators, target, key, desc) {
         var c4 = arguments.length, r6 = c4 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d5;
@@ -4285,10 +4285,10 @@ var require_tslib = __commonJS({
       };
       __generator2 = function(thisArg, body) {
         var _6 = { label: 0, sent: function() {
-          if (t3[0] & 1)
-            throw t3[1];
-          return t3[1];
-        }, trys: [], ops: [] }, f7, y5, t3, g5;
+          if (t4[0] & 1)
+            throw t4[1];
+          return t4[1];
+        }, trys: [], ops: [] }, f7, y6, t4, g5;
         return g5 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g5[Symbol.iterator] = function() {
           return this;
         }), g5;
@@ -4302,21 +4302,21 @@ var require_tslib = __commonJS({
             throw new TypeError("Generator is already executing.");
           while (g5 && (g5 = 0, op2[0] && (_6 = 0)), _6)
             try {
-              if (f7 = 1, y5 && (t3 = op2[0] & 2 ? y5["return"] : op2[0] ? y5["throw"] || ((t3 = y5["return"]) && t3.call(y5), 0) : y5.next) && !(t3 = t3.call(y5, op2[1])).done)
-                return t3;
-              if (y5 = 0, t3)
-                op2 = [op2[0] & 2, t3.value];
+              if (f7 = 1, y6 && (t4 = op2[0] & 2 ? y6["return"] : op2[0] ? y6["throw"] || ((t4 = y6["return"]) && t4.call(y6), 0) : y6.next) && !(t4 = t4.call(y6, op2[1])).done)
+                return t4;
+              if (y6 = 0, t4)
+                op2 = [op2[0] & 2, t4.value];
               switch (op2[0]) {
                 case 0:
                 case 1:
-                  t3 = op2;
+                  t4 = op2;
                   break;
                 case 4:
                   _6.label++;
                   return { value: op2[1], done: false };
                 case 5:
                   _6.label++;
-                  y5 = op2[1];
+                  y6 = op2[1];
                   op2 = [0];
                   continue;
                 case 7:
@@ -4324,25 +4324,25 @@ var require_tslib = __commonJS({
                   _6.trys.pop();
                   continue;
                 default:
-                  if (!(t3 = _6.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op2[0] === 6 || op2[0] === 2)) {
+                  if (!(t4 = _6.trys, t4 = t4.length > 0 && t4[t4.length - 1]) && (op2[0] === 6 || op2[0] === 2)) {
                     _6 = 0;
                     continue;
                   }
-                  if (op2[0] === 3 && (!t3 || op2[1] > t3[0] && op2[1] < t3[3])) {
+                  if (op2[0] === 3 && (!t4 || op2[1] > t4[0] && op2[1] < t4[3])) {
                     _6.label = op2[1];
                     break;
                   }
-                  if (op2[0] === 6 && _6.label < t3[1]) {
-                    _6.label = t3[1];
-                    t3 = op2;
+                  if (op2[0] === 6 && _6.label < t4[1]) {
+                    _6.label = t4[1];
+                    t4 = op2;
                     break;
                   }
-                  if (t3 && _6.label < t3[2]) {
-                    _6.label = t3[2];
+                  if (t4 && _6.label < t4[2]) {
+                    _6.label = t4[2];
                     _6.ops.push(op2);
                     break;
                   }
-                  if (t3[2])
+                  if (t4[2])
                     _6.ops.pop();
                   _6.trys.pop();
                   continue;
@@ -4350,9 +4350,9 @@ var require_tslib = __commonJS({
               op2 = body.call(thisArg, _6);
             } catch (e7) {
               op2 = [6, e7];
-              y5 = 0;
+              y6 = 0;
             } finally {
-              f7 = t3 = 0;
+              f7 = t4 = 0;
             }
           if (op2[0] & 5)
             throw op2[1];
@@ -7767,107 +7767,107 @@ var init_firebase = __esm({
 });
 
 // node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js
-function p4(t3) {
-  m2.setLogLevel(t3);
+function p4(t4) {
+  m2.setLogLevel(t4);
 }
-function y2(t3, ...e7) {
+function y3(t4, ...e7) {
   if (m2.logLevel <= LogLevel.DEBUG) {
     const n3 = e7.map(v2);
-    m2.debug(`Firestore (${w3}): ${t3}`, ...n3);
+    m2.debug(`Firestore (${w3}): ${t4}`, ...n3);
   }
 }
-function _5(t3, ...e7) {
+function _5(t4, ...e7) {
   if (m2.logLevel <= LogLevel.ERROR) {
     const n3 = e7.map(v2);
-    m2.error(`Firestore (${w3}): ${t3}`, ...n3);
+    m2.error(`Firestore (${w3}): ${t4}`, ...n3);
   }
 }
-function g3(t3, ...e7) {
+function g3(t4, ...e7) {
   if (m2.logLevel <= LogLevel.WARN) {
     const n3 = e7.map(v2);
-    m2.warn(`Firestore (${w3}): ${t3}`, ...n3);
+    m2.warn(`Firestore (${w3}): ${t4}`, ...n3);
   }
 }
-function v2(t3) {
-  if ("string" == typeof t3)
-    return t3;
+function v2(t4) {
+  if ("string" == typeof t4)
+    return t4;
   try {
-    return e7 = t3, JSON.stringify(e7);
+    return e7 = t4, JSON.stringify(e7);
   } catch (e8) {
-    return t3;
+    return t4;
   }
   var e7;
 }
-function b3(t3 = "Unexpected state") {
-  const e7 = `FIRESTORE (${w3}) INTERNAL ASSERTION FAILED: ` + t3;
+function b3(t4 = "Unexpected state") {
+  const e7 = `FIRESTORE (${w3}) INTERNAL ASSERTION FAILED: ` + t4;
   throw _5(e7), new Error(e7);
 }
-function E3(t3, e7) {
-  t3 || b3();
+function E3(t4, e7) {
+  t4 || b3();
 }
-function I4(t3, e7) {
-  return t3;
+function I4(t4, e7) {
+  return t4;
 }
-function st2(t3, e7, n3) {
+function st2(t4, e7, n3) {
   if (!n3)
-    throw new U2(P3, `Function ${t3}() cannot be called with an empty ${e7}.`);
+    throw new U2(P3, `Function ${t4}() cannot be called with an empty ${e7}.`);
 }
-function it2(t3) {
-  if (!rt2.isDocumentKey(t3))
-    throw new U2(P3, `Invalid document reference. Document references must have an even number of segments, but ${t3} has ${t3.length}.`);
+function it2(t4) {
+  if (!rt2.isDocumentKey(t4))
+    throw new U2(P3, `Invalid document reference. Document references must have an even number of segments, but ${t4} has ${t4.length}.`);
 }
-function ot2(t3) {
-  if (rt2.isDocumentKey(t3))
-    throw new U2(P3, `Invalid collection reference. Collection references must have an odd number of segments, but ${t3} has ${t3.length}.`);
+function ot2(t4) {
+  if (rt2.isDocumentKey(t4))
+    throw new U2(P3, `Invalid collection reference. Collection references must have an odd number of segments, but ${t4} has ${t4.length}.`);
 }
-function ut2(t3) {
-  if (void 0 === t3)
+function ut2(t4) {
+  if (void 0 === t4)
     return "undefined";
-  if (null === t3)
+  if (null === t4)
     return "null";
-  if ("string" == typeof t3)
-    return t3.length > 20 && (t3 = `${t3.substring(0, 20)}...`), JSON.stringify(t3);
-  if ("number" == typeof t3 || "boolean" == typeof t3)
-    return "" + t3;
-  if ("object" == typeof t3) {
-    if (t3 instanceof Array)
+  if ("string" == typeof t4)
+    return t4.length > 20 && (t4 = `${t4.substring(0, 20)}...`), JSON.stringify(t4);
+  if ("number" == typeof t4 || "boolean" == typeof t4)
+    return "" + t4;
+  if ("object" == typeof t4) {
+    if (t4 instanceof Array)
       return "an array";
     {
-      const e7 = function(t4) {
-        if (t4.constructor)
-          return t4.constructor.name;
+      const e7 = function(t5) {
+        if (t5.constructor)
+          return t5.constructor.name;
         return null;
-      }(t3);
+      }(t4);
       return e7 ? `a custom ${e7} object` : "an object";
     }
   }
-  return "function" == typeof t3 ? "a function" : b3();
+  return "function" == typeof t4 ? "a function" : b3();
 }
-function ct2(t3, e7) {
-  if ("_delegate" in t3 && (t3 = t3._delegate), !(t3 instanceof e7)) {
-    if (e7.name === t3.constructor.name)
+function ct2(t4, e7) {
+  if ("_delegate" in t4 && (t4 = t4._delegate), !(t4 instanceof e7)) {
+    if (e7.name === t4.constructor.name)
       throw new U2(P3, "Type does not match the expected instance. Did you pass a reference from a different Firestore SDK?");
     {
-      const n3 = ut2(t3);
+      const n3 = ut2(t4);
       throw new U2(P3, `Expected type '${e7.name}', but it was: ${n3}`);
     }
   }
-  return t3;
+  return t4;
 }
-function at2(t3, e7) {
+function at2(t4, e7) {
   if (e7 <= 0)
-    throw new U2(P3, `Function ${t3}() requires a positive number, but it was: ${e7}.`);
+    throw new U2(P3, `Function ${t4}() requires a positive number, but it was: ${e7}.`);
 }
-function ht2(t3) {
-  return null == t3;
+function ht2(t4) {
+  return null == t4;
 }
-function lt2(t3) {
-  return 0 === t3 && 1 / t3 == -1 / 0;
+function lt2(t4) {
+  return 0 === t4 && 1 / t4 == -1 / 0;
 }
-function mt2(t3) {
-  if (void 0 === t3)
+function mt2(t4) {
+  if (void 0 === t4)
     return _5("RPC_ERROR", "HTTP error has no status"), R2;
-  switch (t3) {
+  switch (t4) {
     case 200:
       return T3;
     case 400:
@@ -7875,7 +7875,7 @@ function mt2(t3) {
     case 401:
       return x3;
     case 403:
-      return D3;
+      return D2;
     case 404:
       return N2;
     case 409:
@@ -7895,80 +7895,80 @@ function mt2(t3) {
     case 504:
       return V3;
     default:
-      return t3 >= 200 && t3 < 300 ? T3 : t3 >= 400 && t3 < 500 ? S3 : t3 >= 500 && t3 < 600 ? C3 : R2;
+      return t4 >= 200 && t4 < 300 ? T3 : t4 >= 400 && t4 < 500 ? S3 : t4 >= 500 && t4 < 600 ? C3 : R2;
   }
 }
-function yt2(t3) {
-  const e7 = "undefined" != typeof self && (self.crypto || self.msCrypto), n3 = new Uint8Array(t3);
+function yt2(t4) {
+  const e7 = "undefined" != typeof self && (self.crypto || self.msCrypto), n3 = new Uint8Array(t4);
   if (e7 && "function" == typeof e7.getRandomValues)
     e7.getRandomValues(n3);
   else
-    for (let e8 = 0; e8 < t3; e8++)
+    for (let e8 = 0; e8 < t4; e8++)
       n3[e8] = Math.floor(256 * Math.random());
   return n3;
 }
-function gt2(t3, e7) {
-  return t3 < e7 ? -1 : t3 > e7 ? 1 : 0;
+function gt2(t4, e7) {
+  return t4 < e7 ? -1 : t4 > e7 ? 1 : 0;
 }
-function vt2(t3, e7, n3) {
-  return t3.length === e7.length && t3.every((t4, r6) => n3(t4, e7[r6]));
+function vt2(t4, e7, n3) {
+  return t4.length === e7.length && t4.every((t5, r6) => n3(t5, e7[r6]));
 }
-function It2(t3) {
+function It2(t4) {
   let e7 = 0;
-  for (const n3 in t3)
-    Object.prototype.hasOwnProperty.call(t3, n3) && e7++;
+  for (const n3 in t4)
+    Object.prototype.hasOwnProperty.call(t4, n3) && e7++;
   return e7;
 }
-function Tt2(t3, e7) {
-  for (const n3 in t3)
-    Object.prototype.hasOwnProperty.call(t3, n3) && e7(n3, t3[n3]);
+function Tt2(t4, e7) {
+  for (const n3 in t4)
+    Object.prototype.hasOwnProperty.call(t4, n3) && e7(n3, t4[n3]);
 }
-function Ft(t3) {
-  if (E3(!!t3), "string" == typeof t3) {
+function Ft(t4) {
+  if (E3(!!t4), "string" == typeof t4) {
     let e7 = 0;
-    const n3 = xt2.exec(t3);
+    const n3 = xt2.exec(t4);
     if (E3(!!n3), n3[1]) {
-      let t4 = n3[1];
-      t4 = (t4 + "000000000").substr(0, 9), e7 = Number(t4);
+      let t5 = n3[1];
+      t5 = (t5 + "000000000").substr(0, 9), e7 = Number(t5);
     }
-    const r6 = new Date(t3);
+    const r6 = new Date(t4);
     return {
       seconds: Math.floor(r6.getTime() / 1e3),
       nanos: e7
     };
   }
   return {
-    seconds: St2(t3.seconds),
-    nanos: St2(t3.nanos)
+    seconds: St2(t4.seconds),
+    nanos: St2(t4.nanos)
   };
 }
-function St2(t3) {
-  return "number" == typeof t3 ? t3 : "string" == typeof t3 ? Number(t3) : 0;
+function St2(t4) {
+  return "number" == typeof t4 ? t4 : "string" == typeof t4 ? Number(t4) : 0;
 }
-function qt2(t3) {
-  return "string" == typeof t3 ? Dt2.fromBase64String(t3) : Dt2.fromUint8Array(t3);
+function qt2(t4) {
+  return "string" == typeof t4 ? Dt2.fromBase64String(t4) : Dt2.fromUint8Array(t4);
 }
-function Ot2(t3) {
+function Ot2(t4) {
   var e7, n3;
-  return "server_timestamp" === (null === (n3 = ((null === (e7 = null == t3 ? void 0 : t3.mapValue) || void 0 === e7 ? void 0 : e7.fields) || {}).__type__) || void 0 === n3 ? void 0 : n3.stringValue);
+  return "server_timestamp" === (null === (n3 = ((null === (e7 = null == t4 ? void 0 : t4.mapValue) || void 0 === e7 ? void 0 : e7.fields) || {}).__type__) || void 0 === n3 ? void 0 : n3.stringValue);
 }
-function kt2(t3) {
-  const e7 = t3.mapValue.fields.__previous_value__;
+function kt2(t4) {
+  const e7 = t4.mapValue.fields.__previous_value__;
   return Ot2(e7) ? kt2(e7) : e7;
 }
-function Ct2(t3) {
-  const e7 = Ft(t3.mapValue.fields.__local_write_time__.timestampValue);
+function Ct2(t4) {
+  const e7 = Ft(t4.mapValue.fields.__local_write_time__.timestampValue);
   return new bt2(e7.seconds, e7.nanos);
 }
-function Mt(t3) {
-  return "nullValue" in t3 ? 0 : "booleanValue" in t3 ? 1 : "integerValue" in t3 || "doubleValue" in t3 ? 2 : "timestampValue" in t3 ? 3 : "stringValue" in t3 ? 5 : "bytesValue" in t3 ? 6 : "referenceValue" in t3 ? 7 : "geoPointValue" in t3 ? 8 : "arrayValue" in t3 ? 9 : "mapValue" in t3 ? Ot2(t3) ? 4 : function(t4) {
-    return "__max__" === (((t4.mapValue || {}).fields || {}).__type__ || {}).stringValue;
-  }(t3) ? 9007199254740991 : 10 : b3();
+function Mt(t4) {
+  return "nullValue" in t4 ? 0 : "booleanValue" in t4 ? 1 : "integerValue" in t4 || "doubleValue" in t4 ? 2 : "timestampValue" in t4 ? 3 : "stringValue" in t4 ? 5 : "bytesValue" in t4 ? 6 : "referenceValue" in t4 ? 7 : "geoPointValue" in t4 ? 8 : "arrayValue" in t4 ? 9 : "mapValue" in t4 ? Ot2(t4) ? 4 : function(t5) {
+    return "__max__" === (((t5.mapValue || {}).fields || {}).__type__ || {}).stringValue;
+  }(t4) ? 9007199254740991 : 10 : b3();
 }
-function Ut2(t3, e7) {
-  if (t3 === e7)
+function Ut2(t4, e7) {
+  if (t4 === e7)
     return true;
-  const n3 = Mt(t3);
+  const n3 = Mt(t4);
   if (n3 !== Mt(e7))
     return false;
   switch (n3) {
@@ -7976,61 +7976,61 @@ function Ut2(t3, e7) {
     case 9007199254740991:
       return true;
     case 1:
-      return t3.booleanValue === e7.booleanValue;
+      return t4.booleanValue === e7.booleanValue;
     case 4:
-      return Ct2(t3).isEqual(Ct2(e7));
+      return Ct2(t4).isEqual(Ct2(e7));
     case 3:
-      return function(t4, e8) {
-        if ("string" == typeof t4.timestampValue && "string" == typeof e8.timestampValue && t4.timestampValue.length === e8.timestampValue.length)
-          return t4.timestampValue === e8.timestampValue;
-        const n4 = Ft(t4.timestampValue), r6 = Ft(e8.timestampValue);
+      return function(t5, e8) {
+        if ("string" == typeof t5.timestampValue && "string" == typeof e8.timestampValue && t5.timestampValue.length === e8.timestampValue.length)
+          return t5.timestampValue === e8.timestampValue;
+        const n4 = Ft(t5.timestampValue), r6 = Ft(e8.timestampValue);
         return n4.seconds === r6.seconds && n4.nanos === r6.nanos;
-      }(t3, e7);
+      }(t4, e7);
     case 5:
-      return t3.stringValue === e7.stringValue;
+      return t4.stringValue === e7.stringValue;
     case 6:
-      return function(t4, e8) {
-        return qt2(t4.bytesValue).isEqual(qt2(e8.bytesValue));
-      }(t3, e7);
+      return function(t5, e8) {
+        return qt2(t5.bytesValue).isEqual(qt2(e8.bytesValue));
+      }(t4, e7);
     case 7:
-      return t3.referenceValue === e7.referenceValue;
+      return t4.referenceValue === e7.referenceValue;
     case 8:
-      return function(t4, e8) {
-        return St2(t4.geoPointValue.latitude) === St2(e8.geoPointValue.latitude) && St2(t4.geoPointValue.longitude) === St2(e8.geoPointValue.longitude);
-      }(t3, e7);
+      return function(t5, e8) {
+        return St2(t5.geoPointValue.latitude) === St2(e8.geoPointValue.latitude) && St2(t5.geoPointValue.longitude) === St2(e8.geoPointValue.longitude);
+      }(t4, e7);
     case 2:
-      return function(t4, e8) {
-        if ("integerValue" in t4 && "integerValue" in e8)
-          return St2(t4.integerValue) === St2(e8.integerValue);
-        if ("doubleValue" in t4 && "doubleValue" in e8) {
-          const n4 = St2(t4.doubleValue), r6 = St2(e8.doubleValue);
+      return function(t5, e8) {
+        if ("integerValue" in t5 && "integerValue" in e8)
+          return St2(t5.integerValue) === St2(e8.integerValue);
+        if ("doubleValue" in t5 && "doubleValue" in e8) {
+          const n4 = St2(t5.doubleValue), r6 = St2(e8.doubleValue);
           return n4 === r6 ? lt2(n4) === lt2(r6) : isNaN(n4) && isNaN(r6);
         }
         return false;
-      }(t3, e7);
+      }(t4, e7);
     case 9:
-      return vt2(t3.arrayValue.values || [], e7.arrayValue.values || [], Ut2);
+      return vt2(t4.arrayValue.values || [], e7.arrayValue.values || [], Ut2);
     case 10:
-      return function(t4, e8) {
-        const n4 = t4.mapValue.fields || {}, r6 = e8.mapValue.fields || {};
+      return function(t5, e8) {
+        const n4 = t5.mapValue.fields || {}, r6 = e8.mapValue.fields || {};
         if (It2(n4) !== It2(r6))
           return false;
-        for (const t5 in n4)
-          if (n4.hasOwnProperty(t5) && (void 0 === r6[t5] || !Ut2(n4[t5], r6[t5])))
+        for (const t6 in n4)
+          if (n4.hasOwnProperty(t6) && (void 0 === r6[t6] || !Ut2(n4[t6], r6[t6])))
             return false;
         return true;
-      }(t3, e7);
+      }(t4, e7);
     default:
       return b3();
   }
 }
-function jt2(t3, e7) {
-  return void 0 !== (t3.values || []).find((t4) => Ut2(t4, e7));
+function jt2(t4, e7) {
+  return void 0 !== (t4.values || []).find((t5) => Ut2(t5, e7));
 }
-function Bt(t3, e7) {
-  if (t3 === e7)
+function Bt(t4, e7) {
+  if (t4 === e7)
     return 0;
-  const n3 = Mt(t3), r6 = Mt(e7);
+  const n3 = Mt(t4), r6 = Mt(e7);
   if (n3 !== r6)
     return gt2(n3, r6);
   switch (n3) {
@@ -8038,223 +8038,223 @@ function Bt(t3, e7) {
     case 9007199254740991:
       return 0;
     case 1:
-      return gt2(t3.booleanValue, e7.booleanValue);
+      return gt2(t4.booleanValue, e7.booleanValue);
     case 2:
-      return function(t4, e8) {
-        const n4 = St2(t4.integerValue || t4.doubleValue), r7 = St2(e8.integerValue || e8.doubleValue);
+      return function(t5, e8) {
+        const n4 = St2(t5.integerValue || t5.doubleValue), r7 = St2(e8.integerValue || e8.doubleValue);
         return n4 < r7 ? -1 : n4 > r7 ? 1 : n4 === r7 ? 0 : isNaN(n4) ? isNaN(r7) ? 0 : -1 : 1;
-      }(t3, e7);
+      }(t4, e7);
     case 3:
-      return Qt(t3.timestampValue, e7.timestampValue);
+      return Qt(t4.timestampValue, e7.timestampValue);
     case 4:
-      return Qt(Ct2(t3), Ct2(e7));
+      return Qt(Ct2(t4), Ct2(e7));
     case 5:
-      return gt2(t3.stringValue, e7.stringValue);
+      return gt2(t4.stringValue, e7.stringValue);
     case 6:
-      return function(t4, e8) {
-        const n4 = qt2(t4), r7 = qt2(e8);
+      return function(t5, e8) {
+        const n4 = qt2(t5), r7 = qt2(e8);
         return n4.compareTo(r7);
-      }(t3.bytesValue, e7.bytesValue);
+      }(t4.bytesValue, e7.bytesValue);
     case 7:
-      return function(t4, e8) {
-        const n4 = t4.split("/"), r7 = e8.split("/");
-        for (let t5 = 0; t5 < n4.length && t5 < r7.length; t5++) {
-          const e9 = gt2(n4[t5], r7[t5]);
+      return function(t5, e8) {
+        const n4 = t5.split("/"), r7 = e8.split("/");
+        for (let t6 = 0; t6 < n4.length && t6 < r7.length; t6++) {
+          const e9 = gt2(n4[t6], r7[t6]);
           if (0 !== e9)
             return e9;
         }
         return gt2(n4.length, r7.length);
-      }(t3.referenceValue, e7.referenceValue);
+      }(t4.referenceValue, e7.referenceValue);
     case 8:
-      return function(t4, e8) {
-        const n4 = gt2(St2(t4.latitude), St2(e8.latitude));
+      return function(t5, e8) {
+        const n4 = gt2(St2(t5.latitude), St2(e8.latitude));
         if (0 !== n4)
           return n4;
-        return gt2(St2(t4.longitude), St2(e8.longitude));
-      }(t3.geoPointValue, e7.geoPointValue);
+        return gt2(St2(t5.longitude), St2(e8.longitude));
+      }(t4.geoPointValue, e7.geoPointValue);
     case 9:
-      return function(t4, e8) {
-        const n4 = t4.values || [], r7 = e8.values || [];
-        for (let t5 = 0; t5 < n4.length && t5 < r7.length; ++t5) {
-          const e9 = Bt(n4[t5], r7[t5]);
+      return function(t5, e8) {
+        const n4 = t5.values || [], r7 = e8.values || [];
+        for (let t6 = 0; t6 < n4.length && t6 < r7.length; ++t6) {
+          const e9 = Bt(n4[t6], r7[t6]);
           if (e9)
             return e9;
         }
         return gt2(n4.length, r7.length);
-      }(t3.arrayValue, e7.arrayValue);
+      }(t4.arrayValue, e7.arrayValue);
     case 10:
-      return function(t4, e8) {
-        if (t4 === Lt2 && e8 === Lt2)
+      return function(t5, e8) {
+        if (t5 === Lt2 && e8 === Lt2)
           return 0;
-        if (t4 === Lt2)
+        if (t5 === Lt2)
           return 1;
         if (e8 === Lt2)
           return -1;
-        const n4 = t4.fields || {}, r7 = Object.keys(n4), s6 = e8.fields || {}, i4 = Object.keys(s6);
+        const n4 = t5.fields || {}, r7 = Object.keys(n4), s6 = e8.fields || {}, i4 = Object.keys(s6);
         r7.sort(), i4.sort();
-        for (let t5 = 0; t5 < r7.length && t5 < i4.length; ++t5) {
-          const e9 = gt2(r7[t5], i4[t5]);
+        for (let t6 = 0; t6 < r7.length && t6 < i4.length; ++t6) {
+          const e9 = gt2(r7[t6], i4[t6]);
           if (0 !== e9)
             return e9;
-          const o5 = Bt(n4[r7[t5]], s6[i4[t5]]);
+          const o5 = Bt(n4[r7[t6]], s6[i4[t6]]);
           if (0 !== o5)
             return o5;
         }
         return gt2(r7.length, i4.length);
-      }(t3.mapValue, e7.mapValue);
+      }(t4.mapValue, e7.mapValue);
     default:
       throw b3();
   }
 }
-function Qt(t3, e7) {
-  if ("string" == typeof t3 && "string" == typeof e7 && t3.length === e7.length)
-    return gt2(t3, e7);
-  const n3 = Ft(t3), r6 = Ft(e7), s6 = gt2(n3.seconds, r6.seconds);
+function Qt(t4, e7) {
+  if ("string" == typeof t4 && "string" == typeof e7 && t4.length === e7.length)
+    return gt2(t4, e7);
+  const n3 = Ft(t4), r6 = Ft(e7), s6 = gt2(n3.seconds, r6.seconds);
   return 0 !== s6 ? s6 : gt2(n3.nanos, r6.nanos);
 }
-function zt2(t3, e7) {
+function zt2(t4, e7) {
   return {
-    referenceValue: `projects/${t3.projectId}/databases/${t3.database}/documents/${e7.path.canonicalString()}`
+    referenceValue: `projects/${t4.projectId}/databases/${t4.database}/documents/${e7.path.canonicalString()}`
   };
 }
-function Gt2(t3) {
-  return !!t3 && "arrayValue" in t3;
+function Gt2(t4) {
+  return !!t4 && "arrayValue" in t4;
 }
-function Wt(t3) {
-  return !!t3 && "nullValue" in t3;
+function Wt(t4) {
+  return !!t4 && "nullValue" in t4;
 }
-function Kt(t3) {
-  return !!t3 && "doubleValue" in t3 && isNaN(Number(t3.doubleValue));
+function Kt(t4) {
+  return !!t4 && "doubleValue" in t4 && isNaN(Number(t4.doubleValue));
 }
-function Yt(t3) {
-  return !!t3 && "mapValue" in t3;
+function Yt(t4) {
+  return !!t4 && "mapValue" in t4;
 }
-function Ht2(t3) {
-  if (t3.geoPointValue)
+function Ht2(t4) {
+  if (t4.geoPointValue)
     return {
-      geoPointValue: Object.assign({}, t3.geoPointValue)
+      geoPointValue: Object.assign({}, t4.geoPointValue)
     };
-  if (t3.timestampValue && "object" == typeof t3.timestampValue)
+  if (t4.timestampValue && "object" == typeof t4.timestampValue)
     return {
-      timestampValue: Object.assign({}, t3.timestampValue)
+      timestampValue: Object.assign({}, t4.timestampValue)
     };
-  if (t3.mapValue) {
+  if (t4.mapValue) {
     const e7 = {
       mapValue: {
         fields: {}
       }
     };
-    return Tt2(t3.mapValue.fields, (t4, n3) => e7.mapValue.fields[t4] = Ht2(n3)), e7;
+    return Tt2(t4.mapValue.fields, (t5, n3) => e7.mapValue.fields[t5] = Ht2(n3)), e7;
   }
-  if (t3.arrayValue) {
+  if (t4.arrayValue) {
     const e7 = {
       arrayValue: {
         values: []
       }
     };
-    for (let n3 = 0; n3 < (t3.arrayValue.values || []).length; ++n3)
-      e7.arrayValue.values[n3] = Ht2(t3.arrayValue.values[n3]);
+    for (let n3 = 0; n3 < (t4.arrayValue.values || []).length; ++n3)
+      e7.arrayValue.values[n3] = Ht2(t4.arrayValue.values[n3]);
     return e7;
   }
-  return Object.assign({}, t3);
+  return Object.assign({}, t4);
 }
-function te2(t3, e7 = null, n3 = [], r6 = [], s6 = null, i4 = null, o5 = null) {
-  return new Zt(t3, e7, n3, r6, s6, i4, o5);
+function te2(t4, e7 = null, n3 = [], r6 = [], s6 = null, i4 = null, o5 = null) {
+  return new Zt(t4, e7, n3, r6, s6, i4, o5);
 }
-function ie2(t3, e7) {
+function ie2(t4, e7) {
   var n3;
-  return ((null === (n3 = e7.arrayValue) || void 0 === n3 ? void 0 : n3.values) || []).map((t4) => rt2.fromName(t4.referenceValue));
+  return ((null === (n3 = e7.arrayValue) || void 0 === n3 ? void 0 : n3.values) || []).map((t5) => rt2.fromName(t5.referenceValue));
 }
-function fe2(t3, e7) {
-  return t3.dir === e7.dir && t3.field.isEqual(e7.field);
+function fe2(t4, e7) {
+  return t4.dir === e7.dir && t4.field.isEqual(e7.field);
 }
-function de(t3, e7) {
-  if (null === t3)
+function de(t4, e7) {
+  if (null === t4)
     return null === e7;
   if (null === e7)
     return false;
-  if (t3.inclusive !== e7.inclusive || t3.position.length !== e7.position.length)
+  if (t4.inclusive !== e7.inclusive || t4.position.length !== e7.position.length)
     return false;
-  for (let n3 = 0; n3 < t3.position.length; n3++) {
-    if (!Ut2(t3.position[n3], e7.position[n3]))
+  for (let n3 = 0; n3 < t4.position.length; n3++) {
+    if (!Ut2(t4.position[n3], e7.position[n3]))
       return false;
   }
   return true;
 }
-function me2(t3) {
-  return t3.explicitOrderBy.length > 0 ? t3.explicitOrderBy[0].field : null;
+function me2(t4) {
+  return t4.explicitOrderBy.length > 0 ? t4.explicitOrderBy[0].field : null;
 }
-function pe2(t3) {
-  for (const e7 of t3.filters)
+function pe2(t4) {
+  for (const e7 of t4.filters)
     if (e7.q())
       return e7.field;
   return null;
 }
-function ye2(t3) {
-  return null !== t3.collectionGroup;
+function ye2(t4) {
+  return null !== t4.collectionGroup;
 }
-function _e3(t3) {
-  const e7 = I4(t3);
+function _e3(t4) {
+  const e7 = I4(t4);
   if (null === e7.O) {
     e7.O = [];
-    const t4 = pe2(e7), n3 = me2(e7);
-    if (null !== t4 && null === n3)
-      t4.isKeyField() || e7.O.push(new le2(t4)), e7.O.push(new le2(nt2.keyField(), "asc"));
+    const t5 = pe2(e7), n3 = me2(e7);
+    if (null !== t5 && null === n3)
+      t5.isKeyField() || e7.O.push(new le2(t5)), e7.O.push(new le2(nt2.keyField(), "asc"));
     else {
-      let t5 = false;
+      let t6 = false;
       for (const n4 of e7.explicitOrderBy)
-        e7.O.push(n4), n4.field.isKeyField() && (t5 = true);
-      if (!t5) {
-        const t6 = e7.explicitOrderBy.length > 0 ? e7.explicitOrderBy[e7.explicitOrderBy.length - 1].dir : "asc";
-        e7.O.push(new le2(nt2.keyField(), t6));
+        e7.O.push(n4), n4.field.isKeyField() && (t6 = true);
+      if (!t6) {
+        const t7 = e7.explicitOrderBy.length > 0 ? e7.explicitOrderBy[e7.explicitOrderBy.length - 1].dir : "asc";
+        e7.O.push(new le2(nt2.keyField(), t7));
       }
     }
   }
   return e7.O;
 }
-function ge2(t3) {
-  const e7 = I4(t3);
+function ge2(t4) {
+  const e7 = I4(t4);
   if (!e7.k)
     if ("F" === e7.limitType)
       e7.k = te2(e7.path, e7.collectionGroup, _e3(e7), e7.filters, e7.limit, e7.startAt, e7.endAt);
     else {
-      const t4 = [];
+      const t5 = [];
       for (const n4 of _e3(e7)) {
         const e8 = "desc" === n4.dir ? "asc" : "desc";
-        t4.push(new le2(n4.field, e8));
+        t5.push(new le2(n4.field, e8));
       }
       const n3 = e7.endAt ? new he2(e7.endAt.position, e7.endAt.inclusive) : null, r6 = e7.startAt ? new he2(e7.startAt.position, e7.startAt.inclusive) : null;
-      e7.k = te2(e7.path, e7.collectionGroup, t4, e7.filters, e7.limit, n3, r6);
+      e7.k = te2(e7.path, e7.collectionGroup, t5, e7.filters, e7.limit, n3, r6);
     }
   return e7.k;
 }
-function ve2(t3, e7) {
-  return function(t4, e8) {
-    if (t4.limit !== e8.limit)
+function ve2(t4, e7) {
+  return function(t5, e8) {
+    if (t5.limit !== e8.limit)
       return false;
-    if (t4.orderBy.length !== e8.orderBy.length)
+    if (t5.orderBy.length !== e8.orderBy.length)
       return false;
-    for (let n4 = 0; n4 < t4.orderBy.length; n4++)
-      if (!fe2(t4.orderBy[n4], e8.orderBy[n4]))
+    for (let n4 = 0; n4 < t5.orderBy.length; n4++)
+      if (!fe2(t5.orderBy[n4], e8.orderBy[n4]))
         return false;
-    if (t4.filters.length !== e8.filters.length)
+    if (t5.filters.length !== e8.filters.length)
       return false;
-    for (let s6 = 0; s6 < t4.filters.length; s6++)
-      if (n3 = t4.filters[s6], r6 = e8.filters[s6], n3.op !== r6.op || !n3.field.isEqual(r6.field) || !Ut2(n3.value, r6.value))
+    for (let s6 = 0; s6 < t5.filters.length; s6++)
+      if (n3 = t5.filters[s6], r6 = e8.filters[s6], n3.op !== r6.op || !n3.field.isEqual(r6.field) || !Ut2(n3.value, r6.value))
         return false;
     var n3, r6;
-    return t4.collectionGroup === e8.collectionGroup && !!t4.path.isEqual(e8.path) && !!de(t4.startAt, e8.startAt) && de(t4.endAt, e8.endAt);
-  }(ge2(t3), ge2(e7)) && t3.limitType === e7.limitType;
+    return t5.collectionGroup === e8.collectionGroup && !!t5.path.isEqual(e8.path) && !!de(t5.startAt, e8.startAt) && de(t5.endAt, e8.endAt);
+  }(ge2(t4), ge2(e7)) && t4.limitType === e7.limitType;
 }
-function be2(t3, e7) {
-  return function(t4) {
-    return "number" == typeof t4 && Number.isInteger(t4) && !lt2(t4) && t4 <= Number.MAX_SAFE_INTEGER && t4 >= Number.MIN_SAFE_INTEGER;
-  }(e7) ? function(t4) {
+function be2(t4, e7) {
+  return function(t5) {
+    return "number" == typeof t5 && Number.isInteger(t5) && !lt2(t5) && t5 <= Number.MAX_SAFE_INTEGER && t5 >= Number.MIN_SAFE_INTEGER;
+  }(e7) ? function(t5) {
     return {
-      integerValue: "" + t4
+      integerValue: "" + t5
     };
-  }(e7) : function(t4, e8) {
-    if (t4.C) {
+  }(e7) : function(t5, e8) {
+    if (t5.C) {
       if (isNaN(e8))
         return {
           doubleValue: "NaN"
@@ -8271,10 +8271,10 @@ function be2(t3, e7) {
     return {
       doubleValue: lt2(e8) ? "-0" : e8
     };
-  }(t3, e7);
+  }(t4, e7);
 }
-function ke2(t3, e7) {
-  if (t3.C) {
+function ke2(t4, e7) {
+  if (t4.C) {
     return `${new Date(1e3 * e7.seconds).toISOString().replace(/\.\d*/, "").replace("Z", "")}.${("000000000" + e7.nanoseconds).slice(-9)}Z`;
   }
   return {
@@ -8282,88 +8282,88 @@ function ke2(t3, e7) {
     nanos: e7.nanoseconds
   };
 }
-function Ce2(t3, e7) {
-  return t3.C ? e7.toBase64() : e7.toUint8Array();
+function Ce2(t4, e7) {
+  return t4.C ? e7.toBase64() : e7.toUint8Array();
 }
-function Le2(t3, e7) {
-  return ke2(t3, e7.toTimestamp());
+function Le2(t4, e7) {
+  return ke2(t4, e7.toTimestamp());
 }
-function Me2(t3) {
-  return E3(!!t3), Et2.fromTimestamp(function(t4) {
-    const e7 = Ft(t4);
+function Me2(t4) {
+  return E3(!!t4), Et2.fromTimestamp(function(t5) {
+    const e7 = Ft(t5);
     return new bt2(e7.seconds, e7.nanos);
-  }(t3));
+  }(t4));
 }
-function Ue2(t3, e7) {
-  return function(t4) {
-    return new tt2(["projects", t4.projectId, "databases", t4.database]);
-  }(t3).child("documents").child(e7).canonicalString();
+function Ue2(t4, e7) {
+  return function(t5) {
+    return new tt2(["projects", t5.projectId, "databases", t5.database]);
+  }(t4).child("documents").child(e7).canonicalString();
 }
-function je(t3, e7) {
-  return Ue2(t3.databaseId, e7.path);
+function je(t4, e7) {
+  return Ue2(t4.databaseId, e7.path);
 }
-function Be2(t3, e7) {
-  const n3 = function(t4) {
-    const e8 = tt2.fromString(t4);
+function Be2(t4, e7) {
+  const n3 = function(t5) {
+    const e8 = tt2.fromString(t5);
     return E3(tn(e8)), e8;
   }(e7);
-  if (n3.get(1) !== t3.databaseId.projectId)
-    throw new U2(P3, "Tried to deserialize key from different project: " + n3.get(1) + " vs " + t3.databaseId.projectId);
-  if (n3.get(3) !== t3.databaseId.database)
-    throw new U2(P3, "Tried to deserialize key from different database: " + n3.get(3) + " vs " + t3.databaseId.database);
+  if (n3.get(1) !== t4.databaseId.projectId)
+    throw new U2(P3, "Tried to deserialize key from different project: " + n3.get(1) + " vs " + t4.databaseId.projectId);
+  if (n3.get(3) !== t4.databaseId.database)
+    throw new U2(P3, "Tried to deserialize key from different database: " + n3.get(3) + " vs " + t4.databaseId.database);
   return new rt2((E3((r6 = n3).length > 4 && "documents" === r6.get(4)), r6.popFirst(5)));
   var r6;
 }
-function Qe2(t3, e7) {
-  return Ue2(t3.databaseId, e7);
+function Qe2(t4, e7) {
+  return Ue2(t4.databaseId, e7);
 }
-function ze2(t3) {
-  return new tt2(["projects", t3.databaseId.projectId, "databases", t3.databaseId.database]).canonicalString();
+function ze2(t4) {
+  return new tt2(["projects", t4.databaseId.projectId, "databases", t4.databaseId.database]).canonicalString();
 }
-function Ge2(t3, e7, n3) {
+function Ge2(t4, e7, n3) {
   return {
-    name: je(t3, e7),
+    name: je(t4, e7),
     fields: n3.value.mapValue.fields
   };
 }
-function We2(t3, e7) {
-  return "found" in e7 ? function(t4, e8) {
+function We2(t4, e7) {
+  return "found" in e7 ? function(t5, e8) {
     E3(!!e8.found), e8.found.name, e8.found.updateTime;
-    const n3 = Be2(t4, e8.found.name), r6 = Me2(e8.found.updateTime), s6 = new Jt({
+    const n3 = Be2(t5, e8.found.name), r6 = Me2(e8.found.updateTime), s6 = new Jt({
       mapValue: {
         fields: e8.found.fields
       }
     });
     return Xt.newFoundDocument(n3, r6, s6);
-  }(t3, e7) : "missing" in e7 ? function(t4, e8) {
+  }(t4, e7) : "missing" in e7 ? function(t5, e8) {
     E3(!!e8.missing), E3(!!e8.readTime);
-    const n3 = Be2(t4, e8.missing), r6 = Me2(e8.readTime);
+    const n3 = Be2(t5, e8.missing), r6 = Me2(e8.readTime);
     return Xt.newNoDocument(n3, r6);
-  }(t3, e7) : b3();
+  }(t4, e7) : b3();
 }
-function Ke(t3, e7) {
+function Ke(t4, e7) {
   let n3;
   if (e7 instanceof $e2)
     n3 = {
-      update: Ge2(t3, e7.key, e7.value)
+      update: Ge2(t4, e7.key, e7.value)
     };
   else if (e7 instanceof xe2)
     n3 = {
-      delete: je(t3, e7.key)
+      delete: je(t4, e7.key)
     };
   else if (e7 instanceof De2)
     n3 = {
-      update: Ge2(t3, e7.key, e7.data),
+      update: Ge2(t4, e7.key, e7.data),
       updateMask: Ze2(e7.fieldMask)
     };
   else {
     if (!(e7 instanceof Fe2))
       return b3();
     n3 = {
-      verify: je(t3, e7.key)
+      verify: je(t4, e7.key)
     };
   }
-  return e7.fieldTransforms.length > 0 && (n3.updateTransforms = e7.fieldTransforms.map((t4) => function(t5, e8) {
+  return e7.fieldTransforms.length > 0 && (n3.updateTransforms = e7.fieldTransforms.map((t5) => function(t6, e8) {
     const n4 = e8.transform;
     if (n4 instanceof Ie2)
       return {
@@ -8390,67 +8390,67 @@ function Ke(t3, e7) {
         increment: n4.M
       };
     throw b3();
-  }(0, t4))), e7.precondition.isNone || (n3.currentDocument = function(t4, e8) {
+  }(0, t5))), e7.precondition.isNone || (n3.currentDocument = function(t5, e8) {
     return void 0 !== e8.updateTime ? {
-      updateTime: Le2(t4, e8.updateTime)
+      updateTime: Le2(t5, e8.updateTime)
     } : void 0 !== e8.exists ? {
       exists: e8.exists
     } : b3();
-  }(t3, e7.precondition)), n3;
+  }(t4, e7.precondition)), n3;
 }
-function Ye(t3, e7) {
+function Ye(t4, e7) {
   const n3 = {
     structuredQuery: {}
   }, r6 = e7.path;
-  null !== e7.collectionGroup ? (n3.parent = Qe2(t3, r6), n3.structuredQuery.from = [{
+  null !== e7.collectionGroup ? (n3.parent = Qe2(t4, r6), n3.structuredQuery.from = [{
     collectionId: e7.collectionGroup,
     allDescendants: true
-  }]) : (n3.parent = Qe2(t3, r6.popLast()), n3.structuredQuery.from = [{
+  }]) : (n3.parent = Qe2(t4, r6.popLast()), n3.structuredQuery.from = [{
     collectionId: r6.lastSegment()
   }]);
-  const s6 = function(t4) {
-    if (0 === t4.length)
+  const s6 = function(t5) {
+    if (0 === t5.length)
       return;
-    const e8 = t4.map((t5) => function(t6) {
-      if ("==" === t6.op) {
-        if (Kt(t6.value))
+    const e8 = t5.map((t6) => function(t7) {
+      if ("==" === t7.op) {
+        if (Kt(t7.value))
           return {
             unaryFilter: {
-              field: Xe(t6.field),
+              field: Xe(t7.field),
               op: "IS_NAN"
             }
           };
-        if (Wt(t6.value))
+        if (Wt(t7.value))
           return {
             unaryFilter: {
-              field: Xe(t6.field),
+              field: Xe(t7.field),
               op: "IS_NULL"
             }
           };
-      } else if ("!=" === t6.op) {
-        if (Kt(t6.value))
+      } else if ("!=" === t7.op) {
+        if (Kt(t7.value))
           return {
             unaryFilter: {
-              field: Xe(t6.field),
+              field: Xe(t7.field),
               op: "IS_NOT_NAN"
             }
           };
-        if (Wt(t6.value))
+        if (Wt(t7.value))
           return {
             unaryFilter: {
-              field: Xe(t6.field),
+              field: Xe(t7.field),
               op: "IS_NOT_NULL"
             }
           };
       }
       return {
         fieldFilter: {
-          field: Xe(t6.field),
-          op: Je2(t6.op),
-          value: t6.value
+          field: Xe(t7.field),
+          op: Je2(t7.op),
+          value: t7.value
         }
       };
-    }(t5));
+    }(t6));
     if (1 === e8.length)
       return e8[0];
     return {
@@ -8461,92 +8461,92 @@ function Ye(t3, e7) {
     };
   }(e7.filters);
   s6 && (n3.structuredQuery.where = s6);
-  const i4 = function(t4) {
-    if (0 === t4.length)
+  const i4 = function(t5) {
+    if (0 === t5.length)
       return;
-    return t4.map((t5) => function(t6) {
+    return t5.map((t6) => function(t7) {
       return {
-        field: Xe(t6.field),
-        direction: He2(t6.dir)
+        field: Xe(t7.field),
+        direction: He2(t7.dir)
       };
-    }(t5));
+    }(t6));
   }(e7.orderBy);
   i4 && (n3.structuredQuery.orderBy = i4);
-  const o5 = function(t4, e8) {
-    return t4.C || ht2(e8) ? e8 : {
+  const o5 = function(t5, e8) {
+    return t5.C || ht2(e8) ? e8 : {
       value: e8
     };
-  }(t3, e7.limit);
+  }(t4, e7.limit);
   var u;
   return null !== o5 && (n3.structuredQuery.limit = o5), e7.startAt && (n3.structuredQuery.startAt = {
     before: (u = e7.startAt).inclusive,
     values: u.position
-  }), e7.endAt && (n3.structuredQuery.endAt = function(t4) {
+  }), e7.endAt && (n3.structuredQuery.endAt = function(t5) {
     return {
-      before: !t4.inclusive,
-      values: t4.position
+      before: !t5.inclusive,
+      values: t5.position
     };
   }(e7.endAt)), n3;
 }
-function He2(t3) {
-  return Se2[t3];
+function He2(t4) {
+  return Se2[t4];
 }
-function Je2(t3) {
-  return qe2[t3];
+function Je2(t4) {
+  return qe2[t4];
 }
-function Xe(t3) {
+function Xe(t4) {
   return {
-    fieldPath: t3.canonicalString()
+    fieldPath: t4.canonicalString()
   };
 }
-function Ze2(t3) {
+function Ze2(t4) {
   const e7 = [];
-  return t3.fields.forEach((t4) => e7.push(t4.canonicalString())), {
+  return t4.fields.forEach((t5) => e7.push(t5.canonicalString())), {
     fieldPaths: e7
   };
 }
-function tn(t3) {
-  return t3.length >= 4 && "projects" === t3.get(0) && "databases" === t3.get(2);
+function tn(t4) {
+  return t4.length >= 4 && "projects" === t4.get(0) && "databases" === t4.get(2);
 }
-function en(t3) {
-  return new Oe2(t3, true);
+function en(t4) {
+  return new Oe2(t4, true);
 }
-async function sn(t3, e7) {
-  const n3 = I4(t3), r6 = ze2(n3.L) + "/documents", s6 = {
-    writes: e7.map((t4) => Ke(n3.L, t4))
+async function sn(t4, e7) {
+  const n3 = I4(t4), r6 = ze2(n3.L) + "/documents", s6 = {
+    writes: e7.map((t5) => Ke(n3.L, t5))
   };
   await n3.I("Commit", r6, s6);
 }
-async function on(t3, e7) {
-  const n3 = I4(t3), r6 = ze2(n3.L) + "/documents", s6 = {
-    documents: e7.map((t4) => je(n3.L, t4))
+async function on(t4, e7) {
+  const n3 = I4(t4), r6 = ze2(n3.L) + "/documents", s6 = {
+    documents: e7.map((t5) => je(n3.L, t5))
   }, i4 = await n3.P("BatchGetDocuments", r6, s6, e7.length), o5 = /* @__PURE__ */ new Map();
-  i4.forEach((t4) => {
-    const e8 = We2(n3.L, t4);
+  i4.forEach((t5) => {
+    const e8 = We2(n3.L, t5);
     o5.set(e8.key.toString(), e8);
   });
   const u = [];
-  return e7.forEach((t4) => {
-    const e8 = o5.get(t4.toString());
+  return e7.forEach((t5) => {
+    const e8 = o5.get(t5.toString());
     E3(!!e8), u.push(e8);
   }), u;
 }
-async function un(t3, e7) {
-  const n3 = I4(t3), r6 = Ye(n3.L, ge2(e7));
+async function un(t4, e7) {
+  const n3 = I4(t4), r6 = Ye(n3.L, ge2(e7));
   return (await n3.P("RunQuery", r6.parent, {
     structuredQuery: r6.structuredQuery
-  })).filter((t4) => !!t4.document).map((t4) => function(t5, e8, n4) {
-    const r7 = Be2(t5, e8.name), s6 = Me2(e8.updateTime), i4 = new Jt({
+  })).filter((t5) => !!t5.document).map((t5) => function(t6, e8, n4) {
+    const r7 = Be2(t6, e8.name), s6 = Me2(e8.updateTime), i4 = new Jt({
       mapValue: {
         fields: e8.fields
       }
     }), o5 = Xt.newFoundDocument(r7, s6, i4);
     return n4 && o5.setHasCommittedMutations(), n4 ? o5.setHasCommittedMutations() : o5;
-  }(n3.L, t4.document, void 0));
+  }(n3.L, t5.document, void 0));
 }
-async function cn(t3, e7) {
-  const n3 = I4(t3), r6 = function(t4, e8) {
-    const n4 = Ye(t4, e8);
+async function cn(t4, e7) {
+  const n3 = I4(t4), r6 = function(t5, e8) {
+    const n4 = Ye(t5, e8);
     return {
       structuredAggregationQuery: {
         aggregations: [{
@@ -8559,26 +8559,26 @@ async function cn(t3, e7) {
     };
   }(n3.L, ge2(e7)), s6 = r6.parent;
   n3.connection.v || delete r6.parent;
-  return (await n3.P("RunAggregationQuery", s6, r6, 1)).filter((t4) => !!t4.result).map((t4) => t4.result.aggregateFields);
+  return (await n3.P("RunAggregationQuery", s6, r6, 1)).filter((t5) => !!t5.result).map((t5) => t5.result.aggregateFields);
 }
-function hn(t3) {
-  if (t3._terminated)
+function hn(t4) {
+  if (t4._terminated)
     throw new U2(S3, "The client has already been terminated.");
-  if (!an.has(t3)) {
-    y2("ComponentProvider", "Initializing Datastore");
-    const i4 = function(t4) {
-      return new pt2(t4, fetch.bind(null));
-    }((e7 = t3._databaseId, n3 = t3.app.options.appId || "", r6 = t3._persistenceKey, s6 = t3._freezeSettings(), new J2(e7, n3, r6, s6.host, s6.ssl, s6.experimentalForceLongPolling, s6.experimentalAutoDetectLongPolling, s6.useFetchStreams))), o5 = en(t3._databaseId), u = function(t4, e8, n4, r7) {
-      return new rn(t4, e8, n4, r7);
-    }(t3._authCredentials, t3._appCheckCredentials, i4, o5);
-    an.set(t3, u);
+  if (!an.has(t4)) {
+    y3("ComponentProvider", "Initializing Datastore");
+    const i4 = function(t5) {
+      return new pt2(t5, fetch.bind(null));
+    }((e7 = t4._databaseId, n3 = t4.app.options.appId || "", r6 = t4._persistenceKey, s6 = t4._freezeSettings(), new J2(e7, n3, r6, s6.host, s6.ssl, s6.experimentalForceLongPolling, s6.experimentalAutoDetectLongPolling, s6.useFetchStreams))), o5 = en(t4._databaseId), u = function(t5, e8, n4, r7) {
+      return new rn(t5, e8, n4, r7);
+    }(t4._authCredentials, t4._appCheckCredentials, i4, o5);
+    an.set(t4, u);
   }
   var e7, n3, r6, s6;
-  return an.get(t3);
+  return an.get(t4);
 }
-function dn(t3, e7, n3) {
+function dn(t4, e7, n3) {
   n3 || (n3 = "(default)");
-  const r6 = _getProvider(t3, "firestore/lite");
+  const r6 = _getProvider(t4, "firestore/lite");
   if (r6.isInitialized(n3))
     throw new U2(S3, "Firestore can only be initialized once per app.");
   return r6.initialize({
@@ -8591,15 +8591,15 @@ function wn(e7, n3) {
     identifier: s6
   });
   if (!i4._initialized) {
-    const t3 = getDefaultEmulatorHostnameAndPort("firestore");
-    t3 && mn(i4, ...t3);
+    const t4 = getDefaultEmulatorHostnameAndPort("firestore");
+    t4 && mn(i4, ...t4);
   }
   return i4;
 }
-function mn(t3, e7, n3, r6 = {}) {
+function mn(t4, e7, n3, r6 = {}) {
   var s6;
-  const i4 = (t3 = ct2(t3, fn))._getSettings();
-  if ("firestore.googleapis.com" !== i4.host && i4.host !== e7 && g3("Host has been set in both settings() and useEmulator(), emulator host will be used"), t3._setSettings(Object.assign(Object.assign({}, i4), {
+  const i4 = (t4 = ct2(t4, fn))._getSettings();
+  if ("firestore.googleapis.com" !== i4.host && i4.host !== e7 && g3("Host has been set in both settings() and useEmulator(), emulator host will be used"), t4._setSettings(Object.assign(Object.assign({}, i4), {
     host: `${e7}:${n3}`,
     ssl: false
   })), r6.mockUserToken) {
@@ -8607,72 +8607,72 @@ function mn(t3, e7, n3, r6 = {}) {
     if ("string" == typeof r6.mockUserToken)
       e8 = r6.mockUserToken, n4 = d3.MOCK_USER;
     else {
-      e8 = createMockUserToken(r6.mockUserToken, null === (s6 = t3._app) || void 0 === s6 ? void 0 : s6.options.projectId);
+      e8 = createMockUserToken(r6.mockUserToken, null === (s6 = t4._app) || void 0 === s6 ? void 0 : s6.options.projectId);
       const i5 = r6.mockUserToken.sub || r6.mockUserToken.user_id;
       if (!i5)
         throw new U2(P3, "mockUserToken must contain 'sub' or 'user_id' field!");
       n4 = new d3(i5);
     }
-    t3._authCredentials = new z4(new B3(e8, n4));
+    t4._authCredentials = new z4(new B3(e8, n4));
   }
 }
-function pn(t3) {
-  return t3 = ct2(t3, fn), _removeServiceInstance(t3.app, "firestore/lite"), t3._delete();
+function pn(t4) {
+  return t4 = ct2(t4, fn), _removeServiceInstance(t4.app, "firestore/lite"), t4._delete();
 }
-function In(t3, e7, ...n3) {
-  if (t3 = getModularInstance(t3), st2("collection", "path", e7), t3 instanceof fn) {
+function In(t4, e7, ...n3) {
+  if (t4 = getModularInstance(t4), st2("collection", "path", e7), t4 instanceof fn) {
     const r6 = tt2.fromString(e7, ...n3);
-    return ot2(r6), new En(t3, null, r6);
+    return ot2(r6), new En(t4, null, r6);
   }
   {
-    if (!(t3 instanceof vn || t3 instanceof En))
+    if (!(t4 instanceof vn || t4 instanceof En))
       throw new U2(P3, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
-    const r6 = t3._path.child(tt2.fromString(e7, ...n3));
+    const r6 = t4._path.child(tt2.fromString(e7, ...n3));
     return ot2(r6), new En(
-      t3.firestore,
+      t4.firestore,
       null,
       r6
     );
   }
 }
-function Tn(t3, e7) {
-  if (t3 = ct2(t3, fn), st2("collectionGroup", "collection id", e7), e7.indexOf("/") >= 0)
+function Tn(t4, e7) {
+  if (t4 = ct2(t4, fn), st2("collectionGroup", "collection id", e7), e7.indexOf("/") >= 0)
     throw new U2(P3, `Invalid collection ID '${e7}' passed to function collectionGroup(). Collection IDs must not contain '/'.`);
   return new bn(
-    t3,
+    t4,
     null,
-    function(t4) {
-      return new we2(tt2.emptyPath(), t4);
+    function(t5) {
+      return new we2(tt2.emptyPath(), t5);
     }(e7)
   );
 }
-function An(t3, e7, ...n3) {
-  if (t3 = getModularInstance(t3), 1 === arguments.length && (e7 = _t3.$()), st2("doc", "path", e7), t3 instanceof fn) {
+function An(t4, e7, ...n3) {
+  if (t4 = getModularInstance(t4), 1 === arguments.length && (e7 = _t3.$()), st2("doc", "path", e7), t4 instanceof fn) {
     const r6 = tt2.fromString(e7, ...n3);
     return it2(r6), new vn(
-      t3,
+      t4,
       null,
       new rt2(r6)
     );
   }
   {
-    if (!(t3 instanceof vn || t3 instanceof En))
+    if (!(t4 instanceof vn || t4 instanceof En))
       throw new U2(P3, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
-    const r6 = t3._path.child(tt2.fromString(e7, ...n3));
-    return it2(r6), new vn(t3.firestore, t3 instanceof En ? t3.converter : null, new rt2(r6));
+    const r6 = t4._path.child(tt2.fromString(e7, ...n3));
+    return it2(r6), new vn(t4.firestore, t4 instanceof En ? t4.converter : null, new rt2(r6));
   }
 }
-function Rn(t3, e7) {
-  return t3 = getModularInstance(t3), e7 = getModularInstance(e7), (t3 instanceof vn || t3 instanceof En) && (e7 instanceof vn || e7 instanceof En) && (t3.firestore === e7.firestore && t3.path === e7.path && t3.converter === e7.converter);
+function Rn(t4, e7) {
+  return t4 = getModularInstance(t4), e7 = getModularInstance(e7), (t4 instanceof vn || t4 instanceof En) && (e7 instanceof vn || e7 instanceof En) && (t4.firestore === e7.firestore && t4.path === e7.path && t4.converter === e7.converter);
 }
-function Pn(t3, e7) {
-  return t3 = getModularInstance(t3), e7 = getModularInstance(e7), t3 instanceof bn && e7 instanceof bn && (t3.firestore === e7.firestore && ve2(t3._query, e7._query) && t3.converter === e7.converter);
+function Pn(t4, e7) {
+  return t4 = getModularInstance(t4), e7 = getModularInstance(e7), t4 instanceof bn && e7 instanceof bn && (t4.firestore === e7.firestore && ve2(t4._query, e7._query) && t4.converter === e7.converter);
 }
 function $n() {
   return new Nn("__name__");
 }
-function On(t3) {
-  switch (t3) {
+function On(t4) {
+  switch (t4) {
     case 0:
     case 2:
     case 1:
@@ -8684,211 +8684,211 @@ function On(t3) {
       throw b3();
   }
 }
-function Ln(t3) {
-  const e7 = t3._freezeSettings(), n3 = en(t3._databaseId);
-  return new Cn(t3._databaseId, !!e7.ignoreUndefinedProperties, n3);
+function Ln(t4) {
+  const e7 = t4._freezeSettings(), n3 = en(t4._databaseId);
+  return new Cn(t4._databaseId, !!e7.ignoreUndefinedProperties, n3);
 }
-function Mn(t3, e7, n3, r6, s6, i4 = {}) {
-  const o5 = t3.dt(i4.merge || i4.mergeFields ? 2 : 0, e7, n3, s6);
+function Mn(t4, e7, n3, r6, s6, i4 = {}) {
+  const o5 = t4.dt(i4.merge || i4.mergeFields ? 2 : 0, e7, n3, s6);
   Zn("Data must be an object, but it was:", o5, r6);
   const u = Jn(r6, o5);
   let c4, a4;
   if (i4.merge)
     c4 = new $t2(o5.fieldMask), a4 = o5.fieldTransforms;
   else if (i4.mergeFields) {
-    const t4 = [];
+    const t5 = [];
     for (const r7 of i4.mergeFields) {
       const s7 = tr(e7, r7, n3);
       if (!o5.contains(s7))
         throw new U2(P3, `Field '${s7}' is specified in your field mask but missing from your input data.`);
-      sr(t4, s7) || t4.push(s7);
+      sr(t5, s7) || t5.push(s7);
     }
-    c4 = new $t2(t4), a4 = o5.fieldTransforms.filter((t5) => c4.covers(t5.field));
+    c4 = new $t2(t5), a4 = o5.fieldTransforms.filter((t6) => c4.covers(t6.field));
   } else
     c4 = null, a4 = o5.fieldTransforms;
   return new Sn(new Jt(u), c4, a4);
 }
-function jn(t3, e7, n3) {
+function jn(t4, e7, n3) {
   return new kn({
     rt: 3,
     ft: e7.settings.ft,
-    methodName: t3._methodName,
+    methodName: t4._methodName,
     ot: n3
   }, e7.databaseId, e7.L, e7.ignoreUndefinedProperties);
 }
-function Wn(t3, e7, n3, r6) {
-  const s6 = t3.dt(1, e7, n3);
+function Wn(t4, e7, n3, r6) {
+  const s6 = t4.dt(1, e7, n3);
   Zn("Data must be an object, but it was:", s6, r6);
   const i4 = [], o5 = Jt.empty();
-  Tt2(r6, (t4, r7) => {
-    const u2 = nr(e7, t4, n3);
+  Tt2(r6, (t5, r7) => {
+    const u2 = nr(e7, t5, n3);
     r7 = getModularInstance(r7);
     const c4 = s6.ct(u2);
     if (r7 instanceof Un)
       i4.push(u2);
     else {
-      const t5 = Hn(r7, c4);
-      null != t5 && (i4.push(u2), o5.set(u2, t5));
+      const t6 = Hn(r7, c4);
+      null != t6 && (i4.push(u2), o5.set(u2, t6));
     }
   });
   const u = new $t2(i4);
   return new qn(o5, u, s6.fieldTransforms);
 }
-function Kn(t3, e7, n3, r6, s6, i4) {
-  const o5 = t3.dt(1, e7, n3), u = [tr(e7, r6, n3)], c4 = [s6];
+function Kn(t4, e7, n3, r6, s6, i4) {
+  const o5 = t4.dt(1, e7, n3), u = [tr(e7, r6, n3)], c4 = [s6];
   if (i4.length % 2 != 0)
     throw new U2(P3, `Function ${e7}() needs to be called with an even number of arguments that alternate between field names and values.`);
-  for (let t4 = 0; t4 < i4.length; t4 += 2)
-    u.push(tr(e7, i4[t4])), c4.push(i4[t4 + 1]);
+  for (let t5 = 0; t5 < i4.length; t5 += 2)
+    u.push(tr(e7, i4[t5])), c4.push(i4[t5 + 1]);
   const a4 = [], h2 = Jt.empty();
-  for (let t4 = u.length - 1; t4 >= 0; --t4)
-    if (!sr(a4, u[t4])) {
-      const e8 = u[t4];
-      let n4 = c4[t4];
+  for (let t5 = u.length - 1; t5 >= 0; --t5)
+    if (!sr(a4, u[t5])) {
+      const e8 = u[t5];
+      let n4 = c4[t5];
       n4 = getModularInstance(n4);
       const r7 = o5.ct(e8);
       if (n4 instanceof Un)
         a4.push(e8);
       else {
-        const t5 = Hn(n4, r7);
-        null != t5 && (a4.push(e8), h2.set(e8, t5));
+        const t6 = Hn(n4, r7);
+        null != t6 && (a4.push(e8), h2.set(e8, t6));
       }
     }
   const f7 = new $t2(a4);
   return new qn(h2, f7, o5.fieldTransforms);
 }
-function Yn(t3, e7, n3, r6 = false) {
-  return Hn(n3, t3.dt(r6 ? 4 : 3, e7));
+function Yn(t4, e7, n3, r6 = false) {
+  return Hn(n3, t4.dt(r6 ? 4 : 3, e7));
 }
-function Hn(t3, e7) {
+function Hn(t4, e7) {
   if (Xn(
-    t3 = getModularInstance(t3)
+    t4 = getModularInstance(t4)
   ))
-    return Zn("Unsupported field value:", e7, t3), Jn(t3, e7);
-  if (t3 instanceof Dn)
-    return function(t4, e8) {
+    return Zn("Unsupported field value:", e7, t4), Jn(t4, e7);
+  if (t4 instanceof Dn)
+    return function(t5, e8) {
       if (!On(e8.rt))
-        throw e8.ht(`${t4._methodName}() can only be used with update() and set()`);
+        throw e8.ht(`${t5._methodName}() can only be used with update() and set()`);
       if (!e8.path)
-        throw e8.ht(`${t4._methodName}() is not currently supported inside arrays`);
-      const n3 = t4._toFieldTransform(e8);
+        throw e8.ht(`${t5._methodName}() is not currently supported inside arrays`);
+      const n3 = t5._toFieldTransform(e8);
       n3 && e8.fieldTransforms.push(n3);
-    }(t3, e7), null;
-  if (void 0 === t3 && e7.ignoreUndefinedProperties)
+    }(t4, e7), null;
+  if (void 0 === t4 && e7.ignoreUndefinedProperties)
     return null;
-  if (e7.path && e7.fieldMask.push(e7.path), t3 instanceof Array) {
+  if (e7.path && e7.fieldMask.push(e7.path), t4 instanceof Array) {
     if (e7.settings.ot && 4 !== e7.rt)
       throw e7.ht("Nested arrays are not supported");
-    return function(t4, e8) {
+    return function(t5, e8) {
       const n3 = [];
       let r6 = 0;
-      for (const s6 of t4) {
-        let t5 = Hn(s6, e8.at(r6));
-        null == t5 && (t5 = {
+      for (const s6 of t5) {
+        let t6 = Hn(s6, e8.at(r6));
+        null == t6 && (t6 = {
           nullValue: "NULL_VALUE"
-        }), n3.push(t5), r6++;
+        }), n3.push(t6), r6++;
       }
       return {
         arrayValue: {
           values: n3
         }
       };
-    }(t3, e7);
+    }(t4, e7);
   }
-  return function(t4, e8) {
-    if (null === (t4 = getModularInstance(t4)))
+  return function(t5, e8) {
+    if (null === (t5 = getModularInstance(t5)))
       return {
         nullValue: "NULL_VALUE"
       };
-    if ("number" == typeof t4)
-      return be2(e8.L, t4);
-    if ("boolean" == typeof t4)
+    if ("number" == typeof t5)
+      return be2(e8.L, t5);
+    if ("boolean" == typeof t5)
       return {
-        booleanValue: t4
+        booleanValue: t5
       };
-    if ("string" == typeof t4)
+    if ("string" == typeof t5)
       return {
-        stringValue: t4
+        stringValue: t5
       };
-    if (t4 instanceof Date) {
-      const n3 = bt2.fromDate(t4);
-      return {
-        timestampValue: ke2(e8.L, n3)
-      };
-    }
-    if (t4 instanceof bt2) {
-      const n3 = new bt2(t4.seconds, 1e3 * Math.floor(t4.nanoseconds / 1e3));
+    if (t5 instanceof Date) {
+      const n3 = bt2.fromDate(t5);
       return {
         timestampValue: ke2(e8.L, n3)
       };
     }
-    if (t4 instanceof xn)
+    if (t5 instanceof bt2) {
+      const n3 = new bt2(t5.seconds, 1e3 * Math.floor(t5.nanoseconds / 1e3));
+      return {
+        timestampValue: ke2(e8.L, n3)
+      };
+    }
+    if (t5 instanceof xn)
       return {
         geoPointValue: {
-          latitude: t4.latitude,
-          longitude: t4.longitude
+          latitude: t5.latitude,
+          longitude: t5.longitude
         }
       };
-    if (t4 instanceof Vn)
+    if (t5 instanceof Vn)
       return {
-        bytesValue: Ce2(e8.L, t4._byteString)
+        bytesValue: Ce2(e8.L, t5._byteString)
       };
-    if (t4 instanceof vn) {
-      const n3 = e8.databaseId, r6 = t4.firestore._databaseId;
+    if (t5 instanceof vn) {
+      const n3 = e8.databaseId, r6 = t5.firestore._databaseId;
       if (!r6.isEqual(n3))
         throw e8.ht(`Document reference is for database ${r6.projectId}/${r6.database} but should be for database ${n3.projectId}/${n3.database}`);
       return {
-        referenceValue: Ue2(t4.firestore._databaseId || e8.databaseId, t4._key.path)
+        referenceValue: Ue2(t5.firestore._databaseId || e8.databaseId, t5._key.path)
       };
     }
-    throw e8.ht(`Unsupported field value: ${ut2(t4)}`);
-  }(t3, e7);
+    throw e8.ht(`Unsupported field value: ${ut2(t5)}`);
+  }(t4, e7);
 }
-function Jn(t3, e7) {
+function Jn(t4, e7) {
   const n3 = {};
-  return !function(t4) {
-    for (const e8 in t4)
-      if (Object.prototype.hasOwnProperty.call(t4, e8))
+  return !function(t5) {
+    for (const e8 in t5)
+      if (Object.prototype.hasOwnProperty.call(t5, e8))
         return false;
     return true;
-  }(t3) ? Tt2(t3, (t4, r6) => {
-    const s6 = Hn(r6, e7.it(t4));
-    null != s6 && (n3[t4] = s6);
+  }(t4) ? Tt2(t4, (t5, r6) => {
+    const s6 = Hn(r6, e7.it(t5));
+    null != s6 && (n3[t5] = s6);
   }) : e7.path && e7.path.length > 0 && e7.fieldMask.push(e7.path), {
     mapValue: {
       fields: n3
     }
   };
 }
-function Xn(t3) {
-  return !("object" != typeof t3 || null === t3 || t3 instanceof Array || t3 instanceof Date || t3 instanceof bt2 || t3 instanceof xn || t3 instanceof Vn || t3 instanceof vn || t3 instanceof Dn);
+function Xn(t4) {
+  return !("object" != typeof t4 || null === t4 || t4 instanceof Array || t4 instanceof Date || t4 instanceof bt2 || t4 instanceof xn || t4 instanceof Vn || t4 instanceof vn || t4 instanceof Dn);
 }
-function Zn(t3, e7, n3) {
-  if (!Xn(n3) || !function(t4) {
-    return "object" == typeof t4 && null !== t4 && (Object.getPrototypeOf(t4) === Object.prototype || null === Object.getPrototypeOf(t4));
+function Zn(t4, e7, n3) {
+  if (!Xn(n3) || !function(t5) {
+    return "object" == typeof t5 && null !== t5 && (Object.getPrototypeOf(t5) === Object.prototype || null === Object.getPrototypeOf(t5));
   }(n3)) {
     const r6 = ut2(n3);
-    throw "an object" === r6 ? e7.ht(t3 + " a custom object") : e7.ht(t3 + " " + r6);
+    throw "an object" === r6 ? e7.ht(t4 + " a custom object") : e7.ht(t4 + " " + r6);
   }
 }
-function tr(t3, e7, n3) {
+function tr(t4, e7, n3) {
   if ((e7 = getModularInstance(e7)) instanceof Nn)
     return e7._internalPath;
   if ("string" == typeof e7)
-    return nr(t3, e7);
+    return nr(t4, e7);
   throw rr(
     "Field path arguments must be of type string or ",
-    t3,
+    t4,
     false,
     void 0,
     n3
   );
 }
-function nr(t3, e7, n3) {
+function nr(t4, e7, n3) {
   if (e7.search(er) >= 0)
     throw rr(
       `Invalid field path (${e7}). Paths must not contain '~', '*', '/', '[', or ']'`,
-      t3,
+      t4,
       false,
       void 0,
       n3
@@ -8898,97 +8898,97 @@ function nr(t3, e7, n3) {
   } catch (r6) {
     throw rr(
       `Invalid field path (${e7}). Paths must not be empty, begin with '.', end with '.', or contain '..'`,
-      t3,
+      t4,
       false,
       void 0,
       n3
     );
   }
 }
-function rr(t3, e7, n3, r6, s6) {
+function rr(t4, e7, n3, r6, s6) {
   const i4 = r6 && !r6.isEmpty(), o5 = void 0 !== s6;
   let u = `Function ${e7}() called with invalid data`;
   n3 && (u += " (via `toFirestore()`)"), u += ". ";
   let c4 = "";
-  return (i4 || o5) && (c4 += " (found", i4 && (c4 += ` in field ${r6}`), o5 && (c4 += ` in document ${s6}`), c4 += ")"), new U2(P3, u + t3 + c4);
+  return (i4 || o5) && (c4 += " (found", i4 && (c4 += ` in field ${r6}`), o5 && (c4 += ` in document ${s6}`), c4 += ")"), new U2(P3, u + t4 + c4);
 }
-function sr(t3, e7) {
-  return t3.some((t4) => t4.isEqual(e7));
+function sr(t4, e7) {
+  return t4.some((t5) => t5.isEqual(e7));
 }
-function cr(t3, e7) {
-  return t3 = getModularInstance(t3), e7 = getModularInstance(e7), t3 instanceof ir && e7 instanceof ir ? t3._firestore === e7._firestore && t3._key.isEqual(e7._key) && (null === t3._document ? null === e7._document : t3._document.isEqual(e7._document)) && t3._converter === e7._converter : t3 instanceof ur && e7 instanceof ur && (Pn(t3.query, e7.query) && vt2(t3.docs, e7.docs, cr));
+function cr(t4, e7) {
+  return t4 = getModularInstance(t4), e7 = getModularInstance(e7), t4 instanceof ir && e7 instanceof ir ? t4._firestore === e7._firestore && t4._key.isEqual(e7._key) && (null === t4._document ? null === e7._document : t4._document.isEqual(e7._document)) && t4._converter === e7._converter : t4 instanceof ur && e7 instanceof ur && (Pn(t4.query, e7.query) && vt2(t4.docs, e7.docs, cr));
 }
-function ar(t3, e7) {
-  return "string" == typeof e7 ? nr(t3, e7) : e7 instanceof Nn ? e7._internalPath : e7._delegate._internalPath;
+function ar(t4, e7) {
+  return "string" == typeof e7 ? nr(t4, e7) : e7 instanceof Nn ? e7._internalPath : e7._delegate._internalPath;
 }
-function lr(t3, ...e7) {
+function lr(t4, ...e7) {
   for (const n3 of e7)
-    t3 = n3._apply(t3);
-  return t3;
+    t4 = n3._apply(t4);
+  return t4;
 }
-function dr(t3, e7, n3) {
-  const r6 = e7, s6 = ar("where", t3);
+function dr(t4, e7, n3) {
+  const r6 = e7, s6 = ar("where", t4);
   return new fr(s6, r6, n3);
 }
-function mr(t3, e7 = "asc") {
-  const n3 = e7, r6 = ar("orderBy", t3);
+function mr(t4, e7 = "asc") {
+  const n3 = e7, r6 = ar("orderBy", t4);
   return new wr(r6, n3);
 }
-function yr(t3) {
-  return at2("limit", t3), new pr("limit", t3, "F");
+function yr(t4) {
+  return at2("limit", t4), new pr("limit", t4, "F");
 }
-function _r2(t3) {
-  return at2("limitToLast", t3), new pr("limitToLast", t3, "L");
+function _r2(t4) {
+  return at2("limitToLast", t4), new pr("limitToLast", t4, "L");
 }
-function vr(...t3) {
+function vr(...t4) {
   return new gr(
     "startAt",
-    t3,
+    t4,
     true
   );
 }
-function br(...t3) {
+function br(...t4) {
   return new gr(
     "startAfter",
-    t3,
+    t4,
     false
   );
 }
-function Ir(...t3) {
+function Ir(...t4) {
   return new Er(
     "endBefore",
-    t3,
+    t4,
     false
   );
 }
-function Tr(...t3) {
-  return new Er("endAt", t3, true);
+function Tr(...t4) {
+  return new Er("endAt", t4, true);
 }
-function Ar(t3, e7, n3, r6) {
+function Ar(t4, e7, n3, r6) {
   if (n3[0] = getModularInstance(n3[0]), n3[0] instanceof ir)
-    return function(t4, e8, n4, r7, s6) {
+    return function(t5, e8, n4, r7, s6) {
       if (!r7)
         throw new U2(N2, `Can't use a DocumentSnapshot that doesn't exist for ${n4}().`);
       const i4 = [];
-      for (const n5 of _e3(t4))
+      for (const n5 of _e3(t5))
         if (n5.field.isKeyField())
           i4.push(zt2(e8, r7.key));
         else {
-          const t5 = r7.data.field(n5.field);
-          if (Ot2(t5))
+          const t6 = r7.data.field(n5.field);
+          if (Ot2(t6))
             throw new U2(P3, 'Invalid query. You are trying to start or end a query using a document for which the field "' + n5.field + '" is an uncommitted server timestamp. (Since the value of this field is unknown, you cannot start/end a query with it.)');
-          if (null === t5) {
-            const t6 = n5.field.canonicalString();
-            throw new U2(P3, `Invalid query. You are trying to start or end a query using a document for which the field '${t6}' (used as the orderBy) does not exist.`);
+          if (null === t6) {
+            const t7 = n5.field.canonicalString();
+            throw new U2(P3, `Invalid query. You are trying to start or end a query using a document for which the field '${t7}' (used as the orderBy) does not exist.`);
           }
-          i4.push(t5);
+          i4.push(t6);
         }
       return new he2(i4, s6);
-    }(t3._query, t3.firestore._databaseId, e7, n3[0]._document, r6);
+    }(t4._query, t4.firestore._databaseId, e7, n3[0]._document, r6);
   {
-    const s6 = Ln(t3.firestore);
-    return function(t4, e8, n4, r7, s7, i4) {
-      const o5 = t4.explicitOrderBy;
+    const s6 = Ln(t4.firestore);
+    return function(t5, e8, n4, r7, s7, i4) {
+      const o5 = t5.explicitOrderBy;
       if (s7.length > o5.length)
         throw new U2(P3, `Too many arguments provided to ${r7}(). The number of arguments must be less than or equal to the number of orderBy() clauses`);
       const u = [];
@@ -8997,23 +8997,23 @@ function Ar(t3, e7, n3, r6) {
         if (o5[i5].field.isKeyField()) {
           if ("string" != typeof c4)
             throw new U2(P3, `Invalid query. Expected a string for document ID in ${r7}(), but got a ${typeof c4}`);
-          if (!ye2(t4) && -1 !== c4.indexOf("/"))
+          if (!ye2(t5) && -1 !== c4.indexOf("/"))
             throw new U2(P3, `Invalid query. When querying a collection and ordering by documentId(), the value passed to ${r7}() must be a plain document ID, but '${c4}' contains a slash.`);
-          const n5 = t4.path.child(tt2.fromString(c4));
+          const n5 = t5.path.child(tt2.fromString(c4));
           if (!rt2.isDocumentKey(n5))
             throw new U2(P3, `Invalid query. When querying a collection group and ordering by documentId(), the value passed to ${r7}() must result in a valid document path, but '${n5}' is not because it contains an odd number of segments.`);
           const s8 = new rt2(n5);
           u.push(zt2(e8, s8));
         } else {
-          const t5 = Yn(n4, r7, c4);
-          u.push(t5);
+          const t6 = Yn(n4, r7, c4);
+          u.push(t6);
         }
       }
       return new he2(u, i4);
-    }(t3._query, t3.firestore._databaseId, s6, e7, n3, r6);
+    }(t4._query, t4.firestore._databaseId, s6, e7, n3, r6);
   }
 }
-function Rr(t3, e7, n3) {
+function Rr(t4, e7, n3) {
   if ("string" == typeof (n3 = getModularInstance(n3))) {
     if ("" === n3)
       throw new U2(P3, "Invalid query. When querying with documentId(), you must provide a valid document ID, but it was an empty string.");
@@ -9022,68 +9022,68 @@ function Rr(t3, e7, n3) {
     const r6 = e7.path.child(tt2.fromString(n3));
     if (!rt2.isDocumentKey(r6))
       throw new U2(P3, `Invalid query. When querying a collection group by documentId(), the value provided must result in a valid document path, but '${r6}' is not because it has an odd number of segments (${r6.length}).`);
-    return zt2(t3, new rt2(r6));
+    return zt2(t4, new rt2(r6));
   }
   if (n3 instanceof vn)
-    return zt2(t3, n3._key);
+    return zt2(t4, n3._key);
   throw new U2(P3, `Invalid query. When querying with documentId(), you must provide a valid string or a DocumentReference, but it was: ${ut2(n3)}.`);
 }
-function Pr(t3, e7) {
-  if (!Array.isArray(t3) || 0 === t3.length)
+function Pr(t4, e7) {
+  if (!Array.isArray(t4) || 0 === t4.length)
     throw new U2(P3, `Invalid Query. A non-empty array is required for '${e7.toString()}' filters.`);
-  if (t3.length > 10)
+  if (t4.length > 10)
     throw new U2(P3, `Invalid Query. '${e7.toString()}' filters support a maximum of 10 elements in the value array.`);
 }
-function Vr(t3, e7, n3) {
+function Vr(t4, e7, n3) {
   if (!n3.isEqual(e7))
     throw new U2(P3, `Invalid query. You have a where filter with an inequality (<, <=, !=, not-in, >, or >=) on field '${e7.toString()}' and so you must also use '${e7.toString()}' as your first argument to orderBy(), but your first orderBy() is on field '${n3.toString()}' instead.`);
 }
-function Nr(t3, e7, n3) {
+function Nr(t4, e7, n3) {
   let r6;
-  return r6 = t3 ? n3 && (n3.merge || n3.mergeFields) ? t3.toFirestore(e7, n3) : t3.toFirestore(e7) : e7, r6;
+  return r6 = t4 ? n3 && (n3.merge || n3.mergeFields) ? t4.toFirestore(e7, n3) : t4.toFirestore(e7) : e7, r6;
 }
-function Dr(t3) {
-  const e7 = hn((t3 = ct2(t3, vn)).firestore), n3 = new $r(t3.firestore);
-  return on(e7, [t3._key]).then((e8) => {
+function Dr(t4) {
+  const e7 = hn((t4 = ct2(t4, vn)).firestore), n3 = new $r(t4.firestore);
+  return on(e7, [t4._key]).then((e8) => {
     E3(1 === e8.length);
     const r6 = e8[0];
-    return new ir(t3.firestore, n3, t3._key, r6.isFoundDocument() ? r6 : null, t3.converter);
+    return new ir(t4.firestore, n3, t4._key, r6.isFoundDocument() ? r6 : null, t4.converter);
   });
 }
-function xr(t3) {
-  !function(t4) {
-    if ("L" === t4.limitType && 0 === t4.explicitOrderBy.length)
+function xr(t4) {
+  !function(t5) {
+    if ("L" === t5.limitType && 0 === t5.explicitOrderBy.length)
       throw new U2(k3, "limitToLast() queries require specifying at least one orderBy() clause");
-  }((t3 = ct2(t3, bn))._query);
-  const e7 = hn(t3.firestore), n3 = new $r(t3.firestore);
-  return un(e7, t3._query).then((e8) => {
-    const r6 = e8.map((e9) => new or(t3.firestore, n3, e9.key, e9, t3.converter));
-    return "L" === t3._query.limitType && r6.reverse(), new ur(t3, r6);
+  }((t4 = ct2(t4, bn))._query);
+  const e7 = hn(t4.firestore), n3 = new $r(t4.firestore);
+  return un(e7, t4._query).then((e8) => {
+    const r6 = e8.map((e9) => new or(t4.firestore, n3, e9.key, e9, t4.converter));
+    return "L" === t4._query.limitType && r6.reverse(), new ur(t4, r6);
   });
 }
-function Fr(t3, e7, n3) {
-  const r6 = Nr((t3 = ct2(t3, vn)).converter, e7, n3), s6 = Mn(Ln(t3.firestore), "setDoc", t3._key, r6, null !== t3.converter, n3);
-  return sn(hn(t3.firestore), [s6.toMutation(t3._key, Ve.none())]);
+function Fr(t4, e7, n3) {
+  const r6 = Nr((t4 = ct2(t4, vn)).converter, e7, n3), s6 = Mn(Ln(t4.firestore), "setDoc", t4._key, r6, null !== t4.converter, n3);
+  return sn(hn(t4.firestore), [s6.toMutation(t4._key, Ve.none())]);
 }
-function Sr(t3, e7, n3, ...r6) {
-  const s6 = Ln((t3 = ct2(t3, vn)).firestore);
+function Sr(t4, e7, n3, ...r6) {
+  const s6 = Ln((t4 = ct2(t4, vn)).firestore);
   let i4;
-  i4 = "string" == typeof (e7 = getModularInstance(e7)) || e7 instanceof Nn ? Kn(s6, "updateDoc", t3._key, e7, n3, r6) : Wn(s6, "updateDoc", t3._key, e7);
-  return sn(hn(t3.firestore), [i4.toMutation(t3._key, Ve.exists(true))]);
+  i4 = "string" == typeof (e7 = getModularInstance(e7)) || e7 instanceof Nn ? Kn(s6, "updateDoc", t4._key, e7, n3, r6) : Wn(s6, "updateDoc", t4._key, e7);
+  return sn(hn(t4.firestore), [i4.toMutation(t4._key, Ve.exists(true))]);
 }
-function qr(t3) {
-  return sn(hn((t3 = ct2(t3, vn)).firestore), [new xe2(t3._key, Ve.none())]);
+function qr(t4) {
+  return sn(hn((t4 = ct2(t4, vn)).firestore), [new xe2(t4._key, Ve.none())]);
 }
-function Or(t3, e7) {
-  const n3 = An(t3 = ct2(t3, En)), r6 = Nr(t3.converter, e7), s6 = Mn(Ln(t3.firestore), "addDoc", n3._key, r6, null !== n3.converter, {});
-  return sn(hn(t3.firestore), [s6.toMutation(n3._key, Ve.exists(false))]).then(() => n3);
+function Or(t4, e7) {
+  const n3 = An(t4 = ct2(t4, En)), r6 = Nr(t4.converter, e7), s6 = Mn(Ln(t4.firestore), "addDoc", n3._key, r6, null !== n3.converter, {});
+  return sn(hn(t4.firestore), [s6.toMutation(n3._key, Ve.exists(false))]).then(() => n3);
 }
-function kr(t3) {
-  const e7 = ct2(t3.firestore, fn), n3 = hn(e7), r6 = new $r(e7);
-  return new gn(t3, n3, r6).run();
+function kr(t4) {
+  const e7 = ct2(t4.firestore, fn), n3 = hn(e7), r6 = new $r(e7);
+  return new gn(t4, n3, r6).run();
 }
-function Cr(t3, e7) {
-  return Pn(t3.query, e7.query) && deepEqual(t3.data(), e7.data());
+function Cr(t4, e7) {
+  return Pn(t4.query, e7.query) && deepEqual(t4.data(), e7.data());
 }
 function Lr() {
   return new Un("deleteField");
@@ -9091,37 +9091,37 @@ function Lr() {
 function Mr() {
   return new Bn("serverTimestamp");
 }
-function Ur(...t3) {
-  return new Qn("arrayUnion", t3);
+function Ur(...t4) {
+  return new Qn("arrayUnion", t4);
 }
-function jr(...t3) {
-  return new zn("arrayRemove", t3);
+function jr(...t4) {
+  return new zn("arrayRemove", t4);
 }
-function Br(t3) {
-  return new Gn("increment", t3);
+function Br(t4) {
+  return new Gn("increment", t4);
 }
-function zr(t3, e7) {
-  if ((t3 = getModularInstance(t3)).firestore !== e7)
+function zr(t4, e7) {
+  if ((t4 = getModularInstance(t4)).firestore !== e7)
     throw new U2(P3, "Provided document reference is from a different Firestore instance.");
-  return t3;
+  return t4;
 }
-function Gr(t3) {
-  const e7 = hn(t3 = ct2(t3, fn));
-  return new Qr(t3, (t4) => sn(e7, t4));
+function Gr(t4) {
+  const e7 = hn(t4 = ct2(t4, fn));
+  return new Qr(t4, (t5) => sn(e7, t5));
 }
 function Hr() {
   return "undefined" != typeof document ? document : null;
 }
-function ts(t3, e7, n3) {
-  const r6 = hn(t3 = ct2(t3, fn)), s6 = Object.assign(Object.assign({}, Kr), n3);
-  !function(t4) {
-    if (t4.maxAttempts < 1)
+function ts(t4, e7, n3) {
+  const r6 = hn(t4 = ct2(t4, fn)), s6 = Object.assign(Object.assign({}, Kr), n3);
+  !function(t5) {
+    if (t5.maxAttempts < 1)
       throw new U2(P3, "Max attempts must be at least 1");
   }(s6);
   const i4 = new j2();
-  return new Yr(new Xr(), r6, s6, (n4) => e7(new Zr(t3, n4)), i4).run(), i4.promise;
+  return new Yr(new Xr(), r6, s6, (n4) => e7(new Zr(t4, n4)), i4).run(), i4.promise;
 }
-var d3, w3, m2, T3, A5, R2, P3, V3, N2, $2, D3, x3, F4, S3, q3, O3, k3, C3, L3, M3, U2, j2, B3, Q2, z4, G2, W2, K2, Y3, H3, J2, X2, Z2, tt2, et2, nt2, rt2, ft2, dt2, wt2, pt2, _t3, bt2, Et2, At2, Rt2, Pt2, Vt, Nt2, $t2, Dt2, xt2, Lt2, Jt, Xt, Zt, ee2, ne2, re2, se2, oe2, ue2, ce2, ae2, he2, le2, we2, Ee2, Ie2, Te2, Ae2, Re2, Pe2, Ve, Ne2, $e2, De2, xe2, Fe2, Se2, qe2, Oe2, nn, rn, an, ln, fn, yn, _n2, gn, vn, bn, En, Vn, Nn, Dn, xn, Fn, Sn, qn, kn, Cn, Un, Bn, Qn, zn, Gn, er, ir, or, ur, hr, fr, wr, pr, gr, Er, $r, Qr, Wr, Kr, Yr, Jr, Xr, Zr;
+var d3, w3, m2, T3, A5, R2, P3, V3, N2, $2, D2, x3, F4, S3, q3, O3, k3, C3, L3, M3, U2, j2, B3, Q2, z4, G2, W2, K2, Y3, H3, J2, X2, Z2, tt2, et2, nt2, rt2, ft2, dt2, wt2, pt2, _t3, bt2, Et2, At2, Rt2, Pt2, Vt, Nt2, $t2, Dt2, xt2, Lt2, Jt, Xt, Zt, ee2, ne2, re2, se2, oe2, ue2, ce2, ae2, he2, le2, we2, Ee2, Ie2, Te2, Ae2, Re2, Pe2, Ve, Ne2, $e2, De2, xe2, Fe2, Se2, qe2, Oe2, nn, rn, an, ln, fn, yn, _n2, gn, vn, bn, En, Vn, Nn, Dn, xn, Fn, Sn, qn, kn, Cn, Un, Bn, Qn, zn, Gn, er, ir, or, ur, hr, fr, wr, pr, gr, Er, $r, Qr, Wr, Kr, Yr, Jr, Xr, Zr;
 var init_index_browser_esm2017 = __esm({
   "node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js"() {
     init_index_esm20174();
@@ -9129,8 +9129,8 @@ var init_index_browser_esm2017 = __esm({
     init_index_esm20173();
     init_index_esm2017();
     d3 = class {
-      constructor(t3) {
-        this.uid = t3;
+      constructor(t4) {
+        this.uid = t4;
       }
       isAuthenticated() {
         return null != this.uid;
@@ -9138,8 +9138,8 @@ var init_index_browser_esm2017 = __esm({
       toKey() {
         return this.isAuthenticated() ? "uid:" + this.uid : "anonymous-user";
       }
-      isEqual(t3) {
-        return t3.uid === this.uid;
+      isEqual(t4) {
+        return t4.uid === this.uid;
       }
     };
     d3.UNAUTHENTICATED = new d3(null), d3.GOOGLE_CREDENTIALS = new d3("google-credentials-uid"), d3.FIRST_PARTY = new d3("first-party-uid"), d3.MOCK_USER = new d3("mock-user");
@@ -9152,7 +9152,7 @@ var init_index_browser_esm2017 = __esm({
     V3 = "deadline-exceeded";
     N2 = "not-found";
     $2 = "already-exists";
-    D3 = "permission-denied";
+    D2 = "permission-denied";
     x3 = "unauthenticated";
     F4 = "resource-exhausted";
     S3 = "failed-precondition";
@@ -9163,20 +9163,20 @@ var init_index_browser_esm2017 = __esm({
     L3 = "unavailable";
     M3 = "data-loss";
     U2 = class extends FirebaseError {
-      constructor(t3, e7) {
-        super(t3, e7), this.code = t3, this.message = e7, this.toString = () => `${this.name}: [code=${this.code}]: ${this.message}`;
+      constructor(t4, e7) {
+        super(t4, e7), this.code = t4, this.message = e7, this.toString = () => `${this.name}: [code=${this.code}]: ${this.message}`;
       }
     };
     j2 = class {
       constructor() {
-        this.promise = new Promise((t3, e7) => {
-          this.resolve = t3, this.reject = e7;
+        this.promise = new Promise((t4, e7) => {
+          this.resolve = t4, this.reject = e7;
         });
       }
     };
     B3 = class {
-      constructor(t3, e7) {
-        this.user = e7, this.type = "OAuth", this.headers = /* @__PURE__ */ new Map(), this.headers.set("Authorization", `Bearer ${t3}`);
+      constructor(t4, e7) {
+        this.user = e7, this.type = "OAuth", this.headers = /* @__PURE__ */ new Map(), this.headers.set("Authorization", `Bearer ${t4}`);
       }
     };
     Q2 = class {
@@ -9185,66 +9185,66 @@ var init_index_browser_esm2017 = __esm({
       }
       invalidateToken() {
       }
-      start(t3, e7) {
-        t3.enqueueRetryable(() => e7(d3.UNAUTHENTICATED));
+      start(t4, e7) {
+        t4.enqueueRetryable(() => e7(d3.UNAUTHENTICATED));
       }
       shutdown() {
       }
     };
     z4 = class {
-      constructor(t3) {
-        this.token = t3, this.changeListener = null;
+      constructor(t4) {
+        this.token = t4, this.changeListener = null;
       }
       getToken() {
         return Promise.resolve(this.token);
       }
       invalidateToken() {
       }
-      start(t3, e7) {
-        this.changeListener = e7, t3.enqueueRetryable(() => e7(this.token.user));
+      start(t4, e7) {
+        this.changeListener = e7, t4.enqueueRetryable(() => e7(this.token.user));
       }
       shutdown() {
         this.changeListener = null;
       }
     };
     G2 = class {
-      constructor(t3) {
-        this.auth = null, t3.onInit((t4) => {
-          this.auth = t4;
+      constructor(t4) {
+        this.auth = null, t4.onInit((t5) => {
+          this.auth = t5;
         });
       }
       getToken() {
-        return this.auth ? this.auth.getToken().then((t3) => t3 ? (E3("string" == typeof t3.accessToken), new B3(t3.accessToken, new d3(this.auth.getUid()))) : null) : Promise.resolve(null);
+        return this.auth ? this.auth.getToken().then((t4) => t4 ? (E3("string" == typeof t4.accessToken), new B3(t4.accessToken, new d3(this.auth.getUid()))) : null) : Promise.resolve(null);
       }
       invalidateToken() {
       }
-      start(t3, e7) {
+      start(t4, e7) {
       }
       shutdown() {
       }
     };
     W2 = class {
-      constructor(t3, e7, n3, r6) {
-        this.t = t3, this.i = e7, this.o = n3, this.u = r6, this.type = "FirstParty", this.user = d3.FIRST_PARTY, this.h = /* @__PURE__ */ new Map();
+      constructor(t4, e7, n3, r6) {
+        this.t = t4, this.i = e7, this.o = n3, this.u = r6, this.type = "FirstParty", this.user = d3.FIRST_PARTY, this.h = /* @__PURE__ */ new Map();
       }
       l() {
         return this.u ? this.u() : (E3(!("object" != typeof this.t || null === this.t || !this.t.auth || !this.t.auth.getAuthHeaderValueForFirstParty)), this.t.auth.getAuthHeaderValueForFirstParty([]));
       }
       get headers() {
         this.h.set("X-Goog-AuthUser", this.i);
-        const t3 = this.l();
-        return t3 && this.h.set("Authorization", t3), this.o && this.h.set("X-Goog-Iam-Authorization-Token", this.o), this.h;
+        const t4 = this.l();
+        return t4 && this.h.set("Authorization", t4), this.o && this.h.set("X-Goog-Iam-Authorization-Token", this.o), this.h;
       }
     };
     K2 = class {
-      constructor(t3, e7, n3, r6) {
-        this.t = t3, this.i = e7, this.o = n3, this.u = r6;
+      constructor(t4, e7, n3, r6) {
+        this.t = t4, this.i = e7, this.o = n3, this.u = r6;
       }
       getToken() {
         return Promise.resolve(new W2(this.t, this.i, this.o, this.u));
       }
-      start(t3, e7) {
-        t3.enqueueRetryable(() => e7(d3.FIRST_PARTY));
+      start(t4, e7) {
+        t4.enqueueRetryable(() => e7(d3.FIRST_PARTY));
       }
       shutdown() {
       }
@@ -9252,34 +9252,34 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     Y3 = class {
-      constructor(t3) {
-        this.value = t3, this.type = "AppCheck", this.headers = /* @__PURE__ */ new Map(), t3 && t3.length > 0 && this.headers.set("x-firebase-appcheck", this.value);
+      constructor(t4) {
+        this.value = t4, this.type = "AppCheck", this.headers = /* @__PURE__ */ new Map(), t4 && t4.length > 0 && this.headers.set("x-firebase-appcheck", this.value);
       }
     };
     H3 = class {
-      constructor(t3) {
-        this.m = t3, this.appCheck = null, t3.onInit((t4) => {
-          this.appCheck = t4;
+      constructor(t4) {
+        this.m = t4, this.appCheck = null, t4.onInit((t5) => {
+          this.appCheck = t5;
         });
       }
       getToken() {
-        return this.appCheck ? this.appCheck.getToken().then((t3) => t3 ? (E3("string" == typeof t3.token), new Y3(t3.token)) : null) : Promise.resolve(null);
+        return this.appCheck ? this.appCheck.getToken().then((t4) => t4 ? (E3("string" == typeof t4.token), new Y3(t4.token)) : null) : Promise.resolve(null);
       }
       invalidateToken() {
       }
-      start(t3, e7) {
+      start(t4, e7) {
       }
       shutdown() {
       }
     };
     J2 = class {
-      constructor(t3, e7, n3, r6, s6, i4, o5, u) {
-        this.databaseId = t3, this.appId = e7, this.persistenceKey = n3, this.host = r6, this.ssl = s6, this.forceLongPolling = i4, this.autoDetectLongPolling = o5, this.useFetchStreams = u;
+      constructor(t4, e7, n3, r6, s6, i4, o5, u) {
+        this.databaseId = t4, this.appId = e7, this.persistenceKey = n3, this.host = r6, this.ssl = s6, this.forceLongPolling = i4, this.autoDetectLongPolling = o5, this.useFetchStreams = u;
       }
     };
     X2 = class {
-      constructor(t3, e7) {
-        this.projectId = t3, this.database = e7 || "(default)";
+      constructor(t4, e7) {
+        this.projectId = t4, this.database = e7 || "(default)";
       }
       static empty() {
         return new X2("", "");
@@ -9287,31 +9287,31 @@ var init_index_browser_esm2017 = __esm({
       get isDefaultDatabase() {
         return "(default)" === this.database;
       }
-      isEqual(t3) {
-        return t3 instanceof X2 && t3.projectId === this.projectId && t3.database === this.database;
+      isEqual(t4) {
+        return t4 instanceof X2 && t4.projectId === this.projectId && t4.database === this.database;
       }
     };
     Z2 = class {
-      constructor(t3, e7, n3) {
-        void 0 === e7 ? e7 = 0 : e7 > t3.length && b3(), void 0 === n3 ? n3 = t3.length - e7 : n3 > t3.length - e7 && b3(), this.segments = t3, this.offset = e7, this.len = n3;
+      constructor(t4, e7, n3) {
+        void 0 === e7 ? e7 = 0 : e7 > t4.length && b3(), void 0 === n3 ? n3 = t4.length - e7 : n3 > t4.length - e7 && b3(), this.segments = t4, this.offset = e7, this.len = n3;
       }
       get length() {
         return this.len;
       }
-      isEqual(t3) {
-        return 0 === Z2.comparator(this, t3);
+      isEqual(t4) {
+        return 0 === Z2.comparator(this, t4);
       }
-      child(t3) {
+      child(t4) {
         const e7 = this.segments.slice(this.offset, this.limit());
-        return t3 instanceof Z2 ? t3.forEach((t4) => {
-          e7.push(t4);
-        }) : e7.push(t3), this.construct(e7);
+        return t4 instanceof Z2 ? t4.forEach((t5) => {
+          e7.push(t5);
+        }) : e7.push(t4), this.construct(e7);
       }
       limit() {
         return this.offset + this.length;
       }
-      popFirst(t3) {
-        return t3 = void 0 === t3 ? 1 : t3, this.construct(this.segments, this.offset + t3, this.length - t3);
+      popFirst(t4) {
+        return t4 = void 0 === t4 ? 1 : t4, this.construct(this.segments, this.offset + t4, this.length - t4);
       }
       popLast() {
         return this.construct(this.segments, this.offset, this.length - 1);
@@ -9322,50 +9322,50 @@ var init_index_browser_esm2017 = __esm({
       lastSegment() {
         return this.get(this.length - 1);
       }
-      get(t3) {
-        return this.segments[this.offset + t3];
+      get(t4) {
+        return this.segments[this.offset + t4];
       }
       isEmpty() {
         return 0 === this.length;
       }
-      isPrefixOf(t3) {
-        if (t3.length < this.length)
+      isPrefixOf(t4) {
+        if (t4.length < this.length)
           return false;
         for (let e7 = 0; e7 < this.length; e7++)
-          if (this.get(e7) !== t3.get(e7))
+          if (this.get(e7) !== t4.get(e7))
             return false;
         return true;
       }
-      isImmediateParentOf(t3) {
-        if (this.length + 1 !== t3.length)
+      isImmediateParentOf(t4) {
+        if (this.length + 1 !== t4.length)
           return false;
         for (let e7 = 0; e7 < this.length; e7++)
-          if (this.get(e7) !== t3.get(e7))
+          if (this.get(e7) !== t4.get(e7))
             return false;
         return true;
       }
-      forEach(t3) {
+      forEach(t4) {
         for (let e7 = this.offset, n3 = this.limit(); e7 < n3; e7++)
-          t3(this.segments[e7]);
+          t4(this.segments[e7]);
       }
       toArray() {
         return this.segments.slice(this.offset, this.limit());
       }
-      static comparator(t3, e7) {
-        const n3 = Math.min(t3.length, e7.length);
+      static comparator(t4, e7) {
+        const n3 = Math.min(t4.length, e7.length);
         for (let r6 = 0; r6 < n3; r6++) {
-          const n4 = t3.get(r6), s6 = e7.get(r6);
+          const n4 = t4.get(r6), s6 = e7.get(r6);
           if (n4 < s6)
             return -1;
           if (n4 > s6)
             return 1;
         }
-        return t3.length < e7.length ? -1 : t3.length > e7.length ? 1 : 0;
+        return t4.length < e7.length ? -1 : t4.length > e7.length ? 1 : 0;
       }
     };
     tt2 = class extends Z2 {
-      construct(t3, e7, n3) {
-        return new tt2(t3, e7, n3);
+      construct(t4, e7, n3) {
+        return new tt2(t4, e7, n3);
       }
       canonicalString() {
         return this.toArray().join("/");
@@ -9373,12 +9373,12 @@ var init_index_browser_esm2017 = __esm({
       toString() {
         return this.canonicalString();
       }
-      static fromString(...t3) {
+      static fromString(...t4) {
         const e7 = [];
-        for (const n3 of t3) {
+        for (const n3 of t4) {
           if (n3.indexOf("//") >= 0)
             throw new U2(P3, `Invalid segment (${n3}). Paths must not contain // in them.`);
-          e7.push(...n3.split("/").filter((t4) => t4.length > 0));
+          e7.push(...n3.split("/").filter((t5) => t5.length > 0));
         }
         return new tt2(e7);
       }
@@ -9388,14 +9388,14 @@ var init_index_browser_esm2017 = __esm({
     };
     et2 = /^[_a-zA-Z][_a-zA-Z0-9]*$/;
     nt2 = class extends Z2 {
-      construct(t3, e7, n3) {
-        return new nt2(t3, e7, n3);
+      construct(t4, e7, n3) {
+        return new nt2(t4, e7, n3);
       }
-      static isValidIdentifier(t3) {
-        return et2.test(t3);
+      static isValidIdentifier(t4) {
+        return et2.test(t4);
       }
       canonicalString() {
-        return this.toArray().map((t3) => (t3 = t3.replace(/\\/g, "\\\\").replace(/`/g, "\\`"), nt2.isValidIdentifier(t3) || (t3 = "`" + t3 + "`"), t3)).join(".");
+        return this.toArray().map((t4) => (t4 = t4.replace(/\\/g, "\\\\").replace(/`/g, "\\`"), nt2.isValidIdentifier(t4) || (t4 = "`" + t4 + "`"), t4)).join(".");
       }
       toString() {
         return this.canonicalString();
@@ -9406,29 +9406,29 @@ var init_index_browser_esm2017 = __esm({
       static keyField() {
         return new nt2(["__name__"]);
       }
-      static fromServerFormat(t3) {
+      static fromServerFormat(t4) {
         const e7 = [];
         let n3 = "", r6 = 0;
         const s6 = () => {
           if (0 === n3.length)
-            throw new U2(P3, `Invalid field path (${t3}). Paths must not be empty, begin with '.', end with '.', or contain '..'`);
+            throw new U2(P3, `Invalid field path (${t4}). Paths must not be empty, begin with '.', end with '.', or contain '..'`);
           e7.push(n3), n3 = "";
         };
         let i4 = false;
-        for (; r6 < t3.length; ) {
-          const e8 = t3[r6];
+        for (; r6 < t4.length; ) {
+          const e8 = t4[r6];
           if ("\\" === e8) {
-            if (r6 + 1 === t3.length)
-              throw new U2(P3, "Path has trailing escape character: " + t3);
-            const e9 = t3[r6 + 1];
+            if (r6 + 1 === t4.length)
+              throw new U2(P3, "Path has trailing escape character: " + t4);
+            const e9 = t4[r6 + 1];
             if ("\\" !== e9 && "." !== e9 && "`" !== e9)
-              throw new U2(P3, "Path has invalid escape sequence: " + t3);
+              throw new U2(P3, "Path has invalid escape sequence: " + t4);
             n3 += e9, r6 += 2;
           } else
             "`" === e8 ? (i4 = !i4, r6++) : "." !== e8 || i4 ? (n3 += e8, r6++) : (s6(), r6++);
         }
         if (s6(), i4)
-          throw new U2(P3, "Unterminated ` in path: " + t3);
+          throw new U2(P3, "Unterminated ` in path: " + t4);
         return new nt2(e7);
       }
       static emptyPath() {
@@ -9436,14 +9436,14 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     rt2 = class {
-      constructor(t3) {
-        this.path = t3;
+      constructor(t4) {
+        this.path = t4;
       }
-      static fromPath(t3) {
-        return new rt2(tt2.fromString(t3));
+      static fromPath(t4) {
+        return new rt2(tt2.fromString(t4));
       }
-      static fromName(t3) {
-        return new rt2(tt2.fromString(t3).popFirst(5));
+      static fromName(t4) {
+        return new rt2(tt2.fromString(t4).popFirst(5));
       }
       static empty() {
         return new rt2(tt2.emptyPath());
@@ -9451,8 +9451,8 @@ var init_index_browser_esm2017 = __esm({
       get collectionGroup() {
         return this.path.popLast().lastSegment();
       }
-      hasCollectionId(t3) {
-        return this.path.length >= 2 && this.path.get(this.path.length - 2) === t3;
+      hasCollectionId(t4) {
+        return this.path.length >= 2 && this.path.get(this.path.length - 2) === t4;
       }
       getCollectionGroup() {
         return this.path.get(this.path.length - 2);
@@ -9460,20 +9460,20 @@ var init_index_browser_esm2017 = __esm({
       getCollectionPath() {
         return this.path.popLast();
       }
-      isEqual(t3) {
-        return null !== t3 && 0 === tt2.comparator(this.path, t3.path);
+      isEqual(t4) {
+        return null !== t4 && 0 === tt2.comparator(this.path, t4.path);
       }
       toString() {
         return this.path.toString();
       }
-      static comparator(t3, e7) {
-        return tt2.comparator(t3.path, e7.path);
+      static comparator(t4, e7) {
+        return tt2.comparator(t4.path, e7.path);
       }
-      static isDocumentKey(t3) {
-        return t3.length % 2 == 0;
+      static isDocumentKey(t4) {
+        return t4.length % 2 == 0;
       }
-      static fromSegments(t3) {
-        return new rt2(new tt2(t3.slice()));
+      static fromSegments(t4) {
+        return new rt2(new tt2(t4.slice()));
       }
     };
     ft2 = {
@@ -9484,40 +9484,40 @@ var init_index_browser_esm2017 = __esm({
     };
     (wt2 = dt2 || (dt2 = {}))[wt2.OK = 0] = "OK", wt2[wt2.CANCELLED = 1] = "CANCELLED", wt2[wt2.UNKNOWN = 2] = "UNKNOWN", wt2[wt2.INVALID_ARGUMENT = 3] = "INVALID_ARGUMENT", wt2[wt2.DEADLINE_EXCEEDED = 4] = "DEADLINE_EXCEEDED", wt2[wt2.NOT_FOUND = 5] = "NOT_FOUND", wt2[wt2.ALREADY_EXISTS = 6] = "ALREADY_EXISTS", wt2[wt2.PERMISSION_DENIED = 7] = "PERMISSION_DENIED", wt2[wt2.UNAUTHENTICATED = 16] = "UNAUTHENTICATED", wt2[wt2.RESOURCE_EXHAUSTED = 8] = "RESOURCE_EXHAUSTED", wt2[wt2.FAILED_PRECONDITION = 9] = "FAILED_PRECONDITION", wt2[wt2.ABORTED = 10] = "ABORTED", wt2[wt2.OUT_OF_RANGE = 11] = "OUT_OF_RANGE", wt2[wt2.UNIMPLEMENTED = 12] = "UNIMPLEMENTED", wt2[wt2.INTERNAL = 13] = "INTERNAL", wt2[wt2.UNAVAILABLE = 14] = "UNAVAILABLE", wt2[wt2.DATA_LOSS = 15] = "DATA_LOSS";
     pt2 = class extends class {
-      constructor(t3) {
-        this.databaseInfo = t3, this.databaseId = t3.databaseId;
-        const e7 = t3.ssl ? "https" : "http";
-        this.p = e7 + "://" + t3.host, this.g = "projects/" + this.databaseId.projectId + "/databases/" + this.databaseId.database + "/documents";
+      constructor(t4) {
+        this.databaseInfo = t4, this.databaseId = t4.databaseId;
+        const e7 = t4.ssl ? "https" : "http";
+        this.p = e7 + "://" + t4.host, this.g = "projects/" + this.databaseId.projectId + "/databases/" + this.databaseId.database + "/documents";
       }
       get v() {
         return false;
       }
-      I(t3, e7, n3, r6, s6) {
-        const i4 = this.T(t3, e7);
-        y2("RestConnection", "Sending: ", i4, n3);
+      I(t4, e7, n3, r6, s6) {
+        const i4 = this.T(t4, e7);
+        y3("RestConnection", "Sending: ", i4, n3);
         const o5 = {};
-        return this.A(o5, r6, s6), this.R(t3, i4, o5, n3).then((t4) => (y2("RestConnection", "Received: ", t4), t4), (e8) => {
-          throw g3("RestConnection", `${t3} failed with error: `, e8, "url: ", i4, "request:", n3), e8;
+        return this.A(o5, r6, s6), this.R(t4, i4, o5, n3).then((t5) => (y3("RestConnection", "Received: ", t5), t5), (e8) => {
+          throw g3("RestConnection", `${t4} failed with error: `, e8, "url: ", i4, "request:", n3), e8;
         });
       }
-      P(t3, e7, n3, r6, s6, i4) {
-        return this.I(t3, e7, n3, r6, s6);
+      P(t4, e7, n3, r6, s6, i4) {
+        return this.I(t4, e7, n3, r6, s6);
       }
-      A(t3, e7, n3) {
-        t3["X-Goog-Api-Client"] = "gl-js/ fire/" + w3, t3["Content-Type"] = "text/plain", this.databaseInfo.appId && (t3["X-Firebase-GMPID"] = this.databaseInfo.appId), e7 && e7.headers.forEach((e8, n4) => t3[n4] = e8), n3 && n3.headers.forEach((e8, n4) => t3[n4] = e8);
+      A(t4, e7, n3) {
+        t4["X-Goog-Api-Client"] = "gl-js/ fire/" + w3, t4["Content-Type"] = "text/plain", this.databaseInfo.appId && (t4["X-Firebase-GMPID"] = this.databaseInfo.appId), e7 && e7.headers.forEach((e8, n4) => t4[n4] = e8), n3 && n3.headers.forEach((e8, n4) => t4[n4] = e8);
       }
-      T(t3, e7) {
-        const n3 = ft2[t3];
+      T(t4, e7) {
+        const n3 = ft2[t4];
         return `${this.p}/v1/${e7}:${n3}`;
       }
     } {
-      constructor(t3, e7) {
-        super(t3), this.V = e7;
+      constructor(t4, e7) {
+        super(t4), this.V = e7;
       }
-      N(t3, e7) {
+      N(t4, e7) {
         throw new Error("Not supported by FetchConnection");
       }
-      async R(t3, e7, n3, r6) {
+      async R(t4, e7, n3, r6) {
         var s6;
         const i4 = JSON.stringify(r6);
         let o5;
@@ -9527,13 +9527,13 @@ var init_index_browser_esm2017 = __esm({
             headers: n3,
             body: i4
           });
-        } catch (t4) {
-          throw new U2(mt2(t4.status), "Request failed with error: " + t4.statusText);
+        } catch (t5) {
+          throw new U2(mt2(t5.status), "Request failed with error: " + t5.statusText);
         }
         if (!o5.ok) {
-          let t4 = await o5.json();
-          Array.isArray(t4) && (t4 = t4[0]);
-          const e8 = null === (s6 = null == t4 ? void 0 : t4.error) || void 0 === s6 ? void 0 : s6.message;
+          let t5 = await o5.json();
+          Array.isArray(t5) && (t5 = t5[0]);
+          const e8 = null === (s6 = null == t5 ? void 0 : t5.error) || void 0 === s6 ? void 0 : s6.message;
           throw new U2(mt2(o5.status), `Request failed with error: ${null != e8 ? e8 : o5.statusText}`);
         }
         return o5.json();
@@ -9541,35 +9541,35 @@ var init_index_browser_esm2017 = __esm({
     };
     _t3 = class {
       static $() {
-        const t3 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", e7 = Math.floor(256 / t3.length) * t3.length;
+        const t4 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", e7 = Math.floor(256 / t4.length) * t4.length;
         let n3 = "";
         for (; n3.length < 20; ) {
           const r6 = yt2(40);
           for (let s6 = 0; s6 < r6.length; ++s6)
-            n3.length < 20 && r6[s6] < e7 && (n3 += t3.charAt(r6[s6] % t3.length));
+            n3.length < 20 && r6[s6] < e7 && (n3 += t4.charAt(r6[s6] % t4.length));
         }
         return n3;
       }
     };
     bt2 = class {
-      constructor(t3, e7) {
-        if (this.seconds = t3, this.nanoseconds = e7, e7 < 0)
+      constructor(t4, e7) {
+        if (this.seconds = t4, this.nanoseconds = e7, e7 < 0)
           throw new U2(P3, "Timestamp nanoseconds out of range: " + e7);
         if (e7 >= 1e9)
           throw new U2(P3, "Timestamp nanoseconds out of range: " + e7);
-        if (t3 < -62135596800)
-          throw new U2(P3, "Timestamp seconds out of range: " + t3);
-        if (t3 >= 253402300800)
-          throw new U2(P3, "Timestamp seconds out of range: " + t3);
+        if (t4 < -62135596800)
+          throw new U2(P3, "Timestamp seconds out of range: " + t4);
+        if (t4 >= 253402300800)
+          throw new U2(P3, "Timestamp seconds out of range: " + t4);
       }
       static now() {
         return bt2.fromMillis(Date.now());
       }
-      static fromDate(t3) {
-        return bt2.fromMillis(t3.getTime());
+      static fromDate(t4) {
+        return bt2.fromMillis(t4.getTime());
       }
-      static fromMillis(t3) {
-        const e7 = Math.floor(t3 / 1e3), n3 = Math.floor(1e6 * (t3 - 1e3 * e7));
+      static fromMillis(t4) {
+        const e7 = Math.floor(t4 / 1e3), n3 = Math.floor(1e6 * (t4 - 1e3 * e7));
         return new bt2(e7, n3);
       }
       toDate() {
@@ -9578,11 +9578,11 @@ var init_index_browser_esm2017 = __esm({
       toMillis() {
         return 1e3 * this.seconds + this.nanoseconds / 1e6;
       }
-      _compareTo(t3) {
-        return this.seconds === t3.seconds ? gt2(this.nanoseconds, t3.nanoseconds) : gt2(this.seconds, t3.seconds);
+      _compareTo(t4) {
+        return this.seconds === t4.seconds ? gt2(this.nanoseconds, t4.nanoseconds) : gt2(this.seconds, t4.seconds);
       }
-      isEqual(t3) {
-        return t3.seconds === this.seconds && t3.nanoseconds === this.nanoseconds;
+      isEqual(t4) {
+        return t4.seconds === this.seconds && t4.nanoseconds === this.nanoseconds;
       }
       toString() {
         return "Timestamp(seconds=" + this.seconds + ", nanoseconds=" + this.nanoseconds + ")";
@@ -9594,16 +9594,16 @@ var init_index_browser_esm2017 = __esm({
         };
       }
       valueOf() {
-        const t3 = this.seconds - -62135596800;
-        return String(t3).padStart(12, "0") + "." + String(this.nanoseconds).padStart(9, "0");
+        const t4 = this.seconds - -62135596800;
+        return String(t4).padStart(12, "0") + "." + String(this.nanoseconds).padStart(9, "0");
       }
     };
     Et2 = class {
-      constructor(t3) {
-        this.timestamp = t3;
+      constructor(t4) {
+        this.timestamp = t4;
       }
-      static fromTimestamp(t3) {
-        return new Et2(t3);
+      static fromTimestamp(t4) {
+        return new Et2(t4);
       }
       static min() {
         return new Et2(new bt2(0, 0));
@@ -9611,11 +9611,11 @@ var init_index_browser_esm2017 = __esm({
       static max() {
         return new Et2(new bt2(253402300799, 999999999));
       }
-      compareTo(t3) {
-        return this.timestamp._compareTo(t3.timestamp);
+      compareTo(t4) {
+        return this.timestamp._compareTo(t4.timestamp);
       }
-      isEqual(t3) {
-        return this.timestamp.isEqual(t3.timestamp);
+      isEqual(t4) {
+        return this.timestamp.isEqual(t4.timestamp);
       }
       toMicroseconds() {
         return 1e6 * this.timestamp.seconds + this.timestamp.nanoseconds / 1e3;
@@ -9628,29 +9628,29 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     At2 = class {
-      constructor(t3, e7) {
-        this.comparator = t3, this.root = e7 || Pt2.EMPTY;
+      constructor(t4, e7) {
+        this.comparator = t4, this.root = e7 || Pt2.EMPTY;
       }
-      insert(t3, e7) {
-        return new At2(this.comparator, this.root.insert(t3, e7, this.comparator).copy(null, null, Pt2.BLACK, null, null));
+      insert(t4, e7) {
+        return new At2(this.comparator, this.root.insert(t4, e7, this.comparator).copy(null, null, Pt2.BLACK, null, null));
       }
-      remove(t3) {
-        return new At2(this.comparator, this.root.remove(t3, this.comparator).copy(null, null, Pt2.BLACK, null, null));
+      remove(t4) {
+        return new At2(this.comparator, this.root.remove(t4, this.comparator).copy(null, null, Pt2.BLACK, null, null));
       }
-      get(t3) {
+      get(t4) {
         let e7 = this.root;
         for (; !e7.isEmpty(); ) {
-          const n3 = this.comparator(t3, e7.key);
+          const n3 = this.comparator(t4, e7.key);
           if (0 === n3)
             return e7.value;
           n3 < 0 ? e7 = e7.left : n3 > 0 && (e7 = e7.right);
         }
         return null;
       }
-      indexOf(t3) {
+      indexOf(t4) {
         let e7 = 0, n3 = this.root;
         for (; !n3.isEmpty(); ) {
-          const r6 = this.comparator(t3, n3.key);
+          const r6 = this.comparator(t4, n3.key);
           if (0 === r6)
             return e7 + n3.left.size;
           r6 < 0 ? n3 = n3.left : (e7 += n3.left.size + 1, n3 = n3.right);
@@ -9669,59 +9669,59 @@ var init_index_browser_esm2017 = __esm({
       maxKey() {
         return this.root.maxKey();
       }
-      inorderTraversal(t3) {
-        return this.root.inorderTraversal(t3);
+      inorderTraversal(t4) {
+        return this.root.inorderTraversal(t4);
       }
-      forEach(t3) {
-        this.inorderTraversal((e7, n3) => (t3(e7, n3), false));
+      forEach(t4) {
+        this.inorderTraversal((e7, n3) => (t4(e7, n3), false));
       }
       toString() {
-        const t3 = [];
-        return this.inorderTraversal((e7, n3) => (t3.push(`${e7}:${n3}`), false)), `{${t3.join(", ")}}`;
+        const t4 = [];
+        return this.inorderTraversal((e7, n3) => (t4.push(`${e7}:${n3}`), false)), `{${t4.join(", ")}}`;
       }
-      reverseTraversal(t3) {
-        return this.root.reverseTraversal(t3);
+      reverseTraversal(t4) {
+        return this.root.reverseTraversal(t4);
       }
       getIterator() {
         return new Rt2(this.root, null, this.comparator, false);
       }
-      getIteratorFrom(t3) {
-        return new Rt2(this.root, t3, this.comparator, false);
+      getIteratorFrom(t4) {
+        return new Rt2(this.root, t4, this.comparator, false);
       }
       getReverseIterator() {
         return new Rt2(this.root, null, this.comparator, true);
       }
-      getReverseIteratorFrom(t3) {
-        return new Rt2(this.root, t3, this.comparator, true);
+      getReverseIteratorFrom(t4) {
+        return new Rt2(this.root, t4, this.comparator, true);
       }
     };
     Rt2 = class {
-      constructor(t3, e7, n3, r6) {
+      constructor(t4, e7, n3, r6) {
         this.isReverse = r6, this.nodeStack = [];
         let s6 = 1;
-        for (; !t3.isEmpty(); )
-          if (s6 = e7 ? n3(t3.key, e7) : 1, e7 && r6 && (s6 *= -1), s6 < 0)
-            t3 = this.isReverse ? t3.left : t3.right;
+        for (; !t4.isEmpty(); )
+          if (s6 = e7 ? n3(t4.key, e7) : 1, e7 && r6 && (s6 *= -1), s6 < 0)
+            t4 = this.isReverse ? t4.left : t4.right;
           else {
             if (0 === s6) {
-              this.nodeStack.push(t3);
+              this.nodeStack.push(t4);
               break;
             }
-            this.nodeStack.push(t3), t3 = this.isReverse ? t3.right : t3.left;
+            this.nodeStack.push(t4), t4 = this.isReverse ? t4.right : t4.left;
           }
       }
       getNext() {
-        let t3 = this.nodeStack.pop();
+        let t4 = this.nodeStack.pop();
         const e7 = {
-          key: t3.key,
-          value: t3.value
+          key: t4.key,
+          value: t4.value
         };
         if (this.isReverse)
-          for (t3 = t3.left; !t3.isEmpty(); )
-            this.nodeStack.push(t3), t3 = t3.right;
+          for (t4 = t4.left; !t4.isEmpty(); )
+            this.nodeStack.push(t4), t4 = t4.right;
         else
-          for (t3 = t3.right; !t3.isEmpty(); )
-            this.nodeStack.push(t3), t3 = t3.left;
+          for (t4 = t4.right; !t4.isEmpty(); )
+            this.nodeStack.push(t4), t4 = t4.left;
         return e7;
       }
       hasNext() {
@@ -9730,28 +9730,28 @@ var init_index_browser_esm2017 = __esm({
       peek() {
         if (0 === this.nodeStack.length)
           return null;
-        const t3 = this.nodeStack[this.nodeStack.length - 1];
+        const t4 = this.nodeStack[this.nodeStack.length - 1];
         return {
-          key: t3.key,
-          value: t3.value
+          key: t4.key,
+          value: t4.value
         };
       }
     };
     Pt2 = class {
-      constructor(t3, e7, n3, r6, s6) {
-        this.key = t3, this.value = e7, this.color = null != n3 ? n3 : Pt2.RED, this.left = null != r6 ? r6 : Pt2.EMPTY, this.right = null != s6 ? s6 : Pt2.EMPTY, this.size = this.left.size + 1 + this.right.size;
+      constructor(t4, e7, n3, r6, s6) {
+        this.key = t4, this.value = e7, this.color = null != n3 ? n3 : Pt2.RED, this.left = null != r6 ? r6 : Pt2.EMPTY, this.right = null != s6 ? s6 : Pt2.EMPTY, this.size = this.left.size + 1 + this.right.size;
       }
-      copy(t3, e7, n3, r6, s6) {
-        return new Pt2(null != t3 ? t3 : this.key, null != e7 ? e7 : this.value, null != n3 ? n3 : this.color, null != r6 ? r6 : this.left, null != s6 ? s6 : this.right);
+      copy(t4, e7, n3, r6, s6) {
+        return new Pt2(null != t4 ? t4 : this.key, null != e7 ? e7 : this.value, null != n3 ? n3 : this.color, null != r6 ? r6 : this.left, null != s6 ? s6 : this.right);
       }
       isEmpty() {
         return false;
       }
-      inorderTraversal(t3) {
-        return this.left.inorderTraversal(t3) || t3(this.key, this.value) || this.right.inorderTraversal(t3);
+      inorderTraversal(t4) {
+        return this.left.inorderTraversal(t4) || t4(this.key, this.value) || this.right.inorderTraversal(t4);
       }
-      reverseTraversal(t3) {
-        return this.right.reverseTraversal(t3) || t3(this.key, this.value) || this.left.reverseTraversal(t3);
+      reverseTraversal(t4) {
+        return this.right.reverseTraversal(t4) || t4(this.key, this.value) || this.left.reverseTraversal(t4);
       }
       min() {
         return this.left.isEmpty() ? this : this.left.min();
@@ -9762,28 +9762,28 @@ var init_index_browser_esm2017 = __esm({
       maxKey() {
         return this.right.isEmpty() ? this.key : this.right.maxKey();
       }
-      insert(t3, e7, n3) {
+      insert(t4, e7, n3) {
         let r6 = this;
-        const s6 = n3(t3, r6.key);
-        return r6 = s6 < 0 ? r6.copy(null, null, null, r6.left.insert(t3, e7, n3), null) : 0 === s6 ? r6.copy(null, e7, null, null, null) : r6.copy(null, null, null, null, r6.right.insert(t3, e7, n3)), r6.fixUp();
+        const s6 = n3(t4, r6.key);
+        return r6 = s6 < 0 ? r6.copy(null, null, null, r6.left.insert(t4, e7, n3), null) : 0 === s6 ? r6.copy(null, e7, null, null, null) : r6.copy(null, null, null, null, r6.right.insert(t4, e7, n3)), r6.fixUp();
       }
       removeMin() {
         if (this.left.isEmpty())
           return Pt2.EMPTY;
-        let t3 = this;
-        return t3.left.isRed() || t3.left.left.isRed() || (t3 = t3.moveRedLeft()), t3 = t3.copy(null, null, null, t3.left.removeMin(), null), t3.fixUp();
+        let t4 = this;
+        return t4.left.isRed() || t4.left.left.isRed() || (t4 = t4.moveRedLeft()), t4 = t4.copy(null, null, null, t4.left.removeMin(), null), t4.fixUp();
       }
-      remove(t3, e7) {
+      remove(t4, e7) {
         let n3, r6 = this;
-        if (e7(t3, r6.key) < 0)
-          r6.left.isEmpty() || r6.left.isRed() || r6.left.left.isRed() || (r6 = r6.moveRedLeft()), r6 = r6.copy(null, null, null, r6.left.remove(t3, e7), null);
+        if (e7(t4, r6.key) < 0)
+          r6.left.isEmpty() || r6.left.isRed() || r6.left.left.isRed() || (r6 = r6.moveRedLeft()), r6 = r6.copy(null, null, null, r6.left.remove(t4, e7), null);
         else {
-          if (r6.left.isRed() && (r6 = r6.rotateRight()), r6.right.isEmpty() || r6.right.isRed() || r6.right.left.isRed() || (r6 = r6.moveRedRight()), 0 === e7(t3, r6.key)) {
+          if (r6.left.isRed() && (r6 = r6.rotateRight()), r6.right.isEmpty() || r6.right.isRed() || r6.right.left.isRed() || (r6 = r6.moveRedRight()), 0 === e7(t4, r6.key)) {
             if (r6.right.isEmpty())
               return Pt2.EMPTY;
             n3 = r6.right.min(), r6 = r6.copy(n3.key, n3.value, null, null, r6.right.removeMin());
           }
-          r6 = r6.copy(null, null, null, null, r6.right.remove(t3, e7));
+          r6 = r6.copy(null, null, null, null, r6.right.remove(t4, e7));
         }
         return r6.fixUp();
       }
@@ -9791,42 +9791,42 @@ var init_index_browser_esm2017 = __esm({
         return this.color;
       }
       fixUp() {
-        let t3 = this;
-        return t3.right.isRed() && !t3.left.isRed() && (t3 = t3.rotateLeft()), t3.left.isRed() && t3.left.left.isRed() && (t3 = t3.rotateRight()), t3.left.isRed() && t3.right.isRed() && (t3 = t3.colorFlip()), t3;
+        let t4 = this;
+        return t4.right.isRed() && !t4.left.isRed() && (t4 = t4.rotateLeft()), t4.left.isRed() && t4.left.left.isRed() && (t4 = t4.rotateRight()), t4.left.isRed() && t4.right.isRed() && (t4 = t4.colorFlip()), t4;
       }
       moveRedLeft() {
-        let t3 = this.colorFlip();
-        return t3.right.left.isRed() && (t3 = t3.copy(null, null, null, null, t3.right.rotateRight()), t3 = t3.rotateLeft(), t3 = t3.colorFlip()), t3;
+        let t4 = this.colorFlip();
+        return t4.right.left.isRed() && (t4 = t4.copy(null, null, null, null, t4.right.rotateRight()), t4 = t4.rotateLeft(), t4 = t4.colorFlip()), t4;
       }
       moveRedRight() {
-        let t3 = this.colorFlip();
-        return t3.left.left.isRed() && (t3 = t3.rotateRight(), t3 = t3.colorFlip()), t3;
+        let t4 = this.colorFlip();
+        return t4.left.left.isRed() && (t4 = t4.rotateRight(), t4 = t4.colorFlip()), t4;
       }
       rotateLeft() {
-        const t3 = this.copy(null, null, Pt2.RED, null, this.right.left);
-        return this.right.copy(null, null, this.color, t3, null);
+        const t4 = this.copy(null, null, Pt2.RED, null, this.right.left);
+        return this.right.copy(null, null, this.color, t4, null);
       }
       rotateRight() {
-        const t3 = this.copy(null, null, Pt2.RED, this.left.right, null);
-        return this.left.copy(null, null, this.color, null, t3);
+        const t4 = this.copy(null, null, Pt2.RED, this.left.right, null);
+        return this.left.copy(null, null, this.color, null, t4);
       }
       colorFlip() {
-        const t3 = this.left.copy(null, null, !this.left.color, null, null), e7 = this.right.copy(null, null, !this.right.color, null, null);
-        return this.copy(null, null, !this.color, t3, e7);
+        const t4 = this.left.copy(null, null, !this.left.color, null, null), e7 = this.right.copy(null, null, !this.right.color, null, null);
+        return this.copy(null, null, !this.color, t4, e7);
       }
       checkMaxDepth() {
-        const t3 = this.check();
-        return Math.pow(2, t3) <= this.size + 1;
+        const t4 = this.check();
+        return Math.pow(2, t4) <= this.size + 1;
       }
       check() {
         if (this.isRed() && this.left.isRed())
           throw b3();
         if (this.right.isRed())
           throw b3();
-        const t3 = this.left.check();
-        if (t3 !== this.right.check())
+        const t4 = this.left.check();
+        if (t4 !== this.right.check())
           throw b3();
-        return t3 + (this.isRed() ? 0 : 1);
+        return t4 + (this.isRed() ? 0 : 1);
       }
     };
     Pt2.EMPTY = null, Pt2.RED = true, Pt2.BLACK = false;
@@ -9849,22 +9849,22 @@ var init_index_browser_esm2017 = __esm({
       get right() {
         throw b3();
       }
-      copy(t3, e7, n3, r6, s6) {
+      copy(t4, e7, n3, r6, s6) {
         return this;
       }
-      insert(t3, e7, n3) {
-        return new Pt2(t3, e7);
+      insert(t4, e7, n3) {
+        return new Pt2(t4, e7);
       }
-      remove(t3, e7) {
+      remove(t4, e7) {
         return this;
       }
       isEmpty() {
         return true;
       }
-      inorderTraversal(t3) {
+      inorderTraversal(t4) {
         return false;
       }
-      reverseTraversal(t3) {
+      reverseTraversal(t4) {
         return false;
       }
       minKey() {
@@ -9884,11 +9884,11 @@ var init_index_browser_esm2017 = __esm({
       }
     }();
     Vt = class {
-      constructor(t3) {
-        this.comparator = t3, this.data = new At2(this.comparator);
+      constructor(t4) {
+        this.comparator = t4, this.data = new At2(this.comparator);
       }
-      has(t3) {
-        return null !== this.data.get(t3);
+      has(t4) {
+        return null !== this.data.get(t4);
       }
       first() {
         return this.data.minKey();
@@ -9899,84 +9899,84 @@ var init_index_browser_esm2017 = __esm({
       get size() {
         return this.data.size;
       }
-      indexOf(t3) {
-        return this.data.indexOf(t3);
+      indexOf(t4) {
+        return this.data.indexOf(t4);
       }
-      forEach(t3) {
-        this.data.inorderTraversal((e7, n3) => (t3(e7), false));
+      forEach(t4) {
+        this.data.inorderTraversal((e7, n3) => (t4(e7), false));
       }
-      forEachInRange(t3, e7) {
-        const n3 = this.data.getIteratorFrom(t3[0]);
+      forEachInRange(t4, e7) {
+        const n3 = this.data.getIteratorFrom(t4[0]);
         for (; n3.hasNext(); ) {
           const r6 = n3.getNext();
-          if (this.comparator(r6.key, t3[1]) >= 0)
+          if (this.comparator(r6.key, t4[1]) >= 0)
             return;
           e7(r6.key);
         }
       }
-      forEachWhile(t3, e7) {
+      forEachWhile(t4, e7) {
         let n3;
         for (n3 = void 0 !== e7 ? this.data.getIteratorFrom(e7) : this.data.getIterator(); n3.hasNext(); ) {
-          if (!t3(n3.getNext().key))
+          if (!t4(n3.getNext().key))
             return;
         }
       }
-      firstAfterOrEqual(t3) {
-        const e7 = this.data.getIteratorFrom(t3);
+      firstAfterOrEqual(t4) {
+        const e7 = this.data.getIteratorFrom(t4);
         return e7.hasNext() ? e7.getNext().key : null;
       }
       getIterator() {
         return new Nt2(this.data.getIterator());
       }
-      getIteratorFrom(t3) {
-        return new Nt2(this.data.getIteratorFrom(t3));
+      getIteratorFrom(t4) {
+        return new Nt2(this.data.getIteratorFrom(t4));
       }
-      add(t3) {
-        return this.copy(this.data.remove(t3).insert(t3, true));
+      add(t4) {
+        return this.copy(this.data.remove(t4).insert(t4, true));
       }
-      delete(t3) {
-        return this.has(t3) ? this.copy(this.data.remove(t3)) : this;
+      delete(t4) {
+        return this.has(t4) ? this.copy(this.data.remove(t4)) : this;
       }
       isEmpty() {
         return this.data.isEmpty();
       }
-      unionWith(t3) {
+      unionWith(t4) {
         let e7 = this;
-        return e7.size < t3.size && (e7 = t3, t3 = this), t3.forEach((t4) => {
-          e7 = e7.add(t4);
+        return e7.size < t4.size && (e7 = t4, t4 = this), t4.forEach((t5) => {
+          e7 = e7.add(t5);
         }), e7;
       }
-      isEqual(t3) {
-        if (!(t3 instanceof Vt))
+      isEqual(t4) {
+        if (!(t4 instanceof Vt))
           return false;
-        if (this.size !== t3.size)
+        if (this.size !== t4.size)
           return false;
-        const e7 = this.data.getIterator(), n3 = t3.data.getIterator();
+        const e7 = this.data.getIterator(), n3 = t4.data.getIterator();
         for (; e7.hasNext(); ) {
-          const t4 = e7.getNext().key, r6 = n3.getNext().key;
-          if (0 !== this.comparator(t4, r6))
+          const t5 = e7.getNext().key, r6 = n3.getNext().key;
+          if (0 !== this.comparator(t5, r6))
             return false;
         }
         return true;
       }
       toArray() {
-        const t3 = [];
+        const t4 = [];
         return this.forEach((e7) => {
-          t3.push(e7);
-        }), t3;
+          t4.push(e7);
+        }), t4;
       }
       toString() {
-        const t3 = [];
-        return this.forEach((e7) => t3.push(e7)), "SortedSet(" + t3.toString() + ")";
+        const t4 = [];
+        return this.forEach((e7) => t4.push(e7)), "SortedSet(" + t4.toString() + ")";
       }
-      copy(t3) {
+      copy(t4) {
         const e7 = new Vt(this.comparator);
-        return e7.data = t3, e7;
+        return e7.data = t4, e7;
       }
     };
     Nt2 = class {
-      constructor(t3) {
-        this.iter = t3;
+      constructor(t4) {
+        this.iter = t4;
       }
       getNext() {
         return this.iter.getNext().key;
@@ -9986,52 +9986,52 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     $t2 = class {
-      constructor(t3) {
-        this.fields = t3, t3.sort(nt2.comparator);
+      constructor(t4) {
+        this.fields = t4, t4.sort(nt2.comparator);
       }
       static empty() {
         return new $t2([]);
       }
-      unionWith(t3) {
+      unionWith(t4) {
         let e7 = new Vt(nt2.comparator);
-        for (const t4 of this.fields)
-          e7 = e7.add(t4);
-        for (const n3 of t3)
+        for (const t5 of this.fields)
+          e7 = e7.add(t5);
+        for (const n3 of t4)
           e7 = e7.add(n3);
         return new $t2(e7.toArray());
       }
-      covers(t3) {
+      covers(t4) {
         for (const e7 of this.fields)
-          if (e7.isPrefixOf(t3))
+          if (e7.isPrefixOf(t4))
             return true;
         return false;
       }
-      isEqual(t3) {
-        return vt2(this.fields, t3.fields, (t4, e7) => t4.isEqual(e7));
+      isEqual(t4) {
+        return vt2(this.fields, t4.fields, (t5, e7) => t5.isEqual(e7));
       }
     };
     Dt2 = class {
-      constructor(t3) {
-        this.binaryString = t3;
+      constructor(t4) {
+        this.binaryString = t4;
       }
-      static fromBase64String(t3) {
-        const e7 = atob(t3);
+      static fromBase64String(t4) {
+        const e7 = atob(t4);
         return new Dt2(e7);
       }
-      static fromUint8Array(t3) {
-        const e7 = function(t4) {
+      static fromUint8Array(t4) {
+        const e7 = function(t5) {
           let e8 = "";
-          for (let n3 = 0; n3 < t4.length; ++n3)
-            e8 += String.fromCharCode(t4[n3]);
+          for (let n3 = 0; n3 < t5.length; ++n3)
+            e8 += String.fromCharCode(t5[n3]);
           return e8;
-        }(t3);
+        }(t4);
         return new Dt2(e7);
       }
       [Symbol.iterator]() {
-        let t3 = 0;
+        let t4 = 0;
         return {
-          next: () => t3 < this.binaryString.length ? {
-            value: this.binaryString.charCodeAt(t3++),
+          next: () => t4 < this.binaryString.length ? {
+            value: this.binaryString.charCodeAt(t4++),
             done: false
           } : {
             value: void 0,
@@ -10040,25 +10040,25 @@ var init_index_browser_esm2017 = __esm({
         };
       }
       toBase64() {
-        return t3 = this.binaryString, btoa(t3);
-        var t3;
+        return t4 = this.binaryString, btoa(t4);
+        var t4;
       }
       toUint8Array() {
-        return function(t3) {
-          const e7 = new Uint8Array(t3.length);
-          for (let n3 = 0; n3 < t3.length; n3++)
-            e7[n3] = t3.charCodeAt(n3);
+        return function(t4) {
+          const e7 = new Uint8Array(t4.length);
+          for (let n3 = 0; n3 < t4.length; n3++)
+            e7[n3] = t4.charCodeAt(n3);
           return e7;
         }(this.binaryString);
       }
       approximateByteSize() {
         return 2 * this.binaryString.length;
       }
-      compareTo(t3) {
-        return gt2(this.binaryString, t3.binaryString);
+      compareTo(t4) {
+        return gt2(this.binaryString, t4.binaryString);
       }
-      isEqual(t3) {
-        return this.binaryString === t3.binaryString;
+      isEqual(t4) {
+        return this.binaryString === t4.binaryString;
       }
     };
     Dt2.EMPTY_BYTE_STRING = new Dt2("");
@@ -10071,95 +10071,95 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     Jt = class {
-      constructor(t3) {
-        this.value = t3;
+      constructor(t4) {
+        this.value = t4;
       }
       static empty() {
         return new Jt({
           mapValue: {}
         });
       }
-      field(t3) {
-        if (t3.isEmpty())
+      field(t4) {
+        if (t4.isEmpty())
           return this.value;
         {
           let e7 = this.value;
-          for (let n3 = 0; n3 < t3.length - 1; ++n3)
-            if (e7 = (e7.mapValue.fields || {})[t3.get(n3)], !Yt(e7))
+          for (let n3 = 0; n3 < t4.length - 1; ++n3)
+            if (e7 = (e7.mapValue.fields || {})[t4.get(n3)], !Yt(e7))
               return null;
-          return e7 = (e7.mapValue.fields || {})[t3.lastSegment()], e7 || null;
+          return e7 = (e7.mapValue.fields || {})[t4.lastSegment()], e7 || null;
         }
       }
-      set(t3, e7) {
-        this.getFieldsMap(t3.popLast())[t3.lastSegment()] = Ht2(e7);
+      set(t4, e7) {
+        this.getFieldsMap(t4.popLast())[t4.lastSegment()] = Ht2(e7);
       }
-      setAll(t3) {
+      setAll(t4) {
         let e7 = nt2.emptyPath(), n3 = {}, r6 = [];
-        t3.forEach((t4, s7) => {
+        t4.forEach((t5, s7) => {
           if (!e7.isImmediateParentOf(s7)) {
-            const t5 = this.getFieldsMap(e7);
-            this.applyChanges(t5, n3, r6), n3 = {}, r6 = [], e7 = s7.popLast();
+            const t6 = this.getFieldsMap(e7);
+            this.applyChanges(t6, n3, r6), n3 = {}, r6 = [], e7 = s7.popLast();
           }
-          t4 ? n3[s7.lastSegment()] = Ht2(t4) : r6.push(s7.lastSegment());
+          t5 ? n3[s7.lastSegment()] = Ht2(t5) : r6.push(s7.lastSegment());
         });
         const s6 = this.getFieldsMap(e7);
         this.applyChanges(s6, n3, r6);
       }
-      delete(t3) {
-        const e7 = this.field(t3.popLast());
-        Yt(e7) && e7.mapValue.fields && delete e7.mapValue.fields[t3.lastSegment()];
+      delete(t4) {
+        const e7 = this.field(t4.popLast());
+        Yt(e7) && e7.mapValue.fields && delete e7.mapValue.fields[t4.lastSegment()];
       }
-      isEqual(t3) {
-        return Ut2(this.value, t3.value);
+      isEqual(t4) {
+        return Ut2(this.value, t4.value);
       }
-      getFieldsMap(t3) {
+      getFieldsMap(t4) {
         let e7 = this.value;
         e7.mapValue.fields || (e7.mapValue = {
           fields: {}
         });
-        for (let n3 = 0; n3 < t3.length; ++n3) {
-          let r6 = e7.mapValue.fields[t3.get(n3)];
+        for (let n3 = 0; n3 < t4.length; ++n3) {
+          let r6 = e7.mapValue.fields[t4.get(n3)];
           Yt(r6) && r6.mapValue.fields || (r6 = {
             mapValue: {
               fields: {}
             }
-          }, e7.mapValue.fields[t3.get(n3)] = r6), e7 = r6;
+          }, e7.mapValue.fields[t4.get(n3)] = r6), e7 = r6;
         }
         return e7.mapValue.fields;
       }
-      applyChanges(t3, e7, n3) {
-        Tt2(e7, (e8, n4) => t3[e8] = n4);
+      applyChanges(t4, e7, n3) {
+        Tt2(e7, (e8, n4) => t4[e8] = n4);
         for (const e8 of n3)
-          delete t3[e8];
+          delete t4[e8];
       }
       clone() {
         return new Jt(Ht2(this.value));
       }
     };
     Xt = class {
-      constructor(t3, e7, n3, r6, s6, i4) {
-        this.key = t3, this.documentType = e7, this.version = n3, this.readTime = r6, this.data = s6, this.documentState = i4;
+      constructor(t4, e7, n3, r6, s6, i4) {
+        this.key = t4, this.documentType = e7, this.version = n3, this.readTime = r6, this.data = s6, this.documentState = i4;
       }
-      static newInvalidDocument(t3) {
-        return new Xt(t3, 0, Et2.min(), Et2.min(), Jt.empty(), 0);
+      static newInvalidDocument(t4) {
+        return new Xt(t4, 0, Et2.min(), Et2.min(), Jt.empty(), 0);
       }
-      static newFoundDocument(t3, e7, n3) {
-        return new Xt(t3, 1, e7, Et2.min(), n3, 0);
+      static newFoundDocument(t4, e7, n3) {
+        return new Xt(t4, 1, e7, Et2.min(), n3, 0);
       }
-      static newNoDocument(t3, e7) {
-        return new Xt(t3, 2, e7, Et2.min(), Jt.empty(), 0);
+      static newNoDocument(t4, e7) {
+        return new Xt(t4, 2, e7, Et2.min(), Jt.empty(), 0);
       }
-      static newUnknownDocument(t3, e7) {
-        return new Xt(t3, 3, e7, Et2.min(), Jt.empty(), 2);
+      static newUnknownDocument(t4, e7) {
+        return new Xt(t4, 3, e7, Et2.min(), Jt.empty(), 2);
       }
-      convertToFoundDocument(t3, e7) {
-        return this.version = t3, this.documentType = 1, this.data = e7, this.documentState = 0, this;
+      convertToFoundDocument(t4, e7) {
+        return this.version = t4, this.documentType = 1, this.data = e7, this.documentState = 0, this;
       }
-      convertToNoDocument(t3) {
-        return this.version = t3, this.documentType = 2, this.data = Jt.empty(), this.documentState = 0, this;
+      convertToNoDocument(t4) {
+        return this.version = t4, this.documentType = 2, this.data = Jt.empty(), this.documentState = 0, this;
       }
-      convertToUnknownDocument(t3) {
-        return this.version = t3, this.documentType = 3, this.data = Jt.empty(), this.documentState = 2, this;
+      convertToUnknownDocument(t4) {
+        return this.version = t4, this.documentType = 3, this.data = Jt.empty(), this.documentState = 2, this;
       }
       setHasCommittedMutations() {
         return this.documentState = 2, this;
@@ -10167,8 +10167,8 @@ var init_index_browser_esm2017 = __esm({
       setHasLocalMutations() {
         return this.documentState = 1, this.version = Et2.min(), this;
       }
-      setReadTime(t3) {
-        return this.readTime = t3, this;
+      setReadTime(t4) {
+        return this.readTime = t4, this;
       }
       get hasLocalMutations() {
         return 1 === this.documentState;
@@ -10191,8 +10191,8 @@ var init_index_browser_esm2017 = __esm({
       isUnknownDocument() {
         return 3 === this.documentType;
       }
-      isEqual(t3) {
-        return t3 instanceof Xt && this.key.isEqual(t3.key) && this.version.isEqual(t3.version) && this.documentType === t3.documentType && this.documentState === t3.documentState && this.data.isEqual(t3.data);
+      isEqual(t4) {
+        return t4 instanceof Xt && this.key.isEqual(t4.key) && this.version.isEqual(t4.version) && this.documentType === t4.documentType && this.documentState === t4.documentState && this.data.isEqual(t4.data);
       }
       mutableCopy() {
         return new Xt(this.key, this.documentType, this.version, this.readTime, this.data.clone(), this.documentState);
@@ -10202,39 +10202,39 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     Zt = class {
-      constructor(t3, e7 = null, n3 = [], r6 = [], s6 = null, i4 = null, o5 = null) {
-        this.path = t3, this.collectionGroup = e7, this.orderBy = n3, this.filters = r6, this.limit = s6, this.startAt = i4, this.endAt = o5, this.D = null;
+      constructor(t4, e7 = null, n3 = [], r6 = [], s6 = null, i4 = null, o5 = null) {
+        this.path = t4, this.collectionGroup = e7, this.orderBy = n3, this.filters = r6, this.limit = s6, this.startAt = i4, this.endAt = o5, this.D = null;
       }
     };
     ee2 = class extends class {
     } {
-      constructor(t3, e7, n3) {
-        super(), this.field = t3, this.op = e7, this.value = n3;
+      constructor(t4, e7, n3) {
+        super(), this.field = t4, this.op = e7, this.value = n3;
       }
-      static create(t3, e7, n3) {
-        return t3.isKeyField() ? "in" === e7 || "not-in" === e7 ? this.F(t3, e7, n3) : new ne2(t3, e7, n3) : "array-contains" === e7 ? new oe2(t3, n3) : "in" === e7 ? new ue2(t3, n3) : "not-in" === e7 ? new ce2(t3, n3) : "array-contains-any" === e7 ? new ae2(t3, n3) : new ee2(t3, e7, n3);
+      static create(t4, e7, n3) {
+        return t4.isKeyField() ? "in" === e7 || "not-in" === e7 ? this.F(t4, e7, n3) : new ne2(t4, e7, n3) : "array-contains" === e7 ? new oe2(t4, n3) : "in" === e7 ? new ue2(t4, n3) : "not-in" === e7 ? new ce2(t4, n3) : "array-contains-any" === e7 ? new ae2(t4, n3) : new ee2(t4, e7, n3);
       }
-      static F(t3, e7, n3) {
-        return "in" === e7 ? new re2(t3, n3) : new se2(t3, n3);
+      static F(t4, e7, n3) {
+        return "in" === e7 ? new re2(t4, n3) : new se2(t4, n3);
       }
-      matches(t3) {
-        const e7 = t3.data.field(this.field);
+      matches(t4) {
+        const e7 = t4.data.field(this.field);
         return "!=" === this.op ? null !== e7 && this.S(Bt(e7, this.value)) : null !== e7 && Mt(this.value) === Mt(e7) && this.S(Bt(e7, this.value));
       }
-      S(t3) {
+      S(t4) {
         switch (this.op) {
           case "<":
-            return t3 < 0;
+            return t4 < 0;
           case "<=":
-            return t3 <= 0;
+            return t4 <= 0;
           case "==":
-            return 0 === t3;
+            return 0 === t4;
           case "!=":
-            return 0 !== t3;
+            return 0 !== t4;
           case ">":
-            return t3 > 0;
+            return t4 > 0;
           case ">=":
-            return t3 >= 0;
+            return t4 >= 0;
           default:
             return b3();
         }
@@ -10244,83 +10244,83 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     ne2 = class extends ee2 {
-      constructor(t3, e7, n3) {
-        super(t3, e7, n3), this.key = rt2.fromName(n3.referenceValue);
+      constructor(t4, e7, n3) {
+        super(t4, e7, n3), this.key = rt2.fromName(n3.referenceValue);
       }
-      matches(t3) {
-        const e7 = rt2.comparator(t3.key, this.key);
+      matches(t4) {
+        const e7 = rt2.comparator(t4.key, this.key);
         return this.S(e7);
       }
     };
     re2 = class extends ee2 {
-      constructor(t3, e7) {
-        super(t3, "in", e7), this.keys = ie2("in", e7);
+      constructor(t4, e7) {
+        super(t4, "in", e7), this.keys = ie2("in", e7);
       }
-      matches(t3) {
-        return this.keys.some((e7) => e7.isEqual(t3.key));
+      matches(t4) {
+        return this.keys.some((e7) => e7.isEqual(t4.key));
       }
     };
     se2 = class extends ee2 {
-      constructor(t3, e7) {
-        super(t3, "not-in", e7), this.keys = ie2("not-in", e7);
+      constructor(t4, e7) {
+        super(t4, "not-in", e7), this.keys = ie2("not-in", e7);
       }
-      matches(t3) {
-        return !this.keys.some((e7) => e7.isEqual(t3.key));
+      matches(t4) {
+        return !this.keys.some((e7) => e7.isEqual(t4.key));
       }
     };
     oe2 = class extends ee2 {
-      constructor(t3, e7) {
-        super(t3, "array-contains", e7);
+      constructor(t4, e7) {
+        super(t4, "array-contains", e7);
       }
-      matches(t3) {
-        const e7 = t3.data.field(this.field);
+      matches(t4) {
+        const e7 = t4.data.field(this.field);
         return Gt2(e7) && jt2(e7.arrayValue, this.value);
       }
     };
     ue2 = class extends ee2 {
-      constructor(t3, e7) {
-        super(t3, "in", e7);
+      constructor(t4, e7) {
+        super(t4, "in", e7);
       }
-      matches(t3) {
-        const e7 = t3.data.field(this.field);
+      matches(t4) {
+        const e7 = t4.data.field(this.field);
         return null !== e7 && jt2(this.value.arrayValue, e7);
       }
     };
     ce2 = class extends ee2 {
-      constructor(t3, e7) {
-        super(t3, "not-in", e7);
+      constructor(t4, e7) {
+        super(t4, "not-in", e7);
       }
-      matches(t3) {
+      matches(t4) {
         if (jt2(this.value.arrayValue, {
           nullValue: "NULL_VALUE"
         }))
           return false;
-        const e7 = t3.data.field(this.field);
+        const e7 = t4.data.field(this.field);
         return null !== e7 && !jt2(this.value.arrayValue, e7);
       }
     };
     ae2 = class extends ee2 {
-      constructor(t3, e7) {
-        super(t3, "array-contains-any", e7);
+      constructor(t4, e7) {
+        super(t4, "array-contains-any", e7);
       }
-      matches(t3) {
-        const e7 = t3.data.field(this.field);
-        return !(!Gt2(e7) || !e7.arrayValue.values) && e7.arrayValue.values.some((t4) => jt2(this.value.arrayValue, t4));
+      matches(t4) {
+        const e7 = t4.data.field(this.field);
+        return !(!Gt2(e7) || !e7.arrayValue.values) && e7.arrayValue.values.some((t5) => jt2(this.value.arrayValue, t5));
       }
     };
     he2 = class {
-      constructor(t3, e7) {
-        this.position = t3, this.inclusive = e7;
+      constructor(t4, e7) {
+        this.position = t4, this.inclusive = e7;
       }
     };
     le2 = class {
-      constructor(t3, e7 = "asc") {
-        this.field = t3, this.dir = e7;
+      constructor(t4, e7 = "asc") {
+        this.field = t4, this.dir = e7;
       }
     };
     we2 = class {
-      constructor(t3, e7 = null, n3 = [], r6 = [], s6 = null, i4 = "F", o5 = null, u = null) {
-        this.path = t3, this.collectionGroup = e7, this.explicitOrderBy = n3, this.filters = r6, this.limit = s6, this.limitType = i4, this.startAt = o5, this.endAt = u, this.O = null, this.k = null, this.startAt, this.endAt;
+      constructor(t4, e7 = null, n3 = [], r6 = [], s6 = null, i4 = "F", o5 = null, u = null) {
+        this.path = t4, this.collectionGroup = e7, this.explicitOrderBy = n3, this.filters = r6, this.limit = s6, this.limitType = i4, this.startAt = o5, this.endAt = u, this.O = null, this.k = null, this.startAt, this.endAt;
       }
     };
     Ee2 = class {
@@ -10331,88 +10331,88 @@ var init_index_browser_esm2017 = __esm({
     Ie2 = class extends Ee2 {
     };
     Te2 = class extends Ee2 {
-      constructor(t3) {
-        super(), this.elements = t3;
+      constructor(t4) {
+        super(), this.elements = t4;
       }
     };
     Ae2 = class extends Ee2 {
-      constructor(t3) {
-        super(), this.elements = t3;
+      constructor(t4) {
+        super(), this.elements = t4;
       }
     };
     Re2 = class extends Ee2 {
-      constructor(t3, e7) {
-        super(), this.L = t3, this.M = e7;
+      constructor(t4, e7) {
+        super(), this.L = t4, this.M = e7;
       }
     };
     Pe2 = class {
-      constructor(t3, e7) {
-        this.field = t3, this.transform = e7;
+      constructor(t4, e7) {
+        this.field = t4, this.transform = e7;
       }
     };
     Ve = class {
-      constructor(t3, e7) {
-        this.updateTime = t3, this.exists = e7;
+      constructor(t4, e7) {
+        this.updateTime = t4, this.exists = e7;
       }
       static none() {
         return new Ve();
       }
-      static exists(t3) {
-        return new Ve(void 0, t3);
+      static exists(t4) {
+        return new Ve(void 0, t4);
       }
-      static updateTime(t3) {
-        return new Ve(t3);
+      static updateTime(t4) {
+        return new Ve(t4);
       }
       get isNone() {
         return void 0 === this.updateTime && void 0 === this.exists;
       }
-      isEqual(t3) {
-        return this.exists === t3.exists && (this.updateTime ? !!t3.updateTime && this.updateTime.isEqual(t3.updateTime) : !t3.updateTime);
+      isEqual(t4) {
+        return this.exists === t4.exists && (this.updateTime ? !!t4.updateTime && this.updateTime.isEqual(t4.updateTime) : !t4.updateTime);
       }
     };
     Ne2 = class {
     };
     $e2 = class extends Ne2 {
-      constructor(t3, e7, n3, r6 = []) {
-        super(), this.key = t3, this.value = e7, this.precondition = n3, this.fieldTransforms = r6, this.type = 0;
+      constructor(t4, e7, n3, r6 = []) {
+        super(), this.key = t4, this.value = e7, this.precondition = n3, this.fieldTransforms = r6, this.type = 0;
       }
       getFieldMask() {
         return null;
       }
     };
     De2 = class extends Ne2 {
-      constructor(t3, e7, n3, r6, s6 = []) {
-        super(), this.key = t3, this.data = e7, this.fieldMask = n3, this.precondition = r6, this.fieldTransforms = s6, this.type = 1;
+      constructor(t4, e7, n3, r6, s6 = []) {
+        super(), this.key = t4, this.data = e7, this.fieldMask = n3, this.precondition = r6, this.fieldTransforms = s6, this.type = 1;
       }
       getFieldMask() {
         return this.fieldMask;
       }
     };
     xe2 = class extends Ne2 {
-      constructor(t3, e7) {
-        super(), this.key = t3, this.precondition = e7, this.type = 2, this.fieldTransforms = [];
+      constructor(t4, e7) {
+        super(), this.key = t4, this.precondition = e7, this.type = 2, this.fieldTransforms = [];
       }
       getFieldMask() {
         return null;
       }
     };
     Fe2 = class extends Ne2 {
-      constructor(t3, e7) {
-        super(), this.key = t3, this.precondition = e7, this.type = 3, this.fieldTransforms = [];
+      constructor(t4, e7) {
+        super(), this.key = t4, this.precondition = e7, this.type = 3, this.fieldTransforms = [];
       }
       getFieldMask() {
         return null;
       }
     };
     Se2 = (() => {
-      const t3 = {
+      const t4 = {
         asc: "ASCENDING",
         desc: "DESCENDING"
       };
-      return t3;
+      return t4;
     })();
     qe2 = (() => {
-      const t3 = {
+      const t4 = {
         "<": "LESS_THAN",
         "<=": "LESS_THAN_OR_EQUAL",
         ">": "GREATER_THAN",
@@ -10424,16 +10424,16 @@ var init_index_browser_esm2017 = __esm({
         "not-in": "NOT_IN",
         "array-contains-any": "ARRAY_CONTAINS_ANY"
       };
-      return t3;
+      return t4;
     })();
     Oe2 = class {
-      constructor(t3, e7) {
-        this.databaseId = t3, this.C = e7;
+      constructor(t4, e7) {
+        this.databaseId = t4, this.C = e7;
       }
     };
     nn = class {
-      constructor(t3, e7, n3 = 1e3, r6 = 1.5, s6 = 6e4) {
-        this.U = t3, this.timerId = e7, this.j = n3, this.B = r6, this.G = s6, this.W = 0, this.K = null, this.Y = Date.now(), this.reset();
+      constructor(t4, e7, n3 = 1e3, r6 = 1.5, s6 = 6e4) {
+        this.U = t4, this.timerId = e7, this.j = n3, this.B = r6, this.G = s6, this.W = 0, this.K = null, this.Y = Date.now(), this.reset();
       }
       reset() {
         this.W = 0;
@@ -10441,10 +10441,10 @@ var init_index_browser_esm2017 = __esm({
       H() {
         this.W = this.G;
       }
-      J(t3) {
+      J(t4) {
         this.cancel();
         const e7 = Math.floor(this.W + this.X()), n3 = Math.max(0, Date.now() - this.Y), r6 = Math.max(0, e7 - n3);
-        r6 > 0 && y2("ExponentialBackoff", `Backing off for ${r6} ms (base delay: ${this.W} ms, delay with jitter: ${e7} ms, last attempt: ${n3} ms ago)`), this.K = this.U.enqueueAfterDelay(this.timerId, r6, () => (this.Y = Date.now(), t3())), this.W *= this.B, this.W < this.j && (this.W = this.j), this.W > this.G && (this.W = this.G);
+        r6 > 0 && y3("ExponentialBackoff", `Backing off for ${r6} ms (base delay: ${this.W} ms, delay with jitter: ${e7} ms, last attempt: ${n3} ms ago)`), this.K = this.U.enqueueAfterDelay(this.timerId, r6, () => (this.Y = Date.now(), t4())), this.W *= this.B, this.W < this.j && (this.W = this.j), this.W > this.G && (this.W = this.G);
       }
       Z() {
         null !== this.K && (this.K.skipDelay(), this.K = null);
@@ -10458,21 +10458,21 @@ var init_index_browser_esm2017 = __esm({
     };
     rn = class extends class {
     } {
-      constructor(t3, e7, n3, r6) {
-        super(), this.authCredentials = t3, this.appCheckCredentials = e7, this.connection = n3, this.L = r6, this.tt = false;
+      constructor(t4, e7, n3, r6) {
+        super(), this.authCredentials = t4, this.appCheckCredentials = e7, this.connection = n3, this.L = r6, this.tt = false;
       }
       et() {
         if (this.tt)
           throw new U2(S3, "The client has already been terminated.");
       }
-      I(t3, e7, n3) {
-        return this.et(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([r6, s6]) => this.connection.I(t3, e7, n3, r6, s6)).catch((t4) => {
-          throw "FirebaseError" === t4.name ? (t4.code === x3 && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t4) : new U2(R2, t4.toString());
+      I(t4, e7, n3) {
+        return this.et(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([r6, s6]) => this.connection.I(t4, e7, n3, r6, s6)).catch((t5) => {
+          throw "FirebaseError" === t5.name ? (t5.code === x3 && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t5) : new U2(R2, t5.toString());
         });
       }
-      P(t3, e7, n3, r6) {
-        return this.et(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([s6, i4]) => this.connection.P(t3, e7, n3, s6, i4, r6)).catch((t4) => {
-          throw "FirebaseError" === t4.name ? (t4.code === x3 && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t4) : new U2(R2, t4.toString());
+      P(t4, e7, n3, r6) {
+        return this.et(), Promise.all([this.authCredentials.getToken(), this.appCheckCredentials.getToken()]).then(([s6, i4]) => this.connection.P(t4, e7, n3, s6, i4, r6)).catch((t5) => {
+          throw "FirebaseError" === t5.name ? (t5.code === x3 && (this.authCredentials.invalidateToken(), this.appCheckCredentials.invalidateToken()), t5) : new U2(R2, t5.toString());
         });
       }
       terminate() {
@@ -10481,33 +10481,33 @@ var init_index_browser_esm2017 = __esm({
     };
     an = /* @__PURE__ */ new Map();
     ln = class {
-      constructor(t3) {
+      constructor(t4) {
         var e7;
-        if (void 0 === t3.host) {
-          if (void 0 !== t3.ssl)
+        if (void 0 === t4.host) {
+          if (void 0 !== t4.ssl)
             throw new U2(P3, "Can't provide ssl option if host option is not set");
           this.host = "firestore.googleapis.com", this.ssl = true;
         } else
-          this.host = t3.host, this.ssl = null === (e7 = t3.ssl) || void 0 === e7 || e7;
-        if (this.credentials = t3.credentials, this.ignoreUndefinedProperties = !!t3.ignoreUndefinedProperties, void 0 === t3.cacheSizeBytes)
+          this.host = t4.host, this.ssl = null === (e7 = t4.ssl) || void 0 === e7 || e7;
+        if (this.credentials = t4.credentials, this.ignoreUndefinedProperties = !!t4.ignoreUndefinedProperties, void 0 === t4.cacheSizeBytes)
           this.cacheSizeBytes = 41943040;
         else {
-          if (-1 !== t3.cacheSizeBytes && t3.cacheSizeBytes < 1048576)
+          if (-1 !== t4.cacheSizeBytes && t4.cacheSizeBytes < 1048576)
             throw new U2(P3, "cacheSizeBytes must be at least 1048576");
-          this.cacheSizeBytes = t3.cacheSizeBytes;
+          this.cacheSizeBytes = t4.cacheSizeBytes;
         }
-        this.experimentalForceLongPolling = !!t3.experimentalForceLongPolling, this.experimentalAutoDetectLongPolling = !!t3.experimentalAutoDetectLongPolling, this.useFetchStreams = !!t3.useFetchStreams, function(t4, e8, n3, r6) {
+        this.experimentalForceLongPolling = !!t4.experimentalForceLongPolling, this.experimentalAutoDetectLongPolling = !!t4.experimentalAutoDetectLongPolling, this.useFetchStreams = !!t4.useFetchStreams, function(t5, e8, n3, r6) {
           if (true === e8 && true === r6)
-            throw new U2(P3, `${t4} and ${n3} cannot be used together.`);
-        }("experimentalForceLongPolling", t3.experimentalForceLongPolling, "experimentalAutoDetectLongPolling", t3.experimentalAutoDetectLongPolling);
+            throw new U2(P3, `${t5} and ${n3} cannot be used together.`);
+        }("experimentalForceLongPolling", t4.experimentalForceLongPolling, "experimentalAutoDetectLongPolling", t4.experimentalAutoDetectLongPolling);
       }
-      isEqual(t3) {
-        return this.host === t3.host && this.ssl === t3.ssl && this.credentials === t3.credentials && this.cacheSizeBytes === t3.cacheSizeBytes && this.experimentalForceLongPolling === t3.experimentalForceLongPolling && this.experimentalAutoDetectLongPolling === t3.experimentalAutoDetectLongPolling && this.ignoreUndefinedProperties === t3.ignoreUndefinedProperties && this.useFetchStreams === t3.useFetchStreams;
+      isEqual(t4) {
+        return this.host === t4.host && this.ssl === t4.ssl && this.credentials === t4.credentials && this.cacheSizeBytes === t4.cacheSizeBytes && this.experimentalForceLongPolling === t4.experimentalForceLongPolling && this.experimentalAutoDetectLongPolling === t4.experimentalAutoDetectLongPolling && this.ignoreUndefinedProperties === t4.ignoreUndefinedProperties && this.useFetchStreams === t4.useFetchStreams;
       }
     };
     fn = class {
-      constructor(t3, e7, n3, r6) {
-        this._authCredentials = t3, this._appCheckCredentials = e7, this._databaseId = n3, this._app = r6, this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new ln({}), this._settingsFrozen = false;
+      constructor(t4, e7, n3, r6) {
+        this._authCredentials = t4, this._appCheckCredentials = e7, this._databaseId = n3, this._app = r6, this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new ln({}), this._settingsFrozen = false;
       }
       get app() {
         if (!this._app)
@@ -10520,22 +10520,22 @@ var init_index_browser_esm2017 = __esm({
       get _terminated() {
         return void 0 !== this._terminateTask;
       }
-      _setSettings(t3) {
+      _setSettings(t4) {
         if (this._settingsFrozen)
           throw new U2(S3, "Firestore has already been started and its settings can no longer be changed. You can only modify settings before calling any other methods on a Firestore object.");
-        this._settings = new ln(t3), void 0 !== t3.credentials && (this._authCredentials = function(t4) {
-          if (!t4)
+        this._settings = new ln(t4), void 0 !== t4.credentials && (this._authCredentials = function(t5) {
+          if (!t5)
             return new Q2();
-          switch (t4.type) {
+          switch (t5.type) {
             case "gapi":
-              const e7 = t4.client;
-              return new K2(e7, t4.sessionIndex || "0", t4.iamToken || null, t4.authTokenFactory || null);
+              const e7 = t5.client;
+              return new K2(e7, t5.sessionIndex || "0", t5.iamToken || null, t5.authTokenFactory || null);
             case "provider":
-              return t4.client;
+              return t5.client;
             default:
               throw new U2(P3, "makeAuthCredentialsProvider failed due to invalid credential type");
           }
-        }(t3.credentials));
+        }(t4.credentials));
       }
       _getSettings() {
         return this._settings;
@@ -10554,9 +10554,9 @@ var init_index_browser_esm2017 = __esm({
         };
       }
       _terminate() {
-        return function(t3) {
-          const e7 = an.get(t3);
-          e7 && (y2("ComponentProvider", "Removing Datastore"), an.delete(t3), e7.terminate());
+        return function(t4) {
+          const e7 = an.get(t4);
+          e7 && (y3("ComponentProvider", "Removing Datastore"), an.delete(t4), e7.terminate());
         }(this), Promise.resolve();
       }
     };
@@ -10566,21 +10566,21 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     _n2 = class {
-      constructor(t3, e7) {
-        this._data = e7, this.type = "AggregateQuerySnapshot", this.query = t3;
+      constructor(t4, e7) {
+        this._data = e7, this.type = "AggregateQuerySnapshot", this.query = t4;
       }
       data() {
         return this._data;
       }
     };
     gn = class {
-      constructor(t3, e7, n3) {
-        this.query = t3, this.datastore = e7, this.userDataWriter = n3;
+      constructor(t4, e7, n3) {
+        this.query = t4, this.datastore = e7, this.userDataWriter = n3;
       }
       run() {
-        return cn(this.datastore, this.query._query).then((t3) => {
-          E3(void 0 !== t3[0]);
-          const e7 = Object.entries(t3[0]).filter(([t4, e8]) => "count_alias" === t4).map(([t4, e8]) => this.userDataWriter.convertValue(e8))[0];
+        return cn(this.datastore, this.query._query).then((t4) => {
+          E3(void 0 !== t4[0]);
+          const e7 = Object.entries(t4[0]).filter(([t5, e8]) => "count_alias" === t5).map(([t5, e8]) => this.userDataWriter.convertValue(e8))[0];
           return E3("number" == typeof e7), Promise.resolve(new _n2(this.query, {
             count: e7
           }));
@@ -10588,8 +10588,8 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     vn = class {
-      constructor(t3, e7, n3) {
-        this.converter = e7, this._key = n3, this.type = "document", this.firestore = t3;
+      constructor(t4, e7, n3) {
+        this.converter = e7, this._key = n3, this.type = "document", this.firestore = t4;
       }
       get _path() {
         return this._key.path;
@@ -10603,21 +10603,21 @@ var init_index_browser_esm2017 = __esm({
       get parent() {
         return new En(this.firestore, this.converter, this._key.path.popLast());
       }
-      withConverter(t3) {
-        return new vn(this.firestore, t3, this._key);
+      withConverter(t4) {
+        return new vn(this.firestore, t4, this._key);
       }
     };
     bn = class {
-      constructor(t3, e7, n3) {
-        this.converter = e7, this._query = n3, this.type = "query", this.firestore = t3;
+      constructor(t4, e7, n3) {
+        this.converter = e7, this._query = n3, this.type = "query", this.firestore = t4;
       }
-      withConverter(t3) {
-        return new bn(this.firestore, t3, this._query);
+      withConverter(t4) {
+        return new bn(this.firestore, t4, this._query);
       }
     };
     En = class extends bn {
-      constructor(t3, e7, n3) {
-        super(t3, e7, new we2(n3)), this._path = n3, this.type = "collection";
+      constructor(t4, e7, n3) {
+        super(t4, e7, new we2(n3)), this._path = n3, this.type = "collection";
       }
       get id() {
         return this._query.path.lastSegment();
@@ -10626,30 +10626,30 @@ var init_index_browser_esm2017 = __esm({
         return this._query.path.canonicalString();
       }
       get parent() {
-        const t3 = this._path.popLast();
-        return t3.isEmpty() ? null : new vn(
+        const t4 = this._path.popLast();
+        return t4.isEmpty() ? null : new vn(
           this.firestore,
           null,
-          new rt2(t3)
+          new rt2(t4)
         );
       }
-      withConverter(t3) {
-        return new En(this.firestore, t3, this._path);
+      withConverter(t4) {
+        return new En(this.firestore, t4, this._path);
       }
     };
     Vn = class {
-      constructor(t3) {
-        this._byteString = t3;
+      constructor(t4) {
+        this._byteString = t4;
       }
-      static fromBase64String(t3) {
+      static fromBase64String(t4) {
         try {
-          return new Vn(Dt2.fromBase64String(t3));
-        } catch (t4) {
-          throw new U2(P3, "Failed to construct data from Base64 string: " + t4);
+          return new Vn(Dt2.fromBase64String(t4));
+        } catch (t5) {
+          throw new U2(P3, "Failed to construct data from Base64 string: " + t5);
         }
       }
-      static fromUint8Array(t3) {
-        return new Vn(Dt2.fromUint8Array(t3));
+      static fromUint8Array(t4) {
+        return new Vn(Dt2.fromUint8Array(t4));
       }
       toBase64() {
         return this._byteString.toBase64();
@@ -10660,33 +10660,33 @@ var init_index_browser_esm2017 = __esm({
       toString() {
         return "Bytes(base64: " + this.toBase64() + ")";
       }
-      isEqual(t3) {
-        return this._byteString.isEqual(t3._byteString);
+      isEqual(t4) {
+        return this._byteString.isEqual(t4._byteString);
       }
     };
     Nn = class {
-      constructor(...t3) {
-        for (let e7 = 0; e7 < t3.length; ++e7)
-          if (0 === t3[e7].length)
+      constructor(...t4) {
+        for (let e7 = 0; e7 < t4.length; ++e7)
+          if (0 === t4[e7].length)
             throw new U2(P3, "Invalid field name at argument $(i + 1). Field names must not be empty.");
-        this._internalPath = new nt2(t3);
+        this._internalPath = new nt2(t4);
       }
-      isEqual(t3) {
-        return this._internalPath.isEqual(t3._internalPath);
+      isEqual(t4) {
+        return this._internalPath.isEqual(t4._internalPath);
       }
     };
     Dn = class {
-      constructor(t3) {
-        this._methodName = t3;
+      constructor(t4) {
+        this._methodName = t4;
       }
     };
     xn = class {
-      constructor(t3, e7) {
-        if (!isFinite(t3) || t3 < -90 || t3 > 90)
-          throw new U2(P3, "Latitude must be a number between -90 and 90, but was: " + t3);
+      constructor(t4, e7) {
+        if (!isFinite(t4) || t4 < -90 || t4 > 90)
+          throw new U2(P3, "Latitude must be a number between -90 and 90, but was: " + t4);
         if (!isFinite(e7) || e7 < -180 || e7 > 180)
           throw new U2(P3, "Longitude must be a number between -180 and 180, but was: " + e7);
-        this._lat = t3, this._long = e7;
+        this._lat = t4, this._long = e7;
       }
       get latitude() {
         return this._lat;
@@ -10694,8 +10694,8 @@ var init_index_browser_esm2017 = __esm({
       get longitude() {
         return this._long;
       }
-      isEqual(t3) {
-        return this._lat === t3._lat && this._long === t3._long;
+      isEqual(t4) {
+        return this._lat === t4._lat && this._long === t4._long;
       }
       toJSON() {
         return {
@@ -10703,30 +10703,30 @@ var init_index_browser_esm2017 = __esm({
           longitude: this._long
         };
       }
-      _compareTo(t3) {
-        return gt2(this._lat, t3._lat) || gt2(this._long, t3._long);
+      _compareTo(t4) {
+        return gt2(this._lat, t4._lat) || gt2(this._long, t4._long);
       }
     };
     Fn = /^__.*__$/;
     Sn = class {
-      constructor(t3, e7, n3) {
-        this.data = t3, this.fieldMask = e7, this.fieldTransforms = n3;
+      constructor(t4, e7, n3) {
+        this.data = t4, this.fieldMask = e7, this.fieldTransforms = n3;
       }
-      toMutation(t3, e7) {
-        return null !== this.fieldMask ? new De2(t3, this.data, this.fieldMask, e7, this.fieldTransforms) : new $e2(t3, this.data, e7, this.fieldTransforms);
+      toMutation(t4, e7) {
+        return null !== this.fieldMask ? new De2(t4, this.data, this.fieldMask, e7, this.fieldTransforms) : new $e2(t4, this.data, e7, this.fieldTransforms);
       }
     };
     qn = class {
-      constructor(t3, e7, n3) {
-        this.data = t3, this.fieldMask = e7, this.fieldTransforms = n3;
+      constructor(t4, e7, n3) {
+        this.data = t4, this.fieldMask = e7, this.fieldTransforms = n3;
       }
-      toMutation(t3, e7) {
-        return new De2(t3, this.data, this.fieldMask, e7, this.fieldTransforms);
+      toMutation(t4, e7) {
+        return new De2(t4, this.data, this.fieldMask, e7, this.fieldTransforms);
       }
     };
     kn = class {
-      constructor(t3, e7, n3, r6, s6, i4) {
-        this.settings = t3, this.databaseId = e7, this.L = n3, this.ignoreUndefinedProperties = r6, void 0 === s6 && this.nt(), this.fieldTransforms = s6 || [], this.fieldMask = i4 || [];
+      constructor(t4, e7, n3, r6, s6, i4) {
+        this.settings = t4, this.databaseId = e7, this.L = n3, this.ignoreUndefinedProperties = r6, void 0 === s6 && this.nt(), this.fieldTransforms = s6 || [], this.fieldMask = i4 || [];
       }
       get path() {
         return this.settings.path;
@@ -10734,56 +10734,56 @@ var init_index_browser_esm2017 = __esm({
       get rt() {
         return this.settings.rt;
       }
-      st(t3) {
-        return new kn(Object.assign(Object.assign({}, this.settings), t3), this.databaseId, this.L, this.ignoreUndefinedProperties, this.fieldTransforms, this.fieldMask);
+      st(t4) {
+        return new kn(Object.assign(Object.assign({}, this.settings), t4), this.databaseId, this.L, this.ignoreUndefinedProperties, this.fieldTransforms, this.fieldMask);
       }
-      it(t3) {
+      it(t4) {
         var e7;
-        const n3 = null === (e7 = this.path) || void 0 === e7 ? void 0 : e7.child(t3), r6 = this.st({
+        const n3 = null === (e7 = this.path) || void 0 === e7 ? void 0 : e7.child(t4), r6 = this.st({
           path: n3,
           ot: false
         });
-        return r6.ut(t3), r6;
+        return r6.ut(t4), r6;
       }
-      ct(t3) {
+      ct(t4) {
         var e7;
-        const n3 = null === (e7 = this.path) || void 0 === e7 ? void 0 : e7.child(t3), r6 = this.st({
+        const n3 = null === (e7 = this.path) || void 0 === e7 ? void 0 : e7.child(t4), r6 = this.st({
           path: n3,
           ot: false
         });
         return r6.nt(), r6;
       }
-      at(t3) {
+      at(t4) {
         return this.st({
           path: void 0,
           ot: true
         });
       }
-      ht(t3) {
-        return rr(t3, this.settings.methodName, this.settings.lt || false, this.path, this.settings.ft);
+      ht(t4) {
+        return rr(t4, this.settings.methodName, this.settings.lt || false, this.path, this.settings.ft);
       }
-      contains(t3) {
-        return void 0 !== this.fieldMask.find((e7) => t3.isPrefixOf(e7)) || void 0 !== this.fieldTransforms.find((e7) => t3.isPrefixOf(e7.field));
+      contains(t4) {
+        return void 0 !== this.fieldMask.find((e7) => t4.isPrefixOf(e7)) || void 0 !== this.fieldTransforms.find((e7) => t4.isPrefixOf(e7.field));
       }
       nt() {
         if (this.path)
-          for (let t3 = 0; t3 < this.path.length; t3++)
-            this.ut(this.path.get(t3));
+          for (let t4 = 0; t4 < this.path.length; t4++)
+            this.ut(this.path.get(t4));
       }
-      ut(t3) {
-        if (0 === t3.length)
+      ut(t4) {
+        if (0 === t4.length)
           throw this.ht("Document fields must not be empty");
-        if (On(this.rt) && Fn.test(t3))
+        if (On(this.rt) && Fn.test(t4))
           throw this.ht('Document fields cannot begin and end with "__"');
       }
     };
     Cn = class {
-      constructor(t3, e7, n3) {
-        this.databaseId = t3, this.ignoreUndefinedProperties = e7, this.L = n3 || en(t3);
+      constructor(t4, e7, n3) {
+        this.databaseId = t4, this.ignoreUndefinedProperties = e7, this.L = n3 || en(t4);
       }
-      dt(t3, e7, n3, r6 = false) {
+      dt(t4, e7, n3, r6 = false) {
         return new kn({
-          rt: t3,
+          rt: t4,
           methodName: e7,
           ft: n3,
           path: nt2.emptyPath(),
@@ -10793,71 +10793,71 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     Un = class extends Dn {
-      _toFieldTransform(t3) {
-        if (2 !== t3.rt)
-          throw 1 === t3.rt ? t3.ht(`${this._methodName}() can only appear at the top level of your update data`) : t3.ht(`${this._methodName}() cannot be used with set() unless you pass {merge:true}`);
-        return t3.fieldMask.push(t3.path), null;
+      _toFieldTransform(t4) {
+        if (2 !== t4.rt)
+          throw 1 === t4.rt ? t4.ht(`${this._methodName}() can only appear at the top level of your update data`) : t4.ht(`${this._methodName}() cannot be used with set() unless you pass {merge:true}`);
+        return t4.fieldMask.push(t4.path), null;
       }
-      isEqual(t3) {
-        return t3 instanceof Un;
+      isEqual(t4) {
+        return t4 instanceof Un;
       }
     };
     Bn = class extends Dn {
-      _toFieldTransform(t3) {
-        return new Pe2(t3.path, new Ie2());
+      _toFieldTransform(t4) {
+        return new Pe2(t4.path, new Ie2());
       }
-      isEqual(t3) {
-        return t3 instanceof Bn;
+      isEqual(t4) {
+        return t4 instanceof Bn;
       }
     };
     Qn = class extends Dn {
-      constructor(t3, e7) {
-        super(t3), this.wt = e7;
+      constructor(t4, e7) {
+        super(t4), this.wt = e7;
       }
-      _toFieldTransform(t3) {
+      _toFieldTransform(t4) {
         const e7 = jn(
           this,
-          t3,
+          t4,
           true
-        ), n3 = this.wt.map((t4) => Hn(t4, e7)), r6 = new Te2(n3);
-        return new Pe2(t3.path, r6);
+        ), n3 = this.wt.map((t5) => Hn(t5, e7)), r6 = new Te2(n3);
+        return new Pe2(t4.path, r6);
       }
-      isEqual(t3) {
-        return this === t3;
+      isEqual(t4) {
+        return this === t4;
       }
     };
     zn = class extends Dn {
-      constructor(t3, e7) {
-        super(t3), this.wt = e7;
+      constructor(t4, e7) {
+        super(t4), this.wt = e7;
       }
-      _toFieldTransform(t3) {
+      _toFieldTransform(t4) {
         const e7 = jn(
           this,
-          t3,
+          t4,
           true
-        ), n3 = this.wt.map((t4) => Hn(t4, e7)), r6 = new Ae2(n3);
-        return new Pe2(t3.path, r6);
+        ), n3 = this.wt.map((t5) => Hn(t5, e7)), r6 = new Ae2(n3);
+        return new Pe2(t4.path, r6);
       }
-      isEqual(t3) {
-        return this === t3;
+      isEqual(t4) {
+        return this === t4;
       }
     };
     Gn = class extends Dn {
-      constructor(t3, e7) {
-        super(t3), this.yt = e7;
+      constructor(t4, e7) {
+        super(t4), this.yt = e7;
       }
-      _toFieldTransform(t3) {
-        const e7 = new Re2(t3.L, be2(t3.L, this.yt));
-        return new Pe2(t3.path, e7);
+      _toFieldTransform(t4) {
+        const e7 = new Re2(t4.L, be2(t4.L, this.yt));
+        return new Pe2(t4.path, e7);
       }
-      isEqual(t3) {
-        return this === t3;
+      isEqual(t4) {
+        return this === t4;
       }
     };
     er = new RegExp("[~\\*/\\[\\]]");
     ir = class {
-      constructor(t3, e7, n3, r6, s6) {
-        this._firestore = t3, this._userDataWriter = e7, this._key = n3, this._document = r6, this._converter = s6;
+      constructor(t4, e7, n3, r6, s6) {
+        this._firestore = t4, this._userDataWriter = e7, this._key = n3, this._document = r6, this._converter = s6;
       }
       get id() {
         return this._key.path.lastSegment();
@@ -10871,21 +10871,21 @@ var init_index_browser_esm2017 = __esm({
       data() {
         if (this._document) {
           if (this._converter) {
-            const t3 = new or(
+            const t4 = new or(
               this._firestore,
               this._userDataWriter,
               this._key,
               this._document,
               null
             );
-            return this._converter.fromFirestore(t3);
+            return this._converter.fromFirestore(t4);
           }
           return this._userDataWriter.convertValue(this._document.data.value);
         }
       }
-      get(t3) {
+      get(t4) {
         if (this._document) {
-          const e7 = this._document.data.field(ar("DocumentSnapshot.get", t3));
+          const e7 = this._document.data.field(ar("DocumentSnapshot.get", t4));
           if (null !== e7)
             return this._userDataWriter.convertValue(e7);
         }
@@ -10897,8 +10897,8 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     ur = class {
-      constructor(t3, e7) {
-        this._docs = e7, this.query = t3;
+      constructor(t4, e7) {
+        this._docs = e7, this.query = t4;
       }
       get docs() {
         return [...this._docs];
@@ -10909,18 +10909,18 @@ var init_index_browser_esm2017 = __esm({
       get empty() {
         return 0 === this.docs.length;
       }
-      forEach(t3, e7) {
-        this._docs.forEach(t3, e7);
+      forEach(t4, e7) {
+        this._docs.forEach(t4, e7);
       }
     };
     hr = class {
     };
     fr = class extends hr {
-      constructor(t3, e7, n3) {
-        super(), this._t = t3, this.gt = e7, this.vt = n3, this.type = "where";
+      constructor(t4, e7, n3) {
+        super(), this._t = t4, this.gt = e7, this.vt = n3, this.type = "where";
       }
-      _apply(t3) {
-        const e7 = Ln(t3.firestore), n3 = function(t4, e8, n4, r6, s6, i4, o5) {
+      _apply(t4) {
+        const e7 = Ln(t4.firestore), n3 = function(t5, e8, n4, r6, s6, i4, o5) {
           let u;
           if (s6.isKeyField()) {
             if ("array-contains" === i4 || "array-contains-any" === i4)
@@ -10929,14 +10929,14 @@ var init_index_browser_esm2017 = __esm({
               Pr(o5, i4);
               const e9 = [];
               for (const n5 of o5)
-                e9.push(Rr(r6, t4, n5));
+                e9.push(Rr(r6, t5, n5));
               u = {
                 arrayValue: {
                   values: e9
                 }
               };
             } else
-              u = Rr(r6, t4, o5);
+              u = Rr(r6, t5, o5);
           } else
             "in" !== i4 && "not-in" !== i4 && "array-contains-any" !== i4 || Pr(o5, i4), u = Yn(
               n4,
@@ -10945,23 +10945,23 @@ var init_index_browser_esm2017 = __esm({
               "in" === i4 || "not-in" === i4
             );
           const c4 = ee2.create(s6, i4, u);
-          return function(t5, e9) {
+          return function(t6, e9) {
             if (e9.q()) {
-              const n6 = pe2(t5);
+              const n6 = pe2(t6);
               if (null !== n6 && !n6.isEqual(e9.field))
                 throw new U2(P3, `Invalid query. All where filters with an inequality (<, <=, !=, not-in, >, or >=) must be on the same field. But you have inequality filters on '${n6.toString()}' and '${e9.field.toString()}'`);
-              const r7 = me2(t5);
-              null !== r7 && Vr(t5, e9.field, r7);
+              const r7 = me2(t6);
+              null !== r7 && Vr(t6, e9.field, r7);
             }
-            const n5 = function(t6, e10) {
-              for (const n6 of t6.filters)
+            const n5 = function(t7, e10) {
+              for (const n6 of t7.filters)
                 if (e10.indexOf(n6.op) >= 0)
                   return n6.op;
               return null;
             }(
-              t5,
-              function(t6) {
-                switch (t6) {
+              t6,
+              function(t7) {
+                switch (t7) {
                   case "!=":
                     return ["!=", "not-in"];
                   case "array-contains":
@@ -10979,162 +10979,162 @@ var init_index_browser_esm2017 = __esm({
             );
             if (null !== n5)
               throw n5 === e9.op ? new U2(P3, `Invalid query. You cannot use more than one '${e9.op.toString()}' filter.`) : new U2(P3, `Invalid query. You cannot use '${e9.op.toString()}' filters with '${n5.toString()}' filters.`);
-          }(t4, c4), c4;
-        }(t3._query, "where", e7, t3.firestore._databaseId, this._t, this.gt, this.vt);
-        return new bn(t3.firestore, t3.converter, function(t4, e8) {
-          const n4 = t4.filters.concat([e8]);
-          return new we2(t4.path, t4.collectionGroup, t4.explicitOrderBy.slice(), n4, t4.limit, t4.limitType, t4.startAt, t4.endAt);
-        }(t3._query, n3));
+          }(t5, c4), c4;
+        }(t4._query, "where", e7, t4.firestore._databaseId, this._t, this.gt, this.vt);
+        return new bn(t4.firestore, t4.converter, function(t5, e8) {
+          const n4 = t5.filters.concat([e8]);
+          return new we2(t5.path, t5.collectionGroup, t5.explicitOrderBy.slice(), n4, t5.limit, t5.limitType, t5.startAt, t5.endAt);
+        }(t4._query, n3));
       }
     };
     wr = class extends hr {
-      constructor(t3, e7) {
-        super(), this._t = t3, this.bt = e7, this.type = "orderBy";
+      constructor(t4, e7) {
+        super(), this._t = t4, this.bt = e7, this.type = "orderBy";
       }
-      _apply(t3) {
-        const e7 = function(t4, e8, n3) {
-          if (null !== t4.startAt)
+      _apply(t4) {
+        const e7 = function(t5, e8, n3) {
+          if (null !== t5.startAt)
             throw new U2(P3, "Invalid query. You must not call startAt() or startAfter() before calling orderBy().");
-          if (null !== t4.endAt)
+          if (null !== t5.endAt)
             throw new U2(P3, "Invalid query. You must not call endAt() or endBefore() before calling orderBy().");
           const r6 = new le2(e8, n3);
-          return function(t5, e9) {
-            if (null === me2(t5)) {
-              const n4 = pe2(t5);
-              null !== n4 && Vr(t5, n4, e9.field);
+          return function(t6, e9) {
+            if (null === me2(t6)) {
+              const n4 = pe2(t6);
+              null !== n4 && Vr(t6, n4, e9.field);
             }
-          }(t4, r6), r6;
-        }(t3._query, this._t, this.bt);
-        return new bn(t3.firestore, t3.converter, function(t4, e8) {
-          const n3 = t4.explicitOrderBy.concat([e8]);
-          return new we2(t4.path, t4.collectionGroup, n3, t4.filters.slice(), t4.limit, t4.limitType, t4.startAt, t4.endAt);
-        }(t3._query, e7));
+          }(t5, r6), r6;
+        }(t4._query, this._t, this.bt);
+        return new bn(t4.firestore, t4.converter, function(t5, e8) {
+          const n3 = t5.explicitOrderBy.concat([e8]);
+          return new we2(t5.path, t5.collectionGroup, n3, t5.filters.slice(), t5.limit, t5.limitType, t5.startAt, t5.endAt);
+        }(t4._query, e7));
       }
     };
     pr = class extends hr {
-      constructor(t3, e7, n3) {
-        super(), this.type = t3, this.Et = e7, this.It = n3;
+      constructor(t4, e7, n3) {
+        super(), this.type = t4, this.Et = e7, this.It = n3;
       }
-      _apply(t3) {
-        return new bn(t3.firestore, t3.converter, function(t4, e7, n3) {
-          return new we2(t4.path, t4.collectionGroup, t4.explicitOrderBy.slice(), t4.filters.slice(), e7, n3, t4.startAt, t4.endAt);
-        }(t3._query, this.Et, this.It));
+      _apply(t4) {
+        return new bn(t4.firestore, t4.converter, function(t5, e7, n3) {
+          return new we2(t5.path, t5.collectionGroup, t5.explicitOrderBy.slice(), t5.filters.slice(), e7, n3, t5.startAt, t5.endAt);
+        }(t4._query, this.Et, this.It));
       }
     };
     gr = class extends hr {
-      constructor(t3, e7, n3) {
-        super(), this.type = t3, this.Tt = e7, this.At = n3;
+      constructor(t4, e7, n3) {
+        super(), this.type = t4, this.Tt = e7, this.At = n3;
       }
-      _apply(t3) {
-        const e7 = Ar(t3, this.type, this.Tt, this.At);
-        return new bn(t3.firestore, t3.converter, function(t4, e8) {
-          return new we2(t4.path, t4.collectionGroup, t4.explicitOrderBy.slice(), t4.filters.slice(), t4.limit, t4.limitType, e8, t4.endAt);
-        }(t3._query, e7));
+      _apply(t4) {
+        const e7 = Ar(t4, this.type, this.Tt, this.At);
+        return new bn(t4.firestore, t4.converter, function(t5, e8) {
+          return new we2(t5.path, t5.collectionGroup, t5.explicitOrderBy.slice(), t5.filters.slice(), t5.limit, t5.limitType, e8, t5.endAt);
+        }(t4._query, e7));
       }
     };
     Er = class extends hr {
-      constructor(t3, e7, n3) {
-        super(), this.type = t3, this.Tt = e7, this.At = n3;
+      constructor(t4, e7, n3) {
+        super(), this.type = t4, this.Tt = e7, this.At = n3;
       }
-      _apply(t3) {
-        const e7 = Ar(t3, this.type, this.Tt, this.At);
-        return new bn(t3.firestore, t3.converter, function(t4, e8) {
-          return new we2(t4.path, t4.collectionGroup, t4.explicitOrderBy.slice(), t4.filters.slice(), t4.limit, t4.limitType, t4.startAt, e8);
-        }(t3._query, e7));
+      _apply(t4) {
+        const e7 = Ar(t4, this.type, this.Tt, this.At);
+        return new bn(t4.firestore, t4.converter, function(t5, e8) {
+          return new we2(t5.path, t5.collectionGroup, t5.explicitOrderBy.slice(), t5.filters.slice(), t5.limit, t5.limitType, t5.startAt, e8);
+        }(t4._query, e7));
       }
     };
     $r = class extends class {
-      convertValue(t3, e7 = "none") {
-        switch (Mt(t3)) {
+      convertValue(t4, e7 = "none") {
+        switch (Mt(t4)) {
           case 0:
             return null;
           case 1:
-            return t3.booleanValue;
+            return t4.booleanValue;
           case 2:
-            return St2(t3.integerValue || t3.doubleValue);
+            return St2(t4.integerValue || t4.doubleValue);
           case 3:
-            return this.convertTimestamp(t3.timestampValue);
+            return this.convertTimestamp(t4.timestampValue);
           case 4:
-            return this.convertServerTimestamp(t3, e7);
+            return this.convertServerTimestamp(t4, e7);
           case 5:
-            return t3.stringValue;
+            return t4.stringValue;
           case 6:
-            return this.convertBytes(qt2(t3.bytesValue));
+            return this.convertBytes(qt2(t4.bytesValue));
           case 7:
-            return this.convertReference(t3.referenceValue);
+            return this.convertReference(t4.referenceValue);
           case 8:
-            return this.convertGeoPoint(t3.geoPointValue);
+            return this.convertGeoPoint(t4.geoPointValue);
           case 9:
-            return this.convertArray(t3.arrayValue, e7);
+            return this.convertArray(t4.arrayValue, e7);
           case 10:
-            return this.convertObject(t3.mapValue, e7);
+            return this.convertObject(t4.mapValue, e7);
           default:
             throw b3();
         }
       }
-      convertObject(t3, e7) {
+      convertObject(t4, e7) {
         const n3 = {};
-        return Tt2(t3.fields, (t4, r6) => {
-          n3[t4] = this.convertValue(r6, e7);
+        return Tt2(t4.fields, (t5, r6) => {
+          n3[t5] = this.convertValue(r6, e7);
         }), n3;
       }
-      convertGeoPoint(t3) {
-        return new xn(St2(t3.latitude), St2(t3.longitude));
+      convertGeoPoint(t4) {
+        return new xn(St2(t4.latitude), St2(t4.longitude));
       }
-      convertArray(t3, e7) {
-        return (t3.values || []).map((t4) => this.convertValue(t4, e7));
+      convertArray(t4, e7) {
+        return (t4.values || []).map((t5) => this.convertValue(t5, e7));
       }
-      convertServerTimestamp(t3, e7) {
+      convertServerTimestamp(t4, e7) {
         switch (e7) {
           case "previous":
-            const n3 = kt2(t3);
+            const n3 = kt2(t4);
             return null == n3 ? null : this.convertValue(n3, e7);
           case "estimate":
-            return this.convertTimestamp(Ct2(t3));
+            return this.convertTimestamp(Ct2(t4));
           default:
             return null;
         }
       }
-      convertTimestamp(t3) {
-        const e7 = Ft(t3);
+      convertTimestamp(t4) {
+        const e7 = Ft(t4);
         return new bt2(e7.seconds, e7.nanos);
       }
-      convertDocumentKey(t3, e7) {
-        const n3 = tt2.fromString(t3);
+      convertDocumentKey(t4, e7) {
+        const n3 = tt2.fromString(t4);
         E3(tn(n3));
         const r6 = new X2(n3.get(1), n3.get(3)), s6 = new rt2(n3.popFirst(5));
         return r6.isEqual(e7) || _5(`Document ${s6} contains a document reference within a different database (${r6.projectId}/${r6.database}) which is not supported. It will be treated as a reference in the current database (${e7.projectId}/${e7.database}) instead.`), s6;
       }
     } {
-      constructor(t3) {
-        super(), this.firestore = t3;
+      constructor(t4) {
+        super(), this.firestore = t4;
       }
-      convertBytes(t3) {
-        return new Vn(t3);
+      convertBytes(t4) {
+        return new Vn(t4);
       }
-      convertReference(t3) {
-        const e7 = this.convertDocumentKey(t3, this.firestore._databaseId);
+      convertReference(t4) {
+        const e7 = this.convertDocumentKey(t4, this.firestore._databaseId);
         return new vn(this.firestore, null, e7);
       }
     };
     Qr = class {
-      constructor(t3, e7) {
-        this._firestore = t3, this._commitHandler = e7, this._mutations = [], this._committed = false, this._dataReader = Ln(t3);
+      constructor(t4, e7) {
+        this._firestore = t4, this._commitHandler = e7, this._mutations = [], this._committed = false, this._dataReader = Ln(t4);
       }
-      set(t3, e7, n3) {
+      set(t4, e7, n3) {
         this._verifyNotCommitted();
-        const r6 = zr(t3, this._firestore), s6 = Nr(r6.converter, e7, n3), i4 = Mn(this._dataReader, "WriteBatch.set", r6._key, s6, null !== r6.converter, n3);
+        const r6 = zr(t4, this._firestore), s6 = Nr(r6.converter, e7, n3), i4 = Mn(this._dataReader, "WriteBatch.set", r6._key, s6, null !== r6.converter, n3);
         return this._mutations.push(i4.toMutation(r6._key, Ve.none())), this;
       }
-      update(t3, e7, n3, ...r6) {
+      update(t4, e7, n3, ...r6) {
         this._verifyNotCommitted();
-        const s6 = zr(t3, this._firestore);
+        const s6 = zr(t4, this._firestore);
         let i4;
         return i4 = "string" == typeof (e7 = getModularInstance(e7)) || e7 instanceof Nn ? Kn(this._dataReader, "WriteBatch.update", s6._key, e7, n3, r6) : Wn(this._dataReader, "WriteBatch.update", s6._key, e7), this._mutations.push(i4.toMutation(s6._key, Ve.exists(true))), this;
       }
-      delete(t3) {
+      delete(t4) {
         this._verifyNotCommitted();
-        const e7 = zr(t3, this._firestore);
+        const e7 = zr(t4, this._firestore);
         return this._mutations = this._mutations.concat(new xe2(e7._key, Ve.none())), this;
       }
       commit() {
@@ -11146,71 +11146,71 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     Wr = class {
-      constructor(t3) {
-        this.datastore = t3, this.readVersions = /* @__PURE__ */ new Map(), this.mutations = [], this.committed = false, this.lastWriteError = null, this.writtenDocs = /* @__PURE__ */ new Set();
+      constructor(t4) {
+        this.datastore = t4, this.readVersions = /* @__PURE__ */ new Map(), this.mutations = [], this.committed = false, this.lastWriteError = null, this.writtenDocs = /* @__PURE__ */ new Set();
       }
-      async lookup(t3) {
+      async lookup(t4) {
         if (this.ensureCommitNotCalled(), this.mutations.length > 0)
           throw new U2(P3, "Firestore transactions require all reads to be executed before all writes.");
-        const e7 = await on(this.datastore, t3);
-        return e7.forEach((t4) => this.recordVersion(t4)), e7;
+        const e7 = await on(this.datastore, t4);
+        return e7.forEach((t5) => this.recordVersion(t5)), e7;
       }
-      set(t3, e7) {
-        this.write(e7.toMutation(t3, this.precondition(t3))), this.writtenDocs.add(t3.toString());
+      set(t4, e7) {
+        this.write(e7.toMutation(t4, this.precondition(t4))), this.writtenDocs.add(t4.toString());
       }
-      update(t3, e7) {
+      update(t4, e7) {
         try {
-          this.write(e7.toMutation(t3, this.preconditionForUpdate(t3)));
-        } catch (t4) {
-          this.lastWriteError = t4;
+          this.write(e7.toMutation(t4, this.preconditionForUpdate(t4)));
+        } catch (t5) {
+          this.lastWriteError = t5;
         }
-        this.writtenDocs.add(t3.toString());
+        this.writtenDocs.add(t4.toString());
       }
-      delete(t3) {
-        this.write(new xe2(t3, this.precondition(t3))), this.writtenDocs.add(t3.toString());
+      delete(t4) {
+        this.write(new xe2(t4, this.precondition(t4))), this.writtenDocs.add(t4.toString());
       }
       async commit() {
         if (this.ensureCommitNotCalled(), this.lastWriteError)
           throw this.lastWriteError;
-        const t3 = this.readVersions;
+        const t4 = this.readVersions;
         this.mutations.forEach((e7) => {
-          t3.delete(e7.key.toString());
-        }), t3.forEach((t4, e7) => {
+          t4.delete(e7.key.toString());
+        }), t4.forEach((t5, e7) => {
           const n3 = rt2.fromPath(e7);
           this.mutations.push(new Fe2(n3, this.precondition(n3)));
         }), await sn(this.datastore, this.mutations), this.committed = true;
       }
-      recordVersion(t3) {
+      recordVersion(t4) {
         let e7;
-        if (t3.isFoundDocument())
-          e7 = t3.version;
+        if (t4.isFoundDocument())
+          e7 = t4.version;
         else {
-          if (!t3.isNoDocument())
+          if (!t4.isNoDocument())
             throw b3();
           e7 = Et2.min();
         }
-        const n3 = this.readVersions.get(t3.key.toString());
+        const n3 = this.readVersions.get(t4.key.toString());
         if (n3) {
           if (!e7.isEqual(n3))
             throw new U2(q3, "Document version changed between two reads.");
         } else
-          this.readVersions.set(t3.key.toString(), e7);
+          this.readVersions.set(t4.key.toString(), e7);
       }
-      precondition(t3) {
-        const e7 = this.readVersions.get(t3.toString());
-        return !this.writtenDocs.has(t3.toString()) && e7 ? e7.isEqual(Et2.min()) ? Ve.exists(false) : Ve.updateTime(e7) : Ve.none();
+      precondition(t4) {
+        const e7 = this.readVersions.get(t4.toString());
+        return !this.writtenDocs.has(t4.toString()) && e7 ? e7.isEqual(Et2.min()) ? Ve.exists(false) : Ve.updateTime(e7) : Ve.none();
       }
-      preconditionForUpdate(t3) {
-        const e7 = this.readVersions.get(t3.toString());
-        if (!this.writtenDocs.has(t3.toString()) && e7) {
+      preconditionForUpdate(t4) {
+        const e7 = this.readVersions.get(t4.toString());
+        if (!this.writtenDocs.has(t4.toString()) && e7) {
           if (e7.isEqual(Et2.min()))
             throw new U2(P3, "Can't update a document that doesn't exist.");
           return Ve.updateTime(e7);
         }
         return Ve.exists(true);
       }
-      write(t3) {
-        this.ensureCommitNotCalled(), this.mutations.push(t3);
+      write(t4) {
+        this.ensureCommitNotCalled(), this.mutations.push(t4);
       }
       ensureCommitNotCalled() {
       }
@@ -11219,42 +11219,42 @@ var init_index_browser_esm2017 = __esm({
       maxAttempts: 5
     };
     Yr = class {
-      constructor(t3, e7, n3, r6, s6) {
-        this.asyncQueue = t3, this.datastore = e7, this.options = n3, this.updateFunction = r6, this.deferred = s6, this.Rt = n3.maxAttempts, this.Pt = new nn(this.asyncQueue, "transaction_retry");
+      constructor(t4, e7, n3, r6, s6) {
+        this.asyncQueue = t4, this.datastore = e7, this.options = n3, this.updateFunction = r6, this.deferred = s6, this.Rt = n3.maxAttempts, this.Pt = new nn(this.asyncQueue, "transaction_retry");
       }
       run() {
         this.Rt -= 1, this.Vt();
       }
       Vt() {
         this.Pt.J(async () => {
-          const t3 = new Wr(this.datastore), e7 = this.Nt(t3);
+          const t4 = new Wr(this.datastore), e7 = this.Nt(t4);
           e7 && e7.then((e8) => {
-            this.asyncQueue.enqueueAndForget(() => t3.commit().then(() => {
+            this.asyncQueue.enqueueAndForget(() => t4.commit().then(() => {
               this.deferred.resolve(e8);
-            }).catch((t4) => {
-              this.$t(t4);
+            }).catch((t5) => {
+              this.$t(t5);
             }));
-          }).catch((t4) => {
-            this.$t(t4);
+          }).catch((t5) => {
+            this.$t(t5);
           });
         });
       }
-      Nt(t3) {
+      Nt(t4) {
         try {
-          const e7 = this.updateFunction(t3);
+          const e7 = this.updateFunction(t4);
           return !ht2(e7) && e7.catch && e7.then ? e7 : (this.deferred.reject(Error("Transaction callback must return a Promise")), null);
-        } catch (t4) {
-          return this.deferred.reject(t4), null;
+        } catch (t5) {
+          return this.deferred.reject(t5), null;
         }
       }
-      $t(t3) {
-        this.Rt > 0 && this.Dt(t3) ? (this.Rt -= 1, this.asyncQueue.enqueueAndForget(() => (this.Vt(), Promise.resolve()))) : this.deferred.reject(t3);
+      $t(t4) {
+        this.Rt > 0 && this.Dt(t4) ? (this.Rt -= 1, this.asyncQueue.enqueueAndForget(() => (this.Vt(), Promise.resolve()))) : this.deferred.reject(t4);
       }
-      Dt(t3) {
-        if ("FirebaseError" === t3.name) {
-          const e7 = t3.code;
-          return "aborted" === e7 || "failed-precondition" === e7 || "already-exists" === e7 || !function(t4) {
-            switch (t4) {
+      Dt(t4) {
+        if ("FirebaseError" === t4.name) {
+          const e7 = t4.code;
+          return "aborted" === e7 || "failed-precondition" === e7 || "already-exists" === e7 || !function(t5) {
+            switch (t5) {
               default:
                 return b3();
               case A5:
@@ -11268,7 +11268,7 @@ var init_index_browser_esm2017 = __esm({
               case P3:
               case N2:
               case $2:
-              case D3:
+              case D2:
               case S3:
               case q3:
               case O3:
@@ -11282,25 +11282,25 @@ var init_index_browser_esm2017 = __esm({
       }
     };
     Jr = class {
-      constructor(t3, e7, n3, r6, s6) {
-        this.asyncQueue = t3, this.timerId = e7, this.targetTimeMs = n3, this.op = r6, this.removalCallback = s6, this.deferred = new j2(), this.then = this.deferred.promise.then.bind(this.deferred.promise), this.deferred.promise.catch((t4) => {
+      constructor(t4, e7, n3, r6, s6) {
+        this.asyncQueue = t4, this.timerId = e7, this.targetTimeMs = n3, this.op = r6, this.removalCallback = s6, this.deferred = new j2(), this.then = this.deferred.promise.then.bind(this.deferred.promise), this.deferred.promise.catch((t5) => {
         });
       }
-      static createAndSchedule(t3, e7, n3, r6, s6) {
-        const i4 = Date.now() + n3, o5 = new Jr(t3, e7, i4, r6, s6);
+      static createAndSchedule(t4, e7, n3, r6, s6) {
+        const i4 = Date.now() + n3, o5 = new Jr(t4, e7, i4, r6, s6);
         return o5.start(n3), o5;
       }
-      start(t3) {
-        this.timerHandle = setTimeout(() => this.handleDelayElapsed(), t3);
+      start(t4) {
+        this.timerHandle = setTimeout(() => this.handleDelayElapsed(), t4);
       }
       skipDelay() {
         return this.handleDelayElapsed();
       }
-      cancel(t3) {
-        null !== this.timerHandle && (this.clearTimeout(), this.deferred.reject(new U2(A5, "Operation cancelled" + (t3 ? ": " + t3 : ""))));
+      cancel(t4) {
+        null !== this.timerHandle && (this.clearTimeout(), this.deferred.reject(new U2(A5, "Operation cancelled" + (t4 ? ": " + t4 : ""))));
       }
       handleDelayElapsed() {
-        this.asyncQueue.enqueueAndForget(() => null !== this.timerHandle ? (this.clearTimeout(), this.op().then((t3) => this.deferred.resolve(t3))) : Promise.resolve());
+        this.asyncQueue.enqueueAndForget(() => null !== this.timerHandle ? (this.clearTimeout(), this.op().then((t4) => this.deferred.resolve(t4))) : Promise.resolve());
       }
       clearTimeout() {
         null !== this.timerHandle && (this.removalCallback(this), clearTimeout(this.timerHandle), this.timerHandle = null);
@@ -11309,67 +11309,67 @@ var init_index_browser_esm2017 = __esm({
     Xr = class {
       constructor() {
         this.xt = Promise.resolve(), this.Ft = [], this.St = false, this.qt = [], this.Ot = null, this.kt = false, this.Ct = false, this.Lt = [], this.Pt = new nn(this, "async_queue_retry"), this.Mt = () => {
-          const t4 = Hr();
-          t4 && y2("AsyncQueue", "Visibility state changed to " + t4.visibilityState), this.Pt.Z();
+          const t5 = Hr();
+          t5 && y3("AsyncQueue", "Visibility state changed to " + t5.visibilityState), this.Pt.Z();
         };
-        const t3 = Hr();
-        t3 && "function" == typeof t3.addEventListener && t3.addEventListener("visibilitychange", this.Mt);
+        const t4 = Hr();
+        t4 && "function" == typeof t4.addEventListener && t4.addEventListener("visibilitychange", this.Mt);
       }
       get isShuttingDown() {
         return this.St;
       }
-      enqueueAndForget(t3) {
-        this.enqueue(t3);
+      enqueueAndForget(t4) {
+        this.enqueue(t4);
       }
-      enqueueAndForgetEvenWhileRestricted(t3) {
-        this.Ut(), this.jt(t3);
+      enqueueAndForgetEvenWhileRestricted(t4) {
+        this.Ut(), this.jt(t4);
       }
-      enterRestrictedMode(t3) {
+      enterRestrictedMode(t4) {
         if (!this.St) {
-          this.St = true, this.Ct = t3 || false;
+          this.St = true, this.Ct = t4 || false;
           const e7 = Hr();
           e7 && "function" == typeof e7.removeEventListener && e7.removeEventListener("visibilitychange", this.Mt);
         }
       }
-      enqueue(t3) {
+      enqueue(t4) {
         if (this.Ut(), this.St)
           return new Promise(() => {
           });
         const e7 = new j2();
-        return this.jt(() => this.St && this.Ct ? Promise.resolve() : (t3().then(e7.resolve, e7.reject), e7.promise)).then(() => e7.promise);
+        return this.jt(() => this.St && this.Ct ? Promise.resolve() : (t4().then(e7.resolve, e7.reject), e7.promise)).then(() => e7.promise);
       }
-      enqueueRetryable(t3) {
-        this.enqueueAndForget(() => (this.Ft.push(t3), this.Bt()));
+      enqueueRetryable(t4) {
+        this.enqueueAndForget(() => (this.Ft.push(t4), this.Bt()));
       }
       async Bt() {
         if (0 !== this.Ft.length) {
           try {
             await this.Ft[0](), this.Ft.shift(), this.Pt.reset();
-          } catch (t3) {
-            if (!function(t4) {
-              return "IndexedDbTransactionError" === t4.name;
-            }(t3))
-              throw t3;
-            y2("AsyncQueue", "Operation failed with retryable error: " + t3);
+          } catch (t4) {
+            if (!function(t5) {
+              return "IndexedDbTransactionError" === t5.name;
+            }(t4))
+              throw t4;
+            y3("AsyncQueue", "Operation failed with retryable error: " + t4);
           }
           this.Ft.length > 0 && this.Pt.J(() => this.Bt());
         }
       }
-      jt(t3) {
-        const e7 = this.xt.then(() => (this.kt = true, t3().catch((t4) => {
-          this.Ot = t4, this.kt = false;
-          const e8 = function(t5) {
-            let e9 = t5.message || "";
-            t5.stack && (e9 = t5.stack.includes(t5.message) ? t5.stack : t5.message + "\n" + t5.stack);
+      jt(t4) {
+        const e7 = this.xt.then(() => (this.kt = true, t4().catch((t5) => {
+          this.Ot = t5, this.kt = false;
+          const e8 = function(t6) {
+            let e9 = t6.message || "";
+            t6.stack && (e9 = t6.stack.includes(t6.message) ? t6.stack : t6.message + "\n" + t6.stack);
             return e9;
-          }(t4);
-          throw _5("INTERNAL UNHANDLED ERROR: ", e8), t4;
-        }).then((t4) => (this.kt = false, t4))));
+          }(t5);
+          throw _5("INTERNAL UNHANDLED ERROR: ", e8), t5;
+        }).then((t5) => (this.kt = false, t5))));
         return this.xt = e7, e7;
       }
-      enqueueAfterDelay(t3, e7, n3) {
-        this.Ut(), this.Lt.indexOf(t3) > -1 && (e7 = 0);
-        const r6 = Jr.createAndSchedule(this, t3, e7, n3, (t4) => this.Qt(t4));
+      enqueueAfterDelay(t4, e7, n3) {
+        this.Ut(), this.Lt.indexOf(t4) > -1 && (e7 = 0);
+        const r6 = Jr.createAndSchedule(this, t4, e7, n3, (t5) => this.Qt(t5));
         return this.qt.push(r6), r6;
       }
       Ut() {
@@ -11378,44 +11378,44 @@ var init_index_browser_esm2017 = __esm({
       verifyOperationInProgress() {
       }
       async zt() {
-        let t3;
+        let t4;
         do {
-          t3 = this.xt, await t3;
-        } while (t3 !== this.xt);
+          t4 = this.xt, await t4;
+        } while (t4 !== this.xt);
       }
-      Gt(t3) {
+      Gt(t4) {
         for (const e7 of this.qt)
-          if (e7.timerId === t3)
+          if (e7.timerId === t4)
             return true;
         return false;
       }
-      Wt(t3) {
+      Wt(t4) {
         return this.zt().then(() => {
-          this.qt.sort((t4, e7) => t4.targetTimeMs - e7.targetTimeMs);
+          this.qt.sort((t5, e7) => t5.targetTimeMs - e7.targetTimeMs);
           for (const e7 of this.qt)
-            if (e7.skipDelay(), "all" !== t3 && e7.timerId === t3)
+            if (e7.skipDelay(), "all" !== t4 && e7.timerId === t4)
               break;
           return this.zt();
         });
       }
-      Kt(t3) {
-        this.Lt.push(t3);
+      Kt(t4) {
+        this.Lt.push(t4);
       }
-      Qt(t3) {
-        const e7 = this.qt.indexOf(t3);
+      Qt(t4) {
+        const e7 = this.qt.indexOf(t4);
         this.qt.splice(e7, 1);
       }
     };
     Zr = class {
-      constructor(t3, e7) {
-        this._firestore = t3, this._transaction = e7, this._dataReader = Ln(t3);
+      constructor(t4, e7) {
+        this._firestore = t4, this._transaction = e7, this._dataReader = Ln(t4);
       }
-      get(t3) {
-        const e7 = zr(t3, this._firestore), n3 = new $r(this._firestore);
-        return this._transaction.lookup([e7._key]).then((t4) => {
-          if (!t4 || 1 !== t4.length)
+      get(t4) {
+        const e7 = zr(t4, this._firestore), n3 = new $r(this._firestore);
+        return this._transaction.lookup([e7._key]).then((t5) => {
+          if (!t5 || 1 !== t5.length)
             return b3();
-          const r6 = t4[0];
+          const r6 = t5[0];
           if (r6.isFoundDocument())
             return new ir(this._firestore, n3, r6.key, r6, e7.converter);
           if (r6.isNoDocument())
@@ -11423,27 +11423,27 @@ var init_index_browser_esm2017 = __esm({
           throw b3();
         });
       }
-      set(t3, e7, n3) {
-        const r6 = zr(t3, this._firestore), s6 = Nr(r6.converter, e7, n3), i4 = Mn(this._dataReader, "Transaction.set", r6._key, s6, null !== r6.converter, n3);
+      set(t4, e7, n3) {
+        const r6 = zr(t4, this._firestore), s6 = Nr(r6.converter, e7, n3), i4 = Mn(this._dataReader, "Transaction.set", r6._key, s6, null !== r6.converter, n3);
         return this._transaction.set(r6._key, i4), this;
       }
-      update(t3, e7, n3, ...r6) {
-        const s6 = zr(t3, this._firestore);
+      update(t4, e7, n3, ...r6) {
+        const s6 = zr(t4, this._firestore);
         let i4;
         return i4 = "string" == typeof (e7 = getModularInstance(e7)) || e7 instanceof Nn ? Kn(this._dataReader, "Transaction.update", s6._key, e7, n3, r6) : Wn(this._dataReader, "Transaction.update", s6._key, e7), this._transaction.update(s6._key, i4), this;
       }
-      delete(t3) {
-        const e7 = zr(t3, this._firestore);
+      delete(t4) {
+        const e7 = zr(t4, this._firestore);
         return this._transaction.delete(e7._key), this;
       }
     };
-    !function(t3) {
-      w3 = t3;
-    }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", (t3, { instanceIdentifier: e7, options: n3 }) => {
-      const r6 = t3.getProvider("app").getImmediate(), s6 = new fn(new G2(t3.getProvider("auth-internal")), new H3(t3.getProvider("app-check-internal")), function(t4, e8) {
-        if (!Object.prototype.hasOwnProperty.apply(t4.options, ["projectId"]))
+    !function(t4) {
+      w3 = t4;
+    }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", (t4, { instanceIdentifier: e7, options: n3 }) => {
+      const r6 = t4.getProvider("app").getImmediate(), s6 = new fn(new G2(t4.getProvider("auth-internal")), new H3(t4.getProvider("app-check-internal")), function(t5, e8) {
+        if (!Object.prototype.hasOwnProperty.apply(t5.options, ["projectId"]))
           throw new U2(P3, '"projectId" not provided in firebase.initializeApp.');
-        return new X2(t4.options.projectId, e8);
+        return new X2(t5.options.projectId, e8);
       }(r6, e7), r6);
       return n3 && s6._setSettings(n3), s6;
     }, "PUBLIC").setMultipleInstances(true)), registerVersion("firestore-lite", "3.7.3", ""), registerVersion("firestore-lite", "3.7.3", "esm2017");
@@ -11535,8 +11535,8 @@ var init_LoginCard = __esm({
 
 <svg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M16 7.151l3.302-4.036c0 0 5.656 0.12 11.292 2.74-1.443 2.182-4.307 3.25-4.307 3.25-0.193-1.917-1.536-2.385-5.807-2.385l-4.479 25.281-4.51-25.286c-4.24 0-5.583 0.469-5.776 2.385 0 0-2.865-1.057-4.307-3.24 5.635-2.62 11.292-2.74 11.292-2.74l3.302 4.031h-0.005zM16 1.953c4.552-0.042 9.766 0.703 15.104 3.036 0.714-1.292 0.896-1.859 0.896-1.859-5.833-2.313-11.297-3.109-16-3.13-4.703 0.021-10.167 0.813-16 3.13 0 0 0.26 0.703 0.896 1.865 5.339-2.344 10.552-3.083 15.104-3.047z"></path></svg>`);
     R3 = I((e7, n3, i4, p7) => {
-      let t3, o5;
-      return o5 = x(d2, (s6) => t3 = s6), o5(), `<signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-90", true) + " text-white flex justify-center items-center gap-5"}"><span class="group-hover:scale-[1.15] duration-500">${G(q4, "IconTwitter").$$render(e7, {}, {}, {})}</span>
+      let t4, o5;
+      return o5 = x(d2, (s6) => t4 = s6), o5(), `<signin-button class="${"group bg-[#1d9bf0] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-90", true) + " text-white flex justify-center items-center gap-5"}"><span class="group-hover:scale-[1.15] duration-500">${G(q4, "IconTwitter").$$render(e7, {}, {}, {})}</span>
   
   <span>Sign-in with Twitter</span></signin-button>`;
     });
@@ -11544,8 +11544,8 @@ var init_LoginCard = __esm({
 c-35.841,0-65,29.159-65,65s29.159,65,65,65c28.867,0,53.398-18.913,61.852-45H105V85h105v20c0,57.897-47.103,105-105,105
 S0,162.897,0,105z"></path></svg>`);
     Y4 = I((e7, n3, i4, p7) => {
-      let t3, o5;
-      return o5 = x(d2, (s6) => t3 = s6), o5(), `<signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-90", true) + " text-white flex justify-center items-center gap-5"}"><span class="group-hover:scale-[1.15] duration-500">${G(X3, "IconGoogle").$$render(e7, {}, {}, {})}
+      let t4, o5;
+      return o5 = x(d2, (s6) => t4 = s6), o5(), `<signin-button class="${"group mb-6 bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-90", true) + " text-white flex justify-center items-center gap-5"}"><span class="group-hover:scale-[1.15] duration-500">${G(X3, "IconGoogle").$$render(e7, {}, {}, {})}
     </span>
   
   <span>Sign-in with Google</span></signin-button>`;
@@ -11559,30 +11559,30 @@ c4.248,8.577,9.594,16.336,16.04,23.113c16.613,17.468,38.988,27.087,63.004,27.087
 C475.377,300.97,485,274.132,485,242.5C485,177.726,459.775,116.829,413.974,71.026z M242.5,303.333
 c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60.833,60.833S276.043,303.333,242.5,303.333z"></path></svg>`);
     W3 = I((e7, n3, i4, p7) => {
-      let t3, o5, s6;
+      let t4, o5, s6;
       s6 = x(d2, (b6) => o5 = b6);
       let m7, u, w5, h2 = "", v7 = globalThis.magicLinkInputVisible;
-      return t3 = m7, s6(), `<signin-button class="${"group bg-emerald-500 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", u, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(O4, "IconEmail").$$render(e7, {}, {}, {})}</span>
+      return t4 = m7, s6(), `<signin-button class="${"group bg-emerald-500 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", u, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(O4, "IconEmail").$$render(e7, {}, {}, {})}</span>
   
   <span>Get Magic Link</span></signin-button>
 
-${v7 ? `<input class="${"text-center p-3 mt-3 w-full " + j(t3, true) + " focus:outline-none"}" type="email" placeholder="email"${M("this", w5, 0)}${M("value", h2, 0)}>` : ""}
+${v7 ? `<input class="${"text-center p-3 mt-3 w-full " + j(t4, true) + " focus:outline-none"}" type="email" placeholder="email"${M("this", w5, 0)}${M("value", h2, 0)}>` : ""}
 
 <span id="emailStatusMessage"></span>`;
     });
     J3 = I((e7, n3, i4, p7) => `
 <svg class="-rotate-90" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white"><path fill="white" d="M23 12.5 20.5 15l-3-2V8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842V13l-3 2L1 12.5c.665-.997 2.479-2.657 5.5-3.658C8.024 8.337 9.855 8 12 8c2.146 0 3.976.337 5.5.842 3.021 1 4.835 2.66 5.5 3.658z"></path><path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.5 8.842C15.976 8.337 14.146 8 12 8c-2.145 0-3.976.337-5.5.842m11 0c3.021 1 4.835 2.66 5.5 3.658L20.5 15l-3-2V8.842zm-11 0c-3.021 1-4.835 2.66-5.5 3.658L3.5 15l3-2V8.842z"></path></svg>`);
     K3 = I((e7, n3, i4, p7) => {
-      let t3, o5, s6;
-      s6 = x(d2, (y5) => o5 = y5);
+      let t4, o5, s6;
+      s6 = x(d2, (y6) => o5 = y6);
       let m7 = "+1", u, w5, h2, v7 = "", b6 = globalThis.phoneInputVisible;
-      return t3 = u, s6(), `
+      return t4 = u, s6(), `
 ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", w5, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(J3, "IconPhone").$$render(e7, {}, {}, {})}</span>
     
     <span>Get SMS Code</span></div>
 
   <div class="grid grid-cols-6 w-full text-black">${b6 ? `<input class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"${M("value", m7, 0)}>
-      <input class="${"col-span-5 text-center p-3 mt-3 focus:outline-none " + j(t3, true)}" type="phone" placeholder="phone"${M("this", h2, 0)}${M("value", v7, 0)}>` : ""}</div>`}
+      <input class="${"col-span-5 text-center p-3 mt-3 focus:outline-none " + j(t4, true)}" type="phone" placeholder="phone"${M("this", h2, 0)}${M("value", v7, 0)}>` : ""}</div>`}
 
 <div id="recaptcha-container"></div>
 <div id="phoneStatusMessage" class="${"p-3 font-Poppins " + j(o5 ? "text-lime-100" : "text-rose-600", true)}"></div>
@@ -11594,15 +11594,15 @@ ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md du
 }@media(min-width: 640px){.card-styles.svelte-kjxzgo{width:500px;padding:2.5rem
     }}`, map: null };
     te3 = I((e7, n3, i4, p7) => {
-      let t3, o5, s6, m7, u, w5, h2, v7;
-      o5 = x(B2, (r6) => t3 = r6), m7 = x(F3, (r6) => s6 = r6), w5 = x(d2, (r6) => u = r6), v7 = x(Y2, (r6) => h2 = r6);
-      let { noTransition: b6 = false } = n3, y5, z6, k5, S5;
+      let t4, o5, s6, m7, u, w5, h2, v7;
+      o5 = x(B2, (r6) => t4 = r6), m7 = x(F3, (r6) => s6 = r6), w5 = x(d2, (r6) => u = r6), v7 = x(Y2, (r6) => h2 = r6);
+      let { noTransition: b6 = false } = n3, y6, z6, k5, S5;
       function L5(r6 = "/login") {
         let a4 = 3e3, x5 = parseInt(a4 / 1e3);
         S5 = setInterval(() => {
           x5 > 0 && (x5 += -1, document.getElementById("timeLeft").innerHTML = ` ${x5}`);
         }, 1e3), k5 = setTimeout(() => {
-          T(B2, t3 = false, t3), document.getElementById("timeLeft").innerHTML = 3, H4(r6);
+          T(B2, t4 = false, t4), document.getElementById("timeLeft").innerHTML = 3, H4(r6);
         }, a4);
       }
       async function B4(r6) {
@@ -11610,7 +11610,7 @@ ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md du
         if (console.log("redirectUrlFromLS", a4), a4)
           L5(a4);
         else {
-          const { getFirestore: x5, collection: D6, getDocs: F5 } = await Promise.resolve().then(() => (init_index_esm4(), index_esm_exports)), { app: j3 } = await Promise.resolve().then(() => (init_firebase(), firebase_exports)), V4 = x5(j3), I5 = await F5(D6(V4, "email")), P5 = I5.size, M5 = I5.docs;
+          const { getFirestore: x5, collection: D5, getDocs: F5 } = await Promise.resolve().then(() => (init_index_esm4(), index_esm_exports)), { app: j3 } = await Promise.resolve().then(() => (init_firebase(), firebase_exports)), V4 = x5(j3), I5 = await F5(D5(V4, "email")), P5 = I5.size, M5 = I5.docs;
           for (const C4 in M5) {
             const _6 = M5[C4];
             if (r6 === _6.id) {
@@ -11621,7 +11621,7 @@ ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md du
           }
         }
       }
-      return n3.noTransition === void 0 && i4.noTransition && b6 !== void 0 && i4.noTransition(b6), e7.css.add(N3), t3 || (clearInterval(S5), clearTimeout(k5)), t3 && s6 && B4(z6), o5(), m7(), w5(), v7(), `<main class="w-screen flex justify-center items-center">${s6 ? "" : `<login-card class="${"card-styles text-xl " + j(u ? "hover:shadow-xl " : "hover:shadow-lg", true) + " svelte-kjxzgo"}"${M("style", `background:${h2}`, 0)}>${`${G(W3, "MagicLinkSection").$$render(e7, {}, {}, {})}
+      return n3.noTransition === void 0 && i4.noTransition && b6 !== void 0 && i4.noTransition(b6), e7.css.add(N3), t4 || (clearInterval(S5), clearTimeout(k5)), t4 && s6 && B4(z6), o5(), m7(), w5(), v7(), `<main class="w-screen flex justify-center items-center">${s6 ? "" : `<login-card class="${"card-styles text-xl " + j(u ? "hover:shadow-xl " : "hover:shadow-lg", true) + " svelte-kjxzgo"}"${M("style", `background:${h2}`, 0)}>${`${G(W3, "MagicLinkSection").$$render(e7, {}, {}, {})}
 
           <p class="py-3"></p>
           ${G(K3, "PhoneAuthSection").$$render(e7, {}, {}, {})}`}
@@ -11630,7 +11630,7 @@ ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md du
 
         ${G(R3, "TwitterLoginButton").$$render(e7, {}, {}, {})}</login-card>`}
 
-  ${s6 ? `<logout-card class="${"text-xl card-styles " + j(u ? "hover:shadow-xl" : "hover:shadow-lg", true) + " svelte-kjxzgo"}"${M("style", `background:${h2} `, 0)}><p>${j(y5)}</p>
+  ${s6 ? `<logout-card class="${"text-xl card-styles " + j(u ? "hover:shadow-xl" : "hover:shadow-lg", true) + " svelte-kjxzgo"}"${M("style", `background:${h2} `, 0)}><p>${j(y6)}</p>
 
         <div>Redirecting in
           <div class="text-5xl p-5" id="timeLeft">3</div></div>
@@ -11650,9 +11650,9 @@ var l2;
 var init_Footer = __esm({
   ".svelte-kit/output/server/chunks/Footer.js"() {
     init_chunks();
-    l2 = I((s6, t3, e7, i4) => {
-      let { contactLinkClicked: a4 = false } = t3;
-      return t3.contactLinkClicked === void 0 && e7.contactLinkClicked && a4 !== void 0 && e7.contactLinkClicked(a4), `<div class="${"text-sm mt-20 " + j("mb-10", true) + " flex justify-center items-center flex-row gap-x-1"}"><span class="text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"><a data-sveltekit-preload-data href="/faq">faq</a>
+    l2 = I((s6, t4, e7, i4) => {
+      let { contactLinkClicked: a4 = false } = t4;
+      return t4.contactLinkClicked === void 0 && e7.contactLinkClicked && a4 !== void 0 && e7.contactLinkClicked(a4), `<div class="${"text-sm mt-20 " + j("mb-10", true) + " flex justify-center items-center flex-row gap-x-1"}"><span class="text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"><a data-sveltekit-preload-data href="/faq">faq</a>
       \xA0 | \xA0
     <span id="contactLinkClicked">contact </span></span></div>`;
     });
@@ -11665,16 +11665,16 @@ __export(layout_svelte_exports, {
   default: () => Oe3
 });
 function ne3() {
-  let e7 = Z3, o5 = Z3, t3 = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"], b6 = ["Win32", "Win64", "Windows", "WinCE"], a4 = ["iPhone", "iPad", "iPod"], s6 = null;
-  return t3.includes(o5) ? s6 = "Mac OS" : a4.includes(o5) ? s6 = "iOS" : b6.includes(o5) ? s6 = "Windows" : /Android/.test(e7) ? s6 = "Android" : /Linux/.test(o5) && (s6 = "Linux"), s6;
+  let e7 = Z3, o5 = Z3, t4 = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"], b6 = ["Win32", "Win64", "Windows", "WinCE"], a4 = ["iPhone", "iPad", "iPod"], s6 = null;
+  return t4.includes(o5) ? s6 = "Mac OS" : a4.includes(o5) ? s6 = "iOS" : b6.includes(o5) ? s6 = "Windows" : /Android/.test(e7) ? s6 = "Android" : /Linux/.test(o5) && (s6 = "Linux"), s6;
 }
 function Y5() {
   return Z3;
 }
 function ge3(e7 = "dropzoneCSS", o5 = "/dropzone.css") {
   if (!document.getElementById(e7)) {
-    const t3 = document.createElement("link");
-    t3.id = e7, t3.href = o5, t3.rel = "stylesheet", document.head.appendChild(t3);
+    const t4 = document.createElement("link");
+    t4.id = e7, t4.href = o5, t4.rel = "stylesheet", document.head.appendChild(t4);
   }
 }
 function we3() {
@@ -11683,47 +11683,47 @@ function we3() {
 function J4(e7) {
   return Object.prototype.toString.call(e7) === "[object Date]";
 }
-function U3(e7, o5, t3, b6) {
-  if (typeof t3 == "number" || J4(t3)) {
-    const a4 = b6 - t3, s6 = (t3 - o5) / (e7.dt || 1 / 60), u = e7.opts.stiffness * a4, m7 = e7.opts.damping * s6, n3 = (u - m7) * e7.inv_mass, f7 = (s6 + n3) * e7.dt;
-    return Math.abs(f7) < e7.opts.precision && Math.abs(a4) < e7.opts.precision ? b6 : (e7.settled = false, J4(t3) ? new Date(t3.getTime() + f7) : t3 + f7);
+function U3(e7, o5, t4, b6) {
+  if (typeof t4 == "number" || J4(t4)) {
+    const a4 = b6 - t4, s6 = (t4 - o5) / (e7.dt || 1 / 60), u = e7.opts.stiffness * a4, m7 = e7.opts.damping * s6, n3 = (u - m7) * e7.inv_mass, p7 = (s6 + n3) * e7.dt;
+    return Math.abs(p7) < e7.opts.precision && Math.abs(a4) < e7.opts.precision ? b6 : (e7.settled = false, J4(t4) ? new Date(t4.getTime() + p7) : t4 + p7);
   } else {
-    if (Array.isArray(t3))
-      return t3.map((a4, s6) => U3(e7, o5[s6], t3[s6], b6[s6]));
-    if (typeof t3 == "object") {
+    if (Array.isArray(t4))
+      return t4.map((a4, s6) => U3(e7, o5[s6], t4[s6], b6[s6]));
+    if (typeof t4 == "object") {
       const a4 = {};
-      for (const s6 in t3)
-        a4[s6] = U3(e7, o5[s6], t3[s6], b6[s6]);
+      for (const s6 in t4)
+        a4[s6] = U3(e7, o5[s6], t4[s6], b6[s6]);
       return a4;
     } else
-      throw new Error(`Cannot spring ${typeof t3} values`);
+      throw new Error(`Cannot spring ${typeof t4} values`);
   }
 }
 function ke3(e7, o5 = {}) {
-  const t3 = A2(e7), { stiffness: b6 = 0.15, damping: a4 = 0.8, precision: s6 = 0.01 } = o5;
-  let u, m7, n3, f7 = e7, d5 = e7, h2 = 1, v7 = 0, $3 = false;
-  function w5(r6, p7 = {}) {
+  const t4 = A2(e7), { stiffness: b6 = 0.15, damping: a4 = 0.8, precision: s6 = 0.01 } = o5;
+  let u, m7, n3, p7 = e7, d5 = e7, h2 = 1, v7 = 0, $3 = false;
+  function w5(r6, f7 = {}) {
     d5 = r6;
     const _6 = n3 = {};
-    return e7 == null || p7.hard || x5.stiffness >= 1 && x5.damping >= 1 ? ($3 = true, u = q(), f7 = r6, t3.set(e7 = d5), Promise.resolve()) : (p7.soft && (v7 = 1 / ((p7.soft === true ? 0.5 : +p7.soft) * 60), h2 = 0), m7 || (u = q(), $3 = false, m7 = z((y5) => {
+    return e7 == null || f7.hard || x5.stiffness >= 1 && x5.damping >= 1 ? ($3 = true, u = q(), p7 = r6, t4.set(e7 = d5), Promise.resolve()) : (f7.soft && (v7 = 1 / ((f7.soft === true ? 0.5 : +f7.soft) * 60), h2 = 0), m7 || (u = q(), $3 = false, m7 = z((y6) => {
       if ($3)
         return $3 = false, m7 = null, false;
       h2 = Math.min(h2 + v7, 1);
-      const T6 = { inv_mass: h2, opts: x5, settled: true, dt: (y5 - u) * 60 / 1e3 }, S5 = U3(T6, f7, e7, d5);
-      return u = y5, f7 = e7, t3.set(e7 = S5), T6.settled && (m7 = null), !T6.settled;
-    })), new Promise((y5) => {
+      const T6 = { inv_mass: h2, opts: x5, settled: true, dt: (y6 - u) * 60 / 1e3 }, S5 = U3(T6, p7, e7, d5);
+      return u = y6, p7 = e7, t4.set(e7 = S5), T6.settled && (m7 = null), !T6.settled;
+    })), new Promise((y6) => {
       m7.promise.then(() => {
-        _6 === n3 && y5();
+        _6 === n3 && y6();
       });
     }));
   }
-  const x5 = { set: w5, update: (r6, p7) => w5(r6(d5, e7), p7), subscribe: t3.subscribe, stiffness: b6, damping: a4, precision: s6 };
+  const x5 = { set: w5, update: (r6, f7) => w5(r6(d5, e7), f7), subscribe: t4.subscribe, stiffness: b6, damping: a4, precision: s6 };
   return x5;
 }
 async function Me3() {
   if (!globalThis.submitOnce) {
-    const { PUBLIC_UPLOAD_ENDPOINT: e7 } = await Promise.resolve().then(() => (init_public(), public_exports)), o5 = e7, t3 = new FormData(), b6 = new File(["foo"], "foo.txt", { type: "text/plain" });
-    t3.append("file", b6), fetch(o5, { method: "POST", body: t3 }), globalThis.submitOnce = true;
+    const { PUBLIC_UPLOAD_ENDPOINT: e7 } = await Promise.resolve().then(() => (init_public(), public_exports)), o5 = e7, t4 = new FormData(), b6 = new File(["foo"], "foo.txt", { type: "text/plain" });
+    t4.append("file", b6), fetch(o5, { method: "POST", body: t4 }), globalThis.submitOnce = true;
   }
 }
 function Ce3() {
@@ -11741,14 +11741,14 @@ var init_layout_svelte = __esm({
     init_Modal();
     Z3 = false;
     N4 = 24;
-    be3 = I((e7, o5, t3, b6) => `<svg aria-label="Sun" id="lightIcon"${M("height", N4, 0)}${M("width", N4, 0)} viewBox="${"0 0 " + j(8 * N4, true) + " " + j(8 * N4, true)}" class="mx-3"><path fill="rgb(247,247,247)" d="M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"></path></svg>`);
+    be3 = I((e7, o5, t4, b6) => `<svg aria-label="Sun" id="lightIcon"${M("height", N4, 0)}${M("width", N4, 0)} viewBox="${"0 0 " + j(8 * N4, true) + " " + j(8 * N4, true)}" class="mx-3"><path fill="rgb(247,247,247)" d="M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"></path></svg>`);
     q5 = 24;
-    me3 = I((e7, o5, t3, b6) => `
+    me3 = I((e7, o5, t4, b6) => `
 
 
 <svg aria-label="Moon" id="darkIcon"${M("height", q5, 0)}${M("width", q5, 0)} class="mx-3"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"></path></svg>`);
     he3 = { code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}", map: null };
-    $e3 = I((e7, o5, t3, b6) => {
+    $e3 = I((e7, o5, t4, b6) => {
       let a4, s6;
       return s6 = x(d2, (u) => a4 = u), e7.css.add(he3), s6(), `
   <div><button>${a4 ? `${G(be3, "IconSun").$$render(e7, {}, {}, {})}` : `${G(me3, "IconMoon").$$render(e7, {}, {}, {})}`}</button></div>`;
@@ -11764,30 +11764,30 @@ var init_layout_svelte = __esm({
     ie3 = { subscribe(e7) {
       return ve3().page.subscribe(e7);
     } };
-    xe3 = I((e7, o5, t3, b6) => {
+    xe3 = I((e7, o5, t4, b6) => {
       let a4, s6, u, m7;
       a4 = x(B2, (r6) => r6), s6 = x(P, (r6) => r6), m7 = x(ie3, (r6) => u = r6);
-      let { href: n3, content: f7, routes: d5, btnColorHover: h2, icon: v7, navIconClicked: $3 = false } = o5;
-      o5.href === void 0 && t3.href && n3 !== void 0 && t3.href(n3), o5.content === void 0 && t3.content && f7 !== void 0 && t3.content(f7), o5.routes === void 0 && t3.routes && d5 !== void 0 && t3.routes(d5), o5.btnColorHover === void 0 && t3.btnColorHover && h2 !== void 0 && t3.btnColorHover(h2), o5.icon === void 0 && t3.icon && v7 !== void 0 && t3.icon(v7), o5.navIconClicked === void 0 && t3.navIconClicked && $3 !== void 0 && t3.navIconClicked($3);
+      let { href: n3, content: p7, routes: d5, btnColorHover: h2, icon: v7, navIconClicked: $3 = false } = o5;
+      o5.href === void 0 && t4.href && n3 !== void 0 && t4.href(n3), o5.content === void 0 && t4.content && p7 !== void 0 && t4.content(p7), o5.routes === void 0 && t4.routes && d5 !== void 0 && t4.routes(d5), o5.btnColorHover === void 0 && t4.btnColorHover && h2 !== void 0 && t4.btnColorHover(h2), o5.icon === void 0 && t4.icon && v7 !== void 0 && t4.icon(v7), o5.navIconClicked === void 0 && t4.navIconClicked && $3 !== void 0 && t4.navIconClicked($3);
       let w5, x5;
       do {
         w5 = true;
         for (let r6 in d5)
           d5[r6].isCurrent = d5[r6].href === u.url.pathname;
         x5 = `<a data-sveltekit-preload-data${M("href", n3, 0)} class="${"block font-Nunito font-thin " + j(` ${h2}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`, true)}">
-  ${`${j(f7)}`}</a>`;
+  ${`${j(p7)}`}</a>`;
       } while (!w5);
       return a4(), s6(), m7(), x5;
     });
-    ye3 = I((e7, o5, t3, b6) => {
-      let a4, s6, u, m7, n3, f7, d5, h2, v7, $3, w5, x5, r6, p7, _6, y5, T6, S5;
-      u = x(d2, (l3) => s6 = l3), m7 = x(T2, (l3) => l3), f7 = x(q2, (l3) => n3 = l3), h2 = x(F3, (l3) => d5 = l3), $3 = x(f2, (l3) => v7 = l3), x5 = x(Y2, (l3) => w5 = l3), y5 = x(P, (l3) => _6 = l3), S5 = x(B2, (l3) => T6 = l3);
+    ye3 = I((e7, o5, t4, b6) => {
+      let a4, s6, u, m7, n3, p7, d5, h2, v7, $3, w5, x5, r6, f7, _6, y6, T6, S5;
+      u = x(d2, (l3) => s6 = l3), m7 = x(T2, (l3) => l3), p7 = x(q2, (l3) => n3 = l3), h2 = x(F3, (l3) => d5 = l3), $3 = x(f2, (l3) => v7 = l3), x5 = x(Y2, (l3) => w5 = l3), y6 = x(P, (l3) => _6 = l3), S5 = x(B2, (l3) => T6 = l3);
       let H5 = ke3(1, { stiffness: 0.1, damping: 0.25 });
-      p7 = x(H5, (l3) => r6 = l3);
-      let A7 = 0, O5 = "sm:bg-red-300 rounded", M5 = "hover:bg-red-300 ", W4 = ne3() !== "iOS" && "hidden", j3 = Y5(), L5 = Z3, C4, i4;
+      f7 = x(H5, (l3) => r6 = l3);
+      let A7 = 0, O5 = "sm:bg-red-300 rounded", M5 = "hover:bg-red-300 ", W4 = ne3() !== "iOS" && "hidden", j3 = Y5(), z6 = Z3, C4, i4;
       do
         C4 = true, d5 && !Y5() && (A7 = s6 ? 0.75 : 0, H5.set(1 + 0.5 * Math.sin(v7))), d5 ? T(q2, n3.login.name = "\u{1F680}", n3) : T(q2, n3.login.name = "Login", n3), a4 = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${s6 ? "to-[rgb(37,35,91)]" : "to-red-200"}`, i4 = `
-<logo-and-navbar class="${"opacity-0 " + j(L5, true) + " flex items-center justify-center gap-x-32 md:justify-between w-full"}"><button class="p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent">THINKSOLVE
+<logo-and-navbar class="${"opacity-0 " + j(z6, true) + " flex items-center justify-center gap-x-32 md:justify-between w-full"}"><button class="p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent">THINKSOLVE
     </button>
 
   
@@ -11799,21 +11799,21 @@ var init_layout_svelte = __esm({
     
     ${D(Object.keys(n3).slice(1, 5), (l3) => `
       
-      <li${M("style", l3 == "login" && d5 && `transform:scale(${r6}); filter:hue-rotate(${A7}turn)`, 0)}>${G(xe3, "Navitem").$$render(e7, { href: n3[l3].href, content: n3[l3].name, icon: n3[l3].icon, navIconClicked: n3[l3].href == "/homework" && _6 || n3[l3].href == "/login" && T6 || n3[l3].isCurrent, routes: n3, btnColor: O5, btnColorHover: M5 }, { routes: (I5) => {
-          n3 = I5, C4 = false;
-        }, btnColor: (I5) => {
-          O5 = I5, C4 = false;
-        }, btnColorHover: (I5) => {
-          M5 = I5, C4 = false;
+      <li${M("style", l3 == "login" && d5 && `transform:scale(${r6}); filter:hue-rotate(${A7}turn)`, 0)}>${G(xe3, "Navitem").$$render(e7, { href: n3[l3].href, content: n3[l3].name, icon: n3[l3].icon, navIconClicked: n3[l3].href == "/homework" && _6 || n3[l3].href == "/login" && T6 || n3[l3].isCurrent, routes: n3, btnColor: O5, btnColorHover: M5 }, { routes: (L5) => {
+          n3 = L5, C4 = false;
+        }, btnColor: (L5) => {
+          O5 = L5, C4 = false;
+        }, btnColorHover: (L5) => {
+          M5 = L5, C4 = false;
         } }, {})}
         
       </li>`)}
 
     <li class="${"py-2 translate-y-1 scale-125 md:scale-100 " + j(j3, true)}">${G($e3, "LightDarkMode").$$render(e7, {}, {}, {})}</li></ul></logo-and-navbar>`;
       while (!C4);
-      return u(), m7(), f7(), h2(), $3(), x5(), p7(), y5(), S5(), i4;
+      return u(), m7(), p7(), h2(), $3(), x5(), f7(), y6(), S5(), i4;
     });
-    _e4 = I((e7, o5, t3, b6) => {
+    _e4 = I((e7, o5, t4, b6) => {
       let a4, s6;
       return s6 = x(P, (u) => a4 = u), a4 && Me3(), s6(), `
 
@@ -11821,41 +11821,42 @@ var init_layout_svelte = __esm({
 `;
     });
     Te3 = { code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}", map: null };
-    De3 = I((e7, o5, t3, b6) => {
+    De3 = I((e7, o5, t4, b6) => {
       let a4, s6, u, m7, n3;
       u = x(P, (r6) => s6 = r6), n3 = x(d2, (r6) => m7 = r6);
-      let { text: f7 = "\u{1F525}" } = o5, { textSizeTW: d5 = "text-3xl" } = o5, { dimensionsTW: h2 = "w-[65vw] sm:w-[60vw] h-[60vh]" } = o5, { brightnessTW: v7 = "brightness-100" } = o5, $3;
+      let { text: p7 = "\u{1F525}" } = o5, { textSizeTW: d5 = "text-3xl" } = o5, { dimensionsTW: h2 = "w-[65vw] sm:w-[60vw] h-[60vh]" } = o5, { brightnessTW: v7 = "brightness-100" } = o5, $3;
       async function w5(r6) {
         console.log("drop it like its \u{1F525}"), ge3("dropzoneCSS", "/dropzone.css");
-        const { PUBLIC_UPLOAD_ENDPOINT: p7 } = await Promise.resolve().then(() => (init_public(), public_exports)), { Dropzone: _6 } = await Promise.resolve().then(() => (init_dropzone(), dropzone_exports));
-        $3 = new _6(r6, { url: p7, acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc" }), x5();
+        const { PUBLIC_UPLOAD_ENDPOINT: f7 } = await Promise.resolve().then(() => (init_public(), public_exports)), { Dropzone: _6 } = await Promise.resolve().then(() => (init_dropzone(), dropzone_exports));
+        $3 = new _6(r6, { url: f7, acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc" }), x5();
       }
       function x5() {
         let r6 = [];
-        $3.on("error", (p7) => p7.accepted && r6.push(p7)), $3.on("queuecomplete", () => {
+        $3.on("error", (f7) => f7.accepted && r6.push(f7)), $3.on("queuecomplete", () => {
           setTimeout(() => T(P, s6 = false, s6), 1e3);
         }), window == null || window.addEventListener("online", () => {
           if (r6.length > 0)
-            for (const p7 of r6)
-              $3.processFile(p7), p7.previewElement.querySelector(".dz-error-mark").style.visibility = "hidden", p7.previewElement.querySelector(".dz-error-message").style.visibility = "hidden";
+            for (const f7 of r6)
+              $3.processFile(f7), f7.previewElement.querySelector(".dz-error-mark").style.visibility = "hidden", f7.previewElement.querySelector(".dz-error-message").style.visibility = "hidden";
         });
       }
-      return o5.text === void 0 && t3.text && f7 !== void 0 && t3.text(f7), o5.textSizeTW === void 0 && t3.textSizeTW && d5 !== void 0 && t3.textSizeTW(d5), o5.dimensionsTW === void 0 && t3.dimensionsTW && h2 !== void 0 && t3.dimensionsTW(h2), o5.brightnessTW === void 0 && t3.brightnessTW && v7 !== void 0 && t3.brightnessTW(v7), e7.css.add(Te3), s6 && Ce3(), a4 = m7 ? "#1d1c43" : "#ddd", u(), n3(), `${G(_e4, "PostDummyOnce").$$render(e7, {}, {}, {})}
+      return o5.text === void 0 && t4.text && p7 !== void 0 && t4.text(p7), o5.textSizeTW === void 0 && t4.textSizeTW && d5 !== void 0 && t4.textSizeTW(d5), o5.dimensionsTW === void 0 && t4.dimensionsTW && h2 !== void 0 && t4.dimensionsTW(h2), o5.brightnessTW === void 0 && t4.brightnessTW && v7 !== void 0 && t4.brightnessTW(v7), e7.css.add(Te3), s6 && Ce3(), a4 = m7 ? "#1d1c43" : "#ddd", u(), n3(), `${G(_e4, "PostDummyOnce").$$render(e7, {}, {}, {})}
 
 
-${G(w2, "InView").$$render(e7, { single: true, onview: (r6) => w5(r6), once: true, margin: "0px" }, {}, { default: () => `<form method="post" style="${"box-shadow: inset 0 -10px 10px " + j(a4, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + j(v7, true) + " " + j(d5, true) + " " + j(h2, true) + " mx-auto group"}"><div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>${j(f7)}</div></form>` })}`;
+${G(w2, "InView").$$render(e7, { single: true, onview: (r6) => w5(r6), once: true, margin: "0px" }, {}, { default: () => `<form method="post" style="${"box-shadow: inset 0 -10px 10px " + j(a4, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + j(v7, true) + " " + j(d5, true) + " " + j(h2, true) + " mx-auto group"}"><div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>${j(p7)}</div></form>` })}`;
     });
     Q3 = 800;
     X4 = 400;
     K4 = 100;
-    Oe3 = I((e7, o5, t3, b6) => {
-      let a4, s6, u, m7, n3, f7, d5, h2, v7, $3, w5, x5, r6, p7, _6, y5, T6, S5, H5, A7;
-      s6 = x(F3, (i4) => a4 = i4), m7 = x(B2, (i4) => u = i4), f7 = x(x2, (i4) => n3 = i4), h2 = x(f2, (i4) => d5 = i4), $3 = x(A4, (i4) => v7 = i4), x5 = x(ie3, (i4) => w5 = i4), p7 = x(q2, (i4) => r6 = i4), y5 = x(d2, (i4) => _6 = i4), S5 = x(T2, (i4) => T6 = i4), A7 = x(P, (i4) => H5 = i4);
-      let O5, M5, W4 = false, j3, L5, C4;
+    Oe3 = I((e7, o5, t4, b6) => {
+      let a4, s6, u, m7, n3, p7, d5, h2, v7, $3, w5, x5, r6, f7, _6, y6, T6, S5, H5, A7;
+      s6 = x(F3, (i4) => a4 = i4), m7 = x(B2, (i4) => u = i4), p7 = x(x2, (i4) => n3 = i4), h2 = x(f2, (i4) => d5 = i4), $3 = x(A4, (i4) => v7 = i4), x5 = x(ie3, (i4) => w5 = i4), f7 = x(q2, (i4) => r6 = i4), y6 = x(d2, (i4) => _6 = i4), S5 = x(T2, (i4) => T6 = i4), A7 = x(P, (i4) => H5 = i4);
+      let O5, M5, W4 = false, j3, z6, C4;
       do
-        L5 = true, v7 || (d5 < 10 && (M5 = "top-0"), d5 > 10 && d5 < Q3 && (M5 = "top-0 backdrop-blur-3xl duration-1000"), d5 > Q3 && n3 > 10 && (M5 = "-top-20 backdrop-blur-3xl duration-200"), n3 < -100 && (M5 = "top-0 backdrop-blur-3xl duration-700")), v7 && (d5 >= 0 && d5 < X4 && (M5 = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200"), d5 > X4 && n3 > 20 && (M5 = "-bottom-28 duration-400"), n3 < -30 && (M5 = "bottom-0 backdrop-blur-3xl duration-700")), u && !a4 && setTimeout(() => {
+        z6 = true, v7 || (d5 < 10 && (M5 = "top-0"), d5 > 10 && d5 < Q3 && (M5 = "top-0 backdrop-blur-3xl duration-1000"), d5 > Q3 && n3 > 10 && (M5 = "-top-20 backdrop-blur-3xl duration-200"), n3 < -100 && (M5 = "top-0 backdrop-blur-3xl duration-700")), v7 && (d5 >= 0 && d5 < X4 && (M5 = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200"), d5 > X4 && n3 > 20 && (M5 = "-bottom-28 duration-400"), n3 < -30 && (M5 = "bottom-0 backdrop-blur-3xl duration-700")), u && !a4 && setTimeout(() => {
           j3 = "opacity-100 transition-opacity duration-100 ease-in";
-        }, K4), C4 = `${e7.head += `<!-- HEAD_svelte-kfifv9_START --><link rel="manifest" href="/manifest.json">${w5.status == 200 ? (() => {
+        }, K4), C4 = `
+${e7.head += `<!-- HEAD_svelte-1le8ayz_START --><link rel="manifest" href="/manifest.json">${w5.status == 200 ? (() => {
           let i4 = w5.route.id.slice(1);
           return `
 
@@ -11864,15 +11865,14 @@ ${G(w2, "InView").$$render(e7, { single: true, onview: (r6) => w5(r6), once: tru
       <!-- HTML_TAG_START -->${r6.home.meta}<!-- HTML_TAG_END -->
       
       ` : `${D(Object.keys(r6).slice(1), (l3) => {
-            let I5 = r6[l3].title;
+            let L5 = r6[l3].title;
             return `
 
-        ${i4.startsWith(l3) ? `${e7.title = `<title>${j(I5)}</title>`, ""}
+        ${i4.startsWith(l3) ? `${e7.title = `<title>${j(L5)}</title>`, ""}
+          
           ${r6[l3].meta ? `<!-- HTML_TAG_START -->${r6[l3].meta}<!-- HTML_TAG_END -->` : ""}` : ""}`;
           })}`}`;
-        })() : `${w5.status == 404 ? `${e7.title = "<title>Oops \u{1F4A9}</title>", ""}` : ""}`}<!-- HEAD_svelte-kfifv9_END -->`, ""}
-
-
+        })() : `${w5.status == 404 ? `${e7.title = "<title>Oops \u{1F4A9}</title>", ""}` : ""}`}<!-- HEAD_svelte-1le8ayz_END -->`, ""}
 
 <main>${G(s2, "Modal").$$render(e7, { showModal: W4, bgTint: "backdrop-blur-3xl" }, {}, { default: () => `<ul class="${"text-center flex flex-col gap-y-2 font-Poppins sm:text-5xl text-3xl text-transparent bg-clip-text bg-gradient-to-r " + j(_6 ? "from-teal-200 via-rose-300 to-pink-200 " : "from-teal-700 via-rose-700 to-pink-700 ", true)}"><li>Email:</li>
         <li class="p-5">thinksolve.io@gmail.com</li></ul>` })}
@@ -11894,12 +11894,12 @@ ${G(w2, "InView").$$render(e7, { single: true, onview: (r6) => w5(r6), once: tru
   
 
   ${G(s2, "Modal").$$render(e7, { body: true, bgTint: `backdrop-blur-md opacity-0 ${j3}`, showModal: u }, { showModal: (i4) => {
-          u = i4, L5 = false;
+          u = i4, z6 = false;
         } }, { default: () => `
     ${G(_3, "LazyMount").$$render(e7, { Import: () => (setTimeout(() => u = true, 2.5 * K4), Promise.resolve().then(() => (init_LoginCard(), LoginCard_exports))) }, {}, {})}` })}
 
   ${G(s2, "Modal").$$render(e7, { bgTint: "bg-[rgba(0,0,0,0.1)]", showModal: H5 }, { showModal: (i4) => {
-          H5 = i4, L5 = false;
+          H5 = i4, z6 = false;
         } }, { default: () => `${G(De3, "Dropzone").$$render(e7, { textSizeTW: "text-6xl", dimensionsTW: "w-[80vw] h-[85vh]", brightnessTW: "brightness-95" }, {}, {})}
     
 
@@ -11917,14 +11917,14 @@ ${G(w2, "InView").$$render(e7, { single: true, onview: (r6) => w5(r6), once: tru
 
     
     ${G(w2, "InView").$$render(e7, { margin: "200px", onview: async () => O5 = await Promise.resolve().then(() => (init_Footer(), Footer_exports)) }, {}, { default: () => `${O5 ? `${G(O5.default, "FooterComponent.default").$$render(e7, { contactLinkClicked: W4 }, { contactLinkClicked: (i4) => {
-          W4 = i4, L5 = false;
+          W4 = i4, z6 = false;
         } }, {})}` : ""}` })}
 
     
 
     </div></main>`;
-      while (!L5);
-      return s6(), m7(), f7(), h2(), $3(), x5(), p7(), y5(), S5(), A7(), C4;
+      while (!z6);
+      return s6(), m7(), p7(), h2(), $3(), x5(), f7(), y6(), S5(), A7(), C4;
     });
   }
 });
@@ -11946,8 +11946,8 @@ var init__ = __esm({
     init_layout();
     index = 0;
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
-    file = "_app/immutable/components/pages/_layout.svelte-48e34200.js";
-    imports = ["_app/immutable/components/pages/_layout.svelte-48e34200.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/utils-98cd377c.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/chunks/navigation-3ed869d7.js", "_app/immutable/chunks/LazyMount-618774ce.js", "_app/immutable/chunks/Modal-1031958e.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
+    file = "_app/immutable/components/pages/_layout.svelte-8502757e.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-8502757e.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/utils-98cd377c.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/chunks/navigation-3ed869d7.js", "_app/immutable/chunks/LazyMount-618774ce.js", "_app/immutable/chunks/Modal-1031958e.js", "_app/immutable/modules/pages/_layout.js-c3477997.js"];
     stylesheets = ["_app/immutable/assets/_layout-714b67f1.css", "_app/immutable/assets/LoginCard-b78ac858.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff", "_app/immutable/assets/poppins-v20-latin-700-9338e65f.woff2", "_app/immutable/assets/poppins-v20-latin-700-da36c916.woff"];
   }
@@ -11962,7 +11962,7 @@ var a2;
 var init_error_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_error.svelte.js"() {
     init_chunks();
-    a2 = I((s6, t3, o5, r6) => `
+    a2 = I((s6, t4, o5, r6) => `
 <div class="flex flex-col justify-center items-center gap-10"><p>Oops ... looks like that page doesn&#39;t exist.</p>
   <div class="animate-bounce text-4xl">\u{1F648}</div></div>
 
@@ -11992,6 +11992,19 @@ var init__2 = __esm({
   }
 });
 
+// .svelte-kit/output/server/entries/pages/_page.js
+var page_exports = {};
+__export(page_exports, {
+  load: () => t2
+});
+function t2({ params: e7 }) {
+  return { post: { title: `Title for ${e7.slug} goes here`, content: `Content for ${e7.slug} goes here` } };
+}
+var init_page = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.js"() {
+  }
+});
+
 // .svelte-kit/output/server/chunks/DropzoneOpener.js
 var DropzoneOpener_exports = {};
 __export(DropzoneOpener_exports, {
@@ -12003,8 +12016,8 @@ var init_DropzoneOpener = __esm({
     init_chunks();
     init_store();
     w4 = I((p7, u, c4, b6) => {
-      let r6, e7, s6, t3;
-      return s6 = x(d2, (o5) => e7 = o5), t3 = x(P, (o5) => o5), r6 = e7 ? "#1d1c43" : "#ddd", s6(), t3(), `<button style="${"box-shadow: inset 0 -10px 10px " + j(r6, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"><div class="font-Nunito group-hover:animate-pulse text-2xl">Drop it like it&#39;s \u{1F525}
+      let r6, e7, s6, t4;
+      return s6 = x(d2, (o5) => e7 = o5), t4 = x(P, (o5) => o5), r6 = e7 ? "#1d1c43" : "#ddd", s6(), t4(), `<button style="${"box-shadow: inset 0 -10px 10px " + j(r6, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"><div class="font-Nunito group-hover:animate-pulse text-2xl">Drop it like it&#39;s \u{1F525}
   </div></button>`;
     });
   }
@@ -12013,20 +12026,20 @@ var init_DropzoneOpener = __esm({
 // .svelte-kit/output/server/chunks/PlansSection.js
 var PlansSection_exports = {};
 __export(PlansSection_exports, {
-  default: () => D4
+  default: () => D3
 });
-function h(i4, e7, t3) {
-  return `https://calendly.com/thinksolve/${i4}-${e7}?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1&primary_color=${t3}`;
+function h(i4, e7, t4) {
+  return `https://calendly.com/thinksolve/${i4}-${e7}?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1&primary_color=${t4}`;
 }
-var g4, P4, y3, b4, M4, D4;
+var g4, P4, y4, b4, M4, D3;
 var init_PlansSection = __esm({
   ".svelte-kit/output/server/chunks/PlansSection.js"() {
     init_chunks();
     init_Modal();
     init_store();
-    g4 = I((i4, e7, t3, o5) => {
+    g4 = I((i4, e7, t4, o5) => {
       let u = { 1: "bg-[rgb(244,77,77)]", 2: "bg-[rgb(254,164,92)]", 3: "bg-[rgb(45,165,214)]" }, { btnColorHover: a4 = "" } = e7, { card: l3 } = e7, { button: r6 } = e7, d5 = false, p7 = "", v7;
-      e7.btnColorHover === void 0 && t3.btnColorHover && a4 !== void 0 && t3.btnColorHover(a4), e7.card === void 0 && t3.card && l3 !== void 0 && t3.card(l3), e7.button === void 0 && t3.button && r6 !== void 0 && t3.button(r6);
+      e7.btnColorHover === void 0 && t4.btnColorHover && a4 !== void 0 && t4.btnColorHover(a4), e7.card === void 0 && t4.card && l3 !== void 0 && t4.card(l3), e7.button === void 0 && t4.button && r6 !== void 0 && t4.button(r6);
       let c4, m7;
       do
         c4 = true, m7 = `
@@ -12040,22 +12053,22 @@ ${G(s2, "Modal").$$render(i4, { body: true, bgTint: "bg-[rgba(0,0,0,0.1)]", show
       while (!c4);
       return m7;
     });
-    P4 = I((i4, e7, t3, o5) => {
+    P4 = I((i4, e7, t4, o5) => {
       let u, a4, l3, r6;
       a4 = x(d2, (n3) => u = n3), r6 = x(Y2, (n3) => l3 = n3);
       let { payNowUrl: d5 = "" } = e7, { payLaterUrl: p7 = "" } = e7;
       const v7 = [{ resetter: false, url: d5, opacityTW: "bg-opacity-100", text: "Pay Now" }, { resetter: false, url: p7, opacityTW: "bg-opacity-70", text: "Pay Later" }];
       let { btnColorHover: c4 = "" } = e7, { card: m7 } = e7;
-      return e7.payNowUrl === void 0 && t3.payNowUrl && d5 !== void 0 && t3.payNowUrl(d5), e7.payLaterUrl === void 0 && t3.payLaterUrl && p7 !== void 0 && t3.payLaterUrl(p7), e7.btnColorHover === void 0 && t3.btnColorHover && c4 !== void 0 && t3.btnColorHover(c4), e7.card === void 0 && t3.card && m7 !== void 0 && t3.card(m7), a4(), r6(), `<plans-card class="${"block shadow-md hover:scale-105 " + j(u ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl m-1 p-7 text-center duration-300 group"}"${M("style", `background:${l3}`, 0)}><p class="text-4xl font-Poppins py-5 text-center">${o5.cardTitle ? o5.cardTitle({}) : "Classico"}</p>
+      return e7.payNowUrl === void 0 && t4.payNowUrl && d5 !== void 0 && t4.payNowUrl(d5), e7.payLaterUrl === void 0 && t4.payLaterUrl && p7 !== void 0 && t4.payLaterUrl(p7), e7.btnColorHover === void 0 && t4.btnColorHover && c4 !== void 0 && t4.btnColorHover(c4), e7.card === void 0 && t4.card && m7 !== void 0 && t4.card(m7), a4(), r6(), `<plans-card class="${"block shadow-md hover:scale-105 " + j(u ? "hover:shadow-xl" : "hover:shadow-lg", true) + " rounded-xl m-1 p-7 text-center duration-300 group"}"${M("style", `background:${l3}`, 0)}><p class="text-4xl font-Poppins py-5 text-center">${o5.cardTitle ? o5.cardTitle({}) : "Classico"}</p>
 
   ${D(v7, (n3) => `${G(g4, "PlansButton").$$render(i4, { button: n3, btnColorHover: c4, card: m7 }, {}, {})}`)}
 
   <div class="py-4">${o5.cardText ? o5.cardText({}) : "default cardText"}</div></plans-card>`;
     });
-    y3 = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
+    y4 = "https://invoice.stripe.com/i/acct_1FViRDGlC2pXHzlt/live_YWNjdF8xRlZpUkRHbEMycFhIemx0LF9NU1ljQlpTa1hvSEhnNlkySjhrRmxRWVhQQmhrendpLDU0MTA5ODkz0200eSUPP97h?s=db";
     b4 = { red: "f34d4e", yellow: "fea45c", blue: "2aa5d6" };
-    M4 = [{ card: 1, payNowUrl: h("classico", "stripe", b4.red), payLaterUrl: h("classico", "invoice", b4.red), buttonText: "Classico", cardTitle: "Classico", cardText: "Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.", href: y3 }, { card: 3, payNowUrl: h("mock", "stripe", b4.blue), payLaterUrl: h("mock", "invoice", b4.blue), buttonText: "Mock", cardTitle: "Mock", cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key available as a +2hr premium.", href: y3 }, { card: 2, payNowUrl: "https://calendly.com/thinksolve/custom?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1", payLaterUrl: "https://calendly.com/thinksolve/custom?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1", buttonText: "Custom", cardTitle: "Custom", cardText: "Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. ", href: y3 }];
-    D4 = I((i4, e7, t3, o5) => `
+    M4 = [{ card: 1, payNowUrl: h("classico", "stripe", b4.red), payLaterUrl: h("classico", "invoice", b4.red), buttonText: "Classico", cardTitle: "Classico", cardText: "Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.", href: y4 }, { card: 3, payNowUrl: h("mock", "stripe", b4.blue), payLaterUrl: h("mock", "invoice", b4.blue), buttonText: "Mock", cardTitle: "Mock", cardText: " Get test ready. We provide a mock test session with live support/ answers to completed questions. Digital solution key available as a +2hr premium.", href: y4 }, { card: 2, payNowUrl: "https://calendly.com/thinksolve/custom?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1", payLaterUrl: "https://calendly.com/thinksolve/custom?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1", buttonText: "Custom", cardTitle: "Custom", cardText: "Pick the first session date/time. Describe the remaining quantity of sessions + desired times/dates (check the calendar for availability), and we will send you a custom invoice. ", href: y4 }];
+    D3 = I((i4, e7, t4, o5) => `
 
 <plans-section class="grid grid-cols-1 sm:grid-cols-dynamic sm:px-4 px-[7%] md:m-7">
   
@@ -12087,8 +12100,8 @@ var init_Reviews = __esm({
     v3 = I((i4, e7, a4, l3) => {
       let o5, r6;
       r6 = x(d2, (h2) => o5 = h2);
-      let { title: t3 = "Great physics tutor!!" } = e7, { name: s6 = "Thomas Finn" } = e7, { date: d5 = "2022-06-08" } = e7;
-      return e7.title === void 0 && a4.title && t3 !== void 0 && a4.title(t3), e7.name === void 0 && a4.name && s6 !== void 0 && a4.name(s6), e7.date === void 0 && a4.date && d5 !== void 0 && a4.date(d5), i4.css.add(f3), r6(), `<article class="${"prose relative " + j(o5 && "prose-invert", true) + " md:pb-[5vw]"}"><div class="absolute"><h1 class="svelte-1hvhqpo">${j(t3)}</h1>
+      let { title: t4 = "Great physics tutor!!" } = e7, { name: s6 = "Thomas Finn" } = e7, { date: d5 = "2022-06-08" } = e7;
+      return e7.title === void 0 && a4.title && t4 !== void 0 && a4.title(t4), e7.name === void 0 && a4.name && s6 !== void 0 && a4.name(s6), e7.date === void 0 && a4.date && d5 !== void 0 && a4.date(d5), i4.css.add(f3), r6(), `<article class="${"prose relative " + j(o5 && "prose-invert", true) + " md:pb-[5vw]"}"><div class="absolute"><h1 class="svelte-1hvhqpo">${j(t4)}</h1>
     <div class="flex flex-row">${D(Array(5), (h2, k5) => `${G(w2, "InView").$$render(i4, { single: true, once: true, onview: (c4) => {
         console.log("\u{1F4AB}"), c4.classList.remove("opacity-0"), c4.src = "/star.webp";
       } }, {}, { default: () => `<img src="" class="opacity-0 transition-opacity duration-300 ease-in hover:scale-125" alt="star" style="width:40px; height:40px">
@@ -12101,7 +12114,7 @@ var init_Reviews = __esm({
     b5 = [{ name: "CM", title: "grade 10 math / grade 11 physics", date: "2022-07-11", body: "Although a bit reluctant to try out the online tutoring John was extremely prepared and had no issues helping my daughter with her french-based courses (I shadowed a few sessions Jon  .. the french jokes were also much appreciated :). We'll be going with him again in the upcoming school year!" }, { name: "magnus", title: "Great help before final!", date: "2022-06-26", body: "Waves & oscillation was not covered so well by my teacher ... the session + mock test really helped out before my final exam!" }, { name: "Thomas Finn", title: "Great physics tutor!!", date: "2022-06-08", body: "He was able to help me understand physics so much more and was able to prepare me for both tests as well as my end of year exam! He understands the people he is tutoring and makes changes to help us understand what we are learning so we can do the best that we possibly can and he\u2019s just a great person to chat with!" }, { name: "felix belfoy", title: "quantitative chem", date: "2022-06-01", body: "I only had him for one session since my chemistry tutor got sick before my final \u{1F614}. Jon came to my rescue and even created a personal page with session notes!! Awesome tutor!" }, { name: "Celia", title: "amazing IBHL physics tutor ", date: "2022-05-01", body: "Jon explained the mechanics behind every question I had trouble with in thorough detail. If I had difficulty understanding his explanation, he would use another way to represent his knowledge such as drawing pictures and using diagrams. he taught me measurements, mechanics, waves, electromagnetism, nuclear and thermal physics. He was also a big help with my physics IA! He also made my solution space a place where I could look back if I've forgotten something." }, { name: "fernando vc", title: "very helpful with kinematics!", date: "2021-05-03", body: "He helped to strengthen my physics (mostly kinematics/forces) with prepared online tests. He was also extremely flexible and would even help on weekends when needed." }, { name: "Lavinia", title: "Great Spanish tutor", date: "2021-03-03", body: "He is super patient with my very much broken Spanish. He is always on time and helps out a lot by giving me extra notes. Best Spanish tutor I had so far :)))" }, { name: "TJ Macdonald", title: "Review", date: "2021-02-10", body: "Jon was great at understanding how to best teach me the content if I didn't fully understand at first, and broke it down into simple steps for me. he was also great at knowing when I didn't fully understand something and would clarify it easily without me having to ask which was awesome really glad to have him in my conner for tests and assignments." }, { name: "Miranda Teta", title: "IB Physics", date: "2021-02-05", body: "Jon started tutoring me in my first year of IB Physics, a very challenging course in which I had trouble understanding. He found creative ways for me to comprehend the subject and whenever I still couldn't understand, he would try other ways until I felt comfortable with the topic. He goes out of his way to make sure get the help I need and. after a few tutoring sessions, I started getting a deeper understanding of my course, which am very grateful for." }, { name: "Efe T.", title: "IB Physics Year 1", date: "2021-02-01", body: "He helps through the process of answering each question by helping with each step. From test preparation to experiments, he has assisted me with every problem have encountered. He is also a fun person to talk to and a very friendly person." }, { name: "Parent of Rachel", title: "stellar!", date: "2020-06-03", body: "Finding a steady and solid tutor to help my daughter in grade 12 physics had been a hassle in the last two years, but he came as a recommendation to me from Rachel's private school. Jon was incredibly flexible, down to weekend hours, and exceeded my expectations of what was possible online. The mock test sessions were especially crucial in improving Rachel's grades! Cannot recommend enough!" }, { name: "Paola A.", title: "1st yr at Brock University", date: "2020-10-27", body: "I had an awesome experience with Jon. I was a BioSci student at Brock and really needed help with Physics 1P91 and Calculus. He was clear, structured, patient and thorough. I survived! With Physics being one of my best classes." }, { name: "rob henriquez", title: "mohawk college tutor", date: "2020-02-18", body: "Jon makes learning physics and math intuitive. He finds creative ways of teaching and is passionate about your success. I highly recommend him!!" }, { name: "rozhina mazhar", title: "IB HL Physics", date: "2020-03-07", body: "John was a huge help for me in gr 12 physics at Ridley. We met once a week in the learning centre and he would help me on everything from lab prep to assignments to homework questions ... he made me feel extra confident in my abilities!" }, { name: "Zaara Alam", title: "grade 12 physics", date: "2020-10-27", body: "I am currently being tutored by Jon, and so far having an amazing experience. He is always prepared with new material and tests perfectly fit for each student's needs. He is helping me now with grade 12 physics, and his fun and effective way teaching makes learning much more enjoyable! He also goes out of his way to make his own special formula and study sheets that are very detailed and helpful. He always explains things clearly and with enthusiasm \u{1F642} am now confident that I'll be able to succeed in physics because of his great skills \u{1F600}" }];
     J5 = I((i4, e7, a4, l3) => `<div class="scale-90">
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0">${D(b5, ({ name: o5, title: r6, date: t3, body: s6 }) => `${G(v3, "ReviewCreator").$$render(i4, { title: r6, name: o5, date: t3 }, {}, { default: () => `${j(s6)}
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0">${D(b5, ({ name: o5, title: r6, date: t4, body: s6 }) => `${G(v3, "ReviewCreator").$$render(i4, { title: r6, name: o5, date: t4 }, {}, { default: () => `${j(s6)}
       ` })}`)}</div></div>`);
   }
 });
@@ -12118,8 +12131,13 @@ var init_page_svelte = __esm({
     init_LazyMount();
     init_store();
     x4 = I((e7, $3, u, b6) => {
-      let t3, o5, n3;
-      return n3 = x(d2, (i4) => o5 = i4), t3 = `text-transparent bg-clip-text bg-gradient-to-tr ${o5 ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`, n3(), `<video loading="lazy" controlslist="nodownload" playsinline autoplay muted loop src="/login-bg-video-blurred.mp4" class="${"absolute -z-10 top-0 object-cover w-11/12 h-screen " + j(o5 ? "invert-[0.95] blur-3xl" : "blur-2xl", true)}"></video>
+      let t4, o5, n3;
+      return n3 = x(d2, (i4) => o5 = i4), t4 = `text-transparent bg-clip-text bg-gradient-to-tr ${o5 ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"}`, n3(), `
+
+
+
+
+<video loading="lazy" controlslist="nodownload" playsinline autoplay muted loop src="/login-bg-video-blurred.mp4" class="${"absolute -z-10 top-0 object-cover w-11/12 h-screen " + j(o5 ? "invert-[0.95] blur-3xl" : "blur-2xl", true)}"></video>
 
 
 
@@ -12127,13 +12145,13 @@ ${`<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
     <div class="h-[60vh] flex justify-center items-center text-center"><div class="grid grid-rows-1"></div></div>
 
     
-    <div id="step1" class="hover:scale-105 duration-500 grid place-content-center"><button class="text-5xl font-Poppins text-center pb-7"><span${M("class", t3, 0)}>1. Upload your homework </span></button>
+    <div id="step1" class="hover:scale-105 duration-500 grid place-content-center"><button class="text-5xl font-Poppins text-center pb-7"><span${M("class", t4, 0)}>1. Upload your homework </span></button>
 
       
       ${G(_3, "LazyMount").$$render(e7, { Import: () => Promise.resolve().then(() => (init_DropzoneOpener(), DropzoneOpener_exports)) }, {}, {})}</div>
 
     
-    <div id="step2" class="duration-500 grid place-content-center"><button class="text-5xl font-Poppins text-center pb-7 "><span${M("class", t3, 0)}>2. Schedule a Session </span></button>
+    <div id="step2" class="duration-500 grid place-content-center"><button class="text-5xl font-Poppins text-center pb-7 "><span${M("class", t4, 0)}>2. Schedule a Session </span></button>
 
       
       ${G(_3, "LazyMount").$$render(e7, { Import: () => Promise.resolve().then(() => (init_PlansSection(), PlansSection_exports)) }, {}, {})}
@@ -12145,7 +12163,7 @@ ${`<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
       </div>
 
     
-    <div id="reviews" class="duration-500 mb-[200px] sm:mb-[500px]"><button class="text-5xl font-Poppins w-full flex justify-center"><span${M("class", t3, 0)}>3. Do Some Reading <span class="text-black">\u{1F60E} </span></span></button>
+    <div id="reviews" class="duration-500 mb-[200px] sm:mb-[500px]"><button class="text-5xl font-Poppins w-full flex justify-center"><span${M("class", t4, 0)}>3. Do Some Reading <span class="text-black">\u{1F60E} </span></span></button>
 
       
       ${G(_3, "LazyMount").$$render(e7, { Import: () => Promise.resolve().then(() => (init_Reviews(), Reviews_exports)) }, {}, {})}</div></div>`}
@@ -12170,27 +12188,29 @@ __export(__exports3, {
   fonts: () => fonts3,
   imports: () => imports3,
   index: () => index3,
+  shared: () => page_exports,
   stylesheets: () => stylesheets3
 });
 var index3, component3, file3, imports3, stylesheets3, fonts3;
 var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
+    init_page();
     index3 = 2;
     component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    file3 = "_app/immutable/components/pages/_page.svelte-052686cc.js";
-    imports3 = ["_app/immutable/components/pages/_page.svelte-052686cc.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/LazyMount-618774ce.js", "_app/immutable/chunks/utils-98cd377c.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/navigation-3ed869d7.js", "_app/immutable/chunks/singletons-3ce6c87d.js"];
+    file3 = "_app/immutable/components/pages/_page.svelte-43c77620.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-43c77620.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/LazyMount-618774ce.js", "_app/immutable/chunks/utils-98cd377c.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/navigation-3ed869d7.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/modules/pages/_page.js-ced5fa09.js", "_app/immutable/chunks/_page-a8c00d78.js"];
     stylesheets3 = ["_app/immutable/assets/Reviews-d999b052.css"];
     fonts3 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/classroom/_page.js
-var page_exports = {};
-__export(page_exports, {
+var page_exports2 = {};
+__export(page_exports2, {
   ssr: () => s4
 });
 var s4;
-var init_page = __esm({
+var init_page2 = __esm({
   ".svelte-kit/output/server/entries/pages/classroom/_page.js"() {
     s4 = false;
   }
@@ -12215,8 +12235,8 @@ var init_page_svelte2 = __esm({
           var w5 = p7(620), E4 = p7.n(w5);
           class l3 extends w5 {
             constructor() {
-              var e7, t3;
-              super(...arguments), t3 = {}, (e7 = "_storage") in this ? Object.defineProperty(this, e7, { value: t3, enumerable: true, configurable: true, writable: true }) : this[e7] = t3;
+              var e7, t4;
+              super(...arguments), t4 = {}, (e7 = "_storage") in this ? Object.defineProperty(this, e7, { value: t4, enumerable: true, configurable: true, writable: true }) : this[e7] = t4;
             }
             clear() {
               this._storage = {};
@@ -12227,25 +12247,25 @@ var init_page_svelte2 = __esm({
             getItem(e7) {
               return this._storage[e7];
             }
-            setItem(e7, t3) {
-              this._storage[e7] = t3;
+            setItem(e7, t4) {
+              this._storage[e7] = t4;
             }
             removeItem(e7) {
               delete this._storage[e7];
             }
             key(e7) {
-              const t3 = Object.keys(this._storage);
-              if (!(t3.length <= e7))
-                return t3[e7];
+              const t4 = Object.keys(this._storage);
+              if (!(t4.length <= e7))
+                return t4[e7];
             }
             serialize() {
               let e7 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : [];
               if (e7.length === 0)
                 return JSON.stringify(this._storage);
-              const t3 = { ...this._storage };
+              const t4 = { ...this._storage };
               return e7.forEach((n3) => {
-                delete t3[n3];
-              }), JSON.stringify(t3);
+                delete t4[n3];
+              }), JSON.stringify(t4);
             }
           }
           const u = new class extends w5 {
@@ -12270,8 +12290,8 @@ var init_page_svelte2 = __esm({
               return this._storage.getItem(i4);
             }
             setItem(i4, e7) {
-              let t3 = arguments.length > 2 && arguments[2] !== void 0 && arguments[2];
-              this._storage.setItem(i4, e7), t3 || this.emit("changed");
+              let t4 = arguments.length > 2 && arguments[2] !== void 0 && arguments[2];
+              this._storage.setItem(i4, e7), t4 || this.emit("changed");
             }
             removeItem(i4) {
               this._storage.removeItem(i4), this.emit("changed");
@@ -12283,46 +12303,46 @@ var init_page_svelte2 = __esm({
               let i4 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : [];
               if (this.isLocalStorageDisabled())
                 return this._storage.serialize(i4);
-              const e7 = this._storage.length, t3 = {};
+              const e7 = this._storage.length, t4 = {};
               for (let n3 = 0; n3 < e7; n3++) {
                 const s6 = this._storage.key(n3);
-                i4.includes(s6) || (t3[s6] = this._storage.getItem(s6));
+                i4.includes(s6) || (t4[s6] = this._storage.getItem(s6));
               }
-              return JSON.stringify(t3);
+              return JSON.stringify(t4);
             }
           }();
           var o5 = p7(571);
           const g5 = ["__proto__", "constructor", "prototype"];
           function f7(i4) {
-            const e7 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)+", "gi"), t3 = e7.exec(i4);
-            if (t3) {
-              let n3 = t3[t3.length - 1].toLowerCase();
+            const e7 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)+", "gi"), t4 = e7.exec(i4);
+            if (t4) {
+              let n3 = t4[t4.length - 1].toLowerCase();
               n3 !== "http:" && n3 !== "https:" && (n3 = "https:"), (i4 = i4.substring(e7.lastIndex)).startsWith("//") && (i4 = n3 + i4);
             }
             return i4;
           }
           function x5(i4 = {}) {
             const e7 = [];
-            for (const t3 in i4)
+            for (const t4 in i4)
               try {
-                e7.push(`${t3}=${encodeURIComponent(JSON.stringify(i4[t3]))}`);
+                e7.push(`${t4}=${encodeURIComponent(JSON.stringify(i4[t4]))}`);
               } catch (n3) {
-                console.warn(`Error encoding ${t3}: ${n3}`);
+                console.warn(`Error encoding ${t4}: ${n3}`);
               }
             return e7;
           }
           function C4(i4) {
             const e7 = { toString: V4 };
-            let t3, n3, s6;
-            if (i4 = i4.replace(/\s/g, ""), t3 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)", "gi"), n3 = t3.exec(i4), n3 && (e7.protocol = n3[1].toLowerCase(), i4 = i4.substring(t3.lastIndex)), t3 = new RegExp("^(//[^/?#]+)", "gi"), n3 = t3.exec(i4), n3) {
+            let t4, n3, s6;
+            if (i4 = i4.replace(/\s/g, ""), t4 = new RegExp("^([a-z][a-z0-9\\.\\+-]*:)", "gi"), n3 = t4.exec(i4), n3 && (e7.protocol = n3[1].toLowerCase(), i4 = i4.substring(t4.lastIndex)), t4 = new RegExp("^(//[^/?#]+)", "gi"), n3 = t4.exec(i4), n3) {
               let d5 = n3[1].substring(2);
-              i4 = i4.substring(t3.lastIndex);
+              i4 = i4.substring(t4.lastIndex);
               const h2 = d5.indexOf("@");
               h2 !== -1 && (d5 = d5.substring(h2 + 1)), e7.host = d5;
               const j3 = d5.lastIndexOf(":");
               j3 !== -1 && (e7.port = d5.substring(j3 + 1), d5 = d5.substring(0, j3)), e7.hostname = d5;
             }
-            if (t3 = new RegExp("^([^?#]*)", "gi"), n3 = t3.exec(i4), n3 && (s6 = n3[1], i4 = i4.substring(t3.lastIndex)), s6 ? s6.startsWith("/") || (s6 = `/${s6}`) : s6 = "/", e7.pathname = s6, i4.startsWith("?")) {
+            if (t4 = new RegExp("^([^?#]*)", "gi"), n3 = t4.exec(i4), n3 && (s6 = n3[1], i4 = i4.substring(t4.lastIndex)), s6 ? s6.startsWith("/") || (s6 = `/${s6}`) : s6 = "/", e7.pathname = s6, i4.startsWith("?")) {
               let d5 = i4.indexOf("#", 1);
               d5 === -1 && (d5 = i4.length), e7.search = i4.substring(0, d5), i4 = i4.substring(d5);
             } else
@@ -12330,50 +12350,50 @@ var init_page_svelte2 = __esm({
             return e7.hash = i4.startsWith("#") ? i4 : "", e7;
           }
           function V4(i4) {
-            const { hash: e7, host: t3, pathname: n3, protocol: s6, search: d5 } = i4 || this;
+            const { hash: e7, host: t4, pathname: n3, protocol: s6, search: d5 } = i4 || this;
             let h2 = "";
-            return s6 && (h2 += s6), t3 && (h2 += `//${t3}`), h2 += n3 || "/", d5 && (h2 += d5), e7 && (h2 += e7), h2;
+            return s6 && (h2 += s6), t4 && (h2 += `//${t4}`), h2 += n3 || "/", d5 && (h2 += d5), e7 && (h2 += e7), h2;
           }
           function W4(i4) {
             let e7;
             e7 = i4.serverURL && i4.room ? new URL(i4.room, i4.serverURL).toString() : i4.room ? i4.room : i4.url || "";
-            const t3 = C4(f7(e7));
-            if (!t3.protocol) {
+            const t4 = C4(f7(e7));
+            if (!t4.protocol) {
               let R4 = i4.protocol || i4.scheme;
-              R4 && (R4.endsWith(":") || (R4 += ":"), t3.protocol = R4);
+              R4 && (R4.endsWith(":") || (R4 += ":"), t4.protocol = R4);
             }
-            let { pathname: n3 } = t3;
-            if (!t3.host) {
+            let { pathname: n3 } = t4;
+            if (!t4.host) {
               const R4 = i4.domain || i4.host || i4.hostname;
               if (R4) {
-                const { host: $3, hostname: D6, pathname: z6, port: k5 } = C4(f7(`org.jitsi.meet://${R4}`));
-                $3 && (t3.host = $3, t3.hostname = D6, t3.port = k5), n3 === "/" && z6 !== "/" && (n3 = z6);
+                const { host: $3, hostname: D5, pathname: z6, port: k5 } = C4(f7(`org.jitsi.meet://${R4}`));
+                $3 && (t4.host = $3, t4.hostname = D5, t4.port = k5), n3 === "/" && z6 !== "/" && (n3 = z6);
               }
             }
             const s6 = i4.roomName || i4.room;
-            !s6 || !t3.pathname.endsWith("/") && t3.pathname.endsWith(`/${s6}`) || (n3.endsWith("/") || (n3 += "/"), n3 += s6), t3.pathname = n3;
-            const { jwt: d5, lang: h2, release: j3 } = i4, N5 = new URLSearchParams(t3.search);
+            !s6 || !t4.pathname.endsWith("/") && t4.pathname.endsWith(`/${s6}`) || (n3.endsWith("/") || (n3 += "/"), n3 += s6), t4.pathname = n3;
+            const { jwt: d5, lang: h2, release: j3 } = i4, N5 = new URLSearchParams(t4.search);
             d5 && N5.set("jwt", d5);
             const { defaultLanguage: M5 } = i4.configOverwrite || {};
             (h2 || M5) && N5.set("lang", h2 || M5), j3 && N5.set("release", j3);
             const P5 = N5.toString();
-            P5 && (t3.search = `?${P5}`);
-            let { hash: A7 } = t3;
+            P5 && (t4.search = `?${P5}`);
+            let { hash: A7 } = t4;
             for (const R4 of ["config", "interfaceConfig", "devices", "userInfo", "appData"]) {
               const $3 = x5(i4[`${R4}Overwrite`] || i4[R4] || i4[`${R4}Override`]);
               if ($3.length) {
-                let D6 = `${R4}.${$3.join(`&${R4}.`)}`;
-                A7.length ? D6 = `&${D6}` : A7 = "#", A7 += D6;
+                let D5 = `${R4}.${$3.join(`&${R4}.`)}`;
+                A7.length ? D5 = `&${D5}` : A7 = "#", A7 += D5;
               }
             }
-            return t3.hash = A7, t3.toString() || void 0;
+            return t4.hash = A7, t4.toString() || void 0;
           }
           const B4 = { window: window.opener || window.parent }, U4 = "message";
           class r6 {
             constructor() {
               let { postisOptions: e7 } = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
-              this.postis = function(t3) {
-                var n3, s6 = t3.scope, d5 = t3.window, h2 = t3.windowForEventListening || window, j3 = t3.allowedOrigin, N5 = {}, M5 = [], P5 = {}, A7 = false, R4 = "__ready__", $3 = function(k5) {
+              this.postis = function(t4) {
+                var n3, s6 = t4.scope, d5 = t4.window, h2 = t4.windowForEventListening || window, j3 = t4.allowedOrigin, N5 = {}, M5 = [], P5 = {}, A7 = false, R4 = "__ready__", $3 = function(k5) {
                   var S5;
                   try {
                     S5 = JSON.parse(k5.data);
@@ -12390,7 +12410,7 @@ var init_page_svelte2 = __esm({
                   }
                 };
                 h2.addEventListener("message", $3, false);
-                var D6 = { listen: function(k5, S5) {
+                var D5 = { listen: function(k5, S5) {
                   N5[k5] = N5[k5] || [], N5[k5].push(S5);
                   var J6 = P5[k5];
                   if (J6)
@@ -12403,24 +12423,24 @@ var init_page_svelte2 = __esm({
                   (A7 || k5.method === R4) && d5 && typeof d5.postMessage == "function" ? d5.postMessage(JSON.stringify({ postis: true, scope: s6, method: S5, params: k5.params }), "*") : M5.push(k5);
                 }, ready: function(k5) {
                   A7 ? k5() : setTimeout(function() {
-                    D6.ready(k5);
+                    D5.ready(k5);
                   }, 50);
                 }, destroy: function(k5) {
                   clearInterval(n3), A7 = false, h2 && typeof h2.removeEventListener == "function" && h2.removeEventListener("message", $3), k5 && k5();
                 } }, z6 = +new Date() + Math.random() + "";
                 return n3 = setInterval(function() {
-                  D6.send({ method: R4, params: z6 });
-                }, 50), D6.listen(R4, function(k5) {
+                  D5.send({ method: R4, params: z6 });
+                }, 50), D5.listen(R4, function(k5) {
                   if (k5 === z6) {
                     clearInterval(n3), A7 = true;
                     for (var S5 = 0; S5 < M5.length; S5++)
-                      D6.send(M5[S5]);
+                      D5.send(M5[S5]);
                     M5 = [];
                   } else
-                    D6.send({ method: R4, params: k5 });
-                }), D6;
+                    D5.send({ method: R4, params: k5 });
+                }), D5;
               }({ ...B4, ...e7 }), this._receiveCallback = () => {
-              }, this.postis.listen(U4, (t3) => this._receiveCallback(t3));
+              }, this.postis.listen(U4, (t4) => this._receiveCallback(t4));
             }
             dispose() {
               this.postis.destroy();
@@ -12443,18 +12463,18 @@ var init_page_svelte2 = __esm({
             }
             _onMessageReceived(e7) {
               if (e7.type === c4) {
-                const t3 = this._responseHandlers.get(e7.id);
-                t3 && (t3(e7), this._responseHandlers.delete(e7.id));
+                const t4 = this._responseHandlers.get(e7.id);
+                t4 && (t4(e7), this._responseHandlers.delete(e7.id));
               } else
-                e7.type === a4 ? this.emit("request", e7.data, (t3, n3) => {
-                  this._backend.send({ type: c4, error: n3, id: e7.id, result: t3 });
+                e7.type === a4 ? this.emit("request", e7.data, (t4, n3) => {
+                  this._backend.send({ type: c4, error: n3, id: e7.id, result: t4 });
                 }) : this.emit("event", e7.data);
             }
             dispose() {
               this._responseHandlers.clear(), this._unprocessedMessages.clear(), this.removeAllListeners(), this._disposeBackend();
             }
             emit(e7) {
-              for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), s6 = 1; s6 < t3; s6++)
+              for (var t4 = arguments.length, n3 = new Array(t4 > 1 ? t4 - 1 : 0), s6 = 1; s6 < t4; s6++)
                 n3[s6 - 1] = arguments[s6];
               const d5 = this._listeners.get(e7);
               let h2 = false;
@@ -12462,18 +12482,18 @@ var init_page_svelte2 = __esm({
                 h2 = j3(...n3) || h2;
               }), h2 || this._unprocessedMessages.add(n3), h2;
             }
-            on(e7, t3) {
+            on(e7, t4) {
               let n3 = this._listeners.get(e7);
-              return n3 || (n3 = /* @__PURE__ */ new Set(), this._listeners.set(e7, n3)), n3.add(t3), this._unprocessedMessages.forEach((s6) => {
-                t3(...s6) && this._unprocessedMessages.delete(s6);
+              return n3 || (n3 = /* @__PURE__ */ new Set(), this._listeners.set(e7, n3)), n3.add(t4), this._unprocessedMessages.forEach((s6) => {
+                t4(...s6) && this._unprocessedMessages.delete(s6);
               }), this;
             }
             removeAllListeners(e7) {
               return e7 ? this._listeners.delete(e7) : this._listeners.clear(), this;
             }
-            removeListener(e7, t3) {
+            removeListener(e7, t4) {
               const n3 = this._listeners.get(e7);
-              return n3 && n3.delete(t3), this;
+              return n3 && n3.delete(t4), this;
             }
             sendEvent() {
               let e7 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
@@ -12483,22 +12503,22 @@ var init_page_svelte2 = __esm({
               if (!this._backend)
                 return Promise.reject(new Error("No transport backend defined!"));
               this._requestID++;
-              const t3 = this._requestID;
+              const t4 = this._requestID;
               return new Promise((n3, s6) => {
-                this._responseHandlers.set(t3, (d5) => {
+                this._responseHandlers.set(t4, (d5) => {
                   let { error: h2, result: j3 } = d5;
                   j3 !== void 0 ? n3(j3) : s6(h2 !== void 0 ? h2 : new Error("Unexpected response format!"));
-                }), this._backend.send({ type: a4, data: e7, id: t3 });
+                }), this._backend.send({ type: a4, data: e7, id: t4 });
               });
             }
             setBackend(e7) {
               this._disposeBackend(), this._backend = e7, this._backend.setReceiveCallback(this._onMessageReceived.bind(this));
             }
           }
-          (function(i4, e7 = false, t3 = "hash") {
+          (function(i4, e7 = false, t4 = "hash") {
             typeof i4 == "string" && (i4 = new URL(i4));
-            const n3 = t3 === "search" ? i4.search : i4.hash, s6 = {}, d5 = (n3 == null ? void 0 : n3.substr(1).split("&")) || [];
-            if (t3 === "hash" && d5.length === 1) {
+            const n3 = t4 === "search" ? i4.search : i4.hash, s6 = {}, d5 = (n3 == null ? void 0 : n3.substr(1).split("&")) || [];
+            if (t4 === "hash" && d5.length === 1) {
               const h2 = d5[0];
               if (h2.startsWith("/") && h2.split("&").length === 1)
                 return s6;
@@ -12523,7 +12543,7 @@ var init_page_svelte2 = __esm({
             }), s6;
           })(window.location).jitsi_meet_external_api_id, (window.JitsiMeetJS || (window.JitsiMeetJS = {}), window.JitsiMeetJS.app || (window.JitsiMeetJS.app = {}), window.JitsiMeetJS.app).setExternalTransportBackend = (i4) => (void 0).setBackend(i4);
           var _6 = p7(860);
-          const y5 = p7.n(_6)().getLogger("modules/API/external/functions.js");
+          const y6 = p7.n(_6)().getLogger("modules/API/external/functions.js");
           function b6(i4, e7) {
             return i4.sendRequest({ type: "devices", name: "setDevice", device: e7 });
           }
@@ -12539,9 +12559,9 @@ var init_page_svelte2 = __esm({
           class ie4 extends E4() {
             constructor(e7) {
               super();
-              for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), s6 = 1; s6 < t3; s6++)
+              for (var t4 = arguments.length, n3 = new Array(t4 > 1 ? t4 - 1 : 0), s6 = 1; s6 < t4; s6++)
                 n3[s6 - 1] = arguments[s6];
-              const { roomName: d5 = "", width: h2 = "100%", height: j3 = "100%", parentNode: N5 = document.body, configOverwrite: M5 = {}, interfaceConfigOverwrite: P5 = {}, jwt: A7, lang: R4, onload: $3, invitees: D6, devices: z6, userInfo: k5, e2eeKey: S5, release: J6 } = function(q6) {
+              const { roomName: d5 = "", width: h2 = "100%", height: j3 = "100%", parentNode: N5 = document.body, configOverwrite: M5 = {}, interfaceConfigOverwrite: P5 = {}, jwt: A7, lang: R4, onload: $3, invitees: D5, devices: z6, userInfo: k5, e2eeKey: S5, release: J6 } = function(q6) {
                 if (!q6.length)
                   return {};
                 switch (typeof q6[0]) {
@@ -12558,16 +12578,16 @@ var init_page_svelte2 = __esm({
               }(n3), K5 = u.getItem("jitsiLocalStorage");
               this._parentNode = N5, this._url = function(q6) {
                 return W4({ ...arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {}, url: `https://${q6}/#jitsi_meet_external_api_id=${Q4}` });
-              }(e7, { configOverwrite: M5, interfaceConfigOverwrite: P5, jwt: A7, lang: R4, roomName: d5, devices: z6, userInfo: k5, appData: { localStorageContent: K5 }, release: J6 }), this._createIFrame(j3, h2, $3), this._transport = new m7({ backend: new r6({ postisOptions: { allowedOrigin: new URL(this._url).origin, scope: `jitsi_meet_external_api_${Q4}`, window: this._frame.contentWindow } }) }), Array.isArray(D6) && D6.length > 0 && this.invite(D6), this._tmpE2EEKey = S5, this._isLargeVideoVisible = false, this._isPrejoinVideoVisible = false, this._numberOfParticipants = 0, this._participants = {}, this._myUserID = void 0, this._onStageParticipant = void 0, this._setupListeners(), Q4++;
+              }(e7, { configOverwrite: M5, interfaceConfigOverwrite: P5, jwt: A7, lang: R4, roomName: d5, devices: z6, userInfo: k5, appData: { localStorageContent: K5 }, release: J6 }), this._createIFrame(j3, h2, $3), this._transport = new m7({ backend: new r6({ postisOptions: { allowedOrigin: new URL(this._url).origin, scope: `jitsi_meet_external_api_${Q4}`, window: this._frame.contentWindow } }) }), Array.isArray(D5) && D5.length > 0 && this.invite(D5), this._tmpE2EEKey = S5, this._isLargeVideoVisible = false, this._isPrejoinVideoVisible = false, this._numberOfParticipants = 0, this._participants = {}, this._myUserID = void 0, this._onStageParticipant = void 0, this._setupListeners(), Q4++;
             }
-            _createIFrame(e7, t3, n3) {
+            _createIFrame(e7, t4, n3) {
               const s6 = `jitsiConferenceFrame${Q4}`;
-              this._frame = document.createElement("iframe"), this._frame.allow = "camera; microphone; display-capture; autoplay; clipboard-write", this._frame.src = this._url, this._frame.name = s6, this._frame.id = s6, this._setSize(e7, t3), this._frame.setAttribute("allowFullScreen", "true"), this._frame.style.border = 0, n3 && (this._frame.onload = n3), this._frame = this._parentNode.appendChild(this._frame);
+              this._frame = document.createElement("iframe"), this._frame.allow = "camera; microphone; display-capture; autoplay; clipboard-write", this._frame.src = this._url, this._frame.name = s6, this._frame.id = s6, this._setSize(e7, t4), this._frame.setAttribute("allowFullScreen", "true"), this._frame.style.border = 0, n3 && (this._frame.onload = n3), this._frame = this._parentNode.appendChild(this._frame);
             }
             _getAlwaysOnTopResources() {
-              const e7 = this._frame.contentWindow, t3 = e7.document;
+              const e7 = this._frame.contentWindow, t4 = e7.document;
               let n3 = "";
-              const s6 = t3.querySelector("base");
+              const s6 = t4.querySelector("base");
               if (s6 && s6.href)
                 n3 = s6.href;
               else {
@@ -12577,8 +12597,8 @@ var init_page_svelte2 = __esm({
               return O5.map((d5) => new URL(d5, n3).href);
             }
             _getFormattedDisplayName(e7) {
-              const { formattedDisplayName: t3 } = this._participants[e7] || {};
-              return t3;
+              const { formattedDisplayName: t4 } = this._participants[e7] || {};
+              return t4;
             }
             _getOnStageParticipant() {
               return this._onStageParticipant;
@@ -12594,19 +12614,19 @@ var init_page_svelte2 = __esm({
                 return e7.contentWindow.document.getElementById("prejoinVideo");
             }
             _getParticipantVideo(e7) {
-              const t3 = this.getIFrame();
-              if (t3 && t3.contentWindow && t3.contentWindow.document)
-                return e7 === void 0 || e7 === this._myUserID ? t3.contentWindow.document.getElementById("localVideo_container") : t3.contentWindow.document.querySelector(`#participant_${e7} video`);
+              const t4 = this.getIFrame();
+              if (t4 && t4.contentWindow && t4.contentWindow.document)
+                return e7 === void 0 || e7 === this._myUserID ? t4.contentWindow.document.getElementById("localVideo_container") : t4.contentWindow.document.querySelector(`#participant_${e7} video`);
             }
-            _setSize(e7, t3) {
-              const n3 = Z4(e7), s6 = Z4(t3);
-              n3 !== void 0 && (this._height = e7, this._frame.style.height = n3), s6 !== void 0 && (this._width = t3, this._frame.style.width = s6);
+            _setSize(e7, t4) {
+              const n3 = Z4(e7), s6 = Z4(t4);
+              n3 !== void 0 && (this._height = e7, this._frame.style.height = n3), s6 !== void 0 && (this._width = t4, this._frame.style.width = s6);
             }
             _setupListeners() {
               this._transport.on("event", (e7) => {
-                let { name: t3, ...n3 } = e7;
+                let { name: t4, ...n3 } = e7;
                 const s6 = n3.id;
-                switch (t3) {
+                switch (t4) {
                   case "video-conference-joined":
                     this._tmpE2EEKey !== void 0 && (this.executeCommand(I5.e2eeKey, this._tmpE2EEKey), this._tmpE2EEKey = void 0), this._myUserID = s6, this._participants[s6] = { email: n3.email, avatarURL: n3.avatarURL };
                   case "participant-joined":
@@ -12654,28 +12674,28 @@ var init_page_svelte2 = __esm({
                   case "local-storage-changed":
                     return u.setItem("jitsiLocalStorage", n3.localStorageContent), true;
                 }
-                const d5 = X5[t3];
+                const d5 = X5[t4];
                 return !!d5 && (this.emit(d5, n3), true);
               });
             }
             updateNumberOfParticipants(e7) {
               if (!e7 || !Object.keys(e7).length)
                 return;
-              const t3 = Object.keys(e7).reduce((n3, s6) => {
+              const t4 = Object.keys(e7).reduce((n3, s6) => {
                 var d5;
                 return (d5 = e7[s6]) !== null && d5 !== void 0 && d5.participants ? Object.keys(e7[s6].participants).length + n3 : n3;
               }, 0);
-              this._numberOfParticipants = t3;
+              this._numberOfParticipants = t4;
             }
             async getRoomsInfo() {
               return this._transport.sendRequest({ name: "rooms-info" });
             }
-            addEventListener(e7, t3) {
-              this.on(e7, t3);
+            addEventListener(e7, t4) {
+              this.on(e7, t4);
             }
             addEventListeners(e7) {
-              for (const t3 in e7)
-                this.addEventListener(t3, e7[t3]);
+              for (const t4 in e7)
+                this.addEventListener(t4, e7[t4]);
             }
             captureLargeVideoScreenshot() {
               return this._transport.sendRequest({ name: "capture-largevideo-screenshot" });
@@ -12685,19 +12705,19 @@ var init_page_svelte2 = __esm({
             }
             executeCommand(e7) {
               if (e7 in I5) {
-                for (var t3 = arguments.length, n3 = new Array(t3 > 1 ? t3 - 1 : 0), s6 = 1; s6 < t3; s6++)
+                for (var t4 = arguments.length, n3 = new Array(t4 > 1 ? t4 - 1 : 0), s6 = 1; s6 < t4; s6++)
                   n3[s6 - 1] = arguments[s6];
                 this._transport.sendEvent({ data: n3, name: I5[e7] });
               } else
                 console.error("Not supported command name.");
             }
             executeCommands(e7) {
-              for (const t3 in e7)
-                this.executeCommand(t3, e7[t3]);
+              for (const t4 in e7)
+                this.executeCommand(t4, e7[t4]);
             }
             getAvailableDevices() {
               return function(e7) {
-                return e7.sendRequest({ type: "devices", name: "getAvailableDevices" }).catch((t3) => (y5.error(t3), {}));
+                return e7.sendRequest({ type: "devices", name: "getAvailableDevices" }).catch((t4) => (y6.error(t4), {}));
               }(this._transport);
             }
             getContentSharingParticipants() {
@@ -12705,7 +12725,7 @@ var init_page_svelte2 = __esm({
             }
             getCurrentDevices() {
               return function(e7) {
-                return e7.sendRequest({ type: "devices", name: "getCurrentDevices" }).catch((t3) => (y5.error(t3), {}));
+                return e7.sendRequest({ type: "devices", name: "getCurrentDevices" }).catch((t4) => (y6.error(t4), {}));
               }(this._transport);
             }
             getCustomAvatarBackgrounds() {
@@ -12715,10 +12735,10 @@ var init_page_svelte2 = __esm({
               return this._transport.sendRequest({ name: "get-livestream-url" });
             }
             getParticipantsInfo() {
-              const e7 = Object.keys(this._participants), t3 = Object.values(this._participants);
-              return t3.forEach((n3, s6) => {
+              const e7 = Object.keys(this._participants), t4 = Object.values(this._participants);
+              return t4.forEach((n3, s6) => {
                 n3.participantId = e7[s6];
-              }), t3;
+              }), t4;
             }
             getVideoQuality() {
               return this._videoQuality;
@@ -12727,8 +12747,8 @@ var init_page_svelte2 = __esm({
               return this._transport.sendRequest({ name: "is-audio-available" });
             }
             isDeviceChangeAvailable(e7) {
-              return function(t3, n3) {
-                return t3.sendRequest({ deviceType: n3, type: "devices", name: "isDeviceChangeAvailable" });
+              return function(t4, n3) {
+                return t4.sendRequest({ deviceType: n3, type: "devices", name: "isDeviceChangeAvailable" });
               }(this._transport, e7);
             }
             isDeviceListAvailable() {
@@ -12753,8 +12773,8 @@ var init_page_svelte2 = __esm({
             isModerationOn(e7) {
               return this._transport.sendRequest({ name: "is-moderation-on", mediaType: e7 });
             }
-            isParticipantForceMuted(e7, t3) {
-              return this._transport.sendRequest({ name: "is-participant-force-muted", participantId: e7, mediaType: t3 });
+            isParticipantForceMuted(e7, t4) {
+              return this._transport.sendRequest({ name: "is-participant-force-muted", participantId: e7, mediaType: t4 });
             }
             isParticipantsPaneOpen() {
               return this._transport.sendRequest({ name: "is-participants-pane-open" });
@@ -12766,19 +12786,19 @@ var init_page_svelte2 = __esm({
               return this._transport.sendRequest({ name: "is-start-silent" });
             }
             getAvatarURL(e7) {
-              const { avatarURL: t3 } = this._participants[e7] || {};
-              return t3;
+              const { avatarURL: t4 } = this._participants[e7] || {};
+              return t4;
             }
             getDeploymentInfo() {
               return this._transport.sendRequest({ name: "deployment-info" });
             }
             getDisplayName(e7) {
-              const { displayName: t3 } = this._participants[e7] || {};
-              return t3;
+              const { displayName: t4 } = this._participants[e7] || {};
+              return t4;
             }
             getEmail(e7) {
-              const { email: t3 } = this._participants[e7] || {};
-              return t3;
+              const { email: t4 } = this._participants[e7] || {};
+              return t4;
             }
             getIFrame() {
               return this._frame;
@@ -12802,31 +12822,31 @@ var init_page_svelte2 = __esm({
               this.removeAllListeners(e7);
             }
             removeEventListeners(e7) {
-              e7.forEach((t3) => this.removeEventListener(t3));
+              e7.forEach((t4) => this.removeEventListener(t4));
             }
-            resizeLargeVideo(e7, t3) {
-              e7 <= this._width && t3 <= this._height && this.executeCommand("resizeLargeVideo", e7, t3);
+            resizeLargeVideo(e7, t4) {
+              e7 <= this._width && t4 <= this._height && this.executeCommand("resizeLargeVideo", e7, t4);
             }
             sendProxyConnectionEvent(e7) {
               this._transport.sendEvent({ data: [e7], name: "proxy-connection-event" });
             }
-            setAudioInputDevice(e7, t3) {
+            setAudioInputDevice(e7, t4) {
               return function(n3, s6, d5) {
                 return b6(n3, { id: d5, kind: "audioinput", label: s6 });
-              }(this._transport, e7, t3);
+              }(this._transport, e7, t4);
             }
-            setAudioOutputDevice(e7, t3) {
+            setAudioOutputDevice(e7, t4) {
               return function(n3, s6, d5) {
                 return b6(n3, { id: d5, kind: "audiooutput", label: s6 });
-              }(this._transport, e7, t3);
+              }(this._transport, e7, t4);
             }
             setLargeVideoParticipant(e7) {
               this.executeCommand("setLargeVideoParticipant", e7);
             }
-            setVideoInputDevice(e7, t3) {
+            setVideoInputDevice(e7, t4) {
               return function(n3, s6, d5) {
                 return b6(n3, { id: d5, kind: "videoinput", label: s6 });
-              }(this._transport, e7, t3);
+              }(this._transport, e7, t4);
             }
             startRecording(e7) {
               this.executeCommand("startRecording", e7);
@@ -12838,9 +12858,9 @@ var init_page_svelte2 = __esm({
               this.executeCommand("toggleE2EE", e7);
             }
             async setMediaEncryptionKey(e7) {
-              const { key: t3, index: n3 } = e7;
-              if (t3) {
-                const s6 = await crypto.subtle.exportKey("raw", t3);
+              const { key: t4, index: n3 } = e7;
+              if (t4) {
+                const s6 = await crypto.subtle.exportKey("raw", t4);
                 this.executeCommand("setMediaEncryptionKey", JSON.stringify({ exportedKey: Array.from(new Uint8Array(s6)), index: n3 }));
               } else
                 this.executeCommand("setMediaEncryptionKey", JSON.stringify({ exportedKey: false, index: n3 }));
@@ -13002,12 +13022,12 @@ var init_page_svelte2 = __esm({
           L5.exports = l3, L5.exports.once = function(r6, a4) {
             return new Promise(function(c4, m7) {
               function _6(b6) {
-                r6.removeListener(a4, y5), m7(b6);
+                r6.removeListener(a4, y6), m7(b6);
               }
-              function y5() {
+              function y6() {
                 typeof r6.removeListener == "function" && r6.removeListener("error", _6), c4([].slice.call(arguments));
               }
-              U4(r6, a4, y5, { once: true }), a4 !== "error" && function(b6, O5, I5) {
+              U4(r6, a4, y6, { once: true }), a4 !== "error" && function(b6, O5, I5) {
                 typeof b6.on == "function" && U4(b6, "error", O5, { once: true });
               }(r6, _6);
             });
@@ -13021,10 +13041,10 @@ var init_page_svelte2 = __esm({
             return r6._maxListeners === void 0 ? l3.defaultMaxListeners : r6._maxListeners;
           }
           function f7(r6, a4, c4, m7) {
-            var _6, y5, b6, O5;
-            if (o5(c4), (y5 = r6._events) === void 0 ? (y5 = r6._events = /* @__PURE__ */ Object.create(null), r6._eventsCount = 0) : (y5.newListener !== void 0 && (r6.emit("newListener", a4, c4.listener ? c4.listener : c4), y5 = r6._events), b6 = y5[a4]), b6 === void 0)
-              b6 = y5[a4] = c4, ++r6._eventsCount;
-            else if (typeof b6 == "function" ? b6 = y5[a4] = m7 ? [c4, b6] : [b6, c4] : m7 ? b6.unshift(c4) : b6.push(c4), (_6 = g5(r6)) > 0 && b6.length > _6 && !b6.warned) {
+            var _6, y6, b6, O5;
+            if (o5(c4), (y6 = r6._events) === void 0 ? (y6 = r6._events = /* @__PURE__ */ Object.create(null), r6._eventsCount = 0) : (y6.newListener !== void 0 && (r6.emit("newListener", a4, c4.listener ? c4.listener : c4), y6 = r6._events), b6 = y6[a4]), b6 === void 0)
+              b6 = y6[a4] = c4, ++r6._eventsCount;
+            else if (typeof b6 == "function" ? b6 = y6[a4] = m7 ? [c4, b6] : [b6, c4] : m7 ? b6.unshift(c4) : b6.push(c4), (_6 = g5(r6)) > 0 && b6.length > _6 && !b6.warned) {
               b6.warned = true;
               var I5 = new Error("Possible EventEmitter memory leak detected. " + b6.length + " " + String(a4) + " listeners added. Use emitter.setMaxListeners() to increase limit");
               I5.name = "MaxListenersExceededWarning", I5.emitter = r6, I5.type = a4, I5.count = b6.length, O5 = I5, console && console.warn && console.warn(O5);
@@ -13044,9 +13064,9 @@ var init_page_svelte2 = __esm({
             if (m7 === void 0)
               return [];
             var _6 = m7[a4];
-            return _6 === void 0 ? [] : typeof _6 == "function" ? c4 ? [_6.listener || _6] : [_6] : c4 ? function(y5) {
-              for (var b6 = new Array(y5.length), O5 = 0; O5 < b6.length; ++O5)
-                b6[O5] = y5[O5].listener || y5[O5];
+            return _6 === void 0 ? [] : typeof _6 == "function" ? c4 ? [_6.listener || _6] : [_6] : c4 ? function(y6) {
+              for (var b6 = new Array(y6.length), O5 = 0; O5 < b6.length; ++O5)
+                b6[O5] = y6[O5].listener || y6[O5];
               return b6;
             }(_6) : B4(_6, _6.length);
           }
@@ -13072,8 +13092,8 @@ var init_page_svelte2 = __esm({
             else {
               if (typeof r6.addEventListener != "function")
                 throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof r6);
-              r6.addEventListener(a4, function _6(y5) {
-                m7.once && r6.removeEventListener(a4, _6), c4(y5);
+              r6.addEventListener(a4, function _6(y6) {
+                m7.once && r6.removeEventListener(a4, _6), c4(y6);
               });
             }
           }
@@ -13100,11 +13120,11 @@ var init_page_svelte2 = __esm({
             else if (!m7)
               return false;
             if (m7) {
-              var y5;
-              if (a4.length > 0 && (y5 = a4[0]), y5 instanceof Error)
-                throw y5;
-              var b6 = new Error("Unhandled error." + (y5 ? " (" + y5.message + ")" : ""));
-              throw b6.context = y5, b6;
+              var y6;
+              if (a4.length > 0 && (y6 = a4[0]), y6 instanceof Error)
+                throw y6;
+              var b6 = new Error("Unhandled error." + (y6 ? " (" + y6.message + ")" : ""));
+              throw b6.context = y6, b6;
             }
             var O5 = _6[r6];
             if (O5 === void 0)
@@ -13126,7 +13146,7 @@ var init_page_svelte2 = __esm({
           }, l3.prototype.prependOnceListener = function(r6, a4) {
             return o5(a4), this.prependListener(r6, C4(this, r6, a4)), this;
           }, l3.prototype.removeListener = function(r6, a4) {
-            var c4, m7, _6, y5, b6;
+            var c4, m7, _6, y6, b6;
             if (o5(a4), (m7 = this._events) === void 0)
               return this;
             if ((c4 = m7[r6]) === void 0)
@@ -13134,9 +13154,9 @@ var init_page_svelte2 = __esm({
             if (c4 === a4 || c4.listener === a4)
               --this._eventsCount == 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete m7[r6], m7.removeListener && this.emit("removeListener", r6, c4.listener || a4));
             else if (typeof c4 != "function") {
-              for (_6 = -1, y5 = c4.length - 1; y5 >= 0; y5--)
-                if (c4[y5] === a4 || c4[y5].listener === a4) {
-                  b6 = c4[y5].listener, _6 = y5;
+              for (_6 = -1, y6 = c4.length - 1; y6 >= 0; y6--)
+                if (c4[y6] === a4 || c4[y6].listener === a4) {
+                  b6 = c4[y6].listener, _6 = y6;
                   break;
                 }
               if (_6 < 0)
@@ -13155,9 +13175,9 @@ var init_page_svelte2 = __esm({
             if (c4.removeListener === void 0)
               return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : c4[r6] !== void 0 && (--this._eventsCount == 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete c4[r6]), this;
             if (arguments.length === 0) {
-              var _6, y5 = Object.keys(c4);
-              for (m7 = 0; m7 < y5.length; ++m7)
-                (_6 = y5[m7]) !== "removeListener" && this.removeAllListeners(_6);
+              var _6, y6 = Object.keys(c4);
+              for (m7 = 0; m7 < y6.length; ++m7)
+                (_6 = y6[m7]) !== "removeListener" && this.removeAllListeners(_6);
               return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
             }
             if (typeof (a4 = c4[r6]) == "function")
@@ -13204,7 +13224,12 @@ var init_page_svelte2 = __esm({
       let v7, p7;
       return p7 = x(d2, (w5) => v7 = w5), A(() => {
         T(d2, v7 = false, v7), window.document.body.classList.remove("dark-mode");
-      }), p7(), `${G(ve4, "JitsiUser").$$render(G3, {}, {}, {})}`;
+      }), p7(), `
+
+
+
+
+${G(ve4, "JitsiUser").$$render(G3, {}, {}, {})}`;
     });
   }
 });
@@ -13217,17 +13242,17 @@ __export(__exports4, {
   fonts: () => fonts4,
   imports: () => imports4,
   index: () => index4,
-  shared: () => page_exports,
+  shared: () => page_exports2,
   stylesheets: () => stylesheets4
 });
 var index4, component4, file4, imports4, stylesheets4, fonts4;
 var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
-    init_page();
+    init_page2();
     index4 = 3;
     component4 = async () => (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
-    file4 = "_app/immutable/components/pages/classroom/_page.svelte-154b4ae3.js";
-    imports4 = ["_app/immutable/components/pages/classroom/_page.svelte-154b4ae3.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/navigation-3ed869d7.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/modules/pages/classroom/_page.js-88ede70c.js", "_app/immutable/chunks/_page-372e4857.js"];
+    file4 = "_app/immutable/components/pages/classroom/_page.svelte-05f1029d.js";
+    imports4 = ["_app/immutable/components/pages/classroom/_page.svelte-05f1029d.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/navigation-3ed869d7.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/modules/pages/classroom/_page.js-88ede70c.js", "_app/immutable/chunks/_page-372e4857.js"];
     stylesheets4 = [];
     fonts4 = [];
   }
@@ -13243,16 +13268,16 @@ var init_page_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/classroomA/_page.svelte.js"() {
     init_chunks();
     init_store();
-    c2 = I((t3, n3, o5, l3) => {
+    c2 = I((t4, n3, o5, l3) => {
       let s6, e7;
-      return e7 = x(A4, (d5) => s6 = d5), e7(), `${t3.head += '<!-- HEAD_svelte-1pkind7_START --><script src="https://meet.jit.si/external_api.js"><\/script><!-- HEAD_svelte-1pkind7_END -->', ""}
+      return e7 = x(A4, (d5) => s6 = d5), e7(), `${t4.head += '<!-- HEAD_svelte-1pkind7_START --><script src="https://meet.jit.si/external_api.js"><\/script><!-- HEAD_svelte-1pkind7_END -->', ""}
 
 <div class="relative md:-translate-y-10 -translate-y-32 "><div id="meet" class="w-full h-[95vh] md:h-[670px]"></div>
   <button><img alt="hangup button" class="${"bg-gray-600 p-2 absolute brightness-50 " + j("opacity-0", true) + " " + j(s6 ? "top-5 right-5 " : "bottom-5 right-10 ", true) + " flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0 hover:bg-red-500"}"></button></div>`;
     });
-    m3 = I((t3, n3, o5, l3) => {
+    m3 = I((t4, n3, o5, l3) => {
       let s6;
-      return s6 = x(d2, (e7) => e7), s6(), `${G(c2, "JitsiUserAdmin").$$render(t3, {}, {}, {})}`;
+      return s6 = x(d2, (e7) => e7), s6(), `${G(c2, "JitsiUserAdmin").$$render(t4, {}, {}, {})}`;
     });
   }
 });
@@ -13272,8 +13297,8 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
-    file5 = "_app/immutable/components/pages/classroomA/_page.svelte-69555f0c.js";
-    imports5 = ["_app/immutable/components/pages/classroomA/_page.svelte-69555f0c.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js"];
+    file5 = "_app/immutable/components/pages/classroomA/_page.svelte-7c246ec8.js";
+    imports5 = ["_app/immutable/components/pages/classroomA/_page.svelte-7c246ec8.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js"];
     stylesheets5 = [];
     fonts5 = [];
   }
@@ -13290,7 +13315,7 @@ var init_page_svelte4 = __esm({
     init_chunks();
     init_store();
     r = { code: ".faqContainer.svelte-1yyztah.svelte-1yyztah{display:grid;place-content:center}:root{--light-green:rgb(230, 255, 249);--green:rgb(89, 208, 174);--red:rgb(230, 59, 96);--light-red:rgb(243, 186, 198);--borderRadius:15px}@keyframes svelte-1yyztah-sweep{0%{opacity:0;margin-top:-15px}100%{opacity:1;margin-top:0px}}details.svelte-1yyztah>summary.svelte-1yyztah{list-style:none}details.svelte-1yyztah>summary.svelte-1yyztah::-webkit-details-marker{display:none}details.svelte-1yyztah.svelte-1yyztah{font-family:Nunito, sans-serif;border:0px solid #eee;border-radius:var(--borderRadius);padding:0.5em 0.5em 0;font-size:18px}@media screen and (min-width: 768px){details.svelte-1yyztah.svelte-1yyztah{width:60vw}}@media screen and (max-width: 768px){details.svelte-1yyztah.svelte-1yyztah{width:80vw}}summary.svelte-1yyztah.svelte-1yyztah{margin:-0.5em -0.5em 0;padding:0.5em;border-radius:var(--borderRadius) var(--borderRadius) 0 0}details.svelte-1yyztah.svelte-1yyztah:hover{background:#ddd}body.dark-mode details.svelte-1yyztah.svelte-1yyztah:hover{background:#211f51}details.svelte-1yyztah p.svelte-1yyztah{padding:10px}details.svelte-1yyztah a.svelte-1yyztah{color:var(--red)}details.svelte-1yyztah a.svelte-1yyztah:hover{color:rgb(46, 126, 253)}details[open].svelte-1yyztah.svelte-1yyztah{padding:0.5em;background:var(--light-green);animation:svelte-1yyztah-sweep 0.25s ease-in-out;margin-bottom:10px}body.dark-mode details[open].svelte-1yyztah.svelte-1yyztah{background:var(--light-green);color:black}details[open].svelte-1yyztah summary.svelte-1yyztah{border-bottom:1px solid #aaa;margin-bottom:0.5em;background-color:var(--green);outline:none}details[open].svelte-1yyztah summary.highlight.svelte-1yyztah{background:var(--red);color:white;transition:0.2s ease-in-out}details[open].svelte-1yyztah.svelte-1yyztah:has(summary.highlight){background:var(--light-red);transition:0.2s ease-in-out}", map: null };
-    m4 = I((o5, y5, d5, c4) => {
+    m4 = I((o5, y6, d5, c4) => {
       let s6, a4;
       return s6 = x(B2, (e7) => e7), a4 = x(P, (e7) => e7), o5.css.add(r), s6(), a4(), `
 
@@ -13403,8 +13428,8 @@ var init__6 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     index6 = 5;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
-    file6 = "_app/immutable/components/pages/faq/_page.svelte-b9df6fe9.js";
-    imports6 = ["_app/immutable/components/pages/faq/_page.svelte-b9df6fe9.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js"];
+    file6 = "_app/immutable/components/pages/faq/_page.svelte-c683a0e1.js";
+    imports6 = ["_app/immutable/components/pages/faq/_page.svelte-c683a0e1.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js"];
     stylesheets6 = ["_app/immutable/assets/_page-e302df05.css"];
     fonts6 = [];
   }
@@ -13420,7 +13445,7 @@ var init_page_svelte5 = __esm({
   ".svelte-kit/output/server/entries/pages/homework/_page.svelte.js"() {
     init_chunks();
     init_DropzoneOpener();
-    m5 = I((e7, p7, t3, s6) => `${G(w4, "DropzoneOpener").$$render(e7, {}, {}, {})}`);
+    m5 = I((e7, p7, t4, s6) => `${G(w4, "DropzoneOpener").$$render(e7, {}, {}, {})}`);
   }
 });
 
@@ -13439,20 +13464,20 @@ var init__7 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     index7 = 6;
     component7 = async () => (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
-    file7 = "_app/immutable/components/pages/homework/_page.svelte-c1e97cb0.js";
-    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-c1e97cb0.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/DropzoneOpener-d863ad0c.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js"];
+    file7 = "_app/immutable/components/pages/homework/_page.svelte-7bc73e4e.js";
+    imports7 = ["_app/immutable/components/pages/homework/_page.svelte-7bc73e4e.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/DropzoneOpener-a8947dc4.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js"];
     stylesheets7 = [];
     fonts7 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/katex/_page.js
-var page_exports2 = {};
-__export(page_exports2, {
+var page_exports3 = {};
+__export(page_exports3, {
   prerender: () => e2
 });
 var e2;
-var init_page2 = __esm({
+var init_page3 = __esm({
   ".svelte-kit/output/server/entries/pages/katex/_page.js"() {
     e2 = false;
   }
@@ -14133,7 +14158,7 @@ function sizingGroup(value, options, baseOptions) {
   }
   return buildCommon.makeFragment(inner2);
 }
-var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D5, Dc, T4, Tc, S4, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i4, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
+var SourceLocation, Token, ParseError, contains, deflt, uppercase, hyphenate, ESCAPE_LOOKUP, ESCAPE_REGEX, getBaseElem, isCharacterBox, assert, protocolFromUrl, utils, SETTINGS_SCHEMA, Settings, Style, D4, Dc, T4, Tc, S4, Sc, SS, SSc, styles, sup, sub, fracNum, fracDen, cramp, text$1, Style$1, scriptData, allBlocks, hLinePad, sqrtMain, sqrtSize1, sqrtSize2, sqrtSize3, sqrtSize4, phasePath, sqrtTall, sqrtPath, innerPath, path, tallDelim, DocumentFragment, fontMetricsData, sigmasAndXis, extraCharacterMap, fontMetricsBySizeIndex, sizeStyleMap, sizeMultipliers, sizeAtStyle, Options, ptPerUnit, relativeUnit, validUnit, calculateSize, makeEm, createClass, initNode, toNode, toMarkup, Span, Anchor, Img, iCombinations, SymbolNode, SvgNode, PathNode, LineNode, ATOMS, NON_ATOMS, symbols, math, text, main, ams, accent, bin, close, inner, mathord, op, open, punct, rel, spacing, textord, ligatures, mathTextSymbols, ch, i4, textSymbols, _ch, _i, letters, _ch2, _i2, wideChar, _ch3, _i3, _ch4, _i4, extraLatin, _ch5, _i5, wideLatinLetterData, wideNumeralData, wideCharacterFont, lookupSymbol, makeSymbol, mathsym, boldsymbol, makeOrd, canCombine, tryCombineChars, sizeElementFromChildren, makeSpan$2, makeSvgSpan, makeLineSpan, makeAnchor, makeFragment, wrapFragment, getVListChildrenAndDepth, makeVList, makeGlue, retrieveTextFontName, fontMap, svgData, staticSvg, buildCommon, thinspace, mediumspace, thickspace, spacings, tightSpacings, _functions, _htmlGroupBuilders, _mathmlGroupBuilders, normalizeArgument, ordargument, makeSpan$1, binLeftCanceller, binRightCanceller, styleMap$1, DomEnum, buildExpression$1, traverseNonSpaceNodes, checkPartialGroup, getOutermostNode, getTypeOfDomTree, makeNullDelimiter, buildGroup$1, MathNode, TextNode, SpaceNode, mathMLTree, makeText, makeRow, getVariant, buildExpression2, buildExpressionRow, buildGroup2, optionsFromSettings, displayWrap, buildTree, buildHTMLTree, stretchyCodePoint, mathMLnode, katexImagesData, groupLength, svgSpan, encloseSpan, stretchy, htmlBuilder$a, mathmlBuilder$9, NON_STRETCHY_ACCENT_REGEX, paddedNode, makeSpan2, binrelClass, cdArrowFunctionName, newCell, isStartOfArrow, isLabelEnd, htmlBuilder$8, mathmlBuilder$7, globalMap, checkControlSequence, getRHS, letCommand, getMetrics, styleWrap, centerSpan, makeSmallDelim, mathrmSize, makeLargeDelim, makeGlyphSpan, makeInner, lapInEms, lap, verts, doubleVerts, makeStackedDelim, vbPad, emPad, sqrtSvg, makeSqrtImage, stackLargeDelimiters, stackAlwaysDelimiters, stackNeverDelimiters, sizeToMaxHeight, makeSizedDelim, stackNeverDelimiterSequence, stackAlwaysDelimiterSequence, stackLargeDelimiterSequence, delimTypeToFont, traverseSequence, makeCustomSizedDelim, makeLeftRightDelim, delimiter, delimiterSizes, delimiters, htmlBuilder$7, mathmlBuilder$6, _environments, _macros, validateAmsEnvironmentContext, htmlBuilder$6, alignMap, mathmlBuilder$5, alignedHandler, environments, htmlBuilder$5, mathmlBuilder$4, fontAliases, adjustStyle, htmlBuilder$4, mathmlBuilder$3, stylArray, delimFromValue, htmlBuilder$3, mathmlBuilder$2, sizeData, chooseMathStyle, assembleSupSub, noSuccessor, htmlBuilder$2, mathmlBuilder$1, singleCharBigOps, singleCharIntegrals, htmlBuilder$1, mathmlBuilder2, sizeFuncs, htmlBuilder2, styleMap, htmlBuilderDelegate, defaultVariant, cssSpace, regularSpace, pad, textFontFamilies, textFontWeights, textFontShapes, optionsWithFont, makeVerb, functions, spaceRegexString, controlWordRegexString, controlSymbolRegexString, controlWordWhitespaceRegexString, controlSpaceRegexString, combiningDiacriticalMarkString, combiningDiacriticalMarksEndRegex, tokenRegexString, Lexer, Namespace, macros, digitToNumber, newcommand, dotsByToken, spaceAfterDots, latexRaiseA, braketHelper, implicitCommands, MacroExpander, unicodeSubRegEx, uSubsAndSups, unicodeAccents, unicodeSymbols, Parser, parseTree, render, renderToString, generateParseTree, renderError, renderToDomTree, renderToHTMLTree, katex;
 var init_katex = __esm({
   "node_modules/katex/dist/katex.mjs"() {
     SourceLocation = class {
@@ -14313,7 +14338,7 @@ var init_katex = __esm({
       minRuleThickness: {
         type: "number",
         description: "Specifies a minimum thickness, in ems, for fraction lines, `\\sqrt` top lines, `{array}` vertical lines, `\\hline`, `\\hdashline`, `\\underline`, `\\overline`, and the borders of `\\fbox`, `\\boxed`, and `\\fcolorbox`.",
-        processor: (t3) => Math.max(0, t3),
+        processor: (t4) => Math.max(0, t4),
         cli: "--min-rule-thickness <size>",
         cliProcessor: parseFloat
       },
@@ -14455,7 +14480,7 @@ var init_katex = __esm({
         return this.size >= 2;
       }
     };
-    D5 = 0;
+    D4 = 0;
     Dc = 1;
     T4 = 2;
     Tc = 3;
@@ -14463,15 +14488,15 @@ var init_katex = __esm({
     Sc = 5;
     SS = 6;
     SSc = 7;
-    styles = [new Style(D5, 0, false), new Style(Dc, 0, true), new Style(T4, 1, false), new Style(Tc, 1, true), new Style(S4, 2, false), new Style(Sc, 2, true), new Style(SS, 3, false), new Style(SSc, 3, true)];
+    styles = [new Style(D4, 0, false), new Style(Dc, 0, true), new Style(T4, 1, false), new Style(Tc, 1, true), new Style(S4, 2, false), new Style(Sc, 2, true), new Style(SS, 3, false), new Style(SSc, 3, true)];
     sup = [S4, Sc, S4, Sc, SS, SSc, SS, SSc];
     sub = [Sc, Sc, Sc, Sc, SSc, SSc, SSc, SSc];
     fracNum = [T4, Tc, S4, Sc, SS, SSc, SS, SSc];
     fracDen = [Tc, Tc, Sc, Sc, SSc, SSc, SSc, SSc];
     cramp = [Dc, Dc, Tc, Tc, Sc, Sc, SSc, SSc];
-    text$1 = [D5, Dc, T4, Tc, T4, Tc, T4, Tc];
+    text$1 = [D4, Dc, T4, Tc, T4, Tc, T4, Tc];
     Style$1 = {
-      DISPLAY: styles[D5],
+      DISPLAY: styles[D4],
       TEXT: styles[T4],
       SCRIPT: styles[S4],
       SCRIPTSCRIPT: styles[SS]
@@ -14523,9 +14548,9 @@ var init_katex = __esm({
     sqrtSize4 = function sqrtSize42(extraViniculum, hLinePad2) {
       return "M473," + (2713 + extraViniculum + hLinePad2) + "\nc339.3,-1799.3,509.3,-2700,510,-2702 l" + extraViniculum / 5.298 + " -" + extraViniculum + "\nc3.3,-7.3,9.3,-11,18,-11 H400000v" + (40 + extraViniculum) + "H1017.7\ns-90.5,478,-276.2,1466c-185.7,988,-279.5,1483,-281.5,1485c-2,6,-10,9,-24,9\nc-8,0,-12,-0.7,-12,-2c0,-1.3,-5.3,-32,-16,-92c-50.7,-293.3,-119.7,-693.3,-207,-1200\nc0,-1.3,-5.3,8.7,-16,30c-10.7,21.3,-21.3,42.7,-32,64s-16,33,-16,33s-26,-26,-26,-26\ns76,-153,76,-153s77,-151,77,-151c0.7,0.7,35.7,202,105,604c67.3,400.7,102,602.7,104,\n606zM" + (1001 + extraViniculum) + " " + hLinePad2 + "h400000v" + (40 + extraViniculum) + "H1017.7z";
     };
-    phasePath = function phasePath2(y5) {
-      var x5 = y5 / 2;
-      return "M400000 " + y5 + " H0 L" + x5 + " 0 l65 45 L145 " + (y5 - 80) + " H400000z";
+    phasePath = function phasePath2(y6) {
+      var x5 = y6 / 2;
+      return "M400000 " + y6 + " H0 L" + x5 + " 0 l65 45 L145 " + (y6 - 80) + " H400000z";
     };
     sqrtTall = function sqrtTall2(extraViniculum, hLinePad2, viewBoxHeight) {
       var vertSegment = viewBoxHeight - 54 - hLinePad2 - extraViniculum;
@@ -24900,21 +24925,21 @@ var init_katex = __esm({
     };
     macros = _macros;
     defineMacro("\\noexpand", function(context) {
-      var t3 = context.popToken();
-      if (context.isExpandable(t3.text)) {
-        t3.noexpand = true;
-        t3.treatAsRelax = true;
+      var t4 = context.popToken();
+      if (context.isExpandable(t4.text)) {
+        t4.noexpand = true;
+        t4.treatAsRelax = true;
       }
       return {
-        tokens: [t3],
+        tokens: [t4],
         numArgs: 0
       };
     });
     defineMacro("\\expandafter", function(context) {
-      var t3 = context.popToken();
+      var t4 = context.popToken();
       context.expandOnce(true);
       return {
-        tokens: [t3],
+        tokens: [t4],
         numArgs: 0
       };
     });
@@ -27145,17 +27170,17 @@ __export(__exports8, {
   fonts: () => fonts8,
   imports: () => imports8,
   index: () => index8,
-  shared: () => page_exports2,
+  shared: () => page_exports3,
   stylesheets: () => stylesheets8
 });
 var index8, component8, file8, imports8, stylesheets8, fonts8;
 var init__8 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
-    init_page2();
+    init_page3();
     index8 = 7;
     component8 = async () => (await Promise.resolve().then(() => (init_page_svx(), page_svx_exports))).default;
-    file8 = "_app/immutable/components/pages/katex/_page.svx-322e85da.js";
-    imports8 = ["_app/immutable/components/pages/katex/_page.svx-322e85da.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/modules/pages/katex/_page.js-a31abf09.js", "_app/immutable/chunks/_page-31205051.js"];
+    file8 = "_app/immutable/components/pages/katex/_page.svx-2bbaa76e.js";
+    imports8 = ["_app/immutable/components/pages/katex/_page.svx-2bbaa76e.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/modules/pages/katex/_page.js-a31abf09.js", "_app/immutable/chunks/_page-31205051.js"];
     stylesheets8 = [];
     fonts8 = [];
   }
@@ -27171,7 +27196,7 @@ var init_page_svelte6 = __esm({
   ".svelte-kit/output/server/entries/pages/login/_page.svelte.js"() {
     init_chunks();
     init_LoginCard();
-    p5 = I((o5, e7, t3, s6) => (console.log("back in black!"), `
+    p5 = I((o5, e7, t4, s6) => (console.log("back in black!"), `
 
 
 ${G(te3, "LoginCard").$$render(o5, { noTransition: true }, {}, {})}`));
@@ -27193,20 +27218,20 @@ var init__9 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     index9 = 8;
     component9 = async () => (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
-    file9 = "_app/immutable/components/pages/login/_page.svelte-8a45ddc0.js";
-    imports9 = ["_app/immutable/components/pages/login/_page.svelte-8a45ddc0.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/LoginCard-6efa79c3.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/firebase-cb9dba95.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/navigation-3ed869d7.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/utils-98cd377c.js"];
+    file9 = "_app/immutable/components/pages/login/_page.svelte-342712fc.js";
+    imports9 = ["_app/immutable/components/pages/login/_page.svelte-342712fc.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/LoginCard-774ff023.js", "_app/immutable/chunks/preload-helper-9b728935.js", "_app/immutable/chunks/firebase-cb9dba95.js", "_app/immutable/chunks/public-e0b14f20.js", "_app/immutable/chunks/navigation-3ed869d7.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/utils-98cd377c.js"];
     stylesheets9 = ["_app/immutable/assets/LoginCard-b78ac858.css"];
     fonts9 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/math/_page.js
-var page_exports3 = {};
-__export(page_exports3, {
+var page_exports4 = {};
+__export(page_exports4, {
   prerender: () => e3
 });
 var e3;
-var init_page3 = __esm({
+var init_page4 = __esm({
   ".svelte-kit/output/server/entries/pages/math/_page.js"() {
     e3 = false;
   }
@@ -27218,9 +27243,9 @@ var init_Kajax = __esm({
   ".svelte-kit/output/server/chunks/Kajax.js"() {
     init_chunks();
     init_katex();
-    r3 = I((t3, e7, a4, c4) => `
+    r3 = I((t4, e7, a4, c4) => `
 
-${t3.head += `<!-- HEAD_svelte-15ncbow_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous"><script>MathJax = {
+${t4.head += `<!-- HEAD_svelte-15ncbow_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous"><script>MathJax = {
       // startup: { typeset: false },
       // startup: { elements: ["[m]"] },
       loader: { load: ["[tex]/physics", "[tex]/cancel"] },
@@ -27254,27 +27279,27 @@ var init_page_svx2 = __esm({
     init_store();
     init_Kajax();
     f4 = I((p7, i4, l3, v7) => {
-      let t3, { d: s6 = false } = i4, { m: n3 } = i4;
+      let t4, { d: s6 = false } = i4, { m: n3 } = i4;
       const e7 = { displayMode: s6, throwOnError: false };
-      return i4.d === void 0 && l3.d && s6 !== void 0 && l3.d(s6), i4.m === void 0 && l3.m && n3 !== void 0 && l3.m(n3), t3 = katex.renderToString(n3, e7), `${p7.head += '<!-- HEAD_svelte-bnfb8z_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><!-- HEAD_svelte-bnfb8z_END -->', ""}
+      return i4.d === void 0 && l3.d && s6 !== void 0 && l3.d(s6), i4.m === void 0 && l3.m && n3 !== void 0 && l3.m(n3), t4 = katex.renderToString(n3, e7), `${p7.head += '<!-- HEAD_svelte-bnfb8z_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><!-- HEAD_svelte-bnfb8z_END -->', ""}
 
-<!-- HTML_TAG_START -->${t3}<!-- HTML_TAG_END -->`;
+<!-- HTML_TAG_START -->${t4}<!-- HTML_TAG_END -->`;
     });
     k4 = I((p7, i4, l3, v7) => {
-      let t3, s6;
-      s6 = x(d2, (e7) => t3 = e7);
+      let t4, s6;
+      s6 = x(d2, (e7) => t4 = e7);
       let n3 = ["\\int_{M}d\\omega=\\int_{\\partial M}\\omega", "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}", " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ", "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}", "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c", "e^{i x}=\\cos x+i\\sin x"];
       return s6(), `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full">${D(n3, (e7, o5) => `
-    <p${M("class", t3 ? "text-blue-100" : "text-indigo-900", 0)}>${G(f4, "K").$$render(p7, { d: true, m: e7 }, {}, {})}
+    <p${M("class", t4 ? "text-blue-100" : "text-indigo-900", 0)}>${G(f4, "K").$$render(p7, { d: true, m: e7 }, {}, {})}
     </p>`)}</div>`;
     });
     d4 = 1e3;
     T5 = 1;
     L4 = I((p7, i4, l3, v7) => {
-      let t3, s6, n3, e7, o5;
+      let t4, s6, n3, e7, o5;
       o5 = x(d2, (h2) => e7 = h2);
       let b6 = ["\\int_{M}d\\omega=\\int_{\\partial M}\\omega", "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}", " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ", "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}", "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"], c4 = 2;
-      return t3 = d4, s6 = T5, n3 = e7 ? "prose-invert" : "", o5(), `${G(r3, "Kajax").$$render(p7, {}, {}, {})}
+      return t4 = d4, s6 = T5, n3 = e7 ? "prose-invert" : "", o5(), `${G(r3, "Kajax").$$render(p7, {}, {}, {})}
 
 
 <article class="${"prose lg:prose-lg " + j(n3, true)}"><p>ayo</p>
@@ -27306,13 +27331,13 @@ ${D(Array(s6), (h2, g5) => `<p>${j(g5 + 1)}</p>
 <div class="math math-display"><!-- HTML_TAG_START --><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><!-- HTML_TAG_END --></div>`)}
 
 <ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
-<input type="number" min="1"${M("max", d4, 0)}${M("value", t3, 0)}>
-<input type="range" min="1"${M("max", d4, 0)}${M("value", t3, 0)}>
-${D(Array(t3), (h2, g5) => `<p>${j(g5 + 1)}</p>
+<input type="number" min="1"${M("max", d4, 0)}${M("value", t4, 0)}>
+<input type="range" min="1"${M("max", d4, 0)}${M("value", t4, 0)}>
+${D(Array(t4), (h2, g5) => `<p>${j(g5 + 1)}</p>
         <p class="p-1 text-indigo-700" d${M("m", "\\cancelto{0}{\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}}", 0)}></p>
         <p class="p-1 text-green-700" d${M("k", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
-    ${D(b6, (y5, z6) => `<div><p class="p-1 text-indigo-700" d${M("k", y5, 0)}></p>
-        <p class="p-1 text-green-700" d${M("m", y5, 0)}></p>
+    ${D(b6, (y6, z6) => `<div><p class="p-1 text-indigo-700" d${M("k", y6, 0)}></p>
+        <p class="p-1 text-green-700" d${M("m", y6, 0)}></p>
     </div>`)}`)}</article>
 
 `;
@@ -27328,29 +27353,29 @@ __export(__exports10, {
   fonts: () => fonts10,
   imports: () => imports10,
   index: () => index10,
-  shared: () => page_exports3,
+  shared: () => page_exports4,
   stylesheets: () => stylesheets10
 });
 var index10, component10, file10, imports10, stylesheets10, fonts10;
 var init__10 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
-    init_page3();
+    init_page4();
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
-    file10 = "_app/immutable/components/pages/math/_page.svx-e56c7894.js";
-    imports10 = ["_app/immutable/components/pages/math/_page.svx-e56c7894.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/Kajax-393be6cf.js", "_app/immutable/modules/pages/math/_page.js-14be9830.js", "_app/immutable/chunks/_page-bb20c550.js"];
+    file10 = "_app/immutable/components/pages/math/_page.svx-c0a9f51f.js";
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-c0a9f51f.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/index-335ddf2a.js", "_app/immutable/chunks/Kajax-393be6cf.js", "_app/immutable/modules/pages/math/_page.js-14be9830.js", "_app/immutable/chunks/_page-bb20c550.js"];
     stylesheets10 = [];
     fonts10 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/mathjax/_page.js
-var page_exports4 = {};
-__export(page_exports4, {
+var page_exports5 = {};
+__export(page_exports5, {
   prerender: () => e4
 });
 var e4;
-var init_page4 = __esm({
+var init_page5 = __esm({
   ".svelte-kit/output/server/entries/pages/mathjax/_page.js"() {
     e4 = false;
   }
@@ -27408,29 +27433,29 @@ __export(__exports11, {
   fonts: () => fonts11,
   imports: () => imports11,
   index: () => index11,
-  shared: () => page_exports4,
+  shared: () => page_exports5,
   stylesheets: () => stylesheets11
 });
 var index11, component11, file11, imports11, stylesheets11, fonts11;
 var init__11 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
-    init_page4();
+    init_page5();
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
-    file11 = "_app/immutable/components/pages/mathjax/_page.svx-313ba8fe.js";
-    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-313ba8fe.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/modules/pages/mathjax/_page.js-3702a9a4.js", "_app/immutable/chunks/_page-2bbebd99.js"];
+    file11 = "_app/immutable/components/pages/mathjax/_page.svx-6889763b.js";
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-6889763b.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/modules/pages/mathjax/_page.js-3702a9a4.js", "_app/immutable/chunks/_page-2bbebd99.js"];
     stylesheets11 = [];
     fonts11 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/physics/_page.js
-var page_exports5 = {};
-__export(page_exports5, {
+var page_exports6 = {};
+__export(page_exports6, {
   prerender: () => e5
 });
 var e5;
-var init_page5 = __esm({
+var init_page6 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.js"() {
     e5 = false;
   }
@@ -27441,14 +27466,14 @@ var page_svelte_exports7 = {};
 __export(page_svelte_exports7, {
   default: () => f6
 });
-var y4, v6, f6;
+var y5, v6, f6;
 var init_page_svelte7 = __esm({
   ".svelte-kit/output/server/entries/pages/physics/_page.svelte.js"() {
     init_chunks();
     init_Kajax();
     init_store();
-    y4 = { code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}", map: null };
-    v6 = I((s6, m7, i4, r6) => (s6.css.add(y4), `${G(r3, "MathRenderer").$$render(s6, {}, {}, {})}
+    y5 = { code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}", map: null };
+    v6 = I((s6, m7, i4, r6) => (s6.css.add(y5), `${G(r3, "MathRenderer").$$render(s6, {}, {}, {})}
 
 <p class="text-3xl flex justify-center" d${M("m", "\\cancelto{0}{x}", 0)}></p>
 <p class="text-3xl flex justify-center" d${M("k", "\\cancel{x}", 0)}></p>
@@ -27518,8 +27543,8 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <li>D. 8.0 \u03A9</li></ul>
   <img style="margin: 0 auto; display:flex;width: 65vw;min-width: 280px;max-width: 600px;" src="https://raw.githubusercontent.com/brightowltutoring/web/main/circuits-1.png"></div>`));
     f6 = I((s6, m7, i4, r6) => {
-      let a4, n3, t3;
-      return t3 = x(d2, (c4) => n3 = c4), a4 = n3 ? "prose-invert" : "", t3(), `<div class="${"prose lg:prose-lg " + j(a4, true)}">${G(v6, "E").$$render(s6, {}, {}, {})}</div>`;
+      let a4, n3, t4;
+      return t4 = x(d2, (c4) => n3 = c4), a4 = n3 ? "prose-invert" : "", t4(), `<div class="${"prose lg:prose-lg " + j(a4, true)}">${G(v6, "E").$$render(s6, {}, {}, {})}</div>`;
     });
   }
 });
@@ -27532,17 +27557,17 @@ __export(__exports12, {
   fonts: () => fonts12,
   imports: () => imports12,
   index: () => index12,
-  shared: () => page_exports5,
+  shared: () => page_exports6,
   stylesheets: () => stylesheets12
 });
 var index12, component12, file12, imports12, stylesheets12, fonts12;
 var init__12 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
-    init_page5();
+    init_page6();
     index12 = 11;
     component12 = async () => (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
-    file12 = "_app/immutable/components/pages/physics/_page.svelte-6125994e.js";
-    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-6125994e.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/Kajax-393be6cf.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/modules/pages/physics/_page.js-96b3c396.js", "_app/immutable/chunks/_page-c633c0f5.js"];
+    file12 = "_app/immutable/components/pages/physics/_page.svelte-0b8ca868.js";
+    imports12 = ["_app/immutable/components/pages/physics/_page.svelte-0b8ca868.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/Kajax-393be6cf.js", "_app/immutable/chunks/katex-d33715d1.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/modules/pages/physics/_page.js-96b3c396.js", "_app/immutable/chunks/_page-c633c0f5.js"];
     stylesheets12 = ["_app/immutable/assets/_page-fcf51fa8.css"];
     fonts12 = [];
   }
@@ -27558,7 +27583,11 @@ var init_page_svelte8 = __esm({
   ".svelte-kit/output/server/entries/pages/plans/_page.svelte.js"() {
     init_chunks();
     init_PlansSection();
-    p6 = I((o5, r6, s6, a4) => `${G(D4, "PlansSection").$$render(o5, {}, {}, {})}
+    p6 = I((o5, r6, s6, a4) => `
+
+
+
+${G(D3, "PlansSection").$$render(o5, {}, {}, {})}
 
 
 
@@ -27583,8 +27612,8 @@ var init__13 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     index13 = 12;
     component13 = async () => (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
-    file13 = "_app/immutable/components/pages/plans/_page.svelte-c21a39b0.js";
-    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-c21a39b0.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/PlansSection-57c42d5d.js", "_app/immutable/chunks/Modal-1031958e.js", "_app/immutable/chunks/store-1ddd72d5.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/index-335ddf2a.js"];
+    file13 = "_app/immutable/components/pages/plans/_page.svelte-e36dfe8c.js";
+    imports13 = ["_app/immutable/components/pages/plans/_page.svelte-e36dfe8c.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/PlansSection-88759aa4.js", "_app/immutable/chunks/Modal-1031958e.js", "_app/immutable/chunks/store-b1dc85c2.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/index-335ddf2a.js"];
     stylesheets13 = [];
     fonts13 = [];
   }
@@ -27599,7 +27628,7 @@ var i2;
 var init_page_md = __esm({
   ".svelte-kit/output/server/entries/pages/samplequiz/_page.md.js"() {
     init_chunks();
-    i2 = I((e7, t3, a4, o5) => `
+    i2 = I((e7, t4, a4, o5) => `
 ${D(Array(1e3), ($3, n3) => `<div class="bg-red-100">
   </div>`)}`);
   }
@@ -27788,7 +27817,7 @@ var init_page_svelte9 = __esm({
     init_firebase();
     init_index_esm5();
     i3 = { code: '.loading.svelte-tci3t6:after{content:" . . .";animation:svelte-tci3t6-dots 1s steps(5, end) infinite}@keyframes svelte-tci3t6-dots{0%,40%{color:rgba(0, 0, 0, 0)}}', map: null };
-    m6 = I((t3, n3, c4, a4) => (getFunctions(E2), t3.css.add(i3), `${t3.head += `<!-- HEAD_svelte-1jxl9zf_START -->${t3.title = "<title>Stripe Checkout</title>", ""}<script src="https://js.stripe.com/v3/"><\/script><!-- HEAD_svelte-1jxl9zf_END -->`, ""}
+    m6 = I((t4, n3, c4, a4) => (getFunctions(E2), t4.css.add(i3), `${t4.head += `<!-- HEAD_svelte-1jxl9zf_START -->${t4.title = "<title>Stripe Checkout</title>", ""}<script src="https://js.stripe.com/v3/"><\/script><!-- HEAD_svelte-1jxl9zf_END -->`, ""}
 
 <main></main>
 
@@ -28235,16 +28264,16 @@ function stringify_primitive2(thing) {
 init_index2();
 var import_cookie = __toESM(require_cookie(), 1);
 var ue = __toESM(require_set_cookie(), 1);
-var Qe = I((e7, t3, r6, n3) => {
-  let { stores: s6 } = t3, { page: o5 } = t3, { components: a4 } = t3, { form: i4 } = t3, { data_0: c4 = null } = t3, { data_1: l3 = null } = t3;
-  return C("__svelte__", s6), s6.page.notify, t3.stores === void 0 && r6.stores && s6 !== void 0 && r6.stores(s6), t3.page === void 0 && r6.page && o5 !== void 0 && r6.page(o5), t3.components === void 0 && r6.components && a4 !== void 0 && r6.components(a4), t3.form === void 0 && r6.form && i4 !== void 0 && r6.form(i4), t3.data_0 === void 0 && r6.data_0 && c4 !== void 0 && r6.data_0(c4), t3.data_1 === void 0 && r6.data_1 && l3 !== void 0 && r6.data_1(l3), s6.page.set(o5), `
+var Qe = I((e7, t4, r6, n3) => {
+  let { stores: s6 } = t4, { page: o5 } = t4, { components: a4 } = t4, { form: i4 } = t4, { data_0: c4 = null } = t4, { data_1: l3 = null } = t4;
+  return C("__svelte__", s6), s6.page.notify, t4.stores === void 0 && r6.stores && s6 !== void 0 && r6.stores(s6), t4.page === void 0 && r6.page && o5 !== void 0 && r6.page(o5), t4.components === void 0 && r6.components && a4 !== void 0 && r6.components(a4), t4.form === void 0 && r6.form && i4 !== void 0 && r6.form(i4), t4.data_0 === void 0 && r6.data_0 && c4 !== void 0 && r6.data_0(c4), t4.data_1 === void 0 && r6.data_1 && l3 !== void 0 && r6.data_1(l3), s6.page.set(o5), `
 
 
 ${a4[1] ? `${G(a4[0] || F, "svelte:component").$$render(e7, { data: c4 }, {}, { default: () => `${G(a4[1] || F, "svelte:component").$$render(e7, { data: l3, form: i4 }, {}, {})}` })}` : `${G(a4[0] || F, "svelte:component").$$render(e7, { data: c4, form: i4 }, {}, {})}`}
 
 `;
 });
-function re(e7, t3) {
+function re(e7, t4) {
   const r6 = [];
   e7.split(",").forEach((o5, a4) => {
     const i4 = /([^/]+)\/([^;]+)(?:;q=([0-9.]+))?/.exec(o5);
@@ -28254,59 +28283,59 @@ function re(e7, t3) {
     }
   }), r6.sort((o5, a4) => o5.q !== a4.q ? a4.q - o5.q : o5.subtype === "*" != (a4.subtype === "*") ? o5.subtype === "*" ? 1 : -1 : o5.type === "*" != (a4.type === "*") ? o5.type === "*" ? 1 : -1 : o5.i - a4.i);
   let n3, s6 = 1 / 0;
-  for (const o5 of t3) {
+  for (const o5 of t4) {
     const [a4, i4] = o5.split("/"), c4 = r6.findIndex((l3) => (l3.type === a4 || l3.type === "*") && (l3.subtype === i4 || l3.subtype === "*"));
     c4 !== -1 && c4 < s6 && (n3 = o5, s6 = c4);
   }
   return n3;
 }
-function Ze(e7, ...t3) {
+function Ze(e7, ...t4) {
   var n3;
   const r6 = ((n3 = e7.headers.get("content-type")) == null ? void 0 : n3.split(";", 1)[0].trim()) ?? "";
-  return t3.includes(r6);
+  return t4.includes(r6);
 }
 function $e(e7) {
   return Ze(e7, "application/x-www-form-urlencoded", "multipart/form-data");
 }
 var N = class {
-  constructor(t3, r6) {
-    this.status = t3, typeof r6 == "string" ? this.body = { message: r6 } : r6 ? this.body = r6 : this.body = { message: `Error: ${t3}` };
+  constructor(t4, r6) {
+    this.status = t4, typeof r6 == "string" ? this.body = { message: r6 } : r6 ? this.body = r6 : this.body = { message: `Error: ${t4}` };
   }
   toString() {
     return JSON.stringify(this.body);
   }
 };
 var H = class {
-  constructor(t3, r6) {
-    this.status = t3, this.location = r6;
+  constructor(t4, r6) {
+    this.status = t4, this.location = r6;
   }
 };
 var ne = class {
-  constructor(t3, r6) {
-    this.status = t3, this.data = r6;
+  constructor(t4, r6) {
+    this.status = t4, this.data = r6;
   }
 };
 function et(e7) {
   return e7 instanceof Error || e7 && e7.name && e7.message ? e7 : new Error(JSON.stringify(e7));
 }
-function se(e7, t3) {
-  return e7 === "/" || t3 === "ignore" ? e7 : t3 === "never" ? e7.endsWith("/") ? e7.slice(0, -1) : e7 : t3 === "always" && !e7.endsWith("/") ? e7 + "/" : e7;
+function se(e7, t4) {
+  return e7 === "/" || t4 === "ignore" ? e7 : t4 === "never" ? e7.endsWith("/") ? e7.slice(0, -1) : e7 : t4 === "always" && !e7.endsWith("/") ? e7 + "/" : e7;
 }
 function tt(e7) {
   return e7.split("%25").map(decodeURI).join("%25");
 }
 function rt(e7) {
-  for (const t3 in e7)
-    e7[t3] = decodeURIComponent(e7[t3]);
+  for (const t4 in e7)
+    e7[t4] = decodeURIComponent(e7[t4]);
   return e7;
 }
 var nt = ["href", "pathname", "search", "searchParams", "toString", "toJSON"];
-function st(e7, t3) {
+function st(e7, t4) {
   const r6 = new URL(e7);
   for (const n3 of nt) {
     let s6 = r6[n3];
     Object.defineProperty(r6, n3, { get() {
-      return t3(), s6;
+      return t4(), s6;
     }, enumerable: true, configurable: true });
   }
   return r6[Symbol.for("nodejs.util.inspect.custom")] = (n3, s6, o5) => o5(e7, s6), ot(r6), r6;
@@ -28317,9 +28346,9 @@ function ot(e7) {
   } });
 }
 function ve(e7) {
-  for (const t3 of ["search", "searchParams"])
-    Object.defineProperty(e7, t3, { get() {
-      throw new Error(`Cannot access url.${t3} on a page with prerendering enabled`);
+  for (const t4 of ["search", "searchParams"])
+    Object.defineProperty(e7, t4, { get() {
+      throw new Error(`Cannot access url.${t4} on a page with prerendering enabled`);
     } });
 }
 var oe = "/__data.json";
@@ -28333,65 +28362,65 @@ function ie(e7) {
   return e7.slice(0, -oe.length);
 }
 function it(e7) {
-  ["get", "post", "put", "patch", "del"].forEach((t3) => {
-    if (t3 in e7) {
-      const r6 = t3 === "del" ? "DELETE" : t3.toUpperCase();
-      throw Error(`Endpoint method "${t3}" has changed to "${r6}". See https://github.com/sveltejs/kit/discussions/5359 for more information.`);
+  ["get", "post", "put", "patch", "del"].forEach((t4) => {
+    if (t4 in e7) {
+      const r6 = t4 === "del" ? "DELETE" : t4.toUpperCase();
+      throw Error(`Endpoint method "${t4}" has changed to "${r6}". See https://github.com/sveltejs/kit/discussions/5359 for more information.`);
     }
   });
 }
 var Re = { id: "__error" };
-function ct(e7, t3) {
-  return new Response(`${t3} method not allowed`, { status: 405, headers: { allow: lt(e7).join(", ") } });
+function ct(e7, t4) {
+  return new Response(`${t4} method not allowed`, { status: 405, headers: { allow: lt(e7).join(", ") } });
 }
 function lt(e7) {
-  const t3 = [];
+  const t4 = [];
   for (const r6 in ["GET", "POST", "PUT", "PATCH", "DELETE"])
-    r6 in e7 && t3.push(r6);
-  return (e7.GET || e7.HEAD) && t3.push("HEAD"), t3;
+    r6 in e7 && t4.push(r6);
+  return (e7.GET || e7.HEAD) && t4.push("HEAD"), t4;
 }
-function z3(e7, t3) {
+function z3(e7, t4) {
   return e7.reduce((r6, n3) => {
     var s6, o5;
     for (const a4 of [n3 == null ? void 0 : n3.server, n3 == null ? void 0 : n3.shared])
       if (a4 && ("router" in a4 || "hydrate" in a4))
         throw new Error("`export const hydrate` and `export const router` have been replaced with `export const csr`. See https://github.com/sveltejs/kit/pull/6446");
-    return ((s6 = n3 == null ? void 0 : n3.shared) == null ? void 0 : s6[t3]) ?? ((o5 = n3 == null ? void 0 : n3.server) == null ? void 0 : o5[t3]) ?? r6;
+    return ((s6 = n3 == null ? void 0 : n3.shared) == null ? void 0 : s6[t4]) ?? ((o5 = n3 == null ? void 0 : n3.server) == null ? void 0 : o5[t4]) ?? r6;
   }, void 0);
 }
-function ce(e7, t3, r6) {
-  return new Response(e7.error_template({ status: t3, message: r6 }), { headers: { "content-type": "text/html; charset=utf-8" }, status: t3 });
+function ce(e7, t4, r6) {
+  return new Response(e7.error_template({ status: t4, message: r6 }), { headers: { "content-type": "text/html; charset=utf-8" }, status: t4 });
 }
-async function fe(e7, t3, r6) {
+async function fe(e7, t4, r6) {
   r6 = r6 instanceof N ? r6 : et(r6);
-  const n3 = r6 instanceof N ? r6.status : 500, s6 = await I2(e7, t3, r6), o5 = re(e7.request.headers.get("accept") || "text/html", ["application/json", "text/html"]);
-  return ae(e7.url.pathname) || o5 === "application/json" ? new Response(JSON.stringify(s6), { status: n3, headers: { "content-type": "application/json; charset=utf-8" } }) : ce(t3, n3, s6.message);
+  const n3 = r6 instanceof N ? r6.status : 500, s6 = await I2(e7, t4, r6), o5 = re(e7.request.headers.get("accept") || "text/html", ["application/json", "text/html"]);
+  return ae(e7.url.pathname) || o5 === "application/json" ? new Response(JSON.stringify(s6), { status: n3, headers: { "content-type": "application/json; charset=utf-8" } }) : ce(t4, n3, s6.message);
 }
-function I2(e7, t3, r6) {
-  return r6 instanceof N ? r6.body : t3.handle_error(r6, e7);
+function I2(e7, t4, r6) {
+  return r6 instanceof N ? r6.body : t4.handle_error(r6, e7);
 }
-function F2(e7, t3) {
-  return new Response(void 0, { status: e7, headers: { location: t3 } });
+function F2(e7, t4) {
+  return new Response(void 0, { status: e7, headers: { location: t4 } });
 }
-function Se(e7, t3) {
-  return t3.path ? `Data returned from \`load\` while rendering ${e7.route.id} is not serializable: ${t3.message} (data${t3.path})` : t3.path === "" ? `Data returned from \`load\` while rendering ${e7.route.id} is not a plain object` : t3.message;
+function Se(e7, t4) {
+  return t4.path ? `Data returned from \`load\` while rendering ${e7.route.id} is not serializable: ${t4.message} (data${t4.path})` : t4.path === "" ? `Data returned from \`load\` while rendering ${e7.route.id} is not a plain object` : t4.message;
 }
 function qe(e7) {
   if (!e7)
     return "null";
   if (e7.type === "error" || e7.type === "skip")
     return JSON.stringify(e7);
-  const t3 = stringify(e7.data), r6 = [];
-  return e7.uses.dependencies.size > 0 && r6.push(`"dependencies":${JSON.stringify(Array.from(e7.uses.dependencies))}`), e7.uses.params.size > 0 && r6.push(`"params":${JSON.stringify(Array.from(e7.uses.params))}`), e7.uses.parent && r6.push('"parent":1'), e7.uses.route && r6.push('"route":1'), e7.uses.url && r6.push('"url":1'), `{"type":"data","data":${t3},"uses":{${r6.join(",")}}${e7.slash ? `,"slash":${JSON.stringify(e7.slash)}` : ""}}`;
+  const t4 = stringify(e7.data), r6 = [];
+  return e7.uses.dependencies.size > 0 && r6.push(`"dependencies":${JSON.stringify(Array.from(e7.uses.dependencies))}`), e7.uses.params.size > 0 && r6.push(`"params":${JSON.stringify(Array.from(e7.uses.params))}`), e7.uses.parent && r6.push('"parent":1'), e7.uses.route && r6.push('"route":1'), e7.uses.url && r6.push('"url":1'), `{"type":"data","data":${t4},"uses":{${r6.join(",")}}${e7.slash ? `,"slash":${JSON.stringify(e7.slash)}` : ""}}`;
 }
-async function dt(e7, t3, r6) {
+async function dt(e7, t4, r6) {
   const n3 = e7.request.method;
-  it(t3);
-  let s6 = t3[n3];
-  if (!s6 && n3 === "HEAD" && (s6 = t3.GET), !s6)
-    return ct(t3, n3);
-  const o5 = t3.prerender ?? r6.prerender_default;
-  if (o5 && (t3.POST || t3.PATCH || t3.PUT || t3.DELETE))
+  it(t4);
+  let s6 = t4[n3];
+  if (!s6 && n3 === "HEAD" && (s6 = t4.GET), !s6)
+    return ct(t4, n3);
+  const o5 = t4.prerender ?? r6.prerender_default;
+  if (o5 && (t4.POST || t4.PATCH || t4.PUT || t4.DELETE))
     throw new Error("Cannot prerender endpoints that have mutative methods");
   if (r6.prerendering && !o5) {
     if (r6.initiator)
@@ -28410,30 +28439,30 @@ async function dt(e7, t3, r6) {
   }
 }
 function ut(e7) {
-  const { method: t3, headers: r6 } = e7.request;
-  if (t3 === "PUT" || t3 === "PATCH" || t3 === "DELETE")
+  const { method: t4, headers: r6 } = e7.request;
+  if (t4 === "PUT" || t4 === "PATCH" || t4 === "DELETE")
     return true;
-  if (t3 === "POST" && r6.get("x-sveltekit-action") === "true")
+  if (t4 === "POST" && r6.get("x-sveltekit-action") === "true")
     return false;
   const n3 = e7.request.headers.get("accept") ?? "*/*";
   return re(n3, ["*", "text/html"]) !== "text/html";
 }
 function he(e7) {
-  return e7.filter((t3) => t3 != null);
+  return e7.filter((t4) => t4 != null);
 }
-function ft(e7, t3) {
+function ft(e7, t4) {
   if (isNaN(e7) || e7 < 400 || e7 > 599)
     throw new Error(`HTTP error status codes must be between 400 and 599 \u2014 ${e7} is invalid`);
-  return new N(e7, t3);
+  return new N(e7, t4);
 }
-function ht(e7, t3) {
-  const r6 = new Headers(t3 == null ? void 0 : t3.headers);
-  return r6.has("content-type") || r6.set("content-type", "application/json"), new Response(JSON.stringify(e7), { ...t3, headers: r6 });
+function ht(e7, t4) {
+  const r6 = new Headers(t4 == null ? void 0 : t4.headers);
+  return r6.has("content-type") || r6.set("content-type", "application/json"), new Response(JSON.stringify(e7), { ...t4, headers: r6 });
 }
 function pt(e7) {
   return re(e7.request.headers.get("accept") ?? "*/*", ["application/json", "text/html"]) === "application/json" && e7.request.method === "POST";
 }
-async function mt(e7, t3, r6) {
+async function mt(e7, t4, r6) {
   const n3 = r6.actions;
   if (!n3)
     return Te(r6), new Response("POST method not allowed. No actions exist for this page", { status: 405, headers: { allow: "GET" } });
@@ -28443,22 +28472,22 @@ async function mt(e7, t3, r6) {
     return s6 instanceof ne ? W({ type: "invalid", status: s6.status, data: pe(s6.data, e7.route.id) }) : W({ type: "success", status: s6 ? 200 : 204, data: pe(s6, e7.route.id) });
   } catch (s6) {
     const o5 = s6;
-    return o5 instanceof H ? W({ type: "redirect", status: o5.status, location: o5.location }) : W({ type: "error", error: await I2(e7, t3, Oe(o5)) }, { status: o5 instanceof N ? o5.status : 500 });
+    return o5 instanceof H ? W({ type: "redirect", status: o5.status, location: o5.location }) : W({ type: "error", error: await I2(e7, t4, Oe(o5)) }, { status: o5 instanceof N ? o5.status : 500 });
   }
 }
 function Oe(e7) {
   return e7 instanceof ne ? new Error('Cannot "throw invalid()". Use "return invalid()"') : e7;
 }
-function W(e7, t3) {
-  return ht(e7, t3);
+function W(e7, t4) {
+  return ht(e7, t4);
 }
-function yt(e7, t3) {
-  return t3.server && e7.request.method !== "GET" && e7.request.method !== "HEAD";
+function yt(e7, t4) {
+  return t4.server && e7.request.method !== "GET" && e7.request.method !== "HEAD";
 }
-async function gt(e7, t3) {
-  const r6 = t3.actions;
+async function gt(e7, t4) {
+  const r6 = t4.actions;
   if (!r6)
-    return Te(t3), e7.setHeaders({ allow: "GET" }), { type: "error", error: ft(405, "POST method not allowed. No actions exist for this page") };
+    return Te(t4), e7.setHeaders({ allow: "GET" }), { type: "error", error: ft(405, "POST method not allowed. No actions exist for this page") };
   Pe(r6);
   try {
     const n3 = await Ce(e7, r6);
@@ -28472,7 +28501,7 @@ function Pe(e7) {
   if (e7.default && Object.keys(e7).length > 1)
     throw new Error("When using named actions, the default action cannot be used. See the docs for more info: https://kit.svelte.dev/docs/form-actions#named-actions");
 }
-async function Ce(e7, t3) {
+async function Ce(e7, t4) {
   const r6 = new URL(e7.request.url);
   let n3 = "default";
   for (const o5 of r6.searchParams)
@@ -28481,7 +28510,7 @@ async function Ce(e7, t3) {
         throw new Error('Cannot use reserved action name "default"');
       break;
     }
-  const s6 = t3[n3];
+  const s6 = t4[n3];
   if (!s6)
     throw new Error(`No action with name '${n3}' found`);
   if (!$e(e7.request))
@@ -28489,19 +28518,19 @@ async function Ce(e7, t3) {
   return s6(e7);
 }
 function Te(e7) {
-  for (const t3 of ["POST", "PUT", "PATCH", "DELETE"])
-    if (e7[t3])
-      throw new Error(`${t3} method no longer allowed in +page.server, use actions instead. See the PR for more info: https://github.com/sveltejs/kit/pull/6469`);
+  for (const t4 of ["POST", "PUT", "PATCH", "DELETE"])
+    if (e7[t4])
+      throw new Error(`${t4} method no longer allowed in +page.server, use actions instead. See the PR for more info: https://github.com/sveltejs/kit/pull/6469`);
 }
-function wt(e7, t3) {
-  return Ae(e7, uneval, t3);
+function wt(e7, t4) {
+  return Ae(e7, uneval, t4);
 }
-function pe(e7, t3) {
-  return Ae(e7, stringify, t3);
+function pe(e7, t4) {
+  return Ae(e7, stringify, t4);
 }
-function Ae(e7, t3, r6) {
+function Ae(e7, t4, r6) {
   try {
-    return t3(e7);
+    return t4(e7);
   } catch (n3) {
     const s6 = n3;
     if ("path" in s6) {
@@ -28512,20 +28541,20 @@ function Ae(e7, t3, r6) {
   }
 }
 async function Ue(e7) {
-  var t3;
+  var t4;
   for (const r6 in e7)
-    if (typeof ((t3 = e7[r6]) == null ? void 0 : t3.then) == "function")
+    if (typeof ((t4 = e7[r6]) == null ? void 0 : t4.then) == "function")
       return Object.fromEntries(await Promise.all(Object.entries(e7).map(async ([n3, s6]) => [n3, await s6])));
   return e7;
 }
-async function le({ event: e7, state: t3, node: r6, parent: n3 }) {
+async function le({ event: e7, state: t4, node: r6, parent: n3 }) {
   var c4;
   if (!(r6 != null && r6.server))
     return null;
   const s6 = { dependencies: /* @__PURE__ */ new Set(), params: /* @__PURE__ */ new Set(), parent: false, route: false, url: false }, o5 = st(e7.url, () => {
     s6.url = true;
   });
-  t3.prerendering && ve(o5);
+  t4.prerendering && ve(o5);
   const a4 = await ((c4 = r6.server.load) == null ? void 0 : c4.call(null, { ...e7, depends: (...l3) => {
     for (const p7 of l3) {
       const { href: j3 } = new URL(p7, e7.url);
@@ -28536,29 +28565,29 @@ async function le({ event: e7, state: t3, node: r6, parent: n3 }) {
   } }, url: o5 }));
   return { type: "data", data: a4 ? await Ue(a4) : null, uses: s6, slash: r6.server.trailingSlash };
 }
-async function ze({ event: e7, fetched: t3, node: r6, parent: n3, server_data_promise: s6, state: o5, resolve_opts: a4, csr: i4 }) {
+async function ze({ event: e7, fetched: t4, node: r6, parent: n3, server_data_promise: s6, state: o5, resolve_opts: a4, csr: i4 }) {
   var j3;
   const c4 = await s6;
   if (!((j3 = r6 == null ? void 0 : r6.shared) != null && j3.load))
     return (c4 == null ? void 0 : c4.data) ?? null;
   const l3 = { url: e7.url, params: e7.params, data: (c4 == null ? void 0 : c4.data) ?? null, route: e7.route, fetch: async (d5, m7) => {
-    const b6 = d5 instanceof Request && d5.body ? d5.clone().body : null, y5 = await e7.fetch(d5, m7), w5 = new URL(d5 instanceof Request ? d5.url : d5, e7.url), E4 = w5.origin === e7.url.origin;
+    const b6 = d5 instanceof Request && d5.body ? d5.clone().body : null, y6 = await e7.fetch(d5, m7), w5 = new URL(d5 instanceof Request ? d5.url : d5, e7.url), E4 = w5.origin === e7.url.origin;
     let x5;
     if (E4)
-      o5.prerendering && (x5 = { response: y5, body: null }, o5.prerendering.dependencies.set(w5.pathname, x5));
+      o5.prerendering && (x5 = { response: y6, body: null }, o5.prerendering.dependencies.set(w5.pathname, x5));
     else if ((d5 instanceof Request ? d5.mode : (m7 == null ? void 0 : m7.mode) ?? "cors") !== "no-cors") {
-      const k5 = y5.headers.get("access-control-allow-origin");
+      const k5 = y6.headers.get("access-control-allow-origin");
       if (!k5 || k5 !== e7.url.origin && k5 !== "*")
         throw new Error(`CORS error: ${k5 ? "Incorrect" : "No"} 'Access-Control-Allow-Origin' header is present on the requested resource`);
     }
-    const u = new Proxy(y5, { get(h2, k5, f7) {
+    const u = new Proxy(y6, { get(h2, k5, f7) {
       async function _6() {
         const v7 = await h2.text();
         if (!v7 || typeof v7 == "string") {
           const S5 = Number(h2.status);
           if (isNaN(S5))
             throw new Error(`response.status is not a number. value: "${h2.status}" type: ${typeof h2.status}`);
-          t3.push({ url: E4 ? w5.href.slice(e7.url.origin.length) : w5.href, method: e7.request.method, request_body: d5 instanceof Request && b6 ? await _t(b6) : m7 == null ? void 0 : m7.body, response_body: v7, response: h2 });
+          t4.push({ url: E4 ? w5.href.slice(e7.url.origin.length) : w5.href, method: e7.request.method, request_body: d5 instanceof Request && b6 ? await _t(b6) : m7 == null ? void 0 : m7.body, response_body: v7, response: h2 });
         }
         return x5 && (x5.body = v7), v7;
       }
@@ -28568,9 +28597,9 @@ async function ze({ event: e7, fetched: t3, node: r6, parent: n3, server_data_pr
       } : k5 === "text" ? _6 : k5 === "json" ? async () => JSON.parse(await _6()) : Reflect.get(h2, k5, h2);
     } });
     if (i4) {
-      const h2 = y5.headers.get;
-      y5.headers.get = (k5) => {
-        const f7 = k5.toLowerCase(), _6 = h2.call(y5.headers, f7);
+      const h2 = y6.headers.get;
+      y6.headers.get = (k5) => {
+        const f7 = k5.toLowerCase(), _6 = h2.call(y6.headers, f7);
         if (_6 && !f7.startsWith("x-sveltekit-") && !a4.filterSerializedResponseHeaders(f7, _6))
           throw new Error(`Failed to get response header "${f7}" \u2014 it must be included by the \`filterSerializedResponseHeaders\` option: https://kit.svelte.dev/docs/hooks#server-hooks-handle (at ${e7.route})`);
         return _6;
@@ -28586,30 +28615,30 @@ async function ze({ event: e7, fetched: t3, node: r6, parent: n3, server_data_pr
   return p7 ? Ue(p7) : null;
 }
 async function _t(e7) {
-  let t3 = "";
+  let t4 = "";
   const r6 = e7.getReader(), n3 = new TextDecoder();
   for (; ; ) {
     const { done: s6, value: o5 } = await r6.read();
     if (s6)
       break;
-    t3 += n3.decode(o5);
+    t4 += n3.decode(o5);
   }
-  return t3;
+  return t4;
 }
 function K(e7) {
-  let t3 = 5381;
+  let t4 = 5381;
   if (typeof e7 == "string") {
     let r6 = e7.length;
     for (; r6; )
-      t3 = t3 * 33 ^ e7.charCodeAt(--r6);
+      t4 = t4 * 33 ^ e7.charCodeAt(--r6);
   } else if (ArrayBuffer.isView(e7)) {
     const r6 = new Uint8Array(e7.buffer, e7.byteOffset, e7.byteLength);
     let n3 = r6.length;
     for (; n3; )
-      t3 = t3 * 33 ^ r6[--n3];
+      t4 = t4 * 33 ^ r6[--n3];
   } else
     throw new TypeError("value must be a string or TypedArray");
-  return (t3 >>> 0).toString(36);
+  return (t4 >>> 0).toString(36);
 }
 var Ne = { "&": "&amp;", '"': "&quot;" };
 var bt = new RegExp(`[${Object.keys(Ne).join("")}]|[\\ud800-\\udbff](?![\\udc00-\\udfff])|[\\ud800-\\udbff][\\udc00-\\udfff]|[\\udc00-\\udfff]`, "g");
@@ -28618,11 +28647,11 @@ function Q(e7) {
 }
 var He = { "<": "\\u003C", "\u2028": "\\u2028", "\u2029": "\\u2029" };
 var kt = new RegExp(`[${Object.keys(He).join("")}]`, "g");
-function Et(e7, t3, r6 = false) {
+function Et(e7, t4, r6 = false) {
   const n3 = {};
   let s6 = null, o5 = null;
   for (const [l3, p7] of e7.response.headers)
-    t3(l3, p7) && (n3[l3] = p7), l3 === "cache-control" && (s6 = p7), l3 === "age" && (o5 = p7);
+    t4(l3, p7) && (n3[l3] = p7), l3 === "cache-control" && (s6 = p7), l3 === "age" && (o5 = p7);
   const a4 = { status: e7.response.status, statusText: e7.response.statusText, headers: n3, body: e7.response_body }, i4 = JSON.stringify(a4).replace(kt, (l3) => He[l3]), c4 = ['type="application/json"', "data-sveltekit-fetched", `data-url=${Q(e7.url)}`];
   if (e7.request_body && c4.push(`data-hash=${Q(K(e7.request_body))}`), !r6 && e7.method === "GET" && s6) {
     const l3 = /s-maxage=(\d+)/g.exec(s6) ?? /max-age=(\d+)/g.exec(s6);
@@ -28637,15 +28666,15 @@ var A3 = JSON.stringify;
 var jt = new TextEncoder();
 function me(e7) {
   Z[0] || xt();
-  const t3 = Ie.slice(0), r6 = $t(e7);
+  const t4 = Ie.slice(0), r6 = $t(e7);
   for (let s6 = 0; s6 < r6.length; s6 += 16) {
     const o5 = r6.subarray(s6, s6 + 16);
-    let a4, i4, c4, l3 = t3[0], p7 = t3[1], j3 = t3[2], d5 = t3[3], m7 = t3[4], b6 = t3[5], y5 = t3[6], w5 = t3[7];
+    let a4, i4, c4, l3 = t4[0], p7 = t4[1], j3 = t4[2], d5 = t4[3], m7 = t4[4], b6 = t4[5], y6 = t4[6], w5 = t4[7];
     for (let E4 = 0; E4 < 64; E4++)
-      E4 < 16 ? a4 = o5[E4] : (i4 = o5[E4 + 1 & 15], c4 = o5[E4 + 14 & 15], a4 = o5[E4 & 15] = (i4 >>> 7 ^ i4 >>> 18 ^ i4 >>> 3 ^ i4 << 25 ^ i4 << 14) + (c4 >>> 17 ^ c4 >>> 19 ^ c4 >>> 10 ^ c4 << 15 ^ c4 << 13) + o5[E4 & 15] + o5[E4 + 9 & 15] | 0), a4 = a4 + w5 + (m7 >>> 6 ^ m7 >>> 11 ^ m7 >>> 25 ^ m7 << 26 ^ m7 << 21 ^ m7 << 7) + (y5 ^ m7 & (b6 ^ y5)) + Z[E4], w5 = y5, y5 = b6, b6 = m7, m7 = d5 + a4 | 0, d5 = j3, j3 = p7, p7 = l3, l3 = a4 + (p7 & j3 ^ d5 & (p7 ^ j3)) + (p7 >>> 2 ^ p7 >>> 13 ^ p7 >>> 22 ^ p7 << 30 ^ p7 << 19 ^ p7 << 10) | 0;
-    t3[0] = t3[0] + l3 | 0, t3[1] = t3[1] + p7 | 0, t3[2] = t3[2] + j3 | 0, t3[3] = t3[3] + d5 | 0, t3[4] = t3[4] + m7 | 0, t3[5] = t3[5] + b6 | 0, t3[6] = t3[6] + y5 | 0, t3[7] = t3[7] + w5 | 0;
+      E4 < 16 ? a4 = o5[E4] : (i4 = o5[E4 + 1 & 15], c4 = o5[E4 + 14 & 15], a4 = o5[E4 & 15] = (i4 >>> 7 ^ i4 >>> 18 ^ i4 >>> 3 ^ i4 << 25 ^ i4 << 14) + (c4 >>> 17 ^ c4 >>> 19 ^ c4 >>> 10 ^ c4 << 15 ^ c4 << 13) + o5[E4 & 15] + o5[E4 + 9 & 15] | 0), a4 = a4 + w5 + (m7 >>> 6 ^ m7 >>> 11 ^ m7 >>> 25 ^ m7 << 26 ^ m7 << 21 ^ m7 << 7) + (y6 ^ m7 & (b6 ^ y6)) + Z[E4], w5 = y6, y6 = b6, b6 = m7, m7 = d5 + a4 | 0, d5 = j3, j3 = p7, p7 = l3, l3 = a4 + (p7 & j3 ^ d5 & (p7 ^ j3)) + (p7 >>> 2 ^ p7 >>> 13 ^ p7 >>> 22 ^ p7 << 30 ^ p7 << 19 ^ p7 << 10) | 0;
+    t4[0] = t4[0] + l3 | 0, t4[1] = t4[1] + p7 | 0, t4[2] = t4[2] + j3 | 0, t4[3] = t4[3] + d5 | 0, t4[4] = t4[4] + m7 | 0, t4[5] = t4[5] + b6 | 0, t4[6] = t4[6] + y6 | 0, t4[7] = t4[7] + w5 | 0;
   }
-  const n3 = new Uint8Array(t3.buffer);
+  const n3 = new Uint8Array(t4.buffer);
   return De(n3), Le(n3);
 }
 var Ie = new Uint32Array(8);
@@ -28654,36 +28683,36 @@ function xt() {
   function e7(r6) {
     return (r6 - Math.floor(r6)) * 4294967296;
   }
-  let t3 = 2;
-  for (let r6 = 0; r6 < 64; t3++) {
+  let t4 = 2;
+  for (let r6 = 0; r6 < 64; t4++) {
     let n3 = true;
-    for (let s6 = 2; s6 * s6 <= t3; s6++)
-      if (t3 % s6 === 0) {
+    for (let s6 = 2; s6 * s6 <= t4; s6++)
+      if (t4 % s6 === 0) {
         n3 = false;
         break;
       }
-    n3 && (r6 < 8 && (Ie[r6] = e7(t3 ** (1 / 2))), Z[r6] = e7(t3 ** (1 / 3)), r6++);
+    n3 && (r6 < 8 && (Ie[r6] = e7(t4 ** (1 / 2))), Z[r6] = e7(t4 ** (1 / 3)), r6++);
   }
 }
 function De(e7) {
-  for (let t3 = 0; t3 < e7.length; t3 += 4) {
-    const r6 = e7[t3 + 0], n3 = e7[t3 + 1], s6 = e7[t3 + 2], o5 = e7[t3 + 3];
-    e7[t3 + 0] = o5, e7[t3 + 1] = s6, e7[t3 + 2] = n3, e7[t3 + 3] = r6;
+  for (let t4 = 0; t4 < e7.length; t4 += 4) {
+    const r6 = e7[t4 + 0], n3 = e7[t4 + 1], s6 = e7[t4 + 2], o5 = e7[t4 + 3];
+    e7[t4 + 0] = o5, e7[t4 + 1] = s6, e7[t4 + 2] = n3, e7[t4 + 3] = r6;
   }
 }
 function $t(e7) {
-  const t3 = jt.encode(e7), r6 = t3.length * 8, n3 = 512 * Math.ceil((r6 + 65) / 512), s6 = new Uint8Array(n3 / 8);
-  s6.set(t3), s6[t3.length] = 128, De(s6);
+  const t4 = jt.encode(e7), r6 = t4.length * 8, n3 = 512 * Math.ceil((r6 + 65) / 512), s6 = new Uint8Array(n3 / 8);
+  s6.set(t4), s6[t4.length] = 128, De(s6);
   const o5 = new Uint32Array(s6.buffer);
   return o5[o5.length - 2] = Math.floor(r6 / 4294967296), o5[o5.length - 1] = r6, o5;
 }
 var U = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split("");
 function Le(e7) {
-  const t3 = e7.length;
+  const t4 = e7.length;
   let r6 = "", n3;
-  for (n3 = 2; n3 < t3; n3 += 3)
+  for (n3 = 2; n3 < t4; n3 += 3)
     r6 += U[e7[n3 - 2] >> 2], r6 += U[(e7[n3 - 2] & 3) << 4 | e7[n3 - 1] >> 4], r6 += U[(e7[n3 - 1] & 15) << 2 | e7[n3] >> 6], r6 += U[e7[n3] & 63];
-  return n3 === t3 + 1 && (r6 += U[e7[n3 - 2] >> 2], r6 += U[(e7[n3 - 2] & 3) << 4], r6 += "=="), n3 === t3 && (r6 += U[e7[n3 - 2] >> 2], r6 += U[(e7[n3 - 2] & 3) << 4 | e7[n3 - 1] >> 4], r6 += U[(e7[n3 - 1] & 15) << 2], r6 += "="), r6;
+  return n3 === t4 + 1 && (r6 += U[e7[n3 - 2] >> 2], r6 += U[(e7[n3 - 2] & 3) << 4], r6 += "=="), n3 === t4 && (r6 += U[e7[n3 - 2] >> 2], r6 += U[(e7[n3 - 2] & 3) << 4 | e7[n3 - 1] >> 4], r6 += U[(e7[n3 - 1] & 15) << 2], r6 += "="), r6;
 }
 var ye = new Uint8Array(16);
 function vt() {
@@ -28693,7 +28722,7 @@ var Rt = /* @__PURE__ */ new Set(["self", "unsafe-eval", "unsafe-hashes", "unsaf
 var St = /^(nonce|sha\d\d\d)-/;
 var _r, _n, _s, _o, _e, _t2, _a;
 var We = class {
-  constructor(t3, r6, n3, s6) {
+  constructor(t4, r6, n3, s6) {
     __privateAdd(this, _r, void 0);
     __privateAdd(this, _n, void 0);
     __privateAdd(this, _s, void 0);
@@ -28701,7 +28730,7 @@ var We = class {
     __privateAdd(this, _e, void 0);
     __privateAdd(this, _t2, void 0);
     __privateAdd(this, _a, void 0);
-    __privateSet(this, _r, t3), __privateSet(this, _o, s6 ? { ...r6 } : r6);
+    __privateSet(this, _r, t4), __privateSet(this, _o, s6 ? { ...r6 } : r6);
     const o5 = __privateGet(this, _o);
     if (s6) {
       const c4 = o5["style-src"] || o5["default-src"];
@@ -28711,17 +28740,17 @@ var We = class {
     const a4 = o5["script-src"] || o5["default-src"], i4 = o5["style-src"] || o5["default-src"];
     __privateSet(this, _n, !!a4 && a4.filter((c4) => c4 !== "unsafe-inline").length > 0), __privateSet(this, _s, !s6 && !!i4 && i4.filter((c4) => c4 !== "unsafe-inline").length > 0), this.script_needs_nonce = __privateGet(this, _n) && !__privateGet(this, _r), this.style_needs_nonce = __privateGet(this, _s) && !__privateGet(this, _r), __privateSet(this, _a, n3);
   }
-  add_script(t3) {
-    __privateGet(this, _n) && (__privateGet(this, _r) ? __privateGet(this, _e).push(`sha256-${me(t3)}`) : __privateGet(this, _e).length === 0 && __privateGet(this, _e).push(`nonce-${__privateGet(this, _a)}`));
+  add_script(t4) {
+    __privateGet(this, _n) && (__privateGet(this, _r) ? __privateGet(this, _e).push(`sha256-${me(t4)}`) : __privateGet(this, _e).length === 0 && __privateGet(this, _e).push(`nonce-${__privateGet(this, _a)}`));
   }
-  add_style(t3) {
-    __privateGet(this, _s) && (__privateGet(this, _r) ? __privateGet(this, _t2).push(`sha256-${me(t3)}`) : __privateGet(this, _t2).length === 0 && __privateGet(this, _t2).push(`nonce-${__privateGet(this, _a)}`));
+  add_style(t4) {
+    __privateGet(this, _s) && (__privateGet(this, _r) ? __privateGet(this, _t2).push(`sha256-${me(t4)}`) : __privateGet(this, _t2).length === 0 && __privateGet(this, _t2).push(`nonce-${__privateGet(this, _a)}`));
   }
-  get_header(t3 = false) {
+  get_header(t4 = false) {
     const r6 = [], n3 = { ...__privateGet(this, _o) };
     __privateGet(this, _t2).length > 0 && (n3["style-src"] = [...n3["style-src"] || n3["default-src"] || [], ...__privateGet(this, _t2)]), __privateGet(this, _e).length > 0 && (n3["script-src"] = [...n3["script-src"] || n3["default-src"] || [], ...__privateGet(this, _e)]);
     for (const s6 in n3) {
-      if (t3 && (s6 === "frame-ancestors" || s6 === "report-uri" || s6 === "sandbox"))
+      if (t4 && (s6 === "frame-ancestors" || s6 === "report-uri" || s6 === "sandbox"))
         continue;
       const o5 = n3[s6];
       if (!o5)
@@ -28747,9 +28776,9 @@ var qt = class extends We {
   }
 };
 var Ot = class extends We {
-  constructor(t3, r6, n3, s6) {
+  constructor(t4, r6, n3, s6) {
     var o5, a4;
-    if (super(t3, r6, n3, s6), Object.values(r6).filter((i4) => !!i4).length > 0) {
+    if (super(t4, r6, n3, s6), Object.values(r6).filter((i4) => !!i4).length > 0) {
       const i4 = ((o5 = r6["report-to"]) == null ? void 0 : o5.length) ?? 0 > 0, c4 = ((a4 = r6["report-uri"]) == null ? void 0 : a4.length) ?? 0 > 0;
       if (!i4 && !c4)
         throw Error("`content-security-policy-report-only` must be specified with either the `report-to` or `report-uri` directives, or both");
@@ -28757,11 +28786,11 @@ var Ot = class extends We {
   }
 };
 var Pt = class {
-  constructor({ mode: t3, directives: r6, reportOnly: n3 }, { prerender: s6, dev: o5 }) {
+  constructor({ mode: t4, directives: r6, reportOnly: n3 }, { prerender: s6, dev: o5 }) {
     __publicField(this, "nonce", vt());
     __publicField(this, "csp_provider");
     __publicField(this, "report_only_provider");
-    const a4 = t3 === "hash" || t3 === "auto" && s6;
+    const a4 = t4 === "hash" || t4 === "auto" && s6;
     this.csp_provider = new qt(a4, r6, this.nonce, o5), this.report_only_provider = new Ot(a4, n3, this.nonce, o5);
   }
   get script_needs_nonce() {
@@ -28770,15 +28799,15 @@ var Pt = class {
   get style_needs_nonce() {
     return this.csp_provider.style_needs_nonce || this.report_only_provider.style_needs_nonce;
   }
-  add_script(t3) {
-    this.csp_provider.add_script(t3), this.report_only_provider.add_script(t3);
+  add_script(t4) {
+    this.csp_provider.add_script(t4), this.report_only_provider.add_script(t4);
   }
-  add_style(t3) {
-    this.csp_provider.add_style(t3), this.report_only_provider.add_style(t3);
+  add_style(t4) {
+    this.csp_provider.add_style(t4), this.report_only_provider.add_style(t4);
   }
 };
 var Ct = { ...z2(false), check: () => false };
-async function L({ branch: e7, fetched: t3, options: r6, state: n3, page_config: s6, status: o5, error: a4 = null, event: i4, resolve_opts: c4, action_result: l3 }) {
+async function L({ branch: e7, fetched: t4, options: r6, state: n3, page_config: s6, status: o5, error: a4 = null, event: i4, resolve_opts: c4, action_result: l3 }) {
   var C4;
   if (n3.prerendering) {
     if (r6.csp.mode === "nonce")
@@ -28786,7 +28815,7 @@ async function L({ branch: e7, fetched: t3, options: r6, state: n3, page_config:
     if (r6.app_template_contains_nonce)
       throw new Error("Cannot use prerendering if page template contains %sveltekit.nonce%");
   }
-  const { entry: p7 } = r6.manifest._, j3 = new Set(p7.stylesheets), d5 = new Set(p7.imports), m7 = new Set(r6.manifest._.entry.fonts), b6 = /* @__PURE__ */ new Set(), y5 = /* @__PURE__ */ new Map();
+  const { entry: p7 } = r6.manifest._, j3 = new Set(p7.stylesheets), d5 = new Set(p7.imports), m7 = new Set(r6.manifest._.entry.fonts), b6 = /* @__PURE__ */ new Set(), y6 = /* @__PURE__ */ new Map();
   let w5;
   const E4 = (l3 == null ? void 0 : l3.type) === "success" || (l3 == null ? void 0 : l3.type) === "invalid" ? l3.data ?? null : null;
   if (s6.ssr) {
@@ -28802,7 +28831,7 @@ async function L({ branch: e7, fetched: t3, options: r6, state: n3, page_config:
     };
     q6("origin", "origin"), q6("path", "pathname"), q6("query", "searchParams"), w5 = r6.root.render(g5);
     for (const { node: R4 } of e7)
-      R4.imports && R4.imports.forEach((T6) => d5.add(T6)), R4.stylesheets && R4.stylesheets.forEach((T6) => j3.add(T6)), R4.fonts && R4.fonts.forEach((T6) => m7.add(T6)), R4.inline_styles && Object.entries(await R4.inline_styles()).forEach(([T6, Ve2]) => y5.set(T6, Ve2));
+      R4.imports && R4.imports.forEach((T6) => d5.add(T6)), R4.stylesheets && R4.stylesheets.forEach((T6) => j3.add(T6)), R4.fonts && R4.fonts.forEach((T6) => m7.add(T6)), R4.inline_styles && Object.entries(await R4.inline_styles()).forEach(([T6, Ve2]) => y6.set(T6, Ve2));
   } else
     w5 = { head: "", html: "", css: { code: "", map: null } };
   let x5 = "", u = w5.html;
@@ -28829,8 +28858,8 @@ async function L({ branch: e7, fetched: t3, options: r6, state: n3, page_config:
     const $3 = g5;
     throw new Error(Se(i4, $3));
   }
-  if (E4 && (v7.form = wt(E4, i4.route.id)), y5.size > 0) {
-    const g5 = Array.from(y5.values()).join(`
+  if (E4 && (v7.form = wt(E4, i4.route.id)), y6.size > 0) {
+    const g5 = Array.from(y6.values()).join(`
 `), $3 = [];
     r6.dev && $3.push(" data-sveltekit"), h2.style_needs_nonce && $3.push(` nonce="${h2.nonce}"`), h2.add_style(g5), x5 += `
 	<style${$3.join("")}>${g5}</style>`;
@@ -28839,7 +28868,7 @@ async function L({ branch: e7, fetched: t3, options: r6, state: n3, page_config:
     const $3 = _6(g5);
     if (c4.preload({ type: "css", path: $3 })) {
       const q6 = [];
-      if (h2.style_needs_nonce && q6.push(`nonce="${h2.nonce}"`), y5.has(g5))
+      if (h2.style_needs_nonce && q6.push(`nonce="${h2.nonce}"`), y6.has(g5))
         q6.push("disabled", 'media="(max-width: 0)"');
       else {
         const R4 = ['rel="preload"', 'as="style"'].concat(q6);
@@ -28887,7 +28916,7 @@ async function L({ branch: e7, fetched: t3, options: r6, state: n3, page_config:
 		<script ${$3.join(" ")}>${g5}<\/script>`;
   }
   if (s6.ssr && s6.csr && (u += `
-	${t3.map((g5) => Et(g5, c4.filterSerializedResponseHeaders, !!n3.prerendering)).join(`
+	${t4.map((g5) => Et(g5, c4.filterSerializedResponseHeaders, !!n3.prerendering)).join(`
 	`)}`), r6.service_worker) {
     const g5 = r6.dev ? ", { type: 'module' }" : "", $3 = `
 			if ('serviceWorker' in navigator) {
@@ -28914,24 +28943,24 @@ async function L({ branch: e7, fetched: t3, options: r6, state: n3, page_config:
   }
   return new Response(S5, { status: o5, headers: P5 });
 }
-async function Je({ event: e7, options: t3, state: r6, status: n3, error: s6, resolve_opts: o5 }) {
+async function Je({ event: e7, options: t4, state: r6, status: n3, error: s6, resolve_opts: o5 }) {
   const a4 = [];
   try {
-    const i4 = [], c4 = await t3.manifest._.nodes[0](), l3 = z3([c4], "ssr") ?? true, p7 = z3([c4], "csr") ?? true;
+    const i4 = [], c4 = await t4.manifest._.nodes[0](), l3 = z3([c4], "ssr") ?? true, p7 = z3([c4], "csr") ?? true;
     if (l3) {
       r6.initiator = Re;
       const j3 = le({ event: e7, state: r6, node: c4, parent: async () => ({}) }), d5 = await j3, m7 = await ze({ event: e7, fetched: a4, node: c4, parent: async () => ({}), resolve_opts: o5, server_data_promise: j3, state: r6, csr: p7 });
-      i4.push({ node: c4, server_data: d5, data: m7 }, { node: await t3.manifest._.nodes[1](), data: null, server_data: null });
+      i4.push({ node: c4, server_data: d5, data: m7 }, { node: await t4.manifest._.nodes[1](), data: null, server_data: null });
     }
-    return await L({ options: t3, state: r6, page_config: { ssr: l3, csr: z3([c4], "csr") ?? true }, status: n3, error: await I2(e7, t3, s6), branch: i4, fetched: a4, event: e7, resolve_opts: o5 });
+    return await L({ options: t4, state: r6, page_config: { ssr: l3, csr: z3([c4], "csr") ?? true }, status: n3, error: await I2(e7, t4, s6), branch: i4, fetched: a4, event: e7, resolve_opts: o5 });
   } catch (i4) {
-    return i4 instanceof H ? F2(i4.status, i4.location) : ce(t3, i4 instanceof N ? i4.status : 500, (await I2(e7, t3, i4)).message);
+    return i4 instanceof H ? F2(i4.status, i4.location) : ce(t4, i4 instanceof N ? i4.status : 500, (await I2(e7, t4, i4)).message);
   }
 }
-async function Tt(e7, t3, r6, n3, s6, o5) {
-  if (s6.initiator === t3)
+async function Tt(e7, t4, r6, n3, s6, o5) {
+  if (s6.initiator === t4)
     return new Response(`Not found: ${e7.url.pathname}`, { status: 404 });
-  if (s6.initiator = t3, pt(e7)) {
+  if (s6.initiator = t4, pt(e7)) {
     const a4 = await n3.manifest._.nodes[r6.leaf]();
     if (a4.server)
       return mt(e7, n3, a4.server);
@@ -28959,10 +28988,10 @@ async function Tt(e7, t3, r6, n3, s6, o5) {
     const m7 = [];
     if (z3(a4, "ssr") === false)
       return await L({ branch: [], fetched: m7, page_config: { ssr: false, csr: z3(a4, "csr") ?? true }, status: c4, error: null, event: e7, options: n3, state: s6, resolve_opts: o5 });
-    let b6 = [], y5 = null;
+    let b6 = [], y6 = null;
     const w5 = a4.map((u, h2) => {
-      if (y5)
-        throw y5;
+      if (y6)
+        throw y6;
       return Promise.resolve().then(async () => {
         try {
           if (u === i4 && (l3 == null ? void 0 : l3.type) === "error")
@@ -28976,12 +29005,12 @@ async function Tt(e7, t3, r6, n3, s6, o5) {
             return k5;
           } });
         } catch (k5) {
-          throw y5 = k5, y5;
+          throw y6 = k5, y6;
         }
       });
     }), E4 = z3(a4, "csr") ?? true, x5 = a4.map((u, h2) => {
-      if (y5)
-        throw y5;
+      if (y6)
+        throw y6;
       return Promise.resolve().then(async () => {
         try {
           return await ze({ event: e7, fetched: m7, node: u, parent: async () => {
@@ -28991,7 +29020,7 @@ async function Tt(e7, t3, r6, n3, s6, o5) {
             return k5;
           }, resolve_opts: o5, server_data_promise: w5[h2], state: s6, csr: E4 });
         } catch (k5) {
-          throw y5 = k5, y5;
+          throw y6 = k5, y6;
         }
       });
     });
@@ -29039,11 +29068,11 @@ async function Tt(e7, t3, r6, n3, s6, o5) {
     return await Je({ event: e7, options: n3, state: s6, status: 500, error: a4, resolve_opts: o5 });
   }
 }
-function At(e7, t3, r6) {
+function At(e7, t4, r6) {
   const n3 = {}, s6 = e7.slice(1);
   let o5 = "";
-  for (let a4 = 0; a4 < t3.length; a4 += 1) {
-    const i4 = t3[a4];
+  for (let a4 = 0; a4 < t4.length; a4 += 1) {
+    const i4 = t4[a4];
     let c4 = s6[a4];
     if (i4.chained && i4.rest && o5 && (c4 = c4 ? o5 + "/" + c4 : o5), o5 = "", c4 === void 0)
       i4.rest && (n3[i4.name] = "");
@@ -29052,7 +29081,7 @@ function At(e7, t3, r6) {
         if (i4.optional && i4.chained) {
           let l3 = s6.indexOf(void 0, a4);
           if (l3 === -1) {
-            const p7 = t3[a4 + 1];
+            const p7 = t4[a4 + 1];
             if ((p7 == null ? void 0 : p7.rest) && p7.chained)
               o5 = c4;
             else
@@ -29071,25 +29100,25 @@ function At(e7, t3, r6) {
     return n3;
 }
 function Ut(e7) {
-  let t3 = false, r6;
-  return () => t3 ? r6 : (t3 = true, r6 = e7());
+  let t4 = false, r6;
+  return () => t4 ? r6 : (t4 = true, r6 = e7());
 }
 var ge = "x-sveltekit-invalidated";
-async function zt(e7, t3, r6, n3, s6) {
+async function zt(e7, t4, r6, n3, s6) {
   var o5;
-  if (!t3.page)
+  if (!t4.page)
     return new Response(void 0, { status: 404 });
   try {
-    const a4 = [...t3.page.layouts, t3.page.leaf], i4 = ((o5 = e7.url.searchParams.get(ge)) == null ? void 0 : o5.split("_").map(Boolean)) ?? a4.map(() => true);
+    const a4 = [...t4.page.layouts, t4.page.leaf], i4 = ((o5 = e7.url.searchParams.get(ge)) == null ? void 0 : o5.split("_").map(Boolean)) ?? a4.map(() => true);
     e7.url.searchParams.delete(ge);
     let c4 = false;
     const l3 = new URL(e7.url);
     l3.pathname = se(ie(l3.pathname), s6);
-    const p7 = { ...e7, url: l3 }, j3 = a4.map((y5, w5) => Ut(async () => {
+    const p7 = { ...e7, url: l3 }, j3 = a4.map((y6, w5) => Ut(async () => {
       try {
         if (c4)
           return { type: "skip" };
-        const E4 = y5 == null ? y5 : await r6.manifest._.nodes[y5]();
+        const E4 = y6 == null ? y6 : await r6.manifest._.nodes[y6]();
         return le({ event: p7, state: n3, node: E4, parent: async () => {
           const x5 = {};
           for (let u = 0; u < w5; u += 1) {
@@ -29101,9 +29130,9 @@ async function zt(e7, t3, r6, n3, s6) {
       } catch (E4) {
         throw c4 = true, E4;
       }
-    })), d5 = j3.map(async (y5, w5) => i4[w5] ? y5() : { type: "skip" });
+    })), d5 = j3.map(async (y6, w5) => i4[w5] ? y6() : { type: "skip" });
     let m7 = d5.length;
-    const b6 = await Promise.all(d5.map((y5, w5) => y5.catch(async (E4) => {
+    const b6 = await Promise.all(d5.map((y6, w5) => y6.catch(async (E4) => {
       if (E4 instanceof H)
         throw E4;
       return m7 = Math.min(m7, w5 + 1), { type: "error", error: await I2(e7, r6, E4), status: E4 instanceof N ? E4.status : void 0 };
@@ -29111,8 +29140,8 @@ async function zt(e7, t3, r6, n3, s6) {
     try {
       const w5 = `{"type":"data","nodes":[${b6.slice(0, m7).map(qe).join(",")}]}`;
       return B(w5);
-    } catch (y5) {
-      const w5 = y5;
+    } catch (y6) {
+      const w5 = y6;
       return B(JSON.stringify(Se(e7, w5)), 500);
     }
   } catch (a4) {
@@ -29120,8 +29149,8 @@ async function zt(e7, t3, r6, n3, s6) {
     return i4 instanceof H ? ee(i4) : B(JSON.stringify(await I2(e7, r6, i4)));
   }
 }
-function B(e7, t3 = 200) {
-  return new Response(e7, { status: t3, headers: { "content-type": "application/json", "cache-control": "private, no-store" } });
+function B(e7, t4 = 200) {
+  return new Response(e7, { status: t4, headers: { "content-type": "application/json", "cache-control": "private, no-store" } });
 }
 function ee(e7) {
   return B(JSON.stringify({ type: "redirect", location: e7.location }));
@@ -29129,34 +29158,34 @@ function ee(e7) {
 var O2 = {};
 var Y = encodeURIComponent;
 var X = decodeURIComponent;
-function Nt(e7, t3, r6, n3) {
-  const s6 = e7.headers.get("cookie") ?? "", o5 = (0, import_cookie.parse)(s6, { decode: X }), a4 = se(ae(t3.pathname) ? ie(t3.pathname) : t3.pathname, n3), i4 = a4.split("/").slice(0, -1).join("/") || "/";
+function Nt(e7, t4, r6, n3) {
+  const s6 = e7.headers.get("cookie") ?? "", o5 = (0, import_cookie.parse)(s6, { decode: X }), a4 = se(ae(t4.pathname) ? ie(t4.pathname) : t4.pathname, n3), i4 = a4.split("/").slice(0, -1).join("/") || "/";
   if (r6) {
     for (const d5 of Object.keys(O2))
       O2[d5] = new Set([...O2[d5]].filter((m7) => !J(a4, m7) || d5 in o5));
     for (const d5 in o5)
       O2[d5] = O2[d5] ?? /* @__PURE__ */ new Set(), [...O2[d5]].some((m7) => J(a4, m7)) || O2[d5].add(i4);
   }
-  const c4 = {}, l3 = { httpOnly: true, sameSite: "lax", secure: !(t3.hostname === "localhost" && t3.protocol === "http:") }, p7 = { get(d5, m7) {
+  const c4 = {}, l3 = { httpOnly: true, sameSite: "lax", secure: !(t4.hostname === "localhost" && t4.protocol === "http:") }, p7 = { get(d5, m7) {
     const b6 = c4[d5];
-    if (b6 && we(t3.hostname, b6.options.domain) && J(t3.pathname, b6.options.path))
+    if (b6 && we(t4.hostname, b6.options.domain) && J(t4.pathname, b6.options.path))
       return b6.value;
-    const y5 = (m7 == null ? void 0 : m7.decode) || X, E4 = (0, import_cookie.parse)(s6, { decode: y5 })[d5];
+    const y6 = (m7 == null ? void 0 : m7.decode) || X, E4 = (0, import_cookie.parse)(s6, { decode: y6 })[d5];
     if (!r6 || E4)
       return E4;
     const x5 = /* @__PURE__ */ new Set([...O2[d5] ?? []]);
-    b6 && x5.add(b6.options.path ?? i4), x5.size > 0 && console.warn(`Cookie with name '${d5}' was not found at path '${t3.pathname}', but a cookie with that name exists at these paths: '${[...x5].join("', '")}'. Did you mean to set its 'path' to '/' instead?`);
+    b6 && x5.add(b6.options.path ?? i4), x5.size > 0 && console.warn(`Cookie with name '${d5}' was not found at path '${t4.pathname}', but a cookie with that name exists at these paths: '${[...x5].join("', '")}'. Did you mean to set its 'path' to '/' instead?`);
   }, set(d5, m7, b6 = {}) {
-    let y5 = b6.path ?? i4;
-    if (c4[d5] = { name: d5, value: m7, options: { ...l3, ...b6, path: y5 } }, r6)
+    let y6 = b6.path ?? i4;
+    if (c4[d5] = { name: d5, value: m7, options: { ...l3, ...b6, path: y6 } }, r6)
       if (O2[d5] = O2[d5] ?? /* @__PURE__ */ new Set(), m7)
-        O2[d5].add(y5);
+        O2[d5].add(y6);
       else {
-        if (!O2[d5].has(y5) && O2[d5].size > 0) {
+        if (!O2[d5].has(y6) && O2[d5].size > 0) {
           const w5 = `'${Array.from(O2[d5]).join("', '")}'`;
-          console.warn(`Trying to delete cookie '${d5}' at path '${y5}', but a cookie with that name only exists at these paths: ${w5}.`);
+          console.warn(`Trying to delete cookie '${d5}' at path '${y6}', but a cookie with that name only exists at these paths: ${w5}.`);
         }
-        O2[d5].delete(y5);
+        O2[d5].delete(y6);
       }
   }, delete(d5, m7 = {}) {
     p7.set(d5, "", { ...m7, maxAge: 0 });
@@ -29165,47 +29194,47 @@ function Nt(e7, t3, r6, n3) {
   } };
   function j3(d5, m7) {
     const b6 = {};
-    for (const y5 in o5)
-      b6[y5] = Y(o5[y5]);
-    for (const y5 in c4) {
-      const w5 = c4[y5];
+    for (const y6 in o5)
+      b6[y6] = Y(o5[y6]);
+    for (const y6 in c4) {
+      const w5 = c4[y6];
       if (!we(d5.hostname, w5.options.domain) || !J(d5.pathname, w5.options.path))
         continue;
       const E4 = w5.options.encode || Y;
       b6[w5.name] = E4(w5.value);
     }
     if (m7) {
-      const y5 = (0, import_cookie.parse)(m7, { decode: X });
-      for (const w5 in y5)
-        b6[w5] = Y(y5[w5]);
+      const y6 = (0, import_cookie.parse)(m7, { decode: X });
+      for (const w5 in y6)
+        b6[w5] = Y(y6[w5]);
     }
-    return Object.entries(b6).map(([y5, w5]) => `${y5}=${w5}`).join("; ");
+    return Object.entries(b6).map(([y6, w5]) => `${y6}=${w5}`).join("; ");
   }
   return { cookies: p7, new_cookies: c4, get_cookie_header: j3 };
 }
-function we(e7, t3) {
-  if (!t3)
+function we(e7, t4) {
+  if (!t4)
     return true;
-  const r6 = t3[0] === "." ? t3.slice(1) : t3;
+  const r6 = t4[0] === "." ? t4.slice(1) : t4;
   return e7 === r6 ? true : e7.endsWith("." + r6);
 }
-function J(e7, t3) {
-  if (!t3)
+function J(e7, t4) {
+  if (!t4)
     return true;
-  const r6 = t3.endsWith("/") ? t3.slice(0, -1) : t3;
+  const r6 = t4.endsWith("/") ? t4.slice(0, -1) : t4;
   return e7 === r6 ? true : e7.startsWith(r6 + "/");
 }
-function Ht(e7, t3) {
-  for (const r6 of t3) {
+function Ht(e7, t4) {
+  for (const r6 of t4) {
     const { name: n3, value: s6, options: o5 } = r6;
     e7.append("set-cookie", (0, import_cookie.serialize)(n3, s6, o5));
   }
 }
-function It({ event: e7, options: t3, state: r6, get_cookie_header: n3 }) {
+function It({ event: e7, options: t4, state: r6, get_cookie_header: n3 }) {
   return async (s6, o5) => {
     const a4 = _e2(s6, o5, e7.url), i4 = o5 == null ? void 0 : o5.body;
     let c4 = (s6 instanceof Request ? s6.mode : o5 == null ? void 0 : o5.mode) ?? "cors", l3 = (s6 instanceof Request ? s6.credentials : o5 == null ? void 0 : o5.credentials) ?? "same-origin";
-    return await t3.hooks.handleFetch({ event: e7, request: a4, fetch: async (p7, j3) => {
+    return await t4.hooks.handleFetch({ event: e7, request: a4, fetch: async (p7, j3) => {
       const d5 = _e2(p7, j3, e7.url), m7 = new URL(d5.url);
       if (d5.headers.has("origin") || d5.headers.set("origin", e7.url.origin), p7 !== a4 && (c4 = (p7 instanceof Request ? p7.mode : j3 == null ? void 0 : j3.mode) ?? "cors", l3 = (p7 instanceof Request ? p7.credentials : j3 == null ? void 0 : j3.credentials) ?? "same-origin"), (d5.method === "GET" || d5.method === "HEAD") && (c4 === "no-cors" && m7.origin !== e7.url.origin || m7.origin === e7.url.origin) && d5.headers.delete("origin"), m7.origin !== e7.url.origin) {
         if (`.${m7.hostname}`.endsWith(`.${e7.url.hostname}`) && l3 !== "omit") {
@@ -29216,12 +29245,12 @@ function It({ event: e7, options: t3, state: r6, get_cookie_header: n3 }) {
         return c4 === "no-cors" && (f7 = new Response("", { status: f7.status, statusText: f7.statusText, headers: f7.headers })), f7;
       }
       let b6;
-      const y5 = t3.paths.assets || t3.paths.base, w5 = decodeURIComponent(m7.pathname), E4 = (w5.startsWith(y5) ? w5.slice(y5.length) : w5).slice(1), x5 = `${E4}/index.html`, u = t3.manifest.assets.has(E4), h2 = t3.manifest.assets.has(x5);
+      const y6 = t4.paths.assets || t4.paths.base, w5 = decodeURIComponent(m7.pathname), E4 = (w5.startsWith(y6) ? w5.slice(y6.length) : w5).slice(1), x5 = `${E4}/index.html`, u = t4.manifest.assets.has(E4), h2 = t4.manifest.assets.has(x5);
       if (u || h2) {
         const f7 = u ? E4 : x5;
-        if (t3.read) {
-          const _6 = u ? t3.manifest.mimeTypes[E4.slice(E4.lastIndexOf("."))] : "text/html";
-          return new Response(t3.read(f7), { headers: _6 ? { "content-type": _6 } : {} });
+        if (t4.read) {
+          const _6 = u ? t4.manifest.mimeTypes[E4.slice(E4.lastIndexOf("."))] : "text/html";
+          return new Response(t4.read(f7), { headers: _6 ? { "content-type": _6 } : {} });
         }
         return await fetch(d5);
       }
@@ -29233,7 +29262,7 @@ function It({ event: e7, options: t3, state: r6, get_cookie_header: n3 }) {
       }
       if (i4 && typeof i4 != "string" && !ArrayBuffer.isView(i4))
         throw new Error("Request body must be a string or TypedArray");
-      d5.headers.has("accept") || d5.headers.set("accept", "*/*"), d5.headers.has("accept-language") || d5.headers.set("accept-language", e7.request.headers.get("accept-language")), b6 = await Be(d5, t3, r6);
+      d5.headers.has("accept") || d5.headers.set("accept", "*/*"), d5.headers.has("accept-language") || d5.headers.set("accept-language", e7.request.headers.get("accept-language")), b6 = await Be(d5, t4, r6);
       const k5 = b6.headers.get("set-cookie");
       if (k5)
         for (const f7 of ue.splitCookiesString(k5)) {
@@ -29244,16 +29273,16 @@ function It({ event: e7, options: t3, state: r6, get_cookie_header: n3 }) {
     } });
   };
 }
-function _e2(e7, t3, r6) {
-  return e7 instanceof Request ? e7 : new Request(typeof e7 == "string" ? new URL(e7, r6) : e7, t3);
+function _e2(e7, t4, r6) {
+  return e7 instanceof Request ? e7 : new Request(typeof e7 == "string" ? new URL(e7, r6) : e7, t4);
 }
 var be = ({ html: e7 }) => e7;
 var ke = () => false;
 var Ee = ({ type: e7 }) => e7 === "js" || e7 === "css";
-async function Be(e7, t3, r6) {
+async function Be(e7, t4, r6) {
   var w5, E4, x5;
   let n3 = new URL(e7.url);
-  if (t3.csrf.check_origin && e7.method === "POST" && e7.headers.get("origin") !== n3.origin && $e(e7))
+  if (t4.csrf.check_origin && e7.method === "POST" && e7.headers.get("origin") !== n3.origin && $e(e7))
     return new Response(`Cross-site ${e7.method} form submissions are forbidden`, { status: 403 });
   let s6;
   try {
@@ -29262,15 +29291,15 @@ async function Be(e7, t3, r6) {
     return new Response("Malformed URI", { status: 400 });
   }
   let o5 = null, a4 = {};
-  if (t3.paths.base && !((w5 = r6.prerendering) != null && w5.fallback)) {
-    if (!s6.startsWith(t3.paths.base))
+  if (t4.paths.base && !((w5 = r6.prerendering) != null && w5.fallback)) {
+    if (!s6.startsWith(t4.paths.base))
       return new Response("Not found", { status: 404 });
-    s6 = s6.slice(t3.paths.base.length) || "/";
+    s6 = s6.slice(t4.paths.base.length) || "/";
   }
   const i4 = ae(s6);
   if (i4 && (s6 = ie(s6) || "/"), !((E4 = r6.prerendering) != null && E4.fallback)) {
-    const u = await t3.manifest._.matchers();
-    for (const h2 of t3.manifest._.routes) {
+    const u = await t4.manifest._.matchers();
+    for (const h2 of t4.manifest._.routes) {
       const k5 = h2.pattern.exec(s6);
       if (!k5)
         continue;
@@ -29303,7 +29332,7 @@ async function Be(e7, t3, r6) {
   try {
     if (o5 && !i4) {
       if (o5.page) {
-        const v7 = await Promise.all([...o5.page.layouts.map((S5) => S5 == null ? S5 : t3.manifest._.nodes[S5]()), t3.manifest._.nodes[o5.page.leaf]()]);
+        const v7 = await Promise.all([...o5.page.layouts.map((S5) => S5 == null ? S5 : t4.manifest._.nodes[S5]()), t4.manifest._.nodes[o5.page.leaf]()]);
         c4 = z3(v7, "trailingSlash");
       } else
         o5.endpoint && (c4 = (await o5.endpoint()).trailingSlash);
@@ -29311,9 +29340,9 @@ async function Be(e7, t3, r6) {
       if (_6 !== n3.pathname && !((x5 = r6.prerendering) != null && x5.fallback))
         return new Response(void 0, { status: 301, headers: { "x-sveltekit-normalize": "1", location: (_6.startsWith("//") ? n3.origin + _6 : _6) + (n3.search === "?" ? "" : n3.search) } });
     }
-    const { cookies: u, new_cookies: h2, get_cookie_header: k5 } = Nt(e7, n3, t3.dev, c4 ?? "never");
-    p7.cookies = u, p7.fetch = It({ event: p7, options: t3, state: r6, get_cookie_header: k5 }), r6.prerendering && !r6.prerendering.fallback && ve(n3);
-    const f7 = await t3.hooks.handle({ event: p7, resolve: (_6, v7) => y5(_6, v7).then((S5) => {
+    const { cookies: u, new_cookies: h2, get_cookie_header: k5 } = Nt(e7, n3, t4.dev, c4 ?? "never");
+    p7.cookies = u, p7.fetch = It({ event: p7, options: t4, state: r6, get_cookie_header: k5 }), r6.prerendering && !r6.prerendering.fallback && ve(n3);
+    const f7 = await t4.hooks.handle({ event: p7, resolve: (_6, v7) => y6(_6, v7).then((S5) => {
       for (const P5 in l3) {
         const C4 = l3[P5];
         S5.headers.set(P5, C4);
@@ -29342,9 +29371,9 @@ async function Be(e7, t3, r6) {
     }
     return f7;
   } catch (u) {
-    return u instanceof H ? i4 ? ee(u) : F2(u.status, u.location) : await fe(p7, t3, u);
+    return u instanceof H ? i4 ? ee(u) : F2(u.status, u.location) : await fe(p7, t4, u);
   }
-  async function y5(u, h2) {
+  async function y6(u, h2) {
     var k5;
     try {
       if (h2) {
@@ -29355,22 +29384,22 @@ async function Be(e7, t3, r6) {
         b6 = { transformPageChunk: h2.transformPageChunk || be, filterSerializedResponseHeaders: h2.filterSerializedResponseHeaders || ke, preload: h2.preload || Ee };
       }
       if ((k5 = r6.prerendering) != null && k5.fallback)
-        return await L({ event: u, options: t3, state: r6, page_config: { ssr: false, csr: true }, status: 200, error: null, branch: [], fetched: [], resolve_opts: b6 });
+        return await L({ event: u, options: t4, state: r6, page_config: { ssr: false, csr: true }, status: 200, error: null, branch: [], fetched: [], resolve_opts: b6 });
       if (o5) {
         let f7;
         if (i4)
-          f7 = await zt(u, o5, t3, r6, c4 ?? "never");
+          f7 = await zt(u, o5, t4, r6, c4 ?? "never");
         else if (o5.endpoint && (!o5.page || ut(u)))
           f7 = await dt(u, await o5.endpoint(), r6);
         else if (o5.page)
-          f7 = await Tt(u, o5, o5.page, t3, r6, b6);
+          f7 = await Tt(u, o5, o5.page, t4, r6, b6);
         else
           throw new Error("This should never happen");
         return f7;
       }
-      return r6.initiator === Re ? new Response("Internal Server Error", { status: 500 }) : r6.initiator ? r6.prerendering ? new Response("not found", { status: 404 }) : await fetch(e7) : await Je({ event: u, options: t3, state: r6, status: 404, error: new Error(`Not found: ${u.url.pathname}`), resolve_opts: b6 });
+      return r6.initiator === Re ? new Response("Internal Server Error", { status: 500 }) : r6.initiator ? r6.prerendering ? new Response("not found", { status: 404 }) : await fetch(e7) : await Je({ event: u, options: t4, state: r6, status: 404, error: new Error(`Not found: ${u.url.pathname}`), resolve_opts: b6 });
     } catch (f7) {
-      return await fe(u, t3, f7);
+      return await fe(u, t4, f7);
     } finally {
       u.cookies.set = () => {
         throw new Error("Cannot use `cookies.set(...)` after the response has been generated");
@@ -29385,7 +29414,7 @@ var Fe = "";
 function Ge(e7) {
   te = e7.base, Fe = e7.assets || te;
 }
-var Dt = ({ head: e7, body: t3, assets: r6, nonce: n3 }) => `<!DOCTYPE html>
+var Dt = ({ head: e7, body: t4, assets: r6, nonce: n3 }) => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -29394,15 +29423,15 @@ var Dt = ({ head: e7, body: t3, assets: r6, nonce: n3 }) => `<!DOCTYPE html>
     ` + e7 + `
   </head>
   <body>
-    <div>` + t3 + `</div>
+    <div>` + t4 + `</div>
   </body>
 </html>
 `;
-var Lt = ({ status: e7, message: t3 }) => `<!DOCTYPE html>
+var Lt = ({ status: e7, message: t4 }) => `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>` + t3 + `</title>
+		<title>` + t4 + `</title>
 
 		<style>
 			body {
@@ -29449,7 +29478,7 @@ var Lt = ({ status: e7, message: t3 }) => `<!DOCTYPE html>
 		<div class="error">
 			<span class="status">` + e7 + `</span>
 			<div class="message">
-				<h1>` + t3 + `</h1>
+				<h1>` + t4 + `</h1>
 			</div>
 		</div>
 	</body>
@@ -29458,13 +29487,13 @@ var Lt = ({ status: e7, message: t3 }) => `<!DOCTYPE html>
 var Me = null;
 Ge({ base: "", assets: "" });
 var Gt = class {
-  constructor(t3) {
+  constructor(t4) {
     this.options = { csp: { mode: "auto", directives: { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf: { check_origin: true }, dev: false, handle_error: (r6, n3) => this.options.hooks.handleError({ error: r6, event: n3, get request() {
       throw new Error("request in handleError has been replaced with event. See https://github.com/sveltejs/kit/pull/3384 for details");
-    } }) ?? { message: n3.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: te, assets: Fe }, public_env: {}, read: Me, root: Qe, service_worker: true, app_template: Dt, app_template_contains_nonce: false, error_template: Lt, version: "1671582632318" };
+    } }) ?? { message: n3.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t4, paths: { base: te, assets: Fe }, public_env: {}, read: Me, root: Qe, service_worker: true, app_template: Dt, app_template_contains_nonce: false, error_template: Lt, version: "1671591743164" };
   }
-  async init({ env: t3 }) {
-    const r6 = Object.entries(t3);
+  async init({ env: t4 }) {
+    const r6 = Object.entries(t4);
     Object.fromEntries(r6.filter(([s6]) => !s6.startsWith("PUBLIC_")));
     const n3 = Object.fromEntries(r6.filter(([s6]) => s6.startsWith("PUBLIC_")));
     if (this.options.public_env = n3, !this.options.hooks) {
@@ -29474,10 +29503,10 @@ var Gt = class {
       this.options.hooks = { handle: s6.handle || (({ event: o5, resolve: a4 }) => a4(o5)), handleError: s6.handleError || (({ error: o5 }) => console.error(o5.stack)), handleFetch: s6.handleFetch || (({ request: o5, fetch: a4 }) => a4(o5)) };
     }
   }
-  async respond(t3, r6 = {}) {
-    if (!(t3 instanceof Request))
+  async respond(t4, r6 = {}) {
+    if (!(t4 instanceof Request))
       throw new Error("The first argument to server.respond must be a Request object. See https://github.com/sveltejs/kit/pull/3384 for details");
-    return Be(t3, this.options, r6);
+    return Be(t4, this.options, r6);
   }
 };
 
@@ -29488,7 +29517,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "safari-share-icon.png", "star.webp", "service-worker.js"]),
   mimeTypes: { ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-0d10ab31.js", "imports": ["_app/immutable/start-0d10ab31.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-7ddc716d.js", "imports": ["_app/immutable/start-7ddc716d.js", "_app/immutable/chunks/index-12a0f121.js", "_app/immutable/chunks/singletons-3ce6c87d.js", "_app/immutable/chunks/index-0b40d47e.js", "_app/immutable/chunks/preload-helper-9b728935.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -29613,7 +29642,7 @@ async function e6(e32, t22) {
   let a22 = await e32.match(t22);
   return n22 && a22 && (a22 = new Response(null, a22)), a22;
 }
-function t2(e32, t22, n22, o22) {
+function t3(e32, t22, n22, o22) {
   return ("string" == typeof t22 || "GET" === t22.method) && a3(n22) && (n22.headers.has("Set-Cookie") && (n22 = new Response(n22.body, n22)).headers.append("Cache-Control", "private=Set-Cookie"), o22.waitUntil(e32.put(t22, n22.clone()))), n22;
 }
 var n2 = /* @__PURE__ */ new Set([200, 203, 204, 300, 301, 404, 405, 410, 414, 501]);
@@ -29629,12 +29658,12 @@ function o4(n22) {
     if (r22)
       return r22;
     o22.defer((e32) => {
-      t2(n22, a22, e32, o22);
+      t3(n22, a22, e32, o22);
     });
   };
 }
 var s5 = caches.default;
-var e22 = t2.bind(0, s5);
+var e22 = t3.bind(0, s5);
 var c3 = e6.bind(0, s5);
 var r5 = o4.bind(0, s5);
 var server = new Gt(manifest);

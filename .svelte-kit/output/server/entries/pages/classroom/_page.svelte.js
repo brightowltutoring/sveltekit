@@ -3,4 +3,9 @@ import{c as ne,a as re,e as ee,o as pe,v as ge,h as me}from"../../../chunks/inde
 
 <main><div class="relative md:-translate-y-10 -translate-y-36"><div id="meet" class="w-full h-[82vh] md:h-[670px]"></div>
 
-    <button><img alt="hangup button" class="${"absolute p-2 "+ee("opacity-0",!0)+" "+ee(v?"top-10 right-0":"bottom-5 right-10 ",!0)+" w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></button></div></main>`}),be=ne((G,F,T,L)=>{let v,p;return p=re(te,w=>v=w),pe(()=>{me(te,v=!1,v),window.document.body.classList.remove("dark-mode")}),p(),`${ge(ve,"JitsiUser").$$render(G,{},{},{})}`});export{be as default};
+    <button><img alt="hangup button" class="${"absolute p-2 "+ee("opacity-0",!0)+" "+ee(v?"top-10 right-0":"bottom-5 right-10 ",!0)+" w-[50px] rounded-full content-[url('/phone.svg')] bg-[#2a1c44] active:bg-red-900 rotate-90 hover:scale-[1.3] hover:rotate-0 transition-transform duration-300"}"></button></div></main>`}),be=ne((G,F,T,L)=>{let v,p;return p=re(te,w=>v=w),pe(()=>{me(te,v=!1,v),window.document.body.classList.remove("dark-mode")}),p(),`
+
+
+
+
+${ge(ve,"JitsiUser").$$render(G,{},{},{})}`});export{be as default};

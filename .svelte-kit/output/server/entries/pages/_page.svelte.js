@@ -1,4 +1,9 @@
-import{c as d,a as l,e as p,d as s,v as a}from"../../chunks/index.js";import{L as r}from"../../chunks/LazyMount.js";import{i as c}from"../../chunks/store.js";const x=d((e,$,u,b)=>{let t,o,n;return n=l(c,i=>o=i),t=`text-transparent bg-clip-text bg-gradient-to-tr ${o?"from-red-300 via-white to-white":"from-indigo-600 to-black"}`,n(),`<video loading="lazy" controlslist="nodownload" playsinline autoplay muted loop src="/login-bg-video-blurred.mp4" class="${"absolute -z-10 top-0 object-cover w-11/12 h-screen "+p(o?"invert-[0.95] blur-3xl":"blur-2xl",!0)}"></video>
+import{c as d,a as l,e as p,d as s,v as a}from"../../chunks/index.js";import{L as r}from"../../chunks/LazyMount.js";import{i as c}from"../../chunks/store.js";const x=d((e,$,u,b)=>{let t,o,n;return n=l(c,i=>o=i),t=`text-transparent bg-clip-text bg-gradient-to-tr ${o?"from-red-300 via-white to-white":"from-indigo-600 to-black"}`,n(),`
+
+
+
+
+<video loading="lazy" controlslist="nodownload" playsinline autoplay muted loop src="/login-bg-video-blurred.mp4" class="${"absolute -z-10 top-0 object-cover w-11/12 h-screen "+p(o?"invert-[0.95] blur-3xl":"blur-2xl",!0)}"></video>
 
 
 
