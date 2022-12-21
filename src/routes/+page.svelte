@@ -1,12 +1,4 @@
 <script>
-  // import { page } from "$app/stores";
-  // console.log("$page.data.post.title", $page.data.post.title);
-
-  // export let data;
-  // const { post } = data;
-  // console.log("post.title", post.title);
-  // TODO: above code is experimental; deciding on how to implement head tags
-
   // import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
   // import Reviews from "$lib/Reviews/Reviews.svelte";
   // import PlansSection from "$lib/Plans/PlansSection.svelte";
@@ -27,23 +19,8 @@
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
-
-  // TODO: delete
-  // import { routes } from "$lib/store";
 </script>
 
-<!-- TODO: delete -->
-
-<!-- <svelte:head>
-  <title>Thinksolve.io 💫</title>
-  <meta property="og:url" content="https://thinksolve.io/" />
-</svelte:head> -->
-<!-- {@html $routes.home.meta} -->
-
-<!-- <meta
-  name="description"
-  content="Math and Physics Tutoring for the Stone Age."
-/> -->
 <video
   loading="lazy"
   controlslist="nodownload"
@@ -56,8 +33,6 @@
     ? 'invert-[0.95] blur-3xl'
     : 'blur-2xl'}"
 />
-<!-- dec 18 2022: noticed that 'object-cover' makes the pwa navbar shake on opening the pwa-->
-<!-- not sure to keep 'object-cover' -->
 
 {#if !isRunningStandalone()}
   <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">

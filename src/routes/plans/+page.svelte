@@ -1,16 +1,6 @@
 <script>
-  //  TODO: delete
-  // import { page } from "$app/stores";
-  // import { routes } from "$lib/store"; // used in svelte:tag
   import PlansSection from "$lib/Plans/PlansSection.svelte";
 </script>
-
-<!-- TODO: delete -->
-<!-- <svelte:head>
-  <title>Plans 💡</title>
-  <meta property="og:url" content="https://thinksolve.io/plans" />
-</svelte:head> -->
-<!-- {$routes[$page.route.id.slice(1)].meta} -->
 
 <PlansSection />
 <!-- <PlansSection on:boop={(e) => console.log("😮", e.detail.message)} /> -->

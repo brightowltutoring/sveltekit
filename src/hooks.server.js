@@ -20,37 +20,21 @@ export async function redirectOldUrls({ event, resolve }) {
   return await resolve(event);
 }
 
-// // TODO: test
-// export async function second({ event, resolve }) {
-//   // if (event.url.pathname.startsWith("/plans")) {
-//   if (event.url.pathname === "/plans") {
-//     return new Response("custom response");
-//   }
-
-//   const response = await resolve(event);
-//   return response;
-// }
-
-// As suggested by mihaon on 'https://github.com/sveltejs/svelte/issues/7444', this is a dirty fix to remove duplicate meta tags  ... which I also discovered was an issue with SSR pages
-// Update: this function doesnt work even with updated package.json; conduitry mentioned that in svelte 3.51^ the issue was resolved
+// This hook function — with 'transformPage' updated to 'transformPageChunk' — as provided by mihaon on 'https://github.com/sveltejs/svelte/issues/7444' fixes duplicate meta tags when starting with an SSR loaded page; I first surmised this could be a SSR/SSG-related issue  when starting with non-SSR route '/classroom' and no meta tag duplication persisted upon route changes
 export async function metaTagFixWhenSSR({ event, resolve }) {
-  let response = await resolve(event, {
-    // transformPage: ({ html }) => {
-    transformPageChunk: ({ html }) => {
-      return html
-        .replace(/<link\s+rel="canonical"[^>]*>/, "")
-        .replace(/<meta\s+name="description"[^>]*>/, "")
-        .replace(/<meta\s+name="keywords"[^>]*>/, "")
-        .replace(/<meta\s+property="og:url"[^>]*>/, "")
-        .replace(/<meta\s+property="og:title"[^>]*>/, "")
-        .replace(/<meta\s+property="og:image"[^>]*>/, "")
-        .replace(/<meta\s+property="og:description"[^>]*>/, "");
-    },
-  });
+  function htmlTransformer({ html }) {
+    return html
+      .replace(/<link\s+rel="canonical"[^>]*>/, "")
+      .replace(/<meta\s+name="description"[^>]*>/, "")
+      .replace(/<meta\s+name="keywords"[^>]*>/, "")
+      .replace(/<meta\s+property="og:url"[^>]*>/, "")
+      .replace(/<meta\s+property="og:title"[^>]*>/, "")
+      .replace(/<meta\s+property="og:image"[^>]*>/, "")
+      .replace(/<meta\s+property="og:description"[^>]*>/, "");
+  }
 
-  return response;
+  return await resolve(event, { transformPageChunk: htmlTransformer });
 }
 
 import { sequence } from "@sveltejs/kit/hooks";
 export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
-// export const handle = sequence(redirectOldUrls);
