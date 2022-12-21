@@ -6,7 +6,9 @@
   // const { post } = data;
   // console.log("post.title", post.title);
 
-  import { routes } from "$lib/store"; // used in svelte:tag
+  //  TODO: delete
+
+  // import { routes } from "$lib/store"; // used in svelte:tag
 
   // TODO: above code is experimental; deciding on how to implement head tags
 
@@ -32,17 +34,19 @@
   }`;
 </script>
 
+<!-- TODO: delete -->
+<!-- 
 <svelte:head>
-  <!-- {@html $routes.home.meta} -->
 
   <title>Thinksolve.io 💫</title>
-  <!-- <meta
-    name="description"
-    content="Math and Physics Tutoring for the Stone Age."
-  /> -->
   <meta property="og:url" content="https://thinksolve.io/" />
-</svelte:head>
+</svelte:head> -->
+<!-- {@html $routes.home.meta} -->
 
+<!-- <meta
+  name="description"
+  content="Math and Physics Tutoring for the Stone Age."
+/> -->
 <video
   loading="lazy"
   controlslist="nodownload"

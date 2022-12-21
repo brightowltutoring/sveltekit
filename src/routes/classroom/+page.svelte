@@ -12,14 +12,18 @@
     window.document.body.classList.remove("dark-mode");
   });
 
-  import { page } from "$app/stores";
-  import { routes } from "$lib/store";
+  //  TODO: delete
+
+  // import { page } from "$app/stores";
+  // import { routes } from "$lib/store";
 </script>
 
-<svelte:head>
-  <!-- {$routes[$page.route.id.slice(1)].meta} -->
+<!-- TODO: delete -->
+
+<!-- <svelte:head>
   <title>Classroom 🍎</title>
   <meta property="og:url" content="https://thinksolve.io/classroom" />
-</svelte:head>
+</svelte:head> -->
+<!-- {$routes[$page.route.id.slice(1)].meta} -->
 
 <JitsiUser />
