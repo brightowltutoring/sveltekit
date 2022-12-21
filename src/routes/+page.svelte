@@ -34,10 +34,12 @@
 
 <svelte:head>
   <!-- {@html $routes.home.meta} -->
-  <meta
+
+  <title>Thinksolve.io 💫</title>
+  <!-- <meta
     name="description"
     content="Math and Physics Tutoring for the Stone Age."
-  />
+  /> -->
   <meta property="og:url" content="https://thinksolve.io/" />
 </svelte:head>
 
