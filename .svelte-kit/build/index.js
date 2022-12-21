@@ -13,7 +13,7 @@ const error_template = ({ status, message }) => "<!DOCTYPE html>\n<html lang=\"e
 let read = null;
 
 set_paths({"base":"","assets":""});
-set_version("1671594890732");
+set_version("1671616218874");
 
 let default_protocol = 'https';
 
@@ -34,17 +34,11 @@ export class Server {
 				check_origin: true,
 			},
 			dev: false,
+			embedded: false,
 			handle_error: (error, event) => {
-				return this.options.hooks.handleError({
-					error,
-					event,
-
-					// TODO remove for 1.0
-					// @ts-expect-error
-					get request() {
-						throw new Error('request in handleError has been replaced with event. See https://github.com/sveltejs/kit/pull/3384 for details');
-					}
-				}) ?? { message: event.route.id != null ? 'Internal Error' : 'Not Found' };
+				return this.options.hooks.handleError({ error, event }) ?? {
+					message: event.route.id != null ? 'Internal Error' : 'Not Found'
+				};
 			},
 			hooks: null,
 			manifest,
@@ -56,7 +50,7 @@ export class Server {
 			app_template,
 			app_template_contains_nonce: false,
 			error_template,
-			version: "1671594890732"
+			version: "1671616218874"
 		};
 	}
 
@@ -79,11 +73,6 @@ export class Server {
 
 		if (!this.options.hooks) {
 			const module = await import("../../src/hooks.server.js");
-
-			// TODO remove this for 1.0
-			if (module.externalFetch) {
-				throw new Error('externalFetch has been removed — use handleFetch instead. See https://github.com/sveltejs/kit/pull/6565 for details');
-			}
 
 			this.options.hooks = {
 				handle: module.handle || (({ event, resolve }) => resolve(event)),

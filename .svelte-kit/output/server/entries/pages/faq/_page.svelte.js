@@ -55,21 +55,21 @@ import{c as l,a as t}from"../../../chunks/index.js";import{s as i,a as n}from"..
 
   <details class="svelte-1yyztah"><summary class="svelte-1yyztah">What subjects do you cover? </summary>
 
-    <p class="svelte-1yyztah"><span class="font-Poppins font-bold">MATHEMATICS</span>\xA0 Calculus \u2022
-      Trigonometry \u2022 Advanced Functions \u2022 Complex Numbers \u2022 Linear Algebra \u2022
-      Probability and Statistics \xA0\xA0<span class="font-Poppins font-bold">PHYSICS</span>
-      \xA0Kinematics \u2022 Mechanics \u2022 Thermodynamics \u2022 Fluids \u2022 Electricity &amp; Magnetism
-      \u2022 Circuit Analysis \u2022 Waves \u2022 Optics \u2022 Atomic &amp; Quantum Physics \u2022 Special Relativity
-      \xA0\xA0<span class="font-Poppins font-bold">SPANISH</span>
-      \xA0 Pronunciation \u2022 Grammatical Rules \u2022 Practical Examples
+    <p class="svelte-1yyztah"><span class="font-Poppins font-bold">MATHEMATICS</span>  Calculus •
+      Trigonometry • Advanced Functions • Complex Numbers • Linear Algebra •
+      Probability and Statistics   <span class="font-Poppins font-bold">PHYSICS</span>
+       Kinematics • Mechanics • Thermodynamics • Fluids • Electricity &amp; Magnetism
+      • Circuit Analysis • Waves • Optics • Atomic &amp; Quantum Physics • Special Relativity
+        <span class="font-Poppins font-bold">SPANISH</span>
+        Pronunciation • Grammatical Rules • Practical Examples
 
       <br><br>
       <b>Levels:</b> IB / AP / OSSD (9-12) / College &amp; University
     </p></details>
 
   <details class="svelte-1yyztah"><summary class="svelte-1yyztah">How are mock tests administered? </summary>
-    <p class="svelte-1yyztah">After booking a &quot;Mock&quot; session on <a data-sveltekit-preload-data href="/plans" class="svelte-1yyztah">plans</a>, the student attends a live session where a prepared examination \u2014 in
-      the form of a Google Forms link \u2014 will be shared at the beginning of the
+    <p class="svelte-1yyztah">After booking a &quot;Mock&quot; session on <a data-sveltekit-preload-data href="/plans" class="svelte-1yyztah">plans</a>, the student attends a live session where a prepared examination — in
+      the form of a Google Forms link — will be shared at the beginning of the
       session. The topics are chosen based on input during booking, as well as
       prior discussion with the student.
     </p>

@@ -1,1 +1,0 @@
-function t({params:e}){return{post:{title:`Title for ${e.slug} goes here`,content:`Content for ${e.slug} goes here`}}}const o=Object.freeze(Object.defineProperty({__proto__:null,load:t},Symbol.toStringTag,{value:"Module"}));export{o as _,t as l};
