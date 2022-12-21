@@ -123,7 +123,7 @@ export const routes = writable({
     title: "Thinksolve.io 💫",
     isCurrent: false,
     // icon: IconHome,
-    meta: `<meta name="description" content="Math and Physics Tutoring for the Stone Age."/>
+    meta: `<meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
     <meta property="og:url" content="https://thinksolve.io/">
     `,
   },
@@ -141,7 +141,8 @@ export const routes = writable({
     title: "Plans 💡",
     isCurrent: false,
     icon: IconPlans,
-    meta: `<meta property="og:url" content="https://thinksolve.io/plans">`,
+    meta: `<meta name="description" content="Choose between Classic or Mock session; book a time and date; pay now or later."/>
+    <meta property="og:url" content="https://thinksolve.io/plans">`,
   },
 
   homework: {
@@ -150,7 +151,8 @@ export const routes = writable({
     title: "Homework 📚",
     isCurrent: false,
     icon: IconHomework,
-    meta: `<meta property="og:url" content="https://thinksolve.io/homework">`,
+    meta: `<meta name="description" content="Click and submit your homework here; we accept all relevant file types for homework submission."/>
+    <meta property="og:url" content="https://thinksolve.io/homework">`,
   },
   classroom: {
     name: "Classroom",
@@ -158,7 +160,8 @@ export const routes = writable({
     title: "Classroom 🍎",
     isCurrent: false,
     icon: IconClassroom,
-    meta: `<meta property="og:url" content="https://thinksolve.io/classroom">`,
+    meta: `<meta name="description" content="You are on the classroom page! Hit join to enter, our scheduled session will start shortly. "/>
+    <meta property="og:url" content="https://thinksolve.io/classroom">`,
   },
   // classroomA: {
   //   name: "ClassroomA",
