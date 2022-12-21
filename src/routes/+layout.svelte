@@ -90,6 +90,10 @@
   }
 </script>
 
+<svelte:head>
+  <link rel="manifest" href="/manifest.json" />
+</svelte:head>
+
 <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
 
 <main>
