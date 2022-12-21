@@ -8,7 +8,7 @@
 
   //  TODO: delete
 
-  // import { routes } from "$lib/store"; // used in svelte:tag
+  import { routes } from "$lib/store";
 
   // TODO: above code is experimental; deciding on how to implement head tags
 
@@ -35,12 +35,11 @@
 </script>
 
 <!-- TODO: delete -->
-<!-- 
-<svelte:head>
 
+<svelte:head>
   <title>Thinksolve.io 💫</title>
   <meta property="og:url" content="https://thinksolve.io/" />
-</svelte:head> -->
+</svelte:head>
 <!-- {@html $routes.home.meta} -->
 
 <!-- <meta
