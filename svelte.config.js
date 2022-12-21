@@ -10,7 +10,6 @@ const config = {
   extensions: [".svelte", ...mdsvexConfig.extensions],
   kit: {
     adapter: adapter(),
-    // alias: {'$libo/*':'/Users/brightowl/Documents/GitHub/sveltekit/src/libo/*'},
   },
   preprocess: [preprocess({ postcss: true }), mdsvex(mdsvexConfig)],
 };
