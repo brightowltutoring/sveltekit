@@ -5,11 +5,6 @@
   // export let data;
   // const { post } = data;
   // console.log("post.title", post.title);
-
-  //  TODO: delete
-
-  import { routes } from "$lib/store";
-
   // TODO: above code is experimental; deciding on how to implement head tags
 
   // import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
@@ -32,14 +27,17 @@
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
+
+  // TODO: delete
+  // import { routes } from "$lib/store";
 </script>
 
 <!-- TODO: delete -->
 
-<svelte:head>
+<!-- <svelte:head>
   <title>Thinksolve.io 💫</title>
   <meta property="og:url" content="https://thinksolve.io/" />
-</svelte:head>
+</svelte:head> -->
 <!-- {@html $routes.home.meta} -->
 
 <!-- <meta

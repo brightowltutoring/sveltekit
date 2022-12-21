@@ -14,16 +14,16 @@
 
   //  TODO: delete
 
-  import { page } from "$app/stores";
-  import { routes } from "$lib/store";
+  // import { page } from "$app/stores";
+  // import { routes } from "$lib/store";
 </script>
 
 <!-- TODO: delete -->
 
-<svelte:head>
+<!-- <svelte:head>
   <title>Classroom 🍎</title>
   <meta property="og:url" content="https://thinksolve.io/classroom" />
-</svelte:head>
+</svelte:head> -->
 <!-- {$routes[$page.route.id.slice(1)].meta} -->
 
 <JitsiUser />
