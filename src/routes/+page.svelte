@@ -16,7 +16,6 @@
   $: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
-  console.log("🎤 drop");
 </script>
 
 <video
