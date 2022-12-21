@@ -33,7 +33,12 @@
 </script>
 
 <svelte:head>
-  {@html $routes.home.meta}
+  <!-- {@html $routes.home.meta} -->
+  <meta
+    name="description"
+    content="Math and Physics Tutoring for the Stone Age."
+  />
+  <meta property="og:url" content="https://thinksolve.io/" />
 </svelte:head>
 
 <video

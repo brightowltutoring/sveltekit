@@ -17,7 +17,8 @@
 </script>
 
 <svelte:head>
-  {@html $routes[$page.route.id.slice(1)].meta}
+  <!-- {$routes[$page.route.id.slice(1)].meta} -->
+  <meta property="og:url" content="https://thinksolve.io/classroom" />
 </svelte:head>
 
 <JitsiUser />
