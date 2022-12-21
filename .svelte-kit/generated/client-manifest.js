@@ -14,8 +14,7 @@ export const nodes = [() => import('./nodes/0'),
 	() => import('./nodes/11'),
 	() => import('./nodes/12'),
 	() => import('./nodes/13'),
-	() => import('./nodes/14'),
-	() => import('./nodes/15')];
+	() => import('./nodes/14')];
 
 export const server_loads = [];
 
@@ -27,13 +26,12 @@ export const dictionary = {
 	"/homework": [6],
 	"/katex": [7],
 	"/login": [8],
-	"/math-ssg": [10],
-	"/mathjax": [11],
+	"/mathjax": [10],
 	"/math": [9],
-	"/physics": [12],
-	"/plans": [13],
-	"/samplequiz": [14],
-	"/stripe": [15]
+	"/physics": [11],
+	"/plans": [12],
+	"/samplequiz": [13],
+	"/stripe": [14]
 };
 
 export const hooks = {

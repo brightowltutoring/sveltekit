@@ -42,7 +42,7 @@
 >
   <!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7" -->
   <!-- {#if ready} -->
-  <!-- {#each plansCards as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i} -->
+
   {#each plansCardArray as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
     <div
       in:scale={{
@@ -52,7 +52,6 @@
       }}
     >
       <PlansCard {card} {payNowUrl} {payLaterUrl}>
-        <!-- <span slot="buttonText"> {buttonText} </span> -->
         <span slot="cardTitle"> {cardTitle} </span>
         <span slot="cardText"> {cardText} </span>
       </PlansCard>

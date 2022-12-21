@@ -1,52 +1,10 @@
-import { c as create_ssr_component, d as add_attribute, v as validate_component } from "./index.js";
-const InView = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { vanilla } = $$props;
-  let { once } = $$props;
-  let { onview = () => console.log("i \u2764\uFE0F slots") } = $$props;
-  let container;
-  let { single } = $$props;
-  let { root = null } = $$props;
-  let { threshold = 0 } = $$props;
-  let { margin = "0px" } = $$props;
-  if ($$props.vanilla === void 0 && $$bindings.vanilla && vanilla !== void 0)
-    $$bindings.vanilla(vanilla);
-  if ($$props.once === void 0 && $$bindings.once && once !== void 0)
-    $$bindings.once(once);
-  if ($$props.onview === void 0 && $$bindings.onview && onview !== void 0)
-    $$bindings.onview(onview);
-  if ($$props.single === void 0 && $$bindings.single && single !== void 0)
-    $$bindings.single(single);
-  if ($$props.root === void 0 && $$bindings.root && root !== void 0)
-    $$bindings.root(root);
-  if ($$props.threshold === void 0 && $$bindings.threshold && threshold !== void 0)
-    $$bindings.threshold(threshold);
-  if ($$props.margin === void 0 && $$bindings.margin && margin !== void 0)
-    $$bindings.margin(margin);
-  return `
+import{c as f,d as h,v as m}from"./index.js";const w=f((v,e,t,i)=>{let{vanilla:o}=e,{once:l}=e,{onview:a=()=>console.log("i \u2764\uFE0F slots")}=e,u,{single:n}=e,{root:d=null}=e,{threshold:r=0}=e,{margin:c="0px"}=e;return e.vanilla===void 0&&t.vanilla&&o!==void 0&&t.vanilla(o),e.once===void 0&&t.once&&l!==void 0&&t.once(l),e.onview===void 0&&t.onview&&a!==void 0&&t.onview(a),e.single===void 0&&t.single&&n!==void 0&&t.single(n),e.root===void 0&&t.root&&d!==void 0&&t.root(d),e.threshold===void 0&&t.threshold&&r!==void 0&&t.threshold(r),e.margin===void 0&&t.margin&&c!==void 0&&t.margin(c),`
 
 
-${!vanilla ? `<div${add_attribute("this", container, 0)}>${slots.default ? slots.default({}) : ``}</div>` : ``}`;
-});
-const LazyMount = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { Import = async () => {
-  } } = $$props;
-  let Component;
-  const getComponent = async () => Component = await Import();
-  if ($$props.Import === void 0 && $$bindings.Import && Import !== void 0)
-    $$bindings.Import(Import);
-  return `
+${o?"":`<div${h("this",u,0)}>${i.default?i.default({}):""}</div>`}`}),_=f((v,e,t,i)=>{let{Import:o=async()=>{}}=e,l;const a=async()=>l=await o();return e.Import===void 0&&t.Import&&o!==void 0&&t.Import(o),`
 
 
-${validate_component(InView, "InView").$$render($$result, { onview: getComponent }, {}, {
-    default: () => {
-      return `${Component ? `${validate_component(Component.default, "Component.default").$$render($$result, Object.assign($$props), {}, {})}` : ``}`;
-    }
-  })}
+${m(w,"InView").$$render(v,{onview:a},{},{default:()=>`${l?`${m(l.default,"Component.default").$$render(v,Object.assign(e),{},{})}`:""}`})}
 
 
-`;
-});
-export {
-  InView as I,
-  LazyMount as L
-};
+`});export{w as I,_ as L};

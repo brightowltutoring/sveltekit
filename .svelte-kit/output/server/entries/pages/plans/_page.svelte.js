@@ -1,10 +1,7 @@
-import { c as create_ssr_component, v as validate_component } from "../../../chunks/index.js";
-import PlansSection from "../../../chunks/PlansSection.js";
-const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${validate_component(PlansSection, "PlansSection").$$render($$result, {}, {}, {})}
+import{c as e,v as n}from"../../../chunks/index.js";import t from"../../../chunks/PlansSection.js";const p=e((o,r,s,a)=>`${n(t,"PlansSection").$$render(o,{},{},{})}
 
-`;
-});
-export {
-  Page as default
-};
+
+
+
+
+`);export{p as default};

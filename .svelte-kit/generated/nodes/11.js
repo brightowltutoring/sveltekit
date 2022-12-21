@@ -1,3 +1,3 @@
-import * as shared from "../../../src/routes/mathjax/+page.js";
+import * as shared from "../../../src/routes/physics/+page.js";
 export { shared };
-export { default as component } from "../../../src/routes/mathjax/+page.svx";
+export { default as component } from "../../../src/routes/physics/+page.svelte";
