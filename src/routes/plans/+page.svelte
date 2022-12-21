@@ -1,5 +1,4 @@
 <script>
-  // $page.route.id.slice(1)
   import { page } from "$app/stores";
   import { routes } from "$lib/store"; // used in svelte:tag
   import PlansSection from "$lib/Plans/PlansSection.svelte";

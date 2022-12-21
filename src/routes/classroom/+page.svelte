@@ -11,6 +11,13 @@
     $isDarkMode = false;
     window.document.body.classList.remove("dark-mode");
   });
+
+  import { page } from "$app/stores";
+  import { routes } from "$lib/store";
 </script>
+
+<svelte:head>
+  {@html $routes[$page.route.id.slice(1)].meta}
+</svelte:head>
 
 <JitsiUser />
