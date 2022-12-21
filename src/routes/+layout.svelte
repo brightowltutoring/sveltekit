@@ -7,13 +7,16 @@
   } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
 
-  import Navbar from "$lib/Nav/Navbar.svelte";
+  import { page } from "$app/stores";
+  import { routes } from "$lib/store";
+  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
+
+  import Navbar from "$lib/Nav/Navbar.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
 
-  // import LoginCard from "$lib/Login/LoginCard.svelte";
-  // import Footer from "$lib/Footer.svelte";
+  // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
   let FooterComponent;
 
   import {
@@ -73,10 +76,6 @@
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
 
-  // import { page } from "$app/stores";
-  // import { routes } from "$lib/store";
-  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-
   let contactLinkClicked = false;
 
   // for logincard ui .. which is lazy loaded below
@@ -88,9 +87,6 @@
         "opacity-100 transition-opacity duration-100 ease-in";
     }, opacityEasingDelay);
   }
-
-  import { page } from "$app/stores";
-  import { routes } from "$lib/store";
 </script>
 
 <svelte:head>
@@ -224,30 +220,25 @@
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
     />
-    <!--TODO: note: luckily this one modal dropzone has no impact on the perfect lightscore .. having the Dropzone lazyMounted (which I had done before) would prevent the 'popupOnce' logic defined inside Dropzone.svelte; even WITH timeout delay it would not work -->
+    <!-- NOTE: luckily this one modal dropzone has no impact on the perfect lightscore .. having the Dropzone lazyMounted (which I had done before) would prevent the 'popupOnce' logic defined inside Dropzone.svelte; even WITH timeout delay it would not work -->
 
     <!-- <LazyMount
-    Import={() => import("$lib/Dropzone/Dropzone.svelte")}
-    textSizeTW={"text-6xl"}
-    dimensionsTW={"w-[80vw] h-[85vh]"}
-    brightnessTW={"brightness-95"}
-  /> -->
+      Import={() => import("$lib/Dropzone/Dropzone.svelte")}
+      textSizeTW={"text-6xl"}
+      dimensionsTW={"w-[80vw] h-[85vh]"}
+      brightnessTW={"brightness-95"}
+    /> -->
   </Modal>
 
-  <!-- TODO: removed 'overflow-x-auto overflow-y-hidden' on nov27,2022 ...doesnt seem necessary given 'overflow-x-scroll overflow-y-hidden' is already used on ul element in navbar.svelte -->
   <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full ">
     <Navbar />
   </div>
-
-  <!-- because of the fixing of navbar, we have to defined a top padding to this slot container -->
-  <!-- TODO: this padding is not needed for smaller than md -->
 
   <div class="px-[7%] pt-32 md:block">
     <slot />
 
     <!-- <Footer bind:contactLinkClicked /> -->
 
-    <!-- When passing bounded variables, cannot (yet) use the LazyMount way-->
     <InView
       margin={"200px"}
       onview={async () =>
@@ -257,12 +248,5 @@
         <FooterComponent.default bind:contactLinkClicked />
       {/if}
     </InView>
-
-    <!-- <LazyMount
-      bind:contactLinkClicked
-      Import={ () => import("$lib/Footer.svelte")}
-    /> -->
-
-    <!-- Failed attempt to consolidate lazy import block; comes down to import statement disallowing variable path. Update: passing import via a function prop seems to work, but then passing bounded props doesnt seem to work ..also the markup is already as large as the original  -->
   </div>
 </main>

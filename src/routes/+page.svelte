@@ -1,11 +1,8 @@
 <script>
-  // import DropzoneOpener from "$lib/Dropzone/DropzoneOpener.svelte";
-  // import Reviews from "$lib/Reviews/Reviews.svelte";
-  // import PlansSection from "$lib/Plans/PlansSection.svelte";
-
   // let PlansSection;
   // let classicoAndMock; // this refers to data that is sent UP from PlansSection.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   // import InView from "$lib/Wrappers/InView.svelte";
+
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import { isRunningStandalone } from "$lib/utils";
   import { isDarkMode } from "$lib/store";

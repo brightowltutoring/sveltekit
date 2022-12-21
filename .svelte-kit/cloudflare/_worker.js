@@ -178,7 +178,7 @@ function z2(n3, i2) {
 function A(n3, i2 = p) {
   let u;
   const t3 = /* @__PURE__ */ new Set();
-  function a5(e8) {
+  function a4(e8) {
     if (k(n3, e8) && (n3 = e8, u)) {
       const r5 = !o.length;
       for (const s5 of t3)
@@ -190,35 +190,35 @@ function A(n3, i2 = p) {
       }
     }
   }
-  function l3(e8) {
-    a5(e8(n3));
+  function l4(e8) {
+    a4(e8(n3));
   }
   function f5(e8, r5 = p) {
     const s5 = [e8, r5];
-    return t3.add(s5), t3.size === 1 && (u = i2(a5) || p), e8(n3), () => {
+    return t3.add(s5), t3.size === 1 && (u = i2(a4) || p), e8(n3), () => {
       t3.delete(s5), t3.size === 0 && (u(), u = null);
     };
   }
-  return { set: a5, update: l3, subscribe: f5 };
+  return { set: a4, update: l4, subscribe: f5 };
 }
 function S2(n3, i2, u) {
-  const t3 = !Array.isArray(n3), a5 = t3 ? [n3] : n3, l3 = i2.length < 2;
+  const t3 = !Array.isArray(n3), a4 = t3 ? [n3] : n3, l4 = i2.length < 2;
   return z2(u, (f5) => {
     let e8 = false;
     const r5 = [];
     let s5 = 0, d6 = p;
-    const g4 = () => {
+    const g5 = () => {
       if (s5)
         return;
       d6();
       const c3 = i2(t3 ? r5[0] : r5, f5);
-      l3 ? f5(c3) : d6 = S(c3) ? c3 : p;
-    }, _6 = a5.map((c3, p5) => x(c3, (h2) => {
-      r5[p5] = h2, s5 &= ~(1 << p5), e8 && g4();
+      l4 ? f5(c3) : d6 = S(c3) ? c3 : p;
+    }, _6 = a4.map((c3, p5) => x(c3, (h2) => {
+      r5[p5] = h2, s5 &= ~(1 << p5), e8 && g5();
     }, () => {
       s5 |= 1 << p5;
     }));
-    return e8 = true, g4(), function() {
+    return e8 = true, g5(), function() {
       y(_6), d6();
     };
   });
@@ -542,35 +542,38 @@ var hooks_server_exports = {};
 __export(hooks_server_exports, {
   handle: () => d2,
   metaTagFixWhenSSR: () => k2,
-  redirectOldUrls: () => h
+  redirectOldUrls: () => y2
 });
-function m2(...e8) {
-  const a5 = e8.length;
-  return a5 ? ({ event: r5, resolve: n3 }) => {
-    return s5(0, r5, {});
+function g2(...r5) {
+  const n3 = r5.length;
+  return n3 ? ({ event: e8, resolve: a4 }) => {
+    return s5(0, e8, {});
     function s5(o4, f5, c3) {
-      const g4 = e8[o4];
-      return g4({ event: f5, resolve: (u, i2) => {
-        const l3 = async ({ html: t3, done: p5 }) => (i2?.transformPageChunk && (t3 = await i2.transformPageChunk({ html: t3, done: p5 }) ?? ""), c3?.transformPageChunk && (t3 = await c3.transformPageChunk({ html: t3, done: p5 }) ?? ""), t3);
-        return o4 < a5 - 1 ? s5(o4 + 1, u, { transformPageChunk: l3 }) : n3(u, { transformPageChunk: l3 });
+      const m4 = r5[o4];
+      return m4({ event: f5, resolve: (u, i2) => {
+        const l4 = async ({ html: t3, done: p5 }) => (i2?.transformPageChunk && (t3 = await i2.transformPageChunk({ html: t3, done: p5 }) ?? ""), c3?.transformPageChunk && (t3 = await c3.transformPageChunk({ html: t3, done: p5 }) ?? ""), t3);
+        return o4 < n3 - 1 ? s5(o4 + 1, u, { transformPageChunk: l4 }) : a4(u, { transformPageChunk: l4 });
       } });
     }
-  } : ({ event: r5, resolve: n3 }) => n3(r5);
+  } : ({ event: e8, resolve: a4 }) => a4(e8);
 }
-async function h({ event: e8, resolve: a5 }) {
-  for (const [r5, n3] of y2)
-    if (e8.url.pathname === `/${r5}`)
-      return Response.redirect(`${e8.url.origin}/${n3}`, 301);
-  return await a5(e8);
+async function y2({ event: r5, resolve: n3 }) {
+  for (const [e8, a4] of h)
+    if (r5.url.pathname === `/${e8}`)
+      return Response.redirect(`${r5.url.origin}/${a4}`, 301);
+  return await n3(r5);
 }
-async function k2({ event: e8, resolve: a5 }) {
-  return await a5(e8, { transformPageChunk: ({ html: r5 }) => r5.replace(/<link\s+rel="canonical"[^>]*>/, "").replace(/<meta\s+name="description"[^>]*>/, "").replace(/<meta\s+name="keywords"[^>]*>/, "").replace(/<meta\s+property="og:url"[^>]*>/, "").replace(/<meta\s+property="og:title"[^>]*>/, "").replace(/<meta\s+property="og:image"[^>]*>/, "").replace(/<meta\s+property="og:description"[^>]*>/, "") });
+async function k2({ event: r5, resolve: n3 }) {
+  function e8({ html: a4 }) {
+    return a4.replace(/<link\s+rel="canonical"[^>]*>/, "").replace(/<meta\s+name="description"[^>]*>/, "").replace(/<meta\s+name="keywords"[^>]*>/, "").replace(/<meta\s+property="og:url"[^>]*>/, "").replace(/<meta\s+property="og:title"[^>]*>/, "").replace(/<meta\s+property="og:image"[^>]*>/, "").replace(/<meta\s+property="og:description"[^>]*>/, "");
+  }
+  return await n3(r5, { transformPageChunk: e8 });
 }
-var y2, d2;
+var h, d2;
 var init_hooks_server = __esm({
   ".svelte-kit/output/server/chunks/hooks.server.js"() {
-    y2 = /* @__PURE__ */ new Map([["screenshare", "classroom"]]);
-    d2 = m2(h, k2);
+    h = /* @__PURE__ */ new Map([["screenshare", "classroom"]]);
+    d2 = g2(k2, y2);
   }
 });
 
@@ -587,26 +590,26 @@ var init_layout = __esm({
 });
 
 // .svelte-kit/output/server/chunks/store.js
-var p2, I3, m3, V2, C3, b2, k3, H, F2, $2, g2, x2, y3, A3, B2, P2, T2, Y2, d3, L2, _2, q3;
+var p2, I3, m2, V2, C3, b2, k3, H, F2, $2, g3, x2, y3, A3, B2, P2, T2, Y2, d3, L2, _2, q3;
 var init_store = __esm({
   ".svelte-kit/output/server/chunks/store.js"() {
     init_index2();
     init_chunks();
     p2 = 20;
-    I3 = I((i2, o4, l3, f5) => {
-      let c3, s5, n3, a5;
-      a5 = x(d3, (v6) => n3 = v6);
+    I3 = I((i2, o4, l4, f5) => {
+      let c3, s5, n3, a4;
+      a4 = x(d3, (v6) => n3 = v6);
       let { navIconClicked: e8 } = o4;
-      return o4.navIconClicked === void 0 && l3.navIconClicked && e8 !== void 0 && l3.navIconClicked(e8), c3 = e8 && "fill-rose-300", s5 = n3 ? "white" : "black", a5(), `<svg class="scale-[1.5] origin-top bg-"${M("width", p2, 0)}${M("height", p2, 0)} viewBox="${"0 0 " + j(p2, true) + " " + j(p2, true)}"><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M14 10L8 5v3H1v4h7v3l6-5zm3 7H9v2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2H9v2h8v14z"></path></svg>`;
+      return o4.navIconClicked === void 0 && l4.navIconClicked && e8 !== void 0 && l4.navIconClicked(e8), c3 = e8 && "fill-rose-300", s5 = n3 ? "white" : "black", a4(), `<svg class="scale-[1.5] origin-top bg-"${M("width", p2, 0)}${M("height", p2, 0)} viewBox="${"0 0 " + j(p2, true) + " " + j(p2, true)}"><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M14 10L8 5v3H1v4h7v3l6-5zm3 7H9v2h8c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2H9v2h8v14z"></path></svg>`;
     });
-    m3 = 489.2;
-    V2 = I((i2, o4, l3, f5) => {
-      let c3, s5, n3, a5;
-      a5 = x(d3, (v6) => n3 = v6);
+    m2 = 489.2;
+    V2 = I((i2, o4, l4, f5) => {
+      let c3, s5, n3, a4;
+      a4 = x(d3, (v6) => n3 = v6);
       let { navIconClicked: e8 } = o4;
-      return o4.navIconClicked === void 0 && l3.navIconClicked && e8 !== void 0 && l3.navIconClicked(e8), c3 = e8 && "fill-rose-600", s5 = n3 ? "white" : "black", a5(), `
+      return o4.navIconClicked === void 0 && l4.navIconClicked && e8 !== void 0 && l4.navIconClicked(e8), c3 = e8 && "fill-rose-600", s5 = n3 ? "white" : "black", a4(), `
 
-<svg${M("height", m3 / 15, 0)}${M("width", m3 / 15, 0)} viewBox="${"0 0 " + j(m3, true) + " " + j(m3, true)}"><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
+<svg${M("height", m2 / 15, 0)}${M("width", m2 / 15, 0)} viewBox="${"0 0 " + j(m2, true) + " " + j(m2, true)}"><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
 			c4.5,0,8.1,3.6,8.1,8.1V238.1z M241.3,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
 			c4.5,0,8.1-3.6,8.1-8.1V207.8z M304.8,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
 			c4.5,0,8.1-3.6,8.1-8.1V207.8z M177.8,269.6c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1V300c0,4.5,3.6,8.1,8.1,8.1h30.4
@@ -626,11 +629,11 @@ var init_store = __esm({
 			c0,2.9,1.1,5.7,3.2,7.7l22.9,22.9c4.3,4.3,11.2,4.3,15.5,0l47.3-47.3C443,379.8,444.1,377,444.1,374.1z"></path></svg>`;
     });
     C3 = 204.376;
-    b2 = I((i2, o4, l3, f5) => {
-      let c3, s5, n3, a5;
-      a5 = x(d3, (v6) => n3 = v6);
+    b2 = I((i2, o4, l4, f5) => {
+      let c3, s5, n3, a4;
+      a4 = x(d3, (v6) => n3 = v6);
       let { navIconClicked: e8 } = o4;
-      return o4.navIconClicked === void 0 && l3.navIconClicked && e8 !== void 0 && l3.navIconClicked(e8), c3 = e8 && "fill-rose-300", s5 = n3 ? "white" : "black", a5(), `
+      return o4.navIconClicked === void 0 && l4.navIconClicked && e8 !== void 0 && l4.navIconClicked(e8), c3 = e8 && "fill-rose-300", s5 = n3 ? "white" : "black", a4(), `
 
 <svg${M("height", C3 / 7, 0)}${M("width", C3 / 7, 0)} viewBox="${"0 0 " + j(C3, true) + " " + j(C3, true)}"><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M171.247,204.376c2.484,0,4.5-2.015,4.5-4.5V61.35h-51.744c-7.502,0-13.605-6.107-13.605-13.614V0H33.13
 	c-2.485,0-4.5,2.015-4.5,4.5v195.376c0,2.485,2.015,4.5,4.5,4.5H171.247z M74.999,94.627h79.5v10h-79.5V94.627z M74.999,119.627
@@ -640,11 +643,11 @@ var init_store = __esm({
 	 M120.397,47.736V10.396l43.802,40.953h-40.196C122.014,51.35,120.397,49.729,120.397,47.736z"></path></svg>`;
     });
     k3 = 31.886;
-    H = I((i2, o4, l3, f5) => {
-      let c3, s5, n3, a5;
-      a5 = x(d3, (v6) => n3 = v6);
+    H = I((i2, o4, l4, f5) => {
+      let c3, s5, n3, a4;
+      a4 = x(d3, (v6) => n3 = v6);
       let { navIconClicked: e8 } = o4;
-      return o4.navIconClicked === void 0 && l3.navIconClicked && e8 !== void 0 && l3.navIconClicked(e8), c3 = e8 && "fill-rose-600", s5 = n3 ? "white" : "black", a5(), `<svg${M("width", k3, 0)}${M("height", k3, 0)} viewBox="${"0 0 " + j(k3, true) + " " + j(k3, true)}"><g><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
+      return o4.navIconClicked === void 0 && l4.navIconClicked && e8 !== void 0 && l4.navIconClicked(e8), c3 = e8 && "fill-rose-600", s5 = n3 ? "white" : "black", a4(), `<svg${M("width", k3, 0)}${M("height", k3, 0)} viewBox="${"0 0 " + j(k3, true) + " " + j(k3, true)}"><g><path${M("class", c3, 0)}${M("fill", s5, 0)} d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
 		H19.021z M16.693,19.229c-0.5,0-0.905-0.492-0.905-1.098s0.405-1.098,0.905-1.098c0.5,0,0.905,0.49,0.905,1.098
 		C17.598,18.736,17.193,19.229,16.693,19.229z"></path><g><path d="M19.852,5.718c-1.7,0-3.083,1.384-3.083,3.084c0,1.7,1.383,3.083,3.083,3.083c1.701,0,3.084-1.383,3.084-3.083
 			C22.936,7.102,21.553,5.718,19.852,5.718z M19.852,11.606c-1.546,0-2.805-1.258-2.805-2.805c0-1.547,1.258-2.806,2.805-2.806
@@ -653,10 +656,10 @@ var init_store = __esm({
     });
     F2 = A(false);
     $2 = A(0);
-    g2 = R($2);
+    g3 = R($2);
     x2 = S2($2, (i2) => (setTimeout(() => {
-      g2 = R($2);
-    }, 50), i2 - g2));
+      g3 = R($2);
+    }, 50), i2 - g3));
     y3 = A(0);
     A3 = S2(y3, (i2) => i2 < 768);
     B2 = A(false);
@@ -683,20 +686,20 @@ var init_LazyMount = __esm({
   ".svelte-kit/output/server/chunks/LazyMount.js"() {
     init_chunks();
     w = I((v6, e8, t3, i2) => {
-      let { vanilla: o4 } = e8, { once: l3 } = e8, { onview: a5 = () => console.log("i \u2764\uFE0F slots") } = e8, u, { single: n3 } = e8, { root: d6 = null } = e8, { threshold: r5 = 0 } = e8, { margin: c3 = "0px" } = e8;
-      return e8.vanilla === void 0 && t3.vanilla && o4 !== void 0 && t3.vanilla(o4), e8.once === void 0 && t3.once && l3 !== void 0 && t3.once(l3), e8.onview === void 0 && t3.onview && a5 !== void 0 && t3.onview(a5), e8.single === void 0 && t3.single && n3 !== void 0 && t3.single(n3), e8.root === void 0 && t3.root && d6 !== void 0 && t3.root(d6), e8.threshold === void 0 && t3.threshold && r5 !== void 0 && t3.threshold(r5), e8.margin === void 0 && t3.margin && c3 !== void 0 && t3.margin(c3), `
+      let { vanilla: o4 } = e8, { once: l4 } = e8, { onview: a4 = () => console.log("i \u2764\uFE0F slots") } = e8, u, { single: n3 } = e8, { root: d6 = null } = e8, { threshold: r5 = 0 } = e8, { margin: c3 = "0px" } = e8;
+      return e8.vanilla === void 0 && t3.vanilla && o4 !== void 0 && t3.vanilla(o4), e8.once === void 0 && t3.once && l4 !== void 0 && t3.once(l4), e8.onview === void 0 && t3.onview && a4 !== void 0 && t3.onview(a4), e8.single === void 0 && t3.single && n3 !== void 0 && t3.single(n3), e8.root === void 0 && t3.root && d6 !== void 0 && t3.root(d6), e8.threshold === void 0 && t3.threshold && r5 !== void 0 && t3.threshold(r5), e8.margin === void 0 && t3.margin && c3 !== void 0 && t3.margin(c3), `
 
 
 ${o4 ? "" : `<div${M("this", u, 0)}>${i2.default ? i2.default({}) : ""}</div>`}`;
     });
     _3 = I((v6, e8, t3, i2) => {
       let { Import: o4 = async () => {
-      } } = e8, l3;
-      const a5 = async () => l3 = await o4();
+      } } = e8, l4;
+      const a4 = async () => l4 = await o4();
       return e8.Import === void 0 && t3.Import && o4 !== void 0 && t3.Import(o4), `
 
 
-${G(w, "InView").$$render(v6, { onview: a5 }, {}, { default: () => `${l3 ? `${G(l3.default, "Component.default").$$render(v6, Object.assign(e8), {}, {})}` : ""}` })}
+${G(w, "InView").$$render(v6, { onview: a4 }, {}, { default: () => `${l4 ? `${G(l4.default, "Component.default").$$render(v6, Object.assign(e8), {}, {})}` : ""}` })}
 
 
 `;
@@ -709,12 +712,12 @@ var s2;
 var init_Modal = __esm({
   ".svelte-kit/output/server/chunks/Modal.js"() {
     init_chunks();
-    s2 = I((u, t3, e8, a5) => {
-      let { showModal: o4 = false } = t3, { bgTint: l3 = "bg-[rgba(0,0,0,0.4)]" } = t3, { body: d6 } = t3, f5;
-      return t3.showModal === void 0 && e8.showModal && o4 !== void 0 && e8.showModal(o4), t3.bgTint === void 0 && e8.bgTint && l3 !== void 0 && e8.bgTint(l3), t3.body === void 0 && e8.body && d6 !== void 0 && e8.body(d6), `
+    s2 = I((u, t3, e8, a4) => {
+      let { showModal: o4 = false } = t3, { bgTint: l4 = "bg-[rgba(0,0,0,0.4)]" } = t3, { body: d6 } = t3, f5;
+      return t3.showModal === void 0 && e8.showModal && o4 !== void 0 && e8.showModal(o4), t3.bgTint === void 0 && e8.bgTint && l4 !== void 0 && e8.bgTint(l4), t3.body === void 0 && e8.body && d6 !== void 0 && e8.body(d6), `
 
 
-<button class="${"z-50 fixed top-0 left-0 w-full h-full flex justify-center items-center " + j(o4 ? `${l3} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}"${M("this", f5, 0)}>${a5.default ? a5.default({}) : ""}</button>`;
+<button class="${"z-50 fixed top-0 left-0 w-full h-full flex justify-center items-center " + j(o4 ? `${l4} ` : "hidden", true) + " overflow-y-scroll overflow-x-clip"}"${M("this", f5, 0)}>${a4.default ? a4.default({}) : ""}</button>`;
     });
   }
 });
@@ -797,8 +800,8 @@ __export(dropzone_exports, {
   Dropzone: () => $3ed269f2f0fb224b$export$2e2bcd8739ae039,
   default: () => $3ed269f2f0fb224b$export$2e2bcd8739ae039
 });
-function $parcel$interopDefault(a5) {
-  return a5 && a5.__esModule ? a5.default : a5;
+function $parcel$interopDefault(a4) {
+  return a4 && a4.__esModule ? a4.default : a4;
 }
 function $3ed269f2f0fb224b$var$__guard__(value, transform) {
   return typeof value !== "undefined" && value !== null ? transform(value) : void 0;
@@ -2655,17 +2658,17 @@ function replaceTemplate(template, data) {
     return value != null ? String(value) : `<${key}?>`;
   });
 }
-function deepEqual(a5, b4) {
-  if (a5 === b4) {
+function deepEqual(a4, b4) {
+  if (a4 === b4) {
     return true;
   }
-  const aKeys = Object.keys(a5);
+  const aKeys = Object.keys(a4);
   const bKeys = Object.keys(b4);
   for (const k6 of aKeys) {
     if (!bKeys.includes(k6)) {
       return false;
     }
-    const aProp = a5[k6];
+    const aProp = a4[k6];
     const bProp = b4[k6];
     if (isObject(aProp) && isObject(bProp)) {
       if (!deepEqual(aProp, bProp)) {
@@ -4322,10 +4325,10 @@ var require_tslib = __commonJS({
           if (t3[0] & 1)
             throw t3[1];
           return t3[1];
-        }, trys: [], ops: [] }, f5, y6, t3, g4;
-        return g4 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g4[Symbol.iterator] = function() {
+        }, trys: [], ops: [] }, f5, y6, t3, g5;
+        return g5 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g5[Symbol.iterator] = function() {
           return this;
-        }), g4;
+        }), g5;
         function verb(n3) {
           return function(v6) {
             return step([n3, v6]);
@@ -4334,7 +4337,7 @@ var require_tslib = __commonJS({
         function step(op2) {
           if (f5)
             throw new TypeError("Generator is already executing.");
-          while (g4 && (g4 = 0, op2[0] && (_6 = 0)), _6)
+          while (g5 && (g5 = 0, op2[0] && (_6 = 0)), _6)
             try {
               if (f5 = 1, y6 && (t3 = op2[0] & 2 ? y6["return"] : op2[0] ? y6["throw"] || ((t3 = y6["return"]) && t3.call(y6), 0) : y6.next) && !(t3 = t3.call(y6, op2[1])).done)
                 return t3;
@@ -4393,30 +4396,30 @@ var require_tslib = __commonJS({
           return { value: op2[0] ? op2[1] : void 0, done: true };
         }
       };
-      __exportStar2 = function(m5, o4) {
-        for (var p5 in m5)
+      __exportStar2 = function(m4, o4) {
+        for (var p5 in m4)
           if (p5 !== "default" && !Object.prototype.hasOwnProperty.call(o4, p5))
-            __createBinding2(o4, m5, p5);
+            __createBinding2(o4, m4, p5);
       };
-      __createBinding2 = Object.create ? function(o4, m5, k6, k22) {
+      __createBinding2 = Object.create ? function(o4, m4, k6, k22) {
         if (k22 === void 0)
           k22 = k6;
-        var desc = Object.getOwnPropertyDescriptor(m5, k6);
-        if (!desc || ("get" in desc ? !m5.__esModule : desc.writable || desc.configurable)) {
+        var desc = Object.getOwnPropertyDescriptor(m4, k6);
+        if (!desc || ("get" in desc ? !m4.__esModule : desc.writable || desc.configurable)) {
           desc = { enumerable: true, get: function() {
-            return m5[k6];
+            return m4[k6];
           } };
         }
         Object.defineProperty(o4, k22, desc);
-      } : function(o4, m5, k6, k22) {
+      } : function(o4, m4, k6, k22) {
         if (k22 === void 0)
           k22 = k6;
-        o4[k22] = m5[k6];
+        o4[k22] = m4[k6];
       };
       __values2 = function(o4) {
-        var s5 = typeof Symbol === "function" && Symbol.iterator, m5 = s5 && o4[s5], i2 = 0;
-        if (m5)
-          return m5.call(o4);
+        var s5 = typeof Symbol === "function" && Symbol.iterator, m4 = s5 && o4[s5], i2 = 0;
+        if (m4)
+          return m4.call(o4);
         if (o4 && typeof o4.length === "number")
           return {
             next: function() {
@@ -4428,10 +4431,10 @@ var require_tslib = __commonJS({
         throw new TypeError(s5 ? "Object is not iterable." : "Symbol.iterator is not defined.");
       };
       __read2 = function(o4, n3) {
-        var m5 = typeof Symbol === "function" && o4[Symbol.iterator];
-        if (!m5)
+        var m4 = typeof Symbol === "function" && o4[Symbol.iterator];
+        if (!m4)
           return o4;
-        var i2 = m5.call(o4), r5, ar2 = [], e8;
+        var i2 = m4.call(o4), r5, ar2 = [], e8;
         try {
           while ((n3 === void 0 || n3-- > 0) && !(r5 = i2.next()).done)
             ar2.push(r5.value);
@@ -4439,8 +4442,8 @@ var require_tslib = __commonJS({
           e8 = { error };
         } finally {
           try {
-            if (r5 && !r5.done && (m5 = i2["return"]))
-              m5.call(i2);
+            if (r5 && !r5.done && (m4 = i2["return"]))
+              m4.call(i2);
           } finally {
             if (e8)
               throw e8.error;
@@ -4457,13 +4460,13 @@ var require_tslib = __commonJS({
         for (var s5 = 0, i2 = 0, il = arguments.length; i2 < il; i2++)
           s5 += arguments[i2].length;
         for (var r5 = Array(s5), k6 = 0, i2 = 0; i2 < il; i2++)
-          for (var a5 = arguments[i2], j4 = 0, jl = a5.length; j4 < jl; j4++, k6++)
-            r5[k6] = a5[j4];
+          for (var a4 = arguments[i2], j4 = 0, jl = a4.length; j4 < jl; j4++, k6++)
+            r5[k6] = a4[j4];
         return r5;
       };
       __spreadArray2 = function(to, from, pack) {
         if (pack || arguments.length === 2)
-          for (var i2 = 0, l3 = from.length, ar2; i2 < l3; i2++) {
+          for (var i2 = 0, l4 = from.length, ar2; i2 < l4; i2++) {
             if (ar2 || !(i2 in from)) {
               if (!ar2)
                 ar2 = Array.prototype.slice.call(from, 0, i2);
@@ -4478,21 +4481,21 @@ var require_tslib = __commonJS({
       __asyncGenerator2 = function(thisArg, _arguments, generator) {
         if (!Symbol.asyncIterator)
           throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g4 = generator.apply(thisArg, _arguments || []), i2, q7 = [];
+        var g5 = generator.apply(thisArg, _arguments || []), i2, q7 = [];
         return i2 = {}, verb("next"), verb("throw"), verb("return"), i2[Symbol.asyncIterator] = function() {
           return this;
         }, i2;
         function verb(n3) {
-          if (g4[n3])
+          if (g5[n3])
             i2[n3] = function(v6) {
-              return new Promise(function(a5, b4) {
-                q7.push([n3, v6, a5, b4]) > 1 || resume(n3, v6);
+              return new Promise(function(a4, b4) {
+                q7.push([n3, v6, a4, b4]) > 1 || resume(n3, v6);
               });
             };
         }
         function resume(n3, v6) {
           try {
-            step(g4[n3](v6));
+            step(g5[n3](v6));
           } catch (e8) {
             settle(q7[0][3], e8);
           }
@@ -4527,8 +4530,8 @@ var require_tslib = __commonJS({
       __asyncValues2 = function(o4) {
         if (!Symbol.asyncIterator)
           throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m5 = o4[Symbol.asyncIterator], i2;
-        return m5 ? m5.call(o4) : (o4 = typeof __values2 === "function" ? __values2(o4) : o4[Symbol.iterator](), i2 = {}, verb("next"), verb("throw"), verb("return"), i2[Symbol.asyncIterator] = function() {
+        var m4 = o4[Symbol.asyncIterator], i2;
+        return m4 ? m4.call(o4) : (o4 = typeof __values2 === "function" ? __values2(o4) : o4[Symbol.iterator](), i2 = {}, verb("next"), verb("throw"), verb("return"), i2[Symbol.asyncIterator] = function() {
           return this;
         }, i2);
         function verb(n3) {
@@ -7796,24 +7799,24 @@ var init_firebase = __esm({
 
 // node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js
 function p4(t3) {
-  m4.setLogLevel(t3);
+  m3.setLogLevel(t3);
 }
 function y4(t3, ...e8) {
-  if (m4.logLevel <= LogLevel.DEBUG) {
+  if (m3.logLevel <= LogLevel.DEBUG) {
     const n3 = e8.map(v2);
-    m4.debug(`Firestore (${w2}): ${t3}`, ...n3);
+    m3.debug(`Firestore (${w2}): ${t3}`, ...n3);
   }
 }
-function g3(t3, ...e8) {
-  if (m4.logLevel <= LogLevel.ERROR) {
+function g4(t3, ...e8) {
+  if (m3.logLevel <= LogLevel.ERROR) {
     const n3 = e8.map(v2);
-    m4.error(`Firestore (${w2}): ${t3}`, ...n3);
+    m3.error(`Firestore (${w2}): ${t3}`, ...n3);
   }
 }
 function _5(t3, ...e8) {
-  if (m4.logLevel <= LogLevel.WARN) {
+  if (m3.logLevel <= LogLevel.WARN) {
     const n3 = e8.map(v2);
-    m4.warn(`Firestore (${w2}): ${t3}`, ...n3);
+    m3.warn(`Firestore (${w2}): ${t3}`, ...n3);
   }
 }
 function v2(t3) {
@@ -7828,7 +7831,7 @@ function v2(t3) {
 }
 function b3(t3 = "Unexpected state") {
   const e8 = `FIRESTORE (${w2}) INTERNAL ASSERTION FAILED: ` + t3;
-  throw g3(e8), new Error(e8);
+  throw g4(e8), new Error(e8);
 }
 function E3(t3, e8) {
   t3 || b3();
@@ -7894,7 +7897,7 @@ function lt2(t3) {
 }
 function mt2(t3) {
   if (void 0 === t3)
-    return g3("RPC_ERROR", "HTTP error has no status"), R2;
+    return g4("RPC_ERROR", "HTTP error has no status"), R2;
   switch (t3) {
     case 200:
       return T3;
@@ -8744,9 +8747,9 @@ function Gn(t3, e8, n3, r5, s5, i2 = {}) {
   const o4 = t3.ft(i2.merge || i2.mergeFields ? 2 : 0, e8, n3, s5);
   or("Data must be an object, but it was:", o4, r5);
   const u = sr(r5, o4);
-  let c3, a5;
+  let c3, a4;
   if (i2.merge)
-    c3 = new fe2(o4.fieldMask), a5 = o4.fieldTransforms;
+    c3 = new fe2(o4.fieldMask), a4 = o4.fieldTransforms;
   else if (i2.mergeFields) {
     const t4 = [];
     for (const r6 of i2.mergeFields) {
@@ -8755,10 +8758,10 @@ function Gn(t3, e8, n3, r5, s5, i2 = {}) {
         throw new U2(P4, `Field '${s6}' is specified in your field mask but missing from your input data.`);
       lr(t4, s6) || t4.push(s6);
     }
-    c3 = new fe2(t4), a5 = o4.fieldTransforms.filter((t5) => c3.covers(t5.field));
+    c3 = new fe2(t4), a4 = o4.fieldTransforms.filter((t5) => c3.covers(t5.field));
   } else
-    c3 = null, a5 = o4.fieldTransforms;
-  return new Un(new de2(u), c3, a5);
+    c3 = null, a4 = o4.fieldTransforms;
+  return new Un(new de2(u), c3, a4);
 }
 function Yn(t3, e8, n3) {
   return new Qn({
@@ -8792,21 +8795,21 @@ function er(t3, e8, n3, r5, s5, i2) {
     throw new U2(P4, `Function ${e8}() needs to be called with an even number of arguments that alternate between field names and values.`);
   for (let t4 = 0; t4 < i2.length; t4 += 2)
     u.push(ur(e8, i2[t4])), c3.push(i2[t4 + 1]);
-  const a5 = [], h2 = de2.empty();
+  const a4 = [], h2 = de2.empty();
   for (let t4 = u.length - 1; t4 >= 0; --t4)
-    if (!lr(a5, u[t4])) {
+    if (!lr(a4, u[t4])) {
       const e9 = u[t4];
       let n4 = c3[t4];
       n4 = getModularInstance(n4);
       const r6 = o4.ut(e9);
       if (n4 instanceof Kn)
-        a5.push(e9);
+        a4.push(e9);
       else {
         const t5 = rr(n4, r6);
-        null != t5 && (a5.push(e9), h2.set(e9, t5));
+        null != t5 && (a4.push(e9), h2.set(e9, t5));
       }
     }
-  const f5 = new fe2(a5);
+  const f5 = new fe2(a4);
   return new jn(h2, f5, o4.fieldTransforms);
 }
 function nr(t3, e8, n3, r5 = false) {
@@ -9226,7 +9229,7 @@ function ds(t3, e8, n3) {
   const i2 = new j2();
   return new cs(new ls(), r5, s5, (n4) => e8(new fs(t3, n4)), i2).run(), i2.promise;
 }
-var d4, w2, m4, T3, A4, R2, P4, V3, $3, N, D2, F3, x3, S4, q4, O2, k4, C4, L3, M2, U2, j2, B3, Q2, z4, W2, G3, K2, Y3, H2, J2, X2, Z2, tt2, et2, nt2, rt2, ft2, dt2, wt2, pt2, gt2, It2, Tt2, Vt2, Ft2, Qt, Wt, Gt2, Kt, Ht2, Jt, Xt, te2, ee2, ne2, re2, se2, oe2, ue2, ce, ae2, he2, le2, fe2, de2, we2, me2, ye2, Re2, Pe2, Ve2, $e2, Ne2, De2, Fe2, xe2, Se2, qe2, Oe2, ke2, Ce2, Le2, Me2, Ue2, hn, ln, pn, gn, _n2, Tn, An, Rn, Pn, Vn, $n, qn, On, Cn, Ln, Mn, Un, jn, Qn, zn, Kn, Hn, Jn, Xn, Zn, cr, fr, dr, wr, yr, gr, vr, Er, Ar, Pr, Nr, xr, Br, rs, os, us, cs, hs, ls, fs;
+var d4, w2, m3, T3, A4, R2, P4, V3, $3, N, D2, F3, x3, S4, q4, O2, k4, C4, L3, M2, U2, j2, B3, Q2, z4, W2, G3, K2, Y3, H2, J2, X2, Z2, tt2, et2, nt2, rt2, ft2, dt2, wt2, pt2, gt2, It2, Tt2, Vt2, Ft2, Qt, Wt, Gt2, Kt, Ht2, Jt, Xt, te2, ee2, ne2, re2, se2, oe2, ue2, ce, ae2, he2, le2, fe2, de2, we2, me2, ye2, Re2, Pe2, Ve2, $e2, Ne2, De2, Fe2, xe2, Se2, qe2, Oe2, ke2, Ce2, Le2, Me2, Ue2, hn, ln, pn, gn, _n2, Tn, An, Rn, Pn, Vn, $n, qn, On, Cn, Ln, Mn, Un, jn, Qn, zn, Kn, Hn, Jn, Xn, Zn, cr, fr, dr, wr, yr, gr, vr, Er, Ar, Pr, Nr, xr, Br, rs, os, us, cs, hs, ls, fs;
 var init_index_browser_esm2017 = __esm({
   "node_modules/@firebase/firestore/dist/lite/index.browser.esm2017.js"() {
     init_index_esm20174();
@@ -9249,7 +9252,7 @@ var init_index_browser_esm2017 = __esm({
     };
     d4.UNAUTHENTICATED = new d4(null), d4.GOOGLE_CREDENTIALS = new d4("google-credentials-uid"), d4.FIRST_PARTY = new d4("first-party-uid"), d4.MOCK_USER = new d4("mock-user");
     w2 = "9.15.0";
-    m4 = new Logger("@firebase/firestore");
+    m3 = new Logger("@firebase/firestore");
     T3 = "ok";
     A4 = "cancelled";
     R2 = "unknown";
@@ -11295,7 +11298,7 @@ var init_index_browser_esm2017 = __esm({
         const n3 = tt2.fromString(t3);
         E3(cn(n3));
         const r5 = new X2(n3.get(1), n3.get(3)), s5 = new rt2(n3.popFirst(5));
-        return r5.isEqual(e8) || g3(`Document ${s5} contains a document reference within a different database (${r5.projectId}/${r5.database}) which is not supported. It will be treated as a reference in the current database (${e8.projectId}/${e8.database}) instead.`), s5;
+        return r5.isEqual(e8) || g4(`Document ${s5} contains a document reference within a different database (${r5.projectId}/${r5.database}) which is not supported. It will be treated as a reference in the current database (${e8.projectId}/${e8.database}) instead.`), s5;
       }
     } {
       constructor(t3) {
@@ -11555,7 +11558,7 @@ var init_index_browser_esm2017 = __esm({
             t5.stack && (e10 = t5.stack.includes(t5.message) ? t5.stack : t5.message + "\n" + t5.stack);
             return e10;
           }(t4);
-          throw g3("INTERNAL UNHANDLED ERROR: ", e9), t4;
+          throw g4("INTERNAL UNHANDLED ERROR: ", e9), t4;
         }).then((t4) => (this.Vt = false, t4))));
         return this.It = e8, e8;
       }
@@ -11761,8 +11764,8 @@ c-33.543,0-60.833-27.29-60.833-60.833s27.29-60.833,60.833-60.833s60.833,27.29,60
     W3 = I((e8, n3, i2, p5) => {
       let t3, o4, s5;
       s5 = x(d3, (b4) => o4 = b4);
-      let m5, u, w3, h2 = "", v6 = globalThis.magicLinkInputVisible;
-      return t3 = m5, s5(), `<signin-button class="${"group bg-emerald-500 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", u, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(O3, "IconEmail").$$render(e8, {}, {}, {})}</span>
+      let m4, u, w3, h2 = "", v6 = globalThis.magicLinkInputVisible;
+      return t3 = m4, s5(), `<signin-button class="${"group bg-emerald-500 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", u, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(O3, "IconEmail").$$render(e8, {}, {}, {})}</span>
   
   <span>Get Magic Link</span></signin-button>
 
@@ -11775,13 +11778,13 @@ ${v6 ? `<input class="${"text-center p-3 mt-3 w-full " + j(t3, true) + " focus:o
     K3 = I((e8, n3, i2, p5) => {
       let t3, o4, s5;
       s5 = x(d3, (y6) => o4 = y6);
-      let m5 = "+1", u, w3, h2, v6 = "", b4 = globalThis.phoneInputVisible;
+      let m4 = "+1", u, w3, h2, v6 = "", b4 = globalThis.phoneInputVisible;
       return t3 = u, s5(), `
 ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md duration-200 rounded-md p-4 " + j("group-hover:bg-opacity-80", true) + " text-white flex justify-center items-center gap-5"}"${M("this", w3, 0)}><span class="group-hover:scale-[1.15] duration-500">${G(J3, "IconPhone").$$render(e8, {}, {}, {})}</span>
     
     <span>Get SMS Code</span></div>
 
-  <div class="grid grid-cols-6 w-full text-black">${b4 ? `<input class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"${M("value", m5, 0)}>
+  <div class="grid grid-cols-6 w-full text-black">${b4 ? `<input class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"${M("value", m4, 0)}>
       <input class="${"col-span-5 text-center p-3 mt-3 focus:outline-none " + j(t3, true)}" type="phone" placeholder="phone"${M("this", h2, 0)}${M("value", v6, 0)}>` : ""}</div>`}
 
 <div id="recaptcha-container"></div>
@@ -11794,34 +11797,34 @@ ${`<div class="${"w-full group bg-rose-400 hover:scale-[1.01] hover:shadow-md du
 }@media(min-width: 640px){.card-styles.svelte-kjxzgo{width:500px;padding:2.5rem
     }}`, map: null };
     te3 = I((e8, n3, i2, p5) => {
-      let t3, o4, s5, m5, u, w3, h2, v6;
-      o4 = x(B2, (r5) => t3 = r5), m5 = x(F2, (r5) => s5 = r5), w3 = x(d3, (r5) => u = r5), v6 = x(q3, (r5) => h2 = r5);
+      let t3, o4, s5, m4, u, w3, h2, v6;
+      o4 = x(B2, (r5) => t3 = r5), m4 = x(F2, (r5) => s5 = r5), w3 = x(d3, (r5) => u = r5), v6 = x(q3, (r5) => h2 = r5);
       let { noTransition: b4 = false } = n3, y6, z6, k6, S6;
       function L5(r5 = "/login") {
-        let a5 = 3e3, x4 = parseInt(a5 / 1e3);
+        let a4 = 3e3, x4 = parseInt(a4 / 1e3);
         S6 = setInterval(() => {
           x4 > 0 && (x4 += -1, document.getElementById("timeLeft").innerHTML = ` ${x4}`);
         }, 1e3), k6 = setTimeout(() => {
           T(B2, t3 = false, t3), document.getElementById("timeLeft").innerHTML = 3, H3(r5);
-        }, a5);
+        }, a4);
       }
       async function B4(r5) {
-        let a5 = localStorage.getItem("redirectUrlFromLS");
-        if (console.log("redirectUrlFromLS", a5), a5)
-          L5(a5);
+        let a4 = localStorage.getItem("redirectUrlFromLS");
+        if (console.log("redirectUrlFromLS", a4), a4)
+          L5(a4);
         else {
           const { getFirestore: x4, collection: D4, getDocs: F4 } = await Promise.resolve().then(() => (init_index_esm4(), index_esm_exports)), { app: j4 } = await Promise.resolve().then(() => (init_firebase(), firebase_exports)), V4 = x4(j4), I6 = await F4(D4(V4, "email")), P5 = I6.size, M3 = I6.docs;
           for (const C5 in M3) {
             const _6 = M3[C5];
             if (r5 === _6.id) {
-              localStorage.setItem("redirectUrlFromLS", _6.data().redirectUrl), a5 = localStorage.getItem("redirectUrlFromLS"), L5(a5);
+              localStorage.setItem("redirectUrlFromLS", _6.data().redirectUrl), a4 = localStorage.getItem("redirectUrlFromLS"), L5(a4);
               return;
             }
-            parseInt(C5) === P5 - 1 && (localStorage.setItem("redirectUrlFromLS", "/"), a5 = localStorage.getItem("redirectUrlFromLS"), L5(a5));
+            parseInt(C5) === P5 - 1 && (localStorage.setItem("redirectUrlFromLS", "/"), a4 = localStorage.getItem("redirectUrlFromLS"), L5(a4));
           }
         }
       }
-      return n3.noTransition === void 0 && i2.noTransition && b4 !== void 0 && i2.noTransition(b4), e8.css.add(N2), t3 || (clearInterval(S6), clearTimeout(k6)), t3 && s5 && B4(z6), o4(), m5(), w3(), v6(), `<main class="w-screen flex justify-center items-center">${s5 ? "" : `<login-card class="${"card-styles text-xl " + j(u ? "hover:shadow-xl " : "hover:shadow-lg", true) + " svelte-kjxzgo"}"${M("style", `background:${h2}`, 0)}>${`${G(W3, "MagicLinkSection").$$render(e8, {}, {}, {})}
+      return n3.noTransition === void 0 && i2.noTransition && b4 !== void 0 && i2.noTransition(b4), e8.css.add(N2), t3 || (clearInterval(S6), clearTimeout(k6)), t3 && s5 && B4(z6), o4(), m4(), w3(), v6(), `<main class="w-screen flex justify-center items-center">${s5 ? "" : `<login-card class="${"card-styles text-xl " + j(u ? "hover:shadow-xl " : "hover:shadow-lg", true) + " svelte-kjxzgo"}"${M("style", `background:${h2}`, 0)}>${`${G(W3, "MagicLinkSection").$$render(e8, {}, {}, {})}
 
           <p class="py-3"></p>
           ${G(K3, "PhoneAuthSection").$$render(e8, {}, {}, {})}`}
@@ -11851,8 +11854,8 @@ var init_Footer = __esm({
   ".svelte-kit/output/server/chunks/Footer.js"() {
     init_chunks();
     l2 = I((s5, t3, e8, i2) => {
-      let { contactLinkClicked: a5 = false } = t3;
-      return t3.contactLinkClicked === void 0 && e8.contactLinkClicked && a5 !== void 0 && e8.contactLinkClicked(a5), `<div class="${"text-sm mt-20 " + j("mb-10", true) + " flex justify-center items-center flex-row gap-x-1"}"><span class="text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"><a data-sveltekit-preload-data href="/faq">faq</a>
+      let { contactLinkClicked: a4 = false } = t3;
+      return t3.contactLinkClicked === void 0 && e8.contactLinkClicked && a4 !== void 0 && e8.contactLinkClicked(a4), `<div class="${"text-sm mt-20 " + j("mb-10", true) + " flex justify-center items-center flex-row gap-x-1"}"><span class="text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600"><a data-sveltekit-preload-data href="/faq">faq</a>
       \xA0 | \xA0
     <span id="contactLinkClicked">contact </span></span></div>`;
     });
@@ -11865,8 +11868,8 @@ __export(layout_svelte_exports, {
   default: () => Pe3
 });
 function ne3() {
-  let e8 = Z3, s5 = Z3, t3 = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"], m5 = ["Win32", "Win64", "Windows", "WinCE"], a5 = ["iPhone", "iPad", "iPod"], o4 = null;
-  return t3.includes(s5) ? o4 = "Mac OS" : a5.includes(s5) ? o4 = "iOS" : m5.includes(s5) ? o4 = "Windows" : /Android/.test(e8) ? o4 = "Android" : /Linux/.test(s5) && (o4 = "Linux"), o4;
+  let e8 = Z3, s5 = Z3, t3 = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"], m4 = ["Win32", "Win64", "Windows", "WinCE"], a4 = ["iPhone", "iPad", "iPod"], o4 = null;
+  return t3.includes(s5) ? o4 = "Mac OS" : a4.includes(s5) ? o4 = "iOS" : m4.includes(s5) ? o4 = "Windows" : /Android/.test(e8) ? o4 = "Android" : /Linux/.test(s5) && (o4 = "Linux"), o4;
 }
 function Y5() {
   return Z3;
@@ -11880,24 +11883,24 @@ function ve3(e8 = "dropzoneCSS", s5 = "/dropzone.css") {
 function J4(e8) {
   return Object.prototype.toString.call(e8) === "[object Date]";
 }
-function U3(e8, s5, t3, m5) {
+function U3(e8, s5, t3, m4) {
   if (typeof t3 == "number" || J4(t3)) {
-    const a5 = m5 - t3, o4 = (t3 - s5) / (e8.dt || 1 / 60), u = e8.opts.stiffness * a5, b4 = e8.opts.damping * o4, n3 = (u - b4) * e8.inv_mass, f5 = (o4 + n3) * e8.dt;
-    return Math.abs(f5) < e8.opts.precision && Math.abs(a5) < e8.opts.precision ? m5 : (e8.settled = false, J4(t3) ? new Date(t3.getTime() + f5) : t3 + f5);
+    const a4 = m4 - t3, o4 = (t3 - s5) / (e8.dt || 1 / 60), u = e8.opts.stiffness * a4, b4 = e8.opts.damping * o4, n3 = (u - b4) * e8.inv_mass, f5 = (o4 + n3) * e8.dt;
+    return Math.abs(f5) < e8.opts.precision && Math.abs(a4) < e8.opts.precision ? m4 : (e8.settled = false, J4(t3) ? new Date(t3.getTime() + f5) : t3 + f5);
   } else {
     if (Array.isArray(t3))
-      return t3.map((a5, o4) => U3(e8, s5[o4], t3[o4], m5[o4]));
+      return t3.map((a4, o4) => U3(e8, s5[o4], t3[o4], m4[o4]));
     if (typeof t3 == "object") {
-      const a5 = {};
+      const a4 = {};
       for (const o4 in t3)
-        a5[o4] = U3(e8, s5[o4], t3[o4], m5[o4]);
-      return a5;
+        a4[o4] = U3(e8, s5[o4], t3[o4], m4[o4]);
+      return a4;
     } else
       throw new Error(`Cannot spring ${typeof t3} values`);
   }
 }
 function ke3(e8, s5 = {}) {
-  const t3 = A(e8), { stiffness: m5 = 0.15, damping: a5 = 0.8, precision: o4 = 0.01 } = s5;
+  const t3 = A(e8), { stiffness: m4 = 0.15, damping: a4 = 0.8, precision: o4 = 0.01 } = s5;
   let u, b4, n3, f5 = e8, d6 = e8, $4 = 1, v6 = 0, h2 = false;
   function w3(r5, p5 = {}) {
     d6 = r5;
@@ -11914,13 +11917,13 @@ function ke3(e8, s5 = {}) {
       });
     }));
   }
-  const x4 = { set: w3, update: (r5, p5) => w3(r5(d6, e8), p5), subscribe: t3.subscribe, stiffness: m5, damping: a5, precision: o4 };
+  const x4 = { set: w3, update: (r5, p5) => w3(r5(d6, e8), p5), subscribe: t3.subscribe, stiffness: m4, damping: a4, precision: o4 };
   return x4;
 }
 async function Me3() {
   if (!globalThis.submitOnce) {
-    const { PUBLIC_UPLOAD_ENDPOINT: e8 } = await Promise.resolve().then(() => (init_public(), public_exports)), s5 = e8, t3 = new FormData(), m5 = new File(["foo"], "foo.txt", { type: "text/plain" });
-    t3.append("file", m5), fetch(s5, { method: "POST", body: t3 }), globalThis.submitOnce = true;
+    const { PUBLIC_UPLOAD_ENDPOINT: e8 } = await Promise.resolve().then(() => (init_public(), public_exports)), s5 = e8, t3 = new FormData(), m4 = new File(["foo"], "foo.txt", { type: "text/plain" });
+    t3.append("file", m4), fetch(s5, { method: "POST", body: t3 }), globalThis.submitOnce = true;
   }
 }
 function Ce3() {
@@ -11939,17 +11942,17 @@ var init_layout_svelte = __esm({
     init_Modal();
     Z3 = s;
     j3 = 24;
-    be3 = I((e8, s5, t3, m5) => `<svg aria-label="Sun" id="lightIcon"${M("height", j3, 0)}${M("width", j3, 0)} viewBox="${"0 0 " + j(8 * j3, true) + " " + j(8 * j3, true)}" class="mx-3"><path fill="rgb(247,247,247)" d="M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"></path></svg>`);
+    be3 = I((e8, s5, t3, m4) => `<svg aria-label="Sun" id="lightIcon"${M("height", j3, 0)}${M("width", j3, 0)} viewBox="${"0 0 " + j(8 * j3, true) + " " + j(8 * j3, true)}" class="mx-3"><path fill="rgb(247,247,247)" d="M49.828 91.317c0 22.662 18.393 41.054 41.054 41.054 22.662 0 41.054-18.392 41.054-41.054 0-22.661-18.392-41.053-41.054-41.053-22.661 0-41.054 18.392-41.054 41.053Zm49.265 82.108v-16.421c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.211v16.421c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.211Zm0-147.794V9.21c0-4.516-3.695-8.211-8.21-8.211-4.517 0-8.211 3.695-8.211 8.21v16.422c0 4.516 3.694 8.211 8.21 8.211 4.516 0 8.211-3.695 8.211-8.21ZM8.774 99.528h16.422c4.516 0 8.21-3.695 8.21-8.21 0-4.516-3.694-8.211-8.21-8.211H8.774c-4.515 0-8.21 3.695-8.21 8.21 0 4.516 3.695 8.211 8.21 8.211Zm147.795 0h16.421c4.516 0 8.211-3.695 8.211-8.21 0-4.516-3.695-8.211-8.211-8.211h-16.421c-4.516 0-8.211 3.695-8.211 8.21 0 4.516 3.695 8.211 8.211 8.211Zm-126.61 41.136c-3.203 3.203-3.203 8.457 0 11.578 3.201 3.202 8.456 3.202 11.576 0l8.704-8.704c3.202-3.202 3.202-8.457 0-11.577-3.202-3.12-8.457-3.202-11.577 0l-8.704 8.703ZM131.525 39.097c-3.202 3.202-3.202 8.457 0 11.577 3.202 3.202 8.457 3.202 11.577 0l8.703-8.703c3.203-3.202 3.203-8.457 0-11.577-3.202-3.203-8.457-3.203-11.577 0l-8.703 8.703Zm-89.99-8.704c-3.203-3.202-8.458-3.202-11.578 0-3.202 3.203-3.202 8.458 0 11.578l8.704 8.703c3.202 3.202 8.457 3.202 11.577 0 3.12-3.202 3.202-8.457 0-11.577l-8.703-8.704Zm101.567 101.568c-3.202-3.202-8.457-3.202-11.577 0-3.202 3.202-3.202 8.457 0 11.577l8.703 8.704c3.202 3.202 8.457 3.202 11.577 0 3.12-3.203 3.203-8.458 0-11.578l-8.703-8.703Z"></path></svg>`);
     q6 = 24;
-    $e3 = I((e8, s5, t3, m5) => `
+    $e3 = I((e8, s5, t3, m4) => `
 
 
 <svg aria-label="Moon" id="darkIcon"${M("height", q6, 0)}${M("width", q6, 0)} class="mx-3"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"></path></svg>`);
     he3 = { code: ":root{--light:#f7f7f7;--dark:rgb(20, 13, 33)}body{background:var(--light);color:var(--dark);transition:background-color 0.3s}body.dark-mode{background:var(--dark);color:var(--light)}", map: null };
-    ge3 = I((e8, s5, t3, m5) => {
-      let a5, o4;
-      return o4 = x(d3, (u) => a5 = u), e8.css.add(he3), o4(), `
-  <div><button>${a5 ? `${G(be3, "IconSun").$$render(e8, {}, {}, {})}` : `${G($e3, "IconMoon").$$render(e8, {}, {}, {})}`}</button></div>`;
+    ge3 = I((e8, s5, t3, m4) => {
+      let a4, o4;
+      return o4 = x(d3, (u) => a4 = u), e8.css.add(he3), o4(), `
+  <div><button>${a4 ? `${G(be3, "IconSun").$$render(e8, {}, {}, {})}` : `${G($e3, "IconMoon").$$render(e8, {}, {}, {})}`}</button></div>`;
     });
     we3 = () => {
       const e8 = O("__svelte__");
@@ -11958,9 +11961,9 @@ var init_layout_svelte = __esm({
     ie2 = { subscribe(e8) {
       return we3().page.subscribe(e8);
     } };
-    xe3 = I((e8, s5, t3, m5) => {
-      let a5, o4, u, b4;
-      a5 = x(B2, (r5) => r5), o4 = x(P2, (r5) => r5), b4 = x(ie2, (r5) => u = r5);
+    xe3 = I((e8, s5, t3, m4) => {
+      let a4, o4, u, b4;
+      a4 = x(B2, (r5) => r5), o4 = x(P2, (r5) => r5), b4 = x(ie2, (r5) => u = r5);
       let { href: n3, content: f5, routes: d6, btnColorHover: $4, icon: v6, navIconClicked: h2 = false } = s5;
       s5.href === void 0 && t3.href && n3 !== void 0 && t3.href(n3), s5.content === void 0 && t3.content && f5 !== void 0 && t3.content(f5), s5.routes === void 0 && t3.routes && d6 !== void 0 && t3.routes(d6), s5.btnColorHover === void 0 && t3.btnColorHover && $4 !== void 0 && t3.btnColorHover($4), s5.icon === void 0 && t3.icon && v6 !== void 0 && t3.icon(v6), s5.navIconClicked === void 0 && t3.navIconClicked && h2 !== void 0 && t3.navIconClicked(h2);
       let w3, x4;
@@ -11971,29 +11974,29 @@ var init_layout_svelte = __esm({
         x4 = `<a data-sveltekit-preload-data${M("href", n3, 0)} class="${"block font-Nunito font-thin " + j(` ${$4}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`, true)}">
   ${`${j(f5)}`}</a>`;
       } while (!w3);
-      return a5(), o4(), b4(), x4;
+      return a4(), o4(), b4(), x4;
     });
-    ye3 = I((e8, s5, t3, m5) => {
-      let a5, o4, u, b4, n3, f5, d6, $4, v6, h2, w3, x4, r5, p5, _6, y6, T6, S6;
-      u = x(d3, (l3) => o4 = l3), b4 = x(T2, (l3) => l3), f5 = x(Y2, (l3) => n3 = l3), $4 = x(F2, (l3) => d6 = l3), h2 = x($2, (l3) => v6 = l3), x4 = x(q3, (l3) => w3 = l3), y6 = x(P2, (l3) => _6 = l3), S6 = x(B2, (l3) => T6 = l3);
+    ye3 = I((e8, s5, t3, m4) => {
+      let a4, o4, u, b4, n3, f5, d6, $4, v6, h2, w3, x4, r5, p5, _6, y6, T6, S6;
+      u = x(d3, (l4) => o4 = l4), b4 = x(T2, (l4) => l4), f5 = x(Y2, (l4) => n3 = l4), $4 = x(F2, (l4) => d6 = l4), h2 = x($2, (l4) => v6 = l4), x4 = x(q3, (l4) => w3 = l4), y6 = x(P2, (l4) => _6 = l4), S6 = x(B2, (l4) => T6 = l4);
       let H4 = ke3(1, { stiffness: 0.1, damping: 0.25 });
-      p5 = x(H4, (l3) => r5 = l3);
+      p5 = x(H4, (l4) => r5 = l4);
       let A6 = 0, O4 = "sm:bg-red-300 rounded", M3 = "hover:bg-red-300 ", W4 = ne3() !== "iOS" && "hidden", E4 = Y5(), z6 = Z3, C5, i2;
       do
-        C5 = true, d6 && !Y5() && (A6 = o4 ? 0.75 : 0, H4.set(1 + 0.5 * Math.sin(v6))), d6 ? T(Y2, n3.login.name = "\u{1F680}", n3) : T(Y2, n3.login.name = "Login", n3), a5 = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${o4 ? "to-[rgb(37,35,91)]" : "to-red-200"}`, i2 = `
+        C5 = true, d6 && !Y5() && (A6 = o4 ? 0.75 : 0, H4.set(1 + 0.5 * Math.sin(v6))), d6 ? T(Y2, n3.login.name = "\u{1F680}", n3) : T(Y2, n3.login.name = "Login", n3), a4 = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${o4 ? "to-[rgb(37,35,91)]" : "to-red-200"}`, i2 = `
 <logo-and-navbar class="${"opacity-0 " + j(z6, true) + " flex items-center justify-center gap-x-32 md:justify-between w-full"}"><button class="p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent">THINKSOLVE
     </button>
 
   
-  <ul class="${"text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto " + j(a5, true) + " hideScrollBar overflow-x-scroll overflow-y-hidden"}">
+  <ul class="${"text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto " + j(a4, true) + " hideScrollBar overflow-x-scroll overflow-y-hidden"}">
     
     <li${M("class", W4, 0)}><button class="${"font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg " + j(w3, true) + " hover:bg-indigo-400 hover:text-white active:animate-pulse duration-200 border-b-1 rounded"}">App
       </button></li>
 
     
-    ${D(Object.keys(n3).slice(1, 5), (l3) => `
+    ${D(Object.keys(n3).slice(1, 5), (l4) => `
       
-      <li${M("style", l3 == "login" && d6 && `transform:scale(${r5}); filter:hue-rotate(${A6}turn)`, 0)}>${G(xe3, "Navitem").$$render(e8, { href: n3[l3].href, content: n3[l3].name, icon: n3[l3].icon, navIconClicked: n3[l3].href == "/homework" && _6 || n3[l3].href == "/login" && T6 || n3[l3].isCurrent, routes: n3, btnColor: O4, btnColorHover: M3 }, { routes: (L5) => {
+      <li${M("style", l4 == "login" && d6 && `transform:scale(${r5}); filter:hue-rotate(${A6}turn)`, 0)}>${G(xe3, "Navitem").$$render(e8, { href: n3[l4].href, content: n3[l4].name, icon: n3[l4].icon, navIconClicked: n3[l4].href == "/homework" && _6 || n3[l4].href == "/login" && T6 || n3[l4].isCurrent, routes: n3, btnColor: O4, btnColorHover: M3 }, { routes: (L5) => {
           n3 = L5, C5 = false;
         }, btnColor: (L5) => {
           O4 = L5, C5 = false;
@@ -12007,16 +12010,16 @@ var init_layout_svelte = __esm({
       while (!C5);
       return u(), b4(), f5(), $4(), h2(), x4(), p5(), y6(), S6(), i2;
     });
-    _e4 = I((e8, s5, t3, m5) => {
-      let a5, o4;
-      return o4 = x(P2, (u) => a5 = u), a5 && Me3(), o4(), `
+    _e4 = I((e8, s5, t3, m4) => {
+      let a4, o4;
+      return o4 = x(P2, (u) => a4 = u), a4 && Me3(), o4(), `
 
 
 `;
     });
     Te3 = { code: ".dropzone .dz-preview.dz-image-preview{background-color:transparent !important}", map: null };
-    De3 = I((e8, s5, t3, m5) => {
-      let a5, o4, u, b4, n3;
+    De3 = I((e8, s5, t3, m4) => {
+      let a4, o4, u, b4, n3;
       u = x(P2, (r5) => o4 = r5), n3 = x(d3, (r5) => b4 = r5);
       let { text: f5 = "\u{1F525}" } = s5, { textSizeTW: d6 = "text-3xl" } = s5, { dimensionsTW: $4 = "w-[65vw] sm:w-[60vw] h-[60vh]" } = s5, { brightnessTW: v6 = "brightness-100" } = s5, h2;
       async function w3(r5) {
@@ -12034,20 +12037,20 @@ var init_layout_svelte = __esm({
               h2.processFile(p5), p5.previewElement.querySelector(".dz-error-mark").style.visibility = "hidden", p5.previewElement.querySelector(".dz-error-message").style.visibility = "hidden";
         });
       }
-      return s5.text === void 0 && t3.text && f5 !== void 0 && t3.text(f5), s5.textSizeTW === void 0 && t3.textSizeTW && d6 !== void 0 && t3.textSizeTW(d6), s5.dimensionsTW === void 0 && t3.dimensionsTW && $4 !== void 0 && t3.dimensionsTW($4), s5.brightnessTW === void 0 && t3.brightnessTW && v6 !== void 0 && t3.brightnessTW(v6), e8.css.add(Te3), o4 && Ce3(), a5 = b4 ? "#1d1c43" : "#ddd", u(), n3(), `${G(_e4, "PostDummyOnce").$$render(e8, {}, {}, {})}
+      return s5.text === void 0 && t3.text && f5 !== void 0 && t3.text(f5), s5.textSizeTW === void 0 && t3.textSizeTW && d6 !== void 0 && t3.textSizeTW(d6), s5.dimensionsTW === void 0 && t3.dimensionsTW && $4 !== void 0 && t3.dimensionsTW($4), s5.brightnessTW === void 0 && t3.brightnessTW && v6 !== void 0 && t3.brightnessTW(v6), e8.css.add(Te3), o4 && Ce3(), a4 = b4 ? "#1d1c43" : "#ddd", u(), n3(), `${G(_e4, "PostDummyOnce").$$render(e8, {}, {}, {})}
 
 
-${G(w, "InView").$$render(e8, { single: true, onview: (r5) => w3(r5), once: true, margin: "0px" }, {}, { default: () => `<form method="post" style="${"box-shadow: inset 0 -10px 10px " + j(a5, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + j(v6, true) + " " + j(d6, true) + " " + j($4, true) + " mx-auto group"}"><div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>${j(f5)}</div></form>` })}`;
+${G(w, "InView").$$render(e8, { single: true, onview: (r5) => w3(r5), once: true, margin: "0px" }, {}, { default: () => `<form method="post" style="${"box-shadow: inset 0 -10px 10px " + j(a4, true) + "; border-radius: 50px; border-color: transparent; background-color: transparent"}" class="${"dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl " + j(v6, true) + " " + j(d6, true) + " " + j($4, true) + " mx-auto group"}"><div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>${j(f5)}</div></form>` })}`;
     });
     Q3 = 800;
     X4 = 400;
     K4 = 100;
-    Pe3 = I((e8, s5, t3, m5) => {
-      let a5, o4, u, b4, n3, f5, d6, $4, v6, h2, w3, x4, r5, p5, _6, y6, T6, S6, H4, A6;
-      o4 = x(F2, (i2) => a5 = i2), b4 = x(B2, (i2) => u = i2), f5 = x(x2, (i2) => n3 = i2), $4 = x($2, (i2) => d6 = i2), h2 = x(A3, (i2) => v6 = i2), x4 = x(ie2, (i2) => w3 = i2), p5 = x(Y2, (i2) => r5 = i2), y6 = x(d3, (i2) => _6 = i2), S6 = x(T2, (i2) => T6 = i2), A6 = x(P2, (i2) => H4 = i2);
+    Pe3 = I((e8, s5, t3, m4) => {
+      let a4, o4, u, b4, n3, f5, d6, $4, v6, h2, w3, x4, r5, p5, _6, y6, T6, S6, H4, A6;
+      o4 = x(F2, (i2) => a4 = i2), b4 = x(B2, (i2) => u = i2), f5 = x(x2, (i2) => n3 = i2), $4 = x($2, (i2) => d6 = i2), h2 = x(A3, (i2) => v6 = i2), x4 = x(ie2, (i2) => w3 = i2), p5 = x(Y2, (i2) => r5 = i2), y6 = x(d3, (i2) => _6 = i2), S6 = x(T2, (i2) => T6 = i2), A6 = x(P2, (i2) => H4 = i2);
       let O4, M3, W4 = false, E4, z6, C5;
       do
-        z6 = true, v6 || (d6 < 10 && (M3 = "top-0"), d6 > 10 && d6 < Q3 && (M3 = "top-0 backdrop-blur-3xl duration-1000"), d6 > Q3 && n3 > 10 && (M3 = "-top-20 backdrop-blur-3xl duration-200"), n3 < -100 && (M3 = "top-0 backdrop-blur-3xl duration-700")), v6 && (d6 >= 0 && d6 < X4 && (M3 = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200"), d6 > X4 && n3 > 20 && (M3 = "-bottom-28 duration-400"), n3 < -30 && (M3 = "bottom-0 backdrop-blur-3xl duration-700")), u && !a5 && setTimeout(() => {
+        z6 = true, v6 || (d6 < 10 && (M3 = "top-0"), d6 > 10 && d6 < Q3 && (M3 = "top-0 backdrop-blur-3xl duration-1000"), d6 > Q3 && n3 > 10 && (M3 = "-top-20 backdrop-blur-3xl duration-200"), n3 < -100 && (M3 = "top-0 backdrop-blur-3xl duration-700")), v6 && (d6 >= 0 && d6 < X4 && (M3 = "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200"), d6 > X4 && n3 > 20 && (M3 = "-bottom-28 duration-400"), n3 < -30 && (M3 = "bottom-0 backdrop-blur-3xl duration-700")), u && !a4 && setTimeout(() => {
           E4 = "opacity-100 transition-opacity duration-100 ease-in";
         }, K4), C5 = `${e8.head += `<!-- HEAD_svelte-1le8ayz_START --><link rel="manifest" href="/manifest.json">${w3.status == 200 ? (() => {
           let i2 = w3.route.id.slice(1);
@@ -12057,13 +12060,13 @@ ${G(w, "InView").$$render(e8, { single: true, onview: (r5) => w3(r5), once: true
 
       <!-- HTML_TAG_START -->${r5.home.meta}<!-- HTML_TAG_END -->
       
-      ` : `${D(Object.keys(r5).slice(1), (l3) => {
-            let L5 = r5[l3].title;
+      ` : `${D(Object.keys(r5).slice(1), (l4) => {
+            let L5 = r5[l4].title;
             return `
 
-        ${i2.startsWith(l3) ? `${e8.title = `<title>${j(L5)}</title>`, ""}
+        ${i2.startsWith(l4) ? `${e8.title = `<title>${j(L5)}</title>`, ""}
           
-          ${r5[l3].meta ? `<!-- HTML_TAG_START -->${r5[l3].meta}<!-- HTML_TAG_END -->` : ""}` : ""}`;
+          ${r5[l4].meta ? `<!-- HTML_TAG_START -->${r5[l4].meta}<!-- HTML_TAG_END -->` : ""}` : ""}`;
           })}`}`;
         })() : `${w3.status == 404 ? `${e8.title = "<title>Oops \u{1F4A9}</title>", ""}` : ""}`}<!-- HEAD_svelte-1le8ayz_END -->`, ""}
 
@@ -12100,24 +12103,15 @@ ${G(w, "InView").$$render(e8, { single: true, onview: (r5) => w3(r5), once: true
 
     ` })}
 
-  
   <div class="${"z-50 md:py-4 md:px-[7%] fixed " + j(M3, true) + " ease-in-out w-full"}">${G(ye3, "Navbar").$$render(e8, {}, {}, {})}</div>
 
-  
-  
-
-  <div class="px-[7%] pt-32 md:block">${m5.default ? m5.default({}) : ""}
+  <div class="px-[7%] pt-32 md:block">${m4.default ? m4.default({}) : ""}
 
     
 
-    
     ${G(w, "InView").$$render(e8, { margin: "200px", onview: async () => O4 = await Promise.resolve().then(() => (init_Footer(), Footer_exports)) }, {}, { default: () => `${O4 ? `${G(O4.default, "FooterComponent.default").$$render(e8, { contactLinkClicked: W4 }, { contactLinkClicked: (i2) => {
           W4 = i2, z6 = false;
-        } }, {})}` : ""}` })}
-
-    
-
-    </div></main>`;
+        } }, {})}` : ""}` })}</div></main>`;
       while (!z6);
       return o4(), b4(), f5(), $4(), h2(), x4(), p5(), y6(), S6(), A6(), C5;
     });
@@ -12143,7 +12137,7 @@ var init__ = __esm({
     component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
     file = "_app/immutable/components/pages/_layout.svelte-c11c743e.js";
     imports = ["_app/immutable/components/pages/_layout.svelte-c11c743e.js", "_app/immutable/chunks/preload-helper-41c905a7.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/index-c4fdc548.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/chunks/utils-cee92a91.js", "_app/immutable/chunks/singletons-f7512b57.js", "_app/immutable/chunks/navigation-b45bea8c.js", "_app/immutable/chunks/LazyMount-5fb7f1c0.js", "_app/immutable/chunks/Modal-930f9c3e.js", "_app/immutable/modules/pages/_layout.js-9cbb603b.js", "_app/immutable/chunks/_layout-da46b06b.js"];
-    stylesheets = ["_app/immutable/assets/_layout-714b67f1.css", "_app/immutable/assets/LoginCard-b78ac858.css"];
+    stylesheets = ["_app/immutable/assets/_layout-240f4f06.css", "_app/immutable/assets/LoginCard-b78ac858.css"];
     fonts = ["_app/immutable/assets/nunito-v25-latin-200-ffcbf1b4.woff2", "_app/immutable/assets/nunito-v25-latin-200-fa28d3a9.woff", "_app/immutable/assets/nunito-v25-latin-regular-5e2f97ea.woff2", "_app/immutable/assets/nunito-v25-latin-regular-6a10fc2f.woff", "_app/immutable/assets/poppins-v20-latin-100-a9220f99.woff2", "_app/immutable/assets/poppins-v20-latin-100-439ff4aa.woff", "_app/immutable/assets/poppins-v20-latin-700-9338e65f.woff2", "_app/immutable/assets/poppins-v20-latin-700-da36c916.woff"];
   }
 });
@@ -12151,17 +12145,17 @@ var init__ = __esm({
 // .svelte-kit/output/server/entries/pages/_error.svelte.js
 var error_svelte_exports = {};
 __export(error_svelte_exports, {
-  default: () => a3
+  default: () => l3
 });
-var a3;
+var l3;
 var init_error_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_error.svelte.js"() {
     init_chunks();
-    a3 = I((s5, t3, o4, r5) => `
+    l3 = I((e8, t3, r5, a4) => `
 <div class="flex flex-col justify-center items-center gap-10"><p>Oops ... looks like that page doesn&#39;t exist.</p>
-  <div class="animate-bounce text-4xl">\u{1F648}</div></div>
+  </div>
 
-`);
+<div class="flex justify-center"><img src="/facepalm.gif" alt="face palm star trek gif" class="w-1/3 min-w-[250px]"></div>`);
   }
 });
 
@@ -12180,8 +12174,8 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    file2 = "_app/immutable/components/pages/_error.svelte-f2cca3e1.js";
-    imports2 = ["_app/immutable/components/pages/_error.svelte-f2cca3e1.js", "_app/immutable/chunks/index-72912202.js"];
+    file2 = "_app/immutable/components/pages/_error.svelte-7060b602.js";
+    imports2 = ["_app/immutable/components/pages/_error.svelte-7060b602.js", "_app/immutable/chunks/index-72912202.js"];
     stylesheets2 = [];
     fonts2 = [];
   }
@@ -25612,14 +25606,14 @@ var init_katex = __esm({
       formLigatures(group) {
         var n3 = group.length - 1;
         for (var i2 = 0; i2 < n3; ++i2) {
-          var a5 = group[i2];
-          var v6 = a5.text;
+          var a4 = group[i2];
+          var v6 = a4.text;
           if (v6 === "-" && group[i2 + 1].text === "-") {
             if (i2 + 1 < n3 && group[i2 + 2].text === "-") {
               group.splice(i2, 3, {
                 type: "textord",
                 mode: "text",
-                loc: SourceLocation.range(a5, group[i2 + 2]),
+                loc: SourceLocation.range(a4, group[i2 + 2]),
                 text: "---"
               });
               n3 -= 2;
@@ -25627,7 +25621,7 @@ var init_katex = __esm({
               group.splice(i2, 2, {
                 type: "textord",
                 mode: "text",
-                loc: SourceLocation.range(a5, group[i2 + 1]),
+                loc: SourceLocation.range(a4, group[i2 + 1]),
                 text: "--"
               });
               n3 -= 1;
@@ -25637,7 +25631,7 @@ var init_katex = __esm({
             group.splice(i2, 2, {
               type: "textord",
               mode: "text",
-              loc: SourceLocation.range(a5, group[i2 + 1]),
+              loc: SourceLocation.range(a4, group[i2 + 1]),
               text: v6 + v6
             });
             n3 -= 1;
@@ -25854,7 +25848,7 @@ var init_page_svx = __esm({
     init_chunks();
     init_katex();
     init_store();
-    v3 = I((s5, m5, d6, c3) => `
+    v3 = I((s5, m4, d6, c3) => `
 
 
 
@@ -25862,16 +25856,16 @@ var init_page_svx = __esm({
 
 ${s5.head += '<!-- HEAD_svelte-ztscxf_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous"><!-- HEAD_svelte-ztscxf_END -->', ""}`);
     r = 1e3;
-    z5 = I((s5, m5, d6, c3) => {
+    z5 = I((s5, m4, d6, c3) => {
       let n3, i2, o4;
-      o4 = x(d3, (l3) => i2 = l3);
+      o4 = x(d3, (l4) => i2 = l4);
       let e8 = r, $4 = ["\\int_{M}d\\omega=\\int_{\\partial M}\\omega", "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}", " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ", "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}", "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"];
       return n3 = i2 ? "prose-invert" : "", o4(), `${G(v3, "MathLazyRenderer").$$render(s5, {}, {}, {})}
 <article class="${"prose lg:prose-lg " + j(n3, true)}"><h1>This page lazy-rendered using Katex</h1>
 <input type="number" min="1"${M("max", r, 0)}${M("value", e8, 0)}>
 <input type="range" min="1"${M("max", r, 0)}${M("value", e8, 0)}>
 <h2>${j(e8)} sections; ${j(e8 * $4.length)} equations below</h2>
-${D(Array(e8), (l3, g4) => `<div>${j(g4 + 1)}</div>
+${D(Array(e8), (l4, g5) => `<div>${j(g5 + 1)}</div>
     ${D($4, (_6) => `<p class="p-1 text-indigo-700" d${M("k", _6, 0)}></p>`)}`)}</article>`;
     });
   }
@@ -25919,7 +25913,7 @@ var init_Kajax = __esm({
   ".svelte-kit/output/server/chunks/Kajax.js"() {
     init_chunks();
     init_katex();
-    r2 = I((t3, e8, a5, c3) => `
+    r2 = I((t3, e8, a4, c3) => `
 
 ${t3.head += `<!-- HEAD_svelte-15ncbow_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous"><script>MathJax = {
       // startup: { typeset: false },
@@ -25954,14 +25948,14 @@ var init_page_svx2 = __esm({
     init_katex();
     init_store();
     init_Kajax();
-    f2 = I((p5, i2, l3, v6) => {
+    f2 = I((p5, i2, l4, v6) => {
       let t3, { d: s5 = false } = i2, { m: n3 } = i2;
       const e8 = { displayMode: s5, throwOnError: false };
-      return i2.d === void 0 && l3.d && s5 !== void 0 && l3.d(s5), i2.m === void 0 && l3.m && n3 !== void 0 && l3.m(n3), t3 = katex.renderToString(n3, e8), `${p5.head += '<!-- HEAD_svelte-bnfb8z_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><!-- HEAD_svelte-bnfb8z_END -->', ""}
+      return i2.d === void 0 && l4.d && s5 !== void 0 && l4.d(s5), i2.m === void 0 && l4.m && n3 !== void 0 && l4.m(n3), t3 = katex.renderToString(n3, e8), `${p5.head += '<!-- HEAD_svelte-bnfb8z_START --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><!-- HEAD_svelte-bnfb8z_END -->', ""}
 
 <!-- HTML_TAG_START -->${t3}<!-- HTML_TAG_END -->`;
     });
-    k5 = I((p5, i2, l3, v6) => {
+    k5 = I((p5, i2, l4, v6) => {
       let t3, s5;
       s5 = x(d3, (e8) => t3 = e8);
       let n3 = ["\\int_{M}d\\omega=\\int_{\\partial M}\\omega", "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}", " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ", "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}", "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c", "e^{i x}=\\cos x+i\\sin x"];
@@ -25971,7 +25965,7 @@ var init_page_svx2 = __esm({
     });
     d5 = 1e3;
     T5 = 1;
-    L4 = I((p5, i2, l3, v6) => {
+    L4 = I((p5, i2, l4, v6) => {
       let t3, s5, n3, e8, o4;
       o4 = x(d3, (h2) => e8 = h2);
       let b4 = ["\\int_{M}d\\omega=\\int_{\\partial M}\\omega", "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}", " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ", "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}", "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"], c3 = 2;
@@ -26003,13 +25997,13 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <div class="p-4"><input type="number" min="1"${M("value", s5, 0)}>
     <input type="range" min="1"${M("value", s5, 0)}></div>
 <h1>${j(s5)} lines of markdown immediately below</h1>
-${D(Array(s5), (h2, g4) => `<p>${j(g4 + 1)}</p>
+${D(Array(s5), (h2, g5) => `<p>${j(g5 + 1)}</p>
 <div class="math math-display"><!-- HTML_TAG_START --><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><!-- HTML_TAG_END --></div>`)}
 
 <ul><li>pull this slider over to show that more equations doesnt slow the page down (capped at 10,000 but could be larger)</li></ul>
 <input type="number" min="1"${M("max", d5, 0)}${M("value", t3, 0)}>
 <input type="range" min="1"${M("max", d5, 0)}${M("value", t3, 0)}>
-${D(Array(t3), (h2, g4) => `<p>${j(g4 + 1)}</p>
+${D(Array(t3), (h2, g5) => `<p>${j(g5 + 1)}</p>
         <p class="p-1 text-indigo-700" d${M("m", "\\cancelto{0}{\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}}", 0)}></p>
         <p class="p-1 text-green-700" d${M("k", "\\int\\limits_{-\\infty}^{\\infty} e^{-x^{2}} \\, dx = \\sqrt{\\pi}", 0)}></p>
     ${D(b4, (y6, z6) => `<div><p class="p-1 text-indigo-700" d${M("k", y6, 0)}></p>
@@ -26087,15 +26081,15 @@ var init_page_svx3 = __esm({
   <\/script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"><\/script><!-- HEAD_svelte-1fd20gn_END -->`, ""}`);
     r3 = 1e3;
     f3 = I((s5, o4, u, d6) => {
-      let n3, i2, l3;
-      l3 = x(d3, (c3) => i2 = c3);
+      let n3, i2, l4;
+      l4 = x(d3, (c3) => i2 = c3);
       let e8 = r3, p5 = ["\\int_{M}d\\omega=\\int_{\\partial M}\\omega", "G_{\\mu\\nu}\\,+\\,\\Lambda g_{\\mu\\nu}\\,=\\,\\kappa T_{\\mu\\nu}", " (i\\hbar\\gamma^\\mu \\partial_\\mu  - mc) \\ \\psi = 0 ", "\\left\\langle{e^{-\\beta\\,W}}\\right\\rangle = \\,{e^{-\\beta\\,\\triangle\\,F}}", "z_{n+1}\\,=\\,z_{n}^{2}\\,+\\,c"];
-      return n3 = i2 ? "prose-invert" : "", l3(), `${G(v4, "MathLazyRenderer").$$render(s5, {}, {}, {})}
+      return n3 = i2 ? "prose-invert" : "", l4(), `${G(v4, "MathLazyRenderer").$$render(s5, {}, {}, {})}
 <article class="${"prose lg:prose-lg " + j(n3, true)}"><h1>This page lazy-rendered using Mathjax (using tex-mml-chtml.js NOT svg)</h1>
 <input type="number" min="1"${M("max", r3, 0)}${M("value", e8, 0)}>
 <input type="range" min="1"${M("max", r3, 0)}${M("value", e8, 0)}>
 <h2>${j(e8)} sections; ${j(e8 * p5.length)} equations below</h2>
-${D(Array(e8), (c3, g4) => `<div>${j(g4 + 1)}</div>
+${D(Array(e8), (c3, g5) => `<div>${j(g5 + 1)}</div>
     ${D(p5, (h2) => `<p class="p-1 text-red-400" d${M("m", h2, 0)}></p>`)}`)}</article>`;
     });
   }
@@ -26119,7 +26113,7 @@ var init__5 = __esm({
     index5 = 10;
     component5 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
     file5 = "_app/immutable/components/pages/mathjax/_page.svx-c2fed9c2.js";
-    imports5 = ["_app/immutable/components/pages/mathjax/_page.svx-c2fed9c2.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/modules/pages/mathjax/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-37f6be6a.js"];
+    imports5 = ["_app/immutable/components/pages/mathjax/_page.svx-c2fed9c2.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/modules/pages/mathjax/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-621564aa.js"];
     stylesheets5 = [];
     fonts5 = [];
   }
@@ -26149,7 +26143,7 @@ var init_page_svelte = __esm({
     init_Kajax();
     init_store();
     y5 = { code: ".hScroll.svelte-zoca3o{overflow:auto;white-space:nowrap;margin:0 30;background-color:var(--correctColour)}", map: null };
-    v5 = I((s5, m5, i2, r5) => (s5.css.add(y5), `${G(r2, "MathRenderer").$$render(s5, {}, {}, {})}
+    v5 = I((s5, m4, i2, r5) => (s5.css.add(y5), `${G(r2, "MathRenderer").$$render(s5, {}, {}, {})}
 
 <p class="text-3xl flex justify-center" d${M("m", "\\cancelto{0}{x}", 0)}></p>
 <p class="text-3xl flex justify-center" d${M("k", "\\cancel{x}", 0)}></p>
@@ -26218,9 +26212,9 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <li>C. 4.0 \u03A9</li>
 <li>D. 8.0 \u03A9</li></ul>
   <img style="margin: 0 auto; display:flex;width: 65vw;min-width: 280px;max-width: 600px;" src="https://raw.githubusercontent.com/brightowltutoring/web/main/circuits-1.png"></div>`));
-    f4 = I((s5, m5, i2, r5) => {
-      let a5, n3, t3;
-      return t3 = x(d3, (c3) => n3 = c3), a5 = n3 ? "prose-invert" : "", t3(), `<div class="${"prose lg:prose-lg " + j(a5, true)}">${G(v5, "E").$$render(s5, {}, {}, {})}</div>`;
+    f4 = I((s5, m4, i2, r5) => {
+      let a4, n3, t3;
+      return t3 = x(d3, (c3) => n3 = c3), a4 = n3 ? "prose-invert" : "", t3(), `<div class="${"prose lg:prose-lg " + j(a4, true)}">${G(v5, "E").$$render(s5, {}, {}, {})}</div>`;
     });
   }
 });
@@ -26243,7 +26237,7 @@ var init__6 = __esm({
     index6 = 11;
     component6 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
     file6 = "_app/immutable/components/pages/physics/_page.svelte-cb0bc643.js";
-    imports6 = ["_app/immutable/components/pages/physics/_page.svelte-cb0bc643.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/Kajax-40bc98d8.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/modules/pages/physics/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-621564aa.js"];
+    imports6 = ["_app/immutable/components/pages/physics/_page.svelte-cb0bc643.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/Kajax-40bc98d8.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-013100f8.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/modules/pages/physics/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-37f6be6a.js"];
     stylesheets6 = ["_app/immutable/assets/_page-fcf51fa8.css"];
     fonts6 = [];
   }
@@ -26380,7 +26374,7 @@ function uneval(value) {
   }
   walk(value);
   const names = /* @__PURE__ */ new Map();
-  Array.from(counts).filter((entry) => entry[1] > 1).sort((a5, b4) => b4[1] - a5[1]).forEach((entry, i2) => {
+  Array.from(counts).filter((entry) => entry[1] > 1).sort((a4, b4) => b4[1] - a4[1]).forEach((entry, i2) => {
     names.set(entry[0], get_name(i2));
   });
   function stringify2(thing) {
@@ -26663,26 +26657,26 @@ init_index2();
 var import_cookie = __toESM(require_cookie(), 1);
 var le = __toESM(require_set_cookie(), 1);
 var Ze = I((e8, t3, r5, n3) => {
-  let { stores: s5 } = t3, { page: o4 } = t3, { components: a5 } = t3, { form: i2 } = t3, { data_0: c3 = null } = t3, { data_1: f5 = null } = t3;
-  return C("__svelte__", s5), s5.page.notify, t3.stores === void 0 && r5.stores && s5 !== void 0 && r5.stores(s5), t3.page === void 0 && r5.page && o4 !== void 0 && r5.page(o4), t3.components === void 0 && r5.components && a5 !== void 0 && r5.components(a5), t3.form === void 0 && r5.form && i2 !== void 0 && r5.form(i2), t3.data_0 === void 0 && r5.data_0 && c3 !== void 0 && r5.data_0(c3), t3.data_1 === void 0 && r5.data_1 && f5 !== void 0 && r5.data_1(f5), s5.page.set(o4), `
+  let { stores: s5 } = t3, { page: o4 } = t3, { components: a4 } = t3, { form: i2 } = t3, { data_0: c3 = null } = t3, { data_1: f5 = null } = t3;
+  return C("__svelte__", s5), s5.page.notify, t3.stores === void 0 && r5.stores && s5 !== void 0 && r5.stores(s5), t3.page === void 0 && r5.page && o4 !== void 0 && r5.page(o4), t3.components === void 0 && r5.components && a4 !== void 0 && r5.components(a4), t3.form === void 0 && r5.form && i2 !== void 0 && r5.form(i2), t3.data_0 === void 0 && r5.data_0 && c3 !== void 0 && r5.data_0(c3), t3.data_1 === void 0 && r5.data_1 && f5 !== void 0 && r5.data_1(f5), s5.page.set(o4), `
 
 
-${a5[1] ? `${G(a5[0] || F, "svelte:component").$$render(e8, { data: c3 }, {}, { default: () => `${G(a5[1] || F, "svelte:component").$$render(e8, { data: f5, form: i2 }, {}, {})}` })}` : `${G(a5[0] || F, "svelte:component").$$render(e8, { data: c3, form: i2 }, {}, {})}`}
+${a4[1] ? `${G(a4[0] || F, "svelte:component").$$render(e8, { data: c3 }, {}, { default: () => `${G(a4[1] || F, "svelte:component").$$render(e8, { data: f5, form: i2 }, {}, {})}` })}` : `${G(a4[0] || F, "svelte:component").$$render(e8, { data: c3, form: i2 }, {}, {})}`}
 
 `;
 });
 function Z(e8, t3) {
   const r5 = [];
-  e8.split(",").forEach((o4, a5) => {
+  e8.split(",").forEach((o4, a4) => {
     const i2 = /([^/]+)\/([^;]+)(?:;q=([0-9.]+))?/.exec(o4);
     if (i2) {
       const [, c3, f5, y6 = "1"] = i2;
-      r5.push({ type: c3, subtype: f5, q: +y6, i: a5 });
+      r5.push({ type: c3, subtype: f5, q: +y6, i: a4 });
     }
-  }), r5.sort((o4, a5) => o4.q !== a5.q ? a5.q - o4.q : o4.subtype === "*" != (a5.subtype === "*") ? o4.subtype === "*" ? 1 : -1 : o4.type === "*" != (a5.type === "*") ? o4.type === "*" ? 1 : -1 : o4.i - a5.i);
+  }), r5.sort((o4, a4) => o4.q !== a4.q ? a4.q - o4.q : o4.subtype === "*" != (a4.subtype === "*") ? o4.subtype === "*" ? 1 : -1 : o4.type === "*" != (a4.type === "*") ? o4.type === "*" ? 1 : -1 : o4.i - a4.i);
   let n3, s5 = 1 / 0;
   for (const o4 of t3) {
-    const [a5, i2] = o4.split("/"), c3 = r5.findIndex((f5) => (f5.type === a5 || f5.type === "*") && (f5.subtype === i2 || f5.subtype === "*"));
+    const [a4, i2] = o4.split("/"), c3 = r5.findIndex((f5) => (f5.type === a4 || f5.type === "*") && (f5.subtype === i2 || f5.subtype === "*"));
     c3 !== -1 && c3 < s5 && (n3 = o4, s5 = c3);
   }
   return n3;
@@ -26810,14 +26804,14 @@ async function dt(e8, t3, r5) {
     return new Response(void 0, { status: 204 });
   }
   try {
-    const a5 = await s5(e8);
-    if (!(a5 instanceof Response))
+    const a4 = await s5(e8);
+    if (!(a4 instanceof Response))
       throw new Error(`Invalid response from route ${e8.url.pathname}: handler should return a Response object`);
-    return r5.prerendering && a5.headers.set("x-sveltekit-prerender", String(o4)), a5;
-  } catch (a5) {
-    if (a5 instanceof U)
-      return new Response(void 0, { status: a5.status, headers: { location: a5.location } });
-    throw a5;
+    return r5.prerendering && a4.headers.set("x-sveltekit-prerender", String(o4)), a4;
+  } catch (a4) {
+    if (a4 instanceof U)
+      return new Response(void 0, { status: a4.status, headers: { location: a4.location } });
+    throw a4;
   }
 }
 function ut(e8) {
@@ -26934,10 +26928,10 @@ async function ze(e8) {
 async function oe({ event: e8, options: t3, state: r5, node: n3, parent: s5 }) {
   if (!n3?.server)
     return null;
-  const o4 = { dependencies: /* @__PURE__ */ new Set(), params: /* @__PURE__ */ new Set(), parent: false, route: false, url: false }, a5 = ot(e8.url, () => {
+  const o4 = { dependencies: /* @__PURE__ */ new Set(), params: /* @__PURE__ */ new Set(), parent: false, route: false, url: false }, a4 = ot(e8.url, () => {
     o4.url = true;
   });
-  r5.prerendering && Re(a5);
+  r5.prerendering && Re(a4);
   const i2 = await n3.server.load?.call(null, { ...e8, depends: (...f5) => {
     for (const y6 of f5) {
       const { href: k6 } = new URL(y6, e8.url);
@@ -26945,24 +26939,24 @@ async function oe({ event: e8, options: t3, state: r5, node: n3, parent: s5 }) {
     }
   }, params: new Proxy(e8.params, { get: (f5, y6) => (o4.params.add(y6), f5[y6]) }), parent: async () => (o4.parent = true, s5()), route: { get id() {
     return o4.route = true, e8.route.id;
-  } }, url: a5 }), c3 = i2 ? await ze(i2) : null;
+  } }, url: a4 }), c3 = i2 ? await ze(i2) : null;
   return t3.dev && He(c3, e8.route.id), { type: "data", data: c3, uses: o4, slash: n3.server.trailingSlash };
 }
-async function Ne({ event: e8, fetched: t3, node: r5, parent: n3, server_data_promise: s5, state: o4, resolve_opts: a5, csr: i2 }) {
+async function Ne({ event: e8, fetched: t3, node: r5, parent: n3, server_data_promise: s5, state: o4, resolve_opts: a4, csr: i2 }) {
   const c3 = await s5;
   if (!r5?.universal?.load)
     return c3?.data ?? null;
   const f5 = await r5.universal.load.call(null, { url: e8.url, params: e8.params, data: c3?.data ?? null, route: e8.route, fetch: async (k6, u) => {
-    const _6 = k6 instanceof Request && k6.body ? k6.clone().body : null, l3 = await e8.fetch(k6, u), d6 = new URL(k6 instanceof Request ? k6.url : k6, e8.url), p5 = d6.origin === e8.url.origin;
-    let m5;
+    const _6 = k6 instanceof Request && k6.body ? k6.clone().body : null, l4 = await e8.fetch(k6, u), d6 = new URL(k6 instanceof Request ? k6.url : k6, e8.url), p5 = d6.origin === e8.url.origin;
+    let m4;
     if (p5)
-      o4.prerendering && (m5 = { response: l3, body: null }, o4.prerendering.dependencies.set(d6.pathname, m5));
+      o4.prerendering && (m4 = { response: l4, body: null }, o4.prerendering.dependencies.set(d6.pathname, m4));
     else if ((k6 instanceof Request ? k6.mode : u?.mode ?? "cors") !== "no-cors") {
-      const g4 = l3.headers.get("access-control-allow-origin");
-      if (!g4 || g4 !== e8.url.origin && g4 !== "*")
-        throw new Error(`CORS error: ${g4 ? "Incorrect" : "No"} 'Access-Control-Allow-Origin' header is present on the requested resource`);
+      const g5 = l4.headers.get("access-control-allow-origin");
+      if (!g5 || g5 !== e8.url.origin && g5 !== "*")
+        throw new Error(`CORS error: ${g5 ? "Incorrect" : "No"} 'Access-Control-Allow-Origin' header is present on the requested resource`);
     }
-    const E4 = new Proxy(l3, { get(h2, g4, R4) {
+    const E4 = new Proxy(l4, { get(h2, g5, R4) {
       async function b4() {
         const j4 = await h2.text();
         if (!j4 || typeof j4 == "string") {
@@ -26971,18 +26965,18 @@ async function Ne({ event: e8, fetched: t3, node: r5, parent: n3, server_data_pr
             throw new Error(`response.status is not a number. value: "${h2.status}" type: ${typeof h2.status}`);
           t3.push({ url: p5 ? d6.href.slice(e8.url.origin.length) : d6.href, method: e8.request.method, request_body: k6 instanceof Request && _6 ? await yt(_6) : u?.body, response_body: j4, response: h2 });
         }
-        return m5 && (m5.body = j4), j4;
+        return m4 && (m4.body = j4), j4;
       }
-      return g4 === "arrayBuffer" ? async () => {
+      return g5 === "arrayBuffer" ? async () => {
         const j4 = await h2.arrayBuffer();
-        return m5 && (m5.body = new Uint8Array(j4)), j4;
-      } : g4 === "text" ? b4 : g4 === "json" ? async () => JSON.parse(await b4()) : Reflect.get(h2, g4, h2);
+        return m4 && (m4.body = new Uint8Array(j4)), j4;
+      } : g5 === "text" ? b4 : g5 === "json" ? async () => JSON.parse(await b4()) : Reflect.get(h2, g5, h2);
     } });
     if (i2) {
-      const h2 = l3.headers.get;
-      l3.headers.get = (g4) => {
-        const R4 = g4.toLowerCase(), b4 = h2.call(l3.headers, R4);
-        if (b4 && !R4.startsWith("x-sveltekit-") && !a5.filterSerializedResponseHeaders(R4, b4))
+      const h2 = l4.headers.get;
+      l4.headers.get = (g5) => {
+        const R4 = g5.toLowerCase(), b4 = h2.call(l4.headers, R4);
+        if (b4 && !R4.startsWith("x-sveltekit-") && !a4.filterSerializedResponseHeaders(R4, b4))
           throw new Error(`Failed to get response header "${R4}" \u2014 it must be included by the \`filterSerializedResponseHeaders\` option: https://kit.svelte.dev/docs/hooks#server-hooks-handle (at ${e8.route})`);
         return b4;
       };
@@ -27034,7 +27028,7 @@ function bt(e8, t3, r5 = false) {
   let s5 = null, o4 = null;
   for (const [f5, y6] of e8.response.headers)
     t3(f5, y6) && (n3[f5] = y6), f5 === "cache-control" && (s5 = y6), f5 === "age" && (o4 = y6);
-  const a5 = { status: e8.response.status, statusText: e8.response.statusText, headers: n3, body: e8.response_body }, i2 = JSON.stringify(a5).replace(wt, (f5) => De[f5]), c3 = ['type="application/json"', "data-sveltekit-fetched", `data-url=${Y(e8.url)}`];
+  const a4 = { status: e8.response.status, statusText: e8.response.statusText, headers: n3, body: e8.response_body }, i2 = JSON.stringify(a4).replace(wt, (f5) => De[f5]), c3 = ['type="application/json"', "data-sveltekit-fetched", `data-url=${Y(e8.url)}`];
   if (e8.request_body && c3.push(`data-hash=${Y(V(e8.request_body))}`), !r5 && e8.method === "GET" && s5) {
     const f5 = /s-maxage=(\d+)/g.exec(s5) ?? /max-age=(\d+)/g.exec(s5);
     if (f5) {
@@ -27051,10 +27045,10 @@ function pe(e8) {
   const t3 = Le.slice(0), r5 = jt(e8);
   for (let s5 = 0; s5 < r5.length; s5 += 16) {
     const o4 = r5.subarray(s5, s5 + 16);
-    let a5, i2, c3, f5 = t3[0], y6 = t3[1], k6 = t3[2], u = t3[3], _6 = t3[4], l3 = t3[5], d6 = t3[6], p5 = t3[7];
-    for (let m5 = 0; m5 < 64; m5++)
-      m5 < 16 ? a5 = o4[m5] : (i2 = o4[m5 + 1 & 15], c3 = o4[m5 + 14 & 15], a5 = o4[m5 & 15] = (i2 >>> 7 ^ i2 >>> 18 ^ i2 >>> 3 ^ i2 << 25 ^ i2 << 14) + (c3 >>> 17 ^ c3 >>> 19 ^ c3 >>> 10 ^ c3 << 15 ^ c3 << 13) + o4[m5 & 15] + o4[m5 + 9 & 15] | 0), a5 = a5 + p5 + (_6 >>> 6 ^ _6 >>> 11 ^ _6 >>> 25 ^ _6 << 26 ^ _6 << 21 ^ _6 << 7) + (d6 ^ _6 & (l3 ^ d6)) + X[m5], p5 = d6, d6 = l3, l3 = _6, _6 = u + a5 | 0, u = k6, k6 = y6, y6 = f5, f5 = a5 + (y6 & k6 ^ u & (y6 ^ k6)) + (y6 >>> 2 ^ y6 >>> 13 ^ y6 >>> 22 ^ y6 << 30 ^ y6 << 19 ^ y6 << 10) | 0;
-    t3[0] = t3[0] + f5 | 0, t3[1] = t3[1] + y6 | 0, t3[2] = t3[2] + k6 | 0, t3[3] = t3[3] + u | 0, t3[4] = t3[4] + _6 | 0, t3[5] = t3[5] + l3 | 0, t3[6] = t3[6] + d6 | 0, t3[7] = t3[7] + p5 | 0;
+    let a4, i2, c3, f5 = t3[0], y6 = t3[1], k6 = t3[2], u = t3[3], _6 = t3[4], l4 = t3[5], d6 = t3[6], p5 = t3[7];
+    for (let m4 = 0; m4 < 64; m4++)
+      m4 < 16 ? a4 = o4[m4] : (i2 = o4[m4 + 1 & 15], c3 = o4[m4 + 14 & 15], a4 = o4[m4 & 15] = (i2 >>> 7 ^ i2 >>> 18 ^ i2 >>> 3 ^ i2 << 25 ^ i2 << 14) + (c3 >>> 17 ^ c3 >>> 19 ^ c3 >>> 10 ^ c3 << 15 ^ c3 << 13) + o4[m4 & 15] + o4[m4 + 9 & 15] | 0), a4 = a4 + p5 + (_6 >>> 6 ^ _6 >>> 11 ^ _6 >>> 25 ^ _6 << 26 ^ _6 << 21 ^ _6 << 7) + (d6 ^ _6 & (l4 ^ d6)) + X[m4], p5 = d6, d6 = l4, l4 = _6, _6 = u + a4 | 0, u = k6, k6 = y6, y6 = f5, f5 = a4 + (y6 & k6 ^ u & (y6 ^ k6)) + (y6 >>> 2 ^ y6 >>> 13 ^ y6 >>> 22 ^ y6 << 30 ^ y6 << 19 ^ y6 << 10) | 0;
+    t3[0] = t3[0] + f5 | 0, t3[1] = t3[1] + y6 | 0, t3[2] = t3[2] + k6 | 0, t3[3] = t3[3] + u | 0, t3[4] = t3[4] + _6 | 0, t3[5] = t3[5] + l4 | 0, t3[6] = t3[6] + d6 | 0, t3[7] = t3[7] + p5 | 0;
   }
   const n3 = new Uint8Array(t3.buffer);
   return We(n3), Je(n3);
@@ -27119,8 +27113,8 @@ var Ge = class {
       c3 && !c3.includes("unsafe-inline") && (o4["style-src"] = [...c3, "unsafe-inline"]);
     }
     __privateSet(this, _e, []), __privateSet(this, _t2, []);
-    const a5 = o4["script-src"] || o4["default-src"], i2 = o4["style-src"] || o4["default-src"];
-    __privateSet(this, _n, !!a5 && a5.filter((c3) => c3 !== "unsafe-inline").length > 0), __privateSet(this, _s, !s5 && !!i2 && i2.filter((c3) => c3 !== "unsafe-inline").length > 0), this.script_needs_nonce = __privateGet(this, _n) && !__privateGet(this, _r), this.style_needs_nonce = __privateGet(this, _s) && !__privateGet(this, _r), __privateSet(this, _a, n3);
+    const a4 = o4["script-src"] || o4["default-src"], i2 = o4["style-src"] || o4["default-src"];
+    __privateSet(this, _n, !!a4 && a4.filter((c3) => c3 !== "unsafe-inline").length > 0), __privateSet(this, _s, !s5 && !!i2 && i2.filter((c3) => c3 !== "unsafe-inline").length > 0), this.script_needs_nonce = __privateGet(this, _n) && !__privateGet(this, _r), this.style_needs_nonce = __privateGet(this, _s) && !__privateGet(this, _r), __privateSet(this, _a, n3);
   }
   add_script(t3) {
     __privateGet(this, _n) && (__privateGet(this, _r) ? __privateGet(this, _e).push(`sha256-${pe(t3)}`) : __privateGet(this, _e).length === 0 && __privateGet(this, _e).push(`nonce-${__privateGet(this, _a)}`));
@@ -27137,10 +27131,10 @@ var Ge = class {
       const o4 = n3[s5];
       if (!o4)
         continue;
-      const a5 = [s5];
+      const a4 = [s5];
       Array.isArray(o4) && o4.forEach((i2) => {
-        Rt.has(i2) || $t.test(i2) ? a5.push(`'${i2}'`) : a5.push(i2);
-      }), r5.push(a5.join(" "));
+        Rt.has(i2) || $t.test(i2) ? a4.push(`'${i2}'`) : a4.push(i2);
+      }), r5.push(a4.join(" "));
     }
     return r5.join("; ");
   }
@@ -27160,8 +27154,8 @@ var vt = class extends Ge {
 var St = class extends Ge {
   constructor(t3, r5, n3, s5) {
     if (super(t3, r5, n3, s5), Object.values(r5).filter((o4) => !!o4).length > 0) {
-      const o4 = r5["report-to"]?.length ?? 0 > 0, a5 = r5["report-uri"]?.length ?? 0 > 0;
-      if (!o4 && !a5)
+      const o4 = r5["report-to"]?.length ?? 0 > 0, a4 = r5["report-uri"]?.length ?? 0 > 0;
+      if (!o4 && !a4)
         throw Error("`content-security-policy-report-only` must be specified with either the `report-to` or `report-uri` directives, or both");
     }
   }
@@ -27171,8 +27165,8 @@ var Ot = class {
     __publicField(this, "nonce", xt());
     __publicField(this, "csp_provider");
     __publicField(this, "report_only_provider");
-    const a5 = t3 === "hash" || t3 === "auto" && s5;
-    this.csp_provider = new vt(a5, r5, this.nonce, o4), this.report_only_provider = new St(a5, n3, this.nonce, o4);
+    const a4 = t3 === "hash" || t3 === "auto" && s5;
+    this.csp_provider = new vt(a4, r5, this.nonce, o4), this.report_only_provider = new St(a4, n3, this.nonce, o4);
   }
   get script_needs_nonce() {
     return this.csp_provider.script_needs_nonce || this.report_only_provider.script_needs_nonce;
@@ -27188,28 +27182,28 @@ var Ot = class {
   }
 };
 var Pt = { ...z2(false), check: () => false };
-async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config: s5, status: o4, error: a5 = null, event: i2, resolve_opts: c3, action_result: f5 }) {
+async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config: s5, status: o4, error: a4 = null, event: i2, resolve_opts: c3, action_result: f5 }) {
   if (n3.prerendering) {
     if (r5.csp.mode === "nonce")
       throw new Error('Cannot use prerendering if config.kit.csp.mode === "nonce"');
     if (r5.app_template_contains_nonce)
       throw new Error("Cannot use prerendering if page template contains %sveltekit.nonce%");
   }
-  const { entry: y6 } = r5.manifest._, k6 = new Set(y6.stylesheets), u = new Set(y6.imports), _6 = new Set(r5.manifest._.entry.fonts), l3 = /* @__PURE__ */ new Set(), d6 = /* @__PURE__ */ new Map();
+  const { entry: y6 } = r5.manifest._, k6 = new Set(y6.stylesheets), u = new Set(y6.imports), _6 = new Set(r5.manifest._.entry.fonts), l4 = /* @__PURE__ */ new Set(), d6 = /* @__PURE__ */ new Map();
   let p5;
-  const m5 = f5?.type === "success" || f5?.type === "failure" ? f5.data ?? null : null;
+  const m4 = f5?.type === "success" || f5?.type === "failure" ? f5.data ?? null : null;
   if (s5.ssr) {
-    const w3 = { stores: { page: A(null), navigating: A(null), updated: Pt }, components: await Promise.all(e8.map(({ node: x4 }) => x4.component())), form: m5 };
+    const w3 = { stores: { page: A(null), navigating: A(null), updated: Pt }, components: await Promise.all(e8.map(({ node: x4 }) => x4.component())), form: m4 };
     let $4 = {};
     for (let x4 = 0; x4 < e8.length; x4 += 1)
       $4 = { ...$4, ...e8[x4].data }, w3[`data_${x4}`] = $4;
-    w3.page = { error: a5, params: i2.params, route: i2.route, status: o4, url: i2.url, data: $4, form: m5 }, p5 = r5.root.render(w3);
+    w3.page = { error: a4, params: i2.params, route: i2.route, status: o4, url: i2.url, data: $4, form: m4 }, p5 = r5.root.render(w3);
     for (const { node: x4 } of e8)
       x4.imports && x4.imports.forEach((v6) => u.add(v6)), x4.stylesheets && x4.stylesheets.forEach((v6) => k6.add(v6)), x4.fonts && x4.fonts.forEach((v6) => _6.add(v6)), x4.inline_styles && Object.entries(await x4.inline_styles()).forEach(([v6, N3]) => d6.set(v6, N3));
   } else
     p5 = { head: "", html: "", css: { code: "", map: null } };
   let E4 = "", h2 = p5.html;
-  const g4 = new Ot(r5.csp, { dev: r5.dev, prerender: !!n3.prerendering }), R4 = V(h2);
+  const g5 = new Ot(r5.csp, { dev: r5.dev, prerender: !!n3.prerendering }), R4 = V(h2);
   let b4;
   if (r5.paths.assets)
     b4 = r5.paths.assets;
@@ -27232,21 +27226,21 @@ async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config
     const $4 = w3;
     throw new Error(Se(i2, $4));
   }
-  if (m5 && (O4.form = _t(m5, i2.route.id)), d6.size > 0) {
+  if (m4 && (O4.form = _t(m4, i2.route.id)), d6.size > 0) {
     const w3 = Array.from(d6.values()).join(`
 `), $4 = [];
-    r5.dev && $4.push(" data-sveltekit"), g4.style_needs_nonce && $4.push(` nonce="${g4.nonce}"`), g4.add_style(w3), E4 += `
+    r5.dev && $4.push(" data-sveltekit"), g5.style_needs_nonce && $4.push(` nonce="${g5.nonce}"`), g5.add_style(w3), E4 += `
 	<style${$4.join("")}>${w3}</style>`;
   }
   for (const w3 of k6) {
     const $4 = j4(w3);
     if (c3.preload({ type: "css", path: $4 })) {
       const x4 = [];
-      if (g4.style_needs_nonce && x4.push(`nonce="${g4.nonce}"`), d6.has(w3))
+      if (g5.style_needs_nonce && x4.push(`nonce="${g5.nonce}"`), d6.has(w3))
         x4.push("disabled", 'media="(max-width: 0)"');
       else {
         const v6 = ['rel="preload"', 'as="style"'].concat(x4);
-        l3.add(`<${encodeURI($4)}>; ${v6.join(";")}; nopush`);
+        l4.add(`<${encodeURI($4)}>; ${v6.join(";")}; nopush`);
       }
       x4.unshift('rel="stylesheet"'), E4 += `
 		<link href="${$4}" ${x4.join(" ")}>`;
@@ -27264,7 +27258,7 @@ async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config
     const w3 = [`env: ${q2(r5.public_env)}`, `paths: ${q2(r5.paths)}`, `target: document.querySelector('[data-sveltekit-hydrate="${R4}"]').parentNode`, `version: ${q2(r5.version)}`];
     if (s5.ssr) {
       const v6 = [`node_ids: [${e8.map(({ node: N3 }) => N3.index).join(", ")}]`, `data: ${O4.data}`, `form: ${O4.form}`];
-      o4 !== 200 && v6.push(`status: ${o4}`), a5 && v6.push(`error: ${uneval(a5)}`), r5.embedded && v6.push(`params: ${uneval(i2.params)}`, `route: ${q2(i2.route)}`), w3.push(`hydrate: {
+      o4 !== 200 && v6.push(`status: ${o4}`), a4 && v6.push(`error: ${uneval(a4)}`), r5.embedded && v6.push(`params: ${uneval(i2.params)}`, `route: ${q2(i2.route)}`), w3.push(`hydrate: {
 					${v6.join(`,
 					`)}
 				}`);
@@ -27279,11 +27273,11 @@ async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config
 		`;
     for (const v6 of u) {
       const N3 = j4(v6);
-      c3.preload({ type: "js", path: N3 }) && (l3.add(`<${encodeURI(N3)}>; rel="modulepreload"; nopush`), n3.prerendering && (E4 += `
+      c3.preload({ type: "js", path: N3 }) && (l4.add(`<${encodeURI(N3)}>; rel="modulepreload"; nopush`), n3.prerendering && (E4 += `
 		<link rel="modulepreload" href="${N3}">`));
     }
     const x4 = ['type="module"', `data-sveltekit-hydrate="${R4}"`];
-    g4.add_script($4), g4.script_needs_nonce && x4.push(`nonce="${g4.nonce}"`), h2 += `
+    g5.add_script($4), g5.script_needs_nonce && x4.push(`nonce="${g5.nonce}"`), h2 += `
 		<script ${x4.join(" ")}>${$4}<\/script>`;
   }
   if (s5.ssr && s5.csr && (h2 += `
@@ -27296,34 +27290,34 @@ async function I2({ branch: e8, fetched: t3, options: r5, state: n3, page_config
 				});
 			}
 		`;
-    g4.add_script($4), E4 += `
-		<script${g4.script_needs_nonce ? ` nonce="${g4.nonce}"` : ""}>${$4}<\/script>`;
+    g5.add_script($4), E4 += `
+		<script${g5.script_needs_nonce ? ` nonce="${g5.nonce}"` : ""}>${$4}<\/script>`;
   }
   if (n3.prerendering) {
-    const w3 = [], $4 = g4.csp_provider.get_meta();
+    const w3 = [], $4 = g5.csp_provider.get_meta();
     $4 && w3.push($4), n3.prerendering.cache && w3.push(`<meta http-equiv="cache-control" content="${n3.prerendering.cache}">`), w3.length > 0 && (E4 = w3.join(`
 `) + E4);
   }
   E4 += p5.head;
-  const T6 = await c3.transformPageChunk({ html: r5.app_template({ head: E4, body: h2, assets: b4, nonce: g4.nonce }), done: true }) || "", H4 = new Headers({ "x-sveltekit-page": "true", "content-type": "text/html", etag: `"${V(T6)}"` });
+  const T6 = await c3.transformPageChunk({ html: r5.app_template({ head: E4, body: h2, assets: b4, nonce: g5.nonce }), done: true }) || "", H4 = new Headers({ "x-sveltekit-page": "true", "content-type": "text/html", etag: `"${V(T6)}"` });
   if (!n3.prerendering) {
-    const w3 = g4.csp_provider.get_header();
+    const w3 = g5.csp_provider.get_header();
     w3 && H4.set("content-security-policy", w3);
-    const $4 = g4.report_only_provider.get_header();
-    $4 && H4.set("content-security-policy-report-only", $4), l3.size && H4.set("link", Array.from(l3).join(", "));
+    const $4 = g5.report_only_provider.get_header();
+    $4 && H4.set("content-security-policy-report-only", $4), l4.size && H4.set("link", Array.from(l4).join(", "));
   }
   return new Response(T6, { status: o4, headers: H4 });
 }
 async function Be({ event: e8, options: t3, state: r5, status: n3, error: s5, resolve_opts: o4 }) {
-  const a5 = [];
+  const a4 = [];
   try {
     const i2 = [], c3 = await t3.manifest._.nodes[0](), f5 = P([c3], "ssr") ?? true, y6 = P([c3], "csr") ?? true;
     if (f5) {
       r5.initiator = ve;
-      const k6 = oe({ event: e8, options: t3, state: r5, node: c3, parent: async () => ({}) }), u = await k6, _6 = await Ne({ event: e8, fetched: a5, node: c3, parent: async () => ({}), resolve_opts: o4, server_data_promise: k6, state: r5, csr: y6 });
+      const k6 = oe({ event: e8, options: t3, state: r5, node: c3, parent: async () => ({}) }), u = await k6, _6 = await Ne({ event: e8, fetched: a4, node: c3, parent: async () => ({}), resolve_opts: o4, server_data_promise: k6, state: r5, csr: y6 });
       i2.push({ node: c3, server_data: u, data: _6 }, { node: await t3.manifest._.nodes[1](), data: null, server_data: null });
     }
-    return await I2({ options: t3, state: r5, page_config: { ssr: f5, csr: P([c3], "csr") ?? true }, status: n3, error: await z3(e8, t3, s5), branch: i2, fetched: a5, event: e8, resolve_opts: o4 });
+    return await I2({ options: t3, state: r5, page_config: { ssr: f5, csr: P([c3], "csr") ?? true }, status: n3, error: await z3(e8, t3, s5), branch: i2, fetched: a4, event: e8, resolve_opts: o4 });
   } catch (i2) {
     return i2 instanceof U ? B(i2.status, i2.location) : ne(t3, i2 instanceof C2 ? i2.status : 500, (await z3(e8, t3, i2)).message);
   }
@@ -27332,11 +27326,11 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
   if (s5.initiator === t3)
     return new Response(`Not found: ${e8.url.pathname}`, { status: 404 });
   if (s5.initiator = t3, ft(e8)) {
-    const a5 = await n3.manifest._.nodes[r5.leaf]();
-    return ht(e8, n3, a5?.server);
+    const a4 = await n3.manifest._.nodes[r5.leaf]();
+    return ht(e8, n3, a4?.server);
   }
   try {
-    const a5 = await Promise.all([...r5.layouts.map((h2) => h2 == null ? h2 : n3.manifest._.nodes[h2]()), n3.manifest._.nodes[r5.leaf]()]), i2 = a5.at(-1);
+    const a4 = await Promise.all([...r5.layouts.map((h2) => h2 == null ? h2 : n3.manifest._.nodes[h2]()), n3.manifest._.nodes[r5.leaf]()]), i2 = a4.at(-1);
     let c3 = 200, f5;
     if (pt(e8, i2)) {
       if (f5 = await mt(e8, i2.server), f5?.type === "redirect")
@@ -27347,19 +27341,19 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
       }
       f5?.type === "failure" && (c3 = f5.status);
     }
-    const y6 = a5.some((h2) => h2?.server), k6 = it(e8.url.pathname), u = P(a5, "prerender");
+    const y6 = a4.some((h2) => h2?.server), k6 = it(e8.url.pathname), u = P(a4, "prerender");
     if (u) {
       const h2 = i2.server;
       if (h2 && h2.actions)
         throw new Error("Cannot prerender pages with actions");
     } else if (s5.prerendering)
-      return u !== false && P(a5, "ssr") === false && !i2.server?.actions ? await I2({ branch: [], fetched: [], page_config: { ssr: false, csr: P(a5, "csr") ?? true }, status: c3, error: null, event: e8, options: n3, state: s5, resolve_opts: o4 }) : new Response(void 0, { status: 204 });
+      return u !== false && P(a4, "ssr") === false && !i2.server?.actions ? await I2({ branch: [], fetched: [], page_config: { ssr: false, csr: P(a4, "csr") ?? true }, status: c3, error: null, event: e8, options: n3, state: s5, resolve_opts: o4 }) : new Response(void 0, { status: 204 });
     s5.prerender_default = u;
     const _6 = [];
-    if (P(a5, "ssr") === false)
-      return await I2({ branch: [], fetched: _6, page_config: { ssr: false, csr: P(a5, "csr") ?? true }, status: c3, error: null, event: e8, options: n3, state: s5, resolve_opts: o4 });
-    let l3 = [], d6 = null;
-    const p5 = a5.map((h2, g4) => {
+    if (P(a4, "ssr") === false)
+      return await I2({ branch: [], fetched: _6, page_config: { ssr: false, csr: P(a4, "csr") ?? true }, status: c3, error: null, event: e8, options: n3, state: s5, resolve_opts: o4 });
+    let l4 = [], d6 = null;
+    const p5 = a4.map((h2, g5) => {
       if (d6)
         throw d6;
       return Promise.resolve().then(async () => {
@@ -27368,7 +27362,7 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
             throw f5.error;
           return await oe({ event: e8, options: n3, state: s5, node: h2, parent: async () => {
             const R4 = {};
-            for (let b4 = 0; b4 < g4; b4 += 1) {
+            for (let b4 = 0; b4 < g5; b4 += 1) {
               const j4 = await p5[b4];
               j4 && Object.assign(R4, await j4.data);
             }
@@ -27378,17 +27372,17 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
           throw d6 = R4, d6;
         }
       });
-    }), m5 = P(a5, "csr") ?? true, E4 = a5.map((h2, g4) => {
+    }), m4 = P(a4, "csr") ?? true, E4 = a4.map((h2, g5) => {
       if (d6)
         throw d6;
       return Promise.resolve().then(async () => {
         try {
           return await Ne({ event: e8, fetched: _6, node: h2, parent: async () => {
             const R4 = {};
-            for (let b4 = 0; b4 < g4; b4 += 1)
+            for (let b4 = 0; b4 < g5; b4 += 1)
               Object.assign(R4, await E4[b4]);
             return R4;
-          }, resolve_opts: o4, server_data_promise: p5[g4], state: s5, csr: m5 });
+          }, resolve_opts: o4, server_data_promise: p5[g5], state: s5, csr: m4 });
         } catch (R4) {
           throw d6 = R4, d6;
         }
@@ -27400,12 +27394,12 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
     for (const h2 of E4)
       h2.catch(() => {
       });
-    for (let h2 = 0; h2 < a5.length; h2 += 1) {
-      const g4 = a5[h2];
-      if (g4)
+    for (let h2 = 0; h2 < a4.length; h2 += 1) {
+      const g5 = a4[h2];
+      if (g5)
         try {
           const R4 = await p5[h2], b4 = await E4[h2];
-          l3.push({ node: g4, server_data: R4, data: b4 });
+          l4.push({ node: g5, server_data: R4, data: b4 });
         } catch (R4) {
           const b4 = R4;
           if (b4 instanceof U) {
@@ -27420,44 +27414,44 @@ async function Tt(e8, t3, r5, n3, s5, o4) {
             if (r5.errors[h2]) {
               const T6 = r5.errors[h2], H4 = await n3.manifest._.nodes[T6]();
               let w3 = h2;
-              for (; !l3[w3]; )
+              for (; !l4[w3]; )
                 w3 -= 1;
-              return await I2({ event: e8, options: n3, state: s5, resolve_opts: o4, page_config: { ssr: true, csr: true }, status: j4, error: O4, branch: fe(l3.slice(0, w3 + 1)).concat({ node: H4, data: null, server_data: null }), fetched: _6 });
+              return await I2({ event: e8, options: n3, state: s5, resolve_opts: o4, page_config: { ssr: true, csr: true }, status: j4, error: O4, branch: fe(l4.slice(0, w3 + 1)).concat({ node: H4, data: null, server_data: null }), fetched: _6 });
             }
           return ne(n3, j4, O4.message);
         }
       else
-        l3.push(null);
+        l4.push(null);
     }
     if (s5.prerendering && y6) {
-      const h2 = `{"type":"data","nodes":[${l3.map((g4) => Oe(g4?.server_data)).join(",")}]}`;
+      const h2 = `{"type":"data","nodes":[${l4.map((g5) => Oe(g5?.server_data)).join(",")}]}`;
       s5.prerendering.dependencies.set(k6, { response: new Response(h2), body: h2 });
     }
-    return await I2({ event: e8, options: n3, state: s5, resolve_opts: o4, page_config: { csr: P(a5, "csr") ?? true, ssr: true }, status: c3, error: null, branch: fe(l3), action_result: f5, fetched: _6 });
-  } catch (a5) {
-    return await Be({ event: e8, options: n3, state: s5, status: 500, error: a5, resolve_opts: o4 });
+    return await I2({ event: e8, options: n3, state: s5, resolve_opts: o4, page_config: { csr: P(a4, "csr") ?? true, ssr: true }, status: c3, error: null, branch: fe(l4), action_result: f5, fetched: _6 });
+  } catch (a4) {
+    return await Be({ event: e8, options: n3, state: s5, status: 500, error: a4, resolve_opts: o4 });
   }
 }
 function qt(e8, t3, r5) {
   const n3 = {}, s5 = e8.slice(1);
   let o4 = "";
-  for (let a5 = 0; a5 < t3.length; a5 += 1) {
-    const i2 = t3[a5];
-    let c3 = s5[a5];
+  for (let a4 = 0; a4 < t3.length; a4 += 1) {
+    const i2 = t3[a4];
+    let c3 = s5[a4];
     if (i2.chained && i2.rest && o4 && (c3 = c3 ? o4 + "/" + c3 : o4), o4 = "", c3 === void 0)
       i2.rest && (n3[i2.name] = "");
     else {
       if (i2.matcher && !r5[i2.matcher](c3)) {
         if (i2.optional && i2.chained) {
-          let f5 = s5.indexOf(void 0, a5);
+          let f5 = s5.indexOf(void 0, a4);
           if (f5 === -1) {
-            const y6 = t3[a5 + 1];
+            const y6 = t3[a4 + 1];
             if (y6?.rest && y6.chained)
               o4 = c3;
             else
               return;
           }
-          for (; f5 >= a5; )
+          for (; f5 >= a4; )
             s5[f5] = s5[f5 - 1], f5 -= 1;
           continue;
         }
@@ -27478,42 +27472,42 @@ async function Ct(e8, t3, r5, n3, s5, o4) {
   if (!t3.page)
     return new Response(void 0, { status: 404 });
   try {
-    const a5 = [...t3.page.layouts, t3.page.leaf], i2 = s5 ?? a5.map(() => true);
+    const a4 = [...t3.page.layouts, t3.page.leaf], i2 = s5 ?? a4.map(() => true);
     let c3 = false;
     const f5 = new URL(e8.url);
     f5.pathname = te(f5.pathname, o4);
-    const y6 = { ...e8, url: f5 }, k6 = a5.map((d6, p5) => At(async () => {
+    const y6 = { ...e8, url: f5 }, k6 = a4.map((d6, p5) => At(async () => {
       try {
         if (c3)
           return { type: "skip" };
-        const m5 = d6 == null ? d6 : await r5.manifest._.nodes[d6]();
-        return oe({ event: y6, options: r5, state: n3, node: m5, parent: async () => {
+        const m4 = d6 == null ? d6 : await r5.manifest._.nodes[d6]();
+        return oe({ event: y6, options: r5, state: n3, node: m4, parent: async () => {
           const E4 = {};
           for (let h2 = 0; h2 < p5; h2 += 1) {
-            const g4 = await k6[h2]();
-            g4 && Object.assign(E4, g4.data);
+            const g5 = await k6[h2]();
+            g5 && Object.assign(E4, g5.data);
           }
           return E4;
         } });
-      } catch (m5) {
-        throw c3 = true, m5;
+      } catch (m4) {
+        throw c3 = true, m4;
       }
     })), u = k6.map(async (d6, p5) => i2[p5] ? d6() : { type: "skip" });
     let _6 = u.length;
-    const l3 = await Promise.all(u.map((d6, p5) => d6.catch(async (m5) => {
-      if (m5 instanceof U)
-        throw m5;
-      return _6 = Math.min(_6, p5 + 1), { type: "error", error: await z3(e8, r5, m5), status: m5 instanceof C2 ? m5.status : void 0 };
+    const l4 = await Promise.all(u.map((d6, p5) => d6.catch(async (m4) => {
+      if (m4 instanceof U)
+        throw m4;
+      return _6 = Math.min(_6, p5 + 1), { type: "error", error: await z3(e8, r5, m4), status: m4 instanceof C2 ? m4.status : void 0 };
     })));
     try {
-      const p5 = `{"type":"data","nodes":[${l3.slice(0, _6).map(Oe).join(",")}]}`;
+      const p5 = `{"type":"data","nodes":[${l4.slice(0, _6).map(Oe).join(",")}]}`;
       return G2(p5);
     } catch (d6) {
       const p5 = d6;
       return G2(JSON.stringify(Se(e8, p5)), 500);
     }
-  } catch (a5) {
-    const i2 = a5;
+  } catch (a4) {
+    const i2 = a4;
     return i2 instanceof U ? K(i2) : G2(JSON.stringify(await z3(e8, r5, i2)));
   }
 }
@@ -27525,26 +27519,26 @@ function K(e8) {
 }
 var S3 = {};
 function Ut(e8, t3, r5, n3) {
-  const s5 = e8.headers.get("cookie") ?? "", o4 = (0, import_cookie.parse)(s5, { decode: (u) => u }), a5 = te(t3.pathname, n3), i2 = a5.split("/").slice(0, -1).join("/") || "/";
+  const s5 = e8.headers.get("cookie") ?? "", o4 = (0, import_cookie.parse)(s5, { decode: (u) => u }), a4 = te(t3.pathname, n3), i2 = a4.split("/").slice(0, -1).join("/") || "/";
   if (r5) {
     const u = (0, import_cookie.parse)(s5, { decode: decodeURIComponent });
     for (const _6 of Object.keys(S3))
-      S3[_6] = new Set([...S3[_6]].filter((l3) => !J(a5, l3) || _6 in u));
+      S3[_6] = new Set([...S3[_6]].filter((l4) => !J(a4, l4) || _6 in u));
     for (const _6 in u)
-      S3[_6] = S3[_6] ?? /* @__PURE__ */ new Set(), [...S3[_6]].some((l3) => J(a5, l3)) || S3[_6].add(i2);
+      S3[_6] = S3[_6] ?? /* @__PURE__ */ new Set(), [...S3[_6]].some((l4) => J(a4, l4)) || S3[_6].add(i2);
   }
   const c3 = {}, f5 = { httpOnly: true, sameSite: "lax", secure: !(t3.hostname === "localhost" && t3.protocol === "http:") }, y6 = { get(u, _6) {
-    const l3 = c3[u];
-    if (l3 && ye(t3.hostname, l3.options.domain) && J(t3.pathname, l3.options.path))
-      return l3.value;
-    const d6 = _6?.decode || decodeURIComponent, m5 = (0, import_cookie.parse)(s5, { decode: d6 })[u];
-    if (!r5 || m5)
-      return m5;
+    const l4 = c3[u];
+    if (l4 && ye(t3.hostname, l4.options.domain) && J(t3.pathname, l4.options.path))
+      return l4.value;
+    const d6 = _6?.decode || decodeURIComponent, m4 = (0, import_cookie.parse)(s5, { decode: d6 })[u];
+    if (!r5 || m4)
+      return m4;
     const E4 = /* @__PURE__ */ new Set([...S3[u] ?? []]);
-    l3 && E4.add(l3.options.path ?? i2), E4.size > 0 && console.warn(`Cookie with name '${u}' was not found at path '${t3.pathname}', but a cookie with that name exists at these paths: '${[...E4].join("', '")}'. Did you mean to set its 'path' to '/' instead?`);
-  }, set(u, _6, l3 = {}) {
-    let d6 = l3.path ?? i2;
-    if (c3[u] = { name: u, value: _6, options: { ...f5, ...l3, path: d6 } }, r5)
+    l4 && E4.add(l4.options.path ?? i2), E4.size > 0 && console.warn(`Cookie with name '${u}' was not found at path '${t3.pathname}', but a cookie with that name exists at these paths: '${[...E4].join("', '")}'. Did you mean to set its 'path' to '/' instead?`);
+  }, set(u, _6, l4 = {}) {
+    let d6 = l4.path ?? i2;
+    if (c3[u] = { name: u, value: _6, options: { ...f5, ...l4, path: d6 } }, r5)
       if (S3[u] = S3[u] ?? /* @__PURE__ */ new Set(), _6)
         S3[u].add(d6);
       else {
@@ -27556,24 +27550,24 @@ function Ut(e8, t3, r5, n3) {
       }
   }, delete(u, _6 = {}) {
     y6.set(u, "", { ..._6, maxAge: 0 });
-  }, serialize(u, _6, l3) {
-    return (0, import_cookie.serialize)(u, _6, { ...f5, ...l3 });
+  }, serialize(u, _6, l4) {
+    return (0, import_cookie.serialize)(u, _6, { ...f5, ...l4 });
   } };
   function k6(u, _6) {
-    const l3 = { ...o4 };
+    const l4 = { ...o4 };
     for (const d6 in c3) {
       const p5 = c3[d6];
       if (!ye(u.hostname, p5.options.domain) || !J(u.pathname, p5.options.path))
         continue;
-      const m5 = p5.options.encode || encodeURIComponent;
-      l3[p5.name] = m5(p5.value);
+      const m4 = p5.options.encode || encodeURIComponent;
+      l4[p5.name] = m4(p5.value);
     }
     if (_6) {
       const d6 = (0, import_cookie.parse)(_6, { decode: (p5) => p5 });
       for (const p5 in d6)
-        l3[p5] = d6[p5];
+        l4[p5] = d6[p5];
     }
-    return Object.entries(l3).map(([d6, p5]) => `${d6}=${p5}`).join("; ");
+    return Object.entries(l4).map(([d6, p5]) => `${d6}=${p5}`).join("; ");
   }
   return { cookies: y6, new_cookies: c3, get_cookie_header: k6 };
 }
@@ -27597,11 +27591,11 @@ function zt(e8, t3) {
 }
 function Nt({ event: e8, options: t3, state: r5, get_cookie_header: n3 }) {
   return async (s5, o4) => {
-    const a5 = ge(s5, o4, e8.url), i2 = o4?.body;
+    const a4 = ge(s5, o4, e8.url), i2 = o4?.body;
     let c3 = (s5 instanceof Request ? s5.mode : o4?.mode) ?? "cors", f5 = (s5 instanceof Request ? s5.credentials : o4?.credentials) ?? "same-origin";
-    return await t3.hooks.handleFetch({ event: e8, request: a5, fetch: async (y6, k6) => {
+    return await t3.hooks.handleFetch({ event: e8, request: a4, fetch: async (y6, k6) => {
       const u = ge(y6, k6, e8.url), _6 = new URL(u.url);
-      if (u.headers.has("origin") || u.headers.set("origin", e8.url.origin), y6 !== a5 && (c3 = (y6 instanceof Request ? y6.mode : k6?.mode) ?? "cors", f5 = (y6 instanceof Request ? y6.credentials : k6?.credentials) ?? "same-origin"), (u.method === "GET" || u.method === "HEAD") && (c3 === "no-cors" && _6.origin !== e8.url.origin || _6.origin === e8.url.origin) && u.headers.delete("origin"), _6.origin !== e8.url.origin) {
+      if (u.headers.has("origin") || u.headers.set("origin", e8.url.origin), y6 !== a4 && (c3 = (y6 instanceof Request ? y6.mode : k6?.mode) ?? "cors", f5 = (y6 instanceof Request ? y6.credentials : k6?.credentials) ?? "same-origin"), (u.method === "GET" || u.method === "HEAD") && (c3 === "no-cors" && _6.origin !== e8.url.origin || _6.origin === e8.url.origin) && u.headers.delete("origin"), _6.origin !== e8.url.origin) {
         if (`.${_6.hostname}`.endsWith(`.${e8.url.hostname}`) && f5 !== "omit") {
           const j4 = n3(_6, u.headers.get("cookie"));
           j4 && u.headers.set("cookie", j4);
@@ -27609,12 +27603,12 @@ function Nt({ event: e8, options: t3, state: r5, get_cookie_header: n3 }) {
         let b4 = await fetch(u);
         return c3 === "no-cors" && (b4 = new Response("", { status: b4.status, statusText: b4.statusText, headers: b4.headers })), b4;
       }
-      let l3;
-      const d6 = t3.paths.assets || t3.paths.base, p5 = decodeURIComponent(_6.pathname), m5 = (p5.startsWith(d6) ? p5.slice(d6.length) : p5).slice(1), E4 = `${m5}/index.html`, h2 = t3.manifest.assets.has(m5), g4 = t3.manifest.assets.has(E4);
-      if (h2 || g4) {
-        const b4 = h2 ? m5 : E4;
+      let l4;
+      const d6 = t3.paths.assets || t3.paths.base, p5 = decodeURIComponent(_6.pathname), m4 = (p5.startsWith(d6) ? p5.slice(d6.length) : p5).slice(1), E4 = `${m4}/index.html`, h2 = t3.manifest.assets.has(m4), g5 = t3.manifest.assets.has(E4);
+      if (h2 || g5) {
+        const b4 = h2 ? m4 : E4;
         if (t3.read) {
-          const j4 = h2 ? t3.manifest.mimeTypes[m5.slice(m5.lastIndexOf("."))] : "text/html";
+          const j4 = h2 ? t3.manifest.mimeTypes[m4.slice(m4.lastIndexOf("."))] : "text/html";
           return new Response(t3.read(b4), { headers: j4 ? { "content-type": j4 } : {} });
         }
         return await fetch(u);
@@ -27627,14 +27621,14 @@ function Nt({ event: e8, options: t3, state: r5, get_cookie_header: n3 }) {
       }
       if (i2 && typeof i2 != "string" && !ArrayBuffer.isView(i2))
         throw new Error("Request body must be a string or TypedArray");
-      u.headers.has("accept") || u.headers.set("accept", "*/*"), u.headers.has("accept-language") || u.headers.set("accept-language", e8.request.headers.get("accept-language")), l3 = await Fe(u, t3, r5);
-      const R4 = l3.headers.get("set-cookie");
+      u.headers.has("accept") || u.headers.set("accept", "*/*"), u.headers.has("accept-language") || u.headers.set("accept-language", e8.request.headers.get("accept-language")), l4 = await Fe(u, t3, r5);
+      const R4 = l4.headers.get("set-cookie");
       if (R4)
         for (const b4 of le.splitCookiesString(R4)) {
           const { name: j4, value: O4, ...T6 } = le.parseString(b4);
           e8.cookies.set(j4, O4, T6);
         }
-      return l3;
+      return l4;
     } });
   };
 }
@@ -27647,8 +27641,8 @@ function ae(e8) {
     if (n3) {
       for (const o4 in n3)
         if (o4[0] !== "_" && !t3.has(o4)) {
-          const a5 = e8.join(", ");
-          throw new Error(`Invalid export '${o4}'${s5 ? ` in ${s5}` : ""} (valid exports are ${a5}, or anything with a '_' prefix)`);
+          const a4 = e8.join(", ");
+          throw new Error(`Invalid export '${o4}'${s5 ? ` in ${s5}` : ""} (valid exports are ${a4}, or anything with a '_' prefix)`);
         }
     }
   }
@@ -27672,7 +27666,7 @@ async function Fe(e8, t3, r5) {
   } catch {
     return new Response("Malformed URI", { status: 400 });
   }
-  let o4 = null, a5 = {};
+  let o4 = null, a4 = {};
   if (t3.paths.base && !r5.prerendering?.fallback) {
     if (!s5.startsWith(t3.paths.base))
       return new Response("Not found", { status: 404 });
@@ -27681,14 +27675,14 @@ async function Fe(e8, t3, r5) {
   const i2 = $e(s5);
   let c3;
   if (i2 && (s5 = de(s5) || "/", n3.pathname = de(n3.pathname) || "/", c3 = n3.searchParams.get(_e2)?.split("_").map(Boolean), n3.searchParams.delete(_e2)), !r5.prerendering?.fallback) {
-    const l3 = await t3.manifest._.matchers();
+    const l4 = await t3.manifest._.matchers();
     for (const d6 of t3.manifest._.routes) {
       const p5 = d6.pattern.exec(s5);
       if (!p5)
         continue;
-      const m5 = qt(p5, d6.params, l3);
-      if (m5) {
-        o4 = d6, a5 = nt(m5);
+      const m4 = qt(p5, d6.params, l4);
+      if (m4) {
+        o4 = d6, a4 = nt(m4);
         break;
       }
     }
@@ -27696,21 +27690,21 @@ async function Fe(e8, t3, r5) {
   let f5;
   const y6 = {}, k6 = { cookies: null, fetch: null, getClientAddress: r5.getClientAddress || (() => {
     throw new Error("@sveltejs/adapter-cloudflare does not specify getClientAddress. Please raise an issue");
-  }), locals: {}, params: a5, platform: r5.platform, request: e8, route: { id: o4?.id ?? null }, setHeaders: (l3) => {
-    for (const d6 in l3) {
-      const p5 = d6.toLowerCase(), m5 = l3[d6];
+  }), locals: {}, params: a4, platform: r5.platform, request: e8, route: { id: o4?.id ?? null }, setHeaders: (l4) => {
+    for (const d6 in l4) {
+      const p5 = d6.toLowerCase(), m4 = l4[d6];
       if (p5 === "set-cookie")
         throw new Error("Use `event.cookies.set(name, value, options)` instead of `event.setHeaders` to set cookies");
       if (p5 in y6)
         throw new Error(`"${d6}" header is already set`);
-      y6[p5] = m5, r5.prerendering && p5 === "cache-control" && (r5.prerendering.cache = m5);
+      y6[p5] = m4, r5.prerendering && p5 === "cache-control" && (r5.prerendering.cache = m4);
     }
   }, url: n3, isDataRequest: i2 };
   let u = { transformPageChunk: we, filterSerializedResponseHeaders: be, preload: ke };
   try {
     if (o4 && !i2) {
       if (o4.page) {
-        const h2 = await Promise.all([...o4.page.layouts.map((g4) => g4 == null ? g4 : t3.manifest._.nodes[g4]()), t3.manifest._.nodes[o4.page.leaf]()]);
+        const h2 = await Promise.all([...o4.page.layouts.map((g5) => g5 == null ? g5 : t3.manifest._.nodes[g5]()), t3.manifest._.nodes[o4.page.leaf]()]);
         f5 = P(h2, "trailingSlash");
       } else
         o4.endpoint && (f5 = (await o4.endpoint()).trailingSlash);
@@ -27718,38 +27712,38 @@ async function Fe(e8, t3, r5) {
       if (E4 !== n3.pathname && !r5.prerendering?.fallback)
         return new Response(void 0, { status: 301, headers: { "x-sveltekit-normalize": "1", location: (E4.startsWith("//") ? n3.origin + E4 : E4) + (n3.search === "?" ? "" : n3.search) } });
     }
-    const { cookies: l3, new_cookies: d6, get_cookie_header: p5 } = Ut(e8, n3, t3.dev, f5 ?? "never");
-    k6.cookies = l3, k6.fetch = Nt({ event: k6, options: t3, state: r5, get_cookie_header: p5 }), r5.prerendering && !r5.prerendering.fallback && Re(n3);
-    const m5 = await t3.hooks.handle({ event: k6, resolve: (E4, h2) => _6(E4, h2).then((g4) => {
+    const { cookies: l4, new_cookies: d6, get_cookie_header: p5 } = Ut(e8, n3, t3.dev, f5 ?? "never");
+    k6.cookies = l4, k6.fetch = Nt({ event: k6, options: t3, state: r5, get_cookie_header: p5 }), r5.prerendering && !r5.prerendering.fallback && Re(n3);
+    const m4 = await t3.hooks.handle({ event: k6, resolve: (E4, h2) => _6(E4, h2).then((g5) => {
       for (const R4 in y6) {
         const b4 = y6[R4];
-        g4.headers.set(R4, b4);
+        g5.headers.set(R4, b4);
       }
-      return zt(g4.headers, Object.values(d6)), r5.prerendering && E4.route.id !== null && g4.headers.set("x-sveltekit-routeid", encodeURI(E4.route.id)), g4;
+      return zt(g5.headers, Object.values(d6)), r5.prerendering && E4.route.id !== null && g5.headers.set("x-sveltekit-routeid", encodeURI(E4.route.id)), g5;
     }) });
-    if (m5.status === 200 && m5.headers.has("etag")) {
+    if (m4.status === 200 && m4.headers.has("etag")) {
       let E4 = e8.headers.get("if-none-match");
       E4?.startsWith('W/"') && (E4 = E4.substring(2));
-      const h2 = m5.headers.get("etag");
+      const h2 = m4.headers.get("etag");
       if (E4 === h2) {
-        const g4 = new Headers({ etag: h2 });
+        const g5 = new Headers({ etag: h2 });
         for (const R4 of ["cache-control", "content-location", "date", "expires", "vary", "set-cookie"]) {
-          const b4 = m5.headers.get(R4);
-          b4 && g4.set(R4, b4);
+          const b4 = m4.headers.get(R4);
+          b4 && g5.set(R4, b4);
         }
-        return new Response(void 0, { status: 304, headers: g4 });
+        return new Response(void 0, { status: 304, headers: g5 });
       }
     }
-    if (i2 && m5.status >= 300 && m5.status <= 308) {
-      const E4 = m5.headers.get("location");
+    if (i2 && m4.status >= 300 && m4.status <= 308) {
+      const E4 = m4.headers.get("location");
       if (E4)
-        return K(new U(m5.status, E4));
+        return K(new U(m4.status, E4));
     }
-    return m5;
-  } catch (l3) {
-    return l3 instanceof U ? i2 ? K(l3) : B(l3.status, l3.location) : await ue(k6, t3, l3);
+    return m4;
+  } catch (l4) {
+    return l4 instanceof U ? i2 ? K(l4) : B(l4.status, l4.location) : await ue(k6, t3, l4);
   }
-  async function _6(l3, d6) {
+  async function _6(l4, d6) {
     try {
       if (d6) {
         if ("ssr" in d6)
@@ -27757,26 +27751,26 @@ async function Fe(e8, t3, r5) {
         u = { transformPageChunk: d6.transformPageChunk || we, filterSerializedResponseHeaders: d6.filterSerializedResponseHeaders || be, preload: d6.preload || ke };
       }
       if (r5.prerendering?.fallback)
-        return await I2({ event: l3, options: t3, state: r5, page_config: { ssr: false, csr: true }, status: 200, error: null, branch: [], fetched: [], resolve_opts: u });
+        return await I2({ event: l4, options: t3, state: r5, page_config: { ssr: false, csr: true }, status: 200, error: null, branch: [], fetched: [], resolve_opts: u });
       if (o4) {
         let p5;
         if (i2)
-          p5 = await Ct(l3, o4, t3, r5, c3, f5 ?? "never");
-        else if (o4.endpoint && (!o4.page || ut(l3)))
-          p5 = await dt(l3, await o4.endpoint(), r5);
+          p5 = await Ct(l4, o4, t3, r5, c3, f5 ?? "never");
+        else if (o4.endpoint && (!o4.page || ut(l4)))
+          p5 = await dt(l4, await o4.endpoint(), r5);
         else if (o4.page)
-          p5 = await Tt(l3, o4, o4.page, t3, r5, u);
+          p5 = await Tt(l4, o4, o4.page, t3, r5, u);
         else
           throw new Error("This should never happen");
         return p5;
       }
-      return r5.initiator === ve ? new Response("Internal Server Error", { status: 500 }) : r5.initiator ? r5.prerendering ? new Response("not found", { status: 404 }) : await fetch(e8) : await Be({ event: l3, options: t3, state: r5, status: 404, error: new Error(`Not found: ${l3.url.pathname}`), resolve_opts: u });
+      return r5.initiator === ve ? new Response("Internal Server Error", { status: 500 }) : r5.initiator ? r5.prerendering ? new Response("not found", { status: 404 }) : await fetch(e8) : await Be({ event: l4, options: t3, state: r5, status: 404, error: new Error(`Not found: ${l4.url.pathname}`), resolve_opts: u });
     } catch (p5) {
-      return await ue(l3, t3, p5);
+      return await ue(l4, t3, p5);
     } finally {
-      l3.cookies.set = () => {
+      l4.cookies.set = () => {
         throw new Error("Cannot use `cookies.set(...)` after the response has been generated");
-      }, l3.setHeaders = () => {
+      }, l4.setHeaders = () => {
         throw new Error("Cannot use `setHeaders(...)` after the response has been generated");
       };
     }
@@ -27861,7 +27855,7 @@ var Ye = null;
 Ve({ base: "", assets: "" });
 var Vt = class {
   constructor(t3) {
-    this.options = { csp: { mode: "auto", directives: { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf: { check_origin: true }, dev: false, embedded: false, handle_error: (r5, n3) => this.options.hooks.handleError({ error: r5, event: n3 }) ?? { message: n3.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: Q, assets: Me }, public_env: {}, read: Ye, root: Ze, service_worker: true, app_template: Ht, app_template_contains_nonce: false, error_template: It, version: "1671616218874" };
+    this.options = { csp: { mode: "auto", directives: { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf: { check_origin: true }, dev: false, embedded: false, handle_error: (r5, n3) => this.options.hooks.handleError({ error: r5, event: n3 }) ?? { message: n3.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: Q, assets: Me }, public_env: {}, read: Ye, root: Ze, service_worker: true, app_template: Ht, app_template_contains_nonce: false, error_template: It, version: "1671647289051" };
   }
   async init({ env: t3 }) {
     const r5 = Object.entries(t3);
@@ -27869,7 +27863,7 @@ var Vt = class {
     const n3 = Object.fromEntries(r5.filter(([s5]) => s5.startsWith("PUBLIC_")));
     if (this.options.public_env = n3, !this.options.hooks) {
       const s5 = await Promise.resolve().then(() => (init_hooks_server(), hooks_server_exports));
-      this.options.hooks = { handle: s5.handle || (({ event: o4, resolve: a5 }) => a5(o4)), handleError: s5.handleError || (({ error: o4 }) => console.error(o4.stack)), handleFetch: s5.handleFetch || (({ request: o4, fetch: a5 }) => a5(o4)) };
+      this.options.hooks = { handle: s5.handle || (({ event: o4, resolve: a4 }) => a4(o4)), handleError: s5.handleError || (({ error: o4 }) => console.error(o4.stack)), handleFetch: s5.handleFetch || (({ request: o4, fetch: a4 }) => a4(o4)) };
     }
   }
   async respond(t3, r5 = {}) {
@@ -27883,10 +27877,10 @@ var Vt = class {
 var manifest = {
   appDir: "_app",
   appPath: "_app",
-  assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "safari-share-icon.png", "star.webp", "service-worker.js"]),
-  mimeTypes: { ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
+  assets: /* @__PURE__ */ new Set([".DS_Store", "dropzone.css", "facepalm.gif", "favicon.png", "icons/apple-icon-180.png", "icons/apple-splash-1125-2436.jpg", "icons/apple-splash-1136-640.jpg", "icons/apple-splash-1170-2532.jpg", "icons/apple-splash-1179-2556.jpg", "icons/apple-splash-1242-2208.jpg", "icons/apple-splash-1242-2688.jpg", "icons/apple-splash-1284-2778.jpg", "icons/apple-splash-1290-2796.jpg", "icons/apple-splash-1334-750.jpg", "icons/apple-splash-1536-2048.jpg", "icons/apple-splash-1620-2160.jpg", "icons/apple-splash-1668-2224.jpg", "icons/apple-splash-1668-2388.jpg", "icons/apple-splash-1792-828.jpg", "icons/apple-splash-2048-1536.jpg", "icons/apple-splash-2048-2732.jpg", "icons/apple-splash-2160-1620.jpg", "icons/apple-splash-2208-1242.jpg", "icons/apple-splash-2224-1668.jpg", "icons/apple-splash-2388-1668.jpg", "icons/apple-splash-2436-1125.jpg", "icons/apple-splash-2532-1170.jpg", "icons/apple-splash-2556-1179.jpg", "icons/apple-splash-2688-1242.jpg", "icons/apple-splash-2732-2048.jpg", "icons/apple-splash-2778-1284.jpg", "icons/apple-splash-2796-1290.jpg", "icons/apple-splash-640-1136.jpg", "icons/apple-splash-750-1334.jpg", "icons/apple-splash-828-1792.jpg", "icons/logotest.png", "icons/manifest-icon-192.maskable.png", "icons/manifest-icon-512.maskable.png", "login-bg-video-blurred.mp4", "manifest.json", "phone.svg", "reviews/.DS_Store", "reviews/review-ben-bare.webp", "reviews/review-efe-bare.webp", "reviews/review-miranda-bare.webp", "reviews/review-paola-bare.webp", "reviews/review-rob-bare.webp", "reviews/review-tj-bare.webp", "reviews/review-zaara-bare.webp", "robots.txt", "safari-share-icon.png", "star.webp", "service-worker.js"]),
+  mimeTypes: { ".css": "text/css", ".gif": "image/gif", ".png": "image/png", ".jpg": "image/jpeg", ".mp4": "video/mp4", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".txt": "text/plain" },
   _: {
-    entry: { "file": "_app/immutable/start-f7bd14ea.js", "imports": ["_app/immutable/start-f7bd14ea.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/singletons-f7512b57.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/chunks/preload-helper-41c905a7.js"], "stylesheets": [], "fonts": [] },
+    entry: { "file": "_app/immutable/start-4a524add.js", "imports": ["_app/immutable/start-4a524add.js", "_app/immutable/chunks/index-72912202.js", "_app/immutable/chunks/singletons-f7512b57.js", "_app/immutable/chunks/index-ab67ea0f.js", "_app/immutable/chunks/preload-helper-41c905a7.js"], "stylesheets": [], "fonts": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -27940,10 +27934,10 @@ async function e7(e32, t22) {
   return n22 && a22 && (a22 = new Response(null, a22)), a22;
 }
 function t2(e32, t22, n22, o22) {
-  return ("string" == typeof t22 || "GET" === t22.method) && a4(n22) && (n22.headers.has("Set-Cookie") && (n22 = new Response(n22.body, n22)).headers.append("Cache-Control", "private=Set-Cookie"), o22.waitUntil(e32.put(t22, n22.clone()))), n22;
+  return ("string" == typeof t22 || "GET" === t22.method) && a3(n22) && (n22.headers.has("Set-Cookie") && (n22 = new Response(n22.body, n22)).headers.append("Cache-Control", "private=Set-Cookie"), o22.waitUntil(e32.put(t22, n22.clone()))), n22;
 }
 var n2 = /* @__PURE__ */ new Set([200, 203, 204, 300, 301, 404, 405, 410, 414, 501]);
-function a4(e32) {
+function a3(e32) {
   if (!n2.has(e32.status) || ~(e32.headers.get("Vary") || "").indexOf("*"))
     return false;
   let t22 = e32.headers.get("Cache-Control") || "";

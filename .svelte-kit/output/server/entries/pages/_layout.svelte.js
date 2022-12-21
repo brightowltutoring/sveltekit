@@ -67,19 +67,10 @@ ${k(re,"InView").$$render(e,{single:!0,onview:r=>w(r),once:!0,margin:"0px"},{},{
 
     `})}
 
-  
   <div class="${"z-50 md:py-4 md:px-[7%] fixed "+g(M,!0)+" ease-in-out w-full"}">${k(ye,"Navbar").$$render(e,{},{},{})}</div>
-
-  
-  
 
   <div class="px-[7%] pt-32 md:block">${m.default?m.default({}):""}
 
     
 
-    
-    ${k(re,"InView").$$render(e,{margin:"200px",onview:async()=>O=await import("../../chunks/Footer.js")},{},{default:()=>`${O?`${k(O.default,"FooterComponent.default").$$render(e,{contactLinkClicked:W},{contactLinkClicked:i=>{W=i,z=!1}},{})}`:""}`})}
-
-    
-
-    </div></main>`;while(!z);return o(),b(),f(),$(),h(),x(),p(),y(),S(),A(),C});export{Pe as default};
+    ${k(re,"InView").$$render(e,{margin:"200px",onview:async()=>O=await import("../../chunks/Footer.js")},{},{default:()=>`${O?`${k(O.default,"FooterComponent.default").$$render(e,{contactLinkClicked:W},{contactLinkClicked:i=>{W=i,z=!1}},{})}`:""}`})}</div></main>`;while(!z);return o(),b(),f(),$(),h(),x(),p(),y(),S(),A(),C});export{Pe as default};

@@ -1,5 +1,5 @@
-import{c as e}from"../../chunks/index.js";const a=e((s,t,o,r)=>`
+import{c as s}from"../../chunks/index.js";const l=s((e,t,r,a)=>`
 <div class="flex flex-col justify-center items-center gap-10"><p>Oops ... looks like that page doesn&#39;t exist.</p>
-  <div class="animate-bounce text-4xl">🙈</div></div>
+  </div>
 
-`);export{a as default};
+<div class="flex justify-center"><img src="/facepalm.gif" alt="face palm star trek gif" class="w-1/3 min-w-[250px]"></div>`);export{l as default};
