@@ -27523,7 +27523,7 @@ var init__10 = __esm({
     index10 = 9;
     component10 = async () => (await Promise.resolve().then(() => (init_page_svx2(), page_svx_exports2))).default;
     file10 = "_app/immutable/components/pages/math/_page.svx-1e340093.js";
-    imports10 = ["_app/immutable/components/pages/math/_page.svx-1e340093.js", "_app/immutable/chunks/index-06adba90.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-e723d68b.js", "_app/immutable/chunks/index-bc04d146.js", "_app/immutable/chunks/index-1b1ee987.js", "_app/immutable/chunks/Kajax-a6b1bd4f.js", "_app/immutable/modules/pages/math/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-37f6be6a.js"];
+    imports10 = ["_app/immutable/components/pages/math/_page.svx-1e340093.js", "_app/immutable/chunks/index-06adba90.js", "_app/immutable/chunks/katex-589a4957.js", "_app/immutable/chunks/store-e723d68b.js", "_app/immutable/chunks/index-bc04d146.js", "_app/immutable/chunks/index-1b1ee987.js", "_app/immutable/chunks/Kajax-a6b1bd4f.js", "_app/immutable/modules/pages/math/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-bfda8c82.js"];
     stylesheets10 = [];
     fonts10 = [];
   }
@@ -27603,7 +27603,7 @@ var init__11 = __esm({
     index11 = 10;
     component11 = async () => (await Promise.resolve().then(() => (init_page_svx3(), page_svx_exports3))).default;
     file11 = "_app/immutable/components/pages/mathjax/_page.svx-d96dec71.js";
-    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-d96dec71.js", "_app/immutable/chunks/index-06adba90.js", "_app/immutable/chunks/store-e723d68b.js", "_app/immutable/chunks/index-bc04d146.js", "_app/immutable/modules/pages/mathjax/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-bfda8c82.js"];
+    imports11 = ["_app/immutable/components/pages/mathjax/_page.svx-d96dec71.js", "_app/immutable/chunks/index-06adba90.js", "_app/immutable/chunks/store-e723d68b.js", "_app/immutable/chunks/index-bc04d146.js", "_app/immutable/modules/pages/mathjax/_page.js-7dc16dc1.js", "_app/immutable/chunks/_page-37f6be6a.js"];
     stylesheets11 = [];
     fonts11 = [];
   }
@@ -29620,7 +29620,7 @@ var Ye = null;
 Ve({ base: "", assets: "" });
 var Vt = class {
   constructor(t3) {
-    this.options = { csp: { mode: "auto", directives: { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf: { check_origin: true }, dev: false, embedded: false, handle_error: (r6, n3) => this.options.hooks.handleError({ error: r6, event: n3 }) ?? { message: n3.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: Q, assets: Me }, public_env: {}, read: Ye, root: Ze, service_worker: true, app_template: Ht, app_template_contains_nonce: false, error_template: It, version: "1671752095788" };
+    this.options = { csp: { mode: "auto", directives: { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, reportOnly: { "upgrade-insecure-requests": false, "block-all-mixed-content": false } }, csrf: { check_origin: true }, dev: false, embedded: false, handle_error: (r6, n3) => this.options.hooks.handleError({ error: r6, event: n3 }) ?? { message: n3.route.id != null ? "Internal Error" : "Not Found" }, hooks: null, manifest: t3, paths: { base: Q, assets: Me }, public_env: {}, read: Ye, root: Ze, service_worker: true, app_template: Ht, app_template_contains_nonce: false, error_template: It, version: "1671752483882" };
   }
   async init({ env: t3 }) {
     const r6 = Object.entries(t3);

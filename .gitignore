@@ -6,6 +6,8 @@ node_modules
 .output
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# I guess i cannot gitignore env files, since deployment doesnt work ... stripe public keys yada
 # !.env.example
 # .env.*
 # .env
