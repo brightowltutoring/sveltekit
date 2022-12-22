@@ -1,5 +1,5 @@
 <script>
-  import PostDummyOnce from "$lib/PostDummyOnce.svelte";
+  import PostDummyOnce from "$lib/Dropzone/PostDummyOnce.svelte";
   // import("$lib/Dropzone/dropzone.css");
   // import { Dropzone } from "dropzone";
 
