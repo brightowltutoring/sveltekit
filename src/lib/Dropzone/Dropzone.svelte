@@ -80,7 +80,7 @@
         document
           .querySelector(".dropzone")
           .dispatchEvent(new CustomEvent("click"));
-      }, 25);
+      }, 50);
       globalThis.onceBoolean = true;
     }
   }
