@@ -26,12 +26,6 @@
  * ```
  */
 declare module '$env/static/private' {
-	export const SECRET_FIREBASE_apiKey: string;
-	export const SECRET_FIREBASE_authDomain: string;
-	export const SECRET_FIREBASE_projectId: string;
-	export const SECRET_FIREBASE_storageBucket: string;
-	export const SECRET_FIREBASE_messagingSenderId: string;
-	export const SECRET_FIREBASE_appId: string;
 	export const MANPATH: string;
 	export const alfred_theme_background: string;
 	export const TERM_PROGRAM: string;
@@ -160,12 +154,6 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
-		SECRET_FIREBASE_apiKey: string;
-		SECRET_FIREBASE_authDomain: string;
-		SECRET_FIREBASE_projectId: string;
-		SECRET_FIREBASE_storageBucket: string;
-		SECRET_FIREBASE_messagingSenderId: string;
-		SECRET_FIREBASE_appId: string;
 		MANPATH: string;
 		alfred_theme_background: string;
 		TERM_PROGRAM: string;
