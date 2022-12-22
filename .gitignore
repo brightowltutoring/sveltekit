@@ -3,12 +3,12 @@ node_modules
 /build
 /.svelte-kit
 /package
-!.env.example
 .vercel
 .output
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # COMMENTED OUT since disallowing stripe public keys in git commit
+# !.env.example
 # .env.*
 # .env
