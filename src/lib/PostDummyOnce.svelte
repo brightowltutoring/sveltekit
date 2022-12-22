@@ -1,15 +1,17 @@
-<!-- <button id="btn" class="hidden">submit dummy once</button> -->
 <script>
   import { showHomeworkModal } from "$lib/store";
-
   $: $showHomeworkModal && PostDummyOnce();
+  let src = "";
 
   async function PostDummyOnce() {
-    // NOTE: the 'globalThis.submitOnce' logic makes sure that the function can only fire once per SESSION ... specifically due to component lifecycles; Using '{ once: true }' inside a click event listener (attached to a dom element) ... would reset when changing routes (caveat: '{once:true}' would suffice if the component is attached to the body of the document)
-
     if (!globalThis.submitOnce) {
       const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
-      const postUrl = PUBLIC_UPLOAD_ENDPOINT;
+      const endpoint = PUBLIC_UPLOAD_ENDPOINT;
+
+      // This code sends a dummy .txt file ONCE per session to a designated google drive folder via post request to the 'endpoint' (calls nodejs google cloud function to do this .... logic not here)
+      // REASON: to circumvent 'coldstart' of google cloud function file submitter when user submits first file
+      // UPDATE: DEC 21,2022: 'hydrating' the invisible iframe below with a google apps script (logic not detailed here), moves the dummy .txt file to a junk folder.
+      // FUTURE GOAL: use google app script or google drive api to directly delete the files ... haven't been successful in creating a google app script to do this since the google cloud function is run by a 'google service account' (one which I created) and won't allow automated deletions ...
 
       const data = new FormData();
       const file = new File(["foo"], "foo.txt", {
@@ -17,13 +19,24 @@
       });
       data.append("file", file);
 
-      fetch(postUrl, {
+      fetch(endpoint, {
         method: "POST",
         body: data,
       });
+
+      const GOOGLE_APP_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbz-u_z2CVcJoIiGQCz7l9iQfPyQiyfz-IhUa9rX6cIy5zv0sfi8GfgkS6skzOJSmCAviQ/exec";
+
+      setTimeout(() => (src = GOOGLE_APP_SCRIPT_URL), 5000);
+
       globalThis.submitOnce = true;
     }
   }
 </script>
 
-<!-- This component sends a dummy file (in this case: javascript constructed .txt file using 'new File()' constructor) — to be fired on the first homework button click only. REASON: to circumvent 'coldstart' of google cloud function endpoint when user submits the first file -->
+<iframe
+  title="google app script: moveNamedFilesToFolder"
+  style="height: 0vh; width: 0vw"
+  {src}
+  frameborder="0"
+/>
