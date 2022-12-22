@@ -26,6 +26,12 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const SECRET_FIREBASE_apiKey: string;
+	export const SECRET_FIREBASE_authDomain: string;
+	export const SECRET_FIREBASE_projectId: string;
+	export const SECRET_FIREBASE_storageBucket: string;
+	export const SECRET_FIREBASE_messagingSenderId: string;
+	export const SECRET_FIREBASE_appId: string;
 	export const MANPATH: string;
 	export const alfred_theme_background: string;
 	export const TERM_PROGRAM: string;
@@ -45,7 +51,6 @@ declare module '$env/static/private' {
 	export const ZDOTDIR: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const MallocNanoZone: string;
-	export const npm_package_optional: string;
 	export const COLOR: string;
 	export const npm_config_noproxy: string;
 	export const npm_config_local_prefix: string;
@@ -55,7 +60,6 @@ declare module '$env/static/private' {
 	export const COMMAND_MODE: string;
 	export const npm_config_globalconfig: string;
 	export const CONDA_EXE: string;
-	export const npm_package_peer: string;
 	export const alfred_version: string;
 	export const SSH_AUTH_SOCK: string;
 	export const __CF_USER_TEXT_ENCODING: string;
@@ -63,7 +67,6 @@ declare module '$env/static/private' {
 	export const npm_execpath: string;
 	export const alfred_theme_selection_background: string;
 	export const PAGER: string;
-	export const npm_package_integrity: string;
 	export const _CE_CONDA: string;
 	export const LSCOLORS: string;
 	export const alfred_theme_subtext: string;
@@ -85,21 +88,17 @@ declare module '$env/static/private' {
 	export const LANG: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const XPC_FLAGS: string;
-	export const npm_package_engines_node: string;
 	export const RUBY_ENGINE: string;
 	export const npm_config_node_gyp: string;
-	export const npm_package_dev: string;
 	export const npm_package_version: string;
 	export const _CE_M: string;
 	export const XPC_SERVICE_NAME: string;
 	export const VSCODE_INJECTION: string;
-	export const npm_package_resolved: string;
 	export const HOME: string;
 	export const SHLVL: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const GEM_ROOT: string;
 	export const HOMEBREW_PREFIX: string;
-	export const npm_package_dev_optional: string;
 	export const npm_config_cache: string;
 	export const CONDA_PYTHON_EXE: string;
 	export const LESS: string;
@@ -124,6 +123,7 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
+	export const NODE_ENV: string;
 }
 
 /**
@@ -136,7 +136,14 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-
+	export const PUBLIC_FIREBASE_apiKey: string;
+	export const PUBLIC_FIREBASE_authDomain: string;
+	export const PUBLIC_FIREBASE_projectId: string;
+	export const PUBLIC_FIREBASE_storageBucket: string;
+	export const PUBLIC_FIREBASE_messagingSenderId: string;
+	export const PUBLIC_FIREBASE_appId: string;
+	export const PUBLIC_STRIPE_KEY: string;
+	export const PUBLIC_UPLOAD_ENDPOINT: string;
 }
 
 /**
@@ -153,6 +160,12 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		SECRET_FIREBASE_apiKey: string;
+		SECRET_FIREBASE_authDomain: string;
+		SECRET_FIREBASE_projectId: string;
+		SECRET_FIREBASE_storageBucket: string;
+		SECRET_FIREBASE_messagingSenderId: string;
+		SECRET_FIREBASE_appId: string;
 		MANPATH: string;
 		alfred_theme_background: string;
 		TERM_PROGRAM: string;
@@ -172,7 +185,6 @@ declare module '$env/dynamic/private' {
 		ZDOTDIR: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		MallocNanoZone: string;
-		npm_package_optional: string;
 		COLOR: string;
 		npm_config_noproxy: string;
 		npm_config_local_prefix: string;
@@ -182,7 +194,6 @@ declare module '$env/dynamic/private' {
 		COMMAND_MODE: string;
 		npm_config_globalconfig: string;
 		CONDA_EXE: string;
-		npm_package_peer: string;
 		alfred_version: string;
 		SSH_AUTH_SOCK: string;
 		__CF_USER_TEXT_ENCODING: string;
@@ -190,7 +201,6 @@ declare module '$env/dynamic/private' {
 		npm_execpath: string;
 		alfred_theme_selection_background: string;
 		PAGER: string;
-		npm_package_integrity: string;
 		_CE_CONDA: string;
 		LSCOLORS: string;
 		alfred_theme_subtext: string;
@@ -212,21 +222,17 @@ declare module '$env/dynamic/private' {
 		LANG: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		XPC_FLAGS: string;
-		npm_package_engines_node: string;
 		RUBY_ENGINE: string;
 		npm_config_node_gyp: string;
-		npm_package_dev: string;
 		npm_package_version: string;
 		_CE_M: string;
 		XPC_SERVICE_NAME: string;
 		VSCODE_INJECTION: string;
-		npm_package_resolved: string;
 		HOME: string;
 		SHLVL: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
 		GEM_ROOT: string;
 		HOMEBREW_PREFIX: string;
-		npm_package_dev_optional: string;
 		npm_config_cache: string;
 		CONDA_PYTHON_EXE: string;
 		LESS: string;
@@ -251,6 +257,7 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		COLORTERM: string;
+		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: string]: string | undefined;
 	}
@@ -268,6 +275,14 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
+		PUBLIC_FIREBASE_apiKey: string;
+		PUBLIC_FIREBASE_authDomain: string;
+		PUBLIC_FIREBASE_projectId: string;
+		PUBLIC_FIREBASE_storageBucket: string;
+		PUBLIC_FIREBASE_messagingSenderId: string;
+		PUBLIC_FIREBASE_appId: string;
+		PUBLIC_STRIPE_KEY: string;
+		PUBLIC_UPLOAD_ENDPOINT: string;
 		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }

@@ -1,4 +1,4 @@
-import{c as n,v as r}from"../../../chunks/index.js";import a from"../../../chunks/LoginCard.js";const p=n((o,e,t,s)=>(console.log("back in black!"),`
+import{c as r,v as n}from"../../../chunks/index.js";import t from"../../../chunks/LoginCard.js";const $=r((o,e,a,s)=>`
 
 
-${r(a,"LoginCard").$$render(o,{noTransition:!0},{},{})}`));export{p as default};
+${n(t,"LoginCard").$$render(o,{noTransition:!0},{},{})}`);export{$ as default};
