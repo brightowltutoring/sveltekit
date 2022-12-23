@@ -74,14 +74,14 @@
   }
 
   function dropzonePopUpOnce() {
-    // This code fires once since 'globalThis.onceBoolean' starts out as undefined, then switched to true inside
-    if (!globalThis.onceBoolean) {
+    // This code fires once since 'globalThis.popUpOnceBoolean' starts out as undefined, then switched to true inside
+    if (!globalThis.popUpOnceBoolean) {
       setTimeout(() => {
         document
           .querySelector(".dropzone")
           .dispatchEvent(new CustomEvent("click"));
-      }, 50);
-      globalThis.onceBoolean = true;
+      }, 75);
+      globalThis.popUpOnceBoolean = true;
     }
   }
 </script>
