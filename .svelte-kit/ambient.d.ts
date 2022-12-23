@@ -138,6 +138,7 @@ declare module '$env/static/public' {
 	export const PUBLIC_FIREBASE_appId: string;
 	export const PUBLIC_STRIPE_KEY: string;
 	export const PUBLIC_UPLOAD_ENDPOINT: string;
+	export const PUBLIC_GOOGLE_APP_SCRIPT: string;
 }
 
 /**
@@ -271,6 +272,7 @@ declare module '$env/dynamic/public' {
 		PUBLIC_FIREBASE_appId: string;
 		PUBLIC_STRIPE_KEY: string;
 		PUBLIC_UPLOAD_ENDPOINT: string;
+		PUBLIC_GOOGLE_APP_SCRIPT: string;
 		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }
