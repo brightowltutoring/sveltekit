@@ -23,7 +23,8 @@
       disableSelfView: false,
       // disableSelfViewSettings: true,
       disabledSounds: ["KNOCKING_PARTICIPANT_SOUND"],
-      disableDeepLinking: true,
+      deeplinking: { disabled: true },
+      // ADDED DEC 23,2022 as 'disableDeepLinking: true' stopped working in order to block 'add app/extension' in iframe on mobile
       disableRemoteMute: true,
       notifications: "lobby.notificationTitle",
       startWithAudioMuted: true,
@@ -58,9 +59,9 @@
       // ],
     },
     interfaceConfigOverwrite: {
+      SHOW_CHROME_EXTENSION_BANNER: false,
       VIDEO_QUALITY_LABEL_DISABLED: true,
       DEFAULT_BACKGROUND: `#130e21`,
-      SHOW_CHROME_EXTENSION_BANNER: false,
       SETTINGS_SECTIONS: [
         "devices",
         // 'moderator','language','profile','calendar','sounds',

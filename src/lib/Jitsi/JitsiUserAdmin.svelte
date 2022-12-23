@@ -25,9 +25,10 @@
       parentNode: document.querySelector("#meet"),
       configOverwrite: {
         disabledSounds: ["KNOCKING_PARTICIPANT_SOUND"],
-        disableDeepLinking: true,
         startWithAudioMuted: true,
         startWithVideoMuted: true,
+        deeplinking: { disabled: true },
+        // ADDED DEC 23,2022 as 'disableDeepLinking: true' stopped working in order to block 'add app/extension' in iframe on mobile
       },
       interfaceConfigOverwrite: {
         DEFAULT_BACKGROUND: `#130e21`,
