@@ -1,4 +1,0 @@
-import{c as a,a as i,e as r,v as p}from"../../../chunks/index.js";import{l as $,i as u}from"../../../chunks/store.js";const c=a((t,n,o,l)=>{let s,e;return e=i($,d=>s=d),e(),`${t.head+='<!-- HEAD_svelte-1pkind7_START --><script src="https://meet.jit.si/external_api.js"><\/script><!-- HEAD_svelte-1pkind7_END -->',""}
-
-<div class="relative md:-translate-y-10 -translate-y-32 "><div id="meet" class="w-full h-[95vh] md:h-[670px]"></div>
-  <button><img alt="hangup button" class="${"bg-gray-600 p-2 absolute brightness-50 "+r("opacity-0",!0)+" "+r(s?"top-5 right-5 ":"bottom-5 right-10 ",!0)+" flex w-[50px] rounded-full content-[url('/phone.svg')] rotate-90 duration-[0.4s] hover:scale-[1.5] hover:rotate-0 hover:bg-red-500"}"></button></div>`}),m=a((t,n,o,l)=>{let s;return s=i(u,e=>e),s(),`${p(c,"JitsiUserAdmin").$$render(t,{},{},{})}`});export{m as default};
