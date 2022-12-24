@@ -239,14 +239,16 @@
 
     <!-- <Footer bind:contactLinkClicked /> -->
 
-    <InView
-      margin={"200px"}
-      onview={async () =>
-        (FooterComponent = await import("$lib/Footer.svelte"))}
-    >
-      {#if FooterComponent}
-        <FooterComponent.default bind:contactLinkClicked />
-      {/if}
-    </InView>
+    {#if $page.route.id !== "/classroom"}
+      <InView
+        margin={"200px"}
+        onview={async () =>
+          (FooterComponent = await import("$lib/Footer.svelte"))}
+      >
+        {#if FooterComponent}
+          <FooterComponent.default bind:contactLinkClicked />
+        {/if}
+      </InView>
+    {/if}
   </div>
 </main>
