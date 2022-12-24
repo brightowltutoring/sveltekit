@@ -1,4 +1,8 @@
 <script>
+  // import "$lib/Dropzone/dropzone.css";
+  import "/node_modules/dropzone/dist/dropzone.css";
+  //TODO: temporarily loading dropzone.css at top of dropzone.svelte (via: "/node_modules/dropzone/dist/dropzone.css") rather than via 'inview'-ing and attaching dropzone.css (from static folder to head of document)
+
   import PostDummyOnce from "$lib/Dropzone/PostDummyOnce.svelte";
 
   import InView from "$lib/Wrappers/InView.svelte";
@@ -21,7 +25,8 @@
   async function hydrateDropzoneDomEls(target) {
     console.log("drop it like its 🔥");
 
-    cssToHead("dropzoneCSS", "/dropzone.css"); // Dynamic import of 'dropzone.css' crashes with vite's 'npm run build'; oddly works fine with 'npm run dev'. WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
+    // cssToHead("dropzoneCSS", "/dropzone.css");
+    // Dynamic import of 'dropzone.css' crashes with vite's 'npm run build'; oddly works fine with 'npm run dev'. WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
 
     // const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
 
