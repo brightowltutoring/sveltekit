@@ -8,8 +8,8 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # I guess i cannot gitignore env files, since deployment doesnt work ... stripe public keys yada
-# !.env.example
-# .env.*
+!.env.example
+.env.*
 .env
 # COMMENTED OUT since disallowing stripe public keys in git commit
 
