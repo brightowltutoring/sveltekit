@@ -12,9 +12,11 @@
 
   async function PostDummyOnce() {
     if (!globalThis.submitOnce) {
-      const { SECRET_UPLOAD_ENDPOINT, SECRET_GOOGLE_APP_SCRIPT } = await import(
-        "$env/dynamic/private"
-      );
+      // const { PUBLIC_UPLOAD_ENDPOINT, PUBLIC_GOOGLE_APP_SCRIPT } = await import(
+      //   "$env/static/public"
+      // );
+      const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
+      const PUBLIC_GOOGLE_APP_SCRIPT = import.meta.env.VITE_GOOGLE_APP_SCRIPT;
 
       const data = new FormData();
       const file = new File(["foo"], "foo.txt", {
@@ -22,13 +24,13 @@
       });
       data.append("file", file);
 
-      fetch(SECRET_UPLOAD_ENDPOINT, {
+      fetch(PUBLIC_UPLOAD_ENDPOINT, {
         method: "POST",
         body: data,
       });
 
       // google is too fast for 1000ms, so using 5000ms
-      setTimeout(() => (iframeSrc = SECRET_GOOGLE_APP_SCRIPT), 5000);
+      setTimeout(() => (iframeSrc = PUBLIC_GOOGLE_APP_SCRIPT), 5000);
 
       globalThis.submitOnce = true;
     }

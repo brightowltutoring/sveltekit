@@ -32,11 +32,12 @@
     // WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
 
     const { Dropzone } = await import("dropzone");
-    const { SECRET_UPLOAD_ENDPOINT } = await import("$env/dynamic/private");
+    // const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
+    PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
 
     // dropzone = new Dropzone(daForm, {
     dropzone = new Dropzone("#default", {
-      url: SECRET_UPLOAD_ENDPOINT,
+      url: PUBLIC_UPLOAD_ENDPOINT,
       acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
     });
 
