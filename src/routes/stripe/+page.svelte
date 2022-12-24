@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { PUBLIC_STRIPE_KEY } from "$env/static/public";
+  import { PUBLIC_STRIPE_KEY } from "$env/dynamic/private";
   import { fly } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
 

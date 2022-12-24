@@ -13,7 +13,7 @@
   async function PostDummyOnce() {
     if (!globalThis.submitOnce) {
       const { PUBLIC_UPLOAD_ENDPOINT, PUBLIC_GOOGLE_APP_SCRIPT } = await import(
-        "$env/static/public"
+        "$env/dynamic/private"
       );
 
       const data = new FormData();

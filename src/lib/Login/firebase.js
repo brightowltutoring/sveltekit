@@ -1,4 +1,4 @@
-import * as NV from "$env/static/public";
+import * as NV from "$env/dynamic/private";
 import { initializeApp } from "firebase/app";
 // import { getAuth } from "firebase/auth";
 
