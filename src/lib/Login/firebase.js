@@ -12,12 +12,12 @@ import {
 // import { getFirestore } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: NV.PUBLIC_FIREBASE_apiKey,
-  authDomain: NV.PUBLIC_FIREBASE_authDomain,
-  projectId: NV.PUBLIC_FIREBASE_projectId,
-  storageBucket: NV.PUBLIC_FIREBASE_storageBucket,
-  messagingSenderId: NV.PUBLIC_FIREBASE_messagingSenderId,
-  appId: NV.PUBLIC_FIREBASE_appId,
+  apiKey: NV.SECRET_FIREBASE_apiKey,
+  authDomain: NV.SECRET_FIREBASE_authDomain,
+  projectId: NV.SECRET_FIREBASE_projectId,
+  storageBucket: NV.SECRET_FIREBASE_storageBucket,
+  messagingSenderId: NV.SECRET_FIREBASE_messagingSenderId,
+  appId: NV.SECRET_FIREBASE_appId,
 };
 
 export const app = initializeApp(firebaseConfig);

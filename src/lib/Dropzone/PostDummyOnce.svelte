@@ -12,7 +12,7 @@
 
   async function PostDummyOnce() {
     if (!globalThis.submitOnce) {
-      const { PUBLIC_UPLOAD_ENDPOINT, PUBLIC_GOOGLE_APP_SCRIPT } = await import(
+      const { SECRET_UPLOAD_ENDPOINT, SECRET_GOOGLE_APP_SCRIPT } = await import(
         "$env/dynamic/private"
       );
 
@@ -22,13 +22,13 @@
       });
       data.append("file", file);
 
-      fetch(PUBLIC_UPLOAD_ENDPOINT, {
+      fetch(SECRET_UPLOAD_ENDPOINT, {
         method: "POST",
         body: data,
       });
 
       // google is too fast for 1000ms, so using 5000ms
-      setTimeout(() => (iframeSrc = PUBLIC_GOOGLE_APP_SCRIPT), 5000);
+      setTimeout(() => (iframeSrc = SECRET_GOOGLE_APP_SCRIPT), 5000);
 
       globalThis.submitOnce = true;
     }

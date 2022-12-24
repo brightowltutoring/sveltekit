@@ -32,12 +32,12 @@
 
     cssToHead("dropzoneCSS", "/dropzone.css"); // Dynamic import of 'dropzone.css' crashes with vite's 'npm run build'; oddly works fine with 'npm run dev'. WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
 
-    const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/dynamic/private");
+    const { SECRET_UPLOAD_ENDPOINT } = await import("$env/dynamic/private");
 
     const { Dropzone } = await import("dropzone");
 
     dropzone = new Dropzone(target, {
-      url: PUBLIC_UPLOAD_ENDPOINT,
+      url: SECRET_UPLOAD_ENDPOINT,
       acceptedFiles: ".heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc",
     });
 

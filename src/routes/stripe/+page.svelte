@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { PUBLIC_STRIPE_KEY } from "$env/dynamic/private";
+  import { SECRET_STRIPE_KEY } from "$env/dynamic/private";
   import { fly } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
 
@@ -69,7 +69,7 @@
           });
 
           // create checkout session; Stripe() comes from head script
-          Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id });
+          Stripe(SECRET_STRIPE_KEY).redirectToCheckout({ sessionId: data.id });
         }
       } catch (error) {
         console.log("stripeRedirectToCheckout failed", error);
