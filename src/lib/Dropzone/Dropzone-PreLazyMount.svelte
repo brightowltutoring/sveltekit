@@ -1,18 +1,13 @@
 <script>
-  // Since this entire component is lazyMounted, I don't have to dynamically import modules (e.g. inside the hydrateDropzoneDomEls 'inview callback function')
-  import Dropzone from "dropzone";
-  import "$lib/Dropzone/dropzone.css";
-
-  // const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
-  const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
-
   import PostDummyOnce from "$lib/Dropzone/PostDummyOnce.svelte";
 
   import InView from "$lib/Wrappers/InView.svelte";
+  // import { cssToHead } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
 
-  // Alternative to the vanilla-y eventListener logic commented out above.
   // TODO: Note: using {once:true} inside an event listener attached to 'querySelector('a[href="/homework"]')' would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
+
+  // Alternative to the vanilla-y eventListener logic commented out above.
   $: $showHomeworkModal && dropzonePopUpOnce();
 
   export let text = "🔥";
@@ -20,10 +15,19 @@
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
   export let brightnessTW = "brightness-100";
   $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
+
   let dropzone;
 
   async function hydrateDropzoneDomEls(target) {
-    console.log("drop it like its 🌶️");
+    console.log("drop it like its 🔥");
+
+    cssToHead("dropzoneCSS", "/dropzone.css");
+    // Dynamic import of 'dropzone.css' here, crashes with vite's 'npm run build'; oddly works fine with 'npm run dev'. WORKAROUND: create and append <link:css> from copy of dropzone.css inside src/static folder:
+
+    // const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
+    const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
+
+    const { Dropzone } = await import("dropzone");
 
     dropzone = new Dropzone(target, {
       url: PUBLIC_UPLOAD_ENDPOINT,
