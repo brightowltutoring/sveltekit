@@ -1,20 +1,11 @@
 <script>
   import PostDummyOnce from "$lib/Dropzone/PostDummyOnce.svelte";
-  // import("$lib/Dropzone/dropzone.css");
-  // import { Dropzone } from "dropzone";
 
   import InView from "$lib/Wrappers/InView.svelte";
   import { cssToHead } from "$lib/utils";
   import { isDarkMode, showHomeworkModal } from "$lib/store";
 
-  // import { onMount } from "svelte";
-
-  // onMount(() => {
-  //   document
-  //     .querySelector('a[href="/homework"]')
-  //     .addEventListener("click", dropzonePopUpOnce);
-  // });
-  // TODO: Note: using {once:true} inside the event listener would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
+  // TODO: Note: using {once:true} inside an event listener attached to 'querySelector('a[href="/homework"]')' would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
 
   // Alternative to the vanilla-y eventListener logic commented out above.
   $: $showHomeworkModal && dropzonePopUpOnce();
