@@ -1,7 +1,6 @@
 <script>
-  // import "$lib/Dropzone/dropzone.css";
-  import "/node_modules/dropzone/dist/dropzone.css";
-  //TODO: temporarily loading dropzone.css at top of dropzone.svelte (via: "/node_modules/dropzone/dist/dropzone.css") rather than via 'inview'-ing and attaching dropzone.css (from static folder to head of document)
+  import "$lib/Dropzone/dropzone.css";
+  //TODO: temporarily loading dropzone.css at top of dropzone.svelte (via: "$lib/Dropzone/dropzone.css") rather than via 'inview'-ing and attaching dropzone.css (from static folder to head of document)
 
   import PostDummyOnce from "$lib/Dropzone/PostDummyOnce.svelte";
 
