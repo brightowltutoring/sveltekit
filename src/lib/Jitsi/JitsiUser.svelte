@@ -1,5 +1,9 @@
 <script>
-  import "$lib/Jitsi/jitsi_api"; // contains JitsiMeetExternalAPI ... used to import via link
+  export let admin; // existence prop; used for '/classroomA' route
+
+  import "$lib/Jitsi/jitsi_api";
+  // using local copy of jitsi api instead of external link, imported via svelte:head tag (e.g. using: src="https://meet.jit.si/external_api.js")
+
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { lessThan768 } from "$lib/store";
@@ -13,28 +17,9 @@
   let domain = "meet.jit.si";
   let options = {
     roomName: "ThinkSolve12522",
-    // width: "100%", height: "740px",
-    // parentNode: document.querySelector("#meet"),
     configOverwrite: {
-      hideConferenceTimer: true,
-      hideConferenceSubject: true,
-      hideParticipantsStats: true,
-      disablePolls: true,
-      disableSelfView: false,
-      // disableSelfViewSettings: true,
-      deeplinking: { disabled: true },
-      // deeplinking: { disabled: true },
-      // ADDED DEC 23,2022 as 'disableDeepLinking: true' stopped working in order to block 'add app/extension' in iframe on mobile
-      disableRemoteMute: true,
-      notifications: "lobby.notificationTitle",
       startWithAudioMuted: true,
       startWithVideoMuted: true,
-      remoteVideoMenu: {
-        disableKick: true,
-        disablePrivateChat: true,
-      },
-
-      // TODO: get request still grabs all this mp3 data ... id rather not fetch this instead of disabling
       disabledSounds: [
         "ASKED_TO_UNMUTE_SOUND",
         "E2EE_OFF_SOUND",
@@ -57,14 +42,35 @@
         "RECORDING_ON_SOUND",
         "TALK_WHILE_MUTED_SOUND",
       ],
+
+      hideConferenceTimer: !admin && true,
+      hideConferenceSubject: !admin && true,
+      hideParticipantsStats: !admin && true,
+      disablePolls: admin ? false : true,
+      disableSelfView: false,
+      // disableSelfViewSettings: true,
+      deeplinking: { disabled: true }, // ADDED DEC 23,2022 as 'disableDeepLinking: true' stopped working in order to block 'add app/extension' in iframe on mobile
+      disableRemoteMute: true,
+      notifications: !admin && ["lobby.notificationTitle"], // TODO: still don't understand logic, but works; result: only admin can allow users in
+      remoteVideoMenu: !admin && {
+        disableKick: true,
+        disablePrivateChat: true,
+      },
+
+      // TODO: get request still grabs all this mp3 data ... id rather not fetch this instead of disabling
     },
     interfaceConfigOverwrite: {
+      // DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
+      DEFAULT_BACKGROUND: `#130e21`,
       SHOW_CHROME_EXTENSION_BANNER: false,
       VIDEO_QUALITY_LABEL_DISABLED: true,
-      DEFAULT_BACKGROUND: `#130e21`,
       SETTINGS_SECTIONS: [
         "devices",
-        // 'moderator','language','profile','calendar','sounds',
+        admin && "moderator",
+        admin && "language",
+        admin && "profile",
+        admin && "calendar",
+        admin && "sounds",
       ],
       TOOLBAR_BUTTONS: [
         "desktop",
@@ -74,26 +80,49 @@
         "chat",
         "fodeviceselection",
         "etherpad",
-        // "hangup","dock-iframe","undock-iframe","raisehand","noisesuppression","settings","select-background","participants-pane","highlight",'mute-video-everyone','mute-everyone','security','sharedvideo','videoquality','livestreaming','recording','closedcaptions','filmstrip','feedback','stats','shortcuts',"tileview","profile",
+        admin && "noisesuppression",
+        admin && "settings",
+        admin && "mute-video-everyone",
+        admin && "mute-everyone",
+        admin && "security",
+        admin && "sharedvideo",
+        admin && "videoquality",
+        admin && "profile",
+        admin && "raisehand",
+        admin && "livestreaming",
+        admin && "recording",
+        admin && "closedcaptions",
+        admin && "filmstrip",
+        admin && "feedback",
+        admin && "stats",
+        admin && "shortcuts",
+        admin && "tileview",
       ],
     },
   };
 
-  // let leftwatermark;
-  // $: alert(leftwatermark);
+  let changeOpacityTo100;
 
   onMount(() => {
-    // can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
+    setTimeout(() => {
+      changeOpacityTo100 =
+        "opacity-100 transition-opacity duration-500 ease-in-out";
+    }, 1000);
     try {
+      // can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
       options.parentNode = document.querySelector("#meet");
+
+      // !admin &&
+      //   (options.configOverwrite.notifications = ["lobby.notificationTitle"]);
+
       api = new JitsiMeetExternalAPI(domain, options);
 
       api.addEventListener("participantRoleChanged", function (event) {
-        par = [...api.getParticipantsInfo()]; // the last person to join sees the most people...
-        // firstID = Object.values(par[0])[3];
-        // api.pinParticipant(firstID);
-        // alert(firstID);
-        // leftwatermark = document.querySelector("div.watermark.leftwatermark");
+        // if (admin && event.role === "moderator") {
+        api.executeCommand("password", "thnkslv");
+        api.executeCommand("toggleLobby", true);
+        // }
+        par = [...api.getParticipantsInfo()];
       });
     } catch (error) {
       console.log("onMount for JitsiMeetExternalAPI broken", error);
@@ -101,14 +130,10 @@
   });
 </script>
 
-<!-- <svelte:head>
-  <script src="https://meet.jit.si/external_api.js"></script>
-</svelte:head> -->
-
-<div class="relative md:-translate-y-10 -translate-y-36">
-  <!-- <div id="meet" class="w-full h-[82vh] md:h-[670px]" /> -->
-  <div id="meet" class="w-full h-[90vh] md:h-[670px]" />
-
+<div
+  id="meet"
+  class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px] opacity-0 ${changeOpacityTo100}`}
+>
   <button on:click={hangUpBtn}>
     <img
       alt="hangup button"

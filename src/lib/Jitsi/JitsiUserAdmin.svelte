@@ -1,3 +1,4 @@
+<!-- no longer used; using JitsiUser with 'admin' prop to use all the admin parameters -->
 <script>
   import { onMount } from "svelte";
   import { lessThan768 } from "$lib/store";
@@ -43,15 +44,15 @@
         ],
         TOOLBAR_BUTTONS: [
           // "hangup",
-          "noisesuppression",
           "desktop",
           "microphone",
           "camera",
           "fullscreen",
-          "settings",
           "chat",
           "fodeviceselection",
           "etherpad",
+          "noisesuppression",
+          "settings",
           "mute-video-everyone",
           "mute-everyone",
           "security",
