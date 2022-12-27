@@ -114,7 +114,8 @@
         {/if}
       {/each}
     {/if}
-  {:else if $page.status == 404}
+  {:else}
+    <!-- {:else if $page.status == 404} -->
     <title>Oops 💩</title>
   {/if}
 </svelte:head>
@@ -239,7 +240,8 @@
 
     <!-- <Footer bind:contactLinkClicked /> -->
 
-    {#if $page.route.id !== "/classroom"}
+    <!-- without status 200 check, this breaks with error.svelte -->
+    {#if $page.status == 200 && $page.route.id !== "/classroom"}
       <InView
         margin={"200px"}
         onview={async () =>

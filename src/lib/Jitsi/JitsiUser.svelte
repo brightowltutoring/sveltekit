@@ -9,7 +9,10 @@
   import { lessThan768 } from "$lib/store";
 
   async function hangUpBtn() {
-    await api.dispose();
+    // await api.dispose();
+    // await api.executeCommand("hangup");
+    await api.executeCommand("endConference");
+
     goto("/");
   }
 
@@ -18,8 +21,10 @@
   let options = {
     roomName: "ThinkSolve12522",
     configOverwrite: {
-      startWithAudioMuted: true,
+      // startWithAudioMuted: true,
+      startWithAudioMuted: admin ? true : false,
       startWithVideoMuted: true,
+      // startWithVideoMuted: admin ? true : false,
       disabledSounds: [
         "ASKED_TO_UNMUTE_SOUND",
         "E2EE_OFF_SOUND",
@@ -43,18 +48,22 @@
         "TALK_WHILE_MUTED_SOUND",
       ],
 
+      // TODO: do these actually do what I expect?
       hideConferenceTimer: !admin && true,
       hideConferenceSubject: !admin && true,
       hideParticipantsStats: !admin && true,
       disablePolls: admin ? false : true,
-      disableSelfView: false,
+      disableSelfView: !admin && true,
       // disableSelfViewSettings: true,
       deeplinking: { disabled: true }, // ADDED DEC 23,2022 as 'disableDeepLinking: true' stopped working in order to block 'add app/extension' in iframe on mobile
       disableRemoteMute: true,
-      notifications: !admin && ["lobby.notificationTitle"], // TODO: still don't understand logic, but works; result: only admin can allow users in
+      notifications: !admin && ["lobby.notificationTitle"],
+      // TODO: still don't understand logic, but works; result: only admin can allow users in
       remoteVideoMenu: !admin && {
-        disableKick: true,
-        disablePrivateChat: true,
+        disabled: true,
+        // disableKick: true,
+        // disablePrivateChat: true,
+        // disableGrantModerator: true,
       },
 
       // TODO: get request still grabs all this mp3 data ... id rather not fetch this instead of disabling
@@ -97,6 +106,7 @@
         admin && "stats",
         admin && "shortcuts",
         admin && "tileview",
+        // "hangup",
       ],
     },
   };
@@ -112,16 +122,15 @@
       // can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
       options.parentNode = document.querySelector("#meet");
 
-      // !admin &&
-      //   (options.configOverwrite.notifications = ["lobby.notificationTitle"]);
-
       api = new JitsiMeetExternalAPI(domain, options);
 
+      const pwd = "thnkslv";
       api.addEventListener("participantRoleChanged", function (event) {
-        // if (admin && event.role === "moderator") {
-        api.executeCommand("password", "thnkslv");
-        api.executeCommand("toggleLobby", true);
-        // }
+        if (event.role === "moderator") {
+          api.executeCommand("password", pwd);
+          api.executeCommand("toggleLobby", true);
+        }
+
         par = [...api.getParticipantsInfo()];
       });
     } catch (error) {
