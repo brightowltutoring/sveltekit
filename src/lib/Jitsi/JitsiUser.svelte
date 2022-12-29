@@ -9,20 +9,18 @@
   import { lessThan768 } from "$lib/store";
 
   async function hangUpBtn() {
-    // await api.dispose();
+    await api.dispose();
     // await api.executeCommand("hangup");
-    await api.executeCommand("endConference");
-
+    // await api.executeCommand("endConference");
     goto("/");
   }
 
   let api, par;
   let domain = "meet.jit.si";
   let options = {
-    roomName: "ThinkSolve12522",
+    roomName: "ThinkSolve122822",
     configOverwrite: {
-      // startWithAudioMuted: true,
-      startWithAudioMuted: admin ? true : false,
+      startWithAudioMuted: true,
       startWithVideoMuted: true,
       // startWithVideoMuted: admin ? true : false,
       disabledSounds: [
@@ -52,11 +50,12 @@
       hideConferenceTimer: !admin && true,
       hideConferenceSubject: !admin && true,
       hideParticipantsStats: !admin && true,
-      disablePolls: admin ? false : true,
+      // disablePolls: admin ? false : true,
+      disablePolls: !admin && true,
       disableSelfView: !admin && true,
       // disableSelfViewSettings: true,
       deeplinking: { disabled: true }, // ADDED DEC 23,2022 as 'disableDeepLinking: true' stopped working in order to block 'add app/extension' in iframe on mobile
-      disableRemoteMute: true,
+      disableRemoteMute: !admin && true,
       notifications: !admin && ["lobby.notificationTitle"],
       // TODO: still don't understand logic, but works; result: only admin can allow users in
       remoteVideoMenu: !admin && {
@@ -72,7 +71,7 @@
       // DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
       DEFAULT_BACKGROUND: `#130e21`,
       SHOW_CHROME_EXTENSION_BANNER: false,
-      VIDEO_QUALITY_LABEL_DISABLED: true,
+      VIDEO_QUALITY_LABEL_DISABLED: !admin && true,
       SETTINGS_SECTIONS: [
         "devices",
         admin && "moderator",
@@ -111,13 +110,13 @@
     },
   };
 
-  let changeOpacityTo100;
+  // let changeOpacityTo100;
 
   onMount(() => {
-    setTimeout(() => {
-      changeOpacityTo100 =
-        "opacity-100 transition-opacity duration-500 ease-in-out";
-    }, 1000);
+    // setTimeout(() => {
+    //   changeOpacityTo100 =
+    //     "opacity-100 transition-opacity duration-500 ease-in-out";
+    // }, 1000);
     try {
       // can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
       options.parentNode = document.querySelector("#meet");
@@ -141,8 +140,9 @@
 
 <div
   id="meet"
-  class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px] opacity-0 ${changeOpacityTo100}`}
->
+  class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px]`}
+  >
+  <!-- class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px] opacity-0 ${changeOpacityTo100}`} -->
   <button on:click={hangUpBtn}>
     <img
       alt="hangup button"
