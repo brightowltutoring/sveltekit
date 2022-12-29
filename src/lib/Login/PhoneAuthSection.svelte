@@ -82,20 +82,19 @@
 
 <!-- dec1,2022: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
 {#if !phoneCodeSent}
-  <div
+  <button
     bind:this={sendPhoneCodeBtn}
     on:click={submitPhoneNumber}
-    on:keydown={submitPhoneNumber}
-    class="w-full group bg-rose-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
+    class=" group bg-rose-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
       ? 'group-hover:bg-opacity-80'
-      : 'group-hover:bg-opacity-80'}  text-white flex justify-center items-center gap-5"
+      : 'group-hover:bg-opacity-80'}  text-white flex w-full justify-center items-center gap-5"
   >
     <span class="group-hover:scale-[1.15] duration-500">
       <IconPhone />
     </span>
     <!-- <span class="font-bold">Get SMS Code</span> -->
     <span>Get SMS Code</span>
-  </div>
+  </button>
 
   <div class="grid grid-cols-6 w-full text-black">
     {#if phoneInputVisible}

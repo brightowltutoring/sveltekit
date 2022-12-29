@@ -68,20 +68,19 @@
   let magicLinkInputVisible = globalThis.magicLinkInputVisible;
 </script>
 
-<signin-button
+<button
   bind:this={magicLinkBtn}
   on:click={signinWithLinkAndStop}
-  on:keydown={signinWithLinkAndStop}
   class="group bg-emerald-500 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
     ? 'group-hover:bg-opacity-80'
-    : 'group-hover:bg-opacity-80'}  text-white flex justify-center items-center gap-5"
+    : 'group-hover:bg-opacity-80'}  text-white flex w-full justify-center items-center gap-5"
 >
   <span class="group-hover:scale-[1.15] duration-500">
     <IconEmail />
   </span>
   <!-- <span class="font-bold">Get Magic Link</span> -->
   <span>Get Magic Link</span>
-</signin-button>
+</button>
 
 {#if magicLinkInputVisible}
   <input

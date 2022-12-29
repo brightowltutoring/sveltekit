@@ -39,9 +39,11 @@ export async function magicLinkToEmail(EMAIL) {
 // UPDATE:  dec17,2022: 'https://firebase.google.com/docs/auth/web/redirect-best-practices' explains how and why 'signInWithRedirect' fails .. seems like just using 'signInWithPopup' is easiest option
 export async function TwitterLogin() {
   // const auth = await import("$lib/Login/firebase");
+
   const { TwitterAuthProvider, browserPopupRedirectResolver } = await import(
     "firebase/auth"
   );
+  const { signInWithPopup } = await import("firebase/auth");
   const provider = new TwitterAuthProvider();
 
   // if (get(lessThan768)) {
@@ -70,7 +72,7 @@ export async function TwitterLogin() {
   //       // ...
   //     });
   // } else {
-  const { signInWithPopup } = await import("firebase/auth");
+  // const { signInWithPopup } = await import("firebase/auth");
   signInWithPopup(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.

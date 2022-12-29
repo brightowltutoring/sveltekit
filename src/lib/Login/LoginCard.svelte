@@ -7,6 +7,7 @@
 
   // TODO: commented out on dec12, 2022  due to code splitting / dynamic importing
   // import { app, auth } from "$lib/Login/firebase";
+
   // import { auth } from "$lib/Login/firebase";
   // import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
@@ -49,7 +50,6 @@
   }
 
   async function onMountFirebase() {
-    // TODO:dynamic importing added on dec12,2022
     const { auth } = await import("$lib/Login/firebase");
     const { onAuthStateChanged, isSignInWithEmailLink } = await import(
       "firebase/auth"
@@ -96,9 +96,7 @@
     // }
   }
 
-  onMount(() => {
-    onMountFirebase();
-  });
+  onMount(() => onMountFirebase());
 
   //  Hoisted Functions
 
