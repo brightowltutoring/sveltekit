@@ -43,7 +43,6 @@ export async function TwitterLogin() {
   const { TwitterAuthProvider, browserPopupRedirectResolver } = await import(
     "firebase/auth"
   );
-  const { signInWithPopup } = await import("firebase/auth");
   const provider = new TwitterAuthProvider();
 
   // if (get(lessThan768)) {
@@ -72,7 +71,7 @@ export async function TwitterLogin() {
   //       // ...
   //     });
   // } else {
-  // const { signInWithPopup } = await import("firebase/auth");
+  const { signInWithPopup } = await import("firebase/auth");
   signInWithPopup(auth, provider, browserPopupRedirectResolver)
     .then((result) => {
       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.

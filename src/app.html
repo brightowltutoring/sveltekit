@@ -7,6 +7,20 @@
     %sveltekit.head%
   </head>
   <body>
+    <!--TODO: this, alongside +layout.svelte top code sorta does saved darkmode -->
+    <script>
+      const isDarkModeLS = localStorage.getItem("darkMode").toString();
+
+      if (isDarkModeLS == "true") {
+        document.body.classList.add("dark-mode");
+      }
+
+      if (isDarkModeLS == "false") {
+        document.body.classList.remove("dark-mode");
+      }
+    </script>
+    <!--TODO: this, alongside +layout.svelte top code sorta does saved darkmode -->
+
     <div>%sveltekit.body%</div>
   </body>
 </html>

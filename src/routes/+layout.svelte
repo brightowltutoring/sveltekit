@@ -1,4 +1,19 @@
 <script>
+  // TODO: this, alongside app.html pre-body script sorta does saved darkmode
+  import { isDarkMode } from "$lib/store";
+  import { browser } from "$app/environment";
+  $: $isDarkMode, browser && localStorage.setItem("darkMode", $isDarkMode);
+
+  $: if (browser && localStorage.getItem("darkMode") === "true") {
+    $isDarkMode = true;
+    browser && document.body.classList.add("dark-mode");
+    // } else if (browser && localStorage.getItem("darkMode") === "false") {
+  } else {
+    $isDarkMode = false;
+    browser && document.body.classList.remove("dark-mode");
+  }
+  // TODO: this, alongside app.html pre-body script sorta does saved darkmode
+
   import "../app.css";
   import {
     scale,
@@ -29,7 +44,7 @@
     showLoginModal,
     showHomeworkModal,
     navAppClicked,
-    isDarkMode,
+    // isDarkMode,
     isLoggedIn,
   } from "$lib/store";
 

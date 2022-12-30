@@ -5,9 +5,12 @@
   import { elasticOut, quintOut } from "svelte/easing";
   import { isDarkMode } from "$lib/store";
 
+  import { browser } from "$app/environment";
+
   function toggleDM() {
+    $isDarkMode = !$isDarkMode;
     document.body.classList.toggle("dark-mode");
-    $isDarkMode = !$isDarkMode; // controls other app elements that use darkmode logic
+    localStorage.setItem("darkMode", $isDarkMode);
   }
 </script>
 
