@@ -17,7 +17,7 @@
     $isDarkMode ? "from-red-300 via-white to-white" : "from-indigo-600 to-black"
   }`;
 
-  console.log("cloudflare deploy, boy");
+  // console.log("cloudflare deploy, boy");
 </script>
 
 <video
