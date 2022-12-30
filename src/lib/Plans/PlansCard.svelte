@@ -47,7 +47,7 @@
   </div>
 </plans-card>
 
-<!--Previously the background color of this component was set with "style={`background:${$elementColor}`}" — i.e. inline css via reactive javascript-string (specifically a derived svelte store variable) — however this would case 'darkmode flash' when starting with the /plans route (and darkmode saved/set from localStorage).  -->
+<!-- Previously the background color of this component was set with "style={`background:${$elementColor}`}" — i.e. inline css via reactive javascript-string (specifically a derived svelte store variable) — however this would cause 'darkmode flash' when starting with the /plans route (and darkmode saved/set from localStorage).  -->
 <style>
   plans-card {
     background: rgb(242, 247, 250);

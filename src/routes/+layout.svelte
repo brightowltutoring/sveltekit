@@ -1,18 +1,18 @@
 <script>
-  // TODO: this, alongside app.html pre-body script sorta does saved darkmode
   import { isDarkMode } from "$lib/store";
   import { browser } from "$app/environment";
-  $: $isDarkMode, browser && localStorage.setItem("darkMode", $isDarkMode);
 
-  $: if (browser && localStorage.getItem("darkMode") === "true") {
+  //TODO: NOTE: For dark mode I am persisting '$isDarkMode' (i.e. a reactive, global boolean variable) via a localStorage copy  'isDarkModeLS'. In order to avoid 'flash of content' when returning after a closed session, a script tag in app.html is inserted which uses localStorage 'isDarkModeLS' (i.e. the last value of '$isDarkMode') to reproduce css light/darkmode on body.
+
+  // During the session the localStorage copy 'isDarkModeLS' is updated based on changes to '$isDarkMode'; 'browser' method is needed so that sveltekit doesn't attempt this logic on server-side (localStorage only exists on client-side).
+  $: $isDarkMode, browser && localStorage.setItem("isDarkModeLS", $isDarkMode);
+
+  // On returning to app, set the '$isDarkMode' based on the local storage copy 'isDarkModeLS' ... essentially persisting '$isDarkMode' from previous session
+  if (browser && localStorage.getItem("isDarkModeLS") === "true")
     $isDarkMode = true;
-    browser && document.body.classList.add("dark-mode");
-    // } else if (browser && localStorage.getItem("darkMode") === "false") {
-  } else {
-    $isDarkMode = false;
-    browser && document.body.classList.remove("dark-mode");
-  }
-  // TODO: this, alongside app.html pre-body script sorta does saved darkmode
+  else $isDarkMode = false;
+
+  //TODO: NOTE: For dark mode I am persisting '$isDarkMode' (i.e. a reactive, global boolean variable) via a localStorage copy  'isDarkModeLS'. In order to avoid 'flash of content' when returning after a closed session, a script tag in app.html is inserted which uses localStorage 'isDarkModeLS' (i.e. the last value of '$isDarkMode') to reproduce css light/darkmode on body.
 
   import "../app.css";
   import {

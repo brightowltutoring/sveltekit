@@ -1,6 +1,16 @@
 import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
 
+// export function persistDarkModeFromLastSession() {
+//   const isDarkModeLS = localStorage.getItem("isDarkModeLS").toString();
+
+//   if (isDarkModeLS == "true") {
+//     document.body.classList.add("dark-mode");
+//   } else {
+//     document.body.classList.remove("dark-mode");
+//   }
+// }
+
 // modified on nov29,2022 from: https://stackoverflow.com/questions/38241480/detect-macos-ios-windows-android-and-linux-os-with-js
 // TODO: might need to add 'browser &&' if this function is not called inside an onMount
 // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios'

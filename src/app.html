@@ -7,19 +7,21 @@
     %sveltekit.head%
   </head>
   <body>
-    <!--TODO: this, alongside +layout.svelte top code sorta does saved darkmode -->
-    <script>
-      const isDarkModeLS = localStorage.getItem("darkMode").toString();
+    <!--TODO: this, alongside +layout.svelte top code does darkmode -->
+    <!-- <script type="module">
+      import { persistDarkModeFromLastSession } from "../src/lib/utils.js";
 
+      persistDarkModeFromLastSession(); -->
+
+    <script>
+      const isDarkModeLS = localStorage.getItem("isDarkModeLS").toString();
       if (isDarkModeLS == "true") {
         document.body.classList.add("dark-mode");
-      }
-
-      if (isDarkModeLS == "false") {
+      } else {
         document.body.classList.remove("dark-mode");
       }
     </script>
-    <!--TODO: this, alongside +layout.svelte top code sorta does saved darkmode -->
+    <!--TODO: this, alongside +layout.svelte top code does darkmode -->
 
     <div>%sveltekit.body%</div>
   </body>

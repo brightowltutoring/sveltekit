@@ -159,7 +159,8 @@
   }
 </script>
 
-<main class="w-screen flex justify-center items-center">
+<!-- TODO: when doing w-screen this component on '/login' route is off-center -->
+<main class="w-full flex justify-center items-center ">
   {#if !$isLoggedIn}
     {#key !noTransition && $showLoginModal}
       <login-card
@@ -167,8 +168,8 @@
         class="card-styles text-xl {$isDarkMode
           ? 'hover:shadow-xl '
           : 'hover:shadow-lg'}"
-        style={`background:${$elementColor}`}
       >
+        <!-- style={`background:${$elementColor}`} -->
         {#if isRunningStandalone()}
           <PhoneAuthSection />
         {:else}
@@ -192,8 +193,8 @@
         class="text-xl card-styles {$isDarkMode
           ? 'hover:shadow-xl'
           : 'hover:shadow-lg'}"
-        style={`background:${$elementColor} `}
       >
+        <!-- style={`background:${$elementColor} `} -->
         <p>{loginWelcomeText}</p>
 
         <div>
@@ -213,5 +214,17 @@
 <style>
   .card-styles {
     @apply relative block font-Poppins mx-auto py-10 px-5 sm:p-10 w-[90vw] sm:w-[500px] shadow-md hover:scale-[1.01] rounded-2xl hover:rounded-3xl duration-300;
+  }
+
+  login-card,
+  logout-card {
+    background: rgb(242, 247, 250);
+  }
+
+  :global(body.dark-mode) login-card {
+    background: rgb(38, 35, 51);
+  }
+  :global(body.dark-mode) logout-card {
+    background: rgb(38, 35, 51);
   }
 </style>

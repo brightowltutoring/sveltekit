@@ -9,7 +9,11 @@
   import PostDummyOnce from "$lib/Dropzone/PostDummyOnce.svelte";
 
   import InView from "$lib/Wrappers/InView.svelte";
-  import { isDarkMode, showHomeworkModal } from "$lib/store";
+  import {
+    // isDarkMode,
+    showHomeworkModal,
+  } from "$lib/store";
+  // $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
   // Alternative to the vanilla-y eventListener logic commented out above.
   // TODO: Note: using {once:true} inside an event listener attached to 'querySelector('a[href="/homework"]')' would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
@@ -19,7 +23,6 @@
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
   export let brightnessTW = "brightness-100";
-  $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
   let dropzone;
 
   async function hydrateDropzoneDomEls(target) {
@@ -91,9 +94,9 @@
   once
   margin={"0px"}
 >
+  <!-- style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent" -->
   <form
     method="post"
-    style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent"
     class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
   >
     <div
@@ -109,5 +112,20 @@
   /* Oddly without specifying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
   :global(.dropzone .dz-preview.dz-image-preview) {
     background-color: transparent !important;
+  }
+
+  :root {
+    --light-box-shadow-color: #ddd;
+    --dark-box-shadow-color: #1d1c43;
+  }
+  form {
+    box-shadow: inset 0 -10px 10px var(--light-box-shadow-color);
+    border-radius: 50px;
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  :global(body.dark-mode) form {
+    box-shadow: inset 0 -10px 10px var(--dark-box-shadow-color);
   }
 </style>
