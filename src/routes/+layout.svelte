@@ -8,7 +8,7 @@
   $: $isDarkMode, browser && localStorage.setItem("isDarkModeLS", $isDarkMode);
 
   // On returning to app, set the '$isDarkMode' based on the local storage copy 'isDarkModeLS' ... essentially persisting '$isDarkMode' from previous session
-  if (browser && localStorage.getItem("isDarkModeLS") === "true")
+  if (browser && localStorage.getItem("isDarkModeLS") == "true")
     $isDarkMode = true;
   else $isDarkMode = false;
 
