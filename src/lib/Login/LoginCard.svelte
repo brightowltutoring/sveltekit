@@ -20,7 +20,7 @@
   import {
     isLoggedIn,
     isDarkMode,
-    elementColor,
+    // elementColor,
     showLoginModal,
     // lessThan768,
   } from "$lib/store";
