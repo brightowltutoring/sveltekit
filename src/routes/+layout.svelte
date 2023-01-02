@@ -26,7 +26,7 @@
   import { routes } from "$lib/store";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
 
-  // import LoginCard from "../lib/Login/LoginCard.svelte"; //TODO: remove
+  import LoginCard from "../lib/Login/LoginCard.svelte"; //TODO: remove
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
 
@@ -223,13 +223,13 @@
     bind:showModal={$showLoginModal}
     bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`}
   >
-    <!-- <LoginCard /> -->
-    <LazyMount
+    <LoginCard />
+    <!-- <LazyMount
       Import={() => {
         setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
         return import("$lib/Login/LoginCard.svelte");
       }}
-    />
+    /> -->
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
