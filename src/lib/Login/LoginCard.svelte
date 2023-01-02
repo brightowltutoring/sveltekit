@@ -11,6 +11,8 @@
   // import { auth } from "$lib/Login/firebase";
   // import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
+  import { browser } from "$app/environment";
+
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
   import { slide } from "svelte/transition";
@@ -89,14 +91,17 @@
       } else {
         localStorage.removeItem("redirectUrlFromLS"); // clears on logout only; stays even on refresh/exit!
         $isLoggedIn = false;
-        $showLoginModal = false;
+        // $showLoginModal = false;
         loggedInEmail = "";
       }
     });
     // }
   }
 
-  onMount(() => onMountFirebase());
+  // onMount(() => {
+  //   onMountFirebase();
+  // });
+  onMount(onMountFirebase);
 
   //  Hoisted Functions
 
@@ -162,52 +167,54 @@
 <!-- TODO: when doing w-screen this component on '/login' route is off-center -->
 <main class="w-full flex justify-center items-center ">
   {#if !$isLoggedIn && $showLoginModal}
-    <!-- {#key !noTransition} -->
-    <login-card
-      in:slide={{ duration: 400, easing: quintOut }}
-      class="card-styles text-xl {$isDarkMode
-        ? 'hover:shadow-xl '
-        : 'hover:shadow-lg'}"
-    >
-      <!-- style={`background:${$elementColor}`} -->
-      {#if isRunningStandalone()}
-        <PhoneAuthSection />
-      {:else}
-        <MagicLinkSection />
+    <!-- {#if !$isLoggedIn} -->
+    {#key !noTransition && $showLoginModal}
+      <login-card
+        in:slide={{ duration: 400, easing: quintOut }}
+        class="card-styles text-xl {$isDarkMode
+          ? 'hover:shadow-xl '
+          : 'hover:shadow-lg'} "
+      >
+        <!-- style={`background:${$elementColor}`} -->
+        {#if isRunningStandalone()}
+          <PhoneAuthSection />
+        {:else}
+          <MagicLinkSection />
 
-        <p class="py-3" />
-        <PhoneAuthSection />
-      {/if}
+          <p class="py-3" />
+          <PhoneAuthSection />
+        {/if}
 
-      <GoogleLoginButton />
+        <GoogleLoginButton />
 
-      <TwitterLoginButton />
-    </login-card>
-    <!-- {/key} -->
+        <TwitterLoginButton />
+      </login-card>
+    {/key}
   {/if}
 
   {#if $isLoggedIn && $showLoginModal}
-    <!-- {#key !noTransition} -->
-    <logout-card
-      in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
-      class="text-xl card-styles {$isDarkMode
-        ? 'hover:shadow-xl'
-        : 'hover:shadow-lg'}"
-    >
-      <!-- style={`background:${$elementColor} `} -->
-      <p>{loginWelcomeText}</p>
-
-      <div>
-        Redirecting in
-        <div class="text-5xl p-5" id="timeLeft">3</div>
-      </div>
-
-      <button
-        class="text-2xl font-medium bg-rose-300 text-white rounded-lg p-4 hover:scale-110 hover:rounded-xl duration-200 ease-in"
-        on:click={logoutFunction}>Logout</button
+    <!-- {#if $isLoggedIn} -->
+    {#key !noTransition && $showLoginModal}
+      <logout-card
+        in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
+        class="text-xl card-styles {$isDarkMode
+          ? 'hover:shadow-xl'
+          : 'hover:shadow-lg'}"
       >
-    </logout-card>
-    <!-- {/key} -->
+        <!-- style={`background:${$elementColor} `} -->
+        <p>{loginWelcomeText}</p>
+
+        <div>
+          Redirecting in
+          <div class="text-5xl p-5" id="timeLeft">3</div>
+        </div>
+
+        <button
+          class="text-2xl font-medium bg-rose-300 text-white rounded-lg p-4 hover:scale-110 hover:rounded-xl duration-200 ease-in"
+          on:click={logoutFunction}>Logout</button
+        >
+      </logout-card>
+    {/key}
   {/if}
 </main>
 

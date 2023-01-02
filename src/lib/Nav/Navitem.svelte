@@ -45,8 +45,8 @@
 </script>
 
 <a
-  on:click={handleNavButtonClicks}
   data-sveltekit-preload-data
+  on:click={handleNavButtonClicks}
   {href}
   class="block font-Nunito font-thin 
 
