@@ -1,4 +1,48 @@
 <script>
+  let loggedInEmail;
+  async function onMountFirebase() {
+    const { auth } = await import("$lib/Login/firebase");
+    const { onAuthStateChanged, isSignInWithEmailLink } = await import(
+      "firebase/auth"
+    );
+
+    // Confirm the link is a sign-in with email link.
+
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      let email = window.localStorage.getItem("emailForSignIn");
+      if (!email) {
+        email = window.prompt("Please provide your email for confirmation");
+      }
+
+      const { signInWithEmailLink } = await import("firebase/auth");
+      signInWithEmailLink(auth, email, window.location.href)
+        .then(() => {
+          window.localStorage.removeItem("emailForSignIn");
+          $showLoginModal = true;
+        })
+        .catch((error) => console.log("signInWithEmailLink:", error));
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        $isLoggedIn = true;
+        loggedInEmail = user.email;
+
+        // loginWelcomeText = user.displayName
+        //   ? `Hey ${user.displayName}!`
+        //   : `Hey ${user.email}!`;
+      } else {
+        localStorage.removeItem("redirectUrlFromLS"); // clears on logout only; stays even on refresh/exit!
+        $isLoggedIn = false;
+        // $showLoginModal = false;
+        loggedInEmail = "";
+      }
+    });
+    // }
+  }
+
+  // TODO: testing the above (DELETE LATER)
+
   import { isDarkMode } from "$lib/store";
   import { browser } from "$app/environment";
 
@@ -26,7 +70,7 @@
   import { routes } from "$lib/store";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
 
-  import LoginCard from "../lib/Login/LoginCard.svelte"; //TODO: remove
+  // import LoginCard from "../lib/Login/LoginCard.svelte"; //TODO: remove
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
 
@@ -52,7 +96,53 @@
 
   import { onMount } from "svelte";
 
+  // TODO: might delete this
+  let hasUID;
+  async function isUIDfromIDB() {
+    const asyncForEach = (array, callback, done) => {
+      const runAndWait = (i) => {
+        if (i === array.length) return done();
+        return callback(array[i], () => runAndWait(i + 1));
+      };
+      return runAndWait(0);
+    };
+
+    const dump = {};
+    const dbRequest = window.indexedDB.open("firebaseLocalStorageDb");
+    dbRequest.onsuccess = () => {
+      const db = dbRequest.result;
+      const stores = ["firebaseLocalStorage"];
+
+      const tx = db.transaction(stores);
+      asyncForEach(
+        stores,
+        (store, next) => {
+          const req = tx.objectStore(store).getAll();
+          req.onsuccess = () => {
+            dump[store] = req.result;
+            next();
+          };
+        },
+        () => {
+          let dumpString = JSON.stringify(dump);
+          // console.log(dumpString);
+          hasUID = dumpString.includes("uid");
+          console.log("hasUID from inside function", hasUID);
+        }
+      );
+    };
+  }
+  // TODO: might delete this
+
   onMount(() => {
+    // TODO: might delete this
+    isUIDfromIDB();
+    setTimeout(() => {
+      console.log("hasUID from inside onMount", hasUID);
+      if (hasUID) onMountFirebase();
+    }, 2000);
+    // TODO: might delete this
+
     // $lessThan768 && disableZoomGestures();
     (isRunningStandalone() || $lessThan768) && disableZoomGestures();
     setInnerWidthViaMatchMedia();
@@ -218,17 +308,18 @@
 
   <!-- UPDATE: the timeout here is 250ms and 100 ms and in opacity easing logic defined above. These are magic numbers as far as im concerned, up until now the logincard has been jittery on mobile -->
 
-  <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
-    <!-- TODO: when not lazymounting logincard do not use 'changeOpacityTo100' logic ..holy fuu -->
-    <LoginCard />
+  <!-- <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
+    <LoginCard /> -->
+  <!-- TODO: when not lazymounting logincard do not use 'changeOpacityTo100' logic ..holy fuu -->
 
-    <!-- <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`}> -->
-    <!-- <LazyMount
+  <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
+    <!-- bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`} -->
+    <LazyMount
       Import={() => {
         setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
         return import("$lib/Login/LoginCard.svelte");
       }}
-    /> -->
+    />
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
