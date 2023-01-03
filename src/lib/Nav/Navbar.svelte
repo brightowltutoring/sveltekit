@@ -14,11 +14,46 @@
     navAppClicked,
     clearNavModals,
     elementColor,
-    // lessThan768,
     showLoginModal,
     showHomeworkModal,
+    instDeltaY,
+    lessThan768,
   } from "$lib/store";
   import { spring } from "svelte/motion";
+
+  // jankytown logic added jan 3, 2022
+  let jankytown;
+
+  // sets jankytown for bigger than med.
+
+  let verticalThreshold = 800;
+  let verticalThresholdMobile = 400;
+
+  $: if (!$lessThan768) {
+    if ($scrollY < 10) jankytown = "top-0";
+
+    if ($scrollY > 10 && $scrollY < verticalThreshold)
+      jankytown = "top-0 backdrop-blur-3xl duration-1000";
+
+    if ($scrollY > verticalThreshold && $instDeltaY > 10) {
+      jankytown = "-top-20 backdrop-blur-3xl duration-200";
+    }
+
+    if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl duration-700";
+  }
+  // sets jankytown for smaller than med
+  $: if ($lessThan768) {
+    if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
+      // if ($scrollY <= verticalThresholdMobile) {
+      jankytown =
+        "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200";
+    }
+    if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
+      jankytown = "-bottom-28 duration-400";
+    if ($instDeltaY < -30)
+      jankytown = "bottom-0 backdrop-blur-3xl duration-700";
+  }
+  // jankytown logic added jan 3, 2022
 
   let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
   let hueRocket = 0;
@@ -68,68 +103,72 @@
     browser && "opacity-100 transition-opacity duration-1000 ease-in";
 </script>
 
-<!-- gap-x-24 -->
-<logo-and-navbar
-  class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center gap-x-32 md:justify-between w-full"
->
-  {#key resetLogoClick}
-    <button
-      class=" p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
-    md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
-      in:scale={{ duration: 1200, easing: elasticOut }}
-      on:click={clickLogo}
-    >
-      THINKSOLVE
-    </button>
-  {/key}
+<svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
 
-  <!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
-  <ul
-    class="text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto  {bgGradientColor} hideScrollBar overflow-x-scroll overflow-y-hidden"
+<!-- gap-x-24 -->
+<main class="z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
+  <logo-and-navbar
+    class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center gap-x-32 md:justify-between w-full"
   >
-    <!-- py-3 px-5 -->
-    <!-- <ul
+    {#key resetLogoClick}
+      <button
+        class=" p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
+    md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
+        in:scale={{ duration: 1200, easing: elasticOut }}
+        on:click={clickLogo}
+      >
+        THINKSOLVE
+      </button>
+    {/key}
+
+    <!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
+    <ul
+      class="text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto  {bgGradientColor} hideScrollBar overflow-x-scroll overflow-y-hidden"
+    >
+      <!-- py-3 px-5 -->
+      <!-- <ul
     class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   > -->
-    <li class={hideIfRunningStandalone || hideIfNotIOS}>
-      <button
-        class=" font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
+      <li class={hideIfRunningStandalone || hideIfNotIOS}>
+        <button
+          class=" font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
       border-b-1 rounded "
-        on:click={handleAppNavClick}
-      >
-        App
-      </button>
-    </li>
-
-    <!-- {#each Object.keys($routes).slice(0, 6) as KEY} -->
-    {#each Object.keys($routes).slice(1, 5) as KEY}
-      <!-- class={(KEY == "home" || KEY == "faq") && hideIfRunningStandalone} -->
-      <!-- class={KEY == "home" && hideIfRunningStandalone} -->
-      <li
-        style={KEY == "login" &&
-          $isLoggedIn &&
-          `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
-      >
-        <Navitem
-          href={$routes[KEY].href}
-          content={$routes[KEY].name}
-          bind:routes={$routes}
-          bind:btnColor
-          bind:btnColorHover
-          icon={$routes[KEY].icon}
-          navIconClicked={($routes[KEY].href == "/homework" &&
-            $showHomeworkModal) ||
-            ($routes[KEY].href == "/login" && $showLoginModal) ||
-            $routes[KEY].isCurrent}
-        />
-        <!-- TODO: do all these need to be 'bind:' -->
+          on:click={handleAppNavClick}
+        >
+          App
+        </button>
       </li>
-    {/each}
 
-    <li
-      class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone} "
-    >
-      <LightDarkMode />
-    </li>
-  </ul>
-</logo-and-navbar>
+      <!-- {#each Object.keys($routes).slice(0, 6) as KEY} -->
+      {#each Object.keys($routes).slice(1, 5) as KEY}
+        <!-- class={(KEY == "home" || KEY == "faq") && hideIfRunningStandalone} -->
+        <!-- class={KEY == "home" && hideIfRunningStandalone} -->
+        <li
+          style={KEY == "login" &&
+            $isLoggedIn &&
+            `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
+        >
+          <Navitem
+            href={$routes[KEY].href}
+            content={$routes[KEY].name}
+            bind:routes={$routes}
+            bind:btnColor
+            bind:btnColorHover
+            icon={$routes[KEY].icon}
+            navIconClicked={($routes[KEY].href == "/homework" &&
+              $showHomeworkModal) ||
+              ($routes[KEY].href == "/login" && $showLoginModal) ||
+              $routes[KEY].isCurrent}
+          />
+          <!-- TODO: do all these need to be 'bind:' -->
+        </li>
+      {/each}
+
+      <li
+        class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone} "
+      >
+        <LightDarkMode />
+      </li>
+    </ul>
+  </logo-and-navbar>
+</main>

@@ -1,5 +1,4 @@
 <script>
-  import TitleHead from "../lib/TitleHead.svelte";
   import { isDarkMode } from "$lib/store";
 
   import "../app.css";
@@ -11,7 +10,7 @@
   import { elasticOut, quintOut } from "svelte/easing";
 
   import { page } from "$app/stores";
-
+  import { routes } from "$lib/store";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
 
   // import LoginCard from "../lib/Login/LoginCard.svelte"; //TODO: remove
@@ -19,24 +18,27 @@
   import Modal from "$lib/Wrappers/Modal.svelte";
 
   import Navbar from "$lib/Nav/Navbar.svelte";
-
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
 
   // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
   let FooterComponent;
 
   import {
+    instDeltaY,
+    scrollY,
     setInnerWidthViaMatchMedia,
     lessThan768,
     showLoginModal,
     showHomeworkModal,
     navAppClicked,
+    // isDarkMode,
     isLoggedIn,
   } from "$lib/store";
 
   import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
 
   import { onMount } from "svelte";
+  import Navbar2 from "../lib/Nav/Navbar.svelte";
 
   // TODO: delete code below this?
   let loggedInEmail;
@@ -139,6 +141,39 @@
     // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
   });
 
+  // $: console.log("$instDeltaY", $instDeltaY);
+  let jankytown;
+
+  // sets jankytown for bigger than med.
+
+  let verticalThreshold = 800;
+  let verticalThresholdMobile = 400;
+
+  $: if (!$lessThan768) {
+    if ($scrollY < 10) jankytown = "top-0";
+
+    if ($scrollY > 10 && $scrollY < verticalThreshold)
+      jankytown = "top-0 backdrop-blur-3xl duration-1000";
+
+    if ($scrollY > verticalThreshold && $instDeltaY > 10) {
+      jankytown = "-top-20 backdrop-blur-3xl duration-200";
+    }
+
+    if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl duration-700";
+  }
+  // sets jankytown for smaller than med
+  $: if ($lessThan768) {
+    if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
+      // if ($scrollY <= verticalThresholdMobile) {
+      jankytown =
+        "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200";
+    }
+    if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
+      jankytown = "-bottom-28 duration-400";
+    if ($instDeltaY < -30)
+      jankytown = "bottom-0 backdrop-blur-3xl duration-700";
+  }
+
   let contactLinkClicked = false;
 
   // for logincard ui .. which is lazy loaded below
@@ -152,11 +187,40 @@
   }
 </script>
 
-<TitleHead />
+<svelte:head>
+  <link rel="manifest" href="/manifest.json" />
+
+  {#if $page.status == 200}
+    {@const slashlessRoute = $page.route.id.slice(1)}
+
+    {#if slashlessRoute == ""}
+      <title>{$routes.home.title}</title>
+
+      {@html $routes.home.meta}
+      <!-- meta tag now included in store object -->
+      <!-- for some reason without svelte's '@html', the meta tags break upon reloading certain routes (like plans) -->
+    {:else}
+      {#each Object.keys($routes).slice(1) as key}
+        {@const title = $routes[key].title}
+
+        {#if slashlessRoute.startsWith(key)}
+          <title>{title}</title>
+          <!-- //TODO: meta tags are not attaching uniquely on route changes -->
+          {#if $routes[key].meta}
+            {@html $routes[key].meta}
+          {/if}
+        {/if}
+      {/each}
+    {/if}
+  {:else}
+    <!-- {:else if $page.status == 404} -->
+    <title>Oops 💩</title>
+  {/if}
+</svelte:head>
+
+<svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
 
 <main>
-  <Navbar />
-
   <Modal showModal={contactLinkClicked} bgTint={"backdrop-blur-3xl"}>
     {#key !contactLinkClicked}
       <ul
@@ -257,6 +321,11 @@
     />
     <!-- NOTE: luckily this one modal dropzone has no impact on the perfect lightscore .. having the Dropzone lazyMounted (which I had done before) would prevent the 'popupOnce' logic defined inside Dropzone.svelte; even WITH timeout delay it would not work -->
   </Modal>
+
+  <Navbar2 />
+  <!-- <div class=" z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full ">
+    <Navbar />
+  </div> -->
 
   <div class="px-[7%] pt-32 md:block">
     <slot />
