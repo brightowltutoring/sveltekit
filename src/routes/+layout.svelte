@@ -1,30 +1,16 @@
 <script>
-  import TitleHead from "../lib/TitleHead.svelte";
-  import { isDarkMode } from "$lib/store";
-
   import "../app.css";
-  import {
-    scale,
-    fly,
-    // slide, fade, blur
-  } from "svelte/transition";
-  import { elasticOut, quintOut } from "svelte/easing";
-
-  import { page } from "$app/stores";
-
+  import TitleHead from "$lib/TitleHead.svelte";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-
-  // import LoginCard from "../lib/Login/LoginCard.svelte"; //TODO: remove
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
-
   import Navbar from "$lib/Nav/Navbar.svelte";
-
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 
-  // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
-  let FooterComponent;
-
+  import { onMount } from "svelte";
+  import { page } from "$app/stores";
+  import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
   import {
     setInnerWidthViaMatchMedia,
     lessThan768,
@@ -32,13 +18,26 @@
     showHomeworkModal,
     navAppClicked,
     isLoggedIn,
+    isDarkMode,
   } from "$lib/store";
+  import { scale, fly } from "svelte/transition"; // slide, fade, blur
+  import { elasticOut, quintOut } from "svelte/easing";
 
-  import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
+  onMount(async () => {
+    // This imports various firebase modules IF user has previously signed in with firebase .. i.e. doesnt ship unnecessary js to people who have never logged in.  TODO: would prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead ... and to await the result rather than use some arbitrary timeout delay.
+    isUIDfromIDB(); // depends on the existence of window.indexedDB
+    setTimeout(() => {
+      console.log("hasUID", hasUID);
+      if (hasUID) onMountFirebase();
+    }, 50);
 
-  import { onMount } from "svelte";
+    // $lessThan768 && disableZoomGestures();
+    (isRunningStandalone() || $lessThan768) && disableZoomGestures();
+    setInnerWidthViaMatchMedia();
 
-  // TODO: delete code below this?
+    // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
+  });
+
   let loggedInEmail;
   async function onMountFirebase() {
     const { auth } = await import("$lib/Login/firebase");
@@ -50,9 +49,8 @@
 
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem("emailForSignIn");
-      if (!email) {
+      if (!email)
         email = window.prompt("Please provide your email for confirmation");
-      }
 
       const { signInWithEmailLink } = await import("firebase/auth");
       signInWithEmailLink(auth, email, window.location.href)
@@ -74,7 +72,7 @@
       } else {
         localStorage.removeItem("redirectUrlFromLS"); // clears on logout only; stays even on refresh/exit!
         $isLoggedIn = false;
-        // $showLoginModal = false;
+        $showLoginModal = false;
         loggedInEmail = "";
       }
     });
@@ -123,25 +121,8 @@
     };
   }
 
-  onMount(async () => {
-    isUIDfromIDB();
-
-    setTimeout(() => {
-      console.log("hasUID", hasUID);
-      if (hasUID) onMountFirebase();
-    }, 50);
-    //  TODO: delete above? would also prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead
-
-    // $lessThan768 && disableZoomGestures();
-    (isRunningStandalone() || $lessThan768) && disableZoomGestures();
-    setInnerWidthViaMatchMedia();
-
-    // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
-  });
-
   let contactLinkClicked = false;
 
-  // for logincard ui .. which is lazy loaded below
   const opacityEasingDelay = 100;
   let changeOpacityTo100;
   $: if ($showLoginModal && !$isLoggedIn) {
@@ -231,18 +212,13 @@
     </Modal>
   {/if}
 
-  <!--dec 16,2022: Logincard contains firebase modules and svg icon in svelte components ... lazy loading this yields a perfect lighthouse score (Logincard.svelte is loaded!), however due to the asynchronous nature of dynamic import the UI takes a hit ... which is why I also use 'opacity easing' in Modal.svelte. Seems so janky, however the alternative is much worse: granularly dynamic import everything inside Logincard. Oh and for some reason have to reset '$showLoginModal = true' ... haven't yet figured why it flicker to false when first clicking the login button -->
-
-  <!-- UPDATE: the timeout here is 250ms and 100 ms and in opacity easing logic defined above. These are magic numbers as far as im concerned, up until now the logincard has been jittery on mobile -->
-
   <!-- <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
     <LoginCard /> -->
-  <!-- TODO: when not lazymounting logincard do not use 'changeOpacityTo100' logic ..holy fuu -->
-
   <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
     <!-- bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`} -->
     <LazyMount
       Import={() => {
+        // this '$showLoginModal' was previously needed due to lazymounting the component .. check later if needed
         setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
         return import("$lib/Login/LoginCard.svelte");
       }}
@@ -255,7 +231,7 @@
       dimensionsTW={"w-[80vw] h-[85vh]"}
       brightnessTW={"brightness-95"}
     />
-    <!-- NOTE: luckily this one modal dropzone has no impact on the perfect lightscore .. having the Dropzone lazyMounted (which I had done before) would prevent the 'popupOnce' logic defined inside Dropzone.svelte; even WITH timeout delay it would not work -->
+    <!-- NOTE: having the Dropzone lazyMounted prevents the 'popupOnce' logic defined inside Dropzone.svelte; even WITH timeout delay it would not work. Luckily this one modal dropzone has no impact on the perfect lightscore ! -->
   </Modal>
 
   <div class="px-[7%] pt-32 md:block">

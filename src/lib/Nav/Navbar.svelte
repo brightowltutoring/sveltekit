@@ -92,15 +92,13 @@
     $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"
   }`;
 
-  // These two conditional tailwind classes work together; 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
-  // TODO: i wonder if app splashscreen would make 'fadeInToFullOpacity' unneeded
-  // let hideIfRunningStandalone = $lessThan768 && "hidden";
-
-  let hideIfNotIOS = getOS() !== "iOS" && "hidden"; // added dec4,2022 after noticing that the PWA download popup shows on android already
+  let hideIfNotIOS = getOS() !== "iOS" && "hidden"; // PWA download popup shows on android already
 
   let hideIfRunningStandalone = isRunningStandalone() && "hidden";
   let fadeInToFullOpacity =
-    browser && "opacity-100 transition-opacity duration-1000 ease-in";
+    browser && "opacity-100 transition-opacity duration-500 ease-in";
+
+  // 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
 </script>
 
 <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
@@ -141,8 +139,6 @@
 
       <!-- {#each Object.keys($routes).slice(0, 6) as KEY} -->
       {#each Object.keys($routes).slice(1, 5) as KEY}
-        <!-- class={(KEY == "home" || KEY == "faq") && hideIfRunningStandalone} -->
-        <!-- class={KEY == "home" && hideIfRunningStandalone} -->
         <li
           style={KEY == "login" &&
             $isLoggedIn &&
@@ -160,13 +156,11 @@
               ($routes[KEY].href == "/login" && $showLoginModal) ||
               $routes[KEY].isCurrent}
           />
-          <!-- TODO: do all these need to be 'bind:' -->
         </li>
       {/each}
 
-      <li
-        class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone} "
-      >
+      <!-- class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}" -->
+      <li class="py-2 translate-y-1 scale-125 md:scale-100 ">
         <LightDarkMode />
       </li>
     </ul>
