@@ -6,15 +6,13 @@
   import { isDarkMode } from "$lib/store";
   import { browser } from "$app/environment";
 
-  // NOTE: this global component alters the darkmode JS and CSS DURING the session, including the setting of localStorage reference for continuity into the next session.
-  // To properly set the darkmode CSS on initial page load —— so that there is no flash of content on body + elements —— I have to use a script inside app.html which references localStorage to set the body css. For all other elements I use  css selector logic in the component's style section, so that it changes with body in a non-flashing manner.
+  // This (global) component alters the darkmode JS and CSS DURING the session, including the setting of localStorage reference for continuity into the next session.
+  // NOTE: this component does NOT handle darkmode on initial page load. To properly set the darkmode CSS on initial page load —— so that there is no flash of content —— I have to use a script inside app.html to set the body css using localStorage darkmode reference. For non-body elements I use css parent selector logic (with 'body' as the parent) in the style section of the component; this is mostly useful for top-of-page elements, all other elements that depend on darkmode css could be set with the simpler 'js-in-tailwind-css' way.
 
   // use last session's '$isDarkMode' value
-  if (browser && localStorage.getItem("isDarkModeLS") == "true") {
+  if (browser && localStorage.getItem("isDarkModeLS") == "true")
     $isDarkMode = true;
-  } else {
-    $isDarkMode = false;
-  }
+  else $isDarkMode = false;
 
   // during session set local storage darkmode çopy reactively via global variable '$isDarkMode'
   $: browser && localStorage.setItem("isDarkModeLS", $isDarkMode);

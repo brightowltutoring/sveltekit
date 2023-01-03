@@ -7,7 +7,7 @@
     %sveltekit.head%
   </head>
   <body>
-    <!--TODO: this, alongside +layout.svelte top code does darkmode -->
+    <!-- This set's the body's darkmode css state using localStorage, BEFORE anything svelte renders ... mimicking a server-side approach. Localstorage state set in LightDarkMode.svelte, i.e. from last session. -->
     <script>
       if (localStorage.getItem("isDarkModeLS") == "true") {
         document.body.classList.add("dark-mode");

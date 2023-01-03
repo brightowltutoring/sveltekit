@@ -93,6 +93,8 @@
     };
 
     const dump = {};
+    let dumpString;
+    // let hasUID = false;
     const dbRequest = window.indexedDB.open("firebaseLocalStorageDb");
     dbRequest.onsuccess = () => {
       const db = dbRequest.result;
@@ -109,25 +111,24 @@
           };
         },
         () => {
-          let dumpString = JSON.stringify(dump);
-          // console.log(dumpString);
+          // let dumpString = await JSON.stringify(dump);
+          dumpString = JSON.stringify(dump);
           hasUID = dumpString.includes("uid");
-          console.log("hasUID from inside function", hasUID);
+          // console.log("hasUID from inside function", hasUID);
         }
       );
     };
   }
 
-  onMount(() => {
+  onMount(async () => {
     isUIDfromIDB();
-    setTimeout(() => {
-      console.log("hasUID from inside onMount", hasUID);
-      if (hasUID) onMountFirebase();
-    }, 2000);
-  });
-  // TODO: delete code above this?
 
-  onMount(() => {
+    setTimeout(() => {
+      console.log("hasUID", hasUID);
+      if (hasUID) onMountFirebase();
+    }, 50);
+    //  TODO: delete above? would also prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead
+
     // $lessThan768 && disableZoomGestures();
     (isRunningStandalone() || $lessThan768) && disableZoomGestures();
     setInnerWidthViaMatchMedia();
