@@ -94,29 +94,33 @@
 
     const dump = {};
     let dumpString;
-    // let hasUID = false;
+
     const dbRequest = window.indexedDB.open("firebaseLocalStorageDb");
     dbRequest.onsuccess = () => {
-      const db = dbRequest.result;
-      const stores = ["firebaseLocalStorage"];
+      try {
+        const db = dbRequest.result;
+        const stores = ["firebaseLocalStorage"];
 
-      const tx = db.transaction(stores);
-      asyncForEach(
-        stores,
-        (store, next) => {
-          const req = tx.objectStore(store).getAll();
-          req.onsuccess = () => {
-            dump[store] = req.result;
-            next();
-          };
-        },
-        () => {
-          // let dumpString = await JSON.stringify(dump);
-          dumpString = JSON.stringify(dump);
-          hasUID = dumpString.includes("uid");
-          // console.log("hasUID from inside function", hasUID);
-        }
-      );
+        const tx = db.transaction(stores);
+        asyncForEach(
+          stores,
+          (store, next) => {
+            const req = tx.objectStore(store).getAll();
+            req.onsuccess = () => {
+              dump[store] = req.result;
+              next();
+            };
+          },
+          () => {
+            // let dumpString = await JSON.stringify(dump);
+            dumpString = JSON.stringify(dump);
+            hasUID = dumpString.includes("uid");
+            // console.log("hasUID from inside function", hasUID);
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
     };
   }
 
