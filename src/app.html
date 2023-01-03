@@ -8,20 +8,13 @@
   </head>
   <body>
     <!--TODO: this, alongside +layout.svelte top code does darkmode -->
-    <!-- <script type="module">
-      import { persistDarkModeFromLastSession } from "../src/lib/utils.js";
-
-      persistDarkModeFromLastSession(); -->
-
     <script>
-      const isDarkModeLS = localStorage.getItem("isDarkModeLS");
-      if (isDarkModeLS == "true") {
+      if (localStorage.getItem("isDarkModeLS") == "true") {
         document.body.classList.add("dark-mode");
       } else {
         document.body.classList.remove("dark-mode");
       }
     </script>
-    <!--TODO: this, alongside +layout.svelte top code does darkmode -->
 
     <div>%sveltekit.body%</div>
   </body>

@@ -1,4 +1,45 @@
 <script>
+  import { isDarkMode } from "$lib/store";
+
+  import "../app.css";
+  import {
+    scale,
+    fly,
+    // slide, fade, blur
+  } from "svelte/transition";
+  import { elasticOut, quintOut } from "svelte/easing";
+
+  import { page } from "$app/stores";
+  import { routes } from "$lib/store";
+  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
+
+  // import LoginCard from "../lib/Login/LoginCard.svelte"; //TODO: remove
+  import InView from "$lib/Wrappers/InView.svelte";
+  import Modal from "$lib/Wrappers/Modal.svelte";
+
+  import Navbar from "$lib/Nav/Navbar.svelte";
+  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+
+  // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
+  let FooterComponent;
+
+  import {
+    instDeltaY,
+    scrollY,
+    setInnerWidthViaMatchMedia,
+    lessThan768,
+    showLoginModal,
+    showHomeworkModal,
+    navAppClicked,
+    // isDarkMode,
+    isLoggedIn,
+  } from "$lib/store";
+
+  import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
+
+  import { onMount } from "svelte";
+
+  // TODO: delete code below this?
   let loggedInEmail;
   async function onMountFirebase() {
     const { auth } = await import("$lib/Login/firebase");
@@ -41,62 +82,6 @@
     // }
   }
 
-  // TODO: testing the above (DELETE LATER)
-
-  import { isDarkMode } from "$lib/store";
-  import { browser } from "$app/environment";
-
-  //TODO: NOTE: For dark mode I am persisting '$isDarkMode' (i.e. a reactive, global boolean variable) via a localStorage copy  'isDarkModeLS'. In order to avoid 'flash of content' when returning after a closed session, a script tag in app.html is inserted which uses localStorage 'isDarkModeLS' (i.e. the last value of '$isDarkMode') to reproduce css light/darkmode on body.
-
-  // During the session the localStorage copy 'isDarkModeLS' is updated based on changes to '$isDarkMode'; 'browser' method is needed so that sveltekit doesn't attempt this logic on server-side (localStorage only exists on client-side).
-  $: $isDarkMode, browser && localStorage.setItem("isDarkModeLS", $isDarkMode);
-
-  // On returning to app, set the '$isDarkMode' based on the local storage copy 'isDarkModeLS' ... essentially persisting '$isDarkMode' from previous session
-  if (browser && localStorage.getItem("isDarkModeLS") == "true")
-    $isDarkMode = true;
-  else $isDarkMode = false;
-
-  //TODO: NOTE: For dark mode I am persisting '$isDarkMode' (i.e. a reactive, global boolean variable) via a localStorage copy  'isDarkModeLS'. In order to avoid 'flash of content' when returning after a closed session, a script tag in app.html is inserted which uses localStorage 'isDarkModeLS' (i.e. the last value of '$isDarkMode') to reproduce css light/darkmode on body.
-
-  import "../app.css";
-  import {
-    scale,
-    fly,
-    // slide, fade, blur
-  } from "svelte/transition";
-  import { elasticOut, quintOut } from "svelte/easing";
-
-  import { page } from "$app/stores";
-  import { routes } from "$lib/store";
-  import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-
-  // import LoginCard from "../lib/Login/LoginCard.svelte"; //TODO: remove
-  import InView from "$lib/Wrappers/InView.svelte";
-  import Modal from "$lib/Wrappers/Modal.svelte";
-
-  import Navbar from "$lib/Nav/Navbar.svelte";
-  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-
-  // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
-  let FooterComponent;
-
-  import {
-    instDeltaY,
-    scrollY,
-    setInnerWidthViaMatchMedia,
-    lessThan768,
-    showLoginModal,
-    showHomeworkModal,
-    navAppClicked,
-    // isDarkMode,
-    isLoggedIn,
-  } from "$lib/store";
-
-  import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
-
-  import { onMount } from "svelte";
-
-  // TODO: might delete this
   let hasUID;
   async function isUIDfromIDB() {
     const asyncForEach = (array, callback, done) => {
@@ -132,17 +117,17 @@
       );
     };
   }
-  // TODO: might delete this
 
   onMount(() => {
-    // TODO: might delete this
     isUIDfromIDB();
     setTimeout(() => {
       console.log("hasUID from inside onMount", hasUID);
       if (hasUID) onMountFirebase();
     }, 2000);
-    // TODO: might delete this
+  });
+  // TODO: delete code above this?
 
+  onMount(() => {
     // $lessThan768 && disableZoomGestures();
     (isRunningStandalone() || $lessThan768) && disableZoomGestures();
     setInnerWidthViaMatchMedia();

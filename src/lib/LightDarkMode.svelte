@@ -4,13 +4,24 @@
   import { scale, slide } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
   import { isDarkMode } from "$lib/store";
+  import { browser } from "$app/environment";
 
-  // import { browser } from "$app/environment";
+  // NOTE: this global component alters the darkmode JS and CSS DURING the session, including the setting of localStorage reference for continuity into the next session.
+  // To properly set the darkmode CSS on initial page load —— so that there is no flash of content on body + elements —— I have to use a script inside app.html which references localStorage to set the body css. For all other elements I use  css selector logic in the component's style section, so that it changes with body in a non-flashing manner.
+
+  // use last session's '$isDarkMode' value
+  if (browser && localStorage.getItem("isDarkModeLS") == "true") {
+    $isDarkMode = true;
+  } else {
+    $isDarkMode = false;
+  }
+
+  // during session set local storage darkmode çopy reactively via global variable '$isDarkMode'
+  $: browser && localStorage.setItem("isDarkModeLS", $isDarkMode);
 
   function toggleDM() {
     $isDarkMode = !$isDarkMode;
     document.body.classList.toggle("dark-mode");
-    // localStorage.setItem("darkMode", $isDarkMode);
   }
 </script>
 
