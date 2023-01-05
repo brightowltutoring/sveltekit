@@ -1,5 +1,4 @@
 <script>
-  import { debounce } from "$lib/utils";
   import LightDarkMode from "$lib/LightDarkMode.svelte";
   import Navitem from "$lib/Nav/Navitem.svelte";
   import { browser } from "$app/environment";
@@ -29,10 +28,6 @@
   const verticalThresholdMobile = 400;
 
   $: if (!$lessThan768) {
-    console.log(
-      `$scrollY debounced with a timeout of ${debounceTime}ms`,
-      $scrollY
-    );
     if ($scrollY < 10) jankytown = "top-0";
 
     if ($scrollY > 10 && $scrollY < verticalThreshold)
@@ -46,10 +41,6 @@
   }
   // sets jankytown for smaller than med
   $: if ($lessThan768) {
-    console.log(
-      `$scrollY debounced with a timeout of ${debounceTime}ms`,
-      $scrollY
-    );
     if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
       // if ($scrollY <= verticalThresholdMobile) {
       jankytown =
@@ -71,6 +62,7 @@
   }
 
   $: $routes.login.name = $isLoggedIn ? "🚀" : "Login";
+  // $: $isLoggedIn ? ($routes.login.name = "🚀") : ($routes.login.name = "Login");
 
   let resetLogoClick;
   function clickLogo() {
@@ -106,10 +98,11 @@
 
   // 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
 
-  const debounceTime = 25;
-  function scrollYSetter() {
-    $scrollY = window.scrollY;
-  }
+  // import { debounce } from "$lib/utils";
+  // const debounceTime = 25;
+  // function scrollYSetter() {
+  //   $scrollY = window.scrollY;
+  // }
 </script>
 
 <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
@@ -174,8 +167,10 @@
         </li>
       {/each}
 
-      <!-- class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}" -->
-      <li class="py-2 translate-y-1 scale-125 md:scale-100 ">
+      <li
+        class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}"
+      >
+        <!-- <li class="py-2 translate-y-1 scale-125 md:scale-100 "> -->
         <LightDarkMode />
       </li>
     </ul>
