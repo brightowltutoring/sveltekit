@@ -9,10 +9,46 @@
   // This (global) component alters the darkmode JS and CSS DURING the session, including the setting of localStorage reference for continuity into the next session.
   // NOTE: this component does NOT handle darkmode on initial page load. To properly set the darkmode CSS on initial page load —— so that there is no flash of content —— I have to use a script inside app.html to set the body css using localStorage darkmode reference. For non-body elements I use css parent selector logic (with 'body' as the parent) in the style section of the component; this is mostly useful for top-of-page elements, all other elements that depend on darkmode css could be set with the simpler 'js-in-tailwind-css' way.
 
-  // use last session's '$isDarkMode' value
-  if (browser && localStorage.getItem("isDarkModeLS") == "true")
-    $isDarkMode = true;
-  else $isDarkMode = false;
+  // use last session's '$isDarkMode' value OR from system preferences
+  browser && isDarkModer();
+
+  function isDarkModer() {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    const lastSessionWasDarkmode =
+      localStorage.getItem("isDarkModeLS") == "true";
+
+    // -----
+    if (prefersDark || lastSessionWasDarkmode) {
+      $isDarkMode = true;
+    } else {
+      $isDarkMode = false;
+    }
+    // -----
+    // if (prefersDark) {
+    //   $isDarkMode = true;
+    // }
+
+    // if (lastSessionWasDarkmode) {
+    // if (prefersDark) {
+    //   $isDarkMode = true;
+    // } else {
+    //   $isDarkMode = false;
+    // }
+  }
+  // const prefersDark =
+  //   browser && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  // const lastSessionWasDarkmode =
+  //   browser && localStorage.getItem("isDarkModeLS") == "true";
+
+  // if (prefersDark || lastSessionWasDarkmode) {
+  //   $isDarkMode = true;
+  // } else {
+  //   $isDarkMode = false;
+  // }
 
   // during session set local storage darkmode çopy reactively via global variable '$isDarkMode'
   $: browser && localStorage.setItem("isDarkModeLS", $isDarkMode);

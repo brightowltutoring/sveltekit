@@ -1,6 +1,27 @@
 import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
 
+// debouncer from https://www.freecodecamp.org/news/javascript-debounce-example/
+// TODO: why is 'args / func.apply(this, args)' syntax necessary
+export function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+}
+
+// debouncer variant
+function debounce1(func, timeout = 300) {
+  let timer;
+  return () => {
+    clearTimeout(timer);
+    timer = setTimeout(func, timeout);
+  };
+}
+
 // modified on nov29,2022 from: https://stackoverflow.com/questions/38241480/detect-macos-ios-windows-android-and-linux-os-with-js
 // TODO: might need to add 'browser &&' if this function is not called inside an onMount
 // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios'

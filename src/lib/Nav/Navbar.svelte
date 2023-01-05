@@ -1,10 +1,11 @@
 <script>
-  import { browser } from "$app/environment";
+  import { debounce } from "$lib/utils";
   import LightDarkMode from "$lib/LightDarkMode.svelte";
+  import Navitem from "$lib/Nav/Navitem.svelte";
+  import { browser } from "$app/environment";
+  import { goto } from "$app/navigation";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
-  import Navitem from "$lib/Nav/Navitem.svelte";
-  import { goto } from "$app/navigation";
   import { isRunningStandalone, getOS } from "$lib/utils";
   import {
     isLoggedIn,
@@ -24,12 +25,14 @@
   // jankytown logic added jan 3, 2022
   let jankytown;
 
-  // sets jankytown for bigger than med.
-
-  let verticalThreshold = 800;
-  let verticalThresholdMobile = 400;
+  const verticalThreshold = 800;
+  const verticalThresholdMobile = 400;
 
   $: if (!$lessThan768) {
+    console.log(
+      `$scrollY debounced with a timeout of ${debounceTime}ms`,
+      $scrollY
+    );
     if ($scrollY < 10) jankytown = "top-0";
 
     if ($scrollY > 10 && $scrollY < verticalThreshold)
@@ -43,6 +46,10 @@
   }
   // sets jankytown for smaller than med
   $: if ($lessThan768) {
+    console.log(
+      `$scrollY debounced with a timeout of ${debounceTime}ms`,
+      $scrollY
+    );
     if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
       // if ($scrollY <= verticalThresholdMobile) {
       jankytown =
@@ -63,7 +70,7 @@
     scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
   }
 
-  $: $isLoggedIn ? ($routes.login.name = "🚀") : ($routes.login.name = "Login");
+  $: $routes.login.name = $isLoggedIn ? "🚀" : "Login";
 
   let resetLogoClick;
   function clickLogo() {
@@ -82,13 +89,12 @@
   function handleAppNavClick() {
     clearNavModals();
     $navAppClicked = true;
-    // setTimeout(() => clearNavModals(), 15000);
   }
 
   let btnColor = "sm:bg-red-300 rounded";
   let btnColorHover = "hover:bg-red-300 ";
 
-  $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)]  ${
+  $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${
     $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"
   }`;
 
@@ -99,9 +105,18 @@
     browser && "opacity-100 transition-opacity duration-500 ease-in";
 
   // 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
+
+  const debounceTime = 50;
+  function scrollYSetter() {
+    $scrollY = window.scrollY;
+  }
 </script>
 
-<svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
+<!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
+<svelte:window
+  on:scroll={debounce(() => scrollYSetter(), debounceTime)}
+  on:contextmenu|preventDefault
+/>
 
 <!-- gap-x-24 -->
 <main class="z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
