@@ -5,9 +5,9 @@
   import Modal from "$lib/Wrappers/Modal.svelte";
   import Navbar from "$lib/Nav/Navbar.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  import Footer from "$lib/Footer.svelte";
-  // import InView from "$lib/Wrappers/InView.svelte";
-  // let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
+  // import Footer from "$lib/Footer.svelte";
+  import InView from "$lib/Wrappers/InView.svelte";
+  let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 
   import { onMount } from "svelte";
   import { routes } from "$lib/store";
@@ -237,10 +237,10 @@
   <div class="px-[7%] pt-32 md:block">
     <slot />
 
-    <Footer bind:contactLinkClicked />
+    <!-- <Footer bind:contactLinkClicked /> -->
 
     <!-- without status 200 check, this breaks with error.svelte -->
-    <!-- {#if $page.status == 200 && $page.route.id !== "/classroom"}
+    {#if $page.status == 200 && $page.route.id !== "/classroom"}
       <InView
         margin={"200px"}
         onview={async () =>
@@ -250,7 +250,7 @@
           <FooterComponent.default bind:contactLinkClicked />
         {/if}
       </InView>
-    {/if} -->
+    {/if}
   </div>
 </main>
 
