@@ -21,7 +21,8 @@
       localStorage.getItem("isDarkModeLS") == "true";
 
     // -----
-    if (prefersDark || lastSessionWasDarkmode) {
+    // if (prefersDark || lastSessionWasDarkmode) {
+    if (lastSessionWasDarkmode) {
       $isDarkMode = true;
     } else {
       $isDarkMode = false;
