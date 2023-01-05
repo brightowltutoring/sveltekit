@@ -112,11 +112,11 @@
   }
 </script>
 
-<!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
-<svelte:window
+<svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
+<!-- <svelte:window
   on:scroll={debounce(() => scrollYSetter(), debounceTime)}
   on:contextmenu|preventDefault
-/>
+/> -->
 
 <!-- gap-x-24 -->
 <main class="z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
