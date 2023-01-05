@@ -1,15 +1,19 @@
-// const urlRedirects = {
-//   screenshare: "classroom",
-// };
+const urlRedirects = {
+  screenshare: "classroom",
+  // login: "login",
+};
 
-const urlMap = new Map([["screenshare", "classroom"]]);
+// const urlMap = new Map([
+//   ["screenshare", "classroom"],
+//   ["login", "login2"],
+// ]);
 
 export async function redirectOldUrls({ event, resolve }) {
   // export const handle = async ({ event, resolve }) => {
-  // for (const [key, value] of Object.entries(urlRedirects)) {
-  for (const [key, value] of urlMap) {
+  for (const [key, value] of Object.entries(urlRedirects)) {
+    // for (const [key, value] of urlMap) {
     if (event.url.pathname === `/${key}`) {
-      return Response.redirect(`${event.url.origin}/${value}`, 301);
+      return Response.redirect(`${event.url.origin}/${value}`, 302);
     }
   }
 
@@ -34,4 +38,4 @@ export async function metaTagFixWhenSSR({ event, resolve }) {
 }
 
 import { sequence } from "@sveltejs/kit/hooks";
-export const handle = sequence(metaTagFixWhenSSR, redirectOldUrls);
+export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
