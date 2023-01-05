@@ -2,11 +2,12 @@
   import "../app.css";
 
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
-  import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
   import Navbar from "$lib/Nav/Navbar.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
+  import Footer from "$lib/Footer.svelte";
+  // import InView from "$lib/Wrappers/InView.svelte";
+  // let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 
   import { onMount } from "svelte";
   import { routes } from "$lib/store";
@@ -134,38 +135,6 @@
   }
 </script>
 
-<!-- <TitleHead />.  TODO: NEVER turn <svelte:head> into a component .. app breaks when deployed to cloudflare -->
-<svelte:head>
-  <link rel="manifest" href="/manifest.json" />
-
-  {#if $page.status == 200}
-    {@const slashlessRoute = $page.route.id.slice(1)}
-
-    {#if slashlessRoute == ""}
-      <title>{$routes.home.title}</title>
-
-      {@html $routes.home.meta}
-      <!-- meta tag now included in store object -->
-      <!-- for some reason without svelte's '@html', the meta tags break upon reloading certain routes (like plans) -->
-    {:else}
-      {#each Object.keys($routes).slice(1) as key}
-        {@const title = $routes[key].title}
-
-        {#if slashlessRoute.startsWith(key)}
-          <title>{title}</title>
-          <!-- //TODO: meta tags are not attaching uniquely on route changes -->
-          {#if $routes[key].meta}
-            {@html $routes[key].meta}
-          {/if}
-        {/if}
-      {/each}
-    {/if}
-  {:else}
-    <!-- {:else if $page.status == 404} -->
-    <title>Oops 💩</title>
-  {/if}
-</svelte:head>
-
 <main>
   <Navbar />
 
@@ -268,10 +237,10 @@
   <div class="px-[7%] pt-32 md:block">
     <slot />
 
-    <!-- <Footer bind:contactLinkClicked /> -->
+    <Footer bind:contactLinkClicked />
 
     <!-- without status 200 check, this breaks with error.svelte -->
-    {#if $page.status == 200 && $page.route.id !== "/classroom"}
+    <!-- {#if $page.status == 200 && $page.route.id !== "/classroom"}
       <InView
         margin={"200px"}
         onview={async () =>
@@ -281,6 +250,38 @@
           <FooterComponent.default bind:contactLinkClicked />
         {/if}
       </InView>
-    {/if}
+    {/if} -->
   </div>
 </main>
+
+<!-- <TitleHead />.  TODO: NEVER turn <svelte:head> into a component ... like '<TitleHead />'; app breaks when deployed to cloudflare for some mobile browsers and for the pwa -->
+<svelte:head>
+  <link rel="manifest" href="/manifest.json" />
+
+  {#if $page.status == 200}
+    {@const slashlessRoute = $page.route.id.slice(1)}
+
+    {#if slashlessRoute == ""}
+      <title>{$routes.home.title}</title>
+
+      {@html $routes.home.meta}
+      <!-- meta tag now included in store object -->
+      <!-- for some reason without svelte's '@html', the meta tags break upon reloading certain routes (like plans) -->
+    {:else}
+      {#each Object.keys($routes).slice(1) as key}
+        {@const title = $routes[key].title}
+
+        {#if slashlessRoute.startsWith(key)}
+          <title>{title}</title>
+          <!-- //TODO: meta tags are not attaching uniquely on route changes -->
+          {#if $routes[key].meta}
+            {@html $routes[key].meta}
+          {/if}
+        {/if}
+      {/each}
+    {/if}
+  {:else}
+    <!-- {:else if $page.status == 404} -->
+    <title>Oops 💩</title>
+  {/if}
+</svelte:head>
