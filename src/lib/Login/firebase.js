@@ -11,22 +11,22 @@ import {
 
 // import { getFirestore } from "firebase/firestore/lite";
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_apiKey,
-  authDomain: import.meta.env.VITE_FIREBASE_authDomain,
-  projectId: import.meta.env.VITE_FIREBASE_projectId,
-  storageBucket: import.meta.env.VITE_FIREBASE_storageBucket,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_messagingSenderId,
-  appId: import.meta.env.VITE_FIREBASE_appId,
-};
 // const firebaseConfig = {
-//   apiKey: NV.PUBLIC_FIREBASE_apiKey,
-//   authDomain: NV.PUBLIC_FIREBASE_authDomain,
-//   projectId: NV.PUBLIC_FIREBASE_projectId,
-//   storageBucket: NV.PUBLIC_FIREBASE_storageBucket,
-//   messagingSenderId: NV.PUBLIC_FIREBASE_messagingSenderId,
-//   appId: NV.PUBLIC_FIREBASE_appId,
+//   apiKey: import.meta.env.VITE_FIREBASE_apiKey,
+//   authDomain: import.meta.env.VITE_FIREBASE_authDomain,
+//   projectId: import.meta.env.VITE_FIREBASE_projectId,
+//   storageBucket: import.meta.env.VITE_FIREBASE_storageBucket,
+//   messagingSenderId: import.meta.env.VITE_FIREBASE_messagingSenderId,
+//   appId: import.meta.env.VITE_FIREBASE_appId,
 // };
+const firebaseConfig = {
+  apiKey: NV.PUBLIC_FIREBASE_apiKey,
+  authDomain: NV.PUBLIC_FIREBASE_authDomain,
+  projectId: NV.PUBLIC_FIREBASE_projectId,
+  storageBucket: NV.PUBLIC_FIREBASE_storageBucket,
+  messagingSenderId: NV.PUBLIC_FIREBASE_messagingSenderId,
+  appId: NV.PUBLIC_FIREBASE_appId,
+};
 
 export const app = initializeApp(firebaseConfig);
 

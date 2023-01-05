@@ -12,11 +12,11 @@
 
   async function PostDummyOnce() {
     if (!globalThis.submitOnce) {
-      // const { PUBLIC_UPLOAD_ENDPOINT, PUBLIC_GOOGLE_APP_SCRIPT } = await import(
-      //   "$env/static/public"
-      // );
-      const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
-      const PUBLIC_GOOGLE_APP_SCRIPT = import.meta.env.VITE_GOOGLE_APP_SCRIPT;
+      const { PUBLIC_UPLOAD_ENDPOINT, PUBLIC_GOOGLE_APP_SCRIPT } = await import(
+        "$env/static/public"
+      );
+      // const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
+      // const PUBLIC_GOOGLE_APP_SCRIPT = import.meta.env.VITE_GOOGLE_APP_SCRIPT;
 
       const data = new FormData();
       const file = new File(["foo"], "foo.txt", {

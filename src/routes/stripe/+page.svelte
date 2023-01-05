@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
-  // import { PUBLIC_STRIPE_KEY } from "$env/static/public";
-  const PUBLIC_STRIPE_KEY = import.meta.env.VITE_STRIPE_KEY;
+  import { PUBLIC_STRIPE_KEY } from "$env/static/public";
+  // const PUBLIC_STRIPE_KEY = import.meta.env.VITE_STRIPE_KEY;
   import { fly } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
 
