@@ -1,6 +1,6 @@
 <script>
   import "../app.css";
-  import TitleHead from "$lib/TitleHead.svelte";
+
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import InView from "$lib/Wrappers/InView.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
@@ -9,6 +9,7 @@
   let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 
   import { onMount } from "svelte";
+  import { routes } from "$lib/store";
   import { page } from "$app/stores";
   import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
   import {
@@ -131,12 +132,9 @@
         "opacity-100 transition-opacity duration-100 ease-in";
     }, opacityEasingDelay);
   }
-
-  // import { page } from "$app/stores";
-  import { routes } from "$lib/store";
 </script>
 
-<!-- <TitleHead /> -->
+<!-- <TitleHead />.  TODO: NEVER turn <svelte:head> into a component .. app breaks when deployed to cloudflare -->
 <svelte:head>
   <link rel="manifest" href="/manifest.json" />
 

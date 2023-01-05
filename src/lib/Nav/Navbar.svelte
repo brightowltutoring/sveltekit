@@ -28,6 +28,7 @@
   const verticalThresholdMobile = 400;
 
   $: if (!$lessThan768) {
+    console.log(`$scrollY debounced using ${debounceTime}ms`, $scrollY);
     if ($scrollY < 10) jankytown = "top-0";
 
     if ($scrollY > 10 && $scrollY < verticalThreshold)
@@ -62,7 +63,6 @@
   }
 
   $: $routes.login.name = $isLoggedIn ? "🚀" : "Login";
-  // $: $isLoggedIn ? ($routes.login.name = "🚀") : ($routes.login.name = "Login");
 
   let resetLogoClick;
   function clickLogo() {
@@ -98,18 +98,18 @@
 
   // 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
 
-  // import { debounce } from "$lib/utils";
-  // const debounceTime = 25;
-  // function scrollYSetter() {
-  //   $scrollY = window.scrollY;
-  // }
+  import { debounce } from "$lib/utils";
+  const debounceTime = 25;
+  function scrollYSetter() {
+    $scrollY = window.scrollY;
+  }
 </script>
 
-<svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
-<!-- <svelte:window
+<!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
+<svelte:window
   on:scroll={debounce(() => scrollYSetter(), debounceTime)}
   on:contextmenu|preventDefault
-/> -->
+/>
 
 <!-- gap-x-24 -->
 <main class="z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
