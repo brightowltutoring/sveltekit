@@ -1,5 +1,21 @@
 import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
+import { isDarkMode } from "$lib/store";
+
+export function bodyDarkModer() {
+  // const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const lastSessionWasDarkmode = localStorage.getItem("isDarkModeLS") == "true";
+
+  // if (prefersDark || lastSessionWasDarkmode) {
+  if (lastSessionWasDarkmode) {
+    document.body.classList.add("dark-mode");
+    isDarkMode.set(true);
+  } else {
+    document.body.classList.remove("dark-mode");
+    isDarkMode.set(false);
+  }
+}
 
 // debouncer from https://www.freecodecamp.org/news/javascript-debounce-example/
 // TODO: why is 'args / func.apply(this, args)' syntax necessary
