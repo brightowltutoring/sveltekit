@@ -106,7 +106,7 @@
 
   // 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
 
-  const debounceTime = 55;
+  const debounceTime = 25;
   function scrollYSetter() {
     $scrollY = window.scrollY;
   }
