@@ -9,38 +9,23 @@
   <body>
     <!-- This set's the body's darkmode css state using localStorage, BEFORE anything svelte renders ... mimicking a server-side approach. Localstorage state set in LightDarkMode.svelte, i.e. from last session. -->
     <script>
-      bodyDarkModer();
+      // bodyDarkModer();
 
-      function bodyDarkModer() {
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
+      // function bodyDarkModer() {
+      // const prefersDark = window.matchMedia(
+      //   "(prefers-color-scheme: dark)"
+      // ).matches;
 
-        const lastSessionWasDarkmode =
-          localStorage.getItem("isDarkModeLS") == "true";
+      const lastSessionWasDarkmode =
+        localStorage.getItem("isDarkModeLS") == "true";
 
-        // if (lastSessionWasDarkmode) {
-        //   document.body.classList.add("dark-mode");
-        // } else if (prefersDark) {
-        //   document.body.classList.add("dark-mode");
-        // } else {
-        //   document.body.classList.remove("dark-mode");
-        // }
-
-        // if (prefersDark || lastSessionWasDarkmode) {
-        if (lastSessionWasDarkmode) {
-          document.body.classList.add("dark-mode");
-        } else {
-          document.body.classList.remove("dark-mode");
-        }
-
-        // if (lastSessionWasDarkmode) {
-        // if (prefersDark) {
-        //   document.body.classList.add("dark-mode");
-        // } else {
-        //   document.body.classList.remove("dark-mode");
-        // }
+      // if (prefersDark || lastSessionWasDarkmode) {
+      if (lastSessionWasDarkmode) {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
       }
+      // }
     </script>
 
     <div>%sveltekit.body%</div>
