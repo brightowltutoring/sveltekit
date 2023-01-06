@@ -11,7 +11,6 @@
   let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 
   import { onMount } from "svelte";
-  import { routes } from "$lib/store";
   import { page } from "$app/stores";
   import { disableZoomGestures, getOS, isRunningStandalone } from "$lib/utils";
   import {
@@ -240,8 +239,9 @@
 
     <!-- <Footer bind:contactLinkClicked /> -->
 
-    <!-- without status 200 check, this breaks with error.svelte -->
-    {#if $page.status == 200 && $page.route.id !== "/classroom"}
+    <!-- without status 200 check, this breaks error.svelte for all errored pages ... still not sure why -->
+    <!-- {#if $page.status == 200 && $page.route.id !== "/classroom"} -->
+    {#if $page.route?.id !== "/classroom"}
       <InView
         margin={"200px"}
         onview={async () =>
