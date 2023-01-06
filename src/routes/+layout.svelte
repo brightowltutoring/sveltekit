@@ -1,7 +1,7 @@
 <script>
-  import Seo from "$lib/Seo.svelte";
   import "../app.css";
 
+  import Seo from "$lib/Seo.svelte";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
   import Navbar from "$lib/Nav/Navbar.svelte";
@@ -135,6 +135,11 @@
   }
 </script>
 
+<Seo />
+<svelte:head>
+  <link rel="manifest" href="/manifest.json" />
+</svelte:head>
+
 <main>
   <Navbar />
 
@@ -216,13 +221,14 @@
     <LoginCard /> -->
   <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
     <!-- bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`} -->
-    <LazyMount
+
+    <LazyMount Import={() => import("$lib/Login/LoginCard.svelte")} />
+    <!-- <LazyMount
       Import={() => {
-        // this '$showLoginModal' was previously needed due to lazymounting the component .. check later if needed
         setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
         return import("$lib/Login/LoginCard.svelte");
       }}
-    />
+    /> -->
   </Modal>
 
   <Modal bind:showModal={$showHomeworkModal} bgTint={"bg-[rgba(0,0,0,0.1)]"}>
@@ -239,8 +245,6 @@
 
     <!-- <Footer bind:contactLinkClicked /> -->
 
-    <!-- without status 200 check, this breaks error.svelte for all errored pages ... still not sure why -->
-    <!-- {#if $page.status == 200 && $page.route.id !== "/classroom"} -->
     {#if $page.route?.id !== "/classroom"}
       <InView
         margin={"200px"}
@@ -254,9 +258,3 @@
     {/if}
   </div>
 </main>
-
-<Seo />
-
-<svelte:head>
-  <link rel="manifest" href="/manifest.json" />
-</svelte:head>
