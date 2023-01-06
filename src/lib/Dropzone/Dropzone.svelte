@@ -125,7 +125,7 @@
     background-color: transparent;
   }
 
-  :global(body.dark-mode) form {
+  :global(html.dark-mode) form {
     box-shadow: inset 0 -10px 10px var(--dark-box-shadow-color);
   }
 </style>

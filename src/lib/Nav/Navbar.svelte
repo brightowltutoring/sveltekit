@@ -38,7 +38,8 @@
       jankytown = "-top-20 backdrop-blur-3xl duration-200";
     }
 
-    if ($instDeltaY < -100) jankytown = "top-0 backdrop-blur-3xl duration-700";
+    if ($instDeltaY < -100 && $scrollY != 0)
+      jankytown = "top-0 backdrop-blur-3xl duration-700";
   }
   // sets jankytown for smaller than med
   $: if ($lessThan768) {
@@ -49,7 +50,7 @@
     }
     if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
       jankytown = "-bottom-28 duration-400";
-    if ($instDeltaY < -30)
+    if ($instDeltaY < -30 && $scrollY != 0)
       jankytown = "bottom-0 backdrop-blur-3xl duration-700";
   }
   // jankytown logic added jan 3, 2022

@@ -28,7 +28,7 @@
     background-color: transparent;
   }
 
-  :global(body.dark-mode) button {
+  :global(html.dark-mode) button {
     box-shadow: inset 0 -10px 10px var(--dark-box-shadow-color);
   }
 </style>

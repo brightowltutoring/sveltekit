@@ -162,10 +162,10 @@
   {/each}
 </div> -->
 <style>
-  :global(html video) {
+  video {
     @apply absolute -z-10 top-0 object-cover w-11/12 h-screen blur-2xl;
   }
-  :global(html.dark-mode video) {
+  :global(html.dark-mode) video {
     @apply invert-[0.95] blur-3xl;
   }
 </style>

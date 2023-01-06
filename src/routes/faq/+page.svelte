@@ -258,7 +258,7 @@
   }
 
   /* svelte :global needed to use predefined darkmode logic */
-  :global(body.dark-mode) details:hover {
+  :global(html.dark-mode) details:hover {
     background: #211f51;
   }
 
@@ -281,7 +281,7 @@
   }
 
   /* svelte :global needed to use predefined darkmode logic */
-  :global(body.dark-mode) details[open] {
+  :global(html.dark-mode) details[open] {
     background: var(--light-green);
     color: black;
   }
