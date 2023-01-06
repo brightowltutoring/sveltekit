@@ -1,6 +1,13 @@
 import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
 
+export function initialTheme() {
+  if (sessionStorage.getItem("isDarkModeLS") === "true") return "dark";
+  if (sessionStorage.getItem("isDarkModeLS") === "false") return "light";
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
+  return "light";
+}
+
 // debounce from https://www.freecodecamp.org/news/javascript-debounce-example/; TODO: why is 'args / func.apply(this, args)' syntax necessary
 export function debounce(func, timeout = 300) {
   let timer;

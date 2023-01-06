@@ -1,22 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Using this head script BEFORE the body is loaded achieves darkmode WITHOUT an initial flash of content DESPITE retrieving darkmode information from the client (sessionStorage & window.matchMedia) -->
-    <!-- 
-      ... So why do people insist on complex server-side methods involving framework-specific code AND cookies API ?? This vanilla-ish ('ish' because other half in lightdarkmode.svelte) approach also happens to be 1) less code, 2) simpler to read.   Cookies offer a custom lifetime, however isn't the desired approach for this boolean theme (dark/light) to 1) initialize with device settings, 2) update with session settings? -->
-
-    <script>
-      if (initialTheme() === "dark")
-        document.documentElement.classList.add("dark-mode");
-
-      function initialTheme() {
-        if (sessionStorage.getItem("isDarkModeLS") === "true") return "dark";
-        if (sessionStorage.getItem("isDarkModeLS") === "false") return "light";
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-          return "dark";
-        return "light";
-      }
-    </script>
     <meta charset="utf-8" />
     <link rel="icon" href="%sveltekit.assets%/favicon.png" />
     <meta name="viewport" content="width=device-width" />
