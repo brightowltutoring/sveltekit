@@ -3,13 +3,16 @@
   import { onMount, onDestroy } from "svelte";
   import { isDarkMode } from "$lib/store";
 
+  let wasDarkModeLS = sessionStorage.getItem("isDarkModeLS");
   onMount(() => {
     $isDarkMode = true;
     document.body.classList.add("dark-mode");
   });
   onDestroy(() => {
-    $isDarkMode = false;
-    window.document.body.classList.remove("dark-mode");
+    if (wasDarkModeLS === "false") {
+      $isDarkMode = false;
+      window.document.body.classList.remove("dark-mode");
+    }
   });
 </script>
 

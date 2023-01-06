@@ -6,14 +6,13 @@
 
   // this is to decide in onDestroy to reset to lightmode when navigating away from '/classroom', or to remain in darkmode ... provided darkmode was on before navigating to
 
-  // let wasDarkModeLS = browser && localStorage.getItem("isDarkModeLS");
-  let wasDarkModeLS = localStorage.getItem("isDarkModeLS");
+  let wasDarkModeLS = sessionStorage.getItem("isDarkModeLS");
   onMount(() => {
     $isDarkMode = true;
     document.body.classList.add("dark-mode");
   });
   onDestroy(() => {
-    if (wasDarkModeLS == "false") {
+    if (wasDarkModeLS === "false") {
       $isDarkMode = false;
       window.document.body.classList.remove("dark-mode");
     }
