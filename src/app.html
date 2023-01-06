@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
-    <meta name="viewport" content="width=device-width" />
-    %sveltekit.head%
-  </head>
-  <body>
     <!-- This set's the body's darkmode css state BEFORE anything svelte renders ... mimicking a server-side approach. Localstorage state set in LightDarkMode.svelte -->
     <script>
       if (getTheme() === "dark") {
-        document.body.classList.add("dark-mode");
+        document.documentElement.classList.add("dark-mode");
       } else {
-        document.body.classList.remove("dark-mode");
+        document.documentElement.classList.remove("dark-mode");
       }
 
       function getTheme() {
@@ -23,7 +17,12 @@
         return "light";
       }
     </script>
-
+    <meta charset="utf-8" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    %sveltekit.head%
+  </head>
+  <body>
     <div>%sveltekit.body%</div>
   </body>
 </html>

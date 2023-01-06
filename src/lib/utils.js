@@ -1,24 +1,7 @@
 import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
-import { isDarkMode } from "$lib/store";
 
-function bodyDarkModer() {
-  // const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const lastSessionWasDarkmode = localStorage.getItem("isDarkModeLS") == "true";
-
-  // if (prefersDark || lastSessionWasDarkmode) {
-  if (lastSessionWasDarkmode) {
-    document.body.classList.add("dark-mode");
-    isDarkMode.set(true);
-  } else {
-    document.body.classList.remove("dark-mode");
-    isDarkMode.set(false);
-  }
-}
-
-// debouncer from https://www.freecodecamp.org/news/javascript-debounce-example/
-// TODO: why is 'args / func.apply(this, args)' syntax necessary
+// debounce from https://www.freecodecamp.org/news/javascript-debounce-example/; TODO: why is 'args / func.apply(this, args)' syntax necessary
 export function debounce(func, timeout = 300) {
   let timer;
   return (...args) => {
@@ -27,15 +10,10 @@ export function debounce(func, timeout = 300) {
       func.apply(this, args);
     }, timeout);
   };
-}
-
-// debouncer variant
-function debounce1(func, timeout = 300) {
-  let timer;
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(func, timeout);
-  };
+  // return () => {
+  //   clearTimeout(timer);
+  //   timer = setTimeout(func, timeout);
+  // };
 }
 
 // modified on nov29,2022 from: https://stackoverflow.com/questions/38241480/detect-macos-ios-windows-android-and-linux-os-with-js

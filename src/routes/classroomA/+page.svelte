@@ -6,12 +6,12 @@
   let wasDarkModeLS = sessionStorage.getItem("isDarkModeLS");
   onMount(() => {
     $isDarkMode = true;
-    document.body.classList.add("dark-mode");
+    document.documentElement.classList.add("dark-mode");
   });
   onDestroy(() => {
     if (wasDarkModeLS === "false") {
       $isDarkMode = false;
-      window.document.body.classList.remove("dark-mode");
+      document.documentElement.classList.remove("dark-mode");
     }
   });
 </script>

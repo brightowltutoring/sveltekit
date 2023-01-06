@@ -24,7 +24,7 @@
 
   function toggleDM() {
     $isDarkMode = !$isDarkMode;
-    document.body.classList.toggle("dark-mode");
+    document.documentElement.classList.toggle("dark-mode");
   }
 </script>
 
@@ -43,22 +43,3 @@
     </button>
   </div>
 {/key}
-
-<style>
-  :root {
-    --light: #f7f7f7;
-    --dark: rgb(20, 13, 33);
-    /* --light_darkened: rgb(224, 229, 232); */
-    /* --dark_lightened: rgb(38, 35, 51); */
-  }
-  :global(body) {
-    background: var(--light);
-    color: var(--dark);
-    transition: background-color 0.3s;
-  }
-
-  :global(body.dark-mode) {
-    background: var(--dark);
-    color: var(--light);
-  }
-</style>

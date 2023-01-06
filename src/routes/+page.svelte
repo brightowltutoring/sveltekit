@@ -28,10 +28,10 @@
   muted
   loop
   src="/login-bg-video-blurred.mp4"
-  class="absolute -z-10 top-0 object-cover w-11/12 h-screen {$isDarkMode
-    ? 'invert-[0.95] blur-3xl'
-    : 'blur-2xl'}"
 />
+<!-- class="absolute -z-10 top-0 object-cover w-11/12 h-screen" -->
+<!-- {$isDarkMode ? "invert-[0.95] blur-3xl" : "blur-2xl"}  -->
+<!-- . . . this code snippet replaced with css darkmode selector logic in <style> section (using svelte :global selector and tailwind css with @apply) to avoid flash of unstyled content on initial page load -->
 
 {#if !isRunningStandalone()}
   <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
@@ -161,33 +161,11 @@
     </ReviewCreator>
   {/each}
 </div> -->
-
-<!-- // TODO: these four blocks of code were my attempt to simulate a user dragging their screen down on mobile device .. again goal is to hide addressbar in doing so
-    window.dispatchEvent(new Event("touchstart"));
-
-    window.dispatchEvent(new Event("touchmove"));
-
-    setTimeout(() => {
-      window.scrollTo({
-        top: 100,
-        behavior: "smooth",
-      });
-    }, 500);
-    setTimeout(() => {
-      window.dispatchEvent(new Event("touchend"));
-    }, 1000);
-
-     // window.addEventListener("touchstart", () => {
-    //   console.log("window touchstart (actually fired dispatch event)");
-    // });
-    // window.addEventListener("touchend", () => {
-    //   console.log("window touchend (actually fired dispatch event)");
-    // }); -->
-
-<!-- <style>
-  .page {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-rows: repeat(auto-fit, minmax(100vh, 1fr));
+<style>
+  :global(html video) {
+    @apply absolute -z-10 top-0 object-cover w-11/12 h-screen blur-2xl;
   }
-</style> -->
+  :global(html.dark-mode video) {
+    @apply invert-[0.95] blur-3xl;
+  }
+</style>

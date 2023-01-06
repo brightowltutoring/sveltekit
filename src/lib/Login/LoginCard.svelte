@@ -228,9 +228,9 @@
     background: rgb(242, 247, 250);
   }
 
-  /* :global(body.dark-mode) :where(login-card, logout-card) { */
-  :global(body.dark-mode) login-card,
-  :global(body.dark-mode) logout-card {
+  :global(html.dark-mode) :where(login-card, logout-card) {
+    /* :global(html.dark-mode) login-card,
+  :global(html.dark-mode) logout-card { */
     background: rgb(38, 35, 51);
   }
 </style>

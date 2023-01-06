@@ -53,7 +53,7 @@
     background: rgb(242, 247, 250);
   }
 
-  :global(body.dark-mode) plans-card {
+  :global(html.dark-mode) plans-card {
     background: rgb(38, 35, 51);
   }
 </style>
