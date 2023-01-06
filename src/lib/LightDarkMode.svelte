@@ -6,33 +6,21 @@
   import { isDarkMode } from "$lib/store";
   import { browser } from "$app/environment";
 
-  // import { bodyDarkModer } from "$lib/utils.js";
-  // browser && bodyDarkModer();
+  // Initially sets $isDarkMode to true or false, using sessionStorage and matchMedia logic
+  browser && ($isDarkMode = getTheme() === "dark");
 
-  // This (global) component alters the darkmode JS and CSS DURING the session, including the setting of localStorage reference for continuity into the next session.
-  // NOTE: this component does NOT handle darkmode on initial page load. To properly set the darkmode CSS on initial page load —— so that there is no flash of content —— I have to use a script inside app.html to set the body css using localStorage darkmode reference. For non-body elements I use css parent selector logic (with 'body' as the parent) in the style section of the component; this is mostly useful for top-of-page elements, all other elements that depend on darkmode css could be set with the simpler 'js-in-tailwind-css' way.
+  // During session set local storage darkmode çopy reactively via global variable '$isDarkMode'
+  $: browser && sessionStorage.setItem("isDarkModeLS", $isDarkMode);
 
-  // use last session's '$isDarkMode' value OR from system preferences
-  browser && isDarkModer();
+  // TODO: note: the initial-page-load darkmode is NOT set here; this is set in app.html using the same 'getTheme()' function to set the css on the body element.
 
-  function isDarkModer() {
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    const lastSessionWasDarkmode =
-      localStorage.getItem("isDarkModeLS") == "true";
-
-    // if (prefersDark || lastSessionWasDarkmode) {
-    if (lastSessionWasDarkmode) {
-      $isDarkMode = true;
-    } else {
-      $isDarkMode = false;
-    }
+  function getTheme() {
+    if (sessionStorage.getItem("isDarkModeLS") === "true") return "dark";
+    if (sessionStorage.getItem("isDarkModeLS") === "false") return "light";
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+      return "dark";
+    return "light";
   }
-
-  // during session set local storage darkmode çopy reactively via global variable '$isDarkMode'
-  $: browser && localStorage.setItem("isDarkModeLS", $isDarkMode);
 
   function toggleDM() {
     $isDarkMode = !$isDarkMode;

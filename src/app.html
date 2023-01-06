@@ -7,26 +7,20 @@
     %sveltekit.head%
   </head>
   <body>
-    <!-- This set's the body's darkmode css state using localStorage, BEFORE anything svelte renders ... mimicking a server-side approach. Localstorage state set in LightDarkMode.svelte, i.e. from last session. -->
-    <!-- <script type="module">
-      import { bodyDarkModer } from "../src/lib/utils.js";
-      bodyDarkModer(); -->
+    <!-- This set's the body's darkmode css state BEFORE anything svelte renders ... mimicking a server-side approach. Localstorage state set in LightDarkMode.svelte -->
     <script>
-      bodyDarkModer();
-      function bodyDarkModer() {
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
+      if (getTheme() === "dark") {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
 
-        const lastSessionWasDarkmode =
-          localStorage.getItem("isDarkModeLS") == "true";
-
-        // if (prefersDark || lastSessionWasDarkmode) {
-        if (lastSessionWasDarkmode) {
-          document.body.classList.add("dark-mode");
-        } else {
-          document.body.classList.remove("dark-mode");
-        }
+      function getTheme() {
+        if (sessionStorage.getItem("isDarkModeLS") === "true") return "dark";
+        if (sessionStorage.getItem("isDarkModeLS") === "false") return "light";
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+          return "dark";
+        return "light";
       }
     </script>
 

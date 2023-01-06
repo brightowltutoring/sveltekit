@@ -2,7 +2,7 @@ import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
 import { isDarkMode } from "$lib/store";
 
-export function bodyDarkModer() {
+function bodyDarkModer() {
   // const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   const lastSessionWasDarkmode = localStorage.getItem("isDarkModeLS") == "true";
