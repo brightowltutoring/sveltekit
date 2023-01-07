@@ -8,7 +8,7 @@
 
   // Initialize $isDarkMode using client-side settings via 'initialTheme()';
   // Note: 'initialTheme()' declaration AND dark-mode css initialization done in head of document (see <svelte:head> below)
-  browser && ($isDarkMode = initialTheme() === "dark");
+  browser && ($isDarkMode = initialTheme() === "dark-mode");
 
   function toggleDarkMode() {
     $isDarkMode = !$isDarkMode;
@@ -21,15 +21,14 @@
 
 <svelte:head>
   <script>
-    if (initialTheme() === "dark")
-      document.documentElement.classList.add("dark-mode");
+    document.documentElement.classList.add(initialTheme());
 
     function initialTheme() {
-      if (sessionStorage.getItem("isDarkMode") === "true") return "dark";
-      if (sessionStorage.getItem("isDarkMode") === "false") return "light";
+      if (sessionStorage.getItem("isDarkMode") === "true") return "dark-mode";
+      if (sessionStorage.getItem("isDarkMode") === "false") return "";
       if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-        return "dark";
-      return "light";
+        return "dark-mode";
+      return "";
     }
   </script>
   <!-- ... For darkmode/lightmode, why do people insist on complex server-side methods involving framework-specific code AND cookies API ?? Cookies offer a custom lifetime, however isn't the desired approach for this boolean theme (dark/light) to 1) initialize with device settings, 2) update with session settings? -->
