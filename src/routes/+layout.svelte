@@ -6,9 +6,9 @@
   import Modal from "$lib/Wrappers/Modal.svelte";
   import Navbar from "$lib/Nav/Navbar.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
-  // import Footer from "$lib/Footer.svelte";
   import InView from "$lib/Wrappers/InView.svelte";
   let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
+  // import Footer from "$lib/Footer.svelte";
 
   import { onMount } from "svelte";
   import { page } from "$app/stores";
@@ -27,9 +27,11 @@
 
   onMount(async () => {
     // This imports various firebase modules IF user has previously signed in with firebase .. i.e. doesnt ship unnecessary js to people who have never logged in.  TODO: would prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead ... and to await the result rather than use some arbitrary timeout delay.
-    isUIDfromIDB(); // depends on the existence of window.indexedDB
+
+    isUIDfromIDB();
+
     setTimeout(() => {
-      console.log("hasUID", hasUID);
+      // console.log("hasUID", hasUID);
       if (hasUID) onMountFirebase();
     }, 50);
 
@@ -67,10 +69,6 @@
       if (user) {
         $isLoggedIn = true;
         loggedInEmail = user.email;
-
-        // loginWelcomeText = user.displayName
-        //   ? `Hey ${user.displayName}!`
-        //   : `Hey ${user.email}!`;
       } else {
         localStorage.removeItem("redirectUrlFromLS"); // clears on logout only; stays even on refresh/exit!
         $isLoggedIn = false;
@@ -78,61 +76,66 @@
         loggedInEmail = "";
       }
     });
-    // }
   }
 
-  let hasUID;
+  let hasUID = false;
   async function isUIDfromIDB() {
-    const asyncForEach = (array, callback, done) => {
-      const runAndWait = (i) => {
-        if (i === array.length) return done();
-        return callback(array[i], () => runAndWait(i + 1));
-      };
-      return runAndWait(0);
-    };
+    const dbName = "firebaseLocalStorageDb";
+    const stores = ["firebaseLocalStorage"];
+    const dbRequest = window.indexedDB.open(dbName);
 
     const dump = {};
     let dumpString;
+    let hasUIDinner;
 
-    const dbRequest = window.indexedDB.open("firebaseLocalStorageDb");
-    dbRequest.onsuccess = () => {
+    dbRequest.onsuccess = async function () {
       try {
-        const db = dbRequest.result;
-        const stores = ["firebaseLocalStorage"];
+        const tx = dbRequest.result.transaction(stores);
 
-        const tx = db.transaction(stores);
         asyncForEach(
           stores,
-          (store, next) => {
+          function CALLBACK(store, next) {
             const req = tx.objectStore(store).getAll();
-            req.onsuccess = () => {
+            req.onsuccess = function () {
               dump[store] = req.result;
               next();
             };
           },
-          () => {
-            // let dumpString = await JSON.stringify(dump);
+          function DONE() {
             dumpString = JSON.stringify(dump);
-            hasUID = dumpString.includes("uid");
-            // console.log("hasUID from inside function", hasUID);
+            hasUIDinner = dumpString.includes("uid");
+            hasUID = hasUIDinner;
+            return hasUIDinner;
           }
         );
       } catch (error) {
         console.log(error);
       }
     };
+
+    function asyncForEach(array, callback, done) {
+      // let finalValue=''
+      function runAndWait(i) {
+        if (i === array.length) {
+          // finalValue = done()
+          return done();
+        }
+        return callback(array[i], () => runAndWait(i + 1));
+      }
+      return runAndWait(0);
+    }
   }
+
+  // const opacityEasingDelay = 100;
+  // let changeOpacityTo100;
+  // $: if ($showLoginModal && !$isLoggedIn) {
+  //   setTimeout(() => {
+  //     changeOpacityTo100 =
+  //       "opacity-100 transition-opacity duration-100 ease-in";
+  //   }, opacityEasingDelay);
+  // }
 
   let contactLinkClicked = false;
-
-  const opacityEasingDelay = 100;
-  let changeOpacityTo100;
-  $: if ($showLoginModal && !$isLoggedIn) {
-    setTimeout(() => {
-      changeOpacityTo100 =
-        "opacity-100 transition-opacity duration-100 ease-in";
-    }, opacityEasingDelay);
-  }
 </script>
 
 <Seo />

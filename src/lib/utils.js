@@ -2,8 +2,8 @@ import { browser } from "$app/environment";
 import { scale } from "svelte/transition";
 
 // export function initialTheme() {
-//   if (sessionStorage.getItem("isDarkModeLS") === "true") return "dark";
-//   if (sessionStorage.getItem("isDarkModeLS") === "false") return "light";
+//   if (sessionStorage.getItem("isDarkMode") === "true") return "dark";
+//   if (sessionStorage.getItem("isDarkMode") === "false") return "light";
 //   if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
 //   return "light";
 // }

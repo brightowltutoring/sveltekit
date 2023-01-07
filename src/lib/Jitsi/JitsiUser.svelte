@@ -141,7 +141,7 @@
 <div
   id="meet"
   class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px]`}
-  >
+>
   <!-- class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px] opacity-0 ${changeOpacityTo100}`} -->
   <button on:click={hangUpBtn}>
     <img

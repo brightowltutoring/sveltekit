@@ -1,9 +1,5 @@
 <script>
   import PlansButton from "$lib/Plans/PlansButton.svelte";
-  import {
-    isDarkMode,
-    // elementColor
-  } from "$lib/store";
 
   export let payNowUrl = "";
   export let payLaterUrl = "";
@@ -28,10 +24,11 @@
   export let card; /* 1,2,3, */
 </script>
 
-<plans-card
-  class="block shadow-md hover:scale-105 {$isDarkMode
+<!-- {$isDarkMode
     ? 'hover:shadow-xl'
-    : 'hover:shadow-lg'} rounded-xl m-1 p-7 text-center duration-300 group"
+    : 'hover:shadow-lg'} -->
+<plans-card
+  class="block shadow-md hover:scale-105 rounded-xl m-1 p-7 text-center duration-300 group "
 >
   <!-- style={`background:${$elementColor}`} -->
   <p class="text-4xl font-Poppins py-5 text-center">
@@ -39,7 +36,9 @@
   </p>
 
   {#each payButtons as button}
-    <PlansButton {button} {btnColorHover} {card} />
+    <div class="inline-block group-hover:animate-pulse group-hover:scale-95 ">
+      <PlansButton {button} {btnColorHover} {card} />
+    </div>
   {/each}
 
   <div class="py-4">
@@ -51,9 +50,11 @@
 <style>
   plans-card {
     background: rgb(242, 247, 250);
+    @apply hover:shadow-lg;
   }
 
   :global(html.dark-mode) plans-card {
     background: rgb(38, 35, 51);
+    @apply hover:shadow-xl;
   }
 </style>
