@@ -1,10 +1,18 @@
-<script>
+<script lang="ts">
   import IconSun from "$lib/Icons/IconSun.svelte";
   import IconMoon from "$lib/Icons/IconMoon.svelte";
   import { scale, slide } from "svelte/transition";
   import { elasticOut, quintOut } from "svelte/easing";
   import { isDarkMode } from "$lib/store";
   import { browser } from "$app/environment";
+
+  function initialTheme() {
+    if (sessionStorage.getItem("isDarkMode") === "true") return "dark-mode";
+    if (sessionStorage.getItem("isDarkMode") === "false") return "";
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+      return "dark-mode";
+    return "";
+  }
 
   // Initialize $isDarkMode using client-side settings via 'initialTheme()';
   // Note: 'initialTheme()' declaration AND dark-mode css initialization done in head of document (see <svelte:head> below)
@@ -15,7 +23,7 @@
 
     // These two can also be rewritten with svelte-reactive statements (using '$' and 'browser'), however it's a little more readable (and less code) to consolidate here
     document.documentElement.classList.toggle("dark-mode");
-    sessionStorage.setItem("isDarkMode", $isDarkMode);
+    sessionStorage.setItem("isDarkMode", $isDarkMode.toString());
   }
 </script>
 

@@ -1,10 +1,10 @@
-<script>
-  export let showModal = false;
-  export let bgTint = "bg-[rgba(0,0,0,0.4)]";
-  export let body;
+<script lang="ts">
+  export let showModal: boolean = false;
+  export let bgTint: string = "bg-[rgba(0,0,0,0.4)]";
+  export let body: any = false;
   // default behaviour is to allow navbar through; when user declares 'body' prop then the modal is attached to the document's body ... such as with the calendly modals
 
-  let container;
+  let container: any;
   import { onMount } from "svelte";
   // without this body append logic, the modal inherits strange padding when used inside other components; originally no issues when using modal at the layout level ... which makes sense as it is the top most level in sveltekit
   body && onMount(() => document.body.appendChild(container));

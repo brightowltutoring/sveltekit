@@ -1,4 +1,4 @@
-<script>
+<script type="ts">
   // let PlansSection;
   // let classicoAndMock; // this refers to data that is sent UP from PlansSection.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   // import InView from "$lib/Wrappers/InView.svelte";
@@ -21,7 +21,6 @@
 </script>
 
 <video
-  loading="lazy"
   controlslist="nodownload"
   playsinline
   autoplay

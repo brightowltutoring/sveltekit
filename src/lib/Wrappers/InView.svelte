@@ -1,13 +1,13 @@
 <!-- This code has two streams: either does things the vanilla way or the component-slot way -->
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
 
-  export let vanilla; // IF doing intersection observer the vanilla javascript way, user specifies this parameter as the querySelectee ... i.e. vanilla = {'#someId'}
-  export let once; // existence prop; when declared, observation happens once per 'element'
-  export let onview = () => console.log("i ❤️ slots"); // action taken when 'element' comes "into view"
+  export let vanilla: boolean = false; // IF doing intersection observer the vanilla javascript way, user specifies this parameter as the querySelectee ... i.e. vanilla = {'#someId'}
+  export let once: boolean = false; // existence prop; when declared, observation happens once per 'element'
+  export let onview = (target: any) => console.log("i ❤️ slots"); // action taken when 'element' comes "into view"
 
-  let container; // refers to container div of the <slot/>-component (i.e. when not using vanilla approach)
-  export let single; // existence prop; when declared the observation is done on the first child of <slot/>, rather than the div container of <slot/>, ... useful when modifying a single wrapped element
+  let container: HTMLElement; // refers to container div of the <slot/>-component (i.e. when not using vanilla approach)
+  export let single: boolean = false; // existence prop; when declared the observation is done on the first child of <slot/>, rather than the div container of <slot/>, ... useful when modifying a single wrapped element
 
   export let root = null;
   export let threshold = 0;
@@ -15,7 +15,7 @@
 
   const options = { root, threshold, rootMargin: margin };
 
-  function handleIntersect(entries, observer) {
+  function handleIntersect(entries: any, observer: any) {
     // let entrees = vanilla ? entries : [entries[0]];
     // TODO: UPDATE: when doing for loop it seems to not matter to 'array-ify' even if entries is a single element
     // for (const entry of entrees) {
@@ -37,7 +37,9 @@
     // when viewing and modifying single wrapped element
 
     if (vanilla)
-      document.querySelectorAll(vanilla).forEach((el) => observer.observe(el));
+      document
+        .querySelectorAll("vanilla")
+        .forEach((el) => observer.observe(el));
     // when vanilla javascript is needed ... such as when using external libraries/javascript
   });
 </script>

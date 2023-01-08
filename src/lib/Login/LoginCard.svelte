@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import TwitterLoginButton from "$lib/Login/TwitterLoginButton.svelte";
   import GoogleLoginButton from "$lib/Login/GoogleLoginButton.svelte";
   import MagicLinkSection from "$lib/Login/MagicLinkSection.svelte";
@@ -11,7 +11,7 @@
   // import { auth } from "$lib/Login/firebase";
   // import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
-  import { browser } from "$app/environment";
+  // import { browser } from "$app/environment";
 
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
@@ -21,7 +21,7 @@
   import { logoutFunction } from "$lib/Login/loginFunctions";
   import {
     isLoggedIn,
-    isDarkMode,
+    // isDarkMode,
     // elementColor,
     showLoginModal,
     // lessThan768,
@@ -29,17 +29,17 @@
 
   export let noTransition = false;
 
-  let loginWelcomeText;
+  let loginWelcomeText: any;
 
   // Allows to convert infinite 'animate-ping' tailwind animation to short animation;
   // logic in 'signinWithLinkAndStop' function. Normally would do this with svelte and keyed block,
   // however the destruction/creation of the element interferes with event fire logic I want to maintain
 
-  let loggedInEmail;
+  let loggedInEmail: any;
 
   // these were previously store variables, but the reactive statement below takes care of things
-  let redirectAfterLoginTimeOut;
-  let redirectSetInterval;
+  let redirectAfterLoginTimeOut: any;
+  let redirectSetInterval: any;
 
   // !$showLoginModal just means when unclicking login button ... rename at a future date?
   $: if (!$showLoginModal) {
@@ -98,17 +98,18 @@
     // }
   }
 
-  // onMount(() => {
-  //   onMountFirebase();
-  // });
-  onMount(onMountFirebase);
+  onMount(() => {
+    onMountFirebase();
+  });
+  // onMount(onMountFirebase);
 
   //  Hoisted Functions
 
   // this function needs to detect logout too to reset store
   function redirectLogic(userRedirectUrl = "/login") {
     let redirectTimeInMS = 3000;
-    let seconds = parseInt(redirectTimeInMS / 1000); // i.e. 3
+    let seconds = redirectTimeInMS / 1000; // i.e. 3
+    // let seconds = parseInt(redirectTimeInMS / 1000); // i.e. 3
 
     // redirectSetInterval and redirectAfterLoginTimeOut are global variables, the state of which is also controlled above via a reactive statement
 
@@ -121,7 +122,8 @@
 
     redirectAfterLoginTimeOut = setTimeout(() => {
       $showLoginModal = false;
-      document.getElementById("timeLeft").innerHTML = 3;
+      // document.getElementById("timeLeft").innerHTML = 3;
+      document.getElementById("timeLeft").innerHTML = "3"; //TODO: potential bug
       goto(userRedirectUrl);
     }, redirectTimeInMS);
   }

@@ -1,4 +1,4 @@
-<!-- dec14,530pm: havent yet figured out the passed bounded props  -->
+<!-- <script lang="ts"> -->
 <script>
   import InView from "$lib/Wrappers/InView.svelte";
 
@@ -15,6 +15,9 @@
   // DISCUSSION:
   // > lighthouse for no lazy explainable since inview is already built into many components ... even without lazymount i'm not getting a true baseline. I think chrome might also have some memory of previous version since safari and firefox load noticeably slow with the no lazy version
 </script>
+
+<!-- dec14,530pm: havent yet figured out the passed bounded props  -->
+
 
 <InView onview={getComponent}>
   {#if Component}

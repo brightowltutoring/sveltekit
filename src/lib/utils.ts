@@ -117,13 +117,14 @@ export function customEase(t) {
   // return 1;
 }
 
+// { delay = 0, easing = elasticOut, duration = 3000 }
 export function customFade(
   node,
-  { delay = 0, easing = elasticOut, duration = 3000 }
+  { delay = 0, duration = 3000 }
 ) {
   return {
     delay,
-    easing,
+    // easing,
     duration,
     css: (t, u) =>
       ` opacity: ${0.8 * u + t};
@@ -133,14 +134,15 @@ export function customFade(
   };
 }
 
+// { X = 0, Y = -100, easing = quintOut, duration = 300 }
 export function slider(
   node,
-  { X = 0, Y = -100, easing = quintOut, duration = 300 }
+  { X = 0, Y = -100, duration = 300 }
 ) {
   return {
     X,
     Y,
-    easing,
+    // easing,
     duration,
     css: (t, u) =>
       ` transform: translate(${X * u}px, ${Y * u}px);

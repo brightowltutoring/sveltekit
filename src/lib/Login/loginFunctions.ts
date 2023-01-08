@@ -184,6 +184,7 @@ export async function sendCodeToPhone(PHONE_NUMBER, RECAPTCHA_VERIFIER) {
       .then((confirmationResult) => {
         // SMS sent. Prompt user to type the code from the message, then sign the
         // user in with confirmationResult.confirm(code).
+        // @ts-ignore
         window.confirmationResult = confirmationResult;
         // ...
       })
@@ -198,6 +199,7 @@ export async function sendCodeToPhone(PHONE_NUMBER, RECAPTCHA_VERIFIER) {
 // let clickOrEnterFired = e.type == "click" || e.key == "Enter";
 export function verifySMSCode(SMS_CODE) {
   let code = SMS_CODE;
+  // @ts-ignore
   let confirmationResult = window.confirmationResult;
 
   // sms code is 6 digits-long as of dec1,2022

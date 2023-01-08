@@ -71,7 +71,7 @@ export const instDeltaY = derived(scrollY, ($scrollY) => {
 // export const windowInnerHeight = writable(0);
 // TODO: remove?
 
-export const innerWidth = writable(0);
+export const innerWidth = writable<number>(0);
 export const lessThan768 = derived(
   innerWidth,
   ($innerWidth) => $innerWidth < 768
@@ -98,9 +98,9 @@ export function setInnerWidthViaMatchMedia(pixelWidth = 768) {
 }
 
 // these nav items only since theyre modals, rather than actual routes
-export const showLoginModal = writable(false);
-export const showHomeworkModal = writable(false);
-export const navAppClicked = writable(false);
+export const showLoginModal = writable<boolean>(false) ;
+export const showHomeworkModal = writable<boolean>(false);
+export const navAppClicked = writable<boolean>(false);
 
 // TODO: dec11,2022: I just noticed that the logic of this function (when used inside Navitem.svelte & Navbar.svelte ) is possible with 'event delegation' technique ... i.e. attaching a click event listener on the entire documment, and filtering for event.target.node; might change this to that at a future date. ASIDE: The way I did it here is sveltier (less general) but in some sense more readable WITHIN this framework.
 export function clearNavModals() {
@@ -223,7 +223,7 @@ export const routes = writable({
 });
 
 // export const isDarkMode = writable(true);
-export const isDarkMode = writable(false);
+export const isDarkMode = writable<boolean>(false);
 
 export const light = "#f7f7f7";
 export const light_darkened = "rgb(242,247,250)";
@@ -233,6 +233,7 @@ export const dark = "rgb(37,27,47)";
 export const dark_lightened = "rgb(38, 35, 51)";
 export const dark_lightened_half = "#8f86b8";
 
+// TODO: is this needed anymore?
 export const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
   $isDarkMode ? set(dark_lightened) : set(light_darkened);
 });

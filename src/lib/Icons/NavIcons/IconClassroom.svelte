@@ -4,7 +4,7 @@
   // $: navIconClickedFill =
   //   navIconClicked && (!$isDarkMode ? "fill-rose-600" : "fill-indigo-400");
 
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
   $: fillColor = $isDarkMode ? "white" : "black";
   // $: focusFillColorTW = $isDarkMode
   //   ? "focus:fill-green-400 focus:outline-none"

@@ -3,7 +3,7 @@
   $: navIconClickedFill = navIconClicked && "fill-rose-300";
   // navIconClicked && (!$isDarkMode ? "fill-rose-300" : "fill-indigo-200");
 
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
   $: fillColor = $isDarkMode ? "white" : "black";
 
   let size = 204.376;

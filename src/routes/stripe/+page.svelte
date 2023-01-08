@@ -1,4 +1,7 @@
-<script>
+<script lang="ts">
+  // import "@stripe/stripe-js";
+  import { loadStripe } from "@stripe/stripe-js/pure";
+
   import { onMount } from "svelte";
   import { PUBLIC_STRIPE_KEY } from "$env/static/public";
   // const PUBLIC_STRIPE_KEY = import.meta.env.VITE_STRIPE_KEY;
@@ -8,8 +11,12 @@
   let slideKey = false;
 
   // variables related to url parameters
-  let urlSearch, service, extra, quantity, email;
-  $: firstName = "";
+  let urlSearch: string,
+    service: string,
+    extra: boolean,
+    quantity: number,
+    email: string;
+  let firstName: string = "";
 
   import { app } from "$lib/Login/firebase";
   import { getFunctions, httpsCallable } from "firebase/functions";
@@ -24,11 +31,11 @@
 
     async function stripeRedirectToCheckout() {
       try {
-        const USP = new URLSearchParams(urlSearch);
+        let USP = new URLSearchParams(urlSearch);
 
         const invitee_full_name = USP.get("invitee_full_name");
         const firstNameLowerCase = invitee_full_name
-          .split(" ")[0]
+          ?.split(" ")[0]
           .toLowerCase();
 
         firstName =
@@ -38,7 +45,8 @@
         email = USP.get("invitee_email");
 
         // converts answer_1 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
-        quantity = USP.get("answer_1").match(/\d+(\.\d{1,2})/)[0] * 60;
+        let answer_1: string = USP.get("answer_1").match(/\d+(\.\d{1,2})/)[0];
+        quantity = parseFloat(answer_1) * 60;
 
         // answer_2 relates to adding digital session notes
         if (USP.get("answer_2")) {
@@ -61,16 +69,21 @@
             functions,
             "stripeSessionIdGCF"
           );
-          const { data } = await stripeSessionIdGCF({
+          const { data } = (await stripeSessionIdGCF({
             email,
             extra,
             service,
             quantity,
             // dollar_hourly_rate,
-          });
+          })) as any;
 
           // create checkout session; Stripe() comes from head script
-          Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id });
+
+          const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
+
+          stripe.redirectToCheckout({ sessionId: data.id });
+
+          // Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id }); //non-typescript
         }
       } catch (error) {
         console.log("stripeRedirectToCheckout failed", error);
@@ -81,7 +94,7 @@
 
 <svelte:head>
   <title>Stripe Checkout</title>
-  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://js.stripe.com/v3/" async></script>
 </svelte:head>
 
 <main>

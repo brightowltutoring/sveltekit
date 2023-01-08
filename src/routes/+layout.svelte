@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "../app.css";
 
   import Seo from "$lib/Seo.svelte";
@@ -135,7 +135,7 @@
   //   }, opacityEasingDelay);
   // }
 
-  let contactLinkClicked = false;
+  let contactLinkClicked: boolean = false;
 </script>
 
 <Seo />
@@ -174,13 +174,7 @@
           in:scale
           class="p-10 flex flex-col gap-y-8 font-Poppins text-3xl sm:text-6xl"
         >
-          <li
-            in:scale={{
-              x: 100,
-              duration: 1300,
-              easing: elasticOut,
-            }}
-          >
+          <li in:scale={{ duration: 1300, easing: elasticOut }}>
             <div class="text-6xl">1.</div>
             Open Safari
           </li>

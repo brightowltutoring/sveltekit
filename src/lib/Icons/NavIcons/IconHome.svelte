@@ -1,5 +1,5 @@
 <script>
-  import { isDarkMode } from "$lib/store.js";
+  import { isDarkMode } from "$lib/store";
   $: fillColor = $isDarkMode ? "white" : "black";
   let size = 39.434;
 </script>

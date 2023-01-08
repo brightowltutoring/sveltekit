@@ -1,4 +1,5 @@
 <script>
+  //@ts-nocheck
   export let admin; // existence prop; used for '/classroomA' route
 
   import "$lib/Jitsi/jitsi_api";
@@ -18,6 +19,7 @@
   let api, par;
   let domain = "meet.jit.si";
   let options = {
+    parentNode: document.querySelector("#meet"),
     roomName: "ThinkSolve122822",
     configOverwrite: {
       startWithAudioMuted: true,
@@ -121,6 +123,8 @@
       // can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
       options.parentNode = document.querySelector("#meet");
 
+      // @ts-ignore
+      // TODO: potential bug
       api = new JitsiMeetExternalAPI(domain, options);
 
       const pwd = "thnkslv";
@@ -152,3 +156,7 @@
     />
   </button>
 </div>
+
+<!-- <svelte:head>
+  <script src="https://meet.jit.si/external_api.js"></script>
+</svelte:head> -->
