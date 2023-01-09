@@ -7,7 +7,7 @@
   import Navbar from "$lib/Nav/Navbar.svelte";
   import Dropzone from "$lib/Dropzone/Dropzone.svelte";
   import InView from "$lib/Wrappers/InView.svelte";
-  let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
+  let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
   // import Footer from "$lib/Footer.svelte";
 
   import { onMount } from "svelte";
@@ -52,17 +52,18 @@
     // Confirm the link is a sign-in with email link.
 
     if (isSignInWithEmailLink(auth, window.location.href)) {
-      let email = window.localStorage.getItem("emailForSignIn");
+      let email: string | null = window.localStorage.getItem("emailForSignIn");
       if (!email)
         email = window.prompt("Please provide your email for confirmation");
-
-      const { signInWithEmailLink } = await import("firebase/auth");
-      signInWithEmailLink(auth, email, window.location.href)
-        .then(() => {
-          window.localStorage.removeItem("emailForSignIn");
-          $showLoginModal = true;
-        })
-        .catch((error) => console.log("signInWithEmailLink:", error));
+      else {
+        const { signInWithEmailLink } = await import("firebase/auth");
+        signInWithEmailLink(auth, email, window.location.href)
+          .then(() => {
+            window.localStorage.removeItem("emailForSignIn");
+            $showLoginModal = true;
+          })
+          .catch((error) => console.log("signInWithEmailLink:", error));
+      }
     }
 
     onAuthStateChanged(auth, (user) => {
@@ -84,7 +85,7 @@
     const stores = ["firebaseLocalStorage"];
     const dbRequest = window.indexedDB.open(dbName);
 
-    const dump = {};
+    const dump: Record<string, any> = {};
     let dumpString;
     let hasUIDinner;
 
@@ -94,7 +95,7 @@
 
         asyncForEach(
           stores,
-          function CALLBACK(store, next) {
+          function CALLBACK(store: string, next) {
             const req = tx.objectStore(store).getAll();
             req.onsuccess = function () {
               dump[store] = req.result;
@@ -105,7 +106,7 @@
             dumpString = JSON.stringify(dump);
             hasUIDinner = dumpString.includes("uid");
             hasUID = hasUIDinner;
-            return hasUIDinner;
+            // return hasUIDinner;
           }
         );
       } catch (error) {
@@ -113,9 +114,13 @@
       }
     };
 
-    function asyncForEach(array, callback, done) {
+    function asyncForEach(
+      array: Array<string>,
+      callback: (a: string, b: any) => void,
+      done: () => void
+    ) {
       // let finalValue=''
-      function runAndWait(i) {
+      function runAndWait(i: number): any {
         if (i === array.length) {
           // finalValue = done()
           return done();

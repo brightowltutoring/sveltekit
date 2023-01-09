@@ -2,12 +2,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  export let vanilla: boolean = false; // IF doing intersection observer the vanilla javascript way, user specifies this parameter as the querySelectee ... i.e. vanilla = {'#someId'}
-  export let once: boolean = false; // existence prop; when declared, observation happens once per 'element'
+  export let vanilla = false; // IF doing intersection observer the vanilla javascript way, user specifies this parameter as the querySelectee ... i.e. vanilla = {'#someId'}
+  export let once = false; // existence prop; when declared, observation happens once per 'element'
   export let onview = (target: any) => console.log("i ❤️ slots"); // action taken when 'element' comes "into view"
 
   let container: HTMLElement; // refers to container div of the <slot/>-component (i.e. when not using vanilla approach)
-  export let single: boolean = false; // existence prop; when declared the observation is done on the first child of <slot/>, rather than the div container of <slot/>, ... useful when modifying a single wrapped element
+  export let single = false; // existence prop; when declared the observation is done on the first child of <slot/>, rather than the div container of <slot/>, ... useful when modifying a single wrapped element
 
   export let root = null;
   export let threshold = 0;

@@ -1,4 +1,3 @@
-
 import * as NV from "$env/static/public";
 
 import { initializeApp } from "firebase/app";
@@ -28,7 +27,6 @@ const firebaseConfig = {
   storageBucket: NV.PUBLIC_FIREBASE_storageBucket,
   messagingSenderId: NV.PUBLIC_FIREBASE_messagingSenderId,
   appId: NV.PUBLIC_FIREBASE_appId,
-
 };
 
 export const app = initializeApp(firebaseConfig);

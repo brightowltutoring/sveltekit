@@ -1,6 +1,5 @@
-<script>
-  //@ts-nocheck
-  export let admin; // existence prop; used for '/classroomA' route
+<script lang="ts">
+  export let admin = false; // existence prop; used for '/classroomA' route
 
   import "$lib/Jitsi/jitsi_api";
   // using local copy of jitsi api instead of external link, imported via svelte:head tag (e.g. using: src="https://meet.jit.si/external_api.js")
@@ -16,7 +15,7 @@
     goto("/");
   }
 
-  let api, par;
+  let api: any, par: Array<string>;
   let domain = "meet.jit.si";
   let options = {
     parentNode: document.querySelector("#meet"),
@@ -128,7 +127,7 @@
       api = new JitsiMeetExternalAPI(domain, options);
 
       const pwd = "thnkslv";
-      api.addEventListener("participantRoleChanged", function (event) {
+      api.addEventListener("participantRoleChanged", function (event: any) {
         if (event.role === "moderator") {
           api.executeCommand("password", pwd);
           api.executeCommand("toggleLobby", true);

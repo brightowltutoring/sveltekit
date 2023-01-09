@@ -6,16 +6,10 @@
   import { isDarkMode } from "$lib/store";
   import { browser } from "$app/environment";
 
-  function initialTheme() {
-    if (sessionStorage.getItem("isDarkMode") === "true") return "dark-mode";
-    if (sessionStorage.getItem("isDarkMode") === "false") return "";
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-      return "dark-mode";
-    return "";
-  }
-
   // Initialize $isDarkMode using client-side settings via 'initialTheme()';
   // Note: 'initialTheme()' declaration AND dark-mode css initialization done in head of document (see <svelte:head> below)
+
+  // @ts-ignore  // 'initialTheme()' is defined in the head of the document, as mentioned in comment above
   browser && ($isDarkMode = initialTheme() === "dark-mode");
 
   function toggleDarkMode() {

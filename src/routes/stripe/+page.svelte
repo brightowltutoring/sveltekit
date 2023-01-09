@@ -39,13 +39,13 @@
           .toLowerCase();
 
         firstName =
-          firstNameLowerCase.charAt(0).toUpperCase() +
-          firstNameLowerCase.slice(1);
+          firstNameLowerCase!.charAt(0).toUpperCase() +
+          firstNameLowerCase!.slice(1);
 
-        email = USP.get("invitee_email");
+        email = USP.get("invitee_email")!;
 
         // converts answer_1 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
-        let answer_1: string = USP.get("answer_1").match(/\d+(\.\d{1,2})/)[0];
+        let answer_1 = USP.get("answer_1")!.match(/\d+(\.\d{1,2})/)![0];
         quantity = parseFloat(answer_1) * 60;
 
         // answer_2 relates to adding digital session notes
@@ -57,7 +57,7 @@
 
         // event_type_name sets session as classico or mock
         for (let el of ["classico", "mock"]) {
-          if (USP.get("event_type_name").toLowerCase().includes(el)) {
+          if (USP.get("event_type_name")!.toLowerCase().includes(el)) {
             service = el;
             break;
           }
@@ -81,7 +81,7 @@
 
           const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 
-          stripe.redirectToCheckout({ sessionId: data.id });
+          stripe!.redirectToCheckout({ sessionId: data.id });
 
           // Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id }); //non-typescript
         }

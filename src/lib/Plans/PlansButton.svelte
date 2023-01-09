@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Modal from "$lib/Wrappers/Modal.svelte";
   // import { scale } from "svelte/transition";
   // import { elasticOut } from "svelte/easing";
@@ -10,13 +10,13 @@
 
   export let btnColorHover = "";
 
-  export let card; /* 1,2,3, */
-  export let button;
+  export let card: number; /* 1,2,3, */
+  export let button: any;
   let showMe = false;
   let src = "";
-  let changeOpacityTo100;
+  let changeOpacityTo100: string;
 
-  async function handlePlansModal(BUTTON_URL) {
+  async function handlePlansModal(e: MouseEvent, BUTTON_URL: string) {
     src = BUTTON_URL;
     showMe = true;
     // setTimeout is necessary since iframe doesnt yet exist. I.e. a css transition requires the element to exist, in this case create at opacity-0 and then change to opacity-100 after delay, hopefully when already created.
@@ -41,7 +41,7 @@
 <button
   on:mouseover={() => (src = button.url)}
   on:focus={() => (src = button.url)}
-  on:click={handlePlansModal(button.url)}
+  on:click={(e) => handlePlansModal(e, button.url)}
   class="hover:shadow-md hover:scale-105 duration-200 rounded-md hover:rounded-lg p-4 m-1 group-hover:bg-opacity-80 text-xl text-white {buttonColor[
     card
   ]} {btnColorHover} {button.opacityTW}"

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import PlansButton from "$lib/Plans/PlansButton.svelte";
 
   export let payNowUrl = "";
@@ -7,13 +7,13 @@
   const payButtons = [
     {
       resetter: false,
-      url: payNowUrl,
+      url: payNowUrl as string,
       opacityTW: "bg-opacity-100",
       text: "Pay Now",
     },
     {
       resetter: false,
-      url: payLaterUrl,
+      url: payLaterUrl as string,
       opacityTW: "bg-opacity-70",
       text: "Pay Later",
     },
@@ -21,7 +21,7 @@
 
   export let btnColorHover = "";
 
-  export let card; /* 1,2,3, */
+  export let card: number; /* 1,2,3, */
 </script>
 
 <!-- {$isDarkMode

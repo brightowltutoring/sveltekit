@@ -1,7 +1,7 @@
 <script lang="ts">
-  export let showModal: boolean = false;
-  export let bgTint: string = "bg-[rgba(0,0,0,0.4)]";
-  export let body: any = false;
+  export let showModal = false;
+  export let bgTint = "bg-[rgba(0,0,0,0.4)]";
+  export let body = false;
   // default behaviour is to allow navbar through; when user declares 'body' prop then the modal is attached to the document's body ... such as with the calendly modals
 
   let container: any;

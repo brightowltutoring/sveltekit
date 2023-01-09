@@ -63,6 +63,7 @@
       let email = window.localStorage.getItem("emailForSignIn");
       if (!email) {
         email = window.prompt("Please provide your email for confirmation");
+        return; // ts complaint fix?
       }
 
       const { signInWithEmailLink } = await import("firebase/auth");
@@ -98,10 +99,7 @@
     // }
   }
 
-  onMount(() => {
-    onMountFirebase();
-  });
-  // onMount(onMountFirebase);
+  onMount(onMountFirebase);
 
   //  Hoisted Functions
 
@@ -116,19 +114,19 @@
     redirectSetInterval = setInterval(() => {
       if (seconds > 0) {
         seconds += -1;
-        document.getElementById("timeLeft").innerHTML = ` ${seconds}`;
+        document.getElementById("timeLeft")!.innerHTML = ` ${seconds}`;
       }
     }, 1000);
 
     redirectAfterLoginTimeOut = setTimeout(() => {
       $showLoginModal = false;
       // document.getElementById("timeLeft").innerHTML = 3;
-      document.getElementById("timeLeft").innerHTML = "3"; //TODO: potential bug
+      document.getElementById("timeLeft")!.innerHTML = "3"; //TODO: potential bug
       goto(userRedirectUrl);
     }, redirectTimeInMS);
   }
 
-  async function showLoginModalRedirect(userEmail) {
+  async function showLoginModalRedirect(userEmail: string) {
     let redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
     console.log("redirectUrlFromLS", redirectUrlFromLS);
 
@@ -151,14 +149,14 @@
 
         if (userEmail === doc.id) {
           localStorage.setItem("redirectUrlFromLS", doc.data().redirectUrl);
-          redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+          redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS")!;
           redirectLogic(redirectUrlFromLS);
           return; // break;
         }
         // without parseInt(i) this math conditional breaks
         if (parseInt(i) === querySnapshotSize - 1) {
           localStorage.setItem("redirectUrlFromLS", "/");
-          redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS");
+          redirectUrlFromLS = localStorage.getItem("redirectUrlFromLS")!;
           redirectLogic(redirectUrlFromLS);
         }
       }

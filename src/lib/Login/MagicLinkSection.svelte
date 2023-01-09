@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import {
     regexEmailChecker,
     magicLinkToEmail,
@@ -7,18 +7,25 @@
   import { isDarkMode } from "$lib/store";
 
   let magicLinkSent = false;
-  let emptyEmailInputAnimated;
+  let emptyEmailInputAnimated: boolean;
   $: shortPing = !magicLinkSent && emptyEmailInputAnimated && "animate-ping";
 
-  let magicLinkBtn;
-  let emailField;
-  let emailFieldValue = "";
+  let magicLinkBtn: HTMLElement;
+  let emailField: HTMLElement;
+  let emailFieldValue: string = "";
   let isEmail = false;
 
-  function signinWithLinkAndStop(e) {
+  // @ts-ignore
+  let magicLinkInputVisible = globalThis.magicLinkInputVisible;
+
+  let emailStatusMessage: HTMLElement;
+
+  function signinWithLinkAndStop(e: MouseEvent | KeyboardEvent) {
+    // @ts-ignores
     magicLinkInputVisible = globalThis.magicLinkInputVisible = true;
 
-    let clickOrEnterFired = e.type == "click" || e.key == "Enter";
+    let clickOrEnterFired =
+      (<MouseEvent>e).type == "click" || (<KeyboardEvent>e).key == "Enter";
 
     if (clickOrEnterFired && emailFieldValue == "") {
       emptyEmailInputAnimated = true;
@@ -48,7 +55,7 @@
     }
   }
 
-  function onInputEmailField(EMAIL) {
+  function onInputEmailField(EMAIL: string) {
     isEmail = regexEmailChecker(EMAIL);
     if (EMAIL == "") {
       emailField.style.border = "1px solid #aaa";
@@ -64,8 +71,6 @@
       emailField.style.color = "#10bb8a"; // green-ish colour
     }
   }
-
-  let magicLinkInputVisible = globalThis.magicLinkInputVisible;
 </script>
 
 <button
@@ -84,17 +89,15 @@
 
 {#if magicLinkInputVisible}
   <input
-    on:keydown={(e) => {
-      signinWithLinkAndStop(e);
-    }}
-    on:paste={onInputEmailField(emailFieldValue)}
-    on:keyup={onInputEmailField(emailFieldValue)}
+    on:keydown={signinWithLinkAndStop}
+    on:paste={() => onInputEmailField(emailFieldValue)}
+    on:keyup={() => onInputEmailField(emailFieldValue)}
     bind:this={emailField}
-    class="  text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
+    class="text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
     bind:value={emailFieldValue}
     type="email"
     placeholder="email"
   />
 {/if}
 
-<span id="emailStatusMessage" />
+<span bind:this={emailStatusMessage} />

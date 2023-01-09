@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
   // let PlansSection;
   // let classicoAndMock; // this refers to data that is sent UP from PlansSection.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
   // import InView from "$lib/Wrappers/InView.svelte";
@@ -48,8 +48,8 @@
 
           <button
             on:click={() => {
+              // .getElementById("reviews")
               document
-                // .getElementById("reviews")
                 .getElementById("step1")
                 .scrollIntoView({ behavior: "smooth", block: "start" });
             }}

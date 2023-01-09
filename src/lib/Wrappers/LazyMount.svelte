@@ -1,5 +1,4 @@
-<!-- <script lang="ts"> -->
-<script>
+<script lang="ts">
   import InView from "$lib/Wrappers/InView.svelte";
 
   export let Import = async () => {};
@@ -17,7 +16,6 @@
 </script>
 
 <!-- dec14,530pm: havent yet figured out the passed bounded props  -->
-
 
 <InView onview={getComponent}>
   {#if Component}

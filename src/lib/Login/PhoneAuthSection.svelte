@@ -1,6 +1,6 @@
-<script>
-  let smsCode;
-  let countryCode = "+1";
+<script lang="ts">
+  let smsCode: string;
+  let countryCode: string = "+1";
 
   import {
     regexPhoneChecker,
@@ -12,19 +12,26 @@
   import { isDarkMode } from "$lib/store";
 
   let phoneCodeSent = false;
-  let emptyPhoneInputAnimated;
+  let emptyPhoneInputAnimated: boolean;
   $: shortPing = !phoneCodeSent && emptyPhoneInputAnimated && "animate-ping";
 
-  let sendPhoneCodeBtn;
-  let phoneField;
-  let phoneFieldValue = "";
+  let sendPhoneCodeBtn: HTMLElement;
+  let phoneField: HTMLElement;
+  let phoneFieldValue: string = "";
   let isPhoneNumber = false;
+  let phoneStatusMessage: HTMLElement;
 
-  async function submitPhoneNumber(e) {
+  // @ts-ignore
+  let phoneInputVisible: boolean = globalThis.phoneInputVisible;
+
+  async function submitPhoneNumber(e: MouseEvent | KeyboardEvent) {
     // phoneInputVisible alone allows for immediate change in dom; globalThis.phoneInputVisible allows for persistence given that the component is destroyed (logincard is destroyed when modal closes)
+
+    // @ts-ignore
     phoneInputVisible = globalThis.phoneInputVisible = true;
 
-    let clickOrEnterFired = e.type == "click" || e.key == "Enter";
+    let clickOrEnterFired =
+      (<MouseEvent>e).type == "click" || (<KeyboardEvent>e).key == "Enter";
 
     if (clickOrEnterFired && phoneFieldValue == "") {
       emptyPhoneInputAnimated = true;
@@ -55,20 +62,22 @@
     }
   }
 
-  function onInputPhoneField(PHONE) {
-    isPhoneNumber = regexPhoneChecker(PHONE);
-    if (PHONE == "") {
-      phoneField.style.border = "1px solid #aaa";
-      phoneField.style.color = "#aaa";
-      phoneField.style.fontSize = "16px";
-    } else if (!isPhoneNumber) {
-      phoneField.style.border = "1.5px solid red";
-      phoneField.style.color = "red";
-      phoneField.style.fontSize = "20px";
-    } else if (isPhoneNumber) {
-      phoneField.style.border = "2px solid #59d0ae";
-      phoneField.style.backgroundColor = "white";
-      phoneField.style.color = "#10bb8a"; // green-ish colour
+  function onInputPhoneField(e: ClipboardEvent | KeyboardEvent, PHONE: string) {
+    if (<ClipboardEvent>e || <KeyboardEvent>e) {
+      isPhoneNumber = regexPhoneChecker(PHONE);
+      if (PHONE == "") {
+        phoneField.style.border = "1px solid #aaa";
+        phoneField.style.color = "#aaa";
+        phoneField.style.fontSize = "16px";
+      } else if (!isPhoneNumber) {
+        phoneField.style.border = "1.5px solid red";
+        phoneField.style.color = "red";
+        phoneField.style.fontSize = "20px";
+      } else if (isPhoneNumber) {
+        phoneField.style.border = "2px solid #59d0ae";
+        phoneField.style.backgroundColor = "white";
+        phoneField.style.color = "#10bb8a"; // green-ish colour
+      }
     }
   }
 
@@ -77,7 +86,6 @@
   // phoneInputVisible controls the visibility of an input dom element; starts as false, but then persisted as true even when the component is destroyed ...thanks to storing the truthiness globally in window.phoneInputVisible (which is set to true on an onclick). Note: using 'window.phoneInputVisible' alone does not update DOM immediately (updates only on the next closing-openining of the modal), therefore need phoneInputVisible as well.
 
   // Update: using the modern 'globalThis' instead of 'window' means I don't need to use the sveltekit browser check
-  let phoneInputVisible = globalThis.phoneInputVisible;
 </script>
 
 <!-- dec1,2022: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
@@ -103,9 +111,9 @@
         class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"
       />
       <input
-        on:keydown={(e) => submitPhoneNumber(e)}
-        on:paste={onInputPhoneField(phoneFieldValue)}
-        on:keyup={onInputPhoneField(phoneFieldValue)}
+        on:keydown={submitPhoneNumber}
+        on:paste={(e) => onInputPhoneField(e, phoneFieldValue)}
+        on:keyup={(e) => onInputPhoneField(e, phoneFieldValue)}
         bind:this={phoneField}
         class="col-span-5 text-center p-3 mt-3 focus:outline-none {shortPing}"
         bind:value={phoneFieldValue}
@@ -118,7 +126,7 @@
 
 <div id="recaptcha-container" />
 <div
-  id="phoneStatusMessage"
+  bind:this={phoneStatusMessage}
   class="p-3 font-Poppins {$isDarkMode ? 'text-lime-100' : 'text-rose-600'}"
 />
 
@@ -128,8 +136,8 @@
     <!-- on:keydown={(e) => verifySMSCode(smsCode, e)} -->
     <!-- col-span-2 -->
     <input
-      on:keyup={verifySMSCode(smsCode)}
-      on:paste={verifySMSCode(smsCode)}
+      on:keyup={(e) => verifySMSCode(e, smsCode)}
+      on:paste={(e) => verifySMSCode(e, smsCode)}
       bind:value={smsCode}
       class="col-span-3 text-center p-3 mt-3 focus:outline-none "
       placeholder="enter sms code"

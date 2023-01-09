@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   // Since this entire component is lazyMounted, I don't have to dynamically import modules (e.g. inside the hydrateDropzoneDomEls 'inview callback function')
   import Dropzone from "dropzone";
   import "$lib/Dropzone/dropzone.css";
 
-  // const { PUBLIC_UPLOAD_ENDPOINT } = await import("$env/static/public");
-  const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
+  import { PUBLIC_UPLOAD_ENDPOINT } from "$env/static/public";
+  // const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
 
   import PostDummyOnce from "$lib/Dropzone/PostDummyOnce.svelte";
 
@@ -23,9 +23,9 @@
   export let textSizeTW = "text-3xl";
   export let dimensionsTW = "w-[65vw] sm:w-[60vw] h-[60vh]";
   export let brightnessTW = "brightness-100";
-  let dropzone;
+  let dropzone: any;
 
-  async function hydrateDropzoneDomEls(target) {
+  async function hydrateDropzoneDomEls(target: HTMLElement) {
     console.log("drop it like its 🌶️");
 
     dropzone = new Dropzone(target, {
@@ -39,8 +39,11 @@
   // Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
   // Tested use cases: internet cuts out mid-upload, and internet off when upload started.
   function dropzoneHandleErroredUploads() {
-    let filesToRetry = [];
-    dropzone.on("error", (file) => file.accepted && filesToRetry.push(file));
+    let filesToRetry: Array<any> = [];
+    dropzone.on(
+      "error",
+      (file: any) => file.accepted && filesToRetry.push(file)
+    );
 
     dropzone.on("queuecomplete", () => {
       setTimeout(() => ($showHomeworkModal = false), 1000);
@@ -68,12 +71,15 @@
 
   function dropzonePopUpOnce() {
     // This code fires once since 'globalThis.popUpOnceBoolean' starts out as undefined, then switched to true inside
+
+    // @ts-ignore
     if (!globalThis.popUpOnceBoolean) {
       setTimeout(() => {
         document
-          .querySelector(".dropzone")
+          .querySelector(".dropzone")!
           .dispatchEvent(new CustomEvent("click"));
       }, 75);
+      // @ts-ignore
       globalThis.popUpOnceBoolean = true;
     }
   }

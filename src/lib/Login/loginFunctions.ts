@@ -197,27 +197,32 @@ export async function sendCodeToPhone(PHONE_NUMBER, RECAPTCHA_VERIFIER) {
 
 // export function verifySMSCode(SMS_CODE, e) {
 // let clickOrEnterFired = e.type == "click" || e.key == "Enter";
-export function verifySMSCode(SMS_CODE) {
-  let code = SMS_CODE;
-  // @ts-ignore
-  let confirmationResult = window.confirmationResult;
+export function verifySMSCode(
+  e: ClipboardEvent | KeyboardEvent,
+  SMS_CODE: string
+) {
+  if (<ClipboardEvent>e || <KeyboardEvent>e) {
+    let code = SMS_CODE;
+    // @ts-ignore
+    let confirmationResult = window.confirmationResult;
 
-  // sms code is 6 digits-long as of dec1,2022
-  // if (clickOrEnterFired && code.length >= 5 && confirmationResult) {
-  if (code.length >= 6 && confirmationResult) {
-    confirmationResult
-      .confirm(code)
-      .then((result) => {
-        // User signed in successfully.
-        // const user = result.user;
-        // ...
-        console.log("result", result);
-      })
-      .catch((error) => {
-        // User couldn't sign in (bad verification code?)
-        // ...
-        console.log("error", error);
-      });
+    // sms code is 6 digits-long as of dec1,2022
+    // if (clickOrEnterFired && code.length >= 5 && confirmationResult) {
+    if (code.length >= 6 && confirmationResult) {
+      confirmationResult
+        .confirm(code)
+        .then((result) => {
+          // User signed in successfully.
+          // const user = result.user;
+          // ...
+          console.log("result", result);
+        })
+        .catch((error) => {
+          // User couldn't sign in (bad verification code?)
+          // ...
+          console.log("error", error);
+        });
+    }
   }
 }
 
