@@ -9,15 +9,24 @@
   // Initialize $isDarkMode using client-side settings via 'initialTheme()';
   // Note: 'initialTheme()' declaration AND dark-mode css initialization done in head of document (see <svelte:head> below)
 
-  // @ts-ignore  // 'initialTheme()' is defined in the head of the document, as mentioned in comment above
+  // @ts-ignore; 'initialTheme()' exists in head script (see <svelte:head> below)
   browser && ($isDarkMode = initialTheme() === "dark-mode");
+
+  // initialize AND reactively set sessionStorage
+  $: $isDarkMode,
+    browser && sessionStorage.setItem("isDarkMode", $isDarkMode.toString());
 
   function toggleDarkMode() {
     $isDarkMode = !$isDarkMode;
-
-    // These two can also be rewritten with svelte-reactive statements (using '$' and 'browser'), however it's a little more readable (and less code) to consolidate here
     document.documentElement.classList.toggle("dark-mode");
-    sessionStorage.setItem("isDarkMode", $isDarkMode.toString());
+  }
+
+  function initialTheme() {
+    if (sessionStorage.getItem("isDarkMode") === "true") return "dark-mode";
+    if (sessionStorage.getItem("isDarkMode") === "false") return "";
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+      return "dark-mode";
+    return "";
   }
 </script>
 
