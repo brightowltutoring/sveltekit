@@ -1,8 +1,10 @@
 <script lang="ts">
   import InView from "$lib/Wrappers/InView.svelte";
+  // import type { SvelteComponent } from "svelte";
 
   export let Import = async () => {};
-  let Component;
+  // let Component: SvelteComponent;
+  let Component: any;
   const getComponent = async () => (Component = await Import());
 
   // import { onMount } from "svelte";

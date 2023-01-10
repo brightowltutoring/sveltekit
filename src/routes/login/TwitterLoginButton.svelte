@@ -1,7 +1,7 @@
 <script>
   import { isDarkMode } from "$lib/store";
   import IconTwitter from "$lib/Icons/LoginIcons/IconTwitter.svelte";
-  import { TwitterLogin } from "$lib/Login/loginFunctions";
+  import { TwitterLogin } from "./loginFunctions";
 </script>
 
 <button

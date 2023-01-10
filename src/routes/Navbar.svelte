@@ -1,6 +1,6 @@
 <script>
-  import LightDarkMode from "$lib/LightDarkMode.svelte";
-  import Navitem from "$lib/Nav/Navitem.svelte";
+  import LightDarkMode from "./LightDarkMode.svelte";
+  import Navitem from "./Navitem.svelte";
   import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
   import { scale } from "svelte/transition";
@@ -136,6 +136,7 @@
       <!-- <ul
     class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   > -->
+
       <li class={hideIfRunningStandalone || hideIfNotIOS}>
         <button
           class=" font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200

@@ -1,13 +1,13 @@
 <script lang="ts">
   import "../app.css";
 
-  import Seo from "$lib/Seo.svelte";
+  import Seo from "./Seo.svelte";
   import LazyMount from "$lib/Wrappers/LazyMount.svelte";
   import Modal from "$lib/Wrappers/Modal.svelte";
-  import Navbar from "$lib/Nav/Navbar.svelte";
-  import Dropzone from "$lib/Dropzone/Dropzone.svelte";
+  import Navbar from "./Navbar.svelte";
+  import Dropzone from "./homework/Dropzone.svelte";
   import InView from "$lib/Wrappers/InView.svelte";
-  let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
+  let FooterComponent; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
   // import Footer from "$lib/Footer.svelte";
 
   import { onMount } from "svelte";
@@ -44,7 +44,7 @@
 
   let loggedInEmail;
   async function onMountFirebase() {
-    const { auth } = await import("$lib/Login/firebase");
+    const { auth } = await import("./login/firebase");
     const { onAuthStateChanged, isSignInWithEmailLink } = await import(
       "firebase/auth"
     );
@@ -224,7 +224,7 @@
   <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
     <!-- bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`} -->
 
-    <LazyMount Import={() => import("$lib/Login/LoginCard.svelte")} />
+    <LazyMount Import={() => import("./login/LoginCard.svelte")} />
     <!-- <LazyMount
       Import={() => {
         setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
@@ -250,8 +250,7 @@
     {#if $page.route?.id !== "/classroom"}
       <InView
         margin={"200px"}
-        onview={async () =>
-          (FooterComponent = await import("$lib/Footer.svelte"))}
+        onview={async () => (FooterComponent = await import("./Footer.svelte"))}
       >
         {#if FooterComponent}
           <FooterComponent.default bind:contactLinkClicked />

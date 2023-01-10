@@ -18,7 +18,7 @@
     email: string;
   let firstName: string = "";
 
-  import { app } from "$lib/Login/firebase";
+  import { app } from "../login/firebase";
   import { getFunctions, httpsCallable } from "firebase/functions";
   const functions = getFunctions(app);
 

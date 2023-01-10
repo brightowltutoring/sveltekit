@@ -1,9 +1,9 @@
 <script>
   import { browser } from "$app/environment";
-  import LightDarkMode from "$lib/LightDarkMode.svelte";
+  // import LightDarkMode from "$lib/Nav/LightDarkMode.svelte";
+  // import Navitem from "$lib/Nav/Navitem.svelte";
   import { scale } from "svelte/transition";
   import { elasticOut } from "svelte/easing";
-  import Navitem from "$lib/Nav/Navitem.svelte";
   import { goto } from "$app/navigation";
   import { isRunningStandalone, getOS } from "$lib/utils";
   import {
@@ -110,7 +110,7 @@
           $isLoggedIn &&
           `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
       >
-        <Navitem
+        <!-- <Navitem
           href={$routes[KEY].href}
           content={$routes[KEY].name}
           bind:routes={$routes}
@@ -121,7 +121,7 @@
             $showHomeworkModal) ||
             ($routes[KEY].href == "/login" && $showLoginModal) ||
             $routes[KEY].isCurrent}
-        />
+        /> -->
         <!-- TODO: do all these need to be 'bind:' -->
       </li>
     {/each}
@@ -129,7 +129,7 @@
     <li
       class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone} "
     >
-      <LightDarkMode />
+      <!-- <LightDarkMode /> -->
     </li>
   </ul>
 </logo-and-navbar>

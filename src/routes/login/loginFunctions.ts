@@ -1,18 +1,18 @@
-import { auth } from "$lib/Login/firebase";
+import { auth } from "./firebase";
 import { goto } from "$app/navigation";
 
 // import { get } from "svelte/store";
 // import { lessThan768 } from "$lib/store";
 // import { isRunningStandalone } from "$lib/utils";
 
-export function regexEmailChecker(EMAIL) {
+export function regexEmailChecker(EMAIL: string) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
 }
-export function regexPhoneChecker(PHONE) {
+export function regexPhoneChecker(PHONE: string) {
   return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(PHONE);
 }
 
-export async function magicLinkToEmail(EMAIL) {
+export async function magicLinkToEmail(EMAIL: string) {
   // const auth = await import("$lib/Login/firebase");
   const {
     sendSignInLinkToEmail,
@@ -77,8 +77,8 @@ export async function TwitterLogin() {
       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
       // You can use these server side with your app's credentials to access the Twitter API.
       const credential = TwitterAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const secret = credential.secret;
+      const token = credential!.accessToken;
+      const secret = credential!.secret;
 
       // The signed-in user info.
       const user = result.user;
@@ -140,7 +140,7 @@ export async function GoogleLogin() {
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+      const token = credential!.accessToken;
       // The signed-in user info.
       const user = result.user;
     })
@@ -157,7 +157,9 @@ export async function GoogleLogin() {
   // }
 }
 
-export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID) {
+export async function generateRecaptchaVerifier(
+  RECAPTCHA_CONTAINER_ID: string
+) {
   const { RecaptchaVerifier } = await import("firebase/auth");
 
   // Could also do 'window.recaptchaVerifier = new RecaptchaVerifier ..' and return nothing, however using this function modularly elsewhere it is more readable to return the desired 'verifier' variable as the output of this called function
@@ -165,7 +167,7 @@ export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID) {
     RECAPTCHA_CONTAINER_ID,
     {
       size: "invisible",
-      callback: (response) => {},
+      callback: (response: any) => {},
     },
     auth
   );
@@ -173,7 +175,10 @@ export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID) {
   return recaptchaVerifier;
 }
 
-export async function sendCodeToPhone(PHONE_NUMBER, RECAPTCHA_VERIFIER) {
+export async function sendCodeToPhone(
+  PHONE_NUMBER: string,
+  RECAPTCHA_VERIFIER: any
+) {
   const { setPersistence, browserSessionPersistence, signInWithPhoneNumber } =
     await import("firebase/auth");
 
@@ -211,13 +216,13 @@ export function verifySMSCode(
     if (code.length >= 6 && confirmationResult) {
       confirmationResult
         .confirm(code)
-        .then((result) => {
+        .then((result: any) => {
           // User signed in successfully.
           // const user = result.user;
           // ...
           console.log("result", result);
         })
-        .catch((error) => {
+        .catch((error: any) => {
           // User couldn't sign in (bad verification code?)
           // ...
           console.log("error", error);

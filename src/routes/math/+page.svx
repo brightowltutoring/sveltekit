@@ -3,7 +3,7 @@
 {/key}
 
 <script>
-    import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
+    import SixMathEqnAnim from "$lib//old-stuff/SixMathEqnAnim.svelte";
     // import Katexer from "$lib/MathJaxer.svelte"
     // import Katexer from "$lib/Katexer.svelte"
     import Kajax from "$lib/Kajax.svelte"
@@ -41,7 +41,7 @@ $$
 <!-- <article > -->
 <article class="prose lg:prose-lg {proseInvert}">
 
-    ayo
+
 <SixMathEqnAnim />
 
   <!-- <h1>This page has math is processed by both Katex (green) and Mathjax (blue)</h1> -->

@@ -1,5 +1,5 @@
 <script>
-  import GalleryScale from "$lib/GalleryScale.svelte";
+  import GalleryScale from "$lib/old-stuff/GalleryScale.svelte";
   const reviewers = ["tj", "ben", "miranda", "efe", "paola", "rob", "zaara"];
 </script>
 

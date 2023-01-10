@@ -1,14 +1,14 @@
 <script lang="ts">
-  import TwitterLoginButton from "$lib/Login/TwitterLoginButton.svelte";
-  import GoogleLoginButton from "$lib/Login/GoogleLoginButton.svelte";
-  import MagicLinkSection from "$lib/Login/MagicLinkSection.svelte";
-  import PhoneAuthSection from "$lib/Login/PhoneAuthSection.svelte";
+  import TwitterLoginButton from "./TwitterLoginButton.svelte";
+  import GoogleLoginButton from "./GoogleLoginButton.svelte";
+  import MagicLinkSection from "./MagicLinkSection.svelte";
+  import PhoneAuthSection from "./PhoneAuthSection.svelte";
   // import CloseButton from "$lib/CloseButton.svelte";
 
   // TODO: commented out on dec12, 2022  due to code splitting / dynamic importing
-  // import { app, auth } from "$lib/Login/firebase";
+  // import { app, auth } from "./firebase";
 
-  // import { auth } from "$lib/Login/firebase";
+  // import { auth } from "./firebase";
   // import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
 
   // import { browser } from "$app/environment";
@@ -18,7 +18,7 @@
   import { slide } from "svelte/transition";
   import { quintOut, elasticOut } from "svelte/easing";
   import { isRunningStandalone } from "$lib/utils";
-  import { logoutFunction } from "$lib/Login/loginFunctions";
+  import { logoutFunction } from "./loginFunctions";
   import {
     isLoggedIn,
     // isDarkMode,
@@ -52,7 +52,7 @@
   }
 
   async function onMountFirebase() {
-    const { auth } = await import("$lib/Login/firebase");
+    const { auth } = await import("./firebase");
     const { onAuthStateChanged, isSignInWithEmailLink } = await import(
       "firebase/auth"
     );
@@ -138,7 +138,7 @@
       );
 
       // TODO:dynamic importing added on dec12,2022
-      const { app } = await import("$lib/Login/firebase");
+      const { app } = await import("./firebase");
 
       const db = getFirestore(app);
       const querySnapshot = await getDocs(collection(db, "email"));

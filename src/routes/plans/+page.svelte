@@ -1,5 +1,5 @@
 <script>
-  import PlansSection from "$lib/Plans/PlansSection.svelte";
+  import PlansSection from "./PlansSection.svelte";
 </script>
 
 <PlansSection />

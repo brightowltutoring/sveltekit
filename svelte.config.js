@@ -10,6 +10,15 @@ const config = {
   extensions: [".svelte", ...mdsvexConfig.extensions],
   kit: {
     adapter: adapter(),
+    // vite: {
+    //   resolve: {
+    //     alias: {
+    //       // these are the aliases and paths to them
+    //       "@src": path.resolve("./src/"),
+    //       "@utils": path.resolve("./src/lib/utils"),
+    //     },
+    //   },
+    // },
   },
   preprocess: [preprocess({ postcss: true }), mdsvex(mdsvexConfig)],
 };

@@ -78,7 +78,7 @@
       </button>
 
       <!-- This opens the modal dropzone; no need to instantiate more than one dropzone component since already available at the layout (i.e root) level of the app. -->
-      <LazyMount Import={() => import("$lib/Dropzone/DropzoneOpener.svelte")} />
+      <LazyMount Import={() => import("./homework/DropzoneOpener.svelte")} />
     </div>
 
     <!-- third page -->
@@ -95,7 +95,7 @@
       </button>
 
       <!-- Dec17,2022: not sure how to handle the custom dispatched event, as before. Maybe rethink PlansSection logic -->
-      <LazyMount Import={() => import("$lib/Plans/PlansSection.svelte")} />
+      <LazyMount Import={() => import("./plans/PlansSection.svelte")} />
 
       <!-- TODO: not yet sure how to deal with on:boop in LazyMount ... this is doing things manually; maybe rethink props logic inside PlansSection to do what on:boop accomplishes (i.e. reducing the card elements to first two) -->
 
@@ -130,7 +130,7 @@
       </button>
 
       <!-- <Reviews /> -->
-      <LazyMount Import={() => import("$lib/Reviews/Reviews.svelte")} />
+      <LazyMount Import={() => import("./reviews/Reviews.svelte")} />
     </div>
   </div>
 {:else}

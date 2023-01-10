@@ -1,10 +1,11 @@
-<script>
+<!-- TODO: fix routes and icon types -->
+<script lang="ts">
   // import InView from "$lib/Wrappers/InView.svelte";
-  export let href,
-    content,
-    routes,
-    btnColorHover,
-    icon,
+  export let href: string,
+    content: string,
+    routes: any,
+    btnColorHover: string,
+    icon: any,
     navIconClicked = false;
   // bool, btnColor,
 
@@ -23,7 +24,7 @@
     routes[key].isCurrent = routes[key].href === $page.url.pathname;
   }
 
-  function handleNavButtonClicks(e) {
+  function handleNavButtonClicks(e: MouseEvent) {
     // resets all modals (so modals don't continuously pile up)
     // e.preventDefault();
     clearNavModals();

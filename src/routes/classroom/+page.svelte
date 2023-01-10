@@ -1,6 +1,6 @@
 <script lang="ts">
+  import JitsiUser from "./JitsiUser.svelte";
   import { browser } from "$app/environment";
-  import JitsiUser from "$lib/Jitsi/JitsiUser.svelte";
   import { onMount, onDestroy } from "svelte";
   import { isDarkMode } from "$lib/store";
 
@@ -8,7 +8,6 @@
 
   let wasDarkModeLS = browser && sessionStorage.getItem("isDarkMode");
 
-  console.log("wasDarkModeLS", wasDarkModeLS);
   onMount(() => {
     $isDarkMode = true;
     document.documentElement.classList.add("dark-mode");

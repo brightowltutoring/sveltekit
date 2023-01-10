@@ -7,7 +7,7 @@
     generateRecaptchaVerifier,
     sendCodeToPhone,
     verifySMSCode,
-  } from "$lib/Login/loginFunctions";
+  } from "./loginFunctions";
   import IconPhone from "$lib/Icons/LoginIcons/IconPhone.svelte";
   import { isDarkMode } from "$lib/store";
 

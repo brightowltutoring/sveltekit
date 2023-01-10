@@ -1,12 +1,12 @@
 <script>
   // import InView from "$lib/Wrappers/InView.svelte";
-  import PlansCard from "$lib/Plans/PlansCard.svelte";
+  import PlansCard from "./PlansCard.svelte";
   import { elasticOut } from "svelte/easing";
   import {
     scale,
     //  slide ,fade, fly,
   } from "svelte/transition";
-  import { plansCardArray } from "$lib/Plans/plansCardArray";
+  import { plansCardArray } from "./plansCardArray";
   // import { onMount, createEventDispatcher } from "svelte";
   // import { cssToHead, jsToHead } from "$lib/utils";
   // let dispatch = createEventDispatcher();

@@ -1,5 +1,5 @@
 <script>
-  import { GoogleLogin } from "$lib/Login/loginFunctions";
+  import { GoogleLogin } from "./loginFunctions";
   import { isDarkMode } from "$lib/store";
   import IconGoogle from "$lib/Icons/LoginIcons/IconGoogle.svelte";
 </script>

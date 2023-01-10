@@ -9,7 +9,6 @@
   // Initialize $isDarkMode using client-side settings via 'initialTheme()';
   // Note: 'initialTheme()' declaration AND dark-mode css initialization done in head of document (see <svelte:head> below)
 
-  // @ts-ignore; 'initialTheme()' exists in head script (see <svelte:head> below)
   browser && ($isDarkMode = initialTheme() === "dark-mode");
 
   // initialize AND reactively set sessionStorage
@@ -31,8 +30,13 @@
 </script>
 
 <svelte:head>
-  <script>
-    document.documentElement.classList.add(initialTheme());
+  <script lang="ts">
+    // document.documentElement.classList.add(initialTheme()); // one liner not liked by lighthouse
+    if (initialTheme() === "dark-mode") {
+      document.documentElement.classList.add("dark-mode");
+    } else {
+      document.documentElement.classList.remove("dark-mode");
+    }
 
     function initialTheme() {
       if (sessionStorage.getItem("isDarkMode") === "true") return "dark-mode";

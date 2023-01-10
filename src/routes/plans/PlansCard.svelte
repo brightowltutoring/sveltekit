@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PlansButton from "$lib/Plans/PlansButton.svelte";
+  import PlansButton from "./PlansButton.svelte";
 
   export let payNowUrl = "";
   export let payLaterUrl = "";

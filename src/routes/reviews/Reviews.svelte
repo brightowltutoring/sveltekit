@@ -1,6 +1,7 @@
 <script>
-  import ReviewCreator from "$lib/Reviews/reviewCreator.svx";
-  import { reviews } from "$lib/Reviews/reviews";
+  // @ts-ignore
+  import ReviewCreator from "./reviewCreator.svx";
+  import { reviews } from "./reviews";
 </script>
 
 <div class="scale-90">

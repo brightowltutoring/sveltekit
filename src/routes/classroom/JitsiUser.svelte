@@ -1,7 +1,7 @@
 <script lang="ts">
   export let admin = false; // existence prop; used for '/classroomA' route
 
-  import "$lib/Jitsi/jitsi_api";
+  import "./jitsi_api";
   // using local copy of jitsi api instead of external link, imported via svelte:head tag (e.g. using: src="https://meet.jit.si/external_api.js")
 
   import { onMount } from "svelte";
