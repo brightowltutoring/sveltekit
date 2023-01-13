@@ -1,11 +1,24 @@
 <script>
-  import { isDarkMode } from "$lib/store"; 
+  import { isDarkMode, scrollY } from "$lib/store"; 
   import InView from "$lib/Wrappers/InView.svelte";
  
   export let title = "Great physics tutor!!"
   export let name = "Thomas Finn"
-  export let date = '2022-06-08'
-  
+
+   export let date = '2022-06-08' 
+
+  // TODO: this breaks on ios simulator ... specifically doesnt respect the 'lightmode' restriction
+
+  /*import { spring } from 'svelte/motion';
+  let sineSpring = spring(1, { stiffness: 0.1, damping: 0.25 });
+
+	$: if($isDarkMode) {
+      sineSpring.set(1 - 0.07 * Math.sin(10*$scrollY));
+    }
+     else {  
+      sineSpring.set(0);
+    }
+  */
 </script>
 
 <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">  
@@ -23,8 +36,9 @@
           target.src = "/star.webp";
         }} >
 
-       <img src="" class="opacity-0 transition-opacity duration-300 ease-in hover:scale-125" alt="star" style="width:40px; height:40px" >
-       
+       <img src="" class="opacity-0 transition-opacity duration-300 ease-in hover:scale-125" alt="star" style={`width:40px; height:40px; `} >
+       <!-- filter:hue-rotate(${$sineSpring}turn)  -->
+
       </InView>
 
       {/each}

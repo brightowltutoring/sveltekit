@@ -1,5 +1,5 @@
-*.md
-*.svx
+# *.md
+# *.svx
 
 .DS_Store
 node_modules

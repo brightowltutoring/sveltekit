@@ -1,180 +1,179 @@
-<script>
-  import LightDarkMode from "./LightDarkMode.svelte";
-  import Navitem from "./Navitem.svelte";
-  import { browser } from "$app/environment";
-  import { goto } from "$app/navigation";
-  import { scale } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
-  import { isRunningStandalone, getOS } from "$lib/utils";
-  import {
-    isLoggedIn,
-    routes,
-    scrollY,
-    isDarkMode,
-    navAppClicked,
-    clearNavModals,
-    elementColor,
-    showLoginModal,
-    showHomeworkModal,
-    instDeltaY,
-    lessThan768,
-  } from "$lib/store";
-  import { spring } from "svelte/motion";
+<script lang="ts">
+	// import type { ComponentType } from 'svelte';
 
-  // jankytown logic added jan 3, 2022
-  let jankytown;
+	import LightDarkMode from './LightDarkMode.svelte';
+	import Navitem from './Navitem.svelte';
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
+	import { scale } from 'svelte/transition';
+	import { elasticOut } from 'svelte/easing';
+	import { isRunningStandalone, getOS } from '$lib/utils';
+	import {
+		isLoggedIn,
+		routes,
+		scrollY,
+		isDarkMode,
+		navAppClicked,
+		clearNavModals,
+		elementColor,
+		showLoginModal,
+		showHomeworkModal,
+		instDeltaY,
+		lessThan768
+	} from '$lib/store';
+	import { spring } from 'svelte/motion';
 
-  const verticalThreshold = 800;
-  const verticalThresholdMobile = 400;
+	// jankytown logic added jan 3, 2022
+	let jankytown: string;
 
-  $: if (!$lessThan768) {
-    console.log(`$scrollY debounced using ${debounceTime}ms`, $scrollY);
-    if ($scrollY < 10) jankytown = "top-0";
+	const verticalThreshold = 800;
+	const verticalThresholdMobile = 400;
 
-    if ($scrollY > 10 && $scrollY < verticalThreshold)
-      jankytown = "top-0 backdrop-blur-3xl duration-1000";
+	$: if (!$lessThan768) {
+		console.log(`$scrollY debounced using ${debounceTime}ms`, $scrollY);
+		if ($scrollY < 10) jankytown = 'top-0';
 
-    if ($scrollY > verticalThreshold && $instDeltaY > 10) {
-      jankytown = "-top-20 backdrop-blur-3xl duration-200";
-    }
+		if ($scrollY > 10 && $scrollY < verticalThreshold)
+			jankytown = 'top-0 backdrop-blur-3xl duration-1000';
 
-    if ($instDeltaY < -100 && $scrollY != 0)
-      jankytown = "top-0 backdrop-blur-3xl duration-700";
-  }
-  // sets jankytown for smaller than med
-  $: if ($lessThan768) {
-    if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
-      // if ($scrollY <= verticalThresholdMobile) {
-      jankytown =
-        "bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200";
-    }
-    if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
-      jankytown = "-bottom-28 duration-400";
-    if ($instDeltaY < -30 && $scrollY != 0)
-      jankytown = "bottom-0 backdrop-blur-3xl duration-700";
-  }
-  // jankytown logic added jan 3, 2022
+		if ($scrollY > verticalThreshold && $instDeltaY > 10) {
+			jankytown = '-top-20 backdrop-blur-3xl duration-200';
+		}
 
-  let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
-  let hueRocket = 0;
+		if ($instDeltaY < -100 && $scrollY != 0) jankytown = 'top-0 backdrop-blur-3xl duration-700';
+	}
+	// sets jankytown for smaller than med
+	$: if ($lessThan768) {
+		if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
+			// if ($scrollY <= verticalThresholdMobile) {
+			jankytown = 'bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200';
+		}
+		if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
+			jankytown = '-bottom-28 duration-400';
+		if ($instDeltaY < -30 && $scrollY != 0) jankytown = 'bottom-0 backdrop-blur-3xl duration-700';
+	}
+	// jankytown logic added jan 3, 2022
 
-  $: if ($isLoggedIn && !isRunningStandalone()) {
-    hueRocket = $isDarkMode ? 0.75 : 0;
-    scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
-  }
+	let hueRocket = 0;
+	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
 
-  $: $routes.login.name = $isLoggedIn ? "🚀" : "Login";
+	$: if ($isLoggedIn && !isRunningStandalone()) {
+		hueRocket = $isDarkMode ? 0.75 : 0;
+		scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
+	}
 
-  let resetLogoClick;
-  function clickLogo() {
-    clearNavModals();
-    goto("/");
+	$: $routes.login.name = $isLoggedIn ? '🚀' : 'Login';
 
-    resetLogoClick = !resetLogoClick;
+	let resetLogoClick: boolean;
+	function clickLogo() {
+		clearNavModals();
+		goto('/');
 
-    for (let key in $routes) {
-      $routes[key].isCurrent = false;
-    }
+		resetLogoClick = !resetLogoClick;
 
-    $routes.home.isCurrent = true;
-  }
+		for (let key in $routes) {
+			$routes[key].isCurrent = false;
+		}
 
-  function handleAppNavClick() {
-    clearNavModals();
-    $navAppClicked = true;
-  }
+		$routes.home.isCurrent = true;
+	}
 
-  let btnColor = "sm:bg-red-300 rounded";
-  let btnColorHover = "hover:bg-red-300 ";
+	function handleAppNavClick() {
+		clearNavModals();
+		$navAppClicked = true;
+	}
 
-  $: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${
-    $isDarkMode ? "to-[rgb(37,35,91)]" : "to-red-200"
-  }`;
+	$: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${
+		$isDarkMode ? 'to-[rgb(37,35,91)]' : 'to-red-200'
+	}`;
 
-  let hideIfNotIOS = getOS() !== "iOS" && "hidden"; // PWA download popup shows on android already
+	let hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; //`${getOS() !== "iOS" && "hidden"}`; // PWA download popup shows on android already
 
-  let hideIfRunningStandalone = isRunningStandalone() && "hidden";
-  let fadeInToFullOpacity =
-    browser && "opacity-100 transition-opacity duration-500 ease-in";
+	let hideIfRunningStandalone = isRunningStandalone() && 'hidden'; //`${isRunningStandalone() && "hidden"}`;
 
-  // 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
+	let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-500 ease-in';
 
-  import { debounce } from "$lib/utils";
-  const debounceTime = 25;
-  function scrollYSetter() {
-    $scrollY = window.scrollY;
-  }
+	// 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
+
+	import { debounce } from '$lib/utils';
+	const debounceTime = 25;
+	function scrollYSetter() {
+		$scrollY = window.scrollY;
+	}
 </script>
 
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
 <svelte:window
-  on:scroll={debounce(() => scrollYSetter(), debounceTime)}
-  on:contextmenu|preventDefault
+	on:scroll={debounce(() => scrollYSetter(), debounceTime)}
+	on:contextmenu|preventDefault
 />
 
 <!-- gap-x-24 -->
 <main class="z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
-  <logo-and-navbar
-    class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center gap-x-32 md:justify-between w-full"
-  >
-    {#key resetLogoClick}
-      <button
-        class=" p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
+	<logo-and-navbar
+		class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center gap-x-32 md:justify-between w-full"
+	>
+		{#key resetLogoClick}
+			<button
+				class=" p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
     md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
-        in:scale={{ duration: 1200, easing: elasticOut }}
-        on:click={clickLogo}
-      >
-        THINKSOLVE
-      </button>
-    {/key}
+				in:scale={{ duration: 1200, easing: elasticOut }}
+				on:click={clickLogo}
+			>
+				THINKSOLVE
+			</button>
+		{/key}
 
-    <!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
-    <ul
-      class="text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto  {bgGradientColor} hideScrollBar overflow-x-scroll overflow-y-hidden"
-    >
-      <!-- py-3 px-5 -->
-      <!-- <ul
+		<!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
+		<ul
+			class="text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto  {bgGradientColor} hideScrollBar overflow-x-scroll overflow-y-hidden"
+		>
+			<!-- py-3 px-5 -->
+			<!-- <ul
     class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   > -->
 
-      <li class={hideIfRunningStandalone || hideIfNotIOS}>
-        <button
-          class=" font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
+			<li class={hideIfRunningStandalone || hideIfNotIOS}>
+				<button
+					class="font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
       border-b-1 rounded "
-          on:click={handleAppNavClick}
-        >
-          App
-        </button>
-      </li>
+					on:click={handleAppNavClick}
+				>
+					App
+				</button>
+			</li>
 
-      <!-- {#each Object.keys($routes).slice(0, 6) as KEY} -->
-      {#each Object.keys($routes).slice(1, 5) as KEY}
-        <li
-          style={KEY == "login" &&
-            $isLoggedIn &&
-            `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
-        >
-          <Navitem
-            href={$routes[KEY].href}
-            content={$routes[KEY].name}
-            bind:routes={$routes}
-            bind:btnColor
-            bind:btnColorHover
-            icon={$routes[KEY].icon}
-            navIconClicked={($routes[KEY].href == "/homework" &&
-              $showHomeworkModal) ||
-              ($routes[KEY].href == "/login" && $showLoginModal) ||
-              $routes[KEY].isCurrent}
-          />
-        </li>
-      {/each}
+			<!-- {#each Object.keys($routes).slice(0, 6) as KEY} -->
+			{#each Object.keys($routes).slice(1, 5) as KEY}
+				{@const { href, name, icon, isCurrent } = $routes[KEY]}
+				{@const navIconClicked =
+					(href == '/homework' && $showHomeworkModal) ||
+					(href == '/login' && $showLoginModal) ||
+					isCurrent}
+				{@const loggedInDynamicRocket =
+					KEY == 'login' &&
+					$isLoggedIn &&
+					`transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
 
-      <!-- <li
+				<li style={loggedInDynamicRocket}>
+					<Navitem
+						{navIconClicked}
+						{href}
+						{icon}
+						{name}
+						bind:routes={$routes}
+						btnColorHover={'hover:bg-red-300'}
+					/>
+					<!-- btnColor={'sm:bg-red-300 rounded'} -->
+				</li>
+			{/each}
+
+			<!-- <li
         class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}"
       > -->
-      <li class="py-2 translate-y-1 scale-125 md:scale-100 ">
-        <LightDarkMode />
-      </li>
-    </ul>
-  </logo-and-navbar>
+			<li class="py-2 translate-y-1 scale-125 md:scale-100 ">
+				<LightDarkMode />
+			</li>
+		</ul>
+	</logo-and-navbar>
 </main>

@@ -1,72 +1,64 @@
-<!-- TODO: fix routes and icon types -->
+<!-- TODO: fix types for: routes, icon -->
 <script lang="ts">
-  // import InView from "$lib/Wrappers/InView.svelte";
-  export let href: string,
-    content: string,
-    routes: any,
-    btnColorHover: string,
-    icon: any,
-    navIconClicked = false;
-  // bool, btnColor,
+	// import InView from "$lib/Wrappers/InView.svelte";
+	import type { ComponentType } from 'svelte';
 
-  import { isRunningStandalone } from "$lib/utils";
-  import {
-    showLoginModal,
-    showHomeworkModal,
-    clearNavModals,
-    // lessThan768,
-  } from "$lib/store";
-  import { page } from "$app/stores";
+	export let href: string,
+		name: string,
+		routes: any,
+		btnColorHover: string,
+		icon: ComponentType,
+		navIconClicked: boolean = false;
+	// bool, btnColor,
 
-  // this allows going back and button click matching with route
-  // could've done this in if/else but the boolean nature here made it unnecessary
-  $: for (let key in routes) {
-    routes[key].isCurrent = routes[key].href === $page.url.pathname;
-  }
+	import { isRunningStandalone } from '$lib/utils';
+	import {
+		showLoginModal,
+		showHomeworkModal,
+		clearNavModals
+		// lessThan768,
+	} from '$lib/store';
+	import { page } from '$app/stores';
 
-  function handleNavButtonClicks(e: MouseEvent) {
-    // resets all modals (so modals don't continuously pile up)
-    // e.preventDefault();
-    clearNavModals();
+	// this allows going back and button click matching with route
+	// could've done this in if/else but the boolean nature here made it unnecessary
+	$: for (let key in routes) {
+		routes[key].isCurrent = routes[key].href === $page.url.pathname;
+	}
 
-    // sets the correct modal
-    if (href == "/homework") {
-      e.preventDefault();
-      $showHomeworkModal = true;
-      return;
-    }
-    if (href == "/login") {
-      e.preventDefault();
+	function handleNavButtonClicks(e: MouseEvent) {
+		// resets all modals (so modals don't continuously pile up)
+		clearNavModals();
 
-      $showLoginModal = true;
-
-      return;
-    }
-  }
+		// sets the correct modal
+		if (href == '/homework') {
+			e.preventDefault();
+			$showHomeworkModal = true;
+			return;
+		}
+		if (href == '/login') {
+			e.preventDefault();
+			$showLoginModal = true;
+			return;
+		}
+	}
 </script>
 
 <a
-  data-sveltekit-preload-data
-  on:click={handleNavButtonClicks}
-  {href}
-  class="block font-Nunito font-thin 
+	data-sveltekit-preload-data
+	on:click={handleNavButtonClicks}
+	{href}
+	class="block font-Nunito font-thin 
 
   {!isRunningStandalone() &&
-    ` ${btnColorHover}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`} "
+		` ${btnColorHover}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`} "
 >
-  <!-- {#if $lessThan768} -->
-  {#if isRunningStandalone()}
-    <div
-      class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 md:px-10"
-    >
-      <svelte:component this={icon} bind:navIconClicked />
-      <!-- <InView margin={"400px"}>
-        <svelte:component this={icon} bind:navIconClicked />
-      </InView> -->
-
-      <span class="text-xs text-center">{content}</span>
-    </div>
-  {:else}
-    {content}
-  {/if}
+	{#if isRunningStandalone()}
+		<div class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 md:px-10">
+			<svelte:component this={icon} bind:navIconClicked />
+			<span class="text-xs text-center">{name}</span>
+		</div>
+	{:else}
+		{name}
+	{/if}
 </a>
