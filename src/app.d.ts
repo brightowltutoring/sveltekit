@@ -6,4 +6,10 @@ declare namespace App {
 	// interface Locals {}
 	// interface PageData {}
 	// interface Platform {}
+	// interface globalThis {
+	// 	submitOnce: boolean;
+	// }
 }
+// declare global {
+// 	var submitOnce: boolean;
+// }

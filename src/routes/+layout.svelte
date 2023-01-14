@@ -137,7 +137,7 @@
 	//   }, opacityEasingDelay);
 	// }
 
-	let contactLinkClicked: boolean = false;
+	let contactLinkClicked = false;
 </script>
 
 <Seo />
@@ -223,7 +223,7 @@
 	<Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
 		<!-- bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`} -->
 
-		<LazyMount Import={() => import('./login/LoginCard.svelte')} />
+		<LazyMount bind:contactLinkClicked Import={() => import('./login/LoginCard.svelte')} />
 		<!-- <LazyMount
       Import={() => {
         setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
@@ -248,15 +248,10 @@
 
 		<!-- <Footer bind:contactLinkClicked /> -->
 
-		{#if $page.route?.id !== '/classroom'}
-			<InView
-				margin={'200px'}
-				onview={async () => (FooterComponent = await import('./Footer.svelte'))}
-			>
-				{#if FooterComponent}
-					<FooterComponent.default bind:contactLinkClicked />
-				{/if}
-			</InView>
-		{/if}
+		<InView onview={async () => (FooterComponent = await import('./Footer.svelte'))}>
+			{#if $page.route?.id !== '/classroom' && FooterComponent}
+				<FooterComponent.default bind:contactLinkClicked />
+			{/if}
+		</InView>
 	</div>
 </main>

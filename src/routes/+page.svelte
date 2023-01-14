@@ -5,17 +5,13 @@
 
 	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 	import { isRunningStandalone } from '$lib/utils';
-	import { isDarkMode } from '$lib/store';
 	import { slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	// import DropzoneOpener from './homework/DropzoneOpener.svelte';
 
 	let ready = false;
 	onMount(() => (ready = true));
-
-	$: gradientTextColor = `text-transparent bg-clip-text bg-gradient-to-tr ${
-		$isDarkMode ? 'from-red-300 via-white to-white' : 'from-indigo-600 to-black'
-	}`;
 
 	console.log('☁️ 🎟️');
 </script>
@@ -37,23 +33,23 @@
 		<!-- main page -->
 		<div class="h-[60vh] flex justify-center items-center text-center">
 			<div class="grid grid-rows-1">
-				{#if ready}
-					<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins  pb-4 ">
-						Math, Physics
-						<span class={gradientTextColor}> ... Online! </span>
-					</div>
+				<!-- {#if ready} -->
+				<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4">
+					Math, Physics
+					<span class="gradientTextColor"> ... Online! </span>
+				</div>
 
-					<button
-						on:click={() => {
-							document
-								.getElementById('step1')
-								?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-						}}
-						class="animate-bounce text-2xl font-Nunito font-thin"
-					>
-						👇 get started
-					</button>
-				{/if}
+				<button
+					on:click={() => {
+						document
+							.getElementById('step1')
+							?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+					}}
+					class="animate-bounce text-2xl font-Nunito font-thin"
+				>
+					👇 get started
+				</button>
+				<!-- {/if} -->
 			</div>
 		</div>
 
@@ -65,10 +61,11 @@
 				}}
 				class="text-5xl font-Poppins text-center pb-7"
 			>
-				<span class={gradientTextColor}> 1. Upload your homework </span>
+				<span class="gradientTextColor"> 1. Upload your homework </span>
 			</button>
 
 			<!-- This opens the modal dropzone; no need to instantiate more than one dropzone component since already available at the layout (i.e root) level of the app. -->
+			<!-- <DropzoneOpener /> -->
 			<LazyMount Import={() => import('./homework/DropzoneOpener.svelte')} />
 		</div>
 
@@ -82,7 +79,7 @@
 						?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 				}}
 			>
-				<span class={gradientTextColor}> 2. Schedule a Session </span>
+				<span class="gradientTextColor"> 2. Schedule a Session </span>
 			</button>
 
 			<!-- Dec17,2022: not sure how to handle the custom dispatched event, as before. Maybe rethink PlansSection logic -->
@@ -115,7 +112,7 @@
 				on:click={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
 				class="text-5xl font-Poppins w-full flex justify-center"
 			>
-				<span class={gradientTextColor}>3. Do Some Reading <span class="text-black">😎 </span></span
+				<span class="gradientTextColor">3. Do Some Reading <span class="text-black">😎 </span></span
 				>
 			</button>
 
@@ -129,7 +126,7 @@
 		<button on:click={() => goto('/plans')} class="grid grid-rows-1">
 			{#if ready}
 				<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
-					You're on the <span class={gradientTextColor}> App!</span>
+					You're on the <span class="gradientTextColor"> App!</span>
 				</div>
 
 				<div class="grid px-6 text-2xl font-Nunito font-thin ">
@@ -155,6 +152,13 @@
 		@apply absolute -z-10 top-0 object-cover w-11/12 h-screen blur-2xl;
 	}
 	:global(html.dark-mode) video {
-		@apply invert-[0.95] hue-rotate-90 blur-3xl;
+		@apply blur-3xl invert-[0.95] hue-rotate-90;
+	}
+
+	.gradientTextColor {
+		@apply text-transparent bg-clip-text bg-gradient-to-tr from-indigo-600 to-black;
+	}
+	:global(html.dark-mode) .gradientTextColor {
+		@apply from-red-300 via-white to-white;
 	}
 </style>
