@@ -1,5 +1,5 @@
 <script>
-  import DropzoneOpener from "./DropzoneOpener.svelte";
+	import DropzoneOpener from './DropzoneOpener.svelte';
 </script>
 
 <DropzoneOpener />

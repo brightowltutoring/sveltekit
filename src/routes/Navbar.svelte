@@ -23,36 +23,17 @@
 	} from '$lib/store';
 	import { spring } from 'svelte/motion';
 
-	// jankytown logic added jan 3, 2022
-	let jankytown: string;
+	let showHideNav: string = '';
 
-	const verticalThreshold = 800;
-	const verticalThresholdMobile = 400;
+	$: {
+		if ($scrollY < 10) showHideNav = 'bottom-0 md:top-0';
 
-	$: if (!$lessThan768) {
-		console.log(`$scrollY debounced using ${debounceTime}ms`, $scrollY);
-		if ($scrollY < 10) jankytown = 'top-0';
+		if ($instDeltaY < 0 && $scrollY != 0) showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl';
 
-		if ($scrollY > 10 && $scrollY < verticalThreshold)
-			jankytown = 'top-0 backdrop-blur-3xl duration-1000';
-
-		if ($scrollY > verticalThreshold && $instDeltaY > 10) {
-			jankytown = '-top-20 backdrop-blur-3xl duration-200';
+		if ($scrollY > 400 && $instDeltaY > 10) {
+			showHideNav = '-bottom-20 md:-top-20 backdrop-blur-3xl duration-200';
 		}
-
-		if ($instDeltaY < -100 && $scrollY != 0) jankytown = 'top-0 backdrop-blur-3xl duration-700';
 	}
-	// sets jankytown for smaller than med
-	$: if ($lessThan768) {
-		if ($scrollY >= 0 && $scrollY < verticalThresholdMobile) {
-			// if ($scrollY <= verticalThresholdMobile) {
-			jankytown = 'bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-3xl duration-200';
-		}
-		if ($scrollY > verticalThresholdMobile && $instDeltaY > 20)
-			jankytown = '-bottom-28 duration-400';
-		if ($instDeltaY < -30 && $scrollY != 0) jankytown = 'bottom-0 backdrop-blur-3xl duration-700';
-	}
-	// jankytown logic added jan 3, 2022
 
 	let hueRocket = 0;
 	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
@@ -83,10 +64,6 @@
 		$navAppClicked = true;
 	}
 
-	$: bgGradientColor = `bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] ${
-		$isDarkMode ? 'to-[rgb(37,35,91)]' : 'to-red-200'
-	}`;
-
 	let hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
 
 	let hideIfRunningStandalone = isRunningStandalone() && 'hidden';
@@ -109,24 +86,28 @@
 />
 
 <!-- gap-x-24 -->
-<main class="z-50 md:py-4 md:px-[7%] fixed {jankytown} ease-in-out w-full">
-	<logo-and-navbar
-		class="opacity-0 {fadeInToFullOpacity} flex items-center justify-center gap-x-32 md:justify-between w-full"
-	>
+
+<main
+	class="z-50 md:py-4 md:px-[7%] fixed w-full bottom-0 md:top-0 h-16 duration-500 ease-in-out {showHideNav}"
+>
+	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
+		<!-- opacity-0 {fadeInToFullOpacity}  -->
 		{#key resetLogoClick}
-			<button
-				class=" p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
+			<!-- previously was a button, but anchor tag 'degrades gracefully'  -->
+			<a
+				href="/"
+				on:click={clickLogo}
+				class="p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
     md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
 				in:scale={{ duration: 1200, easing: elasticOut }}
-				on:click={clickLogo}
 			>
 				THINKSOLVE
-			</button>
+			</a>
 		{/key}
 
 		<!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
 		<ul
-			class="text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto  {bgGradientColor} hideScrollBar overflow-x-scroll overflow-y-hidden"
+			class="bgGradientColor text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto hideScrollBar overflow-x-scroll overflow-y-hidden"
 		>
 			<!-- py-3 px-5 -->
 			<!-- <ul
@@ -178,3 +159,12 @@
 		</ul>
 	</logo-and-navbar>
 </main>
+
+<style>
+	.bgGradientColor {
+		@apply bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200;
+	}
+	:global(html.dark-mode) .bgGradientColor {
+		@apply to-[rgb(37,35,91)];
+	}
+</style>

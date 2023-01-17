@@ -24,6 +24,7 @@
 	loop
 	src="/login-bg-video-blurred.mp4"
 />
+
 <!-- class="absolute -z-10 top-0 object-cover w-11/12 h-screen" -->
 <!-- {$isDarkMode ? "invert-[0.95] blur-3xl" : "blur-2xl"}  -->
 <!-- . . . this code snippet replaced with css darkmode selector logic in <style> section (using svelte :global selector and tailwind css with @apply) to avoid flash of unstyled content on initial page load -->
@@ -33,23 +34,23 @@
 		<!-- main page -->
 		<div class="h-[60vh] flex justify-center items-center text-center">
 			<div class="grid grid-rows-1">
-				<!-- {#if ready} -->
-				<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4">
-					Math, Physics
-					<span class="gradientTextColor"> ... Online! </span>
-				</div>
+				{#key ready}
+					<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4">
+						Math, Physics
+						<span class="gradientTextColor"> ... Online! </span>
+					</div>
 
-				<button
-					on:click={() => {
-						document
-							.getElementById('step1')
-							?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-					}}
-					class="animate-bounce text-2xl font-Nunito font-thin"
-				>
-					👇 get started
-				</button>
-				<!-- {/if} -->
+					<button
+						on:click={() => {
+							document
+								.getElementById('step1')
+								?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+						}}
+						class="animate-bounce text-2xl font-Nunito font-thin"
+					>
+						👇 get started
+					</button>
+				{/key}
 			</div>
 		</div>
 
@@ -120,11 +121,13 @@
 			<LazyMount Import={() => import('./reviews/Reviews.svelte')} />
 		</div>
 	</div>
-{:else}
+{/if}
+
+{#if isRunningStandalone()}
 	<!-- main page -->
 	<div class="h-[70vh] flex justify-center items-center text-center ">
 		<button on:click={() => goto('/plans')} class="grid grid-rows-1">
-			{#if ready}
+			{#key ready}
 				<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
 					You're on the <span class="gradientTextColor"> App!</span>
 				</div>
@@ -132,7 +135,7 @@
 				<div class="grid px-6 text-2xl font-Nunito font-thin ">
 					the navbar is now your friend 🤝
 				</div>
-			{/if}
+			{/key}
 		</button>
 	</div>
 {/if}
