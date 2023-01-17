@@ -3,12 +3,14 @@
 	// let classicoAndMock; // this refers to data that is sent UP from PlansSection.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
 	// import InView from "$lib/Wrappers/InView.svelte";
 
-	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
+	// import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 	import { isRunningStandalone } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	// import DropzoneOpener from './homework/DropzoneOpener.svelte';
+	import DropzoneOpener from './homework/DropzoneOpener.svelte';
+	import PlansSection from './plans/PlansSection.svelte';
+	import Reviews from './reviews/Reviews.svelte';
 
 	let ready = false;
 	onMount(() => (ready = true));
@@ -67,7 +69,8 @@
 
 			<!-- This opens the modal dropzone; no need to instantiate more than one dropzone component since already available at the layout (i.e root) level of the app. -->
 			<!-- <DropzoneOpener /> -->
-			<LazyMount Import={() => import('./homework/DropzoneOpener.svelte')} />
+			<!-- <LazyMount Import={() => import('./homework/DropzoneOpener.svelte')} /> -->
+			<DropzoneOpener />
 		</div>
 
 		<!-- third page -->
@@ -84,7 +87,8 @@
 			</button>
 
 			<!-- Dec17,2022: not sure how to handle the custom dispatched event, as before. Maybe rethink PlansSection logic -->
-			<LazyMount Import={() => import('./plans/PlansSection.svelte')} />
+			<PlansSection />
+			<!-- <LazyMount Import={() => import('./plans/PlansSection.svelte')} /> -->
 
 			<!-- TODO: not yet sure how to deal with on:boop in LazyMount ... this is doing things manually; maybe rethink props logic inside PlansSection to do what on:boop accomplishes (i.e. reducing the card elements to first two) -->
 
@@ -117,8 +121,8 @@
 				>
 			</button>
 
-			<!-- <Reviews /> -->
-			<LazyMount Import={() => import('./reviews/Reviews.svelte')} />
+			<Reviews />
+			<!-- <LazyMount Import={() => import('./reviews/Reviews.svelte')} /> -->
 		</div>
 	</div>
 {/if}
