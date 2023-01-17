@@ -42,22 +42,27 @@
 			return;
 		}
 	}
+
+	// let isRunningStandaloneValue = isRunningStandalone();
 </script>
 
 <a
 	data-sveltekit-preload-data
 	on:click={handleNavButtonClicks}
 	{href}
-	class="block font-Nunito font-thin  hover:rounded  md:p-2 py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll {!isRunningStandalone() &&
-		btnColorHover} "
+	class="block font-Nunito font-thin  hover:rounded p-2 {!isRunningStandalone() && btnColorHover} "
 >
 	{#if isRunningStandalone()}
-		<div class="flex flex-col justify-between items-center aspect-square w-[50px]">
+		<div class="flex flex-col justify-between items-center h-[50px] w-[50px] ">
 			<!-- mt-1 md:px-10 -->
 			<svelte:component this={icon} bind:navIconClicked />
 			<span class="text-xs text-center">{name}</span>
 		</div>
-	{:else}
-		{name}
+		<!-- {:else} -->
+	{/if}
+	{#if !isRunningStandalone()}
+		<div class=" py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll">
+			{name}
+		</div>
 	{/if}
 </a>
