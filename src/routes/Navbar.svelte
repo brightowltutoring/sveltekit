@@ -18,15 +18,14 @@
 		elementColor,
 		showLoginModal,
 		showHomeworkModal,
-		instDeltaY,
-		lessThan768
+		instDeltaY
 	} from '$lib/store';
 	import { spring } from 'svelte/motion';
 
-	let showHideNav: string = '';
+	let showHideNav = '';
 
 	$: {
-		if ($scrollY < 10) showHideNav = 'bottom-0 md:top-0';
+		if ($scrollY < 10) showHideNav = 'bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-none';
 
 		if ($instDeltaY < 0 && $scrollY != 0) showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl';
 

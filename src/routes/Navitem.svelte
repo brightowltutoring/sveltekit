@@ -48,13 +48,12 @@
 	data-sveltekit-preload-data
 	on:click={handleNavButtonClicks}
 	{href}
-	class="block font-Nunito font-thin 
-
-  {!isRunningStandalone() &&
-		` ${btnColorHover}  hover:rounded py-1 px-2 duration-300 ease-in-out text-2xl md:text-xl`} "
+	class="block font-Nunito font-thin  hover:rounded  md:p-2 py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll {!isRunningStandalone() &&
+		btnColorHover} "
 >
 	{#if isRunningStandalone()}
-		<div class="flex flex-col justify-between items-center w-[50px] h-[50px] mt-1 md:px-10">
+		<div class="flex flex-col justify-between items-center aspect-square w-[50px]">
+			<!-- mt-1 md:px-10 -->
 			<svelte:component this={icon} bind:navIconClicked />
 			<span class="text-xs text-center">{name}</span>
 		</div>
