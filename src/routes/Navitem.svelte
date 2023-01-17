@@ -43,7 +43,8 @@
 		}
 	}
 
-	// let isRunningStandaloneValue = isRunningStandalone();
+	// let runningStandalone = true;
+	$: runningStandalone = isRunningStandalone() === true;
 </script>
 
 <a
@@ -52,17 +53,39 @@
 	{href}
 	class="block font-Nunito font-thin  hover:rounded p-2 {!isRunningStandalone() && btnColorHover} "
 >
+	<!-- {#if isPwa} -->
+	<!-- {#if runningStandalone} -->
 	{#if isRunningStandalone()}
-		<div class="flex flex-col justify-between items-center h-[50px] w-[50px] ">
+		<div class="flex flex-col justify-between items-center h-[50px] w-[50px]  ">
 			<!-- mt-1 md:px-10 -->
 			<svelte:component this={icon} bind:navIconClicked />
 			<span class="text-xs text-center">{name}</span>
 		</div>
-		<!-- {:else} -->
 	{/if}
 	{#if !isRunningStandalone()}
 		<div class=" py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll">
 			{name}
 		</div>
 	{/if}
+
+	<!-- In order to work 'isRunningStandalone()' as to redefined as an async function -->
+	<!-- {#await isRunningStandalone() then value}
+		{#if value}
+			<div class="flex flex-col justify-between items-center h-[50px] w-[50px] ">
+				<svelte:component this={icon} bind:navIconClicked />
+				<span class="text-xs text-center">{name}</span>
+			</div>
+		{:else}
+			<div class=" py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll">
+				{name}
+			</div>
+		{/if}
+	{/await}
+	<noscript>
+		<div
+			class=" hover:rounded p-2  py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll {btnColorHover}"
+		>
+			{name}
+		</div>
+	</noscript> -->
 </a>

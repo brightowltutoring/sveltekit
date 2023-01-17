@@ -1,6 +1,12 @@
 import { browser } from '$app/environment';
 import { scale } from 'svelte/transition';
 
+// taken from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript'
+export function getCookieValue(name: string) {
+	// return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
+	return (browser && document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop()) || '';
+}
+
 // export function initialTheme() {
 //   if (sessionStorage.getItem("isDarkMode") === "true") return "dark";
 //   if (sessionStorage.getItem("isDarkMode") === "false") return "light";
@@ -61,8 +67,9 @@ export function disableZoomGestures() {
 	}
 }
 
+// export async function isRunningStandalone() {
 export function isRunningStandalone() {
-	return browser && window?.matchMedia('(display-mode: standalone)').matches;
+	return browser && window.matchMedia('(display-mode: standalone)').matches;
 }
 
 // custom easing functions

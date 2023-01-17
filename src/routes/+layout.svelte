@@ -13,6 +13,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { disableZoomGestures, getOS, isRunningStandalone } from '$lib/utils';
+
 	import {
 		setInnerWidthViaMatchMedia,
 		lessThan768,
@@ -143,6 +144,17 @@
 <Seo />
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
+	<!-- <script>
+		if (window.matchMedia('(display-mode: standalone)').matches) {
+			document.cookie = 'deviceMode=pwa';
+
+			setTimeout(() => {
+				document.getElementById('navvy').classList.add('bg-red-500');
+			}, 0);
+		} else {
+			document.cookie = 'deviceMode=not-pwa';
+		}
+	</script> -->
 </svelte:head>
 
 <main class="flex flex-col min-h-screen">

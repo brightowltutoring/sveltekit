@@ -67,7 +67,7 @@
 
 	let hideIfRunningStandalone = isRunningStandalone() && 'hidden';
 
-	let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-500 ease-in';
+	let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-300 ease-in';
 
 	// 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
 
@@ -87,7 +87,7 @@
 <!-- gap-x-24 -->
 
 <main
-	class="z-50 md:py-4 md:px-[7%] fixed md:h-16  w-full bottom-0 md:top-0 duration-500 ease-in-out {showHideNav}"
+	class="animate-fadeIn z-50 md:py-4 md:px-[7%] fixed md:h-16  w-full bottom-0 md:top-0 {showHideNav} "
 >
 	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
 		<!-- opacity-0 {fadeInToFullOpacity}  -->
@@ -113,7 +113,8 @@
     class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   > -->
 
-			<li class="{hideIfRunningStandalone} {hideIfNotIOS}">
+			<!-- <li class={hideIfRunningStandalone || hideIfNotIOS}> -->
+			<li class="{hideIfRunningStandalone} {hideIfNotIOS} ">
 				<button
 					class="font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
       border-b-1 rounded "

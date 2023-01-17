@@ -16,6 +16,28 @@ module.exports = {
 			fontFamily: {
 				Nunito: ['Nunito', 'sans-serif'],
 				Poppins: ['Poppins', 'sans-serif']
+			},
+			keyframes: {
+				fadeIn: {
+					'0%': {
+						opacity: '0'
+					},
+					'100%': {
+						opacity: '100'
+					}
+				},
+				wiggle: {
+					'0%, 100%': {
+						transform: 'rotate(-3deg)'
+					},
+					'50%': {
+						transform: 'rotate(3deg)'
+					}
+				}
+			},
+			animation: {
+				wiggle: 'wiggle 1s ease-in-out infinite',
+				fadeIn: 'fadeIn 1s ease-in'
 			}
 		}
 	}

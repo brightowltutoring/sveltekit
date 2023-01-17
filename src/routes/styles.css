@@ -117,3 +117,59 @@ body {
 	/* --light_darkened: rgb(224, 229, 232); */
 	/* --dark_lightened: rgb(38, 35, 51); */
 }
+
+/* THIS IS REPLACED WITH FEWER LINES IN tailwind.config.cjs */
+
+/* 
+:root {
+	--fadeInFromNoneAnimation: fadeInFromNoneAnimation 3s ease-in;
+}
+
+.fadeInFromNone {
+	display: block;
+
+	-webkit-animation: var(--fadeInFromNoneAnimation);
+	-moz-animation: var(--fadeInFromNoneAnimation);
+	-o-animation: var(--fadeInFromNoneAnimation);
+	animation: var(--fadeInFromNoneAnimation);
+}
+
+@-webkit-keyframes fadeInFromNoneAnimation {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes fadeInFromNoneAnimation {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@-o-keyframes fadeInFromNoneAnimation {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInFromNoneAnimation {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+} */
