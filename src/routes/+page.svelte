@@ -13,7 +13,11 @@
 	import Reviews from './reviews/Reviews.svelte';
 
 	let ready = false;
-	onMount(() => (ready = true));
+	onMount(() => {
+		ready = true;
+		// console.log('isRunningStandalone()', isRunningStandalone());
+		// alert(isRunningStandalone());
+	});
 
 	console.log('☁️ 🎟️');
 </script>
@@ -31,31 +35,30 @@
 <!-- {$isDarkMode ? "invert-[0.95] blur-3xl" : "blur-2xl"}  -->
 <!-- . . . this code snippet replaced with css darkmode selector logic in <style> section (using svelte :global selector and tailwind css with @apply) to avoid flash of unstyled content on initial page load -->
 
-{#if !isRunningStandalone()}
-	<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
-		<!-- main page -->
-		<div class="h-[60vh] flex justify-center items-center text-center">
-			<div class="grid grid-rows-1">
-				{#key ready}
-					<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4">
-						Math, Physics
-						<span class="gradientTextColor"> ... Online! </span>
-					</div>
-
-					<button
-						on:click={() => {
-							document
-								.getElementById('step1')
-								?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-						}}
-						class="animate-bounce text-2xl font-Nunito font-thin"
-					>
-						👇 get started
-					</button>
-				{/key}
+<!-- {#if !isRunningStandalone()} -->
+<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
+	<!-- main page -->
+	<div class="h-[60vh] flex justify-center items-center text-center">
+		<div class="grid grid-rows-1">
+			<!-- {#if ready} -->
+			<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4">
+				Math, Physics
+				<span class="gradientTextColor"> ... Online! </span>
 			</div>
-		</div>
 
+			<button
+				on:click={() => {
+					document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				}}
+				class="animate-bounce text-2xl font-Nunito font-thin"
+			>
+				👇 get started
+			</button>
+			<!-- {/if} -->
+		</div>
+	</div>
+
+	{#if !isRunningStandalone()}
 		<!-- second page -->
 		<div id="step1" class="hover:scale-105 duration-500 grid place-content-center">
 			<button
@@ -124,11 +127,11 @@
 			<Reviews />
 			<!-- <LazyMount Import={() => import('./reviews/Reviews.svelte')} /> -->
 		</div>
-	</div>
-{/if}
+	{/if}
+</div>
+<!-- {/if} -->
 
-{#if isRunningStandalone()}
-	<!-- main page -->
+<!-- {#if isRunningStandalone()}
 	<div class="h-[70vh] flex justify-center items-center text-center ">
 		<button on:click={() => goto('/plans')} class="grid grid-rows-1">
 			{#key ready}
@@ -142,7 +145,7 @@
 			{/key}
 		</button>
 	</div>
-{/if}
+{/if} -->
 
 <!-- <div class="grid grid-cols-1 gap-y-[600px] sm:gap-y-[330px] py-20"> -->
 <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-[2000px] sm:gap-y-[330px] py-20"> -->

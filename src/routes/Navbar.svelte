@@ -88,7 +88,7 @@
 <!-- gap-x-24 -->
 
 <main
-	class="z-50 md:py-4 md:px-[7%] fixed w-full bottom-0 md:top-0 h-16 duration-500 ease-in-out {showHideNav}"
+	class="z-50 md:py-4 md:px-[7%] fixed md:h-16  w-full bottom-0 md:top-0 duration-500 ease-in-out {showHideNav}"
 >
 	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
 		<!-- opacity-0 {fadeInToFullOpacity}  -->

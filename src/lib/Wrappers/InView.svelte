@@ -4,7 +4,7 @@
 
 	export let vanilla = false; // IF doing intersection observer the vanilla javascript way, user specifies this parameter as the querySelectee ... i.e. vanilla = {'#someId'}
 	export let once = false; // existence prop; when declared, observation happens once per 'element'
-	export let onview = (target: any) => console.log('i ❤️ slots'); // action taken when 'element' comes "into view"
+	export let onview = (target: Element) => console.log('i ❤️ slots'); // action taken when 'element' comes "into view"
 
 	let container: HTMLElement; // refers to container div of the <slot/>-component (i.e. when not using vanilla approach)
 	export let single = false; // existence prop; when declared the observation is done on the first child of <slot/>, rather than the div container of <slot/>, ... useful when modifying a single wrapped element
@@ -15,14 +15,12 @@
 
 	const options = { root, threshold, rootMargin: margin };
 
-	function handleIntersect(entries: any, observer: any) {
-		// let entrees = vanilla ? entries : [entries[0]];
-		// TODO: UPDATE: when doing for loop it seems to not matter to 'array-ify' even if entries is a single element
-		// for (const entry of entrees) {
-		for (const entry of entries) {
+	function handleIntersect(ENTRIES: IntersectionObserverEntry[], OBSERVER: IntersectionObserver) {
+		// for loop is needed when defaulting to vanilla behaviour (see onMount choices below)
+		for (const entry of ENTRIES) {
 			if (entry.isIntersecting) {
 				onview(entry.target); // pass element as an argument in case we need to modify element itself
-				once && observer.unobserve(entry.target);
+				once && OBSERVER.unobserve(entry.target);
 			}
 		}
 	}
