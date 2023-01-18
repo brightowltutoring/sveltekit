@@ -51,7 +51,8 @@
 	data-sveltekit-preload-data
 	on:click={handleNavButtonClicks}
 	{href}
-	class="block font-Nunito font-thin  hover:rounded p-2 {!isRunningStandalone() && btnColorHover} "
+	class="block font-Nunito font-thin hover:rounded px-2 py-1  duration-100 ease-in {!isRunningStandalone() &&
+		btnColorHover} "
 >
 	<!-- {#if isPwa} -->
 	<!-- {#if runningStandalone} -->
@@ -63,7 +64,7 @@
 		</div>
 	{/if}
 	{#if !isRunningStandalone()}
-		<div class=" py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll">
+		<div class="text-2xl md:text-xl ">
 			{name}
 		</div>
 	{/if}

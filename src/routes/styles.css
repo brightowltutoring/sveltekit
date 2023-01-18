@@ -118,53 +118,12 @@ body {
 	/* --dark_lightened: rgb(38, 35, 51); */
 }
 
-/* THIS IS REPLACED WITH FEWER LINES IN tailwind.config.cjs */
-
-/* 
-:root {
-	--fadeInFromNoneAnimation: fadeInFromNoneAnimation 3s ease-in;
+/* Using tailwind css version instead of this. Pro: tailwind version has intellisense when hovering the code; Con: have to define the code here in the tailwind config file */
+/* .fadeInFromNone {
+	animation: fadeInFromNone 3s ease-in;
 }
 
-.fadeInFromNone {
-	display: block;
-
-	-webkit-animation: var(--fadeInFromNoneAnimation);
-	-moz-animation: var(--fadeInFromNoneAnimation);
-	-o-animation: var(--fadeInFromNoneAnimation);
-	animation: var(--fadeInFromNoneAnimation);
-}
-
-@-webkit-keyframes fadeInFromNoneAnimation {
-	0% {
-		opacity: 0;
-	}
-
-	100% {
-		opacity: 1;
-	}
-}
-
-@-moz-keyframes fadeInFromNoneAnimation {
-	0% {
-		opacity: 0;
-	}
-
-	100% {
-		opacity: 1;
-	}
-}
-
-@-o-keyframes fadeInFromNoneAnimation {
-	0% {
-		opacity: 0;
-	}
-
-	100% {
-		opacity: 1;
-	}
-}
-
-@keyframes fadeInFromNoneAnimation {
+@keyframes fadeInFromNone {
 	0% {
 		opacity: 0;
 	}

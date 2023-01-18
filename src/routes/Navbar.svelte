@@ -3,7 +3,8 @@
 
 	import LightDarkMode from './LightDarkMode.svelte';
 	import Navitem from './Navitem.svelte';
-	import { browser } from '$app/environment';
+	// import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { scale } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
@@ -27,11 +28,17 @@
 	$: {
 		if ($scrollY < 10) showHideNav = 'bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-none';
 
-		if ($instDeltaY < 0 && $scrollY != 0) showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl';
-
-		if ($scrollY > 400 && $instDeltaY > 10) {
-			showHideNav = '-bottom-20 md:-top-20 backdrop-blur-3xl duration-200';
+		if ($scrollY > 40 && $instDeltaY > 10) {
+			showHideNav = 'backdrop-blur-3xl';
+			// showHideNav = 'backdrop-blur-3xl bg-red-500';
 		}
+
+		if ($scrollY > 400 && $instDeltaY > 10)
+			showHideNav = '-bottom-20 md:-top-20 backdrop-blur-3xl duration-200';
+
+		if ($instDeltaY < -100 && $scrollY !== 0)
+			// showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl duration-500 bg-blue-500';
+			showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl duration-500';
 	}
 
 	let hueRocket = 0;
@@ -77,6 +84,14 @@
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
 	}
+
+	let mounted = false;
+	let mounted2 = true;
+
+	onMount(() => {
+		mounted = true;
+		mounted2 = false;
+	});
 </script>
 
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
@@ -87,8 +102,15 @@
 
 <!-- gap-x-24 -->
 
-<main
-	class="animate-fadeIn z-50 md:py-4 md:px-[7%] fixed md:h-16  w-full bottom-0 md:top-0 {showHideNav} "
+<!-- fadeInFromNone  -->
+<!-- animate-fadeIn -->
+<!-- {!mounted
+		? 'opacity-0'
+		: 'opacity-100 transition-opacity duration-1000'}  -->
+
+<!-- class:js={mounted } -->
+<nav
+	class="animate-fadeIn z-50 md:pt-4 md:pb-16 md:px-[7%] fixed md:h-16 w-full bottom-0 md:top-0 {showHideNav}  ease-in "
 >
 	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
 		<!-- opacity-0 {fadeInToFullOpacity}  -->
@@ -159,7 +181,7 @@
 			</li>
 		</ul>
 	</logo-and-navbar>
-</main>
+</nav>
 
 <style>
 	.bgGradientColor {
@@ -167,5 +189,9 @@
 	}
 	:global(html.dark-mode) .bgGradientColor {
 		@apply to-[rgb(37,35,91)];
+	}
+
+	nav.js {
+		@apply opacity-100 transition-opacity duration-1000 ease-in;
 	}
 </style>
