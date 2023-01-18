@@ -67,7 +67,8 @@
 
 	let hideIfRunningStandalone = isRunningStandalone() && 'hidden';
 
-	let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-300 ease-in';
+	// let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-300 ease-in';
+	// THIS NOW REPLACED BY CUSTOM TAILWIND CSS ANIMATION: animate-fadeIn
 
 	// 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
 
