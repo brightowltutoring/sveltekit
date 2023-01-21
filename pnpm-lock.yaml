@@ -39,8 +39,6 @@ dependencies:
   mdsvex: 0.10.6_svelte@3.55.1
   rehype-katex-svelte: 1.1.2
   svelte-katex: 0.1.2
-  tslib: 2.4.1
-  typescript: 4.9.4
 
 devDependencies:
   '@sveltejs/adapter-cloudflare': 1.0.3_@sveltejs+kit@1.0.1
@@ -60,6 +58,8 @@ devDependencies:
   svelte-check: 3.0.2_gqx7lw3sljhsd4bstor5m2aa2u
   svelte-preprocess: 4.10.7_awginupsaj455aehf5x365sh44
   tailwindcss: 3.2.4_postcss@8.4.21
+  tslib: 2.4.1
+  typescript: 4.9.4
   vite: 4.0.4
 
 packages:
@@ -2684,7 +2684,6 @@ packages:
 
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
-    dev: false
 
   /type-check/0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -2702,6 +2701,7 @@ packages:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /undici/5.14.0:
     resolution: {integrity: sha512-yJlHYw6yXPPsuOH0x2Ib1Km61vu4hLiRRQoafs+WUgX1vO64vgnxiCEN9dpIrhZyHFsai3F0AEj4P9zy19enEQ==}
