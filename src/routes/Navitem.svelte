@@ -12,6 +12,7 @@
 	// bool, btnColor,
 
 	import { isRunningStandalone } from '$lib/utils';
+	import { runningStandalone } from '$lib/store';
 	import {
 		showLoginModal,
 		showHomeworkModal,
@@ -60,18 +61,19 @@
 	<!-- fadeInFromNone -->
 
 	<!-- This ridiculous if block is necessary if want a default navbar that works when js is turned off (i.e. !mounted is truthy), OTHERWISE await a PWA check to give the PWA version of the navbar, else produce default navbar again -->
-	{#if !mounted}
+	{#if !mounted || !$runningStandalone}
 		<div class="text-2xl md:text-xl">{name}</div>
 	{:else}
-		{#await isRunningStandalone() then isTrue}
-			{#if isTrue}
-				<div class="flex flex-col justify-between items-center h-[50px] w-[50px]">
-					<svelte:component this={icon} bind:navIconClicked />
-					<span class="text-xs text-center">{name}</span>
-				</div>
-			{:else}
-				<div class="text-2xl md:text-xl">{name}</div>
-			{/if}
-		{/await}
+		<!-- {#await isRunningStandalone() then isTrue} -->
+		<!-- {#if isTrue} -->
+		<!-- {#if runningStandalone} -->
+		<div class="flex flex-col justify-between items-center h-[50px] w-[50px]">
+			<svelte:component this={icon} bind:navIconClicked />
+			<span class="text-xs text-center">{name}</span>
+		</div>
+		<!-- {:else}
+			<div class="text-2xl md:text-xl">{name}</div>
+		{/if} -->
+		<!-- {/await} -->
 	{/if}
 </a>

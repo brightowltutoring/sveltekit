@@ -149,10 +149,12 @@
 		}
 	}
 
-	let runningStandalone = false;
+	// let runningStandalone = false;
+
+	import { runningStandalone } from '$lib/store';
 
 	onMount(async () => {
-		runningStandalone = await isRunningStandalone();
+		// runningStandalone = await isRunningStandalone();
 		onMountFirebase();
 	});
 </script>
@@ -166,7 +168,7 @@
 				<!-- class={$isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg"} -->
 				<!-- style={`background:${$elementColor}`} -->
 
-				{#if runningStandalone}
+				{#if $runningStandalone}
 					<PhoneAuthSection />
 				{:else}
 					<MagicLinkSection />

@@ -1,5 +1,6 @@
 import { writable, derived, get } from 'svelte/store';
 
+export const runningStandalone = writable(false);
 // const createWritableStore = (key, startValue) => {
 //   const { subscribe, set } = writable(startValue);
 

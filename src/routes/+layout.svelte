@@ -21,7 +21,8 @@
 		showHomeworkModal,
 		navAppClicked,
 		isLoggedIn,
-		isDarkMode
+		isDarkMode,
+		runningStandalone
 	} from '$lib/store';
 	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
 	import { elasticOut, quintOut } from 'svelte/easing';
@@ -37,7 +38,11 @@
 		}, 50);
 
 		// $lessThan768 && disableZoomGestures();
-		((await isRunningStandalone()) || $lessThan768) && disableZoomGestures();
+
+		// initializing the global variable so I don't have to call this function repeatedly
+		$runningStandalone = await isRunningStandalone();
+
+		($runningStandalone || $lessThan768) && disableZoomGestures();
 		setInnerWidthViaMatchMedia();
 
 		// TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
