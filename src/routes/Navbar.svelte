@@ -92,6 +92,12 @@
 		mounted = true;
 		mounted2 = false;
 	});
+
+	// const setTheme = (theme: string) => {
+	// 	document.cookie = `siteTheme=${theme}`;
+	// 	console.log('theme', theme);
+	// 	alert(3);
+	// };
 </script>
 
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
@@ -109,8 +115,9 @@
 		: 'opacity-100 transition-opacity duration-1000'}  -->
 
 <!-- class:js={mounted } -->
+<!-- fadeInFromNone -->
 <nav
-	class="animate-fadeIn z-50 md:pt-4 md:pb-16 md:px-[7%] fixed md:h-16 w-full bottom-0 md:top-0 {showHideNav}  ease-in "
+	class="z-50 md:pt-4 md:pb-16 md:px-[7%] fixed md:h-16 w-full bottom-0 md:top-0 {showHideNav}  ease-in "
 >
 	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
 		<!-- opacity-0 {fadeInToFullOpacity}  -->
@@ -179,6 +186,8 @@
 			<li class="py-2 translate-y-1 scale-125 md:scale-100 ">
 				<LightDarkMode />
 			</li>
+			<!-- <li><a href={'#'} on:click={() => setTheme('light')}>LightMode</a></li>
+			<li><a href={'#'} on:click={() => setTheme('dark')}>DarkMode</a></li> -->
 		</ul>
 	</logo-and-navbar>
 </nav>
@@ -191,6 +200,7 @@
 		@apply to-[rgb(37,35,91)];
 	}
 
+	/* TODO: delete? */
 	nav.js {
 		@apply opacity-100 transition-opacity duration-1000 ease-in;
 	}

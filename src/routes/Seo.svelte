@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	{#if $page.status !== 200}
+	{#if $page.status == 404}
 		<title>Oops 💩</title>
 	{:else}
 		{@const slashlessRoute = $page.route.id && $page.route.id.slice(1)}

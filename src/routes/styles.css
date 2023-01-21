@@ -61,6 +61,13 @@
 /* dec12,2022: this doesnt seem to work anymore */
 
 /* Using html instead of body here (and documentElement instead of body when referencing with classList), since flash of content persists on firefox ... this works in all cases  */
+:root {
+	--light: #f7f7f7;
+	--dark: rgb(20, 13, 33);
+	/* --light_darkened: rgb(224, 229, 232); */
+	/* --dark_lightened: rgb(38, 35, 51); */
+}
+
 html {
 	background: var(--light);
 	color: var(--dark);
@@ -111,24 +118,21 @@ body {
 	scrollbar-width: none; /* ....for Firefox */
 }
 
-:root {
-	--light: #f7f7f7;
-	--dark: rgb(20, 13, 33);
-	/* --light_darkened: rgb(224, 229, 232); */
-	/* --dark_lightened: rgb(38, 35, 51); */
-}
-
 /* Using tailwind css version instead of this. Pro: tailwind version has intellisense when hovering the code; Con: have to define the code here in the tailwind config file */
-/* .fadeInFromNone {
-	animation: fadeInFromNone 3s ease-in;
+.fadeInFromNone {
+	animation: fadeInFromNone 1s ease-in;
 }
 
 @keyframes fadeInFromNone {
 	0% {
 		opacity: 0;
+		display: none;
+		filter: blur(1.5rem);
 	}
 
 	100% {
 		opacity: 1;
+		filter: blur(0);
+		display: block;
 	}
-} */
+}

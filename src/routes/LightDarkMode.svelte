@@ -46,17 +46,65 @@
 	<!-- ... For darkmode/lightmode, why do people insist on complex server-side methods involving framework-specific code AND cookies API ?? Cookies offer a custom lifetime, however isn't the desired approach for this boolean theme (dark/light) to 1) initialize with device settings, 2) update with session settings? -->
 </svelte:head>
 
+<!-- works without JS ...  but seems like anchor tag url /SSR way is still preferable since the sibling input element has to sit above the icon div elements in order to work (and therefore cannot wrap icons in anchor tag) -->
 <main>
 	{#key $isDarkMode}
-		<!-- Currently using nested 'divs' to compose two svelte transitions. This can be done with a custom function as well (TODO:) such as on: https://svelte.dev/repl/f5c42c6dc6774f29ad9350cd2dc2d299?version=3.38.3 -->
+		<div in:slide={{ duration: 600, easing: quintOut }}>
+			<input
+				on:click={toggleDarkMode}
+				type="checkbox"
+				bind:checked={$isDarkMode}
+				class="peer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[2.5] z-10 opacity-0"
+			/>
+
+			<div in:scale={{ duration: 1000, easing: elasticOut }} class="hidden peer-checked:block">
+				<IconSun />
+			</div>
+			<div in:scale={{ duration: 1000, easing: elasticOut }} class="block peer-checked:hidden">
+				<IconMoon />
+			</div>
+		</div>
+	{/key}
+</main>
+
+<!-- Breaks without JS -->
+<!-- <main>
+	{#key $isDarkMode}
 		<div in:slide={{ duration: 600, easing: quintOut }}>
 			<button on:click={toggleDarkMode} in:scale={{ duration: 1000, easing: elasticOut }}>
 				{#if $isDarkMode}
-					<IconSun />
+					<a href={'?lightmode'}>
+						<IconSun />
+					</a>
 				{:else}
-					<IconMoon />
+					<a href={'?darkmode'}>
+						<IconMoon />
+					</a>
 				{/if}
 			</button>
 		</div>
 	{/key}
-</main>
+</main> -->
+
+<!-- Currently using nested 'divs' to compose two svelte transitions. This can be done with a custom function as well (TODO:) such as on: https://svelte.dev/repl/f5c42c6dc6774f29ad9350cd2dc2d299?version=3.38.3 -->
+<style>
+	/* :root {
+		--light: #f7f7f7;
+		--dark: rgb(20, 13, 33);
+	} */
+	/* :global(html):has(#gato):has(.hidden) {
+		background: var(--dark);
+		color: var(--light);
+	} */
+
+	/* html {
+		background: var(--light);
+		color: var(--dark);
+		transition: background-color 0.3s;
+	}
+
+	html.dark-mode {
+		background: var(--dark);
+		color: var(--light);
+	} */
+</style>

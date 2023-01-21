@@ -139,6 +139,11 @@
 	// }
 
 	let contactLinkClicked = false;
+
+	// TODO: FORM ACTIONS
+	// import { page } from '$app/stores';
+	// import { enhance } from '$app/forms';
+	// TODO: FORM ACTIONS
 </script>
 
 <Seo />
@@ -158,6 +163,12 @@
 </svelte:head>
 
 <main class="flex flex-col min-h-screen">
+	<!-- TODO: FORM ACTIONS -->
+	<!-- <form method="POST" use:enhance action="/" class="z-[999]">
+		<input class="sr-only" name="pathname" type="pathname" value={`${$page.url.pathname}`} />
+		<button>submit: {$page.url.pathname}</button>
+	</form> -->
+	<!-- TODO: FORM ACTIONS -->
 	<Navbar />
 
 	<Modal showModal={contactLinkClicked} bgTint={'backdrop-blur-3xl'}>
@@ -261,7 +272,7 @@
 		<!-- <Footer bind:contactLinkClicked /> -->
 
 		<InView onview={async () => (FooterComponent = await import('./Footer.svelte'))}>
-			{#if $page.route?.id !== '/classroom' && FooterComponent}
+			{#if !($page.route?.id == '/pwa-home' || '/classroom') && FooterComponent}
 				<FooterComponent.default bind:contactLinkClicked />
 			{/if}
 		</InView>

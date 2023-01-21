@@ -1,7 +1,7 @@
 <!-- TODO: fix types for: routes, icon -->
 <script lang="ts">
 	// import InView from "$lib/Wrappers/InView.svelte";
-	import type { ComponentType } from 'svelte';
+	import { onMount, type ComponentType } from 'svelte';
 
 	export let href: string,
 		name: string,
@@ -43,8 +43,11 @@
 		}
 	}
 
-	// let runningStandalone = true;
-	$: runningStandalone = isRunningStandalone() === true;
+	let runningStandalone = false;
+
+	onMount(() => {
+		runningStandalone = isRunningStandalone() === true;
+	});
 </script>
 
 <a
@@ -54,17 +57,14 @@
 	class="block font-Nunito font-thin hover:rounded px-2 py-1  duration-100 ease-in {!isRunningStandalone() &&
 		btnColorHover} "
 >
-	<!-- {#if isPwa} -->
-	<!-- {#if runningStandalone} -->
-	{#if isRunningStandalone()}
-		<div class="flex flex-col justify-between items-center h-[50px] w-[50px]  ">
-			<!-- mt-1 md:px-10 -->
+	{#if runningStandalone}
+		<!-- {#if isRunningStandalone()} -->
+		<div class="fadeInFromNone flex flex-col justify-between items-center h-[50px] w-[50px]">
 			<svelte:component this={icon} bind:navIconClicked />
 			<span class="text-xs text-center">{name}</span>
 		</div>
-	{/if}
-	{#if !isRunningStandalone()}
-		<div class="text-2xl md:text-xl ">
+	{:else}
+		<div class="fadeInFromNone text-2xl md:text-xl ">
 			{name}
 		</div>
 	{/if}
