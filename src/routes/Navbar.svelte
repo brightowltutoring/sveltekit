@@ -6,7 +6,7 @@
 	// import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { scale } from 'svelte/transition';
+	import { scale, fade, fly, slide, blur } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
 	import { isRunningStandalone, getOS } from '$lib/utils';
 	import {
@@ -116,6 +116,7 @@
 
 <!-- class:js={mounted } -->
 <!-- fadeInFromNone -->
+
 <nav
 	class="z-50 md:pt-4 md:pb-16 md:px-[7%] fixed md:h-16 w-full bottom-0 md:top-0 {showHideNav}  ease-in "
 >
@@ -183,7 +184,7 @@
 			<!-- <li
         class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}"
       > -->
-			<li class="py-2 translate-y-1 scale-125 md:scale-100 ">
+			<li class=" py-2 translate-y-1 scale-125 md:scale-100 ">
 				<LightDarkMode />
 			</li>
 			<!-- <li><a href={'#'} on:click={() => setTheme('light')}>LightMode</a></li>

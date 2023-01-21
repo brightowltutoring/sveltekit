@@ -89,8 +89,6 @@
 		// }
 	}
 
-	onMount(onMountFirebase);
-
 	//  Hoisted Functions
 
 	// this function needs to detect logout too to reset store
@@ -150,17 +148,25 @@
 			}
 		}
 	}
+
+	let runningStandalone = false;
+
+	onMount(async () => {
+		runningStandalone = await isRunningStandalone();
+		onMountFirebase();
+	});
 </script>
 
 <!-- TODO: when doing w-screen this component on '/login' route is off-center -->
-<main class="w-full flex justify-center items-center ">
+<main class="w-full flex justify-center items-center">
 	<!-- {#if !$isLoggedIn && $showLoginModal} -->
 	{#if !$isLoggedIn}
 		{#key !noTransition && $showLoginModal}
 			<login-card in:slide={{ duration: 400, easing: quintOut }} class="cardStyles">
 				<!-- class={$isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg"} -->
 				<!-- style={`background:${$elementColor}`} -->
-				{#if isRunningStandalone()}
+
+				{#if runningStandalone}
 					<PhoneAuthSection />
 				{:else}
 					<MagicLinkSection />

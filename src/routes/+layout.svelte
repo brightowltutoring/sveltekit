@@ -31,13 +31,13 @@
 
 		isUIDfromIDB();
 
-		setTimeout(() => {
+		setTimeout(async () => {
 			// console.log("hasUID", hasUID);
 			if (hasUID) onMountFirebase();
 		}, 50);
 
 		// $lessThan768 && disableZoomGestures();
-		(isRunningStandalone() || $lessThan768) && disableZoomGestures();
+		((await isRunningStandalone()) || $lessThan768) && disableZoomGestures();
 		setInnerWidthViaMatchMedia();
 
 		// TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.

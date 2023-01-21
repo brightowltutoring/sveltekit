@@ -2,6 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import BackgroundVideo from '../BackgroundVideo.svelte';
 	import { onMount } from 'svelte';
+	// import { browser } from '$app/environment';
 	// import { goto } from '$app/navigation';
 
 	let ready = false;
@@ -13,7 +14,6 @@
 <BackgroundVideo />
 
 <div class="h-[70vh] flex justify-center items-center text-center ">
-	<!-- used to use button element with 'on:click={() => goto('/plans')}', however breaks when JS turns off  -->
 	<a href="/plans" class="grid grid-rows-1">
 		{#if ready}
 			<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">

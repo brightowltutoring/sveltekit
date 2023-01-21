@@ -43,10 +43,10 @@
 		}
 	}
 
-	let runningStandalone = false;
+	let mounted = false;
 
 	onMount(() => {
-		runningStandalone = isRunningStandalone() === true;
+		mounted = true;
 	});
 </script>
 
@@ -57,36 +57,21 @@
 	class="block font-Nunito font-thin hover:rounded px-2 py-1  duration-100 ease-in {!isRunningStandalone() &&
 		btnColorHover} "
 >
-	{#if runningStandalone}
-		<!-- {#if isRunningStandalone()} -->
-		<div class="fadeInFromNone flex flex-col justify-between items-center h-[50px] w-[50px]">
-			<svelte:component this={icon} bind:navIconClicked />
-			<span class="text-xs text-center">{name}</span>
-		</div>
-	{:else}
-		<div class="fadeInFromNone text-2xl md:text-xl ">
-			{name}
-		</div>
-	{/if}
+	<!-- fadeInFromNone -->
 
-	<!-- In order to work 'isRunningStandalone()' as to redefined as an async function -->
-	<!-- {#await isRunningStandalone() then value}
-		{#if value}
-			<div class="flex flex-col justify-between items-center h-[50px] w-[50px] ">
-				<svelte:component this={icon} bind:navIconClicked />
-				<span class="text-xs text-center">{name}</span>
-			</div>
-		{:else}
-			<div class=" py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll">
-				{name}
-			</div>
-		{/if}
-	{/await}
-	<noscript>
-		<div
-			class=" hover:rounded p-2  py-1 duration-300 ease-in-out text-2xl md:text-xl overflow-y-scroll {btnColorHover}"
-		>
-			{name}
-		</div>
-	</noscript> -->
+	<!-- This ridiculous if block is necessary if want a default navbar that works when js is turned off (i.e. !mounted is truthy), OTHERWISE await a PWA check to give the PWA version of the navbar, else produce default navbar again -->
+	{#if !mounted}
+		<div class="text-2xl md:text-xl">{name}</div>
+	{:else}
+		{#await isRunningStandalone() then isTrue}
+			{#if isTrue}
+				<div class="flex flex-col justify-between items-center h-[50px] w-[50px]">
+					<svelte:component this={icon} bind:navIconClicked />
+					<span class="text-xs text-center">{name}</span>
+				</div>
+			{:else}
+				<div class="text-2xl md:text-xl">{name}</div>
+			{/if}
+		{/await}
+	{/if}
 </a>

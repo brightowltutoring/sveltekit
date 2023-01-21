@@ -18,15 +18,19 @@
 	}
 
 	import { onMount } from 'svelte';
-	onMount(() => {
+
+	let runningStandalone: boolean;
+
+	onMount(async () => {
 		// using event delegation logic to do X when target is clicked and do Y when not-target is clicked ... previously had to implement this with store variables and manually resetting logic ... TODO: possibly refactor the resetting logic use this
 		// @ts-ignore
 		document.addEventListener('click', handleContactLinkClicked);
+		runningStandalone = await isRunningStandalone();
 	});
 </script>
 
 <div
-	class=" text-sm mt-20 {isRunningStandalone()
+	class=" text-sm mt-20 {runningStandalone
 		? 'mb-32'
 		: 'mb-10'} flex justify-center items-center flex-row gap-x-1"
 >
