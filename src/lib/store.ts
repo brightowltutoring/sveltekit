@@ -1,5 +1,6 @@
 import { writable, derived, get } from 'svelte/store';
 
+// TODO: added jan 22 when moving function from +layout.svelte to SigninWithEmailLink.ts; may delete
 export const loggedInEmail = writable('');
 
 export const runningStandalone = writable(false);

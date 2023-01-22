@@ -7,7 +7,7 @@
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Navbar from './Navbar.svelte';
 	import Dropzone from './homework/Dropzone.svelte';
-	// import InView from '$lib/Wrappers/InView.svelte';
+
 	let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 	import Footer from './Footer.svelte';
 
@@ -21,7 +21,6 @@
 		showLoginModal,
 		showHomeworkModal,
 		navAppClicked,
-		// isLoggedIn,
 		isDarkMode,
 		runningStandalone
 	} from '$lib/store';
