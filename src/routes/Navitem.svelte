@@ -44,7 +44,7 @@
 		}
 	}
 
-	// NOTE: using custom 'browser:hidden' and 'pwa:hidden' custom breakpoints, I don't need to rely on javascript and therefore no flash of content is possible
+	// NOTE: using custom 'pwa' breakpoint, I don't need to rely on javascript and therefore no flash of content is possible
 
 	// let mounted = false;
 	// onMount(() => (mounted = true));
@@ -58,7 +58,7 @@
 		btnColorHover} "
 >
 	<!-- {#if mounted && $runningStandalone} -->
-	<div class="browser:hidden flex flex-col justify-between items-center h-[50px] w-[50px]">
+	<div class="hidden pwa:flex flex-col justify-between items-center h-[50px] w-[50px]">
 		<svelte:component this={icon} bind:navIconClicked />
 		<span class="text-xs text-center">{name}</span>
 	</div>
