@@ -84,20 +84,6 @@
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
 	}
-
-	let mounted = false;
-	let mounted2 = true;
-
-	onMount(() => {
-		mounted = true;
-		mounted2 = false;
-	});
-
-	// const setTheme = (theme: string) => {
-	// 	document.cookie = `siteTheme=${theme}`;
-	// 	console.log('theme', theme);
-	// 	alert(3);
-	// };
 </script>
 
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
@@ -107,18 +93,9 @@
 />
 
 <!-- gap-x-24 -->
-
-<!-- fadeInFromNone  -->
-<!-- animate-fadeIn -->
-<!-- {!mounted
-		? 'opacity-0'
-		: 'opacity-100 transition-opacity duration-1000'}  -->
-
-<!-- class:js={mounted } -->
-<!-- fadeInFromNone -->
-
+<!-- bottom-0 md:top-0 -->
 <nav
-	class="z-50 md:pt-4 md:pb-16 md:px-[7%] fixed md:h-16 w-full bottom-0 md:top-0 {showHideNav}  ease-in "
+	class="z-50 md:pt-4 md:pb-16 md:px-[7%] fixed md:h-16 w-full  {showHideNav} pwa:bottom-0 ease-in "
 >
 	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
 		<!-- opacity-0 {fadeInToFullOpacity}  -->

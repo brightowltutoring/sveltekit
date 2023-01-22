@@ -6,9 +6,7 @@
 	// import { goto } from '$app/navigation';
 
 	let ready = false;
-	onMount(() => {
-		ready = true;
-	});
+	onMount(() => (ready = true));
 </script>
 
 <BackgroundVideo />

@@ -3,6 +3,11 @@ module.exports = {
 	plugins: [require('@tailwindcss/typography')],
 	theme: {
 		extend: {
+			screens: {
+				// These are used as 'pwa:hidden, browser:hidden' instead of checking display-mode with async js combined svelte if-block logic ... such that when JS is turned off the conditional logic works out. Really a shame that tailwind doesn't support it natively; this css way is both more economic and non-async ...  the js way requires initializing js store variable in +layout.svelte, ... then importing per component file ... then potentially dealing with async nature, which leads to flashes of content.
+				pwa: { raw: '(display-mode: standalone)' },
+				browser: { raw: '(display-mode: browser)' }
+			},
 			gridTemplateColumns: {
 				dynamic: 'repeat(auto-fit, minmax(20rem, 1fr))'
 			},
@@ -18,14 +23,14 @@ module.exports = {
 				Poppins: ['Poppins', 'sans-serif']
 			},
 			keyframes: {
-				fadeIn: {
-					'0%': {
-						opacity: '0'
-					},
-					'100%': {
-						opacity: '100'
-					}
-				}
+				// fadeIn: {
+				// 	'0%': {
+				// 		opacity: '0'
+				// 	},
+				// 	'100%': {
+				// 		opacity: '100'
+				// 	}
+				// }
 				// wiggle: {
 				// 	'0%, 100%': {
 				// 		transform: 'rotate(-3deg)'
@@ -36,7 +41,7 @@ module.exports = {
 				// }
 			},
 			animation: {
-				fadeIn: 'fadeIn 0.7s ease-in'
+				// fadeIn: 'fadeIn 0.7s ease-in'
 				// wiggle: 'wiggle 1s ease-in-out infinite',
 			}
 		}

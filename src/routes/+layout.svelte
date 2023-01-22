@@ -8,7 +8,7 @@
 	import Dropzone from './homework/Dropzone.svelte';
 	import InView from '$lib/Wrappers/InView.svelte';
 	let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
-	// import Footer from './Footer.svelte';
+	import Footer from './Footer.svelte';
 
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
@@ -274,12 +274,14 @@
 	<div class="px-[7%] pt-32 md:block">
 		<slot />
 
-		<!-- <Footer bind:contactLinkClicked /> -->
+		{#if $page.route?.id !== '/classroom' && $page.route?.id !== '/pwa-home'}
+			<Footer bind:contactLinkClicked />
+		{/if}
 
-		<InView onview={async () => (FooterComponent = await import('./Footer.svelte'))}>
+		<!-- <InView onview={async () => (FooterComponent = await import('./Footer.svelte'))}>
 			{#if !($page.route?.id == '/pwa-home' || '/classroom') && FooterComponent}
 				<FooterComponent.default bind:contactLinkClicked />
 			{/if}
-		</InView>
+		</InView> -->
 	</div>
 </main>

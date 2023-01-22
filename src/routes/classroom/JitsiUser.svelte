@@ -7,13 +7,11 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { lessThan768, runningStandalone } from '$lib/store';
-	// import { isRunningStandalone } from '$lib/utils';
 
 	async function hangUpBtn() {
 		await api.dispose();
-		// await api.executeCommand("hangup");
+
 		$runningStandalone ? goto('/pwa-home') : goto('/');
-		// isRunningStandalone() ? goto('/pwa-home') : goto('/');
 	}
 
 	let api: any, par: Array<string>;
