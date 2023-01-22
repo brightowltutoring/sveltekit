@@ -85,9 +85,9 @@
 	onMount(async () => {
 		// This imports various firebase modules IF user has previously signed in with firebase .. i.e. doesnt ship unnecessary js to people who have never logged in.  TODO: would prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead ... and to await the result rather than use some arbitrary timeout delay.
 
-		await isUIDfromIDB();
+		isUIDfromIDB();
 		setTimeout(async () => {
-			if (hasUID) await SignInWithEmailLink();
+			if (hasUID) SignInWithEmailLink();
 		}, 50);
 
 		// $lessThan768 && disableZoomGestures();
