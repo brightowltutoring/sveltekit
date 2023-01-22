@@ -1,5 +1,7 @@
 import { writable, derived, get } from 'svelte/store';
 
+export const loggedInEmail = writable('');
+
 export const runningStandalone = writable(false);
 // const createWritableStore = (key, startValue) => {
 //   const { subscribe, set } = writable(startValue);
@@ -131,7 +133,8 @@ export const routes = writable({
 		href: '/login',
 		title: 'Login 🚀',
 		isCurrent: false,
-		meta: `<meta property="og:url" content="https://thinksolve.io/login">`,
+		meta: `<meta name="description" content="Log in page."/> 
+		<meta property="og:url" content="https://thinksolve.io/login">`,
 		icon: IconLogin
 	},
 	plans: {

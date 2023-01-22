@@ -1,12 +1,13 @@
 <!-- TODO: fix types for: FooterComponent, Import function prop,  -->
 <script lang="ts">
 	import './styles.css';
+	import { SignInWithEmailLink } from './login/SigninWithEmailLink';
 	import Seo from './Seo.svelte';
 	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Navbar from './Navbar.svelte';
 	import Dropzone from './homework/Dropzone.svelte';
-	import InView from '$lib/Wrappers/InView.svelte';
+	// import InView from '$lib/Wrappers/InView.svelte';
 	let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 	import Footer from './Footer.svelte';
 
@@ -20,68 +21,14 @@
 		showLoginModal,
 		showHomeworkModal,
 		navAppClicked,
-		isLoggedIn,
+		// isLoggedIn,
 		isDarkMode,
 		runningStandalone
 	} from '$lib/store';
 	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
 	import { elasticOut, quintOut } from 'svelte/easing';
 
-	onMount(async () => {
-		// This imports various firebase modules IF user has previously signed in with firebase .. i.e. doesnt ship unnecessary js to people who have never logged in.  TODO: would prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead ... and to await the result rather than use some arbitrary timeout delay.
-
-		isUIDfromIDB();
-
-		setTimeout(async () => {
-			// console.log("hasUID", hasUID);
-			if (hasUID) onMountFirebase();
-		}, 50);
-
-		// $lessThan768 && disableZoomGestures();
-
-		// initializing the global variable so I don't have to call this function repeatedly
-		$runningStandalone = await isRunningStandalone();
-
-		($runningStandalone || $lessThan768) && disableZoomGestures();
-		setInnerWidthViaMatchMedia();
-
-		// TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
-	});
-
-	let loggedInEmail;
-	async function onMountFirebase() {
-		const { auth } = await import('./login/firebase');
-		const { onAuthStateChanged, isSignInWithEmailLink } = await import('firebase/auth');
-
-		// Confirm the link is a sign-in with email link.
-
-		if (isSignInWithEmailLink(auth, window.location.href)) {
-			let email: string | null = window.localStorage.getItem('emailForSignIn');
-			if (!email) email = window.prompt('Please provide your email for confirmation');
-			else {
-				const { signInWithEmailLink } = await import('firebase/auth');
-				signInWithEmailLink(auth, email, window.location.href)
-					.then(() => {
-						window.localStorage.removeItem('emailForSignIn');
-						$showLoginModal = true;
-					})
-					.catch((error) => console.log('signInWithEmailLink:', error));
-			}
-		}
-
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				$isLoggedIn = true;
-				loggedInEmail = user.email;
-			} else {
-				localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
-				$isLoggedIn = false;
-				$showLoginModal = false;
-				loggedInEmail = '';
-			}
-		});
-	}
-
+	// TODO: EXPERIMENTAL CODE
 	let hasUID = false;
 	async function isUIDfromIDB() {
 		const dbName = 'firebaseLocalStorageDb';
@@ -133,15 +80,28 @@
 			return runAndWait(0);
 		}
 	}
+	// TODO: EXPERIMENTAL CODE
 
-	// const opacityEasingDelay = 100;
-	// let changeOpacityTo100;
-	// $: if ($showLoginModal && !$isLoggedIn) {
-	//   setTimeout(() => {
-	//     changeOpacityTo100 =
-	//       "opacity-100 transition-opacity duration-100 ease-in";
-	//   }, opacityEasingDelay);
-	// }
+	onMount(async () => {
+		// This imports various firebase modules IF user has previously signed in with firebase .. i.e. doesnt ship unnecessary js to people who have never logged in.  TODO: would prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead ... and to await the result rather than use some arbitrary timeout delay.
+
+		isUIDfromIDB();
+
+		setTimeout(async () => {
+			// if (hasUID) onMountFirebase();
+			if (hasUID) SignInWithEmailLink();
+		}, 50);
+
+		// $lessThan768 && disableZoomGestures();
+
+		// initializing the global variable so I don't have to call this function repeatedly
+		$runningStandalone = await isRunningStandalone();
+
+		($runningStandalone || $lessThan768) && disableZoomGestures();
+		setInnerWidthViaMatchMedia();
+
+		// TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
+	});
 
 	let contactLinkClicked = false;
 
@@ -249,15 +209,7 @@
 	<!-- <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
     <LoginCard /> -->
 	<Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
-		<!-- bgTint={`backdrop-blur-md opacity-0 ${changeOpacityTo100}`} -->
-
 		<LazyMount bind:contactLinkClicked Import={() => import('./login/LoginCard.svelte')} />
-		<!-- <LazyMount
-      Import={() => {
-        setTimeout(() => ($showLoginModal = true), 2.5 * opacityEasingDelay); //opacityEasingDelay = 100ms
-        return import("$lib/Login/LoginCard.svelte");
-      }}
-    /> -->
 	</Modal>
 
 	<Modal bind:showModal={$showHomeworkModal} bgTint={'bg-[rgba(0,0,0,0.1)]'}>

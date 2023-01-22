@@ -1,18 +1,18 @@
 <script lang="ts">
 	let smsCode: string;
-	let countryCode: string = '+1';
+	let countryCode = '+1';
 
 	import {
 		regexPhoneChecker,
 		generateRecaptchaVerifier,
 		sendCodeToPhone,
 		verifySMSCode
-	} from './loginFunctions';
+	} from './PhoneLogin';
 	import IconPhone from '$lib/Icons/LoginIcons/IconPhone.svelte';
 	import { isDarkMode } from '$lib/store';
 
 	let phoneCodeSent = false;
-	let emptyPhoneInputAnimated: boolean;
+	let emptyPhoneInputAnimated = false;
 	$: shortPing = !phoneCodeSent && emptyPhoneInputAnimated && 'animate-ping';
 
 	let sendPhoneCodeBtn: HTMLElement;

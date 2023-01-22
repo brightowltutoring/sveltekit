@@ -17,8 +17,8 @@
 	import { goto } from '$app/navigation';
 	import { slide } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
-	import { isRunningStandalone } from '$lib/utils';
-	import { logoutFunction } from './loginFunctions';
+	// import { isRunningStandalone } from '$lib/utils';
+	import { logoutFunction } from './logoutFunction';
 	import { isLoggedIn, showLoginModal } from '$lib/store';
 
 	export let noTransition = false;

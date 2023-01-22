@@ -1,9 +1,10 @@
 <script>
 	import { isDarkMode } from '$lib/store';
-	import { GoogleLogin } from './loginFunctions';
+	import { GoogleLogin } from './GoogleLogin';
 	import IconGoogle from '$lib/Icons/LoginIcons/IconGoogle.svelte';
 </script>
 
+<!-- href="/plans" -->
 <button
 	on:keydown={GoogleLogin}
 	on:click={GoogleLogin}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { regexEmailChecker, magicLinkToEmail } from './loginFunctions';
+	import { regexEmailChecker, magicLinkToEmail } from './MagicLinkLogin';
 	import IconEmail from '$lib/Icons/LoginIcons/IconEmail.svelte';
 	import { isDarkMode } from '$lib/store';
 
