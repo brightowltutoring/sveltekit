@@ -7,7 +7,7 @@
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Navbar from './Navbar.svelte';
 	import Dropzone from './homework/Dropzone.svelte';
-	import InView from '$lib/Wrappers/InView.svelte';
+	// import InView from '$lib/Wrappers/InView.svelte';
 	let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 	import Footer from './Footer.svelte';
 
@@ -21,7 +21,7 @@
 		showLoginModal,
 		showHomeworkModal,
 		navAppClicked,
-		isLoggedIn,
+		// isLoggedIn,
 		isDarkMode,
 		runningStandalone
 	} from '$lib/store';
@@ -85,13 +85,12 @@
 	onMount(async () => {
 		// This imports various firebase modules IF user has previously signed in with firebase .. i.e. doesnt ship unnecessary js to people who have never logged in.  TODO: would prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead ... and to await the result rather than use some arbitrary timeout delay.
 
-		isUIDfromIDB();
-
-		setTimeout(async () => {
-			// console.log("hasUID", hasUID);
-			if (hasUID) onMountFirebase();
-			// if (hasUID) SignInWithEmailLink();
-		}, 50);
+		SignInWithEmailLink(); //temporary commenting out conditional logic below which runs this function
+		// await isUIDfromIDB();
+		// setTimeout(async () => {
+		// 	// if (hasUID) onMountFirebase();
+		// 	if (hasUID) await SignInWithEmailLink();
+		// }, 50);
 
 		// $lessThan768 && disableZoomGestures();
 
@@ -104,39 +103,41 @@
 		// TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios' ... Main use case is for downloading PWA on ios/android phones, so as long as that works, it's fine.
 	});
 
-	let loggedInEmail;
-	async function onMountFirebase() {
-		const { auth } = await import('./login/firebase');
-		const { onAuthStateChanged, isSignInWithEmailLink } = await import('firebase/auth');
+	// TODO: this logic moved to SigninWithEmailLink.ts in '/login' folder; the code is broken for magic link signin in both cases at the moment (jan 22, 2023 @ 4:30pm)
+	// let loggedInEmail;
+	// async function onMountFirebase() {
+	// 	const { auth } = await import('./login/firebase');
+	// 	const { onAuthStateChanged, isSignInWithEmailLink } = await import('firebase/auth');
 
-		// Confirm the link is a sign-in with email link.
+	// 	// Confirm the link is a sign-in with email link.
 
-		if (isSignInWithEmailLink(auth, window.location.href)) {
-			let email: string | null = window.localStorage.getItem('emailForSignIn');
-			if (!email) email = window.prompt('Please provide your email for confirmation');
-			else {
-				const { signInWithEmailLink } = await import('firebase/auth');
-				signInWithEmailLink(auth, email, window.location.href)
-					.then(() => {
-						window.localStorage.removeItem('emailForSignIn');
-						$showLoginModal = true;
-					})
-					.catch((error) => console.log('signInWithEmailLink:', error));
-			}
-		}
+	// 	if (isSignInWithEmailLink(auth, window.location.href)) {
+	// 		let email: string | null = window.localStorage.getItem('emailForSignIn');
+	// 		if (!email) email = window.prompt('Please provide your email for confirmation');
+	// 		else {
+	// 			const { signInWithEmailLink } = await import('firebase/auth');
+	// 			signInWithEmailLink(auth, email, window.location.href)
+	// 				.then(() => {
+	// 					window.localStorage.removeItem('emailForSignIn');
+	// 					$showLoginModal = true;
+	// 				})
+	// 				.catch((error) => console.log('signInWithEmailLink:', error));
+	// 		}
+	// 	}
 
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				$isLoggedIn = true;
-				loggedInEmail = user.email;
-			} else {
-				localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
-				$isLoggedIn = false;
-				$showLoginModal = false;
-				loggedInEmail = '';
-			}
-		});
-	}
+	// 	onAuthStateChanged(auth, (user) => {
+	// 		if (user) {
+	// 			$isLoggedIn = true;
+	// 			loggedInEmail = user.email;
+	// 		} else {
+	// 			localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
+	// 			$isLoggedIn = false;
+	// 			$showLoginModal = false;
+	// 			loggedInEmail = '';
+	// 		}
+	// 	});
+	// }
+	// TODO: this logic moved to SigninWithEmailLink.ts in '/login' folder; the code is broken for magic link signin in both cases at the moment (jan 22, 2023 @ 4:30pm)
 
 	let contactLinkClicked = false;
 
