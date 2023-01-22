@@ -47,7 +47,7 @@
 </svelte:head>
 
 <!-- works without JS ...  but seems like anchor tag url /SSR way is still preferable since the sibling input element has to sit above the icon div elements in order to work (and therefore cannot wrap icons in anchor tag) -->
-<main>
+<!-- <main>
 	{#key $isDarkMode}
 		<div in:slide={{ duration: 600, easing: quintOut }}>
 			<input
@@ -65,10 +65,10 @@
 			</div>
 		</div>
 	{/key}
-</main>
+</main> -->
 
 <!-- Breaks without JS -->
-<!-- <main>
+<main>
 	{#key $isDarkMode}
 		<div in:slide={{ duration: 600, easing: quintOut }}>
 			<button on:click={toggleDarkMode} in:scale={{ duration: 1000, easing: elasticOut }}>
@@ -84,7 +84,7 @@
 			</button>
 		</div>
 	{/key}
-</main> -->
+</main>
 
 <!-- Currently using nested 'divs' to compose two svelte transitions. This can be done with a custom function as well (TODO:) such as on: https://svelte.dev/repl/f5c42c6dc6774f29ad9350cd2dc2d299?version=3.38.3 -->
 <style>

@@ -67,7 +67,7 @@ export function disableZoomGestures() {
 	}
 }
 
-// export async function isRunningStandalone() {
+// export function isRunningStandalone() {
 export async function isRunningStandalone() {
 	return browser && window.matchMedia('(display-mode: standalone)').matches;
 }
