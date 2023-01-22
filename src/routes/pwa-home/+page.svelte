@@ -12,9 +12,8 @@
 </script>
 
 <BackgroundVideo />
-
-<div class="h-[70vh] flex justify-center items-center text-center ">
-	<a href="/plans" class="grid grid-rows-1">
+<a href="/plans" class="h-[70vh] flex justify-center items-center text-center ">
+	<div class="grid grid-rows-1">
 		{#if ready}
 			<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
 				You're on the <span class="gradientTextColor"> App!</span>
@@ -25,5 +24,5 @@
 			</div>
 		{/if}
 		<div class="grid px-6 text-2xl font-Nunito font-thin ">the navbar is now your friend 🤝</div>
-	</a>
-</div>
+	</div>
+</a>
