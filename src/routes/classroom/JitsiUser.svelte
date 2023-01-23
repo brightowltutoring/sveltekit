@@ -1,5 +1,5 @@
 <script lang="ts">
-	import './jitsi_api';
+	// import './jitsi_api';
 	// using local copy of jitsi api script since standard head script (e.g. using: src="https://meet.jit.si/external_api.js"), in commented out <svelte:head> below, not working
 
 	export let admin = false; // existence prop; used for '/classroomA' route
@@ -122,6 +122,7 @@
 
 			// @ts-ignore
 			// TODO: potential bug
+
 			api = await new JitsiMeetExternalAPI(domain, options);
 
 			// const iframe = api.getIFrame();
@@ -145,9 +146,10 @@
 </script>
 
 <!-- <div id="meet" class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px]`}> -->
+
 <div
 	id="meet"
-	class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px] opacity-0 ${changeOpacityTo100}`}
+	class={`opacity-0 ${changeOpacityTo100}  relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px] `}
 >
 	<button on:click={hangUpBtn}>
 		<img
@@ -158,7 +160,3 @@
 		/>
 	</button>
 </div>
-
-<!-- <svelte:head>
-	<script src="https://meet.jit.si/external_api.js"></script>
-</svelte:head> -->

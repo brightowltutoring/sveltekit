@@ -109,19 +109,12 @@
 </script>
 
 <Seo />
-<svelte:head>
-	<link rel="manifest" href="/manifest.json" />
-	<!-- <script>
-		if (window.matchMedia('(display-mode: standalone)').matches) {
-			document.cookie = 'deviceMode=pwa';
 
-			setTimeout(() => {
-				document.getElementById('navvy').classList.add('bg-red-500');
-			}, 0);
-		} else {
-			document.cookie = 'deviceMode=not-pwa';
-		}
-	</script> -->
+<svelte:head>
+	<script src="https://meet.jit.si/external_api.js" defer></script>
+	<!-- This is placed here — instead of route component — since trying to navigate to '/classroom',say, results in the jitsi function not loading in time. Previously I used a local copy of the jitsi api (js file) with SSR set to false in +page.ts ... which works ... however the page breaks when JS is turned off disallowing <noscript> content -->
+
+	<link rel="manifest" href="/manifest.json" />
 </svelte:head>
 
 <main class="flex flex-col min-h-screen">
