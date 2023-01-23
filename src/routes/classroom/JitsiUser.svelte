@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { scale } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
 	// import './jitsi_api';
 	// using local copy of jitsi api script since standard head script (e.g. using: src="https://meet.jit.si/external_api.js"), in commented out <svelte:head> below, not working
 
@@ -114,11 +112,7 @@
 
 	let changeOpacityTo100: string;
 
-	import { browser } from '$app/environment';
-	let mounted = false;
-
 	onMount(async () => {
-		mounted = true;
 		setTimeout(() => {
 			changeOpacityTo100 = 'opacity-100 transition-opacity ease-in-out duration-500';
 		}, 1000);

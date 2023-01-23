@@ -43,22 +43,22 @@
 	<!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7" -->
 	<!-- {#if ready} -->
 
-	{#key mounted}
-		{#each plansCardArray as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
-			<div
-				in:scale={{
-					delay: 100 * i,
-					duration: 1000,
-					easing: elasticOut
-				}}
-			>
-				<PlansCard {card} {payNowUrl} {payLaterUrl}>
-					<span slot="cardTitle"> {cardTitle} </span>
-					<span slot="cardText"> {cardText} </span>
-				</PlansCard>
-			</div>
-		{/each}
-	{/key}
+	<!-- {#key mounted} -->
+	{#each plansCardArray as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
+		<div
+			in:scale={{
+				delay: 100 * i,
+				duration: 1000,
+				easing: elasticOut
+			}}
+		>
+			<PlansCard {card} {payNowUrl} {payLaterUrl}>
+				<span slot="cardTitle"> {cardTitle} </span>
+				<span slot="cardText"> {cardText} </span>
+			</PlansCard>
+		</div>
+	{/each}
+	<!-- {/key} -->
 	<!-- {/if} -->
 </plans-section>
 <!-- </InView> -->
