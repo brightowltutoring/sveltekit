@@ -30,12 +30,13 @@
 		if ($scrollY < 10) showHideNav = 'bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-none';
 
 		if ($scrollY > 40 && $instDeltaY > 10) {
-			showHideNav = 'backdrop-blur-3xl';
+			showHideNav = 'backdrop-blur-3xl duration-200';
 			// showHideNav = 'backdrop-blur-3xl bg-red-500';
 		}
 
 		if ($scrollY > 400 && $instDeltaY > 10)
-			showHideNav = '-bottom-20 md:-top-20 backdrop-blur-3xl duration-200';
+			showHideNav =
+				'bottom-0 translate-y-20 md:top-0 md:-translate-y-20 backdrop-blur-3xl duration-200';
 
 		if ($instDeltaY < -100 && $scrollY !== 0)
 			// showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl duration-500 bg-blue-500';
@@ -97,12 +98,10 @@
 <!-- gap-x-24 -->
 <!-- bottom-0 md:top-0 -->
 <nav
-	class="z-50 md:pt-4 md:pb-16 md:px-[7%] fixed md:h-16 w-full  {showHideNav} pwa:bottom-0 ease-in "
+	class="z-50 md:pt-4 md:pb-16 md:px-[7%] md:h-16 w-full md:top-0 bottom-0 pwa:bottom-0 ease-in fixed {showHideNav}"
 >
 	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
-		<!-- opacity-0 {fadeInToFullOpacity}  -->
 		{#key resetLogoClick}
-			<!-- previously was a button, but anchor tag 'degrades gracefully'  -->
 			<a
 				href="/"
 				on:click={clickLogo}

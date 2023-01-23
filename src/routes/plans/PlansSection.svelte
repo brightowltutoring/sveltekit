@@ -2,11 +2,10 @@
 	// import InView from "$lib/Wrappers/InView.svelte";
 	import PlansCard from './PlansCard.svelte';
 	import { elasticOut } from 'svelte/easing';
-	import {
-		scale
-		//  slide ,fade, fly,
-	} from 'svelte/transition';
+	import { scale } from 'svelte/transition';
+	//  slide ,fade, fly,
 	import { plansCardArray } from './plansCardArray';
+	import { onMount } from 'svelte';
 	// import { onMount, createEventDispatcher } from "svelte";
 	// import { cssToHead, jsToHead } from "$lib/utils";
 	// let dispatch = createEventDispatcher();
@@ -33,6 +32,9 @@
 	// function boop() {
 	//   dispatch("boop", { plansCardArray, message: "n i boop" });
 	// }
+
+	let mounted = false;
+	onMount(() => (mounted = true));
 </script>
 
 <!-- <InView once margin={"200px"} onview={addCalendlyCSSandJS}> -->
@@ -41,20 +43,22 @@
 	<!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7" -->
 	<!-- {#if ready} -->
 
-	{#each plansCardArray as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
-		<div
-			in:scale={{
-				delay: 100 * i,
-				duration: 1000,
-				easing: elasticOut
-			}}
-		>
-			<PlansCard {card} {payNowUrl} {payLaterUrl}>
-				<span slot="cardTitle"> {cardTitle} </span>
-				<span slot="cardText"> {cardText} </span>
-			</PlansCard>
-		</div>
-	{/each}
+	{#key mounted}
+		{#each plansCardArray as { card, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
+			<div
+				in:scale={{
+					delay: 100 * i,
+					duration: 1000,
+					easing: elasticOut
+				}}
+			>
+				<PlansCard {card} {payNowUrl} {payLaterUrl}>
+					<span slot="cardTitle"> {cardTitle} </span>
+					<span slot="cardText"> {cardText} </span>
+				</PlansCard>
+			</div>
+		{/each}
+	{/key}
 	<!-- {/if} -->
 </plans-section>
 <!-- </InView> -->
