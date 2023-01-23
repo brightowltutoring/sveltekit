@@ -120,19 +120,21 @@ body {
 
 /* Using tailwind css version instead of this. Pro: tailwind version has intellisense when hovering the code; Con: have to define the code here in the tailwind config file */
 .fadeInFromNone {
-	animation: fadeInFromNone 1s ease-in;
+	animation: fadeInFromNone 0.8s ease;
 }
 
 @keyframes fadeInFromNone {
 	0% {
-		opacity: 0;
+		/* opacity: 0; */
 		display: none;
-		filter: blur(1.5rem);
+		/* filter: blur(1.5rem); */
+		transform: scale(0) rotate(30deg);
 	}
 
 	100% {
-		opacity: 1;
-		filter: blur(0);
+		/* opacity: 1; */
+		/* filter: blur(0); */
 		display: block;
+		transform: scale(1) rotate(0deg);
 	}
 }

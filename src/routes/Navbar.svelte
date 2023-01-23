@@ -4,7 +4,7 @@
 	import LightDarkMode from './LightDarkMode.svelte';
 	import Navitem from './Navitem.svelte';
 	// import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
+	// import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { scale, fade, fly, slide, blur } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
@@ -19,7 +19,8 @@
 		elementColor,
 		showLoginModal,
 		showHomeworkModal,
-		instDeltaY
+		instDeltaY,
+		runningStandalone
 	} from '$lib/store';
 	import { spring } from 'svelte/motion';
 
@@ -72,7 +73,8 @@
 
 	let hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
 
-	let hideIfRunningStandalone = isRunningStandalone() && 'hidden';
+	// let hideIfRunningStandalone = isRunningStandalone() && 'hidden';
+	let hideIfRunningStandalone = $runningStandalone && 'hidden';
 
 	// let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-300 ease-in';
 	// THIS NOW REPLACED BY CUSTOM TAILWIND CSS ANIMATION: animate-fadeIn

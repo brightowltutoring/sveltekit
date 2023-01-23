@@ -5,6 +5,7 @@
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { isDarkMode } from '$lib/store';
 	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 
 	// Initialize $isDarkMode using client-side settings via 'initialTheme()';
 	// Note: 'initialTheme()' declaration AND dark-mode css initialization done in head of document (see <svelte:head> below)
@@ -25,12 +26,16 @@
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
 		return '';
 	}
+
+	let mounted = false;
+
+	onMount(() => (mounted = true));
 </script>
 
 <svelte:head>
 	<script lang="ts">
 		// document.documentElement.classList.add(initialTheme()); // one liner not liked by lighthouse
-		if (initialTheme() === '' || null) {
+		if (initialTheme() === '') {
 			document.documentElement.classList.remove('dark-mode');
 		} else {
 			document.documentElement.classList.add('dark-mode');
@@ -68,43 +73,17 @@
 </main> -->
 
 <!-- Breaks without JS -->
-<main>
+
+<main class="fadeInFromNone px-2">
 	{#key $isDarkMode}
 		<div in:slide={{ duration: 600, easing: quintOut }}>
 			<button on:click={toggleDarkMode} in:scale={{ duration: 1000, easing: elasticOut }}>
 				{#if $isDarkMode}
-					<a href={'?lightmode'}>
-						<IconSun />
-					</a>
+					<IconSun />
 				{:else}
-					<a href={'?darkmode'}>
-						<IconMoon />
-					</a>
+					<IconMoon />
 				{/if}
 			</button>
 		</div>
 	{/key}
 </main>
-
-<!-- Currently using nested 'divs' to compose two svelte transitions. This can be done with a custom function as well (TODO:) such as on: https://svelte.dev/repl/f5c42c6dc6774f29ad9350cd2dc2d299?version=3.38.3 -->
-<style>
-	/* :root {
-		--light: #f7f7f7;
-		--dark: rgb(20, 13, 33);
-	} */
-	/* :global(html):has(#gato):has(.hidden) {
-		background: var(--dark);
-		color: var(--light);
-	} */
-
-	/* html {
-		background: var(--light);
-		color: var(--dark);
-		transition: background-color 0.3s;
-	}
-
-	html.dark-mode {
-		background: var(--dark);
-		color: var(--light);
-	} */
-</style>

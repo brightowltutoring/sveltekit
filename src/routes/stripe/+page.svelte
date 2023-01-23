@@ -1,111 +1,101 @@
 <script lang="ts">
-  // import "@stripe/stripe-js";
-  import { loadStripe } from "@stripe/stripe-js/pure";
+	// import "@stripe/stripe-js";
+	import { loadStripe } from '@stripe/stripe-js/pure';
 
-  import { onMount } from "svelte";
-  import { PUBLIC_STRIPE_KEY } from "$env/static/public";
-  // const PUBLIC_STRIPE_KEY = import.meta.env.VITE_STRIPE_KEY;
-  import { fly } from "svelte/transition";
-  import { elasticOut } from "svelte/easing";
+	import { onMount } from 'svelte';
+	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
+	// const PUBLIC_STRIPE_KEY = import.meta.env.VITE_STRIPE_KEY;
+	import { fly } from 'svelte/transition';
+	import { elasticOut } from 'svelte/easing';
 
-  let slideKey = false;
+	let slideKey = false;
 
-  // variables related to url parameters
-  let urlSearch: string,
-    service: string,
-    extra: boolean,
-    quantity: number,
-    email: string;
-  let firstName: string = "";
+	// variables related to url parameters
+	let urlSearch: string, service: string, extra: boolean, quantity: number, email: string;
+	let firstName: string = '';
 
-  import { app } from "../login/firebase";
-  import { getFunctions, httpsCallable } from "firebase/functions";
-  const functions = getFunctions(app);
+	import { app } from '../login/firebase';
+	import { getFunctions, httpsCallable } from 'firebase/functions';
+	const functions = getFunctions(app);
 
-  onMount(async () => {
-    slideKey = true;
+	onMount(async () => {
+		slideKey = true;
 
-    urlSearch = window.location.search.slice(1); // gets everything after "?" in url
-    window.history.replaceState({}, "", `/${btoa(urlSearch)}`); // shows url parameters in base64
-    stripeRedirectToCheckout();
+		urlSearch = window.location.search.slice(1); // gets everything after "?" in url
+		window.history.replaceState({}, '', `/${btoa(urlSearch)}`); // shows url parameters in base64
+		stripeRedirectToCheckout();
 
-    async function stripeRedirectToCheckout() {
-      try {
-        let USP = new URLSearchParams(urlSearch);
+		async function stripeRedirectToCheckout() {
+			try {
+				let USP = new URLSearchParams(urlSearch);
 
-        const invitee_full_name = USP.get("invitee_full_name");
-        const firstNameLowerCase = invitee_full_name
-          ?.split(" ")[0]
-          .toLowerCase();
+				const invitee_full_name = USP.get('invitee_full_name');
+				const firstNameLowerCase = invitee_full_name?.split(' ')[0].toLowerCase();
 
-        firstName =
-          firstNameLowerCase!.charAt(0).toUpperCase() +
-          firstNameLowerCase!.slice(1);
+				firstName = firstNameLowerCase!.charAt(0).toUpperCase() + firstNameLowerCase!.slice(1);
 
-        email = USP.get("invitee_email")!;
+				email = USP.get('invitee_email')!;
 
-        // converts answer_1 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
-        let answer_1 = USP.get("answer_1")!.match(/\d+(\.\d{1,2})/)![0];
-        quantity = parseFloat(answer_1) * 60;
+				// converts answer_1 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
+				let answer_1 = USP.get('answer_1')!.match(/\d+(\.\d{1,2})/)![0];
+				quantity = parseFloat(answer_1) * 60;
 
-        // answer_2 relates to adding digital session notes
-        if (USP.get("answer_2")) {
-          // USP.get("answer_2").toLowerCase().includes("yes");
-          // since this quesiton only has "yes" as an optoin then don't need to check anything other than existence
-          extra = true;
-        }
+				// answer_2 relates to adding digital session notes
+				if (USP.get('answer_2')) {
+					// USP.get("answer_2").toLowerCase().includes("yes");
+					// since this quesiton only has "yes" as an optoin then don't need to check anything other than existence
+					extra = true;
+				}
 
-        // event_type_name sets session as classico or mock
-        for (let el of ["classico", "mock"]) {
-          if (USP.get("event_type_name")!.toLowerCase().includes(el)) {
-            service = el;
-            break;
-          }
-        }
+				// event_type_name sets session as classico or mock
+				for (let el of ['classico', 'mock']) {
+					if (USP.get('event_type_name')!.toLowerCase().includes(el)) {
+						service = el;
+						break;
+					}
+				}
 
-        if (service && quantity) {
-          // create checkout session using url params ... but only if some actually exist
-          const stripeSessionIdGCF = httpsCallable(
-            functions,
-            "stripeSessionIdGCF"
-          );
-          const { data } = (await stripeSessionIdGCF({
-            email,
-            extra,
-            service,
-            quantity,
-            // dollar_hourly_rate,
-          })) as any;
+				if (service && quantity) {
+					// create checkout session using url params ... but only if some actually exist
+					const stripeSessionIdGCF = httpsCallable(functions, 'stripeSessionIdGCF');
+					const { data } = (await stripeSessionIdGCF({
+						email,
+						extra,
+						service,
+						quantity
+						// dollar_hourly_rate,
+					})) as any;
 
-          // create checkout session; Stripe() comes from head script
+					// create checkout session; Stripe() comes from head script
 
-          const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
+					const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 
-          stripe!.redirectToCheckout({ sessionId: data.id });
+					stripe!.redirectToCheckout({ sessionId: data.id });
 
-          // Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id }); //non-typescript
-        }
-      } catch (error) {
-        console.log("stripeRedirectToCheckout failed", error);
-      }
-    }
-  });
+					// Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id }); //non-typescript
+				}
+			} catch (error) {
+				console.log('stripeRedirectToCheckout failed', error);
+			}
+		}
+	});
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
   <title>Stripe Checkout</title>
   <script src="https://js.stripe.com/v3/" async></script>
-</svelte:head>
+</svelte:head> -->
+<!-- moving to +layout.svelte with 'defer' attribute, since  -->
 
 <main>
-  {#if slideKey && service && quantity}
-    <div
-      in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
-      class="font-Poppins text-5xl text-center pt-20 animate-bounce loading"
-    >
-      Almost there {firstName}
-    </div>
-  {/if}
+	{#if slideKey && service && quantity}
+		<div
+			in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
+			class="font-Poppins text-5xl text-center pt-20 animate-bounce loading"
+		>
+			Almost there {firstName}
+		</div>
+	{/if}
 </main>
 
 <!-- OLD CODE: -->
@@ -115,15 +105,15 @@
 
 <!-- const extra = USP.get("extra"); -->
 <style>
-  .loading:after {
-    content: " . . .";
-    animation: dots 1s steps(5, end) infinite;
-  }
+	.loading:after {
+		content: ' . . .';
+		animation: dots 1s steps(5, end) infinite;
+	}
 
-  @keyframes dots {
-    0%,
-    40% {
-      color: rgba(0, 0, 0, 0);
-    }
-  }
+	@keyframes dots {
+		0%,
+		40% {
+			color: rgba(0, 0, 0, 0);
+		}
+	}
 </style>
