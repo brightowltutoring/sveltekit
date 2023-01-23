@@ -74,7 +74,7 @@
 	let hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
 
 	// let hideIfRunningStandalone = isRunningStandalone() && 'hidden';
-	let hideIfRunningStandalone = $runningStandalone && 'hidden';
+	// $: hideIfRunningStandalone = $runningStandalone && 'hidden';
 
 	// let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-300 ease-in';
 	// THIS NOW REPLACED BY CUSTOM TAILWIND CSS ANIMATION: animate-fadeIn
@@ -124,7 +124,8 @@
   > -->
 
 			<!-- <li class={hideIfRunningStandalone || hideIfNotIOS}> -->
-			<li class="{hideIfRunningStandalone} {hideIfNotIOS} ">
+			<!-- <li class="{hideIfRunningStandalone} {hideIfNotIOS} "> -->
+			<li class="pwa:hidden {hideIfNotIOS} ">
 				<button
 					class="font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
       border-b-1 rounded "
