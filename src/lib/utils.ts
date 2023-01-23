@@ -1,11 +1,23 @@
 import { browser } from '$app/environment';
 import { scale } from 'svelte/transition';
 
-// taken from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript'
-export function getCookieValue(name: string) {
-	// return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
-	return (browser && document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop()) || '';
-}
+//  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use
+
+export const cookeh = {
+	// found out hard way that some browser don't support special characters for 'name' ..so now sticking to regular letters (i.e. $isLoggedIn is not allowed as a string)
+	setOnce: function (name: string, value: string | boolean) {
+		return (document.cookie = `${name}=${value}; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure`);
+	},
+	get: function (name: string) {
+		// return (browser && document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop()) || '';
+		return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
+		// why do i have browser check again?
+	},
+
+	erase: function (name: string) {
+		return (document.cookie = name + '=; Max-Age=-99999999;');
+	}
+};
 
 // export function initialTheme() {
 //   if (sessionStorage.getItem("isDarkMode") === "true") return "dark";

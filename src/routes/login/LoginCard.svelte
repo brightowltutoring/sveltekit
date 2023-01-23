@@ -1,4 +1,7 @@
 <script lang="ts">
+	// let runningStandalone = false;
+	import { runningStandalone } from '$lib/store';
+
 	import TwitterLoginButton from './TwitterLoginButton.svelte';
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
 	import MagicLinkSection from './MagicLinkSection.svelte';
@@ -17,7 +20,8 @@
 	import { goto } from '$app/navigation';
 	import { slide } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
-	// import { isRunningStandalone } from '$lib/utils';
+	// isRunningStandalone
+	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
 	import { isLoggedIn, showLoginModal } from '$lib/store';
 
@@ -72,16 +76,23 @@
 		//   window.localStorage.getItem("previouslySignedIn")
 		// );
 		// if (previouslySignedIn === true) {
+
+		let name = 'doSomethingOnlyOnce';
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				// window.localStorage.setItem("previouslySignedIn", true);
 				$isLoggedIn = true;
+
+				cookeh.setOnce('loggedInPrev', $isLoggedIn);
+
 				loggedInEmail = user.email;
 
 				loginWelcomeText = user.displayName ? `Hey ${user.displayName}!` : `Hey ${user.email}!`;
 			} else {
-				localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
 				$isLoggedIn = false;
+				cookeh.erase('loggedInPrev');
+
+				localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
 				// $showLoginModal = false;
 				loggedInEmail = '';
 			}
@@ -148,10 +159,6 @@
 			}
 		}
 	}
-
-	// let runningStandalone = false;
-
-	import { runningStandalone } from '$lib/store';
 
 	onMount(async () => {
 		// runningStandalone = await isRunningStandalone();

@@ -1,7 +1,7 @@
 <!-- TODO: fix types for: FooterComponent, Import function prop,  -->
 <script lang="ts">
-	import { SignInWithEmailLink } from './login/SigninWithEmailLink';
 	import './styles.css';
+	import { SignInWithEmailLink } from './login/SigninWithEmailLink';
 	import Seo from './Seo.svelte';
 	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
@@ -13,7 +13,7 @@
 
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { disableZoomGestures, getOS, isRunningStandalone } from '$lib/utils';
+	import { disableZoomGestures, getOS, isRunningStandalone, cookeh } from '$lib/utils';
 
 	import {
 		setInnerWidthViaMatchMedia,
@@ -27,67 +27,12 @@
 	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
 	import { elasticOut, quintOut } from 'svelte/easing';
 
-	// TODO: EXPERIMENTAL CODE
-	let hasUID = false;
-	async function isUIDfromIDB() {
-		const dbName = 'firebaseLocalStorageDb';
-		const stores = ['firebaseLocalStorage'];
-		const dbRequest = window.indexedDB.open(dbName);
-
-		const dump: Record<string, any> = {};
-		let dumpString;
-		let hasUIDinner;
-
-		try {
-			dbRequest.onsuccess = async function () {
-				const tx = dbRequest.result.transaction(stores);
-
-				asyncForEach(
-					stores,
-					function CALLBACK(store: string, next) {
-						const req = tx.objectStore(store).getAll();
-						req.onsuccess = function () {
-							dump[store] = req.result;
-							next();
-						};
-					},
-					function DONE() {
-						dumpString = JSON.stringify(dump);
-						hasUIDinner = dumpString.includes('uid');
-						hasUID = hasUIDinner;
-						// return hasUIDinner;
-					}
-				);
-			};
-		} catch (error) {
-			console.log(error);
-		}
-
-		function asyncForEach(
-			array: Array<string>,
-			callback: (a: string, b: any) => void,
-			done: () => void
-		) {
-			// let finalValue=''
-			function runAndWait(i: number): any {
-				if (i === array.length) {
-					// finalValue = done()
-					return done();
-				}
-				return callback(array[i], () => runAndWait(i + 1));
-			}
-			return runAndWait(0);
-		}
-	}
-	// TODO: EXPERIMENTAL CODE
-
 	onMount(async () => {
 		// This imports various firebase modules IF user has previously signed in with firebase .. i.e. doesnt ship unnecessary js to people who have never logged in.  TODO: would prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead ... and to await the result rather than use some arbitrary timeout delay.
 
-		isUIDfromIDB();
-		setTimeout(async () => {
-			if (hasUID) SignInWithEmailLink();
-		}, 50);
+		if (cookeh.get(`loggedInPrev`)) {
+			SignInWithEmailLink();
+		}
 
 		// $lessThan768 && disableZoomGestures();
 
