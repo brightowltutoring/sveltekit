@@ -38,8 +38,8 @@
 		let dumpString;
 		let hasUIDinner;
 
-		dbRequest.onsuccess = async function () {
-			try {
+		try {
+			dbRequest.onsuccess = async function () {
 				const tx = dbRequest.result.transaction(stores);
 
 				asyncForEach(
@@ -58,10 +58,10 @@
 						// return hasUIDinner;
 					}
 				);
-			} catch (error) {
-				console.log(error);
-			}
-		};
+			};
+		} catch (error) {
+			console.log(error);
+		}
 
 		function asyncForEach(
 			array: Array<string>,
