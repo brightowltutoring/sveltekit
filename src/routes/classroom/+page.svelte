@@ -34,6 +34,7 @@
 {#if browser}
 	{#key mounted}
 		<div
+			class="disableScrollOnThisPage"
 			in:scale={{
 				duration: 2000,
 				easing: quintOut

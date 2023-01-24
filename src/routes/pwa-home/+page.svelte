@@ -10,7 +10,10 @@
 </script>
 
 <BackgroundVideo />
-<a href="/plans" class="h-[70vh] flex justify-center items-center text-center ">
+<a
+	href="/plans"
+	class="disableScrollOnThisPage h-[70vh] flex justify-center items-center text-center "
+>
 	<div class="grid grid-rows-1">
 		{#if ready}
 			<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">

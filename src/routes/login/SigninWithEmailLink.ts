@@ -1,6 +1,3 @@
-// let loggedInEmail: string | null;
-// maybe return this value ... or make global variable since layout component does make use of it (this entire file was moved from layout.svelte)
-
 import { showLoginModal, isLoggedIn, loggedInEmail } from '$lib/store';
 
 // previously in +layout.svelte and named 'onMountFirebase()'; both the version there and here are broken though... thinking it has to do with 'isUIDfromIDB()' check there

@@ -1,19 +1,22 @@
 <!-- TODO: fix types for: FooterComponent, Import function prop,  -->
 <script lang="ts">
+	// export let data;
+	// const { haventLoggedOut, testCookie } = data;
 	import './styles.css';
-	import { SignInWithEmailLink } from './login/SigninWithEmailLink';
+
 	import Seo from './Seo.svelte';
 	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Navbar from './Navbar.svelte';
 	import Dropzone from './homework/Dropzone.svelte';
 
-	let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
+	// let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 	import Footer from './Footer.svelte';
 
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { disableZoomGestures, getOS, isRunningStandalone, cookeh } from '$lib/utils';
+	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
+	import { elasticOut, quintOut } from 'svelte/easing';
 
 	import {
 		setInnerWidthViaMatchMedia,
@@ -24,20 +27,19 @@
 		isDarkMode,
 		runningStandalone
 	} from '$lib/store';
-	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
-	import { elasticOut, quintOut } from 'svelte/easing';
+
+	import { disableZoomGestures, getOS, isPWA, cookeh } from '$lib/utils';
+	import { SignInWithEmailLink } from './login/SigninWithEmailLink';
 
 	onMount(async () => {
-		// This imports various firebase modules IF user has previously signed in with firebase .. i.e. doesnt ship unnecessary js to people who have never logged in.  TODO: would prefer if 'isUIDfromIDB()' returned 'hasUID' boolean instead ... and to await the result rather than use some arbitrary timeout delay.
-
-		if (cookeh.get(`loggedInPrev`)) {
-			SignInWithEmailLink();
-		}
+		// should add check if someone fired a magicLink .. magicLink still doesnt work cross browser
+		// if (haventLoggedOut) {
+		if (cookeh.get(`haventLoggedOut`)) SignInWithEmailLink();
 
 		// $lessThan768 && disableZoomGestures();
 
 		// initializing the global variable so I don't have to call this function repeatedly
-		$runningStandalone = await isRunningStandalone();
+		$runningStandalone = await isPWA();
 
 		($runningStandalone || $lessThan768) && disableZoomGestures();
 		setInnerWidthViaMatchMedia();
@@ -57,7 +59,7 @@
 
 <svelte:head>
 	<script src="https://meet.jit.si/external_api.js" defer></script>
-	<!-- This is placed here — instead of route component — since trying to navigate to '/classroom',say, results in the jitsi function not loading in time. Previously I used a local copy of the jitsi api (js file) with SSR set to false in +page.ts ... which works ... however the page breaks when JS is turned off disallowing <noscript> content -->
+	<!-- This is placed here — instead of route component — since trying to navigate to '/classroom', say, results in the jitsi function not loading in time. Previously I used a local copy of the jitsi api (js file) with SSR set to false in +page.ts ... which works ... however the page breaks when JS is turned off disallowing <noscript> content -->
 
 	<link rel="manifest" href="/manifest.json" />
 </svelte:head>

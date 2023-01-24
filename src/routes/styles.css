@@ -79,6 +79,10 @@ html.dark-mode {
 	color: var(--light);
 }
 
+body:has(.disableScrollOnThisPage) {
+	overflow: hidden;
+}
+
 /* hide scrollbar Firefox */
 /* html {
   scrollbar-width: none; 

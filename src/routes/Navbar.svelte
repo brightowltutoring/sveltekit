@@ -8,7 +8,7 @@
 	import { goto } from '$app/navigation';
 	import { scale, fade, fly, slide, blur } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
-	import { isRunningStandalone, getOS } from '$lib/utils';
+	import { isPWA, getOS } from '$lib/utils';
 	import {
 		isLoggedIn,
 		routes,
@@ -46,7 +46,7 @@
 	let hueRocket = 0;
 	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
 
-	$: if ($isLoggedIn && !isRunningStandalone()) {
+	$: if ($isLoggedIn && !isPWA()) {
 		hueRocket = $isDarkMode ? 0.75 : 0;
 		scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
 	}
@@ -74,7 +74,7 @@
 
 	let hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
 
-	// let hideIfRunningStandalone = isRunningStandalone() && 'hidden';
+	// let hideIfRunningStandalone = isPWA() && 'hidden';
 	// $: hideIfRunningStandalone = $runningStandalone && 'hidden';
 
 	// let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-300 ease-in';
@@ -98,7 +98,7 @@
 <!-- gap-x-24 -->
 <!-- bottom-0 md:top-0 -->
 <nav
-	class="z-50 md:pt-4 md:pb-16 md:px-[7%] md:h-16 w-full md:top-0 bottom-0 pwa:bottom-0 ease-in fixed {showHideNav}"
+	class="z-50 md:pt-4 md:pb-16 md:px-[7%] md:h-16 w-full md:top-0 bottom-0 pwa:bottom-0  pwa:translate-y-0 ease-in fixed {showHideNav}"
 >
 	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
 		{#key resetLogoClick}

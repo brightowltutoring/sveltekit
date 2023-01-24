@@ -71,26 +71,18 @@
 				.catch((error) => console.log('signInWithEmailLink:', error));
 		}
 
-		// window.localStorage.removeItem("previouslySignedIn");
-		// let previouslySignedIn = JSON.parse(
-		//   window.localStorage.getItem("previouslySignedIn")
-		// );
-		// if (previouslySignedIn === true) {
-
-		let name = 'doSomethingOnlyOnce';
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				// window.localStorage.setItem("previouslySignedIn", true);
 				$isLoggedIn = true;
 
-				cookeh.setOnce('loggedInPrev', $isLoggedIn);
+				cookeh.set('haventLoggedOut', $isLoggedIn);
 
 				loggedInEmail = user.email;
 
 				loginWelcomeText = user.displayName ? `Hey ${user.displayName}!` : `Hey ${user.email}!`;
 			} else {
 				$isLoggedIn = false;
-				cookeh.erase('loggedInPrev');
+				cookeh.erase('haventLoggedOut');
 
 				localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
 				// $showLoginModal = false;
@@ -161,7 +153,7 @@
 	}
 
 	onMount(async () => {
-		// runningStandalone = await isRunningStandalone();
+		// runningStandalone = await isPWA();
 		onMountFirebase();
 	});
 </script>

@@ -3,10 +3,12 @@ import { scale } from 'svelte/transition';
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use
 
+// weird how I recreated a simplified version of sveltekit's cookie api .. lol ...but that is intended to work server side??
 export const cookeh = {
 	// found out hard way that some browser don't support special characters for 'name' ..so now sticking to regular letters (i.e. $isLoggedIn is not allowed as a string)
-	setOnce: function (name: string, value: string | boolean) {
-		return (document.cookie = `${name}=${value}; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure`);
+	set: function (name: string, value: string | boolean, seconds = 60 * 60 * 24) {
+		return (document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None; Secure`);
+		// return (document.cookie = `${name}=${value}; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure`);
 	},
 	get: function (name: string) {
 		// return (browser && document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop()) || '';
@@ -15,7 +17,8 @@ export const cookeh = {
 	},
 
 	erase: function (name: string) {
-		return (document.cookie = name + '=; Max-Age=-99999999;');
+		return (document.cookie = name + '=; max-age=0;');
+		// return (document.cookie = name + '=; Max-Age=-99999999;');
 	}
 };
 
@@ -79,8 +82,8 @@ export function disableZoomGestures() {
 	}
 }
 
-// export function isRunningStandalone() {
-export async function isRunningStandalone() {
+// export function isPWA() {
+export async function isPWA() {
 	return browser && window.matchMedia('(display-mode: standalone)').matches;
 }
 

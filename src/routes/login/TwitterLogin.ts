@@ -10,7 +10,7 @@ export async function TwitterLogin() {
 	const provider = new TwitterAuthProvider();
 
 	// if (get(lessThan768)) {
-	// if (isRunningStandalone()) {
+	// if (isPWA()) {
 	//   const { signInWithRedirect } = await import("firebase/auth");
 	//   signInWithRedirect(auth, provider, browserPopupRedirectResolver)
 	//     .then((result) => {
