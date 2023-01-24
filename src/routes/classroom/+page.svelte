@@ -8,6 +8,10 @@
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
+	import { page } from '$app/stores';
+	import { disableScrollingOnPage } from '$lib/utils';
+	disableScrollingOnPage($page.url.pathname);
+
 	// this is to decide in onDestroy to reset to lightmode when navigating away from '/classroom', or to remain in darkmode ... provided darkmode was on before navigating to
 
 	let wasDarkModeLS = browser && sessionStorage.getItem('isDarkMode');
@@ -46,5 +50,5 @@
 {/if}
 
 <!-- <svelte:head>
-	<script src="https://meet.jit.si/external_api.js"></script>
-</svelte:head> -->
+		<script src="https://meet.jit.si/external_api.js"></script>
+	</svelte:head> -->

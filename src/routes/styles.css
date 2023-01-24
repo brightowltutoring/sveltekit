@@ -79,6 +79,7 @@ html.dark-mode {
 	color: var(--light);
 }
 
+/* body .disableScrollOnThisPage { */
 body:has(.disableScrollOnThisPage) {
 	overflow: hidden;
 }

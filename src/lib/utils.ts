@@ -1,5 +1,23 @@
 import { browser } from '$app/environment';
 import { scale } from 'svelte/transition';
+import { onDestroy, onMount } from 'svelte';
+
+// Need to use JS to disable scrolling on firefox, since firefox does not support the :has() css pseudo-selector —— e.g. body:has(element){ overflow:hidden }, is the elegant css way of disabling scroll (for a given route containing a specific element) ——
+export function disableScrollingOnPage(pathname: string) {
+	onMount(() => {
+		if (
+			browser &&
+			navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
+			(pathname === '/classroom' || '/pwa-home')
+		) {
+			document.body.style.overflow = 'hidden';
+		}
+	});
+
+	onDestroy(() => {
+		browser && (document.body.style.overflow = 'auto');
+	});
+}
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use
 

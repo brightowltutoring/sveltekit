@@ -1,9 +1,10 @@
 <script>
 	import { slide } from 'svelte/transition';
 	import BackgroundVideo from '../BackgroundVideo.svelte';
-	import { onMount } from 'svelte';
-	// import { browser } from '$app/environment';
-	// import { goto } from '$app/navigation';
+	import { onMount, onDestroy } from 'svelte';
+	import { page } from '$app/stores';
+	import { disableScrollingOnPage } from '$lib/utils';
+	disableScrollingOnPage($page.url.pathname);
 
 	let ready = false;
 	onMount(() => (ready = true));
