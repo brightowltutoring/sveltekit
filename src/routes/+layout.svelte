@@ -64,13 +64,15 @@
 	<link rel="manifest" href="/manifest.json" />
 </svelte:head>
 
-<main class="flex flex-col min-h-screen">
+<!-- <main class="grid grid-rows-1 auto-rows-auto min-h-screen  border-red-700 border-4"> -->
+<main class="flex flex-col  min-h-screen  ">
 	<!-- TODO: FORM ACTIONS -->
 	<!-- <form method="POST" use:enhance action="/" class="z-[999]">
 		<input class="sr-only" name="pathname" type="pathname" value={`${$page.url.pathname}`} />
 		<button>submit: {$page.url.pathname}</button>
 	</form> -->
 	<!-- TODO: FORM ACTIONS -->
+
 	<Navbar />
 
 	<Modal showModal={contactLinkClicked} bgTint={'backdrop-blur-3xl'}>
@@ -144,7 +146,7 @@
 	{/if}
 
 	<!-- <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
-    <LoginCard /> -->
+			<LoginCard /> -->
 	<Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
 		<LazyMount bind:contactLinkClicked Import={() => import('./login/LoginCard.svelte')} />
 	</Modal>
@@ -166,11 +168,11 @@
 		{#if $page.route?.id !== '/classroom' && $page.route?.id !== '/pwa-home'}
 			<Footer bind:contactLinkClicked />
 		{/if}
+	</div>
 
-		<!-- <InView onview={async () => (FooterComponent = await import('./Footer.svelte'))}>
+	<!-- <InView onview={async () => (FooterComponent = await import('./Footer.svelte'))}>
 			{#if !($page.route?.id == '/pwa-home' || '/classroom') && FooterComponent}
 				<FooterComponent.default bind:contactLinkClicked />
 			{/if}
 		</InView> -->
-	</div>
 </main>

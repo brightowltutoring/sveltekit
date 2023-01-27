@@ -7,7 +7,7 @@ export function disableScrollingOnPage(pathname: string) {
 	onMount(() => {
 		if (
 			browser &&
-			navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
+			// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
 			(pathname === '/classroom' || '/pwa-home')
 		) {
 			document.body.style.overflow = 'hidden';

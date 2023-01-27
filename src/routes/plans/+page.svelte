@@ -1,7 +1,8 @@
 <script>
 	import PlansSection from './PlansSection.svelte';
-	let mounted = false;
 	import { onMount } from 'svelte';
+
+	let mounted = false;
 	onMount(() => (mounted = true));
 </script>
 
