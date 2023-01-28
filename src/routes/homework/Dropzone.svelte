@@ -90,7 +90,7 @@
 	<!-- style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent" -->
 	<form
 		method="post"
-		class="dropzone flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} mx-auto group"
+		class="dropzone flex flex-wrap items-center justify-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto"
 	>
 		<div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
 			{text}

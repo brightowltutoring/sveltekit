@@ -29,8 +29,8 @@
 </script>
 
 <!-- NEW way using custom 'pwa' tailwind css utility class -->
-<div class="text-sm mt-20 mb-10 pwa:mb-32 flex justify-center items-center flex-row gap-x-1">
-	<span class="text-transparent bg-clip-text bg-gradient-to-l from-blue-500 to-pink-600">
+<div class="mt-20 mb-10 flex flex-row items-center justify-center gap-x-1 text-sm pwa:mb-32">
+	<span class="bg-gradient-to-l from-blue-500 to-pink-600 bg-clip-text text-transparent">
 		<a data-sveltekit-preload-data href="/faq" class="pwa:hidden">faq &nbsp; | &nbsp;</a>
 		<span id="contactLink"> contact </span>
 	</span>

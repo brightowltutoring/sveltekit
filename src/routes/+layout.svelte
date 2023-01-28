@@ -7,7 +7,7 @@
 	import Seo from './Seo.svelte';
 	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
-	import Navbar from './Navbar.svelte';
+	import Navbar from './(navbar)/Navbar.svelte';
 	import Dropzone from './homework/Dropzone.svelte';
 
 	// let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
@@ -65,7 +65,7 @@
 </svelte:head>
 
 <!-- <main class="grid grid-rows-1 auto-rows-auto min-h-screen  border-red-700 border-4"> -->
-<main class="flex flex-col  min-h-screen  ">
+<main class="flex flex-col  min-h-screen">
 	<!-- TODO: FORM ACTIONS -->
 	<!-- <form method="POST" use:enhance action="/" class="z-[999]">
 		<input class="sr-only" name="pathname" type="pathname" value={`${$page.url.pathname}`} />
@@ -95,6 +95,7 @@
 	<!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
 	{#if getOS() == 'iOS'}
 		<Modal
+			all
 			showModal={$navAppClicked}
 			bgTint={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 		>
@@ -164,11 +165,10 @@
 	<!-- <div> -->
 	<div class="px-[7%] pt-32 md:block">
 		<slot />
-
-		{#if $page.route?.id !== '/classroom' && $page.route?.id !== '/pwa-home'}
-			<Footer bind:contactLinkClicked />
-		{/if}
 	</div>
+	{#if $page.route?.id !== '/classroom' && $page.route?.id !== '/pwa-home'}
+		<Footer bind:contactLinkClicked />
+	{/if}
 
 	<!-- <InView onview={async () => (FooterComponent = await import('./Footer.svelte'))}>
 			{#if !($page.route?.id == '/pwa-home' || '/classroom') && FooterComponent}

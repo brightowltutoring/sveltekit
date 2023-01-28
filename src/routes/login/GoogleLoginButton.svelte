@@ -8,11 +8,11 @@
 <button
 	on:keydown={GoogleLogin}
 	on:click={GoogleLogin}
-	class="group mb-6  bg-[#4285f4] hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
+	class="group mb-6 rounded-md bg-[#4285f4] p-4 duration-200 hover:scale-[1.01] hover:shadow-md {$isDarkMode
 		? 'group-hover:bg-opacity-90'
-		: 'group-hover:bg-opacity-90'} text-white flex w-full justify-center items-center gap-5"
+		: 'group-hover:bg-opacity-90'} flex w-full items-center justify-center gap-5 text-white"
 >
-	<span class="group-hover:scale-[1.15] duration-500">
+	<span class="duration-500 group-hover:scale-[1.15]">
 		<IconGoogle />
 		<!-- {@html `<svg height="24" width="24">
       <path fill="${$isDarkMode ? "black" : "white"}"

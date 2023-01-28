@@ -28,15 +28,15 @@
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} -->
 <plans-card
-	class="block shadow-md hover:scale-105 rounded-xl m-1 p-7 text-center duration-300 group"
+	class="group m-1 block rounded-xl p-7 text-center shadow-md duration-300 hover:scale-105"
 >
 	<!-- style={`background:${$elementColor}`} -->
-	<p class="text-4xl font-Poppins py-5 text-center">
+	<p class="py-5 text-center font-Poppins text-4xl">
 		<slot name="cardTitle">Classico</slot>
 	</p>
 
 	{#each payButtons as button}
-		<div class="inline-block group-hover:animate-pulse group-hover:scale-95 ">
+		<div class="inline-block group-hover:scale-95 group-hover:animate-pulse ">
 			<PlansButton {button} {btnColorHover} {card} />
 		</div>
 	{/each}

@@ -1,5 +1,5 @@
 <script>
-	import BackgroundVideo from '../BackgroundVideo.svelte';
+	import BackgroundVideo from '../../lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
 	import { onMount, onDestroy } from 'svelte';
 	import { page } from '$app/stores';
@@ -13,18 +13,18 @@
 <BackgroundVideo />
 <a
 	href="/plans"
-	class="disableScrollOnThisPage h-[70vh] flex justify-center items-center text-center "
+	class="disableScrollOnThisPage flex h-[70vh] items-center justify-center text-center "
 >
 	<div class="grid grid-rows-1">
 		{#if ready}
-			<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4 ">
+			<div in:slide={{ duration: 500 }} class="pb-4 font-Poppins text-6xl ">
 				You're on the <span class="gradientTextColor"> App!</span>
 			</div>
 		{:else}
-			<div class="text-6xl font-Poppins pb-4 ">
+			<div class="pb-4 font-Poppins text-6xl ">
 				You're on the <span class="gradientTextColor"> App!</span>
 			</div>
 		{/if}
-		<div class="grid px-6 text-2xl font-Nunito font-thin ">the navbar is now your friend 🤝</div>
+		<div class="grid px-6 font-Nunito text-2xl font-thin ">the navbar is now your friend 🤝</div>
 	</div>
 </a>

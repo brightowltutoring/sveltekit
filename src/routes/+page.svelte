@@ -9,7 +9,7 @@
 	import DropzoneOpener from './homework/DropzoneOpener.svelte';
 	import PlansSection from './plans/PlansSection.svelte';
 	import Reviews from './reviews/Reviews.svelte';
-	import BackgroundVideo from './BackgroundVideo.svelte';
+	import BackgroundVideo from '../lib/BackgroundVideo.svelte';
 
 	let ready = false;
 	onMount(() => {
@@ -21,35 +21,31 @@
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64 ">
 	<!-- main page -->
-	<div class="h-[60vh] flex justify-center items-center text-center">
+	<div
+		class="flex h-[60vh] items-center justify-center text-center"
+		on:click={() => {
+			document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}}
+	>
 		<div class="grid grid-rows-1">
 			{#key ready}
-				<div in:slide={{ duration: 500 }} class="text-6xl font-Poppins pb-4">
+				<div in:slide={{ duration: 500 }} class="pb-4 font-Poppins text-6xl">
 					Math, Physics
 					<span class="gradientTextColor"> ... Online! </span>
 				</div>
 
-				<button
-					on:click={() => {
-						document
-							.getElementById('step1')
-							?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-					}}
-					class="animate-bounce text-2xl font-Nunito font-thin"
-				>
-					👇 get started
-				</button>
+				<button class="animate-bounce font-Nunito text-2xl font-thin"> 👇 get started </button>
 			{/key}
 		</div>
 	</div>
 
 	<!-- second page -->
-	<div id="step1" class="hover:scale-105 duration-500 grid place-content-center">
+	<div id="step1" class="grid place-content-center duration-500 hover:scale-105">
 		<button
 			on:click={() => {
 				document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			}}
-			class="text-5xl font-Poppins text-center pb-7"
+			class="pb-7 text-center font-Poppins text-5xl"
 		>
 			<span class="gradientTextColor"> 1. Upload your homework </span>
 		</button>
@@ -60,9 +56,9 @@
 	</div>
 
 	<!-- third page -->
-	<div id="step2" class="duration-500 grid place-content-center">
+	<div id="step2" class="grid place-content-center duration-500">
 		<button
-			class="text-5xl font-Poppins text-center pb-7 "
+			class="pb-7 text-center font-Poppins text-5xl "
 			on:click={() => {
 				document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			}}
@@ -96,10 +92,10 @@
 	</div>
 
 	<!-- fourth page -->
-	<div id="reviews" class="duration-500 mb-[200px] sm:mb-[500px]">
+	<div id="reviews" class="mb-[200px] duration-500 sm:mb-[500px]">
 		<button
 			on:click={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-			class="text-5xl font-Poppins w-full flex justify-center"
+			class="flex w-full justify-center font-Poppins text-5xl"
 		>
 			<span class="gradientTextColor">3. Do Some Reading <span class="text-black">😎 </span></span>
 		</button>
@@ -111,7 +107,7 @@
 
 <style>
 	.gradientTextColor {
-		@apply text-transparent bg-clip-text bg-gradient-to-tr from-indigo-600 to-black;
+		@apply bg-gradient-to-tr from-indigo-600 to-black bg-clip-text text-transparent;
 	}
 	:global(html.dark-mode) .gradientTextColor {
 		@apply from-red-300 via-white to-white;

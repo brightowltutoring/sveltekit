@@ -10,7 +10,7 @@
   > -->
 
 	<div
-		class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10  gap-y-[500px] lg:gap-y-[700px] -translate-y-60 sm:translate-y-0"
+		class="grid -translate-y-60 grid-cols-1 gap-x-10 gap-y-[500px] sm:translate-y-0 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-[700px]"
 	>
 		{#each reviews as { name, title, date, body }}
 			<ReviewCreator {title} {name} {date}>

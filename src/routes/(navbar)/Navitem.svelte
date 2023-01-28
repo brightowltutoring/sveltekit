@@ -54,15 +54,15 @@
 	data-sveltekit-preload-data
 	on:click={handleNavButtonClicks}
 	{href}
-	class=" block font-Nunito font-thin hover:rounded px-2 py-1  duration-100 ease-in {!$runningStandalone &&
+	class=" block px-2 py-1 font-Nunito font-thin duration-100  ease-in hover:rounded {!$runningStandalone &&
 		btnColorHover} "
 >
 	<!-- {#if mounted && $runningStandalone} -->
-	<div class="hidden pwa:flex flex-col justify-between items-center h-[50px] w-[50px]">
+	<div class="hidden h-[50px] w-[50px] flex-col items-center justify-between pwa:flex">
 		<svelte:component this={icon} bind:navIconClicked />
-		<span class="text-xs text-center">{name}</span>
+		<span class="text-center text-xs">{name}</span>
 	</div>
 	<!-- {:else} -->
-	<div class="pwa:hidden text-2xl md:text-xl">{name}</div>
+	<div class="text-2xl md:text-xl pwa:hidden">{name}</div>
 	<!-- {/if} -->
 </a>

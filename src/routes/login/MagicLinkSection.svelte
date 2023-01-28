@@ -69,11 +69,11 @@
 <button
 	bind:this={magicLinkBtn}
 	on:click={signinWithLinkAndStop}
-	class="group bg-emerald-500 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
+	class="group rounded-md bg-emerald-500  p-4  duration-200 hover:scale-[1.01] hover:shadow-md {$isDarkMode
 		? 'group-hover:bg-opacity-80'
-		: 'group-hover:bg-opacity-80'}  text-white flex w-full justify-center items-center gap-5"
+		: 'group-hover:bg-opacity-80'}  flex w-full items-center justify-center gap-5 text-white"
 >
-	<span class="group-hover:scale-[1.15] duration-500">
+	<span class="duration-500 group-hover:scale-[1.15]">
 		<IconEmail />
 	</span>
 	<!-- <span class="font-bold">Get Magic Link</span> -->
@@ -86,7 +86,7 @@
 		on:paste={() => onInputEmailField(emailFieldValue)}
 		on:keyup={() => onInputEmailField(emailFieldValue)}
 		bind:this={emailField}
-		class="text-center p-3 mt-3 w-full {shortPing} focus:outline-none "
+		class="mt-3 w-full p-3 text-center {shortPing} focus:outline-none "
 		bind:value={emailFieldValue}
 		type="email"
 		placeholder="email"

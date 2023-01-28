@@ -9,9 +9,9 @@
 <!-- style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent" -->
 <button
 	on:click={() => ($showHomeworkModal = true)}
-	class="submitArea flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl  text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
+	class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap  items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 >
-	<div class="font-Nunito group-hover:animate-pulse text-2xl">Drop it like it's 🔥</div>
+	<div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's 🔥</div>
 </button>
 
 <!-- noscript submit homework -->
@@ -33,16 +33,16 @@
 		> -->
 
 		<input
-			class="rounded border-1 bg-red-800 p-3 text-white hover:bg-blue-400  focus:bg-indigo-700"
+			class="border-1 rounded bg-red-800 p-3 text-white hover:bg-blue-400  focus:bg-indigo-700"
 			type="submit"
 			value="Submit"
 		/>
 
 		<label
 			for="file"
-			class="submitArea flex justify-center items-center flex-wrap overflow-scroll backdrop-blur-3xl text-3xl w-[65vw] sm:w-[60vw] h-[60vh] mx-auto group"
+			class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 		>
-			<div class="font-Nunito group-hover:animate-pulse text-2xl">Drop it like it's 🔥</div>
+			<div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's 🔥</div>
 			<!-- <input class="hidden" type="file" name="file" id="file" required multiple /> -->
 			<input class="hidden" type="file" name="file" id="file" required />
 		</label>

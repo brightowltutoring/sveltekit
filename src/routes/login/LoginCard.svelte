@@ -159,7 +159,7 @@
 </script>
 
 <!-- TODO: when doing w-screen this component on '/login' route is off-center -->
-<main class="w-full flex justify-center items-center">
+<main class="flex w-full items-center justify-center">
 	<!-- {#if !$isLoggedIn && $showLoginModal} -->
 	{#if !$isLoggedIn}
 		{#key !noTransition && $showLoginModal}
@@ -196,11 +196,11 @@
 
 				<div>
 					Redirecting in
-					<div class="text-5xl p-5" id="timeLeft">3</div>
+					<div class="p-5 text-5xl" id="timeLeft">3</div>
 				</div>
 
 				<button
-					class="text-2xl font-medium bg-rose-300 text-white rounded-lg p-4 hover:scale-110 hover:rounded-xl duration-200 ease-in"
+					class="rounded-lg bg-rose-300 p-4 text-2xl font-medium text-white duration-200 ease-in hover:scale-110 hover:rounded-xl"
 					on:click={logoutFunction}>Logout</button
 				>
 			</logout-card>
@@ -212,7 +212,7 @@
 	/* :where selector not needed here but used out of principle as it is 'argument forgiving'; @apply using tailwindcss  */
 	/* :where(login-card, logout-card) { */
 	.cardStyles {
-		@apply relative block font-Poppins text-xl mx-auto py-10 px-5 sm:p-10 w-[90vw] sm:w-[500px] shadow-md hover:scale-[1.01] rounded-2xl hover:rounded-3xl duration-300;
+		@apply relative mx-auto block w-[90vw] rounded-2xl py-10 px-5 font-Poppins text-xl shadow-md duration-300 hover:scale-[1.01] hover:rounded-3xl sm:w-[500px] sm:p-10;
 	}
 
 	login-card,

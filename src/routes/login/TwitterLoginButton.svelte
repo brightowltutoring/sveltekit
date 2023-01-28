@@ -6,11 +6,11 @@
 
 <button
 	on:click={TwitterLogin}
-	class="group bg-[#1d9bf0]  hover:shadow-md hover:scale-[1.01] duration-200 rounded-md p-4 {$isDarkMode
+	class="group rounded-md  bg-[#1d9bf0] p-4 duration-200 hover:scale-[1.01] hover:shadow-md {$isDarkMode
 		? 'group-hover:bg-opacity-90'
-		: 'group-hover:bg-opacity-90'} text-white flex w-full justify-center items-center gap-5"
+		: 'group-hover:bg-opacity-90'} flex w-full items-center justify-center gap-5 text-white"
 >
-	<span class="group-hover:scale-[1.15] duration-500">
+	<span class="duration-500 group-hover:scale-[1.15]">
 		<IconTwitter />
 	</span>
 	<!-- <span class="font-bold">Sign-in with Twitter</span> -->

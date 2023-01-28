@@ -70,6 +70,10 @@
 	function handleAppNavClick() {
 		clearNavModals();
 		$navAppClicked = true;
+
+		// setTimeout(() => {
+		// 	$navAppClicked = false;
+		// }, 5000);
 	}
 
 	let hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
@@ -87,6 +91,30 @@
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
 	}
+
+	// let contactLinkClicked = false;
+	// let contactLinkTimeout: ReturnType<typeof setTimeout>;
+
+	// onMount(() => {
+	// 	document.addEventListener('click', handleContactLinkClicked);
+	// });
+
+	// function handleContactLinkClicked(e: { target: HTMLInputElement }) {
+	// 	let isTarget = e.target.id === 'appButton';
+
+	// 	if (!isTarget) {
+	// 		contactLinkClicked = false;
+	// 		clearTimeout(contactLinkTimeout);
+	// 		alert('yyeet2');
+	// 	}
+	// 	if (isTarget) {
+	// 		alert('yyeet');
+	// 		contactLinkClicked = true;
+	// 		contactLinkTimeout = setTimeout(() => {
+	// 			contactLinkClicked = false;
+	// 		}, 4000);
+	// 	}
+	// }
 </script>
 
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
@@ -98,15 +126,15 @@
 <!-- gap-x-24 -->
 <!-- bottom-0 md:top-0 -->
 <nav
-	class="z-50 md:pt-4 md:pb-16 md:px-[7%] md:h-16 w-full md:top-0 bottom-0 pwa:bottom-0  pwa:translate-y-0 ease-in fixed {showHideNav}"
+	class="fixed bottom-0 z-50 w-full ease-in md:top-0 md:h-16 md:px-[7%] md:pt-4  md:pb-16 pwa:bottom-0 pwa:translate-y-0 {showHideNav}"
 >
-	<logo-and-navbar class="flex items-center justify-center gap-x-32 md:justify-between w-full">
+	<logo-and-navbar class="flex w-full items-center justify-center gap-x-32 md:justify-between">
 		{#key resetLogoClick}
 			<a
 				href="/"
 				on:click={clickLogo}
-				class="p-2 md:translate-y-[0.1rem] md:translate-x-3 hidden md:block text-xl font-Poppins 
-    md:text-[min(5.5vw,40px)] active:text-red-600 hover:scale-110 transition-transform selection:bg-transparent"
+				class="hidden p-2 font-Poppins text-xl transition-transform selection:bg-transparent hover:scale-110 
+    active:text-red-600 md:block md:translate-y-[0.1rem] md:translate-x-3 md:text-[min(5.5vw,40px)]"
 				in:scale={{ duration: 1200, easing: elasticOut }}
 			>
 				THINKSOLVE
@@ -115,7 +143,7 @@
 
 		<!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
 		<ul
-			class="bgGradientColor text-xl grid grid-flow-col place-items-center w-full gap-1 p-2 rounded-md md:rounded-xl md:ml-24 md:p-1 md:w-auto hideScrollBar overflow-x-scroll overflow-y-hidden"
+			class="bgGradientColor hideScrollBar grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md p-2 text-xl md:ml-24 md:w-auto md:rounded-xl md:p-1"
 		>
 			<!-- py-3 px-5 -->
 			<!-- <ul
@@ -125,9 +153,10 @@
 			<!-- <li class={hideIfRunningStandalone || hideIfNotIOS}> -->
 			<!-- <li class="{hideIfRunningStandalone} {hideIfNotIOS} "> -->
 			<li class="pwa:hidden {hideIfNotIOS} ">
+				<!-- id="appButton" -->
 				<button
-					class="font-Nunito font-thin text-2xl md:text-xl hover:rounded py-1 px-2 duration-300 hover:shadow-lg  {$elementColor} hover:bg-indigo-400 hover:text-white  active:animate-pulse duration-200
-      border-b-1 rounded "
+					class="py-1 px-2 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl  {$elementColor} border-b-1 rounded  duration-200 hover:bg-indigo-400
+      hover:text-white active:animate-pulse "
 					on:click={handleAppNavClick}
 				>
 					App
@@ -163,7 +192,7 @@
 			<!-- <li
         class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}"
       > -->
-			<li class=" py-2 translate-y-1 scale-125 md:scale-100 ">
+			<li class=" translate-y-1 scale-125 py-2 md:scale-100 ">
 				<LightDarkMode />
 			</li>
 			<!-- <li><a href={'#'} on:click={() => setTheme('light')}>LightMode</a></li>

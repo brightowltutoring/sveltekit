@@ -86,29 +86,29 @@
 	<button
 		bind:this={sendPhoneCodeBtn}
 		on:click={submitPhoneNumber}
-		class=" group bg-rose-400 hover:scale-[1.01]  hover:shadow-md  duration-200 rounded-md p-4 {$isDarkMode
+		class=" group rounded-md bg-rose-400  p-4  duration-200 hover:scale-[1.01] hover:shadow-md {$isDarkMode
 			? 'group-hover:bg-opacity-80'
-			: 'group-hover:bg-opacity-80'}  text-white flex w-full justify-center items-center gap-5"
+			: 'group-hover:bg-opacity-80'}  flex w-full items-center justify-center gap-5 text-white"
 	>
-		<span class="group-hover:scale-[1.15] duration-500">
+		<span class="duration-500 group-hover:scale-[1.15]">
 			<IconPhone />
 		</span>
 		<!-- <span class="font-bold">Get SMS Code</span> -->
 		<span>Get SMS Code</span>
 	</button>
 
-	<div class="grid grid-cols-6 w-full text-black">
+	<div class="grid w-full grid-cols-6 text-black">
 		{#if phoneInputVisible}
 			<input
 				bind:value={countryCode}
-				class="col-span-1 text-center p-3 mt-3 focus:outline-none border-r-2"
+				class="col-span-1 mt-3 border-r-2 p-3 text-center focus:outline-none"
 			/>
 			<input
 				on:keydown={submitPhoneNumber}
 				on:paste={(e) => onInputPhoneField(e, phoneFieldValue)}
 				on:keyup={(e) => onInputPhoneField(e, phoneFieldValue)}
 				bind:this={phoneField}
-				class="col-span-5 text-center p-3 mt-3 focus:outline-none {shortPing}"
+				class="col-span-5 mt-3 p-3 text-center focus:outline-none {shortPing}"
 				bind:value={phoneFieldValue}
 				type="phone"
 				placeholder="phone"
@@ -132,7 +132,7 @@
 			on:keyup={(e) => verifySMSCode(e, smsCode)}
 			on:paste={(e) => verifySMSCode(e, smsCode)}
 			bind:value={smsCode}
-			class="col-span-3 text-center p-3 mt-3 focus:outline-none "
+			class="col-span-3 mt-3 p-3 text-center focus:outline-none "
 			placeholder="enter sms code"
 		/>
 
