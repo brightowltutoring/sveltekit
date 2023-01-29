@@ -21,7 +21,7 @@
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64 ">
 	<!-- main page -->
-	<div
+	<section
 		class="flex h-[60vh] items-center justify-center text-center"
 		on:click={() => {
 			document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -37,10 +37,10 @@
 				<button class="animate-bounce font-Nunito text-2xl font-thin"> 👇 get started </button>
 			{/key}
 		</div>
-	</div>
+	</section>
 
 	<!-- second page -->
-	<div id="step1" class="grid place-content-center duration-500 hover:scale-105">
+	<section id="step1" class="grid place-content-center duration-500 hover:scale-105">
 		<button
 			on:click={() => {
 				document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -53,10 +53,10 @@
 		<!-- This opens the modal dropzone; no need to instantiate more than one dropzone component since already available at the layout (i.e root) level of the app. -->
 		<DropzoneOpener />
 		<!-- <LazyMount Import={() => import('./homework/DropzoneOpener.svelte')} /> -->
-	</div>
+	</section>
 
 	<!-- third page -->
-	<div id="step2" class="grid place-content-center duration-500">
+	<section id="step2" class="grid place-content-center duration-500">
 		<button
 			class="pb-7 text-center font-Poppins text-5xl "
 			on:click={() => {
@@ -89,20 +89,20 @@
       </InView> -->
 
 		<!-- Note: 'boop' is a custom svelte event sent from within PlansSection.svelte, containing 'plansCardArray'; here I decide to modify a copy of this data and name it 'classicoAndMock' ... upside of this is not having to import 'plansCardArray' from a js file ...downside is while waiting for this boop event the change in content flashes on the home route (when refreshing the page at the plans section)-->
-	</div>
+	</section>
 
 	<!-- fourth page -->
-	<div id="reviews" class="mb-[200px] duration-500 sm:mb-[500px]">
+	<section id="reviews" class="mb-[200px] duration-500 sm:mb-[500px] ">
 		<button
 			on:click={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-			class="flex w-full justify-center font-Poppins text-5xl"
+			class="flex w-full justify-center  font-Poppins text-5xl"
 		>
 			<span class="gradientTextColor">3. Do Some Reading <span class="text-black">😎 </span></span>
 		</button>
 
-		<Reviews />
 		<!-- <LazyMount Import={() => import('./reviews/Reviews.svelte')} /> -->
-	</div>
+		<Reviews />
+	</section>
 </div>
 
 <style>

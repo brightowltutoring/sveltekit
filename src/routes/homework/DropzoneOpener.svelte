@@ -9,7 +9,7 @@
 <!-- style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent" -->
 <button
 	on:click={() => ($showHomeworkModal = true)}
-	class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap  items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
+	class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 >
 	<div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's 🔥</div>
 </button>
@@ -44,7 +44,7 @@
 		>
 			<div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's 🔥</div>
 			<!-- <input class="hidden" type="file" name="file" id="file" required multiple /> -->
-			<input class="hidden" type="file" name="file" id="file" required />
+			<input type="file" name="file" id="file" required />
 		</label>
 	</form>
 </noscript>

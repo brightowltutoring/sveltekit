@@ -25,6 +25,7 @@ export const runningStandalone = writable(false);
 
 // export const count = createWritableStore("count", 0);
 
+export const contactLinkClicked = writable(false);
 export const isLoggedIn = writable(false);
 export const lastScrollY = writable(0);
 export const scrollY = writable(0);

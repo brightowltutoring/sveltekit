@@ -25,7 +25,7 @@
   
 </script>
 
-<article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">  
+<article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw]  ">  
 
   <div class="absolute">
 

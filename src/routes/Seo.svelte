@@ -7,7 +7,7 @@
 	{#if $page.status == 404}
 		<title>Oops 💩</title>
 	{:else}
-		{@const slashlessRoute = $page.route.id && $page.route.id.slice(1)}
+		{@const slashlessRoute = $page.route.id?.slice(1)}
 
 		{#if slashlessRoute == ''}
 			<title>{$routes.home.title}</title>

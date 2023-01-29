@@ -79,13 +79,15 @@
 
 				loggedInEmail = user.email;
 
-				loginWelcomeText = user.displayName ? `Hey ${user.displayName}!` : `Hey ${user.email}!`;
+				loginWelcomeText = 'Howdy!';
+				if (user.email) loginWelcomeText = `Hey ${user.email}!`;
+				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
 			} else {
 				$isLoggedIn = false;
 				cookeh.erase('haventLoggedOut');
 
 				localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
-				// $showLoginModal = false;
+
 				loggedInEmail = '';
 			}
 		});
