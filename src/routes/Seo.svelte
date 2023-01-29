@@ -4,12 +4,12 @@
 </script>
 
 <svelte:head>
-	{#if $page.status == 404}
+	{#if $page.status === 404}
 		<title>Oops 💩</title>
 	{:else}
 		{@const slashlessRoute = $page.route.id?.slice(1)}
 
-		{#if slashlessRoute == ''}
+		{#if slashlessRoute === ''}
 			<title>{$routes.home.title}</title>
 
 			{@html $routes.home.meta}

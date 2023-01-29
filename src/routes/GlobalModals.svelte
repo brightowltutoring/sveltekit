@@ -1,12 +1,12 @@
 <script>
-	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Dropzone from './homework/Dropzone.svelte';
+	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
+	// import LoginCard from './login/LoginCard.svelte';
+
 	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
 	import { elasticOut, quintOut } from 'svelte/easing';
-
 	import { getOS } from '$lib/utils';
-
 	import {
 		showLoginModal,
 		showHomeworkModal,
@@ -89,11 +89,9 @@
 
 <!-- <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
 			<LoginCard /> -->
-<Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
-	<LazyMount
-		bind:contactLinkClicked={$contactLinkClicked}
-		Import={() => import('./login/LoginCard.svelte')}
-	/>
+<Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md`}>
+	<!-- lazy importing this because otherwise contents flash through on initial page load (i.e. before modal can hide it) -->
+	<LazyMount Import={() => import('./login/LoginCard.svelte')} />
 </Modal>
 
 <Modal bind:showModal={$showHomeworkModal} bgTint={'bg-[rgba(0,0,0,0.1)]'}>

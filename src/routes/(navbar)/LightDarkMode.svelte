@@ -12,7 +12,6 @@
 
 	// initialize AND reactively set sessionStorage
 	$: $isDarkMode, browser && sessionStorage.setItem('isDarkMode', $isDarkMode.toString());
-
 	browser && ($isDarkMode = initialTheme() === 'dark-mode');
 
 	function toggleDarkMode() {

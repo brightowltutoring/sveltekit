@@ -71,10 +71,16 @@
 html {
 	background: var(--light);
 	color: var(--dark);
-	transition: background-color 0.3s;
+	transition: background-color 0.5s ease-out;
 }
 
 html.dark-mode {
+	background: var(--dark);
+	color: var(--light);
+}
+
+/* on chromium browsers the existence of 'transition' in html class above results in an initial page load darkmode flicker; this hack fixes it (note: previously setting darkmode logic on body instead of html resulted in flicker on non-chromium browsers ... ) */
+html.dark-mode body {
 	background: var(--dark);
 	color: var(--light);
 }
