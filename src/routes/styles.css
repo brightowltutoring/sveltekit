@@ -79,9 +79,10 @@ html.dark-mode {
 	color: var(--light);
 }
 
-/* on chromium browsers the existence of 'transition' in html class above results in an initial page load darkmode flicker; this hack fixes it (note: previously setting darkmode logic on body instead of html resulted in flicker on non-chromium browsers ... ) */
+/* on chromium browsers the existence of 'transition' in html class above results in an initial page load darkmode flicker; this hack fixes it .. except have to layer a partially transparent dark coior, otherwise background videos arent visible */
 html.dark-mode body {
-	background: var(--dark);
+	/* background-color: var(--dark-semi-transparent); */
+	background-color: var(--dark);
 	color: var(--light);
 }
 

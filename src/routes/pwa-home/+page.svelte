@@ -15,7 +15,9 @@
 	href="/plans"
 	class="disableScrollOnThisPage flex h-[70vh] items-center justify-center text-center "
 >
-	<div class="grid grid-rows-1">
+	<!-- annoyingly have to add z-10 since background video interferes with this svelte transitioned text -->
+
+	<div class="z-10 grid grid-rows-1">
 		{#if ready}
 			<div in:slide={{ duration: 500 }} class="pb-4 font-Poppins text-6xl ">
 				You're on the <span class="gradientTextColor"> App!</span>

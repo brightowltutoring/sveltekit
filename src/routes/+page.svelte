@@ -21,15 +21,17 @@
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64 ">
 	<!-- main page -->
+
 	<section
 		class="flex h-[60vh] items-center justify-center text-center"
 		on:click={() => {
 			document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}}
 	>
-		<div class="grid grid-rows-1">
+		<!-- annoyingly have to add z-10 since background video interferes with this svelte transitioned text -->
+		<div class="z-10 grid grid-rows-1">
 			{#key ready}
-				<div in:slide={{ duration: 500 }} class="pb-4 font-Poppins text-6xl">
+				<div in:slide={{ duration: 500 }} class=" pb-4 font-Poppins text-6xl">
 					Math, Physics
 					<span class="gradientTextColor"> ... Online! </span>
 				</div>
