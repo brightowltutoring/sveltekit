@@ -71,7 +71,7 @@
 html {
 	background: var(--light);
 	color: var(--dark);
-	transition: background-color 0.5s ease-out;
+	transition: background-color 0.2s ease;
 }
 
 html.dark-mode {
@@ -79,11 +79,12 @@ html.dark-mode {
 	color: var(--light);
 }
 
-/* on chromium browsers the existence of 'transition' in html class above results in an initial page load darkmode flicker; this hack fixes it .. except have to layer a partially transparent dark coior, otherwise background videos arent visible */
+/* on chromium browsers the existence of 'transition' in html class above results in an initial page load darkmode flicker; this hack fixes it .. but have to give 'z-10' to sections with a background video .. it appears */
 html.dark-mode body {
 	/* background-color: var(--dark-semi-transparent); */
 	background-color: var(--dark);
 	color: var(--light);
+	transition: background-color 0.2s ease;
 }
 
 /* body .disableScrollOnThisPage { */

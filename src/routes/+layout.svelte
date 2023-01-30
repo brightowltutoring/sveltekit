@@ -2,6 +2,7 @@
 <script lang="ts">
 	// export let data;
 	// const { haventLoggedOut, testCookie } = data;
+
 	import './styles.css';
 	import Seo from './Seo.svelte';
 	import Navbar from './(navbar)/Navbar.svelte';
@@ -20,6 +21,10 @@
 	import { disableZoomGestures, isPWA, cookeh } from '$lib/utils';
 	import { SignInWithEmailLink } from './login/SigninWithEmailLink';
 	import GlobalModals from './GlobalModals.svelte';
+
+	// import { browser } from '$app/environment';
+	// let isiPhone = browser && navigator.userAgent.toLowerCase().includes('iphone');
+	// browser && alert(`isiPhone: ${isiPhone}`);
 
 	onMount(async () => {
 		// should add check if someone fired a magicLink .. magicLink still doesnt work cross browser

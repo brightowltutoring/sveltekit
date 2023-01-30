@@ -3,8 +3,7 @@
 
 	import LightDarkMode from './LightDarkMode.svelte';
 	import Navitem from './Navitem.svelte';
-	// import { browser } from '$app/environment';
-	// import { onMount } from 'svelte';
+
 	import { goto } from '$app/navigation';
 	import { scale, fade, fly, slide, blur } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
@@ -76,9 +75,7 @@
 		// }, 5000);
 	}
 
-	let hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
-
-	// let hideIfRunningStandalone = isPWA() && 'hidden';
+	$: hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
 	// $: hideIfRunningStandalone = $runningStandalone && 'hidden';
 
 	// let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-300 ease-in';
@@ -91,6 +88,12 @@
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
 	}
+
+	// import { onMount } from 'svelte';
+	// let hideIfRunningStandalone: boolean | string = '';
+	// onMount(async () => {
+	// 	hideIfRunningStandalone = (await isPWA()) && 'hidden';
+	// });
 
 	// let contactLinkClicked = false;
 	// let contactLinkTimeout: ReturnType<typeof setTimeout>;
@@ -150,19 +153,6 @@
     class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   > -->
 
-			<!-- <li class={hideIfRunningStandalone || hideIfNotIOS}> -->
-			<!-- <li class="{hideIfRunningStandalone} {hideIfNotIOS} "> -->
-			<li class="pwa:hidden {hideIfNotIOS} ">
-				<!-- id="appButton" -->
-				<button
-					class="py-1 px-2 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl  {$elementColor} border-b-1 rounded  duration-200 hover:bg-indigo-400
-      hover:text-white active:animate-pulse "
-					on:click={handleAppNavClick}
-				>
-					App
-				</button>
-			</li>
-
 			<!-- {#each Object.keys($routes).slice(0, 6) as KEY} -->
 			{#each Object.keys($routes).slice(1, 5) as KEY}
 				{@const { href, name, icon, isCurrent } = $routes[KEY]}
@@ -188,6 +178,19 @@
 					<!-- btnColor={'sm:bg-red-300 rounded'} -->
 				</li>
 			{/each}
+
+			<!-- <li class={hideIfRunningStandalone || hideIfNotIOS}> -->
+			<!-- <li class="{hideIfRunningStandalone} {hideIfNotIOS} " /> -->
+			<li class="pwa:hidden {hideIfNotIOS} ">
+				<!-- id="appButton" -->
+				<button
+					class="py-1 px-2 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl  {$elementColor} border-b-1 rounded  duration-200 hover:bg-indigo-400
+      hover:text-white active:animate-pulse "
+					on:click={handleAppNavClick}
+				>
+					App
+				</button>
+			</li>
 
 			<!-- <li
         class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}"

@@ -1,7 +1,7 @@
 <script>
 	import BackgroundVideo from '../../lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { disableScrollingOnPage } from '$lib/utils';
 	disableScrollingOnPage($page.url.pathname);
@@ -10,13 +10,13 @@
 	onMount(() => (ready = true));
 </script>
 
+<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
+
 <BackgroundVideo />
 <a
 	href="/plans"
-	class="disableScrollOnThisPage flex h-[70vh] items-center justify-center text-center "
+	class="disableScrollOnThisPage  z-10   flex h-[70vh] items-center justify-center text-center "
 >
-	<!-- annoyingly have to add z-10 since background video interferes with this svelte transitioned text -->
-
 	<div class="z-10 grid grid-rows-1">
 		{#if ready}
 			<div in:slide={{ duration: 500 }} class="pb-4 font-Poppins text-6xl ">

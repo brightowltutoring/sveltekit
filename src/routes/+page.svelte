@@ -23,13 +23,14 @@
 	<!-- main page -->
 
 	<section
-		class="flex h-[60vh] items-center justify-center text-center"
+		class="z-10 flex h-[60vh] items-center justify-center text-center"
 		on:click={() => {
 			document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}}
 	>
-		<!-- annoyingly have to add z-10 since background video interferes with this svelte transitioned text -->
-		<div class="z-10 grid grid-rows-1">
+		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
+
+		<div class=" grid grid-rows-1">
 			{#key ready}
 				<div in:slide={{ duration: 500 }} class=" pb-4 font-Poppins text-6xl">
 					Math, Physics
