@@ -1,5 +1,5 @@
 <script>
-	import BackgroundVideo from '../../lib/BackgroundVideo.svelte';
+	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
@@ -15,7 +15,7 @@
 <BackgroundVideo />
 <a
 	href="/plans"
-	class="disableScrollOnThisPage  z-10   flex h-[70vh] items-center justify-center text-center "
+	class="disableScrollOnThisPage z-10 flex h-[70vh] items-center justify-center text-center"
 >
 	<div class="z-10 grid grid-rows-1">
 		{#if ready}

@@ -2,26 +2,21 @@
 	// let PlansSection;
 	// let classicoAndMock; // this refers to data that is sent UP from PlansSection.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
 	// import InView from "$lib/Wrappers/InView.svelte";
-
 	// import LazyMount from '$lib/Wrappers/LazyMount.svelte';
-	import { slide } from 'svelte/transition';
-	import { onMount } from 'svelte';
 	import DropzoneOpener from './homework/DropzoneOpener.svelte';
 	import PlansSection from './plans/PlansSection.svelte';
 	import Reviews from './reviews/Reviews.svelte';
 	import BackgroundVideo from '../lib/BackgroundVideo.svelte';
+	import { slide } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	let ready = false;
-	onMount(() => {
-		ready = true;
-	});
+	onMount(() => (ready = true));
 </script>
 
 <BackgroundVideo />
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64 ">
-	<!-- main page -->
-
 	<section
 		class="z-10 flex h-[60vh] items-center justify-center text-center"
 		on:click={() => {
@@ -53,9 +48,7 @@
 			<span class="gradientTextColor"> 1. Upload your homework </span>
 		</button>
 
-		<!-- This opens the modal dropzone; no need to instantiate more than one dropzone component since already available at the layout (i.e root) level of the app. -->
 		<DropzoneOpener />
-		<!-- <LazyMount Import={() => import('./homework/DropzoneOpener.svelte')} /> -->
 	</section>
 
 	<!-- third page -->
@@ -69,7 +62,6 @@
 			<span class="gradientTextColor"> 2. Schedule a Session </span>
 		</button>
 
-		<!-- Dec17,2022: not sure how to handle the custom dispatched event, as before. Maybe rethink PlansSection logic -->
 		<PlansSection />
 		<!-- <LazyMount Import={() => import('./plans/PlansSection.svelte')} /> -->
 

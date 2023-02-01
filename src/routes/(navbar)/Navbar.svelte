@@ -5,7 +5,10 @@
 	import Navitem from './Navitem.svelte';
 
 	import { goto } from '$app/navigation';
-	import { scale, fade, fly, slide, blur } from 'svelte/transition';
+	import {
+		scale
+		// fade, fly, slide, blur
+	} from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
 	import { isPWA, getOS } from '$lib/utils';
 	import {
@@ -18,8 +21,8 @@
 		elementColor,
 		showLoginModal,
 		showHomeworkModal,
-		instDeltaY,
-		runningStandalone
+		instDeltaY
+		// runningStandalone
 	} from '$lib/store';
 	import { spring } from 'svelte/motion';
 
@@ -30,7 +33,6 @@
 
 		if ($scrollY > 40 && $instDeltaY > 10) {
 			showHideNav = 'backdrop-blur-3xl duration-200';
-			// showHideNav = 'backdrop-blur-3xl bg-red-500';
 		}
 
 		if ($scrollY > 400 && $instDeltaY > 10)
@@ -38,7 +40,6 @@
 				'bottom-0 translate-y-20 md:top-0 md:-translate-y-20 backdrop-blur-3xl duration-200';
 
 		if ($instDeltaY < -100 && $scrollY !== 0)
-			// showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl duration-500 bg-blue-500';
 			showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl duration-500';
 	}
 
@@ -69,55 +70,16 @@
 	function handleAppNavClick() {
 		clearNavModals();
 		$navAppClicked = true;
-
-		// setTimeout(() => {
-		// 	$navAppClicked = false;
-		// }, 5000);
 	}
 
 	$: hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
 	// $: hideIfRunningStandalone = $runningStandalone && 'hidden';
-
-	// let fadeInToFullOpacity = browser && 'opacity-100 transition-opacity duration-300 ease-in';
-	// THIS NOW REPLACED BY CUSTOM TAILWIND CSS ANIMATION: animate-fadeIn
-
-	// 'hideIfRunningStandalone' hides part of the navbar ui if accessing in standalone mode (i.e. from the app) ... however the change in content flickers. To remedy the flicker I have the navbar start with zero opacity and then 'fadeInToFullOpacity' transitions to max opacity using sveltekit's 'browser' check.
 
 	import { debounce } from '$lib/utils';
 	const debounceTime = 25;
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
 	}
-
-	// import { onMount } from 'svelte';
-	// let hideIfRunningStandalone: boolean | string = '';
-	// onMount(async () => {
-	// 	hideIfRunningStandalone = (await isPWA()) && 'hidden';
-	// });
-
-	// let contactLinkClicked = false;
-	// let contactLinkTimeout: ReturnType<typeof setTimeout>;
-
-	// onMount(() => {
-	// 	document.addEventListener('click', handleContactLinkClicked);
-	// });
-
-	// function handleContactLinkClicked(e: { target: HTMLInputElement }) {
-	// 	let isTarget = e.target.id === 'appButton';
-
-	// 	if (!isTarget) {
-	// 		contactLinkClicked = false;
-	// 		clearTimeout(contactLinkTimeout);
-	// 		alert('yyeet2');
-	// 	}
-	// 	if (isTarget) {
-	// 		alert('yyeet');
-	// 		contactLinkClicked = true;
-	// 		contactLinkTimeout = setTimeout(() => {
-	// 			contactLinkClicked = false;
-	// 		}, 4000);
-	// 	}
-	// }
 </script>
 
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
@@ -127,7 +89,6 @@
 />
 
 <!-- gap-x-24 -->
-<!-- bottom-0 md:top-0 -->
 <nav
 	class="fixed bottom-0 z-50 w-full ease-in md:top-0 md:h-16 md:px-[7%] md:pt-4  md:pb-16 pwa:bottom-0 pwa:translate-y-0 {showHideNav}"
 >
@@ -153,7 +114,6 @@
     class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
   > -->
 
-			<!-- {#each Object.keys($routes).slice(0, 6) as KEY} -->
 			{#each Object.keys($routes).slice(1, 5) as KEY}
 				{@const { href, name, icon, isCurrent } = $routes[KEY]}
 				{@const navIconClicked =
@@ -175,16 +135,12 @@
 						bind:routes={$routes}
 						btnColorHover={'hover:bg-red-300'}
 					/>
-					<!-- btnColor={'sm:bg-red-300 rounded'} -->
 				</li>
 			{/each}
 
-			<!-- <li class={hideIfRunningStandalone || hideIfNotIOS}> -->
-			<!-- <li class="{hideIfRunningStandalone} {hideIfNotIOS} " /> -->
 			<li class="pwa:hidden {hideIfNotIOS} ">
-				<!-- id="appButton" -->
 				<button
-					class="py-1 px-2 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl  {$elementColor} border-b-1 rounded  duration-200 hover:bg-indigo-400
+					class="py-1 px-3 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl  {$elementColor} border-b-1 rounded  duration-200 hover:bg-indigo-400
       hover:text-white active:animate-pulse "
 					on:click={handleAppNavClick}
 				>
@@ -192,14 +148,9 @@
 				</button>
 			</li>
 
-			<!-- <li
-        class="py-2 translate-y-1 scale-125 md:scale-100 {hideIfRunningStandalone}"
-      > -->
 			<li class=" translate-y-1 scale-125 py-2 md:scale-100 ">
 				<LightDarkMode />
 			</li>
-			<!-- <li><a href={'#'} on:click={() => setTheme('light')}>LightMode</a></li>
-			<li><a href={'#'} on:click={() => setTheme('dark')}>DarkMode</a></li> -->
 		</ul>
 	</logo-and-navbar>
 </nav>

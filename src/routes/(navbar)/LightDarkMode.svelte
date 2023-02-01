@@ -32,17 +32,16 @@
 </script>
 
 <svelte:head>
-	<script lang="ts">
-		// document.documentElement.classList.add(initialTheme()); // one liner not liked by lighthouse
-		if (initialTheme() === '') {
-			document.documentElement.classList.remove('dark-mode');
-		} else {
-			document.documentElement.classList.add('dark-mode');
-		}
+	<script>
+		document.documentElement.classList.add(initialTheme()); // one liner not liked by lighthouse
+
+		// initialTheme() === ''
+		// 	? document.documentElement.classList.remove('dark-mode')
+		// 	: document.documentElement.classList.add('dark-mode');
 
 		function initialTheme() {
 			if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
-			if (sessionStorage.getItem('isDarkMode') === 'false' || null) return '';
+			if (sessionStorage.getItem('isDarkMode') === 'false') return '';
 			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
 			return '';
 		}
