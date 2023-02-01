@@ -35,9 +35,9 @@
 	<script>
 		// document.documentElement.classList.add(initialTheme()); // one liner not liked by lighthouse
 
-		initialTheme() === 'dark-mode'
-			? document.documentElement.classList.add('dark-mode');
-			: document.documentElement.classList.remove('dark-mode')
+		initialTheme() === ''
+			? document.documentElement.classList.remove('dark-mode')
+			: document.documentElement.classList.add('dark-mode');
 
 		function initialTheme() {
 			if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
