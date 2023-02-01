@@ -18,20 +18,16 @@ export function disableScrollingOnPage(pathname: string) {
 
 // weird how I recreated a simplified version of sveltekit's cookie api .. lol ...but that is intended to work server side??
 export const cookeh = {
-	// found out hard way that some browser don't support special characters for 'name' ..so now sticking to regular letters (i.e. $isLoggedIn is not allowed as a string)
+	// found out hard way that some browser don't support special characters for 'name' ... so now sticking to regular letters (i.e. $isLoggedIn is not allowed as a string)
 	set: function (name: string, value: string | boolean, seconds = 60 * 60 * 24) {
 		return (document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None; Secure`);
-		// return (document.cookie = `${name}=${value}; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure`);
 	},
 	get: function (name: string) {
-		// return (browser && document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop()) || '';
 		return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
-		// why do i have browser check again?
 	},
 
 	erase: function (name: string) {
 		return (document.cookie = name + '=; max-age=0;');
-		// return (document.cookie = name + '=; Max-Age=-99999999;');
 	}
 };
 

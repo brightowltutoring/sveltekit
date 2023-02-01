@@ -3,10 +3,11 @@
 	// export let data;
 	// const { haventLoggedOut, testCookie } = data;
 
-	import './styles.css';
-	import Seo from './Seo.svelte';
-	import Navbar from './(navbar)/Navbar.svelte';
-	import Footer from './Footer.svelte';
+	import './(rootLayout)/styles.css';
+	import GlobalModals from './(rootLayout)/GlobalModals.svelte';
+	import Seo from './(rootLayout)/Seo.svelte';
+	import Navbar from './(rootLayout)/Navbar.svelte';
+	import Footer from './(rootLayout)/Footer.svelte';
 	// let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 
 	import { onMount } from 'svelte';
@@ -19,8 +20,7 @@
 	} from '$lib/store';
 
 	import { disableZoomGestures, isPWA, cookeh } from '$lib/utils';
-	import { SignInWithEmailLink } from './login/SigninWithEmailLink';
-	import GlobalModals from './GlobalModals.svelte';
+	import { FirebaseSignerIner } from './login/FirebaseSignerIner';
 
 	// import { browser } from '$app/environment';
 	// let isiPhone = browser && navigator.userAgent.toLowerCase().includes('iphone');
@@ -29,7 +29,7 @@
 	onMount(async () => {
 		// should add check if someone fired a magicLink .. magicLink still doesnt work cross browser
 
-		if (cookeh.get(`haventLoggedOut`)) SignInWithEmailLink();
+		if (cookeh.get(`haventLoggedOut`)) FirebaseSignerIner();
 
 		// initializing the global variable so I don't have to call this function repeatedly
 		$runningStandalone = await isPWA();

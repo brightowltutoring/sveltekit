@@ -7,8 +7,8 @@
 	font-family: 'Nunito';
 	font-style: normal;
 	font-weight: 200;
-	src: local(''), url('../fonts/nunito-v25-latin-200.woff2') format('woff2'),
-		/* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/nunito-v25-latin-200.woff')
+	src: local(''), url('$lib/fonts/nunito-v25-latin-200.woff2') format('woff2'),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */ url('$lib/fonts/nunito-v25-latin-200.woff')
 			format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
@@ -17,8 +17,8 @@
 	font-family: 'Nunito';
 	font-style: bold;
 	font-weight: 400;
-	src: local(''), url('../fonts/nunito-v25-latin-regular.woff2') format('woff2'),
-		/* Chrome 26+, Opera 23+, Firefox 39+ */ url('../fonts/nunito-v25-latin-regular.woff')
+	src: local(''), url('$lib/fonts/nunito-v25-latin-regular.woff2') format('woff2'),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */ url('$lib/fonts/nunito-v25-latin-regular.woff')
 			format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
@@ -27,16 +27,16 @@
 	font-family: 'Poppins';
 	font-style: normal;
 	font-weight: 100;
-	src: local(''), url('../fonts/poppins-v20-latin-100.woff2') format('woff2'),
-		url('../fonts/poppins-v20-latin-100.woff') format('woff');
+	src: local(''), url('$lib/fonts/poppins-v20-latin-100.woff2') format('woff2'),
+		url('$lib/fonts/poppins-v20-latin-100.woff') format('woff');
 }
 /* poppins-regular - latin */
 /* @font-face {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  src: local(""), url("../fonts/poppins-v20-latin-regular.woff2") format("woff2"),
-    url("../fonts/poppins-v20-latin-regular.woff") format("woff");
+  src: local(""), url("$lib/fonts/poppins-v20-latin-regular.woff2") format("woff2"),
+    url("$lib/fonts/poppins-v20-latin-regular.woff") format("woff");
 } */
 
 /* poppins-700 - latin */
@@ -44,16 +44,16 @@
 	font-family: 'Poppins';
 	font-style: bold;
 	font-weight: 700;
-	src: local(''), url('../fonts/poppins-v20-latin-700.woff2') format('woff2'),
-		url('../fonts/poppins-v20-latin-700.woff') format('woff');
+	src: local(''), url('$lib/fonts/poppins-v20-latin-700.woff2') format('woff2'),
+		url('$lib/fonts/poppins-v20-latin-700.woff') format('woff');
 }
 /* poppins-900 - latin */
 /* @font-face {
   font-family: "Poppins";
   font-style: bold;
   font-weight: 900;
-  src: local(""), url("../fonts/poppins-v20-latin-900.woff2") format("woff2"),
-      url("../fonts/poppins-v20-latin-900.woff") format("woff");
+  src: local(""), url("$lib/fonts/poppins-v20-latin-900.woff2") format("woff2"),
+      url("$lib/fonts/poppins-v20-latin-900.woff") format("woff");
 } */
 
 /* OLD WAY: link import flickers on page load */
@@ -81,25 +81,16 @@ html.dark-mode {
 
 /* on chromium browsers the existence of 'transition' in html class above results in an initial page load darkmode flicker; this hack fixes it .. but have to give 'z-10' to sections with a background video .. it appears */
 html.dark-mode body {
-	/* background-color: var(--dark-semi-transparent); */
 	background-color: var(--dark);
 	color: var(--light);
 	transition: background-color 0.2s ease;
 }
 
-/* body .disableScrollOnThisPage { */
+/* this is fallback when the JS version of no-scroll (in utils.ts) fails; works for some browsers */
 body:has(.disableScrollOnThisPage) {
 	overflow: hidden;
 }
 
-/* hide scrollbar Firefox */
-/* html {
-  scrollbar-width: none; 
-} */
-/* hide scrollbar Chrome, Safari, Opera */
-/* body::-webkit-scrollbar {
-  display: none; 
-} */
 body {
 	/* -ms-overflow-style: none;  */
 	/* hide scrollbar IE and Edge */

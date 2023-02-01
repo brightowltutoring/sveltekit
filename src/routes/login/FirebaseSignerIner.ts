@@ -1,7 +1,6 @@
 import { showLoginModal, isLoggedIn, loggedInEmail } from '$lib/store';
 
-// previously in +layout.svelte and named 'onMountFirebase()'; both the version there and here are broken though... thinking it has to do with 'isUIDfromIDB()' check there
-export async function SignInWithEmailLink() {
+export async function FirebaseSignerIner() {
 	const { auth } = await import('./firebase');
 	const { onAuthStateChanged, isSignInWithEmailLink } = await import('firebase/auth');
 
