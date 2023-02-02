@@ -1,13 +1,15 @@
-/* NEW WAY (feb 1, 2023): pnpm install and use easy! */
-@import '@fontsource/nunito/200.css';
-@import '@fontsource/poppins/100.css';
+/* EXPERIMENTAL WAY: ... flickers font on initial page load */
+/* "@fontsource/nunito": "^4.5.12",
+		"@fontsource/poppins": "^4.5.10", */
+/* @import '@fontsource/nunito/200.css';
+@import '@fontsource/poppins/100.css'; */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* OLD WAY 2 (feb 1, 2023): download various .woff, .woff2 files for Nunito and Poppins and reference them below */
-/* @font-face {
+/* CURRENT WAY: download various .woff, .woff2 files for Nunito and Poppins and reference them below */
+@font-face {
 	font-family: 'Nunito';
 	font-style: normal;
 	font-weight: 200;
@@ -34,9 +36,9 @@
 	font-weight: 700;
 	src: local(''), url('$lib/fonts/poppins-v20-latin-700.woff2') format('woff2'),
 		url('$lib/fonts/poppins-v20-latin-700.woff') format('woff');
-} */
+}
 
-/* OLD WAY 1 (dec12, 2022): ... flickers on page load. Update: no longer works */
+/* OLD WAY  (dec12, 2022): ... flickers on page load. Update: no longer works */
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap'); */
 
 /* Using html instead of body here (and documentElement instead of body when referencing with classList), since flash of content persists on firefox ... this works in all cases  */
