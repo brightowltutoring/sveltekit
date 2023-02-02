@@ -1,6 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@fontsource/fira-mono': ^4.5.10
+  '@fontsource/nunito': ^4.5.12
+  '@fontsource/poppins': ^4.5.10
   '@stripe/stripe-js': ^1.46.0
   '@sveltejs/adapter-cloudflare': ^1.1.0
   '@sveltejs/kit': 1.0.1
@@ -32,6 +35,8 @@ specifiers:
   vite: ^4.0.4
 
 dependencies:
+  '@fontsource/nunito': 4.5.12
+  '@fontsource/poppins': 4.5.10
   '@stripe/stripe-js': 1.46.0
   dropzone: 6.0.0-beta.2
   firebase: 9.16.0
@@ -42,6 +47,7 @@ dependencies:
   svelte-katex: 0.1.2
 
 devDependencies:
+  '@fontsource/fira-mono': 4.5.10
   '@sveltejs/adapter-cloudflare': 1.1.0_@sveltejs+kit@1.0.1
   '@sveltejs/kit': 1.0.1_svelte@3.55.1+vite@4.0.4
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.4
@@ -732,6 +738,18 @@ packages:
 
   /@firebase/webchannel-wrapper/0.9.0:
     resolution: {integrity: sha512-BpiZLBWdLFw+qFel9p3Zs1jD6QmH7Ii4aTDu6+vx8ShdidChZUXqDhYJly4ZjSgQh54miXbBgBrk0S+jTIh/Qg==}
+    dev: false
+
+  /@fontsource/fira-mono/4.5.10:
+    resolution: {integrity: sha512-bxUnRP8xptGRo8YXeY073DSpfK74XpSb0ZyRNpHV9WvLnJ7TwPOjZll8hTMin7zLC6iOp59pDZ8EQDj1gzgAQQ==}
+    dev: true
+
+  /@fontsource/nunito/4.5.12:
+    resolution: {integrity: sha512-Li90TCJha1E+nBgP51GjcIGV6LxyQi7QisW8KZ4kpz5mpnQc1HmsJWVr9fyTMItUF/OuZUOfEazenXjaY6qRpQ==}
+    dev: false
+
+  /@fontsource/poppins/4.5.10:
+    resolution: {integrity: sha512-oYZVHsnlwV3VWM1SE/m6SUxVh0QLk5+2wB+lBiXcI7N/0KVQWmV9YykaPqfJHBLvmdya+MAOnv+BQHeLU1vOOw==}
     dev: false
 
   /@grpc/grpc-js/1.7.3:

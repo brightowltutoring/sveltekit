@@ -27,7 +27,7 @@
 
 		<div class=" grid grid-rows-1">
 			{#key ready}
-				<div in:slide={{ duration: 500 }} class=" pb-4 font-Poppins text-6xl">
+				<div in:slide={{ duration: 500 }} class=" pb-4 font-Poppins text-6xl ">
 					Math, Physics
 					<span class="gradientTextColor"> ... Online! </span>
 				</div>

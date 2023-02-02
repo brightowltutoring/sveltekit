@@ -13,6 +13,7 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
+		"@fontsource/fira-mono": "^4.5.10",
 		"@sveltejs/adapter-cloudflare": "^1.1.0",
 		"@sveltejs/kit": "1.0.1",
 		"@tailwindcss/typography": "^0.5.9",
@@ -37,6 +38,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/nunito": "^4.5.12",
+		"@fontsource/poppins": "^4.5.10",
 		"@stripe/stripe-js": "^1.46.0",
 		"dropzone": "6.0.0-beta.2",
 		"firebase": "^9.16.0",

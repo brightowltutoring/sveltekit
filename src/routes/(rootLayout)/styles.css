@@ -1,28 +1,26 @@
+/* NEW WAY (feb 1, 2023): pnpm install and use easy! */
+@import '@fontsource/nunito/200.css';
+@import '@fontsource/poppins/100.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* nunito-200 - latin */
-@font-face {
+/* OLD WAY 2 (feb 1, 2023): download various .woff, .woff2 files for Nunito and Poppins and reference them below */
+/* @font-face {
 	font-family: 'Nunito';
 	font-style: normal;
 	font-weight: 200;
 	src: local(''), url('$lib/fonts/nunito-v25-latin-200.woff2') format('woff2'),
-		/* Chrome 26+, Opera 23+, Firefox 39+ */ url('$lib/fonts/nunito-v25-latin-200.woff')
-			format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+		url('$lib/fonts/nunito-v25-latin-200.woff') format('woff');
 }
-
-/* nunito-regular - latin */
 @font-face {
 	font-family: 'Nunito';
 	font-style: bold;
 	font-weight: 400;
 	src: local(''), url('$lib/fonts/nunito-v25-latin-regular.woff2') format('woff2'),
-		/* Chrome 26+, Opera 23+, Firefox 39+ */ url('$lib/fonts/nunito-v25-latin-regular.woff')
-			format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+		url('$lib/fonts/nunito-v25-latin-regular.woff') format('woff');
 }
-
-/* poppins-100 - latin */
 @font-face {
 	font-family: 'Poppins';
 	font-style: normal;
@@ -30,42 +28,21 @@
 	src: local(''), url('$lib/fonts/poppins-v20-latin-100.woff2') format('woff2'),
 		url('$lib/fonts/poppins-v20-latin-100.woff') format('woff');
 }
-/* poppins-regular - latin */
-/* @font-face {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  src: local(""), url("$lib/fonts/poppins-v20-latin-regular.woff2") format("woff2"),
-    url("$lib/fonts/poppins-v20-latin-regular.woff") format("woff");
-} */
-
-/* poppins-700 - latin */
 @font-face {
 	font-family: 'Poppins';
 	font-style: bold;
 	font-weight: 700;
 	src: local(''), url('$lib/fonts/poppins-v20-latin-700.woff2') format('woff2'),
 		url('$lib/fonts/poppins-v20-latin-700.woff') format('woff');
-}
-/* poppins-900 - latin */
-/* @font-face {
-  font-family: "Poppins";
-  font-style: bold;
-  font-weight: 900;
-  src: local(""), url("$lib/fonts/poppins-v20-latin-900.woff2") format("woff2"),
-      url("$lib/fonts/poppins-v20-latin-900.woff") format("woff");
 } */
 
-/* OLD WAY: link import flickers on page load */
+/* OLD WAY 1 (dec12, 2022): ... flickers on page load. Update: no longer works */
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@100&display=swap'); */
-/* dec12,2022: this doesnt seem to work anymore */
 
 /* Using html instead of body here (and documentElement instead of body when referencing with classList), since flash of content persists on firefox ... this works in all cases  */
 :root {
 	--light: #f7f7f7;
 	--dark: rgb(20, 13, 33);
-	/* --light_darkened: rgb(224, 229, 232); */
-	/* --dark_lightened: rgb(38, 35, 51); */
 }
 
 html {

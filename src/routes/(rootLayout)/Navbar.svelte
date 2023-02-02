@@ -140,7 +140,7 @@
 
 			<li class="pwa:hidden {hideIfNotIOS} ">
 				<button
-					class="py-1 px-3 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl  {$elementColor} border-b-1 rounded  duration-200 hover:bg-indigo-400
+					class="py-1 px-3 font-Nunito text-2xl font-thin  duration-300 hover:rounded hover:shadow-lg md:text-xl  {$elementColor} border-b-1 rounded  duration-200 hover:bg-indigo-400
       hover:text-white active:animate-pulse "
 					on:click={handleAppNavClick}
 				>
