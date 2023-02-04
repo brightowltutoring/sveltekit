@@ -11,8 +11,8 @@
 	let slideKey = false;
 
 	// variables related to url parameters
-	let urlSearch: string, service: string, extra: boolean, quantity: number, email: string;
-	let firstName: string = '';
+	let urlSearch: string, service: string, extra: boolean, quantity: number, email: string | null;
+	let firstName: string;
 
 	import { app } from '../login/firebase';
 	import { getFunctions, httpsCallable } from 'firebase/functions';
@@ -27,29 +27,31 @@
 
 		async function stripeRedirectToCheckout() {
 			try {
-				let USP = new URLSearchParams(urlSearch);
-
+				const USP = new URLSearchParams(urlSearch);
 				const invitee_full_name = USP.get('invitee_full_name');
-				const firstNameLowerCase = invitee_full_name?.split(' ')[0].toLowerCase();
+				const invitee_email = USP.get('invitee_email');
+				const event_type_name = USP.get('event_type_name');
+				const answer_1 = USP.get('answer_1'); // this now reflects the payment email, if it exists
+				const answer_2 = USP.get('answer_2');
+				const answer_3 = USP.get('answer_3');
 
-				firstName = firstNameLowerCase!.charAt(0).toUpperCase() + firstNameLowerCase!.slice(1);
+				// need to change this to a conditional checking new answer_2
+				email = answer_1 ?? invitee_email;
 
-				email = USP.get('invitee_email')!;
+				let firstNameLowerCase = invitee_full_name?.split(' ')[0].toLowerCase();
 
-				// converts answer_1 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
-				let answer_1 = USP.get('answer_1')!.match(/\d+(\.\d{1,2})/)![0];
-				quantity = parseFloat(answer_1) * 60;
+				firstName = firstNameLowerCase?.charAt(0).toUpperCase() + firstNameLowerCase!.slice(1);
 
-				// answer_2 relates to adding digital session notes
-				if (USP.get('answer_2')) {
-					// USP.get("answer_2").toLowerCase().includes("yes");
-					// since this quesiton only has "yes" as an optoin then don't need to check anything other than existence
-					extra = true;
-				}
+				// converts answer_2 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
+				let answer_2_processed = answer_2!.match(/\d+(\.\d{1,2})/)![0];
+				quantity = parseFloat(answer_2_processed) * 60;
+
+				// answer_3 relates to adding digital session notes
+				if (answer_3) extra = true;
 
 				// event_type_name sets session as classico or mock
 				for (let el of ['classico', 'mock']) {
-					if (USP.get('event_type_name')!.toLowerCase().includes(el)) {
+					if (event_type_name!.toLowerCase().includes(el)) {
 						service = el;
 						break;
 					}
@@ -91,19 +93,13 @@
 	{#if slideKey && service && quantity}
 		<div
 			in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
-			class="font-Poppins text-5xl text-center pt-20 animate-bounce loading"
+			class="loading animate-bounce pt-20 text-center font-Poppins text-5xl"
 		>
 			Almost there {firstName}
 		</div>
 	{/if}
 </main>
 
-<!-- OLD CODE: -->
-<!-- const email = USP.get("email"); -->
-<!-- const quantity = USP.get("quantity"); -->
-<!-- const dollar_hourly_rate = USP.get("dollar_hourly_rate"); -->
-
-<!-- const extra = USP.get("extra"); -->
 <style>
 	.loading:after {
 		content: ' . . .';

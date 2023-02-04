@@ -13,7 +13,6 @@
 		// isDarkMode,
 		showHomeworkModal
 	} from '$lib/store';
-	// $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
 
 	// Alternative to the vanilla-y eventListener logic commented out above.
 	// TODO: Note: using {once:true} inside an event listener attached to 'querySelector('a[href="/homework"]')' would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
@@ -87,7 +86,6 @@
       placeholder="1nQLtENA2318gXFsNbPklccxA-oz8Anfz"
     /> -->
 <InView single onview={(target) => hydrateDropzoneDomEls(target)} once margin={'0px'}>
-	<!-- style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent" -->
 	<form
 		method="post"
 		class="dropzone flex flex-wrap items-center justify-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto"
