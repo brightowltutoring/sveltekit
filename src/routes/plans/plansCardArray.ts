@@ -7,15 +7,20 @@ const color = {
 	blue: '2aa5d6'
 };
 
-function payUrl(session_type: string, payment_type: string, color: string) {
-	return `https://calendly.com/thinksolve/${session_type}-${payment_type}?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1&primary_color=${color}`;
+function payNowUrl(session_type: string, payment_type: string, color: string) {
+	return `https://calendly.com/thinksolve/${session_type}-${payment_type}?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1&primary_color=${color}&a2=1.25+hr`;
+}
+
+// duplicating this function to allow pre-populating answers ... the now and later calendly urls are slightly different
+function payLaterUrl(session_type: string, payment_type: string, color: string) {
+	return `https://calendly.com/thinksolve/${session_type}-${payment_type}?embed_domain=thinksolve.io&embed_type=PopupText&hide_gdpr_banner=1&primary_color=${color}&a1=1.25+hr`;
 }
 
 export const plansCardArray = [
 	{
 		card: 1,
-		payNowUrl: payUrl('classico', 'stripe', color.red),
-		payLaterUrl: payUrl('classico', 'invoice', color.red),
+		payNowUrl: payNowUrl('classico', 'stripe', color.red),
+		payLaterUrl: payLaterUrl('classico', 'invoice', color.red),
 		buttonText: 'Classico',
 		cardTitle: 'Classico',
 		cardText:
@@ -24,8 +29,8 @@ export const plansCardArray = [
 	},
 	{
 		card: 3,
-		payNowUrl: payUrl('mock', 'stripe', color.blue),
-		payLaterUrl: payUrl('mock', 'invoice', color.blue),
+		payNowUrl: payNowUrl('mock', 'stripe', color.blue),
+		payLaterUrl: payLaterUrl('mock', 'invoice', color.blue),
 		buttonText: 'Mock',
 		cardTitle: 'Mock',
 		cardText:

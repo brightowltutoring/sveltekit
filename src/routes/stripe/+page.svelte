@@ -29,7 +29,7 @@
 			try {
 				const USP = new URLSearchParams(urlSearch);
 
-				alert(USP);
+				// alert(USP);
 				const invitee_full_name = USP.get('invitee_full_name');
 				const invitee_email = USP.get('invitee_email');
 				const event_type_name = USP.get('event_type_name');
