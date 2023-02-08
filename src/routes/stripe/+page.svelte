@@ -28,6 +28,8 @@
 		async function stripeRedirectToCheckout() {
 			try {
 				const USP = new URLSearchParams(urlSearch);
+
+				alert(USP);
 				const invitee_full_name = USP.get('invitee_full_name');
 				const invitee_email = USP.get('invitee_email');
 				const event_type_name = USP.get('event_type_name');
@@ -35,11 +37,9 @@
 				const answer_2 = USP.get('answer_2');
 				const answer_3 = USP.get('answer_3');
 
-				// need to change this to a conditional checking new answer_2
 				email = answer_1 ?? invitee_email;
 
 				let firstNameLowerCase = invitee_full_name?.split(' ')[0].toLowerCase();
-
 				firstName = firstNameLowerCase?.charAt(0).toUpperCase() + firstNameLowerCase!.slice(1);
 
 				// converts answer_2 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
