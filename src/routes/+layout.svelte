@@ -64,7 +64,8 @@
 <main class="flex min-h-screen flex-col">
 	<Navbar />
 
-	<div class="px-[7%] pt-32 md:block">
+	<!-- px-[7%] -->
+	<div class="pt-32 md:block lg:px-[6%]">
 		<slot />
 	</div>
 

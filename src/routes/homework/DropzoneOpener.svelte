@@ -1,4 +1,5 @@
 <script>
+	// import IconUpload from '$lib/Icons/IconUpload.svelte';
 	import {
 		// isDarkMode,
 		showHomeworkModal
@@ -12,6 +13,9 @@
 	class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 >
 	<div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's 🔥</div>
+	<!-- <div class="group-hover:animate-pulse">
+		<IconUpload />
+	</div> -->
 </button>
 
 <!-- noscript submit homework -->

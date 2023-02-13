@@ -13,6 +13,7 @@
 		// isDarkMode,
 		showHomeworkModal
 	} from '$lib/store';
+	import IconUpload from '$lib/Icons/IconUpload.svelte';
 
 	// Alternative to the vanilla-y eventListener logic commented out above.
 	// TODO: Note: using {once:true} inside an event listener attached to 'querySelector('a[href="/homework"]')' would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
@@ -91,7 +92,8 @@
 		class="dropzone flex flex-wrap items-center justify-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto"
 	>
 		<div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
-			{text}
+			<!-- {text} -->
+			<IconUpload />
 		</div>
 	</form>
 </InView>
