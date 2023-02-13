@@ -61,11 +61,11 @@
 <Seo />
 <GlobalModals />
 
-<main class="flex min-h-screen flex-col">
+<main class=" flex min-h-screen flex-col">
 	<Navbar />
 
 	<!-- px-[7%] -->
-	<div class="pt-32 md:block lg:px-[6%]">
+	<div class="px-[5%] pt-32 md:block">
 		<slot />
 	</div>
 
