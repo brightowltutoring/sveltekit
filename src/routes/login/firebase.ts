@@ -1,6 +1,6 @@
 import * as NV from '$env/static/public';
 
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 // import { getAuth } from "firebase/auth";
 
 import {
@@ -29,7 +29,8 @@ const firebaseConfig = {
 	appId: NV.PUBLIC_FIREBASE_appId
 };
 
-export const app = initializeApp(firebaseConfig);
+// export const app = initializeApp(firebaseConfig);
+export const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
 
 // export const auth = getAuth(app);
 // TODO: Update dec13, 2022: oer the suggestions on 'https://github.com/firebase/firebase-js-sdk/issues/4946' and 'https://firebase.google.com/docs/auth/web/custom-dependencies' I am swapping 'getAuth' for 'initializeAuth', which allows me to code split the previously implicit 'browserPopupRedirectResolver' ... specifically I can dynamically import 'browserPopupRedirectResolver' and pass as a third argument to 'signinWithPopup' inside the google/twitter login functions in loginFunctions.js
