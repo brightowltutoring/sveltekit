@@ -27,7 +27,7 @@
 <!-- {$isDarkMode
     ? 'hover:shadow-xl'
     : 'hover:shadow-lg'} -->
-<plans-card class="group block rounded-xl p-4 text-center shadow-md duration-300 hover:scale-105">
+<plans-card class="group  block rounded-xl p-5 text-center shadow-md duration-300 hover:scale-105">
 	<!-- style={`background:${$elementColor}`} -->
 	<p class="py-5 text-center font-Poppins text-4xl">
 		<slot name="cardTitle">Classico</slot>

@@ -39,8 +39,10 @@
 
 <!-- <InView once margin={"200px"} onview={addCalendlyCSSandJS}> -->
 <!-- use:boop -->
-<plans-section class="grid grid-cols-1 px-[7%] sm:grid-cols-dynamic sm:px-4 md:m-7">
-	<!-- class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 sm:px-4 px-10 md:m-7" -->
+
+<plans-section
+	class="grid grid-cols-1 gap-5 overflow-x-clip sm:grid-cols-dynamic sm:overflow-visible"
+>
 	<!-- {#if ready} -->
 
 	<!-- {#key mounted} -->
