@@ -10,6 +10,7 @@
 
 <!-- style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent" -->
 <button
+	aria-label="Upload Button Area"
 	on:click={() => {
 		$showHomeworkModal = true;
 		// setTimeout(() => {
