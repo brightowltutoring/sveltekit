@@ -14,3 +14,5 @@ vite.config.ts.timestamp-*
 # COMMENTED OUT since disallowing stripe public keys in git commit
 
 /.vscode
+
+/baas_googleCloudFunctions

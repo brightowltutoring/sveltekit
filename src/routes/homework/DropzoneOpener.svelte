@@ -1,5 +1,6 @@
 <script>
-	// import IconUpload from '$lib/Icons/IconUpload.svelte';
+	import IconUpload from '$lib/Icons/IconUpload.svelte';
+
 	import {
 		// isDarkMode,
 		showHomeworkModal
@@ -9,13 +10,19 @@
 
 <!-- style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent" -->
 <button
-	on:click={() => ($showHomeworkModal = true)}
+	on:click={() => {
+		$showHomeworkModal = true;
+
+		setTimeout(() => {
+			document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
+		}, 75);
+	}}
 	class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 >
-	<div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's 🔥</div>
-	<!-- <div class="group-hover:animate-pulse">
+	<!-- <div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's</div> -->
+	<div class="animate-pulse">
 		<IconUpload />
-	</div> -->
+	</div>
 </button>
 
 <!-- noscript submit homework -->

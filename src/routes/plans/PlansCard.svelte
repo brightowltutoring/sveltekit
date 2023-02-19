@@ -7,13 +7,13 @@
 	const payButtons = [
 		{
 			resetter: false,
-			url: payNowUrl as string,
+			url: payNowUrl,
 			opacityTW: 'bg-opacity-100',
 			text: 'Pay Now'
 		},
 		{
 			resetter: false,
-			url: payLaterUrl as string,
+			url: payLaterUrl,
 			opacityTW: 'bg-opacity-70',
 			text: 'Pay Later'
 		}
@@ -24,11 +24,7 @@
 	export let card: number; /* 1,2,3, */
 </script>
 
-<!-- {$isDarkMode
-    ? 'hover:shadow-xl'
-    : 'hover:shadow-lg'} -->
 <plans-card class="group  block rounded-xl p-5 text-center shadow-md duration-300 hover:scale-105">
-	<!-- style={`background:${$elementColor}`} -->
 	<p class="py-5 text-center font-Poppins text-4xl">
 		<slot name="cardTitle">Classico</slot>
 	</p>

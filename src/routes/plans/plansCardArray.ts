@@ -25,8 +25,9 @@ export const plansCardArray = [
 		buttonText: 'Classico',
 		cardTitle: 'Classico',
 		cardText:
-			'Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.'
-		// href: sampleHref
+			'Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.',
+		// href: sampleHref,
+		buttonColor: color.red
 	},
 	{
 		card: 3,
@@ -35,8 +36,9 @@ export const plansCardArray = [
 		buttonText: 'Mock',
 		cardTitle: 'Mock',
 		cardText:
-			'Get test ready. We provide a live mock test session with answers to completed questions. Digital solution key available as a +2hr premium.'
-		// href: sampleHref
+			'Get test ready. We provide a live mock test session with answers to completed questions. Digital solution key available as a +2hr premium.',
+		// href: sampleHref,
+		buttonColor: color.blue
 	}
 	// TODO: commenting out this service for now (feb13,2023) ... havent thought of a good third service
 	// {
