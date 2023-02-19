@@ -12,10 +12,9 @@
 <button
 	on:click={() => {
 		$showHomeworkModal = true;
-
-		setTimeout(() => {
-			document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
-		}, 75);
+		// setTimeout(() => {
+		document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
+		// }, 75);
 	}}
 	class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 >
