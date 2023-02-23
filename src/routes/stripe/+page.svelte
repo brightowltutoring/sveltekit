@@ -1,9 +1,13 @@
 <script lang="ts">
+	import { app } from '../login/firebase';
+	import { getFunctions, httpsCallable } from 'firebase/functions';
+	const functions = getFunctions(app);
+
 	// import "@stripe/stripe-js";
 	import { loadStripe } from '@stripe/stripe-js/pure';
-
 	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
 	// const PUBLIC_STRIPE_KEY = import.meta.env.VITE_STRIPE_KEY;
+
 	import { fly } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
 
@@ -14,10 +18,6 @@
 		quantity: number,
 		email: string | null,
 		firstName: string;
-
-	import { app } from '../login/firebase';
-	import { getFunctions, httpsCallable } from 'firebase/functions';
-	const functions = getFunctions(app);
 
 	import { onMount } from 'svelte';
 	let slideKey = false;

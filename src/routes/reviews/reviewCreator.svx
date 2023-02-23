@@ -20,12 +20,13 @@
   
   import {onMount} from 'svelte'
   let mounted= false
-
   onMount(()=> (mounted = true))
   
 </script>
 
-<article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw]  ">  
+<!-- <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">   -->
+<article class="prose relative md:pb-[5vw] ">  
+<!-- darkmode now handled in styles section -->
 
   <div class="absolute">
 
@@ -64,9 +65,8 @@
 
 
 
-<!-- <style>
-  h1,h2,h3,h4{
-    margin:  0;
-    padding: 0;
+<style>
+  :global(html.dark-mode) article {
+    @apply prose-invert
   }
-</style> -->
+</style>

@@ -41,7 +41,7 @@
 <!-- use:boop -->
 <!-- lg:pb-32 lg:pt-10 -->
 <plans-section
-	class="grid grid-cols-1 gap-5 overflow-x-clip sm:grid-cols-dynamic sm:overflow-visible lg:px-16 "
+	class="mx-2 grid grid-cols-1 gap-5 overflow-x-clip sm:grid-cols-dynamic sm:overflow-visible lg:px-16"
 >
 	<!-- {#if ready} -->
 

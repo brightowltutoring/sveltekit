@@ -9,6 +9,7 @@
 	import BackgroundVideo from '../lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import HorizontalScrollReviews from '$lib/HorizontalScrollReviews.svelte';
 
 	let ready = false;
 	onMount(() => (ready = true));
@@ -96,7 +97,12 @@
 		</button>
 
 		<!-- <LazyMount Import={() => import('./reviews/Reviews.svelte')} /> -->
-		<Reviews />
+		<div class="hidden sm:block">
+			<Reviews />
+		</div>
+		<div class="block sm:hidden">
+			<HorizontalScrollReviews />
+		</div>
 	</section>
 </div>
 
