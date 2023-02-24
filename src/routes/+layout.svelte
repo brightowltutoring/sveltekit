@@ -61,7 +61,7 @@
 <Seo />
 <GlobalModals />
 
-<main class=" flex min-h-screen flex-col">
+<main class=" flex min-h-screen flex-col ">
 	<Navbar />
 
 	<!-- px-[7%] -->

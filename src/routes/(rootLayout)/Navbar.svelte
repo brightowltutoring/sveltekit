@@ -108,7 +108,7 @@
 		<!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
 		<!-- bgGradientColor  -->
 		<ul
-			class="hideScrollBar grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1 "
+			class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1 "
 		>
 			<!-- py-3 px-5 -->
 			<!-- <ul

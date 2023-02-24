@@ -2,7 +2,7 @@ module.exports = {
 	darkMode: ['class', 'html.dark-mode'],
 	// darkMode: ['class', '[data-mode="dark"]'],
 	content: ['./src/**/*.{html,js,ts,svelte,md,svx}'],
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [require('@tailwindcss/typography'), require('tailwind-scrollbar-hide')],
 	theme: {
 		extend: {
 			screens: {

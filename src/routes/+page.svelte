@@ -17,11 +17,11 @@
 
 <BackgroundVideo />
 
-<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64 ">
+<div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
 	<section
 		class="z-10 flex h-[60vh] items-center justify-center text-center"
 		on:click={() => {
-			document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		}}
 	>
 		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
@@ -42,7 +42,7 @@
 	<section id="step1" class="grid place-content-center duration-500 hover:scale-105">
 		<button
 			on:click={() => {
-				document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 			}}
 			class="pb-7 text-center font-Poppins text-5xl"
 		>

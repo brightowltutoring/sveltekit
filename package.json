@@ -44,7 +44,8 @@
 		"mathjax": "^3.2.2",
 		"mdsvex": "^0.10.6",
 		"rehype-katex-svelte": "^1.1.2",
-		"svelte-katex": "^0.1.2"
+		"svelte-katex": "^0.1.2",
+		"tailwind-scrollbar-hide": "^1.1.7"
 	},
 	"description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
 	"main": "mdsvex.config.js",
