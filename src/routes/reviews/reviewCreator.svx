@@ -32,6 +32,8 @@
 
    # {title}
 
+   <!-- <h1>{title}</h1> -->
+
     <div class="flex flex-row">
       {#each Array(5) as _,i }
 
@@ -54,9 +56,11 @@
 
     <div class="italic"> on {date} </div>
 
-    <slot/>
+    <div class="py-3">
+      <slot/>
+    </div>
 
-    <b class="absolute right-0 bottom-0 -my-10 mx-5 ">{name}</b>
+    <b class="absolute right-0 bottom-0 -my-10 mx-5 py-3">{name}</b>
 
   </div>
 

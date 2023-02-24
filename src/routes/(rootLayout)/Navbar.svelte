@@ -106,8 +106,9 @@
 		{/key}
 
 		<!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
+		<!-- bgGradientColor  -->
 		<ul
-			class="bgGradientColor hideScrollBar grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md p-2 text-xl md:ml-24 md:w-auto md:rounded-xl md:p-1"
+			class="hideScrollBar grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1 "
 		>
 			<!-- py-3 px-5 -->
 			<!-- <ul
@@ -155,16 +156,15 @@
 	</logo-and-navbar>
 </nav>
 
-<style>
+<!-- UPDATE (feb23,2023): Using tailwind.config.cjs way of implementing darkmode now (referencing 'html.dark-mode' still), rather than the global svelte styles tag way  -->
+<!-- <style>
 	.bgGradientColor {
 		@apply bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200;
 	}
+
 	:global(html.dark-mode) .bgGradientColor {
 		@apply to-[rgb(37,35,91)];
 	}
 
-	/* TODO: delete? */
-	nav.js {
-		@apply opacity-100 transition-opacity duration-1000 ease-in;
-	}
-</style>
+
+</style> -->

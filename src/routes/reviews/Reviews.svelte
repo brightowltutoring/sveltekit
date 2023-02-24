@@ -2,7 +2,8 @@
 	import { reviews } from './reviews';
 
 	// @ts-ignore
-	import ReviewCreator from './reviewCreator.svx';
+	import ReviewCreator from './ReviewCreator.svelte';
+	// import ReviewCreator from './reviewCreator.svx';
 </script>
 
 <div class="scale-90">

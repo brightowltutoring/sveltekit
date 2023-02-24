@@ -24,7 +24,9 @@
 	export let card: number; /* 1,2,3, */
 </script>
 
-<plans-card class="group  block rounded-xl p-5 text-center shadow-md duration-300 hover:scale-105">
+<plans-card
+	class="group block rounded-xl bg-[#f2f7fa] p-5 text-center shadow-md duration-300 hover:scale-105 hover:shadow-lg dark:bg-[#262333] dark:hover:shadow-xl"
+>
 	<p class="py-5 text-center font-Poppins text-4xl">
 		<slot name="cardTitle">Classico</slot>
 	</p>
@@ -40,15 +42,18 @@
 	</div>
 </plans-card>
 
+<!-- UPDATE (feb23,2023): Using tailwind.config.cjs way of implementing darkmode now (referencing 'html.dark-mode' still), rather than the global svelte styles tag way  -->
+
 <!-- Previously the background color of this component was set with "style={`background:${$elementColor}`}" — i.e. inline css via reactive javascript-string (specifically a derived svelte store variable) — however this would cause 'darkmode flash' when starting with the /plans route (and darkmode saved/set from localStorage).  -->
-<style>
+
+<!-- <style>
 	plans-card {
-		background: rgb(242, 247, 250);
+		background: #f2f7fa;
 		@apply hover:shadow-lg;
 	}
 
 	:global(html.dark-mode) plans-card {
-		background: rgb(38, 35, 51);
+		background: #262333;
 		@apply hover:shadow-xl;
 	}
-</style>
+</style> -->
