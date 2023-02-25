@@ -27,20 +27,20 @@ export async function sendCodeToPhone(PHONE_NUMBER: string, RECAPTCHA_VERIFIER: 
 
 	// dec1,2022: added this unchecked 'setPersistence' wrapper to log user out once the session is closed; for phone authentication this is desirable to discourage multiple people sharing one account
 
-	// setPersistence(auth, browserSessionPersistence).then(() => {
-	signInWithPhoneNumber(auth, PHONE_NUMBER, RECAPTCHA_VERIFIER)
-		.then((confirmationResult) => {
-			// SMS sent. Prompt user to type the code from the message, then sign the
-			// user in with confirmationResult.confirm(code).
-			// @ts-ignore
-			window.confirmationResult = confirmationResult;
-			// ...
-		})
-		.catch((error) => {
-			// Error; SMS not sent
-			// ...
-		});
-	// }); // setPersistence block
+	setPersistence(auth, browserSessionPersistence).then(() => {
+		signInWithPhoneNumber(auth, PHONE_NUMBER, RECAPTCHA_VERIFIER)
+			.then((confirmationResult) => {
+				// SMS sent. Prompt user to type the code from the message, then sign the
+				// user in with confirmationResult.confirm(code).
+				// @ts-ignore
+				window.confirmationResult = confirmationResult;
+				// ...
+			})
+			.catch((error) => {
+				// Error; SMS not sent
+				// ...
+			});
+	}); // setPersistence block
 }
 
 // export function verifySMSCode(SMS_CODE, e) {

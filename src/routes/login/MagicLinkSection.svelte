@@ -2,6 +2,7 @@
 	import { regexEmailChecker, magicLinkToEmail } from './MagicLinkLogin';
 	import IconEmail from '$lib/Icons/LoginIcons/IconEmail.svelte';
 	import { isDarkMode } from '$lib/store';
+	import LoginButton from './LoginButton.svelte';
 
 	let magicLinkSent = false;
 	let emptyEmailInputAnimated: boolean;
@@ -66,19 +67,14 @@
 	}
 </script>
 
-<button
-	bind:this={magicLinkBtn}
-	on:click={signinWithLinkAndStop}
-	class="group rounded-md bg-emerald-500  p-4  duration-200 hover:scale-[1.01] hover:shadow-md {$isDarkMode
-		? 'group-hover:bg-opacity-80'
-		: 'group-hover:bg-opacity-80'}  flex w-full items-center justify-center gap-5 text-white"
+<LoginButton
+	bindThis={magicLinkBtn}
+	onClick={() => signinWithLinkAndStop()}
+	innerText={'Get Magic Link'}
+	bgColorTW={'bg-emerald-500'}
 >
-	<span class="duration-500 group-hover:scale-[1.15]">
-		<IconEmail />
-	</span>
-	<!-- <span class="font-bold">Get Magic Link</span> -->
-	<span>Get Magic Link</span>
-</button>
+	<IconEmail />
+</LoginButton>
 
 {#if magicLinkInputVisible}
 	<input

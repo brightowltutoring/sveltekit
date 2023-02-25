@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LoginButton from './LoginButton.svelte';
 	let smsCode: string;
 	let countryCode = '+1';
 
@@ -84,19 +85,27 @@
 
 <!-- dec1,2022: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
 {#if !phoneCodeSent}
-	<button
+	<LoginButton
+		bindThis={sendPhoneCodeBtn}
+		onClick={() => submitPhoneNumber()}
+		innerText={'Get SMS Code'}
+		bgColorTW={'bg-rose-400'}
+	>
+		<IconPhone />
+	</LoginButton>
+
+	<!-- <button
 		bind:this={sendPhoneCodeBtn}
 		on:click={submitPhoneNumber}
-		class=" group rounded-md bg-rose-400  p-4  duration-200 hover:scale-[1.01] hover:shadow-md {$isDarkMode
+		class=" group rounded-md bg-rose-400  p-4  duration-200 hover:scale-[1.01] hover:shadow-md dark:bg-opacity-80 {$isDarkMode
 			? 'group-hover:bg-opacity-80'
 			: 'group-hover:bg-opacity-80'}  flex w-full items-center justify-center gap-5 text-white"
 	>
 		<span class="duration-500 group-hover:scale-[1.15]">
 			<IconPhone />
 		</span>
-		<!-- <span class="font-bold">Get SMS Code</span> -->
 		<span>Get SMS Code</span>
-	</button>
+	</button> -->
 
 	<div class="grid w-full grid-cols-6 text-black">
 		{#if phoneInputVisible}

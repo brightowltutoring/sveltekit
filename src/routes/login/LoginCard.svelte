@@ -170,7 +170,7 @@
 				<!-- style={`background:${$elementColor}`} -->
 
 				<GoogleLoginButton />
-
+				<p class="py-3" />
 				<div class="hidden pwa:block">
 					<PhoneAuthSection />
 				</div>
