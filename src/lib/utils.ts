@@ -84,7 +84,7 @@ export function disableZoomGestures() {
 	}
 }
 
-// export function isPWA() {
+// this javascript implementation is largely replaced by the (tailwind) css 'pwa:' prefixer ... using custom tailwind config (under theme.extend.screens.pwa )
 export async function isPWA() {
 	return browser && window.matchMedia('(display-mode: standalone)').matches;
 }

@@ -32,11 +32,11 @@
 			>
 				<button
 					on:click={scrollToRightCard}
-					class="absolute right-0 top-0 h-full w-20 rounded-full"
+					class="absolute right-0 top-0 z-10 h-full w-16 rounded-full "
 				/>
 				<button
 					on:click={scrollToLeftCard}
-					class="absolute left-0  top-0 h-full w-20 rounded-full"
+					class="absolute left-0  top-0 z-10 h-full w-16 rounded-full "
 				/>
 				<ReviewCreator {title} {name} {date}>
 					{body}

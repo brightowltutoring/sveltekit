@@ -20,6 +20,7 @@
 	let phoneFieldValue: string = '';
 	let isPhoneNumber = false;
 	let phoneStatusMessage: HTMLElement;
+	// phoneStatusMessage.style.display = 'none';
 
 	// @ts-ignore
 	let phoneInputVisible: boolean = globalThis.phoneInputVisible;
@@ -120,7 +121,7 @@
 <div id="recaptcha-container" />
 <div
 	bind:this={phoneStatusMessage}
-	class="p-3 font-Poppins {$isDarkMode ? 'text-lime-100' : 'text-rose-600'}"
+	class="hidden p-3 font-Poppins {$isDarkMode ? 'text-lime-100' : 'text-rose-600'}"
 />
 
 {#if phoneCodeSent}
