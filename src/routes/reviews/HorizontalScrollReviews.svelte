@@ -31,12 +31,14 @@
 				class="relative h-[70vh] w-[85vw] max-w-sm overflow-hidden overflow-y-scroll scroll-smooth rounded-xl bg-white p-5 px-10 shadow-md transition-shadow duration-300 ease-in-out scrollbar-hide hover:shadow-xl dark:bg-[#252333]"
 			>
 				<button
+					aria-label="right horizontal scroll to next review card"
 					on:click={scrollToRightCard}
-					class="absolute right-0 top-0 z-10 h-full w-16 rounded-full "
+					class="absolute right-0 top-0 z-10 h-full w-16 rounded-full"
 				/>
 				<button
+					aria-label="left horizontal scroll to next review card"
 					on:click={scrollToLeftCard}
-					class="absolute left-0  top-0 z-10 h-full w-16 rounded-full "
+					class="absolute left-0  top-0 z-10 h-full w-16 rounded-full"
 				/>
 				<ReviewCreator {title} {name} {date}>
 					{body}
