@@ -165,7 +165,7 @@
 	<!-- {#if !$isLoggedIn && $showLoginModal} -->
 	{#if !$isLoggedIn}
 		{#key !noTransition && $showLoginModal}
-			<login-card in:slide={{ duration: 400, easing: quintOut }} class="cardStyles">
+			<login-card in:slide={{ duration: 400, easing: quintOut }}>
 				<!-- class={$isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg"} -->
 				<!-- style={`background:${$elementColor}`} -->
 
@@ -198,10 +198,7 @@
 	<!-- {#if $isLoggedIn && $showLoginModal} -->
 	{#if $isLoggedIn}
 		{#key !noTransition && $showLoginModal}
-			<logout-card
-				in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
-				class="cardStyles"
-			>
+			<logout-card in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}>
 				<!-- class={$isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg"} -->
 				<!-- style={`background:${$elementColor} `} -->
 				<p>{loginWelcomeText}</p>
@@ -221,20 +218,13 @@
 </main>
 
 <style>
-	/* :where selector not needed here but used out of principle as it is 'argument forgiving'; @apply using tailwindcss  */
-	/* :where(login-card, logout-card) { */
-	/* .cardStyles {
-		@apply relative mx-auto block w-[90vw] rounded-2xl py-10 px-5 font-Poppins text-xl shadow-md duration-300 hover:scale-[1.01] hover:rounded-3xl sm:w-[500px] sm:p-10;
-	} */
-
 	login-card,
 	logout-card {
 		@apply relative mx-auto block w-[90vw] rounded-2xl bg-[#f2f7fa] py-10 px-5 font-Poppins text-xl shadow-md duration-300 hover:scale-[1.01] hover:rounded-3xl sm:w-[500px] sm:p-10;
 	}
 
+	/* for some reason the custom 'dark:' tailwind utility class is not working */
 	:global(html.dark-mode) :where(login-card, logout-card) {
-		/* :global(html.dark-mode) login-card,
-  :global(html.dark-mode) logout-card { */
 		@apply bg-[#262333];
 	}
 </style>
