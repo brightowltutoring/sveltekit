@@ -84,7 +84,7 @@
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
 			} else {
 				$isLoggedIn = false;
-				cookeh.erase('haventLoggedOut');
+				cookeh.eat('haventLoggedOut');
 
 				localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
 

@@ -26,7 +26,7 @@ export const cookeh = {
 		return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
 	},
 
-	erase: function (name: string) {
+	eat: function (name: string) {
 		return (document.cookie = name + '=; max-age=0;');
 	}
 };

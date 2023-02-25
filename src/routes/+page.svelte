@@ -6,10 +6,10 @@
 	import DropzoneOpener from './homework/DropzoneOpener.svelte';
 	import PlansSection from './plans/PlansSection.svelte';
 	import Reviews from './reviews/Reviews.svelte';
+	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
 	import BackgroundVideo from '../lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import HorizontalScrollReviews from '$lib/HorizontalScrollReviews.svelte';
 
 	let ready = false;
 	onMount(() => (ready = true));
