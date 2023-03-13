@@ -11,8 +11,6 @@
 			.getElementById(`card_${target_index % reviews.length}`)
 			?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	}
-
-	// previously was defining two functions per index under svelte each block using @const .. however this component is small enough to keep function definitions in script tag ... also not a fan of creating 2N functions
 </script>
 
 <!-- example taken from: https://tailwindcomponents.com/component/horizontal-scroll-card-components -->

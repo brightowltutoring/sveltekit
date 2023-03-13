@@ -94,19 +94,6 @@
 		<IconPhone />
 	</LoginButton>
 
-	<!-- <button
-		bind:this={sendPhoneCodeBtn}
-		on:click={submitPhoneNumber}
-		class=" group rounded-md bg-rose-400  p-4  duration-200 hover:scale-[1.01] hover:shadow-md dark:bg-opacity-80 {$isDarkMode
-			? 'group-hover:bg-opacity-80'
-			: 'group-hover:bg-opacity-80'}  flex w-full items-center justify-center gap-5 text-white"
-	>
-		<span class="duration-500 group-hover:scale-[1.15]">
-			<IconPhone />
-		</span>
-		<span>Get SMS Code</span>
-	</button> -->
-
 	<div class="grid w-full grid-cols-6 text-black">
 		{#if phoneInputVisible}
 			<input
