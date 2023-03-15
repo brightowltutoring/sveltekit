@@ -1,20 +1,23 @@
 <script>
-  export let navIconClicked;
+	export let navIconClicked;
+	$: navIconClickedFill = navIconClicked && '!fill-rose-600';
+	// navIconClicked && (!$isDarkMode ? "fill-rose-500" : "fill-indigo-700");
 
-  $: navIconClickedFill = navIconClicked && "fill-rose-600";
-  // navIconClicked && (!$isDarkMode ? "fill-rose-500" : "fill-indigo-700");
-  import { isDarkMode } from "$lib/store";
-  $: fillColor = $isDarkMode ? "white" : "black";
-  let size = 489.2;
+	let size = 489.2;
+
+	// TODO: replaced with tailwind 'dm:' logic .., no longer need $isDarkMode
+	// import { isDarkMode } from '$lib/store';
+	// $: fillColor = $isDarkMode ? 'white' : 'black';
 </script>
 
 <!-- I have no idea why 1/15 here ends up with the icon centered in the navbar -->
 
 <svg height={size / 15} width={size / 15} viewBox="0 0 {size} {size}">
-  <path
-    class={navIconClickedFill}
-    fill={fillColor}
-    d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
+	<!-- class={navIconClickedFill} -->
+	<!-- fill={fillColor} -->
+	<path
+		class={`fill-black dark:fill-white ${navIconClickedFill}`}
+		d="M177.8,238.1c0,4.5-3.6,8.1-8.1,8.1h-30.4c-4.5,0-8.1-3.6-8.1-8.1v-30.4c0-4.5,3.6-8.1,8.1-8.1h30.4
 			c4.5,0,8.1,3.6,8.1,8.1V238.1z M241.3,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
 			c4.5,0,8.1-3.6,8.1-8.1V207.8z M304.8,207.8c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1v30.4c0,4.5,3.6,8.1,8.1,8.1h30.4
 			c4.5,0,8.1-3.6,8.1-8.1V207.8z M177.8,269.6c0-4.5-3.6-8.1-8.1-8.1h-30.4c-4.5,0-8.1,3.6-8.1,8.1V300c0,4.5,3.6,8.1,8.1,8.1h30.4
@@ -32,5 +35,11 @@
 			z M489.2,397.7c0,50.3-40.8,91.1-91.1,91.1S307,448,307,397.7s40.8-91.1,91.1-91.1S489.2,347.4,489.2,397.7z M444.1,374.1
 			c0-2.9-1.1-5.7-3.2-7.7c-4.3-4.3-11.2-4.3-15.5,0L385.8,406l-15.2-15.2c-4.3-4.3-11.2-4.3-15.5,0c-2.1,2.1-3.2,4.8-3.2,7.7
 			c0,2.9,1.1,5.7,3.2,7.7l22.9,22.9c4.3,4.3,11.2,4.3,15.5,0l47.3-47.3C443,379.8,444.1,377,444.1,374.1z"
-  />
+	/>
 </svg>
+
+<style>
+	#testin {
+		fill: red;
+	}
+</style>

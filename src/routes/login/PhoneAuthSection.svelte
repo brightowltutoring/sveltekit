@@ -117,8 +117,9 @@
 <div id="recaptcha-container" />
 <div
 	bind:this={phoneStatusMessage}
-	class="hidden p-3 font-Poppins {$isDarkMode ? 'text-lime-100' : 'text-rose-600'}"
+	class="hidden p-3 font-Poppins text-rose-600 dark:text-lime-100"
 />
+<!-- {$isDarkMode ? 'text-lime-100' : 'text-rose-600' -->
 
 {#if phoneCodeSent}
 	<!-- {#if true} -->

@@ -23,10 +23,11 @@
 				duration: 1500,
 				easing: elasticOut
 			}}
-			class="flex flex-col gap-y-2 bg-gradient-to-r bg-clip-text text-center font-Poppins text-3xl text-transparent sm:text-5xl  {$isDarkMode
-				? 'from-teal-200 via-rose-300 to-pink-200 '
-				: 'from-teal-700 via-rose-700 to-pink-700 '}"
+			class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl"
 		>
+			<!--  {$isDarkMode
+				? 'from-teal-200 via-rose-300 to-pink-200 '
+				: 'from-teal-700 via-rose-700 to-pink-700 '} -->
 			<li>Email:</li>
 			<li class="p-5">thinksolve.io@gmail.com</li>
 		</ul>
