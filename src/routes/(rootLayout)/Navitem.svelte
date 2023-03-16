@@ -3,12 +3,12 @@
 	// import InView from "$lib/Wrappers/InView.svelte";
 	import type { ComponentType } from 'svelte';
 
-	export let href: string,
-		name: string,
-		routes: any,
-		btnColorHover: string,
-		icon: ComponentType,
-		navIconClicked: boolean = false;
+	export let href: string;
+	export let name: string;
+	export let routes: any;
+	export let btnColorHover: string;
+	export let icon: ComponentType;
+	export let navIconClicked = false;
 	// bool, btnColor,
 
 	// import { isRunningStandalone } from '$lib/utils';

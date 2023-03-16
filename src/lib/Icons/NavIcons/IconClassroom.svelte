@@ -1,26 +1,12 @@
-<script>
-	export let navIconClicked;
-	$: navIconClickedFill = navIconClicked && '!fill-rose-600';
-	// $: navIconClickedFill =
-	//   navIconClicked && (!$isDarkMode ? "fill-rose-600" : "fill-indigo-400");
-
-	// TODO: replaced with tailwind 'dm:' logic .., no longer need $isDarkMode
-	// import { isDarkMode } from '$lib/store';
-	// $: fillColor = $isDarkMode ? 'white' : 'black';
-	// $: focusFillColorTW = $isDarkMode
-	//   ? "focus:fill-green-400 focus:outline-none"
-	//   : "focus:fill-red-500 focus:outline-none";
+<script lang="ts">
+	import NavIconSvg from './NavIconSVG.svelte';
+	export let navIconClicked: boolean;
 	let size = 31.886;
 </script>
 
-<svg width={size} height={size} viewBox="0 0 {size} {size}">
+<NavIconSvg {size} {navIconClicked} width={1.3 * size}>
 	<g>
-		<!-- class={focusFillColorTW} -->
-		<!-- tabindex="-1" -->
-		<!-- fill={fillColor} -->
-		<!-- class={navIconClickedFill} -->
 		<path
-			class={`fill-black dark:fill-white ${navIconClickedFill}`}
 			d="M19.021,1.176V0L15.23,1.176H6.929v28.245h1.54V2.716h1.793L9.086,3.081v26.34l9.935,2.465V2.716h4.395v26.705h1.541V1.176
 		H19.021z M16.693,19.229c-0.5,0-0.905-0.492-0.905-1.098s0.405-1.098,0.905-1.098c0.5,0,0.905,0.49,0.905,1.098
 		C17.598,18.736,17.193,19.229,16.693,19.229z"
@@ -73,4 +59,4 @@
 			/>
 		</g>
 	</g>
-</svg>
+</NavIconSvg>

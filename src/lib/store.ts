@@ -117,10 +117,30 @@ import IconPlans from '$lib/Icons/NavIcons/IconPlans.svelte';
 import IconHomework from '$lib/Icons/NavIcons/IconHomework.svelte';
 import IconClassroom from '$lib/Icons/NavIcons/IconClassroom.svelte';
 
-// import type { ComponentType } from 'svelte';
+import type { ComponentType } from 'svelte';
+
+interface routeInfo {
+	name: string;
+	href: string;
+	title: string;
+	isCurrent: boolean;
+	meta?: string;
+	icon?: ComponentType;
+}
+
+type routeNames =
+	| 'home'
+	| 'login'
+	| 'plans'
+	| 'homework'
+	| 'classroom'
+	| 'faq'
+	| 'stripe'
+	| 'physics'
+	| 'math';
 
 //TODO: fix type
-export const routes = writable({
+export const routes = writable<Record<routeNames, routeInfo>>({
 	home: {
 		name: 'Home',
 		href: '/',

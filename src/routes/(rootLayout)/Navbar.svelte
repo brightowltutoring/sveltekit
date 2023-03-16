@@ -60,9 +60,10 @@
 
 		resetLogoClick = !resetLogoClick;
 
-		for (let key in $routes) {
-			$routes[key].isCurrent = false;
+		for (const key in $routes) {
+			$routes[key as keyof typeof $routes].isCurrent = false;
 		}
+		// this jank taken from: https://stackoverflow.com/questions/57086672/element-implicitly-has-an-any-type-because-expression-of-type-string-cant-b
 
 		$routes.home.isCurrent = true;
 	}
