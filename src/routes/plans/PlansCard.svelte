@@ -1,8 +1,13 @@
 <script lang="ts">
 	import PlansButton from './PlansButton.svelte';
 
+	export let cardText = '';
+	export let cardTitle = '';
+
 	export let payNowUrl = '';
 	export let payLaterUrl = '';
+	export let buttonColor: string;
+	// export let btnColorHover = '';
 
 	const payButtons = [
 		{
@@ -18,33 +23,27 @@
 			text: 'Pay Later'
 		}
 	];
-
-	export let btnColorHover = '';
-
-	export let card: number; /* 1,2,3, */
 </script>
 
 <plans-card
 	class="group block rounded-xl bg-[#f2f7fa] p-5 text-center shadow-md duration-300 hover:scale-105 hover:shadow-lg dark:bg-[#262333] dark:hover:shadow-xl"
 >
 	<p class="py-5 text-center font-Poppins text-4xl">
-		<slot name="cardTitle">Classico</slot>
+		<!-- <slot name="cardTitle">cardTitle</slot> -->
+		{cardTitle}
 	</p>
 
 	{#each payButtons as button}
 		<div class="inline-block group-hover:scale-95 group-hover:animate-pulse ">
-			<PlansButton {button} {btnColorHover} {card} />
+			<PlansButton {button} {buttonColor} />
 		</div>
 	{/each}
 
 	<div class="py-4">
-		<slot name="cardText">default cardText</slot>
+		<!-- <slot name="cardText">cardText</slot> -->
+		{cardText}
 	</div>
 </plans-card>
-
-<!-- UPDATE (feb23,2023): Using tailwind.config.cjs way of implementing darkmode now (referencing 'html.dark-mode' still), rather than the global svelte styles tag way  -->
-
-<!-- Previously the background color of this component was set with "style={`background:${$elementColor}`}" — i.e. inline css via reactive javascript-string (specifically a derived svelte store variable) — however this would cause 'darkmode flash' when starting with the /plans route (and darkmode saved/set from localStorage).  -->
 
 <!-- <style>
 	plans-card {

@@ -157,7 +157,6 @@
 	</logo-and-navbar>
 </nav>
 
-<!-- UPDATE (feb23,2023): Using tailwind.config.cjs way of implementing darkmode now (referencing 'html.dark-mode' still), rather than the global svelte styles tag way  -->
 <!-- <style>
 	.bgGradientColor {
 		@apply bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200;

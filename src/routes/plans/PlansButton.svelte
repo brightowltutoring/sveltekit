@@ -1,16 +1,7 @@
 <script lang="ts">
 	import Modal from '$lib/Wrappers/Modal.svelte';
 
-	// ... haven't figured type
-	let buttonColor: any = {
-		1: 'bg-[rgb(244,77,77)]' /* red */,
-		2: 'bg-[rgb(254,164,92)]' /* yellow */,
-		3: 'bg-[rgb(45,165,214)]' /* blue */
-	};
-	1;
-	export let btnColorHover = '';
-
-	export let card: number; /* 1,2,3, */
+	export let buttonColor: string;
 
 	// havent figured how to type this
 	export let button: any;
@@ -47,9 +38,8 @@
 	on:click={(e) => handlePlansModal(e, url)}
 	on:focus={(e) => handlePlansModal(e, url)}
 	on:mouseover={(e) => handlePlansModal(e, url)}
-	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md group-hover:bg-opacity-80 {opacityTW} {btnColorHover} {buttonColor[
-		card
-	]}"
+	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md group-hover:bg-opacity-80 {opacityTW}  {buttonColor}"
 >
-	<slot name="buttonText">{text}</slot>
+	<!-- <slot name="buttonText">{text}</slot> -->
+	<span>{text}</span>
 </button>
