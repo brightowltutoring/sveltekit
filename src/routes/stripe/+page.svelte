@@ -65,19 +65,18 @@
 			if (service && quantity) {
 				// create checkout session using url params ... but only if some actually exist
 				const stripeSessionIdGCF = httpsCallable(functions, 'stripeSessionIdGCF');
-				const { data } = (await stripeSessionIdGCF({
+				const { data }: any = await stripeSessionIdGCF({
 					email,
 					extra,
 					service,
 					quantity
-					// dollar_hourly_rate,
-				})) as any;
+				});
 
 				// create checkout session; Stripe() comes from head script
 
 				const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 
-				stripe!.redirectToCheckout({ sessionId: data.id });
+				stripe?.redirectToCheckout({ sessionId: data.id });
 
 				// Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id }); //non-typescript
 			}
@@ -101,6 +100,10 @@
 		>
 			Almost there {firstName}
 		</div>
+		<!-- {:else}
+		<div class=" pt-20 text-center font-Poppins text-5xl">
+			Oops ... there was a mistake. Please try again.
+		</div> -->
 	{/if}
 </main>
 

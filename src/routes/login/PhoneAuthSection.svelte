@@ -10,13 +10,14 @@
 		verifySMSCode
 	} from './PhoneLogin';
 	import IconPhone from '$lib/Icons/LoginIcons/IconPhone.svelte';
-	import { isDarkMode } from '$lib/store';
+	// import { isDarkMode } from '$lib/store';
 
 	let phoneCodeSent = false;
+
 	let emptyPhoneInputAnimated = false;
 	$: shortPing = !phoneCodeSent && emptyPhoneInputAnimated && 'animate-ping';
 
-	let sendPhoneCodeBtn: HTMLElement;
+	// let sendPhoneCodeBtn: HTMLButtonElement;
 	let phoneField: HTMLElement;
 	let phoneFieldValue: string = '';
 	let isPhoneNumber = false;
@@ -34,6 +35,9 @@
 
 		let clickOrEnterFired = (<MouseEvent>e).type == 'click' || (<KeyboardEvent>e).key == 'Enter';
 
+		console.log('clickOrEnterFired', clickOrEnterFired);
+		console.log('isPhoneNumber', isPhoneNumber);
+
 		if (clickOrEnterFired && phoneFieldValue == '') {
 			emptyPhoneInputAnimated = true;
 			setTimeout(() => (emptyPhoneInputAnimated = !emptyPhoneInputAnimated), 100);
@@ -50,8 +54,8 @@
 			phoneField.style.opacity = '0.5';
 			phoneField.style.pointerEvents = 'none';
 
-			sendPhoneCodeBtn.style.opacity = '0.5';
-			sendPhoneCodeBtn.style.pointerEvents = 'none';
+			// sendPhoneCodeBtn.style.opacity = '0.5';
+			// sendPhoneCodeBtn.style.pointerEvents = 'none';
 
 			phoneCodeSent = true;
 		}
@@ -83,16 +87,28 @@
 	// Update: using the modern 'globalThis' instead of 'window' means I don't need to use the sveltekit browser check
 </script>
 
-<!-- dec1,2022: changed 'button' to div ..since it flashes through the hidden modal on pageload -->
 {#if !phoneCodeSent}
+	<!-- bind:bindThis={sendPhoneCodeBtn} -->
 	<LoginButton
-		bindThis={sendPhoneCodeBtn}
-		onClick={() => submitPhoneNumber()}
+		on:click={(e) => submitPhoneNumber(e)}
 		innerText={'Get SMS Code'}
 		bgColorTW={'bg-rose-400'}
 	>
 		<IconPhone />
 	</LoginButton>
+
+	<!-- TODO: old way -->
+	<!-- <button
+		bind:this={sendPhoneCodeBtn}
+		on:click={(e) => submitPhoneNumber(e)}
+		class="group flex w-full items-center justify-center gap-5 rounded-md bg-rose-400 p-4 text-white duration-200 hover:scale-[1.01] hover:shadow-md group-hover:bg-opacity-90 dark:bg-opacity-80 dark:group-hover:bg-opacity-90"
+	>
+		<span class="duration-500 group-hover:scale-[1.15]">
+			<IconPhone />
+		</span>
+
+		<span>Get SMS Code</span>
+	</button> -->
 
 	<div class="grid w-full grid-cols-6 text-black">
 		{#if phoneInputVisible}
@@ -135,9 +151,9 @@
 		/>
 
 		<!-- <button
-    on:click={(e) => verifySMSCode(smsCode, e)}
-      class="col-span-1 text-center p-3 mt-3 bg-rose-300 text-white font-bold"
-      >Enter
-    </button> -->
+			on:click={(e) => verifySMSCode(e, smsCode)}
+			class="col-span-1 mt-3 bg-rose-300 p-3 text-center font-bold text-white"
+			>Enter
+		</button> -->
 	</div>
 {/if}

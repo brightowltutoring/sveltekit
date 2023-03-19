@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { regexEmailChecker, magicLinkToEmail } from './MagicLinkLogin';
 	import IconEmail from '$lib/Icons/LoginIcons/IconEmail.svelte';
-	import { isDarkMode } from '$lib/store';
+	// import { isDarkMode } from '$lib/store';
 	import LoginButton from './LoginButton.svelte';
 
 	let magicLinkSent = false;
 	let emptyEmailInputAnimated: boolean;
 	$: shortPing = !magicLinkSent && emptyEmailInputAnimated && 'animate-ping';
 
-	let magicLinkBtn: HTMLElement;
+	// let magicLinkBtn: HTMLButtonElement;
 	let emailField: HTMLElement;
 	let emailFieldValue: string = '';
 	let isEmail = false;
@@ -44,8 +44,8 @@
 			emailField.style.opacity = '0.5';
 			emailField.style.pointerEvents = 'none';
 
-			magicLinkBtn.style.opacity = '0.5';
-			magicLinkBtn.style.pointerEvents = 'none';
+			// magicLinkBtn.style.opacity = '0.5';
+			// magicLinkBtn.style.pointerEvents = 'none';
 		}
 	}
 
@@ -67,9 +67,9 @@
 	}
 </script>
 
+<!-- bindThis={magicLinkBtn} -->
 <LoginButton
-	bindThis={magicLinkBtn}
-	onClick={() => signinWithLinkAndStop()}
+	on:click={(e) => signinWithLinkAndStop(e)}
 	innerText={'Get Magic Link'}
 	bgColorTW={'bg-emerald-500'}
 >

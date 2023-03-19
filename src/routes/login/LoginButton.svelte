@@ -1,13 +1,12 @@
-<script>
-	export let bindThis;
-	export let onClick = () => {};
+<script lang="ts">
+	// export let bindThis: HTMLButtonElement | null;
 	export let bgColorTW = 'bg-rose-400';
 	export let innerText = '';
 </script>
 
+<!-- bind:this={bindThis} -->
 <button
-	bind:this={bindThis}
-	on:click={onClick}
+	on:click
 	class="group flex w-full items-center justify-center gap-5 rounded-md p-4 text-white {bgColorTW} duration-200 hover:scale-[1.01] hover:shadow-md group-hover:bg-opacity-90 dark:bg-opacity-80 dark:group-hover:bg-opacity-90"
 >
 	<span class="duration-500 group-hover:scale-[1.15]">
