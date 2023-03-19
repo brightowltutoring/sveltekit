@@ -1,19 +1,13 @@
 <script>
+	import LoginCard from './../login/LoginCard.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Dropzone from '../homework/Dropzone.svelte';
-	import LazyMount from '$lib/Wrappers/LazyMount.svelte';
-	// import LoginCard from './login/LoginCard.svelte';
+	// import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 
 	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { getOS } from '$lib/utils';
-	import {
-		showLoginModal,
-		showHomeworkModal,
-		navAppClicked,
-		isDarkMode,
-		contactLinkClicked
-	} from '$lib/store';
+	import { showLoginModal, showHomeworkModal, navAppClicked, contactLinkClicked } from '$lib/store';
 </script>
 
 <Modal showModal={$contactLinkClicked} bgTint={'backdrop-blur-3xl'}>
@@ -25,9 +19,6 @@
 			}}
 			class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl"
 		>
-			<!--  {$isDarkMode
-				? 'from-teal-200 via-rose-300 to-pink-200 '
-				: 'from-teal-700 via-rose-700 to-pink-700 '} -->
 			<li>Email:</li>
 			<li class="p-5">thinksolve.io@gmail.com</li>
 		</ul>
@@ -88,11 +79,10 @@
 	</Modal>
 {/if}
 
-<!-- <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md `}>
-			<LoginCard /> -->
+<!--OLD WAY: place '<LazyMount Import={() => import('../login/LoginCard.svelte')} /> ' inside modal below .. otherwise contents flash through on initial page load (i.e. before modal can hide it). UPDATE: in Modal.svelte, changing button to div fixes this ... not sure why still -->
+
 <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md`}>
-	<!-- lazy importing this because otherwise contents flash through on initial page load (i.e. before modal can hide it) -->
-	<LazyMount Import={() => import('../login/LoginCard.svelte')} />
+	<LoginCard />
 </Modal>
 
 <Modal bind:showModal={$showHomeworkModal} bgTint={'bg-[rgba(0,0,0,0.1)]'}>

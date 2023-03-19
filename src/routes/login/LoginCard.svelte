@@ -48,6 +48,12 @@
 		showLoginModalRedirect(loggedInEmail);
 	}
 
+	onMount(onMountFirebase);
+	// onMount(async () => {
+	// 	// runningStandalone = await isPWA();
+	// 	onMountFirebase();
+	// });
+
 	async function onMountFirebase() {
 		const { auth } = await import('./firebase');
 		const { onAuthStateChanged, isSignInWithEmailLink } = await import('firebase/auth');
@@ -152,11 +158,6 @@
 			}
 		}
 	}
-
-	onMount(async () => {
-		// runningStandalone = await isPWA();
-		onMountFirebase();
-	});
 </script>
 
 <!-- TODO: when doing w-screen this component on '/login' route is off-center -->
