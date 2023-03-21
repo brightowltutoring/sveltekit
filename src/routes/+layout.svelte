@@ -69,6 +69,7 @@
 	</div>
 
 	<!-- {#if $page.route?.id !== '/classroom' && $page.route?.id !== '/pwa-home'} -->
+
 	{#if !['/classroom', '/pwa-home'].includes($page.route?.id ?? '')}
 		<Footer bind:contactLinkClicked={$contactLinkClicked} />
 	{/if}

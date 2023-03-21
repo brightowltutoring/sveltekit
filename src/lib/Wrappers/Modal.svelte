@@ -23,15 +23,11 @@
 
 <!-- the svelte '|self' modifier makes only the wrapper of the slot clickable -->
 
-<!-- The logincard component flashes through this modal component when the element below is a button; using a div works fine (apart from 'keypress' a11y complains of svelte). Previously I was using a custom <LazyMount> component to dynamically import the LoginCard component in GlobalModals.svelte in order to avoid the flash. -->
-<!-- <div class="hidden"> -->
-
-<div
-	on:keypress={closeModal}
+<button
 	on:click|self={closeModal}
 	bind:this={container}
-	class=" fixed top-0 left-0 z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center 
-		{showModal && `${bgTint} !flex`}"
+	class="fixed top-0 left-0 z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center 
+				{showModal && `${bgTint} !flex`}"
 >
 	<slot />
-</div>
+</button>

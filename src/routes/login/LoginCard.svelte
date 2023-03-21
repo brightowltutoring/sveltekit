@@ -160,28 +160,23 @@
 	}
 </script>
 
-<!-- TODO: when doing w-screen this component on '/login' route is off-center -->
-<!-- <main class="flex w-full items-center  justify-center "> -->
 <main>
-	<!-- {#if !$isLoggedIn && $showLoginModal} -->
-	{#if !$isLoggedIn}
-		{#key !noTransition && $showLoginModal}
-			<login-card in:slide={{ duration: 400, easing: quintOut }}>
-				<!-- class={$isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg"} -->
-				<!-- style={`background:${$elementColor}`} -->
+	{#if !$isLoggedIn && $showLoginModal}
+		<!-- {#if !$isLoggedIn} -->
+		<!-- {#key !noTransition && $showLoginModal} -->
+		<login-card in:slide={{ duration: 400, easing: quintOut }}>
+			<GoogleLoginButton />
+			<p class="py-3" />
+			<div class="hidden pwa:block">
+				<PhoneAuthSection />
+			</div>
+			<div class="pwa:hidden">
+				<MagicLinkSection />
 
-				<GoogleLoginButton />
 				<p class="py-3" />
-				<div class="hidden pwa:block">
-					<PhoneAuthSection />
-				</div>
-				<div class="pwa:hidden">
-					<MagicLinkSection />
-
-					<p class="py-3" />
-					<PhoneAuthSection />
-				</div>
-				<!-- 
+				<PhoneAuthSection />
+			</div>
+			<!-- 
 				{#if $runningStandalone}
 					<PhoneAuthSection />
 				{:else}
@@ -191,30 +186,28 @@
 					<PhoneAuthSection />
 				{/if} -->
 
-				<!-- <TwitterLoginButton /> -->
-			</login-card>
-		{/key}
+			<!-- <TwitterLoginButton /> -->
+		</login-card>
+		<!-- {/key} -->
 	{/if}
 
-	<!-- {#if $isLoggedIn && $showLoginModal} -->
-	{#if $isLoggedIn}
-		{#key !noTransition && $showLoginModal}
-			<logout-card in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}>
-				<!-- class={$isDarkMode ? "hover:shadow-xl " : "hover:shadow-lg"} -->
-				<!-- style={`background:${$elementColor} `} -->
-				<p>{loginWelcomeText}</p>
+	{#if $isLoggedIn && $showLoginModal}
+		<!-- {#if $isLoggedIn} -->
+		<!-- {#key !noTransition && $showLoginModal} -->
+		<logout-card in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}>
+			<p>{loginWelcomeText}</p>
 
-				<div>
-					Redirecting in
-					<div class="p-5 text-5xl" id="timeLeft">3</div>
-				</div>
+			<div>
+				Redirecting in
+				<div class="p-5 text-5xl" id="timeLeft">3</div>
+			</div>
 
-				<button
-					class="rounded-lg bg-rose-300 p-4 text-2xl font-medium text-white duration-200 ease-in hover:scale-110 hover:rounded-xl"
-					on:click={logoutFunction}>Logout</button
-				>
-			</logout-card>
-		{/key}
+			<button
+				class="rounded-lg bg-rose-300 p-4 text-2xl font-medium text-white duration-200 ease-in hover:scale-110 hover:rounded-xl"
+				on:click={logoutFunction}>Logout</button
+			>
+		</logout-card>
+		<!-- {/key} -->
 	{/if}
 </main>
 
