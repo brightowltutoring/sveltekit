@@ -12,6 +12,7 @@
 <button
 	aria-label="Upload Button Area"
 	on:click={() => {
+		// alert("clicked")
 		$showHomeworkModal = true;
 		// setTimeout(() => {
 		document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
