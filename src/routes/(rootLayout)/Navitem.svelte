@@ -11,13 +11,12 @@
 	export let navIconClicked = false;
 	// bool, btnColor,
 
-	// import { isRunningStandalone } from '$lib/utils';
-	import { runningStandalone } from '$lib/store';
+	import { clearNavModals } from '$lib/utils';
 	import {
 		showLoginModal,
 		showHomeworkModal,
-		clearNavModals
 		// lessThan768,
+		runningStandalone
 	} from '$lib/store';
 	import { page } from '$app/stores';
 

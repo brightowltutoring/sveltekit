@@ -10,14 +10,13 @@
 		// fade, fly, slide, blur
 	} from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
-	import { isPWA, getOS } from '$lib/utils';
+	import { isPWA, getOS, clearNavModals } from '$lib/utils';
 	import {
 		isLoggedIn,
 		routes,
 		scrollY,
 		isDarkMode,
 		navAppClicked,
-		clearNavModals,
 		elementColor,
 		showLoginModal,
 		showHomeworkModal,
@@ -56,7 +55,7 @@
 	let resetLogoClick: boolean;
 	function clickLogo() {
 		clearNavModals();
-		goto('/');
+		// goto('/');
 
 		resetLogoClick = !resetLogoClick;
 

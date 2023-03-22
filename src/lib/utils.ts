@@ -1,6 +1,14 @@
 import { browser } from '$app/environment';
 import { onMount, onDestroy } from 'svelte';
 import { scale } from 'svelte/transition';
+import { showLoginModal, showHomeworkModal, navAppClicked } from '$lib/store';
+
+// TODO: dec11,2022: I just noticed that the logic of this function (when used inside Navitem.svelte & Navbar.svelte ) is possible with 'event delegation' technique ... i.e. attaching a click event listener on the entire documment, and filtering for event.target.node; might change this to that at a future date. ASIDE: The way I did it here is sveltier (less general) but in some sense more readable WITHIN this framework.
+export function clearNavModals() {
+	showLoginModal.set(false);
+	showHomeworkModal.set(false);
+	navAppClicked.set(false);
+}
 
 // Need to use JS to disable scrolling on firefox, since firefox does not support the :has() css pseudo-selector —— e.g. body:has(element){ overflow:hidden }, is the elegant css way of disabling scroll (for a given route containing a specific element) ——
 export function disableScrollingOnPage(pathname: string) {

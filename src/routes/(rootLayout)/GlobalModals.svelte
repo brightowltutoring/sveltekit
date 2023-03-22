@@ -8,15 +8,34 @@
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { getOS } from '$lib/utils';
 	import { showLoginModal, showHomeworkModal, navAppClicked, contactLinkClicked } from '$lib/store';
+
+	let contactLinkScaling = {
+		duration: 1500,
+		easing: elasticOut
+	};
+	let stepOneScale = {
+		duration: 1300,
+		easing: elasticOut
+	};
+
+	let stepTwoFlyIn = {
+		x: 100,
+		delay: 1200,
+		duration: 1000,
+		easing: quintOut
+	};
+	let stepThreeFlyIn = {
+		x: 200,
+		delay: 2000,
+		duration: 1200,
+		easing: quintOut
+	};
 </script>
 
 <Modal showModal={$contactLinkClicked} bgTint={'backdrop-blur-3xl'}>
 	{#key !$contactLinkClicked}
 		<ul
-			in:scale={{
-				duration: 1500,
-				easing: elasticOut
-			}}
+			in:scale={contactLinkScaling}
 			class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl"
 		>
 			<li>Email:</li>
@@ -34,23 +53,11 @@
 	>
 		{#key !$navAppClicked}
 			<ul in:scale class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
-				<li
-					in:scale={{
-						duration: 1300,
-						easing: elasticOut
-					}}
-				>
+				<li in:scale={stepOneScale}>
 					<div class="text-6xl">1.</div>
 					Open Safari
 				</li>
-				<li
-					in:fly={{
-						x: 100,
-						delay: 1200,
-						duration: 1000,
-						easing: quintOut
-					}}
-				>
+				<li in:fly={stepTwoFlyIn}>
 					<div class="text-6xl">2.</div>
 					<div class="flex flex-row items-center justify-center gap-x-2 pt-2">
 						<span> Click share icon</span>
@@ -62,15 +69,7 @@
 					</div>
 				</li>
 
-				<li
-					class=" text-black"
-					in:fly={{
-						x: 200,
-						delay: 2000,
-						duration: 1200,
-						easing: quintOut
-					}}
-				>
+				<li class=" text-black" in:fly={stepThreeFlyIn}>
 					<div class="text-6xl ">3.</div>
 					Click 'Add to Home Screen' 🚀
 				</li>
@@ -79,13 +78,11 @@
 	</Modal>
 {/if}
 
-<!--OLD WAY: place '<LazyMount Import={() => import('../login/LoginCard.svelte')} /> ' inside modal below .. otherwise contents flash through on initial page load (i.e. before modal can hide it). UPDATE: in Modal.svelte, changing button to div fixes this ... not sure why still -->
-
 <Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md`}>
 	<LoginCard />
 </Modal>
 
-<Modal bind:showModal={$showHomeworkModal} bgTint={'bg-[rgba(0,0,0,0.1)]'}>
+<Modal showModal={$showHomeworkModal} bgTint={'bg-[rgba(0,0,0,0.1)]'}>
 	<Dropzone
 		textSizeTW={'text-6xl'}
 		dimensionsTW={'w-[80vw] h-[85vh]'}
