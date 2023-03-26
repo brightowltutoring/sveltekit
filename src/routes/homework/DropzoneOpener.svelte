@@ -45,7 +45,7 @@
 		> -->
 
 		<input
-			class="border-1 rounded bg-red-800 p-3 text-white hover:bg-blue-400  focus:bg-indigo-700"
+			class="border-1 rounded bg-red-800 p-3 text-white hover:bg-blue-400 focus:bg-indigo-700"
 			type="submit"
 			value="Submit"
 		/>

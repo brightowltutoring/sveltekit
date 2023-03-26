@@ -47,7 +47,7 @@
 	}}
 >
 	<!-- class="font-Poppins text-center text-6xl text-transparent bg-clip-text bg-gradient-to-l from-teal-500 to-pink-600 " -->
-	<span in:fade class="text-center font-Poppins text-5xl font-bold "> FAQ </span>
+	<span in:fade class="text-center font-Poppins text-5xl font-bold"> FAQ </span>
 </div>
 <!-- TODO: some weird reason I have to add 'class="highlight"' ot at least one summary element before the css/js logic can work -->
 
@@ -81,10 +81,10 @@
 			For added convenience in future submissions, consider downloading the app on your mobile
 			device. Using Safari on iOS devices:
 		</p>
-		<span class="flex flex-col items-center justify-center gap-x-2 ">
-			<span class="flex flex-row  gap-x-1">
+		<span class="flex flex-col items-center justify-center gap-x-2">
+			<span class="flex flex-row gap-x-1">
 				Click share icon
-				<img class="h-5 w-5 " src="/safari-share-icon.png" alt="safari share icon" />
+				<img class="h-5 w-5" src="/safari-share-icon.png" alt="safari share icon" />
 			</span>
 
 			<span> Click "Add to Homescreen"</span>

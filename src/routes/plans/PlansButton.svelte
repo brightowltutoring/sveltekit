@@ -28,7 +28,7 @@
 <Modal body bind:showModal={showMe} bgTint={'bg-[rgba(0,0,0,0.1)]'}>
 	<iframe
 		title="Thinksolve Plans"
-		class="{changeOpacityTo100} fixed bottom-0 h-[90%] w-full rounded-xl border-dotted border-gray-500 opacity-0   backdrop-blur-3xl transition-opacity duration-200 ease-in md:w-[80%] md:-translate-y-5"
+		class="{changeOpacityTo100} fixed bottom-0 h-[90%] w-full rounded-xl border-dotted border-gray-500 opacity-0 backdrop-blur-3xl transition-opacity duration-200 ease-in md:w-[80%] md:-translate-y-5"
 		{src}
 	/>
 </Modal>

@@ -53,7 +53,7 @@
 	data-sveltekit-preload-data
 	on:click={handleNavButtonClicks}
 	{href}
-	class=" block px-2 py-1 font-Nunito font-thin duration-100  ease-in hover:rounded {!$runningStandalone &&
+	class=" block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {!$runningStandalone &&
 		btnColorHover} "
 >
 	<!-- {#if mounted && $runningStandalone} -->

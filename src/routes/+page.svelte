@@ -28,7 +28,7 @@
 
 		<div class=" grid grid-rows-1">
 			{#key ready}
-				<div in:slide={{ duration: 500 }} class=" pb-4 font-Poppins text-6xl ">
+				<div in:slide={{ duration: 500 }} class=" pb-4 font-Poppins text-6xl">
 					Math, Physics
 					<span class="gradientTextColor"> ... Online! </span>
 				</div>
@@ -55,7 +55,7 @@
 	<!-- third page -->
 	<section id="step2" class="grid place-content-center duration-500">
 		<button
-			class="pb-7 text-center font-Poppins text-5xl "
+			class="pb-7 text-center font-Poppins text-5xl"
 			on:click={() => {
 				document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			}}
@@ -88,10 +88,10 @@
 	</section>
 
 	<!-- fourth page -->
-	<section id="reviews" class="mb-[200px] duration-500 sm:mb-[500px] ">
+	<section id="reviews" class="mb-[200px] duration-500 sm:mb-[500px]">
 		<button
 			on:click={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-			class="flex w-full justify-center  font-Poppins text-5xl"
+			class="flex w-full justify-center font-Poppins text-5xl"
 		>
 			<span class="gradientTextColor">3. Do Some Reading <span class="text-black">😎 </span></span>
 		</button>

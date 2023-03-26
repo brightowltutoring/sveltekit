@@ -20,7 +20,7 @@
 	import { slide } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
 	// isRunningStandalone
-	import { cookeh } from '$lib/utils';
+	import { cookeh, clickOutside2 } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
 	import { isLoggedIn, showLoginModal } from '$lib/store';
 
@@ -161,7 +161,8 @@
 </script>
 
 <main>
-	{#if !$isLoggedIn && $showLoginModal}
+	<!-- TODO: this breaks the expected '/login' behaviour .. i.e. no content unless button clicked  -->
+	{#if !$isLoggedIn}
 		<!-- {#if !$isLoggedIn} -->
 		<!-- {#key !noTransition && $showLoginModal} -->
 		<login-card in:slide={{ duration: 400, easing: quintOut }}>

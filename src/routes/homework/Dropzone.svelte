@@ -9,10 +9,7 @@
 	import PostDummyOnce from './PostDummyOnce.svelte';
 
 	import InView from '$lib/Wrappers/InView.svelte';
-	import {
-		// isDarkMode,
-		showHomeworkModal
-	} from '$lib/store';
+	import { showHomeworkModal } from '$lib/store';
 
 	import IconUploadGradient from '$lib/Icons/IconUploadGradient.svelte';
 
@@ -20,7 +17,7 @@
 	// TODO: Note: using {once:true} inside an event listener attached to 'querySelector('a[href="/homework"]')' would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
 	$: $showHomeworkModal && dropzonePopUpOnce();
 
-	export let text = '🔥';
+	// export let text = '🔥';
 	export let textSizeTW = 'text-3xl';
 	export let dimensionsTW = 'w-[65vw] sm:w-[60vw] h-[60vh]';
 	export let brightnessTW = 'brightness-100';

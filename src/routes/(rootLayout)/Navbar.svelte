@@ -4,13 +4,12 @@
 	import LightDarkMode from './LightDarkMode.svelte';
 	import Navitem from './Navitem.svelte';
 
-	import { goto } from '$app/navigation';
 	import {
 		scale
 		// fade, fly, slide, blur
 	} from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
-	import { isPWA, getOS, clearNavModals } from '$lib/utils';
+	import { isPWA, getOS, clearNavModals, clickOutside, clickOutside2 } from '$lib/utils';
 	import {
 		isLoggedIn,
 		routes,
@@ -90,14 +89,14 @@
 
 <!-- gap-x-24 -->
 <nav
-	class="fixed bottom-0 z-50 w-full ease-in md:top-0 md:h-16 md:px-[7%] md:pt-4  md:pb-16 pwa:bottom-0 pwa:translate-y-0 {showHideNav}"
+	class="fixed bottom-0 z-50 w-full ease-in md:top-0 md:h-16 md:px-[7%] md:pt-4 md:pb-16 pwa:bottom-0 pwa:translate-y-0 {showHideNav}"
 >
 	<logo-and-navbar class="flex w-full items-center justify-center gap-x-32 md:justify-between">
 		{#key resetLogoClick}
 			<a
 				href="/"
 				on:click={clickLogo}
-				class="hidden p-2 font-Poppins text-xl transition-transform selection:bg-transparent hover:scale-110 
+				class="hidden p-2 font-Poppins text-xl transition-transform selection:bg-transparent hover:scale-110
     active:text-red-600 md:block md:translate-y-[0.1rem] md:translate-x-3 md:text-[min(5.5vw,40px)]"
 				in:scale={{ duration: 1200, easing: elasticOut }}
 			>
@@ -108,7 +107,7 @@
 		<!-- TODO: for some reason 'grid grid-flow-col place-items-center w-screen' works but 'flex flex-row items-center justify-center w-screen' does not. Noticed that adding 'justify-center' with flex here clips the navbar, disallowing the expected overflow-x-scroll behaviour -->
 		<!-- bgGradientColor  -->
 		<ul
-			class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1 "
+			class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1"
 		>
 			<!-- py-3 px-5 -->
 			<!-- <ul
@@ -126,8 +125,13 @@
 					$isLoggedIn &&
 					`transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
 
-				<!-- typescript complains if i dont wrap the js variable in a template string -->
 				<li style={`${loggedInDynamicRocket}`}>
+					<!-- use:clickOutside2={{
+						onClickOutside2: () => alert(`${href}`),
+						// useThisAction: href === '/plans' || href === '/homework'
+						// useThisAction: ['/plans', '/homework'].includes(href)
+					}} -->
+
 					<Navitem
 						{navIconClicked}
 						{href}
@@ -139,17 +143,21 @@
 				</li>
 			{/each}
 
-			<li class="pwa:hidden {hideIfNotIOS} ">
+			<li class="pwa:hidden {hideIfNotIOS}">
 				<button
-					class="py-1 px-3 font-Nunito text-2xl font-thin  duration-300 hover:rounded hover:shadow-lg md:text-xl  {$elementColor} border-b-1 rounded  duration-200 hover:bg-indigo-400
-      hover:text-white active:animate-pulse "
+					class="py-1 px-3 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl {$elementColor} border-b-1 rounded duration-200 hover:bg-indigo-400
+      hover:text-white active:animate-pulse"
 					on:click={handleAppNavClick}
 				>
 					App
 				</button>
 			</li>
 
-			<li class=" translate-y-1 scale-125 py-2 md:scale-100 ">
+			<li class="translate-y-1 scale-125 py-2 md:scale-100">
+				<!-- use:clickOutside2={{ onClickOutside2: () => alert('go duck duck') }} -->
+				<!-- use:clickOutside
+				on:click_outside={() => alert('go duck duck')} -->
+
 				<LightDarkMode />
 			</li>
 		</ul>

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import LoginCard from './../login/LoginCard.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Dropzone from '../homework/Dropzone.svelte';
@@ -33,56 +33,53 @@
 </script>
 
 <Modal showModal={$contactLinkClicked} bgTint={'backdrop-blur-3xl'}>
-	{#key !$contactLinkClicked}
-		<ul
-			in:scale={contactLinkScaling}
-			class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl"
-		>
-			<li>Email:</li>
-			<li class="p-5">thinksolve.io@gmail.com</li>
-		</ul>
-	{/key}
+	<ul
+		in:scale={contactLinkScaling}
+		class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl"
+	>
+		<li>Email:</li>
+		<li class="p-5">thinksolve.io@gmail.com</li>
+	</ul>
 </Modal>
 
 <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
 {#if getOS() == 'iOS'}
 	<Modal
 		all
-		showModal={$navAppClicked}
+		bind:showModal={$navAppClicked}
 		bgTint={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 	>
-		{#key !$navAppClicked}
-			<ul in:scale class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
-				<li in:scale={stepOneScale}>
-					<div class="text-6xl">1.</div>
-					Open Safari
-				</li>
-				<li in:fly={stepTwoFlyIn}>
-					<div class="text-6xl">2.</div>
-					<div class="flex flex-row items-center justify-center gap-x-2 pt-2">
-						<span> Click share icon</span>
-						<img
-							class="h-7 w-7 -translate-y-1  invert"
-							src="/safari-share-icon.png"
-							alt="safari share icon"
-						/>
-					</div>
-				</li>
+		<ul in:scale class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
+			<li in:scale={stepOneScale}>
+				<div class="text-6xl">1.</div>
+				Open Safari
+			</li>
+			<li in:fly={stepTwoFlyIn}>
+				<div class="text-6xl">2.</div>
+				<div class="flex flex-row items-center justify-center gap-x-2 pt-2">
+					<span> Click share icon</span>
+					<img
+						class="h-7 w-7 -translate-y-1 invert"
+						src="/safari-share-icon.png"
+						alt="safari share icon"
+					/>
+				</div>
+			</li>
 
-				<li class=" text-black" in:fly={stepThreeFlyIn}>
-					<div class="text-6xl ">3.</div>
-					Click 'Add to Home Screen' 🚀
-				</li>
-			</ul>
-		{/key}
+			<li class="text-black" in:fly={stepThreeFlyIn}>
+				<div class="text-6xl">3.</div>
+				Click 'Add to Home Screen' 🚀
+			</li>
+		</ul>
 	</Modal>
 {/if}
 
-<Modal body bind:showModal={$showLoginModal} bgTint={`backdrop-blur-md`}>
+<!-- <Modal body all={true} bind:showModal={$showLoginModal} bgTint={'backdrop-blur-md'}> -->
+<Modal bind:showModal={$showLoginModal} bgTint={'backdrop-blur-md'}>
 	<LoginCard />
 </Modal>
 
-<Modal showModal={$showHomeworkModal} bgTint={'bg-[rgba(0,0,0,0.1)]'}>
+<Modal body bind:showModal={$showHomeworkModal} bgTint={'bg-[rgba(0,0,0,0.1)]'}>
 	<Dropzone
 		textSizeTW={'text-6xl'}
 		dimensionsTW={'w-[80vw] h-[85vh]'}

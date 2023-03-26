@@ -23,7 +23,7 @@
 		"eslint-plugin-svelte3": "^4.0.0",
 		"postcss": "^8.4.21",
 		"postcss-load-config": "^4.0.1",
-		"prettier": "^2.8.6",
+		"prettier": "^2.8.7",
 		"prettier-plugin-svelte": "^2.10.0",
 		"prettier-plugin-tailwindcss": "^0.2.5",
 		"remark-math": "^3.0.1",
@@ -37,7 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@stripe/stripe-js": "^1.50.0",
+		"@stripe/stripe-js": "^1.52.0",
 		"dropzone": "6.0.0-beta.2",
 		"firebase": "^9.18.0",
 		"katex": "^0.16.4",

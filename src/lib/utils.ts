@@ -3,6 +3,54 @@ import { onMount, onDestroy } from 'svelte';
 import { scale } from 'svelte/transition';
 import { showLoginModal, showHomeworkModal, navAppClicked } from '$lib/store';
 
+// svelte use action
+export function clickOutside(node: HTMLElement, useThisAction = true) {
+	if (!node || !useThisAction) return;
+
+	document.addEventListener('click', dispatchClickOutsideEvent, true);
+
+	return {
+		destroy() {
+			document.removeEventListener('click', dispatchClickOutsideEvent, true);
+		}
+	};
+
+	function dispatchClickOutsideEvent(event) {
+		let target = <HTMLElement>event.target;
+
+		if (!node.contains(target)) {
+			node.dispatchEvent(new CustomEvent('click_outside'));
+		}
+	}
+}
+
+interface clickOutside2Params {
+	onClickOutside2: () => void;
+	useThisAction?: boolean;
+}
+
+// svelte use action ... but without dispatching/handling custom event. Code on the node element is similar: i.e. 'use:clickOutside on:click_outside={() => alert('sofie sofie')}' vs 'use:clickOutside2={{onClickOutside2: () => alert('go duck duck')}}', with the latter being unified in a single element attribute
+export function clickOutside2(node: HTMLElement, params: clickOutside2Params) {
+	const { onClickOutside2, useThisAction = true } = params;
+
+	if (!node || !useThisAction) return;
+	//  .. if looping over many elements, it would be nice to switch the action off by passing some index level boolean
+
+	document.addEventListener('click', dispatchOnClickOutside2, true);
+
+	return {
+		destroy() {
+			document.removeEventListener('click', dispatchOnClickOutside2, true);
+		}
+	};
+
+	function dispatchOnClickOutside2(event) {
+		let target = <HTMLElement>event.target;
+
+		if (!node.contains(target)) onClickOutside2();
+	}
+}
+
 // TODO: dec11,2022: I just noticed that the logic of this function (when used inside Navitem.svelte & Navbar.svelte ) is possible with 'event delegation' technique ... i.e. attaching a click event listener on the entire documment, and filtering for event.target.node; might change this to that at a future date. ASIDE: The way I did it here is sveltier (less general) but in some sense more readable WITHIN this framework.
 export function clearNavModals() {
 	showLoginModal.set(false);
