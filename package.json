@@ -17,6 +17,7 @@
 		"@sveltejs/kit": "1.0.1",
 		"@tailwindcss/typography": "^0.5.9",
 		"@types/dropzone": "^5.7.4",
+		"@types/ua-parser-js": "^0.7.36",
 		"autoprefixer": "^10.4.14",
 		"eslint": "^8.36.0",
 		"eslint-config-prettier": "^8.8.0",
@@ -45,7 +46,8 @@
 		"mdsvex": "^0.10.6",
 		"rehype-katex-svelte": "^1.1.2",
 		"svelte-katex": "^0.1.2",
-		"tailwind-scrollbar-hide": "^1.1.7"
+		"tailwind-scrollbar-hide": "^1.1.7",
+		"ua-parser-js": "^1.0.34"
 	},
 	"description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
 	"main": "mdsvex.config.js",

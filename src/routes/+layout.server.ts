@@ -1,18 +1,20 @@
-// this component is the first time i am toying with sveltekit's cookie API; currently have my own simple implementation via a 'cookeh' object function factory in utils.ts
+import UAParser from 'ua-parser-js';
 
-// import type { LayoutServerLoad } from './$types';
+export async function load({ request }) {
+	const isPWA = request.headers.has('X-PWA-Request');
+	// TODO: add a custom PWA request header 'X-PWA-Request' to sw.js so that this works when coming from a PWA
 
-export const load = async ({ cookies }) => {
-	// cookies.set('testCookie', 'true');
+	const userAgent = String(request.headers.get('user-agent'));
+	const parser = new UAParser(userAgent);
+	const isMobile = parser.getDevice().type === 'mobile';
 
-	const haventLoggedOut = cookies.get('haventLoggedOut');
-	// console.log('haventLoggedOut', haventLoggedOut);
+	// console.log('isMobile server-side', isMobile);
+	console.log('isPWA server-side', isPWA);
 
-	// const testCookie = cookies.get('testCookie');
+	// console.log('request.headers', request.headers);
 
 	return {
-		haventLoggedOut
-		// testCookie
+		isMobile,
+		isPWAFromLoad: isPWA
 	};
-};
-// satisfies LayoutServerLoad;
+}

@@ -1,7 +1,9 @@
 <!-- TODO: fix types for: FooterComponent, Import function prop,  -->
 <script lang="ts">
-	// export let data;
-	// const { haventLoggedOut, testCookie } = data;
+	export let data;
+	const { isMobile, isPWAFromLoad } = data;
+	console.log('isMobile client-side', isMobile);
+	console.log('isPWA client-side', isPWAFromLoad);
 
 	import './(rootLayout)/styles.css';
 	import GlobalModals from './(rootLayout)/GlobalModals.svelte';
@@ -65,6 +67,9 @@
 	<Navbar />
 
 	<div class="px-[5%] pt-32 md:block">
+		{#if isPWAFromLoad}
+			hey this is pwa
+		{/if}
 		<slot />
 	</div>
 
