@@ -100,10 +100,6 @@
 		>
 			Almost there {firstName}
 		</div>
-		<!-- {:else}
-		<div class=" pt-20 text-center font-Poppins text-5xl">
-			Oops ... there was a mistake. Please try again.
-		</div> -->
 	{/if}
 </main>
 
