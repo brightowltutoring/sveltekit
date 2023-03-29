@@ -89,7 +89,7 @@
 
 <!-- gap-x-24 -->
 <nav
-	class="fixed bottom-0 z-50 w-full ease-in md:top-0 md:h-16 md:px-[7%] md:pt-4 md:pb-16 pwa:bottom-0 pwa:translate-y-0 {showHideNav}"
+	class="fixed bottom-0 z-50 w-full ease-in md:top-0 md:h-16 md:px-[7%] md:pb-16 md:pt-4 pwa:bottom-0 pwa:translate-y-0 {showHideNav}"
 >
 	<logo-and-navbar class="flex w-full items-center justify-center gap-x-32 md:justify-between">
 		{#key resetLogoClick}
@@ -97,7 +97,7 @@
 				href="/"
 				on:click={clickLogo}
 				class="hidden p-2 font-Poppins text-xl transition-transform selection:bg-transparent hover:scale-110
-    active:text-red-600 md:block md:translate-y-[0.1rem] md:translate-x-3 md:text-[min(5.5vw,40px)]"
+    active:text-red-600 md:block md:translate-x-3 md:translate-y-[0.1rem] md:text-[min(5.5vw,40px)]"
 				in:scale={{ duration: 1200, easing: elasticOut }}
 			>
 				THINKSOLVE
@@ -111,7 +111,7 @@
 		>
 			<li class="pwa:hidden {hideIfNotIOS}">
 				<button
-					class="py-1 px-3 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl {$elementColor} border-b-1 rounded duration-200 hover:bg-indigo-400
+					class="px-3 py-1 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl {$elementColor} border-b-1 rounded duration-200 hover:bg-indigo-400
   hover:text-white active:animate-pulse"
 					on:click={handleAppNavClick}
 				>

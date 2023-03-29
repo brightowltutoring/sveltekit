@@ -1,7 +1,7 @@
 <script lang="ts">
 	import IconSun from '$lib/Icons/IconSun.svelte';
 	import IconMoon from '$lib/Icons/IconMoon.svelte';
-	import { scale, slide } from 'svelte/transition';
+	import { slide, scale } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { isDarkMode } from '$lib/store';
 	import { browser } from '$app/environment';
@@ -29,6 +29,9 @@
 	let mounted = false;
 
 	onMount(() => (mounted = true));
+
+	// Will be consumed in IconmMoon.svelte and IconSun.svelte as in:scale transitions. Doing this as a prop to avoid nested wrapping of 'transition' divs
+	let transition = { duration: 1000, easing: elasticOut };
 </script>
 
 <svelte:head>
@@ -74,14 +77,14 @@
 
 <main class="fadeInFromNone px-2">
 	{#key $isDarkMode}
-		<div in:slide={{ duration: 600, easing: quintOut }}>
-			<button on:click={toggleDarkMode} in:scale={{ duration: 1000, easing: elasticOut }}>
+		<button on:click={toggleDarkMode} in:slide={{ duration: 600, easing: quintOut }}>
+			<div in:scale={{ duration: 1000, easing: elasticOut }}>
 				{#if $isDarkMode}
 					<IconSun />
 				{:else}
 					<IconMoon />
 				{/if}
-			</button>
-		</div>
+			</div>
+		</button>
 	{/key}
 </main>

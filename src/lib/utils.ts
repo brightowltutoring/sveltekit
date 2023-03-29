@@ -11,8 +11,8 @@ export function userAgentFromRequestHeaders(event: RequestEvent) {
 	const { request } = event;
 	const userAgent = String(request.headers.get('user-agent'));
 	const parser = new UAParser(userAgent);
-	const isMobile = parser.getDevice().type === 'mobile';
-	const isIphone = parser.getDevice().model?.toLowerCase() === 'iphone';
+	// const isMobile = parser.getDevice().type === 'mobile';
+	// const isIphone = parser.getDevice().model?.toLowerCase() === 'iphone';
 	const isIOS = parser.getOS().name?.toLowerCase() === 'ios';
 
 	// console.log('request', request.headers);
@@ -21,8 +21,8 @@ export function userAgentFromRequestHeaders(event: RequestEvent) {
 	// console.log('parser.getDevice()', parser.getOS());
 
 	return {
-		isMobile,
-		isIphone,
+		// isMobile,
+		// isIphone,
 		isIOS
 	};
 }

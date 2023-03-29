@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 
+	export let transitionsOff: boolean | null = false;
+
 	export let all: boolean | undefined = false; // usually false, but when true modal closes when clicked anywhere
 	export let showModal = false;
-	export let bgTint: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
+	export let bgTW: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
 	export let body: boolean | undefined = false;
 	// default behaviour is to allow navbar through; when user declares 'body' prop then the modal is attached to the document's body ... such as with the calendly modals
 
@@ -29,10 +31,10 @@
 	on:keypress|self={closeModal}
 	on:click|self={closeModal}
 	bind:this={container}
-	class="fixed top-0 left-0 z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center
-				{showModal && `${bgTint} !flex`}"
+	class="fixed left-0 top-0 z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center
+				{showModal && `${bgTW} !flex`}"
 >
-	{#if body}
+	{#if transitionsOff || body}
 		<slot />
 	{:else}
 		{#key showModal}

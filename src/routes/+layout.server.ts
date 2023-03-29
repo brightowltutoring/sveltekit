@@ -1,11 +1,11 @@
 import { userAgentFromRequestHeaders } from '$lib/utils';
 
 export async function load(event) {
-	const { isMobile, isIphone, isIOS } = userAgentFromRequestHeaders(event);
+	const { isIOS } = userAgentFromRequestHeaders(event);
 
 	return {
-		isMobile,
-		isIphone,
+		// isMobile,
+		// isIphone,
 		isIOS
 	};
 }

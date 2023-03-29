@@ -1,14 +1,12 @@
 <!-- TODO: fix types for: FooterComponent, Import function prop,  -->
 <script lang="ts">
-	import { setContext } from 'svelte';
-
 	export let data;
-	const { isMobile, isIphone, isIOS } = data;
+	const { isIOS /*isMobile, isIphone */ } = data;
 
+	import { setContext } from 'svelte';
 	setContext('isIOS', isIOS);
 
-	// console.log('isMobile client-side', isMobile);
-	// console.log('isIphone client-side', isIphone);
+	// console.log('isMobile client-side', isMobile, 'isIphone client-side', isIphone);
 
 	import './(rootLayout)/styles.css';
 	import GlobalModals from './(rootLayout)/GlobalModals.svelte';

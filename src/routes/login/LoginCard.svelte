@@ -1,6 +1,4 @@
 <script lang="ts">
-	// import { runningStandalone } from '$lib/store';
-
 	// import TwitterLoginButton from './TwitterLoginButton.svelte';
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
 	import MagicLinkSection from './MagicLinkSection.svelte';
@@ -177,15 +175,6 @@
 				<p class="py-3" />
 				<PhoneAuthSection />
 			</div>
-			<!-- 
-				{#if $runningStandalone}
-					<PhoneAuthSection />
-				{:else}
-					<MagicLinkSection />
-
-					<p class="py-3" />
-					<PhoneAuthSection />
-				{/if} -->
 
 			<!-- <TwitterLoginButton /> -->
 		</login-card>
@@ -215,7 +204,7 @@
 <style>
 	login-card,
 	logout-card {
-		@apply relative mx-auto block w-[90vw] rounded-2xl bg-[#f2f7fa] py-10 px-5 font-Poppins text-xl shadow-md duration-300 hover:scale-[1.01] hover:rounded-3xl sm:w-[500px] sm:p-10;
+		@apply relative mx-auto block w-[90vw] rounded-2xl bg-[#f2f7fa] px-5 py-10 font-Poppins text-xl shadow-md duration-300 hover:scale-[1.01] hover:rounded-3xl sm:w-[500px] sm:p-10;
 	}
 
 	/* for some reason the custom 'dark:' tailwind utility class is not working */

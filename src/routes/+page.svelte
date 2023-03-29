@@ -26,7 +26,7 @@
 	>
 		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
 
-		<div class=" grid grid-rows-1">
+		<div class="grid grid-rows-1">
 			{#key ready}
 				<div in:slide={{ duration: 500 }} class=" pb-4 font-Poppins text-6xl">
 					Math, Physics
@@ -97,12 +97,10 @@
 		</button>
 
 		<!-- <LazyMount Import={() => import('./reviews/Reviews.svelte')} /> -->
-		<div class="hidden sm:block">
-			<Reviews />
-		</div>
-		<div class="block sm:hidden">
-			<HorizontalScrollReviews />
-		</div>
+
+		<Reviews class="hidden sm:block" />
+
+		<HorizontalScrollReviews class="block sm:hidden" />
 	</section>
 </div>
 

@@ -4,13 +4,12 @@
 	import Dropzone from '../homework/Dropzone.svelte';
 	// import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 
-	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
+	import { scale, fly /* slide, fade, blur*/ } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { showLoginModal, showHomeworkModal, navAppClicked, contactLinkClicked } from '$lib/store';
 
-	// import { getOS } from '$lib/utils';
 	import { getContext } from 'svelte';
-	const isIOS = getContext('isIOS');
+	const isIOS: boolean = getContext('isIOS');
 
 	let contactLinkScaling = {
 		duration: 1500,
@@ -35,7 +34,7 @@
 	};
 </script>
 
-<Modal showModal={$contactLinkClicked} bgTint={'backdrop-blur-3xl'}>
+<Modal showModal={$contactLinkClicked} bgTW={'backdrop-blur-3xl'}>
 	<ul
 		in:scale={contactLinkScaling}
 		class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl"
@@ -45,49 +44,45 @@
 	</ul>
 </Modal>
 
-<!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
-<!-- {#if getOS() == 'iOS'} -->
-{#if isIOS}
-	<Modal
-		all
-		bind:showModal={$navAppClicked}
-		bgTint={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
-	>
-		<ul in:scale class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
-			<li in:scale={stepOneScale}>
-				<div class="text-6xl">1.</div>
-				Open Safari
-			</li>
-			<li in:fly={stepTwoFlyIn}>
-				<div class="text-6xl">2.</div>
-				<div class="flex flex-row items-center justify-center gap-x-2 pt-2">
-					<span> Click share icon</span>
-					<img
-						class="h-7 w-7 -translate-y-1 invert"
-						src="/safari-share-icon.png"
-						alt="safari share icon"
-					/>
-				</div>
-			</li>
+<Modal
+	all
+	showModal={isIOS && $navAppClicked}
+	bgTW={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
+>
+	<ul class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
+		<li in:scale={stepOneScale}>
+			<div class="text-6xl">1.</div>
+			Open Safari
+		</li>
+		<li in:fly={stepTwoFlyIn}>
+			<div class="text-6xl">2.</div>
+			<div class="flex flex-row items-center justify-center gap-x-2 pt-2">
+				<span> Click share icon</span>
+				<img
+					class="h-7 w-7 -translate-y-1 invert"
+					src="/safari-share-icon.png"
+					alt="safari share icon"
+				/>
+			</div>
+		</li>
 
-			<li class="text-black" in:fly={stepThreeFlyIn}>
-				<div class="text-6xl">3.</div>
-				Click 'Add to Home Screen' 🚀
-			</li>
-		</ul>
-	</Modal>
-{/if}
+		<li class="text-black" in:fly={stepThreeFlyIn}>
+			<div class="text-6xl">3.</div>
+			Click 'Add to Home Screen' 🚀
+		</li>
+	</ul>
+</Modal>
 
-<!-- <Modal body all={true} bind:showModal={$showLoginModal} bgTint={'backdrop-blur-md'}> -->
-<Modal bind:showModal={$showLoginModal} bgTint={'backdrop-blur-md'}>
+<!-- <Modal body all={true} bind:showModal={$showLoginModal} bgTW={'backdrop-blur-md'}> -->
+<Modal bind:showModal={$showLoginModal} bgTW={'backdrop-blur-md'}>
 	<LoginCard />
 </Modal>
 
-<Modal body bind:showModal={$showHomeworkModal} bgTint={'bg-[rgba(0,0,0,0.1)]'}>
+<!-- transitionsOff prop declared kills any svelte transitions defined within any slotted components; in modal.svelte a key block conditionally resets the component if transitionsOff is falsy (default behaviour) ...  which is not desired for this dropzone component (want to persist state of uploaded files)  -->
+<Modal transitionsOff bind:showModal={$showHomeworkModal} bgTW={'bg-[rgba(0,0,0,0.1)]'}>
 	<Dropzone
 		textSizeTW={'text-6xl'}
 		dimensionsTW={'w-[80vw] h-[85vh]'}
 		brightnessTW={'brightness-95'}
 	/>
-	<!-- NOTE: having the Dropzone lazyMounted prevents the 'popupOnce' logic defined inside Dropzone.svelte; even WITH timeout delay it would not work. Luckily this one modal dropzone has no impact on the perfect lightscore ! -->
 </Modal>

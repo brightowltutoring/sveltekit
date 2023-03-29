@@ -1,5 +1,5 @@
 <script>
-  import Reviews from "./Reviews.svelte";
+	import Reviews from './Reviews.svelte';
 </script>
 
 <Reviews />

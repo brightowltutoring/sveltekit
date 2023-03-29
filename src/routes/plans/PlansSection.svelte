@@ -3,7 +3,6 @@
 	import { plansCardArray } from './plansCardArray';
 
 	import { elasticOut } from 'svelte/easing';
-	import { scale } from 'svelte/transition';
 
 	import { onMount } from 'svelte';
 	let mounted = false;
@@ -14,15 +13,12 @@
 	class="mx-2 grid grid-cols-1 gap-5 overflow-x-clip sm:grid-cols-dynamic sm:overflow-visible lg:px-16"
 >
 	{#each plansCardArray as { buttonColor, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
-		<div
-			in:scale={{
-				delay: 100 * i,
-				duration: 1000,
-				easing: elasticOut
-			}}
-		>
-			<PlansCard {buttonColor} {payNowUrl} {payLaterUrl} {cardText} {cardTitle} />
-		</div>
+		{@const inScale = {
+			delay: 100 * i,
+			duration: 1000,
+			easing: elasticOut
+		}}
+		<PlansCard {inScale} {buttonColor} {payNowUrl} {payLaterUrl} {cardText} {cardTitle} />
 	{/each}
 </plans-section>
 

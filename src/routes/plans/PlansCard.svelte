@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { scale } from 'svelte/transition';
 	import PlansButton from './PlansButton.svelte';
+
+	export let inScale = {};
 
 	export let cardText = '';
 	export let cardTitle = '';
@@ -26,6 +29,7 @@
 </script>
 
 <plans-card
+	in:scale={inScale}
 	class="group block rounded-xl bg-[#f2f7fa] p-5 text-center shadow-md duration-300 hover:scale-105 hover:shadow-lg dark:bg-[#262333] dark:hover:shadow-xl"
 >
 	<p class="py-5 text-center font-Poppins text-4xl">
@@ -34,9 +38,10 @@
 	</p>
 
 	{#each payButtons as button}
-		<div class="inline-block group-hover:scale-95 group-hover:animate-pulse ">
-			<PlansButton {button} {buttonColor} />
-		</div>
+		<PlansButton
+			{button}
+			class="{buttonColor} inline-block group-hover:scale-95 group-hover:animate-pulse"
+		/>
 	{/each}
 
 	<div class="py-4">
