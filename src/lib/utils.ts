@@ -3,6 +3,30 @@ import { onMount, onDestroy } from 'svelte';
 import { scale } from 'svelte/transition';
 import { showLoginModal, showHomeworkModal, navAppClicked } from '$lib/store';
 
+import UAParser from 'ua-parser-js';
+import type { RequestEvent } from '@sveltejs/kit';
+
+// replaces getOS() function since this now works on server-side alongside (layout) load function
+export function userAgentFromRequestHeaders(event: RequestEvent) {
+	const { request } = event;
+	const userAgent = String(request.headers.get('user-agent'));
+	const parser = new UAParser(userAgent);
+	const isMobile = parser.getDevice().type === 'mobile';
+	const isIphone = parser.getDevice().model?.toLowerCase() === 'iphone';
+	const isIOS = parser.getOS().name?.toLowerCase() === 'ios';
+
+	// console.log('request', request.headers);
+	// console.log('isMobile server-side', isMobile);
+	// console.log('isIphone', isIphone);
+	// console.log('parser.getDevice()', parser.getOS());
+
+	return {
+		isMobile,
+		isIphone,
+		isIOS
+	};
+}
+
 // svelte use action
 export function clickOutside(node: HTMLElement, useThisAction = true) {
 	if (!node || !useThisAction) return;
@@ -102,6 +126,7 @@ export function debounce(func, timeout = 300) {
 	// };
 }
 
+// UPDATE (mar28,2023): replaced with 'userAgentFromRequestHeaders()' since the state that it returns is done on the server-side, hence able to conditionally show UI without flash of content (getOS relies on client-side js 'navigator.userAgent')
 // modified on nov29,2022 from: https://stackoverflow.com/questions/38241480/detect-macos-ios-windows-android-and-linux-os-with-js
 // TODO: might need to add 'browser &&' if this function is not called inside an onMount
 // TODO: on xcode simulator the ipad 10th and ipad air 5th returns as 'macos' not 'ios'

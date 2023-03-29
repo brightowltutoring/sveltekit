@@ -1,15 +1,15 @@
 <script lang="ts">
-	// import type { ComponentType } from 'svelte';
-
 	import LightDarkMode from './LightDarkMode.svelte';
 	import Navitem from './Navitem.svelte';
 
-	import {
-		scale
-		// fade, fly, slide, blur
-	} from 'svelte/transition';
+	import { scale /* fade, fly, slide, blur*/ } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
-	import { isPWA, getOS, clearNavModals, clickOutside, clickOutside2 } from '$lib/utils';
+	import {
+		debounce,
+		isPWA,
+		clearNavModals
+		/* getOS, clickOutside, clickOutside2  */
+	} from '$lib/utils';
 	import {
 		isLoggedIn,
 		routes,
@@ -20,9 +20,13 @@
 		showLoginModal,
 		showHomeworkModal,
 		instDeltaY
-		// runningStandalone
 	} from '$lib/store';
 	import { spring } from 'svelte/motion';
+	import { getContext } from 'svelte';
+
+	const isIOS = getContext('isIOS');
+	const hideIfNotIOS = !isIOS && 'hidden'; // PWA download popup shows on android already
+	// $: hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
 
 	let showHideNav = '';
 
@@ -71,10 +75,6 @@
 		$navAppClicked = true;
 	}
 
-	$: hideIfNotIOS = getOS() !== 'iOS' && 'hidden'; // PWA download popup shows on android already
-	// $: hideIfRunningStandalone = $runningStandalone && 'hidden';
-
-	import { debounce } from '$lib/utils';
 	const debounceTime = 25;
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
@@ -109,10 +109,15 @@
 		<ul
 			class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1"
 		>
-			<!-- py-3 px-5 -->
-			<!-- <ul
-    class="flex flex-row items-center justify-center w-screen text-xl  {bgGradientColor} hideScrollBar overflow-x-scroll rounded-md md:rounded-xl  md:ml-24 md:p-1 py-3 px-5 "
-  > -->
+			<li class="pwa:hidden {hideIfNotIOS}">
+				<button
+					class="py-1 px-3 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl {$elementColor} border-b-1 rounded duration-200 hover:bg-indigo-400
+  hover:text-white active:animate-pulse"
+					on:click={handleAppNavClick}
+				>
+					App
+				</button>
+			</li>
 
 			{#each Object.keys($routes).slice(1, 5) as KEY}
 				{@const { href, name, icon, isCurrent } = $routes[KEY]}
@@ -142,16 +147,6 @@
 					/>
 				</li>
 			{/each}
-
-			<li class="pwa:hidden {hideIfNotIOS}">
-				<button
-					class="py-1 px-3 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl {$elementColor} border-b-1 rounded duration-200 hover:bg-indigo-400
-      hover:text-white active:animate-pulse"
-					on:click={handleAppNavClick}
-				>
-					App
-				</button>
-			</li>
 
 			<li class="translate-y-1 scale-125 py-2 md:scale-100">
 				<!-- use:clickOutside2={{ onClickOutside2: () => alert('go duck duck') }} -->

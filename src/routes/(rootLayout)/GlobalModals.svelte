@@ -6,8 +6,11 @@
 
 	import { scale, fly } from 'svelte/transition'; // slide, fade, blur
 	import { elasticOut, quintOut } from 'svelte/easing';
-	import { getOS } from '$lib/utils';
 	import { showLoginModal, showHomeworkModal, navAppClicked, contactLinkClicked } from '$lib/store';
+
+	// import { getOS } from '$lib/utils';
+	import { getContext } from 'svelte';
+	const isIOS = getContext('isIOS');
 
 	let contactLinkScaling = {
 		duration: 1500,
@@ -43,7 +46,8 @@
 </Modal>
 
 <!-- although the 'app' button is also screened in Navbar.svelte, it's also a good idea to not render the popup here -->
-{#if getOS() == 'iOS'}
+<!-- {#if getOS() == 'iOS'} -->
+{#if isIOS}
 	<Modal
 		all
 		bind:showModal={$navAppClicked}

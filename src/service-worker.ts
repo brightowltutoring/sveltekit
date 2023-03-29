@@ -80,24 +80,24 @@ worker.addEventListener('fetch', (event) => {
 });
 
 // Intercept HTTP requests by adding a custom 'pwa' request header ... to be used in +layout.server.js
-worker.addEventListener('fetch', (event: Event) => {
-	// Clone the request to avoid modifying the original
+// worker.addEventListener('fetch', (event: Event) => {
+// 	// Clone the request to avoid modifying the original
 
-	const fetchEvent = event as FetchEvent;
+// 	const fetchEvent = event as FetchEvent;
 
-	const request = fetchEvent.request.clone();
+// 	const request = fetchEvent.request.clone();
 
-	// If the request is coming from a PWA, add the custom header
-	if (isPWA()) request.headers.set('X-PWA-Request', 'true');
+// 	// If the request is coming from a PWA, add the custom header
+// 	if (isPWA()) request.headers.set('X-PWA-Request', 'true');
 
-	// Pass the modified request to the fetch() method
-	fetchEvent.respondWith(fetch(request));
-});
+// 	// Pass the modified request to the fetch() method
+// 	fetchEvent.respondWith(fetch(request));
+// });
 
-function isPWA(): boolean {
-	// Use a type assertion to tell TypeScript that the navigator object is an instance of Navigator
-	const nav = worker.navigator as Navigator;
+// function isPWA(): boolean {
+// 	// Use a type assertion to tell TypeScript that the navigator object is an instance of Navigator
+// 	const nav = worker.navigator as Navigator;
 
-	// Check whether the standalone property exists on the Navigator interface
-	return typeof nav.standalone !== 'undefined' && nav.standalone;
-}
+// 	// Check whether the standalone property exists on the Navigator interface
+// 	return typeof nav.standalone !== 'undefined' && nav.standalone;
+// }

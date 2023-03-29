@@ -1,9 +1,14 @@
 <!-- TODO: fix types for: FooterComponent, Import function prop,  -->
 <script lang="ts">
+	import { setContext } from 'svelte';
+
 	export let data;
-	const { isMobile, isPWAFromLoad } = data;
-	console.log('isMobile client-side', isMobile);
-	console.log('isPWA client-side', isPWAFromLoad);
+	const { isMobile, isIphone, isIOS } = data;
+
+	setContext('isIOS', isIOS);
+
+	// console.log('isMobile client-side', isMobile);
+	// console.log('isIphone client-side', isIphone);
 
 	import './(rootLayout)/styles.css';
 	import GlobalModals from './(rootLayout)/GlobalModals.svelte';
@@ -39,19 +44,7 @@
 		($runningStandalone || $lessThan768) && disableZoomGestures();
 		setInnerWidthViaMatchMedia();
 	});
-
-	// TODO: FORM ACTIONS
-	// import { page } from '$app/stores';
-	// import { enhance } from '$app/forms';
-	// TODO: FORM ACTIONS
 </script>
-
-<!-- TODO: FORM ACTIONS -->
-<!-- <form method="POST" use:enhance action="/" class="z-[999]">
-		<input class="sr-only" name="pathname" type="pathname" value={`${$page.url.pathname}`} />
-		<button>submit: {$page.url.pathname}</button>
-	</form> -->
-<!-- TODO: FORM ACTIONS -->
 
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
@@ -63,15 +56,13 @@
 <Seo />
 <GlobalModals />
 
-<main class=" flex min-h-screen flex-col">
+<main class="flex min-h-screen flex-col">
 	<Navbar />
-
+	<!-- {#if !isIphone} -->
 	<div class="px-[5%] pt-32 md:block">
-		{#if isPWAFromLoad}
-			hey this is pwa
-		{/if}
 		<slot />
 	</div>
+	<!-- {/if} -->
 
 	<!-- {#if $page.route?.id !== '/classroom' && $page.route?.id !== '/pwa-home'} -->
 

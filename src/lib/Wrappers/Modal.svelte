@@ -16,7 +16,7 @@
 
 	// Returns ability to close modal by clicking the entire container WITH content. So far only used when clicking the contact link in the footer and closing the fullscreen modal
 	all && onMount(() => container.addEventListener('click', closeModal));
-	all && onDestroy(() => container.removeEventListener('click', closeModal));
+	all && onDestroy(() => container?.removeEventListener('click', closeModal));
 
 	function closeModal() {
 		showModal = false;
