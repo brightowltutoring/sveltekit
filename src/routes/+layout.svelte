@@ -58,11 +58,10 @@
 
 <main class="flex min-h-screen flex-col">
 	<Navbar />
-	<!-- {#if !isIphone} -->
+
 	<div class="px-[5%] pt-32 md:block">
 		<slot />
 	</div>
-	<!-- {/if} -->
 
 	<!-- {#if $page.route?.id !== '/classroom' && $page.route?.id !== '/pwa-home'} -->
 
