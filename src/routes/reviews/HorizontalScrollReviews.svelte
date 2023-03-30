@@ -20,7 +20,7 @@
 <!-- example taken from: https://tailwindcomponents.com/component/horizontal-scroll-card-components -->
 
 <section
-	class="mt-16 flex overflow-x-scroll rounded-xl bg-[#f0efef] py-5 scrollbar-hide dark:bg-[#312e44] {$$props.class}"
+	class="mt-16 flex overflow-x-scroll scroll-smooth rounded-xl bg-[#f0efef] py-5 scrollbar-hide dark:bg-[#312e44] {$$props.class}"
 >
 	<div class="mx-10 flex gap-x-5 md:mx-20 lg:mx-40">
 		<!-- {#each Array(30) as _, i} -->

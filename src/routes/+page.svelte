@@ -18,12 +18,10 @@
 <BackgroundVideo />
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
-	<section
-		class="z-10 flex h-[60vh] items-center justify-center text-center"
-		on:click={() => {
-			document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-		}}
-	>
+	<a href="#step1" class="z-10 flex h-[60vh] items-center justify-center text-center">
+		<!-- on:click|preventDefault={() => {
+				document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}} -->
 		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
 
 		<div class="grid grid-rows-1">
@@ -36,32 +34,28 @@
 				<button class="animate-bounce font-Nunito text-2xl font-thin"> 👇 get started </button>
 			{/key}
 		</div>
-	</section>
+	</a>
 
 	<!-- second page -->
-	<section id="step1" class="grid place-content-center duration-500 hover:scale-105">
-		<button
-			on:click={() => {
-				document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-			}}
-			class="pb-7 text-center font-Poppins text-5xl"
-		>
+	<section id="step1" class="grid scroll-my-20 place-content-center duration-500 hover:scale-105">
+		<a href="#step2" class="pb-7 text-center font-Poppins text-5xl">
+			<!-- on:click|preventDefault={() => {
+					document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				}} -->
 			<span class="gradientTextColor"> 1. Upload your homework </span>
-		</button>
+		</a>
 
 		<DropzoneOpener />
 	</section>
 
 	<!-- third page -->
-	<section id="step2" class="grid place-content-center duration-500">
-		<button
-			class="pb-7 text-center font-Poppins text-5xl"
-			on:click={() => {
-				document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			}}
-		>
+	<section id="step2" class="grid scroll-my-20 place-content-center duration-500">
+		<a href="#reviews" class="pb-7 text-center font-Poppins text-5xl">
+			<!-- on:click|preventDefault={() => {
+					document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				}} -->
 			<span class="gradientTextColor"> 2. Schedule a Session </span>
-		</button>
+		</a>
 
 		<PlansSection />
 		<!-- <LazyMount Import={() => import('./plans/PlansSection.svelte')} /> -->
@@ -69,32 +63,30 @@
 		<!-- TODO: not yet sure how to deal with on:boop in LazyMount ... this is doing things manually; maybe rethink props logic inside PlansSection to do what on:boop accomplishes (i.e. reducing the card elements to first two) -->
 
 		<!-- <InView
-        onview={async () => {
-          PlansSection = (await import("$lib/Plans/PlansSection.svelte"))
-            .default;
-        }}
-       >
-        <svelte:component
-          this={PlansSection}
-          plansCards={classicoAndMock}
-          on:boop={(e) => {
-            classicoAndMock = e.detail.plansCardArray.slice(0, 2);
-            console.log("🏡", e.detail.message);
-          }}
-        />
-      </InView> -->
+			onview={async () => {
+			  PlansSection = (await import("$lib/Plans/PlansSection.svelte"))
+				.default;
+			}}
+		   >
+			<svelte:component
+			  this={PlansSection}
+			  plansCards={classicoAndMock}
+			  on:boop={(e) => {
+				classicoAndMock = e.detail.plansCardArray.slice(0, 2);
+				console.log("🏡", e.detail.message);
+			  }}
+			/>
+		  </InView> -->
 
 		<!-- Note: 'boop' is a custom svelte event sent from within PlansSection.svelte, containing 'plansCardArray'; here I decide to modify a copy of this data and name it 'classicoAndMock' ... upside of this is not having to import 'plansCardArray' from a js file ...downside is while waiting for this boop event the change in content flashes on the home route (when refreshing the page at the plans section)-->
 	</section>
 
 	<!-- fourth page -->
-	<section id="reviews" class="mb-[200px] duration-500 sm:mb-[500px]">
-		<button
-			on:click={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-			class="flex w-full justify-center font-Poppins text-5xl"
-		>
+	<section id="reviews" class="mb-[200px] scroll-my-20 duration-500 sm:mb-[500px]">
+		<a href="#top" class="flex w-full justify-center text-center font-Poppins text-5xl">
+			<!-- on:click|preventDefault={() => window.scrollTo({ top: 0, behavior: 'smooth' })} -->
 			<span class="gradientTextColor">3. Do Some Reading <span class="text-black">😎 </span></span>
-		</button>
+		</a>
 
 		<!-- <LazyMount Import={() => import('./reviews/Reviews.svelte')} /> -->
 

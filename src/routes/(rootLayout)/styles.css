@@ -48,7 +48,7 @@
 }
 
 html {
-	/* scroll-behavior: smooth; */
+	scroll-behavior: smooth;
 	background: var(--light);
 	color: var(--dark);
 	transition: background-color 0.2s ease;
