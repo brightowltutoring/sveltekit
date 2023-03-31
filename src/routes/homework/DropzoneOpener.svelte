@@ -11,18 +11,16 @@
 	}
 </script>
 
-<!-- on:click={openShowHomeworkModal} -->
 <button
+	on:click={openShowHomeworkModal}
 	aria-label="Upload Button Area"
 	class="submitArea group relative mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 >
 	<div class="flex flex-col items-center justify-center">
-		<!-- <div class="overlay animate-pulse"> -->
 		<div class="animate-pulse">
 			<IconUpload />
 		</div>
 
-		<!-- <div class="overlay z-50"> -->
 		<div class="z-50">
 			<NoScriptSubmitHomework />
 		</div>
@@ -30,9 +28,6 @@
 </button>
 
 <style>
-	.overlay {
-		@apply absolute left-0 top-0 h-[100%] w-[100%];
-	}
 	:root {
 		--light-box-shadow-color: #ddd;
 		--dark-box-shadow-color: #1d1c43;

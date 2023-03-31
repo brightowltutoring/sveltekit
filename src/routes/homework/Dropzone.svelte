@@ -87,8 +87,9 @@
 <InView single onview={(target) => hydrateDropzoneDomEls(target)} once margin={'0px'}>
 	<form
 		method="post"
-		class="dropzone flex flex-wrap items-center justify-center overflow-scroll backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto"
+		class="dropzone flex flex-wrap items-center justify-center backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto"
 	>
+		<!-- overflow-scroll  -->
 		<div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
 			<!-- {text} -->
 			<IconUploadGradient />
@@ -105,15 +106,18 @@
 	:root {
 		--light-box-shadow-color: #ddd;
 		--dark-box-shadow-color: #1d1c43;
+		--box-shadow-inset: 10px;
 	}
 	form {
-		box-shadow: inset 0 -10px 10px var(--light-box-shadow-color);
+		box-shadow: inset 0 calc(-1 * var(--box-shadow-inset)) var(--box-shadow-inset)
+			var(--light-box-shadow-color);
 		border-radius: 50px;
 		border-color: transparent;
 		background-color: transparent;
 	}
 
 	:global(html.dark-mode) form {
-		box-shadow: inset 0 -10px 10px var(--dark-box-shadow-color);
+		box-shadow: inset 0 calc(-1 * var(--box-shadow-inset)) var(--box-shadow-inset)
+			var(--dark-box-shadow-color);
 	}
 </style>
