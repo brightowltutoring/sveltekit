@@ -28,8 +28,7 @@
 			<div class="grid w-1/2 grid-cols-1 gap-5">
 				<!-- animate-pulse -->
 				<!-- <IconUpload /> -->
-				<!-- <input type="file" name="file" id="file" multiple /> -->
-				<input type="file" name="file" id="file" />
+				<input type="file" name="file" id="file" multiple />
 				<input
 					class="border-1 hover: rounded bg-red-800 p-3 text-white hover:bg-blue-400 focus:animate-ping focus:bg-indigo-700"
 					type="submit"

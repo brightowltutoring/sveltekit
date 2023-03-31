@@ -39,8 +39,7 @@ export async function submitHomework(event: RequestEvent) {
 	async function uploadSingle(file: File) {
 		let data = new FormData();
 		data.append('file', file, file.name);
-		// fetch(PUBLIC_UPLOAD_ENDPOINT, {
-		fetch('https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable', {
+		fetch(PUBLIC_UPLOAD_ENDPOINT, {
 			method: 'POST',
 			body: data
 		});
