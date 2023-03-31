@@ -19,7 +19,8 @@ export const actions = {
 				'https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable',
 				{
 					method: 'POST',
-					body: data
+					body: data,
+					mode: 'cors'
 				}
 			);
 		}
