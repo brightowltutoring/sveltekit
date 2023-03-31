@@ -5,12 +5,12 @@
 // import { submitHomework } from './submitHomework';
 export const actions = {
 	// default: (event) => submitHomework(event)
-	default: async (event) => {
-		const formData = await event.request.formData();
+	default: async ({ request, fetch }) => {
+		const formData = await request.formData();
 
 		const files = formData.getAll('file') as File[];
 
-		for (let file of files) {
+		for await (let file of files) {
 			let data = new FormData();
 			data.append('file', file, file.name);
 
