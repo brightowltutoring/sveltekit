@@ -1,68 +1,38 @@
-<script>
+<script lang="ts">
 	import IconUpload from '$lib/Icons/IconUpload.svelte';
+	import { showHomeworkModal } from '$lib/store';
+	// import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 
-	import {
-		// isDarkMode,
-		showHomeworkModal
-	} from '$lib/store';
-	// $: boxShadowColor = $isDarkMode ? "#1d1c43" : "#ddd";
+	import NoScriptSubmitHomework from './NoScriptSubmitHomework.svelte';
+
+	function openShowHomeworkModal() {
+		$showHomeworkModal = true;
+		document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
+	}
 </script>
 
-<!-- style="box-shadow: inset 0 -10px 10px {boxShadowColor}; border-radius: 50px; border-color: transparent; background-color: transparent" -->
 <button
 	aria-label="Upload Button Area"
-	on:click={() => {
-		// alert("clicked")
-		$showHomeworkModal = true;
-		// setTimeout(() => {
-		document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
-		// }, 75);
-	}}
-	class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
+	on:click={openShowHomeworkModal}
+	class="submitArea group relative mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 >
-	<!-- <div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's</div> -->
-	<div class="animate-pulse">
-		<IconUpload />
+	<div class="flex flex-col items-center justify-center">
+		<!-- <div class="overlay animate-pulse"> -->
+		<div class="animate-pulse">
+			<IconUpload />
+		</div>
+
+		<!-- <div class="overlay z-50"> -->
+		<div class="z-50">
+			<NoScriptSubmitHomework />
+		</div>
 	</div>
 </button>
 
-<!-- noscript submit homework -->
-<noscript>
-	<iframe
-		name="dummyframe"
-		id="dummyframe"
-		style="display: none;"
-		title="this iframe serves as a janky solution so that the page doesnt redirect after form submission"
-	/>
-	<form
-		target="dummyframe"
-		enctype="multipart/form-data"
-		method="POST"
-		action="https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable"
-	>
-		<!-- <button class="rounded border-1 bg-red-800 p-3 text-white hover:bg-blue-400" type="submit"
-			>Submit</button
-		> -->
-
-		<input
-			class="border-1 rounded bg-red-800 p-3 text-white hover:bg-blue-400 focus:bg-indigo-700"
-			type="submit"
-			value="Submit"
-		/>
-
-		<label
-			for="file"
-			class="submitArea group mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
-		>
-			<div class="font-Nunito text-2xl group-hover:animate-pulse">Drop it like it's 🔥</div>
-			<!-- <input class="hidden" type="file" name="file" id="file" required multiple /> -->
-			<input type="file" name="file" id="file" required />
-		</label>
-	</form>
-</noscript>
-
-<!-- noscript submit homework -->
 <style>
+	.overlay {
+		@apply absolute left-0 top-0 h-[100%] w-[100%];
+	}
 	:root {
 		--light-box-shadow-color: #ddd;
 		--dark-box-shadow-color: #1d1c43;
