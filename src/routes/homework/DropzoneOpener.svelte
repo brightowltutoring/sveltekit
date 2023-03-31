@@ -11,9 +11,9 @@
 	}
 </script>
 
+<!-- on:click={openShowHomeworkModal} -->
 <button
 	aria-label="Upload Button Area"
-	on:click={openShowHomeworkModal}
 	class="submitArea group relative mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
 >
 	<div class="flex flex-col items-center justify-center">
