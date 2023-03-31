@@ -1,14 +1,16 @@
 <noscript>
-	<!-- <iframe
+	<iframe
 		name="dummyframe"
 		id="dummyframe"
 		style="display: none;"
 		title="this iframe serves as a janky solution so that the page doesnt redirect after form submission"
-	/> -->
+	/>
 
 	<!-- <form enctype="multipart/form-data" method="POST" action={PUBLIC_UPLOAD_ENDPOINT}> -->
+	<!--  -->
 	<!-- target="dummyframe" -->
-	<form enctype="multipart/form-data" method="POST">
+	<form enctype="multipart/form-data" method="POST" action="/api/submit-homework">
+		<!-- <form enctype="multipart/form-data" method="POST"> -->
 		<label
 			for="file"
 			class="submitArea group mx-auto flex w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
