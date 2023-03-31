@@ -1,5 +1,5 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
+// import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 
 export async function submitHomework(event: RequestEvent) {
 	const formData = await event.request.formData();
@@ -13,7 +13,8 @@ export async function submitHomework(event: RequestEvent) {
 		data.append('file', file);
 
 		// handle these with promise all
-		fetch(PUBLIC_UPLOAD_ENDPOINT, {
+		fetch('https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable', {
+			// fetch(PUBLIC_UPLOAD_ENDPOINT, {
 			method: 'POST',
 			body: data
 		});
