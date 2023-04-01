@@ -1,11 +1,11 @@
-import { auth } from './firebase';
+// import { auth } from './firebase';
 
 export function regexEmailChecker(EMAIL: string) {
 	return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
 }
 
 export async function magicLinkToEmail(EMAIL: string) {
-	// const auth = await import("$lib/Login/firebase");
+	const { auth } = await import('./firebase');
 	const {
 		sendSignInLinkToEmail
 		// EmailAuthProvider

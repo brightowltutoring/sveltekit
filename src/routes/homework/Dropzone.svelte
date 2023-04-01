@@ -64,8 +64,7 @@
 	function dropzonePopUpOnce() {
 		// This code fires once since 'globalThis.popUpOnceBoolean' starts out as undefined, then switched to true inside
 
-		// @ts-ignore
-		if (!globalThis.popUpOnceBoolean) {
+		if (!(globalThis as any).popUpOnceBoolean) {
 			setTimeout(() => {
 				document.querySelector('.dropzone')!.dispatchEvent(new CustomEvent('click'));
 			}, 75);
@@ -87,7 +86,7 @@
 <InView single onview={(target) => hydrateDropzoneDomEls(target)} once margin={'0px'}>
 	<form
 		method="post"
-		class="dropzone flex flex-wrap items-center justify-center backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto"
+		class="dropzone flex flex-wrap items-center justify-center backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto overflow-y-scroll"
 	>
 		<!-- overflow-scroll  -->
 		<div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>

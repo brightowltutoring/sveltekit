@@ -11,12 +11,7 @@
 	/>
 
 	<!-- target="dummyframe" -->
-	<form
-		target="dummyframe"
-		enctype="multipart/form-data"
-		method="POST"
-		action={PUBLIC_UPLOAD_ENDPOINT}
-	>
+	<form enctype="multipart/form-data" method="POST" action={PUBLIC_UPLOAD_ENDPOINT}>
 		<!-- <form enctype="multipart/form-data" method="POST" action="/api/submit-homework"> -->
 		<!-- <form enctype="multipart/form-data" method="POST"> -->
 		<label

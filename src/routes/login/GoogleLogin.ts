@@ -1,20 +1,18 @@
-import { auth } from './firebase';
-import { signInWithPopup, GoogleAuthProvider, browserPopupRedirectResolver } from 'firebase/auth';
-
-const provider = new GoogleAuthProvider();
+// import { auth } from './firebase';
+// import { signInWithPopup, GoogleAuthProvider, browserPopupRedirectResolver } from 'firebase/auth';
+// const provider = new GoogleAuthProvider();
 
 export async function GoogleLogin() {
-	// const auth = await import("$lib/Login/firebase");
+	const { auth } = await import('./firebase');
 
-	// const {
-	// 	GoogleAuthProvider,
-	// 	browserPopupRedirectResolver
-	// 	// setPersistence, browserSessionPersistence, inMemoryPersistence,
-	// } = await import('firebase/auth');
+	const {
+		GoogleAuthProvider,
+		browserPopupRedirectResolver,
+		// setPersistence, browserSessionPersistence, inMemoryPersistence,
+		signInWithPopup
+	} = await import('firebase/auth');
 
-	// const provider = new GoogleAuthProvider();
-
-	// const { signInWithPopup } = await import('firebase/auth');
+	const provider = new GoogleAuthProvider();
 
 	// setPersistence(auth, browserSessionPersistence).then(() => {
 	signInWithPopup(auth, provider, browserPopupRedirectResolver)

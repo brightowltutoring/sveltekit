@@ -1,21 +1,53 @@
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
+
+const ENDPOINT = [
+	'https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable',
+	PUBLIC_UPLOAD_ENDPOINT
+];
+
 import type { RequestEvent } from '@sveltejs/kit';
+
+// TODO: delete these
+import fetch from 'node-fetch';
+import FormData from 'form-data';
+import { Readable } from 'readable-stream';
+
 export async function POST(event: RequestEvent) {
 	const formData = await event.request.formData();
-
 	const files = formData.getAll('file') as File[];
 
-	for (let file of files) {
-		let data = new FormData();
-		data.append('file', file, file.name);
+	const form = new FormData();
 
-		fetch(PUBLIC_UPLOAD_ENDPOINT, {
-			method: 'POST',
-			body: data
-		});
+	// for (const file of files) {
+	// 	form.append('file', file, { filename: file.name });
+	// }
+
+	for (let i = 0; i < files.length; i++) {
+		const file = files[i];
+		const stream = Readable.from(fs.createReadStream(file.path));
+		form.append('files', stream, { filename: file.name });
 	}
 
-	console.log('yoo');
+	await fetch(ENDPOINT[0], {
+		method: 'POST',
+		body: formData,
+		headers: form.getHeaders()
+	});
+
+	// const files = formData.getAll('file') as File[];
+
+	// console.log('files', files);
+
+	// for (let file of files) {
+	// 	let data = new FormData();
+	// 	data.append('file', file, file.name);
+
+	// 	await fetch(ENDPOINT[0], {
+	// 		method: 'POST',
+	// 		body: data
+	// 	});
+	// }
+
 	// return new Response(String(101));
 	return new Response('Redirect', { status: 303, headers: { Location: '/homework' } });
 

@@ -146,7 +146,7 @@
 			on:keyup={(e) => verifySMSCode(e, smsCode)}
 			on:paste={(e) => verifySMSCode(e, smsCode)}
 			bind:value={smsCode}
-			class="col-span-3 mt-3 p-3 text-center focus:outline-none "
+			class="col-span-3 mt-3 p-3 text-center text-black focus:outline-none"
 			placeholder="enter sms code"
 		/>
 

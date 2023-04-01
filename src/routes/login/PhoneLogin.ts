@@ -1,10 +1,11 @@
-import { auth } from './firebase';
+// import { auth } from './firebase';
 
 export function regexPhoneChecker(PHONE: string) {
 	return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(PHONE);
 }
 
 export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID: string) {
+	const { auth } = await import('./firebase');
 	const { RecaptchaVerifier } = await import('firebase/auth');
 
 	// Could also do 'window.recaptchaVerifier = new RecaptchaVerifier ..' and return nothing, however using this function modularly elsewhere it is more readable to return the desired 'verifier' variable as the output of this called function
@@ -21,6 +22,7 @@ export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID: string) 
 }
 
 export async function sendCodeToPhone(PHONE_NUMBER: string, RECAPTCHA_VERIFIER: any) {
+	const { auth } = await import('./firebase');
 	const { setPersistence, browserSessionPersistence, signInWithPhoneNumber } = await import(
 		'firebase/auth'
 	);
@@ -46,10 +48,10 @@ export async function sendCodeToPhone(PHONE_NUMBER: string, RECAPTCHA_VERIFIER: 
 // export function verifySMSCode(SMS_CODE, e) {
 // let clickOrEnterFired = e.type == "click" || e.key == "Enter";
 export function verifySMSCode(e: ClipboardEvent | KeyboardEvent, SMS_CODE: string) {
-	if (<ClipboardEvent>e || <KeyboardEvent>e) {
+	if (e instanceof ClipboardEvent || e instanceof KeyboardEvent) {
 		let code = SMS_CODE;
-		// @ts-ignore
-		let confirmationResult = window.confirmationResult;
+
+		let confirmationResult = (window as any).confirmationResult;
 
 		// sms code is 6 digits-long as of dec1,2022
 		// if (clickOrEnterFired && code.length >= 5 && confirmationResult) {

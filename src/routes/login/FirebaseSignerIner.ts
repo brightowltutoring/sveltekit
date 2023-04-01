@@ -21,6 +21,7 @@ export async function FirebaseSignerIner() {
 		}
 	});
 
+	// TODO: should this exist outside of this function?
 	// (For magic link only) Confirm the link is a sign-in with email link.
 	const { isSignInWithEmailLink } = await import('firebase/auth');
 	if (isSignInWithEmailLink(auth, window.location.href)) {
