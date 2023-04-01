@@ -2,6 +2,7 @@
 	import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 </script>
 
+<!-- TODO: appears that when js is off there is a limit to how much files can be uploaded at once .. -->
 <noscript>
 	<iframe
 		name="dummyframe"
@@ -11,13 +12,13 @@
 	/>
 
 	<!-- target="dummyframe" -->
-	<form
+	<!-- <form
 		target="dummyframe"
 		enctype="multipart/form-data"
 		method="POST"
 		action={PUBLIC_UPLOAD_ENDPOINT}
-	>
-		<!-- <form enctype="multipart/form-data" method="POST" action="/api/submit-homework"> -->
+	> -->
+	<form enctype="multipart/form-data" method="POST" action="/api/submit-homework">
 		<!-- <form enctype="multipart/form-data" method="POST"> -->
 		<label
 			for="file"
