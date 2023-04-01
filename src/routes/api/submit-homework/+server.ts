@@ -34,23 +34,28 @@ export async function POST(event: RequestEvent) {
 	// 	headers: form.getHeaders()
 	// });
 
-	const formData = await event.request.formData();
-	const files = formData.getAll('file') as File[];
+	try {
+		const formData = await event.request.formData();
+		const files = formData.getAll('file') as File[];
 
-	console.log('event.request.headers)', event.request.headers);
-	console.log('files', files);
+		// console.log('event.request.headers)', event.request.headers);
 
-	for (let file of files) {
-		let data = new FormData();
-		data.append('file', file, file.name);
-		fetch(ENDPOINT[0], {
-			method: 'POST',
-			body: data
-		});
+		for (let file of files) {
+			let data = new FormData();
+			data.append('file', file, file.name);
+			fetch(ENDPOINT[0], {
+				method: 'POST',
+				body: data
+			});
+		}
+		console.log('files', files);
+
+		return new Response('Redirect', { status: 303, headers: { Location: '/homework' } });
+	} catch (error) {
+		const errorMessage = `An error occured with the /api/submit-homework/+server.ts code:\n\n ${error}\n`;
+		console.log(errorMessage);
+		return new Response(errorMessage, { status: 500 });
 	}
-
-	// return new Response(String(101));
-	return new Response('Redirect', { status: 303, headers: { Location: '/homework' } });
 
 	// return redirect(status:200, location:'/')
 	// Do something with the form data, e.g. save it to a database
