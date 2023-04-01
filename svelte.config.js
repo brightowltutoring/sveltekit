@@ -10,7 +10,10 @@ const config = {
 	vitePlugin: { experimental: { inspector: true } },
 	extensions: ['.svelte', ...mdsvexConfig.extensions],
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		csrf: {
+			checkOrigin: false
+		}
 	},
 	preprocess: [vitePreprocess(), preprocess({ postcss: true }), mdsvex(mdsvexConfig)]
 };
