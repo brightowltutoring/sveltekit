@@ -16,3 +16,6 @@ vite.config.ts.timestamp-*
 /.vscode
 
 /baas_googleCloudFunctions
+
+.vercel
+/.vercel

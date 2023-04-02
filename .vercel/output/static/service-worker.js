@@ -1,31 +1,31 @@
 const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), o = [
   a + "/_app/immutable/chunks/public.ec3b3561.js",
-  a + "/_app/immutable/entry/app.fa4a816b.js",
-  a + "/_app/immutable/chunks/0.3b0b5748.js",
+  a + "/_app/immutable/entry/app.7162a49c.js",
+  a + "/_app/immutable/chunks/0.ed50d220.js",
   a + "/_app/immutable/chunks/1.41ac8561.js",
   a + "/_app/immutable/chunks/10.a69349d5.js",
   a + "/_app/immutable/chunks/11.2bff2152.js",
   a + "/_app/immutable/chunks/12.e1dc12aa.js",
-  a + "/_app/immutable/chunks/13.5a48de3d.js",
+  a + "/_app/immutable/chunks/13.464ae2c3.js",
   a + "/_app/immutable/chunks/14.0fbfcfce.js",
   a + "/_app/immutable/chunks/15.ceece1c3.js",
   a + "/_app/immutable/chunks/16.a584f02e.js",
   a + "/_app/immutable/chunks/2.53d4ab78.js",
-  a + "/_app/immutable/chunks/3.301347c8.js",
-  a + "/_app/immutable/chunks/4.3339385d.js",
+  a + "/_app/immutable/chunks/3.10d02a22.js",
+  a + "/_app/immutable/chunks/4.0797a9f5.js",
   a + "/_app/immutable/chunks/5.5fdbdd97.js",
   a + "/_app/immutable/chunks/6.a8b182f8.js",
   a + "/_app/immutable/chunks/7.35874d5f.js",
-  a + "/_app/immutable/chunks/8.bb062ec6.js",
+  a + "/_app/immutable/chunks/8.6df7c0da.js",
   a + "/_app/immutable/chunks/9.238848db.js",
   a + "/_app/immutable/assets/DropzoneOpener.90a1cec0.css",
   a + "/_app/immutable/assets/EnableJavascript.ca8e24ae.css",
   a + "/_app/immutable/assets/LoginCard.9daed711.css",
   a + "/_app/immutable/chunks/BackgroundVideo.8bb5b74f.js",
   a + "/_app/immutable/chunks/DropzoneOpener.46973b96.js",
-  a + "/_app/immutable/chunks/EnableJavascript.0e3fb60c.js",
+  a + "/_app/immutable/chunks/EnableJavascript.ef88fb90.js",
   a + "/_app/immutable/chunks/Kajax.b7fa9a0f.js",
-  a + "/_app/immutable/chunks/LoginCard.f4dcbcd6.js",
+  a + "/_app/immutable/chunks/LoginCard.b99fe6e3.js",
   a + "/_app/immutable/chunks/Modal.8d249450.js",
   a + "/_app/immutable/chunks/PlansSection.38589179.js",
   a + "/_app/immutable/chunks/Reviews.3c95c541.js",
@@ -35,13 +35,13 @@ const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), o
   a + "/_app/immutable/chunks/index.589901a3.js",
   a + "/_app/immutable/chunks/index.d162f37a.js",
   a + "/_app/immutable/chunks/katex.17b360fd.js",
-  a + "/_app/immutable/chunks/navigation.bb68b411.js",
+  a + "/_app/immutable/chunks/navigation.ae12b6c4.js",
   a + "/_app/immutable/chunks/preload-helper.41c905a7.js",
-  a + "/_app/immutable/chunks/singletons.28e9a871.js",
+  a + "/_app/immutable/chunks/singletons.f11da539.js",
   a + "/_app/immutable/chunks/store.d544f2d3.js",
-  a + "/_app/immutable/chunks/stores.5d7967e5.js",
+  a + "/_app/immutable/chunks/stores.ef582908.js",
   a + "/_app/immutable/chunks/utils.f720108d.js",
-  a + "/_app/immutable/entry/start.cfe8e0c8.js",
+  a + "/_app/immutable/entry/start.f39f725e.js",
   a + "/_app/immutable/chunks/index.esm.5199b64a.js",
   a + "/_app/immutable/chunks/index.esm.ed1975f8.js",
   a + "/_app/immutable/assets/nunito-v25-latin-200.fa28d3a9.woff",
@@ -54,22 +54,22 @@ const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), o
   a + "/_app/immutable/assets/poppins-v20-latin-700.9338e65f.woff2",
   a + "/_app/immutable/entry/_error.svelte.2e836791.js",
   a + "/_app/immutable/assets/_layout.52f8d827.css",
-  a + "/_app/immutable/entry/_layout.svelte.9ac8324c.js",
+  a + "/_app/immutable/entry/_layout.svelte.7929883f.js",
   a + "/_app/immutable/assets/_page.d372e546.css",
   a + "/_app/immutable/entry/_page.svelte.b8ea9af1.js",
-  a + "/_app/immutable/entry/classroom-page.svelte.0c8abb77.js",
-  a + "/_app/immutable/entry/classroomA-page.svelte.bac6950d.js",
+  a + "/_app/immutable/entry/classroom-page.svelte.ba5d4272.js",
+  a + "/_app/immutable/entry/classroomA-page.svelte.4f58309c.js",
   a + "/_app/immutable/assets/_page.21fdf0aa.css",
   a + "/_app/immutable/entry/faq-page.svelte.34d1a098.js",
   a + "/_app/immutable/entry/homework-page.svelte.6a9b6aac.js",
   a + "/_app/immutable/entry/katex-page.svx.6f604c5b.js",
-  a + "/_app/immutable/entry/login-page.svelte.9bdbc395.js",
+  a + "/_app/immutable/entry/login-page.svelte.105406db.js",
   a + "/_app/immutable/entry/math-page.svx.a327d62f.js",
   a + "/_app/immutable/entry/mathjax-page.svx.839665b3.js",
   a + "/_app/immutable/assets/_page.fcf51fa8.css",
   a + "/_app/immutable/entry/physics-page.svelte.cf5aab7b.js",
   a + "/_app/immutable/entry/plans-page.svelte.5cf03266.js",
-  a + "/_app/immutable/entry/pwa-home-page.svelte.3210f59a.js",
+  a + "/_app/immutable/entry/pwa-home-page.svelte.94478950.js",
   a + "/_app/immutable/entry/reviews-page.svelte.03f38012.js",
   a + "/_app/immutable/entry/samplequiz-page.md.e027455a.js",
   a + "/_app/immutable/assets/_page.66c4b252.css",
@@ -116,10 +116,10 @@ const a = /* @__PURE__ */ location.pathname.split("/").slice(0, -1).join("/"), o
   a + "/robots.txt",
   a + "/safari-share-icon.png",
   a + "/star.webp"
-], c = "1680476891428", t = self, i = `cache${c}`, m = o.concat(b), h = new Set(m);
+], i = "1680478860516", t = self, c = `cache${i}`, m = o.concat(b), h = new Set(m);
 t.addEventListener("install", (s) => {
   s.waitUntil(
-    caches.open(i).then((p) => p.addAll(m)).then(() => {
+    caches.open(c).then((p) => p.addAll(m)).then(() => {
       t.skipWaiting();
     })
   );
@@ -128,13 +128,13 @@ t.addEventListener("activate", (s) => {
   s.waitUntil(
     caches.keys().then(async (p) => {
       for (const e of p)
-        e !== i && await caches.delete(e);
+        e !== c && await caches.delete(e);
       t.clients.claim();
     })
   );
 });
-async function j(s) {
-  const p = await caches.open(`offline${c}`);
+async function f(s) {
+  const p = await caches.open(`offline${i}`);
   try {
     const e = await fetch(s);
     return p.put(s, e.clone()), e;
@@ -150,6 +150,6 @@ t.addEventListener("fetch", (s) => {
     return;
   const p = new URL(s.request.url), e = p.protocol.startsWith("http"), n = p.hostname === self.location.hostname && p.port !== self.location.port, l = p.host === self.location.host && h.has(p.pathname), u = s.request.cache === "only-if-cached" && !l;
   e && !n && !u && s.respondWith(
-    (async () => l && await caches.match(s.request) || j(s.request))()
+    (async () => l && await caches.match(s.request) || f(s.request))()
   );
 });
