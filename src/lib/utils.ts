@@ -15,7 +15,7 @@ export async function postDummyTextFileToGoogleDrive(name: string) {
 	});
 	data.append('file', file);
 
-	fetch(PUBLIC_UPLOAD_ENDPOINT, {
+	await fetch(PUBLIC_UPLOAD_ENDPOINT, {
 		method: 'POST',
 		body: data
 	});

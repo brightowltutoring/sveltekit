@@ -56,16 +56,31 @@ export async function POST(event: RequestEvent) {
 		console.log('files', files);
 		// console.log('event.request.headers)', event.request.headers);
 
-		for (let file of files) {
+		// for (let file of files) {
+		// 	let data = new FormData();
+		// 	data.append('file', file, file.name);
+		// 	await fetch(ENDPOINT[0], {
+		// 		method: 'POST',
+		// 		body: data
+		// 	});
+		// }
+
+		const requests = files.map((file) => {
 			let data = new FormData();
 			data.append('file', file, file.name);
-			fetch(ENDPOINT[0], {
+			return fetch(ENDPOINT[0], {
 				method: 'POST',
 				body: data
+			}).catch((err) => {
+				console.log(`Error uploading ${file.name}: ${err}`);
+				return null;
 			});
-		}
+		});
 
-		return new Response('Redirect', { status: 303, headers: { Location: '/homework' } });
+		// starts the concurrent fetches chain in a non-breaking way
+		(await Promise.all(requests)).filter((res) => res !== null);
+
+		return new Response('Redirect', { status: 303, headers: { Location: '/' } });
 	} catch (error) {
 		const errorMessage = `An error occured with the /api/submit-homework/+server.ts code:\n\n ${error}\n`;
 		console.log(errorMessage);
