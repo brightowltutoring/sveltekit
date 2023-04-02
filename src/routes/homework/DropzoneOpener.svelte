@@ -14,17 +14,19 @@
 <button
 	on:click={openShowHomeworkModal}
 	aria-label="Upload Button Area"
-	class="submitArea group relative mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll text-3xl backdrop-blur-3xl sm:w-[60vw]"
+	class="submitArea mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll backdrop-blur-3xl sm:w-[60vw]"
 >
-	<div class="flex flex-col items-center justify-center">
-		<div class="animate-pulse">
-			<IconUpload />
-		</div>
+	<!-- group relative  -->
+	<!-- this file refers to the input file inside <NoScriptSubmitHomework />  -->
+	<label for="file" class="w-[60vw]">
+		<div class="flex w-[100%] flex-col items-center justify-center">
+			<div class="animate-pulse">
+				<IconUpload />
+			</div>
 
-		<div class="z-50">
 			<NoScriptSubmitHomework />
 		</div>
-	</div>
+	</label>
 </button>
 
 <style>

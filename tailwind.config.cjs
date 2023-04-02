@@ -32,18 +32,18 @@ module.exports = {
 				// 		opacity: '100'
 				// 	}
 				// }
-				// wiggle: {
-				// 	'0%, 100%': {
-				// 		transform: 'rotate(-3deg)'
-				// 	},
-				// 	'50%': {
-				// 		transform: 'rotate(3deg)'
-				// 	}
-				// }
+				wave: {
+					'0%, 100%': {
+						transform: 'rotate(-3deg)  translateX(-5px)'
+					},
+					'50%': {
+						transform: 'rotate(3deg)  translateX(5px)'
+					}
+				}
 			},
 			animation: {
 				// fadeIn: 'fadeIn 0.7s ease-in'
-				// wiggle: 'wiggle 1s ease-in-out infinite',
+				wave: 'wave 1s ease infinite'
 			}
 		}
 	}
