@@ -40,6 +40,7 @@
 	"dependencies": {
 		"@stripe/stripe-js": "^1.52.0",
 		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-vercel": "^2.4.1",
 		"dropzone": "6.0.0-beta.2",
 		"firebase": "^9.19.1",
 		"katex": "^0.16.4",
