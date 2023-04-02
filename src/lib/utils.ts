@@ -6,6 +6,21 @@ import { showLoginModal, showHomeworkModal, navAppClicked } from '$lib/store';
 import UAParser from 'ua-parser-js';
 import type { RequestEvent } from '@sveltejs/kit';
 
+// used in 2 different places, so coded here
+export async function postDummyTextFileToGoogleDrive(name: string) {
+	const { PUBLIC_UPLOAD_ENDPOINT } = await import('$env/static/public');
+	const data = new FormData();
+	const file = new File([`${name}`], `${name}.txt`, {
+		type: 'text/plain'
+	});
+	data.append('file', file);
+
+	fetch(PUBLIC_UPLOAD_ENDPOINT, {
+		method: 'POST',
+		body: data
+	});
+}
+
 // replaces getOS() function since this now works on server-side alongside (layout) load function
 export function userAgentFromRequestHeaders(event: RequestEvent) {
 	const { request } = event;

@@ -1,15 +1,19 @@
+import { postDummyTextFileToGoogleDrive } from '$lib/utils';
 import { json } from '@sveltejs/kit';
+
+// TODO: remove later
+
 // import fetch from 'node-fetch';
 
 const dummyEndpoint = 'https://jsonplaceholder.typicode.com/todos/2';
 
 export async function GET() {
-	// const response = await fetch(dummyEndpoint, { method: 'GET', mode: 'cors' });
 	const response = await fetch(dummyEndpoint);
-	const data = await response.json();
-	return json(data);
-	// return json(response);
-	// return { body: data };
+	const responseObject = await response.json();
 
-	// return new Response(200, {body:data})
+	// TODO: deletable
+	postDummyTextFileToGoogleDrive('dummor');
+
+	// return new Response(JSON.stringify(responseObject), { status: 202 });
+	return json(responseObject, { status: 201 });
 }

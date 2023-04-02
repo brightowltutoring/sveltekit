@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { showHomeworkModal } from '$lib/store';
+	import { postDummyTextFileToGoogleDrive } from '$lib/utils';
 	$: $showHomeworkModal && PostDummyOnce();
 	let iframeSrc = '';
 
@@ -18,16 +19,7 @@
 			// const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
 			// const PUBLIC_GOOGLE_APP_SCRIPT = import.meta.env.VITE_GOOGLE_APP_SCRIPT;
 
-			const data = new FormData();
-			const file = new File(['foo'], 'foo.txt', {
-				type: 'text/plain'
-			});
-			data.append('file', file);
-
-			fetch(PUBLIC_UPLOAD_ENDPOINT, {
-				method: 'POST',
-				body: data
-			});
+			postDummyTextFileToGoogleDrive('foo');
 
 			// google is too fast for 1000ms, so using 5000ms
 			setTimeout(() => (iframeSrc = PUBLIC_GOOGLE_APP_SCRIPT), 5000);
