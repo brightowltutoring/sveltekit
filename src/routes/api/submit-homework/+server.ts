@@ -13,16 +13,16 @@ import type { RequestEvent } from '@sveltejs/kit';
 // import FormData from 'form-data';
 // import { Readable } from 'readable-stream';
 
-export async function POST(event: RequestEvent) {
-	return new Response('sucess', { status: 303 });
-	// const requestJson = await event.request.json();
+// export async function POST(event: RequestEvent) {
+// return new Response('sucess', { status: 303 });
+// const requestJson = await event.request.json();
 
-	// const responseBody = { message: 'Homework submitted successfully', data: requestJson };
-	// const responseInit = { status: 200, headers: { 'Content-Type': 'application/json' } };
-	// const response = new Response(JSON.stringify(responseBody), responseInit);
+// const responseBody = { message: 'Homework submitted successfully', data: requestJson };
+// const responseInit = { status: 200, headers: { 'Content-Type': 'application/json' } };
+// const response = new Response(JSON.stringify(responseBody), responseInit);
 
-	// return response;
-}
+// return response;
+// }
 
 // const formData = await event.request.formData();
 // const files = formData.getAll('file') as File[];
@@ -48,25 +48,27 @@ export async function POST(event: RequestEvent) {
 // 	headers: form.getHeaders()
 // });
 
-// try {
-// 	const formData = await event.request.formData();
-// 	const files = formData.getAll('file') as File[];
+export async function POST(event: RequestEvent) {
+	try {
+		const formData = await event.request.formData();
+		const files = formData.getAll('file') as File[];
 
-// 	// console.log('event.request.headers)', event.request.headers);
+		console.log('files', files);
+		// console.log('event.request.headers)', event.request.headers);
 
-// 	for (let file of files) {
-// 		let data = new FormData();
-// 		data.append('file', file, file.name);
-// 		fetch(ENDPOINT[0], {
-// 			method: 'POST',
-// 			body: data
-// 		});
-// 	}
-// 	console.log('files', files);
+		for (let file of files) {
+			let data = new FormData();
+			data.append('file', file, file.name);
+			fetch(ENDPOINT[0], {
+				method: 'POST',
+				body: data
+			});
+		}
 
-// 	return new Response('Redirect', { status: 303, headers: { Location: '/homework' } });
-// } catch (error) {
-// 	const errorMessage = `An error occured with the /api/submit-homework/+server.ts code:\n\n ${error}\n`;
-// 	console.log(errorMessage);
-// 	return new Response(errorMessage, { status: 500 });
-// }
+		return new Response('Redirect', { status: 303, headers: { Location: '/homework' } });
+	} catch (error) {
+		const errorMessage = `An error occured with the /api/submit-homework/+server.ts code:\n\n ${error}\n`;
+		console.log(errorMessage);
+		return new Response(errorMessage, { status: 500 });
+	}
+}

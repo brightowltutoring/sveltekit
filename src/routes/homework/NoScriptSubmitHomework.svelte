@@ -1,25 +1,19 @@
 <script>
 	import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
+	const action_API_URL = ['/api/submit-homework', '/api/testPost', PUBLIC_UPLOAD_ENDPOINT];
 </script>
 
 <!-- TODO: appears that when js is off there is a limit to how much files can be uploaded at once .. -->
 <noscript>
-	<iframe
+	<!-- <iframe
 		name="dummyframe"
 		id="dummyframe"
 		style="display: none;"
 		title="this iframe serves as a janky solution so that the page doesnt redirect after form submission"
-	/>
+	/> -->
 
 	<!-- target="dummyframe" -->
-	<!-- <form
-		target="dummyframe"
-		enctype="multipart/form-data"
-		method="POST"
-		action={PUBLIC_UPLOAD_ENDPOINT}
-	> -->
-	<!-- <form enctype="multipart/form-data" method="POST" action="/api/submit-homework"> -->
-	<form enctype="multipart/form-data" method="POST" action="/api/testPost">
+	<form enctype="multipart/form-data" method="POST" action={action_API_URL[0]}>
 		<!-- <form enctype="multipart/form-data" method="POST"> -->
 		<label
 			for="file"

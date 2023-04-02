@@ -10,7 +10,7 @@ export async function POST(event: RequestEvent) {
 	console.log(fileNamesOneString2);
 
 	const blob = fileNamesOneString2;
-	return new Response(blob, { status: 303 });
+	return new Response(JSON.stringify(blob), { status: 303 });
 }
 // console.log('files', files);
 
