@@ -65,8 +65,12 @@ export async function POST(event: RequestEvent) {
 		// 	});
 		// }
 
-		const requests = files.map((file) => {
-			let data = new FormData();
+		const requests = files.map(async (file) => {
+			if (!file || !file.name) {
+				return Promise.resolve(null);
+			}
+			const data = new FormData();
+
 			data.append('file', file, file.name);
 			return fetch(ENDPOINT[0], {
 				method: 'POST',
