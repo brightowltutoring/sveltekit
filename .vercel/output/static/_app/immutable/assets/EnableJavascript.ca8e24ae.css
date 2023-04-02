@@ -1,0 +1,1 @@
+:root{--hueRotateMaxAngle:5deg}div.svelte-gnixho{filter:hue-rotate(0deg);animation:svelte-gnixho-flicker 2s infinite}@keyframes svelte-gnixho-flicker{0%{filter:hue-rotate(var(--hueRotateMaxAngle))}50%{filter:hue-rotate(0deg)}to{filter:hue-rotate(var(--hueRotateMaxAngle))}}
