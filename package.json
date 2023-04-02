@@ -39,6 +39,7 @@
 	"type": "module",
 	"dependencies": {
 		"@stripe/stripe-js": "^1.52.0",
+		"@sveltejs/adapter-auto": "^2.0.0",
 		"dropzone": "6.0.0-beta.2",
 		"firebase": "^9.19.1",
 		"katex": "^0.16.4",
