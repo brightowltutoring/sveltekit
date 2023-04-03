@@ -1,8 +1,4 @@
 <script lang="ts">
-	// let PlansSection;
-	// let classicoAndMock; // this refers to data that is sent UP from PlansSection.svelte via svelte's createEventDispatcher ... to be used in this parent component (home route)
-	// import InView from "$lib/Wrappers/InView.svelte";
-	// import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 	import DropzoneOpener from './homework/DropzoneOpener.svelte';
 	import PlansSection from './plans/PlansSection.svelte';
 	import Reviews from './reviews/Reviews.svelte';
@@ -39,9 +35,6 @@
 	<!-- second page -->
 	<section id="step1" class="grid scroll-my-20 place-content-center duration-500 hover:scale-105">
 		<a href="#step2" class="pb-7 text-center font-Poppins text-5xl">
-			<!-- on:click|preventDefault={() => {
-					document.getElementById('step2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-				}} -->
 			<span class="gradientTextColor"> 1. Upload your homework </span>
 		</a>
 
@@ -51,44 +44,17 @@
 	<!-- third page -->
 	<section id="step2" class="grid scroll-my-20 place-content-center duration-500">
 		<a href="#reviews" class="pb-7 text-center font-Poppins text-5xl">
-			<!-- on:click|preventDefault={() => {
-					document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-				}} -->
 			<span class="gradientTextColor"> 2. Schedule a Session </span>
 		</a>
 
 		<PlansSection />
-		<!-- <LazyMount Import={() => import('./plans/PlansSection.svelte')} /> -->
-
-		<!-- TODO: not yet sure how to deal with on:boop in LazyMount ... this is doing things manually; maybe rethink props logic inside PlansSection to do what on:boop accomplishes (i.e. reducing the card elements to first two) -->
-
-		<!-- <InView
-			onview={async () => {
-			  PlansSection = (await import("$lib/Plans/PlansSection.svelte"))
-				.default;
-			}}
-		   >
-			<svelte:component
-			  this={PlansSection}
-			  plansCards={classicoAndMock}
-			  on:boop={(e) => {
-				classicoAndMock = e.detail.plansCardArray.slice(0, 2);
-				console.log("🏡", e.detail.message);
-			  }}
-			/>
-		  </InView> -->
-
-		<!-- Note: 'boop' is a custom svelte event sent from within PlansSection.svelte, containing 'plansCardArray'; here I decide to modify a copy of this data and name it 'classicoAndMock' ... upside of this is not having to import 'plansCardArray' from a js file ...downside is while waiting for this boop event the change in content flashes on the home route (when refreshing the page at the plans section)-->
 	</section>
 
 	<!-- fourth page -->
 	<section id="reviews" class="mb-[200px] scroll-my-20 duration-500 sm:mb-[500px]">
 		<a href="#top" class="flex w-full justify-center text-center font-Poppins text-5xl">
-			<!-- on:click|preventDefault={() => window.scrollTo({ top: 0, behavior: 'smooth' })} -->
 			<span class="gradientTextColor">3. Do Some Reading <span class="text-black">😎 </span></span>
 		</a>
-
-		<!-- <LazyMount Import={() => import('./reviews/Reviews.svelte')} /> -->
 
 		<Reviews class="hidden sm:block" />
 

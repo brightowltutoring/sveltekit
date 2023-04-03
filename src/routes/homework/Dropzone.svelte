@@ -4,7 +4,6 @@
 	import './dropzone.css';
 
 	import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-	// const PUBLIC_UPLOAD_ENDPOINT = import.meta.env.VITE_UPLOAD_ENDPOINT;
 
 	import PostDummyOnce from './PostDummyOnce.svelte';
 

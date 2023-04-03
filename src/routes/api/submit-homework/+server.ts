@@ -1,10 +1,7 @@
 // import { json, fail } from '@sveltejs/kit';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 
-const ENDPOINT = [
-	'https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable',
-	PUBLIC_UPLOAD_ENDPOINT
-];
+const ENDPOINT = [PUBLIC_UPLOAD_ENDPOINT];
 
 import type { RequestEvent } from '@sveltejs/kit';
 

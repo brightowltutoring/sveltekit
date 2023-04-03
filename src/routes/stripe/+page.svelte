@@ -6,7 +6,6 @@
 	// import "@stripe/stripe-js";
 	import { loadStripe } from '@stripe/stripe-js/pure';
 	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
-	// const PUBLIC_STRIPE_KEY = import.meta.env.VITE_STRIPE_KEY;
 
 	import { fly } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';

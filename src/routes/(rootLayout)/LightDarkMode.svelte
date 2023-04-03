@@ -31,7 +31,6 @@
 	onMount(() => (mounted = true));
 
 	// Will be consumed in IconmMoon.svelte and IconSun.svelte as in:scale transitions. Doing this as a prop to avoid nested wrapping of 'transition' divs
-	let transition = { duration: 1000, easing: elasticOut };
 </script>
 
 <svelte:head>
@@ -60,21 +59,29 @@
 				on:click={toggleDarkMode}
 				type="checkbox"
 				bind:checked={$isDarkMode}
-				class="peer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[2.5] z-10 opacity-0"
+				class=" peer absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 scale-[2.5] opacity-0"
 			/>
 
-			<div in:scale={{ duration: 1000, easing: elasticOut }} class="hidden peer-checked:block">
+			<div
+				id="sun"
+				in:scale={{ duration: 1000, easing: elasticOut }}
+				class="hidden peer-checked:block"
+			>
 				<IconSun />
 			</div>
-			<div in:scale={{ duration: 1000, easing: elasticOut }} class="block peer-checked:hidden">
+			<div
+				id="moon"
+				in:scale={{ duration: 1000, easing: elasticOut }}
+				class="block peer-checked:hidden"
+			>
 				<IconMoon />
 			</div>
 		</div>
 	{/key}
 </main> -->
 
+<!-- TODO: is it possible to toggle with :has and tailwind dark: , when js is off-->
 <!-- Breaks without JS -->
-
 <main class="fadeInFromNone px-2">
 	{#key $isDarkMode}
 		<button on:click={toggleDarkMode} in:slide={{ duration: 600, easing: quintOut }}>
@@ -88,3 +95,44 @@
 		</button>
 	{/key}
 </main>
+
+<!-- <div class="hidden dark:block">
+					<IconSun />
+				</div>
+				<div class="block dark:hidden">
+					<IconMoon />
+				</div> -->
+
+<!-- <style>
+	:root {
+		--light: #f7f7f7;
+		--dark: #140d21;
+	}
+	:global(html):has(#moon) {
+	
+		color: green;
+	}
+
+	:global(html):has(#moon) {
+		color: red !important;
+	}
+</style> -->
+
+<!-- <style>
+	:root {
+		--light: #f7f7f7;
+		--dark: #140d21;
+	}
+	:global(html):has(#moon) {
+		background: var(--light);
+		color: var(--dark);
+		transition: background-color 0.2s ease;
+
+	}
+
+	:global(html):has(#moon) {
+		background: var(--dark);
+		color: var(--light);
+
+	}
+</style> -->

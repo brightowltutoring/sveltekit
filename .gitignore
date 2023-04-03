@@ -1,9 +1,19 @@
 # custom 
-**/old-stuff-2
-**/lib/store-OLD.ts
+src/**/*_old.*
+src/**/*-old.*
+src/**/old-*
+src/**/*-experimental.*
+src/**/experimental-*
+
+/baas_googleCloudFunctions
 
 
 # standard stuff below
+
+!.env.example
+.env.*
+.env
+
 .DS_Store
 node_modules
 /build
@@ -11,16 +21,10 @@ node_modules
 /package
 .output
 
-!.env.example
-.env.*
-.env
-
-/.vscode
 
 .vercel
 .vercel/output
 
-/baas_googleCloudFunctions
 
 dist
 .vscode

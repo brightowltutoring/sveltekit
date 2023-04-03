@@ -1,19 +1,12 @@
 import type { Handle } from '@sveltejs/kit';
-
-const urlRedirects = {
-	screenshare: 'classroom'
-	// login: "login",
-};
-
-// const urlMap = new Map([
-//   ["screenshare", "classroom"],
-//   ["login", "login2"],
-// ]);
+import { sequence } from '@sveltejs/kit/hooks';
 
 export const redirectOldUrls: Handle = async ({ event, resolve }) => {
-	// export const handle = async ({ event, resolve }) => {
+	const urlRedirects = {
+		screenshare: 'classroom'
+	};
+
 	for (const [key, value] of Object.entries(urlRedirects)) {
-		// for (const [key, value] of urlMap) {
 		if (event.url.pathname === `/${key}`) {
 			return Response.redirect(`${event.url.origin}/${value}`, 302);
 		}
@@ -22,10 +15,8 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
-// This hook function — with 'transformPage' updated to 'transformPageChunk' — as provided by mihaon on 'https://github.com/sveltejs/svelte/issues/7444' fixes duplicate meta tags when starting with an SSR loaded page; I first surmised this could be a SSR/SSG-related issue  when starting with non-SSR route '/classroom' and no meta tag duplication persisted upon route changes
-// export const handle = async ({ event, resolve }) => {
-// export async function metaTagFixWhenSSR({ event, resolve }) {
-export const metaTagFixWhenSSR = (async ({ event, resolve }) => {
+// Taken from 'https://github.com/sveltejs/svelte/issues/7444'
+export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event, {
 		transformPageChunk: ({ html }) => {
 			return html
@@ -40,7 +31,6 @@ export const metaTagFixWhenSSR = (async ({ event, resolve }) => {
 	});
 
 	return response;
-}) satisfies Handle;
+};
 
-import { sequence } from '@sveltejs/kit/hooks';
 export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
