@@ -13,9 +13,6 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/adapter-cloudflare": "^2.2.0",
-		"@sveltejs/adapter-vercel": "^2.4.1",
 		"@sveltejs/kit": "1.15.0",
 		"@tailwindcss/typography": "^0.5.9",
 		"@types/dropzone": "^5.7.4",
@@ -40,6 +37,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-cloudflare": "^2.2.0",
+		"@sveltejs/adapter-vercel": "^2.4.1",
 		"@stripe/stripe-js": "^1.52.0",
 		"dropzone": "6.0.0-beta.2",
 		"firebase": "^9.19.1",
