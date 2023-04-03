@@ -1,6 +1,7 @@
-import { showLoginModal, isLoggedIn, loggedInEmail } from '$lib/store';
+// import { showLoginModal, isLoggedIn, loggedInEmail } from '$lib/store';
 
 export async function FirebaseSignerIner() {
+	const { showLoginModal, isLoggedIn, loggedInEmail } = await import('$lib/store');
 	const { auth } = await import('./firebase');
 
 	const { onAuthStateChanged } = await import('firebase/auth');

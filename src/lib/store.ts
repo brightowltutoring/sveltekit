@@ -1,42 +1,17 @@
 import { writable, derived, get } from 'svelte/store';
 
+export const isDarkMode = writable(false);
+
 // TODO: added jan 22 when moving function from +layout.svelte to SigninWithEmailLink.ts; may delete
 export const loggedInEmail = writable('');
 
 export const runningStandalone = writable(false);
-// const createWritableStore = (key, startValue) => {
-//   const { subscribe, set } = writable(startValue);
-
-//   return {
-//     subscribe,
-//     set,
-//     useLocalStorage: () => {
-//       const json = localStorage.getItem(key);
-//       if (json) {
-//         set(JSON.parse(json));
-//       }
-
-//       subscribe((current) => {
-//         localStorage.setItem(key, JSON.stringify(current));
-//       });
-//     },
-//   };
-// };
-
-// export const count = createWritableStore("count", 0);
 
 export const contactLinkClicked = writable(false);
 export const isLoggedIn = writable(false);
 export const lastScrollY = writable(0);
 export const scrollY = writable(0);
 
-// This is equivalent to "setTimeout(()=>{ $startScrollY = $scrollY },200)"
-// if placed inside +layout.svelte .. under an onscroll event attached to the window
-
-// Conceptually this is like an inst. change, since it sets back to zero
-// however the time step is 200 not infinitesimal
-
-// TODO: this new way of calculating 'instDeltaY' has the advantage of not dropping to 0 .. and thus can be used for 'was scrolling down/up' logic. For some reason this code, with the same 50ms delay, updates 'instDeltaY' less frequently than the older method ... which is actually better for performance (the updating is still smooth)
 let delayedScrollY = get(scrollY);
 export const instDeltaY = derived(scrollY, ($scrollY) => {
 	setTimeout(() => {
@@ -46,60 +21,26 @@ export const instDeltaY = derived(scrollY, ($scrollY) => {
 	return $scrollY - delayedScrollY;
 });
 
-// TODO: old way of calculating instDeltaY  ...
-// export const startScrollY = derived(scrollY, ($scrollY, set) => {
-//   // set both values initially equal
-//   set($scrollY);
-
-//   // ... then set it as the old scrollY value
-//   setTimeout(() => {
-//     set($scrollY);
-//   }, 50);
-// });
-// export const instDeltaY = derived(
-//   [scrollY, startScrollY],
-//   ([$scrollY, $startScrollY]) => {
-//     return $scrollY - $startScrollY;
-//   }
-// );
-// TODO: old way of calculating instDeltaY  ...
-
-// TODO: remove?
-// export const scrollHeight = writable(0);
-// export const scrollYMax = writable(0);
-// export const fractionScroll = derived(
-//   [scrollY, scrollYMax],
-//   ([$scrollY, $scrollYMax]) => {
-//     return 1 - $scrollY / $scrollYMax;
-//   }
-// );
-// export const windowInnerHeight = writable(0);
-// TODO: remove?
-
 export const innerWidth = writable(0);
 export const lessThan768 = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
 
-// the code for 'setInnerWidthViaMatchMedia()' is considerably more than doing '<svelte:window bind:innerWidth={$innerWidth} />' however the latter updates $innerWidth — and all dependent code — continuously on screen resize ...
+// Could do something like '$innerWidth = window.innerWidth' inside .svelte file, however value would be updating continuously
 export function setInnerWidthViaMatchMedia(pixelWidth = 768) {
-	// return browser && window.matchMedia("(max-width: 768px)").matches;
-
-	// browser is needed if this function isn't set in the onMount
-	// if (browser) {
 	innerWidth.set(window.innerWidth);
 	console.log(`LANDED at ${get(innerWidth)}`);
 
-	const mediaQueryList = window.matchMedia(`(max-width: ${pixelWidth}px)`);
-	//Note: can use '$innerWidth = window.innerWidth' when inside .svelte file, instead
-	mediaQueryList.addEventListener('change', (event) => {
+	window
+		.matchMedia(`(max-width: ${pixelWidth}px)`)
+		.addEventListener('change', handleInnerWidthChange);
+
+	function handleInnerWidthChange(event: MediaQueryListEvent) {
 		innerWidth.set(window.innerWidth);
 		event.matches
 			? console.log(`UNDER ${pixelWidth}px 🙈`)
 			: console.log(`OVER ${pixelWidth}px 😄`);
-	});
-	// }
+	}
 }
 
-// these nav items only since theyre modals, rather than actual routes
 export const showLoginModal = writable(false);
 export const showHomeworkModal = writable(false);
 export const navAppClicked = writable(false);
@@ -132,7 +73,6 @@ type routeNames =
 	| 'physics'
 	| 'math';
 
-//TODO: fix type
 export const routes = writable<Record<routeNames, routeInfo>>({
 	home: {
 		name: 'Home',
@@ -180,13 +120,6 @@ export const routes = writable<Record<routeNames, routeInfo>>({
     <meta property="og:url" content="https://thinksolve.io/classroom">`,
 		icon: IconClassroom
 	},
-	// classroomA: {
-	//   name: "ClassroomA",
-	//   href: "/classroomA",
-	//   title: "ClassroomA 🍎",
-	//   isCurrent: false,
-	//   icon: IconClassroom,
-	// },
 	faq: {
 		name: 'FAQ',
 		href: '/faq',
@@ -212,39 +145,4 @@ export const routes = writable<Record<routeNames, routeInfo>>({
 		title: 'math',
 		isCurrent: false
 	}
-
-	// calcom: {
-	//   name: "calcom",
-	//   href: "/calcom",
-	//   title: "calcom",
-	//   isCurrent: false,
-	// },
-	// mathjax: {
-	//   name: "mathjax",
-	//   href: "/mathjax",
-	//   title: "mathjax",
-	//   isCurrent: false,
-	// },
-	// katex: {
-	//   name: "katex",
-	//   href: "/katex",
-	//   title: "katex",
-	//   isCurrent: false,
-	// },
-});
-
-// export const isDarkMode = writable(true);
-export const isDarkMode = writable(false);
-
-export const light = '#f7f7f7';
-export const light_darkened = 'rgb(242,247,250)';
-export const light_darkened_half = 'pink';
-export const dark = 'rgb(37,27,47)';
-// export const dark_lightened =  'rgb(39,35,53)'
-export const dark_lightened = 'rgb(38, 35, 51)';
-export const dark_lightened_half = '#8f86b8';
-
-// TODO: is this needed anymore?
-export const elementColor = derived(isDarkMode, ($isDarkMode, set) => {
-	$isDarkMode ? set(dark_lightened) : set(light_darkened);
 });

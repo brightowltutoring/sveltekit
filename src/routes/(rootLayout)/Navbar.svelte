@@ -16,7 +16,6 @@
 		scrollY,
 		isDarkMode,
 		navAppClicked,
-		elementColor,
 		showLoginModal,
 		showHomeworkModal,
 		instDeltaY
@@ -111,8 +110,8 @@
 		>
 			<li class="pwa:hidden {hideIfNotIOS}">
 				<button
-					class="px-3 py-1 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:shadow-lg md:text-xl {$elementColor} border-b-1 rounded duration-200 hover:bg-indigo-400
-  hover:text-white active:animate-pulse"
+					class="border-b-1 rounded px-3 py-1 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:bg-indigo-400 hover:text-white hover:shadow-lg
+  active:animate-pulse md:text-xl"
 					on:click={handleAppNavClick}
 				>
 					App

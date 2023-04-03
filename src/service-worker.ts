@@ -79,7 +79,7 @@ worker.addEventListener('fetch', (event) => {
 	}
 });
 
-// Intercept HTTP requests by adding a custom 'pwa' request header ... to be used in +layout.server.js
+// TODO: Intercept HTTP requests by adding a custom 'pwa' request header ... to be used in +layout.server.js
 // worker.addEventListener('fetch', (event: Event) => {
 // 	// Clone the request to avoid modifying the original
 

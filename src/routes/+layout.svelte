@@ -1,46 +1,39 @@
-<!-- TODO: fix types for: FooterComponent, Import function prop,  -->
 <script lang="ts">
 	export let data;
-	const { isIOS /*isMobile, isIphone */ } = data;
+	const { haventLoggedOut, isIOS, isMobile } = data;
 
 	import { setContext } from 'svelte';
 	setContext('isIOS', isIOS);
-
-	// console.log('isMobile client-side', isMobile, 'isIphone client-side', isIphone);
 
 	import './(rootLayout)/styles.css';
 	import GlobalModals from './(rootLayout)/GlobalModals.svelte';
 	import Seo from './(rootLayout)/Seo.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import Footer from './(rootLayout)/Footer.svelte';
-	// let FooterComponent: any; // this component is not 'LazyMount-ed' since LazyMount cannot handle bounded props..yet?
 
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { setInnerWidthViaMatchMedia, runningStandalone, contactLinkClicked } from '$lib/store';
+
 	import {
-		setInnerWidthViaMatchMedia,
-		lessThan768,
-		runningStandalone,
-		contactLinkClicked
-	} from '$lib/store';
-
-	import { disableZoomGestures, isPWA, cookeh } from '$lib/utils';
-	import { FirebaseSignerIner } from './login/FirebaseSignerIner';
-
-	// import { browser } from '$app/environment';
-	// let isiPhone = browser && navigator.userAgent.toLowerCase().includes('iphone');
-	// browser && alert(`isiPhone: ${isiPhone}`);
+		disableZoomGestures,
+		isPWA
+		// cookeh
+	} from '$lib/utils';
+	// import { FirebaseSignerIner } from './login/FirebaseSignerIner';
 
 	onMount(async () => {
+		isMobile && disableZoomGestures();
+		setInnerWidthViaMatchMedia();
+
 		// should add check if someone fired a magicLink .. magicLink still doesnt work cross browser
 
-		if (cookeh.get(`haventLoggedOut`)) FirebaseSignerIner();
+		// This doesnt seem to work as I expect ... since logincard loads the firebase modules as specified in 'FirebaseSignerIner()'. TODO: do cookie based loading of the relevant firebase login modules
+		// cookeh.get(`haventLoggedOut`) && FirebaseSignerIner();
+		// haventLoggedOut && FirebaseSignerIner();
 
-		// initializing the global variable so I don't have to call this function repeatedly
 		$runningStandalone = await isPWA();
-
-		($runningStandalone || $lessThan768) && disableZoomGestures();
-		setInnerWidthViaMatchMedia();
+		// TODO: get 'pwa' info from custom request headers so there is no asynchronous nature due to client-side js dependency
 	});
 </script>
 

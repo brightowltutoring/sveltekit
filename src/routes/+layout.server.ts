@@ -1,11 +1,15 @@
 import { userAgentFromRequestHeaders } from '$lib/utils';
 
 export async function load(event) {
-	const { isIOS } = userAgentFromRequestHeaders(event);
+	const { isIOS, isMobile } = userAgentFromRequestHeaders(event);
+
+	// TODO: may delete
+	const haventLoggedOut = event.cookies.get('haventLoggedOut');
 
 	return {
-		// isMobile,
-		// isIphone,
+		haventLoggedOut,
+		isMobile,
 		isIOS
+		// isIphone,
 	};
 }

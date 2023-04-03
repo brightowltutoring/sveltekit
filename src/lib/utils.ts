@@ -3,8 +3,8 @@ import { onMount, onDestroy } from 'svelte';
 import { scale } from 'svelte/transition';
 import { showLoginModal, showHomeworkModal, navAppClicked } from '$lib/store';
 
-import UAParser from 'ua-parser-js';
 import type { RequestEvent } from '@sveltejs/kit';
+import UAParser from 'ua-parser-js';
 
 // used in 2 different places, so coded here
 export async function postDummyTextFileToGoogleDrive(name: string) {
@@ -26,19 +26,14 @@ export function userAgentFromRequestHeaders(event: RequestEvent) {
 	const { request } = event;
 	const userAgent = String(request.headers.get('user-agent'));
 	const parser = new UAParser(userAgent);
-	// const isMobile = parser.getDevice().type === 'mobile';
-	// const isIphone = parser.getDevice().model?.toLowerCase() === 'iphone';
+	const isMobile = parser.getDevice().type === 'mobile';
 	const isIOS = parser.getOS().name?.toLowerCase() === 'ios';
-
-	// console.log('request', request.headers);
-	// console.log('isMobile server-side', isMobile);
-	// console.log('isIphone', isIphone);
-	// console.log('parser.getDevice()', parser.getOS());
+	// const isIphone = parser.getDevice().model?.toLowerCase() === 'iphone';
 
 	return {
-		// isMobile,
-		// isIphone,
+		isMobile,
 		isIOS
+		// isIphone,
 	};
 }
 

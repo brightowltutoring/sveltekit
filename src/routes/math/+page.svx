@@ -3,7 +3,7 @@
 {/key}
 
 <script>
-    import SixMathEqnAnim from "$lib//old-stuff/SixMathEqnAnim.svelte";
+    import SixMathEqnAnim from "$lib/SixMathEqnAnim.svelte";
     // import Katexer from "$lib/MathJaxer.svelte"
     // import Katexer from "$lib/Katexer.svelte"
     import Kajax from "$lib/Kajax.svelte"

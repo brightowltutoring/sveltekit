@@ -1,24 +1,14 @@
 <script lang="ts">
-	// import TwitterLoginButton from './TwitterLoginButton.svelte';
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
 	import MagicLinkSection from './MagicLinkSection.svelte';
 	import PhoneAuthSection from './PhoneAuthSection.svelte';
-	// import CloseButton from "$lib/CloseButton.svelte";
-
-	// TODO: commented out on dec12, 2022  due to code splitting / dynamic importing
-	// import { app, auth } from "./firebase";
-
-	// import { auth } from "./firebase";
-	// import { onAuthStateChanged, isSignInWithEmailLink } from "firebase/auth";
-
-	// import { browser } from "$app/environment";
 
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { slide } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
 	// isRunningStandalone
-	import { cookeh, clickOutside2 } from '$lib/utils';
+	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
 	import { isLoggedIn, showLoginModal } from '$lib/store';
 
@@ -47,14 +37,11 @@
 	}
 
 	onMount(onMountFirebase);
-	// onMount(async () => {
-	// 	// runningStandalone = await isPWA();
-	// 	onMountFirebase();
-	// });
 
 	async function onMountFirebase() {
 		const { auth } = await import('./firebase');
-		const { onAuthStateChanged, isSignInWithEmailLink } = await import('firebase/auth');
+
+		const { isSignInWithEmailLink } = await import('firebase/auth');
 
 		// Confirm the link is a sign-in with email link.
 
@@ -74,6 +61,9 @@
 				.catch((error) => console.log('signInWithEmailLink:', error));
 		}
 
+		// TODO: this code fires when component mounts, but would rather download firebase modules as needed .. i.e. cookie based logic as I had in layout.svelte
+
+		const { onAuthStateChanged } = await import('firebase/auth');
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				$isLoggedIn = true;
@@ -94,6 +84,7 @@
 				loggedInEmail = '';
 			}
 		});
+
 		// }
 	}
 
@@ -126,6 +117,7 @@
 		let redirectUrlFromLS = localStorage.getItem('redirectUrlFromLS');
 		console.log('redirectUrlFromLS', redirectUrlFromLS);
 
+		// TODO: test this to see how many calls to firebase ... may need to use cookies instead
 		if (redirectUrlFromLS) {
 			redirectLogic(redirectUrlFromLS);
 		} else {
