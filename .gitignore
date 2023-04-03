@@ -1,21 +1,80 @@
+# .DS_Store
+# node_modules
+# /build
+# /.svelte-kit
+# /package
+# .output
+# vite.config.js.timestamp-*
+# vite.config.ts.timestamp-*
+
+# # I guess i cannot gitignore env files, since deployment doesnt work ... stripe public keys yada
+# # !.env.example
+# # .env.*
+# .env
+# # COMMENTED OUT since disallowing stripe public keys in git commit
+
+# /.vscode
+
+# /baas_googleCloudFunctions
+
+
+# /.vercel
+# .vercel
+
+
 .DS_Store
 node_modules
 /build
 /.svelte-kit
 /package
 .output
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
+
 
 # I guess i cannot gitignore env files, since deployment doesnt work ... stripe public keys yada
-# !.env.example
-# .env.*
+!.env.example
+.env.*
 .env
 # COMMENTED OUT since disallowing stripe public keys in git commit
 
 /.vscode
 
+# dec 31,2022: i'm not yet sure if .vercel shoud be gitignored ...
+# /.vercel
+.vercel
+.vercel/output
+
 /baas_googleCloudFunctions
 
+node_modules
+dist
+.vscode
+npm-debug.log
+yarn-error.log
+.nyc_output
+coverage
+coverage.lcov
+*.swp
+*.bak
+*.tgz
+packages/cli/src/util/dev/templates/*.ts
+packages/cli/src/util/constants.ts
+packages/cli/test/**/yarn.lock
+!packages/cli/test/dev/**/yarn.lock
+packages/cli/test/**/node_modules
+packages/cli/test/dev/fixtures/08-hugo/hugo
+packages/cli/test/dev/fixtures/**/dist
+packages/cli/test/dev/fixtures/**/public
+packages/cli/test/dev/fixtures/**/.now
+packages/cli/test/dev/fixtures/**/.vercel
+!packages/cli/test/fixtures/unit/commands/build/monorepo-detection/**/yarn.lock
+packages/cli/test/fixtures/integration
+test/lib/deployment/failed-page.txt
+.DS_Store
+.next
+/.env
+/public
+__pycache__
 .vercel
-/.vercel
+.turbo
+.eslintcache
+turbo-cache-key.json

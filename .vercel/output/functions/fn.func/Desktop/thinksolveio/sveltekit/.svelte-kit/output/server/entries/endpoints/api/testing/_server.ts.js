@@ -1,1 +1,0 @@
-import{p as t}from"../../../../chunks/utils.js";import{j as s}from"../../../../chunks/index.js";const e="https://jsonplaceholder.typicode.com/todos/2";async function m(){const o=await(await fetch(e)).json();return t("dummor"),s(o,{status:201})}export{m as GET};

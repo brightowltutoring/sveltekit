@@ -1,1 +1,0 @@
-const f={default:async({request:a})=>{const e=(await a.formData()).getAll("file");for(let t of e){let o=new FormData;o.append("file",t,t.name),fetch("https://us-central1-thinksolve-app.cloudfunctions.net/postToGoogleDriveGCF/formidable",{method:"POST",body:o})}}};export{f as actions};
