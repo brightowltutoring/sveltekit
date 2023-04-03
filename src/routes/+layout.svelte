@@ -31,9 +31,6 @@
 		// This doesnt seem to work as I expect ... since logincard loads the firebase modules as specified in 'FirebaseSignerIner()'. TODO: do cookie based loading of the relevant firebase login modules
 		// cookeh.get(`haventLoggedOut`) && FirebaseSignerIner();
 		// haventLoggedOut && FirebaseSignerIner();
-
-		$runningStandalone = await isPWA();
-		// TODO: get 'pwa' info from custom request headers so there is no asynchronous nature due to client-side js dependency
 	});
 </script>
 
