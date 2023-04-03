@@ -1,3 +1,4 @@
+/// <reference types="@sveltejs/kit" />
 import { build, files, version } from '$service-worker';
 
 const worker = self as unknown as ServiceWorkerGlobalScope;
@@ -79,25 +80,37 @@ worker.addEventListener('fetch', (event) => {
 	}
 });
 
-// TODO: Intercept HTTP requests by adding a custom 'pwa' request header ... to be used in +layout.server.js
-// worker.addEventListener('fetch', (event: Event) => {
-// 	// Clone the request to avoid modifying the original
-
-// 	const fetchEvent = event as FetchEvent;
-
-// 	const request = fetchEvent.request.clone();
-
-// 	// If the request is coming from a PWA, add the custom header
-// 	if (isPWA()) request.headers.set('X-PWA-Request', 'true');
-
-// 	// Pass the modified request to the fetch() method
-// 	fetchEvent.respondWith(fetch(request));
+// worker.addEventListener('fetch', function (event) {
+// 	event.respondWith(
+// 		fetch(event.request, {
+// 			headers: {
+// 				...event.request.headers,
+// 				// 'X-My-Custom-Header': 'my custom value'
+// 				// 'User-Agent': 'MyAwesomePWA/1.0.0'
+// 				'X-My-PWA-Header': 'MyAwesomePWA/1.0.0'
+// 			}
+// 		})
+// 	);
 // });
 
-// function isPWA(): boolean {
-// 	// Use a type assertion to tell TypeScript that the navigator object is an instance of Navigator
-// 	const nav = worker.navigator as Navigator;
+// worker.addEventListener('fetch', function (event) {
+// 	// attempt 1
+// 	// event.respondWith(
+// 	// 	fetch(event.request, {
+// 	// 		headers: Object.assign({}, event.request.headers, {
+// 	// 			'X-My-PWA-Header': 'MyAwesomePWA/1.0.0'
+// 	// 		})
+// 	// 	})
+// 	// );
 
-// 	// Check whether the standalone property exists on the Navigator interface
-// 	return typeof nav.standalone !== 'undefined' && nav.standalone;
-// }
+// 	// attempt 2
+
+// 	event.respondWith(
+// 		fetch(event.request, {
+// 			headers: new Headers({
+// 				...event.request.headers,
+// 				'X-My-PWA-Header': 'MyAwesomePWA/1.0.0'
+// 			})
+// 		})
+// 	);
+// });

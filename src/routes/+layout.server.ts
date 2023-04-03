@@ -1,6 +1,8 @@
 import { userAgentFromRequestHeaders } from '$lib/utils';
 
 export async function load(event) {
+	// const isPwaFromHeader = event.request.headers.get('User-Agent');
+	// console.log('isPwaFromHeader', isPwaFromHeader);
 	const { isIOS, isMobile } = userAgentFromRequestHeaders(event);
 
 	// TODO: may delete
@@ -10,6 +12,7 @@ export async function load(event) {
 		haventLoggedOut,
 		isMobile,
 		isIOS
+		// isPwaFromHeader
 		// isIphone,
 	};
 }

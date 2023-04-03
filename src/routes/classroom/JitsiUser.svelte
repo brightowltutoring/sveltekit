@@ -6,12 +6,14 @@
 
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { lessThan768, runningStandalone } from '$lib/store';
+	import { lessThan768 } from '$lib/store';
+	import { isPWA } from '$lib/utils';
 
 	async function hangUpBtn() {
 		await api.dispose();
 
-		$runningStandalone ? goto('/pwa-home') : goto('/');
+		(await isPWA()) ? goto('/pwa-home') : goto('/');
+		// $runningStandalone ? goto('/pwa-home') : goto('/');
 	}
 
 	let api: any, par: Array<string>;
@@ -155,8 +157,8 @@
 		<img
 			alt="hangup button"
 			class="absolute p-2 {!par && 'opacity-0'} {$lessThan768
-				? 'top-10 right-0'
-				: 'bottom-5 right-10 '}  w-[50px] rotate-90 rounded-full bg-[#2a1c44]  transition-transform duration-300 content-[url('/phone.svg')] hover:rotate-0 hover:scale-[1.3] active:bg-red-900"
+				? 'right-0 top-10'
+				: 'bottom-5 right-10 '}  w-[50px] rotate-90 rounded-full bg-[#2a1c44] transition-transform duration-300 content-[url('/phone.svg')] hover:rotate-0 hover:scale-[1.3] active:bg-red-900"
 		/>
 	</button>
 </div>

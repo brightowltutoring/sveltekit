@@ -5,6 +5,13 @@
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		%sveltekit.head%
+		<script>
+			if (navigator.userAgent.indexOf('PWA') === -1) {
+				navigator.userAgent += ' PWA';
+				console.log(navigator.userAgent);
+				alert(user.agent);
+			}
+		</script>
 	</head>
 	<body>
 		<div>%sveltekit.body%</div>

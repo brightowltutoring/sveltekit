@@ -12,12 +12,7 @@
 	// bool, btnColor,
 
 	import { clearNavModals } from '$lib/utils';
-	import {
-		showLoginModal,
-		showHomeworkModal,
-		// lessThan768,
-		runningStandalone
-	} from '$lib/store';
+	import { showLoginModal, showHomeworkModal } from '$lib/store';
 	import { page } from '$app/stores';
 
 	// this allows going back and button click matching with route
@@ -53,9 +48,10 @@
 	data-sveltekit-preload-data
 	on:click={handleNavButtonClicks}
 	{href}
-	class=" block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {!$runningStandalone &&
-		btnColorHover} "
+	class="block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {btnColorHover}"
 >
+	<!-- Using the custom 'pwa:' class I now pass in 'hover:bg-red-300 pwa:hover:bg-transparent' for btnColorHover in the parent component which makes '{!$runningStandalone && btnColorHover}' unnecessary ... $runningStandalone boolean had to be defined in store.ts and was set with async javascript in +layout.svelte -->
+
 	<!-- {#if mounted && $runningStandalone} -->
 	<div class="hidden h-[50px] w-[50px] flex-col items-center justify-between pwa:flex">
 		<svelte:component this={icon} bind:navIconClicked />
