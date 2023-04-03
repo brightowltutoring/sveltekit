@@ -6,7 +6,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"bp": "vite build && vite preview",
+		"bp": "vite build && vite preview && rm -rf .vercel",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
