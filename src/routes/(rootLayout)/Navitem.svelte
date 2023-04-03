@@ -37,18 +37,13 @@
 			return;
 		}
 	}
-
-	// NOTE: using custom 'pwa' breakpoint, I don't need to rely on javascript and therefore no flash of content is possible
-
-	// let mounted = false;
-	// onMount(() => (mounted = true));
 </script>
 
 <a
 	data-sveltekit-preload-data
 	on:click={handleNavButtonClicks}
 	{href}
-	class="block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {btnColorHover}"
+	class="block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {btnColorHover} "
 >
 	<!-- Using the custom 'pwa:' class I now pass in 'hover:bg-red-300 pwa:hover:bg-transparent' for btnColorHover in the parent component which makes '{!$runningStandalone && btnColorHover}' unnecessary ... $runningStandalone boolean had to be defined in store.ts and was set with async javascript in +layout.svelte -->
 

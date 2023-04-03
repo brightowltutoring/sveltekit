@@ -13,16 +13,15 @@
 
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { setInnerWidthViaMatchMedia, runningStandalone, contactLinkClicked } from '$lib/store';
+	import { setInnerWidthViaMatchMedia, contactLinkClicked } from '$lib/store';
 
 	import {
-		disableZoomGestures,
-		isPWA
+		disableZoomGestures
 		// cookeh
 	} from '$lib/utils';
 	// import { FirebaseSignerIner } from './login/FirebaseSignerIner';
 
-	onMount(async () => {
+	onMount(() => {
 		isMobile && disableZoomGestures();
 		setInnerWidthViaMatchMedia();
 

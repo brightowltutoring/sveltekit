@@ -5,8 +5,6 @@ export const isDarkMode = writable(false);
 // TODO: added jan 22 when moving function from +layout.svelte to SigninWithEmailLink.ts; may delete
 export const loggedInEmail = writable('');
 
-export const runningStandalone = writable(false);
-
 export const contactLinkClicked = writable(false);
 export const isLoggedIn = writable(false);
 export const lastScrollY = writable(0);

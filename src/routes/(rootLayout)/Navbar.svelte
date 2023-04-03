@@ -142,8 +142,9 @@
 						{icon}
 						{name}
 						bind:routes={$routes}
-						btnColorHover={'hover:bg-red-300 pwa:hover:bg-transparent'}
+						btnColorHover={'notpwa:hover:bg-red-300'}
 					/>
+					<!-- btnColorHover={'hover:bg-red-300 pwa:hover:bg-transparent'} -->
 				</li>
 			{/each}
 

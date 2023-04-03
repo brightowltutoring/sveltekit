@@ -7,7 +7,7 @@
 	import { goto } from '$app/navigation';
 	import { slide } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
-	// isRunningStandalone
+
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
 	import { isLoggedIn, showLoginModal } from '$lib/store';
