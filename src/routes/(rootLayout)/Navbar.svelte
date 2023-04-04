@@ -4,12 +4,7 @@
 
 	import { scale /* fade, fly, slide, blur*/ } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
-	import {
-		debounce,
-		isPWA,
-		clearNavModals
-		/* getOS, clickOutside, clickOutside2  */
-	} from '$lib/utils';
+	import { debounce, clearNavModals } from '$lib/utils';
 	import {
 		isLoggedIn,
 		routes,
@@ -47,7 +42,8 @@
 	let hueRocket = 0;
 	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
 
-	$: if ($isLoggedIn && !isPWA()) {
+	// $: if ($isLoggedIn && !isPWA()) {
+	$: if ($isLoggedIn && (sessionStorage.getItem('isPWA') === 'false' || null)) {
 		hueRocket = $isDarkMode ? 0.75 : 0;
 		scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
 	}

@@ -7,12 +7,14 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { lessThan768 } from '$lib/store';
-	import { isPWA } from '$lib/utils';
 
 	async function hangUpBtn() {
 		await api.dispose();
 
-		(await isPWA()) ? goto('/pwa-home') : goto('/');
+		if (sessionStorage.getItem('isPWA') === 'true') goto('/pwa-home');
+		else goto('/');
+
+		// (await isPWA()) ? goto('/pwa-home') : goto('/');
 		// $runningStandalone ? goto('/pwa-home') : goto('/');
 	}
 
