@@ -1,47 +1,38 @@
 <script lang="ts">
-	export let data;
-	const { isIOS, isMobile } = data;
-
-	import { setContext } from 'svelte';
-	setContext('isIOS', isIOS);
-
 	import './(rootLayout)/styles.css';
-	import GlobalModals from './(rootLayout)/GlobalModals.svelte';
+	import IsPWA from './(rootLayout)/IsPWA.svelte';
 	import Seo from './(rootLayout)/Seo.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import Footer from './(rootLayout)/Footer.svelte';
-
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { setInnerWidthViaMatchMedia, contactLinkClicked } from '$lib/store';
+	import { setContext } from 'svelte';
+	import { debounce, disableZoomGestures } from '$lib/utils';
+	import { setInnerWidthViaMatchMedia, scrollY } from '$lib/store';
 
-	import {
-		disableZoomGestures
-		// cookeh
-	} from '$lib/utils';
-	import IsPWA from './(rootLayout)/IsPWA.svelte';
-	// import { FirebaseSignerIner } from './login/FirebaseSignerIner';
+	export let data;
+	const { isIOS, isMobile } = data;
+	setContext('isIOS', isIOS);
 
 	onMount(() => {
 		isMobile && disableZoomGestures();
 		setInnerWidthViaMatchMedia();
 	});
-	// should add check if someone fired a magicLink .. magicLink still doesnt work cross browser
 
-	// Previously in onMount: this doesnt seem to work as I expect ... since logincard loads the firebase modules as specified in 'FirebaseSignerIner()'. TODO: do cookie based loading of the relevant firebase login modules
-	// cookeh.get(`haventLoggedOut`) && FirebaseSignerIner();
-	// haventLoggedOut && FirebaseSignerIner();
+	function scrollYSetter() {
+		$scrollY = window.scrollY;
+	}
 </script>
 
-<svelte:head>
-	<link rel="manifest" href="/manifest.json" />
-	<script src="https://meet.jit.si/external_api.js" defer></script>
-	<!-- This is placed here — instead of route component — since trying to navigate to '/classroom', say, results in the jitsi function not loading in time. Previously I used a local copy of the jitsi api (js file) with SSR set to false in +page.ts ... which works ... however the page breaks when JS is turned off disallowing <noscript> content -->
-</svelte:head>
+<!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
+<svelte:window on:scroll={debounce(() => scrollYSetter(), 25)} on:contextmenu|preventDefault />
 
 <IsPWA />
 <Seo />
-<GlobalModals />
+<svelte:head>
+	<link rel="manifest" href="/manifest.json" />
+	<script src="https://meet.jit.si/external_api.js" defer></script>
+</svelte:head>
 
 <main class="flex min-h-screen flex-col">
 	<Navbar />
@@ -50,9 +41,7 @@
 		<slot />
 	</div>
 
-	<!-- {#if $page.route?.id !== '/classroom' && $page.route?.id !== '/pwa-home'} -->
-
 	{#if !['/classroom', '/pwa-home'].includes($page.route?.id ?? '')}
-		<Footer bind:contactLinkClicked={$contactLinkClicked} />
+		<Footer />
 	{/if}
 </main>

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import LoginCard from './../login/LoginCard.svelte';
+	import LoginCard from '../login/LoginCard.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Dropzone from '../homework/Dropzone.svelte';
-	// import LazyMount from '$lib/Wrappers/LazyMount.svelte';
 
 	import { scale, fly /* slide, fade, blur*/ } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
@@ -11,10 +10,6 @@
 	import { getContext } from 'svelte';
 	const isIOS: boolean = getContext('isIOS');
 
-	let contactLinkScaling = {
-		duration: 1500,
-		easing: elasticOut
-	};
 	let stepOneScale = {
 		duration: 1300,
 		easing: elasticOut
@@ -33,16 +28,6 @@
 		easing: quintOut
 	};
 </script>
-
-<Modal showModal={$contactLinkClicked} bgTW={'backdrop-blur-3xl'}>
-	<ul
-		in:scale={contactLinkScaling}
-		class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl"
-	>
-		<li>Email:</li>
-		<li class="p-5">thinksolve.io@gmail.com</li>
-	</ul>
-</Modal>
 
 <Modal
 	all
