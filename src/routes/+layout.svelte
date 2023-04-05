@@ -24,15 +24,16 @@
 	}
 </script>
 
-<!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
-<svelte:window on:scroll={debounce(() => scrollYSetter(), 25)} on:contextmenu|preventDefault />
-
-<IsPWA />
-<Seo />
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
 	<script src="https://meet.jit.si/external_api.js" defer></script>
 </svelte:head>
+
+<IsPWA />
+<Seo />
+
+<!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
+<svelte:window on:scroll={debounce(() => scrollYSetter(), 25)} on:contextmenu|preventDefault />
 
 <main class="flex min-h-screen flex-col">
 	<Navbar />

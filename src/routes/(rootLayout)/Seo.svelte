@@ -1,26 +1,26 @@
-<script>
-	import { routes } from '$lib/store';
+<script lang="ts">
+	import { routes2 } from '$lib/store';
 	import { page } from '$app/stores';
 
-	const slashlessRoute = $page.route.id?.slice(1);
+	$: routeId = $page.route.id;
 </script>
 
 <svelte:head>
 	{#if $page.status === 404}
 		<title>Oops 💩</title>
-	{:else if slashlessRoute === ''}
-		<title>{$routes.home.title}</title>
+	{:else if routeId?.slice(1) === ''}
+		<title>{$routes2[0].title}</title>
 
-		{@html $routes.home.meta}
+		{@html $routes2[0].meta}
 	{:else}
-		{#each Object.keys($routes).slice(1) as key}
-			{@const title = $routes[key].title}
+		{#each $routes2 as key}
+			{@const { title, meta, href } = key}
 
-			{#if slashlessRoute?.startsWith(key)}
+			{#if routeId?.includes(href)}
 				<title>{title}</title>
 
-				{#if $routes[key].meta}
-					{@html $routes[key].meta}
+				{#if meta}
+					{@html meta}
 				{/if}
 			{/if}
 		{/each}
