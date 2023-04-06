@@ -16,7 +16,7 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 };
 
 // Taken from 'https://github.com/sveltejs/svelte/issues/7444'
-export const metaTagFixWhenSSR = (async ({ event, resolve }) => {
+export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event, {
 		transformPageChunk: ({ html }) => {
 			return html
@@ -31,6 +31,6 @@ export const metaTagFixWhenSSR = (async ({ event, resolve }) => {
 	});
 
 	return response;
-}) as Handle;
+};
 
 export const handle = sequence(metaTagFixWhenSSR, redirectOldUrls);

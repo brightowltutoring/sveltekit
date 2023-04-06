@@ -1,4 +1,6 @@
 # custom 
+*-old.*
+*-experimental.*
 src/**/*_old.*
 src/**/*-old.*
 src/**/old-*
