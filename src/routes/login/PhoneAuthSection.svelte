@@ -35,8 +35,8 @@
 
 		let clickOrEnterFired = (<MouseEvent>e).type == 'click' || (<KeyboardEvent>e).key == 'Enter';
 
-		console.log('clickOrEnterFired', clickOrEnterFired);
-		console.log('isPhoneNumber', isPhoneNumber);
+		// console.log('clickOrEnterFired', clickOrEnterFired);
+		// console.log('isPhoneNumber', isPhoneNumber);
 
 		if (clickOrEnterFired && phoneFieldValue == '') {
 			emptyPhoneInputAnimated = true;

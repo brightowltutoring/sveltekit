@@ -21,3 +21,10 @@ declare namespace svelteHTML {
 		'on:click_outside'?: (e: CustomEvent) => void;
 	}
 }
+
+// no longer needed since persisting global state with svelte stores
+// declare module globalThis {
+// 	var magicLinkInputVisible: boolean;
+// 	var popUpOnceBoolean: boolean;
+// 	var submitOnce: boolean;
+// }

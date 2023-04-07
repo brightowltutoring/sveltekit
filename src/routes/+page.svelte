@@ -61,12 +61,13 @@
 		<HorizontalScrollReviews class="block sm:hidden" />
 	</section>
 </div>
+s
 
-<style>
+<style lang="postcss">
 	.gradientTextColor {
-		@apply bg-gradient-to-tr from-indigo-600 to-black bg-clip-text text-transparent;
+		@apply bg-gradient-to-tr from-indigo-600 to-black bg-clip-text text-transparent dark:from-red-300 dark:via-white dark:to-white;
 	}
-	:global(html.dark-mode) .gradientTextColor {
+	/* :global(html.dark-mode) .gradientTextColor {
 		@apply from-red-300 via-white to-white;
-	}
+	} */
 </style>

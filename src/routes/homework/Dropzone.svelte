@@ -22,10 +22,10 @@
 	export let brightnessTW = 'brightness-100';
 	let dropzone: any;
 
-	async function hydrateDropzoneDomEls(target: HTMLElement) {
+	async function hydrateDropzoneDomEls(target: Element | HTMLElement) {
 		console.log('drop it like its 🌶️');
 
-		dropzone = new Dropzone(target, {
+		dropzone = new Dropzone(target as HTMLElement, {
 			url: PUBLIC_UPLOAD_ENDPOINT,
 			acceptedFiles: '.heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc'
 		});
@@ -60,15 +60,17 @@
 		});
 	}
 
-	function dropzonePopUpOnce() {
-		// This code fires once since 'globalThis.popUpOnceBoolean' starts out as undefined, then switched to true inside
+	import { popUpOnceBoolean$ } from '$lib/store';
 
-		if (!(globalThis as any).popUpOnceBoolean) {
+	function dropzonePopUpOnce() {
+		// if (!(globalThis as any).popUpOnceBoolean) {
+		if ($popUpOnceBoolean$ === false) {
 			setTimeout(() => {
 				document.querySelector('.dropzone')!.dispatchEvent(new CustomEvent('click'));
 			}, 75);
-			// @ts-ignore
-			globalThis.popUpOnceBoolean = true;
+
+			// globalThis.popUpOnceBoolean = true;
+			$popUpOnceBoolean$ = true;
 		}
 	}
 </script>

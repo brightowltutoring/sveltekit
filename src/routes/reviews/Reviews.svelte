@@ -1,7 +1,5 @@
 <script>
 	import { reviews } from './reviews';
-
-	// @ts-ignore
 	import ReviewCreator from './ReviewCreator.svelte';
 	// import ReviewCreator from './reviewCreator.svx';
 </script>

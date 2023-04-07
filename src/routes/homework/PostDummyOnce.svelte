@@ -11,8 +11,11 @@
 
 	// FUTURE GOAL: use google app script or google drive api to directly delete the files ... haven't been successful in creating an app script to do this since the google cloud function is run by a 'google service account' (one which I created no less) and won't allow automated deletions ...
 
+	import { submitOnce$ } from '$lib/store';
+
 	async function PostDummyOnce() {
-		if (!globalThis.submitOnce) {
+		// if (!globalThis.submitOnce) {
+		if ($submitOnce$ === false) {
 			const { PUBLIC_UPLOAD_ENDPOINT, PUBLIC_GOOGLE_APP_SCRIPT } = await import(
 				'$env/static/public'
 			);
@@ -22,7 +25,8 @@
 			// google is too fast for 1000ms, so using 5000ms
 			setTimeout(() => (iframeSrc = PUBLIC_GOOGLE_APP_SCRIPT), 5000);
 
-			globalThis.submitOnce = true;
+			// globalThis.submitOnce = true;
+			$submitOnce$ = true;
 		}
 	}
 </script>

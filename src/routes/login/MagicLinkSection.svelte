@@ -13,14 +13,15 @@
 	let emailFieldValue: string = '';
 	let isEmail = false;
 
-	// @ts-ignore
-	let magicLinkInputVisible = globalThis.magicLinkInputVisible;
-
 	let emailStatusMessage: HTMLElement;
 
+	// let magicLinkInputVisible = globalThis.magicLinkInputVisible;
+
+	import { magicLinkInputVisible$ } from '$lib/store';
+
 	function signinWithLinkAndStop(e: MouseEvent | KeyboardEvent) {
-		// @ts-ignores
-		magicLinkInputVisible = globalThis.magicLinkInputVisible = true;
+		// magicLinkInputVisible = globalThis.magicLinkInputVisible = true;
+		$magicLinkInputVisible$ = true;
 
 		let clickOrEnterFired = (<MouseEvent>e).type == 'click' || (<KeyboardEvent>e).key == 'Enter';
 
@@ -67,7 +68,6 @@
 	}
 </script>
 
-<!-- bindThis={magicLinkBtn} -->
 <LoginButton
 	on:click={(e) => signinWithLinkAndStop(e)}
 	innerText={'Get Magic Link'}
@@ -76,13 +76,14 @@
 	<IconEmail />
 </LoginButton>
 
-{#if magicLinkInputVisible}
+{#if $magicLinkInputVisible$}
+	<!-- {#if magicLinkInputVisible} -->
 	<input
 		on:keydown={signinWithLinkAndStop}
 		on:paste={() => onInputEmailField(emailFieldValue)}
 		on:keyup={() => onInputEmailField(emailFieldValue)}
 		bind:this={emailField}
-		class="mt-3 w-full p-3 text-center {shortPing} focus:outline-none "
+		class="mt-3 w-full p-3 text-center {shortPing} focus:outline-none"
 		bind:value={emailFieldValue}
 		type="email"
 		placeholder="email"

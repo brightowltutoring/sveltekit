@@ -10,8 +10,7 @@ const config = {
 		adapter: adapter()
 	},
 
-	preprocess: [vitePreprocess(), mdsvex(mdsvexConfig)]
-	// preprocess: [preprocess({ postcss: true }), vitePreprocess(), mdsvex(mdsvexConfig)]
+	preprocess: [/* preprocess({ postcss: true }), */ vitePreprocess(), mdsvex(mdsvexConfig)]
 };
 
 export default config;

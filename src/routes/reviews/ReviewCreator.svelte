@@ -59,7 +59,7 @@
 			<slot />
 		</div>
 
-		<div class="absolute right-0 bottom-0 -my-10 mx-5 py-3 font-bold">
+		<div class="absolute bottom-0 right-0 -my-10 mx-5 py-3 font-bold">
 			{name}
 		</div>
 	</review-card-contents>

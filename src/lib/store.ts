@@ -1,5 +1,11 @@
 import { writable, derived, get } from 'svelte/store';
 
+// alternative to globalThis variables
+export const magicLinkInputVisible$ = writable(false);
+export const popUpOnceBoolean$ = writable(false);
+export const submitOnce$ = writable(false);
+
+// not used as much .. but keeping just in case
 export const isDarkMode = writable(false);
 
 // TODO: added jan 22 when moving function from +layout.svelte to SigninWithEmailLink.ts; may delete

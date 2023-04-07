@@ -126,7 +126,6 @@
 
 			// @ts-ignore
 			// TODO: potential bug
-
 			api = await new JitsiMeetExternalAPI(domain, options);
 
 			// const iframe = api.getIFrame();
