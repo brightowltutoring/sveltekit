@@ -61,7 +61,6 @@
 		<HorizontalScrollReviews class="block sm:hidden" />
 	</section>
 </div>
-s
 
 <style lang="postcss">
 	.gradientTextColor {

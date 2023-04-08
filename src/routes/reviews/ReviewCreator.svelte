@@ -38,6 +38,7 @@
 					onview={(target) => {
 						console.log('💫');
 						target.classList.remove('opacity-0');
+
 						target.src = '/star.webp';
 					}}
 				>

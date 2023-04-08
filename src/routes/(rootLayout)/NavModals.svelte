@@ -59,12 +59,14 @@
 </Modal>
 
 <!-- <Modal body all={true} bind:showModal={$showLoginModal} bgTW={'backdrop-blur-md'}> -->
-<Modal bind:showModal={$showLoginModal} bgTW={'backdrop-blur-md'}>
+
+<Modal showModal={$showLoginModal} bgTW={'backdrop-blur-md'}>
 	<LoginCard />
 </Modal>
 
 <!-- transitionsOff prop declared kills any svelte transitions defined within any slotted components; in modal.svelte a key block conditionally resets the component if transitionsOff is falsy (default behaviour) ...  which is not desired for this dropzone component (want to persist state of uploaded files)  -->
-<Modal transitionsOff bind:showModal={$showHomeworkModal} bgTW={'bg-[rgba(0,0,0,0.1)]'}>
+
+<Modal transitionsOff showModal={$showHomeworkModal} bgTW={'bg-[rgba(0,0,0,0.1)]'}>
 	<Dropzone
 		textSizeTW={'text-6xl'}
 		dimensionsTW={'w-[80vw] h-[85vh]'}

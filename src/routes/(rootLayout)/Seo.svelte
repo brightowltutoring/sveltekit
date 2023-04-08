@@ -1,20 +1,25 @@
 <script lang="ts">
-	import { routes2 } from '$lib/store';
+	import { routes } from '$lib/store';
 	import { page } from '$app/stores';
 
 	$: routeId = $page.route.id;
+
+	let routes$ = Object.values($routes);
 </script>
 
 <svelte:head>
 	{#if $page.status === 404}
 		<title>Oops 💩</title>
-	{:else if routeId?.slice(1) === ''}
-		<title>{$routes2[0].title}</title>
-
-		{@html $routes2[0].meta}
 	{:else}
-		{#each $routes2 as key}
+		{#each routes$ as key, i}
 			{@const { title, meta, href } = key}
+
+			<!--TODO: even with this code I have to separate home route from rest ... why?? -->
+			{#if i === 0 && routeId === '/'}
+				<title>{routes$[0].title}</title>
+
+				{@html routes$[0].meta}
+			{/if}
 
 			{#if routeId?.includes(href)}
 				<title>{title}</title>

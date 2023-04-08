@@ -52,7 +52,7 @@
 <NavModals />
 
 <nav
-	class="fixed bottom-0 z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in pwa:bottom-0 pwa:translate-y-0 {showHideNav} md:top-0 md:justify-between md:px-[7%] md:py-10"
+	class="fixed bottom-0 z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in pwa:bottom-0 pwa:translate-y-0 {showHideNav}  md:top-0 md:justify-between md:px-[7%] md:py-10"
 >
 	<LogoButton />
 
@@ -63,24 +63,24 @@
 			<AppNavButton />
 		</li>
 
-		{#each Object.keys($routes).slice(1, 5) as KEY}
-			{@const { href, name, icon, isCurrent } = $routes[KEY]}
+		{#each Object.values($routes).slice(1, 5) as { href, name, icon, isCurrent }}
 			{@const navIconClicked =
-				(href == '/homework' && $showHomeworkModal) ||
-				(href == '/login' && $showLoginModal) ||
-				isCurrent}
-			{@const loggedInDynamicRocket =
-				KEY == 'login' &&
-				$isLoggedIn &&
-				`transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`}
+				isCurrent ||
+				(href === '/homework' && $showHomeworkModal) ||
+				(href === '/login' && $showLoginModal)}
 
-			<li style={`${loggedInDynamicRocket}`}>
+			{@const loggedInDynamicRocket =
+				href === '/login' && $isLoggedIn
+					? `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`
+					: null}
+
+			<li style={loggedInDynamicRocket}>
 				<Navitem
 					{navIconClicked}
 					{href}
 					{icon}
 					{name}
-					bind:routes={$routes}
+					routes={$routes}
 					btnColorHover={'notpwa:hover:bg-red-300'}
 				/>
 			</li>

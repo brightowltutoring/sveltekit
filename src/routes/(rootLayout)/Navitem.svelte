@@ -7,7 +7,7 @@
 	export let name: string;
 	export let routes: any;
 	export let btnColorHover: string;
-	export let icon: ComponentType;
+	export let icon: ComponentType | undefined;
 	export let navIconClicked = false;
 	// bool, btnColor,
 

@@ -57,28 +57,21 @@ import IconClassroom from '$lib/Icons/NavIcons/IconClassroom.svelte';
 
 import type { ComponentType } from 'svelte';
 
-export interface RouteMeta {
+type RouteData = {
 	name: string;
 	href: string;
 	title: string;
 	isCurrent: boolean;
 	meta?: string;
 	icon?: ComponentType;
-}
+};
 
-export interface Routes {
-	home: RouteMeta;
-	login: RouteMeta;
-	plans: RouteMeta;
-	homework: RouteMeta;
-	classroom: RouteMeta;
-	faq?: RouteMeta;
-	stripe?: RouteMeta;
-	physics?: RouteMeta;
-	math?: RouteMeta;
-}
+type routesType = Record<
+	'home' | 'login' | 'plans' | 'homework' | 'classroom' | 'faq' | 'stripe' | 'physics' | 'math',
+	RouteData
+>;
 
-export const routes = writable<Routes>({
+const routesObj = {
 	home: {
 		name: 'Home',
 		href: '/',
@@ -150,78 +143,29 @@ export const routes = writable<Routes>({
 		title: 'math',
 		isCurrent: false
 	}
-});
+};
 
-// TODO: is this routes2 array better or using creating a map out of routes object .. namely mapping strings to objects??
-export const routes2 = writable<RouteMeta[]>([
-	{
-		name: 'Home',
-		href: '/',
-		title: 'Thinksolve.io 💫',
-		isCurrent: false,
-		meta: `<meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
-    <meta property="og:url" content="https://thinksolve.io/">`,
-		icon: IconHome
-	},
-	{
-		name: 'Login',
-		href: '/login',
-		title: 'Login 🚀',
-		isCurrent: false,
-		meta: `<meta name="description" content="Log in page."/>
-		<meta property="og:url" content="https://thinksolve.io/login">`,
-		icon: IconLogin
-	},
-	{
-		name: 'Plans',
-		href: '/plans',
-		title: 'Plans 💡',
-		isCurrent: false,
-		meta: `<meta name="description" content="Choose between Classic or Mock session; book a time and date; pay now or later."/>
-    <meta property="og:url" content="https://thinksolve.io/plans">`,
-		icon: IconPlans
-	},
-	{
-		name: 'Homework',
-		href: '/homework',
-		title: 'Homework 📚',
-		isCurrent: false,
-		meta: `<meta name="description" content="Click and submit your homework here; we accept all relevant file types for homework submission."/>
-    <meta property="og:url" content="https://thinksolve.io/homework">`,
-		icon: IconHomework
-	},
-	{
-		name: 'Classroom',
-		href: '/classroom',
-		title: 'Classroom 🍎',
-		isCurrent: false,
-		meta: `<meta name="description" content="You are on the classroom page! Hit join to enter, our scheduled session will start shortly. "/>
-    <meta property="og:url" content="https://thinksolve.io/classroom">`,
-		icon: IconClassroom
-	},
-	{
-		name: 'FAQ',
-		href: '/faq',
-		title: 'FAQ 🙋‍♀️',
-		isCurrent: false,
-		meta: `<meta og:url="https://thinksolve.io/faq" />`
-	},
-	{
-		name: 'Stripe',
-		href: '/stripe',
-		title: 'Stripe 💰',
-		isCurrent: false
-	},
-	{
-		name: 'physics',
-		href: '/physics',
-		title: 'physics 🚀',
-		isCurrent: false
-	},
-	{
-		name: 'math',
-		href: '/math',
-		title: 'math',
-		isCurrent: false
-	}
-]);
+export const routes = writable<routesType>(routesObj);
+
+// Experimental and alternate code below
+
+// testing an array way to deal with the routes object
+export const routes2 = writable<RouteData[]>(Object.values(routesObj));
+
+// testing an map way to deal with the first key-value level of routes object
+type routesMapType = Map<string, RouteData>;
+// type routesMapType = Map<'home' | 'login' | 'plans' | 'homework' | 'classroom' | 'faq' | 'stripe' | 'physics' | 'math', RouteData>;
+
+export const routesMap = writable<routesMapType>(new Map(Object.entries(routesObj)));
+
+// export interface routesType {
+// 	home: RouteData;
+// 	login: RouteData;
+// 	plans: RouteData;
+// 	homework: RouteData;
+// 	classroom: RouteData;
+// 	faq?: RouteData;
+// 	stripe?: RouteData;
+// 	physics?: RouteData;
+// 	math?: RouteData;
+// }

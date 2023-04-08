@@ -13,20 +13,20 @@
 
 	import { submitOnce$ } from '$lib/store';
 
+	// PostDummyOnce();
+
 	async function PostDummyOnce() {
 		// if (!globalThis.submitOnce) {
-		if ($submitOnce$ === false) {
-			const { PUBLIC_UPLOAD_ENDPOINT, PUBLIC_GOOGLE_APP_SCRIPT } = await import(
-				'$env/static/public'
-			);
+		if ($showHomeworkModal === true && $submitOnce$ === false) {
+			// globalThis.submitOnce = true;
+			$submitOnce$ = true;
 
 			postDummyTextFileToGoogleDrive('foo');
 
+			const { PUBLIC_GOOGLE_APP_SCRIPT } = await import('$env/static/public');
+
 			// google is too fast for 1000ms, so using 5000ms
 			setTimeout(() => (iframeSrc = PUBLIC_GOOGLE_APP_SCRIPT), 5000);
-
-			// globalThis.submitOnce = true;
-			$submitOnce$ = true;
 		}
 	}
 </script>
