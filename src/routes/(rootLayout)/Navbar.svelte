@@ -41,7 +41,7 @@
 	let hueRocket = 0;
 	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
 
-	$: if ($isLoggedIn && (sessionStorage.getItem('isPWA') === 'false' || null)) {
+	$: if ($isLoggedIn && (sessionStorage.getItem('isPwaMode') === 'false' || null)) {
 		hueRocket = $isDarkMode ? 0.75 : 0;
 		scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
 	}
