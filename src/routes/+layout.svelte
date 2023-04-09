@@ -21,6 +21,7 @@
 
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
+		// console.log('$scrollY', $scrollY);
 	}
 </script>
 
@@ -33,7 +34,7 @@
 <Seo />
 
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
-<svelte:window on:scroll={debounce(() => scrollYSetter(), 25)} on:contextmenu|preventDefault />
+<svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault />
 
 <main class="flex min-h-screen flex-col">
 	<Navbar />

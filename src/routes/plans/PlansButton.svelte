@@ -1,10 +1,6 @@
 <script lang="ts">
 	import Modal from '$lib/Wrappers/Modal.svelte';
 
-	// export let buttonColor: string;
-
-	// havent figured how to type this
-
 	interface payButton {
 		resetter: boolean;
 		url: string;
@@ -19,8 +15,6 @@
 	let showMe = false;
 	let src = '';
 	let changeOpacityTo100 = '';
-
-	// $: showMe && setTimeout(() => (changeOpacityTo100 = 'opacity-100 '), 25);
 
 	function handlePlansModal(e: MouseEvent | FocusEvent, BUTTON_URL: string) {
 		src = BUTTON_URL;

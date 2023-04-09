@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { routes, routes2 } from '$lib/store';
+	import { routes /* routes2  */ } from '$lib/store';
 	import { page } from '$app/stores';
 
+	let routes$ = Object.values($routes);
 	$: routeId = $page.route.id;
-
-	// let routes$ = Object.values($routes);
 </script>
 
-<!-- <svelte:head>
+<!-- new way: -->
+<svelte:head>
 	{#if $page.status === 404}
 		<title>Oops 💩</title>
 	{:else}
@@ -15,9 +15,9 @@
 			{@const { title, meta, href } = key}
 
 			{#if i === 0 && routeId === '/'}
-				<title>{routes$[0].title}</title>
+				<title>{routes$[i].title}</title>
 
-				{@html routes$[0].meta}
+				{@html routes$[i].meta}
 			{/if}
 
 			{#if routeId?.includes(href)}
@@ -29,9 +29,10 @@
 			{/if}
 		{/each}
 	{/if}
-</svelte:head> -->
+</svelte:head>
 
-<svelte:head>
+<!-- old way: -->
+<!-- <svelte:head>
 	{#if $page.status === 404}
 		<title>Oops 💩</title>
 	{:else if routeId?.slice(1) === ''}
@@ -51,4 +52,4 @@
 			{/if}
 		{/each}
 	{/if}
-</svelte:head>
+</svelte:head> -->
