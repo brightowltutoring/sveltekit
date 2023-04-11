@@ -1,3 +1,5 @@
+export const prerender = true;
+
 import { userAgentFromRequestHeaders, isPwaFromCookieOrUrl } from '$lib/utils';
 
 export async function load(event) {

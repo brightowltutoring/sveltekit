@@ -3,6 +3,8 @@
 // }
 
 // import { submitHomework } from './submitHomework';
+export const prerender = false;
+
 export const actions = {
 	// default: (event) => submitHomework(event)
 	default: async ({ request }) => {
