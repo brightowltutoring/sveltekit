@@ -20,6 +20,19 @@ export async function postDummyTextFileToGoogleDrive(name: string) {
 	});
 }
 
+export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent) {
+	let isPWA = false;
+	const cookieIsPWA = cookies.get('isPWA');
+
+	if (cookieIsPWA !== undefined) {
+		isPWA = cookieIsPWA === 'true';
+	} else {
+		isPWA = url.endsWith('/pwa-home/') || url.endsWith('/pwa-home');
+	}
+
+	return { isPWA };
+}
+
 // client-side navigator.userAgent results in flash of content .. this is better
 export function userAgentFromRequestHeaders(event: RequestEvent) {
 	const { request } = event;
@@ -55,16 +68,25 @@ export async function disableScrollingOnPage(pathname: string) {
 	onDestroy(() => browser && (document.body.style.overflow = 'auto'));
 }
 
-//  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use
+export function setIsPwaCookie() {
+	const name = 'isPWA';
+	if (cookeh.get(name)) return;
 
-// weird how I recreated a simplified version of sveltekit's cookie api .. lol ...but that is intended to work server side??
+	const isPWA = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+	cookeh.set(name, isPWA, 60 * 60 * 24 * 30);
+}
+
+//  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use. Might add serializer code from npm cookie inside my set method.
 export const cookeh = {
 	// found out hard way that some browser don't support special characters for 'name' ... so now sticking to regular letters (i.e. $isLoggedIn is not allowed as a string)
 	set: function (name: string, value: string | boolean, seconds = 60 * 60 * 24) {
 		return (document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None; Secure`);
 	},
 	get: function (name: string) {
-		return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
+		// return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
+
+		const match = document.cookie.match(`${name}=(.*?)(;|$)`);
+		return match ? decodeURIComponent(match[1]) : '';
 	},
 
 	eat: function (name: string) {

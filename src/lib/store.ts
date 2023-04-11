@@ -66,7 +66,7 @@ type RouteData = {
 	icon?: ComponentType;
 };
 
-type routesType = Record<
+export type routesType = Record<
 	'home' | 'login' | 'plans' | 'homework' | 'classroom' | 'faq' | 'stripe' | 'physics' | 'math',
 	RouteData
 >;

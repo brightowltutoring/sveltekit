@@ -79,38 +79,3 @@ worker.addEventListener('fetch', (event) => {
 		);
 	}
 });
-
-// worker.addEventListener('fetch', function (event) {
-// 	event.respondWith(
-// 		fetch(event.request, {
-// 			headers: {
-// 				...event.request.headers,
-// 				// 'X-My-Custom-Header': 'my custom value'
-// 				// 'User-Agent': 'MyAwesomePWA/1.0.0'
-// 				'X-My-PWA-Header': 'MyAwesomePWA/1.0.0'
-// 			}
-// 		})
-// 	);
-// });
-
-// worker.addEventListener('fetch', function (event) {
-// 	// attempt 1
-// 	// event.respondWith(
-// 	// 	fetch(event.request, {
-// 	// 		headers: Object.assign({}, event.request.headers, {
-// 	// 			'X-My-PWA-Header': 'MyAwesomePWA/1.0.0'
-// 	// 		})
-// 	// 	})
-// 	// );
-
-// 	// attempt 2
-
-// 	event.respondWith(
-// 		fetch(event.request, {
-// 			headers: new Headers({
-// 				...event.request.headers,
-// 				'X-My-PWA-Header': 'MyAwesomePWA/1.0.0'
-// 			})
-// 		})
-// 	);
-// });

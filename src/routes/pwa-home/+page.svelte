@@ -1,10 +1,12 @@
 <script>
 	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { disableScrollingOnPage } from '$lib/utils';
 	disableScrollingOnPage($page.url.pathname);
+
+	// console.log(`getContext('isPWA')`, getContext('isPWA'), typeof getContext('isPWA'));
 
 	let ready = false;
 	onMount(() => (ready = true));

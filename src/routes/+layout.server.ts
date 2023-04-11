@@ -1,9 +1,8 @@
-import { userAgentFromRequestHeaders } from '$lib/utils';
+import { userAgentFromRequestHeaders, isPwaFromCookieOrUrl } from '$lib/utils';
 
 export async function load(event) {
-	// set in head script tag in <PWA/>
-	// event.setHeaders({})
 	const { isIOS, isMobile } = userAgentFromRequestHeaders(event);
+	const { isPWA } = isPwaFromCookieOrUrl(event);
 
 	// TODO: may delete
 	const haventLoggedOut = event.cookies.get('haventLoggedOut');
@@ -11,7 +10,7 @@ export async function load(event) {
 	return {
 		haventLoggedOut,
 		isMobile,
-		isIOS
-		// isPWA
+		isIOS,
+		isPWA
 	};
 }

@@ -1,15 +1,14 @@
-<!-- TODO: fix types for: routes, icon -->
 <script lang="ts">
 	// import InView from "$lib/Wrappers/InView.svelte";
 	import type { ComponentType } from 'svelte';
+	import type { routesType } from '$lib/store';
 
 	export let href: string;
 	export let name: string;
-	export let routes: any;
+	export let routes: routesType | any;
 	export let btnColorHover: string;
 	export let icon: ComponentType | undefined;
 	export let navIconClicked = false;
-	// bool, btnColor,
 
 	import { clearNavModals } from '$lib/utils';
 	import { showLoginModal, showHomeworkModal } from '$lib/store';
@@ -17,6 +16,7 @@
 
 	// this allows going back and button click matching with route
 	// could've done this in if/else but the boolean nature here made it unnecessary
+
 	$: for (let key in routes) {
 		routes[key].isCurrent = routes[key].href === $page.url.pathname;
 	}

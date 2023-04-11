@@ -1,20 +1,23 @@
 <script lang="ts">
 	import './(rootLayout)/styles.css';
-	import IsPWA from './(rootLayout)/IsPWA.svelte';
+	// import IsPWA from './(rootLayout)/IsPWA.svelte';
 	import Seo from './(rootLayout)/Seo.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import Footer from './(rootLayout)/Footer.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { setContext } from 'svelte';
-	import { debounce, disableZoomGestures } from '$lib/utils';
+	import { debounce, disableZoomGestures, setIsPwaCookie } from '$lib/utils';
 	import { setInnerWidthViaMatchMedia, scrollY } from '$lib/store';
 
 	export let data;
-	const { isIOS, isMobile } = data;
+	const { isIOS, isMobile, isPWA } = data;
 	setContext('isIOS', isIOS);
+	setContext('isPWA', isPWA);
 
 	onMount(() => {
+		setIsPwaCookie();
+
 		isMobile && disableZoomGestures();
 		setInnerWidthViaMatchMedia();
 	});
@@ -30,7 +33,7 @@
 	<script src="https://meet.jit.si/external_api.js" defer></script>
 </svelte:head>
 
-<IsPWA />
+<!-- <IsPWA /> -->
 <Seo />
 
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
