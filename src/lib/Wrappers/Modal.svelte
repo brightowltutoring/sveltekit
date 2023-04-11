@@ -13,12 +13,17 @@
 	let container: HTMLElement;
 
 	// This is mainly a fix for the custom calendly iframe modal (in PlansButton.svelte) .. i.e. without appending the modal to the document body then the modal inherits strange padding and starts glitching
-	body && onMount(() => document.body.appendChild(container));
-	// body && onDestroy(() => container.remove());
+
+	if (body) {
+		onMount(() => document.body.appendChild(container));
+		onDestroy(() => container?.remove());
+	}
 
 	// Returns ability to close modal by clicking the entire container WITH content. So far only used when clicking the contact link in the footer and closing the fullscreen modal
-	all && onMount(() => container.addEventListener('click', closeModal));
-	all && onDestroy(() => container?.removeEventListener('click', closeModal));
+	if (all) {
+		onMount(() => container.addEventListener('click', closeModal));
+		onDestroy(() => container?.removeEventListener('click', closeModal));
+	}
 
 	function closeModal() {
 		showModal = false;

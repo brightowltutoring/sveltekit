@@ -1,4 +1,11 @@
 <script lang="ts">
+	interface payButton {
+		resetter: boolean;
+		url: string;
+		opacityTW: string;
+		text: string;
+	}
+
 	import { scale } from 'svelte/transition';
 	import PlansButton from './PlansButton.svelte';
 
@@ -12,7 +19,7 @@
 	export let buttonColor: string;
 	// export let btnColorHover = '';
 
-	const payButtons = [
+	const payButtons: payButton[] = [
 		{
 			resetter: false,
 			url: payNowUrl,

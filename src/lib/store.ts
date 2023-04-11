@@ -64,6 +64,7 @@ type RouteData = {
 	isCurrent: boolean;
 	meta?: string;
 	icon?: ComponentType;
+	modal?: boolean;
 };
 
 export type routesType = Record<
