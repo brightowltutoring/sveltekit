@@ -61,7 +61,7 @@ export async function clearNavModals() {
 export async function disableScrollingOnPage(pathname: string) {
 	onMount(() => {
 		// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
-		if (pathname === '/classroom' || '/pwa') {
+		if (pathname === '/classroom' || '/pwa-home') {
 			document.body.style.overflow = 'hidden';
 		}
 	});
