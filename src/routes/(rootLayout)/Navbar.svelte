@@ -53,14 +53,14 @@
 <NavModals />
 
 <nav
-	class="fixed bottom-0 z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in pwa:bottom-0 pwa:translate-y-0 {showHideNav}  md:top-0 md:justify-between md:px-[7%] md:py-10"
+	class="fixed bottom-0 z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in pwa:bottom-0 pwa:translate-y-0 {showHideNav}  md:top-0 md:justify-between md:px-[7%] md:py-10 pwa:h-[80px]"
 >
 	<LogoButton />
 
 	<ul
 		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1"
 	>
-		<li class="hidden {isIOS && 'block pwa:hidden'}">
+		<li class={isIOS ? 'block pwa:hidden' : 'hidden'}>
 			<AppNavButton />
 		</li>
 

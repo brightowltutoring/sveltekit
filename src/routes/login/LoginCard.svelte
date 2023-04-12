@@ -194,7 +194,6 @@
 </main>
 
 <style lang="postcss">
-	/* <style> */
 	login-card,
 	logout-card {
 		@apply relative mx-auto block w-[90vw] rounded-2xl bg-[#f2f7fa] px-5 py-10 font-Poppins text-xl shadow-md duration-300 hover:scale-[1.01] hover:rounded-3xl dark:bg-[#262333] sm:w-[500px] sm:p-10;
