@@ -40,9 +40,8 @@
 </script>
 
 <a
-	data-sveltekit-preload-data
-	on:click={handleNavButtonClicks}
 	{href}
+	on:click={handleNavButtonClicks}
 	class="block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {btnColorHover} "
 >
 	<!-- Using the custom 'pwa:' class I now pass in 'hover:bg-red-300 pwa:hover:bg-transparent' for btnColorHover in the parent component which makes '{!$runningStandalone && btnColorHover}' unnecessary ... $runningStandalone boolean had to be defined in store.ts and was set with async javascript in +layout.svelte -->

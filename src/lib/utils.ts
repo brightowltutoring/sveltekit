@@ -27,10 +27,11 @@ export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent
 	if (cookieIsPWA !== undefined) {
 		isPWA = cookieIsPWA === 'true';
 	} else {
-		isPWA = url.endsWith('/pwa-home/') || url.endsWith('/pwa-home');
+		// isPWA = url.startsWith('/pwa/') || url === '/pwa';
+		isPWA = url.includes('pwa-home');
 	}
 
-	return { isPWA };
+	return { isPWA /*  url: String(url)  */ };
 }
 
 // client-side navigator.userAgent results in flash of content .. this is better
@@ -60,7 +61,7 @@ export async function clearNavModals() {
 export async function disableScrollingOnPage(pathname: string) {
 	onMount(() => {
 		// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
-		if (pathname === '/classroom' || '/pwa-home') {
+		if (pathname === '/classroom' || '/pwa') {
 			document.body.style.overflow = 'hidden';
 		}
 	});
@@ -70,6 +71,7 @@ export async function disableScrollingOnPage(pathname: string) {
 
 export function setIsPwaCookie() {
 	const name = 'isPWA';
+	// cookeh.eat(name);
 	if (cookeh.get(name)) return;
 
 	const isPWA = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;

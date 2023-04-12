@@ -1,6 +1,5 @@
 <script lang="ts">
 	import './(rootLayout)/styles.css';
-	// import IsPWA from './(rootLayout)/IsPWA.svelte';
 	import Seo from './(rootLayout)/Seo.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import Footer from './(rootLayout)/Footer.svelte';
@@ -11,11 +10,13 @@
 	import { setInnerWidthViaMatchMedia, scrollY } from '$lib/store';
 
 	export let data;
-	const { isIOS, isMobile, isPWA } = data;
+	const { isIOS, isMobile, isPWA /* url */ } = data;
+
 	setContext('isIOS', isIOS);
 	setContext('isPWA', isPWA);
 
 	onMount(() => {
+		// alert(`url: ${url}`);
 		setIsPwaCookie();
 
 		isMobile && disableZoomGestures();
@@ -46,7 +47,7 @@
 		<slot />
 	</div>
 
-	{#if !['/classroom', '/pwa-home'].includes($page.route?.id ?? '')}
+	{#if !['/classroom', '/pwa'].includes($page.route?.id ?? '')}
 		<Footer />
 	{/if}
 </main>

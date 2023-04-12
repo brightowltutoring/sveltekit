@@ -56,7 +56,8 @@
 		<summary class="highlight"> How are we screen-sharing? Zoom? </summary>
 
 		Nope, our sessions happen on-site
-		<a data-sveltekit-preload-data href="/classroom"> in the classroom</a>.
+
+		<a href="/classroom"> in the classroom</a>.
 	</details>
 
 	<details>
@@ -98,8 +99,7 @@
 	<details>
 		<summary> How do I pay? </summary>
 		<p>
-			On the <a data-sveltekit-preload-data href="/plans">plans page</a> you can either "pay now" or
-			"pay later", per service.
+			On the <a href="/plans">plans page</a> you can either "pay now" or "pay later", per service.
 		</p>
 		<p>
 			After booking details have been confirmed the "pay now" option will redirect you to a checkout
@@ -135,10 +135,10 @@
 	<details>
 		<summary> How are mock tests administered? </summary>
 		<p>
-			After booking a "Mock" session on <a data-sveltekit-preload-data href="/plans">plans</a>, the
-			student attends a live session where a prepared examination — in the form of a Google Forms
-			link — will be shared at the beginning of the session. The topics are chosen based on input
-			during booking, as well as prior discussion with the student.
+			After booking a "Mock" session on <a href="/plans">plans</a>, the student attends a live
+			session where a prepared examination — in the form of a Google Forms link — will be shared at
+			the beginning of the session. The topics are chosen based on input during booking, as well as
+			prior discussion with the student.
 		</p>
 		<p>
 			<span class="font-Poppins font-bold">In regards to completed questions only:</span> answers are

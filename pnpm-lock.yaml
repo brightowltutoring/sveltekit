@@ -6,13 +6,13 @@ dependencies:
     version: 1.52.1
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
-    version: 2.0.0(@sveltejs/kit@1.15.0)
+    version: 2.0.0(@sveltejs/kit@1.15.4)
   '@sveltejs/adapter-cloudflare':
     specifier: ^2.2.0
-    version: 2.2.0(@sveltejs/kit@1.15.0)
+    version: 2.2.0(@sveltejs/kit@1.15.4)
   '@sveltejs/adapter-vercel':
     specifier: ^2.4.1
-    version: 2.4.1(@sveltejs/kit@1.15.0)
+    version: 2.4.1(@sveltejs/kit@1.15.4)
   dropzone:
     specifier: 6.0.0-beta.2
     version: 6.0.0-beta.2
@@ -43,8 +43,8 @@ dependencies:
 
 devDependencies:
   '@sveltejs/kit':
-    specifier: 1.15.0
-    version: 1.15.0(svelte@3.58.0)(vite@4.2.1)
+    specifier: 1.15.4
+    version: 1.15.4(svelte@3.58.0)(vite@4.2.1)
   '@tailwindcss/typography':
     specifier: ^0.5.9
     version: 0.5.9(tailwindcss@3.3.1)
@@ -1151,32 +1151,32 @@ packages:
     resolution: {integrity: sha512-fza40OPSpGQlFxc5TZWiYC/6Lk89Sep1fLuv9ss33YS6lCAF8UZbfA1E6W+lwO4c7WRKZIZumHIEbPJfP/O9uw==}
     dev: false
 
-  /@sveltejs/adapter-auto@2.0.0(@sveltejs/kit@1.15.0):
+  /@sveltejs/adapter-auto@2.0.0(@sveltejs/kit@1.15.4):
     resolution: {integrity: sha512-b+gkHFZgD771kgV3aO4avHFd7y1zhmMYy9i6xOK7m/rwmwaRO8gnF5zBc0Rgca80B2PMU1bKNxyBTHA14OzUAQ==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0
     dependencies:
-      '@sveltejs/kit': 1.15.0(svelte@3.58.0)(vite@4.2.1)
+      '@sveltejs/kit': 1.15.4(svelte@3.58.0)(vite@4.2.1)
       import-meta-resolve: 2.2.2
     dev: false
 
-  /@sveltejs/adapter-cloudflare@2.2.0(@sveltejs/kit@1.15.0):
+  /@sveltejs/adapter-cloudflare@2.2.0(@sveltejs/kit@1.15.4):
     resolution: {integrity: sha512-B3GQtdPBLHG1eTjOUCjTOqlkTEuYbeSFFw984sEclWxNnLgj3dO6DY8pRTVyrltwNtKRG/7W+ltPVzcbcn30Dg==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0
     dependencies:
       '@cloudflare/workers-types': 4.20230404.0
-      '@sveltejs/kit': 1.15.0(svelte@3.58.0)(vite@4.2.1)
+      '@sveltejs/kit': 1.15.4(svelte@3.58.0)(vite@4.2.1)
       esbuild: 0.16.17
       worktop: 0.8.0-next.14
     dev: false
 
-  /@sveltejs/adapter-vercel@2.4.1(@sveltejs/kit@1.15.0):
+  /@sveltejs/adapter-vercel@2.4.1(@sveltejs/kit@1.15.4):
     resolution: {integrity: sha512-7YOHBq8onxqD5ZshQhveuSzJg9ZOicKoNZQtOnAj++0MJmPElxQ5Mjqp6aQfIhHAHl8tn5UbacCpvR39mPejgw==}
     peerDependencies:
       '@sveltejs/kit': ^1.5.0
     dependencies:
-      '@sveltejs/kit': 1.15.0(svelte@3.58.0)(vite@4.2.1)
+      '@sveltejs/kit': 1.15.4(svelte@3.58.0)(vite@4.2.1)
       '@vercel/nft': 0.22.6
       esbuild: 0.16.17
     transitivePeerDependencies:
@@ -1184,8 +1184,8 @@ packages:
       - supports-color
     dev: false
 
-  /@sveltejs/kit@1.15.0(svelte@3.58.0)(vite@4.2.1):
-    resolution: {integrity: sha512-fvDsW9msxWjDU/j9wwLlxEZ6cpXQYcmcQHq7neJMqibMEl39gI1ztVymGnYqM8KLqZXwNmhKtLu8EPheukKtXQ==}
+  /@sveltejs/kit@1.15.4(svelte@3.58.0)(vite@4.2.1):
+    resolution: {integrity: sha512-m+Tid9nbtFawmiu85lDlal0AQ7UeuV48UsuKMe06QLr3ntMQSUzIPqyswNRZqFrar6NhVTUXQ0aO61M3U4MWpQ==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
@@ -1206,7 +1206,7 @@ packages:
       sirv: 2.0.2
       svelte: 3.58.0
       tiny-glob: 0.2.9
-      undici: 5.21.0
+      undici: 5.20.0
       vite: 4.2.1
     transitivePeerDependencies:
       - supports-color
@@ -3251,8 +3251,8 @@ packages:
     resolution: {integrity: sha512-fKnGuqmTBnIE+/KXSzCn4db8RTigUzw1AN0DmdU6hJovUTbYJKyqj+8Mt1c4VfRDnOVJnENmfYkIPZ946UrSAA==}
     dev: false
 
-  /undici@5.21.0:
-    resolution: {integrity: sha512-HOjK8l6a57b2ZGXOcUsI5NLfoTrfmbOl90ixJDl0AEFG4wgHNDQxtZy15/ZQp7HhjkpaGlp/eneMgtsu1dIlUA==}
+  /undici@5.20.0:
+    resolution: {integrity: sha512-J3j60dYzuo6Eevbawwp1sdg16k5Tf768bxYK4TUJRH7cBM4kFCbf3mOnM/0E3vQYXvpxITbbWmBafaDbxLDz3g==}
     engines: {node: '>=12.18'}
     dependencies:
       busboy: 1.6.0

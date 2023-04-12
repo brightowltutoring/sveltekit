@@ -21,8 +21,3 @@
 		<PlansCard {inScale} {buttonColor} {payNowUrl} {payLaterUrl} {cardText} {cardTitle} />
 	{/each}
 </plans-section>
-
-<!-- <PlansCard {buttonColor} {payNowUrl} {payLaterUrl}>
-	<span slot="cardTitle"> {cardTitle} </span>
-	<span slot="cardText"> {cardText} </span>
-</PlansCard>  -->
