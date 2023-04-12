@@ -16,10 +16,8 @@
 	setContext('isPWA', isPWA);
 
 	onMount(() => {
-		// alert(`url: ${url}`);
+		if (isMobile) disableZoomGestures();
 		setIsPwaCookie();
-
-		isMobile && disableZoomGestures();
 		setInnerWidthViaMatchMedia();
 	});
 
