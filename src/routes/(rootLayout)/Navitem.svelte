@@ -1,5 +1,6 @@
 <script lang="ts">
 	// import InView from "$lib/Wrappers/InView.svelte";
+
 	import type { ComponentType } from 'svelte';
 	import type { routesType } from '$lib/store';
 
@@ -20,7 +21,6 @@
 	$: for (let key in routes) {
 		routes[key].isCurrent = routes[key].href === $page.url.pathname;
 	}
-
 	function handleNavButtonClicks(e: MouseEvent) {
 		// resets all modals (so modals don't continuously pile up)
 		clearNavModals();
@@ -49,7 +49,7 @@
 
 	<!-- {#if mounted && $runningStandalone} -->
 	<div class="hidden h-[50px] w-[50px] flex-col items-center justify-between pwa:flex">
-		<svelte:component this={icon} bind:navIconClicked />
+		<svelte:component this={icon} {navIconClicked} />
 		<span class="text-center text-xs">{name}</span>
 	</div>
 	<!-- {:else} -->

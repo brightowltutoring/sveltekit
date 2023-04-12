@@ -19,7 +19,6 @@
 	import AppNavButton from './AppNavButton.svelte';
 
 	const isIOS = getContext('isIOS');
-	const hideIfNotIOS = !isIOS && 'hidden'; // PWA download popup shows on android already
 
 	let showHideNav = '';
 
@@ -61,10 +60,12 @@
 	<ul
 		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1"
 	>
-		<li class="pwa:hidden {hideIfNotIOS}">
+		<li class="hidden {isIOS && 'block pwa:hidden'}">
 			<AppNavButton />
 		</li>
 
+		<!-- {#each Object.keys($routes).slice(1, 5) as key}
+			{@const { href, name, icon, isCurrent } = $routes[key]} -->
 		{#each Object.values($routes).slice(1, 5) as { href, name, icon, isCurrent }}
 			{@const navIconClicked =
 				isCurrent ||
@@ -82,8 +83,8 @@
 					{href}
 					{icon}
 					{name}
-					btnColorHover={'notpwa:hover:bg-red-300'}
 					bind:routes={$routes}
+					btnColorHover={'notpwa:hover:bg-red-300'}
 				/>
 				<!-- without this bind PWA svg's dont work! -->
 			</li>

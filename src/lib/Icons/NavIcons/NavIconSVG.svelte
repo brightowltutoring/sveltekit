@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let navIconClicked: boolean;
+	export let navIconClicked = false;
 	export let fillColor = '!fill-rose-600 dark:!fill-blue-600';
 	export let size: number;
 	export let height = size;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NavIconSVG from './NavIconSVG.svelte';
-	export let navIconClicked: boolean;
+	export let navIconClicked = false;
 	let size = 489.2;
 </script>
 
