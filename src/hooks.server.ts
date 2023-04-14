@@ -3,8 +3,8 @@ import { sequence } from '@sveltejs/kit/hooks';
 
 export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	const urlRedirects = {
-		screenshare: 'classroom'
-		// 'pwa-home': 'pwa'
+		screenshare: 'classroom',
+		'pwa-home': 'pwa'
 	};
 
 	for (const [key, value] of Object.entries(urlRedirects)) {

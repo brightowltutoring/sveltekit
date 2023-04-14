@@ -28,7 +28,8 @@ export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent
 		isPWA = cookieIsPWA === 'true';
 	} else {
 		// isPWA = url.startsWith('/pwa/') || url === '/pwa';
-		isPWA = url.includes('pwa-home');
+		// isPWA = url.includes('pwa-home');
+		isPWA = url.includes('pwa');
 	}
 
 	return { isPWA /*  url: String(url)  */ };
@@ -61,7 +62,8 @@ export async function clearNavModals() {
 export async function disableScrollingOnPage(pathname: string) {
 	onMount(() => {
 		// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
-		if (pathname === '/classroom' || '/pwa-home') {
+		// if (pathname === '/classroom' || '/pwa-home') {
+		if (pathname === '/classroom' || '/pwa') {
 			document.body.style.overflow = 'hidden';
 		}
 	});
@@ -70,12 +72,11 @@ export async function disableScrollingOnPage(pathname: string) {
 }
 
 export function setIsPwaCookie() {
-	const name = 'isPWA';
-	// cookeh.eat(name);
-	if (cookeh.get(name)) return;
+	// cookeh.eat('isPWA');
+	if (cookeh.get('isPWA')) return;
 
 	const isPWA = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-	cookeh.set(name, isPWA, 60 * 60 * 24 * 30);
+	cookeh.set('isPWA', isPWA, 60 * 60 * 24 * 30);
 }
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use. Might add serializer code from npm cookie inside my set method.

@@ -14,8 +14,8 @@
 	async function hangUpBtn() {
 		await api.dispose();
 
-		// alert(`isPwaFromContext'${isPwaFromContext}`);
-		if (isPwaFromContext) goto('/pwa-home');
+		if (isPwaFromContext) goto('/pwa');
+		// if (isPwaFromContext) goto('/pwa-home');
 		// if (sessionStorage.getItem('isPwaMode') === 'true') goto('/pwa-home');
 		else goto('/');
 
