@@ -42,14 +42,17 @@
 <a
 	{href}
 	on:click={handleNavButtonClicks}
-	class="block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {btnColorHover} "
+	class="block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {btnColorHover}  "
 >
 	<!-- Using the custom 'pwa:' class I now pass in 'hover:bg-red-300 pwa:hover:bg-transparent' for btnColorHover in the parent component which makes '{!$runningStandalone && btnColorHover}' unnecessary ... $runningStandalone boolean had to be defined in store.ts and was set with async javascript in +layout.svelte -->
 
 	<!-- {#if mounted && $runningStandalone} -->
-	<div class="hidden h-[50px] w-[50px] flex-col items-center justify-between pwa:flex">
+	<div
+		class="hidden h-10
+	 w-10 flex-col items-center justify-between pwa:flex"
+	>
 		<svelte:component this={icon} {navIconClicked} />
-		<span class="text-center text-xs">{name}</span>
+		<span class="scale-[0.8] text-center text-xs">{name}</span>
 	</div>
 	<!-- {:else} -->
 	<div class="text-2xl md:text-xl pwa:hidden">{name}</div>

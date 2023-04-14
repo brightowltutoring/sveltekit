@@ -11,7 +11,7 @@
 	{width}
 	{height}
 	viewBox="0 0 {size} {size}"
-	class={`origin-top fill-black dark:fill-white ${navIconClicked && fillColor} ${extraTW} `}
+	class={`origin-top  fill-black dark:fill-white ${navIconClicked && fillColor} ${extraTW} `}
 >
 	<slot />
 </svg>

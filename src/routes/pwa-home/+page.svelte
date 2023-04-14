@@ -1,6 +1,8 @@
 <script lang="ts">
+	import KitTransition from '$lib/Wrappers/KitTransition.svelte';
+	import { KTransition, slider } from '$lib/Wrappers/KitTransition';
 	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
-	import { slide } from 'svelte/transition';
+	import { scale, slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { disableScrollingOnPage } from '$lib/utils';
@@ -19,6 +21,14 @@
 	class="disableScrollOnThisPage z-10 flex h-[70vh] items-center justify-center text-center"
 >
 	<div class="z-10 grid grid-rows-1">
+		<!-- <div class="pb-4 font-Poppins text-6xl" in:slider>
+			You're on the <span class="gradientTextColor"> App!</span>
+		</div> -->
+		<!-- <KitTransition inProp={slide}>
+			<div class="pb-4 font-Poppins text-6xl">
+				You're on the <span class="gradientTextColor"> App!</span>
+			</div>
+		</KitTransition> -->
 		{#key ready}
 			<div in:slide={{ duration: ready ? 500 : 0 }} class="pb-4 font-Poppins text-6xl">
 				You're on the <span class="gradientTextColor"> App!</span>

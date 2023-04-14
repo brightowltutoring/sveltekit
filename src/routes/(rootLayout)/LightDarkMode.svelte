@@ -1,7 +1,7 @@
 <script lang="ts">
 	import IconSun from '$lib/Icons/IconSun.svelte';
 	import IconMoon from '$lib/Icons/IconMoon.svelte';
-	import { slide, scale } from 'svelte/transition';
+	import { slide, scale, fly, draw, fade } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { isDarkMode } from '$lib/store';
 	import { browser } from '$app/environment';
@@ -47,14 +47,12 @@
 
 <main class="fadeInFromNone px-2">
 	{#key $isDarkMode}
-		<button on:click={toggleDarkMode} in:slide={{ duration: 600, easing: quintOut }}>
-			<div in:scale={{ duration: 1000, easing: elasticOut }}>
-				{#if $isDarkMode}
-					<IconSun />
-				{:else}
-					<IconMoon />
-				{/if}
-			</div>
+		<button on:click={toggleDarkMode} in:scale={{ duration: 1000, easing: elasticOut }}>
+			{#if $isDarkMode}
+				<IconSun />
+			{:else}
+				<IconMoon />
+			{/if}
 		</button>
 	{/key}
 </main>

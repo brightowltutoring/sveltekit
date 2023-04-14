@@ -52,13 +52,16 @@
 
 <NavModals />
 
+<!-- gap-x-32 pwa:h-[60px] -->
 <nav
-	class="fixed z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:bottom-0 pwa:h-[70px] pwa:origin-bottom pwa:translate-y-0"
+	class="fixed z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:bottom-0 pwa:pt-1"
 >
 	<LogoButton />
 
+	<!--TODO: testing removal apr14-->
+	<!-- p-2 md:p-1 -->
 	<ul
-		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 p-2 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl md:p-1"
+		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl pwa:m-0"
 	>
 		<li class={isIOS ? 'block pwa:hidden' : 'hidden'}>
 			<AppNavButton />
@@ -90,7 +93,8 @@
 			</li>
 		{/each}
 
-		<li class="translate-y-1 scale-125 py-2 md:scale-100">
+		<!-- TODO: padding seems to do nothing -->
+		<li class="scale-125 py-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
 			<LightDarkMode />
 		</li>
 	</ul>
