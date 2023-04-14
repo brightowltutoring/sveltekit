@@ -107,12 +107,24 @@ export function debounce(func, timeout = 300) {
 	};
 }
 
-export function disableZoomGestures() {
-	for (let eventName of ['gesturestart', 'dblclick']) {
-		document.addEventListener(eventName, (e) => {
-			e.preventDefault();
-			return false;
-		});
+// export function disableZoomGestures() {
+// 	for (let eventName of ['gesturestart', 'dblclick']) {
+// 		document.addEventListener(eventName, (e) => {
+// 			e.preventDefault();
+// 			// return false;
+// 		});
+// 	}
+// }
+
+export function disableZoomOnTouchDevices() {
+	if ('ontouchstart' in window) disableCallBack();
+
+	function disableCallBack() {
+		for (let eventName of ['gesturestart', 'dblclick']) {
+			document.addEventListener(eventName, (e) => {
+				e.preventDefault();
+			});
+		}
 	}
 }
 

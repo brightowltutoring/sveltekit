@@ -6,17 +6,18 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { setContext } from 'svelte';
-	import { debounce, disableZoomGestures, setIsPwaCookie } from '$lib/utils';
+	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import { setInnerWidthViaMatchMedia, scrollY } from '$lib/store';
 
 	export let data;
-	const { isIOS, isMobile, isPWA /* url */ } = data;
+	const { isIOS, /* isMobile, */ isPWA /* url */ } = data;
 
 	setContext('isIOS', isIOS);
 	setContext('isPWA', isPWA);
 
 	onMount(() => {
-		if (isMobile) disableZoomGestures();
+		// if (isMobile) disableZoomGestures();
+		disableZoomOnTouchDevices();
 		setIsPwaCookie();
 		setInnerWidthViaMatchMedia();
 	});
@@ -38,7 +39,8 @@
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
 <svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault />
 
-<main class="flex min-h-screen flex-col">
+<!-- <main class="flex min-h-screen flex-col"> -->
+<main>
 	<Navbar />
 
 	<div class="px-[5%] pt-32 md:block">

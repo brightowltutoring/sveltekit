@@ -53,7 +53,7 @@
 <NavModals />
 
 <nav
-	class="fixed bottom-0 z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in pwa:bottom-0 pwa:translate-y-0 {showHideNav}  md:top-0 md:justify-between md:px-[7%] md:py-10 pwa:h-[80px]"
+	class="fixed z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in md:px-[7%] md:py-10 {showHideNav} bottom-0 bg-red-400 md:top-0 md:justify-between pwa:bottom-0 pwa:h-[70px] pwa:origin-bottom pwa:translate-y-0"
 >
 	<LogoButton />
 
@@ -84,7 +84,7 @@
 					{icon}
 					{name}
 					bind:routes={$routes}
-					btnColorHover={'notpwa:hover:bg-red-300'}
+					btnColorHover={'notpwa:hover:bg-red-300 '}
 				/>
 				<!-- without this bind PWA svg's dont work! -->
 			</li>
