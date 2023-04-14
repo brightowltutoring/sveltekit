@@ -5,10 +5,8 @@
 	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
 	import BackgroundVideo from '../lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
-	import { onMount } from 'svelte';
-
-	let ready = false;
-	onMount(() => (ready = true));
+	import { elasticOut } from 'svelte/easing';
+	import Transition from '$lib/Wrappers/Transition.svelte';
 </script>
 
 <BackgroundVideo />
@@ -21,14 +19,14 @@
 		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
 
 		<div class="grid grid-rows-1">
-			{#key ready}
-				<div in:slide={{ duration: ready ? 500 : 0 }} class=" pb-4 font-Poppins text-6xl">
+			<Transition IN={slide} OPTS={{ duration: 1000, easing: elasticOut }}>
+				<div class=" pb-4 font-Poppins text-6xl">
 					Math, Physics
 					<span class="gradientTextColor"> ... Online! </span>
 				</div>
+			</Transition>
 
-				<button class="animate-bounce font-Nunito text-2xl font-thin"> 👇 get started </button>
-			{/key}
+			<button class="animate-bounce font-Nunito text-2xl font-thin"> 👇 get started </button>
 		</div>
 	</a>
 
