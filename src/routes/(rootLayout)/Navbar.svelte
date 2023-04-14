@@ -53,7 +53,7 @@
 <NavModals />
 
 <nav
-	class="fixed z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in md:px-[7%] md:py-10 {showHideNav} bottom-0 bg-red-400 md:top-0 md:justify-between pwa:bottom-0 pwa:h-[70px] pwa:origin-bottom pwa:translate-y-0"
+	class="fixed z-50 flex h-[60px] w-full items-center justify-center gap-x-32 ease-in md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:bottom-0 pwa:h-[70px] pwa:origin-bottom pwa:translate-y-0"
 >
 	<LogoButton />
 
