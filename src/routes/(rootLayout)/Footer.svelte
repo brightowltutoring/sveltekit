@@ -24,9 +24,13 @@
 	}
 </script>
 
-<div class="mb-10 mt-20 flex flex-row items-center justify-center gap-x-1 text-sm pwa:mb-3">
+<!-- pwa:mb-3 -->
+<div
+	class="mb-10 mt-20 flex flex-row items-center justify-center gap-x-1 text-sm pwa:-translate-y-10"
+>
 	<span class="bg-gradient-to-l from-blue-500 to-pink-600 bg-clip-text text-transparent">
-		<a href="/faq" class="pwa:hidden">faq &nbsp; | &nbsp;</a>
+		<!-- class="pwa:hidden" -->
+		<a href="/faq">faq &nbsp; | &nbsp;</a>
 		<span bind:this={contactLink}> contact </span>
 	</span>
 </div>
