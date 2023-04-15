@@ -1,6 +1,6 @@
 <script lang="ts">
-	import IsPWA from './../(rootLayout)/IsPWA.svelte';
-	// import './jitsi_api';
+	// import IsPWA from './../(rootLayout)/IsPWA.svelte';
+
 	// using local copy of jitsi api script since standard head script (e.g. using: src="https://meet.jit.si/external_api.js"), in commented out <svelte:head> below, not working
 
 	export let admin = false; // existence prop; used for '/classroomA' route
