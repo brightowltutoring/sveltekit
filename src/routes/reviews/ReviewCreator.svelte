@@ -17,10 +17,6 @@
 	} else {
 		sineSpring.set(0);
 	}
-
-	import { onMount } from 'svelte';
-	let mounted = false;
-	onMount(() => (mounted = true));
 </script>
 
 <!-- <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">   -->

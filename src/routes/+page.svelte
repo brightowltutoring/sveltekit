@@ -1,6 +1,6 @@
 <script lang="ts">
 	import DropzoneOpener from './homework/DropzoneOpener.svelte';
-	import PlansSection from './plans/PlansSection.svelte';
+	import PlansSection from './plans/+page.svelte';
 	import Reviews from './reviews/Reviews.svelte';
 	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
 	import BackgroundVideo from '../lib/BackgroundVideo.svelte';

@@ -1,14 +1,10 @@
 <script lang="ts">
 	import IconSun from '$lib/Icons/IconSun.svelte';
 	import IconMoon from '$lib/Icons/IconMoon.svelte';
-	import { slide, scale, fly, draw, fade } from 'svelte/transition';
-	import { elasticOut, quintOut } from 'svelte/easing';
+	import { scale } from 'svelte/transition';
+	import { elasticOut } from 'svelte/easing';
 	import { isDarkMode } from '$lib/store';
 	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
-
-	let mounted = false;
-	onMount(() => (mounted = true));
 
 	// Initialize $isDarkMode using client-side settings via 'initialTheme()';
 	// Note: 'initialTheme()' declaration AND dark-mode css initialization done in head of document (see <svelte:head> below)
