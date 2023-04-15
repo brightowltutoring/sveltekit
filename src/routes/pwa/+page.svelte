@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Transition from '$lib/Wrappers/Transition.svelte';
+	// import Transition from '$lib/Wrappers/Transition.svelte';
 
 	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
@@ -18,11 +18,11 @@
 	class="disableScrollOnThisPage z-10 flex h-[70vh] items-center justify-center text-center"
 >
 	<div class="z-10 grid grid-rows-1">
-		<Transition IN={slide} OPTS={{ duration: 1000, easing: elasticOut }}>
-			<div class="pb-4 font-Poppins text-6xl">
-				You're on the <span class="gradientTextColor"> App!</span>
-			</div>
-		</Transition>
+		<!-- <Transition IN={slide} OPTS={{ duration: 1000, easing: elasticOut }}> -->
+		<div class="pb-4 font-Poppins text-6xl">
+			You're on the <span class="gradientTextColor"> App!</span>
+		</div>
+		<!-- </Transition> -->
 
 		<div class="grid px-6 font-Nunito text-2xl font-thin">the navbar is now your friend 🤝</div>
 	</div>
