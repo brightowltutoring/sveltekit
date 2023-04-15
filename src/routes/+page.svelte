@@ -6,24 +6,30 @@
 	import BackgroundVideo from '../lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
+	import { onMount } from 'svelte';
 	// import Transition from '$lib/Wrappers/Transition.svelte';
+	let ready = false;
+	onMount(() => (ready = true));
 </script>
 
 <BackgroundVideo />
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
 	<a href="#step1" class="z-10 flex h-[60vh] items-center justify-center text-center">
-		<!-- on:click|preventDefault={() => {
-				document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			}} -->
 		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
 
 		<div class="grid grid-rows-1">
 			<!-- <Transition IN={slide} OPTS={{ duration: 1000, easing: elasticOut }}> -->
-			<div class=" pb-4 font-Poppins text-6xl">
-				Math, Physics
-				<span class="gradientTextColor"> ... Online! </span>
-			</div>
+
+			{#key ready}
+				<div
+					class="pb-4 font-Poppins text-6xl"
+					in:slide={{ duration: ready ? 1000 : 0, easing: elasticOut }}
+				>
+					Math, Physics
+					<span class="gradientTextColor"> ... Online! </span>
+				</div>
+			{/key}
 			<!-- </Transition> -->
 
 			<button class="animate-bounce font-Nunito text-2xl font-thin"> 👇 get started </button>
