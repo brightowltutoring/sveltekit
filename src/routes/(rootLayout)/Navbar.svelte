@@ -54,7 +54,7 @@
 
 <!-- gap-x-32 pwa:h-[60px] -->
 <nav
-	class="fixed z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:bottom-0 pwa:pt-1"
+	class="fixed z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:translate-y-0 pwa:pt-1"
 >
 	<LogoButton />
 

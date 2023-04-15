@@ -72,7 +72,7 @@ export async function disableScrollingOnPage(pathname: string) {
 }
 
 export function setIsPwaCookie() {
-	// cookeh.eat('isPWA');
+	cookeh.eat('isPWA');
 	if (cookeh.get('isPWA')) return;
 
 	const isPWA = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;

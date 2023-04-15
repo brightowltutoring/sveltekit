@@ -5,6 +5,7 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	const urlRedirects = {
 		screenshare: 'classroom',
 		'pwa-home': 'pwa'
+		// pwa: 'pwa-home'
 	};
 
 	for (const [key, value] of Object.entries(urlRedirects)) {
