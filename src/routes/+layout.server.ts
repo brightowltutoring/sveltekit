@@ -1,16 +1,11 @@
 import { userAgentFromRequestHeaders, isPwaFromCookieOrUrl } from '$lib/utils';
+import { getRouteMetaData } from '$lib/store';
 
 export async function load(event) {
+	const { title, meta } = getRouteMetaData(event.url.pathname); // for seo
+
 	const { isIOS, isMobile } = userAgentFromRequestHeaders(event);
-	const { isPWA /* url */ } = isPwaFromCookieOrUrl(event);
+	const { isPWA } = isPwaFromCookieOrUrl(event);
 
-	// const haventLoggedOut = event.cookies.get('haventLoggedOut');
-
-	return {
-		// haventLoggedOut,
-		isMobile,
-		isIOS,
-		isPWA
-		// url
-	};
+	return { isMobile, isIOS, isPWA, title, meta };
 }

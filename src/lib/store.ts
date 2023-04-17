@@ -78,7 +78,7 @@ const routesObj = {
 		href: '/',
 		title: 'Thinksolve.io 💫',
 		isCurrent: false,
-		meta: `<meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
+		meta: ` <meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
     <meta property="og:url" content="https://thinksolve.io/">`,
 		icon: IconHome
 	},
@@ -159,14 +159,15 @@ type routesMapType = Map<string, RouteData>;
 
 export const routesMap = writable<routesMapType>(new Map(Object.entries(routesObj)));
 
-// export interface routesType {
-// 	home: RouteData;
-// 	login: RouteData;
-// 	plans: RouteData;
-// 	homework: RouteData;
-// 	classroom: RouteData;
-// 	faq?: RouteData;
-// 	stripe?: RouteData;
-// 	physics?: RouteData;
-// 	math?: RouteData;
-// }
+export function getRouteMetaData(pathname: string) {
+	const routes = Object.values(routesObj);
+	// const matchingRoute = routes.find((v) => pathname.includes(v.href)) as RouteData;
+	const matchingRoute = routes.find((v) => v.href === pathname) as RouteData;
+
+	if (!matchingRoute) return { title: '', meta: '' };
+
+	return {
+		title: matchingRoute.title,
+		meta: matchingRoute.meta
+	};
+}
