@@ -17,23 +17,22 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
-// Update: new way of doing seo with layout.server.ts, etc makes 'metaTagFixWhenSSR' unnecessary
 // Taken from 'https://github.com/sveltejs/svelte/issues/7444'
-// export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
-// 	const response = await resolve(event, {
-// 		transformPageChunk: ({ html }) => {
-// 			return html
-// 				.replace(/<link\s+rel="canonical"[^>]*>/, '')
-// 				.replace(/<meta\s+name="description"[^>]*>/, '')
-// 				.replace(/<meta\s+name="keywords"[^>]*>/, '')
-// 				.replace(/<meta\s+property="og:url"[^>]*>/, '')
-// 				.replace(/<meta\s+property="og:title"[^>]*>/, '')
-// 				.replace(/<meta\s+property="og:image"[^>]*>/, '')
-// 				.replace(/<meta\s+property="og:description"[^>]*>/, '');
-// 		}
-// 	});
+export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
+	const response = await resolve(event, {
+		transformPageChunk: ({ html }) => {
+			return html
+				.replace(/<link\s+rel="canonical"[^>]*>/, '')
+				.replace(/<meta\s+name="description"[^>]*>/, '')
+				.replace(/<meta\s+name="keywords"[^>]*>/, '')
+				.replace(/<meta\s+property="og:url"[^>]*>/, '')
+				.replace(/<meta\s+property="og:title"[^>]*>/, '')
+				.replace(/<meta\s+property="og:image"[^>]*>/, '')
+				.replace(/<meta\s+property="og:description"[^>]*>/, '');
+		}
+	});
 
-// 	return response;
-// };
+	return response;
+};
 
-export const handle = sequence(redirectOldUrls /* metaTagFixWhenSSR */);
+export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
