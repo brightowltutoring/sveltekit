@@ -3,8 +3,8 @@ import { sequence } from '@sveltejs/kit/hooks';
 
 export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	const urlRedirects = {
-		screenshare: 'classroom'
-		// 'pwa-home': 'pwa'
+		screenshare: 'classroom',
+		'pwa-home': 'pwa'
 		// pwa: 'pwa-home'
 	};
 
@@ -17,6 +17,7 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
+// Seemingly needed when doing Seo.svelte way ...
 // Taken from 'https://github.com/sveltejs/svelte/issues/7444'
 export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event, {
@@ -35,4 +36,4 @@ export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
+export const handle = sequence(redirectOldUrls /* metaTagFixWhenSSR */);

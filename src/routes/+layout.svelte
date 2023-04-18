@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from './(rootLayout)/Seo.svelte';
 	import './(rootLayout)/styles.css';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import Footer from './(rootLayout)/Footer.svelte';
@@ -31,11 +32,12 @@
 	{@html data.meta}
 </svelte:head>
 
+<!-- <Seo /> -->
+
 <svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault />
 
 <main>
 	<Navbar />
-
 	<div class="px-[5%] pt-32 md:block">
 		<slot />
 	</div>

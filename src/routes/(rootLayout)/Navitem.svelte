@@ -52,7 +52,7 @@
 	 w-10 flex-col items-center justify-between pwa:flex"
 	>
 		<svelte:component this={icon} {navIconClicked} />
-		<span class="scale-[0.8] text-center text-xs">{name}</span>
+		<span class="scale-[0.95] text-center text-xs">{name}</span>
 	</div>
 	<!-- {:else} -->
 	<div class="text-2xl md:text-xl pwa:hidden">{name}</div>

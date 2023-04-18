@@ -52,24 +52,20 @@
 
 <NavModals />
 
-<!-- gap-x-32 pwa:h-[60px] -->
 <nav
-	class="fixed z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:bottom-0 pwa:translate-y-0"
+	class="fixed z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:bottom-0 pwa:translate-y-0 pwa:pt-1"
 >
-	<!-- pwa:translate-y-0 pwa:pt-1 -->
 	<LogoButton />
 
-	<!--TODO: testing removal apr14-->
-	<!-- p-2 md:p-1 -->
 	<ul
-		class=" grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl pwa:m-0"
+		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl pwa:m-0 pwa:pb-0"
 	>
 		<li class={isIOS ? 'block pwa:hidden' : 'hidden'}>
 			<AppNavButton />
 		</li>
 
 		<!-- {#each Object.keys($routes).slice(1, 5) as key}
-			{@const { href, name, icon, isCurrent } = $routes[key]} -->
+				{@const { href, name, icon, isCurrent } = $routes[key]} -->
 		{#each Object.values($routes).slice(1, 5) as { href, name, icon, isCurrent }}
 			{@const navIconClicked =
 				isCurrent ||
@@ -95,14 +91,8 @@
 		{/each}
 
 		<!-- TODO: padding seems to do nothing -->
-		<li class="scale-125 py-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
+		<li class=" py-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
 			<LightDarkMode />
 		</li>
 	</ul>
 </nav>
-
-<style lang="postcss">
-	.toBottom {
-		@apply absolute bottom-0 left-0 z-50 w-full sm:static sm:top-0;
-	}
-</style>

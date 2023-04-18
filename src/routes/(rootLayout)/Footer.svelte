@@ -25,9 +25,7 @@
 </script>
 
 <!-- pwa:mb-3 -->
-<div
-	class="mb-10 mt-20 flex flex-row items-center justify-center gap-x-1 text-sm pwa:-translate-y-10"
->
+<div class="my-20 flex h-10 flex-row items-center justify-center gap-x-1 text-sm">
 	<span class="bg-gradient-to-l from-blue-500 to-pink-600 bg-clip-text text-transparent">
 		<!-- class="pwa:hidden" -->
 		<a href="/faq">faq &nbsp; | &nbsp;</a>
