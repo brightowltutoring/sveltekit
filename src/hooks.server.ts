@@ -17,10 +17,11 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
+// Updatee: https://www.okupter.com/blog/sveltekit-fix-duplicate-metatags-issue gives the answer:
+//      Disable HTML minification for the domain from Cloudflare dashboard (Speed > Optimization > Auto Minify).
 // Update: with this function off things work normally in vercel but with cloudflare and JS on the meta tags are persisted
-// Old: Seemingly needed when doing Seo.svelte way ...
-//
-// Taken from 'https://github.com/sveltejs/svelte/issues/7444'
+
+// Old: Needed with Seo.svelte way of implementing SEO. Taken from 'https://github.com/sveltejs/svelte/issues/7444'
 export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event, {
 		transformPageChunk: ({ html }) => {

@@ -65,8 +65,6 @@ type RouteData = {
 	meta?: string;
 	icon?: ComponentType;
 	modal?: boolean;
-	meta2?: any;
-	// meta2?: Array<Record<string, string>>;
 };
 
 export type routesType = Record<
@@ -82,17 +80,7 @@ const routesObj = {
 		isCurrent: false,
 		meta: ` <meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
     <meta property="og:url" content="https://thinksolve.io/">`,
-		icon: IconHome,
-		meta2: [
-			{
-				name: 'description',
-				content: 'Math and Physics Tutoring for the Modern Age.'
-			},
-			{
-				property: 'og:url',
-				content: 'https://thinksolve.io/'
-			}
-		]
+		icon: IconHome
 	},
 	login: {
 		name: 'Login',
@@ -101,17 +89,7 @@ const routesObj = {
 		isCurrent: false,
 		meta: `<meta name="description" content="Log in page."/> 
 		<meta property="og:url" content="https://thinksolve.io/login">`,
-		icon: IconLogin,
-		meta2: [
-			{
-				name: 'description',
-				content: 'Log in page.'
-			},
-			{
-				property: 'og:url',
-				content: 'https://thinksolve.io/login'
-			}
-		]
+		icon: IconLogin
 	},
 	plans: {
 		name: 'Plans',
@@ -120,17 +98,7 @@ const routesObj = {
 		isCurrent: false,
 		meta: `<meta name="description" content="Choose between Classic or Mock session; book a time and date; pay now or later."/>
     <meta property="og:url" content="https://thinksolve.io/plans">`,
-		icon: IconPlans,
-		meta2: [
-			{
-				name: 'description',
-				content: 'Choose between Classic or Mock session; book a time and date; pay now or later.'
-			},
-			{
-				property: 'og:url',
-				content: 'https://thinksolve.io/plans'
-			}
-		]
+		icon: IconPlans
 	},
 
 	homework: {
@@ -140,18 +108,7 @@ const routesObj = {
 		isCurrent: false,
 		meta: `<meta name="description" content="Click and submit your homework here; we accept all relevant file types for homework submission."/>
     <meta property="og:url" content="https://thinksolve.io/homework">`,
-		icon: IconHomework,
-		meta2: [
-			{
-				name: 'description',
-				content:
-					'Click and submit your homework here; we accept all relevant file types for homework submission.'
-			},
-			{
-				property: 'og:url',
-				content: 'https://thinksolve.io/homework'
-			}
-		]
+		icon: IconHomework
 	},
 	classroom: {
 		name: 'Classroom',
@@ -160,18 +117,7 @@ const routesObj = {
 		isCurrent: false,
 		meta: `<meta name="description" content="You are on the classroom page! Hit join to enter, our scheduled session will start shortly. "/>
     <meta property="og:url" content="https://thinksolve.io/classroom">`,
-		icon: IconClassroom,
-		meta2: [
-			{
-				name: 'description',
-				content:
-					'You are on the classroom page! Hit join to enter, our scheduled session will start shortly.'
-			},
-			{
-				property: 'og:url',
-				content: 'https://thinksolve.io/classroom'
-			}
-		]
+		icon: IconClassroom
 	},
 	faq: {
 		name: 'FAQ',
@@ -216,15 +162,12 @@ export const routesMap = writable<routesMapType>(new Map(Object.entries(routesOb
 export function getRouteMetaData(pathname: string) {
 	const routes = Object.values(routesObj);
 	// const matchingRoute = routes.find((v) => pathname.includes(v.href)) as RouteData;
-	const matchingRoute = routes.find((v) => {
-		return v.href === pathname /* && pathname !== '/' */;
-	}) as RouteData;
+	const matchingRoute = routes.find((v) => v.href === pathname) as RouteData;
 
-	if (!matchingRoute) return { title: '', meta: '' /* , meta2: '' */ };
+	if (!matchingRoute) return { title: '', meta: '' };
 
 	return {
 		title: matchingRoute.title,
 		meta: matchingRoute.meta
-		// meta2: matchingRoute.meta2
 	};
 }
