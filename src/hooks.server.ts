@@ -17,7 +17,9 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
-// Seemingly needed when doing Seo.svelte way ...
+// Update: with this function off things work normally in vercel but with cloudflare and JS on the meta tags are persisted
+// Old: Seemingly needed when doing Seo.svelte way ...
+//
 // Taken from 'https://github.com/sveltejs/svelte/issues/7444'
 export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event, {
@@ -36,4 +38,4 @@ export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
+export const handle = sequence(redirectOldUrls /* metaTagFixWhenSSR */);
