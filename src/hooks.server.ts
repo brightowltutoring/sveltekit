@@ -36,4 +36,4 @@ export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handle = sequence(redirectOldUrls /* metaTagFixWhenSSR */);
+export const handle = sequence(redirectOldUrls, metaTagFixWhenSSR);
