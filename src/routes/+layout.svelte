@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Seo from './(rootLayout)/Seo.svelte';
+	// import Seo from './(rootLayout)/Seo.svelte';
 	import './(rootLayout)/styles.css';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import Footer from './(rootLayout)/Footer.svelte';
@@ -28,8 +28,7 @@
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
 	<script src="https://meet.jit.si/external_api.js" defer></script>
-	<title>{data.title}</title>
-	{@html data.meta}
+	{@html data.titleAndMeta}
 </svelte:head>
 
 <!-- <Seo /> -->

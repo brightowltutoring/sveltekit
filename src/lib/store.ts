@@ -63,6 +63,7 @@ type RouteData = {
 	title: string;
 	isCurrent: boolean;
 	meta?: string;
+
 	icon?: ComponentType;
 	modal?: boolean;
 };
@@ -148,26 +149,17 @@ const routesObj = {
 
 export const routes = writable<routesType>(routesObj);
 
-// Experimental and alternate code below
-
 // testing an array way to deal with the routes object
 export const routes2 = writable<RouteData[]>(Object.values(routesObj));
 
-// testing an map way to deal with the first key-value level of routes object
-type routesMapType = Map<string, RouteData>;
-// type routesMapType = Map<'home' | 'login' | 'plans' | 'homework' | 'classroom' | 'faq' | 'stripe' | 'physics' | 'math', RouteData>;
+const routesData = Object.values(routesObj);
+export function getTitleAndMetaData(pathname: string) {
+	let matchingRoute = routesData[0] as RouteData;
 
-export const routesMap = writable<routesMapType>(new Map(Object.entries(routesObj)));
-
-export function getRouteMetaData(pathname: string) {
-	const routes = Object.values(routesObj);
-	// const matchingRoute = routes.find((v) => pathname.includes(v.href)) as RouteData;
-	const matchingRoute = routes.find((v) => v.href === pathname) as RouteData;
-
-	if (!matchingRoute) return { title: '', meta: '' };
+	if (pathname !== '/')
+		matchingRoute = routesData.slice(1).find((v) => pathname.includes(v.href)) as RouteData;
 
 	return {
-		title: matchingRoute.title,
-		meta: matchingRoute.meta
+		titleAndMeta: `<title>${matchingRoute.title}</title> ` + matchingRoute.meta
 	};
 }
