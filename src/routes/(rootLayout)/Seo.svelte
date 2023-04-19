@@ -1,14 +1,14 @@
 <!-- This was my 'old' way of doing SEO which I was led to believe was wrong ...  but realizing that 'page' is initially available on the server when SvelteKit is doing the initial SSR of this app I now think this component works as expected. Turning off JS in the browser also seems to confirm this ..-->
 
-<script lang="ts">
+<!-- <script lang="ts">
 	import { routes } from '$lib/store';
 	import { page } from '$app/stores';
 
 	let routes$ = Object.values($routes);
 	$: routeId = $page.route.id;
-</script>
+</script> -->
 
-<svelte:head>
+<!-- <svelte:head>
 	{#if $page.status === 404}
 		<title>Oops 💩</title>
 	{:else}
@@ -30,9 +30,9 @@
 			{/if}
 		{/each}
 	{/if}
-</svelte:head>
+</svelte:head> -->
 
-<!-- old way: -->
+<!--TODO: old way: -->
 <!-- <svelte:head>
 	{#if $page.status === 404}
 		<title>Oops 💩</title>

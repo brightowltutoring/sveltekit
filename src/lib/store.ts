@@ -62,8 +62,8 @@ type RouteData = {
 	href: string;
 	title: string;
 	isCurrent: boolean;
-	meta?: string;
-
+	// meta?: string;
+	description?: string;
 	icon?: ComponentType;
 	modal?: boolean;
 };
@@ -79,8 +79,10 @@ export const routesObj = {
 		href: '/',
 		title: 'Thinksolve.io 💫',
 		isCurrent: false,
-		meta: ` <meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
-    <meta property="og:url" content="https://thinksolve.io/">`,
+		description: 'Math and Physics Tutoring for the Modern Age.',
+		// 	meta: ` <meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
+		// <meta property="og:url" content="https://thinksolve.io/"> <link rel="canonical" href="https://thinksolve.io/">
+		// `,
 		icon: IconHome
 	},
 	login: {
@@ -88,8 +90,10 @@ export const routesObj = {
 		href: '/login',
 		title: 'Login 🚀',
 		isCurrent: false,
-		meta: `<meta name="description" content="Log in page."/> 
-		<meta property="og:url" content="https://thinksolve.io/login">`,
+		description: 'Log in page.',
+		// meta: `<meta name="description" content="Log in page."/>
+		// <meta property="og:url" content="https://thinksolve.io/login"> <link rel="canonical" href="https://thinksolve.io/login">
+		// `,
 		icon: IconLogin
 	},
 	plans: {
@@ -97,8 +101,10 @@ export const routesObj = {
 		href: '/plans',
 		title: 'Plans 💡',
 		isCurrent: false,
-		meta: `<meta name="description" content="Choose between Classic or Mock session; book a time and date; pay now or later."/>
-    <meta property="og:url" content="https://thinksolve.io/plans">`,
+		description: 'Choose between Classic or Mock session; book a time and date; pay now or later.',
+		// 	meta: `<meta name="description" content="Choose between Classic or Mock session; book a time and date; pay now or later."/>
+		// <meta property="og:url" content="https://thinksolve.io/plans"> <link rel="canonical" href="https://thinksolve.io/plans">
+		// `,
 		icon: IconPlans
 	},
 
@@ -107,8 +113,11 @@ export const routesObj = {
 		href: '/homework',
 		title: 'Homework 📚',
 		isCurrent: false,
-		meta: `<meta name="description" content="Click and submit your homework here; we accept all relevant file types for homework submission."/>
-    <meta property="og:url" content="https://thinksolve.io/homework">`,
+		description:
+			'Click and submit your homework here; we accept all relevant file types for homework submission.',
+		// 	meta: `<meta name="description" content="Click and submit your homework here; we accept all relevant file types for homework submission."/>
+		// <meta property="og:url" content="https://thinksolve.io/homework"> <link rel="canonical" href="https://thinksolve.io/homework">
+		// `,
 		icon: IconHomework
 	},
 	classroom: {
@@ -116,16 +125,20 @@ export const routesObj = {
 		href: '/classroom',
 		title: 'Classroom 🍎',
 		isCurrent: false,
-		meta: `<meta name="description" content="You are on the classroom page! Hit join to enter, our scheduled session will start shortly. "/>
-    <meta property="og:url" content="https://thinksolve.io/classroom">`,
+		description:
+			'You are on the classroom page! Hit join to enter, our scheduled session will start shortly.',
+		// 	meta: `<meta name="description" content="You are on the classroom page! Hit join to enter, our scheduled session will start shortly. "/>
+		// <meta property="og:url" content="https://thinksolve.io/classroom"> <link rel="canonical" href="https://thinksolve.io/classroom">
+		// `,
 		icon: IconClassroom
 	},
 	faq: {
 		name: 'FAQ',
 		href: '/faq',
 		title: 'FAQ 🙋‍♀️',
-		isCurrent: false,
-		meta: `<meta og:url="https://thinksolve.io/faq" />`
+		isCurrent: false
+		// meta: `<meta og:url="https://thinksolve.io/faq" /> <link rel="canonical" href="https://thinksolve.io/faq">
+		// `
 	},
 	stripe: {
 		name: 'Stripe',
@@ -159,13 +172,16 @@ export function getTitleAndMetaData(pathname: string) {
 	if (pathname !== '/')
 		matchingRoute = routesData.slice(1).find((v) => pathname.includes(v.href)) as RouteData;
 
-	if (!matchingRoute) {
-		return {
-			titleAndMeta: ''
-		};
-	}
+	if (!matchingRoute) return { titleAndMeta: '' };
 
-	return {
-		titleAndMeta: `<title>${matchingRoute.title}</title> ` + matchingRoute.meta
-	};
+	const fullUrl = `https://thinksolve.io${pathname}`;
+
+	const titleAndMeta = `
+		<title>${matchingRoute.title}</title> 
+		<meta name="description" content="${matchingRoute.description}"/>
+		<meta property="og:url" content="${fullUrl}"> 
+		<link rel="canonical" href="${fullUrl}">
+		`;
+
+	return { titleAndMeta };
 }
