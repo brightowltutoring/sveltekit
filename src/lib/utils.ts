@@ -27,18 +27,15 @@ export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent
 	if (cookieIsPWA !== undefined) {
 		isPWA = cookieIsPWA === 'true';
 	} else {
-		// isPWA = url.startsWith('/pwa/') || url === '/pwa';
-		// isPWA = url.includes('pwa-home');
 		isPWA = url.includes('pwa');
 	}
 
-	return { isPWA /*  url: String(url)  */ };
+	return { isPWA };
 }
 
 // client-side navigator.userAgent results in flash of content .. this is better
-export function userAgentFromRequestHeaders(event: RequestEvent) {
-	const { request } = event;
-	const userAgent = String(request.headers.get('user-agent'));
+export function userAgentFromRequestHeaders(headers: Headers) {
+	const userAgent = String(headers.get('user-agent'));
 	const parser = new UAParser(userAgent);
 	const isMobile = parser.getDevice().type === 'mobile';
 	const isIOS = parser.getOS().name?.toLowerCase() === 'ios';
@@ -62,7 +59,6 @@ export async function clearNavModals() {
 export async function disableScrollingOnPage(pathname: string) {
 	onMount(() => {
 		// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
-		// if (pathname === '/classroom' || '/pwa-home') {
 		if (pathname === '/classroom' || '/pwa') {
 			document.body.style.overflow = 'hidden';
 		}

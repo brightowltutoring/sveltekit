@@ -22,18 +22,12 @@
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
 	}
-
-	// console.log('$page.status ', $page.status);
 </script>
 
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
 	<script src="https://meet.jit.si/external_api.js" defer></script>
 	{@html data.titleAndMeta}
-
-	<!-- {#if pageStatus === 404 || pageStatus === 500}
-		<title>Oops 💩 {pageStatus}</title>
-	{/if} -->
 </svelte:head>
 
 <!-- <Seo /> -->

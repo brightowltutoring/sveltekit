@@ -15,12 +15,8 @@
 		await api.dispose();
 
 		if (isPwaFromContext) goto('/pwa');
-		// if (isPwaFromContext) goto('/pwa-home');
 		// if (sessionStorage.getItem('isPwaMode') === 'true') goto('/pwa-home');
 		else goto('/');
-
-		// (await isPWA()) ? goto('/pwa-home') : goto('/');
-		// $runningStandalone ? goto('/pwa-home') : goto('/');
 	}
 
 	let api: any, par: Array<string>;
