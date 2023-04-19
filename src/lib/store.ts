@@ -73,7 +73,7 @@ export type routesType = Record<
 	RouteData
 >;
 
-const routesObj = {
+export const routesObj = {
 	home: {
 		name: 'Home',
 		href: '/',
@@ -158,6 +158,12 @@ export function getTitleAndMetaData(pathname: string) {
 
 	if (pathname !== '/')
 		matchingRoute = routesData.slice(1).find((v) => pathname.includes(v.href)) as RouteData;
+
+	if (!matchingRoute) {
+		return {
+			titleAndMeta: ''
+		};
+	}
 
 	return {
 		titleAndMeta: `<title>${matchingRoute.title}</title> ` + matchingRoute.meta

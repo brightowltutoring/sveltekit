@@ -1,18 +1,24 @@
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
+// import { routesObj } from '$lib/store';
+// const availableRouteString = String(Object.keys(routesObj));
+
 export const redirectOldUrls: Handle = async ({ event, resolve }) => {
+	const pathname = event.url.pathname;
+
 	const urlRedirects = {
 		screenshare: 'classroom',
 		'pwa-home': 'pwa'
-		// pwa: 'pwa-home'
 	};
 
 	for (const [key, value] of Object.entries(urlRedirects)) {
-		if (event.url.pathname === `/${key}`) {
+		if (pathname === `/${key}`) {
 			return Response.redirect(`${event.url.origin}/${value}`, 302);
 		}
 	}
+
+	// if (availableRouteString.includes(pathname)) return Response.redirect(`🍌`, 302);
 
 	return await resolve(event);
 };
