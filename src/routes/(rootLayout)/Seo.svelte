@@ -1,36 +1,40 @@
-<!-- This was my 'old' way of doing SEO which I was led to believe was wrong ...  but realizing that 'page' is initially available on the server when SvelteKit is doing the initial SSR of this app I now think this component works as expected. Turning off JS in the browser also seems to confirm this ..-->
+<!--  This a modified version of my original implementation of SEO ... based on checking with JS off in chrome devtools this is implemented on the server! -->
+<!-- Pro: simpler and more consolidated than handling 'event.request.url.pathname', passing from layout.server.ts to layout.svelte, AND doesnt break the '+error.svelte' when navigating to faulty path  -->
 
-<!-- <script lang="ts">
+<script lang="ts">
 	import { routes } from '$lib/store';
 	import { page } from '$app/stores';
 
 	let routes$ = Object.values($routes);
-	$: routeId = $page.route.id;
-</script> -->
+	// $: routeId = $page.route.id;
+	$: pathname = $page.url.pathname;
+	$: fullUrl = `https://thinksolve.io${pathname}`;
+	// $: console.log('fullUrl', fullUrl);
 
-<!-- <svelte:head>
+	const meta = (title: string, description: string | undefined, fullUrl: string) => `
+					<title>${title}</title> 
+					<meta name="description" content="${description}"/>
+					<meta property="og:description" content="${description}"/>
+					<meta property="og:url" content="${fullUrl}">
+					<link rel="canonical" href="${fullUrl}">
+				`;
+</script>
+
+<svelte:head>
 	{#if $page.status === 404}
 		<title>Oops 💩</title>
 	{:else}
 		{#each routes$ as route, i}
-			{@const { title, meta, href } = route}
-
-			{#if i === 0 && routeId === '/'}
-				<title>{routes$[i].title}</title>
-
-				{@html routes$[i].meta}
+			{#if i === 0 && pathname === '/'}
+				{@html `${meta(route.title, route.description, fullUrl)}`}
 			{/if}
 
-			{#if routeId?.includes(href)}
-				<title>{title}</title>
-
-				{#if meta}
-					{@html meta}
-				{/if}
+			{#if i !== 0 && pathname?.includes(route.href)}
+				{@html `${meta(route.title, route.description, fullUrl)}`}
 			{/if}
 		{/each}
 	{/if}
-</svelte:head> -->
+</svelte:head>
 
 <!--TODO: old way: -->
 <!-- <svelte:head>
@@ -55,74 +59,44 @@
 	{/if}
 </svelte:head> -->
 
-<!-- TODO: this code below explains idea now -->
+<!-- Current SEO implementation -->
 <!-- 
 // +layout.server.ts
-import { getRouteMetaData } from '$lib/store';
+import { getTitleAndMetaData } from '$lib/store';
 export async function load(event) {
-	const { title, meta } = getRouteMetaData(event.url.pathname); // for seo
-
-	return {  title, meta };
+	const { titleAndMeta } = getTitleAndMetaData(event.url.pathname);
+	return {  titleAndMeta };
 }
 
 // +layout.svelte
-export let data;
-$: ({ title, meta } = data);
-
+<script>
+	export let data
+</script>
 <svelte:head>
-	<title>{title}</title>
-	{@html meta}
+	{@html data.titleAndMeta}
 </svelte:head>
 
 // store.ts
-type RouteData = {
-	name: string;
-	href: string;
-	title: string;
-	isCurrent: boolean;
-	meta?: string;
-	icon?: ComponentType;
-	modal?: boolean;
-};
-const routesObj = {
-	home: {
-		name: 'Home',
-		href: '/',
-		title: 'Thinksolve.io 💫',
-		isCurrent: false,
-		meta: ` <meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
-    <meta property="og:url" content="https://thinksolve.io/">`,
-		icon: IconHome
-	},
-	login: {
-		name: 'Login',
-		href: '/login',
-		title: 'Login 🚀',
-		isCurrent: false,
-		meta: `<meta name="description" content="Log in page."/> 
-		<meta property="og:url" content="https://thinksolve.io/login">`,
-		icon: IconLogin
-	},
-	plans: {
-		name: 'Plans',
-		href: '/plans',
-		title: 'Plans 💡',
-		isCurrent: false,
-		meta: `<meta name="description" content="Choose between Classic or Mock session; book a time and date; pay now or later."/>
-    <meta property="og:url" content="https://thinksolve.io/plans">`,
-		icon: IconPlans
-	},
-// ...
-};
+const routesData = Object.values(routesObj);
+export function getTitleAndMetaData(pathname: string) {
+	let matchingRoute = routesData[0] as RouteData;
 
-export function getRouteMetaData(pathname: string) {
-	const routes = Object.values(routesObj);
-	const matchingRoute = routes.find((v) => v.href === pathname) as RouteData;
+	if (pathname !== '/')
+		matchingRoute = routesData.slice(1).find((v) => pathname.includes(v.href)) as RouteData;
 
-	if (!matchingRoute) return { title: '', meta: '' };
+	if (!matchingRoute) return { titleAndMeta: '' };
 
-	return {
-		title: matchingRoute.title,
-		meta: matchingRoute.meta
-	};
-} -->
+	const fullUrl = `https://thinksolve.io${pathname}`;
+
+	const titleAndMeta = `
+		<title>${matchingRoute.title}</title> 
+		<meta name="description" content="${matchingRoute.description}"/>
+		<meta property="og:description" content="${matchingRoute.description}"/>
+		<meta property="og:url" content="${fullUrl}">
+		<link rel="canonical" href="${fullUrl}">
+		`;
+
+	return { titleAndMeta };
+}
+
+ -->

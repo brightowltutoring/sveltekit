@@ -179,7 +179,8 @@ export function getTitleAndMetaData(pathname: string) {
 	const titleAndMeta = `
 		<title>${matchingRoute.title}</title> 
 		<meta name="description" content="${matchingRoute.description}"/>
-		<meta property="og:url" content="${fullUrl}"> 
+		<meta property="og:description" content="${matchingRoute.description}"/>
+		<meta property="og:url" content="${fullUrl}">
 		<link rel="canonical" href="${fullUrl}">
 		`;
 

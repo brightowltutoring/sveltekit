@@ -7,6 +7,7 @@
 	import { setContext } from 'svelte';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import { setInnerWidthViaMatchMedia, scrollY } from '$lib/store';
+	import Seo from './(rootLayout)/Seo.svelte';
 
 	export let data;
 
@@ -27,10 +28,10 @@
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
 	<script src="https://meet.jit.si/external_api.js" defer></script>
-	{@html data.titleAndMeta}
+	<!-- {@html data.titleAndMeta} -->
 </svelte:head>
 
-<!-- <Seo /> -->
+<Seo />
 
 <svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault />
 
