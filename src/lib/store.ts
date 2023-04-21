@@ -81,7 +81,7 @@ export const routesObj = {
 		isCurrent: false,
 		description: 'Math and Physics Tutoring for the Modern Age.',
 		// 	meta: ` <meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
-		// <meta property="og:url" content="https://thinksolve.io/"> <link rel="canonical" routePath="https://thinksolve.io/">
+		// <meta property="og:url" content="https://thinksolve.io/"> <link rel="canonical" href="https://thinksolve.io/">
 		// `,
 		icon: IconHome
 	},
@@ -92,7 +92,7 @@ export const routesObj = {
 		isCurrent: false,
 		description: 'Log in page.',
 		// meta: `<meta name="description" content="Log in page."/>
-		// <meta property="og:url" content="https://thinksolve.io/login"> <link rel="canonical" routePath="https://thinksolve.io/login">
+		// <meta property="og:url" content="https://thinksolve.io/login"> <link rel="canonical" href="https://thinksolve.io/login">
 		// `,
 		icon: IconLogin
 	},
@@ -103,7 +103,7 @@ export const routesObj = {
 		isCurrent: false,
 		description: 'Choose between Classic or Mock session; book a time and date; pay now or later.',
 		// 	meta: `<meta name="description" content="Choose between Classic or Mock session; book a time and date; pay now or later."/>
-		// <meta property="og:url" content="https://thinksolve.io/plans"> <link rel="canonical" routePath="https://thinksolve.io/plans">
+		// <meta property="og:url" content="https://thinksolve.io/plans"> <link rel="canonical" href="https://thinksolve.io/plans">
 		// `,
 		icon: IconPlans
 	},
@@ -116,7 +116,7 @@ export const routesObj = {
 		description:
 			'Click and submit your homework here; we accept all relevant file types for homework submission.',
 		// 	meta: `<meta name="description" content="Click and submit your homework here; we accept all relevant file types for homework submission."/>
-		// <meta property="og:url" content="https://thinksolve.io/homework"> <link rel="canonical" routePath="https://thinksolve.io/homework">
+		// <meta property="og:url" content="https://thinksolve.io/homework"> <link rel="canonical" href="https://thinksolve.io/homework">
 		// `,
 		icon: IconHomework
 	},
@@ -128,7 +128,7 @@ export const routesObj = {
 		description:
 			'You are on the classroom page! Hit join to enter, our scheduled session will start shortly.',
 		// 	meta: `<meta name="description" content="You are on the classroom page! Hit join to enter, our scheduled session will start shortly. "/>
-		// <meta property="og:url" content="https://thinksolve.io/classroom"> <link rel="canonical" routePath="https://thinksolve.io/classroom">
+		// <meta property="og:url" content="https://thinksolve.io/classroom"> <link rel="canonical" href="https://thinksolve.io/classroom">
 		// `,
 		icon: IconClassroom
 	},
@@ -137,7 +137,7 @@ export const routesObj = {
 		routePath: '/faq',
 		title: 'FAQ 🙋‍♀️',
 		isCurrent: false
-		// meta: `<meta og:url="https://thinksolve.io/faq" /> <link rel="canonical" routePath="https://thinksolve.io/faq">
+		// meta: `<meta og:url="https://thinksolve.io/faq" /> <link rel="canonical" href="https://thinksolve.io/faq">
 		// `
 	},
 	stripe: {
@@ -166,7 +166,10 @@ export const routes = writable<routesType>(routesObj);
 export const routes2 = writable<RouteData[]>(Object.values(routesObj));
 
 const routesData = Object.values(routesObj);
-export function getSeoString(pathname: string) {
+export function getSeoString(url: URL) {
+	const pathname = url.pathname;
+	const fullUrl = url.href;
+
 	let matchingRoute = routesData[0] as RouteData;
 
 	if (pathname !== '/')
@@ -175,8 +178,6 @@ export function getSeoString(pathname: string) {
 		}) as RouteData;
 
 	if (!matchingRoute) return { seoString: '<title>Oops 💩</title>' };
-
-	const fullUrl = `https://thinksolve.io${pathname}`;
 
 	const seoString = `
 		<title>${matchingRoute.title}</title> 
