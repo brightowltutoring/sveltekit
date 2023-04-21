@@ -6,12 +6,10 @@
 	import { page } from '$app/stores';
 
 	let routes$ = Object.values($routes);
-	// $: routeId = $page.route.id;
 	$: pathname = $page.url.pathname;
-	$: fullUrl = `https://thinksolve.io${pathname}`;
-	// $: console.log('fullUrl', fullUrl);
+	$: fullUrl = $page.url.href;
 
-	const meta = (title: string, description: string | undefined, fullUrl: string) => `
+	const seoString = (title: string, description: string | undefined) => ` 	
 					<title>${title}</title> 
 					<meta name="description" content="${description}"/>
 					<meta property="og:description" content="${description}"/>
@@ -25,12 +23,12 @@
 		<title>Oops 💩</title>
 	{:else}
 		{#each routes$ as route, i}
-			{#if i === 0 && pathname === '/'}
-				{@html `${meta(route.title, route.description, fullUrl)}`}
-			{/if}
+			{@const { title, description, routePath } = route}
+			{@const conditionOne = i === 0 && pathname === '/'}
+			{@const conditionTwo = i !== 0 && pathname?.includes(routePath)}
 
-			{#if i !== 0 && pathname?.includes(route.href)}
-				{@html `${meta(route.title, route.description, fullUrl)}`}
+			{#if conditionOne || conditionTwo}
+				{@html `${seoString(title, description)}`}
 			{/if}
 		{/each}
 	{/if}
@@ -65,7 +63,7 @@
 import { getTitleAndMetaData } from '$lib/store';
 export async function load(event) {
 	const { titleAndMeta } = getTitleAndMetaData(event.url.pathname);
-	return {  titleAndMeta };
+	return { titleAndMeta };
 }
 
 // +layout.svelte
@@ -77,7 +75,7 @@ export async function load(event) {
 </svelte:head>
 
 // store.ts
-const routesData = Object.values(routesObj);
+...
 export function getTitleAndMetaData(pathname: string) {
 	let matchingRoute = routesData[0] as RouteData;
 
@@ -86,7 +84,7 @@ export function getTitleAndMetaData(pathname: string) {
 
 	if (!matchingRoute) return { titleAndMeta: '' };
 
-	const fullUrl = `https://thinksolve.io${pathname}`;
+	const fullUrl = `https://<website-name>.com${pathname}`;
 
 	const titleAndMeta = `
 		<title>${matchingRoute.title}</title> 

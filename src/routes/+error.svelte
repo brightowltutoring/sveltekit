@@ -1,13 +1,13 @@
 <!-- <script>
 	import { page } from '$app/stores';
 
-	$: pageStatus = $page.status;
+	// $: pageStatus = $page.status;
 </script> -->
 
 <!-- <h1>{$page.status}: {$page.error.message}</h1> -->
 
 <!-- <svelte:head>
-	{#if pageStatus === 404}
+	{#if $page.status === 404}
 		<title>Oops 💩</title>
 	{/if}
 </svelte:head> -->

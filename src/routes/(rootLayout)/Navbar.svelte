@@ -65,22 +65,22 @@
 		</li>
 
 		<!-- {#each Object.keys($routes).slice(1, 5) as key}
-				{@const { href, name, icon, isCurrent } = $routes[key]} -->
-		{#each Object.values($routes).slice(1, 5) as { href, name, icon, isCurrent }}
+				{@const { routePath, name, icon, isCurrent } = $routes[key]} -->
+		{#each Object.values($routes).slice(1, 5) as { routePath, name, icon, isCurrent }}
 			{@const navIconClicked =
 				isCurrent ||
-				(href === '/homework' && $showHomeworkModal) ||
-				(href === '/login' && $showLoginModal)}
+				(routePath === '/homework' && $showHomeworkModal) ||
+				(routePath === '/login' && $showLoginModal)}
 
 			{@const loggedInDynamicRocket =
-				href === '/login' && $isLoggedIn
+				routePath === '/login' && $isLoggedIn
 					? `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`
 					: null}
 
 			<li style={loggedInDynamicRocket}>
 				<Navitem
 					{navIconClicked}
-					{href}
+					{routePath}
 					{icon}
 					{name}
 					bind:routes={$routes}

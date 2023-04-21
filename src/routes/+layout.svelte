@@ -28,10 +28,10 @@
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
 	<script src="https://meet.jit.si/external_api.js" defer></script>
-	<!-- {@html data.titleAndMeta} -->
+	{@html data.seoString}
 </svelte:head>
 
-<Seo />
+<!-- <Seo /> -->
 
 <svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault />
 

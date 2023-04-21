@@ -4,7 +4,7 @@
 	import type { ComponentType } from 'svelte';
 	import type { routesType } from '$lib/store';
 
-	export let href: string;
+	export let routePath: string;
 	export let name: string;
 	export let routes: routesType | any;
 	export let btnColorHover: string;
@@ -19,19 +19,19 @@
 	// could've done this in if/else but the boolean nature here made it unnecessary
 
 	$: for (let key in routes) {
-		routes[key].isCurrent = routes[key].href === $page.url.pathname;
+		routes[key].isCurrent = routes[key].routePath === $page.url.pathname;
 	}
 	function handleNavButtonClicks(e: MouseEvent) {
 		// resets all modals (so modals don't continuously pile up)
 		clearNavModals();
 
 		// sets the correct modal
-		if (href == '/homework') {
+		if (routePath == '/homework') {
 			e.preventDefault();
 			$showHomeworkModal = true;
 			return;
 		}
-		if (href == '/login') {
+		if (routePath == '/login') {
 			e.preventDefault();
 			$showLoginModal = true;
 			return;
@@ -40,7 +40,7 @@
 </script>
 
 <a
-	{href}
+	href={routePath}
 	on:click={handleNavButtonClicks}
 	class="block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded {btnColorHover}  "
 >
