@@ -60,11 +60,14 @@ import type { ComponentType } from 'svelte';
 export type RouteData = {
 	name: string;
 	routePath: string;
-	title: string;
 	isCurrent: boolean;
-	// meta?: string;
 	description?: string;
+	title?: string;
 	icon?: ComponentType;
+	meta: {
+		title: string;
+		description?: string;
+	};
 	modal?: boolean;
 };
 
@@ -77,85 +80,82 @@ export const routesObj = {
 	home: {
 		name: 'Home',
 		routePath: '/',
-		title: 'Thinksolve.io 💫',
 		isCurrent: false,
-		description: 'Math and Physics Tutoring for the Modern Age.',
-		// 	meta: ` <meta name="description" content="Math and Physics Tutoring for the Modern Age."/>
-		// <meta property="og:url" content="https://thinksolve.io/"> <link rel="canonical" href="https://thinksolve.io/">
-		// `,
+		meta: {
+			title: 'Thinksolve.io 💫',
+			description: 'Math and Physics Tutoring for the Modern Age.'
+		},
 		icon: IconHome
 	},
 	login: {
 		name: 'Login',
 		routePath: '/login',
-		title: 'Login 🚀',
 		isCurrent: false,
-		description: 'Log in page.',
-		// meta: `<meta name="description" content="Log in page."/>
-		// <meta property="og:url" content="https://thinksolve.io/login"> <link rel="canonical" href="https://thinksolve.io/login">
-		// `,
+		meta: {
+			title: 'Login 🚀',
+			description: 'Log in page.'
+		},
 		icon: IconLogin
 	},
 	plans: {
 		name: 'Plans',
 		routePath: '/plans',
-		title: 'Plans 💡',
 		isCurrent: false,
-		description: 'Choose between Classic or Mock session; book a time and date; pay now or later.',
-		// 	meta: `<meta name="description" content="Choose between Classic or Mock session; book a time and date; pay now or later."/>
-		// <meta property="og:url" content="https://thinksolve.io/plans"> <link rel="canonical" href="https://thinksolve.io/plans">
-		// `,
+		meta: {
+			title: 'Plans 💡',
+			description: 'Choose between Classic or Mock session; book a time and date; pay now or later.'
+		},
+
 		icon: IconPlans
 	},
 
 	homework: {
 		name: 'Homework',
 		routePath: '/homework',
-		title: 'Homework 📚',
 		isCurrent: false,
-		description:
-			'Click and submit your homework here; we accept all relevant file types for homework submission.',
-		// 	meta: `<meta name="description" content="Click and submit your homework here; we accept all relevant file types for homework submission."/>
-		// <meta property="og:url" content="https://thinksolve.io/homework"> <link rel="canonical" href="https://thinksolve.io/homework">
-		// `,
+		meta: {
+			title: 'Homework 📚',
+			description:
+				'Click and submit your homework here; we accept all relevant file types for homework submission.'
+		},
+
 		icon: IconHomework
 	},
 	classroom: {
 		name: 'Classroom',
 		routePath: '/classroom',
-		title: 'Classroom 🍎',
 		isCurrent: false,
-		description:
-			'You are on the classroom page! Hit join to enter, our scheduled session will start shortly.',
-		// 	meta: `<meta name="description" content="You are on the classroom page! Hit join to enter, our scheduled session will start shortly. "/>
-		// <meta property="og:url" content="https://thinksolve.io/classroom"> <link rel="canonical" href="https://thinksolve.io/classroom">
-		// `,
+
+		meta: {
+			title: 'Classroom 🍎',
+			description:
+				'You are on the classroom page! Hit join to enter, our scheduled session will start shortly.'
+		},
+
 		icon: IconClassroom
 	},
 	faq: {
 		name: 'FAQ',
 		routePath: '/faq',
-		title: 'FAQ 🙋‍♀️',
-		isCurrent: false
-		// meta: `<meta og:url="https://thinksolve.io/faq" /> <link rel="canonical" href="https://thinksolve.io/faq">
-		// `
+		isCurrent: false,
+		meta: { title: 'FAQ 🙋‍♀️' }
 	},
 	stripe: {
 		name: 'Stripe',
 		routePath: '/stripe',
-		title: 'Stripe 💰',
+		meta: { title: 'Stripe 💰' },
 		isCurrent: false
 	},
 	physics: {
 		name: 'physics',
 		routePath: '/physics',
-		title: 'physics 🚀',
+		meta: { title: 'physics 🚀' },
 		isCurrent: false
 	},
 	math: {
 		name: 'math',
 		routePath: '/math',
-		title: 'math',
+		meta: { title: 'math' },
 		isCurrent: false
 	}
 };
@@ -180,9 +180,9 @@ export function getSeoString(url: URL) {
 	if (!matchingRoute) return { seoString: '<title>Oops 💩</title>' };
 
 	const seoString = `
-		<title>${matchingRoute.title}</title> 
-		<meta name="description" content="${matchingRoute.description}"/>
-		<meta property="og:description" content="${matchingRoute.description}"/>
+		<title>${matchingRoute.meta?.title}</title> 
+		<meta name="description" content="${matchingRoute.meta.description}"/>
+		<meta property="og:description" content="${matchingRoute.meta.description}"/>
 		<meta property="og:url" content="${fullUrl}">
 		<link rel="canonical" routePath="${fullUrl}">
 		`;

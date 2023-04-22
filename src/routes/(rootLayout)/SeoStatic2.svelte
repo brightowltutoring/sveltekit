@@ -19,7 +19,9 @@
 		if (pathname !== '/')
 			matchingRoute = routes$.slice(1).find((v) => pathname.includes(v.routePath)) as RouteData;
 
-		const { title, description } = matchingRoute;
+		const {
+			meta: { title, description }
+		} = matchingRoute;
 
 		return ` 	<title>${title}</title> 
 					<meta name="description" content="${description}"/>

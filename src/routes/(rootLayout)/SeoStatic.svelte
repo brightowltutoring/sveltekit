@@ -23,12 +23,12 @@
 		<title>Oops 💩</title>
 	{:else}
 		{#each routes$ as route, i}
-			{@const { title, description, routePath } = route}
+			{@const { meta, routePath } = route}
 			{@const conditionOne = i === 0 && pathname === '/'}
 			{@const conditionTwo = i !== 0 && pathname?.includes(routePath)}
 
 			{#if conditionOne || conditionTwo}
-				{@html `${seoString(title, description)}`}
+				{@html `${seoString(meta.title, meta.description)}`}
 			{/if}
 		{/each}
 	{/if}

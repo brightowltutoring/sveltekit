@@ -7,7 +7,7 @@
 	import { setContext } from 'svelte';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import { setInnerWidthViaMatchMedia, scrollY } from '$lib/store';
-	import Seo from './(rootLayout)/Seo.svelte';
+	// import Seo from './(rootLayout)/SeoStatic2.svelte';
 
 	export let data;
 
