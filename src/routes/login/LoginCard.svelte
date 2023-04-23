@@ -8,6 +8,10 @@
 	import { slide } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
 
+	import { getContext } from 'svelte';
+
+	$: haventLoggedOut = getContext('haventLoggedOut');
+
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
 	import { isLoggedIn, showLoginModal } from '$lib/store';
@@ -36,7 +40,9 @@
 		showLoginModalRedirect(loggedInEmail);
 	}
 
-	onMount(onMountFirebase);
+	// onMount(onMountFirebase);
+
+	$: if (haventLoggedOut || ($showLoginModal && !haventLoggedOut)) onMount(onMountFirebase);
 
 	async function onMountFirebase() {
 		const [firebaseModule, authModule] = await Promise.all([

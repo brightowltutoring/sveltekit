@@ -13,6 +13,7 @@
 
 	setContext('isIOS', data.isIOS);
 	setContext('isPWA', data.isPWA);
+	setContext('haventLoggedOut', data.haventLoggedOut);
 
 	onMount(() => {
 		disableZoomOnTouchDevices();
