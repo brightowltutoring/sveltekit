@@ -71,7 +71,7 @@ export function setIsPwaCookie() {
 	cookeh.eat('isPWA');
 	if (cookeh.get('isPWA')) return;
 
-	const isPWA = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+	const isPWA = window.matchMedia('(display-mode: standalone)').matches;
 	cookeh.set('isPWA', isPWA, 60 * 60 * 24 * 30);
 }
 
@@ -94,8 +94,8 @@ export const cookeh = {
 };
 
 // debounce from https://www.freecodecamp.org/news/javascript-debounce-example/; TODO: why is 'args / func.apply(this, args)' syntax necessary
-export function debounce(func, timeout = 300) {
-	let timer;
+export function debounce(func: any, timeout = 300) {
+	let timer: ReturnType<typeof setTimeout>;
 	return (...args) => {
 		clearTimeout(timer);
 		timer = setTimeout(() => {

@@ -3,14 +3,26 @@
 // const provider = new GoogleAuthProvider();
 
 export async function GoogleLogin() {
-	const { auth } = await import('./firebase');
+	const [authModule, firebaseAuthModule] = await Promise.all([
+		import('./firebase'),
+		import('firebase/auth')
+	]);
 
+	const { auth } = authModule;
 	const {
 		GoogleAuthProvider,
 		browserPopupRedirectResolver,
-		// setPersistence, browserSessionPersistence, inMemoryPersistence,
-		signInWithPopup
-	} = await import('firebase/auth');
+		signInWithPopup /*  setPersistence, browserSessionPersistence, inMemoryPersistence, */
+	} = firebaseAuthModule;
+
+	// const { auth } = await import('./firebase');
+
+	// const {
+	// 	GoogleAuthProvider,
+	// 	browserPopupRedirectResolver,
+	// 	//
+	// 	signInWithPopup
+	// } = await import('firebase/auth');
 
 	const provider = new GoogleAuthProvider();
 
