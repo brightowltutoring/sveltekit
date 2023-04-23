@@ -5,11 +5,13 @@ export function regexEmailChecker(EMAIL: string) {
 }
 
 export async function magicLinkToEmail(EMAIL: string) {
-	const { auth } = await import('./firebase');
-	const {
-		sendSignInLinkToEmail
-		// EmailAuthProvider
-	} = await import('firebase/auth');
+	const [firebaseModule, firebaseAuthModule] = await Promise.all([
+		import('./firebase'),
+		import('firebase/auth')
+	]);
+
+	const { auth } = firebaseModule;
+	const { sendSignInLinkToEmail } = firebaseAuthModule;
 
 	await sendSignInLinkToEmail(auth, EMAIL, {
 		url: 'https://thinksolve.io/',

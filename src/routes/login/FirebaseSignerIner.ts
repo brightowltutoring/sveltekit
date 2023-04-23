@@ -1,10 +1,13 @@
-// import { showLoginModal, isLoggedIn, loggedInEmail } from '$lib/store';
-
 export async function FirebaseSignerIner() {
-	const { showLoginModal, isLoggedIn, loggedInEmail } = await import('$lib/store');
-	const { auth } = await import('./firebase');
+	const [storeModule, firebaseModule] = await Promise.all([
+		import('$lib/store'),
+		import('./firebase')
+	]);
 
-	const { onAuthStateChanged } = await import('firebase/auth');
+	const { showLoginModal, isLoggedIn, loggedInEmail } = storeModule;
+	const { auth } = firebaseModule;
+
+	const { onAuthStateChanged, isSignInWithEmailLink } = await import('firebase/auth');
 	onAuthStateChanged(auth, (user) => {
 		if (user?.email) {
 			isLoggedIn.set(true);
@@ -24,7 +27,7 @@ export async function FirebaseSignerIner() {
 
 	// TODO: should this exist outside of this function?
 	// (For magic link only) Confirm the link is a sign-in with email link.
-	const { isSignInWithEmailLink } = await import('firebase/auth');
+
 	if (isSignInWithEmailLink(auth, window.location.href)) {
 		let email: string | null = window.localStorage.getItem('emailForSignIn');
 		if (!email) email = window.prompt('Please provide your email for confirmation');

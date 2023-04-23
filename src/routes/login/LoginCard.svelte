@@ -39,9 +39,13 @@
 	onMount(onMountFirebase);
 
 	async function onMountFirebase() {
-		const { auth } = await import('./firebase');
+		const [firebaseModule, authModule] = await Promise.all([
+			import('./firebase'),
+			import('firebase/auth')
+		]);
 
-		const { isSignInWithEmailLink } = await import('firebase/auth');
+		const { auth } = firebaseModule;
+		const { isSignInWithEmailLink, signInWithEmailLink, onAuthStateChanged } = authModule;
 
 		// Confirm the link is a sign-in with email link.
 
@@ -52,7 +56,6 @@
 				return; // ts complaint fix?
 			}
 
-			const { signInWithEmailLink } = await import('firebase/auth');
 			signInWithEmailLink(auth, email, window.location.href)
 				.then(() => {
 					window.localStorage.removeItem('emailForSignIn');
@@ -63,7 +66,6 @@
 
 		// TODO: this code fires when component mounts, but would rather download firebase modules as needed .. i.e. cookie based logic as I had in layout.svelte
 
-		const { onAuthStateChanged } = await import('firebase/auth');
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				$isLoggedIn = true;
@@ -121,10 +123,13 @@
 		if (redirectUrlFromLS) {
 			redirectLogic(redirectUrlFromLS);
 		} else {
-			const { getFirestore, collection, getDocs } = await import('firebase/firestore/lite');
+			const [firebaseModule, firestoreModule] = await Promise.all([
+				import('./firebase'),
+				import('firebase/firestore/lite')
+			]);
 
-			// TODO:dynamic importing added on dec12,2022
-			const { app } = await import('./firebase');
+			const { app } = firebaseModule;
+			const { getFirestore, collection, getDocs } = firestoreModule;
 
 			const db = getFirestore(app);
 			const querySnapshot = await getDocs(collection(db, 'email'));
