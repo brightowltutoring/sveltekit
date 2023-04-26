@@ -31,7 +31,7 @@
 	let redirectSetInterval: ReturnType<typeof setInterval>;
 
 	// !$showLoginModal just means when unclicking login button ... rename at a future date?
-	$: if (!$showLoginModal) {
+	$: if (!$showLoginModal && haventLoggedOut) {
 		clearInterval(redirectSetInterval);
 		clearTimeout(redirectAfterLoginTimeOut);
 	}
@@ -40,9 +40,8 @@
 		showLoginModalRedirect(loggedInEmail);
 	}
 
-	// onMount(onMountFirebase);
-
-	$: if (haventLoggedOut || ($showLoginModal && !haventLoggedOut)) onMount(onMountFirebase);
+	$: if (haventLoggedOut || (!haventLoggedOut && $showLoginModal)) onMount(onMountFirebase);
+	// $: if (haventLoggedOut || $showLoginModal) onMount(onMountFirebase);
 
 	async function onMountFirebase() {
 		const [firebaseModule, authModule] = await Promise.all([
@@ -85,9 +84,8 @@
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
 			} else {
 				$isLoggedIn = false;
-				cookeh.eat('haventLoggedOut');
 
-				localStorage.removeItem('redirectUrlFromLS'); // clears on logout only; stays even on refresh/exit!
+				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
 
 				loggedInEmail = '';
 			}
@@ -102,9 +100,6 @@
 	function redirectLogic(userRedirectUrl = '/login') {
 		let redirectTimeInMS = 3000;
 		let seconds = redirectTimeInMS / 1000; // i.e. 3
-		// let seconds = parseInt(redirectTimeInMS / 1000); // i.e. 3
-
-		// redirectSetInterval and redirectAfterLoginTimeOut are global variables, the state of which is also controlled above via a reactive statement
 
 		redirectSetInterval = setInterval(() => {
 			if (seconds > 0) {
@@ -122,13 +117,14 @@
 	}
 
 	async function showLoginModalRedirect(userEmail: string | null) {
-		let redirectUrlFromLS = localStorage.getItem('redirectUrlFromLS');
-		console.log('redirectUrlFromLS', redirectUrlFromLS);
+		let redirectUrlFromCookies = cookeh.get('redirectUrlFromCookies');
 
-		// TODO: test this to see how many calls to firebase ... may need to use cookies instead
-		if (redirectUrlFromLS) {
-			redirectLogic(redirectUrlFromLS);
+		if (redirectUrlFromCookies) {
+			redirectLogic(redirectUrlFromCookies);
+
+			console.log('redirectUrlFromCookies', redirectUrlFromCookies);
 		} else {
+			console.log('getdocs from firestore');
 			const [firebaseModule, firestoreModule] = await Promise.all([
 				import('./firebase'),
 				import('firebase/firestore/lite')
@@ -137,25 +133,21 @@
 			const { app } = firebaseModule;
 			const { getFirestore, collection, getDocs } = firestoreModule;
 
-			const db = getFirestore(app);
-			const querySnapshot = await getDocs(collection(db, 'email'));
-			const querySnapshotSize = querySnapshot.size;
-			const docs = querySnapshot.docs; // forEach can use querySnapshot directly, however 'break' logic becomes convoluted with try-catch block and throwing 'BreakException={}' (see: https://stackoverflow.com/questions/2641347/short-circuit-array-foreach-like-calling-break)
-			for (const i in docs) {
-				const doc = docs[i];
-
+			// 'email' refers to a custom database
+			const querySnapshotDocs = (await getDocs(collection(getFirestore(app), 'email'))).docs;
+			for (const doc of querySnapshotDocs) {
 				if (userEmail === doc.id) {
-					localStorage.setItem('redirectUrlFromLS', doc.data().redirectUrl);
-					redirectUrlFromLS = localStorage.getItem('redirectUrlFromLS')!;
-					redirectLogic(redirectUrlFromLS);
-					return; // break;
+					redirectUrlFromCookies = doc.data().redirectUrl;
+					break;
 				}
-				// without parseInt(i) this math conditional breaks
-				if (parseInt(i) === querySnapshotSize - 1) {
-					localStorage.setItem('redirectUrlFromLS', '/');
-					redirectUrlFromLS = localStorage.getItem('redirectUrlFromLS')!;
-					redirectLogic(redirectUrlFromLS);
-				}
+			}
+
+			if (redirectUrlFromCookies) {
+				cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies);
+				redirectLogic(redirectUrlFromCookies);
+			} else {
+				cookeh.set('redirectUrlFromCookies', '/');
+				redirectLogic('/');
 			}
 		}
 	}

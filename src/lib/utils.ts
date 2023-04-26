@@ -88,8 +88,12 @@ export const cookeh = {
 		return match ? decodeURIComponent(match[1]) : '';
 	},
 
-	eat: function (name: string) {
-		return (document.cookie = name + '=; max-age=0;');
+	eat: function (...names: string[]) {
+		names.forEach((name) => {
+			document.cookie = `${name}=; max-age=0;`;
+		});
+		// eat: function (name: string) {
+		// 	return (document.cookie = name + '=; max-age=0;');
 	}
 };
 
