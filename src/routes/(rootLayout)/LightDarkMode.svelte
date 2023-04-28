@@ -33,29 +33,29 @@
 <svelte:head>
 	<script lang="ts">
 		// ORIGINAL
-		// initialTheme() === ''
-		// 	? document.documentElement.classList.remove('dark-mode')
-		// 	: document.documentElement.classList.add('dark-mode');
+		initialTheme() === ''
+			? document.documentElement.classList.remove('dark-mode')
+			: document.documentElement.classList.add('dark-mode');
 
-		// function initialTheme() {
-		// 	if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
-		// 	if (sessionStorage.getItem('isDarkMode') === 'false') return '';
-		// 	if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
-		// 	return '';
-		// }
+		function initialTheme() {
+			if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
+			if (sessionStorage.getItem('isDarkMode') === 'false') return '';
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
+			return '';
+		}
 
 		// ALT #2
-		prefersDarkMode() && document.documentElement.classList.add('dark-mode');
+		// prefersDarkMode() && document.documentElement.classList.add('dark-mode');
 
-		function prefersDarkMode(): boolean {
-			return (
-				sessionStorage.getItem('isDarkMode') === 'true' ??
-				window.matchMedia('(prefers-color-scheme: dark)').matches
-			);
+		// function prefersDarkMode(): boolean {
+		// 	return (
+		// 		sessionStorage.getItem('isDarkMode') === 'true' ??
+		// 		window.matchMedia('(prefers-color-scheme: dark)').matches
+		// 	);
 
-			// if (sessionStorage.getItem('isDarkMode') === 'true') return true;
-			// if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
-		}
+		// 	// if (sessionStorage.getItem('isDarkMode') === 'true') return true;
+		// 	// if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
+		// }
 	</script>
 </svelte:head>
 
