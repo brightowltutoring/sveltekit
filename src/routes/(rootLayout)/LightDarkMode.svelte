@@ -18,7 +18,7 @@
 		document.documentElement.classList.toggle('dark-mode');
 	}
 
-	function initialTheme() {
+	export function initialTheme() {
 		if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
 		if (sessionStorage.getItem('isDarkMode') === 'false' || null) return '';
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
@@ -26,17 +26,30 @@
 	}
 </script>
 
+<!-- <svelte:head>
+	<script type="module" src="/src/routes/(rootLayout)/ldm-EXPERIMENTAL.ts"></script>
+</svelte:head> -->
+
 <svelte:head>
 	<script>
-		initialTheme() === ''
-			? document.documentElement.classList.remove('dark-mode')
-			: document.documentElement.classList.add('dark-mode');
+		// ORIGINAL
+		// initialTheme() === ''
+		// 	? document.documentElement.classList.remove('dark-mode')
+		// 	: document.documentElement.classList.add('dark-mode');
 
-		function initialTheme() {
-			if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
-			if (sessionStorage.getItem('isDarkMode') === 'false') return '';
-			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
-			return '';
+		// function initialTheme() {
+		// 	if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
+		// 	if (sessionStorage.getItem('isDarkMode') === 'false') return '';
+		// 	if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
+		// 	return '';
+		// }
+
+		// ALT #2
+		document.documentElement.classList.add(prefersDarkMode() ? 'dark-mode' : '');
+
+		function prefersDarkMode() {
+			if (sessionStorage.getItem('isDarkMode') === 'true') return true;
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'true';
 		}
 	</script>
 </svelte:head>
