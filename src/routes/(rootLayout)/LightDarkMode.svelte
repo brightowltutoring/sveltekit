@@ -31,7 +31,7 @@
 </svelte:head> -->
 
 <svelte:head>
-	<script>
+	<script lang="ts">
 		// ORIGINAL
 		// initialTheme() === ''
 		// 	? document.documentElement.classList.remove('dark-mode')
@@ -45,11 +45,16 @@
 		// }
 
 		// ALT #2
-		document.documentElement.classList.add(prefersDarkMode() ? 'dark-mode' : '');
+		prefersDarkMode() && document.documentElement.classList.add('dark-mode');
 
-		function prefersDarkMode() {
-			if (sessionStorage.getItem('isDarkMode') === 'true') return true;
-			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'true';
+		function prefersDarkMode(): boolean {
+			return (
+				sessionStorage.getItem('isDarkMode') === 'true' ??
+				window.matchMedia('(prefers-color-scheme: dark)').matches
+			);
+
+			// if (sessionStorage.getItem('isDarkMode') === 'true') return true;
+			// if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
 		}
 	</script>
 </svelte:head>
