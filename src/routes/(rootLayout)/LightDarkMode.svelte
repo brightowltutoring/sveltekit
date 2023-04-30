@@ -32,30 +32,15 @@
 
 <svelte:head>
 	<script lang="ts">
-		// ORIGINAL
-		initialTheme() === ''
-			? document.documentElement.classList.remove('dark-mode')
-			: document.documentElement.classList.add('dark-mode');
+		document.documentElement.classList.toggle('dark-mode', prefersDarkMode());
+		function prefersDarkMode() {
+			if (sessionStorage.getItem('isDarkMode') === 'true') return true;
+			if (sessionStorage.getItem('isDarkMode') === 'false') return false;
 
-		function initialTheme() {
-			if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
-			if (sessionStorage.getItem('isDarkMode') === 'false') return '';
-			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
-			return '';
+			// if sessionStorage doesn't exist, then defaults to matchMedia logic
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
+			return false;
 		}
-
-		// ALT #2
-		// prefersDarkMode() && document.documentElement.classList.add('dark-mode');
-
-		// function prefersDarkMode(): boolean {
-		// 	return (
-		// 		sessionStorage.getItem('isDarkMode') === 'true' ??
-		// 		window.matchMedia('(prefers-color-scheme: dark)').matches
-		// 	);
-
-		// 	// if (sessionStorage.getItem('isDarkMode') === 'true') return true;
-		// 	// if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
-		// }
 	</script>
 </svelte:head>
 
