@@ -6,29 +6,26 @@
 	import { isDarkMode } from '$lib/store';
 	import { browser } from '$app/environment';
 
-	// Initialize $isDarkMode using client-side settings via 'initialTheme()';
-	// Note: 'initialTheme()' declaration AND dark-mode css initialization done in head of document (see <svelte:head> below)
+	// initialize darkmode state
+	browser && ($isDarkMode = prefersDarkMode());
 
-	// initialize AND reactively set sessionStorage
-	$: $isDarkMode, browser && sessionStorage.setItem('isDarkMode', $isDarkMode.toString());
-	browser && ($isDarkMode = initialTheme() === 'dark-mode');
+	// reactively set sessionStorage darkmode
+	$: browser && sessionStorage.setItem('isDarkMode', String($isDarkMode));
 
 	function toggleDarkMode() {
 		$isDarkMode = !$isDarkMode;
 		document.documentElement.classList.toggle('dark-mode');
 	}
 
-	export function initialTheme() {
-		if (sessionStorage.getItem('isDarkMode') === 'true') return 'dark-mode';
-		if (sessionStorage.getItem('isDarkMode') === 'false' || null) return '';
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark-mode';
-		return '';
+	function prefersDarkMode() {
+		if (sessionStorage.getItem('isDarkMode') === 'true') return true;
+		if (sessionStorage.getItem('isDarkMode') === 'false') return false;
+
+		// if sessionStorage doesn't exist, then defaults to matchMedia logic
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
+		return false;
 	}
 </script>
-
-<!-- <svelte:head>
-	<script type="module" src="/src/routes/(rootLayout)/ldm-EXPERIMENTAL.ts"></script>
-</svelte:head> -->
 
 <svelte:head>
 	<script lang="ts">
