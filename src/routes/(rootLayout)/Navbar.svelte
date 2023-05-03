@@ -11,14 +11,17 @@
 		showLoginModal,
 		showHomeworkModal,
 		instDeltaY
+		// isIOS,
+		// isPWA
 	} from '$lib/store';
 
 	import { spring } from 'svelte/motion';
-	import { getContext } from 'svelte';
 	import LogoButton from './LogoButton.svelte';
 	import AppNavButton from './AppNavButton.svelte';
 
+	import { getContext, onMount } from 'svelte';
 	const isIOS = getContext('isIOS');
+	// $: haventLoggedOut = getContext('haventLoggedOut');
 
 	let showHideNav = '';
 
@@ -42,12 +45,17 @@
 
 	const isPwaFromContext = getContext('isPWA');
 	$: if ($isLoggedIn && (isPwaFromContext === false || null)) {
+		// $: if ($isLoggedIn && ($isPWA === false || null)) {
 		// $: if ($isLoggedIn && (sessionStorage.getItem('isPwaMode') === 'false' || null)) {
 		hueRocket = $isDarkMode ? 0.75 : 0;
 		scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
 	}
 
 	$: $routes.login.name = $isLoggedIn ? '🚀' : 'Login';
+
+	// onMount(() => {
+	// 	alert(`$isLoggedIn ${$isLoggedIn}`);
+	// });
 </script>
 
 <NavModals />
@@ -60,6 +68,7 @@
 	<ul
 		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl pwa:m-0 pwa:pb-0"
 	>
+		<!-- <li class={$isIOS ? 'block pwa:hidden' : 'hidden'}> -->
 		<li class={isIOS ? 'block pwa:hidden' : 'hidden'}>
 			<AppNavButton />
 		</li>

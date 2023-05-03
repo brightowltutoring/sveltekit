@@ -12,7 +12,11 @@ export const isDarkMode = writable(false);
 export const loggedInEmail = writable('');
 
 export const contactLinkClicked = writable(false);
+
 export const isLoggedIn = writable(false);
+export const isIOS = writable(false);
+export const isPWA = writable(false);
+
 export const lastScrollY = writable(0);
 export const scrollY = writable(0);
 

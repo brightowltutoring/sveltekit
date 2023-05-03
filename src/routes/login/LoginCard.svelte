@@ -1,30 +1,23 @@
 <script lang="ts">
+	export let noTransition = false;
+
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
 	import MagicLinkSection from './MagicLinkSection.svelte';
 	import PhoneAuthSection from './PhoneAuthSection.svelte';
-
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { slide } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
-
-	import { getContext } from 'svelte';
-
-	$: haventLoggedOut = getContext('haventLoggedOut');
-
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
 	import { isLoggedIn, showLoginModal } from '$lib/store';
+	import { getContext } from 'svelte';
 
-	export let noTransition = false;
-
-	let loginWelcomeText: string;
-
+	let loginWelcomeText = 'Howdy!';
 	// Allows to convert infinite 'animate-ping' tailwind animation to short animation;
 	// logic in 'signinWithLinkAndStop' function. Normally would do this with svelte and keyed block,
 	// however the destruction/creation of the element interferes with event fire logic I want to maintain
-
-	let loggedInEmail: string | null;
+	let loggedInEmail: string | null = '';
 
 	// these were previously store variables, but the reactive statement below takes care of things
 	let redirectAfterLoginTimeOut: ReturnType<typeof setTimeout>;
@@ -32,16 +25,16 @@
 
 	// !$showLoginModal just means when unclicking login button ... rename at a future date?
 	$: if (!$showLoginModal && haventLoggedOut) {
+		// $: if (!$showLoginModal && $isLoggedIn) {
 		clearInterval(redirectSetInterval);
 		clearTimeout(redirectAfterLoginTimeOut);
 	}
 
-	$: if ($showLoginModal && $isLoggedIn) {
-		showLoginModalRedirect(loggedInEmail);
-	}
+	$: if ($showLoginModal && $isLoggedIn) showLoginModalRedirect(loggedInEmail);
 
+	$: haventLoggedOut = getContext('haventLoggedOut');
 	$: if (haventLoggedOut || (!haventLoggedOut && $showLoginModal)) onMount(onMountFirebase);
-	// $: if (haventLoggedOut || $showLoginModal) onMount(onMountFirebase);
+	// $: if ($isLoggedIn || (!$isLoggedIn && $showLoginModal)) onMount(onMountFirebase);
 
 	async function onMountFirebase() {
 		const [firebaseModule, authModule] = await Promise.all([
@@ -79,7 +72,6 @@
 
 				loggedInEmail = user.email;
 
-				loginWelcomeText = 'Howdy!';
 				if (user.email) loginWelcomeText = `Hey ${user.email}!`;
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
 			} else {
@@ -93,8 +85,6 @@
 
 		// }
 	}
-
-	//  Hoisted Functions
 
 	// this function needs to detect logout too to reset store
 	function redirectLogic(userRedirectUrl = '/login') {
@@ -196,13 +186,13 @@
 	{/if}
 </main>
 
+<!-- :global(html.dark-mode) :where(login-card, logout-card) {
+		@apply bg-[#262333];
+	} -->
+
 <style lang="postcss">
 	login-card,
 	logout-card {
 		@apply relative mx-auto block w-[90vw] rounded-2xl bg-[#f2f7fa] px-5 py-10 font-Poppins text-xl shadow-md duration-300 hover:scale-[1.01] hover:rounded-3xl dark:bg-[#262333] sm:w-[500px] sm:p-10;
 	}
-
-	/* :global(html.dark-mode) :where(login-card, logout-card) {
-		@apply bg-[#262333];
-	} */
 </style>

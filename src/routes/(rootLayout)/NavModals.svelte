@@ -5,7 +5,7 @@
 
 	import { scale, fly /* slide, fade, blur*/ } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
-	import { showLoginModal, showHomeworkModal, navAppClicked } from '$lib/store';
+	import { showLoginModal, showHomeworkModal, navAppClicked /* isIOS */ } from '$lib/store';
 
 	import { getContext } from 'svelte';
 	const isIOS: boolean = getContext('isIOS');
@@ -29,6 +29,7 @@
 	};
 </script>
 
+<!-- showModal={$isIOS && $navAppClicked} -->
 <Modal
 	all
 	showModal={isIOS && $navAppClicked}
