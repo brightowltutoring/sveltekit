@@ -8,6 +8,7 @@
 	import { elasticOut } from 'svelte/easing';
 
 	import { onMount } from 'svelte';
+
 	let ready = false;
 	onMount(() => (ready = true));
 </script>

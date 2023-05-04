@@ -11,7 +11,6 @@
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
 	import { isLoggedIn, showLoginModal } from '$lib/store';
-	import { getContext } from 'svelte';
 
 	let loginWelcomeText = 'Howdy!';
 	// Allows to convert infinite 'animate-ping' tailwind animation to short animation;
@@ -24,17 +23,18 @@
 	let redirectSetInterval: ReturnType<typeof setInterval>;
 
 	// !$showLoginModal just means when unclicking login button ... rename at a future date?
-	$: if (!$showLoginModal && haventLoggedOut) {
-		// $: if (!$showLoginModal && $isLoggedIn) {
+
+	$: if (!$showLoginModal && $isLoggedIn) {
 		clearInterval(redirectSetInterval);
 		clearTimeout(redirectAfterLoginTimeOut);
 	}
 
-	$: if ($showLoginModal && $isLoggedIn) showLoginModalRedirect(loggedInEmail);
+	$: if ($showLoginModal && $isLoggedIn) {
+		showLoginModalRedirect(loggedInEmail);
+	}
 
-	$: haventLoggedOut = getContext('haventLoggedOut');
-	$: if (haventLoggedOut || (!haventLoggedOut && $showLoginModal)) onMount(onMountFirebase);
 	// $: if ($isLoggedIn || (!$isLoggedIn && $showLoginModal)) onMount(onMountFirebase);
+	onMount(async () => await onMountFirebase());
 
 	async function onMountFirebase() {
 		const [firebaseModule, authModule] = await Promise.all([
@@ -68,7 +68,7 @@
 			if (user) {
 				$isLoggedIn = true;
 
-				cookeh.set('haventLoggedOut', $isLoggedIn);
+				cookeh.set('haventLoggedOut', String($isLoggedIn));
 
 				loggedInEmail = user.email;
 
@@ -76,9 +76,7 @@
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
 			} else {
 				$isLoggedIn = false;
-
 				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
-
 				loggedInEmail = '';
 			}
 		});

@@ -1,21 +1,16 @@
 <script lang="ts">
-	// import IsPWA from './../(rootLayout)/IsPWA.svelte';
-
 	// using local copy of jitsi api script since standard head script (e.g. using: src="https://meet.jit.si/external_api.js"), in commented out <svelte:head> below, not working
 
 	export let admin = false; // existence prop; used for '/classroomA' route
 
-	import { onMount, getContext } from 'svelte';
+	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { lessThan768 } from '$lib/store';
-
-	const isPwaFromContext = getContext('isPWA');
+	import { lessThan768, isPWA } from '$lib/store';
 
 	async function hangUpBtn() {
 		await api.dispose();
 
-		if (isPwaFromContext) goto('/pwa');
-		// if (sessionStorage.getItem('isPwaMode') === 'true') goto('/pwa-home');
+		if ($isPWA) goto('/pwa');
 		else goto('/');
 	}
 

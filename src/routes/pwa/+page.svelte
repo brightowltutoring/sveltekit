@@ -3,9 +3,6 @@
 	import { slide } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	// import { page } from '$app/stores';
-	// import { disableScrollingOnPage } from '$lib/utils';
-	// disableScrollingOnPage($page.url.pathname);
 
 	let ready = false;
 	onMount(() => (ready = true));

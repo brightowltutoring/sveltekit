@@ -4,20 +4,15 @@
 	import Footer from './(rootLayout)/Footer.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { setContext } from 'svelte';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
-	import { setInnerWidthViaMatchMedia, scrollY, isLoggedIn /*, isIOS, isPWA */ } from '$lib/store';
+	import { setInnerWidthViaMatchMedia, scrollY, isLoggedIn, isIOS, isPWA } from '$lib/store';
+
 	// import Seo from './(rootLayout)/SeoStatic2.svelte';
 
 	export let data;
-
-	setContext('isIOS', data.isIOS);
-	setContext('isPWA', data.isPWA);
-	setContext('haventLoggedOut', data.haventLoggedOut);
-
-	// $isLoggedIn = Boolean(data.haventLoggedOut);
-	// $isIOS = Boolean(data.isIOS);
-	// $isPWA = Boolean(data.isPWA);
+	$isLoggedIn = Boolean(data.haventLoggedOut);
+	$isIOS = Boolean(data.isIOS);
+	$isPWA = Boolean(data.isPWA);
 
 	onMount(() => {
 		disableZoomOnTouchDevices();

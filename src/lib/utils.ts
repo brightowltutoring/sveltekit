@@ -68,11 +68,11 @@ export async function disableScrollingOnPage(pathname: string) {
 }
 
 export function setIsPwaCookie() {
-	cookeh.eat('isPWA');
+	// cookeh.eat('isPWA'); //testing; keep this commented out unless needed!
 	if (cookeh.get('isPWA')) return;
 
 	const isPWA = window.matchMedia('(display-mode: standalone)').matches;
-	cookeh.set('isPWA', isPWA, 60 * 60 * 24 * 30);
+	isPWA && cookeh.set('isPWA', isPWA, 60 * 60 * 24 * 30);
 }
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use. Might add serializer code from npm cookie inside my set method.

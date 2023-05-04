@@ -13,6 +13,7 @@ export const loggedInEmail = writable('');
 
 export const contactLinkClicked = writable(false);
 
+// these are intialized set at the layout level; isLoggedIn can be toggled in other components
 export const isLoggedIn = writable(false);
 export const isIOS = writable(false);
 export const isPWA = writable(false);
