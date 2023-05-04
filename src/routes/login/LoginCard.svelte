@@ -33,10 +33,11 @@
 		showLoginModalRedirect(loggedInEmail);
 	}
 
-	// $: if ($isLoggedIn || (!$isLoggedIn && $showLoginModal)) onMount(onMountFirebase);
-	onMount(async () => await onMountFirebase());
+	$: if ($isLoggedIn || (!$isLoggedIn && $showLoginModal)) onMount(onMountFirebase);
+	// onMount(async () => await onMountFirebase()); //above seemingly has no performance gains
 
 	async function onMountFirebase() {
+		console.log('check check');
 		const [firebaseModule, authModule] = await Promise.all([
 			import('./firebase'),
 			import('firebase/auth')
