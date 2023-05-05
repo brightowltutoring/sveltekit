@@ -1,4 +1,5 @@
-import { showLoginModal, showHomeworkModal, navAppClicked } from '$lib/store';
+import { get } from 'svelte/store';
+import { showLoginModal, showHomeworkModal, navAppClicked, isSafari } from '$lib/store';
 import { onMount, onDestroy } from 'svelte';
 import { browser } from '$app/environment';
 // the modules above cannot be dynamically imported in functions below, without failure
@@ -39,12 +40,15 @@ export function userAgentFromRequestHeaders(headers: Headers) {
 	const parser = new UAParser(userAgent);
 	const isMobile = parser.getDevice().type === 'mobile';
 	const isIOS = parser.getOS().name?.toLowerCase() === 'ios';
+
+	const browser = parser.getBrowser().name?.toLowerCase();
+	const isSafari = browser?.includes('safari');
 	// const isIphone = parser.getDevice().model?.toLowerCase() === 'iphone';
 
 	return {
 		isMobile,
-		isIOS
-		// isIphone,
+		isIOS,
+		isSafari
 	};
 }
 
@@ -72,15 +76,21 @@ export function setIsPwaCookie() {
 	if (cookeh.get('isPWA')) return;
 
 	const isPWA = window.matchMedia('(display-mode: standalone)').matches;
-	isPWA && cookeh.set('isPWA', isPWA, 60 * 60 * 24 * 30);
+	isPWA && cookeh.set('isPWA', isPWA);
 }
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use. Might add serializer code from npm cookie inside my set method.
 export const cookeh = {
-	// found out hard way that some browser don't support special characters for 'name' ... so now sticking to regular letters (i.e. $isLoggedIn is not allowed as a string)
-	set: function (name: string, value: string | boolean, seconds = 60 * 60 * 24) {
-		return (document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None; Secure`);
+	set: function (
+		name: string,
+		value: string | boolean,
+		{ seconds = 60 * 60 * 24, secure = !get(isSafari) } = {}
+		// For some reason on safari the security has to set to false, but on chrome it has to be set to true!! At the moment 'isSafari' is set from request headers on the backend, then set as a store variable on the front-end ... which I am choosing to retrieve here as the default value to 'secure' ... otherwise I'd have to set '{secure: !$isSafari}' when setting the cookie on the client-side for every cookie
+	) {
+		document.cookie =
+			`${name}=${value}; max-age=${seconds}; SameSite=None` + (secure ? '; Secure' : '');
 	},
+
 	get: function (name: string) {
 		// return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
 
@@ -98,9 +108,24 @@ export const cookeh = {
 };
 
 // debounce from https://www.freecodecamp.org/news/javascript-debounce-example/; TODO: why is 'args / func.apply(this, args)' syntax necessary
-export function debounce(func: any, timeout = 300) {
+// export function debounce(func: any, timeout = 300) {
+// 	let timer: ReturnType<typeof setTimeout>;
+
+// 	return (...args) => {
+// 		clearTimeout(timer);
+// 		timer = setTimeout(() => {
+// 			func.apply(this, args);
+// 		}, timeout);
+// 	};
+// }
+// TODO: chatgpt fix:
+export function debounce<F extends (...args: any[]) => void>(
+	func: F,
+	timeout = 300
+): (...args: Parameters<F>) => void {
 	let timer: ReturnType<typeof setTimeout>;
-	return (...args) => {
+
+	return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
 		clearTimeout(timer);
 		timer = setTimeout(() => {
 			func.apply(this, args);

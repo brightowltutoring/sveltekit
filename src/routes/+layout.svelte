@@ -5,7 +5,14 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
-	import { setInnerWidthViaMatchMedia, scrollY, isLoggedIn, isIOS, isPWA } from '$lib/store';
+	import {
+		setInnerWidthViaMatchMedia,
+		scrollY,
+		isLoggedIn,
+		isIOS,
+		isPWA,
+		isSafari
+	} from '$lib/store';
 
 	// import Seo from './(rootLayout)/SeoStatic2.svelte';
 
@@ -13,6 +20,7 @@
 	$isLoggedIn = Boolean(data.haventLoggedOut);
 	$isIOS = Boolean(data.isIOS);
 	$isPWA = Boolean(data.isPWA);
+	$isSafari = Boolean(data.isSafari);
 
 	onMount(() => {
 		disableZoomOnTouchDevices();

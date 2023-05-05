@@ -10,7 +10,7 @@
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
-	import { isLoggedIn, showLoginModal } from '$lib/store';
+	import { isLoggedIn, showLoginModal, isSafari } from '$lib/store';
 
 	let loginWelcomeText = 'Howdy!';
 	// Allows to convert infinite 'animate-ping' tailwind animation to short animation;
@@ -33,8 +33,10 @@
 		showLoginModalRedirect(loggedInEmail);
 	}
 
+	//TODO: for some reason $isLoggedIn, initialized via cookie, is falsy on safari ... even it previously set to true ... According to 'https://github.com/sveltejs/kit/issues/6632' the fix involves setting 'secure' to false when setting the cookie
 	$: if ($isLoggedIn || (!$isLoggedIn && $showLoginModal)) onMount(onMountFirebase);
-	// onMount(async () => await onMountFirebase()); //above seemingly has no performance gains
+
+	// onMount(async () => await onMountFirebase());
 
 	async function onMountFirebase() {
 		console.log('check check');
@@ -69,7 +71,7 @@
 			if (user) {
 				$isLoggedIn = true;
 
-				cookeh.set('haventLoggedOut', String($isLoggedIn));
+				cookeh.set('haventLoggedOut', $isLoggedIn);
 
 				loggedInEmail = user.email;
 
