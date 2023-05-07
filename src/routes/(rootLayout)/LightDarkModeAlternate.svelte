@@ -9,8 +9,8 @@
 	// initialize darkmode state
 	browser && ($isDarkMode = prefersDarkMode());
 
-	// reactively set sessionStorage darkmode
-	$: browser && sessionStorage.setItem('isDarkMode', String($isDarkMode));
+	// reactively set localStorage darkmode
+	$: browser && localStorage.setItem('isDarkMode', String($isDarkMode));
 
 	function toggleDarkMode() {
 		$isDarkMode = !$isDarkMode;
@@ -18,8 +18,8 @@
 	}
 
 	function prefersDarkMode() {
-		if (sessionStorage.getItem('isDarkMode') === 'true') return true;
-		if (sessionStorage.getItem('isDarkMode') === 'false') return false;
+		if (localStorage.getItem('isDarkMode') === 'true') return true;
+		if (localStorage.getItem('isDarkMode') === 'false') return false;
 
 		// if sessionStorage doesn't exist, then defaults to matchMedia logic
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
@@ -31,11 +31,18 @@
 	<script lang="ts">
 		document.documentElement.classList.toggle('dark-mode', prefersDarkMode());
 		function prefersDarkMode() {
-			if (sessionStorage.getItem('isDarkMode') === 'true') return true;
-			if (sessionStorage.getItem('isDarkMode') === 'false') return false;
+			if (localStorage.getItem('isDarkMode') === 'true') return true;
+			if (localStorage.getItem('isDarkMode') === 'false') return false;
 			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
 			return false;
 		}
+
+		// localStorage.getItem('isDarkMode') === 'true'
+		// 	? document.documentElement.classList.add('dark-mode')
+		// 	: localStorage.getItem('isDarkMode') === 'false'
+		// 	? document.documentElement.classList.remove('dark-mode')
+		// 	: window.matchMedia('(prefers-color-scheme: dark)').matches &&
+		// 	  document.documentElement.classList.add('dark-mode');
 	</script>
 </svelte:head>
 
