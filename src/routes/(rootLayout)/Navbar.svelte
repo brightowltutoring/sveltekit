@@ -18,6 +18,7 @@
 	import { spring } from 'svelte/motion';
 	import LogoButton from './LogoButton.svelte';
 	import AppNavButton from './AppNavButton.svelte';
+	import { browser } from '$app/environment';
 
 	let showHideNav = '';
 
@@ -45,6 +46,7 @@
 	}
 
 	$: $routes.login.name = $isLoggedIn ? '🚀' : 'Login';
+	browser && alert(`$isLoggedIn: ${$isLoggedIn}`);
 </script>
 
 <NavModals />
