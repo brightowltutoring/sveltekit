@@ -1,5 +1,6 @@
 import { goto } from '$app/navigation';
-import { showLoginModal, isPWA } from '$lib/store';
+import { showLoginModal, isPWA, isLoggedIn } from '$lib/store';
+import { cookeh } from '$lib/utils';
 import { get } from 'svelte/store';
 
 export async function logoutFunction() {
@@ -14,6 +15,10 @@ export async function logoutFunction() {
 	const { signOut } = authModule;
 
 	signOut(auth)
-		.then(() => goto(get(isPWA) ? '/pwa' : '/'))
+		// .then(() => goto(get(isPWA) ? '/pwa' : '/'))
+		.then(() => {
+			isLoggedIn.set(false);
+			cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
+		})
 		.catch((error) => console.log('logoutFunction failed', error));
 }
