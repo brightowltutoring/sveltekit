@@ -46,7 +46,7 @@
 	}
 
 	$: $routes.login.name = $isLoggedIn ? '🚀' : 'Login';
-	browser && alert(`$isLoggedIn: ${$isLoggedIn}`);
+	// $: browser && console.log('$isLoggedIn', $isLoggedIn);
 </script>
 
 <NavModals />

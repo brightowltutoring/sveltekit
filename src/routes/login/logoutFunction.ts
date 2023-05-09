@@ -1,5 +1,6 @@
 import { goto } from '$app/navigation';
-import { showLoginModal } from '$lib/store';
+import { showLoginModal, isPWA } from '$lib/store';
+import { get } from 'svelte/store';
 
 export async function logoutFunction() {
 	showLoginModal.set(false);
@@ -13,11 +14,6 @@ export async function logoutFunction() {
 	const { signOut } = authModule;
 
 	signOut(auth)
-		.then(() => {
-			console.log('logged out');
-			goto('/');
-		})
-		.catch((error) => {
-			console.log('logoutFunction failed', error);
-		});
+		.then(() => goto(get(isPWA) ? '/pwa' : '/'))
+		.catch((error) => console.log('logoutFunction failed', error));
 }

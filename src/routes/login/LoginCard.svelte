@@ -70,21 +70,21 @@
 
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
+				cookeh.set('haventLoggedOut', $isLoggedIn, { secure: !$isSafari });
 				$isLoggedIn = true;
 
 				// cookeh.set('haventLoggedOut', String($isLoggedIn), { secure: false, seconds: 5 });
 				// cookeh.set('haventLoggedOut', String($isLoggedIn));
 				// cookeh.set('haventLoggedOut', $isLoggedIn, { secure: true });
-				cookeh.set('haventLoggedOut', $isLoggedIn, { secure: !$isSafari });
 
 				loggedInEmail = user.email;
 
 				if (user.email) loginWelcomeText = `Hey ${user.email}!`;
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
 			} else {
-				$isLoggedIn = false;
 				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
-				loggedInEmail = '';
+				$isLoggedIn = false;
+				// loggedInEmail = '';
 			}
 		});
 
@@ -141,7 +141,7 @@
 				cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies);
 				redirectLogic(redirectUrlFromCookies);
 			} else {
-				cookeh.set('redirectUrlFromCookies', '/');
+				cookeh.set('redirectUrlFromCookies', '/pwa');
 				redirectLogic('/');
 			}
 		}
