@@ -34,8 +34,8 @@
 	}
 
 	//TODO: for some reason $isLoggedIn, initialized via cookie, is falsy on safari ... even it previously set to true ... According to 'https://github.com/sveltejs/kit/issues/6632' the fix involves setting 'secure' to false when setting the cookie
-	$: if ($isLoggedIn || (!$isLoggedIn && $showLoginModal)) onMount(onMountFirebase);
-	// onMount(async () => await onMountFirebase());
+	// $: if ($isLoggedIn || (!$isLoggedIn && $showLoginModal))
+	onMount(async () => await onMountFirebase());
 
 	// onMount(async () => await onMountFirebase());
 

@@ -8,7 +8,7 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	const pathname = event.url.pathname;
 
 	const urlRedirects = {
-		screenshare: 'classroom',
+		// screenshare: 'classroom',
 		'pwa-home': 'pwa'
 	};
 
@@ -19,6 +19,7 @@ export const redirectOldUrls: Handle = async ({ event, resolve }) => {
 	}
 
 	// if (availableRouteString.includes(pathname)) return Response.redirect(`🍌`, 302);
+	console.log(` event.url: ${event.url} `);
 
 	return await resolve(event);
 };
@@ -45,4 +46,4 @@ export const metaTagFixWhenSSR: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handle = sequence(redirectOldUrls /* , metaTagFixWhenSSR */);
+// export const handle = sequence(redirectOldUrls /* , metaTagFixWhenSSR */);
