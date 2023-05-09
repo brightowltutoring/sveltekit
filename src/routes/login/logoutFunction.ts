@@ -1,7 +1,7 @@
-import { goto } from '$app/navigation';
-import { showLoginModal, isPWA, isLoggedIn } from '$lib/store';
+import { showLoginModal, /*  isPWA, */ isLoggedIn } from '$lib/store';
+// import { get } from 'svelte/store';
+// import { goto } from '$app/navigation';
 import { cookeh } from '$lib/utils';
-import { get } from 'svelte/store';
 
 export async function logoutFunction() {
 	showLoginModal.set(false);

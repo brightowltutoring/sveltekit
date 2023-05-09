@@ -82,10 +82,11 @@
 				if (user.email) loginWelcomeText = `Hey ${user.email}!`;
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
 			} else {
-				// NOTE: this code moved to logoutFunction.ts .. makes more sense there
-				// cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
-				// $isLoggedIn = false;
 				loggedInEmail = '';
+
+				// this code also in logoutFunction.ts ... currently it was buggy when just in logoutFunction.ts. TODO: resolve this
+				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
+				$isLoggedIn = false;
 			}
 		});
 
