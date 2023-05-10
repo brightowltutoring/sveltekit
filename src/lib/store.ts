@@ -1,5 +1,9 @@
 import { writable, derived, get } from 'svelte/store';
 
+// .. previously in logincard.svelte; once upon a time I did have these here
+export const redirectAfterLoginTimeOut = writable<ReturnType<typeof setTimeout>>(undefined);
+export const redirectSetInterval = writable<ReturnType<typeof setInterval>>(undefined);
+
 // alternative to globalThis variables
 export const magicLinkInputVisible$ = writable(false);
 export const popUpOnceBoolean$ = writable(false);

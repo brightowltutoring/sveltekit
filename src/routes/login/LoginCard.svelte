@@ -4,13 +4,20 @@
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
 	import MagicLinkSection from './MagicLinkSection.svelte';
 	import PhoneAuthSection from './PhoneAuthSection.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { slide } from 'svelte/transition';
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
-	import { isLoggedIn, showLoginModal, isSafari } from '$lib/store';
+	import {
+		isLoggedIn,
+		showLoginModal,
+		isSafari,
+		isPWA
+		// redirectAfterLoginTimeOut, // TODO: delete
+		// redirectSetInterval // TODO: delete
+	} from '$lib/store';
 
 	let loginWelcomeText = 'Howdy!';
 	// Allows to convert infinite 'animate-ping' tailwind animation to short animation;
@@ -19,28 +26,40 @@
 	let loggedInEmail: string | null = '';
 
 	// these were previously store variables, but the reactive statement below takes care of things
+
 	let redirectAfterLoginTimeOut: ReturnType<typeof setTimeout>;
 	let redirectSetInterval: ReturnType<typeof setInterval>;
 
-	// !$showLoginModal just means when unclicking login button ... rename at a future date?
+	// // handling this in onMount now; specifically within 'onAuthStagechanged' detection of user (firebase function)
+	// $: if ($showLoginModal && $isLoggedIn) {
+	// 	showLoginModalRedirect(loggedInEmail);
+	// }
 
-	$: if (!$showLoginModal && $isLoggedIn) {
-		clearInterval(redirectSetInterval);
-		clearTimeout(redirectAfterLoginTimeOut);
-	}
-
-	$: if ($showLoginModal && $isLoggedIn) {
-		showLoginModalRedirect(loggedInEmail);
-	}
+	// // handling this in onDestroy now
+	// $: if (!$showLoginModal && $isLoggedIn) {
+	// 	clearInterval(redirectSetInterval);
+	// 	clearTimeout(redirectAfterLoginTimeOut);
+	// 	console.log('!$showLoginModal && $isLoggedIn');
+	// }
 
 	//TODO: for some reason $isLoggedIn, initialized via cookie, is falsy on safari ... even it previously set to true ... According to 'https://github.com/sveltejs/kit/issues/6632' the fix involves setting 'secure' to false when setting the cookie
 	// $: if ($isLoggedIn || (!$isLoggedIn && $showLoginModal))
-	onMount(async () => await onMountFirebase());
+	onMount(async () => {
+		await onMountFirebase();
+
+		// alert('hey');
+		console.log('created');
+	});
+
+	onDestroy(async () => {
+		clearInterval(redirectSetInterval);
+		clearTimeout(redirectAfterLoginTimeOut);
+		console.log('destroyed!');
+	});
 
 	// onMount(async () => await onMountFirebase());
 
 	async function onMountFirebase() {
-		console.log('onMountFirebase');
 		const [firebaseModule, authModule] = await Promise.all([
 			import('./firebase'),
 			import('firebase/auth')
@@ -70,14 +89,11 @@
 
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
+				loggedInEmail = user.email;
+				showLoginModalRedirect(loggedInEmail);
+
 				cookeh.set('haventLoggedOut', $isLoggedIn, { secure: !$isSafari });
 				$isLoggedIn = true;
-
-				// cookeh.set('haventLoggedOut', String($isLoggedIn), { secure: false, seconds: 5 });
-				// cookeh.set('haventLoggedOut', String($isLoggedIn));
-				// cookeh.set('haventLoggedOut', $isLoggedIn, { secure: true });
-
-				loggedInEmail = user.email;
 
 				if (user.email) loginWelcomeText = `Hey ${user.email}!`;
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
@@ -85,6 +101,7 @@
 				loggedInEmail = '';
 
 				// this code also in logoutFunction.ts ... currently it was buggy when just in logoutFunction.ts. TODO: resolve this
+
 				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
 				$isLoggedIn = false;
 			}
@@ -96,19 +113,23 @@
 	// this function needs to detect logout too to reset store
 	function redirectLogic(userRedirectUrl = '/login') {
 		let redirectTimeInMS = 3000;
-		let seconds = redirectTimeInMS / 1000; // i.e. 3
+		let seconds = Math.trunc(redirectTimeInMS / 1000); // i.e. 3
+		let timeLeftElement = document.getElementById('timeLeft');
 
 		redirectSetInterval = setInterval(() => {
 			if (seconds > 0) {
 				seconds += -1;
-				document.getElementById('timeLeft')!.innerHTML = ` ${seconds}`;
+				if (timeLeftElement) timeLeftElement.innerHTML = ` ${seconds}`;
+				console.log('seconds', seconds);
 			}
 		}, 1000);
 
 		redirectAfterLoginTimeOut = setTimeout(() => {
+			// this removed from reactive statement above, since it makes sense to clear after the set timeout directly, rather than depend on some svelte global variables which indirectly do the same thing
+			clearInterval(redirectSetInterval);
+			clearTimeout(redirectAfterLoginTimeOut);
+
 			$showLoginModal = false;
-			// document.getElementById("timeLeft").innerHTML = 3;
-			document.getElementById('timeLeft')!.innerHTML = '3'; //TODO: potential bug
 			goto(userRedirectUrl);
 		}, redirectTimeInMS);
 	}
@@ -135,16 +156,20 @@
 			for (const doc of querySnapshotDocs) {
 				if (userEmail === doc.id) {
 					redirectUrlFromCookies = doc.data().redirectUrl;
+					console.log('redirectUrlFromCookies from firestore', redirectUrlFromCookies);
 					break;
 				}
 			}
 
 			if (redirectUrlFromCookies) {
-				cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies);
+				// cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies);
+				cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies, { secure: !$isSafari });
 				redirectLogic(redirectUrlFromCookies);
 			} else {
-				cookeh.set('redirectUrlFromCookies', '/pwa');
-				redirectLogic('/');
+				let defaultRoute = $isPWA ? '/pwa' : '/';
+				// cookeh.set('redirectUrlFromCookies', defaultRoutes);
+				cookeh.set('redirectUrlFromCookies', defaultRoute, { secure: !$isSafari });
+				redirectLogic(defaultRoute);
 			}
 		}
 	}
@@ -173,11 +198,12 @@
 		<!-- {/key} -->
 	{/if}
 
-	{#if $isLoggedIn && $showLoginModal}
-		<!-- {#if $isLoggedIn} -->
+	<!-- {#if $isLoggedIn && $showLoginModal} -->
+	{#if $isLoggedIn}
 		<!-- {#key !noTransition && $showLoginModal} -->
 		<logout-card in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}>
 			<p>{loginWelcomeText}</p>
+			<!-- <p>{!$isLoggedIn ? 'Howdy' : loginWelcomeText}</p> -->
 
 			<div>
 				Redirecting in
