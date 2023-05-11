@@ -10,15 +10,10 @@
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
-	import { isLoggedIn, showLoginModal, /* isSafari, */ isPWA } from '$lib/store';
+	import { isLoggedIn, showLoginModal, isPWA } from '$lib/store';
 
 	let loginWelcomeText = 'Howdy!';
-	// Allows to convert infinite 'animate-ping' tailwind animation to short animation;
-	// logic in 'signinWithLinkAndStop' function. Normally would do this with svelte and keyed block,
-	// however the destruction/creation of the element interferes with event fire logic I want to maintain
 	let loggedInEmail: string | null = '';
-
-	// these were previously store variables, but the reactive statement below takes care of things
 
 	let redirectAfterLoginTimeOut: ReturnType<typeof setTimeout>;
 	let redirectSetInterval: ReturnType<typeof setInterval>;
@@ -33,8 +28,6 @@
 		clearTimeout(redirectAfterLoginTimeOut);
 		console.log('destroyed!');
 	});
-
-	// onMount(async () => await onMountFirebase());
 
 	async function onMountFirebase() {
 		const [firebaseModule, authModule] = await Promise.all([
@@ -62,8 +55,6 @@
 				.catch((error) => console.log('signInWithEmailLink:', error));
 		}
 
-		// TODO: this code fires when component mounts, but would rather download firebase modules as needed .. i.e. cookie based logic as I had in layout.svelte
-
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				$isLoggedIn = true;
@@ -72,7 +63,6 @@
 				showLoginModalRedirect(loggedInEmail);
 
 				cookeh.set('haventLoggedOut', $isLoggedIn);
-				// cookeh.set('haventLoggedOut', $isLoggedIn, { secure: !$isSafari });
 
 				if (user.email) loginWelcomeText = `Hey ${user.email}!`;
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
@@ -80,7 +70,6 @@
 				$isLoggedIn = false;
 				loggedInEmail = '';
 
-				// this code also in logoutFunction.ts ... currently it was buggy when just in logoutFunction.ts. TODO: resolve this
 				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
 			}
 		});
@@ -101,7 +90,6 @@
 		}, 1000);
 
 		redirectAfterLoginTimeOut = setTimeout(() => {
-			// this removed from reactive statement above, since it makes sense to clear after the set timeout directly, rather than depend on some svelte global variables which indirectly do the same thing
 			clearInterval(redirectSetInterval);
 			clearTimeout(redirectAfterLoginTimeOut);
 
@@ -115,7 +103,6 @@
 
 		if (redirectUrlFromCookies) {
 			redirectLogic(redirectUrlFromCookies);
-			// console.log('redirectUrlFromCookies', redirectUrlFromCookies);
 		} else {
 			console.log('getdocs from firestore');
 			const [firebaseModule, firestoreModule] = await Promise.all([
@@ -131,20 +118,20 @@
 			for (const doc of querySnapshotDocs) {
 				if (userEmail === doc.id) {
 					redirectUrlFromCookies = doc.data().redirectUrl;
-					// console.log('redirectUrlFromCookies from firestore', redirectUrlFromCookies);
+
 					break;
 				}
 			}
 
 			if (redirectUrlFromCookies) {
 				cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies);
-				// cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies, { secure: !$isSafari });
+
 				redirectLogic(redirectUrlFromCookies);
 			} else {
 				let defaultRoute = $isPWA ? '/pwa' : '/';
 
 				cookeh.set('redirectUrlFromCookies', defaultRoute);
-				// cookeh.set('redirectUrlFromCookies', defaultRoute, { secure: !$isSafari });
+
 				redirectLogic(defaultRoute);
 			}
 		}
@@ -152,10 +139,7 @@
 </script>
 
 <main>
-	<!-- TODO: this breaks the expected '/login' behaviour .. i.e. no content unless button clicked  -->
 	{#if !$isLoggedIn}
-		<!-- {#if !$isLoggedIn} -->
-		<!-- {#key !noTransition && $showLoginModal} -->
 		<login-card in:slide={{ duration: 400, easing: quintOut }}>
 			<GoogleLoginButton />
 			<p class="py-3" />
@@ -168,18 +152,12 @@
 				<p class="py-3" />
 				<PhoneAuthSection />
 			</div>
-
-			<!-- <TwitterLoginButton /> -->
 		</login-card>
-		<!-- {/key} -->
 	{/if}
 
-	<!-- {#if $isLoggedIn && $showLoginModal} -->
 	{#if $isLoggedIn}
-		<!-- {#key !noTransition && $showLoginModal} -->
 		<logout-card in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}>
 			<p>{loginWelcomeText}</p>
-			<!-- <p>{!$isLoggedIn ? 'Howdy' : loginWelcomeText}</p> -->
 
 			<div>
 				Redirecting in
@@ -191,7 +169,6 @@
 				on:click={logoutFunction}>Logout</button
 			>
 		</logout-card>
-		<!-- {/key} -->
 	{/if}
 </main>
 
