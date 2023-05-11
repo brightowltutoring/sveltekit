@@ -111,7 +111,7 @@ export const cookeh = {
 };
 
 // debounce from https://www.freecodecamp.org/news/javascript-debounce-example/; TODO: why is 'args / func.apply(this, args)' syntax necessary
-// export function debounce(func: any, timeout = 300) {
+// export function debouncer(func: any, timeout = 300) {
 // 	let timer: ReturnType<typeof setTimeout>;
 
 // 	return (...args) => {
@@ -121,18 +121,16 @@ export const cookeh = {
 // 		}, timeout);
 // 	};
 // }
-// TODO: chatgpt fix:
-export function debounce<F extends (...args: any[]) => void>(
-	func: F,
-	timeout = 300
-): (...args: Parameters<F>) => void {
-	let timer: ReturnType<typeof setTimeout>;
 
-	return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
-		clearTimeout(timer);
-		timer = setTimeout(() => {
-			func.apply(this, args);
-		}, timeout);
+// TODO: chatgpt properly-typed version:
+
+type FunctionType = (...args: any[]) => void;
+export function debounce<f extends FunctionType>(func: f, timeout = 300) {
+	let timerId: NodeJS.Timeout;
+
+	return (...args: Parameters<f>) => {
+		timerId && clearTimeout(timerId);
+		timerId = setTimeout(() => func(...args), timeout);
 	};
 }
 

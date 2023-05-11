@@ -1,15 +1,12 @@
-<script>
-	import { isDarkMode, scrollY } from '$lib/store';
-	import InView from '$lib/Wrappers/InView.svelte';
-
+<script lang="ts">
 	export let title = 'Great physics tutor!!';
 	export let name = 'Thomas Finn';
-
 	export let date = '2022-06-08';
 
-	// TODO: this breaks on ios simulator ... specifically doesnt respect the 'lightmode' restriction
-
+	import InView from '$lib/Wrappers/InView.svelte';
+	import { isDarkMode, scrollY } from '$lib/store';
 	import { spring } from 'svelte/motion';
+
 	let sineSpring = spring(0, { stiffness: 0.1, damping: 0.25 });
 
 	$: if ($isDarkMode) {
@@ -17,35 +14,30 @@
 	} else {
 		sineSpring.set(0);
 	}
+
+	function hydrateStar(target: Element) {
+		if (target instanceof HTMLImageElement) {
+			target.src = '/star.webp';
+			target.classList.remove('opacity-0');
+			console.log('💫');
+		}
+	}
 </script>
 
-<!-- <article class="prose relative {$isDarkMode && "prose-invert"} md:pb-[5vw] ">   -->
 <review-card class="prose relative block dark:prose-invert md:pb-[5vw]">
-	<!-- darkmode now handled in styles section -->
-
 	<review-card-contents class="absolute">
 		<h1>{title}</h1>
 
 		<div class="flex flex-row">
-			{#each Array(5) as _, i}
-				<InView
-					single
-					once
-					onview={(target) => {
-						console.log('💫');
-						target.classList.remove('opacity-0');
-
-						target.src = '/star.webp';
-					}}
-				>
+			<!-- {#each Array(5) as _} -->
+			{#each { length: 5 } as _}
+				<InView single once onview={hydrateStar}>
 					<img
+						style={`filter:hue-rotate(${$sineSpring}turn)`}
+						class="h-10 w-10 opacity-0 transition-opacity duration-300 ease-in hover:scale-125"
 						src=""
-						class="opacity-0 transition-opacity duration-300 ease-in hover:scale-125"
 						alt="star"
-						style={`width:40px; height:40px; filter:hue-rotate(${$sineSpring}turn) `}
 					/>
-
-					<!-- filter:hue-rotate(${$sineSpring}turn)  -->
 				</InView>
 			{/each}
 		</div>
@@ -61,10 +53,3 @@
 		</div>
 	</review-card-contents>
 </review-card>
-
-<!-- UPDATE (feb23,2023): Using tailwind.config.cjs way of implementing darkmode now (referencing 'html.dark-mode' still), rather than the global svelte styles tag way  -->
-<!-- <style>
-	:global(html.dark-mode) review-card {
-		@apply prose-invert;
-	}
-</style> -->

@@ -1,7 +1,6 @@
 <script>
 	import { reviews } from './reviews';
 	import ReviewCreator from './ReviewCreator.svelte';
-	// import ReviewCreator from './reviewCreator.svx';
 </script>
 
 <div class="scale-90 {$$props.class}">
@@ -15,23 +14,3 @@
 		{/each}
 	</div>
 </div>
-
-<!-- <style>
-	.scrolling-wrapper {
-		overflow-x: scroll;
-		overflow-y: hidden;
-		white-space: nowrap;
-	}
-	.scrolling-wrapper .card {
-		display: inline-block;
-		width: 800px;
-		height: 800px;
-	}
-
-	.card {
-		border: 2px solid red;
-		/* width: 150px;
-		height: 75px; */
-		background: lightblue;
-	}
-</style> -->
