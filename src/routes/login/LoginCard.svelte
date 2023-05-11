@@ -20,7 +20,7 @@
 
 	onMount(async () => {
 		await onMountFirebase();
-		console.log('created');
+		console.log('created 🚀');
 	});
 
 	onDestroy(async () => {
