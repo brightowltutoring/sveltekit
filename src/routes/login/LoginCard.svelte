@@ -10,13 +10,19 @@
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
-	import { isLoggedIn, showLoginModal, isPWA } from '$lib/store';
+	import { isLoggedIn, showLoginModal, isPWA, routes } from '$lib/store';
 
 	let loginWelcomeText = 'Howdy!';
 	let loggedInEmail: string | null = '';
 
 	let redirectAfterLoginTimeOut: ReturnType<typeof setTimeout>;
 	let redirectSetInterval: ReturnType<typeof setInterval>;
+
+	// this was previously removed
+	$: if ($isLoggedIn && !$showLoginModal) {
+		clearInterval(redirectSetInterval);
+		clearTimeout(redirectAfterLoginTimeOut);
+	}
 
 	onMount(async () => {
 		await onMountFirebase();
@@ -66,11 +72,15 @@
 
 				if (user.email) loginWelcomeText = `Hey ${user.email}!`;
 				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
+
+				// $routes.login.name = '🚀';
 			} else {
 				$isLoggedIn = false;
 				loggedInEmail = '';
 
 				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
+
+				// $routes.login.name = 'Login';
 			}
 		});
 	}

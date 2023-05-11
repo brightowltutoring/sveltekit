@@ -1,4 +1,7 @@
 <script lang="ts">
+	// import { browser } from '$app/environment';
+	// import { onDestroy } from 'svelte';
+
 	export let showModal = false;
 	export let transitionsOff: boolean | null = false;
 	export let bgTW: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
@@ -24,9 +27,16 @@
 			}
 		};
 	}
+
+	// TODO: find out why this isn't logging in the console
+	// onDestroy(() => {
+	// 	browser && console.log('modal component destroyed');
+	// 	console.log('modal component destroyed');
+	// });
 </script>
 
-{#if body || transitionsOff ? true : showModal}
+{#key body || transitionsOff ? true : showModal}
+	<!-- {#key true} -->
 	<div
 		on:click|self={closeModal}
 		on:keypress|self={closeModal}
@@ -37,4 +47,4 @@
 		<slot />
 		<!-- TODO: BUG: safari has issues with nested onDestroy/onMount .. specifically with clearIntervals and clearTimeouts; using if block instead of key block seems to work without issue.  -->
 	</div>
-{/if}
+{/key}
