@@ -35,8 +35,6 @@
 	function scrollYSetter() {
 		$scrollY = window.scrollY;
 	}
-
-	console.log('🚀🔥');
 </script>
 
 <svelte:head>

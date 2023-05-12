@@ -1,7 +1,9 @@
 // import { json, fail } from '@sveltejs/kit';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 
-const ENDPOINT = [PUBLIC_UPLOAD_ENDPOINT];
+import { UPLOAD_ENDPOINT } from '$env/static/private';
+
+const ENDPOINT = [UPLOAD_ENDPOINT, PUBLIC_UPLOAD_ENDPOINT];
 
 import type { RequestEvent } from '@sveltejs/kit';
 
