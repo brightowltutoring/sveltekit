@@ -51,10 +51,24 @@ export async function POST(event: RequestEvent) {
 		// starts the concurrent fetches chain in a non-breaking way
 		// (await Promise.all(requests)).filter((res) => res !== null);
 
-		return new Response('Redirect', { status: 303, headers: { Location: '/' } });
+		// return new Response('Redirect', { status: 303, headers: { Location: '/' } });
+		return new Response(JSON.stringify({ success: true, message: 'File uploaded successfully.' }), {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
 	} catch (error) {
-		const errorMessage = `An error occured with the /api/submit-homework/+server.ts code:\n\n ${error}\n`;
-		console.log(errorMessage);
-		return new Response(errorMessage, { status: 500 });
+		// const errorMessage = `An error occured with the /api/submit-homework/+server.ts code:\n\n ${error}\n`;
+		// console.log(errorMessage);
+		// return new Response(errorMessage, { status: 500 });
+		return new Response(
+			JSON.stringify({ error: true, message: 'An error occurred while uploading the file.' }),
+			{
+				status: 500,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}
+		);
 	}
 }
