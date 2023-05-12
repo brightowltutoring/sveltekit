@@ -5,12 +5,15 @@
 
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { lessThan768, isPWA } from '$lib/store';
+	import { lessThan768 /*  isPWA */ } from '$lib/store';
+	import { getContext } from 'svelte';
+
+	const isPWA: boolean = getContext('isPWA');
 
 	async function hangUpBtn() {
 		await api.dispose();
 
-		if ($isPWA) goto('/pwa');
+		if (isPWA) goto('/pwa');
 		else goto('/');
 	}
 

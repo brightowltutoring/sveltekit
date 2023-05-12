@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { showLoginModal, showHomeworkModal, navAppClicked, isSafari } from '$lib/store';
+
 import { onMount, onDestroy } from 'svelte';
 import { browser } from '$app/environment';
 // the modules above cannot be dynamically imported in functions below, without failure
@@ -85,6 +86,7 @@ export const cookeh = {
 		name: string,
 		value: string | boolean,
 		// { seconds = 60 * 60 * 24, secure = true } = {}
+
 		{ seconds = 60 * 60 * 24, secure = !get(isSafari) } = {}
 		// For some reason on safari the security has to set to false, but on chrome it has to be set to true!! At the moment 'isSafari' is set from request headers on the backend, then set as a store variable on the front-end ... which I am choosing to retrieve here as the default value to 'secure' ... otherwise I'd have to set '{secure: !$isSafari}' when setting the cookie on the client-side for every cookie
 	) {

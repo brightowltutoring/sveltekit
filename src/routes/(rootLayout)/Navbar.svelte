@@ -3,6 +3,10 @@
 	import NavModals from './NavModals.svelte';
 	import Navitem from './Navitem.svelte';
 
+	import { getContext } from 'svelte';
+	const isIOS: boolean = getContext('isIOS');
+	const isPWA: boolean = getContext('isPWA');
+
 	import {
 		isLoggedIn,
 		routes,
@@ -10,15 +14,14 @@
 		isDarkMode,
 		showLoginModal,
 		showHomeworkModal,
-		instDeltaY,
-		isIOS,
-		isPWA
+		instDeltaY
+		// isIOS,
+		// isPWA
 	} from '$lib/store';
 
 	import { spring } from 'svelte/motion';
 	import LogoButton from './LogoButton.svelte';
 	import AppNavButton from './AppNavButton.svelte';
-	import { browser } from '$app/environment';
 
 	let showHideNav = '';
 
@@ -40,7 +43,7 @@
 	let hueRocket = 0;
 	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
 
-	$: if ($isLoggedIn && ($isPWA === false || null)) {
+	$: if ($isLoggedIn && (isPWA === false || null)) {
 		hueRocket = $isDarkMode ? 0.75 : 0;
 		scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
 	}
@@ -60,7 +63,7 @@
 	<ul
 		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl pwa:m-0 pwa:pb-0"
 	>
-		<li class={$isIOS ? 'block pwa:hidden' : 'hidden'}>
+		<li class={isIOS ? 'block pwa:hidden' : 'hidden'}>
 			<AppNavButton />
 		</li>
 

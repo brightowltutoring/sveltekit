@@ -10,7 +10,10 @@
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
-	import { isLoggedIn, showLoginModal, isPWA, routes } from '$lib/store';
+	import { isLoggedIn, showLoginModal /* isPWA */ } from '$lib/store';
+
+	import { getContext } from 'svelte';
+	const isPWA: boolean = getContext('isPWA');
 
 	let loginWelcomeText = 'Howdy!';
 	let loggedInEmail: string | null = '';
@@ -138,7 +141,7 @@
 
 				redirectLogic(redirectUrlFromCookies);
 			} else {
-				let defaultRoute = $isPWA ? '/pwa' : '/';
+				let defaultRoute = isPWA ? '/pwa' : '/';
 
 				cookeh.set('redirectUrlFromCookies', defaultRoute);
 
