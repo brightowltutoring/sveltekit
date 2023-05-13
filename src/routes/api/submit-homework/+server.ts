@@ -1,66 +1,45 @@
-// import { json, fail } from '@sveltejs/kit';
-import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-
 import { UPLOAD_ENDPOINT } from '$env/static/private';
 
-const ENDPOINT = [UPLOAD_ENDPOINT, PUBLIC_UPLOAD_ENDPOINT];
-
-import type { RequestEvent } from '@sveltejs/kit';
-
-export async function POST(event: RequestEvent) {
+export async function POST(event) {
 	try {
 		const formData = await event.request.formData();
-		// const files = formData.getAll('file') as File[];
 
 		const files: File[] = [];
-		for (const [name, value] of formData.entries()) {
-			if (value instanceof File) {
-				files.push(value);
-			}
+		for (const value of formData.values()) {
+			if (value instanceof File) files.push(value);
 		}
 
-		// console.log('files', files);
-		// console.log('event.request.headers)', event.request.headers);
+		let count = 0;
+		let filesInfo = '';
 
 		for (let file of files) {
-			console.log('file.name', file.name);
+			filesInfo += `${count + 1}. ${file.name} (${file.size} B); `;
+			count++;
+
 			let data = new FormData();
 			data.append('file', file, file.name);
-			await fetch(ENDPOINT[0], {
+			await fetch(UPLOAD_ENDPOINT, {
 				method: 'POST',
 				body: data
 			});
 		}
 
-		// const requests = files.map(async (file) => {
-		// 	if (!file.name) {
-		// 		return Promise.resolve(null);
-		// 	}
-		// 	const data = new FormData();
+		let message = `${count} file(s) uploaded successfully: ${filesInfo} `;
 
-		// 	data.append('file', file, file.name);
-		// 	return fetch(ENDPOINT[0], {
-		// 		method: 'POST',
-		// 		body: data
-		// 	}).catch((err) => {
-		// 		console.log(`Error uploading ${file.name}: ${err}`);
-		// 		return null;
-		// 	});
-		// });
+		console.log(message);
 
-		// starts the concurrent fetches chain in a non-breaking way
-		// (await Promise.all(requests)).filter((res) => res !== null);
-
-		// return new Response('Redirect', { status: 303, headers: { Location: '/' } });
-		return new Response(JSON.stringify({ success: true, message: 'File uploaded successfully.' }), {
-			headers: {
-				'Content-Type': 'application/json'
+		return new Response(
+			JSON.stringify({
+				success: true,
+				message: message
+			}),
+			{
+				headers: {
+					'Content-Type': 'application/json'
+				}
 			}
-		});
+		);
 	} catch (error) {
-		// const errorMessage = `An error occured with the /api/submit-homework/+server.ts code:\n\n ${error}\n`;
-		// console.log(errorMessage);
-		// return new Response(errorMessage, { status: 500 });
 		return new Response(
 			JSON.stringify({ error: true, message: 'An error occurred while uploading the file.' }),
 			{
