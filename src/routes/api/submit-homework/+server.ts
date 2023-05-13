@@ -24,7 +24,7 @@ export async function POST(event) {
 			});
 		}
 
-		let message = `${count} file(s) uploaded successfully: ${filesInfo} `;
+		let message = `${count} file(s) uploaded successfully: ${filesInfo}. Uploaded to: ${UPLOAD_ENDPOINT} `;
 
 		console.log(message);
 

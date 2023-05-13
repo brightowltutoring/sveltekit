@@ -11,8 +11,8 @@
 	}
 </script>
 
+<!-- on:click={openShowHomeworkModal} -->
 <button
-	on:click={openShowHomeworkModal}
 	aria-label="Upload Button Area"
 	class="submitArea mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll backdrop-blur-3xl sm:w-[60vw]"
 >
