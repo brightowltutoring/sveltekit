@@ -1,7 +1,45 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 
+export async function submitHomeworkAction(event: RequestEvent) {
+	const UPLOAD_ENDPOINT = PUBLIC_UPLOAD_ENDPOINT;
+
+	try {
+		const formData = await event.request.formData();
+
+		const files: File[] = [];
+		for (const value of formData.values()) {
+			if (value instanceof File) files.push(value);
+		}
+
+		let count = 0;
+		let filesInfo = '';
+
+		for (let file of files) {
+			filesInfo += `${count + 1}. ${file.name} (${file.size} B); `;
+			count++;
+
+			let data = new FormData();
+			data.append('file', file, file.name);
+			await fetch(UPLOAD_ENDPOINT, {
+				method: 'POST',
+				body: data
+			});
+		}
+
+		let message = `${count} file(s) uploaded successfully: ${filesInfo}. Uploaded to: ${UPLOAD_ENDPOINT} `;
+
+		console.log(message, event.url.pathname);
+
+		return { success: true };
+	} catch (error) {
+		console.log('error', error);
+		return { error: error };
+	}
+}
+
 export async function submitHomework(event: RequestEvent) {
+	console.log('request sent to submitHomework');
 	const formData = await event.request.formData();
 
 	const files = formData.getAll('file') as File[];
@@ -44,6 +82,7 @@ export async function submitHomework(event: RequestEvent) {
 			body: data
 		});
 	}
+	return { success: true };
 }
 
 // alternate method for populating files array

@@ -9,6 +9,8 @@
 		$showHomeworkModal = true;
 		document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
 	}
+
+	export let success = false;
 </script>
 
 <button
@@ -24,7 +26,7 @@
 				<IconUpload />
 			</div>
 
-			<NoScriptSubmitHomework />
+			<NoScriptSubmitHomework {success} />
 		</div>
 	</label>
 </button>

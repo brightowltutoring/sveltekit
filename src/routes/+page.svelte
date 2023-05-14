@@ -11,6 +11,9 @@
 
 	let ready = false;
 	onMount(() => (ready = true));
+
+	export let form;
+	$: success = form?.success;
 </script>
 
 <BackgroundVideo />
@@ -40,7 +43,7 @@
 			<span class="gradientTextColor"> 1. Upload your homework </span>
 		</a>
 
-		<DropzoneOpener />
+		<DropzoneOpener {success} />
 	</section>
 
 	<!-- third page -->

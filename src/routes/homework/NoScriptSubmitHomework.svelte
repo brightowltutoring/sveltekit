@@ -1,6 +1,9 @@
 <script>
+	import { enhance } from '$app/forms';
 	import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-	const action_API_URL = ['/api/submit-homework', '/api/testPost', PUBLIC_UPLOAD_ENDPOINT];
+	const action_API_URL = ['/api/submit-homework', '', '/api/testPost', PUBLIC_UPLOAD_ENDPOINT];
+
+	export let success = false;
 </script>
 
 <!-- TODO: appears that when js is off there is a limit to how much files can be uploaded at once .. -->
@@ -17,8 +20,9 @@
 		target="dummyframe"
 		enctype="multipart/form-data"
 		method="POST"
-		action={action_API_URL[0]}
 		class="flex flex-col items-center justify-center gap-5"
+		action={action_API_URL[1]}
+		use:enhance
 	>
 		<!-- <form enctype="multipart/form-data" method="POST"> -->
 		<label for="file" class="flex items-center justify-center text-lg sm:w-[60vw]">
@@ -27,10 +31,15 @@
 		<label
 			tabindex="-1"
 			for="submit"
-			class="border-1 group rounded-lg bg-red-800 p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave focus:bg-emerald-500"
+			class="border-1 group rounded-lg {success
+				? 'bg-emerald-500'
+				: 'bg-red-800 '} p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave"
 		>
-			<span class="block group-focus:hidden">submit</span>
-			<span class="hidden group-focus:block">sent</span>
+			{success ? 'sent' : 'submit'}
+			<!-- class="border-1 group rounded-lg bg-red-800 p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave focus:bg-emerald-500" -->
+			<!-- <span class="block group-focus:hidden">submit</span>
+		<span class="hidden group-focus:block">sent</span> -->
+
 			<input class="hidden" type="submit" value="Submit" id="submit" />
 		</label>
 	</form>
