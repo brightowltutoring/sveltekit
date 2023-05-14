@@ -6,6 +6,3 @@
 </script>
 
 <DropzoneOpener {success} />
-<!-- {#if success}
-	success!
-{/if} -->
