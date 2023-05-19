@@ -48,7 +48,15 @@
 		scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
 	}
 
-	$: $routes.login.name = $isLoggedIn ? '🚀' : 'Login';
+	// $: $routes.login.name = $isLoggedIn ? '🚀' : 'Login';
+
+	//NOTE: The code below is the idiomatic way to do the above, which is immune to race conditions amongst other things; in this case I could've used the simpler code above since only this component makes changes to 'routes.login.name'
+	$: {
+		routes.update((routes) => {
+			routes.login.name = $isLoggedIn ? '🚀' : 'Login';
+			return routes;
+		});
+	}
 </script>
 
 <NavModals />

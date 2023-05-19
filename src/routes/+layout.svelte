@@ -14,16 +14,14 @@
 		// isPWA,
 	} from '$lib/store';
 
-	// import Seo from './(rootLayout)/SeoStatic2.svelte';
-
 	export let data;
-	$: $isLoggedIn = Boolean(data.haventLoggedOut);
+	$: isLoggedIn.set(Boolean(data.haventLoggedOut)); // $: $isLoggedIn = Boolean(data.haventLoggedOut);
 	$: seoString = data.seoString; //this fixed seo data when navigating away from errored page
 
 	setContext('isIOS', data.isIOS); // $isIOS = Boolean(data.isIOS);
 	setContext('isPWA', data.isPWA); // $isPWA = Boolean(data.isPWA);
 
-	$isSafari = Boolean(data.isSafari); // setContext('isSafari', data.isSafari);
+	isSafari.set(Boolean(data.isSafari)); //$isSafari = Boolean(data.isSafari); // setContext('isSafari', data.isSafari);
 	// TODO: since 'isSafari' is accessed in utils.ts (for 'cookeh' setter definition), at the moment haven't figured out how to do this with setContext
 
 	onMount(() => {
@@ -33,7 +31,8 @@
 	});
 
 	function scrollYSetter() {
-		$scrollY = window.scrollY;
+		scrollY.set(window.scrollY);
+		// $scrollY = window.scrollY;
 	}
 </script>
 

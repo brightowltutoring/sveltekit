@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { showHomeworkModal } from '$lib/store';
+	import { showHomeworkModal, submitOnce$ } from '$lib/store';
 	import { postDummyTextFileToGoogleDrive } from '$lib/utils';
 	$: $showHomeworkModal && PostDummyOnce();
 	let iframeSrc = '';
@@ -11,15 +11,14 @@
 
 	// FUTURE GOAL: use google app script or google drive api to directly delete the files ... haven't been successful in creating an app script to do this since the google cloud function is run by a 'google service account' (one which I created no less) and won't allow automated deletions ...
 
-	import { submitOnce$ } from '$lib/store';
-
 	// PostDummyOnce();
 
 	async function PostDummyOnce() {
 		// if (!globalThis.submitOnce) {
 		if ($showHomeworkModal === true && $submitOnce$ === false) {
 			// globalThis.submitOnce = true;
-			$submitOnce$ = true;
+			// $submitOnce$ = true;
+			submitOnce$.set(true);
 
 			postDummyTextFileToGoogleDrive('foo');
 

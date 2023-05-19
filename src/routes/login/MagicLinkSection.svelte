@@ -21,7 +21,8 @@
 
 	function signinWithLinkAndStop(e: MouseEvent | KeyboardEvent) {
 		// magicLinkInputVisible = globalThis.magicLinkInputVisible = true;
-		$magicLinkInputVisible$ = true;
+		// $magicLinkInputVisible$ = true;
+		magicLinkInputVisible$.set(true);
 
 		let clickOrEnterFired = (<MouseEvent>e).type == 'click' || (<KeyboardEvent>e).key == 'Enter';
 

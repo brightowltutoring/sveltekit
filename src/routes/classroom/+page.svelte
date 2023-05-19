@@ -17,14 +17,16 @@
 	let mounted = false;
 	function turnOnDarkMode() {
 		mounted = true;
-		$isDarkMode = true;
+		isDarkMode.set(true);
+		// $isDarkMode = true;
 		document.documentElement.classList.add('dark-mode');
 	}
 
 	let initiallyInLightmode = browser && (sessionStorage.getItem('isDarkMode') === 'false' || null);
 	function returnInitialDarkModeState() {
 		if (initiallyInLightmode) {
-			$isDarkMode = false;
+			isDarkMode.set(false);
+			// $isDarkMode = false;
 			document.documentElement.classList.remove('dark-mode');
 		}
 	}

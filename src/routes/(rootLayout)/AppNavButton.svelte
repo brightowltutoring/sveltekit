@@ -4,7 +4,8 @@
 
 	function handleAppNavClick() {
 		clearNavModals();
-		$navAppClicked = true;
+		navAppClicked.set(true);
+		// $navAppClicked = true;
 	}
 </script>
 

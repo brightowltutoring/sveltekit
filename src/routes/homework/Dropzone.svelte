@@ -1,16 +1,12 @@
 <script lang="ts">
 	// Since this entire component is lazyMounted, I don't have to dynamically import modules (e.g. inside the hydrateDropzoneDomEls 'inview callback function')
-	import Dropzone from 'dropzone';
 	import './dropzone.css';
-
-	import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-
+	import Dropzone from 'dropzone';
 	import PostDummyOnce from './PostDummyOnce.svelte';
-
 	import InView from '$lib/Wrappers/InView.svelte';
-	import { showHomeworkModal } from '$lib/store';
-
 	import IconUploadGradient from '$lib/Icons/IconUploadGradient.svelte';
+	import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
+	import { showHomeworkModal, popUpOnceBoolean$ } from '$lib/store';
 
 	// Alternative to the vanilla-y eventListener logic commented out above.
 	// TODO: Note: using {once:true} inside an event listener attached to 'querySelector('a[href="/homework"]')' would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
@@ -40,7 +36,8 @@
 		dropzone.on('error', (file: any) => file.accepted && filesToRetry.push(file));
 
 		dropzone.on('queuecomplete', () => {
-			setTimeout(() => ($showHomeworkModal = false), 1000);
+			setTimeout(() => showHomeworkModal.set(false), 1000);
+			// setTimeout(() => ($showHomeworkModal = false), 1000);
 		});
 
 		window?.addEventListener('online', () => {
@@ -60,8 +57,6 @@
 		});
 	}
 
-	import { popUpOnceBoolean$ } from '$lib/store';
-
 	function dropzonePopUpOnce() {
 		// if (!(globalThis as any).popUpOnceBoolean) {
 		if ($popUpOnceBoolean$ === false) {
@@ -70,7 +65,8 @@
 			}, 75);
 
 			// globalThis.popUpOnceBoolean = true;
-			$popUpOnceBoolean$ = true;
+			// $popUpOnceBoolean$ = true;
+			popUpOnceBoolean$.set(true);
 		}
 	}
 </script>
