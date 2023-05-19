@@ -28,12 +28,14 @@
 		// sets the correct modal
 		if (routePath == '/homework') {
 			e.preventDefault();
-			$showHomeworkModal = true;
+			// $showHomeworkModal = true;
+			showHomeworkModal.set(true);
 			return;
 		}
 		if (routePath == '/login') {
 			e.preventDefault();
-			$showLoginModal = true;
+			// $showLoginModal = true;
+			showLoginModal.set(true);
 			return;
 		}
 	}

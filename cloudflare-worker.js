@@ -1,3 +1,4 @@
+// TODO: unfinished implementation
 addEventListener('fetch', (event) => {
 	const request = event.request;
 

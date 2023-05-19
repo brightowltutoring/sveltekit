@@ -11,16 +11,15 @@ export async function FirebaseSignerIner() {
 	onAuthStateChanged(auth, (user) => {
 		if (user?.email) {
 			isLoggedIn.set(true);
-			// $isLoggedIn = true;
-			// loggedInEmail = user.email;
+
 			loggedInEmail.set(user.email);
 		} else {
 			localStorage.removeItem('redirectUrlFromLS');
-			// $isLoggedIn = false;
+
 			isLoggedIn.set(false);
-			// $showLoginModal = false;
+
 			showLoginModal.set(false);
-			// loggedInEmail = '';
+
 			loggedInEmail.set('');
 		}
 	});

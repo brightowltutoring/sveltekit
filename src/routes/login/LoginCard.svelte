@@ -59,14 +59,16 @@
 			signInWithEmailLink(auth, email, window.location.href)
 				.then(() => {
 					window.localStorage.removeItem('emailForSignIn');
-					$showLoginModal = true;
+					showLoginModal.set(true);
+					// $showLoginModal = true;
 				})
 				.catch((error) => console.log('signInWithEmailLink:', error));
 		}
 
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				$isLoggedIn = true;
+				// $isLoggedIn = true;
+				isLoggedIn.set(true);
 
 				loggedInEmail = user.email;
 				showLoginModalRedirect(loggedInEmail);
@@ -78,7 +80,8 @@
 
 				// $routes.login.name = '🚀';
 			} else {
-				$isLoggedIn = false;
+				// $isLoggedIn = false;
+				isLoggedIn.set(false);
 				loggedInEmail = '';
 
 				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
@@ -106,7 +109,8 @@
 			clearInterval(redirectSetInterval);
 			clearTimeout(redirectAfterLoginTimeOut);
 
-			$showLoginModal = false;
+			showLoginModal.set(false);
+			// $showLoginModal = false;
 			goto(userRedirectUrl);
 		}, redirectTimeInMS);
 	}
