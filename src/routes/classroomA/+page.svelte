@@ -23,9 +23,7 @@
 
 <EnableJavascript />
 
-{#if browser}
-	<JitsiUser admin />
-{/if}
+<JitsiUser admin />
 
 <!-- <svelte:head>
 	<script src="https://meet.jit.si/external_api.js"></script>

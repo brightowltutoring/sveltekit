@@ -4,7 +4,7 @@
 	// TODO: e.g. the passed Import prop has the form '() => import('/path/to/component.svelte')', e.g. to handle lazy loading of components ... still haven't determined if there is a more descriptive type than below
 	export let Import: () => Promise<{ default: any }>;
 
-	let Component: any;
+	let Component: { default: any } | undefined;
 	const getComponent = async () => (Component = await Import());
 </script>
 

@@ -3,24 +3,22 @@
 
 	export let admin = false; // existence prop; used for '/classroomA' route
 
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { lessThan768 /*  isPWA */ } from '$lib/store';
-	import { getContext } from 'svelte';
 
-	const isPWA: boolean = getContext('isPWA');
+	import { getContext } from 'svelte';
+	import { browser } from '$app/environment';
 
 	async function hangUpBtn() {
 		await api.dispose();
-
-		if (isPWA) goto('/pwa');
-		else goto('/');
+		goto(getContext('isPWA') ? '/pwa' : '/');
 	}
 
-	let api: any, par: Array<string>;
+	let api: any;
+	let par: Array<string>;
 	let domain = 'meet.jit.si';
 	let options = {
-		parentNode: document.querySelector('#meet'),
+		parentNode: browser && document.querySelector('#meet'),
 		roomName: 'ThinkSolve122822',
 		configOverwrite: {
 			startWithAudioMuted: true,
@@ -114,23 +112,22 @@
 	};
 
 	let changeOpacityTo100: string;
+	let changeOpacityTimeOUt: NodeJS.Timeout;
+
+	onDestroy(() => {
+		clearTimeout(changeOpacityTimeOUt);
+	});
 
 	onMount(async () => {
-		setTimeout(() => {
-			changeOpacityTo100 = 'opacity-100 transition-opacity ease-in-out duration-500';
+		changeOpacityTimeOUt = setTimeout(() => {
+			changeOpacityTo100 = 'opacity-100  transition-opacity ease-in-out duration-500';
 		}, 1000);
 		try {
 			// can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
 			options.parentNode = document.querySelector('#meet');
 
 			// @ts-ignore
-			// TODO: potential bug
 			api = await new JitsiMeetExternalAPI(domain, options);
-
-			// const iframe = api.getIFrame();
-
-			// console.log('iframe', iframe);
-			// alert(iframe);
 
 			const pwd = 'thnkslv';
 			api.addEventListener('participantRoleChanged', function (event: any) {
@@ -147,18 +144,19 @@
 	});
 </script>
 
-<!-- <div id="meet" class={`relative md:-translate-y-10 -translate-y-36 w-full h-[90vh] md:h-[670px]`}> -->
+{#if browser}
+	<div
+		id="meet"
+		class={`opacity-0 ${changeOpacityTo100} relative h-[90vh] w-full -translate-y-36 md:h-[670px] md:-translate-y-10 pwa:h-[85vh] `}
+	>
+		<!-- {$lessThan768 ? 'right-0 top-10' : 'bottom-5 right-10 '}  -->
 
-<div
-	id="meet"
-	class={`opacity-0 ${changeOpacityTo100} relative h-[90vh] w-full -translate-y-36 md:h-[670px] md:-translate-y-10 pwa:h-[85vh] `}
->
-	<button on:click={hangUpBtn}>
-		<img
-			alt="hangup button"
-			class="absolute p-2 {!par && 'opacity-0'} {$lessThan768
-				? 'right-0 top-10'
-				: 'bottom-5 right-10 '}  w-[50px] rotate-90 rounded-full bg-[#2a1c44] transition-transform duration-300 content-[url('/phone.svg')] hover:rotate-0 hover:scale-[1.3] active:bg-red-900"
-		/>
-	</button>
-</div>
+		<button on:click={hangUpBtn}>
+			<img
+				alt="hangup button"
+				class="absolute right-0 top-10 w-[50px] rotate-90 rounded-full bg-[#2a1c44] p-2 transition-transform duration-300 content-[url('/phone.svg')] hover:rotate-0 hover:scale-[1.3] active:bg-red-900 md:bottom-5 md:right-10 md:top-auto {!par &&
+					'opacity-0'}"
+			/>
+		</button>
+	</div>
+{/if}

@@ -6,7 +6,7 @@
 	import { page } from '$app/stores';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import {
-		setInnerWidthViaMatchMedia,
+		// setInnerWidthViaMatchMedia,
 		scrollY,
 		isLoggedIn,
 		isSafari
@@ -27,7 +27,9 @@
 	onMount(() => {
 		disableZoomOnTouchDevices();
 		setIsPwaCookie();
-		setInnerWidthViaMatchMedia();
+
+		// NOTE: no longer needed since at the moment '$lessThan768' has no use
+		// setInnerWidthViaMatchMedia();
 	});
 
 	function scrollYSetter() {
