@@ -62,7 +62,7 @@
 
 	<details>
 		<summary> Is it possible to access all my session content in one place? </summary>
-		<!-- on:click={() => ($showLoginModal = true)} -->
+
 		<p>
 			Sure can! Contact us directly to set up a personalized page, or check the option when booking!
 			You will be <button class="text-rose-500" on:click={() => showLoginModal.set(true)}
@@ -73,7 +73,7 @@
 
 	<details>
 		<summary> How do I share homework? </summary>
-		<!-- on:click={() => ($showHomeworkModal = true)} -->
+
 		<p>
 			Click on "<button class="text-rose-500" on:click={() => showHomeworkModal.set(true)}>
 				Homework</button

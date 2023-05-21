@@ -36,15 +36,19 @@
 </script>
 
 {#key body || transitionsOff ? true : showModal}
-	<!-- {#key true} -->
 	<div
 		on:click|self={closeModal}
 		on:keypress|self={closeModal}
 		use:modalDirective
-		class="fixed left-0 top-0 z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center
-{showModal && `${bgTW} !flex`} "
+		class="fixed left-0 top-0 -z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center {showModal &&
+			`${bgTW} z-50 !flex`} 
+"
 	>
+		<!--  -->
+		<!-- {#key showModal} -->
+		<!-- {#if showModal} -->
 		<slot />
+		<!-- {/if} -->
 		<!-- TODO: BUG: safari has issues with nested onDestroy/onMount .. specifically with clearIntervals and clearTimeouts; using if block instead of key block seems to work without issue.  -->
 	</div>
 {/key}

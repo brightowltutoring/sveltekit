@@ -9,13 +9,13 @@
 	let wasDarkModeLS = browser && sessionStorage.getItem('isDarkMode');
 	onMount(() => {
 		isDarkMode.set(true);
-		// $isDarkMode = true;
+
 		document.documentElement.classList.add('dark-mode');
 	});
 	onDestroy(() => {
 		if (wasDarkModeLS === 'false') {
 			isDarkMode.set(false);
-			// $isDarkMode = false;
+
 			document.documentElement.classList.remove('dark-mode');
 		}
 	});

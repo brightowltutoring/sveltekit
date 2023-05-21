@@ -17,7 +17,7 @@
 		// if (!globalThis.submitOnce) {
 		if ($showHomeworkModal === true && $submitOnce$ === false) {
 			// globalThis.submitOnce = true;
-			// $submitOnce$ = true;
+
 			submitOnce$.set(true);
 
 			postDummyTextFileToGoogleDrive('foo');

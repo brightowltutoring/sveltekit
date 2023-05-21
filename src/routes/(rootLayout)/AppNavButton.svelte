@@ -5,7 +5,6 @@
 	function handleAppNavClick() {
 		clearNavModals();
 		navAppClicked.set(true);
-		// $navAppClicked = true;
 	}
 </script>
 

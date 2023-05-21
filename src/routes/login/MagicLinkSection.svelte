@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { regexEmailChecker, magicLinkToEmail } from './MagicLinkLogin';
 	import IconEmail from '$lib/Icons/LoginIcons/IconEmail.svelte';
-	// import { isDarkMode } from '$lib/store';
 	import LoginButton from './LoginButton.svelte';
 
 	let magicLinkSent = false;
@@ -21,7 +20,7 @@
 
 	function signinWithLinkAndStop(e: MouseEvent | KeyboardEvent) {
 		// magicLinkInputVisible = globalThis.magicLinkInputVisible = true;
-		// $magicLinkInputVisible$ = true;
+
 		magicLinkInputVisible$.set(true);
 
 		let clickOrEnterFired = (<MouseEvent>e).type == 'click' || (<KeyboardEvent>e).key == 'Enter';

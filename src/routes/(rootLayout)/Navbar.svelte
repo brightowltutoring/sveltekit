@@ -22,6 +22,7 @@
 	import { spring } from 'svelte/motion';
 	import LogoButton from './LogoButton.svelte';
 	import AppNavButton from './AppNavButton.svelte';
+	import LoginButton from '../login/LoginButton.svelte';
 
 	let showHideNav = '';
 
@@ -50,13 +51,13 @@
 
 	// $: $routes.login.name = $isLoggedIn ? '🚀' : 'Login';
 
-	//NOTE: The code below is the idiomatic way to do the above, which is immune to race conditions amongst other things; in this case I could've used the simpler code above since only this component makes changes to 'routes.login.name'
-	$: {
-		routes.update((routes) => {
-			routes.login.name = $isLoggedIn ? '🚀' : 'Login';
-			return routes;
-		});
-	}
+	// The code below is the idiomatic way to do the above, which is immune to race conditions.
+	// UNOFFICIALLY: the pwa with CF doesn't flicker anymore when logged in !!
+
+	$: routes.update((routes) => {
+		routes.login.name = $isLoggedIn ? '🚀' : 'Login';
+		return routes;
+	});
 </script>
 
 <NavModals />

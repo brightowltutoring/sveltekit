@@ -18,7 +18,7 @@
 	function turnOnDarkMode() {
 		mounted = true;
 		isDarkMode.set(true);
-		// $isDarkMode = true;
+
 		document.documentElement.classList.add('dark-mode');
 	}
 
@@ -26,7 +26,7 @@
 	function returnInitialDarkModeState() {
 		if (initiallyInLightmode) {
 			isDarkMode.set(false);
-			// $isDarkMode = false;
+
 			document.documentElement.classList.remove('dark-mode');
 		}
 	}

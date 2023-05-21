@@ -8,13 +8,11 @@
 
 	// initialize darkmode state
 	browser && isDarkMode.set(prefersDarkMode());
-	// browser && ($isDarkMode = prefersDarkMode());
 
 	// reactively set sessionStorage darkmode
 	$: browser && sessionStorage.setItem('isDarkMode', String($isDarkMode));
 
 	function toggleDarkMode() {
-		// $isDarkMode = !$isDarkMode;
 		isDarkMode.update((v) => !v);
 		document.documentElement.classList.toggle('dark-mode');
 	}

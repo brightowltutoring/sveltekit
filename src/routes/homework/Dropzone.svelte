@@ -37,7 +37,6 @@
 
 		dropzone.on('queuecomplete', () => {
 			setTimeout(() => showHomeworkModal.set(false), 1000);
-			// setTimeout(() => ($showHomeworkModal = false), 1000);
 		});
 
 		window?.addEventListener('online', () => {
@@ -65,7 +64,7 @@
 			}, 75);
 
 			// globalThis.popUpOnceBoolean = true;
-			// $popUpOnceBoolean$ = true;
+
 			popUpOnceBoolean$.set(true);
 		}
 	}

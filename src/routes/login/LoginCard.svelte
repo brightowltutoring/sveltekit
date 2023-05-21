@@ -13,23 +13,29 @@
 	import { isLoggedIn, showLoginModal /* isPWA */ } from '$lib/store';
 
 	import { getContext } from 'svelte';
+	import { page } from '$app/stores';
 	const isPWA: boolean = getContext('isPWA');
 
-	let loginWelcomeText = 'Howdy!';
+	// set in the 'onAuthStateChanged'
 	let loggedInEmail: string | null = '';
+	let loggedInDisplayName: string | null = '';
+
+	let loginWelcomeText = 'Howdy!';
+	$: loginWelcomeText = `Hey ${loggedInDisplayName || loggedInEmail}`;
 
 	let redirectAfterLoginTimeOut: ReturnType<typeof setTimeout>;
 	let redirectSetInterval: ReturnType<typeof setInterval>;
 
-	// this was previously removed
-	$: if ($isLoggedIn && !$showLoginModal) {
+	let redirectTimeInMS = 3000;
+	let seconds = Math.trunc(redirectTimeInMS / 1000);
+
+	$: if ($isLoggedIn && !$showLoginModal && $page.route.id !== '/login') {
 		clearInterval(redirectSetInterval);
 		clearTimeout(redirectAfterLoginTimeOut);
 	}
 
 	onMount(async () => {
 		await onMountFirebase();
-		console.log('created 🚀');
 	});
 
 	onDestroy(async () => {
@@ -39,6 +45,7 @@
 	});
 
 	async function onMountFirebase() {
+		console.log('mounted like a mounty');
 		const [firebaseModule, authModule] = await Promise.all([
 			import('./firebase'),
 			import('firebase/auth')
@@ -60,24 +67,22 @@
 				.then(() => {
 					window.localStorage.removeItem('emailForSignIn');
 					showLoginModal.set(true);
-					// $showLoginModal = true;
 				})
 				.catch((error) => console.log('signInWithEmailLink:', error));
 		}
 
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				// $isLoggedIn = true;
 				isLoggedIn.set(true);
 
+				loggedInDisplayName = user.displayName;
 				loggedInEmail = user.email;
 				showLoginModalRedirect(loggedInEmail);
 
 				cookeh.set('haventLoggedOut', $isLoggedIn);
 
-				if (user.email) loginWelcomeText = `Hey ${user.email}!`;
-				if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
-
+				// if (user.email) loginWelcomeText = `Hey ${user.email}!`;
+				// if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
 				// $routes.login.name = '🚀';
 			} else {
 				// $isLoggedIn = false;
@@ -91,18 +96,9 @@
 		});
 	}
 
-	// this function needs to detect logout too to reset store
 	function redirectLogic(userRedirectUrl = '/login') {
-		let redirectTimeInMS = 3000;
-		let seconds = Math.trunc(redirectTimeInMS / 1000); // i.e. 3
-		let timeLeftElement = document.getElementById('timeLeft');
-
 		redirectSetInterval = setInterval(() => {
-			if (seconds > 0) {
-				seconds += -1;
-				if (timeLeftElement) timeLeftElement.innerHTML = ` ${seconds}`;
-				console.log('seconds', seconds);
-			}
+			if (seconds > 0) seconds += -1;
 		}, 1000);
 
 		redirectAfterLoginTimeOut = setTimeout(() => {
@@ -110,7 +106,6 @@
 			clearTimeout(redirectAfterLoginTimeOut);
 
 			showLoginModal.set(false);
-			// $showLoginModal = false;
 			goto(userRedirectUrl);
 		}, redirectTimeInMS);
 	}
@@ -119,6 +114,7 @@
 		let redirectUrlFromCookies = cookeh.get('redirectUrlFromCookies');
 
 		if (redirectUrlFromCookies) {
+			// console.log('redirectUrlFromCookies', redirectUrlFromCookies);
 			redirectLogic(redirectUrlFromCookies);
 		} else {
 			console.log('getdocs from firestore');
@@ -176,10 +172,8 @@
 		<logout-card in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}>
 			<p>{loginWelcomeText}</p>
 
-			<div>
-				Redirecting in
-				<div class="p-5 text-5xl" id="timeLeft">3</div>
-			</div>
+			Redirecting in
+			<p class="p-5 text-5xl">{seconds}</p>
 
 			<button
 				class="rounded-lg bg-rose-300 p-4 text-2xl font-medium text-white duration-200 ease-in hover:scale-110 hover:rounded-xl"
