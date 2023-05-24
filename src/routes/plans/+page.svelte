@@ -2,7 +2,7 @@
 	// import Transition from '$lib/Wrappers/Transition.svelte';
 	import PlansCard from './PlansCard.svelte';
 	import { plansCardArray } from './plansCardArray';
-	import { scale } from 'svelte/transition';
+
 	import { elasticOut } from 'svelte/easing';
 </script>
 

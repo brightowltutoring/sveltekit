@@ -1,27 +1,9 @@
 import { writable, derived, get } from 'svelte/store';
 
-// .. previously in logincard.svelte; once upon a time I did have these here
-export const redirectAfterLoginTimeOut = writable<ReturnType<typeof setTimeout>>(undefined);
-export const redirectSetInterval = writable<ReturnType<typeof setInterval>>(undefined);
-
-// alternative to globalThis variables
-export const magicLinkInputVisible$ = writable(false);
-export const popUpOnceBoolean$ = writable(false);
-export const submitOnce$ = writable(false);
-
-// not used as much .. but keeping just in case
-export const isDarkMode = writable(false);
-
-// TODO: added jan 22 when moving function from +layout.svelte to SigninWithEmailLink.ts; may delete
-export const loggedInEmail = writable('');
-
-export const contactLinkClicked = writable(false);
-
-// these are intialized set at the layout level; isLoggedIn can be toggled in other components
 export const isLoggedIn = writable(false);
-// export const isPWA = writable(false);
-// export const isIOS = writable(false);
 export const isSafari = writable(false);
+export const isDarkMode = writable(false);
+export const contactLinkClicked = writable(false);
 
 export const lastScrollY = writable(0);
 export const scrollY = writable(0);
@@ -35,29 +17,15 @@ export const instDeltaY = derived(scrollY, ($scrollY) => {
 	return $scrollY - delayedScrollY;
 });
 
-export const innerWidth = writable(0);
-export const lessThan768 = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
-
-// Could do something like '$innerWidth = window.innerWidth' inside .svelte file, however value would be updating continuously
-export function setInnerWidthViaMatchMedia(pixelWidth = 768) {
-	innerWidth.set(window.innerWidth);
-	console.log(`LANDED at ${get(innerWidth)}`);
-
-	window
-		.matchMedia(`(max-width: ${pixelWidth}px)`)
-		.addEventListener('change', handleInnerWidthChange);
-
-	function handleInnerWidthChange(event: MediaQueryListEvent) {
-		innerWidth.set(window.innerWidth);
-		event.matches
-			? console.log(`UNDER ${pixelWidth}px 🙈`)
-			: console.log(`OVER ${pixelWidth}px 😄`);
-	}
-}
-
+export const navAppClicked = writable(false);
 export const showLoginModal = writable(false);
 export const showHomeworkModal = writable(false);
-export const navAppClicked = writable(false);
+
+export async function clearNavModals() {
+	showLoginModal.set(false);
+	showHomeworkModal.set(false);
+	navAppClicked.set(false);
+}
 
 import IconHome from '$lib/Icons/NavIcons/IconHome.svelte';
 import IconLogin from '$lib/Icons/NavIcons/IconLogin.svelte';
@@ -86,7 +54,7 @@ export type routesType = Record<
 	RouteData
 >;
 
-export const routesObj = {
+const routesObj = {
 	home: {
 		name: 'Home',
 		routePath: '/',
@@ -169,11 +137,10 @@ export const routesObj = {
 		isCurrent: false
 	}
 };
-
 export const routes = writable<routesType>(routesObj);
 
 // testing an array way to deal with the routes object
-export const routes2 = writable<RouteData[]>(Object.values(routesObj));
+// export const routes2 = writable<RouteData[]>(Object.values(routesObj));
 
 const routesData = Object.values(routesObj);
 export function getSeoString(url: URL) {
@@ -199,3 +166,23 @@ export function getSeoString(url: URL) {
 
 	return { seoString };
 }
+
+// export const innerWidth = writable(0);
+// export const lessThan768 = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
+
+// // Could do something like '$innerWidth = window.innerWidth' inside .svelte file, however value would be updating continuously
+// export function setInnerWidthViaMatchMedia(pixelWidth = 768) {
+// 	innerWidth.set(window.innerWidth);
+// 	console.log(`LANDED at ${get(innerWidth)}`);
+
+// 	window
+// 		.matchMedia(`(max-width: ${pixelWidth}px)`)
+// 		.addEventListener('change', handleInnerWidthChange);
+
+// 	function handleInnerWidthChange(event: MediaQueryListEvent) {
+// 		innerWidth.set(window.innerWidth);
+// 		event.matches
+// 			? console.log(`UNDER ${pixelWidth}px 🙈`)
+// 			: console.log(`OVER ${pixelWidth}px 😄`);
+// 	}
+// }

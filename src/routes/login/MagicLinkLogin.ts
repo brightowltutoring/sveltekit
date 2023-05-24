@@ -1,5 +1,8 @@
 // import { auth } from './firebase';
 
+import { writable } from 'svelte/store';
+export const magicLinkInputVisible$ = writable(false);
+
 export function regexEmailChecker(EMAIL: string) {
 	return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
 }

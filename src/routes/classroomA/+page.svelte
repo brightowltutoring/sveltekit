@@ -1,8 +1,7 @@
 <script>
 	import { browser } from '$app/environment';
 	import EnableJavascript from '$lib/EnableJavascript.svelte';
-
-	import JitsiUser from '../classroom/JitsiUser.svelte';
+	import JitsiUser from '$routes/classroom/JitsiUser.svelte';
 	import { onMount, onDestroy } from 'svelte';
 	import { isDarkMode } from '$lib/store';
 

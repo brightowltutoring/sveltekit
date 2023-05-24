@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { regexEmailChecker, magicLinkToEmail } from './MagicLinkLogin';
+	import { regexEmailChecker, magicLinkToEmail, magicLinkInputVisible$ } from './MagicLinkLogin';
 	import IconEmail from '$lib/Icons/LoginIcons/IconEmail.svelte';
 	import LoginButton from './LoginButton.svelte';
 
@@ -15,8 +15,6 @@
 	let emailStatusMessage: HTMLElement;
 
 	// let magicLinkInputVisible = globalThis.magicLinkInputVisible;
-
-	import { magicLinkInputVisible$ } from '$lib/store';
 
 	function signinWithLinkAndStop(e: MouseEvent | KeyboardEvent) {
 		// magicLinkInputVisible = globalThis.magicLinkInputVisible = true;

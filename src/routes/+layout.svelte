@@ -5,14 +5,7 @@
 	import { onMount, setContext } from 'svelte';
 	import { page } from '$app/stores';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
-	import {
-		// setInnerWidthViaMatchMedia,
-		scrollY,
-		isLoggedIn,
-		isSafari
-		// isIOS,
-		// isPWA,
-	} from '$lib/store';
+	import { scrollY, isLoggedIn, isSafari } from '$lib/store';
 
 	export let data;
 	$: isLoggedIn.set(Boolean(data.haventLoggedOut));
@@ -28,8 +21,7 @@
 		disableZoomOnTouchDevices();
 		setIsPwaCookie();
 
-		// NOTE: no longer needed since at the moment '$lessThan768' has no use
-		// setInnerWidthViaMatchMedia();
+		// setInnerWidthViaMatchMedia(); // no longer needed since at the moment '$lessThan768' has no use
 	});
 
 	function scrollYSetter() {

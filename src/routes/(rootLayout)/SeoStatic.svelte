@@ -3,6 +3,7 @@
 
 <script lang="ts">
 	import { routes } from '$lib/store';
+
 	import { page } from '$app/stores';
 
 	let routes$ = Object.values($routes);

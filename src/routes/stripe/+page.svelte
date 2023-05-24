@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { app } from '../login/firebase';
+	import { app } from '$routes/login/firebase';
 	import { getFunctions, httpsCallable } from 'firebase/functions';
 	const functions = getFunctions(app);
 

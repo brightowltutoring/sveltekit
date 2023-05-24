@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { scale } from 'svelte/transition';
-	import { routes } from '$lib/store';
-	import { clearNavModals } from '$lib/utils';
+	import { routes, clearNavModals } from '$lib/store';
 	import { elasticOut } from 'svelte/easing';
 
 	let resetLogoClick: boolean;

@@ -3,7 +3,7 @@
 	import PlansSection from './plans/+page.svelte';
 	import Reviews from './reviews/Reviews.svelte';
 	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
-	import BackgroundVideo from '../lib/BackgroundVideo.svelte';
+	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
 	import { slide } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
 

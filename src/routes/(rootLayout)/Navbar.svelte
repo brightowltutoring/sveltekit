@@ -15,14 +15,11 @@
 		showLoginModal,
 		showHomeworkModal,
 		instDeltaY
-		// isIOS,
-		// isPWA
 	} from '$lib/store';
 
 	import { spring } from 'svelte/motion';
 	import LogoButton from './LogoButton.svelte';
 	import AppNavButton from './AppNavButton.svelte';
-	import LoginButton from '../login/LoginButton.svelte';
 
 	let showHideNav = '';
 
@@ -50,10 +47,6 @@
 	}
 
 	// $: $routes.login.name = $isLoggedIn ? '🚀' : 'Login';
-
-	// The code below is the idiomatic way to do the above, which is immune to race conditions.
-	// UNOFFICIALLY: the pwa with CF doesn't flicker anymore when logged in !!
-
 	$: routes.update((routes) => {
 		routes.login.name = $isLoggedIn ? '🚀' : 'Login';
 		return routes;
@@ -74,8 +67,6 @@
 			<AppNavButton />
 		</li>
 
-		<!-- {#each Object.keys($routes).slice(1, 5) as key}
-				{@const { routePath, name, icon, isCurrent } = $routes[key]} -->
 		{#each Object.values($routes).slice(1, 5) as { routePath, name, icon, isCurrent }}
 			{@const navIconClicked =
 				isCurrent ||
@@ -100,7 +91,6 @@
 			</li>
 		{/each}
 
-		<!-- TODO: padding seems to do nothing -->
 		<li class=" py-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
 			<LightDarkMode />
 		</li>

@@ -1,6 +1,5 @@
 <script>
-	import { navAppClicked } from '$lib/store';
-	import { clearNavModals } from '$lib/utils';
+	import { navAppClicked, clearNavModals } from '$lib/store';
 
 	function handleAppNavClick() {
 		clearNavModals();

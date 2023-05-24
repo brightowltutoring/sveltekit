@@ -1,99 +1,50 @@
 <script lang="ts">
-	// Since this entire component is lazyMounted, I don't have to dynamically import modules (e.g. inside the hydrateDropzoneDomEls 'inview callback function')
 	import './dropzone.css';
-	import Dropzone from 'dropzone';
-	import PostDummyOnce from './PostDummyOnce.svelte';
+	import {
+		dropzonePopUpOnce,
+		hydrateDropzoneDomEls,
+		getIframeSrcAndPostDummyOnce
+	} from './Dropzone';
+
 	import InView from '$lib/Wrappers/InView.svelte';
 	import IconUploadGradient from '$lib/Icons/IconUploadGradient.svelte';
-	import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-	import { showHomeworkModal, popUpOnceBoolean$ } from '$lib/store';
 
-	// Alternative to the vanilla-y eventListener logic commented out above.
-	// TODO: Note: using {once:true} inside an event listener attached to 'querySelector('a[href="/homework"]')' would not produce the desired of effect of firing 'dropzonePopUpOnce()' once per SESSION ... since when the component is destroyed between route changes so too is the logic in this .svelte file. The work around is done with the global variable logic inside 'dropzonePopUpOnce()'
-	$: $showHomeworkModal && dropzonePopUpOnce();
+	import { showHomeworkModal } from '$lib/store';
 
-	// export let text = '🔥';
 	export let textSizeTW = 'text-3xl';
 	export let dimensionsTW = 'w-[65vw] sm:w-[60vw] h-[60vh]';
 	export let brightnessTW = 'brightness-100';
-	let dropzone: any;
 
-	async function hydrateDropzoneDomEls(target: Element | HTMLElement) {
-		console.log('drop it like its 🌶️');
+	let iframeSrc: string | undefined = '';
+	const updateIframeSrc = async () => (iframeSrc = await getIframeSrcAndPostDummyOnce());
 
-		dropzone = new Dropzone(target as HTMLElement, {
-			url: PUBLIC_UPLOAD_ENDPOINT,
-			acceptedFiles: '.heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc'
-		});
-
-		dropzoneHandleErroredUploads();
-	}
-
-	// Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
-	// Tested use cases: internet cuts out mid-upload, and internet off when upload started.
-	function dropzoneHandleErroredUploads() {
-		let filesToRetry: Array<any> = [];
-		dropzone.on('error', (file: any) => file.accepted && filesToRetry.push(file));
-
-		dropzone.on('queuecomplete', () => {
-			setTimeout(() => showHomeworkModal.set(false), 1000);
-		});
-
-		window?.addEventListener('online', () => {
-			if (filesToRetry.length > 0) {
-				for (const file of filesToRetry) {
-					dropzone.processFile(file);
-
-					// removes error mark css after the files have been processed
-					file.previewElement.querySelector('.dz-error-mark').style.visibility = 'hidden';
-					// removes error message css after the files have been processed
-					file.previewElement.querySelector('.dz-error-message').style.visibility = 'hidden';
-				}
-
-				// reset collected files array when done
-				filesToRetry.length == 0;
-			}
-		});
-	}
-
-	function dropzonePopUpOnce() {
-		// if (!(globalThis as any).popUpOnceBoolean) {
-		if ($popUpOnceBoolean$ === false) {
-			setTimeout(() => {
-				document.querySelector('.dropzone')!.dispatchEvent(new CustomEvent('click'));
-			}, 75);
-
-			// globalThis.popUpOnceBoolean = true;
-
-			popUpOnceBoolean$.set(true);
-		}
-	}
+	$: $showHomeworkModal && dropzonePopUpOnce();
+	$: $showHomeworkModal && updateIframeSrc();
 </script>
 
-<PostDummyOnce />
+<!-- The one-time hydration of this iframe submits a dummy file to google drive, with the goal to circumvent cold-start of google drive cloud function -->
+<iframe
+	title="Executes 'moveNamedFilesToFolder' Google App script via iFrame src"
+	style="height: 0vh; width: 0vw"
+	src={iframeSrc}
+	frameborder="0"
+/>
 
-<!-- <input
-      style="text-align: center"
-      type="text"
-      id="gdf"
-      name="gdf"
-      placeholder="1nQLtENA2318gXFsNbPklccxA-oz8Anfz"
-    /> -->
+<!-- <PostDummyOnce /> -->
+
 <InView single onview={(target) => hydrateDropzoneDomEls(target)} once margin={'0px'}>
 	<form
 		method="post"
 		class="dropzone flex flex-wrap items-center justify-center backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto overflow-y-scroll"
 	>
-		<!-- overflow-scroll  -->
 		<div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
-			<!-- {text} -->
 			<IconUploadGradient />
 		</div>
 	</form>
 </InView>
 
 <style>
-	/* Oddly without specifying this css as global, the white background on uploaded images isn't removed for all dropzone instances (e.g. for the nav modal dropzone)  */
+	/* removes white background on uploaded images  */
 	:global(.dropzone .dz-preview.dz-image-preview) {
 		background-color: transparent !important;
 	}

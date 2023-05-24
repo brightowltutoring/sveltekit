@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { showLoginModal, showHomeworkModal, navAppClicked, isSafari } from '$lib/store';
+import { isSafari } from '$lib/store';
 
 import { onMount, onDestroy } from 'svelte';
 import { browser } from '$app/environment';
@@ -7,20 +7,6 @@ import { browser } from '$app/environment';
 
 import type { RequestEvent } from '@sveltejs/kit';
 import UAParser from 'ua-parser-js';
-
-export async function postDummyTextFileToGoogleDrive(name: string) {
-	const { PUBLIC_UPLOAD_ENDPOINT } = await import('$env/static/public');
-	const data = new FormData();
-	const file = new File([`${name}`], `${name}.txt`, {
-		type: 'text/plain'
-	});
-	data.append('file', file);
-
-	await fetch(PUBLIC_UPLOAD_ENDPOINT, {
-		method: 'POST',
-		body: data
-	});
-}
 
 export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent) {
 	let isPWA = false;
@@ -51,13 +37,6 @@ export function userAgentFromRequestHeaders(headers: Headers) {
 		isIOS,
 		isSafari
 	};
-}
-
-// TODO: dec11,2022: I just noticed that the logic of this function (when used inside Navitem.svelte & Navbar.svelte ) is possible with 'event delegation' technique ... i.e. attaching a click event listener on the entire documment, and filtering for event.target.node; might change this to that at a future date. ASIDE: The way I did it here is sveltier (less general) but in some sense more readable WITHIN this framework.
-export async function clearNavModals() {
-	showLoginModal.set(false);
-	showHomeworkModal.set(false);
-	navAppClicked.set(false);
 }
 
 // Need to use JS to disable scrolling on firefox, since firefox does not support the :has() css pseudo-selector —— e.g. body:has(element){ overflow:hidden }, is the elegant css way of disabling scroll (for a given route containing a specific element) ——
@@ -158,21 +137,21 @@ export function disableZoomOnTouchDevices() {
 }
 
 // As of nov18 2022, dynamically importing css failed for dropzone.css when combining with InView.svelte; this seems to be a known bug with vite (https://github.com/vitejs/vite/issues/4237; I updated vite as well) and 'npm run prod' as things works fine on 'npm run dev'. Either way the code here is straightforward, vanilla way of achieving dynamic import of js/css should module bundlers fail awkwardly.
-export function cssToHead(id = 'dropzoneCSS', path = '/dropzone.css') {
-	if (!document.getElementById(id)) {
-		const element = document.createElement('link');
-		element.id = id;
-		element.href = path;
-		element.rel = 'stylesheet';
-		document.head.appendChild(element);
-	}
-}
-export function jsToHead(id = 'calendlyJS', path = 'external-website.com/calendly.js') {
-	if (!document.getElementById(id)) {
-		const element = document.createElement('script');
-		element.id = id;
-		element.src = path;
-		element.type = 'text/javascript';
-		document.head.appendChild(element);
-	}
-}
+// export function cssToHead(id = 'dropzoneCSS', path = '/dropzone.css') {
+// 	if (!document.getElementById(id)) {
+// 		const element = document.createElement('link');
+// 		element.id = id;
+// 		element.href = path;
+// 		element.rel = 'stylesheet';
+// 		document.head.appendChild(element);
+// 	}
+// }
+// export function jsToHead(id = 'calendlyJS', path = 'external-website.com/calendly.js') {
+// 	if (!document.getElementById(id)) {
+// 		const element = document.createElement('script');
+// 		element.id = id;
+// 		element.src = path;
+// 		element.type = 'text/javascript';
+// 		document.head.appendChild(element);
+// 	}
+// }
