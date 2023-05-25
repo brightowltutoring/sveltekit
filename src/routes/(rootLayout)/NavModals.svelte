@@ -2,13 +2,12 @@
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import LoginCard from '$routes/login/LoginCard.svelte';
 	import Dropzone from '$routes/homework/Dropzone.svelte';
-
-	import { getContext } from 'svelte';
-	const isIOS: boolean = getContext('isIOS');
+	// const isIOS: boolean = getContext('isIOS');
 
 	import { scale, fly } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { showLoginModal, showHomeworkModal, navAppClicked } from '$lib/store/modalsStore';
+	import { isIOS } from '$lib/store/clientStore';
 
 	let stepOneScale = {
 		duration: 1300,
@@ -31,7 +30,7 @@
 
 <Modal
 	all
-	showModal={isIOS && $navAppClicked}
+	showModal={$isIOS && $navAppClicked}
 	bgTW={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 >
 	<ul class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">

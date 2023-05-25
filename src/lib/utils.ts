@@ -64,10 +64,8 @@ export const cookeh = {
 	set: function (
 		name: string,
 		value: string | boolean,
-		// { seconds = 60 * 60 * 24, secure = true } = {}
 
 		{ seconds = 60 * 60 * 24, secure = !get(isSafari) } = {}
-		// For some reason on safari the security has to set to false, but on chrome it has to be set to true!! At the moment 'isSafari' is set from request headers on the backend, then set as a store variable on the front-end ... which I am choosing to retrieve here as the default value to 'secure' ... otherwise I'd have to set '{secure: !$isSafari}' when setting the cookie on the client-side for every cookie
 	) {
 		console.log(`${name} cookie set`);
 		document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None${
@@ -76,8 +74,6 @@ export const cookeh = {
 	},
 
 	get: function (name: string) {
-		// return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
-
 		const match = document.cookie.match(`${name}=(.*?)(;|$)`);
 		return match ? decodeURIComponent(match[1]) : '';
 	},
@@ -86,8 +82,6 @@ export const cookeh = {
 		names.forEach((name) => {
 			document.cookie = `${name}=; max-age=0;`;
 		});
-		// eat: function (name: string) {
-		// 	return (document.cookie = name + '=; max-age=0;');
 	}
 };
 
@@ -115,15 +109,6 @@ export function debounce<f extends FunctionType>(func: f, timeout = 300) {
 	};
 }
 
-// export function disableZoomGestures() {
-// 	for (let eventName of ['gesturestart', 'dblclick']) {
-// 		document.addEventListener(eventName, (e) => {
-// 			e.preventDefault();
-// 			// return false;
-// 		});
-// 	}
-// }
-
 export function disableZoomOnTouchDevices() {
 	if ('ontouchstart' in window) disableCallBack();
 
@@ -135,23 +120,3 @@ export function disableZoomOnTouchDevices() {
 		}
 	}
 }
-
-// As of nov18 2022, dynamically importing css failed for dropzone.css when combining with InView.svelte; this seems to be a known bug with vite (https://github.com/vitejs/vite/issues/4237; I updated vite as well) and 'npm run prod' as things works fine on 'npm run dev'. Either way the code here is straightforward, vanilla way of achieving dynamic import of js/css should module bundlers fail awkwardly.
-// export function cssToHead(id = 'dropzoneCSS', path = '/dropzone.css') {
-// 	if (!document.getElementById(id)) {
-// 		const element = document.createElement('link');
-// 		element.id = id;
-// 		element.href = path;
-// 		element.rel = 'stylesheet';
-// 		document.head.appendChild(element);
-// 	}
-// }
-// export function jsToHead(id = 'calendlyJS', path = 'external-website.com/calendly.js') {
-// 	if (!document.getElementById(id)) {
-// 		const element = document.createElement('script');
-// 		element.id = id;
-// 		element.src = path;
-// 		element.type = 'text/javascript';
-// 		document.head.appendChild(element);
-// 	}
-// }

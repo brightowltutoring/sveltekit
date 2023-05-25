@@ -2,21 +2,18 @@
 	import './(rootLayout)/styles.css';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import Footer from './(rootLayout)/Footer.svelte';
-	import { onMount, setContext } from 'svelte';
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
-	import { isLoggedIn, isSafari } from '$lib/store/clientStore';
+	import { isLoggedIn, isSafari, isIOS, isPWA } from '$lib/store/clientStore';
 	import { scrollY } from '$lib/store/scrollStore';
 
 	export let data;
+	$: seoString = data.seoString;
 	$: isLoggedIn.set(Boolean(data.haventLoggedOut));
-	$: seoString = data.seoString; //this fixed seo data when navigating away from errored page
-
-	setContext('isIOS', data.isIOS); // $isIOS = Boolean(data.isIOS);
-	setContext('isPWA', data.isPWA); // $isPWA = Boolean(data.isPWA);
-
-	isSafari.set(Boolean(data.isSafari)); // setContext('isSafari', data.isSafari);
-	// TODO: since 'isSafari' is accessed in utils.ts (for 'cookeh' setter definition), at the moment haven't figured out how to do this with setContext
+	isIOS.set(Boolean(data.isIOS)); // setContext('isIOS', data.isIOS);
+	isPWA.set(Boolean(data.isPWA)); // setContext('isPWA', data.isPWA);
+	isSafari.set(Boolean(data.isSafari));
 
 	onMount(() => {
 		disableZoomOnTouchDevices();

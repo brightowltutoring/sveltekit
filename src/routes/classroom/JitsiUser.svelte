@@ -1,17 +1,14 @@
 <script lang="ts">
-	// using local copy of jitsi api script since standard head script (e.g. using: src="https://meet.jit.si/external_api.js"), in commented out <svelte:head> below, not working
-
 	export let admin = false; // existence prop; used for '/classroomA' route
-
 	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-
-	import { getContext } from 'svelte';
 	import { browser } from '$app/environment';
+	import { isPWA } from '$lib/store/clientStore';
 
 	async function hangUpBtn() {
 		await api.dispose();
-		goto(getContext('isPWA') ? '/pwa' : '/');
+		goto($isPWA ? '/pwa' : '/');
+		// goto(getContext('isPWA') ? '/pwa' : '/');
 	}
 
 	let api: any;

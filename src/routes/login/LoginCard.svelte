@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let noTransition = false;
-
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
 	import MagicLinkSection from './MagicLinkSection.svelte';
 	import PhoneAuthSection from './PhoneAuthSection.svelte';
@@ -11,12 +10,10 @@
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
 	import { showLoginModal } from '$lib/store/modalsStore';
-	import { isLoggedIn } from '$lib/store/clientStore';
-
-	import { getContext } from 'svelte';
+	import { isLoggedIn, isPWA } from '$lib/store/clientStore';
 	import { page } from '$app/stores';
-	const isPWA: boolean = getContext('isPWA');
 
+	// const isPWA: boolean = getContext('isPWA');
 	let loggedInEmail: string | null = '';
 	let loggedInDisplayName: string | null = '';
 
@@ -136,7 +133,7 @@
 
 				redirectLogic(redirectUrlFromCookies);
 			} else {
-				let defaultRoute = isPWA ? '/pwa' : '/';
+				let defaultRoute = $isPWA ? '/pwa' : '/';
 
 				cookeh.set('redirectUrlFromCookies', defaultRoute);
 
