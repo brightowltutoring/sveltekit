@@ -2,8 +2,7 @@
 <!-- Pro: simpler and more consolidated than handling 'event.request.url.pathname', passing from layout.server.ts to layout.svelte, AND doesnt break the '+error.svelte' when navigating to faulty path  -->
 
 <script lang="ts">
-	import { routes } from '$lib/store';
-
+	import { routes } from '$lib/store/routesStore';
 	import { page } from '$app/stores';
 
 	let routes$ = Object.values($routes);

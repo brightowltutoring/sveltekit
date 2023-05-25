@@ -1,7 +1,7 @@
 <script>
 	// @ts-ignore
 	import E from '$lib/e-and-m.svx';
-	import { isDarkMode } from '$lib/store';
+	import { isDarkMode } from '$lib/store/clientStore';
 	$: proseInvert = $isDarkMode ? 'prose-invert' : '';
 </script>
 

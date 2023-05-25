@@ -3,7 +3,7 @@
 
 	import IconUpload from '$lib/Icons/IconUpload.svelte';
 	import { enhance } from '$app/forms';
-	import { showHomeworkModal } from '$lib/store';
+	import { showHomeworkModal } from '$lib/store/modalsStore';
 	// import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 	const ACTION_API_URL = ['/api/submit-homework', '', '/api/testPost' /* PUBLIC_UPLOAD_ENDPOINT */];
 

@@ -1,32 +1,3 @@
-import { writable, derived, get } from 'svelte/store';
-
-export const isLoggedIn = writable(false);
-export const isSafari = writable(false);
-export const isDarkMode = writable(false);
-export const contactLinkClicked = writable(false);
-
-export const lastScrollY = writable(0);
-export const scrollY = writable(0);
-
-let delayedScrollY = get(scrollY);
-export const instDeltaY = derived(scrollY, ($scrollY) => {
-	setTimeout(() => {
-		delayedScrollY = get(scrollY);
-	}, 50);
-
-	return $scrollY - delayedScrollY;
-});
-
-export const navAppClicked = writable(false);
-export const showLoginModal = writable(false);
-export const showHomeworkModal = writable(false);
-
-export async function clearNavModals() {
-	showLoginModal.set(false);
-	showHomeworkModal.set(false);
-	navAppClicked.set(false);
-}
-
 import IconHome from '$lib/Icons/NavIcons/IconHome.svelte';
 import IconLogin from '$lib/Icons/NavIcons/IconLogin.svelte';
 import IconPlans from '$lib/Icons/NavIcons/IconPlans.svelte';
@@ -34,6 +5,7 @@ import IconHomework from '$lib/Icons/NavIcons/IconHomework.svelte';
 import IconClassroom from '$lib/Icons/NavIcons/IconClassroom.svelte';
 
 import type { ComponentType } from 'svelte';
+import { writable } from 'svelte/store';
 
 export type RouteData = {
 	name: string;
@@ -139,14 +111,9 @@ const routesObj = {
 };
 export const routes = writable<routesType>(routesObj);
 
-// testing an array way to deal with the routes object
-// export const routes2 = writable<RouteData[]>(Object.values(routesObj));
-
 const routesData = Object.values(routesObj);
 export function getSeoString(url: URL) {
 	const pathname = url.pathname;
-	const fullUrl = url.href;
-
 	let matchingRoute = routesData[0] as RouteData;
 
 	if (pathname !== '/')
@@ -156,33 +123,16 @@ export function getSeoString(url: URL) {
 
 	if (!matchingRoute) return { seoString: '<title>Oops 💩</title>' };
 
-	const seoString = `
-		<title>${matchingRoute.meta?.title}</title> 
-		<meta name="description" content="${matchingRoute.meta.description}"/>
-		<meta property="og:description" content="${matchingRoute.meta.description}"/>
-		<meta property="og:url" content="${fullUrl}">
-		<link rel="canonical" routePath="${fullUrl}">
-		`;
+	const href = url.href;
+	const { title, description } = matchingRoute.meta;
 
-	return { seoString };
+	return {
+		seoString: `
+			<title>${title}</title> 
+			<meta name="description" content="${description}"/>
+			<meta property="og:description" content="${description}"/>
+			<meta property="og:url" content="${href}">
+			<link rel="canonical" href="${href}">
+		`
+	};
 }
-
-// export const innerWidth = writable(0);
-// export const lessThan768 = derived(innerWidth, ($innerWidth) => $innerWidth < 768);
-
-// // Could do something like '$innerWidth = window.innerWidth' inside .svelte file, however value would be updating continuously
-// export function setInnerWidthViaMatchMedia(pixelWidth = 768) {
-// 	innerWidth.set(window.innerWidth);
-// 	console.log(`LANDED at ${get(innerWidth)}`);
-
-// 	window
-// 		.matchMedia(`(max-width: ${pixelWidth}px)`)
-// 		.addEventListener('change', handleInnerWidthChange);
-
-// 	function handleInnerWidthChange(event: MediaQueryListEvent) {
-// 		innerWidth.set(window.innerWidth);
-// 		event.matches
-// 			? console.log(`UNDER ${pixelWidth}px 🙈`)
-// 			: console.log(`OVER ${pixelWidth}px 😄`);
-// 	}
-// }

@@ -1,8 +1,8 @@
 <script lang="ts">
-	// import InView from "$lib/Wrappers/InView.svelte";
-
 	import type { ComponentType } from 'svelte';
-	import type { routesType } from '$lib/store';
+	import type { routesType } from '$lib/store/routesStore';
+	import { showLoginModal, showHomeworkModal, clearNavModals } from '$lib/store/modalsStore';
+	import { page } from '$app/stores';
 
 	export let routePath: string;
 	export let name: string;
@@ -10,9 +10,6 @@
 	export let btnColorHover: string;
 	export let icon: ComponentType | undefined;
 	export let navIconClicked = false;
-
-	import { showLoginModal, showHomeworkModal, clearNavModals } from '$lib/store';
-	import { page } from '$app/stores';
 
 	// this allows going back and button click matching with route
 	// could've done this in if/else but the boolean nature here made it unnecessary

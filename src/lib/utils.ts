@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { isSafari } from '$lib/store';
+import { isSafari } from '$lib/store/clientStore';
 
 import { onMount, onDestroy } from 'svelte';
 import { browser } from '$app/environment';

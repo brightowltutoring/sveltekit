@@ -5,7 +5,8 @@
 	import { onMount, setContext } from 'svelte';
 	import { page } from '$app/stores';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
-	import { scrollY, isLoggedIn, isSafari } from '$lib/store';
+	import { isLoggedIn, isSafari } from '$lib/store/clientStore';
+	import { scrollY } from '$lib/store/scrollStore';
 
 	export let data;
 	$: isLoggedIn.set(Boolean(data.haventLoggedOut));

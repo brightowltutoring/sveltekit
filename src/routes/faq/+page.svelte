@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { fly, fade, slide } from 'svelte/transition';
+	import { onMount } from 'svelte';
+	import { fly, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import { showHomeworkModal, showLoginModal } from '$lib/store/modalsStore';
 
-	import { showHomeworkModal, showLoginModal } from '$lib/store';
 	let faqContainer: HTMLElement;
 	let selectedTd: HTMLElement;
 
@@ -16,7 +17,6 @@
 		(<HTMLDetailsElement>selectedTd.parentElement).open = false; // this disables closing the details element going forward
 	}
 
-	import { onMount } from 'svelte';
 	onMount(() => {
 		faqContainer = document.querySelector('.faqContainer')!;
 

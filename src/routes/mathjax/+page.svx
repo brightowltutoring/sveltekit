@@ -5,7 +5,7 @@
 <script>
 
     import MathLazyRenderer from "$lib/MathJaxer.svelte"
-    import { isDarkMode } from "$lib/store";
+    import { isDarkMode } from "$lib/store/clientStore";
   
     let numMax = 1000
     let num = numMax

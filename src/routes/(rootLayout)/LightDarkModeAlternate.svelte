@@ -3,7 +3,7 @@
 	import IconMoon from '$lib/Icons/IconMoon.svelte';
 	import { scale } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
-	import { isDarkMode } from '$lib/store';
+	import { isDarkMode } from '$lib/store/clientStore';
 	import { browser } from '$app/environment';
 
 	// initialize darkmode state

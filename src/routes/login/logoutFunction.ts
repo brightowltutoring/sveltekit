@@ -1,6 +1,5 @@
-import { showLoginModal, /*  isPWA, */ isLoggedIn } from '$lib/store';
-// import { get } from 'svelte/store';
-// import { goto } from '$app/navigation';
+import { showLoginModal } from '$lib/store/modalsStore';
+import { isLoggedIn } from '$lib/store/clientStore';
 import { cookeh } from '$lib/utils';
 
 export async function logoutFunction() {

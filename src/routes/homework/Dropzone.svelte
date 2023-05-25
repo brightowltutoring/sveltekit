@@ -9,13 +9,14 @@
 	import InView from '$lib/Wrappers/InView.svelte';
 	import IconUploadGradient from '$lib/Icons/IconUploadGradient.svelte';
 
-	import { showHomeworkModal } from '$lib/store';
+	import { showHomeworkModal } from '$lib/store/modalsStore';
 
 	export let textSizeTW = 'text-3xl';
 	export let dimensionsTW = 'w-[65vw] sm:w-[60vw] h-[60vh]';
 	export let brightnessTW = 'brightness-100';
 
 	let iframeSrc: string | undefined = '';
+
 	const updateIframeSrc = async () => (iframeSrc = await getIframeSrcAndPostDummyOnce());
 
 	$: $showHomeworkModal && dropzonePopUpOnce();

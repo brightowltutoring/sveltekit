@@ -3,7 +3,7 @@
 	import EnableJavascript from '$lib/EnableJavascript.svelte';
 
 	import { onMount, onDestroy } from 'svelte';
-	import { isDarkMode } from '$lib/store';
+	import { isDarkMode } from '$lib/store/clientStore';
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { page } from '$app/stores';

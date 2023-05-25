@@ -1,12 +1,12 @@
 <script>
-	import { isDarkMode } from '$lib/store';
+	import { isDarkMode } from '$lib/store/clientStore';
 	import IconTwitter from '$lib/Icons/LoginIcons/IconTwitter.svelte';
 	import { TwitterLogin } from './TwitterLogin';
 </script>
 
 <button
 	on:click={TwitterLogin}
-	class="group rounded-md  bg-[#1d9bf0] p-4 duration-200 hover:scale-[1.01] hover:shadow-md {$isDarkMode
+	class="group rounded-md bg-[#1d9bf0] p-4 duration-200 hover:scale-[1.01] hover:shadow-md {$isDarkMode
 		? 'group-hover:bg-opacity-90'
 		: 'group-hover:bg-opacity-90'} flex w-full items-center justify-center gap-5 text-white"
 >

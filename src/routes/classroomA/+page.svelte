@@ -3,7 +3,7 @@
 	import EnableJavascript from '$lib/EnableJavascript.svelte';
 	import JitsiUser from '$routes/classroom/JitsiUser.svelte';
 	import { onMount, onDestroy } from 'svelte';
-	import { isDarkMode } from '$lib/store';
+	import { isDarkMode } from '$lib/store/clientStore';
 
 	let wasDarkModeLS = browser && sessionStorage.getItem('isDarkMode');
 	onMount(() => {

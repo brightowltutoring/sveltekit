@@ -10,7 +10,6 @@
 		verifySMSCode
 	} from './PhoneLogin';
 	import IconPhone from '$lib/Icons/LoginIcons/IconPhone.svelte';
-	// import { isDarkMode } from '$lib/store';
 
 	let phoneCodeSent = false;
 

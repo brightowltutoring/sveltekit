@@ -7,7 +7,6 @@
 	let emptyEmailInputAnimated: boolean;
 	$: shortPing = !magicLinkSent && emptyEmailInputAnimated && 'animate-ping';
 
-	// let magicLinkBtn: HTMLButtonElement;
 	let emailField: HTMLElement;
 	let emailFieldValue: string = '';
 	let isEmail = false;
@@ -42,9 +41,6 @@
 
 			emailField.style.opacity = '0.5';
 			emailField.style.pointerEvents = 'none';
-
-			// magicLinkBtn.style.opacity = '0.5';
-			// magicLinkBtn.style.pointerEvents = 'none';
 		}
 	}
 
@@ -75,7 +71,6 @@
 </LoginButton>
 
 {#if $magicLinkInputVisible$}
-	<!-- {#if magicLinkInputVisible} -->
 	<input
 		on:keydown={signinWithLinkAndStop}
 		on:paste={() => onInputEmailField(emailFieldValue)}

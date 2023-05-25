@@ -7,15 +7,10 @@
 	const isIOS: boolean = getContext('isIOS');
 	const isPWA: boolean = getContext('isPWA');
 
-	import {
-		isLoggedIn,
-		routes,
-		scrollY,
-		isDarkMode,
-		showLoginModal,
-		showHomeworkModal,
-		instDeltaY
-	} from '$lib/store';
+	import { showLoginModal, showHomeworkModal } from '$lib/store/modalsStore';
+	import { isLoggedIn, isDarkMode } from '$lib/store/clientStore';
+	import { scrollY, instDeltaY } from '$lib/store/scrollStore';
+	import { routes } from '$lib/store/routesStore';
 
 	import { spring } from 'svelte/motion';
 	import LogoButton from './LogoButton.svelte';

@@ -7,7 +7,7 @@
     // import Katexer from "$lib/MathJaxer.svelte"
     // import Katexer from "$lib/Katexer.svelte"
     import Kajax from "$lib/Kajax.svelte"
-    import { isDarkMode } from "$lib/store";
+    import { isDarkMode } from "$lib/store/clientStore";
   
     let numMax = 1000
     let numMDMax = 1

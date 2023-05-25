@@ -10,13 +10,13 @@
 	import { quintOut, elasticOut } from 'svelte/easing';
 	import { cookeh } from '$lib/utils';
 	import { logoutFunction } from './logoutFunction';
-	import { isLoggedIn, showLoginModal /* isPWA */ } from '$lib/store';
+	import { showLoginModal } from '$lib/store/modalsStore';
+	import { isLoggedIn } from '$lib/store/clientStore';
 
 	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
 	const isPWA: boolean = getContext('isPWA');
 
-	// set in the 'onAuthStateChanged'
 	let loggedInEmail: string | null = '';
 	let loggedInDisplayName: string | null = '';
 
@@ -36,6 +36,7 @@
 
 	onMount(async () => {
 		await onMountFirebase();
+		console.log('mounted 🐎');
 	});
 
 	onDestroy(async () => {
@@ -45,7 +46,6 @@
 	});
 
 	async function onMountFirebase() {
-		console.log('mounted like a mounty');
 		const [firebaseModule, authModule] = await Promise.all([
 			import('./firebase'),
 			import('firebase/auth')
@@ -83,15 +83,11 @@
 
 				// if (user.email) loginWelcomeText = `Hey ${user.email}!`;
 				// if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
-				// $routes.login.name = '🚀';
 			} else {
-				// $isLoggedIn = false;
 				isLoggedIn.set(false);
 				loggedInEmail = '';
 
 				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
-
-				// $routes.login.name = 'Login';
 			}
 		});
 	}
@@ -114,7 +110,6 @@
 		let redirectUrlFromCookies = cookeh.get('redirectUrlFromCookies');
 
 		if (redirectUrlFromCookies) {
-			// console.log('redirectUrlFromCookies', redirectUrlFromCookies);
 			redirectLogic(redirectUrlFromCookies);
 		} else {
 			console.log('getdocs from firestore');

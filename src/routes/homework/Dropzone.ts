@@ -1,6 +1,6 @@
 import Dropzone from 'dropzone';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-import { showHomeworkModal } from '$lib/store';
+import { showHomeworkModal } from '$lib/store/modalsStore';
 import { get, writable } from 'svelte/store';
 
 const popUpOnceBoolean$ = writable(false);

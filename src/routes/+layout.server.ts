@@ -1,5 +1,5 @@
 import { userAgentFromRequestHeaders, isPwaFromCookieOrUrl } from '$lib/utils';
-import { getSeoString } from '$lib/store';
+import { getSeoString } from '$lib/store/routesStore';
 
 export async function load(event) {
 	const haventLoggedOut = event.cookies.get('haventLoggedOut');

@@ -4,7 +4,8 @@
 	export let date = '2022-06-08';
 
 	import InView from '$lib/Wrappers/InView.svelte';
-	import { isDarkMode, scrollY } from '$lib/store';
+	import { isDarkMode } from '$lib/store/clientStore';
+	import { scrollY } from '$lib/store/scrollStore';
 	import { spring } from 'svelte/motion';
 
 	let sineSpring = spring(0, { stiffness: 0.1, damping: 0.25 });
