@@ -1,16 +1,15 @@
 <script lang="ts">
 	import LoginButton from './LoginButton.svelte';
-	let smsCode: string;
-	let countryCode = '+1';
-
+	import IconPhone from '$lib/Icons/LoginIcons/IconPhone.svelte';
 	import {
-		regexPhoneChecker,
 		generateRecaptchaVerifier,
+		regexPhoneChecker,
 		sendCodeToPhone,
 		verifySMSCode
 	} from './PhoneLogin';
-	import IconPhone from '$lib/Icons/LoginIcons/IconPhone.svelte';
 
+	let smsCode: string;
+	let countryCode = '+1';
 	let phoneCodeSent = false;
 
 	let emptyPhoneInputAnimated = false;

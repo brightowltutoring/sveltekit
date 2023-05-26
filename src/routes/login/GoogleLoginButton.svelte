@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { GoogleLogin } from './GoogleLogin';
-	import IconGoogle from '$lib/Icons/LoginIcons/IconGoogle.svelte';
 	import LoginButton from './LoginButton.svelte';
+	import IconGoogle from '$lib/Icons/LoginIcons/IconGoogle.svelte';
+	import { GoogleLogin } from './GoogleLogin';
 </script>
 
 <LoginButton

@@ -1,6 +1,6 @@
 <script>
-	import { isDarkMode } from '$lib/store/clientStore';
 	import IconTwitter from '$lib/Icons/LoginIcons/IconTwitter.svelte';
+	import { isDarkMode } from '$lib/store/clientStore';
 	import { TwitterLogin } from './TwitterLogin';
 </script>
 

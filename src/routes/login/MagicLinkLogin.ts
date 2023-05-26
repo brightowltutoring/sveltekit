@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+
 export const magicLinkInputVisible$ = writable(false);
 
 export function regexEmailChecker(EMAIL: string) {

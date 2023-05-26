@@ -1,13 +1,12 @@
 <script lang="ts">
-	import JitsiUser from './JitsiUser.svelte';
 	import EnableJavascript from '$lib/EnableJavascript.svelte';
-
-	import { onMount, onDestroy } from 'svelte';
-	import { isDarkMode } from '$lib/store/clientStore';
-	import { scale } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
+	import JitsiUser from './JitsiUser.svelte';
 	import { page } from '$app/stores';
+	import { isDarkMode } from '$lib/store/clientStore';
 	import { disableScrollingOnPage } from '$lib/utils';
+	import { onDestroy, onMount } from 'svelte';
+	import { quintOut } from 'svelte/easing';
+	import { scale } from 'svelte/transition';
 
 	disableScrollingOnPage($page.url.pathname);
 	let initiallyInLightmode: boolean;

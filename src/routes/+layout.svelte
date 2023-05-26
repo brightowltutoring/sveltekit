@@ -1,12 +1,12 @@
 <script lang="ts">
-	import './(rootLayout)/styles.css';
-	import Navbar from './(rootLayout)/Navbar.svelte';
-	import Footer from './(rootLayout)/Footer.svelte';
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { scrollY } from '$lib/old/store';
+	import { isIOS, isLoggedIn, isPWA, isSafari } from '$lib/store/clientStore';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
-	import { isLoggedIn, isSafari, isIOS, isPWA } from '$lib/store/clientStore';
-	import { scrollY } from '$lib/store/scrollStore';
+	import { onMount } from 'svelte';
+	import Footer from './(rootLayout)/Footer.svelte';
+	import Navbar from './(rootLayout)/Navbar.svelte';
+	import './(rootLayout)/styles.css';
 
 	export let data;
 	$: seoString = data.seoString;

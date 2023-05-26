@@ -1,5 +1,5 @@
-import { showLoginModal } from '$lib/store/modalsStore';
 import { isLoggedIn } from '$lib/store/clientStore';
+import { showLoginModal } from '$lib/store/modalsStore';
 import { cookeh } from '$lib/utils';
 
 export async function logoutFunction() {

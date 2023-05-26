@@ -1,55 +1,7 @@
-import { get } from 'svelte/store';
-import { isSafari } from '$lib/store/clientStore';
-
-import { onMount, onDestroy } from 'svelte';
 import { browser } from '$app/environment';
-// the modules above cannot be dynamically imported in functions below, without failure
-
-import type { RequestEvent } from '@sveltejs/kit';
-import UAParser from 'ua-parser-js';
-
-export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent) {
-	let isPWA = false;
-	const cookieIsPWA = cookies.get('isPWA');
-
-	if (cookieIsPWA !== undefined) {
-		isPWA = cookieIsPWA === 'true';
-	} else {
-		isPWA = url.includes('pwa');
-	}
-
-	return { isPWA };
-}
-
-// client-side navigator.userAgent results in flash of content .. this is better
-export function userAgentFromRequestHeaders(headers: Headers) {
-	const userAgent = String(headers.get('user-agent'));
-	const parser = new UAParser(userAgent);
-	const isMobile = parser.getDevice().type === 'mobile';
-	const isIOS = parser.getOS().name?.toLowerCase() === 'ios';
-
-	const browser = parser.getBrowser().name?.toLowerCase();
-	const isSafari = browser?.includes('safari');
-	// const isIphone = parser.getDevice().model?.toLowerCase() === 'iphone';
-
-	return {
-		isMobile,
-		isIOS,
-		isSafari
-	};
-}
-
-// Need to use JS to disable scrolling on firefox, since firefox does not support the :has() css pseudo-selector —— e.g. body:has(element){ overflow:hidden }, is the elegant css way of disabling scroll (for a given route containing a specific element) ——
-export async function disableScrollingOnPage(pathname: string) {
-	onMount(() => {
-		// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
-		if (pathname === '/classroom' || '/pwa') {
-			document.body.style.overflow = 'hidden';
-		}
-	});
-
-	onDestroy(() => browser && (document.body.style.overflow = 'auto'));
-}
+import { isSafari } from '$lib/store/clientStore';
+import { onDestroy, onMount } from 'svelte';
+import { get } from 'svelte/store';
 
 export function setIsPwaCookie() {
 	// cookeh.eat('isPWA'); //testing; keep this commented out unless needed!
@@ -119,4 +71,57 @@ export function disableZoomOnTouchDevices() {
 			});
 		}
 	}
+}
+
+// Need to use JS to disable scrolling on firefox, since firefox does not support the :has() css pseudo-selector —— e.g. body:has(element){ overflow:hidden }, is the elegant css way of disabling scroll (for a given route containing a specific element) ——
+export function disableScrollingOnPage(pathname: string) {
+	onMount(() => {
+		// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
+		if (pathname === '/classroom' || '/pwa') {
+			document.body.style.overflow = 'hidden';
+		}
+	});
+
+	onDestroy(() => browser && (document.body.style.overflow = 'auto'));
+}
+
+// USE ACTIONS BELOW:
+export function useInView(
+	node?: HTMLElement,
+	{
+		onview = (target: Element) => console.log('i ❤️ slots'),
+		once = true,
+		vanilla = false,
+		root = undefined,
+		threshold = 0,
+		margin = '0px'
+	} = {}
+) {
+	const observer = new IntersectionObserver(handleIntersect, {
+		root,
+		threshold,
+		rootMargin: margin
+	});
+
+	// when vanilla, this action should be attached to the body of the document, say
+
+	if (node) observer.observe(node);
+	if (!node && vanilla) {
+		document.querySelectorAll('vanilla').forEach((el) => observer.observe(el));
+	}
+
+	function handleIntersect(ENTRIES: IntersectionObserverEntry[], OBSERVER: IntersectionObserver) {
+		for (const entry of ENTRIES) {
+			if (entry.isIntersecting) {
+				onview(entry.target);
+				once && OBSERVER.unobserve(entry.target);
+			}
+		}
+	}
+
+	return {
+		destroy() {
+			observer.disconnect();
+		}
+	};
 }

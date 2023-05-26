@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { regexEmailChecker, magicLinkToEmail, magicLinkInputVisible$ } from './MagicLinkLogin';
 	import IconEmail from '$lib/Icons/LoginIcons/IconEmail.svelte';
 	import LoginButton from './LoginButton.svelte';
+	import { magicLinkInputVisible$, magicLinkToEmail, regexEmailChecker } from './MagicLinkLogin';
 
 	let magicLinkSent = false;
 	let emptyEmailInputAnimated: boolean;

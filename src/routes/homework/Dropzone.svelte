@@ -1,19 +1,17 @@
 <script lang="ts">
-	import './dropzone.css';
-	import {
-		dropzonePopUpOnce,
-		hydrateDropzoneDomEls,
-		getIframeSrcAndPostDummyOnce
-	} from './Dropzone';
-
-	import InView from '$lib/Wrappers/InView.svelte';
-	import IconUploadGradient from '$lib/Icons/IconUploadGradient.svelte';
-
-	import { showHomeworkModal } from '$lib/store/modalsStore';
-
 	export let textSizeTW = 'text-3xl';
 	export let dimensionsTW = 'w-[65vw] sm:w-[60vw] h-[60vh]';
 	export let brightnessTW = 'brightness-100';
+
+	import './dropzone.css';
+	import IconUploadGradient from '$lib/Icons/IconUploadGradient.svelte';
+	import { showHomeworkModal } from '$lib/store/modalsStore';
+	import { useInView } from '$lib/utils';
+	import {
+		dropzonePopUpOnce,
+		getIframeSrcAndPostDummyOnce,
+		hydrateDropzoneDomEls
+	} from './Dropzone';
 
 	let iframeSrc: string | undefined = '';
 
@@ -33,16 +31,18 @@
 
 <!-- <PostDummyOnce /> -->
 
-<InView single onview={(target) => hydrateDropzoneDomEls(target)} once margin={'0px'}>
-	<form
-		method="post"
-		class="dropzone flex flex-wrap items-center justify-center backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto overflow-y-scroll"
-	>
-		<div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
-			<IconUploadGradient />
-		</div>
-	</form>
-</InView>
+<!-- <InView single onview={(target) => hydrateDropzoneDomEls(target)} once margin={'0px'}> -->
+<form
+	use:useInView={{ onview: (target) => hydrateDropzoneDomEls(target) }}
+	method="post"
+	class="dropzone flex flex-wrap items-center justify-center backdrop-blur-3xl {brightnessTW} {textSizeTW} {dimensionsTW} group mx-auto overflow-y-scroll"
+>
+	<div class="dz-message font-Nunito group-hover:animate-pulse" data-dz-message>
+		<IconUploadGradient />
+	</div>
+</form>
+
+<!-- </InView> -->
 
 <style>
 	/* removes white background on uploaded images  */

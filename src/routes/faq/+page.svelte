@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { fly, fade } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
 	import { showHomeworkModal, showLoginModal } from '$lib/store/modalsStore';
+	import { onMount } from 'svelte';
+	import { quintOut } from 'svelte/easing';
+	import { fade, fly } from 'svelte/transition';
 
 	let faqContainer: HTMLElement;
 	let selectedTd: HTMLElement;

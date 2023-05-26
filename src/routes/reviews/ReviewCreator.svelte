@@ -3,10 +3,11 @@
 	export let name = 'Thomas Finn';
 	export let date = '2022-06-08';
 
-	import InView from '$lib/Wrappers/InView.svelte';
+	import { useInView } from '$lib/utils';
 	import { isDarkMode } from '$lib/store/clientStore';
 	import { scrollY } from '$lib/store/scrollStore';
 	import { spring } from 'svelte/motion';
+	import InView from '$src/lib/Wrappers/InView.svelte';
 
 	let sineSpring = spring(0, { stiffness: 0.1, damping: 0.25 });
 
@@ -32,14 +33,15 @@
 		<div class="flex flex-row">
 			<!-- {#each Array(5) as _} -->
 			{#each { length: 5 } as _}
-				<InView single once onview={hydrateStar}>
-					<img
-						style={`filter:hue-rotate(${$sineSpring}turn)`}
-						class="h-10 w-10 opacity-0 transition-opacity duration-300 ease-in hover:scale-125"
-						src=""
-						alt="star"
-					/>
-				</InView>
+				<!-- <InView single once onview={hydrateStar}> -->
+				<img
+					use:useInView={{ onview: (target) => hydrateStar(target) }}
+					style={`filter:hue-rotate(${$sineSpring}turn)`}
+					class="h-10 w-10 opacity-0 transition-opacity duration-300 ease-in hover:scale-125"
+					src=""
+					alt="star"
+				/>
+				<!-- </InView> -->
 			{/each}
 		</div>
 

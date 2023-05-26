@@ -1,13 +1,12 @@
 <script lang="ts">
+	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
 	import DropzoneOpener from './homework/DropzoneOpener.svelte';
 	import PlansSection from './plans/+page.svelte';
-	import Reviews from './reviews/Reviews.svelte';
 	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
-	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
-	import { slide } from 'svelte/transition';
-	import { elasticOut } from 'svelte/easing';
-
+	import Reviews from './reviews/Reviews.svelte';
 	import { onMount } from 'svelte';
+	import { elasticOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
 
 	let ready = false;
 	onMount(() => (ready = true));
@@ -19,7 +18,7 @@
 <BackgroundVideo />
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">
-	<a href="#step1" class="z-10 flex h-[60vh] items-center justify-center text-center">
+	<a href="#step1" class=" z-10 flex h-[60vh] items-center justify-center text-center">
 		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
 
 		<div class="grid grid-rows-1">

@@ -1,17 +1,19 @@
 <script lang="ts">
 	export let noTransition = false;
+
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
 	import MagicLinkSection from './MagicLinkSection.svelte';
 	import PhoneAuthSection from './PhoneAuthSection.svelte';
-	import { onMount, onDestroy } from 'svelte';
+
 	import { goto } from '$app/navigation';
-	import { slide } from 'svelte/transition';
-	import { quintOut, elasticOut } from 'svelte/easing';
-	import { cookeh } from '$lib/utils';
-	import { logoutFunction } from './logoutFunction';
-	import { showLoginModal } from '$lib/store/modalsStore';
-	import { isLoggedIn, isPWA } from '$lib/store/clientStore';
 	import { page } from '$app/stores';
+	import { isLoggedIn, isPWA } from '$lib/store/clientStore';
+	import { showLoginModal } from '$lib/store/modalsStore';
+	import { cookeh } from '$lib/utils';
+	import { onDestroy, onMount } from 'svelte';
+	import { elasticOut, quintOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
+	import { logoutFunction } from './logoutFunction';
 
 	// const isPWA: boolean = getContext('isPWA');
 	let loggedInEmail: string | null = '';
