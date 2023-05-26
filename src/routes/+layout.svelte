@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { scrollY } from '$lib/old/store';
+	import { scrollY } from '$lib/store/scrollStore';
 	import { isIOS, isLoggedIn, isPWA, isSafari } from '$lib/store/clientStore';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import { onMount } from 'svelte';
