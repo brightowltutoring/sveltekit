@@ -1,15 +1,6 @@
-import { browser } from '$app/environment';
-import { isSafari } from '$lib/store/clientStore';
-import { onDestroy, onMount } from 'svelte';
+import { isSafari, isDarkMode } from '$lib/store/clientStore';
+import { onMount } from 'svelte';
 import { get } from 'svelte/store';
-
-export function setIsPwaCookie() {
-	// cookeh.eat('isPWA'); //testing; keep this commented out unless needed!
-	if (cookeh.get('isPWA')) return;
-
-	const isPWA = window.matchMedia('(display-mode: standalone)').matches;
-	isPWA && cookeh.set('isPWA', isPWA);
-}
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use. Might add serializer code from npm cookie inside my set method.
 export const cookeh = {
@@ -19,10 +10,10 @@ export const cookeh = {
 
 		{ seconds = 60 * 60 * 24, secure = !get(isSafari) } = {}
 	) {
-		console.log(`${name} cookie set`);
 		document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None${
 			secure ? '; Secure' : ''
 		}`;
+		console.log(`${name} cookie set; secure: ${secure}`);
 	},
 
 	get: function (name: string) {
@@ -31,11 +22,19 @@ export const cookeh = {
 	},
 
 	eat: function (...names: string[]) {
-		names.forEach((name) => {
-			document.cookie = `${name}=; max-age=0;`;
-		});
+		names.forEach((name) => (document.cookie = `${name}=; max-age=0;`));
 	}
 };
+
+export async function setIsPwaCookie() {
+	// cookeh.eat('isPWA'); //testing; keep this commented out unless needed!
+	onMount(() => {
+		if (cookeh.get('isPWA')) return;
+
+		const isPWA = window.matchMedia('(display-mode: standalone)').matches;
+		isPWA && cookeh.set('isPWA', isPWA);
+	});
+}
 
 // debounce from https://www.freecodecamp.org/news/javascript-debounce-example/; TODO: why is 'args / func.apply(this, args)' syntax necessary
 // export function debouncer(func: any, timeout = 300) {
@@ -62,27 +61,31 @@ export function debounce<f extends FunctionType>(func: f, timeout = 300) {
 }
 
 export function disableZoomOnTouchDevices() {
-	if ('ontouchstart' in window) disableCallBack();
+	onMount(() => {
+		if ('ontouchstart' in window) disableCallBack();
 
-	function disableCallBack() {
-		for (let eventName of ['gesturestart', 'dblclick']) {
-			document.addEventListener(eventName, (e) => {
-				e.preventDefault();
-			});
+		function disableCallBack() {
+			for (let eventName of ['gesturestart', 'dblclick']) {
+				document.addEventListener(eventName, (e) => {
+					e.preventDefault();
+				});
+			}
 		}
-	}
+	});
 }
 
 // Need to use JS to disable scrolling on firefox, since firefox does not support the :has() css pseudo-selector —— e.g. body:has(element){ overflow:hidden }, is the elegant css way of disabling scroll (for a given route containing a specific element) ——
 export function disableScrollingOnPage(pathname: string) {
 	onMount(() => {
+		const originalOverflow = document.body.style.overflow;
 		// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
+
 		if (pathname === '/classroom' || '/pwa') {
 			document.body.style.overflow = 'hidden';
 		}
-	});
 
-	onDestroy(() => browser && (document.body.style.overflow = 'auto'));
+		return () => (document.body.style.overflow = originalOverflow);
+	});
 }
 
 // USE ACTIONS BELOW:
@@ -91,23 +94,23 @@ export function useInView(
 	{
 		onview = (target: Element) => console.log('i ❤️ slots'),
 		once = true,
-		vanilla = false,
+		vanilla = undefined as string | undefined,
 		root = undefined,
 		threshold = 0,
 		margin = '0px'
 	} = {}
 ) {
-	const observer = new IntersectionObserver(handleIntersect, {
+	const options = {
 		root,
 		threshold,
 		rootMargin: margin
-	});
-
-	// when vanilla, this action should be attached to the body of the document, say
+	};
+	const observer = new IntersectionObserver(handleIntersect, options);
 
 	if (node) observer.observe(node);
 	if (!node && vanilla) {
-		document.querySelectorAll('vanilla').forEach((el) => observer.observe(el));
+		document.querySelectorAll(vanilla).forEach((el) => observer.observe(el));
+		// document.querySelectorAll(`${vanilla}`).forEach((el) => observer.observe(el));
 	}
 
 	function handleIntersect(ENTRIES: IntersectionObserverEntry[], OBSERVER: IntersectionObserver) {
@@ -124,4 +127,41 @@ export function useInView(
 			observer.disconnect();
 		}
 	};
+}
+
+// NOTE: In the vanilla case, I would have to do:
+// let inView;
+
+// onMount(() => {
+// 	inView = useInView(undefined, {
+// 		vanilla: 'IMG'
+// 	});
+
+// 	return () => inView.destroy();
+// });
+
+// OR do:
+// let inView =
+// 	browser &&
+// 	useInView(undefined, {
+// 		vanilla: 'IMG'
+// 	});
+
+// onDestroy(() => {
+// 	inView && inView.destroy();
+// });
+
+export function inDarkOutOriginal() {
+	onMount(() => {
+		let initiallyInLightmode = !get(isDarkMode);
+		document.documentElement.classList.add('dark-mode');
+		isDarkMode.set(true);
+
+		return () => {
+			if (initiallyInLightmode) {
+				isDarkMode.set(false);
+				document.documentElement.classList.remove('dark-mode');
+			}
+		};
+	});
 }

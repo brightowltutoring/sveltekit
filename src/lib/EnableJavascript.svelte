@@ -1,7 +1,7 @@
 <noscript>
 	<!-- class="bg-rose-500 w-full p-7 top-0 left-0 fixed font-Poppins text-2xl text-center z-50 flex justify-center place-items-center " -->
 	<div
-		class="fixed top-0 left-0 z-50 flex w-full place-items-center justify-center bg-rose-500 p-7 text-center font-Poppins text-2xl "
+		class="fixed left-0 top-0 z-50 flex w-full place-items-center justify-center bg-rose-500 p-7 text-center font-Poppins text-2xl"
 	>
 		<!-- class="animate-bounce" -->
 		<span> Please enable Javascript to continue using this page. </span>

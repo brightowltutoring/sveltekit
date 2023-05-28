@@ -1,26 +1,20 @@
 <script>
-	import { browser } from '$app/environment';
-	import EnableJavascript from '$lib/EnableJavascript.svelte';
 	import JitsiUser from '$routes/classroom/JitsiUser.svelte';
-	import { onMount, onDestroy } from 'svelte';
-	import { isDarkMode } from '$lib/store/clientStore';
 
-	let wasDarkModeLS = browser && sessionStorage.getItem('isDarkMode');
-	onMount(() => {
-		isDarkMode.set(true);
+	// let wasDarkModeLS = browser && sessionStorage.getItem('isDarkMode');
+	// onMount(() => {
+	// 	isDarkMode.set(true);
 
-		document.documentElement.classList.add('dark-mode');
-	});
-	onDestroy(() => {
-		if (wasDarkModeLS === 'false') {
-			isDarkMode.set(false);
+	// 	document.documentElement.classList.add('dark-mode');
+	// });
+	// onDestroy(() => {
+	// 	if (wasDarkModeLS === 'false') {
+	// 		isDarkMode.set(false);
 
-			document.documentElement.classList.remove('dark-mode');
-		}
-	});
+	// 		document.documentElement.classList.remove('dark-mode');
+	// 	}
+	// });
 </script>
-
-<EnableJavascript />
 
 <JitsiUser admin />
 

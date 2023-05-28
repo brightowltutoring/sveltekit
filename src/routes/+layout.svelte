@@ -3,7 +3,6 @@
 	import { scrollY } from '$lib/store/scrollStore';
 	import { isIOS, isLoggedIn, isPWA, isSafari } from '$lib/store/clientStore';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
-	import { onMount } from 'svelte';
 	import Footer from './(rootLayout)/Footer.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import './(rootLayout)/styles.css';
@@ -15,12 +14,10 @@
 	isPWA.set(Boolean(data.isPWA)); // setContext('isPWA', data.isPWA);
 	isSafari.set(Boolean(data.isSafari));
 
-	onMount(() => {
-		disableZoomOnTouchDevices();
-		setIsPwaCookie();
+	disableZoomOnTouchDevices();
+	setIsPwaCookie();
 
-		// setInnerWidthViaMatchMedia(); // no longer needed since at the moment '$lessThan768' has no use
-	});
+	// setInnerWidthViaMatchMedia(); // no longer needed since at the moment '$lessThan768' has no use
 
 	function scrollYSetter() {
 		scrollY.set(window.scrollY);
