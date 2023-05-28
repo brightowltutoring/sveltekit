@@ -35,7 +35,7 @@
 
 	onMount(async () => {
 		await onMountFirebase();
-		console.log('mounted 🐎');
+		console.log('mounted like a 🗻');
 	});
 
 	onDestroy(async () => {

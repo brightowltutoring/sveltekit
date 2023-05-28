@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let admin = false; // existence prop; used for '/classroomA' route
 	import { onDestroy, onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { isPWA } from '$lib/store/clientStore';
 	import { inDarkOutOriginal } from '$src/lib/utils';
@@ -164,7 +164,3 @@
 		</button>
 	</div>
 {/if}
-
-<svelte:head>
-	<script src="https://meet.jit.si/external_api.js"></script>
-</svelte:head>

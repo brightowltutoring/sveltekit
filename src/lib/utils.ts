@@ -1,6 +1,8 @@
 import { isSafari, isDarkMode } from '$lib/store/clientStore';
 import { onMount } from 'svelte';
 import { get } from 'svelte/store';
+import { is_client } from 'svelte/internal';
+//  is_client = typeof window !== 'undefined' as per https://github.com/sveltejs/svelte/blob/master/src/runtime/internal/environment.ts
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use. Might add serializer code from npm cookie inside my set method.
 export const cookeh = {
@@ -10,6 +12,7 @@ export const cookeh = {
 
 		{ seconds = 60 * 60 * 24, secure = !get(isSafari) } = {}
 	) {
+		if (!is_client) return;
 		document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None${
 			secure ? '; Secure' : ''
 		}`;
@@ -17,23 +20,26 @@ export const cookeh = {
 	},
 
 	get: function (name: string) {
+		if (!is_client) return;
 		const match = document.cookie.match(`${name}=(.*?)(;|$)`);
 		return match ? decodeURIComponent(match[1]) : '';
 	},
 
 	eat: function (...names: string[]) {
+		if (!is_client) return;
 		names.forEach((name) => (document.cookie = `${name}=; max-age=0;`));
 	}
 };
 
 export async function setIsPwaCookie() {
+	if (!is_client) return;
+	// onMount(() => {
 	// cookeh.eat('isPWA'); //testing; keep this commented out unless needed!
-	onMount(() => {
-		if (cookeh.get('isPWA')) return;
+	if (cookeh.get('isPWA')) return;
 
-		const isPWA = window.matchMedia('(display-mode: standalone)').matches;
-		isPWA && cookeh.set('isPWA', isPWA);
-	});
+	const isPWA = window.matchMedia('(display-mode: standalone)').matches;
+	isPWA && cookeh.set('isPWA', isPWA);
+	// });
 }
 
 // debounce from https://www.freecodecamp.org/news/javascript-debounce-example/; TODO: why is 'args / func.apply(this, args)' syntax necessary
@@ -61,17 +67,18 @@ export function debounce<f extends FunctionType>(func: f, timeout = 300) {
 }
 
 export function disableZoomOnTouchDevices() {
-	onMount(() => {
-		if ('ontouchstart' in window) disableCallBack();
+	if (!is_client) return;
+	// onMount(() => {
+	if ('ontouchstart' in window) disableCallBack();
 
-		function disableCallBack() {
-			for (let eventName of ['gesturestart', 'dblclick']) {
-				document.addEventListener(eventName, (e) => {
-					e.preventDefault();
-				});
-			}
+	function disableCallBack() {
+		for (let eventName of ['gesturestart', 'dblclick']) {
+			document.addEventListener(eventName, (e) => {
+				e.preventDefault();
+			});
 		}
-	});
+	}
+	// });
 }
 
 // Need to use JS to disable scrolling on firefox, since firefox does not support the :has() css pseudo-selector —— e.g. body:has(element){ overflow:hidden }, is the elegant css way of disabling scroll (for a given route containing a specific element) ——
@@ -109,6 +116,7 @@ export function useInView(
 
 	if (node) observer.observe(node);
 	if (!node && vanilla) {
+		// if (!is_client) return;
 		document.querySelectorAll(vanilla).forEach((el) => observer.observe(el));
 		// document.querySelectorAll(`${vanilla}`).forEach((el) => observer.observe(el));
 	}
@@ -164,4 +172,25 @@ export function inDarkOutOriginal() {
 			}
 		};
 	});
+}
+
+export function cssToHead(id = 'dropzoneCSS', path = '/dropzone.css') {
+	if (!is_client) return;
+	if (!document.getElementById(id)) {
+		const element = document.createElement('link');
+		element.id = id;
+		element.href = path;
+		element.rel = 'stylesheet';
+		document.head.appendChild(element);
+	}
+}
+export function jsToHead(id = 'calendlyJS', path = 'external-website.com/calendly.js') {
+	if (!is_client) return;
+	if (!document.getElementById(id)) {
+		const element = document.createElement('script');
+		element.id = id;
+		element.src = path;
+		element.type = 'text/javascript';
+		document.head.appendChild(element);
+	}
 }

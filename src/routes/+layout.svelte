@@ -26,7 +26,7 @@
 
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
-	<script src="https://meet.jit.si/external_api.js" defer></script>
+	<script src="https://meet.jit.si/external_api.js" async></script>
 	{@html seoString}
 </svelte:head>
 
