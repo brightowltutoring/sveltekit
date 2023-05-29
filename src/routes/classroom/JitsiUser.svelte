@@ -42,7 +42,9 @@
 					api.executeCommand('toggleLobby', true);
 				}
 
-				par?.push(...api.getParticipantsInfo()); // par = [...api.getParticipantsInfo()];
+				par = [...api.getParticipantsInfo()];
+				// reassignment is necessary to trigger 'par' reactive statement in 'invisibleOnNoParticipants'
+				// par?.push(...api.getParticipantsInfo());
 				// alert(JSON.stringify(par));
 			});
 		} catch (error) {
@@ -62,15 +64,16 @@
 {#if browser}
 	<div
 		id="meet"
-		class={`${changeOpacityTo100} relative h-[90vh] w-full -translate-y-36 opacity-0 md:h-[670px] md:-translate-y-10 pwa:h-[85vh] `}
+		class={`opacity-0 ${changeOpacityTo100} relative h-[90vh] w-full -translate-y-36 md:h-[670px] md:-translate-y-10 pwa:h-[85vh] `}
 	>
 		<!-- {$lessThan768 ? 'right-0 top-10' : 'bottom-5 right-10 '}  -->
-
+		<!-- class={`${invisibleOnNoParticipants}`} -->
+		<!-- class={par.length < 1 ? 'opacity-0' : ''} -->
 		<button on:click={hangUpBtn}>
 			<img
 				alt="hangup button"
-				class="absolute right-0 top-10 w-[50px] rotate-90 rounded-full bg-[#2a1c44] p-2 transition-transform duration-300 content-[url('/phone.svg')] hover:rotate-0 hover:scale-[1.3] active:bg-red-900 md:bottom-5 md:right-10 md:top-auto {!par &&
-					'opacity-0'}"
+				class="{!par &&
+					'opacity-0'} absolute right-0 top-10 w-[50px] rotate-90 rounded-full bg-[#2a1c44] p-2 transition-transform duration-300 content-[url('/phone.svg')] hover:rotate-0 hover:scale-[1.3] active:bg-red-900 md:bottom-5 md:right-10 md:top-auto"
 			/>
 		</button>
 	</div>

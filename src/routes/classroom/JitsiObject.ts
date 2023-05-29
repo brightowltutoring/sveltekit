@@ -1,11 +1,12 @@
 export const jitsiObject = {
 	api: undefined as any,
-	par: [] as Array<string>,
+	par: undefined as Array<string> | undefined,
+	// par: [] as Array<string>,
 	domain: 'meet.jit.si',
 	getOptions: (admin = false) => getOptions(admin)
 };
 
-export function getOptions(admin = false) {
+function getOptions(admin = false) {
 	return {
 		parentNode: null as Element | null,
 		// parentNode: is_client && document.querySelector('#meet'),
