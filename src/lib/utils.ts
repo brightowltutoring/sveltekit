@@ -69,29 +69,29 @@ export function debounce<f extends FunctionType>(func: f, timeout = 300) {
 export function disableZoomOnTouchDevices() {
 	if (!is_client) return;
 	// onMount(() => {
-	if ('ontouchstart' in window) disableCallBack();
-
-	function disableCallBack() {
+	if ('ontouchstart' in window) {
 		for (let eventName of ['gesturestart', 'dblclick']) {
 			document.addEventListener(eventName, (e) => {
 				e.preventDefault();
 			});
 		}
 	}
+
 	// });
 }
 
 // Need to use JS to disable scrolling on firefox, since firefox does not support the :has() css pseudo-selector —— e.g. body:has(element){ overflow:hidden }, is the elegant css way of disabling scroll (for a given route containing a specific element) ——
 export function disableScrollingOnPage(pathname: string) {
 	onMount(() => {
-		const originalOverflow = document.body.style.overflow;
+		// const originalOverflow = document.body.style.overflow;
 		// navigator.userAgent.toLocaleLowerCase().includes('firefox') &&
 
 		if (pathname === '/classroom' || '/pwa') {
 			document.body.style.overflow = 'hidden';
 		}
 
-		return () => (document.body.style.overflow = originalOverflow);
+		return () => (document.body.style.overflow = 'auto');
+		// return () => (document.body.style.overflow = originalOverflow);
 	});
 }
 

@@ -1,134 +1,38 @@
 <script lang="ts">
-	export let admin = false; // existence prop; used for '/classroomA' route
-	import { onDestroy, onMount } from 'svelte';
-	import { beforeNavigate, goto } from '$app/navigation';
+	export let isAdmin = false;
+
+	import EnableJavascript from '$src/lib/EnableJavascript.svelte';
 	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 	import { isPWA } from '$lib/store/clientStore';
 	import { inDarkOutOriginal } from '$src/lib/utils';
-	import EnableJavascript from '$src/lib/EnableJavascript.svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import { jitsiObject } from './JitsiObject';
+	// import './jitsi_external_api';
 
 	inDarkOutOriginal();
 
 	async function hangUpBtn() {
 		await api.dispose();
 		goto($isPWA ? '/pwa' : '/');
-		// goto(getContext('isPWA') ? '/pwa' : '/');
 	}
 
-	let api: any;
-	let par: Array<string>;
-	let domain = 'meet.jit.si';
+	let { api, par, domain, getOptions } = jitsiObject;
+	let options = getOptions(isAdmin);
 
 	let changeOpacityTo100: string;
 	let changeOpacityTimeOUt: NodeJS.Timeout;
 
-	onDestroy(() => {
-		clearTimeout(changeOpacityTimeOUt);
-	});
+	function changeOpacityCallback() {
+		changeOpacityTo100 = 'opacity-100 transition-opacity ease-in-out duration-500';
+	}
 
 	onMount(async () => {
-		let options = {
-			parentNode: document.querySelector('#meet'),
-			// parentNode: browser && document.querySelector('#meet'),
-			roomName: 'ThinkSolve122822',
-			configOverwrite: {
-				startWithAudioMuted: true,
-				startWithVideoMuted: true,
-				// startWithVideoMuted: admin ? true : false,
-				disabledSounds: [
-					'ASKED_TO_UNMUTE_SOUND',
-					'E2EE_OFF_SOUND',
-					'E2EE_ON_SOUND',
-					'INCOMING_MSG_SOUND',
-					'KNOCKING_PARTICIPANT_SOUND',
-					'LIVE_STREAMING_OFF_SOUND',
-					'LIVE_STREAMING_ON_SOUND',
-					'NO_AUDIO_SIGNAL_SOUND',
-					'NOISY_AUDIO_INPUT_SOUND',
-					'OUTGOING_CALL_EXPIRED_SOUND',
-					'OUTGOING_CALL_REJECTED_SOUND',
-					'OUTGOING_CALL_RINGING_SOUND',
-					'OUTGOING_CALL_START_SOUND',
-					'PARTICIPANT_JOINED_SOUND',
-					'PARTICIPANT_LEFT_SOUND',
-					'RAISE_HAND_SOUND',
-					'REACTION_SOUND',
-					'RECORDING_OFF_SOUND',
-					'RECORDING_ON_SOUND',
-					'TALK_WHILE_MUTED_SOUND'
-				],
-
-				// TODO: do these actually do what I expect?
-				hideConferenceTimer: !admin && true,
-				hideConferenceSubject: !admin && true,
-				hideParticipantsStats: !admin && true,
-				// disablePolls: admin ? false : true,
-				disablePolls: !admin && true,
-				disableSelfView: !admin && true,
-				// disableSelfViewSettings: true,
-				deeplinking: { disabled: true }, // ADDED DEC 23,2022 as 'disableDeepLinking: true' stopped working in order to block 'add app/extension' in iframe on mobile
-				disableRemoteMute: !admin && true,
-				notifications: !admin && ['lobby.notificationTitle'],
-				// TODO: still don't understand logic, but works; result: only admin can allow users in
-				remoteVideoMenu: !admin && {
-					disabled: true
-					// disableKick: true,
-					// disablePrivateChat: true,
-					// disableGrantModerator: true,
-				}
-
-				// TODO: get request still grabs all this mp3 data ... id rather not fetch this instead of disabling
-			},
-			interfaceConfigOverwrite: {
-				// DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
-				DEFAULT_BACKGROUND: `#130e21`,
-				SHOW_CHROME_EXTENSION_BANNER: false,
-				VIDEO_QUALITY_LABEL_DISABLED: !admin && true,
-				SETTINGS_SECTIONS: [
-					'devices',
-					admin && 'moderator',
-					admin && 'language',
-					admin && 'profile',
-					admin && 'calendar',
-					admin && 'sounds'
-				],
-				TOOLBAR_BUTTONS: [
-					'desktop',
-					'microphone',
-					'camera',
-					'fullscreen',
-					'chat',
-					'fodeviceselection',
-					'etherpad',
-					admin && 'noisesuppression',
-					admin && 'settings',
-					admin && 'mute-video-everyone',
-					admin && 'mute-everyone',
-					admin && 'security',
-					admin && 'sharedvideo',
-					admin && 'videoquality',
-					admin && 'profile',
-					admin && 'raisehand',
-					admin && 'livestreaming',
-					admin && 'recording',
-					admin && 'closedcaptions',
-					admin && 'filmstrip',
-					admin && 'feedback',
-					admin && 'stats',
-					admin && 'shortcuts',
-					admin && 'tileview'
-					// "hangup",
-				]
-			}
-		};
-		changeOpacityTimeOUt = setTimeout(() => {
-			changeOpacityTo100 = 'opacity-100  transition-opacity ease-in-out duration-500';
-		}, 1000);
+		changeOpacityTimeOUt = setTimeout(changeOpacityCallback, 1000);
 		try {
-			// can only access dom element ("#meet") after 'onMount' ... therefore have to add this to the options object HERE before instantiating the jitsi api
 			options.parentNode = document.querySelector('#meet');
 
-			// @ts-ignore
+			//@ts-ignore
 			api = await new JitsiMeetExternalAPI(domain, options);
 
 			const pwd = 'thnkslv';
@@ -138,11 +42,18 @@
 					api.executeCommand('toggleLobby', true);
 				}
 
-				par = [...api.getParticipantsInfo()];
+				par?.push(...api.getParticipantsInfo()); // par = [...api.getParticipantsInfo()];
+				// alert(JSON.stringify(par));
 			});
 		} catch (error) {
 			console.log('onMount for JitsiMeetExternalAPI broken', error);
 		}
+	});
+
+	// when onMount is async, then the return callback does not execute, hence why onDestroy is necessary
+	onDestroy(() => {
+		changeOpacityTimeOUt && clearTimeout(changeOpacityTimeOUt);
+		// console.log('jitsi unmounted');
 	});
 </script>
 
@@ -151,7 +62,7 @@
 {#if browser}
 	<div
 		id="meet"
-		class={`opacity-0 ${changeOpacityTo100} relative h-[90vh] w-full -translate-y-36 md:h-[670px] md:-translate-y-10 pwa:h-[85vh] `}
+		class={`${changeOpacityTo100} relative h-[90vh] w-full -translate-y-36 opacity-0 md:h-[670px] md:-translate-y-10 pwa:h-[85vh] `}
 	>
 		<!-- {$lessThan768 ? 'right-0 top-10' : 'bottom-5 right-10 '}  -->
 
@@ -164,3 +75,7 @@
 		</button>
 	</div>
 {/if}
+<!-- 
+<svelte:head>
+	<script src="https://meet.jit.si/external_api.js"></script>
+</svelte:head> -->
