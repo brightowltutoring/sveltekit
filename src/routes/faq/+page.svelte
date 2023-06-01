@@ -5,54 +5,52 @@
 	import { fade, fly } from 'svelte/transition';
 
 	let faqContainer: HTMLElement;
-	let selectedTd: HTMLElement;
-
-	function highlightAndKeepOpen(td: HTMLElement) {
-		if (selectedTd) {
-			// remove the existing highlight if any
-			selectedTd.classList.remove('highlight');
-		}
-		selectedTd = td;
-		selectedTd.classList.add('highlight'); // highlight the new td
-		(<HTMLDetailsElement>selectedTd.parentElement).open = false; // this disables closing the details element going forward
-	}
-
 	onMount(() => {
-		faqContainer = document.querySelector('.faqContainer')!;
-
-		// too annoying to change the markup manually for "Q1, .., Q8" ..so using this javascript
 		faqContainer.querySelectorAll('SUMMARY').forEach((el, index) => {
 			el.insertAdjacentHTML('afterbegin', `Q${index + 1}. `);
 		});
 
-		// using 'event delegation' technique (rather than querySelectorAll logic) when listening to events for multiple children elements of a common parent element
+		// using 'event delegation'
 		faqContainer.addEventListener('click', (event) => {
-			let target = <HTMLElement>event.target;
-
-			if (target.tagName !== 'SUMMARY') return; // commonly used ... does this matter? optimization?
-			if (target.tagName === 'SUMMARY') highlightAndKeepOpen(target);
+			let target = event.target as HTMLElement;
+			if (target.tagName !== 'SUMMARY') return;
+			highlightAndKeepOpen(target);
 		});
 	});
+
+	let selectedTd: HTMLElement;
+	function highlightAndKeepOpen(td: HTMLElement) {
+		// remove the existing highlight if any
+		if (selectedTd) selectedTd.classList.remove('highlight');
+
+		selectedTd = td;
+
+		// highlight the new td
+		selectedTd.classList.add('highlight');
+
+		// this disables closing the details element going forward
+		(selectedTd.parentElement as HTMLDetailsElement).open = false;
+	}
+
+	function closeFaqs() {
+		faqContainer.querySelectorAll('details').forEach((el) => (el.open = false));
+	}
+
+	const inFlyFAQ = {
+		y: 50,
+		duration: 800,
+		easing: quintOut
+	};
+	const inFlyFAQContainer = { y: -50, duration: 500 };
 </script>
 
-<!-- TODO: noticed a pattern ... the markdown of this component being repetitive, makes it easier to use vanilla css approach (also the event delegation classList add logic works easiest with vanilla css) -->
+<button on:dblclick={closeFaqs} in:fly={inFlyFAQ} class="w-full py-16">
+	<span in:fade class="font-Poppins text-5xl font-bold"> FAQ </span>
+</button>
 
-<!-- in:slide={{ duration: 800 }} -->
-<div
-	in:fly={{ y: 50, duration: 800, easing: quintOut }}
-	class="grid place-content-center py-16"
-	on:dblclick={() => {
-		faqContainer.querySelectorAll('details').forEach((el) => (el.open = false));
-		// closes all details elements (easter eggy)
-	}}
->
-	<!-- class="font-Poppins text-center text-6xl text-transparent bg-clip-text bg-gradient-to-l from-teal-500 to-pink-600 " -->
-	<span in:fade class="text-center font-Poppins text-5xl font-bold"> FAQ </span>
-</div>
-<!-- TODO: some weird reason I have to add 'class="highlight"' ot at least one summary element before the css/js logic can work -->
-
-<div in:fly={{ y: -50, duration: 500 }} class="faqContainer">
+<div in:fly={inFlyFAQContainer} bind:this={faqContainer} class="grid place-content-center">
 	<details>
+		<!-- ?: I have to add 'highlight' class to at least one summary element before the css/js logic can work -->
 		<summary class="highlight"> How are we screen-sharing? Zoom? </summary>
 
 		Nope, our sessions happen on-site
@@ -154,9 +152,6 @@
 			I am looking to refer a friend, do you offer any discounts based on referrals?
 		</summary>
 		<p>
-			<!-- Great question! We absolutely welcome this initiative and are pleased to
-      reward it; please visit our <a>/referrals</a> page. <br /><br /> -->
-
 			Great question! You can enter your referral as an input when booking; for this initiative we
 			are pleased to offer a
 			<!-- group-active:animate-ping -->
@@ -170,12 +165,8 @@
 	</details>
 </div>
 
+<!-- The markdown of this component being repetitive, makes vanilla css a better choice for styling (also the event delegation classList add logic works easiest with vanilla css).  It's also possible to abstract the details/summary elements into a components and use tailwind directly in those components ... -->
 <style>
-	.faqContainer {
-		display: grid;
-		place-content: center;
-	}
-
 	:root {
 		--light-green: rgb(230, 255, 249);
 		--green: rgb(89, 208, 174);
@@ -257,12 +248,12 @@
 		background: var(--light-green);
 		animation: sweep 0.25s ease-in-out;
 		margin-bottom: 10px;
+		color: black;
 	}
 
 	/* svelte :global needed to use predefined darkmode logic */
 	:global(html.dark-mode) details[open] {
 		background: var(--light-green);
-		color: black;
 	}
 
 	details[open] summary {
