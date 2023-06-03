@@ -40,7 +40,7 @@
 		<slot />
 	</div>
 
-	{#if !['/classroom', '/pwa'].includes($page.route?.id ?? '')}
+	{#if !['/classroom', '/pwa', '/stripe'].includes($page.route?.id ?? '')}
 		<Footer />
 	{/if}
 </main>

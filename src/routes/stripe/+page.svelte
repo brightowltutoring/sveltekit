@@ -5,27 +5,22 @@
 	import { fly } from 'svelte/transition';
 
 	// variables related to url parameters
-	let urlSearch: string,
+	// let urlSearch: string,
+	let url: URL,
 		service: string,
 		extra: boolean,
 		quantity: number,
 		email: string | null,
 		firstName: string;
 
-	let slideKey = false;
-	onMount(async () => {
-		urlSearch = window.location.search.slice(1); // gets everything after "?" in url
-		window.history.replaceState({}, '', `/${btoa(urlSearch)}`); // shows url parameters in base64
-
-		await stripeRedirectToCheckout();
-		slideKey = true;
-	});
+	let loading_status = true;
+	onMount(async () => await stripeRedirectToCheckout());
 
 	async function stripeRedirectToCheckout() {
 		try {
-			const USP = new URLSearchParams(urlSearch);
+			url = new URL(window.location.href);
+			const USP = url.searchParams;
 
-			// alert(USP);
 			const invitee_full_name = USP.get('invitee_full_name');
 			const invitee_email = USP.get('invitee_email');
 			const event_type_name = USP.get('event_type_name');
@@ -76,25 +71,41 @@
 
 				console.log('stripe to the moon 🚀');
 
+				window.history.replaceState({}, '', `/${btoa(String(url))}`); // shows url parameters in base64
 				// Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id }); //non-typescript
 			}
 		} catch (error) {
 			console.log('stripeRedirectToCheckout failed', error);
-			goto('/');
+			setTimeout(() => {
+				loading_status = false;
+				goto('/plans');
+			}, 1000);
 		}
 	}
 </script>
 
-<main>
-	{#if slideKey && service && quantity}
-		<div
-			in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
-			class="loading animate-bounce pt-20 text-center font-Poppins text-5xl"
-		>
-			Almost there {firstName}
-		</div>
-	{/if}
-</main>
+{#if loading_status}
+	<first-level class="!grid h-[60vh] w-full animate-pulse place-content-center overflow-hidden">
+		{#if service && quantity}
+			<span
+				in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
+				class="loading animate-bounce text-center font-Poppins text-2xl"
+			>
+				Almost there {firstName}
+			</span>
+		{/if}
+		<br /><br />
+		<second-level class="!flex w-full scale-[150%] space-x-5 md:scale-[200%]">
+			<third-level>
+				<fourth-level class="h-12 w-12 rounded-full" />
+			</third-level>
+			<third-level class="!flex flex-col place-content-center space-y-2">
+				<fourth-level class="h-4 w-40 rounded" />
+				<fourth-level class="h-4 w-20 rounded" />
+			</third-level>
+		</second-level>
+	</first-level>
+{/if}
 
 <style>
 	.loading:after {
@@ -108,4 +119,20 @@
 			color: rgba(0, 0, 0, 0);
 		}
 	}
+	fourth-level,
+	third-level,
+	second-level,
+	first-level {
+		display: block;
+	}
+	fourth-level {
+		background-color: rgb(80, 140, 137);
+		opacity: 0.5;
+	}
+	/* second-level {
+		background-color: rgb(230, 78, 78);
+	}
+	first-level {
+		background-color: rgb(108, 108, 199);
+	} */
 </style>
