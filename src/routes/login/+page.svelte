@@ -35,13 +35,13 @@
 
 	onMount(async () => {
 		await onMountFirebase();
-		console.log('mounted like a 🗻');
+		// console.log('mounted like a 🗻');
 	});
 
 	onDestroy(() => {
 		clearInterval(redirectSetInterval);
 		clearTimeout(redirectAfterLoginTimeOut);
-		console.log('destroyed!');
+		// console.log('destroyed!');
 	});
 
 	async function onMountFirebase() {

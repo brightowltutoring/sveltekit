@@ -13,7 +13,6 @@
 
 	export let form;
 	$: success = form?.success;
-	console.log('yeet');
 </script>
 
 <BackgroundVideo />
