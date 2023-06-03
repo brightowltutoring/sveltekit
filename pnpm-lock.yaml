@@ -86,7 +86,7 @@ devDependencies:
     specifier: 3.0.1
     version: 3.0.1
   svelte:
-    specifier: 4.0.0-next.0 || ^3.59.1
+    specifier: ^3.59.1 || 4.0.0-next.0
     version: 3.59.1
   svelte-check:
     specifier: ^3.4.3
