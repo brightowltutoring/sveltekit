@@ -9,7 +9,7 @@ dependencies:
     specifier: ^1.54.0
     version: 1.54.0
   '@sveltejs/adapter-auto':
-    specifier: ^2.1.0
+    specifier: 2.1.0
     version: 2.1.0(@sveltejs/kit@1.20.1)
   dropzone:
     specifier: 6.0.0-beta.2
@@ -86,7 +86,7 @@ devDependencies:
     specifier: 3.0.1
     version: 3.0.1
   svelte:
-    specifier: ^3.59.1 || 4.0.0-next.0
+    specifier: ^3.59.1
     version: 3.59.1
   svelte-check:
     specifier: ^3.4.3
@@ -95,8 +95,8 @@ devDependencies:
     specifier: ^3.3.2
     version: 3.3.2
   tslib:
-    specifier: 2.5.2
-    version: 2.5.2
+    specifier: 2.5.3
+    version: 2.5.3
   typescript:
     specifier: ^5.1.3
     version: 5.1.3
@@ -608,7 +608,7 @@ packages:
       '@firebase/app-compat': 0.2.11
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -627,7 +627,7 @@ packages:
       '@firebase/installations': 0.6.4(@firebase/app@0.9.11)
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/app-check-compat@0.3.7(@firebase/app-compat@0.2.11)(@firebase/app@0.9.11):
@@ -641,7 +641,7 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -663,7 +663,7 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/app-compat@0.2.11:
@@ -673,7 +673,7 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/app-types@0.9.0:
@@ -687,7 +687,7 @@ packages:
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
       idb: 7.1.1
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/auth-compat@0.4.2(@firebase/app-compat@0.2.11)(@firebase/app-types@0.9.0)(@firebase/app@0.9.11):
@@ -701,7 +701,7 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
       node-fetch: 2.6.7
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -732,7 +732,7 @@ packages:
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
       node-fetch: 2.6.7
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -741,7 +741,7 @@ packages:
     resolution: {integrity: sha512-rLMyrXuO9jcAUCaQXCMjCMUsWrba5fzHlNK24xz5j2W6A/SRmK8mZJ/hn7V0fViLbxC0lPMtrK1eYzk6Fg03jA==}
     dependencies:
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/database-compat@0.3.4:
@@ -752,7 +752,7 @@ packages:
       '@firebase/database-types': 0.10.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/database-types@0.10.4:
@@ -770,7 +770,7 @@ packages:
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
       faye-websocket: 0.11.4
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/firestore-compat@0.3.10(@firebase/app-compat@0.2.11)(@firebase/app-types@0.9.0)(@firebase/app@0.9.11):
@@ -783,7 +783,7 @@ packages:
       '@firebase/firestore': 3.12.1(@firebase/app@0.9.11)
       '@firebase/firestore-types': 2.5.1(@firebase/app-types@0.9.0)(@firebase/util@1.9.3)
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -814,7 +814,7 @@ packages:
       '@grpc/grpc-js': 1.7.3
       '@grpc/proto-loader': 0.6.13
       node-fetch: 2.6.7
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -829,7 +829,7 @@ packages:
       '@firebase/functions': 0.10.0(@firebase/app@0.9.11)
       '@firebase/functions-types': 0.6.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
       - encoding
@@ -851,7 +851,7 @@ packages:
       '@firebase/messaging-interop-types': 0.2.0
       '@firebase/util': 1.9.3
       node-fetch: 2.6.7
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -866,7 +866,7 @@ packages:
       '@firebase/installations': 0.6.4(@firebase/app@0.9.11)
       '@firebase/installations-types': 0.5.0(@firebase/app-types@0.9.0)
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -889,13 +889,13 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
       idb: 7.0.1
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/logger@0.4.0:
     resolution: {integrity: sha512-eRKSeykumZ5+cJPdxxJRgAC3G5NknY2GwEbKfymdnXtnT0Ucm4pspfR6GT4MUQEDuJwRVbVcSx85kgJulMoFFA==}
     dependencies:
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/messaging-compat@0.2.4(@firebase/app-compat@0.2.11)(@firebase/app@0.9.11):
@@ -907,7 +907,7 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/messaging': 0.12.4(@firebase/app@0.9.11)
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -927,7 +927,7 @@ packages:
       '@firebase/messaging-interop-types': 0.2.0
       '@firebase/util': 1.9.3
       idb: 7.0.1
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/performance-compat@0.2.4(@firebase/app-compat@0.2.11)(@firebase/app@0.9.11):
@@ -941,7 +941,7 @@ packages:
       '@firebase/performance': 0.6.4(@firebase/app@0.9.11)
       '@firebase/performance-types': 0.2.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -960,7 +960,7 @@ packages:
       '@firebase/installations': 0.6.4(@firebase/app@0.9.11)
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/remote-config-compat@0.2.4(@firebase/app-compat@0.2.11)(@firebase/app@0.9.11):
@@ -974,7 +974,7 @@ packages:
       '@firebase/remote-config': 0.4.4(@firebase/app@0.9.11)
       '@firebase/remote-config-types': 0.3.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -993,7 +993,7 @@ packages:
       '@firebase/installations': 0.6.4(@firebase/app@0.9.11)
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/storage-compat@0.3.2(@firebase/app-compat@0.2.11)(@firebase/app-types@0.9.0)(@firebase/app@0.9.11):
@@ -1006,7 +1006,7 @@ packages:
       '@firebase/storage': 0.11.2(@firebase/app@0.9.11)
       '@firebase/storage-types': 0.8.0(@firebase/app-types@0.9.0)(@firebase/util@1.9.3)
       '@firebase/util': 1.9.3
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -1032,7 +1032,7 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
       node-fetch: 2.6.7
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -1040,7 +1040,7 @@ packages:
   /@firebase/util@1.9.3:
     resolution: {integrity: sha512-DY02CRhOZwpzO36fHpuVysz6JZrscPiBXD0fXp6qSrL9oNOx5KWICKdR95C0lSITzxp0TZosVyHqzatE8JbcjA==}
     dependencies:
-      tslib: 2.5.2
+      tslib: 2.5.3
     dev: false
 
   /@firebase/webchannel-wrapper@0.10.1:
@@ -1525,7 +1525,7 @@ packages:
     resolution: {integrity: sha512-XKxXAC3HVPv7r674zP0VC3RTXz+/JKhfyw94ljvF80yynK6VkTnqE3jMuN8b3dUVmmc43TjyxjW4KTsmB3c86g==}
     dependencies:
       debug: 4.3.4
-      tslib: 2.5.2
+      tslib: 2.5.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3398,8 +3398,8 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /tslib@2.5.2:
-    resolution: {integrity: sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==}
+  /tslib@2.5.3:
+    resolution: {integrity: sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==}
 
   /tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
