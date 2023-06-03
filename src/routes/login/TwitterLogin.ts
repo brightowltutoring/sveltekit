@@ -2,7 +2,7 @@
 
 export async function TwitterLogin() {
 	const [authModule, authProviderModule] = await Promise.all([
-		import('./firebase'),
+		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
 

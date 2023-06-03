@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Modal from '$lib/Wrappers/Modal.svelte';
-	import LoginCard from '$routes/login/LoginCard.svelte';
+	// import LoginCard from '$routes/login/LoginCard.svelte';
+	import LoginCard from '$routes/login/+page.svelte';
 	import Dropzone from '$routes/homework/Dropzone.svelte';
 	// const isIOS: boolean = getContext('isIOS');
 

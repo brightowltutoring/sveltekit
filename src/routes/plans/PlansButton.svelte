@@ -6,7 +6,7 @@
 	const { url, opacityTW, text } = button;
 
 	let showMe = false;
-	let src = '';
+	let src: string | undefined = undefined;
 	let changeOpacityTo100 = '';
 
 	function handlePlansModal(e: MouseEvent, BUTTON_URL: string) {

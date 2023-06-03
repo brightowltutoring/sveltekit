@@ -1,14 +1,8 @@
 <script lang="ts">
-	import { app } from '$routes/login/firebase';
-	import { getFunctions, httpsCallable } from 'firebase/functions';
-	const functions = getFunctions(app);
-
-	// import "@stripe/stripe-js";
-	import { loadStripe } from '@stripe/stripe-js/pure';
-	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
-
-	import { fly } from 'svelte/transition';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
 	import { elasticOut } from 'svelte/easing';
+	import { fly } from 'svelte/transition';
 
 	// variables related to url parameters
 	let urlSearch: string,
@@ -18,15 +12,13 @@
 		email: string | null,
 		firstName: string;
 
-	import { onMount } from 'svelte';
 	let slideKey = false;
 	onMount(async () => {
-		slideKey = true;
-
 		urlSearch = window.location.search.slice(1); // gets everything after "?" in url
 		window.history.replaceState({}, '', `/${btoa(urlSearch)}`); // shows url parameters in base64
 
-		stripeRedirectToCheckout();
+		await stripeRedirectToCheckout();
+		slideKey = true;
 	});
 
 	async function stripeRedirectToCheckout() {
@@ -62,8 +54,21 @@
 			}
 
 			if (service && quantity) {
+				// NOW load all modules relevant to stripe checkout creation, in a non-blocking way
+				const [{ app }, { getFunctions, httpsCallable }, { loadStripe }, { PUBLIC_STRIPE_KEY }] =
+					await Promise.all([
+						import('$lib/firebase'),
+						import('firebase/functions'),
+						import('@stripe/stripe-js/pure'),
+						import('$env/static/public')
+					]);
+				// const { app } = firebaseModule;
+				// const { getFunctions, httpsCallable } = firebaseFunctionsModule;
+				// const { loadStripe } = loadStripeModule;
+				// const { PUBLIC_STRIPE_KEY } = envPublicModule;
+
 				// create checkout session using url params ... but only if some actually exist
-				const stripeSessionIdGCF = httpsCallable(functions, 'stripeSessionIdGCF');
+				const stripeSessionIdGCF = httpsCallable(getFunctions(app), 'stripeSessionIdGCF');
 				const { data }: any = await stripeSessionIdGCF({
 					email,
 					extra,
@@ -74,22 +79,16 @@
 				// create checkout session; Stripe() comes from head script
 
 				const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
-
 				stripe?.redirectToCheckout({ sessionId: data.id });
 
 				// Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id }); //non-typescript
 			}
 		} catch (error) {
 			console.log('stripeRedirectToCheckout failed', error);
+			goto('/');
 		}
 	}
 </script>
-
-<!-- <svelte:head>
-  <title>Stripe Checkout</title>
-  <script src="https://js.stripe.com/v3/" async></script>
-</svelte:head> -->
-<!-- moving to +layout.svelte with 'defer' attribute, since  -->
 
 <main>
 	{#if slideKey && service && quantity}

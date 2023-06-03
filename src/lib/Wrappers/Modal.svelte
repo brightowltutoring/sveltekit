@@ -1,7 +1,4 @@
 <script lang="ts">
-	// import { browser } from '$app/environment';
-	// import { onDestroy } from 'svelte';
-
 	export let showModal = false;
 	export let transitionsOff: boolean | null = false;
 	export let bgTW: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
@@ -14,7 +11,6 @@
 	}
 
 	function modalDirective(node: HTMLElement) {
-		// console.log(`modalDirective called ${node.innerHTML}`); //debugging
 		if (!body && !all) return;
 
 		body && document.body.appendChild(node);
@@ -27,28 +23,17 @@
 			}
 		};
 	}
-
-	// TODO: find out why this isn't logging in the console
-	// onDestroy(() => {
-	// 	browser && console.log('modal component destroyed');
-	// 	console.log('modal component destroyed');
-	// });
 </script>
 
 {#key body || transitionsOff ? true : showModal}
-	<div
-		on:click|self={closeModal}
+	<modal
 		on:keypress|self={closeModal}
+		on:click|self={closeModal}
 		use:modalDirective
 		class="fixed left-0 top-0 -z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center {showModal &&
 			`${bgTW} z-50 !flex`} 
 "
 	>
-		<!--  -->
-		<!-- {#key showModal} -->
-		<!-- {#if showModal} -->
 		<slot />
-		<!-- {/if} -->
-		<!-- TODO: BUG: safari has issues with nested onDestroy/onMount .. specifically with clearIntervals and clearTimeouts; using if block instead of key block seems to work without issue.  -->
-	</div>
+	</modal>
 {/key}

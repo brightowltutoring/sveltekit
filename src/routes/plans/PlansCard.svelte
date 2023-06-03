@@ -53,10 +53,3 @@
 		{cardText}
 	</div>
 </plans-card>
-
-<!-- <style>
-	:global(html.dark-mode) plans-card {
-		background: #262333;
-		@apply hover:shadow-xl;
-	}
-</style> -->

@@ -1,4 +1,8 @@
-// import { auth } from './firebase';
+import { writable } from 'svelte/store';
+
+export type phoneType = string | undefined;
+export const phoneInputValue$ = writable<phoneType>(undefined);
+export const phoneCodeSent$ = writable(false);
 
 export function regexPhoneChecker(PHONE: string) {
 	return /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(PHONE);
@@ -6,7 +10,7 @@ export function regexPhoneChecker(PHONE: string) {
 
 export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID: string) {
 	const [firebaseModule, firebaseAuthModule] = await Promise.all([
-		import('./firebase'),
+		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
 	const { auth } = firebaseModule;
@@ -27,7 +31,7 @@ export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID: string) 
 
 export async function sendCodeToPhone(PHONE_NUMBER: string, RECAPTCHA_VERIFIER: any) {
 	const [firebaseModule, firebaseAuthModule] = await Promise.all([
-		import('./firebase'),
+		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
 

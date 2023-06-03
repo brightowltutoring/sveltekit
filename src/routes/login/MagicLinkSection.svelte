@@ -1,35 +1,43 @@
 <script lang="ts">
 	import IconEmail from '$lib/Icons/LoginIcons/IconEmail.svelte';
+
 	import LoginButton from './LoginButton.svelte';
-	import { magicLinkInputVisible$, magicLinkToEmail, regexEmailChecker } from './MagicLinkLogin';
+	import { emailInputValue$, magicLinkToEmail, regexEmailChecker } from './MagicLinkLogin';
+	import type { EmailType } from './MagicLinkLogin';
 
 	let magicLinkSent = false;
 	let emptyEmailInputAnimated: boolean;
 	$: shortPing = !magicLinkSent && emptyEmailInputAnimated && 'animate-ping';
 
+	// '$emailInputValue$' starts as undefined; showInputField starts as falsey
 	let emailField: HTMLElement;
-	let emailFieldValue: string = '';
-	let isEmail = false;
-
+	let isEmail: boolean | undefined = false;
 	let emailStatusMessage: HTMLElement;
 
+	let emptyEmailInputAnimatedTimeout: NodeJS.Timeout;
 	// let magicLinkInputVisible = globalThis.magicLinkInputVisible;
 
 	function signinWithLinkAndStop(e: MouseEvent | KeyboardEvent) {
 		// magicLinkInputVisible = globalThis.magicLinkInputVisible = true;
 
-		magicLinkInputVisible$.set(true);
+		if ($emailInputValue$ === undefined) emailInputValue$.set('');
+		// if (!showInputField) emailInputValue$.set('');
 
-		let clickOrEnterFired = (<MouseEvent>e).type == 'click' || (<KeyboardEvent>e).key == 'Enter';
+		let clickOrEnterFired = (<MouseEvent>e).type === 'click' || (<KeyboardEvent>e).key === 'Enter';
 
-		if (clickOrEnterFired && emailFieldValue == '') {
+		if (emptyEmailInputAnimatedTimeout) clearTimeout(emptyEmailInputAnimatedTimeout);
+		if (clickOrEnterFired && $emailInputValue$ === '') {
 			emptyEmailInputAnimated = true;
-			setTimeout(() => (emptyEmailInputAnimated = !emptyEmailInputAnimated), 100);
+			let emptyEmailInputAnimatedTimeout = setTimeout(
+				() => (emptyEmailInputAnimated = !emptyEmailInputAnimated),
+				100
+			);
 		}
 		if (clickOrEnterFired && isEmail) {
-			magicLinkToEmail(emailFieldValue);
+			magicLinkToEmail($emailInputValue$);
 			magicLinkSent = true;
-			emailFieldValue = '';
+			// emailInputValue$ = '';
+			emailInputValue$.set('');
 
 			emailStatusMessage.style.display = 'block';
 
@@ -44,7 +52,9 @@
 		}
 	}
 
-	function onInputEmailField(EMAIL: string) {
+	function onInputEmailField(EMAIL: EmailType) {
+		if (EMAIL === undefined) return;
+
 		isEmail = regexEmailChecker(EMAIL);
 		if (EMAIL == '') {
 			emailField.style.border = '1px solid #aaa';
@@ -70,17 +80,19 @@
 	<IconEmail />
 </LoginButton>
 
-{#if $magicLinkInputVisible$}
+{#if $emailInputValue$ !== undefined}
+	<!-- {#if showInputField} -->
 	<input
 		on:keydown={signinWithLinkAndStop}
-		on:paste={() => onInputEmailField(emailFieldValue)}
-		on:keyup={() => onInputEmailField(emailFieldValue)}
+		on:paste={() => onInputEmailField($emailInputValue$)}
+		on:keyup={() => onInputEmailField($emailInputValue$)}
 		bind:this={emailField}
 		class="mt-3 w-full p-3 text-center {shortPing} focus:outline-none"
-		bind:value={emailFieldValue}
+		bind:value={$emailInputValue$}
 		type="email"
 		placeholder="email"
 	/>
+	<!-- bind:value={emailInputValue$} -->
 {/if}
 
 <span bind:this={emailStatusMessage} />

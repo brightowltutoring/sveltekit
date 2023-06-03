@@ -6,7 +6,7 @@ export async function logoutFunction() {
 	showLoginModal.set(false);
 
 	const [firebaseModule, authModule] = await Promise.all([
-		import('./firebase'),
+		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
 

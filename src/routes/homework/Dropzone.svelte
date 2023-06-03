@@ -13,7 +13,7 @@
 		hydrateDropzoneDomEls
 	} from './Dropzone';
 
-	let iframeSrc: string | undefined = '';
+	let iframeSrc: string | undefined = undefined;
 
 	const updateIframeSrc = async () => (iframeSrc = await getIframeSrcAndPostDummyOnce());
 

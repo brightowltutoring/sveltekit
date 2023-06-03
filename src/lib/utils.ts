@@ -137,6 +137,25 @@ export function useInView(
 	};
 }
 
+// useful action when wanting to do onclick on a non-button element, and want to avoid a11y complaint. Currently haven't found a nice way to reproduce the svelte event modifiers like '|self'
+type EventTypes = Event | KeyboardEvent;
+type HandlerType = (event: EventTypes) => void;
+export function clickOrKeydown(node: HTMLElement, handler: HandlerType) {
+	node.addEventListener('click', handleClickOrKeydown);
+	node.addEventListener('keydown', handleClickOrKeydown);
+
+	function handleClickOrKeydown(event: EventTypes) {
+		if (event.type === 'keydown' || event.type === 'click') handler(event);
+	}
+
+	return {
+		destroy() {
+			node.removeEventListener('click', handleClickOrKeydown);
+			node.removeEventListener('keydown', handleClickOrKeydown);
+		}
+	};
+}
+
 // NOTE: In the vanilla case, I would have to do:
 // let inView;
 

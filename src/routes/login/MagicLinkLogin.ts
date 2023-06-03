@@ -1,14 +1,18 @@
 import { writable } from 'svelte/store';
 
-export const magicLinkInputVisible$ = writable(false);
+export type EmailType = string | undefined;
+export const emailInputValue$ = writable<EmailType>(undefined);
 
-export function regexEmailChecker(EMAIL: string) {
+export function regexEmailChecker(EMAIL: EmailType) {
+	if (EMAIL === undefined) return;
 	return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(EMAIL);
 }
 
-export async function magicLinkToEmail(EMAIL: string) {
+export async function magicLinkToEmail(EMAIL: EmailType) {
+	if (EMAIL === undefined || EMAIL === '') return;
+
 	const [firebaseModule, firebaseAuthModule] = await Promise.all([
-		import('./firebase'),
+		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
 

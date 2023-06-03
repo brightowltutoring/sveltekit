@@ -1,6 +1,6 @@
 export async function GoogleLogin() {
 	const [authModule, firebaseAuthModule] = await Promise.all([
-		import('./firebase'),
+		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
 
