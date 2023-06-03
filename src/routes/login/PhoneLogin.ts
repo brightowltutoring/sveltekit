@@ -9,12 +9,10 @@ export function regexPhoneChecker(PHONE: string) {
 }
 
 export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID: string) {
-	const [firebaseModule, firebaseAuthModule] = await Promise.all([
+	const [{ auth }, { RecaptchaVerifier }] = await Promise.all([
 		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
-	const { auth } = firebaseModule;
-	const { RecaptchaVerifier } = firebaseAuthModule;
 
 	// Could also do 'window.recaptchaVerifier = new RecaptchaVerifier ..' and return nothing, however using this function modularly elsewhere it is more readable to return the desired 'verifier' variable as the output of this called function
 	const recaptchaVerifier = new RecaptchaVerifier(
@@ -30,13 +28,8 @@ export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID: string) 
 }
 
 export async function sendCodeToPhone(PHONE_NUMBER: string, RECAPTCHA_VERIFIER: any) {
-	const [firebaseModule, firebaseAuthModule] = await Promise.all([
-		import('$lib/firebase'),
-		import('firebase/auth')
-	]);
-
-	const { auth } = firebaseModule;
-	const { setPersistence, browserSessionPersistence, signInWithPhoneNumber } = firebaseAuthModule;
+	const [{ auth }, { setPersistence, browserSessionPersistence, signInWithPhoneNumber }] =
+		await Promise.all([import('$lib/firebase'), import('firebase/auth')]);
 
 	// dec1,2022: added this unchecked 'setPersistence' wrapper to log user out once the session is closed; for phone authentication this is desirable to discourage multiple people sharing one account
 

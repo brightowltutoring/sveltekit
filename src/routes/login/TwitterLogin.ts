@@ -1,13 +1,6 @@
-// import { auth } from './firebase';
-
 export async function TwitterLogin() {
-	const [authModule, authProviderModule] = await Promise.all([
-		import('$lib/firebase'),
-		import('firebase/auth')
-	]);
-
-	const { auth } = authModule;
-	const { TwitterAuthProvider, browserPopupRedirectResolver, signInWithPopup } = authProviderModule;
+	const [{ auth }, { TwitterAuthProvider, browserPopupRedirectResolver, signInWithPopup }] =
+		await Promise.all([import('$lib/firebase'), import('firebase/auth')]);
 
 	const provider = new TwitterAuthProvider();
 

@@ -1,15 +1,13 @@
 export async function GoogleLogin() {
-	const [authModule, firebaseAuthModule] = await Promise.all([
-		import('$lib/firebase'),
-		import('firebase/auth')
-	]);
-
-	const { auth } = authModule;
-	const {
-		GoogleAuthProvider,
-		browserPopupRedirectResolver,
-		signInWithPopup /*  setPersistence, browserSessionPersistence, inMemoryPersistence, */
-	} = firebaseAuthModule;
+	const [
+		{ auth },
+		{
+			GoogleAuthProvider,
+			browserPopupRedirectResolver,
+			signInWithPopup
+			/*  setPersistence, browserSessionPersistence, inMemoryPersistence, */
+		}
+	] = await Promise.all([import('$lib/firebase'), import('firebase/auth')]);
 
 	const provider = new GoogleAuthProvider();
 

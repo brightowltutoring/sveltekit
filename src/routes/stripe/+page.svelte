@@ -54,7 +54,6 @@
 			}
 
 			if (service && quantity) {
-				// NOW load all modules relevant to stripe checkout creation, in a non-blocking way
 				const [{ app }, { getFunctions, httpsCallable }, { loadStripe }, { PUBLIC_STRIPE_KEY }] =
 					await Promise.all([
 						import('$lib/firebase'),
@@ -62,19 +61,6 @@
 						import('@stripe/stripe-js/pure'),
 						import('$env/static/public')
 					]);
-
-				// const [firebaseModule, firebaseFunctionsModule, loadStripeModule, envPublicModule] =
-				// 	await Promise.all([
-				// 		import('$lib/firebase'),
-				// 		import('firebase/functions'),
-				// 		import('@stripe/stripe-js/pure'),
-				// 		import('$env/static/public')
-				// 	]);
-
-				// const { app } = firebaseModule;
-				// const { getFunctions, httpsCallable } = firebaseFunctionsModule;
-				// const { loadStripe } = loadStripeModule;
-				// const { PUBLIC_STRIPE_KEY } = envPublicModule;
 
 				// create checkout session using url params ... but only if some actually exist
 				const stripeSessionIdGCF = httpsCallable(getFunctions(app), 'stripeSessionIdGCF');
@@ -85,17 +71,15 @@
 					quantity
 				});
 
-				// create checkout session; Stripe() comes from head script
-
 				const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 				stripe?.redirectToCheckout({ sessionId: data.id });
 
-				console.log('stripe session created 🚀');
+				console.log('stripe to the moon 🚀');
 
 				// Stripe(PUBLIC_STRIPE_KEY).redirectToCheckout({ sessionId: data.id }); //non-typescript
 			}
 		} catch (error) {
-			console.log('stripeRedirectToCheckout failed 🙅‍♂️', error);
+			console.log('stripeRedirectToCheckout failed', error);
 			goto('/');
 		}
 	}

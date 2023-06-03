@@ -5,13 +5,10 @@ import { cookeh } from '$lib/utils';
 export async function logoutFunction() {
 	showLoginModal.set(false);
 
-	const [firebaseModule, authModule] = await Promise.all([
+	const [{ auth }, { signOut }] = await Promise.all([
 		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
-
-	const { auth } = firebaseModule;
-	const { signOut } = authModule;
 
 	signOut(auth)
 		// .then(() => goto(get(isPWA) ? '/pwa' : '/'))

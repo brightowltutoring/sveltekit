@@ -45,13 +45,8 @@
 	});
 
 	async function onMountFirebase() {
-		const [firebaseModule, authModule] = await Promise.all([
-			import('$lib/firebase'),
-			import('firebase/auth')
-		]);
-
-		const { auth } = firebaseModule;
-		const { isSignInWithEmailLink, signInWithEmailLink, onAuthStateChanged } = authModule;
+		const [{ auth }, { isSignInWithEmailLink, signInWithEmailLink, onAuthStateChanged }] =
+			await Promise.all([import('$lib/firebase'), import('firebase/auth')]);
 
 		// Confirm the link is a sign-in with email link.
 
@@ -112,13 +107,10 @@
 			redirectLogic(redirectUrlFromCookies);
 		} else {
 			console.log('getdocs from firestore');
-			const [firebaseModule, firestoreModule] = await Promise.all([
+			const [{ app }, { getFirestore, collection, getDocs }] = await Promise.all([
 				import('$lib/firebase'),
 				import('firebase/firestore/lite')
 			]);
-
-			const { app } = firebaseModule;
-			const { getFirestore, collection, getDocs } = firestoreModule;
 
 			// 'email' refers to a custom database
 			const querySnapshotDocs = (await getDocs(collection(getFirestore(app), 'email'))).docs;
