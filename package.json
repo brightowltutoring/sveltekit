@@ -31,7 +31,7 @@
 		"svelte": "^3.59.1",
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.3.2",
-		"tslib": "2.5.3",
+		"tslib": "^2.5.3",
 		"typescript": "^5.1.3",
 		"vite": "^4.3.9",
 		"wrangler": "3.0.0"
@@ -40,6 +40,7 @@
 	"dependencies": {
 		"@stripe/stripe-js": "^1.54.0",
 		"@sveltejs/adapter-auto": "2.1.0",
+		"@sveltejs/adapter-cloudflare": "^2.3.0",
 		"dropzone": "6.0.0-beta.2",
 		"firebase": "^9.22.1",
 		"katex": "^0.16.7",
