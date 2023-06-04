@@ -77,8 +77,8 @@
 		} catch (error) {
 			console.log('stripeRedirectToCheckout failed', error);
 			setTimeout(() => {
-				loading_status = false;
-				goto('/plans');
+				// loading_status = false;
+				// goto('/plans');
 			}, 1000);
 		}
 	}
@@ -93,15 +93,14 @@
 			>
 				Almost there {firstName}
 			</span>
+			<br /><br />
 		{/if}
-		<br /><br />
 		<second-level class="!flex w-full scale-[150%] space-x-5 md:scale-[200%]">
-			<third-level>
-				<fourth-level class="h-12 w-12 rounded-full" />
-			</third-level>
+			<third-level class="COMMON_COLOR h-12 w-12 rounded-full" />
+
 			<third-level class="!flex flex-col place-content-center space-y-2">
-				<fourth-level class="h-4 w-40 rounded" />
-				<fourth-level class="h-4 w-20 rounded" />
+				<fourth-level class="COMMON_COLOR h-4 w-40 rounded" />
+				<fourth-level class="COMMON_COLOR h-4 w-20 rounded" />
 			</third-level>
 		</second-level>
 	</first-level>
@@ -125,10 +124,15 @@
 	first-level {
 		display: block;
 	}
-	fourth-level {
+
+	.COMMON_COLOR {
+		background-color: rgb(80, 140, 137);
+		opacity: 0.4;
+	}
+	/* third-level {
 		background-color: rgb(80, 140, 137);
 		opacity: 0.5;
-	}
+	} */
 	/* second-level {
 		background-color: rgb(230, 78, 78);
 	}

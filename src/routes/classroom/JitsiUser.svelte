@@ -8,7 +8,6 @@
 	import { inDarkOutOriginal } from '$src/lib/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import { jitsiObject } from './JitsiObject';
-	// import './jitsi_external_api';
 
 	inDarkOutOriginal();
 
@@ -30,32 +29,37 @@
 	onMount(async () => {
 		changeOpacityTimeOUt = setTimeout(changeOpacityCallback, 1000);
 		try {
-			options.parentNode = document.querySelector('#meet');
-
+			options.parentNode = document.querySelector('#jaas-container');
 			//@ts-ignore
 			api = await new JitsiMeetExternalAPI(domain, options);
 
 			const pwd = 'thnkslv';
+
+			api.executeCommand('password', pwd);
+			api.executeCommand('toggleLobby', true);
+
 			api.addEventListener('participantRoleChanged', function (event: any) {
-				if (event.role === 'moderator') {
-					api.executeCommand('password', pwd);
-					api.executeCommand('toggleLobby', true);
-				}
+				// const pwd = 'thnkslv';
+				// // if (event.role === 'moderator') {
+				// api.executeCommand('password', pwd);
+				// api.executeCommand('toggleLobby', true);
+				// // }
 
 				par = [...api.getParticipantsInfo()];
-				// reassignment is necessary to trigger 'par' reactive statement in 'invisibleOnNoParticipants'
-				// par?.push(...api.getParticipantsInfo());
-				// alert(JSON.stringify(par));
+
+				// alert(JSON.stringify(par[0].participantId));
+
+				// api.executeCommand('kickParticipant',
+				// 	participantID: par[0].participantID
+				// );
 			});
 		} catch (error) {
 			console.log('onMount for JitsiMeetExternalAPI broken', error);
 		}
 	});
 
-	// when onMount is async, then the return callback does not execute, hence why onDestroy is necessary
 	onDestroy(() => {
 		changeOpacityTimeOUt && clearTimeout(changeOpacityTimeOUt);
-		// console.log('jitsi unmounted');
 	});
 </script>
 
@@ -63,12 +67,9 @@
 
 {#if browser}
 	<div
-		id="meet"
+		id="jaas-container"
 		class={`opacity-0 ${changeOpacityTo100} relative h-[90vh] w-full -translate-y-36 md:h-[670px] md:-translate-y-10 pwa:h-[85vh] `}
 	>
-		<!-- {$lessThan768 ? 'right-0 top-10' : 'bottom-5 right-10 '}  -->
-		<!-- class={`${invisibleOnNoParticipants}`} -->
-		<!-- class={par.length < 1 ? 'opacity-0' : ''} -->
 		<button on:click={hangUpBtn}>
 			<img
 				alt="hangup button"
@@ -78,7 +79,3 @@
 		</button>
 	</div>
 {/if}
-<!-- 
-<svelte:head>
-	<script src="https://meet.jit.si/external_api.js"></script>
-</svelte:head> -->

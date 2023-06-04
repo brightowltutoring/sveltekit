@@ -2,7 +2,8 @@ export const jitsiObject = {
 	api: undefined as any,
 	par: undefined as Array<string> | undefined,
 	// par: [] as Array<string>,
-	domain: 'meet.jit.si',
+	// domain: 'meet.jit.si',
+	domain: '8x8.vc',
 	getOptions: (admin = false) => getOptions(admin)
 };
 
@@ -10,11 +11,10 @@ function getOptions(admin = false) {
 	return {
 		parentNode: null as Element | null,
 		// parentNode: is_client && document.querySelector('#meet'),
-		roomName: 'ThinkSolve122822',
+		roomName: 'ThinkSolveio',
 		configOverwrite: {
-			startWithAudioMuted: true,
+			startWithAudioMuted: admin,
 			startWithVideoMuted: true,
-			// startWithVideoMuted: admin ? true : false,
 			disabledSounds: [
 				'ASKED_TO_UNMUTE_SOUND',
 				'E2EE_OFF_SOUND',
@@ -29,8 +29,8 @@ function getOptions(admin = false) {
 				'OUTGOING_CALL_REJECTED_SOUND',
 				'OUTGOING_CALL_RINGING_SOUND',
 				'OUTGOING_CALL_START_SOUND',
-				'PARTICIPANT_JOINED_SOUND',
-				'PARTICIPANT_LEFT_SOUND',
+				// 'PARTICIPANT_JOINED_SOUND',
+				// 'PARTICIPANT_LEFT_SOUND',
 				'RAISE_HAND_SOUND',
 				'REACTION_SOUND',
 				'RECORDING_OFF_SOUND',
@@ -39,22 +39,21 @@ function getOptions(admin = false) {
 			],
 
 			// TODO: do these actually do what I expect?
-			hideConferenceTimer: !admin && true,
-			hideConferenceSubject: !admin && true,
-			hideParticipantsStats: !admin && true,
-			// disablePolls: admin ? false : true,
-			disablePolls: !admin && true,
-			disableSelfView: !admin && true,
+			hideConferenceTimer: !admin,
+			hideConferenceSubject: !admin,
+			hideParticipantsStats: !admin,
+			disablePolls: !admin,
+			disableSelfView: !admin,
 			// disableSelfViewSettings: true,
 			deeplinking: { disabled: true }, // ADDED DEC 23,2022 as 'disableDeepLinking: true' stopped working in order to block 'add app/extension' in iframe on mobile
-			disableRemoteMute: !admin && true,
+			disableRemoteMute: !admin,
 			notifications: !admin && ['lobby.notificationTitle'],
 			// TODO: still don't understand logic, but works; result: only admin can allow users in
 			remoteVideoMenu: !admin && {
 				disabled: true
-				// disableKick: true,
-				// disablePrivateChat: true,
-				// disableGrantModerator: true,
+				// disableKick: false,
+				// disablePrivateChat: false,
+				// disableGrantModerator: false
 			}
 
 			// TODO: get request still grabs all this mp3 data ... id rather not fetch this instead of disabling
@@ -63,7 +62,7 @@ function getOptions(admin = false) {
 			// DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
 			DEFAULT_BACKGROUND: `#130e21`,
 			SHOW_CHROME_EXTENSION_BANNER: false,
-			VIDEO_QUALITY_LABEL_DISABLED: !admin && true,
+			VIDEO_QUALITY_LABEL_DISABLED: !admin,
 			SETTINGS_SECTIONS: [
 				'devices',
 				admin && 'moderator',
