@@ -28,7 +28,7 @@
 	<link rel="manifest" href="/manifest.json" />
 	<script
 		src="https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js"
-		async
+		defer
 	></script>
 
 	{@html seoString}
