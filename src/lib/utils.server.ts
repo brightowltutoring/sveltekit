@@ -21,9 +21,5 @@ export function userAgentFromRequestHeaders(headers: Headers) {
 	const isSafari = browser?.includes('safari');
 	// const isIphone = parser.getDevice().model?.toLowerCase() === 'iphone';
 
-	return {
-		isMobile,
-		isIOS,
-		isSafari
-	};
+	return { isMobile, isIOS, isSafari };
 }

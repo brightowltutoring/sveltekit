@@ -2,12 +2,13 @@
 	export let isAdmin = false;
 
 	import EnableJavascript from '$src/lib/EnableJavascript.svelte';
-	import { browser } from '$app/environment';
+	// import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { isPWA } from '$lib/store/clientStore';
 	import { inDarkOutOriginal } from '$src/lib/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import { jitsiObject } from './JitsiObject';
+	// import { jitsiObject } from './JitsiObject-old';
 
 	inDarkOutOriginal();
 
@@ -44,11 +45,13 @@
 				api.addEventListener(
 					'participantRoleChanged',
 					function (event: any) {
-						// const pwd = 'thnkslv';
-						// // if (event.role === 'moderator') {
-						// api.executeCommand('password', pwd);
-						// api.executeCommand('toggleLobby', true);
-						// // }
+						const pwd = 'thnkslv';
+						if (event.role === 'moderator') {
+							api.executeCommand('password', pwd);
+							api.executeCommand('toggleLobby', true);
+						}
+
+						// alert(JSON.stringify(event));
 
 						par = [...api.getParticipantsInfo()];
 
@@ -71,7 +74,7 @@
 		if (wasMounted) {
 			api.dispose();
 
-			console.log('jitsi disposed');
+			console.log('jitsi off');
 		}
 	});
 </script>
@@ -97,4 +100,5 @@
 	<script
 		src="https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js"
 	></script>
+	<script src="https://meet.jit.si/external_api.js"></script>
 </svelte:head>

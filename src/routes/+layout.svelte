@@ -30,10 +30,10 @@
 		src="https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js"
 		defer
 	></script>
+	<script src="https://meet.jit.si/external_api.js" defer></script>
 
 	{@html seoString}
 </svelte:head>
-<!-- src="https://meet.jit.si/external_api.js" -->
 
 <!-- <Seo /> -->
 

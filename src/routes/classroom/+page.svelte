@@ -1,4 +1,5 @@
 <script lang="ts">
+	// import JitsiUser from '$routes/classroom/old/JitsiUser-old.svelte';
 	import JitsiUser from './JitsiUser.svelte';
 	import { disableScrollingOnPage } from '$lib/utils';
 	import { quintOut } from 'svelte/easing';

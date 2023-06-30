@@ -77,8 +77,8 @@
 		} catch (error) {
 			console.log('stripeRedirectToCheckout failed', error);
 			setTimeout(() => {
-				// loading_status = false;
-				// goto('/plans');
+				loading_status = false;
+				goto('/plans');
 			}, 1000);
 		}
 	}

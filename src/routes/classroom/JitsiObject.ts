@@ -13,7 +13,9 @@ function getOptions(admin = false) {
 		// parentNode: is_client && document.querySelector('#meet'),
 		roomName: 'ThinkSolveio',
 		configOverwrite: {
-			startWithAudioMuted: admin,
+			// startAudioOnly: true,
+			// startWithAudioMuted: admin,
+			startWithAudioMuted: false,
 			startWithVideoMuted: true,
 			disabledSounds: [
 				'ASKED_TO_UNMUTE_SOUND',
@@ -55,6 +57,16 @@ function getOptions(admin = false) {
 				// disablePrivateChat: false,
 				// disableGrantModerator: false
 			}
+			// remoteVideoMenu: {
+			// 	// Whether the remote video context menu to be rendered or not.
+			// 	disabled: true,
+			// 	// If set to true the 'Kick out' button will be disabled.
+			// 	disableKick: !admin,
+			// 	// If set to true the 'Grant moderator' button will be disabled.
+			// 	disableGrantModerator: !admin,
+			// 	// If set to true the 'Send private message' button will be disabled.
+			// 	disablePrivateChat: !admin
+			// }
 
 			// TODO: get request still grabs all this mp3 data ... id rather not fetch this instead of disabling
 		},
@@ -80,10 +92,12 @@ function getOptions(admin = false) {
 				'fodeviceselection',
 				'etherpad',
 				admin && 'noisesuppression',
+				admin && 'participants-pane',
+				admin && 'invite',
+				admin && 'security',
 				admin && 'settings',
 				admin && 'mute-video-everyone',
 				admin && 'mute-everyone',
-				admin && 'security',
 				admin && 'sharedvideo',
 				admin && 'videoquality',
 				admin && 'profile',
