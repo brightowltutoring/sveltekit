@@ -152,9 +152,7 @@
 				<PhoneAuthSection />
 			</div>
 		</login-card>
-	{/if}
-
-	{#if $isLoggedIn}
+	{:else}
 		<logout-card
 			class="element"
 			in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}

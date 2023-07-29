@@ -133,9 +133,12 @@
 {/if}
 
 <div id="recaptcha-container" />
-<div class="p-3 font-Poppins text-rose-600 dark:text-lime-100">
-	{phoneStatusMessage2}
-</div>
+
+{#if phoneStatusMessage2}
+	<div class="pt-3 font-Poppins text-rose-600 dark:text-lime-100">
+		{phoneStatusMessage2}
+	</div>
+{/if}
 <!-- <div
 	bind:this={phoneStatusMessage}
 	class="hidden p-3 font-Poppins text-rose-600 dark:text-lime-100"
