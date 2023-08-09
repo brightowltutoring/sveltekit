@@ -10,6 +10,10 @@ export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent
 	return { isPWA: Boolean(isPWACookie) };
 }
 
+// // ALTERNATE:
+// let isPWA = (isPWACookie === undefined) ? url.includes('pwa'): Boolean(isPWACookie) 
+// 	return isPWA
+
 // client-side navigator.userAgent results in flash of content
 export function userAgentFromRequestHeaders(headers: Headers) {
 	const userAgent = String(headers.get('user-agent'));

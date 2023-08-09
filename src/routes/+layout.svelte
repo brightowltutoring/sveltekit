@@ -4,7 +4,7 @@
 	import { isIOS, isLoggedIn, isPWA, isSafari } from '$lib/store/clientStore';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import Footer from './(rootLayout)/Footer.svelte';
-	import Navbar from './(rootLayout)/Navbar.svelte';
+	import Navbar from './(rootLayout)/NavBar2.svelte';
 	import './(rootLayout)/styles.css';
 
 	export let data;
