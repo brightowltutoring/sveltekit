@@ -37,8 +37,8 @@ export async function load({ url }) {
 	const dollar_hourly_rate_2dec = Math.round(dollar_hourly_rate).toFixed(2);
 	const dollar_minute_rate_2dec = (Math.round(dollar_hourly_rate) / 60).toFixed(2);
 
-	const isClassico = event_type_name?.toLowerCase() === 'classico';
-	const isMock = event_type_name?.toLowerCase() === 'mock';
+	const isClassico = event_type_name?.trim().toLowerCase() === 'classico';
+	const isMock = event_type_name?.trim().toLowerCase() === 'mock';
 
 	const extraEntry = {
 		quantity: 0,

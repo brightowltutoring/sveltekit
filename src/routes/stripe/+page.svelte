@@ -34,7 +34,8 @@
 			firstName = firstNameLowerCase?.charAt(0).toUpperCase() + firstNameLowerCase!.slice(1);
 
 			// converts answer_2 from 1.25 hr to 1.25 to 75 .. representing 75 minutes, say
-			let answer_2_processed = answer_2!.match(/\d+(\.\d{1,2})/)![0];
+			// let answer_2_processed = answer_2!.match(/\d+(\.\d{1,2})/)![0];
+			let answer_2_processed = answer_2!.match(/\d+(\.\d{1,2})?/)![0];
 			quantity = parseFloat(answer_2_processed) * 60;
 
 			// answer_3 relates to adding digital session notes
