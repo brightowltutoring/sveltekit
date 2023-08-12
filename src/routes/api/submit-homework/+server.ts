@@ -1,45 +1,60 @@
 import { UPLOAD_ENDPOINT } from '$env/static/private';
 
-export async function POST(event) {
+export async function POST({ request, fetch }) {
 	console.log('sveltekit POST function hit at "/api/submit-homework/+server.ts" ');
 	try {
-		const formData = await event.request.formData();
+		const formData = await request.formData();
 
-		const files: File[] = [];
-		for (const value of formData.values()) {
-			if (value instanceof File) files.push(value);
-		}
+		const firstNameAndSize = `firstNameAndSize: ${formData.entries().next().value[1].name}; ${
+			formData.entries().next().value[1].size
+		}.`;
 
-		let count = 0;
-		let filesInfo = '';
+		console.log('firstNameAndSize', firstNameAndSize);
 
-		for (let file of files) {
-			filesInfo += `${count + 1}. ${file.name} (${file.size} B); `;
-			count++;
+		if (formData instanceof FormData) {
+			const files: File[] = [];
+			for (const value of formData.values()) {
+				if (value instanceof File) files.push(value);
+			}
 
-			let data = new FormData();
-			data.append('file', file, file.name);
-			await fetch(UPLOAD_ENDPOINT, {
-				method: 'POST',
-				body: data
-			});
-		}
+			let count = 0;
+			let filesInfo = '';
 
-		let message = `${count} file(s) uploaded successfully: ${filesInfo}. Uploaded to: ${UPLOAD_ENDPOINT} `;
+			for (let file of files) {
+				filesInfo += `${count + 1}. ${file.name} (${file.size} B); `;
+				count++;
 
-		console.log(message);
+				let data = new FormData();
+				data.append('file', file, file.name);
+				await fetch(UPLOAD_ENDPOINT, {
+					method: 'POST',
+					body: data
+				});
+			}
 
-		return new Response(
-			JSON.stringify({
-				success: true,
-				message: message
-			}),
-			{
+			let message = `${count} file(s) uploaded successfully: ${filesInfo}. Uploaded to: ${UPLOAD_ENDPOINT} `;
+
+			console.log(message);
+
+			return new Response(
+				JSON.stringify({
+					success: true,
+					message: firstNameAndSize + message
+				}),
+				{
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}
+			);
+		} else {
+			return new Response(JSON.stringify({ error: true, message: 'No form data found.' }), {
+				status: 400,
 				headers: {
 					'Content-Type': 'application/json'
 				}
-			}
-		);
+			});
+		}
 	} catch (error) {
 		return new Response(
 			JSON.stringify({ error: true, message: 'An error occurred while uploading the file.' }),

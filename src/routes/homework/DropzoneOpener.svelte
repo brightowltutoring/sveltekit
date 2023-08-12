@@ -6,15 +6,15 @@
 	import { onMount } from 'svelte';
 
 	function showHomeworkModalAndClickDropzone() {
-		showHomeworkModal.set(true);
-		document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
+		// showHomeworkModal.set(true);
+		// document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
 	}
 
 	let mounted = false;
 
-	onMount(() => {
-		mounted = true;
-	});
+	// onMount(() => {
+	// 	mounted = true;
+	// });
 </script>
 
 <button
@@ -56,7 +56,8 @@
 					<p class="block group-focus:!hidden">submit</p>
 					<p class="hidden group-focus:!block">success</p>
 
-					<input on:click|preventDefault class="hidden" type="submit" value="Submit" id="submit" />
+					<input class="hidden" type="submit" value="Submit" id="submit" />
+					<!-- on:click|preventDefault -->
 				</label>
 			</form>
 			<!-- {/if} -->
