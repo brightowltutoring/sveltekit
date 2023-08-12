@@ -1,16 +1,23 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
-	import { loadStripe } from '@stripe/stripe-js';
+	import { loadStripe } from '@stripe/stripe-js/pure';
+	// import { loadStripe } from '@stripe/stripe-js';
+
 	import { onMount } from 'svelte';
 	import { elasticOut } from 'svelte/easing';
 
 	export let data;
+	$: sessionId = data.sessionId;
+	$: firstName = data.firstName;
+
+	$: console.log('sessionId', sessionId);
+	$: console.log('firstName', firstName);
 
 	let loading_status = true;
 	onMount(async () => {
 		const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
-		stripe?.redirectToCheckout({ sessionId: data.sessionId });
+		stripe?.redirectToCheckout({ sessionId });
 	});
 </script>
 
@@ -21,7 +28,7 @@
 			in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
 			class="loading animate-bounce text-center font-Poppins text-2xl"
 		>
-			Almost there {data.firstName}
+			Almost there {firstName}
 		</span>
 		<br /><br />
 		<!-- {/if} -->
@@ -59,14 +66,4 @@
 		background-color: rgb(80, 140, 137);
 		opacity: 0.4;
 	}
-	/* third-level {
-		background-color: rgb(80, 140, 137);
-		opacity: 0.5;
-	} */
-	/* second-level {
-		background-color: rgb(230, 78, 78);
-	}
-	first-level {
-		background-color: rgb(108, 108, 199);
-	} */
 </style>
