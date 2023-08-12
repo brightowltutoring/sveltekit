@@ -16,13 +16,20 @@ const stripe = new Stripe(STRIPE_KEY, {
 });
 
 export async function load({ url }) {
-	const { invitee_full_name, invitee_email, event_type_name, answer_1, answer_2, answer_3 } =
-		Object.fromEntries(url.searchParams.entries());
+	// const { invitee_full_name, invitee_email, event_type_name, answer_1, answer_2, answer_3 } =
+	// 	Object.fromEntries(url.searchParams.entries());
+	const USP = url.searchParams;
+	const invitee_full_name = USP.get('invitee_full_name');
+	const invitee_email = USP.get('invitee_email');
+	const event_type_name = USP.get('event_type_name');
+	const answer_1 = USP.get('answer_1'); // this now reflects the payment email, if it exists
+	const answer_2 = USP.get('answer_2');
+	const answer_3 = USP.get('answer_3');
 
 	const firstNameLowerCase = invitee_full_name?.split(' ')[0].toLowerCase();
 	const firstName = firstNameLowerCase?.charAt(0).toUpperCase() + firstNameLowerCase!.slice(1);
 
-	const quantity = Math.ceil(60 * Number(answer_2.match(/\d+(\.\d{1,2})?/)![0]));
+	const quantity = Math.ceil(60 * Number(answer_2?.match(/\d+(\.\d{1,2})?/)![0]));
 	const dollar_hourly_rate = 50;
 	const cents_minute_rate = dollar_hourly_rate * (100 / 60);
 	const unit_amount = Math.round(cents_minute_rate); // checkout based on time in minutes
@@ -30,8 +37,8 @@ export async function load({ url }) {
 	const dollar_hourly_rate_2dec = Math.round(dollar_hourly_rate).toFixed(2);
 	const dollar_minute_rate_2dec = (Math.round(dollar_hourly_rate) / 60).toFixed(2);
 
-	const isClassico = event_type_name.toLowerCase() === 'classico';
-	const isMock = event_type_name.toLowerCase() === 'mock';
+	const isClassico = event_type_name?.toLowerCase() === 'classico';
+	const isMock = event_type_name?.toLowerCase() === 'mock';
 
 	const extraEntry = {
 		quantity: 0,
