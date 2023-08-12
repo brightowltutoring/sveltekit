@@ -1,8 +1,10 @@
-import { submitHomeworkAction as submitHomework } from './submitHomework';
-// import { submitHomework } from './submitHomework';
+import {
+	submitHomeworkAction
+	/*  submitHomework as submitHomeworkAction */
+} from './submitHomework.server';
 
-export const prerender = false;
+// export const prerender = false;
 
 export const actions = {
-	default: (event) => submitHomework(event)
+	default: (event) => submitHomeworkAction(event)
 };

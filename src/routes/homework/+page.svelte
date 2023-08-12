@@ -1,8 +1,9 @@
 <script>
 	import DropzoneOpener from './DropzoneOpener.svelte';
 
-	export let form;
-	$: success = form?.success;
+	// export let form;
+	// $: success = form?.success;
 </script>
 
-<DropzoneOpener {success} />
+<DropzoneOpener />
+<!-- <DropzoneOpener {success} /> -->
