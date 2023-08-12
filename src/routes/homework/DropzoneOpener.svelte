@@ -44,7 +44,8 @@
 					<label for="file" class="flex items-center justify-center text-lg sm:w-[60vw]">
 						<input class="hidden px-5" type="file" name="file" id="file" multiple />
 					</label>
-					<label
+
+					<!-- <label
 						tabindex="-1"
 						for="submit"
 						class="border-1 group rounded-lg {success
@@ -52,6 +53,18 @@
 							: 'bg-red-800 '} p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave"
 					>
 						{success ? 'sent' : 'submit'}
+						<p class="hidden">submit</p>
+
+						<input class="hidden" type="submit" value="Submit" id="submit" />
+					</label> -->
+
+					<label
+						tabindex="-1"
+						for="submit"
+						class="border-1 group rounded-lg bg-red-800 focus:bg-emerald-500 p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave group"
+					>
+						<p class="block group-focus:!hidden">submit</p>
+						<p class="hidden group-focus:!block">success</p>
 
 						<input class="hidden" type="submit" value="Submit" id="submit" />
 					</label>

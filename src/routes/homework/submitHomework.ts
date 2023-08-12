@@ -1,8 +1,11 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
+import { UPLOAD_ENDPOINT } from '$env/static/private';
 
 export async function submitHomeworkAction(event: RequestEvent) {
-	const UPLOAD_ENDPOINT = PUBLIC_UPLOAD_ENDPOINT;
+	// const UPLOAD_ENDPOINT = PUBLIC_UPLOAD_ENDPOINT;
+
+	console.log('submitHomeworkAction action; currently using "private" upload endpoint');
 
 	try {
 		const formData = await event.request.formData();
@@ -39,7 +42,7 @@ export async function submitHomeworkAction(event: RequestEvent) {
 }
 
 export async function submitHomework(event: RequestEvent) {
-	console.log('request sent to submitHomework');
+	console.log('submitHomework action hit');
 	const formData = await event.request.formData();
 
 	const files = formData.getAll('file') as File[];
