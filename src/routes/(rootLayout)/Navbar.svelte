@@ -1,17 +1,13 @@
 <script lang="ts">
+	import { spring } from 'svelte/motion';
 	import LightDarkMode from './LightDarkMode.svelte';
 	import NavModals from './NavModals.svelte';
-	import Navitem from './Navitem.svelte';
-	import { showLoginModal, showHomeworkModal } from '$lib/store/modalsStore';
+	import { showLoginModal, showHomeworkModal, clearNavModals } from '$lib/store/modalsStore';
 	import { isLoggedIn, isDarkMode, isIOS, isPWA } from '$lib/store/clientStore';
 	import { scrollY, instDeltaY } from '$lib/store/scrollStore';
 	import { routes } from '$lib/store/routesStore';
-	import { spring } from 'svelte/motion';
 	import LogoButton from './LogoButton.svelte';
 	import AppNavButton from './AppNavButton.svelte';
-
-	// const isIOS: boolean = getContext('isIOS');
-	// const isPWA: boolean = getContext('isPWA');
 
 	let showHideNav = '';
 
@@ -43,6 +39,21 @@
 		routes.login.name = $isLoggedIn ? '🚀' : 'Login';
 		return routes;
 	});
+
+	function handleNavButtonClicks(e: MouseEvent, routePath: string) {
+		clearNavModals();
+
+		if (routePath == '/homework') {
+			e.preventDefault();
+			showHomeworkModal.set(true);
+			return;
+		}
+		if (routePath == '/login') {
+			e.preventDefault();
+			showLoginModal.set(true);
+			return;
+		}
+	}
 </script>
 
 <NavModals />
@@ -71,19 +82,22 @@
 					: null}
 
 			<li style={loggedInDynamicRocket}>
-				<Navitem
-					{navIconClicked}
-					{routePath}
-					{icon}
-					{name}
-					bind:routes={$routes}
-					btnColorHover={'notpwa:hover:bg-red-300 '}
-				/>
-				<!-- without this bind PWA svg's dont work! -->
+				<a
+					href={routePath}
+					on:click={(e) => handleNavButtonClicks(e, routePath)}
+					class="block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded notpwa:hover:bg-red-300"
+				>
+					<div class="hidden h-10 w-10 flex-col items-center justify-between pwa:flex">
+						<svelte:component this={icon} {navIconClicked} />
+						<span class="scale-[0.95] text-center text-xs">{name}</span>
+					</div>
+
+					<div class="text-2xl md:text-xl pwa:hidden">{name}</div>
+				</a>
 			</li>
 		{/each}
 
-		<li class=" py-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
+		<li class="py-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
 			<LightDarkMode />
 		</li>
 	</ul>

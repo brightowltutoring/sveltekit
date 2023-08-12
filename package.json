@@ -19,7 +19,7 @@
 		"@supabase/supabase-js": "^2.32.0",
 		"@sveltejs/adapter-auto": "2.1.0",
 		"@sveltejs/adapter-cloudflare": "^2.3.2",
-		"@sveltejs/kit": "^1.22.4",
+		"@sveltejs/kit": "^1.22.5",
 		"@tailwindcss/typography": "^0.5.9",
 		"@types/dropzone": "^5.7.4",
 		"@types/ua-parser-js": "^0.7.36",
@@ -30,6 +30,7 @@
 		"postcss": "^8.4.27",
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^3.0.1",
+		"prettier-plugin-svelte": "^3.0.3",
 		"prettier-plugin-tailwindcss": "^0.4.1",
 		"remark-math": "3.0.1",
 		"svelte": "^4.1.2",
@@ -38,7 +39,6 @@
 		"tslib": "^2.6.1",
 		"typescript": "^5.1.6",
 		"vite": "^4.4.9",
-		"prettier-plugin-svelte": "^3.0.3",
 		"wrangler": "^3.5.0"
 	},
 	"type": "module",
@@ -50,6 +50,7 @@
 		"mathjax": "^3.2.2",
 		"mdsvex": "^0.11.0",
 		"rehype-katex-svelte": "^1.2.0",
+		"stripe": "^12.18.0",
 		"svelte-katex": "^0.1.2",
 		"tailwind-scrollbar-hide": "^1.1.7",
 		"ua-parser-js": "^1.0.35"
