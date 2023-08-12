@@ -1,6 +1,7 @@
 import { UPLOAD_ENDPOINT } from '$env/static/private';
 
 export async function POST(event) {
+	console.log('sveltekit POST function hit at "/api/submit-homework/+server.ts" ');
 	try {
 		const formData = await event.request.formData();
 

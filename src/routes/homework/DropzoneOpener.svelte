@@ -38,6 +38,7 @@
 			<!-- {#if !mounted} -->
 			<!-- on:click={(e) => e.preventDefault()} -->
 			<form
+				action={'/api/submit-homework'}
 				enctype="multipart/form-data"
 				method="POST"
 				target="dummyframe"
