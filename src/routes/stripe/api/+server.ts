@@ -1,13 +1,4 @@
-// export async function GET({ cookies }) {
-// 	// throw redirect(308, session.url);
-// 	const redirectPath = '/plans';
-// 	cookies.set('test_cookie', 'test_cookie', {
-// 		path: redirectPath
-// 	});
-// 	throw redirect(308, redirectPath);
-// }
-
-// http://localhost:4173/stripe1?answer_2=2.5hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true
+// http://localhost:4173/stripe/api/?answer_2=1.5hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true
 
 import { STRIPE_KEY } from '$env/static/private';
 import { redirect } from '@sveltejs/kit';
@@ -18,8 +9,15 @@ const stripe = new Stripe(STRIPE_KEY, {
 });
 
 export async function GET({ url }) {
-	const { /* invitee_full_name, */ invitee_email, event_type_name, answer_1, answer_2, answer_3 } =
-		Object.fromEntries(url.searchParams.entries());
+	// try {
+	const {
+		/* invitee_full_name, */
+		invitee_email,
+		event_type_name,
+		answer_1,
+		answer_2,
+		answer_3
+	} = Object.fromEntries(url.searchParams.entries());
 
 	// const firstNameLowerCase = invitee_full_name?.split(' ')[0].toLowerCase();
 	// const firstName = firstNameLowerCase?.charAt(0).toUpperCase() + firstNameLowerCase!.slice(1);
@@ -106,4 +104,7 @@ export async function GET({ url }) {
 	const session = await stripe.checkout.sessions.create(sessionObject as any);
 
 	throw redirect(308, session.url as string);
+	// } catch (error) {
+	// 	throw redirect(308, '/plans');
+	// }
 }
