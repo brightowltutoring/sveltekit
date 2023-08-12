@@ -14,6 +14,8 @@
 	$: console.log('sessionId', sessionId);
 	$: console.log('firstName', firstName);
 
+	console.log('test rocket 🚀');
+
 	let loading_status = true;
 	onMount(async () => {
 		const stripe = await loadStripe(PUBLIC_STRIPE_KEY);

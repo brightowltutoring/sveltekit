@@ -1,9 +1,13 @@
 // http://localhost:5173/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true
 
-// Currently this works on vercel (https://sveltekit-u7qb.vercel.app/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true)
+// Works on vercel (https://sveltekit-u7qb.vercel.app/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true)
 
-// Doesn't currently on cloudflare pages (https://thinksolve.io/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true)
+// Works on netlify (https://64d70110faf31948e15eed3d--thinksolveio.netlify.app/stripe1/?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true)
+
+// Doesn't work on cloudflare pages (https://thinksolve.io/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true) ... CF pages doesnt allow ssr so load function doesnt fire?
+
 import { STRIPE_KEY } from '$env/static/private';
+import { redirect } from '@sveltejs/kit';
 
 import Stripe from 'stripe';
 const stripe = new Stripe(STRIPE_KEY, {
@@ -98,7 +102,8 @@ export async function load({ url }) {
 
 	const session = await stripe.checkout.sessions.create(sessionObject as any);
 
-	// stripe creates a session id for us, to process the payment (used on client side)
+	throw redirect(308, session.url);
+
 	return {
 		sessionId: session.id,
 		firstName: firstName
