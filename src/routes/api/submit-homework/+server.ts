@@ -1,5 +1,5 @@
 import { UPLOAD_ENDPOINT } from '$env/static/private';
-// import { sendDummyTextFileToGoogleDrive } from '$src/lib/utils.js';
+import { sendDummyTextFileToGoogleDrive } from '$src/lib/utils.js';
 
 export async function POST({ request, url }) {
 	const referringUrl = request.headers.get('Referer') as string;
@@ -7,7 +7,10 @@ export async function POST({ request, url }) {
 
 	// console.log('sveltekit POST function hit at "/api/submit-homework/+server.ts" ');
 	try {
-		// await sendDummyTextFileToGoogleDrive('derpa');
+		// this post request dummy function works on all deployments, including Cloudflare pages
+		sendDummyTextFileToGoogleDrive('derpa');
+
+		// code below still not processed by CF pages, but works on Netlify and Vercel. Apparently CF pages allow native form submission with files ... which is why I have to use client-side 'dropzone' file submitter
 		const formData = await request.formData();
 
 		if (formData instanceof FormData) {
