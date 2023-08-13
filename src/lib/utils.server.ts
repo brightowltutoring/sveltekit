@@ -11,7 +11,7 @@ export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent
 }
 
 // // ALTERNATE:
-// let isPWA = (isPWACookie === undefined) ? url.includes('pwa'): Boolean(isPWACookie) 
+// let isPWA = (isPWACookie === undefined) ? url.includes('pwa'): Boolean(isPWACookie)
 // 	return isPWA
 
 // client-side navigator.userAgent results in flash of content

@@ -32,8 +32,11 @@ export async function POST({ request, fetch }) {
 				await fetch(UPLOAD_ENDPOINT, {
 					method: 'POST',
 					body: data,
+					// headers: {
+					// 	'X-Forwarded-Method': 'GET'
+					// }
 					headers: {
-						'X-Forwarded-Method': 'GET'
+						'Content-Type': 'multipart/form-data'
 					}
 				});
 			}

@@ -216,7 +216,6 @@ export function jsToHead(id = 'calendlyJS', path = 'external-website.com/calendl
 
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 export async function sendDummyTextFileToGoogleDrive(name: string) {
-	// const { PUBLIC_UPLOAD_ENDPOINT } = await import('$env/static/public');
 	const data = new FormData();
 	const file = new File([`${name}`], `${name}.txt`, {
 		type: 'text/plain'
