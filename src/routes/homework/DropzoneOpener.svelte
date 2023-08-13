@@ -1,20 +1,27 @@
 <script lang="ts">
-	export let success = false;
+	import { enhance } from '$app/forms';
 
 	import IconUpload from '$lib/Icons/IconUpload.svelte';
 	import { showHomeworkModal } from '$lib/store/modalsStore';
 	import { onMount } from 'svelte';
 
-	function showHomeworkModalAndClickDropzone() {
-		// showHomeworkModal.set(true);
-		// document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
-	}
+	// let mounted = false;
+	// $: status = mounted ? 200 : 302;
+	// onMount(() => (mounted = true));
 
 	let mounted = false;
+	let status = 302;
+	onMount(() => {
+		// mounted = true;
+		status = 200;
+	});
 
-	// onMount(() => {
-	// 	mounted = true;
-	// });
+	function showHomeworkModalAndClickDropzone() {
+		if (mounted) {
+			showHomeworkModal.set(true);
+			document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
+		}
+	}
 </script>
 
 <button
@@ -28,22 +35,15 @@
 				<IconUpload />
 			</div>
 
-			<iframe
-				name="dummyframe"
-				id="dummyframe"
-				style="display: none;"
-				title="this iframe serves as a janky solution so that the page doesnt redirect after form submission"
-			/>
-
-			<!-- {#if !mounted} -->
-			<!-- on:click={(e) => e.preventDefault()} -->
 			<form
-				action={'/api/submit-homework'}
-				enctype="multipart/form-data"
+				use:enhance
 				method="POST"
-				target="dummyframe"
+				action={`/api/submit-homework?status=${status}`}
+				enctype="multipart/form-data"
 				class="{mounted ? 'hidden' : 'flex'} flex-col items-center justify-center gap-5"
 			>
+				<!-- target="dummyframe" -->
+				<!-- <iframe name="dummyframe" id="dummyframe" style="display: none;" title="dummy iframe" /> -->
 				<label for="file" class="flex items-center justify-center text-lg sm:w-[60vw]">
 					<input class="hidden px-5" type="file" name="file" id="file" multiple />
 				</label>
@@ -60,7 +60,6 @@
 					<!-- on:click|preventDefault -->
 				</label>
 			</form>
-			<!-- {/if} -->
 		</div>
 	</label>
 </button>

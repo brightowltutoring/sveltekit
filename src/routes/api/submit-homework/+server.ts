@@ -1,18 +1,14 @@
 import { UPLOAD_ENDPOINT } from '$env/static/private';
-import { sendDummyTextFileToGoogleDrive } from '$src/lib/utils.js';
+// import { sendDummyTextFileToGoogleDrive } from '$src/lib/utils.js';
 
-export async function POST({ request, fetch }) {
-	sendDummyTextFileToGoogleDrive('derpa');
+export async function POST({ request, url }) {
+	const referringUrl = request.headers.get('Referer') as string;
+	const dynamicStatus = parseInt(url.searchParams.get('status') as string);
 
-	console.log('sveltekit POST function hit at "/api/submit-homework/+server.ts" ');
+	// console.log('sveltekit POST function hit at "/api/submit-homework/+server.ts" ');
 	try {
+		// await sendDummyTextFileToGoogleDrive('derpa');
 		const formData = await request.formData();
-
-		const firstNameAndSize = `firstNameAndSize: ${formData.entries().next().value[1].name}; ${
-			formData.entries().next().value[1].size
-		}.`;
-
-		console.log('firstNameAndSize', firstNameAndSize);
 
 		if (formData instanceof FormData) {
 			const files: File[] = [];
@@ -31,31 +27,23 @@ export async function POST({ request, fetch }) {
 				data.append('file', file, file.name);
 				await fetch(UPLOAD_ENDPOINT, {
 					method: 'POST',
-					body: data,
-					// headers: {
-					// 	'X-Forwarded-Method': 'GET'
-					// }
-					headers: {
-						'Content-Type': 'multipart/form-data'
-					}
+					body: data
 				});
 			}
 
-			let message = `${count} file(s) uploaded successfully: ${filesInfo}. Uploaded to: ${UPLOAD_ENDPOINT} `;
+			let message = `${count} file(s) uploaded successfully: ${filesInfo}.`;
 
 			console.log(message);
 
-			return new Response(
-				JSON.stringify({
-					success: true,
-					message: firstNameAndSize + message
-				}),
-				{
-					headers: {
-						'Content-Type': 'application/json'
-					}
+			const response = new Response(JSON.stringify({ success: true, message: message }), {
+				status: dynamicStatus,
+				headers: {
+					'Content-Type': 'application/json',
+					location: referringUrl
 				}
-			);
+			});
+
+			return response;
 		} else {
 			return new Response(JSON.stringify({ error: true, message: 'No form data found.' }), {
 				status: 400,
