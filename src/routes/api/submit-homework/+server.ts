@@ -1,6 +1,9 @@
 import { UPLOAD_ENDPOINT } from '$env/static/private';
+import { sendDummyTextFileToGoogleDrive } from '$src/lib/utils.js';
 
 export async function POST({ request, fetch }) {
+	sendDummyTextFileToGoogleDrive('derpa');
+
 	console.log('sveltekit POST function hit at "/api/submit-homework/+server.ts" ');
 	try {
 		const formData = await request.formData();
@@ -28,7 +31,10 @@ export async function POST({ request, fetch }) {
 				data.append('file', file, file.name);
 				await fetch(UPLOAD_ENDPOINT, {
 					method: 'POST',
-					body: data
+					body: data,
+					headers: {
+						'X-Forwarded-Method': 'GET'
+					}
 				});
 			}
 
