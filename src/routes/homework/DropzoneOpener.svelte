@@ -11,8 +11,9 @@
 
 	let mounted = false;
 	let status = 302;
+
 	onMount(() => {
-		mounted = true;
+		// mounted = true;
 		status = 200;
 	});
 
@@ -35,17 +36,17 @@
 				<IconUpload />
 			</div>
 
+			<!-- use:enhance -->
+
 			<form
-				use:enhance
+				enctype="multipart/form-data"
 				method="POST"
 				action={`/api/submit-homework?status=${status}`}
-				enctype="multipart/form-data"
 				class="{mounted ? 'hidden' : 'flex'} flex-col items-center justify-center gap-5"
 			>
 				<!-- target="dummyframe" -->
 				<!-- <iframe name="dummyframe" id="dummyframe" style="display: none;" title="dummy iframe" /> -->
 				<label for="file" class="flex items-center justify-center text-lg sm:w-[60vw]">
-					<!-- on:click|preventDefault -->
 					<input
 						on:click={(e) => mounted && e.preventDefault()}
 						class="hidden px-5"
@@ -64,7 +65,6 @@
 					<p class="block group-focus:!hidden">submit</p>
 					<p class="hidden group-focus:!block">success</p>
 
-					<!-- on:click|preventDefault -->
 					<input class="hidden" type="submit" value="Submit" id="submit" />
 				</label>
 			</form>
