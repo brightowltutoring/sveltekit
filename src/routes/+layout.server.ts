@@ -8,5 +8,5 @@ export async function load(event) {
 	const { isIOS, isMobile, isSafari } = userAgentFromRequestHeaders(event.request.headers);
 	const { isPWA } = isPwaFromCookieOrUrl(event);
 
-	return { isMobile, isIOS, isSafari, isPWA, seoString, haventLoggedOut };
+	return { isMobile, isIOS, isSafari, isPWA, seoString, haventLoggedOut, url: event.request.url };
 }

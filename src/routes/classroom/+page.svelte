@@ -5,6 +5,7 @@
 	import { quintOut } from 'svelte/easing';
 	import { scale } from 'svelte/transition';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	disableScrollingOnPage($page.url.pathname);
 
@@ -12,17 +13,26 @@
 		duration: 2000,
 		easing: quintOut
 	};
+
+	let mounted = false;
+	onMount(() => {
+		setTimeout(() => {
+			mounted = true;
+		}, 1000);
+	});
 </script>
 
-<div in:scale={scaleParams} class="disableScrollOnThisPage">
-	<JitsiUser />
-</div>
+{#if mounted}
+	<div in:scale={scaleParams} class="disableScrollOnThisPage">
+		<JitsiUser />
+	</div>
+{/if}
 
-<!-- <svelte:head>
+<svelte:head>
 	<script
 		src="https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js"
 	></script>
-</svelte:head> -->
+</svelte:head>
 
 <!-- <svelte:head>
 	<script

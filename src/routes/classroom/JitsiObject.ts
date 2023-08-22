@@ -1,21 +1,17 @@
 export const jitsiObject = {
 	api: undefined as any,
-	par: undefined as Array<string> | undefined,
-	// par: [] as Array<string>,
-	// domain: 'meet.jit.si',
-	domain: '8x8.vc',
+	par: undefined as Array<string> | undefined, // par: [] as Array<string>,
+	domain: '8x8.vc', // domain: 'meet.jit.si',
 	getOptions: (admin = false) => getOptions(admin)
 };
 
 function getOptions(admin = false) {
 	return {
-		parentNode: null as Element | null,
-		// parentNode: is_client && document.querySelector('#meet'),
+		parentNode: null as Element | null, // parentNode: is_client && document.querySelector('#meet'),
 		roomName: 'ThinkSolveio',
 		configOverwrite: {
 			// startAudioOnly: true,
-			// startWithAudioMuted: admin,
-			startWithAudioMuted: false,
+			startWithAudioMuted: false, // startWithAudioMuted: admin,
 			startWithVideoMuted: true,
 			disabledSounds: [
 				'ASKED_TO_UNMUTE_SOUND',
