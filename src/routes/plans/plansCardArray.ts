@@ -6,6 +6,7 @@ const color = {
 
 // unfortunately cannot interpolate js variables inside tailwind bg class
 const buttonColor = {
+	// 1: 'bg-gradient-to-r from-[#f34d4e] via-[#f34d4e] to-violet-400' /* red */,
 	1: 'bg-[#f34d4e]' /* red */,
 	2: 'bg-[#2aa5d6]' /* blue */,
 	3: 'bg-[#fea45c]' /* yellow */

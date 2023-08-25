@@ -28,7 +28,7 @@
 		{
 			resetter: false,
 			url: payLaterUrl,
-			opacityTW: 'bg-opacity-70',
+			opacityTW: 'bg-opacity-80',
 			text: 'Pay Later'
 		}
 	];

@@ -38,38 +38,38 @@
 
 			<!-- use:enhance -->
 
-			<noscript>
-				<form
-					enctype="multipart/form-data"
-					method="POST"
-					action={`/api/submit-homework?status=${status}`}
-					class="{mounted ? 'hidden' : 'flex'} flex-col items-center justify-center gap-5"
+			<!-- <noscript> -->
+			<form
+				enctype="multipart/form-data"
+				method="POST"
+				action={`/api/submit-homework?status=${status}`}
+				class="{mounted ? 'hidden' : 'flex'} flex-col items-center justify-center gap-5"
+			>
+				<!-- target="dummyframe" -->
+				<!-- <iframe name="dummyframe" id="dummyframe" style="display: none;" title="dummy iframe" /> -->
+				<label for="file" class="flex items-center justify-center text-lg sm:w-[60vw]">
+					<input
+						on:click={(e) => mounted && e.preventDefault()}
+						class="hidden px-5"
+						type="file"
+						name="file"
+						id="file"
+						multiple
+					/>
+				</label>
+
+				<label
+					tabindex="-1"
+					for="submit"
+					class="border-1 group rounded-lg bg-red-800 focus:bg-emerald-500 p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave group"
 				>
-					<!-- target="dummyframe" -->
-					<!-- <iframe name="dummyframe" id="dummyframe" style="display: none;" title="dummy iframe" /> -->
-					<label for="file" class="flex items-center justify-center text-lg sm:w-[60vw]">
-						<input
-							on:click={(e) => mounted && e.preventDefault()}
-							class="hidden px-5"
-							type="file"
-							name="file"
-							id="file"
-							multiple
-						/>
-					</label>
+					<p class="block group-focus:!hidden">submit</p>
+					<p class="hidden group-focus:!block">success</p>
 
-					<label
-						tabindex="-1"
-						for="submit"
-						class="border-1 group rounded-lg bg-red-800 focus:bg-emerald-500 p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave group"
-					>
-						<p class="block group-focus:!hidden">submit</p>
-						<p class="hidden group-focus:!block">success</p>
-
-						<input class="hidden" type="submit" value="Submit" id="submit" />
-					</label>
-				</form>
-			</noscript>
+					<input class="hidden" type="submit" value="Submit" id="submit" />
+				</label>
+			</form>
+			<!-- </noscript> -->
 		</div>
 	</label>
 </button>

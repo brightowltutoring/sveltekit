@@ -42,7 +42,8 @@
 			<span class="gradientTextColor"> 1. Upload your homework </span>
 		</a>
 
-		<DropzoneOpener {success} />
+		<DropzoneOpener />
+		<!-- <DropzoneOpener {success} /> -->
 	</section>
 
 	<!-- third page -->

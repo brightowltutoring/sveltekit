@@ -40,11 +40,20 @@ module.exports = {
 					'50%': {
 						transform: 'rotate(3deg)  translateX(5px)'
 					}
+				},
+				bgsize: {
+					'0%,100%': {
+						backgroundSize: '100% '
+					},
+					'50%': {
+						backgroundSize: '400% '
+					}
 				}
 			},
 			animation: {
 				// fadeIn: 'fadeIn 0.7s ease-in'
-				wave: 'wave 1s ease infinite'
+				wave: 'wave 1s ease infinite',
+				bgsize: 'bgsize 4s infinite'
 			}
 		}
 	}

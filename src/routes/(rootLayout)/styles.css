@@ -7,28 +7,36 @@
 	font-family: 'Nunito';
 	font-style: normal;
 	font-weight: 200;
-	src: local(''), url('$lib/fonts/nunito-v25-latin-200.woff2') format('woff2'),
+	src:
+		local(''),
+		url('$lib/fonts/nunito-v25-latin-200.woff2') format('woff2'),
 		url('$lib/fonts/nunito-v25-latin-200.woff') format('woff');
 }
 @font-face {
 	font-family: 'Nunito';
 	font-style: bold;
 	font-weight: 400;
-	src: local(''), url('$lib/fonts/nunito-v25-latin-regular.woff2') format('woff2'),
+	src:
+		local(''),
+		url('$lib/fonts/nunito-v25-latin-regular.woff2') format('woff2'),
 		url('$lib/fonts/nunito-v25-latin-regular.woff') format('woff');
 }
 @font-face {
 	font-family: 'Poppins';
 	font-style: normal;
 	font-weight: 100;
-	src: local(''), url('$lib/fonts/poppins-v20-latin-100.woff2') format('woff2'),
+	src:
+		local(''),
+		url('$lib/fonts/poppins-v20-latin-100.woff2') format('woff2'),
 		url('$lib/fonts/poppins-v20-latin-100.woff') format('woff');
 }
 @font-face {
 	font-family: 'Poppins';
 	font-style: bold;
 	font-weight: 700;
-	src: local(''), url('$lib/fonts/poppins-v20-latin-700.woff2') format('woff2'),
+	src:
+		local(''),
+		url('$lib/fonts/poppins-v20-latin-700.woff2') format('woff2'),
 		url('$lib/fonts/poppins-v20-latin-700.woff') format('woff');
 }
 
@@ -88,5 +96,17 @@ body:has(.disableScrollOnThisPage) {
 	100% {
 		display: block;
 		transform: scale(1) rotate(0deg);
+	}
+}
+
+.background-animate {
+	background-size: 400%;
+	animation: backgroundAnimate 4s infinite ease;
+}
+
+@keyframes backgroundAnimate {
+	50% {
+		background-size: 100%;
+		background-position: right;
 	}
 }

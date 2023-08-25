@@ -15,9 +15,16 @@
 <style>
 	svg path {
 		fill: url(#GradHere);
+		animation: animate 4s infinite ease;
 	}
 
 	:global(html.dark-mode) svg {
 		filter: invert(0.9);
+	}
+
+	@keyframes animate {
+		50% {
+			filter: invert(0.1);
+		}
 	}
 </style>

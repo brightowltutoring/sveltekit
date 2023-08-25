@@ -36,7 +36,7 @@
 	href={url}
 	on:click={(e) => handlePlansModal(e, url)}
 	on:mouseenter={(e) => handlePlansModal(e, url)}
-	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md group-hover:bg-opacity-80 {opacityTW} {$$props.class}"
+	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md {opacityTW} {$$props.class} "
 >
 	<span>{text}</span>
 </a>
