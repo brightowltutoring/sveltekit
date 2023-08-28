@@ -164,10 +164,9 @@
 		Redirecting in
 		<p class="p-5 text-5xl">{seconds}</p>
 
-		<!-- use:enhance={logoutFunction} -->
-		<form method="POST" use:enhance>
+		<!-- on:click={logoutFunction} -->
+		<form method="POST" use:enhance={logoutFunction}>
 			<button
-				on:click={logoutFunction}
 				formaction={'/logout'}
 				class="rounded-lg bg-rose-300 p-4 text-2xl font-medium text-white duration-200 ease-in hover:scale-110 hover:rounded-xl"
 			>
