@@ -95,9 +95,8 @@
 		on:click={(e) => submitPhoneNumber(e)}
 		innerText={'Get SMS Code'}
 		bgColorTW={'bg-rose-400'}
-	>
-		<IconPhone />
-	</LoginButton>
+		icon={IconPhone}
+	/>
 
 	<div class="grid w-full grid-cols-6 text-black">
 		{#if phoneInputVisible}

@@ -6,15 +6,14 @@
 	import Footer from './(rootLayout)/Footer.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import './(rootLayout)/styles.css';
-	import { beforeNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 
 	export let data;
 	$: seoString = data.seoString;
-	$: isLoggedIn.set(Boolean(data.haventLoggedOut));
-	isIOS.set(Boolean(data.isIOS)); // setContext('isIOS', data.isIOS);
-	isPWA.set(Boolean(data.isPWA)); // setContext('isPWA', data.isPWA);
-	isSafari.set(Boolean(data.isSafari));
+	$: isLoggedIn.set(data.haventLoggedOut === 'true');
+	isSafari.set(data.isSafari === true);
+	// isIOS.set(Boolean(data.isIOS)); // setContext('isIOS', data.isIOS);
+	// isPWA.set(Boolean(data.isPWA)); // setContext('isPWA', data.isPWA);
 
 	disableZoomOnTouchDevices();
 	setIsPwaCookie();

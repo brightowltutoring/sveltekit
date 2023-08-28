@@ -8,6 +8,5 @@
 	on:click={() => GoogleLogin()}
 	innerText={'Sign-in with Google'}
 	bgColorTW={'bg-[#4285f4]'}
->
-	<IconGoogle />
-</LoginButton>
+	icon={IconGoogle}
+/>

@@ -1,6 +1,8 @@
 <script lang="ts">
+	import type { SvelteComponent } from 'svelte';
 	export let bgColorTW = 'bg-rose-400';
 	export let innerText = '';
+	export let icon: SvelteComponent | any = undefined;
 </script>
 
 <button
@@ -9,7 +11,8 @@
 >
 	<span class="duration-500 group-hover:scale-[1.15]">
 		<!-- where the icon goes -->
-		<slot />
+		<svelte:component this={icon} />
+		<!-- <slot /> -->
 	</span>
 
 	<span>{innerText}</span>

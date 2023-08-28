@@ -18,7 +18,7 @@
 	onMount(() => {
 		setTimeout(() => {
 			mounted = true;
-		}, 1000);
+		}, 500);
 	});
 </script>
 

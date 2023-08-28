@@ -3,7 +3,10 @@
 	import LightDarkMode from './LightDarkMode.svelte';
 	import NavModals from './NavModals.svelte';
 	import { showLoginModal, showHomeworkModal, clearNavModals } from '$lib/store/modalsStore';
-	import { isLoggedIn, isDarkMode, isIOS, isPWA } from '$lib/store/clientStore';
+	import { isLoggedIn, isDarkMode /*  isIOS, isPWA  */ } from '$lib/store/clientStore';
+	import { page } from '$app/stores';
+	$: ({ data } = $page);
+
 	import { scrollY, instDeltaY } from '$lib/store/scrollStore';
 	import { routes } from '$lib/store/routesStore';
 	import LogoButton from './LogoButton.svelte';
@@ -29,7 +32,8 @@
 	let hueRocket = 0;
 	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
 
-	$: if ($isLoggedIn && ($isPWA === false || null)) {
+	$: if ($isLoggedIn && (data.isPWA === false || null)) {
+		// $: if ($isLoggedIn && ($isPWA === false || null)) {
 		hueRocket = $isDarkMode ? 0.75 : 0;
 		scaleRocket.set(1 + 0.5 * Math.sin($scrollY));
 	}
@@ -66,7 +70,8 @@
 	<ul
 		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide dark:to-[rgb(37,35,91)] md:ml-24 md:w-auto md:rounded-xl pwa:m-0 pwa:pb-0 background-animate"
 	>
-		<li class={$isIOS ? 'block pwa:hidden' : 'hidden'}>
+		<!-- <li class={$isIOS ? 'block pwa:hidden' : 'hidden'}> -->
+		<li class={data.isIOS ? 'block pwa:hidden' : 'hidden'}>
 			<AppNavButton />
 		</li>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	export let noTransition = false;
 
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
@@ -7,7 +8,8 @@
 
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { isLoggedIn, isPWA } from '$lib/store/clientStore';
+	$: ({ data } = $page);
+	import { isLoggedIn /* isPWA  */ } from '$lib/store/clientStore';
 	import { showLoginModal } from '$lib/store/modalsStore';
 	import { cookeh } from '$lib/utils';
 	import { onDestroy, onMount } from 'svelte';
@@ -67,22 +69,24 @@
 
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				isLoggedIn.set(true);
-
 				loggedInDisplayName = user.displayName;
 				loggedInEmail = user.email;
 				showLoginModalRedirect(loggedInEmail);
 
+				isLoggedIn.set(true);
 				cookeh.set('haventLoggedOut', $isLoggedIn);
 
-				// if (user.email) loginWelcomeText = `Hey ${user.email}!`;
-				// if (user.displayName) loginWelcomeText = `Hey ${user.displayName}!`;
+				// cookeh.set('haventLoggedOut', Boolean(user));
 			} else {
-				isLoggedIn.set(false);
 				loggedInEmail = '';
-
-				cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
 			}
+
+			// these couldve been set in else branch, but now in logoutFunction.ts
+			// cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
+			// isLoggedIn.set(false);
+
+			// this commented out code can only be set in logoutFunction.ts, otherwise the login modal is 'continuously closed'
+			// showLoginModal.set(false);
 		});
 	}
 
@@ -127,7 +131,8 @@
 
 				redirectLogic(redirectUrlFromCookies);
 			} else {
-				let defaultRoute = $isPWA ? '/pwa' : '/';
+				let defaultRoute = data.isPWA ? '/pwa' : '/';
+				// let defaultRoute = $isPWA ? '/pwa' : '/';
 
 				cookeh.set('redirectUrlFromCookies', defaultRoute);
 
@@ -137,38 +142,40 @@
 	}
 </script>
 
-<main>
-	{#if !$isLoggedIn}
-		<login-card class="element" in:slide|global={{ duration: 400, easing: quintOut }}>
-			<GoogleLoginButton />
+{#if !$isLoggedIn}
+	<login-card in:slide|global={{ duration: 400, easing: quintOut }}>
+		<GoogleLoginButton />
+
+		<p class="py-3" />
+		<div class="hidden pwa:block">
+			<PhoneAuthSection />
+		</div>
+		<div class="pwa:hidden">
+			<MagicLinkSection />
+
 			<p class="py-3" />
-			<div class="hidden pwa:block">
-				<PhoneAuthSection />
-			</div>
-			<div class="pwa:hidden">
-				<MagicLinkSection />
+			<PhoneAuthSection />
+		</div>
+	</login-card>
+{:else}
+	<logout-card in:slide|global={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}>
+		<p>{loginWelcomeText}</p>
 
-				<p class="py-3" />
-				<PhoneAuthSection />
-			</div>
-		</login-card>
-	{:else}
-		<logout-card
-			class="element"
-			in:slide={{ duration: noTransition ? 0 : 1000, easing: elasticOut }}
-		>
-			<p>{loginWelcomeText}</p>
+		Redirecting in
+		<p class="p-5 text-5xl">{seconds}</p>
 
-			Redirecting in
-			<p class="p-5 text-5xl">{seconds}</p>
-
+		<!-- use:enhance={logoutFunction} -->
+		<form method="POST" use:enhance>
 			<button
+				on:click={logoutFunction}
+				formaction={'/logout'}
 				class="rounded-lg bg-rose-300 p-4 text-2xl font-medium text-white duration-200 ease-in hover:scale-110 hover:rounded-xl"
-				on:click={logoutFunction}>Logout</button
 			>
-		</logout-card>
-	{/if}
-</main>
+				Logout
+			</button>
+		</form>
+	</logout-card>
+{/if}
 
 <style lang="postcss">
 	login-card,

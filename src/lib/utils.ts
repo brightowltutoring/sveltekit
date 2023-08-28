@@ -1,4 +1,6 @@
 import { isSafari, isDarkMode } from '$lib/store/clientStore';
+import { page } from '$app/stores';
+
 import { onMount } from 'svelte';
 import { get } from 'svelte/store';
 import { is_client } from 'svelte/internal';
@@ -10,7 +12,8 @@ export const cookeh = {
 		name: string,
 		value: string | boolean,
 
-		{ seconds = 60 * 60 * 24, secure = !get(isSafari) } = {}
+		{ seconds = 60 * 60 * 24, secure = !get(page).data.isSafari } = {}
+		// { seconds = 60 * 60 * 24, secure = !get(isSafari) } = {}
 	) {
 		if (!is_client) return;
 		document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None${

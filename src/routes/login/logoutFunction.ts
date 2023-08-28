@@ -1,20 +1,20 @@
-import { isLoggedIn } from '$lib/store/clientStore';
+// import { isLoggedIn } from '$lib/store/clientStore';
 import { showLoginModal } from '$lib/store/modalsStore';
 import { cookeh } from '$lib/utils';
 
 export async function logoutFunction() {
-	showLoginModal.set(false);
-
 	const [{ auth }, { signOut }] = await Promise.all([
 		import('$lib/firebase'),
 		import('firebase/auth')
 	]);
 
+	// this now done server-side with formaction for '/logout'
+	// cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
+
+	console.log('logoutFunction hit');
+	showLoginModal.set(false);
+
 	signOut(auth)
-		// .then(() => goto(get(isPWA) ? '/pwa' : '/'))
-		.then(() => {
-			isLoggedIn.set(false);
-			cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
-		})
-		.catch((error) => console.log('logoutFunction failed', error));
+		.then(() => console.log('firebase user logged out'))
+		.catch((error) => console.log('firebase logout failed', error));
 }

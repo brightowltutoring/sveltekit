@@ -2,16 +2,20 @@
 	export let isAdmin = false;
 	import EnableJavascript from '$src/lib/EnableJavascript.svelte';
 	import { goto } from '$app/navigation';
-	import { isPWA } from '$lib/store/clientStore';
 	import { inDarkOutOriginal } from '$src/lib/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import { jitsiObject } from './JitsiObject';
+
+	// import { isPWA } from '$lib/store/clientStore';
+	import { page } from '$app/stores';
+	$: ({ data } = $page);
 
 	inDarkOutOriginal();
 
 	async function hangUpBtn() {
 		await api.dispose();
-		goto($isPWA ? '/pwa' : '/');
+		// goto($isPWA ? '/pwa' : '/');
+		goto(data.isPWA ? '/pwa' : '/');
 	}
 
 	let { api, par, domain, getOptions } = jitsiObject;

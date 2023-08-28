@@ -76,9 +76,8 @@
 	on:click={(e) => signinWithLinkAndStop(e)}
 	innerText={'Get Magic Link'}
 	bgColorTW={'bg-emerald-500'}
->
-	<IconEmail />
-</LoginButton>
+	icon={IconEmail}
+/>
 
 {#if $emailInputValue$ !== undefined}
 	<!-- {#if showInputField} -->
