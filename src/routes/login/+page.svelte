@@ -1,15 +1,12 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	export let noTransition = false;
-
 	import GoogleLoginButton from './GoogleLoginButton.svelte';
 	import MagicLinkSection from './MagicLinkSection.svelte';
 	import PhoneAuthSection from './PhoneAuthSection.svelte';
-
+	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	$: ({ data } = $page);
-	import { isLoggedIn /* isPWA  */ } from '$lib/store/clientStore';
+	import { isLoggedIn } from '$lib/store/clientStore';
 	import { showLoginModal } from '$lib/store/modalsStore';
 	import { cookeh } from '$lib/utils';
 	import { onDestroy, onMount } from 'svelte';
@@ -17,34 +14,80 @@
 	import { slide } from 'svelte/transition';
 	import { logoutFunction } from './logoutFunction';
 
-	// const isPWA: boolean = getContext('isPWA');
+	$: ({ data } = $page); // for data.isPWA
+
+	onMount(async () => await onMountFirebase());
+	onDestroy(() => clearInterval(redirectSetInterval));
+
+	let userRedirectUrl = '/plans';
 	let loggedInEmail: string | null = '';
 	let loggedInDisplayName: string | null = '';
-
 	let loginWelcomeText = 'Howdy!';
 	$: loginWelcomeText = `Hey ${loggedInDisplayName || loggedInEmail}`;
 
-	let redirectAfterLoginTimeOut: ReturnType<typeof setTimeout>;
 	let redirectSetInterval: ReturnType<typeof setInterval>;
-
-	let redirectTimeInMS = 3000;
-	let seconds = Math.trunc(redirectTimeInMS / 1000);
-
-	$: if ($isLoggedIn && !$showLoginModal && $page.route.id !== '/login') {
+	let seconds = 3;
+	$: console.log(seconds, 'seconds');
+	$: if (seconds === 0) {
+		showLoginModal.set(false);
 		clearInterval(redirectSetInterval);
-		clearTimeout(redirectAfterLoginTimeOut);
+		goto(userRedirectUrl);
+		// seconds = 3; // seemingly not needed
 	}
 
-	onMount(async () => {
-		await onMountFirebase();
-		// console.log('mounted like a 🗻');
-	});
-
-	onDestroy(() => {
+	$: if (!$showLoginModal && $page.route.id !== '/login') {
 		clearInterval(redirectSetInterval);
-		clearTimeout(redirectAfterLoginTimeOut);
-		// console.log('destroyed!');
-	});
+	}
+
+	function redirectLogic(USER_REDIRECT_URL = '/login') {
+		redirectSetInterval = setInterval(() => {
+			if (seconds > 0) seconds += -1;
+			if (seconds === 0) {
+				userRedirectUrl = USER_REDIRECT_URL;
+				clearInterval(redirectSetInterval);
+			}
+		}, 1000);
+	}
+
+	async function showLoginModalRedirect(userEmail: string | null) {
+		let redirectUrlFromCookies = cookeh.get('redirectUrlFromCookies');
+
+		if (redirectUrlFromCookies) {
+			redirectLogic(redirectUrlFromCookies);
+		} else {
+			console.log('getdocs from firestore');
+			const [{ app }, { getFirestore, collection, getDocs }] = await Promise.all([
+				import('$lib/firebase'),
+				import('firebase/firestore/lite')
+			]);
+
+			// 'email' refers to a custom database
+			const querySnapshotDocs = (await getDocs(collection(getFirestore(app), 'email'))).docs;
+			let redirectUrlFromFireBase;
+			for (const doc of querySnapshotDocs) {
+				if (userEmail === doc.id) {
+					redirectUrlFromFireBase = doc.data().redirectUrl;
+					// redirectUrlFromCookies = doc.data().redirectUrl;
+
+					break;
+				}
+			}
+
+			if (redirectUrlFromFireBase) {
+				// cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies);
+				cookeh.set('redirectUrlFromCookies', redirectUrlFromFireBase);
+
+				// redirectLogic(redirectUrlFromCookies);
+				redirectLogic(redirectUrlFromFireBase);
+			} else {
+				let defaultRoute = data.isPWA ? '/pwa' : '/';
+
+				cookeh.set('redirectUrlFromCookies', defaultRoute);
+
+				redirectLogic(defaultRoute);
+			}
+		}
+	}
 
 	async function onMountFirebase() {
 		const [{ auth }, { isSignInWithEmailLink, signInWithEmailLink, onAuthStateChanged }] =
@@ -71,9 +114,10 @@
 			if (user) {
 				loggedInDisplayName = user.displayName;
 				loggedInEmail = user.email;
-				showLoginModalRedirect(loggedInEmail);
 
 				isLoggedIn.set(true);
+
+				showLoginModalRedirect(loggedInEmail);
 				cookeh.set('haventLoggedOut', $isLoggedIn);
 
 				// cookeh.set('haventLoggedOut', Boolean(user));
@@ -90,55 +134,9 @@
 		});
 	}
 
-	function redirectLogic(userRedirectUrl = '/login') {
-		redirectSetInterval = setInterval(() => {
-			if (seconds > 0) seconds += -1;
-		}, 1000);
-
-		redirectAfterLoginTimeOut = setTimeout(() => {
-			clearInterval(redirectSetInterval);
-			clearTimeout(redirectAfterLoginTimeOut);
-
-			showLoginModal.set(false);
-			goto(userRedirectUrl);
-		}, redirectTimeInMS);
-	}
-
-	async function showLoginModalRedirect(userEmail: string | null) {
-		let redirectUrlFromCookies = cookeh.get('redirectUrlFromCookies');
-
-		if (redirectUrlFromCookies) {
-			redirectLogic(redirectUrlFromCookies);
-		} else {
-			console.log('getdocs from firestore');
-			const [{ app }, { getFirestore, collection, getDocs }] = await Promise.all([
-				import('$lib/firebase'),
-				import('firebase/firestore/lite')
-			]);
-
-			// 'email' refers to a custom database
-			const querySnapshotDocs = (await getDocs(collection(getFirestore(app), 'email'))).docs;
-			for (const doc of querySnapshotDocs) {
-				if (userEmail === doc.id) {
-					redirectUrlFromCookies = doc.data().redirectUrl;
-
-					break;
-				}
-			}
-
-			if (redirectUrlFromCookies) {
-				cookeh.set('redirectUrlFromCookies', redirectUrlFromCookies);
-
-				redirectLogic(redirectUrlFromCookies);
-			} else {
-				let defaultRoute = data.isPWA ? '/pwa' : '/';
-				// let defaultRoute = $isPWA ? '/pwa' : '/';
-
-				cookeh.set('redirectUrlFromCookies', defaultRoute);
-
-				redirectLogic(defaultRoute);
-			}
-		}
+	function handleLogout() {
+		clearInterval(redirectSetInterval); // this not working on  '/login'
+		logoutFunction();
 	}
 </script>
 
@@ -165,7 +163,7 @@
 		<p class="p-5 text-5xl">{seconds}</p>
 
 		<!-- on:click={logoutFunction} -->
-		<form method="POST" use:enhance={logoutFunction}>
+		<form method="POST" use:enhance={handleLogout}>
 			<button
 				formaction={'/logout'}
 				class="rounded-lg bg-rose-300 p-4 text-2xl font-medium text-white duration-200 ease-in hover:scale-110 hover:rounded-xl"

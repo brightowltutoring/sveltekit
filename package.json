@@ -49,6 +49,7 @@
 		"katex": "^0.16.8",
 		"mathjax": "^3.2.2",
 		"mdsvex": "^0.11.0",
+		"postgres": "^3.3.5",
 		"rehype-katex-svelte": "^1.2.0",
 		"stripe": "^12.18.0",
 		"svelte-katex": "^0.1.2",

@@ -1,4 +1,4 @@
-// http://localhost:5173/stripe/api/?answer_2=1.5hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true
+// http://localhost:5173/stripe/api/?answer_2=2.5hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=test@tube.com&answer_3=true
 
 // http://localhost:5173/stripe/?assigned_to=ThinkSolve&event_type_uuid=b5ac9745-94c6-4f78-b7f0-e138a082ea5b&event_type_name=Classico%20&event_start_time=2023-08-17T16%3A30%3A00-04%3A00&event_end_time=2023-08-17T17%3A45%3A00-04%3A00&invitee_uuid=d32c1091-ad33-4eb3-94b8-27de95b7581d&invitee_full_name=testy&invitee_email=test%40test.com&answer_2=15%20hr&answer_3=Yes%2C%20please%21
 
@@ -13,7 +13,7 @@ const stripe = new Stripe(STRIPE_KEY, {
 export async function GET({ url }) {
 	// try {
 	const { invitee_email, event_type_name, answer_1, answer_2, answer_3 } = Object.fromEntries(
-		url.searchParams.entries()
+		url.searchParams
 	);
 
 	const dollar_hourly_rate = 50;
@@ -99,8 +99,9 @@ export async function GET({ url }) {
 
 	const session = await stripe.checkout.sessions.create(sessionObject as any);
 
-	console.log('session.url', session.url);
+	console.log('session.url', session.url); // this could be stored in a user database and retrieved later
 	throw redirect(308, session.url as string);
+
 	// } catch (error) {
 	// 	throw redirect(308, '/plans');
 	// }

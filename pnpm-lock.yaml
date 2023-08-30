@@ -23,6 +23,9 @@ dependencies:
   mdsvex:
     specifier: ^0.11.0
     version: 0.11.0(svelte@4.2.0)
+  postgres:
+    specifier: ^3.3.5
+    version: 3.3.5
   rehype-katex-svelte:
     specifier: ^1.2.0
     version: 1.2.0
@@ -6291,6 +6294,10 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /postgres@3.3.5:
+    resolution: {integrity: sha512-+JD93VELV9gHkqpV5gdL5/70HdGtEw4/XE1S4BC8f1mcPmdib3K5XsKVbnR1XcAyC41zOnifJ+9YRKxdIsXiUw==}
+    dev: false
 
   /prebuild-install@7.1.1:
     resolution: {integrity: sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==}
