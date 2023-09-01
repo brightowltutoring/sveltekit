@@ -18,6 +18,7 @@ export async function load(event) {
 		isPWA,
 		seoString,
 		haventLoggedOut,
-		url
+		url,
+		user: event.locals.user
 	};
 }

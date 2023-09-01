@@ -20,8 +20,6 @@
 	function prefersDarkMode() {
 		if (sessionStorage.getItem('isDarkMode') === 'true') return true;
 		if (sessionStorage.getItem('isDarkMode') === 'false') return false;
-
-		// if sessionStorage doesn't exist, then defaults to matchMedia logic
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
 		return false;
 	}

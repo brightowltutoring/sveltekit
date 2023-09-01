@@ -6,9 +6,11 @@
 	import Footer from './(rootLayout)/Footer.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import './(rootLayout)/styles.css';
-	import { browser } from '$app/environment';
 
 	export let data;
+
+	console.log('user', data.user);
+
 	$: seoString = data.seoString;
 	$: isLoggedIn.set(data.haventLoggedOut === 'true');
 	isSafari.set(data.isSafari === true);

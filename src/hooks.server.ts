@@ -1,31 +1,14 @@
-// import { redirect } from '@sveltejs/kit';
+import { sql } from '$lib/server/database';
 
-// export async function handle({ event, resolve }) {
-// 	// event.locals.haventLoggedOut = Boolean(event.cookies.get('haventLoggedOut'));
+export async function handle({ event, resolve }) {
+	const [User] = await sql`
+			SELECT *
+			FROM "User"
+            WHERE "User".id = 1234
+		`;
 
-// 	let response = await resolve(event);
+	event.locals.user = User;
+	let response = await resolve(event);
 
-// 	return response;
-// }
-
-// import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
-// import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-
-// export async function handle({ event, resolve }) {
-// 	event.locals.haventLoggedOut = Boolean(event.cookies.get('haventLoggedOut'));
-
-// 	event.locals.supabase = createSupabaseServerClient({
-// 		supabaseUrl: PUBLIC_SUPABASE_URL,
-// 		supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
-// 		event
-// 	});
-
-// 	event.locals.getSession = async () => await event.locals.supabase.auth.getSession().data.session;
-
-// 	let response = await resolve(event, {
-// 		filterSerializedResponseHeaders(name) {
-// 			return name === 'content-range';
-// 		}
-// 	});
-// 	return response;
-// }
+	return response;
+}
