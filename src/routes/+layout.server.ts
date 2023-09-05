@@ -1,7 +1,7 @@
 import { getSeoString } from '$src/lib/store/routesStore.js';
 import { isPwaFromCookieOrUrl, userAgentFromRequestHeaders } from '$lib/utils.server';
 
-export const prerender = true;
+// export const prerender = true;
 
 export async function load(event) {
 	// const haventLoggedOut = event.locals.haventLoggedOut;
