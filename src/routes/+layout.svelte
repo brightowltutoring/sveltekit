@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { scrollY } from '$lib/store/scrollStore';
-	import { isIOS, isLoggedIn, isPWA, isSafari } from '$lib/store/clientStore';
+	import { isLoggedIn, isSafari } from '$lib/store/clientStore';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import Footer from './(rootLayout)/Footer.svelte';
+	// import Navbar from './(rootLayout)/Navbar-experimental.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
 	import './(rootLayout)/styles.css';
 

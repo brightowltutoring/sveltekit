@@ -15,6 +15,7 @@ const stripe = new Stripe(STRIPE_KEY, {
 	apiVersion: '2022-11-15'
 });
 
+export const prerender = false;
 export async function load({ url }) {
 	// const { invitee_full_name, invitee_email, event_type_name, answer_1, answer_2, answer_3 } =
 	// 	Object.fromEntries(url.searchParams.entries());

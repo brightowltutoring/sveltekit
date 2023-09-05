@@ -3,8 +3,7 @@ import {
 	/*  submitHomework as submitHomeworkAction */
 } from './submitHomework.server';
 
-// export const prerender = false;
-
+export const prerender = false;
 export const actions = {
 	default: (event) => submitHomeworkAction(event)
 };
