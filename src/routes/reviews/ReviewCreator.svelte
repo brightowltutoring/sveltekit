@@ -34,13 +34,20 @@
 			<!-- {#each Array(5) as _} -->
 			{#each { length: 5 } as _}
 				<!-- <InView single once onview={hydrateStar}> -->
+
 				<img
+					style={`filter:hue-rotate(${$sineSpring}turn)`}
+					class="h-10 w-10 transition-opacity duration-300 ease-in hover:scale-125"
+					src="/star.webp"
+					alt="star"
+				/>
+				<!-- <img
 					use:useInView={{ onview: (target) => hydrateStar(target) }}
 					style={`filter:hue-rotate(${$sineSpring}turn)`}
 					class="h-10 w-10 opacity-0 transition-opacity duration-300 ease-in hover:scale-125"
 					src=""
 					alt="star"
-				/>
+				/> -->
 				<!-- </InView> -->
 			{/each}
 		</div>
