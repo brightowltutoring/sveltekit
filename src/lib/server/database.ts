@@ -1,3 +1,5 @@
+// // METHOD 1:
+
 // import { POSTGRES_SUPABASE_URL } from '$env/static/private';
 // import postgres from 'postgres';
 
@@ -6,21 +8,24 @@
 // 	connect_timeout: 10000
 // });
 
-import { POSTGRES_SUPABASE_URL } from '$env/static/private';
-import pkg from 'pg';
-const { Pool } = pkg;
+// // METHOD 2:
+// import { POSTGRES_SUPABASE_URL } from '$env/static/private';
+// import pkg from 'pg';
+// const { Pool } = pkg;
 
-const pooledConnection = new Pool({
-	connectionString: POSTGRES_SUPABASE_URL
-});
+// const pooledConnection = new Pool({
+// 	connectionString: POSTGRES_SUPABASE_URL
+// });
 
-export const db = {
-	query: async function (text: string, params: any[] = []) {
-		const res = await pooledConnection.query(text, params);
-		return res;
-		// return res.rows;
-	}
-};
+// export const db = {
+// 	query: async (text: string, params: any[] = []) => {
+// 		const res = await pooledConnection.query(text, params);
+// 		return res;
+// 		// return res.rows;
+// 	}
+// };
+
+// // METHOD 3:
 
 // import pkg from 'pg';
 // const { Client } = pkg;
