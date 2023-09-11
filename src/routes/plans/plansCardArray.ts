@@ -22,6 +22,7 @@ export const plansCardArray = [
 			'Classic 1-on-1 session with smooth screen-sharing. Digital session notes available as a +1hr premium.'
 	},
 	{
+		// payNowUrl: 'https://cal.com/thinksolveio/classico?layout=week_view',
 		payNowUrl: payUrl('mock', 'stripe', color.blue, '&a2=2'),
 		payLaterUrl: payUrl('mock', 'invoice', color.blue, '&a1=2'),
 		buttonColor: buttonColor[2],

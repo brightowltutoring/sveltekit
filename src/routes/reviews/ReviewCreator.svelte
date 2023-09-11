@@ -2,28 +2,29 @@
 	export let title = 'Great physics tutor!!';
 	export let name = 'Thomas Finn';
 	export let date = '2022-06-08';
-
-	import { useInView } from '$lib/utils';
 	import { isDarkMode } from '$lib/store/clientStore';
 	import { scrollY } from '$lib/store/scrollStore';
 	import { spring } from 'svelte/motion';
-	import InView from '$src/lib/Wrappers/InView.svelte';
 
-	let sineSpring = spring(0, { stiffness: 0.1, damping: 0.25 });
+	const ORIGINAL_SPRING_VALUE = 0;
+	const sineSpring = spring(ORIGINAL_SPRING_VALUE);
+	$: $scrollY, sineSpringSetter();
 
-	$: if ($isDarkMode) {
-		sineSpring.set(1 - 0.07 * Math.sin(30 * $scrollY));
-	} else {
-		sineSpring.set(0);
+	let timeout: NodeJS.Timeout;
+	function sineSpringSetter() {
+		if (timeout) clearTimeout(timeout);
+		if (!$isDarkMode) return;
+
+		sineSpring.set(0.3 * Math.sin($scrollY));
+
+		timeout = setTimeout(() => {
+			sineSpring.set(ORIGINAL_SPRING_VALUE);
+		}, 1500);
 	}
 
-	function hydrateStar(target: Element) {
-		if (target instanceof HTMLImageElement) {
-			target.src = '/star.webp';
-			target.classList.remove('opacity-0');
-			console.log('💫');
-		}
-	}
+	// $: if ($isDarkMode) {
+	// 	sineSpring.set(Math.sin($scrollY), { soft: 1 });
+	// }
 </script>
 
 <review-card class="prose relative block dark:prose-invert md:pb-[5vw]">
@@ -31,24 +32,14 @@
 		<h1>{title}</h1>
 
 		<div class="flex flex-row">
-			<!-- {#each Array(5) as _} -->
-			{#each { length: 5 } as _}
-				<!-- <InView single once onview={hydrateStar}> -->
-
+			{#each Array(5) as _}
 				<img
 					style={`filter:hue-rotate(${$sineSpring}turn)`}
-					class="h-10 w-10 transition-opacity duration-300 ease-in hover:scale-125"
+					class="flickerWhenDarkMode h-10 w-10 transition-transform duration-200 ease-in hover:scale-110"
 					src="/star.webp"
 					alt="star"
 				/>
-				<!-- <img
-					use:useInView={{ onview: (target) => hydrateStar(target) }}
-					style={`filter:hue-rotate(${$sineSpring}turn)`}
-					class="h-10 w-10 opacity-0 transition-opacity duration-300 ease-in hover:scale-125"
-					src=""
-					alt="star"
-				/> -->
-				<!-- </InView> -->
+				<!-- <Star /> -->
 			{/each}
 		</div>
 
@@ -63,3 +54,14 @@
 		</div>
 	</review-card-contents>
 </review-card>
+
+<style>
+	:global(html.dark-mode) .flickerWhenDarkMode {
+		animation: flickerWhenDarkMode 1.5s infinite;
+	}
+	@keyframes flickerWhenDarkMode {
+		50% {
+			filter: hue-rotate(0.06turn);
+		}
+	}
+</style>

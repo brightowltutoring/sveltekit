@@ -44,6 +44,9 @@
 				<IconSun />
 			{:else}
 				<IconMoon />
+				<!-- attrs={{
+						'aria-label': 'Moony'
+					}} -->
 			{/if}
 		</button>
 	{/key}

@@ -63,7 +63,7 @@
 
 		<Reviews class="hidden sm:block" />
 
-		<HorizontalScrollReviews class="block sm:hidden" />
+		<HorizontalScrollReviews class="block sm:hidden " />
 	</section>
 </div>
 

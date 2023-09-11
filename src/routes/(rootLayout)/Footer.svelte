@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { elasticOut } from 'svelte/easing';
 
+	let emailText: HTMLElement;
 	let contactLink: HTMLElement;
 	let contactLinkClicked = false;
 	let contactLinkTimeout: ReturnType<typeof setTimeout>;
@@ -12,11 +13,16 @@
 
 	//This could also be done without 'let contactLink' and with 'e.target.id', but I believe this way scopes everything to this component, whereas the vanilla way could have a id name collision
 	function handleContactLinkClicked(e: MouseEvent | TouchEvent) {
+		// if (contactLinkTimeout) clearTimeout(contactLinkTimeout);
+
 		if (e.target === contactLink) {
 			contactLinkClicked = true;
 			contactLinkTimeout = setTimeout(() => {
 				contactLinkClicked = false;
-			}, 6000);
+			}, 2000);
+		} else if (e.target === emailText) {
+			contactLinkClicked = true;
+			clearTimeout(contactLinkTimeout);
 		} else {
 			contactLinkClicked = false;
 			clearTimeout(contactLinkTimeout);
@@ -44,6 +50,9 @@
 		class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl background-animate"
 	>
 		<li>Email:</li>
-		<li class="p-5">thinksolve.io@gmail.com</li>
+		<!-- <li bind:this={emailText} class="p-5">thinksolve.io@gmail.com</li> -->
+		<li class="p-5">
+			<a bind:this={emailText} href="mailto:thinksolve.io@gmail.comm"> thinksolve.io@gmail.com </a>
+		</li>
 	</ul>
 </Modal>

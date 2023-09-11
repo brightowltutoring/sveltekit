@@ -122,10 +122,10 @@
 			Advanced Functions • Complex Numbers • Linear Algebra • Probability and Statistics
 			&nbsp;&nbsp;<span class="font-Poppins font-bold">PHYSICS</span>
 			&nbsp;Kinematics • Mechanics • Thermodynamics • Fluids • Electricity & Magnetism • Circuit Analysis
-			• Waves • Optics • Atomic & Quantum Physics • Special Relativity &nbsp;&nbsp;<span
-				class="font-Poppins font-bold">SPANISH</span
-			>
-			&nbsp; Pronunciation • Grammatical Rules • Practical Examples
+			• Waves • Optics • Atomic & Quantum Physics • Special Relativity &nbsp;&nbsp;
+
+			<!-- <span class="font-Poppins font-bold">SPANISH</span>
+				&nbsp; Pronunciation • Grammatical Rules • Practical Examples -->
 
 			<br /><br />
 			<b>Levels:</b> IB / AP / OSSD (9-12) / College & University

@@ -6,6 +6,7 @@
 
 	import { onMount } from 'svelte';
 	import { elasticOut } from 'svelte/easing';
+	import { OAuthCredential } from 'firebase/auth';
 
 	export let data;
 	$: sessionId = data.sessionId;

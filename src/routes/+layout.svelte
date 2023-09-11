@@ -6,7 +6,7 @@
 	import Footer from './(rootLayout)/Footer.svelte';
 	// import Navbar from './(rootLayout)/Navbar-experimental.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
-	import './(rootLayout)/styles.css';
+	import '../styles.css';
 
 	export let data;
 
