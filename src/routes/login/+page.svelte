@@ -27,7 +27,7 @@
 
 	let redirectSetInterval: ReturnType<typeof setInterval>;
 	let seconds = 3;
-	$: console.log(seconds, 'seconds');
+	// $: console.log(seconds, 'seconds');
 	$: if (seconds === 0) {
 		showLoginModal.set(false);
 		clearInterval(redirectSetInterval);

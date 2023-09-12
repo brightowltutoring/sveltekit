@@ -16,7 +16,6 @@
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20230904.0",
 		"@sveltejs/adapter-auto": "2.1.0",
-		"@sveltejs/adapter-cloudflare": "^2.3.3",
 		"@sveltejs/kit": "^1.24.1",
 		"@tailwindcss/typography": "^0.5.10",
 		"@types/dropzone": "^5.7.4",
@@ -48,16 +47,17 @@
 		"katex": "^0.16.8",
 		"mathjax": "^3.2.2",
 		"mdsvex": "^0.11.0",
-		"pg": "^8.11.3",
-		"pg-pool": "^3.6.1",
-		"postgres": "^3.3.5",
 		"rehype-katex-svelte": "^1.2.0",
 		"stripe": "^12.18.0",
 		"svelte-katex": "^0.1.2",
 		"tailwind-scrollbar-hide": "^1.1.7",
-		"ua-parser-js": "^1.0.36",
-		"wrangler": "^3.7.0"
+		"ua-parser-js": "^1.0.36"
 	},
+	"//": [
+		"pg",
+		"pg-pool",
+		"postgres"
+	],
 	"description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
 	"main": "mdsvex.config.js",
 	"repository": {

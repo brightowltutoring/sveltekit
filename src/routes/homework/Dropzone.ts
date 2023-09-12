@@ -1,4 +1,4 @@
-import Dropzone from 'dropzone';
+import Dropzone, { type DropzoneFile, type DropzoneOptions } from 'dropzone';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
 import { showHomeworkModal } from '$lib/store/modalsStore';
 import { get, writable } from 'svelte/store';
@@ -6,53 +6,62 @@ import { get, writable } from 'svelte/store';
 const popUpOnceBoolean$ = writable(false);
 const submitOnce$ = writable(false);
 
-let dropzone: any;
+let dropzone: Dropzone;
+const dropzoneOptions: DropzoneOptions = {
+	url: PUBLIC_UPLOAD_ENDPOINT,
+	acceptedFiles: '.heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc'
+};
 
 export async function hydrateDropzoneDomEls(target: Element | HTMLElement) {
-	console.log('drop it like its 🌶️');
+	console.log('drip drop 💧');
 
-	dropzone = new Dropzone(target as HTMLElement, {
-		url: PUBLIC_UPLOAD_ENDPOINT,
-		acceptedFiles: '.heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc'
-	});
+	dropzone = new Dropzone(target as HTMLElement, dropzoneOptions);
 
-	dropzoneHandleErroredUploads();
+	handleErroredUploads(dropzone);
 }
 
 // Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
 // Tested use cases: internet cuts out mid-upload, and internet off when upload started.
-function dropzoneHandleErroredUploads() {
-	let filesToRetry: Array<any> = [];
-	dropzone.on('error', (file: any) => file.accepted && filesToRetry.push(file));
 
-	dropzone.on('queuecomplete', () => {
-		setTimeout(() => showHomeworkModal.set(false), 1000);
+let queuecompleteTimeout: NodeJS.Timeout;
+
+function handleErroredUploads(DROPZONE_INSTANCE: Dropzone) {
+	let filesToRetry: Array<any> = [];
+	DROPZONE_INSTANCE.on('error', (file: DropzoneFile) => file.accepted && filesToRetry.push(file));
+
+	DROPZONE_INSTANCE.on('queuecomplete', () => {
+		if (queuecompleteTimeout) clearTimeout(queuecompleteTimeout);
+		queuecompleteTimeout = setTimeout(() => showHomeworkModal.set(false), 1000);
 	});
 
 	window?.addEventListener('online', () => {
-		if (filesToRetry.length > 0) {
-			for (const file of filesToRetry) {
-				dropzone.processFile(file);
+		if (!(filesToRetry.length > 0)) return;
 
-				// removes error mark css after the files have been processed
-				file.previewElement.querySelector('.dz-error-mark').style.visibility = 'hidden';
-				// removes error message css after the files have been processed
-				file.previewElement.querySelector('.dz-error-message').style.visibility = 'hidden';
-			}
+		for (const file of filesToRetry) {
+			DROPZONE_INSTANCE.processFile(file);
 
-			// reset collected files array when done
-			filesToRetry.length == 0;
+			// removes error mark css after the files have been processed
+			file.previewElement.querySelector('.dz-error-mark').style.visibility = 'hidden';
+			// removes error message css after the files have been processed
+			file.previewElement.querySelector('.dz-error-message').style.visibility = 'hidden';
 		}
+
+		// reset collected files array when done
+		filesToRetry.length == 0;
 	});
 }
+
+let dropzonePopUpOnceTimeout: NodeJS.Timeout;
 
 export function dropzonePopUpOnce() {
 	if (get(popUpOnceBoolean$) === true) return;
 
 	popUpOnceBoolean$.set(true);
-	setTimeout(dispatchClickOnDropzone, 75);
+
+	dropzonePopUpOnceTimeout = setTimeout(dispatchClickOnDropzone, 75);
 
 	function dispatchClickOnDropzone() {
+		if (dropzonePopUpOnceTimeout) clearTimeout(dropzonePopUpOnceTimeout);
 		return document.querySelector('.dropzone')!.dispatchEvent(new CustomEvent('click'));
 	}
 }

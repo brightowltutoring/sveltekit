@@ -19,8 +19,6 @@ export function userAgentFromRequestHeaders(headers: Headers) {
 	const userAgent = String(headers.get('user-agent'));
 	const parser = new UAParser(userAgent);
 
-	// console.log('parser.getResult()',parser.getResult())
-
 	const isMobile = parser.getDevice().type === 'mobile';
 	const isIOS = parser.getOS().name?.toLowerCase() === 'ios';
 	const browser = parser.getBrowser().name?.toLowerCase();

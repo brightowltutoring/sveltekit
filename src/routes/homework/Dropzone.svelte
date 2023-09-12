@@ -17,8 +17,10 @@
 
 	const updateIframeSrc = async () => (iframeSrc = await getIframeSrcAndPostDummyOnce());
 
-	$: $showHomeworkModal && dropzonePopUpOnce();
-	$: $showHomeworkModal && updateIframeSrc();
+	$: $showHomeworkModal && (dropzonePopUpOnce(), updateIframeSrc());
+
+	// $: $showHomeworkModal && dropzonePopUpOnce();
+	// $: $showHomeworkModal && updateIframeSrc();
 </script>
 
 <!-- The one-time hydration of this iframe submits a dummy file to google drive, with the goal to circumvent cold-start of google drive cloud function -->

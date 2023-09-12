@@ -9,8 +9,7 @@
 	import '../styles.css';
 
 	export let data;
-
-	console.log('user', data.user);
+	// console.log('user', data.user);
 
 	$: seoString = data.seoString;
 	$: isLoggedIn.set(data.haventLoggedOut === 'true');

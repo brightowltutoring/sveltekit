@@ -4,8 +4,6 @@ import { isPwaFromCookieOrUrl, userAgentFromRequestHeaders } from '$lib/utils.se
 // export const prerender = true;
 
 export async function load(event) {
-	// const haventLoggedOut = event.locals.haventLoggedOut;
-
 	const url = event.request.url;
 	const haventLoggedOut = event.cookies.get('haventLoggedOut');
 
@@ -20,7 +18,7 @@ export async function load(event) {
 		isPWA,
 		seoString,
 		haventLoggedOut,
-		url,
-		user: event.locals.user
+		url
+		// user: event.locals.user
 	};
 }
