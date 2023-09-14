@@ -1,4 +1,4 @@
-// http://localhost:5173/stripe/api/?answer_2=1.99hr&invitee_full_name=josh&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=test@tube.com&answer_3=false
+// http://localhost:5173/stripe/api/?answer_2=13hr&invitee_full_name=josh&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=test@tube.com&answer_3=false
 
 // http://localhost:5173/stripe/?assigned_to=ThinkSolve&event_type_uuid=b5ac9745-94c6-4f78-b7f0-e138a082ea5b&event_type_name=Classico%20&event_start_time=2023-08-17T16%3A30%3A00-04%3A00&event_end_time=2023-08-17T17%3A45%3A00-04%3A00&invitee_uuid=d32c1091-ad33-4eb3-94b8-27de95b7581d&invitee_full_name=testy&invitee_email=test%40test.com&answer_2=15%20hr&answer_3=Yes%2C%20please%21
 

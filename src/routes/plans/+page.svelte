@@ -8,7 +8,7 @@
 
 	import { elasticOut } from 'svelte/easing';
 
-	$: stripeUrl = $page.data.stripeUrl;
+	$: stripeUrl = $page.data?.stripeUrl;
 </script>
 
 {#if stripeUrl}
