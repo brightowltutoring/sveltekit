@@ -1,4 +1,4 @@
-// http://localhost:5173/stripe/api/?answer_2=2.5hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=test@tube.com&answer_3=true
+// http://localhost:5173/stripe/api/?answer_2=1.99hr&invitee_full_name=josh&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=test@tube.com&answer_3=false
 
 // http://localhost:5173/stripe/?assigned_to=ThinkSolve&event_type_uuid=b5ac9745-94c6-4f78-b7f0-e138a082ea5b&event_type_name=Classico%20&event_start_time=2023-08-17T16%3A30%3A00-04%3A00&event_end_time=2023-08-17T17%3A45%3A00-04%3A00&invitee_uuid=d32c1091-ad33-4eb3-94b8-27de95b7581d&invitee_full_name=testy&invitee_email=test%40test.com&answer_2=15%20hr&answer_3=Yes%2C%20please%21
 
@@ -12,6 +12,7 @@ const stripe = new Stripe(STRIPE_KEY, {
 
 export async function GET({ url }) {
 	// try {
+
 	const { invitee_email, event_type_name, answer_1, answer_2, answer_3 } = Object.fromEntries(
 		url.searchParams
 	);
@@ -55,11 +56,11 @@ export async function GET({ url }) {
 					product_data: {
 						name: undefined as string | undefined,
 						description:
-							`All prices calculated using a rate of $${dollar_minute_rate_2dec} per minute (i.e. $${dollar_hourly_rate_2dec} per hour); quantity ("Qty") refers to time in minutes. 
-						
-						Re-scheduling OR cancellation with refund possible with at least 24 hours notice. 
+							`All prices calculated using a rate of $${dollar_minute_rate_2dec} per minute (i.e. $${dollar_hourly_rate_2dec} per hour); quantity ("Qty") refers to time in minutes.
+
+						Re-scheduling OR cancellation with refund possible with at least 24 hours notice.
 						Cancellation without refund may result if: (1) student arrives late in excess of 15 minutes; (2) homework is not submitted within 12 hours of booking.
-						
+
 						` as string | undefined
 					}
 				}
@@ -99,10 +100,38 @@ export async function GET({ url }) {
 
 	const session = await stripe.checkout.sessions.create(sessionObject as any);
 
-	console.log('session.url', session.url); // this could be stored in a user database and retrieved later
-	throw redirect(308, session.url as string);
+	// cookies.set('stripeSessionFullUrl', session.url as string)
+
+	// setting cookie here doesnt persist, so setting and redirecting from page.server.ts of '/plans' instead
+
+	const [stripeUrlWithoutHash, stripeHash] = (session.url as string).split('#');
+
+	// let stripeUrl = stripeUrlWithoutHash + '#' + stripeHash;
+
+	throw redirect(
+		308,
+		`/plans?stripeUrlWithoutHash=${stripeUrlWithoutHash}&stripeHash=${stripeHash}`
+	);
+
+	// throw redirect(308, session.url as string);
+	// throw redirect(308, '/');
 
 	// } catch (error) {
 	// 	throw redirect(308, '/plans');
 	// }
 }
+
+// export const GET = async ({ cookies, request }) => {
+// 	cookies.set('stripeUrl3', 'gato', { secure: false });
+
+// 	const status = 200; // 308
+// 	const referringUrl = '/plans';
+// 	// const referringUrl = request.headers.get('Referer') as string;
+// 	return new Response(JSON.stringify({ success: true, message: '🍌' }), {
+// 		status,
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 			location: referringUrl
+// 		}
+// 	});
+// };

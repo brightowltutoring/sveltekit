@@ -19,6 +19,7 @@ export async function load(event) {
 		seoString,
 		haventLoggedOut,
 		url
+
 		// user: event.locals.user
 	};
 }

@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { scrollY } from '$lib/store/scrollStore';
 	import { isLoggedIn, isSafari } from '$lib/store/clientStore';
-	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
+	import { cookeh, debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import Footer from './(rootLayout)/Footer.svelte';
 	// import Navbar from './(rootLayout)/Navbar-experimental.svelte';
 	import Navbar from './(rootLayout)/Navbar.svelte';
@@ -10,6 +10,7 @@
 
 	export let data;
 	// console.log('user', data.user);
+	// $: console.log('data.stripeCheckoutUrl', data.stripeCheckoutUrl);
 
 	$: seoString = data.seoString;
 	$: isLoggedIn.set(data.haventLoggedOut === 'true');

@@ -3,6 +3,7 @@ import { sendDummyTextFileToGoogleDrive } from '$src/lib/utils.js';
 
 export async function POST({ request, url }) {
 	const referringUrl = request.headers.get('Referer') as string;
+
 	const dynamicStatus = parseInt(url.searchParams.get('status') as string);
 
 	// console.log('sveltekit POST function hit at "/api/submit-homework/+server.ts" ');
