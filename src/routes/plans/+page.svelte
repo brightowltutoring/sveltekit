@@ -7,8 +7,14 @@
 	import { plansCardArray } from './plansCardArray';
 
 	import { elasticOut } from 'svelte/easing';
+	// import { invalidate } from '$app/navigation';
+	// import { browser } from '$app/environment';
 
-	$: stripeUrl = $page.data?.stripeUrl;
+	// browser && invalidate('load:reset');
+	$: ({
+		data: { stripeUrl }
+	} = $page);
+	// $: stripeUrl = $page.data.stripeUrl;
 </script>
 
 {#if stripeUrl}

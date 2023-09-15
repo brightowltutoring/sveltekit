@@ -1,21 +1,21 @@
-// http://localhost:5173/stripe/api/?answer_2=13hr&invitee_full_name=joe&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=test@tube.com&answer_3=false
-
-// http://localhost:5173/stripe/?assigned_to=ThinkSolve&event_type_uuid=b5ac9745-94c6-4f78-b7f0-e138a082ea5b&event_type_name=Classico%20&event_start_time=2023-08-17T16%3A30%3A00-04%3A00&event_end_time=2023-08-17T17%3A45%3A00-04%3A00&invitee_uuid=d32c1091-ad33-4eb3-94b8-27de95b7581d&invitee_full_name=testy&invitee_email=test%40test.com&answer_2=15%20hr&answer_3=Yes%2C%20please%21
-
 import { STRIPE_KEY } from '$env/static/private';
-import { redirect } from '@sveltejs/kit';
-
 import Stripe from 'stripe';
 const stripe = new Stripe(STRIPE_KEY, {
 	apiVersion: '2022-11-15'
 });
 
-export async function GET({ url, cookies }) {
-	// try {
-
+export async function getStripeCheckoutUrl(url: URL) {
 	const { invitee_email, event_type_name, answer_1, answer_2, answer_3 } = Object.fromEntries(
 		url.searchParams
 	);
+
+	if (!event_type_name) return;
+
+	// const { STRIPE_KEY } = await import('$env/static/private');
+	// const { Stripe } = await import('stripe');
+	// const stripe = new Stripe(STRIPE_KEY, {
+	// 	apiVersion: '2022-11-15'
+	// });
 
 	const dollar_hourly_rate = 50;
 	const dollar_hourly_rate_2dec = Math.round(dollar_hourly_rate).toFixed(2);
@@ -100,38 +100,7 @@ export async function GET({ url, cookies }) {
 
 	const session = await stripe.checkout.sessions.create(sessionObject as any);
 
-	// not working in local prod, test on deployment ...otherwise delete if not working
+	const sessionUrl = session.url as string;
 
-	// setting cookie here doesnt persist, so setting and redirecting from page.server.ts of '/plans' instead
-
-	const [stripeUrlWithoutHash, stripeHash] = (session.url as string).split('#');
-
-	// let stripeUrl = stripeUrlWithoutHash + '#' + stripeHash;
-
-	throw redirect(
-		308,
-		`/plans?stripeUrlWithoutHash=${stripeUrlWithoutHash}&stripeHash=${stripeHash}`
-	);
-
-	// throw redirect(308, session.url as string);
-	// throw redirect(308, '/');
-
-	// } catch (error) {
-	// 	throw redirect(308, '/plans');
-	// }
+	return sessionUrl;
 }
-
-// export const GET = async ({ cookies, request }) => {
-// 	cookies.set('stripeUrl3', 'gato', { secure: false });
-
-// 	const status = 200; // 308
-// 	const referringUrl = '/plans';
-// 	// const referringUrl = request.headers.get('Referer') as string;
-// 	return new Response(JSON.stringify({ success: true, message: '🍌' }), {
-// 		status,
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 			location: referringUrl
-// 		}
-// 	});
-// };

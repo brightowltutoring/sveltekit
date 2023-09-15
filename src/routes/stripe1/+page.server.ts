@@ -1,4 +1,4 @@
-// http://localhost:5173/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true
+// http://localhost:5173/stripe1?answer_2=4.98hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true
 
 // Works on vercel (https://sveltekit-u7qb.vercel.app/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true)
 
@@ -8,21 +8,32 @@
 // UPDATE: WORKS ON CF PAGES doing everything server side way via 'stripe/api/+server.ts', without need for client-side
 // UPDATE2: now working on cf pages??
 
-import { STRIPE_KEY } from '$env/static/private';
+import { redirect } from '@sveltejs/kit';
 
-import Stripe from 'stripe';
-const stripe = new Stripe(STRIPE_KEY, {
-	apiVersion: '2022-11-15'
-});
+// import { STRIPE_KEY } from '$env/static/private';
+// import Stripe from 'stripe';
+// const stripe = new Stripe(STRIPE_KEY, {
+// 	apiVersion: '2022-11-15'
+// });
 
 export const prerender = false;
-export async function load({ url }) {
+export async function load({ url, cookies }) {
 	// const { invitee_full_name, invitee_email, event_type_name, answer_1, answer_2, answer_3 } =
 	// 	Object.fromEntries(url.searchParams.entries());
 	const USP = url.searchParams;
 	const invitee_full_name = USP.get('invitee_full_name');
 	const invitee_email = USP.get('invitee_email');
 	const event_type_name = USP.get('event_type_name');
+
+	if (!event_type_name) {
+		return;
+	}
+
+	const { STRIPE_KEY } = await import('$env/static/private');
+	const { Stripe } = await import('stripe');
+	const stripe = new Stripe(STRIPE_KEY, {
+		apiVersion: '2022-11-15'
+	});
 	const answer_1 = USP.get('answer_1'); // this now reflects the payment email, if it exists
 	const answer_2 = USP.get('answer_2');
 	const answer_3 = USP.get('answer_3');
@@ -111,8 +122,13 @@ export async function load({ url }) {
 
 	const session = await stripe.checkout.sessions.create(sessionObject as any);
 
-	return {
-		sessionId: session.id,
-		firstName: firstName
-	};
+	const sessionUrl = session.url;
+
+	if (sessionUrl == null) {
+		throw new Error('Session URL is null');
+	}
+
+	cookies.set('stripeUrltesy', sessionUrl);
+
+	throw redirect(308, sessionUrl);
 }
