@@ -1,12 +1,10 @@
-<!-- <script>
+<script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
 	import { loadStripe } from '@stripe/stripe-js/pure';
-	// import { loadStripe } from '@stripe/stripe-js';
-
 	import { onMount } from 'svelte';
 	import { elasticOut } from 'svelte/easing';
-	import { OAuthCredential } from 'firebase/auth';
+	import { goto } from '$app/navigation';
 
 	export let data;
 	$: sessionId = data.sessionId;
@@ -20,7 +18,13 @@
 	let loading_status = true;
 	onMount(async () => {
 		const stripe = await loadStripe(PUBLIC_STRIPE_KEY);
-		stripe?.redirectToCheckout({ sessionId });
+
+		if (sessionId) {
+			stripe?.redirectToCheckout({ sessionId });
+		} else {
+			loading_status = false;
+			goto('/');
+		}
 	});
 </script>
 
@@ -30,7 +34,9 @@
 			in:fly={{ y: -400, duration: 2000, easing: elasticOut }}
 			class="loading animate-bounce text-center font-Poppins text-2xl"
 		>
-			Almost there {firstName}
+			{#if sessionId}
+				Almost there {firstName}
+			{/if}
 		</span>
 		<br /><br />
 
@@ -68,6 +74,4 @@
 		background-color: rgb(80, 140, 137);
 		opacity: 0.4;
 	}
-</style> -->
-
-Error son
+</style>

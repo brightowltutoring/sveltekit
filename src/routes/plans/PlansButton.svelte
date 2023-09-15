@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Modal from '$lib/Wrappers/Modal.svelte';
+	import StripeCheckout from '$routes/stripe/StripeCheckout.svelte';
 
 	export let button;
 
@@ -24,7 +25,11 @@
 	}
 </script>
 
+<!--  -->
 <Modal body bind:showModal={showMe} bgTW={'bg-[rgba(0,0,0,0.1)]'}>
+	{#if showMe}
+		<StripeCheckout />
+	{/if}
 	<iframe
 		title="Thinksolve Plans"
 		class="{changeOpacityTo100} fixed bottom-0 h-[90%] w-full rounded-xl border-dotted border-gray-500 opacity-0 backdrop-blur-3xl md:w-[80%] md:-translate-y-5"

@@ -1,16 +1,18 @@
-import { STRIPE_KEY } from '$env/static/private';
-// import Stripe from 'stripe';
-// const stripe = new Stripe(STRIPE_KEY, {
-// 	apiVersion: '2022-11-15'
-// });
-
 export async function getStripeCheckoutUrl(url: URL) {
 	const { invitee_email, event_type_name, answer_1, answer_2, answer_3 } = Object.fromEntries(
 		url.searchParams
 	);
 
-	if (!event_type_name) return;
+	// TS complains if I return null. Previous TS typing was also failing (and uglier with external definitions)
+	if (!event_type_name) {
+		// return;
+		return {
+			stripeCheckoutUrl: undefined as undefined | null | string,
+			sessionName: undefined as undefined | null | string
+		};
+	}
 
+	const { STRIPE_KEY } = await import('$env/static/private');
 	const { Stripe } = await import('stripe');
 	const stripe = new Stripe(STRIPE_KEY, {
 		apiVersion: '2022-11-15'
@@ -99,7 +101,8 @@ export async function getStripeCheckoutUrl(url: URL) {
 
 	const session = await stripe.checkout.sessions.create(sessionObject as any);
 
-	const sessionUrl = session.url as string;
-
-	return sessionUrl;
+	return {
+		stripeCheckoutUrl: session.url,
+		sessionName: sessionObject.line_items[0].price_data.product_data.name
+	};
 }

@@ -1,21 +1,5 @@
 // http://localhost:5173/stripe1?answer_2=4.98hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true
 
-// Works on vercel (https://sveltekit-u7qb.vercel.app/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true)
-
-// Works on netlify (https://64d70110faf31948e15eed3d--thinksolveio.netlify.app/stripe1/?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true)
-
-// Doesn't work on cloudflare pages (https://thinksolve.io/stripe1?answer_2=1.25hr&invitee_full_name=jon&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=brightowl.edu@gmail.com&answer_3=true) ... CF pages doesnt allow ssr so load function doesnt fire?
-// UPDATE: WORKS ON CF PAGES doing everything server side way via 'stripe/api/+server.ts', without need for client-side
-// UPDATE2: now working on cf pages??
-
-import { redirect } from '@sveltejs/kit';
-
-// import { STRIPE_KEY } from '$env/static/private';
-// import Stripe from 'stripe';
-// const stripe = new Stripe(STRIPE_KEY, {
-// 	apiVersion: '2022-11-15'
-// });
-
 export const prerender = false;
 export async function load({ url, cookies }) {
 	// const { invitee_full_name, invitee_email, event_type_name, answer_1, answer_2, answer_3 } =
@@ -122,13 +106,20 @@ export async function load({ url, cookies }) {
 
 	const session = await stripe.checkout.sessions.create(sessionObject as any);
 
-	const sessionUrl = session.url;
+	const sessionId = session.id;
 
-	if (sessionUrl == null) {
-		throw new Error('Session URL is null');
-	}
+	return {
+		firstName,
+		sessionId
+	};
 
-	cookies.set('stripeUrltesy', sessionUrl);
+	// const sessionUrl = session.url;
 
-	throw redirect(308, sessionUrl);
+	// if (sessionUrl == null) {
+	// 	throw new Error('Session URL is null');
+	// }
+
+	// cookies.set('stripeUrltesy', sessionUrl);
+
+	// throw redirect(308, sessionUrl);
 }
