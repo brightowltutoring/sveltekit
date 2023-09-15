@@ -1,8 +1,8 @@
 import { STRIPE_KEY } from '$env/static/private';
-import Stripe from 'stripe';
-const stripe = new Stripe(STRIPE_KEY, {
-	apiVersion: '2022-11-15'
-});
+// import Stripe from 'stripe';
+// const stripe = new Stripe(STRIPE_KEY, {
+// 	apiVersion: '2022-11-15'
+// });
 
 export async function getStripeCheckoutUrl(url: URL) {
 	const { invitee_email, event_type_name, answer_1, answer_2, answer_3 } = Object.fromEntries(
@@ -11,11 +11,10 @@ export async function getStripeCheckoutUrl(url: URL) {
 
 	if (!event_type_name) return;
 
-	// const { STRIPE_KEY } = await import('$env/static/private');
-	// const { Stripe } = await import('stripe');
-	// const stripe = new Stripe(STRIPE_KEY, {
-	// 	apiVersion: '2022-11-15'
-	// });
+	const { Stripe } = await import('stripe');
+	const stripe = new Stripe(STRIPE_KEY, {
+		apiVersion: '2022-11-15'
+	});
 
 	const dollar_hourly_rate = 50;
 	const dollar_hourly_rate_2dec = Math.round(dollar_hourly_rate).toFixed(2);

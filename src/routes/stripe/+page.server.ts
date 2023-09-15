@@ -1,4 +1,4 @@
-// http://localhost:5173/stripe?answer_2=2.3hr&invitee_full_name=joe&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=yeet@test.com&answer_3=true
+// http://localhost:4173/stripe?answer_2=4.3hr&invitee_full_name=josh&invitee_email=jonag@pm.me&event_type_name=classico&answer_1=joe@blow.com&answer_3=true
 
 import { redirect } from '@sveltejs/kit';
 import { getStripeCheckoutUrl } from './getStripeCheckoutUrl';

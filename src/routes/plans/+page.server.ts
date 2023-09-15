@@ -19,14 +19,13 @@
 
 // // ABOVE CODE WORKED WHEN REDIRECTED FROM '/stripe/api/+server.ts'
 
-export const load = async ({ cookies, depends }) => {
-	// depends('load:reset');
-	let stripeUrl = cookies.get('stripeCheckoutUrl');
+export async function load({ cookies }) {
+	let stripeCheckoutUrl = cookies.get('stripeCheckoutUrl');
 
-	// if (stripeUrl) {
-	return { stripeUrl };
-	// }
-};
+	return { stripeCheckoutUrl };
+}
 export const actions = {
-	deleteSession: async ({ cookies }) => cookies.delete('stripeCheckoutUrl')
+	deleteSession: async ({ cookies }) => {
+		cookies.delete('stripeCheckoutUrl');
+	}
 };
