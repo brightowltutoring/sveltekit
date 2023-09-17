@@ -21,11 +21,13 @@
 
 export async function load({ cookies }) {
 	let stripeCheckoutUrl = cookies.get('stripeCheckoutUrl');
+	let sessionName = cookies.get('sessionName');
 
-	return { stripeCheckoutUrl };
+	return { stripeCheckoutUrl, sessionName };
 }
 export const actions = {
 	deleteSession: async ({ cookies }) => {
 		cookies.delete('stripeCheckoutUrl');
+		cookies.delete('sessionName');
 	}
 };

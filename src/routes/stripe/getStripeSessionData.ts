@@ -1,4 +1,6 @@
-export async function getStripeCheckoutUrl(url: URL) {
+import type Stripe from 'stripe';
+
+export async function getStripeSessionData(url: URL) {
 	const { invitee_email, event_type_name, answer_1, answer_2, answer_3 } = Object.fromEntries(
 		url.searchParams
 	);
@@ -14,6 +16,7 @@ export async function getStripeCheckoutUrl(url: URL) {
 
 	const { STRIPE_KEY } = await import('$env/static/private');
 	const { Stripe } = await import('stripe');
+
 	const stripe = new Stripe(STRIPE_KEY, {
 		apiVersion: '2022-11-15'
 	});
@@ -42,7 +45,7 @@ export async function getStripeCheckoutUrl(url: URL) {
 		}
 	};
 
-	const sessionObject = {
+	const sessionParams = {
 		customer_email: answer_1 ?? invitee_email,
 		payment_method_types: ['card'],
 		mode: 'payment',
@@ -70,14 +73,14 @@ export async function getStripeCheckoutUrl(url: URL) {
 	};
 
 	if (isClassico) {
-		sessionObject.line_items[0].price_data.product_data.name = 'Classico Session';
+		sessionParams.line_items[0].price_data.product_data.name = 'Classico Session';
 	} else if (isMock) {
-		let sessionTime = Math.round(sessionObject.line_items[0].quantity as number);
+		let sessionTime = Math.round(sessionParams.line_items[0].quantity as number);
 		let testCreationCostInMinutes = 90;
 
-		sessionObject.line_items[0].quantity = testCreationCostInMinutes + sessionTime;
-		sessionObject.line_items[0].price_data.product_data.description += `Price includes session time (${sessionTime} minutes) and mock test creation & answers (equivalent to ${testCreationCostInMinutes} minutes). `;
-		sessionObject.line_items[0].price_data.product_data.name = 'Mock Test Session';
+		sessionParams.line_items[0].quantity = testCreationCostInMinutes + sessionTime;
+		sessionParams.line_items[0].price_data.product_data.description += `Price includes session time (${sessionTime} minutes) and mock test creation & answers (equivalent to ${testCreationCostInMinutes} minutes). `;
+		sessionParams.line_items[0].price_data.product_data.name = 'Mock Test Session';
 	}
 
 	if (answer_3) {
@@ -96,13 +99,15 @@ export async function getStripeCheckoutUrl(url: URL) {
 					'Equivalent to 120 minutes of time. Your solution key will become available via the login page (login with ONE of the following providers: email, google, or twitter).'
 			};
 		}
-		sessionObject.line_items = [...sessionObject.line_items, extraEntry];
+		sessionParams.line_items = [...sessionParams.line_items, extraEntry];
 	}
 
-	const session = await stripe.checkout.sessions.create(sessionObject as any);
+	const session = await stripe.checkout.sessions.create(
+		sessionParams as Stripe.Checkout.SessionCreateParams
+	);
 
 	return {
 		stripeCheckoutUrl: session.url,
-		sessionName: sessionObject.line_items[0].price_data.product_data.name
+		sessionName: sessionParams.line_items[0].price_data.product_data.name
 	};
 }

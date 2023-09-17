@@ -6,8 +6,9 @@
 		text: string;
 	}
 
-	import { scale } from 'svelte/transition';
 	import PlansButton from './PlansButton.svelte';
+	// import PlansButton from './PlansButton-experimental.svelte';
+	import { scale } from 'svelte/transition';
 
 	export let inScale = {};
 
