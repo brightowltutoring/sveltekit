@@ -3,11 +3,14 @@
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { elasticOut } from 'svelte/easing';
+	import { dev } from '$app/environment';
 
 	// this component gets data from '/plans/+page.server.ts'
 	$: ({ stripeCheckoutUrl, sessionName } = $page.data);
 
-	$: showElement = $page.url.pathname.includes('/plans') && stripeCheckoutUrl;
+	// currently want this component to work in development .. idea not complete
+	$: showElement = dev && $page.url.pathname.includes('/plans') && stripeCheckoutUrl;
+	// $: showElement =  $page.url.pathname.includes('/plans') && stripeCheckoutUrl;
 	// $: showElement = stripeCheckoutUrl;
 </script>
 
