@@ -1,14 +1,8 @@
 <script lang="ts">
-	interface payButton {
-		resetter: boolean;
-		url: string;
-		opacityTW: string;
-		text: string;
-	}
-
 	import PlansButton from './PlansButton.svelte';
-	// import PlansButton from './PlansButton-experimental.svelte';
+	// import PlansButton from './PlansButton-old.svelte';
 	import { scale } from 'svelte/transition';
+	import type { payButton } from './plansCardStuff';
 
 	export let inScale = {};
 

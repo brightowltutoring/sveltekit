@@ -1,56 +1,62 @@
 <script lang="ts">
+	import type { payButton } from './plansCardStuff';
+	export let button: payButton;
+
 	import Modal from '$lib/Wrappers/Modal.svelte';
+	import Loading from '$lib/Loading.svelte';
 	import StripeCheckout from '$routes/stripe/StripeCheckout.svelte';
+	import { onMount } from 'svelte';
 
-	export let button;
+	let showModal = false;
 
-	const { url, opacityTW, text } = button;
+	let myIframe: HTMLIFrameElement;
 
-	let showMe = false;
-	let src: string | undefined = undefined;
-	let changeOpacityTo100 = '';
+	let myIframeSrc: string | undefined = undefined;
 
-	function handlePlansModal(e: MouseEvent, BUTTON_URL: string) {
+	let iframeLoaded = false;
+	function setIframeLoadedTrue() {
+		iframeLoaded = true;
+		console.log('iframe loaded son');
+	}
+
+	onMount(() => {
+		myIframe.addEventListener('load', setIframeLoadedTrue);
+		return () => {
+			myIframe.removeEventListener('load', setIframeLoadedTrue);
+		};
+	});
+
+	function handleIframeAndModal(e: MouseEvent) {
 		e.preventDefault();
-		src = BUTTON_URL;
+		myIframeSrc = button.url;
 
 		if (e.type === 'click') {
-			showMe = true;
-			setTimeout(
-				() => (changeOpacityTo100 = 'opacity-100 transition-opacity duration-300 ease-in'),
-				25
-			);
-			// setTimeout is necessary since iframe doesnt yet exist ... to do opacity transition
+			showModal = true;
 		}
 	}
 </script>
 
-<!--  -->
-<Modal body bind:showModal={showMe} bgTW={'bg-[rgba(0,0,0,0.1)]'}>
-	{#if showMe}
+<Modal body bind:showModal bgTW={'bg-[rgba(0,0,0,0.1)]'}>
+	{#if !iframeLoaded}
+		<Loading />
+	{:else}
 		<StripeCheckout />
 	{/if}
+
 	<iframe
+		class="opacity-0 transition-opacity duration-300 ease-in {iframeLoaded &&
+			'opacity-100'} fixed bottom-0 h-[90%] w-full rounded-xl border-dotted border-gray-500 backdrop-blur-3xl md:w-[80%] md:-translate-y-5"
 		title="Thinksolve Plans"
-		class="{changeOpacityTo100} fixed bottom-0 h-[90%] w-full rounded-xl border-dotted border-gray-500 opacity-0 backdrop-blur-3xl md:w-[80%] md:-translate-y-5"
-		{src}
+		src={myIframeSrc}
+		bind:this={myIframe}
 	/>
 </Modal>
 
 <a
-	href={url}
-	on:click={(e) => handlePlansModal(e, url)}
-	on:mouseenter={(e) => handlePlansModal(e, url)}
-	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md {opacityTW} {$$props.class} "
+	href={button.url}
+	on:click={(e) => handleIframeAndModal(e)}
+	on:mouseenter={(e) => handleIframeAndModal(e)}
+	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md {button.opacityTW} {$$props.class} "
 >
-	<span>{text}</span>
+	<span>{button.text}</span>
 </a>
-
-<!-- on:click={Calendly.initPopupWidget({ url: button.url })} -->
-<!-- <button
-	on:click={(e) => handlePlansModal(e, url)}
-	on:mouseenter={(e) => handlePlansModal(e, url)}
-	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md group-hover:bg-opacity-80 {opacityTW} {$$props.class}"
->
-	<span>{text}</span>
-</button> -->

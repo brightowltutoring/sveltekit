@@ -26,7 +26,9 @@
 </script>
 
 {#key body || transitionsOff ? true : showModal}
-	<modal
+	<div
+		role="button"
+		tabindex="0"
 		on:keypress|self={closeModal}
 		on:click|self={closeModal}
 		use:modalDirective
@@ -35,5 +37,5 @@
 "
 	>
 		<slot />
-	</modal>
+	</div>
 {/key}

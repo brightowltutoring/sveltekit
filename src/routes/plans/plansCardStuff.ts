@@ -12,7 +12,14 @@ const buttonColor = {
 	3: 'bg-[#fea45c]' /* yellow */
 };
 
-export const plansCardArray = [
+export interface payButton {
+	resetter: boolean;
+	url: string;
+	opacityTW: string;
+	text: string;
+}
+
+export const plansCards = [
 	{
 		payNowUrl: payUrl('classico', 'stripe', color.red, '&a2=2'),
 		payLaterUrl: payUrl('classico', 'invoice', color.red, '&a1=1'),

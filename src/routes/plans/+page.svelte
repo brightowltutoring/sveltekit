@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PlansCard from './PlansCard.svelte';
-	import { plansCardArray } from './plansCardArray';
+	import { plansCards } from './plansCardStuff';
 	import { elasticOut } from 'svelte/easing';
 </script>
 
@@ -9,7 +9,7 @@
 <plans-section
 	class="mx-2 grid grid-cols-1 gap-5 overflow-x-clip sm:grid-cols-dynamic sm:overflow-visible lg:px-16"
 >
-	{#each plansCardArray as { buttonColor, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
+	{#each plansCards as { buttonColor, payNowUrl, payLaterUrl, cardTitle, cardText }, i}
 		{@const inScale = {
 			delay: 100 * i,
 			duration: 1000,
