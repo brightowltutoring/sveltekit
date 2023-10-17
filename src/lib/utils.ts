@@ -1,9 +1,9 @@
 import { isDarkMode } from '$lib/store/clientStore';
 import { page } from '$app/stores';
 import { onMount } from 'svelte';
-import { get } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 // import { browser } from '$app/environment';
-export const is_client = typeof window !== 'undefined'  // framework agnostic version of 'browser'
+export const is_client = typeof window !== 'undefined'; // framework agnostic version of 'browser'
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use. Might add serializer code from npm cookie inside my set method.
 export const cookeh = {
@@ -106,11 +106,7 @@ export function useInView(
 		margin = '0px'
 	} = {}
 ) {
-	const options = {
-		root,
-		threshold,
-		rootMargin: margin
-	};
+	const options = { root, threshold, rootMargin: margin };
 	const observer = new IntersectionObserver(handleIntersect, options);
 
 	if (node) observer.observe(node);

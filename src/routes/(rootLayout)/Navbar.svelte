@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { spring } from 'svelte/motion';
+	// import LightDarkMode from './LightDarkMode-experimental.svelte';
 	import LightDarkMode from './LightDarkMode.svelte';
 	import NavModals from './NavModals.svelte';
 	import { showLoginModal, showHomeworkModal, clearNavModals } from '$lib/store/modalsStore';
@@ -18,12 +19,13 @@
 		if ($scrollY < 10) showHideNav = 'bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-none';
 
 		if ($scrollY > 40 && $instDeltaY > 10) {
-			showHideNav = 'backdrop-blur-3xl duration-200';
+			showHideNav = 'backdrop-blur-3xl';
 		}
 
 		if ($scrollY > 400 && $instDeltaY > 10)
-			showHideNav =
-				'bottom-0 translate-y-20 md:top-0 md:-translate-y-20 backdrop-blur-3xl duration-200';
+			showHideNav = '-bottom-20  md:-top-20  backdrop-blur-3xl duration-200';
+		// showHideNav =
+		// 	'bottom-0 translate-y-20 md:top-0 md:-translate-y-20 backdrop-blur-3xl duration-200';
 
 		if ($instDeltaY < -100 && $scrollY !== 0)
 			showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl duration-500';
@@ -68,7 +70,7 @@
 	<LogoButton />
 
 	<ul
-		class="grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide dark:to-[#25235b] md:ml-24 md:w-auto md:rounded-xl pwa:m-0 pwa:pb-0 background-animate"
+		class="background-animate grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide dark:to-[#25235b] md:ml-24 md:w-auto md:rounded-xl pwa:m-0 pwa:pb-0"
 	>
 		<!-- <li class={$isIOS ? 'block pwa:hidden' : 'hidden'}> -->
 		<li class={data.isIOS ? 'block pwa:hidden' : 'hidden'}>

@@ -36,7 +36,8 @@
 	}
 </script>
 
-<Modal body bind:showModal bgTW={'bg-[rgba(0,0,0,0.1)]'}>
+<!-- <Modal body bind:showModal bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
+<Modal body {showModal} on:close={() => (showModal = false)} bgTW={'bg-[rgba(0,0,0,0.1)]'}>
 	{#if !iframeLoaded}
 		<Loading />
 	{:else}

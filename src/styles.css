@@ -40,24 +40,12 @@
 		url('$lib/fonts/poppins-v20-latin-700.woff') format('woff');
 }
 
-:root {
-	--bg-color: #f7f7f7;
-	--text-color: #140d21;
-}
-
-.dark-mode {
-	--bg-color: #140d21;
-	--text-color: #f7f7f7;
-}
-
 body,
 html {
-	background-color: var(--bg-color);
-	color: var(--text-color);
+	background-color: var(--bg-color, #f7f7f7);
+	color: var(--text-color, #140d21);
 	transition: background-color 0.2s ease;
-
 	scroll-behavior: smooth;
-
 	-webkit-tap-highlight-color: transparent;
 	user-select: none;
 }
@@ -65,6 +53,15 @@ html {
 /* this is fallback when the JS version of no-scroll (in utils.ts) fails; works for some browsers */
 body:has(.disableScrollOnThisPage) {
 	overflow: hidden;
+}
+
+/* .dark-mode:has(.classroom) {
+	--bg-color: black;
+} */
+
+.dark-mode {
+	--bg-color: #140d21;
+	--text-color: #f7f7f7;
 }
 
 /* now using an tailwind npm package for tailwind for this ... easier to invoke with breakpoints */

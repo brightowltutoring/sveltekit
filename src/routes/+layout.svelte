@@ -50,7 +50,8 @@
 
 <!-- <Seo /> -->
 
-<svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault />
+<svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault />
+<!-- <svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault /> -->
 
 <main>
 	<Navbar />

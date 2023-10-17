@@ -9,12 +9,14 @@
 	import { slide } from 'svelte/transition';
 
 	let ready = false;
+
 	onMount(() => (ready = true));
 
 	export let form;
 	$: success = form?.success;
 </script>
 
+<span class="classroom hidden" />
 <BackgroundVideo />
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">

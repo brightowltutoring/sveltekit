@@ -19,6 +19,9 @@
 		setTimeout(() => {
 			mounted = true;
 		}, 500);
+
+		// document.documentElement.classList.add('classroom');
+		// return () => document.documentElement.classList.remove('classroom');
 	});
 </script>
 
@@ -53,3 +56,21 @@
 	</script>
 </svelte:head>
 <div id="jaas-container" class="h-screen w-full" /> -->
+
+<!-- TAILWIND VARIANT 
+<style lang="postcss">
+	dummy-element {
+		display: none;
+		:global(.dark-mode):has(&) {
+			--bg-color: black;
+		}
+	}
+</style> -->
+<dummy-element />
+
+<style>
+	/* :global(.dark-mode.classroom) { */
+	:global(.dark-mode):has(dummy-element) {
+		--bg-color: black;
+	}
+</style>

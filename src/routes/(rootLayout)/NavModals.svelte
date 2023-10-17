@@ -32,6 +32,7 @@
 <Modal
 	all
 	showModal={data.isIOS && $navAppClicked}
+	on:close={() => navAppClicked.set(false)}
 	bgTW={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 >
 	<ul class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
@@ -60,13 +61,24 @@
 
 <!-- <Modal body all={true} bind:showModal={$showLoginModal} bgTW={'backdrop-blur-md'}> -->
 <!-- TODO: dont remove bind ... pwa svgs wont work properly -->
-<Modal bind:showModal={$showLoginModal} bgTW={'backdrop-blur-md'}>
+<!-- bind:showModal={$showLoginModal} -->
+<Modal
+	bgTW={'backdrop-blur-md'}
+	showModal={$showLoginModal}
+	on:close={() => showLoginModal.set(false)}
+>
 	<LoginCard />
 </Modal>
 
 <!-- transitionsOff prop declared kills any svelte transitions defined within any slotted components; in modal.svelte a key block conditionally resets the component if transitionsOff is falsy (default behaviour) ...  which is not desired for this dropzone component (want to persist state of uploaded files)  -->
 <!-- TODO: dont remove bind ... pwa svgs wont work properly -->
-<Modal transitionsOff bind:showModal={$showHomeworkModal} bgTW={'bg-[rgba(0,0,0,0.1)]'}>
+<!-- <Modal transitionsOff bind:showModal={$showHomeworkModal} bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
+<Modal
+	transitionsOff
+	showModal={$showHomeworkModal}
+	on:close={() => showHomeworkModal.set(false)}
+	bgTW={'bg-[rgba(0,0,0,0.1)]'}
+>
 	<Dropzone
 		textSizeTW={'text-6xl'}
 		dimensionsTW={'w-[80vw] h-[85vh]'}

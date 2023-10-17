@@ -33,7 +33,7 @@
 <!-- pwa:mb-3 -->
 <div class="my-20 flex h-10 flex-row items-center justify-center gap-x-1 text-sm">
 	<span
-		class="bg-gradient-to-l from-blue-500 to-pink-600 text-transparent bg-clip-text background-animate"
+		class="background-animate bg-gradient-to-l from-blue-500 to-pink-600 bg-clip-text text-transparent"
 	>
 		<!-- class="pwa:hidden" -->
 		<a href="/faq">faq &nbsp; | &nbsp;</a>
@@ -47,7 +47,7 @@
 			duration: 1500,
 			easing: elasticOut
 		}}
-		class="flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl background-animate"
+		class="background-animate flex flex-col gap-y-2 bg-gradient-to-r from-teal-700 via-rose-700 to-pink-700 bg-clip-text text-center font-Poppins text-3xl text-transparent dark:from-teal-200 dark:via-rose-300 dark:to-pink-200 sm:text-5xl"
 	>
 		<li>Email:</li>
 

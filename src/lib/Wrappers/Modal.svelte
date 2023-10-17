@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
 	export let showModal = false;
 	export let transitionsOff: boolean | null = false;
 	export let bgTW: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
@@ -6,12 +8,17 @@
 	export let body: boolean | undefined = false;
 	// default behaviour is to allow navbar through; when user declares 'body' prop then the modal is attached to the document's body ... such as with the calendly modals
 
+	let dispatch = createEventDispatcher();
+
 	function closeModal() {
-		showModal = false;
+		// showModal = false;
+		dispatch('close');
+		// clearNavModals();
 	}
 
 	function modalDirective(node: HTMLElement) {
 		if (!body && !all) return;
+		console.log('modal');
 
 		body && document.body.appendChild(node);
 		all && node.addEventListener('click', closeModal);
