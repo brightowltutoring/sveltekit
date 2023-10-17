@@ -26,26 +26,17 @@
 	function scrollYSetter() {
 		scrollY.set(window.scrollY);
 	}
-
-	// $: if (data.url.includes('classroom') && browser) {
-	// 	// Load the external library
-	// 	const script = document.createElement('script');
-	// 	script.src =
-	// 		'https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js';
-	// 	document.head.appendChild(script);
-	// }
 </script>
 
 <svelte:head>
 	<link rel="manifest" href="/manifest.json" />
-	<!-- {#if data.url.includes('classroom')}
+	{@html seoString}
+	{#if data.url.includes('classroom')}
 		<script
 			src="https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js"
-			async
 		></script>
-	{/if} -->
-
-	{@html seoString}
+		<!-- "https://meet.jit.si/external_api.js" -->
+	{/if}
 </svelte:head>
 
 <!-- <Seo /> -->

@@ -16,7 +16,6 @@
 	$: success = form?.success;
 </script>
 
-<span class="classroom hidden" />
 <BackgroundVideo />
 
 <div class="grid grid-cols-1 gap-y-52 lg:gap-y-64">

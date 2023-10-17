@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { showHomeworkModal, showLoginModal } from '$lib/store/modalsStore';
-	import { onMount } from 'svelte';
+	import { showHomeworkModal, loginModalOpen } from '$lib/store/modalsStore';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { quintOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
+
+	const dispatch = createEventDispatcher();
 
 	let faqContainer: HTMLElement;
 	onMount(() => {
@@ -13,6 +15,9 @@
 		// using 'event delegation'
 		faqContainer.addEventListener('click', (event) => {
 			let target = event.target as HTMLElement;
+			if (target.tagName == 'A' || target.tagName == 'BUTTON') {
+				dispatch('closeFaqModal');
+			}
 			if (target.tagName !== 'SUMMARY') return;
 			highlightAndKeepOpen(target);
 		});
@@ -44,129 +49,133 @@
 	const inFlyFAQContainer = { y: -50, duration: 500 };
 </script>
 
-<button on:dblclick={closeFaqs} in:fly={inFlyFAQ} class="w-full py-16">
-	<span in:fade class="font-Poppins text-5xl font-bold"> FAQ </span>
-</button>
+<main class="h-full overflow-scroll scrollbar-hide">
+	<button on:dblclick={closeFaqs} in:fly={inFlyFAQ} class="w-full py-16">
+		<span in:fade class="font-Poppins text-5xl font-bold"> FAQ </span>
+	</button>
 
-<div in:fly={inFlyFAQContainer} bind:this={faqContainer} class="grid place-content-center">
-	<details>
-		<!-- ?: I have to add 'highlight' class to at least one summary element before the css/js logic can work -->
-		<summary class="highlight"> How are we screen-sharing? Zoom? </summary>
+	<div in:fly={inFlyFAQContainer} bind:this={faqContainer} class="grid place-content-center">
+		<details>
+			<!-- ?: I have to add 'highlight' class to at least one summary element before the css/js logic can work -->
+			<summary class="highlight"> How are we screen-sharing? Zoom? </summary>
 
-		Nope, our sessions happen on-site
+			Nope, our sessions happen on-site
 
-		<a href="/classroom"> in the classroom</a>.
-	</details>
+			<a href="/classroom"> in the classroom</a>.
+		</details>
 
-	<details>
-		<summary> Is it possible to access all my session content in one place? </summary>
+		<details>
+			<summary> Is it possible to access all my session content in one place? </summary>
 
-		<p>
-			Sure can! Contact us directly to set up a personalized page, or check the option when booking!
-			You will be <button class="text-rose-500" on:click={() => showLoginModal.set(true)}
-				>redirected to your personal page upon logging in
-			</button>.
-		</p>
-	</details>
+			<p>
+				Sure can! Contact us directly to set up a personalized page, or check the option when
+				booking! You will be <button class="text-rose-500" on:click={() => loginModalOpen.set(true)}
+					>redirected to your personal page upon logging in
+				</button>.
+			</p>
+		</details>
 
-	<details>
-		<summary> How do I share homework? </summary>
+		<details>
+			<summary> How do I share homework? </summary>
 
-		<p>
-			Click on "<button class="text-rose-500" on:click={() => showHomeworkModal.set(true)}>
-				Homework</button
-			>" in the navbar and submit screenshots/ PDFs/ etc.
-		</p>
+			<p>
+				Click on "<button class="text-rose-500" on:click={() => showHomeworkModal.set(true)}>
+					Homework</button
+				>" in the navbar and submit screenshots/ PDFs/ etc.
+			</p>
 
-		<p>
-			For added convenience in future submissions, consider downloading the app on your mobile
-			device. Using Safari on iOS devices:
-		</p>
-		<span class="flex flex-col items-center justify-center gap-x-2">
-			<span class="flex flex-row gap-x-1">
-				Click share icon
-				<img class="h-5 w-5" src="/safari-share-icon.png" alt="safari share icon" />
+			<p>
+				For added convenience in future submissions, consider downloading the app on your mobile
+				device. Using Safari on iOS devices:
+			</p>
+			<span class="flex flex-col items-center justify-center gap-x-2">
+				<span class="flex flex-row gap-x-1">
+					Click share icon
+					<img class="h-5 w-5" src="/safari-share-icon.png" alt="safari share icon" />
+				</span>
+
+				<span> Click "Add to Homescreen"</span>
 			</span>
+			<p>
+				Using Chrome on Android devices, you should be prompted automatically (usually at the bottom
+				of the screen).
+			</p>
+		</details>
 
-			<span> Click "Add to Homescreen"</span>
-		</span>
-		<p>
-			Using Chrome on Android devices, you should be prompted automatically (usually at the bottom
-			of the screen).
-		</p>
-	</details>
+		<details>
+			<summary> How do I pay? </summary>
+			<p>
+				On the <a href="/plans">plans page</a> you can either "pay now" or "pay later", per service.
+			</p>
+			<p>
+				After booking details have been confirmed the "pay now" option will redirect you to a
+				checkout page. With "pay later" we send a custom STRIPE invoice to the preferred email. In
+				both cases you will have the option to pay with credit card, Apple Pay, or Google Pay!
+			</p>
+		</details>
 
-	<details>
-		<summary> How do I pay? </summary>
-		<p>
-			On the <a href="/plans">plans page</a> you can either "pay now" or "pay later", per service.
-		</p>
-		<p>
-			After booking details have been confirmed the "pay now" option will redirect you to a checkout
-			page. With "pay later" we send a custom STRIPE invoice to the preferred email. In both cases
-			you will have the option to pay with credit card, Apple Pay, or Google Pay!
-		</p>
-	</details>
+		<details>
+			<summary> How do I book multiple sessions at once? </summary>
 
-	<details>
-		<summary> How do I book multiple sessions at once? </summary>
+			<p>
+				We will book the remaining times for you at the beginning / end of the scheduled session.
+			</p>
+		</details>
 
-		<p>We will book the remaining times for you at the beginning / end of the scheduled session.</p>
-	</details>
+		<details>
+			<summary> What subjects do you cover? </summary>
 
-	<details>
-		<summary> What subjects do you cover? </summary>
+			<p>
+				<span class="font-Poppins font-bold">MATHEMATICS</span>&nbsp; Calculus • Trigonometry •
+				Advanced Functions • Complex Numbers • Linear Algebra • Probability and Statistics
+				&nbsp;&nbsp;<span class="font-Poppins font-bold">PHYSICS</span>
+				&nbsp;Kinematics • Mechanics • Thermodynamics • Fluids • Electricity & Magnetism • Circuit Analysis
+				• Waves • Optics • Atomic & Quantum Physics • Special Relativity &nbsp;&nbsp;
 
-		<p>
-			<span class="font-Poppins font-bold">MATHEMATICS</span>&nbsp; Calculus • Trigonometry •
-			Advanced Functions • Complex Numbers • Linear Algebra • Probability and Statistics
-			&nbsp;&nbsp;<span class="font-Poppins font-bold">PHYSICS</span>
-			&nbsp;Kinematics • Mechanics • Thermodynamics • Fluids • Electricity & Magnetism • Circuit Analysis
-			• Waves • Optics • Atomic & Quantum Physics • Special Relativity &nbsp;&nbsp;
-
-			<!-- <span class="font-Poppins font-bold">SPANISH</span>
+				<!-- <span class="font-Poppins font-bold">SPANISH</span>
 				&nbsp; Pronunciation • Grammatical Rules • Practical Examples -->
 
-			<br /><br />
-			<b>Levels:</b> IB / AP / OSSD (9-12) / College & University
-		</p>
-	</details>
+				<br /><br />
+				<b>Levels:</b> IB / AP / OSSD (9-12) / College & University
+			</p>
+		</details>
 
-	<details>
-		<summary> How are mock tests administered? </summary>
-		<p>
-			After booking a "Mock" session on <a href="/plans">plans</a>, the student attends a live
-			session where a prepared examination — in the form of a Google Forms link — will be shared at
-			the beginning of the session. The topics are chosen based on input during booking, as well as
-			prior discussion with the student.
-		</p>
-		<p>
-			<span class="font-Poppins font-bold">In regards to completed questions only:</span> answers are
-			discussed during session time. A detailed, digital solution key is also available at a premium,
-			to be populated on your personal page.
-		</p>
-	</details>
+		<details>
+			<summary> How are mock tests administered? </summary>
+			<p>
+				After booking a "Mock" session on <a href="/plans">plans</a>, the student attends a live
+				session where a prepared examination — in the form of a Google Forms link — will be shared
+				at the beginning of the session. The topics are chosen based on input during booking, as
+				well as prior discussion with the student.
+			</p>
+			<p>
+				<span class="font-Poppins font-bold">In regards to completed questions only:</span> answers are
+				discussed during session time. A detailed, digital solution key is also available at a premium,
+				to be populated on your personal page.
+			</p>
+		</details>
 
-	<details class="group">
-		<summary>
-			I am looking to refer a friend, do you offer any discounts based on referrals?
-		</summary>
-		<p>
-			Great question! You can enter your referral as an input when booking; for this initiative we
-			are pleased to offer a
-			<!-- group-active:animate-ping -->
-			<span
-				class="bg-gradient-to-b from-rose-700 via-rose-600 to-yellow-300 bg-clip-text text-transparent opacity-0 hover:opacity-100 group-active:opacity-100"
-			>
-				25%
-			</span>
-			discount on the next applicable session!
-		</p>
-	</details>
-</div>
+		<details class="group">
+			<summary>
+				I am looking to refer a friend, do you offer any discounts based on referrals?
+			</summary>
+			<p>
+				Great question! You can enter your referral as an input when booking; for this initiative we
+				are pleased to offer a
+				<!-- group-active:animate-ping -->
+				<span
+					class="bg-gradient-to-b from-rose-700 via-rose-600 to-yellow-300 bg-clip-text text-transparent opacity-0 hover:opacity-100 group-active:opacity-100"
+				>
+					25%
+				</span>
+				discount on the next applicable session!
+			</p>
+		</details>
+	</div>
+</main>
 
 <!-- The markdown of this component being repetitive, makes vanilla css a better choice for styling (also the event delegation classList add logic works easiest with vanilla css).  It's also possible to abstract the details/summary elements into a components and use tailwind directly in those components ... -->
-<style>
+<style lang="postcss">
 	:root {
 		--light-green: rgb(230, 255, 249);
 		--green: rgb(89, 208, 174);

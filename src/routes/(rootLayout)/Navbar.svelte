@@ -3,7 +3,7 @@
 	// import LightDarkMode from './LightDarkMode-experimental.svelte';
 	import LightDarkMode from './LightDarkMode.svelte';
 	import NavModals from './NavModals.svelte';
-	import { showLoginModal, showHomeworkModal, clearNavModals } from '$lib/store/modalsStore';
+	import { loginModalOpen, showHomeworkModal, clearNavModals } from '$lib/store/modalsStore';
 	import { isLoggedIn, isDarkMode /*  isIOS, isPWA  */ } from '$lib/store/clientStore';
 	import { page } from '$app/stores';
 	$: ({ data } = $page);
@@ -23,7 +23,7 @@
 		}
 
 		if ($scrollY > 400 && $instDeltaY > 10)
-			showHideNav = '-bottom-20  md:-top-20  backdrop-blur-3xl duration-200';
+			showHideNav = '!-bottom-20  md:!-top-20  backdrop-blur-3xl duration-200';
 		// showHideNav =
 		// 	'bottom-0 translate-y-20 md:top-0 md:-translate-y-20 backdrop-blur-3xl duration-200';
 
@@ -56,7 +56,7 @@
 		}
 		if (routePath == '/login') {
 			e.preventDefault();
-			showLoginModal.set(true);
+			loginModalOpen.set(true);
 			return;
 		}
 	}
@@ -81,7 +81,7 @@
 			{@const navIconClicked =
 				isCurrent ||
 				(routePath === '/homework' && $showHomeworkModal) ||
-				(routePath === '/login' && $showLoginModal)}
+				(routePath === '/login' && $loginModalOpen)}
 
 			{@const loggedInDynamicRocket =
 				routePath === '/login' && $isLoggedIn

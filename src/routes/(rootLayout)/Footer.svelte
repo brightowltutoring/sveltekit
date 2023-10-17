@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FAQ from '$routes/faq/+page.svelte';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import { scale } from 'svelte/transition';
 	import { onMount } from 'svelte';
@@ -28,6 +29,14 @@
 			clearTimeout(contactLinkTimeout);
 		}
 	}
+
+	let faqModalOpen = false;
+	function openFaqModal() {
+		faqModalOpen = true;
+	}
+	function closeFaqModal() {
+		faqModalOpen = false;
+	}
 </script>
 
 <!-- pwa:mb-3 -->
@@ -36,12 +45,12 @@
 		class="background-animate bg-gradient-to-l from-blue-500 to-pink-600 bg-clip-text text-transparent"
 	>
 		<!-- class="pwa:hidden" -->
-		<a href="/faq">faq &nbsp; | &nbsp;</a>
+		<a href="/faq" on:click|preventDefault={openFaqModal}>faq &nbsp; | &nbsp;</a>
 		<span bind:this={contactLink}> contact </span>
 	</span>
 </div>
 
-<Modal showModal={contactLinkClicked} bgTW={'backdrop-blur-3xl'}>
+<Modal modalOpen={contactLinkClicked} bgTW={'backdrop-blur-3xl'}>
 	<ul
 		in:scale={{
 			duration: 1500,
@@ -55,4 +64,8 @@
 			<a bind:this={emailText} href="mailto:thinksolve.io@gmail.com"> thinksolve.io@gmail.com </a>
 		</li>
 	</ul>
+</Modal>
+
+<Modal modalOpen={faqModalOpen} on:closeModal={closeFaqModal} bgTW={'backdrop-blur-3xl'}>
+	<FAQ on:closeFaqModal={closeFaqModal} />
 </Modal>

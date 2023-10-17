@@ -7,11 +7,21 @@
 	import StripeCheckout from '$routes/stripe/StripeCheckout.svelte';
 	import { onMount } from 'svelte';
 
-	let showModal = false;
+	let plansModalOpen = false;
+	function closePlansModal() {
+		plansModalOpen = false;
+	}
+	function openPlansModal() {
+		plansModalOpen = true;
+	}
 
 	let myIframe: HTMLIFrameElement;
-
 	let myIframeSrc: string | undefined = undefined;
+	function hydrateIframe() {
+		if (myIframeSrc == undefined) {
+			myIframeSrc = button.url;
+		}
+	}
 
 	let iframeLoaded = false;
 	function setIframeLoadedTrue() {
@@ -25,19 +35,15 @@
 			myIframe.removeEventListener('load', setIframeLoadedTrue);
 		};
 	});
-
-	function handleIframeAndModal(e: MouseEvent) {
-		e.preventDefault();
-		myIframeSrc = button.url;
-
-		if (e.type === 'click') {
-			showModal = true;
-		}
-	}
 </script>
 
-<!-- <Modal body bind:showModal bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
-<Modal body {showModal} on:close={() => (showModal = false)} bgTW={'bg-[rgba(0,0,0,0.1)]'}>
+<!-- <Modal body bind:modalOpen bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
+<Modal
+	body
+	modalOpen={plansModalOpen}
+	on:closeModal={closePlansModal}
+	bgTW={'bg-[rgba(0,0,0,0.1)]'}
+>
 	{#if !iframeLoaded}
 		<Loading />
 	{:else}
@@ -55,8 +61,8 @@
 
 <a
 	href={button.url}
-	on:click={(e) => handleIframeAndModal(e)}
-	on:mouseenter={(e) => handleIframeAndModal(e)}
+	on:mouseenter|preventDefault={hydrateIframe}
+	on:click|preventDefault={openPlansModal}
 	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md {button.opacityTW} {$$props.class} "
 >
 	<span>{button.text}</span>

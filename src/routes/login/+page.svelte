@@ -7,7 +7,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { isLoggedIn } from '$lib/store/clientStore';
-	import { showLoginModal } from '$lib/store/modalsStore';
+	import { loginModalOpen } from '$lib/store/modalsStore';
 	import { cookeh } from '$lib/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import { elasticOut, quintOut } from 'svelte/easing';
@@ -29,13 +29,13 @@
 	let seconds = 3;
 	// $: console.log(seconds, 'seconds');
 	$: if (seconds === 0) {
-		showLoginModal.set(false);
+		loginModalOpen.set(false);
 		clearInterval(redirectSetInterval);
 		goto(userRedirectUrl);
 		// seconds = 3; // seemingly not needed
 	}
 
-	$: if (!$showLoginModal && $page.route.id !== '/login') {
+	$: if (!$loginModalOpen && $page.route.id !== '/login') {
 		clearInterval(redirectSetInterval);
 	}
 
@@ -49,7 +49,7 @@
 		}, 1000);
 	}
 
-	async function showLoginModalRedirect(userEmail: string | null) {
+	async function loginModalOpenRedirect(userEmail: string | null) {
 		let redirectUrlFromCookies = cookeh.get('redirectUrlFromCookies');
 
 		if (redirectUrlFromCookies) {
@@ -105,7 +105,7 @@
 			signInWithEmailLink(auth, email, window.location.href)
 				.then(() => {
 					window.localStorage.removeItem('emailForSignIn');
-					showLoginModal.set(true);
+					loginModalOpen.set(true);
 				})
 				.catch((error) => console.log('signInWithEmailLink:', error));
 		}
@@ -117,7 +117,7 @@
 
 				isLoggedIn.set(true);
 
-				showLoginModalRedirect(loggedInEmail);
+				loginModalOpenRedirect(loggedInEmail);
 				cookeh.set('haventLoggedOut', $isLoggedIn);
 
 				// cookeh.set('haventLoggedOut', Boolean(user));
@@ -130,7 +130,7 @@
 			// isLoggedIn.set(false);
 
 			// this commented out code can only be set in logoutFunction.ts, otherwise the login modal is 'continuously closed'
-			// showLoginModal.set(false);
+			// loginModalOpen.set(false);
 		});
 	}
 

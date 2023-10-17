@@ -1,5 +1,5 @@
 // import { isLoggedIn } from '$lib/store/clientStore';
-import { showLoginModal } from '$lib/store/modalsStore';
+import { loginModalOpen } from '$lib/store/modalsStore';
 import { cookeh } from '$lib/utils';
 
 export async function logoutFunction() {
@@ -12,7 +12,7 @@ export async function logoutFunction() {
 	// cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
 
 	console.log('logoutFunction hit');
-	showLoginModal.set(false);
+	loginModalOpen.set(false);
 
 	signOut(auth)
 		.then(() => console.log('firebase user logged out'))

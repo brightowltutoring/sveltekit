@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let showModal = false;
+	export let modalOpen = false;
 	export let transitionsOff: boolean | null = false;
 	export let bgTW: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
 	export let all: boolean | undefined = false; // usually false, but when true modal closes when clicked anywhere
@@ -11,9 +11,7 @@
 	let dispatch = createEventDispatcher();
 
 	function closeModal() {
-		// showModal = false;
-		dispatch('close');
-		// clearNavModals();
+		dispatch('closeModal');
 	}
 
 	function modalDirective(node: HTMLElement) {
@@ -32,14 +30,14 @@
 	}
 </script>
 
-{#key body || transitionsOff ? true : showModal}
+{#key body || transitionsOff ? true : modalOpen}
 	<div
 		role="button"
 		tabindex="0"
 		on:keypress|self={closeModal}
 		on:click|self={closeModal}
 		use:modalDirective
-		class="fixed left-0 top-0 -z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center {showModal &&
+		class="fixed left-0 top-0 -z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center {modalOpen &&
 			`${bgTW} z-50 !flex`} 
 "
 	>
