@@ -7,25 +7,25 @@
 
 	let emailText: HTMLElement;
 	let contactLink: HTMLElement;
-	let contactLinkClicked = false;
+	let contactLinkModalOpen = false;
 	let contactLinkTimeout: ReturnType<typeof setTimeout>;
 
-	onMount(() => document.addEventListener('click', handleContactLinkClicked));
+	onMount(() => document.addEventListener('click', handlecontactLinkModalOpen));
 
 	//This could also be done without 'let contactLink' and with 'e.target.id', but I believe this way scopes everything to this component, whereas the vanilla way could have a id name collision
-	function handleContactLinkClicked(e: MouseEvent | TouchEvent) {
+	function handlecontactLinkModalOpen(e: MouseEvent | TouchEvent) {
 		// if (contactLinkTimeout) clearTimeout(contactLinkTimeout);
 
 		if (e.target === contactLink) {
-			contactLinkClicked = true;
+			contactLinkModalOpen = true;
 			contactLinkTimeout = setTimeout(() => {
-				contactLinkClicked = false;
+				contactLinkModalOpen = false;
 			}, 2000);
 		} else if (e.target === emailText) {
-			contactLinkClicked = true;
+			contactLinkModalOpen = true;
 			clearTimeout(contactLinkTimeout);
 		} else {
-			contactLinkClicked = false;
+			contactLinkModalOpen = false;
 			clearTimeout(contactLinkTimeout);
 		}
 	}
@@ -50,7 +50,7 @@
 	</span>
 </div>
 
-<Modal modalOpen={contactLinkClicked} bgTW={'backdrop-blur-3xl'}>
+<Modal modalOpen={contactLinkModalOpen} bgTW={'backdrop-blur-3xl'}>
 	<ul
 		in:scale={{
 			duration: 1500,

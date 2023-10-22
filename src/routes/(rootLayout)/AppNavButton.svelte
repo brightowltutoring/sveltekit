@@ -1,9 +1,9 @@
 <script>
-	import { navAppClicked, clearNavModals } from '$lib/store/modalsStore';
+	import { navAppModalOpen, clearNavModals } from '$lib/store/modalsStore';
 
 	function handleAppNavClick() {
 		clearNavModals();
-		navAppClicked.set(true);
+		navAppModalOpen.set(true);
 	}
 </script>
 

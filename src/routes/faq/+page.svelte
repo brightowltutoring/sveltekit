@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { showHomeworkModal, loginModalOpen } from '$lib/store/modalsStore';
+	// import { modals } from '$lib/store/modalsStore';
+	import { homeworkModalOpen, loginModalOpen } from '$lib/store/modalsStore';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { quintOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
@@ -19,6 +20,7 @@
 				dispatch('closeFaqModal');
 			}
 			if (target.tagName !== 'SUMMARY') return;
+
 			highlightAndKeepOpen(target);
 		});
 	});
@@ -47,6 +49,15 @@
 		easing: quintOut
 	};
 	const inFlyFAQContainer = { y: -50, duration: 500 };
+
+	function openHomeworkModal() {
+		homeworkModalOpen.set(true);
+		// modals.open('homework');
+	}
+	function openLoginModal() {
+		loginModalOpen.set(true);
+		// modals.open('login');
+	}
 </script>
 
 <main class="h-full overflow-scroll scrollbar-hide">
@@ -67,9 +78,10 @@
 		<details>
 			<summary> Is it possible to access all my session content in one place? </summary>
 
+			<!-- on:click={() => loginModalOpen.set(true)} -->
 			<p>
 				Sure can! Contact us directly to set up a personalized page, or check the option when
-				booking! You will be <button class="text-rose-500" on:click={() => loginModalOpen.set(true)}
+				booking! You will be <button class="text-rose-500" on:click={openLoginModal}
 					>redirected to your personal page upon logging in
 				</button>.
 			</p>
@@ -79,9 +91,8 @@
 			<summary> How do I share homework? </summary>
 
 			<p>
-				Click on "<button class="text-rose-500" on:click={() => showHomeworkModal.set(true)}>
-					Homework</button
-				>" in the navbar and submit screenshots/ PDFs/ etc.
+				Click on "<button class="text-rose-500" on:click={openHomeworkModal}> Homework</button>" in
+				the navbar and submit screenshots/ PDFs/ etc.
 			</p>
 
 			<p>
@@ -198,13 +209,16 @@
 		}
 	}
 
-	/* remove arrow  */
-	details > summary {
+	summary {
+		margin: -0.5em -0.5em 0;
+		padding: 0.5em;
+		border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+
+		/* removes arrow */
 		list-style: none;
-	}
-	/* remove arrow  */
-	details > summary::-webkit-details-marker {
-		display: none;
+		& ::-webkit-details-marker {
+			display: none;
+		}
 	}
 
 	details {
@@ -213,74 +227,60 @@
 		border-radius: var(--borderRadius);
 		padding: 0.5em 0.5em 0;
 		font-size: 18px;
-	}
-
-	@media screen and (min-width: 768px) {
-		details {
-			width: 60vw;
+		@media screen and (min-width: 768px) {
+			& {
+				width: 60vw;
+			}
 		}
-	}
-	@media screen and (max-width: 768px) {
-		details {
-			width: 80vw;
+		@media screen and (max-width: 768px) {
+			& {
+				width: 60vw;
+			}
 		}
-	}
+		& p {
+			padding: 10px;
+		}
+		& a {
+			color: var(--red);
+		}
+		& a:hover {
+			color: rgb(46, 126, 253);
+		}
 
-	summary {
-		margin: -0.5em -0.5em 0;
-		padding: 0.5em;
-		border-radius: var(--borderRadius) var(--borderRadius) 0 0;
-	}
+		:global(html.dark-mode) &:hover {
+			background: #211f51;
+		}
+		&:hover {
+			background: #ddd;
+		}
 
-	details:hover {
-		background: #ddd;
-	}
+		:global(html.dark-mode) &[open] {
+			background: var(--light-green);
+		}
+		&[open] {
+			padding: 0.5em;
+			background: var(--light-green);
+			animation: sweep 0.25s ease-in-out;
+			margin-bottom: 10px;
+			color: black;
 
-	/* svelte :global needed to use predefined darkmode logic */
-	:global(html.dark-mode) details:hover {
-		background: #211f51;
-	}
+			/* dec11,2022: doesnt work on firefox */
+			&:has(summary.highlight) {
+				background: var(--light-red);
+				transition: 0.2s ease-in-out;
+			}
 
-	details p {
-		padding: 10px;
-	}
-
-	details a {
-		color: var(--red);
-	}
-	details a:hover {
-		color: rgb(46, 126, 253);
-	}
-
-	details[open] {
-		padding: 0.5em;
-		background: var(--light-green);
-		animation: sweep 0.25s ease-in-out;
-		margin-bottom: 10px;
-		color: black;
-	}
-
-	/* svelte :global needed to use predefined darkmode logic */
-	:global(html.dark-mode) details[open] {
-		background: var(--light-green);
-	}
-
-	details[open] summary {
-		border-bottom: 1px solid #aaa;
-		margin-bottom: 0.5em;
-		background-color: var(--green);
-		outline: none;
-	}
-
-	details[open] summary.highlight {
-		background: var(--red);
-		color: white;
-		transition: 0.2s ease-in-out;
-	}
-
-	/* dec11,2022: doesnt work on firefox */
-	details[open]:has(summary.highlight) {
-		background: var(--light-red);
-		transition: 0.2s ease-in-out;
+			& summary {
+				border-bottom: 1px solid #aaa;
+				margin-bottom: 0.5em;
+				background-color: var(--green);
+				outline: none;
+			}
+			& summary.highlight {
+				background: var(--red);
+				color: white;
+				transition: 0.2s ease-in-out;
+			}
+		}
 	}
 </style>

@@ -5,7 +5,8 @@
 	import { cookeh, debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
 	import Footer from './(rootLayout)/Footer.svelte';
 	// import Navbar from './(rootLayout)/Navbar-experimental.svelte';
-	import Navbar from './(rootLayout)/Navbar.svelte';
+	import Navbar from './(rootLayout)/Navbar_oct22_2023_old.svelte';
+	// import Navbar from './(rootLayout)/Navbar.svelte';
 	import '../styles.css';
 
 	export let data;

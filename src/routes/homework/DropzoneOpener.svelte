@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-
 	import IconUpload from '$lib/Icons/IconUpload.svelte';
-	import { showHomeworkModal } from '$lib/store/modalsStore';
+	import { homeworkModalOpen } from '$lib/store/modalsStore';
+	// import { modals } from '$lib/store/modalsStore';
 	import { onMount } from 'svelte';
 
 	// let mounted = false;
@@ -17,16 +16,17 @@
 		status = 200;
 	});
 
-	function showHomeworkModalAndClickDropzone() {
+	function homeworkModalOpenAndClickDropzone() {
 		if (mounted) {
-			showHomeworkModal.set(true);
+			homeworkModalOpen.set(true);
+			// modals.open('homework');
 			document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
 		}
 	}
 </script>
 
 <button
-	on:click={showHomeworkModalAndClickDropzone}
+	on:click={homeworkModalOpenAndClickDropzone}
 	aria-label="Upload Button Area"
 	class="submitArea mx-auto flex h-[60vh] w-[65vw] flex-wrap items-center justify-center overflow-scroll backdrop-blur-3xl sm:w-[60vw]"
 >
@@ -61,7 +61,7 @@
 				<label
 					tabindex="-1"
 					for="submit"
-					class="border-1 group rounded-lg bg-red-800 focus:bg-emerald-500 p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave group"
+					class="border-1 group group rounded-lg bg-red-800 p-3 text-white transition-colors duration-500 hover:bg-blue-400 focus:animate-wave focus:bg-emerald-500"
 				>
 					<p class="block group-focus:!hidden">submit</p>
 					<p class="hidden group-focus:!block">success</p>

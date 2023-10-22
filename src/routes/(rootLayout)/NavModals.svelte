@@ -1,13 +1,16 @@
 <script lang="ts">
+	import { modals, type Modals } from '$lib/store/modalsStore';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import LoginCard from '$routes/login/+page.svelte';
 	import Dropzone from '$routes/homework/Dropzone.svelte';
 	import { scale, fly } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
-	import { loginModalOpen, showHomeworkModal, navAppClicked } from '$lib/store/modalsStore';
 	import { page } from '$app/stores';
 	$: ({ data } = $page);
 	// import { isIOS } from '$lib/store/clientStore';
+
+	// svelte4 has type issues when using directly as props
+	$: modals$ = $modals as Modals;
 
 	let stepOneScale = {
 		duration: 1300,
@@ -28,11 +31,11 @@
 	};
 </script>
 
-<!-- modalOpen={$isIOS && $navAppClicked} -->
+<!-- modalOpen={$isIOS && $navAppModalOpen} -->
 <Modal
 	all
-	modalOpen={data.isIOS && $navAppClicked}
-	on:closeModal={() => navAppClicked.set(false)}
+	modalOpen={data.isIOS && modals$['navApp']}
+	on:closeModal={() => modals.close('navApp')}
 	bgTW={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 >
 	<ul class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
@@ -61,22 +64,22 @@
 
 <!-- <Modal body all={true} bind:modalOpen={$loginModalOpen} bgTW={'backdrop-blur-md'}> -->
 <!-- TODO: dont remove bind ... pwa svgs wont work properly -->
-<!-- bind:modalOpen={$loginModalOpen} -->
+
 <Modal
+	on:closeModal={() => modals.close('login')}
+	modalOpen={modals$['login']}
 	bgTW={'backdrop-blur-md'}
-	modalOpen={$loginModalOpen}
-	on:closeModal={() => loginModalOpen.set(false)}
 >
 	<LoginCard />
 </Modal>
 
 <!-- transitionsOff prop declared kills any svelte transitions defined within any slotted components; in modal.svelte a key block conditionally resets the component if transitionsOff is falsy (default behaviour) ...  which is not desired for this dropzone component (want to persist state of uploaded files)  -->
 <!-- TODO: dont remove bind ... pwa svgs wont work properly -->
-<!-- <Modal transitionsOff bind:modalOpen={$showHomeworkModal} bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
+<!-- <Modal transitionsOff bind:modalOpen={$homeworkModalOpen } bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
 <Modal
 	transitionsOff
-	modalOpen={$showHomeworkModal}
-	on:closeModal={() => showHomeworkModal.set(false)}
+	modalOpen={modals$['homework']}
+	on:closeModal={() => modals.close('homework')}
 	bgTW={'bg-[rgba(0,0,0,0.1)]'}
 >
 	<Dropzone

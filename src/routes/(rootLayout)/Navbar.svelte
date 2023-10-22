@@ -2,8 +2,9 @@
 	import { spring } from 'svelte/motion';
 	// import LightDarkMode from './LightDarkMode-experimental.svelte';
 	import LightDarkMode from './LightDarkMode.svelte';
+	// import NavModals from './NavModals_oct22_2023_old.svelte';
 	import NavModals from './NavModals.svelte';
-	import { loginModalOpen, showHomeworkModal, clearNavModals } from '$lib/store/modalsStore';
+	import { type Modals, modals, homeworkModalOpen } from '$lib/store/modalsStore';
 	import { isLoggedIn, isDarkMode /*  isIOS, isPWA  */ } from '$lib/store/clientStore';
 	import { page } from '$app/stores';
 	$: ({ data } = $page);
@@ -12,6 +13,8 @@
 	import { routes } from '$lib/store/routesStore';
 	import LogoButton from './LogoButton.svelte';
 	import AppNavButton from './AppNavButton.svelte';
+
+	$: modals$ = $modals as Modals;
 
 	let showHideNav = '';
 
@@ -47,16 +50,18 @@
 	});
 
 	function handleNavButtonClicks(e: MouseEvent, routePath: string) {
-		clearNavModals();
-
 		if (routePath == '/homework') {
 			e.preventDefault();
-			showHomeworkModal.set(true);
+
+			modals.open('homework');
+			homeworkModalOpen.set(true);
 			return;
 		}
 		if (routePath == '/login') {
 			e.preventDefault();
-			loginModalOpen.set(true);
+
+			modals.open('login');
+
 			return;
 		}
 	}
@@ -80,8 +85,8 @@
 		{#each Object.values($routes).slice(1, 5) as { routePath, name, icon, isCurrent }}
 			{@const navIconClicked =
 				isCurrent ||
-				(routePath === '/homework' && $showHomeworkModal) ||
-				(routePath === '/login' && $loginModalOpen)}
+				(routePath === '/homework' && modals$['homework']) ||
+				(routePath === '/login' && modals$['login'])}
 
 			{@const loggedInDynamicRocket =
 				routePath === '/login' && $isLoggedIn

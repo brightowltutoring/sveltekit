@@ -1,14 +1,19 @@
+import { dev } from '$app/environment';
 import Dropzone, { type DropzoneFile, type DropzoneOptions } from 'dropzone';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-import { showHomeworkModal } from '$lib/store/modalsStore';
+import { homeworkModalOpen } from '$lib/store/modalsStore';
+// import { modals, type Modals } from '$lib/store/modalsStore';
 import { get, writable } from 'svelte/store';
 
 const popUpOnceBoolean$ = writable(false);
 const submitOnce$ = writable(false);
 
+// const dropzoneUrl = '/';
+const dropzoneUrl = dev ? '/' : PUBLIC_UPLOAD_ENDPOINT;
+
 let dropzone: Dropzone;
 const dropzoneOptions: DropzoneOptions = {
-	url: PUBLIC_UPLOAD_ENDPOINT,
+	url: dropzoneUrl,
 	acceptedFiles: '.heic,.jpeg,.jpg,.png,.txt,.pdf,.docx,.doc'
 };
 
@@ -17,7 +22,7 @@ export async function hydrateDropzoneDomEls(target: Element | HTMLElement) {
 
 	dropzone = new Dropzone(target as HTMLElement, dropzoneOptions);
 
-	handleErroredUploads(dropzone);
+	await handleErroredUploads(dropzone);
 }
 
 // Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
@@ -25,30 +30,37 @@ export async function hydrateDropzoneDomEls(target: Element | HTMLElement) {
 
 let queuecompleteTimeout: NodeJS.Timeout;
 
-function handleErroredUploads(DROPZONE_INSTANCE: Dropzone) {
-	let filesToRetry: Array<any> = [];
-	DROPZONE_INSTANCE.on('error', (file: DropzoneFile) => file.accepted && filesToRetry.push(file));
+async function handleErroredUploads(DROPZONE_INSTANCE: Dropzone) {
+	try {
+		let filesToRetry: Array<any> = [];
+		DROPZONE_INSTANCE.on('error', (file: DropzoneFile) => file.accepted && filesToRetry.push(file));
 
-	DROPZONE_INSTANCE.on('queuecomplete', () => {
-		if (queuecompleteTimeout) clearTimeout(queuecompleteTimeout);
-		queuecompleteTimeout = setTimeout(() => showHomeworkModal.set(false), 1000);
-	});
+		DROPZONE_INSTANCE.on('queuecomplete', () => {
+			if (queuecompleteTimeout) clearTimeout(queuecompleteTimeout);
+			queuecompleteTimeout = setTimeout(() => {
+				homeworkModalOpen.set(false);
+				// modals.close('homework');
+			}, 1000);
+		});
 
-	window?.addEventListener('online', () => {
-		if (!(filesToRetry.length > 0)) return;
+		window?.addEventListener('online', () => {
+			if (!(filesToRetry.length > 0)) return;
 
-		for (const file of filesToRetry) {
-			DROPZONE_INSTANCE.processFile(file);
+			for (const file of filesToRetry) {
+				DROPZONE_INSTANCE.processFile(file);
 
-			// removes error mark css after the files have been processed
-			file.previewElement.querySelector('.dz-error-mark').style.visibility = 'hidden';
-			// removes error message css after the files have been processed
-			file.previewElement.querySelector('.dz-error-message').style.visibility = 'hidden';
-		}
+				// removes error mark css after the files have been processed
+				file.previewElement.querySelector('.dz-error-mark').style.visibility = 'hidden';
+				// removes error message css after the files have been processed
+				file.previewElement.querySelector('.dz-error-message').style.visibility = 'hidden';
+			}
 
-		// reset collected files array when done
-		filesToRetry.length == 0;
-	});
+			// reset collected files array when done
+			filesToRetry.length == 0;
+		});
+	} catch (error) {
+		console.log('error', error);
+	}
 }
 
 let dropzonePopUpOnceTimeout: NodeJS.Timeout;
@@ -68,7 +80,10 @@ export function dropzonePopUpOnce() {
 
 // based on previous function 'PostDummyOnce()'
 export async function getIframeSrcAndPostDummyOnce() {
-	if (get(showHomeworkModal) === true && get(submitOnce$) === false) {
+	// let homeworkModalOpenNow = get(homeworkModalOpen) === true;
+	// let homeworkModalOpenNow = true;
+	// if ((get(modals) as Modals)['homework'] === true && get(submitOnce$) === false) {
+	if (get(homeworkModalOpen) === true && get(submitOnce$) === false) {
 		submitOnce$.set(true);
 		postDummyTextFileToGoogleDrive('foo');
 
