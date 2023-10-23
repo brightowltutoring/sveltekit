@@ -7,7 +7,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { isLoggedIn } from '$lib/store/clientStore';
-	import { loginModalOpen } from '$lib/store/modalsStore';
+	import { modals, type Modals } from '$lib/store/modalsStore';
 	import { cookeh } from '$lib/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import { elasticOut, quintOut } from 'svelte/easing';
@@ -27,15 +27,16 @@
 
 	let redirectSetInterval: ReturnType<typeof setInterval>;
 	let seconds = 3;
-	// $: console.log(seconds, 'seconds');
+
 	$: if (seconds === 0) {
-		loginModalOpen.set(false);
+		modals.closeAll();
 		clearInterval(redirectSetInterval);
 		goto(userRedirectUrl);
 		// seconds = 3; // seemingly not needed
 	}
 
-	$: if (!$loginModalOpen && $page.route.id !== '/login') {
+	// $: if (!$loginModalOpen && $page.route.id !== '/login') {
+	$: if (!($modals as Modals)['login'] && $page.route.id !== '/login') {
 		clearInterval(redirectSetInterval);
 	}
 
@@ -105,7 +106,8 @@
 			signInWithEmailLink(auth, email, window.location.href)
 				.then(() => {
 					window.localStorage.removeItem('emailForSignIn');
-					loginModalOpen.set(true);
+
+					modals.open('login');
 				})
 				.catch((error) => console.log('signInWithEmailLink:', error));
 		}

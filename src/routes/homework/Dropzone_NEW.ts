@@ -1,13 +1,15 @@
 import { dev } from '$app/environment';
 import Dropzone, { type DropzoneFile, type DropzoneOptions } from 'dropzone';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-import { homeworkModalOpen } from '$lib/store/modalsStore';
+
+import { modals, type Modals } from '$lib/store/modalsStore';
 import { get, writable } from 'svelte/store';
 
 const popUpOnceBoolean$ = writable(false);
 const submitOnce$ = writable(false);
 
 // oct22,2023: during development 'PUBLIC_UPLOAD_ENDPOINT' started giving CORS issues..
+
 const dropzoneUrl = dev ? '/' : PUBLIC_UPLOAD_ENDPOINT;
 
 let dropzone: Dropzone;
@@ -37,7 +39,8 @@ async function handleErroredUploads(DROPZONE_INSTANCE: Dropzone) {
 		DROPZONE_INSTANCE.on('queuecomplete', () => {
 			if (queuecompleteTimeout) clearTimeout(queuecompleteTimeout);
 			queuecompleteTimeout = setTimeout(() => {
-				homeworkModalOpen.set(false);
+				// homeworkModalOpen.set(false);
+				modals.close('homework');
 			}, 1000);
 		});
 
@@ -80,8 +83,8 @@ export function dropzonePopUpOnce() {
 export async function getIframeSrcAndPostDummyOnce() {
 	// let homeworkModalOpenNow = get(homeworkModalOpen) === true;
 	// let homeworkModalOpenNow = true;
-	// if ((get(modals) as Modals)['homework'] === true && get(submitOnce$) === false) {
-	if (get(homeworkModalOpen) === true && get(submitOnce$) === false) {
+	// if (get(homeworkModalOpen) === true && get(submitOnce$) === false) {
+	if ((get(modals) as Modals)['homework'] === true && get(submitOnce$) === false) {
 		submitOnce$.set(true);
 		postDummyTextFileToGoogleDrive('foo');
 

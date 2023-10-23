@@ -1,12 +1,7 @@
 <script lang="ts">
 	import IconUpload from '$lib/Icons/IconUpload.svelte';
-	// import { homeworkModalOpen } from '$lib/store/modalsStore';
 	import { modals } from '$lib/store/modalsStore';
 	import { onMount } from 'svelte';
-
-	// let mounted = false;
-	// $: status = mounted ? 200 : 302;
-	// onMount(() => (mounted = true));
 
 	let mounted = false;
 	let status = 302;
@@ -18,7 +13,6 @@
 
 	function homeworkModalOpenAndClickDropzone() {
 		if (mounted) {
-			// homeworkModalOpen.set(true);
 			modals.open('homework');
 			document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
 		}

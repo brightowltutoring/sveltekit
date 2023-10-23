@@ -1,18 +1,15 @@
 <script lang="ts">
 	import { spring } from 'svelte/motion';
-	// import LightDarkMode from './LightDarkMode-experimental.svelte';
 	import LightDarkMode from './LightDarkMode.svelte';
-	// import NavModals from './NavModals_oct22_2023_old.svelte';
-	import NavModals from './NavModals.svelte';
-	import { type Modals, modals, homeworkModalOpen } from '$lib/store/modalsStore';
-	import { isLoggedIn, isDarkMode /*  isIOS, isPWA  */ } from '$lib/store/clientStore';
+	import NavModals from './NavModals_NEW.svelte';
+	import { type Modals, modals } from '$lib/store/modalsStore';
+	import { isLoggedIn, isDarkMode } from '$lib/store/clientStore';
 	import { page } from '$app/stores';
 	$: ({ data } = $page);
 
 	import { scrollY, instDeltaY } from '$lib/store/scrollStore';
 	import { routes } from '$lib/store/routesStore';
 	import LogoButton from './LogoButton.svelte';
-	import AppNavButton from './AppNavButton.svelte';
 
 	$: modals$ = $modals as Modals;
 
@@ -50,20 +47,17 @@
 	});
 
 	function handleNavButtonClicks(e: MouseEvent, routePath: string) {
-		if (routePath == '/homework') {
+		if (routePath === '/homework') {
 			e.preventDefault();
-
 			modals.open('homework');
-			homeworkModalOpen.set(true);
 			return;
 		}
-		if (routePath == '/login') {
+		if (routePath === '/login') {
 			e.preventDefault();
-
 			modals.open('login');
-
 			return;
 		}
+		modals.closeAll();
 	}
 </script>
 
@@ -79,7 +73,12 @@
 	>
 		<!-- <li class={$isIOS ? 'block pwa:hidden' : 'hidden'}> -->
 		<li class={data.isIOS ? 'block pwa:hidden' : 'hidden'}>
-			<AppNavButton />
+			<button
+				on:click={() => modals.open('navApp')}
+				class="border-b-1 rounded px-3 py-1 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:bg-indigo-400 hover:text-white hover:shadow-lg active:animate-pulse md:text-xl"
+			>
+				App
+			</button>
 		</li>
 
 		{#each Object.values($routes).slice(1, 5) as { routePath, name, icon, isCurrent }}

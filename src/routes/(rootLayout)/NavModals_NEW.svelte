@@ -2,12 +2,11 @@
 	import { modals, type Modals } from '$lib/store/modalsStore';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import LoginCard from '$routes/login/+page.svelte';
-	import Dropzone from '$routes/homework/Dropzone.svelte';
+	import Dropzone from '$routes/homework/Dropzone_NEW.svelte';
 	import { scale, fly } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { page } from '$app/stores';
 	$: ({ data } = $page);
-	// import { isIOS } from '$lib/store/clientStore';
 
 	// svelte4 has type issues when using directly as props
 	$: modals$ = $modals as Modals;
@@ -31,7 +30,6 @@
 	};
 </script>
 
-<!-- modalOpen={$isIOS && $navAppModalOpen} -->
 <Modal
 	all
 	modalOpen={data.isIOS && modals$['navApp']}
@@ -62,9 +60,6 @@
 	</ul>
 </Modal>
 
-<!-- <Modal body all={true} bind:modalOpen={$loginModalOpen} bgTW={'backdrop-blur-md'}> -->
-<!-- TODO: dont remove bind ... pwa svgs wont work properly -->
-
 <Modal
 	on:closeModal={() => modals.close('login')}
 	modalOpen={modals$['login']}
@@ -73,9 +68,6 @@
 	<LoginCard />
 </Modal>
 
-<!-- transitionsOff prop declared kills any svelte transitions defined within any slotted components; in modal.svelte a key block conditionally resets the component if transitionsOff is falsy (default behaviour) ...  which is not desired for this dropzone component (want to persist state of uploaded files)  -->
-<!-- TODO: dont remove bind ... pwa svgs wont work properly -->
-<!-- <Modal transitionsOff bind:modalOpen={$homeworkModalOpen } bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
 <Modal
 	transitionsOff
 	modalOpen={modals$['homework']}

@@ -1,6 +1,4 @@
-// import { isLoggedIn } from '$lib/store/clientStore';
-import { loginModalOpen } from '$lib/store/modalsStore';
-import { cookeh } from '$lib/utils';
+import { modals } from '$lib/store/modalsStore';
 
 export async function logoutFunction() {
 	const [{ auth }, { signOut }] = await Promise.all([
@@ -12,7 +10,8 @@ export async function logoutFunction() {
 	// cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
 
 	console.log('logoutFunction hit');
-	loginModalOpen.set(false);
+	// loginModalOpen.set(false);
+	modals.close('login');
 
 	signOut(auth)
 		.then(() => console.log('firebase user logged out'))

@@ -1,6 +1,5 @@
 <script lang="ts">
-	// import { modals } from '$lib/store/modalsStore';
-	import { homeworkModalOpen, loginModalOpen } from '$lib/store/modalsStore';
+	import { modals } from '$lib/store/modalsStore';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { quintOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
@@ -51,12 +50,12 @@
 	const inFlyFAQContainer = { y: -50, duration: 500 };
 
 	function openHomeworkModal() {
-		homeworkModalOpen.set(true);
-		// modals.open('homework');
+		// homeworkModalOpen.set(true);
+		modals.open('homework');
 	}
 	function openLoginModal() {
-		loginModalOpen.set(true);
-		// modals.open('login');
+		// loginModalOpen.set(true);
+		modals.open('login');
 	}
 </script>
 
