@@ -16,7 +16,7 @@
 
 	function modalDirective(node: HTMLElement) {
 		if (!body && !all) return;
-		console.log('modal');
+		// console.log('modal');
 
 		body && document.body.appendChild(node);
 		all && node.addEventListener('click', closeModal);

@@ -78,9 +78,6 @@ export function dropzonePopUpOnce() {
 
 // based on previous function 'PostDummyOnce()'
 export async function getIframeSrcAndPostDummyOnce() {
-	// let homeworkModalOpenNow = get(homeworkModalOpen) === true;
-	// let homeworkModalOpenNow = true;
-	// if ((get(modals) as Modals)['homework'] === true && get(submitOnce$) === false) {
 	if (get(homeworkModalOpen) === true && get(submitOnce$) === false) {
 		submitOnce$.set(true);
 		postDummyTextFileToGoogleDrive('foo');

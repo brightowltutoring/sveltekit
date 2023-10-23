@@ -1,8 +1,7 @@
 import { writable } from 'svelte/store';
 
+// Old way to mutually handle modals. More manual and readable, but 'clearNavModals' becomes awkward to use ...
 export const contactLinkModalOpen = writable(false);
-
-// // old way to mutually handle modals ... more readable makes more sense the new way
 export const navAppModalOpen = writable(false);
 export const loginModalOpen = writable(false);
 export const homeworkModalOpen = writable(false);
@@ -11,17 +10,19 @@ export async function clearNavModals() {
 	loginModalOpen.set(false);
 	homeworkModalOpen.set(false);
 	navAppModalOpen.set(false);
+	contactLinkModalOpen.set(false);
 }
 
-// necessary when referencing the keys as strings in custom store below
-// export interface Modals {
-// 	[key: string]: boolean;
-// }
-export type Modals = {
+// New way to mutually handle modals below; 'open' method automatically closes other modals
+type Modals = {
 	[key: string]: boolean;
+} & {
+	contactLink: boolean;
+	navApp: boolean;
+	login: boolean;
+	homework: boolean;
 };
 
-// Usage
 export const modals = createExclusiveModals({
 	contactLink: false,
 	navApp: false,
@@ -30,59 +31,34 @@ export const modals = createExclusiveModals({
 });
 
 // modals.open('contactLink'); // Sets contactLink modal to true and all others to false!
-// modals.close('contactLink'); // Sets contactLink modal to false only
-// modals.closeAll(); // Closes all ... which seems more useful
-function createExclusiveModals(modalsObject: Object) {
-	const { subscribe, update } = writable(modalsObject);
+function createExclusiveModals(_modals: Modals) {
+	const { subscribe, update } = writable(_modals);
 
 	return { subscribe, open, close, closeAll };
 
 	function open(modalName: string) {
 		update((modals) => {
 			for (const key in modals) {
-				console.log('open');
-				(modals as Modals)[key] = key === modalName;
+				// console.log('open');
+				modals[key] = key === modalName;
 			}
 			return modals;
 		});
 	}
 	function close(modalName: string) {
 		update((modals) => {
-			console.log('close');
-			(modals as Modals)[modalName] = false;
+			// console.log('close');
+			modals[modalName] = false;
 			return modals;
 		});
 	}
 	function closeAll() {
 		update((modals) => {
-			console.log('closeAll');
+			// console.log('closeAll');
 			for (const key in modals) {
-				(modals as Modals)[key] = false;
+				modals[key] = false;
 			}
 			return modals;
 		});
 	}
 }
-// // old definitions (creates new objects)
-// definitions
-// function close(modalName: string) {
-// 	set(function (modals: Object) {
-// 		const newModals = { ...modals };
-// 		//@ts-ignore
-// 		newModals[modalName] = false;
-// 		return newModals;
-// 	});
-// }
-
-// function open(modalName: string) {
-// 	update((modals) => {
-// 		const newModals = {};
-
-// 		Object.keys(modals).forEach((k) => {
-// 			//@ts-ignore
-// 			newModals[k] = k === modalName;
-// 		});
-
-// 		return newModals;
-// 	});
-// }

@@ -7,7 +7,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { isLoggedIn } from '$lib/store/clientStore';
-	import { modals, type Modals } from '$lib/store/modalsStore';
+	import { modals } from '$lib/store/modalsStore';
 	import { cookeh } from '$lib/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import { elasticOut, quintOut } from 'svelte/easing';
@@ -36,7 +36,7 @@
 	}
 
 	// $: if (!$loginModalOpen && $page.route.id !== '/login') {
-	$: if (!($modals as Modals)['login'] && $page.route.id !== '/login') {
+	$: if (!$modals.login && $page.route.id !== '/login') {
 		clearInterval(redirectSetInterval);
 	}
 

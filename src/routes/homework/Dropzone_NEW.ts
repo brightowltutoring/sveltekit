@@ -1,8 +1,7 @@
 import { dev } from '$app/environment';
 import Dropzone, { type DropzoneFile, type DropzoneOptions } from 'dropzone';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-
-import { modals, type Modals } from '$lib/store/modalsStore';
+import { modals } from '$lib/store/modalsStore';
 import { get, writable } from 'svelte/store';
 
 const popUpOnceBoolean$ = writable(false);
@@ -84,7 +83,7 @@ export async function getIframeSrcAndPostDummyOnce() {
 	// let homeworkModalOpenNow = get(homeworkModalOpen) === true;
 	// let homeworkModalOpenNow = true;
 	// if (get(homeworkModalOpen) === true && get(submitOnce$) === false) {
-	if ((get(modals) as Modals)['homework'] === true && get(submitOnce$) === false) {
+	if (get(modals).homework === true && get(submitOnce$) === false) {
 		submitOnce$.set(true);
 		postDummyTextFileToGoogleDrive('foo');
 

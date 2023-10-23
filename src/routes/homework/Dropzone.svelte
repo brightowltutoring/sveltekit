@@ -6,7 +6,6 @@
 	import './dropzone.css';
 	import IconUploadGradient from '$lib/Icons/IconUploadGradient.svelte';
 	import { homeworkModalOpen } from '$lib/store/modalsStore';
-	// import {  modals, type Modals } from '$lib/store/modalsStore';
 	import { useInView } from '$lib/utils';
 	import {
 		dropzonePopUpOnce,
@@ -18,9 +17,7 @@
 
 	const updateIframeSrc = async () => (iframeSrc = await getIframeSrcAndPostDummyOnce());
 
-	// $: if (($modals as Modals)['homework']) dropzonePopUpOnce(), updateIframeSrc();
 	$: $homeworkModalOpen && (dropzonePopUpOnce(), updateIframeSrc());
-
 	// $: $homeworkModalOpen  && dropzonePopUpOnce();
 	// $: $homeworkModalOpen  && updateIframeSrc();
 </script>

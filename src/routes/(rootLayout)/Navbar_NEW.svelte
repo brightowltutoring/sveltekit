@@ -2,7 +2,7 @@
 	import { spring } from 'svelte/motion';
 	import LightDarkMode from './LightDarkMode.svelte';
 	import NavModals from './NavModals_NEW.svelte';
-	import { type Modals, modals } from '$lib/store/modalsStore';
+	import { modals } from '$lib/store/modalsStore';
 	import { isLoggedIn, isDarkMode } from '$lib/store/clientStore';
 	import { page } from '$app/stores';
 	$: ({ data } = $page);
@@ -10,8 +10,6 @@
 	import { scrollY, instDeltaY } from '$lib/store/scrollStore';
 	import { routes } from '$lib/store/routesStore';
 	import LogoButton from './LogoButton.svelte';
-
-	$: modals$ = $modals as Modals;
 
 	let showHideNav = '';
 
@@ -84,8 +82,8 @@
 		{#each Object.values($routes).slice(1, 5) as { routePath, name, icon, isCurrent }}
 			{@const navIconClicked =
 				isCurrent ||
-				(routePath === '/homework' && modals$['homework']) ||
-				(routePath === '/login' && modals$['login'])}
+				(routePath === '/homework' && $modals.homework) ||
+				(routePath === '/login' && $modals.login)}
 
 			{@const loggedInDynamicRocket =
 				routePath === '/login' && $isLoggedIn

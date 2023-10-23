@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { modals, type Modals } from '$lib/store/modalsStore';
+	import { modals } from '$lib/store/modalsStore';
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import LoginCard from '$routes/login/+page.svelte';
 	import Dropzone from '$routes/homework/Dropzone_NEW.svelte';
@@ -9,7 +9,6 @@
 	$: ({ data } = $page);
 
 	// svelte4 has type issues when using directly as props
-	$: modals$ = $modals as Modals;
 
 	let stepOneScale = {
 		duration: 1300,
@@ -32,7 +31,7 @@
 
 <Modal
 	all
-	modalOpen={data.isIOS && modals$['navApp']}
+	modalOpen={data.isIOS && $modals.navApp}
 	on:closeModal={() => modals.close('navApp')}
 	bgTW={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 >
@@ -62,7 +61,7 @@
 
 <Modal
 	on:closeModal={() => modals.close('login')}
-	modalOpen={modals$['login']}
+	modalOpen={$modals.login}
 	bgTW={'backdrop-blur-md'}
 >
 	<LoginCard />
@@ -70,7 +69,7 @@
 
 <Modal
 	transitionsOff
-	modalOpen={modals$['homework']}
+	modalOpen={$modals.homework}
 	on:closeModal={() => modals.close('homework')}
 	bgTW={'bg-[rgba(0,0,0,0.1)]'}
 >
