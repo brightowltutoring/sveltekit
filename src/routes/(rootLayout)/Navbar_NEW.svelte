@@ -83,7 +83,7 @@
 			{@const navIconClicked =
 				isCurrent ||
 				(routePath === '/homework' && $modals.homework) ||
-				(routePath === '/login' && $modals.login)}
+				(routePath === '/login' && $modals.contactLink)}
 
 			{@const loggedInDynamicRocket =
 				routePath === '/login' && $isLoggedIn

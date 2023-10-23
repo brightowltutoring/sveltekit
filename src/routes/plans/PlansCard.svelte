@@ -31,7 +31,7 @@
 
 <plans-card
 	in:scale|global={inScale}
-	class="group block rounded-xl bg-[#f2f7fa] p-5 text-center shadow-md duration-300 hover:scale-105 hover:shadow-lg dark:bg-[#262333] dark:hover:shadow-xl"
+	class="] group block rounded-xl bg-[#f2f7fa] p-5 text-center shadow-md duration-300 hover:scale-105 hover:shadow-lg dark:bg-[#262333] dark:hover:shadow-xl"
 >
 	<p class="py-5 text-center font-Poppins text-4xl">
 		{cardTitle}

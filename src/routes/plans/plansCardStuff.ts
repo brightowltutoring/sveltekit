@@ -6,10 +6,15 @@ const color = {
 
 // unfortunately cannot interpolate js variables inside tailwind bg class
 const buttonColor = {
-	// 1: 'bg-gradient-to-r from-[#f34d4e] via-[#f34d4e] to-violet-400' /* red */,
-	1: 'bg-[#f34d4e]' /* red */,
-	2: 'bg-[#2aa5d6]' /* blue */,
-	3: 'bg-[#fea45c]' /* yellow */
+	// 1: 'bg-gradient-to-tr from-[#f34d4e] from-[50%] via-red-300 to-[#f34d4e]',
+	// 2: 'bg-gradient-to-tr from-indigo-600 from-[40%] via-indigo-400 to-indigo-600'
+
+	1: 'bg-[#AF1433] dark:brightness-200' /* red */,
+	2: 'bg-[#353DD9] dark:brightness-200' /* blue */
+
+	// 1: 'bg-[#f34d4e]' /* red */,
+	// 2: 'bg-[#2aa5d6]' /* blue */,
+	// 3: 'bg-[#fea45c]' /* yellow */
 };
 
 export interface payButton {

@@ -1,20 +1,9 @@
 <script lang="ts">
 	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
 	import DropzoneOpener from './homework/DropzoneOpener_NEW.svelte';
-	// import DropzoneOpener from './homework/DropzoneOpener.svelte';
 	import PlansSection from './plans/+page.svelte';
 	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
 	import Reviews from './reviews/Reviews.svelte';
-	import { onMount } from 'svelte';
-	import { elasticOut } from 'svelte/easing';
-	import { slide } from 'svelte/transition';
-
-	let ready = false;
-
-	onMount(() => (ready = true));
-
-	export let form;
-	$: success = form?.success;
 </script>
 
 <BackgroundVideo />
@@ -24,15 +13,10 @@
 		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
 
 		<div class="grid grid-rows-1">
-			{#key ready}
-				<div
-					class="pb-4 font-Poppins text-6xl"
-					in:slide={{ duration: ready ? 1000 : 0, easing: elasticOut }}
-				>
-					Math, Physics
-					<span class="gradientTextColor"> ... Online! </span>
-				</div>
-			{/key}
+			<div class="pb-4 font-Poppins text-6xl">
+				Math, Physics
+				<span class="gradientTextColor"> ... Online! </span>
+			</div>
 
 			<button class="animate-bounce font-Nunito text-2xl font-thin"> 👇 get started </button>
 		</div>
@@ -45,7 +29,6 @@
 		</a>
 
 		<DropzoneOpener />
-		<!-- <DropzoneOpener {success} /> -->
 	</section>
 
 	<!-- third page -->

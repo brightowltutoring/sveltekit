@@ -14,13 +14,14 @@ export async function clearNavModals() {
 }
 
 // New way to mutually handle modals below; 'open' method automatically closes other modals
+
 type Modals = {
-	[key: string]: boolean;
-} & {
 	contactLink: boolean;
 	navApp: boolean;
 	login: boolean;
 	homework: boolean;
+} & {
+	[key: string]: boolean;
 };
 
 export const modals = createExclusiveModals({
@@ -62,3 +63,8 @@ function createExclusiveModals(_modals: Modals) {
 		});
 	}
 }
+
+// No intellisense provided ... useless
+// type Modals = {
+// 	[key in 'contactLink' | 'navApp' | 'login' | 'homework' as string]: boolean;
+// };
