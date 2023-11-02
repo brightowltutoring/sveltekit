@@ -195,19 +195,6 @@
 		--borderRadius: 15px;
 	}
 
-	/* opacity seems to not do much */
-	@keyframes sweep {
-		0% {
-			opacity: 0;
-			margin-top: -15px;
-		}
-
-		100% {
-			opacity: 1;
-			margin-top: 0px;
-		}
-	}
-
 	summary {
 		margin: -0.5em -0.5em 0;
 		padding: 0.5em;
@@ -215,7 +202,7 @@
 
 		/* removes arrow */
 		list-style: none;
-		& ::-webkit-details-marker {
+		&::-webkit-details-marker {
 			display: none;
 		}
 	}
@@ -280,6 +267,19 @@
 				color: white;
 				transition: 0.2s ease-in-out;
 			}
+		}
+	}
+
+	/* opacity seems to not do much */
+	@keyframes sweep {
+		0% {
+			opacity: 0;
+			margin-top: -15px;
+		}
+
+		100% {
+			opacity: 1;
+			margin-top: 0px;
 		}
 	}
 </style>

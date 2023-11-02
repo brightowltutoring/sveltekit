@@ -7,9 +7,12 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { isLoggedIn } from '$lib/store/clientStore';
+
+	// $: isLoggedIn = getContext('isLoggedIn');
+
 	import { modals } from '$lib/store/modalsStore';
 	import { cookeh } from '$lib/utils';
-	import { onDestroy, onMount } from 'svelte';
+	import { createEventDispatcher, getContext, onDestroy, onMount } from 'svelte';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
 	import { logoutFunction } from './logoutFunction';
@@ -117,28 +120,24 @@
 				loggedInDisplayName = user.displayName;
 				loggedInEmail = user.email;
 
-				isLoggedIn.set(true);
+				document.dispatchEvent(new CustomEvent('login'));
 
 				loginModalOpenRedirect(loggedInEmail);
-				cookeh.set('haventLoggedOut', $isLoggedIn);
 
-				// cookeh.set('haventLoggedOut', Boolean(user));
+				cookeh.set('haventLoggedOut', Boolean(user));
 			} else {
+				// document.dispatchEvent(new CustomEvent('logout'));
+				// unsure if leaving here or in 'handleLogout'
+
 				loggedInEmail = '';
 			}
-
-			// these couldve been set in else branch, but now in logoutFunction.ts
-			// cookeh.eat('haventLoggedOut', 'redirectUrlFromCookies');
-			// isLoggedIn.set(false);
-
-			// this commented out code can only be set in logoutFunction.ts, otherwise the login modal is 'continuously closed'
-			// loginModalOpen.set(false);
 		});
 	}
 
 	function handleLogout() {
 		clearInterval(redirectSetInterval); // this not working on  '/login'
 		logoutFunction();
+		document.dispatchEvent(new CustomEvent('logout'));
 	}
 </script>
 

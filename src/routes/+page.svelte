@@ -1,9 +1,25 @@
 <script lang="ts">
 	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
+	import { onMount } from 'svelte';
 	import DropzoneOpener from './homework/DropzoneOpener_NEW.svelte';
 	import PlansSection from './plans/+page.svelte';
 	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
 	import Reviews from './reviews/Reviews.svelte';
+
+	// function isCalendlyEvent(e: MessageEvent) {
+	// 	return e.data.event && e.data.event.indexOf('calendly') === 0;
+	// }
+
+	// onMount(() => {
+	// 	window.addEventListener('message', (e) => {
+	// 		if (isCalendlyEvent(e)) {
+	// 			let payload = e.data;
+	// 			if (payload) {
+	// 				alert(JSON.stringify(payload));
+	// 			}
+	// 		}
+	// 	});
+	// });
 </script>
 
 <BackgroundVideo />

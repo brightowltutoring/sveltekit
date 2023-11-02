@@ -82,7 +82,6 @@ body:has(.disableScrollOnThisPage) {
 @keyframes fadeInFromNone {
 	0% {
 		display: none;
-
 		transform: scale(0) rotate(30deg);
 	}
 

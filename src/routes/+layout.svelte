@@ -1,17 +1,32 @@
 <script lang="ts">
+	// import { scrollY } from '$lib/store/scrollStore';
+
 	export let data;
 
 	import '../styles.css';
 	import { page } from '$app/stores';
 	import { scrollY } from '$lib/store/scrollStore';
-	import { isLoggedIn, isSafari } from '$lib/store/clientStore';
+	import { isSafari, isLoggedIn } from '$lib/store/clientStore';
 	import { debounce, disableZoomOnTouchDevices, setIsPwaCookie } from '$lib/utils';
-	import Footer from './(rootLayout)/Footer.svelte';
-	import Navbar from './(rootLayout)/Navbar_NEW.svelte';
+	import Footer from './Footer.svelte';
+	import Navbar from './Navbar.svelte';
+	import { onMount } from 'svelte';
 
+	isSafari.set(data.isSafari === true);
 	$: seoString = data.seoString;
 	$: isLoggedIn.set(data.haventLoggedOut === 'true');
-	isSafari.set(data.isSafari === true);
+
+	const login = () => isLoggedIn.set(true);
+	const logout = () => isLoggedIn.set(false);
+	onMount(() => {
+		document.addEventListener('login', login);
+		document.addEventListener('logout', logout);
+
+		return () => {
+			document.removeEventListener('login', login);
+			document.removeEventListener('logout', logout);
+		};
+	});
 
 	disableZoomOnTouchDevices();
 	setIsPwaCookie();
@@ -35,7 +50,7 @@
 <svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault />
 
 <main>
-	<Navbar />
+	<Navbar isLoggedIn={$isLoggedIn} scrollY={$scrollY} />
 	<div class="px-[5%] pt-32">
 		<slot />
 	</div>

@@ -40,6 +40,7 @@ export function browserStore(key: string, value: valueType, type: StorageType = 
 			browserStorage.setItem(key, JSON.stringify(value)); // save also to local storage as a string
 			return set(JSON.stringify(value));
 		},
+		//@ts-ignore
 		update: (callback: Updater<T>) => {
 			return update((last) => {
 				const value = callback(last);
