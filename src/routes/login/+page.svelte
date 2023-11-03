@@ -7,12 +7,9 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { isLoggedIn } from '$lib/store/clientStore';
-
-	// $: isLoggedIn = getContext('isLoggedIn');
-
 	import { modals } from '$lib/store/modalsStore';
 	import { cookeh } from '$lib/utils';
-	import { createEventDispatcher, getContext, onDestroy, onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
 	import { logoutFunction } from './logoutFunction';
@@ -35,10 +32,8 @@
 		modals.closeAll();
 		clearInterval(redirectSetInterval);
 		goto(userRedirectUrl);
-		// seconds = 3; // seemingly not needed
 	}
 
-	// $: if (!$loginModalOpen && $page.route.id !== '/login') {
 	$: if (!$modals.login && $page.route.id !== '/login') {
 		clearInterval(redirectSetInterval);
 	}
@@ -163,7 +158,6 @@
 		Redirecting in
 		<p class="p-5 text-5xl">{seconds}</p>
 
-		<!-- on:click={logoutFunction} -->
 		<form method="POST" use:enhance={handleLogout}>
 			<button
 				formaction={'/logout'}

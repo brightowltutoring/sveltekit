@@ -18,6 +18,7 @@
 
 	const login = () => isLoggedIn.set(true);
 	const logout = () => isLoggedIn.set(false);
+
 	onMount(() => {
 		document.addEventListener('login', login);
 		document.addEventListener('logout', logout);

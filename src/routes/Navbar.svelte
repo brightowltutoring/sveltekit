@@ -3,9 +3,7 @@
 	export let scrollY = 0;
 	import { instDeltaY } from '$lib/store/scrollStore'; // make this 'export let' next?
 
-	import LoginCard from '$routes/login/+page.svelte';
-	import IconSun from '$lib/Icons/IconSun.svelte';
-	import IconMoon from '$lib/Icons/IconMoon.svelte';
+	import LoginCard from '$routes/login/page-nov1-2023-old.svelte';
 	import Modal from '$src/lib/Wrappers/Modal.svelte';
 	import Dropzone from '$routes/homework/Dropzone.svelte';
 
@@ -102,25 +100,6 @@
 
 		$routes.home.isCurrent = true;
 	}
-
-	//modals stuff
-	let stepOneScale = {
-		duration: 1300,
-		easing: elasticOut
-	};
-
-	let stepTwoFlyIn = {
-		x: 100,
-		delay: 1200,
-		duration: 1000,
-		easing: quintOut
-	};
-	let stepThreeFlyIn = {
-		x: 200,
-		delay: 2000,
-		duration: 1200,
-		easing: quintOut
-	};
 </script>
 
 <svelte:head>
@@ -189,15 +168,18 @@
 			</li>
 		{/each}
 
-		<li class="py-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
-			<!-- <LightDarkMode /> -->
-			<div class="fadeIn px-2">
+		<li class="p-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
+			<button class="fadeIn" on:click={toggleDarkMode}>
 				{#key $isDarkMode}
-					<button on:click={toggleDarkMode} in:scale={{ duration: 1000, easing: elasticOut }}>
-						<svelte:component this={$isDarkMode ? IconSun : IconMoon} />
-					</button>
+					<img
+						in:scale={{ duration: 1000, easing: elasticOut }}
+						height="24"
+						width="24"
+						src={$isDarkMode ? '/sun.svg' : '/moon.svg'}
+						alt={$isDarkMode ? 'sun svg' : 'moon svg'}
+					/>
 				{/key}
-			</div>
+			</button>
 		</li>
 	</ul>
 </nav>
@@ -211,11 +193,11 @@
 		bgTW={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 	>
 		<ul class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
-			<li in:scale={stepOneScale}>
+			<li in:scale={{ duration: 1300, easing: elasticOut }}>
 				<div class="text-6xl">1.</div>
 				Open Safari
 			</li>
-			<li in:fly={stepTwoFlyIn}>
+			<li in:fly={{ x: 100, delay: 1200, duration: 1000, easing: quintOut }}>
 				<div class="text-6xl">2.</div>
 				<div class="flex flex-row items-center justify-center gap-x-2 pt-2">
 					<span> Click share icon</span>
@@ -227,7 +209,7 @@
 				</div>
 			</li>
 
-			<li class="text-black" in:fly={stepThreeFlyIn}>
+			<li class="text-black" in:fly={{ x: 200, delay: 2000, duration: 1200, easing: quintOut }}>
 				<div class="text-6xl">3.</div>
 				Click 'Add to Home Screen' 🚀
 			</li>
@@ -256,9 +238,10 @@
 	</Modal>
 </section>
 
-<style lang="postcss">
+<style>
 	.fadeIn {
 		animation: fadeIn 0.8s ease;
+		transform-origin: center;
 	}
 
 	@keyframes fadeIn {

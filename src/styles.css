@@ -102,3 +102,34 @@ body:has(.disableScrollOnThisPage) {
 		background-position: right;
 	}
 }
+
+/* experimental: trying to replicate svelte's elastic transition without needing JS */
+/* cubic-bezier(0.64, 0.57, 0.67, 1.53); */
+.elasticOut:not(.disable_animation) {
+	animation: elasticOut 0.8s ease;
+}
+
+@keyframes elasticOut {
+	0% {
+	}
+
+	40% {
+		transform: translateY(-50px);
+	}
+
+	60% {
+		transform: translateY(20px);
+	}
+
+	80% {
+		transform: translateY(-40px);
+	}
+
+	/* 90% {
+		transform: translateY(10px);
+	} */
+
+	100% {
+		transform: translateY(0px);
+	}
+}

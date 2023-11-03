@@ -1,10 +1,16 @@
+<script context="module">
+	let timesMounted = 0;
+</script>
+
 <script lang="ts">
 	import BackgroundVideo from '$lib/BackgroundVideo.svelte';
 	import { onMount } from 'svelte';
+
 	import DropzoneOpener from './homework/DropzoneOpener_NEW.svelte';
 	import PlansSection from './plans/+page.svelte';
 	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
 	import Reviews from './reviews/Reviews.svelte';
+	import { sleep } from '$src/lib/utils';
 
 	// function isCalendlyEvent(e: MessageEvent) {
 	// 	return e.data.event && e.data.event.indexOf('calendly') === 0;
@@ -20,6 +26,13 @@
 	// 		}
 	// 	});
 	// });
+
+	// This ensures the animation is disabled after 1sec .. and not cut off. For subsequent component mounts the transition also doesnt play
+	onMount(() => {
+		if (timesMounted == 0) {
+			sleep(1000).then(() => timesMounted++);
+		}
+	});
 </script>
 
 <BackgroundVideo />
@@ -28,7 +41,7 @@
 	<a href="#step1" class=" z-10 flex h-[60vh] items-center justify-center text-center">
 		<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
 
-		<div class="grid grid-rows-1">
+		<div class:disable_animation={timesMounted > 0} class="elasticOut grid grid-rows-1">
 			<div class="pb-4 font-Poppins text-6xl">
 				Math, Physics
 				<span class="gradientTextColor"> ... Online! </span>
