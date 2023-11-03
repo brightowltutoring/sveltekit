@@ -3,7 +3,7 @@
 	export let scrollY = 0;
 	import { instDeltaY } from '$lib/store/scrollStore'; // make this 'export let' next?
 
-	import LoginCard from '$routes/login/page-nov1-2023-old.svelte';
+	import LoginCard from '$routes/login/+page.svelte';
 	import Modal from '$src/lib/Wrappers/Modal.svelte';
 	import Dropzone from '$routes/homework/Dropzone.svelte';
 
