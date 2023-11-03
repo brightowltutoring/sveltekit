@@ -105,7 +105,7 @@ body:has(.disableScrollOnThisPage) {
 
 /* experimental: trying to replicate svelte's elastic transition without needing JS */
 /* cubic-bezier(0.64, 0.57, 0.67, 1.53); */
-.elasticOut:not(.disable_animation) {
+.elasticOut {
 	animation: elasticOut 0.8s ease;
 }
 
