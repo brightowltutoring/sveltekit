@@ -1,12 +1,27 @@
 import { isDarkMode } from '$lib/store/clientStore';
 import { page } from '$app/stores';
 import { onMount } from 'svelte';
-import { get } from 'svelte/store';
+import { get, type Readable } from 'svelte/store';
 // import { browser } from '$app/environment';
 export const is_client = typeof window !== 'undefined'; // framework agnostic version of 'browser'
 
+// EXPERIMENTAL
+export async function subscribe$<T>(store: Readable<T>, callback: (value: T) => void) {
+	const { onDestroy } = await import('svelte');
+
+	const unsubscribe = store.subscribe(callback);
+
+	onDestroy(unsubscribe);
+	// onDestroy(() => unsubscribe());
+}
+
+let sleepTimeout: NodeJS.Timeout;
 export function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
+	sleepTimeout && clearTimeout(sleepTimeout);
+
+	return new Promise((resolve) => {
+		sleepTimeout = setTimeout(resolve, ms);
+	});
 }
 
 //  inspired from 'https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript', but made into a 'factory' for easier use. Might add serializer code from npm cookie inside my set method.
@@ -229,3 +244,18 @@ export async function sendDummyTextFileToGoogleDrive(name: string) {
 		body: data
 	});
 }
+
+// function isCalendlyEvent(e: MessageEvent) {
+// 	return e.data.event && e.data.event.indexOf('calendly') === 0;
+// }
+
+// onMount(() => {
+// 	window.addEventListener('message', (e) => {
+// 		if (isCalendlyEvent(e)) {
+// 			let payload = e.data;
+// 			if (payload) {
+// 				alert(JSON.stringify(payload));
+// 			}
+// 		}
+// 	});
+// });

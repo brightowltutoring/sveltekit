@@ -1,8 +1,10 @@
 <script lang="ts">
 	export let isLoggedIn = false;
 	export let scrollY = 0;
-	import { instDeltaY } from '$lib/store/scrollStore'; // make this 'export let' next?
 
+	import { navigating } from '$app/stores';
+
+	import { instDeltaY } from '$lib/store/scrollStore'; // make this 'export let' next?
 	import LoginCard from '$routes/login/+page.svelte';
 	import Modal from '$src/lib/Wrappers/Modal.svelte';
 	import Dropzone from '$routes/homework/Dropzone.svelte';
@@ -16,6 +18,7 @@
 	import { modals } from '$lib/store/modalsStore';
 	import { spring } from 'svelte/motion';
 	import { page } from '$app/stores';
+	import { sleep } from '$src/lib/utils';
 	$: ({ data } = $page);
 
 	onMount(() => {
@@ -100,6 +103,13 @@
 
 		$routes.home.isCurrent = true;
 	}
+
+	// for toggling 'loader-bar' class
+	let showLoader = false;
+	$: if ($navigating?.from?.route.id !== $navigating?.to?.route.id) {
+		showLoader = true;
+		sleep(600).then(() => (showLoader = false));
+	}
 </script>
 
 <svelte:head>
@@ -117,6 +127,9 @@
 <nav
 	class="fixed z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:bottom-0 pwa:translate-y-0 pwa:pt-1"
 >
+	<!-- LOADER BAR -->
+	<span class:loader-bar-fireship={showLoader} class="absolute bottom-0 left-0 sm:top-0" />
+
 	{#key resetLogoClick}
 		<a
 			href="/"
@@ -168,15 +181,15 @@
 			</li>
 		{/each}
 
-		<li class="p-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
-			<button class="fadeIn" on:click={toggleDarkMode}>
+		<li class="px-3 py-2 md:scale-100 pwa:scale-100 notpwa:translate-y-1">
+			<button class="fadeIn w-[24px]" on:click={toggleDarkMode}>
 				{#key $isDarkMode}
 					<img
 						in:scale={{ duration: 1000, easing: elasticOut }}
 						height="24"
 						width="24"
-						src={$isDarkMode ? '/sun.svg' : '/moon.svg'}
 						alt={$isDarkMode ? 'sun svg' : 'moon svg'}
+						src={$isDarkMode ? '/sun.svg' : '/moon.svg'}
 					/>
 				{/key}
 			</button>
@@ -238,7 +251,52 @@
 	</Modal>
 </section>
 
-<style>
+<style lang="postcss">
+	.loader-bar-fireship {
+		--gradient-from: #f97316;
+		--gradient-via: #a855f7;
+		--gradient-to: #ec4899;
+		background-image: linear-gradient(
+			to right,
+			var(--gradient-from),
+			var(--gradient-via),
+			var(--gradient-to)
+		);
+		background-size: 200% 200%;
+		animation:
+			gradient-move 1.8s infinite,
+			grow-width 0.1s forwards ease-in;
+	}
+
+	@keyframes gradient-move {
+		0% {
+			background-position: left;
+		}
+
+		50% {
+			background-position: right;
+		}
+
+		100% {
+			background-position: left;
+		}
+	}
+
+	@keyframes grow-width {
+		0% {
+			width: 0%;
+			height: 1px;
+		}
+		80% {
+			width: 80%;
+			height: 6px;
+		}
+		100% {
+			width: 100%;
+			height: 4px;
+		}
+	}
+
 	.fadeIn {
 		animation: fadeIn 0.8s ease;
 		transform-origin: center;

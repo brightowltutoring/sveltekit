@@ -1,18 +1,16 @@
-const postcssNested = require('postcss-nested');
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
-
+// const postcssNested = require('postcss-nested');
+// const tailwindcss = require('tailwindcss');
+// const autoprefixer = require('autoprefixer');
 // const config = {
 // 	plugins: [postcssNested(), tailwindcss(), autoprefixer]
 // };
+// module.exports = config;
 
-const config = {
+module.exports = {
 	plugins: {
-		'postcss-import': {},
+		// 'postcss-import': {},
 		'tailwindcss/nesting': 'postcss-nested',
 		tailwindcss: {},
 		autoprefixer: {}
 	}
 };
-
-module.exports = config;

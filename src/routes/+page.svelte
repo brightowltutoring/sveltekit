@@ -8,23 +8,8 @@
 	import PlansSection from './plans/+page.svelte';
 	import HorizontalScrollReviews from './reviews/HorizontalScrollReviews.svelte';
 	import Reviews from './reviews/Reviews.svelte';
-	import { sleep } from '$src/lib/utils';
+	import { sleep } from '$lib/utils';
 	import { browser } from '$app/environment';
-
-	// function isCalendlyEvent(e: MessageEvent) {
-	// 	return e.data.event && e.data.event.indexOf('calendly') === 0;
-	// }
-
-	// onMount(() => {
-	// 	window.addEventListener('message', (e) => {
-	// 		if (isCalendlyEvent(e)) {
-	// 			let payload = e.data;
-	// 			if (payload) {
-	// 				alert(JSON.stringify(payload));
-	// 			}
-	// 		}
-	// 	});
-	// });
 
 	// If js is enabled then 'elasticOut' animation will play once.
 	// With JS disabled the css animation plays on every navigation to this route .. which is superior to svelte js animation (doesnt work without js)

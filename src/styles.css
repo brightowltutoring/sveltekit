@@ -104,32 +104,29 @@ body:has(.disableScrollOnThisPage) {
 }
 
 /* experimental: trying to replicate svelte's elastic transition without needing JS */
-/* cubic-bezier(0.64, 0.57, 0.67, 1.53); */
+
 .elasticOut {
-	animation: elasticOut 0.8s ease;
+	animation: quarter-step 0.8s var(--easing) 1.2s;
+	--easing: ease-in-out;
+	--displ: 5%;
+	--transform-default: translateY(0);
+	--transform-25: translateY(calc(-10 * var(--displ)));
+	--transform-50: translateY(calc(5 * var(--displ)));
+	--transform-75: translateY(calc(-2 * var(--displ)));
 }
 
-@keyframes elasticOut {
-	0% {
-	}
-
-	40% {
-		transform: translateY(-50px);
-	}
-
-	60% {
-		transform: translateY(20px);
-	}
-
-	80% {
-		transform: translateY(-40px);
-	}
-
-	/* 90% {
-		transform: translateY(10px);
-	} */
-
+@keyframes quarter-step {
+	0%,
 	100% {
-		transform: translateY(0px);
+		transform: var(--transform-default);
+	}
+	25% {
+		transform: var(--transform-25);
+	}
+	50% {
+		transform: var(--transform-50);
+	}
+	75% {
+		transform: var(--transform-75);
 	}
 }

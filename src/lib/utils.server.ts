@@ -1,6 +1,4 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import UAParser from 'ua-parser-js';
-
 export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent) {
 	const isPWACookie = cookies.get('isPWA');
 
@@ -15,6 +13,7 @@ export function isPwaFromCookieOrUrl({ cookies, request: { url } }: RequestEvent
 // 	return isPWA
 
 // client-side navigator.userAgent results in flash of content
+import UAParser from 'ua-parser-js';
 export function userAgentFromRequestHeaders(headers: Headers) {
 	const userAgent = String(headers.get('user-agent'));
 	const parser = new UAParser(userAgent);

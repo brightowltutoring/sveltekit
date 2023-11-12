@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	// import { scrollY } from '$lib/store/scrollStore';
 
 	export let data;
@@ -31,7 +32,6 @@
 
 	disableZoomOnTouchDevices();
 	setIsPwaCookie();
-
 	function scrollYSetter() {
 		scrollY.set(window.scrollY);
 	}

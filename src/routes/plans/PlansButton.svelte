@@ -38,6 +38,7 @@
 </script>
 
 <!-- <Modal body bind:modalOpen bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
+
 <Modal
 	body
 	modalOpen={plansModalOpen}
