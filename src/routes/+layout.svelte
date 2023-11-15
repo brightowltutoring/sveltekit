@@ -38,8 +38,10 @@
 </script>
 
 <svelte:head>
-	<link rel="manifest" href="/manifest.json" />
 	{@html seoString}
+	{#if data.isMobile}
+		<link rel="manifest" href="/manifest.json" />
+	{/if}
 	{#if data.url.includes('classroom')}
 		<script
 			src="https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js"

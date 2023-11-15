@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20231025.0",
 		"@sveltejs/adapter-auto": "2.1.0",
-		"@sveltejs/kit": "^1.27.5",
+		"@sveltejs/kit": "^1.27.6",
 		"@tailwindcss/typography": "^0.5.10",
 		"@types/dropzone": "^5.7.7",
 		"@types/pg": "^8.10.9",
@@ -28,7 +28,7 @@
 		"postcss": "^8.4.31",
 		"postcss-load-config": "^4.0.1",
 		"postcss-nested": "^6.0.1",
-		"prettier": "^3.0.3",
+		"prettier": "^3.1.0",
 		"prettier-plugin-svelte": "^3.1.0",
 		"prettier-plugin-tailwindcss": "^0.5.7",
 		"remark-math": "3.0.1",
