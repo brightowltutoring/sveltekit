@@ -106,9 +106,14 @@
 
 	// for toggling 'loader-bar' class
 	let showLoader = false;
+	let loaderTimeout: NodeJS.Timeout;
 	$: if ($navigating?.from?.route.id !== $navigating?.to?.route.id) {
 		showLoader = true;
-		sleep(600).then(() => (showLoader = false));
+		// sleep(600).then(() => (showLoader = false));
+		if (loaderTimeout) clearTimeout(loaderTimeout);
+		loaderTimeout = setTimeout(() => {
+			showLoader = false;
+		}, 600);
 	}
 </script>
 
