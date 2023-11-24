@@ -24,13 +24,19 @@
 	});
 </script>
 
-{#if mounted}
-	<div in:scale={scaleParams} class="disableScrollOnThisPage">
-		<JitsiUser />
-	</div>
-{/if}
+<!-- {#if mounted} -->
+<div in:scale={scaleParams} class="disableScrollOnThisPage">
+	<JitsiUser />
+</div>
+<!-- {/if} -->
 
 <dummy-element />
+
+<!-- <svelte:head>
+	<script
+		src="https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js"
+	></script>
+</svelte:head> -->
 
 <style>
 	/* :global(.dark-mode.classroom) { */

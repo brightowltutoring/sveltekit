@@ -1,4 +1,5 @@
 <script lang="ts">
+	import './jitsi_external_api';
 	export let isAdmin = false;
 	import EnableJavascript from '$src/lib/EnableJavascript.svelte';
 	import { goto } from '$app/navigation';
@@ -32,7 +33,7 @@
 		try {
 			options.parentNode = document.querySelector('#meet');
 
-			// @ts-ignore // layout.svelte has jitsi script
+			// @ts-ignore
 			api = await new JitsiMeetExternalAPI(domain, options);
 
 			api?.addEventListener('participantRoleChanged', function (event: any) {

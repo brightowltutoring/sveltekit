@@ -111,6 +111,7 @@
 		}
 
 		onAuthStateChanged(auth, (user) => {
+			// console.log('user', user !== null);
 			if (user) {
 				loggedInDisplayName = user.displayName;
 				loggedInEmail = user.email;
