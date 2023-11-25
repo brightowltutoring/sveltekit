@@ -77,8 +77,8 @@
 
 <!-- Not sure if this should be here, since already defined in layout.svelte. -->
 <!-- On mobile using navbar to navigate to /classroom seems to break the jitsi iframe -->
-<svelte:head>
+<!-- <svelte:head>
 	<script
 		src="https://8x8.vc/vpaas-magic-cookie-0c93f8c4b4d6403cbf9746e035d5660e/external_api.js"
 	></script>
-</svelte:head>
+</svelte:head> -->
