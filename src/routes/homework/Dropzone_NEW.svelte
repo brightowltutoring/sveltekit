@@ -5,22 +5,16 @@
 
 	import './dropzone.css';
 	import IconUploadGradient from '$lib/Icons/IconUploadGradient.svelte';
-	import { modals } from '$lib/store/modalsStore';
+
 	import { useInView } from '$lib/utils';
-	import {
-		dropzonePopUpOnce,
-		getIframeSrcAndPostDummyOnce,
-		hydrateDropzoneDomEls
-	} from './Dropzone_NEW';
+	import { getIframeSrcAndPostDummyOnce, hydrateDropzoneDomEls } from './Dropzone_NEW';
+	import { modals } from '$src/lib/store/modalsStore';
 
 	let iframeSrc: string | undefined = undefined;
-
 	const updateIframeSrc = async () => (iframeSrc = await getIframeSrcAndPostDummyOnce());
+	$: $modals.homework && updateIframeSrc();
 
-	$: $modals.homework && dropzonePopUpOnce(), updateIframeSrc();
-
-	// $: $homeworkModalOpen  && dropzonePopUpOnce();
-	// $: $homeworkModalOpen  && updateIframeSrc();
+	// $: $modals.homework && dropzonePopUpOnce(), updateIframeSrc();
 </script>
 
 <!-- The one-time hydration of this iframe submits a dummy file to google drive, with the goal to circumvent cold-start of google drive cloud function -->

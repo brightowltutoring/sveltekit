@@ -18,11 +18,16 @@ const dropzoneOptions: DropzoneOptions = {
 };
 
 export async function hydrateDropzoneDomEls(target: Element | HTMLElement) {
-	console.log('mic drop 🎤');
+	console.log('new dropzone logic');
 
 	dropzone = new Dropzone(target as HTMLElement, dropzoneOptions);
 
-	await handleErroredUploads(dropzone);
+	if (get(popUpOnceBoolean$) === false) {
+		popUpOnceBoolean$.set(true);
+		target.dispatchEvent(new CustomEvent('click'));
+	}
+
+	handleErroredUploads(dropzone);
 }
 
 // Collect 'errored' files, which are of the acceptable type ... and reprocess files when internet comes back.
@@ -63,21 +68,6 @@ async function handleErroredUploads(DROPZONE_INSTANCE: Dropzone) {
 	}
 }
 
-let dropzonePopUpOnceTimeout: NodeJS.Timeout;
-
-export function dropzonePopUpOnce() {
-	if (get(popUpOnceBoolean$) === true) return;
-
-	popUpOnceBoolean$.set(true);
-
-	dropzonePopUpOnceTimeout = setTimeout(dispatchClickOnDropzone, 75);
-
-	function dispatchClickOnDropzone() {
-		if (dropzonePopUpOnceTimeout) clearTimeout(dropzonePopUpOnceTimeout);
-		return document.querySelector('.dropzone')!.dispatchEvent(new CustomEvent('click'));
-	}
-}
-
 // based on previous function 'PostDummyOnce()'
 export async function getIframeSrcAndPostDummyOnce() {
 	// let homeworkModalOpenNow = get(homeworkModalOpen) === true;
@@ -89,6 +79,7 @@ export async function getIframeSrcAndPostDummyOnce() {
 
 		let iframeSrc = '';
 
+		// BUG?: should resolve wrap setTimeout??
 		return new Promise<string>((resolve) => {
 			setTimeout(async () => {
 				const { PUBLIC_GOOGLE_APP_SCRIPT } = await import('$env/static/public');

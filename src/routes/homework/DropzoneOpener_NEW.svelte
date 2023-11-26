@@ -12,10 +12,10 @@
 	});
 
 	function homeworkModalOpenAndClickDropzone() {
-		if (mounted) {
-			modals.open('homework');
-			document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
-		}
+		// if (mounted) {
+		modals.open('homework');
+		document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
+		// }
 	}
 </script>
 

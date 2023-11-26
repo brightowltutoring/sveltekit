@@ -1,5 +1,5 @@
 <script lang="ts">
-	import './jitsi_external_api';
+	import './modified_external_api';
 	export let isAdmin = false;
 	import EnableJavascript from '$src/lib/EnableJavascript.svelte';
 	import { goto } from '$app/navigation';

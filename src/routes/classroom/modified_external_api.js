@@ -1,5 +1,6 @@
 // @ts-nocheck
 !(function (e, t) {
+	if (typeof window === 'undefined') return;
 	'object' == typeof exports && 'object' == typeof module
 		? (module.exports = t())
 		: 'function' == typeof define && define.amd
@@ -7,7 +8,8 @@
 		  : 'object' == typeof exports
 		    ? (exports.JitsiMeetExternalAPI = t())
 		    : (e.JitsiMeetExternalAPI = t());
-})(self, () =>
+	// })(self, () =>
+})(globalThis, () =>
 	(() => {
 		var e = {
 				537: (e, t, n) => {
