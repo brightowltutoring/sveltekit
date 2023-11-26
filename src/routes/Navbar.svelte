@@ -7,8 +7,8 @@
 	import { instDeltaY } from '$lib/store/scrollStore'; // make this 'export let' next?
 	import LoginCard from '$routes/login/+page.svelte';
 	import Modal from '$src/lib/Wrappers/Modal.svelte';
-	import Dropzone from './homework/Dropzone_NEW.svelte';
-	// import Dropzone from '$routes/homework/Dropzone.svelte';
+	// import Dropzone from './homework/Dropzone_NEW.svelte';
+	import Dropzone from '$routes/homework/Dropzone.svelte';
 
 	import { onMount } from 'svelte';
 	import { scale, fly } from 'svelte/transition';

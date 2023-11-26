@@ -14,7 +14,9 @@
 	function homeworkModalOpenAndClickDropzone() {
 		// if (mounted) {
 		modals.open('homework');
-		document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
+		setTimeout(() => {
+			document.querySelector('.dropzone')?.dispatchEvent(new CustomEvent('click'));
+		}, 1000);
 		// }
 	}
 </script>

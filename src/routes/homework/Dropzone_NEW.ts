@@ -24,6 +24,10 @@ export async function hydrateDropzoneDomEls(target: Element | HTMLElement) {
 
 	if (get(popUpOnceBoolean$) === false) {
 		popUpOnceBoolean$.set(true);
+		// alert('hey');
+		// setTimeout(() => {
+		// 	target.dispatchEvent(new CustomEvent('click'));
+		// }, 1000);
 		target.dispatchEvent(new CustomEvent('click'));
 	}
 

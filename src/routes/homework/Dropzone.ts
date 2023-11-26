@@ -61,6 +61,7 @@ async function handleErroredUploads(DROPZONE_INSTANCE: Dropzone) {
 	}
 }
 
+// separating 'dropzonePopUpOnce' logic into its own function is necessary for some reason on mobile ..
 let dropzonePopUpOnceTimeout: NodeJS.Timeout;
 
 export function dropzonePopUpOnce() {
@@ -68,7 +69,7 @@ export function dropzonePopUpOnce() {
 
 	popUpOnceBoolean$.set(true);
 
-	dropzonePopUpOnceTimeout = setTimeout(dispatchClickOnDropzone, 75);
+	dropzonePopUpOnceTimeout = setTimeout(dispatchClickOnDropzone, 100);
 
 	function dispatchClickOnDropzone() {
 		if (dropzonePopUpOnceTimeout) clearTimeout(dropzonePopUpOnceTimeout);
