@@ -1,7 +1,5 @@
 <script lang="ts">
-	// import { fade } from 'svelte/transition';
-	// import { scrollY } from '$lib/store/scrollStore';
-
+	onMount(() => console.log('updated to sveltekit2 😎'));
 	export let data;
 
 	import '../styles.css';

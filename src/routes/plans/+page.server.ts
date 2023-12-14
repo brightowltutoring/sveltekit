@@ -27,7 +27,7 @@ export async function load({ cookies }) {
 }
 export const actions = {
 	deleteSession: async ({ cookies }) => {
-		cookies.delete('stripeCheckoutUrl');
-		cookies.delete('sessionName');
+		/* @migration task: add path argument */ cookies.delete('stripeCheckoutUrl');
+		/* @migration task: add path argument */ cookies.delete('sessionName');
 	}
 };

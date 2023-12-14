@@ -10,11 +10,11 @@ export async function load({ url, cookies }) {
 	const { stripeCheckoutUrl, sessionName } = await getStripeSessionData(url);
 
 	if (!stripeCheckoutUrl || !sessionName) {
-		throw redirect(redirectValue, '/');
+		redirect(redirectValue, '/');
 	}
 
-	cookies.set('stripeCheckoutUrl', stripeCheckoutUrl);
-	cookies.set('sessionName', sessionName);
+	/* @migration task: add path argument */ cookies.set('stripeCheckoutUrl', stripeCheckoutUrl);
+	/* @migration task: add path argument */ cookies.set('sessionName', sessionName);
 
-	throw redirect(redirectValue, stripeCheckoutUrl);
+	redirect(redirectValue, stripeCheckoutUrl);
 }
