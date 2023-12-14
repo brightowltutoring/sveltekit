@@ -49,6 +49,7 @@
 	{/if} -->
 </svelte:head>
 
+<!-- <svelte:document on:login={login} on:logout={logout} /> -->
 <!-- <svelte:window bind:scrollY={$scrollY} on:contextmenu|preventDefault /> -->
 <svelte:window on:scroll={debounce(() => scrollYSetter(), 20)} on:contextmenu|preventDefault />
 

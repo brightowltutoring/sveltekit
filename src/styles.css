@@ -106,7 +106,8 @@ body:has(.disableScrollOnThisPage) {
 /* experimental: trying to replicate svelte's elastic transition without needing JS */
 
 .elasticOut {
-	animation: quarter-step 0.8s var(--easing) 1.2s;
+	animation: quarter-step 0.8s var(--easing);
+	/* animation: quarter-step 0.8s var(--easing) 1.2s; */
 	--easing: ease-in-out;
 	--displ: 5%;
 	--transform-default: translateY(0);

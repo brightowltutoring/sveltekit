@@ -19,11 +19,13 @@
 	import { modals } from '$lib/store/modalsStore';
 	import { spring } from 'svelte/motion';
 	import { page } from '$app/stores';
-	import { sleep } from '$src/lib/utils';
+
 	$: ({ data } = $page);
+	// $: $isDarkMode = browser && document.documentElement.classList.contains('dark-mode');
 
 	onMount(() => {
-		isDarkMode.set(prefersDarkMode());
+		// isDarkMode.set(prefersDarkMode());
+		isDarkMode.set(document.documentElement.classList.contains('dark-mode'));
 
 		// update session storage before page reloads; could've done in <svelte:window> as well...
 		window.addEventListener('beforeunload', setDarkModeInSessionStorage);
@@ -75,12 +77,6 @@
 	}
 
 	// darkmode functions
-	function prefersDarkMode() {
-		if (sessionStorage.getItem('isDarkMode') === 'true') return true;
-		if (sessionStorage.getItem('isDarkMode') === 'false') return false;
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
-		return false;
-	}
 
 	function setDarkModeInSessionStorage() {
 		sessionStorage.setItem('isDarkMode', String($isDarkMode));
