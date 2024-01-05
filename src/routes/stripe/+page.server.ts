@@ -13,8 +13,10 @@ export async function load({ url, cookies }) {
 		redirect(redirectValue, '/');
 	}
 
-	/* @migration task: add path argument */ cookies.set('stripeCheckoutUrl', stripeCheckoutUrl);
-	/* @migration task: add path argument */ cookies.set('sessionName', sessionName);
+	/* @migration task: add path argument */
+	cookies.set('stripeCheckoutUrl', stripeCheckoutUrl, { path: '/' });
+	/* @migration task: add path argument */
+	cookies.set('sessionName', sessionName, { path: '/' });
 
 	redirect(redirectValue, stripeCheckoutUrl);
 }

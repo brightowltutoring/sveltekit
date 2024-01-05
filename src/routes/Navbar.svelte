@@ -34,6 +34,8 @@
 
 	let showHideNav = '';
 
+	//svelte 5 updates made this store of type unknown?
+
 	$: {
 		if (scrollY < 10) showHideNav = 'bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-none';
 
@@ -127,10 +129,15 @@
 </svelte:head>
 
 <nav
-	class="fixed z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:px-[7%] md:py-10 {showHideNav} bottom-0 md:top-0 md:justify-between pwa:bottom-0 pwa:translate-y-0 pwa:pt-1"
+	class="fixed bottom-0 z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:top-0 md:justify-between md:px-[7%] md:py-10 pwa:bottom-0 pwa:translate-y-0 pwa:pt-1 {showHideNav}"
 >
 	<!-- LOADER BAR -->
-	<span class:loader-bar-fireship={showLoader} class="absolute bottom-0 left-0 sm:top-0" />
+	<span
+		class="absolute bottom-0 left-0 h-[4px] w-full sm:top-0 {showLoader && 'loader-bar-fireship'}"
+	/>
+
+	<!-- stopped working in svelte5 update -->
+	<!-- <span class:loader-bar-fireship={showLoader} class="absolute bottom-0 left-0 sm:top-0" /> -->
 
 	{#key resetLogoClick}
 		<a

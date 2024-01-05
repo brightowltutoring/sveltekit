@@ -34,7 +34,8 @@
 
 <style>
 	/* :global(.dark-mode.classroom) { */
-	:global(.dark-mode):has(dummy-element) {
+	/* :global(.dark-mode):has(dummy-element) {  ... broke in svelte 5*/
+	:global(.dark-mode:has(dummy-element)) {
 		--bg-color: black;
 	}
 </style>

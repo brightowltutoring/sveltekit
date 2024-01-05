@@ -35,10 +35,10 @@ export const cookeh = {
 	) {
 		if (!is_client) return;
 
-		document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None${
+		window.document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None${
 			secure ? '; Secure' : ''
 		}`;
-		console.log(`${name} cookie set; secure: ${secure}`);
+		// console.log(`${name} cookie set; secure: ${secure}`);
 	},
 
 	get: function (name: string) {
@@ -231,6 +231,7 @@ export function jsToHead(id = 'calendlyJS', path = 'external-website.com/calendl
 }
 
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
+import { browser } from '$app/environment';
 
 export async function sendDummyTextFileToGoogleDrive(name: string) {
 	const data = new FormData();

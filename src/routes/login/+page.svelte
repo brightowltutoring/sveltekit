@@ -121,6 +121,7 @@
 				loginModalOpenRedirect(loggedInEmail);
 
 				cookeh.set('haventLoggedOut', Boolean(user));
+				// TODO: this code breaks in svelte5!!
 			} else {
 				// document.dispatchEvent(new CustomEvent('logout'));
 				// unsure if leaving here or in 'handleLogout'
