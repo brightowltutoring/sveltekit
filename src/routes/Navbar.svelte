@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	export let isLoggedIn = false;
 	export let scrollY = 0;
 
@@ -35,27 +36,32 @@
 	let showHideNav = '';
 
 	//svelte 5 updates made this store of type unknown?
+	$: velY = $instDeltaY as number;
 
 	$: {
 		if (scrollY < 10) showHideNav = 'bottom-0 backdrop-blur-3xl md:top-0 md:backdrop-blur-none';
 
-		if (scrollY > 40 && $instDeltaY > 10) {
+		if (scrollY > 40 && velY > 10) {
 			showHideNav = 'backdrop-blur-3xl';
 		}
 
-		if (scrollY > 400 && $instDeltaY > 10)
+		if (scrollY > 400 && velY > 10)
 			showHideNav = '!-bottom-20  md:!-top-20  backdrop-blur-3xl duration-200';
 
-		if ($instDeltaY < -100 && scrollY !== 0)
+		if (velY < -100 && scrollY !== 0)
 			showHideNav = 'bottom-0 md:top-0 backdrop-blur-3xl duration-500';
 	}
 
 	let hueRocket = 0;
 	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
 
-	$: if (isLoggedIn && (data.isPWA === false || null)) {
+	$: if (browser && isLoggedIn) {
+		// $: if (isLoggedIn && (data.isPWA === false || null)) {
 		hueRocket = $isDarkMode ? 0.75 : 0;
+
+		// setTimeout(() => {
 		scaleRocket.set(1 + 0.5 * Math.sin(scrollY));
+		// }, 1000);
 	}
 
 	// $: $routes.login.name = isLoggedIn ? '🚀' : 'Login';
@@ -175,6 +181,7 @@
 					: null}
 
 			<li style={loggedInDynamicRocket}>
+				<!-- <li> -->
 				<a
 					href={routePath}
 					on:click={(e) => handleNavButtonClicks(e, routePath)}

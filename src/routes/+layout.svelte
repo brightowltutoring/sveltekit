@@ -1,5 +1,4 @@
 <script lang="ts">
-	onMount(() => console.log('updated to sveltekit2 😎. Tried svelte5 update but broke...'));
 	export let data;
 
 	import '../styles.css';

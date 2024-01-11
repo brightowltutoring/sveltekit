@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 
 	export let modalOpen = false;
 	export let transitionsOff: boolean | null = false;
@@ -28,13 +28,24 @@
 			}
 		};
 	}
+
+	// logic doesn't work inside the modalDirective TODO: why??
+	onMount(() => {
+		document.addEventListener('keydown', close_on_escape);
+		return () => document.removeEventListener('keydown', close_on_escape);
+	});
+
+	function close_on_escape(e: KeyboardEvent) {
+		if (e.key !== 'Escape') return;
+		dispatch('closeModal');
+	}
 </script>
 
 {#key body || transitionsOff ? true : modalOpen}
 	<div
 		role="button"
 		tabindex="0"
-		on:keypress|self={closeModal}
+		on:keydown|self={closeModal}
 		on:click|self={closeModal}
 		use:modalDirective
 		class="fixed left-0 top-0 -z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center {modalOpen &&
