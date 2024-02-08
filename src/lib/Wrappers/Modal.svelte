@@ -9,49 +9,43 @@
 	// default behaviour is to allow navbar through; when user declares 'body' prop then the modal is attached to the document's body ... such as with the calendly modals
 
 	let dispatch = createEventDispatcher();
+	function closeModal(event: KeyboardEvent | MouseEvent) {
+		// i.e. close modal if slot parent (|self) OR escape key is clicked
 
-	function closeModal() {
-		dispatch('closeModal');
+		if (event.currentTarget === event.target || (event as KeyboardEvent).key == 'Escape') {
+			dispatch('closeModal');
+		}
 	}
 
 	function modalDirective(node: HTMLElement) {
-		if (!body && !all) return;
-		// console.log('modal');
+		document.addEventListener('keydown', closeModal);
+		node.addEventListener('click', closeModal);
+
+		// if (!body && !all) return;
 
 		body && document.body.appendChild(node);
-		all && node.addEventListener('click', closeModal);
 
 		return {
 			destroy() {
 				body && node.remove();
-				all && node.removeEventListener('click', closeModal);
+				node.removeEventListener('click', closeModal);
+				document.removeEventListener('keydown', closeModal);
 			}
 		};
 	}
-
-	// logic doesn't work inside the modalDirective TODO: why??
-	onMount(() => {
-		document.addEventListener('keydown', close_on_escape);
-		return () => document.removeEventListener('keydown', close_on_escape);
-	});
-
-	function close_on_escape(e: KeyboardEvent) {
-		if (e.key !== 'Escape') return;
-		dispatch('closeModal');
-	}
 </script>
 
+<!-- on:keydown={closeModal} -->
+<!-- on:click={closeModal} -->
+<!-- role="button" -->
+<!-- tabindex="0" -->
 {#key body || transitionsOff ? true : modalOpen}
-	<div
-		role="button"
-		tabindex="0"
-		on:keydown|self={closeModal}
-		on:click|self={closeModal}
+	<modal-container
 		use:modalDirective
 		class="fixed left-0 top-0 -z-50 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center {modalOpen &&
 			`${bgTW} z-50 !flex`} 
 "
 	>
 		<slot />
-	</div>
+	</modal-container>
 {/key}

@@ -8,9 +8,23 @@
 	import { jitsiObject } from './JitsiObject';
 
 	import { page } from '$app/stores';
+	import { isDarkMode } from '$src/lib/store/clientStore';
+	import { get } from 'svelte/store';
 	$: ({ data } = $page);
 
 	inDarkOutOriginal();
+	// onMount(() => {
+	// 	let initiallyInLightmode = !$isDarkMode;
+	// 	document.documentElement.classList.add('dark-mode');
+	// 	$isDarkMode = true;
+
+	// 	return () => {
+	// 		if (initiallyInLightmode) {
+	// 			$isDarkMode = false;
+	// 			document.documentElement.classList.remove('dark-mode');
+	// 		}
+	// 	};
+	// });
 
 	async function hangUpBtn() {
 		await api.dispose();
@@ -55,7 +69,6 @@
 		// if (wasMounted) {
 		api?.dispose();
 
-		console.log('jitsi off');
 		// }
 	});
 </script>

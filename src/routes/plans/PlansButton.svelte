@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { payButton } from './plansCardStuff';
 	export let button: payButton;
+	export let className: string;
 
 	import Modal from '$lib/Wrappers/Modal.svelte';
 	import Loading from '$lib/Loading.svelte';
@@ -64,7 +65,7 @@
 	href={button.url}
 	on:mouseenter|preventDefault={hydrateIframe}
 	on:click|preventDefault={openPlansModal}
-	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md {button.opacityTW} {$$props.class} "
+	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md {button.opacityTW} {className} "
 >
 	<span>{button.text}</span>
 </a>

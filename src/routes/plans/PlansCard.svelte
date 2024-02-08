@@ -3,8 +3,9 @@
 </script>
 
 <script lang="ts">
-	import PlansButton from './PlansButton.svelte';
-	// import PlansButton from './PlansButton-old.svelte';
+	// import PlansButton from './PlansButton.svelte';
+	import PlansButton from './PlansButton-testing.svelte';
+
 	import { scale } from 'svelte/transition';
 	import type { payButton } from './plansCardStuff';
 
@@ -64,7 +65,7 @@
 		{#each payButtons as button}
 			<PlansButton
 				{button}
-				class="{buttonColor} inline-block group-hover:scale-95 group-hover:animate-pulse"
+				className="{buttonColor} inline-block group-hover:scale-95 group-hover:animate-pulse"
 			/>
 		{/each}
 
