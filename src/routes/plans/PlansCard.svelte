@@ -3,8 +3,8 @@
 </script>
 
 <script lang="ts">
-	// import PlansButton from './PlansButton.svelte';
-	import PlansButton from './PlansButton-testing.svelte';
+	import PlansButton from './PlansButton.svelte';
+	// import PlansButton from './PlansButton-old.svelte';
 
 	import { scale } from 'svelte/transition';
 	import type { payButton } from './plansCardStuff';

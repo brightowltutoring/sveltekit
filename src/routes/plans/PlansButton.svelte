@@ -1,71 +1,46 @@
-<script lang="ts">
+<script lang="ts" context="module">
+	import { writable } from 'svelte/store';
 	import type { payButton } from './plansCardStuff';
+	import type { iframeModalType } from '$lib/IframeModal.svelte';
+	export let iframeModals = writable<iframeModalType[]>([]);
+</script>
+
+<script lang="ts">
 	export let button: payButton;
 	export let className: string;
 
-	import Modal from '$lib/Wrappers/Modal.svelte';
-	import Loading from '$lib/Loading.svelte';
-	import StripeCheckout from '$routes/stripe/StripeCheckout.svelte';
-	import { onMount } from 'svelte';
+	$: thisIndex = $iframeModals.findIndex((el) => el.url === button.url);
 
-	let plansModalOpen = false;
-	function closePlansModal() {
-		plansModalOpen = false;
-	}
-	function openPlansModal() {
-		plansModalOpen = true;
+	function openPlansModal(e: MouseEvent) {
+		e.preventDefault();
+
+		$iframeModals[thisIndex].bool = true;
 	}
 
-	let myIframe: HTMLIFrameElement;
-	let myIframeSrc: string | undefined = undefined;
-	function hydrateIframe() {
-		if (myIframeSrc == undefined) {
-			myIframeSrc = button.url;
+	function updateIframeModalsOnce(node: HTMLAnchorElement) {
+		node.addEventListener('mouseenter', updateIframeModals, { once: true });
+
+		function updateIframeModals() {
+			if (thisIndex > -1) return;
+
+			let item: iframeModalType = {
+				url: button.url,
+				bool: false,
+				loading: 'pending',
+				name: button.url.split('/thinksolve/')[1].split('?')[0].split('-').join(' ')
+			};
+
+			// iframeModals.push(item)
+			$iframeModals = [...$iframeModals, item];
 		}
 	}
-
-	let iframeLoaded = false;
-	function setIframeLoadedTrue() {
-		iframeLoaded = true;
-		console.log('iframe loaded son');
-	}
-
-	onMount(() => {
-		myIframe.addEventListener('load', setIframeLoadedTrue);
-		return () => {
-			myIframe.removeEventListener('load', setIframeLoadedTrue);
-		};
-	});
 </script>
 
-<!-- <Modal body bind:modalOpen bgTW={'bg-[rgba(0,0,0,0.1)]'}> -->
-
-<Modal
-	body
-	modalOpen={plansModalOpen}
-	on:closeModal={closePlansModal}
-	bgTW={'bg-[rgba(0,0,0,0.1)]'}
->
-	{#if !iframeLoaded}
-		<Loading />
-	{:else}
-		<StripeCheckout />
-	{/if}
-
-	<iframe
-		class="opacity-0 transition-opacity duration-300 ease-in {iframeLoaded &&
-			'opacity-100'} fixed bottom-0 h-[90%] w-full rounded-xl border-dotted border-gray-500 backdrop-blur-3xl md:w-[80%] md:-translate-y-5"
-		title="Thinksolve Plans"
-		src={myIframeSrc}
-		bind:this={myIframe}
-	/>
-</Modal>
-
 <a
+	use:updateIframeModalsOnce
 	href={button.url}
-	on:mouseenter|preventDefault={hydrateIframe}
-	on:click|preventDefault={openPlansModal}
-	class="m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md {button.opacityTW} {className} "
+	on:click={openPlansModal}
+	class="{button.opacityTW} {className}  m-1 rounded-md p-4 text-xl text-white duration-200 hover:scale-105 hover:rounded-lg hover:shadow-md"
 >
 	<span>{button.text}</span>
 </a>

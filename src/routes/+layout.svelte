@@ -10,9 +10,7 @@
 	import Navbar from './Navbar.svelte';
 	import { onMount } from 'svelte';
 	import IframeModal from '$src/lib/IframeModal.svelte';
-	import { iframeModals } from './plans/PlansButton-testing.svelte';
-	import Modal from '$src/lib/Wrappers/Modal.svelte';
-	import Loading from '$src/lib/Loading.svelte';
+	import { iframeModals } from './plans/PlansButton.svelte';
 
 	isSafari.set(data.isSafari === true);
 	$: seoString = data.seoString;
@@ -41,30 +39,6 @@
 {#each $iframeModals as iframe}
 	<IframeModal bind:iframe />
 {/each}
-
-<!-- {#each $iframeModals as _, i}
-	<IframeModal bind:iframe={$iframeModals[i]} />
-{/each} -->
-
-<!-- {#each $iframeModals as iframe, i}
-	<Modal
-		on:closeModal={() => (iframe.bool = false)}
-		body
-		modalOpen={iframe.bool}
-		bgTW={'bg-[rgba(0,0,0,0.1)]'}
-	>
-		{#if !iframe.loading}
-			<Loading />
-		{/if}
-
-		<iframe
-			class="opacity-0 transition-opacity duration-300 ease-in {iframe.loading &&
-				'opacity-100'} fixed bottom-0 h-[90%] w-full rounded-xl border-dotted border-gray-500 backdrop-blur-3xl md:w-[80%] md:-translate-y-5"
-			title="Thinksolve Plans"
-			src={iframe.url}
-		/>
-	</Modal>
-{/each} -->
 
 <svelte:head>
 	{@html seoString}
