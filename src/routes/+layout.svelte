@@ -36,8 +36,10 @@
 	}
 </script>
 
+<!-- bind needed or not -->
 {#each $iframeModals as iframe}
-	<IframeModal bind:iframe />
+	<!-- <IframeModal bind:iframe /> -->
+	<IframeModal {iframe} />
 {/each}
 
 <svelte:head>

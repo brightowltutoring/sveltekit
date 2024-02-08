@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
 
+	export let close = () => {};
 	export let modalOpen = false;
 	export let transitionsOff: boolean | null = false;
 	export let bgTW: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
@@ -13,7 +14,8 @@
 		// i.e. close modal if slot parent (|self) OR escape key is clicked
 
 		if (event.currentTarget === event.target || (event as KeyboardEvent).key == 'Escape') {
-			dispatch('closeModal');
+			// dispatch('closeModal');
+			close();
 		}
 	}
 

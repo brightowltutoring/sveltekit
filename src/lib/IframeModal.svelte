@@ -45,8 +45,9 @@
 </Modal> -->
 
 <!-- TODO: testing -->
+<!-- on:closeModal={() => (iframe.bool = false)} -->
 <Modal
-	on:closeModal={() => (iframe.bool = false)}
+	close={() => (iframe.bool = false)}
 	body
 	modalOpen={iframe.bool}
 	bgTW={'bg-[rgba(0,0,0,0.1)]'}
