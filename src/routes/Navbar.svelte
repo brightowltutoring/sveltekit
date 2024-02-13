@@ -214,14 +214,17 @@
 </nav>
 
 <!-- <NavModals /> -->
+
 <section>
 	<Modal
+		close={() => modals.close('navApp')}
 		all
 		modalOpen={data.isIOS && $modals.navApp}
-		on:closeModal={() => modals.close('navApp')}
 		bgTW={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 	>
-		<ul class="flex flex-col gap-y-8 p-10 font-Poppins text-3xl sm:text-6xl">
+		<ul
+			class=" flex h-[500px] w-[300px] flex-col gap-y-8 overflow-scroll p-10 font-Poppins text-3xl sm:text-6xl"
+		>
 			<li in:scale={{ duration: 1300, easing: elasticOut }}>
 				<div class="text-6xl">1.</div>
 				Open Safari

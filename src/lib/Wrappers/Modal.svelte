@@ -1,9 +1,7 @@
 <script lang="ts">
 	// import { createEventDispatcher, onMount } from 'svelte';
 
-	export let close = () => {
-		modalOpen = false;
-	};
+	export let close = () => {};
 	export let modalOpen = false;
 	export let transitionsOff: boolean | null = false;
 	export let bgTW: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
@@ -15,7 +13,8 @@
 	function closeModal(event: KeyboardEvent | MouseEvent) {
 		// i.e. close modal if slot parent (|self) OR escape key is clicked
 
-		if (event.currentTarget === event.target || (event as KeyboardEvent).key == 'Escape') {
+		// if (event.currentTarget === event.target || (event as KeyboardEvent).key == 'Escape') {
+		if (event.currentTarget == event.target || (event as KeyboardEvent).key == 'Escape') {
 			// dispatch('closeModal');
 			close();
 		}
@@ -31,7 +30,7 @@
 
 		return {
 			destroy() {
-				body && node.remove();
+				// body && node.remove();
 				node.removeEventListener('click', closeModal);
 				document.removeEventListener('keydown', closeModal);
 			}
