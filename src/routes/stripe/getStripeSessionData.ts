@@ -1,9 +1,14 @@
 import type Stripe from 'stripe';
 
 export async function getStripeSessionData(url: URL) {
-	const { invitee_email, event_type_name, answer_1, answer_2, answer_3 } = Object.fromEntries(
+
+	const CURRENCY_STRING = 'USD'
+
+	const { invitee_email, event_type_name, answer_1, answer_2, answer_3, answer_4 } = Object.fromEntries(
 		url.searchParams
 	);
+
+	// console.log(url.searchParams);
 
 	// TS complains if I return null. Previous TS typing was also failing (and uglier with external definitions)
 	if (!event_type_name) {
@@ -22,28 +27,20 @@ export async function getStripeSessionData(url: URL) {
 	});
 
 	const dollar_hourly_rate = 50;
-	const dollar_hourly_rate_2dec = Math.round(dollar_hourly_rate).toFixed(2);
-	const dollar_minute_rate_2dec = (Math.round(dollar_hourly_rate) / 60).toFixed(2);
+	const dollar_hourly_rate_2dec = dollar_hourly_rate;
+	const dollar_minute_rate_2dec = (dollar_hourly_rate / 60).toFixed(2)
+
+
 	const cents_minute_rate = dollar_hourly_rate * (100 / 60);
 	const unit_amount = Math.round(cents_minute_rate); // checkout based on time in minutes
 
-	// answer_2 represents hours; quantity is in minutes
-	const quantity = Math.ceil(60 * Number(answer_2?.match(/\d+(\.\d{1,2})?/)![0]));
 
-	const isClassico = event_type_name?.trim().toLowerCase() === 'classico';
-	const isMock = event_type_name?.trim().toLowerCase() === 'mock';
 
-	const extraEntry = {
-		quantity: undefined as number | undefined,
-		price_data: {
-			currency: 'usd',
-			unit_amount: unit_amount,
-			product_data: {
-				name: undefined as string | undefined,
-				description: undefined as string | undefined
-			}
-		}
-	};
+	// answer_2 represents hours
+	const quantity = Math.ceil(Number(answer_2?.match(/\d+(\.\d{1,2})?/)![0]));
+	const minutes = Math.ceil(60 * quantity);
+
+
 
 	const sessionParams = {
 		customer_email: answer_1 ?? invitee_email,
@@ -53,9 +50,9 @@ export async function getStripeSessionData(url: URL) {
 		cancel_url: `${url.origin}/plans`,
 		line_items: [
 			{
-				quantity: quantity as number | undefined,
+				quantity: minutes as number | undefined,
 				price_data: {
-					currency: 'usd',
+					currency: CURRENCY_STRING,
 					unit_amount: unit_amount,
 					product_data: {
 						name: undefined as string | undefined,
@@ -72,6 +69,10 @@ export async function getStripeSessionData(url: URL) {
 		]
 	};
 
+
+	const isClassico = event_type_name?.trim().toLowerCase() === 'classico';
+	const isMock = event_type_name?.trim().toLowerCase() === 'mock';
+
 	if (isClassico) {
 		sessionParams.line_items[0].price_data.product_data.name = 'Classico Session';
 	} else if (isMock) {
@@ -83,24 +84,44 @@ export async function getStripeSessionData(url: URL) {
 		sessionParams.line_items[0].price_data.product_data.name = 'Mock Test Session';
 	}
 
+
+
 	if (answer_3) {
 		if (isClassico) {
-			extraEntry.quantity = 60;
-			extraEntry.price_data.product_data = {
-				name: 'Digital Session Notes',
-				description:
-					'Equivalent to 60 minutes of time. Your notes will become available via the login page (login with ONE of the following providers: email, google, or twitter). '
-			};
-		} else if (isMock) {
-			extraEntry.quantity = 120;
-			extraEntry.price_data.product_data = {
-				name: 'Digital Solution Key',
-				description:
-					'Equivalent to 120 minutes of time. Your solution key will become available via the login page (login with ONE of the following providers: email, google, or twitter).'
-			};
+			let quantity_classico = 60
+			sessionParams.line_items.push(
+				createExtraEntry({
+					quantity: quantity_classico,
+					name: 'Digital Session Notes',
+					description: `Equivalent to ${quantity_classico} minutes of time. Your notes will become available via the login page (login with either ONE of: email, google account).`
+				})
+			);
 		}
-		sessionParams.line_items = [...sessionParams.line_items, extraEntry];
+		if (isMock) {
+			let quantity_mock = 120
+			sessionParams.line_items.push(
+				createExtraEntry({
+					quantity: quantity_mock,
+					name: 'Digital Session Key',
+					description: `Equivalent to ${quantity_mock} minutes of time. Your solution key will become available via the login page (login with either ONE of: email, google account).`
+				})
+			);
+		}
+
 	}
+
+	const supply_material = answer_4?.toLowerCase().startsWith("no") || false
+	if (supply_material) {
+		let newEntry = createExtraEntry({
+			quantity: 30,
+			name: 'Supply Session Material',
+			description: 'We will supply the session material. The content can be reused in the following session at no extra cost. Equivalent to 30 minutes of time.'
+		});
+		sessionParams.line_items.push(newEntry);
+	}
+
+
+
 
 	const session = await stripe.checkout.sessions.create(
 		sessionParams as Stripe.Checkout.SessionCreateParams
@@ -110,4 +131,25 @@ export async function getStripeSessionData(url: URL) {
 		stripeCheckoutUrl: session.url,
 		sessionName: sessionParams.line_items[0].price_data.product_data.name
 	};
+
+
+	function createExtraEntry({ quantity, name, description }: {
+		quantity: number,
+		name: string,
+		description: string
+	}) {
+		return {
+			quantity: quantity,
+			price_data: {
+				currency: CURRENCY_STRING,
+				unit_amount: unit_amount,
+				product_data: {
+					name: name,
+					description: description
+				}
+			}
+		};
+	}
 }
+
+
