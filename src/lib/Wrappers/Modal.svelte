@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { createEventDispatcher, onMount } from 'svelte';
+	// import { createEventDispatcher, onMount } from 'svelte';
 
-	export let close = () => {};
+	export let close = () => {
+		modalOpen = false;
+	};
 	export let modalOpen = false;
 	export let transitionsOff: boolean | null = false;
 	export let bgTW: string | undefined = 'bg-[rgba(0,0,0,0.4)]';
@@ -9,7 +11,7 @@
 	export let body: boolean | undefined = false;
 	// default behaviour is to allow navbar through; when user declares 'body' prop then the modal is attached to the document's body ... such as with the calendly modals
 
-	let dispatch = createEventDispatcher();
+	// let dispatch = createEventDispatcher();
 	function closeModal(event: KeyboardEvent | MouseEvent) {
 		// i.e. close modal if slot parent (|self) OR escape key is clicked
 

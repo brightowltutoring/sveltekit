@@ -245,20 +245,18 @@
 		</ul>
 	</Modal>
 
-	<Modal
-		on:closeModal={() => modals.close('login')}
-		modalOpen={$modals.login}
-		bgTW={'backdrop-blur-md'}
-	>
+	<!-- on:closeModal={() => modals.close('login')} -->
+	<Modal close={() => modals.close('login')} modalOpen={$modals.login} bgTW={'backdrop-blur-md'}>
 		<LoginCard />
 	</Modal>
 
 	<Modal
 		transitionsOff
 		modalOpen={$modals.homework}
-		on:closeModal={() => modals.close('homework')}
+		close={() => modals.close('homework')}
 		bgTW={'bg-[rgba(0,0,0,0.1)]'}
 	>
+		<!-- on:closeModal={() => modals.close('homework')} -->
 		<Dropzone
 			textSizeTW={'text-6xl'}
 			dimensionsTW={'w-[80vw] h-[85vh]'}

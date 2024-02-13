@@ -66,6 +66,8 @@
 	</ul>
 </Modal>
 
-<Modal modalOpen={faqModalOpen} on:closeModal={closeFaqModal} bgTW={'backdrop-blur-3xl'}>
-	<FAQ on:closeFaqModal={closeFaqModal} />
+<!-- on:closeModal={closeFaqModal}  -->
+<Modal modalOpen={faqModalOpen} close={closeFaqModal} bgTW={'backdrop-blur-3xl'}>
+	<FAQ />
+	<!-- <FAQ on:closeFaqModal={closeFaqModal} /> -->
 </Modal>
