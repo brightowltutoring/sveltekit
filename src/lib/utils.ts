@@ -35,9 +35,8 @@ export const cookeh = {
 	) {
 		if (!is_client) return;
 
-		window.document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None${
-			secure ? '; Secure' : ''
-		}`;
+		window.document.cookie = `${name}=${value}; max-age=${seconds}; SameSite=None${secure ? '; Secure' : ''
+			}`;
 		// console.log(`${name} cookie set; secure: ${secure}`);
 	},
 
@@ -243,6 +242,21 @@ export async function sendDummyTextFileToGoogleDrive(name: string) {
 	await fetch(PUBLIC_UPLOAD_ENDPOINT, {
 		method: 'POST',
 		body: data
+	});
+}
+export function receive(target: EventTarget, event_handler_object: Record<string, () => void>) {
+	onMount(() => {
+		const entries = Object.entries(event_handler_object);
+
+		for (let [event, handler] of entries) {
+			target.addEventListener(event, handler);
+		}
+
+		return () => {
+			for (let [event, handler] of entries) {
+				target.removeEventListener(event, handler);
+			}
+		};
 	});
 }
 

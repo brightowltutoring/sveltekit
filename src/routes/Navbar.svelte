@@ -29,8 +29,17 @@
 		isDarkMode.set(document.documentElement.classList.contains('dark-mode'));
 
 		// update session storage before page reloads; could've done in <svelte:window> as well...
-		window.addEventListener('beforeunload', setDarkModeInSessionStorage);
-		return () => window.removeEventListener('beforeunload', setDarkModeInSessionStorage);
+		// window.addEventListener('beforeunload', setDarkModeInSessionStorage);
+
+		const matchDark = window.matchMedia('(prefers-color-scheme: dark)');
+		const setMode = (e: MediaQueryListEvent) => setDarkMode(e.matches);
+
+		matchDark.addEventListener('change', setMode);
+
+		return () => {
+			matchDark.removeEventListener('change', setMode);
+			// window.removeEventListener('beforeunload', setDarkModeInSessionStorage);
+		};
 	});
 
 	let showHideNav = '';
@@ -86,13 +95,25 @@
 
 	// darkmode functions
 
-	function setDarkModeInSessionStorage() {
-		sessionStorage.setItem('isDarkMode', String($isDarkMode));
+	// removed: feb 25, 2024
+	// function setDarkModeInSessionStorage() {
+	// 	sessionStorage.setItem('isDarkMode', String($isDarkMode));
+	// }
+
+	// added: feb 25, 2024
+	function setDarkMode(val: boolean) {
+		isDarkMode.set(val);
+		document.documentElement.classList.toggle('dark-mode', val);
+		sessionStorage.setItem('isDarkMode', String(val));
 	}
 
 	function toggleDarkMode() {
-		isDarkMode.update((v) => !v);
-		document.documentElement.classList.toggle('dark-mode');
+		// added: feb 25, 2024
+		setDarkMode(!$isDarkMode);
+
+		// removed: feb 25, 2024
+		// isDarkMode.update((v) => !v);
+		// document.documentElement.classList.toggle('dark-mode');
 	}
 
 	// logo button
@@ -124,13 +145,23 @@
 
 <svelte:head>
 	<script lang="ts">
-		document.documentElement.classList.toggle('dark-mode', prefersDarkMode());
-		function prefersDarkMode() {
-			if (sessionStorage.getItem('isDarkMode') === 'true') return true;
-			if (sessionStorage.getItem('isDarkMode') === 'false') return false;
-			if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
-			return false;
+		document.documentElement.classList.toggle('dark-mode', initDarkMode());
+
+		function initDarkMode(): boolean {
+			if (window.location.pathname === '/classroom') return true;
+
+			const match_dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			const storage = sessionStorage.getItem('isDarkMode');
+
+			return (!storage && match_dark) || storage === 'true';
 		}
+		// document.documentElement.classList.toggle('dark-mode', prefersDarkMode());
+		// function prefersDarkMode() {
+		// 	if (sessionStorage.getItem('isDarkMode') === 'true') return true;
+		// 	if (sessionStorage.getItem('isDarkMode') === 'false') return false;
+		// 	if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
+		// 	return false;
+		// }
 	</script>
 </svelte:head>
 
@@ -222,9 +253,7 @@
 		modalOpen={data.isIOS && $modals.navApp}
 		bgTW={'text-white bg-gradient-to-br from-[#6c79f4] to-rose-400'}
 	>
-		<ul
-			class=" flex h-[500px] w-[300px] flex-col gap-y-8 overflow-scroll p-10 font-Poppins text-3xl sm:text-6xl"
-		>
+		<ul class="flex w-[85vw] flex-col gap-y-8 overflow-scroll font-Poppins text-3xl sm:text-6xl">
 			<li in:scale={{ duration: 1300, easing: elasticOut }}>
 				<div class="text-6xl">1.</div>
 				Open Safari

@@ -65,7 +65,7 @@
 		{#each payButtons as button}
 			<PlansButton
 				{button}
-				className="{buttonColor} inline-block group-hover:scale-95 group-hover:animate-pulse"
+				class="{buttonColor} inline-block group-hover:scale-95 group-hover:animate-pulse"
 			/>
 		{/each}
 

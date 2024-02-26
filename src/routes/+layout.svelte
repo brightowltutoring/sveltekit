@@ -11,6 +11,7 @@
 	import { onMount } from 'svelte';
 	import IframeModal from '$src/lib/IframeModal.svelte';
 	import { iframeModals } from './plans/PlansButton.svelte';
+	import IframeModals from '$src/lib/IframeModals.svelte';
 
 	isSafari.set(data.isSafari === true);
 	$: seoString = data.seoString;
@@ -34,11 +35,17 @@
 	function scrollYSetter() {
 		scrollY.set(window.scrollY);
 	}
+
+	// let target = new EventTarget();
+	// setContext('target', target);
+	// receive(target, { login, logout });
 </script>
 
-<!-- bind needed or not -->
+<!-- why does this not work? works in svelte 5 -->
+<!-- <IframeModals  /> -->
+
+<!-- bind works too -->
 {#each $iframeModals as iframe}
-	<!-- <IframeModal bind:iframe /> -->
 	<IframeModal {iframe} />
 {/each}
 

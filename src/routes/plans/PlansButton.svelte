@@ -7,14 +7,16 @@
 
 <script lang="ts">
 	export let button: payButton;
-	export let className: string;
+
+	let className: string;
+	export { className as class };
 
 	$: thisIndex = $iframeModals.findIndex((el) => el.url === button.url);
 
 	function openPlansModal(e: MouseEvent) {
 		e.preventDefault();
 
-		$iframeModals[thisIndex].bool = true;
+		$iframeModals[thisIndex].isOpen = true;
 	}
 
 	function updateIframeModalsOnce(node: HTMLAnchorElement) {
@@ -25,7 +27,7 @@
 
 			let item: iframeModalType = {
 				url: button.url,
-				bool: false,
+				isOpen: false,
 				loading: 'pending',
 				name: button.url.split('/thinksolve/')[1].split('?')[0].split('-').join(' ')
 			};

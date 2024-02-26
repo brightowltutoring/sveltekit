@@ -117,6 +117,7 @@
 				loggedInEmail = user.email;
 
 				document.dispatchEvent(new CustomEvent('login'));
+				// target.dispatchEvent(new CustomEvent('login'));
 
 				loginModalOpenRedirect(loggedInEmail);
 
@@ -135,6 +136,7 @@
 		clearInterval(redirectSetInterval); // this not working on  '/login'
 		logoutFunction();
 		document.dispatchEvent(new CustomEvent('logout'));
+		// target.dispatchEvent(new CustomEvent('logout'));
 	}
 </script>
 
